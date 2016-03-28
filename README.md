@@ -46,5 +46,5 @@ ZKCloud真诚的邀请.NET界神级人物共同参与设计，我们将为您共
 
 
 ZKCloud交流QQ群：227278553
-ZKCloud经纪人：25328838
+客服QQ：25328838
 Git项目地址：https://github.com/zhongku/ZKCloud 
