@@ -20715,7 +20715,7 @@ html, body {
 
 /* 表格载入中样式 */
 .ajax-table.loading {
-  background: #FFF url("../common.base.images/ajax-loading.gif") no-repeat scroll center center;
+  background: #FFF url("../Base.images/ajax-loading.gif") no-repeat scroll center center;
   min-height: 300px; }
   .ajax-table.loading > * {
     display: none; }
@@ -20817,7 +20817,7 @@ html, body {
 
 /* 模态框载入远程内容时的样式 */
 .bootstrap-dialog-message .remote-contents.loading {
-  background: #FFF url("../common.base.images/ajax-loading.gif") no-repeat scroll center center;
+  background: #FFF url("../Base.images/ajax-loading.gif") no-repeat scroll center center;
   min-height: 300px; }
 
 /* 面板内容中的元素样式 */

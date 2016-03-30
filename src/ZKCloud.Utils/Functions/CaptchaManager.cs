@@ -22,7 +22,7 @@ namespace ZKCloud.Utils.Functions {
 		/// <summary>
 		/// 保存到会话时使用的键名前缀
 		/// </summary>
-		public const string SessionItemKeyPrefix = "Common.Base.Captcha.";
+		public const string SessionItemKeyPrefix = "Base.Captcha.";
 
 		/// <summary>
 		/// 生成验证码 

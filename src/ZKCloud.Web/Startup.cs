@@ -55,10 +55,10 @@ namespace ZKCloud.Web {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=common}/{action=index}/{id?}",
-                    defaults: new { app = "common.base" });
+                    defaults: new { app = "Base" });
                 routes.MapRoute(
                     name: "default_app",
-                    template: "{app=common.base}/{controller=common}/{action=index}/{id?}");
+                    template: "{app=Base}/{controller=common}/{action=index}/{id?}");
             });
 			
             app.RegisterEntityFrameworkRepositoryContext();

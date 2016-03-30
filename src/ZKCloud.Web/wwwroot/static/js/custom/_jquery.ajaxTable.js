@@ -21,7 +21,7 @@ $.fn.ajaxTable = function (options) {
 		conditions: {},
 		target: null,
 		loadingClass: "loading",
-		template: "/static/common.base.tmpl/ajaxTable.tmpl"
+		template: "/static/Base.tmpl/ajaxTable.tmpl"
 	}, options || {});
 	// 创建新的Ajax表格对象
 	table = new $.ajaxTableType();
