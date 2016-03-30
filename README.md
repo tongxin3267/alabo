@@ -6,11 +6,12 @@ ZKCloud是国内第一款.Net Core下的热插拔开源框架，致力于“业�
 <strong>已完成功能：</strong><br/>
 	<li>基于.Net Core 实现热插拔，可跨平台部署</li>
 	<li>基于对象缓存的轻量级Ioc容器</li>
-	<li>程序动态编译（.Net Core 特性）</li>
+	<li>程序动态编译,支持dll编译、支持cs文件直接编译访问</li>
 	<li>Code Frist模式，基于EntityFramework实现数据自动迁移</li>
 	<li>支持mssql、mysql、pgsql、sqlite数据库</li>
-	<li><li>动态webapi，封装了常见的数据库操作（包括同步异步操作）</li>
+	<li>动态webapi，封装了常见的数据库操作（包括同步异步操作）</li>
 	<li>多语言支持</li>
+	<li>动态路由,不依赖控制器，可以直接访问页面（减少控制器代码）</li>
 	<li>插件应用基于领域驱动设计</li>
 	<li>后台UI样式</li>
 
@@ -18,7 +19,6 @@ ZKCloud是国内第一款.Net Core下的热插拔开源框架，致力于“业�
 
 <strong>计划开发功能：</strong><br/>
 	<li>支持多套主题</li>
-	<li>不依赖控制器，可以直接访问页面（减少控制器代码）</li>
 	<li>不依赖Models，实现表单数据前后端验证、数据安全交互处理（表单代码最少化）</li>
 	<li>在Razor基础上，优化数据绑定方式（数据绑定代码最小化）</li>
 	<li>文章模块示例代码</li>
