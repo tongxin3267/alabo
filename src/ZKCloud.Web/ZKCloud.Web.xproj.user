@@ -3,6 +3,6 @@
   <PropertyGroup>
     <ActiveDebugProfile>IIS Express</ActiveDebugProfile>
     <ShowAllFiles>false</ShowAllFiles>
-    <NameOfLastUsedPublishProfile>zkcloud</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>ZKCloud</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

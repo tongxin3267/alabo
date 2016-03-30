@@ -20,6 +20,10 @@ namespace ZKCloud.Web.Apps.Article.src.Domains.Entitys {
 		/// </summary>
 		public virtual string Title { get; set; }
 		/// <summary>
+		/// 文章分类
+		/// </summary>
+		public virtual long ClassId { get; set; }
+		/// <summary>
 		/// 文章来源
 		/// </summary>
 		public virtual string Source { get; set; }
