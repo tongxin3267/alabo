@@ -1,0 +1,8 @@
+﻿一、动态路由
+		1. 文章article/template/page下面所有页面能够访问，可支持4级路径（多的路径暂时不考虑）
+		2. 默认index 可以不加index直接访问  比如：/article 可以直接访问 结果和/article/index 一样
+
+		
+二、文章演示数据
+	文章添加
+		1. 引入百度编辑器 http://ueditor.baidu.com/website/ 放到base下面？

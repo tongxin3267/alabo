@@ -75,7 +75,7 @@ namespace ZKCloud.Web.Mvc
 
                 requestPath = requestPath.TrimStart('/').ToLower();
                 string[] paths = requestPath.Split('/');
-                if (paths.Length == 2 && paths[1].Equals("index") || paths.Length >= 3) //这里匹配  /app/index  和  /app/controller/action这种路径
+                if (paths.Length == 2 || paths[1].Equals("index") || paths.Length >= 3) //这里匹配  /app/index  和  /app/controller/action这种路径
                 {
                     string viewName = "";
                     string app = paths[0];
@@ -85,18 +85,18 @@ namespace ZKCloud.Web.Mvc
                     //根据路径构造视图名称
                     if (paths.Length == 3)
                     {
-                        viewName = string.Format("~/apps/{0}/template/{1}_{2}", app, ctr, act);
+                        viewName = string.Format("~/apps/{0}/template/page/{1}_{2}", app, ctr, act);
                     }
                     else if (paths[1].Equals("index"))
                     {
-                        viewName = string.Format("~/apps/{0}/template/{1}", app, ctr);
+                        viewName = string.Format("~/apps/{0}/template/page/{1}", app, ctr);
                     }
 
 
                     //修改成访问的动态视图 Controller 和 action
                     var routeData = new RouteData();
-                    routeData.Values.Add("app", "demo01");
-                    routeData.Values.Add("controller", "test");
+                    routeData.Values.Add("app", "base");
+                    routeData.Values.Add("controller", "common");
                     routeData.Values.Add("action", "dynamic");
                     routeData.Values.Add("id", id);
 
