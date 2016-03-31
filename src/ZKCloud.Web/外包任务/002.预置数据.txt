@@ -1,0 +1,55 @@
+﻿任务名称：.NET大神请进，开源框架ZKCloud下实现预置数据
+
+一、通用配置  GenericConfig
+		1.设计出发点：在每个应用当中都有系统配置数据，比如网站名称、版权信息、附件上传大小。
+			我们想通过框架，把所有的配置数据写到数据表GenericConfig里头，在其他的应用当中，只需要写好配置类，就可以完成配置的界面操作，保存、获取等操作
+		2. 使用场景：
+				比如我在文章插件下添加了个ArticleConfig类，设置了几个类的属性
+					则可以通过访问/admin/config/ArticleConfig来 设置配置属性的值
+					在程序当中可以通过ConfigRepository<ArticleConfig>().XXX 来获取属性的值
+
+				依次类推：添加了商品配置类 ProductConfig类
+						可以通过/admin/config/ProductConfig/ 来设置值，通过ConfigRepository<ProductConfig>().XXX 来获取值
+		3. 任务要求：
+				a. 自动生成配置页面,新的配置除了类以外不需要添加任何额外的代码
+				b. 值可以直接获取并使用 ConfigRepository<ArticleConfig>().XXX
+				c. 值设置界面支持：支持文本框、复选框、单选框等控件，可参考（ZKCloud.Web.Apps.Base.src.Domains.Enums.InputControlType)枚举
+
+		4. 最终效果图片：http://www.5ug.com/images/config.jpg 
+
+二、通用级联数据  GenericLinkData
+		1.设计出发点：每个应用当中都可能有级联数，比如文章分类，文章标签、商品分类，订单分类，会员等级等等。
+			我们想通过框架，把所有的级联数据都保存到数据表GenericClass当中，在其他的应用当中，只要使用好约定即可完成级联数据的操作
+		2. 任务描述
+				比如我在文章插件下添加了个文章分类
+					则可以通过访问/admin/linkdata/articleclass，来添加编辑分类
+
+		3. 任务要求：
+				a. 可以任意的添加级联数据，然后通过/admin/class/xxx 界面来操作
+				c. 一个类中支持多个分类，支持单选和多选（比如文章有：文章分类、文章标签、文章等级三个级联数据）
+				b. 文章添加的级联数据示例代码（文章分类[树形多选]、文章标签[复选框多选]、文章等级[下拉框单选])
+
+
+		4. 可参考我们之前完成方式：(用户名：admin 密码：123456)
+				级联数据添加：http://www.5ug.com/admin_classes?type=CMS.Article.ArticleClass 
+				文章添加：http://www.5ug.com/admin_articles/index 
+
+三、通用扩展属性
+		1.设计出发点：每个表中客户可能都需要一些个性化的字段，比如客户表。客户需要额外添加电话号码、出生日期、备忘信息等
+				传统方式是通过程序员为表添加字段，然后在实现功能，很繁琐代码工作量也增加
+				我们想通过框架，将所有表中未知的字段统称为扩展属性，可以通过界面操作快速的添加文本、下拉、复选、附件、图片等任意格式的数据
+
+		3. 任务要求：完成前两个功能后，经过大神的审核通过以后，在做第三个功能
+
+
+		
+额外要求：
+		1. 因为开源，所以代码尽可能的优雅
+		2. 遵守ZKCloud原则"业务实现代码最少化"，所以要做到代码尽可能的少
+		3. 性能优化
+		4. 如果有更好的设计思路，一定不要保留，可以加QQ2839018一起探讨
+		5. 功能的实现无需考虑前端样式，我们有专门的前端随时配和您
+
+参考资料：
+		1. 解读ASP.NET 5 & MVC6系列（13）：TagHelper  http://www.cnblogs.com/TomXu/p/4496480.html 
+		2. 解读ASP.NET 5 & MVC6系列  http://www.cnblogs.com/TomXu/p/4496545.html

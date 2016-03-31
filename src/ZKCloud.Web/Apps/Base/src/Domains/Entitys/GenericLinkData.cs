@@ -6,23 +6,21 @@ using System.Threading.Tasks;
 using ZKCloud.Domain.Models;
 using ZKCloud.Domain.Repositories;
 
-namespace ZKCloud.Web.apps.Perset.src.Entity {
-	/// <summary>
-	/// 通用分类
-	/// </summary>
-	public class GenericClass : EntityBase {
+namespace ZKCloud.Web.Apps.Base.src.Domains.Entitys
+{
+    public class GenericLinkData : EntityBase {
 		/// <summary>
-		/// 分类Id
+		/// 级联数据Id
 		/// </summary>
 		public virtual long Id { get; set; }
 		/// <summary>
-		/// 分类类型
+		/// 级联数据类型
 		/// </summary>
 		public virtual string Type { get; set; }
 		/// <summary>
-		/// 上级分类，根节点时等于null
+		/// 上级级联数据，根节点时等于null
 		/// </summary>
-		public virtual GenericClass Parent { get; set; }
+		public virtual GenericLinkData Parent { get; set; }
 		/// <summary>
 		/// 名称
 		/// </summary>
@@ -59,9 +57,9 @@ namespace ZKCloud.Web.apps.Perset.src.Entity {
 
 	public class GenericClassCreator : IModelCreator {
 		public void CreateModel(ModelBuilder modelBuilder) {
-			modelBuilder.Entity<GenericClass>(d =>
+			modelBuilder.Entity<GenericLinkData>(d =>
 			{
-				d.ToTable("Common_GenericClass");
+				d.ToTable("Common_GenericLinkData");
 				d.HasKey(e => e.Id);
 				d.Property(c => c.Type);
 				d.Property(c => c.Name).IsRequired();

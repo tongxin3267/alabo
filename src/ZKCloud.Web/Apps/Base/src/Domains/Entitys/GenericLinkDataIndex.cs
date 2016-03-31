@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 using ZKCloud.Domain.Models;
 using ZKCloud.Domain.Repositories;
 
-namespace ZKCloud.Web.apps.Perset.src.Entity {
-	/// <summary>
-	/// 通用分类索引
-	/// </summary>
-	public class GenericClassIndex : EntityBase {
+namespace ZKCloud.Web.Apps.Base.src.Domains.Entitys
+{
+    public class GenericLinkDataIndex :EntityBase {
 		/// <summary>
 		/// 索引ID
 		/// </summary>
@@ -31,9 +29,9 @@ namespace ZKCloud.Web.apps.Perset.src.Entity {
 
 	public class GenericClassIndexCreator : IModelCreator {
 		public void CreateModel(ModelBuilder modelBuilder) {
-			modelBuilder.Entity<GenericClassIndex>(d =>
+			modelBuilder.Entity<GenericLinkDataIndex>(d =>
 			{
-				d.ToTable("Common_GenericClassIndex");
+				d.ToTable("Common_GenericLinkDataIndex");
 				d.HasKey(e => e.Id);
 				d.Property(c => c.Type);
 				d.Property(c => c.EntityId);
