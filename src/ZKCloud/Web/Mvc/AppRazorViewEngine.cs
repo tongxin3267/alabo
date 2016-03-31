@@ -197,6 +197,9 @@ namespace ZKCloud.Web.Mvc {
             ActionContext context,
             string pageName,
             bool isPartial) {
+
+            //判断当前是否为base/common/dynamic 动态解析的视图，如果是则将视图
+
             if (IsApplicationRelativePath(pageName)) {
                 var applicationRelativePath = pageName;
                 if (!pageName.EndsWith(ViewExtension, StringComparison.OrdinalIgnoreCase)) {
@@ -276,12 +279,13 @@ namespace ZKCloud.Web.Mvc {
             foreach (var path in locationsToSearch) {
                 var page = _pageFactory.CreateInstance(path);
                 if (page != null) {
+                    searchedLocations.Add(path);
                     // 3a. We found a page. Cache the set of values that produced it and return a found result.
                     _viewLocationCache.Set(expanderContext, new ViewLocationCacheResult(path, searchedLocations));
                     return new RazorPageResult(pageName, page);
                 }
-
-                searchedLocations.Add(path);
+                
+                //searchedLocations.Add(path); //comment by jak, 这里添加的是没找到的,应该放到上面的循环
             }
 
             // 3b. We did not find a page for any of the paths.

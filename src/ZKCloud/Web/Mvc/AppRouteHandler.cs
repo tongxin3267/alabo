@@ -80,7 +80,10 @@ namespace ZKCloud.Web.Mvc
                     viewName = string.Format("~/apps/{0}/template/page/{1}", app, string.Join("_", paths));
 
                     //修改成访问的动态视图 Controller 和 action
-                    var routeData = new RouteData();                    routeData.Values.Add("app", "base");                    routeData.Values.Add("controller", "common");                    routeData.Values.Add("action", "dynamic");                    //routeData.Values.Add("id", id);
+                    var routeData = new RouteData(context.RouteData);
+
+                    //if (routeData.Values.ContainsKey(app)) routeData.Values.Remove("app");
+                    routeData.Values.Clear();                    routeData.Values.Add("app", "base");                    //if (routeData.Values.ContainsKey("controller")) routeData.Values.Remove("controller");                    routeData.Values.Add("controller", "common");                    //if (routeData.Values.ContainsKey("action")) routeData.Values.Remove("action");                    routeData.Values.Add("action", "dynamic");                    //routeData.Values.Add("id", id);
                     context.HttpContext.Items.Add("__appname__", app);                    context.HttpContext.Items.Add("__check__", ctr);                    context.HttpContext.Items.Add("__dynamicviewname__", viewName);                    context.RouteData = routeData; //覆盖原来要访问的controller 和 action
                     //再找一次(这次是找动态的视图controoller 和 action)                    actionDescriptor = await _actionSelector.SelectAsync(context);
                 }
@@ -114,7 +117,7 @@ namespace ZKCloud.Web.Mvc
                 context.IsHandled = true;
 
                 //清除路由信息？貌似会带到下次请求，如果下次请求的路径比上次短，那么下次的路由信息将会出现脏信息
-                context.RouteData.Values.Clear();
+                context.RouteData.Values.Clear();  //這裡的值不能清除啊，有可能還要在內部的部分也用到
                 //清楚保存的临时信息
                 context.HttpContext.Items.Remove("__appname__");                context.HttpContext.Items.Remove("__check__");                context.HttpContext.Items.Remove("__dynamicviewname__");
 
