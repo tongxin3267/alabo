@@ -1,7 +1,34 @@
-﻿二、权限系统
-	设计原则：根据实体类来自动添加权限 (使用约定，让业务实现代码最小化)
-	约定功能：
-			1./admin 开头的必须需要管理员权限，/user/开头必须需要用户权限
-			2.操作界面上可对页面的访问进行权限是设置（公开、密码、管理员角色、用户组）
-			4.在IServer接口上面特殊的功能权限
+﻿任务名称：.NET大神请进，开源框架ZKCloud下实现权限
+开源框架ZKCloud地址：https://github.com/zhongku/ZKCloud 
+请各位开发者研究代码，认真核实看能否按质的完成我们的需求,时间可以宽裕点.代码质量第一位
+
+
+一、权限系统,任务要求如下：
+			1.用户登录（验证码实现）、管理员登录
+			2.角色、用户组
+			3./admin 开头的必须需要管理员权限，/user/开头必须需要用户权限
+			4.操作界面上可对页面的访问进行权限是设置（公开、密码、管理员角色、用户组）
 			5.所有约定的类，默认拥有（查看、编辑、添加、删除）等数据库操作权限
+			6.在IServer接口上面特殊的功能权限
+			7.自定义灵活权限（有更好的思路可在探讨）
+					可以在后台管理界面上，添加自定义权限，页面上面使用TagHelper来控制权限
+					比如：
+					客户查看权限：后台添加权限ViewCustomer   前台TagHelper控制<div Permission-for="ViewCustomer"> .... </div>
+					编辑用户权限：后台添加权限EditCustomer   前台TagHelper控制<div Permission-for="EditCustomer"> .... </div>
+					常看用户等级：后台添加权限ViewUserGrade   前台TagHelper控制<div Permission-for="ViewUserGrade"> .... </div>
+					......
+			
+
+
+
+		
+额外要求：
+		1. 因为开源，所以代码尽可能的优雅
+		2. 遵守ZKCloud原则"业务实现代码最少化"，所以要做到代码尽可能的少
+		3. 性能优化
+		4. 如果有更好的设计思路，一定不要保留，可以加QQ2839018一起探讨
+		5. 功能的实现无需考虑前端样式，我们有专门的前端随时配和您
+
+参考资料：
+		1. 解读ASP.NET 5 & MVC6系列（13）：TagHelper  http://www.cnblogs.com/TomXu/p/4496480.html 
+		2. 解读ASP.NET 5 & MVC6系列  http://www.cnblogs.com/TomXu/p/4496545.html
