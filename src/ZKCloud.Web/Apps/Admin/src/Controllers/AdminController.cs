@@ -61,6 +61,17 @@ namespace ZKCloud.Web.Apps.Admin.src.Controllers {
         {
             return View();
         }
+
+        /// <summary>
+        /// 登录页面
+        /// 访问地址:/admin/roles
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("admin/roles")]
+        public IActionResult Roles()
+        {
+            return View();
+        }
     }
 }
 

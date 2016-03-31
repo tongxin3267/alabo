@@ -4,16 +4,16 @@
 <div class="zkdrop">
     <div class="articletop row">
         <div class="clo-xs-8 col-sm-8 col-md-8 col-lg-8"><i class="icon-cog icon-large" style="vertical-align:middle;margin-right:5px;"></i>文章管理</div>
-        <div class="clo-xs-4 col-sm-4 col-md-4 col-lg-4 text-right"><button class="btn btn_action">action</button><button class="btn btn_setting">Settings</button><button class="btn btn_tool"><i class="icon-share-alt"></i>Tools</button></div>
+        <div class="clo-xs-4 col-sm-4 col-md-4 col-lg-4 text-right"><button class="btn btn_action" data-toggle="modal" data-target="#myModal">添加文章</button><button class="btn btn_setting">Settings</button><button class="btn btn_tool"><i class="icon-share-alt"></i>Tools</button></div>
     </div>
     <hr style="margin:0;" />
     <div class="row " style="padding-top:10px;padding:10px 0 0 0;">
         <div class="clo-xs-8 col-sm-8 col-md-8 col-lg-8">
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">所有文章</a></li>
-                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">已发布&nbsp;<span class="badge badge-info">4</span></a></li>
-                <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">未发布&nbsp;<span class="badge badge-danger">4</span></a></li>
-                <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">回收站&nbsp;<span class="badge badge-warning">4</span></a></li>
+                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">已发布<span class="badge badge-info">4</span></a></li>
+                <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">未发布<span class="badge badge-danger">4</span></a></li>
+                <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">回收站<span class="badge badge-warning">4</span></a></li>
             </ul>
         </div>
         <div class="clo-xs-4 col-sm-4 col-md-4 col-lg-4">
@@ -220,10 +220,26 @@
     <div class="adbottom row">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <input type="checkbox" />
-            <button class="boBtn" style="margin-left:10px;"><i class="icon-user"></i>Profile</button><button class="boBtn"><i class="icon-cogs"></i>Settings</button><button class="boBtn"><i class="icon-code-fork"></i>Feed</button><button class="boBtn">More<i class="icon-angle-down"></i></button>
+            <button class="boBtn" style="margin-left:10px;"><i class="fa fa-user"></i>Profile</button><button class="boBtn"><i class="fa-cogs fa"></i>Settings</button><button class="boBtn"><i class="fa-code-fork fa"></i>Feed</button>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 text-right">
-            30/98&emsp;<i class="fa fa-fast-backward"></i><i class="fa fa-step-backward"></i><input type="text" /> /98 <i class="fa fa-step-forward"></i><i class="fa fa-fast-forward"></i>
+            30/98&emsp;<i class="fa fa-fast-backward"></i><i class="fa fa-step-backward"></i><input type="text" style="border-radius:5px;"/> /98 <i class="fa fa-step-forward"></i><i class="fa fa-fast-forward"></i>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal bootstrap-dialog type-primary fade size-fullscreen" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header zkmodalheader">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i></button>
+                <h4 class="modal-title" id="myModalLabel">文章添加</h4>
+            </div>
+            <div class="modal-body">
+                @await Html.PartialAsync("articleadd")
+            </div>
         </div>
     </div>
 </div>

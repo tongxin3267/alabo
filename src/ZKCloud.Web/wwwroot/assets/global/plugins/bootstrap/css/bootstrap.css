@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /*!
  * Bootstrap v3.3.6 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
@@ -6020,3 +6020,25 @@ button.close {
 @media print {
   .hidden-print {
     display: none !important; } }
+
+
+/*下面为自定义模态框样式 start*/
+.bootstrap-dialog.size-fullscreen {
+    padding-left: 0 !important;
+}
+
+    .bootstrap-dialog.size-fullscreen .modal-dialog {
+        left: 10%;
+        margin: 0;
+        height: 650px;
+        width: 80%;
+    }
+
+        .bootstrap-dialog.size-fullscreen .modal-dialog .modal-content {
+            height: 100%;
+        }
+
+        .bootstrap-dialog.size-fullscreen .modal-dialog .modal-body {
+            height: 100%;
+        }
+/*下面为自定义模态框样式 end*/

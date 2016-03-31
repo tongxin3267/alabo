@@ -139,7 +139,13 @@ $clr-green: #299250;
 .zkdrop .nav-pills, .zkdrop .nav-tabs {
     margin-bottom: 0px;
 }
-.articlebottom{
-    border-top:1px solid #ddd;
-    padding:10px 0;
+
+.articlebottom {
+    border-top: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.zkmodalheader {
+    background-color: #428BCA;
+    color: white;
 }
