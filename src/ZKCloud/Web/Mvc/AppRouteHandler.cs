@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNet.Mvc.Infrastructure;
 using Microsoft.AspNet.Mvc;
+using System.Collections.Generic;
 
 namespace ZKCloud.Web.Mvc
 {
@@ -64,51 +65,27 @@ namespace ZKCloud.Web.Mvc
             var actionDescriptor = await _actionSelector.SelectAsync(context);
             if (actionDescriptor == null)
             { //没有直接找到对应的controller 下的 action, 转为动态视图查找
-              
+
                 //这里要不要把处理过的路径缓存起来，如果再次遇到相同的路径需要动态处理的则可以直接从缓存中获取视图文件名称
                 var requestPath = context.HttpContext.Request.Path.Value ?? string.Empty;
-                int index = requestPath.IndexOf('?');
-                if (index > 0)
-                {
-                    requestPath = requestPath.Replace(context.HttpContext.Request.QueryString.ToString(), "");//去掉url参数
-                }
+                if (!string.IsNullOrEmpty(requestPath)) //只有请求路径不为空时进行动态处理                {
+                    int index = requestPath.IndexOf('?');                    if (index > 0)                    {                        requestPath = requestPath.Replace(context.HttpContext.Request.QueryString.ToString(), "");//去掉url参数                    }                    requestPath = requestPath.TrimStart('/').ToLower();                    List<string> paths = new List<string>(requestPath.Split('/'));
+                    string viewName = "";                    string app = paths[0];                    string ctr = paths.Count > 1 ? paths[1] : "";
 
-                requestPath = requestPath.TrimStart('/').ToLower();
-                string[] paths = requestPath.Split('/');
-                if (paths.Length == 2 || paths[1].Equals("index") || paths.Length >= 3) //这里匹配  /app/index  和  /app/controller/action这种路径
-                {
-                    string viewName = "";
-                    string app = paths[0];
-                    string ctr = paths[1];
-                    string act = paths.Length > 2 ? paths[2] : "";
-                    string id = paths.Length > 3 ? paths[3] : "";
-                    //根据路径构造视图名称
-                    if (paths.Length == 3)
-                    {
-                        viewName = string.Format("~/apps/{0}/template/page/{1}_{2}", app, ctr, act);
-                    }
-                    else if (paths[1].Equals("index"))
-                    {
-                        viewName = string.Format("~/apps/{0}/template/page/{1}", app, ctr);
-                    }
+                    //根据路径构造视图名称 
+                    //匹配 /app 路径, 在后面默认加上index
+                    if (paths.Count == 1)                    {                        paths.Add("index");                    }                    paths.Remove(app);//移除app的名称
 
+                    //匹配 /app/*************后面的路径构造成视图文件名称, /app/后面可以接任意长度路径                                          
+                    viewName = string.Format("~/apps/{0}/template/page/{1}", app, string.Join("_", paths));
 
                     //修改成访问的动态视图 Controller 和 action
-                    var routeData = new RouteData();
-                    routeData.Values.Add("app", "base");
-                    routeData.Values.Add("controller", "common");
-                    routeData.Values.Add("action", "dynamic");
-                    routeData.Values.Add("id", id);
-
-                    context.HttpContext.Items.Add("__check__", ctr);
-                    context.HttpContext.Items.Add("__dynamicviewname__", viewName);
-                    context.RouteData = routeData; //覆盖原来要访问的controller 和 action
-                    
-                    //再找一次(这次是找动态的视图controoller 和 action)
-                    actionDescriptor = await _actionSelector.SelectAsync(context);
+                    var routeData = new RouteData();                    routeData.Values.Add("app", "base");                    routeData.Values.Add("controller", "common");                    routeData.Values.Add("action", "dynamic");                    //routeData.Values.Add("id", id);
+                    context.HttpContext.Items.Add("__appname__", app);                    context.HttpContext.Items.Add("__check__", ctr);                    context.HttpContext.Items.Add("__dynamicviewname__", viewName);                    context.RouteData = routeData; //覆盖原来要访问的controller 和 action
+                    //再找一次(这次是找动态的视图controoller 和 action)                    actionDescriptor = await _actionSelector.SelectAsync(context);
                 }
             }
-           
+
             // Replacing the route data allows any code running here to dirty the route values or data-tokens
             // without affecting something upstream.
             var oldRouteData = context.RouteData;
@@ -137,9 +114,12 @@ namespace ZKCloud.Web.Mvc
                 context.IsHandled = true;
 
                 //清除路由信息？貌似会带到下次请求，如果下次请求的路径比上次短，那么下次的路由信息将会出现脏信息
-                context.RouteData.Values.Clear();                
+                context.RouteData.Values.Clear();
+                //清楚保存的临时信息
+                context.HttpContext.Items.Remove("__appname__");                context.HttpContext.Items.Remove("__check__");                context.HttpContext.Items.Remove("__dynamicviewname__");
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.WriteLine("===========excute the action exception：" + ex.Message);
             }

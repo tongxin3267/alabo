@@ -24,7 +24,7 @@ namespace ZKCloud.Web.Mvc
             var inlineConstraintResolver = (IInlineConstraintResolver)routeCollectionBuilder.ServiceProvider.GetService(typeof(IInlineConstraintResolver));
             routeCollectionBuilder.Routes.Add(
                 new AppTemplateRoute(
-                    routeCollectionBuilder.DefaultHandler,
+                    new AppRouteHandler(),
                     name,
                     template,
                     ObjectToDictionary(defaults),
