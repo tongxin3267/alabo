@@ -49,6 +49,18 @@ namespace ZKCloud.Web.Apps.Admin.src.Controllers {
 			Resolve<UserRepository>().AddSingle(user);
 			return Content("注册成功！");
 		}
-	}
+
+
+        /// <summary>
+        /// 登录页面
+        /// 访问地址:/admin/roles
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("admin/article")]
+        public IActionResult Article()
+        {
+            return View();
+        }
+    }
 }
 
