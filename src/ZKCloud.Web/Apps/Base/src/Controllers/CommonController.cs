@@ -56,6 +56,10 @@ namespace ZKCloud.Web.Apps.Base.src.Domains {
 			//}
 
 			string viewName = HttpContext.Items.SingleOrDefault(c => c.Key.Equals("__dynamicviewname__")).Value.ToString();
+
+            //这里将路由中的app改成实际访问的app名称，用于其他不是用相对路径查找视图的操作
+            string actAppName= HttpContext.Items.SingleOrDefault(c => c.Key.Equals("__appname__")).Value.ToString();
+            RouteData.Values["app"] = actAppName;
 			return View(viewName);
 		}
 
