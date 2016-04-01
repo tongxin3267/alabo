@@ -5,6 +5,13 @@
   "tags": [ "" ],
   "projectUrl": "",
   "licenseUrl": "",
+  "scripts": {
+    "postbuild": [
+      "xcopy /R /K /Y ..\\..\\artifacts\\bin\\ZKCloud.Web.Apps.Demo02\\Debug\\dnxcore50\\*.dll ..\\ZKCloud.Web\\Apps\\demo02\\bin\\",
+      "xcopy /R /K /Y ..\\..\\artifacts\\bin\\ZKCloud.Web.Apps.Demo02\\Debug\\dnxcore50\\*.pdb ..\\ZKCloud.Web\\Apps\\demo02\\bin\\",
+      "xcopy /R /K /Y app.json ..\\ZKCloud.Web\\Apps\\demo02\\"
+    ]
+  },
   "frameworks": {
     "dnxcore50": {
       "dependencies": {

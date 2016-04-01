@@ -36,7 +36,10 @@ namespace ZKCloud.Apps
             var dllFiles = new DirectoryInfo(appBinPath).GetFiles("*.dll");
             IList<IApp> appList = new List<IApp>();
             foreach(var file in dllFiles) {
-                var assembly = PlatformServices.Default.AssemblyLoadContextAccessor.Default.LoadFile(file.FullName);
+                var assembly = PlatformServices.Default
+                    .AssemblyLoadContextAccessor
+                    .Default
+                    .LoadStream(GetAssemblyMemoryStream(file.FullName), GetAssemblySymbolsMemoryStream(file.FullName));
                 Type appType = assembly.GetTypes()
                     .Where(e => e.GetTypeInfo().IsClass && !e.GetTypeInfo().IsAbstract && typeof(IApp).IsAssignableFrom(e))
                     .FirstOrDefault();
@@ -69,6 +72,34 @@ namespace ZKCloud.Apps
                 appList.Add(app);
             }
             return appList.ToArray();
+        }
+
+        private static Stream GetAssemblyMemoryStream(string path) {
+            if (!File.Exists(path))
+                throw new FileNotFoundException();
+            using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) {
+                MemoryStream ms = new MemoryStream();
+                fs.CopyTo(ms);
+                ms.Flush();
+                ms.Seek(0, SeekOrigin.Begin);
+                return ms;
+            }
+        }
+
+        private static Stream GetAssemblySymbolsMemoryStream(string path) {
+            if (!File.Exists(path))
+                throw new FileNotFoundException();
+            string pdbPath = Path.Combine(Path.GetDirectoryName(path), Path.GetFileNameWithoutExtension(path), "pdb");
+            if (!File.Exists(pdbPath)) {
+                return null;
+            }
+            using (FileStream fs = new FileStream(pdbPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) {
+                MemoryStream ms = new MemoryStream();
+                fs.CopyTo(ms);
+                ms.Flush();
+                ms.Seek(0, SeekOrigin.Begin);
+                return ms;
+            }
         }
     }
 }
