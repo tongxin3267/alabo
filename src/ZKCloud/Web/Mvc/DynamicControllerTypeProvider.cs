@@ -22,6 +22,7 @@ namespace ZKCloud.Web.Mvc {
             get {
                 var list = new List<TypeInfo>(base.ControllerTypes);
                 DynamicApiControllerBuilder.AddDynamicApiControllerTypes(list);
+                AppExtensions.AddAppControllerTypes(list);
                 return list;
             }
         }

@@ -57,7 +57,7 @@ namespace ZKCloud.Web {
 
                 routes.MapRoute(
                     name: "default",
-                    template: "",
+                    template: "{app}/{controller}/{action}",
                     defaults: new { app = "base", controller = "common", action = "index" });
                 //新添加的路由配置 by jak
                 routes.MapAppRoute(
