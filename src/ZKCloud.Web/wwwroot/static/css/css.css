@@ -38,7 +38,7 @@
 .articletop {
     height: 50px;
     line-height: 50px;
-    font-size: 18px;
+    font-size: 14px;
     color: #777;
 }
 
@@ -96,6 +96,9 @@
             color: grey;
             font-size: 14px;
             height: 40px;
+            width: 100px;
+            text-align: center;
+            white-space: normal;
         }
 
         .zkdrop .nav-tabs > li:hover a, .zkdrop .nav-tabs > li.active > a:focus {
@@ -170,3 +173,21 @@
 .padding-20 {
     padding: 20px;
 }
+
+.savesubmit {
+    position: absolute;
+    top: 8px;
+    right: 15px;
+}
+
+.form_block {
+    position: relative;
+}
+
+    .form_block .zkfa {
+        color: #c72020;
+    }
+
+    .form_block label {
+        color: grey;
+    }

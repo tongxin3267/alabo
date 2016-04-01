@@ -9,148 +9,116 @@
         <div class="clo-xs-4 col-sm-4 col-md-4 col-lg-4 text-right"></div>
     </div>
     <hr style="margin:0;" />
-    <div class="row " style="padding-top:10px;padding:10px 0 0 0;">
-        <div class="clo-xs-8 col-sm-8 col-md-8 col-lg-8" style="padding:0;">
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">基本信息</a></li>
-                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">详情<span class="badge badge-info">4</span></a></li>
-                <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">高级<span class="badge badge-danger">4</span></a></li>            
-            </ul>
+    <form asp-controller="User" asp-action="Login" method="post" class="form-horizontal" role="form">
+        <div class="form_block container-fluid">
+            <div class="row " style="padding-top:10px;padding:10px 0 0 0;">
+                <div class="clo-xs-8 col-sm-8 col-md-8 col-lg-8" style="padding:0;">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">基本信息</a></li>
+                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">详情</a></li>
+                        <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">高级</a></li>
+                    </ul>
+                </div>
+                <div class="clo-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+            </div>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="home">
+                    <div class="form-group">
+                        <label class="control-label col-md-2">文档标题<i class="fa-star fa zkfa"></i></label>
+                        <div class="col-md-10">
+                            <input class="form-control" data-val="true" data-val-length="文档标题的长度必须在 1 和 500 之间" data-val-length-max="500" data-val-length-min="1" data-val-required="请填写文档标题" id="Title" name="Title" placeholder="文档标题" type="text" value="">
+                            <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">文档分类<i class="fa-star fa zkfa"></i></label>
+                        <div class="col-md-10">
+                            <textarea class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">文档标签<i class="fa-star fa zkfa"></i></label>
+                        <div class="col-md-10">
+                            <div class="checkbox-group" data-toggle="checkbox-group">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" class="select-all">
+                                    全选
+                                </label>
+                                <div class="checkbox-list">
+
+                                </div>
+                                <input data-val="true" data-val-required="请填写文档标签" id="DocumentTagIdsJson" name="DocumentTagIdsJson" type="hidden" value="[]">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="profile">
+                    <div class="form-group">
+                        <label class="control-label col-md-2">详细介绍</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">参考资料</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" cols="20" id="Reference" name="Reference" placeholder="参考资料" rows="5"></textarea>
+                            <span class="field-validation-valid" data-valmsg-for="Reference" data-valmsg-replace="true"></span>
+
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="messages">
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2">发布状态<i class="fa-star fa zkfa"></i></label>
+                        <div class="col-md-10">
+                            <div class="radio-list" style="margin-left:20px;">
+                                <label class="radio-inline">
+                                    <input checked="checked" data-val="true" data-val-required="请填写发布状态" id="State" name="State" type="radio" value="0">
+                                    发布
+                                </label><label class="radio-inline">
+                                    <input id="State" name="State" type="radio" value="1">
+                                    未发布
+                                </label>
+                            </div>
+                            <span class="field-validation-valid" data-valmsg-for="State" data-valmsg-replace="true"></span>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">指导人</label>
+                        <div class="col-md-10">
+                            <input class="form-control" id="Trainer" name="Trainer" placeholder="指导人" type="text" value="">
+                            <span class="field-validation-valid" data-valmsg-for="Trainer" data-valmsg-replace="true"></span>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">显示顺序<i class="fa-star fa zkfa"></i></label>
+                        <div class="col-md-10">
+                            <input class="form-control" data-val="true" data-val-number="The field 显示顺序 must be a number." data-val-regex="显示顺序格式不正确" data-val-regex-pattern="^-?[\d]+$" data-val-required="请填写显示顺序" id="DisplayOrder" name="DisplayOrder" placeholder="" type="text" value="10000">
+                            <span class="field-validation-valid" data-valmsg-for="DisplayOrder" data-valmsg-replace="true"></span>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">备注</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" cols="20" id="Remark" name="Remark" placeholder="备注" rows="5"></textarea>
+                            <span class="field-validation-valid" data-valmsg-for="Remark" data-valmsg-replace="true"></span>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            注:<i class="fa-star fa zkfa"></i>为必填项
+            <button type="submit" class="btn btn-success savesubmit">保 存</button>
         </div>
-        <div class="clo-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
-    </div>
-    <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="home">
-            <form asp-controller="User" asp-action="Login" method="post" class="form-horizontal" role="form">
-                <input asp-for="Id" type="hidden" />
-                <input asp-for="CreateTime" type="hidden" />
-                <input asp-for="LastUpdated" type="hidden" />
-                <div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Title" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="Title" class="form-control" />
-                        <span asp-validation-for="Title" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Source" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="Source" class="form-control" />
-                        <span asp-validation-for="Source" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Summary" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="Summary" class="form-control" />
-                        <span asp-validation-for="Summary" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Intro" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <textarea asp-for="Intro" class="form-control"></textarea>
-                        <span asp-validation-for="Intro" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="DisplayOrder" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="DisplayOrder" class="form-control" />
-                        <span asp-validation-for="DisplayOrder" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Remark" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="Remark" class="form-control" />
-                        <span asp-validation-for="Remark" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="State" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="State" class="form-control" />
-                        <span asp-validation-for="State" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <button type="submit" class="btn btn-default">保 存</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div role="tabpanel" class="tab-pane" id="profile">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>id</th>
-                        <th><span class="pull-left">First Name</span><span class="pull-right"><i class="icon-sort"></i></span></th>
-                        <th><span class="pull-left">Last Name</span><span class="pull-right"><i class="icon-sort"></i></span></th>
-                        <th><span class="pull-left">Username</span><span class="pull-right"><i class="icon-sort"></i></span></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="active">
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>gbhfg</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>gdfgdf</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div role="tabpanel" class="tab-pane" id="messages">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>id</th>
-                        <th><span class="pull-left">First Name</span><span class="pull-right"><i class="icon-sort"></i></span></th>
-                        <th><span class="pull-left">Last Name</span><span class="pull-right"><i class="icon-sort"></i></span></th>
-                        <th><span class="pull-left">Username</span><span class="pull-right"><i class="icon-sort"></i></span></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="active">
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>gbhfg</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>gdfgdf</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>rtre</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>rtre</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>rtre</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>    
-    </div>
+    </form>
 </div>
