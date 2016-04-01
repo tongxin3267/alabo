@@ -13,6 +13,10 @@ namespace ZKCloud.Runtime {
         /// </summary>
         public string BaseDirectory { get; } = AppContext.BaseDirectory;
 
+        public string AppBaseDirectory {
+            get { return Path.Combine(BaseDirectory, "apps"); }
+        }
+
         /// <summary>
 		/// App_Data目录
 		/// </summary>

@@ -20,17 +20,18 @@ using ZKCloud.Localize;
 using Microsoft.AspNet.Mvc.Controllers;
 using Microsoft.AspNet.Mvc;
 using ZKCloud.Web.Apps.Demo01.Domain.Services;
-
+using ZKCloud.Apps;
 
 namespace ZKCloud.Web {
     public class Startup {
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services) {
-            services.AddMvc();
-            services.AddAppRazorViewEngine();
-            services.AddAppUrlHelper();
-            services.AddDynamicControllerTypeProvider();
+			AppManager.LoadAll();
+			services.AddMvc();
+			services.AddAppRazorViewEngine();
+			services.AddAppUrlHelper();
+			services.AddDynamicControllerTypeProvider();
 			services.AddCaching();
 			services.AddSession(options =>
 			{
@@ -41,17 +42,18 @@ namespace ZKCloud.Web {
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app) {
-            app.UseIISPlatformHandler();
+			app.UseIISPlatformHandler();
 
-            app.UseFileServer(new FileServerOptions() {
-                FileProvider = new PhysicalFileProvider(RuntimeContext.Current.Path.BaseDirectory),
-                RequestPath = new PathString(""),
-                EnableDirectoryBrowsing = false
-            });
+			app.UseFileServer(new FileServerOptions()
+			{
+				FileProvider = new PhysicalFileProvider(RuntimeContext.Current.Path.BaseDirectory),
+				RequestPath = new PathString(""),
+				EnableDirectoryBrowsing = false
+			});
 
-            app.UsePerHttpRequestContainer();
+			app.UsePerHttpRequestContainer();
 			app.UseSession();
-            app.UseMvc(routes => {
+			app.UseMvc(routes => {
 
                 routes.MapRoute(
                     name: "default",
@@ -81,7 +83,7 @@ namespace ZKCloud.Web {
 
 
 			DynamicApiControllerBuilder.For<ITestDataService>().WithApp("demo03").Build();
-        }
+		}
 
         // Entry point for the application.
         public static void Main(string[] args) => WebApplication.Run<Startup>(args);
