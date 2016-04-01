@@ -8,8 +8,7 @@ using Microsoft.AspNet.Mvc.Rendering;
 using ZKCloud.Localize;
 using ZKCloud.Extensions;
 
-namespace ZKCloud.Web.Mvc.TagHelpers
-{
+namespace ZKCloud.Web.Mvc.TagHelpers {
     [HtmlTargetElement("a", Attributes = ForAttributeName)]
     [HtmlTargetElement("label", Attributes = ForAttributeName)]
     [HtmlTargetElement("textbox", Attributes = ForAttributeName)]
@@ -26,12 +25,12 @@ namespace ZKCloud.Web.Mvc.TagHelpers
         public override void Process(TagHelperContext context, TagHelperOutput output) {
             var translateForArray = TranslateFor.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             translateForArray.Foreach(async e => {
-                if(e.Equals(TextAttributeName, StringComparison.OrdinalIgnoreCase)) {
+                if (e.Equals(TextAttributeName, StringComparison.OrdinalIgnoreCase)) {
                     var content = await output.GetChildContentAsync();
                     output.Content.SetHtmlContent(new LocalizedString(content.GetContent()).ToString());
-                }else {
+                } else {
                     var find = output.Attributes.FirstOrDefault(a => a.Name.Equals(e, StringComparison.OrdinalIgnoreCase));
-                    if(find!= null) {
+                    if (find != null) {
                         find.Value = new LocalizedString(Convert.ToString(find.Value)).ToString();
                     }
                 }
