@@ -24,20 +24,20 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="home">
                     <div class="form-group">
-                        <label class="control-label col-md-2">文档标题<i class="fa-star fa zkfa"></i></label>
+                        <label class="control-label col-md-2">文档标题<span class="zkfa">*</span></label>
                         <div class="col-md-10">
                             <input class="form-control" data-val="true" data-val-length="文档标题的长度必须在 1 和 500 之间" data-val-length-max="500" data-val-length-min="1" data-val-required="请填写文档标题" id="Title" name="Title" placeholder="文档标题" type="text" value="">
                             <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true"></span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-2">文档分类<i class="fa-star fa zkfa"></i></label>
+                        <label class="control-label col-md-2">文档分类<span class="zkfa">*</span></label>
                         <div class="col-md-10">
                             <textarea class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-2">文档标签<i class="fa-star fa zkfa"></i></label>
+                        <label class="control-label col-md-2">文档标签<span class="zkfa">*</span></label>
                         <div class="col-md-10">
                             <div class="checkbox-group" data-toggle="checkbox-group">
                                 <label class="checkbox-inline">
@@ -74,7 +74,7 @@
 
 
                     <div class="form-group">
-                        <label class="control-label col-md-2">发布状态<i class="fa-star fa zkfa"></i></label>
+                        <label class="control-label col-md-2">发布状态<span class="zkfa">*</span></label>
                         <div class="col-md-10">
                             <div class="radio-list" style="margin-left:20px;">
                                 <label class="radio-inline">
@@ -98,7 +98,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-2">显示顺序<i class="fa-star fa zkfa"></i></label>
+                        <label class="control-label col-md-2">显示顺序<span class="zkfa">*</span></label>
                         <div class="col-md-10">
                             <input class="form-control" data-val="true" data-val-number="The field 显示顺序 must be a number." data-val-regex="显示顺序格式不正确" data-val-regex-pattern="^-?[\d]+$" data-val-required="请填写显示顺序" id="DisplayOrder" name="DisplayOrder" placeholder="" type="text" value="10000">
                             <span class="field-validation-valid" data-valmsg-for="DisplayOrder" data-valmsg-replace="true"></span>
@@ -117,7 +117,6 @@
 
                 </div>
             </div>
-            注:<i class="fa-star fa zkfa"></i>为必填项
             <button type="submit" class="btn btn-success savesubmit">保 存</button>
         </div>
     </form>
