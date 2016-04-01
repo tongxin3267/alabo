@@ -3,71 +3,154 @@
 @{
     ViewData["Title"] = "添加文章";
 }
-
-<h2>@ViewData["Title"].</h2>
-<div class="row">
-    <div class="col-md-8">
-        <form asp-controller="User" asp-action="Login" method="post" class="form-horizontal" role="form">
-            <h4>添加文章</h4>
-            <input asp-for="Id" type="hidden" />
-            <input asp-for="CreateTime" type="hidden" />
-            <input asp-for="LastUpdated" type="hidden" />
-            <hr />
-            <div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Title" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="Title" class="form-control" />
-                    <span asp-validation-for="Title" class="text-danger"></span>
+<div class="zkdrop">
+    <div class="articletop row">
+        <div class="clo-xs-8 col-sm-8 col-md-8 col-lg-8"><i class="fa-cog fa icon-large" style="vertical-align:middle;margin-right:5px;"></i>添加文章</div>
+        <div class="clo-xs-4 col-sm-4 col-md-4 col-lg-4 text-right"></div>
+    </div>
+    <hr style="margin:0;" />
+    <div class="row " style="padding-top:10px;padding:10px 0 0 0;">
+        <div class="clo-xs-8 col-sm-8 col-md-8 col-lg-8" style="padding:0;">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">基本信息</a></li>
+                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">详情<span class="badge badge-info">4</span></a></li>
+                <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">高级<span class="badge badge-danger">4</span></a></li>            
+            </ul>
+        </div>
+        <div class="clo-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+    </div>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="home">
+            <form asp-controller="User" asp-action="Login" method="post" class="form-horizontal" role="form">
+                <input asp-for="Id" type="hidden" />
+                <input asp-for="CreateTime" type="hidden" />
+                <input asp-for="LastUpdated" type="hidden" />
+                <div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Title" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="Source" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="Source" class="form-control" />
-                    <span asp-validation-for="Source" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="Source" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="Source" class="form-control" />
+                        <span asp-validation-for="Source" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="Summary" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="Summary" class="form-control" />
-                    <span asp-validation-for="Summary" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="Summary" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="Summary" class="form-control" />
+                        <span asp-validation-for="Summary" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="Intro" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <textarea asp-for="Intro" class="form-control" /></textarea>
-                    <span asp-validation-for="Intro" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="Intro" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <textarea asp-for="Intro" class="form-control"></textarea>
+                        <span asp-validation-for="Intro" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="DisplayOrder" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="DisplayOrder" class="form-control" />
-                    <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="DisplayOrder" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="DisplayOrder" class="form-control" />
+                        <span asp-validation-for="DisplayOrder" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="Remark" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="Remark" class="form-control" />
-                    <span asp-validation-for="Remark" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="Remark" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="Remark" class="form-control" />
+                        <span asp-validation-for="Remark" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="State" class="col-md-2 control-label"></label>
-                <div class="col-md-10">
-                    <input asp-for="State" class="form-control" />
-                    <span asp-validation-for="State" class="text-danger"></span>
+                <div class="form-group">
+                    <label asp-for="State" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="State" class="form-control" />
+                        <span asp-validation-for="State" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <button type="submit" class="btn btn-default">保 存</button>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn btn-default">保 存</button>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="profile">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th><span class="pull-left">First Name</span><span class="pull-right"><i class="icon-sort"></i></span></th>
+                        <th><span class="pull-left">Last Name</span><span class="pull-right"><i class="icon-sort"></i></span></th>
+                        <th><span class="pull-left">Username</span><span class="pull-right"><i class="icon-sort"></i></span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="active">
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>gbhfg</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>gdfgdf</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="messages">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th><span class="pull-left">First Name</span><span class="pull-right"><i class="icon-sort"></i></span></th>
+                        <th><span class="pull-left">Last Name</span><span class="pull-right"><i class="icon-sort"></i></span></th>
+                        <th><span class="pull-left">Username</span><span class="pull-right"><i class="icon-sort"></i></span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="active">
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>gbhfg</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>gdfgdf</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>rtre</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>rtre</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>rtre</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>    
     </div>
 </div>
