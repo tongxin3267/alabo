@@ -89,7 +89,7 @@ namespace ZKCloud.Apps
         private static Stream GetAssemblySymbolsMemoryStream(string path) {
             if (!File.Exists(path))
                 throw new FileNotFoundException();
-            string pdbPath = Path.Combine(Path.GetDirectoryName(path), Path.GetFileNameWithoutExtension(path), "pdb");
+            string pdbPath = Path.Combine(Path.GetDirectoryName(path), $"{Path.GetFileNameWithoutExtension(path)}.pdb");
             if (!File.Exists(pdbPath)) {
                 return null;
             }
