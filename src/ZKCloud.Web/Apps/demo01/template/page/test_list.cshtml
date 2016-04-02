@@ -1,0 +1,26 @@
+﻿@model ZKCloud.Domain.Models.PagedList<ZKCloud.Web.Apps.Demo01.Domain.Models.TestData>
+@using ZKCloud.Web.Mvc;
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<table border="1px">
+    <thead>
+        <tr><td width="120px">Id</td><td width="300px">Name</td></tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr><td>@item.Id</td><td>@item.Name</td></tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2" align="right">
+            [page:@Model.PageIndex / pagesize:@Model.PageSize]
+            @Html.ActionLink("上一页", "list", "test", new { page = Model.PageIndex - 1 })
+            @Html.ActionLink("下一页", "list", "test", new { page = Model.PageIndex + 1 })
+            </td>
+        </tr>
+    </tfoot>
+</table>
