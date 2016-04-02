@@ -3,7 +3,7 @@ using System;
 using ZKCloud.Domain.Models;
 using ZKCloud.Domain.Repositories;
 
-namespace ZKCloud.Web.Apps.Base.src.Domains.Entitys{
+namespace ZKCloud.Web.Apps.Base.src.Entities{
 	/// <summary>
 	/// 通用配置
 	/// </summary>

@@ -1,7 +1,7 @@
 ﻿using DryIoc;
 using DryIocAttributes;
 using System;
-using ZKCloud.Web.Apps.Base.src.Domains.Entitys;
+using ZKCloud.Web.Apps.Base.src.Entities;
 using Microsoft.AspNet.Http;
 using ZKCloud.Web.Apps.Base.src.Domains.Repositories;
 using ZKCloud.Container;
@@ -20,7 +20,7 @@ namespace ZKCloud.Web.Apps.Base.src.Domains.Services {
 		/// </summary>
 		public const string SessionKey = "Base.Session";
 
-		public bool SetSession(User.src.Entity.User user, ISession httpSession, bool rememberMe=false) {
+		public bool SetSession(User.src.Entities.User user, ISession httpSession, bool rememberMe=false) {
 			bool flag = false;
 			var session = new Session();  
 			session.ReleatedId = user.Id;

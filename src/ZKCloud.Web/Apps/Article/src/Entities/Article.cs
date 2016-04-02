@@ -5,7 +5,7 @@ using ZKCloud.Domain.Repositories;
 using ZKCloud.Web.apps.Perset.src.Enum;
 using ZKCloud.Web.Apps.Article.src.Domains.Enums;
 
-namespace ZKCloud.Web.Apps.Article.src.Domains.Entitys {
+namespace ZKCloud.Web.Apps.Article.src.Entities {
 	/// <summary>
 	/// 文章
 	/// </summary>

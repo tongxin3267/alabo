@@ -6,7 +6,7 @@ using ZKCloud.Domain.Repositories;
 
 namespace ZKCloud.Web.Apps.Admin.src.Domains.Repositories
 {
-    public class AdminRepositories : ReadWriteRepositoryBase<src.Domains.Entitys.Admin> 
+    public class AdminRepositories : ReadWriteRepositoryBase<src.Entities.Admin> 
     {
     }
 }

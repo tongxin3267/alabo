@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using ZKCloud.Domain.Models;
 using ZKCloud.Domain.Repositories;
 using ZKCloud.Domain.Services;
-using ZKCloud.Web.Apps.Article.src.Domains.Entitys;
+using ZKCloud.Web.Apps.Article.src.Entities;
 using ZKCloud.Web.Apps.Article.src.Domains.Repositories;
 
 namespace ZKCloud.Web.Apps.Article.src.Domains.Services {
 	public class ArticleServices : ServiceBase, IArticleServices {
-		public void AddSingle(Entitys.Article article) {
+		public void AddSingle(Entities.Article article) {
 			Repository<ArticleRepositories>().AddSingle(article);
         }
 
@@ -27,19 +27,19 @@ namespace ZKCloud.Web.Apps.Article.src.Domains.Services {
             }
 		}
 
-		public void UpdateSingle(Entitys.Article article) {
+		public void UpdateSingle(Entities.Article article) {
 			Repository<ArticleRepositories>().UpdateSingle(article);
 		}
 
-		public List<Entitys.Article> GetList() {
+		public List<Entities.Article> GetList() {
 			return Repository<ArticleRepositories>().ReadMany(e=>true).ToList();
         }
 
-		public Entitys.Article GetSingle(long id) {
+		public Entities.Article GetSingle(long id) {
 			return Repository<ArticleRepositories>().ReadSingle(e => e.Id == id);
         }
 
-		public Entitys.Article Read(long id) {
+		public Entities.Article Read(long id) {
 			throw new NotImplementedException();
 		}
 
@@ -47,11 +47,11 @@ namespace ZKCloud.Web.Apps.Article.src.Domains.Services {
 			throw new NotImplementedException();
 		}
 
-		public IList<Entitys.Article> ReadMany() {
+		public IList<Entities.Article> ReadMany() {
 			return Repository<ArticleRepositories>().ReadMany(e => true).ToList();
 		}
 
-		public PagedList<Entitys.Article> ReadPage(int pageIndex = 1, int pageSize = 10) {
+		public PagedList<Entities.Article> ReadPage(int pageIndex = 1, int pageSize = 10) {
 			return new ArticlePageRepositories().ReadMany(e => true, pageSize, pageIndex);
         } 
     }

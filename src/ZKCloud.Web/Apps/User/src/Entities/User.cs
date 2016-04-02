@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using ZKCloud.Domain.Models;
 using ZKCloud.Domain.Repositories;
 using ZKCloud.Web.apps.Perset.src.Enum;
-using ZKCloud.Web.Apps.Perset.src.Entity;
+using ZKCloud.Web.Apps.Perset.src.Entities;
 using ZKCloud.Web.Apps.Perset.src.Enum;
 
-namespace ZKCloud.Web.Apps.User.src.Entity {
+namespace ZKCloud.Web.Apps.User.src.Entities{
 	/// <summary>
 	/// 用户
 	/// </summary>

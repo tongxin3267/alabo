@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ZKCloud.Domain.Models;
 using ZKCloud.Domain.Repositories;
 
-namespace ZKCloud.Web.Apps.Base.src.Domains.Entitys
+namespace ZKCloud.Web.Apps.Base.src.Entities
 {
     public class GenericLinkData : EntityBase {
 		/// <summary>

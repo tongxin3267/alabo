@@ -5,13 +5,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Http.Features;
 using ZKCloud.Domain.Services;
-using ZKCloud.Web.Apps.User.src.Entity;
+using ZKCloud.Web.Apps.User.src.Entities;
 using ZKCloud.Web.Apps.User.src.Repositories;
 
 namespace ZKCloud.Web.Apps.User.src.Services {
 
 	public class UserService : ServiceBase, IUserService {
-		public IList<Entity.User> GetList() {
+		public IList<Entities.User> GetList() {
 			return Repository<UserRepository>().ReadMany(e => true).ToList();
 		}
 
@@ -24,8 +24,8 @@ namespace ZKCloud.Web.Apps.User.src.Services {
 			return random; 
 		}
 
-		public Entity.User FindUser(string username) {
-			var user = new Entity.User();
+		public Entities.User FindUser(string username) {
+			var user = new Entities.User();
             if (!string.IsNullOrEmpty(username)){ 
 				user = Repository<UserRepository>().ReadSingle(x => x.Username == username);
 			}
@@ -41,7 +41,7 @@ namespace ZKCloud.Web.Apps.User.src.Services {
             return flag; 
 		}
 
-		public bool LoginWithUser(Entity.User user, bool rememberLogin, ISession httpSession) {
+		public bool LoginWithUser(Entities.User user, bool rememberLogin, ISession httpSession) {
 			bool flag = false; 
 			if (user != null){
 				flag = new Base.src.Domains.Services.SessionServices().SetSession(user,httpSession);
@@ -82,7 +82,7 @@ namespace ZKCloud.Web.Apps.User.src.Services {
 			flag = Repository<UserRepository>().ReadSingle(x => x.Username == username) != null;
 			return flag;
 		}
-		public Tuple<bool, string> UserRegedit(Entity.User user) {
+		public Tuple<bool, string> UserRegedit(Entities.User user) {
 			Tuple<bool,string> result = Tuple.Create(false,"注册失败，用户名已经存在！");
 			if (Repository<UserRepository>().ReadSingle(x => x.Username == user.Username) == null) { 
 				Repository<UserRepository>().AddSingle(user);

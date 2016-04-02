@@ -7,9 +7,9 @@ using ZKCloud.Domain.Models;
 using ZKCloud.Domain.Repositories;
 using ZKCloud.Web.apps.Perset.src.Enum;
 using ZKCloud.Web.Apps.Perset.src.Enum;
-using ZKCloud.Web.Apps.User.src.Entity;
+using ZKCloud.Web.Apps.User.src.Entities;
 
-namespace ZKCloud.Web.apps.Perset.src.Entity
+namespace ZKCloud.Web.apps.Perset.src.Entities
 {
     /// <summary>
     /// 评论

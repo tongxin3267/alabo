@@ -10,30 +10,30 @@ namespace ZKCloud.Web.Apps.Admin.src.Domains.Services {
 		/// 添加管理员
 		/// </summary>
 		/// <param name="article"></param>
-		void AddSingle(Entitys.Admin admin);
+		void AddSingle(Entities.Admin admin);
 		/// <summary>
 		/// 返回管理员列表
 		/// </summary>
 		/// <returns></returns>
-		IList<Entitys.Admin> GetList();
+		IList<Entities.Admin> GetList();
 		/// <summary>
 		/// 编辑管理员
 		/// </summary>
 		/// <param name=""></param>
-		void UpdateSingle(Entitys.Admin admin);
+		void UpdateSingle(Entities.Admin admin);
 		/// <summary>
 		/// 获取管理员
 		/// </summary>
 		/// <param name="id"></param>
 		/// <returns></returns>
-		Entitys.Admin Read(long id);
+		Entities.Admin Read(long id);
 		/// <summary>
 		/// 删除管理员，用‘，’隔开Id
 		/// </summary>
 		/// <param name="ids"></param>
 		void Delete(params int[] ids);
 
-		IList<Entitys.Admin> ReadMany();
+		IList<Entities.Admin> ReadMany();
 
 		/// <summary>
 		/// 分配管理员权限给现有用户

@@ -8,7 +8,7 @@ using ZKCloud.Domain.Repositories;
 using ZKCloud.Web.apps.Perset.src.Enum;
 using ZKCloud.Web.Apps.Perset.src.Enum;
 
-namespace ZKCloud.Web.apps.Base.src.Entity
+namespace ZKCloud.Web.apps.Base.src.Entities
 {
     /// <summary>
     /// 扩展属性

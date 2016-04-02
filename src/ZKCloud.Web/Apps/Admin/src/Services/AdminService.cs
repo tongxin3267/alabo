@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using ZKCloud.Domain.Repositories;
 using ZKCloud.Domain.Services;
-using ZKCloud.Web.Apps.Admin.src.Domains.Entitys;
+using ZKCloud.Web.Apps.Admin.src.Entities;
 
 namespace ZKCloud.Web.Apps.Admin.src.Domains.Services {
 	public class AdminService : IAdminService {
-		public void AddSingle(Entitys.Admin admin) {
+		public void AddSingle(Entities.Admin admin) {
 			throw new NotImplementedException();
 		}
 
@@ -20,15 +20,15 @@ namespace ZKCloud.Web.Apps.Admin.src.Domains.Services {
 			throw new NotImplementedException();
 		}
 
-		public IList<Entitys.Admin> GetList() {
+		public IList<Entities.Admin> GetList() {
 			throw new NotImplementedException();
 		}
 
-		public Entitys.Admin Read(long id) {
+		public Entities.Admin Read(long id) {
 			throw new NotImplementedException();
 		}
 
-		public IList<Entitys.Admin> ReadMany() {
+		public IList<Entities.Admin> ReadMany() {
 			throw new NotImplementedException();
 		}
 
@@ -40,7 +40,7 @@ namespace ZKCloud.Web.Apps.Admin.src.Domains.Services {
 			throw new NotImplementedException();
 		}
 
-		public void UpdateSingle(Entitys.Admin admin) {
+		public void UpdateSingle(Entities.Admin admin) {
 			throw new NotImplementedException();
 		}
 	}

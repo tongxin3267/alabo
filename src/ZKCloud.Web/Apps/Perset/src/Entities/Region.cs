@@ -4,7 +4,7 @@ using ZKCloud.Domain.Models;
 using ZKCloud.Domain.Repositories;
 using ZKCloud.Web.Apps.Perset.src.Enum;
 
-namespace ZKCloud.Web.Apps.Perset.src.Entity {
+namespace ZKCloud.Web.Apps.Perset.src.Entities {
 	/// <summary>
 	/// 地区
 	/// 这个对象中的值生成后不应该修改

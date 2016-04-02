@@ -6,7 +6,7 @@ using Microsoft.AspNet.Mvc;
 using ZKCloud.Container;
 using ZKCloud.Domain.Repositories;
 using ZKCloud.Web.Mvc;
-using MyUser = ZKCloud.Web.Apps.User.src.Entity.User;
+using MyUser = ZKCloud.Web.Apps.User.src.Entities.User;
 using ZKCloud.Web.Apps.User.src.Repositories;
 
 namespace ZKCloud.Web.Apps.Admin.src.Controllers {

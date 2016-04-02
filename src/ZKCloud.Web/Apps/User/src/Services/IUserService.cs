@@ -8,13 +8,13 @@ using ZKCloud.Domain.Services;
 
 namespace ZKCloud.Web.Apps.User.src.Services {
 	public interface IUserService : IAutoApiService {
-		IList<User.src.Entity.User> GetList();
+		IList<User.src.Entities.User> GetList();
 
 		/// <summary>
 		/// 根据用户名查找用户
 		/// 找不到时返回null
 		/// </summary>
-		User.src.Entity.User FindUser(string username);
+		User.src.Entities.User FindUser(string username);
 		// <summary>
 		/// 以用户名和密码登录
 		/// 注意登陆时会把原会话删除，需要继承部分数据时请添加回调处理
@@ -29,7 +29,7 @@ namespace ZKCloud.Web.Apps.User.src.Services {
 		/// 以指定用户登录
 		/// 跳过密码等检查
 		/// </summary>
-		bool LoginWithUser(User.src.Entity.User user, bool rememberLogin, ISession httpSession);
+		bool LoginWithUser(User.src.Entities.User user, bool rememberLogin, ISession httpSession);
 		/// <summary>
 		/// 检查用户是否存在
 		/// </summary>
@@ -68,7 +68,7 @@ namespace ZKCloud.Web.Apps.User.src.Services {
 		/// 用户注册
 		/// </summary>
 		/// <returns></returns>
-		Tuple<bool,string> UserRegedit(Entity.User user);
+		Tuple<bool,string> UserRegedit(Entities.User user);
 		/// <summary>
 		/// 重置密码
 		/// </summary>

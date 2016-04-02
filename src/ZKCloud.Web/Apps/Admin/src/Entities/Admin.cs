@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ZKCloud.Domain.Models;
 
-namespace ZKCloud.Web.Apps.Admin.src.Domains.Entitys
+namespace ZKCloud.Web.Apps.Admin.src.Entities
 {
 	/// <summary>
 	/// 管理员

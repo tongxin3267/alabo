@@ -7,7 +7,7 @@ using ZKCloud.Web.Apps.Perset.src.Enum;
 using ZKCloud.Web.Apps.Perset.src.Repositories;
 using ZKCloud.Web.Mvc;
 
-namespace ZKCloud.Web.Apps.Perset.src.Entity {
+namespace ZKCloud.Web.Apps.Perset.src.Entities {
 	public class InitRegion : BaseController {
 		public void InitRegionData() {
 			List<Region> list = new List<Region>();

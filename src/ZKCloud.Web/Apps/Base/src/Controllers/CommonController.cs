@@ -13,7 +13,7 @@ namespace ZKCloud.Web.Apps.Base.src.Domains {
 		// GET: /<controller>/
 
 		public IActionResult Index() {
-			new ZKCloud.Web.Apps.Perset.src.Entity.InitRegion().InitRegionData();
+			new ZKCloud.Web.Apps.Perset.src.Entities.InitRegion().InitRegionData();
 
 			var sessionId = HttpContext.Session.GetString("SessionId");
 			if (sessionId == null)
