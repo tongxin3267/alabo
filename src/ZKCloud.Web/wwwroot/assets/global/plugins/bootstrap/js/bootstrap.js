@@ -2361,3 +2361,140 @@ if (typeof jQuery === 'undefined') {
   })
 
 }(jQuery);
++function (t) {
+    "use strict";
+    function e(e) {
+        e && 3 === e.which || (t(o).remove(),
+        t(r).each(function () {
+            var i = t(this)
+              , o = n(i)
+              , r = {
+                  relatedTarget: this
+              };
+            o.hasClass("open") && (o.trigger(e = t.Event("hide.bs.dropdown", r)),
+            e.isDefaultPrevented() || (i.attr("aria-expanded", "false"),
+            o.removeClass("open").trigger("hidden.bs.dropdown", r)))
+        }))
+    }
+    function n(e) {
+        var n = e.attr("data-target");
+        n || (n = e.attr("href"),
+        n = n && /#[A-Za-z]/.test(n) && n.replace(/.*(?=#[^\s]*$)/, ""));
+        var i = n && t(n);
+        return i && i.length ? i : e.parent()
+    }
+    function i(e) {
+        return this.each(function () {
+            var n = t(this)
+              , i = n.data("bs.dropdown");
+            i || n.data("bs.dropdown", i = new a(this)),
+            "string" == typeof e && i[e].call(n)
+        })
+    }
+    var o = ".dropdown-backdrop"
+      , r = '[data-toggle="dropdown"]'
+      , a = function (e) {
+          t(e).on("click.bs.dropdown", this.toggle)
+      }
+    ;
+    a.VERSION = "3.3.2",
+    a.prototype.toggle = function (i) {
+        var o = t(this);
+        if (!o.is(".disabled, :disabled")) {
+            var r = n(o)
+              , a = r.hasClass("open");
+            if (e(),
+            !a) {
+                "ontouchstart" in document.documentElement && !r.closest(".navbar-nav").length && t('<div class="dropdown-backdrop"/>').insertAfter(t(this)).on("click", e);
+                var s = {
+                    relatedTarget: this
+                };
+                if (r.trigger(i = t.Event("show.bs.dropdown", s)),
+                i.isDefaultPrevented())
+                    return;
+                o.trigger("focus").attr("aria-expanded", "true"),
+                r.toggleClass("open").trigger("shown.bs.dropdown", s)
+            }
+            return !1
+        }
+    }
+    ,
+    a.prototype.keydown = function (e) {
+        if (/(38|40|27|32)/.test(e.which) && !/input|textarea/i.test(e.target.tagName)) {
+            var i = t(this);
+            if (e.preventDefault(),
+            e.stopPropagation(),
+            !i.is(".disabled, :disabled")) {
+                var o = n(i)
+                  , a = o.hasClass("open");
+                if (!a && 27 != e.which || a && 27 == e.which)
+                    return 27 == e.which && o.find(r).trigger("focus"),
+                    i.trigger("click");
+                var s = " li:not(.divider):visible a"
+                  , l = o.find('[role="menu"]' + s + ', [role="listbox"]' + s);
+                if (l.length) {
+                    var u = l.index(e.target);
+                    38 == e.which && u > 0 && u--,
+                    40 == e.which && u < l.length - 1 && u++,
+                    ~u || (u = 0),
+                    l.eq(u).trigger("focus")
+                }
+            }
+        }
+    }
+    ;
+    var s = t.fn.dropdown;
+    t.fn.dropdown = i,
+    t.fn.dropdown.Constructor = a,
+    t.fn.dropdown.noConflict = function () {
+        return t.fn.dropdown = s,
+        this
+    }
+    ,
+    t(document).on("click.bs.dropdown.data-api", e).on("click.bs.dropdown.data-api", ".dropdown form", function (t) {
+        t.stopPropagation()
+    }).on("click.bs.dropdown.data-api", r, a.prototype.toggle).on("keydown.bs.dropdown.data-api", r, a.prototype.keydown).on("keydown.bs.dropdown.data-api", '[role="menu"]', a.prototype.keydown).on("keydown.bs.dropdown.data-api", '[role="listbox"]', a.prototype.keydown)
+}(jQuery),
+$(function () {
+    function t() {
+        var t = $(this)
+          , e = t.find(".dropdown-menu").first();
+        if (e.length || "dropdown" != t.attr("data-toggle") || (e = t.parent().find(".dropdown-menu").first()),
+        e.length && e.is(":visible")) {
+            var n = e.offset().left;
+            if (0 > n) {
+                var i = n - 15;
+                e.css("margin-left", "0px").css("margin-right", i + "px")
+            }
+            var o = ($(document),
+            $(document).width() + $(document).scrollLeft())
+              , r = e.offset().left + e.outerWidth();
+            if (r > o) {
+                var a = o - r - 15;
+                e.css("margin-right", "0px").css("margin-left", a + "px")
+            }
+        }
+    }
+    $(document).on("click", ".dropdown-menu .form", function (t) {
+        $(t.target).closest("[type='submit']").length || t.stopPropagation()
+    }),
+    $(document).on("click", ".advance-select .dropdown-menu", function (t) {
+        $(t.target).closest("select").length || t.stopPropagation()
+    }),
+    $(document).on("show.bs.dropdown", "*", function () {
+        t.call(this)
+    }),
+    $(document).on("shown.bs.dropdown", "*", function () {
+        t.call(this)
+    })
+});
+$(function () {
+    $('.btn-group>a.btn').click(function () {
+        var valtext = $(this).parent().attr('class');
+        if (valtext.indexOf('open') < 0) {
+            $(this).parent().addClass('open');
+        } else {
+            $(this).parent().removeClass('open');
+        }
+    });
+});

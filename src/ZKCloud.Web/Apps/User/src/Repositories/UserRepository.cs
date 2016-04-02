@@ -4,12 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using ZKCloud.Domain.Repositories;
 using ZKCloud.Web.Apps.Perset.src.Entities;
-using ZKCloud.Web.Apps.Perset.src.Enum;
 
-namespace ZKCloud.Web.Apps.Perset.src.Repositories
-{
-    public class RegionRepositories : ReadWriteRepositoryBase<Region>
-    {
-
+namespace ZKCloud.Web.Apps.User.src.Repositories {
+	public class UserRepository : ReadWriteRepositoryBase<ZKCloud.Web.Apps.User.src.Entities.User> {
 	}
 }
+
+ 
