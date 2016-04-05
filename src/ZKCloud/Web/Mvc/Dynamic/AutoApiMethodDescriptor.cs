@@ -16,10 +16,14 @@ namespace ZKCloud.Web.Mvc.Dynamic {
         }
 
         public void CreateDynamicMethod(TypeBuilder builder) {
+            var methodParameters = Method.GetParameters();
             var methodBuilder = builder.DefineMethod(Method.Name,
                 MethodAttributes.Public,
                 Method.ReturnType,
-                Method.GetParameters().Select(e => e.ParameterType).ToArray());
+                methodParameters.Select(e => e.ParameterType).ToArray());
+            for (int i = 0; i < methodParameters.Length; i++) {
+                methodBuilder.DefineParameter(i + 1, ParameterAttributes.HasDefault, methodParameters[i].Name);
+            }
             var il = methodBuilder.GetILGenerator();
             var resolveMethod = typeof(BaseController)
                 .GetMethod("Resolve", BindingFlags.Instance | BindingFlags.NonPublic)
@@ -29,7 +33,6 @@ namespace ZKCloud.Web.Mvc.Dynamic {
             il.EmitCall(OpCodes.Call, resolveMethod, null);
             il.Emit(OpCodes.Stloc, serviceLocal);
             il.Emit(OpCodes.Ldloc, serviceLocal);
-            var methodParameters = Method.GetParameters();
             for (int i = 0; i < methodParameters.Length; i++) {
                 il.Emit(OpCodes.Ldarg, i + 1);
             }

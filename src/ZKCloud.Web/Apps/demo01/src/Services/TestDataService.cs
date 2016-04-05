@@ -18,11 +18,13 @@ namespace ZKCloud.Web.Apps.Demo01.Domain.Services {
             }
         }
 
-        public IList<TestData> GetList() {
+        public IList<TestData> GetTestList() {
+            System.Diagnostics.Debug.WriteLine("testdataservice::gettestlist()");
             return Repository<TestDataRepository>().ReadMany(e => true).ToList();
         }
 
-        public PagedList<TestData> GetList(int pageIndex,int pageSize) {
+        public PagedList<TestData> GetList(int pageIndex, int pageSize) {
+            System.Diagnostics.Debug.WriteLine($"pageindex:{pageIndex}, pagesize:{pageSize}");
             var list = _list.Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();

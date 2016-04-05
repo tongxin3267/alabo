@@ -8,7 +8,7 @@ using ZKCloud.Web.Apps.Demo01.Domain.Models;
 
 namespace ZKCloud.Web.Apps.Demo01.Domain.Services {
     public interface ITestDataService : IAutoApiService {
-        IList<TestData> GetList();
+        IList<TestData> GetTestList();
 
         PagedList<TestData> GetList(int pageIndex, int pageSize);
     }

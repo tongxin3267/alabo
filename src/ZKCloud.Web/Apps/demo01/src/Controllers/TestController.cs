@@ -12,6 +12,7 @@ using ZKCloud.Web.Mvc;
 using ZKCloud.Web.Apps.Demo01.Domain.Models;
 using ZKCloud.Web.Apps.Demo01.Domain.Repositories;
 using ZKCloud.Web.Apps.Demo01.Domain.Services;
+using ZKCloud.Domain.Models;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -52,13 +53,14 @@ namespace ZKCloud.Web.Apps.Demo01.Controllers {
 			return View();
 		}
 
-        public IActionResult list(int? page) {
+        public PagedList<TestData> list(int? page) {
+            Console.WriteLine("TestController::List()");
             page = page ?? 1;
             if (page < 1)
                 page = 1;
             int pageSize = 20;
             var model = Resolve<ITestDataService>().GetList(page.Value, pageSize);
-            return View(model);
+            return model;
         }
 	}
 }

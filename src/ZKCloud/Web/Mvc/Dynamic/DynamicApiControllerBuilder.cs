@@ -46,6 +46,9 @@ namespace ZKCloud.Web.Mvc.Dynamic {
 
         public void Build() {
             var autoApiServiceDescriptor = new AutoApiServiceDescriptor(_appName, _serviceType);
+            //var instanse = Activator.CreateInstance(autoApiServiceDescriptor.CreateDynamicApiType(_apiControllerModuleBuilder).AsType());
+            //var method = instanse.GetType().GetMethod("GetList");
+            //var result = method.Invoke(instanse, new object[] { 1, 10 });
             DynamicApiControllerTypeList.Add(autoApiServiceDescriptor.CreateDynamicApiType(_apiControllerModuleBuilder));
         }
     }
