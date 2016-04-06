@@ -60,6 +60,7 @@ namespace ZKCloud.Domain.Repositories {
             where T : class {
             long count = 0;
             context.Query<T>().Where(expression).Foreach(d => { update(d); context.Update(d); count++; });
+            context.SaveChanges();
             return count;
         }
 
@@ -74,6 +75,7 @@ namespace ZKCloud.Domain.Repositories {
             where T : class {
             long count = 0;
             context.Query<T>().Where(expression).Foreach(d => { context.Delete(d); ++count; });
+            context.SaveChanges();
             return count;
         }
     }
