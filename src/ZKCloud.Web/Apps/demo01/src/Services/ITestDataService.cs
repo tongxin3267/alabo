@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ZKCloud.Domain.Models;
+using ZKCloud.Domain.Entities;
 using ZKCloud.Domain.Services;
 using ZKCloud.Web.Apps.Demo01.Domain.Models;
 

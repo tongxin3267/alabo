@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Data.Entity;
-using ZKCloud.Domain.Models;
+using ZKCloud.Domain.Entities;
 using ZKCloud.Domain.Repositories;
 using ZKCloud.Web.Apps.Perset.src.Enum;
 using ZKCloud.Web.Apps.Perset.src.Repositories;

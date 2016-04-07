@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ZKCloud.Domain.Models {
+namespace ZKCloud.Domain.Entities {
     public class PagedList<T> : List<T> {
         public long RecordCount { get; private set; }
 

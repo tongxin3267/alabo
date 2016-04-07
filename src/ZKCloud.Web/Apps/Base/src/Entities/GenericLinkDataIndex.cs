@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ZKCloud.Domain.Models;
+using ZKCloud.Domain.Entities;
 using ZKCloud.Domain.Repositories;
 
 namespace ZKCloud.Web.Apps.Base.src.Entities

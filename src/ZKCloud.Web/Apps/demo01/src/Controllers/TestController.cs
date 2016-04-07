@@ -12,7 +12,10 @@ using ZKCloud.Web.Mvc;
 using ZKCloud.Web.Apps.Demo01.Domain.Models;
 using ZKCloud.Web.Apps.Demo01.Domain.Repositories;
 using ZKCloud.Web.Apps.Demo01.Domain.Services;
-using ZKCloud.Domain.Models;
+using ZKCloud.Domain.Entities;
+using ZKCloud.Core.AutoConfig;
+using ZKCloud.Core.AutoConfig.Domain.Entities;
+using ZKCloud.Core.AutoConfig.Domain.Services;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -62,5 +65,33 @@ namespace ZKCloud.Web.Apps.Demo01.Controllers {
             var model = Resolve<ITestDataService>().GetList(page.Value, pageSize);
             return model;
         }
+
+        public IActionResult TestConfig() {
+            try {
+                AutoConfigDescription configDescription = AutoConfigDescription.Create(typeof(TestConfig));
+                var configs = configDescription.CreateGenericConfigs(new TestConfig() {
+                    Name = "demo 01 name",
+                    Title = "demo 01 title",
+                    IntValue = 100
+                });
+                Resolve<IGenericConfigService>().AddOrUpdate(configs);
+                configs = Resolve<IGenericConfigService>().GetList("demo01");
+                TestConfig config = configDescription.CreateAutoConfig<TestConfig>(configs);
+                return Content($"config.name={config.Name}, config.Title={config.Title}, config.IntValue={config.IntValue}");
+            } catch (Exception e) {
+                return Content(e.ToString());
+            }
+        }
 	}
+
+    [Config("demo01")]
+    public class TestConfig : IAutoConfig {
+        [ConfigProperty("name", ConfigPropertyType.Text)]
+        public string Name { get; set; }
+
+        [ConfigProperty("title", ConfigPropertyType.Text)]
+        public string Title { get; set; }
+
+        public int IntValue { get; set; }
+    }
 }
