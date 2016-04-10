@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNet.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using ZKCloud.Domain.Models;
 using ZKCloud.Domain.Services;
-
+using ZKCloud.Web.Apps.Article.src.Entities;
 
 namespace ZKCloud.Web.Apps.Article.src.Domains.Services {
 	/// <summary>
@@ -41,5 +42,41 @@ namespace ZKCloud.Web.Apps.Article.src.Domains.Services {
 		IList<Entities.Article> ReadMany(); 
 
 		PagedList<Entities.Article> ReadPage(int pageIndex=1,int pageSize=10);
-	}
+        //=====================================================
+
+        /// <summary>
+        /// 获取文章
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Entities.Article get(long id);
+
+        /// <summary>
+        /// 增加文章
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        AjaxResult add(Entities.Article entity);
+
+        /// <summary>
+        /// 修改文章
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        AjaxResult edit(Entities.Article entity);
+
+        /// <summary>
+        /// 删除文章
+        /// </summary>
+        /// <param name="ids"></param>
+        /// <returns></returns>
+        AjaxResult deletes(string ids);
+
+        /// <summary>
+        /// 分页查询文章
+        /// </summary>
+        /// <param name="pageinfo"></param>
+        /// <returns></returns>
+        EasyuiGridResult<Entities.Article> query(EasyuiGridPageInfo pageinfo, int state = -1, string sreach=null);
+    }
 }

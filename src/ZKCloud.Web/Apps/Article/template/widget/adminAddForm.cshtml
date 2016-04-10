@@ -3,14 +3,17 @@
 @{
     ViewData["Title"] = "添加文章";
 }
+<script src="~/wwwroot/assets/global/plugins/ckeditor/ckeditor.js" type="text/javascript" charset="utf-8"></script>
+
 <div class="zkdrop">
     <div class="articletop row">
         <div class="clo-xs-8 col-sm-8 col-md-8 col-lg-8"><i class="fa-cog fa icon-large" style="vertical-align:middle;margin-right:5px;"></i>添加文章</div>
         <div class="clo-xs-4 col-sm-4 col-md-4 col-lg-4 text-right"></div>
     </div>
     <hr style="margin:0;" />
-    <form asp-controller="User" asp-action="Login" method="post" class="form-horizontal" role="form">
+    <form  method="post" class="form-horizontal" role="form">
         <div class="form_block container-fluid">
+            <!-- tab  tool -->
             <div class="row " style="padding-top:10px;padding:10px 0 0 0;">
                 <div class="clo-xs-8 col-sm-8 col-md-8 col-lg-8" style="padding:0;">
                     <ul class="nav nav-tabs" role="tablist">
@@ -19,24 +22,43 @@
                         <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">高级</a></li>
                     </ul>
                 </div>
-                <div class="clo-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+                <div class="clo-xs-4 col-sm-4 col-md-4 col-lg-4" style="text-align:right;">
+                    <button type="button" onclick="save()" class="btn btn-success">保 存</button>
+                    <button type="button" onclick="javascript: window.location.href = '/article/admin/list'" class="btn btn-success">返回</button>
+                </div>
             </div>
             <div class="tab-content">
+                <!--基本信息-->
                 <div role="tabpanel" class="tab-pane active" id="home">
+                    <div class="form-group">
+                        <label class="control-label col-md-2">发布状态<span class="zkfa">*</span></label>
+                        <div class="col-md-10">
+                            <div class="radio-list" style="margin-left:20px;">
+                                <label class="radio-inline">
+                                    <input checked="checked"  id="State" name="State" type="radio" value="1" >
+                                    发布
+                                </label><label class="radio-inline">
+                                    <input id="State" name="State" type="radio" value="0">
+                                    未发布
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="control-label col-md-2">文档标题<span class="zkfa">*</span></label>
                         <div class="col-md-10">
-                            <input class="form-control" data-val="true" data-val-length="文档标题的长度必须在 1 和 500 之间" data-val-length-max="500" data-val-length-min="1" data-val-required="请填写文档标题" id="Title" name="Title" placeholder="文档标题" type="text" value="">
-                            <span class="field-validation-valid" data-valmsg-for="Title" data-valmsg-replace="true"></span>
+                            <input class="form-control required"  id="Title" name="Title" data-val="true" data-val-length="文档标题的长度必须在 1 和 500 之间" data-val-length-max="500" data-val-length-min="1" data-val-required="请填写文档标题" placeholder="文档标题" type="text" value="">                            
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-2">文档分类<span class="zkfa">*</span></label>
                         <div class="col-md-10">
-                            <textarea class="form-control"></textarea>
+                            <textarea class="form-control required digits:true" id="ClassId" name="ClassId"></textarea>
                         </div>
                     </div>
-                    <div class="form-group">
+
+                    <!-- 实体类中间没有标签设计-->
+                    @*<div class="form-group">
                         <label class="control-label col-md-2">文档标签<span class="zkfa">*</span></label>
                         <div class="col-md-10">
                             <div class="checkbox-group" data-toggle="checkbox-group">
@@ -51,73 +73,87 @@
 
                             </div>
                         </div>
-                    </div>
+                    </div>*@
                 </div>
+                <!--详情-->
                 <div role="tabpanel" class="tab-pane" id="profile">
+                    <div class="form-group">
+                        <label class="control-label col-md-2">文章摘要</label>
+                        <div class="col-md-10">
+                            <textarea class="form-control" cols="20" id="Summary" name="Summary" placeholder="文章摘要" rows="5"></textarea>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="control-label col-md-2">详细介绍</label>
                         <div class="col-md-10">
-                            <textarea class="form-control"></textarea>
+                            <textarea name="Intro" id="Intro"></textarea>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-md-2">参考资料</label>
-                        <div class="col-md-10">
-                            <textarea class="form-control" cols="20" id="Reference" name="Reference" placeholder="参考资料" rows="5"></textarea>
-                            <span class="field-validation-valid" data-valmsg-for="Reference" data-valmsg-replace="true"></span>
-
-                        </div>
-                    </div>
+                    
                 </div>
+                <!--高级-->
                 <div role="tabpanel" class="tab-pane" id="messages">
 
-
                     <div class="form-group">
-                        <label class="control-label col-md-2">发布状态<span class="zkfa">*</span></label>
+                        <label class="control-label col-md-2">文章来源</label>
                         <div class="col-md-10">
-                            <div class="radio-list" style="margin-left:20px;">
-                                <label class="radio-inline">
-                                    <input checked="checked" data-val="true" data-val-required="请填写发布状态" id="State" name="State" type="radio" value="0">
-                                    发布
-                                </label><label class="radio-inline">
-                                    <input id="State" name="State" type="radio" value="1">
-                                    未发布
-                                </label>
-                            </div>
-                            <span class="field-validation-valid" data-valmsg-for="State" data-valmsg-replace="true"></span>
-
+                            <input class="form-control" id="Source" name="Source" placeholder="文章来源" type="text" value="">                           
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-2">指导人</label>
-                        <div class="col-md-10">
-                            <input class="form-control" id="Trainer" name="Trainer" placeholder="指导人" type="text" value="">
-                            <span class="field-validation-valid" data-valmsg-for="Trainer" data-valmsg-replace="true"></span>
-
-                        </div>
-                    </div>
-                    <div class="form-group">
+                    <!--这个在实体中没有-->
+                    @*<div class="form-group">
                         <label class="control-label col-md-2">显示顺序<span class="zkfa">*</span></label>
                         <div class="col-md-10">
-                            <input class="form-control" data-val="true" data-val-number="The field 显示顺序 must be a number." data-val-regex="显示顺序格式不正确" data-val-regex-pattern="^-?[\d]+$" data-val-required="请填写显示顺序" id="DisplayOrder" name="DisplayOrder" placeholder="" type="text" value="10000">
-                            <span class="field-validation-valid" data-valmsg-for="DisplayOrder" data-valmsg-replace="true"></span>
-
+                            <input class="form-control" data-val="true" data-val-number="The field 显示顺序 must be a number." data-val-regex="显示顺序格式不正确" data-val-regex-pattern="^-?[\d]+$" data-val-required="请填写显示顺序" id="DisplayOrder" name="DisplayOrder" placeholder="" type="text" value="10000">                           
                         </div>
-                    </div>
+                    </div>*@
                     <div class="form-group">
                         <label class="control-label col-md-2">备注</label>
                         <div class="col-md-10">
                             <textarea class="form-control" cols="20" id="Remark" name="Remark" placeholder="备注" rows="5"></textarea>
-                            <span class="field-validation-valid" data-valmsg-for="Remark" data-valmsg-replace="true"></span>
-
                         </div>
                     </div>
-
-
                 </div>
             </div>
-            <button type="submit" class="btn btn-success savesubmit">保 存</button>
+            
         </div>
+        <input type="hidden" id="CreateTime" name="CreateTime" />
+        <input type="hidden" id="Id" name="Id" />
     </form>
 </div>
+<script>
+    var __id='@Context.Request.Query["id"]';
+    function save() {
+        var _url = "/article/articleservices/add";
+        if (__id !== '') {//是修改文章，修改提交的地址
+            _url = "/article/articleservices/edit";
+        }
+        $('form').form({    
+            url: _url,
+            onSubmit: function () {
+                return $("form").valid(); //先用jquery.validation 验证是否通过
+            },    
+            success: function (data) {
+                var result = eval('(' + data + ')');
+                alert(result.message);
+                if (result.status) {
+                    //成功了，要跳转不?
+                    window.location.href = "/article/admin/list";
+                }
+            }    
+        });    
+        // submit the form    
+        $('form').submit(); 
+    }
+    $(function () {
+        CKEDITOR.replace('Intro');
+        
+        if (__id!=='') {//是修改文章，则加载数据
+            $.get("/article/articleservices/get", { id: __id }, function (result) {
+                $('form').form('load', result);  //利用easyui的form插件自动赋值
+            });
+        }
+    });
+    
+</script>
