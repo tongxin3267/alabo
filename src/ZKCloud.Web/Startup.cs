@@ -21,6 +21,7 @@ using Microsoft.AspNet.Mvc.Controllers;
 using Microsoft.AspNet.Mvc;
 using ZKCloud.Web.Apps.Demo01.Domain.Services;
 using ZKCloud.Apps;
+using ZKCloud.Web.Apps.Article.src.Domains.Services;
 
 namespace ZKCloud.Web {
     public class Startup {
@@ -58,7 +59,7 @@ namespace ZKCloud.Web {
                 routes.MapRoute(
                     name: "default",
                     template: "{app}/{controller}/{action}",
-                    defaults: new { app = "base", controller = "common", action = "index" });
+                    defaults: new {app="base", controller = "common", action = "index" });
                 //新添加的路由配置 by jak
                 routes.MapAppRoute(
                     name: "app_one",
@@ -83,7 +84,8 @@ namespace ZKCloud.Web {
 
 
 			DynamicApiControllerBuilder.For<ITestDataService>().WithApp("demo03").Build();
-		}
+            DynamicApiControllerBuilder.For<IArticleServices>().WithApp("Article").Build();
+        }
 
         // Entry point for the application.
         public static void Main(string[] args) => WebApplication.Run<Startup>(args);
