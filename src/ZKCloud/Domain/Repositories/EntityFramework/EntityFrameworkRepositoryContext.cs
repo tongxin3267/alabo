@@ -72,7 +72,8 @@ namespace ZKCloud.Domain.Repositories.EntityFramework {
         }
 
         public void Delete<T>(T data) where T : class {
-            throw new NotImplementedException();
+            _context.Remove(data);
+            SaveChanges();
         }
 
         public void Dispose() {
@@ -96,7 +97,8 @@ namespace ZKCloud.Domain.Repositories.EntityFramework {
         }
 
         public void Update<T>(T data) where T : class {
-            _context.Update<T>(data);
+            _context.Update(data);
+            SaveChanges();
         }
 
         public DbSet<T> Set<T>() where T : class {
