@@ -18,8 +18,9 @@ namespace ZKCloud.Web.Apps.Base.src.Domains {
 			var sessionId = HttpContext.Session.GetString("SessionId");
 			if (sessionId == null)
 			{
-				return Redirect("/user/login");
-			}
+                //return Redirect("/user/login"); //暂时改成跳转到管理首页
+                return Redirect("/admin/index");
+            }
 			return View();
 		}
 		/// <summary>
