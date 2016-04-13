@@ -9,12 +9,16 @@ namespace ZKCloud.Web.Apps.Article.src.Domains.Enums {
 	/// </summary>
 	public enum ArticleStates {
 		/// <summary>
-		/// 已发布
-		/// </summary>
-		Publish = 0,
-		/// <summary>
 		/// 未发布
 		/// </summary>
-		UnPublish = 1,
+		UnPublish = 0,
+		/// <summary>
+		/// 已发布
+		/// </summary>
+		Publish = 1,
+        /// <summary>
+        /// 已删除
+        /// </summary>
+        Delete=2
 	}
 }

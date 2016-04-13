@@ -48,7 +48,7 @@ namespace ZKCloud.Web.Apps.Article.src.Entities {
 		/// </summary>
 		public virtual long ViewCount { get; set; }
 		/// <summary>
-		/// 文章状态
+		/// 文章状态,0 未发布，1表示已发布，2 表示删除
 		/// </summary>
 		public virtual ArticleStates State { get; set; }
 		/// <summary>
