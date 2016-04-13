@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Data;
 using Microsoft.Data.Entity;
+using Microsoft.Data.Entity.Storage;
 using Microsoft.Data.Sqlite;
 using ZKCloud.Container;
 using ZKCloud.Runtime;
@@ -59,6 +61,10 @@ namespace ZKCloud.Domain.Repositories.EntityFramework {
 
         public string ConnectionString { get; private set; }
 
+        private IRelationalTransaction _transaction;
+
+        private int _transactionCount = 0;
+
         public object DbContext {
             get { return _context; }
         }
@@ -108,6 +114,57 @@ namespace ZKCloud.Domain.Repositories.EntityFramework {
         public void CheckContextIsInitialized() {
             if (_context == null)
                 throw new InvalidOperationException("please open context first.");
+        }
+
+        public void BeginTransaction() {
+            RaseExceptionIfConnectionIsNotInitialization();
+            if (_transactionCount <= 0) {
+                _transaction = _context.Database.BeginTransaction();
+            } else {
+                _transactionCount++;
+            }
+        }
+
+        public void BeginTransaction(IsolationLevel isolationLevel) {
+            RaseExceptionIfConnectionIsNotInitialization();
+            if (_transactionCount <= 0) {
+                _transaction = _context.Database.BeginTransaction(isolationLevel);
+            } else {
+                _transactionCount++;
+            }
+        }
+
+        public void CommitTransaction() {
+            RaseExceptionIfConnectionIsNotInitialization();
+            if (_transactionCount > 0) {
+                _transactionCount--;
+            } else {
+                _transaction.Commit();
+            }
+        }
+
+        public void RollbackTransaction() {
+            RaseExceptionIfConnectionIsNotInitialization();
+            if (_transactionCount > 0) {
+                _transactionCount--;
+            } else {
+                _transaction.Rollback();
+            }
+        }
+
+        public void DisposeTransaction() {
+            RaseExceptionIfConnectionIsNotInitialization();
+            if (_transactionCount > 0) {
+                _transactionCount--;
+            } else {
+                _transaction.Dispose();
+                _transaction = null;
+            }
+        }
+
+        private void RaseExceptionIfConnectionIsNotInitialization() {
+            if (_context == null)
+                throw new RepositoryContextException("sqlite connection is not initialization.");
         }
     }
 }

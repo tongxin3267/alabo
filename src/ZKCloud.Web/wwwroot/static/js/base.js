@@ -29,3 +29,4 @@
 // @koala-append "custom/_jquery.switchery.js"
 // @koala-append "custom/_jquery.toast.setup.js"
 // @koala-append "custom/_metronic.fullscreen.js"
+

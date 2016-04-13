@@ -68,19 +68,27 @@ namespace ZKCloud.Web.Apps.Demo01.Controllers {
 
         public IActionResult TestConfig() {
             try {
-                AutoConfigDescription configDescription = AutoConfigDescription.Create(typeof(TestConfig));
-                var configs = configDescription.CreateGenericConfigs(new TestConfig() {
-                    Name = "demo 01 name",
-                    Title = "demo 01 title",
-                    IntValue = 100
-                });
-                Resolve<IGenericConfigService>().AddOrUpdate(configs);
-                configs = Resolve<IGenericConfigService>().GetList("demo01");
-                TestConfig config = configDescription.CreateAutoConfig<TestConfig>(configs);
+                var config = AutoConfigManager.Get<TestConfig>();
                 return Content($"config.name={config.Name}, config.Title={config.Title}, config.IntValue={config.IntValue}");
             } catch (Exception e) {
                 return Content(e.ToString());
             }
+        }
+
+        [HttpGet]
+        public IActionResult Config() {
+            var config = AutoConfigManager.Get<TestConfig>();
+            return View(config);
+        }
+
+        [HttpPost]
+        public IActionResult Config(TestConfig config) {
+            if (config == null)
+                return Content("config can not be null.");
+            if (!ModelState.IsValid)
+                return Content($"data valid error!\nmessage:{ModelState.ToString()}");
+            AutoConfigManager.Save(config);
+            return Content("config saved.");
         }
 	}
 

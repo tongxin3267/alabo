@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,5 +23,15 @@ namespace ZKCloud.Domain.Repositories {
         void Update<T>(T data) where T : class;
 
         void Delete<T>(T data) where T : class;
+
+        void BeginTransaction();
+
+        void BeginTransaction(IsolationLevel isolationLevel);
+
+        void CommitTransaction();
+
+        void RollbackTransaction();
+
+        void DisposeTransaction();
     }
 }

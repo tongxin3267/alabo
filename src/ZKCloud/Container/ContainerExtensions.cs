@@ -29,7 +29,7 @@ namespace ZKCloud.Container {
                 return task;
             };
             return app.Use(middleware);
-        }
+        } 
 
         public static Action CreateContainerRegisterAction(this Type type, RegisterType registerType = RegisterType.Singleton) {
             var instanseExpression = Expression.Constant(ContainerManager.Default);

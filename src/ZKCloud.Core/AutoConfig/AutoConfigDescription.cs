@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -10,6 +11,9 @@ namespace ZKCloud.Core.AutoConfig
 {
     public class AutoConfigDescription
     {
+        private static ConcurrentDictionary<Type, AutoConfigDescription> _cache =
+            new ConcurrentDictionary<Type, AutoConfigDescription>();
+
         public Type ConfigType { get; private set; }
 
         public ConfigAttribute ConfigAttribute { get; private set; }
@@ -36,8 +40,8 @@ namespace ZKCloud.Core.AutoConfig
                 .ToArray();
         }
 
-        public static AutoConfigDescription Create(Type configType) {
-            return new AutoConfigDescription(configType);
+        internal static AutoConfigDescription Create(Type configType) {
+            return _cache.GetOrAdd(configType, e => new AutoConfigDescription(e));
         }
 
         public IEnumerable<GenericConfig> CreateGenericConfigs(IAutoConfig config) {
