@@ -10,7 +10,7 @@ using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Repositories;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Open.Attach.Domain.Services;
+using Alabo.App.Share.Attach.Domain.Services;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Exceptions;
 using Alabo.Extensions;

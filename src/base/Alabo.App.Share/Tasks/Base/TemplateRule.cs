@@ -1,4 +1,4 @@
-﻿namespace Alabo.App.Open.Tasks.Base {
+﻿namespace Alabo.App.Share.Tasks.Base {
 
     /// <summary>
     /// 模板信息

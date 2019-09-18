@@ -1,14 +1,14 @@
 ﻿using System.Threading.Tasks;
-using Alabo.App.Open.Reports.Admin;
-using Alabo.App.Open.Reports.Finance;
-using Alabo.App.Open.Reports.Order;
-using Alabo.App.Open.Reports.Pay;
-using Alabo.App.Open.Reports.Product;
-using Alabo.App.Open.Reports.User.Model;
-using Alabo.App.Open.Reports.User.Schedule;
+using Alabo.App.Share.Reports.Admin;
+using Alabo.App.Share.Reports.Finance;
+using Alabo.App.Share.Reports.Order;
+using Alabo.App.Share.Reports.Pay;
+using Alabo.App.Share.Reports.Product;
+using Alabo.App.Share.Reports.User.Model;
+using Alabo.App.Share.Reports.User.Schedule;
 using Alabo.Schedules.Job;
 
-namespace Alabo.App.Open.Reports {
+namespace Alabo.App.Share.Reports {
 
     /// <summary>
     /// 数据统计服务

@@ -1,12 +1,12 @@
 ﻿// ***********************************************************************
-// Assembly         : Alabo.App.Open
+// Assembly         : Alabo.App.Share
 // Author           : zkclo
 // Created          : 03-06-2018
 //
 // Last Modified By : zkclo
 // Last Modified On : 04-06-2018
 // ***********************************************************************
-// <copyright file="ViewAdminReward.cs" company="Alabo.App.Open">
+// <copyright file="ViewAdminReward.cs" company="Alabo.App.Share">
 //     Copyright (c) . All rights reserved.
 // </copyright>
 // <summary></summary>
@@ -21,10 +21,10 @@ using System.Linq;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Open.Share.Domain.Dto;
-using Alabo.App.Open.Share.Domain.Entities;
-using Alabo.App.Open.Share.Domain.Enums;
-using Alabo.App.Open.Share.Domain.Services;
+using Alabo.App.Share.Share.Domain.Dto;
+using Alabo.App.Share.Share.Domain.Entities;
+using Alabo.App.Share.Share.Domain.Enums;
+using Alabo.App.Share.Share.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
@@ -36,7 +36,7 @@ using Alabo.UI.AutoLists;
 using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Share.ViewModels {
+namespace Alabo.App.Share.Share.ViewModels {
 
     /// <summary>
     ///     Class ViewHomeReward.
@@ -118,7 +118,7 @@ namespace Alabo.App.Open.Share.ViewModels {
         /// </summary>
         [Display(Name = "分润状态")]
         [Field(ControlsType = ControlsType.DropdownList, IsTabSearch = true,
-            DataSource = "Alabo.App.Open.Share.Domain.Enums.FenRunStatus", Width = "90", ListShow = false,
+            DataSource = "Alabo.App.Share.Share.Domain.Enums.FenRunStatus", Width = "90", ListShow = false,
             SortOrder = 9)]
         public FenRunStatus Status { get; set; }
 

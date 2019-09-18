@@ -1,6 +1,6 @@
-﻿using Alabo.App.Open.Attach.Domain.Enums;
+﻿using Alabo.App.Share.Attach.Domain.Enums;
 
-namespace Alabo.App.Open.Attach.Domain.Dtos {
+namespace Alabo.App.Share.Attach.Domain.Dtos {
 
     /// <summary>
     /// 足迹模型

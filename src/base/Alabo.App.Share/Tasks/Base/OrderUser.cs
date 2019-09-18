@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alabo.App.Open.Tasks.Base {
+namespace Alabo.App.Share.Tasks.Base {
 
     /// <summary>
     /// 交易用户、触发用户、下单用户的用户类型

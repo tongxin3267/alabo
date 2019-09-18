@@ -11,20 +11,20 @@
 //using Alabo.App.Core.Api.Controller;
 //using Alabo.App.Core.Tasks;
 //using Alabo.App.Core.User;
-//using Alabo.App.Open.Share.Domain.Dtos;
+//using Alabo.App.Share.Share.Domain.Dtos;
 //using Alabo.RestfulApi;
 //using ZKCloud.Open.ApiBase.Configuration;
 //using Alabo.Domains.Services;
 //using Alabo.Web.Mvc.Attributes;
 //using Alabo.Web.Mvc.Controllers;
-//using Alabo.App.Open.Share.Domain.Entities;
-//using Alabo.App.Open.Share.Domain.Services;
+//using Alabo.App.Share.Share.Domain.Entities;
+//using Alabo.App.Share.Share.Domain.Services;
 //using Alabo.Extensions;
 //using ZKCloud.Open.ApiBase.Models;
-//using Alabo.App.Open.Tasks.Base;
+//using Alabo.App.Share.Tasks.Base;
 //using Alabo.App.Core.Common.Domain.Services;
 
-//namespace Alabo.App.Open.Share.Controllers {
+//namespace Alabo.App.Share.Share.Controllers {
 //    [ApiExceptionFilter]
 //    [Route("Api/RewardRule/[action]")]
 //    public class ApiRewardRuleController : ApiBaseController<RewardRule, ObjectId> {

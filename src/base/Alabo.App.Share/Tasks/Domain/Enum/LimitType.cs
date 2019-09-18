@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Tasks.Domain.Enum {
+namespace Alabo.App.Share.Tasks.Domain.Enum {
 
     [ClassProperty(Name = "按时间限制方式")]
     public enum LimitType {

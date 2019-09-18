@@ -5,15 +5,15 @@ using System.Linq;
 using Alabo.App.Core.Api.Controller;
 using Alabo.App.Core.Api.Domain.Service;
 using Alabo.App.Core.Api.Filter;
-using Alabo.App.Open.Attach.Domain.Dtos;
-using Alabo.App.Open.Attach.Domain.Entities;
-using Alabo.App.Open.Attach.Domain.Services;
+using Alabo.App.Share.Attach.Domain.Dtos;
+using Alabo.App.Share.Attach.Domain.Entities;
+using Alabo.App.Share.Attach.Domain.Services;
 using Alabo.App.Shop.Product.DiyModels;
 using Alabo.Domains.Enums;
 using ZKCloud.Open.ApiBase.Models;
 using Alabo.RestfulApi;
 
-namespace Alabo.App.Open.Attach.Controllers {
+namespace Alabo.App.Share.Attach.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/Favorite/[action]")]

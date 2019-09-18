@@ -10,8 +10,8 @@ using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Core.UserType.Domain.Services;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.App.Open.Tasks.Modules;
+using Alabo.App.Share.Tasks.Base;
+using Alabo.App.Share.Tasks.Modules;
 using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.Core.Enums.Enum;
 using Alabo.Domains.Enums;
@@ -20,7 +20,7 @@ using ZKCloud.Open.ApiBase.Models;
 using Alabo.Web.Mvc.Attributes;
 using ICityService = Alabo.App.Agent.Citys.Domain.Services.ICityService;
 
-namespace Alabo.App.Open.Tasks.Configs.Area {
+namespace Alabo.App.Share.Tasks.Configs.Area {
 
     [ShareModules(Name = "市代理分润",
      FenRunResultType = Core.Tasks.Domain.Enums.FenRunResultType.Price,

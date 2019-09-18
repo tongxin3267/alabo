@@ -6,11 +6,11 @@ using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.App.Core.UserType.Domain.Services;
-using Alabo.App.Open.Tasks.Base;
+using Alabo.App.Share.Tasks.Base;
 using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.Helpers;
 
-namespace Alabo.App.Open.Tasks.Modules {
+namespace Alabo.App.Share.Tasks.Modules {
 
     using User = Alabo.App.Core.User.Domain.Entities.User;
 

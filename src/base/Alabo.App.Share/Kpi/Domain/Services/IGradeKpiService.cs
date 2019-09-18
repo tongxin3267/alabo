@@ -2,14 +2,14 @@ using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Open.Kpi.Domain.CallBack;
-using Alabo.App.Open.Kpi.Domain.Entities;
-using Alabo.App.Open.Kpi.ViewModels;
+using Alabo.App.Share.Kpi.Domain.CallBack;
+using Alabo.App.Share.Kpi.Domain.Entities;
+using Alabo.App.Share.Kpi.ViewModels;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 
-namespace Alabo.App.Open.Kpi.Domain.Services {
+namespace Alabo.App.Share.Kpi.Domain.Services {
 
     public interface IGradeKpiService : IService<GradeKpi, ObjectId> {
         /// <summary>

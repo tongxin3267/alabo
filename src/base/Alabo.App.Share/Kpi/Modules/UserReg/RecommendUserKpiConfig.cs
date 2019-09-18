@@ -14,7 +14,7 @@ using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Kpi.Modules.UserReg {
+namespace Alabo.App.Share.Kpi.Modules.UserReg {
 
     public class RecommendUserKpiConfig : KpiBaseConfig {
 

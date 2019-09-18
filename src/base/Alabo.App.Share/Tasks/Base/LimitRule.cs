@@ -1,6 +1,6 @@
-﻿using Alabo.App.Open.Tasks.Domain.Enum;
+﻿using Alabo.App.Share.Tasks.Domain.Enum;
 
-namespace Alabo.App.Open.Tasks.Base {
+namespace Alabo.App.Share.Tasks.Base {
 
     /// <summary>
     /// 封底规则

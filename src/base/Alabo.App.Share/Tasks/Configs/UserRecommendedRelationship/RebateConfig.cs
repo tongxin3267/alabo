@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.App.Open.Tasks.Modules;
+using Alabo.App.Share.Tasks.Base;
+using Alabo.App.Share.Tasks.Modules;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Open.Tasks.Configs.UserRecommendedRelationship {
+namespace Alabo.App.Share.Tasks.Configs.UserRecommendedRelationship {
 
     /// <summary>
     /// Class RebateConfig.
     /// 自身返利
     /// </summary>
-    /// <seealso cref="Alabo.App.Open.Tasks.Base.ShareBaseConfig" />
+    /// <seealso cref="Alabo.App.Share.Tasks.Base.ShareBaseConfig" />
     public class RebateConfig : ShareBaseConfig {
     }
 

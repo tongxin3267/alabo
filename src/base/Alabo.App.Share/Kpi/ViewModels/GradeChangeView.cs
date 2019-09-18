@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.App.Open.Kpi.Domain.Enum;
+using Alabo.App.Share.Kpi.Domain.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Open.Kpi.ViewModels {
+namespace Alabo.App.Share.Kpi.ViewModels {
 
     /// <summary>
     /// 修改会员等级

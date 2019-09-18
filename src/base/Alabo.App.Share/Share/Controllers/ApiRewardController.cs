@@ -11,9 +11,9 @@ using Alabo.App.Core.Themes.DiyModels.Lists;
 using Alabo.App.Core.Themes.DiyModels.Previews;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Open.Share.Domain.Dto;
-using Alabo.App.Open.Share.Domain.Entities;
-using Alabo.App.Open.Share.Domain.Services;
+using Alabo.App.Share.Share.Domain.Dto;
+using Alabo.App.Share.Share.Domain.Entities;
+using Alabo.App.Share.Share.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
@@ -22,7 +22,7 @@ using Alabo.Mapping;
 using ZKCloud.Open.ApiBase.Models;
 using Alabo.RestfulApi;
 
-namespace Alabo.App.Open.Share.Controllers {
+namespace Alabo.App.Share.Share.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/Reward/[action]")]

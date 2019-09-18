@@ -9,7 +9,7 @@ using Alabo.Extensions;
 using Alabo.Schedules.Job;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Reports.Product {
+namespace Alabo.App.Share.Reports.Product {
 
     [ClassProperty(Name = "商品统计数据", Icon = "fa fa-building", Description = "商品统计数据")]
     public class ProductReport : IReportModel {

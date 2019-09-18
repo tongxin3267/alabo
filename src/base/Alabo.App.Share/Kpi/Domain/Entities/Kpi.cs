@@ -8,7 +8,7 @@ using Alabo.Domains.Enums;
 using Alabo.Tenants;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Kpi.Domain.Entities {
+namespace Alabo.App.Share.Kpi.Domain.Entities {
 
     /// <summary>
     ///     统计表（该表数据，只增，不编辑，不删除)

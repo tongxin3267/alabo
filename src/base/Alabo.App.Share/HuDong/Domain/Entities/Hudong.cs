@@ -3,12 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Open.HuDong.Domain.Enums;
+using Alabo.App.Share.HuDong.Domain.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.HuDong.Domain.Entities {
+namespace Alabo.App.Share.HuDong.Domain.Entities {
 
     /// <summary>
     ///
@@ -28,7 +28,7 @@ namespace Alabo.App.Open.HuDong.Domain.Entities {
         public string Name { get; set; } = "活动名称";
 
         /// <summary>
-        /// 所属营销活动类型，如：Alabo.App.Open.HuDong.Modules.BigWheel
+        /// 所属营销活动类型，如：Alabo.App.Share.HuDong.Modules.BigWheel
         /// 大转盘
         /// </summary>
         [Display(Name = "所属营销活动类型")]

@@ -9,10 +9,10 @@ using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Open.Share.Domain.Enums;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.App.Open.Tasks.Parameter;
-using Alabo.App.Open.Tasks.Result;
+using Alabo.App.Share.Share.Domain.Enums;
+using Alabo.App.Share.Tasks.Base;
+using Alabo.App.Share.Tasks.Parameter;
+using Alabo.App.Share.Tasks.Result;
 using Alabo.App.Shop.Order.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Entities.Extensions;
 using Alabo.App.Shop.Order.Domain.Services;
@@ -23,7 +23,7 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Open.Tasks {
+namespace Alabo.App.Share.Tasks {
 
     /// <summary>
     /// Class ShareModuleBase.

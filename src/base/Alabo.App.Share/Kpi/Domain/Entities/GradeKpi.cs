@@ -3,13 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Open.Kpi.Domain.Enum;
+using Alabo.App.Share.Kpi.Domain.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Open.Kpi.Domain.Entities {
+namespace Alabo.App.Share.Kpi.Domain.Entities {
 
     /// <summary>
     ///     等级考核
@@ -82,7 +82,7 @@ namespace Alabo.App.Open.Kpi.Domain.Entities {
         /// </summary>
         [Display(Name = "考核结果")]
         [Field(ControlsType = ControlsType.DropdownList, IsShowAdvancedSerach = true, IsShowBaseSerach = true, ListShow = true, EditShow = true,
-            SortOrder = 102, Width = "110", DataSource = "Alabo.App.Open.Kpi.Domain.Enum.KpiResult")]
+            SortOrder = 102, Width = "110", DataSource = "Alabo.App.Share.Kpi.Domain.Enum.KpiResult")]
         public KpiResult KpiResult { get; set; }
 
         /// <summary>

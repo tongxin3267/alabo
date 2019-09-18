@@ -4,7 +4,7 @@ using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.App.Core.User.Domain.Services;
 
-namespace Alabo.App.Open.Tasks.Result {
+namespace Alabo.App.Share.Tasks.Result {
 
     public class UserOutResult : ITaskResult {
         public TaskContext Context { get; private set; }

@@ -7,7 +7,7 @@ using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.Core.Enums.Enum;
 
-namespace Alabo.App.Open.Tasks.Result {
+namespace Alabo.App.Share.Tasks.Result {
 
     public class BillAddResult : ITaskResult {
         public TaskContext Context { get; private set; }

@@ -1,15 +1,15 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Open.Share.Domain.Entities;
-using Alabo.App.Open.Share.Domain.Enums;
+using Alabo.App.Share.Share.Domain.Entities;
+using Alabo.App.Share.Share.Domain.Enums;
 using Alabo.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Open.Share.ViewModels {
+namespace Alabo.App.Share.Share.ViewModels {
 
     /// <summary>
     /// 分润配置

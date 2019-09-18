@@ -1,12 +1,12 @@
 ﻿// ***********************************************************************
-// Assembly         : Alabo.App.Open
+// Assembly         : Alabo.App.Share
 // Author           : zkclo
 // Created          : 03-06-2018
 //
 // Last Modified By : zkclo
 // Last Modified On : 04-06-2018
 // ***********************************************************************
-// <copyright file="ViewAdminReward.cs" company="Alabo.App.Open">
+// <copyright file="ViewAdminReward.cs" company="Alabo.App.Share">
 //     Copyright (c) . All rights reserved.
 // </copyright>
 // <summary></summary>
@@ -18,14 +18,14 @@ using System.ComponentModel.DataAnnotations;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Open.Share.Domain.Entities;
-using Alabo.App.Open.Share.Domain.Enums;
+using Alabo.App.Share.Share.Domain.Entities;
+using Alabo.App.Share.Share.Domain.Enums;
 using Alabo.Domains.Enums;
 using ZKCloud.Open.Share.Models;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Open.Share.ViewModels {
+namespace Alabo.App.Share.Share.ViewModels {
 
     /// <summary>
     ///     Class ViewAdminReward.

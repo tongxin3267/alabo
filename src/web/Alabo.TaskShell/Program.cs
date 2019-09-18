@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Alabo.App.Core.Common.Job;
 using Alabo.App.Core.Tasks.Job;
 using Alabo.App.Market.BookDonae.Domain.Services;
-using Alabo.App.Open.Operate.Job;
+using Alabo.App.Share.Operate.Job;
 using Alabo.App.Shop.Order.Job;
 using Alabo.Helpers;
 using Alabo.Runtime;

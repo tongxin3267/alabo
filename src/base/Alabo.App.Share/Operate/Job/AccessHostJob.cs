@@ -7,7 +7,7 @@ using Alabo.Dependency;
 using Alabo.Extensions;
 using Alabo.Schedules.Job;
 
-namespace Alabo.App.Open.Operate.Job {
+namespace Alabo.App.Share.Operate.Job {
 
     /// <summary>
     /// 3分钟定时访问网站

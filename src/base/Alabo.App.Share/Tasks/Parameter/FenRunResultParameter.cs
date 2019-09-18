@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Share.Domain.Enums;
-using Alabo.App.Open.Tasks.Base;
+using Alabo.App.Share.Share.Domain.Enums;
+using Alabo.App.Share.Tasks.Base;
 using Alabo.Core.Enums.Enum;
 
-namespace Alabo.App.Open.Tasks.Parameter {
+namespace Alabo.App.Share.Tasks.Parameter {
 
     using Core.Common.Domain.Services;
     using Core.Finance.Domain.CallBacks;

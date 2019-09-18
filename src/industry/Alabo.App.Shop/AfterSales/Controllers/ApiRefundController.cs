@@ -36,11 +36,8 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
     [ApiExceptionFilter]
     [Route("Api/Refund/[action]")]
     public class ApiRefundController : ApiBaseController<Refund, ObjectId> {
-        
-       
 
         public ApiRefundController() : base() {
-       
         }
 
         /// <summary>
@@ -65,7 +62,7 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Open.ApiBase.Models.ApiResult> Apply([FromBody]Refund parameter) {
+        public async Task<ZKCloud.Open.ApiBase.Models.ApiResult> Apply([FromBody]Refund parameter) {
             var order = Resolve<IOrderService>().GetSingle(parameter.OrderId);
             //未发货
             if (order.OrderStatus == Order.Domain.Enums.OrderStatus.WaitingSellerSendGoods) {
@@ -73,7 +70,7 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
             } else if (order.OrderStatus == Order.Domain.Enums.OrderStatus.WaitingReceiptProduct) {
                 order.OrderStatus = Order.Domain.Enums.OrderStatus.AfterSale;
             } else {
-                return await System.Threading.Tasks.Task.FromResult(Open.ApiBase.Models.ApiResult.Failure("订单状态已更改!"));
+                return await System.Threading.Tasks.Task.FromResult(ApiResult.Failure("订单状态已更改!"));
             }
             parameter.Process = Domain.Enums.RefundStatus.BuyerApplyRefund;
             var res = Resolve<IRefundService>().AddOrUpdate(parameter);
@@ -84,7 +81,7 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
             var update = Resolve<IOrderService>().Update(order);
 
             //订单更新成功且退款信息插入成功
-            var result = res && update ? Open.ApiBase.Models.ApiResult.Success() : Open.ApiBase.Models.ApiResult.Failure("申请失败!");
+            var result = res && update ? ApiResult.Success() : ApiResult.Failure("申请失败!");
             //插入订单操作记录
             var orderAction = new OrderAction {
                 Intro = $"会员申请{parameter.Reason},原因为:{parameter.Description}",
@@ -101,7 +98,7 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Open.ApiBase.Models.ApiResult> Process([FromBody]Refund parameter) {
+        public async Task<ApiResult> Process([FromBody]Refund parameter) {
             var order = Resolve<IOrderService>().GetSingle(parameter.OrderId);
             var pay = Resolve<IPayService>().GetSingle(s => s.Id == order.PayId);
             pay.PayExtension = pay.Extensions.ToObject<PayExtension>();
@@ -109,12 +106,12 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
 
             var entity = Resolve<IRefundService>().GetByIdNoTracking(order.OrderExtension?.RefundInfo?.Id);
             if (entity == null) {
-                return await System.Threading.Tasks.Task.FromResult(Open.ApiBase.Models.ApiResult.Failure("退款状态以异常!"));
+                return await System.Threading.Tasks.Task.FromResult(ApiResult.Failure("退款状态以异常!"));
             }
 
             if (pay.Amount < parameter.Amount) {
                 //退款金额不能大于支付金额
-                return await System.Threading.Tasks.Task.FromResult(Open.ApiBase.Models.ApiResult.Failure("退款金额不能大于订单金额!"));
+                return await System.Threading.Tasks.Task.FromResult(ApiResult.Failure("退款金额不能大于订单金额!"));
             }
             //退款金额等于 手动退款的金额
             entity.Amount = parameter.Amount;
@@ -123,24 +120,24 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
 
             //请求结果
             if (!refundFree.Item1.Succeeded) {
-                return Open.ApiBase.Models.ApiResult.Failure($"退款失败!refundFree.Item1:ErrorMessages=>{refundFree.Item1.ErrorMessages.Join()}/ReturnMessage=>{refundFree.Item1.ReturnMessage},refundFree.Item2:{refundFree.Item2}");
+                return ApiResult.Failure($"退款失败!refundFree.Item1:ErrorMessages=>{refundFree.Item1.ErrorMessages.Join()}/ReturnMessage=>{refundFree.Item1.ReturnMessage},refundFree.Item2:{refundFree.Item2}");
             }
             //未发货
             if (order.OrderStatus == Order.Domain.Enums.OrderStatus.AfterSale) {
                 if (order.OrderExtension.RefundInfo.Process == Domain.Enums.RefundStatus.WaitSaleAllow) {
                     entity.Process = Domain.Enums.RefundStatus.Sucess;
                 } else {
-                    return await System.Threading.Tasks.Task.FromResult(Open.ApiBase.Models.ApiResult.Failure("售后状态已被更改,操作失败!"));
+                    return await System.Threading.Tasks.Task.FromResult(ApiResult.Failure("售后状态已被更改,操作失败!"));
                 }
             } else if (order.OrderStatus == Order.Domain.Enums.OrderStatus.Refund) {
                 //退款可以在 同意之后或者 直接退款,退款后直接完成
                 if (order.OrderExtension.RefundInfo.Process == Domain.Enums.RefundStatus.BuyerApplyRefund) {
                     entity.Process = Domain.Enums.RefundStatus.Sucess;
                 } else {
-                    return await System.Threading.Tasks.Task.FromResult(Open.ApiBase.Models.ApiResult.Failure("售后状态已被更改,操作失败!"));
+                    return await System.Threading.Tasks.Task.FromResult(ApiResult.Failure("售后状态已被更改,操作失败!"));
                 }
             } else {
-                return await System.Threading.Tasks.Task.FromResult(Open.ApiBase.Models.ApiResult.Failure("订单状态已更改,操作失败!"));
+                return await System.Threading.Tasks.Task.FromResult(ApiResult.Failure("订单状态已更改,操作失败!"));
             }
             //退款完成后将更改订单状态
             order.OrderStatus = Order.Domain.Enums.OrderStatus.Refunded;
@@ -151,7 +148,7 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
             order.OrderExtension.RefundInfo = entity;
             order.Extension = order.OrderExtension.ToJsons();
             var update = Resolve<IOrderService>().Update(order);
-            var result = res && update ? Open.ApiBase.Models.ApiResult.Success() : Open.ApiBase.Models.ApiResult.Failure("退款失败!");
+            var result = res && update ? ApiResult.Success() : ApiResult.Failure("退款失败!");
 
             return await System.Threading.Tasks.Task.FromResult(result);
         }
@@ -161,7 +158,7 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Open.ApiBase.Models.ApiResult> AllowProcess([FromBody]Refund parameter) {
+        public async Task<ZKCloud.Open.ApiBase.Models.ApiResult> AllowProcess([FromBody]Refund parameter) {
             var order = Resolve<IOrderService>().GetSingle(parameter.OrderId);
             var pay = Resolve<IPayService>().GetSingle(s => s.Id == order.PayId);
 
@@ -170,7 +167,7 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
                 if (entity.Process == Domain.Enums.RefundStatus.BuyerApplyRefund) {
                     entity.Process = Domain.Enums.RefundStatus.WaitSaleAllow;
                 } else {
-                    return await System.Threading.Tasks.Task.FromResult(Open.ApiBase.Models.ApiResult.Failure("售后状态已被更改,操作失败!"));
+                    return await System.Threading.Tasks.Task.FromResult(ApiResult.Failure("售后状态已被更改,操作失败!"));
                 }
                 entity.Address = parameter.Address;
             }
@@ -178,7 +175,7 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
             order.OrderExtension.RefundInfo = entity;
             order.Extension = order.OrderExtension.ToJsons();
             var update = Resolve<IOrderService>().Update(order);
-            var result = res && update ? Open.ApiBase.Models.ApiResult.Success() : Open.ApiBase.Models.ApiResult.Failure("操作失败!");
+            var result = res && update ? ApiResult.Success() : ApiResult.Failure("操作失败!");
             //插入订单操作记录
             var orderAction = new OrderAction {
                 Intro = $"系统后台同意退款申请，已处理",
@@ -196,7 +193,7 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Open.ApiBase.Models.ApiResult> RefuseProcess([FromBody]Refund parameter) {
+        public async Task<ApiResult> RefuseProcess([FromBody]Refund parameter) {
             var order = Resolve<IOrderService>().GetSingle(parameter.OrderId);
             var pay = Resolve<IPayService>().GetSingle(s => s.Id == order.PayId);
 
@@ -205,7 +202,7 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
                 if (entity.Process == Domain.Enums.RefundStatus.BuyerApplyRefund) {
                     entity.Process = Domain.Enums.RefundStatus.WaitSaleRefuse;
                 } else {
-                    return await System.Threading.Tasks.Task.FromResult(Open.ApiBase.Models.ApiResult.Failure("售后状态已更改!"));
+                    return await System.Threading.Tasks.Task.FromResult(ApiResult.Failure("售后状态已更改!"));
                 }
             }
             //未发货
@@ -214,7 +211,7 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
             } else if (order.OrderStatus == Order.Domain.Enums.OrderStatus.Refund) {
                 order.OrderStatus = Order.Domain.Enums.OrderStatus.WaitingSellerSendGoods;
             } else {
-                return await System.Threading.Tasks.Task.FromResult(Open.ApiBase.Models.ApiResult.Failure("订单状态已更改!"));
+                return await System.Threading.Tasks.Task.FromResult(ApiResult.Failure("订单状态已更改!"));
             }
             //entity.Address = parameter.Address;
             var res = Resolve<IRefundService>().Update(entity);
@@ -222,7 +219,7 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
             order.OrderExtension.RefundInfo = entity;
             order.Extension = order.OrderExtension.ToJsons();
             var update = Resolve<IOrderService>().Update(order);
-            var result = res && update ? Open.ApiBase.Models.ApiResult.Success() : Open.ApiBase.Models.ApiResult.Failure("操作失败!");
+            var result = res && update ? ApiResult.Success() : ApiResult.Failure("操作失败!");
 
             //插入订单操作记录
             var orderAction = new OrderAction {
@@ -241,7 +238,7 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public async Task<Open.ApiBase.Models.ApiResult> RefuseCancel([FromBody]Refund parameter) {
+        public async Task<ApiResult> RefuseCancel([FromBody]Refund parameter) {
             var order = Resolve<IOrderService>().GetSingle(parameter.OrderId);
             var pay = Resolve<IPayService>().GetSingle(s => s.Id == order.PayId);
 
@@ -250,7 +247,7 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
                 if (entity.Process == Domain.Enums.RefundStatus.BuyerApplyRefund) {
                     entity.Process = Domain.Enums.RefundStatus.Closed;//用户取消
                 } else {
-                    return await System.Threading.Tasks.Task.FromResult(Open.ApiBase.Models.ApiResult.Failure("售后状态已更改!"));
+                    return await System.Threading.Tasks.Task.FromResult(ApiResult.Failure("售后状态已更改!"));
                 }
             }
             //未发货
@@ -259,7 +256,7 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
             } else if (order.OrderStatus == Order.Domain.Enums.OrderStatus.Refund) {
                 order.OrderStatus = Order.Domain.Enums.OrderStatus.WaitingSellerSendGoods;
             } else {
-                return await System.Threading.Tasks.Task.FromResult(Open.ApiBase.Models.ApiResult.Failure("订单状态已更改!"));
+                return await System.Threading.Tasks.Task.FromResult(ApiResult.Failure("订单状态已更改!"));
             }
             //entity.Address = parameter.Address;
             var res = Resolve<IRefundService>().Update(entity);
@@ -267,7 +264,7 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
             order.OrderExtension.RefundInfo = entity;
             order.Extension = order.OrderExtension.ToJsons();
             var update = Resolve<IOrderService>().Update(order);
-            var result = res && update ? Open.ApiBase.Models.ApiResult.Success() : Open.ApiBase.Models.ApiResult.Failure("操作失败!");
+            var result = res && update ? ApiResult.Success() : ApiResult.Failure("操作失败!");
             //插入订单操作记录
             var orderAction = new OrderAction {
                 Intro = $"用户取消退款申请",

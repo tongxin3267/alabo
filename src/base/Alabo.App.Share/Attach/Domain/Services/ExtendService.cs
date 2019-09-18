@@ -1,10 +1,10 @@
 using MongoDB.Bson;
-using Alabo.App.Open.Attach.Domain.Entities;
+using Alabo.App.Share.Attach.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 
-namespace Alabo.App.Open.Attach.Domain.Services {
+namespace Alabo.App.Share.Attach.Domain.Services {
 
     public class ExtendService : ServiceBase<Extend, ObjectId>, IExtendService {
 

@@ -11,7 +11,7 @@ using Alabo.Extensions;
 using Alabo.Schedules.Job;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Reports.Finance {
+namespace Alabo.App.Share.Reports.Finance {
 
     /// <summary>
     /// 分润数据统计

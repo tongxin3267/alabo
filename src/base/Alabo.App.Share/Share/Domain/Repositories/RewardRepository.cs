@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using Alabo.App.Open.Share.Domain.Dto;
-using Alabo.App.Open.Share.Domain.Entities;
-using Alabo.App.Open.Share.Domain.Enums;
+using Alabo.App.Share.Share.Domain.Dto;
+using Alabo.App.Share.Share.Domain.Entities;
+using Alabo.App.Share.Share.Domain.Enums;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Repositories.Extensions;
 using Alabo.Extensions;
 
-namespace Alabo.App.Open.Share.Domain.Repositories {
+namespace Alabo.App.Share.Share.Domain.Repositories {
 
     internal class RewardRepository : RepositoryEfCore<Entities.Reward, long>, IRewardRepository {
 

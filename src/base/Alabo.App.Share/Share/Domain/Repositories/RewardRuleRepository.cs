@@ -1,9 +1,9 @@
 using MongoDB.Bson;
-using Alabo.App.Open.Share.Domain.Entities;
+using Alabo.App.Share.Share.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 
-namespace Alabo.App.Open.Share.Domain.Repositories {
+namespace Alabo.App.Share.Share.Domain.Repositories {
 
     public class RewardRuleRepository : RepositoryMongo<RewardRule, ObjectId>, IRewardRuleRepository {
 

@@ -1,8 +1,8 @@
-﻿using Alabo.App.Open.Reports.Admin;
+﻿using Alabo.App.Share.Reports.Admin;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 
-namespace Alabo.App.Open.Reports.Service {
+namespace Alabo.App.Share.Reports.Service {
 
     public interface IOpenReportService : IService {
         /// <summary>

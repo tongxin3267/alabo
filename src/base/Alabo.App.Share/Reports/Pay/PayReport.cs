@@ -9,7 +9,7 @@ using Alabo.Domains.Repositories.EFCore;
 using Alabo.Extensions;
 using Alabo.Schedules.Job;
 
-namespace Alabo.App.Open.Reports.Pay {
+namespace Alabo.App.Share.Reports.Pay {
 
     public class PayReport : IReportModel {
 

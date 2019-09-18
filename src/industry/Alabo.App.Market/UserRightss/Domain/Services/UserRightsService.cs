@@ -1,13 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Alabo.App.Core.Admin.Domain.Services;
 using Alabo.App.Core.Api.Domain.Service;
-using Alabo.App.Core.Common.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Employes.Domain.Services;
-using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.Tasks.Domain.Entities;
 using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Core.Tasks.Domain.Services;
@@ -21,8 +14,8 @@ using Alabo.App.Market.UserRightss.Domain.Dtos;
 using Alabo.App.Market.UserRightss.Domain.Entities;
 using Alabo.App.Market.UserRightss.Domain.Enums;
 using Alabo.App.Market.UserRightss.Domain.Repositories;
-using Alabo.App.Open.Kpi.Domain.Entities;
-using Alabo.App.Open.Kpi.Domain.Services;
+using Alabo.App.Share.Kpi.Domain.Entities;
+using Alabo.App.Share.Kpi.Domain.Services;
 using Alabo.App.Shop.Order.Domain.Dtos;
 using Alabo.App.Shop.Order.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Entities.Extensions;
@@ -39,6 +32,10 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Linq.Dynamic;
 using Alabo.Mapping;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Alabo.App.Market.UserRightss.Domain.Services {
 

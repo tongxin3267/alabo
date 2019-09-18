@@ -7,12 +7,12 @@ using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Core.UserType.Domain.Services;
-using Alabo.App.Open.Tasks;
+using Alabo.App.Share.Tasks;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Open.Kpi {
+namespace Alabo.App.Share.Kpi {
 
     using User = Core.User.Domain.Entities.User;
 

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Kpi.Domain.Enum {
+namespace Alabo.App.Share.Kpi.Domain.Enum {
 
     /// <summary>
     /// 考核结果

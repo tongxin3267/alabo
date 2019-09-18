@@ -2,7 +2,7 @@
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Tasks.Base {
+namespace Alabo.App.Share.Tasks.Base {
 
     /// <summary>
     /// 分润在商品上面的展示

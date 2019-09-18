@@ -1,10 +1,10 @@
 using MongoDB.Bson;
-using Alabo.App.Open.HuDong.Domain.Entities;
-using Alabo.App.Open.HuDong.Dtos;
+using Alabo.App.Share.HuDong.Domain.Entities;
+using Alabo.App.Share.HuDong.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 
-namespace Alabo.App.Open.HuDong.Domain.Services {
+namespace Alabo.App.Share.HuDong.Domain.Services {
 
     public interface IHudongRecordService : IService<HudongRecord, ObjectId> {
 

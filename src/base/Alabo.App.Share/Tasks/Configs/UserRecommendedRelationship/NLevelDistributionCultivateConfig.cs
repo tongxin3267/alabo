@@ -8,14 +8,14 @@ using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.App.Open.Tasks.Modules;
+using Alabo.App.Share.Tasks.Base;
+using Alabo.App.Share.Tasks.Modules;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Tasks.Configs.UserRecommendedRelationship {
+namespace Alabo.App.Share.Tasks.Configs.UserRecommendedRelationship {
 
     /// <summary>
     /// 裂变与培育

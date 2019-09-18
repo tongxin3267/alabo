@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Share.Domain.Enums {
+namespace Alabo.App.Share.Share.Domain.Enums {
 
     [ClassProperty(Name = "地址类型")]
     public enum RegionType {

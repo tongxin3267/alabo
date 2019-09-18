@@ -6,10 +6,10 @@ using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Open.Kpi.Domain.CallBack;
-using Alabo.App.Open.Kpi.Domain.Entities;
-using Alabo.App.Open.Kpi.Domain.Enum;
-using Alabo.App.Open.Kpi.ViewModels;
+using Alabo.App.Share.Kpi.Domain.CallBack;
+using Alabo.App.Share.Kpi.Domain.Entities;
+using Alabo.App.Share.Kpi.Domain.Enum;
+using Alabo.App.Share.Kpi.ViewModels;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -20,7 +20,7 @@ using Alabo.Extensions;
 using Alabo.Linq;
 using Alabo.Schedules;
 
-namespace Alabo.App.Open.Kpi.Domain.Services {
+namespace Alabo.App.Share.Kpi.Domain.Services {
 
     /// <summary>
     /// µÈ¼¶¿¼ºË

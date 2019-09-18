@@ -1,13 +1,13 @@
 using MongoDB.Bson;
-using Alabo.App.Open.HuDong.Domain.Entities;
-using Alabo.App.Open.HuDong.Dtos;
+using Alabo.App.Share.HuDong.Domain.Entities;
+using Alabo.App.Share.HuDong.Dtos;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 
-namespace Alabo.App.Open.HuDong.Domain.Services {
+namespace Alabo.App.Share.HuDong.Domain.Services {
 
     /// <summary>
     ///

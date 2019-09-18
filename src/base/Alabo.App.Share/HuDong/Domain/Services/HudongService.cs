@@ -5,16 +5,16 @@ using System.Linq;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Open.HuDong.Domain.Entities;
-using Alabo.App.Open.HuDong.Domain.Enums;
-using Alabo.App.Open.HuDong.Dtos;
+using Alabo.App.Share.HuDong.Domain.Entities;
+using Alabo.App.Share.HuDong.Domain.Enums;
+using Alabo.App.Share.HuDong.Dtos;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 
-namespace Alabo.App.Open.HuDong.Domain.Services {
+namespace Alabo.App.Share.HuDong.Domain.Services {
 
     public class HudongService : ServiceBase<Hudong, ObjectId>, IHudongService {
 

@@ -8,7 +8,7 @@ using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Open.Kpi.Domain.CallBack {
+namespace Alabo.App.Share.Kpi.Domain.CallBack {
 
     /// <summary>
     ///     绩效降职配置

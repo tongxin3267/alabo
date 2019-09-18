@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Open.Tasks.Base;
+using Alabo.App.Share.Tasks.Base;
 
-namespace Alabo.App.Open.Tasks.Parameter {
+namespace Alabo.App.Share.Tasks.Parameter {
 
     public class SuperiorDividendParameter {
 

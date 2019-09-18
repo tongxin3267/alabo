@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Open.HuDong.Domain.Entities;
-using Alabo.App.Open.HuDong.Domain.Enums;
-using Alabo.App.Open.HuDong.Domain.Services;
+using Alabo.App.Share.HuDong.Domain.Entities;
+using Alabo.App.Share.HuDong.Domain.Enums;
+using Alabo.App.Share.HuDong.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.UI;
 using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.HuDong.Modules {
+namespace Alabo.App.Share.HuDong.Modules {
 
     [ClassProperty(Name = "获奖记录", PageType = ViewPageType.List)]
     public class AwardList : UIBase, IAutoTable<HudongRecord> {
@@ -30,7 +30,7 @@ namespace Alabo.App.Open.HuDong.Modules {
         /// 互动类型
         /// </summary>
         [Display(Name = "互动类型"), Field(ControlsType = ControlsType.Label, ListShow = true,
-            DataSource = "Alabo.App.Open.HuDong.Domain.Enums.HuDongEnums")]
+            DataSource = "Alabo.App.Share.HuDong.Domain.Enums.HuDongEnums")]
         public HuDongEnums HuDongActivityType { get; set; }
 
         public List<TableAction> Actions() {

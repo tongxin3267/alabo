@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Alabo.App.Core.Api.Domain.Service;
-using Alabo.App.Open.HuDong.Domain.Entities;
-using Alabo.App.Open.HuDong.Domain.Services;
+using Alabo.App.Share.HuDong.Domain.Entities;
+using Alabo.App.Share.HuDong.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
@@ -11,7 +11,7 @@ using Alabo.UI;
 using Alabo.UI.AutoLists;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.HuDong.UI {
+namespace Alabo.App.Share.HuDong.UI {
 
     /// <summary>
     ///用户中奖记录

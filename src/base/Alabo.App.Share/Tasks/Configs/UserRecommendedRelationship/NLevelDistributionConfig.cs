@@ -6,17 +6,17 @@ using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.App.Open.Tasks.Modules;
+using Alabo.App.Share.Tasks.Base;
+using Alabo.App.Share.Tasks.Modules;
 using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Open.Tasks.Configs.UserRecommendedRelationship {
+namespace Alabo.App.Share.Tasks.Configs.UserRecommendedRelationship {
 
     /// <summary>
     /// 裂变分佣
     /// </summary>
-    /// <seealso cref="Alabo.App.Open.Tasks.Base.ShareBaseConfig" />
+    /// <seealso cref="Alabo.App.Share.Tasks.Base.ShareBaseConfig" />
     public class NLevelDistributionConfig : ShareBaseConfig {
     }
 

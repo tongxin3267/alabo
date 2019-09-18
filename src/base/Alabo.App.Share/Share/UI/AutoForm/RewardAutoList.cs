@@ -4,8 +4,8 @@ using System.Linq;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Open.Share.Domain.Entities;
-using Alabo.App.Open.Share.Domain.Services;
+using Alabo.App.Share.Share.Domain.Entities;
+using Alabo.App.Share.Share.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
@@ -13,7 +13,7 @@ using Alabo.UI;
 using Alabo.UI.AutoLists;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Share.UI.AutoForm {
+namespace Alabo.App.Share.Share.UI.AutoForm {
 
     [ClassProperty(Name = "分润记录", Description = "分润记录")]
     public class RewardAutoList : UIBase, IAutoList {

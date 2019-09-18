@@ -13,18 +13,18 @@ using ZKCloud.Open.ApiBase.Configuration;
 using Alabo.Domains.Services;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.Controllers;
-using Alabo.App.Open.HuDong.Domain.Entities;
+using Alabo.App.Share.HuDong.Domain.Entities;
 using Alabo.App.Core.Api.Controller;
-using Alabo.App.Open.HuDong.Domain.Services;
+using Alabo.App.Share.HuDong.Domain.Services;
 using ZKCloud.Open.ApiBase.Models;
 using Alabo.Helpers;
 using System.Collections.Generic;
 using Alabo.Extensions;
-using Alabo.App.Open.HuDong.Dtos;
+using Alabo.App.Share.HuDong.Dtos;
 using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.Core.Extensions;
 
-namespace Alabo.App.Open.HuDong.Controllers {
+namespace Alabo.App.Share.HuDong.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/Hudong/[action]")]

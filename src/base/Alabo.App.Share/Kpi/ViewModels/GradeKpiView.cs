@@ -1,11 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Open.Kpi.Domain.Enum;
+using Alabo.App.Share.Kpi.Domain.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Open.Kpi.ViewModels {
+namespace Alabo.App.Share.Kpi.ViewModels {
 
     /// <summary>
     /// </summary>
@@ -84,7 +84,7 @@ namespace Alabo.App.Open.Kpi.ViewModels {
         /// <value>
         ///     The kpi result.
         /// </value>
-        [Field(ListShow = true, DataSource = "Alabo.App.Open.Kpi.Domain.Enum.KpiResult", GroupTabId = 1,
+        [Field(ListShow = true, DataSource = "Alabo.App.Share.Kpi.Domain.Enum.KpiResult", GroupTabId = 1,
             Width = "100", SortOrder = 2, LabelColor = LabelColor.Info)]
         [Display(Name = "考核结果")]
         public KpiResult KpiResult { get; set; }
@@ -159,7 +159,7 @@ namespace Alabo.App.Open.Kpi.ViewModels {
         /// <value>
         ///     The kpi result.
         /// </value>
-        [Field(ListShow = true, DataSource = "Alabo.App.Open.Kpi.Domain.Enum.KpiResult", GroupTabId = 1,
+        [Field(ListShow = true, DataSource = "Alabo.App.Share.Kpi.Domain.Enum.KpiResult", GroupTabId = 1,
             Width = "100", SortOrder = 2, LabelColor = LabelColor.Info)]
         [Display(Name = "考核结果")]
         public KpiResult KpiResult { get; set; }

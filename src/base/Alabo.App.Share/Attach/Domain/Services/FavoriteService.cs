@@ -1,7 +1,7 @@
 using MongoDB.Bson;
 using System.Collections.Generic;
-using Alabo.App.Open.Attach.Domain.Dtos;
-using Alabo.App.Open.Attach.Domain.Entities;
+using Alabo.App.Share.Attach.Domain.Dtos;
+using Alabo.App.Share.Attach.Domain.Entities;
 using Alabo.App.Shop.Product.Domain.Services;
 using Alabo.App.Shop.Product.ViewModels;
 using Alabo.Datas.UnitOfWorks;
@@ -10,7 +10,7 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 
-namespace Alabo.App.Open.Attach.Domain.Services {
+namespace Alabo.App.Share.Attach.Domain.Services {
 
     public class FavoriteService : ServiceBase<Favorite, ObjectId>, IFavoriteService {
 

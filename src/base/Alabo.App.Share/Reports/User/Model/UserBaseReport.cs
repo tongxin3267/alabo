@@ -4,7 +4,7 @@ using Alabo.App.Core.Reports;
 using Alabo.App.Core.Reports.ViewModels;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Reports.User.Model {
+namespace Alabo.App.Share.Reports.User.Model {
 
     /// <summary>
     /// 会员基础数据统计

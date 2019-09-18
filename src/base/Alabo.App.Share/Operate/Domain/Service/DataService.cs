@@ -9,7 +9,7 @@ using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 
-namespace Alabo.App.Open.Operate.Domain.Service {
+namespace Alabo.App.Share.Operate.Domain.Service {
 
     public class DataService : ServiceBase, IDataService {
         /// <summary>

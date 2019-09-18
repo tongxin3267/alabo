@@ -6,13 +6,13 @@ using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Reports.Domain.Services;
 using Alabo.App.Core.Reports.ViewModels;
 using Alabo.App.Core.User.Domain.Repositories;
-using Alabo.App.Open.Reports.User.Model;
+using Alabo.App.Share.Reports.User.Model;
 using Alabo.Dependency;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Extensions;
 using Alabo.Schedules.Job;
 
-namespace Alabo.App.Open.Reports.User.Schedule {
+namespace Alabo.App.Share.Reports.User.Schedule {
 
     /// <summary>
     /// 会员基础数据统计

@@ -9,7 +9,7 @@ using Alabo.UI;
 using Alabo.UI.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Messages.ViewsModels
+namespace Alabo.App.Share.Messages.ViewsModels
 {
 
     /// <summary>

@@ -8,7 +8,7 @@ using System;
 using Alabo.App.Core.Api;
 using Alabo.App.Core.ApiStore;
 using Alabo.App.Core.Tasks;
-using Alabo.App.Open.Messages;
+using Alabo.App.Share.Messages;
 using Alabo.Apps;
 using Alabo.Datas.Ef;
 using Alabo.Datas.UnitOfWorks;

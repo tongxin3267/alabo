@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using Alabo.App.Core.Api.Controller;
 using Alabo.App.Core.Api.Filter;
 using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Open.Kpi.Domain.CallBack;
-using Alabo.App.Open.Kpi.Domain.Services;
+using Alabo.App.Share.Kpi.Domain.CallBack;
+using Alabo.App.Share.Kpi.Domain.Services;
 using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Open.Kpi.Controllers {
+namespace Alabo.App.Share.Kpi.Controllers {
 
     /// <summary>
     /// KPI¿¼ºË

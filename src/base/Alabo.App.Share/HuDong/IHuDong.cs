@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Open.HuDong.Domain.Entities;
+using Alabo.App.Share.HuDong.Domain.Entities;
 
-namespace Alabo.App.Open.HuDong {
+namespace Alabo.App.Share.HuDong {
 
     /// <summary>
     /// 互动活动接口

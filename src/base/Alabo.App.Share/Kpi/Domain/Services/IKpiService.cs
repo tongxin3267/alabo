@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Open.Kpi.ViewModels;
+using Alabo.App.Share.Kpi.ViewModels;
 using Alabo.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 
-namespace Alabo.App.Open.Kpi.Domain.Services {
+namespace Alabo.App.Share.Kpi.Domain.Services {
 
     using Kpi = Entities.Kpi;
 

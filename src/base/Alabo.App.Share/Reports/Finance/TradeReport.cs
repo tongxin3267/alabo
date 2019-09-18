@@ -12,7 +12,7 @@ using Alabo.Extensions;
 using Alabo.Schedules.Job;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Reports.Finance {
+namespace Alabo.App.Share.Reports.Finance {
 
     [ClassProperty(Name = "交易数据统计", Icon = "fa fa-building", Description = "交易数据统计,提现，充值，订单支付")]
     public class TradeReport : IReportModel {

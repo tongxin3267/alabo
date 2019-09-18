@@ -1,5 +1,5 @@
 ﻿//
-//namespace Alabo.App.Open.Tasks.Configs.Range {
+//namespace Alabo.App.Share.Tasks.Configs.Range {
 //    public class FixedAmountRangeConfig : ShareBaseConfig {
 //    }
 //

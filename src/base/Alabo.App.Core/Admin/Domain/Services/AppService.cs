@@ -43,7 +43,7 @@ namespace Alabo.App.Core.Admin.Domain.Services {
                 {"Articles", "文章"},
                 {"Support", "工单"},
 
-                // Alabo.App.Open
+                // Alabo.App.Share
                 {"Messages", "短信"},
                 {"Share", "分润"},
 

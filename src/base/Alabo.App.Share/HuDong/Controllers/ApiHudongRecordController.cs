@@ -2,10 +2,10 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using Alabo.App.Core.Api.Controller;
 using Alabo.App.Core.Api.Filter;
-using Alabo.App.Open.HuDong.Domain.Entities;
-using Alabo.App.Open.HuDong.Domain.Services;
+using Alabo.App.Share.HuDong.Domain.Entities;
+using Alabo.App.Share.HuDong.Domain.Services;
 
-namespace Alabo.App.Open.HuDong.Controllers {
+namespace Alabo.App.Share.HuDong.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/HudongRecord/[action]")]

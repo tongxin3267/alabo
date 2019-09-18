@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Open.HuDong.Domain.Entities;
-using Alabo.App.Open.HuDong.Domain.Enums;
-using Alabo.App.Open.HuDong.Domain.Services;
+using Alabo.App.Share.HuDong.Domain.Entities;
+using Alabo.App.Share.HuDong.Domain.Enums;
+using Alabo.App.Share.HuDong.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.UI;
 using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.HuDong.Modules {
+namespace Alabo.App.Share.HuDong.Modules {
 
     /// <summary>
     ///
@@ -40,7 +40,7 @@ namespace Alabo.App.Open.HuDong.Modules {
         /// 奖品类型
         /// </summary>
         [Display(Name = "奖品类型"), Field(ControlsType = ControlsType.Label, ListShow = true,
-             DataSource = "Alabo.App.Open.HuDong.Domain.Enums.HudongAwardType")]
+             DataSource = "Alabo.App.Share.HuDong.Domain.Enums.HudongAwardType")]
         public HudongAwardType HuDongActivityType { get; set; }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Alabo.App.Open.HuDong.Modules {
         /// <summary>
         /// 互动类型
         /// </summary>
-        [Display(Name = "互动类型"), Field(ControlsType = ControlsType.Label, ListShow = true, DataSource = "Alabo.App.Open.HuDong.Domain.Enums.HuDongEnums")]
+        [Display(Name = "互动类型"), Field(ControlsType = ControlsType.Label, ListShow = true, DataSource = "Alabo.App.Share.HuDong.Domain.Enums.HuDongEnums")]
         public HuDongEnums HuDongType { get; set; }
 
         /// <summary>

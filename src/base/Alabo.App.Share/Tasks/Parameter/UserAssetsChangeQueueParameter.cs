@@ -1,4 +1,4 @@
-﻿namespace Alabo.App.Open.Tasks.Parameter {
+﻿namespace Alabo.App.Share.Tasks.Parameter {
 
     public class UserAssetsChangeQueueParameter {
 

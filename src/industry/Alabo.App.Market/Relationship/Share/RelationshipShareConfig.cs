@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Alabo.App.Core;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.App.Market.Relationship.Domain.CallBacks;
 using Alabo.App.Market.Relationship.Domain.Services;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.App.Open.Tasks.Modules;
+using Alabo.App.Share.Tasks.Base;
+using Alabo.App.Share.Tasks.Modules;
 using Alabo.Domains.Enums;
 using ZKCloud.Open.ApiBase.Models;
 using Alabo.RestfulApi;
@@ -20,7 +21,7 @@ namespace Alabo.App.Market.Relationship.Share {
     /// <summary>
     ///     裂变分佣
     /// </summary>
-    /// <seealso cref="Alabo.App.Open.Tasks.Base.ShareBaseConfig" />
+    /// <seealso cref="Alabo.App.Share.Tasks.Base.ShareBaseConfig" />
     public class RelationshipShareConfig : ShareBaseConfig {
 
         /// <summary>

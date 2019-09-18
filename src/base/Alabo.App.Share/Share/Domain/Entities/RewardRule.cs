@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.Domains.Entities;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Share.Domain.Entities {
+namespace Alabo.App.Share.Share.Domain.Entities {
 
     [BsonIgnoreExtraElements]
     [Table("Share_RewardConfig")]

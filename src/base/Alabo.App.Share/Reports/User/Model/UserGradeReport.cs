@@ -12,7 +12,7 @@ using Alabo.Extensions;
 using Alabo.Schedules.Job;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Reports.User.Model {
+namespace Alabo.App.Share.Reports.User.Model {
 
     /// <summary>
     /// 会员等级统计

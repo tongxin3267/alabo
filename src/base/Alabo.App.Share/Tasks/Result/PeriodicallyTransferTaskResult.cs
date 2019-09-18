@@ -7,11 +7,11 @@ using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.App.Core.User.Domain.Repositories;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.App.Open.Tasks.Parameter;
+using Alabo.App.Share.Tasks.Base;
+using Alabo.App.Share.Tasks.Parameter;
 using Alabo.Domains.Repositories.EFCore;
 
-namespace Alabo.App.Open.Tasks.Result {
+namespace Alabo.App.Share.Tasks.Result {
 
     public class PeriodicallyTransferTaskResult : ITaskResult {
         public TaskContext Context { get; private set; }

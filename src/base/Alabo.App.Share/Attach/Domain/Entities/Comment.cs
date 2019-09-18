@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.Domains.Entities;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Attach.Domain.Entities {
+namespace Alabo.App.Share.Attach.Domain.Entities {
 
     /// <summary>
     ///     通用评论表

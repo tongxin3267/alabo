@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories.Mongo.Extension;
 
-namespace Alabo.App.Open.HuDong.Dtos {
+namespace Alabo.App.Share.HuDong.Dtos {
 
     public class HuDongViewInput {
 

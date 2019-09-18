@@ -2,9 +2,9 @@
 using Alabo.App.Core.Tasks;
 using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Parameter;
+using Alabo.App.Share.Tasks.Parameter;
 
-namespace Alabo.App.Open.Tasks.Result {
+namespace Alabo.App.Share.Tasks.Result {
 
     public class SharesValueChangeResult : ITaskResult {
         public TaskContext Context { get; private set; }

@@ -8,12 +8,12 @@ using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.Tasks;
 using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Share.Domain.Services;
-using Alabo.App.Open.Tasks.Parameter;
+using Alabo.App.Share.Share.Domain.Services;
+using Alabo.App.Share.Tasks.Parameter;
 using Alabo.Core.Enums.Enum;
-using RewardModel = Alabo.App.Open.Share.Domain.Entities.Reward;
+using RewardModel = Alabo.App.Share.Share.Domain.Entities.Reward;
 
-namespace Alabo.App.Open.Tasks.Result {
+namespace Alabo.App.Share.Tasks.Result {
 
     public class InvoiceResult : ITaskResult {
         public TaskContext Context { get; private set; }

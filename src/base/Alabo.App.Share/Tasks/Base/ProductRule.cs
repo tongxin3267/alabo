@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Open.Share.Domain.Enums;
+using Alabo.App.Share.Share.Domain.Enums;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Tasks.Base {
+namespace Alabo.App.Share.Tasks.Base {
 
     public class ProductRule {
 

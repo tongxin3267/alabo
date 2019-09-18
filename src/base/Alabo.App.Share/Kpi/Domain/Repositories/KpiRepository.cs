@@ -7,7 +7,7 @@ using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Repositories.Extensions;
 using Alabo.Extensions;
 
-namespace Alabo.App.Open.Kpi.Domain.Repositories {
+namespace Alabo.App.Share.Kpi.Domain.Repositories {
 
     using Kpi = Entities.Kpi;
 

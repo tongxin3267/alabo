@@ -1,10 +1,10 @@
 using MongoDB.Bson;
-using Alabo.App.Open.Attach.Domain.Dtos;
-using Alabo.App.Open.Attach.Domain.Entities;
+using Alabo.App.Share.Attach.Domain.Dtos;
+using Alabo.App.Share.Attach.Domain.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 
-namespace Alabo.App.Open.Attach.Domain.Services {
+namespace Alabo.App.Share.Attach.Domain.Services {
 
     /// <summary>
     /// ÊÕ²Ø½Ó¿Ú

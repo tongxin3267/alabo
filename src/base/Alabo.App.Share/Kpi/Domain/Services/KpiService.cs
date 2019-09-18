@@ -1,16 +1,16 @@
 ﻿using System.Linq;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Open.Kpi.Domain.CallBack;
-using Alabo.App.Open.Kpi.Domain.Repositories;
-using Alabo.App.Open.Kpi.ViewModels;
+using Alabo.App.Share.Kpi.Domain.CallBack;
+using Alabo.App.Share.Kpi.Domain.Repositories;
+using Alabo.App.Share.Kpi.ViewModels;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Exceptions;
 
-namespace Alabo.App.Open.Kpi.Domain.Services {
+namespace Alabo.App.Share.Kpi.Domain.Services {
 
     using System;
     using System.Collections.Generic;

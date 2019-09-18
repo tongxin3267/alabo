@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using System.Threading.Tasks;
 using Alabo.App.Core.Common.Job;
 using Alabo.App.Core.Tasks.Job;
-using Alabo.App.Open.Operate.Job;
+using Alabo.App.Share.Operate.Job;
 using Alabo.App.Shop.Order.Job;
 using Alabo.Runtime;
 using Alabo.Schedules;

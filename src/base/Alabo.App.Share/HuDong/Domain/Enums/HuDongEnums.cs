@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Open.HuDong.Domain.Enums {
+namespace Alabo.App.Share.HuDong.Domain.Enums {
 
     public enum HuDongEnums {
 

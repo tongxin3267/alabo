@@ -2,11 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Open.Attach.Domain.Enums;
+using Alabo.App.Share.Attach.Domain.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Attach.Domain.Entities {
+namespace Alabo.App.Share.Attach.Domain.Entities {
 
     /// <summary>
     ///     站内信

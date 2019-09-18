@@ -14,7 +14,7 @@ using Alabo.Extensions;
 using Alabo.Schedules.Job;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Reports.Admin {
+namespace Alabo.App.Share.Reports.Admin {
 
     /// <summary>
     /// 后台左侧菜单统计数据

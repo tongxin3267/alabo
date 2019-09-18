@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Tasks.Enums {
+namespace Alabo.App.Share.Tasks.Enums {
 
     [ClassProperty(Name = "有效水品")]
     public enum EffectivityLevel {

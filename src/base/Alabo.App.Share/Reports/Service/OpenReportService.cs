@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using Alabo.App.Core.Reports.Domain.Services;
-using Alabo.App.Open.Reports.Admin;
+using Alabo.App.Share.Reports.Admin;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 
-namespace Alabo.App.Open.Reports.Service {
+namespace Alabo.App.Share.Reports.Service {
 
     public class OpenReportService : ServiceBase, IOpenReportService {
 
@@ -14,7 +14,7 @@ namespace Alabo.App.Open.Reports.Service {
 
         public AdminSideBarReport GetAdminSideBarReport(SideBarType sideBarType, long fatherId) {
             var sideBarReport = new AdminSideBarReport();
-            var adminSideBarReports = Resolve<IReportService>().GetList<Alabo.App.Open.Reports.Admin.AdminSideBarReport>();
+            var adminSideBarReports = Resolve<IReportService>().GetList<Alabo.App.Share.Reports.Admin.AdminSideBarReport>();
             sideBarReport = adminSideBarReports.FirstOrDefault(r => r.SideBarType == sideBarType);
             return sideBarReport;
         }

@@ -6,8 +6,8 @@ using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Open.Share.Domain.Entities;
-using Alabo.App.Open.Share.Domain.Services;
+using Alabo.App.Share.Share.Domain.Entities;
+using Alabo.App.Share.Share.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
 using ZKCloud.Open.Share.Models;
@@ -16,7 +16,7 @@ using Alabo.UI.AutoPreviews;
 using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Share.Domain.Dto {
+namespace Alabo.App.Share.Share.Domain.Dto {
 
     /// <summary>
     /// Class RewardApiOutput.
@@ -121,7 +121,7 @@ namespace Alabo.App.Open.Share.Domain.Dto {
         ///// </summary>
         //[Required]
         //[Display(Name = "分润状态")]
-        //[Field(ListShow = true, EditShow = true,  DataSource = "Alabo.App.Open.Share.Domain.Enums.FenRunStatus", SortOrder = 3)]
+        //[Field(ListShow = true, EditShow = true,  DataSource = "Alabo.App.Share.Share.Domain.Enums.FenRunStatus", SortOrder = 3)]
         //public FenRunStatus Status { get; set; }
 
         ///// <summary>

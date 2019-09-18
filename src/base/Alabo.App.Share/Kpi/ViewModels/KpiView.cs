@@ -4,7 +4,7 @@ using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Open.Kpi.ViewModels {
+namespace Alabo.App.Share.Kpi.ViewModels {
 
     /// <summary>
     /// </summary>

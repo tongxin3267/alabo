@@ -4,13 +4,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using MongoDB.Bson;
 using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Open.Tasks.Base;
+using Alabo.App.Share.Tasks.Base;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.UI.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Tasks.Base
+namespace Alabo.App.Share.Tasks.Base
 {
     /// <summary>
     /// 分润编辑详情

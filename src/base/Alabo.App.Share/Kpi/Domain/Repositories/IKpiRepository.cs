@@ -1,6 +1,6 @@
 ﻿using Alabo.Domains.Repositories;
 
-namespace Alabo.App.Open.Kpi.Domain.Repositories {
+namespace Alabo.App.Share.Kpi.Domain.Repositories {
 
     using Kpi = Entities.Kpi;
 

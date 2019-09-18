@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Attach.Domain.Enums {
+namespace Alabo.App.Share.Attach.Domain.Enums {
 
     [ClassProperty(Name = "发送目标")]
     public enum SendType {

@@ -9,7 +9,7 @@ using Alabo.Domains.Repositories.EFCore;
 using Alabo.Extensions;
 using Alabo.Schedules.Job;
 
-namespace Alabo.App.Open.Reports.Order {
+namespace Alabo.App.Share.Reports.Order {
 
     public class OrderReport : IReportModel {
 

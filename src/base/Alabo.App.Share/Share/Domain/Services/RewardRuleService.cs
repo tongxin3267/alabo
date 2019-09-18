@@ -7,9 +7,9 @@ using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Tasks;
 using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Share.Domain.Dtos;
-using Alabo.App.Open.Share.Domain.Entities;
-using Alabo.App.Open.Tasks.Base;
+using Alabo.App.Share.Share.Domain.Dtos;
+using Alabo.App.Share.Share.Domain.Entities;
+using Alabo.App.Share.Tasks.Base;
 using Alabo.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
@@ -20,7 +20,7 @@ using Alabo.Extensions;
 using Alabo.UI.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Share.Domain.Services {
+namespace Alabo.App.Share.Share.Domain.Services {
 
     public class RewardRuleService : ServiceBase<RewardRule, ObjectId>, IRewardRuleService {
 

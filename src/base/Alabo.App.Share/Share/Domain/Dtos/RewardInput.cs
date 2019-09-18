@@ -4,7 +4,7 @@ using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Share.Domain.Dto {
+namespace Alabo.App.Share.Share.Domain.Dto {
 
     /// <summary>
     /// Class RewardInput.

@@ -14,12 +14,12 @@ using Alabo.App.Core.User;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Repositories;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Open.Share.Domain.Dto;
-using Alabo.App.Open.Share.Domain.Enums;
-using Alabo.App.Open.Share.Domain.Repositories;
-using Alabo.App.Open.Share.ViewModels;
-using Alabo.App.Open.Tasks;
-using Alabo.App.Open.Tasks.Base;
+using Alabo.App.Share.Share.Domain.Dto;
+using Alabo.App.Share.Share.Domain.Enums;
+using Alabo.App.Share.Share.Domain.Repositories;
+using Alabo.App.Share.Share.ViewModels;
+using Alabo.App.Share.Tasks;
+using Alabo.App.Share.Tasks.Base;
 using Alabo.App.Shop.Product.Domain.CallBacks;
 using Alabo.App.Shop.Product.Domain.Services;
 using Alabo.Core.Enums.Enum;
@@ -35,7 +35,7 @@ using Alabo.Reflections;
 using Alabo.Runtime;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Share.Domain.Services {
+namespace Alabo.App.Share.Share.Domain.Services {
 
     using Reward = Entities.Reward;
     using User = Core.User.Domain.Entities.User;

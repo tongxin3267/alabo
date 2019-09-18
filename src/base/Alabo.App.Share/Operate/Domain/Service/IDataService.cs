@@ -1,7 +1,7 @@
 ﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 
-namespace Alabo.App.Open.Operate.Domain.Service {
+namespace Alabo.App.Share.Operate.Domain.Service {
 
     /// <summary>
     /// 数据运维服务

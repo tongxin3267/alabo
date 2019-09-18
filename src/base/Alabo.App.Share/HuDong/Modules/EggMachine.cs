@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Open.HuDong.Domain.Entities;
-using Alabo.App.Open.HuDong.Domain.Enums;
+using Alabo.App.Share.HuDong.Domain.Entities;
+using Alabo.App.Share.HuDong.Domain.Enums;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.HuDong.Modules {
+namespace Alabo.App.Share.HuDong.Modules {
 
     [ClassProperty(Name = "超级扭蛋机", Description = "超级扭蛋机", PageType = ViewPageType.List)]
     public class EggMachine : IHuDong {
