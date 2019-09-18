@@ -12,6 +12,6 @@
     <DocumentationFile></DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ZKCloud\Alabo.csproj" />
+    <ProjectReference Include="..\Alabo\Alabo.csproj" />
   </ItemGroup>
 </Project>
