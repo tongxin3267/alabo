@@ -42,6 +42,5 @@
     <ProjectReference Include="..\Alabo.App.Agent\Alabo.App.Agent.csproj" />
     <ProjectReference Include="..\Alabo.App.Asset\Alabo.App.Asset\Alabo.App.Asset.csproj" />
     <ProjectReference Include="..\Alabo.App.Core\Alabo.App.Core.csproj" />
-    <ProjectReference Include="..\Alabo.App.Task\Alabo.App.Task.csproj" />
   </ItemGroup>
 </Project>
