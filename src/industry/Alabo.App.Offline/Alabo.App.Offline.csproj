@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Order\AppUrl\**" />
+    <Compile Remove="Product\AppUrl\**" />
+    <EmbeddedResource Remove="Order\AppUrl\**" />
+    <EmbeddedResource Remove="Product\AppUrl\**" />
+    <None Remove="Order\AppUrl\**" />
+    <None Remove="Product\AppUrl\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\core\ZKCloud\Alabo.csproj" />
+    <ProjectReference Include="..\ZKCloud.App.Core\ZKCloud.App.Core.csproj" />
+    <ProjectReference Include="..\ZKCloud.App.Open\ZKCloud.App.Open.csproj" />
+    <ProjectReference Include="..\ZKCloud.App.Shop\ZKCloud.App.Shop.csproj" />
+  </ItemGroup>
+
+</Project>

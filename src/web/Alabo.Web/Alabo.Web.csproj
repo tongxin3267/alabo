@@ -1,0 +1,66 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web" ToolsVersion="15.0">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <MvcRazorCompileOnPublish>false</MvcRazorCompileOnPublish>
+    <TypeScriptToolsVersion>2.3</TypeScriptToolsVersion>
+    <FileUpgradeFlags>40</FileUpgradeFlags>
+    <UpgradeBackupLocation>C:\git\zkcloudv11s\Backup\src\web\ZKCloud.Web\</UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <LangVersion>7.1</LangVersion>
+    <Version>13.0.1</Version>
+    <Authors>5ug.com</Authors>
+    <Company>5ug.com</Company>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netcoreapp2.0\ZKCloud.Web.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Admin\Base\Sql\**" />
+    <Compile Remove="Admin\Cusomer\**" />
+    <Compile Remove="Admin\Reports\新文件夹\**" />
+    <Compile Remove="Views\**" />
+    <Content Remove="Admin\Base\Sql\**" />
+    <Content Remove="Admin\Cusomer\**" />
+    <Content Remove="Admin\Reports\新文件夹\**" />
+    <Content Remove="Views\**" />
+    <EmbeddedResource Remove="Admin\Base\Sql\**" />
+    <EmbeddedResource Remove="Admin\Cusomer\**" />
+    <EmbeddedResource Remove="Admin\Reports\新文件夹\**" />
+    <EmbeddedResource Remove="Views\**" />
+    <None Remove="Admin\Base\Sql\**" />
+    <None Remove="Admin\Cusomer\**" />
+    <None Remove="Admin\Reports\新文件夹\**" />
+    <None Remove="Views\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Admin\Shop\Product\AdminProduct_ImgBg.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\app\ZKCloud.App.Agent\ZKCloud.App.Agent.csproj" />
+    <ProjectReference Include="..\..\app\ZKCloud.App.Cms\ZKCloud.App.Cms.csproj" />
+    <ProjectReference Include="..\..\app\ZKCloud.App.Core\ZKCloud.App.Core.csproj" />
+    <ProjectReference Include="..\..\app\ZKCloud.App.Market\ZKCloud.App.Market.csproj" />
+    <ProjectReference Include="..\..\app\ZKCloud.App.Offline\ZKCloud.App.Offline.csproj" />
+    <ProjectReference Include="..\..\app\ZKCloud.App.Open\ZKCloud.App.Open.csproj" />
+    <ProjectReference Include="..\..\app\ZKCloud.App.Shop\ZKCloud.App.Shop.csproj" />
+    <ProjectReference Include="..\..\core\ZKCloud.Core\Alabo.Core.csproj" />
+    <ProjectReference Include="..\..\core\ZKCloud\Alabo.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="Admin\Core\Finance\AdminTransfer_Edit.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Admin\Shop\Order\Widget\SellerOrder_Edit_Model_Cancle.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="wwwroot\InitData\CustomShopFinanceDefault.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\assets\lib\" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <VisualStudio><UserProperties appsettings_1qnn_1json__JsonSchema="" appsettings_1json__JSONSchema="http://json.schemastore.org/babelrc" /></VisualStudio>
+  </ProjectExtensions>
+</Project>

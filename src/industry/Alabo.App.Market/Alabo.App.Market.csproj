@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <FileUpgradeFlags>40</FileUpgradeFlags>
+    <UpgradeBackupLocation>C:\git\zkcloudv11s\Backup\src\app\ZKCloud.App.Customer\</UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netcoreapp2.1\ZKCloud.App.Customer.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netcoreapp2.0\ZKCloud.App.Customer.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Debt\**" />
+    <EmbeddedResource Remove="Debt\**" />
+    <None Remove="Debt\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\core\ZKCloud.Core\Alabo.Core.csproj" />
+    <ProjectReference Include="..\..\core\ZKCloud\Alabo.csproj" />
+    <ProjectReference Include="..\ZKCloud.App.Cms\ZKCloud.App.Cms.csproj" />
+    <ProjectReference Include="..\ZKCloud.App.Core\ZKCloud.App.Core.csproj" />
+    <ProjectReference Include="..\ZKCloud.App.Offline\ZKCloud.App.Offline.csproj" />
+    <ProjectReference Include="..\ZKCloud.App.Open\ZKCloud.App.Open.csproj" />
+    <ProjectReference Include="..\ZKCloud.App.Shop\ZKCloud.App.Shop.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Decision\" />
+  </ItemGroup>
+</Project>

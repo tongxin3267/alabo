@@ -1,0 +1,121 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Datas\**" />
+    <Compile Remove="Domains\**" />
+    <Compile Remove="Domain\**" />
+    <Compile Remove="Events\**" />
+    <Compile Remove="Exceptions\**" />
+    <Compile Remove="Extensions\**" />
+    <Compile Remove="Files\**" />
+    <Compile Remove="Helpers\**" />
+    <Compile Remove="Linq\**" />
+    <Compile Remove="Mapping\**" />
+    <Compile Remove="Maps\**" />
+    <Compile Remove="Parameters\**" />
+    <Compile Remove="Randoms\**" />
+    <Compile Remove="Reflections\**" />
+    <Compile Remove="Regex\**" />
+    <Compile Remove="Samples\**" />
+    <Compile Remove="Schedules\**" />
+    <Compile Remove="Signatures\**" />
+    <Compile Remove="Validations\**" />
+    <Compile Remove="wwwroot\**" />
+    <Compile Remove="XUnitHelpers\**" />
+    <EmbeddedResource Remove="Datas\**" />
+    <EmbeddedResource Remove="Domains\**" />
+    <EmbeddedResource Remove="Domain\**" />
+    <EmbeddedResource Remove="Events\**" />
+    <EmbeddedResource Remove="Exceptions\**" />
+    <EmbeddedResource Remove="Extensions\**" />
+    <EmbeddedResource Remove="Files\**" />
+    <EmbeddedResource Remove="Helpers\**" />
+    <EmbeddedResource Remove="Linq\**" />
+    <EmbeddedResource Remove="Mapping\**" />
+    <EmbeddedResource Remove="Maps\**" />
+    <EmbeddedResource Remove="Parameters\**" />
+    <EmbeddedResource Remove="Randoms\**" />
+    <EmbeddedResource Remove="Reflections\**" />
+    <EmbeddedResource Remove="Regex\**" />
+    <EmbeddedResource Remove="Samples\**" />
+    <EmbeddedResource Remove="Schedules\**" />
+    <EmbeddedResource Remove="Signatures\**" />
+    <EmbeddedResource Remove="Validations\**" />
+    <EmbeddedResource Remove="wwwroot\**" />
+    <EmbeddedResource Remove="XUnitHelpers\**" />
+    <None Remove="Datas\**" />
+    <None Remove="Domains\**" />
+    <None Remove="Domain\**" />
+    <None Remove="Events\**" />
+    <None Remove="Exceptions\**" />
+    <None Remove="Extensions\**" />
+    <None Remove="Files\**" />
+    <None Remove="Helpers\**" />
+    <None Remove="Linq\**" />
+    <None Remove="Mapping\**" />
+    <None Remove="Maps\**" />
+    <None Remove="Parameters\**" />
+    <None Remove="Randoms\**" />
+    <None Remove="Reflections\**" />
+    <None Remove="Regex\**" />
+    <None Remove="Samples\**" />
+    <None Remove="Schedules\**" />
+    <None Remove="Signatures\**" />
+    <None Remove="Validations\**" />
+    <None Remove="wwwroot\**" />
+    <None Remove="XUnitHelpers\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Applications\CrudServiceTest.BatchSave.cs" />
+    <Compile Remove="Applications\CrudServiceTest.Save.cs" />
+    <Compile Remove="Applications\QueryServiceTest.cs" />
+    <Compile Remove="ExtensionTest.Common.cs" />
+    <Compile Remove="ExtensionTest.Convert.cs" />
+    <Compile Remove="ExtensionTest.DateTime.cs" />
+    <Compile Remove="ExtensionTest.Format.cs" />
+    <Compile Remove="ExtensionTest.Lambda.cs" />
+    <Compile Remove="ExtensionTest.Validate.cs" />
+    <Compile Remove="Reports\AutoReportService-Ltest.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.1.1" />
+    <PackageReference Include="NSubstitute" Version="3.1.0" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\app\ZKCloud.App.Agent\ZKCloud.App.Agent.csproj" />
+    <ProjectReference Include="..\..\app\ZKCloud.App.Cms\ZKCloud.App.Cms.csproj" />
+    <ProjectReference Include="..\..\app\ZKCloud.App.Core\ZKCloud.App.Core.csproj" />
+    <ProjectReference Include="..\..\app\ZKCloud.App.Market\ZKCloud.App.Market.csproj" />
+    <ProjectReference Include="..\..\app\ZKCloud.App.Open\ZKCloud.App.Open.csproj" />
+    <ProjectReference Include="..\..\app\ZKCloud.App.Shop\ZKCloud.App.Shop.csproj" />
+    <ProjectReference Include="..\..\core\ZKCloud.Core\Alabo.Core.csproj" />
+    <ProjectReference Include="..\..\core\ZKCloud\Alabo.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Applications\" />
+    <Folder Include="AutoReports\" />
+    <Folder Include="Reports\" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JSONSchema="" /></VisualStudio></ProjectExtensions>
+
+</Project>

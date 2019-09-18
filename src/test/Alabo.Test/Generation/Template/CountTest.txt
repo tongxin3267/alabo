@@ -1,0 +1,12 @@
+﻿	    [Fact]
+	    [TestMethod("Count_Expected_Test")]
+	    public void Count_ExpectedBehavior()
+	    {
+	        var count = Service<[[IModelService]]>().Count();
+	        Assert.True(count>=0);
+
+	        var list = Service<[[IModelService]]>().GetList();
+	        var countList = Service<[[IModelService]]>().Count();
+	        Assert.Equal(count , countList);
+
+        }

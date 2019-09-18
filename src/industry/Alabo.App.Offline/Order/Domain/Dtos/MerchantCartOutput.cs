@@ -1,0 +1,39 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Alabo.App.Offline.Order.ViewModels;
+using Alabo.App.Shop.Order.Domain.Dtos;
+
+namespace Alabo.App.Offline.Order.Domain.Dtos
+{
+    /// <summary>
+    /// MerchantCartOutput
+    /// </summary>
+    public class MerchantCartOutput
+    {
+        /// <summary>
+        /// Total count
+        /// </summary>
+        public long TotalCount { get; set; } = 0;
+
+        /// <summary>
+        /// Total amount
+        /// </summary>
+        public decimal TotalAmount { get; set; } = 0;
+
+        /// <summary>
+        /// Fee amount
+        /// </summary>
+        public decimal FeeAmount { get; set; }
+
+        /// <summary>
+        /// Product
+        /// </summary>
+        public List<MerchantCartViewModel> Products { get; set; } = new List<MerchantCartViewModel>();
+
+        /// <summary>
+        /// Gets or sets the allow moneys.
+        /// </summary>
+        public List<OrderMoneyItem> AllowMoneys { get; set; } = new List<OrderMoneyItem>();
+    }
+}

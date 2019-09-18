@@ -1,0 +1,62 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <FileUpgradeFlags>40</FileUpgradeFlags>
+    <UpgradeBackupLocation>C:\git\zkcloudv11s\Backup\src\app\ZKCloud.App.Core\</UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <LangVersion>7.1</LangVersion>
+    <Version>1.0.1</Version>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netcoreapp2.1\ZKCloud.App.Core.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netcoreapp2.0\ZKCloud.App.Core.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="ApiStore\Payment\Domain\**" />
+    <Compile Remove="ApiStore\Sms\Controllers\**" />
+    <Compile Remove="Markets\EnterpriseCertification\UI\**" />
+    <Compile Remove="Reports\Charts\**" />
+    <Compile Remove="Reports\Schedule\**" />
+    <Compile Remove="Tasks\Dtos\**" />
+    <Compile Remove="UserType\Domain\Services\新文件夹\**" />
+    <EmbeddedResource Remove="ApiStore\Payment\Domain\**" />
+    <EmbeddedResource Remove="ApiStore\Sms\Controllers\**" />
+    <EmbeddedResource Remove="Markets\EnterpriseCertification\UI\**" />
+    <EmbeddedResource Remove="Reports\Charts\**" />
+    <EmbeddedResource Remove="Reports\Schedule\**" />
+    <EmbeddedResource Remove="Tasks\Dtos\**" />
+    <EmbeddedResource Remove="UserType\Domain\Services\新文件夹\**" />
+    <None Remove="ApiStore\Payment\Domain\**" />
+    <None Remove="ApiStore\Sms\Controllers\**" />
+    <None Remove="Markets\EnterpriseCertification\UI\**" />
+    <None Remove="Reports\Charts\**" />
+    <None Remove="Reports\Schedule\**" />
+    <None Remove="Tasks\Dtos\**" />
+    <None Remove="UserType\Domain\Services\新文件夹\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="ApiStore\Sms\Services\ISmsService.cs" />
+    <Compile Remove="ApiStore\Sms\Services\SmsService.cs" />
+    <Compile Remove="Finance\UI\AutoForm\WithdrawAdminAutoForm.cs" />
+    <Compile Remove="Reports\Domain\Dtos\CountReportInput.cs" />
+    <Compile Remove="Reports\Domain\Dtos\CountReportItem.cs" />
+    <Compile Remove="Reports\Domain\Dtos\CountReportTable.cs" />
+    <Compile Remove="Reports\Domain\Dtos\SumReportTable.cs" />
+    <Compile Remove="Reports\Domain\Dtos\SumReportTableItems.cs" />
+    <Compile Remove="Reports\Domain\Dtos\SumTableOutput.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Senparc.Weixin.WxOpen" Version="3.3.9.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\core\ZKCloud.Core\Alabo.Core.csproj" />
+    <ProjectReference Include="..\..\core\ZKCloud\Alabo.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="AopSdk">
+      <HintPath>..\..\..\reference\AopSdk.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

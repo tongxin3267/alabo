@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <FileUpgradeFlags>40</FileUpgradeFlags>
+    <UpgradeBackupLocation>C:\git\zkcloudv11s\Backup\src\web\ZKCloud.Web.TaskShell\</UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="appsettings.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\app\ZKCloud.App.Agent\ZKCloud.App.Agent.csproj" />
+    <ProjectReference Include="..\..\app\ZKCloud.App.Core\ZKCloud.App.Core.csproj" />
+    <ProjectReference Include="..\..\app\ZKCloud.App.Market\ZKCloud.App.Market.csproj" />
+    <ProjectReference Include="..\..\app\ZKCloud.App.Offline\ZKCloud.App.Offline.csproj" />
+    <ProjectReference Include="..\..\app\ZKCloud.App.Open\ZKCloud.App.Open.csproj" />
+    <ProjectReference Include="..\..\app\ZKCloud.App.Shop\ZKCloud.App.Shop.csproj" />
+    <ProjectReference Include="..\..\core\ZKCloud.Core\Alabo.Core.csproj" />
+    <ProjectReference Include="..\..\core\ZKCloud\Alabo.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

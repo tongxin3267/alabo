@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <FileUpgradeFlags>40</FileUpgradeFlags>
+    <UpgradeBackupLocation>C:\git\zkcloudv11s\Backup\src\app\ZKCloud.App.Open\</UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netcoreapp2.1\ZKCloud.App.Open.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\netcoreapp2.0\ZKCloud.App.Open.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Reports\Domain\**" />
+    <Compile Remove="Share\Domain\CallBacks\**" />
+    <Compile Remove="Tasks\Configs\SharedFenRun\VentureCompany\**" />
+    <Compile Remove="Tasks\Domain\Repositories\**" />
+    <EmbeddedResource Remove="Reports\Domain\**" />
+    <EmbeddedResource Remove="Share\Domain\CallBacks\**" />
+    <EmbeddedResource Remove="Tasks\Configs\SharedFenRun\VentureCompany\**" />
+    <EmbeddedResource Remove="Tasks\Domain\Repositories\**" />
+    <None Remove="Reports\Domain\**" />
+    <None Remove="Share\Domain\CallBacks\**" />
+    <None Remove="Tasks\Configs\SharedFenRun\VentureCompany\**" />
+    <None Remove="Tasks\Domain\Repositories\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\core\ZKCloud.Core\Alabo.Core.csproj" />
+    <ProjectReference Include="..\..\core\ZKCloud\Alabo.csproj" />
+    <ProjectReference Include="..\ZKCloud.App.Agent\ZKCloud.App.Agent.csproj" />
+    <ProjectReference Include="..\ZKCloud.App.Cms\ZKCloud.App.Cms.csproj" />
+    <ProjectReference Include="..\ZKCloud.App.Core\ZKCloud.App.Core.csproj" />
+    <ProjectReference Include="..\ZKCloud.App.Shop\ZKCloud.App.Shop.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Attach\Controllers\" />
+    <Folder Include="Attach\Controllers\" />
+    <Folder Include="Tasks\Controllers\" />
+    <Folder Include="Tasks\Domain\Services\" />
+    <Folder Include="Tasks\Modules\" />
+  </ItemGroup>
+</Project>
