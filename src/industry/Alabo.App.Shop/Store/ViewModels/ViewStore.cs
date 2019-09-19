@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using MongoDB.Bson.Serialization.Attributes;
-using Alabo.App.Core.UserType.Domain.Enums;
-using Alabo.App.Core.UserType.Modules.Supplier;
-using Alabo.App.Shop.Store.Domain.Entities.Extensions;
-using Alabo.App.Shop.Store.Domain.Services;
+﻿using Alabo.App.Shop.Store.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.Extensions;
 using Alabo.UI;
 using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Alabo.App.Shop.Store.ViewModels {
 
@@ -58,18 +53,18 @@ namespace Alabo.App.Shop.Store.ViewModels {
             ListShow = true, SortOrder = 7)]
         public bool IsPlanform { get; set; } = false;
 
-        /// <summary>
-        ///     供应商状态
-        /// </summary>
-        /// <value>
-        ///     The status.
-        /// </value>
-        [Display(Name = "供应商状态")]
-        [Field(ControlsType = ControlsType.DropdownList, IsShowBaseSerach = true, IsShowAdvancedSerach = true,
-            DataSource = "Alabo.App.Core.UserType.Domain.Enums.UserTypeStatus", Width = "180", ListShow = true,
-            SortOrder = 3)]
-        [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        public UserTypeStatus Status { get; set; } = UserTypeStatus.Pending;
+        ///// <summary>
+        /////     供应商状态
+        ///// </summary>
+        ///// <value>
+        /////     The status.
+        ///// </value>
+        //[Display(Name = "供应商状态")]
+        //[Field(ControlsType = ControlsType.DropdownList, IsShowBaseSerach = true, IsShowAdvancedSerach = true,
+        //    DataSource = "Alabo.App.Core.UserType.Domain.Enums.UserTypeStatus", Width = "180", ListShow = true,
+        //    SortOrder = 3)]
+        //[Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
+        //public UserTypeStatus Status { get; set; } = UserTypeStatus.Pending;
 
         /// <summary>
         ///     用户Id
@@ -124,16 +119,16 @@ namespace Alabo.App.Shop.Store.ViewModels {
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         public Guid GradeId { get; set; }
 
-        /// <summary>
-        ///     Gets or sets the supplier grade configuration.
-        /// </summary>
-        /// <value>
-        ///     The supplier grade configuration.
-        /// </value>
-        [Display(Name = "等级")]
-        [Field(ControlsType = ControlsType.DropdownList, Width = "180", ListShow = false,
-            DataSource = "Alabo.App.Core.UserType.Modules.Supplier.SupplierGradeConfig", SortOrder = 4)]
-        public SupplierGradeConfig SupplierGradeConfig { get; set; }
+        ///// <summary>
+        /////     Gets or sets the supplier grade configuration.
+        ///// </summary>
+        ///// <value>
+        /////     The supplier grade configuration.
+        ///// </value>
+        //[Display(Name = "等级")]
+        //[Field(ControlsType = ControlsType.DropdownList, Width = "180", ListShow = false,
+        //    DataSource = "Alabo.App.Core.UserType.Modules.Supplier.SupplierGradeConfig", SortOrder = 4)]
+        //public SupplierGradeConfig SupplierGradeConfig { get; set; }
 
         /// <summary>
         ///     Gets or sets the name of the grade.

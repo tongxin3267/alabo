@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Castle.Components.DictionaryAdapter;
-using Alabo.App.Core.Api.Domain.Service;
+﻿using Alabo.App.Core.Api.Domain.Service;
 using Alabo.App.Core.Common.Domain.CallBacks;
 using Alabo.App.Core.Common.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Core.UserType.Modules.Supplier;
 using Alabo.App.Shop.Activitys.Domain.Enum;
 using Alabo.App.Shop.Activitys.Domain.Services;
 using Alabo.App.Shop.Activitys.Modules.BuyPermision.Model;
@@ -28,7 +21,6 @@ using Alabo.App.Shop.Product.Domain.Repositories;
 using Alabo.App.Shop.Product.ViewModels;
 using Alabo.App.Shop.Store.Domain.Dtos;
 using Alabo.App.Shop.Store.Domain.Services;
-using Alabo.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -38,6 +30,10 @@ using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.Maps;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Alabo.App.Shop.Product.Domain.Services {
 
@@ -441,10 +437,10 @@ namespace Alabo.App.Shop.Product.Domain.Services {
                 return null;
             }
             var storeInfo = Resolve<IStoreService>().GetSingle(u => u.Id == product.StoreId);
-            var grade = Resolve<IAutoConfigService>().GetList<SupplierGradeConfig>(u => u.Id == storeInfo.GradeId);
+            // var grade = Resolve<IAutoConfigService>().GetList<SupplierGradeConfig>(u => u.Id == storeInfo.GradeId);
             var model = new StoreInfoOutput {
                 Store = storeInfo,
-                StoreGradeName = grade.FirstOrDefault().Name,
+                //    StoreGradeName = grade.FirstOrDefault().Name,
                 User = Resolve<IUserService>().GetSingle(u => u.Id == storeInfo.UserId)
             };
 

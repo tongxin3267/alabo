@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoMapper;
-using Alabo.App.Agent.County.Domain.Services;
+﻿using Alabo.App.Agent.County.Domain.Services;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Core.UserType.Domain.Enums;
-
+using Alabo.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
 using Alabo.Maps;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
+using System;
 
 namespace Alabo.App.Agent.County.Domain.Dtos {
 

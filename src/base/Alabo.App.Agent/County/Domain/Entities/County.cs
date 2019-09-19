@@ -1,15 +1,12 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using Alabo.App.Agent.Citys.Domain.CallBacks;
-using Alabo.App.Core.Themes;
-using Alabo.App.Core.UserType.Domain.Enums;
+﻿using Alabo.App.Agent.Citys.Domain.CallBacks;
+using Alabo.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Alabo.App.Agent.County.Domain.Entities {
 

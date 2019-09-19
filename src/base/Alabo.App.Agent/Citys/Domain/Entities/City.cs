@@ -1,29 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using MongoDB.Bson.Serialization.Attributes;
-using Alabo.App.Agent.Citys.Domain.CallBacks;
-using Alabo.App.Core.Employes.Domain.Entities;
-using Alabo.App.Core.UserType.Domain.Enums;
+﻿using Alabo.App.Agent.Citys.Domain.CallBacks;
+using Alabo.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
-using Alabo.UI;
-using Alabo.UI.AutoForms;
 using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Validations;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.App.Agent.Citys.Domain.Entities
-{
+namespace Alabo.App.Agent.Citys.Domain.Entities {
 
     [ClassProperty(Name = "城市合伙人")]
     [BsonIgnoreExtraElements]
     [AutoDelete(IsAuto = true)]
     [Table("Agent_City")]
-    public class City : AggregateMongodbUserRoot<City>
-    {
+    public class City : AggregateMongodbUserRoot<City> {
 
         /// <summary>
         ///     名称
@@ -135,7 +127,6 @@ namespace Alabo.App.Agent.Citys.Domain.Entities
             EditShow = true, SortOrder = 1005)]
         public UserTypeStatus Status { get; set; } = UserTypeStatus.Pending;
 
-
         /// <summary>
         ///     状态
         /// </summary>
@@ -146,14 +137,11 @@ namespace Alabo.App.Agent.Citys.Domain.Entities
             //DataSource = "Alabo.App.Core.UserType.Domain.Enums.UserTypeStatus",
             Width = "150", ListShow = true,
               SortOrder = 1005)]
-        public string StatusName
-        {
-            get
-            {
+        public string StatusName {
+            get {
                 return this.Status.GetDisplayName();
             }
-            set
-            {
+            set {
                 _ = value;
             }
         }

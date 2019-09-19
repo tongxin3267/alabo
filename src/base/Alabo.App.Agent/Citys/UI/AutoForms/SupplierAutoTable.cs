@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Alabo.App.Core.Common.Domain.Services;
+﻿using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Core.UserType.Modules.Supplier;
 using Alabo.App.Shop.Store.Domain.Entities;
 using Alabo.App.Shop.Store.Domain.Services;
 using Alabo.Domains.Entities;
@@ -13,13 +8,14 @@ using Alabo.Extensions;
 using Alabo.UI;
 using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Agent.Citys.UI.AutoForms
-{
+namespace Alabo.App.Agent.Citys.UI.AutoForms {
 
     [ClassProperty(Name = "供应商")]
-    public class SupplierAutoTable : UIBase, IAutoTable<SupplierAutoTable>
-    {
+    public class SupplierAutoTable : UIBase, IAutoTable<SupplierAutoTable> {
 
         #region 供应商清单属性
 
@@ -95,39 +91,34 @@ namespace Alabo.App.Agent.Citys.UI.AutoForms
             ListShow = true, Width = "100", SortOrder = 8)]
         public DateTime CreateTime { get; set; }
 
-        #endregion
+        #endregion 供应商清单属性
 
-        public List<TableAction> Actions()
-        {
+        public List<TableAction> Actions() {
             return new List<TableAction>() {
                 new TableAction("详情","url",TableActionType.ColumnAction)
             };
         }
 
-        public PageResult<SupplierAutoTable> PageTable(object query, AutoBaseModel autoModel)
-        {
+        public PageResult<SupplierAutoTable> PageTable(object query, AutoBaseModel autoModel) {
             var result = new PagedList<SupplierAutoTable>();
             var querys = ToQuery<Store>();
             querys.ParentUserId = autoModel.BasicUser.Id;
 
             var list = Resolve<IStoreService>().GetPagedList(querys);
-            if (list.Count > 0)
-            {
-                list.ForEach(p =>
-                {
-                    var gradeInfo = Resolve<IGradeService>().GetSupplierGrade(p.GradeId).Name;
+            if (list.Count > 0) {
+                list.ForEach(p => {
+                    // var gradeInfo = Resolve<IGradeService>().GetSupplierGrade(p.GradeId).Name;
                     var user = Resolve<IUserService>().GetSingle(p.UserId);
 
                     var model = new SupplierAutoTable();
                     model.StoreName = p.Name;
                     model.Mobile = user.Mobile;
                     model.MasterName = user.Name;
-                    model.SupplierGrade = gradeInfo == null ? "--" : gradeInfo;
+                    //   model.SupplierGrade = gradeInfo == null ? "--" : gradeInfo;
                     model.StatusName = EnumExtensions.GetDisplayName(p.Status);
                     model.CreateTime = p.CreateTime;
                     result.Add(model);
                 });
-
             }
             return ToPageResult(result);
         }

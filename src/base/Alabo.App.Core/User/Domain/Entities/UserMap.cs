@@ -77,25 +77,7 @@ namespace Alabo.App.Core.User.Domain.Entities {
             builder.Ignore(e => e.ParentMapList);
             builder.Ignore(e => e.UserName);
             builder.Ignore(e => e.Version);
-            if (TenantContext.IsTenant) {
-                // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
-            }
         }
-    }
-
-    public class TeamMap {
-
-        /// <summary>
-        ///     层次
-        /// </summary>
-        [Display(Name = "层次")]
-        public long TeamLevel { get; set; }
-
-        /// <summary>
-        ///     用户Id
-        /// </summary>
-        [Display(Name = "用户Id")]
-        public long UserId { get; set; }
     }
 
     /// <summary>

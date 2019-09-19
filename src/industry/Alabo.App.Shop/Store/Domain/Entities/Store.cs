@@ -1,15 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.UserType.Domain.Enums;
-using Alabo.App.Core.UserType.Modules.Supplier;
-using Alabo.App.Shop.Store.Domain.Entities.Extensions;
+﻿using Alabo.App.Shop.Store.Domain.Entities.Extensions;
+using Alabo.Core.Enums.Enum;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Tenants;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Shop.Store.Domain.Entities {
 
@@ -67,12 +66,6 @@ namespace Alabo.App.Shop.Store.Domain.Entities {
         /// </summary>
         [Display(Name = "店铺的扩展属性")]
         public StoreExtension StoreExtension { get; set; }
-
-        /// <summary>
-        ///     供应商等级
-        /// </summary>
-        [Display(Name = "供应商等级")]
-        public SupplierGradeConfig GradeConfig { get; set; }
     }
 
     public class StoreTableMap : MsSqlAggregateRootMap<Store> {
@@ -86,11 +79,7 @@ namespace Alabo.App.Shop.Store.Domain.Entities {
             builder.HasKey(e => e.Id);
             builder.Property(e => e.Name).IsRequired();
             builder.Ignore(e => e.StoreExtension);
-            builder.Ignore(e => e.GradeConfig);
             builder.Ignore(e => e.Version);
-            if (TenantContext.IsTenant) {
-                // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
-            }
         }
     }
 }

@@ -1,20 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Alabo.App.Core.Api.Controller;
+﻿using Alabo.App.Core.Api.Controller;
 using Alabo.App.Core.Api.Filter;
-using Alabo.App.Core.Common;
 using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Themes.DiyModels.Lists;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Core.User.Reports;
-using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 
 namespace Alabo.App.Core.User.Controllers {
 
@@ -58,17 +53,6 @@ namespace Alabo.App.Core.User.Controllers {
         [HttpGet]
         [Display(Description = "获取比自己级别低的等级（包括自己等级）")]
         public ApiResult<List<UserGradeConfig>> GetLowGrade([FromQuery]long loginUserId) {
-            return null;
-        }
-
-        /// <summary>
-        /// 获取会员等级统计
-        /// </summary>
-        /// <param name="loginUserId"></param>
-        /// <returns></returns>
-        [HttpGet]
-        [Display(Description = "获取会员等级统计")]
-        public ApiResult<UserGradeReport> GetGradeReport([FromQuery]long loginUserId) {
             return null;
         }
 

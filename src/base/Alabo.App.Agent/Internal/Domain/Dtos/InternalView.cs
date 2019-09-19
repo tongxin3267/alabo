@@ -1,22 +1,20 @@
-﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using Alabo.App.Agent.Internal.Domain.CallBacks;
+﻿using Alabo.App.Agent.Internal.Domain.CallBacks;
 using Alabo.App.Agent.Internal.Domain.Services;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Core.UserType.Domain.Enums;
+using Alabo.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Mapping;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
-using Alabo.UI.AutoLists;
 using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
+using AutoMapper;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Alabo.App.Agent.Internal.Domain.Dtos {
 

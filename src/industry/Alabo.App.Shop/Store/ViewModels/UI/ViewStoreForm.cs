@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using MongoDB.Bson.Serialization.Attributes;
-using Alabo.App.Core.UserType.Domain.Enums;
-using Alabo.App.Core.UserType.Modules.Supplier;
-using Alabo.App.Shop.Store.Domain.Services;
+﻿using Alabo.App.Shop.Store.Domain.Services;
+using Alabo.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Mapping;
@@ -13,6 +7,9 @@ using Alabo.UI;
 using Alabo.UI.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Alabo.App.Shop.Store.ViewModels {
 
@@ -129,10 +126,10 @@ namespace Alabo.App.Shop.Store.ViewModels {
         /// <value>
         ///     The supplier grade configuration.
         /// </value>
-        [Display(Name = "等级")]
-        [Field(ControlsType = ControlsType.DropdownList, Width = "180", ListShow = false,
-            DataSource = "Alabo.App.Core.UserType.Modules.Supplier.SupplierGradeConfig", SortOrder = 4)]
-        public SupplierGradeConfig SupplierGradeConfig { get; set; }
+        //[Display(Name = "等级")]
+        //[Field(ControlsType = ControlsType.DropdownList, Width = "180", ListShow = false,
+        //    DataSource = "Alabo.App.Core.UserType.Modules.Supplier.SupplierGradeConfig", SortOrder = 4)]
+        //public SupplierGradeConfig SupplierGradeConfig { get; set; }
 
         /// <summary>
         ///     Gets or sets the name of the grade.
