@@ -26,14 +26,6 @@ namespace Alabo.App.Core.UserType.Modules.Province {
         ValidateMessage = "该等级下存在用户或者为默认等级", SideBarType = SideBarType.ProvinceSideBar)]
     public class ProvinceGradeConfig : BaseGradeConfig, IAutoConfig {
 
-        /// <summary>
-        ///     会员类型Id，不同的会员类型有不同的等级
-        /// </summary>
-        [Field(ControlsType = ControlsType.Hidden, ListShow = false, EditShow = true, Width = "10%",
-            DisplayMode = DisplayMode.Text, SortOrder = 1)]
-        [Display(Name = "省代理等级")]
-        public new Guid UserTypeId { get; set; } = Guid.Parse("71BE65E6-3A64-414D-972E-1A3D4A365101");
-
         public void SetDefault() {
             var list = Ioc.Resolve<IAutoConfigService>().GetList<ProvinceGradeConfig>();
             if (list.Count < 1) {
@@ -74,16 +66,5 @@ namespace Alabo.App.Core.UserType.Modules.Province {
                 Ioc.Resolve<IAutoConfigService>().AddOrUpdate(autoConfig);
             }
         }
-    }
-
-    /// <summary>
-    ///     控制面板中 商品分类
-    ///     Alabo.App.Shop.Product.Domain.CallBacks.ProductCalssRelation
-    /// </summary>
-    [ClassProperty(Name = "省代理等级", Icon = "fa fa-database", Description = "省代理等级", PageType = ViewPageType.List,
-        Mark = 0,
-        SideBarType = SideBarType.ProvinceSideBar)]
-    //SideBar = "/Core/UserType/SideBar/ProvinceSideBar")]
-    public class ProvinceGradeRelation : IRelation {
     }
 }

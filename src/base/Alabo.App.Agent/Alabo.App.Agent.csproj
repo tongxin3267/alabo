@@ -11,4 +11,8 @@
     <ProjectReference Include="..\Alabo.App.Core\Alabo.App.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Province\Domain\Configs\" />
+  </ItemGroup>
+
 </Project>
