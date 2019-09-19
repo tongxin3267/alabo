@@ -41,7 +41,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alabo.App.Offline", "src\in
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alabo.App.Market", "src\industry\Alabo.App.Market\Alabo.App.Market.csproj", "{B8679DEC-8D31-44E9-B9B4-001FF66407BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alabo.App.Job", "src\base\Alabo.App.Job\Alabo.App.Job.csproj", "{F2BDC2D3-0A09-4AA2-8353-0D14C62720CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alabo.App.Job", "src\base\Alabo.App.Job\Alabo.App.Job.csproj", "{F2BDC2D3-0A09-4AA2-8353-0D14C62720CF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alabo.Test.Cms", "src\test\Alabo.Test.Cms\Alabo.Test.Cms.csproj", "{8328276A-CBA5-48DF-85CA-73FFAB4DCC7B}"
 EndProject

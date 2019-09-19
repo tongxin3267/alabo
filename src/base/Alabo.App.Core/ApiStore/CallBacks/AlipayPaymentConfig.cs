@@ -78,30 +78,3 @@ namespace Alabo.App.Core.ApiStore.CallBacks {
         }
     }
 }
-
-//{
-//  "Alipay": {
-//    "AppId": "xxx",
-//    "RsaPublicKey": "xxx",
-//    "RsaPrivateKey": "xxx"
-//  },
-//  "WeChatPay": {
-//    "AppId": "xxx",
-//    "AppSecret": "xxx",
-//    "MchId": "xxx",
-//    "Key": "xxx",
-//    "Certificate": "xxx",
-//    "RsaPublicKey": "xxx",
-//  },
-//  "QPay": {
-//    "MchId": "xxx",
-//    "Key": "xxx",
-//    "Certificate": "xxx",
-//  },
-//  "JdPay": {
-//    "Merchant": "xxx",
-//    "RsaPublicKey": "xxx",
-//    "RsaPrivateKey": "xxx",
-//    "DesKey": "xxx"
-//  }
-//}
