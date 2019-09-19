@@ -15,7 +15,7 @@ namespace Alabo.Tenants.Extensions {
             }
 
             var database = RuntimeContext.GetTenantDataBase();
-            return connectionString.Replace(RuntimeContext.Current.WebsiteConfig.MongoDbConnection.Database, database);
+            return connectionString.Replace("Initial Catalog=" + RuntimeContext.Current.WebsiteConfig.MongoDbConnection.Database, "Initial Catalog=" + database);
         }
 
         /// <summary>

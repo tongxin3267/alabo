@@ -19,7 +19,7 @@ namespace Alabo.App.Core.Api.Swagger {
         public static IServiceCollection AddSwaggerService(this IServiceCollection services) {
             services.AddSwaggerGen(options => {
                 options.CustomSchemaIds(x => x.FullName);
-                options.SwaggerDoc("api", new Info { Title = "ZKCloud Api 文档", Version = "v12" });
+                options.SwaggerDoc("api", new Info { Title = "Alabo Api 文档", Version = "v12" });
                 options.ResolveConflictingActions(b => b.First());
                 options.DocInclusionPredicate((doc, a) =>
                     a.ActionDescriptor is ControllerActionDescriptor &&
@@ -27,7 +27,7 @@ namespace Alabo.App.Core.Api.Swagger {
                         as ControllerActionDescriptor).ControllerTypeInfo));
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
                 foreach (var item in Directory.GetFiles(basePath, "*.xml")) {
-                    if (Path.GetFileName(item).Contains("ZKCloud")) {
+                    if (Path.GetFileName(item).Contains("Alabo")) {
                         options.IncludeXmlComments(item);
                     }
                 }
@@ -47,7 +47,7 @@ namespace Alabo.App.Core.Api.Swagger {
             app.UseSwaggerUI(c => {
                 //c.RoutePrefix = "ApiDoc";
                 c.SwaggerEndpoint("/swagger/api/swagger.json", "v12");
-                c.DocumentTitle = "ZKCloud Api 文档";
+                c.DocumentTitle = "Alabo Api 文档";
             });
             return app;
         }

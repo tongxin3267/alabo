@@ -23,7 +23,7 @@ namespace Alabo.Web {
         /// <param name="args">The arguments.</param>
         public static void Main(string[] args) {
             var host = BuildWebHost(args);
-            RunJobs(host).GetAwaiter().GetResult();
+            //   RunJobs(host).GetAwaiter().GetResult();
             host.Run();
         }
 

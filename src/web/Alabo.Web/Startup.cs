@@ -38,14 +38,6 @@ namespace Alabo.Web {
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
-            if (env.IsDevelopment()) {
-                // 开发环境下单独加载客户配置json
-                builder = new ConfigurationBuilder()
-                    .SetBasePath(env.ContentRootPath)
-                    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                    .AddEnvironmentVariables();
-                builder.AddApplicationInsightsSettings(developerMode: true);
-            }
             Configuration = builder.Build();
             env.ConfigurationRuntimePath(Configuration);
             Configuration = configuration;

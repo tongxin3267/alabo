@@ -187,7 +187,7 @@ namespace Alabo.Runtime {
         public Assembly[] GetPlatformRuntimeAssemblies() {
             if (_platformRuntimeAssemblie == null) {
                 _platformRuntimeAssemblie = GetRuntimeAssemblies(e =>
-                    (e.FullName.StartsWith("ZKCloud") || e.FullName.StartsWith("ZKOpen")) &&
+                    (e.FullName.StartsWith("Alabo") || e.FullName.StartsWith("ZKOpen") || e.FullName.StartsWith("ZKCloud")) &&
                     !e.FullName.Contains("ZKCloud.Open"));
             }
 
@@ -201,73 +201,6 @@ namespace Alabo.Runtime {
         /// <param name="serviceProvider">The 服务 provider.</param>
         internal static void SetRequestServices(int threadId, IServiceProvider serviceProvider) {
             ServiceProviderCache.AddOrUpdate(threadId, serviceProvider, (_1, _2) => serviceProvider);
-        }
-
-        /// <summary>
-        ///     加载所有组件
-        /// </summary>
-        public void LoadComponents() {
-            //return; // 由于只能在请求中获取到applicationPartManager，故无法在启动时加载模块组件
-            var path = Current.Path.ComponentsDirectory;
-            var files = Directory.GetFiles(path);
-            var applicationPartManager = Current.RequestServices.GetService<ApplicationPartManager>();
-            if (applicationPartManager == null) {
-                return;
-            }
-
-            void AddPart(string file) {
-                using (var fs = new FileStream(file, FileMode.Open, FileAccess.Read)) {
-                    Assembly assembly = null;
-                    assembly = AssemblyLoadContext.Default.LoadFromStream(fs);
-                    var part = new AssemblyPart(assembly);
-
-                    applicationPartManager.ApplicationParts.Add(part);
-                }
-            }
-
-            foreach (var file in files) {
-                if (!file.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)) {
-                    continue;
-                }
-
-                AddPart(file);
-            }
-        }
-
-        /// <summary>
-        ///     加载指定文件
-        /// </summary>
-        /// <param name="name">模块文件名称</param>
-        public void LoadComponent(string name) {
-            var path = Current.Path.ComponentsDirectory;
-            var fileName = name.EndsWith(".dll") ? name : $"{name}.dll";
-            name = name.IndexOf('.') == -1 ? name : name.Substring(0, name.IndexOf('.'));
-            var file = System.IO.Path.Combine(path, fileName);
-            if (!File.Exists(file)) {
-                return;
-            }
-
-            var applicationPartManager = Current.RequestServices.GetService<ApplicationPartManager>();
-            var viewComponentDescriptorCollectionProvider =
-                Current.RequestServices.GetService<IViewComponentDescriptorCollectionProvider>();
-            //if (applicationPartManager == null ||
-            //    !(viewComponentDescriptorCollectionProvider is ZkCloudViewComponentDescriptorCollectionProvider)
-            //) {
-            //    return;
-            //}
-
-            if (applicationPartManager.ApplicationParts.Any(p => p.Name == name)) {
-                return;
-            }
-
-            using (var fs = new FileStream(file, FileMode.Open, FileAccess.Read)) {
-                Assembly assembly = null;
-                assembly = AssemblyLoadContext.Default.LoadFromStream(fs);
-                var part = new AssemblyPart(assembly);
-
-                applicationPartManager.ApplicationParts.Add(part);
-                //(viewComponentDescriptorCollectionProvider as ZkCloudViewComponentDescriptorCollectionProvider).Reset();
-            }
         }
     }
 }
