@@ -20,21 +20,18 @@
     <Compile Remove="Reports\Charts\**" />
     <Compile Remove="Reports\Schedule\**" />
     <Compile Remove="Tasks\Dtos\**" />
-    <Compile Remove="UserType\Domain\Services\新文件夹\**" />
     <EmbeddedResource Remove="ApiStore\Payment\Domain\**" />
     <EmbeddedResource Remove="ApiStore\Sms\Controllers\**" />
     <EmbeddedResource Remove="Markets\EnterpriseCertification\UI\**" />
     <EmbeddedResource Remove="Reports\Charts\**" />
     <EmbeddedResource Remove="Reports\Schedule\**" />
     <EmbeddedResource Remove="Tasks\Dtos\**" />
-    <EmbeddedResource Remove="UserType\Domain\Services\新文件夹\**" />
     <None Remove="ApiStore\Payment\Domain\**" />
     <None Remove="ApiStore\Sms\Controllers\**" />
     <None Remove="Markets\EnterpriseCertification\UI\**" />
     <None Remove="Reports\Charts\**" />
     <None Remove="Reports\Schedule\**" />
     <None Remove="Tasks\Dtos\**" />
-    <None Remove="UserType\Domain\Services\新文件夹\**" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="ApiStore\Sms\Services\ISmsService.cs" />
