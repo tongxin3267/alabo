@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Core.Admin.Domain.Services;
+﻿using Alabo.App.Core.Admin.Domain.Services;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Core.UserType.Domain.Services;
-using Alabo.App.Core.UserType.Modules.Partner;
 using Alabo.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Schedules;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.App.Core.User.Domain.Services {
 
@@ -96,12 +94,12 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// </summary>
         /// <param name="user">用户</param>
         private void AddParnter(Entities.User user) {
-            var config = Resolve<IAutoConfigService>().GetValue<PartnerConfig>();
-            if (config.AfterUserRegAddPanter) {
-                //会员注册后自动添加合伙人
-                var parnterUserTypeId = UserTypeEnum.Partner.GetFieldId();
-                Resolve<ITypeUserService>().SetTypeUser(user.Id, parnterUserTypeId);
-            }
+            //var config = Resolve<IAutoConfigService>().GetValue<PartnerConfig>();
+            //if (config.AfterUserRegAddPanter) {
+            //    //会员注册后自动添加合伙人
+            //    var parnterUserTypeId = UserTypeEnum.Partner.GetFieldId();
+            //    Resolve<ITypeUserService>().SetTypeUser(user.Id, parnterUserTypeId);
+            //}
         }
 
         #endregion 与内部合伙人关联

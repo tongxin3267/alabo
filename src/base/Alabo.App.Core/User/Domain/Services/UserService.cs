@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using Alabo.App.Core.Api.Domain.Service;
+﻿using Alabo.App.Core.Api.Domain.Service;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Employes.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Repositories;
 using Alabo.App.Core.User.ViewModels;
-using Alabo.App.Core.UserType.Domain.Services;
 using Alabo.Core.Enums.Enum;
 using Alabo.Core.Extensions;
 using Alabo.Datas.UnitOfWorks;
@@ -25,6 +19,8 @@ using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.UI;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.App.Core.User.Domain.Services {
 
@@ -541,9 +537,8 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// </summary>
         /// <param name="userId">用户Id</param>
         public bool IsAdmin(long userId) {
-            var userType = Resolve<IUserTypeService>().GetSingle(userId, UserTypeEnum.Employees);
             var find = Resolve<IEmployeeService>().GetSingle(r => r.UserId == userId);
-            if (userType == null && find == null) {
+            if (find == null) {
                 return false;
             }
             return true;

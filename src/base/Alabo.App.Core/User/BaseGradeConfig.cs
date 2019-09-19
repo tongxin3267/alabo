@@ -1,10 +1,10 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.UserType.Domain.CallBacks;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.ComponentModel.DataAnnotations;
+using ZKCloud.App.Core.UserType.Domain.CallBacks;
 
 namespace Alabo.App.Core.User {
 

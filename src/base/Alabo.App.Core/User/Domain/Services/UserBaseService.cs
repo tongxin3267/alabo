@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Alabo.App.Core.Common.Domain.CallBacks;
+﻿using Alabo.App.Core.Common.Domain.CallBacks;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Core.UserType.Domain.Enums;
-using Alabo.App.Core.UserType.Domain.Services;
 using Alabo.Core.Enums.Enum;
 using Alabo.Core.Extensions;
 using Alabo.Datas.UnitOfWorks;
@@ -20,7 +13,9 @@ using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Helpers;
-using ZKCloud.Open.ApiBase.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UserDetail = Alabo.App.Core.User.Domain.Entities.UserDetail;
 
 namespace Alabo.App.Core.User.Domain.Services {
@@ -170,15 +165,15 @@ namespace Alabo.App.Core.User.Domain.Services {
                     return new Tuple<ServiceResult, UserOutput>(ServiceResult.FailedWithMessage("服务中心用户状态不正常"), null);
                 }
 
-                var servcieUserType = Ioc.Resolve<IUserTypeService>().GetSingle(r =>
-                    r.UserId == serviceUser.Id && r.UserTypeId == UserTypeEnum.ServiceCenter.GetFieldId());
-                if (servcieUserType == null) {
-                    return new Tuple<ServiceResult, UserOutput>(ServiceResult.FailedWithMessage("该用户的门店不存在"), null);
-                }
+                //var servcieUserType = Ioc.Resolve<IUserTypeService>().GetSingle(r =>
+                //    r.UserId == serviceUser.Id && r.UserTypeId == UserTypeEnum.ServiceCenter.GetFieldId());
+                //if (servcieUserType == null) {
+                //    return new Tuple<ServiceResult, UserOutput>(ServiceResult.FailedWithMessage("该用户的门店不存在"), null);
+                //}
 
-                if (servcieUserType.Status != UserTypeStatus.Success) {
-                    return new Tuple<ServiceResult, UserOutput>(ServiceResult.FailedWithMessage("门店状态不正常"), null);
-                }
+                //if (servcieUserType.Status != UserTypeStatus.Success) {
+                //    return new Tuple<ServiceResult, UserOutput>(ServiceResult.FailedWithMessage("门店状态不正常"), null);
+                //}
                 user.Detail.ServiceCenterUserId = serviceUser.Id;
             }
 

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.App.Core.User;
+﻿using Alabo.App.Core.User;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.UserType.Modules.Supplier;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.App.Core.Common.Domain.Services {
 
@@ -47,7 +46,5 @@ namespace Alabo.App.Core.Common.Domain.Services {
         /// </summary>
         /// <param name="userGradeInput"></param>
         ServiceResult UpdateUserGrade(UserGradeInput userGradeInput);
-
-        SupplierGradeConfig GetSupplierGrade(Guid gradeId);
     }
 }

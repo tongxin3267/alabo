@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Core.Common.Domain.Repositories;
+﻿using Alabo.App.Core.Common.Domain.Repositories;
 using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.User;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.UserType.Modules.Supplier;
 using Alabo.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.App.Core.Common.Domain.Services {
 
@@ -108,16 +107,6 @@ namespace Alabo.App.Core.Common.Domain.Services {
         public ServiceResult UpdateUserGrade(UserGradeInput userGradeInput) {
             return Resolve<IUpgradeRecordService>()
                 .ChangeUserGrade(userGradeInput.UserId, userGradeInput.GradeId, userGradeInput.Type);
-        }
-
-        public SupplierGradeConfig GetSupplierGrade(Guid gradeId) {
-            var supplierGradeList = Resolve<IAutoConfigService>().GetList<SupplierGradeConfig>();
-
-            var grade = supplierGradeList.FirstOrDefault(e => e.Id == gradeId);
-            if (grade == null) {
-                grade = new SupplierGradeConfig();
-            }
-            return grade;
         }
     }
 }
