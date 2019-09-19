@@ -51,6 +51,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alabo.Test.Open", "src\test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Alabo.Test.Shop", "src\test\Alabo.Test.Shop\Alabo.Test.Shop.csproj", "{B28FE48F-B01A-4B9A-833D-DF62BF568ADF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alabo.App.Weixin", "src\base\Alabo.App.Weixin\Alabo.App.Weixin.csproj", "{D41D65EC-32CD-4E6A-BE84-FF514DDAF478}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,10 @@ Global
 		{B28FE48F-B01A-4B9A-833D-DF62BF568ADF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B28FE48F-B01A-4B9A-833D-DF62BF568ADF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B28FE48F-B01A-4B9A-833D-DF62BF568ADF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D41D65EC-32CD-4E6A-BE84-FF514DDAF478}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D41D65EC-32CD-4E6A-BE84-FF514DDAF478}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D41D65EC-32CD-4E6A-BE84-FF514DDAF478}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D41D65EC-32CD-4E6A-BE84-FF514DDAF478}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -157,6 +163,7 @@ Global
 		{877D480B-31ED-4226-BB03-2236E0603956} = {4EBEA55A-BB69-48A6-9F3F-1703D9942A7B}
 		{8E029ED4-A65E-4F81-A2EE-A9B084B4A3F2} = {4EBEA55A-BB69-48A6-9F3F-1703D9942A7B}
 		{B28FE48F-B01A-4B9A-833D-DF62BF568ADF} = {4EBEA55A-BB69-48A6-9F3F-1703D9942A7B}
+		{D41D65EC-32CD-4E6A-BE84-FF514DDAF478} = {DE2736F2-3D89-4B20-BF9B-049DEE71FF9B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A1E90677-FAAA-4BD1-8798-FCFEE91E8323}
