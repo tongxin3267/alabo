@@ -68,7 +68,7 @@ namespace Alabo.App.Core.Api.Controller {
         public User.Domain.Entities.User User {
             get {
                 if (_user == null && AutoModel.BasicUser != null) {
-                    _user = Resolve<IUserService>().GetSingle(AutoModel.BasicUser.Id);
+                    _user = Resolve<IAlaboUserService>().GetSingle(AutoModel.BasicUser.Id);
                 }
 
                 return _user;
@@ -95,7 +95,7 @@ namespace Alabo.App.Core.Api.Controller {
 
                     var userId = HttpContext.Request.Headers["zk-user-id"].ToString().ConvertToLong(-1);
                     if (userId > 0) {
-                        var user = Resolve<IUserService>().GetSingle(userId);
+                        var user = Resolve<IAlaboUserService>().GetSingle(userId);
                         _autoModel.BasicUser = new BasicUser { Id = userId };
                         if (user != null) {
                             _autoModel.BasicUser = user.MapTo<BasicUser>();

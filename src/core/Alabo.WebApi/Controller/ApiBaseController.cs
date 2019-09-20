@@ -74,7 +74,7 @@ namespace Alabo.App.Core.Api.Controller {
                 //}
 
                 //var tokenSign = HttpContext.Request.Headers["zk-token"].ToString();
-                //tokenSign = tokenSign.Substring(2, 10) + Resolve<IUserService>().GetUserToken(User);
+                //tokenSign = tokenSign.Substring(2, 10) + Resolve<IAlaboUserService>().GetUserToken(User);
                 //var md5Token = tokenSign.ToLower().ToMd5HashString();
 
                 //var userToken = HttpContext.Request.Headers["zk-user-token"];
@@ -87,7 +87,7 @@ namespace Alabo.App.Core.Api.Controller {
                 // 开放该判断后 供应商无法访问订单和商品列表
                 //if (apiAuthAttribute.Filter == FilterType.Admin || AutoModel.Filter == FilterType.Admin)
                 //{
-                //    if (!Resolve<IUserService>().IsAdmin(User.Id))
+                //    if (!Resolve<IAlaboUserService>().IsAdmin(User.Id))
                 //    {
                 //        return ApiResult.Failure<AccessToken>($"您不是管理员无权访问");
                 //    }
