@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Alabo.App.Core.Common.Domain.Services {
 
-    public interface IConfigService : IService<AutoConfig, long> {
+    public interface IAlaboConfigService : IService<AutoConfig, long> {
 
         /// <summary>
         /// 获取单个数据

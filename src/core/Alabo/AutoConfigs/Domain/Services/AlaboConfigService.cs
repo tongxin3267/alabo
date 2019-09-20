@@ -19,10 +19,10 @@ using System.Reflection;
 
 namespace Alabo.App.Core.Common.Domain.Services {
 
-    public class ConfigService : ServiceBase<AutoConfig, long>, IConfigService {
+    public class AlaboConfigService : ServiceBase<AutoConfig, long>, IAlaboConfigService {
         private static readonly string AutoConfigCacheKey = "AutoConfigCacheKey_";
 
-        public ConfigService(IUnitOfWork unitOfWork, IRepository<AutoConfig, long> repository) : base(unitOfWork, repository) {
+        public AlaboConfigService(IUnitOfWork unitOfWork, IRepository<AutoConfig, long> repository) : base(unitOfWork, repository) {
         }
 
         /// <summary>
