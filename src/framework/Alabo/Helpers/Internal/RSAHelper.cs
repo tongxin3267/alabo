@@ -5,7 +5,7 @@ using System.Text;
 using Alabo.Exceptions;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Helpers.Internal {
+namespace ZKCloud.Core.Helpers.Internal {
 
     /// <summary>
     ///     RSA加解密 使用OpenSSL的公钥加密/私钥解密
@@ -27,7 +27,7 @@ namespace Alabo.Helpers.Internal {
         /// <param name="encoding">编码类型</param>
         /// <param name="privateKey">私钥</param>
         /// <param name="publicKey">公钥</param>
-        public RsaHelper(RSAType rsaType, Encoding encoding, string privateKey = null, string publicKey = null) {
+        public RsaHelper(RsaType rsaType, Encoding encoding, string privateKey, string publicKey = null) {
             _encoding = encoding;
             if (!string.IsNullOrEmpty(privateKey)) {
                 _privateKeyRsaProvider = CreateRsaProviderFromPrivateKey(privateKey);
@@ -37,7 +37,7 @@ namespace Alabo.Helpers.Internal {
                 _publicKeyRsaProvider = CreateRsaProviderFromPublicKey(publicKey);
             }
 
-            _hashAlgorithmName = rsaType == RSAType.RSA ? HashAlgorithmName.SHA1 : HashAlgorithmName.SHA256;
+            _hashAlgorithmName = rsaType == RsaType.Rsa ? HashAlgorithmName.SHA1 : HashAlgorithmName.SHA256;
         }
 
         #region 使用私钥签名
@@ -52,7 +52,7 @@ namespace Alabo.Helpers.Internal {
             var signatureBytes =
                 _privateKeyRsaProvider.SignData(dataBytes, _hashAlgorithmName, RSASignaturePadding.Pkcs1);
 
-            return System.Convert.ToBase64String(signatureBytes);
+            return Convert.ToBase64String(signatureBytes);
         }
 
         #endregion 使用私钥签名
@@ -66,7 +66,7 @@ namespace Alabo.Helpers.Internal {
         /// <param name="sign">签名</param>
         public bool Verify(string data, string sign) {
             var dataBytes = _encoding.GetBytes(data);
-            var signBytes = System.Convert.FromBase64String(sign);
+            var signBytes = Convert.FromBase64String(sign);
 
             var verify =
                 _publicKeyRsaProvider.VerifyData(dataBytes, signBytes, _hashAlgorithmName, RSASignaturePadding.Pkcs1);
@@ -83,7 +83,7 @@ namespace Alabo.Helpers.Internal {
                 throw new ValidException("_privateKeyRsaProvider is null");
             }
 
-            return Encoding.UTF8.GetString(_privateKeyRsaProvider.Decrypt(System.Convert.FromBase64String(cipherText),
+            return Encoding.UTF8.GetString(_privateKeyRsaProvider.Decrypt(Convert.FromBase64String(cipherText),
                 RSAEncryptionPadding.Pkcs1));
         }
 
@@ -96,7 +96,7 @@ namespace Alabo.Helpers.Internal {
                 throw new ValidException("_publicKeyRsaProvider is null");
             }
 
-            return System.Convert.ToBase64String(_publicKeyRsaProvider.Encrypt(Encoding.UTF8.GetBytes(text),
+            return Convert.ToBase64String(_publicKeyRsaProvider.Encrypt(Encoding.UTF8.GetBytes(text),
                 RSAEncryptionPadding.Pkcs1));
         }
 
@@ -105,7 +105,7 @@ namespace Alabo.Helpers.Internal {
         #region 使用私钥创建RSA实例
 
         public RSA CreateRsaProviderFromPrivateKey(string privateKey) {
-            var privateKeyBits = System.Convert.FromBase64String(privateKey);
+            var privateKeyBits = Convert.FromBase64String(privateKey);
 
             var rsa = RSA.Create();
             var rsaParameters = new RSAParameters();
@@ -155,7 +155,7 @@ namespace Alabo.Helpers.Internal {
             byte[] seqOid = { 0x30, 0x0D, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x01, 0x01, 0x05, 0x00 };
             var seq = new byte[15];
 
-            var x509Key = System.Convert.FromBase64String(publicKeyString);
+            var x509Key = Convert.FromBase64String(publicKeyString);
 
             // ---------  Set up stream to read the asn.1 encoded SubjectPublicKeyInfo blob  ------
             using (var mem = new MemoryStream(x509Key)) {
@@ -240,7 +240,8 @@ namespace Alabo.Helpers.Internal {
                     }
 
                     var expbytes =
-                        binr.ReadByte(); // should only need one byte for actual exponent data (for all useful values)
+                        (int)binr
+                            .ReadByte(); // should only need one byte for actual exponent data (for all useful values)
                     var exponent = binr.ReadBytes(expbytes);
 
                     // ------- create RSACryptoServiceProvider instance and initialize with public key -----
@@ -313,17 +314,17 @@ namespace Alabo.Helpers.Internal {
     ///     RSA算法类型
     /// </summary>
     [ClassProperty(Name = "RSA算法类型")]
-    public enum RSAType {
+    public enum RsaType {
 
         /// <summary>
         ///     SHA1
         /// </summary>
-        RSA = 0,
+        Rsa = 0,
 
         /// <summary>
         ///     RSA2 密钥长度至少为2048
         ///     SHA256
         /// </summary>
-        RSA2
+        Rsa2
     }
 }

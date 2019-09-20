@@ -12,6 +12,6 @@
     <DocumentationFile></DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Alabo\Alabo.csproj" />
+    <ProjectReference Include="..\Alabo\01-Alabo.csproj" />
   </ItemGroup>
 </Project>

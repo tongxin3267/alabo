@@ -1,19 +1,35 @@
-﻿using System;
-using System.Linq;
+﻿using Alabo.Extensions;
+using System;
 using System.Security.Cryptography;
 using System.Text;
-using Alabo.Helpers.Internal;
 using ZKCloud.Core.Helpers.Internal;
 
-namespace Alabo.Helpers {
+namespace Alabo.Core.Extensions {
 
     /// <summary>
-    ///     加密操作
-    ///     说明：
-    ///     1. AES加密整理自支付宝SDK
-    ///     2. RSA加密采用 https://github.com/stulzq/DotnetCore.RSA/blob/master/DotnetCore.RSA/RSAHelper.cs
+    ///     ///
+    ///     <summary>
+    ///         加密操作
+    ///         说明：
+    ///         1. AES加密整理自支付宝SDK
+    ///         2. RSA加密采用 https://github.com/stulzq/DotnetCore.RSA/blob/master/DotnetCore.RSA/RSAHelper.cs
+    ///     </summary>
     /// </summary>
-    public static class Encrypt {
+    public static class SecurityExtensions {
+
+        public static string ToMd5HashString(this string s) {
+            if (s.IsNullOrEmpty()) {
+                return s;
+            }
+
+            var data = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(s));
+            var sb = new StringBuilder();
+            for (var i = 0; i < data.Length; i++) {
+                sb.AppendFormat("{0:x2}", data[i]);
+            }
+
+            return sb.ToString();
+        }
 
         #region Md5加密
 
@@ -48,8 +64,7 @@ namespace Alabo.Helpers {
                 var hash = md5.ComputeHash(encoding.GetBytes(value));
                 result = startIndex == null
                     ? BitConverter.ToString(hash)
-                    : BitConverter.ToString(hash, Extensions.Extensions.SafeValue(startIndex),
-                        Extensions.Extensions.SafeValue(length));
+                    : BitConverter.ToString(hash, startIndex.Value, length.Value);
             } finally {
                 md5.Clear();
             }
@@ -107,7 +122,7 @@ namespace Alabo.Helpers {
         /// <param name="key">密钥,24位</param>
         /// <param name="encoding">编码</param>
         public static string DesEncrypt(object value, string key, Encoding encoding) {
-            var text = Extensions.Extensions.SafeString(value);
+            var text = value.SafeString();
             if (ValidateDes(text, key) == false) {
                 return string.Empty;
             }
@@ -132,7 +147,11 @@ namespace Alabo.Helpers {
         ///     创建Des加密服务提供程序
         /// </summary>
         private static TripleDESCryptoServiceProvider CreateDesProvider(string key) {
-            return new TripleDESCryptoServiceProvider { Key = Encoding.ASCII.GetBytes(key), Mode = CipherMode.ECB, Padding = PaddingMode.PKCS7 };
+            return new TripleDESCryptoServiceProvider {
+                Key = Encoding.ASCII.GetBytes(key),
+                Mode = CipherMode.ECB,
+                Padding = PaddingMode.PKCS7
+            };
         }
 
         /// <summary>
@@ -141,7 +160,7 @@ namespace Alabo.Helpers {
         private static string GetEncryptResult(string value, Encoding encoding, ICryptoTransform transform) {
             var bytes = encoding.GetBytes(value);
             var result = transform.TransformFinalBlock(bytes, 0, bytes.Length);
-            return System.Convert.ToBase64String(result);
+            return Convert.ToBase64String(result);
         }
 
         /// <summary>
@@ -168,7 +187,7 @@ namespace Alabo.Helpers {
         /// <param name="key">密钥,24位</param>
         /// <param name="encoding">编码</param>
         public static string DesDecrypt(object value, string key, Encoding encoding) {
-            var text = Extensions.Extensions.SafeString(value);
+            var text = value.SafeString();
             if (!ValidateDes(text, key)) {
                 return string.Empty;
             }
@@ -182,7 +201,7 @@ namespace Alabo.Helpers {
         ///     获取解密结果
         /// </summary>
         private static string GetDecryptResult(string value, Encoding encoding, ICryptoTransform transform) {
-            var bytes = System.Convert.FromBase64String(value);
+            var bytes = Convert.FromBase64String(value);
             var result = transform.TransformFinalBlock(bytes, 0, bytes.Length);
             return encoding.GetString(result);
         }
@@ -257,7 +276,7 @@ namespace Alabo.Helpers {
         /// </summary>
         private static RijndaelManaged CreateRijndaelManaged(string key) {
             return new RijndaelManaged {
-                Key = System.Convert.FromBase64String(key),
+                Key = Convert.FromBase64String(key),
                 Mode = CipherMode.CBC,
                 Padding = PaddingMode.PKCS7,
                 IV = Iv
@@ -318,7 +337,7 @@ namespace Alabo.Helpers {
         /// <param name="key">密钥</param>
         /// <param name="encoding">编码</param>
         public static string RsaSign(string value, string key, Encoding encoding) {
-            return RsaSign(value, key, encoding, RsaType.Rsa2);
+            return RsaSign(value, key, encoding, RsaType.Rsa);
         }
 
         /// <summary>
@@ -352,90 +371,6 @@ namespace Alabo.Helpers {
             return rsa.Sign(value);
         }
 
-        /// <summary>
-        ///     Rsa验签，采用 SHA1 算法
-        /// </summary>
-        /// <param name="value">待验签的值</param>
-        /// <param name="publicKey">公钥</param>
-        /// <param name="sign">签名</param>
-        public static bool RsaVerify(string value, string publicKey, string sign) {
-            return RsaVerify(value, publicKey, sign, Encoding.UTF8);
-        }
-
-        /// <summary>
-        ///     Rsa验签，采用 SHA1 算法
-        /// </summary>
-        /// <param name="value">待验签的值</param>
-        /// <param name="publicKey">公钥</param>
-        /// <param name="sign">签名</param>
-        /// <param name="encoding">编码</param>
-        public static bool RsaVerify(string value, string publicKey, string sign, Encoding encoding) {
-            return RsaVerify(value, publicKey, sign, encoding, RsaType.Rsa2);
-        }
-
-        /// <summary>
-        ///     Rsa验签，采用 SHA256 算法
-        /// </summary>
-        /// <param name="value">待验签的值</param>
-        /// <param name="publicKey">公钥</param>
-        /// <param name="sign">签名</param>
-        public static bool Rsa2Verify(string value, string publicKey, string sign) {
-            return Rsa2Verify(value, publicKey, sign, Encoding.UTF8);
-        }
-
-        /// <summary>
-        ///     Rsa验签，采用 SHA256 算法
-        /// </summary>
-        /// <param name="value">待验签的值</param>
-        /// <param name="publicKey">公钥</param>
-        /// <param name="sign">签名</param>
-        /// <param name="encoding">编码</param>
-        public static bool Rsa2Verify(string value, string publicKey, string sign, Encoding encoding) {
-            return RsaVerify(value, publicKey, sign, encoding, RsaType.Rsa2);
-        }
-
-        /// <summary>
-        ///     Rsa验签
-        /// </summary>
-        private static bool RsaVerify(string value, string publicKey, string sign, Encoding encoding, RsaType type) {
-            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(publicKey) ||
-                string.IsNullOrWhiteSpace(sign)) {
-                return false;
-            }
-
-            var rsa = new RsaHelper(type, encoding, publicKey, publicKey);
-            return rsa.Verify(value, sign);
-        }
-
         #endregion RSA签名
-
-        #region HmacSha256加密
-
-        /// <summary>
-        ///     HMACSHA256加密
-        /// </summary>
-        /// <param name="value">值</param>
-        /// <param name="key">密钥</param>
-        public static string HmacSha256(string value, string key) {
-            return HmacSha256(value, key, Encoding.UTF8);
-        }
-
-        /// <summary>
-        ///     HMACSHA256加密
-        /// </summary>
-        /// <param name="value">值</param>
-        /// <param name="key">密钥</param>
-        /// <param name="encoding">字符编码</param>
-        public static string HmacSha256(string value, string key, Encoding encoding) {
-            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(key)) {
-                return string.Empty;
-            }
-
-            var sha256 = new HMACSHA256(encoding.GetBytes(key));
-            var hash = sha256.ComputeHash(encoding.GetBytes(value));
-            return string.Join("", hash.ToList().Select(t => t.ToString("x2")).ToArray());
-        }
-
-        #endregion HmacSha256加密
     }
 }

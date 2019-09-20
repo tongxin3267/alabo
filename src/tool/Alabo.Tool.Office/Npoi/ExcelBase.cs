@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Tool.Office.Abstractions;
 using Alabo.Tool.Office.Core;

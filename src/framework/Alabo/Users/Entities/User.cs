@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Core.Regex;
 
 namespace Alabo.App.Core.User.Domain.Entities {
 
@@ -22,6 +23,7 @@ namespace Alabo.App.Core.User.Domain.Entities {
         /// </summary>
         [StringLength(15, MinimumLength = 3, ErrorMessage = ErrorMessage.NameNotInRang)]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
+        [RegularExpression(RegularExpressionHelper.UserName, ErrorMessage = ErrorMessage.NotMatchFormat)]
         [Display(Name = "用户名")]
         public string UserName { get; set; }
 
@@ -36,6 +38,8 @@ namespace Alabo.App.Core.User.Domain.Entities {
         ///     邮箱
         /// </summary>
         [Display(Name = "邮箱")]
+        //[Remote("verify_email", HttpMethod = "POST", ErrorMessage = ErrorMessage.IsUserd)]
+        [RegularExpression(RegularExpressionHelper.Email, ErrorMessage = ErrorMessage.NotMatchFormat)]
         public string Email { get; set; }
 
         /// <summary>
@@ -43,6 +47,9 @@ namespace Alabo.App.Core.User.Domain.Entities {
         /// </summary>
 
         [Display(Name = "手机")]
+        //[Remote("verify_mobile", HttpMethod = "POST", ErrorMessage = ErrorMessage.IsUserd)]
+        //[Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
+        [RegularExpression(RegularExpressionHelper.ChinaMobile, ErrorMessage = ErrorMessage.NotMatchFormat)]
         public string Mobile { get; set; }
 
         /// <summary>
