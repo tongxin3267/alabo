@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <AssemblyName>Alabo.WebApi</AssemblyName>
-    <RootNamespace>Alabo.WebApi</RootNamespace>
+    <AssemblyName>Alabo.Core</AssemblyName>
+    <RootNamespace>Alabo.Core</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

@@ -51,12 +51,6 @@
     <PackageReference Include="Senparc.Weixin.WxOpen" Version="3.3.9.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\core\Alabo.Core\Alabo.Core.csproj" />
-    <ProjectReference Include="..\..\core\Alabo.UI\Alabo.Web.Ui.csproj" />
-    <ProjectReference Include="..\..\core\Alabo.WebApi\Alabo.Web.Api.csproj" />
-    <ProjectReference Include="..\..\core\Alabo\Alabo.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="AopSdk">
       <HintPath>..\..\..\reference\AopSdk.dll</HintPath>
     </Reference>
@@ -64,5 +58,9 @@
   <ItemGroup>
     <Folder Include="Common\Controllers\" />
     <Folder Include="Grades\Domain\Configs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\framework\Alabo.WebApi\02-Alabo.Core.csproj" />
+    <ProjectReference Include="..\..\framework\Alabo\01-Alabo.csproj" />
   </ItemGroup>
 </Project>
