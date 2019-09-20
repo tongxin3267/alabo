@@ -34,21 +34,18 @@
     <Compile Remove="Domains\Model\**" />
     <Compile Remove="Domains\Repositories\Operations\**" />
     <Compile Remove="Sessions\**" />
-    <Compile Remove="UI\Enums\**" />
     <Compile Remove="Web\Controllers\**" />
     <Compile Remove="Datas\UnitOfWorks\SqlServer\Mappings\**" />
     <EmbeddedResource Remove="Datas\Stores\View\**" />
     <EmbeddedResource Remove="Domains\Model\**" />
     <EmbeddedResource Remove="Domains\Repositories\Operations\**" />
     <EmbeddedResource Remove="Sessions\**" />
-    <EmbeddedResource Remove="UI\Enums\**" />
     <EmbeddedResource Remove="Web\Controllers\**" />
     <EmbeddedResource Remove="Datas\UnitOfWorks\SqlServer\Mappings\**" />
     <None Remove="Datas\Stores\View\**" />
     <None Remove="Domains\Model\**" />
     <None Remove="Domains\Repositories\Operations\**" />
     <None Remove="Sessions\**" />
-    <None Remove="UI\Enums\**" />
     <None Remove="Web\Controllers\**" />
     <None Remove="Datas\UnitOfWorks\SqlServer\Mappings\**" />
   </ItemGroup>
