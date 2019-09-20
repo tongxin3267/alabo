@@ -1,14 +1,14 @@
 ﻿using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Core.UI.Enum
-{
+namespace Alabo.Core.UI.Enum {
+
     /// <summary>
     ///     Font Awesome图标
     /// </summary>
     [ClassProperty(Name = "Font Awesome图标")]
-    public enum FontAwesomeIcon
-    {
+    public enum FontAwesomeIcon {
+
         /// <summary>
         ///     fa-glass
         /// </summary>
@@ -98,11 +98,6 @@ namespace Alabo.Core.UI.Enum
         ///     fa-signal
         /// </summary>
         [Field(Icon = "fa fa-signal")] Signal,
-
-        /// <summary>
-        ///     fa-cog
-        /// </summary>
-        [Field(Icon = IconFlaticon.menu)] Cog,
 
         /// <summary>
         ///     fa-trash-o

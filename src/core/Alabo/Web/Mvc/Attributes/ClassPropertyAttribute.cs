@@ -2,22 +2,19 @@
 using Alabo.Domains.Enums;
 using Alabo.UI;
 
-namespace Alabo.Web.Mvc.Attributes
-{
+namespace Alabo.Web.Mvc.Attributes {
+
     /// <summary>
     ///     类属性特性信息
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Enum)]
-    public class ClassPropertyAttribute : Attribute
-    {
+    public class ClassPropertyAttribute : Attribute {
         private string v;
 
-        public ClassPropertyAttribute()
-        {
+        public ClassPropertyAttribute() {
         }
 
-        public ClassPropertyAttribute(string v, string Icon, string Description)
-        {
+        public ClassPropertyAttribute(string v, string Icon, string Description) {
             this.v = v;
             this.Icon = Icon;
             this.Description = Description;
@@ -27,11 +24,6 @@ namespace Alabo.Web.Mvc.Attributes
         ///     显示在导航上的图标
         /// </summary>
         public string Icon { get; set; } = "flaticon-interface-8 ";
-
-        /// <summary>
-        ///     图标
-        /// </summary>
-        public Flaticon Flaticon { get; set; }
 
         /// <summary>
         ///     显示名称

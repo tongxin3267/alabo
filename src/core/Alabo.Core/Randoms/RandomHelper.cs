@@ -5,10 +5,10 @@ using Alabo.Core.Enums.Enum;
 using Alabo.Extensions;
 using Alabo.UI;
 
-namespace Alabo.Core.Randoms
-{
-    public static class RandomHelper
-    {
+namespace Alabo.Core.Randoms {
+
+    public static class RandomHelper {
+
         public static List<string> Xing = new List<string>
         {
             "赵", "钱", "孙", "李", "周", "吴", "郑", "王", "冯", "陈", "楮", "卫", "蒋", "沈", "韩", "杨",
@@ -55,10 +55,8 @@ namespace Alabo.Core.Randoms
         /// <summary>
         ///     随机颜色
         /// </summary>
-        public static string Color
-        {
-            get
-            {
+        public static string Color {
+            get {
                 var list = new List<string>
                 {
                     "info",
@@ -78,14 +76,11 @@ namespace Alabo.Core.Randoms
             }
         }
 
-
         /// <summary>
         ///     随机头像
         /// </summary>
-        public static string Avator
-        {
-            get
-            {
+        public static string Avator {
+            get {
                 var list = new List<string>
                 {
                     "https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoBjkfxWn1XibfQCGxay4xYCGrBdaEqfibX7KAY6W3WPMmkhghStPzbc5Gqrert3y1HKzCTUMiaQXUAw/132",
@@ -141,13 +136,12 @@ namespace Alabo.Core.Randoms
         /// <summary>
         ///     随机图标
         /// </summary>
-        public static string Icon
-        {
-            get
-            {
+        public static string Icon {
+            get {
                 var index = new Random().Next(1, 80);
-                index.IntToEnum<Flaticon>(out var flaticon);
-                return flaticon.GetIcon();
+                // index.IntToEnum<Flaticon>(out var flaticon);
+                //  return flaticon.GetIcon();
+                return String.Empty;
             }
         }
 
@@ -159,8 +153,7 @@ namespace Alabo.Core.Randoms
         /// <summary>
         ///     使用RNGCryptoServiceProvider生成真正随机的二进制数据
         /// </summary>
-        public static byte[] SystemRandomBytes()
-        {
+        public static byte[] SystemRandomBytes() {
             var bytes = Guid.NewGuid().ToByteArray();
             return bytes;
         }
@@ -168,16 +161,14 @@ namespace Alabo.Core.Randoms
         /// <summary>
         ///     使用RNGCryptoServiceProvider生成真正随机的整数
         /// </summary>
-        public static int SystemRandomInt()
-        {
+        public static int SystemRandomInt() {
             return BitConverter.ToInt32(SystemRandomBytes(), 0);
         }
 
         /// <summary>
         ///     随机产生6位的密码
         /// </summary>
-        public static string PassWord()
-        {
+        public static string PassWord() {
             var str = new Random().Next(100000, 999999);
 
             return str.ToString().PadLeft(6, '0');
@@ -187,8 +178,7 @@ namespace Alabo.Core.Randoms
         ///     支付密码 6位数字支付密码
         /// </summary>
         /// <returns></returns>
-        public static string PayPassWord()
-        {
+        public static string PayPassWord() {
             var str = new Random().Next(100000, 999999);
             return str.ToString().PadLeft(6, '0');
         }
@@ -196,8 +186,7 @@ namespace Alabo.Core.Randoms
         /// <summary>
         ///     生成10位数的编号
         /// </summary>
-        public static string GenerateSerial()
-        {
+        public static string GenerateSerial() {
             //把guid转换为两个long int
             var bytes = Guid.NewGuid().ToByteArray();
             var high = BitConverter.ToUInt64(bytes, 0);
@@ -213,8 +202,7 @@ namespace Alabo.Core.Randoms
         /// <param name="length">字符串长度</param>
         /// <param name="chars">包含的字符，默认是a-zA-Z0-9</param>
         public static string RandomString(int length,
-            string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
-        {
+            string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789") {
             var buffer = new char[length];
             for (var n = 0; n < length; ++n) {
                 buffer[n] = chars[Generator.Next(chars.Length)];
@@ -226,8 +214,7 @@ namespace Alabo.Core.Randoms
         /// <summary>
         ///     随机产生邮箱
         /// </summary>
-        public static string Email()
-        {
+        public static string Email() {
             var emmail = RandomString(5).ToLower() + new Random().Next(10000, 999999);
             return emmail + "@5ug.com";
         }
@@ -235,8 +222,7 @@ namespace Alabo.Core.Randoms
         /// <summary>
         ///     随机生成手机号码
         /// </summary>
-        public static string Mobile()
-        {
+        public static string Mobile() {
             string[] tel =
             {
                 "133", "153", "180", "181", "189", "134", "135", "136", "137", "138", "139", "150", "151", "152", "157",
@@ -251,12 +237,10 @@ namespace Alabo.Core.Randoms
             return phonePrix + phoneLast;
         }
 
-
         /// <summary>
         ///     随机生成手机号码
         /// </summary>
-        public static string MobileHiden()
-        {
+        public static string MobileHiden() {
             string[] tel =
             {
                 "133", "153", "180", "181", "189", "134", "135", "136", "137", "138", "139", "150", "151", "152", "157",
@@ -276,8 +260,7 @@ namespace Alabo.Core.Randoms
         /// </summary>
         /// <param name="min">最小数范围</param>
         /// <param name="max">最大数范围</param>
-        public static int Number(int min, int max)
-        {
+        public static int Number(int min, int max) {
             var num = new Random().Next(min, max);
             return num;
         }
@@ -286,8 +269,7 @@ namespace Alabo.Core.Randoms
         ///     获取随机性别
         /// </summary>
         /// <returns></returns>
-        public static Sex GetSex()
-        {
+        public static Sex GetSex() {
             var i = new Random().Next(0, 100000);
             var sex = Sex.Man;
             if (i % 2 == 0) {
@@ -302,8 +284,7 @@ namespace Alabo.Core.Randoms
         /// </summary>
         /// <param name="sex"></param>
         /// <returns></returns>
-        public static string Name(Sex sex)
-        {
+        public static string Name(Sex sex) {
             var nameList = _lastNameMan.ToCharArray().ToList(); //151的男士名
             if (sex == Sex.WoMan) {
                 nameList = _lastNameWoMan.ToCharArray().ToList(); //151个女士名
@@ -318,8 +299,7 @@ namespace Alabo.Core.Randoms
             return xing + firstName + lastName;
         }
 
-        public static string XingRandom()
-        {
+        public static string XingRandom() {
             var xingIndex = new Random().Next(0, Xing.Count);
             var xing = Xing[xingIndex];
             return xing;

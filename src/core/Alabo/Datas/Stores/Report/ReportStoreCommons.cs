@@ -56,7 +56,7 @@ namespace Alabo.Datas.Stores.Report {
             rsList.Add(new AutoReport {
                 Name = $"{inputParas.EntityType}统计",
                 AutoReportChart = new AutoReportChart {
-                    Type = ReportChartType.Line,
+                    // Type = ReportChartType.Line,
                     Columns = colList,
                     Rows = rowList
                 }
@@ -208,7 +208,7 @@ namespace Alabo.Datas.Stores.Report {
             rsList.Add(new AutoReport {
                 Name = $"{inputParas.Type}SumReport统计",
                 AutoReportChart = new AutoReportChart {
-                    Type = ReportChartType.Line,
+                    // Type = ReportChartType.Line,
                     Columns = colList,
                     Rows = rowList
                 }
