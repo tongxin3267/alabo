@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>Alabo.Tool.QrCode</RootNamespace>
+    <AssemblyName>Alabo.Tool.QrCode</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\framework\Alabo\01-Alabo.csproj" />
+  </ItemGroup>
+
+</Project>

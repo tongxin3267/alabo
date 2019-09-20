@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AssemblyName>Alabo.Tool.Office</AssemblyName>
+    <RootNamespace>Alabo.Tool.Office</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\framework\Alabo\01-Alabo.csproj" />
+  </ItemGroup>
+
+</Project>
