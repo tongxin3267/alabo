@@ -63,19 +63,9 @@ namespace Alabo.App.Core.Common.Controllers {
         /// <returns></returns>
         [HttpGet]
         public ApiResult<List<EnumList>> AllKeyValues() {
-            var result = Resolve<ITypeService>().AllKeyValues();
-            return ApiResult.Success(result.ToList());
-        }
-
-        /// <summary>
-        /// 获取UI类型，返回前台组件
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public ApiResult<List<string>> GetComponentPath(string type) {
-            var result = Resolve<IAutoUIService>().GetAutoComponents(type);
-            return ToResult<List<string>>(result);
+            //var result = Resolve<ITypeService>().AllKeyValues();
+            //return ApiResult.Success(result.ToList());
+            return null;
         }
 
         ///// <summary>
@@ -94,16 +84,6 @@ namespace Alabo.App.Core.Common.Controllers {
 
         //    return ApiResult.Success(find.ToList());
         //}
-
-        /// <summary>
-        /// 获取PC端所有的调试URL地址
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public ApiResult<List<KeyValue>> GetAllPcUrl() {
-            var result = Resolve<IAutoUIService>().GetAllPcUrl();
-            return ApiResult.Success(result);
-        }
 
         /// <summary>
         /// Get key values

@@ -93,32 +93,32 @@ namespace Alabo.App.Core.UI.Controllers {
                     ServiceName = autoTask.ServcieType.Name,
                     Method = autoTask.Method
                 };
-                Resolve<ITaskQueueService>().AddBackJob(backJobParameter);
+                //  Resolve<ITaskQueueService>().AddBackJob(backJobParameter);
             }
             return ApiResult.Success();
         }
 
-        /// <summary>
-        /// 获取最近的执行任务
-        /// </summary>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public ApiResult<List<TaskQueue>> List(string type) {
-            Type typeFind = null;
-            object instanceFind = null;
-            var checkType = Resolve<IUIBaseService>().CheckType(type, ref typeFind, ref instanceFind);
-            if (!checkType.Succeeded) {
-                //  return new Tuple<ServiceResult, AutoForm>(checkType, new AutoForm());
-            }
-            if (instanceFind is IAutoTask set) {
-                var autoTask = set.Init();
-                var list = Resolve<ITaskQueueService>().GetList(r => r.ModuleId == autoTask.ModuleId);
-            }
-            //    return ApiResult.Success
-            // 根据ModuldId，读取出最近10条
-            return null;
-        }
+        ///// <summary>
+        ///// 获取最近的执行任务
+        ///// </summary>
+        ///// <param name="type"></param>
+        ///// <returns></returns>
+        //[HttpGet]
+        //public ApiResult<List<TaskQueue>> List(string type) {
+        //    Type typeFind = null;
+        //    object instanceFind = null;
+        //    var checkType = Resolve<IUIBaseService>().CheckType(type, ref typeFind, ref instanceFind);
+        //    if (!checkType.Succeeded) {
+        //        //  return new Tuple<ServiceResult, AutoForm>(checkType, new AutoForm());
+        //    }
+        //    if (instanceFind is IAutoTask set) {
+        //        var autoTask = set.Init();
+        //        var list = Resolve<ITaskQueueService>().GetList(r => r.ModuleId == autoTask.ModuleId);
+        //    }
+        //    //    return ApiResult.Success
+        //    // 根据ModuldId，读取出最近10条
+        //    return null;
+        //}
 
         public ApiResult<AutoTask> GetView(string type) {
             Type typeFind = null;

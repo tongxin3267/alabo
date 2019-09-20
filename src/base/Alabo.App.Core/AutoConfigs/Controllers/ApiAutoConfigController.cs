@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
+using Alabo.App.Core.Admin.Domain.Services;
 using Alabo.App.Core.Api.Controller;
 using Alabo.App.Core.Api.Domain.Service;
 using Alabo.App.Core.Api.Filter;
@@ -17,6 +18,7 @@ using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.ViewFeatures;
 using Alabo.App.Core.AutoConfigs.Domain.Dtos;
+using Alabo.Domains.Entities;
 
 namespace Alabo.App.Core.Common.Controllers {
 
@@ -26,6 +28,88 @@ namespace Alabo.App.Core.Common.Controllers {
 
         public ApiAutoConfigController() : base() {
             BaseService = Resolve<IAutoConfigService>();
+        }
+
+        /// <summary>
+        ///     获取AutoConfig,系统提供超过100以上的AutoConfig，可以在数据结构中查看：示范值：WebSiteConfig、MoneyTypeConfig、UserTypeConfig。访问/Admin/Table/List
+        ///     查看所有自动配置
+        /// </summary>
+        /// <param name="parameter">参数</param>
+        [HttpGet]
+        [Display(Description = "获取AutoConfig")]
+        public ApiResult<List<JObject>> GetAutoConfigList([FromQuery] string parameter) {
+            if (parameter.IsNullOrEmpty()) {
+                ApiResult.Failure("类型不能为空");
+            }
+
+            var configType = Resolve<IAutoConfigService>().GetTypeByName(parameter);
+            if (configType == null) {
+                return ApiResult.Failure<List<JObject>>("输入参数不合法！");
+            }
+
+            var classPropertyAttribute = configType.GetAttribute<ClassPropertyAttribute>();
+            if (classPropertyAttribute != null) {
+                if (classPropertyAttribute.PageType == Domains.Enums.ViewPageType.List) {
+                    var configValue = Resolve<IAutoConfigService>().GetList(configType.FullName);
+                    //var configJson = Resolve<IApiService>().InstanceToApiImageUrl(configValue.ToJson());
+                    //configValue = configJson.ToObject<List<JObject>>();
+                    return ApiResult.Success(configValue);
+                }
+            }
+            return ApiResult.Failure<List<JObject>>("输入参数不合法！或使用Api/GetAutoConfig接口");
+        }
+
+        /// <summary>
+        ///     根据AutoConfig获取KeyValues，可以通过此来构建下拉菜单、picker.示范值：MoneyTypeConfig、UserTypeConfig
+        /// </summary>
+        /// <param name="type"></param>
+        [HttpGet]
+        [Display(Description = "根据AutoConfig获取KeyValues")]
+        public ApiResult<IList<KeyValue>> GetKeyValuesByAutoConfig([FromQuery] string type) {
+            if (type.IsNullOrEmpty()) {
+                return ApiResult.Failure<IList<KeyValue>>("类型不能为空");
+            }
+
+            var configValue = Resolve<ITypeService>().GetAutoConfigDictionary(type);
+            IList<KeyValue> keyValues = new List<KeyValue>();
+            foreach (var item in configValue) {
+                var keyValue = new KeyValue {
+                    Name = item.Value.ToStr(),
+                    Key = item.Key,
+                    Value = item.Value.ToStr()
+                };
+                keyValues.Add(keyValue);
+            }
+
+            return ApiResult.Success(keyValues);
+        }
+
+        /// <summary>
+        ///     获取AutoConfig,系统提供超过100以上的AutoConfig，可以在数据结构中查看：示范值：WebSiteConfig、MoneyTypeConfig、UserTypeConfig。访问/Admin/Table/List
+        ///     查看所有自动配置
+        /// </summary>
+        /// <param name="parameter">参数</param>
+        [HttpGet]
+        [Display(Description = "获取AutoConfig")]
+        public ApiResult<object> GetAutoConfig([FromQuery] string parameter) {
+            if (parameter.IsNullOrEmpty()) {
+                ApiResult.Failure("类型不能为空");
+            }
+
+            var configType = Resolve<IAutoConfigService>().GetTypeByName(parameter);
+            if (configType == null) {
+                return ApiResult.Failure<object>("输入参数不合法！");
+            }
+
+            var classPropertyAttribute = configType.GetAttribute<ClassPropertyAttribute>();
+            if (classPropertyAttribute != null) {
+                if (classPropertyAttribute.PageType == Domains.Enums.ViewPageType.Edit) {
+                    var configValue = Resolve<IAutoConfigService>().GetValue(configType.FullName);
+                    configValue = Resolve<IApiService>().InstanceToApiImageUrl(configValue);
+                    return ApiResult.Success(configValue);
+                }
+            }
+            return ApiResult.Failure<object>("输入参数不合法！或使用Api/GetAutoConfigList接口");
         }
 
         /// <summary>
