@@ -13,8 +13,8 @@ namespace Alabo.App.Core.Common {
             //导入地址数据 ,从js文件导入,如果从高德地图导入会导致地址库不同步的问题
             Ioc.Resolve<IRegionService>().InitRegion();
 
-            // 导入商圈数据
-            Ioc.Resolve<ICircleService>().Init();
+            //// 导入商圈数据
+            //Ioc.Resolve<ICircleService>().Init();
 
             // 导入Schedule数据
             Ioc.Resolve<IScheduleService>().Init();

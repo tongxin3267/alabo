@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.App.Agent.Circle.Domain.Entities;
 using Alabo.App.Core.ApiStore.MiniProgram.Clients;
 using Alabo.App.Core.Common.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Enum;

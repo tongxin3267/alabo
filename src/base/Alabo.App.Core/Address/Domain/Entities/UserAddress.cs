@@ -15,12 +15,11 @@ namespace Alabo.App.Core.User.Domain.Entities {
     /// <summary>
     ///     用户地址
     /// </summary>
-    [ClassProperty(Name = "用户地址", PostApi = "Api/UserAddress/SaveOrderAddress", ListApi = "Api/UserAddress/Get", PageType = ViewPageType.List,
-        SuccessReturn = "Api/UserAddress/Get", Icon = IconFontawesome.address_book,
+    [ClassProperty(Name = "用户地址", PageType = ViewPageType.List, Icon = IconFontawesome.address_book,
         SideBarType = SideBarType.UserAddressSideBar)]
     [BsonIgnoreExtraElements]
     [AutoDelete(IsAuto = true)]
-    [Table("User_UserAddress")]
+    [Table("Address_UserAddress")]
     public class UserAddress : AggregateMongodbUserRoot<UserAddress> {
 
         /// <summary>
