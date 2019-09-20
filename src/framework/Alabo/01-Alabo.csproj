@@ -22,8 +22,9 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <ProjectGuid>{86D265D9-1BB5-465D-8838-64C1C9B7836F}</ProjectGuid>
-    <AssemblyName />
+    <AssemblyName>Alabo</AssemblyName>
     <LangVersion>7.1</LangVersion>
+    <RootNamespace>Alabo</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>

@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Alabo.Core\Alabo.Core.csproj" />
-    <ProjectReference Include="..\Alabo.WebApi\Alabo.WebApi.csproj" />
+    <ProjectReference Include="..\Alabo.WebApi\Alabo.Web.Api.csproj" />
     <ProjectReference Include="..\Alabo\Alabo.csproj" />
   </ItemGroup>
 
