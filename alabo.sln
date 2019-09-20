@@ -68,6 +68,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04.tool", "04.tool", "{FF485353-3506-44D6-BEE4-16154FD3527D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-items", "solution-items", "{3CA48181-8A4D-47F7-9CBF-C52E996B6493}"
+	ProjectSection(SolutionItems) = preProject
+		contributing.md = contributing.md
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03.Alabo.Tool.Office", "src\tool\Alabo.Tool.Office\03.Alabo.Tool.Office.csproj", "{CB405255-F65E-48B0-8E15-5E26993497EF}"
 EndProject

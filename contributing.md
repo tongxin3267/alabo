@@ -66,14 +66,6 @@ If you're creating a bug/problem report, please include followings:
 
 Only English!
 
-### Stack Overflow
-
-You can use StackOverflow for your questions about using the framework, templates and samples:
-
-https://stackoverflow.com/questions/tagged/aspnetboilerplate
-
-Use `aspnetboilerplate` tag in your questions.
-
 
 
 
