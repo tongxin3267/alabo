@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Core.Common.Domain.Services;
+﻿using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Core.User.Domain.Entities.Extensions;
 using Alabo.App.Core.User.Domain.Repositories;
 using Alabo.App.Core.User.ViewModels;
 using Alabo.App.Core.User.ViewModels.Admin;
 using Alabo.Core.Extensions;
 using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Attributes;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
@@ -20,6 +15,9 @@ using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Schedules;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.App.Core.User.Domain.Services {
 
@@ -38,16 +36,6 @@ namespace Alabo.App.Core.User.Domain.Services {
             if (!_parentMapCache.TryGetValue(userId, out var result)) {
                 result = Repository<IUserMapRepository>().GetParentMap(userId);
                 if (result != null) {
-                    //result.GradeInfoExtension = result.GradeInfo.DeserializeJson<GradeInfoExtension>();
-                    //if (result.GradeInfoExtension == null) {
-                    //    result.GradeInfoExtension = new GradeInfoExtension();
-                    //}
-
-                    result.ShopSaleExtension = result.ShopSaleInfo.DeserializeJson<ShopSaleExtension>();
-                    if (result.ShopSaleExtension == null) {
-                        result.ShopSaleExtension = new ShopSaleExtension();
-                    }
-
                     result.ParentMapList = result.ParentMap.DeserializeJson<List<ParentMap>>();
                     if (result.ParentMapList == null) {
                         result.ParentMapList = new List<ParentMap>();
@@ -70,11 +58,6 @@ namespace Alabo.App.Core.User.Domain.Services {
                 //if (userMap.GradeInfoExtension == null) {
                 //    userMap.GradeInfoExtension = new GradeInfoExtension();
                 //}
-
-                userMap.ShopSaleExtension = userMap.ShopSaleInfo.DeserializeJson<ShopSaleExtension>();
-                if (userMap.ShopSaleExtension == null) {
-                    userMap.ShopSaleExtension = new ShopSaleExtension();
-                }
 
                 userMap.ParentMapList = userMap.ParentMap.DeserializeJson<List<ParentMap>>();
                 if (userMap.ParentMapList == null) {
@@ -168,22 +151,6 @@ namespace Alabo.App.Core.User.Domain.Services {
             }
 
             return null;
-        }
-
-        /// <summary>
-        ///     更新销售业绩
-        /// </summary>
-        /// <param name="userId">用户Id</param>
-        /// <param name="shopSaleExtension"></param>
-        [Method(RunInUrl = true)]
-        public void UpdateShopSale(long userId, ShopSaleExtension shopSaleExtension) {
-            var userMap = GetSingle(userId);
-            if (userMap != null) {
-                var dataUserMap = GetSingle(r => r.UserId == userId);
-                dataUserMap.ShopSaleExtension.ModifiedTime = DateTime.Now;
-                dataUserMap.ShopSaleInfo = shopSaleExtension.ToJson();
-                Update(dataUserMap);
-            }
         }
 
         /// <summary>

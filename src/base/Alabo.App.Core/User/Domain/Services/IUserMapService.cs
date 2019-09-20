@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Core.User.Domain.Entities.Extensions;
+﻿using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.ViewModels;
 using Alabo.App.Core.User.ViewModels.Admin;
-using Alabo.Domains.Attributes;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using System.Collections.Generic;
 
 namespace Alabo.App.Core.User.Domain.Services {
 
@@ -51,14 +49,6 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// </summary>
         /// <param name="userMap"></param>
         IEnumerable<Entities.User> GetTeamUser(UserMap userMap);
-
-        /// <summary>
-        ///     更新销售业绩
-        /// </summary>
-        /// <param name="userId">用户Id</param>
-        /// <param name="shopSaleExtension"></param>
-        [Method(RunInUrl = true)]
-        void UpdateShopSale(long userId, ShopSaleExtension shopSaleExtension);
 
         /// <summary>
         ///     更新所有用户的组织架构图

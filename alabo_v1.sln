@@ -57,6 +57,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alabo.WebApi", "src\core\Al
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alabo.UI", "src\core\Alabo.UI\Alabo.UI.csproj", "{F0924E7E-1C3F-4161-9EB8-F7FBD05A8455}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alabo.App.Cloud", "src\base\Alabo.App.Cloud\Alabo.App.Cloud.csproj", "{5CC3FA3B-C826-4FCA-8C70-D92C7DE3F7CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -147,6 +149,10 @@ Global
 		{F0924E7E-1C3F-4161-9EB8-F7FBD05A8455}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F0924E7E-1C3F-4161-9EB8-F7FBD05A8455}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0924E7E-1C3F-4161-9EB8-F7FBD05A8455}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CC3FA3B-C826-4FCA-8C70-D92C7DE3F7CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CC3FA3B-C826-4FCA-8C70-D92C7DE3F7CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CC3FA3B-C826-4FCA-8C70-D92C7DE3F7CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CC3FA3B-C826-4FCA-8C70-D92C7DE3F7CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -178,6 +184,7 @@ Global
 		{D41D65EC-32CD-4E6A-BE84-FF514DDAF478} = {DE2736F2-3D89-4B20-BF9B-049DEE71FF9B}
 		{3A303DD5-09D1-4FF9-9F97-04BEAD22B782} = {AB3D1F36-F7F5-45C6-8686-F5F5962B782B}
 		{F0924E7E-1C3F-4161-9EB8-F7FBD05A8455} = {AB3D1F36-F7F5-45C6-8686-F5F5962B782B}
+		{5CC3FA3B-C826-4FCA-8C70-D92C7DE3F7CF} = {DE2736F2-3D89-4B20-BF9B-049DEE71FF9B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A1E90677-FAAA-4BD1-8798-FCFEE91E8323}
