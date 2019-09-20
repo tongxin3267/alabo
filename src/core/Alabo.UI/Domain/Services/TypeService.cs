@@ -111,41 +111,42 @@ namespace Alabo.App.Core.Admin.Domain.Services {
             if (isAllSelect) {
                 dictionary.Add("-1", "所有");
             }
-            IList<JObject> list = Resolve<IAutoConfigService>().GetList(config.FullName);
 
-            if (!list.Any()) {
-                return dictionary;
-            }
+            //IList<JObject> list = Resolve<IAutoConfigService>().GetList(config.FullName);
 
-            var TextField = string.Empty; //如果不存在Main特性则取Id字段显示
-            foreach (var item in config.GetProperties()) {
-                if (item.GetAttribute<MainAttribute>() == null) {
-                    continue;
-                }
+            //if (!list.Any()) {
+            //    return dictionary;
+            //}
 
-                TextField = item.Name;
-                break;
-            }
+            //var TextField = string.Empty; //如果不存在Main特性则取Id字段显示
+            //foreach (var item in config.GetProperties()) {
+            //    if (item.GetAttribute<MainAttribute>() == null) {
+            //        continue;
+            //    }
 
-            if (TextField.IsNullOrEmpty()) {
-                foreach (var item in config.GetProperties()) {
-                    if (item.Name == "Name") {
-                        TextField = item.Name;
-                    }
-                }
-            }
+            //    TextField = item.Name;
+            //    break;
+            //}
 
-            if (TextField.IsNullOrEmpty()) {
-                TextField = "Id";
-            }
+            //if (TextField.IsNullOrEmpty()) {
+            //    foreach (var item in config.GetProperties()) {
+            //        if (item.Name == "Name") {
+            //            TextField = item.Name;
+            //        }
+            //    }
+            //}
 
-            foreach (var data in list) {
-                var key = data["Id"].ToString();
-                var value = data[TextField];
-                if (!dictionary.Keys.Contains(key)) {
-                    dictionary.Add(key, value);
-                }
-            }
+            //if (TextField.IsNullOrEmpty()) {
+            //    TextField = "Id";
+            //}
+
+            //foreach (var data in list) {
+            //    var key = data["Id"].ToString();
+            //    var value = data[TextField];
+            //    if (!dictionary.Keys.Contains(key)) {
+            //        dictionary.Add(key, value);
+            //    }
+            //}
 
             return dictionary;
         }
