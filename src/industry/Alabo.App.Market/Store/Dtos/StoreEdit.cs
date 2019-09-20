@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Alabo.App.Core.User;
-using Alabo.App.Core.User.Domain.Entities;
+﻿using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Core.UserType.Domain.Enums;
 using Alabo.App.Shop.Store.Domain.Entities.Extensions;
 using Alabo.App.Shop.Store.Domain.Services;
-using Alabo.Datas.Stores;
+using Alabo.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
-using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
+using System;
 
 namespace Alabo.App.Market.Store.Dtos {
 

@@ -8,7 +8,6 @@ using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Core.UserType.Domain.CallBacks;
 using Alabo.App.Market.UserRightss.Domain.CallBack;
 using Alabo.App.Market.UserRightss.Domain.Dtos;
 using Alabo.App.Market.UserRightss.Domain.Entities;
@@ -36,6 +35,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ZKCloud.App.Core.UserType.Domain.CallBacks;
 
 namespace Alabo.App.Market.UserRightss.Domain.Services {
 

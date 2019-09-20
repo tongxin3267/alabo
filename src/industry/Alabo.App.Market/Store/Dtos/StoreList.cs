@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using Alabo.App.Core.Admin.Domain.Services;
-using Alabo.App.Core.Employes.Domain.Services;
-using Alabo.App.Core.UserType.Domain.Enums;
-using Alabo.App.Core.UserType.Modules.Supplier;
-using Alabo.App.Shop.Store.Domain.Services;
+﻿using Alabo.App.Shop.Store.Domain.Services;
+using Alabo.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Mapping;
 using Alabo.UI;
 using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Alabo.App.Market.Store.Dtos {
 
@@ -118,10 +114,10 @@ namespace Alabo.App.Market.Store.Dtos {
         /// <value>
         ///     The supplier grade configuration.
         /// </value>
-        [Display(Name = "等级")]
-        [Field(ControlsType = ControlsType.DropdownList, Width = "180", ListShow = false, EditShow = false,
-            DataSource = "Alabo.App.Core.UserType.Modules.Supplier.SupplierGradeConfig", SortOrder = 4)]
-        public SupplierGradeConfig SupplierGradeConfig { get; set; }
+        //[Display(Name = "等级")]
+        //[Field(ControlsType = ControlsType.DropdownList, Width = "180", ListShow = false, EditShow = false,
+        //    DataSource = "Alabo.App.Core.UserType.Modules.Supplier.SupplierGradeConfig", SortOrder = 4)]
+        //public SupplierGradeConfig SupplierGradeConfig { get; set; }
 
         /// <summary>
         ///     Gets or sets the name of the grade.
@@ -185,7 +181,7 @@ namespace Alabo.App.Market.Store.Dtos {
             var result = new PagedList<StoreList>();
             foreach (var item in stores) {
                 var view = AutoMapping.SetValue<StoreList>(item);
-                view.Status = item.Status;
+                //view.Status = item.Status;
 
                 result.Add(view);
             }
