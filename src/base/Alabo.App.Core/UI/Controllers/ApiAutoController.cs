@@ -33,6 +33,7 @@ using Alabo.Web.ViewFeatures;
 using Newtonsoft.Json;
 using Alabo.App.Core.User;
 using IAutoPreview = Alabo.UI.AutoPreviews.IAutoPreview;
+using Alabo.App.Core.AutoConfigs.Domain.Dtos;
 
 namespace Alabo.App.Core.UI.Controllers {
 

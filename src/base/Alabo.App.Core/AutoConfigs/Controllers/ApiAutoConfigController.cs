@@ -16,6 +16,7 @@ using ZKCloud.Open.ApiBase.Models;
 using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.ViewFeatures;
+using Alabo.App.Core.AutoConfigs.Domain.Dtos;
 
 namespace Alabo.App.Core.Common.Controllers {
 
@@ -173,14 +174,5 @@ namespace Alabo.App.Core.Common.Controllers {
             }
             return ApiResult.Failure<List<JObject>>("输入参数不合法！或使用Api/GetAutoConfig接口");
         }
-    }
-
-    /// <summary>
-    /// 删除记录
-    /// </summary>
-    public class AutoConfigDelete {
-        public string Type { get; set; }
-
-        public Guid Id { get; set; }
     }
 }

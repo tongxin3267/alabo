@@ -1,7 +1,6 @@
-﻿using System;
-using Alabo.App.Core.Admin.Domain.Extensions;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using System;
 
 namespace Alabo.App.Core.Admin.Domain.Services {
 
@@ -9,10 +8,6 @@ namespace Alabo.App.Core.Admin.Domain.Services {
     ///     通用表单服务
     /// </summary>
     public interface IAdminTableService : IService {
-
-        ServiceResult Settings(TableSetting tableSetting, long userId);
-
-        TableSetting GetSetting(string key, long userId);
 
         /// <summary>
         ///     导出表格

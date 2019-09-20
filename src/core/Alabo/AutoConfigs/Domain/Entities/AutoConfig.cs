@@ -48,9 +48,6 @@ namespace Alabo.App.Core.Common.Domain.Entities {
             builder.Property(e => e.Type).HasMaxLength(255);
             builder.Property(p => p.Value).HasColumnType("ntext");
             builder.Ignore(e => e.Version);
-            if (TenantContext.IsTenant) {
-                // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
-            }
         }
     }
 }
