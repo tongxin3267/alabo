@@ -1,25 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Reflection;
-using Castle.Core.Internal;
-using Microsoft.AspNetCore.Mvc;
-using Alabo.App.Core.Admin.Domain.Services;
+﻿using Alabo.App.Core.Admin.Domain.Services;
 using Alabo.App.Core.Api.Controller;
 using Alabo.App.Core.Api.Filter;
-using Alabo.App.Core.Common.Controllers;
-using Alabo.App.Core.Common.Domain.Entities;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.UI.Domain.Services;
 using Alabo.App.Core.UI.Dtos;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Extensions;
-using ZKCloud.Open.ApiBase.Models;
-using ZKCloud.Open.DynamicExpression;
-using Alabo.RestfulApi;
 using Alabo.UI;
 using Alabo.UI.AutoArticles;
 using Alabo.UI.AutoForms;
@@ -28,12 +13,13 @@ using Alabo.UI.AutoNews;
 using Alabo.UI.AutoPreviews;
 using Alabo.UI.AutoReports;
 using Alabo.UI.AutoTables;
-using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.ViewFeatures;
-using Newtonsoft.Json;
-using Alabo.App.Core.User;
+using Castle.Core.Internal;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using ZKCloud.Open.ApiBase.Models;
 using IAutoPreview = Alabo.UI.AutoPreviews.IAutoPreview;
-using Alabo.App.Core.AutoConfigs.Domain.Dtos;
 
 namespace Alabo.App.Core.UI.Controllers {
 
@@ -304,74 +290,6 @@ namespace Alabo.App.Core.UI.Controllers {
             } else {
                 return ApiResult.Failure<List<AutoReport>>($"非IAutoReport类型，请确认{type}输入是否正确");
             }
-        }
-
-        /// <summary>
-        /// 删除会员卡
-        /// </summary>
-        /// <returns></returns>
-        [HttpDelete]
-        public ApiResult DeleteUserCard(AutoConfigDelete entity) {
-            #region
-            entity.Type = "UserGradeConfig";
-            var HasGrade = Resolve<IUserService>().GetList();
-
-            if (HasGrade != null) {
-                foreach (var item in HasGrade) {
-                    if (item.GradeId == entity.Id) {
-                        return ApiResult.Failure("该等级下有会员，无法删除！");
-                    }
-                }
-            }
-            if (entity == null) {
-                return ApiResult.Failure("参数不能为空");
-            }
-
-            if (entity.Type.IsNullOrEmpty()) {
-                return ApiResult.Failure("类型不能为空");
-            }
-
-            var type = entity.Type.GetTypeByName();
-            if (type == null) {
-                return ApiResult.Failure("类型不存在");
-            }
-            var attr = type.GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
-            var configDescription = new ClassDescription(type.GetTypeInfo());
-
-            if (attr != null && !string.IsNullOrEmpty(attr.Validator)) {
-                var script = string.Format(attr.Validator, entity.Id);
-                var isValidated = Resolve<IAutoConfigService>().Check(script);
-                if (isValidated) {
-                    return ApiResult.Failure("删除失败" + attr.ValidateMessage);
-                }
-            }
-
-            var list = Resolve<IAutoConfigService>().GetObjectList(type);
-            object deleteItem = null;
-            foreach (var item in list) {
-                if (item.GetType().GetProperty("Id").GetValue(item).ToGuid() == entity.Id.ToGuid()) {
-                    if (type.GetTypeInfo().BaseType.Name == "BaseGradeConfig") {
-                        if (item.GetType().GetProperty("IsDefault").GetValue(item).ToBoolean()) {
-                            continue;
-                        }
-                    }
-
-                    deleteItem = item;
-                    break;
-                }
-            }
-
-            if (deleteItem != null) {
-                list.Remove(deleteItem);
-            }
-
-            var config = Resolve<IAutoConfigService>().GetConfig(type.FullName);
-            config.Value = JsonConvert.SerializeObject(list);
-            Resolve<IAutoConfigService>().AddOrUpdate(config);
-            Resolve<IAutoConfigService>().Log($"成功删除配置,IAutoConfig配置类型为:{type.GetTypeInfo().Name},配置ID:{entity.Id}");
-
-            return ApiResult.Success("删除成功");
-            #endregion
         }
     }
 }

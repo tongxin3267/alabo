@@ -1,17 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Alabo.App.Core.Admin.Domain.Services;
+﻿using Alabo.App.Core.Admin.Domain.Services;
 using Alabo.App.Core.Api.Controller;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.UI.Domain.Services;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
-using ZKCloud.Open.ApiBase.Models;
 using Alabo.UI.AutoTables;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Core.Common.Controllers {
 
@@ -168,10 +166,10 @@ namespace Alabo.App.Core.Common.Controllers {
 
             var intances = type.GetInstanceByName();
 
-            if (intances is IRelation) {
-                var result = Resolve<IRelationService>().GetKeyValues2(type).ToList();
-                return ApiResult.Success(result);
-            }
+            //if (intances is IRelation) {
+            //    var result = Resolve<IRelationService>().GetKeyValues2(type).ToList();
+            //    return ApiResult.Success(result);
+            //}
 
             //enum
             if (find.IsEnum) {
@@ -179,28 +177,32 @@ namespace Alabo.App.Core.Common.Controllers {
                 if (keyValues == null) {
                     return ApiResult.Failure<List<KeyValue>>("枚举不存在");
                 }
+
                 return ApiResult.Success(keyValues.ToList());
             } else {
                 //Auto config
-                var configValue = Resolve<ITypeService>().GetAutoConfigDictionary(type);
+                //var configValue = Resolve<ITypeService>().GetAutoConfigDictionary(type);
 
-                if (configValue == null) {
-                    return ApiResult.Failure<List<KeyValue>>($"{type}不存在");
-                }
+                //if (configValue == null) {
+                //    return ApiResult.Failure<List<KeyValue>>($"{type}不存在");
+                // }
 
                 var keyValues = new List<KeyValue>();
                 if (type.Contains("MoneyTypeConfig")) {
-                    var moneyConfig = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>().Where(x => x.Status == Domains.Enums.Status.Normal && x.IsShowFront);
-                    foreach (var item in moneyConfig) {
-                        keyValues.Add(new KeyValue { Key = item.Id, Value = item.Name });
-                    }
-                } else {
-                    foreach (var item in configValue) {
-                        keyValues.Add(new KeyValue { Key = item.Key, Value = item.Value });
-                    }
+                    //    var moneyConfig = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>().Where(x => x.Status == Domains.Enums.Status.Normal && x.IsShowFront);
+                    //    foreach (var item in moneyConfig) {
+                    //        keyValues.Add(new KeyValue { Key = item.Id, Value = item.Name });
+                    //    }
+                    //} else {
+                    //    foreach (var item in configValue) {
+                    //        keyValues.Add(new KeyValue { Key = item.Key, Value = item.Value });
+                    //    }
+                    //}
+                    return ApiResult.Success(keyValues);
                 }
-                return ApiResult.Success(keyValues);
             }
+
+            return null;
         }
     }
 }
