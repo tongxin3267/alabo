@@ -8,6 +8,8 @@ using Alabo.Mapping;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
 using Alabo.Web.Mvc.Attributes;
+using Alabo.App.Agent.Circle.Domain.Services;
+using Alabo.App.Agent.Circle.Domain.Entities;
 
 namespace Alabo.App.Core.Common.Domain.Entities {
 

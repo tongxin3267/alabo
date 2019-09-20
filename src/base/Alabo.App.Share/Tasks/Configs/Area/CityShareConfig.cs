@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Alabo.App.Core.Common.Domain.Entities;
+﻿using Alabo.App.Core.Common.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Core.UserType.Domain.Services;
 using Alabo.App.Share.Tasks.Base;
 using Alabo.App.Share.Tasks.Modules;
 using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.Core.Enums.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
-using ZKCloud.Open.ApiBase.Models;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using ZKCloud.Open.ApiBase.Models;
 using ICityService = Alabo.App.Agent.Citys.Domain.Services.ICityService;
 
 namespace Alabo.App.Share.Tasks.Configs.Area {

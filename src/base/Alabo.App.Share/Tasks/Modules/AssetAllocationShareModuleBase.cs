@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Core.Common.Domain.Services;
+﻿using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Core.UserType.Domain.Services;
 using Alabo.App.Share.Tasks.Base;
 using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.Helpers;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.App.Share.Tasks.Modules {
 
@@ -48,13 +47,13 @@ namespace Alabo.App.Share.Tasks.Modules {
                         if (TriggerType == TriggerType.Order) {
                             var order = Ioc.Resolve<IOrderService>().GetSingle(orderId);
                             if (order != null) {
-                                var storeUser = Ioc.Resolve<ITypeUserService>()
-                                    .GetStoreUser(order.StoreId, shareUser.Id);
-                                if (storeUser == null) {
-                                    //分润用户不是该店铺的用户 退出
-                                    return;
-                                    // ExecuteResult<ITaskResult>.Cancel($"分润用户不是该店铺的用户");
-                                }
+                                //var storeUser = Ioc.Resolve<ITypeUserService>()
+                                //    .GetStoreUser(order.StoreId, shareUser.Id);
+                                //if (storeUser == null) {
+                                //    //分润用户不是该店铺的用户 退出
+                                //    return;
+                                //    // ExecuteResult<ITaskResult>.Cancel($"分润用户不是该店铺的用户");
+                                //}
                             }
                         }
                     }
