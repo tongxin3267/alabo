@@ -12,6 +12,9 @@
 
   <ItemGroup>
     <Folder Include="Reflections\Services\" />
+    <Folder Include="Logs\" />
+    <Folder Include="Tables\" />
+    <Folder Include="Notifications\" />
   </ItemGroup>
 
 </Project>
