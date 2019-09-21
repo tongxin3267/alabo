@@ -1,5 +1,6 @@
 ﻿using System;
 using Alabo.Extensions;
+using Alabo.RestfulApi;
 using ZKCloud.Open.ApiBase.Connectors;
 using ZKCloud.Open.ApiBase.Formatters;
 
@@ -11,7 +12,7 @@ namespace Alabo.App.Core.ApiStore.AMap.District {
     ///     http://restapi.amap.com/v3/config/district?key=7a0bfcba0cbd3490c8cbf1331a5e68c2&keywords=&subdistrict=3&extensions
     ///     =base
     /// </summary>
-    public class RegionMapClient : ApiStoreClient {
+    public class RegionMapClient : ClientBase {
         private static readonly Func<IConnector> _connectorCreator = () => new HttpClientConnector();
 
         private static readonly Func<IDataFormatter> _formmaterCreator = () => new JsonFormatter();
@@ -27,7 +28,7 @@ namespace Alabo.App.Core.ApiStore.AMap.District {
         ///     Initializes a new instance of the <see cref="MiniProgramClient" /> class.
         /// </summary>
         public RegionMapClient()
-            : base(_baseUri, _connectorCreator(), _formmaterCreator()) {
+            : base(_baseUri) {
         }
 
         /// <summary>

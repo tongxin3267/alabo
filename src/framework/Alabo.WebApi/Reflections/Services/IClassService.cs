@@ -6,8 +6,7 @@ using Alabo.Web.ViewFeatures;
 namespace Alabo.App.Core.Admin.Domain.Services {
 
     /// <summary>
-    ///     Interface ICalssService
-    ///     类特性
+    ///     类反射相关操作
     /// </summary>
     public interface IClassService : IService {
 

@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Alabo\01-Alabo.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Reflections\Services\" />
+  </ItemGroup>
+
 </Project>
