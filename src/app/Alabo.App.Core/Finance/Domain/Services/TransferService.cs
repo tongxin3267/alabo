@@ -277,7 +277,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
             var moneyConfigs = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
             view.CheckAmount = trade.Amount;
             view.User = Resolve<IUserService>().GetSingle(trade.UserId);
-            view.User.UserGradeConfig = userGardes.SingleOrDefault(e => e.Id == view.User.GradeId);
+
             view.MoneyType = moneyConfigs.SingleOrDefault(e => e.Id == trade.MoneyTypeId);
 
             view.TragetMoneyType =
@@ -285,7 +285,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
             view.TransferConfig = Resolve<IAutoConfigService>().GetList<TransferConfig>()
                 .SingleOrDefault(e => e.Id == trade.TradeExtension.Transfer.TransConfigId);
             view.TragetUser = Resolve<IUserService>().GetSingle(trade.TradeExtension.Transfer.OtherUserId);
-            view.TragetUser.UserGradeConfig = userGardes.SingleOrDefault(e => e.Id == view.TragetUser.GradeId);
+
             view.Serial = trade.Serial;
             view.Id = trade.Id;
             view.ServiceFee = trade.TradeExtension.Transfer.ServiceAmount;

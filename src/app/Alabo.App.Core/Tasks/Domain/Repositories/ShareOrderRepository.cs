@@ -21,6 +21,7 @@ using Alabo.Domains.Repositories.Extensions;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Schedules;
+using ZKCloud.Open.Message.Models;
 using Convert = System.Convert;
 
 namespace Alabo.App.Core.Tasks.Domain.Repositories {

@@ -40,14 +40,10 @@ namespace Alabo.App.Core.Tasks.Domain.Services {
             foreach (var type in GetAllTypes()) {
                 try {
                     long delay = 0;
-                    if (type == typeof(MessageQueueJob)) {
-                        delay = 3;
-                    } else {
-                        var config = Activator.CreateInstance(type, loggerFactory);
-                        var dynamicConfig = (dynamic)config;
-                        var timeSpan = (TimeSpan)dynamicConfig.DelayInterval;
-                        delay = timeSpan.TotalSeconds.ConvertToLong();
-                    }
+                    var config = Activator.CreateInstance(type, loggerFactory);
+                    var dynamicConfig = (dynamic)config;
+                    var timeSpan = (TimeSpan)dynamicConfig.DelayInterval;
+                    delay = timeSpan.TotalSeconds.ConvertToLong();
 
                     var find = list.FirstOrDefault(r => r.Type == type.FullName);
                     if (find == null) {

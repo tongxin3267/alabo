@@ -22,12 +22,12 @@ namespace Alabo.App.Core.User.Domain.Repositories {
             }
 
             var sql = @"INSERT INTO [dbo].[User_UserDetail]
-           ([UserId],[Password],[PayPassword] ,[IsServiceCenter] ,[ServiceCenterUserId],
+           ([UserId],[Password],[PayPassword] ,
 			[RegionId],[AddressId],[Sex],[Birthday]
            ,[CreateTime],[RegisterIp],[LoginNum],[LastLoginIp],[LastLoginTime]
            ,[OpenId] ,[ModifiedTime],[Remark])
      VALUES
-           (@UserId,@Password,@PayPassword ,@IsServiceCenter ,@ServiceCenterUserId,
+           (@UserId,@Password,@PayPassword ,
 			@RegionId,@AddressId,@Sex,@Birthday
            ,@CreateTime,@RegisterIp,@LoginNum,@LastLoginIp,@LastLoginTime
            ,@OpenId ,@ModifiedTime,@Remark)
@@ -37,8 +37,6 @@ namespace Alabo.App.Core.User.Domain.Repositories {
                 RepositoryContext.CreateParameter("@UserId", userDetail.UserId),
                 RepositoryContext.CreateParameter("@Password", userDetail.Password),
                 RepositoryContext.CreateParameter("@PayPassword", userDetail.PayPassword),
-                RepositoryContext.CreateParameter("@IsServiceCenter", userDetail.IsServiceCenter),
-                RepositoryContext.CreateParameter("@ServiceCenterUserId", userDetail.ServiceCenterUserId),
 
                 RepositoryContext.CreateParameter("@RegionId", userDetail.RegionId),
                 RepositoryContext.CreateParameter("@AddressId", userDetail.AddressId),
@@ -151,8 +149,6 @@ namespace Alabo.App.Core.User.Domain.Repositories {
             var UserDetail = new UserDetail {
                 Id = reader["Id"].ConvertToLong(0),
                 UserId = reader["UserId"].ConvertToLong(0),
-                IsServiceCenter = reader["IsServiceCenter"].ToBoolean(),
-                ServiceCenterUserId = reader["ServiceCenterUserId"].ConvertToLong(0),
                 RegionId = reader["RegionId"].ConvertToLong(),
                 AddressId = reader["AddressId"].ToString(),
                 Sex = (Sex)reader["Sex"].ConvertToInt(0),

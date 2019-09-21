@@ -14,7 +14,7 @@ namespace Alabo.App.Core.ApiStore.CallBacks {
     [ClassProperty(Name = "物流跟踪配置", Icon = "fa fa-puzzle-piece",
         SideBarType = SideBarType.ApiStoreSideBar,
         SortOrder = 2, Description = "物流跟踪配置")]
-    internal class LogisticsTrackConfig : BaseViewModel, IAutoConfig {
+    public class LogisticsTrackConfig : BaseViewModel, IAutoConfig {
 
         /// <summary>
         ///     是否启用

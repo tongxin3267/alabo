@@ -152,14 +152,10 @@ namespace Alabo.App.Core.User.Domain.Services {
                     var length = g.MeasureString(UserName, font);
                     g.DrawString(UserName, font, Brushes.Azure, (850 - length.Width) / 2, 270);
                     //获取等级
-                    var grade = Resolve<IUserService>().GetSingle(user.Id).UserGradeConfig;
+                    var grade = Resolve<IGradeService>().GetGrade(user.GradeId);
                     var gradeName = string.Empty;
                     if (grade != null) {
                         gradeName = grade.Name;
-                    }
-
-                    if (Resolve<IUserDetailService>().IsServiceCenter(user.Id)) {
-                        gradeName = gradeName + "（门店）";
                     }
 
                     // gradeName = "匠心" + gradeName;

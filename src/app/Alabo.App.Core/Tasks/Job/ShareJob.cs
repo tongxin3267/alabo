@@ -10,6 +10,7 @@ using Alabo.App.Core.Tasks.Domain.Repositories;
 using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Dependency;
+using Alabo.Exceptions;
 using Alabo.Runtime;
 using Alabo.Schedules.Job;
 
@@ -56,12 +57,12 @@ namespace Alabo.App.Core.Tasks.Job {
             if (shareOrder != null) {
                 try {
                     if (shareOrder.Status != ShareOrderStatus.Pending) {
-                        throw new MessageQueueHandleException(queueId, "分润订单状态不是待处理状态");
+                        throw new ValidException("分润订单状态不是待处理状态");
                     }
 
                     var order = scope.Resolve<IShareOrderRepository>().GetSingleNative(shareOrder.Id);
                     if (order.Status != ShareOrderStatus.Pending) {
-                        throw new MessageQueueHandleException(queueId, "分润订单状态不是待处理状态");
+                        throw new ValidException("分润订单状态不是待处理状态");
                     }
 
                     var moduleTypeArray = taskManager.GetModulePriceArray();

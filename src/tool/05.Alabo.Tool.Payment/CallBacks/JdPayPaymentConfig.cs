@@ -14,7 +14,7 @@ namespace Alabo.App.Core.ApiStore.CallBacks {
     [ClassProperty(Name = "京东支付配置", Icon = "fa fa-puzzle-piece",
         SideBarType = SideBarType.ApiStoreSideBar,
         SortOrder = 2, Description = "京东支付配置")]
-    internal class JdPayPaymentConfig : BaseViewModel, IAutoConfig {
+    public class JdPayPaymentConfig : BaseViewModel, IAutoConfig {
 
         /// <summary>
         ///     是否启用

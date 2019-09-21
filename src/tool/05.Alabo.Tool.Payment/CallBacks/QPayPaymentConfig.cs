@@ -14,7 +14,7 @@ namespace Alabo.App.Core.ApiStore.CallBacks {
     [ClassProperty(Name = "QQ钱包支付配置", Icon = "fa fa-puzzle-piece",
         SideBarType = SideBarType.ApiStoreSideBar,
         SortOrder = 2, Description = "QQ钱包支付配置")]
-    internal class QPayPaymentConfig : BaseViewModel, IAutoConfig {
+    public class QPayPaymentConfig : BaseViewModel, IAutoConfig {
 
         /// <summary>
         ///     是否启用

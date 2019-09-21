@@ -53,13 +53,5 @@ namespace Alabo.App.Core.Finance.Domain.Entities {
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [Field(ControlsType = ControlsType.TextBox, Width = "150", ListShow = true, SortOrder = 8)]
         public string Address { get; set; }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public PageResult<BankCard> PageTable(object query, AutoBaseModel autoModel) {
-            var model = Resolve<IBankCardService>().GetPagedList(query);
-            return ToPageResult(model);
-        }
     }
 }

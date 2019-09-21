@@ -14,7 +14,7 @@ namespace Alabo.App.Core.ApiStore.CallBacks {
     [ClassProperty(Name = "Paypal支付配置", Icon = "fa fa-puzzle-piece",
         SideBarType = SideBarType.ApiStoreSideBar,
         SortOrder = 2, Description = "Paypal支付配置")]
-    internal class PaypalPayPaymentConfig : BaseViewModel, IAutoConfig {
+    public class PaypalPayPaymentConfig : BaseViewModel, IAutoConfig {
 
         /// <summary>
         ///     是否启用

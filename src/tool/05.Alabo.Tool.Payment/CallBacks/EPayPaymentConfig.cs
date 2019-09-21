@@ -14,7 +14,7 @@ namespace Alabo.App.Core.ApiStore.CallBacks {
     [ClassProperty(Name = "网银支付配置", Icon = "fa fa-puzzle-piece",
         SideBarType = SideBarType.ApiStoreSideBar,
         SortOrder = 2, Description = "网银支付配置")]
-    internal class EPayPaymentConfig : BaseViewModel, IAutoConfig {
+    public class EPayPaymentConfig : BaseViewModel, IAutoConfig {
 
         /// <summary>
         ///     是否启用

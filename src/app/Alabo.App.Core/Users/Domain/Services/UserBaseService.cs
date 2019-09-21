@@ -164,17 +164,6 @@ namespace Alabo.App.Core.User.Domain.Services {
                 if (serviceUser.Status != Status.Normal) {
                     return new Tuple<ServiceResult, UserOutput>(ServiceResult.FailedWithMessage("服务中心用户状态不正常"), null);
                 }
-
-                //var servcieUserType = Ioc.Resolve<IUserTypeService>().GetSingle(r =>
-                //    r.UserId == serviceUser.Id && r.UserTypeId == UserTypeEnum.ServiceCenter.GetFieldId());
-                //if (servcieUserType == null) {
-                //    return new Tuple<ServiceResult, UserOutput>(ServiceResult.FailedWithMessage("该用户的门店不存在"), null);
-                //}
-
-                //if (servcieUserType.Status != UserTypeStatus.Success) {
-                //    return new Tuple<ServiceResult, UserOutput>(ServiceResult.FailedWithMessage("门店状态不正常"), null);
-                //}
-                user.Detail.ServiceCenterUserId = serviceUser.Id;
             }
 
             if (!regInput.OpenId.IsNullOrEmpty()) {

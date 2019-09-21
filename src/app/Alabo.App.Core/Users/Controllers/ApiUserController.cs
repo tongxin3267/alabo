@@ -416,7 +416,7 @@ namespace Alabo.App.Core.User.Controllers {
             userOutput.GradeName = userGrade.Count > 0 ? userGrade[0]?.Name : string.Empty;
             userOutput.Sex = userDetail.Sex.GetDisplayName();
             userOutput.ParentUserName = Resolve<IUserService>().GetSingle(u => u.Id == user.ParentId)?.UserName;
-            userOutput.IsServiceCenter = userDetail.IsServiceCenter;
+
             userOutput.RegionName = Resolve<IRegionService>().GetRegionNameById(userDetail.RegionId);
             if (!userDetail.Avator.IsNullOrEmpty()) {
                 userOutput.Avator = Resolve<IApiService>().ApiImageUrl(userDetail.Avator);

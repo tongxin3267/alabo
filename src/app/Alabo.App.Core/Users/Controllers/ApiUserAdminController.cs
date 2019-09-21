@@ -78,13 +78,6 @@ namespace Alabo.App.Core.User.Controllers {
                 view.IdentityStatus = identity.Status;
             }
 
-            if (user.Detail.ServiceCenterUserId > 0) {
-                var serviceUser = Resolve<IUserService>().GetSingle(user.Detail.ServiceCenterUserId);
-                if (serviceUser != null) {
-                    view.ServiceCenterUserName = serviceUser.UserName;
-                }
-            }
-
             return ApiResult.Success(view);
         }
 
@@ -121,7 +114,7 @@ namespace Alabo.App.Core.User.Controllers {
 
                 find.Remark = view.UserDetail.Remark;
                 find.Sex = view.Sex;
-                find.ServiceCenterUserId = view.UserDetail.ServiceCenterUserId;
+
                 find.Birthday = view.UserDetail.Birthday;
                 find.RegionId = view.UserDetail.RegionId;
                 find.RegionId = view.RegionId;
@@ -137,13 +130,6 @@ namespace Alabo.App.Core.User.Controllers {
                     if (serviceUser == null) {
                         return ApiResult.Failure($"您输入的{serviceUserTypeName}不存在，请重新输入");
                     }
-
-                    var isServiceCenter = Resolve<IUserDetailService>().IsServiceCenter(serviceUser.Id);
-                    if (!isServiceCenter) {
-                        return ApiResult.Failure($"您输入的{serviceUserTypeName}不存在，请重新输入");
-                    }
-
-                    find.ServiceCenterUserId = serviceUser.Id;
                 }
 
                 var result = Resolve<IUserAdminService>().UpdateUserDetail(find);

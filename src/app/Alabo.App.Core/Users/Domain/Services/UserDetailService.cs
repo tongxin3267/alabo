@@ -65,9 +65,6 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// <param name="userId">用户Id</param>
         public bool IsServiceCenter(long userId) {
             var userDetail = GetSingle(r => r.UserId == userId);
-            if (userDetail != null) {
-                return userDetail.IsServiceCenter;
-            }
 
             return false;
         }
@@ -359,14 +356,10 @@ namespace Alabo.App.Core.User.Domain.Services {
                     var length = g.MeasureString(UserName, font);
                     g.DrawString(UserName, font, Brushes.Azure, (850 - length.Width) / 2, 270);
                     //获取等级
-                    var grade = Resolve<IUserService>().GetSingle(user.Id).UserGradeConfig;
+                    var grade = Resolve<IGradeService>().GetGrade(user.GradeId);
                     var gradeName = string.Empty;
                     if (grade != null) {
                         gradeName = grade.Name;
-                    }
-
-                    if (Resolve<IUserDetailService>().IsServiceCenter(user.Id)) {
-                        gradeName = gradeName + "（门店）";
                     }
 
                     // gradeName = "匠心" + gradeName;
@@ -436,11 +429,6 @@ namespace Alabo.App.Core.User.Domain.Services {
             userOutput.ParentUserName = Resolve<IUserService>().GetSingle(u => u.Id == user.ParentId)?.UserName;
             userOutput.IdentityStatusName = userOutput.IdentityStatus.GetDisplayName();
             userOutput.OpenId = user.Detail.OpenId;
-
-            var serviceUser = Resolve<IUserService>().GetSingle(user.Detail.ServiceCenterUserId);
-            if (serviceUser != null) {
-                userOutput.ServiceCenterName = serviceUser.GetUserName();
-            }
 
             var parentUser = Resolve<IUserService>().GetSingle(user.ParentId);
             if (parentUser != null) {

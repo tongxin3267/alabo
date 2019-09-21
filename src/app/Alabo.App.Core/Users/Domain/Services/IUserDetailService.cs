@@ -58,12 +58,6 @@ namespace Alabo.App.Core.User.Domain.Services {
         ServiceResult ChangeMobile(ViewChangMobile view);
 
         /// <summary>
-        ///     判断是否是门店
-        /// </summary>
-        /// <param name="userId">会员Id</param>
-        bool IsServiceCenter(long userId);
-
-        /// <summary>
         ///     获取s the 会员 output.
         /// </summary>
         /// <param name="userId">会员Id</param>

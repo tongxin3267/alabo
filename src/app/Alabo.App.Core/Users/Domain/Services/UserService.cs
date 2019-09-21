@@ -146,7 +146,7 @@ namespace Alabo.App.Core.User.Domain.Services {
                 result = Repository<IUserRepository>().GetUserDetail(userId);
                 if (result != null) {
                     ObjectCache.Set(cacheKey, result);
-                    result.UserGradeConfig = Resolve<IGradeService>().GetGrade(result.GradeId);
+                    //  result.UserGradeConfig = Resolve<IGradeService>().GetGrade(result.GradeId);
                 }
             }
 
@@ -329,8 +329,6 @@ namespace Alabo.App.Core.User.Domain.Services {
                 viewUser.CreateTime = userDetail.CreateTime;
                 viewUser.Sex = userDetail.Sex;
 
-                viewUser.IsServiceCenter = userDetail.IsServiceCenter;
-                viewUser.ServiceCenterUserId = userDetail.ServiceCenterUserId;
                 viewUser.UserGradeConfig = Resolve<IGradeService>().GetGrade(viewUser.GradeId);
 
                 var parentItemUser = parentUsers.FirstOrDefault(r => r.Id == item.ParentId);
@@ -395,8 +393,6 @@ namespace Alabo.App.Core.User.Domain.Services {
                 viewUser.CreateTime = userDetail.CreateTime;
                 viewUser.Sex = userDetail.Sex;
 
-                viewUser.IsServiceCenter = userDetail.IsServiceCenter;
-                viewUser.ServiceCenterUserId = userDetail.ServiceCenterUserId;
                 viewUser.UserGradeConfig = Resolve<IGradeService>().GetGrade(viewUser.GradeId);
 
                 var parentItemUser = parentUsers.FirstOrDefault(r => r.Id == item.ParentId);
@@ -519,10 +515,6 @@ namespace Alabo.App.Core.User.Domain.Services {
         public long GetTeamCenterService(long userId, long grade) {
             var grades = Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
             var user = GetSingle(userId);
-            user.UserGradeConfig = grades.SingleOrDefault(e => e.Id == user.GradeId);
-            if (user.UserGradeConfig != null && user.UserGradeConfig.SortOrder >= grade) {
-                return user.Id;
-            }
 
             if (user.ParentId == 0 || user.Id == user.ParentId) {
                 return 0;

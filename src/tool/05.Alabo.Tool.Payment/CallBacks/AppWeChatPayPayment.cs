@@ -14,7 +14,7 @@ namespace Alabo.App.Core.ApiStore.CallBacks {
     [ClassProperty(Name = "APP微信支付配置", Icon = "fa fa-puzzle-piece",
         SideBarType = SideBarType.ApiStoreSideBar,
         SortOrder = 2, Description = "APP微信支付配置")]
-    internal class AppWeChatPaymentConfig : BaseViewModel, IAutoConfig {
+    public class AppWeChatPaymentConfig : BaseViewModel, IAutoConfig {
 
         /// <summary>
         ///     是否启用

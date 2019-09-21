@@ -457,12 +457,12 @@ namespace Alabo.App.Core.User.Domain.Repositories {
             }
 
             var sql = @"INSERT INTO [dbo].[User_UserDetail]
-           ([UserId],[Password],[PayPassword] ,[IsServiceCenter] ,[ServiceCenterUserId],
+           ([UserId],[Password],[PayPassword] ,
             [RegionId],[AddressId],[Sex],[Birthday]
            ,[CreateTime],[RegisterIp],[LoginNum],[LastLoginIp],[LastLoginTime],
            [ModifiedTime],[OpenId],[Avator])
              VALUES
-           (@UserId,@Password,@PayPassword ,@IsServiceCenter ,@ServiceCenterUserId,
+           (@UserId,@Password,@PayPassword ,
             @RegionId,@AddressId,@Sex,@Birthday
            ,@CreateTime,@RegisterIp,@LoginNum,@LastLoginIp,@LastLoginTime,
            @ModifiedTime,@OpenId,@Avator);
@@ -473,8 +473,6 @@ namespace Alabo.App.Core.User.Domain.Repositories {
                 RepositoryContext.CreateParameter("@UserId", userDetail.UserId),
                 RepositoryContext.CreateParameter("@Password", userDetail.Password),
                 RepositoryContext.CreateParameter("@PayPassword", userDetail.PayPassword),
-                RepositoryContext.CreateParameter("@IsServiceCenter", userDetail.IsServiceCenter),
-                RepositoryContext.CreateParameter("@ServiceCenterUserId", userDetail.ServiceCenterUserId),
 
                 RepositoryContext.CreateParameter("@RegionId", userDetail.RegionId),
                 RepositoryContext.CreateParameter("@AddressId", userDetail.AddressId),
@@ -553,8 +551,6 @@ namespace Alabo.App.Core.User.Domain.Repositories {
                 UserId = reader["Id"].ConvertToLong(),
                 Password = reader["Password"].ToString(),
                 PayPassword = reader["PayPassword"].ToString(),
-                IsServiceCenter = (bool)reader["IsServiceCenter"],
-                ServiceCenterUserId = reader["ServiceCenterUserId"].ConvertToLong(),
 
                 RegionId = reader["RegionId"].ConvertToLong(),
                 AddressId = reader["AddressId"].ToString(),

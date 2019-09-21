@@ -98,22 +98,5 @@ namespace Alabo.App.Core.Common.Domain.Entities {
         [Display(Name = "类型")]
         [Field(ListShow = true, SortOrder = 20, Width = "100")]
         public RegionLevel Level { get; set; }
-
-        public IEnumerable<ViewLink> ViewLinks() {
-            var quickLinks = new List<ViewLink>
-            {
-                new ViewLink("所含子区域", "/Admin/Region/List?ParentId=[[RegionId]]&Method=GetPagedList", Icons.List,
-                    LinkType.ColumnLink)
-            };
-            return quickLinks;
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public PageResult<Region> PageTable(object query, AutoBaseModel autoModel) {
-            var model = Resolve<IRegionService>().GetPagedList(query);
-            return ToPageResult(model);
-        }
     }
 }

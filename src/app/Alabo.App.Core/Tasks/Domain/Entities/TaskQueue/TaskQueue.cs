@@ -93,25 +93,6 @@ namespace Alabo.App.Core.Tasks.Domain.Entities {
             TableDispalyStyle = TableDispalyStyle.Code, ListShow = true, EditShow = true,
             SortOrder = 1)]
         public string ModuleName { get; set; }
-
-        public IEnumerable<ViewLink> ViewLinks() {
-            var quickLinks = new List<ViewLink>
-            {
-                new ViewLink("删除", "/Admin/Basic/Delete?Service=ITaskQueueService&Method=Delete&id=[[Id]]",
-                    Icons.Delete, LinkType.ColumnLink)
-            };
-            return quickLinks;
-        }
-
-        /// <summary>
-        /// 通用分页查询列表
-        /// </summary>
-        /// <param name="query"></param>
-        /// <returns></returns>
-        public PageResult<TaskQueue> PageTable(object query, AutoBaseModel autoModel) {
-            var list = Ioc.Resolve<ITaskQueueService>().GetPageList(query);
-            return ToPageResult(list);
-        }
     }
 
     /// <summary>
@@ -129,9 +110,6 @@ namespace Alabo.App.Core.Tasks.Domain.Entities {
             builder.Ignore(e => e.UserName);
             builder.Ignore(e => e.ModuleName);
             builder.Ignore(e => e.Version);
-            if (TenantContext.IsTenant) {
-                // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
-            }
         }
     }
 }

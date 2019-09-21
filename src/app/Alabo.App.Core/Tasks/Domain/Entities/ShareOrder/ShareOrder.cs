@@ -102,16 +102,6 @@ namespace Alabo.App.Core.Tasks.Domain.Entities {
             SortOrder = 3000)]
         public long ExecuteCount { get; set; }
 
-        /// <summary>
-        /// 通用分页查询列表
-        /// </summary>
-        /// <param name="query"></param>
-        /// <returns></returns>
-        public PageResult<ShareOrder> PageTable(object query, AutoBaseModel autoModel) {
-            var list = Resolve<IShareOrderService>().GetPageList(query);
-            return ToPageResult(list);
-        }
-
         #region 以下字段不插入数据库
 
         /// <summary>
