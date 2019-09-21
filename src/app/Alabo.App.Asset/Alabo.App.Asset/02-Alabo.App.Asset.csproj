@@ -1,10 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>Alabo.App.Asset</AssemblyName>
     <RootNamespace>Alabo.App.Asset</RootNamespace>
+    <ApplicationIcon />
+    <StartupObject />
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\framework\Alabo.WebApi\02-Alabo.Core.csproj" />
+    <ProjectReference Include="..\..\..\framework\Alabo\01-Alabo.csproj" />
+    <ProjectReference Include="..\..\Alabo.App.Core\01-Alabo.App.Core.csproj" />
+  </ItemGroup>
 
 </Project>
