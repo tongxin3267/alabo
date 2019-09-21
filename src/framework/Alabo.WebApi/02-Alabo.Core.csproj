@@ -11,9 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Reflections\Services\" />
-    <Folder Include="Logs\" />
-    <Folder Include="Tables\" />
+    <Folder Include="Admins\Dtos\" />
     <Folder Include="Notifications\" />
   </ItemGroup>
 

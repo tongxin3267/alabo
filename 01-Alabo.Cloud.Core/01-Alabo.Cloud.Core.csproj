@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <RootNamespace>_01_Alabo.Cloud.Core</RootNamespace>
+    <AssemblyName>Alabo.Cloud.Core</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

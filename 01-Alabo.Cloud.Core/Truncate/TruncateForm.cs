@@ -1,14 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using Alabo.App.Core.Admin.Domain.Repositories;
+using Alabo.App.Core.Admin.Domain.Services;
+using Alabo.App.Core.User.Domain.Services;
+using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Extensions;
+using Alabo.Helpers;
+using Alabo.Maps;
+using Alabo.Runtime;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
 using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
-namespace _01_Alabo.Cloud.Core.Truncate {
+namespace Alabo.Cloud.Core.Truncate {
 
     /// <summary>
     /// 清空数据
@@ -105,11 +110,68 @@ namespace _01_Alabo.Cloud.Core.Truncate {
         public string MobileVerifiyCode { get; set; }
 
         public AutoForm GetView(object id, AutoBaseModel autoModel) {
-            throw new NotImplementedException();
+            var view = new TruncateForm();
+            if (id.ConvertToLong() == 10000) {
+                view = new TruncateForm {
+                    UserTable = "User_User",
+                    ScheduleTable = "Task_Schedule",
+                    Key = RuntimeContext.Current.WebsiteConfig.OpenApiSetting.Key,
+                };
+            }
+
+            var autoForm = ToAutoForm(view);
+            return autoForm;
         }
 
         public ServiceResult Save(object model, AutoBaseModel autoModel) {
-            throw new NotImplementedException();
+            var truncateInput = model.MapTo<TruncateForm>();
+            if (!HttpWeb.UserName.Equal("admin")) {
+                return ServiceResult.FailedWithMessage("当前操作用户名非admin,不能进行该操作");
+            }
+
+            var user = Resolve<IAlaboUserService>().GetSingle(HttpWeb.UserId);
+            if (user.Status != Status.Normal) {
+                return ServiceResult.FailedWithMessage("用户状态不正常,不能进行该操作");
+            }
+            if (!user.UserName.Equal("admin")) {
+                return ServiceResult.FailedWithMessage("当前操作用户名非admin,不能进行该操作");
+            }
+
+            if (!truncateInput.UserTable.Equals("User_User")) {
+                return ServiceResult.FailedWithMessage("用户数据表填写出错,不能进行该操作");
+            }
+            if (!truncateInput.MongoTableName.Equals(RuntimeContext.Current.WebsiteConfig.MongoDbConnection.Database)) {
+                return ServiceResult.FailedWithMessage("Mongodb数据库表填写出错,不能进行该操作");
+            }
+            if (!truncateInput.ScheduleTable.Equals("Task_Schedule")) {
+                return ServiceResult.FailedWithMessage("调度作业表填写错误,不能进行该操作");
+            }
+            //if (!truncateInput.ProjectId.Equals(HttpWeb.Token.ProjectId.ToString())) {
+            //    return ServiceResult.FailedWithMessage("项目Id填写错误,不能进行该操作");
+            //}
+
+            if (!truncateInput.Key.Equals(RuntimeContext.Current.WebsiteConfig.OpenApiSetting.Key)) {
+                return ServiceResult.FailedWithMessage("秘钥填写错误,不能进行该操作");
+            }
+
+            if (!truncateInput.Mobile.Equals(Resolve<IOpenService>().OpenMobile)) {
+                return ServiceResult.FailedWithMessage("平台预留手机号码填写错误,不能进行该操作");
+            }
+
+            //if (!truncateInput.CompanyName.Equals(Resolve<IOpenService>().Project.CompanyName)) {
+            //    return ServiceResult.FailedWithMessage("公司名称填写错误,不能进行该操作");
+            //}
+
+            Repository<ICatalogRepository>().TruncateTable();
+
+            // 先更新数据库脚本
+            Resolve<ICatalogService>().UpdateDatabase();
+
+            // 清空缓存
+            Resolve<IAdminService>().ClearCache();
+            Resolve<ITableService>().Log("清空数据");
+            Resolve<IOpenService>().SendRaw(Resolve<IOpenService>().OpenMobile, "您的系统数据已清空，请悉知。");
+            return ServiceResult.Success;
         }
     }
 }

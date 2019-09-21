@@ -4,7 +4,7 @@ using Alabo.Domains.Services;
 
 namespace Alabo.App.Core.Admin.Domain.Services {
 
-    public interface IVerifyService : IService {
+    public interface IValidService : IService {
 
         /// <summary>
         /// 根据用户名，验证用户状态是否正常
@@ -26,5 +26,11 @@ namespace Alabo.App.Core.Admin.Domain.Services {
         /// <param name="gradeId"></param>
         /// <returns></returns>
         ServiceResult VerifyUserGrade(Guid gradeId);
+
+        /// <summary>
+        /// 验证支付密码
+        /// </summary>
+        /// <returns></returns>
+        ServiceResult VerifySafePassword();
     }
 }

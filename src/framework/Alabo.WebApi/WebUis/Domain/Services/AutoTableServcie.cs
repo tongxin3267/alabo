@@ -49,7 +49,7 @@ namespace Alabo.App.Core.UI.Domain.Services {
             #region autoConfig类型
 
             else if (instanceFind is IAutoConfig) {
-                var data = Resolve<IAutoConfigService>().GetObjectList(typeFind);
+                var data = Resolve<IAlaboAutoConfigService>().GetObjectList(typeFind);
                 var result = PagedList<object>.Create(data, data.Count, 100, 1);
 
                 PageResult<object> apiRusult = new PageResult<object> {

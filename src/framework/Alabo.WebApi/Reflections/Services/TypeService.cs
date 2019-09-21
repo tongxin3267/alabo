@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Alabo.App.Core.Api.Controller;
+using Alabo.App.Core.Common;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
@@ -240,7 +241,7 @@ namespace Alabo.App.Core.Admin.Domain.Services {
         /// </summary>
         /// <returns>IEnumerable&lt;Type&gt;.</returns>
         public IEnumerable<Type> GetAllConfigType() {
-            return Resolve<IAutoConfigService>().GetAllTypes();
+            return Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoConfig));
         }
 
         public object GetEntityType(object entityName) {
@@ -398,7 +399,7 @@ namespace Alabo.App.Core.Admin.Domain.Services {
         public IEnumerable<EnumList> AllKeyValues() {
             var list = new List<EnumList>();
             // 所有的AutoConfig配置,只显示列表类型
-            var allConfigs = Resolve<IAutoConfigService>().GetAllTypes();
+            var allConfigs = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoConfig));
             EnumList enumList = new EnumList {
                 Name = "AutoConfig配置"
             };
@@ -417,7 +418,8 @@ namespace Alabo.App.Core.Admin.Domain.Services {
             enumList = new EnumList {
                 Name = "级联通用分类"
             };
-            var relationTypes = Resolve<IRelationService>().GetAllClassTypes();
+            var relationTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IRelation));
+            relationTypes = relationTypes.Where(r => r.Name.Contains("Class"));
             foreach (var item in relationTypes) {
                 var attribute = item.GetAttribute<ClassPropertyAttribute>();
                 if (attribute != null) {
@@ -433,7 +435,8 @@ namespace Alabo.App.Core.Admin.Domain.Services {
             enumList = new EnumList {
                 Name = "级联通用标签"
             };
-            relationTypes = Resolve<IRelationService>().GetAllTagTypes();
+            relationTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IRelation));
+            relationTypes = relationTypes.Where(r => r.Name.Contains("Tags"));
             foreach (var item in relationTypes) {
                 var attribute = item.GetAttribute<ClassPropertyAttribute>();
                 if (attribute != null) {

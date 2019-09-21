@@ -104,7 +104,7 @@ namespace Alabo.App.Core.Api.Controller {
         /// <returns></returns>
         [NonAction]
         protected ApiResult<AccessToken> GetAccessToken() {
-            var apiSecurityConfig = Resolve<IAlaboConfigService>().GetValue<ApiSecurityConfig>();
+            var apiSecurityConfig = Resolve<IAlaboAutoConfigService>().GetValue<ApiSecurityConfig>();
             //如果是开发模式，这不验证安全
             if (!apiSecurityConfig.IsOpen) {
                 return ApiResult.Success(new AccessToken());

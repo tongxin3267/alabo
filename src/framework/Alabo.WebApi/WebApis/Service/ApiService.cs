@@ -45,7 +45,7 @@ namespace Alabo.App.Core.Api.Domain.Service {
                     imageUrl = $"{HttpWeb.ServiceHostUrl}/{imageUrl}";
                 }
             } else {
-                imageUrl = Resolve<IAlaboConfigService>().GetValue<WebSiteConfig>().NoPic;
+                imageUrl = Resolve<IAlaboAutoConfigService>().GetValue<WebSiteConfig>().NoPic;
             }
 
             if (imageUrl.Contains("///")) {
@@ -62,7 +62,7 @@ namespace Alabo.App.Core.Api.Domain.Service {
         /// <param name="content"></param>
         public string ConvertToApiImageUrl(string content) {
             if (!content.IsNullOrEmpty()) {
-                var webSite = Resolve<IAlaboConfigService>().GetValue<WebSiteConfig>();
+                var webSite = Resolve<IAlaboAutoConfigService>().GetValue<WebSiteConfig>();
                 content = content.ToLower();//先转小写
                 //双引号
                 content = content.Replace("src=\"/uploads/", "src=\"" + webSite.ApiImagesUrl + "/uploads/");
@@ -84,7 +84,7 @@ namespace Alabo.App.Core.Api.Domain.Service {
         /// </summary>
         /// <param name="userId">用户Id</param>
         public string ApiUserAvator(long userId) {
-            var webSite = Resolve<IAlaboConfigService>().GetValue<WebSiteConfig>();
+            var webSite = Resolve<IAlaboAutoConfigService>().GetValue<WebSiteConfig>();
             //var avatorUrl = Resolve<IUserDetailService>().GetSingle(u => u.UserId == userId)?.Avator;
             //if (avatorUrl.IsNullOrEmpty()) {
             //    avatorUrl = @"/wwwroot/static/images/avator/man_64.png";

@@ -19,10 +19,10 @@ using System.Reflection;
 
 namespace Alabo.App.Core.Common.Domain.Services {
 
-    public class AlaboConfigService : ServiceBase<AutoConfig, long>, IAlaboConfigService {
+    public class AlaboAutoConfigService : ServiceBase<AutoConfig, long>, IAlaboAutoConfigService {
         private static readonly string AutoConfigCacheKey = "AutoConfigCacheKey_";
 
-        public AlaboConfigService(IUnitOfWork unitOfWork, IRepository<AutoConfig, long> repository) : base(unitOfWork, repository) {
+        public AlaboAutoConfigService(IUnitOfWork unitOfWork, IRepository<AutoConfig, long> repository) : base(unitOfWork, repository) {
         }
 
         /// <summary>
@@ -167,6 +167,21 @@ namespace Alabo.App.Core.Common.Domain.Services {
             }
 
             return Activator.CreateInstance(type);
+        }
+
+        public List<object> GetObjectList(Type type) {
+            var list = new List<object>();
+            var config = GetConfig(type.FullName);
+            if (config != null) {
+                var request = JsonConvert.DeserializeObject<List<JObject>>(config.Value);
+                foreach (var item in request) {
+                    var data = Activator.CreateInstance(type);
+                    PropertyDescription.SetValue(data, item);
+                    list.Add(data);
+                }
+            }
+
+            return list;
         }
     }
 }
