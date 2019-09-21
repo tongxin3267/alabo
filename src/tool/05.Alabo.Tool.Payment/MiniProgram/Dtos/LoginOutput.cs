@@ -25,6 +25,6 @@ namespace Alabo.App.Core.ApiStore.MiniProgram.Dtos {
         ///     登录用户
         /// </summary>
         /// <value>The user.</value>
-        public UserOutput User { get; set; }
+     //   public UserOutput User { get; set; }
     }
 }

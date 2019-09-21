@@ -1,10 +1,4 @@
-﻿using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Alabo.App.Core.ApiStore.AMap.District;
-using Alabo.App.Core.Common.Domain.Dtos;
+﻿using Alabo.App.Core.Common.Domain.Dtos;
 using Alabo.App.Core.Common.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Enum;
 using Alabo.Core.Enums.Enum;
@@ -14,6 +8,12 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
+using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Alabo.App.Core.ApiStore.AMap.District;
 
 namespace Alabo.App.Core.Common.Domain.Services {
 

@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <RootNamespace>_04_Alabo.Tool.AMap</RootNamespace>
+    <RootNamespace>Alabo.Tool.AMap</RootNamespace>
+    <AssemblyName>Alabo.Tool.AMap</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

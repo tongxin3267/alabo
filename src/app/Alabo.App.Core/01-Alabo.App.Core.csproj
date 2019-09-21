@@ -51,5 +51,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\framework\Alabo.WebApi\02-Alabo.Core.csproj" />
     <ProjectReference Include="..\..\framework\Alabo\01-Alabo.csproj" />
+    <ProjectReference Include="..\..\tool\04-Alabo.Tool.AMap\04-Alabo.Tool.AMap.csproj" />
+    <ProjectReference Include="..\..\tool\05.Alabo.Tool.Payment\05-Alabo.Tool.Payment.csproj" />
   </ItemGroup>
 </Project>

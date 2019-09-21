@@ -29,51 +29,53 @@ namespace Alabo.App.Core.ApiStore.MiniProgram.Clients {
         /// </summary>
         /// <param name="miniProgramLoginInput">The mini program login input.</param>
         public ApiResult<SessionOutput> Login(LoginInput miniProgramLoginInput) {
-            var miniProgram = Service<IAutoConfigService>().GetValue<MiniProgramConfig>();
-            var loginUrl =
-                $"/sns/jscode2session?appid={miniProgram.AppID}&secret={miniProgram.AppSecret}&js_code={miniProgramLoginInput.JsCode}&grant_type={miniProgramLoginInput.GrantType}";
-            var url = BuildQueryUri(loginUrl);
-            var result = Connector.Get(url);
+            //var miniProgram = Service<IAutoConfigService>().GetValue<MiniProgramConfig>();
+            //var loginUrl =
+            //    $"/sns/jscode2session?appid={miniProgram.AppID}&secret={miniProgram.AppSecret}&js_code={miniProgramLoginInput.JsCode}&grant_type={miniProgramLoginInput.GrantType}";
+            //var url = BuildQueryUri(loginUrl);
+            //var result = Connector.Get(url);
 
-            //如果请求错误，错误数据的格式示例：{"errcode":40029,"errmsg":"invalid code, hints: [ req_id: Hs2Q7a0732th50 ]"}
-            if (result.Contains("errmsg") && result.Contains("errcode")) {
-                var errorMessage = result.DeserializeJson<MiniErrorMessage>();
-                var apiResult = new ApiResult {
-                    Status = ResultStatus.Error,
-                    Message = errorMessage.Errmsg,
-                    MessageCode = errorMessage.Errcode.ConvertToInt()
-                };
-                return ApiResult.Failure<SessionOutput>(apiResult.ToJson());
-            }
+            //如果请求错误，错误数据的格式示例：{ "errcode":40029,"errmsg":"invalid code, hints: [ req_id: Hs2Q7a0732th50 ]"}
+            //if (result.Contains("errmsg") && result.Contains("errcode")) {
+            //    var errorMessage = result.DeserializeJson<MiniErrorMessage>();
+            //    var apiResult = new ApiResult {
+            //        Status = ResultStatus.Error,
+            //        Message = errorMessage.Errmsg,
+            //        MessageCode = errorMessage.Errcode.ConvertToInt()
+            //    };
+            //    return ApiResult.Failure<SessionOutput>(apiResult.ToJson());
+            //}
 
-            var sessionOutput = result.DeserializeJson<SessionOutput>();
-            return ApiResult.Success(sessionOutput);
+            //var sessionOutput = result.DeserializeJson<SessionOutput>();
+            //return ApiResult.Success(sessionOutput);
+            return null;
         }
 
         public ApiResult<SessionOutput> PubLogin(LoginInput miniProgramLoginInput) {
-            var miniProgram = Service<IAutoConfigService>().GetValue<WeChatPaymentConfig>();
-            var loginUrl =
-                $"/sns/oauth2/access_token?appid={miniProgram.AppId}&secret={miniProgram.AppSecret}&code={miniProgramLoginInput.JsCode}&grant_type=authorization_code";
+            //var miniProgram = Service<IAutoConfigService>().GetValue<WeChatPaymentConfig>();
             //var loginUrl =
-            //    $"/sns/oauth2/access_token?appid=wx3845717402bcb006&secret=a977a30163b6c14516236a912842521b&code={miniProgramLoginInput.JsCode}&grant_type=authorization_code";
-            var url = BuildQueryUri(loginUrl);
-            var result = Connector.Get(url);
+            //    $"/sns/oauth2/access_token?appid={miniProgram.AppId}&secret={miniProgram.AppSecret}&code={miniProgramLoginInput.JsCode}&grant_type=authorization_code";
+            ////var loginUrl =
+            ////    $"/sns/oauth2/access_token?appid=wx3845717402bcb006&secret=a977a30163b6c14516236a912842521b&code={miniProgramLoginInput.JsCode}&grant_type=authorization_code";
+            //var url = BuildQueryUri(loginUrl);
+            //var result = Connector.Get(url);
 
-            //如果请求错误，错误数据的格式示例：{"errcode":40029,"errmsg":"invalid code, hints: [ req_id: Hs2Q7a0732th50 ]"}
-            if (result.Contains("errmsg") && result.Contains("errcode")) {
-                var errorMessage = result.DeserializeJson<MiniErrorMessage>();
-                var apiResult = new ApiResult {
-                    Status = ResultStatus.Error,
-                    Message = errorMessage.Errmsg,
-                    MessageCode = errorMessage.Errcode.ConvertToInt()
-                };
-                Service<IUserService>().Log($"公众号登录失败,code:{miniProgramLoginInput.JsCode},原因:{apiResult.ToJson()}");
-                return ApiResult.Failure<SessionOutput>(apiResult.ToJson());
-            }
+            ////如果请求错误，错误数据的格式示例：{"errcode":40029,"errmsg":"invalid code, hints: [ req_id: Hs2Q7a0732th50 ]"}
+            //if (result.Contains("errmsg") && result.Contains("errcode")) {
+            //    var errorMessage = result.DeserializeJson<MiniErrorMessage>();
+            //    var apiResult = new ApiResult {
+            //        Status = ResultStatus.Error,
+            //        Message = errorMessage.Errmsg,
+            //        MessageCode = errorMessage.Errcode.ConvertToInt()
+            //    };
+            //    Service<IUserService>().Log($"公众号登录失败,code:{miniProgramLoginInput.JsCode},原因:{apiResult.ToJson()}");
+            //    return ApiResult.Failure<SessionOutput>(apiResult.ToJson());
+            //}
 
-            var sessionOutput = result.DeserializeJson<SessionOutput>();
-            //Service<IUserService>().Log($"公众号登录成功,code:{miniProgramLoginInput.JsCode},openId:{sessionOutput.openid}");
-            return ApiResult.Success(sessionOutput);
+            //var sessionOutput = result.DeserializeJson<SessionOutput>();
+            ////Service<IUserService>().Log($"公众号登录成功,code:{miniProgramLoginInput.JsCode},openId:{sessionOutput.openid}");
+            //return ApiResult.Success(sessionOutput);
+            return null;
         }
     }
 }

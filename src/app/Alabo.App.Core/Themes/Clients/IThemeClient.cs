@@ -1,12 +1,10 @@
-﻿using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Alabo.App.Core.Admin.Domain.Dtos;
-using Alabo.App.Core.Themes.Dtos;
+﻿using Alabo.App.Core.Themes.Dtos;
 using Alabo.App.Core.Themes.Dtos.Service;
 using Alabo.Domains.Entities;
 using Alabo.RestfulApi;
+using MongoDB.Bson;
+using System;
+using System.Threading.Tasks;
 
 namespace Alabo.App.Core.Themes.Clients {
 
@@ -19,14 +17,6 @@ namespace Alabo.App.Core.Themes.Clients {
         /// <param name="proejctId"></param>
         /// <returns></returns>
         Task<ServiceResult> InitOpenSite(string token, Guid proejctId);
-
-        /// <summary>
-        /// 初始化服务端站点数据
-        /// </summary>
-        /// <param name="token"></param>
-        /// <param name="proejctId"></param>
-        /// <returns></returns>
-        Task<List<ClientApp>> GetApps(string token, Guid proejctId);
 
         /// <summary>
         /// 获取模板，和模板页面

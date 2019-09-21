@@ -1,5 +1,5 @@
-﻿using System;
-using Alabo.App.Core.Finance.Domain.Enums;
+﻿using Alabo.App.Core.Finance.Domain.Enums;
+using System;
 
 namespace Alabo.App.Core.ApiStore {
 

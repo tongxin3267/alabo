@@ -47,10 +47,11 @@ namespace Alabo.App.Core.ApiStore.WeiXinMp.Clients {
         }
 
         public AccessTokenResult GetToken() {
-            var wexinConfig = Ioc.Resolve<IAutoConfigService>().GetValue<WeChatPaymentConfig>();
-            var token = CommonApi.GetToken(wexinConfig.AppId, wexinConfig.AppSecret);
+            //var wexinConfig = Ioc.Resolve<IAutoConfigService>().GetValue<WeChatPaymentConfig>();
+            //var token = CommonApi.GetToken(wexinConfig.AppId, wexinConfig.AppSecret);
 
-            return token;
+            //return token;
+            return null;
         }
 
         public WeixinUserInfoResult GetUserInfo(string openId) {
