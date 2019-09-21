@@ -30,7 +30,6 @@
     <None Remove="Tasks\Dtos\**" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Finance\UI\AutoForm\WithdrawAdminAutoForm.cs" />
     <Compile Remove="Reports\Dtos\CountReportInput.cs" />
     <Compile Remove="Reports\Dtos\CountReportItem.cs" />
     <Compile Remove="Reports\Dtos\CountReportTable.cs" />
