@@ -1,17 +1,20 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.UI;
+using Alabo.UI.AutoForms;
 using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.Admin.Domain.Dtos {
+namespace _01_Alabo.Cloud.Core.Truncate {
 
     /// <summary>
     /// 清空数据
     /// </summary>
-    [ClassProperty(Name = "清空数据", Icon = IconFlaticon.exclamation, SideBarType = SideBarType.ControlSideBar)]
-    public class TruncateInput : BaseViewModel {
+    [ClassProperty(Name = "清空数据", Icon = IconFlaticon.exclamation)]
+    public class TruncateForm : UIBase, IAutoForm {
 
         /// <summary>
         /// 激活Key
@@ -100,5 +103,13 @@ namespace Alabo.App.Core.Admin.Domain.Dtos {
         // [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         // [MinLength(6, ErrorMessage = ErrorMessage.MinStringLength)]
         public string MobileVerifiyCode { get; set; }
+
+        public AutoForm GetView(object id, AutoBaseModel autoModel) {
+            throw new NotImplementedException();
+        }
+
+        public ServiceResult Save(object model, AutoBaseModel autoModel) {
+            throw new NotImplementedException();
+        }
     }
 }

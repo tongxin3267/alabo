@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Admin\Extensions\" />
     <Folder Include="Common\Controllers\" />
     <Folder Include="Grades\Domain\Configs\" />
   </ItemGroup>

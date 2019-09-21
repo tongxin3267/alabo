@@ -1,16 +1,7 @@
-﻿using System;
-using System.Linq;
-using Alabo.App.Core.Admin.Domain.Repositories;
+﻿using Alabo.App.Core.Admin.Domain.Repositories;
 using Alabo.App.Core.Admin.Domain.Services;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Tenants.Callbacks;
 using Alabo.App.Core.Tenants.Domains.Dtos;
-using Alabo.App.Core.Tenants.UI;
-using Alabo.App.Core.Themes.Domain.Enums;
-using Alabo.App.Core.Themes.Domain.Services;
-using Alabo.App.Core.Themes.Dtos;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.Core.Enums.Enum;
 using Alabo.Core.Extensions;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Base.Services;
@@ -20,7 +11,6 @@ using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Runtime;
 using Alabo.Tenants;
-using Alabo.Tenants.Domain.Entities;
 using Alabo.Tenants.Domain.Services;
 
 namespace Alabo.App.Core.Tenants.Domains.Services {
@@ -62,10 +52,10 @@ namespace Alabo.App.Core.Tenants.Domains.Services {
             //初始化默认数据
             Resolve<IAdminService>().DefaultInit(tenantInit.IsTenant);
             // 修改管理员的账号
-            var user = Resolve<IUserService>().GetSingle(r => r.UserName == "admin");
+            var user = Resolve<IAlaboUserService>().GetSingle(r => r.UserName == "admin");
             if (user != null) {
                 user.Mobile = tenantInit.Mobile;
-                Resolve<IUserService>().Update(user);
+                Resolve<IAlaboUserService>().Update(user);
             }
             return ServiceResult.Success;
         }
@@ -75,18 +65,18 @@ namespace Alabo.App.Core.Tenants.Domains.Services {
             if (!result.Succeeded) {
                 return result;
             }
-
+            //DOTO  2019年9月21日重构
             // 初始化后台模板
-            ClientPageInput pageInput = new ClientPageInput {
-                ClientType = ClientType.PcWeb,
-                Type = ThemeType.Admin
-            };
-            try {
-                var allClientPages = Resolve<IThemePageService>().GetAllClientPages(pageInput);
-                allClientPages.LastUpdate = DateTime.Now.AddMinutes(10).ConvertDateTimeInt();
-            } catch (Exception ex) {
-                return ServiceResult.FailedWithMessage("后台模板初始化出错" + ex.Message);
-            }
+            //ClientPageInput pageInput = new ClientPageInput {
+            //    ClientType = ClientType.PcWeb,
+            //    Type = ThemeType.Admin
+            //};
+            //try {
+            //    var allClientPages = Resolve<IThemePageService>().GetAllClientPages(pageInput);
+            //    allClientPages.LastUpdate = DateTime.Now.AddMinutes(10).ConvertDateTimeInt();
+            //} catch (Exception ex) {
+            //    return ServiceResult.FailedWithMessage("后台模板初始化出错" + ex.Message);
+            //}
             return ServiceResult.Success;
         }
 
@@ -138,71 +128,6 @@ namespace Alabo.App.Core.Tenants.Domains.Services {
             isExists = _tenantCreateRepository.IsExistsDatabase(tenantName);
             if (isExists == false) {
                 return ServiceResult.FailedWithMessage("数据库创建失败，没有 CREATE DATABASE 权限，请手动添加数据库用户的 CREATE DATABASE 权限");
-            }
-            return ServiceResult.Success;
-        }
-
-        /// <summary>
-        /// 保存租户
-        /// </summary>
-        /// <param name="user"></param>
-        private void SaveTenant(User.Domain.Entities.User user, TenantInput tenantInput) {
-            // 此方法保存的数据需要切回到Master上.
-            TenantContext.CurrentTenant = TenantContext.Master;
-            var tenantService = Resolve<ITenantService>();
-            var exists = tenantService.Exists(t => t.Name.ToLower() == user.UserName.ToLower());
-            if (exists) {
-                return;
-            }
-
-            var tenant = new Tenant {
-                UserId = user.Id,
-                UserName = user.UserName,
-                Sign = user.UserName.Trim(),
-                ServiceUrl = tenantInput.ServiceUrl,
-                ClientUrl = tenantInput.ClientUrl,
-                Name = user.GetUserName(),
-                DatabaseName = RuntimeContext.GetTenantDataBase(user.UserName)
-            };
-            Resolve<ITenantService>().Add(tenant);
-        }
-
-        public ServiceResult Create(TenantInput tenantInput) {
-            var user = Resolve<IUserService>().GetNomarlUser(tenantInput.UserId);
-            if (user == null) {
-                return ServiceResult.FailedWithMessage("用户不存在或状态不正常");
-            }
-
-            var find = Resolve<ITenantService>().GetSingle(r => r.UserId == user.Id);
-            if (find != null) {
-                return ServiceResult.FailedWithMessage("当前用户已是租户，不能重复创建");
-            }
-
-            var serviceConfig = Resolve<IAutoConfigService>()
-                .GetList<TenantServiceHostConfig>(r => r.Id == tenantInput.TenantServiceHostConfigId)?.FirstOrDefault();
-            if (serviceConfig == null) {
-                return ServiceResult.FailedWithMessage("请选择Api服务器配置地址");
-            }
-
-            var clientConfig = Resolve<IAutoConfigService>()
-                .GetList<TenantClientHostConfig>(r => r.Id == tenantInput.TenantClientHostConfigId)?.FirstOrDefault();
-            if (clientConfig == null) {
-                return ServiceResult.FailedWithMessage("请选择客服端访问地址");
-            }
-
-            var userName = user.UserName;
-            tenantInput.ClientUrl = clientConfig.Url;
-            tenantInput.ServiceUrl = serviceConfig.Url;
-
-            try {
-                var result = InitTenantDatabase(userName);
-                if (result.Succeeded) {
-                    SaveTenant(user, tenantInput);
-                } else {
-                    return result;//报错直接返回咯
-                }
-            } catch (Exception ex) {
-                throw ex;
             }
             return ServiceResult.Success;
         }

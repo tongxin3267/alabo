@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace Alabo.Initialize {
 
@@ -16,5 +17,17 @@ namespace Alabo.Initialize {
         ///     初始化默认数据
         /// </summary>
         void Init();
+    }
+
+    /// <summary>
+    /// DefaultInitSortAttribute SortIndex ASC
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Class)]
+    public class DefaultInitSortAttribute : Attribute {
+
+        /// <summary>
+        /// Sort index
+        /// </summary>
+        public long SortIndex { get; set; } = 100;
     }
 }

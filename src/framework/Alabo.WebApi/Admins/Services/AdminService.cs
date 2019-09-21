@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using Alabo.App.Core.Admin.Domain.Dtos;
+﻿using Alabo.App.Core.Admin.Domain.Dtos;
 using Alabo.App.Core.Admin.Domain.Repositories;
-using Alabo.App.Core.Admin.Extensions;
-using Alabo.App.Core.Themes.Clients;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Base.Services;
@@ -17,9 +9,15 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Initialize;
+using Alabo.Runtime;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 using ZKCloud.Open.ApiBase.Configuration;
 using ZKCloud.Open.ApiBase.Services;
-using Alabo.Runtime;
 
 namespace Alabo.App.Core.Admin.Domain.Services {
 
@@ -37,8 +35,6 @@ namespace Alabo.App.Core.Admin.Domain.Services {
 
         private IServerApiClient _userApiClient;
         private RestClientConfiguration _restClientConfiugration;
-
-        private IThemeClient _themeClient;
 
         /// <summary>
         /// 租户初始时候需要速度比较快
@@ -125,7 +121,7 @@ namespace Alabo.App.Core.Admin.Domain.Services {
                 return ServiceResult.FailedWithMessage("当前操作用户名非admin,不能进行该操作");
             }
 
-            var user = Resolve<IUserService>().GetSingle(HttpWeb.UserId);
+            var user = Resolve<IAlaboUserService>().GetSingle(HttpWeb.UserId);
             if (user.Status != Status.Normal) {
                 return ServiceResult.FailedWithMessage("用户状态不正常,不能进行该操作");
             }

@@ -103,7 +103,7 @@ namespace Alabo.App.Core.Admin.Domain.Services {
         }
 
         public Tuple<ServiceResult, string, string> ToExcel(Type type, dynamic inputData) {
-            //var service = "IUserService";
+            //var service = "IAlaboUserService";
             //var method = "GetViewUserPageList";
             //var query = "";
             //var type = autoTable.GetType();

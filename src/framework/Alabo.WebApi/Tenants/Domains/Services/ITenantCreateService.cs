@@ -1,5 +1,4 @@
 ﻿using Alabo.App.Core.Tenants.Domains.Dtos;
-using Alabo.App.Core.Tenants.UI;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 
@@ -45,13 +44,6 @@ namespace Alabo.App.Core.Tenants.Domains.Services {
         /// </summary>
         /// <returns></returns>
         ServiceResult InitTenantDatabase(string tenant);
-
-        /// <summary>
-        /// 创建租户
-        /// </summary>
-        /// <param name="tenantInput"></param>
-        /// <returns></returns>
-        ServiceResult Create(TenantInput tenantInput);
 
         /// <summary>
         /// 检查租户是否存在

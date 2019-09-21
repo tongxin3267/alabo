@@ -166,7 +166,7 @@ namespace Alabo.App.Core.Admin.Domain.Services {
         /// <summary>
         ///     获取d单个的IService类型
         /// </summary>
-        /// <param name="entityName">可以是配置名如：IUserService ，也可以是IService的完整命名空间</param>
+        /// <param name="entityName">可以是配置名如：IAlaboUserService ，也可以是IService的完整命名空间</param>
         /// <returns>Type.</returns>
         public Type GetEntityType(string entityName) {
             throw new NotImplementedException();
@@ -227,7 +227,7 @@ namespace Alabo.App.Core.Admin.Domain.Services {
         /// <summary>
         ///     获取所有的IService类型
         /// </summary>
-        /// <param name="serviceName">可以是配置名如：IUserService ，也可以是IService的完整命名空间</param>
+        /// <param name="serviceName">可以是配置名如：IAlaboUserService ，也可以是IService的完整命名空间</param>
         /// <returns>Type.</returns>
         public Type GetServiceType(string serviceName) {
             var type = GetAllServiceType()
@@ -322,7 +322,7 @@ namespace Alabo.App.Core.Admin.Domain.Services {
         /// <summary>
         ///     根据实体类型的名称获取IService名称
         /// </summary>
-        /// <param name="entityName">比如：输入User 获取IUserService</param>
+        /// <param name="entityName">比如：输入User 获取IAlaboUserService</param>
         public string GetServiceTypeByEntity(string entityName) {
             if (entityName == null) {
                 throw new ValidException("实体名称不能为空");
