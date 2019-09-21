@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>_01_Alabo.Cloud.Core</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="SendSms\Controllers\ApiSendSmsController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="SendSms\Controllers\ApiSendSmsController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\app\Alabo.App.Core\01-Alabo.App.Core.csproj" />
+    <ProjectReference Include="..\src\framework\Alabo.WebApi\02-Alabo.Core.csproj" />
+    <ProjectReference Include="..\src\framework\Alabo\01-Alabo.csproj" />
+  </ItemGroup>
+
+</Project>

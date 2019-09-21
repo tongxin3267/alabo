@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>Alabo.Tool.WeiXin</RootNamespace>
+    <AssemblyName>Alabo.Tool.WeiXin</AssemblyName>
+  </PropertyGroup>
+
+</Project>

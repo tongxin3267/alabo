@@ -14,31 +14,20 @@
     <DocumentationFile>bin\Release\netcoreapp2.0\ZKCloud.App.Core.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="ApiStore\Payment\Domain\**" />
-    <Compile Remove="ApiStore\Sms\Controllers\**" />
     <Compile Remove="Api\**" />
-    <Compile Remove="Markets\EnterpriseCertification\UI\**" />
     <Compile Remove="Reports\Charts\**" />
     <Compile Remove="Reports\Schedule\**" />
     <Compile Remove="Tasks\Dtos\**" />
-    <EmbeddedResource Remove="ApiStore\Payment\Domain\**" />
-    <EmbeddedResource Remove="ApiStore\Sms\Controllers\**" />
     <EmbeddedResource Remove="Api\**" />
-    <EmbeddedResource Remove="Markets\EnterpriseCertification\UI\**" />
     <EmbeddedResource Remove="Reports\Charts\**" />
     <EmbeddedResource Remove="Reports\Schedule\**" />
     <EmbeddedResource Remove="Tasks\Dtos\**" />
-    <None Remove="ApiStore\Payment\Domain\**" />
-    <None Remove="ApiStore\Sms\Controllers\**" />
     <None Remove="Api\**" />
-    <None Remove="Markets\EnterpriseCertification\UI\**" />
     <None Remove="Reports\Charts\**" />
     <None Remove="Reports\Schedule\**" />
     <None Remove="Tasks\Dtos\**" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="ApiStore\Sms\Services\ISmsService.cs" />
-    <Compile Remove="ApiStore\Sms\Services\SmsService.cs" />
     <Compile Remove="Finance\UI\AutoForm\WithdrawAdminAutoForm.cs" />
     <Compile Remove="Reports\Domain\Dtos\CountReportInput.cs" />
     <Compile Remove="Reports\Domain\Dtos\CountReportItem.cs" />
