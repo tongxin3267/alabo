@@ -70,18 +70,5 @@ namespace Alabo.App.Agent.Circle.Domain.Entities {
         [Field(ListShow = true, SortOrder = 5, Width = "350", ControlsType = ControlsType.TextBox,
             IsShowBaseSerach = true)]
         public string FullName { get; set; }
-
-        /// <summary>
-        /// 通用分页查询列表
-        /// </summary>
-        /// <param name="query"></param>
-        /// <returns></returns>
-        public PageResult<Circle> PageTable(object query, AutoBaseModel autoModel) {
-            var list = Resolve<ICircleService>().GetPagedList(query);
-            foreach (var item in list) {
-                item.RegionName = Resolve<IRegionService>().GetRegionNameById(item.RegionId);
-            }
-            return ToPageResult(list);
-        }
     }
 }

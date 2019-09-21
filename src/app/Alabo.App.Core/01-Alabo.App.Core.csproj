@@ -29,12 +29,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Finance\UI\AutoForm\WithdrawAdminAutoForm.cs" />
-    <Compile Remove="Reports\Domain\Dtos\CountReportInput.cs" />
-    <Compile Remove="Reports\Domain\Dtos\CountReportItem.cs" />
-    <Compile Remove="Reports\Domain\Dtos\CountReportTable.cs" />
-    <Compile Remove="Reports\Domain\Dtos\SumReportTable.cs" />
-    <Compile Remove="Reports\Domain\Dtos\SumReportTableItems.cs" />
-    <Compile Remove="Reports\Domain\Dtos\SumTableOutput.cs" />
+    <Compile Remove="Reports\Dtos\CountReportInput.cs" />
+    <Compile Remove="Reports\Dtos\CountReportItem.cs" />
+    <Compile Remove="Reports\Dtos\CountReportTable.cs" />
+    <Compile Remove="Reports\Dtos\SumReportTable.cs" />
+    <Compile Remove="Reports\Dtos\SumReportTableItems.cs" />
+    <Compile Remove="Reports\Dtos\SumTableOutput.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Senparc.Weixin.WxOpen" Version="3.3.9.2" />
