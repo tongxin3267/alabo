@@ -12,6 +12,7 @@ using Alabo.Tenants;
 using Alabo.UI;
 using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
+using ZKCloud.Open.Message.Models;
 
 namespace Alabo.App.Core.Common.Domain.Entities {
 
@@ -20,7 +21,7 @@ namespace Alabo.App.Core.Common.Domain.Entities {
     ///     在Mongdob的事物未解决之前不能换成Mongdob，在分润中有事物操作
     /// </summary>
     [ClassProperty(Name = "消息发送队列")]
-    public class MessageQueue : AggregateDefaultRoot<MessageQueue>, IAutoTable<MessageQueue> {
+    public class MessageQueue : AggregateDefaultRoot<MessageQueue> {
 
         /// <summary>
         ///     短信模板id（非模板短信id为0）
@@ -87,20 +88,6 @@ namespace Alabo.App.Core.Common.Domain.Entities {
         [Display(Name = "客户端发送IP地址")]
         [Field(ControlsType = ControlsType.TextBox, Width = "110", ListShow = true, SortOrder = 6)]
         public string IpAdress { get; set; } = string.Empty;
-
-        public List<TableAction> Actions() {
-            var list = new List<TableAction>
-            {
-                ToLinkAction("消息发送队列", "/MessageQueue/list")
-            };
-            return list;
-        }
-
-        public PageResult<MessageQueue> PageTable(object query, AutoBaseModel autoModel) {
-            var model = Resolve<IMessageQueueService>().GetPagedList(query);//服务重新写一个分页
-            var result = ToPageResult(model);
-            return result;
-        }
     }
 
     public class MessageQueueTableMap : MsSqlAggregateRootMap<MessageQueue> {
@@ -113,9 +100,6 @@ namespace Alabo.App.Core.Common.Domain.Entities {
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.Version);
-            if (TenantContext.IsTenant) {
-                // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
-            }
         }
     }
 }
