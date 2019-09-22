@@ -6,8 +6,8 @@
     <OldToolsVersion>2.0</OldToolsVersion>
     <LangVersion>7.1</LangVersion>
     <Version>1.0.1</Version>
-    <AssemblyName>Alabo.App.Core</AssemblyName>
-    <RootNamespace>Alabo.App.Core</RootNamespace>
+    <AssemblyName>Alabo.Data.People</AssemblyName>
+    <RootNamespace>Alabo.Data.People</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netcoreapp2.1\ZKCloud.App.Core.xml</DocumentationFile>
