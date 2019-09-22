@@ -71,7 +71,8 @@ namespace Alabo.Web.TaskShell {
             services.AddApiService();
             // 添加支付方式等,第三方注入
             services.AddApiStoreService();
-            ;
+            // 添加任务调度服务
+            //  services.AddTasks();
 
             return services.AddUtil();
         }
