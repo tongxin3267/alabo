@@ -3,6 +3,7 @@ using Alabo.Web.TaskShell.Job;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using System.Threading.Tasks;
+using Alabo.Web.CodeGeneration.EntityCode;
 
 namespace Alabo.Web.TaskShell {
 
@@ -15,11 +16,12 @@ namespace Alabo.Web.TaskShell {
         }
 
         /// <summary>
-        /// Run jobs
+        /// 通过调度任务启动，不同的生成，请手动修改生成方法
         /// </summary>
         private static async Task RunJobs(IWebHost host) {
             var scheduler = new Scheduler();
-            await scheduler.AddJobAsync<BookImportJob>();
+            //实体服务和方法生成
+            await scheduler.AddJobAsync<EntityCodeGenerationJob>();
             //start
             await scheduler.StartAsync();
         }

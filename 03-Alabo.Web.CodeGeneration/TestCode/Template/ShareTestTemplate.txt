@@ -1,0 +1,76 @@
+﻿using Xunit;
+using Alabo.App.Core.Tasks.Domain.Services;
+using Alabo.App.Core.User.Domain.Services;
+using Alabo.Extensions;
+
+namespace [[TestFullName]]
+{
+    /// <summary>
+    /// 请登录网站http://test.5ug.com 手动添加条相关的记录
+    /// </summary>
+    public class [[ClassName]] : BaseShareTest
+    {
+
+        public [[ClassName]]()
+        {
+            this.RegModuleConfigId = 316;
+            this.ShopModuleConfigId = 317;
+            this.ModuleType = typeof([[ModuleFullName]]);
+			this.ConfigType = typeof([[ModuleConfigFullName]]);
+        }
+
+        [Fact]
+        public void ModuleAttributeTest()
+        {
+            var moduleAttribute = Service<ITaskModuleConfigService>().GetModuleAttribute(this.ModuleType);
+            Assert.NotNull(moduleAttribute);
+            Assert.False(moduleAttribute.Id.IsGuidNullOrEmpty());
+			Assert.NotNull(this.ConfigType);
+        }
+
+        [Theory]
+        [InlineData("A001")]
+        [InlineData("A002")]
+        [InlineData("B001")]
+        [InlineData("B002")]
+        [InlineData("admin")]
+        public void UserRegTest(string userName)
+        {
+            var user = Service<IUserService>().GetSingle(userName);
+            var shareOrder = UserRegShareOrder(user);
+            var beforeAccount = GetShareAccount(user.Id);
+
+            this.TaskActuator.ExecuteTask(this.ModuleType, shareOrder,
+                new {ShareOrderId = shareOrder.Id, shareOrder.TriggerType, BaseFenRunAmount = shareOrder.Amount});
+
+            var afterAccount = GetShareAccount(user.Id);
+            var ratios = this.Ratios(this.RegModuleConfigId);
+            var shareAmount = shareOrder.Amount*ratios[0];// 分润金额
+            var shareRewardInput = new ShareRewardInput(shareOrder, beforeAccount, afterAccount, user.Id, shareAmount, this.RegModuleConfigId,user.Id);
+            this.AssertResult(shareRewardInput);
+
+        }
+
+        [Theory]
+        [InlineData("B003")]
+        [InlineData("B004")]
+        public void ShopOrderTest(string userName)
+        {
+            var user = Service<IUserService>().GetSingle(userName);
+            var orderResult = GetShopOrder(user);
+            var beforeAccount = GetShareAccount(user.Id);
+
+            this.TaskActuator.ExecuteTask(this.ModuleType, orderResult.Item1,
+                new { ShareOrderId = orderResult.Item1.Id, orderResult.Item1.TriggerType, OrderId = orderResult.Item2.Id });
+
+            var afterAccount = GetShareAccount(user.Id);
+            var ratios = this.Ratios(this.ShopModuleConfigId);
+            var shareAmount = orderResult.Item2.PaymentAmount * ratios[0];// 分润金额
+
+
+            var shareRewardInput = new ShareRewardInput(orderResult.Item1, beforeAccount, afterAccount, user.Id, shareAmount, this.ShopModuleConfigId,user.Id);
+            this.AssertResult(shareRewardInput);
+
+        }
+    }
+}
