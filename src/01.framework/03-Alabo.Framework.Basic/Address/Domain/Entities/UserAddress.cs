@@ -107,16 +107,5 @@ namespace Alabo.App.Core.User.Domain.Entities {
         ///     城市编码
         /// </summary>
         public long City { get; set; }
-
-        /// <summary>
-        ///     获取链接
-        /// </summary>
-        public IEnumerable<ViewLink> ViewLinks() {
-            var quickLinks = new List<ViewLink>
-            {
-                new ViewLink("详情", "/Admin/UserAddress/Edit?Id=[[Id]]", Icons.Edit, LinkType.ColumnLink)
-            };
-            return quickLinks;
-        }
     }
 }
