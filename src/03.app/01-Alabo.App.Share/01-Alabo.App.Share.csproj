@@ -5,6 +5,8 @@
     <UpgradeBackupLocation>C:\git\zkcloudv11s\Backup\src\app\ZKCloud.App.Open\</UpgradeBackupLocation>
     <OldToolsVersion>2.0</OldToolsVersion>
     <LangVersion>7.1</LangVersion>
+    <AssemblyName>Alabo.App.Share</AssemblyName>
+    <RootNamespace>Alabo.App.Share</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netcoreapp2.1\ZKCloud.App.Open.xml</DocumentationFile>

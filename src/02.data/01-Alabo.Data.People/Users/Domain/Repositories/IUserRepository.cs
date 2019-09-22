@@ -47,31 +47,10 @@ namespace Alabo.App.Core.User.Domain.Repositories {
         IList<Entities.User> GetViewUserList(UserInput userInput, out long count);
 
         /// <summary>
-        /// 获取用户服务商家的统计数据
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        UserStatisticOutput GetUserStatistic(long userId);
-
-        /// <summary>
-        /// 获取用户收益的统计数据
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        EarnStatisticOutput GetEarnStatistic(long userId);
-
-        /// <summary>
         ///     会员删除时推荐关系修改
         /// </summary>
         /// <param name="userIds"></param>
         /// <param name="parentId"></param>
         bool UpdateRecommend(List<long> userIds, long parentId);
-
-        /// <summary>
-        ///     会员删除时团队关系修改
-        /// </summary>
-        /// <param name="userIds"></param>
-        /// <param name="serviceCenterUserId"></param>
-        bool UpdateserviceCenter(List<long> userIds, long serviceCenterUserId);
     }
 }

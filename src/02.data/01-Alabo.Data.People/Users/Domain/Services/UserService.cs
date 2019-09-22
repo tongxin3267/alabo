@@ -2,12 +2,10 @@
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Employes.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Repositories;
 using Alabo.App.Core.User.ViewModels;
-using Alabo.Core.Enums.Enum;
 using Alabo.Core.Extensions;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
@@ -300,7 +298,8 @@ namespace Alabo.App.Core.User.Domain.Services {
 
             var parentIds = viewUserList.Select(r => r.ParentId).Distinct().ToList();
             var parentUsers = _userRepository.GetList(parentIds);
-            var identityList = Resolve<IIdentityService>().GetList(r => userIds.Contains(r.UserId)).ToList();
+            //TODO 9月重构注释
+            //var identityList = Resolve<IIdentityService>().GetList(r => userIds.Contains(r.UserId)).ToList();
 
             IList<ViewUser> userResult = new List<ViewUser>();
 
@@ -336,11 +335,11 @@ namespace Alabo.App.Core.User.Domain.Services {
                     viewUser.ParentName = GetUserStyle(parentItemUser);
                     viewUser.ParentId = parentItemUser.Id;
                 }
-
-                var identityItem = identityList.FirstOrDefault(r => r.UserId == item.Id);
-                if (identityItem != null) {
-                    viewUser.IdentityStatus = identityItem.Status;
-                }
+                //TODO 9月重构注释
+                //var identityItem = identityList.FirstOrDefault(r => r.UserId == item.Id);
+                //if (identityItem != null) {
+                //    viewUser.IdentityStatus = identityItem.Status;
+                //}
 
                 if (userInput.FilterType == FilterType.User) {
                     viewUser.UserName = item.GetUserName();
@@ -364,7 +363,7 @@ namespace Alabo.App.Core.User.Domain.Services {
 
             var parentIds = viewUserList.Select(r => r.ParentId).Distinct().ToList();
             var parentUsers = _userRepository.GetList(parentIds);
-            var identityList = Resolve<IIdentityService>().GetList(r => userIds.Contains(r.UserId)).ToList();
+            // var identityList = Resolve<IIdentityService>().GetList(r => userIds.Contains(r.UserId)).ToList();
 
             IList<T> userResult = new List<T>();
 
@@ -401,10 +400,10 @@ namespace Alabo.App.Core.User.Domain.Services {
                     viewUser.ParentId = parentItemUser.Id;
                 }
 
-                var identityItem = identityList.FirstOrDefault(r => r.UserId == item.Id);
-                if (identityItem != null) {
-                    viewUser.IdentityStatus = identityItem.Status;
-                }
+                //var identityItem = identityList.FirstOrDefault(r => r.UserId == item.Id);
+                //if (identityItem != null) {
+                //    viewUser.IdentityStatus = identityItem.Status;
+                //}
 
                 if (userInput.FilterType == FilterType.User) {
                     viewUser.UserName = item.GetUserName();
@@ -414,32 +413,6 @@ namespace Alabo.App.Core.User.Domain.Services {
             }
 
             return PagedList<T>.Create(userResult, count, userInput.PageSize, userInput.PageIndex);
-        }
-
-        /// <summary>
-        /// 获取用户推广商家的统计数据
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        public UserStatisticOutput GetUserStatistic(long userId) {
-            return _userRepository.GetUserStatistic(userId);
-        }
-
-        /// <summary>
-        /// 获取用户推广商家的统计数据
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        public EarnStatisticOutput GetEarnStatistic(long userId) {
-            var statistic = _userRepository.GetEarnStatistic(userId);
-
-            var userAccount = Resolve<IAccountService>().GetAccount(userId, Currency.Cny);
-
-            if (userAccount != null) {
-                statistic.Balance = userAccount.Amount;
-            }
-
-            return statistic;
         }
 
         /// <summary>
@@ -561,16 +534,16 @@ namespace Alabo.App.Core.User.Domain.Services {
                     throw new ValidException("用户不能为空");
                 }
 
-                var accout = Resolve<IAccountService>().GetSingle(r => r.UserId == user.Id);
+                //     var accout = Resolve<IAccountService>().GetSingle(r => r.UserId == user.Id);
                 //if (accout == null) {
                 //    throw new ValidException("用户不合法");
                 //}
 
-                var key = user?.Id + user?.UserName + HttpWeb.Site.Id + accout?.Id + HttpWeb.Tenant;
-                var key2 = user?.Id + user?.UserName + HttpWeb.Site.Id + accout?.MoneyTypeId;
-                var key3 = user?.Id + user?.UserName + HttpWeb.Site.Id + accout?.MoneyTypeId +
+                var key = user?.Id + user?.UserName + HttpWeb.Site.Id + HttpWeb.Tenant;
+                var key2 = user?.Id + user?.UserName + HttpWeb.Site.Id;
+                var key3 = user?.Id + user?.UserName + HttpWeb.Site.Id +
                            HttpWeb.Site.Id + user?.Detail?.Id;
-                var token = key.ToMd5HashString() + accout?.Token?.Substring(5, 15) +
+                var token = key.ToMd5HashString() +
                             key2.ToMd5HashString().Substring(3, 18) + key3.ToMd5HashString();
                 return token;
             }, "GetUserToken_" + user?.Id).Value;

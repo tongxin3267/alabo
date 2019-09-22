@@ -79,28 +79,6 @@ namespace Alabo.App.Core.User.Controllers {
             return ApiResult.Success(apiOutput);
         }
 
-        /// <summary>
-        /// 获取商家数据
-        /// </summary>
-        /// <param name="loginUserId"></param>
-        /// <returns></returns>
-        [HttpGet]
-        [Display(Description = "商家数据")]
-        public ApiResult<UserStatisticOutput> GetUserStatistic([FromQuery] long loginUserId) {
-            return ApiResult.Success(Resolve<IUserService>().GetUserStatistic(loginUserId));
-        }
-
-        /// <summary>
-        /// 获取收益数据
-        /// </summary>
-        /// <param name="loginUserId"></param>
-        /// <returns></returns>
-        [HttpGet]
-        [Display(Description = "收益数据")]
-        public ApiResult<EarnStatisticOutput> GetEarnStatistic([FromQuery] long loginUserId) {
-            return ApiResult.Success(Resolve<IUserService>().GetEarnStatistic(loginUserId));
-        }
-
         [HttpPost]
         public ApiResult AddUser([FromBody] ViewUser view) {
             if (!this.IsFormValid()) {

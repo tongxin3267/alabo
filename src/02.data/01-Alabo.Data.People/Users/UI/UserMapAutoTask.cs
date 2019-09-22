@@ -1,5 +1,4 @@
-﻿using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Core.User.Domain.Services;
+﻿using Alabo.App.Core.User.Domain.Services;
 using Alabo.Schedules;
 using Alabo.UI.AutoTasks;
 using Alabo.Web.Mvc.Attributes;

@@ -19,9 +19,6 @@ namespace Alabo.App.Core.User.Domain.Repositories {
         /// <param name="userId">用户Id</param>
         UserMap GetSingle(long userId);
 
-        List<UserTree> GetTree(long userId, UserTreeConfig userTreeConfig, UserTypeConfig userType,
-            List<UserGradeConfig> userGradeConfigList, UserTypeConfig userServiceConfig);
-
         UserMap Add(UserMap userMap);
 
         void UpdateMap(long userId, string map);

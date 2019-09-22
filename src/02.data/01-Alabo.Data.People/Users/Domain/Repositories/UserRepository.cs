@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.Tasks.Domain.Enums;
+﻿using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.ViewModels;
@@ -14,7 +8,10 @@ using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Extensions;
-using Alabo.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
 using Convert = System.Convert;
 
 namespace Alabo.App.Core.User.Domain.Repositories {
@@ -210,6 +207,7 @@ namespace Alabo.App.Core.User.Domain.Repositories {
                     //添加用户资产
                     AddAccount(transaction, user.Id, moneyTypes);
                     //添加分润订单
+                    //TODO 9月重构注释
                     AddShareOrder(transaction, user.Id);
                     transaction.Commit();
                 } catch (Exception ex) {
@@ -394,24 +392,14 @@ namespace Alabo.App.Core.User.Domain.Repositories {
             return false;
         }
 
-        public bool UpdateserviceCenter(List<long> userIds, long serviceCenterUserId) {
-            var sql =
-                $"  update  user_userDetail set ServiceCenterUserId=={serviceCenterUserId} where UserId in ({userIds.ToSqlString()})";
-            var result = RepositoryContext.ExecuteNonQuery(sql);
-            if (result > 0) {
-                return true;
-            }
-
-            return false;
-        }
-
         private void AddAccount(DbTransaction transaction, long userId, List<MoneyTypeConfig> moneyTypes) {
             foreach (var item in moneyTypes) {
                 var sql = @"INSERT INTO [dbo].[Finance_Account]
                             ([UserId],[MoneyTypeId],[Amount],[FreezeAmount],[HistoryAmount],[Token]) VALUES
                              (@UserId,@MoneyTypeId,0,0,0,@Token)";
-
-                var token = Ioc.Resolve<IAccountService>().GetToken(userId, item);
+                //TODO 9月重构注释
+                // var token = Ioc.Resolve<IAccountService>().GetToken(userId, item);
+                var token = string.Empty;
                 var parameters = new[]
                 {
                     RepositoryContext.CreateParameter("@UserId", userId),

@@ -1,7 +1,4 @@
 ﻿using Alabo.App.Core.Admin.Domain.Services;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
@@ -31,7 +28,7 @@ namespace Alabo.App.Core.User.Domain.Services {
                 UserId = user.Id,
                 Method = "AfterUserRegTask"
             };
-            Resolve<ITaskQueueService>().AddBackJob(backJobParameter);
+            //   Resolve<ITaskQueueService>().AddBackJob(backJobParameter);
         }
 
         /// <summary>
@@ -42,7 +39,7 @@ namespace Alabo.App.Core.User.Domain.Services {
             var user = Resolve<IUserService>().GetUserDetail(userId);
             if (user != null) {
                 // 生成用户二维码
-                Resolve<IUserQrCodeService>().CreateCode(user);
+                // Resolve<IUserQrCodeService>().CreateCode(user);
 
                 // 添加内部合伙人关系
                 AddParnter(user);

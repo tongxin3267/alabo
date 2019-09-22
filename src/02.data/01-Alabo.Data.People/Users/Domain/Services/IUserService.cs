@@ -84,20 +84,6 @@ namespace Alabo.App.Core.User.Domain.Services {
         IList<Entities.User> GetList(IList<long> userIds);
 
         /// <summary>
-        /// 获取用户推广商家的统计数据
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        UserStatisticOutput GetUserStatistic(long userId);
-
-        /// <summary>
-        /// 获取用户收益的统计数据
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <returns></returns>
-        EarnStatisticOutput GetEarnStatistic(long userId);
-
-        /// <summary>
         ///     更新s the specified 会员.
         /// </summary>
         /// <param name="user">The 会员.</param>

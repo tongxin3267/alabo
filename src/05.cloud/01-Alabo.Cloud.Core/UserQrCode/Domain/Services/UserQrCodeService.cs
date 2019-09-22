@@ -54,7 +54,8 @@ namespace Alabo.App.Core.User.Domain.Services {
                 ServiceName = typeof(IUserQrCodeService).Name,
                 Method = "CreateAllUserQrCode"
             };
-            Resolve<ITaskQueueService>().AddBackJob(backJobParameter);
+            //TODO 9月重构注释
+            //  Resolve<ITaskQueueService>().AddBackJob(backJobParameter);
         }
 
         /// <summary>

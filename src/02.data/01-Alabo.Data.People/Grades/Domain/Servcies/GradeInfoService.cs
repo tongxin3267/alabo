@@ -1,12 +1,4 @@
-using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Repositories;
@@ -20,6 +12,10 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Linq;
 using Alabo.Schedules;
+using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.App.Core.User.Domain.Services {
 
