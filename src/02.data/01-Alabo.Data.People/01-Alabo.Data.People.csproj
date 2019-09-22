@@ -17,11 +17,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Api\**" />
-    <Compile Remove="Tasks\Dtos\**" />
     <EmbeddedResource Remove="Api\**" />
-    <EmbeddedResource Remove="Tasks\Dtos\**" />
     <None Remove="Api\**" />
-    <None Remove="Tasks\Dtos\**" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Senparc.Weixin.WxOpen" Version="3.3.9.2" />

@@ -2,16 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <AssemblyName>Alabo.Framework.Core</AssemblyName>
-    <RootNamespace>Alabo.Core</RootNamespace>
+    <RootNamespace>Alabo.Framework.Tasks</RootNamespace>
+    <AssemblyName>Alabo.Framework.Tasks</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Admins\Dtos\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\01-Alabo\01-Alabo.csproj" />
+    <ProjectReference Include="..\02-Alabo.Framework.Core\02-Alabo.Framework.Core.csproj" />
   </ItemGroup>
 
 </Project>

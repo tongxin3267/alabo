@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Alabo.App.Core.Common.Domain.Entities;
+using Alabo.App.Core.Finance.Domain.CallBacks;
+using Alabo.App.Core.Themes.DiyModels.Links;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Services;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using Alabo.App.Core.Common.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Themes.DiyModels.Links;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Services;
 
 namespace Alabo.App.Core.Common.Domain.Services {
 
@@ -73,11 +72,6 @@ namespace Alabo.App.Core.Common.Domain.Services {
         ///     获取所有正常的货币类型
         /// </summary>
         IList<MoneyTypeConfig> MoneyTypes();
-
-        /// <summary>
-        ///     获取所有正常的用户类型
-        /// </summary>
-        IList<UserTypeConfig> UserTypes();
 
         /// <summary>
         ///     初始化所有的AutoConfig配置数据

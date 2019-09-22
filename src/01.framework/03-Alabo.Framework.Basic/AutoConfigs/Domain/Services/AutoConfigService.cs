@@ -1,19 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using Alabo.App.Core.Admin.Domain.Services;
-using Alabo.App.Core.Common.Domain.CallBacks;
+﻿using Alabo.App.Core.Admin.Domain.Services;
 using Alabo.App.Core.Common.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Repositories;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Themes.DiyModels.Links;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -24,6 +13,14 @@ using Alabo.Reflections;
 using Alabo.Runtime;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.ViewFeatures;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 
 namespace Alabo.App.Core.Common.Domain.Services {
 
@@ -286,13 +283,6 @@ namespace Alabo.App.Core.Common.Domain.Services {
         }
 
         /// <summary>
-        ///     获取所有正常的用户类型
-        /// </summary>
-        public IList<UserTypeConfig> UserTypes() {
-            return GetList<UserTypeConfig>(r => r.Status == Status.Normal).OrderBy(r => r.SortOrder).ToList();
-        }
-
-        /// <summary>
         ///     初始化所有的AutoConfig配置数据
         /// </summary>
         public void InitDefaultData() {
@@ -324,25 +314,25 @@ namespace Alabo.App.Core.Common.Domain.Services {
                 ObjectCache.Set(productPriceScheduleKey, true);
             }
 
-            // 修改二维码配置时，会在1分钟内自动更新所有会员的二维码
-            if (type == typeof(QrCodeConfig).FullName) {
-                Resolve<IUserQrCodeService>().CreateCodeTask();
-            }
+            //// 修改二维码配置时，会在1分钟内自动更新所有会员的二维码
+            //if (type == typeof(QrCodeConfig).FullName) {
+            //    Resolve<IUserQrCodeService>().CreateCodeTask();
+            //}
 
             // 修改二维码配置时，会在1分钟内自动更新所有会员的二维码
-            if (type == "Alabo.App.Core.User.Domain.CallBacks.UserConfig") {
-                var userMapInfoUpdateSchedule = "UserMapInfoUpdateSchedule";
-                var userConfig = GetValue<TeamConfig>();
-                if (ObjectCache.TryGet(userMapInfoUpdateSchedule, out Tuple<bool, long> result)) {
-                    // 团队数量更新
-                    if (result.Item2 != userConfig.TeamLevel) {
-                        Resolve<IGradeInfoService>().UpdataAllUserBackJob();
-                        ObjectCache.Set(userMapInfoUpdateSchedule, Tuple.Create(true, userConfig.TeamLevel));
-                    }
-                } else {
-                    ObjectCache.Set(userMapInfoUpdateSchedule, Tuple.Create(true, userConfig.TeamLevel));
-                }
-            }
+            //if (type == "Alabo.App.Core.User.Domain.CallBacks.UserConfig") {
+            //    var userMapInfoUpdateSchedule = "UserMapInfoUpdateSchedule";
+            //    var userConfig = GetValue<TeamConfig>();
+            //    if (ObjectCache.TryGet(userMapInfoUpdateSchedule, out Tuple<bool, long> result)) {
+            //        // 团队数量更新
+            //        if (result.Item2 != userConfig.TeamLevel) {
+            //            Resolve<IGradeInfoService>().UpdataAllUserBackJob();
+            //            ObjectCache.Set(userMapInfoUpdateSchedule, Tuple.Create(true, userConfig.TeamLevel));
+            //        }
+            //    } else {
+            //        ObjectCache.Set(userMapInfoUpdateSchedule, Tuple.Create(true, userConfig.TeamLevel));
+            //    }
+            //}
 
             var cacheAllKey = AutoConfigCacheKey + "_alltypes";
             ObjectCache.Remove(cacheAllKey);

@@ -5,12 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="AutoConfigs\**" />
-    <EmbeddedResource Remove="AutoConfigs\**" />
-    <None Remove="AutoConfigs\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\01-Alabo\01-Alabo.csproj" />
     <ProjectReference Include="..\02-Alabo.Framework.Core\02-Alabo.Framework.Core.csproj" />
   </ItemGroup>

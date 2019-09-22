@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Alabo.App.Core.Common.Domain.Enum;
-using Alabo.App.Core.Common.Domain.Repositories;
+﻿using Alabo.App.Core.Common.Domain.Repositories;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using ZKCloud.Open.Message.Models;
 using MessageQueue = Alabo.App.Core.Common.Domain.Entities.MessageQueue;
 

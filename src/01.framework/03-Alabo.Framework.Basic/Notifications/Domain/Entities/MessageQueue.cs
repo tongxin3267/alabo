@@ -1,17 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Common.Domain.Enum;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.Datas.Ef.SqlServer;
+﻿using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.Tenants;
-using Alabo.UI;
-using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.Message.Models;
 
 namespace Alabo.App.Core.Common.Domain.Entities {
