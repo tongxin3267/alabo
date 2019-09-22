@@ -19,7 +19,7 @@ namespace Alabo.App.Core.User.Domain.Services {
             var userTypeConfig = Resolve<IAutoConfigService>().GetList<UserTypeConfig>().FirstOrDefault();
             var userGradeConfigList = Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
             var userServiceConfig = Resolve<IAutoConfigService>().GetList<UserTypeConfig>().FirstOrDefault();
-            return Repository<IUserMapRepository>().GetTree(UserId, userTreeConfig, userTypeConfig, userGradeConfigList,
+            return Repository<IUserTreeRepository>().GetTree(UserId, userTreeConfig, userTypeConfig, userGradeConfigList,
                 userServiceConfig);
         }
     }

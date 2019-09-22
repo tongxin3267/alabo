@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.Domains.Services;
 
@@ -14,5 +15,8 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// </summary>
         /// <param name="userId">用户Id</param>
         List<UserTree> GetUserTree(long userId);
+
+        List<UserTree> GetTree(long userId, UserTreeConfig userTreeConfig, UserTypeConfig userType,
+            List<UserGradeConfig> userGradeConfigList, UserTypeConfig userServiceConfig);
     }
 }

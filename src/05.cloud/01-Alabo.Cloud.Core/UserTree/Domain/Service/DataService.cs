@@ -19,14 +19,14 @@ namespace Alabo.App.Share.Operate.Domain.Service {
         public ServiceResult CheckOutUserMap() {
             //  UpdateMap(113);
             var pageCount = 30; // 每次处理30个
-            var totalCount = Repository<IUserMapRepository>().RepositoryContext
+            var totalCount = Repository<IUserTreeRepository>().RepositoryContext
                 .ExecuteScalar("select count(id) from User_User").ConvertToLong();
             var totalPage = totalCount / 30 + 1;
             for (var i = 1; i <= totalPage; i++) {
                 var userIds = new List<long>();
                 var sql =
                     $"SELECT TOP 30 Id FROM (SELECT  ROW_NUMBER() OVER (ORDER BY id  ) AS RowNumber,Id FROM User_User  ) as A WHERE RowNumber > {pageCount}*({i}-1)  ";
-                using (var reader = Repository<IUserMapRepository>().RepositoryContext.ExecuteDataReader(sql)) {
+                using (var reader = Repository<IUserTreeRepository>().RepositoryContext.ExecuteDataReader(sql)) {
                     while (reader.Read()) {
                         userIds.Add(reader["Id"].ConvertToLong());
                     }
@@ -57,14 +57,14 @@ namespace Alabo.App.Share.Operate.Domain.Service {
         public void UpdateAllUserMap() {
             // 运营之前先更新这个update User_UserMap set ParentMap=''
             var pageCount = 30; // 每次处理30个
-            var totalCount = Repository<IUserMapRepository>().RepositoryContext
+            var totalCount = Repository<IUserTreeRepository>().RepositoryContext
                 .ExecuteScalar("select count(id) from User_User").ConvertToLong();
             var totalPage = totalCount / 30 + 1;
             for (var i = 1; i <= totalPage; i++) {
                 var userIds = new List<long>();
                 var sql =
                     $"SELECT TOP 30 Id FROM (SELECT  ROW_NUMBER() OVER (ORDER BY id  ) AS RowNumber,Id FROM User_User  ) as A WHERE RowNumber > {pageCount}*({i}-1)  ";
-                using (var reader = Repository<IUserMapRepository>().RepositoryContext.ExecuteDataReader(sql)) {
+                using (var reader = Repository<IUserTreeRepository>().RepositoryContext.ExecuteDataReader(sql)) {
                     while (reader.Read()) {
                         userIds.Add(reader["Id"].ConvertToLong());
                     }
