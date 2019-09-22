@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AssemblyName>Alabo.Data.Things</AssemblyName>
+    <RootNamespace>Alabo.Data.Things</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Goods\" />
+    <Folder Include="Orders\" />
+  </ItemGroup>
 
 </Project>
