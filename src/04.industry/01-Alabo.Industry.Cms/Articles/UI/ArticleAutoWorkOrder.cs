@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.App.Core.Common.UI;
-using Alabo.Domains.Entities;
-using Alabo.Extensions;
-using Alabo.Linq.Dynamic;
+﻿using Alabo.Domains.Entities;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 using Alabo.Web.Mvc.Attributes;
+using System;
 using IAutoForm = Alabo.UI.AutoForms.IAutoForm;
 
 namespace Alabo.App.Cms.Articles.UI {

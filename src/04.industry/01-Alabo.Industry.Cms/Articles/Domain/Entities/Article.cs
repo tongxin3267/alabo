@@ -13,8 +13,7 @@ using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Cms.Articles.Domain.Entities
-{
+namespace Alabo.App.Cms.Articles.Domain.Entities {
 
     /// <summary>
     ///     文章类
@@ -22,8 +21,7 @@ namespace Alabo.App.Cms.Articles.Domain.Entities
     [BsonIgnoreExtraElements]
     [Table("CMS_Article")]
     [ClassProperty(Name = "文章", Icon = "fa fa-puzzle-piece", SideBarType = SideBarType.ArticleSideBarSideBar)]
-    public class Article : AggregateMongodbUserRoot<Article>, IAutoTable<Article>
-    {
+    public class Article : AggregateMongodbUserRoot<Article> {
 
         /// <summary>
         ///     级联Id
@@ -188,46 +186,5 @@ namespace Alabo.App.Cms.Articles.Domain.Entities
         /// <value>The tags.</value>
         [Display(Name = "标签")]
         public string Tags { get; set; }
-
-        public IEnumerable<ViewLink> ViewLinks()
-        {
-            var quickLinks = new List<ViewLink>
-            {
-                new ViewLink("编辑", "", Icons.Edit, LinkType.ColumnLink),
-                new ViewLink("添加文章", "", Icons.Add, LinkType.TableQuickLink),
-                new ViewLink("删除", "", Icons.Delete, LinkType.ColumnLink)
-            };
-            return quickLinks;
-        }
-
-        private class FactAttribute : Attribute
-        {
-        }
-
-        /// <summary>
-        /// 分页列表
-        /// </summary>
-        /// <param name="query"></param>
-        /// <param name="autoModel"></param>
-        /// <returns></returns>
-        public PageResult<Article> PageTable(object query, AutoBaseModel autoModel)
-        {
-            var list = Resolve<IArticleService>().GetPagedList(query);
-            return ToPageResult(list);
-        }
-
-        /// <summary>
-        /// 操作
-        /// </summary>
-        /// <returns></returns>
-        public List<TableAction> Actions()
-        {
-            var list = new List<TableAction>
-            {
-                ToLinkAction("编辑", "Edit",TableActionType.ColumnAction),
-                ToLinkAction("删除", "/Api/Article/Delete",ActionLinkType.Delete,TableActionType.ColumnAction)
-            };
-            return list;
-        }
     }
 }

@@ -112,6 +112,7 @@
     <ProjectReference Include="..\..\01.framework\05-Alabo.Framework.Themes\05-Alabo.Framework.Themes.csproj" />
     <ProjectReference Include="..\..\01.framework\06-Alabo.Framework.Tasks\06-Alabo.Framework.Tasks.csproj" />
     <ProjectReference Include="..\..\02.data\01-Alabo.Data.People\01-Alabo.Data.People.csproj" />
+    <ProjectReference Include="..\..\04.industry\01-Alabo.Industry.Cms\01-Alabo.Industry.Cms.csproj" />
     <ProjectReference Include="..\..\05.cloud\01-Alabo.Cloud.Core\01-Alabo.Cloud.Core.csproj" />
   </ItemGroup>
 
