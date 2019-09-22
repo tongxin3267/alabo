@@ -94,6 +94,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04-Alabo.Cloud.Contracts", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06.Alabo.Cloud.Reports", "src\05.cloud\06.Alabo.Cloud.Reports\06.Alabo.Cloud.Reports.csproj", "{B2795BB2-EE82-420B-AB77-C0F05322E533}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02-Alabo.Cloud.People", "02-Alabo.Cloud.People\02-Alabo.Cloud.People.csproj", "{6A73F424-7827-4258-9348-1670CAA9E17E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -232,6 +234,10 @@ Global
 		{B2795BB2-EE82-420B-AB77-C0F05322E533}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B2795BB2-EE82-420B-AB77-C0F05322E533}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B2795BB2-EE82-420B-AB77-C0F05322E533}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A73F424-7827-4258-9348-1670CAA9E17E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A73F424-7827-4258-9348-1670CAA9E17E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A73F424-7827-4258-9348-1670CAA9E17E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A73F424-7827-4258-9348-1670CAA9E17E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -279,6 +285,7 @@ Global
 		{D3316663-C4AE-446D-B045-1DBFAB6522B2} = {78B783FE-A75F-435B-9C34-64D875B74923}
 		{97D1E5BA-5E92-4BDD-80F2-129AC9F6802D} = {88893B6D-E6A5-4347-8D36-1F2FD57DA466}
 		{B2795BB2-EE82-420B-AB77-C0F05322E533} = {88893B6D-E6A5-4347-8D36-1F2FD57DA466}
+		{6A73F424-7827-4258-9348-1670CAA9E17E} = {88893B6D-E6A5-4347-8D36-1F2FD57DA466}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A1E90677-FAAA-4BD1-8798-FCFEE91E8323}
