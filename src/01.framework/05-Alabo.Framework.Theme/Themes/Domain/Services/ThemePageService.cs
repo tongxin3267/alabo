@@ -1,8 +1,3 @@
-using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using Alabo.App.Core.ApiStore.CallBacks;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Themes.Domain.Entities;
 using Alabo.App.Core.Themes.Dtos;
 using Alabo.Datas.UnitOfWorks;
@@ -11,6 +6,10 @@ using Alabo.Domains.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Helpers;
+using MongoDB.Bson;
+using System.Collections.Generic;
+using Alabo.App.Core.Common.Domain.Services;
+using Alabo.App.Core.ApiStore.CallBacks;
 
 namespace Alabo.App.Core.Themes.Domain.Services {
 
@@ -55,7 +54,7 @@ namespace Alabo.App.Core.Themes.Domain.Services {
                 allClientPages.Site.Tenant = HttpWeb.Tenant;
 
                 // 判断是否开启微信支付
-                var config = Resolve<IAutoConfigService>().GetValue<WeChatPaymentConfig>();
+                var config = Resolve<IAlaboAutoConfigService>().GetValue<WeChatPaymentConfig>();
                 if (!config.IsEnable || config.AppId.IsNullOrEmpty() || config.APISecretKey.IsNullOrEmpty() || config.CallBackUrl.IsNullOrEmpty()) {
                     allClientPages.Site.IsWeiXinPay = false;
                 } else {

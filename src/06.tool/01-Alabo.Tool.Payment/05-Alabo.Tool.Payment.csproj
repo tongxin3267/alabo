@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\framework\Alabo.WebApi\02-Alabo.Framework.Core.csproj" />
-    <ProjectReference Include="..\..\framework\Alabo\01-Alabo.csproj" />
+    <ProjectReference Include="..\..\01.framework\01-Alabo\01-Alabo.csproj" />
+    <ProjectReference Include="..\..\01.framework\02-Alabo.Framework.Core\02-Alabo.Framework.Core.csproj" />
   </ItemGroup>
 
 </Project>

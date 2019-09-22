@@ -6,4 +6,10 @@
     <RootNamespace>Alabo.Framework.Theme</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\06.tool\01-Alabo.Tool.Payment\05-Alabo.Tool.Payment.csproj" />
+    <ProjectReference Include="..\01-Alabo\01-Alabo.csproj" />
+    <ProjectReference Include="..\02-Alabo.Framework.Core\02-Alabo.Framework.Core.csproj" />
+  </ItemGroup>
+
 </Project>

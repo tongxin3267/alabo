@@ -5,8 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Alabo.WebApi\02-Alabo.Framework.Core.csproj" />
-    <ProjectReference Include="..\Alabo\01-Alabo.csproj" />
+    <Compile Remove="AutoConfigs\**" />
+    <EmbeddedResource Remove="AutoConfigs\**" />
+    <None Remove="AutoConfigs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\01-Alabo\01-Alabo.csproj" />
+    <ProjectReference Include="..\02-Alabo.Framework.Core\02-Alabo.Framework.Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,12 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Alabo\01-Alabo.csproj" />
+    <Folder Include="Admins\Dtos\" />
+    <Folder Include="Notifications\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Admins\Dtos\" />
-    <Folder Include="Notifications\" />
+    <ProjectReference Include="..\01-Alabo\01-Alabo.csproj" />
   </ItemGroup>
 
 </Project>
