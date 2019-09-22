@@ -1,9 +1,8 @@
 ﻿using Alabo.Schedules.Job;
-using Alabo.Web.TaskShell.Job;
+using Alabo.Web.CodeGeneration.EntityCode;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using System.Threading.Tasks;
-using Alabo.Web.CodeGeneration.EntityCode;
 
 namespace Alabo.Web.TaskShell {
 

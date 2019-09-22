@@ -22,7 +22,7 @@ namespace Alabo.Test.Generation.CodeTemplate {
         }
 
         public static string GetFilePath(Type type, string flag, string projectName = "") {
-            var host = new TestHostingEnvironment();
+            //  var host = new TestHostingEnvironment();
             var proj = string.Empty;
             if (type.Module.Name == "ZKCloud") {
                 proj = type.Assembly.GetName().Name + ".Test";
@@ -32,8 +32,9 @@ namespace Alabo.Test.Generation.CodeTemplate {
 
             var paths = type.Namespace.Replace(type.Assembly.GetName().Name, "")
                 .Split(".", StringSplitOptions.RemoveEmptyEntries);
-            var filePath = $"{host.TestRootPath}\\{proj}".Replace("zkcloudv11s", projectName)
-                .Replace("Entities", "Services").Replace("test", "app");
+            //var filePath = $"{host.TestRootPath}\\{proj}".Replace("zkcloudv11s", projectName)
+            //    .Replace("Entities", "Services").Replace("test", "app");
+            var filePath = proj;
             foreach (var item in paths) {
                 filePath += "\\" + item.Replace("Entities", flag);
                 DirectoryHelper.CreateIfNotExists(filePath);

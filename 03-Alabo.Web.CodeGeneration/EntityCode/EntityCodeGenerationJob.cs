@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Alabo.App.Core.Admin.Domain.Services;
-using Alabo.App.Core.Employes.Domain.Entities;
-using Alabo.Dependency;
+﻿using Alabo.Dependency;
 using Alabo.Domains.Entities.Core;
-using Alabo.Helpers;
 using Alabo.Schedules.Job;
 using Alabo.Test.Generation.CodeTemplate;
 using Quartz;
-using Senparc.NeuChar.Entities;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Alabo.App.Cms.Articles.Domain.Entities;
+using Alabo.Reflections;
 
 namespace Alabo.Web.CodeGeneration.EntityCode {
 
@@ -27,15 +23,17 @@ namespace Alabo.Web.CodeGeneration.EntityCode {
         }
 
         public void CreateCode(Type type) {
-            var keyType = "long"; // Sql实体主键类型为long
-            if (type.GetInterfaces().Contains(typeof(IMongoEntity))) {
-                keyType = "ObjectId"; // MongoDb实体 主键类型为ObjectId
+            var keyIdType = Reflection.GetMemberType(type, "Id");
+            if (keyIdType == null) {
+                Console.WriteLine($@"{type.Name}非实体，请重新输入");
+                return;
             }
+
             ServcieTemplate.Create(type);
             Console.WriteLine(@"服务代码已生成");
             RepositroyTemplate.Create(type);
             Console.WriteLine(@"仓储代码已生成");
-            ApiControllerTemplate.CreateApiController(type, keyType);
+            ApiControllerTemplate.CreateApiController(type, keyIdType.Name);
             Console.WriteLine(@"Api接口代码已生成");
         }
     }

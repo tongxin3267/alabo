@@ -10,6 +10,8 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using Alabo.Helpers;
+using File = System.IO.File;
 
 namespace Alabo.Test.Generation {
 
@@ -28,7 +30,7 @@ namespace Alabo.Test.Generation {
                 instanseType = instanseType.GetType();
             }
 
-            var host = new TestHostingEnvironment();
+            // var host = new TestHostingEnvironment();
             var testBuilder = new StringBuilder();
             var proj = string.Empty;
             if (type.Module.Name == "ZKCloud") {
@@ -39,7 +41,8 @@ namespace Alabo.Test.Generation {
 
             var paths = type.Namespace.Replace(type.Assembly.GetName().Name, "")
                 .Split(".", StringSplitOptions.RemoveEmptyEntries);
-            var filePath = $"{host.TestRootPath}\\{proj}";
+            //  var filePath = $"{host.TestRootPath}\\{proj}";
+            var filePath = proj;
             if (isZkcloud) {
                 filePath += ".Test";
             }
@@ -330,7 +333,6 @@ namespace Alabo.Test.Generation {
             return name.Replace(".", "_");
         }
 
-        [Fact]
         public void Starts() {
             StartSingleServieCode(typeof(ILightAppService));
         }
@@ -339,10 +341,10 @@ namespace Alabo.Test.Generation {
         ///     Starts this instance.
         ///     开始生成单元测试代码
         /// </summary>
-        [Fact]
+
         public void Start() {
             Console.WriteLine(@"开始生成代码");
-            var allServiceType = Resolve<ITypeService>().GetAllServiceType(); //.Where(o=>!o.IsAbstract);
+            var allServiceType = Ioc.Resolve<ITypeService>().GetAllServiceType(); //.Where(o=>!o.IsAbstract);
             foreach (var type in allServiceType) {
                 try {
                     //  StartSingleServieCode(type);
