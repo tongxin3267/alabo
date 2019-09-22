@@ -5,4 +5,8 @@
     <AssemblyName>Alabo.Cloud.Hudong</AssemblyName>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="HuDong\" />
+  </ItemGroup>
+
 </Project>

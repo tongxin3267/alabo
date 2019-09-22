@@ -90,9 +90,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06-Alabo.Framework.Tasks", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01-Alabo.Cloud.Core", "src\05.cloud\01-Alabo.Cloud.Core\01-Alabo.Cloud.Core.csproj", "{DF4D0BAB-47B7-48DE-AF59-DA090C64EF97}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02-Alabo.App.Market", "src\05.cloud\02-Alabo.Cloud.Market\02-Alabo.App.Market.csproj", "{D60976E2-7F21-4E92-A614-F2A542C50E9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02-Alabo.Cloud.Market", "src\05.cloud\02-Alabo.Cloud.Market\02-Alabo.Cloud.Market.csproj", "{D60976E2-7F21-4E92-A614-F2A542C50E9C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03-Alabo.Cloud.Hudong", "src\05.cloud\03-Alabo.Cloud.Hudong\03-Alabo.Cloud.Hudong.csproj", "{86FAB603-BB47-47D4-AAAA-D2FC99F4E992}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Alabo.Cloud.Contracts", "Alabo.Cloud.Contracts\Alabo.Cloud.Contracts.csproj", "{5EA4AD3A-85EC-47BB-96F0-AA0473BAE04F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -232,6 +234,10 @@ Global
 		{86FAB603-BB47-47D4-AAAA-D2FC99F4E992}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86FAB603-BB47-47D4-AAAA-D2FC99F4E992}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86FAB603-BB47-47D4-AAAA-D2FC99F4E992}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EA4AD3A-85EC-47BB-96F0-AA0473BAE04F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EA4AD3A-85EC-47BB-96F0-AA0473BAE04F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EA4AD3A-85EC-47BB-96F0-AA0473BAE04F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EA4AD3A-85EC-47BB-96F0-AA0473BAE04F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -279,6 +285,7 @@ Global
 		{DF4D0BAB-47B7-48DE-AF59-DA090C64EF97} = {88893B6D-E6A5-4347-8D36-1F2FD57DA466}
 		{D60976E2-7F21-4E92-A614-F2A542C50E9C} = {88893B6D-E6A5-4347-8D36-1F2FD57DA466}
 		{86FAB603-BB47-47D4-AAAA-D2FC99F4E992} = {88893B6D-E6A5-4347-8D36-1F2FD57DA466}
+		{5EA4AD3A-85EC-47BB-96F0-AA0473BAE04F} = {88893B6D-E6A5-4347-8D36-1F2FD57DA466}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A1E90677-FAAA-4BD1-8798-FCFEE91E8323}
