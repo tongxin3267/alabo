@@ -26,7 +26,6 @@
     <Folder Include="Recharges\Domain\Repositories\" />
     <Folder Include="Refunds\Controllers\" />
     <Folder Include="Refunds\Domain\Configs\" />
-    <Folder Include="Refunds\Domain\Entities\" />
     <Folder Include="Refunds\Domain\Repositories\" />
     <Folder Include="Refunds\Domain\Services\" />
     <Folder Include="Refunds\Dtos\" />
