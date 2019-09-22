@@ -14,6 +14,11 @@ namespace Alabo.App.Core.User.Domain.Services {
         public UserTreeService(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
+        public List<UserTree> GetTree(long userId, UserTreeConfig userTreeConfig, UserTypeConfig userType, List<UserGradeConfig> userGradeConfigList, UserTypeConfig userServiceConfig) {
+            //TODO 2019年9月22日 重构组织结构图，查看之前代码
+            throw new System.NotImplementedException();
+        }
+
         public List<UserTree> GetUserTree(long UserId) {
             var userTreeConfig = Resolve<IAutoConfigService>().GetValue<UserTreeConfig>();
             var userTypeConfig = Resolve<IAutoConfigService>().GetList<UserTypeConfig>().FirstOrDefault();
