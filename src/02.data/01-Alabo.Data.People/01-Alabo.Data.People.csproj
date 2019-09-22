@@ -24,11 +24,6 @@
     <PackageReference Include="Senparc.Weixin.WxOpen" Version="3.3.9.2" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="AopSdk">
-      <HintPath>..\..\..\reference\AopSdk.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Grades\Domain\Configs\" />
   </ItemGroup>
   <ItemGroup>
@@ -36,6 +31,5 @@
     <ProjectReference Include="..\..\01.framework\02-Alabo.Framework.Core\02-Alabo.Framework.Core.csproj" />
     <ProjectReference Include="..\..\01.framework\03-Alabo.Framework.Basic\03-Alabo.Framework.Basic.csproj" />
     <ProjectReference Include="..\..\06.tool\01-Alabo.Tool.Payment\05-Alabo.Tool.Payment.csproj" />
-    <ProjectReference Include="..\..\06.tool\04-Alabo.Tool.AMap\04-Alabo.Tool.AMap.csproj" />
   </ItemGroup>
 </Project>

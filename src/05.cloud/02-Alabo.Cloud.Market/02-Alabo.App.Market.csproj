@@ -5,6 +5,8 @@
     <UpgradeBackupLocation>C:\git\zkcloudv11s\Backup\src\app\ZKCloud.App.Customer\</UpgradeBackupLocation>
     <OldToolsVersion>2.0</OldToolsVersion>
     <LangVersion>7.2</LangVersion>
+    <AssemblyName>Alabo.App.Market</AssemblyName>
+    <RootNamespace>Alabo.App.Market</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netcoreapp2.1\ZKCloud.App.Customer.xml</DocumentationFile>
