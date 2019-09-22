@@ -13,15 +13,12 @@
     <DocumentationFile>bin\Release\netcoreapp2.0\ZKCloud.App.Open.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Reports\Domain\**" />
     <Compile Remove="Share\Domain\CallBacks\**" />
     <Compile Remove="Tasks\Configs\SharedFenRun\VentureCompany\**" />
     <Compile Remove="Tasks\Domain\Repositories\**" />
-    <EmbeddedResource Remove="Reports\Domain\**" />
     <EmbeddedResource Remove="Share\Domain\CallBacks\**" />
     <EmbeddedResource Remove="Tasks\Configs\SharedFenRun\VentureCompany\**" />
     <EmbeddedResource Remove="Tasks\Domain\Repositories\**" />
-    <None Remove="Reports\Domain\**" />
     <None Remove="Share\Domain\CallBacks\**" />
     <None Remove="Tasks\Configs\SharedFenRun\VentureCompany\**" />
     <None Remove="Tasks\Domain\Repositories\**" />

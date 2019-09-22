@@ -17,25 +17,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Api\**" />
-    <Compile Remove="Reports\Charts\**" />
-    <Compile Remove="Reports\Schedule\**" />
     <Compile Remove="Tasks\Dtos\**" />
     <EmbeddedResource Remove="Api\**" />
-    <EmbeddedResource Remove="Reports\Charts\**" />
-    <EmbeddedResource Remove="Reports\Schedule\**" />
     <EmbeddedResource Remove="Tasks\Dtos\**" />
     <None Remove="Api\**" />
-    <None Remove="Reports\Charts\**" />
-    <None Remove="Reports\Schedule\**" />
     <None Remove="Tasks\Dtos\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Reports\Dtos\CountReportInput.cs" />
-    <Compile Remove="Reports\Dtos\CountReportItem.cs" />
-    <Compile Remove="Reports\Dtos\CountReportTable.cs" />
-    <Compile Remove="Reports\Dtos\SumReportTable.cs" />
-    <Compile Remove="Reports\Dtos\SumReportTableItems.cs" />
-    <Compile Remove="Reports\Dtos\SumTableOutput.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Senparc.Weixin.WxOpen" Version="3.3.9.2" />
@@ -46,7 +32,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Common\Controllers\" />
     <Folder Include="Grades\Domain\Configs\" />
   </ItemGroup>
   <ItemGroup>
