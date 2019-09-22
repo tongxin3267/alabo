@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.App.Core.Tasks.Domain.Entities;
+﻿using Alabo.App.Core.Tasks.Domain.Entities;
 using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Domains.Services;
 using Alabo.Schedules;
+using System;
+using System.Collections.Generic;
+using Alabo.App.Core.Tasks.ResultModel;
 
 namespace Alabo.App.Core.Tasks.Domain.Services {
 

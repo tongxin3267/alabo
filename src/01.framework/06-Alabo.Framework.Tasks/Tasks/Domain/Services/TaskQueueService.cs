@@ -1,12 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Alabo.App.Core.Tasks.Domain.Entities;
+﻿using Alabo.App.Core.Tasks.Domain.Entities;
 using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Core.Tasks.Domain.Repositories;
-using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
@@ -17,6 +11,12 @@ using Alabo.Helpers;
 using Alabo.Reflections;
 using Alabo.Runtime;
 using Alabo.Schedules;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using Alabo.App.Core.Tasks.ResultModel;
 
 namespace Alabo.App.Core.Tasks.Domain.Services {
 
