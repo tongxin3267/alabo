@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using Alabo.App.Core.Tasks.Domain.Enums;
 using Convert = System.Convert;
 
 namespace Alabo.App.Core.User.Domain.Repositories {
@@ -322,46 +323,6 @@ namespace Alabo.App.Core.User.Domain.Repositories {
             }
 
             return result;
-        }
-
-        public UserStatisticOutput GetUserStatistic(long userId) {
-            var statistic = new UserStatisticOutput();
-
-            var sqlWhere = $"ParentId={userId}";
-            var sqlUnativated = $"{sqlWhere} AND Mobile = UserName and Mobile like 'WX%'";
-            var sqlToday = $"{sqlWhere} AND DateDiff(dd,CreateTime,getdate())=0";
-            var sqlThisMonth = $"{sqlWhere} AND DateDiff(mm,CreateTime,getdate())=0";
-
-            var sqlCount = $"SELECT COUNT(Id) [Count] FROM User_User where {sqlWhere}";
-            statistic.Total = RepositoryContext.ExecuteScalar(sqlCount)?.ConvertToLong() ?? 0;
-
-            sqlCount = $"SELECT COUNT(Id) [Count] FROM User_User where {sqlUnativated}";
-            statistic.UnActivated = RepositoryContext.ExecuteScalar(sqlCount)?.ConvertToLong() ?? 0;
-
-            sqlCount = $"SELECT COUNT(Id) [Count] FROM User_User where {sqlToday}";
-            statistic.Today = RepositoryContext.ExecuteScalar(sqlCount)?.ConvertToLong() ?? 0;
-
-            sqlCount = $"SELECT COUNT(Id) [Count] FROM User_User where {sqlThisMonth}";
-            statistic.ThisMonth = RepositoryContext.ExecuteScalar(sqlCount)?.ConvertToLong() ?? 0;
-
-            return statistic;
-        }
-
-        public EarnStatisticOutput GetEarnStatistic(long userId) {
-            var statistic = new EarnStatisticOutput();
-
-            var sqlWhere = $"UserId={userId}";
-            var sqlToday = $"{sqlWhere} AND DateDiff(dd,CreateTime,getdate())=0";
-
-            var sqlCount = $"SELECT SUM(Amount) FROM [Share_Reward] where {sqlWhere}";
-            statistic.Total = RepositoryContext.ExecuteScalar(sqlCount).ConvertToDecimal(0);
-
-            sqlCount = $"SELECT SUM(Amount) FROM [Share_Reward] where {sqlToday}";
-            statistic.Today = RepositoryContext.ExecuteScalar(sqlCount).ConvertToDecimal(0);
-
-            statistic.Balance = 123;
-
-            return statistic;
         }
 
         public IList<Entities.User> GetList(IList<long> userIds) {
