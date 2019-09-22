@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.App.Core.Common.Domain.Services;
+﻿using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.Dtos.Pay;
 using Alabo.App.Core.Finance.Domain.Entities;
 using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.App.Core.Tasks.Domain.CallBacks;
 using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
@@ -14,6 +11,8 @@ using Alabo.Domains.Repositories.EFCore;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Linq.Dynamic;
+using System;
+using System.Collections.Generic;
 using Convert = System.Convert;
 
 namespace Alabo.App.Core.Finance.Domain.Repositories {
@@ -127,12 +126,12 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
                             triggerType = pay.PayExtension.TriggerType;
                         }
 
-                        // 2019年6月4日 订单完成后分润
-                        var shareOrderConfig = Ioc.Resolve<IAutoConfigService>().GetValue<ShopOrderShareConfig>();
-                        int pending = (int)ShareOrderSystemStatus.Pending;
-                        if (shareOrderConfig.OrderSuccess) {
-                            pending = (int)ShareOrderSystemStatus.OrderPendingSucess;
-                        }
+                        //TODO 2019年9月22日  订单完成后分润 重构
+                        //var shareOrderConfig = Ioc.Resolve<IAutoConfigService>().GetValue<ShopOrderShareConfig>();
+                        //int pending = (int)ShareOrderSystemStatus.Pending;
+                        //if (shareOrderConfig.OrderSuccess) {
+                        //    pending = (int)ShareOrderSystemStatus.OrderPendingSucess;
+                        //}
 
                         // 分润订单, UserId 有等于 OrderId的可能, 用 EntityId = {trade.Id}) AND TriggerType != 1 联合进行限制
                         sql = $" IF NOT EXISTS(SELECT * FROM Task_ShareOrder WHERE EntityId = {(long)item} AND TriggerType != 1) " +

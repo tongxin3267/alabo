@@ -529,20 +529,22 @@ namespace Alabo.App.Core.Finance.Domain.Services {
 
                 account.FreezeAmount -= withDraw.Amount;
 
-                var shareOrder = new ShareOrder {
-                    UserId = withDraw.UserId,
-                    Amount = withDraw.Amount,
-                    Status = ShareOrderStatus.Pending,
-                    TriggerType = TriggerType.WithDraw,
-                    EntityId = withDraw.Id
-                };
+                //TODO 9月重构注释
+                //var shareOrder = new ShareOrder {
+                //    UserId = withDraw.UserId,
+                //    Amount = withDraw.Amount,
+                //    Status = ShareOrderStatus.Pending,
+                //    TriggerType = TriggerType.WithDraw,
+                //    EntityId = withDraw.Id
+                //};
 
                 context.BeginTransaction();
                 try {
                     Resolve<IAccountService>().Update(account);
                     Resolve<ITradeService>().Update(withDraw);
                     Resolve<IBillService>().Add(bill);
-                    Resolve<IShareOrderService>().Add(shareOrder);
+                    //TODO 9月重构注释
+                    // Resolve<IShareOrderService>().Add(shareOrder);
                     context.SaveChanges();
                     context.CommitTransaction();
                 } catch (Exception ex) {

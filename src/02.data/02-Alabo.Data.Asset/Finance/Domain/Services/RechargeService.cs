@@ -262,21 +262,22 @@ namespace Alabo.App.Core.Finance.Domain.Services {
                         $"{trade.TradeExtension.TradeRemark.Remark} {view.Remark}";
                     trade.Extension = trade.TradeExtension.ToJson();
                     account.Amount += trade.Amount;
+                    //TODO 9月重构注释
                     // 插入 充值人民币
-                    var shareOrder = new ShareOrder {
-                        UserId = trade.UserId,
-                        Amount = trade.TradeExtension.Recharge.CheckAmount,
-                        Status = ShareOrderStatus.Pending,
-                        TriggerType = TriggerType.Recharge,
-                        EntityId = trade.Id
-                    };
+                    //var shareOrder = new ShareOrder {
+                    //    UserId = trade.UserId,
+                    //    Amount = trade.TradeExtension.Recharge.CheckAmount,
+                    //    Status = ShareOrderStatus.Pending,
+                    //    TriggerType = TriggerType.Recharge,
+                    //    EntityId = trade.Id
+                    //};
 
                     context.BeginTransaction();
                     try {
                         Resolve<IAccountService>().Update(account);
                         Resolve<ITradeService>().Update(trade);
                         Resolve<IBillService>().Add(bill);
-                        Resolve<IShareOrderService>().Add(shareOrder);
+                        //  Resolve<IShareOrderService>().Add(shareOrder);
                         context.SaveChanges();
                         context.CommitTransaction();
                     } catch (Exception ex) {

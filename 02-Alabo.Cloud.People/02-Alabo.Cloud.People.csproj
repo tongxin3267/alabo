@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <RootNamespace>_02_Alabo.Cloud.People</RootNamespace>
+    <RootNamespace>Alabo.Cloud.People</RootNamespace>
+    <AssemblyName>Alabo.Cloud.People</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

@@ -230,12 +230,13 @@ namespace Alabo.App.Core.Finance.Domain.Services {
             trade.TradeExtension.TradeRemark.UserRemark = view.UserRemark;
             trade.Extension = trade.TradeExtension.ToJson();
 
-            var shareOrder = new ShareOrder {
-                UserId = loginUser.Id,
-                Amount = view.Amount * outTypeConfig.RateFee * transferConfig.ServiceFee,
-                Status = ShareOrderStatus.Pending,
-                TriggerType = TriggerType.Transfer
-            };
+            //TODO 9月重构注释
+            //var shareOrder = new ShareOrder {
+            //    UserId = loginUser.Id,
+            //    Amount = view.Amount * outTypeConfig.RateFee * transferConfig.ServiceFee,
+            //    Status = ShareOrderStatus.Pending,
+            //    TriggerType = TriggerType.Transfer
+            //};
 
             var context = Repository<IBillRepository>().RepositoryContext;
             context.BeginTransaction();
@@ -243,13 +244,14 @@ namespace Alabo.App.Core.Finance.Domain.Services {
                 Resolve<IAccountService>().Update(userAccount);
                 Resolve<IAccountService>().Update(targetUserAccount);
                 Resolve<ITradeService>().Add(trade);
-                //实体联系改变
-                shareOrder.EntityId = trade.Id;
+                //实体联系改变   //TODO 9月重构注释
+                // shareOrder.EntityId = trade.Id;
                 userBill.EntityId = trade.Id;
                 targetBill.EntityId = trade.Id;
                 Resolve<IBillService>().Add(userBill);
                 Resolve<IBillService>().Add(targetBill);
-                Resolve<IShareOrderService>().Add(shareOrder);
+                //TODO 9月重构注释
+                // Resolve<IShareOrderService>().Add(shareOrder);
                 context.SaveChanges();
                 context.CommitTransaction();
             } catch (Exception ex) {
