@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AssemblyName>Alabo.Framework.Report</AssemblyName>
+    <RootNamespace>Alabo.Framework.Report</RootNamespace>
   </PropertyGroup>
 
 </Project>
