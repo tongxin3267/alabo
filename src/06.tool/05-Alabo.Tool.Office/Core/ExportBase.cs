@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Alabo.Extensions;
+using Alabo.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,6 +8,9 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Alabo.Helpers;
+using Alabo.Reflections;
+using Convert = System.Convert;
 
 namespace Alabo.Tool.Office.Core {
 
@@ -184,7 +189,7 @@ namespace Alabo.Tool.Office.Core {
                     return "";
                 object result = property.GetValue(entity);
                 if (property.PropertyType == typeof(bool))
-                    result = Convert.ToBool(result).Description();
+                    result = Convert.ToBoolean(result).Description();
                 return result;
             }).ToList();
         }
@@ -254,7 +259,7 @@ namespace Alabo.Tool.Office.Core {
             if (fileName.IsEmpty())
                 fileName = Table.Title;
             if (fileName.IsEmpty())
-                fileName = DateTime.Now.ToDateString();
+                fileName = DateTime.Now.ToLongTimeString();
             return fileName + "." + _format.ToString().ToLower();
         }
 
@@ -280,7 +285,7 @@ namespace Alabo.Tool.Office.Core {
         public async Task DownloadAsync(string fileName, Encoding encoding) {
             using (var stream = new MemoryStream()) {
                 WriteStream(stream);
-                await Web.DownloadAsync(stream.ToArray(), GetFileName(fileName));
+                //   await Web.DownloadAsync(stream.ToArray(), GetFileName(fileName));
             }
         }
     }

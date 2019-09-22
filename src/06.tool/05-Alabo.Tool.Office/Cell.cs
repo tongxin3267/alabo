@@ -1,4 +1,5 @@
-﻿using Alabo.Tool.Office.Core;
+﻿using Alabo.Extensions;
+using Alabo.Tool.Office.Core;
 
 namespace Alabo.Tool.Office {
 

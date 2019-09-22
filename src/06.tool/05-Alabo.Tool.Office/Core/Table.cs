@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Alabo.Extensions;
 
 namespace Alabo.Tool.Office.Core {
 
