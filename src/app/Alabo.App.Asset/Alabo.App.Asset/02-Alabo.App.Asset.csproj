@@ -10,9 +10,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\framework\Alabo.WebApi\02-Alabo.Core.csproj" />
+    <ProjectReference Include="..\..\..\framework\Alabo.WebApi\02-Alabo.Framework.Core.csproj" />
     <ProjectReference Include="..\..\..\framework\Alabo\01-Alabo.csproj" />
-    <ProjectReference Include="..\..\Alabo.App.Core\01-Alabo.App.Core.csproj" />
+    <ProjectReference Include="..\..\Alabo.App.Core\01-Alabo.Data.People.csproj" />
   </ItemGroup>
 
 </Project>

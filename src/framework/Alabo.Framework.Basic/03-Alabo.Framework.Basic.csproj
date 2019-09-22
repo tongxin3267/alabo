@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Alabo.WebApi\02-Alabo.Framework.Core.csproj" />
+    <ProjectReference Include="..\Alabo\01-Alabo.csproj" />
+  </ItemGroup>
+
+</Project>

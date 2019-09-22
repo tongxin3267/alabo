@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AssemblyName>Alabo.Framework.Core</AssemblyName>
+    <RootNamespace>Alabo.Core</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Alabo\01-Alabo.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Admins\Dtos\" />
+    <Folder Include="Notifications\" />
+  </ItemGroup>
+
+</Project>
