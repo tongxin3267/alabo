@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <RootNamespace>Alabo.Cloud.Support</RootNamespace>
+    <AssemblyName>Alabo.Cloud.Support</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

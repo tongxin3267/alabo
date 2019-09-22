@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>Alabo.Web.CodeGeneration</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\01.framework\01-Alabo\01-Alabo.csproj" />
+    <ProjectReference Include="..\src\01.framework\02-Alabo.Framework.Core\02-Alabo.Framework.Core.csproj" />
+    <ProjectReference Include="..\src\01.framework\03-Alabo.Framework.Basic\03-Alabo.Framework.Basic.csproj" />
+    <ProjectReference Include="..\src\01.framework\05-Alabo.Framework.Themes\05-Alabo.Framework.Themes.csproj" />
+    <ProjectReference Include="..\src\02.data\01-Alabo.Data.People\01-Alabo.Data.People.csproj" />
+    <ProjectReference Include="..\src\02.data\02-Alabo.Data.Asset\02-Alabo.Data.Asset.csproj" />
+    <ProjectReference Include="..\src\02.data\03-Alabo.Data.Things\03-Alabo.Data.Things.csproj" />
+    <ProjectReference Include="..\src\04.industry\01-Alabo.Industry.Cms\01-Alabo.Industry.Cms.csproj" />
+    <ProjectReference Include="..\src\05.cloud\01-Alabo.Cloud.Core\01-Alabo.Cloud.Core.csproj" />
+    <ProjectReference Include="..\src\06.tool\01-Alabo.Tool.Payment\05-Alabo.Tool.Payment.csproj" />
+    <ProjectReference Include="..\src\06.tool\02-Alabo.Tool.WeiXin\06-Alabo.Tool.WeiXin.csproj" />
+    <ProjectReference Include="..\src\06.tool\04-Alabo.Tool.AMap\04-Alabo.Tool.AMap.csproj" />
+    <ProjectReference Include="..\src\06.tool\05-Alabo.Tool.Office\03-Alabo.Tool.Office.csproj" />
+  </ItemGroup>
+
+</Project>

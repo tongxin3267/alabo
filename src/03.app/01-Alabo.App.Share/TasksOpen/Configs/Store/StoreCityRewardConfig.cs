@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Core.Tasks.Extensions;
+﻿using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Share.Tasks.Base;
 using Alabo.App.Share.Tasks.Modules;
-using Alabo.App.Shop.Order.Domain.Services;
-using Alabo.App.Shop.Store.Domain.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Share.Tasks.Configs.Store {
