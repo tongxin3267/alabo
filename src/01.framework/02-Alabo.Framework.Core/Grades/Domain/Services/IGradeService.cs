@@ -16,13 +16,6 @@ namespace Alabo.App.Core.Common.Domain.Services {
         UserGradeConfig GetGrade(Guid gradeId);
 
         /// <summary>
-        ///     根据用户类型Id,和等级Id获取用户类型等级
-        /// </summary>
-        /// <param name="userTypeId">用户类型Id</param>
-        /// <param name="gradeId"></param>
-        dynamic GetGrade(Guid userTypeId, Guid gradeId);
-
-        /// <summary>
         ///     获取所有的用户类类型等级
         /// </summary>
         /// <param name="key"></param>
