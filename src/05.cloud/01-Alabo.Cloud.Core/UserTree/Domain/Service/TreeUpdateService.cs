@@ -1,20 +1,42 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Repositories;
 using Alabo.App.Core.User.Domain.Services;
+using Alabo.App.Core.User.ViewModels;
+using Alabo.Core.Extensions;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Schedules;
+using _01_Alabo.Cloud.Core.UserTree.Domain.UI;
 
-namespace Alabo.App.Share.Operate.Domain.Service {
+namespace _01_Alabo.Cloud.Core.UserTree.Domain.Service {
 
-    public class DataService : ServiceBase, IDataService {
+    public class TreeUpdateService : ServiceBase, ITreeUpdateService {
+
+        public TreeUpdateService(IUnitOfWork unitOfWork) : base(unitOfWork) {
+        }
+
         /// <summary>
         /// 检查所有的会员关系图是否正确
         /// </summary>
+
+        public void ParentMapTaskQueue() {
+            var backJobParameter = new BackJobParameter {
+                ModuleId = TaskQueueModuleId.UserParentUpdate,
+                CheckLastOne = true,
+                ServiceName = typeof(IUserMapService).Name,
+                Method = "UpdateAllUserParentMap"
+            };
+            Resolve<ITaskQueueService>().AddBackJob(backJobParameter);
+        }
 
         public ServiceResult CheckOutUserMap() {
             //  UpdateMap(113);
@@ -94,9 +116,6 @@ namespace Alabo.App.Share.Operate.Domain.Service {
                     Resolve<IUserMapService>().Update(userMap);
                 }
             }
-        }
-
-        public DataService(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
     }
 }

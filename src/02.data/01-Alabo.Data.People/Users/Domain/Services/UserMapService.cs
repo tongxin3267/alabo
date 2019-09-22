@@ -112,14 +112,6 @@ namespace Alabo.App.Core.User.Domain.Services {
             return newParentMapList.ToJson();
         }
 
-        public List<Entities.User> GetList(long parendId) {
-            throw new NotImplementedException();
-        }
-
-        public List<long> GetChildUserIds(long parentId) {
-            throw new NotImplementedException();
-        }
-
         public void UpdateMap(long userId, long parentId) {
             var map = GetParentMap(parentId);
             if (!map.IsNullOrEmpty()) {
@@ -153,157 +145,6 @@ namespace Alabo.App.Core.User.Domain.Services {
             return null;
         }
 
-        /// <summary>
-        ///     更新所有用户的组织架构图
-        /// </summary>
-        public void UpdateAllUserParentMap() {
-            var pageCount = 30; // 每次处理30个
-            var totalCount = Repository<IUserMapRepository>().RepositoryContext
-                .ExecuteScalar("select count(id) from User_User").ConvertToLong();
-            var totalPage = totalCount / 30 + 1;
-            for (var i = 1; i < totalPage + 1; i++) {
-                var userIds = new List<long>();
-                var sql =
-                    $"SELECT TOP 30 Id FROM (SELECT  ROW_NUMBER() OVER (ORDER BY id ) AS RowNumber,Id FROM User_User  ) as A WHERE RowNumber > {pageCount}*({i}-1)  ";
-                using (var reader = Repository<IUserMapRepository>().RepositoryContext.ExecuteDataReader(sql)) {
-                    while (reader.Read()) {
-                        userIds.Add(reader["Id"].ConvertToLong());
-                    }
-                }
-
-                foreach (var userId in userIds) {
-                    var user = Resolve<IUserService>().GetSingle(userId);
-                    try {
-                        UpdateMap(user.Id, user.ParentId);
-                    } catch (Exception ex) {
-                        Console.WriteLine(ex.Message);
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        ///     获取直推会员、间推、团队的等级分布
-        /// </summary>
-        /// <param name="query"></param>
-        public PagedList<UserGradeInfoView> GetUserGradeInfoPageList(object query) {
-            var pageList = Resolve<IGradeInfoService>().GetPagedList(query);
-            var dictionary = query.DeserializeJson<Dictionary<string, string>>();
-            dictionary.TryGetValue("type", out var type);
-            var gradeInfList = new List<UserGradeInfoView>();
-            var userIds = pageList.Select(r => r.UserId).Distinct().ToList();
-            var users = Resolve<IUserService>().GetList(userIds);
-            foreach (var gradeInfo in pageList) {
-                var user = users.FirstOrDefault(r => r.Id == gradeInfo.UserId);
-                if (user == null) {
-                    continue;
-                }
-
-                var view = new UserGradeInfoView();
-                //  AutoMapping.SetValue(gradeInfo, view);
-                view.Id = gradeInfo.UserId; //Id=用户Id
-                view.GradeName = Resolve<IGradeService>().GetGrade(user.GradeId)?.Name;
-                view.UserName = gradeInfo.UserName;
-
-                if (type == "recomend") {
-                    var result = GetDictionary(gradeInfo.RecomendGradeInfo);
-                    view.GradeInfo = result.Item1;
-                    view.GradeInfoString = result.Item2;
-                    view.TotalCountString = $"直推总数{gradeInfo.RecomendCount}";
-                }
-
-                if (type == "second") {
-                    var result = GetDictionary(gradeInfo.SecondGradeInfo);
-                    view.GradeInfo = result.Item1;
-                    view.GradeInfoString = result.Item2;
-                    view.TotalCountString = $"间推总数{gradeInfo.SecondCount}";
-                }
-
-                if (type == "team") {
-                    var result = GetDictionary(gradeInfo.TeamGradeInfo);
-                    view.GradeInfo = result.Item1;
-                    view.GradeInfoString = result.Item2;
-                    view.TotalCountString = $"团队总数{gradeInfo.TeamCount}";
-                }
-
-                view.DisplayName = $"直推会员{gradeInfo.RecomendCount}个";
-                view.ModifiedTime = gradeInfo.ModifiedTime;
-                gradeInfList.Add(view);
-            }
-
-            return PagedList<UserGradeInfoView>.Create(gradeInfList, pageList.RecordCount, pageList.PageSize,
-                pageList.PageIndex);
-        }
-
-        private Tuple<Dictionary<Guid, long>, string> GetDictionary(IEnumerable<GradeInfoItem> gradeInfo) {
-            //TODO 9月重构注释
-            //var dictionary = new Dictionary<Guid, long>();
-            //var str = string.Empty;
-            //if (gradeInfo != null) {
-            //    gradeInfo.Foreach(r => {
-            //        var grade = Resolve<IGradeService>().GetGrade(r.GradeId);
-            //        dictionary.Add(r.GradeId, r.Count);
-            //        str += $"{grade.Name}({r.Count})  ";
-            //    });
-            //}
-
-            //str = $"<code>{str}</code>";
-            //return Tuple.Create(dictionary, str);
-            return null;
-        }
-
-        #region 修改推荐人
-
-        public ViewRelationUpdate GetUpdateParentUserView(object id) {
-            return new ViewRelationUpdate();
-        }
-
-        public ServiceResult UpdateParentUser(ViewRelationUpdate view) {
-            var user = Resolve<IUserService>().GetSingle(r => r.UserName == view.UserName);
-            if (user == null) {
-                return ServiceResult.FailedWithMessage("用户名不存在");
-            }
-
-            var parentUser = Resolve<IUserService>().GetSingle(view.ParentUserName);
-            if (parentUser == null) {
-                return ServiceResult.FailedWithMessage("推荐人不存在");
-            }
-
-            if (parentUser.Status != Status.Normal) {
-                return ServiceResult.FailedWithMessage("推荐人状态不正常");
-            }
-
-            var currentUserPay = Resolve<IUserDetailService>().GetSingle(r => r.Id == view.UserId);
-            if (view.PayPassword.ToMd5HashString() != currentUserPay.PayPassword) {
-                return ServiceResult.FailedWithMessage("支付密码错误！");
-            }
-
-            var result = ServiceResult.Success;
-            var context = Repository<IUserRepository>().RepositoryContext;
-            try {
-                context.BeginTransaction();
-                user.ParentId = parentUser.Id;
-                Resolve<IUserService>().Update(user);
-
-                ParentMapTaskQueue();
-                context.SaveChanges();
-                context.CommitTransaction();
-            } catch (Exception ex) {
-                context.RollbackTransaction();
-                result = ServiceResult.FailedWithMessage(ex.Message);
-            } finally {
-                context.DisposeTransaction();
-            }
-
-            if (!result.Succeeded) {
-                return ServiceResult.FailedWithMessage("推荐人修改失败");
-            }
-
-            return ServiceResult.Success;
-        }
-
-        #endregion 修改推荐人
-
         public ServiceResult UpdateParentUserAfterUserDelete(long userId, long parentId) {
             //TODO 9月重构注释
             //var userTreeConfig = Resolve<IAutoConfigService>().GetValue<UserTreeConfig>();
@@ -336,6 +177,7 @@ namespace Alabo.App.Core.User.Domain.Services {
             //} else {
             //    return ServiceResult.FailedWithMessage("修改推荐人失败");
             //}
+            return null;
         }
 
         public void ParentMapTaskQueue() {
@@ -347,42 +189,5 @@ namespace Alabo.App.Core.User.Domain.Services {
             };
             Resolve<ITaskQueueService>().AddBackJob(backJobParameter);
         }
-
-        #region 转移团队
-
-        public ViewTransferRelationship GetTransferRelationship(object id) {
-            return new ViewTransferRelationship();
-        }
-
-        public ServiceResult TransferRelationship(ViewTransferRelationship view) {
-            var user = Resolve<IUserService>().GetSingle(r => r.UserName == view.UserName);
-            if (user == null) {
-                return ServiceResult.FailedWithMessage("用户名不存在");
-            }
-
-            var parentUser = Resolve<IUserService>().GetSingle(view.ParentUserName);
-            if (parentUser == null) {
-                return ServiceResult.FailedWithMessage("推荐人不存在");
-            }
-
-            if (parentUser.Status != Status.Normal) {
-                return ServiceResult.FailedWithMessage("推荐人状态不正常");
-            }
-
-            var currentUserPay = Resolve<IUserDetailService>().GetSingle(r => r.Id == view.UserId);
-            if (view.PayPassword.ToMd5HashString() != currentUserPay.PayPassword) {
-                return ServiceResult.FailedWithMessage("支付密码错误！");
-            }
-
-            var result = UpdateParentUserAfterUserDelete(user.Id, parentUser.Id);
-
-            if (!result.Succeeded) {
-                return ServiceResult.FailedWithMessage("推荐人修改失败");
-            }
-
-            return ServiceResult.Success;
-        }
-
-        #endregion 转移团队
     }
 }

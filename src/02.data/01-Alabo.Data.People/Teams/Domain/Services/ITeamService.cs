@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Alabo.App.Core.User.Domain.Dtos;
+using Alabo.App.Core.User.Domain.Entities;
 using Alabo.Domains.Services;
 
 namespace Alabo.App.Core.User.Domain.Services {
@@ -49,5 +50,18 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// </summary>
         /// <param name="userId"></param>
         IEnumerable<Entities.User> GetChildUsers(long userId);
+
+        /// <summary>
+        /// 根据下面的会员，更新团队信息
+        /// </summary>
+        /// <param name="childuUserId"></param>
+        void UpdateTeamInfo(long childuUserId = 0);
+
+        /// <summary>
+        ///     获取团队用户
+        ///     根据UserMap.childNode字段获取
+        /// </summary>
+        /// <param name="userMap"></param>
+        IEnumerable<Entities.User> GetTeamUser(UserMap userMap);
     }
 }
