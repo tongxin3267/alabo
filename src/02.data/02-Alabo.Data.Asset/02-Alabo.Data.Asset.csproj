@@ -17,4 +17,23 @@
     <ProjectReference Include="..\01-Alabo.Data.People\01-Alabo.Data.People.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Accounts\Domain\Configs\" />
+    <Folder Include="BankCards\Domain\Configs\" />
+    <Folder Include="Bills\Domain\Configs\" />
+    <Folder Include="Pays\Domain\Configs\" />
+    <Folder Include="Recharges\Domain\Entities\" />
+    <Folder Include="Recharges\Domain\Repositories\" />
+    <Folder Include="Refunds\Controllers\" />
+    <Folder Include="Refunds\Domain\Configs\" />
+    <Folder Include="Refunds\Domain\Entities\" />
+    <Folder Include="Refunds\Domain\Repositories\" />
+    <Folder Include="Refunds\Domain\Services\" />
+    <Folder Include="Refunds\Dtos\" />
+    <Folder Include="Transfers\Domain\Entities\" />
+    <Folder Include="Transfers\Domain\Repositories\" />
+    <Folder Include="Withraws\Domain\Entities\" />
+    <Folder Include="Withraws\Domain\Repositories\" />
+  </ItemGroup>
+
 </Project>

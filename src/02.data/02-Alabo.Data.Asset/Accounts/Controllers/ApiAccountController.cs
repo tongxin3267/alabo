@@ -24,6 +24,7 @@ using Alabo.Core.Regex;
 using System;
 using ZKCloud.Open.Message.Models;
 using System.Text;
+using Alabo.App.Core.Api.Dtos;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.Finance.Domain.Dtos.Account;
 using Alabo.Maps;
@@ -41,6 +42,33 @@ namespace Alabo.App.Core.Finance.Controllers {
 
         public ApiAccountController(
            ) : base() {
+        }
+
+        /// <summary>
+        ///     所有s the accounts.
+        /// </summary>
+        /// <param name="parameter">参数</param>
+        [HttpGet]
+        [Display(Description = "所有S the accounts")]
+        [ApiAuth]
+        public ApiResult<IList<AccountOutput>> AllAccounts([FromQuery] ApiBaseInput parameter) {
+            var httpss = HttpContext.Request.QueryString;
+            var model = Resolve<IAccountService>().GetUserAllAccount(parameter.LoginUserId);
+            var moneys = Resolve<IAutoConfigService>().MoneyTypes();
+            IList<AccountOutput> result = new List<AccountOutput>();
+            foreach (var item in model) {
+                var config = moneys.FirstOrDefault(r => r.Id == item.MoneyTypeId && r.IsShowFront && r.Status == Status.Normal);
+                if (config != null) {
+                    var apiOutput = new AccountOutput {
+                        MoneyTypeName = config.Name,
+                        Amount = item.Amount,
+                        MoneyTypeId = item.MoneyTypeId
+                    };
+                    result.Add(apiOutput);
+                }
+            }
+
+            return ApiResult.Success(result);
         }
 
         [HttpGet]
