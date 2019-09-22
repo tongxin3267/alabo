@@ -113,7 +113,7 @@ namespace Alabo.App.Core.Admin.Domain.Services {
                 dictionary.Add("-1", "所有");
             }
 
-            //IList<JObject> list = Resolve<IAutoConfigService>().GetList(config.FullName);
+            //IList<JObject> list = Resolve<IAlaboAutoConfigService>().GetList(config.FullName);
 
             //if (!list.Any()) {
             //    return dictionary;

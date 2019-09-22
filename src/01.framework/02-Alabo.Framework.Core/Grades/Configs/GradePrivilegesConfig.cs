@@ -24,7 +24,7 @@ namespace ZKCloud.App.Core.UserType.Domain.CallBacks {
     public class GradePrivilegesConfig : AutoConfigBase, IAutoConfig {
 
         public void SetDefault() {
-            var list = Ioc.Resolve<IAutoConfigService>().GetList<GradePrivilegesConfig>();
+            var list = Ioc.Resolve<IAlaboAutoConfigService>().GetList<GradePrivilegesConfig>();
             if (list.Count <= 0) {
                 var configs = new List<GradePrivilegesConfig>();
                 var config = new GradePrivilegesConfig {
@@ -187,7 +187,7 @@ namespace ZKCloud.App.Core.UserType.Domain.CallBacks {
                     LastUpdated = DateTime.Now,
                     Value = JsonConvert.SerializeObject(list)
                 };
-                Ioc.Resolve<IAutoConfigService>().AddOrUpdate(autoConfig);
+                Ioc.Resolve<IAlaboAutoConfigService>().AddOrUpdate(autoConfig);
             }
         }
 

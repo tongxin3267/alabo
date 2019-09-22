@@ -72,7 +72,7 @@ namespace Alabo.App.Core.User.Domain.Callbacks {
         ///     Sets the default.
         /// </summary>
         public void SetDefault() {
-            var list = Ioc.Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
+            var list = Ioc.Resolve<IAlaboAutoConfigService>().GetList<UserGradeConfig>();
             if (list.Count < 1) {
                 var configs = new List<UserGradeConfig>();
                 var config = new UserGradeConfig {
@@ -108,7 +108,7 @@ namespace Alabo.App.Core.User.Domain.Callbacks {
                     LastUpdated = DateTime.Now,
                     Value = JsonConvert.SerializeObject(list)
                 };
-                Ioc.Resolve<IAutoConfigService>().AddOrUpdate(autoConfig);
+                Ioc.Resolve<IAlaboAutoConfigService>().AddOrUpdate(autoConfig);
             }
         }
     }

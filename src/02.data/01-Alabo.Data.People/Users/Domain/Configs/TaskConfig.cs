@@ -24,7 +24,7 @@ namespace Alabo.App.Core.User.Domain.Callbacks {
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "任务配置 ", Icon = "fa fa-life-ring", PageType = ViewPageType.List, Description = "任务配置",
-        SortOrder = 30, SideBarType = SideBarType.ControlSideBar)]
+        SortOrder = 30)]
     public class TaskConfig : AutoConfigBase, IAutoConfig {
 
         [Field(ControlsType = ControlsType.TextBox, SortOrder = 2, ListShow = true)]

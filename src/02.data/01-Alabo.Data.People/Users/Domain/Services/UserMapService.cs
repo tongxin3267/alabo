@@ -236,18 +236,20 @@ namespace Alabo.App.Core.User.Domain.Services {
         }
 
         private Tuple<Dictionary<Guid, long>, string> GetDictionary(IEnumerable<GradeInfoItem> gradeInfo) {
-            var dictionary = new Dictionary<Guid, long>();
-            var str = string.Empty;
-            if (gradeInfo != null) {
-                gradeInfo.Foreach(r => {
-                    var grade = Resolve<IGradeService>().GetGrade(r.GradeId);
-                    dictionary.Add(r.GradeId, r.Count);
-                    str += $"{grade.Name}({r.Count})  ";
-                });
-            }
+            //TODO 9月重构注释
+            //var dictionary = new Dictionary<Guid, long>();
+            //var str = string.Empty;
+            //if (gradeInfo != null) {
+            //    gradeInfo.Foreach(r => {
+            //        var grade = Resolve<IGradeService>().GetGrade(r.GradeId);
+            //        dictionary.Add(r.GradeId, r.Count);
+            //        str += $"{grade.Name}({r.Count})  ";
+            //    });
+            //}
 
-            str = $"<code>{str}</code>";
-            return Tuple.Create(dictionary, str);
+            //str = $"<code>{str}</code>";
+            //return Tuple.Create(dictionary, str);
+            return null;
         }
 
         #region 修改推荐人
@@ -303,36 +305,37 @@ namespace Alabo.App.Core.User.Domain.Services {
         #endregion 修改推荐人
 
         public ServiceResult UpdateParentUserAfterUserDelete(long userId, long parentId) {
-            var userTreeConfig = Resolve<IAutoConfigService>().GetValue<UserTreeConfig>();
-            // 不修改
-            if (!userTreeConfig.AfterDeleteUserUpdateParentMap) {
-                return ServiceResult.Success;
-            }
-
-            //var user = Resolve<IUserService>().GetSingle(r => r.Id == userId);
-            //if (user != null) {
-            //    return ServiceResult.FailedWithMessage("该用户没有物理删除会员");
+            //TODO 9月重构注释
+            //var userTreeConfig = Resolve<IAutoConfigService>().GetValue<UserTreeConfig>();
+            //// 不修改
+            //if (!userTreeConfig.AfterDeleteUserUpdateParentMap) {
+            //    return ServiceResult.Success;
             //}
-            var parentUser = Resolve<IUserService>().GetSingle(r => r.Id == parentId);
-            if (parentUser == null || parentUser.Status != Status.Normal) {
-                return ServiceResult.FailedWithMessage("用户已删除,其推荐人不存在或状态不正常");
-            }
 
-            var childUsers = Resolve<IUserService>().GetList(r => r.ParentId == userId);
-            var childUserIds = childUsers.Select(r => r.Id).ToList();
-            var result = Repository<IUserRepository>().UpdateRecommend(childUserIds, parentId);
+            ////var user = Resolve<IUserService>().GetSingle(r => r.Id == userId);
+            ////if (user != null) {
+            ////    return ServiceResult.FailedWithMessage("该用户没有物理删除会员");
+            ////}
+            //var parentUser = Resolve<IUserService>().GetSingle(r => r.Id == parentId);
+            //if (parentUser == null || parentUser.Status != Status.Normal) {
+            //    return ServiceResult.FailedWithMessage("用户已删除,其推荐人不存在或状态不正常");
+            //}
 
-            if (result) {
-                // 修改直推会员数量
-                var recomonedUserCount = Resolve<IUserService>().Count(r => r.ParentId == parentUser.Id);
-                var userMap = Resolve<IUserMapService>().GetSingle(r => r.UserId == parentUser.Id);
-                userMap.LevelNumber = recomonedUserCount;
-                Resolve<IUserMapService>().Update(userMap);
-                ParentMapTaskQueue();
-                return ServiceResult.Success;
-            } else {
-                return ServiceResult.FailedWithMessage("修改推荐人失败");
-            }
+            //var childUsers = Resolve<IUserService>().GetList(r => r.ParentId == userId);
+            //var childUserIds = childUsers.Select(r => r.Id).ToList();
+            //var result = Repository<IUserRepository>().UpdateRecommend(childUserIds, parentId);
+
+            //if (result) {
+            //    // 修改直推会员数量
+            //    var recomonedUserCount = Resolve<IUserService>().Count(r => r.ParentId == parentUser.Id);
+            //    var userMap = Resolve<IUserMapService>().GetSingle(r => r.UserId == parentUser.Id);
+            //    userMap.LevelNumber = recomonedUserCount;
+            //    Resolve<IUserMapService>().Update(userMap);
+            //    ParentMapTaskQueue();
+            //    return ServiceResult.Success;
+            //} else {
+            //    return ServiceResult.FailedWithMessage("修改推荐人失败");
+            //}
         }
 
         public void ParentMapTaskQueue() {

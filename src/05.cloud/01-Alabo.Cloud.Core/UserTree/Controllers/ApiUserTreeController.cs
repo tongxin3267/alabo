@@ -40,5 +40,21 @@ namespace Alabo.App.Core.User.Controllers {
             var kk = userTreeList.ToJson();
             return ApiResult.Success(userTreeList);
         }
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ApiResult GetUserTree(int id, string isFirst = "") {
+            if (isFirst.ToLower().Equal("yes") && id == 1) {
+                id = 0;
+            }
+
+            var uMsgs = Resolve<IUserTreeService>().GetUserTree(id);
+
+            return ApiResult.Result(uMsgs);
+        }
     }
 }

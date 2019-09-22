@@ -189,7 +189,7 @@ namespace Alabo.App.Core.Common.Controllers {
 
                 var keyValues = new List<KeyValue>();
                 if (type.Contains("MoneyTypeConfig")) {
-                    //    var moneyConfig = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>().Where(x => x.Status == Domains.Enums.Status.Normal && x.IsShowFront);
+                    //    var moneyConfig = Resolve<IAlaboAutoConfigService>().GetList<MoneyTypeConfig>().Where(x => x.Status == Domains.Enums.Status.Normal && x.IsShowFront);
                     //    foreach (var item in moneyConfig) {
                     //        keyValues.Add(new KeyValue { Key = item.Id, Value = item.Name });
                     //    }

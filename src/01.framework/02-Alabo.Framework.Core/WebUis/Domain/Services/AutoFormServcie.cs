@@ -28,7 +28,7 @@ namespace Alabo.App.Core.UI.Domain.Services {
             }
 
             if (instanceFind is IAutoConfig) {
-                autoForm = Resolve<IApiAutoConfigService>().GetView(instanceFind.GetType(), id);
+                autoForm = Resolve<IApIAlaboAutoConfigService>().GetView(instanceFind.GetType(), id);
                 return new Tuple<ServiceResult, AutoForm>(ServiceResult.Success, autoForm);
             } else if (instanceFind is IAutoForm set) {
                 autoForm = set.GetView(id, autoModel);
@@ -50,7 +50,7 @@ namespace Alabo.App.Core.UI.Domain.Services {
         public ServiceResult Save(AutoFormInput autoFormInput, AutoBaseModel autoModel) {
             //config
             if (autoFormInput.TypeInstance is IAutoConfig) {
-                Ioc.Resolve<IApiAutoConfigService>().Save(autoFormInput.TypeFind, autoFormInput.ModelFind);
+                Ioc.Resolve<IApIAlaboAutoConfigService>().Save(autoFormInput.TypeFind, autoFormInput.ModelFind);
             } else if (autoFormInput.TypeInstance is IAutoForm set) {
                 var result = set.Save(autoFormInput.ModelFind, autoModel);
                 if (!result.Succeeded) {

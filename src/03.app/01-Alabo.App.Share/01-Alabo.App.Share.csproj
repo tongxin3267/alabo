@@ -30,15 +30,13 @@
     <Folder Include="Attach\Controllers\" />
     <Folder Include="TasksOpen\Controllers\" />
     <Folder Include="TasksOpen\Domain\Services\" />
+    <Folder Include="Behaviors\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\core\Alabo.Core\Alabo.Core.csproj" />
-    <ProjectReference Include="..\..\core\Alabo\Alabo.csproj" />
-    <ProjectReference Include="..\..\industry\Alabo.App.Cms\Alabo.App.Cms.csproj" />
-    <ProjectReference Include="..\..\industry\Alabo.App.Offline\Alabo.App.Offline.csproj" />
-    <ProjectReference Include="..\..\industry\Alabo.App.Shop\Alabo.App.Shop.csproj" />
-    <ProjectReference Include="..\Alabo.App.Agent\Alabo.App.Agent.csproj" />
-    <ProjectReference Include="..\Alabo.App.Asset\Alabo.App.Asset\Alabo.App.Asset.csproj" />
-    <ProjectReference Include="..\Alabo.App.Core\Alabo.App.Core.csproj" />
+    <ProjectReference Include="..\..\01.framework\01-Alabo\01-Alabo.csproj" />
+    <ProjectReference Include="..\..\01.framework\02-Alabo.Framework.Core\02-Alabo.Framework.Core.csproj" />
+    <ProjectReference Include="..\..\01.framework\03-Alabo.Framework.Basic\03-Alabo.Framework.Basic.csproj" />
+    <ProjectReference Include="..\..\02.data\01-Alabo.Data.People\01-Alabo.Data.People.csproj" />
+    <ProjectReference Include="..\..\05.cloud\01-Alabo.Cloud.Core\01-Alabo.Cloud.Core.csproj" />
   </ItemGroup>
 </Project>

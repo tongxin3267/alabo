@@ -194,21 +194,5 @@ namespace Alabo.App.Core.User.Controllers {
 
             return ApiResult.Success("密码修改成功");
         }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet]
-        public ApiResult GetUserTree(int id, string isFirst = "") {
-            if (isFirst.ToLower().Equal("yes") && id == 1) {
-                id = 0;
-            }
-
-            var uMsgs = Resolve<IUserTreeService>().GetUserTree(id);
-
-            return ApiResult.Result(uMsgs);
-        }
     }
 }

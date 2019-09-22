@@ -13,9 +13,9 @@ using Alabo.UI.AutoForms;
 
 namespace Alabo.App.Core.Common.Domain.Services {
 
-    public class ApiAutoConfigService : ServiceBase, IApiAutoConfigService {
+    public class ApIAlaboAutoConfigService : ServiceBase, IApIAlaboAutoConfigService {
 
-        public ApiAutoConfigService(IUnitOfWork unitOfWork) : base(unitOfWork) {
+        public ApIAlaboAutoConfigService(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
         public AutoForm GetView(Type type, object id) {
@@ -33,7 +33,7 @@ namespace Alabo.App.Core.Common.Domain.Services {
                 }
             }
             // 重构注释
-            //var config = Resolve<IAutoConfigService>().GetConfig(type.FullName);
+            //var config = Resolve<IAlaboAutoConfigService>().GetConfig(type.FullName);
             //if (config == null) {
             //    return data;
             //}

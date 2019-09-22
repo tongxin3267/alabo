@@ -4,7 +4,7 @@ using Alabo.UI.AutoForms;
 
 namespace Alabo.App.Core.Common.Domain.Services {
 
-    public interface IApiAutoConfigService : IService {
+    public interface IApIAlaboAutoConfigService : IService {
 
         /// <summary>
         /// get view
