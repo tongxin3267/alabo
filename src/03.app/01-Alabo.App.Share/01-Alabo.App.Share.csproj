@@ -16,21 +16,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Share\Domain\CallBacks\**" />
-    <Compile Remove="Tasks\Configs\SharedFenRun\VentureCompany\**" />
-    <Compile Remove="Tasks\Domain\Repositories\**" />
+    <Compile Remove="TasksOpen\Configs\SharedFenRun\VentureCompany\**" />
+    <Compile Remove="TasksOpen\Domain\Repositories\**" />
     <EmbeddedResource Remove="Share\Domain\CallBacks\**" />
-    <EmbeddedResource Remove="Tasks\Configs\SharedFenRun\VentureCompany\**" />
-    <EmbeddedResource Remove="Tasks\Domain\Repositories\**" />
+    <EmbeddedResource Remove="TasksOpen\Configs\SharedFenRun\VentureCompany\**" />
+    <EmbeddedResource Remove="TasksOpen\Domain\Repositories\**" />
     <None Remove="Share\Domain\CallBacks\**" />
-    <None Remove="Tasks\Configs\SharedFenRun\VentureCompany\**" />
-    <None Remove="Tasks\Domain\Repositories\**" />
+    <None Remove="TasksOpen\Configs\SharedFenRun\VentureCompany\**" />
+    <None Remove="TasksOpen\Domain\Repositories\**" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Attach\Controllers\" />
     <Folder Include="Attach\Controllers\" />
-    <Folder Include="Tasks\Controllers\" />
-    <Folder Include="Tasks\Domain\Services\" />
-    <Folder Include="Tasks\Modules\" />
+    <Folder Include="TasksOpen\Controllers\" />
+    <Folder Include="TasksOpen\Domain\Services\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\core\Alabo.Core\Alabo.Core.csproj" />
