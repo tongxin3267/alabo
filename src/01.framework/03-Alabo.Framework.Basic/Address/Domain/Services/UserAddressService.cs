@@ -14,6 +14,7 @@ using Alabo.Domains.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Mapping;
+using Alabo.Users.Domain.Services;
 
 namespace Alabo.App.Core.User.Domain.Services {
 
@@ -134,10 +135,10 @@ namespace Alabo.App.Core.User.Domain.Services {
             var result = AddOrUpdateSingle(userAddress);
             if (result == ServiceResult.Success) {
                 // 修改User_Detial表
-                var userDetail = Resolve<IUserDetailService>().GetSingle(r => r.UserId == userInfoAddress.UserId);
+                var userDetail = Resolve<IAlaboUserDetailService>().GetSingle(r => r.UserId == userInfoAddress.UserId);
                 userDetail.AddressId = userAddress.Id.ToStr();
                 userDetail.RegionId = userInfoAddress.RegionId;
-                Resolve<IUserDetailService>().Update(userDetail);
+                Resolve<IAlaboUserDetailService>().Update(userDetail);
             }
 
             return result;
@@ -256,7 +257,7 @@ namespace Alabo.App.Core.User.Domain.Services {
                 find = new UserAddress();
             }
 
-            var user = Resolve<IUserService>().GetSingle(r => r.Id == userAddress.UserId);
+            var user = Resolve<IAlaboUserService>().GetSingle(r => r.Id == userAddress.UserId);
 
             if (user == null) {
                 return ServiceResult.FailedWithMessage("会员不存在");
