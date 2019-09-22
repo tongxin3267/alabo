@@ -72,7 +72,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02-Alabo.Framework.Core", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04-Alabo.Framework.Report", "src\01.framework\04-Alabo.Framework.Report\04-Alabo.Framework.Report.csproj", "{F598CC64-8C8A-4C1F-B909-B09B2E98C21D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "05-Alabo.Framework.Theme", "src\01.framework\05-Alabo.Framework.Theme\05-Alabo.Framework.Theme.csproj", "{08ED4F91-8B86-46DF-9A41-6BB819CF64AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "05-Alabo.Framework.Themes", "src\01.framework\05-Alabo.Framework.Theme\05-Alabo.Framework.Themes.csproj", "{08ED4F91-8B86-46DF-9A41-6BB819CF64AD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03-Alabo.Framework.Basic", "src\01.framework\03-Alabo.Framework.Basic\03-Alabo.Framework.Basic.csproj", "{9E3E7645-60EA-442F-B7B9-812DFB170AE4}"
 EndProject

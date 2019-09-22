@@ -58,8 +58,10 @@ namespace Alabo.App.Core.Common.Controllers {
         /// <param name="type"></param>
         /// <returns></returns>
         public ApiResult<List<Link>> GetLinks([FromQuery] string type) {
-            var result = Resolve<IAutoConfigService>().GetAllLinks();
-            return ApiResult.Success(result);
+            //doto 2019Äê9ÔÂ22ÈÕ
+            //var result = Resolve<IAutoConfigService>().GetAllLinks();
+            //return ApiResult.Success(result);
+            return null;
         }
 
         /// <summary>

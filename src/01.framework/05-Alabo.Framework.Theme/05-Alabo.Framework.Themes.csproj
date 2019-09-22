@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>Alabo.Framework.Theme</AssemblyName>
-    <RootNamespace>Alabo.Framework.Theme</RootNamespace>
+    <RootNamespace>Alabo.Framework.Themes</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
