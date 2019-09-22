@@ -33,5 +33,21 @@ namespace Alabo.App.Core.User.Controllers {
 
             return ApiResult.Success(apiRusult);
         }
+
+        /// <summary>
+        ///     二维码
+        /// </summary>
+        /// <param name="loginUserId"></param>
+        [HttpGet]
+        [Display(Description = "二维码")]
+        [ApiAuth]
+        public ApiResult<string> QrCode([FromQuery] long loginUserId) {
+            var result = Resolve<IUserQrCodeService>().QrCore(loginUserId);
+            if (result == null) {
+                return ApiResult.Failure<string>("用户不存在或者已经删除！");
+            }
+
+            return ApiResult.Success<string>(result);
+        }
     }
 }

@@ -24,9 +24,6 @@
     <PackageReference Include="Senparc.Weixin.WxOpen" Version="3.3.9.2" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Grades\Domain\Configs\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\01.framework\01-Alabo\01-Alabo.csproj" />
     <ProjectReference Include="..\..\01.framework\02-Alabo.Framework.Core\02-Alabo.Framework.Core.csproj" />
     <ProjectReference Include="..\..\01.framework\03-Alabo.Framework.Basic\03-Alabo.Framework.Basic.csproj" />

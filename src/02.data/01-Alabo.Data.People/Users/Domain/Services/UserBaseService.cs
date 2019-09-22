@@ -1,6 +1,5 @@
 ﻿using Alabo.App.Core.Common.Domain.CallBacks;
 using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Entities;
@@ -91,8 +90,9 @@ namespace Alabo.App.Core.User.Domain.Services {
             }
             Ioc.Resolve<IUserDetailService>().Update(find.Detail);
 
+            //TODO 9月重构注释
             //初始化用户资产账户
-            Resolve<IAccountService>().InitSingleUserAccount(find.Id);
+            //   Resolve<IAccountService>().InitSingleUserAccount(find.Id);
 
             try {
                 var userOutput = Resolve<IUserDetailService>().GetUserOutput(find.Id);

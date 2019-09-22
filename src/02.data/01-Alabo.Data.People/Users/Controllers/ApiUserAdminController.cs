@@ -44,12 +44,6 @@ namespace Alabo.App.Core.User.Controllers {
                 return ApiResult.Failure("您访问的用户不存在");
             }
 
-            var typeName =
-                Resolve<IAutoConfigService>().UserTypes()
-                    .FirstOrDefault(r => r.TypeClass == UserTypeEnum.ServiceCenter) != null
-                    ? Resolve<IAutoConfigService>().UserTypes()
-                        .FirstOrDefault(r => r.TypeClass == UserTypeEnum.ServiceCenter)?.Name
-                    : "门店";
             //ViewBag.ServiceCenterTypeName = "所属" + typeName;
             var parent = Resolve<IUserService>().GetSingle(u => u.Id == user.ParentId);
             var view = new ViewAdminEdit {
@@ -71,11 +65,6 @@ namespace Alabo.App.Core.User.Controllers {
             if (userAddress != null) {
                 view.Address = userAddress.Address;
                 view.RegionName = Resolve<IRegionService>().GetFullName(userAddress.RegionId);
-            }
-
-            var identity = Resolve<IIdentityService>().GetSingle(r => r.UserId == user.Id);
-            if (identity != null) {
-                view.IdentityStatus = identity.Status;
             }
 
             return ApiResult.Success(view);
