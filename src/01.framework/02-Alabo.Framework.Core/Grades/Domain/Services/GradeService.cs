@@ -10,6 +10,7 @@ using Alabo.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.App.Core.User.Domain.Dtos;
 
 namespace Alabo.App.Core.Common.Domain.Services {
 
@@ -103,8 +104,10 @@ namespace Alabo.App.Core.Common.Domain.Services {
         }
 
         public ServiceResult UpdateUserGrade(UserGradeInput userGradeInput) {
-            return Resolve<IUpgradeRecordService>()
-                .ChangeUserGrade(userGradeInput.UserId, userGradeInput.GradeId, userGradeInput.Type);
+            //TODO 2019年9月22日 重构注释
+            //return Resolve<IUpgradeRecordService>()
+            //   .ChangeUserGrade(userGradeInput.UserId, userGradeInput.GradeId, userGradeInput.Type);
+            return null;
         }
     }
 }

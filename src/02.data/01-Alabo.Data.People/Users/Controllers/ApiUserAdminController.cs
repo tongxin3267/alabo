@@ -112,15 +112,6 @@ namespace Alabo.App.Core.User.Controllers {
                     find.RegionId = view.UserDetail.RegionId;
                 }
 
-                if (!view.ServiceCenterUserName.IsNullOrEmpty()) {
-                    var serviceUserTypeName = Resolve<IAutoConfigService>().UserTypes()
-                        .First(r => r.TypeClass == UserTypeEnum.ServiceCenter)?.Name;
-                    var serviceUser = Resolve<IUserService>().GetSingle(view.ServiceCenterUserName);
-                    if (serviceUser == null) {
-                        return ApiResult.Failure($"您输入的{serviceUserTypeName}不存在，请重新输入");
-                    }
-                }
-
                 var result = Resolve<IUserAdminService>().UpdateUserDetail(find);
                 if (!result) {
                     return ApiResult.Failure("服务异常:会员资料修改失败");

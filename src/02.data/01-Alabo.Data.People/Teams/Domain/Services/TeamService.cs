@@ -4,6 +4,7 @@ using System.Linq;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Dtos;
+using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Repositories;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Services;
@@ -140,6 +141,32 @@ namespace Alabo.App.Core.User.Domain.Services {
             }
 
             return result;
+        }
+
+        public void UpdateTeamInfo(long childuUserId = 0) {
+            Repository<IUserMapRepository>().UpdateTeamInfo(childuUserId);
+        }
+
+        /// <summary>
+        ///     获取团队用户
+        ///     根据UserMap.childNode字段获取
+        /// </summary>
+        /// <param name="userMap"></param>
+        public IEnumerable<Entities.User> GetTeamUser(UserMap userMap) {
+            if (userMap != null) {
+                var userIdStrings = userMap.ChildNode.ToSplitList();
+                var userIds = new List<long>();
+                userIdStrings.ForEach(e => {
+                    var _userId = e.Trim().ConvertToLong(0);
+                    if (_userId > 0) {
+                        userIds.Add(_userId);
+                    }
+                });
+                var users = Resolve<IUserService>().GetList(userIds);
+                return users;
+            }
+
+            return null;
         }
 
         /// <summary>

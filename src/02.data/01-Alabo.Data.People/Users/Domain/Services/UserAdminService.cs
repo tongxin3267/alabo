@@ -47,12 +47,14 @@ namespace Alabo.App.Core.User.Domain.Services {
             } else {
                 // 删除成功以后
                 Resolve<IUserService>().DeleteUserCache(model.Id, model.UserName);
-                var userConfig = Resolve<IAutoConfigService>().GetValue<UserTreeConfig>();
 
-                // 删除会员后修改推荐人，下面所有的会员修改组织架构图
-                if (userConfig.AfterDeleteUserUpdateParentMap) {
-                    Resolve<IUserMapService>().UpdateParentUserAfterUserDelete(userId, model.ParentId);
-                }
+                //TODO 2019年9月22日 重构注释
+                //var userConfig = Resolve<IAutoConfigService>().GetValue<UserTreeConfig>();
+
+                //// 删除会员后修改推荐人，下面所有的会员修改组织架构图
+                //if (userConfig.AfterDeleteUserUpdateParentMap) {
+                //    Resolve<IUserMapService>().UpdateParentUserAfterUserDelete(userId, model.ParentId);
+                //}
             }
             return true;
         }

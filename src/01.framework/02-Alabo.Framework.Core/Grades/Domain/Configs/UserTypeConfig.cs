@@ -167,7 +167,7 @@ namespace Alabo.App.Core.User.Domain.Callbacks {
         #endregion
 
         public void SetDefault() {
-            var list = Ioc.Resolve<IAutoConfigService>().GetList<UserTypeConfig>();
+            var list = Ioc.Resolve<IAlaboAutoConfigService>().GetList<UserTypeConfig>();
             if (list == null || list.Count == 0) {
                 var configs = new List<UserTypeConfig>();
                 var config = new UserTypeConfig();
@@ -197,7 +197,7 @@ namespace Alabo.App.Core.User.Domain.Callbacks {
                     LastUpdated = DateTime.Now,
                     Value = JsonConvert.SerializeObject(configs)
                 };
-                Ioc.Resolve<IAutoConfigService>().AddOrUpdate(autoConfig);
+                Ioc.Resolve<IAlaboAutoConfigService>().AddOrUpdate(autoConfig);
             }
         }
     }

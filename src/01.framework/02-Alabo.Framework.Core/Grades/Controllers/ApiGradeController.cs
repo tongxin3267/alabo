@@ -63,7 +63,7 @@ namespace Alabo.App.Core.User.Controllers {
         [HttpGet]
         [Display(Description = "根据用户名获取会员等级")]
         public ApiResult<UserGradeConfig> GetUserGrade([FromQuery]string userName) {
-            var user = Resolve<IUserService>().GetSingle(userName);
+            var user = Resolve<IAlaboUserService>().GetSingle(userName);
             if (user == null) {
                 return ApiResult.Failure<UserGradeConfig>("用户不存在");
             }

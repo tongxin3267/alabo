@@ -58,12 +58,12 @@ namespace Alabo.App.Core.User.ViewModels {
         public string PayPassword { get; set; }
 
         public AutoForm GetView(object id, AutoBaseModel autoModel) {
-            var view = new ViewTransferRelationship();
+            var view = new TransferRelationshipForm();
             return ToAutoForm(view);
         }
 
         public ServiceResult Save(object model, AutoBaseModel autoModel) {
-            var view = model.MapTo<ViewTransferRelationship>();
+            var view = model.MapTo<TransferRelationshipForm>();
             if (autoModel != null) {
                 view.UserId = autoModel.BasicUser.Id;
             }

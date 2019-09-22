@@ -36,32 +36,33 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// </summary>
         /// <param name="userId"></param>
         public void AfterUserRegTask(long userId) {
-            var user = Resolve<IUserService>().GetUserDetail(userId);
-            if (user != null) {
-                // 生成用户二维码
-                // Resolve<IUserQrCodeService>().CreateCode(user);
+            //TODO 2019年9月22日 重构注册后事件
+            //var user = Resolve<IUserService>().GetUserDetail(userId);
+            //if (user != null) {
+            //    // 生成用户二维码
+            //    // Resolve<IUserQrCodeService>().CreateCode(user);
 
-                // 添加内部合伙人关系
-                AddParnter(user);
+            //    // 添加内部合伙人关系
+            //    AddParnter(user);
 
-                //更新：User_Map表：更新会员本身的团队信息 LevelNumber,ChildNode,TeamNumber 字段
-                Ioc.Resolve<IUserMapService>().UpdateTeamInfo(user.Id);
+            //    //更新：User_Map表：更新会员本身的团队信息 LevelNumber,ChildNode,TeamNumber 字段
+            //    Ioc.Resolve<IUserMapService>().UpdateTeamInfo(user.Id);
 
-                //团队等级自动更新模块
-                var backJobParameter = new BackJobParameter {
-                    ModuleId = TaskQueueModuleId.TeamUserGradeAutoUpdate,
-                    UserId = user.Id,
-                    ServiceName = typeof(IGradeInfoService).Name,
-                    Method = "TeamUserGradeAutoUpdate",
-                    Parameter = user.Id,
-                };
-                // Resolve<ITaskQueueService>().AddBackJob(backJobParameter);
+            //    //团队等级自动更新模块
+            //    var backJobParameter = new BackJobParameter {
+            //        ModuleId = TaskQueueModuleId.TeamUserGradeAutoUpdate,
+            //        UserId = user.Id,
+            //        ServiceName = typeof(IGradeInfoService).Name,
+            //        Method = "TeamUserGradeAutoUpdate",
+            //        Parameter = user.Id,
+            //    };
+            //    // Resolve<ITaskQueueService>().AddBackJob(backJobParameter);
 
-                Resolve<IGradeInfoService>().TeamUserGradeAutoUpdate(userId);
+            //    Resolve<IGradeInfoService>().TeamUserGradeAutoUpdate(userId);
 
-                // 继承IUserRegAfter的方法
-                ExecuteUserAfter(user);
-            }
+            //    // 继承IUserRegAfter的方法
+            //    ExecuteUserAfter(user);
+            //}
         }
 
         #region 继承IUserRegAfter的方法
