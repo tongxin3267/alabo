@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\01-Alabo.Cloud.Core\01-Alabo.Cloud.Core.csproj" />
     <ProjectReference Include="..\..\framework\Alabo.WebApi\02-Alabo.Core.csproj" />
     <ProjectReference Include="..\..\framework\Alabo\01-Alabo.csproj" />
     <ProjectReference Include="..\Alabo.App.Core\01-Alabo.App.Core.csproj" />
