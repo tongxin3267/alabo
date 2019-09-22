@@ -1,12 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using Alabo.App.Core.Api;
+﻿using Alabo.App.Core.Api;
 using Alabo.App.Core.ApiStore;
-using Alabo.App.Core.Common.Extensions;
-using Alabo.App.Core.Tasks;
-using Alabo.App.Open.Messages;
 using Alabo.Apps;
 using Alabo.Datas.Ef;
 using Alabo.Datas.UnitOfWorks;
@@ -19,16 +12,19 @@ using Alabo.Runtime;
 using Alabo.Test.Base.Core.Test;
 using Alabo.Web.Extensions;
 using Alabo.Web.Filters;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Alabo.Test.Base.Core.Model {
-    public abstract class CoreTest : IBaseTest
-    {
+
+    public abstract class CoreTest : IBaseTest {
         private static readonly IServiceCollection services = new ServiceCollection();
 
         private readonly IServiceScope _serviceScope;
 
-        static CoreTest()
-        {
+        static CoreTest() {
             var testHostingEnvironment = new TestHostingEnvironment();
             var builder = new ConfigurationBuilder()
                 .SetBasePath(testHostingEnvironment.WebRootPath).AddJsonFile("appsettings.json", true, true)
@@ -37,10 +33,8 @@ namespace Alabo.Test.Base.Core.Model {
             Configuration.ConfigurationRuntimePath(testHostingEnvironment.WebRootPath);
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>(services =>
-                new HttpContextAccessor
-                {
-                    HttpContext = new DefaultHttpContext
-                    {
+                new HttpContextAccessor {
+                    HttpContext = new DefaultHttpContext {
                         RequestServices = services
                     }
                 });
@@ -50,11 +44,10 @@ namespace Alabo.Test.Base.Core.Model {
             // 项目底层配置服务
             services.AddAppServcie(Configuration);
             //添加Mvc服务
-            services.AddMvc(options =>
-                {
-                    //options.Filters.Add( new AutoValidateAntiforgeryTokenAttribute() );
-                    options.Filters.Add(new ExceptionHandlerAttribute());
-                }
+            services.AddMvc(options => {
+                //options.Filters.Add( new AutoValidateAntiforgeryTokenAttribute() );
+                options.Filters.Add(new ExceptionHandlerAttribute());
+            }
             ).AddControllersAsServices();
 
             //添加NLog日志操作
@@ -77,20 +70,11 @@ namespace Alabo.Test.Base.Core.Model {
             services.AddApiService();
             // 添加支付方式等,第三方注入
             services.AddApiStoreService();
-            // 添加任务调度服务
-            services.AddTasks();
-
-            // Alabo.App.Core 服务注入
-            services.AddCoreManager();
-  
-            // Alabo.App.Open 服务注入
-            services.AddOpenManager();
 
             services.AddUtil();
         }
 
-        public CoreTest()
-        {
+        public CoreTest() {
             Services = services.BuildServiceProvider();
             _serviceScope = Services.CreateScope();
 
@@ -101,8 +85,7 @@ namespace Alabo.Test.Base.Core.Model {
 
         private static IConfigurationRoot Configuration { get; }
 
-        public void Dispose()
-        {
+        public void Dispose() {
             _serviceScope.Dispose();
             // Ioc.Dispose();
             //  ContainerManager.Default.DisposeTestPerHttpRequestContainer();
@@ -112,8 +95,7 @@ namespace Alabo.Test.Base.Core.Model {
         ///     获取依赖
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        protected T Resolve<T>()
-        {
+        protected T Resolve<T>() {
             return Ioc.Resolve<T>();
         }
     }

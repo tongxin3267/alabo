@@ -1,15 +1,7 @@
 ﻿//using System;using Alabo.Domains.Repositories.EFCore;using Alabo.Domains.Repositories.Model;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Xunit;
 using Alabo.App.Core.Admin.Domain.Services;
 using Alabo.App.Core.Employes.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Services;
-using Alabo.App.Shop.Product.Domain.Entities;
-using Alabo.App.Shop.Product.Domain.Services;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Query;
 using Alabo.Domains.Repositories.Model;
@@ -18,6 +10,10 @@ using Alabo.Helpers;
 using Alabo.Tenants;
 using Alabo.Test.Base.Core.Model;
 using Alabo.Test.Generation.CodeTemplate;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Xunit;
 
 namespace Alabo.Test.Generation {
 
@@ -26,40 +22,6 @@ namespace Alabo.Test.Generation {
     /// </summary>
     public class ServiceCodeGenerator : CoreTest {
         private readonly string _serviceHostUrl = "http://localhost:9018";
-
-        [Fact]
-        public void asd() {
-            var query = new ExpressionQuery<Order> {
-                PageIndex = 1,
-                PageSize = 15
-            };
-
-            var view = Resolve<IOrderService>().GetPagedList(query);
-            var orders = new List<Order>();
-            foreach (var item in view) {
-                TimeSpan ts = DateTime.Now.Subtract(item.CreateTime);
-                if (ts.Days < 7) {
-                    orders.Add(item);
-                }
-            }
-
-            view.Result = orders;
-            var modelType = "Order".GetTypeByName();
-            var result = Resolve<IAdminTableService>().ToExcel(modelType, view);
-        }
-
-        [Fact]
-        public void T2() {
-            var id = 188;
-            var url = $@"{_serviceHostUrl}/Api/DataSync/GetProduct?id={id}";
-            var json = url.HttpGet();
-            var obj = json.ToObject<Product>();
-
-            TenantContext.CurrentTenant = "tenant1";
-            obj.Id = 0;
-
-            var rs = Ioc.Resolve<IProductService>().Add(obj);
-        }
 
         [Fact]
         public void TestOrderSync() {
