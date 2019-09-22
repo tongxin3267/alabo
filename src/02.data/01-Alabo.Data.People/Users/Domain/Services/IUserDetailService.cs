@@ -69,10 +69,5 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// <param name="openId">The open identifier.</param>
         /// <param name="userId">会员Id</param>
         void UpdateOpenId(string openId, long userId);
-
-        /// <summary>
-        ///     获取当前服务中心下所有会员
-        /// </summary>
-        IList<long> GetAllServiceCenterUserIds(long userId);
     }
 }
