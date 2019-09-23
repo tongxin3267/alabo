@@ -16,12 +16,6 @@ namespace Alabo.App.Core.Tasks.Domain.Repositories {
         IList<long> GetUnHandledIdList();
 
         /// <summary>
-        ///     获取分润数据统计详情
-        /// </summary>
-        /// <param name="shareOrderId"></param>
-        IList<ShareOrderReportItem> GetShareOrderReportItems(long shareOrderId);
-
-        /// <summary>
         ///     Errors the order.
         /// </summary>
         /// <param name="shareOrderId">The share order identifier.</param>

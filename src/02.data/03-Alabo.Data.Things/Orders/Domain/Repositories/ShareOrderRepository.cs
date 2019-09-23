@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Linq;
+using ZKCloud.App.Core.Tasks.Domain.Enums;
 using ZKCloud.Open.Message.Models;
 using Convert = System.Convert;
 
@@ -402,25 +403,6 @@ namespace Alabo.App.Core.Tasks.Domain.Repositories {
             }
 
             return shareOrders;
-        }
-
-        public IList<ShareOrderReportItem> GetShareOrderReportItems(long shareOrderId) {
-            // 升级点不统计
-            var sql =
-                $"select UserId,MoneyTypeId,Amount from Share_Reward where OrderId={shareOrderId} and MoneyTypeId!='E97CCD1E-1478-49BD-BFC7-E73A5D699006'  ";
-            IList<ShareOrderReportItem> list = new List<ShareOrderReportItem>();
-            using (var reader = RepositoryContext.ExecuteDataReader(sql)) {
-                while (reader.Read()) {
-                    var shareOrder = new ShareOrderReportItem {
-                        UserId = reader["UserId"].ConvertToLong(0),
-                        MoneyTypeId = reader["MoneyTypeId"].ToGuid(),
-                        Amount = reader["Amount"].ConvertToDecimal(0)
-                    };
-                    list.Add(shareOrder);
-                }
-            }
-
-            return list;
         }
 
         private ShareOrder ReadShareOrder(IDataReader reader) {
