@@ -1,16 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>Library</OutputType>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <RootNamespace>Alabo.Cloud.People</RootNamespace>
-    <AssemblyName>Alabo.Cloud.People</AssemblyName>
+    <RootNamespace>Alabo.Cloud.Asset</RootNamespace>
+    <ApplicationIcon />
+    <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\01.framework\01-Alabo\01-Alabo.csproj" />
-    <ProjectReference Include="..\..\01.framework\02-Alabo.Framework.Core\02-Alabo.Framework.Core.csproj" />
     <ProjectReference Include="..\..\01.framework\03-Alabo.Framework.Basic\03-Alabo.Framework.Basic.csproj" />
-    <ProjectReference Include="..\..\02.data\01-Alabo.Data.People\01-Alabo.Data.People.csproj" />
+    <ProjectReference Include="..\..\01.framework\06-Alabo.Framework.Tasks\06-Alabo.Framework.Tasks.csproj" />
     <ProjectReference Include="..\..\02.data\02-Alabo.Data.Asset\02-Alabo.Data.Asset.csproj" />
   </ItemGroup>
 

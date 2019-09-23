@@ -33,25 +33,6 @@ namespace Alabo.App.Shop.Order.Domain.Services {
         ViewAdminOrder GetViewAdminOrder(long id, long UserId);
 
         /// <summary>
-        ///     更新订单业绩
-        ///     更新到表User_UserMap.ShopSale中
-        /// </summary>
-        /// <param name="orderId"></param>
-        void UpdateUserSaleInfo(long orderId);
-
-        /// <summary>
-        ///     会员销售统计表
-        /// </summary>
-        /// <param name="query"></param>
-        PagedList<ViewShopSale> GetShopSalePagedList(object query);
-
-        /// <summary>
-        ///     会员销售统计表
-        /// </summary>
-        /// <param name="query"></param>
-        PagedList<ViewPriceStyleSale> GetViewPriceStyleSalePagedList(object query);
-
-        /// <summary>
         /// 产品库存更新
         /// </summary>
         void ProductStockUpdate();
