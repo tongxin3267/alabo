@@ -19,7 +19,7 @@ namespace Alabo.App.Shop.Store {
         /// 初始化 供应商员工以及权限
         /// </summary>
         public void Init() {
-            Ioc.Resolve<IStoreService>().PlanformStore();
+            Ioc.Resolve<IShopStoreService>().PlanformStore();
         }
     }
 }

@@ -109,7 +109,7 @@ namespace Alabo.App.Shop.Store.Domain.Entities {
             if (autoModel.Filter == FilterType.Admin) {
                 model = Resolve<IDeliveryTemplateService>().GetPagedList(query);
             } else if (autoModel.Filter == FilterType.User) {
-                var store = Resolve<IStoreService>().GetUserStore(autoModel.BasicUser.Id);
+                var store = Resolve<IShopStoreService>().GetUserStore(autoModel.BasicUser.Id);
                 if (store == null) {
                     throw new ValidException("您不是供应商");
                 }

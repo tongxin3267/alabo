@@ -92,7 +92,7 @@ namespace Alabo.App.Shop.Order.Domain.PcDtos {
                 expressionQuery.And(e => e.OrderType == model.OrderType);
             }
 
-            var store = Resolve<IStoreService>().GetSingle(u => u.UserId == autoModel.BasicUser.Id);
+            var store = Resolve<IShopStoreService>().GetSingle(u => u.UserId == autoModel.BasicUser.Id);
             if (store == null) {
                 throw new ValidException("您不是供应商,暂无店铺");
             }

@@ -185,7 +185,7 @@ namespace Alabo.App.Shop.Order.Domain.Services {
             if (order != null) {
                 view.Order = order;
                 // 获取门店信息
-                var store = Resolve<IStoreService>().GetSingle(e => e.Id == order.StoreId);
+                var store = Resolve<IShopStoreService>().GetSingle(e => e.Id == order.StoreId);
                 if (store.Extension != null) {
                     store.StoreExtension = store.Extension.DeserializeJson<StoreExtension>();
                 }

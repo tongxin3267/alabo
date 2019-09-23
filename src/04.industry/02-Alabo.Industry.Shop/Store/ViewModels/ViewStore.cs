@@ -174,7 +174,7 @@ namespace Alabo.App.Shop.Store.ViewModels {
         /// <param name="query"></param>
         /// <returns></returns>
         public PageResult<ViewStore> PageTable(object query, AutoBaseModel autoModel) {
-            var list = Resolve<IStoreService>().GetPageList(query);
+            var list = Resolve<IShopStoreService>().GetPageList(query);
             return ToPageResult(list);
         }
 

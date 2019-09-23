@@ -67,7 +67,7 @@ namespace Alabo.App.Shop.Product.Domain.Services
 
                 if (viewProduct.Product.Id > 0)
                 {
-                    viewProduct.Store = Resolve<IStoreService>().GetSingle(e => e.Id == storeId); //供应商
+                    viewProduct.Store = Resolve<IShopStoreService>().GetSingle(e => e.Id == storeId); //供应商
                     //viewProduct.ClassesStore = Service<IRelationIndexService>().GetRelationIds<StoreClassRelation>(productId);///店铺分类
                     viewProduct.ProductSkus = Resolve<IProductSkuService>().GetList(o => o.ProductId == viewProduct.Product.Id)?.ToList();
                 }
@@ -118,7 +118,7 @@ namespace Alabo.App.Shop.Product.Domain.Services
 
             if (viewProduct.Product.StoreId > 0)
             {
-                viewProduct.Store = Resolve<IStoreService>().GetSingle(r => r.Id == viewProduct.Product.StoreId);
+                viewProduct.Store = Resolve<IShopStoreService>().GetSingle(r => r.Id == viewProduct.Product.StoreId);
             }
 
             if (viewProduct.Product.PriceStyleId.IsGuidNullOrEmpty())
@@ -240,7 +240,7 @@ namespace Alabo.App.Shop.Product.Domain.Services
             view.StoreId = view.Product.StoreId;
             if (view.Product.StoreId > 0)
             {
-                view.Store = Resolve<IStoreService>().GetSingle(r => r.Id == view.Product.StoreId);
+                view.Store = Resolve<IShopStoreService>().GetSingle(r => r.Id == view.Product.StoreId);
             }
 
             if (view.Product.PriceStyleId.IsGuidNullOrEmpty())
@@ -266,7 +266,7 @@ namespace Alabo.App.Shop.Product.Domain.Services
             {
                 if (!storeName.IsNullOrEmpty())
                 {
-                    var store = Resolve<IStoreService>().GetSingle(r => r.Name.Contains(storeName));
+                    var store = Resolve<IShopStoreService>().GetSingle(r => r.Name.Contains(storeName));
                     if (store != null)
                     {
                         dic.Add("StoreId", store.Id.ToString());
@@ -275,7 +275,7 @@ namespace Alabo.App.Shop.Product.Domain.Services
             }
             var pageList = Resolve<IProductService>().GetPagedList<ViewProductList>(dic.ToJson());
             var storesId = pageList.Select(r => r.StoreId).Distinct();
-            var stores = Resolve<IStoreService>().GetList(r => storesId.Contains(r.Id));
+            var stores = Resolve<IShopStoreService>().GetList(r => storesId.Contains(r.Id));
             pageList.ForEach(r =>
             {
                 r.StoreName = stores.FirstOrDefault(e => e.Id == r.StoreId)?.Name;
@@ -372,7 +372,7 @@ namespace Alabo.App.Shop.Product.Domain.Services
             //如果是后台添加商品,则商品关联平台店铺
             if (viewProduct.IsAdminAddProduct)
             {
-                var planform = Resolve<IStoreService>().PlanformStore();
+                var planform = Resolve<IShopStoreService>().PlanformStore();
                 if (planform == null)
                 {
                     return ServiceResult.FailedWithMessage("请先添加平台店铺");
@@ -563,7 +563,7 @@ namespace Alabo.App.Shop.Product.Domain.Services
             product.ProductExtensions = new ProductExtensions
             {
                 ProductSkus = Resolve<IProductSkuService>().GetList(e => e.ProductId == product.Id).ToList(), //商品SKU                                                                               // ProductBrand = Service<IStoreBrandService>().GetSingle(e => e.Id == product.BrandId),// 商品品牌
-                Store = Resolve<IStoreService>().GetSingle(e => e.Id == product.StoreId) // 商品所属店铺
+                Store = Resolve<IShopStoreService>().GetSingle(e => e.Id == product.StoreId) // 商品所属店铺
             };
             product.ProductExtensions.ProductCategory = product.Detail.PropertyJson.DeserializeJson<Category.Domain.Entities.Category>();
             product.ProductExtensions.ProductThums = product.Detail.ImageJson.DeserializeJson<List<ProductThum>>();

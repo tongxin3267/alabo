@@ -277,7 +277,7 @@ namespace Alabo.App.Shop.Product.Domain.Entities {
         public PageResult<Product> PageTable(object query, AutoBaseModel autoModel) {
             var model = new PagedList<Product>();
 
-            var store = Resolve<IStoreService>().GetUserStore(autoModel.BasicUser.Id);
+            var store = Resolve<IShopStoreService>().GetUserStore(autoModel.BasicUser.Id);
             if (store == null) {
                 throw new ValidException("您不是供应商,暂无店铺");
             }

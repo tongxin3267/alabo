@@ -103,7 +103,7 @@ namespace Alabo.App.Shop.Order.Domain.Services
         /// <param name="UserId">用户Id</param>
         public Tuple<ServiceResult, StoreProductSku> GetCart(long UserId)
         {
-            var storeItems = Resolve<IStoreService>().GetStoreItemListFromCache();
+            var storeItems = Resolve<IShopStoreService>().GetStoreItemListFromCache();
             var temp = storeItems.Select(r => r.StoreId);
             var viewCarts = Resolve<ICartService>().GetList(e =>
                 e.UserId == UserId && e.Status == Status.Normal && temp.Contains(e.StoreId)); // 读取购物车数据，是正常店铺的

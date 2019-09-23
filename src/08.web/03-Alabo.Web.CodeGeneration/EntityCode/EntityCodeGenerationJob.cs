@@ -5,6 +5,7 @@ using Alabo.Schedules.Job;
 using Alabo.Web.CodeGeneration.EntityCode.Templates;
 using System;
 using System.Threading.Tasks;
+using Alabo.App.Shop.Store.Domain.Entities;
 using Alabo.Data.Things.Brands.Domain.Entities;
 using Alabo.Data.Things.Goodss.Domain.Entities;
 using Quartz;
@@ -18,8 +19,8 @@ namespace Alabo.Web.CodeGeneration.EntityCode {
 
         protected override async Task Execute(IJobExecutionContext context, IScope scope) {
             //手动修改,实体路径，可右键实体手动复制路径
-            var entityPath = @"C:\github\alabo\src\02.data\03-Alabo.Data.Things\Brands\Domain\Entities";
-            CreateCode(typeof(Brand), entityPath);
+            var entityPath = @"C:\github\alabo\src\02.data\01-Alabo.Data.People\Stores\Domain\Entities\";
+            CreateCode(typeof(Store), entityPath);
 
             Console.WriteLine(@"所有代码生成完成");
         }

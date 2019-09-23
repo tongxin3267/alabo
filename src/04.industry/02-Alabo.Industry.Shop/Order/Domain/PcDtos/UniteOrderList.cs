@@ -70,7 +70,7 @@ namespace Alabo.App.Shop.Order.Domain.PcDtos {
                             expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
                         }
 
-                        var store = Resolve<IStoreService>().GetUserStore(model.UserId);
+                        var store = Resolve<IShopStoreService>().GetUserStore(model.UserId);
                         if (store == null) {
                             throw new ValidException("您无权查看其他店铺订单");
                         }

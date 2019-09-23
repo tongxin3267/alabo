@@ -99,7 +99,7 @@ namespace Alabo.App.Shop.Order.Domain.PcDtos {
                     throw new ValidException("非管理员不能查看平台订单");
                 }
             } else if (autoModel.Filter == FilterType.Store) {
-                var store = Resolve<IStoreService>().GetUserStore(autoModel.BasicUser.Id);
+                var store = Resolve<IShopStoreService>().GetUserStore(autoModel.BasicUser.Id);
                 if (store == null) {
                     throw new ValidException("您不是供应商,暂无店铺");
                 }

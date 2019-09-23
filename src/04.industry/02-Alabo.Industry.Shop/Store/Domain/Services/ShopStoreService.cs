@@ -32,7 +32,7 @@ namespace Alabo.App.Shop.Store.Domain.Services {
 
     /// <summary>
     /// </summary>
-    public class StoreService : ServiceBase<Entities.Store, long>, IStoreService {
+    public class ShopStoreService : ServiceBase<Entities.Store, long>, IShopStoreService {
         private const string _storeItemListCacheKey = "GetStoreItemListFromCache";
 
         private readonly IProductSkuRepository _productSkuRepository;
@@ -187,14 +187,14 @@ namespace Alabo.App.Shop.Store.Domain.Services {
             if (user.Status != Status.Normal) {
                 return ServiceResult.FailedWithMessage("该用户状态不正常");
             }
-            var userStore = Resolve<IStoreService>().GetSingle(u => u.UserId == user.Id);
+            var userStore = Resolve<IShopStoreService>().GetSingle(u => u.UserId == user.Id);
             if (userStore != null) {
                 if (userStore.Id != store.Id) {
                     return ServiceResult.FailedWithMessage("该用户已经是供应商，无法重复添加");
                 }
             }
 
-            var find = Resolve<IStoreService>().GetByIdNoTracking(u => u.Id == store.Id);
+            var find = Resolve<IShopStoreService>().GetByIdNoTracking(u => u.Id == store.Id);
             if (find == null) {
                 find = new Entities.Store {
                     UserId = user.Id,
@@ -239,7 +239,7 @@ namespace Alabo.App.Shop.Store.Domain.Services {
 
         public ViewStore GetView(long id) {
             ViewStore view = new ViewStore();
-            var store = Resolve<IStoreService>().GetByIdNoTracking(id);
+            var store = Resolve<IShopStoreService>().GetByIdNoTracking(id);
 
             if (store != null) {
                 view = AutoMapping.SetValue<ViewStore>(store);
@@ -318,7 +318,7 @@ namespace Alabo.App.Shop.Store.Domain.Services {
         /// <param name="query"></param>
 
         public PagedList<ViewStore> GetPageList(object query) {
-            var stores = Resolve<IStoreService>().GetPagedList(query);
+            var stores = Resolve<IShopStoreService>().GetPagedList(query);
             var users = Resolve<IUserService>().GetList();
             var list = new List<ViewStore>();
             //var grades = Resolve<IAutoConfigService>().GetList<SupplierGradeConfig>();
@@ -398,7 +398,7 @@ namespace Alabo.App.Shop.Store.Domain.Services {
             return Tuple.Create(serviceResult, storeProductSku);
         }
 
-        public StoreService(IUnitOfWork unitOfWork, IRepository<Entities.Store, long> repository) : base(unitOfWork, repository) {
+        public ShopStoreService(IUnitOfWork unitOfWork, IRepository<Entities.Store, long> repository) : base(unitOfWork, repository) {
             _productSkuRepository = Repository<IProductSkuRepository>();
         }
 

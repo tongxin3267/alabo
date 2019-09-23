@@ -103,7 +103,7 @@ namespace Alabo.App.Shop.Order.Domain.Services {
             //订单物流信息
             var orderDeliveries = Resolve<IOrderDeliveryService>().GetList(e => e.OrderId == order.Id);
             foreach (var item in orderDeliveries) {
-                var store = Resolve<IStoreService>().GetSingle(e => e.Id == item.StoreId);
+                var store = Resolve<IShopStoreService>().GetSingle(e => e.Id == item.StoreId);
                 store.StoreExtension = store.Extension.DeserializeJson<StoreExtension>();
                 //item.Name = store.StoreExtension.DeliveryTemplate
                 //    .SingleOrDefault(e => e.ExpressId == item.ExpressGuid)?.TemplateName;
@@ -284,7 +284,7 @@ namespace Alabo.App.Shop.Order.Domain.Services {
             //订单物流信息
             var orderDeliveries = Resolve<IOrderDeliveryService>().GetList(e => e.OrderId == order.Id);
             foreach (var item in orderDeliveries) {
-                var store = Resolve<IStoreService>().GetSingle(e => e.Id == item.StoreId);
+                var store = Resolve<IShopStoreService>().GetSingle(e => e.Id == item.StoreId);
                 store.StoreExtension = store.Extension.DeserializeJson<StoreExtension>();
                 //item.Name = store.StoreExtension.DeliveryTemplate
                 //    .SingleOrDefault(e => e.ExpressId == item.ExpressGuid)?.TemplateName;
@@ -364,7 +364,7 @@ namespace Alabo.App.Shop.Order.Domain.Services {
             //订单物流信息
             var orderDeliveries = Resolve<IOrderDeliveryService>().GetList(e => e.OrderId == order.Id);
             foreach (var item in orderDeliveries) {
-                var store = Resolve<IStoreService>().GetSingle(e => e.Id == item.StoreId);
+                var store = Resolve<IShopStoreService>().GetSingle(e => e.Id == item.StoreId);
                 store.StoreExtension = store.Extension.DeserializeJson<StoreExtension>();
                 //item.Name = store.StoreExtension.DeliveryTemplate
                 //    .SingleOrDefault(e => e.ExpressId == item.ExpressGuid)?.TemplateName;
@@ -432,7 +432,7 @@ namespace Alabo.App.Shop.Order.Domain.Services {
                 var deliverRes = Resolve<IOrderService>().Update(order);
 
                 if (deliverRes) {
-                    var store = Resolve<IStoreService>().GetSingle(u => u.Id == order.StoreId);
+                    var store = Resolve<IShopStoreService>().GetSingle(u => u.Id == order.StoreId);
 
                     //添加订单操作记录
                     var orderAction = new OrderAction {

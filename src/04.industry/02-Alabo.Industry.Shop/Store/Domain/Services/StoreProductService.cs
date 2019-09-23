@@ -214,7 +214,7 @@ namespace Alabo.App.Shop.Store.Domain.Services
                 throw new System.Exception("用户不存在");
             }
 
-            var store = Resolve<IStoreService>().GetUserStore(user.Id);
+            var store = Resolve<IShopStoreService>().GetUserStore(user.Id);
             if (store == null)
             {
                 throw new System.Exception("当前用户不存在店铺");

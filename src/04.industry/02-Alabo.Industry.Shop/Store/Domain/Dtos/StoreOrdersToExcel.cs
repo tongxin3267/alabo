@@ -45,7 +45,7 @@ namespace Alabo.App.Shop.Store.Domain.Dtos {
 
         public ServiceResult Save(object model, AutoBaseModel autoModel) {
             var condition = (StoreOrdersToExcel)model;
-            var store = Resolve<IStoreService>().GetSingle(u => u.UserId == autoModel.BasicUser.Id);
+            var store = Resolve<IShopStoreService>().GetSingle(u => u.UserId == autoModel.BasicUser.Id);
             if (store == null) {
                 return ServiceResult.FailedWithMessage("非法操作");
             }

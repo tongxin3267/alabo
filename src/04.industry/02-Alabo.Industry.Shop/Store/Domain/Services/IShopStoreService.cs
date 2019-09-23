@@ -11,13 +11,13 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
 using Alabo.Domains.Services;
 
-namespace Alabo.App.Shop.Store.Domain.Services
-{
+namespace Alabo.App.Shop.Store.Domain.Services {
+
     /// <summary>
     ///     Interface IStoreService
     /// </summary>
-    public interface IStoreService : IService<Entities.Store, long>
-    {
+    public interface IShopStoreService : IService<Entities.Store, long> {
+
         /// <summary>
         ///     获取自营店铺
         ///     平台店铺，后台添加的时候，为平台商品

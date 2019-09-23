@@ -54,7 +54,7 @@ namespace Alabo.App.Shop.Order.Domain.PcDtos {
                 "建议填写您的手机号码，便于通知发货！",
             };
 
-            var view = Resolve<IStoreService>().GetSingle(u => u.UserId == autoModel.BasicUser.Id);
+            var view = Resolve<IShopStoreService>().GetSingle(u => u.UserId == autoModel.BasicUser.Id);
             if (view != null) {
                 var user = Resolve<IUserService>().GetSingle(u => u.Id == view.UserId);
                 var info = AutoMapping.SetValue<SupplierInfo>(view);
@@ -85,7 +85,7 @@ namespace Alabo.App.Shop.Order.Domain.PcDtos {
                 return ServiceResult.FailedWithMessage("不存在的会员");
             }
 
-            var store = Resolve<IStoreService>().GetSingle(u => u.UserId == view.UserId);
+            var store = Resolve<IShopStoreService>().GetSingle(u => u.UserId == view.UserId);
             if (store == null) {
                 return ServiceResult.FailedWithMessage("该用户不是供应商");
             }
@@ -94,14 +94,14 @@ namespace Alabo.App.Shop.Order.Domain.PcDtos {
             storeExtension.BankCard = view.BankCard;
             store.Name = view.Name;
 
-            var updateRes = Resolve<IStoreService>().Update(store);
+            var updateRes = Resolve<IShopStoreService>().Update(store);
             if (!updateRes) {
                 return ServiceResult.FailedWithMessage("修改失败 请重试");
             }
             if (store.Extension.IsNullOrEmpty()) {
                 store.Extension = ObjectExtension.ToJson(storeExtension);
             }
-            var updateExtension = Resolve<IStoreService>().UpdateExtensions(store.Id, storeExtension);
+            var updateExtension = Resolve<IShopStoreService>().UpdateExtensions(store.Id, storeExtension);
 
             if (!view.Moblie.IsNullOrEmpty()) {
                 var viewUser = Resolve<IUserService>().GetSingle(u => u.Id == view.UserId);

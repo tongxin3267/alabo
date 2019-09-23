@@ -430,7 +430,7 @@ namespace Alabo.App.Shop.Order.Controllers {
             order.OrderStatus = OrderStatus.Remited;
             var result = Resolve<IOrderService>().Update(order);
             if (result) {
-                var store = Resolve<IStoreService>().GetSingle(u => u.Id == order.StoreId);
+                var store = Resolve<IShopStoreService>().GetSingle(u => u.Id == order.StoreId);
                 var user = Resolve<IUserService>().GetSingle(u => u.Id == store.UserId);
                 Resolve<IOpenService>().SendRawAsync(user.Mobile, "您有一个新订单，请尽快安排发货，并登录企牛牛供应商后台进行发货操作");
                 return ApiResult.Success();

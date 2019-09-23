@@ -40,7 +40,7 @@ namespace Alabo.App.Shop.Store.Controllers {
         ///
         /// </summary>
         public ApiStoreController() : base() {
-            BaseService = Resolve<IStoreService>();
+            BaseService = Resolve<IShopStoreService>();
         }
 
         /// <summary>
@@ -91,11 +91,11 @@ namespace Alabo.App.Shop.Store.Controllers {
                 list.Remove(list[0]);
             }
 
-            var extend = Resolve<IStoreService>().GetStoreExtension(storeId);
+            var extend = Resolve<IShopStoreService>().GetStoreExtension(storeId);
 
             extend.StoreCategories = catList;
 
-            return ApiResult.Success(Resolve<IStoreService>().UpdateExtensions(storeId, extend));
+            return ApiResult.Success(Resolve<IShopStoreService>().UpdateExtensions(storeId, extend));
         }
 
         /// <summary>
@@ -204,7 +204,7 @@ namespace Alabo.App.Shop.Store.Controllers {
         [HttpGet]
         public ApiResult GetStoreOrdersToExcel(StoreOrdersToExcel model) {
             var webSite = Resolve<IAutoConfigService>().GetValue<WebSiteConfig>();
-            var store = Resolve<IStoreService>().GetSingle(u => u.UserId == model.UserId);
+            var store = Resolve<IShopStoreService>().GetSingle(u => u.UserId == model.UserId);
             if (store == null) {
                 return ApiResult.Failure("·Ç·¨²Ù×÷");
             }

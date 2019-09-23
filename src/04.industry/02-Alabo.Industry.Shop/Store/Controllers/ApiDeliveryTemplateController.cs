@@ -109,7 +109,7 @@ namespace Alabo.App.Shop.Store.Controllers
                 {
                     //同意账号下运费模板不能重复
                     
-                    var store = Resolve<IStoreService>().GetUserStore(template.UserId);
+                    var store = Resolve<IShopStoreService>().GetUserStore(template.UserId);
                     if (store != null)
                     {
                         template.StoreId = store.Id;

@@ -161,14 +161,14 @@ namespace Alabo.App.Shop.Store.ViewModels {
         /// <returns></returns>
         public AutoForm GetView(object id, AutoBaseModel autoModel) {
             var viewStoreId = ToId<long>(id);
-            var viewStore = Resolve<IStoreService>().GetView(viewStoreId);
+            var viewStore = Resolve<IShopStoreService>().GetView(viewStoreId);
             var model = AutoMapping.SetValue<ViewStoreForm>(viewStore);
             return ToAutoForm(model);
         }
 
         public ServiceResult Save(object model, AutoBaseModel autoModel) {
             var viewStoreView = AutoMapping.SetValue<ViewStore>(model);
-            var result = Resolve<IStoreService>().AddOrUpdate(viewStoreView);
+            var result = Resolve<IShopStoreService>().AddOrUpdate(viewStoreView);
             return result;
         }
     }

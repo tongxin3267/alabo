@@ -799,7 +799,7 @@ namespace Alabo.App.Shop.Order.Domain.Services {
                 return Tuple.Create(ServiceResult.FailedWithMessage("您的输入的账户不存在，或者状态不正常"), storeProductSku);
             }
 
-            var storeItems = Resolve<IStoreService>().GetStoreItemListFromCache()
+            var storeItems = Resolve<IShopStoreService>().GetStoreItemListFromCache()
                 .Where(r => orderProductInputList.Select(e => e.StoreId).Contains(r.StoreId))?.ToList();
             if (storeItems == null || storeItems.Count == 0) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("您购买的商品店铺不存"), storeProductSku);
@@ -813,7 +813,7 @@ namespace Alabo.App.Shop.Order.Domain.Services {
                 ProductId = orderProductInputList.FirstOrDefault().ProductId,
                 IsApiImage = true
             };
-            var storeProductSkuResult = Resolve<IStoreService>().GetStoreProductSku(storeProductSkuDtos);
+            var storeProductSkuResult = Resolve<IShopStoreService>().GetStoreProductSku(storeProductSkuDtos);
             if (storeProductSkuResult == null
                 || storeProductSkuResult.Item1 == null
                 || !storeProductSkuResult.Item1.Succeeded) {
@@ -1008,7 +1008,7 @@ namespace Alabo.App.Shop.Order.Domain.Services {
 
                 // 商品总运费
                 if (userAddress != null && address != null) {
-                    var expressFeeResult = Resolve<IStoreService>().CountExpressFee(storeItem.StoreId, address, storeItem.ProductSkuItems);
+                    var expressFeeResult = Resolve<IShopStoreService>().CountExpressFee(storeItem.StoreId, address, storeItem.ProductSkuItems);
                     if (!expressFeeResult.Item1.Succeeded) {
                         result = ServiceResult.FailedWithMessage(expressFeeResult.Item1.ToString());
                     } else {
@@ -1154,7 +1154,7 @@ namespace Alabo.App.Shop.Order.Domain.Services {
                 ProductId = productId,
                 IsApiImage = false
             };
-            storeProductSku = Resolve<IStoreService>().GetStoreProductSku(storeProductSkuDtos).Item2;
+            storeProductSku = Resolve<IShopStoreService>().GetStoreProductSku(storeProductSkuDtos).Item2;
             storeProductSku.StoreItems.ToList().ForEach(r => {
                 r.ProductSkuItems.ToList().ForEach(e => {
                     // 计算购买数量
