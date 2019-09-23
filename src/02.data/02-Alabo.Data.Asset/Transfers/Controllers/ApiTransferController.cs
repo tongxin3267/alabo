@@ -25,21 +25,7 @@ namespace Alabo.App.Core.Finance.Controllers {
     [ApiExceptionFilter]
     [Route("Api/Transfer/[action]")]
     public class ApiTransferController : ApiBaseController {
-        /// <summary>
-        ///     The automatic configuration manager
-        /// </summary>
 
-        /// <summary>
-        ///     The message manager
-        /// </summary>
-
-        /// <summary>
-        ///     The 会员 manager
-        /// </summary>
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="ApiTransferController" /> class.
-        /// </summary>
         public ApiTransferController(
             ) : base() {
         }

@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Alabo.App.Asset.Recharges.Domain.Entities;
 using Alabo.App.Core.Api.Controller;
 using Alabo.App.Core.Api.Domain.Service;
 using Alabo.App.Core.Api.Filter;
@@ -30,24 +32,10 @@ namespace Alabo.App.Core.Finance.Controllers {
     /// </summary>
     [ApiExceptionFilter]
     [Route("Api/Recharge/[action]")]
-    public class RechargeApiController : ApiBaseController {
-        /// <summary>
-        ///     The automatic configuration manager
-        /// </summary>
+    public class ApiRechargeController : ApiBaseController<Recharge, long> {
 
-        /// <summary>
-        ///     The message manager
-        /// </summary>
-
-        /// <summary>
-        ///     The 会员 manager
-        /// </summary>
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="RechargeApiController" /> class.
-        /// </summary>
-        public RechargeApiController(
-            ) : base() {
+        public ApiRechargeController() : base() {
+            BaseService = Resolve<IRechargeService>();
         }
 
         /// <summary>

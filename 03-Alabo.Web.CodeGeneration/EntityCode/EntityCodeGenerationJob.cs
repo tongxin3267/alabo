@@ -6,6 +6,11 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Alabo.App.Asset.Recharges.Domain.Entities;
+using Alabo.App.Asset.Refunds.Domain.Entities;
+using Alabo.App.Asset.Settlements.Domain.Entities;
+using Alabo.App.Asset.Transfers.Domain.Entities;
+using Alabo.App.Asset.Withraws.Domain.Entities;
 using Alabo.App.Cms.Articles.Domain.Entities;
 using Alabo.Reflections;
 using Alabo.Web.CodeGeneration.EntityCode.Templates;
@@ -20,8 +25,9 @@ namespace Alabo.Web.CodeGeneration.EntityCode {
 
         protected override async Task Execute(IJobExecutionContext context, IScope scope) {
             //手动修改,实体路径，可右键实体手动复制路径
-            var entityPath = @"C:\github\alabo\src\05.cloud\04-Alabo.Cloud.Contracts\Domain\Entities";
-            CreateCode(typeof(ContractRecord), entityPath);
+            var entityPath = @"C:\github\alabo\src\02.data\02-Alabo.Data.Asset\Withraws\Domain\Entities\";
+            CreateCode(typeof(Withraw), entityPath);
+
             Console.WriteLine(@"所有代码生成完成");
         }
 
