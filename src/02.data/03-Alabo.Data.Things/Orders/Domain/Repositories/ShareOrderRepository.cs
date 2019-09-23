@@ -3,9 +3,6 @@ using Alabo.App.Core.Tasks.Domain.Entities.Extensions;
 using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.Cache;
-using Alabo.Core.Enums.Enum;
-using Alabo.Core.Regex;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
@@ -18,7 +15,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Linq;
-using ZKCloud.App.Core.Tasks.Domain.Enums;
+using Alabo.App.Core.Finance.Domain.Repositories;
+using Alabo.Cache;
+using Alabo.Core.Enums.Enum;
+using Alabo.Core.Regex;
 using ZKCloud.Open.Message.Models;
 using Convert = System.Convert;
 
@@ -105,188 +105,187 @@ namespace Alabo.App.Core.Tasks.Domain.Repositories {
         /// </summary>
         /// <param name="resultList">The result list.</param>
         public void UpdatePriceTaskResult(IEnumerable<ShareResult> resultList) {
+            var sqlList = new List<string>();
+            var dbParameterList = new List<DbParameter[]>();
+
+            var repositoryContext = RepositoryContext;
+            long shareOrderId = 0;
+            var sql = string.Empty;
+            DbParameter[] parameters = null;
+
+            IList<long> shareUsreIds = new List<long>();
+            foreach (var shareResult in resultList) {
+                shareUsreIds.Add(shareResult.ShareUser.Id);
+            }
+
             //TODO 9月重构注释
-            //var sqlList = new List<string>();
-            //var dbParameterList = new List<DbParameter[]>();
+            var shareUsreAccounts =
+                Ioc.Resolve<IAccountRepository>()
+                    .GetAccountByUserIds(shareUsreIds); //获取所有分润用户的资产账户
 
-            //var repositoryContext = RepositoryContext;
-            //long shareOrderId = 0;
-            //var sql = string.Empty;
-            //DbParameter[] parameters = null;
+            foreach (var shareResult in resultList) {
+                if (shareOrderId == 0) {
+                    shareOrderId = shareResult.ShareOrder.Id;
+                }
 
-            //IList<long> shareUsreIds = new List<long>();
-            //foreach (var shareResult in resultList) {
-            //    shareUsreIds.Add(shareResult.ShareUser.Id);
-            //}
+                var account = shareUsreAccounts.FirstOrDefault(r =>
+                    r.MoneyTypeId == shareResult.MoneyTypeId && r.UserId == shareResult.ShareUser.Id);
+                if (account == null) {
+                    break;
+                }
 
-            ////TODO 9月重构注释
-            ////var shareUsreAccounts =
-            ////    Ioc.Resolve<IAccountRepository>()
-            ////        .GetAccountByUserIds(shareUsreIds); //获取所有分润用户的资产账户
+                var afterAccount = account.Amount + shareResult.Amount; //账户金额
+                //更新资产
+                sql =
+                    "update Finance_Account set Amount=Amount+@Amount, HistoryAmount=HistoryAmount+@Amount  where MoneyTypeId=@MoneyTypeId and  UserId=@UserId";
+                parameters = new[]
+                {
+                    repositoryContext.CreateParameter("@UserId", shareResult.ShareUser.Id),
+                    repositoryContext.CreateParameter("@MoneyTypeId", shareResult.MoneyTypeId),
+                    repositoryContext.CreateParameter("@Amount", shareResult.Amount)
+                };
+                sqlList.Add(sql);
+                dbParameterList.Add(parameters);
 
-            //foreach (var shareResult in resultList) {
-            //    if (shareOrderId == 0) {
-            //        shareOrderId = shareResult.ShareOrder.Id;
-            //    }
+                //更新财务记录bill表
+                sql =
+                    @"INSERT INTO [dbo].[Finance_Bill]([UserId],[OtherUserId] ,[EntityId] ,[Type] ,[Flow],[MoneyTypeId],[Amount],[AfterAmount],[Intro],[CreateTime])
+                                                    VALUES (@UserId,@OtherUserId ,@EntityId ,@Type ,@Flow,@MoneyTypeId,@Amount,@AfterAmount,@Intro,@CreateTime)";
+                parameters = new[]
+                {
+                    repositoryContext.CreateParameter("@UserId", shareResult.ShareUser.Id),
+                    repositoryContext.CreateParameter("@OtherUserId", shareResult.OrderUser.Id),
+                    repositoryContext.CreateParameter("@EntityId", shareResult.ShareOrder.Id),
+                    repositoryContext.CreateParameter("@Type", Convert.ToInt16(BillActionType.FenRun)),
+                    repositoryContext.CreateParameter("@Flow", Convert.ToInt16(AccountFlow.Income)),
+                    repositoryContext.CreateParameter("@MoneyTypeId", shareResult.MoneyTypeId),
+                    repositoryContext.CreateParameter("@Amount", shareResult.Amount),
+                    repositoryContext.CreateParameter("@AfterAmount", afterAccount),
+                    repositoryContext.CreateParameter("@Intro", shareResult.Intro),
+                    repositoryContext.CreateParameter("@CreateTime", DateTime.Now)
+                };
+                sqlList.Add(sql);
+                dbParameterList.Add(parameters);
 
-            //    var account = shareUsreAccounts.FirstOrDefault(r =>
-            //        r.MoneyTypeId == shareResult.MoneyTypeId && r.UserId == shareResult.ShareUser.Id);
-            //    if (account == null) {
-            //        break;
-            //    }
+                //添加分润记录
+                sql =
+                    @"INSERT INTO [dbo].[Share_Reward] ([UserId] ,[OrderUserId],[OrderId],[MoneyTypeId],[Amount] ,[AfterAmount],[ModuleId],[ModuleConfigId],[Intro],[CreateTime],[Status])
+                             VALUES (@UserId ,@OrderUserId,@OrderId,@MoneyTypeId,@Amount ,@AfterAmount,@ModuleId,@ModuleConfigId,@Intro,@CreateTime,@Status)";
+                parameters = new[]
+                {
+                    repositoryContext.CreateParameter("@UserId", shareResult.ShareUser.Id),
+                    repositoryContext.CreateParameter("@OrderUserId", shareResult.OrderUser.Id),
+                    repositoryContext.CreateParameter("@OrderId", shareResult.ShareOrder.Id),
+                    repositoryContext.CreateParameter("@MoneyTypeId", shareResult.MoneyTypeId),
+                    repositoryContext.CreateParameter("@Amount", shareResult.Amount),
+                    repositoryContext.CreateParameter("@AfterAmount", afterAccount),
+                    repositoryContext.CreateParameter("@ModuleId", shareResult.ModuleId),
+                    repositoryContext.CreateParameter("@ModuleConfigId", shareResult.ModuleConfigId),
+                    repositoryContext.CreateParameter("@Intro", shareResult.Intro),
+                    repositoryContext.CreateParameter("@Status", 3), // 分润状态暂时设定为成功
+                    repositoryContext.CreateParameter("@CreateTime", DateTime.Now)
+                };
+                sqlList.Add(sql);
+                dbParameterList.Add(parameters);
 
-            //    var afterAccount = account.Amount + shareResult.Amount; //账户金额
-            //    //更新资产
-            //    sql =
-            //        "update Finance_Account set Amount=Amount+@Amount, HistoryAmount=HistoryAmount+@Amount  where MoneyTypeId=@MoneyTypeId and  UserId=@UserId";
-            //    parameters = new[]
-            //    {
-            //        repositoryContext.CreateParameter("@UserId", shareResult.ShareUser.Id),
-            //        repositoryContext.CreateParameter("@MoneyTypeId", shareResult.MoneyTypeId),
-            //        repositoryContext.CreateParameter("@Amount", shareResult.Amount)
-            //    };
-            //    sqlList.Add(sql);
-            //    dbParameterList.Add(parameters);
+                // 更新货币类型的账号金额，否则多个账号增加金额时会导致账号金额一样
+                shareUsreAccounts.Foreach(r => {
+                    if (r.MoneyTypeId == shareResult.MoneyTypeId) {
+                        r.Amount += shareResult.Amount;
+                    }
+                });
 
-            //    //更新财务记录bill表
-            //    sql =
-            //        @"INSERT INTO [dbo].[Finance_Bill]([UserId],[OtherUserId] ,[EntityId] ,[Type] ,[Flow],[MoneyTypeId],[Amount],[AfterAmount],[Intro],[CreateTime])
-            //                                        VALUES (@UserId,@OtherUserId ,@EntityId ,@Type ,@Flow,@MoneyTypeId,@Amount,@AfterAmount,@Intro,@CreateTime)";
-            //    parameters = new[]
-            //    {
-            //        repositoryContext.CreateParameter("@UserId", shareResult.ShareUser.Id),
-            //        repositoryContext.CreateParameter("@OtherUserId", shareResult.OrderUser.Id),
-            //        repositoryContext.CreateParameter("@EntityId", shareResult.ShareOrder.Id),
-            //        repositoryContext.CreateParameter("@Type", Convert.ToInt16(BillActionType.FenRun)),
-            //        repositoryContext.CreateParameter("@Flow", Convert.ToInt16(AccountFlow.Income)),
-            //        repositoryContext.CreateParameter("@MoneyTypeId", shareResult.MoneyTypeId),
-            //        repositoryContext.CreateParameter("@Amount", shareResult.Amount),
-            //        repositoryContext.CreateParameter("@AfterAmount", afterAccount),
-            //        repositoryContext.CreateParameter("@Intro", shareResult.Intro),
-            //        repositoryContext.CreateParameter("@CreateTime", DateTime.Now)
-            //    };
-            //    sqlList.Add(sql);
-            //    dbParameterList.Add(parameters);
+                //添加的短信队列
+                if (shareResult.SmsNotification) {
+                    if (RegexHelper.CheckMobile(shareResult.ShareUser.Mobile) && !shareResult.SmsIntro.IsNullOrEmpty()) {
+                        sql =
+                            @"INSERT INTO [dbo].[Common_MessageQueue] ([TemplateCode],[Mobile],[Content] ,[Parameters] ,[Status],[Message] ,[Summary],[IpAdress],[RequestTime],[SendTime])
+                                VALUES (@TemplateCode,@Mobile,@Content ,@Parameters ,@Status,@Message ,@Summary,@IpAdress,@RequestTime,@SendTime)";
+                        parameters = new[]
+                        {
+                            repositoryContext.CreateParameter("@TemplateCode", 0),
+                            repositoryContext.CreateParameter("@Mobile", shareResult.ShareUser.Mobile),
+                            repositoryContext.CreateParameter("@Content", shareResult.SmsIntro),
+                            repositoryContext.CreateParameter("@Parameters", string.Empty),
+                            repositoryContext.CreateParameter("@Status", Convert.ToInt16(MessageStatus.Pending)),
+                            repositoryContext.CreateParameter("@Message", string.Empty),
+                            repositoryContext.CreateParameter("@Summary", string.Empty),
+                            repositoryContext.CreateParameter("@IpAdress", "127.0.0.3"),
+                            repositoryContext.CreateParameter("@RequestTime", DateTime.Now),
+                            repositoryContext.CreateParameter("@SendTime", DateTime.Now)
+                        };
+                        sqlList.Add(sql);
+                        dbParameterList.Add(parameters);
+                    }
 
-            //    //添加分润记录
-            //    sql =
-            //        @"INSERT INTO [dbo].[Share_Reward] ([UserId] ,[OrderUserId],[OrderId],[MoneyTypeId],[Amount] ,[AfterAmount],[ModuleId],[ModuleConfigId],[Intro],[CreateTime],[Status])
-            //                 VALUES (@UserId ,@OrderUserId,@OrderId,@MoneyTypeId,@Amount ,@AfterAmount,@ModuleId,@ModuleConfigId,@Intro,@CreateTime,@Status)";
-            //    parameters = new[]
-            //    {
-            //        repositoryContext.CreateParameter("@UserId", shareResult.ShareUser.Id),
-            //        repositoryContext.CreateParameter("@OrderUserId", shareResult.OrderUser.Id),
-            //        repositoryContext.CreateParameter("@OrderId", shareResult.ShareOrder.Id),
-            //        repositoryContext.CreateParameter("@MoneyTypeId", shareResult.MoneyTypeId),
-            //        repositoryContext.CreateParameter("@Amount", shareResult.Amount),
-            //        repositoryContext.CreateParameter("@AfterAmount", afterAccount),
-            //        repositoryContext.CreateParameter("@ModuleId", shareResult.ModuleId),
-            //        repositoryContext.CreateParameter("@ModuleConfigId", shareResult.ModuleConfigId),
-            //        repositoryContext.CreateParameter("@Intro", shareResult.Intro),
-            //        repositoryContext.CreateParameter("@Status", 3), // 分润状态暂时设定为成功
-            //        repositoryContext.CreateParameter("@CreateTime", DateTime.Now)
-            //    };
-            //    sqlList.Add(sql);
-            //    dbParameterList.Add(parameters);
-            //    //TODO 9月重构注释
-            //    // 更新货币类型的账号金额，否则多个账号增加金额时会导致账号金额一样
-            //    //shareUsreAccounts.Foreach(r => {
-            //    //    if (r.MoneyTypeId == shareResult.MoneyTypeId) {
-            //    //        r.Amount += shareResult.Amount;
-            //    //    }
-            //    //});
+                    Ioc.Resolve<IObjectCache>().Set("MessageIsAllSend_Cache", false);
+                }
+            }
 
-            //    //添加的短信队列
-            //    if (shareResult.SmsNotification) {
-            //        if (RegexHelper.CheckMobile(shareResult.ShareUser.Mobile) && !shareResult.SmsIntro.IsNullOrEmpty()) {
-            //            sql =
-            //                @"INSERT INTO [dbo].[Common_MessageQueue] ([TemplateCode],[Mobile],[Content] ,[Parameters] ,[Status],[Message] ,[Summary],[IpAdress],[RequestTime],[SendTime])
-            //                    VALUES (@TemplateCode,@Mobile,@Content ,@Parameters ,@Status,@Message ,@Summary,@IpAdress,@RequestTime,@SendTime)";
-            //            parameters = new[]
-            //            {
-            //                repositoryContext.CreateParameter("@TemplateCode", 0),
-            //                repositoryContext.CreateParameter("@Mobile", shareResult.ShareUser.Mobile),
-            //                repositoryContext.CreateParameter("@Content", shareResult.SmsIntro),
-            //                repositoryContext.CreateParameter("@Parameters", string.Empty),
-            //                repositoryContext.CreateParameter("@Status", Convert.ToInt16(MessageStatus.Pending)),
-            //                repositoryContext.CreateParameter("@Message", string.Empty),
-            //                repositoryContext.CreateParameter("@Summary", string.Empty),
-            //                repositoryContext.CreateParameter("@IpAdress", "127.0.0.3"),
-            //                repositoryContext.CreateParameter("@RequestTime", DateTime.Now),
-            //                repositoryContext.CreateParameter("@SendTime", DateTime.Now)
-            //            };
-            //            sqlList.Add(sql);
-            //            dbParameterList.Add(parameters);
-            //        }
+            #region //获取得到升级点的用户，并加入升级队列
 
-            //        Ioc.Resolve<IObjectCache>().Set("MessageIsAllSend_Cache", false);
-            //    }
-            //}
+            var upgradePointsUserIds = resultList
+                .Where(r => r.MoneyTypeId == Guid.Parse("E97CCD1E-1478-49BD-BFC7-E73A5D699006"))
+                .Select(r => r.ShareUser.Id).ToList();
+            if (upgradePointsUserIds.Count > 0) {
+                foreach (var userId in upgradePointsUserIds) {
+                    var taskQueue = new TaskQueue {
+                        UserId = userId,
+                        ModuleId = TaskQueueModuleId.UserUpgradeByUpgradePoints,
+                        Type = TaskQueueType.Once
+                    };
+                    sql =
+                        "INSERT INTO [dbo].[Task_TaskQueue] ([UserId]  ,[Type],[ModuleId] ,[Parameter],[ExecutionTimes] ,[ExecutionTime],[CreateTime] ,[HandleTime] ,[MaxExecutionTimes],[Status] ,[Message]) " +
+                        "VALUES (@UserId  ,@Type,@ModuleId ,@Parameter,@ExecutionTimes ,@ExecutionTime,@CreateTime ,@HandleTime ,@MaxExecutionTimes,@Status ,@Message)";
+                    parameters = new[]
+                    {
+                        repositoryContext.CreateParameter("@UserId", taskQueue.UserId),
+                        repositoryContext.CreateParameter("@Type", taskQueue.Type), // 升级只需执行一次
+                        repositoryContext.CreateParameter("@ModuleId", taskQueue.ModuleId),
+                        repositoryContext.CreateParameter("@Parameter", taskQueue.Parameter),
+                        repositoryContext.CreateParameter("@ExecutionTimes", taskQueue.ExecutionTimes),
+                        repositoryContext.CreateParameter("@ExecutionTime", taskQueue.ExecutionTime),
+                        repositoryContext.CreateParameter("@CreateTime", taskQueue.CreateTime),
+                        repositoryContext.CreateParameter("@HandleTime", taskQueue.HandleTime),
+                        repositoryContext.CreateParameter("@MaxExecutionTimes", taskQueue.MaxExecutionTimes),
+                        repositoryContext.CreateParameter("@Status", taskQueue.Status),
+                        repositoryContext.CreateParameter("@Message", taskQueue.Message)
+                    };
+                    sqlList.Add(sql);
+                    dbParameterList.Add(parameters);
+                }
+            }
 
-            //#region //获取得到升级点的用户，并加入升级队列
+            #endregion //获取得到升级点的用户，并加入升级队列
 
-            //var upgradePointsUserIds = resultList
-            //    .Where(r => r.MoneyTypeId == Guid.Parse("E97CCD1E-1478-49BD-BFC7-E73A5D699006"))
-            //    .Select(r => r.ShareUser.Id).ToList();
-            //if (upgradePointsUserIds.Count > 0) {
-            //    foreach (var userId in upgradePointsUserIds) {
-            //        var taskQueue = new TaskQueue {
-            //            UserId = userId,
-            //            ModuleId = TaskQueueModuleId.UserUpgradeByUpgradePoints,
-            //            Type = TaskQueueType.Once
-            //        };
-            //        sql =
-            //            "INSERT INTO [dbo].[Task_TaskQueue] ([UserId]  ,[Type],[ModuleId] ,[Parameter],[ExecutionTimes] ,[ExecutionTime],[CreateTime] ,[HandleTime] ,[MaxExecutionTimes],[Status] ,[Message]) " +
-            //            "VALUES (@UserId  ,@Type,@ModuleId ,@Parameter,@ExecutionTimes ,@ExecutionTime,@CreateTime ,@HandleTime ,@MaxExecutionTimes,@Status ,@Message)";
-            //        parameters = new[]
-            //        {
-            //            repositoryContext.CreateParameter("@UserId", taskQueue.UserId),
-            //            repositoryContext.CreateParameter("@Type", taskQueue.Type), // 升级只需执行一次
-            //            repositoryContext.CreateParameter("@ModuleId", taskQueue.ModuleId),
-            //            repositoryContext.CreateParameter("@Parameter", taskQueue.Parameter),
-            //            repositoryContext.CreateParameter("@ExecutionTimes", taskQueue.ExecutionTimes),
-            //            repositoryContext.CreateParameter("@ExecutionTime", taskQueue.ExecutionTime),
-            //            repositoryContext.CreateParameter("@CreateTime", taskQueue.CreateTime),
-            //            repositoryContext.CreateParameter("@HandleTime", taskQueue.HandleTime),
-            //            repositoryContext.CreateParameter("@MaxExecutionTimes", taskQueue.MaxExecutionTimes),
-            //            repositoryContext.CreateParameter("@Status", taskQueue.Status),
-            //            repositoryContext.CreateParameter("@Message", taskQueue.Message)
-            //        };
-            //        sqlList.Add(sql);
-            //        dbParameterList.Add(parameters);
-            //    }
-            //}
+            // //更新ShareOrder状态
+            sql = "update Task_ShareOrder set Summary='sucess sql' ,Status=@Status ,UpdateTime=GETDATE() where Id=@Id";
+            parameters = new[]
+           {
+                    repositoryContext.CreateParameter("@Id",shareOrderId),
+                    repositoryContext.CreateParameter("@Status",Convert.ToInt16(ShareOrderStatus.Handled)),
+             };
+            sqlList.Add(sql);
+            dbParameterList.Add(parameters);
 
-            //#endregion //获取得到升级点的用户，并加入升级队列
-
-            //// //更新ShareOrder状态
-            //// sql = "update Task_ShareOrder set Summary='sucess sql' ,Status=@Status ,UpdateTime=GETDATE() where Id=@Id";
-            //// parameters = new[]
-            ////{
-            ////        repositoryContext.CreateParameter("@Id",shareOrderId),
-            ////        repositoryContext.CreateParameter("@Status",Convert.ToInt16(ShareOrderStatus.Handled)),
-            //// };
-            //// sqlList.Add(sql);
-            //// dbParameterList.Add(parameters);
-
-            //try {
-            //    sql = $"select Status from Task_ShareOrder where Id={shareOrderId}";
-            //    //Thread.Sleep(1); // 停留1，防止重复触发
-            //    var shareOrderStatus = repositoryContext.ExecuteScalar(sql).ConvertToInt();
-            //    // 如果订单状态==1，在执行数据操作
-            //    if (shareOrderStatus == 1) {
-            //        repositoryContext.ExecuteBatch(sqlList, dbParameterList);
-            //    }
-            //} catch (Exception ex) {
-            //    sql = "update Task_ShareOrder set Summary=@Summary ,Status=@Status ,UpdateTime=GETDATE() where Id=@Id";
-            //    parameters = new[]
-            //    {
-            //        repositoryContext.CreateParameter("@Id", shareOrderId),
-            //        repositoryContext.CreateParameter("@Status", Convert.ToInt16(ShareOrderStatus.Error)),
-            //        repositoryContext.CreateParameter("@Summary", ex.Message)
-            //    };
-            //    repositoryContext.ExecuteNonQuery(sql, parameters);
-            //}
+            try {
+                sql = $"select Status from Task_ShareOrder where Id={shareOrderId}";
+                //Thread.Sleep(1); // 停留1，防止重复触发
+                var shareOrderStatus = repositoryContext.ExecuteScalar(sql).ConvertToInt();
+                // 如果订单状态==1，在执行数据操作
+                if (shareOrderStatus == 1) {
+                    repositoryContext.ExecuteBatch(sqlList, dbParameterList);
+                }
+            } catch (Exception ex) {
+                sql = "update Task_ShareOrder set Summary=@Summary ,Status=@Status ,UpdateTime=GETDATE() where Id=@Id";
+                parameters = new[]
+                {
+                    repositoryContext.CreateParameter("@Id", shareOrderId),
+                    repositoryContext.CreateParameter("@Status", Convert.ToInt16(ShareOrderStatus.Error)),
+                    repositoryContext.CreateParameter("@Summary", ex.Message)
+                };
+                repositoryContext.ExecuteNonQuery(sql, parameters);
+            }
         }
 
         /// <summary>

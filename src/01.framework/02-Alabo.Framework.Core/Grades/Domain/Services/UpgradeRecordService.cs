@@ -21,7 +21,7 @@ namespace Alabo.App.Core.Tasks.Domain.Services {
             if (afterGrade == null) {
                 return ServiceResult.FailedWithMessage("需要升级的等级不存在");
             }
-            var user = Resolve<IUserService>().GetSingle(r => r.Id == userId);
+            var user = Resolve<IAlaboUserService>().GetSingle(r => r.Id == userId);
             if (user == null) {
                 return ServiceResult.FailedWithMessage("用户不存在");
             }
@@ -31,7 +31,7 @@ namespace Alabo.App.Core.Tasks.Domain.Services {
             }
 
             user.GradeId = afterGradeId;
-            if (Resolve<IUserService>().Update(user)) {
+            if (Resolve<IAlaboUserService>().Update(user)) {
                 UpgradeRecord upgradeRecord = new UpgradeRecord {
                     AfterGradeId = afterGradeId,
                     BeforeGradeId = beforeGrade.Id,
@@ -39,8 +39,8 @@ namespace Alabo.App.Core.Tasks.Domain.Services {
                     Type = upgradeType,
                 };
                 Add(upgradeRecord);
-                // 删除缓存
-                Resolve<IUserService>().DeleteUserCache(user.Id, user.UserName);
+                //TODO 2019年9月23日 重构删除缓存 删除缓存
+                //  Resolve<IAlaboUserService>().DeleteUserCache(user.Id, user.UserName);
                 return ServiceResult.Success;
             } else {
                 return ServiceResult.FailedWithMessage("等级修改失败");

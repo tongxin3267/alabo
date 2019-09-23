@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.App.Core.Tasks.Domain.Entities;
+﻿using Alabo.App.Core.Tasks.Domain.Entities;
 using Alabo.App.Core.Tasks.Domain.Entities.Extensions;
-using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Core.Tasks.Domain.Repositories;
-using Alabo.App.Core.Tasks.Domain.ViewModels;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
@@ -12,6 +8,8 @@ using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.App.Core.Tasks.Domain.Services {
 

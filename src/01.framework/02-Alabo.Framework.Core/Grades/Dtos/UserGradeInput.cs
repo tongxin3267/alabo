@@ -1,7 +1,7 @@
-﻿using Alabo.Domains.Entities;
+﻿using Alabo.App.Core.Tasks.Domain.Enums;
+using Alabo.Domains.Entities;
 using System;
 using System.ComponentModel.DataAnnotations;
-using ZKCloud.App.Core.Tasks.Domain.Enums;
 
 namespace Alabo.App.Core.User.Domain.Dtos {
 
