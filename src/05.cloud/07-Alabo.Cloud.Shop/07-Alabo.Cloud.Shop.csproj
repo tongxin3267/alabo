@@ -18,4 +18,12 @@
     <ProjectReference Include="..\04-Alabo.Cloud.Things\04-Alabo.Cloud.Things.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Comments\Domain\Configs\" />
+    <Folder Include="Comments\Domain\Enums\" />
+    <Folder Include="Comments\Dtos\" />
+    <Folder Include="Footprints\Domain\Configs\" />
+    <Folder Include="Footprints\Domain\Enums\" />
+  </ItemGroup>
+
 </Project>

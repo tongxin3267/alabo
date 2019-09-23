@@ -8,6 +8,7 @@ namespace Alabo.App.Share.Attach.Domain.Entities {
 
     /// <summary>
     ///     扩展属性
+    ///TODO 所有字段的扩展属性
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Attach_Comment")]

@@ -12,4 +12,12 @@
     <ProjectReference Include="..\02-Alabo.Framework.Core\02-Alabo.Framework.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Letters\Controllers\" />
+    <Folder Include="Letters\Domain\Configs\" />
+    <Folder Include="Letters\Domain\Repositories\" />
+    <Folder Include="Letters\Domain\Services\" />
+    <Folder Include="Letters\Dtos\" />
+  </ItemGroup>
+
 </Project>

@@ -14,4 +14,10 @@
     <ProjectReference Include="..\..\02.data\02-Alabo.Data.Asset\02-Alabo.Data.Asset.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="GradeInfos\Domain\Enums\" />
+    <Folder Include="GradeInfos\Domain\Services\" />
+    <Folder Include="GradeInfos\Dtos\" />
+  </ItemGroup>
+
 </Project>
