@@ -70,7 +70,7 @@ namespace Alabo.App.Shop.Order.Domain.Services {
             //实名认证判断
             var orderConfig = Resolve<IAutoConfigService>().GetValue<OrderConfig>();
             if (orderConfig.IsIdentity) {
-                if (!Resolve<IIdentityService>().IsIdentity(user.Id)) {
+                if (!Resolve<IUserDetailService>().IsIdentity(user.Id)) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("请先实名认证"), new BuyOutput());
                 }
             }

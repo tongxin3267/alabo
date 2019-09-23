@@ -411,5 +411,14 @@ namespace Alabo.App.Core.User.Domain.Services {
             //    return ServiceResult.Success;
             //}
         }
+
+        public bool IsIdentity(long userId) {
+            var find = GetSingle(r => r.UserId == userId);
+            if (find == null) {
+                return false;
+            } else {
+                return find.Identity;
+            }
+        }
     }
 }

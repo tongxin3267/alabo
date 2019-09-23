@@ -41,11 +41,6 @@ namespace Alabo.App.Shop.Product.Domain.Services {
         ViewProductEdit GetPageView(ViewProductEdit view);
 
         /// <summary>
-        ///     生成商品二维码
-        /// </summary>
-        void CreateQrcode(long productId);
-
-        /// <summary>
         ///     后台商品搜索
         /// </summary>
         /// <param name="query"></param>

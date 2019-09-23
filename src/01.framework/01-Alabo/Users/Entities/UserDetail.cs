@@ -123,6 +123,11 @@ namespace Alabo.App.Core.User.Domain.Entities {
         [Display(Name = "邮箱")]
         [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1, Width = "150", EditShow = true, SortOrder = 1)]
         public string Email { get; set; }
+
+        /// <summary>
+        /// 是否实名认证
+        /// </summary>
+        public bool Identity { get; set; }
     }
 
     /// <summary>

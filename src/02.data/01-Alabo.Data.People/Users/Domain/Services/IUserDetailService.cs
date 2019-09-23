@@ -69,5 +69,12 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// <param name="openId">The open identifier.</param>
         /// <param name="userId">会员Id</param>
         void UpdateOpenId(string openId, long userId);
+
+        /// <summary>
+        /// 是否实名认证
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        bool IsIdentity(long userId);
     }
 }
