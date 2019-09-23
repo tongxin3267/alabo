@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using Alabo.App.Asset.Recharges.Domain.Entities;
 using Alabo.App.Core.Finance.Domain.Dtos.Recharge;
 using Alabo.App.Core.Finance.Domain.Entities;
 using Alabo.App.Core.Finance.ViewModels.Recharge;
@@ -12,7 +13,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
     /// <summary>
     ///     充值
     /// </summary>
-    public interface IRechargeService : IService {
+    public interface IRechargeService : IService<Recharge, long> {
 
         /// <summary>
         /// 储值卡充值

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.App.Asset.Recharges.Domain.Entities;
 using Alabo.App.Core.Common.Domain.CallBacks;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
@@ -21,6 +22,7 @@ using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
+using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Mapping;
@@ -30,9 +32,9 @@ namespace Alabo.App.Core.Finance.Domain.Services {
     /// <summary>
     ///     Class RechargeService.
     /// </summary>
-    public class RechargeService : ServiceBase, IRechargeService {
+    public class RechargeService : ServiceBase<Recharge, long>, IRechargeService {
 
-        public RechargeService(IUnitOfWork unitOfWork) : base(unitOfWork) {
+        public RechargeService(IUnitOfWork unitOfWork, IRepository<Recharge, long> repository) : base(unitOfWork, repository) {
         }
 
         public ServiceResult StoredValueRecharge(StoredValueInput view) {
