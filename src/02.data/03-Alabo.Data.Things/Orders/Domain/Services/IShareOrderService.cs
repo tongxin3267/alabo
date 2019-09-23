@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.App.Core.Tasks.Domain.Entities;
+﻿using Alabo.App.Core.Tasks.Domain.Entities;
 using Alabo.App.Core.Tasks.Domain.Entities.Extensions;
-using Alabo.App.Core.Tasks.Domain.ViewModels;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.App.Core.Tasks.Domain.Services {
 
@@ -12,19 +11,6 @@ namespace Alabo.App.Core.Tasks.Domain.Services {
     ///     Interface IShareOrderService
     /// </summary>
     public interface IShareOrderService : IService<ShareOrder, long> {
-
-        /// <summary>
-        /// 获取分润测试视图
-        /// </summary>
-        /// <returns></returns>
-        TestShareOrderView GetTestView();
-
-        /// <summary>
-        /// 更新分润测试订单
-        /// </summary>
-        /// <param name="view"></param>
-        /// <returns></returns>
-        ServiceResult AddOrUpdateTest(TestShareOrderView view);
 
         /// <summary>
         ///     获取s the un handled identifier list.

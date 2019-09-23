@@ -150,31 +150,5 @@ namespace Alabo.App.Core.Tasks.Domain.Services {
             var result = Resolve<IShareOrderService>().AddSingle(shareOrder);
             return result;
         }
-
-        public TestShareOrderView GetTestView() {
-            return new TestShareOrderView();
-        }
-
-        public ServiceResult AddOrUpdateTest(TestShareOrderView view) {
-            var user = Resolve<IUserService>().GetSingle(view.UserName);
-            if (user == null) {
-                return ServiceResult.FailedWithMessage("用户不存在");
-            }
-
-            if (view.Amount <= 0) {
-                return ServiceResult.FailedWithMessage("分润金额不能小于0");
-            }
-
-            ShareOrder shareOrder = new ShareOrder {
-                UserId = user.Id,
-                EntityId = user.Id,
-                Amount = view.Amount,
-                TriggerType = TriggerType.Other,
-            };
-            if (!Add(shareOrder)) {
-                return ServiceResult.FailedWithMessage("添加失败");
-            }
-            return ServiceResult.Success;
-        }
     }
 }

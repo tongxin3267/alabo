@@ -1,6 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Alabo.App.Core.Tasks.Domain.Entities;
+using Alabo.App.Core.Tasks.Domain.Enums;
+using Alabo.App.Core.Tasks.Domain.Services;
+using Alabo.App.Core.User.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Maps;
+using Alabo.UI;
+using Alabo.UI.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using Alabo.Web.Validations;
@@ -12,7 +19,7 @@ namespace Alabo.App.Core.Tasks.Domain.ViewModels {
     /// </summary>
     [ClassProperty(Name = "分润测试", Icon = "fa fa-file", Description = "分润测试",
         SideBarType = SideBarType.ShareOrderTestSideBar)]
-    public class TestShareOrderView : BaseViewModel {
+    public class TestShareOrderView : UIBase, IAutoForm {
 
         /// <summary>
         /// 要更改的用户名
@@ -48,5 +55,33 @@ namespace Alabo.App.Core.Tasks.Domain.ViewModels {
         [HelpBlock("输入当前用户的支付密码")]
         [DataType(DataType.Password)]
         public string PayPassword { get; set; }
+
+        public AutoForm GetView(object id, AutoBaseModel autoModel) {
+            var view = new TestShareOrderView();
+            return ToAutoForm(view);
+        }
+
+        public ServiceResult Save(object model, AutoBaseModel autoModel) {
+            var view = model.MapTo<TestShareOrderView>();
+            var user = Resolve<IUserService>().GetSingle(view.UserName);
+            if (user == null) {
+                return ServiceResult.FailedWithMessage("用户不存在");
+            }
+
+            if (view.Amount <= 0) {
+                return ServiceResult.FailedWithMessage("分润金额不能小于0");
+            }
+
+            ShareOrder shareOrder = new ShareOrder {
+                UserId = user.Id,
+                EntityId = user.Id,
+                Amount = view.Amount,
+                TriggerType = TriggerType.Other,
+            };
+            if (!Resolve<IShareOrderService>().Add(shareOrder)) {
+                return ServiceResult.FailedWithMessage("添加失败");
+            }
+            return ServiceResult.Success;
+        }
     }
 }
