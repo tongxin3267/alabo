@@ -1,16 +1,13 @@
-﻿using System;
+﻿using Alabo.App.Offline.Order.ViewModels;
 using System.Collections.Generic;
-using System.Text;
-using Alabo.App.Offline.Order.ViewModels;
-using Alabo.App.Shop.Order.Domain.Dtos;
 
-namespace Alabo.App.Offline.Order.Domain.Dtos
-{
+namespace Alabo.App.Offline.Order.Domain.Dtos {
+
     /// <summary>
     /// MerchantCartOutput
     /// </summary>
-    public class MerchantCartOutput
-    {
+    public class MerchantCartOutput {
+
         /// <summary>
         /// Total count
         /// </summary>
