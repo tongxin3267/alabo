@@ -16,23 +16,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Attach\**" />
-    <Compile Remove="Share\Domain\CallBacks\**" />
-    <Compile Remove="TasksOpen\Configs\SharedFenRun\VentureCompany\**" />
-    <Compile Remove="TasksOpen\Domain\Repositories\**" />
+    <Compile Remove="Rewards\Domain\CallBacks\**" />
+    <Compile Remove="TasksOpen\**" />
+    <Compile Remove="Tasks\**" />
     <EmbeddedResource Remove="Attach\**" />
-    <EmbeddedResource Remove="Share\Domain\CallBacks\**" />
-    <EmbeddedResource Remove="TasksOpen\Configs\SharedFenRun\VentureCompany\**" />
-    <EmbeddedResource Remove="TasksOpen\Domain\Repositories\**" />
+    <EmbeddedResource Remove="Rewards\Domain\CallBacks\**" />
+    <EmbeddedResource Remove="TasksOpen\**" />
+    <EmbeddedResource Remove="Tasks\**" />
     <None Remove="Attach\**" />
-    <None Remove="Share\Domain\CallBacks\**" />
-    <None Remove="TasksOpen\Configs\SharedFenRun\VentureCompany\**" />
-    <None Remove="TasksOpen\Domain\Repositories\**" />
+    <None Remove="Rewards\Domain\CallBacks\**" />
+    <None Remove="TasksOpen\**" />
+    <None Remove="Tasks\**" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="TasksOpen\Controllers\" />
-    <Folder Include="TasksOpen\Domain\Services\" />
+    <Folder Include="RewardRuless\Domain\Configs\" />
+    <Folder Include="RewardRuless\Domain\Enums\" />
     <Folder Include="Behaviors\" />
-    <Folder Include="Tasks\Domain\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\01.framework\01-Alabo\01-Alabo.csproj" />
