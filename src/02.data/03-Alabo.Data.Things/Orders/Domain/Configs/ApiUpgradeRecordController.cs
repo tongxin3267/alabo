@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using System.ComponentModel.DataAnnotations;
 using Alabo.App.Core.Api.Controller;
 using Alabo.App.Core.Api.Filter;
@@ -11,17 +12,17 @@ using ZKCloud.Open.ApiBase.Models;
 namespace Alabo.App.Core.Tasks.Controllers {
 
     [ApiExceptionFilter]
-    [Route("Api/TaskQueue/[action]")]
-    public class ApiTaskQueueController : ApiBaseController<TaskQueue, long> {
+    [Route("Api/UpgradeRecord/[action]")]
+    public class ApiUpgradeRecordController : ApiBaseController<UpgradeRecord, ObjectId> {
 
-        public ApiTaskQueueController() : base() {
-            BaseService = Resolve<ITaskQueueService>();
+        public ApiUpgradeRecordController() : base() {
+            BaseService = Resolve<IUpgradeRecordService>();
         }
 
         [HttpGet]
-        [Display(Description = "后台任务队列")]
-        public ApiResult<PagedList<TaskQueue>> TaskQueueList([FromQuery] PagedInputDto parameter) {
-            var model = Resolve<ITaskQueueService>().GetPageList(Query);
+        [Display(Description = "升级记录")]
+        public ApiResult<PagedList<UpgradeRecord>> UpgradeList([FromQuery] PagedInputDto parameter) {
+            var model = Resolve<IUpgradeRecordService>().GetPagedList(Query);
             return ApiResult.Success(model);
         }
     }

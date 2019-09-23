@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>_05_Alabo.Cloud.Share</RootNamespace>
+    <AssemblyName>Alabo.Cloud.Share</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\01.framework\01-Alabo\01-Alabo.csproj" />
+    <ProjectReference Include="..\..\01.framework\02-Alabo.Framework.Core\02-Alabo.Framework.Core.csproj" />
+    <ProjectReference Include="..\..\01.framework\03-Alabo.Framework.Basic\03-Alabo.Framework.Basic.csproj" />
+    <ProjectReference Include="..\..\02.data\02-Alabo.Data.Asset\02-Alabo.Data.Asset.csproj" />
+    <ProjectReference Include="..\..\03.app\01-Alabo.App.Share\01-Alabo.App.Share.csproj" />
+    <ProjectReference Include="..\03-Alabo.Cloud.Asset\03-Alabo.Cloud.Asset.csproj" />
+    <ProjectReference Include="..\04-Alabo.Cloud.Things\04-Alabo.Cloud.Things.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -31,6 +31,7 @@
     <Folder Include="TasksOpen\Controllers\" />
     <Folder Include="TasksOpen\Domain\Services\" />
     <Folder Include="Behaviors\" />
+    <Folder Include="Tasks\Domain\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\01.framework\01-Alabo\01-Alabo.csproj" />

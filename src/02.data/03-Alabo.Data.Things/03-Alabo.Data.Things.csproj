@@ -6,8 +6,4 @@
     <RootNamespace>Alabo.Data.Things</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Orders\" />
-  </ItemGroup>
-
 </Project>
