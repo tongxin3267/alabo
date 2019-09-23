@@ -24,7 +24,7 @@
     <None Remove="Activitys\Modules\PreSells\Dtos\**" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Store\Controllers\DeliveryTemplateController.cs" />
+    <Compile Remove="Deliveries\Controllers\DeliveryTemplateController.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\01.framework\01-Alabo\01-Alabo.csproj" />
@@ -38,5 +38,12 @@
     <Reference Include="Microsoft.AspNetCore.Mvc.Core">
       <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.mvc.core\2.1.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="OrderActions\Domain\Configs\" />
+    <Folder Include="OrderActions\Dtos\" />
+    <Folder Include="OrderDeliveries\Domain\Configs\" />
+    <Folder Include="OrderDeliveries\Domain\Enums\" />
+    <Folder Include="OrderDeliveries\Dtos\" />
   </ItemGroup>
 </Project>
