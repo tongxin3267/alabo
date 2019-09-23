@@ -1,21 +1,12 @@
-﻿using Alabo.Dependency;
-using Alabo.Domains.Entities.Core;
-using Alabo.Schedules.Job;
-using Quartz;
-using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Alabo.App.Asset.Recharges.Domain.Entities;
-using Alabo.App.Asset.Refunds.Domain.Entities;
-using Alabo.App.Asset.Settlements.Domain.Entities;
-using Alabo.App.Asset.Transfers.Domain.Entities;
-using Alabo.App.Asset.Withdraws.Domain.Entities;
-using Alabo.App.Cms.Articles.Domain.Entities;
+﻿using Alabo.Data.People.Suppliers.Domain.Entities;
+using Alabo.Dependency;
 using Alabo.Reflections;
+using Alabo.Schedules.Job;
 using Alabo.Web.CodeGeneration.EntityCode.Templates;
-using Alabo.Cloud.Contracts.Domain.Entities;
-using Alabo.Data.People.Suppliers.Domain.Entities;
+using System;
+using System.Threading.Tasks;
+using Alabo.Data.Things.Goodss.Domain.Entities;
+using Quartz;
 
 namespace Alabo.Web.CodeGeneration.EntityCode {
 
@@ -26,8 +17,8 @@ namespace Alabo.Web.CodeGeneration.EntityCode {
 
         protected override async Task Execute(IJobExecutionContext context, IScope scope) {
             //手动修改,实体路径，可右键实体手动复制路径
-            var entityPath = @"C:\github\alabo\src\02.data\01-Alabo.Data.People\Suppliers\Domain\Entities\";
-            CreateCode(typeof(Supplier), entityPath);
+            var entityPath = @"C:\github\alabo\src\02.data\03-Alabo.Data.Things\Goodss\Domain\Entities";
+            CreateCode(typeof(Goods), entityPath);
 
             Console.WriteLine(@"所有代码生成完成");
         }

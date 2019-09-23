@@ -60,7 +60,7 @@ namespace Alabo.App.Core.Admin.Domain.Repositories {
             DropMongoDbTable("Attach_FootPrint");
             DropMongoDbTable("Attach_Comment");
             DropMongoDbTable("Attach_Comment");
-            DropMongoDbTable("Attach_Favorite");
+            DropMongoDbTable("Basic_Favorite");
             DropMongoDbTable("Attach_Letter");
             DropMongoDbTable("Kpi_GradeKpi");
 

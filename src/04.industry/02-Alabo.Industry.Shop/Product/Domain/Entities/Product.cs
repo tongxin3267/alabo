@@ -24,15 +24,13 @@ using Alabo.App.Shop.Store.Domain.Services;
 using Alabo.UI;
 using Alabo.App.Shop.Product.Domain.Dtos;
 
-namespace Alabo.App.Shop.Product.Domain.Entities
-{
+namespace Alabo.App.Shop.Product.Domain.Entities {
 
     [ClassProperty(Name = "商品管理", Icon = "fa fa-puzzle-piece", Description = "产品线商品", PageType = ViewPageType.List, PostApi = "Api/Store/GetProductList", ListApi = "Api/Product/ProductList")]
     /// <summary>
     /// Class Product.
     /// </summary>
-    public class Product : AggregateDefaultRoot<Product>, IAutoTable<Product>
-    {
+    public class Product : AggregateDefaultRoot<Product> {
 
         #region 属性
 
@@ -278,65 +276,15 @@ namespace Alabo.App.Shop.Product.Domain.Entities
         #endregion 以下字段程序使用,不生成数据库
 
         #endregion 属性
-
-        /// <summary>
-        /// 构建自动表单
-        /// </summary>
-        /// <param name="query"></param>
-        /// <returns></returns>
-        public PageResult<Product> PageTable(object query, AutoBaseModel autoModel)
-        {
-            var model = new PagedList<Product>();
-            var stores = Resolve<IStoreService>().GetList();
-            //if (autoModel.Filter == FilterType.Admin) {
-            model = Resolve<IProductService>().GetPagedList(query);
-            foreach (var item in model)
-            {
-                item.StoreName = stores.FirstOrDefault(u => u.Id == item.StoreId)?.Name;
-            }
-            // }
-            //供应商请参考 ProductStore 类
-            //else if (autoModel.Filter == FilterType.Store) {
-            //    var store = Resolve<IStoreService>().GetUserStore(autoModel.BasicUser.Id);
-            //    if (store == null) {
-            //        throw new ValidException("您不是供应商,暂无店铺");
-            //    }
-            //    model = Resolve<IProductService>().GetPagedList(query, r => r.StoreId == store.Id);
-            //}
-            //else if (autoModel.Filter == FilterType.User) {
-            //    //用户商品 //貌似用户不能上传商品,只能管理员和供应商
-            //    model = Resolve<IProductService>().GetPagedList(query);
-            //} else {
-            //    throw new ValidException("方式不对");
-            //}
-
-            return ToPageResult(model);
-        }
-
-        public List<TableAction> Actions()
-        {
-            var list = new List<TableAction>
-            {
-                ToLinkAction("商品添加", "/Admin/Product/Edit",TableActionType.QuickAction),//管理员增加
-
-                ToLinkAction("商品编辑", "/Admin/Product/Edit",TableActionType.ColumnAction),//管理员编辑
-                ToLinkAction("商品活动", "/Admin/Activity/Index",TableActionType.ColumnAction),//管理员活动
-                ToLinkAction("删除商品", "/Api/Store/DeleteProduct",ActionLinkType.Delete,TableActionType.ColumnAction)//管理员删除
-            };
-            return list;
-        }
     }
 
-    public class ProductTableMap : MsSqlAggregateRootMap<Product>
-    {
+    public class ProductTableMap : MsSqlAggregateRootMap<Product> {
 
-        protected override void MapTable(EntityTypeBuilder<Product> builder)
-        {
+        protected override void MapTable(EntityTypeBuilder<Product> builder) {
             builder.ToTable("ZKShop_Product");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<Product> builder)
-        {
+        protected override void MapProperties(EntityTypeBuilder<Product> builder) {
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Property(e => e.Name).HasMaxLength(250);
@@ -345,8 +293,7 @@ namespace Alabo.App.Shop.Product.Domain.Entities
             builder.Ignore(e => e.Detail);
             builder.Ignore(e => e.Store);
             builder.Ignore(e => e.Version);
-            if (TenantContext.IsTenant)
-            {
+            if (TenantContext.IsTenant) {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
             }
         }

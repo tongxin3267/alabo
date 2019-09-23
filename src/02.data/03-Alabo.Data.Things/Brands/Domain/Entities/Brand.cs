@@ -14,7 +14,7 @@ namespace Alabo.App.Shop.Store.Domain.Entities {
     /// 店铺品牌
     /// </summary>
     [BsonIgnoreExtraElements]
-    [Table("Store_Brand")]
+    [Table("Things_Brand")]
     public class Brand : AggregateMongodbRoot<Brand> {
 
         [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1, ListShow = true, SortOrder = 1)]
@@ -56,14 +56,6 @@ namespace Alabo.App.Shop.Store.Domain.Entities {
         [Range(0, 99999, ErrorMessage = "请输入0-99999之间的数字")]
         [HelpBlock("排序,越小排在越前面，请输入0-99999之间的数字")]
         public long SortOrder { get; set; } = 1000;
-
-        /// <summary>
-        ///     创建时间
-        /// </summary>
-        [Display(Name = "创建时间")]
-        [Field(ControlsType = ControlsType.DateTimePicker, ListShow = true, GroupTabId = 3, EditShow = false,
-            SortOrder = 10001, Width = "160")]
-        public DateTime CreateTime { get; set; } = DateTime.Now;
 
         /// <summary>
         ///     通用状态 状态：0正常,1冻结,2删除

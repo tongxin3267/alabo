@@ -6,6 +6,7 @@
     <RootNamespace>Alabo.Cloud.Asset</RootNamespace>
     <ApplicationIcon />
     <StartupObject />
+    <AssemblyName>Alabo.Cloud.Asset</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
