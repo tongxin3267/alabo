@@ -22,6 +22,7 @@ using Alabo.Mapping;
 using ZKCloud.Open.ApiBase.Models;
 using Alabo.RestfulApi;
 using Alabo.UI.AutoForms;
+using Alabo.App.Asset.Withdraws.Domain.Services;
 
 namespace Alabo.App.Core.Finance.Controllers {
 
@@ -57,7 +58,7 @@ namespace Alabo.App.Core.Finance.Controllers {
         [Display(Description = "获取允许提现的账户类型")]
         [ApiAuth]
         public ApiResult GetAccountType([FromQuery] long loginUserId) {
-            var result = Resolve<IWithDrawService>().GetWithDrawMoneys(loginUserId);
+            var result = Resolve<IWithdrawService>().GetWithDrawMoneys(loginUserId);
             if (result != null) {
                 return ApiResult.Success(result);
             }
@@ -78,7 +79,7 @@ namespace Alabo.App.Core.Finance.Controllers {
             }
 
             parameter.UserId = parameter.LoginUserId;
-            var serviceResult = Resolve<IWithDrawService>().Add(parameter);
+            var serviceResult = Resolve<IWithdrawService>().Add(parameter);
             return ToResult(serviceResult);
         }
 
@@ -90,7 +91,7 @@ namespace Alabo.App.Core.Finance.Controllers {
         [Display(Description = "获取用户所有提现数据")]
         [ApiAuth]
         public ApiResult<PagedList<Trade>> GetUserList([FromQuery] WithDrawApiInput parameter) {
-            var result = Resolve<IWithDrawService>().GetUserList(parameter);
+            var result = Resolve<IWithdrawService>().GetUserList(parameter);
             if (result != null) {
                 return ApiResult.Success(result);
             }
@@ -111,7 +112,7 @@ namespace Alabo.App.Core.Finance.Controllers {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
             }
 
-            var serviceResult = Resolve<IWithDrawService>().Delete(loginUserId, id);
+            var serviceResult = Resolve<IWithdrawService>().Delete(loginUserId, id);
             return ToResult(serviceResult);
         }
 
@@ -120,7 +121,7 @@ namespace Alabo.App.Core.Finance.Controllers {
         [ApiAuth]
         public ApiResult<ListOutput> List([FromQuery] ListInput parameter) {
             var model = Resolve<ITradeService>()
-                .GetList(u => u.UserId == parameter.LoginUserId && u.Type == TradeType.Withraw).ToList();
+                .GetList(u => u.UserId == parameter.LoginUserId && u.Type == TradeType.Withdraw).ToList();
             var apiOutput = new ListOutput {
                 TotalSize = model.Count() / parameter.PageSize
             };
@@ -148,7 +149,7 @@ namespace Alabo.App.Core.Finance.Controllers {
         [HttpGet]
         [Display(Description = "获取提现详情")]
         public ApiResult Get([FromQuery] long loginUserId, long id) {
-            var result = Resolve<IWithDrawService>().GetSingle(loginUserId, id);
+            var result = Resolve<IWithdrawService>().GetSingle(loginUserId, id);
             if (result != null) {
                 if (result.UserId != loginUserId) {
                     return ApiResult.Failure<WithDrawShowOutput>("对不起，您无权查看他人提现详情");
@@ -172,7 +173,7 @@ namespace Alabo.App.Core.Finance.Controllers {
         [Display(Description = "提现记录")]
         public ApiResult GetList() {
             var result = new List<WithDrawOutput>();
-            var model = Resolve<ITradeService>().GetPagedList(Query, u => u.Type == TradeType.Withraw);
+            var model = Resolve<ITradeService>().GetPagedList(Query, u => u.Type == TradeType.Withdraw);
             var moneyConfigList = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
             foreach (var item in model) {
                 var withDraw = AutoMapping.SetValue<WithDrawOutput>(item);

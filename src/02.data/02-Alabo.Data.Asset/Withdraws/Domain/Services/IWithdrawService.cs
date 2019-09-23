@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using MongoDB.Bson;
 using Alabo.Domains.Services;
-using Alabo.App.Asset.Withraws.Domain.Entities;
+using Alabo.App.Asset.Withdraws.Domain.Entities;
 using Alabo.App.Core.Finance.Domain.Dtos.WithDraw;
 using Alabo.App.Core.Finance.Domain.Entities;
 using Alabo.App.Core.Finance.ViewModels.WithDraw;
 using Alabo.Domains.Entities;
 using Microsoft.AspNetCore.Http;
 
-namespace Alabo.App.Asset.Withraws.Domain.Services {
+namespace Alabo.App.Asset.Withdraws.Domain.Services {
 
-    public interface IWithrawService : IService<Withraw, long> {
+    public interface IWithdrawService : IService<Withdraw, long> {
 
         /// <summary>
         ///     Ã·œ÷

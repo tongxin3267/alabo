@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using Alabo.App.Asset.Withdraws.Domain.Services;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.Dtos.WithDraw;
 using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Mapping;
+using Alabo.Maps;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
 using Alabo.UI.AutoTables;
@@ -18,9 +20,8 @@ using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Core.Finance.UI.AutoForm {
 
-    [ClassProperty(Name = "", Description = "提现审核")]
-    public class WithdrawAdminAutoForm : UIBase, IAutoTable<WithdrawAdminAutoForm>//, IAutoForm
-    {
+    [ClassProperty(Name = "", Description = "提现")]
+    public class WithdrawAutoForm : UIBase, IAutoForm, IAutoTable<WithdrawAutoForm> {
         #region
 
         /// <summary>
@@ -137,16 +138,8 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
 
         #endregion
 
-        /// <summary>
-        /// 操作按钮
-        /// </summary>
-        /// <returns></returns>
         public List<TableAction> Actions() {
-            return new List<TableAction>()
-            {
-                 ToLinkAction("查看详情", "/Admin/Product/Edit",TableActionType.QuickAction),//管理员增加
-                 ToLinkAction("审核", "/Admin/Product/Edit",TableActionType.QuickAction),//管理员增加
-            };
+            return null;
         }
 
         public Alabo.UI.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
@@ -163,22 +156,17 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
             return result;
         }
 
-        /// <summary>
-        /// 表格
-        /// </summary>
-        /// <param name="query"></param>
-        /// <param name="autoModel"></param>
-        /// <returns></returns>
-        public PageResult<WithdrawAdminAutoForm> PageTable(object query, AutoBaseModel autoModel) {
-            var dic = HttpWeb.HttpContext.ToDictionary();
-            dic = dic.RemoveKey("type");// 移除该type否则无法正常lambda
+        public PageResult<WithdrawAutoForm> PageTable(object query, AutoBaseModel autoModel) {
             var userInput = ToQuery<WithDrawApiInput>();
 
             if (autoModel.Filter == FilterType.Admin) {
-                var model = Resolve<IWithDrawService>().GetAdminPageList(dic.ToJson());
-                var view = new PagedList<WithdrawAdminAutoForm>();
+                var dic = HttpWeb.HttpContext.ToDictionary();
+                dic = dic.RemoveKey("WithdrawAdminAutoForm");// 移除该type否则无法正常lambda
+
+                var model = Resolve<IWithdrawService>().GetAdminPageList(dic.ToJson());
+                var view = new PagedList<WithdrawAutoForm>();
                 foreach (var item in model) {
-                    var outPut = AutoMapping.SetValue<WithdrawAdminAutoForm>(item);
+                    var outPut = AutoMapping.SetValue<WithdrawAutoForm>(item);
                     view.Add(outPut);
                 }
                 return ToPageResult(view);
@@ -186,12 +174,12 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
             if (autoModel.Filter == FilterType.User) {
                 userInput.UserId = autoModel.BasicUser.Id;
                 userInput.LoginUserId = autoModel.BasicUser.Id;
-                var model = Resolve<IWithDrawService>().GetUserList(userInput);
+                var model = Resolve<IWithdrawService>().GetUserList(userInput);
 
                 var money = Resolve<IAutoConfigService>().GetList<Domain.CallBacks.MoneyTypeConfig>();
-                var view = new PagedList<WithdrawAdminAutoForm>();
+                var view = new PagedList<WithdrawAutoForm>();
                 foreach (var item in model) {
-                    var outPut = new WithdrawAdminAutoForm {
+                    var outPut = new WithdrawAutoForm {
                         //提现单号
                         //Serial = item.Serial,
                         //状态
@@ -210,12 +198,21 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
                 }
                 return ToPageResult(view);
             } else {
-                throw new SystemException("类型权限不正确");
+                throw new ValidException("类型权限不正确");
             }
         }
 
         public ServiceResult Save(object model, AutoBaseModel autoModel) {
-            throw new NotImplementedException();
+            var withDraw = (WithdrawAutoForm)model;
+            withDraw.UserId = autoModel.BasicUser.Id;
+            withDraw.Status = TradeStatus.FirstCheckSuccess;
+            //如果为空则直接赋值为 储值/现金
+            if (withDraw.MoneyTypeId.IsNullOrEmpty()) {
+                withDraw.MoneyTypeId = Guid.Parse("e97ccd1e-1478-49bd-bfc7-e73a5d699000");
+            }
+
+            var result = Resolve<IWithdrawService>().Add(withDraw.MapTo<WithDrawInput>());
+            return result;
         }
     }
 }

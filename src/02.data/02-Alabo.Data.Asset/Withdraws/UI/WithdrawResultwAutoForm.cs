@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Finance.Domain.Enums;
+using Alabo.App.Asset.Withdraws.Domain.Services;
 using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -11,8 +11,7 @@ using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Core.Finance.UI.AutoForm {
 
-    [ClassProperty(Name = "提现审核", Description = "提现")]
-    public class WithdrawReviewAutoForm : UIBase, IAutoForm {
+    internal class WithdrawResultwAutoForm : UIBase, IAutoForm {
         #region
 
         /// <summary>
@@ -46,9 +45,8 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
         /// <summary>
         ///     Gets or sets the bank card identifier.
         /// </summary>
-        [Display(Name = "当前状态")]
+        [Display(Name = "审核状态")]
         [Field(ControlsType = ControlsType.Label, EditShow = true, SortOrder = 4)]
-        [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         public string Status { get; set; }
 
         /// <summary>
@@ -108,40 +106,21 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
         public DateTime CreateTime { get; set; }
 
         /// <summary>
-        /// 审核状态
-        /// </summary>
-        [Display(Name = "审核状态")]
-        [Field(ControlsType = ControlsType.RadioButton, DataSourceType = typeof(ReviewState), EditShow = true, SortOrder = 12)]
-        [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        public ReviewState ReviewState { get; set; }
-
-        /// <summary>
         /// 审核信息
         /// </summary>
         [Display(Name = "审核信息")]
-        [Field(ControlsType = ControlsType.TextArea, EditShow = true, SortOrder = 12)]
-        //[Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        [HelpBlock("请输入审核信息")]
+        [Field(ControlsType = ControlsType.Label, EditShow = true, SortOrder = 12)]
         public string ReviewRemark { get; set; }
-
-        /// <summary>
-        /// 审核拒绝理由
-        /// </summary>
-        [Display(Name = "原因")]
-        [Field(ControlsType = ControlsType.TextArea, EditShow = true, SortOrder = 12)]
-        //[Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        [HelpBlock("请输入原因")]
-        public string FailuredReason { get; set; }
 
         #endregion
 
         public Alabo.UI.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
-            var withDraw = Resolve<IWithDrawService>().GetAdminWithDraw(id.ConvertToLong());
-            var form = new WithdrawReviewAutoForm();
+            var withDraw = Resolve<IWithdrawService>().GetAdminWithDraw(id.ConvertToLong());
+            var form = new WithdrawResultwAutoForm();
             if (withDraw == null) {
-                form = new WithdrawReviewAutoForm();
+                form = new WithdrawResultwAutoForm();
             } else {
-                form = new WithdrawReviewAutoForm() {
+                form = new WithdrawResultwAutoForm() {
                     Status = withDraw.Status.GetDisplayName(),
                     Amount = withDraw.Amount,
                     Fee = withDraw.Fee,
@@ -149,11 +128,12 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
 
                     BankCardId = withDraw.BankCard?.Number,
                     CreateTime = withDraw.CreateTime,
-                    FailuredReason = withDraw.FailuredReason,
+                    //FailuredReason = withDraw.FailuredReason,
                     Id = withDraw.Id,
                     MoneyTypeId = withDraw.MoneyTypeConfig?.Id,
 
-                    ReviewRemark = withDraw.Remark,//汇款备注提示
+                    //审核结果
+                    ReviewRemark = withDraw.FailuredReason.IsNullOrEmpty() ? withDraw.Remark : withDraw.FailuredReason,
 
                     UserRemark = withDraw.UserRemark,
                     UserId = withDraw.UserId
@@ -161,7 +141,7 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
                 // withDraw.MapTo<WithdrawReviewAutoForm>();
             }
             var result = ToAutoForm(form);
-            result.AlertText = "【审核提现】";
+            result.AlertText = "【审核结果】";
 
             //result.ButtomHelpText = new List<string> {
             //    "提现金额为【储值】",
@@ -174,41 +154,7 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
         }
 
         public ServiceResult Save(object model, AutoBaseModel autoModel) {
-            var withDraw = (WithdrawReviewAutoForm)model;
-            withDraw.UserId = autoModel.BasicUser.Id;
-
-            var adminWithDraw = Resolve<IWithDrawService>().GetAdminWithDraw(withDraw.Id);
-
-            if (withDraw.ReviewState == ReviewState.Pass && adminWithDraw.Status == TradeStatus.Pending) {
-                //通过初审
-                adminWithDraw.Status = TradeStatus.FirstCheckSuccess;
-            } else if (withDraw.ReviewState == ReviewState.Reject && adminWithDraw.Status == TradeStatus.Pending) {
-                //初审拒绝
-                adminWithDraw.Status = TradeStatus.Failured;
-            } else if (withDraw.ReviewState == ReviewState.Pass && adminWithDraw.Status == TradeStatus.FirstCheckSuccess) {
-                //通过二审
-                adminWithDraw.Status = TradeStatus.Success;
-            } else if (withDraw.ReviewState == ReviewState.Reject && adminWithDraw.Status == TradeStatus.FirstCheckSuccess) {
-                //拒绝二审
-                adminWithDraw.Status = TradeStatus.Failured;
-            } else {
-                //其他状态 返回异常
-                return ServiceResult.FailedMessage("状态异常");
-            }
-
-            //如果为空则直接赋值为 储值/现金
-            if (withDraw.MoneyTypeId.IsNullOrEmpty()) {
-                withDraw.MoneyTypeId = Guid.Parse("e97ccd1e-1478-49bd-bfc7-e73a5d699000");
-            }
-
-            var result = Resolve<IWithDrawService>().WithDrawCheck(new ViewModels.WithDraw.ViewWithDrawCheck() {
-                Amount = adminWithDraw.Amount,
-                FailuredReason = withDraw.FailuredReason,
-                Status = adminWithDraw.Status,
-                TradeId = withDraw.Id,
-                Remark = withDraw.ReviewRemark
-            });
-            return result;
+            return null;
         }
     }
 }

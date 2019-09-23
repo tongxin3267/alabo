@@ -7,7 +7,7 @@ using MongoDB.Bson;
 using Alabo.Domains.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
-using Alabo.App.Asset.Withraws.Domain.Entities;
+using Alabo.App.Asset.Withdraws.Domain.Entities;
 using Alabo.App.Core.Common.Domain.CallBacks;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
@@ -30,11 +30,11 @@ using Alabo.Mapping;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing.Constraints;
 
-namespace Alabo.App.Asset.Withraws.Domain.Services {
+namespace Alabo.App.Asset.Withdraws.Domain.Services {
 
-    public class WithrawService : ServiceBase<Withraw, long>, IWithrawService {
+    public class WithdrawService : ServiceBase<Withdraw, long>, IWithdrawService {
 
-        public WithrawService(IUnitOfWork unitOfWork, IRepository<Withraw, long> repository) : base(unitOfWork,
+        public WithdrawService(IUnitOfWork unitOfWork, IRepository<Withdraw, long> repository) : base(unitOfWork,
             repository) {
         }
 
@@ -83,13 +83,13 @@ namespace Alabo.App.Asset.Withraws.Domain.Services {
                 return ServiceResult.FailedWithMessage("当前账户不支持提现"); //或状态不正常。请在控制面板中进入设置
             }
 
-            var withDrawConfig = Resolve<IAutoConfigService>().GetValue<WithdRawConfig>();
+            var withDrawConfig = Resolve<IAutoConfigService>().GetValue<WithddrawConfig>();
             if (withDrawConfig == null) {
                 return ServiceResult.FailedWithMessage("提现配置异常");
             }
 
             if (!withDrawConfig.CanWithdRaw) {
-                return ServiceResult.FailedWithMessage(withDrawConfig.CanNotWithRawIntro);
+                return ServiceResult.FailedWithMessage(withDrawConfig.CanNotWithdrawIntro);
             }
 
             var userAcount = Resolve<IAccountService>()
@@ -119,7 +119,7 @@ namespace Alabo.App.Asset.Withraws.Domain.Services {
 
             if (!withDrawConfig.CanSerialWithDraw) {
                 if (Resolve<ITradeService>().GetList(e =>
-                        e.Type == TradeType.Withraw && e.Status != TradeStatus.Failured &&
+                        e.Type == TradeType.Withdraw && e.Status != TradeStatus.Failured &&
                         e.Status != TradeStatus.Success).Count() > 0) {
                     return ServiceResult.FailedWithMessage("您有一笔提现正在处理中，本次提现已被取消！");
                 }
@@ -128,7 +128,7 @@ namespace Alabo.App.Asset.Withraws.Domain.Services {
             #endregion 安全验证
 
             var trade = AutoMapping.SetValue<Trade>(view);
-            trade.Type = TradeType.Withraw;
+            trade.Type = TradeType.Withdraw;
             //银行卡信息处理
             var backCard = Resolve<IBankCardService>().GetSingle(u => u.Number == view.BankCardId);
             //var backCard = new BankCard();
@@ -178,7 +178,7 @@ namespace Alabo.App.Asset.Withraws.Domain.Services {
         public ServiceResult Delete(long userId, long id) {
             var serviceResult = ServiceResult.Success;
             var trade = Resolve<ITradeService>()
-                .GetSingle(e => e.Type == TradeType.Withraw && e.UserId == userId && e.Id == id);
+                .GetSingle(e => e.Type == TradeType.Withdraw && e.UserId == userId && e.Id == id);
             var user = Resolve<IUserService>().GetSingle(userId);
             var userAcount = Resolve<IAccountService>()
                 .GetSingle(e => e.UserId == userId && e.MoneyTypeId == trade.MoneyTypeId);
@@ -232,7 +232,7 @@ namespace Alabo.App.Asset.Withraws.Domain.Services {
         /// <param name="id">Id标识</param>
         public WithDrawShowOutput GetSingle(long userId, long id) {
             var trade = Resolve<ITradeService>()
-                .GetSingle(r => r.Id == id && r.UserId == userId && r.Type == TradeType.Withraw);
+                .GetSingle(r => r.Id == id && r.UserId == userId && r.Type == TradeType.Withdraw);
             var monenyTypeConfigs = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
             if (trade != null) {
                 var user = Resolve<IUserService>().GetSingle(userId);
@@ -260,7 +260,7 @@ namespace Alabo.App.Asset.Withraws.Domain.Services {
                 PageSize = (int)parameter.PageSize
             };
             query.And(e => e.UserId == parameter.LoginUserId);
-            query.And(e => e.Type == TradeType.Withraw);
+            query.And(e => e.Type == TradeType.Withdraw);
             query.OrderByDescending(r => r.Id);
             var model = Resolve<ITradeService>().GetPagedList(query);
             return model;
@@ -272,7 +272,7 @@ namespace Alabo.App.Asset.Withraws.Domain.Services {
         /// <param name="query">查询</param>
         public PagedList<WithDrawOutput> GetPageList(object query) {
             // 获取当前供应商的所有订单
-            var list = Resolve<ITradeService>().GetPagedList(query, r => r.Type == TradeType.Withraw);
+            var list = Resolve<ITradeService>().GetPagedList(query, r => r.Type == TradeType.Withdraw);
             var moneyType = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
             var users = Resolve<IUserService>().GetList();
             var resultList = new List<WithDrawOutput>();
@@ -302,7 +302,7 @@ namespace Alabo.App.Asset.Withraws.Domain.Services {
         /// <param name="query">查询</param>
         public PagedList<ViewAdminWithDraw> GetAdminPageList(object query) {
             // 获取当前供应商的所有订单
-            var list = Resolve<ITradeService>().GetPagedList(query, r => r.Type == TradeType.Withraw);
+            var list = Resolve<ITradeService>().GetPagedList(query, r => r.Type == TradeType.Withdraw);
             var moneyType = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
             var users = Resolve<IUserService>().GetList();
             var resultList = new List<ViewAdminWithDraw>();
@@ -413,7 +413,7 @@ namespace Alabo.App.Asset.Withraws.Domain.Services {
                 PageSize = (int)parameter.PageSize
             };
             query.And(e => e.UserId == parameter.LoginUserId);
-            query.And(e => e.Type == TradeType.Withraw);
+            query.And(e => e.Type == TradeType.Withdraw);
             query.OrderByDescending(r => r.Id);
             var model = Resolve<ITradeService>().GetPagedList(query);
             return model;
@@ -473,7 +473,7 @@ namespace Alabo.App.Asset.Withraws.Domain.Services {
                                 withDraw.Amount
                             }，管理员初审不通过，账户退回{withDraw.Amount}",
                     UserId = withDraw.UserId,
-                    Type = BillActionType.Withraw,
+                    Type = BillActionType.Withdraw,
                     Flow = AccountFlow.Income,
                     MoneyTypeId = withDraw.MoneyTypeId,
                     Amount = withDraw.Amount,
@@ -515,7 +515,7 @@ namespace Alabo.App.Asset.Withraws.Domain.Services {
                     EntityId = withDraw.Id,
                     Intro = $@"{user.GetUserName()}申请{drawMoneyType.Name}提现{withDraw.Amount}成功",
                     UserId = withDraw.UserId,
-                    Type = BillActionType.Withraw,
+                    Type = BillActionType.Withdraw,
                     Flow = AccountFlow.Spending,
                     MoneyTypeId = withDraw.MoneyTypeId,
                     Amount = withDraw.Amount,
@@ -576,7 +576,7 @@ namespace Alabo.App.Asset.Withraws.Domain.Services {
         public PagedList<ViewHomeWithDraw> GetUserPage(object query) {
             var user = query.ToUserObject();
             var resultList = Resolve<ITradeService>()
-                .GetPagedList<ViewHomeWithDraw>(query, r => r.Type == TradeType.Withraw && r.UserId == user.Id);
+                .GetPagedList<ViewHomeWithDraw>(query, r => r.Type == TradeType.Withdraw && r.UserId == user.Id);
             var moenyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
             resultList.ForEach(r => {
                 r.MoneyTypeName = moenyTypes.FirstOrDefault(u => u.Id == r.MoneyTypeId)?.Name;

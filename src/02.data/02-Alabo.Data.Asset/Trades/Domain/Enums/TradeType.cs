@@ -21,7 +21,7 @@ namespace Alabo.App.Core.Finance.Domain.Enums {
         /// </summary>
         [Display(Name = "提现")]
         [LabelCssClass(BadgeColorCalss.Primary)]
-        Withraw = 2,
+        Withdraw = 2,
 
         /// <summary>
         ///     转账

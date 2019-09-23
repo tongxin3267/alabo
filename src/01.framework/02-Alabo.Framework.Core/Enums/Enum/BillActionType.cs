@@ -67,7 +67,7 @@ namespace Alabo.Core.Enums.Enum
         [LabelCssClass(BadgeColorCalss.Metal)]
         [Field(IsDefault = true, GuidId = "E0000000-1478-49BD-BFC7-E00000000110")]
         [Display(Name = "提现")]
-        Withraw = 110,
+        Withdraw = 110,
 
         /// <summary>
         ///     系统减少

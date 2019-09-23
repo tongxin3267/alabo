@@ -34,7 +34,7 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
                 PageSize = (int)15
             };
             temp.And(e => e.UserId == userId.ToInt64());
-            temp.And(u => u.Type == TradeType.Withraw);
+            temp.And(u => u.Type == TradeType.Withdraw);
 
             temp.OrderByDescending(s => s.CreateTime);
 

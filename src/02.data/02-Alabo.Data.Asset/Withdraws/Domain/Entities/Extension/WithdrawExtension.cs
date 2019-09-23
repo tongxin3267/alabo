@@ -8,14 +8,14 @@ using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Asset.Withraws.Domain.Entities.Extension {
+namespace Alabo.App.Asset.Withdraws.Domain.Entities.Extension {
 
     /// <summary>
     ///     充值表
     /// </summary>
     [BsonIgnoreExtraElements]
     [ClassProperty(Name = "充值管理", Icon = "fa fa-puzzle-piece", Description = "充值管理", PageType = ViewPageType.List)]
-    public class WithrawExtension : BaseViewModel {
+    public class WithdrawExtension : BaseViewModel {
 
         /// <summary>
         ///     充值方式

@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.Withraws.Domain.Enums {
+namespace Alabo.App.Asset.Withdraws.Domain.Enums {
 
-    public enum WithrawStatus {
+    public enum WithdrawStatus {
 
         /// <summary>
         ///     待处理

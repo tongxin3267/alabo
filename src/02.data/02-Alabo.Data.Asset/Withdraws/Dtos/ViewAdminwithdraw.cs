@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.App.Asset.Withdraws.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Finance.Domain.Dtos.WithDraw;
 using Alabo.App.Core.Finance.Domain.Entities;
@@ -189,7 +190,7 @@ namespace Alabo.App.Core.Finance.ViewModels.WithDraw {
         }
 
         public PageResult<ViewAdminWithDraw> PageTable(object query) {
-            var model = Resolve<IWithDrawService>().GetAdminPageList(query);
+            var model = Resolve<IWithdrawService>().GetAdminPageList(query);
             return ToPageResult(model);
         }
 
@@ -197,7 +198,7 @@ namespace Alabo.App.Core.Finance.ViewModels.WithDraw {
             var userInput = ToQuery<WithDrawApiInput>();
 
             if (autoModel.Filter == FilterType.Admin) {
-                var model = Resolve<IWithDrawService>().GetUserList(userInput);
+                var model = Resolve<IWithdrawService>().GetUserList(userInput);
                 var view = new PagedList<ViewAdminWithDraw>();
                 foreach (var item in model) {
                     var outPut = AutoMapping.SetValue<ViewAdminWithDraw>(item);
@@ -208,7 +209,7 @@ namespace Alabo.App.Core.Finance.ViewModels.WithDraw {
             if (autoModel.Filter == FilterType.User) {
                 userInput.UserId = autoModel.BasicUser.Id;
                 userInput.LoginUserId = autoModel.BasicUser.Id;
-                var model = Resolve<IWithDrawService>().GetUserList(userInput);
+                var model = Resolve<IWithdrawService>().GetUserList(userInput);
                 var view = new PagedList<ViewAdminWithDraw>();
                 foreach (var item in model) {
                     var outPut = AutoMapping.SetValue<ViewAdminWithDraw>(item);

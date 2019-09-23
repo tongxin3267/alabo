@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using Alabo.App.Asset.Withdraws.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.App.Core.Finance.Domain.Services;
@@ -174,7 +175,7 @@ namespace Alabo.App.Core.Finance.Domain.Dtos.WithDraw {
                 var dic = HttpWeb.HttpContext.ToDictionary();
                 dic = dic.RemoveKey("type");// 移除该type否则无法正常lambda
 
-                var model = Resolve<IWithDrawService>().GetAdminPageList(dic.ToJson());
+                var model = Resolve<IWithdrawService>().GetAdminPageList(dic.ToJson());
                 var view = new PagedList<WithDrawOutput>();
                 //var moneyTypes= Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>()
                 foreach (var item in model) {
@@ -208,7 +209,7 @@ namespace Alabo.App.Core.Finance.Domain.Dtos.WithDraw {
             }
             if (autoModel.Filter == FilterType.User) {
                 userInput.UserId = autoModel.BasicUser.Id;
-                var model = Resolve<IWithDrawService>().GetUserList(userInput);
+                var model = Resolve<IWithdrawService>().GetUserList(userInput);
                 var view = new PagedList<WithDrawOutput>();
                 foreach (var item in model) {
                     var outPut = AutoMapping.SetValue<WithDrawOutput>(item);

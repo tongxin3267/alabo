@@ -13,7 +13,7 @@ namespace Alabo.App.Core.Finance.Domain.CallBacks {
     [NotMapped]
     [ClassProperty(Name = "提现设置", Icon = "fa fa-paw", PageType = ViewPageType.Edit, Description = "提现设置",
         SortOrder = 24, SideBarType = SideBarType.WithDrawSideBar)]
-    public class WithdRawConfig : AutoConfigBase, IAutoConfig {
+    public class WithddrawConfig : AutoConfigBase, IAutoConfig {
 
         /// <summary>
         ///     是否允许会员提现
@@ -55,7 +55,7 @@ namespace Alabo.App.Core.Finance.Domain.CallBacks {
         [Field(ControlsType = ControlsType.TextArea)]
         [HelpBlock("不允许会员提现时候，会员提交提现申请的说明")]
         [Display(Name = "不允许提现的原因", Order = 10, GroupName = "基本设置", AutoGenerateField = false)]
-        public string CanNotWithRawIntro { get; set; } = "非提现时间，不允许会员提现，给您带来不便的抱歉深感遗憾";
+        public string CanNotWithdrawIntro { get; set; } = "非提现时间，不允许会员提现，给您带来不便的抱歉深感遗憾";
 
         /// <summary>
         ///     最小提现额度

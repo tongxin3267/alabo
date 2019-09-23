@@ -28,7 +28,6 @@
     <Folder Include="Refunds\Domain\Services\" />
     <Folder Include="Refunds\Dtos\" />
     <Folder Include="Transfers\Domain\Repositories\" />
-    <Folder Include="Withraws\Domain\Repositories\" />
   </ItemGroup>
 
 </Project>

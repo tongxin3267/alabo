@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Asset.Withraws.Domain.Entities.Extension;
-using Alabo.App.Asset.Withraws.Domain.Enums;
+using Alabo.App.Asset.Withdraws.Domain.Entities.Extension;
+using Alabo.App.Asset.Withdraws.Domain.Enums;
 using Alabo.App.Core.Finance.Domain.Entities;
 using Alabo.App.Core.Finance.Domain.Entities.Extension;
 using Alabo.App.Core.Finance.Domain.Enums;
@@ -12,10 +12,10 @@ using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.App.Asset.Withraws.Domain.Entities {
+namespace Alabo.App.Asset.Withdraws.Domain.Entities {
 
     [ClassProperty(Name = "提现", Icon = "fa fa-puzzle-piece", Description = "提现")]
-    public class Withraw : AggregateDefaultUserRoot<Withraw> {
+    public class Withdraw : AggregateDefaultUserRoot<Withdraw> {
 
         /// <summary>
         ///     本次变动的货币类型id
@@ -40,7 +40,7 @@ namespace Alabo.App.Asset.Withraws.Domain.Entities {
         ///     状态
         /// </summary>
         [Display(Name = "状态")]
-        public WithrawStatus Status { get; set; } = WithrawStatus.Pending;
+        public WithdrawStatus Status { get; set; } = WithdrawStatus.Pending;
 
         /// <summary>
         ///     付款时间
@@ -53,7 +53,7 @@ namespace Alabo.App.Asset.Withraws.Domain.Entities {
         /// <summary>
         ///     Gets or sets the 扩展.
         /// </summary>
-        [Field(ExtensionJson = "WithrawExtension")]
+        [Field(ExtensionJson = "WithdrawExtension")]
         [Display(Name = "扩展")]
         public string Extension { get; set; }
 
@@ -61,7 +61,7 @@ namespace Alabo.App.Asset.Withraws.Domain.Entities {
         ///     Gets or sets the with draw 扩展.
         /// </summary>
         [Display(Name = "贸易扩展")]
-        public WithrawExtension WithrawExtension { get; set; } = new WithrawExtension();
+        public WithdrawExtension WithdrawExtension { get; set; } = new WithdrawExtension();
 
         /// <summary>
         ///     Gets the serial.
@@ -78,16 +78,16 @@ namespace Alabo.App.Asset.Withraws.Domain.Entities {
             }
         }
 
-        public class WithrawTableMap : MsSqlAggregateRootMap<Withraw> {
+        public class WithdrawTableMap : MsSqlAggregateRootMap<Withdraw> {
 
-            protected override void MapTable(EntityTypeBuilder<Withraw> builder) {
-                builder.ToTable("Finance_Withraw");
+            protected override void MapTable(EntityTypeBuilder<Withdraw> builder) {
+                builder.ToTable("Finance_Withdraw");
             }
 
-            protected override void MapProperties(EntityTypeBuilder<Withraw> builder) {
+            protected override void MapProperties(EntityTypeBuilder<Withdraw> builder) {
                 //应用程序编号
                 builder.HasKey(e => e.Id);
-                builder.Ignore(e => e.WithrawExtension);
+                builder.Ignore(e => e.WithdrawExtension);
                 builder.Ignore(e => e.Serial);
                 builder.Ignore(e => e.UserName);
                 builder.Ignore(e => e.Version);
