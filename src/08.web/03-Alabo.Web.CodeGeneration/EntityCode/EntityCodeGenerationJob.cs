@@ -19,8 +19,8 @@ namespace Alabo.Web.CodeGeneration.EntityCode {
 
         protected override async Task Execute(IJobExecutionContext context, IScope scope) {
             //手动修改,实体路径，可右键实体手动复制路径
-            var entityPath = @"C:\github\alabo\src\02.data\01-Alabo.Data.People\Stores\Domain\Entities\";
-            CreateCode(typeof(Store), entityPath);
+            var entityPath = @"C:\github\alabo\src\02.data\03-Alabo.Data.Things\Goodss\Domain\Entities\";
+            CreateCode(typeof(GoodsLine), entityPath);
 
             Console.WriteLine(@"所有代码生成完成");
         }

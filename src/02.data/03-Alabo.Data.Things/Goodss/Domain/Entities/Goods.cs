@@ -48,6 +48,11 @@ namespace Alabo.Data.Things.Goodss.Domain.Entities {
         public string Bn { get; set; }
 
         /// <summary>
+        /// 商品类型
+        /// </summary>
+        public GoodsType Type { get; set; }
+
+        /// <summary>
         ///     商品品牌ID
         ///     商品的品牌Id存放在Store表中
         ///     关联店铺的品牌

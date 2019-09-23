@@ -26,6 +26,7 @@ using Alabo.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.App.Core.Tasks.Domain.Services;
 using Convert = System.Convert;
 
 namespace Alabo.App.Shop.Order.Domain.Services {
