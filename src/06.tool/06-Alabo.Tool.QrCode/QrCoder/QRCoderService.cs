@@ -1,4 +1,5 @@
-﻿using QRCoder;
+﻿using Alabo.Extensions;
+using QRCoder;
 
 namespace Alabo.Tool.QrCode.QrCoder {
 

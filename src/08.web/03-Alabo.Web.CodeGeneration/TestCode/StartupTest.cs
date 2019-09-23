@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Alabo.App.Core.Admin.Domain.Services;
+using Alabo.Extensions;
+using Alabo.Helpers;
+using Alabo.Linq.Dynamic;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,11 +10,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
-using Alabo.App.Core.Admin.Domain.Services;
-using Alabo.App.Core.LightApps.Domain.Services;
-using Alabo.Extensions;
-using Alabo.Helpers;
-using Alabo.Linq.Dynamic;
 using File = System.IO.File;
 
 namespace Alabo.Web.CodeGeneration.TestCode {
@@ -331,10 +330,6 @@ namespace Alabo.Web.CodeGeneration.TestCode {
 
             para = param;
             return name.Replace(".", "_");
-        }
-
-        public void Starts() {
-            StartSingleServieCode(typeof(ILightAppService));
         }
 
         /// <summary>
