@@ -90,7 +90,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03-Alabo.Web.CodeGeneration
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02-Alabo.Industry.Shop", "src\04.industry\02-Alabo.Industry.Shop\02-Alabo.Industry.Shop.csproj", "{502EE411-C10F-45F3-AC9D-BCBA8DAE96A8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03-Alabo.App.Offline", "src\04.industry\02-Alabo.Industry.Offline\03-Alabo.App.Offline.csproj", "{75890C3D-DD76-4DFF-8E4F-003C6C963161}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03-Alabo.Industry.Offline", "src\04.industry\02-Alabo.Industry.Offline\03-Alabo.Industry.Offline.csproj", "{75890C3D-DD76-4DFF-8E4F-003C6C963161}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

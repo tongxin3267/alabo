@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Core.Common.Domain.CallBacks;
+﻿using Alabo.App.Core.Common.Domain.CallBacks;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.Entities;
 using Alabo.App.Core.Finance.Domain.Entities.Extension;
 using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Entities.Extensions;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Shop.Order.Domain.Dtos;
 using Alabo.App.Shop.Order.Domain.Entities.Extensions;
@@ -27,8 +22,10 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
-using Alabo.Helpers;
 using Alabo.Mapping;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Convert = System.Convert;
 
 namespace Alabo.App.Shop.Order.Domain.Services {
@@ -108,14 +105,11 @@ namespace Alabo.App.Shop.Order.Domain.Services {
 
             pay.AccountPay = acmountPay.ToJson();
 
-
             if (!singlePayInput.RedirectUrl.IsNullOrEmpty()) {
                 payExtension.RedirectUrl = singlePayInput.RedirectUrl;
             }
 
             pay.Extensions = payExtension.ToJson();
-
-            
 
             if (Resolve<IPayService>().Add(pay)) {
                 return Tuple.Create(ServiceResult.Success, pay);
