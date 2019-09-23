@@ -14,7 +14,7 @@ namespace Alabo.App.Agent.Citys.Domain.Entities {
     [ClassProperty(Name = "城市合伙人")]
     [BsonIgnoreExtraElements]
     [AutoDelete(IsAuto = true)]
-    [Table("Agent_City")]
+    [Table("People_City")]
     public class City : AggregateMongodbUserRoot<City> {
 
         /// <summary>

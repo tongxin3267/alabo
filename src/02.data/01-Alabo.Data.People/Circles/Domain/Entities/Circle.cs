@@ -15,7 +15,7 @@ namespace Alabo.App.Agent.Circle.Domain.Entities {
 
     [ClassProperty(Name = "商圈")]
     [BsonIgnoreExtraElements]
-    [Table("Agent_Circle")]
+    [Table("People_Circle")]
     [AutoDelete(IsAuto = true)]
     public class Circle : AggregateMongodbRoot<Circle> {
 

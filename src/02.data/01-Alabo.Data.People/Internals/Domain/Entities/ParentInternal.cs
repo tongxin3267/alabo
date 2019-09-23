@@ -11,7 +11,7 @@ namespace Alabo.App.Agent.Internal.Domain.Entities {
 
     [ClassProperty(Name = "内部合伙人")]
     [BsonIgnoreExtraElements]
-    [Table("Agent_ParentInternal")]
+    [Table("People_ParentInternal")]
     public class ParentInternal : AggregateMongodbUserRoot<ParentInternal> {
 
         [Display(Name = "名称")]

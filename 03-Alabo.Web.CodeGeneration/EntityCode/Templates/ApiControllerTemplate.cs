@@ -25,6 +25,7 @@ namespace Alabo.Web.CodeGeneration.EntityCode.Templates {
 
             var testBuilder = new StringBuilder();
             var filePath = BaseTemplate.GetFilePath(type, "Controllers", entityPath);
+
             DirectoryHelper.CreateIfNotExists(filePath);
             var fileName = filePath + $"\\Api{type.Name}Controller.cs";
             if (!File.Exists(fileName)) {

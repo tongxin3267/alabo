@@ -13,7 +13,7 @@ namespace Alabo.App.Agent.County.Domain.Entities {
     [ClassProperty(Name = "区县合伙人")]
     [BsonIgnoreExtraElements]
     [AutoDelete(IsAuto = true)]
-    [Table("Agent_County")]
+    [Table("People_County")]
     public class County : AggregateMongodbUserRoot<County> {
 
         /// <summary>

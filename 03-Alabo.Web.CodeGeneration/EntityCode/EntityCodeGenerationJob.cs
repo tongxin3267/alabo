@@ -15,6 +15,7 @@ using Alabo.App.Cms.Articles.Domain.Entities;
 using Alabo.Reflections;
 using Alabo.Web.CodeGeneration.EntityCode.Templates;
 using Alabo.Cloud.Contracts.Domain.Entities;
+using Alabo.Data.People.Suppliers.Domain.Entities;
 
 namespace Alabo.Web.CodeGeneration.EntityCode {
 
@@ -25,8 +26,8 @@ namespace Alabo.Web.CodeGeneration.EntityCode {
 
         protected override async Task Execute(IJobExecutionContext context, IScope scope) {
             //手动修改,实体路径，可右键实体手动复制路径
-            var entityPath = @"C:\github\alabo\src\02.data\02-Alabo.Data.Asset\Withdraws\Domain\Entities\";
-            CreateCode(typeof(Withdraw), entityPath);
+            var entityPath = @"C:\github\alabo\src\02.data\01-Alabo.Data.People\Suppliers\Domain\Entities\";
+            CreateCode(typeof(Supplier), entityPath);
 
             Console.WriteLine(@"所有代码生成完成");
         }

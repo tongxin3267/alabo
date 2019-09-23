@@ -14,7 +14,7 @@ namespace Alabo.App.Agent.ShareHolders.Domain.Entities {
     [ClassProperty(Name = "股东")]
     [BsonIgnoreExtraElements]
     [AutoDelete(IsAuto = true)]
-    [Table("Agent_ShareHolder")]
+    [Table("People_ShareHolder")]
     public class ShareHolder : AggregateMongodbRoot<ShareHolder> {
 
         [Field(ListShow = false, EditShow = true, ControlsType = ControlsType.Hidden, SortOrder = 700)]

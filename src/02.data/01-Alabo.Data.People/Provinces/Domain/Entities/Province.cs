@@ -12,7 +12,7 @@ namespace Alabo.App.Agent.Province.Domain.Entities {
 
     [ClassProperty(Name = "省合伙人")]
     [BsonIgnoreExtraElements]
-    [Table("Agent_Province")]
+    [Table("People_Province")]
     [AutoDelete(IsAuto = true)]
     public class Province : AggregateMongodbUserRoot<Province> {
 
