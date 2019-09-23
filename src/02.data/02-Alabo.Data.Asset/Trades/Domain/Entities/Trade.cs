@@ -100,9 +100,6 @@ namespace Alabo.App.Core.Finance.Domain.Entities {
             builder.Ignore(e => e.Serial);
             builder.Ignore(e => e.UserName);
             builder.Ignore(e => e.Version);
-            if (TenantContext.IsTenant) {
-                // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
-            }
         }
     }
 }

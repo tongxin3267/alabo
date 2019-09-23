@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Alabo.App.Asset.Refunds.Domain.Entities.Extension;
+using Alabo.App.Asset.Withraws.Domain.Entities.Extension;
+using Alabo.App.Asset.Withraws.Domain.Enums;
 using Alabo.App.Core.Finance.Domain.Entities;
 using Alabo.App.Core.Finance.Domain.Entities.Extension;
 using Alabo.App.Core.Finance.Domain.Enums;
@@ -13,10 +12,10 @@ using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.App.Asset.Refunds.Domain.Entities {
+namespace Alabo.App.Asset.Withraws.Domain.Entities {
 
-    [ClassProperty(Name = "财务交易", Icon = "fa fa-puzzle-piece", Description = "提现管理")]
-    public class Refund : AggregateDefaultUserRoot<Refund> {
+    [ClassProperty(Name = "提现", Icon = "fa fa-puzzle-piece", Description = "提现")]
+    public class Withraw : AggregateDefaultUserRoot<Withraw> {
 
         /// <summary>
         ///     本次变动的货币类型id
@@ -41,7 +40,7 @@ namespace Alabo.App.Asset.Refunds.Domain.Entities {
         ///     状态
         /// </summary>
         [Display(Name = "状态")]
-        public RefundStatus Status { get; set; } = RefundStatus.Pending;
+        public WithrawStatus Status { get; set; } = WithrawStatus.Pending;
 
         /// <summary>
         ///     付款时间
@@ -54,7 +53,7 @@ namespace Alabo.App.Asset.Refunds.Domain.Entities {
         /// <summary>
         ///     Gets or sets the 扩展.
         /// </summary>
-        [Field(ExtensionJson = "RefundExtension")]
+        [Field(ExtensionJson = "WithrawExtension")]
         [Display(Name = "扩展")]
         public string Extension { get; set; }
 
@@ -62,7 +61,7 @@ namespace Alabo.App.Asset.Refunds.Domain.Entities {
         ///     Gets or sets the with draw 扩展.
         /// </summary>
         [Display(Name = "贸易扩展")]
-        public RefundExtension RefundExtension { get; set; } = new RefundExtension();
+        public WithrawExtension WithrawExtension { get; set; } = new WithrawExtension();
 
         /// <summary>
         ///     Gets the serial.
@@ -78,21 +77,21 @@ namespace Alabo.App.Asset.Refunds.Domain.Entities {
                 return searSerial;
             }
         }
-    }
 
-    public class RefundTableMap : MsSqlAggregateRootMap<Refund> {
+        public class WithrawTableMap : MsSqlAggregateRootMap<Withraw> {
 
-        protected override void MapTable(EntityTypeBuilder<Refund> builder) {
-            builder.ToTable("Finance_Refund");
-        }
+            protected override void MapTable(EntityTypeBuilder<Withraw> builder) {
+                builder.ToTable("Finance_Withraw");
+            }
 
-        protected override void MapProperties(EntityTypeBuilder<Refund> builder) {
-            //应用程序编号
-            builder.HasKey(e => e.Id);
-            builder.Ignore(e => e.RefundExtension);
-            builder.Ignore(e => e.Serial);
-            builder.Ignore(e => e.UserName);
-            builder.Ignore(e => e.Version);
+            protected override void MapProperties(EntityTypeBuilder<Withraw> builder) {
+                //应用程序编号
+                builder.HasKey(e => e.Id);
+                builder.Ignore(e => e.WithrawExtension);
+                builder.Ignore(e => e.Serial);
+                builder.Ignore(e => e.UserName);
+                builder.Ignore(e => e.Version);
+            }
         }
     }
 }

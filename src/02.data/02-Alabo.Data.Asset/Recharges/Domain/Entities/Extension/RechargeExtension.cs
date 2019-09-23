@@ -14,8 +14,8 @@ namespace Alabo.App.Core.Finance.Domain.Entities.Extension {
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Finace_TradeRecharge")]
-    [ClassProperty(Name = "充值管理", Icon = "fa fa-puzzle-piece", Description = "充值管理", PageType = ViewPageType.List, PostApi = "Api/Recharge/GetList", ListApi = "Api/Recharge/GetList")]
-    public class TradeRecharge : BaseViewModel {
+    [ClassProperty(Name = "充值管理", Icon = "fa fa-puzzle-piece", Description = "充值管理", PageType = ViewPageType.List)]
+    public class RechargeExtension : BaseViewModel {
 
         /// <summary>
         ///     充值方式

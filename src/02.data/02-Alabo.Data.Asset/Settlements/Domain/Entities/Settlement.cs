@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Alabo.App.Asset.Refunds.Domain.Entities.Extension;
+using Alabo.App.Asset.Settlements.Domain.Entities.Extension;
+using Alabo.App.Asset.Settlements.Domain.Enums;
 using Alabo.App.Core.Finance.Domain.Entities;
 using Alabo.App.Core.Finance.Domain.Entities.Extension;
 using Alabo.App.Core.Finance.Domain.Enums;
@@ -13,10 +12,10 @@ using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.App.Asset.Refunds.Domain.Entities {
+namespace Alabo.App.Asset.Settlements.Domain.Entities {
 
-    [ClassProperty(Name = "财务交易", Icon = "fa fa-puzzle-piece", Description = "提现管理")]
-    public class Refund : AggregateDefaultUserRoot<Refund> {
+    [ClassProperty(Name = "结算", Icon = "fa fa-puzzle-piece", Description = "充值")]
+    public class Settlement : AggregateDefaultUserRoot<Settlement> {
 
         /// <summary>
         ///     本次变动的货币类型id
@@ -41,7 +40,7 @@ namespace Alabo.App.Asset.Refunds.Domain.Entities {
         ///     状态
         /// </summary>
         [Display(Name = "状态")]
-        public RefundStatus Status { get; set; } = RefundStatus.Pending;
+        public SettlementStatus Status { get; set; } = SettlementStatus.Pending;
 
         /// <summary>
         ///     付款时间
@@ -54,7 +53,7 @@ namespace Alabo.App.Asset.Refunds.Domain.Entities {
         /// <summary>
         ///     Gets or sets the 扩展.
         /// </summary>
-        [Field(ExtensionJson = "RefundExtension")]
+        [Field(ExtensionJson = "SettlementExtension")]
         [Display(Name = "扩展")]
         public string Extension { get; set; }
 
@@ -62,7 +61,7 @@ namespace Alabo.App.Asset.Refunds.Domain.Entities {
         ///     Gets or sets the with draw 扩展.
         /// </summary>
         [Display(Name = "贸易扩展")]
-        public RefundExtension RefundExtension { get; set; } = new RefundExtension();
+        public SettlementExtension SettlementExtension { get; set; } = new SettlementExtension();
 
         /// <summary>
         ///     Gets the serial.
@@ -80,16 +79,16 @@ namespace Alabo.App.Asset.Refunds.Domain.Entities {
         }
     }
 
-    public class RefundTableMap : MsSqlAggregateRootMap<Refund> {
+    public class SettlementTableMap : MsSqlAggregateRootMap<Settlement> {
 
-        protected override void MapTable(EntityTypeBuilder<Refund> builder) {
-            builder.ToTable("Finance_Refund");
+        protected override void MapTable(EntityTypeBuilder<Settlement> builder) {
+            builder.ToTable("Finance_Settlement");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<Refund> builder) {
+        protected override void MapProperties(EntityTypeBuilder<Settlement> builder) {
             //应用程序编号
             builder.HasKey(e => e.Id);
-            builder.Ignore(e => e.RefundExtension);
+            builder.Ignore(e => e.SettlementExtension);
             builder.Ignore(e => e.Serial);
             builder.Ignore(e => e.UserName);
             builder.Ignore(e => e.Version);

@@ -366,7 +366,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
                 Type = TradeType.Recharge
             };
 
-            trade.TradeExtension.Recharge = new TradeRecharge { RechargeType = RechargeType.Online };
+            trade.TradeExtension.Recharge = new RechargeExtension { RechargeType = RechargeType.Online };
             trade.TradeExtension.Recharge.CheckAmount = view.Amount; //实际支付人民币
             trade.TradeExtension.Recharge.Fee = view.Amount * RechargeConfig.ServiceRate; //手续费
 
