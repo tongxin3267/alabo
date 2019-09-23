@@ -5,12 +5,11 @@ using System.Text;
 namespace Alabo.Web.CodeGeneration.EntityCode.Templates {
 
     public static class ServcieTemplate {
-
         /// <summary>
         ///     生成服务接口，与服务方法
         /// </summary>
-        /// <param name="type"></param>
-        public static void Create(Type type, string entityPath) {
+
+        public static void Create(Type type, string idType, string entityPath) {
             if (!type.BaseType.FullName.Contains("Entities")) {
                 Console.WriteLine(@"命名空间必须包含Entities");
                 return;
@@ -36,7 +35,7 @@ namespace Alabo.Web.CodeGeneration.EntityCode.Templates {
                 testBuilder.AppendLine($"namespace {type.Namespace.Replace("Entities", "Services")} {{");
                 ;
 
-                testBuilder.AppendLine($"\tpublic interface I{type.Name}Service : IService<{type.Name}, ObjectId>  {{");
+                testBuilder.AppendLine($"\tpublic interface I{type.Name}Service : IService<{type.Name}, {idType}>  {{");
 
                 testBuilder.AppendLine("\t}");
                 testBuilder.AppendLine("\t}");
@@ -71,9 +70,9 @@ namespace Alabo.Web.CodeGeneration.EntityCode.Templates {
                 ;
 
                 testBuilder.AppendLine(
-                    $"\tpublic class {type.Name}Service : ServiceBase<{type.Name}, ObjectId>,I{type.Name}Service  {{");
+                    $"\tpublic class {type.Name}Service : ServiceBase<{type.Name}, {idType}>,I{type.Name}Service  {{");
                 testBuilder.AppendLine(
-                    $"\tpublic  {type.Name}Service(IUnitOfWork unitOfWork, IRepository<{type.Name}, ObjectId> repository) : base(unitOfWork, repository){{");
+                    $"\tpublic  {type.Name}Service(IUnitOfWork unitOfWork, IRepository<{type.Name}, {idType}> repository) : base(unitOfWork, repository){{");
                 testBuilder.AppendLine("\t}");
                 testBuilder.AppendLine("\t}");
                 testBuilder.AppendLine("}");

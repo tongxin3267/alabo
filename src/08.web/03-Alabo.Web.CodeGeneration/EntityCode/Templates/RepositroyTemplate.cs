@@ -13,7 +13,7 @@ namespace Alabo.Web.CodeGeneration.EntityCode.Templates {
         ///     生成服务接口，与服务方法
         /// </summary>
         /// <param name="type"></param>
-        public static void Create(Type type, string entityPath) {
+        public static void Create(Type type, string idType, string entityPath) {
             //type = typeof(Theme);
 
             if (!type.BaseType.FullName.Contains("Entities")) {
@@ -41,7 +41,7 @@ namespace Alabo.Web.CodeGeneration.EntityCode.Templates {
                 ;
 
                 testBuilder.AppendLine(
-                    $"\tpublic interface I{type.Name}Repository : IRepository<{type.Name}, ObjectId>  {{");
+                    $"\tpublic interface I{type.Name}Repository : IRepository<{type.Name}, {idType}>  {{");
 
                 testBuilder.AppendLine("\t}");
                 testBuilder.AppendLine("}");
@@ -76,7 +76,7 @@ namespace Alabo.Web.CodeGeneration.EntityCode.Templates {
                 ;
 
                 testBuilder.AppendLine(
-                    $"\tpublic class {type.Name}Repository : RepositoryMongo<{type.Name}, ObjectId>,I{type.Name}Repository  {{");
+                    $"\tpublic class {type.Name}Repository : RepositoryMongo<{type.Name}, {idType}>,I{type.Name}Repository  {{");
 
                 testBuilder.AppendLine($"\tpublic  {type.Name}Repository(IUnitOfWork unitOfWork) : base(unitOfWork){{");
                 testBuilder.AppendLine("\t}");

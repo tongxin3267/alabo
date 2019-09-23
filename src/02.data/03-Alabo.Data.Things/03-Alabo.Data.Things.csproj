@@ -15,8 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Brands\Domain\Repositories\" />
-    <Folder Include="Brands\Domain\Services\" />
     <Folder Include="Orders\Domain\Configs\" />
   </ItemGroup>
 
