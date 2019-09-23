@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Alabo.App.Cms.Articles.Domain.Entities;
 using Alabo.Reflections;
 using Alabo.Web.CodeGeneration.EntityCode.Templates;
+using Alabo.Cloud.Contracts.Domain.Entities;
 
 namespace Alabo.Web.CodeGeneration.EntityCode {
 
@@ -19,8 +20,8 @@ namespace Alabo.Web.CodeGeneration.EntityCode {
 
         protected override async Task Execute(IJobExecutionContext context, IScope scope) {
             //手动修改,实体路径，可右键实体手动复制路径
-            var entityPath = @"C:\github\alabo\src\04.industry\01-Alabo.Industry.Cms\Articles\Domain\Entities\";
-            CreateCode(typeof(Article), entityPath);
+            var entityPath = @"C:\github\alabo\src\05.cloud\04-Alabo.Cloud.Contracts\Domain\Entities";
+            CreateCode(typeof(ContractRecord), entityPath);
             Console.WriteLine(@"所有代码生成完成");
         }
 

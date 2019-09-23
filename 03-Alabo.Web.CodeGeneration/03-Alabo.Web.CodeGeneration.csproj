@@ -16,6 +16,7 @@
     <ProjectReference Include="..\src\02.data\03-Alabo.Data.Things\03-Alabo.Data.Things.csproj" />
     <ProjectReference Include="..\src\04.industry\01-Alabo.Industry.Cms\01-Alabo.Industry.Cms.csproj" />
     <ProjectReference Include="..\src\05.cloud\01-Alabo.Cloud.Core\01-Alabo.Cloud.Core.csproj" />
+    <ProjectReference Include="..\src\05.cloud\04-Alabo.Cloud.Contracts\04-Alabo.Cloud.Contracts.csproj" />
     <ProjectReference Include="..\src\06.tool\01-Alabo.Tool.Payment\05-Alabo.Tool.Payment.csproj" />
     <ProjectReference Include="..\src\06.tool\02-Alabo.Tool.WeiXin\06-Alabo.Tool.WeiXin.csproj" />
     <ProjectReference Include="..\src\06.tool\04-Alabo.Tool.AMap\04-Alabo.Tool.AMap.csproj" />

@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AssemblyName>Alabo.Cloud.Contracts</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\01.framework\01-Alabo\01-Alabo.csproj" />
-    <ProjectReference Include="..\src\01.framework\02-Alabo.Framework.Core\02-Alabo.Framework.Core.csproj" />
-    <ProjectReference Include="..\src\01.framework\03-Alabo.Framework.Basic\03-Alabo.Framework.Basic.csproj" />
-    <ProjectReference Include="..\src\05.cloud\01-Alabo.Cloud.Core\01-Alabo.Cloud.Core.csproj" />
+    <ProjectReference Include="..\..\01.framework\01-Alabo\01-Alabo.csproj" />
+    <ProjectReference Include="..\..\01.framework\02-Alabo.Framework.Core\02-Alabo.Framework.Core.csproj" />
+    <ProjectReference Include="..\..\01.framework\03-Alabo.Framework.Basic\03-Alabo.Framework.Basic.csproj" />
   </ItemGroup>
 
 </Project>
