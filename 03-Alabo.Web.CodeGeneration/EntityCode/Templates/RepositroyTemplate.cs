@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using Alabo.Exceptions;
 
-namespace Alabo.Test.Generation.CodeTemplate {
+namespace Alabo.Web.CodeGeneration.EntityCode.Templates {
 
     public static class RepositroyTemplate {
 
@@ -13,7 +13,7 @@ namespace Alabo.Test.Generation.CodeTemplate {
         ///     生成服务接口，与服务方法
         /// </summary>
         /// <param name="type"></param>
-        public static void Create(Type type, string projectName = "zkcloudv11s") {
+        public static void Create(Type type, string entityPath) {
             //type = typeof(Theme);
 
             if (!type.BaseType.FullName.Contains("Entities")) {
@@ -22,9 +22,8 @@ namespace Alabo.Test.Generation.CodeTemplate {
 
             var testBuilder = new StringBuilder();
 
-            var filePath = BaseTemplate.GetFilePath(type, "Repositories");
-            var fileName = $"{filePath}\\I{type.Name}Repository.cs".Replace("test\\", "app\\")
-                .Replace("Entities", "Services").Replace("zkcloudv11s", projectName);
+            var filePath = BaseTemplate.GetFilePath(type, "Repositories", entityPath);
+            var fileName = $"{filePath}\\I{type.Name}Repository.cs".Replace("test\\", "app\\");
             if (!File.Exists(fileName)) {
                 testBuilder.AppendLine(
                     "using System;using Alabo.Domains.Repositories.EFCore;using Alabo.Domains.Repositories.Model;");
@@ -56,8 +55,7 @@ namespace Alabo.Test.Generation.CodeTemplate {
             }
 
             fileName = $"{filePath}\\{type.Name}Repository.cs".Replace("test\\", "app\\")
-                .Replace("Entities", "Services")
-                .Replace("zkcloudv11s", projectName);
+                .Replace("Entities", "Services");
             if (!File.Exists(fileName)) {
                 testBuilder = new StringBuilder();
                 testBuilder.AppendLine(

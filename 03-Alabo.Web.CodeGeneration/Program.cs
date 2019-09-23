@@ -1,10 +1,10 @@
-﻿using Alabo.Schedules.Job;
+﻿using System.Threading.Tasks;
+using Alabo.Schedules.Job;
 using Alabo.Web.CodeGeneration.EntityCode;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using System.Threading.Tasks;
 
-namespace Alabo.Web.TaskShell {
+namespace Alabo.Web.CodeGeneration {
 
     public class Program {
 

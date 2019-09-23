@@ -1,13 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using System;
+﻿using System;
 using Alabo.App.Core.Api;
 using Alabo.App.Core.ApiStore;
-using Alabo.App.Core.Tasks;
 using Alabo.Apps;
 using Alabo.Datas.Ef;
 using Alabo.Datas.UnitOfWorks;
@@ -19,8 +12,14 @@ using Alabo.Runtime;
 using Alabo.Tenants.Extensions;
 using Alabo.Web.Extensions;
 using Alabo.Web.Mvc;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Alabo.Web.TaskShell {
+namespace Alabo.Web.CodeGeneration {
 
     /// <summary>
     /// startup

@@ -4,7 +4,7 @@ using System.Text;
 using Alabo.Core.Files;
 using Alabo.Exceptions;
 
-namespace Alabo.Test.Generation.CodeTemplate {
+namespace Alabo.Web.CodeGeneration.EntityCode.Templates {
 
     public static class ApiControllerTemplate {
 
@@ -15,7 +15,7 @@ namespace Alabo.Test.Generation.CodeTemplate {
         ///     生成服务接口，与服务方法
         /// </summary>
         /// <param name="type"></param>
-        public static void CreateApiController(Type type, string idType, string projectName = "zkcloudv11s") {
+        public static void CreateApiController(Type type, string idType, string entityPath) {
             //  type = typeof(WidgetHistory);
             //if (type.BaseType.FullName != typeof(MongoEntity).FullName) throw new ValidException("非Mongodb实体方法，不支持服务方法生成");
 
@@ -24,8 +24,7 @@ namespace Alabo.Test.Generation.CodeTemplate {
             }
 
             var testBuilder = new StringBuilder();
-            var filePath = BaseTemplate.GetFilePath(type, "Controllers").Replace("Domain", "").Replace("Domains", "")
-                .Replace(projectName, "");
+            var filePath = BaseTemplate.GetFilePath(type, "Controllers", entityPath);
             DirectoryHelper.CreateIfNotExists(filePath);
             var fileName = filePath + $"\\Api{type.Name}Controller.cs";
             if (!File.Exists(fileName)) {

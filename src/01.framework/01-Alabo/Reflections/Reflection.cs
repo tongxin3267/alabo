@@ -11,6 +11,7 @@ using Alabo.Domains.Services;
 using Alabo.Helpers;
 using Alabo.Runtime;
 using Convert = Alabo.Helpers.Convert;
+using String = System.String;
 
 namespace Alabo.Reflections {
 

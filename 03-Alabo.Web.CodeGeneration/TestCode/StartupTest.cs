@@ -1,8 +1,4 @@
-﻿using Alabo.App.Core.Admin.Domain.Services;
-using Alabo.App.Core.LightApps.Domain.Services;
-using Alabo.Extensions;
-using Alabo.Linq.Dynamic;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,10 +6,14 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using Alabo.App.Core.Admin.Domain.Services;
+using Alabo.App.Core.LightApps.Domain.Services;
+using Alabo.Extensions;
 using Alabo.Helpers;
+using Alabo.Linq.Dynamic;
 using File = System.IO.File;
 
-namespace Alabo.Test.Generation {
+namespace Alabo.Web.CodeGeneration.TestCode {
 
     /// <summary>
     ///     代码生成
