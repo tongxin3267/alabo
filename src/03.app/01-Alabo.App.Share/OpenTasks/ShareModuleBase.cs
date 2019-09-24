@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Core.Common.Domain.Services;
+﻿using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.Tasks.Domain.Enums;
@@ -9,18 +6,16 @@ using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Open.Share.Domain.Enums;
 using Alabo.App.Open.Tasks.Base;
 using Alabo.App.Open.Tasks.Parameter;
 using Alabo.App.Open.Tasks.Result;
-using Alabo.App.Shop.Order.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Entities.Extensions;
-using Alabo.App.Shop.Order.Domain.Services;
-using Alabo.App.Shop.Product.Domain.Services;
 using Alabo.Core.Enums.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Open.Tasks {
@@ -145,60 +140,60 @@ namespace Alabo.App.Open.Tasks {
                 }
             }
 
-            // 触发类型为商城购物
+            // TODO 2019年9月24日 触发类型为商城购物
             if (TriggerType == TriggerType.Order) {
-                //获取价格基数
-                if (parameter.TryGetValue("OrderId", out long orderId)) {
-                    // 获取符合条件的商品 价格依赖范围 所有商品 按所属商品线选择 按所属商城选择
-                    var effectiveOrderProductListAll = GetEffectiveOrderProduct(orderId);
-                    if (effectiveOrderProductListAll == null || effectiveOrderProductListAll.Count == 0) {
-                        return ExecuteResult<ITaskResult[]>.Cancel($"没有符合的产品可分润,退出模块.");
-                    }
-                    var effectiveOrderProductList = new List<OrderProduct>();
+                ////获取价格基数
+                //if (parameter.TryGetValue("OrderId", out long orderId)) {
+                //    // 获取符合条件的商品 价格依赖范围 所有商品 按所属商品线选择 按所属商城选择
+                //    var effectiveOrderProductListAll = GetEffectiveOrderProduct(orderId);
+                //    if (effectiveOrderProductListAll == null || effectiveOrderProductListAll.Count == 0) {
+                //        return ExecuteResult<ITaskResult[]>.Cancel($"没有符合的产品可分润,退出模块.");
+                //    }
+                //    var effectiveOrderProductList = new List<OrderProduct>();
 
-                    // 商品单价限制
+                //    // 商品单价限制
 
-                    if (Configuration.PriceLimitType == PriceLimitType.ProductPrice) {
-                        foreach (var productItem in effectiveOrderProductListAll) {
-                            if (productItem.Amount > Configuration.BaseRule.MaxAmount && Configuration.BaseRule.MaxAmount > 0) {
-                                continue;
-                            }
-                            if (productItem.Amount < Configuration.BaseRule.MinimumAmount && Configuration.BaseRule.MinimumAmount > 0) {
-                                continue;
-                            }
-                            effectiveOrderProductList.Add(productItem);
-                        }
-                    } else {
-                        effectiveOrderProductList = effectiveOrderProductListAll;
-                    }
+                //    if (Configuration.PriceLimitType == PriceLimitType.ProductPrice) {
+                //        foreach (var productItem in effectiveOrderProductListAll) {
+                //            if (productItem.Amount > Configuration.BaseRule.MaxAmount && Configuration.BaseRule.MaxAmount > 0) {
+                //                continue;
+                //            }
+                //            if (productItem.Amount < Configuration.BaseRule.MinimumAmount && Configuration.BaseRule.MinimumAmount > 0) {
+                //                continue;
+                //            }
+                //            effectiveOrderProductList.Add(productItem);
+                //        }
+                //    } else {
+                //        effectiveOrderProductList = effectiveOrderProductListAll;
+                //    }
 
-                    //如果价格模式为销售价，则触发金额为有效的商品实际售价之和
-                    if (Configuration.ProductRule.AmountType == PriceType.Price) {
-                        // 根据实际支付方式获取价格 （PaymentAmount为人民币支付的价格）
-                        BaseFenRunAmount = effectiveOrderProductList.Sum(e => e.PaymentAmount);
-                    }
-                    //如果价格模式为分润价，则触发金额为有效的商品分润价之和
-                    if (Configuration.ProductRule.AmountType == PriceType.FenRun) {
-                        BaseFenRunAmount = effectiveOrderProductList.Sum(e => e.FenRunAmount);
-                    }
-                    //如果价格模式为商品数 ：有效商品数量之和
-                    if (Configuration.ProductRule.AmountType == PriceType.ProductNum) {
-                        BaseFenRunAmount = effectiveOrderProductList.Sum(e => e.Count);
-                    }
-                    //如果价格模式为商品数 ：有效商品数量之和
-                    if (Configuration.ProductRule.AmountType == PriceType.OrderNum) {
-                        BaseFenRunAmount = 1;
-                    }
-                    //如果价格模式为服务费
-                    if (Configuration.ProductRule.AmountType == PriceType.OrderFeeAmount) {
-                        BaseFenRunAmount = effectiveOrderProductList.Sum(e => e.OrderProductExtension?.OrderAmount?.FeeAmount).ConvertToDecimal();
-                    }
-                }
+                //    //如果价格模式为销售价，则触发金额为有效的商品实际售价之和
+                //    if (Configuration.ProductRule.AmountType == PriceType.Price) {
+                //        // 根据实际支付方式获取价格 （PaymentAmount为人民币支付的价格）
+                //        BaseFenRunAmount = effectiveOrderProductList.Sum(e => e.PaymentAmount);
+                //    }
+                //    //如果价格模式为分润价，则触发金额为有效的商品分润价之和
+                //    if (Configuration.ProductRule.AmountType == PriceType.FenRun) {
+                //        BaseFenRunAmount = effectiveOrderProductList.Sum(e => e.FenRunAmount);
+                //    }
+                //    //如果价格模式为商品数 ：有效商品数量之和
+                //    if (Configuration.ProductRule.AmountType == PriceType.ProductNum) {
+                //        BaseFenRunAmount = effectiveOrderProductList.Sum(e => e.Count);
+                //    }
+                //    //如果价格模式为商品数 ：有效商品数量之和
+                //    if (Configuration.ProductRule.AmountType == PriceType.OrderNum) {
+                //        BaseFenRunAmount = 1;
+                //    }
+                //    //如果价格模式为服务费
+                //    if (Configuration.ProductRule.AmountType == PriceType.OrderFeeAmount) {
+                //        BaseFenRunAmount = effectiveOrderProductList.Sum(e => e.OrderProductExtension?.OrderAmount?.FeeAmount).ConvertToDecimal();
+                //    }
+                //}
 
-                OrderId = orderId;
-                if (BaseFenRunAmount <= 0) {
-                    return ExecuteResult<ITaskResult[]>.Cancel($"分润基数价格获取为0. BaseFenRunAmount={BaseFenRunAmount},订单id为{OrderId}");
-                }
+                //OrderId = orderId;
+                //if (BaseFenRunAmount <= 0) {
+                //    return ExecuteResult<ITaskResult[]>.Cancel($"分润基数价格获取为0. BaseFenRunAmount={BaseFenRunAmount},订单id为{OrderId}");
+                //}
             }
 
             // 触发类型为内部连锁
@@ -228,9 +223,10 @@ namespace Alabo.App.Open.Tasks {
             if (shareOrder == null) {
                 return ExecuteResult<ITaskResult[]>.Fail("分润订单未找到.");
             }
-            if (shareOrder.Status != ShareOrderStatus.Pending) {
-                return ExecuteResult<ITaskResult[]>.Fail("分润订单原生查询，状态不正常.");
-            }
+            // TODO 2019年9月24日 重构 商城模式
+            //if (shareOrder.Status != ShareOrderStatus.Pending) {
+            //    return ExecuteResult<ITaskResult[]>.Fail("分润订单原生查询，状态不正常.");
+            //}
 
             var teamConfig = Resolve<IAutoConfigService>().GetValue<TeamConfig>();
             this.TeamLevel = teamConfig.TeamLevel;
@@ -354,48 +350,48 @@ namespace Alabo.App.Open.Tasks {
             return resultList;
         }
 
-        /// <summary>
-        /// 获取商品有效范围
-        /// </summary>
-        /// <param name="OrderId">The order identifier.</param>
+        ///// <summary>
+        ///// TODO 2019年9月24日 重构 获取商品有效范围
+        ///// </summary>
+        ///// <param name="OrderId">The order identifier.</param>
 
-        protected List<OrderProduct> GetEffectiveOrderProduct(long OrderId) {
-            // 所有符合条件的订单商品
-            var orderProductList = Alabo.Helpers.Ioc.Resolve<IOrderProductService>().GetList(e => e.OrderId == OrderId).ToList();
-            orderProductList.ForEach(r => {
-                r.OrderProductExtension = r.Extension.DeserializeJson<OrderProductExtension>();
-            });
-            // 所有服务条件的商品Id
-            var productIds = orderProductList.Select(r => r.ProductId).Distinct().ToList();
-            //如果商品范围为:所有商品，则直接返回所有商品
-            if (Configuration.ProductRule.ProductModel == ProductModelType.All) {
-                return orderProductList;
-            }
-            // 如果商品范围为：产品线，则返回产品线商品
-            if (Configuration.ProductRule.ProductModel == ProductModelType.ProductLine) {
-                //检查是否符合商品限制要求
-                if (!string.IsNullOrWhiteSpace(Configuration.ProductRule.ProductLines)) {
-                    // 获取符合条件的产品线
-                    var limitProductIdArray = Configuration.ProductRule.ProductLines.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Where(e => e.IsNumber()).Select(e => Convert.ToInt64(e)).ToArray();
-                    var productIdlist = Alabo.Helpers.Ioc.Resolve<IGoodsLineService>().GetProductIds(limitProductIdArray.ToList());
-                    orderProductList = orderProductList.Where(e => productIdlist.Contains(e.ProductId)).ToList();
-                    return orderProductList;
-                } else {
-                    return null;
-                }
-            }
-            //如果商品范围为:按所属商城选择 ，则直接返回所有商品
-            if (Configuration.ProductRule.ProductModel == ProductModelType.ShoppingMall) {
-                if (!Configuration.ProductRule.PriceStyleId.IsGuidNullOrEmpty()) {
-                    var productMallIds = Alabo.Helpers.Ioc.Resolve<IProductService>().GetList(r => (r.PriceStyleId == Configuration.ProductRule.PriceStyleId) && productIds.Contains(r.Id)).Select(e => e.Id).ToList();
-                    orderProductList = orderProductList.Where(e => productMallIds.Contains(e.ProductId)).ToList();
-                    return orderProductList;
-                }
-                return null;
-            }
+        //protected List<OrderProduct> GetEffectiveOrderProduct(long OrderId) {
+        //    // 所有符合条件的订单商品
+        //    var orderProductList = Alabo.Helpers.Ioc.Resolve<IOrderProductService>().GetList(e => e.OrderId == OrderId).ToList();
+        //    orderProductList.ForEach(r => {
+        //        r.OrderProductExtension = r.Extension.DeserializeJson<OrderProductExtension>();
+        //    });
+        //    // 所有服务条件的商品Id
+        //    var productIds = orderProductList.Select(r => r.ProductId).Distinct().ToList();
+        //    //如果商品范围为:所有商品，则直接返回所有商品
+        //    if (Configuration.ProductRule.ProductModel == ProductModelType.All) {
+        //        return orderProductList;
+        //    }
+        //    // 如果商品范围为：产品线，则返回产品线商品
+        //    if (Configuration.ProductRule.ProductModel == ProductModelType.ProductLine) {
+        //        //检查是否符合商品限制要求
+        //        if (!string.IsNullOrWhiteSpace(Configuration.ProductRule.ProductLines)) {
+        //            // 获取符合条件的产品线
+        //            var limitProductIdArray = Configuration.ProductRule.ProductLines.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Where(e => e.IsNumber()).Select(e => Convert.ToInt64(e)).ToArray();
+        //            var productIdlist = Alabo.Helpers.Ioc.Resolve<IGoodsLineService>().GetProductIds(limitProductIdArray.ToList());
+        //            orderProductList = orderProductList.Where(e => productIdlist.Contains(e.ProductId)).ToList();
+        //            return orderProductList;
+        //        } else {
+        //            return null;
+        //        }
+        //    }
+        //    //如果商品范围为:按所属商城选择 ，则直接返回所有商品
+        //    if (Configuration.ProductRule.ProductModel == ProductModelType.ShoppingMall) {
+        //        if (!Configuration.ProductRule.PriceStyleId.IsGuidNullOrEmpty()) {
+        //            var productMallIds = Alabo.Helpers.Ioc.Resolve<IProductService>().GetList(r => (r.PriceStyleId == Configuration.ProductRule.PriceStyleId) && productIds.Contains(r.Id)).Select(e => e.Id).ToList();
+        //            orderProductList = orderProductList.Where(e => productMallIds.Contains(e.ProductId)).ToList();
+        //            return orderProductList;
+        //        }
+        //        return null;
+        //    }
 
-            return orderProductList;
-        }
+        //    return orderProductList;
+        //}
 
         /// <summary>
         /// 校验会员某奖金最低剩余额度

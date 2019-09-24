@@ -1,17 +1,17 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Linq;
-using Alabo.App.Core.Common.Domain.Services;
+﻿using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Finance.Domain.Entities;
 using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.Tasks;
 using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Share.Domain.Services;
 using Alabo.App.Open.Tasks.Parameter;
 using Alabo.Core.Enums.Enum;
-using RewardModel = Alabo.App.Open.Share.Domain.Entities.Reward;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Linq;
+using Alabo.App.Share.Share.Domain.Services;
+using Reward = Alabo.App.Share.Share.Domain.Entities.Reward;
 
 namespace Alabo.App.Open.Tasks.Result {
 
@@ -41,7 +41,7 @@ namespace Alabo.App.Open.Tasks.Result {
             }
 
             var userAccount = Alabo.Helpers.Ioc.Resolve<IAccountService>().GetAccount(Parameter.ReceiveUserId, moneyType.Id);
-            var invoiceReward = new RewardModel() {
+            var invoiceReward = new Reward() {
                 AfterAmount = userAccount.Amount,
                 CreateTime = currentTime,
 

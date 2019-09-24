@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Share.Domain.Enums;
+﻿using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.App.Open.Tasks.Base;
 using Alabo.App.Share.Share.Domain.Enums;
 using Alabo.Core.Enums.Enum;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.App.Open.Tasks.Parameter {
 
+    using Alabo.App.Core.Tasks.Domain.Enums;
     using Core.Common.Domain.Services;
     using Core.Finance.Domain.CallBacks;
-    using Alabo.App.Core.Tasks.Domain.Enums;
     using User = Alabo.App.Core.User.Domain.Entities.User;
 
     public class FenRunResultParameter {
@@ -183,7 +182,7 @@ namespace Alabo.App.Open.Tasks.Parameter {
                 ModuleName = "招商奖",//读取配置的的名称，未实现
 
                 //分润记录信息
-                ShareStatus = Share.Domain.Enums.FenRunStatus.Success,
+                ShareStatus = FenRunStatus.Success,
                 ShareLevel = shareLevel,
                 UserRemark = string.Empty,
                 Summary = summary,

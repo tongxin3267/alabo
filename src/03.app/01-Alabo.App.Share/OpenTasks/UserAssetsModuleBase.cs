@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Core.Tasks.Domain.Entities;
+﻿using Alabo.App.Core.Tasks.Domain.Entities;
 using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Core.UserType.Domain.Services;
 using Alabo.App.Open.Tasks.Base;
 using Alabo.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Open.Tasks {
@@ -128,18 +127,18 @@ namespace Alabo.App.Open.Tasks {
                             }
                         }
                     } else {
-                        //检查用户类型
-                        var userType = Alabo.Helpers.Ioc.Resolve<IUserTypeService>().GetSingle(ShareOrderUser.Id, Configuration.OrderUser.OrderUserTypeId);
-                        if (userType == null) {
-                            return ExecuteResult<ITaskResult[]>.Cancel($"user with id {ShareOrder.UserId} has not  userType:{Configuration.OrderUser.OrderUserTypeId}, exit module"); //该会员不存在该类型的用户类型
-                        } else {
-                            //检查用户类型等级
-                            if (Configuration.OrderUser.IsLimitOrderUserGrade) {
-                                if (Configuration.OrderUser.OrderUserGradeId != userType.GradeId) {
-                                    return ExecuteResult<ITaskResult[]>.Cancel($"userType with UserId {ShareOrder.UserId} not match UserTypeGradeid:{Configuration.OrderUser.OrderUserTypeId}, exit module"); //会员等级不符合grade要求，直接退出
-                                }
-                            }
-                        }
+                        //TODO 2019年9月24日 检查用户类型
+                        //var userType = Alabo.Helpers.Ioc.Resolve<IUserTypeService>().GetSingle(ShareOrderUser.Id, Configuration.OrderUser.OrderUserTypeId);
+                        //if (userType == null) {
+                        //    return ExecuteResult<ITaskResult[]>.Cancel($"user with id {ShareOrder.UserId} has not  userType:{Configuration.OrderUser.OrderUserTypeId}, exit module"); //该会员不存在该类型的用户类型
+                        //} else {
+                        //    //检查用户类型等级
+                        //    if (Configuration.OrderUser.IsLimitOrderUserGrade) {
+                        //        if (Configuration.OrderUser.OrderUserGradeId != userType.GradeId) {
+                        //            return ExecuteResult<ITaskResult[]>.Cancel($"userType with UserId {ShareOrder.UserId} not match UserTypeGradeid:{Configuration.OrderUser.OrderUserTypeId}, exit module"); //会员等级不符合grade要求，直接退出
+                        //        }
+                        //    }
+                        //}
                     }
                 } else {
                     return ExecuteResult<ITaskResult[]>.Cancel($"OrderUserTypeId is null"); //userTypeId 为空
@@ -174,23 +173,22 @@ namespace Alabo.App.Open.Tasks {
                         //如果是会员，检查会员等级
                         if (Configuration.ShareUser.IsLimitShareUserGrade) {
                             if (Configuration.ShareUser.ShareUserGradeId != _shareUser.GradeId) {
-                               
                                 return ExecuteResult<ITaskResult[]>.Fail($"user with id {userId} not match UserGradeid:{Configuration.ShareUser.ShareUserTypeId}, exit module"); //会员等级不符合grade要求，直接退出
                             }
                         }
                     } else {
-                        //检查用户类型
-                        var userType = Alabo.Helpers.Ioc.Resolve<IUserTypeService>().GetSingle(userId, Configuration.ShareUser.ShareUserTypeId);
-                        if (userType == null) {
-                            return ExecuteResult<ITaskResult[]>.Fail($"share user with id {userId} has not  userType:{Configuration.ShareUser.ShareUserTypeId}, exit module"); //该会员不存在该类型的用户类型
-                        } else {
-                            //检查用户类型等级
-                            if (Configuration.ShareUser.IsLimitShareUserGrade) {
-                                if (Configuration.ShareUser.ShareUserGradeId != userType.GradeId) {
-                                    return ExecuteResult<ITaskResult[]>.Fail($"share userType with UserId {userId} not match UserTypeGradeid:{Configuration.ShareUser.ShareUserTypeId}, exit module"); //会员等级不符合grade要求，直接退出
-                                }
-                            }
-                        }
+                        //TODO 2019年9月24日 检查用户类型
+                        //var userType = Alabo.Helpers.Ioc.Resolve<IUserTypeService>().GetSingle(userId, Configuration.ShareUser.ShareUserTypeId);
+                        //if (userType == null) {
+                        //    return ExecuteResult<ITaskResult[]>.Fail($"share user with id {userId} has not  userType:{Configuration.ShareUser.ShareUserTypeId}, exit module"); //该会员不存在该类型的用户类型
+                        //} else {
+                        //    //检查用户类型等级
+                        //    if (Configuration.ShareUser.IsLimitShareUserGrade) {
+                        //        if (Configuration.ShareUser.ShareUserGradeId != userType.GradeId) {
+                        //            return ExecuteResult<ITaskResult[]>.Fail($"share userType with UserId {userId} not match UserTypeGradeid:{Configuration.ShareUser.ShareUserTypeId}, exit module"); //会员等级不符合grade要求，直接退出
+                        //        }
+                        //    }
+                        //}
                     }
                 } else {
                     return ExecuteResult<ITaskResult[]>.Fail($"ShareUserTypeId is null"); //userTypeId 为空

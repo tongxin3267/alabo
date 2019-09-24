@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Core.Tasks.Extensions;
+﻿using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Open.Tasks.Base;
 using Alabo.App.Open.Tasks.Modules;
-using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.App.Shop.Store.Domain.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Open.Tasks.Configs.Store {
@@ -43,35 +42,37 @@ namespace Alabo.App.Open.Tasks.Configs.Store {
                 return baseResult;
             }
 
+            //TODO 2019年9月24日 供应商订单重构
             // 同时下多个供应商订单的时候，分开
-            var order = Resolve<IOrderService>().GetSingle(r => r.Id == OrderId);
-            if (order == null) {
-                return ExecuteResult<ITaskResult[]>.Cancel("订单不存在");
-            }
+            //var order = Resolve<IOrderService>().GetSingle(r => r.Id == OrderId);
+            //if (order == null) {
+            //    return ExecuteResult<ITaskResult[]>.Cancel("订单不存在");
+            //}
 
-            var store = Resolve<IStoreService>().GetSingle(r => r.Id == order.StoreId);
-            if (store == null) {
-                return ExecuteResult<ITaskResult[]>.Cancel("店铺不存在");
-            }
+            //var store = Resolve<IStoreService>().GetSingle(r => r.Id == order.StoreId);
+            //if (store == null) {
+            //    return ExecuteResult<ITaskResult[]>.Cancel("店铺不存在");
+            //}
 
-            var storeUser = Resolve<IUserService>().GetNomarlUser(store.UserId);
-            if (storeUser == null) {
-                return ExecuteResult<ITaskResult[]>.Cancel("店铺用户不存在");
-            }
-            var storeParentUser = Resolve<IUserService>().GetNomarlUser(storeUser.ParentId);
-            if (storeParentUser == null) {
-                return ExecuteResult<ITaskResult[]>.Cancel("店铺推荐用户不存在");
-            }
-            IList<ITaskResult> resultList = new List<ITaskResult>();
+            //var storeUser = Resolve<IUserService>().GetNomarlUser(store.UserId);
+            //if (storeUser == null) {
+            //    return ExecuteResult<ITaskResult[]>.Cancel("店铺用户不存在");
+            //}
+            //var storeParentUser = Resolve<IUserService>().GetNomarlUser(storeUser.ParentId);
+            //if (storeParentUser == null) {
+            //    return ExecuteResult<ITaskResult[]>.Cancel("店铺推荐用户不存在");
+            //}
+            //IList<ITaskResult> resultList = new List<ITaskResult>();
 
-            decimal shareAmount = 0;
-            base.GetShareUser(storeParentUser.Id, out var shareUser); //从基类获取分润用户
+            //decimal shareAmount = 0;
+            //base.GetShareUser(storeParentUser.Id, out var shareUser); //从基类获取分润用户
 
-            var ratio = Convert.ToDecimal(Ratios[0]);
-            shareAmount = base.BaseFenRunAmount * ratio; //分润金额
-            CreateResultList(shareAmount, base.ShareOrderUser, shareUser, parameter, Configuration, resultList);
+            //var ratio = Convert.ToDecimal(Ratios[0]);
+            //shareAmount = base.BaseFenRunAmount * ratio; //分润金额
+            //CreateResultList(shareAmount, base.ShareOrderUser, shareUser, parameter, Configuration, resultList);
 
-            return ExecuteResult<ITaskResult[]>.Success(resultList.ToArray());
+            // return ExecuteResult<ITaskResult[]>.Success(resultList.ToArray());
+            return null;
         }
     }
 }

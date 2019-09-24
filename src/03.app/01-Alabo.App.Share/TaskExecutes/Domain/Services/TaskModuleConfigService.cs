@@ -1,29 +1,25 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Alabo.App.Core.Tasks.ResultModel;
+using Alabo.Datas.UnitOfWorks;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Services;
+using Alabo.Extensions;
+using Alabo.Reflections;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using Alabo.App.Core.Reports.Domain.Services;
-using Alabo.App.Core.Reports.Model;
-using Alabo.App.Core.Tasks.Clients;
-using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Services;
-using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Configuration;
 using ZKCloud.Open.ApiBase.Services;
 using ZKCloud.Open.Share.Models;
 using ZKCloud.Open.Share.Services;
-using Alabo.Reflections;
 
 namespace Alabo.App.Core.Tasks.Domain.Services {
 
     public class TaskModuleConfigService : ServiceBase, ITaskModuleConfigService {
         private static readonly string _shareModuleCacheKey = "ShareModuleCacheKeyList";
-        private IOpenApiClient _openApiClient;
         private RestClientConfiguration _restClientConfiugration;
         private IServerAuthenticationManager _serverAuthenticationManager;
         private IShareApiClient _shareApiClient;
@@ -35,17 +31,18 @@ namespace Alabo.App.Core.Tasks.Domain.Services {
             ObjectCache.Remove(_shareModuleCacheKey);
             TaskModuleConfigBaseService(context);
             if (!ObjectCache.TryGet(_shareModuleCacheKey, out IList<ShareModule> shareModuleList)) {
-                var result = _openApiClient.GetShareList(_serverAuthenticationManager.Token.Token);
-                shareModuleList = result.Result;
+                //添加统计 TODO 重构注释 分润维度获取
+                //var result = _openApiClient.GetShareList(_serverAuthenticationManager.Token.Token);
+                // shareModuleList = result.Result;
                 if (shareModuleList != null) {
                     ObjectCache.Set(_shareModuleCacheKey, shareModuleList);
-                    //添加统计
-                    var shareModuleReports = new ShareModuleReports {
-                        ConfigCount = shareModuleList.Count,
-                        EnableCount = shareModuleList.Count(r => r.IsEnable),
-                        ShareModuleList = shareModuleList.ToJson()
-                    };
-                    Resolve<IReportService>().AddOrUpdate(shareModuleReports);
+
+                    //var shareModuleReports = new ShareModuleReports {
+                    //    ConfigCount = shareModuleList.Count,
+                    //    EnableCount = shareModuleList.Count(r => r.IsEnable),
+                    //    ShareModuleList = shareModuleList.ToJson()
+                    //};
+                    //Resolve<IReportService>().AddOrUpdate(shareModuleReports);
                 }
             }
 
@@ -163,23 +160,24 @@ namespace Alabo.App.Core.Tasks.Domain.Services {
             where TConfiguration : IModuleConfig {
             var attribute = GetModuleAttribute<TModule>();
             CheckTaskModuleAttribute(attribute, typeof(TConfiguration));
+            // TODO 2019年9月24日 重构 维度获取
+            //var shareModuleList = Resolve<IReportService>().GetValue<ShareModuleReports>();
+            //var list = shareModuleList.ShareModuleList.DeserializeJson<List<ShareModule>>().ToList();
 
-            var shareModuleList = Resolve<IReportService>().GetValue<ShareModuleReports>();
-            var list = shareModuleList.ShareModuleList.DeserializeJson<List<ShareModule>>().ToList();
+            //list = list.Where(e => e.ModuleId == attribute.Id && e.IsEnable).ToList();
+            ////return list.Select(e => e.ConfigurationValue.ConvertToModuleConfig<TConfiguration>()).ToList();
+            //var resutList = list.Select(e => e.ConfigValue.ConvertToModuleConfig<TConfiguration>((int)e.Id, e.Name))
+            //    .ToList();
+            //if (!attribute.IsSupportMultipleConfiguration) {
+            //    var singleList = new List<TConfiguration>
+            //    {
+            //        resutList.FirstOrDefault()
+            //    };
+            //    resutList = singleList;
+            //}
 
-            list = list.Where(e => e.ModuleId == attribute.Id && e.IsEnable).ToList();
-            //return list.Select(e => e.ConfigurationValue.ConvertToModuleConfig<TConfiguration>()).ToList();
-            var resutList = list.Select(e => e.ConfigValue.ConvertToModuleConfig<TConfiguration>((int)e.Id, e.Name))
-                .ToList();
-            if (!attribute.IsSupportMultipleConfiguration) {
-                var singleList = new List<TConfiguration>
-                {
-                    resutList.FirstOrDefault()
-                };
-                resutList = singleList;
-            }
-
-            return resutList;
+            //return resutList;
+            return null;
         }
 
         private TaskModuleAttribute GetModuleAttribute<T>()
@@ -214,7 +212,6 @@ namespace Alabo.App.Core.Tasks.Domain.Services {
             _serverAuthenticationManager = context.RequestServices.GetService<IServerAuthenticationManager>();
             _restClientConfiugration = context.RequestServices.GetService<RestClientConfiguration>();
             _shareApiClient = new ShareApiClient(_restClientConfiugration.OpenApiUrl);
-            _openApiClient = new OpenApiClient(_restClientConfiugration.OpenApiUrl);
         }
     }
 }

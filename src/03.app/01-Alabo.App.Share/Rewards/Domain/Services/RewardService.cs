@@ -1,13 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Alabo.App.Core.Common.Domain.Services;
+﻿using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Reports.Domain.Services;
-using Alabo.App.Core.Reports.Model;
 using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.App.Core.User;
@@ -20,10 +12,6 @@ using Alabo.App.Share.Share.Domain.Dto;
 using Alabo.App.Share.Share.Domain.Enums;
 using Alabo.App.Share.Share.Domain.Repositories;
 using Alabo.App.Share.Share.ViewModels;
-using Alabo.App.Share.Tasks;
-using Alabo.App.Share.Tasks.Base;
-using Alabo.App.Shop.Product.Domain.CallBacks;
-using Alabo.App.Shop.Product.Domain.Services;
 using Alabo.Core.Enums.Enum;
 using Alabo.Data.Things.Goodss.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
@@ -33,10 +21,16 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Mapping;
-using ZKCloud.Open.Share.Models;
 using Alabo.Reflections;
 using Alabo.Runtime;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using ZKCloud.Open.Share.Models;
 
 namespace Alabo.App.Share.Share.Domain.Services {
 
@@ -236,7 +230,9 @@ namespace Alabo.App.Share.Share.Domain.Services {
             var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
             var userTypes = Resolve<IAutoConfigService>().GetList<UserTypeConfig>();
             var productLines = Resolve<IGoodsLineService>().GetList();
-            var shopMallConfigs = Resolve<IAutoConfigService>().GetList<PriceStyleConfig>();
+
+            // TODO 2019年9月24日 重构 商城模式
+            //   var shopMallConfigs = Resolve<IAutoConfigService>().GetList<PriceStyleConfig>();
 
             var result = new List<ViewShareModuleList>();
             foreach (var item in moduleList) {
@@ -300,14 +296,16 @@ namespace Alabo.App.Share.Share.Domain.Services {
                          .Where(e => e.IsNumber())
                          .Select(e => Convert.ToInt64(e))
                          .ToArray();
-                        var lines = productLines.Where(r => limitProductIdArray.Contains(r.Id));
-                        lines.Foreach(r => {
-                            viewShare.ProductRangIntro += r.Name + " ";
-                        });
+                        // TODO 2019年9月24日 重构 商城模式
+                        //var lines = productLines.Where(r => limitProductIdArray.Contains(r.Id));
+                        //lines.Foreach(r => {
+                        //    viewShare.ProductRangIntro += r.Name + " ";
+                        //});
                     }
                     if (shareBaseConfig.ProductRule.ProductModel == ProductModelType.ShoppingMall) {
-                        var priceStyle = shopMallConfigs.FirstOrDefault(r => r.Id == shareBaseConfig.ProductRule.PriceStyleId);
-                        viewShare.ProductRangIntro += priceStyle?.Name;
+                        // TODO 2019年9月24日 重构 商城模式
+                        //var priceStyle = shopMallConfigs.FirstOrDefault(r => r.Id == shareBaseConfig.ProductRule.PriceStyleId);
+                        // viewShare.ProductRangIntro += priceStyle?.Name;
                     }
                 }
 

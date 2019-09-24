@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Alabo.App.Core.Common.Domain.Entities;
+﻿using Alabo.App.Core.Common.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Core.UserType.Domain.Services;
 using Alabo.App.Open.Tasks.Base;
 using Alabo.App.Open.Tasks.Modules;
-using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.Core.Enums.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
-using ZKCloud.Open.ApiBase.Models;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using ZKCloud.Open.ApiBase.Models;
 using ICityService = Alabo.App.Agent.Citys.Domain.Services.ICityService;
 
 namespace Alabo.App.Open.Tasks.Configs.Area {
@@ -61,79 +59,81 @@ namespace Alabo.App.Open.Tasks.Configs.Area {
             if (baseResult.Status != ResultStatus.Success) {
                 return ExecuteResult<ITaskResult[]>.Cancel(baseResult.Message);
             }
-            // 如果触发方式是订单类型，用户触发和其他触发后续支出
-            long? cityRegionId = 0; // 城市区域代理Id
+            //TODO 2019年9月24日 城市代理商分润
+            //// 如果触发方式是订单类型，用户触发和其他触发后续支出
+            //long? cityRegionId = 0; // 城市区域代理Id
 
-            // 20190603: TriggerType.Order || TriggerType.Other
-            if (base.Configuration.TriggerType == TriggerType.Order
-                || base.Configuration.TriggerType == TriggerType.Other) {
-                var order = Resolve<IOrderService>().GetSingle(ShareOrder.EntityId);
-                if (order == null) {
-                    return ExecuteResult<ITaskResult[]>.Cancel("未找到订单");
-                }
-                var region = new Region(); // 区域
-                // 按收货地址
-                if (base.Configuration.AddressLockType == AddressLockType.OrderAddress) {
-                    var userAddress = Resolve<IUserAddressService>().GetSingle(r => r.Id == order.AddressId.ToObjectId());
-                    var regStr = userAddress.RegionId.ToString();
-                    if (regStr.Length >= 4) {
-                        cityRegionId = regStr.Substring(0, 4).ToInt64();
-                    }
-                }
+            //// 20190603: TriggerType.Order || TriggerType.Other
+            //if (base.Configuration.TriggerType == TriggerType.Order
+            //    || base.Configuration.TriggerType == TriggerType.Other) {
+            //    var order = Resolve<IOrderService>().GetSingle(ShareOrder.EntityId);
+            //    if (order == null) {
+            //        return ExecuteResult<ITaskResult[]>.Cancel("未找到订单");
+            //    }
+            //    var region = new Region(); // 区域
+            //    // 按收货地址
+            //    if (base.Configuration.AddressLockType == AddressLockType.OrderAddress) {
+            //        var userAddress = Resolve<IUserAddressService>().GetSingle(r => r.Id == order.AddressId.ToObjectId());
+            //        var regStr = userAddress.RegionId.ToString();
+            //        if (regStr.Length >= 4) {
+            //            cityRegionId = regStr.Substring(0, 4).ToInt64();
+            //        }
+            //    }
 
-                // 按备案地址
-                if (base.Configuration.AddressLockType == AddressLockType.UserInfoAddress) {
-                    var orderUser = Resolve<IUserService>().GetUserDetail(order.UserId);
-                    cityRegionId = Resolve<IRegionService>().GetCityId((orderUser.Detail?.RegionId).ConvertToLong());
-                }
+            //    // 按备案地址
+            //    if (base.Configuration.AddressLockType == AddressLockType.UserInfoAddress) {
+            //        var orderUser = Resolve<IUserService>().GetUserDetail(order.UserId);
+            //        cityRegionId = Resolve<IRegionService>().GetCityId((orderUser.Detail?.RegionId).ConvertToLong());
+            //    }
 
-                // 按发货人地址分润
-                if (base.Configuration.AddressLockType == AddressLockType.DeliveryUserAddress) {
-                    var orderUserDetail = Resolve<IUserDetailService>().GetSingle(r => r.UserId == order.DeliverUserId);
-                    if (orderUserDetail != null) {
-                        cityRegionId = Resolve<IRegionService>().GetCityId(orderUserDetail.RegionId)
-                            .ConvertToLong();
-                    }
-                }
-            }
+            //    // 按发货人地址分润
+            //    if (base.Configuration.AddressLockType == AddressLockType.DeliveryUserAddress) {
+            //        var orderUserDetail = Resolve<IUserDetailService>().GetSingle(r => r.UserId == order.DeliverUserId);
+            //        if (orderUserDetail != null) {
+            //            cityRegionId = Resolve<IRegionService>().GetCityId(orderUserDetail.RegionId)
+            //                .ConvertToLong();
+            //        }
+            //    }
+            //}
 
-            // 获取城市代理
-            IList<ITaskResult> resultList = new List<ITaskResult>();
-            //var cityUserType = Resolve<IUserTypeService>().GetSingle(r => r.UserTypeId == UserTypeEnum.City.GetFieldId() && r.EntityId == cityRegionId);
-            var cityUserType = Resolve<ICityService>().GetSingle(r => r.RegionId == cityRegionId);
-            if (cityUserType == null) {
-                return ExecuteResult<ITaskResult[]>.Cancel("该区域的城市代理未找到");
-            }
-            // 推荐关系 一二代
-            var maps = new List<ParentMap> {
-                new ParentMap {
-                    ParentLevel = 1,
-                    UserId = cityUserType.UserId
-                }
-            };
-            if (cityUserType.ParentUserId != 0) {
-                maps.Add(new ParentMap {
-                    ParentLevel = 2,
-                    UserId = cityUserType.ParentUserId
-                });
-            }
-            // 城市代理分润
-            for (var i = 0; i < Ratios.Count; i++) {
-                if (maps.Count < i + 1) {
-                    break;
-                }
-                var item = maps[i];
-                base.GetShareUser(item.UserId, out var shareUser);//从基类获取分润用户
-                if (shareUser == null) {
-                    continue;
-                }
+            //// 获取城市代理
+            //IList<ITaskResult> resultList = new List<ITaskResult>();
+            ////var cityUserType = Resolve<IUserTypeService>().GetSingle(r => r.UserTypeId == UserTypeEnum.City.GetFieldId() && r.EntityId == cityRegionId);
+            //var cityUserType = Resolve<ICityService>().GetSingle(r => r.RegionId == cityRegionId);
+            //if (cityUserType == null) {
+            //    return ExecuteResult<ITaskResult[]>.Cancel("该区域的城市代理未找到");
+            //}
+            //// 推荐关系 一二代
+            //var maps = new List<ParentMap> {
+            //    new ParentMap {
+            //        ParentLevel = 1,
+            //        UserId = cityUserType.UserId
+            //    }
+            //};
+            //if (cityUserType.ParentUserId != 0) {
+            //    maps.Add(new ParentMap {
+            //        ParentLevel = 2,
+            //        UserId = cityUserType.ParentUserId
+            //    });
+            //}
+            //// 城市代理分润
+            //for (var i = 0; i < Ratios.Count; i++) {
+            //    if (maps.Count < i + 1) {
+            //        break;
+            //    }
+            //    var item = maps[i];
+            //    base.GetShareUser(item.UserId, out var shareUser);//从基类获取分润用户
+            //    if (shareUser == null) {
+            //        continue;
+            //    }
 
-                var ratio = Convert.ToDecimal(Ratios[i]);
-                var shareAmount = BaseFenRunAmount * ratio;//分润金额
-                CreateResultList(shareAmount, ShareOrderUser, shareUser, parameter, Configuration, resultList);//构建分润参数
-            }
+            //    var ratio = Convert.ToDecimal(Ratios[i]);
+            //    var shareAmount = BaseFenRunAmount * ratio;//分润金额
+            //    CreateResultList(shareAmount, ShareOrderUser, shareUser, parameter, Configuration, resultList);//构建分润参数
+            //}
 
-            return ExecuteResult<ITaskResult[]>.Success(resultList.ToArray());
+            // return ExecuteResult<ITaskResult[]>.Success(resultList.ToArray());
+            return null;
         }
     }
 }
