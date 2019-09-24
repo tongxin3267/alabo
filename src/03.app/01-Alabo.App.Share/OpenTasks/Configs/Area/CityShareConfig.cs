@@ -39,7 +39,7 @@ namespace Alabo.App.Open.Tasks.Configs.Area {
 
     [TaskModule(Id, ModelName, SortOrder = 909998, FenRunResultType = Core.Tasks.Domain.Enums.FenRunResultType.Price,
         Intro = "市代理分润，根据全国661个城市来划分，一个城市所有的订单都会有分润。可配置市代理分润，推荐市代理分润，市代理见点分润等，配置方式灵活多变"
-       , ConfigurationType = typeof(CityShareConfig), RelationshipType = Core.Tasks.Domain.Enums.RelationshipType.UserTypeRelationship, IsSupportMultipleConfiguration = true)]
+       , ConfigurationType = typeof(CityShareConfig), RelationshipType = RelationshipType.UserTypeRelationship, IsSupportMultipleConfiguration = true)]
     public class CityModule : AssetAllocationShareModuleBase<CityShareConfig> {
         public const string Id = "8e5968e1-77d9-49f3-b849-85064d305821";
 
