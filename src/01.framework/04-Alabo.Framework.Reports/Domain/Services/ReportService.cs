@@ -17,6 +17,7 @@ using Alabo.Reflections;
 using Alabo.Runtime;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.ViewFeatures;
+using Alabo.Framework.Reports;
 
 namespace Alabo.App.Core.Reports.Domain.Services {
 
@@ -27,7 +28,7 @@ namespace Alabo.App.Core.Reports.Domain.Services {
             repository) {
         }
 
-        public void AddOrUpdate<T>(T userReport) where T : class, IReportModel {
+        public void AddOrUpdate<T>(T userReport) where T : class, IReport {
             var report = new Report();
 
             var configProperty = typeof(T).GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
@@ -43,7 +44,7 @@ namespace Alabo.App.Core.Reports.Domain.Services {
         ///     更新配置的值
         /// </summary>
         /// <param name="value"></param>
-        public ServiceResult AddOrUpdate<T>(object value) where T : class, IReportModel {
+        public ServiceResult AddOrUpdate<T>(object value) where T : class, IReport {
             var report = Resolve<IReportService>().GetReport(typeof(T).FullName);
             var typeclassProperty = typeof(T).GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
             if (typeclassProperty == null) {
@@ -125,7 +126,7 @@ namespace Alabo.App.Core.Reports.Domain.Services {
             return report;
         }
 
-        public T GetValue<T>() where T : class, IReportModel {
+        public T GetValue<T>() where T : class, IReport {
             var report = GetReport(typeof(T).FullName);
             if (report == null) {
                 return Activator.CreateInstance(typeof(T)) as T;
@@ -151,7 +152,7 @@ namespace Alabo.App.Core.Reports.Domain.Services {
             if (!ObjectCache.TryGetPublic(cacheKey, out IEnumerable<Type> types)) {
                 //因为遍历所有程序集，速度会有影响
                 types = RuntimeContext.Current.GetPlatformRuntimeAssemblies().SelectMany(a => a.GetTypes()
-                    .Where(t => t.GetInterfaces().Contains(typeof(IReportModel)) && t.FullName.EndsWith("Report")));
+                    .Where(t => t.GetInterfaces().Contains(typeof(IReport)) && t.FullName.EndsWith("Report")));
                 //排序，根据SordOrder从小到大排列
                 types = types.OrderBy(r =>
                     r.GetTypeInfo().GetAttribute<ClassPropertyAttribute>() != null
@@ -192,7 +193,7 @@ namespace Alabo.App.Core.Reports.Domain.Services {
         }
 
         public IEnumerable<SelectListItem> GetList<T>(Func<T, bool> predicate, Func<T, object> textSelector,
-            Func<T, object> valueSelector) where T : class, IReportModel {
+            Func<T, object> valueSelector) where T : class, IReport {
             var report = GetReport(typeof(T).FullName);
             var values = new List<T>();
             if (report != null) {

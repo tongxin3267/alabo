@@ -104,7 +104,7 @@ namespace Alabo.App.Core.Reports.Domain.Repositories {
         public List<object> GetDayCountReport(CountReportInput countReportInput) {
             countReportInput.Condition.EntityType = countReportInput.EntityType;
             var tableName = countReportInput.Condition.GetTableName();
-            var dbContext = Ioc.Resolve<IUserRepository>().RepositoryContext;
+            var dbContext = Ioc.Resolve<IAlaboUserRepository>().RepositoryContext;
 
             var tempSqlWhere = string.Empty;
 
@@ -174,7 +174,7 @@ namespace Alabo.App.Core.Reports.Domain.Repositories {
                 }
             }
 
-            var dbContext = Ioc.Resolve<IUserRepository>().RepositoryContext;
+            var dbContext = Ioc.Resolve<IAlaboUserRepository>().RepositoryContext;
             var sqlCountByDay = $@" select  CONVERT(VARCHAR(100), CreateTime, 23) 日期, count(id) as 全部数量," + tempSqlStatusCount +
                                 @"cast( convert (decimal(18,2),100*cast(count(distinct isnull(id,0)) as float)/cast(((select  count(id) from " + tableName + $@") )as float) ) as varchar)+'%' as 比率
                                 from " + tableName +
@@ -219,7 +219,7 @@ namespace Alabo.App.Core.Reports.Domain.Repositories {
             var strSql = queryResult.Item1;
             var chartCols = queryResult.Item2;
             var chartRows = new List<object>();
-            var dbContext = Ioc.Resolve<IUserRepository>().RepositoryContext;
+            var dbContext = Ioc.Resolve<IAlaboUserRepository>().RepositoryContext;
 
             using (var dr = dbContext.ExecuteDataReader(strSql)) {
                 while (dr.Read()) {
@@ -332,7 +332,7 @@ namespace Alabo.App.Core.Reports.Domain.Repositories {
                 }
             }
 
-            var dbContext = Ioc.Resolve<IUserRepository>().RepositoryContext;
+            var dbContext = Ioc.Resolve<IAlaboUserRepository>().RepositoryContext;
             var sqlCountByDay = $@" select  CONVERT(VARCHAR(100), CreateTime, 23) Day, count(id) as TotalNum," + tempSqlStatusCount + tempSqlStatusRatioCount +
                                 @"cast( convert (decimal(18,2),100*cast(count(distinct isnull(id,0)) as float)/cast(((select  count(id) from " + tableName + $@") )as float) ) as varchar)+'%' as SaleRatio
                                 from " + tableName +
@@ -444,7 +444,7 @@ namespace Alabo.App.Core.Reports.Domain.Repositories {
         /// <param name="EnumName"></param>
         /// <returns></returns>
         public List<CountReportTable> GetCountReportTableWithField(CountReportInput countReport, string EnumName) {
-            var dbContext = Ioc.Resolve<IUserRepository>().RepositoryContext;
+            var dbContext = Ioc.Resolve<IAlaboUserRepository>().RepositoryContext;
             var queryResult = ExeclCountTableSql(countReport, EnumName);
             var strSql = queryResult.Item1;
             var chartCols = queryResult.Item2;
@@ -547,7 +547,7 @@ namespace Alabo.App.Core.Reports.Domain.Repositories {
         /// </summary>
         /// <returns></returns>
         public List<AutoReport> GetSumReport(SumReportInput sumReportInput) {
-            var dbContext = Ioc.Resolve<IUserRepository>().RepositoryContext;
+            var dbContext = Ioc.Resolve<IAlaboUserRepository>().RepositoryContext;
             var queryResult = GetSumReportQuerySql(sumReportInput);
             var strSql = queryResult.Item1;
             var chartCols = queryResult.Item2;
@@ -578,7 +578,7 @@ namespace Alabo.App.Core.Reports.Domain.Repositories {
         /// <param name="EnumName"></param>
         /// <returns></returns>
         public List<SumReportTable> GetSumReportTable(SumReportInput reportInput, string EnumName) {
-            var dbContext = Ioc.Resolve<IUserRepository>().RepositoryContext;
+            var dbContext = Ioc.Resolve<IAlaboUserRepository>().RepositoryContext;
             var queryResult = GetSumTableQuerySql(reportInput, EnumName);
 
             var strSql = queryResult.Item1;
@@ -744,7 +744,7 @@ namespace Alabo.App.Core.Reports.Domain.Repositories {
             singleReportInput.Condition.EntityType = singleReportInput.EntityType;
             var tableName = singleReportInput.Condition.GetTableName();
 
-            var dbContext = Ioc.Resolve<IUserRepository>().RepositoryContext;
+            var dbContext = Ioc.Resolve<IAlaboUserRepository>().RepositoryContext;
             StringBuilder sql = new StringBuilder();
 
             switch (singleReportInput.Style) {

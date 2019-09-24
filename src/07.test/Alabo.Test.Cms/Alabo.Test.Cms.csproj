@@ -14,18 +14,11 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\base\Alabo.App.Agent\Alabo.App.Agent.csproj" />
-    <ProjectReference Include="..\..\base\Alabo.App.Asset\Alabo.App.Asset\Alabo.App.Asset.csproj" />
-    <ProjectReference Include="..\..\base\Alabo.App.Core\Alabo.App.Core.csproj" />
-    <ProjectReference Include="..\..\base\Alabo.App.Job\Alabo.App.Job.csproj" />
-    <ProjectReference Include="..\..\base\Alabo.App.Share\Alabo.App.Share.csproj" />
-    <ProjectReference Include="..\..\core\Alabo.Core\Alabo.Core.csproj" />
-    <ProjectReference Include="..\..\core\Alabo\Alabo.csproj" />
-    <ProjectReference Include="..\..\industry\Alabo.App.Cms\Alabo.App.Cms.csproj" />
-    <ProjectReference Include="..\..\industry\Alabo.App.Market\Alabo.App.Market.csproj" />
-    <ProjectReference Include="..\..\industry\Alabo.App.Offline\Alabo.App.Offline.csproj" />
-    <ProjectReference Include="..\..\industry\Alabo.App.Shop\Alabo.App.Shop.csproj" />
-    <ProjectReference Include="..\Alabo.Test\Alabo.Test.csproj" />
+    <ProjectReference Include="..\..\01.framework\01-Alabo\01-Alabo.csproj" />
+    <ProjectReference Include="..\..\02.data\01-Alabo.Data.People\01-Alabo.Data.People.csproj" />
+    <ProjectReference Include="..\..\03.app\01-Alabo.App.Share\01-Alabo.App.Share.csproj" />
+    <ProjectReference Include="..\..\04.industry\01-Alabo.Industry.Cms\01-Alabo.Industry.Cms.csproj" />
+    <ProjectReference Include="..\01-Alabo.Test\01-Alabo.Test.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />

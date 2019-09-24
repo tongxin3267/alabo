@@ -6,19 +6,20 @@ using System.Collections.Generic;
 using Alabo.App.Core.Reports.Domain.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Framework.Reports;
 
 namespace Alabo.App.Core.Reports.Domain.Services {
 
     public interface IReportService : IService<Report, ObjectId> {
 
-        void AddOrUpdate<T>(T reporyModel) where T : class, IReportModel;
+        void AddOrUpdate<T>(T reporyModel) where T : class, IReport;
 
         /// <summary>
         ///     更新配置的值
         ///     ///
         /// </summary>
         /// <param name="value"></param>
-        ServiceResult AddOrUpdate<T>(object value) where T : class, IReportModel;
+        ServiceResult AddOrUpdate<T>(object value) where T : class, IReport;
 
         /// <summary>
         ///     更新配置的值
@@ -34,12 +35,12 @@ namespace Alabo.App.Core.Reports.Domain.Services {
         /// <param name="key">完整的命名空间：Alabo.App.Core.Finance.Domain.CallBacks.WithdRawReport</param>
         Report GetReport(string key);
 
-        T GetValue<T>() where T : class, IReportModel;
+        T GetValue<T>() where T : class, IReport;
 
         List<T> GetList<T>(Func<T, bool> predicate = null) where T : new();
 
         IEnumerable<SelectListItem> GetList<T>(Func<T, bool> predicate, Func<T, object> textSelector,
-            Func<T, object> valueSelector) where T : class, IReportModel;
+            Func<T, object> valueSelector) where T : class, IReport;
 
         object GetValue(string key);
 
