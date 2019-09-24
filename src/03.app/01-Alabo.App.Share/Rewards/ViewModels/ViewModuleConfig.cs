@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Tasks;
+﻿using Alabo.App.Core.Tasks;
 using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Core.Tasks.ResultModel;
+using Alabo.App.Open.Tasks;
+using Alabo.App.Open.Tasks.Base;
 using Alabo.App.Share.Share.Domain.Enums;
-using Alabo.App.Share.Tasks;
-using Alabo.App.Share.Tasks.Base;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using ZKCloud.Open.Share.Models;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using ZKCloud.Open.Share.Models;
 
 namespace Alabo.App.Share.Share.ViewModels {
 
