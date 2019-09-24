@@ -17,21 +17,16 @@
   <ItemGroup>
     <Compile Remove="Attach\**" />
     <Compile Remove="Rewards\Domain\CallBacks\**" />
-    <Compile Remove="TasksOpen\**" />
-    <Compile Remove="Tasks\**" />
     <EmbeddedResource Remove="Attach\**" />
     <EmbeddedResource Remove="Rewards\Domain\CallBacks\**" />
-    <EmbeddedResource Remove="TasksOpen\**" />
-    <EmbeddedResource Remove="Tasks\**" />
     <None Remove="Attach\**" />
     <None Remove="Rewards\Domain\CallBacks\**" />
-    <None Remove="TasksOpen\**" />
-    <None Remove="Tasks\**" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="RewardRuless\Domain\Configs\" />
     <Folder Include="RewardRuless\Domain\Enums\" />
     <Folder Include="Behaviors\" />
+    <Folder Include="TaskExecutes\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\01.framework\01-Alabo\01-Alabo.csproj" />
