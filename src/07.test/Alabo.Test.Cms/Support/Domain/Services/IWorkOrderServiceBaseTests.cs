@@ -1,20 +1,18 @@
-using Xunit;
 using Alabo.App.Cms.Support.Domain.Services;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
+using Xunit;
 
-namespace Alabo.Test.Cms.Support.Domain.Services
-{
-    public class IWorkOrderServiceBaseTests : CoreTest
-    {
+namespace Alabo.Test.Cms.Support.Domain.Services {
+
+    public class IWorkOrderServiceBaseTests : CoreTest {
+
         [Theory]
         [InlineData(-1)]
         [TestMethod("GetSingleFromCache_Test")]
-        public void GetSingleFromCache_Test_ExpectedBehavior(long entityId)
-        {
+        public void GetSingleFromCache_Test_ExpectedBehavior(long entityId) {
             var model = Resolve<IWorkOrderService>().GetRandom(entityId);
-            if (model != null)
-            {
+            if (model != null) {
                 var newModel = Resolve<IWorkOrderService>().GetSingleFromCache(model.Id);
                 Assert.NotNull(newModel);
                 Assert.Equal(newModel.Id, model.Id);
@@ -23,8 +21,7 @@ namespace Alabo.Test.Cms.Support.Domain.Services
 
         [Fact]
         [TestMethod("Count_Expected_Test")]
-        public void Count_ExpectedBehavior()
-        {
+        public void Count_ExpectedBehavior() {
             var count = Resolve<IWorkOrderService>().Count();
             Assert.True(count >= 0);
 

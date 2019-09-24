@@ -1,8 +1,7 @@
-using Xunit;
-using Alabo.App.Open.Kpi.Domain.Services;
 using Alabo.App.Share.Kpi.Domain.Services;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
+using Xunit;
 
 namespace Alabo.Test.Open.Kpi.Domain.Services {
 
