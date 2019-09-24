@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AssemblyName>Alabo.Cloud.Hudong</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="HuDong\**" />
+    <EmbeddedResource Remove="HuDong\**" />
+    <None Remove="HuDong\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\01.framework\01-Alabo\01-Alabo.csproj" />
+    <ProjectReference Include="..\..\01.framework\06-Alabo.Framework.Tasks\06-Alabo.Framework.Tasks.csproj" />
+    <ProjectReference Include="..\..\02.data\02-Alabo.Data.Asset\02-Alabo.Data.Asset.csproj" />
+    <ProjectReference Include="..\..\03.app\01-Alabo.App.Share\01-Alabo.App.Share.csproj" />
+    <ProjectReference Include="..\..\03.app\02-Alabo.App.Kpi\02-Alabo.App.Kpi.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.App.Core.Common;
+﻿using Alabo.App.Core.Common;
 using Alabo.Core.Enums.Enum;
-using Alabo.Core.UI.Attributes;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 

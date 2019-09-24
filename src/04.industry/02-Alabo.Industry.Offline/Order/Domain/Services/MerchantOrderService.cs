@@ -201,42 +201,42 @@ namespace Alabo.App.Offline.Order.Domain.Services {
                     Resolve<IMerchantCartService>().Delete(product.Id.ToObjectId());
                 });
                 Resolve<IMerchantOrderProductService>().AddMany(orderProducts);
-
+                //TODO 2019年9月24日 重构 线下订单交易
                 //order for pay
-                var payOrder = new Shop.Order.Domain.Entities.Order {
-                    Id = order.Id,
-                    PaymentAmount = order.PaymentAmount,
-                    TotalAmount = order.TotalAmount
-                };
-                //pay record
-                var singlePayInput = new SinglePayInput {
-                    Orders = new List<Shop.Order.Domain.Entities.Order> { payOrder },
-                    User = user,
-                    ExcecuteSqlList = new BaseServiceMethod {
-                        Method = "ExcecuteSqlList",
-                        ServiceName = typeof(IMerchantOrderService).Name,
-                        Parameter = order.Id
-                    },
-                    BuyerCount = 1,
-                    CheckoutType = CheckoutType.Offline
-                };
-                var payResult = Resolve<IOrderAdminService>().AddSinglePay(singlePayInput);
-                if (!payResult.Item1.Succeeded) {
-                    context.RollbackTransaction();
-                    return Tuple.Create(payResult.Item1, orderBuyOutput);
-                }
+                //var payOrder = new Shop.Order.Domain.Entities.Order {
+                //    Id = order.Id,
+                //    PaymentAmount = order.PaymentAmount,
+                //    TotalAmount = order.TotalAmount
+                //};
+                ////pay record
+                //var singlePayInput = new SinglePayInput {
+                //    Orders = new List<Shop.Order.Domain.Entities.Order> { payOrder },
+                //    User = user,
+                //    ExcecuteSqlList = new BaseServiceMethod {
+                //        Method = "ExcecuteSqlList",
+                //        ServiceName = typeof(IMerchantOrderService).Name,
+                //        Parameter = order.Id
+                //    },
+                //    BuyerCount = 1,
+                //    CheckoutType = CheckoutType.Offline
+                //};
+                //var payResult = Resolve<IOrderAdminService>().AddSinglePay(singlePayInput);
+                //if (!payResult.Item1.Succeeded) {
+                //    context.RollbackTransaction();
+                //    return Tuple.Create(payResult.Item1, orderBuyOutput);
+                //}
 
-                //update order pay id
-                Resolve<IMerchantOrderService>().Update(r => {
-                    r.PayId = payResult.Item2.Id;
-                }, e => e.Id == order.Id);
+                ////update order pay id
+                //Resolve<IMerchantOrderService>().Update(r => {
+                //    r.PayId = payResult.Item2.Id;
+                //}, e => e.Id == order.Id);
 
-                //add order action
-                Resolve<IOrderActionService>().Add(payOrder, user, OrderActionType.OfflineUserCreateOrder);
+                ////add order action
+                //Resolve<IOrderActionService>().Add(payOrder, user, OrderActionType.OfflineUserCreateOrder);
 
                 //output
-                orderBuyOutput.PayAmount = payResult.Item2.Amount;
-                orderBuyOutput.PayId = payResult.Item2.Id;
+                //  orderBuyOutput.PayAmount = payResult.Item2.Amount;
+                //  orderBuyOutput.PayId = payResult.Item2.Id;
                 orderBuyOutput.OrderIds = new List<long> { order.Id };
 
                 context.SaveChanges();
@@ -267,7 +267,8 @@ namespace Alabo.App.Offline.Order.Domain.Services {
                     return;
                 }
                 sqlList.Add($"update Offline_MerchantOrder set OrderStatus={(int)MerchantOrderStatus.Success},PayId='{pay.Id}'  where OrderStatus={(int)MerchantOrderStatus.WaitingBuyerPay} and id in  ({entityIdList.ToSqlString()})");
-                sqlList.Add($"INSERT INTO [dbo].[ZKShop_OrderAction] ([OrderId] ,[ActionUserId] ,[Intro]  ,[Extensions]  ,[CreateTime],[OrderActionType]) VALUES({order.Id},{pay.UserId},'会员支付订单，支付方式为{pay.PayType.GetDisplayName()},支付现金金额为{pay.Amount}','','{DateTime.Now}',{(int)OrderActionType.OfflineUserPayOrder})");
+                // TODO 线下订单支付关闭
+                // sqlList.Add($"INSERT INTO [dbo].[ZKShop_OrderAction] ([OrderId] ,[ActionUserId] ,[Intro]  ,[Extensions]  ,[CreateTime],[OrderActionType]) VALUES({order.Id},{pay.UserId},'会员支付订单，支付方式为{pay.PayType.GetDisplayName()},支付现金金额为{pay.Amount}','','{DateTime.Now}',{(int)OrderActionType.OfflineUserPayOrder})");
             });
 
             return sqlList;

@@ -27,10 +27,5 @@ namespace Alabo.App.Offline.Order.Domain.Dtos {
         /// Product
         /// </summary>
         public List<MerchantCartViewModel> Products { get; set; } = new List<MerchantCartViewModel>();
-
-        /// <summary>
-        /// Gets or sets the allow moneys.
-        /// </summary>
-        public List<OrderMoneyItem> AllowMoneys { get; set; } = new List<OrderMoneyItem>();
     }
 }
