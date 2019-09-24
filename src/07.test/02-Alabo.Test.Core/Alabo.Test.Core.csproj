@@ -27,7 +27,6 @@
     <ProjectReference Include="..\..\03.app\02-Alabo.App.Kpi\02-Alabo.App.Kpi.csproj" />
     <ProjectReference Include="..\..\04.industry\01-Alabo.Industry.Cms\01-Alabo.Industry.Cms.csproj" />
     <ProjectReference Include="..\..\05.cloud\04-Alabo.Cloud.Things\04-Alabo.Cloud.Things.csproj" />
-    <ProjectReference Include="..\..\05.cloud\09-Alabo.Cloud.Market\02-Alabo.Cloud.Market.csproj" />
     <ProjectReference Include="..\01-Alabo.Test\01-Alabo.Test.csproj" />
   </ItemGroup>
   <ItemGroup>
