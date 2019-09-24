@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <RootNamespace>_12.Alabo.Cloud.School</RootNamespace>
+    <RootNamespace>Alabo.Cloud.School</RootNamespace>
+    <AssemblyName>Alabo.Cloud.School</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
