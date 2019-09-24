@@ -104,14 +104,6 @@ namespace Alabo.App.Share.Share.Domain.Entities {
                 return searSerial;
             }
         }
-
-        /// <summary>
-        ///
-        /// </summary>
-        public PageResult<Reward> PageTable(object query, AutoBaseModel autoModel) {
-            var model = Resolve<IRewardService>().GetPagedList(query);
-            return ToPageResult(model);
-        }
     }
 
     public class DetailTableMap : MsSqlAggregateRootMap<Reward> {
@@ -121,15 +113,11 @@ namespace Alabo.App.Share.Share.Domain.Entities {
         }
 
         protected override void MapProperties(EntityTypeBuilder<Reward> builder) {
-            //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Property(e => e.MoneyTypeId).HasColumnType("uniqueidentifier");
             builder.Property(e => e.Intro).HasMaxLength(255);
             builder.Ignore(e => e.Serial);
             builder.Ignore(e => e.Version);
-            if (TenantContext.IsTenant) {
-                // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
-            }
         }
     }
 }

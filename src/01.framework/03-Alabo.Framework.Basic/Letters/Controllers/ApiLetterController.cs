@@ -1,6 +1,7 @@
 using Alabo.App.Core.Api.Controller;
 using Alabo.App.Core.Api.Filter;
 using Alabo.App.Share.Attach.Domain.Entities;
+using Alabo.Framework.Basic.Letters.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 

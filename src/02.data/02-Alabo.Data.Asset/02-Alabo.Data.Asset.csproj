@@ -13,7 +13,6 @@
     <ProjectReference Include="..\..\01.framework\01-Alabo\01-Alabo.csproj" />
     <ProjectReference Include="..\..\01.framework\02-Alabo.Framework.Core\02-Alabo.Framework.Core.csproj" />
     <ProjectReference Include="..\..\01.framework\03-Alabo.Framework.Basic\03-Alabo.Framework.Basic.csproj" />
-    <ProjectReference Include="..\..\05.cloud\01-Alabo.Cloud.Core\01-Alabo.Cloud.Core.csproj" />
     <ProjectReference Include="..\01-Alabo.Data.People\01-Alabo.Data.People.csproj" />
   </ItemGroup>
 

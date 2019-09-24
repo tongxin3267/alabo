@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using Alabo.App.Open.Tasks;
+using Alabo.App.Open.Tasks.Base;
 using Alabo.App.Share.Share.Domain.Dto;
 using Alabo.App.Share.Share.ViewModels;
 using Alabo.App.Share.Tasks;
@@ -92,20 +94,5 @@ namespace Alabo.App.Share.Share.Domain.Services {
         /// <param name="query">查询</param>
 
         PagedList<ViewHomeReward> GetUserPage(object query);
-
-        /// <summary>
-        /// Gets the user page.
-        /// </summary>
-        /// <param name="query">查询</param>
-        /// <param name="entity">The entity.</param>
-
-        PagedList<ViewHomeReward> GetUserPage(object query, Reward entity);
-
-        /// <summary>
-        /// 获取分润配置
-        /// </summary>
-        /// <param name="moduleConfigId"></param>
-
-        ShareBaseConfig GetShareBaseConfig(long moduleConfigId);
     }
 }

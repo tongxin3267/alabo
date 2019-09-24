@@ -377,7 +377,7 @@ namespace Alabo.App.Open.Tasks {
                 if (!string.IsNullOrWhiteSpace(Configuration.ProductRule.ProductLines)) {
                     // 获取符合条件的产品线
                     var limitProductIdArray = Configuration.ProductRule.ProductLines.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Where(e => e.IsNumber()).Select(e => Convert.ToInt64(e)).ToArray();
-                    var productIdlist = Alabo.Helpers.Ioc.Resolve<IProductLineService>().GetProductIds(limitProductIdArray.ToList());
+                    var productIdlist = Alabo.Helpers.Ioc.Resolve<IGoodsLineService>().GetProductIds(limitProductIdArray.ToList());
                     orderProductList = orderProductList.Where(e => productIdlist.Contains(e.ProductId)).ToList();
                     return orderProductList;
                 } else {

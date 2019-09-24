@@ -14,6 +14,8 @@ using Alabo.App.Core.User;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Repositories;
 using Alabo.App.Core.User.Domain.Services;
+using Alabo.App.Open.Tasks;
+using Alabo.App.Open.Tasks.Base;
 using Alabo.App.Share.Share.Domain.Dto;
 using Alabo.App.Share.Share.Domain.Enums;
 using Alabo.App.Share.Share.Domain.Repositories;
@@ -23,6 +25,7 @@ using Alabo.App.Share.Tasks.Base;
 using Alabo.App.Shop.Product.Domain.CallBacks;
 using Alabo.App.Shop.Product.Domain.Services;
 using Alabo.Core.Enums.Enum;
+using Alabo.Data.Things.Goodss.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -232,7 +235,7 @@ namespace Alabo.App.Share.Share.Domain.Services {
             }
             var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
             var userTypes = Resolve<IAutoConfigService>().GetList<UserTypeConfig>();
-            var productLines = Resolve<IProductLineService>().GetList();
+            var productLines = Resolve<IGoodsLineService>().GetList();
             var shopMallConfigs = Resolve<IAutoConfigService>().GetList<PriceStyleConfig>();
 
             var result = new List<ViewShareModuleList>();
@@ -368,21 +371,6 @@ namespace Alabo.App.Share.Share.Domain.Services {
             }
 
             return view;
-        }
-
-        public PagedList<ViewHomeReward> GetUserPage(object query, Reward entity) {
-            throw new NotImplementedException();
-        }
-
-        public ShareBaseConfig GetShareBaseConfig(long moduleConfigId) {
-            var shareModuleReports = Resolve<IReportService>().GetValue<ShareModuleReports>();
-            var findModuleList = shareModuleReports.ShareModuleList.ToObject<List<ShareModule>>();
-            var find = findModuleList.FirstOrDefault(r => r.Id == moduleConfigId);
-            if (find != null) {
-                var shareBaseConfig = JsonConvert.DeserializeObject<ShareBaseConfigList>(find.ConfigValue);
-                return shareBaseConfig;
-            }
-            return null;
         }
 
         public PagedList<ViewAdminReward> GetRewardList(object query) {
