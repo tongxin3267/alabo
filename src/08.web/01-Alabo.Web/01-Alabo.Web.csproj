@@ -50,7 +50,6 @@
     <Folder Include="wwwroot\assets\lib\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\12.Alabo.Cloud.School\12.Alabo.Cloud.School.csproj" />
     <ProjectReference Include="..\..\01.framework\01-Alabo\01-Alabo.csproj" />
     <ProjectReference Include="..\..\01.framework\02-Alabo.Framework.Core\02-Alabo.Framework.Core.csproj" />
     <ProjectReference Include="..\..\01.framework\03-Alabo.Framework.Basic\03-Alabo.Framework.Basic.csproj" />
@@ -72,9 +71,10 @@
     <ProjectReference Include="..\..\05.cloud\05-Alabo.Cloud.Share\05-Alabo.Cloud.Share.csproj" />
     <ProjectReference Include="..\..\05.cloud\07-Alabo.Cloud.Shop\07-Alabo.Cloud.Shop.csproj" />
     <ProjectReference Include="..\..\05.cloud\08-Alabo.Cloud.Hudong\08-Alabo.Cloud.Hudong.csproj" />
-    <ProjectReference Include="..\..\05.cloud\09.Alabo.Cloud.Cms\09.Alabo.Cloud.Cms.csproj" />
+    <ProjectReference Include="..\..\05.cloud\09-Alabo.Cloud.Cms\09-Alabo.Cloud.Cms.csproj" />
     <ProjectReference Include="..\..\05.cloud\10-Alabo.Cloud.Support\10-Alabo.Cloud.Support.csproj" />
     <ProjectReference Include="..\..\05.cloud\11-Alabo.Cloud.Contracts\11-Alabo.Cloud.Contracts.csproj" />
+    <ProjectReference Include="..\..\05.cloud\12-Alabo.Cloud.School\12-Alabo.Cloud.School.csproj" />
     <ProjectReference Include="..\..\06.tool\01-Alabo.Tool.Payment\05-Alabo.Tool.Payment.csproj" />
     <ProjectReference Include="..\..\06.tool\02-Alabo.Tool.WeiXin\06-Alabo.Tool.WeiXin.csproj" />
     <ProjectReference Include="..\..\06.tool\03-Alabo.Tool.Sms\02-Alabo.Tool.Sms.csproj" />
