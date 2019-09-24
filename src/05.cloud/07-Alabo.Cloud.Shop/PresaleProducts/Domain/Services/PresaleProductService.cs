@@ -25,7 +25,6 @@ namespace Alabo.App.Market.PresaleProducts.Domain.Services {
 
         public PresaleProductService(IUnitOfWork unitOfWork, IRepository<PresaleProduct, ObjectId> repository)
             : base(unitOfWork, repository) {
-            _storeId = Resolve<IStoreService>().PlanformStore().Id;
         }
 
         /// <summary>

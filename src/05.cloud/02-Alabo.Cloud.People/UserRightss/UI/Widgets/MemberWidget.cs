@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Alabo.App.Core.Admin.Domain.Services;
-using Alabo.App.Core.Api.Domain.Service;
+﻿using Alabo.App.Core.Api.Domain.Service;
 using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Employes.Domain.Services;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Repositories;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Share.Attach.Domain.Services;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.UI.Widgets;
+using System;
+using System.Linq;
 
 namespace Alabo.App.Market.UI.Widgets {
 
@@ -51,7 +46,7 @@ namespace Alabo.App.Market.UI.Widgets {
             var currentGrade = gradeList != null ? gradeList.FirstOrDefault(x => x.Id == user.GradeId) : new UserGradeConfig { };
             var nextGrade = currentGrade != null ? gradeList.FirstOrDefault(x => x.SortOrder == currentGrade.SortOrder + 1 && !x.Name.Contains("营销中心")) : new UserGradeConfig { };
             var userDetail = Ioc.Resolve<IUserDetailService>().GetSingle(userId);
-            var favorite = Ioc.Resolve<IFavoriteService>().GetFavoriteCountByUserId(userId);
+            //    var favorite = Ioc.Resolve<IFavoriteService>().GetFavoriteCountByUserId(userId);
             var isNotAdmin = !Ioc.Resolve<IUserService>().IsAdmin(userId);
             if (userDetail.Avator.IsNullOrEmpty()) {
                 userDetail.Avator = @"/wwwroot/static/images/avator/man_64.png";
@@ -68,7 +63,7 @@ namespace Alabo.App.Market.UI.Widgets {
                 // 不是Admin才有升级
                 UpgradeButton = isNotAdmin && nextGrade != null && !string.IsNullOrEmpty(nextGrade?.Name) ? $"升级{nextGrade?.Name}" : "",
                 UpgradeGradeId = isNotAdmin && nextGrade != null && (nextGrade?.Id ?? Guid.Empty) != Guid.Empty ? (nextGrade?.Id ?? Guid.Empty) : Guid.Empty,
-                Favorite = favorite
+                // Favorite = favorite
             };
 
             return rs;

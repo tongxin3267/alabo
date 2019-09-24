@@ -3,6 +3,7 @@ using MongoDB.Bson;
 using System.ComponentModel.DataAnnotations;
 using Alabo.App.Core.Api.Controller;
 using Alabo.App.Core.Api.Filter;
+using Alabo.App.Open.Attach.Domain.Enums;
 using Alabo.App.Share.Attach.Domain.Dtos;
 using Alabo.App.Share.Attach.Domain.Entities;
 using Alabo.App.Share.Attach.Domain.Enums;

@@ -1,18 +1,9 @@
-using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Core.Common;
 using Alabo.App.Core.Finance.Domain.Entities;
 using Alabo.App.Core.Finance.Domain.Entities.Extension;
 using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Market.BookingSignup.Domain.Entities;
-using Alabo.App.Market.BookingSignup.Domain.Repositories;
 using Alabo.App.Market.BookingSignup.Dtos;
-using Alabo.App.Shop.Order.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.Core.Enums.Enum;
 using Alabo.Core.Regex;
 using Alabo.Datas.UnitOfWorks;
@@ -23,36 +14,33 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Linq.Dynamic;
 using Alabo.Mapping;
+using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace Alabo.App.Market.BookingSignup.Domain.Services
-{
+namespace Alabo.App.Market.BookingSignup.Domain.Services {
 
-    public class BookingSignupService : ServiceBase<Entities.BookingSignup, ObjectId>, IBookingSignupService
-    {
+    public class BookingSignupService : ServiceBase<Entities.BookingSignup, ObjectId>, IBookingSignupService {
 
-        public BookingSignupService(IUnitOfWork unitOfWork, IRepository<Entities.BookingSignup, ObjectId> repository) : base(unitOfWork, repository)
-        {
+        public BookingSignupService(IUnitOfWork unitOfWork, IRepository<Entities.BookingSignup, ObjectId> repository) : base(unitOfWork, repository) {
         }
 
-        public Tuple<BookingBuyOutput, ServiceResult> Buy(BookingBuyInput buyInput)
-        {
+        public Tuple<BookingBuyOutput, ServiceResult> Buy(BookingBuyInput buyInput) {
             // 安验证，Order BookingId
             // order.price =总价/数量 // pay表记录
 
             #region 验证
 
-            if (buyInput.UserId <= 0)
-            {
+            if (buyInput.UserId <= 0) {
                 return Tuple.Create(new BookingBuyOutput(), ServiceResult.FailedWithMessage("会员不存在"));
             }
 
-            if (buyInput.Count < 1)
-            {
+            if (buyInput.Count < 1) {
                 return Tuple.Create(new BookingBuyOutput(), ServiceResult.FailedWithMessage("至少要有一名参与者"));
             }
 
-            if (buyInput.Price != buyInput.TotalPrice / buyInput.Count)
-            {
+            if (buyInput.Price != buyInput.TotalPrice / buyInput.Count) {
                 return Tuple.Create(new BookingBuyOutput(), ServiceResult.FailedWithMessage("价格计算有误"));
             }
             //if (buyInput.BookingId.IsNullOrEmpty()) {
@@ -75,21 +63,17 @@ namespace Alabo.App.Market.BookingSignup.Domain.Services
 
             model.Contacts = buyInput.Contacts.Deserialize<BookingSignupOrderContact>();
             int i = 0;
-            foreach (var item in model.Contacts)
-            {
+            foreach (var item in model.Contacts) {
                 i++;
-                if (item.Name.IsNullOrEmpty())
-                {
+                if (item.Name.IsNullOrEmpty()) {
                     return Tuple.Create(new Dtos.BookingBuyOutput(), ServiceResult.FailedWithMessage($"第{i}名参与者名字不能为空"));
                 }
 
-                if (item.Mobile.IsNullOrEmpty())
-                {
+                if (item.Mobile.IsNullOrEmpty()) {
                     return Tuple.Create(new Dtos.BookingBuyOutput(), ServiceResult.FailedWithMessage($"第{i}名参与者手机号不能为空"));
                 }
 
-                if (!RegexHelper.CheckMobile(item.Mobile))
-                {
+                if (!RegexHelper.CheckMobile(item.Mobile)) {
                     return Tuple.Create(new Dtos.BookingBuyOutput(), ServiceResult.FailedWithMessage($"第{i}名参与者手机号不正确"));
                 }
             }
@@ -98,15 +82,12 @@ namespace Alabo.App.Market.BookingSignup.Domain.Services
 
             model.IsPay = false;
             model.BookingId = buyInput.BookingId.ToObjectId();
-            if (Resolve<IBookingSignupOrderService>().Add(model))
-            {
-                var payExtension = new PayExtension
-                {
+            if (Resolve<IBookingSignupOrderService>().Add(model)) {
+                var payExtension = new PayExtension {
                     TradeNo = model.Id.ToString(),
                     Body = $"您正在企牛牛商城上消费，请认真核对账单信息",
                     UserName = user.GetUserName(),
-                    AfterSuccess = new BaseServiceMethod
-                    {
+                    AfterSuccess = new BaseServiceMethod {
                         Method = "AfterPaySuccess",
                         ServiceName = typeof(IBookingSignupService).Name,
                         Parameter = (object)model.Id
@@ -118,28 +99,23 @@ namespace Alabo.App.Market.BookingSignup.Domain.Services
                     //RedirectUrl = $"/pages/index?path=successful_registration&id={model.Id}",
                 };
                 payExtension.RedirectUrl = $"/pages/index?path=successful_registration&id={model.Id.ToString()}";
-                var pay = new Pay
-                {
+                var pay = new Pay {
                     Status = PayStatus.WaiPay,
                     Type = CheckoutType.Customer,
                     Amount = buyInput.TotalPrice,
                     UserId = user.Id,
                 };
-                try
-                {
+                try {
                     var bookingSignup = Resolve<IBookingSignupService>().GetSingle(u => u.Id == model.BookingId);
                     // Resolve<ITradeService>().Add(trade);
                     pay.EntityId = $"[\"{model.Id.ToString()}\"]";
                     payExtension.TradeNo = model.Id.ToString();
                     pay.Extensions = payExtension.ToJsons();
                     Resolve<IPayService>().Add(pay);
-                }
-                catch (Exception ex)
-                {
+                } catch (Exception ex) {
                     return Tuple.Create(new Dtos.BookingBuyOutput(), ServiceResult.FailedWithMessage("订单记录失败"));
                 }
-                var outPut = new BookingBuyOutput
-                {
+                var outPut = new BookingBuyOutput {
                     PayId = pay.Id,
                     PayAmount = buyInput.TotalPrice,
                     OrderId = model.Id
@@ -150,8 +126,7 @@ namespace Alabo.App.Market.BookingSignup.Domain.Services
         }
 
         ///
-        public void AfterPaySuccess(List<object> entityId)
-        {
+        public void AfterPaySuccess(List<object> entityId) {
             // var orderId = entityIdList.FirstOrDefault();
             var order = Resolve<IBookingSignupOrderService>().GetSingle(entityId.FirstOrDefault());
             if (order == null) {
@@ -162,8 +137,7 @@ namespace Alabo.App.Market.BookingSignup.Domain.Services
             Resolve<IBookingSignupOrderService>().Update(order);
             var bookingSignup = Resolve<IBookingSignupService>().GetSingle(order.BookingId);
             var message = $"恭喜您成功报名{bookingSignup.Name}课程，课程将于{bookingSignup.StartTime}在{bookingSignup.Address}开始，预定{bookingSignup.EndTime}结束，望悉知!";
-            foreach (var item in order.Contacts)
-            {
+            foreach (var item in order.Contacts) {
                 Resolve<IOpenService>().SendRaw(item.Mobile, message);
             }
         }

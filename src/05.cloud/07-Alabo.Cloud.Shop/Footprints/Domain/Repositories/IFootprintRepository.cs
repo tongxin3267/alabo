@@ -4,6 +4,6 @@ using Alabo.Domains.Repositories;
 
 namespace Alabo.App.Share.Attach.Domain.Repositories {
 
-    public interface IFavoriteRepository : IRepository<Favorite, ObjectId> {
+    public interface IFootprintRepository : IRepository<Footprint, ObjectId> {
     }
 }

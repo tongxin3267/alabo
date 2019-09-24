@@ -49,31 +49,32 @@ namespace Alabo.App.Core.Tasks.Domain.Services {
             var shareOrderList = Resolve<IShareOrderService>()
                 .GetList(r => r.Id >= maxShareOrderId && r.TriggerType == TriggerType.Order);
             foreach (var shareOrder in shareOrderList) {
-                var shareOrderItems = Ioc.Resolve<IShareOrderRepository>()
-                    .GetShareOrderReportItems(shareOrder.Id);
-                var shareOrderReport = new ShareOrderReport {
-                    Id = shareOrder.Id.ToString().ConvertToObjectId(),
-                    UserId = shareOrder.UserId,
-                    ShareOrderId = shareOrder.Id,
-                    Amount = shareOrder.Amount,
-                    TotalFenRun = shareOrderItems.Sum(r => r.Amount),
-                    UserItems = shareOrderItems.ToList()
-                };
-                if (shareOrderReport.TotalFenRun > 0) {
-                    shareOrderReport.TotalRatio =
-                        Math.Round(shareOrderReport.TotalFenRun / shareOrderReport.Amount, 4); // 拨比
-                }
+                // TODO 重构统计 2019年9月24日
+                //var shareOrderItems = Ioc.Resolve<IShareOrderRepository>()
+                //    .GetShareOrderReportItems(shareOrder.Id);
+                //var shareOrderReport = new ShareOrderReport {
+                //    Id = shareOrder.Id.ToString().ConvertToObjectId(),
+                //    UserId = shareOrder.UserId,
+                //    ShareOrderId = shareOrder.Id,
+                //    Amount = shareOrder.Amount,
+                //    TotalFenRun = shareOrderItems.Sum(r => r.Amount),
+                //    UserItems = shareOrderItems.ToList()
+                //};
+                //if (shareOrderReport.TotalFenRun > 0) {
+                //    shareOrderReport.TotalRatio =
+                //        Math.Round(shareOrderReport.TotalFenRun / shareOrderReport.Amount, 4); // 拨比
+                //}
 
-                var find = Resolve<IShareOrderReportService>().GetSingle(r => r.ShareOrderId == shareOrder.Id);
-                if (find == null) {
-                    Add(shareOrderReport);
-                } else {
-                    find.Amount = shareOrderReport.Amount;
-                    find.TotalFenRun = shareOrderReport.TotalFenRun;
-                    find.UserItems = shareOrderReport.UserItems;
-                    shareOrderReport.TotalRatio = shareOrderReport.TotalRatio;
-                    Update(find);
-                }
+                //var find = Resolve<IShareOrderReportService>().GetSingle(r => r.ShareOrderId == shareOrder.Id);
+                //if (find == null) {
+                //    Add(shareOrderReport);
+                //} else {
+                //    find.Amount = shareOrderReport.Amount;
+                //    find.TotalFenRun = shareOrderReport.TotalFenRun;
+                //    find.UserItems = shareOrderReport.UserItems;
+                //    shareOrderReport.TotalRatio = shareOrderReport.TotalRatio;
+                //    Update(find);
+                //}
             }
 
             //统计

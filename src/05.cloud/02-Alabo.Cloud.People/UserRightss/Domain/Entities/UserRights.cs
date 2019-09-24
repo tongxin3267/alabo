@@ -17,8 +17,7 @@ using Alabo.UI;
 using Alabo.UI.AutoForms;
 using Alabo.App.Market.UserRightss.Domain.Services;
 
-namespace Alabo.App.Market.UserRightss.Domain.Entities
-{
+namespace Alabo.App.Market.UserRightss.Domain.Entities {
 
     /// <summary>
     ///     会员权益
@@ -27,8 +26,7 @@ namespace Alabo.App.Market.UserRightss.Domain.Entities
     [Table("Market_UserRight")]
     [ClassProperty(Name = "会员权益", Description = "查看会员会员权益", Icon = IconFlaticon.route,
         SideBarType = SideBarType.UserRightsSideBar)]
-    public class UserRights : AggregateDefaultUserRoot<UserRights>, IAutoForm
-    {
+    public class UserRights : AggregateDefaultUserRoot<UserRights> {
 
         /// <summary>
         ///     等级用户Id
@@ -52,46 +50,18 @@ namespace Alabo.App.Market.UserRightss.Domain.Entities
         [Display(Name = "总数量")]
         [Field(ListShow = true, SortOrder = 12, EditShow = true, ControlsType = ControlsType.TextBox, TableDispalyStyle = TableDispalyStyle.Code)]
         public long TotalCount { get; set; }
-
-        public AutoForm GetView(object id, AutoBaseModel autoModel)
-        {
-            var result = Resolve<IUserRightsService>().GetSingle(s => s.Id == long.Parse(id.ToString()));
-            return ToAutoForm(result);
-        }
-
-        public ServiceResult Save(object model, AutoBaseModel autoModel)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<ViewLink> ViewLinks()
-        {
-            var quickLinks = new List<ViewLink>
-            {
-                new ViewLink("编辑", "/Admin/UserRights/Edit?id=[[Id]]", Icons.Edit, LinkType.ColumnLink),
-                new ViewLink("添加", "/Admin/UserRights/Edit", Icons.Add, LinkType.TableQuickLink)
-            };
-            return quickLinks;
-        }
     }
 
-    public class UserRightsTableMap : MsSqlAggregateRootMap<UserRights>
-    {
+    public class UserRightsTableMap : MsSqlAggregateRootMap<UserRights> {
 
-        protected override void MapTable(EntityTypeBuilder<UserRights> builder)
-        {
+        protected override void MapTable(EntityTypeBuilder<UserRights> builder) {
             builder.ToTable("Market_UserRights");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<UserRights> builder)
-        {
+        protected override void MapProperties(EntityTypeBuilder<UserRights> builder) {
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.Version);
-            if (TenantContext.IsTenant)
-            {
-                // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
-            }
         }
     }
 }

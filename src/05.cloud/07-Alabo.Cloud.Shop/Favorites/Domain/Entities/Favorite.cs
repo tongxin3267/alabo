@@ -18,22 +18,8 @@ namespace Alabo.App.Share.Attach.Domain.Entities {
     [BsonIgnoreExtraElements]
     [Table("Attach_Favorite")]
     [AutoDelete(IsAuto = true)]
-    [ClassProperty(Name = "收藏", SideBarType = SideBarType.FullScreen, PostApi = "Api/Favorite/List", ListApi = "Api/Favorite/List")]
-    public class Favorite : AggregateMongodbUserRoot<Favorite>, IAutoTable<Favorite> {
-
-        public List<TableAction> Actions() {
-            var list = new List<TableAction>
-            {
-                //ToLinkAction("编辑", "Edit",TableActionType.ColumnAction),//管理员编辑
-                ToLinkAction("删除", "/Api/Favorite/QueryDelete",ActionLinkType.Delete,TableActionType.ColumnAction)//管理员删除
-            };
-            return list;
-        }
-
-        public PageResult<Favorite> PageTable(object query, AutoBaseModel autoModel) {
-            var model = Resolve<IFavoriteService>().GetPagedList(query);
-            return ToPageResult(model);
-        }
+    [ClassProperty(Name = "收藏", SideBarType = SideBarType.FullScreen)]
+    public class Favorite : AggregateMongodbUserRoot<Favorite> {
 
         /// <summary>
         ///     收藏类型

@@ -1,4 +1,3 @@
-using Alabo.App.Core.Admin.Domain.Services;
 using Alabo.App.Core.Api.Domain.Service;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Tasks.Domain.Entities;
@@ -13,13 +12,6 @@ using Alabo.App.Market.UserRightss.Domain.Dtos;
 using Alabo.App.Market.UserRightss.Domain.Entities;
 using Alabo.App.Market.UserRightss.Domain.Enums;
 using Alabo.App.Market.UserRightss.Domain.Repositories;
-using Alabo.App.Share.Kpi.Domain.Entities;
-using Alabo.App.Share.Kpi.Domain.Services;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Order.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Entities.Extensions;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.Core.Randoms;
 using Alabo.Core.Regex;
 using Alabo.Datas.UnitOfWorks;
@@ -35,6 +27,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Alabo.App.Core.Admin.Domain.Services;
+using Alabo.App.Share.Kpi.Domain.Entities;
+using Alabo.App.Share.Kpi.Domain.Services;
+using Alabo.App.Shop.Order.Domain.Dtos;
+using Alabo.App.Shop.Order.Domain.Entities;
+using Alabo.App.Shop.Order.Domain.Entities.Extensions;
+using Alabo.App.Shop.Order.Domain.Enums;
+using Alabo.App.Shop.Order.Domain.Services;
 using ZKCloud.App.Core.UserType.Domain.CallBacks;
 
 namespace Alabo.App.Market.UserRightss.Domain.Services {
@@ -929,12 +929,12 @@ namespace Alabo.App.Market.UserRightss.Domain.Services {
 
         public ServiceResult AddOrUpdate(UserRights view) {
             // 验证用户
-            var result = Resolve<IVerifyService>().VerifyUser(view.UserName);
+            var result = Resolve<IValidService>().VerifyUser(view.UserName);
             if (!result.Succeeded) {
                 return result;
             }
             // 验证等级
-            result = Resolve<IVerifyService>().VerifyUserGrade(view.GradeId);
+            result = Resolve<IValidService>().VerifyUserGrade(view.GradeId);
             if (!result.Succeeded) {
                 return result;
             }

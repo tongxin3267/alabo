@@ -1,13 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using Alabo.App.Core.Api.Controller;
 using Alabo.App.Core.Api.Filter;
-using Alabo.App.Core.Common;
 using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.User;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Market.UserRightss.Domain.Dtos;
@@ -15,18 +8,14 @@ using Alabo.App.Market.UserRightss.Domain.Entities;
 using Alabo.App.Market.UserRightss.Domain.Services;
 using Alabo.App.Shop.Order.Domain.Dtos;
 using Alabo.Extensions;
-using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.RestfulApi;
-using ZKCloud.Open.ApiBase.Models;
-
-using Alabo.RestfulApi;
-
 using Alabo.Helpers;
+using Microsoft.AspNetCore.Mvc;
 using System;
-using Alabo.App.Core.Admin.Domain.Services;
-using Alabo.Domains.Services.Bulk;
-using Alabo.Core.Extensions;
-using Alabo.App.Core.Employes.Domain.Services;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Market.UserRightss.Controllers {
 

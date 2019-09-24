@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
+﻿using Alabo.Domains.Entities;
 using MongoDB.Bson.Serialization.Attributes;
-using Alabo.App.Market.UserRightss.Domain.Entities;
-using Alabo.Domains.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Alabo.App.Market.Votes.Domain.Entities {
 

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Alabo.App.Core.Reports;
-using Alabo.App.Market.FacePay.Domain.Services;
+﻿using Alabo.App.Market.FacePay.Domain.Services;
 using Alabo.Helpers;
 using Alabo.UI;
 using Alabo.UI.AutoReports;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.App.Market.FacePay.Report {
 
