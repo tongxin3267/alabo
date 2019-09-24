@@ -36,5 +36,6 @@
     <ProjectReference Include="..\..\02.data\02-Alabo.Data.Asset\02-Alabo.Data.Asset.csproj" />
     <ProjectReference Include="..\..\03.app\01-Alabo.App.Share\01-Alabo.App.Share.csproj" />
     <ProjectReference Include="..\..\04.industry\02-Alabo.Industry.Shop\02-Alabo.Industry.Shop.csproj" />
+    <ProjectReference Include="..\01-Alabo.Test\01-Alabo.Test.csproj" />
   </ItemGroup>
 </Project>

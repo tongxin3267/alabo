@@ -1,22 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using Microsoft.Extensions.DependencyInjection;
-using Xunit;
-using Alabo.App.Core.Finance.Domain.Entities;
+﻿using Alabo.App.Core.Finance.Domain.Entities;
 using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.Tasks;
 using Alabo.App.Core.Tasks.Domain.Entities;
 using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Open.Share.Domain.Services;
 using Alabo.App.Shop.Order.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.Core.Enums.Enum;
 using Alabo.Extensions;
 using Alabo.Mapping;
 using Alabo.Test.Base.Core.Model;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using Alabo.App.Share.Share.Domain.Services;
+using Xunit;
 
 namespace Alabo.Test.Open.Tasks {
 
@@ -124,16 +124,16 @@ namespace Alabo.Test.Open.Tasks {
         }
 
         protected List<decimal> Ratios(long moduleConfigId) {
-            var find = Resolve<IRewardService>().GetShareBaseConfig(moduleConfigId);
-            if (find == null) {
-                return null;
-            }
+            //var find = Resolve<IRewardService>().GetShareBaseConfig(moduleConfigId);
+            //if (find == null) {
+            //    return null;
+            //}
 
             var list = new List<decimal>();
-            var stringList = find.DistriRatio.Split(",");
-            foreach (var item in stringList) {
-                list.Add(item.ConvertToDecimal(0));
-            }
+            //var stringList = find.DistriRatio.Split(",");
+            //foreach (var item in stringList) {
+            //    list.Add(item.ConvertToDecimal(0));
+            //}
 
             return list;
         }

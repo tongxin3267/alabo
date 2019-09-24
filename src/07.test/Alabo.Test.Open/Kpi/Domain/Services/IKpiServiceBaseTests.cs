@@ -1,22 +1,21 @@
 using Xunit;
 using Alabo.App.Open.Kpi.Domain.Services;
+using Alabo.App.Share.Kpi.Domain.Services;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
 
-namespace Alabo.Test.Open.Kpi.Domain.Services
-{
-    public class IKpiServiceBaseTests : CoreTest
-    {
-        public class IKpiServiceTests : CoreTest
-        {
+namespace Alabo.Test.Open.Kpi.Domain.Services {
+
+    public class IKpiServiceBaseTests : CoreTest {
+
+        public class IKpiServiceTests : CoreTest {
+
             [Theory]
             [InlineData(-1)]
             [TestMethod("GetSingleFromCache_Test")]
-            public void GetSingleFromCache_Test_ExpectedBehavior(long entityId)
-            {
+            public void GetSingleFromCache_Test_ExpectedBehavior(long entityId) {
                 var model = Resolve<IKpiService>().GetRandom(entityId);
-                if (model != null)
-                {
+                if (model != null) {
                     var newModel = Resolve<IKpiService>().GetSingleFromCache(model.Id);
                     Assert.NotNull(newModel);
                     Assert.Equal(newModel.Id, model.Id);
@@ -25,8 +24,7 @@ namespace Alabo.Test.Open.Kpi.Domain.Services
 
             [Fact]
             [TestMethod("Count_Expected_Test")]
-            public void Count_ExpectedBehavior()
-            {
+            public void Count_ExpectedBehavior() {
                 var count = Resolve<IKpiService>().Count();
                 Assert.True(count >= 0);
 

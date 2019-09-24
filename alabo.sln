@@ -62,7 +62,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01-Alabo.Cloud.Core", "src\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01-Alabo.App.Share", "src\03.app\01-Alabo.App.Share\01-Alabo.App.Share.csproj", "{9D871BAA-836F-47E7-9BFE-645EEFAB6E7A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02-Alabo.App.Kpi", "src\03.app\02-Alabo.App.Kpi\02-Alabo.App.Kpi.csproj", "{D3316663-C4AE-446D-B045-1DBFAB6522B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02-Alabo.App.Kpis", "src\03.app\02-Alabo.App.Kpi\02-Alabo.App.Kpis.csproj", "{D3316663-C4AE-446D-B045-1DBFAB6522B2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01-Alabo.Test", "src\07.test\01-Alabo.Test\01-Alabo.Test.csproj", "{3A13AC78-92D2-4142-A232-168F6548F08E}"
 EndProject

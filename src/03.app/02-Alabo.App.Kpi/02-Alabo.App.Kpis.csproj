@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <AssemblyName>Alabo.App.Kpi</AssemblyName>
+    <AssemblyName>Alabo.App.Kpis</AssemblyName>
+    <RootNamespace>Alabo.App.Kpis</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

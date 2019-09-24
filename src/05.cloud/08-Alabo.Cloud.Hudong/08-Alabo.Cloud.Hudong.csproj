@@ -16,7 +16,7 @@
     <ProjectReference Include="..\..\01.framework\06-Alabo.Framework.Tasks\06-Alabo.Framework.Tasks.csproj" />
     <ProjectReference Include="..\..\02.data\02-Alabo.Data.Asset\02-Alabo.Data.Asset.csproj" />
     <ProjectReference Include="..\..\03.app\01-Alabo.App.Share\01-Alabo.App.Share.csproj" />
-    <ProjectReference Include="..\..\03.app\02-Alabo.App.Kpi\02-Alabo.App.Kpi.csproj" />
+    <ProjectReference Include="..\..\03.app\02-Alabo.App.Kpi\02-Alabo.App.Kpis.csproj" />
   </ItemGroup>
 
 </Project>
