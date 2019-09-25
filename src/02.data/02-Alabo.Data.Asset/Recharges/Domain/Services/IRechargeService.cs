@@ -16,13 +16,6 @@ namespace Alabo.App.Core.Finance.Domain.Services {
     public interface IRechargeService : IService<Recharge, long> {
 
         /// <summary>
-        /// 储值卡充值
-        /// </summary>
-        /// <param name="view"></param>
-        /// <returns></returns>
-        ServiceResult StoredValueRecharge(StoredValueInput view);
-
-        /// <summary>
         ///     线上充值
         /// </summary>
         /// <param name="view"></param>
@@ -53,22 +46,10 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         IList<KeyValue> GetRechargeMoneys();
 
         /// <summary>
-        ///     充值详情
-        /// </summary>
-        /// <param name="id">主键ID</param>
-        ViewAdminRecharge GetAdminRecharge(long id);
-
-        /// <summary>
         ///     审核
         /// </summary>
         /// <param name="httpContext"></param>
         ServiceResult Check(DefaultHttpContext httpContext);
-
-        /// <summary>
-        ///     获取用户充值列表
-        /// </summary>
-        /// <param name="parameter"></param>
-        PagedList<Trade> GetUserList(RechargeAddInput parameter);
 
         RechargeDetail GetSingle(long id);
     }

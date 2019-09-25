@@ -84,22 +84,6 @@ namespace Alabo.App.Core.Finance.Controllers {
         }
 
         /// <summary>
-        ///     获取用户所有提现数据
-        /// </summary>
-        /// <param name="parameter">参数</param>
-        [HttpGet]
-        [Display(Description = "获取用户所有提现数据")]
-        [ApiAuth]
-        public ApiResult<PagedList<Trade>> GetUserList([FromQuery] WithDrawApiInput parameter) {
-            var result = Resolve<IWithdrawService>().GetUserList(parameter);
-            if (result != null) {
-                return ApiResult.Success(result);
-            }
-
-            return ApiResult.Failure<PagedList<Trade>>("用户提现不存在", MessageCodes.ParameterValidationFailure);
-        }
-
-        /// <summary>
         ///     删除用户提现
         /// </summary>
         /// <param name="loginUserId">登录会员Id</param>
@@ -120,24 +104,25 @@ namespace Alabo.App.Core.Finance.Controllers {
         [Display(Description = "用户提现列表")]
         [ApiAuth]
         public ApiResult<ListOutput> List([FromQuery] ListInput parameter) {
-            var model = Resolve<ITradeService>()
-                .GetList(u => u.UserId == parameter.LoginUserId && u.Type == TradeType.Withdraw).ToList();
-            var apiOutput = new ListOutput {
-                TotalSize = model.Count() / parameter.PageSize
-            };
-            foreach (var item in model) {
-                var apiData = new ListItem {
-                    Title = $"提现金额{item.Amount}元",
-                    Intro = $"{item.CreateTime.ToString("yyyy-MM-dd hh:ss")}",
-                    Extra = "编号" + item.Serial,
-                    Image = Resolve<IApiService>().ApiUserAvator(item.Id),
-                    Id = item.Id,
-                    Url = $"/pages/user?path=finance_withdraw_view&id={item.Id}"
-                };
-                apiOutput.ApiDataList.Add(apiData);
-            }
+            //var model = Resolve<ITradeService>()
+            //    .GetList(u => u.UserId == parameter.LoginUserId && u.Type == TradeType.Withdraw).ToList();
+            //var apiOutput = new ListOutput {
+            //    TotalSize = model.Count() / parameter.PageSize
+            //};
+            //foreach (var item in model) {
+            //    var apiData = new ListItem {
+            //        Title = $"提现金额{item.Amount}元",
+            //        Intro = $"{item.CreateTime.ToString("yyyy-MM-dd hh:ss")}",
+            //        Extra = "编号" + item.Serial,
+            //        Image = Resolve<IApiService>().ApiUserAvator(item.Id),
+            //        Id = item.Id,
+            //        Url = $"/pages/user?path=finance_withdraw_view&id={item.Id}"
+            //    };
+            //    apiOutput.ApiDataList.Add(apiData);
+            //}
 
-            return ApiResult.Success(apiOutput);
+            //return ApiResult.Success(apiOutput);
+            return null;
         }
 
         /// <summary>
@@ -172,15 +157,16 @@ namespace Alabo.App.Core.Finance.Controllers {
         [HttpGet]
         [Display(Description = "提现记录")]
         public ApiResult GetList() {
-            var result = new List<WithDrawOutput>();
-            var model = Resolve<ITradeService>().GetPagedList(Query, u => u.Type == TradeType.Withdraw);
-            var moneyConfigList = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
-            foreach (var item in model) {
-                var withDraw = AutoMapping.SetValue<WithDrawOutput>(item);
-                withDraw.MoneyTypeName = moneyConfigList.FirstOrDefault(u => u.Id == item.MoneyTypeId)?.Name;
-                result.Add(withDraw);
-            }
-            return ApiResult.Success(result);
+            //var result = new List<WithDrawOutput>();
+            //var model = Resolve<ITradeService>().GetPagedList(Query, u => u.Type == TradeType.Withdraw);
+            //var moneyConfigList = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
+            //foreach (var item in model) {
+            //    var withDraw = AutoMapping.SetValue<WithDrawOutput>(item);
+            //    withDraw.MoneyTypeName = moneyConfigList.FirstOrDefault(u => u.Id == item.MoneyTypeId)?.Name;
+            //    result.Add(withDraw);
+            //}
+            //return ApiResult.Success(result);
+            return null;
         }
     }
 }

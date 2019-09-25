@@ -150,18 +150,18 @@ namespace Alabo.App.Core.Finance.Domain.Services {
                     }
                 }
 
-                //安全验证 如果是充值 ordersIds   为tradeId 2018524
-                if (pay.Type == CheckoutType.Recharge) {
-                    var tradeIds = pay.EntityId.DeserializeJson<List<long>>();
-                    if (tradeIds == null || tradeIds.Count < 1) {
-                        return Tuple.Create(ServiceResult.FailedWithMessage("实体交易已不存在"), payOutput);
-                    }
+                ////安全验证 如果是充值 ordersIds   为tradeId 2018524
+                //if (pay.Type == CheckoutType.Recharge) {
+                //    var tradeIds = pay.EntityId.DeserializeJson<List<long>>();
+                //    if (tradeIds == null || tradeIds.Count < 1) {
+                //        return Tuple.Create(ServiceResult.FailedWithMessage("实体交易已不存在"), payOutput);
+                //    }
 
-                    var payTrades = Resolve<ITradeService>().GetList(r => tradeIds.Contains(r.Id));
-                    if (!pay.Amount.EqualsDigits(payTrades.Sum(r => r.Amount))) {
-                        return Tuple.Create(ServiceResult.FailedWithMessage("支付金额与订单金额不一致"), payOutput);
-                    }
-                }
+                //    var payTrades = Resolve<ITradeService>().GetList(r => tradeIds.Contains(r.Id));
+                //    if (!pay.Amount.EqualsDigits(payTrades.Sum(r => r.Amount))) {
+                //        return Tuple.Create(ServiceResult.FailedWithMessage("支付金额与订单金额不一致"), payOutput);
+                //    }
+                //}
 
                 #endregion 支付金额校验
 
@@ -331,8 +331,8 @@ namespace Alabo.App.Core.Finance.Domain.Services {
             }
 
             if (pay.Type == CheckoutType.Recharge) {
-                var trade = Resolve<ITradeService>().GetList(e => orderIds.Contains(e.Id)).FirstOrDefault();
-                return _payRepository.AfterPay(pay, isSucess, trade);
+                //var trade = Resolve<ITradeService>().GetList(e => orderIds.Contains(e.Id)).FirstOrDefault();
+                //return _payRepository.AfterPay(pay, isSucess, trade);
             }
 
             return _payRepository.AfterPay(orderIds, pay, isSucess);

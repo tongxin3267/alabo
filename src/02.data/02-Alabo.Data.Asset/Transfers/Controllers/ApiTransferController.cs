@@ -92,26 +92,27 @@ namespace Alabo.App.Core.Finance.Controllers {
         [Display(Description = "转账记录")]
         [HttpGet]
         public ApiResult<ListOutput> List([FromQuery] ListInput parameter) {
-            var model = Resolve<ITradeService>()
-                .GetList(u => /*u.UserId == parameter.LoginUserId &&*/ u.Type == TradeType.Transfer).ToList();
-            var userList = Resolve<IUserService>().GetList();
-            var apiOutput = new ListOutput {
-                TotalSize = model.Count() / parameter.PageSize
-            };
-            foreach (var item in model) {
-                var apiData = new ListItem {
-                    Title = $"转账金额{item.Amount}元",
-                    Intro =
-                        $"转账对象{userList.FirstOrDefault(u => u.Id == item.UserId)?.UserName} {item.CreateTime.ToString("yyyy-MM-dd hh:ss")}",
-                    Extra = "编号" + item.Serial,
-                    Image = Resolve<IApiService>().ApiUserAvator(item.Id),
-                    Id = item.Id,
-                    Url = $"/pages/user?path=finance_transfer_view&id={item.Id}"
-                };
-                apiOutput.ApiDataList.Add(apiData);
-            }
+            //var model = Resolve<ITradeService>()
+            //    .GetList(u => /*u.UserId == parameter.LoginUserId &&*/ u.Type == TradeType.Transfer).ToList();
+            //var userList = Resolve<IUserService>().GetList();
+            //var apiOutput = new ListOutput {
+            //    TotalSize = model.Count() / parameter.PageSize
+            //};
+            //foreach (var item in model) {
+            //    var apiData = new ListItem {
+            //        Title = $"转账金额{item.Amount}元",
+            //        Intro =
+            //            $"转账对象{userList.FirstOrDefault(u => u.Id == item.UserId)?.UserName} {item.CreateTime.ToString("yyyy-MM-dd hh:ss")}",
+            //        Extra = "编号" + item.Serial,
+            //        Image = Resolve<IApiService>().ApiUserAvator(item.Id),
+            //        Id = item.Id,
+            //        Url = $"/pages/user?path=finance_transfer_view&id={item.Id}"
+            //    };
+            //    apiOutput.ApiDataList.Add(apiData);
+            //}
 
-            return ApiResult.Success(apiOutput);
+            //return ApiResult.Success(apiOutput);
+            return null;
         }
     }
 }

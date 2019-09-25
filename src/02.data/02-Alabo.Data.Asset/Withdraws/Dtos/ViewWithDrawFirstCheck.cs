@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Alabo.App.Asset.Withdraws.Domain.Enums;
 using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.Web.Mvc.ViewModel;
 
@@ -28,7 +29,7 @@ namespace Alabo.App.Core.Finance.ViewModels.WithDraw {
         /// <summary>
         ///     状态
         /// </summary>
-        public TradeStatus Status { get; set; }
+        public WithdrawStatus Status { get; set; }
 
         /// <summary>
         ///     申请提现额度

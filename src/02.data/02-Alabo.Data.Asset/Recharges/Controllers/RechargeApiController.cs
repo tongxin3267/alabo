@@ -52,14 +52,6 @@ namespace Alabo.App.Core.Finance.Controllers {
             return ApiResult.Failure("充值类型获取失败", MessageCodes.ParameterValidationFailure);
         }
 
-        [HttpPost]
-        [Display(Description = "储蓄充值")]
-        [ApiAuth]
-        public ApiResult StoredValueAdd([FromBody] StoredValueInput parameter) {
-            var result = Resolve<IRechargeService>().StoredValueRecharge(parameter);
-            return ToResult(result);
-        }
-
         /// <summary>
         ///     充值，包括线下充值和线下充值
         /// </summary>
@@ -156,40 +148,42 @@ namespace Alabo.App.Core.Finance.Controllers {
         [HttpGet]
         [Display(Description = "获取充值列表")]
         public ApiResult<ListOutput> List([FromQuery] ListInput parameter) {
-            var model = Resolve<ITradeService>()
-                .GetList(u => /*u.UserId == parameter.LoginUserId &&*/ u.Type == TradeType.Recharge).ToList();
-            var apiOutput = new ListOutput {
-                TotalSize = model.Count() / parameter.PageSize
-            };
-            foreach (var item in model) {
-                var apiData = new ListItem {
-                    Title = $"充值金额{item.Amount}元",
-                    Intro = $"{item.CreateTime.ToString("yyyy-MM-dd hh:ss")}",
-                    Extra = "编号" + item.Serial,
-                    Image = Resolve<IApiService>().ApiUserAvator(item.Id),
-                    Id = item.Id,
-                    Url = $"/pages/user?path=finance_recharge_view&id={item.Id}"
-                };
-                apiOutput.ApiDataList.Add(apiData);
-            }
+            //var model = Resolve<ITradeService>()
+            //    .GetList(u => /*u.UserId == parameter.LoginUserId &&*/ u.Type == TradeType.Recharge).ToList();
+            //var apiOutput = new ListOutput {
+            //    TotalSize = model.Count() / parameter.PageSize
+            //};
+            //foreach (var item in model) {
+            //    var apiData = new ListItem {
+            //        Title = $"充值金额{item.Amount}元",
+            //        Intro = $"{item.CreateTime.ToString("yyyy-MM-dd hh:ss")}",
+            //        Extra = "编号" + item.Serial,
+            //        Image = Resolve<IApiService>().ApiUserAvator(item.Id),
+            //        Id = item.Id,
+            //        Url = $"/pages/user?path=finance_recharge_view&id={item.Id}"
+            //    };
+            //    apiOutput.ApiDataList.Add(apiData);
+            //}
 
-            return ApiResult.Success(apiOutput);
+            // return ApiResult.Success();
+            return null;
         }
 
         [ApiAuth]
         [HttpGet]
         [Display(Description = "充值记录")]
         public ApiResult GetRechargeList() {
-            var result = new List<RechargeOutput>();
-            var model = Resolve<ITradeService>().GetPagedList(Query, u => u.Type == TradeType.Recharge);
-            var moneyConfigList = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
-            foreach (var item in model) {
-                var recharge = AutoMapping.SetValue<RechargeOutput>(item);
-                recharge.StatusName = item.Status.GetDisplayName();
-                recharge.MoneyTypeName = moneyConfigList.FirstOrDefault(u => u.Id == item.MoneyTypeId)?.Name;
-                result.Add(recharge);
-            }
-            return ApiResult.Success(result);
+            //var result = new List<RechargeOutput>();
+            //var model = Resolve<ITradeService>().GetPagedList(Query, u => u.Type == TradeType.Recharge);
+            //var moneyConfigList = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
+            //foreach (var item in model) {
+            //    var recharge = AutoMapping.SetValue<RechargeOutput>(item);
+            //    recharge.StatusName = item.Status.GetDisplayName();
+            //    recharge.MoneyTypeName = moneyConfigList.FirstOrDefault(u => u.Id == item.MoneyTypeId)?.Name;
+            //    result.Add(recharge);
+            //}
+            //return ApiResult.Success(result);
+            return null;
         }
     }
 }

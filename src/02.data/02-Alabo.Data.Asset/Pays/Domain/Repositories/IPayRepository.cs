@@ -24,13 +24,5 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
         /// <param name="pay"></param>
         /// <param name="isPaySucess">是否支出成功</param>
         ServiceResult AfterPay(List<object> entityIdList, Pay pay, bool isPaySucess);
-
-        /// <summary>
-        ///     支付完成后更新trade表的状态
-        /// </summary>
-        /// <param name="pay"></param>
-        /// <param name="isPaySucess"></param>
-        /// <param name="trade"></param>
-        ServiceResult AfterPay(Pay pay, bool isPaySucess, Trade trade);
     }
 }

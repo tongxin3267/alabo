@@ -106,23 +106,24 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
         public string CreateTime { get; set; }
 
         public AutoPreview GetPreview(string id, AutoBaseModel autoModel) {
-            var model = Resolve<ITradeService>().GetSingle(u => u.Id == id.ToInt64() && u.Type == TradeType.Withdraw);
-            var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
-            var item = AutoMapping.SetValue<WithdrawViewOutput>(model);
+            //var model = Resolve<ITradeService>().GetSingle(u => u.Id == id.ToInt64() && u.Type == TradeType.Withdraw);
+            //var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
+            //var item = AutoMapping.SetValue<WithdrawViewOutput>(model);
 
-            item.Serial = model.Serial;
-            item.Status = model.Status.GetDisplayName();
-            item.BankCardNum = model.TradeExtension.WithDraw.BankCard?.Number;
-            item.BankCardName = model.TradeExtension.WithDraw.BankCard?.Type.GetDisplayName();
-            item.MoneyTypeName = moneyTypes.FirstOrDefault(u => u.Id == model.MoneyTypeId)?.Name;
-            item.Intro = model.TradeExtension?.TradeRemark?.UserRemark;
-            item.UserName = Resolve<IUserService>().GetSingle(u => u.Id == model.UserId)?.UserName;
-            item.AcctionType = model.Type.GetDisplayName();
-            var result = new AutoPreview {
-                KeyValues = item.ToKeyValues()
-            };
+            //item.Serial = model.Serial;
+            //item.Status = model.Status.GetDisplayName();
+            //item.BankCardNum = model.TradeExtension.WithDraw.BankCard?.Number;
+            //item.BankCardName = model.TradeExtension.WithDraw.BankCard?.Type.GetDisplayName();
+            //item.MoneyTypeName = moneyTypes.FirstOrDefault(u => u.Id == model.MoneyTypeId)?.Name;
+            //item.Intro = model.TradeExtension?.TradeRemark?.UserRemark;
+            //item.UserName = Resolve<IUserService>().GetSingle(u => u.Id == model.UserId)?.UserName;
+            //item.AcctionType = model.Type.GetDisplayName();
+            //var result = new AutoPreview {
+            //    KeyValues = item.ToKeyValues()
+            //};
 
-            return result;
+            //return result;
+            return null;
         }
     }
 }

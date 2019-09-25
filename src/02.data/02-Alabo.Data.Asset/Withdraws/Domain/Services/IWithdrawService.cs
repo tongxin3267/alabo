@@ -49,12 +49,6 @@ namespace Alabo.App.Asset.Withdraws.Domain.Services {
         PagedList<ViewAdminWithDraw> GetAdminPageList(object query);
 
         /// <summary>
-        ///     获取用户提现列表
-        /// </summary>
-        /// <param name="parameter">参数</param>
-        PagedList<Trade> GetUserList(WithDrawApiInput parameter);
-
-        /// <summary>
         ///     获取所有支持提现的货币类型
         /// </summary>
         /// <param name="userId">会员Id</param>

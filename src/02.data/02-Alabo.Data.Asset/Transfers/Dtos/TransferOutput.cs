@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.App.Asset.Withdraws.Domain.Enums;
 using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
@@ -57,7 +59,7 @@ namespace Alabo.App.Core.Finance.Domain.Dtos.Transfer {
         [Field(ControlsType = ControlsType.DropdownList, IsTabSearch = true,
             DataSource = "Alabo.App.Core.Finance.Domain.Enums.TradeStatus", ListShow = true, Width = "80",
             SortOrder = 7)]
-        public TradeStatus Status { get; set; }
+        public WithdrawStatus Status { get; set; }
 
         /// <summary>
         ///     申请金额
@@ -69,14 +71,6 @@ namespace Alabo.App.Core.Finance.Domain.Dtos.Transfer {
             SortOrder = 4)]
         [Range(1, 99999999, ErrorMessage = "提现额度必须大于等于0！")]
         public decimal Amount { get; set; }
-
-        /// <summary>
-        ///     交易类型
-        /// </summary>
-        [Display(Name = "交易类型")]
-        [Field(ControlsType = ControlsType.DropdownList, DataSource = "Alabo.App.Core.Finance.Domain.Enums.TradeType",
-            ListShow = true, Width = "80", SortOrder = 6)]
-        public TradeType Type { get; set; }
 
         /// <summary>
         /// </summary>

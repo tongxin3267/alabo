@@ -82,29 +82,10 @@ namespace Alabo.App.Core.Finance.ViewModels.Transfer {
         public DateTime CreateTime { get; set; }
 
         /// <summary>
-        ///     Gets or sets the status.
-        /// </summary>
-        [Display(Name = "状态")]
-        [Field(ControlsType = ControlsType.DropdownList,
-            DataSource = "Alabo.App.Core.Finance.Domain.Enums.TradeStatus", IsShowBaseSerach = true,
-            IsShowAdvancedSerach = true, GroupTabId = 1, Width = "80", SortOrder = 9)]
-        public TradeStatus Status { get; set; }
-
-        /// <summary>
         ///     Gets or sets the money 类型 configuration.
         /// </summary>
         public MoneyTypeConfig TragetMoneyType { get; set; }
 
         public User.Domain.Entities.User TragetUser { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the next with draw.
-        /// </summary>
-        public Trade NextTranfer { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the prex with draw.
-        /// </summary>
-        public Trade PrexTranfer { get; set; }
     }
 }

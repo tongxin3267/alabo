@@ -33,11 +33,6 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         PagedList<TransferOutput> GetPageList(object query);
 
         /// <summary>
-        ///     用户转账列表
-        /// </summary>
-        PagedList<Trade> GetUserList(TransferApiInput parameter);
-
-        /// <summary>
         ///     获取所有支持转账配置
         /// </summary>
         IList<KeyValue> GetTransferConfig();
@@ -47,11 +42,5 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// </summary>
         /// <param name="id">主键ID</param>
         ViewAdminTransfer GetAdminTransfer(long id);
-
-        /// <summary>
-        ///     转账Edit
-        /// </summary>
-        /// <param name="id">主键ID</param>
-        ViewHomeTransfer GetView(long id);
     }
 }

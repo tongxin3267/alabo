@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using Alabo.App.Asset.Recharges.Domain.Enums;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Finance.Domain.Dtos.Recharge;
@@ -19,6 +20,7 @@ using Alabo.Extensions;
 using Alabo.Mapping;
 using Alabo.UI;
 using Alabo.UI.AutoTables;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
@@ -27,7 +29,8 @@ namespace Alabo.App.Core.Finance.ViewModels.Recharge {
     /// <summary>
     ///     充值管理
     /// </summary>
-    [ClassProperty(Name = "充值管理", Icon = "fa fa-puzzle-piece", Description = "充值管理", SideBarType = SideBarType.RechargeSideBar)]
+    [ClassProperty(Name = "充值管理", Icon = "fa fa-puzzle-piece", Description = "充值管理",
+        SideBarType = SideBarType.RechargeSideBar)]
     public class RechargeOutput : UIBase, IAutoTable<RechargeOutput> {
 
         /// <summary>
@@ -86,7 +89,7 @@ namespace Alabo.App.Core.Finance.ViewModels.Recharge {
             DataSource = "Alabo.App.Core.Finance.Domain.Enums.TradeStatus", ListShow = false, EditShow = true,
             Width = "80",
             SortOrder = 10)]
-        public TradeStatus Status { get; set; } = TradeStatus.Pending;
+        public RechargeStatus Status { get; set; } = RechargeStatus.Pending;
 
         /// <summary>
         ///     交易状态
@@ -98,12 +101,8 @@ namespace Alabo.App.Core.Finance.ViewModels.Recharge {
         [Field(ControlsType = ControlsType.TextBox, Width = "80", LabelColor = LabelColor.Info, EditShow = false,
             ListShow = true, SortOrder = 9)]
         public string StatusName {
-            get {
-                return this.Status.GetDisplayName();
-            }
-            set {
-                _ = value;
-            }
+            get { return this.Status.GetDisplayName(); }
+            set { _ = value; }
         }
 
         /// <summary>
@@ -157,86 +156,77 @@ namespace Alabo.App.Core.Finance.ViewModels.Recharge {
         }
 
         public PageResult<RechargeOutput> PageTable(object query, AutoBaseModel autoModel) {
-            var queryInput = ToQuery<RechargeOutputPara>();
-            if (queryInput.Amount != null) {
-                var i = 0M;
-                var b = Decimal.TryParse(queryInput.Amount, out i);
-                if (i == 0) {
-                    throw new ValidException("查询金额格式不正确");
-                }
-            }
+            //    var queryInput = ToQuery<RechargeOutputPara>();
+            //    if (queryInput.Amount != null) {
+            //        var i = 0M;
+            //        var b = Decimal.TryParse(queryInput.Amount, out i);
+            //        if (i == 0) {
+            //            throw new ValidException("查询金额格式不正确");
+            //        }
+            //    }
 
-            var userInput = ToQuery<RechargeAddInput>();
+            //    var userInput = ToQuery<RechargeAddInput>();
 
-            var userService = Resolve<IUserService>();
-            var moneyType = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
-            if (autoModel.Filter == FilterType.Admin) {
-                var model = Resolve<IRechargeService>().GetUserList(userInput);
+            //    var userService = Resolve<IUserService>();
+            //    var moneyType = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
+            //    if (autoModel.Filter == FilterType.Admin) {
+            //        var model = Resolve<IRechargeService>().GetUserList(userInput);
 
-                var users = userService.GetList(s => model.Select(i => i.UserId).Contains(s.Id));
-                var view = new PagedList<RechargeOutput>();
-                foreach (var item in model) {
-                    var outPut = AutoMapping.SetValue<RechargeOutput>(item);
-                    //申请账号
-                    outPut.MoneyTypeName = moneyType.SingleOrDefault(s => s.Id == item.MoneyTypeId)?.Name;
-                    //用户
-                    var user = users.SingleOrDefault(s => s.Id == item.UserId);
-                    if (user != null) {
-                        outPut.UserName = $"{user.Name}({user.UserName})";
-                    }
+            //        var users = userService.GetList(s => model.Select(i => i.UserId).Contains(s.Id));
+            //        var view = new PagedList<RechargeOutput>();
+            //        foreach (var item in model) {
+            //            var outPut = AutoMapping.SetValue<RechargeOutput>(item);
+            //            //申请账号
+            //            outPut.MoneyTypeName = moneyType.SingleOrDefault(s => s.Id == item.MoneyTypeId)?.Name;
+            //            //用户
+            //            var user = users.SingleOrDefault(s => s.Id == item.UserId);
+            //            if (user != null) {
+            //                outPut.UserName = $"{user.Name}({user.UserName})";
+            //            }
 
-                    view.Add(outPut);
-                }
-                if (queryInput.UserName != null) {
-                    var result = view.Where(p => p.UserName == queryInput.UserName).ToList();
+            //            view.Add(outPut);
+            //        }
+            //        if (queryInput.UserName != null) {
+            //            var result = view.Where(p => p.UserName == queryInput.UserName).ToList();
 
-                    foreach (var item in result) {
-                        view.Add(item);
-                    }
-                }
-                return ToPageResult(view);
-            }
-            if (autoModel.Filter == FilterType.User) {
-                userInput.LoginUserId = autoModel.BasicUser.Id;
-                var model = Resolve<IRechargeService>().GetUserList(userInput);
-                var users = userService.GetList(s => model.Select(i => i.UserId).Contains(s.Id));
-                var view = new PagedList<RechargeOutput>();
-                foreach (var item in model) {
-                    var outPut = AutoMapping.SetValue<RechargeOutput>(item);
-                    //申请账号
-                    outPut.MoneyTypeName = moneyType.SingleOrDefault(s => s.Id == item.MoneyTypeId)?.Name;
-                    //用户
-                    var user = users.SingleOrDefault(s => s.Id == item.UserId);
-                    if (user != null) {
-                        outPut.UserName = $"{user.Name}({user.UserName})";
-                    }
+            //            foreach (var item in result) {
+            //                view.Add(item);
+            //            }
+            //        }
+            //        return ToPageResult(view);
+            //    }
+            //    if (autoModel.Filter == FilterType.User) {
+            //        userInput.LoginUserId = autoModel.BasicUser.Id;
+            //        var model = Resolve<IRechargeService>().GetUserList(userInput);
+            //        var users = userService.GetList(s => model.Select(i => i.UserId).Contains(s.Id));
+            //        var view = new PagedList<RechargeOutput>();
+            //        foreach (var item in model) {
+            //            var outPut = AutoMapping.SetValue<RechargeOutput>(item);
+            //            //申请账号
+            //            outPut.MoneyTypeName = moneyType.SingleOrDefault(s => s.Id == item.MoneyTypeId)?.Name;
+            //            //用户
+            //            var user = users.SingleOrDefault(s => s.Id == item.UserId);
+            //            if (user != null) {
+            //                outPut.UserName = $"{user.Name}({user.UserName})";
+            //            }
 
-                    view.Add(outPut);
-                }
-                return ToPageResult(view);
-            } else {
-                throw new ValidException("类型权限不正确");
-            }
+            //            view.Add(outPut);
+            //        }
+            //        return ToPageResult(view);
+            //    } else {
+            //        throw new ValidException("类型权限不正确");
+            //    }
+            //}
+            return null;
         }
 
         /// <summary>
-        ///     操作链接
+        ///
         /// </summary>
-        public IEnumerable ViewLinks() {
-            var quickLinks = new List<ViewLink>
-            {
-                new ViewLink("详情", "/Admin/Recharge/Edit?id=[[Id]]", Icons.Edit, LinkType.ColumnLink)
-            };
-            return quickLinks;
+        public class RechargeOutputPara : PagedInputDto {
+            public string UserName { get; set; }
+
+            public string Amount { get; set; }
         }
-    }
-
-    /// <summary>
-    ///
-    /// </summary>
-    public class RechargeOutputPara : PagedInputDto {
-        public string UserName { get; set; }
-
-        public string Amount { get; set; }
     }
 }

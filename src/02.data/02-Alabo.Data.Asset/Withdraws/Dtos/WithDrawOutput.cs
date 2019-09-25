@@ -15,6 +15,7 @@ using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.UI;
 using Alabo.UI.AutoTables;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
@@ -64,20 +65,11 @@ namespace Alabo.App.Core.Finance.Domain.Dtos.WithDraw {
         public string MoneyTypeName { get; set; }
 
         /// <summary>
-        ///     状态
-        /// </summary>
-        [Display(Name = "状态")]
-        [Field(ControlsType = ControlsType.DropdownList, IsTabSearch = true,
-            DataSource = "Alabo.App.Core.Finance.Domain.Enums.TradeStatus", Width = "80",
-            SortOrder = 7)]
-        public TradeStatus Status { get; set; }
-
-        /// <summary>
         ///     Gets or sets the name of the status.
         /// </summary>
         [Display(Name = "状态")]
         [Field(ControlsType = ControlsType.Label,
-            DataSourceType = typeof(TradeStatus), ListShow = true, GroupTabId = 1,
+   ListShow = true, GroupTabId = 1,
             Width = "80", SortOrder = 9)]
         public string StatusName { get; set; }
 
@@ -98,14 +90,6 @@ namespace Alabo.App.Core.Finance.Domain.Dtos.WithDraw {
         [Display(Name = "用户备注")]
         [Field(ControlsType = ControlsType.TextBox, ListShow = true, Width = "120", SortOrder = 10)]
         public string UserRemark { get; set; }
-
-        /// <summary>
-        ///     交易类型
-        /// </summary>
-        [Display(Name = "交易类型")]
-        [Field(ControlsType = ControlsType.DropdownList, DataSource = "Alabo.App.Core.Finance.Domain.Enums.TradeType",
-            ListShow = false, Width = "80", SortOrder = 6)]
-        public TradeType Type { get; set; }
 
         /// <summary>
         ///     手续费
@@ -169,67 +153,57 @@ namespace Alabo.App.Core.Finance.Domain.Dtos.WithDraw {
         }
 
         public PageResult<WithDrawOutput> PageTable(object query, AutoBaseModel autoModel) {
-            var userInput = ToQuery<WithDrawApiInput>();
+            //var userInput = ToQuery<WithDrawApiInput>();
 
-            if (autoModel.Filter == FilterType.Admin) {
-                var dic = HttpWeb.HttpContext.ToDictionary();
-                dic = dic.RemoveKey("type");// 移除该type否则无法正常lambda
+            //if (autoModel.Filter == FilterType.Admin) {
+            //    var dic = HttpWeb.HttpContext.ToDictionary();
+            //    dic = dic.RemoveKey("type");// 移除该type否则无法正常lambda
 
-                var model = Resolve<IWithdrawService>().GetAdminPageList(dic.ToJson());
-                var view = new PagedList<WithDrawOutput>();
-                //var moneyTypes= Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>()
-                foreach (var item in model) {
-                    var outPut = AutoMapping.SetValue<WithDrawOutput>(item);
-                    //moneyTypes.FirstOrDefault(s=>s.Id==item.MoneyTypeConfig.Id);
-                    outPut.MoneyTypeName = item.MoneyTypeConfig?.Name;
-                    // outPut.BankName = item.BankCard.Type.GetDisplayName();
-                    outPut.CardId = item.BankCard?.Number;
-                    outPut.RealName = item.BankCard?.Name;
-                    outPut.BankName = item.BankCard?.Address;
-                    outPut.StatusName = item.StatusName;
-                    if (item.Status == TradeStatus.Pending) {
-                        outPut.ColumnAction = new ColumnAction {
-                            Name = "初审",
-                            Type = typeof(UI.AutoForm.WithdrawReviewAutoForm).Name
-                        };
-                    } else if (item.Status == TradeStatus.FirstCheckSuccess) {
-                        outPut.ColumnAction = new ColumnAction {
-                            Name = "二审",
-                            Type = typeof(UI.AutoForm.WithdrawReviewAutoForm).Name
-                        };
-                    } else {
-                        outPut.ColumnAction = new ColumnAction {
-                            Name = "查看",
-                            Type = typeof(UI.AutoForm.WithdrawResultwAutoForm).Name
-                        };
-                    }
-                    view.Add(outPut);
-                }
-                return ToPageResult(view);
-            }
-            if (autoModel.Filter == FilterType.User) {
-                userInput.UserId = autoModel.BasicUser.Id;
-                var model = Resolve<IWithdrawService>().GetUserList(userInput);
-                var view = new PagedList<WithDrawOutput>();
-                foreach (var item in model) {
-                    var outPut = AutoMapping.SetValue<WithDrawOutput>(item);
-                    view.Add(outPut);
-                }
-                return ToPageResult(view);
-            } else {
-                throw new ValidException("类型权限不正确");
-            }
-        }
-
-        /// <summary>
-        ///     视图s the links.
-        /// </summary>
-        public IEnumerable<ViewLink> ViewLinks() {
-            var quickLinks = new List<ViewLink>
-            {
-                new ViewLink("编辑", "/Admin/WithDraw/Edit?Id=[[Id]]", Icons.Edit, LinkType.ColumnLink)
-            };
-            return quickLinks;
+            //    var model = Resolve<IWithdrawService>().GetAdminPageList(dic.ToJson());
+            //    var view = new PagedList<WithDrawOutput>();
+            //    //var moneyTypes= Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>()
+            //    foreach (var item in model) {
+            //        var outPut = AutoMapping.SetValue<WithDrawOutput>(item);
+            //        //moneyTypes.FirstOrDefault(s=>s.Id==item.MoneyTypeConfig.Id);
+            //        outPut.MoneyTypeName = item.MoneyTypeConfig?.Name;
+            //        // outPut.BankName = item.BankCard.Type.GetDisplayName();
+            //        outPut.CardId = item.BankCard?.Number;
+            //        outPut.RealName = item.BankCard?.Name;
+            //        outPut.BankName = item.BankCard?.Address;
+            //        outPut.StatusName = item.StatusName;
+            //        if (item.Status == TradeStatus.Pending) {
+            //            outPut.ColumnAction = new ColumnAction {
+            //                Name = "初审",
+            //                Type = typeof(UI.AutoForm.WithdrawReviewAutoForm).Name
+            //            };
+            //        } else if (item.Status == TradeStatus.FirstCheckSuccess) {
+            //            outPut.ColumnAction = new ColumnAction {
+            //                Name = "二审",
+            //                Type = typeof(UI.AutoForm.WithdrawReviewAutoForm).Name
+            //            };
+            //        } else {
+            //            outPut.ColumnAction = new ColumnAction {
+            //                Name = "查看",
+            //                Type = typeof(UI.AutoForm.WithdrawResultwAutoForm).Name
+            //            };
+            //        }
+            //        view.Add(outPut);
+            //    }
+            //    return ToPageResult(view);
+            //}
+            //if (autoModel.Filter == FilterType.User) {
+            //    userInput.UserId = autoModel.BasicUser.Id;
+            //    var model = Resolve<IWithdrawService>().GetUserList(userInput);
+            //    var view = new PagedList<WithDrawOutput>();
+            //    foreach (var item in model) {
+            //        var outPut = AutoMapping.SetValue<WithDrawOutput>(item);
+            //        view.Add(outPut);
+            //    }
+            //    return ToPageResult(view);
+            //} else {
+            //    throw new ValidException("类型权限不正确");
+            //}
+            return null;
         }
     }
 

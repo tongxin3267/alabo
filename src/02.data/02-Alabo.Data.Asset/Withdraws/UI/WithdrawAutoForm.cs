@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Alabo.App.Asset.Withdraws.Domain.Enums;
 using Alabo.App.Asset.Withdraws.Domain.Services;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.Dtos.WithDraw;
@@ -16,6 +17,7 @@ using Alabo.Maps;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
 using Alabo.UI.AutoTables;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Core.Finance.UI.AutoForm {
@@ -57,7 +59,7 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
         [Display(Name = "状态")]
         [Field(ControlsType = ControlsType.DropdownList, DataSource = "Alabo.App.Core.Finance.Domain.Enums.TradeStatus", ListShow = true, EditShow = false, SortOrder = 4)]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        public TradeStatus Status { get; set; }
+        public WithdrawStatus Status { get; set; }
 
         /// <summary>
         ///     Gets or sets the bank card identifier.
@@ -172,40 +174,42 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
                 return ToPageResult(view);
             }
             if (autoModel.Filter == FilterType.User) {
-                userInput.UserId = autoModel.BasicUser.Id;
-                userInput.LoginUserId = autoModel.BasicUser.Id;
-                var model = Resolve<IWithdrawService>().GetUserList(userInput);
+                //userInput.UserId = autoModel.BasicUser.Id;
+                //userInput.LoginUserId = autoModel.BasicUser.Id;
+                //var model = Resolve<IWithdrawService>().GetUserList(userInput);
 
-                var money = Resolve<IAutoConfigService>().GetList<Domain.CallBacks.MoneyTypeConfig>();
-                var view = new PagedList<WithdrawAutoForm>();
-                foreach (var item in model) {
-                    var outPut = new WithdrawAutoForm {
-                        //提现单号
-                        //Serial = item.Serial,
-                        //状态
-                        Status = item.Status,
-                        Amount = item.Amount,
-                        BankCardId = item.TradeExtension.WithDraw.BankCard.Id.ToString(),
-                        MoneyTypeId = item.MoneyTypeId,
-                        //MoneyTypeName = money.Find(s => s.Id == item.MoneyTypeId)?.Name,
-                        UserRemark = item.TradeExtension.TradeRemark.UserRemark,
-                        UserId = item.UserId,
-                        //BankName = $"{item.TradeExtension.WithDraw.BankCard.Type.GetDisplayName()}({item.TradeExtension.WithDraw.BankCard.Address})",
-                        //BankCardNumber = $"{item.TradeExtension.WithDraw.BankCard.Number}({item.TradeExtension.WithDraw.BankCard.Name})",
-                        CreateTime = item.CreateTime
-                    };// AutoMapping.SetValue<WithdrawAutoForm>(item);
-                    view.Add(outPut);
-                }
-                return ToPageResult(view);
+                //var money = Resolve<IAutoConfigService>().GetList<Domain.CallBacks.MoneyTypeConfig>();
+                //var view = new PagedList<WithdrawAutoForm>();
+                //foreach (var item in model) {
+                //    var outPut = new WithdrawAutoForm {
+                //        //提现单号
+                //        //Serial = item.Serial,
+                //        //状态
+                //        Status = item.Status,
+                //        Amount = item.Amount,
+                //        BankCardId = item.TradeExtension.WithDraw.BankCard.Id.ToString(),
+                //        MoneyTypeId = item.MoneyTypeId,
+                //        //MoneyTypeName = money.Find(s => s.Id == item.MoneyTypeId)?.Name,
+                //        UserRemark = item.TradeExtension.TradeRemark.UserRemark,
+                //        UserId = item.UserId,
+                //        //BankName = $"{item.TradeExtension.WithDraw.BankCard.Type.GetDisplayName()}({item.TradeExtension.WithDraw.BankCard.Address})",
+                //        //BankCardNumber = $"{item.TradeExtension.WithDraw.BankCard.Number}({item.TradeExtension.WithDraw.BankCard.Name})",
+                //        CreateTime = item.CreateTime
+                //    };// AutoMapping.SetValue<WithdrawAutoForm>(item);
+                //    view.Add(outPut);
+                //}
+                //return ToPageResult(view);
             } else {
                 throw new ValidException("类型权限不正确");
             }
+
+            return null;
         }
 
         public ServiceResult Save(object model, AutoBaseModel autoModel) {
             var withDraw = (WithdrawAutoForm)model;
             withDraw.UserId = autoModel.BasicUser.Id;
-            withDraw.Status = TradeStatus.FirstCheckSuccess;
+            withDraw.Status = WithdrawStatus.FirstCheckSuccess;
             //如果为空则直接赋值为 储值/现金
             if (withDraw.MoneyTypeId.IsNullOrEmpty()) {
                 withDraw.MoneyTypeId = Guid.Parse("e97ccd1e-1478-49bd-bfc7-e73a5d699000");

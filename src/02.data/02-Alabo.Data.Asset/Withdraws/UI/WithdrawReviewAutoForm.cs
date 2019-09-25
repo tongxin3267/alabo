@@ -8,6 +8,7 @@ using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Core.Finance.UI.AutoForm {
@@ -142,23 +143,23 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
             if (withDraw == null) {
                 form = new WithdrawReviewAutoForm();
             } else {
-                form = new WithdrawReviewAutoForm() {
-                    Status = withDraw.Status.GetDisplayName(),
-                    Amount = withDraw.Amount,
-                    Fee = withDraw.Fee,
-                    PaymentAmount = withDraw.Amount - withDraw.Fee,
+                //form = new WithdrawReviewAutoForm() {
+                //    Status = withDraw.Status.GetDisplayName(),
+                //    Amount = withDraw.Amount,
+                //    Fee = withDraw.Fee,
+                //    PaymentAmount = withDraw.Amount - withDraw.Fee,
 
-                    BankCardId = withDraw.BankCard?.Number,
-                    CreateTime = withDraw.CreateTime,
-                    FailuredReason = withDraw.FailuredReason,
-                    Id = withDraw.Id,
-                    MoneyTypeId = withDraw.MoneyTypeConfig?.Id,
+                //    BankCardId = withDraw.BankCard?.Number,
+                //    CreateTime = withDraw.CreateTime,
+                //    FailuredReason = withDraw.FailuredReason,
+                //    Id = withDraw.Id,
+                //    MoneyTypeId = withDraw.MoneyTypeConfig?.Id,
 
-                    ReviewRemark = withDraw.Remark,//汇款备注提示
+                //    ReviewRemark = withDraw.Remark,//汇款备注提示
 
-                    UserRemark = withDraw.UserRemark,
-                    UserId = withDraw.UserId
-                };
+                //    UserRemark = withDraw.UserRemark,
+                //    UserId = withDraw.UserId
+                //};
                 // withDraw.MapTo<WithdrawReviewAutoForm>();
             }
             var result = ToAutoForm(form);
@@ -175,41 +176,43 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
         }
 
         public ServiceResult Save(object model, AutoBaseModel autoModel) {
+            //TODO 提现审核注释
             var withDraw = (WithdrawReviewAutoForm)model;
-            withDraw.UserId = autoModel.BasicUser.Id;
+            //withDraw.UserId = autoModel.BasicUser.Id;
 
-            var adminWithDraw = Resolve<IWithdrawService>().GetAdminWithDraw(withDraw.Id);
+            //var adminWithDraw = Resolve<IWithdrawService>().GetAdminWithDraw(withDraw.Id);
 
-            if (withDraw.ReviewState == ReviewState.Pass && adminWithDraw.Status == TradeStatus.Pending) {
-                //通过初审
-                adminWithDraw.Status = TradeStatus.FirstCheckSuccess;
-            } else if (withDraw.ReviewState == ReviewState.Reject && adminWithDraw.Status == TradeStatus.Pending) {
-                //初审拒绝
-                adminWithDraw.Status = TradeStatus.Failured;
-            } else if (withDraw.ReviewState == ReviewState.Pass && adminWithDraw.Status == TradeStatus.FirstCheckSuccess) {
-                //通过二审
-                adminWithDraw.Status = TradeStatus.Success;
-            } else if (withDraw.ReviewState == ReviewState.Reject && adminWithDraw.Status == TradeStatus.FirstCheckSuccess) {
-                //拒绝二审
-                adminWithDraw.Status = TradeStatus.Failured;
-            } else {
-                //其他状态 返回异常
-                return ServiceResult.FailedMessage("状态异常");
-            }
+            //if (withDraw.ReviewState == ReviewState.Pass && adminWithDraw.Status == TradeStatus.Pending) {
+            //    //通过初审
+            //   // adminWithDraw.Status = TradeStatus.FirstCheckSuccess;
+            //} else if (withDraw.ReviewState == ReviewState.Reject && adminWithDraw.Status == TradeStatus.Pending) {
+            //    //初审拒绝
+            //    adminWithDraw.Status = TradeStatus.Failured;
+            //} else if (withDraw.ReviewState == ReviewState.Pass && adminWithDraw.Status == TradeStatus.FirstCheckSuccess) {
+            //    //通过二审
+            //    adminWithDraw.Status = TradeStatus.Success;
+            //} else if (withDraw.ReviewState == ReviewState.Reject && adminWithDraw.Status == TradeStatus.FirstCheckSuccess) {
+            //    //拒绝二审
+            //    adminWithDraw.Status = TradeStatus.Failured;
+            //} else {
+            //    //其他状态 返回异常
+            //    return ServiceResult.FailedMessage("状态异常");
+            //}
 
-            //如果为空则直接赋值为 储值/现金
-            if (withDraw.MoneyTypeId.IsNullOrEmpty()) {
-                withDraw.MoneyTypeId = Guid.Parse("e97ccd1e-1478-49bd-bfc7-e73a5d699000");
-            }
+            ////如果为空则直接赋值为 储值/现金
+            //if (withDraw.MoneyTypeId.IsNullOrEmpty()) {
+            //    withDraw.MoneyTypeId = Guid.Parse("e97ccd1e-1478-49bd-bfc7-e73a5d699000");
+            //}
 
-            var result = Resolve<IWithdrawService>().WithDrawCheck(new ViewModels.WithDraw.ViewWithDrawCheck() {
-                Amount = adminWithDraw.Amount,
-                FailuredReason = withDraw.FailuredReason,
-                Status = adminWithDraw.Status,
-                TradeId = withDraw.Id,
-                Remark = withDraw.ReviewRemark
-            });
-            return result;
+            //var result = Resolve<IWithdrawService>().WithDrawCheck(new ViewModels.WithDraw.ViewWithDrawCheck() {
+            //    Amount = adminWithDraw.Amount,
+            //    FailuredReason = withDraw.FailuredReason,
+            //    Status = adminWithDraw.Status,
+            //    TradeId = withDraw.Id,
+            //    Remark = withDraw.ReviewRemark
+            //});
+            //return result;
+            return null;
         }
     }
 }

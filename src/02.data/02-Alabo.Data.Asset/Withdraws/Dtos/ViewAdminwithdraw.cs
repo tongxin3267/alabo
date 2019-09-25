@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.App.Asset.Withdraws.Domain.Enums;
 using Alabo.App.Asset.Withdraws.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Finance.Domain.Dtos.WithDraw;
@@ -15,6 +16,7 @@ using Alabo.Exceptions;
 using Alabo.Mapping;
 using Alabo.UI;
 using Alabo.UI.AutoTables;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Core.Finance.ViewModels.WithDraw {
@@ -133,16 +135,16 @@ namespace Alabo.App.Core.Finance.ViewModels.WithDraw {
         /// </summary>
         [Display(Name = "状态")]
         [Field(ControlsType = ControlsType.DropdownList,
-            DataSourceType = typeof(TradeStatus), IsShowBaseSerach = true,
+            DataSourceType = typeof(WithdrawStatus), IsShowBaseSerach = true,
             IsShowAdvancedSerach = true, GroupTabId = 1, Width = "80", SortOrder = 9)]
-        public TradeStatus Status { get; set; }
+        public WithdrawStatus Status { get; set; }
 
         /// <summary>
         ///     Gets or sets the name of the status.
         /// </summary>
         [Display(Name = "状态")]
         [Field(ControlsType = ControlsType.DropdownList,
-            DataSourceType = typeof(TradeStatus), ListShow = true, GroupTabId = 1,
+            DataSourceType = typeof(WithdrawStatus), ListShow = true, GroupTabId = 1,
             Width = "80", SortOrder = 9)]
         public string StatusName { get; set; }
 
@@ -157,14 +159,6 @@ namespace Alabo.App.Core.Finance.ViewModels.WithDraw {
         public string Intro { get; set; }
 
         /// <summary>
-        ///     Gets or sets the next with draw.
-        /// </summary>
-        public Trade NextWithDraw { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the prex with draw.
-        /// </summary>
-        public Trade PrexWithDraw { get; set; }
 
         /// <summary>
         ///     Json 格式的银行卡信息
@@ -198,27 +192,29 @@ namespace Alabo.App.Core.Finance.ViewModels.WithDraw {
             var userInput = ToQuery<WithDrawApiInput>();
 
             if (autoModel.Filter == FilterType.Admin) {
-                var model = Resolve<IWithdrawService>().GetUserList(userInput);
-                var view = new PagedList<ViewAdminWithDraw>();
-                foreach (var item in model) {
-                    var outPut = AutoMapping.SetValue<ViewAdminWithDraw>(item);
-                    view.Add(outPut);
-                }
-                return ToPageResult(view);
+                //var model = Resolve<IWithdrawService>().GetUserList(userInput);
+                //var view = new PagedList<ViewAdminWithDraw>();
+                //foreach (var item in model) {
+                //    var outPut = AutoMapping.SetValue<ViewAdminWithDraw>(item);
+                //    view.Add(outPut);
+                //}
+                //return ToPageResult(view);
             }
             if (autoModel.Filter == FilterType.User) {
-                userInput.UserId = autoModel.BasicUser.Id;
-                userInput.LoginUserId = autoModel.BasicUser.Id;
-                var model = Resolve<IWithdrawService>().GetUserList(userInput);
-                var view = new PagedList<ViewAdminWithDraw>();
-                foreach (var item in model) {
-                    var outPut = AutoMapping.SetValue<ViewAdminWithDraw>(item);
-                    view.Add(outPut);
-                }
-                return ToPageResult(view);
+                //// userInput.UserId = autoModel.BasicUser.Id;
+                //// userInput.LoginUserId = autoModel.BasicUser.Id;
+                //var model = Resolve<IWithdrawService>().GetUserList(userInput);
+                //var view = new PagedList<ViewAdminWithDraw>();
+                //foreach (var item in model) {
+                //    var outPut = AutoMapping.SetValue<ViewAdminWithDraw>(item);
+                //    view.Add(outPut);
+                //}
+                //return ToPageResult(view);
             } else {
                 throw new ValidException("类型权限不正确");
             }
+
+            return null;
         }
     }
 }

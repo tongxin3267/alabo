@@ -41,9 +41,9 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
 
         public AutoPreview GetPreview(string id, AutoBaseModel autoModel) {
             //TODO 2019年9月25日 转账优化
-            var model = Resolve<ITradeService>().GetSingle(u => u.Id == id.ToInt64() && u.Type == TradeType.Transfer);
+            //  var model = Resolve<ITradeService>().GetSingle(u => u.Id == id.ToInt64() && u.Type == TradeType.Transfer);
             //  var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
-            var item = AutoMapping.SetValue<TransferForm>(model);
+            //  var item = AutoMapping.SetValue<TransferForm>(model);
             //item.Serial = model.Serial;
             //item.MoneyTypeName = moneyTypes.FirstOrDefault(u => u.Id == model.MoneyTypeId)?.Name;
             //item.Intro = model.TradeExtension?.TradeRemark?.UserRemark;
@@ -51,10 +51,11 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
             //    item.OtherUserName = Resolve<IUserService>().GetSingle(u => u.Id == model.TradeExtension.Transfer.OtherUserId)?.UserName;
             //}
 
-            var result = new AutoPreview {
-                KeyValues = item.ToKeyValues()
-            };
-            return result;
+            //var result = new AutoPreview {
+            //    KeyValues = item.ToKeyValues()
+            //};
+            //return result;
+            return null;
         }
     }
 }
