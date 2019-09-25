@@ -11,7 +11,7 @@ namespace Alabo.App.Core.Admin.Domain.Repositories {
     /// <summary>
     /// TenantCreateRepository
     /// </summary>
-    public class TenantCreateRepository : RepositoryEfCore<User.Domain.Entities.User, long>, ITenantCreateRepository {
+    public class TenantCreateRepository : RepositoryEfCore<Users.Entities.User, long>, ITenantCreateRepository {
 
         /// <summary>
         /// TenantCreateRepository
