@@ -49,10 +49,10 @@ namespace Alabo.App.Market.PresaleProducts.Domain.Repositories {
 
             //count
             var sqlCount = $@"SELECT COUNT(presale.Id) [Count]
-                            FROM ZKShop_PresaleProduct AS presale
-                            INNER JOIN ZKShop_Product AS product ON presale.ProductId = product.Id AND presale.PriceStyleId=product.PriceStyleId
-                            INNER JOIN ZKShop_Category AS category ON category.Id = product.CategoryId
-                            LEFT JOIN ZKShop_ProductSku AS sku ON sku.Id = presale.SkuId
+                            FROM Shop_PresaleProduct AS presale
+                            INNER JOIN Shop_Product AS product ON presale.ProductId = product.Id AND presale.PriceStyleId=product.PriceStyleId
+                            INNER JOIN Shop_Category AS category ON category.Id = product.CategoryId
+                            LEFT JOIN Shop_ProductSku AS sku ON sku.Id = presale.SkuId
                             where 1=1 {sqlWhere}";
             count = RepositoryContext.ExecuteScalar(sqlCount)?.ConvertToLong() ?? 0;
 
@@ -71,10 +71,10 @@ namespace Alabo.App.Market.PresaleProducts.Domain.Repositories {
                                 presale.QuantitySold,
                                 presale.Status,
                                 presale.Sort
-                        FROM ZKShop_PresaleProduct AS presale
-                        INNER JOIN ZKShop_Product AS product ON presale.ProductId = product.Id AND presale.PriceStyleId=product.PriceStyleId
-                        INNER JOIN ZKShop_Category AS category ON category.Id = product.CategoryId
-                        LEFT JOIN ZKShop_ProductSku AS sku ON sku.Id = presale.SkuId
+                        FROM Shop_PresaleProduct AS presale
+                        INNER JOIN Shop_Product AS product ON presale.ProductId = product.Id AND presale.PriceStyleId=product.PriceStyleId
+                        INNER JOIN Shop_Category AS category ON category.Id = product.CategoryId
+                        LEFT JOIN Shop_ProductSku AS sku ON sku.Id = presale.SkuId
                         where 1=1 {sqlWhere}
                     ) as A
                    WHERE RowNumber > {input.PageSize}*({input.PageIndex}-1) ";

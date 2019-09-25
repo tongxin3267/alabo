@@ -303,7 +303,7 @@ namespace Alabo.App.Shop.Product.Domain.Entities {
     //{
     //    protected override void MapTable(EntityTypeBuilder<ProductStore> builder)
     //    {
-    //        builder.ToTable("ZKShop_Product");
+    //        builder.ToTable("Shop_Product");
     //    }
 
     //    protected override void MapProperties(EntityTypeBuilder<ProductStore> builder)

@@ -61,7 +61,7 @@ namespace Alabo.App.Core.Common.Domain.Entities {
     public class RelationTableMap : MsSqlAggregateRootMap<Relation> {
 
         protected override void MapTable(EntityTypeBuilder<Relation> builder) {
-            builder.ToTable("Common_Relation");
+            builder.ToTable("Basic_Relation");
         }
 
         protected override void MapProperties(EntityTypeBuilder<Relation> builder) {

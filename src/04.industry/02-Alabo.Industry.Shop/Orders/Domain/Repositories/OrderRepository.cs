@@ -13,7 +13,7 @@ namespace Alabo.App.Shop.Order.Domain.Repositories {
 
         public List<Entities.Order> GetOrders(int? day = 2) {
             List<Entities.Order> result = new List<Entities.Order>();
-            var sql = $"select OrderStatus,Id,CreateTime from  zkshop_order where OrderStatus= {Convert.ToInt16(OrderStatus.WaitingBuyerPay)} and DATEDIFF(DAY, Createtime,GETDATE())={day}";
+            var sql = $"select OrderStatus,Id,CreateTime from  Shop_order where OrderStatus= {Convert.ToInt16(OrderStatus.WaitingBuyerPay)} and DATEDIFF(DAY, Createtime,GETDATE())={day}";
             using (var dr = RepositoryContext.ExecuteDataReader(sql)) {
                 while (dr.Read()) {
                     result.Add(ReadOrder(dr));

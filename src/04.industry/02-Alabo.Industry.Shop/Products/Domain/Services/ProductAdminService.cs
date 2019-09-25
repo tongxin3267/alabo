@@ -135,18 +135,18 @@ namespace Alabo.App.Shop.Product.Domain.Services {
                 viewProduct.ProductDetail.ProductId = viewProduct.Product.Id;
                 viewProduct.Product.RegionId = httpRequest.Form["Country"].ConvertToLong(1);
                 if (viewProduct.Product.Id == 0) {
-                    Resolve<IProductService>().Add(viewProduct.Product); // 添加zkshop_product 表
+                    Resolve<IProductService>().Add(viewProduct.Product); // 添加Shop_product 表
                     viewProduct.ProductDetail.ProductId = viewProduct.Product.Id;
 
-                    Resolve<IProductDetailService>().Add(viewProduct.ProductDetail); // 添加zkshop_productdetai表
+                    Resolve<IProductDetailService>().Add(viewProduct.ProductDetail); // 添加Shop_productdetai表
                 } else {
                     viewProduct.Product.StoreId = viewProduct.StoreId; //供应商Id单独处理
-                    Resolve<IProductService>().Update(viewProduct.Product); // 更新zkshop_product 表
-                    Resolve<IProductDetailService>().UpdateNoTracking(viewProduct.ProductDetail); // 更新zkshop_productdetai表
+                    Resolve<IProductService>().Update(viewProduct.Product); // 更新Shop_product 表
+                    Resolve<IProductDetailService>().UpdateNoTracking(viewProduct.ProductDetail); // 更新Shop_productdetai表
                 }
 
                 // 更新商品Sku
-                var skuResult = Resolve<IProductSkuService>().AddUpdateOrDelete(viewProduct.Product, viewProduct.ProductSkus); // 更新zkshop_productsku表
+                var skuResult = Resolve<IProductSkuService>().AddUpdateOrDelete(viewProduct.Product, viewProduct.ProductSkus); // 更新Shop_productsku表
                 if (!skuResult.Succeeded) {
                     throw new ArgumentException(skuResult.ToString());
                 }

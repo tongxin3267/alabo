@@ -45,7 +45,7 @@ namespace Alabo.Domains.Base.Services {
                         Key = type.Name,
                         Type = type.FullName,
                         TableType = TableType.AutoConfig,
-                        TableName = "Common_AutoConfig"
+                        TableName = "Core_AutoConfig"
                     };
                     if (type.FullName.Contains("ViewModels")) {
                         continue;
@@ -116,7 +116,7 @@ namespace Alabo.Domains.Base.Services {
                     var table = new Table {
                         Key = type.Name,
                         Type = type.FullName,
-                        TableName = "Common_Relation"
+                        TableName = "Basic_Relation"
                     };
                     table.Columns = new List<TableColumn>();
                     var classDescription = new ClassDescription(type);

@@ -107,7 +107,7 @@ namespace Alabo.App.Core.Finance.Domain.Entities {
         ///     映射表
         /// </summary>
         protected override void MapTable(EntityTypeBuilder<Bill> builder) {
-            builder.ToTable("Finance_Bill");
+            builder.ToTable("Asset_Bill");
         }
 
         /// <summary>

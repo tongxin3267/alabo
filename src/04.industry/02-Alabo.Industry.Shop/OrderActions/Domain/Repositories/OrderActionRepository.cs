@@ -65,13 +65,13 @@ WHEN 201 then '订单关闭，已退款'
 else '未知'
 END AS '订单状态'
 --订单状态
-from [dbo].[ZKShop_Order] orde
-left join [dbo].[Finance_Pay] pay on orde.PayId=pay.Id
-LEFT JOIN [dbo].[ZKShop_OrderProduct] ordeProduct on ordeProduct.OrderId=orde.Id
-left join [dbo].[ZKShop_Product] shopProduct on shopProduct.Id=ordeProduct.ProductId
-LEFT JOIN [dbo].[ZKShop_Store] shop on shop.Id=orde.StoreId
+from [dbo].[Shop_Order] orde
+left join [dbo].[Asset_Pay] pay on orde.PayId=pay.Id
+LEFT JOIN [dbo].[Shop_OrderProduct] ordeProduct on ordeProduct.OrderId=orde.Id
+left join [dbo].[Shop_Product] shopProduct on shopProduct.Id=ordeProduct.ProductId
+LEFT JOIN [dbo].[Shop_Store] shop on shop.Id=orde.StoreId
 LEFT JOIN [dbo].[User_User] users on users.Id=orde.UserId
-LEFT JOIN  [dbo].[ZKShop_ProductSku] sku on sku.ProductId=shopProduct.Id
+LEFT JOIN  [dbo].[Shop_ProductSku] sku on sku.ProductId=shopProduct.Id
 where orde.OrderType=1 --过滤购买会员等级的商品
 and pay.PayType<>1  AND pay.PayType<>0 --去掉余额付款
 and orde.OrderStatus not in(201,50,51)-- 关闭已退款，申请退款，退货退款";

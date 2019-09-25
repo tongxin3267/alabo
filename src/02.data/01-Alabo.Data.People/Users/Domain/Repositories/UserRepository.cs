@@ -254,7 +254,7 @@ namespace Alabo.App.Core.User.Domain.Repositories {
             {
                 $"delete from User_User where Id={userId};",
                 $"delete from User_UserType where UserId={userId};",
-                $"delete from [Finance_Account] where UserId={userId};",
+                $"delete from [Asset_Account] where UserId={userId};",
                 $"delete from [User_UserMap] where UserId={userId};",
                 $"delete from [User_UserDetail] where UserId={userId};"
             };
@@ -355,7 +355,7 @@ namespace Alabo.App.Core.User.Domain.Repositories {
 
         private void AddAccount(DbTransaction transaction, long userId, List<MoneyTypeConfig> moneyTypes) {
             foreach (var item in moneyTypes) {
-                var sql = @"INSERT INTO [dbo].[Finance_Account]
+                var sql = @"INSERT INTO [dbo].[Asset_Account]
                             ([UserId],[MoneyTypeId],[Amount],[FreezeAmount],[HistoryAmount],[Token]) VALUES
                              (@UserId,@MoneyTypeId,0,0,0,@Token)";
                 //TODO 9月重构注释

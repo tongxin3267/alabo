@@ -48,7 +48,7 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
                     Value = item.Amount,
                     Image = apiStore.ApiUserAvator(item.UserId),
                     Id = item.Id,
-                    Url = $"/pages/index?path=finance_bill_view&id={item.Id}"
+                    Url = $"/pages/index?path=Asset_bill_view&id={item.Id}"
                 };
                 list.Add(apiData);
             }

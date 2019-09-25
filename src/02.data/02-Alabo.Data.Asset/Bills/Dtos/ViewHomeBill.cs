@@ -15,7 +15,7 @@ namespace Alabo.App.Core.Finance.ViewModels.Bill {
     ///     Class ViewAdminBill.
     /// </summary>
     [BsonIgnoreExtraElements]
-    [Table("Finance_ViewHomeBill")]
+    [Table("Asset_ViewHomeBill")]
     [ClassProperty(Name = "资产明细", Icon = "fa fa-puzzle-piece", SideBarType = SideBarType.FullScreen, PageType = ViewPageType.List, PostApi = "Api/Account/List", ListApi = "Api/Account/List")]
     public class ViewHomeBill : BaseViewModel {
 

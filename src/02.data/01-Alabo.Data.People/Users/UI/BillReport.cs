@@ -14,29 +14,29 @@ namespace Alabo.App.Core.User.UI {
         public List<AutoReport> ResultList(object query, AutoBaseModel autoModel) {
             var dbContext = Ioc.Resolve<IUserRepository>().RepositoryContext;
             //总账单额度
-            var sqlTotalBill = $@" select sum(Amount) from [dbo].[Finance_Bill]   ";
+            var sqlTotalBill = $@" select sum(Amount) from [dbo].[Asset_Bill]   ";
             var TotalBill = dbContext.ExecuteScalar(sqlTotalBill);
             //最近总账单额度
-            var sqlNewTotalBill = $@"select sum(Amount) from [dbo].[Finance_Bill] where  DateDiff(dd,CreateTime,getdate())<=3";
+            var sqlNewTotalBill = $@"select sum(Amount) from [dbo].[Asset_Bill] where  DateDiff(dd,CreateTime,getdate())<=3";
             var NewTotalBill = dbContext.ExecuteScalar(sqlNewTotalBill);
             //最近七天总账单额度
-            var sqlWeekTotalBill = $@"select sum(Amount) from [dbo].[Finance_Bill] where  DateDiff(dd,CreateTime,getdate())<=7";
+            var sqlWeekTotalBill = $@"select sum(Amount) from [dbo].[Asset_Bill] where  DateDiff(dd,CreateTime,getdate())<=7";
             var WeekTotalBill = dbContext.ExecuteScalar(sqlWeekTotalBill);
             //最近一个月总账单额度
-            var sqlMonthTotalBill = $@"select sum(Amount) from [dbo].[Finance_Bill] where  DateDiff(dd,CreateTime,getdate())<=31";
+            var sqlMonthTotalBill = $@"select sum(Amount) from [dbo].[Asset_Bill] where  DateDiff(dd,CreateTime,getdate())<=31";
             var MonthTotalBill = dbContext.ExecuteScalar(sqlMonthTotalBill);
 
             //总充值金额
-            var sqlTotalRecharge = $@" select sum(Amount) from [dbo].[Finance_Bill]   ";
+            var sqlTotalRecharge = $@" select sum(Amount) from [dbo].[Asset_Bill]   ";
             var TotalRecharge = dbContext.ExecuteScalar(sqlTotalRecharge);
             //总提现金额
-            var sqlTotalCash = $@"select sum(Amount) from [dbo].[Finance_Bill] where  DateDiff(dd,CreateTime,getdate())<=3";
+            var sqlTotalCash = $@"select sum(Amount) from [dbo].[Asset_Bill] where  DateDiff(dd,CreateTime,getdate())<=3";
             var TotalCash = dbContext.ExecuteScalar(sqlTotalCash);
             //总消费金额
-            var sqlTotalConsume = $@"select sum(Amount) from [dbo].[Finance_Bill] where  DateDiff(dd,CreateTime,getdate())<=7";
+            var sqlTotalConsume = $@"select sum(Amount) from [dbo].[Asset_Bill] where  DateDiff(dd,CreateTime,getdate())<=7";
             var TotalConsume = dbContext.ExecuteScalar(sqlTotalConsume);
             //总销售金额
-            var sqlTotalSale = $@"select sum(Amount) from [dbo].[Finance_Bill] where  DateDiff(dd,CreateTime,getdate())<=31";
+            var sqlTotalSale = $@"select sum(Amount) from [dbo].[Asset_Bill] where  DateDiff(dd,CreateTime,getdate())<=31";
             var TotalSale = dbContext.ExecuteScalar(sqlTotalSale);
 
             //多维度分析
@@ -46,7 +46,7 @@ namespace Alabo.App.Core.User.UI {
                                     sum([AfterAmount]) as TotalAfterAmount,
                                     SUM(CASE WHEN type = 201 THEN Amount ELSE 0 END) AS TotalConsume,
                                     SUM(CASE WHEN type = 110 THEN Amount ELSE 0 END) AS TotalSale
-                                    from [dbo].[Finance_Bill]
+                                    from [dbo].[Asset_Bill]
                                     GROUP BY CONVERT(VARCHAR(100), CreateTime, 23) ";
 
             var dataList = new List<AutoReprotDataItem>

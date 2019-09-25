@@ -82,7 +82,7 @@ namespace Alabo.App.Shop.Order.Domain.Entities
 
         protected override void MapTable(EntityTypeBuilder<OrderDelivery> builder)
         {
-            builder.ToTable("ZKShop_OrderDelivery");
+            builder.ToTable("Shop_OrderDelivery");
         }
 
         protected override void MapProperties(EntityTypeBuilder<OrderDelivery> builder)

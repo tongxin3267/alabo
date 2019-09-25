@@ -84,7 +84,7 @@ namespace Alabo.App.Shop.Order.Domain.Entities {
     public class OrderProductTableMap : MsSqlAggregateRootMap<OrderProduct> {
 
         protected override void MapTable(EntityTypeBuilder<OrderProduct> builder) {
-            builder.ToTable("ZKShop_OrderProduct");
+            builder.ToTable("Shop_OrderProduct");
         }
 
         protected override void MapProperties(EntityTypeBuilder<OrderProduct> builder) {

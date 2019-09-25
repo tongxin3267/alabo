@@ -1,10 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection;
-using Alabo.App.Core.Common;
+﻿using Alabo.App.Core.Common;
 using Alabo.App.Core.Common.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User;
@@ -13,6 +7,13 @@ using Alabo.Domains.Enums;
 using Alabo.Helpers;
 using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection;
+using Alabo.AutoConfigs;
 
 namespace Alabo.App.Agent.Citys.Domain.CallBacks {
 
@@ -22,7 +23,7 @@ namespace Alabo.App.Agent.Citys.Domain.CallBacks {
     [NotMapped]
     [ClassProperty(Name = "市代理等级", Icon = "fa fa-user-times",
         Description = "市代理等级", PageType = ViewPageType.List, SortOrder = 12,
-        Validator = "SELECT 1 FROM User_UserType WHERE GradeId='{0}'",
+        Validator = "SELECT 1 FROM  WHERE GradeId='{0}'",
         ValidateMessage = "该等级下存在用户或者为默认等级", SideBarType = SideBarType.CitySideBar)]
     public class CityGradeConfig : BaseGradeConfig, IAutoConfig {
 

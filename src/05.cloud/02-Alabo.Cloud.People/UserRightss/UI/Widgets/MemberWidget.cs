@@ -32,9 +32,9 @@ namespace Alabo.App.Market.UI.Widgets {
                 throw new ValidException("对应ID会员不存在");
             }
 
-            var sqlNewOrder = $@" SELECT COUNT(*) FROM ZKShop_Order WHERE CreateTime > '{DateTime.Now.Date.ToString("yyyyMMdd")}' AND OrderType = 1 AND UserId = {userId} ";
+            var sqlNewOrder = $@" SELECT COUNT(*) FROM Shop_Order WHERE CreateTime > '{DateTime.Now.Date.ToString("yyyyMMdd")}' AND OrderType = 1 AND UserId = {userId} ";
             var dayOrderCount = dbContext.ExecuteScalar(sqlNewOrder).ToString().ToLong();
-            var storeRevenue = $@" SELECT Amount FROM Finance_Account WHERE MoneyTypeId = 'E97CCD1E-1478-49BD-BFC7-E73A5D699000' AND UserId = {userId} ";
+            var storeRevenue = $@" SELECT Amount FROM Asset_Account WHERE MoneyTypeId = 'E97CCD1E-1478-49BD-BFC7-E73A5D699000' AND UserId = {userId} ";
             var revenudList = dbContext.ExecuteScalar(storeRevenue);
             var sqlFansCount = $@" SELECT COUNT(*) FROM User_User WHERE ParentId = {userId} ";
             var fansCount = dbContext.ExecuteScalar(sqlFansCount);

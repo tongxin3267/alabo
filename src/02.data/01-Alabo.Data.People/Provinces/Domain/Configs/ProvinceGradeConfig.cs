@@ -8,6 +8,7 @@ using Alabo.App.Core.Common;
 using Alabo.App.Core.Common.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User;
+using Alabo.AutoConfigs;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Helpers;
@@ -22,7 +23,7 @@ namespace Alabo.App.Core.UserType.Modules.Province {
     [NotMapped]
     [ClassProperty(Name = "省代理等级", Icon = "fa fa-user-times",
         Description = "省代理等级", PageType = ViewPageType.List, SortOrder = 12,
-        Validator = "SELECT 1 FROM User_UserType WHERE GradeId='{0}'",
+        Validator = "SELECT 1 FROM  WHERE GradeId='{0}'",
         ValidateMessage = "该等级下存在用户或者为默认等级", SideBarType = SideBarType.ProvinceSideBar)]
     public class ProvinceGradeConfig : BaseGradeConfig, IAutoConfig {
 

@@ -95,7 +95,7 @@ namespace Alabo.App.Asset.Recharges.Domain.Entities {
     public class RechargeTableMap : MsSqlAggregateRootMap<Recharge> {
 
         protected override void MapTable(EntityTypeBuilder<Recharge> builder) {
-            builder.ToTable("Finance_Recharge");
+            builder.ToTable("Asset_Recharge");
         }
 
         protected override void MapProperties(EntityTypeBuilder<Recharge> builder) {

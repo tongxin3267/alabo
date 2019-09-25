@@ -69,7 +69,7 @@ namespace Alabo.App.Shop.Activitys.Domain.Entities {
         public ActivityRecordExtension ActivityRecordExtension { get; set; } = new ActivityRecordExtension(); public class ActivityRecoredRecordTableMap : MsSqlAggregateRootMap<ActivityRecord> {
 
             protected override void MapTable(EntityTypeBuilder<ActivityRecord> builder) {
-                builder.ToTable("ZKShop_ActivityRecord");
+                builder.ToTable("Shop_ActivityRecord");
             }
 
             protected override void MapProperties(EntityTypeBuilder<ActivityRecord> builder) {

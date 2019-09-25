@@ -132,7 +132,7 @@ namespace Alabo.App.Shop.Activitys.Domain.Entities
 
             protected override void MapTable(EntityTypeBuilder<Activity> builder)
             {
-                builder.ToTable("ZKShop_Activity");
+                builder.ToTable("Shop_Activity");
             }
 
             protected override void MapProperties(EntityTypeBuilder<Activity> builder)

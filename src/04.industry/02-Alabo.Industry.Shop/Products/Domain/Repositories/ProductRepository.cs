@@ -40,8 +40,8 @@ namespace Alabo.App.Shop.Product.Domain.Repositories {
             }
 
             if (!string.IsNullOrEmpty(TcSql)) {
-                TcSql = $@"SELECT DISTINCT EntityId FROM Common_RelationIndex  WHERE RelationId IN(
-                        SELECT Id FROM Common_Relation WHERE 1=1 {TcSql} )";
+                TcSql = $@"SELECT DISTINCT EntityId FROM Basic_RelationIndex  WHERE RelationId IN(
+                        SELECT Id FROM Basic_Relation WHERE 1=1 {TcSql} )";
             }
 
             #endregion 标签 分类查询
@@ -84,7 +84,7 @@ namespace Alabo.App.Shop.Product.Domain.Repositories {
                 sqlWhere = $"{sqlWhere} AND PriceStyleId ='{input.PriceStyleId}' ";
             }
 
-            var sqlCount = $"SELECT COUNT(Id) [Count] FROM ZKShop_Product where 1=1 {sqlWhere}";
+            var sqlCount = $"SELECT COUNT(Id) [Count] FROM Shop_Product where 1=1 {sqlWhere}";
             count = RepositoryContext.ExecuteScalar(sqlCount)?.ConvertToLong() ?? 0;
 
             //排序处理  desc 降序
@@ -105,7 +105,7 @@ namespace Alabo.App.Shop.Product.Domain.Repositories {
             }
 
             var sql = $@"SELECT TOP {input.PageSize} * FROM (
-                        SELECT  ROW_NUMBER() OVER (ORDER BY {sort}) AS RowNumber,* FROM ZKShop_Product  where 1=1 {
+                        SELECT  ROW_NUMBER() OVER (ORDER BY {sort}) AS RowNumber,* FROM Shop_Product  where 1=1 {
                     sqlWhere
                 }
                                ) as A

@@ -35,16 +35,16 @@ namespace Alabo.App.Core.User.UI {
             var MonthMemberCount = dbContext.ExecuteScalar(sqlMonthMember);
 
             //总订单数
-            var sqlTotalOrder = $@" SELECT COUNT(*) FROM ZKShop_Order";
+            var sqlTotalOrder = $@" SELECT COUNT(*) FROM Shop_Order";
             var TotalOrderCount = dbContext.ExecuteScalar(sqlTotalOrder);
             //新订单数
-            var sqlNewOrder = $@" SELECT COUNT(*) FROM ZKShop_Order where DateDiff(dd,CreateTime,getdate())<=3";
+            var sqlNewOrder = $@" SELECT COUNT(*) FROM Shop_Order where DateDiff(dd,CreateTime,getdate())<=3";
             var newOrderCount = dbContext.ExecuteScalar(sqlNewOrder);
             //近一个星期订单
-            var sqlWeekOrder = $@" SELECT COUNT(*) FROM ZKShop_Order WHERE DateDiff(dd,CreateTime,getdate())<=7";
+            var sqlWeekOrder = $@" SELECT COUNT(*) FROM Shop_Order WHERE DateDiff(dd,CreateTime,getdate())<=7";
             var WeekOrderCount = dbContext.ExecuteScalar(sqlNewOrder);
             //近一个月订单数
-            var sqlMonthOrder = $@" SELECT COUNT(*) FROM ZKShop_Order WHERE DateDiff(dd,CreateTime,getdate())<=31 ";
+            var sqlMonthOrder = $@" SELECT COUNT(*) FROM Shop_Order WHERE DateDiff(dd,CreateTime,getdate())<=31 ";
             var MonthOrderCount = dbContext.ExecuteScalar(sqlNewOrder);
 
             //var outOrderRate = newOrderCount.ToString().ToDecimal() / 1.8m;
@@ -53,7 +53,7 @@ namespace Alabo.App.Core.User.UI {
                                     CONVERT(VARCHAR(100), a.CreateTime, 23) Day,
                                     COUNT(distinct a.id) as UserCount,
                                     COUNT(b.id) as UserOrderCount
-                                    from [dbo].[User_User] as a inner join [dbo].[ZKShop_Order] as b on a.id=b.UserId
+                                    from [dbo].[User_User] as a inner join [dbo].[Shop_Order] as b on a.id=b.UserId
                                     GROUP BY CONVERT(VARCHAR(100), a.CreateTime, 23) ";
 
             var dataList = new List<AutoReprotDataItem>

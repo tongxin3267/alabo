@@ -113,7 +113,7 @@ namespace Alabo.App.Shop.Category.Domain.Entities {
     public class CategoryTableMap : MsSqlAggregateRootMap<Category> {
 
         protected override void MapTable(EntityTypeBuilder<Category> builder) {
-            builder.ToTable("ZKShop_Category");
+            builder.ToTable("Shop_Category");
         }
 
         protected override void MapProperties(EntityTypeBuilder<Category> builder) {

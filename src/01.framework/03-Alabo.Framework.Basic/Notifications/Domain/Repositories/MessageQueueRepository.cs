@@ -33,7 +33,7 @@ namespace Alabo.App.Core.Common.Domain.Repositories {
             }
 
             var sql =
-                "insert into Common_MessageQueue(TemplateCode, Mobile, Content, [Parameters], Status, Message, Summary, RequestTime, SendTime,IpAdress) values(@templatecode, @mobilse, @contentt, @parameters, @status, N'', N'', GETDATE(), GETDATE(),@ipadress); select @@identity;";
+                "insert into Basic_MessageQueue(TemplateCode, Mobile, Content, [Parameters], Status, Message, Summary, RequestTime, SendTime,IpAdress) values(@templatecode, @mobilse, @contentt, @parameters, @status, N'', N'', GETDATE(), GETDATE(),@ipadress); select @@identity;";
             var parameters = new[]
             {
                 RepositoryContext.CreateParameter("@templatecode", entity.TemplateCode),
@@ -50,13 +50,13 @@ namespace Alabo.App.Core.Common.Domain.Repositories {
         }
 
         public void Cancel(long id) {
-            var sql = $"update Common_MessageQueue set Status={(byte)MessageStatus.Canceld} where Id={id}";
+            var sql = $"update Basic_MessageQueue set Status={(byte)MessageStatus.Canceld} where Id={id}";
             RepositoryContext.ExecuteNonQuery(sql);
         }
 
         public void ErrorQueue(long id, string message) {
             var sql =
-                "update Common_MessageQueue set Status=@status, Message=@message,RequestTime=GETDATE() where Id=@id";
+                "update Basic_MessageQueue set Status=@status, Message=@message,RequestTime=GETDATE() where Id=@id";
             var parameters = new[]
             {
                 RepositoryContext.CreateParameter("@status", MessageStatus.Error),
@@ -68,7 +68,7 @@ namespace Alabo.App.Core.Common.Domain.Repositories {
 
         public void ErrorQueue(long id, string message, string summary) {
             var sql =
-                "update Common_MessageQueue set Status=@status, Message=@message, Summary=@summary,RequestTime=GETDATE() where Id=@id";
+                "update Basic_MessageQueue set Status=@status, Message=@message, Summary=@summary,RequestTime=GETDATE() where Id=@id";
             var parameters = new[]
             {
                 RepositoryContext.CreateParameter("@status", MessageStatus.Error),
@@ -81,7 +81,7 @@ namespace Alabo.App.Core.Common.Domain.Repositories {
 
         public void ErrorQueue(long id, string message, Exception exception) {
             var sql =
-                "update Common_MessageQueue set Status=@status, Message=@message, Summary=@summary,RequestTime=GETDATE() where Id=@id";
+                "update Basic_MessageQueue set Status=@status, Message=@message, Summary=@summary,RequestTime=GETDATE() where Id=@id";
             var parameters = new[]
             {
                 RepositoryContext.CreateParameter("@status", MessageStatus.Error),
@@ -102,7 +102,7 @@ namespace Alabo.App.Core.Common.Domain.Repositories {
             }
 
             var sql =
-                "update Common_MessageQueue set Status=@status, Message=@message, Summary=@summary,RequestTime=GETDATE() where Id=@id";
+                "update Basic_MessageQueue set Status=@status, Message=@message, Summary=@summary,RequestTime=GETDATE() where Id=@id";
             var parameters = new[]
             {
                 RepositoryContext.CreateParameter("@status", MessageStatus.Handled),
@@ -123,7 +123,7 @@ namespace Alabo.App.Core.Common.Domain.Repositories {
             }
 
             var sql =
-                "update Common_MessageQueue set Status=@status,  Message=@message, Summary=@summary,RequestTime=GETDATE() where Id=@id";
+                "update Basic_MessageQueue set Status=@status,  Message=@message, Summary=@summary,RequestTime=GETDATE() where Id=@id";
             var parameters = new[]
             {
                 RepositoryContext.CreateParameter("@status", MessageStatus.Handled),
@@ -135,7 +135,7 @@ namespace Alabo.App.Core.Common.Domain.Repositories {
         }
 
         public MessageQueue GetSingle(long id) {
-            var sql = $"select * from Common_MessageQueue where Id={id}";
+            var sql = $"select * from Basic_MessageQueue where Id={id}";
             MessageQueue result = null;
             using (var dr = RepositoryContext.ExecuteDataReader(sql)) {
                 if (dr.Read()) {
@@ -147,7 +147,7 @@ namespace Alabo.App.Core.Common.Domain.Repositories {
         }
 
         public IList<long> GetUnHandledIdList() {
-            var sql = $"select  Id from Common_MessageQueue where Status={(byte)MessageStatus.Pending} order by id  ";
+            var sql = $"select  Id from Basic_MessageQueue where Status={(byte)MessageStatus.Pending} order by id  ";
             IList<long> list = new List<long>();
             using (var dr = RepositoryContext.ExecuteDataReader(sql)) {
                 while (dr.Read()) {

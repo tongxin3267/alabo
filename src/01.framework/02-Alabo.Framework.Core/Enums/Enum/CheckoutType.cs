@@ -11,7 +11,7 @@ namespace Alabo.Core.Enums.Enum
     {
         /// <summary>
         ///     商城订单
-        ///     订单表在ZkShop_Order表中
+        ///     订单表在Shop_Order表中
         /// </summary>
         [Display(Name = "订单")]
         [LabelCssClass("m-badge--primary")]

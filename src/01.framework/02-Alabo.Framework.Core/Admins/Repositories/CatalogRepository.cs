@@ -24,8 +24,8 @@ namespace Alabo.App.Core.Admin.Domain.Repositories {
         public void UpdateDataBase() {
             var sqlList = new List<string> {
                 //// 2019-03-14 (zhangzulian)
-                "alter table ZKShop_Product add  DeliveryTemplateId  nvarchar(255)",
-                //"update ZKShop_Product set DeliveryTemplateId='' where DeliveryTemplateId is null", // 新增钱包地址
+                "alter table Shop_Product add  DeliveryTemplateId  nvarchar(255)",
+                //"update Shop_Product set DeliveryTemplateId='' where DeliveryTemplateId is null", // 新增钱包地址
             };
             ExecuteSql(sqlList);
         }
@@ -34,19 +34,19 @@ namespace Alabo.App.Core.Admin.Domain.Repositories {
 
         public void TruncateTable() {
             // ZKCloud项目
-            DropMongoDbTable("Base_Logs");
-            DropMongoDbTable("Base_Table");
+            DropMongoDbTable("Core_Logs");
+            DropMongoDbTable("Core_Table");
 
             // Core项目
-            DropMongoDbTable("Common_Logs");
-            DropMongoDbTable("Common_Report");
+            DropMongoDbTable("Basic_Logs");
+            DropMongoDbTable("Basic_Report");
             //用户
             DropMongoDbTable("User_UserAddress");
             DropMongoDbTable("User_GradeInfo");
             DropMongoDbTable("User_Identity");
 
             // 财务
-            DropMongoDbTable("Finance_BankCard");
+            DropMongoDbTable("Asset_BankCard");
 
             // 任务
             DropMongoDbTable("Task_UpgradeRecord");
@@ -76,16 +76,14 @@ namespace Alabo.App.Core.Admin.Domain.Repositories {
                 "truncate table User_User",
                 "truncate table User_UserDetail",
                 "truncate table User_UserMap",
-                "truncate table User_UserType",
-                "truncate table User_UserTypeMap",
                 //用户权益
                 "truncate table Market_UserRights",
 
                 // 财务相关表
-                "truncate table Finance_Account",
-                "truncate table Finance_Bill",
-                      "truncate table Finance_Pay",
-                "truncate table Finance_Trade",
+                "truncate table Asset_Account",
+                "truncate table Asset_Bill",
+                      "truncate table Asset_Pay",
+                "truncate table Asset_Trade",
 
                 //绩效相关表
                 "truncate table Kpi_Kpi",
@@ -96,16 +94,16 @@ namespace Alabo.App.Core.Admin.Domain.Repositories {
                 "truncate table Task_TaskQueue",
 
                 // 订单相关表（四个）
-                "truncate table ZKShop_Order",
-                "truncate table ZKShop_OrderAction",
-                "truncate table ZKShop_OrderDelivery",
-                "truncate table ZKShop_OrderProduct",
+                "truncate table Shop_Order",
+                "truncate table Shop_OrderAction",
+                "truncate table Shop_OrderDelivery",
+                "truncate table Shop_OrderProduct",
 
                 // 活动相关表
-                "truncate table ZKShop_ActivityRecord",
+                "truncate table Shop_ActivityRecord",
 
                 // 其他
-                "truncate table Common_MessageQueue",
+                "truncate table Basic_MessageQueue",
 
                 //客户相关
                  "truncate table Insurance_Order",
@@ -156,63 +154,60 @@ namespace Alabo.App.Core.Admin.Domain.Repositories {
                 //"update Task_ShareOrder set TotalAmount=0 where TotalAmount is null", // 新增分润总金额
 
                 //新增钱包地址 2018年8月21日
-                "ALTER TABLE Finance_Account ADD Token  nvarchar(255)  ",
-                "update Finance_Account set Token='' where Token is null", // 新增钱包地址
+                "ALTER TABLE Asset_Account ADD Token  nvarchar(255)  ",
+                "update Asset_Account set Token='' where Token is null", // 新增钱包地址
 
-                // 2018年8月17日 新增UserTypeMap表
-                "CREATE TABLE [dbo].[User_UserTypeMap]([Id] [bigint]  IDENTITY(1,1) NOT NULL,[UserTypeId] [uniqueidentifier] NOT NULL,[TypeUserId] [bigint] NOT NULL,[TypeId] [bigint] NOT NULL,[UserId] [bigint] NOT NULL)",
-                SetPrimaryKey("User_UserTypeMap"),
                 // 2018年6月21日 新增免邮费
-                " ALTER TABLE ZKShop_Product Add IsFreeShipping  [bit] ",
-                "update ZKShop_Product set IsFreeShipping = 0 where IsFreeShipping is null",
+                " ALTER TABLE Shop_Product Add IsFreeShipping  [bit] ",
+                "update Shop_Product set IsFreeShipping = 0 where IsFreeShipping is null",
 
                 // 修改头像
                 "ALTER TABLE User_UserDetail",
                 "ALTER COLUMN Avator nvarchar(255)",
                 // 2018年6月7日 新增发货用户ID
-                " ALTER TABLE ZKShop_Order Add DeliverUserId  [bigint] ",
-                "update ZKShop_Order set DeliverUserId = 0 where DeliverUserId is null",
+                " ALTER TABLE Shop_Order Add DeliverUserId  [bigint] ",
+                "update Shop_Order set DeliverUserId = 0 where DeliverUserId is null",
 
-                "alter table ZKShop_ActivityRecord  drop column [Type]",
-                "alter table ZKShop_ActivityRecord  drop column [ProductId]",
-                "ALTER TABLE ZKShop_ActivityRecord Add ParentId bigint",
-                "update ZKShop_ActivityRecord set ParentId = 0 where ParentId is null",
+                "alter table Shop_ActivityRecord  drop column [Type]",
+                "alter table Shop_ActivityRecord  drop column [ProductId]",
+                "ALTER TABLE Shop_ActivityRecord Add ParentId bigint",
+                "update Shop_ActivityRecord set ParentId = 0 where ParentId is null",
 
                 // 财务交易表
-                "CREATE TABLE [dbo].[Finance_Trade]([Id] [bigint] IDENTITY(1,1) NOT NULL,[UserId] [bigint] NOT NULL,[MoneyTypeId] [uniqueidentifier] NOT NULL,[Type] [int] NOT NULL,[Amount] [decimal](18, 2) NOT NULL,[Status] [int] NOT NULL,[CreateTime] [datetime2](7) NOT NULL,[PayTime] [datetime2](7) NOT NULL,[Extension] [text] NULL)",
-                " ALTER TABLE Finance_Trade ADD  CONSTRAINT [PK_Finance_Trade] PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF,KPI_NORECOMPUTE = OFF,SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF,ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]",
+                "CREATE TABLE [dbo].[Asset_Trade]([Id] [bigint] IDENTITY(1,1) NOT NULL,[UserId] [bigint] NOT NULL,[MoneyTypeId] [uniqueidentifier] NOT NULL,[Type] [int] NOT NULL,[Amount] [decimal](18, 2) NOT NULL,[Status] [int] NOT NULL,[CreateTime] [datetime2](7) NOT NULL,[PayTime] [datetime2](7) NOT NULL,[Extension] [text] NULL)",
+                " ALTER TABLE Asset_Trade ADD  CONSTRAINT [PK_Asset_Trade] PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF,KPI_NORECOMPUTE = OFF,SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF,ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]",
                 //删除充值，提现表
-                "drop table  Finance_Recharge",
-                "drop table  Finance_WithDraw",
+                "drop table  Asset_Recharge",
+                "drop table  Asset_WithDraw",
                 //删除权限表
                 "drop table  User_Role",
 
                 //2018年5月13日 活动
-                " ALTER TABLE ZKShop_ActivityRecord Add Status int",
-                "update ZKShop_ActivityRecord set Status = 0 where Status is null",
-                " ALTER TABLE ZKShop_ActivityRecord Add ProductId bigint",
-                "update ZKShop_ActivityRecord set ProductId = 0 where ProductId is null",
-                " ALTER TABLE ZKShop_ActivityRecord Add OrderId bigint",
-                "update ZKShop_ActivityRecord set OrderId = 0 where OrderId is null",
+                " ALTER TABLE Shop_ActivityRecord Add Status int",
+                "update Shop_ActivityRecord set Status = 0 where Status is null",
+                " ALTER TABLE Shop_ActivityRecord Add ProductId bigint",
+                "update Shop_ActivityRecord set ProductId = 0 where ProductId is null",
+                " ALTER TABLE Shop_ActivityRecord Add OrderId bigint",
+                "update Shop_ActivityRecord set OrderId = 0 where OrderId is null",
                 //2018年5月4日 活动
-                "alter table ZKShop_ActivityRecord  drop column [ActivityRecordExtension]",
-                "CREATE TABLE [dbo].[ZKShop_Activity]([Id] [bigint] IDENTITY(1,1) NOT NULL,[Name] [nvarchar](255) NOT NULL,[StoreId] [bigint] NOT NULL,[Key] [nvarchar](255) NOT NULL,[Value] [nvarchar](max) NULL,[IsEnable] [bit] NOT NULL,[Status] [int] NOT NULL,[LimitGradeId] [uniqueidentifier] NOT NULL,[MaxStock] [bigint] NOT NULL,[UsedStock] [bigint] NOT NULL,[Extension] [nvarchar](max) NULL,[StartTime] [datetime2](7) NOT NULL,[EndTime] [datetime2](7) NOT NULL)",
-                " ALTER TABLE[dbo].[ZKShop_Activity] ADD CONSTRAINT[PK_ZKShop_Activity] PRIMARY KEY CLUSTERED([Id] ASC)WITH(PAD_INDEX = OFF,KPI_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON[PRIMARY]",
+                "alter table Shop_ActivityRecord  drop column [ActivityRecordExtension]",
+                "CREATE TABLE [dbo].[Shop_Activity]([Id] [bigint] IDENTITY(1,1) NOT NULL,[Name] [nvarchar](255) NOT NULL,[StoreId] [bigint] NOT NULL,[Key] [nvarchar](255) NOT NULL,[Value] [nvarchar](max) NULL,[IsEnable] [bit] NOT NULL,[Status] [int] NOT NULL,[LimitGradeId] [uniqueidentifier] NOT NULL,[MaxStock] [bigint] NOT NULL,[UsedStock] [bigint] NOT NULL,[Extension] [nvarchar](max) NULL,[StartTime] [datetime2](7) NOT NULL,[EndTime] [datetime2](7) NOT NULL)",
+                " ALTER TABLE[dbo].[Shop_Activity] ADD CONSTRAINT[PK_Shop_Activity] PRIMARY KEY CLUSTERED([Id] ASC)WITH(PAD_INDEX = OFF,KPI_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON[PRIMARY]",
                 //2018年5月4日 活动记录
-                "CREATE TABLE [dbo].[ZKShop_ActivityRecord]([Id] [bigint] IDENTITY(1,1) NOT NULL,[ActivityId] [bigint] NOT NULL,[StoreId] [bigint] NOT NULL,[Type] [int] NOT NULL,[UserId] [bigint] NOT NULL,[OrderId] [bigint] NOT NULL,[Extension] [nvarchar](max) NULL,[CreateTime] [datetime2](7) NOT NULL)",
-                "ALTER TABLE [dbo].[ZKShop_ActivityRecord] ADD  CONSTRAINT [PK_ZKShop_ActivityRecord] PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF,KPI_NORECOMPUTE = OFF,SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF,ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]",
+                "CREATE TABLE [dbo].[Shop_ActivityRecord]([Id] [bigint] IDENTITY(1,1) NOT NULL,[ActivityId] [bigint] NOT NULL,[StoreId] [bigint] NOT NULL,[Type] [int] NOT NULL,[UserId] [bigint] NOT NULL,[OrderId] [bigint] NOT NULL,[Extension] [nvarchar](max) NULL,[CreateTime] [datetime2](7) NOT NULL)",
+                "ALTER TABLE [dbo].[Shop_ActivityRecord] ADD  CONSTRAINT [PK_Shop_ActivityRecord] PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF,KPI_NORECOMPUTE = OFF,SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF,ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]",
 
                 // 2018年5月4日 商品活动
-                "ALTER TABLE ZKShop_Product ADD Activity  text",
-                "update ZKShop_Product set Activity='' where Activity is null",
+                "ALTER TABLE Shop_Product ADD Activity  text",
+                "update Shop_Product set Activity='' where Activity is null",
                 // 2018年5月2日
-                " ALTER TABLE ZKShop_Order Add PayId  [bigint] ",
-                "update ZKShop_Order set PayId = 0 where PayId is null",
+                " ALTER TABLE Shop_Order Add PayId  [bigint] ",
+                "update Shop_Order set PayId = 0 where PayId is null",
 
                 // 发货记录表 个和主键2018年5月2日
 
-                "CREATE TABLE [dbo].[ZKShop_OrderDelivery]([Id] [bigint] IDENTITY(1,1) NOT NULL,[OrderId] [bigint] NOT NULL,[StoreId] [bigint] NOT NULL,[TotalCount] [bigint] NOT NULL,[UserId] [bigint] NOT NULL,[ExpressGuid] [uniqueidentifier] NOT NULL,[ExpressNumber] [nvarchar](100) NULL,[Extension] [nvarchar](max) NULL,[CreateTime] [datetime2](7) NOT NULL)",
-                "ALTER TABLE [dbo].[ZKShop_OrderDelivery] ADD  CONSTRAINT [PK_ZKShop_OrderDelivery] PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, KPI_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]",
+                "CREATE TABLE [dbo].[Shop_OrderDelivery]([Id] [bigint] IDENTITY(1,1) NOT NULL,[OrderId] [bigint] NOT NULL,[StoreId] [bigint] NOT NULL,[TotalCount] [bigint] NOT NULL,[UserId] [bigint] NOT NULL,[ExpressGuid] [uniqueidentifier] NOT NULL,[ExpressNumber] [nvarchar](100) NULL,[Extension] [nvarchar](max) NULL,[CreateTime] [datetime2](7) NOT NULL)",
+                "ALTER TABLE [dbo].[Shop_OrderDelivery] ADD  CONSTRAINT [PK_Shop_OrderDelivery] PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, KPI_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]",
 
                 //2018年4月23日 修改ShareOrder
                 " ALTER TABLE Task_ShareOrder Add SystemStatus int",

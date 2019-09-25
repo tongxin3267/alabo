@@ -40,7 +40,7 @@ namespace Alabo.App.Core.Common.Domain.Entities {
     public class RelationIndexTableMap : MsSqlAggregateRootMap<RelationIndex> {
 
         protected override void MapTable(EntityTypeBuilder<RelationIndex> builder) {
-            builder.ToTable("Common_RelationIndex");
+            builder.ToTable("Basic_RelationIndex");
         }
 
         protected override void MapProperties(EntityTypeBuilder<RelationIndex> builder) {

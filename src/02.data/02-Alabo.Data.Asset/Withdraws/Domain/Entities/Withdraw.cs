@@ -98,7 +98,7 @@ namespace Alabo.App.Asset.Withdraws.Domain.Entities {
     public class WithdrawTableMap : MsSqlAggregateRootMap<Withdraw> {
 
         protected override void MapTable(EntityTypeBuilder<Withdraw> builder) {
-            builder.ToTable("Finance_Withdraw");
+            builder.ToTable("Asset_Withdraw");
         }
 
         protected override void MapProperties(EntityTypeBuilder<Withdraw> builder) {

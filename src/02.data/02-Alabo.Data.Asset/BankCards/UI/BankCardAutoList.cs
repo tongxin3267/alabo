@@ -40,7 +40,7 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
                     Value = item.Type.GetDisplayName(),
                     Image = $@"http://s-test.qiniuniu99.com/wwwroot/uploads/bankcard/{item.Type.ToString()}.jpg",
                     Id = item.Id,
-                    Url = $"/pages/index?path=finance_BankCard_add&id={item.Id}"
+                    Url = $"/pages/index?path=Asset_BankCard_add&id={item.Id}"
                 };
                 list.Add(apiData);
             }

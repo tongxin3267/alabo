@@ -35,11 +35,11 @@ namespace Alabo.App.Open.Tasks.Result {
                 var sql = "";
                 foreach (var item in RuleItems) {
                     var addAmount = item.Ratio * Amount;
-                    sql = $"update Finance_Account set Amount=Amount+{addAmount}, HistoryAmount=HistoryAmount+{addAmount}, ModifiedTime=GetDate() where MoneyTypeId='{item.MoneyTypeId}' and UserId={UserId}";
+                    sql = $"update Asset_Account set Amount=Amount+{addAmount}, HistoryAmount=HistoryAmount+{addAmount}, ModifiedTime=GetDate() where MoneyTypeId='{item.MoneyTypeId}' and UserId={UserId}";
                     if (repositoryContext.ExecuteNonQuery(transaction, sql) <= 0) {
                         return ExecuteResult.Fail($"sql script:\"{sql}\" execute with 0 line update.");
                     }
-                    //此处继续加入Share_Reward与Finance_Bill表的记录
+                    //此处继续加入Share_Reward与Asset_Bill表的记录
                     sql = @"insert into Share_Reward(AfterAcount, ConfirmTime, CreateTime, ExtraDate, Fee, FenRunDate, Intro, IsAccount, [Level], ModifiedTime, ModuleId, ModuleName, MoneyTypeId, MoneyTypeName, OrderId,OrderPrice, OrderSerial, OrderUserId, OrderUserNick, Price, Remark, Serial, SortOrder, State, Status, UserId, UserNikeName, TriggerType, ModuleConfigId, BonusId)
                         values(@afteracount, GETDATE(), GETDATE(), '', 0, GETDATE(), @intro, 1, 0, GETDATE(), @moduleid, @modulename, @moneytypeid, @moneytypename, 0, 0, '', 0, '', 0, NULL, '', 1000, 3, 0, @userid, @usernickname, @triggertype, @moduleconfigid, @bonusid)";
                     IList<DbParameter> parameterList = new List<DbParameter>()

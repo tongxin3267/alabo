@@ -210,7 +210,7 @@ namespace Alabo.App.Shop.Product.Domain.Entities
 
         protected override void MapTable(EntityTypeBuilder<ProductSku> builder)
         {
-            builder.ToTable("ZKShop_ProductSku");
+            builder.ToTable("Shop_ProductSku");
         }
 
         protected override void MapProperties(EntityTypeBuilder<ProductSku> builder)

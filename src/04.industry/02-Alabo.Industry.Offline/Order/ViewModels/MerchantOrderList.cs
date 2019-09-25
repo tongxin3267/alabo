@@ -180,7 +180,7 @@ namespace Alabo.App.Offline.Order.ViewModels
                     Title = $"{item.MerchantStoreName}-{item.MerchantOrderStatus.GetDisplayName()}",
                     Intro = $"共{item.TotalCount}件商品,"+ intro.ToString(),
                     Value = $"实付{item.PaymentAmount}元",
-                  //  Url = $"/pages/user?path=finance_recharge_view&id={item.Id}"
+                  //  Url = $"/pages/user?path=Asset_recharge_view&id={item.Id}"
                 };
                 list.Add(apiData);
             }

@@ -99,7 +99,7 @@ namespace Alabo.App.Shop.Product.Domain.Entities
 
             protected override void MapTable(EntityTypeBuilder<ProductDetail> builder)
             {
-                builder.ToTable("ZKShop_ProductDetail");
+                builder.ToTable("Shop_ProductDetail");
             }
 
             protected override void MapProperties(EntityTypeBuilder<ProductDetail> builder)

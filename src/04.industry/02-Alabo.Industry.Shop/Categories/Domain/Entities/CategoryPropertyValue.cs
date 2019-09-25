@@ -63,7 +63,7 @@ namespace Alabo.App.Shop.Category.Domain.Entities {
     public class CategoryPropertyValueTableMap : MsSqlAggregateRootMap<CategoryPropertyValue> {
 
         protected override void MapTable(EntityTypeBuilder<CategoryPropertyValue> builder) {
-            builder.ToTable("ZKShop_CategoryPropertyValue");
+            builder.ToTable("Shop_CategoryPropertyValue");
         }
 
         protected override void MapProperties(EntityTypeBuilder<CategoryPropertyValue> builder) {

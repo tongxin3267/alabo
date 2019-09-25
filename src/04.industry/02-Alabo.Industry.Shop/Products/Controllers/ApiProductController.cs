@@ -360,7 +360,7 @@ namespace Alabo.App.Shop.Product.Controllers {
 
                     productDetail.ProductDetailExtension.AidutMessage = input.AuditMessage;
                     productDetail.Extension = productDetail.ProductDetailExtension.ToJsons();
-                    Resolve<IProductDetailService>().Update(productDetail); // 添加zkshop_productdetai表
+                    Resolve<IProductDetailService>().Update(productDetail); // 添加Shop_productdetai表
                 }
                 model.ProductStatus = input.State;
 

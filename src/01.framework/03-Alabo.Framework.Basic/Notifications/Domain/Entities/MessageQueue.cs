@@ -87,7 +87,7 @@ namespace Alabo.App.Core.Common.Domain.Entities {
     public class MessageQueueTableMap : MsSqlAggregateRootMap<MessageQueue> {
 
         protected override void MapTable(EntityTypeBuilder<MessageQueue> builder) {
-            builder.ToTable("Common_MessageQueue");
+            builder.ToTable("Basic_MessageQueue");
         }
 
         protected override void MapProperties(EntityTypeBuilder<MessageQueue> builder) {

@@ -26,7 +26,7 @@ namespace Alabo.App.Core.Finance.ViewModels.Bill {
                     Value = item.Amount,
                     Image = Resolve<IApiService>().ApiUserAvator(item.UserId),
                     Id = item.Id,
-                    Url = $"/pages/user?path=finance_recharge_view&id={item.Id}"
+                    Url = $"/pages/user?path=Asset_recharge_view&id={item.Id}"
                 };
                 list.Add(apiData);
             }

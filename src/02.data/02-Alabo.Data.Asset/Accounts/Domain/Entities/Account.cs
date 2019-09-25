@@ -60,7 +60,7 @@ namespace Alabo.App.Core.Finance.Domain.Entities {
     public class AccountTableMap : MsSqlAggregateRootMap<Account> {
 
         protected override void MapTable(EntityTypeBuilder<Account> builder) {
-            builder.ToTable("Finance_Account");
+            builder.ToTable("Asset_Account");
         }
 
         protected override void MapProperties(EntityTypeBuilder<Account> builder) {

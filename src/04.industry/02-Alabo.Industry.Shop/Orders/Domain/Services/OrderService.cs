@@ -779,7 +779,7 @@ namespace Alabo.App.Shop.Order.Domain.Services {
                 if (TenantContext.CurrentTenant == "master" && order?.OrderExtension?.TenantOrderInfo?.OrderId > 0) {
                     var tenant = Resolve<ITenantService>().GetSingle(x => x.UserId == order.UserId);
                     if (tenant != null) {
-                        var sql = $@"SELECT o.id OrderId ,p.* FROM ZKShop_Order o JOIN ZKShop_OrderProduct od ON o.Id = od.OrderId JOIN ZKShop_Product p ON p.Id = od.ProductId
+                        var sql = $@"SELECT o.id OrderId ,p.* FROM Shop_Order o JOIN Shop_OrderProduct od ON o.Id = od.OrderId JOIN Shop_Product p ON p.Id = od.ProductId
                              WHERE o.Id = {order.Id} AND o.OrderStatus = 4 AND o.UserId = {order.UserId}";
                         var orderProductList = Ioc.Resolve<IUserRepository>().RepositoryContext.Fetch<PickUpProductView>(sql);
                         if (orderProductList.Count > 0) {
@@ -844,7 +844,7 @@ namespace Alabo.App.Shop.Order.Domain.Services {
                     // 收货后如果是租户订单, 同步到租户的自提
                     var tenant = Resolve<ITenantService>().GetSingle(x => x.UserId == order.UserId);
                     if (tenant != null) {
-                        var sql = $@"SELECT o.id OrderId ,p.* FROM ZKShop_Order o JOIN ZKShop_OrderProduct od ON o.Id = od.OrderId JOIN ZKShop_Product p ON p.Id = od.ProductId
+                        var sql = $@"SELECT o.id OrderId ,p.* FROM Shop_Order o JOIN Shop_OrderProduct od ON o.Id = od.OrderId JOIN Shop_Product p ON p.Id = od.ProductId
                              WHERE o.Id = {order.Id} AND o.OrderStatus = 4 AND o.UserId = {order.UserId}";
                         var orderProductList = Ioc.Resolve<IUserRepository>().RepositoryContext.Fetch<PickUpProductView>(sql);
                         if (orderProductList.Count > 0) {

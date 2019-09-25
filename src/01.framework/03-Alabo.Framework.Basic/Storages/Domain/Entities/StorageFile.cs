@@ -9,7 +9,7 @@ namespace Alabo.App.Core.Common.Domain.Entities {
     /// <summary>
     /// </summary>
     [BsonIgnoreExtraElements]
-    [Table("Common_StorageFile")]
+    [Table("Basic_StorageFile")]
     [ClassProperty(Name = "´æ´¢ÎÄ¼þ")]
     [AutoDeleteAttribute(IsAuto = true)]
     public class StorageFile : AggregateMongodbRoot<StorageFile> {

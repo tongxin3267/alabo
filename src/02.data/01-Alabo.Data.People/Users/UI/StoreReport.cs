@@ -14,14 +14,14 @@ namespace Alabo.App.Core.User.UI {
 
         public List<AutoReport> ResultList(object query, AutoBaseModel autoModel) {
             var dbContext = Ioc.Resolve<IUserRepository>().RepositoryContext;
-            var sqlMemberCount = $@" SELECT COUNT(*) FROM ZKShop_Store ";
+            var sqlMemberCount = $@" SELECT COUNT(*) FROM Shop_Store ";
             var memberCount = dbContext.ExecuteScalar(sqlMemberCount);
-            var sqlNewOrder = $@" SELECT COUNT(*) FROM ZKShop_Order WHERE CreateTime > '{DateTime.Now.Date.ToString("yyyyMMdd")}' AND OrderType = 4";
+            var sqlNewOrder = $@" SELECT COUNT(*) FROM Shop_Order WHERE CreateTime > '{DateTime.Now.Date.ToString("yyyyMMdd")}' AND OrderType = 4";
             var newOrderCount = dbContext.ExecuteScalar(sqlNewOrder);
 
             var sqlCountByDay = $@"SELECT CONVERT(VARCHAR(100), CreateTime, 23) Day
 	                                    ,COUNT(CONVERT(VARCHAR(100), CreateTime, 23)) COUNT
-                                    FROM ZKShop_Store
+                                    FROM Shop_Store
                                     GROUP BY CONVERT(VARCHAR(100), CreateTime, 23) ";
             var dataList = new List<AutoReprotDataItem>
             {

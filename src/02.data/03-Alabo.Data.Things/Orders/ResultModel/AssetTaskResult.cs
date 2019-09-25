@@ -39,7 +39,7 @@ namespace Alabo.App.Core.Tasks.ResultModel {
 
                 //Ioc.Resolve<IAccountService>().Update(findAccount);
                 ////decimal historyChangeAmount = ChangeAmount > 0 ? ChangeAmount : 0;
-                ////string sql = $"update [Finance_Account] set [Amount]=[Amount]+{ChangeAmount}, [HistoryAmount]=[HistoryAmount]+{historyChangeAmount} where [UserId]={UserId} and [Id]={AccountId}";
+                ////string sql = $"update [Asset_Account] set [Amount]=[Amount]+{ChangeAmount}, [HistoryAmount]=[HistoryAmount]+{historyChangeAmount} where [UserId]={UserId} and [Id]={AccountId}";
                 ////Alabo.Helpers.Ioc.Resolve<IUserRepository>().RepositoryContext.ExecuteNonQuery(sql);
                 return ExecuteResult.Success();
             } catch (Exception e) {

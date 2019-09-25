@@ -47,7 +47,7 @@ namespace Alabo.App.Core.Finance.Domain.Entities {
 
         /// <summary>
         ///     获取或设置实体 Id
-        ///     如果商品是商品订单的时候，对应ZkShop_Order id
+        ///     如果商品是商品订单的时候，对应Shop_Order id
         ///     用Json格式保存
         /// </summary>
         [Display(Name = "获取或设置实体 Id")]
@@ -157,7 +157,7 @@ namespace Alabo.App.Core.Finance.Domain.Entities {
     public class InvoiceTableMap : MsSqlAggregateRootMap<Pay> {
 
         protected override void MapTable(EntityTypeBuilder<Pay> builder) {
-            builder.ToTable("Finance_Pay");
+            builder.ToTable("Asset_Pay");
         }
 
         protected override void MapProperties(EntityTypeBuilder<Pay> builder) {

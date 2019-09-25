@@ -39,7 +39,7 @@ namespace Alabo.App.Core.Common.Domain.Entities {
     public class GenericConfigTableMap : MsSqlAggregateRootMap<AutoConfig> {
 
         protected override void MapTable(EntityTypeBuilder<AutoConfig> builder) {
-            builder.ToTable("Common_AutoConfig");
+            builder.ToTable("Core_AutoConfig");
         }
 
         protected override void MapProperties(EntityTypeBuilder<AutoConfig> builder) {

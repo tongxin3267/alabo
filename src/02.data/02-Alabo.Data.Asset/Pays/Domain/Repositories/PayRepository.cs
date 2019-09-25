@@ -33,7 +33,7 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
             var result = new List<PayShopOrderInfo>();
             // 读取未付支付订单的金额
             var sql =
-                $"select paymentAmount,AccountPay from ZKShop_Order  where OrderStatus=1 and id  in  ({entityIdList.ToSqlString()})";
+                $"select paymentAmount,AccountPay from Shop_Order  where OrderStatus=1 and id  in  ({entityIdList.ToSqlString()})";
             using (var reader = RepositoryContext.ExecuteDataReader(sql)) {
                 while (reader.Read()) {
                     var payShopInfoItem = new PayShopOrderInfo {
@@ -65,7 +65,7 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
             foreach (var payPair in pay.AccountPayPair) {
                 if (payPair.Value > 0) {
                     var accountSql =
-                        $"select FreezeAmount from Finance_Account where MoneyTypeId='{payPair.Key}' and UserId={pay.UserId}";
+                        $"select FreezeAmount from Asset_Account where MoneyTypeId='{payPair.Key}' and UserId={pay.UserId}";
                     var freezeAmount = RepositoryContext.ExecuteScalar(accountSql).ToDecimal();
                     if (freezeAmount < payPair.Value) {
                         return ServiceResult.FailedWithMessage("冻结账户余额不足");
@@ -73,13 +73,13 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
 
                     // 扣除冻结资产
                     sql =
-                        $"update Finance_Account set FreezeAmount=FreezeAmount-{payPair.Value} where UserId={pay.UserId} and MoneyTypeId='{payPair.Key}'";
+                        $"update Asset_Account set FreezeAmount=FreezeAmount-{payPair.Value} where UserId={pay.UserId} and MoneyTypeId='{payPair.Key}'";
                     sqlList.Add(sql);
                     // 财务记录
                     var intro =
                         $"支付订单(编号{pay.PayExtension.TradeNo})后，减少冻结资产,减少金额{payPair.Value},冻结金额账后{freezeAmount - payPair.Value}";
                     sql =
-                        $@"INSERT INTO [dbo].[Finance_Bill]([UserId] ,[OtherUserId] ,[Type]  ,[Flow] ,[MoneyTypeId],[Amount] ,[AfterAmount],[Intro] ,[CreateTime] ,[EntityId])
+                        $@"INSERT INTO [dbo].[Asset_Bill]([UserId] ,[OtherUserId] ,[Type]  ,[Flow] ,[MoneyTypeId],[Amount] ,[AfterAmount],[Intro] ,[CreateTime] ,[EntityId])
                                  VALUES
                                  ({pay.UserId},0,{Convert.ToInt16(BillActionType.Shopping)},{
                                 Convert.ToInt16(AccountFlow.Spending)
@@ -94,7 +94,7 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
             if (isPaySucess) {
                 // 更新支付账单状态
                 sql =
-                    $"UPDATE [dbo].[Finance_Pay] SET [Message] = '{pay.Message}',[PayType]={Convert.ToInt16(pay.PayType)}  ,[ResponseSerial] ='{pay.ResponseSerial}' ,[Status] =2 ,[ResponseTime] = '{pay.ResponseTime}' where id={pay.Id} and Status=1";
+                    $"UPDATE [dbo].[Asset_Pay] SET [Message] = '{pay.Message}',[PayType]={Convert.ToInt16(pay.PayType)}  ,[ResponseSerial] ='{pay.ResponseSerial}' ,[Status] =2 ,[ResponseTime] = '{pay.ResponseTime}' where id={pay.Id} and Status=1";
                 sqlList.Add(sql);
                 // 插入分润订单
                 if (pay.Type == CheckoutType.Order) {
@@ -105,7 +105,7 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
                     }
 
                     sql =
-                        $"update  ZKShop_Order set OrderStatus={orderStatus},PayId='{pay.Id}'  where OrderStatus=1 and id  in  ({entityIdList.ToSqlString()})";
+                        $"update  Shop_Order set OrderStatus={orderStatus},PayId='{pay.Id}'  where OrderStatus=1 and id  in  ({entityIdList.ToSqlString()})";
                     sqlList.Add(sql);
 
                     foreach (var item in entityIdList) {
@@ -141,7 +141,7 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
 
                         // 订单操作记录
                         sql =
-                            "INSERT INTO [dbo].[ZKShop_OrderAction] ([OrderId] ,[ActionUserId] ,[Intro]  ,[Extensions]  ,[CreateTime],[OrderActionType])" +
+                            "INSERT INTO [dbo].[Shop_OrderAction] ([OrderId] ,[ActionUserId] ,[Intro]  ,[Extensions]  ,[CreateTime],[OrderActionType])" +
                             $"VALUES({(long)item},{pay.UserId},'会员支付订单，支付方式为{pay.PayType.GetDisplayName()},支付现金金额为{pay.Amount}','','{DateTime.Now}',102)";
                         sqlList.Add(sql);
 
@@ -149,26 +149,26 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
 
                         //更新活动记录状态
                         if (pay.PayExtension.IsGroupBuy) {
-                            sql = $"update ZKShop_ActivityRecord set Status=2 where OrderId={item} and Status=1";
+                            sql = $"update Shop_ActivityRecord set Status=2 where OrderId={item} and Status=1";
                             sqlList.Add(sql);
 
                             sql =
-                                $"  select count(id) from ZKShop_ActivityRecord where ParentId = (select ParentId from ZKShop_ActivityRecord where OrderId = {item}) and ParentId> 0";
+                                $"  select count(id) from Shop_ActivityRecord where ParentId = (select ParentId from Shop_ActivityRecord where OrderId = {item}) and ParentId> 0";
                             var gourpBuyCount = RepositoryContext.ExecuteScalar(sql).ConvertToLong();
                             if (gourpBuyCount > 0 && gourpBuyCount + 1 == pay.PayExtension.BuyerCount &&
                                 pay.PayExtension.BuyerCount > 0) {
                                 // 拼团结束(修改订单状态)
                                 var parentId = RepositoryContext
-                                    .ExecuteScalar($"select ParentId from ZKShop_ActivityRecord where OrderId={item}")
+                                    .ExecuteScalar($"select ParentId from Shop_ActivityRecord where OrderId={item}")
                                     .ConvertToLong();
 
                                 //将订单状态从待分享修改成待发货
                                 sql =
-                                    $"update ZKShop_Order set OrderStatus=2 where Id in( select OrderId from ZKShop_ActivityRecord where (ParentId={parentId} or Id={parentId}) and Status=2) and OrderStatus=10";
+                                    $"update Shop_Order set OrderStatus=2 where Id in( select OrderId from Shop_ActivityRecord where (ParentId={parentId} or Id={parentId}) and Status=2) and OrderStatus=10";
                                 sqlList.Add(sql);
                                 //修改活动记录支付状态，为成功
                                 sql =
-                                    $"update  ZKShop_ActivityRecord set Status=5 where Id in( select Id from ZKShop_ActivityRecord where (ParentId={parentId} or Id={parentId}) and Status=2)";
+                                    $"update  Shop_ActivityRecord set Status=5 where Id in( select Id from Shop_ActivityRecord where (ParentId={parentId} or Id={parentId}) and Status=2)";
                                 sqlList.Add(sql);
                             }
                         }
@@ -201,17 +201,17 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
                         if (payPair.Value > 0) {
                             // 减少冻结资产
                             var accountSql =
-                                $"select Amount from Finance_Account where MoneyTypeId='{payPair.Key}' and UserId={pay.UserId}";
+                                $"select Amount from Asset_Account where MoneyTypeId='{payPair.Key}' and UserId={pay.UserId}";
                             var amount = RepositoryContext.ExecuteScalar(accountSql).ToDecimal();
                             // 扣除冻结资产
                             sql =
-                                $"update Finance_Account set amount=amount+{payPair.Value} where UserId={pay.UserId} and MoneyTypeId='{payPair.Key}'";
+                                $"update Asset_Account set amount=amount+{payPair.Value} where UserId={pay.UserId} and MoneyTypeId='{payPair.Key}'";
                             sqlList.Add(sql);
                             // 财务记录
                             var intro =
                                 $"支付订单(编号{pay.PayExtension.TradeNo})失败后，解冻金额，金额{payPair.Value},解冻账后{amount + payPair.Value}";
                             sql =
-                                $@"INSERT INTO [dbo].[Finance_Bill]([UserId] ,[OtherUserId] ,[Type]  ,[Flow] ,[MoneyTypeId],[Amount] ,[AfterAmount],[Intro] ,[CreateTime] ,[EntityId])
+                                $@"INSERT INTO [dbo].[Asset_Bill]([UserId] ,[OtherUserId] ,[Type]  ,[Flow] ,[MoneyTypeId],[Amount] ,[AfterAmount],[Intro] ,[CreateTime] ,[EntityId])
                                  VALUES
                                  ({pay.UserId},0,{Convert.ToInt16(BillActionType.Shopping)},{
                                         Convert.ToInt16(AccountFlow.Income)

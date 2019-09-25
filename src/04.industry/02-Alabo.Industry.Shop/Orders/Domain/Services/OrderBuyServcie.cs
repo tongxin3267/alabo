@@ -418,7 +418,7 @@ namespace Alabo.App.Shop.Order.Domain.Services {
                     }
 
                     // var orderForCashAmount= storePriceItem.
-                    // 订单表 ,数据插入到zkshop_order 中
+                    // 订单表 ,数据插入到Shop_order 中
                     var order = new Entities.Order {
                         UserId = orderBuyInput.UserId,
                         StoreId = storeOrderItem.StoreId,
@@ -481,7 +481,7 @@ namespace Alabo.App.Shop.Order.Domain.Services {
 
                     #region 插入订单商品数据
 
-                    // 数据擦插入到zkshop_product中
+                    // 数据擦插入到Shop_product中
                     var orderProducts = new List<OrderProduct>();
                     foreach (var productSku in storeOrderItem.ProductSkuItems) {
                         // 价格模式总价,根据sku获取使员的虚拟资产类型

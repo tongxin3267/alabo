@@ -38,7 +38,7 @@ namespace Alabo.App.Market.UI.Widgets {
             }
             var rights = Ioc.Resolve<IUserRightsService>().GetView(true);//用管理员权限去获取
             var items = Ioc.Resolve<IUserRightsService>().GetList(x => x.UserId == userId).ToList();
-            var sqlStoreRevenue = $@" SELECT Amount FROM Finance_Account WHERE MoneyTypeId = 'E97CCD1E-1478-49BD-BFC7-E73A5D699000' AND UserId = {userId} ";
+            var sqlStoreRevenue = $@" SELECT Amount FROM Asset_Account WHERE MoneyTypeId = 'E97CCD1E-1478-49BD-BFC7-E73A5D699000' AND UserId = {userId} ";
             var storeRevenue = dbContext.ExecuteScalar(sqlStoreRevenue);
             var userGrades = Ioc.Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
             var sqlWeekCount = $@" SELECT COUNT(*) FROM User_User WHERE ParentId = {userId} AND CreateTime > '{DateTime.Now.Date.AddDays(-7).ToString("yyyyMMdd")}' ";

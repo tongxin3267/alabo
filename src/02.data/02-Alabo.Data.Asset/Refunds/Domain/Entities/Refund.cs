@@ -83,7 +83,7 @@ namespace Alabo.App.Asset.Refunds.Domain.Entities {
     public class RefundTableMap : MsSqlAggregateRootMap<Refund> {
 
         protected override void MapTable(EntityTypeBuilder<Refund> builder) {
-            builder.ToTable("Finance_Refund");
+            builder.ToTable("Asset_Refund");
         }
 
         protected override void MapProperties(EntityTypeBuilder<Refund> builder) {

@@ -11,7 +11,7 @@ namespace Alabo.App.Core.Reports.Domain.Entities {
     ///     通用配置
     /// </summary>
     [BsonIgnoreExtraElements]
-    [Table("Common_Report")]
+    [Table("Basic_Report")]
     [ClassProperty(Name = "通用配置")]
     public class Report : AggregateMongodbRoot<Report> {
 

@@ -15,36 +15,36 @@ namespace Alabo.App.Core.User.UI {
             var dbContext = Ioc.Resolve<IUserRepository>().RepositoryContext;
 
             //总订单数
-            var sqlTotalOrder = $@" SELECT COUNT(*) FROM ZKShop_Order";
+            var sqlTotalOrder = $@" SELECT COUNT(*) FROM Shop_Order";
             var TotalOrderCount = dbContext.ExecuteScalar(sqlTotalOrder);
             //新订单数
-            var sqlNewOrder = $@" SELECT COUNT(*) FROM ZKShop_Order where DateDiff(dd,CreateTime,getdate())<=3";
+            var sqlNewOrder = $@" SELECT COUNT(*) FROM Shop_Order where DateDiff(dd,CreateTime,getdate())<=3";
             var newOrderCount = dbContext.ExecuteScalar(sqlNewOrder);
             //近一个星期订单
-            var sqlWeekOrder = $@" SELECT COUNT(*) FROM ZKShop_Order WHERE DateDiff(dd,CreateTime,getdate())<=7";
+            var sqlWeekOrder = $@" SELECT COUNT(*) FROM Shop_Order WHERE DateDiff(dd,CreateTime,getdate())<=7";
             var WeekOrderCount = dbContext.ExecuteScalar(sqlNewOrder);
             //近一个月订单数
-            var sqlMonthOrder = $@" SELECT COUNT(*) FROM ZKShop_Order WHERE DateDiff(dd,CreateTime,getdate())<=31 ";
+            var sqlMonthOrder = $@" SELECT COUNT(*) FROM Shop_Order WHERE DateDiff(dd,CreateTime,getdate())<=31 ";
             var MonthOrderCount = dbContext.ExecuteScalar(sqlNewOrder);
 
             //总销售额
-            var sqlSaleTotalAmount = $@" SELECT Sum([PaymentAmount]) FROM ZKShop_Order where [OrderStatus]=100 ";
+            var sqlSaleTotalAmount = $@" SELECT Sum([PaymentAmount]) FROM Shop_Order where [OrderStatus]=100 ";
             var SaleTotalAmount = dbContext.ExecuteScalar(sqlSaleTotalAmount);
             //总销售量
-            var sqlSaleTotalCount = $@" SELECT Count(Id) FROM ZKShop_Order where [OrderStatus]=100";
+            var sqlSaleTotalCount = $@" SELECT Count(Id) FROM Shop_Order where [OrderStatus]=100";
             var SaleTotalCount = dbContext.ExecuteScalar(sqlSaleTotalCount);
             //当月销售额
-            var sqlSaleMonthAmount = $@" SELECT Sum([PaymentAmount]) FROM ZKShop_Order where [OrderStatus]=100 and DateDiff(dd,CreateTime,getdate())<=31";
+            var sqlSaleMonthAmount = $@" SELECT Sum([PaymentAmount]) FROM Shop_Order where [OrderStatus]=100 and DateDiff(dd,CreateTime,getdate())<=31";
             var SaleMonthAmount = dbContext.ExecuteScalar(sqlSaleMonthAmount);
             //当月销售量
-            var sqlMonthMemberCount = $@" SELECT COUNT(id) FROM ZKShop_Order  where [OrderStatus]=100 and DateDiff(dd,CreateTime,getdate())<=31";
+            var sqlMonthMemberCount = $@" SELECT COUNT(id) FROM Shop_Order  where [OrderStatus]=100 and DateDiff(dd,CreateTime,getdate())<=31";
             var MonthMemberCount = dbContext.ExecuteScalar(sqlMonthMemberCount);
 
             var sqlCountByDay = $@" SELECT
                                     CONVERT(VARCHAR(100), CreateTime, 23) Day,
                                     sum([PaymentAmount]) as OrderTotalAmount,
                                     count(1) as OrderTotalCount
-                                    from ZKShop_Order
+                                    from Shop_Order
                                     where  OrderStatus=100
                                     group by  CONVERT(VARCHAR(100), CreateTime, 23)";
 

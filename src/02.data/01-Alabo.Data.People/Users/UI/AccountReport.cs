@@ -14,32 +14,32 @@ namespace Alabo.App.Core.User.UI {
         public List<AutoReport> ResultList(object query, AutoBaseModel autoModel) {
             var dbContext = Ioc.Resolve<IUserRepository>().RepositoryContext;
             //总资产额度
-            var sqlTotalAccount = $@" select sum(Amount) from [dbo].[Finance_Account] ";
+            var sqlTotalAccount = $@" select sum(Amount) from [dbo].[Asset_Account] ";
             var TotalAccount = dbContext.ExecuteScalar(sqlTotalAccount);
             //最近总资产额度
-            var sqlNewTotalAccount = $@"select sum(Amount) from [dbo].[Finance_Account] where  DateDiff(dd,CreateTime,getdate())<=3";
+            var sqlNewTotalAccount = $@"select sum(Amount) from [dbo].[Asset_Account] where  DateDiff(dd,CreateTime,getdate())<=3";
             var NewTotalAccount = dbContext.ExecuteScalar(sqlNewTotalAccount);
             //最近七天总资产额度
-            var sqlWeekTotalAccount = $@"select sum(Amount) from [dbo].[Finance_Account] where  DateDiff(dd,CreateTime,getdate())<=7";
+            var sqlWeekTotalAccount = $@"select sum(Amount) from [dbo].[Asset_Account] where  DateDiff(dd,CreateTime,getdate())<=7";
             var WeekTotalAccount = dbContext.ExecuteScalar(sqlWeekTotalAccount);
             //最近一个月资产单额度
-            var sqlMonthTotalAccount = $@"select sum(Amount) from [dbo].[Finance_Account] where  DateDiff(dd,CreateTime,getdate())<=31";
+            var sqlMonthTotalAccount = $@"select sum(Amount) from [dbo].[Asset_Account] where  DateDiff(dd,CreateTime,getdate())<=31";
             var MonthTotalAccount = dbContext.ExecuteScalar(sqlMonthTotalAccount);
 
             //人民币总额
-            var sqlTotalCash = $@" select sum(Amount)  from [dbo].[Finance_Account]
+            var sqlTotalCash = $@" select sum(Amount)  from [dbo].[Asset_Account]
                                     where  [MoneyTypeId]='E97CCD1E-1478-49BD-BFC7-E73A5D699000' ";
             var TotalCash = dbContext.ExecuteScalar(sqlTotalCash);
             //积分总额
-            var sqlTotalIntegral = $@"select sum(Amount)  from [dbo].[Finance_Account]
+            var sqlTotalIntegral = $@"select sum(Amount)  from [dbo].[Asset_Account]
                                 where  [MoneyTypeId]='E97CCD1E-1478-49BD-BFC7-E73A5D699002'";
             var TotalIntegral = dbContext.ExecuteScalar(sqlTotalIntegral);
             //消费额总额
-            var sqlTotalConsume = $@"select sum(Amount)  from [dbo].[Finance_Account]
+            var sqlTotalConsume = $@"select sum(Amount)  from [dbo].[Asset_Account]
                                         where  [MoneyTypeId]='E97CCD1E-1478-49BD-BFC7-E73A5D699756'";
             var TotalConsume = dbContext.ExecuteScalar(sqlTotalConsume);
             //优惠券总额
-            var sqlTotalCoupon = $@"select sum(Amount)  from [dbo].[Finance_Account]
+            var sqlTotalCoupon = $@"select sum(Amount)  from [dbo].[Asset_Account]
                                 where  [MoneyTypeId]='e97ccd1e-1478-49bd-bfc7-e73a5d699009'";
             var TotalCoupon = dbContext.ExecuteScalar(sqlTotalCoupon);
 
@@ -51,7 +51,7 @@ namespace Alabo.App.Core.User.UI {
                                 SUM(CASE WHEN [MoneyTypeId]='E97CCD1E-1478-49BD-BFC7-E73A5D699002' THEN Amount ELSE 0 END) AS TotalIntegral,
                                 SUM(CASE WHEN [MoneyTypeId]='E97CCD1E-1478-49BD-BFC7-E73A5D699000' THEN Amount ELSE 0 END) AS TotalConsume,
                                 SUM(CASE WHEN [MoneyTypeId]='E97CCD1E-1478-49BD-BFC7-E73A5D699000' THEN Amount ELSE 0 END) AS TotalCoupon
-                                from [dbo].[Finance_Account]
+                                from [dbo].[Asset_Account]
                                 GROUP BY CONVERT(VARCHAR(100), CreateTime, 23)
                                  ";
 

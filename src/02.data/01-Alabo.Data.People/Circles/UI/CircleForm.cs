@@ -17,7 +17,7 @@ namespace Alabo.App.Core.Common.Domain.Entities {
     ///     商圈
     /// </summary>
     [BsonIgnoreExtraElements]
-    [Table("Common_Circle")]
+    [Table("Basic_Circle")]
     [ClassProperty(Name = "商圈", Icon = IconFlaticon.map_location, SideBarType = SideBarType.ControlSideBar,
         PageType = ViewPageType.List, PostApi = "Api/Circle/CircleList")]
     public class CircleForm : UIBase, IAutoForm {

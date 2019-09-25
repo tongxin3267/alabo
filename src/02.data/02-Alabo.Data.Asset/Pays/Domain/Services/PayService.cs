@@ -131,7 +131,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
 
                 #region 支付金额校验
 
-                // 如果订单方式商城订单，则和商城订单表Zkshop_order的金额进行核对验证
+                // 如果订单方式商城订单，则和商城订单表Shop_order的金额进行核对验证
                 if (pay.Type == CheckoutType.Order) {
                     var payShopOrders = _payRepository.GetOrderPayAccount(orderIds);
                     if (!pay.Amount.EqualsDigits(payShopOrders.Sum(r => r.PaymentAmount))) {
@@ -561,9 +561,9 @@ namespace Alabo.App.Core.Finance.Domain.Services {
 
             if (pay.Type == CheckoutType.Recharge) {
                 if (orderIds.Count > 1) {
-                    request.SetReturnUrl($"{url}/pages/index?path=finance_recharge_list");
+                    request.SetReturnUrl($"{url}/pages/index?path=Asset_recharge_list");
                 } else {
-                    request.SetReturnUrl($"{url}/pages/index?path=finance_recharge_list");
+                    request.SetReturnUrl($"{url}/pages/index?path=Asset_recharge_list");
                 }
                 request.SetNotifyUrl($"{serviceUrl}/Pay/WapPayAsync");
             } else {
@@ -628,11 +628,11 @@ namespace Alabo.App.Core.Finance.Domain.Services {
 
                 //if (orderIds.Count > 1)
                 //{
-                //    request.SetReturnUrl($"{url}/pages/index?path=finance_recharge_list");
+                //    request.SetReturnUrl($"{url}/pages/index?path=Asset_recharge_list");
                 //}
                 //else
                 //{
-                //    request.SetReturnUrl($"{url}/pages/index?path=finance_recharge_list");
+                //    request.SetReturnUrl($"{url}/pages/index?path=Asset_recharge_list");
                 //}
                 request.SetNotifyUrl($"{serviceUrl}/Pay/WapPayAsync");
             } else {

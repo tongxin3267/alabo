@@ -8,17 +8,17 @@ using Alabo.Domains.Repositories.Model;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.Domains.Base.Entities
-{
+namespace Alabo.Domains.Base.Entities {
+
     /// <summary>
     ///     表以及数据库结构说明书
     /// </summary>
     [BsonIgnoreExtraElements]
-    [Table("Base_Table")]
+    [Table("Core_Table")]
     [ClassProperty(Name = "数据库表", Icon = "fa fa-cog", SortOrder = 1,
         SideBarType = SideBarType.TableSideBar)]
-    public class Table : AggregateMongodbRoot<Table>
-    {
+    public class Table : AggregateMongodbRoot<Table> {
+
         /// <summary>
         ///     名称
         /// </summary>
@@ -77,8 +77,8 @@ namespace Alabo.Domains.Base.Entities
     /// </summary>
     [ClassProperty(Name = "列结构", Icon = "fa fa-cog", SortOrder = 1,
         SideBarType = SideBarType.TableSideBar)]
-    public class TableColumn : BaseViewModel
-    {
+    public class TableColumn : BaseViewModel {
+
         /// <summary>
         ///     名称
         /// </summary>

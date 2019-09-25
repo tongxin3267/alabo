@@ -49,7 +49,7 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
             //        Value = item.Amount,
             //        Image = users.FirstOrDefault(u => u.UserId == item.UserId)?.Avator,
             //        Id = item.Id,
-            //        Url = $"/pages/index?path=finance_withdraw_view&id={item.Id}"
+            //        Url = $"/pages/index?path=Asset_withdraw_view&id={item.Id}"
             //    };
             //    list.Add(apiData);
             //}

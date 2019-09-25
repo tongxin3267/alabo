@@ -28,9 +28,9 @@ namespace Alabo.App.Agent.Province.Domain.Entities {
         public string Name { get; set; }
 
         /// <summary>
-        ///     相关的实体Id，比如如果是省代理，城市代理，区域代理，则使用Common_Region中的Id
-        ///     如果是商圈，则使用Common_Cicle的Id
-        ///     如果时候供应商，则使用ZKShop_Store 的Id
+        ///     相关的实体Id，比如如果是省代理，城市代理，区域代理，则使用Basic_Region中的Id
+        ///     如果是商圈，则使用Basic_Cicle的Id
+        ///     如果时候供应商，则使用Shop_Store 的Id
         ///     所属区域ID
         ///     一个区域只能有个
         ///     广东省 省代理只有一个

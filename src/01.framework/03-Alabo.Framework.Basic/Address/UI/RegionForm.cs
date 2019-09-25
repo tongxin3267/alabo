@@ -20,7 +20,7 @@ namespace Alabo.App.Core.Common.Domain.Entities {
     /// </summary>
     [ClassProperty(Name = "国家区域", Icon = IconFlaticon.map_location, SideBarType = SideBarType.ControlSideBar, PageType = ViewPageType.List, PostApi = "Api/Region/RegionList")]
     [BsonIgnoreExtraElements]
-    [Table("Common_Region")]
+    [Table("Basic_Region")]
     public class RegionForm : UIBase, IAutoForm {
 
         public RegionForm(long regionId, long parentId) {

@@ -141,7 +141,7 @@ namespace Alabo.App.Core.Finance.Controllers {
                     //   Extra = "编号" + item.Serial,
                     Image = Resolve<IApiService>().ApiUserAvator(item.Id),
                     Id = item.Id,
-                    Url = $"/pages/user?path=finance_pay_view&id={item.Id}"
+                    Url = $"/pages/user?path=Asset_pay_view&id={item.Id}"
                 };
                 apiOutput.ApiDataList.Add(apiData);
             }

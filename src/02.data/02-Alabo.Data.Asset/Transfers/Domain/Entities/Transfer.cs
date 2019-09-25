@@ -72,7 +72,7 @@ namespace Alabo.App.Asset.Transfers.Domain.Entities {
     public class TransferTableMap : MsSqlAggregateRootMap<Transfer> {
 
         protected override void MapTable(EntityTypeBuilder<Transfer> builder) {
-            builder.ToTable("Finance_Transfer");
+            builder.ToTable("Asset_Transfer");
         }
 
         protected override void MapProperties(EntityTypeBuilder<Transfer> builder) {

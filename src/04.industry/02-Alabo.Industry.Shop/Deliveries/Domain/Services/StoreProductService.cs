@@ -149,18 +149,18 @@ namespace Alabo.App.Shop.Store.Domain.Services
 
                 if (parameter.Product.Id == 0)
                 {
-                    Resolve<IProductService>().Add(parameter.Product); // 添加zkshop_product 表
+                    Resolve<IProductService>().Add(parameter.Product); // 添加Shop_product 表
                     parameter.ProductDetail.ProductId = parameter.Product.Id;
-                    Resolve<IProductDetailService>().Add(parameter.ProductDetail); // 添加zkshop_productdetai表
+                    Resolve<IProductDetailService>().Add(parameter.ProductDetail); // 添加Shop_productdetai表
                 }
                 else
                 {
-                    Resolve<IProductService>().Update(parameter.Product); // 更新zkshop_product 表
-                    Resolve<IProductDetailService>().UpdateNoTracking(parameter.ProductDetail); // 更新zkshop_productdetai表
+                    Resolve<IProductService>().Update(parameter.Product); // 更新Shop_product 表
+                    Resolve<IProductDetailService>().UpdateNoTracking(parameter.ProductDetail); // 更新Shop_productdetai表
                 }
 
                 // 更新商品Sku
-                var skuResult = Resolve<IProductSkuService>().AddUpdateOrDelete(parameter.Product, parameter.ProductSkus); // 更新zkshop_productsku表
+                var skuResult = Resolve<IProductSkuService>().AddUpdateOrDelete(parameter.Product, parameter.ProductSkus); // 更新Shop_productsku表
                 if (!skuResult.Succeeded)
                 {
                     throw new ArgumentException(skuResult.ToString());

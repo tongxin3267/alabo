@@ -23,7 +23,6 @@ namespace Alabo.App.Core.User.Domain.Callbacks {
     [ClassProperty(Name = "用户等级", Icon = "fa fa-user-times",
         Description = "用户等级", PageType = ViewPageType.List, SortOrder = 12,
         SideBarType = SideBarType.UserSideBar,
-        Validator = "SELECT 1 FROM User_UserType WHERE GradeId='{0}'",
         ValidateMessage = "该会员等级下存在用户，或者该等级为默认等级不能删除")]
     public class UserGradeConfig : BaseGradeConfig, IAutoConfig {
 

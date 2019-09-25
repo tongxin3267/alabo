@@ -82,7 +82,7 @@ namespace Alabo.App.Asset.Settlements.Domain.Entities {
     public class SettlementTableMap : MsSqlAggregateRootMap<Settlement> {
 
         protected override void MapTable(EntityTypeBuilder<Settlement> builder) {
-            builder.ToTable("Finance_Settlement");
+            builder.ToTable("Asset_Settlement");
         }
 
         protected override void MapProperties(EntityTypeBuilder<Settlement> builder) {

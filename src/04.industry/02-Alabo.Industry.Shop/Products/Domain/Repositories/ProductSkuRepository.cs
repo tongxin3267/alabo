@@ -12,12 +12,12 @@ namespace Alabo.App.Shop.Product.Domain.Repositories {
     internal class ProductSkuRepository : RepositoryEfCore<ProductSku, long>, IProductSkuRepository {
 
         private const string ProdutSkuSql =
-            @"SELECT   dbo.ZKShop_ProductSku.Bn, dbo.ZKShop_Product.Name, dbo.ZKShop_ProductSku.ProductId,dbo.ZKShop_ProductSku.MarketPrice,dbo.ZKShop_ProductSku.MaxPayPrice,dbo.ZKShop_ProductSku.MinPayCash,
-                dbo.ZKShop_ProductSku.Id as ProductSkuId, dbo.ZKShop_ProductSku.Price, dbo.ZKShop_ProductSku.FenRunPrice,
-                dbo.ZKShop_ProductSku.Weight,ZKShop_Product.IsFreeShipping, dbo.ZKShop_ProductSku.Stock, dbo.ZKShop_ProductSku.PropertyValueDesc,
-                dbo.ZKShop_ProductSku.DisplayPrice, dbo.ZKShop_Product.ThumbnailUrl, dbo.ZKShop_Product.StoreId,dbo.ZKShop_Product.PriceStyleId,dbo.ZKShop_Product.DeliveryTemplateId
-                FROM  dbo.ZKShop_ProductSku INNER JOIN
-                dbo.ZKShop_Product ON dbo.ZKShop_ProductSku.ProductId = dbo.ZKShop_Product.Id";
+            @"SELECT   dbo.Shop_ProductSku.Bn, dbo.Shop_Product.Name, dbo.Shop_ProductSku.ProductId,dbo.Shop_ProductSku.MarketPrice,dbo.Shop_ProductSku.MaxPayPrice,dbo.Shop_ProductSku.MinPayCash,
+                dbo.Shop_ProductSku.Id as ProductSkuId, dbo.Shop_ProductSku.Price, dbo.Shop_ProductSku.FenRunPrice,
+                dbo.Shop_ProductSku.Weight,Shop_Product.IsFreeShipping, dbo.Shop_ProductSku.Stock, dbo.Shop_ProductSku.PropertyValueDesc,
+                dbo.Shop_ProductSku.DisplayPrice, dbo.Shop_Product.ThumbnailUrl, dbo.Shop_Product.StoreId,dbo.Shop_Product.PriceStyleId,dbo.Shop_Product.DeliveryTemplateId
+                FROM  dbo.Shop_ProductSku INNER JOIN
+                dbo.Shop_Product ON dbo.Shop_ProductSku.ProductId = dbo.Shop_Product.Id";
 
         /// <summary>
         ///     添加商品库存
@@ -29,9 +29,9 @@ namespace Alabo.App.Shop.Product.Domain.Repositories {
             var result = false;
             using (var transaction = RepositoryContext.BeginNativeDbTransaction()) {
                 try {
-                    var sql = $"update ZKShop_Product set Stock=Stock+{count} where Id={productId}";
+                    var sql = $"update Shop_Product set Stock=Stock+{count} where Id={productId}";
                     RepositoryContext.ExecuteNonQuery(transaction, sql);
-                    sql = $"update ZKShop_ProductSku set Stock=Stock+{count} where Id='{productSkuId}'";
+                    sql = $"update Shop_ProductSku set Stock=Stock+{count} where Id='{productSkuId}'";
                     RepositoryContext.ExecuteNonQuery(transaction, sql);
                     transaction.Commit();
                     result = true;
@@ -53,7 +53,7 @@ namespace Alabo.App.Shop.Product.Domain.Repositories {
         public IEnumerable<ProductSkuItem> GetProductSkuItemList(IEnumerable<long> productSkuIds) {
             var result = new List<ProductSkuItem>();
             var sql =
-                $"{ProdutSkuSql}  where ZKShop_Product.ProductStatus=2  and  ZKShop_ProductSku.Stock>0 and ZKShop_ProductSku.Id  in ({productSkuIds.ToList().ToSqlString()})";
+                $"{ProdutSkuSql}  where Shop_Product.ProductStatus=2  and  Shop_ProductSku.Stock>0 and Shop_ProductSku.Id  in ({productSkuIds.ToList().ToSqlString()})";
             using (var reader = RepositoryContext.ExecuteDataReader(sql)) {
                 while (reader.Read()) {
                     var productSkuItem = new ProductSkuItem {
@@ -88,7 +88,7 @@ namespace Alabo.App.Shop.Product.Domain.Repositories {
         /// <param name="productSkuId"></param>
         public long GetStoreIdByProductSkuId(long productSkuId) {
             var sql =
-                $"SELECT  ZKShop_Product.StoreId FROM ZKShop_Product INNER JOIN  ZKShop_ProductSku ON ZKShop_Product.Id = ZKShop_ProductSku.ProductId where ZKShop_ProductSku.Id={productSkuId}";
+                $"SELECT  Shop_Product.StoreId FROM Shop_Product INNER JOIN  Shop_ProductSku ON Shop_Product.Id = Shop_ProductSku.ProductId where Shop_ProductSku.Id={productSkuId}";
             var result = RepositoryContext.ExecuteScalar(sql).ToInt64();
             return result;
         }
@@ -103,9 +103,9 @@ namespace Alabo.App.Shop.Product.Domain.Repositories {
             var result = false;
             using (var transaction = RepositoryContext.BeginNativeDbTransaction()) {
                 try {
-                    var sql = $"update ZKShop_Product set Stock=Stock-{count} where Id={productId}";
+                    var sql = $"update Shop_Product set Stock=Stock-{count} where Id={productId}";
                     RepositoryContext.ExecuteNonQuery(transaction, sql);
-                    sql = $"update ZKShop_ProductSku set Stock=Stock-{count} where Id='{productSkuId}'";
+                    sql = $"update Shop_ProductSku set Stock=Stock-{count} where Id='{productSkuId}'";
                     RepositoryContext.ExecuteNonQuery(transaction, sql);
                     transaction.Commit();
                     result = true;
@@ -126,12 +126,12 @@ namespace Alabo.App.Shop.Product.Domain.Repositories {
         public IEnumerable<SkuPrice> GetSkuPrice(long productId = 0) {
             var sqlWhere = string.Empty;
             if (productId > 0) {
-                sqlWhere = $" and ZKShop_Product.Id={productId} ";
+                sqlWhere = $" and Shop_Product.Id={productId} ";
             }
 
             var sql =
-                $@"SELECT   dbo.ZKShop_ProductSku.Id, dbo.ZKShop_ProductSku.ProductId, dbo.ZKShop_ProductSku.Price, dbo.ZKShop_Product.PriceStyleId, dbo.ZKShop_Product.MinCashRate
-            FROM dbo.ZKShop_ProductSku INNER JOIN dbo.ZKShop_Product ON dbo.ZKShop_ProductSku.ProductId = dbo.ZKShop_Product.Id Where ZKShop_Product.ProductStatus=2 {
+                $@"SELECT   dbo.Shop_ProductSku.Id, dbo.Shop_ProductSku.ProductId, dbo.Shop_ProductSku.Price, dbo.Shop_Product.PriceStyleId, dbo.Shop_Product.MinCashRate
+            FROM dbo.Shop_ProductSku INNER JOIN dbo.Shop_Product ON dbo.Shop_ProductSku.ProductId = dbo.Shop_Product.Id Where Shop_Product.ProductStatus=2 {
                         sqlWhere
                     } order by id desc ";
             var result = new List<SkuPrice>();
@@ -161,7 +161,7 @@ namespace Alabo.App.Shop.Product.Domain.Repositories {
             var sqlList = new List<string>();
             foreach (var item in productSkus) {
                 var sql =
-                    $"update ZKShop_ProductSku set DisplayPrice='{item.DisplayPrice}',MaxPayPrice='{item.MaxPayPrice}',MinPayCash='{item.MinPayCash}' where id={item.Id}";
+                    $"update Shop_ProductSku set DisplayPrice='{item.DisplayPrice}',MaxPayPrice='{item.MaxPayPrice}',MinPayCash='{item.MinPayCash}' where id={item.Id}";
                 sqlList.Add(sql);
             }
 

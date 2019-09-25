@@ -23,7 +23,7 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
                 throw new ArgumentNullException(nameof(bill));
             }
 
-            var sql = @"INSERT INTO dbo.Finance_Bill
+            var sql = @"INSERT INTO dbo.Asset_Bill
             ([Serial],[UserId],[OtherUserId],[Type],MoneyTypeId
             ,MoneyTypeName,Flow, Amount ,AfterAmount ,
             OrderSerial ,CreateTime,Intro ,CreateTime,[Remark])
@@ -82,12 +82,12 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
                 sqlWhere = $"{sqlWhere} AND UserId='{userInput.UserId}' ";
             }
 
-            var sqlCount = $"SELECT COUNT(Id) [Count] FROM [Finance_Bill] where 1=1 {sqlWhere}";
+            var sqlCount = $"SELECT COUNT(Id) [Count] FROM [Asset_Bill] where 1=1 {sqlWhere}";
             count = RepositoryContext.ExecuteScalar(sqlCount)?.ConvertToLong() ?? 0;
 
             var result = new List<Bill>();
             var sql = $@"SELECT TOP {userInput.PageSize} * FROM (
-                        SELECT  ROW_NUMBER() OVER (ORDER BY id desc) AS RowNumber,[Id] ,[UserId] ,[OtherUserId] ,[Type],[Flow],[MoneyTypeId],[Amount] ,[AfterAmount] ,[Intro] ,[CreateTime] FROM [Finance_Bill] where 1=1 {
+                        SELECT  ROW_NUMBER() OVER (ORDER BY id desc) AS RowNumber,[Id] ,[UserId] ,[OtherUserId] ,[Type],[Flow],[MoneyTypeId],[Amount] ,[AfterAmount] ,[Intro] ,[CreateTime] FROM [Asset_Bill] where 1=1 {
                     sqlWhere
                 }
                                ) as A
@@ -123,12 +123,12 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
                 sqlWhere = $"{sqlWhere} AND UserId='{billApiInput.LoginUserId}' ";
             }
 
-            var sqlCount = $"SELECT COUNT(Id) [Count] FROM [Finance_Bill] where 1=1 {sqlWhere}";
+            var sqlCount = $"SELECT COUNT(Id) [Count] FROM [Asset_Bill] where 1=1 {sqlWhere}";
             count = RepositoryContext.ExecuteScalar(sqlCount)?.ConvertToLong() ?? 0;
 
             var result = new List<Bill>();
             var sql = $@"SELECT TOP {billApiInput.PageSize} * FROM (
-                        SELECT  ROW_NUMBER() OVER (ORDER BY id desc) AS RowNumber,[Id]  ,[Type],[Flow],AfterAmount,[MoneyTypeId],[Amount],[CreateTime] FROM [Finance_Bill] where 1=1 {
+                        SELECT  ROW_NUMBER() OVER (ORDER BY id desc) AS RowNumber,[Id]  ,[Type],[Flow],AfterAmount,[MoneyTypeId],[Amount],[CreateTime] FROM [Asset_Bill] where 1=1 {
                     sqlWhere
                 }
                                ) as A
@@ -152,13 +152,13 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
         }
 
         public void Pay(DbTransaction transaction, Bill bill, Account account) {
-            var sqlAccount = $@"UPDATE [dbo].[Finance_Account]
+            var sqlAccount = $@"UPDATE [dbo].[Asset_Account]
                                     SET [Amount] = {account.Amount}
                                        ,[FreezeAmount] = {account.FreezeAmount}
                                        ,[HistoryAmount] = {account.HistoryAmount}
                                   WHERE Id={account.Id}";
             var sqlBill =
-                $@"INSERT INTO [dbo].[Finance_Bill]([UserId] ,[OtherUserId] ,[Type]  ,[Flow] ,[MoneyTypeId],[Amount] ,[AfterAmount],[Intro] ,[CreateTime] ,[EntityId])
+                $@"INSERT INTO [dbo].[Asset_Bill]([UserId] ,[OtherUserId] ,[Type]  ,[Flow] ,[MoneyTypeId],[Amount] ,[AfterAmount],[Intro] ,[CreateTime] ,[EntityId])
                                  VALUES
                                        ({bill.UserId}
                                        ,{bill.OtherUserId}

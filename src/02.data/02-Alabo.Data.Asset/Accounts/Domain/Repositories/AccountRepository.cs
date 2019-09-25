@@ -27,7 +27,7 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
         /// <param name="moneyTypeId">The money type identifier.</param>
         /// <returns>System.Decimal.</returns>
         public decimal GetAccountAmount(long userId, Guid moneyTypeId) {
-            var sql = $"select Amount from Finance_Account where UserId={userId} and MoneyTypeId='{moneyTypeId}'";
+            var sql = $"select Amount from Asset_Account where UserId={userId} and MoneyTypeId='{moneyTypeId}'";
             var result = RepositoryContext.ExecuteScalar(sql);
             if (result == null || result == DBNull.Value) {
                 return -1;
@@ -50,7 +50,7 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
             }
 
             var sql =
-                $"update Finance_Account set Amount=Amount+{changedAmount} {historyUpdateSql} where UserId={userId} and MoneyTypeId='{moneyTypeId}'";
+                $"update Asset_Account set Amount=Amount+{changedAmount} {historyUpdateSql} where UserId={userId} and MoneyTypeId='{moneyTypeId}'";
             return RepositoryContext.ExecuteNonQuery(sql) > 0;
         }
 
@@ -61,7 +61,7 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
         /// <param name="changedAmount"></param>
         public bool ChangeFreezeAmount(long userId, Guid moneyTypeid, decimal changedAmount) {
             var sql =
-                $"update Finance_Account set FreezeAmount=FreezeAmount+{changedAmount} where UserId={userId} and MoneyTypeId='{moneyTypeid}'";
+                $"update Asset_Account set FreezeAmount=FreezeAmount+{changedAmount} where UserId={userId} and MoneyTypeId='{moneyTypeid}'";
             return RepositoryContext.ExecuteNonQuery(sql) > 0;
         }
 
@@ -73,7 +73,7 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
         /// <param name="amount">The amount.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public bool UpdateAccountAmount(long userId, Guid moneyTypeId, decimal amount) {
-            var sql = $@"update Finance_Account set Amount={amount},
+            var sql = $@"update Asset_Account set Amount={amount},
                             HistoryAmount=(case when {amount}>=Amount then HistoryAmount+{
                     amount
                 }-Amount else HistoryAmount end)
@@ -88,7 +88,7 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
         /// <param name="moneyTypeId">The money type identifier.</param>
         /// <returns>Account.</returns>
         public Account GetAccount(long userId, Guid moneyTypeId) {
-            var sql = $"select * from Finance_Account where MoneyTypeId='{moneyTypeId}' and UserId={userId}";
+            var sql = $"select * from Asset_Account where MoneyTypeId='{moneyTypeId}' and UserId={userId}";
             Account result = null;
             using (var dr = RepositoryContext.ExecuteDataReader(sql)) {
                 if (dr.Read()) {
@@ -107,7 +107,7 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
         /// <param name="moneyTypeId">The money type identifier.</param>
         /// <returns>Account.</returns>
         public Account GetAccount(DbTransaction transaction, long userId, Guid moneyTypeId) {
-            var sql = $"select * from Finance_Account where MoneyTypeId='{moneyTypeId}' and UserId={userId}";
+            var sql = $"select * from Asset_Account where MoneyTypeId='{moneyTypeId}' and UserId={userId}";
             Account result = null;
             using (var dr = RepositoryContext.ExecuteDataReader(transaction, sql)) {
                 if (dr.Read()) {
@@ -134,7 +134,7 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
                 return result;
             }
 
-            var sql = $"select * from Finance_Account where   UserId={userId} and MoneyTypeId In ('{moneyTypeGuid}')";
+            var sql = $"select * from Asset_Account where   UserId={userId} and MoneyTypeId In ('{moneyTypeGuid}')";
             using (var dr = RepositoryContext.ExecuteDataReader(sql)) {
                 while (dr.Read()) {
                     result.Add(ReadAccount(dr));
@@ -150,7 +150,7 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
         /// <param name="userIds">The user ids.</param>
         /// <returns>IList&lt;Account&gt;.</returns>
         public IList<Account> GetAccountByUserIds(IList<long> userIds) {
-            var sql = $"select * from Finance_Account where   UserId in  ({userIds.ToSqlString()})";
+            var sql = $"select * from Asset_Account where   UserId in  ({userIds.ToSqlString()})";
             IList<Account> result = new List<Account>();
             using (var dr = RepositoryContext.ExecuteDataReader(sql)) {
                 while (dr.Read()) {
@@ -167,7 +167,7 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
         /// <param name="id">Id标识</param>
         /// <returns>Account.</returns>
         public Account GetAccount(long id) {
-            var sql = $"select * from Finance_Account where Id='{id}'";
+            var sql = $"select * from Asset_Account where Id='{id}'";
             Account result = null;
             using (var dr = RepositoryContext.ExecuteDataReader(sql)) {
                 if (dr.Read()) {
@@ -180,7 +180,7 @@ namespace Alabo.App.Core.Finance.Domain.Repositories {
 
         public IList<long> GetAllUserIdsWidthOutAccount() {
             var sql =
-                "select Id from User_User where Id not in (select  DISTINCT UserId from Finance_Account ) order by id ";
+                "select Id from User_User where Id not in (select  DISTINCT UserId from Asset_Account ) order by id ";
             IList<long> result = new List<long>();
             using (var dr = RepositoryContext.ExecuteDataReader(sql)) {
                 while (dr.Read()) {

@@ -137,7 +137,7 @@ namespace Alabo.App.Core.Tasks.Domain.Repositories {
                 var afterAccount = account.Amount + shareResult.Amount; //账户金额
                 //更新资产
                 sql =
-                    "update Finance_Account set Amount=Amount+@Amount, HistoryAmount=HistoryAmount+@Amount  where MoneyTypeId=@MoneyTypeId and  UserId=@UserId";
+                    "update Asset_Account set Amount=Amount+@Amount, HistoryAmount=HistoryAmount+@Amount  where MoneyTypeId=@MoneyTypeId and  UserId=@UserId";
                 parameters = new[]
                 {
                     repositoryContext.CreateParameter("@UserId", shareResult.ShareUser.Id),
@@ -149,7 +149,7 @@ namespace Alabo.App.Core.Tasks.Domain.Repositories {
 
                 //更新财务记录bill表
                 sql =
-                    @"INSERT INTO [dbo].[Finance_Bill]([UserId],[OtherUserId] ,[EntityId] ,[Type] ,[Flow],[MoneyTypeId],[Amount],[AfterAmount],[Intro],[CreateTime])
+                    @"INSERT INTO [dbo].[Asset_Bill]([UserId],[OtherUserId] ,[EntityId] ,[Type] ,[Flow],[MoneyTypeId],[Amount],[AfterAmount],[Intro],[CreateTime])
                                                     VALUES (@UserId,@OtherUserId ,@EntityId ,@Type ,@Flow,@MoneyTypeId,@Amount,@AfterAmount,@Intro,@CreateTime)";
                 parameters = new[]
                 {
@@ -199,7 +199,7 @@ namespace Alabo.App.Core.Tasks.Domain.Repositories {
                 if (shareResult.SmsNotification) {
                     if (RegexHelper.CheckMobile(shareResult.ShareUser.Mobile) && !shareResult.SmsIntro.IsNullOrEmpty()) {
                         sql =
-                            @"INSERT INTO [dbo].[Common_MessageQueue] ([TemplateCode],[Mobile],[Content] ,[Parameters] ,[Status],[Message] ,[Summary],[IpAdress],[RequestTime],[SendTime])
+                            @"INSERT INTO [dbo].[Basic_MessageQueue] ([TemplateCode],[Mobile],[Content] ,[Parameters] ,[Status],[Message] ,[Summary],[IpAdress],[RequestTime],[SendTime])
                                 VALUES (@TemplateCode,@Mobile,@Content ,@Parameters ,@Status,@Message ,@Summary,@IpAdress,@RequestTime,@SendTime)";
                         parameters = new[]
                         {
@@ -315,7 +315,7 @@ namespace Alabo.App.Core.Tasks.Domain.Repositories {
                 //添加的短信队列
                 //if (shareResult.SmsNotification) {
                 //    if (RegexHelper.CheckMobile(shareResult.ShareUser.Mobile) && !shareResult.SmsIntro.IsNullOrEmpty()) {
-                //        sql = @"INSERT INTO [dbo].[Common_MessageQueue] ([TemplateCode],[Mobile],[Content] ,[Parameters] ,[Status],[Message] ,[Summary],[IpAdress],[RequestTime],[SendTime])
+                //        sql = @"INSERT INTO [dbo].[Basic_MessageQueue] ([TemplateCode],[Mobile],[Content] ,[Parameters] ,[Status],[Message] ,[Summary],[IpAdress],[RequestTime],[SendTime])
                 //                VALUES (@TemplateCode,@Mobile,@Content ,@Parameters ,@Status,@Message ,@Summary,@IpAdress,@RequestTime,@SendTime)";
                 //        parameters = new[]
                 //        {

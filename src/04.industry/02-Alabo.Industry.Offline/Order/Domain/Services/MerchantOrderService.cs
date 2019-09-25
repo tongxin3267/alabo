@@ -268,7 +268,7 @@ namespace Alabo.App.Offline.Order.Domain.Services {
                 }
                 sqlList.Add($"update Offline_MerchantOrder set OrderStatus={(int)MerchantOrderStatus.Success},PayId='{pay.Id}'  where OrderStatus={(int)MerchantOrderStatus.WaitingBuyerPay} and id in  ({entityIdList.ToSqlString()})");
                 // TODO 线下订单支付关闭
-                // sqlList.Add($"INSERT INTO [dbo].[ZKShop_OrderAction] ([OrderId] ,[ActionUserId] ,[Intro]  ,[Extensions]  ,[CreateTime],[OrderActionType]) VALUES({order.Id},{pay.UserId},'会员支付订单，支付方式为{pay.PayType.GetDisplayName()},支付现金金额为{pay.Amount}','','{DateTime.Now}',{(int)OrderActionType.OfflineUserPayOrder})");
+                // sqlList.Add($"INSERT INTO [dbo].[Shop_OrderAction] ([OrderId] ,[ActionUserId] ,[Intro]  ,[Extensions]  ,[CreateTime],[OrderActionType]) VALUES({order.Id},{pay.UserId},'会员支付订单，支付方式为{pay.PayType.GetDisplayName()},支付现金金额为{pay.Amount}','','{DateTime.Now}',{(int)OrderActionType.OfflineUserPayOrder})");
             });
 
             return sqlList;

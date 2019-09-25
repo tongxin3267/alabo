@@ -29,9 +29,9 @@ namespace Alabo.App.Shop.Order.Domain.Repositories
 
         public List<UserProductCount> GetUserProductCount(long userId, List<long> productIds)
         {
-            var sql = $@"select Count,userId,productId from ZKShop_OrderProduct
-                        inner join ZKShop_Order
-                        on ZKShop_Order.Id=ZKShop_OrderProduct.OrderId
+            var sql = $@"select Count,userId,productId from Shop_OrderProduct
+                        inner join Shop_Order
+                        on Shop_Order.Id=Shop_OrderProduct.OrderId
                         where ProductId in ({productIds.ToSqlString()}) and userid={userId} and (OrderStatus!=200 and OrderStatus!=1)";
             List<UserProductCount> result = new List<UserProductCount>();
             using (var reader = RepositoryContext.ExecuteDataReader(sql))
@@ -56,9 +56,9 @@ namespace Alabo.App.Shop.Order.Domain.Repositories
         /// <param name="productIds"></param>
         public List<ProductCount> GetProductCount(List<long> productIds)
         {
-            var sql = $@"select Count,userId,productId from ZKShop_OrderProduct
-                        inner join ZKShop_Order
-                        on ZKShop_Order.Id=ZKShop_OrderProduct.OrderId
+            var sql = $@"select Count,userId,productId from Shop_OrderProduct
+                        inner join Shop_Order
+                        on Shop_Order.Id=Shop_OrderProduct.OrderId
                         where ProductId in ({productIds.ToSqlString()}) and (OrderStatus!=200 and OrderStatus!=1)";
             var result = new List<ProductCount>();
             using (var reader = RepositoryContext.ExecuteDataReader(sql))

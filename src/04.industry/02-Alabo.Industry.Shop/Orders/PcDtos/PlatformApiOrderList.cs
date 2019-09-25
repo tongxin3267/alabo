@@ -65,7 +65,7 @@ namespace Alabo.App.Shop.Order.Domain.PcDtos {
                     Value = item.TotalAmount,
                     Image = Resolve<IApiService>().ApiUserAvator(item.UserId),
                     Id = item.Id,
-                    Url = $"/pages/user?path=finance_recharge_view&id={item.Id}"
+                    Url = $"/pages/user?path=Asset_recharge_view&id={item.Id}"
                 };
                 list.Add(apiData);
             }

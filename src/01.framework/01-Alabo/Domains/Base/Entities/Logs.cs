@@ -5,17 +5,17 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Domains.Base.Entities
-{
+namespace Alabo.Domains.Base.Entities {
+
     /// <summary>
     ///     日志
     /// </summary>
     [BsonIgnoreExtraElements]
-    [Table("Base_Logs")]
+    [Table("Core_Logs")]
     [ClassProperty(Name = "日志", Icon = "fa fa-cog", SortOrder = 1,
         SideBarType = SideBarType.LogSideBar)]
-    public class Logs : AggregateMongodbUserRoot<Logs>
-    {
+    public class Logs : AggregateMongodbUserRoot<Logs> {
+
         /// <summary>
         ///     类型
         /// </summary>
