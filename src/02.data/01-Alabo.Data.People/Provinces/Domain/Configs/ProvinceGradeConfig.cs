@@ -9,10 +9,7 @@ using Alabo.App.Core.Common.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User;
 using Alabo.AutoConfigs;
-<<<<<<< HEAD
-=======
 using Alabo.AutoConfigs.Entities;
->>>>>>> 44c5e5ba58edef35a87ccf85648611cf174f4003
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Helpers;
