@@ -136,7 +136,7 @@ namespace Alabo.UI.AutoTables
         public static TableColumn GetType(TableColumn tableColumn, PropertyInfo propertyInfo,
             FieldAttribute fieldAttributes)
         {
-            if (propertyInfo.PropertyType.BaseType == typeof(Enum))
+            if (propertyInfo.PropertyType.BaseType == typeof(System.Enum))
             {
                 tableColumn.Type = "enum";
                 tableColumn.Options = propertyInfo.Name;
