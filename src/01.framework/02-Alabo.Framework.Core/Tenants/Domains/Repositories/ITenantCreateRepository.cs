@@ -1,38 +1,38 @@
 ﻿using System.Collections.Generic;
 using Alabo.Domains.Repositories;
 
-namespace Alabo.App.Core.Admin.Domain.Repositories {
-
+namespace Alabo.App.Core.Admin.Domain.Repositories
+{
     /// <summary>
-    /// ITenantCreateRepository
+    ///     ITenantCreateRepository
     /// </summary>
-    public interface ITenantCreateRepository : IRepository<Users.Entities.User, long> {
-
+    public interface ITenantCreateRepository : IRepository<Users.Entities.User, long>
+    {
         /// <summary>
-        /// init tenant sql
+        ///     init tenant sql
         /// </summary>
         /// <returns></returns>
         void InitTenantSql();
 
         /// <summary>
-        /// create database
+        ///     create database
         /// </summary>
         void CreateDatabase(string databaseName);
 
         /// <summary>
-        /// create database
+        ///     create database
         /// </summary>
         void DeleteDatabase(string databaseName);
 
         /// <summary>
-        /// is exists database
+        ///     is exists database
         /// </summary>
         /// <param name="databaseName"></param>
         /// <returns></returns>
         bool IsExistsDatabase(string databaseName);
 
         /// <summary>
-        /// execute sql
+        ///     execute sql
         /// </summary>
         /// <param name="sqlList"></param>
         void ExecuteSql(List<string> sqlList);
