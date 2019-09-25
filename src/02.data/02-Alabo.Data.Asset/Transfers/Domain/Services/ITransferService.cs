@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Alabo.App.Asset.Transfers.Domain.Entities;
 using Alabo.App.Core.Finance.Domain.Dtos.Transfer;
 using Alabo.App.Core.Finance.Domain.Entities;
 using Alabo.App.Core.Finance.ViewModels.Transfer;
@@ -10,7 +11,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
     /// <summary>
     ///     转账
     /// </summary>
-    public interface ITransferService : IService {
+    public interface ITransferService : IService<Transfer, long> {
 
         /// <summary>
         ///     转账

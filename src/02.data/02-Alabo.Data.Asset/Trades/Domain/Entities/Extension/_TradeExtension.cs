@@ -17,11 +17,6 @@ namespace Alabo.App.Core.Finance.Domain.Entities.Extension {
         public RechargeExtension Recharge { get; set; } = new RechargeExtension();
 
         /// <summary>
-        ///     转账
-        /// </summary>
-        public TradeTransfer Transfer { get; set; } = new TradeTransfer();
-
-        /// <summary>
         /// </summary>
         public TradeRemark TradeRemark { get; set; } = new TradeRemark();
     }

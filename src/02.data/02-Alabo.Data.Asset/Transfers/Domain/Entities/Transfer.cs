@@ -1,21 +1,26 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Asset.Transfers.Domain.Entities.Extension;
-using Alabo.App.Asset.Transfers.Domain.Enums;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Entities.Extension;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.Datas.Ef.SqlServer;
+﻿using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.Transfers.Domain.Entities {
 
     [ClassProperty(Name = "充值", Icon = "fa fa-puzzle-piece", Description = "充值")]
     public class Transfer : AggregateDefaultUserRoot<Transfer> {
+
+        /// <summary>
+        ///     转账配置Id
+        /// </summary>
+        public Guid ConfigId { get; set; }
+
+        /// <summary>
+        ///     对方用户
+        /// </summary>
+        public long OtherUserId { get; set; }
 
         /// <summary>
         ///     本次变动的货币类型id
@@ -36,32 +41,17 @@ namespace Alabo.App.Asset.Transfers.Domain.Entities {
         [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1, Width = "150", ListShow = true, SortOrder = 5)]
         public decimal Amount { get; set; }
 
-        /// <summary>
-        ///     状态
-        /// </summary>
-        [Display(Name = "状态")]
-        public TransferStatus Status { get; set; } = TransferStatus.Pending;
+        [Field(ControlsType = ControlsType.TextBox, ListShow = true)]
+        [Display(Name = "手续费")]
+        [HelpBlock("手续费转出账户的比例,例如转出金额100，手续费0.05 实际转出到账95，手续费5")]
+        public decimal ServiceFee { get; set; }
 
         /// <summary>
-        ///     付款时间
+        ///     转账说明
         /// </summary>
-        [Display(Name = "交易时间")]
-        [Field(ControlsType = ControlsType.DateTimePicker, GroupTabId = 1, Width = "150", ListShow = true,
-            SortOrder = 7)]
-        public DateTime PayTime { get; set; } = DateTime.MinValue;
-
-        /// <summary>
-        ///     Gets or sets the 扩展.
-        /// </summary>
-        [Field(ExtensionJson = "TransferExtension")]
-        [Display(Name = "扩展")]
-        public string Extension { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the with draw 扩展.
-        /// </summary>
-        [Display(Name = "贸易扩展")]
-        public TransferExtension TransferExtension { get; set; } = new TransferExtension();
+        [Field(ControlsType = ControlsType.TextBox)]
+        [Display(Name = "转账说明")]
+        public string Intro { get; set; }
 
         /// <summary>
         ///     Gets the serial.
@@ -88,7 +78,6 @@ namespace Alabo.App.Asset.Transfers.Domain.Entities {
         protected override void MapProperties(EntityTypeBuilder<Transfer> builder) {
             //应用程序编号
             builder.HasKey(e => e.Id);
-            builder.Ignore(e => e.TransferExtension);
             builder.Ignore(e => e.Serial);
             builder.Ignore(e => e.UserName);
             builder.Ignore(e => e.Version);

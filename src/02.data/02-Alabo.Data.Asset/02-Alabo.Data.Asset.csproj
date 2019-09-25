@@ -26,6 +26,7 @@
     <Folder Include="Refunds\Domain\Repositories\" />
     <Folder Include="Refunds\Domain\Services\" />
     <Folder Include="Refunds\Dtos\" />
+    <Folder Include="Transfers\Domain\Enums\" />
     <Folder Include="Transfers\Domain\Repositories\" />
   </ItemGroup>
 
