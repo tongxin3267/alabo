@@ -4,7 +4,7 @@ using System.IO;
 using Alabo.Domains.Entities;
 using Alabo.Runtime;
 
-namespace Alabo.Core.Files
+namespace Alabo.Files
 {
     /// <summary>
     ///     文件操作类

@@ -1,6 +1,6 @@
 ﻿using Alabo.Linq;
 
-namespace Alabo.Domains.Dtos
+namespace Alabo.Domains.Services.Report.Dtos
 {
     /// <summary>
     ///     Report统计参数类

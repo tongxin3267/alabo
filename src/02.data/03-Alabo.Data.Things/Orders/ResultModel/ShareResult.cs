@@ -11,12 +11,12 @@ namespace Alabo.App.Core.Tasks.ResultModel {
         /// <summary>
         ///     订单用户
         /// </summary>
-        public User.Domain.Entities.User OrderUser { get; set; }
+        public Users.Entities.User OrderUser { get; set; }
 
         /// <summary>
         ///     分润用户
         /// </summary>
-        public User.Domain.Entities.User ShareUser { get; set; }
+        public Users.Entities.User ShareUser { get; set; }
 
         /// <summary>
         ///     分润订单

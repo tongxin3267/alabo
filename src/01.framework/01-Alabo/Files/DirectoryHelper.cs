@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using Alabo.Extensions;
 
-namespace Alabo.Core.Files
+namespace Alabo.Files
 {
     /// <summary>
     ///     A helper class for Directory operations.

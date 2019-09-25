@@ -6,6 +6,7 @@ using Alabo.App.Shop.Order.Domain.Dtos;
 using Alabo.App.Shop.Order.Dtos;
 using Alabo.App.Shop.Product.Domain.Dtos;
 using Alabo.Domains.Entities.Extensions;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Shop.Order.Domain.Entities.Extensions
 {

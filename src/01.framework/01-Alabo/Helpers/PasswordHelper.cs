@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
-using Alabo.Core.Randoms;
+using Alabo.Randoms;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Core.Helpers
+namespace Alabo.Helpers
 {
     public static class PasswordHelper
     {
@@ -67,7 +67,7 @@ namespace Alabo.Core.Helpers
                 return false;
             }
 
-            var slat = Slat == null ? null : Convert.FromBase64String(Slat);
+            var slat = Slat == null ? null : System.Convert.FromBase64String(Slat);
             var info = FromPassword(password, slat, Type);
             return Hash == info.Hash;
         }
@@ -90,16 +90,16 @@ namespace Alabo.Core.Helpers
             if (type == PasswordHashType.Pbkdf2)
             {
                 slat = slat ?? RandomHelper.SystemRandomBytes();
-                info.Slat = Convert.ToBase64String(slat);
-                info.Hash = Convert.ToBase64String(PasswordHelper.Pbkdf2Sum(passwordBytes, slat));
+                info.Slat = System.Convert.ToBase64String(slat);
+                info.Hash = System.Convert.ToBase64String(PasswordHelper.Pbkdf2Sum(passwordBytes, slat));
             }
             else if (type == PasswordHashType.Md5)
             {
-                info.Hash = Convert.ToBase64String(PasswordHelper.Md5Sum(passwordBytes));
+                info.Hash = System.Convert.ToBase64String(PasswordHelper.Md5Sum(passwordBytes));
             }
             else if (type == PasswordHashType.Sha1)
             {
-                info.Hash = Convert.ToBase64String(PasswordHelper.Sha1Sum(passwordBytes));
+                info.Hash = System.Convert.ToBase64String(PasswordHelper.Sha1Sum(passwordBytes));
             }
 
             return info;

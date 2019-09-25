@@ -14,12 +14,14 @@ using Alabo.App.Open.Tasks.Modules;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Helpers;
+using Alabo.Users.Dtos;
 using ZKCloud.Open.ApiBase.Models;
 using Alabo.Web.Mvc.Attributes;
+using User = Alabo.Users.Entities.User;
 
 namespace Alabo.App.Open.Tasks.Configs.TeamRange {
 
-    using User = Core.User.Domain.Entities.User;
+    using User = User;
 
     /// <summary>
     /// Class TeamFiexdAchievementRangConfig.

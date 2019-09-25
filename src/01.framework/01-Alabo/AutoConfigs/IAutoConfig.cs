@@ -1,4 +1,4 @@
-﻿namespace Alabo.Domains.Entities
+﻿namespace Alabo.AutoConfigs
 {
     /// <summary>
     ///     自动配置继承接口

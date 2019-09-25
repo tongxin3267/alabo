@@ -18,7 +18,7 @@ using System.Linq;
 using Alabo.App.Core.Finance.Domain.Repositories;
 using Alabo.Cache;
 using Alabo.Core.Enums.Enum;
-using Alabo.Core.Regex;
+using Alabo.Regexs;
 using ZKCloud.Open.Message.Models;
 using Convert = System.Convert;
 

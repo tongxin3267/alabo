@@ -8,6 +8,8 @@ using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Open.Tasks.Configs.UserRecommendedRelationship;
 using Alabo.Extensions;
+using Alabo.Users.Dtos;
+using Alabo.Users.Entities;
 
 namespace Alabo.Test.Open.Tasks.Configs.UserRecommendedRelationship
 {

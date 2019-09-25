@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.App.Cms.Support.Domain.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Cms.Support.Domain.Entities {

@@ -1,6 +1,6 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Core.UI.Enum
+namespace Alabo.UI.Enum
 {
     /// <summary>
     ///     http://ui.5ug.com/metronic_v5.0.6.1/metronic_v5.0.6.1/theme/default/dist/default/components/icons/lineawesome.html

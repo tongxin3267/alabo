@@ -6,7 +6,6 @@ using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Repositories;
 using Alabo.App.Core.User.ViewModels;
 using Alabo.App.Core.User.ViewModels.Admin;
-using Alabo.Core.Extensions;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -18,6 +17,8 @@ using Alabo.Schedules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Users.Dtos;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Core.User.Domain.Services {
 

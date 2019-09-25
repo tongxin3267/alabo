@@ -1,4 +1,4 @@
-﻿using Alabo.Core.Helpers;
+﻿using Alabo.Helpers;
 using NPOI.SS.UserModel;
 
 namespace Alabo.Tool.Office.Npoi {
@@ -81,7 +81,7 @@ namespace Alabo.Tool.Office.Npoi {
         /// 设置填充模式
         /// </summary>
         private void SetFillPattern() {
-            _result.FillPattern = Enum.Parse<FillPattern>(_style.FillPattern);
+            _result.FillPattern =EnumHelper.Parse<FillPattern>(_style.FillPattern);
         }
 
         /// <summary>

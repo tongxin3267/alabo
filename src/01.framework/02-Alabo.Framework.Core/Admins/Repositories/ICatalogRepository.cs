@@ -3,7 +3,7 @@ using Alabo.Domains.Repositories;
 
 namespace Alabo.App.Core.Admin.Domain.Repositories {
 
-    public interface ICatalogRepository : IRepository<User.Domain.Entities.User, long> {
+    public interface ICatalogRepository : IRepository<Users.Entities.User, long> {
 
         /// <summary>
         ///     更新数据库

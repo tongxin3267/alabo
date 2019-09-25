@@ -10,6 +10,7 @@ using Alabo.Web.Mvc.ViewModel;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.Validations;
 
 namespace Alabo.App.Shop.Store.ViewModels {
 

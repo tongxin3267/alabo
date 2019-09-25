@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Alabo.Helpers
+namespace Alabo.Regexs
 {
     /// <summary>
     ///     正则操作

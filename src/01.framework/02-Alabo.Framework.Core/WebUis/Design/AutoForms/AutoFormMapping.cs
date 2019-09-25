@@ -141,7 +141,7 @@ namespace Alabo.UI.AutoForms
                     formField.DataSource = item.FieldAttribute.ApiDataSource;
                 }
                 // 如果是枚举类型
-                if (item.Property.PropertyType.BaseType == typeof(Enum)) {
+                if (item.Property.PropertyType.BaseType == typeof(System.Enum)) {
                     formField.DataSource =
                         $"Api/Common/GetKeyValuesByEnum?type={item.Property.PropertyType.FullName}";
                 }
@@ -324,7 +324,7 @@ namespace Alabo.UI.AutoForms
                     else
                     {
                         // enum
-                        if (propertyDesc.Property.PropertyType.BaseType == typeof(Enum)) {
+                        if (propertyDesc.Property.PropertyType.BaseType == typeof(System.Enum)) {
                             formField.DataSource =
                                 $"Api/Type/GetKeyValue?type={propertyDesc.Property.PropertyType.Name}";
                         }
@@ -332,7 +332,7 @@ namespace Alabo.UI.AutoForms
                 }
 
                 // enum
-                if (propertyDesc.Property.PropertyType.BaseType == typeof(Enum)) {
+                if (propertyDesc.Property.PropertyType.BaseType == typeof(System.Enum)) {
                     formField.DataSource = $"Api/Type/GetKeyValue?type={propertyDesc.Property.PropertyType.Name}";
                 }
 

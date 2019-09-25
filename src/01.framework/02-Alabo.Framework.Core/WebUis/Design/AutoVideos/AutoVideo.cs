@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.UI.AutoVideos

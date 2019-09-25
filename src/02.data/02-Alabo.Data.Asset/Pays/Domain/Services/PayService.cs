@@ -11,7 +11,6 @@ using Alabo.App.Core.Finance.Domain.Repositories;
 using Alabo.App.Core.Finance.Dtos;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.Core.Enums.Enum;
-using Alabo.Core.Randoms;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -30,6 +29,8 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using Alabo.AutoConfigs;
+using Alabo.Randoms;
 using ZKCloud.Open.ApiStore.Payment.Modules.Alipay;
 using ZKCloud.Open.ApiStore.Payment.Modules.Alipay.Domain;
 using ZKCloud.Open.ApiStore.Payment.Modules.Alipay.Request;
@@ -360,7 +361,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// </summary>
         /// <param name="pay"></param>
         /// <param name="user">用户</param>
-        private ServiceResult TreezeBeforePay(Pay pay, User.Domain.Entities.User user) {
+        private ServiceResult TreezeBeforePay(Pay pay, Users.Entities.User user) {
             var result = ServiceResult.Success;
             var moneyTypes = Resolve<IAutoConfigService>().MoneyTypes();
             var context = Repository<IBillRepository>().RepositoryContext;

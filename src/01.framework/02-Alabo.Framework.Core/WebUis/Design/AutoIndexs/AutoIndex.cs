@@ -1,4 +1,5 @@
-﻿using Alabo.UI.AutoReports;
+﻿using Alabo.Domains.Services.Report;
+using Alabo.UI.AutoReports;
 using Alabo.UI.AutoTables;
 
 namespace Alabo.UI.AutoIndexs

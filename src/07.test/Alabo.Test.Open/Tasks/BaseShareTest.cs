@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using Alabo.App.Share.Share.Domain.Services;
+using Alabo.Users.Entities;
 using Xunit;
 
 namespace Alabo.Test.Open.Tasks {

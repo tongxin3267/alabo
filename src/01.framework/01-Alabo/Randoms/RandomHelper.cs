@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.Core.Enums.Enum;
-using Alabo.Extensions;
-using Alabo.UI;
+using Alabo.Users.Enum;
 
-namespace Alabo.Core.Randoms {
+namespace Alabo.Randoms {
 
     public static class RandomHelper {
 
@@ -71,7 +69,7 @@ namespace Alabo.Core.Randoms {
                     "secondary"
                 };
 
-                var index = new Random().Next(0, list.Count - 1);
+                var index = new System.Random().Next(0, list.Count - 1);
                 return list[index];
             }
         }
@@ -128,7 +126,7 @@ namespace Alabo.Core.Randoms {
                     "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLT1XcqKqUjrT7nmLvRIalQOD9c2mFv0wA9ccgGm9PqXBWvfWyXvhh2XddZFNN9ATcbTsCX5W8Cicw/132"
                 };
 
-                var index = new Random().Next(0, list.Count - 1);
+                var index = new System.Random().Next(0, list.Count - 1);
                 return list[index];
             }
         }
@@ -138,7 +136,7 @@ namespace Alabo.Core.Randoms {
         /// </summary>
         public static string Icon {
             get {
-                var index = new Random().Next(1, 80);
+                var index = new System.Random().Next(1, 80);
                 // index.IntToEnum<Flaticon>(out var flaticon);
                 //  return flaticon.GetIcon();
                 return String.Empty;
@@ -148,7 +146,7 @@ namespace Alabo.Core.Randoms {
         /// <summary>
         ///     随机数生成器
         /// </summary>
-        public static Random Generator { get; } = new Random(SystemRandomInt());
+        public static System.Random Generator { get; } = new System.Random(SystemRandomInt());
 
         /// <summary>
         ///     使用RNGCryptoServiceProvider生成真正随机的二进制数据
@@ -169,7 +167,7 @@ namespace Alabo.Core.Randoms {
         ///     随机产生6位的密码
         /// </summary>
         public static string PassWord() {
-            var str = new Random().Next(100000, 999999);
+            var str = new System.Random().Next(100000, 999999);
 
             return str.ToString().PadLeft(6, '0');
         }
@@ -179,7 +177,7 @@ namespace Alabo.Core.Randoms {
         /// </summary>
         /// <returns></returns>
         public static string PayPassWord() {
-            var str = new Random().Next(100000, 999999);
+            var str = new System.Random().Next(100000, 999999);
             return str.ToString().PadLeft(6, '0');
         }
 
@@ -215,7 +213,7 @@ namespace Alabo.Core.Randoms {
         ///     随机产生邮箱
         /// </summary>
         public static string Email() {
-            var emmail = RandomString(5).ToLower() + new Random().Next(10000, 999999);
+            var emmail = RandomString(5).ToLower() + new System.Random().Next(10000, 999999);
             return emmail + "@5ug.com";
         }
 
@@ -230,10 +228,10 @@ namespace Alabo.Core.Randoms {
             };
             var telList = tel.ToList();
 
-            var rd = new Random();
+            var rd = new System.Random();
             var index = rd.Next(0, telList.Count);
             var phonePrix = telList[index];
-            var phoneLast = new Random().Next(10000000, 99999999);
+            var phoneLast = new System.Random().Next(10000000, 99999999);
             return phonePrix + phoneLast;
         }
 
@@ -248,10 +246,10 @@ namespace Alabo.Core.Randoms {
             };
             var telList = tel.ToList();
 
-            var rd = new Random();
+            var rd = new System.Random();
             var index = rd.Next(0, telList.Count);
             var phonePrix = telList[index];
-            var phoneLast = new Random().Next(1000, 9999);
+            var phoneLast = new System.Random().Next(1000, 9999);
             return phonePrix + "****" + phoneLast;
         }
 
@@ -261,7 +259,7 @@ namespace Alabo.Core.Randoms {
         /// <param name="min">最小数范围</param>
         /// <param name="max">最大数范围</param>
         public static int Number(int min, int max) {
-            var num = new Random().Next(min, max);
+            var num = new System.Random().Next(min, max);
             return num;
         }
 
@@ -270,7 +268,7 @@ namespace Alabo.Core.Randoms {
         /// </summary>
         /// <returns></returns>
         public static Sex GetSex() {
-            var i = new Random().Next(0, 100000);
+            var i = new System.Random().Next(0, 100000);
             var sex = Sex.Man;
             if (i % 2 == 0) {
                 sex = Sex.WoMan;
@@ -290,17 +288,17 @@ namespace Alabo.Core.Randoms {
                 nameList = _lastNameWoMan.ToCharArray().ToList(); //151个女士名
             }
 
-            var lastNameIndex = new Random().Next(0, nameList.Count);
+            var lastNameIndex = new System.Random().Next(0, nameList.Count);
             var lastName = nameList[lastNameIndex];
-            var xingIndex = new Random().Next(0, Xing.Count);
+            var xingIndex = new System.Random().Next(0, Xing.Count);
             var xing = Xing[xingIndex];
-            var firstNameIndex = new Random().Next(0, nameList.Count);
+            var firstNameIndex = new System.Random().Next(0, nameList.Count);
             var firstName = nameList[firstNameIndex];
             return xing + firstName + lastName;
         }
 
         public static string XingRandom() {
-            var xingIndex = new Random().Next(0, Xing.Count);
+            var xingIndex = new System.Random().Next(0, Xing.Count);
             var xing = Xing[xingIndex];
             return xing;
         }

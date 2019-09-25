@@ -1,6 +1,6 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.UI.AutoReports.Enums
+namespace Alabo.Domains.Services.Report.Enums
 {
     /// <summary>
     ///     图表, 类型参考自 https://v-charts.js.org/#/line

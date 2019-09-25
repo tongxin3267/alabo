@@ -11,6 +11,7 @@ using Alabo.Web.Mvc.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Validations;
 using ZKCloud.Open.Share.Models;
 
 namespace Alabo.App.Share.Share.ViewModels {

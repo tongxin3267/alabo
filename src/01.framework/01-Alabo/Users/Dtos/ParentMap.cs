@@ -1,4 +1,4 @@
-﻿namespace Alabo.App.Core.User.Domain.Dtos {
+﻿namespace Alabo.Users.Dtos {
 
     /// <summary>
     ///     组织架构关系图

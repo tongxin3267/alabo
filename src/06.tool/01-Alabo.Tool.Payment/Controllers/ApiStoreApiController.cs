@@ -11,6 +11,8 @@ using Alabo.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.ComponentModel.DataAnnotations;
+using Alabo.AutoConfigs;
+using Alabo.AutoConfigs.Services;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Core.ApiStore.Controllers {

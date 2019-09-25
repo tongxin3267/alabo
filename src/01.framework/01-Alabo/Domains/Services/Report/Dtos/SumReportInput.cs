@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Alabo.Linq;
 
-namespace Alabo.UI.AutoReports.Dtos
+namespace Alabo.Domains.Services.Report.Dtos
 {
     public class SumReportInput
     {

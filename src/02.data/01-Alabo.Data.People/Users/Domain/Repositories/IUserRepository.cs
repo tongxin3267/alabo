@@ -5,29 +5,29 @@ using Alabo.Domains.Repositories;
 
 namespace Alabo.App.Core.User.Domain.Repositories {
 
-    public interface IUserRepository : IRepository<Entities.User, long> {
+    public interface IUserRepository : IRepository<Users.Entities.User, long> {
 
-        Entities.User UserTeam(long userId);
+        Users.Entities.User UserTeam(long userId);
 
-        Entities.User GetSingle(long userId);
+        Users.Entities.User GetSingle(long userId);
 
-        Entities.User GetSingle(string UserName);
+        Users.Entities.User GetSingle(string UserName);
 
-        Entities.User GetSingleByMail(string mail);
+        Users.Entities.User GetSingleByMail(string mail);
 
-        Entities.User GetSingleByMobile(string mobile);
+        Users.Entities.User GetSingleByMobile(string mobile);
 
-        Entities.User GetUserDetail(long userId);
+        Users.Entities.User GetUserDetail(long userId);
 
-        Entities.User GetUserDetail(string UserName);
+        Users.Entities.User GetUserDetail(string UserName);
 
-        Entities.User Add(Entities.User User, List<MoneyTypeConfig> moneyTypes);
+        Users.Entities.User Add(Users.Entities.User User, List<MoneyTypeConfig> moneyTypes);
 
-        bool UpdateSingle(Entities.User user);
+        bool UpdateSingle(Users.Entities.User user);
 
         bool CheckUserExists(string UserName, string password, out long userId);
 
-        IList<Entities.User> GetList(IList<long> userIds);
+        IList<Users.Entities.User> GetList(IList<long> userIds);
 
         bool ExistsName(string name);
 
@@ -44,7 +44,7 @@ namespace Alabo.App.Core.User.Domain.Repositories {
         /// <returns></returns>
         bool Delete(long userId);
 
-        IList<Entities.User> GetViewUserList(UserInput userInput, out long count);
+        IList<Users.Entities.User> GetViewUserList(UserInput userInput, out long count);
 
         /// <summary>
         ///     会员删除时推荐关系修改

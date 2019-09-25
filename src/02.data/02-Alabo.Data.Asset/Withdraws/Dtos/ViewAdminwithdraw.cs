@@ -45,7 +45,7 @@ namespace Alabo.App.Core.Finance.ViewModels.WithDraw {
         /// <summary>
         ///     交易用户
         /// </summary>
-        public User.Domain.Entities.User User { get; set; }
+        public Users.Entities.User User { get; set; }
 
         /// <summary>
         ///     Gets or sets 会员Id

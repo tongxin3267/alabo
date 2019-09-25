@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Entities;
+using Alabo.Validations;
 
 namespace Alabo.App.Core.Themes.Dtos.Service {
 

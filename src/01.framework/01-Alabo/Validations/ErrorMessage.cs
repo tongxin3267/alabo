@@ -1,4 +1,4 @@
-﻿namespace Alabo.Domains.Entities
+﻿namespace Alabo.Validations
 {
     /// <summary>
     ///     ErrorMessageFormats 类存放格式化错误消息

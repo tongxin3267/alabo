@@ -9,6 +9,7 @@ using Alabo.Extensions;
 using Alabo.Mapping;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Core.User.UI.AutoFrom {

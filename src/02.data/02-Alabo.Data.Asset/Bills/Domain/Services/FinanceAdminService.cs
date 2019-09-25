@@ -85,7 +85,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
                     viewUser.UserId = viewUser.User.Id;
                     viewUser.UserName = Resolve<IUserService>().GetUserStyle(user);
                 } else {
-                    viewUser.User = new User.Domain.Entities.User();
+                    viewUser.User = new Users.Entities.User();
                 }
 
                 var otherUser = users.FirstOrDefault(r => r.Id == item.OtherUserId);

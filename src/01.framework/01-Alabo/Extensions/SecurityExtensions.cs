@@ -1,10 +1,9 @@
-﻿using Alabo.Extensions;
-using System;
+﻿using System;
 using System.Security.Cryptography;
 using System.Text;
-using ZKCloud.Core.Helpers.Internal;
+using Alabo.Helpers.Internal;
 
-namespace Alabo.Core.Extensions {
+namespace Alabo.Extensions {
 
     /// <summary>
     ///     ///

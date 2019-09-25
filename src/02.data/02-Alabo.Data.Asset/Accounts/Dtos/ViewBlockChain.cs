@@ -9,6 +9,7 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.UI;
 using Alabo.UI.AutoTables;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
@@ -86,7 +87,7 @@ namespace Alabo.App.Core.Finance.ViewModels.Account {
         /// <summary>
         ///     交易用户
         /// </summary>
-        public User.Domain.Entities.User User { get; set; }
+        public Users.Entities.User User { get; set; }
 
         /// <summary>
         ///     Gets or sets the money 类型 configuration.

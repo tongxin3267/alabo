@@ -8,6 +8,7 @@ using Alabo.App.Share.Kpi.ViewModels;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Share.Kpi.Domain.Services {
 

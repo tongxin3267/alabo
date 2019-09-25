@@ -17,6 +17,7 @@ using Alabo.Mapping;
 using Alabo.Maps;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Cms.Articles.UI.AutoForm

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Alabo.Core.Helpers
+namespace Alabo.Helpers
 {
     #region 词典读取器
 

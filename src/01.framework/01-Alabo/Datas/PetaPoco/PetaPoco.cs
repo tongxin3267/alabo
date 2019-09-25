@@ -33,7 +33,7 @@ using System.Threading;
 using Alabo.Exceptions;
 using Alabo.Runtime;
 
-namespace PetaPoco {
+namespace Alabo.Datas.PetaPoco {
 
     public class Db {
         public static Database Instance => DbInside.Instance;

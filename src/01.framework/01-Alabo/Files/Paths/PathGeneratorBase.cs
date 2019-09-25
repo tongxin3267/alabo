@@ -2,6 +2,7 @@
 using System.IO;
 using Alabo.Helpers;
 using Alabo.Randoms;
+using Alabo.Regexs;
 using String = Alabo.Helpers.String;
 
 namespace Alabo.Files.Paths

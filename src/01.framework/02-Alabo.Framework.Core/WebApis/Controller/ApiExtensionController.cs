@@ -1,11 +1,11 @@
 ﻿using System;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
 using Alabo.Maps;
 using ZKCloud.Open.ApiBase.Models;
 using Alabo.Security;
 using Alabo.UI;
+using Alabo.Users.Services;
 using Alabo.Web.Mvc.Controllers;
 using ApiResult = ZKCloud.Open.ApiBase.Models.ApiResult;
 
@@ -60,12 +60,12 @@ namespace Alabo.App.Core.Api.Controller {
             }
         }
 
-        private User.Domain.Entities.User _user = null;
+        private Users.Entities.User _user = null;
 
         /// <summary>
         /// 当前Api接口访问的登录用户，由前台传UserId过来判断
         /// </summary>
-        public User.Domain.Entities.User User {
+        public Users.Entities.User User {
             get {
                 if (_user == null && AutoModel.BasicUser != null) {
                     _user = Resolve<IAlaboUserService>().GetSingle(AutoModel.BasicUser.Id);

@@ -5,9 +5,9 @@ using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.Extensions;
+using Alabo.Domains.Services.Report.Enums;
 using Alabo.Extensions;
 using Alabo.Helpers;
-using Alabo.UI.AutoReports.Enums;
 
 namespace Alabo.Linq
 {

@@ -14,12 +14,14 @@ using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.Model;
 using Alabo.Domains.Services;
+using Alabo.Domains.Services.Report;
+using Alabo.Domains.Services.Report.Dtos;
+using Alabo.Domains.Services.Report.Enums;
 using Alabo.Extensions;
 using Alabo.Linq.Dynamic;
 using Alabo.Reflections;
 using Alabo.UI;
 using Alabo.UI.AutoReports;
-using Alabo.UI.AutoReports.Dtos;
 
 namespace Alabo.App.Core.Reports.Domain.Services {
 
@@ -251,8 +253,8 @@ namespace Alabo.App.Core.Reports.Domain.Services {
                 tempObjectList.Add(viewTableOutput);
             }
 
-            var line = (Alabo.UI.AutoReports.Enums.ReportChartType)Enum.Parse(typeof(Alabo.UI.AutoReports.Enums.ReportChartType), "0");
-            var Histogram = (Alabo.UI.AutoReports.Enums.ReportChartType)Enum.Parse(typeof(Alabo.UI.AutoReports.Enums.ReportChartType), "1");
+            var line = (ReportChartType)Enum.Parse(typeof(ReportChartType), "0");
+            var Histogram = (ReportChartType)Enum.Parse(typeof(ReportChartType), "1");
             var returnReport = new List<AutoReport>
             {
                  new AutoReport{ Name = "", Icon =Flaticon.Alarm.GetIcon(), AutoReportChart = new AutoReportChart{ Type = line, Columns = chartCols, Rows = tempObjectList }},

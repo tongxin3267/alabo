@@ -7,7 +7,7 @@ using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Runtime;
 
-namespace Alabo.Core.Files {
+namespace Alabo.Files {
 
     public class ZipHelper {
         private static readonly string Packages = RuntimeContext.Current.Path.PackagesDirectory;

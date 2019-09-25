@@ -5,7 +5,7 @@ using System.Text;
 using Alabo.Exceptions;
 using Alabo.Web.Mvc.Attributes;
 
-namespace ZKCloud.Core.Helpers.Internal {
+namespace Alabo.Helpers.Internal {
 
     /// <summary>
     ///     RSA加解密 使用OpenSSL的公钥加密/私钥解密
@@ -52,7 +52,7 @@ namespace ZKCloud.Core.Helpers.Internal {
             var signatureBytes =
                 _privateKeyRsaProvider.SignData(dataBytes, _hashAlgorithmName, RSASignaturePadding.Pkcs1);
 
-            return Convert.ToBase64String(signatureBytes);
+            return System.Convert.ToBase64String(signatureBytes);
         }
 
         #endregion 使用私钥签名
@@ -66,7 +66,7 @@ namespace ZKCloud.Core.Helpers.Internal {
         /// <param name="sign">签名</param>
         public bool Verify(string data, string sign) {
             var dataBytes = _encoding.GetBytes(data);
-            var signBytes = Convert.FromBase64String(sign);
+            var signBytes = System.Convert.FromBase64String(sign);
 
             var verify =
                 _publicKeyRsaProvider.VerifyData(dataBytes, signBytes, _hashAlgorithmName, RSASignaturePadding.Pkcs1);
@@ -83,7 +83,7 @@ namespace ZKCloud.Core.Helpers.Internal {
                 throw new ValidException("_privateKeyRsaProvider is null");
             }
 
-            return Encoding.UTF8.GetString(_privateKeyRsaProvider.Decrypt(Convert.FromBase64String(cipherText),
+            return Encoding.UTF8.GetString(_privateKeyRsaProvider.Decrypt(System.Convert.FromBase64String(cipherText),
                 RSAEncryptionPadding.Pkcs1));
         }
 
@@ -96,7 +96,7 @@ namespace ZKCloud.Core.Helpers.Internal {
                 throw new ValidException("_publicKeyRsaProvider is null");
             }
 
-            return Convert.ToBase64String(_publicKeyRsaProvider.Encrypt(Encoding.UTF8.GetBytes(text),
+            return System.Convert.ToBase64String(_publicKeyRsaProvider.Encrypt(Encoding.UTF8.GetBytes(text),
                 RSAEncryptionPadding.Pkcs1));
         }
 
@@ -105,7 +105,7 @@ namespace ZKCloud.Core.Helpers.Internal {
         #region 使用私钥创建RSA实例
 
         public RSA CreateRsaProviderFromPrivateKey(string privateKey) {
-            var privateKeyBits = Convert.FromBase64String(privateKey);
+            var privateKeyBits = System.Convert.FromBase64String(privateKey);
 
             var rsa = RSA.Create();
             var rsaParameters = new RSAParameters();
@@ -155,7 +155,7 @@ namespace ZKCloud.Core.Helpers.Internal {
             byte[] seqOid = { 0x30, 0x0D, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x01, 0x01, 0x05, 0x00 };
             var seq = new byte[15];
 
-            var x509Key = Convert.FromBase64String(publicKeyString);
+            var x509Key = System.Convert.FromBase64String(publicKeyString);
 
             // ---------  Set up stream to read the asn.1 encoded SubjectPublicKeyInfo blob  ------
             using (var mem = new MemoryStream(x509Key)) {

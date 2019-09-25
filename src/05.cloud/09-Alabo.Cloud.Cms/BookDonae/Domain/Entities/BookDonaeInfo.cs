@@ -9,6 +9,7 @@ using MongoDB.Bson;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.UI;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Market.BookDonae.Domain.Entities {

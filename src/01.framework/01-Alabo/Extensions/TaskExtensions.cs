@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Alabo.Core.Extensions
+namespace Alabo.Extensions
 {
     public static class TaskExtensions
     {

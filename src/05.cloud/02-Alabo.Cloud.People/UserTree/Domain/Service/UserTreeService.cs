@@ -6,6 +6,7 @@ using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Repositories;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Services;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Core.User.Domain.Services {
 

@@ -9,7 +9,6 @@ using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.Core.Enums.Enum;
-using Alabo.Core.Regex;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Mapping;
@@ -18,6 +17,7 @@ using Alabo.RestfulApi;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
 using System.Linq;
+using Alabo.Regexs;
 
 namespace Alabo.App.Core.User.Controllers {
 

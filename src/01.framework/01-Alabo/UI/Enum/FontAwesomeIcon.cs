@@ -1,7 +1,6 @@
-﻿using Alabo.UI;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Core.UI.Enum {
+namespace Alabo.UI.Enum {
 
     /// <summary>
     ///     Font Awesome图标

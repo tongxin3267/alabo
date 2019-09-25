@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using MongoDB.Bson.Serialization.Attributes;
 using Alabo.App.Core.Common;
 using Alabo.App.Core.User.Domain.Callbacks;
+using Alabo.AutoConfigs;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;

@@ -11,7 +11,7 @@ namespace Alabo.App.Core.Finance.ViewModels.Account {
         /// <summary>
         ///     Gets or sets the 会员.
         /// </summary>
-        public User.Domain.Entities.User User { get; set; }
+        public Users.Entities.User User { get; set; }
 
         /// <summary>
         ///     Gets or sets the accounts.

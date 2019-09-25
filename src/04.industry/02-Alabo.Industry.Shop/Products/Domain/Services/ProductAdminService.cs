@@ -17,12 +17,12 @@ using Alabo.App.Shop.Product.Domain.Enums;
 using Alabo.App.Shop.Product.Domain.Repositories;
 using Alabo.App.Shop.Product.ViewModels;
 using Alabo.App.Shop.Store.Domain.Services;
-using Alabo.Core.Files;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Files;
 using Alabo.Mapping;
 using Alabo.Runtime;
 

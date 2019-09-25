@@ -5,8 +5,6 @@ using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Repositories;
 using Alabo.App.Core.User.ViewModels;
-using Alabo.Core.Extensions;
-using Alabo.Core.Regex;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
@@ -19,6 +17,8 @@ using Alabo.Maps;
 using Alabo.UI;
 using System;
 using System.Collections.Generic;
+using Alabo.Regexs;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Core.User.Domain.Services {
 

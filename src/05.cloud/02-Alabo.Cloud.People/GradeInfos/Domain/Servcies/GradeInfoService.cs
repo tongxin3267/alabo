@@ -76,7 +76,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// <param name="gradeInfo"></param>
         /// <param name="user"></param>
         /// <returns></returns>
-        public Tuple<bool, Guid> GetKpiResult(GradeInfo gradeInfo, Entities.User user) {
+        public Tuple<bool, Guid> GetKpiResult(GradeInfo gradeInfo, Users.Entities.User user) {
             var autoUpgradeConfigs = Resolve<IAutoConfigService>().GetList<AutoUpgradeConfig>();
             var userAutoUpgradeConfig = autoUpgradeConfigs.FirstOrDefault(r => r.GradeId == user.GradeId);
             // 判断升级Id高于当前Id
@@ -227,7 +227,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     根据用户获取用户等数据统计
         /// </summary>
         /// <param name="users"></param>
-        public IEnumerable<GradeInfoItem> GetUsersGradeInfo(IEnumerable<User.Domain.Entities.User> users) {
+        public IEnumerable<GradeInfoItem> GetUsersGradeInfo(IEnumerable<Users.Entities.User> users) {
             var gradeList = new List<GradeInfoItem>();
             if (users != null) {
                 var grades = Resolve<IGradeService>().GetUserGradeList();

@@ -4,6 +4,7 @@ using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Shop.Order.Domain.Services {
 

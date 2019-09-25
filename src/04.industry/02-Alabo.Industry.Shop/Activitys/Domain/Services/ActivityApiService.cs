@@ -31,6 +31,7 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Mapping;
 using Alabo.UI.AutoForms;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Shop.Activitys.Services
 {

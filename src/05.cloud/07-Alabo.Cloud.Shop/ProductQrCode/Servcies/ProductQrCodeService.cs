@@ -9,13 +9,14 @@ using Alabo.App.Core.Common.Domain.CallBacks;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Shop.Product.Domain.Services;
 using Alabo.App.Shop.Product.ViewModels;
-using Alabo.Core.Files;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Runtime;
 using QRCoder;
 using _07_Alabo.Cloud.Shop.ProductQrCode.Servcies;
+using Alabo.AutoConfigs;
+using Alabo.Files;
 
 namespace Alabo.Cloud.Shop.ProductQrCode.Servcies {
 

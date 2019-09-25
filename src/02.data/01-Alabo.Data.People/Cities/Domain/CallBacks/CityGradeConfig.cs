@@ -2,6 +2,8 @@
 using Alabo.App.Core.Common.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User;
+using Alabo.AutoConfigs;
+using Alabo.AutoConfigs.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Helpers;

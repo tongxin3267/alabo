@@ -12,12 +12,11 @@ using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.Core.Enums.Enum;
-using Alabo.Core.Extensions;
 using Alabo.Domains.Base.Services;
 using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
 using Alabo.Web.Mvc.Controllers;
-using UserDetail = Alabo.App.Core.User.Domain.Entities.UserDetail;
+using UserDetail = Alabo.Users.Entities.UserDetail;
 
 namespace Alabo.App.Core.User.Controllers {
 

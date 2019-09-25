@@ -9,6 +9,7 @@ using Alabo.App.Shop.Order.ViewModels;
 using Alabo.App.Shop.Order.ViewModels.OrderEdit;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Shop.Order.Domain.Services {
 

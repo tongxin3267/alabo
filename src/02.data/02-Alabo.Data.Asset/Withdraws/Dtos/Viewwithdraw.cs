@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Entities;
+using Alabo.Validations;
 using Alabo.Web.Mvc.ViewModel;
 
 namespace Alabo.App.Core.Finance.ViewModels.WithDraw {

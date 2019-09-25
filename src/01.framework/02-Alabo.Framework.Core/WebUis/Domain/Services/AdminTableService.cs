@@ -1,5 +1,4 @@
-﻿using Alabo.Core.Files;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
@@ -14,6 +13,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using Alabo.Files;
 using FileInfo = System.IO.FileInfo;
 
 namespace Alabo.App.Core.Admin.Domain.Services {

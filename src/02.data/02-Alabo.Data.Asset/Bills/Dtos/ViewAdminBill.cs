@@ -44,7 +44,7 @@ namespace Alabo.App.Core.Finance.ViewModels.Bill {
         /// <summary>
         ///     交易用户
         /// </summary>
-        public User.Domain.Entities.User User { get; set; }
+        public Users.Entities.User User { get; set; }
 
         /// <summary>
         ///     Gets or sets the name of the 会员.
@@ -81,7 +81,7 @@ namespace Alabo.App.Core.Finance.ViewModels.Bill {
         /// <summary>
         ///     Gets or sets the other 会员.
         /// </summary>
-        public User.Domain.Entities.User OtherUser { get; set; }
+        public Users.Entities.User OtherUser { get; set; }
 
         /// <summary>
         ///     Gets or sets the name of the other 会员.

@@ -4,6 +4,8 @@ using Alabo.App.Cms.Support.Domain.Enum;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Users.Entities;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 

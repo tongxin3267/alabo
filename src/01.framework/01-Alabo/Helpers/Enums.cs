@@ -11,6 +11,8 @@ namespace Alabo.Helpers
     /// </summary>
     public static class Enums
     {
+
+
         /// <summary>
         ///     获取实例
         /// </summary>

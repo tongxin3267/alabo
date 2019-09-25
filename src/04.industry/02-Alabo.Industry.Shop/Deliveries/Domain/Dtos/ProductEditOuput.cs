@@ -9,6 +9,7 @@ using Alabo.App.Shop.Category.Domain.Entities;
 using Alabo.App.Shop.Product.Domain.Entities;
 using Alabo.App.Shop.Product.Domain.Entities.Extensions;
 using Alabo.Domains.Entities;
+using Alabo.Validations;
 
 namespace Alabo.App.Shop.Store.Domain.Dtos {
 

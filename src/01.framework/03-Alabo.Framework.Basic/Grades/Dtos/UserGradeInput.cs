@@ -2,6 +2,7 @@
 using Alabo.Domains.Entities;
 using System;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Validations;
 
 namespace Alabo.App.Core.User.Domain.Dtos {
 

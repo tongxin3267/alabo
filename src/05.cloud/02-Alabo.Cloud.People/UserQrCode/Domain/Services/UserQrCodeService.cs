@@ -11,16 +11,18 @@ using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Common.ViewModels;
 using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.User.Domain.Entities;
-using Alabo.Core.Files;
+using Alabo.AutoConfigs;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Files;
 using Alabo.Helpers;
 using Alabo.Runtime;
 using Alabo.Schedules;
+using Alabo.Users.Entities;
 using File = System.IO.File;
 
 namespace Alabo.App.Core.User.Domain.Services {
@@ -92,7 +94,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     生成用户的二维码，并且把二维码保存到本地
         /// </summary>
         /// <param name="user">用户</param>
-        public void CreateCode(Entities.User user) {
+        public void CreateCode(Users.Entities.User user) {
             //文件夹不存在，重新生成文件夹
             FileHelper.CreateDirectory(FileHelper.WwwRootPath + "//qrcode");
             //二维码图片地址

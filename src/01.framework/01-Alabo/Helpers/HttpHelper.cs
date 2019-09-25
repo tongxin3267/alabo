@@ -4,7 +4,7 @@ using Alabo.Domains.Entities;
 using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Core.Helpers {
+namespace Alabo.Helpers {
 
     /// <summary>
     ///     Api请求

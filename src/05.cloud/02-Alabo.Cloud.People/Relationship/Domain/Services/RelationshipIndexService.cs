@@ -13,6 +13,8 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
+using Alabo.Users.Dtos;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Market.Relationship.Domain.Services {
 

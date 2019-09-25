@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Alabo.Domains.Query.Dto;
 
-namespace Alabo.UI.AutoReports.Dtos
+namespace Alabo.Domains.Services.Report.Dtos
 {
     public class SumTableInput : PagedInputDto
     {

@@ -6,6 +6,7 @@ using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Tenants;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Shop.Order.Domain.Entities {

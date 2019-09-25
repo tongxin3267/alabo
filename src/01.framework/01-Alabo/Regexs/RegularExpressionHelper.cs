@@ -1,4 +1,4 @@
-﻿namespace Alabo.Core.Regex
+﻿namespace Alabo.Regexs
 {
     /// <summary>
     ///     正则表达式

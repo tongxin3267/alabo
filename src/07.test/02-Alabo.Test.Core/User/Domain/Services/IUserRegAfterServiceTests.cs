@@ -21,7 +21,7 @@ namespace Alabo.Test.Core.User.Domain.Services
         [TestMethod("After_User")]
         public void After_User_test()
         {
-            App.Core.User.Domain.Entities.User user = null;
+            Users.Entities.User user = null;
             Resolve<IUserRegAfterService>().AddBackJob(user);
         }
     }

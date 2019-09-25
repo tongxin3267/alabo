@@ -12,6 +12,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
+using Alabo.AutoConfigs;
+using Alabo.AutoConfigs.Entities;
+using Alabo.AutoConfigs.Services;
 
 namespace ZKCloud.App.Core.UserType.Domain.CallBacks {
 

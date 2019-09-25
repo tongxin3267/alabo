@@ -1,12 +1,9 @@
-﻿using Alabo.App.Core.Common.Domain.Entities;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Services;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Alabo.AutoConfigs.Entities;
+using Alabo.Domains.Services;
 
-namespace Alabo.App.Core.Common.Domain.Services {
+namespace Alabo.AutoConfigs.Services {
 
     public interface IAlaboAutoConfigService : IService<AutoConfig, long> {
 

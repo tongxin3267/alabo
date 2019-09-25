@@ -6,7 +6,6 @@ using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Repositories;
 using Alabo.App.Core.User.ViewModels;
-using Alabo.Core.Extensions;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -25,7 +24,7 @@ namespace Alabo.App.Core.User.Domain.Services {
     /// <summary>
     ///     Class UserService.
     /// </summary>
-    public class UserService : ServiceBase<Entities.User, long>, IUserService {
+    public class UserService : ServiceBase<Users.Entities.User, long>, IUserService {
 
         /// <summary>
         ///     The single 会员 cache key
@@ -42,7 +41,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// </summary>
         private readonly IUserRepository _userRepository;
 
-        public UserService(IUnitOfWork unitOfWork, IRepository<Entities.User, long> repository) : base(unitOfWork,
+        public UserService(IUnitOfWork unitOfWork, IRepository<Users.Entities.User, long> repository) : base(unitOfWork,
             repository) {
             _userRepository = Repository<IUserRepository>();
             _userMapRepository = Repository<IUserMapRepository>();
@@ -52,7 +51,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     从缓存中获取用户
         /// </summary>
         /// <param name="userId">会员Id</param>
-        public Entities.User GetSingle(long userId) {
+        public Users.Entities.User GetSingle(long userId) {
             return ObjectCache.GetOrSet(() => { return Repository<IUserRepository>().GetSingle(userId); },
                 $"{_singleUserCacheKey}_Id_{userId}").Value;
         }
@@ -61,7 +60,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     会员s the team.
         /// </summary>
         /// <param name="userId">会员Id</param>
-        public Entities.User UserTeam(long userId) {
+        public Users.Entities.User UserTeam(long userId) {
             return ObjectCache.GetOrSet(() => { return Repository<IUserRepository>().UserTeam(userId); },
                 $"{_singleUserCacheKey}_UserTeam_{userId}").Value;
         }
@@ -70,7 +69,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     获取用户
         /// </summary>
         /// <param name="userId">会员Id</param>
-        public Entities.User GetNomarlUser(long userId) {
+        public Users.Entities.User GetNomarlUser(long userId) {
             var user = GetSingle(userId);
             if (user != null && user.Status == Status.Normal) {
                 return user;
@@ -79,7 +78,7 @@ namespace Alabo.App.Core.User.Domain.Services {
             return null;
         }
 
-        public Entities.User GetSingleByUserNameOrMobile(string userName) {
+        public Users.Entities.User GetSingleByUserNameOrMobile(string userName) {
             var user = GetSingle(r => r.UserName == userName || r.Email == userName || r.Mobile == userName);
             if (user != null) {
                 user = GetUserDetail(user.Id);
@@ -92,13 +91,13 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     获取s the single.
         /// </summary>
         /// <param name="userName">Name of the 会员.</param>
-        public Entities.User GetSingle(string userName) {
+        public Users.Entities.User GetSingle(string userName) {
             if (userName.IsNullOrEmpty()) {
                 return null;
             }
 
             var cacheKey = _singleUserCacheKey + "_UserName_" + userName;
-            if (!ObjectCache.TryGet(cacheKey, out Entities.User result)) {
+            if (!ObjectCache.TryGet(cacheKey, out Users.Entities.User result)) {
                 result = Repository<IUserRepository>().GetSingle(userName.Trim());
                 if (result != null) {
                     ObjectCache.Set(cacheKey, result);
@@ -111,7 +110,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// <summary>
         ///     获取平台用户
         /// </summary>
-        public Entities.User PlanformUser() {
+        public Users.Entities.User PlanformUser() {
             //平台用户的用户名固定为planform
             return GetSingle("admin");
         }
@@ -120,7 +119,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     获取s the single by mobile.
         /// </summary>
         /// <param name="mobile">The mobile.</param>
-        public Entities.User GetSingleByMobile(string mobile) {
+        public Users.Entities.User GetSingleByMobile(string mobile) {
             var result = Repository<IUserRepository>().GetSingleByMobile(mobile); //不能用缓存，手机号码可以修改
             return result;
         }
@@ -129,7 +128,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     获取s the single by mail.
         /// </summary>
         /// <param name="mail">The mail.</param>
-        public Entities.User GetSingleByMail(string mail) {
+        public Users.Entities.User GetSingleByMail(string mail) {
             var result = Repository<IUserRepository>().GetSingleByMail(mail); //不能用缓存，邮箱可以修改
             return result;
         }
@@ -138,9 +137,9 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     获取用户的详细信息，包括User表、UserDetail、UserMap表
         /// </summary>
         /// <param name="userId">会员Id</param>
-        public Entities.User GetUserDetail(long userId) {
+        public Users.Entities.User GetUserDetail(long userId) {
             var cacheKey = _singleUserCacheKey + "_Detail_Id_" + userId;
-            if (!ObjectCache.TryGet(cacheKey, out Entities.User result)) {
+            if (!ObjectCache.TryGet(cacheKey, out Users.Entities.User result)) {
                 result = Repository<IUserRepository>().GetUserDetail(userId);
                 if (result != null) {
                     ObjectCache.Set(cacheKey, result);
@@ -155,13 +154,13 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     获取s the 会员 detail.
         /// </summary>
         /// <param name="UserName">Name of the 会员.</param>
-        public Entities.User GetUserDetail(string UserName) {
+        public Users.Entities.User GetUserDetail(string UserName) {
             if (UserName.IsNullOrEmpty()) {
                 return null;
             }
 
             var cacheKey = _singleUserCacheKey + "_Detail_UserName_" + UserName;
-            if (!ObjectCache.TryGet(cacheKey, out Entities.User result)) {
+            if (!ObjectCache.TryGet(cacheKey, out Users.Entities.User result)) {
                 result = Repository<IUserRepository>().GetUserDetail(UserName.Trim());
                 if (result != null) {
                     ObjectCache.Set(cacheKey, result);
@@ -176,7 +175,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// </summary>
         /// <param name="model">The 视图.</param>
         /// <!-- 对于成员“M:Alabo.Domains.Services.WriteService`2.Update(`0)”忽略有格式错误的 XML 注释 -->
-        public bool UpdateUser(Entities.User model) {
+        public bool UpdateUser(Users.Entities.User model) {
             var result = _userRepository.UpdateSingle(model);
 
             if (result) {
@@ -214,7 +213,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     获取s the list.
         /// </summary>
         /// <param name="userIds">The 会员 ids.</param>
-        public IList<Entities.User> GetList(IList<long> userIds) {
+        public IList<Users.Entities.User> GetList(IList<long> userIds) {
             return _userRepository.GetList(userIds);
         }
 
@@ -222,7 +221,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     获取s the 会员 detail by open identifier.
         /// </summary>
         /// <param name="openId">The open identifier.</param>
-        public Entities.User GetUserDetailByOpenId(string openId) {
+        public Users.Entities.User GetUserDetailByOpenId(string openId) {
             var find = Resolve<IUserDetailService>().GetSingle(r => r.OpenId == openId);
             if (find != null) {
                 var user = GetUserDetail(find.UserId);
@@ -236,7 +235,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     会员注册
         /// </summary>
         /// <param name="user">The 会员.</param>
-        public Entities.User AddUser(Entities.User user) {
+        public Users.Entities.User AddUser(Users.Entities.User user) {
             var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>()
                 .Where(r => r.Status == Status.Normal).ToList();
             var result = _userRepository.Add(user, moneyTypes);
@@ -450,7 +449,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     用户美化
         /// </summary>
         /// <param name="user">用户</param>
-        public string GetUserStyle(Entities.User user) {
+        public string GetUserStyle(Users.Entities.User user) {
             if (user == null) {
                 return string.Empty;
             }
@@ -468,7 +467,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     会员中心用户美化
         /// </summary>
         /// <param name="user">The user.</param>
-        public string GetHomeUserStyle(Entities.User user) {
+        public string GetHomeUserStyle(Users.Entities.User user) {
             if (user == null) {
                 return string.Empty;
             }
@@ -516,7 +515,7 @@ namespace Alabo.App.Core.User.Domain.Services {
             var user = query.ToUserObject();
             var users = Resolve<IUserService>().GetPagedList<ViewHomeUser>(query, u => u.ParentId == user.Id);
             users.ForEach(u => {
-                var userStyle = AutoMapping.SetValue<Entities.User>(u);
+                var userStyle = AutoMapping.SetValue<Users.Entities.User>(u);
                 u.UserName = GetHomeUserStyle(userStyle);
                 u.GradeName = Resolve<IGradeService>().GetGrade(u.GradeId)?.Name;
             });
@@ -528,7 +527,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public string GetUserToken(Entities.User user) {
+        public string GetUserToken(Users.Entities.User user) {
             return ObjectCache.GetOrSet(() => {
                 if (user == null) {
                     throw new ValidException("用户不能为空");

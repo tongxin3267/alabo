@@ -7,6 +7,8 @@ using Alabo.Helpers;
 using Alabo.Mapping;
 using System;
 using System.Linq;
+using Alabo.AutoConfigs;
+using Alabo.AutoConfigs.Services;
 
 namespace Alabo.App.Core.Api.Domain.Service {
 

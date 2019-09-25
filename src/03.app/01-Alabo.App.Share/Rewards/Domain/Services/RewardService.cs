@@ -30,12 +30,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Alabo.Users.Entities;
 using ZKCloud.Open.Share.Models;
 
 namespace Alabo.App.Share.Share.Domain.Services {
 
     using Reward = Entities.Reward;
-    using User = Core.User.Domain.Entities.User;
+    using User = User;
 
     /// <summary>
     /// Class RewardService.

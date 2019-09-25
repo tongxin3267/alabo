@@ -1,4 +1,4 @@
-﻿namespace Alabo.Core.UI
+﻿namespace Alabo.UI
 {
     public class IconFontawesome
     {

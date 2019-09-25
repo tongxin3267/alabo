@@ -1,14 +1,11 @@
-﻿using Alabo.App.Core.Common.Domain.Services;
-using Alabo.Domains.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.Domains.Enums;
-using Alabo.Helpers;
 using Alabo.Runtime;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.App.Core.Common.Domain.CallBacks {
+namespace Alabo.AutoConfigs {
 
     /// <summary>
     /// 网站设置

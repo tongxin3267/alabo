@@ -18,7 +18,6 @@ using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Core.User.ViewModels;
 using Alabo.Core.Enums.Enum;
-using Alabo.Core.Extensions;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
@@ -28,7 +27,7 @@ using ZKCloud.Open.ApiBase.Models;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
 using Alabo.UI.AutoPreviews;
-using UserDetail = Alabo.App.Core.User.Domain.Entities.UserDetail;
+using UserDetail = Alabo.Users.Entities.UserDetail;
 
 namespace Alabo.App.Core.User.Controllers {
 
@@ -37,7 +36,7 @@ namespace Alabo.App.Core.User.Controllers {
     /// </summary>
     [ApiExceptionFilter]
     [Route("Api/User/[action]")]
-    public class ApiUserController : ApiBaseController<Domain.Entities.User, long> {
+    public class ApiUserController : ApiBaseController<Users.Entities.User, long> {
         //private readonly Alabo.App.Core.Api.Domain.Service.IApiService _ApiServer;
 
         /// <summary>

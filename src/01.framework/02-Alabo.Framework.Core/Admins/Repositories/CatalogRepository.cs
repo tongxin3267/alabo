@@ -12,7 +12,7 @@ using Alabo.Helpers;
 
 namespace Alabo.App.Core.Admin.Domain.Repositories {
 
-    public class CatalogRepository : RepositoryEfCore<User.Domain.Entities.User, long>, ICatalogRepository {
+    public class CatalogRepository : RepositoryEfCore<Users.Entities.User, long>, ICatalogRepository {
 
         public CatalogRepository(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }

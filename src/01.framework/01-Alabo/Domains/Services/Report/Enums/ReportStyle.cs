@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.UI.AutoReports.Enums
+namespace Alabo.Domains.Services.Report.Enums
 {
     /// <summary>
     ///     统计方式

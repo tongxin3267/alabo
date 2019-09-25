@@ -5,8 +5,9 @@ using Alabo.App.Core.Reports.Domain.Entities;
 using Alabo.Domains.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Domains.Services.Report;
+using Alabo.Domains.Services.Report.Dtos;
 using Alabo.UI.AutoReports;
-using Alabo.UI.AutoReports.Dtos;
 
 namespace Alabo.App.Core.Reports.Domain.Services {
 
@@ -28,7 +29,7 @@ namespace Alabo.App.Core.Reports.Domain.Services {
         /// </summary>
         /// <param name="inputParas"></param>
         /// <returns></returns>
-        Tuple<ServiceResult, List<AutoReport>> GetCountReport2(Domains.Dtos.CountReportInput inputParas);
+        Tuple<ServiceResult, List<AutoReport>> GetCountReport2(CountReportInput inputParas);
 
         /// <summary>
         /// 按天统计数量 扩展

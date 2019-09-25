@@ -3,11 +3,12 @@ using Xunit;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Core.User.ViewModels;
-using Alabo.Core.Extensions;
-using Alabo.Core.Randoms;
+using Alabo.Extensions;
+using Alabo.Randoms;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
+using Alabo.Users.Entities;
 
 namespace Alabo.Test.Core.User.Domain.Services {
 
@@ -235,7 +236,7 @@ namespace Alabo.Test.Core.User.Domain.Services {
         [Fact]
         [TestMethod("GetHomeUserStyle_User")]
         public void GetHomeUserStyle_User_test() {
-            App.Core.User.Domain.Entities.User user = null;
+            Users.Entities.User user = null;
             var result = Resolve<IUserService>().GetHomeUserStyle(user);
             Assert.NotNull(result);
         }
@@ -267,7 +268,7 @@ namespace Alabo.Test.Core.User.Domain.Services {
         [Fact]
         [TestMethod("GetUserStyle_User")]
         public void GetUserStyle_User_test() {
-            App.Core.User.Domain.Entities.User user = null;
+            Users.Entities.User user = null;
             var result = Resolve<IUserService>().GetUserStyle(user);
             Assert.NotNull(result);
         }

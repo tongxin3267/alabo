@@ -5,6 +5,7 @@ using Alabo.App.Market.BookingSignup.Domain.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.UI;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Market.BookingSignup.Domain.Entities {

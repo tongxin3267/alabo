@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Core.Enums.Enum
+namespace Alabo.Users.Enum
 {
     /// <summary>
     ///     性别

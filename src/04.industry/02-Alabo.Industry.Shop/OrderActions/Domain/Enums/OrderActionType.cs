@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Core.UI.Enum;
+using Alabo.UI.Enum;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Shop.Order.Domain.Enums {

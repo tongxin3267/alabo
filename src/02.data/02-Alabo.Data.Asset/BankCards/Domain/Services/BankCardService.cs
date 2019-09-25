@@ -10,6 +10,7 @@ using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.Dtos.BankCard;
 using Alabo.App.Core.Finance.Domain.Entities;
 using Alabo.App.Core.Finance.Dtos;
+using Alabo.AutoConfigs;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;

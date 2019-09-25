@@ -9,15 +9,17 @@ using Alabo.App.Core.Common.Domain.CallBacks;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.User.Domain.Services;
+using Alabo.AutoConfigs;
 using Alabo.Cache;
-using Alabo.Core.Files;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Files;
 using Alabo.Helpers;
 using Alabo.Runtime;
 using Alabo.Schedules;
+using Alabo.Users.Entities;
 using QRCoder;
 using File = System.IO.File;
 
@@ -75,7 +77,7 @@ namespace _01_Alabo.Cloud.Core.UserQrCode.Domain.Services {
         ///     生成用户的二维码，并且把二维码保存到本地
         /// </summary>
         /// <param name="user">用户</param>
-        public void CreateCode(Alabo.App.Core.User.Domain.Entities.User user) {
+        public void CreateCode(User user) {
             //文件夹不存在，重新生成文件夹
             FileHelper.CreateDirectory(FileHelper.WwwRootPath + "//qrcode");
             //二维码图片地址

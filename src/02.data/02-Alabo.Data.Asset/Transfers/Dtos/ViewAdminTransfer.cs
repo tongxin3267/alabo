@@ -33,7 +33,7 @@ namespace Alabo.App.Core.Finance.ViewModels.Transfer {
         /// <summary>
         ///     交易用户
         /// </summary>
-        public User.Domain.Entities.User User { get; set; }
+        public Users.Entities.User User { get; set; }
 
         /// <summary>
         ///     转出账户
@@ -86,6 +86,6 @@ namespace Alabo.App.Core.Finance.ViewModels.Transfer {
         /// </summary>
         public MoneyTypeConfig TragetMoneyType { get; set; }
 
-        public User.Domain.Entities.User TragetUser { get; set; }
+        public Users.Entities.User TragetUser { get; set; }
     }
 }

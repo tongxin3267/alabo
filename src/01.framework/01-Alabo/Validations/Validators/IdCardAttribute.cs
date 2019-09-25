@@ -4,6 +4,7 @@ using System.Globalization;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Properties;
+using Alabo.Regexs;
 
 namespace Alabo.Validations.Validators
 {

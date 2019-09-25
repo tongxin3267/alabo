@@ -8,10 +8,11 @@ using Alabo.App.Core.Reports.Domain.Entities;
 using Alabo.App.Core.Reports.Domain.Services;
 using Alabo.Domains.Dtos;
 using Alabo.Domains.Entities;
+using Alabo.Domains.Services.Report;
+using Alabo.Domains.Services.Report.Dtos;
 using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
 using Alabo.UI.AutoReports;
-using Alabo.UI.AutoReports.Dtos;
 
 namespace Alabo.App.Core.Reports.Controllers {
 
@@ -38,7 +39,7 @@ namespace Alabo.App.Core.Reports.Controllers {
         /// <returns></returns>
         [HttpGet]
         [Display(Description = "按天统计数据")]
-        public ApiResult<List<AutoReport>> GetCountReport2([FromQuery] Domains.Dtos.CountReportInput reportInput) {
+        public ApiResult<List<AutoReport>> GetCountReport2([FromQuery] CountReportInput reportInput) {
             var result = Resolve<IAutoReportService>().GetCountReport2(reportInput);
             return ToResult<List<AutoReport>>(result);
         }

@@ -19,6 +19,7 @@ using Alabo.Maps;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
 using Alabo.UI.AutoTables;
+using Alabo.Users.Enum;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 

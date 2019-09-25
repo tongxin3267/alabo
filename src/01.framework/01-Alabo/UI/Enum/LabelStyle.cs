@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Core.UI.Enum
+namespace Alabo.UI.Enum
 {
     /// <summary>
     ///     显示样式

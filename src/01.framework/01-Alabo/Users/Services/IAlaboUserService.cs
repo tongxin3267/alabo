@@ -1,6 +1,6 @@
 ﻿using Alabo.Domains.Services;
 
-namespace Alabo.App.Core.User.Domain.Services {
+namespace Alabo.Users.Services {
 
     /// <summary>
     ///     用户操作相关方法

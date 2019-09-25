@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Core.Regex;
 using Alabo.Domains.Entities;
+using Alabo.Regexs;
+using Alabo.Validations;
 
 namespace Alabo.App.Core.User.ViewModels {
 

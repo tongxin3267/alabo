@@ -1,6 +1,7 @@
 ﻿using Alabo.App.Core.User.Domain.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Core.User.Domain.Services {
 
@@ -9,7 +10,7 @@ namespace Alabo.App.Core.User.Domain.Services {
     /// </summary>
     public interface IUserAdminService : IService {
 
-        ServiceResult UpdateUser(Entities.User user);
+        ServiceResult UpdateUser(Users.Entities.User user);
 
         bool UpdateUserDetail(UserDetail userDetail);
 

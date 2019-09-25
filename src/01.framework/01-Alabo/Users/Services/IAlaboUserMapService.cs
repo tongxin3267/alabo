@@ -1,10 +1,7 @@
-﻿using Alabo.App.Core.User.Domain.Entities;
-using Alabo.Domains.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Alabo.Domains.Services;
+using Alabo.Users.Entities;
 
-namespace Alabo.Users.Domain.Services {
+namespace Alabo.Users.Services {
 
     public interface IAlaboUserMapService : IService<UserMap, long> {
     }

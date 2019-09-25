@@ -13,12 +13,12 @@ namespace Alabo.App.Core.User {
         ///     获取Url参数的中的，当前登录用户
         /// </summary>
         /// <param name="obj">The object.</param>
-        public static Domain.Entities.User ToUserObject(this object obj) {
+        public static Users.Entities.User ToUserObject(this object obj) {
             var dic = obj.ToObject<Dictionary<string, string>>();
-            Domain.Entities.User user = null;
+            Users.Entities.User user = null;
             dic.TryGetValue("BasicUser", out var value);
             if (!value.IsNullOrEmpty()) {
-                user = value.ToObject<Domain.Entities.User>();
+                user = value.ToObject<Users.Entities.User>();
             }
 
             return user;

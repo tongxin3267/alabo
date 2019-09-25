@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.App.Core.Markets.Visitors.Domain.Enums;
 using Alabo.Core.Enums.Enum;
 using Alabo.Domains.Entities;
+using Alabo.Users.Enum;
 
 namespace Alabo.App.Core.Markets.Visitors.Domain.Entities {
 

@@ -1,8 +1,8 @@
-﻿using Alabo.App.Core.Common.Domain.Entities;
+﻿using Alabo.AutoConfigs.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 
-namespace Alabo.App.Core.Common.Domain.Repositories {
+namespace Alabo.AutoConfigs.Repositories {
 
     public class AutoConfigRepository : RepositoryEfCore<AutoConfig, long>, IAutoConfigRepository {
 

@@ -8,6 +8,7 @@ using Alabo.Helpers;
 using Alabo.Maps;
 using Alabo.UI;
 using Alabo.UI.AutoTables;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Shop.Category.Domain.Dtos

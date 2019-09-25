@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ZKCloud.Open.ApiBase.Models;
+using User = Alabo.Users.Entities.User;
 
 namespace Alabo.App.Open.Tasks {
 
@@ -292,7 +293,7 @@ namespace Alabo.App.Open.Tasks {
         /// <param name="TriggerAmount">The trigger amount.</param>
         /// <param name="DividendAmount">The dividend amount.</param>
         /// <param name="orderSerial">The order serial.</param>
-        protected string BillLogger(Alabo.App.Core.User.Domain.Entities.User TriggerUser, Alabo.App.Core.User.Domain.Entities.User GainerUser, string accountName, decimal TriggerAmount, decimal DividendAmount, string orderSerial = "") {
+        protected string BillLogger(User TriggerUser, User GainerUser, string accountName, decimal TriggerAmount, decimal DividendAmount, string orderSerial = "") {
             //日志模板对应字段替换
             if (string.IsNullOrWhiteSpace(Configuration.TemplateRule.LoggerTemplate)) {
                 return string.Empty;

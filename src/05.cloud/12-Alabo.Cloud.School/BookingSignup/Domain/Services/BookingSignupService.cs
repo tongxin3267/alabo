@@ -5,7 +5,6 @@ using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Market.BookingSignup.Domain.Entities;
 using Alabo.App.Market.BookingSignup.Dtos;
 using Alabo.Core.Enums.Enum;
-using Alabo.Core.Regex;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
@@ -18,6 +17,7 @@ using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Regexs;
 
 namespace Alabo.App.Market.BookingSignup.Domain.Services {
 

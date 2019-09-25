@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Entities;
+using Alabo.Validations;
 
 namespace Alabo.App.Share.HuDong.Dtos {
 

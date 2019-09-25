@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Alabo.Domains.Services;
+using Alabo.Users.Entities;
 
 namespace _01_Alabo.Cloud.Core.UserQrCode.Domain.Services {
 
@@ -19,6 +20,6 @@ namespace _01_Alabo.Cloud.Core.UserQrCode.Domain.Services {
 
         string QrCore(long userId);
 
-        void CreateCode(Alabo.App.Core.User.Domain.Entities.User user);
+        void CreateCode(User user);
     }
 }

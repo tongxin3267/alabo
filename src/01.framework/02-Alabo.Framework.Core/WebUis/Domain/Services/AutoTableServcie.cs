@@ -1,5 +1,7 @@
 ﻿using System;
 using Alabo.App.Core.Common.Domain.Services;
+using Alabo.AutoConfigs;
+using Alabo.AutoConfigs.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;

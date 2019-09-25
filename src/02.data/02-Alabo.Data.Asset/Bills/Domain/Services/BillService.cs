@@ -59,7 +59,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// <param name="targetUser"></param>
         /// <param name="config"></param>
         /// <param name="amount"></param>
-        public ServiceResult Transfer(User.Domain.Entities.User user, User.Domain.Entities.User targetUser,
+        public ServiceResult Transfer(Users.Entities.User user, Users.Entities.User targetUser,
             TransferConfig config, decimal amount) {
 
             #region 转账安全判断，确保数据准备
@@ -187,7 +187,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
             return result;
         }
 
-        public ServiceResult Transfer(User.Domain.Entities.User user, User.Domain.Entities.User targetUser,
+        public ServiceResult Transfer(Users.Entities.User user, Users.Entities.User targetUser,
             MoneyTypeConfig typeConfig, MoneyTypeConfig targetTypeConfig, decimal amount) {
             var transferConfigs = Resolve<IAutoConfigService>().GetList<TransferConfig>();
             var config = transferConfigs.FirstOrDefault(r =>
@@ -210,7 +210,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// <param name="currency"></param>
         /// <param name="amount"></param>
         /// <param name="Intro"></param>
-        public ServiceResult DeductTreeze(User.Domain.Entities.User user, Currency currency, decimal amount,
+        public ServiceResult DeductTreeze(Users.Entities.User user, Currency currency, decimal amount,
             string Intro) {
             if (Convert.ToInt16(currency) < 0) {
                 return ServiceResult.FailedWithMessage("操作货币类型不合法");
@@ -233,7 +233,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// <param name="typeConfig"></param>
         /// <param name="amount"></param>
         /// <param name="Intro"></param>
-        public ServiceResult DeductTreeze(User.Domain.Entities.User user, MoneyTypeConfig typeConfig, decimal amount,
+        public ServiceResult DeductTreeze(Users.Entities.User user, MoneyTypeConfig typeConfig, decimal amount,
             string Intro) {
             var result = ServiceResult.Success;
             var userAcount = Resolve<IAccountService>().GetAccount(user.Id, typeConfig.Id);
@@ -287,7 +287,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// <param name="typeConfig"></param>
         /// <param name="amount"></param>
         /// <param name="Intro"></param>
-        public ServiceResult Treeze(User.Domain.Entities.User user, MoneyTypeConfig typeConfig, decimal amount,
+        public ServiceResult Treeze(Users.Entities.User user, MoneyTypeConfig typeConfig, decimal amount,
             string Intro) {
             var result = ServiceResult.Success;
             if (user == null) {
@@ -341,7 +341,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// <param name="typeConfig"></param>
         /// <param name="amount"></param>
         /// <param name="Intro"></param>
-        public ServiceResult TreezeSingle(User.Domain.Entities.User user, MoneyTypeConfig typeConfig, decimal amount,
+        public ServiceResult TreezeSingle(Users.Entities.User user, MoneyTypeConfig typeConfig, decimal amount,
             string Intro) {
             var result = ServiceResult.Success;
             if (user == null) {
@@ -388,7 +388,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// <param name="currency"></param>
         /// <param name="amount"></param>
         /// <param name="Intro"></param>
-        public ServiceResult Treeze(User.Domain.Entities.User user, Currency currency, decimal amount, string Intro) {
+        public ServiceResult Treeze(Users.Entities.User user, Currency currency, decimal amount, string Intro) {
             if (Convert.ToInt16(currency) < 0) {
                 return ServiceResult.FailedWithMessage("操作货币类型不合法");
             }
@@ -414,7 +414,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// <param name="typeConfig"></param>
         /// <param name="amount"></param>
         /// <param name="Intro"></param>
-        public ServiceResult Reduce(User.Domain.Entities.User user, MoneyTypeConfig typeConfig, decimal amount,
+        public ServiceResult Reduce(Users.Entities.User user, MoneyTypeConfig typeConfig, decimal amount,
             string Intro) {
             var result = ServiceResult.Success;
             if (user == null) {
@@ -467,7 +467,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// <param name="currency"></param>
         /// <param name="amount"></param>
         /// <param name="Intro"></param>
-        public ServiceResult Reduce(User.Domain.Entities.User user, Currency currency, decimal amount, string Intro) {
+        public ServiceResult Reduce(Users.Entities.User user, Currency currency, decimal amount, string Intro) {
             if (Convert.ToInt16(currency) < 0) {
                 return ServiceResult.FailedWithMessage("操作货币类型不合法");
             }
@@ -488,7 +488,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// <param name="typeConfig"></param>
         /// <param name="amount"></param>
         /// <param name="Intro"></param>
-        public ServiceResult Increase(User.Domain.Entities.User user, MoneyTypeConfig typeConfig, decimal amount,
+        public ServiceResult Increase(Users.Entities.User user, MoneyTypeConfig typeConfig, decimal amount,
             string Intro) {
             if (user == null) {
                 return ServiceResult.FailedWithMessage("操作用户不存在");
@@ -553,7 +553,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// <param name="currency"></param>
         /// <param name="amount"></param>
         /// <param name="Intro"></param>
-        public ServiceResult Increase(User.Domain.Entities.User user, Currency currency, decimal amount, string Intro) {
+        public ServiceResult Increase(Users.Entities.User user, Currency currency, decimal amount, string Intro) {
             if (Convert.ToInt16(currency) < 0) {
                 return ServiceResult.FailedWithMessage("操作货币类型不合法");
             }

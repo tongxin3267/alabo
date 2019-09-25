@@ -1,7 +1,10 @@
-﻿using Alabo.App.Core.Common.Domain.Entities;
-using Alabo.App.Core.Common.Domain.Repositories;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using Alabo.AutoConfigs.Entities;
+using Alabo.AutoConfigs.Repositories;
 using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
@@ -12,12 +15,8 @@ using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.ViewFeatures;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 
-namespace Alabo.App.Core.Common.Domain.Services {
+namespace Alabo.AutoConfigs.Services {
 
     public class AlaboAutoConfigService : ServiceBase<AutoConfig, long>, IAlaboAutoConfigService {
         private static readonly string AutoConfigCacheKey = "AutoConfigCacheKey_";

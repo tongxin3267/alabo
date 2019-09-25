@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.App.Offline.Product.Domain.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Offline.Product.Domain.Entities

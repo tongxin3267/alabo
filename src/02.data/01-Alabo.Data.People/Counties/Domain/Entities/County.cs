@@ -7,6 +7,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.Validations;
 
 namespace Alabo.App.Agent.County.Domain.Entities {
 

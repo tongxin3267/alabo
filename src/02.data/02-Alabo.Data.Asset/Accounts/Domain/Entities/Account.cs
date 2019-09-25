@@ -6,6 +6,7 @@ using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Tenants;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Core.Finance.Domain.Entities {

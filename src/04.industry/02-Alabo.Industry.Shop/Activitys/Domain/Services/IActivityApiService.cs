@@ -10,6 +10,7 @@ using Alabo.App.Shop.Order.Domain.Dtos;
 using Alabo.App.Shop.Store.Domain.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Shop.Activitys.Services
 {

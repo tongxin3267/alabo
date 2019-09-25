@@ -1,6 +1,5 @@
 ﻿using Alabo.App.Core.ApiStore.MiniProgram.Clients;
 using Alabo.App.Core.ApiStore.MiniProgram.Dtos;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Services;
 using Alabo.Extensions;

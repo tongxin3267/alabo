@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.Domains.Enums;
+using Alabo.Users.Entities;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Shop.Order.Domain.Dtos {

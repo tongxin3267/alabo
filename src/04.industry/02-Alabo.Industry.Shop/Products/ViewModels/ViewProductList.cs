@@ -3,9 +3,11 @@ using System.ComponentModel.DataAnnotations;
 using Alabo.App.Core.Common.Domain.CallBacks;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Shop.Product.Domain.Enums;
+using Alabo.AutoConfigs;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
