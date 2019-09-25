@@ -7,7 +7,6 @@ using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Repositories;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Core.User.ViewModels;
-using Alabo.Core.Extensions;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -16,6 +15,7 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Schedules;
 using _01_Alabo.Cloud.Core.UserTree.Domain.UI;
+using Alabo.Users.Dtos;
 
 namespace _01_Alabo.Cloud.Core.UserTree.Domain.Service {
 

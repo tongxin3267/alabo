@@ -4,6 +4,7 @@ using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Extensions;
 using Alabo.Linq.Dynamic;
+using Alabo.Validations;
 
 namespace Alabo.App.Core.Finance.Domain.Entities.Extension {
 
@@ -138,7 +139,7 @@ namespace Alabo.App.Core.Finance.Domain.Entities.Extension {
         /// 支付账单的人，实际订单人
         /// 比如：会员权益购买
         /// </summary>
-        public User.Domain.Entities.User OrderUser { get; set; }
+        public Users.Entities.User OrderUser { get; set; }
 
         public TriggerType TriggerType { get; set; }
     }

@@ -5,7 +5,6 @@ using System.Linq;
 using Alabo.App.Cms.Articles.Domain.Entities;
 using Alabo.App.Core.Common.Domain.CallBacks;
 using Alabo.Core.Enums.Enum;
-using Alabo.Core.Extensions;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;

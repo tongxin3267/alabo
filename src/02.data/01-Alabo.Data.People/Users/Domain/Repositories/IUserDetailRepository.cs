@@ -2,6 +2,7 @@
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.Domains.Repositories;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Core.User.Domain.Repositories {
 

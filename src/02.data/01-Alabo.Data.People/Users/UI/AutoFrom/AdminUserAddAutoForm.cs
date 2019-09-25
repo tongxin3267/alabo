@@ -6,16 +6,17 @@ using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.Core.Extensions;
-using Alabo.Core.Regex;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Randoms;
+using Alabo.Regexs;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
+using Alabo.Users.Entities;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Core.User.UI.AutoFrom {
@@ -130,7 +131,7 @@ namespace Alabo.App.Core.User.UI.AutoFrom {
         public ServiceResult Save(object model, AutoBaseModel autoModel) {
             var view = (AdminUserAddAutoForm)model;
 
-            var user = new Domain.Entities.User {
+            var user = new Users.Entities.User {
                 Map = new UserMap(),
                 UserName = view.UserName.Trim(),
                 Name = view.Name,

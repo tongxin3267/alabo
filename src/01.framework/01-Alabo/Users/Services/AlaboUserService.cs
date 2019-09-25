@@ -2,7 +2,7 @@
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 
-namespace Alabo.App.Core.User.Domain.Services {
+namespace Alabo.Users.Services {
 
     /// <summary>
     ///     Class UserService.

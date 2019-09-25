@@ -12,6 +12,7 @@ using Alabo.Helpers;
 using Alabo.UI;
 using Alabo.UI.AutoLists;
 using Alabo.UI.AutoTables;
+using Alabo.Users.Entities;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Shop.Order.Domain.Dtos

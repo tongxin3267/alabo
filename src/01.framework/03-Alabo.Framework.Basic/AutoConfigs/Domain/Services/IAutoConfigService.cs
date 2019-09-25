@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using Alabo.AutoConfigs;
+using Alabo.AutoConfigs.Entities;
 
 namespace Alabo.App.Core.Common.Domain.Services {
 

@@ -11,6 +11,7 @@ using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Tenants;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
@@ -127,7 +128,7 @@ namespace Alabo.App.Core.Finance.Domain.Entities {
         /// </value>
         [NotMapped]
         [Display(Name = "用户")]
-        public User.Domain.Entities.User User {
+        public Users.Entities.User User {
             get; set;
         }
 

@@ -1,16 +1,16 @@
-﻿using Alabo.Core.Enums.Enum;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Mapping.Dynamic;
+using Alabo.Users.Enum;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.App.Core.User.Domain.Entities {
+namespace Alabo.Users.Entities {
 
     /// <summary>
     ///     Class UserDetail.

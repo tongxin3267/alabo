@@ -4,6 +4,7 @@ using Alabo.App.Share.Kpi.ViewModels;
 using Alabo.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Share.Kpi.Domain.Services {
 

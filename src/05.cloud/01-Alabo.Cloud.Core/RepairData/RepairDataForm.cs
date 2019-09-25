@@ -10,6 +10,7 @@ using Alabo.Domains.Enums;
 using Alabo.Maps;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
 namespace _01_Alabo.Cloud.Core.RepairData {

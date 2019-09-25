@@ -5,6 +5,7 @@ using MongoDB.Bson;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.Domains.Entities;
+using Alabo.Validations;
 
 namespace Alabo.App.Shop.Order.Domain.Dtos
 {

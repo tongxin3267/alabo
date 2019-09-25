@@ -8,6 +8,7 @@ using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Tenants;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Shop.Category.Domain.Entities {

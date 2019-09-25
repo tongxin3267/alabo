@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.Core.Enums.Enum;
-using Alabo.Core.Regex;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Regexs;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Core.Finance.ViewModels.Account {
@@ -72,7 +73,7 @@ namespace Alabo.App.Core.Finance.ViewModels.Account {
         /// <summary>
         ///     Gets or sets the 会员.
         /// </summary>
-        public User.Domain.Entities.User User { get; set; }
+        public Users.Entities.User User { get; set; }
 
         /// <summary>
         ///     Gets or sets the money 类型 configuration.

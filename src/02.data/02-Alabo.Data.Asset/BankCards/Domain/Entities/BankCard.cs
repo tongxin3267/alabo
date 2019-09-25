@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.Core.Enums.Enum;
-using Alabo.Core.UI;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.UI;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Core.Finance.Domain.Entities {

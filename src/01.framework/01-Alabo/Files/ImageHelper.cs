@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 
-namespace Alabo.Core.Files
+namespace Alabo.Files
 {
     public static class ImageHelper
     {

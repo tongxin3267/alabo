@@ -4,9 +4,8 @@ using Alabo.Domains.Base.Services;
 using Alabo.Domains.Enums;
 using Alabo.Exceptions;
 using Alabo.Extensions;
-using Alabo.Helpers;
 
-namespace Alabo.Core.Helpers {
+namespace Alabo.Helpers {
 
     /// <summary>
     ///     Node相关的服务

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Alabo.AutoConfigs;
 using Alabo.Cache;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;

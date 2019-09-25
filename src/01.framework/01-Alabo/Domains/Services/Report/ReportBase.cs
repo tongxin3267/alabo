@@ -4,8 +4,7 @@ using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services.Random;
-using Alabo.UI.AutoReports;
-using Alabo.UI.AutoReports.Dtos;
+using Alabo.Domains.Services.Report.Dtos;
 
 namespace Alabo.Domains.Services.Report
 {

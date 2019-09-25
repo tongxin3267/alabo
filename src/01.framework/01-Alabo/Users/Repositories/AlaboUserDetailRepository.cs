@@ -1,8 +1,8 @@
-﻿using Alabo.App.Core.User.Domain.Entities;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
+using Alabo.Users.Entities;
 
-namespace Alabo.App.Core.User.Domain.Repositories {
+namespace Alabo.Users.Repositories {
 
     internal class UserDetailRepository : RepositoryEfCore<UserDetail, long>, IAlaboUserDetailRepository {
 

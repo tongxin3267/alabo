@@ -14,7 +14,7 @@ using Alabo.Domains.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Mapping;
-using Alabo.Users.Domain.Services;
+using Alabo.Users.Services;
 
 namespace Alabo.App.Core.User.Domain.Services {
 

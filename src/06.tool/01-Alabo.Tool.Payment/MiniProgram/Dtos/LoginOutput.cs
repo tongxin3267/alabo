@@ -1,6 +1,4 @@
-﻿using Alabo.App.Core.User.Domain.Dtos;
-
-namespace Alabo.App.Core.ApiStore.MiniProgram.Dtos {
+﻿namespace Alabo.App.Core.ApiStore.MiniProgram.Dtos {
 
     /// <summary>
     ///     小程序登录以后返回的状态

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using Alabo.App.Core.Reports.Domain.Entities;
 using Alabo.Domains.Dtos;
 using Alabo.Domains.Repositories;
+using Alabo.Domains.Services.Report;
+using Alabo.Domains.Services.Report.Dtos;
 using Alabo.UI.AutoReports;
-using Alabo.UI.AutoReports.Dtos;
 
 namespace Alabo.App.Core.Reports.Domain.Repositories {
 

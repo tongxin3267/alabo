@@ -44,7 +44,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// <param name="config">用户转账设置，在系统控制面板中可配置</param>
         /// <param name="amount">转账金额,必须大于0</param>
         /// <returns>ServiceResult.</returns>
-        ServiceResult Transfer(User.Domain.Entities.User user, User.Domain.Entities.User targetUser,
+        ServiceResult Transfer(Users.Entities.User user, Users.Entities.User targetUser,
             TransferConfig config, decimal amount);
 
         // <summary>
@@ -57,7 +57,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// <param name="tragetTypeConfig">The traget type configuration.</param>
         /// <param name="amount">The amount.</param>
         /// <returns>ServiceResult.</returns>
-        ServiceResult Transfer(User.Domain.Entities.User user, User.Domain.Entities.User targetUser,
+        ServiceResult Transfer(Users.Entities.User user, Users.Entities.User targetUser,
             MoneyTypeConfig typpeConfig, MoneyTypeConfig tragetTypeConfig, decimal amount);
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// <param name="amount">冻结金额,必须大于0</param>
         /// <param name="Intro">The intro.</param>
         /// <returns>ServiceResult.</returns>
-        ServiceResult Treeze(User.Domain.Entities.User user, MoneyTypeConfig typeConfig, decimal amount, string Intro);
+        ServiceResult Treeze(Users.Entities.User user, MoneyTypeConfig typeConfig, decimal amount, string Intro);
 
         /// <summary>
         ///     冻结账户金额
@@ -80,7 +80,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// <param name="amount">The amount.</param>
         /// <param name="Intro">The intro.</param>
         /// <returns>ServiceResult.</returns>
-        ServiceResult TreezeSingle(User.Domain.Entities.User user, MoneyTypeConfig typeConfig, decimal amount,
+        ServiceResult TreezeSingle(Users.Entities.User user, MoneyTypeConfig typeConfig, decimal amount,
             string Intro);
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// <param name="amount">冻结金额,必须大于0</param>
         /// <param name="Intro">The intro.</param>
         /// <returns>ServiceResult.</returns>
-        ServiceResult Treeze(User.Domain.Entities.User user, Currency currency, decimal amount, string Intro);
+        ServiceResult Treeze(Users.Entities.User user, Currency currency, decimal amount, string Intro);
 
         /// <summary>
         ///     解冻账户金额
@@ -101,7 +101,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// <param name="amount">解冻金额,必须大于0</param>
         /// <param name="Intro">The intro.</param>
         /// <returns>ServiceResult.</returns>
-        ServiceResult DeductTreeze(User.Domain.Entities.User user, MoneyTypeConfig typeConfig, decimal amount,
+        ServiceResult DeductTreeze(Users.Entities.User user, MoneyTypeConfig typeConfig, decimal amount,
             string Intro);
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// <param name="amount">解冻金额,必须大于0</param>
         /// <param name="Intro">The intro.</param>
         /// <returns>ServiceResult.</returns>
-        ServiceResult DeductTreeze(User.Domain.Entities.User user, Currency currency, decimal amount, string Intro);
+        ServiceResult DeductTreeze(Users.Entities.User user, Currency currency, decimal amount, string Intro);
 
         /// <summary>
         ///     减少账户金额
@@ -122,7 +122,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// <param name="amount">解冻金额,必须大于0</param>
         /// <param name="Intro">The intro.</param>
         /// <returns>ServiceResult.</returns>
-        ServiceResult Reduce(User.Domain.Entities.User user, MoneyTypeConfig typeConfig, decimal amount, string Intro);
+        ServiceResult Reduce(Users.Entities.User user, MoneyTypeConfig typeConfig, decimal amount, string Intro);
 
         /// <summary>
         ///     减少账户金额
@@ -132,7 +132,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// <param name="amount">解冻金额,必须大于0</param>
         /// <param name="Intro">The intro.</param>
         /// <returns>ServiceResult.</returns>
-        ServiceResult Reduce(User.Domain.Entities.User user, Currency currency, decimal amount, string Intro);
+        ServiceResult Reduce(Users.Entities.User user, Currency currency, decimal amount, string Intro);
 
         /// <summary>
         ///     增加账户余额
@@ -142,7 +142,7 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// <param name="amount">解冻金额,必须大于0</param>
         /// <param name="Intro">The intro.</param>
         /// <returns>ServiceResult.</returns>
-        ServiceResult Increase(User.Domain.Entities.User user, MoneyTypeConfig typeConfig, decimal amount,
+        ServiceResult Increase(Users.Entities.User user, MoneyTypeConfig typeConfig, decimal amount,
             string Intro);
 
         /// <summary>
@@ -153,6 +153,6 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// <param name="amount">解冻金额,必须大于0</param>
         /// <param name="Intro">The intro.</param>
         /// <returns>ServiceResult.</returns>
-        ServiceResult Increase(User.Domain.Entities.User user, Currency currency, decimal amount, string Intro);
+        ServiceResult Increase(Users.Entities.User user, Currency currency, decimal amount, string Intro);
     }
 }

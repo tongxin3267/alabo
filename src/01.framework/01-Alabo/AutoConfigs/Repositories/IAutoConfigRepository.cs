@@ -1,7 +1,7 @@
-﻿using Alabo.App.Core.Common.Domain.Entities;
+﻿using Alabo.AutoConfigs.Entities;
 using Alabo.Domains.Repositories;
 
-namespace Alabo.App.Core.Common.Domain.Repositories {
+namespace Alabo.AutoConfigs.Repositories {
 
     public interface IAutoConfigRepository : IRepository<AutoConfig, long> {
     }

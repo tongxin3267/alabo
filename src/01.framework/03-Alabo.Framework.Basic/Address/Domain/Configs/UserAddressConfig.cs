@@ -1,4 +1,5 @@
-﻿using Alabo.Domains.Entities;
+﻿using Alabo.AutoConfigs;
+using Alabo.Domains.Entities;
 
 namespace Alabo.App.Core.User.Domain.Entities {
 

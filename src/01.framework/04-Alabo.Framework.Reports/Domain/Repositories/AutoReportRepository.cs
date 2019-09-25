@@ -4,18 +4,19 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using Alabo.App.Core.Reports.Domain.Entities;
-using Alabo.App.Core.User.Domain.Repositories;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Dtos;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
+using Alabo.Domains.Services.Report;
+using Alabo.Domains.Services.Report.Dtos;
+using Alabo.Domains.Services.Report.Enums;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.UI;
 using Alabo.UI.AutoReports;
-using Alabo.UI.AutoReports.Dtos;
-using Alabo.UI.AutoReports.Enums;
+using Alabo.Users.Repositories;
 
 namespace Alabo.App.Core.Reports.Domain.Repositories {
 
@@ -231,7 +232,7 @@ namespace Alabo.App.Core.Reports.Domain.Repositories {
                 }
             }
 
-            var line = (Alabo.UI.AutoReports.Enums.ReportChartType)Enum.Parse(typeof(Alabo.UI.AutoReports.Enums.ReportChartType), "0");
+            var line = (ReportChartType)Enum.Parse(typeof(ReportChartType), "0");
             var result = new List<AutoReport>
             {
                  new AutoReport{ Name = "数据走势图", Icon =Flaticon.Alarm.GetIcon(), AutoReportChart = new AutoReportChart{ Type = line, Columns = chartCols, Rows = chartRows }},
@@ -563,7 +564,7 @@ namespace Alabo.App.Core.Reports.Domain.Repositories {
                 }
             }
 
-            var line = (Alabo.UI.AutoReports.Enums.ReportChartType)Enum.Parse(typeof(Alabo.UI.AutoReports.Enums.ReportChartType), "0");
+            var line = (ReportChartType)Enum.Parse(typeof(ReportChartType), "0");
             var result = new List<AutoReport>
                 {
                 new AutoReport{ Name = "数据走势图", Icon =Flaticon.Alarm.GetIcon(), AutoReportChart = new AutoReportChart{ Type = line, Columns = chartCols, Rows = chartRows }},

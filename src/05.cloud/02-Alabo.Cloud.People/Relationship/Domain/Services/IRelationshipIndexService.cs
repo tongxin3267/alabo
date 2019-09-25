@@ -2,6 +2,7 @@ using MongoDB.Bson;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Market.Relationship.Domain.Entities;
 using Alabo.Domains.Services;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Market.Relationship.Domain.Services {
 

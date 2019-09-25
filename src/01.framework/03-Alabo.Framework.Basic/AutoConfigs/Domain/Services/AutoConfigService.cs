@@ -21,6 +21,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using Alabo.AutoConfigs;
+using Alabo.AutoConfigs.Entities;
+using Alabo.AutoConfigs.Repositories;
 
 namespace Alabo.App.Core.Common.Domain.Services {
 

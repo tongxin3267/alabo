@@ -1,9 +1,9 @@
 ﻿using System.IO;
-using Microsoft.AspNetCore.Http;
 using Alabo.Runtime;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.AspNetCore.Http;
 
-namespace Alabo.Core.Files
+namespace Alabo.Files
 {
     /// <summary>
     ///     主题模板帮助类函数

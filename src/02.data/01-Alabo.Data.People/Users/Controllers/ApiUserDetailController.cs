@@ -5,7 +5,7 @@ using Alabo.App.Core.Api.Filter;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
-using UserDetail = Alabo.App.Core.User.Domain.Entities.UserDetail;
+using UserDetail = Alabo.Users.Entities.UserDetail;
 
 namespace Alabo.App.Core.User.Controllers {
 

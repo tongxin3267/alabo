@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using Alabo.App.Core.User.Domain.Repositories;
 using Alabo.Domains.Repositories.EFCore;
+using Alabo.Domains.Services.Report;
+using Alabo.Domains.Services.Report.Enums;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.UI;
 using Alabo.UI.AutoReports;
-using Alabo.UI.AutoReports.Enums;
 
 namespace Alabo.App.Core.User.UI {
 

@@ -8,6 +8,7 @@ using Alabo.Domains.Enums;
 using Alabo.Maps;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using Alabo.Web.Validations;

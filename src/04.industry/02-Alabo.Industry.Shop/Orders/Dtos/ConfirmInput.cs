@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
+using Alabo.Validations;
 
 namespace Alabo.App.Shop.Order.Domain.Dtos {
 

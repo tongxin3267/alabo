@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Alabo.Domains.Services.Report.Enums;
+using Alabo.Linq;
+using Alabo.Validations;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
-using Alabo.Domains.Entities;
-using Alabo.Linq;
-using Alabo.UI.AutoReports.Enums;
 
-namespace Alabo.UI.AutoReports.Dtos
+namespace Alabo.Domains.Services.Report.Dtos
 {
     /// <summary>
     ///     单数据类型，输入模型

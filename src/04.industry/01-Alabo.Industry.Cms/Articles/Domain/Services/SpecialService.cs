@@ -1,12 +1,12 @@
 ﻿using MongoDB.Bson;
 using System.IO;
 using Alabo.App.Cms.Articles.Domain.Entities;
-using Alabo.Core.Files;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Files;
 
 namespace Alabo.App.Cms.Articles.Domain.Services {
 

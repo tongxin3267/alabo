@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Alabo.Domains.Services.Report;
 
 namespace Alabo.UI.AutoReports
 {

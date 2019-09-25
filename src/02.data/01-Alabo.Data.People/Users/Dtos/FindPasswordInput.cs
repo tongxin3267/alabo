@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Core.Regex;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
+using Alabo.Regexs;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Core.User.Domain.Dtos {

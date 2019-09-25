@@ -2,12 +2,13 @@
 using Alabo.App.Core.Employes.Domain.Services;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.Core.Extensions;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Enums;
 using Alabo.Helpers;
 using Alabo.Initialize;
 using System;
+using Alabo.Extensions;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Core.User {
 
@@ -46,7 +47,7 @@ namespace Alabo.App.Core.User {
             var openService = Ioc.Resolve<IOpenService>();
 
             var defaultPwd = "111111";
-            var defaultUser = new Domain.Entities.User {
+            var defaultUser = new Users.Entities.User {
                 Email = "admin@5ug.com",
                 Name = "老板",
                 Status = Status.Normal,
@@ -68,7 +69,7 @@ namespace Alabo.App.Core.User {
             }
 
             //add platform user
-            var planformUser = new Domain.Entities.User {
+            var planformUser = new Users.Entities.User {
                 Email = "planform@5ug.com",
                 Name = "平台",
                 Status = Status.Normal,

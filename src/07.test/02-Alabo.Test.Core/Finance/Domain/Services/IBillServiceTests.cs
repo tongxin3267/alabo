@@ -64,7 +64,7 @@ namespace Alabo.Test.Core.Finance.Domain.Services
         [TestMethod("DeductTreeze_User_Currency_Decimal_String")]
         public void DeductTreeze_User_Currency_Decimal_String_test()
         {
-            App.Core.User.Domain.Entities.User user = null;
+            Users.Entities.User user = null;
             var currency = (Currency) 0;
             var amount = 0;
             var Intro = "";
@@ -112,7 +112,7 @@ namespace Alabo.Test.Core.Finance.Domain.Services
         [TestIgnore]
         public void Increase_User_MoneyTypeConfig_Decimal_String_test()
         {
-            App.Core.User.Domain.Entities.User user = null;
+            Users.Entities.User user = null;
             MoneyTypeConfig typeConfig = null;
             //var amount = 0;
             //var Intro = "";
@@ -124,7 +124,7 @@ namespace Alabo.Test.Core.Finance.Domain.Services
         [TestMethod("Reduce_User_Currency_Decimal_String")]
         public void Reduce_User_Currency_Decimal_String_test()
         {
-            App.Core.User.Domain.Entities.User user = null;
+            Users.Entities.User user = null;
             var currency = (Currency) 0;
             var amount = 0;
             var Intro = "";
@@ -136,7 +136,7 @@ namespace Alabo.Test.Core.Finance.Domain.Services
         [TestMethod("Reduce_User_MoneyTypeConfig_Decimal_String")]
         public void Reduce_User_MoneyTypeConfig_Decimal_String_test()
         {
-            App.Core.User.Domain.Entities.User user = null;
+            Users.Entities.User user = null;
             MoneyTypeConfig typeConfig = null;
             var amount = 0;
             var Intro = "";

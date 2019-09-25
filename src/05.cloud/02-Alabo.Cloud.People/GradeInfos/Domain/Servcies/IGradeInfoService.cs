@@ -16,7 +16,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// <param name="gradeInfo"></param>
         /// <param name="user"></param>
         /// <returns></returns>
-        Tuple<bool, Guid> GetKpiResult(GradeInfo gradeInfo, Entities.User user);
+        Tuple<bool, Guid> GetKpiResult(GradeInfo gradeInfo, Users.Entities.User user);
 
         /// <summary>
         /// 最小项目的Kpi计算
@@ -55,6 +55,6 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     根据用户获取用户等数据统计
         /// </summary>
         /// <param name="users"></param>
-        IEnumerable<GradeInfoItem> GetUsersGradeInfo(IEnumerable<User.Domain.Entities.User> users);
+        IEnumerable<GradeInfoItem> GetUsersGradeInfo(IEnumerable<Users.Entities.User> users);
     }
 }

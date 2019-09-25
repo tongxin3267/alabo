@@ -9,12 +9,14 @@ using Alabo.App.Core.Common.Controllers;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Market.SmallTargets.Controllers;
 using Alabo.App.Shop.Order.Domain.Enums;
+using Alabo.AutoConfigs;
 using Alabo.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Reflections;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
+using Alabo.Users.Enum;
 
 namespace Alabo.Test.Core.Admin.Domain.Services {
 

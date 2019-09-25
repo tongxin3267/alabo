@@ -9,10 +9,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using ZKCloud.Open.ApiBase.Models;
+using User = Alabo.Users.Entities.User;
 
 namespace Alabo.App.Share.Kpi {
 
-    using User = Core.User.Domain.Entities.User;
+    using User = User;
 
     /// <summary>
     /// Class UserAssetsModuleBase.

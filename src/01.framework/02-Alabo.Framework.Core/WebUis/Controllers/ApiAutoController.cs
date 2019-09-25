@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Domains.Services.Report;
 using ZKCloud.Open.ApiBase.Models;
 using IAutoPreview = Alabo.UI.AutoPreviews.IAutoPreview;
 

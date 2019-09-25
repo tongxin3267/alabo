@@ -25,6 +25,7 @@ using Alabo.App.Shop.Product.Domain.Dtos;
 using Alabo.Helpers;
 using Alabo.Domains.Query;
 using Alabo.Exceptions;
+using Alabo.Validations;
 
 namespace Alabo.App.Shop.Product.Domain.Entities {
 

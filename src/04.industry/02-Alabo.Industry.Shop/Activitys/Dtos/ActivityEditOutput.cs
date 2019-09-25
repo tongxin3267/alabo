@@ -7,6 +7,7 @@ using Alabo.App.Shop.Activitys.Domain.Entities.Extension;
 using Alabo.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.UI.AutoForms;
+using Alabo.Validations;
 
 namespace Alabo.App.Shop.Activitys.Dtos
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.UI.AutoReports
+namespace Alabo.Domains.Services.Report
 {
     /// <summary>
     ///     前台报表展示格式

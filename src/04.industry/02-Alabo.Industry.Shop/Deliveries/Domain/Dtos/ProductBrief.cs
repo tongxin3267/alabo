@@ -7,6 +7,7 @@ using Alabo.App.Shop.Product.Domain.Enums;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Shop.Store.Domain.Dtos

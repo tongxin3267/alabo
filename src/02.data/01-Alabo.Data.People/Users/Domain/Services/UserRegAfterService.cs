@@ -19,7 +19,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     注册后操作
         /// </summary>
         /// <param name="user">用户</param>
-        public void AddBackJob(Entities.User user) {
+        public void AddBackJob(Users.Entities.User user) {
             var backJobParameter = new BackJobParameter {
                 ModuleId = TaskQueueModuleId.AfterUserReg,
                 CheckLastOne = true,
@@ -67,7 +67,7 @@ namespace Alabo.App.Core.User.Domain.Services {
 
         #region 继承IUserRegAfter的方法
 
-        private void ExecuteUserAfter(Entities.User user) {
+        private void ExecuteUserAfter(Users.Entities.User user) {
             // 继承IUserRegAfter的方法
             var userAfterMethods = new List<IUserRegAfter>();
             var types = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IUserRegAfter));
@@ -91,7 +91,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     与内部合伙人关联
         /// </summary>
         /// <param name="user">用户</param>
-        private void AddParnter(Entities.User user) {
+        private void AddParnter(Users.Entities.User user) {
             //var config = Resolve<IAutoConfigService>().GetValue<PartnerConfig>();
             //if (config.AfterUserRegAddPanter) {
             //    //会员注册后自动添加合伙人

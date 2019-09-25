@@ -6,6 +6,7 @@ using MongoDB.Bson;
 using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.App.Market.BookingSignup.Domain.Entities;
 using Alabo.Domains.Entities;
+using Alabo.Validations;
 
 namespace Alabo.App.Market.BookingSignup.Dtos {
 

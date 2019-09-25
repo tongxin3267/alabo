@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.Core.Helpers
+namespace Alabo.Helpers
 {
     public class CharHelper
     {

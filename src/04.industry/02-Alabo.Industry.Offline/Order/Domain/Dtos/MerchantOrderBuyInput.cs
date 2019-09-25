@@ -5,6 +5,7 @@ using System.Text;
 using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.App.Offline.Order.ViewModels;
 using Alabo.Domains.Entities;
+using Alabo.Validations;
 
 namespace Alabo.App.Offline.Order.Domain.Dtos
 {

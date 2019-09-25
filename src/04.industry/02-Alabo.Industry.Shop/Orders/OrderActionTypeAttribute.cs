@@ -1,5 +1,5 @@
 ﻿using System;
-using Alabo.Core.UI.Enum;
+using Alabo.UI.Enum;
 
 namespace Alabo.App.Shop.Order
 {

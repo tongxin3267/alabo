@@ -21,7 +21,6 @@ using Alabo.App.Shop.Product.Domain.Dtos;
 using Alabo.App.Shop.Product.Domain.Services;
 using Alabo.App.Shop.Store.Domain.Dtos;
 using Alabo.App.Shop.Store.Domain.Services;
-using Alabo.Core.Extensions;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -31,6 +30,7 @@ using Alabo.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Users.Entities;
 using ZKCloud.Open.DynamicExpression;
 
 namespace Alabo.App.Shop.Order.Domain.Services {

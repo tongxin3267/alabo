@@ -21,6 +21,7 @@ using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Share.Share.Domain.Entities;
 using Alabo.App.Share.Share.Domain.Enums;
 using Alabo.Domains.Enums;
+using Alabo.Users.Entities;
 using ZKCloud.Open.Share.Models;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;

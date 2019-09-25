@@ -18,6 +18,7 @@ using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.ViewFeatures;
 using Alabo.App.Core.AutoConfigs.Domain.Dtos;
+using Alabo.AutoConfigs.Entities;
 using Alabo.Domains.Entities;
 
 namespace Alabo.App.Core.Common.Controllers {

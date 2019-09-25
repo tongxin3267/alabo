@@ -10,7 +10,6 @@ using Alabo.App.Core.Finance.Domain.Repositories;
 using Alabo.App.Core.Finance.ViewModels.Account;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.Core.Enums.Enum;
-using Alabo.Core.Extensions;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;

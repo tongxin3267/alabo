@@ -3,6 +3,7 @@ using Alabo.App.Core.User.Domain.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
 using Alabo.Domains.Services;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Core.User.Domain.Services {
 
@@ -25,7 +26,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     生成会员二维码
         /// </summary>
         /// <param name="user">The 会员.</param>
-        void CreateCode(Entities.User user);
+        void CreateCode(Users.Entities.User user);
 
         /// <summary>
         /// 生成二维码任务

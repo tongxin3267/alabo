@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Core.UI.Enum
+namespace Alabo.UI.Enum
 {
     /// <summary>
     ///     图标大小

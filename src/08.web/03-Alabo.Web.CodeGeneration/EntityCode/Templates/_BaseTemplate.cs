@@ -1,5 +1,5 @@
 ﻿using System;
-using Alabo.Core.Files;
+using Alabo.Files;
 
 namespace Alabo.Web.CodeGeneration.EntityCode.Templates {
 

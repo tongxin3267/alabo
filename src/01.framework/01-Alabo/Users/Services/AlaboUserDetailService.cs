@@ -1,10 +1,9 @@
-﻿using Alabo.App.Core.User.Domain.Entities;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
-using Alabo.Users.Domain.Services;
+using Alabo.Users.Entities;
 
-namespace Alabo.App.Core.User.Domain.Services {
+namespace Alabo.Users.Services {
 
     public class AlaboUserDetailService : ServiceBase<UserDetail, long>, IAlaboUserDetailService {
 

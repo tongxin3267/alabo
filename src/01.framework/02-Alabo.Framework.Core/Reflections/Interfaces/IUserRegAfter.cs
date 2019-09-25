@@ -16,6 +16,6 @@
         /// 执行事件
         /// </summary>
         /// <param name="user">用户</param>
-        void Excecute(Domain.Entities.User user);
+        void Excecute(Users.Entities.User user);
     }
 }

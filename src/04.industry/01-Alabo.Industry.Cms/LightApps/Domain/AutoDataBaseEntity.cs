@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.Mongo.Extension;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Core.LightApps.Domain {

@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;using MongoDB.Bson.Serialization.Attributes;
 using Alabo.App.Market.DataBackup.Domain.Enums;
-using Alabo.Core.UI;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.Model;

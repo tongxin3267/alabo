@@ -8,6 +8,8 @@ using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Extensions;
+using Alabo.Users.Entities;
+using Alabo.Users.Enum;
 
 namespace Alabo.App.Core.User.Domain.Repositories {
 

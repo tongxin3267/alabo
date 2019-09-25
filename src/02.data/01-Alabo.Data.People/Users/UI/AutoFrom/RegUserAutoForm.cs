@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Core.User.ViewModels;
-using Alabo.Core.Extensions;
-using Alabo.Core.Regex;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Helpers;
+using Alabo.Regexs;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
+using Alabo.Users.Entities;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Core.User.UI.AutoFrom {
@@ -192,7 +193,7 @@ namespace Alabo.App.Core.User.UI.AutoFrom {
                 return ServiceResult.FailedWithMessage("请您务必输入【支付密码】6位,否则不能支付！");
             }
 
-            var user = new Domain.Entities.User {
+            var user = new Users.Entities.User {
                 Map = new UserMap(),
                 UserName = view.UserName.Trim(),
                 Name = view.Name,

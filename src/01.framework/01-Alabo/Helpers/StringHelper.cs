@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Alabo.Core.Helpers
+namespace Alabo.Helpers
 {
     public static class StringHelper
     {

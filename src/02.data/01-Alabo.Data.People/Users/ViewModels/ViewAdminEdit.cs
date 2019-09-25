@@ -4,6 +4,8 @@ using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.Core.Enums.Enum;
 using Alabo.Domains.Enums;
+using Alabo.Users.Entities;
+using Alabo.Users.Enum;
 using Alabo.Web.Mvc.ViewModel;
 
 namespace Alabo.App.Core.User.ViewModels {
@@ -32,7 +34,7 @@ namespace Alabo.App.Core.User.ViewModels {
         /// <summary>
         ///     Gets or sets the 会员.
         /// </summary>
-        public Domain.Entities.User User { get; set; }
+        public Users.Entities.User User { get; set; }
 
         /// <summary>
         ///     Gets or sets the 会员 detail.
@@ -80,7 +82,7 @@ namespace Alabo.App.Core.User.ViewModels {
         /// <summary>
         ///     Gets or sets the parent.
         /// </summary>
-        public Domain.Entities.User Parent { get; set; }
+        public Users.Entities.User Parent { get; set; }
 
         /// <summary>
         ///     所属区域

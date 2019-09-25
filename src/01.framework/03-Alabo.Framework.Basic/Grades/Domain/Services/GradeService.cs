@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Alabo.App.Core.User.Domain.Dtos;
+using Alabo.AutoConfigs.Repositories;
+using Alabo.AutoConfigs.Services;
 
 namespace Alabo.App.Core.Common.Domain.Services {
 

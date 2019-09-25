@@ -7,10 +7,11 @@ using Alabo.App.Open.Tasks.Base;
 using Alabo.Helpers;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Open.Tasks.Modules {
 
-    using User = Alabo.App.Core.User.Domain.Entities.User;
+    using User = User;
 
     public abstract class AssetAllocationShareModuleBase<TConfiguration> : ShareModuleBase<TConfiguration>
         where TConfiguration : ShareBaseConfig {

@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Alabo.App.Offline.Order.ViewModels;
 using Alabo.Domains.Entities;
+using Alabo.Validations;
 
 namespace Alabo.App.Offline.Order.Domain.Dtos
 {

@@ -1,14 +1,12 @@
 ﻿using System;
 using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.Core.Extensions;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Helpers;
-using Alabo.Users.Domain.Services;
+using Alabo.Users.Services;
 
 namespace Alabo.App.Core.Admin.Domain.Services {
 

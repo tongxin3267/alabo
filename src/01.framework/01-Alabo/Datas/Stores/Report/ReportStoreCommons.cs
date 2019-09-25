@@ -2,10 +2,10 @@
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Extensions;
-using Alabo.UI.AutoReports;
-using Alabo.UI.AutoReports.Dtos;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Domains.Services.Report;
+using Alabo.Domains.Services.Report.Dtos;
 
 namespace Alabo.Datas.Stores.Report {
 

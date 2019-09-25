@@ -1,6 +1,6 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Core.UI.Enum
+namespace Alabo.UI.Enum
 {
     /// <summary>
     ///     颜色库

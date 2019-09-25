@@ -9,6 +9,7 @@ using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Open.Tasks.Base;
 using Alabo.App.Open.Tasks.Modules;
 using Alabo.Extensions;
+using Alabo.Users.Dtos;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Open.Tasks.Configs.UserRecommendedRelationship {

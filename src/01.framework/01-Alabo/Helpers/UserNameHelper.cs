@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Alabo.Core.Helpers
+namespace Alabo.Helpers
 {
     public class UserNameHelper
     {

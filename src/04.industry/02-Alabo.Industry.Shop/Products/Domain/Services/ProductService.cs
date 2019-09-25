@@ -34,6 +34,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Alabo.AutoConfigs;
 
 namespace Alabo.App.Shop.Product.Domain.Services {
 

@@ -1,4 +1,4 @@
-﻿namespace Alabo.Core.Extensions
+﻿namespace Alabo.Extensions
 {
     public static class BoolExtensions
     {

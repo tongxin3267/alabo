@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using MongoDB.Bson.Serialization.Attributes;
 using Alabo.App.Shop.Order.Domain.Services;
-using Alabo.Core.UI;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;

@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Validations;
 
 namespace Alabo.App.Shop.Store.Domain.Entities {
 

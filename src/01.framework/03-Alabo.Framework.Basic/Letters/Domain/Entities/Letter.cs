@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Share.Attach.Domain.Enums;
 using Alabo.Domains.Entities;
+using Alabo.Users.Entities;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using ZKCloud.App.Open.Attach.Domain.Enums;
 

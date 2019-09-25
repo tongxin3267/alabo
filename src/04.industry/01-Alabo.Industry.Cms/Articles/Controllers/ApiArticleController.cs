@@ -15,6 +15,7 @@ using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Themes.DiyModels.Lists;
 using Alabo.App.Core.Themes.Extensions;
 using Alabo.App.Core.User;
+using Alabo.AutoConfigs;
 using Alabo.Core.Enums.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;

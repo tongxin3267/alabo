@@ -4,9 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.Core.UI.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.UI.Enum;
+using Alabo.Users.Entities;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 

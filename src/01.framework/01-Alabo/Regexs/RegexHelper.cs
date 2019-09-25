@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using Alabo.Extensions;
 
-namespace Alabo.Core.Regex
+namespace Alabo.Regexs
 {
     /// <summary>
     ///     正则严重

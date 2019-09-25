@@ -8,6 +8,7 @@ using Alabo.Datas.UnitOfWorks;
 using Alabo.Helpers;
 using Alabo.Logging;
 using Alabo.Logging.Extensions;
+using Alabo.Regexs;
 
 namespace Alabo.Datas.Ef.Logs
 {

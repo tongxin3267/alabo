@@ -3,9 +3,9 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.Core.UI;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Core.Tasks.Domain.Entities {

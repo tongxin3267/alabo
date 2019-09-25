@@ -2,6 +2,7 @@
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Market.Relationship.Domain.Services;
 using Alabo.Helpers;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Market.Relationship {
 

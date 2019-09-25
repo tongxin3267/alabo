@@ -11,6 +11,7 @@ using Alabo.Helpers;
 using Alabo.UI.Widgets;
 using System;
 using System.Linq;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Market.UI.Widgets {
 

@@ -14,7 +14,6 @@ using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.App.Shop.Order.Domain.Repositories;
 using Alabo.App.Shop.Order.ViewModels;
 using Alabo.App.Shop.Order.ViewModels.OrderEdit;
-using Alabo.Core.Extensions;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
@@ -24,6 +23,7 @@ using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.Tenants;
 using Alabo.Tenants.Domain.Services;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Shop.Order.Domain.Services {
 

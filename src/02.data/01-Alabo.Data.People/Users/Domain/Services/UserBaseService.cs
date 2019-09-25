@@ -4,7 +4,6 @@ using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.Core.Enums.Enum;
-using Alabo.Core.Extensions;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
@@ -15,7 +14,9 @@ using Alabo.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UserDetail = Alabo.App.Core.User.Domain.Entities.UserDetail;
+using Alabo.Users.Dtos;
+using Alabo.Users.Entities;
+using UserDetail = Alabo.Users.Entities.UserDetail;
 
 namespace Alabo.App.Core.User.Domain.Services {
 
@@ -43,7 +44,7 @@ namespace Alabo.App.Core.User.Domain.Services {
             }
 
             // 根据OpenId登录
-            Entities.User find = null;
+            Users.Entities.User find = null;
             if (!loginInput.OpenId.IsNullOrEmpty()) {
                 // 根据OpenId登录
                 find = Resolve<IUserService>().GetUserDetailByOpenId(loginInput.OpenId);
@@ -134,7 +135,7 @@ namespace Alabo.App.Core.User.Domain.Services {
                 return new Tuple<ServiceResult, UserOutput>(ServiceResult.FailedWithMessage("推荐人不能为空"), null);
             }
 
-            var user = new Domain.Entities.User {
+            var user = new Users.Entities.User {
                 UserName = regInput?.UserName?.TrimEnd(' '),
                 Mobile = regInput?.Mobile?.TrimEnd(' '),
                 Email = regInput?.Email?.TrimEnd(' '),
@@ -187,7 +188,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     register as an asynchronous operation.
         /// </summary>
         /// <param name="user">The 会员.</param>
-        public ServiceResult Register(Domain.Entities.User user) {
+        public ServiceResult Register(Users.Entities.User user) {
             var userConfig = Ioc.Resolve<IAutoConfigService>().GetValue<UserConfig>();
 
             //密码不区分大小写

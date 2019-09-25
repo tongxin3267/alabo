@@ -19,6 +19,7 @@ using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Linq;
 using Alabo.Schedules;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Share.Kpi.Domain.Services {
 

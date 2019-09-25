@@ -7,9 +7,9 @@ using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
+using Alabo.Domains.Services.Report;
+using Alabo.Domains.Services.Report.Dtos;
 using Alabo.Extensions;
-using Alabo.UI.AutoReports;
-using Alabo.UI.AutoReports.Dtos;
 
 namespace Alabo.Datas.Stores.Report.Efcore
 {

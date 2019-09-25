@@ -6,7 +6,7 @@ using Alabo.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.User.Domain.Services;
+using Alabo.Users.Services;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Core.Admin.Controllers {

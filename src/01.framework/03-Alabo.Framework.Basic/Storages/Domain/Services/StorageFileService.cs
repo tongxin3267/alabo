@@ -4,10 +4,10 @@ using System;
 using System.IO;
 using System.Linq;
 using Alabo.App.Core.Common.Domain.Entities;
-using Alabo.Core.Files;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
+using Alabo.Files;
 using Alabo.Helpers;
 
 namespace Alabo.App.Core.Common.Domain.Services {

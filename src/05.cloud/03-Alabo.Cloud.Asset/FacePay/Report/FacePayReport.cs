@@ -4,6 +4,8 @@ using Alabo.UI;
 using Alabo.UI.AutoReports;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Domains.Services.Report;
+using Alabo.Domains.Services.Report.Enums;
 
 namespace Alabo.App.Market.FacePay.Report {
 
@@ -26,8 +28,8 @@ namespace Alabo.App.Market.FacePay.Report {
             }
             return new List<AutoReport>
             {
-                new AutoReport{Name = "数据走势图", AutoReportChart = new AutoReportChart{ Type = Alabo.UI.AutoReports.Enums.ReportChartType.Line, Columns = chartCols, Rows = chartRows }},
-                new AutoReport{Name = "数据分布图", AutoReportChart = new AutoReportChart{ Type = Alabo.UI.AutoReports.Enums.ReportChartType.Pie, Columns = chartCols, Rows = chartRows }},
+                new AutoReport{Name = "数据走势图", AutoReportChart = new AutoReportChart{ Type = ReportChartType.Line, Columns = chartCols, Rows = chartRows }},
+                new AutoReport{Name = "数据分布图", AutoReportChart = new AutoReportChart{ Type = ReportChartType.Pie, Columns = chartCols, Rows = chartRows }},
             };
         }
     }

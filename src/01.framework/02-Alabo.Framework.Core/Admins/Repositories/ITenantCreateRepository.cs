@@ -6,7 +6,7 @@ namespace Alabo.App.Core.Admin.Domain.Repositories {
     /// <summary>
     /// ITenantCreateRepository
     /// </summary>
-    public interface ITenantCreateRepository : IRepository<User.Domain.Entities.User, long> {
+    public interface ITenantCreateRepository : IRepository<Users.Entities.User, long> {
 
         /// <summary>
         /// init tenant sql

@@ -5,6 +5,7 @@ using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Entities.Extensions;
 using Alabo.App.Shop.Order.ViewModels.OrderEdit;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Shop.Order.ViewModels {
 

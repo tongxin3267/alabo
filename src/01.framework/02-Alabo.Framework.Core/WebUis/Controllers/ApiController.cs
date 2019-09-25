@@ -1,6 +1,5 @@
 ﻿using Alabo.App.Core.Api.Controller;
 using Alabo.App.Core.Api.Filter;
-using Alabo.Core.Regex;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
 using Alabo.RestfulApi;
@@ -8,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Regexs;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Core.Common.Controllers {

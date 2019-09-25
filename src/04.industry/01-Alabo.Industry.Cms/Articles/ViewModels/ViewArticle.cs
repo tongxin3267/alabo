@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Validations;
 using Alabo.Web.Mvc.ViewModel;
 
 namespace Alabo.App.Cms.Articles.ViewModels {

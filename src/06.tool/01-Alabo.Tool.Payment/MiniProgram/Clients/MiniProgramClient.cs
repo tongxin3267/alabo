@@ -2,7 +2,6 @@
 using Alabo.App.Core.ApiStore.CallBacks;
 using Alabo.App.Core.ApiStore.MiniProgram.Dtos;
 using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Connectors;
 using ZKCloud.Open.ApiBase.Formatters;

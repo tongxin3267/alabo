@@ -6,7 +6,7 @@ using Alabo.Extensions;
 using Alabo.Reflections;
 using TypeExtensions = Alabo.Extensions.TypeExtensions;
 
-namespace Alabo.Core.Helpers
+namespace Alabo.Helpers
 {
     /// <summary>
     ///     枚举操作

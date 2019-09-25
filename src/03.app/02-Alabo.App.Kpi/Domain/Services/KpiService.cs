@@ -9,6 +9,7 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Exceptions;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Share.Kpi.Domain.Services {
 

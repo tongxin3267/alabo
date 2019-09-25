@@ -2,6 +2,7 @@
 using System.Linq;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.UI.Dtos;
+using Alabo.AutoConfigs;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;

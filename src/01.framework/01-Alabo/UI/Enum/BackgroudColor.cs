@@ -2,7 +2,7 @@
 
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Domains.Enums
+namespace Alabo.UI.Enum
 {
     /// <summary>
     ///     背景颜色

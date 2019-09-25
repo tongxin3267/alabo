@@ -1,13 +1,13 @@
-﻿using Alabo.App.Core.User.Domain.Dtos;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
+using Alabo.Users.Dtos;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.User.Domain.Entities {
+namespace Alabo.Users.Entities {
 
     [ClassProperty(Name = "用户组织架构图")]
     public class UserMap : AggregateDefaultUserRoot<UserMap> {

@@ -12,6 +12,8 @@ using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Repositories.Model;
 using Alabo.Extensions;
 using Alabo.Helpers;
+using Alabo.Users.Dtos;
+using Alabo.Users.Entities;
 using Convert = System.Convert;
 
 namespace Alabo.App.Core.User.Domain.Repositories {

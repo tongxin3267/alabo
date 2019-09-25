@@ -6,17 +6,17 @@ using System.Linq;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.Core.Enums.Enum;
-using Alabo.Core.Regex;
-using Alabo.Core.UI;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Maps;
+using Alabo.Regexs;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
 using Alabo.UI.AutoTables;
+using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Core.User.UI.AutoFrom {

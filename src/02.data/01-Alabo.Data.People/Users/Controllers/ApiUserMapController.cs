@@ -3,6 +3,7 @@ using Alabo.App.Core.Api.Controller;
 using Alabo.App.Core.Api.Filter;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Services;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Core.User.Controllers {
 

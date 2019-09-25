@@ -5,13 +5,14 @@ using Alabo.Core.Enums.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Users.Entities;
 
 namespace Alabo.App.Open.Tasks.Parameter {
 
     using Alabo.App.Core.Tasks.Domain.Enums;
     using Core.Common.Domain.Services;
     using Core.Finance.Domain.CallBacks;
-    using User = Alabo.App.Core.User.Domain.Entities.User;
+    using User = User;
 
     public class FenRunResultParameter {
 
