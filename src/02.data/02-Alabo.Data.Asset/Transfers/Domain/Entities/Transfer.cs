@@ -44,7 +44,7 @@ namespace Alabo.App.Asset.Transfers.Domain.Entities {
         [Field(ControlsType = ControlsType.TextBox, ListShow = true)]
         [Display(Name = "手续费")]
         [HelpBlock("手续费转出账户的比例,例如转出金额100，手续费0.05 实际转出到账95，手续费5")]
-        public decimal ServiceFee { get; set; }
+        public decimal Fee { get; set; }
 
         /// <summary>
         ///     转账说明

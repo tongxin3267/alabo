@@ -18,18 +18,6 @@ namespace Alabo.App.Core.Finance.Domain.Entities.Extension {
     public class RechargeExtension : BaseViewModel {
 
         /// <summary>
-        ///     充值方式
-        ///     线上充值，和线下充值
-        /// </summary>
-        public RechargeType RechargeType { get; set; }
-
-        /// <summary>
-        ///     支付方式
-        ///     线上支付时，支付方式必须填写，线下汇款不需要填写
-        /// </summary>
-        public PayType PayType { get; set; }
-
-        /// <summary>
         ///     支付记录
         ///     线上支付时，支付记录必须填写，线下汇款不需要填写
         /// </summary>

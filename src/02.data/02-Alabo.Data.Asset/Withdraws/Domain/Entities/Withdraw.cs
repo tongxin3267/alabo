@@ -26,6 +26,11 @@ namespace Alabo.App.Asset.Withdraws.Domain.Entities {
         public Guid MoneyTypeId { get; set; }
 
         /// <summary>
+        /// 银行卡Id
+        /// </summary>
+        public string BankCardId { get; set; }
+
+        /// <summary>
         ///     本次变动的货币量
         ///     资金流向为收入时货币量大于0
         ///     资金流向为支出时货币量小于0
@@ -35,6 +40,14 @@ namespace Alabo.App.Asset.Withdraws.Domain.Entities {
         [Range(0, 99999999, ErrorMessage = "金额不能小于0")]
         [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1, Width = "150", ListShow = true, SortOrder = 5)]
         public decimal Amount { get; set; }
+
+        /// <summary>
+        ///     应付人民币
+        /// </summary>
+        [Display(Name = "应付人民币")]
+        [Field(ControlsType = ControlsType.NumberRang, IsShowBaseSerach = true, IsShowAdvancedSerach = true,
+            LabelColor = LabelColor.Info, ListShow = true, GroupTabId = 1, Width = "80", SortOrder = 8)]
+        public decimal CheckAmount { get; set; }
 
         /// <summary>
         ///     状态
@@ -51,17 +64,20 @@ namespace Alabo.App.Asset.Withdraws.Domain.Entities {
         public DateTime PayTime { get; set; } = DateTime.MinValue;
 
         /// <summary>
-        ///     Gets or sets the 扩展.
+        ///     手续费
         /// </summary>
-        [Field(ExtensionJson = "WithdrawExtension")]
-        [Display(Name = "扩展")]
-        public string Extension { get; set; }
+        [Display(Name = "手续费")]
+        public decimal Fee { get; set; }
 
         /// <summary>
-        ///     Gets or sets the with draw 扩展.
+        /// 银行卡提现扩展
         /// </summary>
-        [Display(Name = "贸易扩展")]
-        public WithdrawExtension WithdrawExtension { get; set; } = new WithdrawExtension();
+        public WithdrawExtension WithdrawExtension { get; set; }
+
+        /// <summary>
+        /// 扩展数据保存
+        /// </summary>
+        public string Extensions { get; set; }
 
         /// <summary>
         ///     Gets the serial.
@@ -77,21 +93,21 @@ namespace Alabo.App.Asset.Withdraws.Domain.Entities {
                 return searSerial;
             }
         }
+    }
 
-        public class WithdrawTableMap : MsSqlAggregateRootMap<Withdraw> {
+    public class WithdrawTableMap : MsSqlAggregateRootMap<Withdraw> {
 
-            protected override void MapTable(EntityTypeBuilder<Withdraw> builder) {
-                builder.ToTable("Finance_Withdraw");
-            }
+        protected override void MapTable(EntityTypeBuilder<Withdraw> builder) {
+            builder.ToTable("Finance_Withdraw");
+        }
 
-            protected override void MapProperties(EntityTypeBuilder<Withdraw> builder) {
-                //应用程序编号
-                builder.HasKey(e => e.Id);
-                builder.Ignore(e => e.WithdrawExtension);
-                builder.Ignore(e => e.Serial);
-                builder.Ignore(e => e.UserName);
-                builder.Ignore(e => e.Version);
-            }
+        protected override void MapProperties(EntityTypeBuilder<Withdraw> builder) {
+            //应用程序编号
+            builder.HasKey(e => e.Id);
+            builder.Ignore(e => e.Serial);
+            builder.Ignore(e => e.UserName);
+            builder.Ignore(e => e.WithdrawExtension);
+            builder.Ignore(e => e.Version);
         }
     }
 }

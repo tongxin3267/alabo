@@ -14,54 +14,30 @@ namespace Alabo.App.Asset.Withdraws.Domain.Entities.Extension {
     ///     充值表
     /// </summary>
     [BsonIgnoreExtraElements]
-    [ClassProperty(Name = "充值管理", Icon = "fa fa-puzzle-piece", Description = "充值管理", PageType = ViewPageType.List)]
+    [ClassProperty(Name = "提现扩展", Icon = "fa fa-puzzle-piece", Description = "充值管理", PageType = ViewPageType.List)]
     public class WithdrawExtension : BaseViewModel {
 
         /// <summary>
-        ///     充值方式
-        ///     线上充值，和线下充值
+        /// 银行卡信息
         /// </summary>
-        public RechargeType RechargeType { get; set; }
+        public BankCard BankCard { get; set; }
 
         /// <summary>
-        ///     支付方式
-        ///     线上支付时，支付方式必须填写，线下汇款不需要填写
+        ///     会员备注
         /// </summary>
-        public PayType PayType { get; set; }
+        [Display(Name = "会员备注")]
+        public string UserRemark { get; set; }
 
         /// <summary>
-        ///     支付记录
-        ///     线上支付时，支付记录必须填写，线下汇款不需要填写
+        ///     ss
+        ///     备注，此备注表示管理员备注，前台会员不可以修改
         /// </summary>
-        public Pay Pay { get; set; }
-
-        public decimal CheckAmount { get; set; }
-
-        /// <summary>
-        ///     手续费
-        /// </summary>
-        [Display(Name = "手续费")]
-        public decimal Fee { get; set; }
+        [Display(Name = "备注")]
+        public string Remark { get; set; }
 
         /// <summary>
-        ///     Gets or sets the bank 类型.
-        ///     汇款银行
-        ///     线下充值时，汇款银行必须填写
+        ///     失败原因
         /// </summary>
-        [Display(Name = "汇款银行")]
-        public BankType BankType { get; set; }
-
-        /// <summary>
-        ///     银行卡号
-        ///     线下充值时，汇款银行必须填写
-        /// </summary>
-        [Display(Name = "银行卡号")]
-        public string BankNumber { get; set; }
-
-        /// <summary>
-        ///     持卡人姓名
-        /// </summary>
-        [Display(Name = "持卡人姓名")]
-        public string BankName { get; set; }
+        public string FailuredReason { get; set; }
     }
 }

@@ -66,12 +66,6 @@ namespace Alabo.App.Core.Finance.Domain.Entities {
         public string Extension { get; set; }
 
         /// <summary>
-        ///     Gets or sets the with draw 扩展.
-        /// </summary>
-        [Display(Name = "贸易扩展")]
-        public TradeExtension TradeExtension { get; set; } = new TradeExtension();
-
-        /// <summary>
         ///     Gets the serial.
         /// </summary>
         [Display(Name = "序号")]

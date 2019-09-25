@@ -59,9 +59,21 @@ namespace Alabo.App.Asset.Recharges.Domain.Entities {
         public string Extension { get; set; }
 
         /// <summary>
+        ///     充值方式
+        ///     线上充值，和线下充值
+        /// </summary>
+        public RechargeType RechargeType { get; set; }
+
+        /// <summary>
+        ///     支付方式
+        ///     线上支付时，支付方式必须填写，线下汇款不需要填写
+        /// </summary>
+        public PayType PayType { get; set; }
+
+        /// <summary>
         ///     Gets or sets the with draw 扩展.
         /// </summary>
-        [Display(Name = "贸易扩展")]
+        [Display(Name = "充值扩展")]
         public RechargeExtension RechargeExtension { get; set; } = new RechargeExtension();
 
         /// <summary>
