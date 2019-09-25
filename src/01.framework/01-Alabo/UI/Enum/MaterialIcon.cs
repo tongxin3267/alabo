@@ -3524,9 +3524,9 @@ namespace Alabo.UI.Enum
         [Description("restore")] Restore,
 
         /// <summary>
-        ///     restore_page
+        ///     reShop_page
         /// </summary>
-        [Description("restore_page")] RestorePage,
+        [Description("reShop_page")] RestorePage,
 
         /// <summary>
         ///     ring_volume
@@ -4042,9 +4042,9 @@ namespace Alabo.UI.Enum
         [Description("store")] Store,
 
         /// <summary>
-        ///     store_mall_directory
+        ///     Shop_mall_directory
         /// </summary>
-        [Description("store_mall_directory")] StoreMallDirectory,
+        [Description("Shop_mall_directory")] StoreMallDirectory,
 
         /// <summary>
         ///     straighten

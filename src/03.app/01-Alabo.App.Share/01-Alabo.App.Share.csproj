@@ -16,16 +16,18 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Attach\**" />
+    <Compile Remove="Behaviors\**" />
     <Compile Remove="Rewards\Domain\CallBacks\**" />
     <EmbeddedResource Remove="Attach\**" />
+    <EmbeddedResource Remove="Behaviors\**" />
     <EmbeddedResource Remove="Rewards\Domain\CallBacks\**" />
     <None Remove="Attach\**" />
+    <None Remove="Behaviors\**" />
     <None Remove="Rewards\Domain\CallBacks\**" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="RewardRuless\Domain\Configs\" />
     <Folder Include="RewardRuless\Domain\Enums\" />
-    <Folder Include="Behaviors\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\01.framework\01-Alabo\01-Alabo.csproj" />

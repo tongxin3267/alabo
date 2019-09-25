@@ -13,7 +13,7 @@ namespace Alabo.Test.Shop.Store.Domain.Services
         [Fact]
         [TestMethod("AddOrUpdate_DeliveryTemplate_Store")]
         [TestIgnore]
-        public void AddOrUpdate_DeliveryTemplate_Store_test()
+        public void AddOrUpdate_DeliveryTemplate_Shop_test()
         {
             //DeliveryTemplate deliveryTemplate = null;
             //Store store = null;

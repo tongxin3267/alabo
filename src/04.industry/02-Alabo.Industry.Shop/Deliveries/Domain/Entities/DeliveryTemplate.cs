@@ -19,7 +19,7 @@ namespace Alabo.App.Shop.Store.Domain.Entities {
     /// <summary>
     /// 店铺运费模板
     /// </summary>
-    [Table("Store_DeliveryTemplate")]
+    [Table("Shop_DeliveryTemplate")]
     public class DeliveryTemplate : AggregateMongodbUserRoot<DeliveryTemplate> {
 
         #region 属性
