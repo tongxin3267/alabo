@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
-using Alabo.Core.Randoms;
+using Alabo.Randoms;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.Core.Helpers

@@ -1,11 +1,11 @@
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Share.Kpi.Domain.Services;
-using Alabo.Core.Randoms;
 using Alabo.Domains.Enums;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
 using System;
 using System.Collections.Generic;
+using Alabo.Randoms;
 using Xunit;
 
 namespace Alabo.Test.Open.Kpi.Domain.Services {

@@ -4,7 +4,7 @@ using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Core.User.ViewModels;
 using Alabo.Core.Extensions;
-using Alabo.Core.Randoms;
+using Alabo.Randoms;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;

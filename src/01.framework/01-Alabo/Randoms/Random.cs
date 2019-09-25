@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Alabo.Helpers
+namespace Alabo.Randoms
 {
     /// <summary>
     ///     随机数操作
