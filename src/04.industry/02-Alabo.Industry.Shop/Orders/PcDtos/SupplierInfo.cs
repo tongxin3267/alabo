@@ -6,6 +6,8 @@ using AutoMapper;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Shop.Store.Domain.Entities.Extensions;
 using Alabo.App.Shop.Store.Domain.Services;
+using Alabo.Core.WebApis;
+using Alabo.Core.WebUis;
 using Alabo.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;

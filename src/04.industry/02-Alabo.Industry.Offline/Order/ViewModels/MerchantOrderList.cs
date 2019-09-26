@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
-using Alabo.App.Core.Api.Domain.Service;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Offline.Merchants.Domain.Services;
@@ -11,6 +10,10 @@ using Alabo.App.Offline.Order.Domain.Entities;
 using Alabo.App.Offline.Order.Domain.Entities.Extensions;
 using Alabo.App.Offline.Order.Domain.Enums;
 using Alabo.App.Offline.Order.Domain.Services;
+using Alabo.Core.WebApis;
+using Alabo.Core.WebApis.Service;
+using Alabo.Core.WebUis;
+using Alabo.Core.WebUis.Design.AutoLists;
 using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -19,7 +22,6 @@ using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.UI;
-using Alabo.UI.AutoLists;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Offline.Order.ViewModels

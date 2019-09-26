@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Core.Admin.Domain.Repositories;
+using Alabo.Core.Admins.Repositories;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Services;
 

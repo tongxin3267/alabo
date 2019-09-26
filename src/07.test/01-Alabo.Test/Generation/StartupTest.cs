@@ -1,5 +1,4 @@
-﻿using Alabo.App.Core.Admin.Domain.Services;
-using Alabo.App.Core.LightApps.Domain.Services;
+﻿using Alabo.App.Core.LightApps.Domain.Services;
 using Alabo.Extensions;
 using Alabo.Linq.Dynamic;
 using Alabo.Test.Base.Core;

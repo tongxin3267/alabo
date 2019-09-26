@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Core.Api.Domain.Service;
 using Alabo.App.Core.Finance.Domain.Services;
+using Alabo.Core.WebApis;
+using Alabo.Core.WebApis.Service;
+using Alabo.Core.WebUis;
+using Alabo.Core.WebUis.Design.AutoLists;
 using Alabo.Domains.Entities;
 using Alabo.UI;
-using Alabo.UI.AutoLists;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Core.Finance.ViewModels.Bill {

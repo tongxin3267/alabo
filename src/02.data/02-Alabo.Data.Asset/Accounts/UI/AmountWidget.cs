@@ -6,9 +6,9 @@ using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.Core.Enums.Enum;
+using Alabo.Core.WebUis.Design.Widgets;
 using Alabo.Extensions;
 using Alabo.Helpers;
-using Alabo.UI.Widgets;
 
 namespace Alabo.App.Core.UI.Widgets {
 

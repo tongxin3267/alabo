@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Core.Api.Dtos;
 using Alabo.App.Shop.Activitys.Modules.GroupBuy.Dtos;
 using Alabo.App.Shop.Product.Domain.Dtos;
+using Alabo.Core.WebApis.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 

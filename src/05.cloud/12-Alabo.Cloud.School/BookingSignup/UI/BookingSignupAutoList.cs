@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Alabo.App.Market.BookingSignup.Domain.Entities;
 using Alabo.App.Market.BookingSignup.Domain.Services;
+using Alabo.Core.WebApis;
+using Alabo.Core.WebUis;
+using Alabo.Core.WebUis.Design.AutoLists;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
 using Alabo.UI;
-using Alabo.UI.AutoLists;
 
 namespace Alabo.App.Market.BookingSignup.UI {
 

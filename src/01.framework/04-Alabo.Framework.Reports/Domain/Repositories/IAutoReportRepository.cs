@@ -5,7 +5,6 @@ using Alabo.Domains.Dtos;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services.Report;
 using Alabo.Domains.Services.Report.Dtos;
-using Alabo.UI.AutoReports;
 
 namespace Alabo.App.Core.Reports.Domain.Repositories {
 

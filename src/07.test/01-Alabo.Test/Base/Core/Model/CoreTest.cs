@@ -1,5 +1,4 @@
-﻿using Alabo.App.Core.Api;
-using Alabo.App.Core.ApiStore;
+﻿using Alabo.App.Core.ApiStore;
 using Alabo.Apps;
 using Alabo.Datas.Ef;
 using Alabo.Datas.UnitOfWorks;
@@ -16,6 +15,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using Alabo.Core.WebApis;
 
 namespace Alabo.Test.Base.Core.Model {
 

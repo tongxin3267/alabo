@@ -1,16 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.App.Core.Admin.Domain.Services;
 using Alabo.Core.Reflections.Services;
 using Alabo.Core.WebApis.Controller;
-using Alabo.Core.WebApis.Controller;
 using Alabo.Domains.Entities;
-using ZKCloud.Open.ApiBase.Models;
 using Alabo.RestfulApi;
+using Microsoft.AspNetCore.Mvc;
+using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Common.Controllers {
+namespace Alabo.Core.WebUis.Controllers {
 
     /// <summary>
     /// 客户端列表

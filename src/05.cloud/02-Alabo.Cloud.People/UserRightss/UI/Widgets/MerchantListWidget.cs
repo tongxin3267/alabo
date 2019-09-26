@@ -5,10 +5,10 @@ using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Market.UserRightss.Domain.Entities;
 using Alabo.App.Market.UserRightss.Domain.Services;
+using Alabo.Core.WebUis.Design.Widgets;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Mapping;
-using Alabo.UI.Widgets;
 
 namespace Alabo.App.Market.UI.Widgets {
 

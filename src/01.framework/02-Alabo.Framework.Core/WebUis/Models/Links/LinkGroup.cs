@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Themes.DiyModels.Base;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Themes.DiyModels.Links {
+namespace Alabo.Core.WebUis.Models.Links {
 
     [ClassProperty(Name = "链接")]
     public class LinkGroup : BaseComponent {

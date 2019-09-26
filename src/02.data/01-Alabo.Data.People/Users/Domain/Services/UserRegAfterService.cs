@@ -1,5 +1,4 @@
-﻿using Alabo.App.Core.Admin.Domain.Services;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Helpers;

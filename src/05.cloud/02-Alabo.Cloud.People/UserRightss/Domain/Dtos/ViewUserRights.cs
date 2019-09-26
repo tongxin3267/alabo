@@ -7,6 +7,8 @@ using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Market.UserRightss.Domain.Services;
+using Alabo.Core.WebApis;
+using Alabo.Core.WebUis;
 using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;

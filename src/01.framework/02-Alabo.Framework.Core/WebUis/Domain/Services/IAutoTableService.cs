@@ -1,4 +1,5 @@
 ﻿using System;
+using Alabo.Core.WebApis;
 using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;

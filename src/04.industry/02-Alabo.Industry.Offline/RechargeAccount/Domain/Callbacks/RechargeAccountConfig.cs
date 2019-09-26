@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using Alabo.AutoConfigs;
+using Alabo.Core.WebApis;
 using Alabo.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -74,7 +75,7 @@ namespace Alabo.App.Offline.RechargeAccount.Domain.Callbacks
         public decimal DiscountAmount { get; set; }
 
 
-        public AutoForm GetView(object id, UI.AutoBaseModel autoModel)
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
         {
             AutoForm autoForm = new AutoForm();
             autoForm.AlertText = "用户可通过多种途径获取积分，积分可用于积分商城消费";

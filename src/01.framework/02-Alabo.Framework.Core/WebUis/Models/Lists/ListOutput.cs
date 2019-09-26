@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Core.Themes.DiyModels.Base;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Themes.DiyModels.Lists {
+namespace Alabo.Core.WebUis.Models.Lists {
 
     /// <summary>
     ///     通过列表输出，对应前端Api接口

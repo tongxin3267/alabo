@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.App.Cms.Articles.Domain.Services;
-using Alabo.App.Core.Common.Domain.CallBacks;
+using Alabo.Core.Admins.Configs;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.UI;

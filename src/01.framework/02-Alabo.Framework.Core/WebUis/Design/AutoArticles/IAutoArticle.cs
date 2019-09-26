@@ -1,6 +1,6 @@
 ﻿using Alabo.Dependency;
 
-namespace Alabo.UI.AutoArticles
+namespace Alabo.Core.WebUis.Design.AutoArticles
 {
     public interface IAutoArticle : IScopeDependency
     {

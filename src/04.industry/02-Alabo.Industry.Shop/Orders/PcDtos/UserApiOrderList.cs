@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Alabo.App.Core.Admin.Domain.Services;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.App.Shop.Store.Domain.Services;
+using Alabo.Core.WebApis;
 using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;

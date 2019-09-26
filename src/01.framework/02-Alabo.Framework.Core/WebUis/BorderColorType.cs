@@ -1,4 +1,4 @@
-﻿namespace Alabo.UI
+﻿namespace Alabo.Core.WebUis
 {
     /// <summary>
     ///     边框颜色，对应前台x-border

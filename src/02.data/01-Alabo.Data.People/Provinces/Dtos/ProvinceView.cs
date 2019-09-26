@@ -7,6 +7,8 @@ using Alabo.Extensions;
 using Alabo.Maps;
 using Alabo.UI;
 using System;
+using Alabo.Core.WebApis;
+using Alabo.Core.WebUis;
 using Alabo.Core.WebUis.Design.AutoForms;
 
 namespace Alabo.App.Agent.Province.Domain.Dtos {

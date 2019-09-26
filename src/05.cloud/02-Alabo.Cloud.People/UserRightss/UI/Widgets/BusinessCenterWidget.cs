@@ -6,7 +6,6 @@ using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Market.UserRightss.Domain.Services;
 using Alabo.Extensions;
 using Alabo.Helpers;
-using Alabo.UI.Widgets;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Market.UserRightss.Domain.Dtos;
 using Alabo.App.Market.UserRightss.Domain.Entities;
@@ -14,8 +13,9 @@ using Alabo.App.Core.User.Domain.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.App.Market.UserRightss.Domain.CallBack;
 using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Api.Domain.Service;
 using Alabo.App.Core.User.Domain.Callbacks;
+using Alabo.Core.WebApis.Service;
+using Alabo.Core.WebUis.Design.Widgets;
 using Alabo.Exceptions;
 using Alabo.Users.Entities;
 

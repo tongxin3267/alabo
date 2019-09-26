@@ -1,16 +1,16 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
+﻿using Alabo.Core.Tenants.Domains.Dtos;
+using Alabo.Core.Tenants.Domains.Services;
 using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Tenants.Domains.Dtos;
-using Alabo.App.Core.Tenants.Domains.Services;
 using Alabo.Extensions;
-using ZKCloud.Open.ApiBase.Models;
 using Alabo.Runtime;
 using Alabo.Tenants.Domain.Entities;
 using Alabo.Tenants.Domain.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
+using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Tenants.Controllers {
+namespace Alabo.Core.Tenants.Controllers {
 
     [Route("Api/Tenant/[action]")]
     public class ApiTenantController : ApiBaseController<Tenant, ObjectId> {

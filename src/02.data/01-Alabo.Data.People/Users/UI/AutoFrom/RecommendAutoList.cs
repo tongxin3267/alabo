@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Api.Domain.Service;
 using Alabo.App.Core.Themes.Extensions;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.Core.Enums.Enum;
+using Alabo.Core.WebApis;
+using Alabo.Core.WebApis.Service;
+using Alabo.Core.WebUis;
+using Alabo.Core.WebUis.Design.AutoLists;
+using Alabo.Core.WebUis.Design.AutoPreviews;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.UI;
-using Alabo.UI.AutoLists;
-using Alabo.UI.AutoPreviews;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 

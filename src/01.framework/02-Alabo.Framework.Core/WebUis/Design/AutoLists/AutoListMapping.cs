@@ -3,7 +3,7 @@ using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Extensions;
 using Alabo.Helpers;
 
-namespace Alabo.UI.AutoLists
+namespace Alabo.Core.WebUis.Design.AutoLists
 {
     public static class AutoListMapping
     {

@@ -1,6 +1,7 @@
 ﻿using System;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Services;
+using Alabo.Core.WebApis;
 using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;

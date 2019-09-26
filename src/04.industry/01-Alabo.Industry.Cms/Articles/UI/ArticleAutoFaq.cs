@@ -1,10 +1,11 @@
 using MongoDB.Bson;
 using Alabo.App.Cms.Articles.Domain.Services;
+using Alabo.Core.WebApis;
+using Alabo.Core.WebUis;
+using Alabo.Core.WebUis.Design.AutoNews;
 using Alabo.Domains.Entities;
 using Alabo.Helpers;
 using Alabo.UI;
-using Alabo.UI.AutoNews;
-using Alabo.UI.AutoFaqs;
 
 namespace Alabo.App.Cms.Articles.UI {
 

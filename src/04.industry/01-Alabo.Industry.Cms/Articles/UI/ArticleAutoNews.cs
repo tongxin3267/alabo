@@ -4,10 +4,12 @@ using System.Text;
 using MongoDB.Bson;
 using Alabo.App.Cms.Articles.Domain.Services;
 using Alabo.App.Core.Themes.Extensions;
+using Alabo.Core.WebApis;
+using Alabo.Core.WebUis;
+using Alabo.Core.WebUis.Design.AutoNews;
 using Alabo.Domains.Entities;
 using Alabo.Helpers;
 using Alabo.UI;
-using Alabo.UI.AutoNews;
 
 namespace Alabo.App.Cms.Articles.UI {
 

@@ -1,5 +1,4 @@
-﻿using Alabo.App.Core.Api.Domain.Service;
-using Alabo.App.Core.Common.Domain.Services;
+﻿using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Repositories;
@@ -8,9 +7,10 @@ using Alabo.Domains.Repositories.EFCore;
 using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Helpers;
-using Alabo.UI.Widgets;
 using System;
 using System.Linq;
+using Alabo.Core.WebApis.Service;
+using Alabo.Core.WebUis.Design.Widgets;
 using Alabo.Users.Entities;
 
 namespace Alabo.App.Market.UI.Widgets {

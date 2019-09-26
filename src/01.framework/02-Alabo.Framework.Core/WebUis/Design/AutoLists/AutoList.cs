@@ -3,7 +3,7 @@ using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.UI.AutoLists
+namespace Alabo.Core.WebUis.Design.AutoLists
 {
     public class AutoList
     {

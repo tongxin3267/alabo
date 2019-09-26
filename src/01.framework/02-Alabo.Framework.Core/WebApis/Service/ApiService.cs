@@ -1,15 +1,14 @@
-﻿using Alabo.App.Core.Common.Domain.CallBacks;
+﻿using System;
+using System.Linq;
+using Alabo.AutoConfigs;
+using Alabo.AutoConfigs.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Mapping;
-using System;
-using System.Linq;
-using Alabo.AutoConfigs;
-using Alabo.AutoConfigs.Services;
 
-namespace Alabo.App.Core.Api.Domain.Service {
+namespace Alabo.Core.WebApis.Service {
 
     /// <summary>
     ///     Api处理函数

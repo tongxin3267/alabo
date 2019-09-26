@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Alabo.App.Cms.Articles.Domain.Entities;
-using Alabo.App.Core.Common.Domain.CallBacks;
+using Alabo.Core.Admins.Configs;
 using Alabo.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Enums;

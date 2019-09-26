@@ -12,7 +12,6 @@ using Alabo.Domains.Services.Report;
 using Alabo.Domains.Services.Report.Dtos;
 using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.UI.AutoReports;
 
 namespace Alabo.App.Core.Reports.Controllers {
 

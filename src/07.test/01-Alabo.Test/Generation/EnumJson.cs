@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 using Xunit;
-using Alabo.App.Core.Admin.Domain.Services;
 using Alabo.Core.Enums.Enum;
 using Alabo.Core.Reflections.Services;
 using Alabo.Domains.Entities;

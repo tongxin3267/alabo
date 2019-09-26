@@ -1,4 +1,4 @@
-﻿namespace Alabo.UI.Widgets
+﻿namespace Alabo.Core.WebUis.Design.Widgets
 {
     /// <summary>
     ///     通用Widget获取接口

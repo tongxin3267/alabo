@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using Newtonsoft.Json;
 
-namespace Alabo.UI.AutoVideos
+namespace Alabo.Core.WebUis.Design.AutoVideos
 {
     public class AutoVideo
     {

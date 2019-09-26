@@ -1,11 +1,11 @@
-﻿using MongoDB.Bson;
-using Newtonsoft.Json;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Core.Themes.DiyModels.Base {
+namespace Alabo.Core.WebUis.Models {
 
     /// <summary>
     ///     前端组件基类

@@ -21,6 +21,8 @@ using Alabo.App.Shop.Product.Domain.Services;
 using Alabo.App.Shop.Store.Domain.Services;
 using Alabo.UI;
 using Alabo.App.Shop.Product.Domain.Dtos;
+using Alabo.Core.WebApis;
+using Alabo.Core.WebUis;
 using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Helpers;
 using Alabo.Domains.Query;

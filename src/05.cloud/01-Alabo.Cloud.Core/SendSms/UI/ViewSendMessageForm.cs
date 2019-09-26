@@ -8,6 +8,8 @@ using Alabo.UI;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Core.WebApis;
+using Alabo.Core.WebUis;
 using Alabo.Core.WebUis.Design.AutoForms;
 
 namespace Alabo.App.Share.Messages.ViewsModels

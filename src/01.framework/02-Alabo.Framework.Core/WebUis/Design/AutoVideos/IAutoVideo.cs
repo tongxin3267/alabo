@@ -1,4 +1,4 @@
-﻿namespace Alabo.UI.AutoVideos
+﻿namespace Alabo.Core.WebUis.Design.AutoVideos
 {
     public interface IAutoVideo
     {

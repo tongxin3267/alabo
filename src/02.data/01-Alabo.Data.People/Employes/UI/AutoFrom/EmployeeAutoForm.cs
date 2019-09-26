@@ -10,6 +10,8 @@ using Alabo.App.Core.Employes.Domain.Services;
 using Alabo.App.Core.User;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Services;
+using Alabo.Core.WebApis;
+using Alabo.Core.WebUis;
 using Alabo.Core.WebUis.Design.AutoForms;
 using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;

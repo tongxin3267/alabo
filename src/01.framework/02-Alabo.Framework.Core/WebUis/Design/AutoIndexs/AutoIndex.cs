@@ -1,8 +1,7 @@
 ﻿using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Services.Report;
-using Alabo.UI.AutoReports;
 
-namespace Alabo.UI.AutoIndexs
+namespace Alabo.Core.WebUis.Design.AutoIndexs
 {
     public class AutoIndex
     {

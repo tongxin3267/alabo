@@ -4,7 +4,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Alabo.App.Agent.Citys.Domain.Entities;
 using Alabo.App.Agent.Citys.Domain.Services;
-using Alabo.App.Core.Admin;
 using Alabo.App.Core.Employes.Domain.Services;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.Core.Reflections.Interfaces;

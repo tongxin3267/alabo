@@ -2,7 +2,6 @@ using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.Api.Domain.Service;
 using Alabo.App.Offline.Merchants.Domain.Dtos;
 using Alabo.App.Offline.Merchants.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;

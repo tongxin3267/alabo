@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Themes.DiyModels.Previews {
+namespace Alabo.Core.WebUis.Models.Previews {
 
     [ClassProperty(Name = "链接")]
     public class PreviewInput {

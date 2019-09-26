@@ -6,11 +6,13 @@ using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.User.Domain.Services;
+using Alabo.Core.WebApis;
+using Alabo.Core.WebUis;
+using Alabo.Core.WebUis.Design.AutoPreviews;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Mapping;
 using Alabo.UI;
-using Alabo.UI.AutoPreviews;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Core.Finance.UI.AutoForm {

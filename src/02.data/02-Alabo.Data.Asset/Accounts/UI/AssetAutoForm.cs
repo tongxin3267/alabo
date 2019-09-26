@@ -1,8 +1,10 @@
 ﻿using System;
+using Alabo.Core.WebApis;
+using Alabo.Core.WebUis;
 using Alabo.Core.WebUis.Design.AutoForms;
+using Alabo.Core.WebUis.Design.AutoLists;
 using Alabo.Domains.Entities;
 using Alabo.UI;
-using Alabo.UI.AutoLists;
 
 namespace Alabo.App.Core.Finance.UI.AutoForm {
 

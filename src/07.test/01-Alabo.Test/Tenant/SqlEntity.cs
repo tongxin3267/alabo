@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Xunit;
-using Alabo.App.Core.Admin.Domain.Services;
 using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.Entities;

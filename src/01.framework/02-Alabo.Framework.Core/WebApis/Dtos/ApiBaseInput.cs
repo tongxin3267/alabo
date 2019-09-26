@@ -1,6 +1,6 @@
 ﻿using Alabo.Domains.Query.Dto;
 
-namespace Alabo.App.Core.Api.Dtos {
+namespace Alabo.Core.WebApis.Dtos {
 
     /// <summary>
     /// </summary>

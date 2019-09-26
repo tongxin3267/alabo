@@ -4,7 +4,6 @@ using Alabo.App.Core.ApiStore.MiniProgram.Dtos;
 using Alabo.App.Core.ApiStore.MiniProgram.Services;
 using Alabo.App.Core.ApiStore.WeiXinMp.Models;
 using Alabo.App.Core.ApiStore.WeiXinMp.Services;
-using Alabo.App.Core.Common.Domain.CallBacks;
 using Alabo.Domains.Base.Services;
 using Alabo.Extensions;
 using Microsoft.AspNetCore.Mvc;

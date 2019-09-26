@@ -1,5 +1,4 @@
-﻿using Alabo.App.Core.Api.Domain.Service;
-using Alabo.App.Core.Common.Domain.Services;
+﻿using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Shop.Activitys.Domain.Enum;
@@ -34,6 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Alabo.Core.WebApis.Service;
 
 namespace Alabo.App.Shop.Product.Domain.Services
 {

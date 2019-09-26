@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.App.Core.Finance.Domain.Services;
+using Alabo.Core.WebApis;
+using Alabo.Core.WebUis.Design.AutoPreviews;
 using Alabo.Domains.Query.Dto;
 using Alabo.Extensions;
 using Alabo.UI;
-using Alabo.UI.AutoPreviews;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Core.Finance.Domain.Dtos.Bill {

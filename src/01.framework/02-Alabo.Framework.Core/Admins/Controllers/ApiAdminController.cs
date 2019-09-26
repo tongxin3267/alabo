@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Alabo.App.Core.Admin.Domain.Services;
-using Alabo.Core.Admins.Services;
+﻿using Alabo.Core.Admins.Services;
 using Alabo.Core.WebApis.Controller;
 using Alabo.Core.WebApis.Filter;
-using Alabo.Core.WebApis.Controller;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Admin {
+namespace Alabo.Core.Admins.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/Admin/[action]")]

@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using Alabo.Core.Reflections.Services;
+using Alabo.Core.WebUis.Design.AutoArticles;
+using Alabo.Core.WebUis.Design.AutoFaqs;
 using Alabo.Core.WebUis.Design.AutoForms;
+using Alabo.Core.WebUis.Design.AutoImages;
+using Alabo.Core.WebUis.Design.AutoIndexs;
+using Alabo.Core.WebUis.Design.AutoIntros;
+using Alabo.Core.WebUis.Design.AutoLists;
+using Alabo.Core.WebUis.Design.AutoNews;
+using Alabo.Core.WebUis.Design.AutoPreviews;
+using Alabo.Core.WebUis.Design.AutoReports;
 using Alabo.Core.WebUis.Design.AutoTables;
+using Alabo.Core.WebUis.Design.AutoTasks;
+using Alabo.Core.WebUis.Design.AutoVideos;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
-using Alabo.UI.AutoArticles;
-using Alabo.UI.AutoFaqs;
-using Alabo.UI.AutoImages;
-using Alabo.UI.AutoIndexs;
-using Alabo.UI.AutoIntros;
-using Alabo.UI.AutoLists;
-using Alabo.UI.AutoNews;
-using Alabo.UI.AutoPreviews;
-using Alabo.UI.AutoReports;
-using Alabo.UI.AutoTasks;
-using Alabo.UI.AutoVideos;
 
 namespace Alabo.Core.WebUis.Domain.Services {
 
