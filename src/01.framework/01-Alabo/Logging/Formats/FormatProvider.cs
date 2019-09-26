@@ -1,5 +1,5 @@
-﻿using System;
-using Alabo.Logging.Abstractions;
+﻿using Alabo.Logging.Abstractions;
+using System;
 
 namespace Alabo.Logging.Formats
 {

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Alabo.Extensions;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Alabo.Extensions;
 
 namespace Alabo.Regexs
 {

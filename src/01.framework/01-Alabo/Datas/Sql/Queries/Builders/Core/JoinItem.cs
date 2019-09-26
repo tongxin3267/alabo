@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Alabo.Datas.Queries.Enums;
+﻿using Alabo.Datas.Queries.Enums;
 using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 using Alabo.Datas.Sql.Queries.Builders.Conditions;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 namespace Alabo.Datas.Sql.Queries.Builders.Core
 {

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Alabo.Reflections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Alabo.Reflections;
 
 namespace Alabo.Helpers
 {
@@ -26,7 +26,7 @@ namespace Alabo.Helpers
                 throw new ArgumentNullException(nameof(member));
             }
 
-            return (TEnum) Enum.Parse(Common.GetType<TEnum>(), value, true);
+            return (TEnum)Enum.Parse(Common.GetType<TEnum>(), value, true);
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Alabo.Helpers
 
             try
             {
-                return (int) Enum.Parse(type, member.ToString(), true);
+                return (int)Enum.Parse(type, member.ToString(), true);
             }
             catch
             {

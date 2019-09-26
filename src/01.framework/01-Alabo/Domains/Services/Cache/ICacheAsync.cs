@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
+using System.Threading.Tasks;
 
 namespace Alabo.Domains.Services.Cache
 {

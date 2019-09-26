@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using Alabo.Logging;
+﻿using Alabo.Logging;
 using Alabo.Logging.Extensions;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Threading.Tasks;
 
 namespace Alabo.Web.Filters
 {

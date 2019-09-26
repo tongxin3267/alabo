@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Alabo.Helpers;
+using System;
 using System.Text;
-using Alabo.Helpers;
 
 namespace Alabo.Randoms
 {

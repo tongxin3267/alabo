@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Services.Report;
 using Alabo.Domains.Services.Report.Dtos;
+using System.Collections.Generic;
 
 namespace Alabo.Datas.Stores.Report
 {

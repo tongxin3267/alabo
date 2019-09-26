@@ -1,5 +1,5 @@
-using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Framework.Core.Enums.Enum
 {
@@ -12,19 +12,22 @@ namespace Alabo.Framework.Core.Enums.Enum
         /// <summary>
         ///     未审核
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "UnCheck")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "UnCheck")]
         UnCheck = 0,
 
         /// <summary>
         ///     已审核
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "Checked")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "Checked")]
         Checked = 1,
 
         /// <summary>
         ///     已作废
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Metal)] [Display(Name = "Cancelled")]
+        [LabelCssClass(BadgeColorCalss.Metal)]
+        [Display(Name = "Cancelled")]
         Cancelled = 2
     }
 }

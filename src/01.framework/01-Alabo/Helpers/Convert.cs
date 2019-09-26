@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Alabo.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using Alabo.Extensions;
 
 namespace Alabo.Helpers
 {
@@ -96,7 +96,7 @@ namespace Alabo.Helpers
 
             if (digits == null) return result;
 
-            return (float) Math.Round(result, digits.Value);
+            return (float)Math.Round(result, digits.Value);
         }
 
         /// <summary>
@@ -167,7 +167,7 @@ namespace Alabo.Helpers
             var value = GetBool(input);
             if (value != null) return value.Value;
 
-            return bool.TryParse(input.SafeString(), out var result) ? (bool?) result : null;
+            return bool.TryParse(input.SafeString(), out var result) ? (bool?)result : null;
         }
 
         /// <summary>
@@ -225,7 +225,7 @@ namespace Alabo.Helpers
         public static DateTime? ToDateOrNull(object input)
         {
             return DateTime.TryParse(input.SafeString(), out var result)
-                ? (DateTime?) result
+                ? (DateTime?)result
                 : null;
         }
 
@@ -244,7 +244,7 @@ namespace Alabo.Helpers
         /// <param name="input">输入值</param>
         public static Guid? ToGuidOrNull(object input)
         {
-            return Guid.TryParse(input.SafeString(), out var result) ? (Guid?) result : null;
+            return Guid.TryParse(input.SafeString(), out var result) ? (Guid?)result : null;
         }
 
         /// <summary>
@@ -284,33 +284,33 @@ namespace Alabo.Helpers
             if (type == typeof(string))
             {
                 var changeValue = value.ToStr();
-                if (!changeValue.IsNullOrEmpty()) return (T) (object) changeValue;
+                if (!changeValue.IsNullOrEmpty()) return (T)(object)changeValue;
             }
             else if (type == typeof(int))
             {
-                if (value.ToStr().ConvertToInt() != -1) return (T) (object) value.ToStr().ConvertToInt();
+                if (value.ToStr().ConvertToInt() != -1) return (T)(object)value.ToStr().ConvertToInt();
             }
             else if (type == typeof(decimal))
             {
-                if (value.ToStr().ConvertToDecimal() != -1) return (T) (object) value.ToStr().ConvertToDecimal();
+                if (value.ToStr().ConvertToDecimal() != -1) return (T)(object)value.ToStr().ConvertToDecimal();
             }
             else if (type == typeof(long))
             {
-                if (value.ToStr().ConvertToLong() != -1) return (T) (object) value.ToStr().ConvertToLong();
+                if (value.ToStr().ConvertToLong() != -1) return (T)(object)value.ToStr().ConvertToLong();
             }
             else if (type == typeof(DateTime))
             {
                 if (value.ToStr().ConvertToDateTime().Year != 1900)
-                    return (T) (object) value.ToStr().ConvertToDateTime();
+                    return (T)(object)value.ToStr().ConvertToDateTime();
             }
             else if (type == typeof(bool) || type == typeof(bool))
             {
                 var valueDefault = value.ConvertToNullableBool();
-                if (valueDefault.HasValue) return (T) value;
+                if (valueDefault.HasValue) return (T)value;
             }
             else if (type == typeof(Guid))
             {
-                if (!value.ToGuid().IsGuidNullOrEmpty()) return (T) (object) value.ToGuid();
+                if (!value.ToGuid().IsGuidNullOrEmpty()) return (T)(object)value.ToGuid();
             }
             else if (type.GetTypeInfo().BaseType?.Name == nameof(Enum))
             {
@@ -322,7 +322,7 @@ namespace Alabo.Helpers
             {
                 try
                 {
-                    if (value is IConvertible) return (T) System.Convert.ChangeType(value, type);
+                    if (value is IConvertible) return (T)System.Convert.ChangeType(value, type);
                 }
                 catch (Exception ex)
                 {
@@ -331,7 +331,7 @@ namespace Alabo.Helpers
                 }
             }
 
-            return (T) value;
+            return (T)value;
         }
 
         /// <summary>

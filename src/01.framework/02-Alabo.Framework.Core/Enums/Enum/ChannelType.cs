@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Framework.Core.Enums.Enum
 {
@@ -69,7 +69,8 @@ namespace Alabo.Framework.Core.Enums.Enum
         [Field(IsDefault = true, GuidId = "E02220001110000000000012", Icon = "flaticon-list-3")]
         NoteBook = 12,
 
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "自定义")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "自定义")]
         Customer = -1
     }
 }

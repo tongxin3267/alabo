@@ -1,7 +1,7 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
 using Alabo.Security.Enums;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Security
 {

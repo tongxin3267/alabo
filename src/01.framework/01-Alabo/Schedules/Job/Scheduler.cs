@@ -1,10 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using Alabo.Extensions;
+﻿using Alabo.Extensions;
 using Alabo.Tenants;
 using Alabo.Tenants.Domain.Entities;
 using Quartz;
 using Quartz.Impl;
+using System;
+using System.Threading.Tasks;
+
 using Qz = Quartz;
 
 namespace Alabo.Schedules.Job

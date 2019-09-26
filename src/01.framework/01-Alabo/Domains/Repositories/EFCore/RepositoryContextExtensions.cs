@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Alabo.Domains.Repositories.EFCore.Context;
+using Alabo.Domains.Repositories.Model;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using Alabo.Domains.Repositories.EFCore.Context;
-using Alabo.Domains.Repositories.Model;
 
 namespace Alabo.Domains.Repositories.EFCore
 {
@@ -424,7 +424,7 @@ namespace Alabo.Domains.Repositories.EFCore
         private static DbConnection Connection(this IRepositoryContext context)
         {
             var dbConnection = context.UnitOfWork.GetConnection();
-            return (DbConnection) dbConnection;
+            return (DbConnection)dbConnection;
         }
 
         /// <summary>

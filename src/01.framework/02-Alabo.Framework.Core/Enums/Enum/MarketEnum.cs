@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Framework.Core.Enums.Enum
 {
@@ -146,7 +146,8 @@ namespace Alabo.Framework.Core.Enums.Enum
         ///     自定义
         ///     适用于不使用真实货币交易的系统
         /// </summary>
-        [Display(Name = "自定义")] [LabelCssClass(BadgeColorCalss.Metal)]
+        [Display(Name = "自定义")]
+        [LabelCssClass(BadgeColorCalss.Metal)]
         Custom = -1
     }
 }

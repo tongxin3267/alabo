@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Alabo.Datas.UnitOfWorks;
+using Alabo.Domains.Entities.Core;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Entities.Core;
-using MongoDB.Driver;
-using MongoDB.Driver.Linq;
 
 namespace Alabo.Datas.Stores.Add.Mongo
 {

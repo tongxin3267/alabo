@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using Alabo.Extensions;
+﻿using Alabo.Extensions;
 using Alabo.Logging.Abstractions;
 using Alabo.Logging.Contents;
 using Alabo.Logging.NLog;
 using Exceptionless;
 using Microsoft.Extensions.Logging;
+using System.Linq;
 using NLogs = NLog;
 
 namespace Alabo.Logging.Exceptionless

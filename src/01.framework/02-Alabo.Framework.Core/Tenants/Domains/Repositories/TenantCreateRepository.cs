@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Extensions;
 using Alabo.Users.Entities;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Alabo.Framework.Core.Tenants.Domains.Repositories
 {

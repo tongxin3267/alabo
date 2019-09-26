@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Users.Enum
 {
@@ -12,19 +12,22 @@ namespace Alabo.Users.Enum
         /// <summary>
         ///     男
         /// </summary>
-        [Display(Name = "男")] [LabelCssClass(BadgeColorCalss.Danger)]
+        [Display(Name = "男")]
+        [LabelCssClass(BadgeColorCalss.Danger)]
         Man = 1,
 
         /// <summary>
         ///     女
         /// </summary>
-        [Display(Name = "女")] [LabelCssClass(BadgeColorCalss.Info)]
+        [Display(Name = "女")]
+        [LabelCssClass(BadgeColorCalss.Info)]
         WoMan = 2,
 
         /// <summary>
         ///     未知
         /// </summary>
-        [Display(Name = "保密")] [LabelCssClass(BadgeColorCalss.Info)]
+        [Display(Name = "保密")]
+        [LabelCssClass(BadgeColorCalss.Info)]
         UnKnown = 3
     }
 }

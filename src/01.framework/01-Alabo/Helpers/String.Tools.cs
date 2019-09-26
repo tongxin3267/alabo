@@ -71,7 +71,7 @@ namespace Alabo.Helpers
             var charBytes = Encoding.UTF8.GetBytes(text.ToString());
             if (charBytes[0] <= 127) return text.ToString();
 
-            var unicode = (ushort) (charBytes[0] * 256 + charBytes[1]);
+            var unicode = (ushort)(charBytes[0] * 256 + charBytes[1]);
             var pinYin = ResolveByCode(unicode);
             if (!string.IsNullOrWhiteSpace(pinYin)) return pinYin;
 

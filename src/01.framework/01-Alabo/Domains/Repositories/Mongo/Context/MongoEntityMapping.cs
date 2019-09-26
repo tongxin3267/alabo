@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Alabo.Reflections;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Reflections;
 
 namespace Alabo.Domains.Repositories.Mongo.Context
 {

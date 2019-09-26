@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using Alabo.Datas.Queries.Enums;
+﻿using Alabo.Datas.Queries.Enums;
 using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 using Alabo.Datas.Sql.Queries.Builders.Conditions;
 using Alabo.Datas.Sql.Queries.Builders.Core;
 using Alabo.Datas.Sql.Queries.Builders.Internal;
 using Alabo.Linq;
 using Alabo.Properties;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Alabo.Datas.Sql.Queries.Builders.Clauses
 {

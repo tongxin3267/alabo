@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Alabo.Dependency;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Alabo.Dependency;
 
 namespace Alabo.RestfulApi.Clients
 {

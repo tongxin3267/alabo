@@ -1,12 +1,12 @@
-﻿using System.IO;
-using System.Linq;
-using Alabo.Framework.Core.WebApis.Controller;
+﻿using Alabo.Framework.Core.WebApis.Controller;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.Swagger;
+using System.IO;
+using System.Linq;
 
 namespace Alabo.Framework.Core.WebApis.Swagger
 {
@@ -21,7 +21,7 @@ namespace Alabo.Framework.Core.WebApis.Swagger
             services.AddSwaggerGen(options =>
             {
                 options.CustomSchemaIds(x => x.FullName);
-                options.SwaggerDoc("api", new Info {Title = "Alabo Api 文档", Version = "v12"});
+                options.SwaggerDoc("api", new Info { Title = "Alabo Api 文档", Version = "v12" });
                 options.ResolveConflictingActions(b => b.First());
                 options.DocInclusionPredicate((doc, a) =>
                     a.ActionDescriptor is ControllerActionDescriptor &&

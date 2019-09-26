@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Extensions.PlatformAbstractions;
+using System.Collections.Generic;
 using System.Reflection;
-using Microsoft.Extensions.PlatformAbstractions;
 
 namespace Alabo.Reflections
 {

@@ -204,7 +204,7 @@ namespace Alabo.Extensions
         public static decimal RoundDown(this decimal value, int retain)
         {
             var result = Math.Round(value, retain, MidpointRounding.AwayFromZero);
-            if (result > value) result -= (decimal) Math.Pow(10, -retain); //2 => 0.01
+            if (result > value) result -= (decimal)Math.Pow(10, -retain); //2 => 0.01
 
             return result;
         }
@@ -219,7 +219,7 @@ namespace Alabo.Extensions
         {
             if (!Enum.IsDefined(typeof(T), value)) return defaultValue;
 
-            return (T) Enum.ToObject(typeof(T), value);
+            return (T)Enum.ToObject(typeof(T), value);
         }
 
         /// <summary>
@@ -232,7 +232,7 @@ namespace Alabo.Extensions
         {
             if (!Enum.IsDefined(typeof(T), value)) return null;
 
-            return (T) Enum.ToObject(typeof(T), value);
+            return (T)Enum.ToObject(typeof(T), value);
         }
     }
 }

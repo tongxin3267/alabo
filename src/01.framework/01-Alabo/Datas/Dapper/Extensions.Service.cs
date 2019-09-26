@@ -1,5 +1,4 @@
-﻿using System;
-using Alabo.Datas.Dapper.Configs;
+﻿using Alabo.Datas.Dapper.Configs;
 using Alabo.Datas.Dapper.Handlers;
 using Alabo.Datas.Dapper.MySql;
 using Alabo.Datas.Dapper.PgSql;
@@ -13,6 +12,7 @@ using Alabo.Extensions;
 using Dapper;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using System;
 
 namespace Alabo.Datas.Dapper
 {

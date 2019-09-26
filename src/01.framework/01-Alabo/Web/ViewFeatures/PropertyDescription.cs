@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using Alabo.Extensions;
+﻿using Alabo.Extensions;
 using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace Alabo.Web.ViewFeatures
 {
@@ -100,22 +100,22 @@ namespace Alabo.Web.ViewFeatures
                 object value = null;
                 if (request is HttpRequest)
                 {
-                    var obj = (HttpRequest) request;
+                    var obj = (HttpRequest)request;
                     value = obj.Method == "POST" ? obj.Form[item.Name].ToString() : obj.Query[item.Name].ToString();
                 }
 
                 if (request is JObject)
                 {
-                    var obj = (JObject) request;
-                    value = (JValue) obj[item.Name];
+                    var obj = (JObject)request;
+                    value = (JValue)obj[item.Name];
                 }
 
                 if (request is JValue)
                 {
                     //jvalue 可能是一个json对象，需转换为json对象后再操作。
-                    var jvalue = JsonConvert.DeserializeObject(((JValue) request).Value.ToString());
-                    var obj = (JObject) jvalue;
-                    value = (JValue) obj[item.Name];
+                    var jvalue = JsonConvert.DeserializeObject(((JValue)request).Value.ToString());
+                    var obj = (JObject)jvalue;
+                    value = (JValue)obj[item.Name];
                 }
 
                 if (item.PropertyType == typeof(string))
@@ -335,7 +335,7 @@ namespace Alabo.Web.ViewFeatures
                 getValueFunction = lambdaExpression.Compile();
             }
 
-            return getValueFunction((T) instanse);
+            return getValueFunction((T)instanse);
         }
 
         public void SetValue<T>(object instanse, object value)
@@ -358,7 +358,7 @@ namespace Alabo.Web.ViewFeatures
                 setValueAction = lambdaExpression.Compile();
             }
 
-            setValueAction((T) instanse, value);
+            setValueAction((T)instanse, value);
         }
     }
 }

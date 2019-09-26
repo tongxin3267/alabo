@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading;
-using System.Threading.Tasks;
-using Alabo.Datas.Sql.Queries;
+﻿using Alabo.Datas.Sql.Queries;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Repositories.EFCore;
@@ -13,6 +6,13 @@ using Alabo.Domains.Repositories.EFCore.Context;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Data.Common;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.Stores.Add.EfCore
 {
@@ -42,7 +42,7 @@ namespace Alabo.Datas.Stores.Add.EfCore
         /// <param name="unitOfWork">工作单元</param>
         protected EfCoreStoreBase(IUnitOfWork unitOfWork)
         {
-            _unitOfWorkBase = (UnitOfWorkBase) unitOfWork;
+            _unitOfWorkBase = (UnitOfWorkBase)unitOfWork;
             traceId = _unitOfWorkBase.TraceId;
         }
 
@@ -134,7 +134,7 @@ namespace Alabo.Datas.Stores.Add.EfCore
         {
             if (id.SafeString().IsEmpty()) return null;
 
-            return await Set.FindAsync(new[] {id}, cancellationToken);
+            return await Set.FindAsync(new[] { id }, cancellationToken);
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace Alabo.Datas.Stores.Add.EfCore
         /// <param name="ids">标识列表</param>
         public List<TEntity> FindByIds(params TKey[] ids)
         {
-            return FindByIds((IEnumerable<TKey>) ids);
+            return FindByIds((IEnumerable<TKey>)ids);
         }
 
         /// <summary>

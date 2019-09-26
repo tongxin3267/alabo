@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Globalization;
@@ -7,8 +9,6 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using MongoDB.Bson;
-using Newtonsoft.Json;
 
 namespace Alabo.Extensions
 {
@@ -20,22 +20,22 @@ namespace Alabo.Extensions
         /// <summary>
         ///     空白字符串的定义
         /// </summary>
-        private static readonly char[] BlankChars = {' ', '\t', '\r', '\n', '\b'};
+        private static readonly char[] BlankChars = { ' ', '\t', '\r', '\n', '\b' };
 
         /// <summary>
         ///     空白列表
         /// </summary>
-        private static readonly string[] SpaceList = {" ", "　", "\r", "\n", "\t"};
+        private static readonly string[] SpaceList = { " ", "　", "\r", "\n", "\t" };
 
         /// <summary>
         ///     [2**n for n in xrange(8)]
         /// </summary>
-        private static readonly byte[] TrueByteMap = {1, 2, 4, 8, 16, 32, 64, 128};
+        private static readonly byte[] TrueByteMap = { 1, 2, 4, 8, 16, 32, 64, 128 };
 
         /// <summary>
         ///     [~(2**n)&amp;0xff for n in xrange(8)]
         /// </summary>
-        private static readonly byte[] FalseByteMap = {254, 253, 251, 247, 239, 223, 191, 127};
+        private static readonly byte[] FalseByteMap = { 254, 253, 251, 247, 239, 223, 191, 127 };
 
         internal static string SafeStringJoin(IEnumerable<string> enumerable)
         {
@@ -183,7 +183,7 @@ namespace Alabo.Extensions
         /// <returns></returns>
         public static List<Guid> SliptToGuidList(this string input)
         {
-            var list = input.SplitList(new[] {','});
+            var list = input.SplitList(new[] { ',' });
             var resultList = new List<Guid>();
             foreach (var item in list)
             {
@@ -327,7 +327,7 @@ namespace Alabo.Extensions
             sTemp = source.ToString();
             iLength = delimiter.Length;
             bEnd = sTemp.EndsWith(delimiter);
-            for (;;)
+            for (; ; )
             {
                 iPos = sTemp.IndexOf(delimiter);
                 if (iPos < 0) break;
@@ -362,7 +362,7 @@ namespace Alabo.Extensions
             var obj = js.Deserialize(new JsonTextReader(new StringReader(str)), typeof(List<T>));
             if (obj == null) return default;
 
-            return (List<T>) obj;
+            return (List<T>)obj;
         }
 
         /// <summary>
@@ -377,7 +377,7 @@ namespace Alabo.Extensions
             var obj = js.Deserialize(new JsonTextReader(new StringReader(str)), typeof(List<T>));
             if (obj == null) return new List<T>();
 
-            return (List<T>) obj;
+            return (List<T>)obj;
         }
 
         /// <summary>
@@ -449,7 +449,7 @@ namespace Alabo.Extensions
         public static double ToDouble(this string input, bool throwExceptionIfFailed = false)
         {
             var valid = double.TryParse(input, NumberStyles.AllowDecimalPoint,
-                new NumberFormatInfo {NumberDecimalSeparator = "."}, out var result);
+                new NumberFormatInfo { NumberDecimalSeparator = "." }, out var result);
             if (!valid)
                 if (throwExceptionIfFailed)
                     throw new FormatException(string.Format("'{0}' cannot be converted as double", input));
@@ -1103,7 +1103,7 @@ namespace Alabo.Extensions
         {
             try
             {
-                var wc = new WebClient {Encoding = encoding};
+                var wc = new WebClient { Encoding = encoding };
                 var readStream = wc.OpenRead(url);
                 using (var sr = new StreamReader(readStream, encoding))
                 {

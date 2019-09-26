@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using Alabo.Exceptions;
+﻿using Alabo.Exceptions;
+using System.Linq;
 
 namespace Alabo.Validations
 {

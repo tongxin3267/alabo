@@ -1,14 +1,14 @@
-﻿using System;
-using System.Data;
-using System.Linq;
-using System.Linq.Expressions;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Repositories.Mongo.Context;
 using Alabo.Extensions;
 using Alabo.Linq;
 using MongoDB.Driver;
+using System;
+using System.Data;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Alabo.Datas.Stores.Add.Mongo
 {
@@ -27,7 +27,7 @@ namespace Alabo.Datas.Stores.Add.Mongo
 
         protected MongoCoreStoreBase(IUnitOfWork unitOfWork)
         {
-            UnitOfWork = (UnitOfWorkBase) unitOfWork;
+            UnitOfWork = (UnitOfWorkBase)unitOfWork;
         }
 
         /// <summary>

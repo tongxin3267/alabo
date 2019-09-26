@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Concurrent;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Dependency;
 using Alabo.Helpers;
 using Alabo.Runtime;
 using Alabo.Tenants.Domain.Entities;
 using MongoDB.Bson;
+using System;
+using System.Collections.Concurrent;
 
 namespace Alabo.Tenants
 {
@@ -111,7 +111,7 @@ namespace Alabo.Tenants
 
             CurrentTenant = tenantName;
             Ioc.CurrentScope = scope.GetHashCode();
-            var unitOfWork = (UnitOfWorkBase) scope.Resolve<IUnitOfWork>();
+            var unitOfWork = (UnitOfWorkBase)scope.Resolve<IUnitOfWork>();
             unitOfWork.SwitchTenantDatabase();
         }
     }

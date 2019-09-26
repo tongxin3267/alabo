@@ -1,5 +1,5 @@
-﻿using System;
-using Alabo.Dependency;
+﻿using Alabo.Dependency;
+using System;
 
 namespace Alabo.Cache
 {

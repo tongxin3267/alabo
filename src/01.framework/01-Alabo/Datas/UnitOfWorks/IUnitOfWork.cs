@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Alabo.Aspects;
+using System;
 using System.Threading.Tasks;
-using Alabo.Aspects;
 
 namespace Alabo.Datas.UnitOfWorks
 {

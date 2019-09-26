@@ -1,7 +1,7 @@
-﻿using System.Text;
-using Alabo.Datas.Matedatas;
+﻿using Alabo.Datas.Matedatas;
 using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 using Alabo.Datas.Sql.Queries.Builders.Core;
+using System.Text;
 
 namespace Alabo.Datas.Dapper.SqlServer
 {

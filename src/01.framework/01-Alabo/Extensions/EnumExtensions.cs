@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Alabo.Cache;
+﻿using Alabo.Cache;
 using Alabo.Exceptions;
 using Alabo.Helpers;
 using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Convert = System.Convert;
 
 namespace Alabo.Extensions
@@ -19,7 +19,7 @@ namespace Alabo.Extensions
     {
         public static T ToEnum<T>(this string enumString)
         {
-            return (T) Enum.Parse(typeof(T), enumString);
+            return (T)Enum.Parse(typeof(T), enumString);
         }
 
         public static Dictionary<string, object> GetEnumDictionary<T>()
@@ -41,11 +41,11 @@ namespace Alabo.Extensions
         public static IEnumerable<SelectListItem> ToSelectListItem<T>() where T : struct, IConvertible
         {
             return (from int value in Enum.GetValues(typeof(T))
-                select new SelectListItem
-                {
-                    Text = Enum.GetName(typeof(T), value),
-                    Value = value.ToString()
-                }).ToList();
+                    select new SelectListItem
+                    {
+                        Text = Enum.GetName(typeof(T), value),
+                        Value = value.ToString()
+                    }).ToList();
         }
 
         /// <summary>
@@ -55,12 +55,12 @@ namespace Alabo.Extensions
         public static IEnumerable<SelectListItem> ToSelectListItem<T>(string selectName) where T : struct, IConvertible
         {
             return (from int value in Enum.GetValues(typeof(T))
-                select new SelectListItem
-                {
-                    Text = Enum.GetName(typeof(T), value),
-                    Value = Enum.GetName(typeof(T), value),
-                    Selected = Enum.GetName(typeof(T), value) == selectName ? true : false
-                }).ToList();
+                    select new SelectListItem
+                    {
+                        Text = Enum.GetName(typeof(T), value),
+                        Value = Enum.GetName(typeof(T), value),
+                        Selected = Enum.GetName(typeof(T), value) == selectName ? true : false
+                    }).ToList();
         }
 
         /// <summary>
@@ -286,7 +286,7 @@ namespace Alabo.Extensions
         {
             try
             {
-                enumValue = (T) Enum.Parse(typeof(T), stringValue, true);
+                enumValue = (T)Enum.Parse(typeof(T), stringValue, true);
                 if (Enum.IsDefined(typeof(T), enumValue)) return true;
 
                 return false;
@@ -309,7 +309,7 @@ namespace Alabo.Extensions
             {
                 if (Enum.IsDefined(typeof(T), value))
                 {
-                    enumValue = (T) Enum.ToObject(typeof(T), value);
+                    enumValue = (T)Enum.ToObject(typeof(T), value);
                     return true;
                 }
 

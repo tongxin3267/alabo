@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
-using Alabo.Datas.Stores.Add.EfCore;
+﻿using Alabo.Datas.Stores.Add.EfCore;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
 using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Reflections;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.Stores.Column.EfCore
 {

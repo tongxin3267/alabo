@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities.Core;
+﻿using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Services.Report;
 using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis;
@@ -17,6 +14,9 @@ using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Framework.Core.WebUis.Domain.Services;
 using Alabo.Framework.Core.WebUis.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Framework.Core.WebUis.Controllers
@@ -39,7 +39,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
             var dataResult = Resolve<IAutoTableService>().Table(type, QueryDictionary().ToJsons(), AutoModel);
             if (!dataResult.Item1.Succeeded) return ApiResult.Failure(dataResult.Item1.ErrorMessages.ToString());
             var modelType = type.GetTypeByName();
-            if (type.IsNullOrEmpty() || type == "undefined") return ApiResult.Failure(new {File = ""}, "失败: 类型不能为空");
+            if (type.IsNullOrEmpty() || type == "undefined") return ApiResult.Failure(new { File = "" }, "失败: 类型不能为空");
 
             var autoTable = dataResult.Item2;
 
@@ -48,7 +48,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
                 var result = Resolve<IAdminTableService>().ToExcel(modelType, autoTable.Result);
 
                 var index = result.Item2.LastIndexOf(@"\wwwroot\");
-                if (index < 0) return ApiResult.Failure(new {File = ""}, "失败: 文件生成失败");
+                if (index < 0) return ApiResult.Failure(new { File = "" }, "失败: 文件生成失败");
                 var fileBytes = System.IO.File.ReadAllBytes(result.Item2);
                 var file = File(fileBytes, "application/x-msdownload", result.Item3);
 
@@ -57,7 +57,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
             }
             catch (Exception ex)
             {
-                return ApiResult.Failure(new {File = ""}, ex.Message);
+                return ApiResult.Failure(new { File = "" }, ex.Message);
             }
         }
 

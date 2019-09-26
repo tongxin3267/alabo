@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Alabo.Extensions;
+using Alabo.Framework.Core.Reflections.Services;
+using Alabo.Helpers;
+using Alabo.Linq.Dynamic;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,10 +10,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
-using Alabo.Extensions;
-using Alabo.Framework.Core.Reflections.Services;
-using Alabo.Helpers;
-using Alabo.Linq.Dynamic;
 using File = System.IO.File;
 
 namespace Alabo.Web.CodeGeneration.TestCode

@@ -1,6 +1,6 @@
-﻿using System;
-using Alabo.Exceptions.Prompts;
+﻿using Alabo.Exceptions.Prompts;
 using AspectCore.DynamicProxy;
+using System;
 
 namespace Alabo.Extensions
 {

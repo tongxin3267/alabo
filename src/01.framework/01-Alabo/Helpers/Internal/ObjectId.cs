@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Alabo.Exceptions;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-using Alabo.Exceptions;
 
 namespace Alabo.Helpers.Internal
 {
@@ -26,7 +26,7 @@ namespace Alabo.Helpers.Internal
         private static readonly uint[] _lookup32 = Enumerable.Range(0, 256).Select(i =>
         {
             var s = i.ToString("x2");
-            return (uint) s[0] + ((uint) s[1] << 16);
+            return (uint)s[0] + ((uint)s[1] << 16);
         }).ToArray();
 
         // we're using 14 bytes instead of 12 to hold the ObjectId in memory but unlike a byte[] there is no additional object on the heap
@@ -46,7 +46,7 @@ namespace Alabo.Helpers.Internal
             __dateTimeMinValueMillisecondsSinceEpoch = (DateTime.MinValue - __unixEpoch).Ticks / 10000;
             __staticMachine = GetMachineHash();
             __staticIncrement = new Random().Next();
-            __staticPid = (short) GetCurrentProcessId();
+            __staticPid = (short)GetCurrentProcessId();
         }
 
         // constructors
@@ -265,18 +265,18 @@ namespace Alabo.Helpers.Internal
                     "The increment value must be between 0 and 16777215 (it must fit in 3 bytes).");
 
             var bytes = new byte[12];
-            bytes[0] = (byte) (timestamp >> 24);
-            bytes[1] = (byte) (timestamp >> 16);
-            bytes[2] = (byte) (timestamp >> 8);
-            bytes[3] = (byte) timestamp;
-            bytes[4] = (byte) (machine >> 16);
-            bytes[5] = (byte) (machine >> 8);
-            bytes[6] = (byte) machine;
-            bytes[7] = (byte) (pid >> 8);
-            bytes[8] = (byte) pid;
-            bytes[9] = (byte) (increment >> 16);
-            bytes[10] = (byte) (increment >> 8);
-            bytes[11] = (byte) increment;
+            bytes[0] = (byte)(timestamp >> 24);
+            bytes[1] = (byte)(timestamp >> 16);
+            bytes[2] = (byte)(timestamp >> 8);
+            bytes[3] = (byte)timestamp;
+            bytes[4] = (byte)(machine >> 16);
+            bytes[5] = (byte)(machine >> 8);
+            bytes[6] = (byte)machine;
+            bytes[7] = (byte)(pid >> 8);
+            bytes[8] = (byte)pid;
+            bytes[9] = (byte)(increment >> 16);
+            bytes[10] = (byte)(increment >> 8);
+            bytes[11] = (byte)increment;
             return bytes;
         }
 
@@ -311,7 +311,7 @@ namespace Alabo.Helpers.Internal
 
             timestamp = (bytes[0] << 24) + (bytes[1] << 16) + (bytes[2] << 8) + bytes[3];
             machine = (bytes[4] << 16) + (bytes[5] << 8) + bytes[6];
-            pid = (short) ((bytes[7] << 8) + bytes[8]);
+            pid = (short)((bytes[7] << 8) + bytes[8]);
             increment = (bytes[9] << 16) + (bytes[10] << 8) + bytes[11];
         }
 
@@ -337,7 +337,7 @@ namespace Alabo.Helpers.Internal
 
         private static int GetTimestampFromDateTime(DateTime timestamp)
         {
-            return (int) Math.Floor((ToUniversalTime(timestamp) - __unixEpoch).TotalSeconds);
+            return (int)Math.Floor((ToUniversalTime(timestamp) - __unixEpoch).TotalSeconds);
         }
 
         // public methods
@@ -384,7 +384,7 @@ namespace Alabo.Helpers.Internal
         /// <returns>True if the other object is an ObjectId and equal to this one.</returns>
         public override bool Equals(object obj)
         {
-            if (obj is ObjectId) return Equals((ObjectId) obj);
+            if (obj is ObjectId) return Equals((ObjectId)obj);
 
             return false;
         }
@@ -435,7 +435,7 @@ namespace Alabo.Helpers.Internal
             var arr = new byte[s.Length >> 1];
 
             for (var i = 0; i < s.Length >> 1; ++i)
-                arr[i] = (byte) ((GetHexVal(s[i << 1]) << 4) + GetHexVal(s[(i << 1) + 1]));
+                arr[i] = (byte)((GetHexVal(s[i << 1]) << 4) + GetHexVal(s[(i << 1) + 1]));
 
             return arr;
         }
@@ -453,8 +453,8 @@ namespace Alabo.Helpers.Internal
             for (var i = 0; i < bytes.Length; i++)
             {
                 var val = _lookup32[bytes[i]];
-                result[2 * i] = (char) val;
-                result[2 * i + 1] = (char) (val >> 16);
+                result[2 * i] = (char)val;
+                result[2 * i + 1] = (char)(val >> 16);
             }
 
             return new string(result);
@@ -487,7 +487,7 @@ namespace Alabo.Helpers.Internal
 
         private static int GetHexVal(char hex)
         {
-            var val = (int) hex;
+            var val = (int)hex;
             //For uppercase A-F letters:
             //return val - (val < 58 ? 48 : 55);
             //For lowercase a-f letters:

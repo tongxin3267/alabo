@@ -1,9 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Framework.Core.WebApis.Controller
@@ -50,7 +50,7 @@ namespace Alabo.Framework.Core.WebApis.Controller
             var find = BaseService.GetSingle(entity.Id);
             if (find == null) return ApiResult.Failure($"删除的数据不存在,Id:{entity.Id}");
 
-            var dynamicFind = (dynamic) find;
+            var dynamicFind = (dynamic)find;
             if (Convert.ToInt64(dynamicFind.UserId) != AutoModel.BasicUser && AutoModel.BasicUser.Id > 0)
                 return ApiResult.Failure("您无权删除该数据");
 

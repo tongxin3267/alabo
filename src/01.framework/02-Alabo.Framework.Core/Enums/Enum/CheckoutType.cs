@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Framework.Core.Enums.Enum
 {
@@ -58,7 +58,8 @@ namespace Alabo.Framework.Core.Enums.Enum
         /// <summary>
         ///     自定义
         /// </summary>
-        [Display(Name = "自定义")] [LabelCssClass("m-badge--warning")]
+        [Display(Name = "自定义")]
+        [LabelCssClass("m-badge--warning")]
         Customer = 100
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Threading;
-using System.Threading.Tasks;
-using Alabo.Datas.Ef.Configs;
+﻿using Alabo.Datas.Ef.Configs;
 using Alabo.Datas.Ef.Logs;
 using Alabo.Datas.Ef.Map;
 using Alabo.Datas.Matedatas;
@@ -19,6 +14,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.UnitOfWorks
 {
@@ -212,7 +212,7 @@ namespace Alabo.Datas.UnitOfWorks
             if (IsEnabled(log) == false) return;
 
             builder.EnableSensitiveDataLogging();
-            builder.UseLoggerFactory(new LoggerFactory(new[] {GetLogProvider(log)}));
+            builder.UseLoggerFactory(new LoggerFactory(new[] { GetLogProvider(log) }));
         }
 
         /// <summary>

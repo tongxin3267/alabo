@@ -29,7 +29,6 @@ namespace Alabo.Domains.Services.Report
 
         public List<AutoReportItem> AutoReportItem { get; set; }
 
-
         /// <summary>
         ///     报表名称
         /// </summary>
@@ -39,7 +38,6 @@ namespace Alabo.Domains.Services.Report
         ///     图标
         /// </summary>
         public string Icon { get; set; }
-
 
         /// <summary>
         ///     数据表

@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
 using MongoDB.Driver;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.Datas.Stores.Delete.Mongo
 {

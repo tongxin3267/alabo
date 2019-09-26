@@ -1,5 +1,5 @@
-﻿using System;
-using Alabo.Framework.Core.Enums.Enum;
+﻿using Alabo.Framework.Core.Enums.Enum;
+using System;
 
 namespace Alabo.Framework.Core.Reflections.Interfaces
 {

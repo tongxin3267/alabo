@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.Datas.Ef.Configs;
+﻿using Alabo.Datas.Ef.Configs;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Helpers;
 using Alabo.Logging;
 using Alabo.Logging.Extensions;
 using Alabo.Regexs;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.Datas.Ef.Logs
 {
@@ -216,7 +216,7 @@ namespace Alabo.Datas.Ef.Logs
         private static void AddParameter(Dictionary<string, string> result, string parameter, string paramName)
         {
             var pattern = $@"(?:{paramName})?(\d+)='(.*)'(.*)";
-            var values = Regex.GetValues(parameter, pattern, new[] {"$1", "$2", "$3"}).Select(t => t.Value).ToList();
+            var values = Regex.GetValues(parameter, pattern, new[] { "$1", "$2", "$3" }).Select(t => t.Value).ToList();
             if (values.Count != 3) return;
 
             result.Add($"{paramName}{values[0]}", GetValue(values[1], values[2]));

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Alabo.Domains.Enums;
+using System;
 using System.Data;
-using Alabo.Domains.Enums;
 
 namespace Alabo.Domains.Repositories.Extensions
 {
@@ -52,7 +52,7 @@ namespace Alabo.Domains.Repositories.Extensions
             var objectValue = reader.GetValue(i);
             try
             {
-                return (T) objectValue;
+                return (T)objectValue;
             }
             catch
             {

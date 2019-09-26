@@ -1,5 +1,5 @@
-using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Framework.Core.Enums.Enum
 {
@@ -12,19 +12,22 @@ namespace Alabo.Framework.Core.Enums.Enum
         /// <summary>
         ///     数字类型
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "Number")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "Number")]
         Number = 0,
 
         /// <summary>
         ///     网址
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "Url")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "Url")]
         Url = 1,
 
         /// <summary>
         ///     手机号码
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "Mobile")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "Mobile")]
         Mobile = 2
 
         //[a-zA-Z]

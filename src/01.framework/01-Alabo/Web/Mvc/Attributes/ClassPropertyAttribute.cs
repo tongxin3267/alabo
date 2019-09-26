@@ -1,5 +1,5 @@
-﻿using System;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
+using System;
 
 namespace Alabo.Web.Mvc.Attributes
 {

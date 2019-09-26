@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Alabo.Datas.Queries.Enums;
+using Alabo.Linq;
+using Alabo.Linq.Expressions;
+using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Alabo.Datas.Queries.Enums;
-using Alabo.Linq;
-using Alabo.Linq.Expressions;
 
 namespace Alabo.Extensions
 {
@@ -35,7 +35,7 @@ namespace Alabo.Extensions
         /// <param name="value">值</param>
         public static Expression StartsWith(this Expression left, object value)
         {
-            return left.Call("StartsWith", new[] {typeof(string)}, value);
+            return left.Call("StartsWith", new[] { typeof(string) }, value);
         }
 
         #endregion StartsWith(头匹配)
@@ -49,7 +49,7 @@ namespace Alabo.Extensions
         /// <param name="value">值</param>
         public static Expression EndsWith(this Expression left, object value)
         {
-            return left.Call("EndsWith", new[] {typeof(string)}, value);
+            return left.Call("EndsWith", new[] { typeof(string) }, value);
         }
 
         #endregion EndsWith(尾匹配)
@@ -63,7 +63,7 @@ namespace Alabo.Extensions
         /// <param name="value">值</param>
         public static Expression Contains(this Expression left, object value)
         {
-            return left.Call("Contains", new[] {typeof(string)}, value);
+            return left.Call("Contains", new[] { typeof(string) }, value);
         }
 
         #endregion Contains(模糊匹配)
@@ -125,7 +125,7 @@ namespace Alabo.Extensions
         internal static Expression<T> Compose<T>(this Expression<T> first, Expression<T> second,
             Func<Expression, Expression, Expression> merge)
         {
-            var map = first.Parameters.Select((f, i) => new {f, s = second.Parameters[i]})
+            var map = first.Parameters.Select((f, i) => new { f, s = second.Parameters[i] })
                 .ToDictionary(p => p.s, p => p.f);
             var secondBody = ParameterRebinder.ReplaceParameters(map, second.Body);
             return Expression.Lambda<T>(merge(first.Body, secondBody), first.Parameters);

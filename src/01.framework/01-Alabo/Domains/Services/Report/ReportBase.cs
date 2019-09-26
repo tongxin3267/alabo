@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using Alabo.Datas.Stores;
+﻿using Alabo.Datas.Stores;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services.Random;
 using Alabo.Domains.Services.Report.Dtos;
+using System.Collections.Generic;
 
 namespace Alabo.Domains.Services.Report
 {

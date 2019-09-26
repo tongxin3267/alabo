@@ -1,7 +1,4 @@
-﻿using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Alabo.Exceptions;
+﻿using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Runtime;
@@ -9,6 +6,9 @@ using Alabo.Security.Claims;
 using IdentityModel;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
+using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Alabo.Security.Sessions
 {

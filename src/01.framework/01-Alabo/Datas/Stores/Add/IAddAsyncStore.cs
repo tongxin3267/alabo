@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Alabo.Domains.Entities.Core;
+﻿using Alabo.Domains.Entities.Core;
 using Alabo.Validations.Aspects;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.Stores.Add
 {

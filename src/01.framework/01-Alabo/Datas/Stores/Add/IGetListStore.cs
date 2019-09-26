@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Alabo.Domains.Entities.Core;
+using Alabo.Domains.Query;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Alabo.Domains.Entities.Core;
-using Alabo.Domains.Query;
 
 namespace Alabo.Datas.Stores.Add
 {

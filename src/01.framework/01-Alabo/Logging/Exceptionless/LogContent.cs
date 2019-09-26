@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Alabo.Properties;
+﻿using Alabo.Properties;
+using System.Collections.Generic;
 
 namespace Alabo.Logging.Exceptionless
 {

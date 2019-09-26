@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
+using System.Collections.Generic;
 
 namespace Alabo.Datas.Stores.Delete.EfCore
 {

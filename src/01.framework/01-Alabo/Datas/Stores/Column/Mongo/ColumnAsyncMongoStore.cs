@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using Alabo.Datas.Stores.Add.Mongo;
+﻿using Alabo.Datas.Stores.Add.Mongo;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
+using System;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.Stores.Column.Mongo
 {

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Alabo.Domains.Query.Dto;
+using System;
 using System.Collections.Generic;
-using Alabo.Domains.Query.Dto;
 
 namespace Alabo.Domains.Services.Report.Dtos
 {
@@ -60,7 +60,6 @@ namespace Alabo.Domains.Services.Report.Dtos
         ///     格式：2019-6-26
         /// </summary>
         public string Date { get; set; }
-
 
         /// <summary>
         ///     数据项

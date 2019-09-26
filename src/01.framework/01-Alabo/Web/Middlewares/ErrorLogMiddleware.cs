@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using Alabo.Logging;
+﻿using Alabo.Logging;
 using Alabo.Logging.Extensions;
 using Microsoft.AspNetCore.Http;
+using System;
+using System.Threading.Tasks;
 
 namespace Alabo.Web.Middlewares
 {

@@ -1,5 +1,5 @@
-﻿using System;
-using Alabo.Domains.Repositories.EFCore;
+﻿using Alabo.Domains.Repositories.EFCore;
+using System;
 
 namespace Alabo.Domains.Repositories.SqlServer
 {

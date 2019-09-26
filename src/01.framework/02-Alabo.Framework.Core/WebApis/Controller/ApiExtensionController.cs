@@ -1,10 +1,10 @@
-﻿using System;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Extensions;
 using Alabo.Maps;
 using Alabo.Security;
 using Alabo.Users.Services;
 using Alabo.Web.Mvc.Controllers;
+using System;
 using ZKCloud.Open.ApiBase.Models;
 using User = Alabo.Users.Entities.User;
 
@@ -55,7 +55,7 @@ namespace Alabo.Framework.Core.WebApis.Controller
                     if (userId > 0)
                     {
                         var user = Resolve<IAlaboUserService>().GetSingle(userId);
-                        _autoModel.BasicUser = new BasicUser {Id = userId};
+                        _autoModel.BasicUser = new BasicUser { Id = userId };
                         if (user != null) _autoModel.BasicUser = user.MapTo<BasicUser>();
                     }
                 }
@@ -87,7 +87,7 @@ namespace Alabo.Framework.Core.WebApis.Controller
         {
             if (serviceResult.Succeeded)
             {
-                var obj = (T) serviceResult.ReturnObject;
+                var obj = (T)serviceResult.ReturnObject;
                 return ApiResult.Success(obj);
             }
 

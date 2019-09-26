@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
-using Alabo.Datas.Enums;
+﻿using Alabo.Datas.Enums;
 using Alabo.Domains.Entities;
+using System.Threading.Tasks;
 
 namespace Alabo.Domains.Services.Attach
 {

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Alabo.Dependency;
+using Alabo.Extensions;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.Dependency;
-using Alabo.Extensions;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Alabo.Helpers
 {
@@ -47,7 +47,7 @@ namespace Alabo.Helpers
         /// <param name="name">服务名称</param>
         public static List<T> ResolveAll<T>(Type type, string name = null)
         {
-            return ((IEnumerable<T>) DefaultContainer.CreateList(type, name)).ToList();
+            return ((IEnumerable<T>)DefaultContainer.CreateList(type, name)).ToList();
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Alabo.Helpers
         /// <param name="name">服务名称</param>
         public static T Resolve<T>(Type type, string name = null)
         {
-            return (T) DefaultContainer.Create(type, name);
+            return (T)DefaultContainer.Create(type, name);
         }
 
         /// <summary>
@@ -177,6 +177,6 @@ namespace Alabo.Helpers
             return scope;
         }
 
-        #endregion
+        #endregion scope
     }
 }

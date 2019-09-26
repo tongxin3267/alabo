@@ -23,7 +23,7 @@ namespace Alabo.Domains.Services.Random
 
                 default:
                     return FirstOrDefault();
-                // return Store.GetRandom();
+                    // return Store.GetRandom();
             }
         }
     }

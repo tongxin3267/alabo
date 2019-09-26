@@ -42,7 +42,7 @@ namespace Alabo.Domains.Base.Client
             {
                 {"token", token}
             };
-            var data = DataFormatter.FromObject(new {mobile, message, IpAddress = ipAddress});
+            var data = DataFormatter.FromObject(new { mobile, message, IpAddress = ipAddress });
             var result = Connector.Post(url, parameters, data);
             return DataFormatter.ToObject<ApiResult<SecretKeyAuthentication>>(result);
         }
@@ -55,7 +55,7 @@ namespace Alabo.Domains.Base.Client
                 {"token", token},
                 {"ipaddress", ipAddress}
             };
-            var data = await DataFormatter.FromObjectAsync(new {mobile, message, IpAddress = ipAddress});
+            var data = await DataFormatter.FromObjectAsync(new { mobile, message, IpAddress = ipAddress });
             var result = await Connector.PostAsync(url, parameters, data);
             return await DataFormatter.ToObjectAsync<ApiResult<SecretKeyAuthentication>>(result);
         }
@@ -131,7 +131,7 @@ namespace Alabo.Domains.Base.Client
             };
             try
             {
-                var data = DataFormatter.FromObject(new {mobile, IpAddress = userIpAddress});
+                var data = DataFormatter.FromObject(new { mobile, IpAddress = userIpAddress });
                 var result = Connector.Post(url, parameters, data);
                 return DataFormatter.ToObject<ApiResult>(result);
             }
@@ -156,7 +156,7 @@ namespace Alabo.Domains.Base.Client
                 {"token", token},
                 {"ipaddress", userIpAddress}
             };
-            var data = DataFormatter.FromObject(new {mobile, IpAddress = userIpAddress, code});
+            var data = DataFormatter.FromObject(new { mobile, IpAddress = userIpAddress, code });
             var result = Connector.Post(url, parameters, data);
             return DataFormatter.ToObject<ApiResult>(result);
         }

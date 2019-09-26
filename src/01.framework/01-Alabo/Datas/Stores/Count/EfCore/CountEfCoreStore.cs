@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Alabo.Datas.UnitOfWorks;
+using Alabo.Domains.Entities.Core;
+using System;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
-using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Entities.Core;
 
 namespace Alabo.Datas.Stores.Count.EfCore
 {

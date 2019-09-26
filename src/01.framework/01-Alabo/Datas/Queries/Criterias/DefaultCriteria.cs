@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Alabo.Domains.Repositories;
+using System;
 using System.Linq.Expressions;
-using Alabo.Domains.Repositories;
 
 namespace Alabo.Datas.Queries.Criterias
 {

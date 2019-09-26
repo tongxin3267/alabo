@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Framework.Core.Enums.Enum
 {
@@ -12,19 +12,22 @@ namespace Alabo.Framework.Core.Enums.Enum
         /// <summary>
         ///     等待处理
         /// </summary>
-        [Display(Name = "等待处理")] [LabelCssClass("m-badge--metal")]
+        [Display(Name = "等待处理")]
+        [LabelCssClass("m-badge--metal")]
         WaiPay = 1,
 
         /// <summary>
         ///     处理成功
         /// </summary>
-        [Display(Name = "处理成功")] [LabelCssClass("m-badge--success")]
+        [Display(Name = "处理成功")]
+        [LabelCssClass("m-badge--success")]
         Success = 2,
 
         /// <summary>
         ///     处理失败
         /// </summary>
-        [Display(Name = "处理失败")] [LabelCssClass("m-badge--metal")]
+        [Display(Name = "处理失败")]
+        [LabelCssClass("m-badge--metal")]
         Failured = 3
     }
 }

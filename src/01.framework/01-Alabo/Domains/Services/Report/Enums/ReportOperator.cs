@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Domains.Services.Report.Enums
 {
@@ -11,13 +11,15 @@ namespace Alabo.Domains.Services.Report.Enums
         /// <summary>
         ///     等于
         /// </summary>
-        [Display(Name = "等于")] [Field(Mark = "==")]
+        [Display(Name = "等于")]
+        [Field(Mark = "==")]
         Equal = 1,
 
         /// <summary>
         ///     不等于
         /// </summary>
-        [Display(Name = "不等于")] [Field(Mark = "!=")]
+        [Display(Name = "不等于")]
+        [Field(Mark = "!=")]
         NotEqual = 2
     }
 }

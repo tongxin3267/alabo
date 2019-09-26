@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Alabo.Randoms;
+using Alabo.Web.Mvc.Attributes;
+using System;
 using System.Security.Cryptography;
 using System.Text;
-using Alabo.Randoms;
-using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.Helpers
 {
@@ -81,7 +81,7 @@ namespace Alabo.Helpers
         {
             if (string.IsNullOrEmpty(password)) throw new ArgumentNullException("password can't be empty");
 
-            var info = new PasswordInfo {Type = type};
+            var info = new PasswordInfo { Type = type };
             var passwordBytes = Encoding.UTF8.GetBytes(password);
             if (type == PasswordHashType.Pbkdf2)
             {

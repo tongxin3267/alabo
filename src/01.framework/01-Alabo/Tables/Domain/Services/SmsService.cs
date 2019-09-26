@@ -1,14 +1,14 @@
-﻿using System;
-using System.IO;
-using System.Net;
-using System.Security.Cryptography;
-using System.Text;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Base.Dtos;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Helpers;
+using System;
+using System.IO;
+using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 using Convert = System.Convert;
 
 namespace Alabo.Domains.Base.Services
@@ -53,7 +53,7 @@ namespace Alabo.Domains.Base.Services
             {
                 ServicePointManager.Expect100Continue = false;
 
-                var request = (HttpWebRequest) WebRequest.Create(Url);
+                var request = (HttpWebRequest)WebRequest.Create(Url);
                 request.Method = "POST";
                 request.ContentType = "application/x-www-form-urlencoded";
                 request.ContentLength = postDataStr.Length;
@@ -61,7 +61,7 @@ namespace Alabo.Domains.Base.Services
                 var write = new StreamWriter(request.GetRequestStream(), Encoding.ASCII);
                 write.Write(postDataStr);
                 write.Flush();
-                var response = (HttpWebResponse) request.GetResponse();
+                var response = (HttpWebResponse)request.GetResponse();
                 var encoding = response.ContentEncoding;
                 if (encoding == null || encoding.Length < 1) encoding = "UTF-8";
 
@@ -80,7 +80,7 @@ namespace Alabo.Domains.Base.Services
         //系统当前时间毫秒数的生成方法
         private static long currentTimeMillis()
         {
-            return (long) (DateTime.UtcNow - Jan1st1970).TotalMilliseconds;
+            return (long)(DateTime.UtcNow - Jan1st1970).TotalMilliseconds;
         }
 
         /// <summary>

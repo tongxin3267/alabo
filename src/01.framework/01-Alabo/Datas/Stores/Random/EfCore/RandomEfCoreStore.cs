@@ -1,7 +1,7 @@
-﻿using System;
-using System.Linq;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
+using System;
+using System.Linq;
 
 namespace Alabo.Datas.Stores.Random.EfCore
 {

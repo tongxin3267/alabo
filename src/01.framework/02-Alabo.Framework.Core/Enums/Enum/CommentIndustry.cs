@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Framework.Core.Enums.Enum
 {
@@ -9,25 +9,29 @@ namespace Alabo.Framework.Core.Enums.Enum
         /// <summary>
         ///     通用
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "通用")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "通用")]
         Common = 0,
 
         /// <summary>
         ///     旅游
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "旅游")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "旅游")]
         Travel,
 
         /// <summary>
         ///     餐饮业
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "餐饮")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "餐饮")]
         Catering,
 
         /// <summary>
         ///     服务业
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "服务")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "服务")]
         Supply
     }
 }

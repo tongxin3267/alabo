@@ -6,7 +6,7 @@ namespace Alabo.Extensions
     {
         private static T ToObject<T>(object source)
         {
-            return (T) source;
+            return (T)source;
         }
 
         /// <summary>

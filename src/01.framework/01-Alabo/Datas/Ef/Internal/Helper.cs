@@ -1,7 +1,7 @@
-﻿using System;
-using System.Text;
-using Alabo.Domains.Entities.Core;
+﻿using Alabo.Domains.Entities.Core;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System;
+using System.Text;
 
 namespace Alabo.Datas.Ef.Internal
 {

@@ -48,7 +48,7 @@ namespace Alabo.Helpers
         /// <param name="args">参数</param>
         public String Append(string value, params object[] args)
         {
-            if (args == null) args = new object[] {string.Empty};
+            if (args == null) args = new object[] { string.Empty };
 
             if (args.Length == 0)
                 Builder.Append(value);

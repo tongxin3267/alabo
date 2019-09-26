@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-using Alabo.Datas.Matedatas;
+﻿using Alabo.Datas.Matedatas;
 using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 using Alabo.Linq;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Alabo.Datas.Sql.Queries.Builders.Core
 {

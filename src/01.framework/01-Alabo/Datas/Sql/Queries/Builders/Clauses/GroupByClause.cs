@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Alabo.Datas.Sql.Queries.Builders.Abstractions;
+using Alabo.Datas.Sql.Queries.Builders.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
-using Alabo.Datas.Sql.Queries.Builders.Abstractions;
-using Alabo.Datas.Sql.Queries.Builders.Core;
 
 namespace Alabo.Datas.Sql.Queries.Builders.Clauses
 {

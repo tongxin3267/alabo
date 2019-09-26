@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
-using Alabo.Schedules.Job;
+﻿using Alabo.Schedules.Job;
 using Alabo.Web.TaskShell.Job;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using System.Threading.Tasks;
 
 namespace Alabo.Web.TaskShell
 {

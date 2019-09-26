@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Base.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
@@ -15,6 +11,10 @@ using Alabo.Reflections;
 using Alabo.Runtime;
 using Alabo.Web.ViewFeatures;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace Alabo.Domains.Base.Services
 {
@@ -151,7 +151,7 @@ namespace Alabo.Domains.Base.Services
                 var sqlTables = EntityDynamicService.GetSqlTable();
                 foreach (var type in types)
                 {
-                    var table = new Table {Key = type.Name, Type = type.FullName};
+                    var table = new Table { Key = type.Name, Type = type.FullName };
                     if (type.FullName.Contains("Config") && type.Name != "AutoConfig") continue;
 
                     if (type.FullName.Contains("ViewModels")) continue;

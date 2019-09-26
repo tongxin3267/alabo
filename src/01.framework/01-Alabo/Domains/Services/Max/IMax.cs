@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Alabo.Domains.Entities;
+using System;
 using System.Linq.Expressions;
-using Alabo.Domains.Entities;
 
 namespace Alabo.Domains.Services.Max
 {

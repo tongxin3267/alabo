@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Alabo.Extensions;
+using System;
 using System.Reflection;
-using Alabo.Extensions;
 
 namespace Alabo.Mapping
 {
@@ -45,7 +45,7 @@ namespace Alabo.Mapping
             else if (type == typeof(bool) || type == typeof(bool))
             {
                 var valueDefault = value.ConvertToNullableBool();
-                changeValue = valueDefault != null && (bool) valueDefault ? "是" : "否";
+                changeValue = valueDefault != null && (bool)valueDefault ? "是" : "否";
                 if (valueDefault.HasValue) return Tuple.Create(true, changeValue);
             }
             else if (type == typeof(Guid))

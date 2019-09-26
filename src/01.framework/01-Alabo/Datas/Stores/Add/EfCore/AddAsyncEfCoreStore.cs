@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
 using Alabo.Validations.Aspects;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.Stores.Add.EfCore
 {

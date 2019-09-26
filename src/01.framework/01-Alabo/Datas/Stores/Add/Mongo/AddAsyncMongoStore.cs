@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
 using Alabo.Validations.Aspects;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.Stores.Add.Mongo
 {
@@ -23,7 +23,7 @@ namespace Alabo.Datas.Stores.Add.Mongo
 
         public async Task<bool> AddSingleAsync([Valid] TEntity entity)
         {
-            var model = (IMongoEntity) entity;
+            var model = (IMongoEntity)entity;
             if (model.IsObjectIdEmpty())
             {
                 model.Id = ObjectId.GenerateNewId();

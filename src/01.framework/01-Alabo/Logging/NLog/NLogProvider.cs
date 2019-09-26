@@ -1,7 +1,7 @@
-﻿using System;
-using Alabo.Logging.Abstractions;
+﻿using Alabo.Logging.Abstractions;
 using Alabo.Logging.Formats;
 using Microsoft.Extensions.Logging;
+using System;
 using NLogs = NLog;
 
 namespace Alabo.Logging.NLog

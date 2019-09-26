@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.Helpers;
+﻿using Alabo.Helpers;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.Dependency
 {
@@ -28,7 +28,7 @@ namespace Alabo.Dependency
             var result = CreateList(typeof(T), name);
             if (result == null) return new List<T>();
 
-            return ((IEnumerable<T>) result).ToList();
+            return ((IEnumerable<T>)result).ToList();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Alabo.Dependency
         /// <param name="name">服务名称</param>
         public T Create<T>(string name = null)
         {
-            return (T) Create(typeof(T), name);
+            return (T)Create(typeof(T), name);
         }
 
         /// <summary>

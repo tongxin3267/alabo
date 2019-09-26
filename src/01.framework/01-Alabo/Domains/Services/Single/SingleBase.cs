@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq.Expressions;
-using Alabo.Datas.Stores;
+﻿using Alabo.Datas.Stores;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Domains.Services.Add;
 using Alabo.Linq;
 using Alabo.Mapping;
+using System;
+using System.Linq.Expressions;
 
 namespace Alabo.Domains.Services.Single
 {
@@ -56,7 +56,7 @@ namespace Alabo.Domains.Services.Single
 
         public TEntity Next(TEntity model)
         {
-            var dynamic = (dynamic) model;
+            var dynamic = (dynamic)model;
             var dynamicWhere = LinqHelper.GetExpression<TEntity, bool>($"entity.Id > {dynamic.Id}", "entity");
             var next = GetSingle(dynamicWhere);
             if (next == null) next = model;
@@ -66,7 +66,7 @@ namespace Alabo.Domains.Services.Single
 
         public TEntity Prex(TEntity model)
         {
-            var dynamic = (dynamic) model;
+            var dynamic = (dynamic)model;
 
             var query = new ExpressionQuery<TEntity>();
             var dynamicWhere = LinqHelper.GetExpression<TEntity, bool>($"entity.Id < {dynamic.Id}", "entity");

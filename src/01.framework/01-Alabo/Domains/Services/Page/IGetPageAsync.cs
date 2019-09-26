@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Alabo.Domains.Entities;
+using Alabo.Domains.Query;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Query;
 
 namespace Alabo.Domains.Services.Page
 {

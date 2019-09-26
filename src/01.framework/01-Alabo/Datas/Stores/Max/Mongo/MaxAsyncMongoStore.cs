@@ -1,11 +1,11 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Alabo.Datas.Stores.Exist.Mongo;
+﻿using Alabo.Datas.Stores.Exist.Mongo;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
+using System;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.Stores.Max.Mongo
 {

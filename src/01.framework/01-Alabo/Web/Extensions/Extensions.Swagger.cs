@@ -1,7 +1,7 @@
-﻿using System;
-using System.Reflection;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using System;
+using System.Reflection;
 
 namespace Alabo.Web.Extensions
 {

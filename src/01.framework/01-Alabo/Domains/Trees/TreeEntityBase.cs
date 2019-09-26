@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Alabo.Domains.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.Domains.Entities;
 using Convert = Alabo.Helpers.Convert;
 
 namespace Alabo.Domains.Trees

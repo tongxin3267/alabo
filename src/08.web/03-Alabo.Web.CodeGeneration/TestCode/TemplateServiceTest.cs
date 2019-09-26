@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Alabo.Files;
+using System;
 using System.Text;
-using Alabo.Files;
 
 namespace Alabo.Web.CodeGeneration.TestCode
 {

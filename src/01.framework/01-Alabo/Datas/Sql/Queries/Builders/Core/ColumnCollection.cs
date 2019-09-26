@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Alabo.Datas.Sql.Queries.Builders.Abstractions;
+using System;
 using System.Linq;
-using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 
 namespace Alabo.Datas.Sql.Queries.Builders.Core
 {

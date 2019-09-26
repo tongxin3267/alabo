@@ -1,8 +1,8 @@
-﻿using System;
-using System.IO;
-using Alabo.Helpers;
+﻿using Alabo.Helpers;
 using Alabo.Randoms;
 using Alabo.Regexs;
+using System;
+using System.IO;
 using String = Alabo.Helpers.String;
 
 namespace Alabo.Files.Paths

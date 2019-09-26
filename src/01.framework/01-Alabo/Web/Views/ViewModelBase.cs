@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using System.Runtime.Serialization;
-using Alabo.Exceptions;
+﻿using Alabo.Exceptions;
 using Alabo.Validations;
+using System.Linq;
+using System.Runtime.Serialization;
 
 namespace Alabo.Web.Views
 {
