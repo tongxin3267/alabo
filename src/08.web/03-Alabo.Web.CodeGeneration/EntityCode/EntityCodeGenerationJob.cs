@@ -1,14 +1,11 @@
-﻿using Alabo.Data.People.Suppliers.Domain.Entities;
+﻿using Alabo.Cloud.People.UserDigitals.Domain.Entities;
 using Alabo.Dependency;
 using Alabo.Reflections;
 using Alabo.Schedules.Job;
 using Alabo.Web.CodeGeneration.EntityCode.Templates;
+using Quartz;
 using System;
 using System.Threading.Tasks;
-using Alabo.App.Shop.Store.Domain.Entities;
-using Alabo.Data.Things.Brands.Domain.Entities;
-using Alabo.Data.Things.Goodss.Domain.Entities;
-using Quartz;
 
 namespace Alabo.Web.CodeGeneration.EntityCode {
 
@@ -19,8 +16,10 @@ namespace Alabo.Web.CodeGeneration.EntityCode {
 
         protected override async Task Execute(IJobExecutionContext context, IScope scope) {
             //手动修改,实体路径，可右键实体手动复制路径
-            var entityPath = @"C:\github\alabo\src\02.data\03-Alabo.Data.Things\Goodss\Domain\Entities\";
-            CreateCode(typeof(GoodsLine), entityPath);
+            var entityPath = @"C:\alaboshu.com\alabo\src\05.cloud\02-Alabo.Cloud.People\UserDigitals\Domain\Entities\";
+            CreateCode(typeof(UserDigital), entityPath);
+
+            CreateCode(typeof(UserDigitalIndex), entityPath);
 
             Console.WriteLine(@"所有代码生成完成");
         }

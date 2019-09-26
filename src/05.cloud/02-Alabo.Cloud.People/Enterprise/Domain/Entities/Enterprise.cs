@@ -17,7 +17,7 @@ namespace Alabo.App.Core.Markets.EnterpriseCertification.Domain.Entities {
     [BsonIgnoreExtraElements]//PostApi = "Api/Enterprise/EnterpriseList", ListApi = "Api/Enterprise/EnterpriseList"
     [ClassProperty(Name = "企业认证", Icon = "fa fa-puzzle-piece", Description = "企业认证",
         PageType = ViewPageType.List)]
-    [Table("User_Enterprise")]
+    [Table("Cloud_People_Enterprise")]
     public class Enterprise : AggregateMongodbRoot<Enterprise> {
 
         /// <summary>`

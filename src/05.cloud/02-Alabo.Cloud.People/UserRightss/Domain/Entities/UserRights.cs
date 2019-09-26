@@ -22,7 +22,7 @@ namespace Alabo.App.Market.UserRightss.Domain.Entities {
     ///     会员权益
     /// </summary>
     [BsonIgnoreExtraElements]
-    [Table("Market_UserRight")]
+    [Table("Cloud_People_UserRight")]
     [ClassProperty(Name = "会员权益", Description = "查看会员会员权益", Icon = IconFlaticon.route,
         SideBarType = SideBarType.UserRightsSideBar)]
     public class UserRights : AggregateDefaultUserRoot<UserRights> {
