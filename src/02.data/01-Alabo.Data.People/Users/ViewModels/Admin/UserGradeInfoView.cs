@@ -6,7 +6,7 @@ using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using Alabo.Web.Validations;
 
-namespace Alabo.App.Core.User.ViewModels.Admin {
+namespace Alabo.Data.People.Users.ViewModels.Admin {
 
     /// <summary>
     ///     直推会员等级报表

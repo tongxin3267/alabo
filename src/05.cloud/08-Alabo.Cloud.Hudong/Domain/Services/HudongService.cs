@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Share.HuDong.Domain.Entities;
 using Alabo.App.Share.HuDong.Domain.Enums;
 using Alabo.App.Share.HuDong.Dtos;

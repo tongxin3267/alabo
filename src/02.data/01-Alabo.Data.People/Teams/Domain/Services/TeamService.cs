@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Repositories;
+using Alabo.Data.People.Teams.Domain.Configs;
+using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Services;
@@ -14,7 +13,7 @@ using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Users.Dtos;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Core.User.Domain.Services {
+namespace Alabo.Data.People.Teams.Domain.Services {
 
     public class TeamService : ServiceBase, ITeamService {
 
@@ -50,7 +49,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// <param name="userId">当前用户Id</param>
         /// <param name="gradeId">当前用户的等级</param>
         /// <param name="equalUserGradeId"></param>
-        public IList<Users.Entities.User> GetParentTeamByGradeId(long userId, Guid gradeId, bool equalUserGradeId = false) {
+        public IList<Alabo.Users.Entities.User> GetParentTeamByGradeId(long userId, Guid gradeId, bool equalUserGradeId = false) {
             var grades = Resolve<IGradeService>().GetUserGradeList();
             var grade = grades.FirstOrDefault(r => r.Id == gradeId);
             if (grade == null) {
@@ -66,7 +65,7 @@ namespace Alabo.App.Core.User.Domain.Services {
                 grades = grades.Where(r => r.Contribute > grade.Contribute).ToList();
             }
 
-            var result = new List<Users.Entities.User>();
+            var result = new List<Alabo.Users.Entities.User>();
             foreach (var item in teamUser) {
                 var parentGrade = grades.FirstOrDefault(r => r.Id == item.GradeId);
                 if (parentGrade != null) {
@@ -82,7 +81,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// <summary>
         ///     Gets the team by grade identifier.
         /// </summary>
-        public IList<Users.Entities.User> GetTeamByGradeId(long userId, Guid gradeId, bool equalUserGradeId = false) {
+        public IList<Alabo.Users.Entities.User> GetTeamByGradeId(long userId, Guid gradeId, bool equalUserGradeId = false) {
             var grades = Resolve<IGradeService>().GetUserGradeList();
             var grade = grades.FirstOrDefault(r => r.Id == gradeId);
             if (grade == null) {
@@ -100,7 +99,7 @@ namespace Alabo.App.Core.User.Domain.Services {
             }
 
             long parentContribute = 0;
-            var result = new List<Users.Entities.User>();
+            var result = new List<Alabo.Users.Entities.User>();
             result.Add(user);
             var contributeMin = grades.Min(u => u.Contribute);
             foreach (var item in teamUser) {
@@ -155,7 +154,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     根据UserMap.childNode字段获取
         /// </summary>
         /// <param name="userMap"></param>
-        public IEnumerable<Users.Entities.User> GetTeamUser(UserMap userMap) {
+        public IEnumerable<Alabo.Users.Entities.User> GetTeamUser(UserMap userMap) {
             if (userMap != null) {
                 var userIdStrings = userMap.ChildNode.ToSplitList();
                 var userIds = new List<long>();
@@ -195,11 +194,11 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     获取上级团队用户，根团队配置
         /// </summary>
         /// <param name="userId">用户Id</param>
-        public IList<Users.Entities.User> GetParentUsers(long userId) {
+        public IList<Alabo.Users.Entities.User> GetParentUsers(long userId) {
             var parnetMap = GetTeamMap(userId);
             if (parnetMap != null) {
                 var users = _userRepository.GetList(parnetMap.Select(r => r.UserId).ToList());
-                var resultList = new List<Users.Entities.User>();
+                var resultList = new List<Alabo.Users.Entities.User>();
                 // 排序
                 foreach (var item in parnetMap) {
                     var user = users.FirstOrDefault(r => r.Id == item.UserId);
@@ -219,7 +218,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public IEnumerable<Users.Entities.User> GetChildUsers(long userId) {
+        public IEnumerable<Alabo.Users.Entities.User> GetChildUsers(long userId) {
             var userMap = Resolve<IUserMapService>().GetSingle(r => r.UserId == userId);
             if (userMap != null) {
                 var userIdStrings = userMap.ChildNode.ToSplitList();

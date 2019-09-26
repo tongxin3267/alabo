@@ -1,12 +1,9 @@
-using System;using Alabo.Domains.Repositories.EFCore;using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.App.Agent.ShareHolders.Domain.Entities;
-using Alabo.Domains.Repositories;
+using Alabo.Data.People.ShareHolders.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
-using  Alabo.App.Agent.ShareHolders.Domain.Repositories;
+using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Agent.ShareHolders.Domain.Repositories {
+namespace Alabo.Data.People.ShareHolders.Domain.Repositories {
 	public class ShareHolderRepository : RepositoryMongo<ShareHolder, ObjectId>,IShareHolderRepository  {
 	public  ShareHolderRepository(IUnitOfWork unitOfWork) : base(unitOfWork){
 	}

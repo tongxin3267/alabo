@@ -1,7 +1,6 @@
 using System.Linq;
 using Xunit;
 using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Open.Tasks.Configs.Area;
 using Alabo.Extensions;
 

@@ -1,14 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
+﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Query.Dto;
 using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.ViewModel;
-using Alabo.Web.Validations;
 
-namespace Alabo.App.Core.User.Domain.Dtos {
+namespace Alabo.Data.People.Users.Dtos {
 
     /// <summary>
     ///     注册模块

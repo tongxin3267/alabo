@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Repositories;
-using Alabo.App.Core.User.ViewModels;
+using Alabo.Data.People.Users.Domain.Configs;
+using Alabo.Data.People.Users.Domain.Repositories;
+using Alabo.Data.People.Users.Dtos;
+using Alabo.Data.People.Users.ViewModels;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;

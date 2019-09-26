@@ -16,9 +16,6 @@ using Alabo.App.Core.ApiStore.Sms.Enums;
 using Alabo.App.Core.ApiStore.Sms.Models;
 using Alabo.App.Core.ApiStore.WeiXinMp.Models;
 using Alabo.App.Core.ApiStore.WeiXinMp.Services;
-
-using Alabo.App.Core.User;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Domains.Base.Services;
 using Alabo.Extensions;

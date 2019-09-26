@@ -6,8 +6,6 @@ using System.Linq;
 using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Open.Tasks.Configs.TeamRange;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Enums;

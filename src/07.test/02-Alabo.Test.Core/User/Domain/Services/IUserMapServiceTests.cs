@@ -1,6 +1,5 @@
 using Xunit;
 using Alabo.App.Core.User.Domain.Entities.Extensions;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;

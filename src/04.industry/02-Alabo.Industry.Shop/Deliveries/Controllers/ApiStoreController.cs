@@ -1,5 +1,3 @@
-using Alabo.App.Core.Employes.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Shop.Category.Domain.Services;
 using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.App.Shop.Product.Domain.Services;
@@ -20,6 +18,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Data.People.Employes.Dtos;
+using Alabo.Data.People.Users.Dtos;
 using Alabo.Framework.Basic.Relations.Dtos;
 using ZKCloud.Open.ApiBase.Models;
 

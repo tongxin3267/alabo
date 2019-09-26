@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-using MongoDB.Bson;
 using Alabo.App.Core.Themes.Domain.Entities;
-using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.Framework.Core.WebApis;
-using Alabo.UI;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Employes.Domain.Dtos {
+namespace Alabo.Data.People.Employes.Dtos {
 
     /// <summary>
     /// 权限输入模型

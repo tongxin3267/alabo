@@ -1,18 +1,17 @@
-﻿using Alabo.App.Core.Employes.Domain.Services;
-using Alabo.App.Core.User.Domain.Services;
+﻿using System;
+using Alabo.Data.People.Employes.Domain.Services;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Enums;
-using Alabo.Helpers;
-using System;
-using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.Reflections.Interfaces;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Address.Domain.Services;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Services;
+using Alabo.Framework.Core.Reflections.Interfaces;
+using Alabo.Helpers;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Core.User {
+namespace Alabo.Data.People.Users {
 
     /// <summary>
     /// 租户初始数据
@@ -49,7 +48,7 @@ namespace Alabo.App.Core.User {
             var openService = Ioc.Resolve<IOpenService>();
 
             var defaultPwd = "111111";
-            var defaultUser = new Users.Entities.User {
+            var defaultUser = new Alabo.Users.Entities.User {
                 Email = "admin@5ug.com",
                 Name = "老板",
                 Status = Status.Normal,
@@ -71,7 +70,7 @@ namespace Alabo.App.Core.User {
             }
 
             //add platform user
-            var planformUser = new Users.Entities.User {
+            var planformUser = new Alabo.Users.Entities.User {
                 Email = "planform@5ug.com",
                 Name = "平台",
                 Status = Status.Normal,

@@ -1,14 +1,9 @@
-using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
-using Alabo.App.Shop.Store.Domain.Entities;
+using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Shop.Store.Domain.Services {
+namespace Alabo.Data.People.Stores.Domain.Services {
 
     public class StoreService : ServiceBase<Entities.Store, ObjectId>, IStoreService {
 

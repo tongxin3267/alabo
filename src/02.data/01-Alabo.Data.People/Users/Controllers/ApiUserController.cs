@@ -1,46 +1,40 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Senparc.Weixin.WxOpen.AdvancedAPIs.Sns;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.ApiStore.CallBacks;
 using Alabo.App.Core.Themes.Extensions;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Core.User.ViewModels;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebApis.Dtos;
-using Alabo.Framework.Core.WebApis.Service;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Framework.Core.WebUis.Design.AutoPreviews;
-using Alabo.Framework.Core.WebUis.Models.Lists;
-using Alabo.Framework.Core.WebUis.Models.Previews;
+using Alabo.Data.People.Users.Dtos;
+using Alabo.Data.People.Users.ViewModels;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Address.Domain.Services;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Dtos;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.WebUis.Design.AutoPreviews;
+using Alabo.Framework.Core.WebUis.Models.Lists;
+using Alabo.Framework.Core.WebUis.Models.Previews;
 using Alabo.Mapping;
 using Alabo.Maps;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.UI;
+using User = Alabo.Users.Entities.User;
 using UserDetail = Alabo.Users.Entities.UserDetail;
 
-namespace Alabo.App.Core.User.Controllers {
+namespace Alabo.Data.People.Users.Controllers {
 
     /// <summary>
     ///     用户相关Api接口
     /// </summary>
     [ApiExceptionFilter]
     [Route("Api/User/[action]")]
-    public class ApiUserController : ApiBaseController<Users.Entities.User, long> {
+    public class ApiUserController : ApiBaseController<User, long> {
         //private readonly Alabo.App.Core.Api.Domain.Service.IApiService _ApiServer;
 
         /// <summary>

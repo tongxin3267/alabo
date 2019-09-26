@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Shop.Order.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.App.Shop.Product.Domain.Dtos;
+using Alabo.Data.People.Users.Dtos;
 
 namespace Alabo.App.Shop.Order.Domain.Dtos {
 

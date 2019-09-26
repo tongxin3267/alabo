@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
 using Alabo.Validations;
 
-namespace Alabo.App.Core.User.ViewModels {
+namespace Alabo.Data.People.Users.ViewModels {
 
     public class ViewUserTypeLogin {
 

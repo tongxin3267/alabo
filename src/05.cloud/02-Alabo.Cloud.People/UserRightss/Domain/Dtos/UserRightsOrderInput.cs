@@ -8,6 +8,7 @@ using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Market.UserRightss.Domain.Entities;
 using Alabo.App.Market.UserRightss.Domain.Enums;
+using Alabo.Data.People.Users.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Users.Entities;

@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Share.Kpi.Domain.CallBack;
 using Alabo.App.Share.Kpi.Domain.Repositories;
 using Alabo.App.Share.Kpi.ViewModels;
+using Alabo.Data.People.Teams.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;

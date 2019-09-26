@@ -1,7 +1,6 @@
 ﻿using Alabo.App.Core.Tasks.Domain.Entities;
 using Alabo.App.Core.Tasks.Domain.Entities.Extensions;
 using Alabo.App.Core.Tasks.Domain.Repositories;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;

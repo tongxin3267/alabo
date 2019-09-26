@@ -1,14 +1,14 @@
-using Alabo.App.Agent.Citys.Domain.Entities;
-using Alabo.App.Agent.Citys.Domain.Services;
-using Alabo.App.Core.Employes.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Dtos;
+using Alabo.Data.People.Cities.Domain.Entities;
+using Alabo.Data.People.Cities.Domain.Services;
+using Alabo.Data.People.Employes.Dtos;
+using Alabo.Data.People.Users.Dtos;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Agent.Citys.Controllers
+namespace Alabo.Data.People.Cities.Controllers
 {
 
     [ApiExceptionFilter]

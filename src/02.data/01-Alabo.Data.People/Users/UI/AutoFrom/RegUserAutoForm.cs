@@ -1,27 +1,21 @@
-﻿using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 using System.Threading.Tasks;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Core.User.ViewModels;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Helpers;
 using Alabo.Regexs;
-using Alabo.UI;
 using Alabo.Users.Entities;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.User.UI.AutoFrom {
+namespace Alabo.Data.People.Users.UI.AutoFrom {
 
     [Display(Name = "用户注册")]
     [ClassProperty(Name = "用户注册", Description = "用户注册")]
@@ -195,7 +189,7 @@ namespace Alabo.App.Core.User.UI.AutoFrom {
                 return ServiceResult.FailedWithMessage("请您务必输入【支付密码】6位,否则不能支付！");
             }
 
-            var user = new Users.Entities.User {
+            var user = new Alabo.Users.Entities.User {
                 Map = new UserMap(),
                 UserName = view.UserName.Trim(),
                 Name = view.Name,

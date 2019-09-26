@@ -2,7 +2,6 @@
 using Alabo.App.Core.Tasks;
 using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 
 namespace Alabo.App.Open.Tasks.Result {

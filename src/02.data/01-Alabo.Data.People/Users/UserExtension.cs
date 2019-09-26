@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Alabo.Extensions;
 
-namespace Alabo.App.Core.User {
+namespace Alabo.Data.People.Users {
 
     /// <summary>
     ///     用户扩展
@@ -13,12 +13,12 @@ namespace Alabo.App.Core.User {
         ///     获取Url参数的中的，当前登录用户
         /// </summary>
         /// <param name="obj">The object.</param>
-        public static Users.Entities.User ToUserObject(this object obj) {
+        public static Alabo.Users.Entities.User ToUserObject(this object obj) {
             var dic = obj.ToObject<Dictionary<string, string>>();
-            Users.Entities.User user = null;
+            Alabo.Users.Entities.User user = null;
             dic.TryGetValue("BasicUser", out var value);
             if (!value.IsNullOrEmpty()) {
-                user = value.ToObject<Users.Entities.User>();
+                user = value.ToObject<Alabo.Users.Entities.User>();
             }
 
             return user;

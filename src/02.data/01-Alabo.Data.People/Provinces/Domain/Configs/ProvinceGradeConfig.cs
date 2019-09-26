@@ -1,18 +1,18 @@
-﻿using Alabo.App.Core.User;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Reflection;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
+using Alabo.Data.People.Users;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Helpers;
 using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection;
 
-namespace Alabo.App.Core.UserType.Modules.Province
+namespace Alabo.Data.People.Provinces.Domain.Configs
 {
 
     /// <summary>

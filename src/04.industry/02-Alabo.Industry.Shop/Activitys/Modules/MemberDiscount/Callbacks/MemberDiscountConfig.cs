@@ -5,8 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
-
-using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.AutoConfigs;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;

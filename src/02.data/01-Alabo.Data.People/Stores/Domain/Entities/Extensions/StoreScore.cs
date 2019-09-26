@@ -1,6 +1,6 @@
 ﻿using Alabo.Domains.Entities.Extensions;
 
-namespace Alabo.App.Shop.Store.Domain.Entities.Extensions {
+namespace Alabo.Data.People.Stores.Domain.Entities.Extensions {
 
     /// <summary>
     ///     店铺评分

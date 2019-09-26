@@ -1,8 +1,8 @@
-using Alabo.App.Core.Employes.Domain.Dtos;
-using Alabo.App.Core.Employes.Domain.Entities;
-using Alabo.App.Core.Employes.Domain.Services;
-using Alabo.App.Core.User.Controllers;
-using Alabo.App.Core.User.Domain.Dtos;
+using Alabo.Data.People.Employes.Domain.Entities;
+using Alabo.Data.People.Employes.Domain.Services;
+using Alabo.Data.People.Employes.Dtos;
+using Alabo.Data.People.Users.Controllers;
+using Alabo.Data.People.Users.Dtos;
 using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
@@ -11,7 +11,7 @@ using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 using ApiResult = ZKCloud.Open.ApiBase.Models.ApiResult;
 
-namespace Alabo.App.Core.Employes.Controllers
+namespace Alabo.Data.People.Employes.Controllers
 {
 
     [ApiExceptionFilter]
@@ -22,7 +22,7 @@ namespace Alabo.App.Core.Employes.Controllers
         /// </summary>
 
         /// <summary>
-        ///     The »áÔ± manager
+        ///     The ï¿½ï¿½Ô± manager
         /// </summary>
 
         public ApiEmployeeController(
@@ -30,7 +30,7 @@ namespace Alabo.App.Core.Employes.Controllers
         }
 
         /// <summary>
-        /// Ô±¹¤µÇÂ¼
+        /// Ô±ï¿½ï¿½ï¿½ï¿½Â¼
         /// </summary>
         /// <returns></returns>
         [HttpPost]
@@ -45,7 +45,7 @@ namespace Alabo.App.Core.Employes.Controllers
         }
 
         /// <summary>
-        /// Ô±¹¤µÇÂ¼
+        /// Ô±ï¿½ï¿½ï¿½ï¿½Â¼
         /// </summary>
         /// <returns></returns>
         [HttpPost]

@@ -1,25 +1,23 @@
-﻿using Alabo.App.Agent.Citys.Domain.Entities;
-using Alabo.App.Agent.Citys.Domain.Services;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.Framework.Core.Enums.Enum;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using Alabo.Data.People.Cities.Domain.Entities;
+using Alabo.Data.People.Cities.Domain.Services;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
-using Alabo.Maps;
-using Alabo.UI;
-using Alabo.Web.Mvc.Attributes;
-using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Basic.Address.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Framework.Core.WebUis.Design.AutoTables;
+using Alabo.Maps;
+using Alabo.Web.Mvc.Attributes;
+using AutoMapper;
 
-namespace Alabo.App.Agent.Citys.Domain.Dtos {
+namespace Alabo.Data.People.Cities.Dtos {
 
     public class CityView : UIBase, IAutoForm, IAutoTable<CityView> {
         public string Id { get; set; }

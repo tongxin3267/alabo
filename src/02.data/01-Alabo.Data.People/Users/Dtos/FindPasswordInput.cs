@@ -1,13 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
+﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Regexs;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Alabo.App.Core.User.Domain.Dtos {
+namespace Alabo.Data.People.Users.Dtos {
 
     /// <summary>
     ///     找回密码

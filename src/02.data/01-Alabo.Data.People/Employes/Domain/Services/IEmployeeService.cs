@@ -1,12 +1,12 @@
-using MongoDB.Bson;
 using System;
-using Alabo.App.Core.Employes.Domain.Dtos;
-using Alabo.App.Core.Employes.Domain.Entities;
-using Alabo.App.Core.User.Domain.Dtos;
+using Alabo.Data.People.Employes.Domain.Entities;
+using Alabo.Data.People.Employes.Dtos;
+using Alabo.Data.People.Users.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Employes.Domain.Services {
+namespace Alabo.Data.People.Employes.Domain.Services {
 
     public interface IEmployeeService : IService<Employee, ObjectId> {
 

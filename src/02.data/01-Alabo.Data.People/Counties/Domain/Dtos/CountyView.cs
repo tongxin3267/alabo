@@ -1,18 +1,16 @@
-﻿using Alabo.App.Agent.County.Domain.Services;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.Framework.Core.Enums.Enum;
+﻿using System;
+using Alabo.Data.People.Counties.Domain.Services;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
-using Alabo.Maps;
-using Alabo.UI;
-using System;
-using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Basic.Address.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Maps;
 
-namespace Alabo.App.Agent.County.Domain.Dtos {
+namespace Alabo.Data.People.Counties.Domain.Dtos {
 
     public class CountyView : UIBase, IAutoForm {
         public string Id { get; set; }

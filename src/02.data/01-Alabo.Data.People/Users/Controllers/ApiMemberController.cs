@@ -1,26 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Senparc.Weixin.WxOpen.AdvancedAPIs.Sns;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.App.Core.ApiStore.CallBacks;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Domains.Base.Services;
+using Alabo.Data.People.Users.Dtos;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.Web.Mvc.Controllers;
-using UserDetail = Alabo.Users.Entities.UserDetail;
 
-namespace Alabo.App.Core.User.Controllers {
+namespace Alabo.Data.People.Users.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/Member/[action]")]

@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.App.Shop.Order.ViewModels;
 using Alabo.App.Shop.Product.Domain.CallBacks;
 using Alabo.Cloud.Shop.ShopSaleReport.Services;
+using Alabo.Data.People.Teams.Domain.Configs;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;

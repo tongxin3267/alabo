@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using Alabo.App.Core.Finance.Domain.Dtos.Account;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Offline.Product.Domain.Entities;
 using Alabo.App.Offline.RechargeAccount.Entities;
 using Alabo.App.Offline.RechargeAccount.Services;

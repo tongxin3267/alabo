@@ -1,33 +1,34 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Core.User.Domain.Dtos;
+using Alabo.Data.People.Users.Dtos;
 using Alabo.Domains.Repositories;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+using Alabo.Users.Entities;
 
-namespace Alabo.App.Core.User.Domain.Repositories {
+namespace Alabo.Data.People.Users.Domain.Repositories {
 
-    public interface IUserRepository : IRepository<Users.Entities.User, long> {
+    public interface IUserRepository : IRepository<User, long> {
 
-        Users.Entities.User UserTeam(long userId);
+        Alabo.Users.Entities.User UserTeam(long userId);
 
-        Users.Entities.User GetSingle(long userId);
+        Alabo.Users.Entities.User GetSingle(long userId);
 
-        Users.Entities.User GetSingle(string UserName);
+        Alabo.Users.Entities.User GetSingle(string UserName);
 
-        Users.Entities.User GetSingleByMail(string mail);
+        Alabo.Users.Entities.User GetSingleByMail(string mail);
 
-        Users.Entities.User GetSingleByMobile(string mobile);
+        Alabo.Users.Entities.User GetSingleByMobile(string mobile);
 
-        Users.Entities.User GetUserDetail(long userId);
+        Alabo.Users.Entities.User GetUserDetail(long userId);
 
-        Users.Entities.User GetUserDetail(string UserName);
+        Alabo.Users.Entities.User GetUserDetail(string UserName);
 
-        Users.Entities.User Add(Users.Entities.User User, List<MoneyTypeConfig> moneyTypes);
+        Alabo.Users.Entities.User Add(Alabo.Users.Entities.User User, List<MoneyTypeConfig> moneyTypes);
 
-        bool UpdateSingle(Users.Entities.User user);
+        bool UpdateSingle(Alabo.Users.Entities.User user);
 
         bool CheckUserExists(string UserName, string password, out long userId);
 
-        IList<Users.Entities.User> GetList(IList<long> userIds);
+        IList<Alabo.Users.Entities.User> GetList(IList<long> userIds);
 
         bool ExistsName(string name);
 
@@ -44,7 +45,7 @@ namespace Alabo.App.Core.User.Domain.Repositories {
         /// <returns></returns>
         bool Delete(long userId);
 
-        IList<Users.Entities.User> GetViewUserList(UserInput userInput, out long count);
+        IList<Alabo.Users.Entities.User> GetViewUserList(UserInput userInput, out long count);
 
         /// <summary>
         ///     会员删除时推荐关系修改

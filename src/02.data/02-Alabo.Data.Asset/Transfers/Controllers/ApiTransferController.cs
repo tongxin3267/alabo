@@ -8,8 +8,6 @@ using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.App.Core.Finance.Domain.Dtos.Transfer;
 using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.User;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebUis.Models.Lists;
 using Alabo.Domains.Enums;

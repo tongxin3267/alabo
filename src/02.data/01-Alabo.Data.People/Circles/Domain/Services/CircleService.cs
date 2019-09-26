@@ -1,18 +1,12 @@
-using System;
 using System.Collections.Generic;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using AutoMapper;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
+using Alabo.Data.People.Circles.Client;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
-using Alabo.App.Agent.Circle.Domain.Entities;
-using Alabo.App.Core.ApiStore.AMap.CircleMap;
+using Alabo.Domains.Services;
 using Alabo.Mapping;
+using MongoDB.Bson;
 
-namespace Alabo.App.Agent.Circle.Domain.Services {
+namespace Alabo.Data.People.Circles.Domain.Services {
 
     public class CircleService : ServiceBase<Entities.Circle, ObjectId>, ICircleService {
 

@@ -1,4 +1,4 @@
-﻿namespace Alabo.App.Core.User.Domain.Callbacks {
+﻿namespace Alabo.Data.People.Users.Dtos {
 
     public class ConfirmPayPassword {
         public string PayPassWord { get; set; }

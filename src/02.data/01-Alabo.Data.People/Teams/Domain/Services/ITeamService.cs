@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.Domains.Services;
 using Alabo.Users.Dtos;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Core.User.Domain.Services {
+namespace Alabo.Data.People.Teams.Domain.Services {
 
     public interface ITeamService : IService {
 
@@ -18,7 +17,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// <summary>
         ///     创世纪
         /// </summary>
-        IList<Users.Entities.User> GetTeamByGradeId(long userId, Guid gradeId, bool equalUserGradeId = false);
+        IList<Alabo.Users.Entities.User> GetTeamByGradeId(long userId, Guid gradeId, bool equalUserGradeId = false);
 
         /// <summary>
         ///     获取用户的上级用户，返回用户Id列表
@@ -28,7 +27,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// <param name="userId">The user identifier.</param>
         /// <param name="gradeId"></param>
         /// <param name="equalUserGradeId">用户的等级相同时，是否上级用户是否为团队：比如A->B，A,B都是业务员。如果false：则A不是B的团队</param>
-        IList<Users.Entities.User> GetParentTeamByGradeId(long userId, Guid gradeId, bool equalUserGradeId = false);
+        IList<Alabo.Users.Entities.User> GetParentTeamByGradeId(long userId, Guid gradeId, bool equalUserGradeId = false);
 
         /// <summary>
         ///     获取推荐关系图
@@ -43,14 +42,14 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// 获取用户的上级用户
         /// </summary>
         /// <param name="userId">用户Id</param>
-        IList<Users.Entities.User> GetParentUsers(long userId);
+        IList<Alabo.Users.Entities.User> GetParentUsers(long userId);
 
         /// <summary>
         ///     获取团队用户
         ///     根据UserMap.childNode字段获取
         /// </summary>
         /// <param name="userId"></param>
-        IEnumerable<Users.Entities.User> GetChildUsers(long userId);
+        IEnumerable<Alabo.Users.Entities.User> GetChildUsers(long userId);
 
         /// <summary>
         /// 根据下面的会员，更新团队信息
@@ -63,6 +62,6 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     根据UserMap.childNode字段获取
         /// </summary>
         /// <param name="userMap"></param>
-        IEnumerable<Users.Entities.User> GetTeamUser(UserMap userMap);
+        IEnumerable<Alabo.Users.Entities.User> GetTeamUser(UserMap userMap);
     }
 }

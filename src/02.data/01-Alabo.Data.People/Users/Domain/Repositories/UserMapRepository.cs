@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Dtos;
+using Alabo.Data.People.Teams.Domain.Configs;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
@@ -15,7 +14,7 @@ using Alabo.Users.Dtos;
 using Alabo.Users.Entities;
 using Convert = System.Convert;
 
-namespace Alabo.App.Core.User.Domain.Repositories {
+namespace Alabo.Data.People.Users.Domain.Repositories {
 
     public class UserMapRepository : RepositoryEfCore<UserMap, long>, IUserMapRepository {
 

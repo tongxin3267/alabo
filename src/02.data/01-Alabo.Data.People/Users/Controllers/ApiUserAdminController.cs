@@ -1,17 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Core.User.ViewModels;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Data.People.Users.Dtos;
+using Alabo.Data.People.Users.ViewModels;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
@@ -21,9 +13,14 @@ using Alabo.Framework.Basic.Address.Dtos;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Framework.Basic.Grades.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Framework.Core.WebApis.Service;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.User.Controllers {
+namespace Alabo.Data.People.Users.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/UserAdmin/[action]")]

@@ -1,18 +1,14 @@
 using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
-using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Repositories;
-using Alabo.App.Agent.Citys.Domain.Entities;
-using Alabo.App.Core.User.Domain.Services;
+using Alabo.Data.People.Cities.Domain.Entities;
 using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
+using Alabo.Domains.Repositories;
+using Alabo.Domains.Services;
 using Alabo.Users.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Agent.Citys.Domain.Services
+namespace Alabo.Data.People.Cities.Domain.Services
 {
 
     public class CityService : ServiceBase<City, ObjectId>, ICityService

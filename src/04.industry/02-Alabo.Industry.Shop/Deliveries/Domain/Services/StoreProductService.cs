@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Castle.Components.DictionaryAdapter;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Shop.Category.Domain.Entities;
 using Alabo.App.Shop.Category.Domain.Services;
 using Alabo.App.Shop.Product.Domain.CallBacks;

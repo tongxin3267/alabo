@@ -1,11 +1,7 @@
-using System;
-using System.Linq;
-using MongoDB.Bson;
 using Alabo.Domains.Services;
-using Alabo.App.Agent.County.Domain.Entities;
-using Alabo.Domains.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Agent.County.Domain.Services {
+namespace Alabo.Data.People.Counties.Domain.Services {
 
     public interface ICountyService : IService<Domain.Entities.County, ObjectId> {
     }

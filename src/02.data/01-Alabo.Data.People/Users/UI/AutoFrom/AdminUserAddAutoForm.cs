@@ -1,28 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Services;
+using Alabo.Data.People.Users.Domain.Configs;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Services;
-using Alabo.Helpers;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Randoms;
 using Alabo.Regexs;
-using Alabo.UI;
 using Alabo.Users.Entities;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.User.UI.AutoFrom {
+namespace Alabo.Data.People.Users.UI.AutoFrom {
 
     [Display(Name = "用户注册")]
     [ClassProperty(Name = "用户注册", Description = "用户注册")]
@@ -134,7 +129,7 @@ namespace Alabo.App.Core.User.UI.AutoFrom {
         public ServiceResult Save(object model, AutoBaseModel autoModel) {
             var view = (AdminUserAddAutoForm)model;
 
-            var user = new Users.Entities.User {
+            var user = new Alabo.Users.Entities.User {
                 Map = new UserMap(),
                 UserName = view.UserName.Trim(),
                 Name = view.Name,

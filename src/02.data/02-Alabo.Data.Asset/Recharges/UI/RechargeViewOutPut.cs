@@ -3,7 +3,6 @@ using System.Linq;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoPreviews;

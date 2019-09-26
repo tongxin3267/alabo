@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Finance.Domain.Dtos.Bill;
 using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;

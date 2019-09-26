@@ -1,9 +1,8 @@
 using System;
 using System.Linq;
 using Xunit;
-using Alabo.App.Agent.Citys.Domain.CallBacks;
-using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.UserType.Modules.City;
+using Alabo.Data.People.Cities.Domain.CallBacks;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;

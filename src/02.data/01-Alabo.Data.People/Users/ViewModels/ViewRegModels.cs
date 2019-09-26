@@ -1,22 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Data.People.Users.Domain.Configs;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Services;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Randoms;
 using Alabo.Regexs;
-using Alabo.UI;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.AspNetCore.Mvc;
 using Random = Alabo.Randoms.Random;
 
-namespace Alabo.App.Core.User.ViewModels {
+namespace Alabo.Data.People.Users.ViewModels {
 
     /// <summary>
     ///     Class ViewRegModels.

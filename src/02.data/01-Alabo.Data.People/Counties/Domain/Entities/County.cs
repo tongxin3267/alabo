@@ -1,15 +1,15 @@
-﻿using Alabo.App.Agent.Citys.Domain.CallBacks;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.Web.Mvc.Attributes;
-using MongoDB.Bson.Serialization.Attributes;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.Data.People.Cities.Domain.CallBacks;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Validations;
+using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Agent.County.Domain.Entities {
+namespace Alabo.Data.People.Counties.Domain.Entities {
 
     [ClassProperty(Name = "区县合伙人")]
     [BsonIgnoreExtraElements]

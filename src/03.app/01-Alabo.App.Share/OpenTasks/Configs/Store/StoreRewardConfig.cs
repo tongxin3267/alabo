@@ -1,9 +1,7 @@
 ﻿using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Open.Tasks.Base;
 using Alabo.App.Open.Tasks.Modules;
-using Alabo.App.Shop.Store.Domain.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;

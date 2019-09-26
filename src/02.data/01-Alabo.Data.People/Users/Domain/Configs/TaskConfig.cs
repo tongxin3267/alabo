@@ -1,26 +1,24 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Helpers;
 using Alabo.Reflections;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Core.User.Domain.Callbacks {
+namespace Alabo.Data.People.Users.Domain.Configs {
 
     /// <summary>
     ///     任务配置

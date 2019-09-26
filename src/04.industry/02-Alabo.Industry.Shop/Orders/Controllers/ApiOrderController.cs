@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-
-using Alabo.App.Core.User;
 using Alabo.App.Shop.Order.Domain.Dtos;
 using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.App.Shop.Order.Domain.Repositories;
@@ -23,7 +21,6 @@ using Alabo.App.Shop.Order.ViewModels;
 using Alabo.App.Shop.Order.Dtos;
 using Alabo.Helpers;
 using System;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Core.WebUis.Domain.Services;
 using Alabo.Domains.Base.Services;

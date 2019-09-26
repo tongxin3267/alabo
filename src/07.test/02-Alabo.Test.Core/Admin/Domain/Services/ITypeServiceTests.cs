@@ -1,13 +1,12 @@
 using System;
 using System.Linq;
 using Xunit;
-using Alabo.App.Agent.Citys.Domain.CallBacks;
 using Alabo.App.Cms.Articles.Controllers;
 using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Market.SmallTargets.Controllers;
 using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.AutoConfigs;
+using Alabo.Data.People.Cities.Domain.CallBacks;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.Reflections.Services;
 using Alabo.Framework.Core.WebApis.Controller;

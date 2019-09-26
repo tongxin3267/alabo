@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Market.FacePay.Domain.Services;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebApis.Service;

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.User.ViewModels {
+namespace Alabo.Data.People.Users.ViewModels {
 
     public class ViewUserAuthorization {
 

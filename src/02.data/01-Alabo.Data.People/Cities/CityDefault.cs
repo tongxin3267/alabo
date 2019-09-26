@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Alabo.App.Agent.Citys.Domain.Entities;
-using Alabo.App.Agent.Citys.Domain.Services;
-using Alabo.App.Core.Employes.Domain.Services;
-using Alabo.App.Core.User.Domain.Services;
+﻿using Alabo.Data.People.Cities.Domain.Entities;
+using Alabo.Data.People.Cities.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Core.Reflections.Interfaces;
 using Alabo.Helpers;
 
-namespace Alabo.App.Agent.Citys {
+namespace Alabo.Data.People.Cities {
 
     public class CityDefault : IDefaultInit {
         public bool IsTenant => false;

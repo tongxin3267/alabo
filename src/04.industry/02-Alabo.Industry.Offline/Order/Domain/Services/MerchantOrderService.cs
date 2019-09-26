@@ -1,6 +1,4 @@
 using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Offline.Merchants.Domain.Services;
 using Alabo.App.Offline.Order.Domain.Dtos;
 using Alabo.App.Offline.Order.Domain.Entities;
@@ -23,6 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Data.People.Users.Dtos;
 using Alabo.Framework.Core.WebApis.Service;
 
 namespace Alabo.App.Offline.Order.Domain.Services {

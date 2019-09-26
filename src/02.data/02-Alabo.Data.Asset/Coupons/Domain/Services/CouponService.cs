@@ -8,7 +8,6 @@ using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.App.Shop.Coupons.Domain.Entities;
 using Alabo.Domains.Entities;
-using Alabo.App.Shop.Store.Domain.Services;
 using Alabo.App.Shop.Coupons.Domain.Enums;
 using System.Collections.Generic;
 

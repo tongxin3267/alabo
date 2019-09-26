@@ -1,6 +1,5 @@
 ﻿//using System;using Alabo.Domains.Repositories.EFCore;using Alabo.Domains.Repositories.Model;
 
-using Alabo.App.Core.Employes.Domain.Entities;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Query;
 using Alabo.Domains.Repositories.Model;
@@ -12,6 +11,7 @@ using Alabo.Test.Generation.CodeTemplate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Data.People.Employes.Domain.Entities;
 using Alabo.Framework.Core.Reflections.Services;
 using Xunit;
 

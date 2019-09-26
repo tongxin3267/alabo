@@ -1,25 +1,21 @@
-﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
+using Alabo.Data.People.Circles.Domain.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Address.Domain.Services;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Mapping;
 using Alabo.Maps;
-using Alabo.UI;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
-using ICircleService = Alabo.App.Agent.Circle.Domain.Services.ICircleService;
+using ICircleService = Alabo.Data.People.Circles.Domain.Services.ICircleService;
 
-namespace Alabo.App.Agent.Circle.Domain.Dtos {
+namespace Alabo.Data.People.Circles.Dtos {
 
     public class CircleView : UIBase, IAutoForm, IAutoTable {
         public string Id { get; set; }
@@ -87,7 +83,7 @@ namespace Alabo.App.Agent.Circle.Domain.Dtos {
                 return ToAutoForm(model);
             }
 
-            return ToAutoForm(new Entities.Circle());
+            return ToAutoForm(new Circle());
         }
 
         public PageResult<CircleView> PageTable(object query, AutoBaseModel autoModel) {
@@ -109,7 +105,7 @@ namespace Alabo.App.Agent.Circle.Domain.Dtos {
 
         public ServiceResult Save(object model, AutoBaseModel autoModel) {
             var circleView = (CircleView)model;
-            var view = circleView.MapTo<Entities.Circle>();
+            var view = circleView.MapTo<Circle>();
             view.Id = circleView.Id.ToObjectId();
             view.RegionName = Resolve<IRegionService>().GetRegionNameById(view.RegionId);
             var result = Resolve<ICircleService>().AddOrUpdate(view);

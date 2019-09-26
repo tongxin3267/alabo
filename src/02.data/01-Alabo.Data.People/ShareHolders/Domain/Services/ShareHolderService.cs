@@ -1,14 +1,10 @@
-using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
+using Alabo.Data.People.ShareHolders.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
-using Alabo.App.Agent.ShareHolders.Domain.Entities;
+using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Agent.ShareHolders.Domain.Services {
+namespace Alabo.Data.People.ShareHolders.Domain.Services {
 
     public class ShareHolderService : ServiceBase<ShareHolder, ObjectId>, IShareHolderService {
 

@@ -1,14 +1,10 @@
-using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
+using Alabo.Data.People.Internals.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
-using Alabo.App.Agent.Internal.Domain.Entities;
+using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Agent.Internal.Domain.Services {
+namespace Alabo.Data.People.Internals.Domain.Services {
 
     public class ParentInternalService : ServiceBase<ParentInternal, ObjectId>, IParentInternalService {
 

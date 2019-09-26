@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.Employes.Domain.Services;
-using Alabo.App.Core.User;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Repositories;
-using Alabo.App.Core.User.ViewModels;
+using Alabo.Data.People.Employes.Domain.Services;
+using Alabo.Data.People.Users.Domain.Repositories;
+using Alabo.Data.People.Users.Dtos;
+using Alabo.Data.People.Users.ViewModels;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;

@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.User.Domain.Dtos {
+namespace Alabo.Data.People.Users.Dtos {
 
     public class MpLoginInput {
         public string code { get; set; }

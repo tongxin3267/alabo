@@ -2,8 +2,6 @@
 using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Open.Tasks.Base;
 using Alabo.App.Open.Tasks.Modules;
 using Alabo.Framework.Core.Enums.Enum;
@@ -15,7 +13,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using ZKCloud.Open.ApiBase.Models;
-using ICityService = Alabo.App.Agent.Citys.Domain.Services.ICityService;
+using ICityService = Alabo.Data.People.Cities.Domain.Services.ICityService;
 
 namespace Alabo.App.Open.Tasks.Configs.Area {
 

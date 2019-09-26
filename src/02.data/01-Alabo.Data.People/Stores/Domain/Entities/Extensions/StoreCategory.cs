@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Alabo.App.Shop.Store.Domain.Entities.Extensions
+namespace Alabo.Data.People.Stores.Domain.Entities.Extensions
 {
     /// <summary>
     /// 店铺分类

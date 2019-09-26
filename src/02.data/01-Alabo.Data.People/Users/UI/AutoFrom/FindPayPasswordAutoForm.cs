@@ -1,23 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Data.People.Users.Dtos;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Mapping;
 using Alabo.Regexs;
-using Alabo.UI;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.User.UI.AutoFrom {
+namespace Alabo.Data.People.Users.UI.AutoFrom {
 
     [ClassProperty(Name = "找回支付密码", Description = "根据手机号码，手机验证码，找回支付密码")]
     public class FindPayPasswordAutoForm : UIBase, IAutoForm {

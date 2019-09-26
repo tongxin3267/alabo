@@ -1,25 +1,23 @@
-﻿using Alabo.App.Agent.Internal.Domain.CallBacks;
-using Alabo.App.Agent.Internal.Domain.Services;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.Extensions;
-using Alabo.Mapping;
-using Alabo.UI;
-using Alabo.Web.Mvc.Attributes;
-using AutoMapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Alabo.Data.People.Internals.Domain.CallBacks;
+using Alabo.Data.People.Internals.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
+using Alabo.Extensions;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Framework.Core.WebUis.Design.AutoTables;
+using Alabo.Mapping;
+using Alabo.Web.Mvc.Attributes;
+using AutoMapper;
 
-namespace Alabo.App.Agent.Internal.Domain.Dtos {
+namespace Alabo.Data.People.Internals.Dtos {
 
     public class InternalView : UIBase, IAutoForm, IAutoTable {
 

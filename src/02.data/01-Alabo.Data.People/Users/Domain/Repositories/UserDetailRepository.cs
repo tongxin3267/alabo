@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Data.People.Users.Dtos;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
@@ -10,7 +9,7 @@ using Alabo.Extensions;
 using Alabo.Users.Entities;
 using Alabo.Users.Enum;
 
-namespace Alabo.App.Core.User.Domain.Repositories {
+namespace Alabo.Data.People.Users.Domain.Repositories {
 
     internal class UserDetailRepository : RepositoryEfCore<UserDetail, long>, IUserDetailRepository {
 

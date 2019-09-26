@@ -1,4 +1,4 @@
-﻿namespace Alabo.App.Core.User.ViewModels {
+﻿namespace Alabo.Data.People.Users.ViewModels {
 
     public class ViewHomeUserAddress {
     }

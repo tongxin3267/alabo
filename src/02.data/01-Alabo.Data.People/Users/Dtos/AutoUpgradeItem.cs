@@ -1,12 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.User.Domain.Callbacks {
+namespace Alabo.Data.People.Users.Dtos {
 
     /// <summary>
     ///     会员自动升级配置项

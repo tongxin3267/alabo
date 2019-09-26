@@ -1,11 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Query.Dto;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Mapping.Dynamic;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.User.Domain.Dtos {
+namespace Alabo.Data.People.Users.Dtos {
 
     /// <summary>
     ///     用户的输出情况

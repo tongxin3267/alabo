@@ -2,8 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.User.Domain.Repositories;
 using Alabo.App.Shop.Category.Domain.Entities;
+using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;

@@ -1,5 +1,4 @@
 ﻿using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Shop.Activitys.Domain.Entities;
 using Alabo.App.Shop.Activitys.Domain.Entities.Extension;
 using Alabo.App.Shop.Activitys.Domain.Enum;

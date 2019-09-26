@@ -1,10 +1,10 @@
-﻿using Alabo.AutoConfigs;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.AutoConfigs;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.App.Agent.ShareHolders.CallBacks
+namespace Alabo.Data.People.ShareHolders.Configs
 {
 
     /// <summary>

@@ -1,24 +1,23 @@
-using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.Employes.Domain.Dtos;
-using Alabo.App.Core.Employes.Domain.Entities;
 using Alabo.App.Core.Themes.Domain.Entities;
 using Alabo.App.Core.Themes.Domain.Enums;
 using Alabo.App.Core.Themes.Domain.Services;
 using Alabo.App.Core.Themes.Dtos;
-using Alabo.App.Core.User.Domain.Services;
+using Alabo.Data.People.Employes.Domain.Entities;
+using Alabo.Data.People.Employes.Dtos;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Maps;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Employes.Domain.Services {
+namespace Alabo.Data.People.Employes.Domain.Services {
 
     public class PostRoleService : ServiceBase<PostRole, ObjectId>, IPostRoleService {
 

@@ -1,14 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Users.Entities;
 using Alabo.Users.Enum;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.User.ViewModels {
+namespace Alabo.Data.People.Users.ViewModels {
 
     /// <summary>
     ///     后台用户编辑视图
@@ -34,7 +33,7 @@ namespace Alabo.App.Core.User.ViewModels {
         /// <summary>
         ///     Gets or sets the 会员.
         /// </summary>
-        public Users.Entities.User User { get; set; }
+        public Alabo.Users.Entities.User User { get; set; }
 
         /// <summary>
         ///     Gets or sets the 会员 detail.
@@ -82,7 +81,7 @@ namespace Alabo.App.Core.User.ViewModels {
         /// <summary>
         ///     Gets or sets the parent.
         /// </summary>
-        public Users.Entities.User Parent { get; set; }
+        public Alabo.Users.Entities.User Parent { get; set; }
 
         /// <summary>
         ///     所属区域

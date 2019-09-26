@@ -1,11 +1,10 @@
-using Microsoft.AspNetCore.Mvc;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Users.Entities;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Alabo.App.Core.User.Controllers {
+namespace Alabo.Data.People.Users.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/UserMap/[action]")]

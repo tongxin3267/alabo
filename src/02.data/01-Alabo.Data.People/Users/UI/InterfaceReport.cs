@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Core.User.Domain.Repositories;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis.Design.AutoReports;
+using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Services.Report;
 using Alabo.Domains.Services.Report.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis.Design.AutoReports;
 using Alabo.Helpers;
-using Alabo.UI;
 
-namespace Alabo.App.Core.User.UI {
+namespace Alabo.Data.People.Users.UI {
 
     public class InterfaceReport : IAutoReport {
 

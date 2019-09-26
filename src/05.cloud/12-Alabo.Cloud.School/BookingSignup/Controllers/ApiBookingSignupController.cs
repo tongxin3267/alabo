@@ -4,7 +4,6 @@ using Alabo.App.Core.ApiStore.CallBacks;
 using Alabo.App.Core.Finance.Domain.Dtos.Pay;
 using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Market.BookingSignup.Domain.Entities;
 using Alabo.App.Market.BookingSignup.Domain.Services;
 using Alabo.App.Market.BookingSignup.Dtos;

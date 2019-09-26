@@ -1,17 +1,16 @@
-﻿using Alabo.App.Agent.Citys.Domain.Services;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using Alabo.Data.People.Cities.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
-using Alabo.UI;
-using Alabo.Web.Mvc.Attributes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoTables;
+using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Agent.Citys.Domain.Dtos {
+namespace Alabo.Data.People.Cities.UI {
 
     public class CityAutoTable : UIBase, IAutoTable<CityAutoTable> {
         #region

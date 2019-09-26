@@ -1,13 +1,13 @@
-﻿using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.Web.Mvc.Attributes;
-using MongoDB.Bson.Serialization.Attributes;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Agent.Internal.Domain.Entities {
+namespace Alabo.Data.People.Internals.Domain.Entities {
 
     [ClassProperty(Name = "内部合伙人")]
     [BsonIgnoreExtraElements]

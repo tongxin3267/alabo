@@ -1,18 +1,14 @@
-﻿using Alabo.App.Shop.Store.Domain.Entities.Extensions;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Datas.Ef.SqlServer;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.Tenants;
-using Alabo.Web.Mvc.Attributes;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.Data.People.Stores.Domain.Entities.Extensions;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Validations;
+using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Store.Domain.Entities {
+namespace Alabo.Data.People.Stores.Domain.Entities {
 
     /// <summary>
     ///     线上商城店铺

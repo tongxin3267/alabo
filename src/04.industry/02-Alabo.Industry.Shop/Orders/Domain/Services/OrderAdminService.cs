@@ -2,8 +2,6 @@
 using Alabo.App.Core.Finance.Domain.Entities.Extension;
 using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Shop.Order.Domain.Dtos;
 using Alabo.App.Shop.Order.Domain.Entities.Extensions;
 using Alabo.App.Shop.Order.Domain.Enums;

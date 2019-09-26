@@ -1,10 +1,8 @@
-using System;using Alabo.Domains.Repositories.EFCore;using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
+using Alabo.Data.People.ShareHolders.Domain.Entities;
 using Alabo.Domains.Repositories;
-using Alabo.App.Agent.ShareHolders.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Agent.ShareHolders.Domain.Repositories {
+namespace Alabo.Data.People.ShareHolders.Domain.Repositories {
 	public interface IShareHolderRepository : IRepository<ShareHolder, ObjectId>  {
 	}
 }

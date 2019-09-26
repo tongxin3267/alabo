@@ -1,15 +1,13 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using Alabo.App.Agent.ShareHolders.CallBacks;
+using Alabo.Data.People.ShareHolders.Configs;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Agent.ShareHolders.Domain.Entities {
+namespace Alabo.Data.People.ShareHolders.Domain.Entities {
 
     [ClassProperty(Name = "股东")]
     [BsonIgnoreExtraElements]

@@ -1,18 +1,17 @@
-﻿using Alabo.App.Agent.Province.Domain.Services;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.Framework.Core.Enums.Enum;
+﻿using System;
+using Alabo.Data.People.Provinces.Domain.Entities;
+using Alabo.Data.People.Provinces.Domain.Services;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
-using Alabo.Maps;
-using Alabo.UI;
-using System;
-using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Basic.Address.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Maps;
 
-namespace Alabo.App.Agent.Province.Domain.Dtos {
+namespace Alabo.Data.People.Provinces.Dtos {
 
     public class ProvinceView : UIBase, IAutoForm {
         public string Id { get; set; }
@@ -80,14 +79,14 @@ namespace Alabo.App.Agent.Province.Domain.Dtos {
                 return ToAutoForm(model);
             }
 
-            return ToAutoForm(new Entities.Province());
+            return ToAutoForm(new Province());
         }
 
         public ServiceResult Save(object model, AutoBaseModel autoModel) {
             var city = (ProvinceView)model;
             var user = Resolve<IUserService>().GetSingle(u => u.UserName == city.UserName);
             var parentUser = Resolve<IUserService>().GetSingle(u => u.UserName == city.ParentUserName);
-            var view = city.MapTo<Entities.Province>();
+            var view = city.MapTo<Province>();
             if (user == null) {
                 return ServiceResult.FailedWithMessage("所属用户名不存在");
             }

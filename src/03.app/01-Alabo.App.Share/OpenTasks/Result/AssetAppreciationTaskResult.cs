@@ -4,9 +4,9 @@ using System.Data.Common;
 using System.Linq;
 using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Core.User.Domain.Repositories;
 using Alabo.App.Open.Tasks.Base;
 using Alabo.App.Open.Tasks.Parameter;
+using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 
 namespace Alabo.App.Open.Tasks.Result {

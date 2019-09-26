@@ -1,6 +1,5 @@
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Offline.RechargeAccount.Domain.Callbacks;
 using Alabo.App.Offline.RechargeAccount.Domain.Dtos;
 using Alabo.App.Offline.RechargeAccount.Entities;

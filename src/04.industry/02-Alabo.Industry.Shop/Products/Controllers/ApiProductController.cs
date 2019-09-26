@@ -1,4 +1,3 @@
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Shop.Activitys.Modules.MemberDiscount.Callbacks;
 using Alabo.App.Shop.Product.DiyModels;
 using Alabo.App.Shop.Product.Domain.CallBacks;

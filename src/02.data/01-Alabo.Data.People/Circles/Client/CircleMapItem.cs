@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.App.Core.ApiStore.AMap.CircleMap {
+namespace Alabo.Data.People.Circles.Client {
 
     public class CircleMapItem {
         public string Name { get; set; }

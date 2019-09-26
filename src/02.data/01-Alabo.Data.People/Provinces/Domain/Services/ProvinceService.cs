@@ -1,14 +1,9 @@
-using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
-using Alabo.App.Agent.Province.Domain.Entities;
+using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Agent.Province.Domain.Services {
+namespace Alabo.Data.People.Provinces.Domain.Services {
 
     public class ProvinceService : ServiceBase<Entities.Province, ObjectId>, IProvinceService {
 

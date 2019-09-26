@@ -1,11 +1,8 @@
-using System;
-using System.Linq;
-using MongoDB.Bson;
+using Alabo.Data.People.ShareHolders.Domain.Entities;
 using Alabo.Domains.Services;
-using Alabo.App.Agent.ShareHolders.Domain.Entities;
-using Alabo.Domains.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Agent.ShareHolders.Domain.Services {
+namespace Alabo.Data.People.ShareHolders.Domain.Services {
 	public interface IShareHolderService : IService<ShareHolder, ObjectId>  {
 	}
 	}

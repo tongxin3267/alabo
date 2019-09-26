@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.Domains.Repositories;
+﻿using Alabo.Domains.Repositories;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Core.User.Domain.Repositories {
+namespace Alabo.Data.People.Users.Domain.Repositories {
 
     public interface IUserMapRepository : IRepository<UserMap, long> {
 

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-
-using Alabo.App.Core.User;
 using Alabo.App.Shop.Order.Domain.Dtos;
 using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.App.Shop.Order.Domain.Services;
@@ -14,7 +12,6 @@ using ZKCloud.Open.ApiBase.Configuration;
 using Alabo.RestfulApi;
 using ZKCloud.Open.ApiBase.Models;
 using Alabo.Domains.Query.Dto;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.Mapping;
 using Alabo.App.Core.Finance.Domain.Dtos.Pay;
@@ -23,7 +20,6 @@ using Alabo.Helpers;
 using Alabo.App.Shop.Order.Domain.Entities.Extensions;
 using Alabo.App.Shop.Order.ViewModels;
 using Alabo.App.Shop.AfterSale.Domain.Services;
-using Alabo.App.Core.Employes.Domain.Services;
 using Alabo.App.Shop.Store.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 

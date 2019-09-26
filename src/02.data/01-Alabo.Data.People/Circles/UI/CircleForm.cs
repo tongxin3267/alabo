@@ -1,19 +1,18 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.Data.People.Circles.Domain.Entities;
+using Alabo.Data.People.Circles.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.Mapping;
-using Alabo.UI;
-using Alabo.Web.Mvc.Attributes;
-using Alabo.App.Agent.Circle.Domain.Services;
-using Alabo.App.Agent.Circle.Domain.Entities;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Mapping;
 using Alabo.Validations;
+using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Framework.Basic.Relations.Domain.Entities {
+namespace Alabo.Data.People.Circles.UI {
 
     /// <summary>
     ///     商圈

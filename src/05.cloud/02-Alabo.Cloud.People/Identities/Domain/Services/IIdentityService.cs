@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.ViewModels;
+using Alabo.Data.People.Users.ViewModels;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 

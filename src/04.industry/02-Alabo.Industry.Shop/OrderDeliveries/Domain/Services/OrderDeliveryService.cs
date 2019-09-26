@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Shop.Order.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Repositories;
 using Alabo.App.Shop.Order.ViewModels;

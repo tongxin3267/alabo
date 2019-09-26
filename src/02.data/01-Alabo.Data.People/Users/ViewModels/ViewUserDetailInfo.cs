@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Core.Enums.Enum;
 
-namespace Alabo.App.Core.User.ViewModels {
+namespace Alabo.Data.People.Users.ViewModels {
 
     /// <summary>
     ///     会员管理，账户信息

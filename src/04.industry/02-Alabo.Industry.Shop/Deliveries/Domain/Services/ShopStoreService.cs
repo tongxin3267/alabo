@@ -1,5 +1,4 @@
-﻿using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Shop.Activitys.Modules.GroupBuy.Model;
+﻿using Alabo.App.Shop.Activitys.Modules.GroupBuy.Model;
 using Alabo.App.Shop.Order.Domain.Dtos;
 using Alabo.App.Shop.Product.Domain.Dtos;
 using Alabo.App.Shop.Product.Domain.Repositories;

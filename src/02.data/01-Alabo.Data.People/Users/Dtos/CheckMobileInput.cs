@@ -1,4 +1,4 @@
-﻿namespace Alabo.App.Core.User.Domain.Dtos {
+﻿namespace Alabo.Data.People.Users.Dtos {
 
     /// <summary>
     /// 检测手机号码的输入

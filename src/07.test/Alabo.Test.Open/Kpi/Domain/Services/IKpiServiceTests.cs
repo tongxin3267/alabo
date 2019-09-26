@@ -1,4 +1,3 @@
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Share.Kpi.Domain.Services;
 using Alabo.Domains.Enums;
 using Alabo.Test.Base.Core;

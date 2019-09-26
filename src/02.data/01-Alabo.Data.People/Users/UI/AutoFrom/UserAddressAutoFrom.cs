@@ -1,28 +1,26 @@
-﻿using MongoDB.Bson;
-using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Address.Domain.Entities;
 using Alabo.Framework.Basic.Address.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Helpers;
 using Alabo.Maps;
 using Alabo.Regexs;
 using Alabo.UI;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Core.User.UI.AutoFrom {
+namespace Alabo.Data.People.Users.UI.AutoFrom {
 
     /// <summary>
     ///     用户地址

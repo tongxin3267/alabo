@@ -1,5 +1,5 @@
 ﻿using System;
-using Alabo.App.Core.User.Domain.Repositories;
+using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;

@@ -1,17 +1,12 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.UI;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
-using ICircleService = Alabo.App.Agent.Circle.Domain.Services.ICircleService;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Agent.Circle.Domain.Entities {
+namespace Alabo.Data.People.Circles.Domain.Entities {
 
     [ClassProperty(Name = "商圈")]
     [BsonIgnoreExtraElements]

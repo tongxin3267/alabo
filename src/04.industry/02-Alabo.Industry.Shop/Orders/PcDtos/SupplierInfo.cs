@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using AutoMapper;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Shop.Store.Domain.Entities.Extensions;
 using Alabo.App.Shop.Store.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;

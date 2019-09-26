@@ -11,7 +11,7 @@ using Alabo.App.Core.Tasks.Domain.Repositories;
 using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Core.User.Domain.Repositories;
+using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Extensions;
 using Alabo.Helpers;

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
+using Alabo.Data.People.Users.ViewModels;
 using Xunit;
-using Alabo.App.Core.User.ViewModels;
 using Alabo.Test.Base.Core.Model;
 
 namespace Alabo.Test.Core.User.Controllers

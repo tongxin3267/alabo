@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 using Alabo.Framework.Core.WebApis.Filter;
 
 using MongoDB.Bson;
-using Alabo.App.Core.User;
 using Alabo.RestfulApi;
 using ZKCloud.Open.ApiBase.Configuration;
 using Alabo.Domains.Services;
@@ -51,7 +50,7 @@ namespace Alabo.Data.Things.Goodss.Controllers {
                 return ApiResult.Failure(string.Empty, this.FormInvalidReason());
             }
 
-            return ApiResult.Success("±£´æ³É¹¦");
+            return ApiResult.Success("ï¿½ï¿½ï¿½ï¿½É¹ï¿½");
         }
     }
 }

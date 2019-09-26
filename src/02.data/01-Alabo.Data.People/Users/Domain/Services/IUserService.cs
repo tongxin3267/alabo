@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.ViewModels;
+using Alabo.Data.People.Users.Dtos;
+using Alabo.Data.People.Users.ViewModels;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Users.Entities;

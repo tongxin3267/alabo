@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Entities;
+using Alabo.Data.People.Users.Dtos;
 using Alabo.Domains.Attributes;
 using Alabo.Domains.Services;
 

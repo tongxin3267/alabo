@@ -1,7 +1,7 @@
 ﻿using System;
 using Alabo.Domains.Query.Dto;
 
-namespace Alabo.App.Core.User.Domain.Dtos {
+namespace Alabo.Data.People.Users.Dtos {
 
     public class UserApiInput : ApiInputDto {
         public Guid GradeId { get; set; } = Guid.Empty;

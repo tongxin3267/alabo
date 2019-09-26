@@ -1,10 +1,9 @@
 ﻿using System;
-using Alabo.Framework.Core.WebApis;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
-using Alabo.UI;
+using Alabo.Framework.Core.WebApis;
 
-namespace Alabo.App.Core.User.Domain.Dtos {
+namespace Alabo.Data.People.Users.Dtos {
 
     public class UserInput : PagedInputDto {
         public string UserName { get; set; }

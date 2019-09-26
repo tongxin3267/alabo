@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using Alabo.App.Core.User;
 using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
+using Alabo.Data.People.Users;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Agent.Internal.Domain.CallBacks {
+namespace Alabo.Data.People.Internals.Domain.CallBacks {
 
     [NotMapped]
     [ClassProperty(Name = "内部合伙人等级", Icon = "fa fa-user-times",

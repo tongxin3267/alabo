@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.User.Domain.Callbacks {
+namespace Alabo.Data.People.Teams.Domain.Configs {
 
     [NotMapped]
     [ClassProperty(Name = "团队配置", Icon = "flaticon-map",

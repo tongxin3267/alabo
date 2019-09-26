@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Agent.Circle.Domain.Entities;
+using Alabo.App.Core.ApiStore;
 using Alabo.App.Core.ApiStore.MiniProgram.Clients;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Data.People.Circles.Domain.Entities;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Address.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Helpers;
 using ZKCloud.Open.ApiBase.Connectors;
 using ZKCloud.Open.ApiBase.Formatters;
 
-namespace Alabo.App.Core.ApiStore.AMap.CircleMap {
+namespace Alabo.Data.People.Circles.Client {
 
     /// <summary>
     ///     商圈数据导入

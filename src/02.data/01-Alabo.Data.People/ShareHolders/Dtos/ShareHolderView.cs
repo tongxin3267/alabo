@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.App.Agent.ShareHolders.Domain.Entities;
-using Alabo.App.Agent.ShareHolders.Domain.Services;
-using Alabo.App.Core.User.Domain.Services;
+using Alabo.Data.People.ShareHolders.Domain.Entities;
+using Alabo.Data.People.ShareHolders.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Domains.Entities;
+using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Domains.Entities;
-using Alabo.Extensions;
 using Alabo.Maps;
-using Alabo.UI;
 
-namespace Alabo.App.Agent.ShareHolders.Domain.Dtos {
+namespace Alabo.Data.People.ShareHolders.Dtos {
 
     public class ShareHolderView : UIBase, IAutoForm {
         public string Id { get; set; }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Core.User.Domain.Repositories;
+using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
