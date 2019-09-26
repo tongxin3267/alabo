@@ -10,6 +10,7 @@ using Alabo.App.Core.Common.ViewModels;
 using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.AutoConfigs;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;

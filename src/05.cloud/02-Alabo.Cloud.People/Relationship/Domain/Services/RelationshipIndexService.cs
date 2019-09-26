@@ -7,6 +7,7 @@ using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Market.Relationship.Domain.CallBacks;
 using Alabo.App.Market.Relationship.Domain.Entities;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;

@@ -23,6 +23,7 @@ using Alabo.App.Shop.Product.Domain.Enums;
 using Alabo.App.Shop.Product.Domain.Services;
 using Alabo.App.Shop.Store.Domain.Entities.Extensions;
 using Alabo.App.Shop.Store.Domain.Services;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Datas.Stores;
 using Alabo.Datas.UnitOfWorks;

@@ -17,6 +17,7 @@ using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Regexs;
 
 namespace Alabo.App.Market.BookingSignup.Domain.Services {

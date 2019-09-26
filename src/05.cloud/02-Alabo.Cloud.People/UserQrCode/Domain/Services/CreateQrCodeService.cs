@@ -9,6 +9,7 @@ using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.AutoConfigs;
 using Alabo.Cache;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;

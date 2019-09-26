@@ -5,6 +5,7 @@ using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
 using System;
 using System.Collections.Generic;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Randoms;
 using Xunit;
 

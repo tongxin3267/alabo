@@ -8,6 +8,7 @@ using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.App.Agent.Citys.Domain.Entities;
 using Alabo.App.Core.User.Domain.Services;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Users.Entities;
 

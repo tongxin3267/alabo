@@ -22,6 +22,7 @@ using Alabo.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Core.WebApis.Service;
 
 namespace Alabo.App.Offline.Order.Domain.Services {

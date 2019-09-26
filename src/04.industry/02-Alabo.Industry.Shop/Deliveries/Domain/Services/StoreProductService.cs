@@ -14,6 +14,7 @@ using Alabo.App.Shop.Product.Domain.Repositories;
 using Alabo.App.Shop.Product.Domain.Services;
 using Alabo.App.Shop.Product.ViewModels;
 using Alabo.App.Shop.Store.Domain.Dtos;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Xunit;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Core.User.ViewModels;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Extensions;
 using Alabo.Randoms;
 using Alabo.Test.Base.Attribute;

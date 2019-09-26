@@ -12,6 +12,7 @@ using Alabo.App.Core.User.Domain.Services;
 using System.Collections.Generic;
 using Alabo.App.Shop.Coupons.Domain.Enums;
 using System.Text;
+using Alabo.Data.People.Users.Domain.Services;
 
 namespace Alabo.App.Shop.Coupons.Domain.Services
 {

@@ -19,6 +19,7 @@ using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.Tasks.Domain.Entities;
 using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Core.Tasks.Domain.Services;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Entities;
 using Alabo.Framework.Basic.Grades.Domain.Enums;

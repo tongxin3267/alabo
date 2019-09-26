@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using Alabo.App.Core.User.Domain.Services;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Test.Base.Core.Model;
 
 namespace Alabo.Test.Core.User.Domain.Services {

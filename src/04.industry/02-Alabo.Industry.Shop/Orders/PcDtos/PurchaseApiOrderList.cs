@@ -5,6 +5,7 @@ using Alabo.App.Core.Employes.Domain.Services;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.App.Shop.Store.Domain.Services;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;

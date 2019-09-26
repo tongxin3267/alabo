@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Alabo.Data.People.Users.Domain.Services;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Shop.Product.Controllers

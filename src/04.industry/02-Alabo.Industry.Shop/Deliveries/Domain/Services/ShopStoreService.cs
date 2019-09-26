@@ -24,6 +24,7 @@ using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Basic.Address.Domain.Entities;
 using Alabo.Framework.Core.WebApis.Service;
 

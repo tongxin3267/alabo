@@ -8,6 +8,7 @@ using Alabo.App.Market.UserRightss.Domain.Services;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.App.Core.Employes.Domain.Services;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Core.WebUis.Design.Widgets;
 
 namespace Alabo.App.Market.UI.Widgets

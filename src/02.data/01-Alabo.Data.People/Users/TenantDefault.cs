@@ -4,6 +4,7 @@ using Alabo.Domains.Base.Services;
 using Alabo.Domains.Enums;
 using Alabo.Helpers;
 using System;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Core.Reflections.Interfaces;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Address.Domain.Services;

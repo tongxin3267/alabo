@@ -11,6 +11,7 @@ using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.App.Shop.Product.DiyModels;
 using Alabo.App.Shop.Product.Domain.Dtos;
 using Alabo.App.Shop.Product.Domain.Services;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Core.WebApis.Dtos;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Datas.UnitOfWorks;

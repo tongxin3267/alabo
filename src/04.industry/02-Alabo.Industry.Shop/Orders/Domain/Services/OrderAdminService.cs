@@ -26,6 +26,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.AutoConfigs;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Convert = System.Convert;
 

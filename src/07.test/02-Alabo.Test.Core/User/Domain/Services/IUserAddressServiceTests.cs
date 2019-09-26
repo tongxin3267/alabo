@@ -1,6 +1,7 @@
 using MongoDB.Bson;
 using Xunit;
 using Alabo.App.Core.User.Domain.Services;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Basic.Address.Domain.Services;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;
