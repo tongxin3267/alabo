@@ -1,13 +1,11 @@
 ﻿using System;
-using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Repositories;
-using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Core.User.Domain.Services {
+namespace Alabo.Data.People.Users.Domain.Services {
 
     /// </summary>
     public class UserAdminService : ServiceBase, IUserAdminService {
@@ -63,7 +61,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     用户表更新 user_user 缓存删除
         /// </summary>
         /// <param name="user">用户</param>
-        public ServiceResult UpdateUser(Users.Entities.User user) {
+        public ServiceResult UpdateUser(Alabo.Users.Entities.User user) {
             try {
                 Resolve<IUserService>().Update(user);
                 Resolve<IUserService>().DeleteUserCache(user.Id, user.UserName);

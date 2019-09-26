@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using Alabo.App.Core.User.Domain.Dtos;
+﻿using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.ViewModels;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Core.User.Domain.Services {
+namespace Alabo.Data.People.Users.Domain.Services {
 
     /// <summary>
     ///     Interface IUserDetailService

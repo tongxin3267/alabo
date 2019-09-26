@@ -1,24 +1,16 @@
-﻿using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Dtos;
+﻿using System.Collections.Generic;
+using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.User.Domain.Repositories;
-using Alabo.App.Core.User.ViewModels;
-using Alabo.App.Core.User.ViewModels.Admin;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
-using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Schedules;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Alabo.Users.Dtos;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Core.User.Domain.Services {
+namespace Alabo.Data.People.Users.Domain.Services {
 
     public class UserMapService : ServiceBase<UserMap, long>, IUserMapService {
         private readonly IDictionary<long, UserMap> _parentMapCache = new Dictionary<long, UserMap>();

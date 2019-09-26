@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 
-namespace Alabo.App.Core.User.Domain.Services {
+namespace Alabo.Data.People.Users.Domain.Services {
 
     /// <summary>
     /// 用户注册，与用户登录等基本服务方法

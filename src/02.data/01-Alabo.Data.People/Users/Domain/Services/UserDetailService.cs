@@ -1,4 +1,6 @@
-﻿using Alabo.App.Core.User.Domain.Callbacks;
+﻿using System;
+using System.Collections.Generic;
+using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Repositories;
 using Alabo.App.Core.User.ViewModels;
@@ -8,23 +10,19 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
-using Alabo.Helpers;
-using Alabo.Linq.Dynamic;
-using Alabo.Maps;
-using Alabo.UI;
-using System;
-using System.Collections.Generic;
-using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Basic.Address.Domain.Services;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Helpers;
+using Alabo.Linq.Dynamic;
+using Alabo.Maps;
 using Alabo.Regexs;
 using Alabo.Users.Entities;
-using Alabo.Framework.Basic.Grades.Domain.Services;
 
-namespace Alabo.App.Core.User.Domain.Services {
+namespace Alabo.Data.People.Users.Domain.Services {
 
     public class UserDetailService : ServiceBase<UserDetail, long>, IUserDetailService {
         private readonly IUserDetailRepository _userDetailRepository;

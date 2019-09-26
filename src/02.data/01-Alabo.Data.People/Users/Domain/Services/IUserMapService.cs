@@ -1,11 +1,8 @@
-﻿using Alabo.App.Core.User.ViewModels;
-using Alabo.App.Core.User.ViewModels.Admin;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
-using System.Collections.Generic;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Core.User.Domain.Services {
+namespace Alabo.Data.People.Users.Domain.Services {
 
     public interface IUserMapService : IService<UserMap, long> {
 

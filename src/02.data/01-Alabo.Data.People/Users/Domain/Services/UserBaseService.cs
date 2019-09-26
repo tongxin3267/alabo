@@ -1,26 +1,25 @@
-﻿using Alabo.App.Core.User.Domain.Callbacks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
-using Alabo.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Framework.Core.Admins.Configs;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Helpers;
 using Alabo.Users.Dtos;
 using Alabo.Users.Entities;
 using UserDetail = Alabo.Users.Entities.UserDetail;
 
-namespace Alabo.App.Core.User.Domain.Services {
+namespace Alabo.Data.People.Users.Domain.Services {
 
     public class UserBaseService : ServiceBase, IUserBaseService {
 
@@ -46,7 +45,7 @@ namespace Alabo.App.Core.User.Domain.Services {
             }
 
             // 根据OpenId登录
-            Users.Entities.User find = null;
+            Alabo.Users.Entities.User find = null;
             if (!loginInput.OpenId.IsNullOrEmpty()) {
                 // 根据OpenId登录
                 find = Resolve<IUserService>().GetUserDetailByOpenId(loginInput.OpenId);
@@ -137,7 +136,7 @@ namespace Alabo.App.Core.User.Domain.Services {
                 return new Tuple<ServiceResult, UserOutput>(ServiceResult.FailedWithMessage("推荐人不能为空"), null);
             }
 
-            var user = new Users.Entities.User {
+            var user = new Alabo.Users.Entities.User {
                 UserName = regInput?.UserName?.TrimEnd(' '),
                 Mobile = regInput?.Mobile?.TrimEnd(' '),
                 Email = regInput?.Email?.TrimEnd(' '),
@@ -190,7 +189,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     register as an asynchronous operation.
         /// </summary>
         /// <param name="user">The 会员.</param>
-        public ServiceResult Register(Users.Entities.User user) {
+        public ServiceResult Register(Alabo.Users.Entities.User user) {
             var userConfig = Ioc.Resolve<IAutoConfigService>().GetValue<UserConfig>();
 
             //密码不区分大小写

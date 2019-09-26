@@ -1,6 +1,6 @@
 ﻿using Alabo.Domains.Services;
 
-namespace Alabo.App.Core.User.Domain.Services {
+namespace Alabo.Data.People.Users.Domain.Services {
 
     /// <summary>
     ///     会员注册以后服务
@@ -11,7 +11,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// 会员注册以后，添加队列任务
         /// </summary>
         /// <param name="user">会员用户</param>
-        void AddBackJob(Users.Entities.User user);
+        void AddBackJob(Alabo.Users.Entities.User user);
 
         /// <summary>
         /// 用户注册以后，处理事件

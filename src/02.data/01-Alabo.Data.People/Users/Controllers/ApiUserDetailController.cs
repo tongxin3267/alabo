@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.App.Core.User.Domain.Services;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
 using UserDetail = Alabo.Users.Entities.UserDetail;
