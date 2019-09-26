@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Alabo.Extensions;
+using Microsoft.AspNetCore.Http;
 
-namespace Alabo.Tenants {
-
+namespace Alabo.Tenants
+{
     /// <summary>
     ///     tenant middleware
     /// </summary>
-    public class TenantMiddleware {
-
+    public class TenantMiddleware
+    {
         /// <summary>
         ///     next
         /// </summary>
@@ -19,7 +19,8 @@ namespace Alabo.Tenants {
         /// <summary>
         ///     constructor
         /// </summary>
-        public TenantMiddleware(RequestDelegate next) {
+        public TenantMiddleware(RequestDelegate next)
+        {
             _next = next;
         }
 
@@ -27,13 +28,14 @@ namespace Alabo.Tenants {
         ///     invoke
         /// </summary>
         /// <param name="context">Http上下文</param>
-        public async Task Invoke(HttpContext context) {
-            if (TenantContext.IsTenant) {
+        public async Task Invoke(HttpContext context)
+        {
+            if (TenantContext.IsTenant)
+            {
                 var tenantHeader = context.Request.Headers["zk-tenant"];
                 var tenant = tenantHeader.FirstOrDefault();
-                if (tenant.IsNullOrEmpty() || tenant.Contains("null", StringComparison.OrdinalIgnoreCase)) {
+                if (tenant.IsNullOrEmpty() || tenant.Contains("null", StringComparison.OrdinalIgnoreCase))
                     tenant = TenantContext.Master;
-                }
 
                 TenantContext.CurrentTenant = tenant.Trim().ToLower();
             }

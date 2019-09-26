@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Alabo.Domains.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services.Report.Dtos;
 

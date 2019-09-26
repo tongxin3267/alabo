@@ -5,10 +5,10 @@ using Alabo.App.Asset.Bills.Domain.Entities;
 using Alabo.App.Asset.Bills.Dtos;
 using Alabo.Domains.Repositories;
 
-namespace Alabo.App.Asset.Bills.Domain.Repositories {
-
-    public interface IBillRepository : IRepository<Bill, long> {
-
+namespace Alabo.App.Asset.Bills.Domain.Repositories
+{
+    public interface IBillRepository : IRepository<Bill, long>
+    {
         void AddSingleNative(Bill bill);
 
         IList<Bill> GetBillList(BillInput userInput, out long count);

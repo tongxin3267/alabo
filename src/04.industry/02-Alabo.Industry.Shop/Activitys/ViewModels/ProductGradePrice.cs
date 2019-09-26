@@ -3,27 +3,27 @@
 namespace Alabo.Industry.Shop.Activitys.ViewModels
 {
     /// <summary>
-    /// ProductGradePrice
+    ///     ProductGradePrice
     /// </summary>
     public class ProductGradePrice
     {
         /// <summary>
-        /// product id
+        ///     product id
         /// </summary>
         public long ProductId { get; set; }
 
         /// <summary>
-        /// product sku id
+        ///     product sku id
         /// </summary>
         public long ProductSkuId { get; set; }
 
         /// <summary>
-        /// member grade id
+        ///     member grade id
         /// </summary>
         public Guid GradeId { get; set; }
 
         /// <summary>
-        /// member price
+        ///     member price
         /// </summary>
         public decimal MemberPrice { get; set; }
     }

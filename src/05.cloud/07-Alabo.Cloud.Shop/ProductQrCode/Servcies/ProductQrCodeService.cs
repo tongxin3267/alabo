@@ -4,46 +4,48 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Text;
+using Alabo.AutoConfigs;
+using Alabo.Cloud.Shop.ProductQrCode.Configs;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
-using Alabo.Runtime;
-using QRCoder;
-using Alabo.AutoConfigs;
-using Alabo.Cloud.Shop.ProductQrCode.Configs;
 using Alabo.Files;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Industry.Shop.Products.Domain.Services;
 using Alabo.Industry.Shop.Products.ViewModels;
+using Alabo.Runtime;
+using QRCoder;
 
-namespace Alabo.Cloud.Shop.ProductQrCode.Servcies {
-
-    public class ProductQrCodeService : ServiceBase, IProductQrCodeService {
-
+namespace Alabo.Cloud.Shop.ProductQrCode.Servcies
+{
+    public class ProductQrCodeService : ServiceBase, IProductQrCodeService
+    {
         /// <summary>
-        /// TODO 一品一码
+        ///     TODO 一品一码
         /// </summary>
         /// <param name="unitOfWork"></param>
-        public ProductQrCodeService(IUnitOfWork unitOfWork) : base(unitOfWork) {
+        public ProductQrCodeService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
         }
 
         /// <summary>
         /// </summary>
         /// <param name="productId"></param>
-        public void CreateQrcode(long productId) {
+        public void CreateQrcode(long productId)
+        {
             //文件夹不存在，重新生成文件夹
             FileHelper.CreateDirectory(FileHelper.WwwRootPath + "//productqrcode");
             //二维码图片地址
             var qrcodePath = $"/wwwroot/productqrcode/{productId}.jpeg";
             var qrConfig = Resolve<IAutoConfigService>().GetValue<ProductQrCodeConfig>();
-            if (qrConfig != null) {
-                if (qrConfig.BgPicture.IsNullOrEmpty()) {
+            if (qrConfig != null)
+            {
+                if (qrConfig.BgPicture.IsNullOrEmpty())
                     qrConfig.BgPicture = "/wwwroot/assets/mobile/images/qrcode/01.png";
-                }
 
                 qrConfig.BgPicture.Replace('/', '\\');
             }
+
             //生成底部二维码
             GetImg(productId);
             var webSite = Resolve<IAutoConfigService>().GetValue<WebSiteConfig>();
@@ -52,11 +54,10 @@ namespace Alabo.Cloud.Shop.ProductQrCode.Servcies {
             var url = $@"{webSite.DomainName}/product/show/{productId}";
             var product = Resolve<IProductService>().GetSingle(u => u.Id == productId);
             var productDetail = Resolve<IProductDetailService>().GetSingle(u => u.ProductId == productId);
-            if (!url.Contains("http://")) {
-                url = $"http://{url}";
-            }
+            if (!url.Contains("http://")) url = $"http://{url}";
 
-            try {
+            try
+            {
                 var bmp = new Bitmap(520, 650);
                 var g = Graphics.FromImage(bmp);
                 g.Clear(Color.White);
@@ -75,7 +76,9 @@ namespace Alabo.Cloud.Shop.ProductQrCode.Servcies {
                 bmp.Save(result, ImageFormat.Jpeg);
                 bmp.Save(FileHelper.RootPath + qrcodePath, ImageFormat.Jpeg);
                 result.Flush();
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 Trace.WriteLine(ex.Message);
             }
         }
@@ -83,17 +86,18 @@ namespace Alabo.Cloud.Shop.ProductQrCode.Servcies {
         /// <summary>
         ///     获取商品信息和二维码底部
         /// </summary>
-        public void GetImg(long productId) {
+        public void GetImg(long productId)
+        {
             //文件夹不存在，重新生成文件夹
             FileHelper.CreateDirectory(FileHelper.WwwRootPath + "//productqrcode");
             GetWhiteFoot();
             //二维码图片地址
-            var qrcodePath = $"/wwwroot/productqrcode/foot.jpeg";
+            var qrcodePath = "/wwwroot/productqrcode/foot.jpeg";
             var qrConfig = Resolve<IAutoConfigService>().GetValue<ProductQrCodeConfig>();
-            if (qrConfig != null) {
-                if (qrConfig.BgPicture.IsNullOrEmpty()) {
+            if (qrConfig != null)
+            {
+                if (qrConfig.BgPicture.IsNullOrEmpty())
                     qrConfig.BgPicture = "/wwwroot/assets/mobile/images/qrcode/01.png";
-                }
 
                 qrConfig.BgPicture.Replace('/', '\\');
             }
@@ -105,13 +109,13 @@ namespace Alabo.Cloud.Shop.ProductQrCode.Servcies {
             //二维码网址
             var url = $@"{webSite.DomainName}/product/show/{productId}";
             var product = Resolve<IProductService>().GetSingle(u => u.Id == productId);
-            if (!url.Contains("http://")) {
-                url = $"http://{url}";
-            }
+            if (!url.Contains("http://")) url = $"http://{url}";
 
-            try {
+            try
+            {
                 var qrGenerator = new QRCodeGenerator();
-                var qrCodeData = qrGenerator.CreateQrCode(url.ToEncoding(), QRCodeGenerator.ECCLevel.H); // 使用utf-8编码，解决某些浏览器不能识别问题
+                var qrCodeData =
+                    qrGenerator.CreateQrCode(url.ToEncoding(), QRCodeGenerator.ECCLevel.H); // 使用utf-8编码，解决某些浏览器不能识别问题
                 var qrCode = new QRCode(qrCodeData);
                 var bmp = qrCode.GetGraphic(100);
                 //二维码生成
@@ -122,13 +126,15 @@ namespace Alabo.Cloud.Shop.ProductQrCode.Servcies {
                 var g = Graphics.FromImage(bg);
                 g.DrawImage(bmp, new Point(qrConfig.PositionLeft, qrConfig.PositionTop));
                 qrConfig.IsDisplayUserInformation = true;
-                if (qrConfig.IsDisplayUserInformation) {
+                if (qrConfig.IsDisplayUserInformation)
+                {
                     var productName = product.Name;
                     //var productBn = "货号：" + product.Bn;
                     var productPrice = "￥" + product.Price;
                     var descRect = new RectangleF();
                     //使用一个框架放商品信息 控制位置
-                    using (var font = new Font("微软雅黑", 12, FontStyle.Regular)) {
+                    using (var font = new Font("微软雅黑", 12, FontStyle.Regular))
+                    {
                         var length = g.MeasureString(productName, font);
                         length = g.MeasureString(productName, font);
                         descRect.Location = new Point(0, 5);
@@ -141,7 +147,9 @@ namespace Alabo.Cloud.Shop.ProductQrCode.Servcies {
                 bg.Save(result, ImageFormat.Jpeg);
                 bg.Save(FileHelper.RootPath + qrcodePath, ImageFormat.Jpeg);
                 result.Flush();
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 Trace.WriteLine(ex.Message);
             }
         }
@@ -149,8 +157,10 @@ namespace Alabo.Cloud.Shop.ProductQrCode.Servcies {
         /// <summary>
         ///     生成空白底部
         /// </summary>
-        public void GetWhiteFoot() {
-            try {
+        public void GetWhiteFoot()
+        {
+            try
+            {
                 //画布大小  宽*高
                 var bmp = new Bitmap(520, 200);
                 var g = Graphics.FromImage(bmp);
@@ -159,7 +169,9 @@ namespace Alabo.Cloud.Shop.ProductQrCode.Servcies {
                 bmp.Save(result, ImageFormat.Jpeg);
                 bmp.Save(FileHelper.RootPath + "/wwwroot/productqrcode/white.jpeg", ImageFormat.Jpeg);
                 result.Flush();
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 Trace.WriteLine(ex.Message);
             }
         }

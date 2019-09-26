@@ -5,14 +5,14 @@ using Alabo.Industry.Offline.Merchants.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
-namespace Alabo.Industry.Offline.Merchants.Controllers {
-
+namespace Alabo.Industry.Offline.Merchants.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/Merchant/[action]")]
-    public class ApiMerchantController : ApiBaseController<Merchant, ObjectId> {
-
+    public class ApiMerchantController : ApiBaseController<Merchant, ObjectId>
+    {
         public ApiMerchantController()
-            : base() {
+        {
             BaseService = Resolve<IMerchantService>();
         }
     }

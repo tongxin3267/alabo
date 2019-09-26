@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Quartz;
-using Quartz.Impl;
 using Alabo.Extensions;
 using Alabo.Tenants;
 using Alabo.Tenants.Domain.Entities;
+using Quartz;
+using Quartz.Impl;
 using Qz = Quartz;
 
 namespace Alabo.Schedules.Job
@@ -37,9 +37,7 @@ namespace Alabo.Schedules.Job
         public async Task StartAsync()
         {
             _scheduler = await GetScheduler();
-            if (_scheduler.IsStarted) {
-                return;
-            }
+            if (_scheduler.IsStarted) return;
 
             await _scheduler.Start();
         }
@@ -49,9 +47,7 @@ namespace Alabo.Schedules.Job
         /// </summary>
         public async Task PauseAsync()
         {
-            if (_scheduler == null) {
-                return;
-            }
+            if (_scheduler == null) return;
 
             await _scheduler.PauseAll();
         }
@@ -61,9 +57,7 @@ namespace Alabo.Schedules.Job
         /// </summary>
         public async Task ResumeAsync()
         {
-            if (_scheduler == null) {
-                return;
-            }
+            if (_scheduler == null) return;
 
             await _scheduler.ResumeAll();
         }
@@ -73,13 +67,9 @@ namespace Alabo.Schedules.Job
         /// </summary>
         public async Task StopAsync()
         {
-            if (_scheduler == null) {
-                return;
-            }
+            if (_scheduler == null) return;
 
-            if (_scheduler.IsShutdown) {
-                return;
-            }
+            if (_scheduler.IsShutdown) return;
 
             await _scheduler.Shutdown(true);
         }
@@ -97,9 +87,7 @@ namespace Alabo.Schedules.Job
         /// </summary>
         private async Task<Qz.IScheduler> GetScheduler()
         {
-            if (_scheduler != null) {
-                return _scheduler;
-            }
+            if (_scheduler != null) return _scheduler;
 
             var factory = new StdSchedulerFactory();
             return await factory.GetScheduler();
@@ -111,9 +99,7 @@ namespace Alabo.Schedules.Job
         /// <param name="job">作业</param>
         public async Task AddJobAsync(IJob job)
         {
-            if (!(job is JobBase quartzJob)) {
-                throw new InvalidOperationException("Quartz调度器必须从Quartz.JobBase派生");
-            }
+            if (!(job is JobBase quartzJob)) throw new InvalidOperationException("Quartz调度器必须从Quartz.JobBase派生");
 
             var jobDetail = CreateJob(quartzJob);
             var trigger = CreateTrigger(quartzJob);
@@ -153,21 +139,15 @@ namespace Alabo.Schedules.Job
             SetRepeatCount(builder, job);
             // 默认30分钟
             builder.WithIntervalInMinutes(30);
-            if (job.GetInterval() != null) {
-                builder.WithInterval(job.GetInterval().SafeValue());
-            }
+            if (job.GetInterval() != null) builder.WithInterval(job.GetInterval().SafeValue());
 
-            if (job.GetIntervalInHours() != null) {
-                builder.WithIntervalInHours(job.GetIntervalInHours().SafeValue());
-            }
+            if (job.GetIntervalInHours() != null) builder.WithIntervalInHours(job.GetIntervalInHours().SafeValue());
 
-            if (job.GetIntervalInMinutes() != null) {
+            if (job.GetIntervalInMinutes() != null)
                 builder.WithIntervalInMinutes(job.GetIntervalInMinutes().SafeValue());
-            }
 
-            if (job.GetIntervalInSeconds() != null) {
+            if (job.GetIntervalInSeconds() != null)
                 builder.WithIntervalInSeconds(job.GetIntervalInSeconds().SafeValue());
-            }
         }
 
         /// <summary>
@@ -203,9 +183,7 @@ namespace Alabo.Schedules.Job
         /// </summary>
         private void SetEndTime(TriggerBuilder builder, JobBase job)
         {
-            if (job.GetEndTime() == null) {
-                return;
-            }
+            if (job.GetEndTime() == null) return;
 
             builder.EndAt(job.GetEndTime().SafeValue());
         }
@@ -215,9 +193,7 @@ namespace Alabo.Schedules.Job
         /// </summary>
         private void SetCron(TriggerBuilder builder, JobBase job)
         {
-            if (job.GetCron() == null) {
-                return;
-            }
+            if (job.GetCron() == null) return;
 
             builder.WithCronSchedule(job.GetCron());
         }

@@ -1,4 +1,6 @@
-﻿namespace Alabo.Tool.WeiXin {
-    public class Class1 {
+﻿namespace Alabo.Tool.WeiXin
+{
+    public class Class1
+    {
     }
 }

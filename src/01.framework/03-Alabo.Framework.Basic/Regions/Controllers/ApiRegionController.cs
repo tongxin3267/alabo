@@ -14,13 +14,14 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Framework.Basic.Address.Controllers {
-
+namespace Alabo.Framework.Basic.Address.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/Region/[action]")]
-    public class ApiRegionController : ApiBaseController<Region, ObjectId> {
-
-        public ApiRegionController() : base() {
+    public class ApiRegionController : ApiBaseController<Region, ObjectId>
+    {
+        public ApiRegionController()
+        {
             BaseService = Resolve<IRegionService>();
         }
 
@@ -29,18 +30,20 @@ namespace Alabo.Framework.Basic.Address.Controllers {
         /// </summary>
         [HttpGet]
         [Display(Description = "国家区域树形结构")]
-        public ApiResult<List<RegionTree>> Tree() {
+        public ApiResult<List<RegionTree>> Tree()
+        {
             var result = Resolve<IRegionService>().RegionTrees().ToList();
             return ApiResult.Success(result);
         }
 
         /// <summary>
-        ///
         /// </summary>
         [HttpGet]
         [Display(Description = "国家区域树形结构")]
-        public ApiResult<List<RegionWithChild>> all() {
-            var list = Resolve<IRegionService>().RegionTrees().Select(r => new RegionWithChild {
+        public ApiResult<List<RegionWithChild>> all()
+        {
+            var list = Resolve<IRegionService>().RegionTrees().Select(r => new RegionWithChild
+            {
                 Id = r.Id,
                 Name = r.Name,
                 ParentId = r.ParentId
@@ -48,10 +51,9 @@ namespace Alabo.Framework.Basic.Address.Controllers {
 
             var dict = list.ToDictionary(r => r.Id);
 
-            list.Foreach(r => {
-                if (dict.ContainsKey(r.ParentId)) {
-                    dict[r.ParentId].Children.Add(r);
-                }
+            list.Foreach(r =>
+            {
+                if (dict.ContainsKey(r.ParentId)) dict[r.ParentId].Children.Add(r);
             });
 
             var ret = list.Where(r => !dict.ContainsKey(r.ParentId));
@@ -62,17 +64,19 @@ namespace Alabo.Framework.Basic.Address.Controllers {
         }
 
         /// <summary>
-        /// 根据传入枚举返回对应的区域数据
+        ///     根据传入枚举返回对应的区域数据
         /// </summary>
         [HttpGet]
-        public ApiResult GetRegionData(RegionLevel level) {
+        public ApiResult GetRegionData(RegionLevel level)
+        {
             var result = Resolve<IRegionService>().GetRegionData(level);
             return ApiResult.Success(result);
         }
 
         [HttpGet]
         [Display(Description = "国家区域信息")]
-        public ApiResult<PagedList<Region>> RegionList([FromQuery] PagedInputDto parameter) {
+        public ApiResult<PagedList<Region>> RegionList([FromQuery] PagedInputDto parameter)
+        {
             var model = Resolve<IRegionService>().GetPagedList(Query);
             return ApiResult.Success(model);
         }

@@ -3,12 +3,12 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using MongoDB.Bson;
 
-namespace Alabo.Cloud.School.BookingSignup.Domain.Services {
-
-    public interface IBookingSignupOrderService : IService<BookingSignupOrder, ObjectId> {
-
+namespace Alabo.Cloud.School.BookingSignup.Domain.Services
+{
+    public interface IBookingSignupOrderService : IService<BookingSignupOrder, ObjectId>
+    {
         /// <summary>
-        /// ��Աǩ��
+        ///     ��Աǩ��
         /// </summary>
         /// <param name="view"></param>
         /// <returns></returns>

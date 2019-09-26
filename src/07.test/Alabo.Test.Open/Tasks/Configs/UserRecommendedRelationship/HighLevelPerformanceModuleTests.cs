@@ -1,8 +1,8 @@
 using Alabo.App.Share.OpenTasks.Configs.UserRecommendedRelationship;
 using Alabo.App.Share.TaskExecutes.Domain.Services;
-using Xunit;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Extensions;
+using Xunit;
 
 namespace Alabo.Test.Open.Tasks.Configs.UserRecommendedRelationship
 {

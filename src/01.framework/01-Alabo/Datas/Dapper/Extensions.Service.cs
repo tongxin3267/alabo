@@ -1,7 +1,4 @@
 ﻿using System;
-using Dapper;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Alabo.Datas.Dapper.Configs;
 using Alabo.Datas.Dapper.Handlers;
 using Alabo.Datas.Dapper.MySql;
@@ -13,6 +10,9 @@ using Alabo.Datas.Sql;
 using Alabo.Datas.Sql.Queries;
 using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 using Alabo.Extensions;
+using Dapper;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Alabo.Datas.Dapper
 {
@@ -73,9 +73,8 @@ namespace Alabo.Datas.Dapper
             }
 
             services.TryAddScoped<ISqlQuery, SqlQuery>();
-            if (entityMatedata != null) {
+            if (entityMatedata != null)
                 services.TryAddScoped(typeof(IEntityMatedata), t => t.GetService(entityMatedata));
-            }
 
             var config = new SqlQueryConfig();
             action?.Invoke(config);

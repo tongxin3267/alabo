@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using Alabo.Tool.Payment;
 
-namespace Alabo.App.Asset.Pays.Dtos {
-
+namespace Alabo.App.Asset.Pays.Dtos
+{
     /// <summary>
     ///     返回的支付方式列表
     /// </summary>
-    public class PayTypeOutput {
-
+    public class PayTypeOutput
+    {
         /// <summary>
         ///     提示文字
         ///     比如
@@ -36,8 +36,8 @@ namespace Alabo.App.Asset.Pays.Dtos {
     /// <summary>
     ///     支付方式列表
     /// </summary>
-    public class PayTypeList {
-
+    public class PayTypeList
+    {
         /// <summary>
         ///     支付方式的Id
         /// </summary>

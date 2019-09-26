@@ -7,18 +7,21 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Address.Domain.Services;
 using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
 using Alabo.Industry.Shop.Orders.Domain.Entities.Extensions;
 using Alabo.Industry.Shop.Orders.PcDtos;
 using Alabo.Mapping;
 
-namespace Alabo.Industry.Shop.Orders.Domain.Services {
-
-    public class OrderApiService : ServiceBase, IOrderApiService {
-
-        public OrderApiService(IUnitOfWork unitOfWork) : base(unitOfWork) {
+namespace Alabo.Industry.Shop.Orders.Domain.Services
+{
+    public class OrderApiService : ServiceBase, IOrderApiService
+    {
+        public OrderApiService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
         }
 
-        public PagedList<ApiOrderListOutput> GetPageList(object query, ExpressionQuery<Entities.Order> expressionQuery) {
+        public PagedList<ApiOrderListOutput> GetPageList(object query, ExpressionQuery<Order> expressionQuery)
+        {
             //query.PageIndex = (int)orderInput.PageIndex;
             // query.PageSize = (int)orderInput.PageSize;
             expressionQuery.OrderByDescending(e => e.Id);
@@ -26,35 +29,40 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services {
             var orders = Resolve<IOrderService>().GetPagedList(query, expressionQuery.BuildExpression());
 
             var model = new List<ApiOrderListOutput>();
-            if (orders.Count < 0) {
-                return new PagedList<ApiOrderListOutput>();
-            }
+            if (orders.Count < 0) return new PagedList<ApiOrderListOutput>();
 
-            foreach (var item in orders) {
-                var listOutput = new ApiOrderListOutput {
+            foreach (var item in orders)
+            {
+                var listOutput = new ApiOrderListOutput
+                {
                     CreateTime = item?.CreateTime.ToString("yyyy-MM-dd HH:mm:ss"),
                     Id = item.Id,
                     OrderStatuName = item?.OrderStatus.GetDisplayName(),
                     User = item?.OrderExtension?.User,
-                    Address = item?.OrderExtension?.UserAddress?.Address,
+                    Address = item?.OrderExtension?.UserAddress?.Address
                 };
-                if (item.OrderExtension != null) {
-                    if (item.OrderExtension.UserAddress != null) {
+                if (item.OrderExtension != null)
+                {
+                    if (item.OrderExtension.UserAddress != null)
                         listOutput.RegionName = Resolve<IRegionService>()
                             .GetRegionNameById(item.OrderExtension.UserAddress.RegionId);
-                    }
-                } else {
+                }
+                else
+                {
                     listOutput.RegionName = null;
                 }
+
                 listOutput = AutoMapping.SetValue(item, listOutput);
                 var orderExtension = item.Extension.DeserializeJson<OrderExtension>();
-                if (orderExtension != null && orderExtension.Store != null) {
+                if (orderExtension != null && orderExtension.Store != null)
+                {
                     listOutput.StoreName = orderExtension.Store.Name;
                     listOutput.ExpressAmount = orderExtension.OrderAmount.ExpressAmount;
                 }
 
                 listOutput.OutOrderProducts = orderExtension.ProductSkuItems;
-                listOutput.OutOrderProducts?.ToList().ForEach(c => {
+                listOutput.OutOrderProducts?.ToList().ForEach(c =>
+                {
                     c.ThumbnailUrl = Resolve<IApiService>().ApiImageUrl(c.ThumbnailUrl);
                 });
                 model.Add(listOutput);

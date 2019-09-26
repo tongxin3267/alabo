@@ -13,29 +13,29 @@ using Alabo.Web.Mvc.Attributes;
 
 namespace _01_Alabo.Cloud.Core.SendSms.UI
 {
-
     /// <summary>
-    /// Class ViewSendMessage.
+    ///     Class ViewSendMessage.
     /// </summary>
     [ClassProperty(Name = "短信发送", Icon = "fa fa-file", Description = "短信发送")]
-    public class ViewSendMessageForm : UIBase , IAutoForm
+    public class ViewSendMessageForm : UIBase, IAutoForm
     {
-
         /// <summary>
-        /// Gets or sets the phone.
+        ///     Gets or sets the phone.
         /// </summary>
         [Display(Name = "手机号码")]
         [RegularExpression(RegularExpressionHelper.ChinaMobile, ErrorMessage = ErrorMessage.NotMatchFormat)]
-        [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1, Width = "110", ListShow = true, EditShow = true, SortOrder = 1004)]
+        [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1, Width = "110", ListShow = true, EditShow = true,
+            SortOrder = 1004)]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         public string Phone { get; set; }
 
         /// <summary>
-        /// Gets or sets the message.
+        ///     Gets or sets the message.
         /// </summary>
         [Display(Name = "消息内容")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        [Field(ControlsType = ControlsType.TextArea, GroupTabId = 1, Width = "110", ListShow = true,EditShow =true, SortOrder = 1004)]
+        [Field(ControlsType = ControlsType.TextArea, GroupTabId = 1, Width = "110", ListShow = true, EditShow = true,
+            SortOrder = 1004)]
         [StringLength(500, MinimumLength = 2, ErrorMessage = ErrorMessage.MaxStringLength)]
         public string Message { get; set; }
 

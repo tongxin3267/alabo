@@ -6,15 +6,16 @@ using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using Alabo.Web.Validations;
 
-namespace Alabo.Cloud.Shop.ShopSaleReport.Dtos {
-
+namespace Alabo.Cloud.Shop.ShopSaleReport.Dtos
+{
     /// <summary>
     ///     直推会员等级报表
     /// </summary>
     [ClassProperty(Name = "销售统计表", Icon = "fa fa-puzzle-piece", Description = "会员等级报表",
         SideBarType = SideBarType.FullScreen,
         GroupName = "基本信息,高级选项")]
-    public class ViewShopSale : BaseViewModel {
+    public class ViewShopSale : BaseViewModel
+    {
         [Field(ListShow = true)] [Key] public long Id { get; set; }
 
         /// <summary>
@@ -109,7 +110,8 @@ namespace Alabo.Cloud.Shop.ShopSaleReport.Dtos {
         /// <summary>
         ///     获取链接
         /// </summary>
-        public IEnumerable<ViewLink> ViewLinks() {
+        public IEnumerable<ViewLink> ViewLinks()
+        {
             var quickLinks = new List<ViewLink>
             {
                 new ViewLink("会员销售统计表",

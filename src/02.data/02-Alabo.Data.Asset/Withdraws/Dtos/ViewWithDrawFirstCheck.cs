@@ -2,13 +2,13 @@
 using Alabo.App.Asset.Withdraws.Domain.Enums;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Asset.Withdraws.Dtos {
-
+namespace Alabo.App.Asset.Withdraws.Dtos
+{
     /// <summary>
     ///     Class ViewWithDrawCheck.
     /// </summary>
-    public class ViewWithDrawCheck : BaseViewModel {
-
+    public class ViewWithDrawCheck : BaseViewModel
+    {
         /// <summary>
         ///     账单失败原因
         /// </summary>

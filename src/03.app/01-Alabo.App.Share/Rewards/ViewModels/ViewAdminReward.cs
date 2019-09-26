@@ -25,14 +25,14 @@ using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using ZKCloud.Open.Share.Models;
 
-namespace Alabo.App.Share.Rewards.ViewModels {
-
+namespace Alabo.App.Share.Rewards.ViewModels
+{
     /// <summary>
     ///     Class ViewAdminReward.
     /// </summary>
     [ClassProperty(Name = "分润数据", Icon = "fa fa-puzzle-piece", Description = "分润数据")]
-    public class ViewAdminReward : BaseViewModel {
-
+    public class ViewAdminReward : BaseViewModel
+    {
         /// <summary>
         ///     Gets or sets the reward.
         /// </summary>
@@ -73,13 +73,14 @@ namespace Alabo.App.Share.Rewards.ViewModels {
         ///     根据Id自动生成12位序列号
         /// </summary>
         [Display(Name = "编号")]
-        [Field(ListShow = true, EditShow = true, SortOrder = 1, Link = "/Admin/Reward/Edit?id=[[RewardId]]", Width = "75")]
-        public string Serial {
-            get {
+        [Field(ListShow = true, EditShow = true, SortOrder = 1, Link = "/Admin/Reward/Edit?id=[[RewardId]]",
+            Width = "75")]
+        public string Serial
+        {
+            get
+            {
                 var searSerial = $"9{Reward.Id.ToString().PadLeft(9, '0')}";
-                if (Reward.Id.ToString().Length == 10) {
-                    searSerial = $"{Reward.Id.ToString()}";
-                }
+                if (Reward.Id.ToString().Length == 10) searSerial = $"{Reward.Id.ToString()}";
 
                 return searSerial;
             }
@@ -98,7 +99,8 @@ namespace Alabo.App.Share.Rewards.ViewModels {
         /// <value>The share user.</value>
         [Required]
         [Display(Name = "分润用户")]
-        [Field(ListShow = true, EditShow = false, SortOrder = 2, Link = "/admin/user/edit?id=[[ShareUserId]]", Width = "100")]
+        [Field(ListShow = true, EditShow = false, SortOrder = 2, Link = "/admin/user/edit?id=[[ShareUserId]]",
+            Width = "100")]
         public string ShareUserName { get; set; }
 
         /// <summary>
@@ -106,27 +108,30 @@ namespace Alabo.App.Share.Rewards.ViewModels {
         /// </summary>
         [Required]
         [Display(Name = "触发用户")]
-        [Field(ListShow = true, EditShow = false, SortOrder = 3, Link = "/admin/user/edit?id=[[OrderUserId]]", Width = "100")]
+        [Field(ListShow = true, EditShow = false, SortOrder = 3, Link = "/admin/user/edit?id=[[OrderUserId]]",
+            Width = "100")]
         public string OrderUserName { get; set; }
 
         /// <summary>
-        /// 所属维度
+        ///     所属维度
         /// </summary>
         [Required]
         [Display(Name = "所属维度")]
-        [Field(ListShow = true, EditShow = false, SortOrder = 4, Link = "/Admin/Reward/ModuleConfigList?moduleid=[[ModuleId]]", Width = "100")]
+        [Field(ListShow = true, EditShow = false, SortOrder = 4,
+            Link = "/Admin/Reward/ModuleConfigList?moduleid=[[ModuleId]]", Width = "100")]
         public string TaskModuleAttributeName { get; set; }
 
         /// <summary>
-        /// 奖金/配置
+        ///     奖金/配置
         /// </summary>
         [Required]
         [Display(Name = "奖金/配置")]
-        [Field(ListShow = true, EditShow = false, SortOrder = 5, Link = "/Admin/Reward/EditMoudle?id=[[ShareModuleId]]&moduleId=[[ModuleId]]", Width = "100")]
+        [Field(ListShow = true, EditShow = false, SortOrder = 5,
+            Link = "/Admin/Reward/EditMoudle?id=[[ShareModuleId]]&moduleId=[[ModuleId]]", Width = "100")]
         public string ShareModuleName { get; set; }
 
         /// <summary>
-        /// 资产账户
+        ///     资产账户
         /// </summary>
         [Required]
         [Display(Name = "资产账户")]
@@ -134,23 +139,25 @@ namespace Alabo.App.Share.Rewards.ViewModels {
         public string MoneyTypeName { get; set; }
 
         /// <summary>
-        /// 分润金额
+        ///     分润金额
         /// </summary>
         [Required]
         [Display(Name = "分润金额")]
-        [Field(ListShow = true, EditShow = false, SortOrder = 7, TableDispalyStyle = TableDispalyStyle.Code, Width = "100")]
+        [Field(ListShow = true, EditShow = false, SortOrder = 7, TableDispalyStyle = TableDispalyStyle.Code,
+            Width = "100")]
         public decimal RewardAmount { get; set; }
 
         /// <summary>
-        /// 账后金额
+        ///     账后金额
         /// </summary>
         [Required]
         [Display(Name = "账后金额")]
-        [Field(ListShow = true, EditShow = false, SortOrder = 8, TableDispalyStyle = TableDispalyStyle.Code, Width = "100")]
+        [Field(ListShow = true, EditShow = false, SortOrder = 8, TableDispalyStyle = TableDispalyStyle.Code,
+            Width = "100")]
         public decimal AfterAmount { get; set; }
 
         /// <summary>
-        /// 详情
+        ///     详情
         /// </summary>
         [Required]
         [Display(Name = "详情")]
@@ -158,7 +165,7 @@ namespace Alabo.App.Share.Rewards.ViewModels {
         public string Intro { get; set; }
 
         /// <summary>
-        /// 状态
+        ///     状态
         /// </summary>
         [Required]
         [Display(Name = "状态")]
@@ -166,7 +173,7 @@ namespace Alabo.App.Share.Rewards.ViewModels {
         public FenRunStatus Status { get; set; }
 
         /// <summary>
-        /// 分润时间
+        ///     分润时间
         /// </summary>
         [Required]
         [Display(Name = "分润时间")]
@@ -176,7 +183,8 @@ namespace Alabo.App.Share.Rewards.ViewModels {
         /// <summary>
         ///     获取链接
         /// </summary>
-        public IEnumerable<ViewLink> ViewLinks() {
+        public IEnumerable<ViewLink> ViewLinks()
+        {
             var quickLinks = new List<ViewLink>
             {
                 new ViewLink("明细", "/Admin/Reward/Edit?id=[[RewardId]]", Icons.Edit, LinkType.ColumnLink)

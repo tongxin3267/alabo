@@ -8,17 +8,18 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Cloud.Support.Domain.Entities {
-
+namespace Alabo.Cloud.Support.Domain.Entities
+{
     /// <summary>
     ///     工单系统
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Cms_WorkOrder")]
-    [ClassProperty(Name = "工单系统", Icon = "fa fa-puzzle-piece", Description = "工单系统", ListApi = "Api/WorkOrder/WordOrderList",
+    [ClassProperty(Name = "工单系统", Icon = "fa fa-puzzle-piece", Description = "工单系统",
+        ListApi = "Api/WorkOrder/WordOrderList",
         PageType = ViewPageType.List, PostApi = "Api/WorkOrder/WordOrderList")]
-    public class WorkOrder : AggregateMongodbRoot<WorkOrder> {
-
+    public class WorkOrder : AggregateMongodbRoot<WorkOrder>
+    {
         /// <summary>
         ///     标题
         /// </summary>

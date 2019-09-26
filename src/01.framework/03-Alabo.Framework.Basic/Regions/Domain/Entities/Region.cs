@@ -9,21 +9,24 @@ using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Framework.Basic.Address.Domain.Entities {
-
+namespace Alabo.Framework.Basic.Address.Domain.Entities
+{
     /// <summary>
     ///     地区
     ///     这个对象中的值生成后不应该修改
     /// </summary>
-    [ClassProperty(Name = "国家区域", Icon = IconFlaticon.map_location, SideBarType = SideBarType.ControlSideBar, PageType = ViewPageType.List, PostApi = "Api/Region/RegionList")]
+    [ClassProperty(Name = "国家区域", Icon = IconFlaticon.map_location, SideBarType = SideBarType.ControlSideBar,
+        PageType = ViewPageType.List, PostApi = "Api/Region/RegionList")]
     [BsonIgnoreExtraElements]
     [Table("Basic_Region")]
-    public class Region : AggregateMongodbRoot<Region> {
-
-        public Region() : base(ObjectId.Empty) {
+    public class Region : AggregateMongodbRoot<Region>
+    {
+        public Region() : base(ObjectId.Empty)
+        {
         }
 
-        public Region(long regionId, long parentId) {
+        public Region(long regionId, long parentId)
+        {
             RegionId = regionId;
             ParentId = parentId;
             // this.Id = (regionId.ToString() + parentId.ToString()).ConvertToObjectId();

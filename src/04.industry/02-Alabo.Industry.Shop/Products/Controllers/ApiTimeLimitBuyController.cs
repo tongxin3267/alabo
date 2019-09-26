@@ -10,21 +10,14 @@ using ZKCloud.Open.ApiBase.Models;
 namespace Alabo.Industry.Shop.Products.Controllers
 {
     /// <summary>
-    /// ApiTimeLimitBuyController
+    ///     ApiTimeLimitBuyController
     /// </summary>
     [ApiExceptionFilter]
     [Route("Api/TimeLimitBuy/[action]")]
     public class ApiTimeLimitBuyController : ApiBaseController
     {
         /// <summary>
-        /// constructor
-        /// </summary>
-        public ApiTimeLimitBuyController() : base()
-        {
-        }
-
-        /// <summary>
-        /// 限时购列表
+        ///     限时购列表
         /// </summary>
         [HttpGet]
         [Display(Description = "限时购列表")]

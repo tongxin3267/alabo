@@ -5,12 +5,13 @@ using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoLists;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.Recharges.UI {
-
+namespace Alabo.App.Asset.Recharges.UI
+{
     [ClassProperty(Name = "充值AutoList", Description = "充值")]
-    public class RechargeAutoList : UIBase, IAutoList {
-
-        public PageResult<AutoListItem> PageList(object query, AutoBaseModel autoModel) {
+    public class RechargeAutoList : UIBase, IAutoList
+    {
+        public PageResult<AutoListItem> PageList(object query, AutoBaseModel autoModel)
+        {
             //var dic = query.ToObject<Dictionary<string, string>>();
 
             //dic.TryGetValue("loginUserId", out string userId);
@@ -46,7 +47,8 @@ namespace Alabo.App.Asset.Recharges.UI {
             return null;
         }
 
-        public Type SearchType() {
+        public Type SearchType()
+        {
             throw new NotImplementedException();
         }
     }

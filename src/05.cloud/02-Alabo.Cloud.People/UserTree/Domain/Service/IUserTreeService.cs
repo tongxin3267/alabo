@@ -3,13 +3,13 @@ using Alabo.Cloud.People.UserTree.Domain.Configs;
 using Alabo.Domains.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 
-namespace Alabo.Cloud.People.UserTree.Domain.Service {
-
+namespace Alabo.Cloud.People.UserTree.Domain.Service
+{
     /// <summary>
     ///     对用户表的组织结构进行操作
     /// </summary>
-    public interface IUserTreeService : IService {
-
+    public interface IUserTreeService : IService
+    {
         /// <summary>
         ///     获取用户组织架构图
         /// </summary>

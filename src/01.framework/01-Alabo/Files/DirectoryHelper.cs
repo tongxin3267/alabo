@@ -22,9 +22,7 @@ namespace Alabo.Files
             {
                 childPath += $"{item}\\";
                 var directoryInfo = new DirectoryInfo(childPath);
-                if (!Directory.Exists(directoryInfo.FullName)) {
-                    Directory.CreateDirectory(directoryInfo.FullName);
-                }
+                if (!Directory.Exists(directoryInfo.FullName)) Directory.CreateDirectory(directoryInfo.FullName);
             }
         }
 

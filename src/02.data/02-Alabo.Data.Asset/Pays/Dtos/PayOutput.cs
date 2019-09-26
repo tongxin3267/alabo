@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using Alabo.Framework.Core.Enums.Enum;
 
-namespace Alabo.App.Asset.Pays.Dtos {
-
+namespace Alabo.App.Asset.Pays.Dtos
+{
     /// <summary>
     ///     支付结果返回
     /// </summary>
-    public class PayOutput {
-
+    public class PayOutput
+    {
         /// <summary>
         ///     账单处理状态
         /// </summary>
@@ -21,7 +21,7 @@ namespace Alabo.App.Asset.Pays.Dtos {
         public string Message { get; set; }
 
         /// <summary>
-        /// 支付Id
+        ///     支付Id
         /// </summary>
         public long PayId { get; set; }
 
@@ -36,7 +36,7 @@ namespace Alabo.App.Asset.Pays.Dtos {
         public IList<object> EntityIds { get; set; }
 
         /// <summary>
-        /// 订单Id
+        ///     订单Id
         /// </summary>
         public object OrderId { get; set; }
 

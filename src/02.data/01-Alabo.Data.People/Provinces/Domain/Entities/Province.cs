@@ -9,14 +9,14 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Data.People.Provinces.Domain.Entities {
-
+namespace Alabo.Data.People.Provinces.Domain.Entities
+{
     [ClassProperty(Name = "省合伙人")]
     [BsonIgnoreExtraElements]
     [Table("People_Province")]
     [AutoDelete(IsAuto = true)]
-    public class Province : AggregateMongodbUserRoot<Province> {
-
+    public class Province : AggregateMongodbUserRoot<Province>
+    {
         /// <summary>
         ///     名称
         /// </summary>
@@ -43,14 +43,15 @@ namespace Alabo.Data.People.Provinces.Domain.Entities {
         public long RegionId { get; set; }
 
         /// <summary>
-        /// 区域名称
+        ///     区域名称
         /// </summary>
         [Display(Name = "所属城市")]
-        [Field(ControlsType = ControlsType.CityDropList, GroupTabId = 1, EditShow = false, ListShow = true, Width = "120", SortOrder = 600)]
+        [Field(ControlsType = ControlsType.CityDropList, GroupTabId = 1, EditShow = false, ListShow = true,
+            Width = "120", SortOrder = 600)]
         public string RegionName { get; set; }
 
         /// <summary>
-        /// 代理费
+        ///     代理费
         /// </summary>
         public decimal Price { get; set; }
 
@@ -78,7 +79,7 @@ namespace Alabo.Data.People.Provinces.Domain.Entities {
         [HelpBlock("请设置合伙人等级")]
         [Field(ControlsType = ControlsType.DropdownList,
             DataSourceType = typeof(CityGradeConfig), GroupTabId = 1, Width = "180",
-           ListShow = false, EditShow = true, SortOrder = 1)]
+            ListShow = false, EditShow = true, SortOrder = 1)]
         public Guid GradeId { get; set; }
 
         /// <summary>
@@ -90,7 +91,7 @@ namespace Alabo.Data.People.Provinces.Domain.Entities {
         public string Intro { get; set; }
 
         /// <summary>
-        /// 所属用户名
+        ///     所属用户名
         /// </summary>
         [Display(Name = "所属用户名")]
         [Required]

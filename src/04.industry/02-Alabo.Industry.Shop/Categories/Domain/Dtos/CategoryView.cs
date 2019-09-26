@@ -15,11 +15,10 @@ using Alabo.Web.Mvc.Attributes;
 namespace Alabo.Industry.Shop.Categories.Domain.Dtos
 {
     /// <summary>
-    /// 前台编辑视图
+    ///     前台编辑视图
     /// </summary>
     public class CategoryView : UIBase, IAutoTable<CategoryView>
     {
-
         /// <summary>
         ///     父类目Id
         /// </summary>
@@ -27,9 +26,10 @@ namespace Alabo.Industry.Shop.Categories.Domain.Dtos
         public Guid Id { get; set; }
 
         /// <summary>
-        /// 是否是顶级
+        ///     是否是顶级
         /// </summary>
         public bool IsPartent { get; set; } = true;
+
         /// <summary>
         ///     类目名称
         /// </summary>
@@ -44,7 +44,6 @@ namespace Alabo.Industry.Shop.Categories.Domain.Dtos
         [Display(Name = "父类目Id")]
         [Field(ListShow = false, EditShow = true, ControlsType = ControlsType.TextBox)]
         public Guid PartentId { get; set; }
-
 
 
         /// <summary>
@@ -64,7 +63,8 @@ namespace Alabo.Industry.Shop.Categories.Domain.Dtos
         ///     排序,越小排在越前面
         /// </summary>
         [Display(Name = "排序", Order = 1000)]
-        [Field(ControlsType = ControlsType.Numberic, ListShow = true, EditShow = true, SortOrder = 10000, Width = "110")]
+        [Field(ControlsType = ControlsType.Numberic, ListShow = true, EditShow = true, SortOrder = 10000,
+            Width = "110")]
         [Range(0, 99999, ErrorMessage = "请输入0-99999之间的数字")]
         [HelpBlock("排序,越小排在越前面，请输入0-99999之间的数字")]
         public long SortOrder { get; set; } = 1000;
@@ -76,24 +76,22 @@ namespace Alabo.Industry.Shop.Categories.Domain.Dtos
         /// </summary>
         [Display(Name = "状态")]
         [Field(ControlsType = ControlsType.RadioButton, ListShow = true, EditShow = true,
-            SortOrder = 10003, Width = "110", DataSourceType = typeof(Alabo.Domains.Enums.Status))]
+            SortOrder = 10003, Width = "110", DataSourceType = typeof(Status))]
         public Status Status { get; set; } = Status.Normal;
-
-
 
 
         public List<TableAction> Actions()
         {
             var list = new List<TableAction>
             {
-                ToLinkAction("编辑", "Edit",TableActionType.ColumnAction),//管理员编辑
-                ToLinkAction("删除", "/Api/Coupon/DeleteCoupon",ActionLinkType.Delete,TableActionType.ColumnAction)//管理员删除
+                ToLinkAction("编辑", "Edit", TableActionType.ColumnAction), //管理员编辑
+                ToLinkAction("删除", "/Api/Coupon/DeleteCoupon", ActionLinkType.Delete,
+                    TableActionType.ColumnAction) //管理员删除
             };
             return list;
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="query"></param>
         /// <param name="autoModel"></param>
@@ -119,11 +117,12 @@ namespace Alabo.Industry.Shop.Categories.Domain.Dtos
         public string Name { get; set; }
 
         /// <summary>
-        /// 控件类型
+        ///     控件类型
         /// </summary>
         public ViewPropertyControlsType ControlsType { get; set; }
+
         /// <summary>
-        /// 简介，有属性值拼接起来
+        ///     简介，有属性值拼接起来
         /// </summary>
         public string Intro { get; set; }
 
@@ -133,11 +132,11 @@ namespace Alabo.Industry.Shop.Categories.Domain.Dtos
         [Display(Name = "排序", Order = 1000)]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         public long SortOrder { get; set; } = 1000;
+
         /// <summary>
-        /// 属性值
+        ///     属性值
         /// </summary>
         public List<ViewPropertyValue> Values { get; set; } = new List<ViewPropertyValue>();
-
     }
 
 
@@ -153,7 +152,7 @@ namespace Alabo.Industry.Shop.Categories.Domain.Dtos
         public string Name { get; set; }
 
         /// <summary>
-        /// 简介，有属性值拼接起来
+        ///     简介，有属性值拼接起来
         /// </summary>
         public string Intro { get; set; }
 
@@ -163,16 +162,17 @@ namespace Alabo.Industry.Shop.Categories.Domain.Dtos
         [Display(Name = "排序", Order = 1000)]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         public long SortOrder { get; set; } = 1000;
+
         /// <summary>
-        /// 属性值
+        ///     属性值
         /// </summary>
         public List<ViewPropertyValue> Values { get; set; } = new List<ViewPropertyValue>();
-
     }
 
     public class ViewPropertyValue
     {
         public Guid Id { get; set; }
+
         /// <summary>
         ///     属性名称
         /// </summary>
@@ -183,42 +183,35 @@ namespace Alabo.Industry.Shop.Categories.Domain.Dtos
     [ClassProperty(Name = "视图控件显示类型")]
     public enum ViewPropertyControlsType
     {
-
         /// <summary>
         ///     文本框
         /// </summary>
-        [LabelCssClass("m-badge--success", IsDataField = true)]
-        [Display(Name = "文本框")]
+        [LabelCssClass("m-badge--success", IsDataField = true)] [Display(Name = "文本框")]
         TextBox = 2,
 
         /// <summary>
         ///     多选框
         /// </summary>
-        [LabelCssClass("m-badge--success", IsDataField = true)]
-        [Display(Name = "多选框")]
+        [LabelCssClass("m-badge--success", IsDataField = true)] [Display(Name = "多选框")]
         CheckBox = 4,
 
         /// <summary>
         ///     单选框
         /// </summary>
-        [LabelCssClass("m-badge--success", IsDataField = true)]
-        [Display(Name = "单选框")]
+        [LabelCssClass("m-badge--success", IsDataField = true)] [Display(Name = "单选框")]
         RadioButton = 5,
 
         /// <summary>
         ///     下拉列表
         /// </summary>
-        [LabelCssClass("m-badge--success", IsDataField = true)]
-        [Display(Name = "下拉列表")]
+        [LabelCssClass("m-badge--success", IsDataField = true)] [Display(Name = "下拉列表")]
         DropdownList = 6,
 
 
         /// <summary>
         ///     样式参考
         /// </summary>
-        [LabelCssClass("m-badge--success", IsDataField = true)]
-        [Display(Name = "Switch切换")]
-        Switch = 15,
-
+        [LabelCssClass("m-badge--success", IsDataField = true)] [Display(Name = "Switch切换")]
+        Switch = 15
     }
 }

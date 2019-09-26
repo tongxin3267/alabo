@@ -9,19 +9,21 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Kpis.GradeKpis.Controllers {
-
+namespace Alabo.App.Kpis.GradeKpis.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/GradeKpi/[action]")]
-    public class ApiGradeKpiController : ApiBaseController<GradeKpi, ObjectId> {
-
-        public ApiGradeKpiController() : base() {
+    public class ApiGradeKpiController : ApiBaseController<GradeKpi, ObjectId>
+    {
+        public ApiGradeKpiController()
+        {
             BaseService = Resolve<IGradeKpiService>();
         }
 
         [HttpGet]
         [Display(Description = "µÈ¼¶¿¼ºË")]
-        public ApiResult<PagedList<GradeKpi>> GradeKpiList([FromQuery] PagedInputDto parameter) {
+        public ApiResult<PagedList<GradeKpi>> GradeKpiList([FromQuery] PagedInputDto parameter)
+        {
             var model = Resolve<IGradeKpiService>().GetGradeKpiList(Query);
             return ApiResult.Success(model);
         }

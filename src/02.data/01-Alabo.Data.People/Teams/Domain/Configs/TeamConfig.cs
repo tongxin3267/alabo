@@ -5,13 +5,13 @@ using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.Data.People.Teams.Domain.Configs {
-
+namespace Alabo.Data.People.Teams.Domain.Configs
+{
     [NotMapped]
     [ClassProperty(Name = "团队配置", Icon = "flaticon-map",
         Description = "团队配置", PageType = ViewPageType.Edit, SortOrder = 12, SideBarType = SideBarType.ControlSideBar)]
-    public class TeamConfig : BaseViewModel, IAutoConfig {
-
+    public class TeamConfig : BaseViewModel, IAutoConfig
+    {
         /// <summary>
         ///     团队数量定义
         /// </summary>
@@ -27,7 +27,8 @@ namespace Alabo.Data.People.Teams.Domain.Configs {
         [Display(Name = "支付密码", Description = "团队数量定义")]
         public string SafePassword { get; set; }
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

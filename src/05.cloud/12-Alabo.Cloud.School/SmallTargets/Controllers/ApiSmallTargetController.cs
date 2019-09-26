@@ -5,15 +5,15 @@ using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
-namespace Alabo.Cloud.School.SmallTargets.Controllers {
-
+namespace Alabo.Cloud.School.SmallTargets.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/SmallTarget/[action]")]
-    public class ApiSmallTargetController : ApiBaseController<SmallTarget, ObjectId> {
-
-        public ApiSmallTargetController() : base() {
+    public class ApiSmallTargetController : ApiBaseController<SmallTarget, ObjectId>
+    {
+        public ApiSmallTargetController()
+        {
             BaseService = Resolve<ISmallTargetService>();
-
         }
     }
 }

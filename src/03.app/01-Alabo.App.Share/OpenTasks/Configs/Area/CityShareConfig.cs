@@ -10,47 +10,52 @@ using Alabo.Framework.Tasks.Schedules.Domain.Enums;
 using Alabo.Web.Mvc.Attributes;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Share.OpenTasks.Configs.Area {
-
+namespace Alabo.App.Share.OpenTasks.Configs.Area
+{
     [ShareModules(Name = "市代理分润",
-     FenRunResultType = FenRunResultType.Price,
-      Intro = "市代理分润，根据全国661个城市来划分，一个城市所有的订单都会有分润。可配置市代理分润，推荐市代理分润，市代理见点分润等，配置方式灵活多变",
-      RelationshipType = RelationshipType.UserTypeRelationship,
-      ConfigHelp = "市代理在后台添加，市代理推荐人也在后台添加。分润比例设置成0.2,0.01 表示市代理分润比例为20%，推荐市代理的分润为1%",
-     Id = "8e5968e1-77d9-49f3-b849-85064d305821", BackGround = "bg-green-seagreen", Icon = "icon-social-dribbble", IsIncludeShareModuleConfig = true
-      )]
-    public class CityShareConfig : ShareBaseConfig {
-
+        FenRunResultType = FenRunResultType.Price,
+        Intro = "市代理分润，根据全国661个城市来划分，一个城市所有的订单都会有分润。可配置市代理分润，推荐市代理分润，市代理见点分润等，配置方式灵活多变",
+        RelationshipType = RelationshipType.UserTypeRelationship,
+        ConfigHelp = "市代理在后台添加，市代理推荐人也在后台添加。分润比例设置成0.2,0.01 表示市代理分润比例为20%，推荐市代理的分润为1%",
+        Id = "8e5968e1-77d9-49f3-b849-85064d305821", BackGround = "bg-green-seagreen", Icon = "icon-social-dribbble",
+        IsIncludeShareModuleConfig = true
+    )]
+    public class CityShareConfig : ShareBaseConfig
+    {
         /// <summary>
-        /// 地址锁定方式
+        ///     地址锁定方式
         /// </summary>
-        [Field(ControlsType = ControlsType.DropdownList, DataSource = "Alabo.Framework.Core.Enums.Enum.AddressLockType", ListShow = true, EditShow = true)]
+        [Field(ControlsType = ControlsType.DropdownList, DataSource = "Alabo.Framework.Core.Enums.Enum.AddressLockType",
+            ListShow = true, EditShow = true)]
         [Display(Name = "地址锁定方式", Description = "选择地址锁定方式。订单收货地址：在用户下单的时候用户自行填写。会员资料地址：在会员中心修改")]
         public AddressLockType AddressLockType { get; set; }
     }
 
     [TaskModule(Id, ModelName, SortOrder = 909998, FenRunResultType = FenRunResultType.Price,
         Intro = "市代理分润，根据全国661个城市来划分，一个城市所有的订单都会有分润。可配置市代理分润，推荐市代理分润，市代理见点分润等，配置方式灵活多变"
-       , ConfigurationType = typeof(CityShareConfig), RelationshipType = RelationshipType.UserTypeRelationship, IsSupportMultipleConfiguration = true)]
-    public class CityModule : AssetAllocationShareModuleBase<CityShareConfig> {
+        , ConfigurationType = typeof(CityShareConfig), RelationshipType = RelationshipType.UserTypeRelationship,
+        IsSupportMultipleConfiguration = true)]
+    public class CityModule : AssetAllocationShareModuleBase<CityShareConfig>
+    {
         public const string Id = "8e5968e1-77d9-49f3-b849-85064d305821";
 
         public const string ModelName = "市代理分润";
 
-        public CityModule(TaskContext context, CityShareConfig configuration) : base(context, configuration) {
+        public CityModule(TaskContext context, CityShareConfig configuration) : base(context, configuration)
+        {
         }
 
         /// <summary>
-        /// 开始执行分润
-        /// 对module配置与参数进行基础验证，子类重写后需要显式调用并判定返回值，如返回值不为Success，则不再执行子类后续逻辑
+        ///     开始执行分润
+        ///     对module配置与参数进行基础验证，子类重写后需要显式调用并判定返回值，如返回值不为Success，则不再执行子类后续逻辑
         /// </summary>
         /// <param name="parameter">参数</param>
         /// <returns>ExecuteResult&lt;ITaskResult[]&gt;.</returns>
-        public override ExecuteResult<ITaskResult[]> Execute(TaskParameter parameter) {
+        public override ExecuteResult<ITaskResult[]> Execute(TaskParameter parameter)
+        {
             var baseResult = base.Execute(parameter);
-            if (baseResult.Status != ResultStatus.Success) {
+            if (baseResult.Status != ResultStatus.Success)
                 return ExecuteResult<ITaskResult[]>.Cancel(baseResult.Message);
-            }
             //TODO 2019年9月24日 城市代理商分润
             //// 如果触发方式是订单类型，用户触发和其他触发后续支出
             //long? cityRegionId = 0; // 城市区域代理Id

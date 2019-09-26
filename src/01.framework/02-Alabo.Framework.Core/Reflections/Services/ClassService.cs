@@ -6,21 +6,23 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Web.ViewFeatures;
 
-namespace Alabo.Framework.Core.Reflections.Services {
-
+namespace Alabo.Framework.Core.Reflections.Services
+{
     /// <summary>
     ///     Class CalssService.
     /// </summary>
-    public class ClassService : ServiceBase, IClassService {
-
-        public ClassService(IUnitOfWork unitOfWork) : base(unitOfWork) {
+    public class ClassService : ServiceBase, IClassService
+    {
+        public ClassService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
         }
 
         /// <summary>
         ///     获取类的特性，包括字段属性，字段特性等
         /// </summary>
         /// <param name="fullName">The full name.</param>
-        public ClassDescription GetClassDescription(string fullName) {
+        public ClassDescription GetClassDescription(string fullName)
+        {
             return fullName.GetClassDescription();
         }
 
@@ -28,7 +30,8 @@ namespace Alabo.Framework.Core.Reflections.Services {
         ///     获取编辑字段特性
         /// </summary>
         /// <param name="fullName">The full name.</param>
-        public IEnumerable<PropertyDescription> GetEditPropertys(string fullName) {
+        public IEnumerable<PropertyDescription> GetEditPropertys(string fullName)
+        {
             var propertys = GetAllPropertys(fullName);
             return propertys?.Where(r => r.FieldAttribute.EditShow);
         }
@@ -37,7 +40,8 @@ namespace Alabo.Framework.Core.Reflections.Services {
         ///     获取列表页字段特性
         /// </summary>
         /// <param name="fullName">The full name.</param>
-        public IEnumerable<PropertyDescription> GetListPropertys(string fullName) {
+        public IEnumerable<PropertyDescription> GetListPropertys(string fullName)
+        {
             var propertys = GetAllPropertys(fullName);
             return propertys?.Where(r => r.FieldAttribute.ListShow);
         }
@@ -46,12 +50,16 @@ namespace Alabo.Framework.Core.Reflections.Services {
         ///     通过完整的命名空间获取属性值
         /// </summary>
         /// <param name="fullName">输入完整的命名空间</param>
-        public IEnumerable<PropertyDescription> GetAllPropertys(string fullName) {
-            try {
+        public IEnumerable<PropertyDescription> GetAllPropertys(string fullName)
+        {
+            try
+            {
                 var t = fullName.GetTypeByFullName();
                 var configDescription = new ClassDescription(t);
                 return configDescription.Propertys.ToList();
-            } catch {
+            }
+            catch
+            {
                 return null;
             }
         }
@@ -60,7 +68,8 @@ namespace Alabo.Framework.Core.Reflections.Services {
         ///     获取编辑字段特性
         /// </summary>
         /// <param name="type">The full name.</param>
-        public IEnumerable<PropertyDescription> GetEditPropertys(Type type) {
+        public IEnumerable<PropertyDescription> GetEditPropertys(Type type)
+        {
             var configDescription = new ClassDescription(type);
             return configDescription.Propertys.Where(r => r.FieldAttribute.EditShow).ToList();
         }
@@ -69,7 +78,8 @@ namespace Alabo.Framework.Core.Reflections.Services {
         ///     获取列表页字段特性
         /// </summary>
         /// <param name="type">The 类型.</param>
-        public IEnumerable<PropertyDescription> GetListPropertys(Type type) {
+        public IEnumerable<PropertyDescription> GetListPropertys(Type type)
+        {
             var configDescription = new ClassDescription(type);
             return configDescription.Propertys.Where(r => r.FieldAttribute.ListShow).ToList();
         }
@@ -78,7 +88,8 @@ namespace Alabo.Framework.Core.Reflections.Services {
         ///     通过完整的命名空间获取属性值
         /// </summary>
         /// <param name="type">输入完整的命名空间</param>
-        public IEnumerable<PropertyDescription> GetAllPropertys(Type type) {
+        public IEnumerable<PropertyDescription> GetAllPropertys(Type type)
+        {
             var configDescription = new ClassDescription(type);
             return configDescription.Propertys.ToList();
         }

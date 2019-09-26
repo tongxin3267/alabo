@@ -5,90 +5,90 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Users.Entities;
 
-namespace Alabo.Data.People.Users.Domain.Services {
-
+namespace Alabo.Data.People.Users.Domain.Services
+{
     /// <summary>
     ///     用户操作相关方法
     /// </summary>
-    public interface IUserService : IService<User, long> {
-
+    public interface IUserService : IService<User, long>
+    {
         /// <summary>
         ///     会员s the team.
         /// </summary>
         /// <param name="userId">会员Id</param>
-        Alabo.Users.Entities.User UserTeam(long userId);
+        User UserTeam(long userId);
 
         /// <summary>
         ///     从缓存当中读取用户
         /// </summary>
         /// <param name="userId">会员Id</param>
-        Alabo.Users.Entities.User GetSingle(long userId);
+        User GetSingle(long userId);
 
         /// <summary>
         ///     获取s the single.
         /// </summary>
         /// <param name="userName">Name of the 会员.</param>
-        Alabo.Users.Entities.User GetSingle(string userName);
+        User GetSingle(string userName);
 
         /// <summary>
-        /// 根据用户名或手机号码获取用户
+        ///     根据用户名或手机号码获取用户
         /// </summary>
         /// <param name="userName"></param>
         /// <returns></returns>
-        Alabo.Users.Entities.User GetSingleByUserNameOrMobile(string userName);
+        User GetSingleByUserNameOrMobile(string userName);
 
         /// <summary>
         ///     获取s the single by mail.
         /// </summary>
         /// <param name="mail">The mail.</param>
-        Alabo.Users.Entities.User GetSingleByMail(string mail);
+        User GetSingleByMail(string mail);
 
         /// <summary>
         ///     获取s the single by mobile.
         /// </summary>
         /// <param name="mobile">The mobile.</param>
-        Alabo.Users.Entities.User GetSingleByMobile(string mobile);
+        User GetSingleByMobile(string mobile);
 
         /// <summary>
         ///     获取用户
         /// </summary>
         /// <param name="userId">会员Id</param>
-        Alabo.Users.Entities.User GetNomarlUser(long userId);
+        User GetNomarlUser(long userId);
 
         /// <summary>
         ///     获取平台用户,没有平台用户，很多功能没有办法使用
         /// </summary>
-        Alabo.Users.Entities.User PlanformUser();
+        User PlanformUser();
 
         /// <summary>
         ///     获取用户的详细信息，包括User表、UserDetail、UserMap表
         /// </summary>
         /// <param name="userId">会员Id</param>
-        Alabo.Users.Entities.User GetUserDetail(long userId);
+        User GetUserDetail(long userId);
 
         /// <summary>
         ///     获取s the 会员 detail by open identifier.
         /// </summary>
         /// <param name="openId">The open identifier.</param>
-        Alabo.Users.Entities.User GetUserDetailByOpenId(string openId);
+        User GetUserDetailByOpenId(string openId);
 
         /// <summary>
         ///     获取s the 会员 detail.
         /// </summary>
         /// <param name="UserName">Name of the 会员.</param>
-        Alabo.Users.Entities.User GetUserDetail(string UserName);
+        User GetUserDetail(string UserName);
 
         /// <summary>
         ///     获取s the list.
         /// </summary>
         /// <param name="userIds">The 会员 ids.</param>
-        IList<Alabo.Users.Entities.User> GetList(IList<long> userIds);
+        IList<User> GetList(IList<long> userIds);
 
         /// <summary>
         ///     更新s the specified 会员.
         /// </summary>
         /// <param name="user">The 会员.</param>
-        bool UpdateUser(Alabo.Users.Entities.User user);
+        bool UpdateUser(User user);
 
         /// <summary>
         ///     Existses the name of the 会员.
@@ -112,7 +112,7 @@ namespace Alabo.Data.People.Users.Domain.Services {
         ///     添加s the specified 会员.
         /// </summary>
         /// <param name="user">The 会员.</param>
-        Alabo.Users.Entities.User AddUser(Alabo.Users.Entities.User user);
+        User AddUser(User user);
 
         /// <summary>
         ///     会员分页查询
@@ -163,7 +163,7 @@ namespace Alabo.Data.People.Users.Domain.Services {
         /// </summary>
         /// <param name="user">用户</param>
         /// ///
-        string GetUserStyle(Alabo.Users.Entities.User user);
+        string GetUserStyle(User user);
 
         /// <summary>
         ///     数据同步 获取等级城市中心
@@ -180,15 +180,15 @@ namespace Alabo.Data.People.Users.Domain.Services {
         ///     Gets the home user style.
         /// </summary>
         /// <param name="user">The user.</param>
-        string GetHomeUserStyle(Alabo.Users.Entities.User user);
+        string GetHomeUserStyle(User user);
 
         PagedList<ViewHomeUser> GetRecommondUserPage(object query);
 
         /// <summary>
-        ///根据用户获取Token
+        ///     根据用户获取Token
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        string GetUserToken(Alabo.Users.Entities.User user);
+        string GetUserToken(User user);
     }
 }

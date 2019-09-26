@@ -5,15 +5,15 @@ using Alabo.Validations;
 using MongoDB.Bson;
 using Newtonsoft.Json;
 
-namespace Alabo.Data.People.Employes.Dtos {
-
+namespace Alabo.Data.People.Employes.Dtos
+{
     /// <summary>
-    /// 岗位编辑
+    ///     岗位编辑
     /// </summary>
-    public class PostRoleInput {
-
+    public class PostRoleInput
+    {
         /// <summary>
-        /// id
+        ///     id
         /// </summary>
         [Display(Name = "Id")]
         [JsonConverter(typeof(ObjectIdConverter))]
@@ -33,7 +33,7 @@ namespace Alabo.Data.People.Employes.Dtos {
         public string Summary { get; set; }
 
         /// <summary>
-        /// 岗位权限IDs
+        ///     岗位权限IDs
         /// </summary>
         public List<string> RoleIds { get; set; } = new List<string>();
     }

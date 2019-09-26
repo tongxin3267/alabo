@@ -9,10 +9,10 @@ using Alabo.Framework.Core.WebUis.Models.Links;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json.Linq;
 
-namespace Alabo.Framework.Basic.AutoConfigs.Domain.Services {
-
-    public interface IAutoConfigService : IService<AutoConfig, long> {
-
+namespace Alabo.Framework.Basic.AutoConfigs.Domain.Services
+{
+    public interface IAutoConfigService : IService<AutoConfig, long>
+    {
         /// <summary>
         ///     更新配置的值
         /// </summary>
@@ -80,13 +80,13 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Services {
         void InitDefaultData();
 
         /// <summary>
-        /// 获取所有AutoConfig的链接地址
+        ///     获取所有AutoConfig的链接地址
         /// </summary>
         /// <returns></returns>
         List<Link> GetAllLinks();
 
         /// <summary>
-        /// 清空缓存
+        ///     清空缓存
         /// </summary>
         /// <param name="type"></param>
         void UpdateCache(string type);

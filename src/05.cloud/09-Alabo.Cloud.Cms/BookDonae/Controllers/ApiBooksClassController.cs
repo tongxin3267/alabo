@@ -5,13 +5,14 @@ using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
-namespace Alabo.Cloud.Cms.BookDonae.Controllers {
-
+namespace Alabo.Cloud.Cms.BookDonae.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/BooksClass/[action]")]
-    public class ApiBooksClassController : ApiBaseController<BooksClass, ObjectId> {
-
-        public ApiBooksClassController() : base() {
+    public class ApiBooksClassController : ApiBaseController<BooksClass, ObjectId>
+    {
+        public ApiBooksClassController()
+        {
             BaseService = Resolve<IBooksClassService>();
         }
     }

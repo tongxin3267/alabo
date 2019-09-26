@@ -6,16 +6,16 @@ using Alabo.Framework.Core.WebUis;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Cloud.Cms.BookDonae.Domain.Entities {
-
+namespace Alabo.Cloud.Cms.BookDonae.Domain.Entities
+{
     /// <summary>
     ///     书籍分类
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Books_Class")]
     [ClassProperty(Name = "书籍分类", Description = "书籍分类", Icon = IconFlaticon.route)]
-    public class BooksClass : AggregateMongodbRoot<BooksClass> {
-
+    public class BooksClass : AggregateMongodbRoot<BooksClass>
+    {
         /// <summary>
         ///     分类名称
         /// </summary>
@@ -26,7 +26,7 @@ namespace Alabo.Cloud.Cms.BookDonae.Domain.Entities {
         public string Name { get; set; }
 
         /// <summary>
-        /// 排序
+        ///     排序
         /// </summary>
         [Display(Name = "排序")]
         [Required(ErrorMessage = "排序")]
@@ -34,7 +34,7 @@ namespace Alabo.Cloud.Cms.BookDonae.Domain.Entities {
         public long SortOrder { get; set; } = 1000;
 
         /// <summary>
-        /// 服务器网址
+        ///     服务器网址
         /// </summary>
         /// <summary>
         ///     状态

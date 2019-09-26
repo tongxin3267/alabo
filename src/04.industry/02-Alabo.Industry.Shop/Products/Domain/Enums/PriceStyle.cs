@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Industry.Shop.Products.Domain.Enums {
-
+namespace Alabo.Industry.Shop.Products.Domain.Enums
+{
     /// <summary>
     ///     商城模式，价格模式
     /// </summary>
     [ClassProperty(Name = "商城与价格模式")]
-    public enum PriceStyle {
-
+    public enum PriceStyle
+    {
         /// <summary>
         ///     Mark标识表示商城首页URL
         ///     商品全部由现金购买
@@ -59,7 +59,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Enums {
         CashAndCredit = 103,
 
         /// <summary>
-        ///    消费额(货币类型:提现)
+        ///     消费额(货币类型:提现)
         /// </summary>
         [Display(Name = "消费额")]
         [Field(IsDefault = true, GuidId = "E0000000-1478-49BD-BFC7-E73A5D699017", Mark = "ShopAmount")]

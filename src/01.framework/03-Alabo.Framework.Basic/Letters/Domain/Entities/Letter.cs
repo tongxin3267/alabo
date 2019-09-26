@@ -7,16 +7,16 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Framework.Basic.Letters.Domain.Entities {
-
+namespace Alabo.Framework.Basic.Letters.Domain.Entities
+{
     /// <summary>
     ///     站内信
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Attach_Letter")]
     [ClassProperty(Name = "站内信")]
-    public class Letter : AggregateMongodbUserRoot<Letter> {
-
+    public class Letter : AggregateMongodbUserRoot<Letter>
+    {
         /// <summary>
         ///     消息标题
         /// </summary>

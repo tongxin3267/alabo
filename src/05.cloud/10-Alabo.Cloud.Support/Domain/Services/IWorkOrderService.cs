@@ -4,10 +4,10 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using MongoDB.Bson;
 
-namespace Alabo.Cloud.Support.Domain.Services {
-
-    public interface IWorkOrderService : IService<WorkOrder, ObjectId> {
-
+namespace Alabo.Cloud.Support.Domain.Services
+{
+    public interface IWorkOrderService : IService<WorkOrder, ObjectId>
+    {
         ServiceResult Delete(ObjectId id);
 
         PagedList<WorkOrder> GetPageList(object query);

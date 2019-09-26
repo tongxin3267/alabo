@@ -5,13 +5,13 @@ using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoPreviews;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.Recharges.UI {
-
+namespace Alabo.App.Asset.Recharges.UI
+{
     [ClassProperty(Name = "充值详情(autopreview)")]
-    public class RechargeViewOutPut : UIBase, IAutoPreview {
-
+    public class RechargeViewOutPut : UIBase, IAutoPreview
+    {
         /// <summary>
-        /// 编号
+        ///     编号
         /// </summary>
         [Field(ControlsType = ControlsType.Label, ListShow = false, EditShow = true, SortOrder = 2, Width = "160")]
         [Display(Name = "编号")]
@@ -66,7 +66,8 @@ namespace Alabo.App.Asset.Recharges.UI {
         [Display(Name = "交易时间")]
         public string CreateTime { get; set; }
 
-        public AutoPreview GetPreview(string id, AutoBaseModel autoModel) {
+        public AutoPreview GetPreview(string id, AutoBaseModel autoModel)
+        {
             //var model = Resolve<ITradeService>().GetSingle(u => u.Id == id.ToInt64() && u.Type == TradeType.Recharge);
             //var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
             //var item = AutoMapping.SetValue<RechargeViewOutPut>(model);

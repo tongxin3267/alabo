@@ -9,42 +9,42 @@ using Alabo.Mapping;
 using Alabo.Users.Enum;
 using MongoDB.Bson;
 
-namespace Alabo.Cloud.People.Enterprise.Domain.Services {
-
-    public class EnterpriseService : ServiceBase<Entities.Enterprise, ObjectId>, IEnterpriseService {
-
-        public EnterpriseService(IUnitOfWork unitOfWork, IRepository<Entities.Enterprise, ObjectId> repository) : base(unitOfWork, repository) {
+namespace Alabo.Cloud.People.Enterprise.Domain.Services
+{
+    public class EnterpriseService : ServiceBase<Entities.Enterprise, ObjectId>, IEnterpriseService
+    {
+        public EnterpriseService(IUnitOfWork unitOfWork, IRepository<Entities.Enterprise, ObjectId> repository) : base(
+            unitOfWork, repository)
+        {
         }
 
-        public ServiceResult AddOrUpdate(EnterpriseView view) {
-            if (view == null) {
-                throw new ValidException("输入不能为空");
-            }
+        public ServiceResult AddOrUpdate(EnterpriseView view)
+        {
+            if (view == null) throw new ValidException("输入不能为空");
 
-            Entities.Enterprise enterprise = AutoMapping.SetValue<Entities.Enterprise>(view);
+            var enterprise = AutoMapping.SetValue<Entities.Enterprise>(view);
             enterprise.UserId = view.LoginUserId;
 
             var find = Resolve<IEnterpriseService>().GetSingle(u => u.LicenseNumber == view.LicenseNumber);
-            if (find == null) {
+            if (find == null)
+            {
                 enterprise.Status = IdentityStatus.IsPost;
                 var addResult = Resolve<IEnterpriseService>().Add(enterprise);
-                if (addResult) {
-                    return ServiceResult.Success;
-                }
+                if (addResult) return ServiceResult.Success;
                 return ServiceResult.Failed;
             }
 
             enterprise.Status = view.Status;
             var result = Resolve<IEnterpriseService>().Update(enterprise);
-            if (result) {
-                return ServiceResult.Success;
-            }
+            if (result) return ServiceResult.Success;
             return ServiceResult.Failed;
         }
 
-        public EnterpriseView GetView(string id) {
-            EnterpriseView view = new EnterpriseView();
-            if (!id.IsNullOrEmpty()) {
+        public EnterpriseView GetView(string id)
+        {
+            var view = new EnterpriseView();
+            if (!id.IsNullOrEmpty())
+            {
                 var EnterpriseView = Resolve<IEnterpriseService>().GetSingle(u => u.Id == id.ToObjectId());
                 view = AutoMapping.SetValue<EnterpriseView>(EnterpriseView);
             }

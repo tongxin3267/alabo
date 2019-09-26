@@ -53,9 +53,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <param name="tableAlias">表别名</param>
         public void Select(string columns, string tableAlias = null)
         {
-            if (string.IsNullOrWhiteSpace(columns)) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(columns)) return;
 
             _columns.Add(new ColumnCollection(columns, tableAlias));
         }
@@ -66,9 +64,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <param name="columns">列名</param>
         public void Select<TEntity>(Expression<Func<TEntity, object[]>> columns) where TEntity : class
         {
-            if (columns == null) {
-                return;
-            }
+            if (columns == null) return;
 
             _columns.Add(new ColumnCollection(_resolver.GetColumns(columns), table: typeof(TEntity)));
         }
@@ -81,9 +77,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         public void Select<TEntity>(Expression<Func<TEntity, object>> column, string columnAlias = null)
             where TEntity : class
         {
-            if (column == null) {
-                return;
-            }
+            if (column == null) return;
 
             _columns.Add(
                 new ColumnCollection($"{_resolver.GetColumn(column)} As {columnAlias}", table: typeof(TEntity)));
@@ -111,9 +105,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// </summary>
         protected virtual string GetColumns()
         {
-            if (_columns.Count == 0) {
-                return "*";
-            }
+            if (_columns.Count == 0) return "*";
 
             return Alabo.Extensions.Extensions.Join(_columns.Select(item => item.ToSql(_dialect, _register)));
         }

@@ -5,16 +5,23 @@ using Alabo.Runtime;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.AutoConfigs {
-
+namespace Alabo.AutoConfigs
+{
     /// <summary>
-    /// 网站设置
+    ///     网站设置
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "网站设置", GroupName = "基本设置,联系信息,本地化信息,法律信息",
         Icon = "fa fa-puzzle-piece", SortOrder = 1, Description = "设置以及查看系统的详细信息",
         SideBarType = SideBarType.ControlSideBar)]
-    public class WebSiteConfig : BaseViewModel, IAutoConfig {
+    public class WebSiteConfig : BaseViewModel, IAutoConfig
+    {
+        /// <summary>
+        ///     SetDefault
+        /// </summary>
+        public void SetDefault()
+        {
+        }
 
         #region 第一个标签 基本设置
 
@@ -42,7 +49,8 @@ namespace Alabo.AutoConfigs {
         [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1)]
         [Display(Name = "Api图片地址")]
         [HelpBlock("Api图片地址,一般情况下为网址，请补全http://或https://格式如http://www.5ug.com")]
-        public string ApiImagesUrl { get; set; } = RuntimeContext.Current.WebsiteConfig.ClientHost;//"https://s-open.qiniuniu99.com";
+        public string ApiImagesUrl { get; set; } =
+            RuntimeContext.Current.WebsiteConfig.ClientHost; //"https://s-open.qiniuniu99.com";
 
         [Field(ControlsType = ControlsType.FileUploder, GroupTabId = 1)]
         [Display(Name = "图标")]
@@ -176,11 +184,5 @@ namespace Alabo.AutoConfigs {
         public string ServiceAgreement { get; set; }
 
         #endregion 第四个标签，法律信息
-
-        /// <summary>
-        /// SetDefault
-        /// </summary>
-        public void SetDefault() {
-        }
     }
 }

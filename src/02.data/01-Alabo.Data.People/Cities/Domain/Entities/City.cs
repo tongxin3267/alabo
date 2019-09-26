@@ -10,14 +10,14 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Data.People.Cities.Domain.Entities {
-
+namespace Alabo.Data.People.Cities.Domain.Entities
+{
     [ClassProperty(Name = "城市合伙人")]
     [BsonIgnoreExtraElements]
     [AutoDelete(IsAuto = true)]
     [Table("People_City")]
-    public class City : AggregateMongodbUserRoot<City> {
-
+    public class City : AggregateMongodbUserRoot<City>
+    {
         /// <summary>
         ///     名称
         /// </summary>
@@ -44,14 +44,15 @@ namespace Alabo.Data.People.Cities.Domain.Entities {
         public long RegionId { get; set; }
 
         /// <summary>
-        /// 区域名称
+        ///     区域名称
         /// </summary>
         [Display(Name = "所属城市")]
-        [Field(ControlsType = ControlsType.CityDropList, GroupTabId = 1, EditShow = false, ListShow = true, Width = "120", SortOrder = 600)]
+        [Field(ControlsType = ControlsType.CityDropList, GroupTabId = 1, EditShow = false, ListShow = true,
+            Width = "120", SortOrder = 600)]
         public string RegionName { get; set; }
 
         /// <summary>
-        /// 代理费
+        ///     代理费
         /// </summary>
         public decimal Price { get; set; }
 
@@ -78,8 +79,8 @@ namespace Alabo.Data.People.Cities.Domain.Entities {
         [Display(Name = "合伙人等级")]
         [HelpBlock("请设置合伙人等级")]
         [Field(ControlsType = ControlsType.DropdownList,
-           DataSourceType = typeof(CityGradeConfig), GroupTabId = 1, Width = "180",
-           ListShow = false, EditShow = true, SortOrder = 1)]
+            DataSourceType = typeof(CityGradeConfig), GroupTabId = 1, Width = "180",
+            ListShow = false, EditShow = true, SortOrder = 1)]
         public Guid GradeId { get; set; }
 
         /// <summary>
@@ -91,7 +92,7 @@ namespace Alabo.Data.People.Cities.Domain.Entities {
         public string Intro { get; set; }
 
         /// <summary>
-        /// 所属用户名
+        ///     所属用户名
         /// </summary>
         [Display(Name = "所属用户名")]
         [Required]
@@ -137,14 +138,11 @@ namespace Alabo.Data.People.Cities.Domain.Entities {
             IsShowAdvancedSerach = false,
             //DataSource = "Alabo.App.Core.UserType.Domain.Enums.UserTypeStatus",
             Width = "150", ListShow = true,
-              SortOrder = 1005)]
-        public string StatusName {
-            get {
-                return this.Status.GetDisplayName();
-            }
-            set {
-                _ = value;
-            }
+            SortOrder = 1005)]
+        public string StatusName
+        {
+            get => Status.GetDisplayName();
+            set => _ = value;
         }
     }
 }

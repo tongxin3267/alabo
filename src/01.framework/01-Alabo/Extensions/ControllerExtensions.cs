@@ -34,9 +34,7 @@ namespace Alabo.Extensions
             foreach (var value in controller.ModelState.Values)
             {
                 var error = value.Errors.FirstOrDefault();
-                if (error != null) {
-                    return error.ErrorMessage;
-                }
+                if (error != null) return error.ErrorMessage;
             }
 
             return null;

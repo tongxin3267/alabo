@@ -105,16 +105,13 @@ namespace Alabo.Domains.Trees
         /// <param name="excludeSelf">是否排除当前节点,默认排除自身</param>
         public List<TKey> GetParentIdsFromPath(bool excludeSelf = true)
         {
-            if (string.IsNullOrWhiteSpace(Path)) {
-                return new List<TKey>();
-            }
+            if (string.IsNullOrWhiteSpace(Path)) return new List<TKey>();
 
             var result = Path.Split(',').Where(id => !string.IsNullOrWhiteSpace(id) && id != ",").ToList();
-            if (excludeSelf) {
+            if (excludeSelf)
                 result = result.Where(id =>
                     Alabo.Extensions.Extensions.SafeString(id).ToLower() !=
                     Alabo.Extensions.Extensions.SafeString(Id).ToLower()).ToList();
-            }
 
             return result.Select(Convert.To<TKey>).ToList();
         }

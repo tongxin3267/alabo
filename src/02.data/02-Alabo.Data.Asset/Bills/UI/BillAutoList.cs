@@ -15,36 +15,40 @@ using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoLists;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.Bills.UI {
-
+namespace Alabo.App.Asset.Bills.UI
+{
     [ClassProperty(Name = "账单AutoList", Description = "账单")]
-    public class BillAutoList : UIBase, IAutoList {
-
-        public PageResult<AutoListItem> PageList(object query, AutoBaseModel autoModel) {
+    public class BillAutoList : UIBase, IAutoList
+    {
+        public PageResult<AutoListItem> PageList(object query, AutoBaseModel autoModel)
+        {
             var dic = query.ToObject<Dictionary<string, string>>();
 
-            dic.TryGetValue("loginUserId", out string userId);
-            dic.TryGetValue("pageIndex", out string pageIndexStr);
+            dic.TryGetValue("loginUserId", out var userId);
+            dic.TryGetValue("pageIndex", out var pageIndexStr);
             var pageIndex = pageIndexStr.ToInt64();
-            if (pageIndex <= 0) {
-                pageIndex = 1;
-            }
-            var temp = new ExpressionQuery<Bill> {
+            if (pageIndex <= 0) pageIndex = 1;
+            var temp = new ExpressionQuery<Bill>
+            {
                 EnablePaging = true,
-                PageIndex = (int)pageIndex,
-                PageSize = (int)15
+                PageIndex = (int) pageIndex,
+                PageSize = 15
             };
             temp.And(e => e.UserId == userId.ToInt64());
-            var model = Resolve<IBillService>().GetListByPageDesc(15, (int)pageIndex, u => u.UserId == userId.ToInt64());
+            var model = Resolve<IBillService>()
+                .GetListByPageDesc(15, (int) pageIndex, u => u.UserId == userId.ToInt64());
             var page = Resolve<IBillService>().GetPagedList(temp);
             page.Result = model.ToList();
             var users = Resolve<IUserDetailService>().GetList();
             var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
             var list = new List<AutoListItem>();
             var apiStore = Resolve<IApiService>();
-            foreach (var item in model.ToList()) {
-                var apiData = new AutoListItem {
-                    Title = moneyTypes.FirstOrDefault(u => u.Id == item.MoneyTypeId)?.Name + "账户 - " + item.Flow.GetDisplayName(),
+            foreach (var item in model.ToList())
+            {
+                var apiData = new AutoListItem
+                {
+                    Title = moneyTypes.FirstOrDefault(u => u.Id == item.MoneyTypeId)?.Name + "账户 - " +
+                            item.Flow.GetDisplayName(),
                     Intro = $"账后{item.AfterAmount}时间{item.CreateTime.ToString()}",
                     Value = item.Amount,
                     Image = apiStore.ApiUserAvator(item.UserId),
@@ -53,10 +57,12 @@ namespace Alabo.App.Asset.Bills.UI {
                 };
                 list.Add(apiData);
             }
+
             return ToPageList(list, page);
         }
 
-        public Type SearchType() {
+        public Type SearchType()
+        {
             return typeof(Bill);
         }
     }

@@ -4,16 +4,16 @@ using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.Industry.Shop.Orders.Domain.Configs {
-
+namespace Alabo.Industry.Shop.Orders.Domain.Configs
+{
     /// <summary>
     ///     订单配置
     /// </summary>
     [ClassProperty(Name = "订单配置", Icon = "fa fa-puzzle-piece", SortOrder = 1,
         Description = "订单配置",
         SideBarType = SideBarType.OrderSideBar)]
-    public class OrderConfig : BaseViewModel, IAutoConfig {
-
+    public class OrderConfig : BaseViewModel, IAutoConfig
+    {
         /// <summary>
         ///     订单自动关闭时间，默认1天，订单关闭后，库存恢复
         /// </summary>
@@ -25,12 +25,12 @@ namespace Alabo.Industry.Shop.Orders.Domain.Configs {
         public long OrderClosedDay { get; set; } = 1;
 
         /// <summary>
-        /// 订单自动关闭时间 默认两小时
+        ///     订单自动关闭时间 默认两小时
         /// </summary>
         public long OrderClosedHour { get; set; } = 2;
 
         /// <summary>
-        /// 自动确认收货 默认15天
+        ///     自动确认收货 默认15天
         /// </summary>
         public long OrderTakeDay { get; set; } = 15;
 
@@ -40,12 +40,13 @@ namespace Alabo.Industry.Shop.Orders.Domain.Configs {
 
 
         /// <summary>
-        /// 现金是否可以抵其他虚拟资产下单的时候
-        /// 比如：积分不足时，是否可以用现金购买
+        ///     现金是否可以抵其他虚拟资产下单的时候
+        ///     比如：积分不足时，是否可以用现金购买
         /// </summary>
         public bool CashCanToOtherAssets { get; set; } = false;
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

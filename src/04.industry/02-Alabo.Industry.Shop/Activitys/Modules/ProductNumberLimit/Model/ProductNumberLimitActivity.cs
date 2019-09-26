@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
@@ -14,7 +15,6 @@ using Microsoft.AspNetCore.Http;
 
 namespace Alabo.Industry.Shop.Activitys.Modules.ProductNumberLimit.Model
 {
-
     /// <summary>
     ///     拼图
     ///     人多优惠大
@@ -31,7 +31,6 @@ namespace Alabo.Industry.Shop.Activitys.Modules.ProductNumberLimit.Model
     [ClassProperty(Name = "商品购买数量限制")]
     public class ProductNumberLimitActivity : BaseViewModel, IActivity
     {
-
         [Field(ControlsType = ControlsType.Numberic, ListShow = true, EditShow = true)]
         [Range(2, 99999999, ErrorMessage = ErrorMessage.DoubleInRang)]
         [HelpBlock("商品Id")]
@@ -47,7 +46,7 @@ namespace Alabo.Industry.Shop.Activitys.Modules.ProductNumberLimit.Model
 
         public AutoForm GetAutoForm(object obj)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public object GetDefaultValue(ActivityEditInput activityEdit, Activity Activity)

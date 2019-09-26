@@ -6,13 +6,13 @@ using Alabo.Data.People.Users.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 
-namespace Alabo.App.Asset.Bills.Domain.Services {
-
+namespace Alabo.App.Asset.Bills.Domain.Services
+{
     /// <summary>
     ///     财务后台处理函数
     /// </summary>
-    public interface IFinanceAdminService : IService {
-
+    public interface IFinanceAdminService : IService
+    {
         PagedList<ViewUserAccounts> GetViewUserPageList(UserInput userInput);
 
         PagedList<ViewAdminBill> GetViewBillPageList(BillInput userInput);

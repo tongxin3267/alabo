@@ -10,8 +10,8 @@ using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Framework.Tasks.Schedules.Domain.Entities {
-
+namespace Alabo.Framework.Tasks.Schedules.Domain.Entities
+{
     /// <summary>
     ///     后台作业任务
     /// </summary>
@@ -19,8 +19,8 @@ namespace Alabo.Framework.Tasks.Schedules.Domain.Entities {
     [Table("Task_Schedule")]
     [ClassProperty(Name = "后台作业任务", Icon = IconFlaticon.file, Description = "后台作业任务,在后台系统执行的时间",
         SideBarType = SideBarType.ControlSideBar)]
-    public class Schedule : AggregateMongodbRoot<Schedule> {
-
+    public class Schedule : AggregateMongodbRoot<Schedule>
+    {
         /// <summary>
         ///     任务名称
         /// </summary>
@@ -73,8 +73,8 @@ namespace Alabo.Framework.Tasks.Schedules.Domain.Entities {
     /// </summary>
     [ClassProperty(Name = "最近记录", Icon = IconFlaticon.menu, SortOrder = 1, Description = "系统保留最近100条记录",
         SideBarType = SideBarType.SinglePageSideBar)]
-    public class ScheduleHistory : BaseViewModel {
-
+    public class ScheduleHistory : BaseViewModel
+    {
         /// <summary>
         ///     执行结果
         /// </summary>

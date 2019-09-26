@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Alabo.Web.Middlewares;
+﻿using Alabo.Web.Middlewares;
+using Microsoft.AspNetCore.Builder;
 
 namespace Alabo.Web.Extensions
 {

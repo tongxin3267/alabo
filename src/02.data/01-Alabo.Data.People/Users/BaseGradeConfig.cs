@@ -6,13 +6,13 @@ using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Data.People.Users {
-
+namespace Alabo.Data.People.Users
+{
     /// <summary>
     ///     会员等级基类函数
     /// </summary>
-    public class BaseGradeConfig : AutoConfigBase {
-
+    public class BaseGradeConfig : AutoConfigBase
+    {
         /// <summary>
         ///     Gets or sets the user type identifier.
         /// </summary>
@@ -63,7 +63,9 @@ namespace Alabo.Data.People.Users {
         /// <value>
         ///     The grade privileges.
         /// </value>
-        [Field(ControlsType = ControlsType.CheckBoxMultipl, SortOrder = 2, DataSourceType = typeof(GradePrivilegesConfig))]//DataSource = "Alabo.App.Core.UserType.Domain.CallBacks.GradePrivilegesConfig")]
+        [Field(ControlsType = ControlsType.CheckBoxMultipl, SortOrder = 2,
+            DataSourceType =
+                typeof(GradePrivilegesConfig))] //DataSource = "Alabo.App.Core.UserType.Domain.CallBacks.GradePrivilegesConfig")]
         [Display(Name = "等级特权")]
         [HelpBlock(
             "等级特权，等级特权可以在控制面板中设置<a href='/Admin/AutoConfig/List?key=Alabo.App.Core.UserType.Domain.CallBacks.GradePrivilegesConfig'>等级特权管理</a>")]
@@ -88,7 +90,7 @@ namespace Alabo.Data.People.Users {
         public string Icon { get; set; }
 
         /// <summary>
-        /// 会员卡背景图
+        ///     会员卡背景图
         /// </summary>
         [Field(ControlsType = ControlsType.AlbumUploder, ListShow = true, SortOrder = 1, IsImagePreview = true)]
         [Display(Name = "会员卡背景图")]

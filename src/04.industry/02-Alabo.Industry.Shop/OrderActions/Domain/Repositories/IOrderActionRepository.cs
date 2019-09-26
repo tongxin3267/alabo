@@ -3,10 +3,10 @@ using Alabo.Domains.Repositories;
 using Alabo.Industry.Shop.OrderActions.Domain.Entities;
 using Alabo.Industry.Shop.Orders.Dtos;
 
-namespace Alabo.Industry.Shop.OrderActions.Domain.Repositories {
-
-    public interface IOrderActionRepository : IRepository<OrderAction, long> {
-
+namespace Alabo.Industry.Shop.OrderActions.Domain.Repositories
+{
+    public interface IOrderActionRepository : IRepository<OrderAction, long>
+    {
         /// <summary>
         ///     Deletes the cart buy order.
         ///     订单生成成功以后，删除购物车数据

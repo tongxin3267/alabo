@@ -5,13 +5,13 @@ using Alabo.Web.Mvc.ViewModel;
 using MongoDB.Bson;
 using Newtonsoft.Json;
 
-namespace Alabo.Framework.Core.WebUis.Models {
-
+namespace Alabo.Framework.Core.WebUis.Models
+{
     /// <summary>
     ///     前端组件基类
     /// </summary>
-    public abstract class BaseComponent : BaseViewModel {
-
+    public abstract class BaseComponent : BaseViewModel
+    {
         /// <summary>
         ///     Id,保存到mondb中
         /// </summary>

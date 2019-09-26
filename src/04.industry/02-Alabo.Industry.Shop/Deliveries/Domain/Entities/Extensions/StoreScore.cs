@@ -1,12 +1,12 @@
 ﻿using Alabo.Domains.Entities.Extensions;
 
-namespace Alabo.Industry.Shop.Deliveries.Domain.Entities.Extensions {
-
+namespace Alabo.Industry.Shop.Deliveries.Domain.Entities.Extensions
+{
     /// <summary>
     ///     店铺评分
     /// </summary>
-    public class StoreScore : EntityExtension {
-
+    public class StoreScore : EntityExtension
+    {
         /// <summary>
         ///     人气
         /// </summary>

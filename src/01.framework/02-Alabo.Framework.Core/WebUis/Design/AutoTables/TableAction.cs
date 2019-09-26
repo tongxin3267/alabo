@@ -1,6 +1,5 @@
 ﻿using System;
 using Alabo.Extensions;
-using Alabo.UI;
 using Newtonsoft.Json;
 
 namespace Alabo.Framework.Core.WebUis.Design.AutoTables
@@ -23,9 +22,7 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoTables
             Url = url;
             Type = ActionLinkType.Link;
             ActionType = TableActionType.ColumnAction;
-            if (Name.Contains("删除")) {
-                Type = ActionLinkType.Delete;
-            }
+            if (Name.Contains("删除")) Type = ActionLinkType.Delete;
         }
 
 
@@ -65,9 +62,7 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoTables
         {
             get
             {
-                if (Convert.ToInt16(IconType) > 0) {
-                    return IconType.GetIcon();
-                }
+                if (Convert.ToInt16(IconType) > 0) return IconType.GetIcon();
 
                 return string.Empty;
             }
@@ -82,13 +77,9 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoTables
         {
             get
             {
-                if (Name.Contains("编辑")) {
-                    return Flaticon.Edit;
-                }
+                if (Name.Contains("编辑")) return Flaticon.Edit;
 
-                if (Name.Contains("删除")) {
-                    return Flaticon.Delete;
-                }
+                if (Name.Contains("删除")) return Flaticon.Delete;
 
                 return 0;
             }

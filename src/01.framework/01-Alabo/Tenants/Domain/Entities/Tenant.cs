@@ -1,23 +1,23 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using Newtonsoft.Json;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
-namespace Alabo.Tenants.Domain.Entities {
-
+namespace Alabo.Tenants.Domain.Entities
+{
     /// <summary>
     ///     主机站点
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Base_Tenant")]
     [ClassProperty(Name = "租户", Icon = "fa fa-cog", SortOrder = 1, SideBarType = SideBarType.LogSideBar)]
-    public class Tenant : AggregateMongodbUserRoot<Tenant> {
-
+    public class Tenant : AggregateMongodbUserRoot<Tenant>
+    {
         /// <summary>
         ///     Name
         /// </summary>
@@ -50,48 +50,48 @@ namespace Alabo.Tenants.Domain.Entities {
         public string ClientUrl { get; set; }
 
         /// <summary>
-        /// 获取站点Id
+        ///     获取站点Id
         /// </summary>
         [JsonConverter(typeof(ObjectIdConverter))]
         public ObjectId SiteId { get; set; }
 
         /// <summary>
-        /// 站点信息
+        ///     站点信息
         /// </summary>
         public TenantSite Site { get; set; }
     }
 
     /// <summary>
-    /// 租户站点信息
+    ///     租户站点信息
     /// </summary>
-    public class TenantSite {
-
+    public class TenantSite
+    {
         /// <summary>
-        /// 站点Id
+        ///     站点Id
         /// </summary>
         [JsonConverter(typeof(ObjectIdConverter))]
         public ObjectId Id { get; set; }
 
         /// <summary>
-        /// 站点Id
+        ///     站点Id
         /// </summary>
         [JsonConverter(typeof(ObjectIdConverter))]
         public ObjectId FatherId { get; set; }
 
         /// <summary>
-        /// 站点编号
+        ///     站点编号
         /// </summary>
         [Display(Name = "项目编号")]
         [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, SortOrder = 1)]
         public string ProjectNum { get; set; }
 
         /// <summary>
-        /// 租户标识
+        ///     租户标识
         /// </summary>
         public string Tenant { get; set; }
 
         /// <summary>
-        /// 用户ID,平台的站点用户
+        ///     用户ID,平台的站点用户
         /// </summary>
         public long UserId { get; set; }
 
@@ -99,7 +99,8 @@ namespace Alabo.Tenants.Domain.Entities {
         ///     站点名称
         /// </summary>
         [Display(Name = "公司名称")]
-        [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, Link = "/Admin/Site/Info?id=[[Id]]", Width = "200", ListShow = true,
+        [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, Link = "/Admin/Site/Info?id=[[Id]]",
+            Width = "200", ListShow = true,
             SortOrder = 2)]
         public string CompanyName { get; set; }
 
@@ -116,7 +117,7 @@ namespace Alabo.Tenants.Domain.Entities {
         public string Url { get; set; }
 
         /// <summary>
-        /// PC端后台预览地址
+        ///     PC端后台预览地址
         /// </summary>
         public string AdminUrl { get; set; }
     }

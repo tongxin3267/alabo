@@ -11,18 +11,19 @@ using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Framework.Basic.Grades.Controllers
 {
-
     [ApiExceptionFilter]
     [Route("Api/UpgradeRecord/[action]")]
-    public class ApiUpgradeRecordController : ApiBaseController<UpgradeRecord, ObjectId> {
-
-        public ApiUpgradeRecordController() : base() {
+    public class ApiUpgradeRecordController : ApiBaseController<UpgradeRecord, ObjectId>
+    {
+        public ApiUpgradeRecordController()
+        {
             BaseService = Resolve<IUpgradeRecordService>();
         }
 
         [HttpGet]
-        [Display(Description = "Éý¼¶¼ÇÂ¼")]
-        public ApiResult<PagedList<UpgradeRecord>> UpgradeList([FromQuery] PagedInputDto parameter) {
+        [Display(Description = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼")]
+        public ApiResult<PagedList<UpgradeRecord>> UpgradeList([FromQuery] PagedInputDto parameter)
+        {
             var model = Resolve<IUpgradeRecordService>().GetPagedList(Query);
             return ApiResult.Success(model);
         }

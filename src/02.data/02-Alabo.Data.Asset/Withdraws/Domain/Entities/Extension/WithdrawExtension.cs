@@ -1,23 +1,21 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.App.Asset.BankCards.Domain.Entities;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Asset.Withdraws.Domain.Entities.Extension {
-
+namespace Alabo.App.Asset.Withdraws.Domain.Entities.Extension
+{
     /// <summary>
     ///     充值表
     /// </summary>
     [BsonIgnoreExtraElements]
     [ClassProperty(Name = "提现扩展", Icon = "fa fa-puzzle-piece", Description = "充值管理", PageType = ViewPageType.List)]
-    public class WithdrawExtension : BaseViewModel {
-
+    public class WithdrawExtension : BaseViewModel
+    {
         /// <summary>
-        /// 银行卡信息
+        ///     银行卡信息
         /// </summary>
         public BankCard BankCard { get; set; }
 

@@ -2,13 +2,13 @@
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
-using MongoDB.Driver;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Repositories.Mongo.Context;
 using Alabo.Extensions;
 using Alabo.Linq;
+using MongoDB.Driver;
 
 namespace Alabo.Datas.Stores.Add.Mongo
 {
@@ -45,9 +45,7 @@ namespace Alabo.Datas.Stores.Add.Mongo
             get
             {
                 var tableName = TableName;
-                if (tableName.IsNullOrEmpty()) {
-                    tableName = MongoEntityMapping.GetTableName(typeof(TEntity));
-                }
+                if (tableName.IsNullOrEmpty()) tableName = MongoEntityMapping.GetTableName(typeof(TEntity));
 
                 return MongoRepositoryConnection.Database.GetCollection<TEntity>(tableName);
             }
@@ -69,9 +67,7 @@ namespace Alabo.Datas.Stores.Add.Mongo
         /// <param name="predicate">条件</param>
         public IQueryable<TEntity> ToQueryable(Expression<Func<TEntity, bool>> predicate = null)
         {
-            if (predicate == null) {
-                return Collection.AsQueryable();
-            }
+            if (predicate == null) return Collection.AsQueryable();
 
             return Collection.AsQueryable().Where(predicate);
         }

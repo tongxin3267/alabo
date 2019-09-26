@@ -5,16 +5,16 @@ using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.Framework.Reports.Domain.CallBacks {
-
+namespace Alabo.Framework.Reports.Domain.CallBacks
+{
     /// <summary>
     ///     统计设置
     /// </summary>
     [ClassProperty(Name = "统计设置", Icon = "fa fa-calendar", SortOrder = 500,
         Description = "设置以及查看系统的统计设置", SideBarType = SideBarType.ControlSideBar)]
     [NotMapped]
-    public class ReportConfig : BaseViewModel, IAutoConfig {
-
+    public class ReportConfig : BaseViewModel, IAutoConfig
+    {
         /// <summary>
         ///     统计周期
         /// </summary>
@@ -26,7 +26,8 @@ namespace Alabo.Framework.Reports.Domain.CallBacks {
         /// <summary>
         ///     默认数据
         /// </summary>
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

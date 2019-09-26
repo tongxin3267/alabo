@@ -47,9 +47,7 @@ namespace Alabo.Randoms
         /// <param name="array">集合</param>
         public static List<T> Sort<T>(IEnumerable<T> array)
         {
-            if (array == null) {
-                return null;
-            }
+            if (array == null) return null;
 
             var random = new System.Random();
             var list = array.ToList();

@@ -2,11 +2,11 @@
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Framework.Core.WebUis.Models.Previews {
-
+namespace Alabo.Framework.Core.WebUis.Models.Previews
+{
     [ClassProperty(Name = "链接")]
-    public class PreviewInput {
-
+    public class PreviewInput
+    {
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         public string Id { get; set; }
 

@@ -8,16 +8,16 @@ using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Cloud.Cms.BookDonae.Domain.Entities {
-
+namespace Alabo.Cloud.Cms.BookDonae.Domain.Entities
+{
     /// <summary>
-    /// 183.60.143.29
+    ///     183.60.143.29
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Books_BookDonaeInfo")]
     [ClassProperty(Name = "书籍管理", Description = "书籍管理", Icon = IconFlaticon.route)]
-    public class BookDonaeInfo : AggregateMongodbRoot<BookDonaeInfo> {
-
+    public class BookDonaeInfo : AggregateMongodbRoot<BookDonaeInfo>
+    {
         /// <summary>
         ///     名称
         /// </summary>
@@ -34,7 +34,7 @@ namespace Alabo.Cloud.Cms.BookDonae.Domain.Entities {
         public ObjectId ClassId { get; set; }
 
         /// <summary>
-        /// 分类名称
+        ///     分类名称
         /// </summary>
         [Display(Name = "分类名称")]
         [Field(ControlsType = ControlsType.TextBox, Width = "300", ListShow = true, EditShow = true,
@@ -50,7 +50,7 @@ namespace Alabo.Cloud.Cms.BookDonae.Domain.Entities {
         public string Url { get; set; }
 
         /// <summary>
-        /// 是否是销售状态
+        ///     是否是销售状态
         /// </summary>
         [Display(Name = "是否是销售状态")]
         [Field(ControlsType = ControlsType.Switch, Width = "300", ListShow = true, EditShow = true,
@@ -58,7 +58,7 @@ namespace Alabo.Cloud.Cms.BookDonae.Domain.Entities {
         public bool IsOnSale { get; set; } = true;
 
         /// <summary>
-        /// 排序
+        ///     排序
         /// </summary>
         [Display(Name = "排序")]
         [Required(ErrorMessage = "排序")]

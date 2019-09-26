@@ -1,10 +1,10 @@
 using System;
-using Xunit;
 using Alabo.Framework.Basic.Relations.Domain.Services;
 using Alabo.Industry.Cms.Articles.Domain.CallBacks;
 using Alabo.Industry.Shop.Products.Domain.Configs;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
+using Xunit;
 
 namespace Alabo.Test.Core.Common.Domain.Services
 {

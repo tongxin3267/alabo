@@ -10,14 +10,15 @@ using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.Users.Entities {
-
+namespace Alabo.Users.Entities
+{
     /// <summary>
     ///     Class UserDetail.
     /// </summary>
-    [ClassProperty(Name = "用户详情", PageType = ViewPageType.List, PostApi = "Api/User/Update", ListApi = "Api/User/Update")]
-    public class UserDetail : AggregateDefaultUserRoot<UserDetail> {
-
+    [ClassProperty(Name = "用户详情", PageType = ViewPageType.List, PostApi = "Api/User/Update",
+        ListApi = "Api/User/Update")]
+    public class UserDetail : AggregateDefaultUserRoot<UserDetail>
+    {
         /// <summary>
         ///     密码
         /// </summary>
@@ -117,7 +118,7 @@ namespace Alabo.Users.Entities {
         public string Remark { get; set; }
 
         /// <summary>
-        /// 用于接收数据 非数据库字段
+        ///     用于接收数据 非数据库字段
         /// </summary>
         [NotMapped]
         [Display(Name = "邮箱")]
@@ -125,7 +126,7 @@ namespace Alabo.Users.Entities {
         public string Email { get; set; }
 
         /// <summary>
-        /// 是否实名认证
+        ///     是否实名认证
         /// </summary>
         public IdentityStatus IdentityStatus { get; set; }
     }
@@ -133,19 +134,21 @@ namespace Alabo.Users.Entities {
     /// <summary>
     ///     应用程序映射配置
     /// </summary>
-    public class UserDetailTableMap : MsSqlAggregateRootMap<UserDetail> {
-
+    public class UserDetailTableMap : MsSqlAggregateRootMap<UserDetail>
+    {
         /// <summary>
         ///     映射表
         /// </summary>
-        protected override void MapTable(EntityTypeBuilder<UserDetail> builder) {
+        protected override void MapTable(EntityTypeBuilder<UserDetail> builder)
+        {
             builder.ToTable("User_UserDetail");
         }
 
         /// <summary>
         ///     映射属性
         /// </summary>
-        protected override void MapProperties(EntityTypeBuilder<UserDetail> builder) {
+        protected override void MapProperties(EntityTypeBuilder<UserDetail> builder)
+        {
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.UserName);
             builder.Ignore(e => e.Version);

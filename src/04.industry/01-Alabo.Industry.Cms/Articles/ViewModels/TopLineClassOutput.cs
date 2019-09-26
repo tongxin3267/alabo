@@ -1,11 +1,11 @@
 ﻿using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.Industry.Cms.Articles.ViewModels {
-
+namespace Alabo.Industry.Cms.Articles.ViewModels
+{
     /// <summary>
     /// </summary>
-    public class TopLineClassOutput : BaseViewModel {
-
+    public class TopLineClassOutput : BaseViewModel
+    {
         /// <summary>
         ///     Gets or sets the name of the class.
         /// </summary>

@@ -94,9 +94,7 @@ namespace Alabo.Helpers
                             }
                             else
                             {
-                                if (n != 0) {
-                                    rmbCapital += CnNumber[j];
-                                }
+                                if (n != 0) rmbCapital += CnNumber[j];
                             }
                         }
                         else
@@ -125,11 +123,9 @@ namespace Alabo.Helpers
         public static int GetDays(int i, List<int> models)
         {
             var days = 0;
-            for (var j = 0; j <= i; j++) {
-                if (j != 0) {
+            for (var j = 0; j <= i; j++)
+                if (j != 0)
                     days += models[j];
-                }
-            }
 
             return days;
         }

@@ -5,13 +5,14 @@ using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
-namespace Alabo.Cloud.People.Visitors.Controllers {
-
+namespace Alabo.Cloud.People.Visitors.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/Visitor/[action]")]
-    public class ApiVisitorController : ApiBaseController<Visitor, ObjectId> {
-
-        public ApiVisitorController() : base() {
+    public class ApiVisitorController : ApiBaseController<Visitor, ObjectId>
+    {
+        public ApiVisitorController()
+        {
             BaseService = Resolve<IVisitorService>();
         }
     }

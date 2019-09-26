@@ -4,10 +4,10 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Industry.Shop.Categories.Domain.Entities;
 
-namespace Alabo.Industry.Shop.Categories.Domain.Services {
-
-    public interface ICategoryPropertyService : IService<CategoryProperty, Guid> {
-
+namespace Alabo.Industry.Shop.Categories.Domain.Services
+{
+    public interface ICategoryPropertyService : IService<CategoryProperty, Guid>
+    {
         /// <summary>
         ///     批量添加更新或删除属性值
         /// </summary>

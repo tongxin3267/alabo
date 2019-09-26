@@ -1,14 +1,14 @@
 ﻿using System;
 
-namespace Alabo.Framework.Core.Reflections.Interfaces {
-
+namespace Alabo.Framework.Core.Reflections.Interfaces
+{
     /// <summary>
     ///     默认数据初始
     /// </summary>
-    public interface IDefaultInit {
-
+    public interface IDefaultInit
+    {
         /// <summary>
-        /// 是否租户初始化时初始
+        ///     是否租户初始化时初始
         /// </summary>
         bool IsTenant { get; }
 
@@ -19,13 +19,13 @@ namespace Alabo.Framework.Core.Reflections.Interfaces {
     }
 
     /// <summary>
-    /// DefaultInitSortAttribute SortIndex ASC
+    ///     DefaultInitSortAttribute SortIndex ASC
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
-    public class DefaultInitSortAttribute : Attribute {
-
+    public class DefaultInitSortAttribute : Attribute
+    {
         /// <summary>
-        /// Sort index
+        ///     Sort index
         /// </summary>
         public long SortIndex { get; set; } = 100;
     }

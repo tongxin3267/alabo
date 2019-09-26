@@ -31,17 +31,11 @@ namespace Alabo.Helpers
         /// </summary>
         private static string GetUrl(string url)
         {
-            if (!url.Contains("?")) {
-                return $"{url}?";
-            }
+            if (!url.Contains("?")) return $"{url}?";
 
-            if (url.EndsWith("?")) {
-                return url;
-            }
+            if (url.EndsWith("?")) return url;
 
-            if (url.EndsWith("&")) {
-                return url;
-            }
+            if (url.EndsWith("&")) return url;
 
             return $"{url}&";
         }

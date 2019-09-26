@@ -8,10 +8,11 @@ using Alabo.Industry.Shop.Orders.Domain.Entities.Extensions;
 using Alabo.Industry.Shop.Orders.ViewModels.OrderEdit;
 using Alabo.Users.Entities;
 
-namespace Alabo.Industry.Shop.Orders.ViewModels {
-
-    public class ViewAdminOrder {
-        public Domain.Entities.Order Order { get; set; } = new Domain.Entities.Order();
+namespace Alabo.Industry.Shop.Orders.ViewModels
+{
+    public class ViewAdminOrder
+    {
+        public Order Order { get; set; } = new Order();
 
         /// <summary>
         ///     订单所包含的所有商品

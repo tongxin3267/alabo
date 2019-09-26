@@ -1,13 +1,13 @@
 ﻿using Alabo.Domains.Query.Dto;
 using Alabo.Industry.Shop.Orders.Domain.Enums;
 
-namespace Alabo.Industry.Shop.Orders.Dtos {
-
+namespace Alabo.Industry.Shop.Orders.Dtos
+{
     /// <summary>
     ///     订单
     /// </summary>
-    public class OrderListInput : ApiInputDto {
-
+    public class OrderListInput : ApiInputDto
+    {
         /// <summary>
         ///     订单状态
         /// </summary>
@@ -20,7 +20,7 @@ namespace Alabo.Industry.Shop.Orders.Dtos {
         ///     AdminOrderList = 3 // 平台订单
         /// </summary>
 
-        public OrderType? OrderType { get; set; }=Domain.Enums.OrderType.Normal;
+        public OrderType? OrderType { get; set; } = Domain.Enums.OrderType.Normal;
 
         /// <summary>
         ///     获取会员Id

@@ -66,21 +66,16 @@ namespace Alabo.Parameters
         /// <param name="value">值</param>
         public ParameterBuilder Add(string key, object value)
         {
-            if (string.IsNullOrWhiteSpace(key)) {
-                return this;
-            }
+            if (string.IsNullOrWhiteSpace(key)) return this;
 
             value = GetValue(value);
-            if (string.IsNullOrWhiteSpace(value.SafeString())) {
-                return this;
-            }
+            if (string.IsNullOrWhiteSpace(value.SafeString())) return this;
 
             key = key.Trim();
-            if (_params.ContainsKey(key)) {
+            if (_params.ContainsKey(key))
                 _params[key] = value;
-            } else {
+            else
                 _params.Add(key, value);
-            }
 
             return this;
         }
@@ -90,25 +85,15 @@ namespace Alabo.Parameters
         /// </summary>
         private object GetValue(object value)
         {
-            if (value == null) {
-                return null;
-            }
+            if (value == null) return null;
 
-            if (value is DateTime dateTime) {
-                return dateTime.ToString("yyyy-MM-dd HH:mm:ss");
-            }
+            if (value is DateTime dateTime) return dateTime.ToString("yyyy-MM-dd HH:mm:ss");
 
-            if (value is bool boolValue) {
-                return boolValue.ToString().ToLower();
-            }
+            if (value is bool boolValue) return boolValue.ToString().ToLower();
 
-            if (value is string) {
-                return value.SafeString().Trim();
-            }
+            if (value is string) return value.SafeString().Trim();
 
-            if (value is decimal) {
-                return value.SafeString();
-            }
+            if (value is decimal) return value.SafeString();
 
             return value;
         }
@@ -123,9 +108,7 @@ namespace Alabo.Parameters
             string encoding = "UTF-8")
         {
             var result = _params.ToDictionary(t => t.Key, t => GetEncodeValue(t.Value, isUrlEncode, encoding));
-            if (isSort == false) {
-                return result;
-            }
+            if (isSort == false) return result;
 
             return new SortedDictionary<string, object>(result);
         }
@@ -135,9 +118,7 @@ namespace Alabo.Parameters
         /// </summary>
         private object GetEncodeValue(object value, bool isUrlEncode, string encoding)
         {
-            if (isUrlEncode) {
-                return HttpWeb.UrlEncode(value.SafeString(), encoding);
-            }
+            if (isUrlEncode) return HttpWeb.UrlEncode(value.SafeString(), encoding);
 
             return value;
         }
@@ -186,14 +167,11 @@ namespace Alabo.Parameters
         public string Result(IParameterFormat format, bool isSort = false, bool isUrlEncode = false,
             string encoding = "UTF-8")
         {
-            if (format == null) {
-                throw new ArgumentNullException(nameof(format));
-            }
+            if (format == null) throw new ArgumentNullException(nameof(format));
 
             var result = string.Empty;
-            foreach (var param in GetDictionary(isSort, isUrlEncode, encoding)) {
+            foreach (var param in GetDictionary(isSort, isUrlEncode, encoding))
                 result = format.Join(result, format.Format(param.Key, param.Value));
-            }
 
             return result;
         }
@@ -204,13 +182,9 @@ namespace Alabo.Parameters
         /// <param name="name">参数名</param>
         public object GetValue(string name)
         {
-            if (name.IsEmpty()) {
-                return string.Empty;
-            }
+            if (name.IsEmpty()) return string.Empty;
 
-            if (_params.ContainsKey(name)) {
-                return _params[name];
-            }
+            if (_params.ContainsKey(name)) return _params[name];
 
             return string.Empty;
         }

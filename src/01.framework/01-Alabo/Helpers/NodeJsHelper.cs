@@ -1,31 +1,30 @@
 ﻿using System;
 using System.Diagnostics;
+using Alabo.Domains.Base.Entities;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Enums;
 using Alabo.Exceptions;
 using Alabo.Extensions;
 
-namespace Alabo.Helpers {
-
+namespace Alabo.Helpers
+{
     /// <summary>
     ///     Node相关的服务
     /// </summary>
-    public static class NodeJsHelper {
-
+    public static class NodeJsHelper
+    {
         /// <summary>
         ///     运行Nodejs相关命令
         /// </summary>
         /// <param name="path">路径，相对wwwroot目录</param>
         /// <param name="command">命令</param>
-        public static void Run(string path, string command) {
-            try {
-                if (path.IsNullOrEmpty()) {
-                    throw new ValidException("路径不能为空");
-                }
+        public static void Run(string path, string command)
+        {
+            try
+            {
+                if (path.IsNullOrEmpty()) throw new ValidException("路径不能为空");
 
-                if (command.IsNullOrEmpty()) {
-                    throw new ValidException("命令不能为空");
-                }
+                if (command.IsNullOrEmpty()) throw new ValidException("命令不能为空");
                 //var realPath = FileHelper.WwwRootPath + path;
                 //FileHelper.CreateDirectory(path);
 
@@ -44,8 +43,11 @@ namespace Alabo.Helpers {
                 runProcess.StandardInput.WriteLine(command); //设置命令
                 WriteLog("SetCMD OK!");
                 runProcess.BeginOutputReadLine();
-            } catch (Exception exc) {
-                var log = new Domains.Base.Entities.Logs {
+            }
+            catch (Exception exc)
+            {
+                var log = new Logs
+                {
                     Content = exc.Message,
                     Level = LogsLevel.Error,
                     Type = typeof(NodeJsHelper).Name
@@ -55,12 +57,15 @@ namespace Alabo.Helpers {
             }
         }
 
-        private static void runProcess_OutputDataReceived(object sender, DataReceivedEventArgs e) {
+        private static void runProcess_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
             Console.WriteLine(e.Data);
         }
 
-        private static void WriteLog(string msg) {
-            var log = new Domains.Base.Entities.Logs {
+        private static void WriteLog(string msg)
+        {
+            var log = new Logs
+            {
                 Content = msg,
                 Level = LogsLevel.Information,
                 Type = typeof(NodeJsHelper).Name

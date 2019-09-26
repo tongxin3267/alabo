@@ -12,86 +12,98 @@ using Alabo.Industry.Cms.Articles.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using MongoDB.Bson;
 
-namespace Alabo.Industry.Cms.Articles.Domain.Services {
+namespace Alabo.Industry.Cms.Articles.Domain.Services
+{
+    public class ArticleAdminService : ServiceBase<Article, ObjectId>, IArticleAdminService
+    {
+        public ArticleAdminService(IUnitOfWork unitOfWork, IRepository<Article, ObjectId> repository) : base(unitOfWork,
+            repository)
+        {
+        }
 
-    public class ArticleAdminService : ServiceBase<Article, ObjectId>, IArticleAdminService {
-
-        public Tuple<ServiceResult, Entities.Article> Delete(string id) {
+        public Tuple<ServiceResult, Article> Delete(string id)
+        {
             var result = ServiceResult.Success;
             var objId = id.ToObjectId();
-            try {
+            try
+            {
                 var article = Resolve<IArticleAdminService>().Delete(u => u.Id == objId);
-                if (article == true) {
-                    return Tuple.Create(result, new Article());
-                }
-            } catch (Exception ex) {
+                if (article) return Tuple.Create(result, new Article());
+            }
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex);
             }
 
-            return Tuple.Create(ServiceResult.FailedWithMessage("删除失败"), new Entities.Article());
+            return Tuple.Create(ServiceResult.FailedWithMessage("删除失败"), new Article());
         }
 
-        public List<Article> GetArticleList() {
+        public List<Article> GetArticleList()
+        {
             var view = Resolve<IArticleAdminService>().GetList();
             return view.ToList();
         }
 
-        public List<Article> GetArticleListByChannelType(ChannelType type, int pageSize = 0, int pageIndex = 0) {
+        public List<Article> GetArticleListByChannelType(ChannelType type, int pageSize = 0, int pageIndex = 0)
+        {
             var channeId = Resolve<IChannelService>().GetChannelId(type);
             var view = GetList(u => u.ChannelId == channeId);
             return view.ToList();
         }
 
         /// <summary>
-        /// 计算方法有问题
+        ///     计算方法有问题
         /// </summary>
-
-        public long GetMaxRelationId() {
+        public long GetMaxRelationId()
+        {
             var articles = Resolve<IRelationIndexService>().GetList();
             var article = articles.OrderByDescending(r => r.RelationId).FirstOrDefault();
-            if (article != null) {
+            if (article != null)
                 return article.RelationId + 1;
-            } else {
-                return 1;
-            }
+            return 1;
         }
 
-        public PagedList<Article> GetPageList(object query, ObjectId channelId) {
+        public PagedList<Article> GetPageList(object query, ObjectId channelId)
+        {
             var pageList = Resolve<IArticleAdminService>().GetPagedList(query, r => r.ChannelId == channelId);
             return pageList;
         }
 
-        public Article GetViewArticle(ObjectId id) {
+        public Article GetViewArticle(ObjectId id)
+        {
             var view = Resolve<IArticleAdminService>().GetSingle(u => u.Id == id);
-            if (view != null) {
+            if (view != null)
+            {
                 var channel = Resolve<IChannelService>().GetSingle(r => r.Id == view.ChannelId);
-                if (channel != null) {
+                if (channel != null)
+                {
                     var classType = Resolve<IChannelService>().GetChannelClassType(channel);
                     var tagType = Resolve<IChannelService>().GetChannelTagType(channel);
-                    view.Classes = Resolve<IRelationIndexService>().GetRelationIds(classType.FullName, view.RelationId); //文章分类
-                    view.Tags = Resolve<IRelationIndexService>().GetRelationIds(tagType.FullName, view.RelationId); //文章标签
+                    view.Classes = Resolve<IRelationIndexService>()
+                        .GetRelationIds(classType.FullName, view.RelationId); //文章分类
+                    view.Tags = Resolve<IRelationIndexService>()
+                        .GetRelationIds(tagType.FullName, view.RelationId); //文章标签
                 }
             }
+
             return view;
         }
 
-        public Tuple<ServiceResult, Entities.Article> AddOrUpdate(Article model, HttpRequest request) {
+        public Tuple<ServiceResult, Article> AddOrUpdate(Article model, HttpRequest request)
+        {
             var id = request.Form["Id"];
             var channelId = request.Form["ChannelId"];
-            if (!id.ToString().IsNullOrEmpty()) {
-                model.Id = id.ToString().ToSafeObjectId();
-            }
+            if (!id.ToString().IsNullOrEmpty()) model.Id = id.ToString().ToSafeObjectId();
 
             model.ChannelId = channelId.ToString().ToSafeObjectId();
             var channel = Resolve<IChannelService>().GetSingle(r => r.Id == model.ChannelId);
-            if (channel == null) {
-                Tuple.Create(ServiceResult.FailedWithMessage("频道不存在"), new Article());
-            }
+            if (channel == null) Tuple.Create(ServiceResult.FailedWithMessage("频道不存在"), new Article());
 
             var list = Resolve<IChannelService>().DataFields(channelId.ToString());
             var dic = new Dictionary<string, string>();
 
-            foreach (var item in list) {
+            foreach (var item in list)
+            {
                 var key = item.Key;
                 string value = request.Form[key];
                 dic.Add(key, value);
@@ -99,25 +111,30 @@ namespace Alabo.Industry.Cms.Articles.Domain.Services {
 
             var find = Resolve<IArticleAdminService>().GetSingle(u => u.Id == model.Id);
             var result = true;
-            if (find == null) {
+            if (find == null)
+            {
                 model.RelationId = GetMaxRelationId();
                 result = Resolve<IArticleAdminService>().Add(model);
-                if (result) {
+                if (result)
+                {
                 }
-            } else {
+            }
+            else
+            {
                 result = Resolve<IArticleAdminService>().Update(model);
             }
 
             model.AttachValue = dic.ToJson();
             // 如果为true
-            if (result == true) {
+            if (result)
+            {
                 // 添加标签和分类
                 var classType = Resolve<IChannelService>().GetChannelClassType(channel);
                 var classIds = request.Form["Classes"].ToStr();
                 var tagType = Resolve<IChannelService>().GetChannelTagType(channel);
                 var tagIds = request.Form["Tags"].ToStr();
                 Resolve<IRelationIndexService>()
-                     .AddUpdateOrDelete(classType.FullName, model.RelationId, classIds);
+                    .AddUpdateOrDelete(classType.FullName, model.RelationId, classIds);
                 Resolve<IRelationIndexService>()
                     .AddUpdateOrDelete(tagType.FullName, model.RelationId, tagIds);
                 return Tuple.Create(ServiceResult.Success, new Article());
@@ -127,11 +144,9 @@ namespace Alabo.Industry.Cms.Articles.Domain.Services {
             return Tuple.Create(ServiceResult.Failed, new Article());
         }
 
-        private void DeleteCache() {
+        private void DeleteCache()
+        {
             ObjectCache.Remove("GetHelpNav");
-        }
-
-        public ArticleAdminService(IUnitOfWork unitOfWork, IRepository<Article, ObjectId> repository) : base(unitOfWork, repository) {
         }
     }
 }

@@ -13,7 +13,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Alabo.Industry.Shop.Activitys.Domain.Entities
 {
-
     /// <summary>
     ///     活动
     ///     活动类型：
@@ -22,7 +21,6 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Entities
     [ClassProperty(Name = "活动")]
     public class Activity : AggregateDefaultRoot<Activity>
     {
-
         /// <summary>
         ///     活动对应的店铺Id
         /// </summary>
@@ -109,7 +107,7 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Entities
         public DateTime EndTime { get; set; }
 
         /// <summary>
-        ///  活动商品
+        ///     活动商品
         /// </summary>
         [Display(Name = "活动商品")]
         public long ProductId { get; set; }
@@ -124,12 +122,10 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Entities
         ///     活动扩展属性
         /// </summary>
         [Display(Name = "活动扩展属性")]
-
         public ActivityExtension ActivityExtension { get; set; } = new ActivityExtension();
 
         public class ActivityTableMap : MsSqlAggregateRootMap<Activity>
         {
-
             protected override void MapTable(EntityTypeBuilder<Activity> builder)
             {
                 builder.ToTable("Shop_Activity");

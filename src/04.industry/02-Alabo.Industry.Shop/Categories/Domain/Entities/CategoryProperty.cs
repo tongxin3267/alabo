@@ -11,18 +11,20 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Newtonsoft.Json;
 
-namespace Alabo.Industry.Shop.Categories.Domain.Entities {
-
+namespace Alabo.Industry.Shop.Categories.Domain.Entities
+{
     /// <summary>
     ///     类目属性值
     /// </summary>
     [ClassProperty(Name = "类目属性值")]
-    public class CategoryProperty : AggregateRoot<CategoryProperty, Guid> {
-
-        public CategoryProperty() : this(Guid.Empty) {
+    public class CategoryProperty : AggregateRoot<CategoryProperty, Guid>
+    {
+        public CategoryProperty() : this(Guid.Empty)
+        {
         }
 
-        public CategoryProperty(Guid id) : base(id) {
+        public CategoryProperty(Guid id) : base(id)
+        {
         }
 
         /// <summary>
@@ -61,7 +63,8 @@ namespace Alabo.Industry.Shop.Categories.Domain.Entities {
         ///     排序,越小排在越前面
         /// </summary>
         [Display(Name = "排序", Order = 1000)]
-        [Field(ControlsType = ControlsType.Numberic, ListShow = true, EditShow = true, SortOrder = 10000, Width = "110")]
+        [Field(ControlsType = ControlsType.Numberic, ListShow = true, EditShow = true, SortOrder = 10000,
+            Width = "110")]
         [Range(0, 99999, ErrorMessage = "请输入0-99999之间的数字")]
         [HelpBlock("排序,越小排在越前面，请输入0-99999之间的数字")]
         public long SortOrder { get; set; } = 1000;
@@ -77,7 +80,7 @@ namespace Alabo.Industry.Shop.Categories.Domain.Entities {
         public string DisplayValue { get; set; }
 
         /// <summary>
-        /// 自定义值
+        ///     自定义值
         /// </summary>
         [Display(Name = "自定义值", Order = 1000)]
         public string SelfDefineValue { get; set; }
@@ -95,13 +98,15 @@ namespace Alabo.Industry.Shop.Categories.Domain.Entities {
         public string PropertyValueJson { get; set; }
     }
 
-    public class CategoryPropertyTableMap : MsSqlAggregateRootMap<CategoryProperty> {
-
-        protected override void MapTable(EntityTypeBuilder<CategoryProperty> builder) {
+    public class CategoryPropertyTableMap : MsSqlAggregateRootMap<CategoryProperty>
+    {
+        protected override void MapTable(EntityTypeBuilder<CategoryProperty> builder)
+        {
             builder.ToTable("Shop_CategoryProperty");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<CategoryProperty> builder) {
+        protected override void MapProperties(EntityTypeBuilder<CategoryProperty> builder)
+        {
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.PropertyValues);
@@ -109,7 +114,8 @@ namespace Alabo.Industry.Shop.Categories.Domain.Entities {
             builder.Ignore(e => e.PropertyValueJson);
             builder.Ignore(e => e.SelfDefineValue);
             builder.Ignore(e => e.Version);
-            if (TenantContext.IsTenant) {
+            if (TenantContext.IsTenant)
+            {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
             }
         }

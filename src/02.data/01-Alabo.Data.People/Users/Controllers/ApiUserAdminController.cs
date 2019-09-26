@@ -20,18 +20,16 @@ using Alabo.Framework.Core.WebApis.Service;
 using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Data.People.Users.Controllers {
-
+namespace Alabo.Data.People.Users.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/UserAdmin/[action]")]
-    public class ApiUserAdminController : ApiBaseController {
-
-        public ApiUserAdminController() : base() {
-        }
-
+    public class ApiUserAdminController : ApiBaseController
+    {
         [HttpGet]
         [Display(Description = "用户信息")]
-        public ApiResult<PagedList<ViewUser>> UserList([FromQuery] PagedInputDto parameter) {
+        public ApiResult<PagedList<ViewUser>> UserList([FromQuery] PagedInputDto parameter)
+        {
             var model = Resolve<IUserService>().GetViewUserPageList(Query);
             return ApiResult.Success(model);
         }
@@ -41,15 +39,15 @@ namespace Alabo.Data.People.Users.Controllers {
         /// </summary>
         /// <param name="id">Id标识</param>
         [HttpGet]
-        public ApiResult Edit(long id) {
+        public ApiResult Edit(long id)
+        {
             var user = Resolve<IUserService>().GetUserDetail(id);
-            if (user == null) {
-                return ApiResult.Failure("您访问的用户不存在");
-            }
+            if (user == null) return ApiResult.Failure("您访问的用户不存在");
 
             //ViewBag.ServiceCenterTypeName = "所属" + typeName;
             var parent = Resolve<IUserService>().GetSingle(u => u.Id == user.ParentId);
-            var view = new ViewAdminEdit {
+            var view = new ViewAdminEdit
+            {
                 ServiceCenterName = parent == null ? "" : parent.GetUserName(),
                 User = user,
                 UserDetail = user.Detail,
@@ -59,13 +57,16 @@ namespace Alabo.Data.People.Users.Controllers {
                 Avator = Resolve<IApiService>().ApiUserAvator(user.Id),
                 Parent = parent,
                 GradeList = Resolve<IAutoConfigService>().GetList<UserGradeConfig>(),
-                StatusList = Enum.GetValues(typeof(Status)).Cast<Status>().ToDictionary(x => (long)x, x => x.GetDisplayName()).Select(x => new { Name = x.Value, Value = x.Key }).ToList(),
+                StatusList = Enum.GetValues(typeof(Status)).Cast<Status>()
+                    .ToDictionary(x => (long) x, x => x.GetDisplayName())
+                    .Select(x => new {Name = x.Value, Value = x.Key}).ToList()
             };
 
             view.RegionId = user.Detail.RegionId;
             var userAddress = Resolve<IUserAddressService>()
                 .GetSingle(r => r.UserId == user.Id && r.Type == AddressLockType.UserInfoAddress);
-            if (userAddress != null) {
+            if (userAddress != null)
+            {
                 view.Address = userAddress.Address;
                 view.RegionName = Resolve<IRegionService>().GetFullName(userAddress.RegionId);
             }
@@ -74,18 +75,16 @@ namespace Alabo.Data.People.Users.Controllers {
         }
 
         [HttpPost]
-        public ApiResult EditBasic([FromBody] ViewAdminEdit view) {
-            if (view.User.Name.IsNullOrEmpty() || view.User.Email.IsNullOrEmpty()) {
+        public ApiResult EditBasic([FromBody] ViewAdminEdit view)
+        {
+            if (view.User.Name.IsNullOrEmpty() || view.User.Email.IsNullOrEmpty())
                 return ApiResult.Failure("操作失败", "姓名或邮箱不能为空");
-            }
 
             var user = view.User;
             user.Status = view.Status;
             user.Detail.ModifiedTime = DateTime.Now;
             var result = Resolve<IUserAdminService>().UpdateUser(user);
-            if (!result.Succeeded) {
-                return ApiResult.Failure(result.ErrorMessages.Join());
-            }
+            if (!result.Succeeded) return ApiResult.Failure(result.ErrorMessages.Join());
 
             //  _messageManager.Keep("信息修改成功");
             //Resolve<IUserService>().Log($"修改会员基本信息，用户名{user.UserName},姓名{user.Name},手机{user.Mobile}");
@@ -97,12 +96,12 @@ namespace Alabo.Data.People.Users.Controllers {
         /// </summary>
         /// <param name="view">The 视图.</param>
         [HttpPost]
-        public ApiResult Edit([FromBody] ViewAdminEdit view) {
-            try {
+        public ApiResult Edit([FromBody] ViewAdminEdit view)
+        {
+            try
+            {
                 var find = Resolve<IUserDetailService>().GetSingle(r => r.Id == view.UserDetail.Id);
-                if (find == null) {
-                    return ApiResult.Failure("该用户的详细资料不存在");
-                }
+                if (find == null) return ApiResult.Failure("该用户的详细资料不存在");
 
                 find.Remark = view.UserDetail.Remark;
                 find.Sex = view.Sex;
@@ -111,29 +110,28 @@ namespace Alabo.Data.People.Users.Controllers {
                 find.RegionId = view.UserDetail.RegionId;
                 find.RegionId = view.RegionId;
 
-                if (view.UserDetail != null && view.UserDetail.RegionId >= 0) {
-                    find.RegionId = view.UserDetail.RegionId;
-                }
+                if (view.UserDetail != null && view.UserDetail.RegionId >= 0) find.RegionId = view.UserDetail.RegionId;
 
                 var result = Resolve<IUserAdminService>().UpdateUserDetail(find);
-                if (!result) {
-                    return ApiResult.Failure("服务异常:会员资料修改失败");
-                } else {
-                    var userInfoAddress = new UserInfoAddressInput {
-                        UserId = view.User.Id,
-                        Id = view.UserDetail.AddressId,
-                        RegionId = view.UserDetail.RegionId,
-                        Address = view.Address,
-                        Type = AddressLockType.UserInfoAddress
-                    };
+                if (!result) return ApiResult.Failure("服务异常:会员资料修改失败");
 
-                    Resolve<IUserAddressService>().SaveUserInfoAddress(userInfoAddress);
-                }
+                var userInfoAddress = new UserInfoAddressInput
+                {
+                    UserId = view.User.Id,
+                    Id = view.UserDetail.AddressId,
+                    RegionId = view.UserDetail.RegionId,
+                    Address = view.Address,
+                    Type = AddressLockType.UserInfoAddress
+                };
+
+                Resolve<IUserAddressService>().SaveUserInfoAddress(userInfoAddress);
 
                 //  _messageManager.Keep("修改会员详细信息");
                 Resolve<IUserService>().Log($"修改会员详细信息,会员ID为{find.UserId}");
                 return ApiResult.Success("信息编辑成功");
-            } catch (Exception exc) {
+            }
+            catch (Exception exc)
+            {
                 return ApiResult.Failure($"信息编辑失败: {exc.Message}");
             }
         }
@@ -143,45 +141,57 @@ namespace Alabo.Data.People.Users.Controllers {
         /// </summary>
         /// <param name="view">The 视图.</param>
         [HttpPost]
-        public ApiResult UpdatePassword([FromBody] ViewAdminEdit view) {
-            var passwordInput = new PasswordInput {
+        public ApiResult UpdatePassword([FromBody] ViewAdminEdit view)
+        {
+            var passwordInput = new PasswordInput
+            {
                 Password = view.Password,
                 ConfirmPassword = view.ConfirmPassword,
                 UserId = view.EditUserId
             };
 
             var editUser = Resolve<IUserService>().GetSingle(view.EditUserId);
-            if (editUser == null) {
-                return ApiResult.Failure("要编辑的用户ID对应用户信息不存在");
-            }
+            if (editUser == null) return ApiResult.Failure("要编辑的用户ID对应用户信息不存在");
             view.User = editUser;
 
             //修改登录密码
-            if (view.Type == 1) {
+            if (view.Type == 1)
+            {
                 passwordInput.Type = PasswordType.LoginPassword;
                 var reuslt = Resolve<IUserDetailService>().ChangePassword(passwordInput, false);
-                if (reuslt.Succeeded) {
-                    Resolve<IUserService>().Log($"管理员修改会员的登录密码,会员ID为{view.User.Id},会员名{view.User.UserName},姓名{view.User.Name}");
-                    if (view.SendPassword) {
+                if (reuslt.Succeeded)
+                {
+                    Resolve<IUserService>()
+                        .Log($"管理员修改会员的登录密码,会员ID为{view.User.Id},会员名{view.User.UserName},姓名{view.User.Name}");
+                    if (view.SendPassword)
+                    {
                         //  _messageManager.AddRawQueue(view.User.Mobile,
                         //    $"管理员已成功修改了您的登录密码，新的登录密码为{view.Password}，请尽快登录系统，并修改登录密码");
                     }
-                } else {
+                }
+                else
+                {
                     return ApiResult.Failure("服务异常:登录密码修改失败，请稍后在试");
                 }
             }
 
-            if (view.Type == 2) {
+            if (view.Type == 2)
+            {
                 passwordInput.Type = PasswordType.PayPassword;
                 var reuslt = Resolve<IUserDetailService>().ChangePassword(passwordInput, false);
-                if (reuslt.Succeeded) {
-                    Resolve<IUserService>().Log($"管理员修改会员的支付密码,会员ID为{view.User.Id},会员名{view.User.UserName},姓名{view.User.Name}"
-                        );
-                    if (view.SendPassword) {
+                if (reuslt.Succeeded)
+                {
+                    Resolve<IUserService>().Log(
+                        $"管理员修改会员的支付密码,会员ID为{view.User.Id},会员名{view.User.UserName},姓名{view.User.Name}"
+                    );
+                    if (view.SendPassword)
+                    {
                         //  _messageManager.AddRawQueue(view.User.Mobile,
                         //   $"管理员已成功修改了您的支付密码，新的登录密码为{view.Password}，请尽快登录系统，并修改支付密码");
                     }
-                } else {
+                }
+                else
+                {
                     return ApiResult.Failure("服务异常:支付密码修改失败，请稍后在试" + reuslt);
                 }
             }

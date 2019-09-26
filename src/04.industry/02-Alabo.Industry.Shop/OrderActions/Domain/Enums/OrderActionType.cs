@@ -3,8 +3,8 @@ using Alabo.Industry.Shop.Orders;
 using Alabo.UI.Enum;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Industry.Shop.OrderActions.Domain.Enums {
-
+namespace Alabo.Industry.Shop.OrderActions.Domain.Enums
+{
     /// <summary>
     ///     订单操作类型
     ///     用户操作类型：从100 -199
@@ -13,8 +13,8 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Enums {
     ///     线下店铺用户操作：从400-499
     /// </summary>
     [ClassProperty(Name = "订单操作类型")]
-    public enum OrderActionType {
-
+    public enum OrderActionType
+    {
         #region 用户操作
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Enums {
         UserCancleOrder = 103,
 
         /// <summary>
-        /// 已发货
+        ///     已发货
         ///     会员退换货
         /// </summary>
         [LabelCssClass("text-success")]
@@ -54,7 +54,7 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Enums {
         UserReturnProduct = 104,
 
         /// <summary>
-        /// 未发货
+        ///     未发货
         ///     会员退款
         /// </summary>
         [LabelCssClass("text-success")]
@@ -126,7 +126,8 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Enums {
         /// </summary>
         [LabelCssClass("text-success")]
         [Display(Name = "卖家发货")]
-        [OrderActionType(Intro = "卖家{SellerUserName}发货", AllowStatus = "Remited,WaitingReceiptProduct,WaitingSellerSendGoods",  //WaitingBuyerConfirm
+        [OrderActionType(Intro = "卖家{SellerUserName}发货",
+            AllowStatus = "Remited,WaitingReceiptProduct,WaitingSellerSendGoods", //WaitingBuyerConfirm
             Name = "发货", Method = "OrderAdminDelivery", AllowUser = 1)]
         SellerDelivery = 202,
 
@@ -271,7 +272,8 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Enums {
         [LabelCssClass("text-success")]
         [Display(Name = "管理员回复留言")]
         [OrderActionType(Intro = "管理员{AdminUserName}后台删除订单", Icon = FontAwesomeIcon.AddressBook,
-            AllowStatus = "WaitingBuyerPay,WaitingSellerSendGoods", Name = "留言", Method = "OrderAdminMessage", AllowUser = 2)]
+            AllowStatus = "WaitingBuyerPay,WaitingSellerSendGoods", Name = "留言", Method = "OrderAdminMessage",
+            AllowUser = 2)]
         AdminMessage = 316,
 
         /// <summary>
@@ -292,7 +294,8 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Enums {
         [LabelCssClass("text-success")]
         [Display(Name = "管理员关闭订单")]
         [OrderActionType(Intro = "管理员{AdminUserName}后台取消订单", Icon = FontAwesomeIcon.WindowClose,
-            AllowStatus = "WaitingBuyerPay", Name = "关闭", Type = "AdminClose", Color = "metal", Method = "Api/OrderAdmin/AdminCancel", AllowUser = 2)]
+            AllowStatus = "WaitingBuyerPay", Name = "关闭", Type = "AdminClose", Color = "metal",
+            Method = "Api/OrderAdmin/AdminCancel", AllowUser = 2)]
         AdminClose = 319,
 
         /// <summary>
@@ -315,7 +318,7 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Enums {
         AdminCheckLogistics = 321,
 
         /// <summary>
-        ///    管理员退款
+        ///     管理员退款
         /// </summary>
         [LabelCssClass("text-success")]
         [Display(Name = "管理员手动退款")]
@@ -364,7 +367,7 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Enums {
         #region 线下店铺用户操作
 
         /// <summary>
-        /// 会员创建订单(线下店铺)
+        ///     会员创建订单(线下店铺)
         /// </summary>
         [LabelCssClass("text-success")]
         [Display(Name = "会员创建订单")]
@@ -372,7 +375,7 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Enums {
         OfflineUserCreateOrder = 401,
 
         /// <summary>
-        /// 会员支付订单(线下店铺)
+        ///     会员支付订单(线下店铺)
         /// </summary>
         [LabelCssClass("text-success")]
         [Display(Name = "会员支付订单")]
@@ -381,7 +384,7 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Enums {
         OfflineUserPayOrder = 402,
 
         /// <summary>
-        /// 会员取消订单(线下店铺)
+        ///     会员取消订单(线下店铺)
         /// </summary>
         [LabelCssClass("text-success")]
         [Display(Name = "会员取消订单")]

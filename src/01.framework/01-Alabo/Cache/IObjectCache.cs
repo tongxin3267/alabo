@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Alabo.Dependency;
 
-namespace Alabo.Cache {
-
+namespace Alabo.Cache
+{
     /// <summary>
     ///     Interface IObjectCache
     /// </summary>
-    public interface IObjectCache : IScopeDependency {
-
+    public interface IObjectCache : IScopeDependency
+    {
         /// <summary>
         ///     Gets the context.
         /// </summary>

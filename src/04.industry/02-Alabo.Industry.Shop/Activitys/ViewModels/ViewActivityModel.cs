@@ -9,13 +9,13 @@ using Microsoft.AspNetCore.Http;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 
-namespace Alabo.Industry.Shop.Activitys.ViewModels {
-
+namespace Alabo.Industry.Shop.Activitys.ViewModels
+{
     /// <summary>
     ///     Class ViewActivityModel.
     /// </summary>
-    public class ViewActivityModel : BaseViewModel {
-
+    public class ViewActivityModel : BaseViewModel
+    {
         /// <summary>
         ///     Gets or sets the 活动.
         /// </summary>

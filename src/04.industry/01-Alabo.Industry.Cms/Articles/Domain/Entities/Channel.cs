@@ -6,18 +6,18 @@ using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Industry.Cms.Articles.Domain.Entities {
-
+namespace Alabo.Industry.Cms.Articles.Domain.Entities
+{
     /// <summary>
     ///     频道
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("CMS_Channel")]
     [ClassProperty(Name = "频道")]
-    public class Channel : AggregateMongodbRoot<Channel> {
-
+    public class Channel : AggregateMongodbRoot<Channel>
+    {
         // <summary>
-        ///     频道名称
+        /// 频道名称
         /// </summary>
         [Display(Name = "频道名称")]
         public string Name { get; set; }

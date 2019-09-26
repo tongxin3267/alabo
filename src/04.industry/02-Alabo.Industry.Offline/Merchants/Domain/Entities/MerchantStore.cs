@@ -8,23 +8,22 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace Alabo.Industry.Offline.Merchants.Domain.Entities
 {
     /// <summary>
-    /// 门店设置
+    ///     门店设置
     /// </summary>
     [Table("Offline_MerchantStore")]
     [BsonIgnoreExtraElements]
     [ClassProperty(Name = "门店设置")]
     public class MerchantStore : AggregateMongodbUserRoot<MerchantStore>
     {
-        [BsonIgnore]
-        public string StoreId { get; set; }
+        [BsonIgnore] public string StoreId { get; set; }
 
         /// <summary>
-        /// 商家ID
+        ///     商家ID
         /// </summary>
         public string MerchantId { get; set; }
 
         /// <summary>
-        /// 店铺名称
+        ///     店铺名称
         /// </summary>
         [Display(Name = "店铺名称")]
         [Field(ControlsType = ControlsType.TextBox, ListShow = true)]
@@ -32,7 +31,7 @@ namespace Alabo.Industry.Offline.Merchants.Domain.Entities
         public string Name { get; set; }
 
         /// <summary>
-        /// 门店logo
+        ///     门店logo
         /// </summary>
         [Display(Name = "门店Logo")]
         [Field(ControlsType = ControlsType.AlbumUploder, ListShow = true)]
@@ -40,7 +39,7 @@ namespace Alabo.Industry.Offline.Merchants.Domain.Entities
         public string Logo { get; set; }
 
         /// <summary>
-        /// 门店描述
+        ///     门店描述
         /// </summary>
         [Display(Name = "门店描述")]
         [Field(ControlsType = ControlsType.TextArea, ListShow = true)]

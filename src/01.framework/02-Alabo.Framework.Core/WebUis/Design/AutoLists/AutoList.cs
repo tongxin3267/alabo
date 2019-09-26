@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.Framework.Core.WebUis.Design.AutoLists

@@ -12,14 +12,14 @@ using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.Industry.Shop.Orders.Domain.Entities {
-
+namespace Alabo.Industry.Shop.Orders.Domain.Entities
+{
     /// <summary>
     ///     订单表
     /// </summary>
     [ClassProperty(Name = "订单表", Description = "店铺管理", PageType = ViewPageType.List, ListApi = "Api/Order/Index")]
-    public class Order : AggregateDefaultUserRoot<Order> {
-
+    public class Order : AggregateDefaultUserRoot<Order>
+    {
         /// <summary>
         ///     发货用户Id
         /// </summary>
@@ -137,12 +137,12 @@ namespace Alabo.Industry.Shop.Orders.Domain.Entities {
         ///     根据Id自动生成12位序列号
         /// </summary>
         [Display(Name = "根据Id自动生成12位序列号")]
-        public string Serial {
-            get {
+        public string Serial
+        {
+            get
+            {
                 var searSerial = $"9{Id.ToString().PadLeft(9, '0')}";
-                if (Id.ToString().Length == 10) {
-                    searSerial = $"{Id.ToString()}";
-                }
+                if (Id.ToString().Length == 10) searSerial = $"{Id.ToString()}";
 
                 return searSerial;
             }
@@ -151,13 +151,15 @@ namespace Alabo.Industry.Shop.Orders.Domain.Entities {
         #endregion 以下为非数据库字段
     }
 
-    public class OrderTableMap : MsSqlAggregateRootMap<Order> {
-
-        protected override void MapTable(EntityTypeBuilder<Order> builder) {
+    public class OrderTableMap : MsSqlAggregateRootMap<Order>
+    {
+        protected override void MapTable(EntityTypeBuilder<Order> builder)
+        {
             builder.ToTable("Shop_Order");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<Order> builder) {
+        protected override void MapProperties(EntityTypeBuilder<Order> builder)
+        {
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.Actions);
@@ -166,7 +168,8 @@ namespace Alabo.Industry.Shop.Orders.Domain.Entities {
             builder.Ignore(e => e.AccountPayPair);
             builder.Ignore(e => e.OrderExtension);
             builder.Ignore(e => e.Version);
-            if (TenantContext.IsTenant) {
+            if (TenantContext.IsTenant)
+            {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
             }
         }

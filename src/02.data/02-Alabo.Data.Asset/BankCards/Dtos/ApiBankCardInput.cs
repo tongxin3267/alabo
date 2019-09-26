@@ -6,16 +6,18 @@ using Alabo.UI;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.BankCards.Dtos {
-
-    [ClassProperty(Name = "银行卡管理", SideBarType = SideBarType.BankCardSideBar, PostApi = "Api/BankCard/AddBankCard", Icon = IconFontawesome.bank)]
-    public class ApiBankCardInput : EntityDto {
+namespace Alabo.App.Asset.BankCards.Dtos
+{
+    [ClassProperty(Name = "银行卡管理", SideBarType = SideBarType.BankCardSideBar, PostApi = "Api/BankCard/AddBankCard",
+        Icon = IconFontawesome.bank)]
+    public class ApiBankCardInput : EntityDto
+    {
         public string Id { get; set; }
 
         public long UserId { get; set; }
 
         /// <summary>
-        /// 银行卡号
+        ///     银行卡号
         /// </summary>
         [Display(Name = "银行卡号")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
@@ -36,7 +38,8 @@ namespace Alabo.App.Asset.BankCards.Dtos {
         /// </summary>
         [Display(Name = "银行类型")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        [Field(ControlsType = ControlsType.DropdownList, DataSource = "Alabo.Framework.Core.Enums.Enum.BankType", Width = "120", EditShow = true, ListShow = true, SortOrder = 3)]
+        [Field(ControlsType = ControlsType.DropdownList, DataSource = "Alabo.Framework.Core.Enums.Enum.BankType",
+            Width = "120", EditShow = true, ListShow = true, SortOrder = 3)]
         public BankType Type { get; set; }
 
         /// <summary>
@@ -48,7 +51,7 @@ namespace Alabo.App.Asset.BankCards.Dtos {
         public string Address { get; set; }
 
         /// <summary>
-        /// 用户Id
+        ///     用户Id
         /// </summary>
         public long LoginUserId { get; set; }
     }

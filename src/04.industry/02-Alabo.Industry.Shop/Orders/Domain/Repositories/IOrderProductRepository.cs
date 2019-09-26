@@ -5,12 +5,10 @@ using Alabo.Industry.Shop.Orders.Domain.Entities;
 
 namespace Alabo.Industry.Shop.Orders.Domain.Repositories
 {
-
     public interface IOrderProductRepository : IRepository<OrderProduct, long>
     {
-
         /// <summary>
-        /// GetUserProductCount
+        ///     GetUserProductCount
         /// </summary>
         /// <param name="UserId"></param>
         /// <param name="productIds"></param>
@@ -18,7 +16,7 @@ namespace Alabo.Industry.Shop.Orders.Domain.Repositories
         List<UserProductCount> GetUserProductCount(long UserId, List<long> productIds);
 
         /// <summary>
-        /// GetProductCount
+        ///     GetProductCount
         /// </summary>
         /// <param name="productIds"></param>
         /// <returns></returns>

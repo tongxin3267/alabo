@@ -16,14 +16,11 @@ namespace Alabo.Domains.Trees
         /// <param name="excludeSelf">是否排除当前节点,默认排除自身</param>
         public static List<string> GetParentIdsFromPath(this ITreeNode node, bool excludeSelf = true)
         {
-            if (node == null || node.Path.IsEmpty()) {
-                return new List<string>();
-            }
+            if (node == null || node.Path.IsEmpty()) return new List<string>();
 
             var result = node.Path.Split(',').Where(id => !string.IsNullOrWhiteSpace(id) && id != ",").ToList();
-            if (excludeSelf) {
+            if (excludeSelf)
                 result = result.Where(id => id.SafeString().ToLower() != node.Id.SafeString().ToLower()).ToList();
-            }
 
             return result;
         }
@@ -37,16 +34,12 @@ namespace Alabo.Domains.Trees
             where TEntity : class, ITreeNode
         {
             var result = new List<string>();
-            if (entities == null) {
-                return result;
-            }
+            if (entities == null) return result;
 
             var list = entities.ToList();
             list.ForEach(entity =>
             {
-                if (entity == null) {
-                    return;
-                }
+                if (entity == null) return;
 
                 result.AddRange(entity.GetParentIdsFromPath().Select(t => t.SafeString()));
             });

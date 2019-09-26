@@ -25,32 +25,40 @@ using Alabo.Users.Entities;
 using QRCoder;
 using File = System.IO.File;
 
-namespace Alabo.Cloud.People.UserQrCode.Domain.Services {
-
-    public class UserQrCodeService : ServiceBase<UserDetail, long>, IUserQrCodeService {
-
-        public UserQrCodeService(IUnitOfWork unitOfWork, IRepository<UserDetail, long> repository) : base(unitOfWork, repository) {
+namespace Alabo.Cloud.People.UserQrCode.Domain.Services
+{
+    public class UserQrCodeService : ServiceBase<UserDetail, long>, IUserQrCodeService
+    {
+        public UserQrCodeService(IUnitOfWork unitOfWork, IRepository<UserDetail, long> repository) : base(unitOfWork,
+            repository)
+        {
         }
 
-        public PagedList<ViewImagePage> QrCodePageList(object query) {
+        public PagedList<ViewImagePage> QrCodePageList(object query)
+        {
             var userResult = Resolve<IUserService>().GetPagedList(query);
 
             var list = new List<ViewImagePage>();
-            userResult.ForEach(r => {
-                list.Add(new ViewImagePage() {
+            userResult.ForEach(r =>
+            {
+                list.Add(new ViewImagePage
+                {
                     Id = r.Id,
                     Title = r.GetUserName(),
                     ImageUrl = $"/wwwroot/qrcode/{r.Id}.jpeg"
                 });
             });
-            return PagedList<ViewImagePage>.Create(list, userResult.RecordCount, userResult.PageSize, userResult.PageIndex);
+            return PagedList<ViewImagePage>.Create(list, userResult.RecordCount, userResult.PageSize,
+                userResult.PageIndex);
         }
 
         /// <summary>
-        /// 生成二维码任务
+        ///     生成二维码任务
         /// </summary>
-        public void CreateCodeTask() {
-            var backJobParameter = new BackJobParameter {
+        public void CreateCodeTask()
+        {
+            var backJobParameter = new BackJobParameter
+            {
                 ModuleId = TaskQueueModuleId.UserQrcodeCreate,
                 CheckLastOne = true,
                 ServiceName = typeof(IUserQrCodeService).Name,
@@ -61,15 +69,15 @@ namespace Alabo.Cloud.People.UserQrCode.Domain.Services {
         }
 
         /// <summary>
-        /// 更新所有会员的二维码
+        ///     更新所有会员的二维码
         /// </summary>
-        public void CreateAllUserQrCode() {
+        public void CreateAllUserQrCode()
+        {
             var maxUserId = Resolve<IUserService>().MaxUserId();
-            for (var i = 0; i < maxUserId + 1; i++) {
+            for (var i = 0; i < maxUserId + 1; i++)
+            {
                 var user = Ioc.Resolve<IUserService>().GetUserDetail(i);
-                if (user != null) {
-                    CreateCode(user);
-                }
+                if (user != null) CreateCode(user);
             }
         }
 
@@ -77,13 +85,12 @@ namespace Alabo.Cloud.People.UserQrCode.Domain.Services {
         ///     生成会员二维码
         /// </summary>
         /// <param name="userId">用户Id</param>
-        public string QrCore(long userId) {
+        public string QrCore(long userId)
+        {
             var path = $"/wwwroot/qrcode/{userId}.jpeg";
             var qrcodePath = FileHelper.RootPath + path;
 
-            if (File.Exists(qrcodePath)) {
-                return Resolve<IApiService>().ApiImageUrl(path);
-            }
+            if (File.Exists(qrcodePath)) return Resolve<IApiService>().ApiImageUrl(path);
 
             var user = Resolve<IUserService>().GetSingle(userId);
             CreateCode(user); // 如果不存在则继续生成二维码
@@ -94,23 +101,22 @@ namespace Alabo.Cloud.People.UserQrCode.Domain.Services {
         ///     生成用户的二维码，并且把二维码保存到本地
         /// </summary>
         /// <param name="user">用户</param>
-        public void CreateCode(Users.Entities.User user) {
+        public void CreateCode(User user)
+        {
             //文件夹不存在，重新生成文件夹
             FileHelper.CreateDirectory(FileHelper.WwwRootPath + "//qrcode");
             //二维码图片地址
             var qrcodePath = $"/wwwroot/qrcode/{user.Id}.jpeg";
             var qrConfig = Resolve<IAutoConfigService>().GetValue<QrCodeConfig>();
-            if (qrConfig != null) {
-                if (qrConfig.BgPicture.IsNullOrEmpty()) {
+            if (qrConfig != null)
+            {
+                if (qrConfig.BgPicture.IsNullOrEmpty())
                     qrConfig.BgPicture = "/wwwroot/assets/mobile/images/qrcode/01.png";
-                }
 
                 qrConfig.BgPicture.Replace('/', '\\');
             }
 
-            if (qrConfig.QrCodeBig <= 50) {
-                qrConfig.QrCodeBig = 300;
-            }
+            if (qrConfig.QrCodeBig <= 50) qrConfig.QrCodeBig = 300;
 
             var webSite = Resolve<IAutoConfigService>().GetValue<WebSiteConfig>();
             //二维码网址
@@ -119,11 +125,10 @@ namespace Alabo.Cloud.People.UserQrCode.Domain.Services {
             // from页面根据二维码设置，完成两种客户需求：1.跳转需求，2 展示具体的内容，比如公司介绍等等
             //var url = $@"{webSite.DomainName}/user/reg?ParentUserName={user.UserName}";
             var url = $@"{webSite.DomainName}/pages/index?path=user_reg&usercode={user.UserName}";
-            if (!url.Contains("http://") || !url.Contains("https://")) {
-                url = $"https://{url}";
-            }
+            if (!url.Contains("http://") || !url.Contains("https://")) url = $"https://{url}";
 
-            try {
+            try
+            {
                 var qrGenerator = new QRCodeGenerator();
                 var qrCodeData =
                     qrGenerator.CreateQrCode(url.ToEncoding(), QRCodeGenerator.ECCLevel.H); // 使用utf-8编码，解决某些浏览器不能识别问题
@@ -138,12 +143,12 @@ namespace Alabo.Cloud.People.UserQrCode.Domain.Services {
 
                 g.DrawImage(bmp, new Point(qrConfig.PositionLeft, qrConfig.PositionTop));
 
-                if (qrConfig.IsDisplayUserInformation) {
+                if (qrConfig.IsDisplayUserInformation)
+                {
                     var avatorPath = RuntimeContext.Current.Path.RootPath +
                                      Resolve<IApiService>().ApiUserAvator(user.Id);
-                    if (!File.Exists(avatorPath)) {
+                    if (!File.Exists(avatorPath))
                         avatorPath = RuntimeContext.Current.Path.WebRootPath + @"\static\images\avator\Man_48.png";
-                    }
 
                     var avatorWidth = 150;
                     var avator = new Bitmap(Image.FromFile(avatorPath), avatorWidth, avatorWidth);
@@ -157,9 +162,7 @@ namespace Alabo.Cloud.People.UserQrCode.Domain.Services {
                     //获取等级
                     var grade = Resolve<IGradeService>().GetGrade(user.GradeId);
                     var gradeName = string.Empty;
-                    if (grade != null) {
-                        gradeName = grade.Name;
-                    }
+                    if (grade != null) gradeName = grade.Name;
 
                     // gradeName = "匠心" + gradeName;
                     length = g.MeasureString(gradeName, font);
@@ -170,18 +173,23 @@ namespace Alabo.Cloud.People.UserQrCode.Domain.Services {
                 bg.Save(result, ImageFormat.Jpeg);
                 bg.Save(FileHelper.RootPath + qrcodePath, ImageFormat.Jpeg);
                 result.Flush();
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 Console.WriteLine(ex.Message);
             }
         }
 
-        public PagedList<ViewImagePage> GetQrCodeList(PagedInputDto parameter) {
+        public PagedList<ViewImagePage> GetQrCodeList(PagedInputDto parameter)
+        {
             var users = Resolve<IUserService>()
-                .GetListByPageDesc(15, (int)parameter.PageIndex, u => u.ParentId == parameter.UserId);
+                .GetListByPageDesc(15, (int) parameter.PageIndex, u => u.ParentId == parameter.UserId);
             var usersCount = Resolve<IUserService>().GetList(u => u.ParentId == parameter.UserId).Count();
             var list = new List<ViewImagePage>();
-            users.ToList().ForEach(r => {
-                list.Add(new ViewImagePage() {
+            users.ToList().ForEach(r =>
+            {
+                list.Add(new ViewImagePage
+                {
                     Id = r.Id,
                     Title = r.GetUserName(),
                     ImageUrl = $"/wwwroot/qrcode/{r.Id}.jpeg"

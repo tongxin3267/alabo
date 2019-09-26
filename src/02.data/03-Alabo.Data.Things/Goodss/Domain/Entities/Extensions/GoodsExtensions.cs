@@ -1,5 +1,6 @@
-﻿namespace Alabo.Data.Things.Goodss.Domain.Entities.Extensions {
-
-    public class GoodsExtensions {
+﻿namespace Alabo.Data.Things.Goodss.Domain.Entities.Extensions
+{
+    public class GoodsExtensions
+    {
     }
 }

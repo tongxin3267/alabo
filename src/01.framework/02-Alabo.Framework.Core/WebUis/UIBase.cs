@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using Alabo.Cache;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Framework.Core.WebUis.Design.AutoLists;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.WebUis.Design.AutoLists;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.Web.Mvc.ViewModel;
@@ -28,9 +28,7 @@ namespace Alabo.Framework.Core.WebUis
         /// <returns></returns>
         protected AutoForm ToAutoForm(object model)
         {
-            if (model != null) {
-                return AutoFormMapping.Convert(model);
-            }
+            if (model != null) return AutoFormMapping.Convert(model);
 
             return null;
         }
@@ -47,21 +45,13 @@ namespace Alabo.Framework.Core.WebUis
         /// <returns></returns>
         protected TKey ToId<TKey>(object id)
         {
-            if (typeof(TKey) == typeof(int) || typeof(TKey) == typeof(long)) {
-                id = id.ConvertToLong(0);
-            }
+            if (typeof(TKey) == typeof(int) || typeof(TKey) == typeof(long)) id = id.ConvertToLong(0);
 
-            if (typeof(TKey) == typeof(Guid)) {
-                id = id.ConvertToGuid();
-            }
+            if (typeof(TKey) == typeof(Guid)) id = id.ConvertToGuid();
 
-            if (typeof(TKey) == typeof(string)) {
-                id = id.ToStr();
-            }
+            if (typeof(TKey) == typeof(string)) id = id.ToStr();
 
-            if (typeof(TKey) == typeof(ObjectId)) {
-                id = ObjectId.Parse(id.ToStr());
-            }
+            if (typeof(TKey) == typeof(ObjectId)) id = ObjectId.Parse(id.ToStr());
 
             return (TKey) id;
         }
@@ -142,9 +132,7 @@ namespace Alabo.Framework.Core.WebUis
         protected PageResult<AutoListItem> ToPageList<TInput>(IEnumerable<AutoListItem> list,
             PagedList<TInput> pageList)
         {
-            if (pageList == null) {
-                return null;
-            }
+            if (pageList == null) return null;
 
             var apiRusult = new PageResult<AutoListItem>
             {
@@ -190,9 +178,7 @@ namespace Alabo.Framework.Core.WebUis
         /// <returns></returns>
         protected PageResult<TOutput> ToPageResult<TOutput, TInput>(PagedList<TInput> pageList)
         {
-            if (pageList == null) {
-                return null;
-            }
+            if (pageList == null) return null;
 
             var newPageList = new PagedList<TOutput>();
             pageList.ForEach(r =>
@@ -220,9 +206,7 @@ namespace Alabo.Framework.Core.WebUis
         /// <returns></returns>
         protected PageResult<T> ToPageResult<T>(PagedList<T> pageList)
         {
-            if (pageList == null) {
-                return null;
-            }
+            if (pageList == null) return null;
 
             var apiRusult = new PageResult<T>
             {

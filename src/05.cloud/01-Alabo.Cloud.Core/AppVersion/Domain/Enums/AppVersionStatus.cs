@@ -1,17 +1,17 @@
-﻿namespace _01_Alabo.Cloud.Core.AppVersion.Domain.Enums {
-
+﻿namespace _01_Alabo.Cloud.Core.AppVersion.Domain.Enums
+{
     /// <summary>
-    /// 升级枚举
+    ///     升级枚举
     /// </summary>
-    public enum AppVersionStatus {
-
+    public enum AppVersionStatus
+    {
         /// <summary>
-        /// 无需更新
+        ///     无需更新
         /// </summary>
         UnUp = 0,
 
         /// <summary>
-        /// 可以更新
+        ///     可以更新
         /// </summary>
         Use = 1
     }

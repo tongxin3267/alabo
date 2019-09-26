@@ -1,6 +1,6 @@
-using MongoDB.Bson;
 using Alabo.Domains.Repositories;
 using Alabo.Tenants.Domain.Entities;
+using MongoDB.Bson;
 
 namespace Alabo.Tenants.Domain.Repositories
 {

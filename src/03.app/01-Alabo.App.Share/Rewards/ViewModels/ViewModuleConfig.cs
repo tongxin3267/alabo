@@ -13,9 +13,10 @@ using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using ZKCloud.Open.Share.Models;
 
-namespace Alabo.App.Share.Rewards.ViewModels {
-
-    public class ViewModuleConfig : BaseViewModel {
+namespace Alabo.App.Share.Rewards.ViewModels
+{
+    public class ViewModuleConfig : BaseViewModel
+    {
         private object _configuration;
         public long Id { get; set; }
 
@@ -56,7 +57,7 @@ namespace Alabo.App.Share.Rewards.ViewModels {
         public OrderUser OrderUser { get; set; } = new OrderUser();
 
         /// <summary>
-        /// 资产Json数据格式
+        ///     资产Json数据格式
         /// </summary>
         [Field(ControlsType = ControlsType.Json, PlaceHolder = "不同的分润维度，可以分配到不同的资产账户，总比例必须等于1",
             ListShow = false, EditShow = true, JsonCanAddOrDelete = true, ExtensionJson = "RuleItems")]
@@ -111,13 +112,13 @@ namespace Alabo.App.Share.Rewards.ViewModels {
         /// <summary>
         ///     配置对象
         /// </summary>
-        public object Configuration {
-            get {
-                if (_configuration == null) {
-                    if (ConfigurationValue != null && ModuleAttribute != null) {
+        public object Configuration
+        {
+            get
+            {
+                if (_configuration == null)
+                    if (ConfigurationValue != null && ModuleAttribute != null)
                         _configuration = ConfigurationValue.ConvertToModuleConfig(ModuleAttribute.ConfigurationType);
-                    }
-                }
 
                 return _configuration;
             }
@@ -168,10 +169,9 @@ namespace Alabo.App.Share.Rewards.ViewModels {
         /// </summary>
         public bool IsLimitOrderUserGrade { get; set; } = false;
 
-        public T GetConfigration<T>() where T : class, IModuleConfig {
-            if (Configuration == null) {
-                return default(T);
-            }
+        public T GetConfigration<T>() where T : class, IModuleConfig
+        {
+            if (Configuration == null) return default;
 
             return Configuration as T;
         }

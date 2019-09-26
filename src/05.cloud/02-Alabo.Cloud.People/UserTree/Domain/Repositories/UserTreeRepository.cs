@@ -7,26 +7,31 @@ using Alabo.Extensions;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Users.Entities;
 
-namespace Alabo.Cloud.People.UserTree.Domain.Repositories {
-
-    public class UserMapRepository : RepositoryEfCore<UserMap, long>, IUserTreeRepository {
-
-        public UserMapRepository(IUnitOfWork unitOfWork) : base(unitOfWork) {
+namespace Alabo.Cloud.People.UserTree.Domain.Repositories
+{
+    public class UserMapRepository : RepositoryEfCore<UserMap, long>, IUserTreeRepository
+    {
+        public UserMapRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
         }
 
         #region 组织架构图
 
-        public List<Users.Entities.UserTree> GetTree(long userId, UserTreeConfig userTreeConfig, UserTypeConfig userType,
-            List<UserGradeConfig> userGradeConfigList, UserTypeConfig userServiceConfig) {
+        public List<Users.Entities.UserTree> GetTree(long userId, UserTreeConfig userTreeConfig,
+            UserTypeConfig userType,
+            List<UserGradeConfig> userGradeConfigList, UserTypeConfig userServiceConfig)
+        {
             bool serviceFlag = true, levelFlag = true, directFlag = true;
             //long Level = 3;
-            if (userTreeConfig != null) {
+            if (userTreeConfig != null)
+            {
                 serviceFlag = userTreeConfig.IsShowServiceCenter;
                 levelFlag = userTreeConfig.IsShowUserGrade;
                 directFlag = userTreeConfig.IsShowDirectMemberNum;
             }
 
-            var str = $"select u.Id,u.Name,u.UserName,u.GradeId ,ISNULL( (SELECT count(1) from User_User uu WHERE uu.ParentId=u.Id) ,0) as ChildCount from User_User as u where u.ParentId = {userId}";
+            var str =
+                $"select u.Id,u.Name,u.UserName,u.GradeId ,ISNULL( (SELECT count(1) from User_User uu WHERE uu.ParentId=u.Id) ,0) as ChildCount from User_User as u where u.ParentId = {userId}";
 
             //str.Append("select  u.Id,u.Name,u.UserName,u.GradeId ,tmp.ChildCount from User_User as u  LEFT JOIN ");
             //str.Append("(select ParentId ,COUNT(1) ChildCount from User_User ");
@@ -41,8 +46,10 @@ namespace Alabo.Cloud.People.UserTree.Domain.Repositories {
             //}
 
             var list = new List<Users.Entities.UserTree>();
-            using (var reader = RepositoryContext.ExecuteDataReader(str)) {
-                while (reader.Read()) {
+            using (var reader = RepositoryContext.ExecuteDataReader(str))
+            {
+                while (reader.Read())
+                {
                     var UserName = reader["UserName"].ToString();
                     var id = reader["Id"].ToString();
                     var realName = reader["Name"].ToString();
@@ -52,15 +59,14 @@ namespace Alabo.Cloud.People.UserTree.Domain.Repositories {
                     var childCount = reader["ChildCount"].ToInt64();
                     //decimal teamSales = reader.Read<decimal>("teamSales");
                     //long teamNumber = reader.Read<long>("TeamNumber");
-                    var userTree = new Users.Entities.UserTree {
+                    var userTree = new Users.Entities.UserTree
+                    {
                         Id = reader["Id"].ToInt64(),
                         Name = UserName,
                         PId = userId
                     };
                     //显示直推人数
-                    if (directFlag) {
-                        userTree.Name = UserName + "  " + childCount + "人";
-                    }
+                    if (directFlag) userTree.Name = UserName + "  " + childCount + "人";
 
                     //显示门店
                     //if (serviceFlag) {
@@ -69,15 +75,14 @@ namespace Alabo.Cloud.People.UserTree.Domain.Repositories {
                     //    }
                     //}
                     //显示等级
-                    if (levelFlag) {
-                        if (userType != null) {
+                    if (levelFlag)
+                        if (userType != null)
+                        {
                             var userGrade = userGradeConfigList.Find(r => r.Id == GradeId);
-                            if (userGrade != null) {
+                            if (userGrade != null)
                                 userTree.Name = $@"{UserName}({realName})" + " " + userGrade.Name +
                                                 $"（直推:{childCount}））";
-                            }
                         }
-                    }
 
                     userTree.Open = false;
                     userTree.IsParent = childCount > 0 ? true : false;

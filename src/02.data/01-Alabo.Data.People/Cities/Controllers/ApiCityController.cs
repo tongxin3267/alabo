@@ -10,23 +10,22 @@ using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Data.People.Cities.Controllers
 {
-
     [ApiExceptionFilter]
     [Route("Api/City/[action]")]
-    public class ApiCityController : ApiBaseController<City, ObjectId> {
-        
-       
-
-        public ApiCityController() : base() {
+    public class ApiCityController : ApiBaseController<City, ObjectId>
+    {
+        public ApiCityController()
+        {
             BaseService = Resolve<ICityService>();
         }
 
         /// <summary>
-        /// 城市合伙人登录
+        ///     城市合伙人登录
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public ApiResult<RoleOuput> Login([FromBody]UserOutput userOutput) {
+        public ApiResult<RoleOuput> Login([FromBody] UserOutput userOutput)
+        {
             return null;
             ////Todo 城市合伙人登录
             //var result = Resolve<IEmployeeService>().Login(userOutput, () =>
@@ -37,17 +36,14 @@ namespace Alabo.Data.People.Cities.Controllers
         }
 
         [HttpGet]
-        public ApiResult ChangeStatus([FromQuery]string UserId, string Status) {
-            if (string.IsNullOrEmpty(UserId)) {
-                return ApiResult.Failure("参数传入失败");
-            }
+        public ApiResult ChangeStatus([FromQuery] string UserId, string Status)
+        {
+            if (string.IsNullOrEmpty(UserId)) return ApiResult.Failure("参数传入失败");
             var b = Resolve<ICityService>().ChangeUserStatus(UserId, Status);
 
-            if (b.Succeeded) {
+            if (b.Succeeded)
                 return ApiResult.Success();
-            } else {
-                return ApiResult.Failure("操作失败");
-            }
+            return ApiResult.Failure("操作失败");
         }
     }
 }

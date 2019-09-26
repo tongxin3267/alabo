@@ -7,12 +7,12 @@ using MongoDB.Bson;
 
 namespace Alabo.Framework.Basic.Address.Controllers
 {
-
     [ApiExceptionFilter]
     [Route("Api/UserAddress/[action]")]
-    public class ApiUserAddressController : ApiBaseController<UserAddress, ObjectId> {
-
-        public ApiUserAddressController() : base() {
+    public class ApiUserAddressController : ApiBaseController<UserAddress, ObjectId>
+    {
+        public ApiUserAddressController()
+        {
             BaseService = Resolve<IUserAddressService>();
         }
     }

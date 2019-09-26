@@ -9,50 +9,37 @@ using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
-using ApiResult = ZKCloud.Open.ApiBase.Models.ApiResult;
 
 namespace Alabo.Data.People.Employes.Controllers
 {
-
     [ApiExceptionFilter]
     [Route("Api/Employee/[action]")]
-    public class ApiEmployeeController : ApiBaseController<Employee, ObjectId> {
+    public class ApiEmployeeController : ApiBaseController<Employee, ObjectId>
+    {
         /// <summary>
-        ///     The automatic configuration manager
-        /// </summary>
-
-        /// <summary>
-        ///     The ��Ա manager
-        /// </summary>
-
-        public ApiEmployeeController(
-            ) : base() {
-        }
-
-        /// <summary>
-        /// Ա����¼
+        ///     Ա����¼
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public ApiResult<UserOutput> LoginByToken([FromBody]GetLoginToken loginByToken) {
-            if (!this.IsFormValid()) {
+        public ApiResult<UserOutput> LoginByToken([FromBody] GetLoginToken loginByToken)
+        {
+            if (!this.IsFormValid())
                 return ApiResult.Failure<UserOutput>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
-            }
 
             var loginInput = Resolve<IEmployeeService>().LoginByToken(loginByToken);
-            ApiMemberController apiUserController = new ApiMemberController();
+            var apiUserController = new ApiMemberController();
             return apiUserController.Login(loginInput);
         }
 
         /// <summary>
-        /// Ա����¼
+        ///     Ա����¼
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public ApiResult<RoleOuput> Login([FromBody]UserOutput userOutput) {
-            if (!this.IsFormValid()) {
+        public ApiResult<RoleOuput> Login([FromBody] UserOutput userOutput)
+        {
+            if (!this.IsFormValid())
                 return ApiResult.Failure<RoleOuput>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
-            }
             var result = Resolve<IEmployeeService>().Login(userOutput);
             return ToResult(result);
         }

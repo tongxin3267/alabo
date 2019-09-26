@@ -29,9 +29,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <param name="alias">别名</param>
         public void Register(Type entity, string alias)
         {
-            if (_data.ContainsKey(entity)) {
-                _data.Remove(entity);
-            }
+            if (_data.ContainsKey(entity)) _data.Remove(entity);
 
             _data[entity] = alias;
         }
@@ -42,9 +40,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <param name="entity">实体类型</param>
         public bool Contains(Type entity)
         {
-            if (entity == null) {
-                return false;
-            }
+            if (entity == null) return false;
 
             return _data.ContainsKey(entity);
         }
@@ -55,13 +51,9 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <param name="entity">实体类型</param>
         public string GetAlias(Type entity)
         {
-            if (entity == null) {
-                return null;
-            }
+            if (entity == null) return null;
 
-            if (_data.ContainsKey(entity)) {
-                return _data[entity];
-            }
+            if (_data.ContainsKey(entity)) return _data[entity];
 
             return null;
         }

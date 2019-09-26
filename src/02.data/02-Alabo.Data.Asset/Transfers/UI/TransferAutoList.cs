@@ -5,12 +5,13 @@ using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoLists;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.Transfers.UI {
-
+namespace Alabo.App.Asset.Transfers.UI
+{
     [ClassProperty(Name = "转账记录AutoList", Description = "转账记录")]
-    public class TransferAutoList : UIBase, IAutoList {
-
-        public PageResult<AutoListItem> PageList(object query, AutoBaseModel autoModel) {
+    public class TransferAutoList : UIBase, IAutoList
+    {
+        public PageResult<AutoListItem> PageList(object query, AutoBaseModel autoModel)
+        {
             //var dic = query.ToObject<Dictionary<string, string>>();
 
             //dic.TryGetValue("loginUserId", out string userId);
@@ -45,7 +46,8 @@ namespace Alabo.App.Asset.Transfers.UI {
             return null;
         }
 
-        public Type SearchType() {
+        public Type SearchType()
+        {
             throw new NotImplementedException();
         }
     }

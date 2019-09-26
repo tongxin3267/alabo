@@ -2,17 +2,17 @@
 using Alabo.Domains.Query.Dto;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Data.People.Users.Dtos {
-
+namespace Alabo.Data.People.Users.Dtos
+{
     /// <summary>
     ///     注册模块
     /// </summary>
     [ClassProperty(Name = "会员注册", GroupName = "推荐人信息,基本信息", PostApi = "Api/User/Reg",
         SuccessReturn = "/User/Login", ButtonText = "会员注册")]
-    public class RegInput : EntityDto {
-
+    public class RegInput : EntityDto
+    {
         /// <summary>
-        /// 用户名
+        ///     用户名
         /// </summary>
         public string UserName { get; set; }
 
@@ -23,13 +23,13 @@ namespace Alabo.Data.People.Users.Dtos {
         public string Password { get; set; }
 
         /// <summary>
-        /// 确认密码
+        ///     确认密码
         /// </summary>
         [Display(Name = "确认密码")]
         public string ConfirmPassword { get; set; }
 
         /// <summary>
-        /// 支付密码
+        ///     支付密码
         /// </summary>
         [Display(Name = "支付密码")]
         public string PayPassword { get; set; }
@@ -59,7 +59,7 @@ namespace Alabo.Data.People.Users.Dtos {
         public string VerifiyCode { get; set; }
 
         /// <summary>
-        /// 推荐人用户名
+        ///     推荐人用户名
         /// </summary>
         [Display(Name = "推荐人用户名")]
         public string ParentUserName { get; set; }
@@ -82,7 +82,7 @@ namespace Alabo.Data.People.Users.Dtos {
         public string Name { get; set; }
 
         /// <summary>
-        /// 是否同意注册协议
+        ///     是否同意注册协议
         /// </summary>
         public bool Agree { get; set; }
     }

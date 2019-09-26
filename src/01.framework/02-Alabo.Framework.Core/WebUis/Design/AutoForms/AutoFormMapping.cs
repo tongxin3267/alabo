@@ -19,9 +19,7 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoForms
         /// <returns></returns>
         private static Type GetGenericType(Type type)
         {
-            if (type.IsGenericType) {
-                return type.GenericTypeArguments[0];
-            }
+            if (type.IsGenericType) return type.GenericTypeArguments[0];
 
             return type;
         }
@@ -82,9 +80,7 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoForms
                                 var fieldGroup = new FieldGroup();
                                 fieldGroup.GroupName = group;
                                 var groupPropertys = propertys.Where(r => r.FieldAttribute?.GroupTabId == i).ToArray();
-                                if (group.Trim().IsNullOrEmpty()) {
-                                    groupPropertys = propertys;
-                                }
+                                if (group.Trim().IsNullOrEmpty()) groupPropertys = propertys;
 
                                 fieldGroup.Items.AddRange(GetFormFieds(groupPropertys));
                                 auto.Groups.Add(fieldGroup);
@@ -107,9 +103,7 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoForms
             var resultFieldProperties = new List<FormFieldProperty>();
             foreach (var item in propertys)
             {
-                if (item.FieldAttribute == null || !item.FieldAttribute.EditShow) {
-                    continue;
-                }
+                if (item.FieldAttribute == null || !item.FieldAttribute.EditShow) continue;
 
                 var formField = AutoMapping.SetValue<FormFieldProperty>(item.FieldAttribute);
                 formField.Name = item.DisplayAttribute?.Name;
@@ -117,34 +111,24 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoForms
                 formField.Type = item.FieldAttribute.ControlsType;
                 formField.Maxlength = item.MaxLengthAttribute?.Length;
                 formField.MinLength = item.MinLengthAttribute?.Length;
-                if (item.RequiredAttribute != null) {
-                    formField.Required = true;
-                }
+                if (item.RequiredAttribute != null) formField.Required = true;
 
-                if (formField.PlaceHolder.IsNullOrEmpty()) {
-                    formField.PlaceHolder = "请输入" + formField.Name;
-                }
+                if (formField.PlaceHolder.IsNullOrEmpty()) formField.PlaceHolder = "请输入" + formField.Name;
 
-                if (!item.FieldAttribute.Width.IsNullOrEmpty()) {
-                    formField.Width = item.FieldAttribute.Width;
-                }
+                if (!item.FieldAttribute.Width.IsNullOrEmpty()) formField.Width = item.FieldAttribute.Width;
 
                 formField.HelpBlock = item.HelpBlockAttribute?.HelpText;
-                if (formField.HelpBlock.IsNullOrEmpty()) {
-                    formField.HelpBlock = formField.PlaceHolder;
-                }
+                if (formField.HelpBlock.IsNullOrEmpty()) formField.HelpBlock = formField.PlaceHolder;
 
                 formField.ListShow = item.FieldAttribute.ListShow;
                 formField.EditShow = item.FieldAttribute.EditShow;
 
-                if (!item.FieldAttribute.ApiDataSource.IsNullOrEmpty()) {
+                if (!item.FieldAttribute.ApiDataSource.IsNullOrEmpty())
                     formField.DataSource = item.FieldAttribute.ApiDataSource;
-                }
                 // 如果是枚举类型
-                if (item.Property.PropertyType.BaseType == typeof(System.Enum)) {
+                if (item.Property.PropertyType.BaseType == typeof(Enum))
                     formField.DataSource =
                         $"Api/Common/GetKeyValuesByEnum?type={item.Property.PropertyType.FullName}";
-                }
 
                 //Json类型
                 if (formField.Type == ControlsType.JsonList)
@@ -190,9 +174,7 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoForms
             //cache class descrption
             var fullName = model.GetType().FullName;
             var classDescription = fullName.GetClassDescription();
-            if (classDescription == null) {
-                return null;
-            }
+            if (classDescription == null) return null;
 
             var classPropertyAttribute = classDescription.ClassPropertyAttribute;
             var auto = new AutoForm
@@ -224,9 +206,7 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoForms
                     var fieldGroup = new FieldGroup();
                     fieldGroup.GroupName = group;
                     var groupPropertys = propertys.Where(r => r.FieldAttribute?.GroupTabId == i).ToArray();
-                    if (group.Trim().IsNullOrEmpty()) {
-                        groupPropertys = propertys;
-                    }
+                    if (group.Trim().IsNullOrEmpty()) groupPropertys = propertys;
 
                     fieldGroup.Items.AddRange(GetFormFieds(groupPropertys, model));
                     auto.Groups.Add(fieldGroup);
@@ -244,9 +224,7 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoForms
         {
             var result = new List<FieldGroup>();
             var propertyType = obj.GetType();
-            if (!propertyType.IsGenericType) {
-                return result;
-            }
+            if (!propertyType.IsGenericType) return result;
 
             var genericTypeName = GetGenericType(propertyType).FullName;
             var propertyDescriptions = genericTypeName.GetClassDescription().Propertys;
@@ -282,9 +260,8 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoForms
                 var propertyDesc = propertys.ToList().Find(p => p.Property.Name == propertyInfo.Name);
                 if (propertyDesc == null
                     || propertyDesc.FieldAttribute == null
-                    || !propertyDesc.FieldAttribute.EditShow) {
+                    || !propertyDesc.FieldAttribute.EditShow)
                     continue;
-                }
 
                 //builder
                 var formField = AutoMapping.SetValue<FormFieldProperty>(propertyDesc.FieldAttribute);
@@ -298,17 +275,12 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoForms
                 formField.EditShow = propertyDesc.FieldAttribute.EditShow;
                 formField.Mark = propertyDesc.FieldAttribute.Mark;
 
-                if (propertyDesc.RequiredAttribute != null) {
-                    formField.Required = true;
-                }
+                if (propertyDesc.RequiredAttribute != null) formField.Required = true;
 
-                if (formField.PlaceHolder.IsNullOrEmpty()) {
-                    formField.PlaceHolder = "请输入" + formField.Name;
-                }
+                if (formField.PlaceHolder.IsNullOrEmpty()) formField.PlaceHolder = "请输入" + formField.Name;
 
-                if (!propertyDesc.FieldAttribute.Width.IsNullOrEmpty()) {
+                if (!propertyDesc.FieldAttribute.Width.IsNullOrEmpty())
                     formField.Width = propertyDesc.FieldAttribute.Width;
-                }
 
                 if (!propertyDesc.FieldAttribute.ApiDataSource.IsNullOrEmpty())
                 {
@@ -324,17 +296,15 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoForms
                     else
                     {
                         // enum
-                        if (propertyDesc.Property.PropertyType.BaseType == typeof(System.Enum)) {
+                        if (propertyDesc.Property.PropertyType.BaseType == typeof(Enum))
                             formField.DataSource =
                                 $"Api/Type/GetKeyValue?type={propertyDesc.Property.PropertyType.Name}";
-                        }
                     }
                 }
 
                 // enum
-                if (propertyDesc.Property.PropertyType.BaseType == typeof(System.Enum)) {
+                if (propertyDesc.Property.PropertyType.BaseType == typeof(Enum))
                     formField.DataSource = $"Api/Type/GetKeyValue?type={propertyDesc.Property.PropertyType.Name}";
-                }
 
                 //Json
                 if (formField.Type == ControlsType.JsonList)
@@ -343,15 +313,13 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoForms
                     formField.JsonItems.AddRange(GetFormFields(propertyValue));
                 }
 
-                if (formField.Type == ControlsType.RelationClass && propertyDesc.FieldAttribute.DataSourceType != null) {
+                if (formField.Type == ControlsType.RelationClass && propertyDesc.FieldAttribute.DataSourceType != null)
                     formField.DataSource =
                         $"Api/Relation/GetClassTree?Type={propertyDesc.FieldAttribute.DataSourceType.Name}";
-                }
 
-                if (formField.Type == ControlsType.RelationTags && propertyDesc.FieldAttribute.DataSourceType != null) {
+                if (formField.Type == ControlsType.RelationTags && propertyDesc.FieldAttribute.DataSourceType != null)
                     formField.DataSource =
                         $"Api/Relation/GetTag?Type={propertyDesc.FieldAttribute.DataSourceType.Name}";
-                }
 
                 formField.Value = propertyInfo.GetPropertyValue(model);
 

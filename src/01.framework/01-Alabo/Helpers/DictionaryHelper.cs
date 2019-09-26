@@ -35,9 +35,7 @@ namespace Alabo.Helpers
         /// <param name="default_value"></param>
         public TV GetValue(T key, TV defaultValue = default)
         {
-            if (!_dict.TryGetValue(key, out var value)) {
-                return defaultValue;
-            }
+            if (!_dict.TryGetValue(key, out var value)) return defaultValue;
 
             return value;
         }
@@ -53,9 +51,7 @@ namespace Alabo.Helpers
         /// <param name="default_value"></param>
         public string GetString(T key, string defaultValue = null)
         {
-            if (!_dict.TryGetValue(key, out var value)) {
-                return defaultValue;
-            }
+            if (!_dict.TryGetValue(key, out var value)) return defaultValue;
 
             return value.ToString();
         }
@@ -71,13 +67,9 @@ namespace Alabo.Helpers
         /// <param name="default_value"></param>
         public int GetInt(T key, int defaultValue = -1)
         {
-            if (!_dict.TryGetValue(key, out var value)) {
-                return defaultValue;
-            }
+            if (!_dict.TryGetValue(key, out var value)) return defaultValue;
 
-            if (!int.TryParse(value.ToString(), out var result)) {
-                return defaultValue;
-            }
+            if (!int.TryParse(value.ToString(), out var result)) return defaultValue;
 
             return result;
         }
@@ -92,26 +84,16 @@ namespace Alabo.Helpers
         /// <param name="value"></param>
         public bool? StringToBool(string value)
         {
-            if (value == null) {
-                return null;
-            }
+            if (value == null) return null;
 
             value = value.ToLower();
-            if (value == "true") {
-                return true;
-            }
+            if (value == "true") return true;
 
-            if (value == "false") {
-                return false;
-            }
+            if (value == "false") return false;
 
-            if (!int.TryParse(value, out var x)) {
-                return null;
-            }
+            if (!int.TryParse(value, out var x)) return null;
 
-            if (x != 0) {
-                return true;
-            }
+            if (x != 0) return true;
 
             return false;
         }
@@ -128,9 +110,7 @@ namespace Alabo.Helpers
         public bool GetBool(T key, bool defaultValue)
         {
             var value = GetNullableBool(key);
-            if (value.HasValue) {
-                return value.Value;
-            }
+            if (value.HasValue) return value.Value;
 
             return defaultValue;
         }
@@ -146,9 +126,7 @@ namespace Alabo.Helpers
         /// <param name="default_value"></param>
         public bool? GetNullableBool(T key, bool? defaultValue = null)
         {
-            if (!_dict.TryGetValue(key, out var value)) {
-                return defaultValue;
-            }
+            if (!_dict.TryGetValue(key, out var value)) return defaultValue;
 
             return StringToBool(value.ToString());
         }
@@ -164,13 +142,9 @@ namespace Alabo.Helpers
         /// <param name="default_value"></param>
         public decimal GetDecimal(T key, decimal defaultValue = -1)
         {
-            if (!_dict.TryGetValue(key, out var value)) {
-                return defaultValue;
-            }
+            if (!_dict.TryGetValue(key, out var value)) return defaultValue;
 
-            if (!decimal.TryParse(value.ToString(), out var result)) {
-                return defaultValue;
-            }
+            if (!decimal.TryParse(value.ToString(), out var result)) return defaultValue;
 
             return result;
         }
@@ -186,13 +160,9 @@ namespace Alabo.Helpers
         /// <param name="default_value"></param>
         public DateTime GetDateTime(T key, DateTime defaultValue = default)
         {
-            if (!_dict.TryGetValue(key, out var value)) {
-                return defaultValue;
-            }
+            if (!_dict.TryGetValue(key, out var value)) return defaultValue;
 
-            if (!DateTime.TryParse(value.ToString(), out var result)) {
-                return defaultValue;
-            }
+            if (!DateTime.TryParse(value.ToString(), out var result)) return defaultValue;
 
             return result;
         }
@@ -209,13 +179,9 @@ namespace Alabo.Helpers
         public IList<int> GetIntList(T key, IList<int> defaultValue = null)
         {
             IList<int> result;
-            if (!_dict.TryGetValue(key, out var value)) {
-                return defaultValue;
-            }
+            if (!_dict.TryGetValue(key, out var value)) return defaultValue;
 
-            if (value == null) {
-                return null;
-            }
+            if (value == null) return null;
 
             result = StringHelper.StringToIntList(value.ToString());
             return result;
@@ -234,9 +200,7 @@ namespace Alabo.Helpers
         {
             foreach (var pair in pdict)
             {
-                if (!replace && _dict.ContainsKey(pair.Key)) {
-                    continue;
-                }
+                if (!replace && _dict.ContainsKey(pair.Key)) continue;
 
                 _dict[pair.Key] = pair.Value;
             }
@@ -279,9 +243,7 @@ namespace Alabo.Helpers
         public static Dictionary<T, TV> Convert(IEnumerable<TS> list, ItemToKey toKey, ItemToValue toValue)
         {
             var dict = new Dictionary<T, TV>();
-            foreach (var item in list) {
-                dict[toKey(item)] = toValue(item);
-            }
+            foreach (var item in list) dict[toKey(item)] = toValue(item);
 
             return dict;
         }
@@ -307,9 +269,7 @@ namespace Alabo.Helpers
         public static SortedDictionary<T, TV> Convert(IEnumerable<TS> list, ItemToKey toKey, ItemToValue toValue)
         {
             var dict = new SortedDictionary<T, TV>();
-            foreach (var item in list) {
-                dict[toKey(item)] = toValue(item);
-            }
+            foreach (var item in list) dict[toKey(item)] = toValue(item);
 
             return dict;
         }

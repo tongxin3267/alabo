@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.App.Asset.Pays.Dtos {
-
-    public class AliResult {
+namespace Alabo.App.Asset.Pays.Dtos
+{
+    public class AliResult
+    {
         public string CardType { get; set; }
 
         public string Bank { get; set; }

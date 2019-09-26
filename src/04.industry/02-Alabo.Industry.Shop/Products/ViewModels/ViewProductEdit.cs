@@ -11,19 +11,19 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.ViewModel;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Alabo.Industry.Shop.Products.ViewModels {
-
+namespace Alabo.Industry.Shop.Products.ViewModels
+{
     /// <summary>
     ///     Class ViewProductEdit.
     /// </summary>
     /// <seealso cref="BaseViewModel" />
-    public class ViewProductEdit : BaseViewModel {
-
+    public class ViewProductEdit : BaseViewModel
+    {
         /// <summary>
         ///     商品信息
         /// </summary>
         /// <value>The product.</value>
-        public Domain.Entities.Product Product { get; set; }
+        public Product Product { get; set; }
 
         /// <summary>
         ///     商品详情

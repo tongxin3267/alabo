@@ -1,22 +1,20 @@
 ﻿using System.ComponentModel;
 
-namespace Alabo.Tool.Office {
-
+namespace Alabo.Tool.Office
+{
     /// <summary>
-    /// 导出格式
+    ///     导出格式
     /// </summary>
-    public enum ExportFormat {
+    public enum ExportFormat
+    {
+        /// <summary>
+        ///     Excel 2003
+        /// </summary>
+        [Description("Excel2003")] Xls,
 
         /// <summary>
-        /// Excel 2003
+        ///     Excel 2007+
         /// </summary>
-        [Description("Excel2003")]
-        Xls,
-
-        /// <summary>
-        /// Excel 2007+
-        /// </summary>
-        [Description("Excel2007+")]
-        Xlsx
+        [Description("Excel2007+")] Xlsx
     }
 }

@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using MongoDB.Bson.Serialization.Attributes;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.Model;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Domains.Base.Entities {
-
+namespace Alabo.Domains.Base.Entities
+{
     /// <summary>
     ///     表以及数据库结构说明书
     /// </summary>
@@ -17,8 +17,8 @@ namespace Alabo.Domains.Base.Entities {
     [Table("Core_Table")]
     [ClassProperty(Name = "数据库表", Icon = "fa fa-cog", SortOrder = 1,
         SideBarType = SideBarType.TableSideBar)]
-    public class Table : AggregateMongodbRoot<Table> {
-
+    public class Table : AggregateMongodbRoot<Table>
+    {
         /// <summary>
         ///     名称
         /// </summary>
@@ -77,8 +77,8 @@ namespace Alabo.Domains.Base.Entities {
     /// </summary>
     [ClassProperty(Name = "列结构", Icon = "fa fa-cog", SortOrder = 1,
         SideBarType = SideBarType.TableSideBar)]
-    public class TableColumn : BaseViewModel {
-
+    public class TableColumn : BaseViewModel
+    {
         /// <summary>
         ///     名称
         /// </summary>

@@ -9,8 +9,8 @@ using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Entities {
-
+namespace _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Entities
+{
     /// <summary>
     ///     分润订单统计
     /// </summary>
@@ -18,8 +18,8 @@ namespace _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Entities {
         SideBarType = SideBarType.BonusPoolBar)]
     [BsonIgnoreExtraElements]
     [Table("Task_ShareOrderReport")]
-    public class ShareOrderReport : AggregateMongodbUserRoot<ShareOrderReport> {
-
+    public class ShareOrderReport : AggregateMongodbUserRoot<ShareOrderReport>
+    {
         /// <summary>
         ///     Gets or sets Id标识
         /// </summary>
@@ -77,7 +77,8 @@ namespace _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Entities {
         /// <summary>
         ///     获取链接
         /// </summary>
-        public IEnumerable<ViewLink> ViewLinks() {
+        public IEnumerable<ViewLink> ViewLinks()
+        {
             var quickLinks = new List<ViewLink>
             {
                 new ViewLink("分润测试",
@@ -90,7 +91,8 @@ namespace _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Entities {
 
     [ClassProperty(Name = "分润订单详情", Icon = "fa fa-file", Description = "分润订单统计",
         SideBarType = SideBarType.BonusPoolBar)]
-    public class ShareOrderReportItem {
+    public class ShareOrderReportItem
+    {
         [Display(Name = "用户ID")] public long UserId { get; set; }
 
         [Display(Name = "货币类型")] public Guid MoneyTypeId { get; set; }

@@ -30,15 +30,11 @@ namespace Alabo.Randoms
         /// <param name="text">如果传入该参数，则从该文本中随机抽取</param>
         public string GenerateString(int maxLength, string text = null)
         {
-            if (text == null) {
-                text = Const.Letters + Const.Numbers;
-            }
+            if (text == null) text = Const.Letters + Const.Numbers;
 
             var result = new StringBuilder();
             var length = GetRandomLength(maxLength);
-            for (var i = 0; i < length; i++) {
-                result.Append(GetRandomChar(text));
-            }
+            for (var i = 0; i < length; i++) result.Append(GetRandomChar(text));
 
             return result.ToString();
         }
@@ -76,9 +72,7 @@ namespace Alabo.Randoms
         public bool GenerateBool()
         {
             var random = _random.Generate(1, 100);
-            if (random % 2 == 0) {
-                return false;
-            }
+            if (random % 2 == 0) return false;
 
             return true;
         }

@@ -5,10 +5,10 @@ using Alabo.Industry.Shop.Carts.Domain.Entities;
 using Alabo.Industry.Shop.Orders.Dtos;
 using MongoDB.Bson;
 
-namespace Alabo.Industry.Shop.Carts.Domain.Services {
-
-    public interface ICartService : IService<Cart, ObjectId> {
-
+namespace Alabo.Industry.Shop.Carts.Domain.Services
+{
+    public interface ICartService : IService<Cart, ObjectId>
+    {
         /// <summary>
         ///     添加购物车
         /// </summary>

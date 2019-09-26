@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
-using MongoDB.Driver;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
+using MongoDB.Driver;
 
 namespace Alabo.Datas.Stores.Count.Mongo
 {
@@ -17,9 +17,7 @@ namespace Alabo.Datas.Stores.Count.Mongo
 
         public long Count(Expression<Func<TEntity, bool>> predicate)
         {
-            if (predicate == null) {
-                return Collection.AsQueryable().LongCount();
-            }
+            if (predicate == null) return Collection.AsQueryable().LongCount();
 
             return Collection.AsQueryable().LongCount(predicate);
         }

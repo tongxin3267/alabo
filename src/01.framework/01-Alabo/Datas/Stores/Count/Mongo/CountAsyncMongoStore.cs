@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using MongoDB.Driver;
-using MongoDB.Driver.Linq;
 using Alabo.Datas.Stores.Column.Mongo;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 namespace Alabo.Datas.Stores.Count.Mongo
 {
@@ -19,9 +19,7 @@ namespace Alabo.Datas.Stores.Count.Mongo
 
         public async Task<long> CountAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            if (predicate == null) {
-                return await Collection.AsQueryable().LongCountAsync();
-            }
+            if (predicate == null) return await Collection.AsQueryable().LongCountAsync();
 
             return await Collection.AsQueryable().LongCountAsync(predicate);
         }

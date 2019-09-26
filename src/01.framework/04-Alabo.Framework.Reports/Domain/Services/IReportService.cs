@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using MongoDB.Bson;
 using Newtonsoft.Json.Linq;
 
-namespace Alabo.Framework.Reports.Domain.Services {
-
-    public interface IReportService : IService<Report, ObjectId> {
-
+namespace Alabo.Framework.Reports.Domain.Services
+{
+    public interface IReportService : IService<Report, ObjectId>
+    {
         void AddOrUpdate<T>(T reporyModel) where T : class, IReport;
 
         /// <summary>

@@ -9,7 +9,6 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Alabo.Industry.Shop.Products.Domain.Entities
 {
-
     /// <summary>
     ///     商品统计数据
     /// </summary>
@@ -88,6 +87,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Entities
         [Field(ExtensionJson = "ProductDetailExtension")]
         [Display(Name = "扩展属性")]
         public string Extension { get; set; }
+
         /// <summary>
         ///     扩展属性
         /// </summary>
@@ -96,7 +96,6 @@ namespace Alabo.Industry.Shop.Products.Domain.Entities
 
         public class ProductDetailTableMap : MsSqlAggregateRootMap<ProductDetail>
         {
-
             protected override void MapTable(EntityTypeBuilder<ProductDetail> builder)
             {
                 builder.ToTable("Shop_ProductDetail");

@@ -16,7 +16,6 @@ using Newtonsoft.Json;
 
 namespace Alabo.Data.People.ShareHolders.Configs
 {
-
     /// <summary>
     ///     股东等级
     /// </summary>
@@ -25,8 +24,8 @@ namespace Alabo.Data.People.ShareHolders.Configs
         Description = "股东等级", PageType = ViewPageType.List, SortOrder = 12,
         Validator = "SELECT 1 FROM User_UserType WHERE GradeId='{0}'",
         ValidateMessage = "该等级下存在用户或者为默认等级", SideBarType = SideBarType.ShareHoldersSideBar)]
-    public class ShareHoldersGradeConfig : BaseGradeConfig, IAutoConfig {
-
+    public class ShareHoldersGradeConfig : BaseGradeConfig, IAutoConfig
+    {
         /// <summary>
         ///     会员类型Id，不同的会员类型有不同的等级
         /// </summary>
@@ -35,11 +34,14 @@ namespace Alabo.Data.People.ShareHolders.Configs
         [Display(Name = "股东等级")]
         public new Guid UserTypeId { get; set; } = Guid.Parse("71BE65E6-3A64-414D-972E-1A3D4A365222");
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
             var list = Ioc.Resolve<IAutoConfigService>().GetList<ShareHoldersGradeConfig>();
-            if (list.Count < 1) {
+            if (list.Count < 1)
+            {
                 var configs = new List<ShareHoldersGradeConfig>();
-                var config = new ShareHoldersGradeConfig {
+                var config = new ShareHoldersGradeConfig
+                {
                     Id = Guid.Parse("72be65e6-3a64-414d-972e-1a3d4a36f500"),
                     Name = "投资股东",
                     Icon = "/wwwroot/static/images/GradeIcon/RewardHolders01.png",
@@ -47,7 +49,8 @@ namespace Alabo.Data.People.ShareHolders.Configs
                 };
                 list.Add(config);
 
-                config = new ShareHoldersGradeConfig {
+                config = new ShareHoldersGradeConfig
+                {
                     Id = Guid.Parse("72be65e6-3a64-414d-972e-1a3d4a36f501"),
                     Name = "运营股东",
                     Icon = "/wwwroot/static/images/GradeIcon/RewardHolders02.png",
@@ -56,7 +59,8 @@ namespace Alabo.Data.People.ShareHolders.Configs
                 };
                 list.Add(config);
 
-                config = new ShareHoldersGradeConfig {
+                config = new ShareHoldersGradeConfig
+                {
                     Id = Guid.Parse("72be65e6-3a64-414d-972e-1a3d4a36f502"),
                     Name = "核心股东",
                     Icon = "/wwwroot/static/images/GradeIcon/RewardHolders03.png",
@@ -65,7 +69,8 @@ namespace Alabo.Data.People.ShareHolders.Configs
                 };
                 list.Add(config);
 
-                config = new ShareHoldersGradeConfig {
+                config = new ShareHoldersGradeConfig
+                {
                     Id = Guid.Parse("72be65e6-3a64-414d-972e-1a3d4a36f502"),
                     Name = "原始股东",
                     Icon = "/wwwroot/static/images/GradeIcon/RewardHolders04.png",
@@ -75,7 +80,8 @@ namespace Alabo.Data.People.ShareHolders.Configs
                 list.Add(config);
 
                 var typeclassProperty = config.GetType().GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
-                var autoConfig = new AutoConfig {
+                var autoConfig = new AutoConfig
+                {
                     Type = config.GetType().FullName,
                     //// AppName = typeclassProperty.AppName,
                     LastUpdated = DateTime.Now,
@@ -93,6 +99,7 @@ namespace Alabo.Data.People.ShareHolders.Configs
     [ClassProperty(Name = "股东等级", Icon = "fa fa-database", Description = "股东等级", PageType = ViewPageType.List, Mark = 0,
         SideBarType = SideBarType.ShareHoldersSideBar)]
     //SideBar = "/Core/UserType/SideBar/RewardHoldersSideBar")]
-    public class ShareHoldersGradeRelation : IRelation {
+    public class ShareHoldersGradeRelation : IRelation
+    {
     }
 }

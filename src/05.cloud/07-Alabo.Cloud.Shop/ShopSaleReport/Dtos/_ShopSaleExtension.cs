@@ -5,13 +5,13 @@ using Alabo.Domains.Entities.Extensions;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Cloud.Shop.ShopSaleReport.Dtos {
-
+namespace Alabo.Cloud.Shop.ShopSaleReport.Dtos
+{
     /// <summary>
     ///     商城销售统计
     /// </summary>
-    public class ShopSaleExtension : EntityExtension {
-
+    public class ShopSaleExtension : EntityExtension
+    {
         /// <summary>
         ///     商城销售额
         ///     用户本身的商城销售额
@@ -47,8 +47,8 @@ namespace Alabo.Cloud.Shop.ShopSaleReport.Dtos {
     /// <summary>
     ///     商城销售统计
     /// </summary>
-    public class ShopSale {
-
+    public class ShopSale
+    {
         /// <summary>
         ///     累计订单数量
         /// </summary>
@@ -93,8 +93,8 @@ namespace Alabo.Cloud.Shop.ShopSaleReport.Dtos {
         public IList<PriceStyleSale> PriceStyleSales { get; set; } = new List<PriceStyleSale>();
     }
 
-    public class PriceStyleSale {
-
+    public class PriceStyleSale
+    {
         /// <summary>
         ///     商城模式Id
         /// </summary>

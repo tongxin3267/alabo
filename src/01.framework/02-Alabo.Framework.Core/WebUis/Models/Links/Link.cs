@@ -5,24 +5,26 @@ using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
 using Newtonsoft.Json;
 
-namespace Alabo.Framework.Core.WebUis.Models.Links {
-
+namespace Alabo.Framework.Core.WebUis.Models.Links
+{
     /// <summary>
     ///     链接、支持图片、链接、广告等
     /// </summary>
     [ClassProperty(Name = "链接")]
-    public class Link : BaseComponent {
-
-        public Link() {
-            this.Id = ObjectId.GenerateNewId();
+    public class Link : BaseComponent
+    {
+        public Link()
+        {
+            Id = ObjectId.GenerateNewId();
         }
 
-        public Link(string name, string url, long sortOrder, string image) {
+        public Link(string name, string url, long sortOrder, string image)
+        {
             Name = name;
             Url = url;
             SortOrder = sortOrder;
             Image = image;
-            this.Id = ObjectId.GenerateNewId();
+            Id = ObjectId.GenerateNewId();
         }
 
         /// <summary>

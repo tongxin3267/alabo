@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Core.Enums.Enum;
 
-namespace Alabo.Data.People.Users.ViewModels {
-
+namespace Alabo.Data.People.Users.ViewModels
+{
     /// <summary>
     ///     会员管理，账户信息
     /// </summary>
-    public class ViewUserDetailInfo {
-
-        public ViewUserDetailInfo() {
+    public class ViewUserDetailInfo
+    {
+        public ViewUserDetailInfo()
+        {
             UserTypeInfos = new List<UserTypeInfo>();
             UserAccountInfos = new List<UserAccountInfo>();
             UserBillInfos = new List<UserBillInfo>();
@@ -20,15 +21,18 @@ namespace Alabo.Data.People.Users.ViewModels {
         public List<UserAccountInfo> UserAccountInfos { get; set; }
         public List<UserBillInfo> UserBillInfos { get; set; }
 
-        public void AddType(UserTypeInfo type) {
+        public void AddType(UserTypeInfo type)
+        {
             UserTypeInfos.Add(type);
         }
 
-        public void AddAccount(UserAccountInfo account) {
+        public void AddAccount(UserAccountInfo account)
+        {
             UserAccountInfos.Add(account);
         }
 
-        public void AddBill(UserBillInfo bill) {
+        public void AddBill(UserBillInfo bill)
+        {
             UserBillInfos.Add(bill);
         }
     }
@@ -36,7 +40,8 @@ namespace Alabo.Data.People.Users.ViewModels {
     /// <summary>
     ///     会员类型
     /// </summary>
-    public class UserTypeInfo {
+    public class UserTypeInfo
+    {
         public long Id { get; set; }
         public string Name { get; set; }
         public string ParentName { get; set; }
@@ -49,7 +54,8 @@ namespace Alabo.Data.People.Users.ViewModels {
     /// <summary>
     ///     资产明细
     /// </summary>
-    public class UserAccountInfo {
+    public class UserAccountInfo
+    {
         public long Id { get; set; }
         public string UserName { get; set; }
         public Currency Currency { get; set; }
@@ -63,7 +69,8 @@ namespace Alabo.Data.People.Users.ViewModels {
     /// <summary>
     ///     交易记录
     /// </summary>
-    public class UserBillInfo {
+    public class UserBillInfo
+    {
         public long Id { get; set; }
         public string Serial { get; set; }
         public string BillTypeName { get; set; }

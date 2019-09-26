@@ -1,17 +1,18 @@
 ﻿using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 
-namespace Alabo.Tool.Office.Npoi {
-
+namespace Alabo.Tool.Office.Npoi
+{
     /// <summary>
-    /// Npoi Excel2007操作
+    ///     Npoi Excel2007操作
     /// </summary>
-    public class Excel2007 : ExcelBase {
-
+    public class Excel2007 : ExcelBase
+    {
         /// <summary>
-        /// 创建工作薄
+        ///     创建工作薄
         /// </summary>
-        protected override IWorkbook GetWorkbook() {
+        protected override IWorkbook GetWorkbook()
+        {
             return new XSSFWorkbook();
         }
     }

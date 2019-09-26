@@ -7,8 +7,8 @@ using Alabo.Web.Mvc.ViewModel;
 
 /// <summary>
 /// </summary>
-namespace Alabo.Tool.Payment.CallBacks {
-
+namespace Alabo.Tool.Payment.CallBacks
+{
     [NotMapped]
     /// <summary>
     /// 微信小程序配置
@@ -16,8 +16,8 @@ namespace Alabo.Tool.Payment.CallBacks {
     [ClassProperty(Name = "微信小程序配置", Icon = "fa fa-puzzle-piece",
         SideBarType = SideBarType.ApiStoreSideBar,
         SortOrder = 2, Description = "微信小程序配置")]
-    public class MiniProgramConfig : BaseViewModel, IAutoConfig {
-
+    public class MiniProgramConfig : BaseViewModel, IAutoConfig
+    {
         /// <summary>
         ///     是否启用
         /// </summary>
@@ -48,7 +48,8 @@ namespace Alabo.Tool.Payment.CallBacks {
         ///     Sets the default.
         /// </summary>
         /// <exception cref="System.NotImplementedException"></exception>
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

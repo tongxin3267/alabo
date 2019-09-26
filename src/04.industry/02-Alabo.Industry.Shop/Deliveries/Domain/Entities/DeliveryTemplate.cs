@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Exceptions;
@@ -12,13 +13,40 @@ using Alabo.Industry.Shop.Deliveries.Domain.Enums;
 using Alabo.Industry.Shop.Deliveries.Domain.Services;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Industry.Shop.Deliveries.Domain.Entities {
-
+namespace Alabo.Industry.Shop.Deliveries.Domain.Entities
+{
     /// <summary>
-    /// 店铺运费模板
+    ///     店铺运费模板
     /// </summary>
     [Table("Shop_DeliveryTemplate")]
-    public class DeliveryTemplate : AggregateMongodbUserRoot<DeliveryTemplate> {
+    public class DeliveryTemplate : AggregateMongodbUserRoot<DeliveryTemplate>
+    {
+        public PageResult<DeliveryTemplate> PageTable(object query, AutoBaseModel autoModel)
+        {
+            var model = new PagedList<DeliveryTemplate>();
+            if (autoModel.Filter == FilterType.Admin)
+            {
+                model = Resolve<IDeliveryTemplateService>().GetPagedList(query);
+            }
+            else if (autoModel.Filter == FilterType.User)
+            {
+                var store = Resolve<IShopStoreService>().GetUserStore(autoModel.BasicUser.Id);
+                if (store == null) throw new ValidException("您不是供应商");
+                model = Resolve<IDeliveryTemplateService>().GetPagedList(query, r => r.StoreId == store.Id);
+            }
+            else
+            {
+                throw new ValidException("方式不对");
+            }
+
+            model.Result = model.Result.Select(s =>
+            {
+                //ConvertToApiImageUrl
+                s.UserName = Resolve<IApiService>().ConvertToApiImageUrl(s.UserName);
+                return s;
+            }).ToList();
+            return null;
+        }
 
         #region 属性
 
@@ -29,8 +57,9 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Entities {
         /// </summary>
         [Display(Name = "运费模板名称")]
         [Required]
-        [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, IsShowAdvancedSerach = true, Width = "180", ListShow = true,
-            Operator = Datas.Queries.Enums.Operator.Contains,
+        [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, IsShowAdvancedSerach = true, Width = "180",
+            ListShow = true,
+            Operator = Operator.Contains,
             EditShow = false, SortOrder = 1)]
         public string TemplateName { get; set; }
 
@@ -69,7 +98,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Entities {
         /// </summary>
         [Display(Name = "默认首费")]
         [Field(IsShowBaseSerach = true, IsShowAdvancedSerach = true, Width = "180", ListShow = true,
-           EditShow = false, SortOrder = 3)]
+            EditShow = false, SortOrder = 3)]
         public decimal StartFee { get; set; } = 8;
 
         /// <summary>
@@ -91,35 +120,14 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Entities {
         public bool Enabled { get; set; }
 
         #endregion 属性
-
-        public PageResult<DeliveryTemplate> PageTable(object query, AutoBaseModel autoModel) {
-            var model = new PagedList<DeliveryTemplate>();
-            if (autoModel.Filter == FilterType.Admin) {
-                model = Resolve<IDeliveryTemplateService>().GetPagedList(query);
-            } else if (autoModel.Filter == FilterType.User) {
-                var store = Resolve<IShopStoreService>().GetUserStore(autoModel.BasicUser.Id);
-                if (store == null) {
-                    throw new ValidException("您不是供应商");
-                }
-                model = Resolve<IDeliveryTemplateService>().GetPagedList(query, r => r.StoreId == store.Id);
-            } else {
-                throw new ValidException("方式不对");
-            }
-            model.Result = model.Result.Select(s => {
-                //ConvertToApiImageUrl
-                s.UserName = Resolve<IApiService>().ConvertToApiImageUrl(s.UserName);
-                return s;
-            }).ToList();
-            return null;
-        }
     }
 
     /// <summary>
     ///     运费模板费用
     ///     区域模板费用
     /// </summary>
-    public class RegionTemplateFee {
-
+    public class RegionTemplateFee
+    {
         /// <summary>
         ///     区域ID可以是城市ID，也可以是区域ID，也可以是省份ID
         /// </summary>

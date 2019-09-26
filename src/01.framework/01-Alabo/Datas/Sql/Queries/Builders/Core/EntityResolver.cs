@@ -32,9 +32,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <param name="entity">实体类型</param>
         public string GetTable(Type entity)
         {
-            if (_matedata == null) {
-                return entity.Name;
-            }
+            if (_matedata == null) return entity.Name;
 
             var result = _matedata.GetTable(entity);
             return string.IsNullOrWhiteSpace(result) ? entity.Name : result;
@@ -57,9 +55,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         public string GetColumns<TEntity>(Expression<Func<TEntity, object[]>> columns)
         {
             var names = Lambda.GetLastNames(columns);
-            if (_matedata == null) {
-                return Alabo.Extensions.Extensions.Join(names);
-            }
+            if (_matedata == null) return Alabo.Extensions.Extensions.Join(names);
 
             return Alabo.Extensions.Extensions.Join(names.Select(name => _matedata.GetColumn(typeof(TEntity), name)));
         }
@@ -72,9 +68,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         public string GetColumn<TEntity>(Expression<Func<TEntity, object>> column)
         {
             var name = Lambda.GetLastName(column);
-            if (_matedata == null) {
-                return name;
-            }
+            if (_matedata == null) return name;
 
             return _matedata.GetColumn(typeof(TEntity), name);
         }
@@ -88,9 +82,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         public string GetColumn(Expression expression, Type entity, bool right = false)
         {
             var column = Lambda.GetLastName(expression, right);
-            if (_matedata == null) {
-                return column;
-            }
+            if (_matedata == null) return column;
 
             return _matedata.GetColumn(entity, column);
         }

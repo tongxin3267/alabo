@@ -5,13 +5,13 @@ using Alabo.Domains.Services;
 using Alabo.Industry.Shop.Orders.Dtos;
 using Alabo.Industry.Shop.Orders.ViewModels;
 
-namespace Alabo.Industry.Shop.Orders.Domain.Services {
-
+namespace Alabo.Industry.Shop.Orders.Domain.Services
+{
     /// <summary>
     ///     订单后台操作相关的接口
     /// </summary>
-    public interface IOrderAdminService : IService {
-
+    public interface IOrderAdminService : IService
+    {
         /// <summary>
         ///     根据订单和用户，创建支付记录
         ///     一个订单创建一条支付记录
@@ -33,7 +33,7 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services {
         ViewAdminOrder GetViewAdminOrder(long id, long UserId);
 
         /// <summary>
-        /// 产品库存更新
+        ///     产品库存更新
         /// </summary>
         void ProductStockUpdate();
     }

@@ -17,9 +17,7 @@ namespace Alabo.Helpers
             Document = new XmlDocument();
             Document.LoadXml(GetXml(xml));
             Root = Document.DocumentElement;
-            if (Root == null) {
-                throw new ArgumentException(nameof(xml));
-            }
+            if (Root == null) throw new ArgumentException(nameof(xml));
         }
 
         /// <summary>
@@ -59,9 +57,8 @@ namespace Alabo.Helpers
         private XmlNode CreateNode(string name, object value, XmlNodeType type)
         {
             var node = Document.CreateNode(type, name, string.Empty);
-            if (string.IsNullOrWhiteSpace(Extensions.Extensions.SafeString(value)) == false) {
+            if (string.IsNullOrWhiteSpace(Extensions.Extensions.SafeString(value)) == false)
                 node.InnerText = Extensions.Extensions.SafeString(value);
-            }
 
             return node;
         }
@@ -71,9 +68,7 @@ namespace Alabo.Helpers
         /// </summary>
         private XmlNode GetParent(XmlNode parent)
         {
-            if (parent == null) {
-                return Root;
-            }
+            if (parent == null) return Root;
 
             return parent;
         }

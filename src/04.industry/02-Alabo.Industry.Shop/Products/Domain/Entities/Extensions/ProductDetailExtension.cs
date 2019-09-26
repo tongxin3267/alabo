@@ -3,22 +3,20 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Entities.Extensions;
 
-namespace Alabo.Industry.Shop.Products.Domain.Entities.Extensions {
-
+namespace Alabo.Industry.Shop.Products.Domain.Entities.Extensions
+{
     /// <summary>
     ///     商品扩展详情
     /// </summary>
-    public class ProductDetailExtension : EntityExtension {
-
-  
-
+    public class ProductDetailExtension : EntityExtension
+    {
         /// <summary>
-        /// 店铺分类
+        ///     店铺分类
         /// </summary>
         public List<long> StoreClass { get; set; } = new List<long>();
 
         /// <summary>
-        /// 商品标签
+        ///     商品标签
         /// </summary>
         public List<long> Tags { get; set; } = new List<long>();
 
@@ -104,10 +102,9 @@ namespace Alabo.Industry.Shop.Products.Domain.Entities.Extensions {
         public string ProductSortTitle { get; set; }
 
         /// <summary>
-        /// 审核拒绝消息内容
+        ///     审核拒绝消息内容
         /// </summary>
         [Display(Name = "审核拒绝消息内容")]
         public string AidutMessage { get; set; }
-
     }
 }

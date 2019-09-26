@@ -5,8 +5,8 @@ using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.Tool.Payment.CallBacks {
-
+namespace Alabo.Tool.Payment.CallBacks
+{
     [NotMapped]
     /// <summary>
     /// Paypal支付配置
@@ -14,8 +14,8 @@ namespace Alabo.Tool.Payment.CallBacks {
     [ClassProperty(Name = "Paypal支付配置", Icon = "fa fa-puzzle-piece",
         SideBarType = SideBarType.ApiStoreSideBar,
         SortOrder = 2, Description = "Paypal支付配置")]
-    public class PaypalPayPaymentConfig : BaseViewModel, IAutoConfig {
-
+    public class PaypalPayPaymentConfig : BaseViewModel, IAutoConfig
+    {
         /// <summary>
         ///     是否启用
         /// </summary>
@@ -62,7 +62,8 @@ namespace Alabo.Tool.Payment.CallBacks {
         [Display(Name = "商户收款邮箱")]
         public string PaypalEmail { get; set; } = "";
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

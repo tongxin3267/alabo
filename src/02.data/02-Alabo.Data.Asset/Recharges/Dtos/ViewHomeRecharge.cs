@@ -8,15 +8,15 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Asset.Recharges.Dtos {
-
+namespace Alabo.App.Asset.Recharges.Dtos
+{
     /// <summary>
     ///     Class ViewHomeRecharge.
     ///     会员中心充值记录
     /// </summary>
     [ClassProperty(Name = "充值管理", Icon = "fa fa-puzzle-piece")]
-    public class ViewHomeRecharge : BaseViewModel {
-
+    public class ViewHomeRecharge : BaseViewModel
+    {
         /// <summary>
         ///     id
         /// </summary>

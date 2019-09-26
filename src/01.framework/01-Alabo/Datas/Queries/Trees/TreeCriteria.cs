@@ -17,9 +17,7 @@ namespace Alabo.Datas.Queries.Trees
         /// <param name="parameter">查询参数</param>
         public TreeCriteria(ITreeQueryParameter parameter) : base(parameter)
         {
-            if (parameter.ParentId != null) {
-                Predicate = Predicate.And(t => t.ParentId == parameter.ParentId);
-            }
+            if (parameter.ParentId != null) Predicate = Predicate.And(t => t.ParentId == parameter.ParentId);
         }
     }
 
@@ -34,17 +32,12 @@ namespace Alabo.Datas.Queries.Trees
         /// <param name="parameter">查询参数</param>
         public TreeCriteria(ITreeQueryParameter<TParentId> parameter)
         {
-            if (!string.IsNullOrWhiteSpace(parameter.Path)) {
+            if (!string.IsNullOrWhiteSpace(parameter.Path))
                 Predicate = Predicate.And(t => t.Path.StartsWith(parameter.Path));
-            }
 
-            if (parameter.Level != null) {
-                Predicate = Predicate.And(t => t.Level == parameter.Level);
-            }
+            if (parameter.Level != null) Predicate = Predicate.And(t => t.Level == parameter.Level);
 
-            if (parameter.Enabled != null) {
-                Predicate = Predicate.And(t => t.Enabled == parameter.Enabled);
-            }
+            if (parameter.Enabled != null) Predicate = Predicate.And(t => t.Enabled == parameter.Enabled);
         }
 
         /// <summary>

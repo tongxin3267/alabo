@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using AspectCore.DynamicProxy.Parameters;
 using Alabo.Aspects.Base;
 using Alabo.Reflections;
+using AspectCore.DynamicProxy.Parameters;
 
 namespace Alabo.Validations.Aspects
 {
@@ -40,13 +40,9 @@ namespace Alabo.Validations.Aspects
         /// </summary>
         private void ValidateCollection(Parameter parameter)
         {
-            if (!(parameter.Value is IEnumerable<IValidation> validations)) {
-                return;
-            }
+            if (!(parameter.Value is IEnumerable<IValidation> validations)) return;
 
-            foreach (var validation in validations) {
-                validation.Validate();
-            }
+            foreach (var validation in validations) validation.Validate();
         }
     }
 }

@@ -8,9 +8,8 @@ namespace Alabo.Industry.Offline.RechargeAccount.Services
 {
     public interface IRechargeAccountLogService : IService<RechargeAccountLog, ObjectId>
     {
-
         /// <summary>
-        /// ≥‰÷µ
+        ///     ≥‰÷µ
         /// </summary>
         /// <param name="rechargeAccount"></param>
         /// <returns></returns>

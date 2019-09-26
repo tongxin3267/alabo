@@ -3,10 +3,10 @@ using Alabo.Domains.Repositories;
 using Alabo.Industry.Shop.Products.Domain.Entities;
 using Alabo.Industry.Shop.Products.Dtos;
 
-namespace Alabo.Industry.Shop.Products.Domain.Repositories {
-
-    public interface IProductSkuRepository : IRepository<ProductSku, long> {
-
+namespace Alabo.Industry.Shop.Products.Domain.Repositories
+{
+    public interface IProductSkuRepository : IRepository<ProductSku, long>
+    {
         /// <summary>
         ///     根据商品SkuId，获取店铺Id
         /// </summary>

@@ -10,17 +10,113 @@ using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.Withdraws.UI {
-
+namespace Alabo.App.Asset.Withdraws.UI
+{
     [ClassProperty(Name = "", Description = "提现审核")]
-    public class WithdrawAdminAutoForm : UIBase, IAutoTable<WithdrawAdminAutoForm>//, IAutoForm
+    public class WithdrawAdminAutoForm : UIBase, IAutoTable<WithdrawAdminAutoForm> //, IAutoForm
     {
+        /// <summary>
+        ///     操作按钮
+        /// </summary>
+        /// <returns></returns>
+        public List<TableAction> Actions()
+        {
+            return new List<TableAction>
+            {
+                ToLinkAction("查看详情", "/Admin/Product/Edit", TableActionType.QuickAction), //管理员增加
+                ToLinkAction("审核", "/Admin/Product/Edit", TableActionType.QuickAction) //管理员增加
+            };
+        }
+
+        /// <summary>
+        ///     表格
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="autoModel"></param>
+        /// <returns></returns>
+        public PageResult<WithdrawAdminAutoForm> PageTable(object query, AutoBaseModel autoModel)
+        {
+            var dic = HttpWeb.HttpContext.ToDictionary();
+            dic = dic.RemoveKey("type"); // 移除该type否则无法正常lambda
+            var userInput = ToQuery<WithDrawApiInput>();
+
+            if (autoModel.Filter == FilterType.Admin)
+            {
+                var model = Resolve<IWithdrawService>().GetAdminPageList(dic.ToJson());
+                var view = new PagedList<WithdrawAdminAutoForm>();
+                foreach (var item in model)
+                {
+                    var outPut = AutoMapping.SetValue<WithdrawAdminAutoForm>(item);
+                    view.Add(outPut);
+                }
+
+                return ToPageResult(view);
+            }
+
+            if (autoModel.Filter == FilterType.User)
+            {
+                //userInput.UserId = autoModel.BasicUser.Id;
+                //userInput.LoginUserId = autoModel.BasicUser.Id;
+                //var model = Resolve<IWithdrawService>().GetUserList(userInput);
+
+                //var money = Resolve<IAutoConfigService>().GetList<Domain.CallBacks.MoneyTypeConfig>();
+                //var view = new PagedList<WithdrawAdminAutoForm>();
+                //foreach (var item in model) {
+                //    var outPut = new WithdrawAdminAutoForm {
+                //        //提现单号
+                //        //Serial = item.Serial,
+                //        //状态
+                //        Status = item.Status,
+                //        Amount = item.Amount,
+                //        BankCardId = item.TradeExtension.WithDraw.BankCard.Id.ToString(),
+                //        MoneyTypeId = item.MoneyTypeId,
+                //        //MoneyTypeName = money.Find(s => s.Id == item.MoneyTypeId)?.Name,
+                //        UserRemark = item.TradeExtension.TradeRemark.UserRemark,
+                //        UserId = item.UserId,
+                //        //BankName = $"{item.TradeExtension.WithDraw.BankCard.Type.GetDisplayName()}({item.TradeExtension.WithDraw.BankCard.Address})",
+                //        //BankCardNumber = $"{item.TradeExtension.WithDraw.BankCard.Number}({item.TradeExtension.WithDraw.BankCard.Name})",
+                //        CreateTime = item.CreateTime
+                //    };// AutoMapping.SetValue<WithdrawAutoForm>(item);
+                //    view.Add(outPut);
+                //}
+                //  return ToPageResult(view);
+            }
+            else
+            {
+                throw new SystemException("类型权限不正确");
+            }
+
+            throw new NotImplementedException();
+        }
+
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
+            var result = ToAutoForm(new WithdrawAutoForm());
+            result.AlertText = "【提现】将 储值 提取到自己的银行卡";
+
+            result.ButtomHelpText = new List<string>
+            {
+                "提现金额为【储值】",
+                "提现到账为T+3请耐心等待审核",
+                "提现金额必须为100的整数倍",
+                "最大提现金额为10000金额/次",
+                "提现手续费为0.3%"
+            };
+            return result;
+        }
+
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
+            throw new NotImplementedException();
+        }
+
         #region
 
         /// <summary>
@@ -39,12 +135,12 @@ namespace Alabo.App.Asset.Withdraws.UI {
         /// </summary>
         [Display(Name = "单号")]
         [Field(ControlsType = ControlsType.TextBox, ListShow = true, EditShow = false, SortOrder = 1)]
-        public string Serial {
-            get {
+        public string Serial
+        {
+            get
+            {
                 var searSerial = $"9{Id.ToString().PadLeft(9, '0')}";
-                if (Id.ToString().Length == 10) {
-                    searSerial = $"{Id.ToString()}";
-                }
+                if (Id.ToString().Length == 10) searSerial = $"{Id.ToString()}";
 
                 return searSerial;
             }
@@ -54,7 +150,8 @@ namespace Alabo.App.Asset.Withdraws.UI {
         ///     Gets or sets the bank card identifier.
         /// </summary>
         [Display(Name = "状态")]
-        [Field(ControlsType = ControlsType.DropdownList, DataSource = "Alabo.App.Core.Finance.Domain.Enums.TradeStatus", ListShow = true, EditShow = false, SortOrder = 4)]
+        [Field(ControlsType = ControlsType.DropdownList, DataSource = "Alabo.App.Core.Finance.Domain.Enums.TradeStatus",
+            ListShow = true, EditShow = false, SortOrder = 4)]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         public WithdrawStatus Status { get; set; }
 
@@ -62,7 +159,8 @@ namespace Alabo.App.Asset.Withdraws.UI {
         ///     Gets or sets the bank card identifier.
         /// </summary>
         [Display(Name = "银行卡")]
-        [Field(ControlsType = ControlsType.DropdownList, ListShow = false, EditShow = true, ApiDataSource = "Api/BankCard/GetList?loginUserId=[[Id]]", SortOrder = 3)]
+        [Field(ControlsType = ControlsType.DropdownList, ListShow = false, EditShow = true,
+            ApiDataSource = "Api/BankCard/GetList?loginUserId=[[Id]]", SortOrder = 3)]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         public string BankCardId { get; set; }
 
@@ -129,94 +227,12 @@ namespace Alabo.App.Asset.Withdraws.UI {
         public string UserRemark { get; set; }
 
         /// <summary>
-        ///    时间
+        ///     时间
         /// </summary>
         [Display(Name = "时间")]
         [Field(ControlsType = ControlsType.DateTimePicker, EditShow = false, ListShow = true, SortOrder = 11)]
         public DateTime CreateTime { get; set; }
 
         #endregion
-
-        /// <summary>
-        /// 操作按钮
-        /// </summary>
-        /// <returns></returns>
-        public List<TableAction> Actions() {
-            return new List<TableAction>()
-            {
-                 ToLinkAction("查看详情", "/Admin/Product/Edit",TableActionType.QuickAction),//管理员增加
-                 ToLinkAction("审核", "/Admin/Product/Edit",TableActionType.QuickAction),//管理员增加
-            };
-        }
-
-        public Alabo.Framework.Core.WebUis.Design.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
-            var result = ToAutoForm(new WithdrawAutoForm());
-            result.AlertText = "【提现】将 储值 提取到自己的银行卡";
-
-            result.ButtomHelpText = new List<string> {
-                "提现金额为【储值】",
-                "提现到账为T+3请耐心等待审核",
-                "提现金额必须为100的整数倍",
-                "最大提现金额为10000金额/次",
-                "提现手续费为0.3%"
-            };
-            return result;
-        }
-
-        /// <summary>
-        /// 表格
-        /// </summary>
-        /// <param name="query"></param>
-        /// <param name="autoModel"></param>
-        /// <returns></returns>
-        public PageResult<WithdrawAdminAutoForm> PageTable(object query, AutoBaseModel autoModel) {
-            var dic = HttpWeb.HttpContext.ToDictionary();
-            dic = dic.RemoveKey("type");// 移除该type否则无法正常lambda
-            var userInput = ToQuery<WithDrawApiInput>();
-
-            if (autoModel.Filter == FilterType.Admin) {
-                var model = Resolve<IWithdrawService>().GetAdminPageList(dic.ToJson());
-                var view = new PagedList<WithdrawAdminAutoForm>();
-                foreach (var item in model) {
-                    var outPut = AutoMapping.SetValue<WithdrawAdminAutoForm>(item);
-                    view.Add(outPut);
-                }
-                return ToPageResult(view);
-            }
-            if (autoModel.Filter == FilterType.User) {
-                //userInput.UserId = autoModel.BasicUser.Id;
-                //userInput.LoginUserId = autoModel.BasicUser.Id;
-                //var model = Resolve<IWithdrawService>().GetUserList(userInput);
-
-                //var money = Resolve<IAutoConfigService>().GetList<Domain.CallBacks.MoneyTypeConfig>();
-                //var view = new PagedList<WithdrawAdminAutoForm>();
-                //foreach (var item in model) {
-                //    var outPut = new WithdrawAdminAutoForm {
-                //        //提现单号
-                //        //Serial = item.Serial,
-                //        //状态
-                //        Status = item.Status,
-                //        Amount = item.Amount,
-                //        BankCardId = item.TradeExtension.WithDraw.BankCard.Id.ToString(),
-                //        MoneyTypeId = item.MoneyTypeId,
-                //        //MoneyTypeName = money.Find(s => s.Id == item.MoneyTypeId)?.Name,
-                //        UserRemark = item.TradeExtension.TradeRemark.UserRemark,
-                //        UserId = item.UserId,
-                //        //BankName = $"{item.TradeExtension.WithDraw.BankCard.Type.GetDisplayName()}({item.TradeExtension.WithDraw.BankCard.Address})",
-                //        //BankCardNumber = $"{item.TradeExtension.WithDraw.BankCard.Number}({item.TradeExtension.WithDraw.BankCard.Name})",
-                //        CreateTime = item.CreateTime
-                //    };// AutoMapping.SetValue<WithdrawAutoForm>(item);
-                //    view.Add(outPut);
-                //}
-                //  return ToPageResult(view);
-            } else {
-                throw new SystemException("类型权限不正确");
-            }
-            throw new NotImplementedException();
-        }
-
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
-            throw new NotImplementedException();
-        }
     }
 }

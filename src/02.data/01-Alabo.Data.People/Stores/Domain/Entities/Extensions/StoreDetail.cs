@@ -5,13 +5,13 @@ using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Data.People.Stores.Domain.Entities.Extensions {
-
+namespace Alabo.Data.People.Stores.Domain.Entities.Extensions
+{
     /// <summary>
     ///     店铺详细属性
     /// </summary>
-    public class StoreDetail : EntityExtension {
-
+    public class StoreDetail : EntityExtension
+    {
         /// <summary>
         ///     主题市场Guid
         /// </summary>

@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.Framework.Core.Reflections.Interfaces;
+﻿using Alabo.Framework.Core.Reflections.Interfaces;
 
-namespace Alabo.Cloud.Contracts.Domain {
-
-    public class ContractDefault : IDefaultInit {
+namespace Alabo.Cloud.Contracts.Domain
+{
+    public class ContractDefault : IDefaultInit
+    {
         public bool IsTenant { get; }
 
-        public void Init() {
+        public void Init()
+        {
             //            var regProtocol = new RegisterProtocolConfig {
             //                Content = $@"一、服务条款的确认及接受
 

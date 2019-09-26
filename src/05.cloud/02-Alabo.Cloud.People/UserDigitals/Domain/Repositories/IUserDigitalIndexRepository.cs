@@ -1,10 +1,10 @@
-using System;using Alabo.Domains.Repositories.EFCore;using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Repositories;
 using Alabo.Cloud.People.UserDigitals.Domain.Entities;
+using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.Cloud.People.UserDigitals.Domain.Repositories {
-	public interface IUserDigitalIndexRepository : IRepository<UserDigitalIndex, ObjectId>  {
-	}
+namespace Alabo.Cloud.People.UserDigitals.Domain.Repositories
+{
+    public interface IUserDigitalIndexRepository : IRepository<UserDigitalIndex, ObjectId>
+    {
+    }
 }

@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using AutoMapper;
-using MongoDB.Bson.Serialization.Attributes;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
+using AutoMapper;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Alabo.Domains.Entities
 {

@@ -120,9 +120,7 @@ namespace Alabo.Datas.Queries
         /// <param name="condition">该值为true时添加查询条件，否则忽略</param>
         public IQuery<TEntity, TKey> WhereIf(Expression<Func<TEntity, bool>> predicate, bool condition)
         {
-            if (condition == false) {
-                return this;
-            }
+            if (condition == false) return this;
 
             return Where(predicate);
         }
@@ -137,9 +135,7 @@ namespace Alabo.Datas.Queries
         public IQuery<TEntity, TKey> WhereIfNotEmpty(Expression<Func<TEntity, bool>> predicate)
         {
             predicate = Helper.GetWhereIfNotEmptyExpression(predicate);
-            if (predicate == null) {
-                return this;
-            }
+            if (predicate == null) return this;
 
             return And(predicate);
         }
@@ -198,10 +194,9 @@ namespace Alabo.Datas.Queries
         public IQuery<TEntity, TKey> Between<TProperty>(Expression<Func<TEntity, TProperty>> propertyExpression,
             DateTime? min, DateTime? max, bool includeTime = true, Boundary? boundary = null)
         {
-            if (includeTime) {
+            if (includeTime)
                 return Where(new DateTimeSegmentCriteria<TEntity, TProperty>(propertyExpression, min, max,
                     boundary ?? Boundary.Both));
-            }
 
             return Where(
                 new DateSegmentCriteria<TEntity, TProperty>(propertyExpression, min, max, boundary ?? Boundary.Left));
@@ -257,16 +252,12 @@ namespace Alabo.Datas.Queries
         /// <param name="predicates">查询条件</param>
         public IQuery<TEntity, TKey> Or(params Expression<Func<TEntity, bool>>[] predicates)
         {
-            if (predicates == null) {
-                return this;
-            }
+            if (predicates == null) return this;
 
             foreach (var item in predicates)
             {
                 var predicate = Helper.GetWhereIfNotEmptyExpression(item);
-                if (predicate == null) {
-                    continue;
-                }
+                if (predicate == null) continue;
 
                 _predicate = Extensions.Extensions.Or(_predicate, predicate);
             }

@@ -6,8 +6,8 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Industry.Cms.Articles.Domain.Entities {
-
+namespace Alabo.Industry.Cms.Articles.Domain.Entities
+{
     /// <summary>
     ///     关于我们
     /// </summary>
@@ -16,8 +16,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.Entities {
     )]
     [BsonIgnoreExtraElements]
     [Table("CMS_About")]
-    public class About : AggregateMongodbRoot<About> {
-
+    public class About : AggregateMongodbRoot<About>
+    {
         /// <summary>
         ///     名称
         /// </summary>

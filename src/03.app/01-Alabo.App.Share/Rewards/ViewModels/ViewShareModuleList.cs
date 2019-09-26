@@ -2,9 +2,10 @@
 using Alabo.App.Share.OpenTasks.Base;
 using Alabo.Framework.Core.Enums.Enum;
 
-namespace Alabo.App.Share.Rewards.ViewModels {
-
-    public class ViewShareModuleList {
+namespace Alabo.App.Share.Rewards.ViewModels
+{
+    public class ViewShareModuleList
+    {
         public long Id { get; set; }
 
         public Guid ModuleId { get; set; }
@@ -63,6 +64,7 @@ namespace Alabo.App.Share.Rewards.ViewModels {
         public bool IsLock { get; set; } = false;
     }
 
-    public class ShareBaseConfigList : ShareBaseConfig {
+    public class ShareBaseConfigList : ShareBaseConfig
+    {
     }
 }

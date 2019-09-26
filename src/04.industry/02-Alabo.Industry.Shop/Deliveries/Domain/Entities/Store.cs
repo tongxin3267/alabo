@@ -10,16 +10,16 @@ using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.Industry.Shop.Deliveries.Domain.Entities {
-
+namespace Alabo.Industry.Shop.Deliveries.Domain.Entities
+{
     /// <summary>
     ///     供应商店铺
     /// </summary>
     [ClassProperty(Name = "供应商管理",
         GroupName = "基本信息,高级选项", Icon = "fa fa-puzzle-piece", SortOrder = 1, Description = "设置以及查看供应商的详细信息")]
     [AutoDelete(IsAuto = true)]
-    public class Store : AggregateDefaultUserRoot<Store> {
-
+    public class Store : AggregateDefaultUserRoot<Store>
+    {
         /// <summary>
         ///     供应商名称
         /// </summary>
@@ -68,13 +68,15 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Entities {
         public StoreExtension StoreExtension { get; set; }
     }
 
-    public class StoreTableMap : MsSqlAggregateRootMap<Store> {
-
-        protected override void MapTable(EntityTypeBuilder<Store> builder) {
+    public class StoreTableMap : MsSqlAggregateRootMap<Store>
+    {
+        protected override void MapTable(EntityTypeBuilder<Store> builder)
+        {
             builder.ToTable("Shop_Store");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<Store> builder) {
+        protected override void MapProperties(EntityTypeBuilder<Store> builder)
+        {
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Property(e => e.Name).IsRequired();

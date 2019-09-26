@@ -12,13 +12,13 @@ using Alabo.Mapping;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Data.People.Users.UI.AutoFrom {
-
+namespace Alabo.Data.People.Users.UI.AutoFrom
+{
     [ClassProperty(Name = "修改登录密码", Description = "根据原始登录密码，修改登录密码")]
-    public class ChangeLoginPasswordAutoForm : UIBase, IAutoForm {
-
+    public class ChangeLoginPasswordAutoForm : UIBase, IAutoForm
+    {
         /// <summary>
-        /// 用户id
+        ///     用户id
         /// </summary>
         [Display(Name = "用户id")]
         [Field(EditShow = false, ControlsType = ControlsType.Hidden)]
@@ -57,27 +57,28 @@ namespace Alabo.Data.People.Users.UI.AutoFrom {
         //[Compare("Password", ErrorMessage = "密码与确认密码不相同")]
         public string ConfirmPassword { get; set; }
 
-        public AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
             var result = new AutoForm();
             result = ToAutoForm(new ChangeLoginPasswordAutoForm());
             result.AlertText = "【修改登录密码】为了更好的保护你的帐号安全，避免您受到损失，建议您修改默认密码";
 
-            result.ButtomHelpText = new List<string> {
+            result.ButtomHelpText = new List<string>
+            {
                 "建议确保登录密码与支付密码不同！",
-                "建议密码采用字母和数字混合，并且不短于6位。",
+                "建议密码采用字母和数字混合，并且不短于6位。"
             };
             return result;
         }
 
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
-            var parameter = (ChangeLoginPasswordAutoForm)model;
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
+            var parameter = (ChangeLoginPasswordAutoForm) model;
 
             var view = AutoMapping.SetValue<PasswordInput>(parameter);
             view.Type = PasswordType.LoginPassword;
-            var result = Resolve<IUserDetailService>().ChangePassword(view, true);
-            if (result.Succeeded) {
-                return ServiceResult.Success;
-            }
+            var result = Resolve<IUserDetailService>().ChangePassword(view);
+            if (result.Succeeded) return ServiceResult.Success;
 
             return ServiceResult.FailedWithMessage(result.ErrorMessages.Join());
         }

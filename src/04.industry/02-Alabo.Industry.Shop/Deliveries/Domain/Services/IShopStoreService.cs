@@ -5,31 +5,32 @@ using Alabo.Domains.Query.Dto;
 using Alabo.Domains.Services;
 using Alabo.Framework.Basic.Address.Domain.Entities;
 using Alabo.Industry.Shop.Deliveries.Domain.Dtos;
+using Alabo.Industry.Shop.Deliveries.Domain.Entities;
 using Alabo.Industry.Shop.Deliveries.Domain.Entities.Extensions;
 using Alabo.Industry.Shop.Deliveries.ViewModels;
 using Alabo.Industry.Shop.Orders.Dtos;
 using Alabo.Industry.Shop.Products.Dtos;
 using MongoDB.Bson;
 
-namespace Alabo.Industry.Shop.Deliveries.Domain.Services {
-
+namespace Alabo.Industry.Shop.Deliveries.Domain.Services
+{
     /// <summary>
     ///     Interface IStoreService
     /// </summary>
-    public interface IShopStoreService : IService<Entities.Store, long> {
-
+    public interface IShopStoreService : IService<Store, long>
+    {
         /// <summary>
         ///     获取自营店铺
         ///     平台店铺，后台添加的时候，为平台商品
         /// </summary>
-        Entities.Store PlanformStore();
+        Store PlanformStore();
 
         /// <summary>
         ///     获取s the 会员 store.
         ///     获取会员店铺
         /// </summary>
         /// <param name="UserId">会员Id</param>
-        Entities.Store GetUserStore(long UserId);
+        Store GetUserStore(long UserId);
 
         /// <summary>
         ///     添加s the 或 更新.
@@ -47,7 +48,8 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services {
         /// <param name="templateId">The express identifier.</param>
         /// <param name="userAddress">用户地址</param>
         /// <param name="weight">The weight.</param>
-        Tuple<ServiceResult, decimal> CountExpressFee(long storeId, ObjectId templateId, UserAddress userAddress, decimal weight);
+        Tuple<ServiceResult, decimal> CountExpressFee(long storeId, ObjectId templateId, UserAddress userAddress,
+            decimal weight);
 
         /// <summary>
         ///     获取s the 视图 store 分页 list.
@@ -99,12 +101,13 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services {
         ViewStore GetView(long id);
 
         /// <summary>
-        /// Counts the express fee.
+        ///     Counts the express fee.
         /// </summary>
         /// <param name="storeId"></param>
         /// <param name="userAddress"></param>
         /// <param name="productSkuItems"></param>
         /// <returns></returns>
-        Tuple<ServiceResult, decimal> CountExpressFee(long storeId, UserAddress userAddress, IList<ProductSkuItem> productSkuItems);
+        Tuple<ServiceResult, decimal> CountExpressFee(long storeId, UserAddress userAddress,
+            IList<ProductSkuItem> productSkuItems);
     }
 }

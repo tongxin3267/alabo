@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using Alabo.Framework.Tasks.Queues.Models;
 
-namespace Alabo.App.Share.TaskExecutes.ResultModel {
-
+namespace Alabo.App.Share.TaskExecutes.ResultModel
+{
     /// <summary>
     /// </summary>
-    public class UserAssetsModuleConfigBase : IModuleConfig {
+    public class UserAssetsModuleConfigBase : IModuleConfig
+    {
         public int Id { get; set; }
 
         /// <summary>
@@ -45,13 +46,15 @@ namespace Alabo.App.Share.TaskExecutes.ResultModel {
 
         public string Name { get; set; }
 
-        long IModuleConfig.Id {
+        long IModuleConfig.Id
+        {
             get => throw new NotImplementedException();
             set => throw new NotImplementedException();
         }
     }
 
-    public class ShareModuleDistriRatio {
+    public class ShareModuleDistriRatio
+    {
         public string DistriRatio { get; set; }
     }
 }

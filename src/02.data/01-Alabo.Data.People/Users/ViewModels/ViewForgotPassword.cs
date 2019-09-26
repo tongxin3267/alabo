@@ -3,13 +3,13 @@ using Alabo.Regexs;
 using Alabo.Validations;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Alabo.Data.People.Users.ViewModels {
-
+namespace Alabo.Data.People.Users.ViewModels
+{
     /// <summary>
     ///     Class ViewForgotPassword.
     /// </summary>
-    public class ViewForgotPassword {
-
+    public class ViewForgotPassword
+    {
         /// <summary>
         ///     Gets or sets the password.
         /// </summary>

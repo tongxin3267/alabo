@@ -14,22 +14,22 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Validations;
 
-namespace Alabo.Cloud.People.UserTree.Domain.UI {
-
+namespace Alabo.Cloud.People.UserTree.Domain.UI
+{
     /// <summary>
-    /// 修改推荐关系
+    ///     修改推荐关系
     /// </summary>
     [ClassProperty(Name = "修改推荐关系")]
-    public class UpdateParentForm : UIBase, IAutoForm {
-
+    public class UpdateParentForm : UIBase, IAutoForm
+    {
         /// <summary>
-        /// 当前登录id
+        ///     当前登录id
         /// </summary>
         [Field(ControlsType = ControlsType.Hidden)]
         public long UserId { get; set; }
 
         /// <summary>
-        /// 要更改的用户名
+        ///     要更改的用户名
         /// </summary>
         [Display(Name = "要更改的用户名")]
         [Required(ErrorMessage = "请输入要更改的用户名")]
@@ -38,7 +38,7 @@ namespace Alabo.Cloud.People.UserTree.Domain.UI {
         public string UserName { get; set; }
 
         /// <summary>
-        /// 上级用户名(推荐人)
+        ///     上级用户名(推荐人)
         /// </summary>
         [Display(Name = "上级用户名(推荐人)")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
@@ -47,7 +47,7 @@ namespace Alabo.Cloud.People.UserTree.Domain.UI {
         public string ParentUserName { get; set; }
 
         /// <summary>
-        /// 支付密码
+        ///     支付密码
         /// </summary>
         [Display(Name = "支付密码")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
@@ -56,39 +56,33 @@ namespace Alabo.Cloud.People.UserTree.Domain.UI {
         [DataType(DataType.Password)]
         public string PayPassword { get; set; }
 
-        public AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
             var view = new UpdateParentForm();
             return ToAutoForm(view);
         }
 
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
             var view = model.MapTo<UpdateParentForm>();
-            if (autoModel != null) {
-                view.UserId = autoModel.BasicUser.Id;
-            }
+            if (autoModel != null) view.UserId = autoModel.BasicUser.Id;
 
             var user = Resolve<IUserService>().GetSingle(r => r.UserName == view.UserName);
-            if (user == null) {
-                return ServiceResult.FailedWithMessage("用户名不存在");
-            }
+            if (user == null) return ServiceResult.FailedWithMessage("用户名不存在");
 
             var parentUser = Resolve<IUserService>().GetSingle(view.ParentUserName);
-            if (parentUser == null) {
-                return ServiceResult.FailedWithMessage("推荐人不存在");
-            }
+            if (parentUser == null) return ServiceResult.FailedWithMessage("推荐人不存在");
 
-            if (parentUser.Status != Status.Normal) {
-                return ServiceResult.FailedWithMessage("推荐人状态不正常");
-            }
+            if (parentUser.Status != Status.Normal) return ServiceResult.FailedWithMessage("推荐人状态不正常");
 
             var currentUserPay = Resolve<IUserDetailService>().GetSingle(r => r.Id == view.UserId);
-            if (view.PayPassword.ToMd5HashString() != currentUserPay.PayPassword) {
+            if (view.PayPassword.ToMd5HashString() != currentUserPay.PayPassword)
                 return ServiceResult.FailedWithMessage("支付密码错误！");
-            }
 
             var result = ServiceResult.Success;
             var context = Repository<IUserRepository>().RepositoryContext;
-            try {
+            try
+            {
                 context.BeginTransaction();
                 user.ParentId = parentUser.Id;
                 Resolve<IUserService>().Update(user);
@@ -96,16 +90,18 @@ namespace Alabo.Cloud.People.UserTree.Domain.UI {
                 Resolve<ITreeUpdateService>().ParentMapTaskQueue();
                 context.SaveChanges();
                 context.CommitTransaction();
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 context.RollbackTransaction();
                 result = ServiceResult.FailedWithMessage(ex.Message);
-            } finally {
+            }
+            finally
+            {
                 context.DisposeTransaction();
             }
 
-            if (!result.Succeeded) {
-                return ServiceResult.FailedWithMessage("推荐人修改失败");
-            }
+            if (!result.Succeeded) return ServiceResult.FailedWithMessage("推荐人修改失败");
 
             return result;
         }

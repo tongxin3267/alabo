@@ -10,6 +10,5 @@ namespace Alabo.Cloud.Shop.SecondBuy.Domain.Repositories
         public SecondBuyOrderRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
-
     }
 }

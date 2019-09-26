@@ -5,12 +5,13 @@ using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoLists;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.Withdraws.UI {
-
+namespace Alabo.App.Asset.Withdraws.UI
+{
     [ClassProperty(Name = "提现记录AutoList", Description = "提现记录")]
-    public class WithdrawAutoList : UIBase, IAutoList {
-
-        public PageResult<AutoListItem> PageList(object query, AutoBaseModel autoModel) {
+    public class WithdrawAutoList : UIBase, IAutoList
+    {
+        public PageResult<AutoListItem> PageList(object query, AutoBaseModel autoModel)
+        {
             //var dic = query.ToObject<Dictionary<string, string>>();
 
             //dic.TryGetValue("loginUserId", out string userId);
@@ -48,7 +49,8 @@ namespace Alabo.App.Asset.Withdraws.UI {
             return null;
         }
 
-        public Type SearchType() {
+        public Type SearchType()
+        {
             throw new NotImplementedException();
         }
     }

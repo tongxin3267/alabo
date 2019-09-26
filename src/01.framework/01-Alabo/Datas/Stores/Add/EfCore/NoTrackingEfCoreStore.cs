@@ -23,9 +23,7 @@ namespace Alabo.Datas.Stores.Add.EfCore
         public TEntity FindByIdNoTracking(TKey id)
         {
             var entities = FindByIdsNoTracking(id);
-            if (entities == null || entities.Count == 0) {
-                return null;
-            }
+            if (entities == null || entities.Count == 0) return null;
 
             return entities[0];
         }
@@ -54,9 +52,7 @@ namespace Alabo.Datas.Stores.Add.EfCore
         /// <param name="ids">标识列表</param>
         public List<TEntity> FindByIdsNoTracking(IEnumerable<TKey> ids)
         {
-            if (ids == null) {
-                return null;
-            }
+            if (ids == null) return null;
 
             var result = FindAsNoTracking()
                 .OrderByDescending(r => r.Id)
@@ -76,11 +72,10 @@ namespace Alabo.Datas.Stores.Add.EfCore
 
         public List<TEntity> FindByIdsNoTracking(Expression<Func<TEntity, bool>> predicate)
         {
-            if (predicate != null) {
+            if (predicate != null)
                 return FindAsNoTracking().Where(predicate)
                     .OrderByDescending(r => r.Id)
                     .ToList();
-            }
 
             return FindAsNoTracking().ToList();
         }

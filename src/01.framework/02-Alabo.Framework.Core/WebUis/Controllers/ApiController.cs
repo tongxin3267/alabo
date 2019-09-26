@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.Regexs;
 using Alabo.RestfulApi;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Framework.Core.WebUis.Controllers {
-
+namespace Alabo.Framework.Core.WebUis.Controllers
+{
     /// <summary>
     ///     通用Api接口文档
     /// </summary>
@@ -19,15 +19,15 @@ namespace Alabo.Framework.Core.WebUis.Controllers {
     //[Produces("application/json")]
     //[Consumes("application/json", "multipart/form-data")] //此处为新增
     [Route("Api/Common/[action]")]
-    public class ApiController : ApiBaseController {
-
+    public class ApiController : ApiBaseController
+    {
         /// <summary>
         ///     Initializes a new instance of the <see cref="ApiAController" /> class.
         /// </summary>
         /// <param name="restClientConfig">The rest client configuration.</param>
         public ApiController(RestClientConfig restClientConfig
-
-        ) : base() {
+        )
+        {
         }
 
         /// <summary>
@@ -36,15 +36,12 @@ namespace Alabo.Framework.Core.WebUis.Controllers {
         /// <param name="type"></param>
         [HttpGet]
         [Display(Description = "根据枚举获取KeyValues")]
-        public ApiResult<IList<KeyValue>> GetKeyValuesByEnum([FromQuery] string type) {
-            if (type.IsNullOrEmpty()) {
-                ApiResult.Failure("类型不能为空");
-            }
+        public ApiResult<IList<KeyValue>> GetKeyValuesByEnum([FromQuery] string type)
+        {
+            if (type.IsNullOrEmpty()) ApiResult.Failure("类型不能为空");
 
             var keyValues = KeyValueExtesions.EnumToKeyValues(type);
-            if (keyValues == null) {
-                return ApiResult.Failure<IList<KeyValue>>("枚举不存在");
-            }
+            if (keyValues == null) return ApiResult.Failure<IList<KeyValue>>("枚举不存在");
 
             return ApiResult.Success(keyValues);
         }
@@ -55,10 +52,9 @@ namespace Alabo.Framework.Core.WebUis.Controllers {
         /// <param name="mobile">手机号码</param>
         [HttpGet]
         [Display(Description = "发送手机验证码")]
-        public ApiResult SendMobileVerifiyCode([FromQuery] string mobile) {
-            if (!RegexHelper.CheckMobile(mobile)) {
-                return ApiResult.Failure("手机号码格式不正确");
-            }
+        public ApiResult SendMobileVerifiyCode([FromQuery] string mobile)
+        {
+            if (!RegexHelper.CheckMobile(mobile)) return ApiResult.Failure("手机号码格式不正确");
             // var code = Ioc.Resolve<IOpenService>().GenerateVerifiyCode(mobile);
 
             //_messageManager.SendRaw(mobile, $"您的验证码是{code},请在5分钟内按页面提示提交验证码,切勿将验证码泄露于他人!");
@@ -76,21 +72,21 @@ namespace Alabo.Framework.Core.WebUis.Controllers {
         /// <param name="message">短信内容</param>
         [HttpGet]
         [Display(Description = "发送短信")]
-        public ApiResult SendMessage(string mobile, string message) {
-            if (!RegexHelper.CheckMobile(mobile)) {
-                return ApiResult.Failure("手机号码格式不正确");
-            }
+        public ApiResult SendMessage(string mobile, string message)
+        {
+            if (!RegexHelper.CheckMobile(mobile)) return ApiResult.Failure("手机号码格式不正确");
             // _messageManager.SendRaw(mobile, message);
 
             return ApiResult.Success();
         }
 
         /// <summary>
-        /// 随机生成ObjectId
+        ///     随机生成ObjectId
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ApiResult GetObjectId() {
+        public ApiResult GetObjectId()
+        {
             var id = ObjectId.GenerateNewId();
             return ApiResult.Success(id);
         }

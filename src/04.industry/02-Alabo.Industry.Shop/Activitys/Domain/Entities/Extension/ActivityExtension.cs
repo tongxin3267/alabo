@@ -5,13 +5,13 @@ using Alabo.Domains.Entities.Extensions;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Industry.Shop.Activitys.Domain.Enum;
 
-namespace Alabo.Industry.Shop.Activitys.Domain.Entities.Extension {
-
+namespace Alabo.Industry.Shop.Activitys.Domain.Entities.Extension
+{
     /// <summary>
     ///     活动
     /// </summary>
-    public class ActivityExtension : EntityExtension {
-
+    public class ActivityExtension : EntityExtension
+    {
         /// <summary>
         ///     活动类型
         /// </summary>
@@ -44,8 +44,8 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Entities.Extension {
     /// <summary>
     ///     活动显示信息或其他信息
     /// </summary>
-    public class ActivityDisplay {
-
+    public class ActivityDisplay
+    {
         /// <summary>
         ///     优惠方式：是否有减钱行为
         /// </summary>

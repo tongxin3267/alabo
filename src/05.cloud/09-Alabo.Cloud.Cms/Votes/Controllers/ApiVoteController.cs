@@ -5,13 +5,13 @@ using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
-namespace Alabo.Cloud.Cms.Votes.Controllers {
-
+namespace Alabo.Cloud.Cms.Votes.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/Vote/[action]")]
-    public class ApiVoteController : ApiBaseController<Vote, ObjectId> {
-
-        public ApiVoteController() : base()
+    public class ApiVoteController : ApiBaseController<Vote, ObjectId>
+    {
+        public ApiVoteController()
         {
             BaseService = Resolve<IVoteService>();
         }

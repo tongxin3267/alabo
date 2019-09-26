@@ -21,9 +21,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
             Desc = desc;
             Entity = entity;
             Raw = raw;
-            if (raw) {
-                return;
-            }
+            if (raw) return;
 
             if (Column.ToLower().EndsWith("desc"))
             {
@@ -59,9 +57,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <param name="register">实体别名注册器</param>
         public string ToSql(IDialect dialect, IEntityAliasRegister register)
         {
-            if (Raw) {
-                return Column;
-            }
+            if (Raw) return Column;
 
             var name = new NameItem(Column);
             var tableAlias = register.GetAlias(Entity);

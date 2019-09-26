@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using Alabo.Domains.Services;
 using Alabo.Industry.Shop.Categories.Domain.Entities;
 
-namespace Alabo.Industry.Shop.Categories.Domain.Services {
-
-    public interface ICategoryPropertyValueService : IService<CategoryPropertyValue, Guid> {
-
+namespace Alabo.Industry.Shop.Categories.Domain.Services
+{
+    public interface ICategoryPropertyValueService : IService<CategoryPropertyValue, Guid>
+    {
         CategoryPropertyValue GetGuidCategoryPropertyValue(string Guid);
 
         /// <summary>

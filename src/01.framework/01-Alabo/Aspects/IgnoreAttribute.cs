@@ -1,10 +1,11 @@
 ﻿using AspectCore.DynamicProxy;
 
-namespace Alabo.Aspects {
-
+namespace Alabo.Aspects
+{
     /// <summary>
     ///     忽略拦截
     /// </summary>
-    public class IgnoreAttribute : NonAspectAttribute {
+    public class IgnoreAttribute : NonAspectAttribute
+    {
     }
 }

@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Alabo.Properties;
+﻿using Alabo.Properties;
+using Microsoft.AspNetCore.Identity;
 
 namespace Alabo.Security.Identity.Describers
 {

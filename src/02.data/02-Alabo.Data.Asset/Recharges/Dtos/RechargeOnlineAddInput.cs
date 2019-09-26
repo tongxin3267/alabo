@@ -6,11 +6,11 @@ using Alabo.Domains.Query.Dto;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.Recharges.Dtos {
-
+namespace Alabo.App.Asset.Recharges.Dtos
+{
     [ClassProperty(Name = "线上充值")]
-    public class RechargeOnlineAddInput : ApiInputDto {
-
+    public class RechargeOnlineAddInput : ApiInputDto
+    {
         /// <summary>
         ///     充值方式
         ///     线上充值，和线下充值

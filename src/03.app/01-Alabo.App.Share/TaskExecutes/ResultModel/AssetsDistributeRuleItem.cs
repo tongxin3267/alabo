@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace Alabo.App.Share.TaskExecutes.ResultModel {
-
-    public class AssetsDistributeRuleItem {
-
+namespace Alabo.App.Share.TaskExecutes.ResultModel
+{
+    public class AssetsDistributeRuleItem
+    {
         /// <summary>
         ///     资产账户类型
         /// </summary>

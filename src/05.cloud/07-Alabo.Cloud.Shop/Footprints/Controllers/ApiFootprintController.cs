@@ -1,4 +1,5 @@
-namespace Alabo.Cloud.Shop.Footprints.Controllers {
+namespace Alabo.Cloud.Shop.Footprints.Controllers
+{
     //2019年9月24日 重构注释
     ///// <summary>
     /////

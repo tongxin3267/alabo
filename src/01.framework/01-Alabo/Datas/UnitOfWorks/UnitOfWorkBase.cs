@@ -3,10 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.Extensions.Logging;
 using Alabo.Datas.Ef.Configs;
 using Alabo.Datas.Ef.Logs;
 using Alabo.Datas.Ef.Map;
@@ -19,6 +15,10 @@ using Alabo.Reflections;
 using Alabo.Security.Sessions;
 using Alabo.Tenants;
 using Alabo.Tenants.Extensions;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Logging;
 
 namespace Alabo.Datas.UnitOfWorks
 {
@@ -111,24 +111,17 @@ namespace Alabo.Datas.UnitOfWorks
                 TenantContext.AddMasterTenant(mainConnectionString);
             }
 
-            if (string.IsNullOrWhiteSpace(ConnectionString)) {
-                ConnectionString = mainConnectionString;
-            }
+            if (string.IsNullOrWhiteSpace(ConnectionString)) ConnectionString = mainConnectionString;
 
-            if (!TenantContext.IsTenant) {
-                return;
-            }
+            if (!TenantContext.IsTenant) return;
 
             var tenantName = TenantContext.CurrentTenant;
-            if (string.IsNullOrWhiteSpace(tenantName)) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(tenantName)) return;
             //Current tenant is main and connection string is not equal switch to main database
             if (tenantName.ToLower() == TenantContext.Master.ToLower())
             {
-                if (mainConnectionString != dbConnection.ConnectionString) {
+                if (mainConnectionString != dbConnection.ConnectionString)
                     SwitchDatabase(dbConnection, mainConnectionString);
-                }
 
                 return;
             }
@@ -216,9 +209,7 @@ namespace Alabo.Datas.UnitOfWorks
         protected void EnableLog(DbContextOptionsBuilder builder)
         {
             var log = GetLog();
-            if (IsEnabled(log) == false) {
-                return;
-            }
+            if (IsEnabled(log) == false) return;
 
             builder.EnableSensitiveDataLogging();
             builder.UseLoggerFactory(new LoggerFactory(new[] {GetLogProvider(log)}));
@@ -264,9 +255,7 @@ namespace Alabo.Datas.UnitOfWorks
         /// </summary>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            foreach (var mapper in GetMaps()) {
-                mapper.Map(modelBuilder);
-            }
+            foreach (var mapper in GetMaps()) mapper.Map(modelBuilder);
         }
 
         /// <summary>
@@ -304,7 +293,7 @@ namespace Alabo.Datas.UnitOfWorks
         /// </summary>
         protected virtual void SaveChangesBefore()
         {
-            foreach (var entry in ChangeTracker.Entries()) {
+            foreach (var entry in ChangeTracker.Entries())
                 switch (entry.State)
                 {
                     case EntityState.Added:
@@ -319,7 +308,6 @@ namespace Alabo.Datas.UnitOfWorks
                         InterceptDeletedOperation(entry);
                         break;
                 }
-            }
         }
 
         /// <summary>
@@ -380,9 +368,7 @@ namespace Alabo.Datas.UnitOfWorks
         /// <param name="entity">实体类型</param>
         public string GetTable(Type entity)
         {
-            if (entity == null) {
-                return null;
-            }
+            if (entity == null) return null;
 
             var entityType = Model.FindEntityType(entity);
             return Extensions.Extensions.SafeString(entityType?.FindAnnotation("Relational:TableName")?.Value);
@@ -394,9 +380,7 @@ namespace Alabo.Datas.UnitOfWorks
         /// <param name="entity">实体类型</param>
         public string GetSchema(Type entity)
         {
-            if (entity == null) {
-                return null;
-            }
+            if (entity == null) return null;
 
             var entityType = Model.FindEntityType(entity);
             return Extensions.Extensions.SafeString(entityType?.FindAnnotation("Relational:Schema")?.Value);
@@ -409,9 +393,7 @@ namespace Alabo.Datas.UnitOfWorks
         /// <param name="property">属性名</param>
         public string GetColumn(Type entity, string property)
         {
-            if (entity == null || string.IsNullOrWhiteSpace(property)) {
-                return null;
-            }
+            if (entity == null || string.IsNullOrWhiteSpace(property)) return null;
 
             var entityType = Model.FindEntityType(entity);
             var result = Extensions.Extensions.SafeString(entityType?.GetProperty(property)

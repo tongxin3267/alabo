@@ -18,9 +18,7 @@ namespace Alabo.Datas.Stores.Exist.Mongo
         public async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate)
         {
             var find = await GetSingleAsync(predicate);
-            if (find == null) {
-                return false;
-            }
+            if (find == null) return false;
 
             return true;
         }

@@ -5,13 +5,13 @@ using Alabo.Data.Things.Orders.Domain.Entities.Extensions;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 
-namespace Alabo.Data.Things.Orders.Domain.Services {
-
+namespace Alabo.Data.Things.Orders.Domain.Services
+{
     /// <summary>
     ///     Interface IShareOrderService
     /// </summary>
-    public interface IShareOrderService : IService<ShareOrder, long> {
-
+    public interface IShareOrderService : IService<ShareOrder, long>
+    {
         /// <summary>
         ///     获取s the un handled identifier list.
         /// </summary>
@@ -47,14 +47,14 @@ namespace Alabo.Data.Things.Orders.Domain.Services {
         ServiceResult AddSingle(ShareOrder shareOrder);
 
         /// <summary>
-        /// 测试模型View
+        ///     测试模型View
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         ShareOrder GetTestView(object id);
 
         /// <summary>
-        /// 更新或添加视图
+        ///     更新或添加视图
         /// </summary>
         /// <param name="shareOrder"></param>
         /// <returns></returns>

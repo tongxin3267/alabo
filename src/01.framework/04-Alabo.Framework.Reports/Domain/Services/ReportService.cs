@@ -18,16 +18,19 @@ using MongoDB.Bson;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace Alabo.Framework.Reports.Domain.Services {
-
-    public class ReportService : ServiceBase<Report, ObjectId>, IReportService {
+namespace Alabo.Framework.Reports.Domain.Services
+{
+    public class ReportService : ServiceBase<Report, ObjectId>, IReportService
+    {
         private static readonly string _ReportCacheKey = "ReportCacheKey_";
 
         public ReportService(IUnitOfWork unitOfWork, IRepository<Report, ObjectId> repository) : base(unitOfWork,
-            repository) {
+            repository)
+        {
         }
 
-        public void AddOrUpdate<T>(T userReport) where T : class, IReport {
+        public void AddOrUpdate<T>(T userReport) where T : class, IReport
+        {
             var report = new Report();
 
             var configProperty = typeof(T).GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
@@ -43,15 +46,15 @@ namespace Alabo.Framework.Reports.Domain.Services {
         ///     更新配置的值
         /// </summary>
         /// <param name="value"></param>
-        public ServiceResult AddOrUpdate<T>(object value) where T : class, IReport {
+        public ServiceResult AddOrUpdate<T>(object value) where T : class, IReport
+        {
             var report = Resolve<IReportService>().GetReport(typeof(T).FullName);
             var typeclassProperty = typeof(T).GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
-            if (typeclassProperty == null) {
-                return ServiceResult.FailedWithMessage("未设置ClassPropertyAttribute特性");
-            }
+            if (typeclassProperty == null) return ServiceResult.FailedWithMessage("未设置ClassPropertyAttribute特性");
 
-            if (report == null) {
-                report = new Report {
+            if (report == null)
+                report = new Report
+                {
                     // AppName = typeclassProperty.AppName,
                     Type = typeof(T).FullName,
 
@@ -59,7 +62,6 @@ namespace Alabo.Framework.Reports.Domain.Services {
                         ? typeclassProperty.Name
                         : typeclassProperty.Description
                 };
-            }
 
             report.Value = value.ToJson();
             report.LastUpdated = DateTime.Now;
@@ -67,22 +69,19 @@ namespace Alabo.Framework.Reports.Domain.Services {
             return ServiceResult.Success;
         }
 
-        public void AddOrUpdate(Report report) {
-            if (report == null) {
-                throw new ArgumentNullException(nameof(report));
-            }
+        public void AddOrUpdate(Report report)
+        {
+            if (report == null) throw new ArgumentNullException(nameof(report));
 
             Report find = null;
-            if (!report.Id.IsObjectIdNullOrEmpty()) {
-                find = GetSingle(e => e.Id == report.Id);
-            }
+            if (!report.Id.IsObjectIdNullOrEmpty()) find = GetSingle(e => e.Id == report.Id);
 
-            if (find == null) {
-                find = GetSingle(e => e.Type == report.Type);
-            }
+            if (find == null) find = GetSingle(e => e.Type == report.Type);
 
-            if (find == null) {
-                find = new Report {
+            if (find == null)
+            {
+                find = new Report
+                {
                     AppName = report.AppName,
                     Type = report.Type,
                     Summary = report.Summary,
@@ -92,7 +91,9 @@ namespace Alabo.Framework.Reports.Domain.Services {
                 Add(find);
                 var cacheAllKey = _ReportCacheKey + "_alltypes";
                 ObjectCache.Remove(cacheAllKey);
-            } else {
+            }
+            else
+            {
                 find.AppName = report.AppName;
                 find.Type = report.Type;
                 find.Value = report.Value;
@@ -109,46 +110,44 @@ namespace Alabo.Framework.Reports.Domain.Services {
         ///     获取统计信息
         /// </summary>
         /// <param name="key"></param>
-        public Report GetReport(string key) {
-            if (string.IsNullOrWhiteSpace(key)) {
-                throw new ArgumentNullException(nameof(key));
-            }
+        public Report GetReport(string key)
+        {
+            if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
 
             var cacheKey = _ReportCacheKey + key;
-            if (!ObjectCache.TryGet(cacheKey, out Report report)) {
+            if (!ObjectCache.TryGet(cacheKey, out Report report))
+            {
                 report = GetSingle(e => e.Type == key);
-                if (report != null) {
-                    ObjectCache.Set(cacheKey, report);
-                }
+                if (report != null) ObjectCache.Set(cacheKey, report);
             }
 
             return report;
         }
 
-        public T GetValue<T>() where T : class, IReport {
+        public T GetValue<T>() where T : class, IReport
+        {
             var report = GetReport(typeof(T).FullName);
-            if (report == null) {
-                return Activator.CreateInstance(typeof(T)) as T;
-            }
+            if (report == null) return Activator.CreateInstance(typeof(T)) as T;
 
             var result = JsonConvert.DeserializeObject<T>(report.Value);
             return result;
         }
 
-        public object GetValue(string key) {
+        public object GetValue(string key)
+        {
             var types = GetAllTypes();
-            foreach (var item in types) {
-                if (item.FullName == key) {
+            foreach (var item in types)
+                if (item.FullName == key)
                     return GetValue(item);
-                }
-            }
 
             return null;
         }
 
-        public IEnumerable<Type> GetAllTypes() {
+        public IEnumerable<Type> GetAllTypes()
+        {
             var cacheKey = _ReportCacheKey + "_alltypes";
-            if (!ObjectCache.TryGetPublic(cacheKey, out IEnumerable<Type> types)) {
+            if (!ObjectCache.TryGetPublic(cacheKey, out IEnumerable<Type> types))
+            {
                 //因为遍历所有程序集，速度会有影响
                 types = RuntimeContext.Current.GetPlatformRuntimeAssemblies().SelectMany(a => a.GetTypes()
                     .Where(t => t.GetInterfaces().Contains(typeof(IReport)) && t.FullName.EndsWith("Report")));
@@ -157,52 +156,53 @@ namespace Alabo.Framework.Reports.Domain.Services {
                     r.GetTypeInfo().GetAttribute<ClassPropertyAttribute>() != null
                         ? r.GetTypeInfo().GetAttribute<ClassPropertyAttribute>().SortOrder
                         : 1);
-                if (types != null) {
-                    ObjectCache.Set(cacheKey, types);
-                }
+                if (types != null) ObjectCache.Set(cacheKey, types);
             }
 
             return types;
         }
 
-        public List<JObject> GetList(string key) {
+        public List<JObject> GetList(string key)
+        {
             var list = new List<JObject>();
             var dataReport = GetReport(key);
-            if (dataReport != null) {
-                list = JsonConvert.DeserializeObject<List<JObject>>(dataReport.Value);
-            }
+            if (dataReport != null) list = JsonConvert.DeserializeObject<List<JObject>>(dataReport.Value);
 
             return list;
         }
 
-        public List<T> GetList<T>(Func<T, bool> predicate = null) where T : new() {
+        public List<T> GetList<T>(Func<T, bool> predicate = null) where T : new()
+        {
             var report = GetReport(typeof(T).FullName);
             var t = new T();
             var reportlist = new List<T>();
-            if (report != null) {
-                if (report.Value != null) {
+            if (report != null)
+                if (report.Value != null)
+                {
                     reportlist = report.Value.Deserialize(t);
-                    if (predicate != null) {
-                        return reportlist.Where(predicate).ToList();
-                    }
+                    if (predicate != null) return reportlist.Where(predicate).ToList();
                 }
-            }
 
             return reportlist;
         }
 
         public IEnumerable<SelectListItem> GetList<T>(Func<T, bool> predicate, Func<T, object> textSelector,
-            Func<T, object> valueSelector) where T : class, IReport {
+            Func<T, object> valueSelector) where T : class, IReport
+        {
             var report = GetReport(typeof(T).FullName);
             var values = new List<T>();
-            if (report != null) {
+            if (report != null)
+            {
                 var request = JsonConvert.DeserializeObject<List<JObject>>(report.Value);
-                foreach (var item in request) {
-                    var data = (T)Activator.CreateInstance(typeof(T));
+                foreach (var item in request)
+                {
+                    var data = (T) Activator.CreateInstance(typeof(T));
                     PropertyDescription.SetValue(data, item);
                     values.Add(data);
                 }
-            } else {
+            }
+            else
+            {
                 return null;
             }
 
@@ -214,21 +214,25 @@ namespace Alabo.Framework.Reports.Domain.Services {
         /// </summary>
         /// <param name="type">值类型</param>
         /// <param name="id">如果是列表页面需要传入ID,编辑页面不需要传入</param>
-        public object GetValue(Type type, Guid id) {
+        public object GetValue(Type type, Guid id)
+        {
             var report = GetReport(type.FullName);
             var values = new List<object>();
             var data = Activator.CreateInstance(type);
-            if (report != null) {
+            if (report != null)
+            {
                 var reportDescription = new ClassDescription(data.GetType());
-                if (reportDescription.ClassPropertyAttribute.PageType == ViewPageType.List) {
+                if (reportDescription.ClassPropertyAttribute.PageType == ViewPageType.List)
+                {
                     var request = JsonConvert.DeserializeObject<List<JObject>>(report.Value);
-                    foreach (var item in request) {
+                    foreach (var item in request)
+                    {
                         PropertyDescription.SetValue(data, item);
-                        if (data.GetType().GetProperty("Id").GetValue(data).ToString() == id.ToString()) {
-                            return data;
-                        }
+                        if (data.GetType().GetProperty("Id").GetValue(data).ToString() == id.ToString()) return data;
                     }
-                } else {
+                }
+                else
+                {
                     var request = JsonConvert.DeserializeObject<JObject>(report.Value);
                     PropertyDescription.SetValue(data, request);
                     return data;
@@ -240,12 +244,15 @@ namespace Alabo.Framework.Reports.Domain.Services {
             return Activator.CreateInstance(type);
         }
 
-        public List<object> GetObjectList(Type type) {
+        public List<object> GetObjectList(Type type)
+        {
             var list = new List<object>();
             var report = GetReport(type.FullName);
-            if (report != null) {
+            if (report != null)
+            {
                 var request = JsonConvert.DeserializeObject<List<JObject>>(report.Value);
-                foreach (var item in request) {
+                foreach (var item in request)
+                {
                     var data = Activator.CreateInstance(type);
                     PropertyDescription.SetValue(data, item);
                     list.Add(data);
@@ -255,13 +262,16 @@ namespace Alabo.Framework.Reports.Domain.Services {
             return list;
         }
 
-        private object GetValue(Type type) {
+        private object GetValue(Type type)
+        {
             var report = GetReport(type.FullName);
-            if (report != null) {
+            if (report != null)
+            {
                 var reportDescription = new ClassDescription(report.GetType());
                 ///如果是编辑页面获取数据库里头的字，如果列表页面使用 GetList<T>来获取值
                 ///如果列表页面编辑的时候，应该要传入ID
-                if (reportDescription.ClassPropertyAttribute.PageType == ViewPageType.Edit) {
+                if (reportDescription.ClassPropertyAttribute.PageType == ViewPageType.Edit)
+                {
                     var data = Activator.CreateInstance(type);
                     var request = JsonConvert.DeserializeObject<JObject>(report.Value);
                     PropertyDescription.SetValue(data, request);
@@ -274,26 +284,26 @@ namespace Alabo.Framework.Reports.Domain.Services {
             return Activator.CreateInstance(type);
         }
 
-        public Type GetType(string key) {
+        public Type GetType(string key)
+        {
             var types = GetAllTypes();
-            foreach (var item in types) {
-                if (item.FullName == key) {
+            foreach (var item in types)
+                if (item.FullName == key)
                     return item;
-                }
-            }
 
             return null;
         }
 
         public static IEnumerable<SelectListItem> FromIEnumerable<T>(
             IEnumerable<T> elements,
-            Func<T, object> textSelector, Func<T, object> valueSelector) {
-            foreach (var element in elements) {
-                yield return new SelectListItem {
+            Func<T, object> textSelector, Func<T, object> valueSelector)
+        {
+            foreach (var element in elements)
+                yield return new SelectListItem
+                {
                     Text = textSelector(element)?.ToString(),
                     Value = valueSelector(element)?.ToString()
                 };
-            }
         }
     }
 }

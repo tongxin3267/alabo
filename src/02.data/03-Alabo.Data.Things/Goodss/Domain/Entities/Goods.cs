@@ -1,37 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Data.Things.Goodss.Domain.Entities.Extensions;
 using Alabo.Data.Things.Goodss.Domain.Enums;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.Tenants;
-using Alabo.UI;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MongoDB.Bson;
 
-namespace Alabo.Data.Things.Goodss.Domain.Entities {
-
+namespace Alabo.Data.Things.Goodss.Domain.Entities
+{
     /// <summary>
-    /// 中台商品
-    /// 可以对接第三方商品信息
+    ///     中台商品
+    ///     可以对接第三方商品信息
     /// </summary>
     [ClassProperty(Name = "商品管理")]
-    public class Goods : AggregateDefaultRoot<Goods> {
-
+    public class Goods : AggregateDefaultRoot<Goods>
+    {
         /// <summary>
         ///     商品名称
         /// </summary>
         [Display(Name = "商品名称")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, PlaceHolder = "请输入商品名称", Operator = Operator.Contains,
+        [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, PlaceHolder = "请输入商品名称",
+            Operator = Operator.Contains,
             IsShowAdvancedSerach = true)]
         [StringLength(60, ErrorMessage = "60个字以内")]
         public string Name { get; set; }
@@ -48,7 +42,7 @@ namespace Alabo.Data.Things.Goodss.Domain.Entities {
         public string Bn { get; set; }
 
         /// <summary>
-        /// 商品类型
+        ///     商品类型
         /// </summary>
         public GoodsType Type { get; set; }
 
@@ -61,7 +55,7 @@ namespace Alabo.Data.Things.Goodss.Domain.Entities {
         public string BrandId { get; set; }
 
         /// <summary>
-        /// 支持多个供应商，第一个供应商为主供应商
+        ///     支持多个供应商，第一个供应商为主供应商
         /// </summary>
         public string SupplierIds { get; set; }
 
@@ -82,7 +76,7 @@ namespace Alabo.Data.Things.Goodss.Domain.Entities {
         public decimal Price { get; set; }
 
         /// <summary>
-        /// 商品状态
+        ///     商品状态
         /// </summary>
         [Display(Name = "商品状态")]
         [Field(ControlsType = ControlsType.TextBox, ListShow = true, IsTabSearch = true, Width = "120", SortOrder = 10)]
@@ -101,18 +95,20 @@ namespace Alabo.Data.Things.Goodss.Domain.Entities {
         public GoodsExtensions GoodsExtensions { get; set; }
 
         /// <summary>
-        /// 扩展属性
+        ///     扩展属性
         /// </summary>
         public string Extensions { get; set; }
     }
 
-    public class GoodsTableMap : MsSqlAggregateRootMap<Goods> {
-
-        protected override void MapTable(EntityTypeBuilder<Goods> builder) {
+    public class GoodsTableMap : MsSqlAggregateRootMap<Goods>
+    {
+        protected override void MapTable(EntityTypeBuilder<Goods> builder)
+        {
             builder.ToTable("Things_Goods");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<Goods> builder) {
+        protected override void MapProperties(EntityTypeBuilder<Goods> builder)
+        {
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Property(e => e.Name).HasMaxLength(250);

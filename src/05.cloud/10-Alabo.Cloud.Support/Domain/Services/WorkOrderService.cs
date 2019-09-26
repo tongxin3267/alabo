@@ -9,18 +9,23 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using MongoDB.Bson;
 
-namespace Alabo.Cloud.Support.Domain.Services {
+namespace Alabo.Cloud.Support.Domain.Services
+{
+    public class WorkOrderService : ServiceBase<WorkOrder, ObjectId>, IWorkOrderService
+    {
+        public WorkOrderService(IUnitOfWork unitOfWork, IRepository<WorkOrder, ObjectId> repository) : base(unitOfWork,
+            repository)
+        {
+        }
 
-    public class WorkOrderService : ServiceBase<WorkOrder, ObjectId>, IWorkOrderService {
-
-        public ServiceResult AddWorkOrder(WorkOrder view) {
+        public ServiceResult AddWorkOrder(WorkOrder view)
+        {
             var result = Resolve<IWorkOrderService>().Add(view);
-            if (!result) {
-                return ServiceResult.FailedWithMessage("添加失败");
-            }
+            if (!result) return ServiceResult.FailedWithMessage("添加失败");
 
             var user = Resolve<IUserService>().GetSingle(view.UserId);
-            if (!user.Mobile.IsNullOrEmpty() && !user.Mobile.StartsWith("WX")) {
+            if (!user.Mobile.IsNullOrEmpty() && !user.Mobile.StartsWith("WX"))
+            {
                 var timeFormat = "yyyy-MM-dd HH:mm:ss";
                 //Resolve<IOpenService>().SendRaw(user.Mobile,
                 //  $"尊敬的用户{user.UserName}:您于{DateTime.Now.ToString(timeFormat)}提交的工单已受理，感谢您的理解以及对我们工作的支持。祝您生活愉快！");
@@ -29,33 +34,30 @@ namespace Alabo.Cloud.Support.Domain.Services {
             return ServiceResult.Success;
         }
 
-        public ServiceResult Delete(ObjectId id) {
+        public ServiceResult Delete(ObjectId id)
+        {
             var result = Resolve<IWorkOrderService>().Delete(u => u.Id == id);
-            if (result.IsNullOrEmpty()) {
-                return ServiceResult.FailedWithMessage("删除失败");
-            }
+            if (result.IsNullOrEmpty()) return ServiceResult.FailedWithMessage("删除失败");
             return ServiceResult.Success;
         }
 
-        public PagedList<WorkOrder> GetPageList(object query) {
+        public PagedList<WorkOrder> GetPageList(object query)
+        {
             var view = Resolve<IWorkOrderService>().GetPageList(query);
             return view;
         }
 
-        public List<WorkOrder> GetWorkOrdersList() {
+        public List<WorkOrder> GetWorkOrdersList()
+        {
             var result = Resolve<IWorkOrderService>().GetList();
             return result.ToList();
         }
 
-        public ServiceResult UpdateWorkOrder(WorkOrder view) {
+        public ServiceResult UpdateWorkOrder(WorkOrder view)
+        {
             var result = Resolve<IWorkOrderService>().Update(view);
-            if (result.IsNullOrEmpty()) {
-                return ServiceResult.FailedWithMessage("编辑失败");
-            }
+            if (result.IsNullOrEmpty()) return ServiceResult.FailedWithMessage("编辑失败");
             return ServiceResult.Success;
-        }
-
-        public WorkOrderService(IUnitOfWork unitOfWork, IRepository<WorkOrder, ObjectId> repository) : base(unitOfWork, repository) {
         }
     }
 }

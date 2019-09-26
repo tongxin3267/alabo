@@ -10,64 +10,76 @@ using Alabo.Industry.Shop.Products.Domain.Services;
 using Alabo.Industry.Shop.Products.ViewModels;
 using MongoDB.Bson;
 
-namespace Alabo.Cloud.Shop.Favorites.Domain.Services {
-
-    public class FavoriteService : ServiceBase<Favorite, ObjectId>, IFavoriteService {
-
-        public FavoriteService(IUnitOfWork unitOfWork, IRepository<Favorite, ObjectId> repository) : base(unitOfWork, repository) {
+namespace Alabo.Cloud.Shop.Favorites.Domain.Services
+{
+    public class FavoriteService : ServiceBase<Favorite, ObjectId>, IFavoriteService
+    {
+        public FavoriteService(IUnitOfWork unitOfWork, IRepository<Favorite, ObjectId> repository) : base(unitOfWork,
+            repository)
+        {
         }
 
-        public new ServiceResult Add(FavoriteInput favoriteInput) {
+        public ServiceResult Add(FavoriteInput favoriteInput)
+        {
             //if (favoriteInput.Type == FavoriteType.Product) {
             var product = Resolve<IProductService>().GetSingle(u => u.Id == favoriteInput.EntityId.ToInt64());
-            var productDetail = Resolve<IProductDetailService>().GetSingle(u => u.ProductId == favoriteInput.EntityId.ToInt64());
+            var productDetail = Resolve<IProductDetailService>()
+                .GetSingle(u => u.ProductId == favoriteInput.EntityId.ToInt64());
             var image = productDetail.ImageJson.DeserializeJson<List<ProductThum>>();
-            Favorite favorite = new Favorite {
+            var favorite = new Favorite
+            {
                 EntityId = favoriteInput.EntityId,
                 Type = favoriteInput.Type,
                 UserId = favoriteInput.LoginUserId,
                 Name = product.Name,
                 Image = image[0].ThumbnailUrl
             };
-            var favoriteSingle = Resolve<IFavoriteService>().GetSingle(u => u.EntityId == favoriteInput.EntityId && u.UserId == favoriteInput.LoginUserId);
+            var favoriteSingle = Resolve<IFavoriteService>().GetSingle(u =>
+                u.EntityId == favoriteInput.EntityId && u.UserId == favoriteInput.LoginUserId);
 
-            if (favoriteSingle == null) {
+            if (favoriteSingle == null)
+            {
                 var result = Add(favorite);
-                if (result) {
-                    return ServiceResult.Success;
-                }
+                if (result) return ServiceResult.Success;
             }
+
             return ServiceResult.Failed;
             // }
         }
 
-        public PagedList<Favorite> GetProductPagedList(object query) {
-            return GetPagedList(query);
-        }
-
         /// <summary>
-        /// 根据用户id获取收藏数量
+        ///     根据用户id获取收藏数量
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public long GetFavoriteCountByUserId(long userId) {
+        public long GetFavoriteCountByUserId(long userId)
+        {
             var res = Resolve<IFavoriteService>().GetList(s => s.UserId == userId);
 
             return res.Count;
         }
 
         /// <summary>
-        /// 删除收藏
+        ///     删除收藏
         /// </summary>
         /// <param name="favoriteInput"></param>
         /// <returns></returns>
-        public ServiceResult Remove(FavoriteInput favoriteInput) {
-            var favoriteSingle = Resolve<IFavoriteService>().GetSingle(u => u.EntityId == favoriteInput.EntityId && u.UserId == favoriteInput.LoginUserId);
-            if (favoriteSingle != null) {
+        public ServiceResult Remove(FavoriteInput favoriteInput)
+        {
+            var favoriteSingle = Resolve<IFavoriteService>().GetSingle(u =>
+                u.EntityId == favoriteInput.EntityId && u.UserId == favoriteInput.LoginUserId);
+            if (favoriteSingle != null)
+            {
                 Delete(favoriteSingle);
                 return ServiceResult.Success;
             }
+
             return ServiceResult.Failed;
+        }
+
+        public PagedList<Favorite> GetProductPagedList(object query)
+        {
+            return GetPagedList(query);
         }
     }
 }

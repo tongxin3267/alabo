@@ -7,10 +7,10 @@ using Alabo.Domains.Services;
 using Alabo.Tool.Payment;
 using Microsoft.AspNetCore.Http;
 
-namespace Alabo.App.Asset.Pays.Domain.Services {
-
-    public interface IPayService : IService<Pay, long> {
-
+namespace Alabo.App.Asset.Pays.Domain.Services
+{
+    public interface IPayService : IService<Pay, long>
+    {
         /// <summary>
         ///     第三方支付，或者余额账户现金支付
         /// </summary>
@@ -19,7 +19,7 @@ namespace Alabo.App.Asset.Pays.Domain.Services {
         Tuple<ServiceResult, PayOutput> Pay(PayInput payInput, HttpContext httpContext = null);
 
         /// <summary>
-        /// 微信app支付
+        ///     微信app支付
         /// </summary>
         /// <param name="pay"></param>
         /// <param name="url"></param>
@@ -60,7 +60,7 @@ namespace Alabo.App.Asset.Pays.Domain.Services {
         PagedList<Pay> GetPageList(object query);
 
         /// <summary>
-        /// 退款
+        ///     退款
         /// </summary>
         /// <param name="pay"></param>
         /// <param name="fee"></param>

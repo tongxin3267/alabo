@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 
-namespace Alabo.Framework.Core.Reflections.Services {
-
+namespace Alabo.Framework.Core.Reflections.Services
+{
     /// <summary>
     ///     类型相关操作服务
     ///     动态类型操作
     /// </summary>
-    public interface ITypeService : IService {
-
+    public interface ITypeService : IService
+    {
         /// <summary>
-        /// 获取所有枚举列表，用于前端展示
+        ///     获取所有枚举列表，用于前端展示
         /// </summary>
         /// <returns></returns>
         IEnumerable<EnumList> GetEnumList();
 
         /// <summary>
-        ///  所有的类型接口，包括枚举、AutoConfig(List对象的)、分类、标签
+        ///     所有的类型接口，包括枚举、AutoConfig(List对象的)、分类、标签
         /// </summary>
         /// <returns></returns>
         IEnumerable<EnumList> AllKeyValues();
@@ -29,13 +29,12 @@ namespace Alabo.Framework.Core.Reflections.Services {
         IEnumerable<Type> GetAllConfigType(string confinName);
 
         /// <summary>
-        /// 根据接口类型返回所有相关的接口
+        ///     根据接口类型返回所有相关的接口
         /// </summary>
-
         IEnumerable<Type> GetAllTypeByInterface(Type interfaceType);
 
         /// <summary>
-        /// 根据接口和名称获取类型
+        ///     根据接口和名称获取类型
         /// </summary>
         /// <param name="interfaceType"></param>
         /// <param name="name"></param>
@@ -43,9 +42,8 @@ namespace Alabo.Framework.Core.Reflections.Services {
         Type GetAllTypeByInterfaceAndName(Type interfaceType, string name);
 
         /// <summary>
-        /// 获取所有的控制器Api
+        ///     获取所有的控制器Api
         /// </summary>
-
         IEnumerable<Type> GetAllApiController();
 
         /// <summary>
@@ -62,9 +60,8 @@ namespace Alabo.Framework.Core.Reflections.Services {
         IEnumerable<Type> GetAllServiceType();
 
         /// <summary>
-        /// 获取所有实体相关的服务
+        ///     获取所有实体相关的服务
         /// </summary>
-
         IEnumerable<Type> GetAllEntityService();
 
         /// <summary>
@@ -112,7 +109,6 @@ namespace Alabo.Framework.Core.Reflections.Services {
         /// </summary>
         /// <param name="configName"></param>
         /// <param name="isAllSelect"></param>
-        ///
         Dictionary<string, object> GetAutoConfigDictionary(string configName, bool isAllSelect = false);
 
         /// <summary>
@@ -144,31 +140,27 @@ namespace Alabo.Framework.Core.Reflections.Services {
         IEnumerable<Type> GetAllConfigType();
 
         /// <summary>
-        /// 获取App名称
+        ///     获取App名称
         /// </summary>
         /// <param name="type"></param>
-
         string GetAppName(Type type);
 
         /// <summary>
-        /// 获取分组名称
+        ///     获取分组名称
         /// </summary>
         /// <param name="type"></param>
-
         string GetGroupName(Type type);
 
         /// <summary>
-        /// 获取App名称
+        ///     获取App名称
         /// </summary>
         /// <param name="fullName"></param>
-
         string GetAppName(string fullName);
 
         /// <summary>
-        /// 获取分组名称
+        ///     获取分组名称
         /// </summary>
         /// <param name="fullName"></param>
-
         string GetGroupName(string fullName);
     }
 }

@@ -13,21 +13,24 @@ using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
 using Newtonsoft.Json;
 
-namespace Alabo.Framework.Basic.Grades.Domain.Configs {
-
+namespace Alabo.Framework.Basic.Grades.Domain.Configs
+{
     /// <summary>
     ///     等级特权
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "等级特权", Icon = "fa fa-birthday-cake", Description = "等级特权", PageType = ViewPageType.List,
         SortOrder = 22, SideBarType = SideBarType.ControlSideBar)]
-    public class GradePrivilegesConfig : AutoConfigBase, IAutoConfig {
-
-        public void SetDefault() {
+    public class GradePrivilegesConfig : AutoConfigBase, IAutoConfig
+    {
+        public void SetDefault()
+        {
             var list = Ioc.Resolve<IAlaboAutoConfigService>().GetList<GradePrivilegesConfig>();
-            if (list.Count <= 0) {
+            if (list.Count <= 0)
+            {
                 var configs = new List<GradePrivilegesConfig>();
-                var config = new GradePrivilegesConfig {
+                var config = new GradePrivilegesConfig
+                {
                     Icon = "/wwwroot/static/images/GradePrivileges/AdvancePayments01.png",
                     Id = Guid.Parse("E97CCE1E-1478-49BD-BFC7-E73A5D698002"),
                     Name = "先行赔付",
@@ -36,7 +39,8 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs {
                 };
                 list.Add(config);
 
-                config = new GradePrivilegesConfig {
+                config = new GradePrivilegesConfig
+                {
                     Id = Guid.Parse("E97CCE1E-1478-49BD-BFC7-E73A5D698003"),
                     Icon = "/wwwroot/static/images/GradePrivileges/FreightSubsidies03.png",
                     Name = "退货运费补贴",
@@ -44,7 +48,8 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs {
                 };
                 list.Add(config);
 
-                config = new GradePrivilegesConfig {
+                config = new GradePrivilegesConfig
+                {
                     Id = Guid.Parse("E97CCE1E-1478-49BD-BFC7-E73A5D698004"),
                     Icon = "/wwwroot/static/images/GradePrivileges/Delivery01.png",
                     Name = "72小时发货",
@@ -52,7 +57,8 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs {
                 };
                 list.Add(config);
 
-                config = new GradePrivilegesConfig {
+                config = new GradePrivilegesConfig
+                {
                     Id = Guid.Parse("E97CCE1E-1478-49BD-BFC7-E73A5D698005"),
                     Icon = "/wwwroot/static/images/GradePrivileges/Refund05.png",
                     Name = "7天无理由退款",
@@ -60,7 +66,8 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs {
                 };
                 list.Add(config);
 
-                config = new GradePrivilegesConfig {
+                config = new GradePrivilegesConfig
+                {
                     Id = Guid.Parse("E97CCE1E-1478-49BD-BFC7-E73A5D698006"),
                     Icon = "/wwwroot/static/images/GradePrivileges/FreePackageMail08.png",
                     Name = "免费包邮",
@@ -68,7 +75,8 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs {
                 };
                 list.Add(config);
 
-                config = new GradePrivilegesConfig {
+                config = new GradePrivilegesConfig
+                {
                     Id = Guid.Parse("E97CCE1E-1478-49BD-BFC7-E73A5D698007"),
                     Icon = "/wwwroot/static/images/GradePrivileges/IdentityNameplate05.png",
                     Name = "身份铭牌",
@@ -76,7 +84,8 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs {
                 };
                 list.Add(config);
 
-                config = new GradePrivilegesConfig {
+                config = new GradePrivilegesConfig
+                {
                     Id = Guid.Parse("E97CCE1E-1478-49BD-BFC7-E73A5D698008"),
                     Icon = "/wwwroot/static/images/GradePrivileges/Integral05.png",
                     Name = "积分抵现",
@@ -84,7 +93,8 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs {
                 };
                 list.Add(config);
 
-                config = new GradePrivilegesConfig {
+                config = new GradePrivilegesConfig
+                {
                     Id = Guid.Parse("E97CCE1E-1478-49BD-BFC7-E73A5D698009"),
                     Icon = "/wwwroot/static/images/GradePrivileges/FreeTrial05.png",
                     Name = "免费试用",
@@ -92,7 +102,8 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs {
                 };
                 list.Add(config);
 
-                config = new GradePrivilegesConfig {
+                config = new GradePrivilegesConfig
+                {
                     Id = Guid.Parse("E97CCE1E-1478-49BD-BFC7-E73A5D698010"),
                     Icon = "/wwwroot/static/images/GradePrivileges/Evaluation05.png",
                     Name = "评价红名展示",
@@ -100,7 +111,8 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs {
                 };
                 list.Add(config);
 
-                config = new GradePrivilegesConfig {
+                config = new GradePrivilegesConfig
+                {
                     Id = Guid.Parse("E97CCE1E-1478-49BD-BFC7-E73A5D698011"),
                     Icon = "/wwwroot/static/images/GradePrivileges/FastRefund05.png",
                     Name = "极速退款",
@@ -108,7 +120,8 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs {
                 };
                 list.Add(config);
 
-                config = new GradePrivilegesConfig {
+                config = new GradePrivilegesConfig
+                {
                     Id = Guid.Parse("E97CCE1E-1478-49BD-BFC7-E73A5D698012"),
                     Icon = "/wwwroot/static/images/GradePrivileges/PriorityAccess03.png",
                     Name = "客服优先接入",
@@ -116,7 +129,8 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs {
                 };
                 list.Add(config);
 
-                config = new GradePrivilegesConfig {
+                config = new GradePrivilegesConfig
+                {
                     Id = Guid.Parse("E97CCE1E-1478-49BD-BFC7-E73A5D698013"),
                     Icon = "/wwwroot/static/images/GradePrivileges/IntegralFeedback01.png",
                     Name = "积分回馈",
@@ -124,7 +138,8 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs {
                 };
                 list.Add(config);
 
-                config = new GradePrivilegesConfig {
+                config = new GradePrivilegesConfig
+                {
                     Id = Guid.Parse("E97CCE1E-1478-49BD-BFC7-E73A5D698014"),
                     Icon = "/wwwroot/static/images/GradePrivileges/BirthdayPrivilege01.png",
                     Name = "生日特权",
@@ -132,7 +147,8 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs {
                 };
                 list.Add(config);
 
-                config = new GradePrivilegesConfig {
+                config = new GradePrivilegesConfig
+                {
                     Id = Guid.Parse("E97CCE1E-1478-49BD-BFC7-E73A5D698015"),
                     Icon = "/wwwroot/static/images/GradePrivileges/GlobalVIP01.png",
                     Name = "全球VIP",
@@ -140,7 +156,8 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs {
                 };
                 list.Add(config);
 
-                config = new GradePrivilegesConfig {
+                config = new GradePrivilegesConfig
+                {
                     Id = Guid.Parse("E97CCE1E-1478-49BD-BFC7-E73A5D698016"),
                     Icon = "/wwwroot/static/images/GradePrivileges/CashDiscount01.png",
                     Name = "兑换折扣",
@@ -148,7 +165,8 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs {
                 };
                 list.Add(config);
 
-                config = new GradePrivilegesConfig {
+                config = new GradePrivilegesConfig
+                {
                     Id = Guid.Parse("E97CCE1E-1478-49BD-BFC7-E73A5D698017"),
                     Icon = "/wwwroot/static/images/GradePrivileges/ExclusiveFor01.png",
                     Name = "专属兑换",
@@ -156,7 +174,8 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs {
                 };
                 list.Add(config);
 
-                config = new GradePrivilegesConfig {
+                config = new GradePrivilegesConfig
+                {
                     Id = Guid.Parse("E97CCE1E-1478-49BD-BFC7-E73A5D698018"),
                     Icon = "/wwwroot/static/images/GradePrivileges/ExtremeClaims01.png",
                     Name = "极速理赔",
@@ -164,7 +183,8 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs {
                 };
                 list.Add(config);
 
-                config = new GradePrivilegesConfig {
+                config = new GradePrivilegesConfig
+                {
                     Id = Guid.Parse("E97CCE1E-1478-49BD-BFC7-E73A5D698019"),
                     Icon = "/wwwroot/static/images/GradePrivileges/SpendBaiPrivileges01.png",
                     Name = "花呗特权",
@@ -172,7 +192,8 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs {
                 };
                 list.Add(config);
 
-                config = new GradePrivilegesConfig {
+                config = new GradePrivilegesConfig
+                {
                     Id = Guid.Parse("E97CCE1E-1478-49BD-BFC7-E73A5D698020"),
                     Icon = "/wwwroot/static/images/GradePrivileges/PriorityExperience01.png",
                     Name = "优先体验",
@@ -181,7 +202,8 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs {
                 list.Add(config);
 
                 var typeclassProperty = config.GetType().GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
-                var autoConfig = new AutoConfig {
+                var autoConfig = new AutoConfig
+                {
                     Type = config.GetType().FullName,
 
                     LastUpdated = DateTime.Now,

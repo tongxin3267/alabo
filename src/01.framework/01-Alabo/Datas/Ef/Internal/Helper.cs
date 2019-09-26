@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Alabo.Domains.Entities.Core;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Alabo.Datas.Ef.Internal
 {
@@ -15,9 +15,7 @@ namespace Alabo.Datas.Ef.Internal
         /// </summary>
         public static void InitVersion(EntityEntry entry)
         {
-            if (!(entry.Entity is IVersion entity)) {
-                return;
-            }
+            if (!(entry.Entity is IVersion entity)) return;
 
             entity.Version = Encoding.UTF8.GetBytes(Guid.NewGuid().ToString());
         }

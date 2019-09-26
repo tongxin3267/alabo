@@ -24,9 +24,7 @@ namespace Alabo.Linq
             where TEntity : class, IAggregateRoot<TEntity, TKey>
         {
             var query = new ExpressionQuery<TEntity>();
-            if (predicate != null) {
-                query.And(predicate);
-            }
+            if (predicate != null) query.And(predicate);
 
             query.OrderByAscending(e => e.Id);
             switch (timeType)

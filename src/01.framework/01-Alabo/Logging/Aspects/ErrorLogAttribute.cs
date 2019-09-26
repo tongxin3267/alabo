@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
-using AspectCore.DynamicProxy;
-using AspectCore.DynamicProxy.Parameters;
 using Alabo.Aspects.Base;
 using Alabo.Logging.Extensions;
+using AspectCore.DynamicProxy;
+using AspectCore.DynamicProxy.Parameters;
 
 namespace Alabo.Logging.Aspects
 {
@@ -26,9 +26,7 @@ namespace Alabo.Logging.Aspects
             catch (Exception ex)
             {
                 log.Class(context.ServiceMethod.DeclaringType.FullName).Method(methodName).Exception(ex);
-                foreach (var parameter in context.GetParameters()) {
-                    parameter.AppendTo(log);
-                }
+                foreach (var parameter in context.GetParameters()) parameter.AppendTo(log);
 
                 log.Error();
                 throw;

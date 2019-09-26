@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Alabo.Data.People.Internals.Domain.CallBacks;
+using Alabo.Data.People.Internals.Domain.Entities;
 using Alabo.Data.People.Internals.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
@@ -17,10 +18,10 @@ using Alabo.Mapping;
 using Alabo.Web.Mvc.Attributes;
 using AutoMapper;
 
-namespace Alabo.Data.People.Internals.Dtos {
-
-    public class InternalView : UIBase, IAutoForm, IAutoTable {
-
+namespace Alabo.Data.People.Internals.Dtos
+{
+    public class InternalView : UIBase, IAutoForm, IAutoTable
+    {
         [Display(Name = "名称")]
         [Field(ListShow = true, EditShow = true, ControlsType = ControlsType.TextBox, SortOrder = 700)]
         public string Name { get; set; }
@@ -52,14 +53,12 @@ namespace Alabo.Data.People.Internals.Dtos {
         [Field(ListShow = true, EditShow = true, ControlsType = ControlsType.RadioButton, SortOrder = 700)]
         public UserTypeStatus Status { get; set; } = UserTypeStatus.Success;
 
-        public List<TableAction> Actions() {
-            return new List<TableAction>();
-        }
-
-        public AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
             var str = id.ToString();
             var model = Resolve<IParentInternalService>().GetSingle(u => u.Id == str.ToObjectId());
-            if (model != null) {
+            if (model != null)
+            {
                 var view = Mapper.Map<InternalView>(model);
                 view.UserName = Resolve<IUserService>().GetSingle(u => u.Id == view.UserId)?.UserName;
                 return ToAutoForm(view);
@@ -68,10 +67,35 @@ namespace Alabo.Data.People.Internals.Dtos {
             return ToAutoForm(new InternalView());
         }
 
-        public PageResult<InternalView> PageTable(object query, AutoBaseModel autoModel) {
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
+            var view = (InternalView) model;
+            var users = Resolve<IUserService>()
+                .GetList(u => u.UserName == view.UserName || u.UserName == view.ParentUserName);
+            if (users.FirstOrDefault(u => u.UserName == view.UserName) == null)
+                return ServiceResult.FailedWithMessage("所属用户名不存在");
+            if (users.FirstOrDefault(u => u.UserName == view.ParentUserName) == null)
+                return ServiceResult.FailedWithMessage("推荐人用户名不存在");
+            var viewModel = Resolve<IParentInternalService>().GetSingle(u => u.UserId == view.UserId);
+            if (viewModel != null) return ServiceResult.FailedWithMessage("该用户已经是合伙人了");
+            var saveModel = AutoMapping.SetValue<ParentInternal>(view);
+            saveModel.ParentUserId = users.FirstOrDefault(u => u.UserName == view.ParentUserName).Id;
+            var result = Resolve<IParentInternalService>().AddOrUpdate(saveModel);
+            if (result) return ServiceResult.Success;
+            return ServiceResult.FailedWithMessage("操作失败");
+        }
+
+        public List<TableAction> Actions()
+        {
+            return new List<TableAction>();
+        }
+
+        public PageResult<InternalView> PageTable(object query, AutoBaseModel autoModel)
+        {
             var model = Resolve<IParentInternalService>().GetPagedList(query);
             var view = new List<InternalView>();
-            foreach (var item in model) {
+            foreach (var item in model)
+            {
                 var cityView = Mapper.Map<InternalView>(item);
                 view.Add(cityView);
             }
@@ -81,28 +105,6 @@ namespace Alabo.Data.People.Internals.Dtos {
             result.Result = view;
 
             return result;
-        }
-
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
-            var view = (InternalView)model;
-            var users = Resolve<IUserService>().GetList(u => u.UserName == view.UserName || u.UserName == view.ParentUserName);
-            if (users.FirstOrDefault(u => u.UserName == view.UserName) == null) {
-                return ServiceResult.FailedWithMessage("所属用户名不存在");
-            }
-            if (users.FirstOrDefault(u => u.UserName == view.ParentUserName) == null) {
-                return ServiceResult.FailedWithMessage("推荐人用户名不存在");
-            }
-            var viewModel = Resolve<IParentInternalService>().GetSingle(u => u.UserId == view.UserId);
-            if (viewModel != null) {
-                return ServiceResult.FailedWithMessage("该用户已经是合伙人了");
-            }
-            var saveModel = AutoMapping.SetValue<Domain.Entities.ParentInternal>(view);
-            saveModel.ParentUserId = users.FirstOrDefault(u => u.UserName == view.ParentUserName).Id;
-            var result = Resolve<IParentInternalService>().AddOrUpdate(saveModel);
-            if (result) {
-                return ServiceResult.Success;
-            }
-            return ServiceResult.FailedWithMessage("操作失败");
         }
     }
 }

@@ -1,16 +1,17 @@
 ﻿using Alabo.Tool.Office.Core;
 
-namespace Alabo.Tool.Office {
-
+namespace Alabo.Tool.Office
+{
     /// <summary>
-    /// 单元格样式
+    ///     单元格样式
     /// </summary>
-    public class CellStyle {
-
+    public class CellStyle
+    {
         /// <summary>
-        /// 初始化单元格样式
+        ///     初始化单元格样式
         /// </summary>
-        public CellStyle() {
+        public CellStyle()
+        {
             BorderColor = Color.Black;
             FontColor = Color.Black;
             FontSize = 12;
@@ -18,55 +19,57 @@ namespace Alabo.Tool.Office {
         }
 
         /// <summary>
-        /// 水平对齐
+        ///     水平对齐
         /// </summary>
         public HorizontalAlignment Alignment { get; set; }
 
         /// <summary>
-        /// 垂直对齐
+        ///     垂直对齐
         /// </summary>
         public VerticalAlignment VerticalAlignment { get; set; }
 
         /// <summary>
-        /// 背景色
+        ///     背景色
         /// </summary>
         public Color BackgroundColor { get; set; }
 
         /// <summary>
-        /// 填充模式
+        ///     填充模式
         /// </summary>
         public FillPattern FillPattern { get; set; }
 
         /// <summary>
-        /// 边框色
+        ///     边框色
         /// </summary>
         public Color BorderColor { get; set; }
 
         /// <summary>
-        /// 字号
+        ///     字号
         /// </summary>
         public short FontSize { get; set; }
 
         /// <summary>
-        /// 字体颜色
+        ///     字体颜色
         /// </summary>
         public Color FontColor { get; set; }
 
         /// <summary>
-        /// 字体加粗
+        ///     字体加粗
         /// </summary>
         public short FontBoldWeight { get; set; }
 
         /// <summary>
-        /// 内容是否自动换行
+        ///     内容是否自动换行
         /// </summary>
         public bool IsWrap { get; set; }
 
         /// <summary>
-        /// 创建表头样式
+        ///     创建表头样式
         /// </summary>
-        public static CellStyle Head() {
-            return new CellStyle {
+        public static CellStyle Head()
+        {
+            return new CellStyle
+            {
                 Alignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
                 BackgroundColor = Color.LightGreen,
@@ -77,17 +80,20 @@ namespace Alabo.Tool.Office {
         }
 
         /// <summary>
-        /// 创建正文样式
+        ///     创建正文样式
         /// </summary>
-        public static CellStyle Body() {
+        public static CellStyle Body()
+        {
             return new CellStyle();
         }
 
         /// <summary>
-        /// 创建页脚样式
+        ///     创建页脚样式
         /// </summary>
-        public static CellStyle Foot() {
-            return new CellStyle {
+        public static CellStyle Foot()
+        {
+            return new CellStyle
+            {
                 Alignment = HorizontalAlignment.Center,
                 VerticalAlignment = VerticalAlignment.Center,
                 BackgroundColor = Color.LightGreen,

@@ -13,18 +13,18 @@ using Alabo.Industry.Shop.Orders.ViewModels.OrderEdit;
 using Alabo.Users.Entities;
 using Microsoft.AspNetCore.Http;
 
-namespace Alabo.Industry.Shop.OrderActions.Domain.Services {
-
-    public interface IOrderActionService : IService<OrderAction, long> {
+namespace Alabo.Industry.Shop.OrderActions.Domain.Services
+{
+    public interface IOrderActionService : IService<OrderAction, long>
+    {
         /// <summary>
         ///     添加卖家评价
         /// </summary>
         /// <param name="httpContext"></param>
-
         ServiceResult Rate(DefaultHttpContext httpContext);
 
         /// <summary>
-        /// 添加卖家评价 (2019.03.31 新用途)
+        ///     添加卖家评价 (2019.03.31 新用途)
         /// </summary>
         /// <param name="modelIn"></param>
         /// <returns></returns>
@@ -34,7 +34,6 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services {
         ///     取消订单
         /// </summary>
         /// <param name="httpContext"></param>
-
         ServiceResult Cancle(DefaultHttpContext httpContext);
 
         /// <summary>
@@ -47,11 +46,10 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services {
         ///     删除订单
         /// </summary>
         /// <param name="httpContext"></param>
-
         ServiceResult Delete(DefaultHttpContext httpContext);
 
         /// <summary>
-        /// 删除订单(03.31 新用途)
+        ///     删除订单(03.31 新用途)
         /// </summary>
         /// <param name="modelIn"></param>
         /// <returns></returns>
@@ -125,7 +123,7 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services {
         ServiceResult Address(DefaultHttpContext httpContext);
 
         /// <summary>
-        /// 修改地址 (2019.03.31 新用途)
+        ///     修改地址 (2019.03.31 新用途)
         /// </summary>
         /// <param name="modelIn"></param>
         /// <param name="orderId"></param>
@@ -133,7 +131,7 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services {
         ServiceResult Address(UserAddress modelIn, long orderId);
 
         /// <summary>
-        /// 导出表格
+        ///     导出表格
         /// </summary>
         /// <returns></returns>
         PagedList<OrderToExcel> GetOrdersToExcel(object query);

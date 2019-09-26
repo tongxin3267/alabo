@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
+using Microsoft.EntityFrameworkCore;
 
 namespace Alabo.Datas.Stores.Add.EfCore
 {
@@ -27,9 +27,7 @@ namespace Alabo.Datas.Stores.Add.EfCore
 
         public async Task<IEnumerable<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            if (predicate == null) {
-                return await Set.ToListAsync();
-            }
+            if (predicate == null) return await Set.ToListAsync();
 
             return await ToQueryable(predicate).ToListAsync();
         }

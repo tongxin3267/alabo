@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace Alabo.Data.Things.Orders.ResultModel {
-
-    public class AssetsDistributeRuleItem {
-
+namespace Alabo.Data.Things.Orders.ResultModel
+{
+    public class AssetsDistributeRuleItem
+    {
         /// <summary>
         ///     资产账户类型
         /// </summary>

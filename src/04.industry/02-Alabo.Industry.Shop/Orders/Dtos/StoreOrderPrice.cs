@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Alabo.Industry.Shop.Orders.Dtos {
-
+namespace Alabo.Industry.Shop.Orders.Dtos
+{
     /// <summary>
     ///     店铺订单价格，与总订单价格
     /// </summary>
-    public class StoreOrderPrice {
-
+    public class StoreOrderPrice
+    {
         /// <summary>
         ///     订单总价格
         /// </summary>
@@ -46,8 +46,8 @@ namespace Alabo.Industry.Shop.Orders.Dtos {
     /// <summary>
     ///     店铺资产数据
     /// </summary>
-    public class OrderMoneyItem {
-
+    public class OrderMoneyItem
+    {
         /// <summary>
         ///     Gets or sets the money identifier.
         /// </summary>
@@ -104,8 +104,8 @@ namespace Alabo.Industry.Shop.Orders.Dtos {
     /// <summary>
     ///     店铺价格
     /// </summary>
-    public class StorePrice {
-
+    public class StorePrice
+    {
         /// <summary>
         ///     店铺Id
         /// </summary>
@@ -145,7 +145,7 @@ namespace Alabo.Industry.Shop.Orders.Dtos {
         public decimal FeeAmount { get; set; }
 
         /// <summary>
-        /// member discount amount
+        ///     member discount amount
         /// </summary>
         public decimal MemberDiscountAmount { get; set; } = 0.0m;
     }

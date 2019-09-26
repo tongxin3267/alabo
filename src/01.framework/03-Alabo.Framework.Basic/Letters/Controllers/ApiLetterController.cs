@@ -5,13 +5,14 @@ using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
-namespace Alabo.Framework.Basic.Letters.Controllers {
-
+namespace Alabo.Framework.Basic.Letters.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/Letter/[action]")]
-    public class ApiLetterController : ApiBaseController<Letter, ObjectId> {
-
-        public ApiLetterController() : base() {
+    public class ApiLetterController : ApiBaseController<Letter, ObjectId>
+    {
+        public ApiLetterController()
+        {
             BaseService = Resolve<ILetterService>();
         }
     }

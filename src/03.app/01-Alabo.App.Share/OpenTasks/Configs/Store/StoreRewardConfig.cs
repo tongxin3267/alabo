@@ -6,38 +6,40 @@ using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Framework.Tasks.Schedules.Domain.Enums;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Share.OpenTasks.Configs.Store {
-
+namespace Alabo.App.Share.OpenTasks.Configs.Store
+{
     /// <summary>
-    /// Class StoreRewardConfig.
-    /// 自身返利
+    ///     Class StoreRewardConfig.
+    ///     自身返利
     /// </summary>
     /// <seealso cref="ShareBaseConfig" />
-    public class StoreRewardConfig : ShareBaseConfig {
+    public class StoreRewardConfig : ShareBaseConfig
+    {
     }
 
     /// <summary>
-    /// Class RebateModul.
+    ///     Class RebateModul.
     /// </summary>
     [TaskModule(Id, "推荐供应商分润",
         ConfigurationType = typeof(StoreRewardConfig), SortOrder = 999990,
         IsSupportMultipleConfiguration = true, FenRunResultType = FenRunResultType.Price,
         RelationshipType = RelationshipType.UserRecommendedRelationship,
         Intro = "推荐供应商时分润")]
-    public class StoreRewardConfigModule : AssetAllocationShareModuleBase<StoreRewardConfig> {
+    public class StoreRewardConfigModule : AssetAllocationShareModuleBase<StoreRewardConfig>
+    {
         public const string Id = "0734225B-08C0-4009-9B66-530DB887B200";
 
         public const string ModuleName = "供应商分润";
 
         public StoreRewardConfigModule(TaskContext context, StoreRewardConfig config)
-            : base(context, config) {
+            : base(context, config)
+        {
         }
 
-        public override ExecuteResult<ITaskResult[]> Execute(TaskParameter parameter) {
+        public override ExecuteResult<ITaskResult[]> Execute(TaskParameter parameter)
+        {
             var baseResult = base.Execute(parameter);
-            if (baseResult.Status != ResultStatus.Success) {
-                return baseResult;
-            }
+            if (baseResult.Status != ResultStatus.Success) return baseResult;
             // TODO 2019年9月24日 店铺分润
             //// 同时下多个供应商订单的时候，分开
             //var order = Resolve<IOrderService>().GetSingle(r => r.Id == OrderId);

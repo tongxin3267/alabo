@@ -11,15 +11,15 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities
 {
-
     /// <summary>
     ///     发货记录表
     /// </summary>
-    [ClassProperty(Name = "发货记录表", Description = "店铺管理", SideBarType = SideBarType.SupplierSideBar, PostApi = "Api/OrderDelivery/List", ListApi = "Api/OrderDelivery/List")]
+    [ClassProperty(Name = "发货记录表", Description = "店铺管理", SideBarType = SideBarType.SupplierSideBar,
+        PostApi = "Api/OrderDelivery/List", ListApi = "Api/OrderDelivery/List")]
     public class OrderDelivery : AggregateDefaultUserRoot<OrderDelivery>
     {
+        #region
 
-        #region 
         /// <summary>
         ///     订单号ID
         /// </summary>
@@ -70,16 +70,11 @@ namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities
         [Display(Name = "快递公司的名称")]
         public string Name { get; set; }
 
-
-        #endregion 
-
-
-
+        #endregion
     }
 
     public class OrderDeliveryTableMap : MsSqlAggregateRootMap<OrderDelivery>
     {
-
         protected override void MapTable(EntityTypeBuilder<OrderDelivery> builder)
         {
             builder.ToTable("Shop_OrderDelivery");

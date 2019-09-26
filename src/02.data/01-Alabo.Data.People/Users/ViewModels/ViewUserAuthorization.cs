@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Data.People.Users.ViewModels {
-
-    public class ViewUserAuthorization {
-
+namespace Alabo.Data.People.Users.ViewModels
+{
+    public class ViewUserAuthorization
+    {
         [Display(Name = "用户名")]
         //[Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         public string UserName { get; set; }

@@ -3,9 +3,10 @@ using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Framework.Core.WebApis;
 
-namespace Alabo.Data.People.Users.Dtos {
-
-    public class UserInput : PagedInputDto {
+namespace Alabo.Data.People.Users.Dtos
+{
+    public class UserInput : PagedInputDto
+    {
         public string UserName { get; set; }
 
         public string Name { get; set; } = string.Empty;

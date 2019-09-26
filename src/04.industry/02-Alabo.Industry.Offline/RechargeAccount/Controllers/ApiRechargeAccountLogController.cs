@@ -13,36 +13,34 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Industry.Offline.RechargeAccount.Controllers {
-
+namespace Alabo.Industry.Offline.RechargeAccount.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/RechargeAccountLog/[action]")]
-    public class ApiRechargeAccountLogController : ApiBaseController<RechargeAccountLog, ObjectId> {
-
-        public ApiRechargeAccountLogController() :
-            base() {
+    public class ApiRechargeAccountLogController : ApiBaseController<RechargeAccountLog, ObjectId>
+    {
+        public ApiRechargeAccountLogController()
+        {
             //_userManager = userManager;
             BaseService = Resolve<IRechargeAccountLogService>();
         }
 
         [HttpGet]
-        public ApiResult GetRechargeConfigList() {
+        public ApiResult GetRechargeConfigList()
+        {
             var list = Ioc.Resolve<IAutoConfigService>().GetConfig(typeof(RechargeAccountConfig).FullName)?.Value
                 ?.ToObject<List<RechargeAccountConfig>>();
             var aliPay = Ioc.Resolve<IAutoConfigService>().GetValue<AlipayPaymentConfig>();
             var wechatPay = Ioc.Resolve<IAutoConfigService>().GetValue<WeChatPaymentConfig>();
             var isPay = false;
-            if (aliPay.IsEnable || wechatPay.IsEnable) {
-                isPay = true;
-            }
+            if (aliPay.IsEnable || wechatPay.IsEnable) isPay = true;
             return ApiResult.Success(list, (isPay ? 1 : 0).ToString());
         }
 
         [HttpPost]
-        public ApiResult Save([FromBody] RechargeAccountInput model) {
-            if (!this.IsFormValid()) {
-                return ApiResult.Failure(this.FormInvalidReason());
-            }
+        public ApiResult Save([FromBody] RechargeAccountInput model)
+        {
+            if (!this.IsFormValid()) return ApiResult.Failure(this.FormInvalidReason());
 
             var result = Resolve<IRechargeAccountLogService>().Add(model);
             return ToResult(result);

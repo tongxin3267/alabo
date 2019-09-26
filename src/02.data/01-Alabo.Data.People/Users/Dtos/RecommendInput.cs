@@ -5,25 +5,21 @@ using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Data.People.Users.Dtos {
-
-    public class RecommendInput {
-
+namespace Alabo.Data.People.Users.Dtos
+{
+    public class RecommendInput
+    {
         /// <summary>
         ///     数据ID
         /// </summary>
         [Display(Name = "数据序号")]
-        public string DataId {
-            get; set;
-        }
+        public string DataId { get; set; }
 
         /// <summary>
         ///     客户端当前登录用户的Id
         /// </summary>
         [Display(Name = "客户端当前登录用户的Id")]
-        public long LoginUserId {
-            get; set;
-        }
+        public long LoginUserId { get; set; }
 
         /// <summary>
         ///     当前页
@@ -40,19 +36,17 @@ namespace Alabo.Data.People.Users.Dtos {
         public long PageSize { get; set; } = 15;
 
         /// <summary>
-        /// 终端类型
+        ///     终端类型
         /// </summary>
-        public ClientType ClientType {
-            get; set;
-        }
+        public ClientType ClientType { get; set; }
 
         /// <summary>
-        /// 等级
+        ///     等级
         /// </summary>
         public Guid GradeId { get; set; }
 
         /// <summary>
-        /// 状态
+        ///     状态
         /// </summary>
         public Status Status { get; set; } = Status.Normal;
     }

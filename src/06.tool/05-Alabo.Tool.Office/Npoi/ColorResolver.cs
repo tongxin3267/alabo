@@ -1,18 +1,20 @@
 ﻿using Alabo.Tool.Office.Core;
 
-namespace Alabo.Tool.Office.Npoi {
-
+namespace Alabo.Tool.Office.Npoi
+{
     /// <summary>
-    /// 颜色转换
+    ///     颜色转换
     /// </summary>
-    public class ColorResolver {
-
+    public class ColorResolver
+    {
         /// <summary>
-        /// 转换
+        ///     转换
         /// </summary>
         /// <param name="color">颜色枚举</param>
-        public static short Resolve(Color color) {
-            switch (color) {
+        public static short Resolve(Color color)
+        {
+            switch (color)
+            {
                 case Color.Aqua:
                     return 0x31;
 

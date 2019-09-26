@@ -11,14 +11,17 @@ using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.Withdraws.Dtos {
-
+namespace Alabo.App.Asset.Withdraws.Dtos
+{
     /// <summary>
     ///     提现输出模型
     /// </summary>
-    [ClassProperty(Name = "提现管理", Icon = "fa fa-puzzle-piece", Description = "提现管理", PostApi = "Api/WithDraw/GetList", PageType = ViewPageType.List, ListApi = "Api/WithDraw/GetList",
+    [ClassProperty(Name = "提现管理", Icon = "fa fa-puzzle-piece", Description = "提现管理", PostApi = "Api/WithDraw/GetList",
+        PageType = ViewPageType.List, ListApi = "Api/WithDraw/GetList",
         SuccessReturn = "Api/WithDraw/GetList", SideBarType = SideBarType.WithDrawSideBar)]
-    public class WithDrawOutput : UIBase, IAutoTable<WithDrawOutput> {//EntityDto
+    public class WithDrawOutput : UIBase, IAutoTable<WithDrawOutput>
+    {
+        //EntityDto
 
         /// <summary>
         ///     id
@@ -61,7 +64,7 @@ namespace Alabo.App.Asset.Withdraws.Dtos {
         /// </summary>
         [Display(Name = "状态")]
         [Field(ControlsType = ControlsType.Label,
-   ListShow = true, GroupTabId = 1,
+            ListShow = true, GroupTabId = 1,
             Width = "80", SortOrder = 9)]
         public string StatusName { get; set; }
 
@@ -109,42 +112,41 @@ namespace Alabo.App.Asset.Withdraws.Dtos {
         public DateTime PayTime { get; set; }
 
         /// <summary>
-        /// 真实姓名
+        ///     真实姓名
         /// </summary>
         [Display(Name = "真实姓名")]
         [Field(ControlsType = ControlsType.TextBox, ListShow = true, Width = "80", SortOrder = 10)]
         public string RealName { get; set; }
 
         /// <summary>
-        /// 银行卡号
+        ///     银行卡号
         /// </summary>
         [Display(Name = "银行卡号")]
         [Field(ControlsType = ControlsType.TextBox, ListShow = true, Width = "100", SortOrder = 11)]
         public string CardId { get; set; }
 
         /// <summary>
-        /// 开户行
+        ///     开户行
         /// </summary>
         [Display(Name = "开户行")]
         [Field(ControlsType = ControlsType.TextBox, ListShow = true, Width = "80", SortOrder = 12)]
         public string BankName { get; set; }
 
         /// <summary>
-        /// 审核操作
+        ///     审核操作
         /// </summary>
 
         [Display(Name = "审核")]
         [Field(ControlsType = ControlsType.ColumnButton, ListShow = true, Width = "80", SortOrder = 12)]
         public ColumnAction ColumnAction { get; set; }
 
-        public List<TableAction> Actions() {
-            return new List<TableAction>() {
-                //ToLinkAction("查看详情", "/Admin/WithDraw/Edit",TableActionType.ColumnAction),//管理员查看详情
-                // ToLinkAction("审核", "/Admin/WithDraw/Edit",TableActionType.FormAction),//管理员审核
-            };
+        public List<TableAction> Actions()
+        {
+            return new List<TableAction>();
         }
 
-        public PageResult<WithDrawOutput> PageTable(object query, AutoBaseModel autoModel) {
+        public PageResult<WithDrawOutput> PageTable(object query, AutoBaseModel autoModel)
+        {
             //var userInput = ToQuery<WithDrawApiInput>();
 
             //if (autoModel.Filter == FilterType.Admin) {
@@ -204,8 +206,8 @@ namespace Alabo.App.Asset.Withdraws.Dtos {
     /// </summary>
     [ClassProperty(Name = "提现管理", Icon = "fa fa-puzzle-piece", Description = "提现管理", PostApi = "Api/WithDraw/Add",
         SuccessReturn = "Api/WithDraw/Get")]
-    public class WithDrawShowOutput {
-
+    public class WithDrawShowOutput
+    {
         /// <summary>
         ///     id
         /// </summary>

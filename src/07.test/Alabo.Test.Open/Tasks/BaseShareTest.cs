@@ -1,9 +1,4 @@
-﻿using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Extensions;
-using Alabo.Mapping;
-using Alabo.Test.Base.Core.Model;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using Alabo.App.Asset.Accounts.Domain.Entities;
@@ -13,20 +8,25 @@ using Alabo.App.Share.TaskExecutes;
 using Alabo.App.Share.TaskExecutes.Domain.Services;
 using Alabo.Data.Things.Orders.Domain.Entities;
 using Alabo.Data.Things.Orders.Domain.Services;
+using Alabo.Extensions;
 using Alabo.Framework.Basic.Address.Domain.Entities;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Industry.Shop.Orders.Domain.Entities;
 using Alabo.Industry.Shop.Orders.Domain.Services;
+using Alabo.Mapping;
+using Alabo.Test.Base.Core.Model;
 using Alabo.Users.Entities;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace Alabo.Test.Open.Tasks {
-
+namespace Alabo.Test.Open.Tasks
+{
     /// <summary>
     ///     规则：1.配置必须提前配置好
     ///     2. 资产分配为100%人民币
     /// </summary>
-    public abstract class BaseShareTest : CoreTest {
-
+    public abstract class BaseShareTest : CoreTest
+    {
         /// <summary>
         ///     测试模块配置Id 注册配置Id
         ///     与后台对应
@@ -46,8 +46,10 @@ namespace Alabo.Test.Open.Tasks {
 
         public Type ConfigType { get; set; }
 
-        protected ITaskActuator TaskActuator {
-            get {
+        protected ITaskActuator TaskActuator
+        {
+            get
+            {
                 var taskActuator = Services.GetService<ITaskActuator>();
                 return taskActuator;
             }
@@ -58,8 +60,10 @@ namespace Alabo.Test.Open.Tasks {
         ///     分润基数为1
         /// </summary>
         /// <param name="user">用户</param>
-        protected ShareOrder UserRegShareOrder(User user) {
-            var shareOrder = new ShareOrder {
+        protected ShareOrder UserRegShareOrder(User user)
+        {
+            var shareOrder = new ShareOrder
+            {
                 EntityId = user.Id,
                 UserId = user.Id,
                 Amount = 1,
@@ -74,12 +78,11 @@ namespace Alabo.Test.Open.Tasks {
         /// </summary>
         /// <param name="user">用户</param>
         /// <param name="address"></param>
-        protected Tuple<ShareOrder, Order> GetShopOrder(User user, UserAddress address = null) {
+        protected Tuple<ShareOrder, Order> GetShopOrder(User user, UserAddress address = null)
+        {
             // 复制id=465的订单
             var order = Resolve<IOrderService>().GetSingle(r => r.Id == 7);
-            if (order == null) {
-                throw new InvalidExpressionException("基础订单不存在，请重新复制订单");
-            }
+            if (order == null) throw new InvalidExpressionException("基础订单不存在，请重新复制订单");
 
             // 添加订单
             var newOrder = AutoMapping.SetValue<Order>(order);
@@ -87,7 +90,8 @@ namespace Alabo.Test.Open.Tasks {
             newOrder.UserId = user.Id;
             newOrder.OrderExtension.User = user;
 
-            if (address != null) {
+            if (address != null)
+            {
                 newOrder.AddressId = address.Id.ToString();
                 newOrder.OrderExtension.UserAddress = address;
             }
@@ -97,14 +101,16 @@ namespace Alabo.Test.Open.Tasks {
 
             // 添加订单商品
             var orderProductList = Resolve<IOrderProductService>().GetList(r => r.OrderId == order.Id);
-            foreach (var item in orderProductList) {
+            foreach (var item in orderProductList)
+            {
                 var orderProduct = AutoMapping.SetValue<OrderProduct>(item);
                 orderProduct.Id = 0;
                 orderProduct.OrderId = newOrder.Id;
                 Resolve<IOrderProductService>().Add(orderProduct);
             }
 
-            var shareOrder = new ShareOrder {
+            var shareOrder = new ShareOrder
+            {
                 EntityId = newOrder.Id,
                 UserId = user.Id,
                 Amount = newOrder.PaymentAmount,
@@ -119,12 +125,14 @@ namespace Alabo.Test.Open.Tasks {
         ///     获取分润会员的分润账户
         /// </summary>
         /// <param name="shareUserId"></param>
-        protected Account GetShareAccount(long shareUserId) {
+        protected Account GetShareAccount(long shareUserId)
+        {
             var account = Resolve<IAccountService>().GetAccount(shareUserId, Currency.Cny);
             return account;
         }
 
-        protected List<decimal> Ratios(long moduleConfigId) {
+        protected List<decimal> Ratios(long moduleConfigId)
+        {
             //var find = Resolve<IRewardService>().GetShareBaseConfig(moduleConfigId);
             //if (find == null) {
             //    return null;
@@ -143,7 +151,8 @@ namespace Alabo.Test.Open.Tasks {
         ///     断言分润结果
         /// </summary>
         /// <param name="input"></param>
-        protected void AssertResult(ShareRewardInput input) {
+        protected void AssertResult(ShareRewardInput input)
+        {
             //分润金额
             Assert.Equal(input.BeforeAccount.Amount + input.ShareAmount, input.AfterAccount.Amount);
 
@@ -188,17 +197,20 @@ namespace Alabo.Test.Open.Tasks {
 
         protected void AssertReward(ShareOrder shareOrder, long shareUserId, Account beforeAccount,
             Account afterAccount,
-            decimal shareAmount, long moduleConfigId, Type type) {
+            decimal shareAmount, long moduleConfigId, Type type)
+        {
         }
     }
 
-    public class ShareRewardInput {
-
-        public ShareRewardInput() {
+    public class ShareRewardInput
+    {
+        public ShareRewardInput()
+        {
         }
 
         public ShareRewardInput(ShareOrder shareOrder, Account beforeAccount, Account afterAccount, long shareUserId,
-            decimal shareAmount, long moduleConfigId, long orderUserId) {
+            decimal shareAmount, long moduleConfigId, long orderUserId)
+        {
             ShareOrder = shareOrder;
             BeforeAccount = beforeAccount;
             ModuleConfigId = moduleConfigId;

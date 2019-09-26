@@ -9,44 +9,25 @@ using Alabo.Framework.Core.WebUis.Models.Lists;
 using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Asset.Withdraws.Controllers {
-
+namespace Alabo.App.Asset.Withdraws.Controllers
+{
     /// <summary>
     ///     提现相关的Api接口
     /// </summary>
     [ApiExceptionFilter]
     [Route("Api/WithDraw/[action]")]
-    public class WithDrawApiController : ApiBaseController {
-        /// <summary>
-        ///     The automatic configuration manager
-        /// </summary>
-
-        /// <summary>
-        ///     The message manager
-        /// </summary>
-
-        /// <summary>
-        ///     The 会员 manager
-        /// </summary>
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="WithDrawApiController" /> class.
-        /// </summary>
-        public WithDrawApiController(
-            ) : base() {
-        }
-
+    public class WithDrawApiController : ApiBaseController
+    {
         /// <summary>
         ///     获取允许提现的账户类型
         /// </summary>
         [HttpGet]
         [Display(Description = "获取允许提现的账户类型")]
         [ApiAuth]
-        public ApiResult GetAccountType([FromQuery] long loginUserId) {
+        public ApiResult GetAccountType([FromQuery] long loginUserId)
+        {
             var result = Resolve<IWithdrawService>().GetWithDrawMoneys(loginUserId);
-            if (result != null) {
-                return ApiResult.Success(result);
-            }
+            if (result != null) return ApiResult.Success(result);
 
             return ApiResult.Failure("提现类型获取失败", MessageCodes.ParameterValidationFailure);
         }
@@ -58,10 +39,10 @@ namespace Alabo.App.Asset.Withdraws.Controllers {
         [HttpPost]
         [Display(Description = "用户申请提现")]
         [ApiAuth]
-        public ApiResult Add([FromBody] WithDrawInput parameter) {
-            if (!this.IsFormValid()) {
+        public ApiResult Add([FromBody] WithDrawInput parameter)
+        {
+            if (!this.IsFormValid())
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
-            }
 
             parameter.UserId = parameter.LoginUserId;
             var serviceResult = Resolve<IWithdrawService>().Add(parameter);
@@ -76,10 +57,10 @@ namespace Alabo.App.Asset.Withdraws.Controllers {
         [HttpDelete]
         [Display(Description = "删除用户提现")]
         [ApiAuth]
-        public ApiResult Delete([FromQuery] long loginUserId, long id) {
-            if (!this.IsFormValid()) {
+        public ApiResult Delete([FromQuery] long loginUserId, long id)
+        {
+            if (!this.IsFormValid())
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
-            }
 
             var serviceResult = Resolve<IWithdrawService>().Delete(loginUserId, id);
             return ToResult(serviceResult);
@@ -88,7 +69,8 @@ namespace Alabo.App.Asset.Withdraws.Controllers {
         [HttpGet]
         [Display(Description = "用户提现列表")]
         [ApiAuth]
-        public ApiResult<ListOutput> List([FromQuery] ListInput parameter) {
+        public ApiResult<ListOutput> List([FromQuery] ListInput parameter)
+        {
             //var model = Resolve<ITradeService>()
             //    .GetList(u => u.UserId == parameter.LoginUserId && u.Type == TradeType.Withdraw).ToList();
             //var apiOutput = new ListOutput {
@@ -118,12 +100,12 @@ namespace Alabo.App.Asset.Withdraws.Controllers {
         [ApiAuth]
         [HttpGet]
         [Display(Description = "获取提现详情")]
-        public ApiResult Get([FromQuery] long loginUserId, long id) {
+        public ApiResult Get([FromQuery] long loginUserId, long id)
+        {
             var result = Resolve<IWithdrawService>().GetSingle(loginUserId, id);
-            if (result != null) {
-                if (result.UserId != loginUserId) {
-                    return ApiResult.Failure<WithDrawShowOutput>("对不起，您无权查看他人提现详情");
-                }
+            if (result != null)
+            {
+                if (result.UserId != loginUserId) return ApiResult.Failure<WithDrawShowOutput>("对不起，您无权查看他人提现详情");
 
                 return ApiResult.Success(result.ToKeyValues());
             }
@@ -133,7 +115,8 @@ namespace Alabo.App.Asset.Withdraws.Controllers {
 
         [HttpGet]
         [Display(Description = "获取转账视图")]
-        public ApiResult<AutoForm> GetWithDrawForm() {
+        public ApiResult<AutoForm> GetWithDrawForm()
+        {
             var view = AutoFormMapping.Convert<WithDrawInput>();
             return ApiResult.Success(view);
         }
@@ -141,7 +124,8 @@ namespace Alabo.App.Asset.Withdraws.Controllers {
         [ApiAuth]
         [HttpGet]
         [Display(Description = "提现记录")]
-        public ApiResult GetList() {
+        public ApiResult GetList()
+        {
             //var result = new List<WithDrawOutput>();
             //var model = Resolve<ITradeService>().GetPagedList(Query, u => u.Type == TradeType.Withdraw);
             //var moneyConfigList = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();

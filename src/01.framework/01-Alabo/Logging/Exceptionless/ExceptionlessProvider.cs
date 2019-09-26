@@ -1,10 +1,10 @@
 ﻿using System.Linq;
-using Exceptionless;
-using Microsoft.Extensions.Logging;
 using Alabo.Extensions;
 using Alabo.Logging.Abstractions;
 using Alabo.Logging.Contents;
 using Alabo.Logging.NLog;
+using Exceptionless;
+using Microsoft.Extensions.Logging;
 using NLogs = NLog;
 
 namespace Alabo.Logging.Exceptionless
@@ -83,9 +83,7 @@ namespace Alabo.Logging.Exceptionless
         /// </summary>
         private EventBuilder CreateBuilder(LogLevel level, ILogContent content)
         {
-            if (content.Exception != null) {
-                return _client.CreateException(content.Exception);
-            }
+            if (content.Exception != null) return _client.CreateException(content.Exception);
 
             return _client.CreateLog(GetMessage(content), ConvertTo(level));
         }
@@ -96,13 +94,10 @@ namespace Alabo.Logging.Exceptionless
         /// <param name="content">日志内容</param>
         private string GetMessage(ILogContent content)
         {
-            if (content is ICaption caption && string.IsNullOrWhiteSpace(caption.Caption) == false) {
+            if (content is ICaption caption && string.IsNullOrWhiteSpace(caption.Caption) == false)
                 return caption.Caption;
-            }
 
-            if (content.Content.Length > 0) {
-                return content.Content.ToString();
-            }
+            if (content.Content.Length > 0) return content.Content.ToString();
 
             return content.TraceId;
         }
@@ -142,9 +137,7 @@ namespace Alabo.Logging.Exceptionless
         /// </summary>
         private void SetUser(ILogContent content)
         {
-            if (string.IsNullOrWhiteSpace(content.UserId)) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(content.UserId)) return;
 
             _client.Configuration.SetUserIdentity(content.UserId);
         }
@@ -154,9 +147,7 @@ namespace Alabo.Logging.Exceptionless
         /// </summary>
         private void SetSource(EventBuilder builder, ILogContent content)
         {
-            if (string.IsNullOrWhiteSpace(content.Url)) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(content.Url)) return;
 
             builder.SetSource(content.Url);
         }
@@ -174,15 +165,11 @@ namespace Alabo.Logging.Exceptionless
         /// </summary>
         private void AddProperties(EventBuilder builder, ILogConvert content)
         {
-            if (content == null) {
-                return;
-            }
+            if (content == null) return;
 
             foreach (var parameter in content.To().OrderBy(t => t.SortId))
             {
-                if (string.IsNullOrWhiteSpace(parameter.Value.SafeString())) {
-                    continue;
-                }
+                if (string.IsNullOrWhiteSpace(parameter.Value.SafeString())) continue;
 
                 builder.SetProperty($"{GetLine()}. {parameter.Text}", parameter.Value);
             }

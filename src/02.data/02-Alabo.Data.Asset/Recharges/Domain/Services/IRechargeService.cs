@@ -7,13 +7,13 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Microsoft.AspNetCore.Http;
 
-namespace Alabo.App.Asset.Recharges.Domain.Services {
-
+namespace Alabo.App.Asset.Recharges.Domain.Services
+{
     /// <summary>
     ///     充值
     /// </summary>
-    public interface IRechargeService : IService<Recharge, long> {
-
+    public interface IRechargeService : IService<Recharge, long>
+    {
         /// <summary>
         ///     线上充值
         /// </summary>

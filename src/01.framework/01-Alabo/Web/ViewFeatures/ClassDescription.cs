@@ -6,10 +6,10 @@ using System.Reflection;
 using Alabo.Cache;
 using Alabo.Extensions;
 using Alabo.Helpers;
-using ZKCloud.Open.DynamicExpression;
 using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using ZKCloud.Open.DynamicExpression;
 
 namespace Alabo.Web.ViewFeatures
 {
@@ -88,9 +88,7 @@ namespace Alabo.Web.ViewFeatures
             if (!objectCache.TryGet(cacheKey, out CacheClassDescription cacheDescription))
             {
                 cacheDescription = Create(baseType);
-                if (cacheDescription != null) {
-                    objectCache.Set(cacheKey, cacheDescription);
-                }
+                if (cacheDescription != null) objectCache.Set(cacheKey, cacheDescription);
             }
 
             if (cacheDescription != null)

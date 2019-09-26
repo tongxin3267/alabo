@@ -67,18 +67,12 @@ namespace Alabo.Parameters
         /// </summary>
         public void LoadUrl(string url)
         {
-            if (string.IsNullOrWhiteSpace(url)) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(url)) return;
 
-            if (url.Contains("?")) {
-                url = url.Substring(url.IndexOf("?", StringComparison.Ordinal) + 1);
-            }
+            if (url.Contains("?")) url = url.Substring(url.IndexOf("?", StringComparison.Ordinal) + 1);
 
             var parameters = HttpUtility.ParseQueryString(url);
-            foreach (var key in parameters.AllKeys) {
-                Add(key, parameters.Get(key));
-            }
+            foreach (var key in parameters.AllKeys) Add(key, parameters.Get(key));
         }
 
         /// <summary>
@@ -87,15 +81,11 @@ namespace Alabo.Parameters
         public void LoadForm()
         {
             var form = HttpWeb.Request?.Form;
-            if (form == null) {
-                return;
-            }
+            if (form == null) return;
 
-            foreach (var key in form.Keys) {
-                if (form.ContainsKey(key)) {
+            foreach (var key in form.Keys)
+                if (form.ContainsKey(key))
                     Add(key, form[key]);
-                }
-            }
         }
 
         /// <summary>
@@ -104,15 +94,11 @@ namespace Alabo.Parameters
         public void LoadQuery()
         {
             var query = HttpWeb.Request?.Query;
-            if (query == null) {
-                return;
-            }
+            if (query == null) return;
 
-            foreach (var key in query.Keys) {
-                if (query.ContainsKey(key)) {
+            foreach (var key in query.Keys)
+                if (query.ContainsKey(key))
                     Add(key, query[key]);
-                }
-            }
         }
 
         /// <summary>

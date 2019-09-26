@@ -1,23 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Alabo.Extensions;
-using Alabo.Runtime;
+﻿using Alabo.Extensions;
 using Alabo.Web.Mvc.Exception;
+using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Alabo.Web.Filters {
-
+namespace Alabo.Web.Filters
+{
     /// <summary>
     ///     异常处理过滤器
     /// </summary>
-    public class ExceptionHandlerAttribute : ExceptionFilterAttribute {
-
+    public class ExceptionHandlerAttribute : ExceptionFilterAttribute
+    {
         /// <summary>
         ///     异常处理
         /// </summary>
-        public override void OnException(ExceptionContext context) {
+        public override void OnException(ExceptionContext context)
+        {
             base.OnException(context);
 
-            if (context.ExceptionHandled == false) {
+            if (context.ExceptionHandled == false)
+            {
                 var msg = context.Exception.Message;
                 msg = msg.ReplaceHtmlTag().ToReplace().ToUrlEncode();
                 msg = msg.ReplaceHtmlTag().ToEncoding();

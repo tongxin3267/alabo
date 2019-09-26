@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Data.People.Suppliers.Domain.Entities {
-
+namespace Alabo.Data.People.Suppliers.Domain.Entities
+{
     [ClassProperty(Name = "供应商")]
     [BsonIgnoreExtraElements]
     [Table("People_Supplier")]
     [AutoDelete(IsAuto = true)]
-    public class Supplier : AggregateMongodbRoot<Supplier> {
-
+    public class Supplier : AggregateMongodbRoot<Supplier>
+    {
         /// <summary>
         ///     供应商名称
         /// </summary>

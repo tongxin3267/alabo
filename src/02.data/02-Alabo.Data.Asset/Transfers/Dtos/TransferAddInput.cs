@@ -5,12 +5,12 @@ using Alabo.Domains.Query.Dto;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.Transfers.Dtos {
-
+namespace Alabo.App.Asset.Transfers.Dtos
+{
     [ClassProperty(Name = "转账", Icon = "fa fa-puzzle-piece", Description = "转账", PostApi = "Api/Transfer/Add",
         SuccessReturn = "Api/Transfer/Get")]
-    public class TransferAddInput : ApiInputDto {
-
+    public class TransferAddInput : ApiInputDto
+    {
         /// <summary>
         ///     转出用户Id
         /// </summary>
@@ -29,7 +29,8 @@ namespace Alabo.App.Asset.Transfers.Dtos {
         ///     "/api/transfer/gettransferconfis"
         /// </summary>
         [Display(Name = "转账类型")]
-        [Field(ControlsType = ControlsType.DropdownList, ApiDataSource = "/Api/Transfer/GetTransferConfis", SortOrder = 1)]
+        [Field(ControlsType = ControlsType.DropdownList, ApiDataSource = "/Api/Transfer/GetTransferConfis",
+            SortOrder = 1)]
         public Guid TransferConfigId { get; set; }
 
         /// <summary>

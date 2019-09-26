@@ -1,11 +1,12 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Alabo.Framework.Reports.Controllers {
-
-    public class ReportResult<T> {
-
-        private ReportResult() {
+namespace Alabo.Framework.Reports.Controllers
+{
+    public class ReportResult<T>
+    {
+        private ReportResult()
+        {
         }
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
@@ -16,27 +17,31 @@ namespace Alabo.Framework.Reports.Controllers {
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string Message { get; private set; }
 
-        public static ReportResult<T> Success(T result) {
-            if (result == null) {
-                throw new ArgumentNullException(nameof(result));
-            }
+        public static ReportResult<T> Success(T result)
+        {
+            if (result == null) throw new ArgumentNullException(nameof(result));
 
-            return new ReportResult<T> {
+            return new ReportResult<T>
+            {
                 Result = result,
                 Message = null,
                 Succeeded = true
             };
         }
 
-        public static ReportResult<T> Failed() {
-            return new ReportResult<T> {
+        public static ReportResult<T> Failed()
+        {
+            return new ReportResult<T>
+            {
                 Succeeded = false,
                 Message = null
             };
         }
 
-        public static ReportResult<T> Failed(string message) {
-            return new ReportResult<T> {
+        public static ReportResult<T> Failed(string message)
+        {
+            return new ReportResult<T>
+            {
                 Succeeded = false,
                 Message = message
             };

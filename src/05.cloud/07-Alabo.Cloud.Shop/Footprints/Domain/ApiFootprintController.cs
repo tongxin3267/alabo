@@ -9,47 +9,49 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Cloud.Shop.Footprints.Domain {
-
+namespace Alabo.Cloud.Shop.Footprints.Domain
+{
     /// <summary>
-    ///
     /// </summary>
     [ApiExceptionFilter]
     [Route("Api/Footprint/[action]")]
-    public class ApiFootprintController : ApiBaseController<Footprint, ObjectId> {
-
+    public class ApiFootprintController : ApiBaseController<Footprint, ObjectId>
+    {
         /// <summary>
-        ///
         /// </summary>
-        public ApiFootprintController() : base() {
+        public ApiFootprintController()
+        {
             BaseService = Resolve<IFootprintService>();
         }
 
         /// <summary>
-        ///    ×ã¼£ÁÐ±í
+        ///     ×ã¼£ÁÐ±í
         /// </summary>
         [HttpGet]
         [Display(Description = "×ã¼£ÁÐ±í")]
-        public ApiResult List([FromQuery]long loginUserId) {
+        public ApiResult List([FromQuery] long loginUserId)
+        {
             var result = Resolve<IFootprintService>().GetList(u => u.UserId == loginUserId);
             return ApiResult.Success(result);
         }
 
         /// <summary>
-        ///    Ìí¼Ó×ã¼£
+        ///     Ìí¼Ó×ã¼£
         /// </summary>
         [HttpGet]
         [Display(Description = "Ìí¼Ó×ã¼£")]
-        public ApiResult Add([FromQuery] FootprintInput parameter) {
+        public ApiResult Add([FromQuery] FootprintInput parameter)
+        {
             var result = Resolve<IFootprintService>().Add(parameter);
             return ToResult(result);
         }
 
         /// <summary>
-        /// Çå¿Õ×ã¼£
+        ///     Çå¿Õ×ã¼£
         /// </summary>
         [HttpGet]
-        public ApiResult Clear([FromQuery] FootprintType type, long loginUserId) {
+        public ApiResult Clear([FromQuery] FootprintType type, long loginUserId)
+        {
             return null;
         }
     }

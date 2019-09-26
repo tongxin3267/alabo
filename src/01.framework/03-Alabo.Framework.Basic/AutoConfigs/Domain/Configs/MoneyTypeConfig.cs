@@ -16,8 +16,8 @@ using Alabo.UI.Enum;
 using Alabo.Web.Mvc.Attributes;
 using Newtonsoft.Json;
 
-namespace Alabo.Framework.Basic.AutoConfigs.Domain.Configs {
-
+namespace Alabo.Framework.Basic.AutoConfigs.Domain.Configs
+{
     /// <summary>
     ///     货币类型配置
     /// </summary>
@@ -26,8 +26,8 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Configs {
         PageType = ViewPageType.List, SortOrder = 20,
         Validator = "select 1 from Asset_Account where MoneyTypeId ='{0}'", ValidateMessage = "当前有账户正在使用当前货币",
         SideBarType = SideBarType.ControlSideBar)]
-    public class MoneyTypeConfig : AutoConfigBase, IAutoConfig {
-
+    public class MoneyTypeConfig : AutoConfigBase, IAutoConfig
+    {
         /// <summary>
         ///     人民币
         /// </summary>
@@ -54,50 +54,50 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Configs {
         public static readonly Guid ShopAmount = Guid.Parse("E97CCD1E-1478-49BD-BFC7-E73A5D699756");
 
         /// <summary>
-        /// 优惠券
+        ///     优惠券
         /// </summary>
         public static readonly Guid Preferential = Guid.Parse("e97ccd1e-1478-49bd-bfc7-e73a5d699009");
 
         /// <summary>
         ///     设置默认值
         /// </summary>
-        public void SetDefault() {
+        public void SetDefault()
+        {
             var list = Ioc.Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
-            if (list == null || list.Count == 0) {
+            if (list == null || list.Count == 0)
+            {
                 var configs = new List<MoneyTypeConfig>();
                 var config = new MoneyTypeConfig();
-                foreach (Currency item in Enum.GetValues(typeof(Currency))) {
-                    config = new MoneyTypeConfig {
+                foreach (Currency item in Enum.GetValues(typeof(Currency)))
+                {
+                    config = new MoneyTypeConfig
+                    {
                         Currency = item,
                         Unit = item.GetFieldAttribute().Mark
                     };
                     var color = item.GetFieldAttribute().Selection;
-                    if (!color.IsNullOrEmpty()) {
-                        config.BackGroudColor = (ColorLibrary)Enum.Parse(typeof(ColorLibrary), color);
-                    }
+                    if (!color.IsNullOrEmpty())
+                        config.BackGroudColor = (ColorLibrary) Enum.Parse(typeof(ColorLibrary), color);
 
-                    if (item.GetFieldAttribute().SortOrder > 0) {
-                        SortOrder = item.GetFieldAttribute().SortOrder;
-                    }
+                    if (item.GetFieldAttribute().SortOrder > 0) SortOrder = item.GetFieldAttribute().SortOrder;
 
-                    if (config.Currency == Currency.Custom) {
+                    if (config.Currency == Currency.Custom)
                         config.Id = Guid.NewGuid();
-                    } else {
+                    else
                         config.Id = item.GetFieldAttribute().GuidId.ToGuid();
-                    }
 
                     config.Name = item.GetDisplayName();
-                    if (item.IsDefault()) {
+                    if (item.IsDefault())
                         config.Status = Status.Normal;
-                    } else {
+                    else
                         config.Status = Status.Freeze;
-                    }
 
                     configs.Add(config);
                 }
 
                 var typeclassProperty = config.GetType().GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
-                var autoConfig = new AutoConfig {
+                var autoConfig = new AutoConfig
+                {
                     Type = config.GetType().FullName,
                     //// AppName = typeclassProperty.AppName,
                     LastUpdated = DateTime.Now,
@@ -121,7 +121,8 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Configs {
         /// <summary>
         ///     货币名称
         /// </summary>
-        [Field(ControlsType = ControlsType.TextBox, SortOrder = 0, IsMain = true, ListShow = true, Width = "110", IsShowBaseSerach = true, IsShowAdvancedSerach = true)]
+        [Field(ControlsType = ControlsType.TextBox, SortOrder = 0, IsMain = true, ListShow = true, Width = "110",
+            IsShowBaseSerach = true, IsShowAdvancedSerach = true)]
         [Required]
         [Display(Name = "货币名称")]
         [Main]

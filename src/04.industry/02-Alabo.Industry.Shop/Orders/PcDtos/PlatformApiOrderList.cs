@@ -15,34 +15,25 @@ using Alabo.Industry.Shop.Orders.Domain.Entities;
 using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.Industry.Shop.Orders.Domain.Services;
 using Alabo.Web.Mvc.Attributes;
+using OrderType = Alabo.Industry.Shop.Orders.Domain.Enums.OrderType;
 
-namespace Alabo.Industry.Shop.Orders.PcDtos {
-
+namespace Alabo.Industry.Shop.Orders.PcDtos
+{
     /// <summary>
-    /// 平台订单列表，只有管理员才可以查看
+    ///     平台订单列表，只有管理员才可以查看
     /// </summary>
     [ClassProperty(Name = "平台订单列表", Description = "平台订单列表")]
-    public class PlatformApiOrderList : BaseApiOrderList, IAutoTable<PlatformApiOrderList>, IAutoList {
-
-        public List<TableAction> Actions() {
-            var list = new List<TableAction>
-            {
-                ToLinkAction("查看订单", "/Admin/Order/Edit",TableActionType.ColumnAction),//管理员后端查看订单
-                //ToLinkAction("查看订单", "/Admin/Purchase/Edit",TableActionType.ColumnAction),//采购订单查看
-            };
-            return list;
-        }
-
-        public PageResult<AutoListItem> PageList(object query, AutoBaseModel autoModel) {
+    public class PlatformApiOrderList : BaseApiOrderList, IAutoTable<PlatformApiOrderList>, IAutoList
+    {
+        public PageResult<AutoListItem> PageList(object query, AutoBaseModel autoModel)
+        {
             var dic = HttpWeb.HttpContext.ToDictionary();
-            dic = dic.RemoveKey("userId");// 否则查出的订单都是同一个用户
+            dic = dic.RemoveKey("userId"); // 否则查出的订单都是同一个用户
 
             var model = ToQuery<PlatformApiOrderList>();
 
             var expressionQuery = new ExpressionQuery<Order>();
-            if (model.OrderStatus > 0) {
-                expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
-            }
+            if (model.OrderStatus > 0) expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
 
             //var isAdmin = Resolve<IUserService>().IsAdmin(model.UserId);
             //if (!isAdmin) {
@@ -54,8 +45,10 @@ namespace Alabo.Industry.Shop.Orders.PcDtos {
             var pageList = Resolve<IOrderApiService>().GetPageList(dic.ToJson(), expressionQuery);
 
             var list = new List<AutoListItem>();
-            foreach (var item in pageList) {
-                var apiData = new AutoListItem {
+            foreach (var item in pageList)
+            {
+                var apiData = new AutoListItem
+                {
                     Title = $"金额{item.TotalAmount}元",
                     Intro = item.UserName,
                     Value = item.TotalAmount,
@@ -65,40 +58,54 @@ namespace Alabo.Industry.Shop.Orders.PcDtos {
                 };
                 list.Add(apiData);
             }
+
             return ToPageList(list, pageList);
         }
 
-        public PageResult<PlatformApiOrderList> PageTable(object query, AutoBaseModel autoModel) {
+        public Type SearchType()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<TableAction> Actions()
+        {
+            var list = new List<TableAction>
+            {
+                ToLinkAction("查看订单", "/Admin/Order/Edit", TableActionType.ColumnAction) //管理员后端查看订单
+                //ToLinkAction("查看订单", "/Admin/Purchase/Edit",TableActionType.ColumnAction),//采购订单查看
+            };
+            return list;
+        }
+
+        public PageResult<PlatformApiOrderList> PageTable(object query, AutoBaseModel autoModel)
+        {
             var dic = HttpWeb.HttpContext.ToDictionary();
-            dic = dic.RemoveKey("userId");// 否则查出的订单都是同一个用户
+            dic = dic.RemoveKey("userId"); // 否则查出的订单都是同一个用户
 
             var model = ToQuery<PlatformApiOrderList>();
 
-            var expressionQuery = new ExpressionQuery<Order> {
+            var expressionQuery = new ExpressionQuery<Order>
+            {
                 PageIndex = 1,
                 EnablePaging = true
             };
 
-            if (model.OrderStatus > 0) {
-                expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
-            }
+            if (model.OrderStatus > 0) expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
 
             expressionQuery.And(e => e.StoreId > 0);
             expressionQuery.And(e => e.UserId > 0);
 
-            if (System.Enum.IsDefined(typeof(Domain.Enums.OrderType), model.OrderType)) {
+            if (Enum.IsDefined(typeof(OrderType), model.OrderType))
                 expressionQuery.And(e => e.OrderType == model.OrderType);
-            }
-            if (autoModel.Filter == FilterType.Admin) {
+            if (autoModel.Filter == FilterType.Admin)
+            {
                 var isAdmin = Resolve<IUserService>().IsAdmin(autoModel.BasicUser.Id);
-                if (!isAdmin) {
-                    throw new ValidException("非管理员不能查看平台订单");
-                }
-            } else if (autoModel.Filter == FilterType.Store) {
+                if (!isAdmin) throw new ValidException("非管理员不能查看平台订单");
+            }
+            else if (autoModel.Filter == FilterType.Store)
+            {
                 var store = Resolve<IShopStoreService>().GetUserStore(autoModel.BasicUser.Id);
-                if (store == null) {
-                    throw new ValidException("您不是供应商,暂无店铺");
-                }
+                if (store == null) throw new ValidException("您不是供应商,暂无店铺");
                 expressionQuery.And(e => e.StoreId == store.Id);
                 // 供应商
                 //expressionQuery.And(e => e.OrderExtension.IsSupplierView == true);
@@ -107,16 +114,14 @@ namespace Alabo.Industry.Shop.Orders.PcDtos {
             //else if (autoModel.Filter == FilterType.User) {
             //    expressionQuery.And(e => e.UserId == autoModel.BasicUser.Id);
             //}
-            else {
+            else
+            {
                 //其他用户查看自己的订单
                 expressionQuery.And(e => e.UserId == autoModel.BasicUser.Id);
             }
+
             var list = Resolve<IOrderApiService>().GetPageList(dic.ToJson(), expressionQuery);
             return ToPageResult<PlatformApiOrderList, ApiOrderListOutput>(list);
-        }
-
-        public Type SearchType() {
-            throw new NotImplementedException();
         }
     }
 }

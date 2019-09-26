@@ -7,9 +7,10 @@ using ZKCloud.Open.ApiBase.Formatters;
 using ZKCloud.Open.ApiBase.Models;
 using ZKCloud.Open.Message.Models;
 
-namespace Alabo.Domains.Base.Client {
-
-    public sealed class OpenMessageClient : RestClientBase, IOpenMessageClient {
+namespace Alabo.Domains.Base.Client
+{
+    public sealed class OpenMessageClient : RestClientBase, IOpenMessageClient
+    {
         private static readonly Func<IConnector> _connectorCreator = () => new HttpClientConnector();
 
         private static readonly Func<IDataFormatter> _formmaterCreator = () => new JsonFormatter();
@@ -25,45 +26,51 @@ namespace Alabo.Domains.Base.Client {
         private static readonly string _checkPhoneVerifiyCode = "/api/message/checkphoneverifiycode";
 
         public OpenMessageClient(Uri baseUri)
-            : base(baseUri, _connectorCreator(), _formmaterCreator()) {
+            : base(baseUri, _connectorCreator(), _formmaterCreator())
+        {
         }
 
         public OpenMessageClient(string baseUrl)
-            : this(new Uri(baseUrl)) {
+            : this(new Uri(baseUrl))
+        {
         }
 
-        public ApiResult SendRaw(string token, string mobile, string message, string ipAddress) {
+        public ApiResult SendRaw(string token, string mobile, string message, string ipAddress)
+        {
             var url = BuildQueryUri(_sendRawUrl);
             IDictionary<string, string> parameters = new Dictionary<string, string>
             {
                 {"token", token}
             };
-            var data = DataFormatter.FromObject(new { mobile, message, IpAddress = ipAddress });
+            var data = DataFormatter.FromObject(new {mobile, message, IpAddress = ipAddress});
             var result = Connector.Post(url, parameters, data);
             return DataFormatter.ToObject<ApiResult<SecretKeyAuthentication>>(result);
         }
 
-        public async Task<ApiResult> SendRawAsync(string token, string mobile, string message, string ipAddress) {
+        public async Task<ApiResult> SendRawAsync(string token, string mobile, string message, string ipAddress)
+        {
             var url = BuildQueryUri(_sendRawUrl);
             IDictionary<string, string> parameters = new Dictionary<string, string>
             {
                 {"token", token},
                 {"ipaddress", ipAddress}
             };
-            var data = await DataFormatter.FromObjectAsync(new { mobile, message, IpAddress = ipAddress });
+            var data = await DataFormatter.FromObjectAsync(new {mobile, message, IpAddress = ipAddress});
             var result = await Connector.PostAsync(url, parameters, data);
             return await DataFormatter.ToObjectAsync<ApiResult<SecretKeyAuthentication>>(result);
         }
 
         public ApiResult SendTemplate(string token, string mobile, long templateId, string userIpAddress,
-            IDictionary<string, string> parameter = null) {
+            IDictionary<string, string> parameter = null)
+        {
             var url = BuildQueryUri(_sendTemplateUrl);
             IDictionary<string, string> parameters = new Dictionary<string, string>
             {
                 {"token", token},
                 {"ipaddress", userIpAddress}
             };
-            var data = DataFormatter.FromObject(new {
+            var data = DataFormatter.FromObject(new
+            {
                 templateid = templateId,
                 mobile,
                 parameters = DataFormatter.FromObject(parameter)
@@ -73,10 +80,9 @@ namespace Alabo.Domains.Base.Client {
         }
 
         public async Task<ApiResult> SendTemplateAsync(string token, string mobile, long templateId,
-            string userIpAddress, IDictionary<string, string> parameter = null) {
-            if (parameter == null) {
-                throw new ArgumentNullException(nameof(parameter));
-            }
+            string userIpAddress, IDictionary<string, string> parameter = null)
+        {
+            if (parameter == null) throw new ArgumentNullException(nameof(parameter));
 
             var url = BuildQueryUri(_sendTemplateUrl);
             IDictionary<string, string> parameters = new Dictionary<string, string>
@@ -84,7 +90,8 @@ namespace Alabo.Domains.Base.Client {
                 {"token", token},
                 {"ipaddress", userIpAddress}
             };
-            var data = DataFormatter.FromObject(new {
+            var data = DataFormatter.FromObject(new
+            {
                 templateid = templateId,
                 mobile,
                 parameters = DataFormatter.FromObject(parameter),
@@ -94,7 +101,8 @@ namespace Alabo.Domains.Base.Client {
             return DataFormatter.ToObject<ApiResult<SecretKeyAuthentication>>(result);
         }
 
-        public async Task<ApiResult<MessageTemplate>> GetTemplate(string token, long code) {
+        public async Task<ApiResult<MessageTemplate>> GetTemplate(string token, long code)
+        {
             IDictionary<string, string> parameters = new Dictionary<string, string>
             {
                 {"token", token},
@@ -113,18 +121,22 @@ namespace Alabo.Domains.Base.Client {
         /// <param name="mobile"></param>
         /// <param name="userIpAddress"></param>
         /// <returns></returns>
-        public ApiResult SendMobileVerifiyCode(string token, string mobile, string userIpAddress) {
+        public ApiResult SendMobileVerifiyCode(string token, string mobile, string userIpAddress)
+        {
             var url = BuildQueryUri(_sendPhoneVerifiyCode);
             IDictionary<string, string> parameters = new Dictionary<string, string>
             {
                 {"token", token},
                 {"ipaddress", userIpAddress}
             };
-            try {
-                var data = DataFormatter.FromObject(new { mobile, IpAddress = userIpAddress });
+            try
+            {
+                var data = DataFormatter.FromObject(new {mobile, IpAddress = userIpAddress});
                 var result = Connector.Post(url, parameters, data);
                 return DataFormatter.ToObject<ApiResult>(result);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 return ApiResult.Failure(ex.Message);
             }
         }
@@ -136,14 +148,15 @@ namespace Alabo.Domains.Base.Client {
         /// <param name="mobile"></param>
         /// <param name="userIpAddress"></param>
         /// <returns></returns>
-        public ApiResult CheckMobileVerifiyCode(string token, string mobile, string userIpAddress, long code) {
+        public ApiResult CheckMobileVerifiyCode(string token, string mobile, string userIpAddress, long code)
+        {
             var url = BuildQueryUri(_checkPhoneVerifiyCode);
             IDictionary<string, string> parameters = new Dictionary<string, string>
             {
                 {"token", token},
                 {"ipaddress", userIpAddress}
             };
-            var data = DataFormatter.FromObject(new { mobile, IpAddress = userIpAddress, code });
+            var data = DataFormatter.FromObject(new {mobile, IpAddress = userIpAddress, code});
             var result = Connector.Post(url, parameters, data);
             return DataFormatter.ToObject<ApiResult>(result);
         }

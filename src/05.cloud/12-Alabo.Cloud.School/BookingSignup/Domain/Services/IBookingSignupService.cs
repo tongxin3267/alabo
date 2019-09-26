@@ -9,16 +9,15 @@ namespace Alabo.Cloud.School.BookingSignup.Domain.Services
 {
     public interface IBookingSignupService : IService<Entities.BookingSignup, ObjectId>
     {
-
         /// <summary>
-        /// 购买
+        ///     购买
         /// </summary>
         /// <param name="buyInput"></param>
         /// <returns></returns>
         Tuple<BookingBuyOutput, ServiceResult> Buy(BookingBuyInput buyInput);
 
         /// <summary>
-        /// 支付成功回调函数
+        ///     支付成功回调函数
         /// </summary>
         /// <param name="entityId"></param>
         void AfterPaySuccess(List<object> entityId);

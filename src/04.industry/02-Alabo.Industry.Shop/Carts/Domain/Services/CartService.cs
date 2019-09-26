@@ -17,12 +17,12 @@ using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Carts.Domain.Services
 {
-
     public class CartService : ServiceBase<Cart, ObjectId>, ICartService
     {
         private readonly IProductSkuRepository _productSkuRepository;
 
-        public CartService(IUnitOfWork unitOfWork, IRepository<Cart, ObjectId> repository) : base(unitOfWork, repository)
+        public CartService(IUnitOfWork unitOfWork, IRepository<Cart, ObjectId> repository) : base(unitOfWork,
+            repository)
         {
             _productSkuRepository = Repository<IProductSkuRepository>();
         }
@@ -38,29 +38,21 @@ namespace Alabo.Industry.Shop.Carts.Domain.Services
             var productSku = Resolve<IProductSkuService>().GetSingle(r => r.Id == orderProductInput.ProductSkuId);
             var storeId = _productSkuRepository.GetStoreIdByProductSkuId(orderProductInput.ProductSkuId);
 
-            if (product == null)
-            {
-                return ServiceResult.FailedWithMessage("商品不存在");
-            }
+            if (product == null) return ServiceResult.FailedWithMessage("商品不存在");
 
-            if (productSku == null)
-            {
-                return ServiceResult.FailedWithMessage("商品SKU错误");
-            }
+            if (productSku == null) return ServiceResult.FailedWithMessage("商品SKU错误");
 
-            if (storeId == 0)
-            {
-                return ServiceResult.FailedWithMessage("storeId错误");
-            }
+            if (storeId == 0) return ServiceResult.FailedWithMessage("storeId错误");
 
             var cartSingle = Resolve<ICartService>().GetSingle(u =>
                 u.ProductId == orderProductInput.ProductId && u.ProductSkuId == orderProductInput.ProductSkuId
-                && u.UserId == orderProductInput.LoginUserId && u.Status == Status.Normal);
-           
+                                                           && u.UserId == orderProductInput.LoginUserId &&
+                                                           u.Status == Status.Normal);
+
 
             if (cartSingle == null)
             {
-                Cart cart = new Cart
+                var cart = new Cart
                 {
                     StoreId = storeId,
                     UserId = orderProductInput.LoginUserId,
@@ -75,22 +67,19 @@ namespace Alabo.Industry.Shop.Carts.Domain.Services
                 Add(cart);
                 return serviceResult;
             }
-            else
-            {
-                //TODO:修改商品数量在这里操作
-                //var count = cartSingle.Count + orderProductInput.Count;
-                //TODO:判断商品最大购买和最小购买
-                //var key = ProductActivityType.BuyPermission.GetDisplayResourceTypeName();
-                //var buy = Resolve<IActivityService>().GetSingle(s => s.ProductId == orderProductInput.ProductId && s.Key == key);
-                //if (count > buy?.MaxStock)
-                //    return ServiceResult.FailedWithMessage("商品数量不能高于最大购买数量!");
-                //else if (count < buy?.MaxStock)
-                //    return ServiceResult.FailedWithMessage("商品数量不能低于最低购买数量!");
+            //TODO:修改商品数量在这里操作
+            //var count = cartSingle.Count + orderProductInput.Count;
+            //TODO:判断商品最大购买和最小购买
+            //var key = ProductActivityType.BuyPermission.GetDisplayResourceTypeName();
+            //var buy = Resolve<IActivityService>().GetSingle(s => s.ProductId == orderProductInput.ProductId && s.Key == key);
+            //if (count > buy?.MaxStock)
+            //    return ServiceResult.FailedWithMessage("商品数量不能高于最大购买数量!");
+            //else if (count < buy?.MaxStock)
+            //    return ServiceResult.FailedWithMessage("商品数量不能低于最低购买数量!");
 
-                // 数量递增
-                cartSingle.Count += orderProductInput.Count;
-                Update(cartSingle);
-            }
+            // 数量递增
+            cartSingle.Count += orderProductInput.Count;
+            Update(cartSingle);
 
             return ServiceResult.Success;
         }
@@ -108,21 +97,19 @@ namespace Alabo.Industry.Shop.Carts.Domain.Services
             var orderProductInputList = new List<OrderProductInput>();
             foreach (var item in viewCarts)
             {
-                OrderProductInput orderProductInput = new OrderProductInput
+                var orderProductInput = new OrderProductInput
                 {
                     Count = item.Count,
                     LoginUserId = UserId,
                     StoreId = item.StoreId,
                     ProductId = item.ProductId,
-                    ProductSkuId = item.ProductSkuId,
+                    ProductSkuId = item.ProductSkuId
                 };
                 orderProductInputList.Add(orderProductInput);
             }
 
             if (orderProductInputList.Count == 0)
-            {
                 return Tuple.Create(ServiceResult.FailedWithMessage("商品数量为0"), new StoreProductSku());
-            }
 
             var buyInput = new BuyInfoInput
             {
@@ -152,7 +139,8 @@ namespace Alabo.Industry.Shop.Carts.Domain.Services
             //    }
             //}
             var cart = Resolve<ICartService>().GetList(u =>
-                u.ProductSkuId == orderProductInput.ProductSkuId && u.UserId == orderProductInput.LoginUserId && u.Status == Status.Normal);
+                u.ProductSkuId == orderProductInput.ProductSkuId && u.UserId == orderProductInput.LoginUserId &&
+                u.Status == Status.Normal);
             cart.Foreach(z =>
             {
                 z.Status = Status.Deleted;
@@ -184,7 +172,8 @@ namespace Alabo.Industry.Shop.Carts.Domain.Services
             //    }
             //}
             var cart = Resolve<ICartService>().GetSingle(u =>
-                u.ProductId == orderProductInput.ProductId && u.ProductSkuId == orderProductInput.ProductSkuId && u.UserId == orderProductInput.LoginUserId && u.Status == Status.Normal);
+                u.ProductId == orderProductInput.ProductId && u.ProductSkuId == orderProductInput.ProductSkuId &&
+                u.UserId == orderProductInput.LoginUserId && u.Status == Status.Normal);
             cart.Count = orderProductInput.Count;
             Update(cart);
             return serviceResult;

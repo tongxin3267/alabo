@@ -7,24 +7,25 @@ using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Industry.Shop.Carts.Domain.Entities {
-
+namespace Alabo.Industry.Shop.Carts.Domain.Entities
+{
     /// <summary>
-    /// 购物车
+    ///     购物车
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Order_Cart")]
-    [ClassProperty(Name = "购物车", Icon = IconLineawesome.shopping_cart, ListApi = "Api/Cart/GetCart", PostApi = "Api/Cart/GetCart",
+    [ClassProperty(Name = "购物车", Icon = IconLineawesome.shopping_cart, ListApi = "Api/Cart/GetCart",
+        PostApi = "Api/Cart/GetCart",
         SideBarType = SideBarType.FullScreen)]
-    public class Cart : AggregateMongodbUserRoot<Cart> {
-
+    public class Cart : AggregateMongodbUserRoot<Cart>
+    {
         /// <summary>
-        /// 店铺Id
+        ///     店铺Id
         /// </summary>
         public long StoreId { get; set; }
 
         /// <summary>
-        /// 商品Id
+        ///     商品Id
         /// </summary>
         [Display(Name = "商品Id")]
         public long ProductId { get; set; }
@@ -32,7 +33,7 @@ namespace Alabo.Industry.Shop.Carts.Domain.Entities {
         public long ProductSkuId { get; set; }
 
         /// <summary>
-        /// 商品名称
+        ///     商品名称
         /// </summary>
         [Field(ControlsType = ControlsType.TextBox, IsShowAdvancedSerach = true, IsShowBaseSerach = true,
             ListShow = true, Operator = Operator.Contains)]
@@ -56,22 +57,22 @@ namespace Alabo.Industry.Shop.Carts.Domain.Entities {
         public string PropertyValueDesc { get; set; }
 
         /// <summary>
-        /// 销售价
+        ///     销售价
         /// </summary>
         [Display(Name = "销售价")]
         [Field(ControlsType = ControlsType.TextBox, ListShow = true)]
         public decimal Price { get; set; }
 
         /// <summary>
-        /// 数量
+        ///     数量
         /// </summary>
         [Display(Name = "数量")]
         [Field(ControlsType = ControlsType.TextBox, ListShow = true)]
         public long Count { get; set; }
 
         /// <summary>
-        /// 状态
-        /// 购物车不删除
+        ///     状态
+        ///     购物车不删除
         /// </summary>
         public Status Status { get; set; } = Status.Normal;
     }

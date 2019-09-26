@@ -10,23 +10,26 @@ using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Kpis.GradeKpis.Domain.Entities {
-
+namespace Alabo.App.Kpis.GradeKpis.Domain.Entities
+{
     /// <summary>
     ///     等级考核
     /// </summary>
-    [ClassProperty(Name = "等级考核", SideBarType = SideBarType.KpiSideBar, PageType = ViewPageType.List, PostApi = "Api/GradeKpi/GradeKpiList", ListApi = "Api/GradeKpi/GradeKpiList")]
+    [ClassProperty(Name = "等级考核", SideBarType = SideBarType.KpiSideBar, PageType = ViewPageType.List,
+        PostApi = "Api/GradeKpi/GradeKpiList", ListApi = "Api/GradeKpi/GradeKpiList")]
     [BsonIgnoreExtraElements]
     [Table("Kpi_GradeKpi")]
-    public class GradeKpi : AggregateMongodbUserRoot<GradeKpi> {
-
+    public class GradeKpi : AggregateMongodbUserRoot<GradeKpi>
+    {
         /// <summary>
-        /// 编号
+        ///     编号
         /// </summary>
         [Display(Name = "编号")]
         [Field(ListShow = true, IsShowBaseSerach = true, ControlsType = ControlsType.TextBox, SortOrder = 1)]
-        public string Serial {
-            get {
+        public string Serial
+        {
+            get
+            {
                 var searSerial = Id.ToString();
                 return searSerial;
             }
@@ -39,7 +42,7 @@ namespace Alabo.App.Kpis.GradeKpis.Domain.Entities {
         public Guid UserTypeId { get; set; }
 
         /// <summary>
-        /// 用户名
+        ///     用户名
         /// </summary>
         [Display(Name = "用户名")]
         [Field(ListShow = true, IsShowBaseSerach = true, ControlsType = ControlsType.TextBox, SortOrder = 2)]
@@ -52,7 +55,7 @@ namespace Alabo.App.Kpis.GradeKpis.Domain.Entities {
         public long TypeId { get; set; }
 
         /// <summary>
-        /// 配置名称
+        ///     配置名称
         /// </summary>
         public string ConfigName { get; set; }
 
@@ -75,14 +78,16 @@ namespace Alabo.App.Kpis.GradeKpis.Domain.Entities {
         /// </summary>
         [Display(Name = "考核周期")]
         [Field(ControlsType = ControlsType.RadioButton, ListShow = true, EditShow = true,
-            SortOrder = 1002, Width = "110", IsTabSearch = true, IsShowBaseSerach = false, IsShowAdvancedSerach = false, DataSource = "Alabo.Domains.Enums.TimeType")]
+            SortOrder = 1002, Width = "110", IsTabSearch = true, IsShowBaseSerach = false, IsShowAdvancedSerach = false,
+            DataSource = "Alabo.Domains.Enums.TimeType")]
         public TimeType TimeType { get; set; } = TimeType.Quarter;
 
         /// <summary>
         ///     考核结果
         /// </summary>
         [Display(Name = "考核结果")]
-        [Field(ControlsType = ControlsType.DropdownList, IsShowAdvancedSerach = true, IsShowBaseSerach = true, ListShow = true, EditShow = true,
+        [Field(ControlsType = ControlsType.DropdownList, IsShowAdvancedSerach = true, IsShowBaseSerach = true,
+            ListShow = true, EditShow = true,
             SortOrder = 102, Width = "110", DataSource = "Alabo.App.Share.Kpi.Domain.Enum.KpiResult")]
         public KpiResult KpiResult { get; set; }
 
@@ -94,30 +99,31 @@ namespace Alabo.App.Kpis.GradeKpis.Domain.Entities {
             GroupTabId = 1, Width = "120", ListShow = true, SortOrder = 2)]
         public IList<GradeKpiItem> KpiItems { get; set; }
 
-        public IEnumerable<ViewLink> ViewLinks() {
+        public IEnumerable<ViewLink> ViewLinks()
+        {
             var quickLinks = new List<ViewLink>
             {
-                new ViewLink("等级修改", "/Admin/GradeKpi/Edit?Id=[[Id]]",Icons.Edit, LinkType.ColumnLink)
+                new ViewLink("等级修改", "/Admin/GradeKpi/Edit?Id=[[Id]]", Icons.Edit, LinkType.ColumnLink)
             };
             return quickLinks;
         }
     }
 
     [ClassProperty(Name = "等级考核详情", SideBarType = SideBarType.GradeKpiSideBar)]
-    public class GradeKpiItem : BaseViewModel {
-
+    public class GradeKpiItem : BaseViewModel
+    {
         [Display(Name = "KPI类型")]
         [Field(ListShow = true)]
         public GradeKpiType KpiType { get; set; }
 
         /// <summary>
-        /// 与API数据对应
+        ///     与API数据对应
         /// </summary>
         [Display(Name = "KPI配置")]
         public long KpiId { get; set; }
 
         /// <summary>
-        /// 与KpiAutoConfig对应
+        ///     与KpiAutoConfig对应
         /// </summary>
         [Display(Name = "KPI配置")]
         public Guid? KpiConfigId { get; set; }

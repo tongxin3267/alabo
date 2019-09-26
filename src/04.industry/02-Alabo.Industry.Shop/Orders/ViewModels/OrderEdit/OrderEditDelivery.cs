@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.Industry.Shop.Orders.ViewModels.OrderEdit {
-
+namespace Alabo.Industry.Shop.Orders.ViewModels.OrderEdit
+{
     /// <summary>
     ///     发货
     /// </summary>
-    public class OrderEditDelivery : BaseViewModel {
-
+    public class OrderEditDelivery : BaseViewModel
+    {
         /// <summary>
         ///     订单Id
         /// </summary>
@@ -41,8 +41,8 @@ namespace Alabo.Industry.Shop.Orders.ViewModels.OrderEdit {
     /// <summary>
     ///     发货数量
     /// </summary>
-    public class OrderEditDeliveryProduct {
-
+    public class OrderEditDeliveryProduct
+    {
         /// <summary>
         ///     商品SKu
         /// </summary>

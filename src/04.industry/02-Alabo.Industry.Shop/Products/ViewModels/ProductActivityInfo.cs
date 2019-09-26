@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Alabo.Industry.Shop.Products.ViewModels {
-
+namespace Alabo.Industry.Shop.Products.ViewModels
+{
     /// <summary>
     ///     存入 OrderProduct 的商品活动信息
     /// </summary>
-    public class ProductActivityInfo {
-
+    public class ProductActivityInfo
+    {
         /// <summary>
         ///     获取或设置活动名称
         /// </summary>

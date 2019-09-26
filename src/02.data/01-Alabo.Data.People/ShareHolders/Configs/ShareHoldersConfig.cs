@@ -6,7 +6,6 @@ using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.Data.People.ShareHolders.Configs
 {
-
     /// <summary>
     ///     股东配置
     /// </summary>
@@ -17,8 +16,8 @@ namespace Alabo.Data.People.ShareHolders.Configs
     [ClassProperty(Name = "股东配置", Icon = "fa fa-user-times",
         Description = "股东配置", PageType = ViewPageType.Edit, SortOrder = 12,
         SideBarType = SideBarType.ShareHoldersSideBar)]
-    public class ShareHoldersConfig : IAutoConfig {
-
+    public class ShareHoldersConfig : IAutoConfig
+    {
         /// <summary>
         ///     服务条款
         ///     留空时使用默认条款
@@ -28,7 +27,8 @@ namespace Alabo.Data.People.ShareHolders.Configs
         [HelpBlock("请输入股东服务条款，默认值为股东服务条款")]
         public string ShareHoldersServiceAgreement { get; set; } = "股东服务条款";
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

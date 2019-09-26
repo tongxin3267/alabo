@@ -38,13 +38,9 @@ namespace Alabo.Domains.Services.Exist
         public bool Exists(Expression<Func<TEntity, bool>> predicate, TKey id)
         {
             var find = GetSingle(predicate);
-            if (find == null) {
-                return false;
-            }
+            if (find == null) return false;
 
-            if (find.Id.Equals(id)) {
-                return false;
-            }
+            if (find.Id.Equals(id)) return false;
 
             return true;
         }

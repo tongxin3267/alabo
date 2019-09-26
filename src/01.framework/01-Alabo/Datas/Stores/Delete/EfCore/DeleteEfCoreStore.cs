@@ -14,24 +14,18 @@ namespace Alabo.Datas.Stores.Delete.EfCore
 
         public bool Delete(TEntity entity)
         {
-            if (entity == null) {
-                return false;
-            }
+            if (entity == null) return false;
 
             UnitOfWork.Set<TEntity>().Remove(entity);
             var count = UnitOfWork.SaveChanges();
-            if (count >= 0) {
-                return true;
-            }
+            if (count >= 0) return true;
 
             return false;
         }
 
         public void Delete(IEnumerable<TEntity> entities)
         {
-            if (entities == null) {
-                return;
-            }
+            if (entities == null) return;
 
             UnitOfWork.Set<TEntity>().RemoveRange(entities);
             UnitOfWork.SaveChanges();

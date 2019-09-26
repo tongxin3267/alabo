@@ -1,7 +1,7 @@
 using Alabo.App.Share.TaskExecutes.Domain.Services;
-using Xunit;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Extensions;
+using Xunit;
 
 namespace Alabo.Test.Open.Tasks.Configs.Area
 {

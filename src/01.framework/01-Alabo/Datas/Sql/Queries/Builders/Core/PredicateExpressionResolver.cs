@@ -36,9 +36,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <param name="expression">谓词表达式</param>
         public ICondition Resolve<TEntiy>(Expression<Func<TEntiy, bool>> expression)
         {
-            if (expression == null) {
-                return NullCondition.Instance;
-            }
+            if (expression == null) return NullCondition.Instance;
 
             return ResolveExpression(expression, typeof(TEntiy));
         }

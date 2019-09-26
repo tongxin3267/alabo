@@ -2,17 +2,19 @@
 using Alabo.Domains.Services;
 using Alabo.Tool.Payment.WeiXinMp.Models;
 
-namespace Alabo.Tool.Payment.WeiXinMp.Services {
-
+namespace Alabo.Tool.Payment.WeiXinMp.Services
+{
     /// <summary>
-    /// 微信公众号相关接口
+    ///     微信公众号相关接口
     /// </summary>
-    public class WeixinMpService : ServiceBase, IWeixinMpService {
-
-        public WeixinMpService(IUnitOfWork unitOfWork) : base(unitOfWork) {
+    public class WeixinMpService : ServiceBase, IWeixinMpService
+    {
+        public WeixinMpService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
         }
 
-        public WeiXinShare WeiXinShare(WeiXinShareInput shareInput) {
+        public WeiXinShare WeiXinShare(WeiXinShareInput shareInput)
+        {
             //var wexinConfig = Ioc.Resolve<IAutoConfigService>().GetValue<WeChatPaymentConfig>();
 
             //var jsApiTicketResult = Ioc.Resolve<IWeixinMpClient>().GetTicketByAccessToken();

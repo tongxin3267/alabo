@@ -8,12 +8,13 @@ using Alabo.Reflections;
 using Alabo.Runtime;
 using ITaskModule = Alabo.App.Share.TaskExecutes.ResultModel.ITaskModule;
 
-namespace Alabo.App.Share.TaskExecutes {
-
+namespace Alabo.App.Share.TaskExecutes
+{
     /// <summary>
     ///     模块管理器
     /// </summary>
-    public class TaskManager {
+    public class TaskManager
+    {
         private readonly HashSet<Guid> _taskIdCache = new HashSet<Guid>();
 
         private readonly IDictionary<Guid, TaskModuleAttribute> _taskModuleAttributeCache =
@@ -32,28 +33,27 @@ namespace Alabo.App.Share.TaskExecutes {
 
         private readonly HashSet<Type> _taskTypeUpgradeCache = new HashSet<Type>(); // 升级类型模式
 
-        public TaskManager() {
+        public TaskManager()
+        {
             BuildTaskModuleCache();
         }
 
         /// <summary>
         ///     自动搜索程序集，构建taskmodule缓存
         /// </summary>
-        private void BuildTaskModuleCache() {
+        private void BuildTaskModuleCache()
+        {
             var assemblies = RuntimeContext.Current.GetPlatformRuntimeAssemblies();
             var moduleTypes = assemblies.SelectMany(e => e.GetTypes())
                 .Where(e => e.GetInterfaces().Contains(typeof(ITaskModule))).ToArray();
 
-            foreach (var type in moduleTypes) {
+            foreach (var type in moduleTypes)
+            {
                 var attributes = type.GetTypeInfo().GetAttributes<TaskModuleAttribute>();
-                if (attributes == null || attributes.Count() <= 0) {
-                    continue;
-                }
+                if (attributes == null || attributes.Count() <= 0) continue;
 
                 var attribute = attributes.First();
-                if (_taskIdCache.Contains(attribute.Id) || _taskTypeCache.Contains(type)) {
-                    continue;
-                }
+                if (_taskIdCache.Contains(attribute.Id) || _taskTypeCache.Contains(type)) continue;
 
                 //add to cache with id key
                 _taskIdCache.Add(attribute.Id);
@@ -64,13 +64,9 @@ namespace Alabo.App.Share.TaskExecutes {
                 _taskModuleTypeAttributeCache.Add(type, attribute);
                 _taskModuleIdCache.Add(type, attribute.Id);
 
-                if (attribute.FenRunResultType == FenRunResultType.Price) {
-                    _taskTypePriceCache.Add(type); // 价格类型模块
-                }
+                if (attribute.FenRunResultType == FenRunResultType.Price) _taskTypePriceCache.Add(type); // 价格类型模块
 
-                if (attribute.FenRunResultType == FenRunResultType.Queue) {
-                    _taskTypeUpgradeCache.Add(type); // 升级类型
-                }
+                if (attribute.FenRunResultType == FenRunResultType.Queue) _taskTypeUpgradeCache.Add(type); // 升级类型
             }
         }
 
@@ -80,7 +76,8 @@ namespace Alabo.App.Share.TaskExecutes {
         /// <param name="id">模块id</param>
         /// <param name="type">模块类型</param>
         /// <returns>获取是否成功</returns>
-        public bool TryGetModuleType(Guid id, out Type type) {
+        public bool TryGetModuleType(Guid id, out Type type)
+        {
             return _taskModuleTypeCache.TryGetValue(id, out type);
         }
 
@@ -90,7 +87,8 @@ namespace Alabo.App.Share.TaskExecutes {
         /// <param name="id">模块id</param>
         /// <param name="attribute">模块描述类型</param>
         /// <returns>获取是否成功</returns>
-        public bool TryGetModuleAttribute(Guid id, out TaskModuleAttribute attribute) {
+        public bool TryGetModuleAttribute(Guid id, out TaskModuleAttribute attribute)
+        {
             return _taskModuleAttributeCache.TryGetValue(id, out attribute);
         }
 
@@ -99,7 +97,8 @@ namespace Alabo.App.Share.TaskExecutes {
         /// </summary>
         /// <param name="id">模块id</param>
         /// <returns>是否存在的结果</returns>
-        public bool ContainsModuleId(Guid id) {
+        public bool ContainsModuleId(Guid id)
+        {
             return _taskIdCache.Contains(id);
         }
 
@@ -107,7 +106,8 @@ namespace Alabo.App.Share.TaskExecutes {
         ///     获取系统已加载的所有模块id
         /// </summary>
         /// <returns>模块id集合</returns>
-        public Guid[] GetModuleIdArray() {
+        public Guid[] GetModuleIdArray()
+        {
             return _taskIdCache.ToArray();
         }
 
@@ -117,7 +117,8 @@ namespace Alabo.App.Share.TaskExecutes {
         /// <param name="type">模块类型</param>
         /// <param name="id">模块id</param>
         /// <returns>获取是否成功</returns>
-        public bool TryGetModuleId(Type type, out Guid id) {
+        public bool TryGetModuleId(Type type, out Guid id)
+        {
             return _taskModuleIdCache.TryGetValue(type, out id);
         }
 
@@ -127,7 +128,8 @@ namespace Alabo.App.Share.TaskExecutes {
         /// <param name="type">模块类型</param>
         /// <param name="attribute">模块描述类</param>
         /// <returns>获取是否成功</returns>
-        public bool TryGetModuleAttribute(Type type, out TaskModuleAttribute attribute) {
+        public bool TryGetModuleAttribute(Type type, out TaskModuleAttribute attribute)
+        {
             return _taskModuleTypeAttributeCache.TryGetValue(type, out attribute);
         }
 
@@ -136,7 +138,8 @@ namespace Alabo.App.Share.TaskExecutes {
         /// </summary>
         /// <param name="type">模块类型</param>
         /// <returns>是否存在</returns>
-        public bool ContainsType(Type type) {
+        public bool ContainsType(Type type)
+        {
             return _taskTypeCache.Contains(type);
         }
 
@@ -144,25 +147,29 @@ namespace Alabo.App.Share.TaskExecutes {
         ///     获取所有模块类型
         /// </summary>
         /// <returns>所有模块类型数组</returns>
-        public Type[] GetModuleTypeArray() {
+        public Type[] GetModuleTypeArray()
+        {
             return _taskTypeCache.ToArray();
         }
 
-        public TaskModuleAttribute[] GetModuleAttributeArray() {
+        public TaskModuleAttribute[] GetModuleAttributeArray()
+        {
             return _taskModuleAttributeCache.Select(e => e.Value).OrderBy(r => r.SortOrder).ToArray();
         }
 
         /// <summary>
         ///     价格类型模块
         /// </summary>
-        public Type[] GetModulePriceArray() {
+        public Type[] GetModulePriceArray()
+        {
             return _taskTypePriceCache.ToArray();
         }
 
         /// <summary>
         ///     升级类型模块
         /// </summary>
-        public Type[] GetModuleUpgradeArray() {
+        public Type[] GetModuleUpgradeArray()
+        {
             return _taskTypeUpgradeCache.ToArray();
         }
     }

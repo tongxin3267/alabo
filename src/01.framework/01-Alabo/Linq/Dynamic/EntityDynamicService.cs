@@ -47,9 +47,7 @@ namespace Alabo.Linq.Dynamic
         /// <returns>dynamic.</returns>
         public static dynamic GetUserGrade(Guid gradeId)
         {
-            if (gradeId.IsGuidNullOrEmpty()) {
-                return null;
-            }
+            if (gradeId.IsGuidNullOrEmpty()) return null;
             // 获取等级
             var gardeService = DynamicService.Resolve("GradeService");
             var gradeTarget = new Interpreter().SetVariable("gardeService", gardeService);

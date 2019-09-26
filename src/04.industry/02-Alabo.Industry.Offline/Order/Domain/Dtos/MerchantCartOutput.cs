@@ -1,30 +1,30 @@
 ﻿using System.Collections.Generic;
 using Alabo.Industry.Offline.Order.ViewModels;
 
-namespace Alabo.Industry.Offline.Order.Domain.Dtos {
-
+namespace Alabo.Industry.Offline.Order.Domain.Dtos
+{
     /// <summary>
-    /// MerchantCartOutput
+    ///     MerchantCartOutput
     /// </summary>
-    public class MerchantCartOutput {
-
+    public class MerchantCartOutput
+    {
         /// <summary>
-        /// Total count
+        ///     Total count
         /// </summary>
         public long TotalCount { get; set; } = 0;
 
         /// <summary>
-        /// Total amount
+        ///     Total amount
         /// </summary>
         public decimal TotalAmount { get; set; } = 0;
 
         /// <summary>
-        /// Fee amount
+        ///     Fee amount
         /// </summary>
         public decimal FeeAmount { get; set; }
 
         /// <summary>
-        /// Product
+        ///     Product
         /// </summary>
         public List<MerchantCartViewModel> Products { get; set; } = new List<MerchantCartViewModel>();
     }

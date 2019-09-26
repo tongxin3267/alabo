@@ -2,14 +2,14 @@
 using Alabo.Framework.Core.WebUis.Models.Lists;
 using Alabo.Industry.Cms.Articles.Domain.Enums;
 
-namespace Alabo.Industry.Cms.Articles.Domain.Dto {
-
+namespace Alabo.Industry.Cms.Articles.Domain.Dto
+{
     /// <summary>
     ///     Class ArticleInput.
     /// </summary>
     /// <seealso cref="Alabo.Domains.Query.Dto.PagedInputDto" />
-    public class ArticleInput : ListInput {
-
+    public class ArticleInput : ListInput
+    {
         /// <summary>
         ///     频道Id
         /// </summary>

@@ -10,9 +10,8 @@ namespace Alabo.Industry.Offline.Order.Controllers
     [Route("Api/MerchantOrderProduct/[action]")]
     public class ApiMerchantOrderProductController : ApiBaseController<MerchantOrderProduct, long>
     {
-
-        public ApiMerchantOrderProductController() 
-            : base() {
+        public ApiMerchantOrderProductController()
+        {
             BaseService = Resolve<IMerchantOrderProductService>();
         }
     }

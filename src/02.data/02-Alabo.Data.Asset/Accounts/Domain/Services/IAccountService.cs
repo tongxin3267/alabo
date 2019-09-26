@@ -8,13 +8,13 @@ using Alabo.Domains.Services;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Core.Enums.Enum;
 
-namespace Alabo.App.Asset.Accounts.Domain.Services {
-
+namespace Alabo.App.Asset.Accounts.Domain.Services
+{
     /// <summary>
     ///     用户资产接口
     /// </summary>
-    public interface IAccountService : IService<Account, long> {
-
+    public interface IAccountService : IService<Account, long>
+    {
         /// <summary>
         ///     获取用户的资产账户
         /// </summary>
@@ -92,14 +92,14 @@ namespace Alabo.App.Asset.Accounts.Domain.Services {
         void InitAllUserIdsWidthOutAccount();
 
         /// <summary>
-        /// 充值
+        ///     充值
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         ServiceResult Add(RechargeAccountInput input);
 
         /// <summary>
-        /// 充值
+        ///     充值
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>

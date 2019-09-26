@@ -2,12 +2,12 @@
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 
-namespace Alabo.Framework.Core.WebUis.Domain.Services {
-
-    public interface IUIBaseService : IService {
-
+namespace Alabo.Framework.Core.WebUis.Domain.Services
+{
+    public interface IUIBaseService : IService
+    {
         /// <summary>
-        /// 检查基础类型
+        ///     检查基础类型
         /// </summary>
         /// <param name="type">type类型</param>
         /// <param name="typeFind">Type 类型</param>

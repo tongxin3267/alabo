@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Alabo.Dependency;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Alabo.Dependency;
 
 namespace Alabo.Test.Base.Core.Test
 {

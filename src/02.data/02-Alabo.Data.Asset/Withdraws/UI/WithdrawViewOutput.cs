@@ -5,26 +5,26 @@ using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoPreviews;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.Withdraws.UI {
-
-    public class WithdrawViewOutput : UIBase, IAutoPreview {
-
+namespace Alabo.App.Asset.Withdraws.UI
+{
+    public class WithdrawViewOutput : UIBase, IAutoPreview
+    {
         /// <summary>
-        /// 编号
+        ///     编号
         /// </summary>
         [Field(ControlsType = ControlsType.Label, ListShow = false, EditShow = true, SortOrder = 2, Width = "160")]
         [Display(Name = "编号")]
         public string Serial { get; set; }
 
         /// <summary>
-        /// 银行卡号
+        ///     银行卡号
         /// </summary>
         [Field(ControlsType = ControlsType.Label, ListShow = false, EditShow = true, SortOrder = 5, Width = "160")]
         [Display(Name = "银行卡号")]
         public string BankCardNum { get; set; }
 
         /// <summary>
-        /// 银行卡
+        ///     银行卡
         /// </summary>
         [Field(ControlsType = ControlsType.Label, ListShow = false, EditShow = true, SortOrder = 4, Width = "160")]
         [Display(Name = "提现银行卡")]
@@ -60,14 +60,14 @@ namespace Alabo.App.Asset.Withdraws.UI {
         public string Intro { get; set; } = "无";
 
         /// <summary>
-        /// 银行卡
+        ///     银行卡
         /// </summary>
         [Field(ControlsType = ControlsType.Label, ListShow = false, EditShow = true, SortOrder = 10099, Width = "160")]
         [Display(Name = "银行卡")]
         public string BankCard { get; set; }
 
         /// <summary>
-        /// 银行名称
+        ///     银行名称
         /// </summary>
         public string BankName { get; set; }
 
@@ -78,7 +78,7 @@ namespace Alabo.App.Asset.Withdraws.UI {
         public string AcctionType { get; set; }
 
         /// <summary>
-        /// 状态
+        ///     状态
         /// </summary>
         [Field(ControlsType = ControlsType.Label, ListShow = false, EditShow = true, SortOrder = 5, Width = "160")]
         [Display(Name = "状态")]
@@ -98,7 +98,8 @@ namespace Alabo.App.Asset.Withdraws.UI {
         [Display(Name = "交易时间")]
         public string CreateTime { get; set; }
 
-        public AutoPreview GetPreview(string id, AutoBaseModel autoModel) {
+        public AutoPreview GetPreview(string id, AutoBaseModel autoModel)
+        {
             //var model = Resolve<ITradeService>().GetSingle(u => u.Id == id.ToInt64() && u.Type == TradeType.Withdraw);
             //var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
             //var item = AutoMapping.SetValue<WithdrawViewOutput>(model);

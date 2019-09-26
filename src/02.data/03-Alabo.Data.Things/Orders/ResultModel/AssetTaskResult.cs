@@ -2,14 +2,15 @@
 using Alabo.Data.Things.Orders.Extensions;
 using Alabo.Framework.Tasks.Queues.Models;
 
-namespace Alabo.Data.Things.Orders.ResultModel {
-
+namespace Alabo.Data.Things.Orders.ResultModel
+{
     /// <summary>
     ///     资产变化结果
     /// </summary>
-    public class AssetTaskResult : ITaskResult {
-
-        public AssetTaskResult(TaskContext context) {
+    public class AssetTaskResult : ITaskResult
+    {
+        public AssetTaskResult(TaskContext context)
+        {
             Context = context;
         }
 
@@ -20,12 +21,12 @@ namespace Alabo.Data.Things.Orders.ResultModel {
         public decimal ChangeAmount { get; set; }
         public TaskContext Context { get; }
 
-        public ExecuteResult Update() {
-            if (ChangeAmount == 0) {
-                return ExecuteResult.Success();
-            }
+        public ExecuteResult Update()
+        {
+            if (ChangeAmount == 0) return ExecuteResult.Success();
 
-            try {
+            try
+            {
                 //TODO 9月重构注释
                 //var findAccount = Ioc.Resolve<IAccountService>().GetAccount(AccountId);
                 //if (findAccount == null) {
@@ -42,7 +43,9 @@ namespace Alabo.Data.Things.Orders.ResultModel {
                 ////string sql = $"update [Asset_Account] set [Amount]=[Amount]+{ChangeAmount}, [HistoryAmount]=[HistoryAmount]+{historyChangeAmount} where [UserId]={UserId} and [Id]={AccountId}";
                 ////Alabo.Helpers.Ioc.Resolve<IUserRepository>().RepositoryContext.ExecuteNonQuery(sql);
                 return ExecuteResult.Success();
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 return ExecuteResult.Error(e);
             }
         }

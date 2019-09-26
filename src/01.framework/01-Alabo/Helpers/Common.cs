@@ -37,14 +37,10 @@ namespace Alabo.Helpers
         /// <param name="relativePath">相对路径</param>
         public static string GetPhysicalPath(string relativePath)
         {
-            if (string.IsNullOrWhiteSpace(relativePath)) {
-                return string.Empty;
-            }
+            if (string.IsNullOrWhiteSpace(relativePath)) return string.Empty;
 
             var rootPath = HttpWeb.RootPath;
-            if (string.IsNullOrWhiteSpace(rootPath)) {
-                return Path.GetFullPath(relativePath);
-            }
+            if (string.IsNullOrWhiteSpace(rootPath)) return Path.GetFullPath(relativePath);
 
             return $"{HttpWeb.RootPath}\\{relativePath.Replace("/", "\\").TrimStart('\\')}";
         }
@@ -55,14 +51,10 @@ namespace Alabo.Helpers
         /// <param name="relativePath">相对路径</param>
         public static string GetWebRootPath(string relativePath)
         {
-            if (string.IsNullOrWhiteSpace(relativePath)) {
-                return string.Empty;
-            }
+            if (string.IsNullOrWhiteSpace(relativePath)) return string.Empty;
 
             var rootPath = HttpWeb.WebRootPath;
-            if (string.IsNullOrWhiteSpace(rootPath)) {
-                return Path.GetFullPath(relativePath);
-            }
+            if (string.IsNullOrWhiteSpace(rootPath)) return Path.GetFullPath(relativePath);
 
             return $"{HttpWeb.WebRootPath}\\{relativePath.Replace("/", "\\").TrimStart('\\')}";
         }

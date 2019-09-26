@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using Alabo.Datas.UnitOfWorks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Alabo.Datas.Ef
 {

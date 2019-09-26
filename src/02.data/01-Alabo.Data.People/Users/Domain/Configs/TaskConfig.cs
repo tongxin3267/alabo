@@ -18,16 +18,16 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Newtonsoft.Json;
 
-namespace Alabo.Data.People.Users.Domain.Configs {
-
+namespace Alabo.Data.People.Users.Domain.Configs
+{
     /// <summary>
     ///     任务配置
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "任务配置 ", Icon = "fa fa-life-ring", PageType = ViewPageType.List, Description = "任务配置",
         SortOrder = 30)]
-    public class TaskConfig : AutoConfigBase, IAutoConfig {
-
+    public class TaskConfig : AutoConfigBase, IAutoConfig
+    {
         [Field(ControlsType = ControlsType.TextBox, SortOrder = 2, ListShow = true)]
         [Display(Name = "任务名称")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
@@ -55,33 +55,36 @@ namespace Alabo.Data.People.Users.Domain.Configs {
         [HelpBlock("完成任务奖励的货币金额，比如推荐一个会员赠送20个升级点，奖励货币金额为20。注册一个会员赠送20元人民币，奖励货币金额为20")]
         public decimal Amount { get; set; } = 0;
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
             var list = Ioc.Resolve<IAutoConfigService>().GetList<TaskConfig>();
             var moneyTypes = Ioc.Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
             var sharedValue = moneyTypes.FirstOrDefault(r => r.Currency == Currency.UpgradePoints); //存在升级点
 
-            if (list.Count == 0) {
+            if (list.Count == 0)
+            {
                 var configs = new List<TaskConfig>();
                 var config = new TaskConfig();
 
-                foreach (TaskType item in Enum.GetValues(typeof(TaskType))) {
-                    if (item.IsDefault()) {
+                foreach (TaskType item in Enum.GetValues(typeof(TaskType)))
+                    if (item.IsDefault())
+                    {
                         config = new TaskConfig();
 
                         ///一级推荐会员
-                        if (item == TaskType.RecommendedMember) {
-                            if (sharedValue != null) {
+                        if (item == TaskType.RecommendedMember)
+                            if (sharedValue != null)
+                            {
                             }
-                        }
 
                         config.Name = "会员注册时候赠送积分";
                         config.Id = Guid.NewGuid();
                         // configs.Add(config);
                     }
-                }
 
                 var typeclassProperty = config.GetType().GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
-                var autoConfig = new AutoConfig {
+                var autoConfig = new AutoConfig
+                {
                     Type = config.GetType().FullName,
 
                     LastUpdated = DateTime.Now,

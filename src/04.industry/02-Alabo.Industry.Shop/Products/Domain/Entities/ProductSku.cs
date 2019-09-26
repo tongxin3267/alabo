@@ -11,14 +11,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Alabo.Industry.Shop.Products.Domain.Entities
 {
-
     /// <summary>
     ///     Class ProductSku.
     /// </summary>
     [ClassProperty(Name = "产品最小库存")]
     public class ProductSku : AggregateDefaultRoot<ProductSku>
     {
-
         /// <summary>
         ///     商品Guid
         /// </summary>
@@ -143,30 +141,29 @@ namespace Alabo.Industry.Shop.Products.Domain.Entities
         public string SpecSn { get; set; }
 
         /// <summary>
-        /// 会员等级价 List<SkuGradePriceItem> 的json数据
+        ///     会员等级价 List<SkuGradePriceItem> 的json数据
         /// </summary>
         public string GradePrice { get; set; }
 
         /// <summary>
-        /// 会员等级
-        /// 前端显示
+        ///     会员等级
+        ///     前端显示
         /// </summary>
         public List<SkuGradePriceItem> GradePriceList { get; set; }
     }
 
     /// <summary>
-    /// 会员等级价折扣
+    ///     会员等级价折扣
     /// </summary>
-
     public class SkuGradePriceItem
     {
         /// <summary>
-        /// 会员等级
+        ///     会员等级
         /// </summary>
         public Guid Id { get; set; }
 
         /// <summary>
-        /// 等级名称
+        ///     等级名称
         /// </summary>
         [Display(Name = "等级名称")]
         public string Name { get; set; }
@@ -207,7 +204,6 @@ namespace Alabo.Industry.Shop.Products.Domain.Entities
 
     public class ProductSkuTableMap : MsSqlAggregateRootMap<ProductSku>
     {
-
         protected override void MapTable(EntityTypeBuilder<ProductSku> builder)
         {
             builder.ToTable("Shop_ProductSku");
@@ -219,7 +215,8 @@ namespace Alabo.Industry.Shop.Products.Domain.Entities
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.Version);
             builder.Ignore(e => e.GradePriceList);
-            if (TenantContext.IsTenant) {
+            if (TenantContext.IsTenant)
+            {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
             }
         }

@@ -7,12 +7,12 @@ using MongoDB.Bson;
 
 namespace Alabo.Cloud.People.UserDigitals.Controllers
 {
-
     [ApiExceptionFilter]
     [Route("Api/UserDigital/[action]")]
-    public class ApiUserDigitalController : ApiBaseController<UserDigital, ObjectId> {
-
-        public ApiUserDigitalController() : base() {
+    public class ApiUserDigitalController : ApiBaseController<UserDigital, ObjectId>
+    {
+        public ApiUserDigitalController()
+        {
             BaseService = Resolve<IUserDigitalService>();
         }
     }

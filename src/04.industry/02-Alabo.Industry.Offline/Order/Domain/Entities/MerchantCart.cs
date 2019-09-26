@@ -8,7 +8,7 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace Alabo.Industry.Offline.Order.Domain.Entities
 {
     /// <summary>
-    /// merchant cart
+    ///     merchant cart
     /// </summary>
     [Table("Offline_MerchantCart")]
     [BsonIgnoreExtraElements]
@@ -16,50 +16,50 @@ namespace Alabo.Industry.Offline.Order.Domain.Entities
     public class MerchantCart : AggregateMongodbUserRoot<MerchantCart>
     {
         /// <summary>
-        /// 店铺id
+        ///     店铺id
         /// </summary>
         [Display(Name = "店铺id")]
         public string MerchantStoreId { get; set; }
 
         /// <summary>
-        /// 商品id
+        ///     商品id
         /// </summary>
         [Display(Name = "商品id")]
         public string MerchantProductId { get; set; }
 
         /// <summary>
-        /// 商品名称
+        ///     商品名称
         /// </summary>
         [Display(Name = "商品名称")]
         public string ProductName { get; set; }
 
         /// <summary>
-        /// SkuId
+        ///     SkuId
         /// </summary>
         [Display(Name = "SkuId")]
         public string SkuId { get; set; }
 
         /// <summary>
-        /// SkuName
+        ///     SkuName
         /// </summary>
         [Display(Name = "SkuName")]
         public string SkuName { get; set; }
 
         /// <summary>
-        /// 销售价
+        ///     销售价
         /// </summary>
         [Display(Name = "销售价")]
         public decimal Price { get; set; }
 
         /// <summary>
-        /// 数量
+        ///     数量
         /// </summary>
         [Display(Name = "数量")]
         public long Count { get; set; }
 
         /// <summary>
-        /// 状态
-        /// 购物车不删除
+        ///     状态
+        ///     购物车不删除
         /// </summary>
         public Status Status { get; set; } = Status.Normal;
     }

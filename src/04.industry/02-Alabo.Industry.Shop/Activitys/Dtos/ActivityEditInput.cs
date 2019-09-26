@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Validations;
 
-namespace Alabo.Industry.Shop.Activitys.Dtos {
-
+namespace Alabo.Industry.Shop.Activitys.Dtos
+{
     /// <summary>
     ///     Class ActivityEditInput.
     /// </summary>
-    public class ActivityEditInput {
-
+    public class ActivityEditInput
+    {
         /// <summary>
         ///     Gets or sets Id标识
         /// </summary>

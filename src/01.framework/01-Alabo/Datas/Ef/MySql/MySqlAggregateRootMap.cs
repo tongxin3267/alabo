@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Alabo.Datas.Ef.Map;
+﻿using Alabo.Datas.Ef.Map;
 using Alabo.Domains.Entities.Core;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Alabo.Datas.Ef.MySql
 {

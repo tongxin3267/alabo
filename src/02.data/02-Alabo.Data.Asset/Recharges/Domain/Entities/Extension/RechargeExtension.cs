@@ -7,16 +7,16 @@ using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Asset.Recharges.Domain.Entities.Extension {
-
+namespace Alabo.App.Asset.Recharges.Domain.Entities.Extension
+{
     /// <summary>
     ///     充值表
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Finace_TradeRecharge")]
     [ClassProperty(Name = "充值管理", Icon = "fa fa-puzzle-piece", Description = "充值管理", PageType = ViewPageType.List)]
-    public class RechargeExtension : BaseViewModel {
-
+    public class RechargeExtension : BaseViewModel
+    {
         /// <summary>
         ///     支付记录
         ///     线上支付时，支付记录必须填写，线下汇款不需要填写

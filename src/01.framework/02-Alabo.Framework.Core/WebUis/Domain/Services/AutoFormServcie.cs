@@ -1,46 +1,51 @@
 ﻿using System;
 using System.Linq;
 using Alabo.AutoConfigs;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Framework.Core.WebUis.Dtos;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Services;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.WebUis.Dtos;
 using Alabo.Helpers;
 using Alabo.Linq.Dynamic;
-using Alabo.UI;
 
-namespace Alabo.Framework.Core.WebUis.Domain.Services {
-
-    public class AutoFormServcie : ServiceBase, IAutoFormServcie {
-
-        public AutoFormServcie(IUnitOfWork unitOfWork) : base(unitOfWork) {
+namespace Alabo.Framework.Core.WebUis.Domain.Services
+{
+    public class AutoFormServcie : ServiceBase, IAutoFormServcie
+    {
+        public AutoFormServcie(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
         }
 
-        public Tuple<ServiceResult, AutoForm> GetView(string type, object id, AutoBaseModel autoModel) {
+        public Tuple<ServiceResult, AutoForm> GetView(string type, object id, AutoBaseModel autoModel)
+        {
             Type typeFind = null;
             object instanceFind = null;
             AutoForm autoForm = null;
             var checkType = Resolve<IUIBaseService>().CheckType(type, ref typeFind, ref instanceFind);
-            if (!checkType.Succeeded) {
-                return new Tuple<ServiceResult, AutoForm>(checkType, new AutoForm());
-            }
+            if (!checkType.Succeeded) return new Tuple<ServiceResult, AutoForm>(checkType, new AutoForm());
 
-            if (instanceFind is IAutoConfig) {
+            if (instanceFind is IAutoConfig)
+            {
                 autoForm = Resolve<IApIAlaboAutoConfigService>().GetView(instanceFind.GetType(), id);
                 return new Tuple<ServiceResult, AutoForm>(ServiceResult.Success, autoForm);
-            } else if (instanceFind is IAutoForm set) {
+            }
+
+            if (instanceFind is IAutoForm set)
+            {
                 autoForm = set.GetView(id, autoModel);
                 return new Tuple<ServiceResult, AutoForm>(ServiceResult.Success, autoForm);
-            } else if (instanceFind is IEntity) {
+            }
+
+            if (instanceFind is IEntity)
+            {
                 var result = DynamicService.ResolveMethod(typeFind.Name, "GetViewById", id);
-                if (result.Item1.Succeeded) {
+                if (result.Item1.Succeeded)
                     autoForm = AutoFormMapping.Convert(result.Item2);
-                } else {
+                else
                     autoForm = AutoFormMapping.Convert(typeFind.FullName);
-                }
 
                 return new Tuple<ServiceResult, AutoForm>(ServiceResult.Success, autoForm);
             }
@@ -48,43 +53,44 @@ namespace Alabo.Framework.Core.WebUis.Domain.Services {
             return new Tuple<ServiceResult, AutoForm>(ServiceResult.FailedWithMessage("未知类型"), new AutoForm());
         }
 
-        public ServiceResult Save(AutoFormInput autoFormInput, AutoBaseModel autoModel) {
+        public ServiceResult Save(AutoFormInput autoFormInput, AutoBaseModel autoModel)
+        {
             //config
-            if (autoFormInput.TypeInstance is IAutoConfig) {
+            if (autoFormInput.TypeInstance is IAutoConfig)
+            {
                 Ioc.Resolve<IApIAlaboAutoConfigService>().Save(autoFormInput.TypeFind, autoFormInput.ModelFind);
-            } else if (autoFormInput.TypeInstance is IAutoForm set) {
+            }
+            else if (autoFormInput.TypeInstance is IAutoForm set)
+            {
                 var result = set.Save(autoFormInput.ModelFind, autoModel);
-                if (!result.Succeeded) {
-                    return ServiceResult.FailedWithMessage(result.ErrorMessages?.FirstOrDefault());
-                }
-            } else if (autoFormInput.TypeInstance is IEntity) {
+                if (!result.Succeeded) return ServiceResult.FailedWithMessage(result.ErrorMessages?.FirstOrDefault());
+            }
+            else if (autoFormInput.TypeInstance is IEntity)
+            {
                 var result = Save(autoFormInput.TypeFind, autoFormInput.ModelFind);
-                if (!result.Succeeded) {
-                    return result;
-                }
+                if (!result.Succeeded) return result;
             }
 
             return ServiceResult.Success;
         }
 
-        private ServiceResult Save(Type type, dynamic model) {
+        private ServiceResult Save(Type type, dynamic model)
+        {
             var find = DynamicService.ResolveMethod(type.Name, "GetSingle", model.Id);
-            if (!find.Item1.Succeeded) {
-                return ServiceResult.FailedWithMessage("参数值为空");
-            }
+            if (!find.Item1.Succeeded) return ServiceResult.FailedWithMessage("参数值为空");
             var entity = find.Item2;
-            if (entity == null) {
+            if (entity == null)
+            {
                 var result = DynamicService.ResolveMethod(type.Name, "Add", model);
-                if (!result.Item1.Succeeded) {
-                    return ServiceResult.FailedWithMessage($"{type.Name},添加失败");
-                }
-            } else {
-                entity = (object)model;
-                var result = DynamicService.ResolveMethod(type.Name, "Update", entity);
-                if (!result.Item1.Succeeded) {
-                    return ServiceResult.FailedWithMessage($"{type.Name},更新失败");
-                }
+                if (!result.Item1.Succeeded) return ServiceResult.FailedWithMessage($"{type.Name},添加失败");
             }
+            else
+            {
+                entity = (object) model;
+                var result = DynamicService.ResolveMethod(type.Name, "Update", entity);
+                if (!result.Item1.Succeeded) return ServiceResult.FailedWithMessage($"{type.Name},更新失败");
+            }
+
             return ServiceResult.Success;
         }
     }

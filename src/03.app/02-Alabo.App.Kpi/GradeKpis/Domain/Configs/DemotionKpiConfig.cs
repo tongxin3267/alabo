@@ -9,8 +9,8 @@ using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using Newtonsoft.Json;
 
-namespace Alabo.App.Kpis.GradeKpis.Domain.Configs {
-
+namespace Alabo.App.Kpis.GradeKpis.Domain.Configs
+{
     /// <summary>
     ///     绩效降职配置
     /// </summary>
@@ -18,8 +18,8 @@ namespace Alabo.App.Kpis.GradeKpis.Domain.Configs {
     [ClassProperty(Name = "绩效降职配置", Icon = "fa fa-cny", Description = "绩效降职配置",
         PageType = ViewPageType.List, SortOrder = 20,
         SideBarType = SideBarType.KpiSideBar)]
-    public class DemotionKpiConfig : BaseViewModel, IAutoConfig {
-
+    public class DemotionKpiConfig : BaseViewModel, IAutoConfig
+    {
         /// <summary>
         ///     Id自增，主键
         /// </summary>
@@ -32,7 +32,8 @@ namespace Alabo.App.Kpis.GradeKpis.Domain.Configs {
         /// <summary>
         ///     会员等级
         /// </summary>
-        [Field(ControlsType = ControlsType.DropdownList, ListShow = true, DisplayMode = DisplayMode.Grade, EditShow = true, SortOrder = 1,
+        [Field(ControlsType = ControlsType.DropdownList, ListShow = true, DisplayMode = DisplayMode.Grade,
+            EditShow = true, SortOrder = 1,
             DataSource = "Alabo.App.Core.User.Domain.Callbacks.UserGradeConfig")]
         [Display(Name = "考核等级")]
         [HelpBlock("考核等级，一个等级降职配置只能有一条，有多条时默认选择第一条")]
@@ -50,7 +51,8 @@ namespace Alabo.App.Kpis.GradeKpis.Domain.Configs {
         /// <summary>
         ///     降职等级
         /// </summary>
-        [Field(ControlsType = ControlsType.DropdownList, ListShow = true, DisplayMode = DisplayMode.Grade, EditShow = true, SortOrder = 1,
+        [Field(ControlsType = ControlsType.DropdownList, ListShow = true, DisplayMode = DisplayMode.Grade,
+            EditShow = true, SortOrder = 1,
             DataSource = "Alabo.App.Core.User.Domain.Callbacks.UserGradeConfig")]
         [Display(Name = "降职等级")]
         [HelpBlock("降职等级")]
@@ -94,7 +96,8 @@ namespace Alabo.App.Kpis.GradeKpis.Domain.Configs {
         [Display(Name = "Kpi项")]
         public IList<KpiItem> KpiItems { get; set; } = new List<KpiItem>();
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Cloud.People.Relationship.Domain.Enums {
-
+namespace Alabo.Cloud.People.Relationship.Domain.Enums
+{
     /// <summary>
     ///     关系图类型
     /// </summary>
     [ClassProperty(Name = "关系图类型")]
-    public enum RelationshipIndexType {
-
+    public enum RelationshipIndexType
+    {
         /// <summary>
         ///     内部合伙人
         /// </summary>

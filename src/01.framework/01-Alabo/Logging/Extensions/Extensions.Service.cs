@@ -1,11 +1,11 @@
 ﻿using System;
-using Exceptionless;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Alabo.Logging.Abstractions;
 using Alabo.Logging.Core;
 using Alabo.Logging.Formats;
 using Alabo.Logging.NLog;
+using Exceptionless;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Alabo.Logging.Extensions
 {

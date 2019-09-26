@@ -7,12 +7,12 @@ using MongoDB.Bson;
 
 namespace Alabo.Cloud.Contracts.Controllers
 {
-
     [ApiExceptionFilter]
     [Route("Api/Contract/[action]")]
-    public class ApiContractController : ApiBaseController<Contract, ObjectId> {
-
-        public ApiContractController() : base() {
+    public class ApiContractController : ApiBaseController<Contract, ObjectId>
+    {
+        public ApiContractController()
+        {
             BaseService = Resolve<IContractService>();
         }
     }

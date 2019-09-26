@@ -5,16 +5,19 @@ using Alabo.Tool.Payment.MiniProgram.Clients;
 using Alabo.Tool.Payment.MiniProgram.Dtos;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Tool.Payment.MiniProgram.Services {
-
-    public class MiniProgramService : ServiceBase, IMiniProgramService {
+namespace Alabo.Tool.Payment.MiniProgram.Services
+{
+    public class MiniProgramService : ServiceBase, IMiniProgramService
+    {
         private readonly IMiniProgramClient _messageApiClient;
 
-        public MiniProgramService(IUnitOfWork unitOfWork) : base(unitOfWork) {
+        public MiniProgramService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
             _messageApiClient = new MiniProgramClient();
         }
 
-        public ApiResult<LoginOutput> Login(LoginInput loginInput) {
+        public ApiResult<LoginOutput> Login(LoginInput loginInput)
+        {
             //var loginOutput = new LoginOutput();
             //var apiResult = _messageApiClient.Login(loginInput);
             //if (apiResult.Status == ResultStatus.Success) {
@@ -38,12 +41,15 @@ namespace Alabo.Tool.Payment.MiniProgram.Services {
             return null;
         }
 
-        public ApiResult<LoginOutput> PubLogin(LoginInput loginInput) {
+        public ApiResult<LoginOutput> PubLogin(LoginInput loginInput)
+        {
             var loginOutput = new LoginOutput();
             var apiResult = _messageApiClient.PubLogin(loginInput);
-            if (apiResult.Status == ResultStatus.Success) {
+            if (apiResult.Status == ResultStatus.Success)
+            {
                 loginOutput.Session = apiResult.Result;
-                if (!loginOutput.Session.openid.IsNullOrEmpty()) {
+                if (!loginOutput.Session.openid.IsNullOrEmpty())
+                {
                     // 如果有注册会员则返回注册会员
                     //var userDetail = Resolve<IUserDetailService>().GetSingle(r => r.OpenId == loginOutput.Session.openid);
                     //if (userDetail != null) {
@@ -52,7 +58,9 @@ namespace Alabo.Tool.Payment.MiniProgram.Services {
                     //    loginOutput.User = Resolve<IUserDetailService>().GetUserOutput(user.Id);
                     //}
                 }
-            } else {
+            }
+            else
+            {
                 var message = apiResult.Message;
                 return ApiResult.Failure<LoginOutput>($"登陆到微信服务器失败:{message}", MessageCodes.ReremoteRequest);
             }

@@ -15,9 +15,10 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
 
-namespace Alabo.App.Asset.BankCards.Dtos {
-
-    public class ViewBankCard : UIBase, IAutoTable<ViewBankCard> {
+namespace Alabo.App.Asset.BankCards.Dtos
+{
+    public class ViewBankCard : UIBase, IAutoTable<ViewBankCard>
+    {
         public ObjectId Id { get; set; }
 
         /// <summary>
@@ -30,7 +31,7 @@ namespace Alabo.App.Asset.BankCards.Dtos {
         public string Name { get; set; }
 
         /// <summary>
-        /// 银行类型
+        ///     银行类型
         /// </summary>
         [Display(Name = "银行类型")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
@@ -58,7 +59,8 @@ namespace Alabo.App.Asset.BankCards.Dtos {
         [Field(ControlsType = ControlsType.TextBox, Width = "150", ListShow = true, SortOrder = 8)]
         public string Address { get; set; }
 
-        public List<TableAction> Actions() {
+        public List<TableAction> Actions()
+        {
             //return new List<TableAction>() {
             //       ToLinkAction("删除", "/Api/BankCard/DeleteBankCard",ActionLinkType.Delete,TableActionType.ColumnAction)
             //};
@@ -66,46 +68,50 @@ namespace Alabo.App.Asset.BankCards.Dtos {
         }
 
         /// <summary>
-        ///
         /// </summary>
-        public PageResult<ViewBankCard> PageTable(object query, AutoBaseModel autoModel) {
+        public PageResult<ViewBankCard> PageTable(object query, AutoBaseModel autoModel)
+        {
             var userInput = ToQuery<ViewBankCardInput>();
             var view = new PagedList<ViewBankCard>();
 
-            if (autoModel.Filter == FilterType.Admin) {
-                var temp = new ExpressionQuery<BankCard> {
+            if (autoModel.Filter == FilterType.Admin)
+            {
+                var temp = new ExpressionQuery<BankCard>
+                {
                     EnablePaging = true,
-                    PageIndex = (int)userInput.PageIndex,
-                    PageSize = (int)15
+                    PageIndex = (int) userInput.PageIndex,
+                    PageSize = 15
                 };
-                if (!userInput.Name.IsNullOrEmpty()) {
-                    temp.And(u => u.Name.Contains(userInput.Name));
-                }
+                if (!userInput.Name.IsNullOrEmpty()) temp.And(u => u.Name.Contains(userInput.Name));
 
-                if (!userInput.Number.IsNullOrEmpty()) {
-                    temp.And(u => u.Number.Contains(userInput.Number));
-                }
+                if (!userInput.Number.IsNullOrEmpty()) temp.And(u => u.Number.Contains(userInput.Number));
 
                 var model = Resolve<IBankCardService>().GetPagedList(temp);
-                foreach (var item in model) {
+                foreach (var item in model)
+                {
                     var outPut = AutoMapping.SetValue<ViewBankCard>(item);
                     outPut.BankCardTypeName = item.Type.GetDisplayName();
                     view.Add(outPut);
                 }
+
                 return ToPageResult(view);
             }
-            if (autoModel.Filter == FilterType.User) {
+
+            if (autoModel.Filter == FilterType.User)
+            {
                 userInput.UserId = autoModel.BasicUser.Id;
                 var model = Resolve<IBankCardService>().GetUserBankCardOutputs(userInput);
-                foreach (var item in model) {
+                foreach (var item in model)
+                {
                     var outPut = AutoMapping.SetValue<ViewBankCard>(item);
                     outPut.BankCardTypeName = item.Type.GetDisplayName();
                     view.Add(outPut);
                 }
+
                 return ToPageResult(view);
-            } else {
-                throw new ValidException("类型权限不正确");
             }
+
+            throw new ValidException("类型权限不正确");
         }
     }
 }

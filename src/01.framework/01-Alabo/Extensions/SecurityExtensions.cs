@@ -3,8 +3,8 @@ using System.Security.Cryptography;
 using System.Text;
 using Alabo.Helpers.Internal;
 
-namespace Alabo.Extensions {
-
+namespace Alabo.Extensions
+{
     /// <summary>
     ///     ///
     ///     <summary>
@@ -14,18 +14,15 @@ namespace Alabo.Extensions {
     ///         2. RSA加密采用 https://github.com/stulzq/DotnetCore.RSA/blob/master/DotnetCore.RSA/RSAHelper.cs
     ///     </summary>
     /// </summary>
-    public static class SecurityExtensions {
-
-        public static string ToMd5HashString(this string s) {
-            if (s.IsNullOrEmpty()) {
-                return s;
-            }
+    public static class SecurityExtensions
+    {
+        public static string ToMd5HashString(this string s)
+        {
+            if (s.IsNullOrEmpty()) return s;
 
             var data = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(s));
             var sb = new StringBuilder();
-            for (var i = 0; i < data.Length; i++) {
-                sb.AppendFormat("{0:x2}", data[i]);
-            }
+            for (var i = 0; i < data.Length; i++) sb.AppendFormat("{0:x2}", data[i]);
 
             return sb.ToString();
         }
@@ -36,7 +33,8 @@ namespace Alabo.Extensions {
         ///     Md5加密，返回16位结果
         /// </summary>
         /// <param name="value">值</param>
-        public static string Md5By16(string value) {
+        public static string Md5By16(string value)
+        {
             return Md5By16(value, Encoding.UTF8);
         }
 
@@ -45,26 +43,29 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="value">值</param>
         /// <param name="encoding">字符编码</param>
-        public static string Md5By16(string value, Encoding encoding) {
+        public static string Md5By16(string value, Encoding encoding)
+        {
             return Md5(value, encoding, 4, 8);
         }
 
         /// <summary>
         ///     Md5加密
         /// </summary>
-        private static string Md5(string value, Encoding encoding, int? startIndex, int? length) {
-            if (string.IsNullOrWhiteSpace(value)) {
-                return string.Empty;
-            }
+        private static string Md5(string value, Encoding encoding, int? startIndex, int? length)
+        {
+            if (string.IsNullOrWhiteSpace(value)) return string.Empty;
 
             var md5 = new MD5CryptoServiceProvider();
             string result;
-            try {
+            try
+            {
                 var hash = md5.ComputeHash(encoding.GetBytes(value));
                 result = startIndex == null
                     ? BitConverter.ToString(hash)
                     : BitConverter.ToString(hash, startIndex.Value, length.Value);
-            } finally {
+            }
+            finally
+            {
                 md5.Clear();
             }
 
@@ -75,7 +76,8 @@ namespace Alabo.Extensions {
         ///     Md5加密，返回32位结果
         /// </summary>
         /// <param name="value">值</param>
-        public static string Md5By32(string value) {
+        public static string Md5By32(string value)
+        {
             return Md5By32(value, Encoding.UTF8);
         }
 
@@ -84,7 +86,8 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="value">值</param>
         /// <param name="encoding">字符编码</param>
-        public static string Md5By32(string value, Encoding encoding) {
+        public static string Md5By32(string value, Encoding encoding)
+        {
             return Md5(value, encoding, null, null);
         }
 
@@ -101,7 +104,8 @@ namespace Alabo.Extensions {
         ///     DES加密
         /// </summary>
         /// <param name="value">待加密的值</param>
-        public static string DesEncrypt(object value) {
+        public static string DesEncrypt(object value)
+        {
             return DesEncrypt(value, DesKey);
         }
 
@@ -110,7 +114,8 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="value">待加密的值</param>
         /// <param name="key">密钥,24位</param>
-        public static string DesEncrypt(object value, string key) {
+        public static string DesEncrypt(object value, string key)
+        {
             return DesEncrypt(value, key, Encoding.UTF8);
         }
 
@@ -120,13 +125,13 @@ namespace Alabo.Extensions {
         /// <param name="value">待加密的值</param>
         /// <param name="key">密钥,24位</param>
         /// <param name="encoding">编码</param>
-        public static string DesEncrypt(object value, string key, Encoding encoding) {
+        public static string DesEncrypt(object value, string key, Encoding encoding)
+        {
             var text = value.SafeString();
-            if (ValidateDes(text, key) == false) {
-                return string.Empty;
-            }
+            if (ValidateDes(text, key) == false) return string.Empty;
 
-            using (var transform = CreateDesProvider(key).CreateEncryptor()) {
+            using (var transform = CreateDesProvider(key).CreateEncryptor())
+            {
                 return GetEncryptResult(text, encoding, transform);
             }
         }
@@ -134,10 +139,9 @@ namespace Alabo.Extensions {
         /// <summary>
         ///     验证Des加密参数
         /// </summary>
-        private static bool ValidateDes(string text, string key) {
-            if (string.IsNullOrWhiteSpace(text) || string.IsNullOrWhiteSpace(key)) {
-                return false;
-            }
+        private static bool ValidateDes(string text, string key)
+        {
+            if (string.IsNullOrWhiteSpace(text) || string.IsNullOrWhiteSpace(key)) return false;
 
             return key.Length == 24;
         }
@@ -145,8 +149,10 @@ namespace Alabo.Extensions {
         /// <summary>
         ///     创建Des加密服务提供程序
         /// </summary>
-        private static TripleDESCryptoServiceProvider CreateDesProvider(string key) {
-            return new TripleDESCryptoServiceProvider {
+        private static TripleDESCryptoServiceProvider CreateDesProvider(string key)
+        {
+            return new TripleDESCryptoServiceProvider
+            {
                 Key = Encoding.ASCII.GetBytes(key),
                 Mode = CipherMode.ECB,
                 Padding = PaddingMode.PKCS7
@@ -156,7 +162,8 @@ namespace Alabo.Extensions {
         /// <summary>
         ///     获取加密结果
         /// </summary>
-        private static string GetEncryptResult(string value, Encoding encoding, ICryptoTransform transform) {
+        private static string GetEncryptResult(string value, Encoding encoding, ICryptoTransform transform)
+        {
             var bytes = encoding.GetBytes(value);
             var result = transform.TransformFinalBlock(bytes, 0, bytes.Length);
             return Convert.ToBase64String(result);
@@ -166,7 +173,8 @@ namespace Alabo.Extensions {
         ///     DES解密
         /// </summary>
         /// <param name="value">加密后的值</param>
-        public static string DesDecrypt(object value) {
+        public static string DesDecrypt(object value)
+        {
             return DesDecrypt(value, DesKey);
         }
 
@@ -175,7 +183,8 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="value">加密后的值</param>
         /// <param name="key">密钥,24位</param>
-        public static string DesDecrypt(object value, string key) {
+        public static string DesDecrypt(object value, string key)
+        {
             return DesDecrypt(value, key, Encoding.UTF8);
         }
 
@@ -185,13 +194,13 @@ namespace Alabo.Extensions {
         /// <param name="value">加密后的值</param>
         /// <param name="key">密钥,24位</param>
         /// <param name="encoding">编码</param>
-        public static string DesDecrypt(object value, string key, Encoding encoding) {
+        public static string DesDecrypt(object value, string key, Encoding encoding)
+        {
             var text = value.SafeString();
-            if (!ValidateDes(text, key)) {
-                return string.Empty;
-            }
+            if (!ValidateDes(text, key)) return string.Empty;
 
-            using (var transform = CreateDesProvider(key).CreateDecryptor()) {
+            using (var transform = CreateDesProvider(key).CreateDecryptor())
+            {
                 return GetDecryptResult(text, encoding, transform);
             }
         }
@@ -199,7 +208,8 @@ namespace Alabo.Extensions {
         /// <summary>
         ///     获取解密结果
         /// </summary>
-        private static string GetDecryptResult(string value, Encoding encoding, ICryptoTransform transform) {
+        private static string GetDecryptResult(string value, Encoding encoding, ICryptoTransform transform)
+        {
             var bytes = Convert.FromBase64String(value);
             var result = transform.TransformFinalBlock(bytes, 0, bytes.Length);
             return encoding.GetString(result);
@@ -217,14 +227,15 @@ namespace Alabo.Extensions {
         /// <summary>
         ///     128位0向量
         /// </summary>
-        private static byte[] Iv {
-            get {
-                if (_iv == null) {
+        private static byte[] Iv
+        {
+            get
+            {
+                if (_iv == null)
+                {
                     var size = 16;
                     _iv = new byte[size];
-                    for (var i = 0; i < size; i++) {
-                        _iv[i] = 0;
-                    }
+                    for (var i = 0; i < size; i++) _iv[i] = 0;
                 }
 
                 return _iv;
@@ -240,7 +251,8 @@ namespace Alabo.Extensions {
         ///     AES加密
         /// </summary>
         /// <param name="value">待加密的值</param>
-        public static string AesEncrypt(string value) {
+        public static string AesEncrypt(string value)
+        {
             return AesEncrypt(value, AesKey);
         }
 
@@ -249,7 +261,8 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="value">待加密的值</param>
         /// <param name="key">密钥</param>
-        public static string AesEncrypt(string value, string key) {
+        public static string AesEncrypt(string value, string key)
+        {
             return AesEncrypt(value, key, Encoding.UTF8);
         }
 
@@ -259,13 +272,13 @@ namespace Alabo.Extensions {
         /// <param name="value">待加密的值</param>
         /// <param name="key">密钥</param>
         /// <param name="encoding">编码</param>
-        public static string AesEncrypt(string value, string key, Encoding encoding) {
-            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(key)) {
-                return string.Empty;
-            }
+        public static string AesEncrypt(string value, string key, Encoding encoding)
+        {
+            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(key)) return string.Empty;
 
             var rijndaelManaged = CreateRijndaelManaged(key);
-            using (var transform = rijndaelManaged.CreateEncryptor(rijndaelManaged.Key, rijndaelManaged.IV)) {
+            using (var transform = rijndaelManaged.CreateEncryptor(rijndaelManaged.Key, rijndaelManaged.IV))
+            {
                 return GetEncryptResult(value, encoding, transform);
             }
         }
@@ -273,8 +286,10 @@ namespace Alabo.Extensions {
         /// <summary>
         ///     创建RijndaelManaged
         /// </summary>
-        private static RijndaelManaged CreateRijndaelManaged(string key) {
-            return new RijndaelManaged {
+        private static RijndaelManaged CreateRijndaelManaged(string key)
+        {
+            return new RijndaelManaged
+            {
                 Key = Convert.FromBase64String(key),
                 Mode = CipherMode.CBC,
                 Padding = PaddingMode.PKCS7,
@@ -286,7 +301,8 @@ namespace Alabo.Extensions {
         ///     AES解密
         /// </summary>
         /// <param name="value">加密后的值</param>
-        public static string AesDecrypt(string value) {
+        public static string AesDecrypt(string value)
+        {
             return AesDecrypt(value, AesKey);
         }
 
@@ -295,7 +311,8 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="value">加密后的值</param>
         /// <param name="key">密钥</param>
-        public static string AesDecrypt(string value, string key) {
+        public static string AesDecrypt(string value, string key)
+        {
             return AesDecrypt(value, key, Encoding.UTF8);
         }
 
@@ -305,13 +322,13 @@ namespace Alabo.Extensions {
         /// <param name="value">加密后的值</param>
         /// <param name="key">密钥</param>
         /// <param name="encoding">编码</param>
-        public static string AesDecrypt(string value, string key, Encoding encoding) {
-            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(key)) {
-                return string.Empty;
-            }
+        public static string AesDecrypt(string value, string key, Encoding encoding)
+        {
+            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(key)) return string.Empty;
 
             var rijndaelManaged = CreateRijndaelManaged(key);
-            using (var transform = rijndaelManaged.CreateDecryptor(rijndaelManaged.Key, rijndaelManaged.IV)) {
+            using (var transform = rijndaelManaged.CreateDecryptor(rijndaelManaged.Key, rijndaelManaged.IV))
+            {
                 return GetDecryptResult(value, encoding, transform);
             }
         }
@@ -325,7 +342,8 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="value">待加密的值</param>
         /// <param name="key">密钥</param>
-        public static string RsaSign(string value, string key) {
+        public static string RsaSign(string value, string key)
+        {
             return RsaSign(value, key, Encoding.UTF8);
         }
 
@@ -335,7 +353,8 @@ namespace Alabo.Extensions {
         /// <param name="value">待加密的值</param>
         /// <param name="key">密钥</param>
         /// <param name="encoding">编码</param>
-        public static string RsaSign(string value, string key, Encoding encoding) {
+        public static string RsaSign(string value, string key, Encoding encoding)
+        {
             return RsaSign(value, key, encoding, RsaType.Rsa);
         }
 
@@ -344,7 +363,8 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="value">待加密的值</param>
         /// <param name="key">密钥</param>
-        public static string Rsa2Sign(string value, string key) {
+        public static string Rsa2Sign(string value, string key)
+        {
             return Rsa2Sign(value, key, Encoding.UTF8);
         }
 
@@ -354,17 +374,17 @@ namespace Alabo.Extensions {
         /// <param name="value">待加密的值</param>
         /// <param name="key">密钥</param>
         /// <param name="encoding">编码</param>
-        public static string Rsa2Sign(string value, string key, Encoding encoding) {
+        public static string Rsa2Sign(string value, string key, Encoding encoding)
+        {
             return RsaSign(value, key, encoding, RsaType.Rsa2);
         }
 
         /// <summary>
         ///     Rsa加密
         /// </summary>
-        private static string RsaSign(string value, string key, Encoding encoding, RsaType type) {
-            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(key)) {
-                return string.Empty;
-            }
+        private static string RsaSign(string value, string key, Encoding encoding, RsaType type)
+        {
+            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(key)) return string.Empty;
 
             var rsa = new RsaHelper(type, encoding, key);
             return rsa.Sign(value);

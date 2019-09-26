@@ -3,28 +3,28 @@ using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Themes.Domain.Entities;
 using MongoDB.Bson;
 
-namespace Alabo.Data.People.Employes.Dtos {
-
+namespace Alabo.Data.People.Employes.Dtos
+{
     /// <summary>
-    /// 权限输入模型
+    ///     权限输入模型
     /// </summary>
-    public class RoleOuput {
-
+    public class RoleOuput
+    {
         /// <summary>
-        /// 管理员后台菜单
+        ///     管理员后台菜单
         /// </summary>
         public List<ThemeOneMenu> Menus { get; set; }
 
         /// <summary>
-        /// 用户权限
+        ///     用户权限
         /// </summary>
         public FilterType FilterType { get; set; }
 
         /// <summary>
-        /// 网址前缀
-        /// 比如后台管理员为： admin/
-        /// 会员中心为 user/
-        /// 城市管理后台admin-city/
+        ///     网址前缀
+        ///     比如后台管理员为： admin/
+        ///     会员中心为 user/
+        ///     城市管理后台admin-city/
         /// </summary>
         public string Prefix { get; set; }
 

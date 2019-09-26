@@ -12,8 +12,8 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Data.People.Circles.UI {
-
+namespace Alabo.Data.People.Circles.UI
+{
     /// <summary>
     ///     商圈
     /// </summary>
@@ -21,8 +21,8 @@ namespace Alabo.Data.People.Circles.UI {
     [Table("Basic_Circle")]
     [ClassProperty(Name = "商圈", Icon = IconFlaticon.map_location, SideBarType = SideBarType.ControlSideBar,
         PageType = ViewPageType.List, PostApi = "Api/Circle/CircleList")]
-    public class CircleForm : UIBase, IAutoForm {
-
+    public class CircleForm : UIBase, IAutoForm
+    {
         /// <summary>
         ///     商圈名称
         /// </summary>
@@ -68,18 +68,20 @@ namespace Alabo.Data.People.Circles.UI {
         public string FullName { get; set; }
 
         /// <summary>
-        /// 转换成Id
+        ///     转换成Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
             var circleId = ToId<long>(id);
             var circleView = Resolve<ICircleService>().GetViewById(circleId);
             var model = AutoMapping.SetValue<CircleForm>(circleView);
             return ToAutoForm(model);
         }
 
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
             var circleView = AutoMapping.SetValue<Circle>(model);
             var result = Resolve<ICircleService>().AddOrUpdate(circleView);
             return new ServiceResult(result);

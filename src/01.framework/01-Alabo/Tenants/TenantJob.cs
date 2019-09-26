@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Quartz;
 using Alabo.Dependency;
 using Alabo.Schedules.Job;
+using Quartz;
 
 namespace Alabo.Tenants
 {

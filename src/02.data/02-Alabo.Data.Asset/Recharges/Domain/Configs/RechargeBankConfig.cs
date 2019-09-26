@@ -6,12 +6,12 @@ using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.Recharges.Domain.Configs {
-
+namespace Alabo.App.Asset.Recharges.Domain.Configs
+{
     [ClassProperty(Name = "收款银行设置", Icon = "fa fa-external-link", Description = "收款设置", SortOrder = 23,
         SideBarType = SideBarType.RechargeSideBar)]
-    public class RechargeBankConfig : AutoConfigBase, IAutoConfig {
-
+    public class RechargeBankConfig : AutoConfigBase, IAutoConfig
+    {
         /// <summary>
         ///     银行名称
         /// </summary>
@@ -46,7 +46,8 @@ namespace Alabo.App.Asset.Recharges.Domain.Configs {
         [Field(ControlsType = ControlsType.TextBox, ListShow = false)]
         public string BankAddress { get; set; }
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

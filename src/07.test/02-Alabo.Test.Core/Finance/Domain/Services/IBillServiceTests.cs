@@ -3,16 +3,16 @@ using System.Linq;
 using Alabo.App.Asset.Accounts.Dtos;
 using Alabo.App.Asset.Bills.Domain.Services;
 using Alabo.App.Asset.Transfers.Domain.Configs;
-using Xunit;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
+using Xunit;
 
 namespace Alabo.Test.Core.Finance.Domain.Services
 {

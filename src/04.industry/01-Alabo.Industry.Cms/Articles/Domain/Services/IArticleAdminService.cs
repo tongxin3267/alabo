@@ -7,13 +7,13 @@ using Alabo.Industry.Cms.Articles.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using MongoDB.Bson;
 
-namespace Alabo.Industry.Cms.Articles.Domain.Services {
-
-    public interface IArticleAdminService : IService<Article, ObjectId> {
+namespace Alabo.Industry.Cms.Articles.Domain.Services
+{
+    public interface IArticleAdminService : IService<Article, ObjectId>
+    {
         /// <summary>
-        /// 获取表Article中的最大Id
+        ///     获取表Article中的最大Id
         /// </summary>
-
         long GetMaxRelationId();
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace Alabo.Industry.Cms.Articles.Domain.Services {
         /// <param name="type"></param>
         /// <param name="pageSize"></param>
         /// <param name="pageIndex"></param>
-        List<Entities.Article> GetArticleListByChannelType(ChannelType type, int pageSize = 0, int pageIndex = 0);
+        List<Article> GetArticleListByChannelType(ChannelType type, int pageSize = 0, int pageIndex = 0);
 
         Article GetViewArticle(ObjectId id);
 
@@ -30,8 +30,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.Services {
 
         List<Article> GetArticleList();
 
-        Tuple<ServiceResult, Entities.Article> Delete(string id);
+        Tuple<ServiceResult, Article> Delete(string id);
 
-        Tuple<ServiceResult, Entities.Article> AddOrUpdate(Article model, HttpRequest request);
+        Tuple<ServiceResult, Article> AddOrUpdate(Article model, HttpRequest request);
     }
 }

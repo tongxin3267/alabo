@@ -10,9 +10,8 @@ namespace Alabo.Industry.Shop.AfterSales
     [AttributeUsage(AttributeTargets.Field)]
     public class RefundTypeAttribute : Attribute
     {
-
         /// <summary>
-        /// 操作类型 用于前端判断
+        ///     操作类型 用于前端判断
         /// </summary>
         public OrderStatus Type { get; set; }
     }

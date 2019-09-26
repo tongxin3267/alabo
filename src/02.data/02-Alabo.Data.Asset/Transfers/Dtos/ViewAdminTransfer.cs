@@ -3,18 +3,19 @@ using System.ComponentModel.DataAnnotations;
 using Alabo.App.Asset.Transfers.Domain.Configs;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+using Alabo.Users.Entities;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Asset.Transfers.Dtos {
-
+namespace Alabo.App.Asset.Transfers.Dtos
+{
     /// <summary>
     ///     Class ViewAdminWithDraw.
     /// </summary>
     [ClassProperty(Name = "转账详情", Icon = "fa fa-puzzle-piece", Description = "转账详情",
         SideBarType = SideBarType.FinanceSideBar)]
-    public class ViewAdminTransfer : BaseViewModel {
-
+    public class ViewAdminTransfer : BaseViewModel
+    {
         /// <summary>
         ///     序列号
         ///     10位数序列号
@@ -32,7 +33,7 @@ namespace Alabo.App.Asset.Transfers.Dtos {
         /// <summary>
         ///     交易用户
         /// </summary>
-        public Users.Entities.User User { get; set; }
+        public User User { get; set; }
 
         /// <summary>
         ///     转出账户
@@ -85,6 +86,6 @@ namespace Alabo.App.Asset.Transfers.Dtos {
         /// </summary>
         public MoneyTypeConfig TragetMoneyType { get; set; }
 
-        public Users.Entities.User TragetUser { get; set; }
+        public User TragetUser { get; set; }
     }
 }

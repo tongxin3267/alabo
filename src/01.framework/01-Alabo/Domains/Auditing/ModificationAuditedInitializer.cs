@@ -81,9 +81,7 @@ namespace Alabo.Domains.Auditing
                 return;
             }
 
-            if (_entity is IModificationAudited<long?>) {
-                InitNullableLong();
-            }
+            if (_entity is IModificationAudited<long?>) InitNullableLong();
         }
 
         /// <summary>

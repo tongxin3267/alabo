@@ -5,13 +5,14 @@ using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
-namespace Alabo.Cloud.Shop.Comments.Controllers {
-
+namespace Alabo.Cloud.Shop.Comments.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/Comment/[action]")]
-    public class ApiCommentController : ApiBaseController<Comment, ObjectId> {
-
-        public ApiCommentController() : base() {
+    public class ApiCommentController : ApiBaseController<Comment, ObjectId>
+    {
+        public ApiCommentController()
+        {
             BaseService = Resolve<ICommentService>();
         }
     }

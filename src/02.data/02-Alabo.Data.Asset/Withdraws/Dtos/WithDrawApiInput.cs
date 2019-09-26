@@ -5,13 +5,13 @@ using Alabo.Domains.Query.Dto;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.Withdraws.Dtos {
-
+namespace Alabo.App.Asset.Withdraws.Dtos
+{
     /// <summary>
     ///     Class WithDrawApiInput.
     /// </summary>
-    public class WithDrawApiInput : ApiInputDto {
-
+    public class WithDrawApiInput : ApiInputDto
+    {
         /// <summary>
         ///     Id
         /// </summary>
@@ -27,7 +27,8 @@ namespace Alabo.App.Asset.Withdraws.Dtos {
         ///     Gets or sets the bank card identifier.
         /// </summary>
         [Display(Name = "银行卡Id")]
-        [Field(ControlsType = ControlsType.DropdownList, EditShow = true, ApiDataSource = "Api/BankCard/GetList?loginUserId={0}", SortOrder = 2)]
+        [Field(ControlsType = ControlsType.DropdownList, EditShow = true,
+            ApiDataSource = "Api/BankCard/GetList?loginUserId={0}", SortOrder = 2)]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         public string BankCardId { get; set; }
 

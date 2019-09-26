@@ -1,13 +1,13 @@
 ﻿using System;
 using Alabo.Industry.Shop.Products.Dtos;
 
-namespace Alabo.Industry.Shop.Orders.Domain.Entities.Extensions {
-
+namespace Alabo.Industry.Shop.Orders.Domain.Entities.Extensions
+{
     /// <summary>
     ///     订单商品表，扩展属性
     /// </summary>
-    public class OrderProductExtension {
-
+    public class OrderProductExtension
+    {
         /// <summary>
         ///     Gets or sets the store moneys. 店铺扣除金额
         /// </summary>
@@ -39,8 +39,8 @@ namespace Alabo.Industry.Shop.Orders.Domain.Entities.Extensions {
     /// <summary>
     ///     订单商品金额
     /// </summary>
-    public class ReduceAmount {
-
+    public class ReduceAmount
+    {
         /// <summary>
         ///     Gets or sets the money type identifier.
         ///     货币类型Id

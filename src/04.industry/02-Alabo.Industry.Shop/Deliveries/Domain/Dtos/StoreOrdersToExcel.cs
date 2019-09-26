@@ -15,10 +15,10 @@ using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.Industry.Shop.Orders.Domain.Services;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos {
-
-    public class StoreOrdersToExcel : UIBase, IAutoForm {
-
+namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos
+{
+    public class StoreOrdersToExcel : UIBase, IAutoForm
+    {
         /// <summary>
         ///     订单状态
         /// </summary>
@@ -37,18 +37,19 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos {
 
         public long UserId { get; set; }
 
-        public AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
             return ToAutoForm(new StoreOrdersToExcel());
         }
 
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
-            var condition = (StoreOrdersToExcel)model;
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
+            var condition = (StoreOrdersToExcel) model;
             var store = Resolve<IShopStoreService>().GetSingle(u => u.UserId == autoModel.BasicUser.Id);
-            if (store == null) {
-                return ServiceResult.FailedWithMessage("非法操作");
-            }
+            if (store == null) return ServiceResult.FailedWithMessage("非法操作");
 
-            var query = new ExpressionQuery<Order> {
+            var query = new ExpressionQuery<Order>
+            {
                 PageIndex = 1,
                 PageSize = 15
             };
@@ -56,11 +57,10 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos {
             query.And(u => u.OrderStatus == condition.Status);
             var view = Resolve<IOrderService>().GetPagedList(query);
             var orders = new List<Order>();
-            foreach (var item in view) {
-                TimeSpan ts = DateTime.Now.Subtract(item.CreateTime);
-                if (ts.Days < condition.Days) {
-                    orders.Add(item);
-                }
+            foreach (var item in view)
+            {
+                var ts = DateTime.Now.Subtract(item.CreateTime);
+                if (ts.Days < condition.Days) orders.Add(item);
             }
 
             view.Result = orders;

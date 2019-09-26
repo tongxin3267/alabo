@@ -9,8 +9,8 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Framework.Basic.Address.Domain.Entities {
-
+namespace Alabo.Framework.Basic.Address.Domain.Entities
+{
     /// <summary>
     ///     用户地址
     /// </summary>
@@ -19,8 +19,8 @@ namespace Alabo.Framework.Basic.Address.Domain.Entities {
     [BsonIgnoreExtraElements]
     [AutoDelete(IsAuto = true)]
     [Table("Address_UserAddress")]
-    public class UserAddress : AggregateMongodbUserRoot<UserAddress> {
-
+    public class UserAddress : AggregateMongodbUserRoot<UserAddress>
+    {
         /// <summary>
         ///     收货人名称
         /// </summary>
@@ -71,7 +71,8 @@ namespace Alabo.Framework.Basic.Address.Domain.Entities {
         /// </summary>
         [Display(Name = "邮政编码")]
         [RegularExpression(@"[0-9]{6}$", ErrorMessage = ErrorMessage.NotMatchFormat)]
-        [Field(ControlsType = ControlsType.Numberic, IsShowBaseSerach = true, IsShowAdvancedSerach = true, Width = "100",
+        [Field(ControlsType = ControlsType.Numberic, IsShowBaseSerach = true, IsShowAdvancedSerach = true,
+            Width = "100",
             ListShow = true, SortOrder = 4)]
         [HelpBlock("请输入所在地邮政编码")]
         public string ZipCode { get; set; }

@@ -6,13 +6,13 @@ using Alabo.Industry.Shop.Orders.Domain.Entities;
 using Alabo.Users.Entities;
 using ZKCloud.Open.LogisticsTracking.kdniao;
 
-namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities.Extensions {
-
+namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities.Extensions
+{
     /// <summary>
     ///     发货记录表
     /// </summary>
-    public class OrderDeliveryExtension : EntityExtension {
-
+    public class OrderDeliveryExtension : EntityExtension
+    {
         /// <summary>
         ///     操作时管理员
         /// </summary>
@@ -44,8 +44,8 @@ namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities.Extensions {
     ///     发货商品信息
     ///     根据OrderProduct来
     /// </summary>
-    public class ProductDeliveryInfo {
-
+    public class ProductDeliveryInfo
+    {
         /// <summary>
         ///     Gets or sets the store identifier.
         /// </summary>

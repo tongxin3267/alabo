@@ -2,13 +2,13 @@
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 
-namespace Alabo.Framework.Core.WebUis.Domain.Services {
-
+namespace Alabo.Framework.Core.WebUis.Domain.Services
+{
     /// <summary>
     ///     通用表单服务
     /// </summary>
-    public interface IAdminTableService : IService {
-
+    public interface IAdminTableService : IService
+    {
         /// <summary>
         ///     导出表格
         /// </summary>
@@ -21,7 +21,7 @@ namespace Alabo.Framework.Core.WebUis.Domain.Services {
         Tuple<ServiceResult, string, string> ToExcel(string type, object query);
 
         /// <summary>
-        /// 导出Excel
+        ///     导出Excel
         /// </summary>
         /// <returns></returns>
         Tuple<ServiceResult, string, string> ToExcel(Type type, dynamic data);

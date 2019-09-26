@@ -5,16 +5,16 @@ using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.Data.People.Users.Domain.Configs {
-
+namespace Alabo.Data.People.Users.Domain.Configs
+{
     [NotMapped]
     /// <summary>
     /// 会员注册选项
     /// </summary>
     [ClassProperty(Name = "用户选项 ", Icon = "fa fa-user", Description = "会员选项", SortOrder = 10,
         SideBarType = SideBarType.UserSideBar)]
-    public class UserConfig : BaseViewModel, IAutoConfig {
-
+    public class UserConfig : BaseViewModel, IAutoConfig
+    {
         /// <summary>
         ///     Gets or sets the recommend redirect URL.
         /// </summary>
@@ -24,7 +24,7 @@ namespace Alabo.Data.People.Users.Domain.Configs {
         public string DefaultPassword { get; set; }
 
         /// <summary>
-        /// 默认时支付密码和登录密码一样,设置新会员默认支付密码时不生效
+        ///     默认时支付密码和登录密码一样,设置新会员默认支付密码时不生效
         /// </summary>
         [Display(Name = "第一次使用支付密码时设置为支付密码")]
         [HelpBlock("第一次使用支付密码时设置为支付密码，注册的时候注册密码为空")]
@@ -39,7 +39,7 @@ namespace Alabo.Data.People.Users.Domain.Configs {
         public string RecommendRedirectUrl { get; set; } = "/Index";
 
         /// <summary>
-        ///    注册自动填充的邮箱后缀
+        ///     注册自动填充的邮箱后缀
         /// </summary>
         [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1)]
         [Display(Name = "注册自动填充的邮箱后缀")]
@@ -121,7 +121,7 @@ namespace Alabo.Data.People.Users.Domain.Configs {
         public bool NeedPhoneVierfyCode { get; set; } = true;
 
         /// <summary>
-        /// 后台添加会员数据自动填充
+        ///     后台添加会员数据自动填充
         /// </summary>
         [Field(ControlsType = ControlsType.Switch, GroupTabId = 1, EditShow = true)]
         [Display(Name = "后台添加会员数据自动填充")]
@@ -131,7 +131,8 @@ namespace Alabo.Data.People.Users.Domain.Configs {
         /// <summary>
         ///     Sets the default.
         /// </summary>
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

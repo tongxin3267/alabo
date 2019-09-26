@@ -8,28 +8,23 @@ using Alabo.Framework.Core.WebUis.Models.Lists;
 using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Asset.Transfers.Controllers {
-
+namespace Alabo.App.Asset.Transfers.Controllers
+{
     /// <summary>
     ///     转账相关的Api接口
     /// </summary>
     [ApiExceptionFilter]
     [Route("Api/Transfer/[action]")]
-    public class ApiTransferController : ApiBaseController {
-
-        public ApiTransferController(
-            ) : base() {
-        }
-
+    public class ApiTransferController : ApiBaseController
+    {
         /// <summary>
         ///     获取后台转账配置
         /// </summary>
         [HttpGet]
-        public ApiResult GetTransferConfis() {
+        public ApiResult GetTransferConfis()
+        {
             var result = Resolve<ITransferService>().GetTransferConfig();
-            if (result != null) {
-                return ApiResult.Success(result);
-            }
+            if (result != null) return ApiResult.Success(result);
 
             return ApiResult.Failure("转账类型获取失败", MessageCodes.ParameterValidationFailure);
         }
@@ -40,10 +35,10 @@ namespace Alabo.App.Asset.Transfers.Controllers {
         /// <param name="parameter">参数</param>
         [HttpPost]
         [ApiAuth]
-        public ApiResult Add([FromBody] TransferAddInput parameter) {
-            if (!this.IsFormValid()) {
+        public ApiResult Add([FromBody] TransferAddInput parameter)
+        {
+            if (!this.IsFormValid())
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
-            }
 
             var serviceResult = Resolve<ITransferService>().Add(parameter);
 
@@ -70,11 +65,10 @@ namespace Alabo.App.Asset.Transfers.Controllers {
         /// <param name="id">Id标识</param>
         [ApiAuth]
         [HttpGet]
-        public ApiResult Get([FromQuery] long loginUserId, long id) {
+        public ApiResult Get([FromQuery] long loginUserId, long id)
+        {
             var result = Resolve<ITransferService>().GetSingle(id, loginUserId);
-            if (result != null) {
-                return ApiResult.Success(result);
-            }
+            if (result != null) return ApiResult.Success(result);
 
             return ApiResult.Failure("没有数据");
         }
@@ -82,7 +76,8 @@ namespace Alabo.App.Asset.Transfers.Controllers {
         [ApiAuth]
         [Display(Description = "转账记录")]
         [HttpGet]
-        public ApiResult<ListOutput> List([FromQuery] ListInput parameter) {
+        public ApiResult<ListOutput> List([FromQuery] ListInput parameter)
+        {
             //var model = Resolve<ITradeService>()
             //    .GetList(u => /*u.UserId == parameter.LoginUserId &&*/ u.Type == TradeType.Transfer).ToList();
             //var userList = Resolve<IUserService>().GetList();

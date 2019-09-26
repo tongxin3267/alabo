@@ -15,17 +15,11 @@ namespace Alabo.Domains.Query
         public override IQueryable<TEntity> Execute(IQueryable<TEntity> query)
         {
             query = base.Execute(query);
-            if (!EnablePaging) {
-                return query;
-            }
+            if (!EnablePaging) return query;
 
-            if (PageSize <= 0) {
-                PageSize = 20;
-            }
+            if (PageSize <= 0) PageSize = 20;
 
-            if (PageIndex <= 0) {
-                PageIndex = 1;
-            }
+            if (PageIndex <= 0) PageIndex = 1;
 
             return query.Skip((PageIndex - 1) * PageSize).Take(PageSize);
         }

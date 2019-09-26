@@ -5,10 +5,10 @@ using Alabo.Validations;
 using MongoDB.Bson;
 using Newtonsoft.Json;
 
-namespace Alabo.Cloud.Support.Domain.ViewModels {
-
-    public class ReplyWorkOrder {
-
+namespace Alabo.Cloud.Support.Domain.ViewModels
+{
+    public class ReplyWorkOrder
+    {
         [JsonConverter(typeof(ObjectIdConverter))]
         public ObjectId Id { get; set; }
 

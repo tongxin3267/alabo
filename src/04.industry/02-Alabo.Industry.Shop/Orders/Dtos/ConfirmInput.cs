@@ -2,10 +2,10 @@
 using Alabo.Domains.Query.Dto;
 using Alabo.Validations;
 
-namespace Alabo.Industry.Shop.Orders.Dtos {
-
-    public class ConfirmInput : ApiInputDto {
-
+namespace Alabo.Industry.Shop.Orders.Dtos
+{
+    public class ConfirmInput : ApiInputDto
+    {
         /// <summary>
         ///     支付密码
         /// </summary>

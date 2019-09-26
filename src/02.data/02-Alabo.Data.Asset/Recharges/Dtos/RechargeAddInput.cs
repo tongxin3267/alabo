@@ -6,15 +6,16 @@ using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.Recharges.Dtos {
-
+namespace Alabo.App.Asset.Recharges.Dtos
+{
     /// <summary>
     ///     Class RechargeAddInput.
     ///     线上和线下充值接口
     /// </summary>
     [ClassProperty(Name = "充值", PostApi = "Api/Recharge/AddOffOnline", SuccessReturn = "Api/Recharge/Get",
         Description = "充值")]
-    public class RechargeAddInput : ApiInputDto {
+    public class RechargeAddInput : ApiInputDto
+    {
         /// <summary>
         ///     充值方式
         ///     线上充值，和线下充值
@@ -25,7 +26,7 @@ namespace Alabo.App.Asset.Recharges.Dtos {
         /// <summary>
         ///     账户Id
         /// </summary>
-       // [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
+        // [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         public Guid MoneyTypeId { get; set; }
 
         ///// <summary>
@@ -51,7 +52,8 @@ namespace Alabo.App.Asset.Recharges.Dtos {
         ///     线下充值时，汇款银行必须填写
         /// </summary>
         [Display(Name = "汇款银行")]
-        [Field(ControlsType = ControlsType.DropdownList, EditShow = false, DataSource = "Alabo.Framework.Core.Enums.Enum.BankType", Width = "80",
+        [Field(ControlsType = ControlsType.DropdownList, EditShow = false,
+            DataSource = "Alabo.Framework.Core.Enums.Enum.BankType", Width = "80",
             SortOrder = 3)]
         public BankType BankType { get; set; }
 

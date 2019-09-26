@@ -6,14 +6,14 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Data.People.Circles.Domain.Entities {
-
+namespace Alabo.Data.People.Circles.Domain.Entities
+{
     [ClassProperty(Name = "商圈")]
     [BsonIgnoreExtraElements]
     [Table("People_Circle")]
     [AutoDelete(IsAuto = true)]
-    public class Circle : AggregateMongodbRoot<Circle> {
-
+    public class Circle : AggregateMongodbRoot<Circle>
+    {
         /// <summary>
         ///     商圈名称
         /// </summary>

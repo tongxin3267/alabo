@@ -14,23 +14,18 @@ using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.Industry.Shop.Orders.Dtos
 {
-
     /// <summary>
     ///     用户购买
     ///     包括立即购买和购物车购买
     /// </summary>
     public class BuyInput : EntityDto
     {
-
         /// <summary>
         ///     Gets or sets 会员Id
         /// </summary>
         [Display(Name = "用户Id")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        public long UserId
-        {
-            get; set;
-        }
+        public long UserId { get; set; }
 
         /// <summary>
         ///     购物订单签名
@@ -38,10 +33,7 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         /// </summary>
         [Display(Name = "缓存Key")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        public string Sign
-        {
-            get; set;
-        }
+        public string Sign { get; set; }
 
         /// <summary>
         ///     订单总金额
@@ -49,10 +41,7 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         [Display(Name = "订单总金额")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [Range(0.00, long.MaxValue, ErrorMessage = ErrorMessage.NameNotInRang)]
-        public decimal TotalAmount
-        {
-            get; set;
-        }
+        public decimal TotalAmount { get; set; }
 
         /// <summary>
         ///     订单商品总数
@@ -60,10 +49,7 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         [Display(Name = "订单商品总数")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [Range(1, long.MaxValue, ErrorMessage = ErrorMessage.NameNotInRang)]
-        public long TotalCount
-        {
-            get; set;
-        }
+        public long TotalCount { get; set; }
 
         /// <summary>
         ///     支付金额，人民币
@@ -71,29 +57,20 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         [Display(Name = "支付金额")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [Range(0.01, long.MaxValue, ErrorMessage = ErrorMessage.NameNotInRang)]
-        public decimal PaymentAmount
-        {
-            get; set;
-        }
+        public decimal PaymentAmount { get; set; }
 
         /// <summary>
         ///     地址Id
         ///     可以为空，必须虚拟商品的是
         /// </summary>
         [Display(Name = "地址Id")]
-        public string AddressId
-        {
-            get; set;
-        }
+        public string AddressId { get; set; }
 
         /// <summary>
         ///     Gets or sets the store order json.
         /// </summary>
         [Display(Name = "订单Json")]
-        public string StoreOrderJson
-        {
-            get; set;
-        }
+        public string StoreOrderJson { get; set; }
 
         /// <summary>
         ///     支付方式Id
@@ -101,20 +78,14 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         /// </summary>
         [Display(Name = "支付方式")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        public PayType PayType
-        {
-            get; set;
-        }
+        public PayType PayType { get; set; }
 
         /// <summary>
         ///     订单类型
         /// </summary>
         [Display(Name = "订单类型")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        public OrderType OrderType
-        {
-            get; set;
-        }
+        public OrderType OrderType { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether this instance is from cart.
@@ -125,10 +96,7 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         /// <summary>
         ///     按店铺生成订单，每个订单一个条记录
         /// </summary>
-        public IList<StoreOrderItem> StoreOrders
-        {
-            get; set;
-        }
+        public IList<StoreOrderItem> StoreOrders { get; set; }
 
         /// <summary>
         ///     Gets or sets the reduce moneys.
@@ -139,10 +107,7 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         /// <summary>
         ///     Gets or sets the reduce moneys json.
         /// </summary>
-        public string ReduceMoneysJson
-        {
-            get; set;
-        }
+        public string ReduceMoneysJson { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether this instance is group buy.
@@ -160,13 +125,10 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         ///     Gets or sets the 活动 identifier.
         ///     活动记录Id，拼团
         /// </summary>
-        public long ActivityRecordId
-        {
-            get; set;
-        }
+        public long ActivityRecordId { get; set; }
 
         /// <summary>
-        /// 优惠券信息, Json数组
+        ///     优惠券信息, Json数组
         /// </summary>
         public string CouponJson { get; set; }
     }
@@ -218,7 +180,7 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         public decimal ExpressAmount { get; set; }
 
         /// <summary>
-        /// 邮费金额
+        ///     邮费金额
         /// </summary>
         public decimal CalculateExpressAmount { get; set; }
 
@@ -229,7 +191,7 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         public decimal ProductAmount { get; set; }
 
         /// <summary>
-        /// 快递方式
+        ///     快递方式
         /// </summary>
         public ExpressType ExpressType { get; set; } = ExpressType.Express;
     }
@@ -239,17 +201,13 @@ namespace Alabo.Industry.Shop.Orders.Dtos
     /// </summary>
     public class StoreOrderProductSkuItem
     {
-
         /// <summary>
         ///     商品Id
         /// </summary>
         [Display(Name = "商品Id")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [Range(1, 99999999, ErrorMessage = ErrorMessage.NameNotCorrect)]
-        public long ProductId
-        {
-            get; set;
-        }
+        public long ProductId { get; set; }
 
         /// <summary>
         ///     商品SKuID
@@ -257,18 +215,12 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         [Display(Name = "商品SKU")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [Range(1, 99999999, ErrorMessage = ErrorMessage.NameNotCorrect)]
-        public long ProductSkuId
-        {
-            get; set;
-        }
+        public long ProductSkuId { get; set; }
 
         /// <summary>
         ///     Gets or sets the store identifier.
         /// </summary>
-        public long StoreId
-        {
-            get; set;
-        }
+        public long StoreId { get; set; }
 
         /// <summary>
         ///     商品数量
@@ -276,10 +228,7 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         [Display(Name = "商品数量")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [Range(1, 99999999, ErrorMessage = ErrorMessage.NameNotCorrect)]
-        public long Count
-        {
-            get; set;
-        }
+        public long Count { get; set; }
 
         /// <summary>
         ///     Gets or sets the amount.
@@ -287,18 +236,12 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         [Display(Name = "订单金额")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [Range(0, 99999999, ErrorMessage = ErrorMessage.NameNotCorrect)]
-        public decimal Amount
-        {
-            get; set;
-        }
+        public decimal Amount { get; set; }
 
         /// <summary>
         ///     Gets or sets the price style identifier.
         /// </summary>
-        public Guid PriceStyleId
-        {
-            get; set;
-        }
+        public Guid PriceStyleId { get; set; }
     }
 
     /// <summary>
@@ -306,30 +249,20 @@ namespace Alabo.Industry.Shop.Orders.Dtos
     /// </summary>
     public class SinglePayInput
     {
-
         /// <summary>
         ///     Gets or sets the orders.
         /// </summary>
-        public IEnumerable<Order> Orders
-        {
-            get; set;
-        }
+        public IEnumerable<Order> Orders { get; set; }
 
         /// <summary>
         ///     Gets or sets the 会员.
         /// </summary>
-        public User User
-        {
-            get; set;
-        }
+        public User User { get; set; }
 
         /// <summary>
         ///     Gets or sets the reduce moneys.
         /// </summary>
-        public List<OrderMoneyItem> ReduceMoneys
-        {
-            get; set;
-        }
+        public List<OrderMoneyItem> ReduceMoneys { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether this instance is admin pay.
@@ -353,51 +286,50 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         public bool IsFromOrder { get; set; } = false;
 
         /// <summary>
-        /// 支付成功后执行的方法
-        /// 注意以下几点：否则无法执行
-        /// 1. 类型必须为void
-        /// 2. 参数
+        ///     支付成功后执行的方法
+        ///     注意以下几点：否则无法执行
+        ///     1. 类型必须为void
+        ///     2. 参数
         /// </summary>
         public BaseServiceMethod AfterSuccess { get; set; }
 
         /// <summary>
-        /// 返回Sql脚本对象
-        /// 注意以下几点
-        /// 1. 返回类型必须为List<String>
-        ///
+        ///     返回Sql脚本对象
+        ///     注意以下几点
+        ///     1. 返回类型必须为List<String>
         /// </summary>
         public BaseServiceMethod ExcecuteSqlList { get; set; }
 
         /// <summary>
-        /// 支付失败后执行的方法
-        /// 注意以下几点：否则无法执行
-        /// 1. 类型必须为void
-        /// 2. 参数
+        ///     支付失败后执行的方法
+        ///     注意以下几点：否则无法执行
+        ///     1. 类型必须为void
+        ///     2. 参数
         /// </summary>
         public BaseServiceMethod AfterFail { get; set; }
 
         /// <summary>
-        /// 支付人
+        ///     支付人
         /// </summary>
         public User OrderUser { get; set; }
 
         /// <summary>
-        /// 分润触发类型
+        ///     分润触发类型
         /// </summary>
         public TriggerType TriggerType { get; set; }
 
         /// <summary>
-        /// 支付订单类型
+        ///     支付订单类型
         /// </summary>
         public CheckoutType CheckoutType { get; set; } = CheckoutType.Order;
 
-         /// <summary>
-        /// 支付成功后跳转链接
+        /// <summary>
+        ///     支付成功后跳转链接
         /// </summary>
         public string RedirectUrl { get; set; }
 
         /// <summary>
-        /// 扩展字段,存json格式
+        ///     扩展字段,存json格式
         /// </summary>
         public string Expansion { get; set; }
 
@@ -412,9 +344,7 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         public CheckoutType Type { get; set; } = 0;
 
         /// <summary>
-        /// 
         /// </summary>
         public string EntityId { get; set; }
-
     }
 }

@@ -16,9 +16,7 @@ namespace Alabo.Extensions
         /// <param name="parameterName">参数名</param>
         public static void CheckNull(this object obj, string parameterName)
         {
-            if (obj == null) {
-                throw new ArgumentNullException(parameterName);
-            }
+            if (obj == null) throw new ArgumentNullException(parameterName);
         }
 
         /// <summary>
@@ -45,9 +43,7 @@ namespace Alabo.Extensions
         /// <param name="value">值</param>
         public static bool IsEmpty(this Guid? value)
         {
-            if (value == null) {
-                return true;
-            }
+            if (value == null) return true;
 
             return value == Guid.Empty;
         }
@@ -58,9 +54,7 @@ namespace Alabo.Extensions
         /// <param name="value">值</param>
         public static bool IsEmpty<T>(this IEnumerable<T> value)
         {
-            if (value == null) {
-                return true;
-            }
+            if (value == null) return true;
 
             return !value.Any();
         }

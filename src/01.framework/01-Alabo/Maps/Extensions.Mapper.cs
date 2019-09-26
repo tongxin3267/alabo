@@ -44,27 +44,19 @@ namespace Alabo.Maps
         /// </summary>
         private static TDestination MapTo<TDestination>(object source, TDestination destination)
         {
-            if (source == null) {
-                throw new ArgumentNullException(nameof(source));
-            }
+            if (source == null) throw new ArgumentNullException(nameof(source));
 
-            if (destination == null) {
-                throw new ArgumentNullException(nameof(destination));
-            }
+            if (destination == null) throw new ArgumentNullException(nameof(destination));
 
             var sourceType = GetType(source);
             var destinationType = GetType(destination);
             var map = GetMap(sourceType, destinationType);
-            if (map != null) {
-                return Mapper.Map(source, destination);
-            }
+            if (map != null) return Mapper.Map(source, destination);
 
             lock (Sync)
             {
                 map = GetMap(sourceType, destinationType);
-                if (map != null) {
-                    return Mapper.Map(source, destination);
-                }
+                if (map != null) return Mapper.Map(source, destination);
 
                 InitMaps(sourceType, destinationType);
             }
@@ -78,18 +70,13 @@ namespace Alabo.Maps
         private static Type GetType(object obj)
         {
             var type = obj.GetType();
-            if (obj is IEnumerable == false) {
-                return type;
-            }
+            if (obj is IEnumerable == false) return type;
 
-            if (type.IsArray) {
-                return type.GetElementType();
-            }
+            if (type.IsArray) return type.GetElementType();
 
             var genericArgumentsTypes = type.GetTypeInfo().GetGenericArguments();
-            if (genericArgumentsTypes == null || genericArgumentsTypes.Length == 0) {
+            if (genericArgumentsTypes == null || genericArgumentsTypes.Length == 0)
                 throw new ArgumentException("泛型类型参数不能为空");
-            }
 
             return genericArgumentsTypes[0];
         }
@@ -132,9 +119,7 @@ namespace Alabo.Maps
                 Mapper.Initialize(config =>
                 {
                     ClearConfig();
-                    foreach (var item in maps) {
-                        config.CreateMap(item.SourceType, item.DestinationType);
-                    }
+                    foreach (var item in maps) config.CreateMap(item.SourceType, item.DestinationType);
 
                     config.CreateMap(sourceType, destinationType);
                 });

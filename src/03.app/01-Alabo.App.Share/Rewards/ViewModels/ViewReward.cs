@@ -9,16 +9,16 @@ using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Share.Rewards.ViewModels {
-
+namespace Alabo.App.Share.Rewards.ViewModels
+{
     /// <summary>
-    /// 分润配置
+    ///     分润配置
     /// </summary>
     [ClassProperty(Name = "分润配置", Icon = "fa fa-puzzle-piece", Description = "分润配置", ListApi = "Api/Reward/List",
         PageType = ViewPageType.List, PostApi = "Api/Reward/List")]
     [BsonIgnoreExtraElements]
-    public class ViewReward : BaseViewModel {
-
+    public class ViewReward : BaseViewModel
+    {
         /// <summary>
         ///     分润ID ，主键自增
         /// </summary>

@@ -10,12 +10,14 @@ using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Helpers;
 using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
 using Newtonsoft.Json;
+using Convert = System.Convert;
 
-namespace Alabo.Industry.Shop.Deliveries.Domain.CallBacks {
-
+namespace Alabo.Industry.Shop.Deliveries.Domain.CallBacks
+{
     [NotMapped]
     /// <summary>
     /// 主题市场
@@ -24,8 +26,8 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.CallBacks {
         GroupName = "Core",
         SideBarType = SideBarType.SupplierSideBar)]
     // SideBar = "Shop/StoreSideBar")]
-    public class StoreMarketConfig : AutoConfigBase, IAutoConfig {
-
+    public class StoreMarketConfig : AutoConfigBase, IAutoConfig
+    {
         [Field(ControlsType = ControlsType.DropdownList, ListShow = true)]
         [Display(Name = "市场名称")]
         [Required]
@@ -47,38 +49,40 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.CallBacks {
         [Display(Name = "是否默认")]
         public bool IsDefault { get; set; }
 
-        public void SetDefault() {
-            var list = Alabo.Helpers.Ioc.Resolve<IAutoConfigService>().GetList<StoreMarketConfig>();
-            if (list == null || list.Count == 0) {
+        public void SetDefault()
+        {
+            var list = Ioc.Resolve<IAutoConfigService>().GetList<StoreMarketConfig>();
+            if (list == null || list.Count == 0)
+            {
                 var configs = new List<StoreMarketConfig>();
                 var config = new StoreMarketConfig();
-                foreach (MarketEnum item in Enum.GetValues(typeof(MarketEnum))) {
-                    config = new StoreMarketConfig {
+                foreach (MarketEnum item in Enum.GetValues(typeof(MarketEnum)))
+                {
+                    config = new StoreMarketConfig
+                    {
                         MarketGuid = item
                     };
-                    if (item == MarketEnum.Custom) {
+                    if (item == MarketEnum.Custom)
                         config.Id = Guid.NewGuid();
-                    } else {
+                    else
                         config.Id = item.GetFieldAttribute().GuidId.ToGuid();
-                    }
 
                     config.Name = item.GetDisplayName();
-                    if (Convert.ToInt32(item) > 5) {
-                        config.Status = Status.Freeze;
-                    }
+                    if (Convert.ToInt32(item) > 5) config.Status = Status.Freeze;
 
                     config.IsDefault = true;
                     configs.Add(config);
                 }
 
                 var typeclassProperty = config.GetType().GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
-                var autoConfig = new AutoConfig {
+                var autoConfig = new AutoConfig
+                {
                     Type = config.GetType().FullName,
 
                     LastUpdated = DateTime.Now,
                     Value = JsonConvert.SerializeObject(configs)
                 };
-                Alabo.Helpers.Ioc.Resolve<IAutoConfigService>().AddOrUpdate(autoConfig);
+                Ioc.Resolve<IAutoConfigService>().AddOrUpdate(autoConfig);
             }
         }
     }
