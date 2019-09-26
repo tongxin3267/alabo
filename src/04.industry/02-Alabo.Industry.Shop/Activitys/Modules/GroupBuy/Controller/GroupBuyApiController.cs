@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Core.WebApis.Controller;
 using Alabo.App.Core.Api.Dtos;
-using Alabo.App.Core.Api.Filter;
+using Alabo.Core.WebApis.Filter;
 using Alabo.App.Core.Themes.Dtos.Service;
 using Alabo.App.Shop.Activitys.Modules.GroupBuy.Dtos;
 using Alabo.App.Shop.Activitys.Modules.GroupBuy.Service;

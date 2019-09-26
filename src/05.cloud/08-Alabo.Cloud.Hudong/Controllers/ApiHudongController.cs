@@ -1,5 +1,5 @@
 using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
+using Alabo.Core.WebApis.Filter;
 using Alabo.App.Share.HuDong.Domain.Entities;
 using Alabo.App.Share.HuDong.Domain.Services;
 using Alabo.App.Share.HuDong.Dtos;

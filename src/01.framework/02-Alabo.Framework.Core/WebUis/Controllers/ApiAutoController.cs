@@ -1,6 +1,6 @@
 ﻿using Alabo.App.Core.Admin.Domain.Services;
 using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
+using Alabo.Core.WebApis.Filter;
 using Alabo.App.Core.UI.Domain.Services;
 using Alabo.App.Core.UI.Dtos;
 using Alabo.Domains.Entities.Core;

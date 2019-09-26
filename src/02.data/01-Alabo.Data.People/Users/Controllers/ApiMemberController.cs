@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Senparc.Weixin.WxOpen.AdvancedAPIs.Sns;
 using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
+using Alabo.Core.WebApis.Filter;
 using Alabo.App.Core.ApiStore.CallBacks;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User.Domain.Dtos;

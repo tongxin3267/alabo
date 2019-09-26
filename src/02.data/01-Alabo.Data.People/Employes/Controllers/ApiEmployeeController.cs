@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
+using Alabo.Core.WebApis.Filter;
 using Alabo.App.Core.Common;
 using Alabo.App.Core.Employes.Domain.Dtos;
 using Alabo.App.Core.Employes.Domain.Entities;

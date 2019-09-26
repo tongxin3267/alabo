@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Core.WebApis.Controller;
 using Alabo.App.Core.Api.Domain.Service;
-using Alabo.App.Core.Api.Filter;
+using Alabo.Core.WebApis.Filter;
 using Alabo.App.Market.PromotionalMaterial.Domain.Entities;
 using Alabo.App.Market.PromotionalMaterial.Domain.Services;
 using Alabo.Extensions;

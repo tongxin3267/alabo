@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
+using Alabo.Core.WebApis.Filter;
 using Alabo.App.Shop.Category.Domain.Services;
 using Alabo.RestfulApi;
 using ZKCloud.Open.ApiBase.Models;

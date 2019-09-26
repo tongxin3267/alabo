@@ -1,5 +1,5 @@
 using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
+using Alabo.Core.WebApis.Filter;
 using Alabo.Data.Things.Brands.Domain.Entities;
 using Alabo.Data.Things.Brands.Domain.Services;
 using Microsoft.AspNetCore.Mvc;

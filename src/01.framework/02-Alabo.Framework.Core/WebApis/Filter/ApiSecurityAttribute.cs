@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Api.Filter {
+namespace Alabo.Core.WebApis.Filter {
 
     public class ApiSecurityAttribute : ExceptionFilterAttribute {
 

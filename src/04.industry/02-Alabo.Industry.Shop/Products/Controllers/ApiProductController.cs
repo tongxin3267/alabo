@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Alabo.App.Core.Admin.Domain.Services;
 using Alabo.Core.WebApis.Controller;
 using Alabo.App.Core.Api.Domain.Service;
-using Alabo.App.Core.Api.Filter;
+using Alabo.Core.WebApis.Filter;
 using Alabo.App.Core.Common.Domain.Dtos;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Employes.Domain.Services;

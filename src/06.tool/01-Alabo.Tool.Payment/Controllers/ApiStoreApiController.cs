@@ -1,5 +1,5 @@
 ﻿using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
+using Alabo.Core.WebApis.Filter;
 using Alabo.App.Core.ApiStore.MiniProgram.Dtos;
 using Alabo.App.Core.ApiStore.MiniProgram.Services;
 using Alabo.App.Core.ApiStore.WeiXinMp.Models;

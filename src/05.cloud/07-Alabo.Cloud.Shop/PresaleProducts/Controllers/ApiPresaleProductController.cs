@@ -1,6 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
-using Alabo.App.Core.Api.Filter;
+using Alabo.Core.WebApis.Filter;
 using Alabo.App.Core.Common;
 using Alabo.App.Core.User;
 using ZKCloud.Open.ApiBase.Configuration;
