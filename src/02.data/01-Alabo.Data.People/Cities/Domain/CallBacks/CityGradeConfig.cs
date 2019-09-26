@@ -1,5 +1,5 @@
 ﻿using Alabo.App.Core.Common;
-using Alabo.App.Core.Common.Domain.Entities;
+using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User;
 using Alabo.AutoConfigs;
@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
+
 using Alabo.AutoConfigs;
 
 namespace Alabo.App.Agent.Citys.Domain.CallBacks {

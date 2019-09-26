@@ -1,4 +1,4 @@
-﻿using Alabo.App.Core.Common.Domain.Entities;
+﻿using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Core.Tasks.Extensions;

@@ -14,7 +14,7 @@ using ZKCloud.Open.ApiBase.Configuration;
 using ZKCloud.Open.ApiBase.Models;
 using ZKCloud.Open.Message.Models;
 using ZKCloud.Open.Message.Services;
-using MessageQueue = Alabo.App.Core.Common.Domain.Entities.MessageQueue;
+using MessageQueue = Alabo.Framework.Basic.Relations.Domain.Entities.MessageQueue;
 
 namespace Alabo.App.Core.Common.Job {
 

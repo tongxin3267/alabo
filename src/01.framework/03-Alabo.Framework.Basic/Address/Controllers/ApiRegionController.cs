@@ -6,7 +6,7 @@ using System.Linq;
 using Alabo.Core.WebApis.Controller;
 using Alabo.Core.WebApis.Filter;
 using Alabo.App.Core.Common.Domain.Dtos;
-using Alabo.App.Core.Common.Domain.Entities;
+using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.Core.Enums.Enum;
 using Alabo.Domains.Entities;

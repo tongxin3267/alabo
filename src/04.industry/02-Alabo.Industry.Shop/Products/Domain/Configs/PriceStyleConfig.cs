@@ -7,7 +7,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using System.Linq;
 using System.Reflection;
 using Alabo.App.Core.Common;
-using Alabo.App.Core.Common.Domain.Entities;
+using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Shop.Product.Domain.Enums;
@@ -94,7 +94,7 @@ namespace Alabo.App.Shop.Product.Domain.CallBacks {
         //[HelpBlock("如果商城模式需要特殊字段时候，可以使用高级编辑器，需要开启设置所属高级编辑器")]
         //public bool IsUserAdvanceEditor { get; set; } = false;
 
-        //[Field("所属高级编辑器", ControlsType.DropdownList, SortOrder = 6, ListShow = false, DataSource = "Alabo.App.Core.Common.Domain.Entities.AdvanceEditor")]
+        //[Field("所属高级编辑器", ControlsType.DropdownList, SortOrder = 6, ListShow = false, DataSource = "Alabo.Framework.Basic.Relations.Domain.Entities.AdvanceEditor")]
         //[Display(Name = "所属高级编辑器")]
         //[HelpBlock("如果商城模式需要特殊字段时候，可以使用高级编辑器，需要开启开启高级编辑器.<a href='/Admin/AdvanceEditor/index'>配置高级编辑器</a>")]
         //public long AdvanceEditorId { get; set; }
