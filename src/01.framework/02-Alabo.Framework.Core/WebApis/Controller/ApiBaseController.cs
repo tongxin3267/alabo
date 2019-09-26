@@ -1,24 +1,19 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.AspNetCore.Mvc.Filters;
-using System;
+﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
+using Alabo.App.Core.Api.Controller;
 using Alabo.App.Core.Api.Domain.CallBacks;
 using Alabo.App.Core.Api.Filter;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.User;
 using Alabo.AutoConfigs.Services;
 using Alabo.Extensions;
 using Alabo.Helpers;
-using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 using Alabo.Runtime;
 using Alabo.UI;
-using Alabo.Web.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Mvc.Filters;
+using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Api.Controller {
+namespace Alabo.Core.WebApis.Controller {
 
     public abstract class ApiBaseController : ApiExtensionController {
         protected AccessToken Token;

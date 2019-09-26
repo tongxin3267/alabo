@@ -31,6 +31,7 @@ using Alabo.App.Core.Finance.Domain.Entities.Extension;
 using Alabo.Core.Enums.Enum;
 using Alabo.Linq.Dynamic;
 using Alabo.App.Core.Finance.Dtos;
+using Alabo.Core.WebApis.Controller;
 
 namespace Alabo.App.Core.Finance.Controllers {
 

@@ -13,6 +13,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Services;
+using Alabo.Core.WebApis.Controller;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Core.ApiStore.Controllers {

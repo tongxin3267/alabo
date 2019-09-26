@@ -7,6 +7,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 using System.Linq;
 using Alabo.App.Core.Api.Controller;
+using Alabo.Core.WebApis.Controller;
 
 namespace Alabo.App.Core.Api.Swagger {
 

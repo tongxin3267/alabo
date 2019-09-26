@@ -9,6 +9,7 @@ using Alabo.App.Cms.Articles.Domain.Services;
 using Alabo.App.Core.Api.Controller;
 using Alabo.App.Core.Api.Filter;
 using Alabo.App.Core.Common.Domain.Services;
+using Alabo.Core.WebApis.Controller;
 using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
 using Alabo.RestfulApi;

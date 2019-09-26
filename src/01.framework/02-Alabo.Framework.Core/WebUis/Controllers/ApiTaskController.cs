@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Diagnostics;
 using System.IO;
+using Alabo.Core.WebApis.Controller;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Core.UI.Controllers {
