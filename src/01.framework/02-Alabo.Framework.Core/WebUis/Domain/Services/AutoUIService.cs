@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Alabo.Core.Reflections.Services;
+using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
@@ -16,11 +17,10 @@ using Alabo.UI.AutoLists;
 using Alabo.UI.AutoNews;
 using Alabo.UI.AutoPreviews;
 using Alabo.UI.AutoReports;
-using Alabo.UI.AutoTables;
 using Alabo.UI.AutoTasks;
 using Alabo.UI.AutoVideos;
 
-namespace Alabo.App.Core.Admin.Domain.Services {
+namespace Alabo.Core.WebUis.Domain.Services {
 
     public class AutoUIService : ServiceBase, IAutoUIService {
 

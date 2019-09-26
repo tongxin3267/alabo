@@ -5,6 +5,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 using Alabo.Cache;
+using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Extensions;
@@ -12,7 +13,6 @@ using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.UI.AutoForms;
 using Alabo.UI.AutoLists;
-using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.ViewModel;
 
 namespace Alabo.UI

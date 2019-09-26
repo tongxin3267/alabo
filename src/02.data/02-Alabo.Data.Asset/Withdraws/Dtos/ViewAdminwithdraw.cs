@@ -10,12 +10,12 @@ using Alabo.App.Core.Finance.Domain.Entities;
 using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.User.Domain.Callbacks;
+using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Exceptions;
 using Alabo.Mapping;
 using Alabo.UI;
-using Alabo.UI.AutoTables;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 

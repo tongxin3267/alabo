@@ -8,12 +8,12 @@ using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Share.Share.Domain.Entities;
 using Alabo.App.Share.Share.Domain.Services;
+using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
 using ZKCloud.Open.Share.Models;
 using Alabo.UI;
 using Alabo.UI.AutoPreviews;
-using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Share.Share.Domain.Dto {

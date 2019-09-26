@@ -10,6 +10,7 @@ using Alabo.App.Cms.Articles.Domain.Dto;
 using Alabo.App.Cms.Articles.Domain.Services;
 using Alabo.App.Core.Common.Domain.CallBacks;
 using Alabo.App.Core.Common.Domain.Services;
+using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -19,7 +20,6 @@ using Alabo.Mapping;
 using Alabo.Maps;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
-using Alabo.UI.AutoTables;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 

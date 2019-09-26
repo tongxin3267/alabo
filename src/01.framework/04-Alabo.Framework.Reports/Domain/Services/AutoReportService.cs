@@ -5,7 +5,7 @@ using System.Linq;
 using Alabo.App.Core.Reports.Domain.Dtos;
 using Alabo.App.Core.Reports.Domain.Entities;
 using Alabo.App.Core.Reports.Domain.Repositories;
-using Alabo.App.Core.UI.Domain.Services;
+using Alabo.Core.WebUis.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Dtos;

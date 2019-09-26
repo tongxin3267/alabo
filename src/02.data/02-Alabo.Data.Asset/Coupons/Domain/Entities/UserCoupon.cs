@@ -7,10 +7,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using Alabo.App.Shop.Coupons.Domain.Enums;
 using Alabo.App.Shop.Coupons.Domain.Services;
+using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.UI;
-using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Shop.Coupons.Domain.Entities {

@@ -20,6 +20,7 @@ using Alabo.App.Shop.Store.Domain.Dtos;
 using Alabo.App.Shop.Store.Domain.Entities.Extensions;
 using Alabo.App.Shop.Store.Domain.Services;
 using Alabo.AutoConfigs;
+using Alabo.Core.WebUis.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Extensions;

@@ -1,10 +1,10 @@
 ﻿using System;
+using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.UI;
-using Alabo.UI.AutoTables;
 
-namespace Alabo.App.Core.UI.Domain.Services {
+namespace Alabo.Core.WebUis.Domain.Services {
 
     public interface IAutoTableService : IService {
 

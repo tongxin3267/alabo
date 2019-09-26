@@ -1,17 +1,16 @@
 ﻿using System;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Services;
+using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Services;
 using Alabo.Linq.Dynamic;
-using ZKCloud.Open.DynamicExpression;
 using Alabo.UI;
-using Alabo.UI.AutoTables;
+using ZKCloud.Open.DynamicExpression;
 
-namespace Alabo.App.Core.UI.Domain.Services {
+namespace Alabo.Core.WebUis.Domain.Services {
 
     public class AutoTableServcie : ServiceBase, IAutoTableService {
 

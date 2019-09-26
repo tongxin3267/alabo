@@ -11,6 +11,7 @@ using Alabo.App.Offline.Order.Domain.Entities;
 using Alabo.App.Offline.Order.Domain.Entities.Extensions;
 using Alabo.App.Offline.Order.Domain.Enums;
 using Alabo.App.Offline.Order.Domain.Services;
+using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
@@ -19,7 +20,6 @@ using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.UI;
 using Alabo.UI.AutoLists;
-using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Offline.Order.ViewModels

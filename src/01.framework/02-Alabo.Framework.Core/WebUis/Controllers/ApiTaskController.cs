@@ -1,5 +1,4 @@
 ﻿using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.UI.Domain.Services;
 using Alabo.Schedules;
 using Alabo.UI.AutoTasks;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +6,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using Alabo.Core.WebApis.Controller;
+using Alabo.Core.WebUis.Domain.Services;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Core.UI.Controllers {

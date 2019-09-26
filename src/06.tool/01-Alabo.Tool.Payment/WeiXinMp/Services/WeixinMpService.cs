@@ -5,7 +5,6 @@ using Alabo.App.Core.ApiStore.CallBacks;
 using Alabo.App.Core.ApiStore.WeiXinMp.Clients;
 using Alabo.App.Core.ApiStore.WeiXinMp.Models;
 using Alabo.App.Core.Common.Domain.CallBacks;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Services;

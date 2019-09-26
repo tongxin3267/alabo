@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Core.Enums.Enum;
+using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.UI;
-using Alabo.UI.AutoTables;
 using Alabo.Users.Enum;
 using Alabo.Web.Mvc.Attributes;
 

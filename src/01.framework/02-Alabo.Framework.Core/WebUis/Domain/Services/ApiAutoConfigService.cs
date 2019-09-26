@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using Alabo.App.Core.Admin.Domain.Services;
+﻿using System;
 using Alabo.AutoConfigs.Entities;
 using Alabo.AutoConfigs.Services;
 using Alabo.Core.Reflections.Services;
@@ -10,10 +7,9 @@ using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Helpers;
-using Alabo.Reflections;
 using Alabo.UI.AutoForms;
 
-namespace Alabo.App.Core.Common.Domain.Services {
+namespace Alabo.Core.WebUis.Domain.Services {
 
     public class ApIAlaboAutoConfigService : ServiceBase, IApIAlaboAutoConfigService {
 

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.App.Market.UserRightss.Domain.Enums;
 using Alabo.App.Market.UserRightss.Domain.Services;
+using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Mapping;
 using Alabo.UI;
-using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 

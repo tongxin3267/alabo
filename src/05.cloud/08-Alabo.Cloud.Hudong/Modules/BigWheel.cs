@@ -4,10 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using Alabo.App.Share.HuDong.Domain.Entities;
 using Alabo.App.Share.HuDong.Domain.Enums;
 using Alabo.App.Share.HuDong.Domain.Services;
+using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.UI;
-using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Share.HuDong.Modules {

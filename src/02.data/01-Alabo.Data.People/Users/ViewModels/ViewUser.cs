@@ -9,7 +9,6 @@ using Alabo.Extensions;
 using Alabo.Maps;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
-using Alabo.UI.AutoTables;
 using Alabo.Users.Enum;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
@@ -18,6 +17,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Core.WebUis.Design.AutoTables;
 
 namespace Alabo.App.Core.User.ViewModels {
 

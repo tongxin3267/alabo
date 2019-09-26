@@ -5,7 +5,7 @@ using Alabo.Domains.Services;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
 
-namespace Alabo.App.Core.UI.Domain.Services {
+namespace Alabo.Core.WebUis.Domain.Services {
 
     public interface IAutoFormServcie : IService {
 

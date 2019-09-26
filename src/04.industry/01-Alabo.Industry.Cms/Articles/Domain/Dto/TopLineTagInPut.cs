@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Alabo.App.Core.Common.Domain.Services;
+using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
@@ -10,7 +11,6 @@ using Alabo.Helpers;
 using Alabo.Maps;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
-using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Cms.Articles.Domain.Dto

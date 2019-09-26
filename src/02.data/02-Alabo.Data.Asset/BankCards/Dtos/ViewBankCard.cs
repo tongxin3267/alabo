@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.App.Core.Finance.Domain.Services;
+using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
@@ -10,7 +11,6 @@ using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Mapping;
 using Alabo.UI;
-using Alabo.UI.AutoTables;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 

@@ -7,10 +7,10 @@ using Alabo.App.Core.Finance.Domain.Dtos.Bill;
 using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.Core.Enums.Enum;
+using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.UI;
-using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 

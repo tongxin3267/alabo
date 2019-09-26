@@ -6,6 +6,7 @@ using System.Text;
 using Alabo.App.Core.Api.Domain.Service;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Market.FacePay.Domain.Services;
+using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
@@ -13,7 +14,6 @@ using Alabo.Extensions;
 using Alabo.Maps;
 using Alabo.UI;
 using Alabo.UI.AutoLists;
-using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Market.FacePay.Domain.Dtos

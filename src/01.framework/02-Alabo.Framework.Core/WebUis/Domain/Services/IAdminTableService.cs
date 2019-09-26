@@ -1,8 +1,8 @@
-﻿using Alabo.Domains.Entities;
+﻿using System;
+using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
-using System;
 
-namespace Alabo.App.Core.Admin.Domain.Services {
+namespace Alabo.Core.WebUis.Domain.Services {
 
     /// <summary>
     ///     通用表单服务

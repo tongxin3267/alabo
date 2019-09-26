@@ -6,13 +6,13 @@ using System.Text;
 using MongoDB.Bson;
 using Alabo.App.Market.BookingSignup.Domain.Entities;
 using Alabo.App.Market.BookingSignup.Domain.Services;
+using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
 using Alabo.Mapping;
 using Alabo.UI;
-using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Market.BookingSignup.UI {

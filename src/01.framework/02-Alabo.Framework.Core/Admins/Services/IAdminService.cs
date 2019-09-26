@@ -1,7 +1,6 @@
 ﻿using Alabo.Domains.Services;
-using System.Threading.Tasks;
 
-namespace Alabo.App.Core.Admin.Domain.Services {
+namespace Alabo.Core.Admins.Services {
 
     /// <summary>
     /// </summary>

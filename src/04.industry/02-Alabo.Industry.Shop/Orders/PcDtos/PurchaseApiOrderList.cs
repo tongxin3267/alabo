@@ -6,6 +6,7 @@ using Alabo.App.Core.Employes.Domain.Services;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.App.Shop.Store.Domain.Services;
+using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Exceptions;
@@ -13,7 +14,6 @@ using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.UI;
 using Alabo.UI.AutoLists;
-using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Shop.Order.Domain.PcDtos {

@@ -3,7 +3,7 @@ using Alabo.App.Core.Admin.Domain.Repositories;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Services;
 
-namespace Alabo.App.Core.Admin.Domain.Services {
+namespace Alabo.Core.Admins.Services {
 
     /// <summary>
     ///     Class CatalogService.

@@ -8,6 +8,7 @@ using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User;
 using Alabo.App.Core.User.Domain.Callbacks;
+using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
@@ -17,7 +18,6 @@ using Alabo.Mapping;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
 using Alabo.UI.AutoLists;
-using Alabo.UI.AutoTables;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 

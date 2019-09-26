@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.App.Shop.Category.Domain.Services;
+using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Helpers;
 using Alabo.Maps;
 using Alabo.UI;
-using Alabo.UI.AutoTables;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 

@@ -2,7 +2,7 @@
 using Alabo.Domains.Services;
 using Alabo.UI.AutoForms;
 
-namespace Alabo.App.Core.Common.Domain.Services {
+namespace Alabo.Core.WebUis.Domain.Services {
 
     public interface IApIAlaboAutoConfigService : IService {
 
