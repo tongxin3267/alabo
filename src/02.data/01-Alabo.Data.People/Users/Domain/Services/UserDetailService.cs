@@ -17,6 +17,7 @@ using Alabo.Maps;
 using Alabo.UI;
 using System;
 using System.Collections.Generic;
+using Alabo.Core.Enums.Enum;
 using Alabo.Regexs;
 using Alabo.Users.Entities;
 
@@ -417,8 +418,11 @@ namespace Alabo.App.Core.User.Domain.Services {
             if (find == null) {
                 return false;
             } else {
-                return find.Identity;
+                if (find.IdentityStatus == IdentityStatus.Succeed) {
+                    return true;
+                }
             }
+            return false;
         }
     }
 }

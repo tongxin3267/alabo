@@ -126,19 +126,6 @@ namespace Alabo.App.Core.User.ViewModels {
         public IdentityStatus IdentityStatus { get; set; } = IdentityStatus.IsNoPost;
 
         /// <summary>
-        ///
-        /// </summary>
-        [Display(Name = "实名情况")]
-        [HelpBlock("请确定实名")]
-        [Field(ControlsType = ControlsType.Label, GroupTabId = 1, Width = "150", ListShow = false, EditShow = false, SortOrder = 8)]
-        public string IdentityName { get; set; }
-
-        /// <summary>
-        /// 是否实名认证
-        /// </summary>
-        public bool IsIdentity { get; set; }
-
-        /// <summary>
         ///     性别
         /// </summary>
         [Display(Name = "性别")]

@@ -411,7 +411,7 @@ namespace Alabo.App.Core.User.Domain.Repositories {
            ([UserId],[Password],[PayPassword] ,
             [RegionId],[AddressId],[Sex],[Birthday]
            ,[CreateTime],[RegisterIp],[LoginNum],[LastLoginIp],[LastLoginTime],
-           [ModifiedTime],[OpenId],[Avator],[Identity])
+           [ModifiedTime],[OpenId],[Avator],[IdentityStatus])
              VALUES
            (@UserId,@Password,@PayPassword ,
             @RegionId,@AddressId,@Sex,@Birthday
@@ -440,7 +440,7 @@ namespace Alabo.App.Core.User.Domain.Repositories {
                 RepositoryContext.CreateParameter("@Avator", userDetail.Avator ?? ""),
 
                 RepositoryContext.CreateParameter("@ModifiedTime", userDetail.ModifiedTime),
-                RepositoryContext.CreateParameter("@Identity", userDetail.Identity)
+                RepositoryContext.CreateParameter("@Identity", userDetail.IdentityStatus)
 
                 // RepositoryContext.CreateParameter("@Remark",userDetail.Remark)
             };
@@ -518,7 +518,7 @@ namespace Alabo.App.Core.User.Domain.Repositories {
                 OpenId = reader["OpenId"].ToString(),
                 ModifiedTime = reader["ModifiedTime"].ToDateTime(),
                 Remark = reader["Remark"].ToString(),
-                Identity = (bool)reader["Identity"],
+                IdentityStatus = (IdentityStatus)reader["IdentityStatus"],
             };
             return userDetail;
         }
@@ -547,7 +547,6 @@ namespace Alabo.App.Core.User.Domain.Repositories {
 
                 ParentId = reader["ParentId"].ConvertToLong(0),
                 IdentityStatus = (IdentityStatus)reader["IdentityStatus"],
-                IsIdentity = (bool)reader["Identity"],
                 Sex = (Sex)reader["Sex"].ConvertToLong(0),
                 Avator = reader["Avator"].ToString(),
                 CreateTime = reader["CreateTime"].ConvertToDateTime()
