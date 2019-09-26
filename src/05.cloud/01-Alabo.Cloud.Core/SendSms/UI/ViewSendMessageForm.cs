@@ -1,14 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.App.Core.Common.Domain.Services;
+﻿using Alabo.App.Core.Common.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.Mapping;
 using Alabo.Regexs;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Share.Messages.ViewsModels
 {

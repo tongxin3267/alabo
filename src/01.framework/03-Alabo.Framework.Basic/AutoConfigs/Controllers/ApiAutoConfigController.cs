@@ -1,27 +1,26 @@
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Reflection;
 using Alabo.App.Core.Admin.Domain.Services;
-using Alabo.Core.WebApis.Controller;
 using Alabo.App.Core.Api.Domain.Service;
-using Alabo.Core.WebApis.Filter;
-using Alabo.App.Core.Common.Domain.Entities;
+using Alabo.App.Core.AutoConfigs.Domain.Dtos;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Themes.DiyModels.Links;
+using Alabo.AutoConfigs.Entities;
+using Alabo.Core.WebApis.Controller;
+using Alabo.Core.WebApis.Filter;
+using Alabo.Domains.Entities;
 using Alabo.Extensions;
-using ZKCloud.Open.ApiBase.Models;
 using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.ViewFeatures;
-using Alabo.App.Core.AutoConfigs.Domain.Dtos;
-using Alabo.AutoConfigs.Entities;
-using Alabo.Domains.Entities;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
+using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Common.Controllers {
+namespace Alabo.App.Core.Common.Controllers
+{
 
     [ApiExceptionFilter]
     [Route("Api/AutoConfig/[action]")]

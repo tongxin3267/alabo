@@ -1,6 +1,4 @@
 ﻿using Alabo.App.Core.Api.Domain.Service;
-using Alabo.App.Core.Common.Domain.CallBacks;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.User.Domain.Services;
@@ -21,12 +19,14 @@ using Alabo.App.Shop.Product.Domain.Repositories;
 using Alabo.App.Shop.Product.ViewModels;
 using Alabo.App.Shop.Store.Domain.Dtos;
 using Alabo.App.Shop.Store.Domain.Services;
+using Alabo.AutoConfigs;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.Maps;
@@ -34,9 +34,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Alabo.AutoConfigs;
 
-namespace Alabo.App.Shop.Product.Domain.Services {
+namespace Alabo.App.Shop.Product.Domain.Services
+{
 
     /// <summary>
     /// ProductService

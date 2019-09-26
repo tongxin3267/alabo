@@ -1,10 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
+using Alabo.App.Core.Common.Domain.Services;
 using Alabo.Core.WebApis.Controller;
 using Alabo.Core.WebApis.Filter;
-using Alabo.App.Core.Common.Domain.Entities;
-using Alabo.App.Core.Common.Domain.Services;
+using Alabo.Framework.Basic.Relations.Domain.Entities;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Alabo.App.Core.Common.Controllers {
+namespace Alabo.App.Core.Common.Controllers
+{
 
     [ApiExceptionFilter]
     [Route("Api/MessageQueue/[action]")]
