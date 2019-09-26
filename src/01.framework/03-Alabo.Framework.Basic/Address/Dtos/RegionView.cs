@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.Framework.Basic.Relations.Domain.Entities {
+namespace Alabo.Framework.Basic.Address.Dtos {
 
     public class RegionView {
         public string Label { get; set; }

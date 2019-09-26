@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.Common.Domain.Dtos {
+namespace Alabo.Framework.Basic.Relations.Dtos {
 
     /// <summary>
     ///     级联数据类型：包含分类与标签

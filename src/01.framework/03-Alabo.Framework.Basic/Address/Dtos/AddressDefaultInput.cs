@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
 using Alabo.Validations;
 
-namespace Alabo.App.Core.User.Domain.Dtos {
+namespace Alabo.Framework.Basic.Address.Dtos {
 
     /// <summary>
     ///     默认地址修改

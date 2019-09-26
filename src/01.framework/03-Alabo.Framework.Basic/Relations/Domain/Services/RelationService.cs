@@ -1,5 +1,7 @@
-﻿using Alabo.App.Core.Common.Domain.Dtos;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -7,18 +9,14 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.Relations.Domain.Entities;
+using Alabo.Framework.Core.Reflections.Interfaces;
+using Alabo.Framework.Core.WebUis.Models.Links;
 using Alabo.Reflections;
 using Alabo.Runtime;
 using Alabo.Web.Mvc.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Alabo.Framework.Basic.Relations.Domain.Services;
-using Alabo.Framework.Core.Reflections.Interfaces;
-using Alabo.Framework.Core.WebUis.Models.Links;
 
-namespace Alabo.App.Core.Common.Domain.Services {
+namespace Alabo.Framework.Basic.Relations.Domain.Services {
 
     public class RelationService : ServiceBase<Relation, long>, IRelationService {
 

@@ -1,14 +1,12 @@
-using MongoDB.Bson;
 using System;
-using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Users.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Tasks.Domain.Services {
+namespace Alabo.Framework.Basic.Grades.Domain.Services {
 
     public class UpgradeRecordService : ServiceBase<UpgradeRecord, ObjectId>, IUpgradeRecordService {
 

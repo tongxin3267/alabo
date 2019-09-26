@@ -8,6 +8,7 @@ using Alabo.App.Shop.Product.Domain.Entities;
 using Alabo.App.Shop.Product.Domain.Enums;
 using Alabo.App.Shop.Store.Domain.Entities.Extensions;
 using Alabo.Domains.Entities;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Validations;
 using Alabo.Web.Mvc.ViewModel;
 

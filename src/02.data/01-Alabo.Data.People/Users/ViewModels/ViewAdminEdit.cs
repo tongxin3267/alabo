@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Users.Entities;
 using Alabo.Users.Enum;
 using Alabo.Web.Mvc.ViewModel;

@@ -1,16 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.App.Core.Common.Domain.Repositories;
-using Alabo.Framework.Core.Reflections.Interfaces;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
-using Alabo.Framework.Basic.Relations.Domain.Services;
+using Alabo.Framework.Basic.Relations.Domain.Entities;
+using Alabo.Framework.Core.Reflections.Interfaces;
 
-namespace Alabo.App.Core.Common.Domain.Services {
+namespace Alabo.Framework.Basic.Relations.Domain.Services {
 
     public class RelationIndexService : ServiceBase<RelationIndex, long>, IRelationIndexService {
 

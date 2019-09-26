@@ -1,16 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
-using MongoDB.Bson;
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Files;
 using Alabo.Helpers;
+using Microsoft.AspNetCore.Http;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Common.Domain.Services {
+namespace Alabo.Framework.Basic.Storages.Domain.Services {
 
     public class StorageFileService : ServiceBase<StorageFile, ObjectId>, IStorageFileService {
 

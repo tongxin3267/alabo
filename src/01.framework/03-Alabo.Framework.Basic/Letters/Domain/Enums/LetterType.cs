@@ -1,7 +1,7 @@
-﻿using Alabo.Web.Mvc.Attributes;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using Alabo.Web.Mvc.Attributes;
 
-namespace ZKCloud.App.Open.Attach.Domain.Enums {
+namespace Alabo.Framework.Basic.Letters.Domain.Enums {
 
     /// <summary>
     /// 站内信

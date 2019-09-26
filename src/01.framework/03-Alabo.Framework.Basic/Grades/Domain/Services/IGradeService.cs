@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;

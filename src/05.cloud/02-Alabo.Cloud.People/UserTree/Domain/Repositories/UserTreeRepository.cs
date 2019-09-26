@@ -10,6 +10,7 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Repositories.Model;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Helpers;
 using Alabo.Users.Entities;
 using Convert = System.Convert;

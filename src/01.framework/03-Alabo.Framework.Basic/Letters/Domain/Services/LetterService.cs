@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Alabo.App.Share.Attach.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
+using Alabo.Framework.Basic.Letters.Domain.Entities;
 using MongoDB.Bson;
 
 namespace Alabo.Framework.Basic.Letters.Domain.Services {

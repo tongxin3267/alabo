@@ -1,5 +1,4 @@
-﻿using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.User.Domain.Dtos;
+﻿using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.ViewModels;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
@@ -12,6 +11,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using Alabo.App.Core.Tasks.Domain.Enums;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Users.Entities;
 using Alabo.Users.Enum;
 using Convert = System.Convert;

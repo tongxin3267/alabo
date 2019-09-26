@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using System.Threading.Tasks;
-using Alabo.App.Core.Common.Job;
 using Alabo.App.Core.Tasks.Job;
 using Alabo.App.Shop.Order.Job;
+using Alabo.Framework.Basic.Notifications.Job;
 using Alabo.Framework.Core.Admins.Job;
 using Alabo.Runtime;
 using Alabo.Schedules;

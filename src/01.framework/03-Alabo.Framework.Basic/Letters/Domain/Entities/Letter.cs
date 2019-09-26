@@ -1,14 +1,12 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Share.Attach.Domain.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Users.Entities;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
-using ZKCloud.App.Open.Attach.Domain.Enums;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Share.Attach.Domain.Entities {
+namespace Alabo.Framework.Basic.Letters.Domain.Entities {
 
     /// <summary>
     ///     站内信

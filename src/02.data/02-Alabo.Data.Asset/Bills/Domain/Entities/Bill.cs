@@ -7,6 +7,7 @@ using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Tenants;
 using Alabo.Web.Mvc.Attributes;
 

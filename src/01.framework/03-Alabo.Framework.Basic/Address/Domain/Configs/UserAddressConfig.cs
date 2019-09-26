@@ -1,7 +1,6 @@
 ﻿using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
 
-namespace Alabo.App.Core.User.Domain.Entities {
+namespace Alabo.Framework.Basic.Address.Domain.Configs {
 
     /// <summary>
     /// 地址配置文件

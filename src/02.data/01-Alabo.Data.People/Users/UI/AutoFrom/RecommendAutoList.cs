@@ -14,6 +14,7 @@ using Alabo.Framework.Core.WebUis.Design.AutoPreviews;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.UI;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;

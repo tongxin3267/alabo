@@ -1,14 +1,13 @@
-﻿using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
-using Quartz;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Alabo.App.Core.Common.Domain;
 using Alabo.Cache;
 using Alabo.Dependency;
 using Alabo.Framework.Basic.Notifications.Domain.Services;
 using Alabo.Regexs;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
+using Quartz;
 using ZKCloud.Open;
 using ZKCloud.Open.ApiBase.Configuration;
 using ZKCloud.Open.ApiBase.Models;
@@ -16,7 +15,7 @@ using ZKCloud.Open.Message.Models;
 using ZKCloud.Open.Message.Services;
 using MessageQueue = Alabo.Framework.Basic.Notifications.Domain.Entities.MessageQueue;
 
-namespace Alabo.App.Core.Common.Job {
+namespace Alabo.Framework.Basic.Notifications.Job {
 
     public class MessageQueueJob : Alabo.Schedules.Job.JobBase {
         private IAdminMeesageApiClient _adminMessageApiClient;

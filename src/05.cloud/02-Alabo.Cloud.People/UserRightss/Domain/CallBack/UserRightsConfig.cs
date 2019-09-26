@@ -9,6 +9,7 @@ using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.AutoConfigs;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 

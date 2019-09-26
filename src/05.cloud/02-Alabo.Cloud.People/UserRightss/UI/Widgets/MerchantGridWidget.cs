@@ -9,6 +9,7 @@ using Alabo.App.Market.UserRightss.Domain.Services;
 using Alabo.Framework.Core.WebUis.Design.Widgets;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Helpers;
 
 namespace Alabo.App.Market.UI.Widgets {

@@ -28,6 +28,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using Alabo.AutoConfigs;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Randoms;
 using ZKCloud.Open.ApiStore.Payment.Modules.Alipay;

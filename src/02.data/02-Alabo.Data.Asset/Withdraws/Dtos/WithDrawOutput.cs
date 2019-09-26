@@ -14,6 +14,7 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Exceptions;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.UI;

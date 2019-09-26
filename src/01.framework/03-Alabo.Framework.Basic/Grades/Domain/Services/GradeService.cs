@@ -1,23 +1,18 @@
-﻿using Alabo.App.Core.Common.Domain.Repositories;
-using Alabo.App.Core.User;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.Framework.Core.Enums.Enum;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Alabo.AutoConfigs.Repositories;
+using Alabo.AutoConfigs.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.AutoConfigs.Repositories;
-using Alabo.AutoConfigs.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
-using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Framework.Basic.Grades.Dtos;
+using Alabo.Framework.Core.Enums.Enum;
 
-namespace Alabo.App.Core.Common.Domain.Services {
+namespace Alabo.Framework.Basic.Grades.Domain.Services {
 
     public class GradeService : ServiceBase, IGradeService {
 

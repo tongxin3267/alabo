@@ -25,6 +25,7 @@ using Alabo.Domains.Entities;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Address.Domain.Services;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Mapping;
 using Alabo.Maps;
 using ZKCloud.Open.ApiBase.Models;

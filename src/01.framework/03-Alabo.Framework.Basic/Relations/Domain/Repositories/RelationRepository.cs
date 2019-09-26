@@ -1,8 +1,8 @@
-﻿using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
+using Alabo.Framework.Basic.Relations.Domain.Entities;
 
-namespace Alabo.App.Core.Common.Domain.Repositories {
+namespace Alabo.Framework.Basic.Relations.Domain.Repositories {
 
     internal class RelationRepository : RepositoryEfCore<Relation, long>, IRelationRepository {
 

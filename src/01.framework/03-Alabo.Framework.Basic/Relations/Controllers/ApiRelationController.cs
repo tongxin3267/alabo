@@ -1,19 +1,18 @@
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.Common.Domain.Dtos;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.Framework.Core.WebUis.Models.Links;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.Framework.Basic.Relations.Domain.Services;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Framework.Core.WebUis.Models.Links;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Common.Controllers {
+namespace Alabo.Framework.Basic.Relations.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/Relation/[action]")]

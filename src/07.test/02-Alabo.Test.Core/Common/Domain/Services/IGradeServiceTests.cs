@@ -4,6 +4,7 @@ using Xunit;
 using Alabo.App.Agent.Citys.Domain.CallBacks;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.UserType.Modules.City;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;

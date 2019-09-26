@@ -9,6 +9,7 @@ using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Market.UserRightss.Domain.Entities;
 using Alabo.App.Market.UserRightss.Domain.Enums;
 using Alabo.Domains.Entities;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Users.Entities;
 using Alabo.Validations;
 

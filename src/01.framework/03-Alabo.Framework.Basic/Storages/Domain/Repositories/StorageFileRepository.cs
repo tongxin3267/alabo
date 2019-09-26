@@ -1,9 +1,8 @@
-using MongoDB.Bson;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Common.Domain.Repositories {
+namespace Alabo.Framework.Basic.Storages.Domain.Repositories {
 
     public class StorageFileRepository : RepositoryMongo<StorageFile, ObjectId>, IStorageFileRepository {
 

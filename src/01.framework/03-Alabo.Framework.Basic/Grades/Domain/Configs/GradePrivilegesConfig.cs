@@ -1,12 +1,4 @@
-﻿using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Entities.Core;
-using Alabo.Domains.Enums;
-using Alabo.Helpers;
-using Alabo.Reflections;
-using Alabo.Web.Mvc.Attributes;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,8 +6,14 @@ using System.Reflection;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
 using Alabo.AutoConfigs.Services;
+using Alabo.Domains.Entities.Core;
+using Alabo.Domains.Enums;
+using Alabo.Helpers;
+using Alabo.Reflections;
+using Alabo.Web.Mvc.Attributes;
+using Newtonsoft.Json;
 
-namespace ZKCloud.App.Core.UserType.Domain.CallBacks {
+namespace Alabo.Framework.Basic.Grades.Domain.Configs {
 
     /// <summary>
     ///     等级特权

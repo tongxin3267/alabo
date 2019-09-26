@@ -13,6 +13,7 @@ using Alabo.Framework.Core.WebUis.Design.AutoPreviews;
 using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using ZKCloud.Open.Share.Models;
 using Alabo.UI;

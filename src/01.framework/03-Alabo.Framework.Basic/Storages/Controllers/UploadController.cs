@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Primitives;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -15,8 +12,11 @@ using System.Text.RegularExpressions;
 using Alabo.Extensions;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.Controllers;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
 
-namespace Alabo.App.Core.Common.Controllers {
+namespace Alabo.Framework.Basic.Storages.Controllers {
 
     [Route("/Web/[Action]")]
     public class UploadController : BaseController {

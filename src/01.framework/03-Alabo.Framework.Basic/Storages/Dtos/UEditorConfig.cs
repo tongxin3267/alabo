@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Newtonsoft.Json.Linq;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using Alabo.Runtime;
+using Microsoft.AspNetCore.Hosting;
+using Newtonsoft.Json.Linq;
 
-namespace Alabo.App.Core.Common {
+namespace Alabo.Framework.Basic.Storages.Dtos {
 
     public class UEditorConfig {
         private static readonly bool noCache = true;

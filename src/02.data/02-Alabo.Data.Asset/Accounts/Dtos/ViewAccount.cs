@@ -5,6 +5,7 @@ using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Regexs;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;

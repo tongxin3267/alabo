@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Alabo.App.Core.AutoConfigs.Domain.Dtos {
+namespace Alabo.Framework.Basic.AutoConfigs.Dtos {
 
     public class AutoConfigDelete {
         public string Type { get; set; }

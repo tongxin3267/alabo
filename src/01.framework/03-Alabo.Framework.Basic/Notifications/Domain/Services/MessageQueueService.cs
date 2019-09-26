@@ -1,16 +1,14 @@
-﻿using Alabo.App.Core.Common.Domain.Repositories;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Alabo.Framework.Basic.Notifications.Domain.Services;
 using ZKCloud.Open.Message.Models;
 using MessageQueue = Alabo.Framework.Basic.Notifications.Domain.Entities.MessageQueue;
 
-namespace Alabo.App.Core.Common.Domain.Services {
+namespace Alabo.Framework.Basic.Notifications.Domain.Services {
 
     public class MessageQueueService : ServiceBase<MessageQueue, long>, IMessageQueueService {
 

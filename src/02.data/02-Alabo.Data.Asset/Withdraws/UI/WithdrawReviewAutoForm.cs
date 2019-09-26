@@ -9,6 +9,7 @@ using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.UI;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
@@ -68,7 +69,7 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
 
         [Display(Name = "提现账户")]
         [Field(ControlsType = ControlsType.DropdownList, EditShow = false,
-            DataSourceType = typeof(Domain.CallBacks.MoneyTypeConfig),
+            DataSourceType = typeof(MoneyTypeConfig),
             SortOrder = 200)]
         public Guid? MoneyTypeId { get; set; } = Guid.Parse("e97ccd1e-1478-49bd-bfc7-e73a5d699000");
 

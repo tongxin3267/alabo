@@ -14,6 +14,7 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Exceptions;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.Maps;
@@ -103,7 +104,7 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
         [Display(Name = "提现账户")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [Field(ControlsType = ControlsType.DropdownList, ListShow = false, EditShow = false,
-            DataSourceType = typeof(Domain.CallBacks.MoneyTypeConfig), IsShowBaseSerach = false,
+            DataSourceType = typeof(MoneyTypeConfig), IsShowBaseSerach = false,
             SortOrder = 200)]
         public Guid MoneyTypeId { get; set; } = Guid.Parse("e97ccd1e-1478-49bd-bfc7-e73a5d699000");
 

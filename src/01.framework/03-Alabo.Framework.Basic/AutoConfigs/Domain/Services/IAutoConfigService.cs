@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Core.WebUis.Models.Links;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json.Linq;

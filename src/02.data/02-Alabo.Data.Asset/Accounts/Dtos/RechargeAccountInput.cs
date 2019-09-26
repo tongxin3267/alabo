@@ -1,6 +1,7 @@
 ﻿using System;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Finance.Domain.Enums;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 
 namespace Alabo.App.Core.Finance.Domain.Dtos.Account {
 

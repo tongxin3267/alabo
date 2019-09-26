@@ -9,6 +9,7 @@ using Alabo.Helpers;
 using System;
 using System.Linq;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Framework.Core.WebUis.Design.Widgets;
 using Alabo.Users.Entities;

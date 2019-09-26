@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Tasks.Domain.Enums {
+namespace Alabo.Framework.Basic.Grades.Domain.Enums {
 
     [ClassProperty(Name = "升级类型")]
     public enum UpgradeType {

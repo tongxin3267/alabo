@@ -1,17 +1,14 @@
-﻿using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.Extensions;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
+using Alabo.Extensions;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.Users.Services;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.User.Controllers {
+namespace Alabo.Framework.Basic.Grades.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/Grade/[action]")]

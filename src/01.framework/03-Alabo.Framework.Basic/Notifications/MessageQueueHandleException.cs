@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alabo.App.Core.Common.Domain {
+namespace Alabo.Framework.Basic.Notifications {
 
     public class MessageQueueHandleException : Exception {
 

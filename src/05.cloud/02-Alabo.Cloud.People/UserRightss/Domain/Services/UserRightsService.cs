@@ -31,13 +31,14 @@ using Alabo.App.Shop.Order.Domain.Entities.Extensions;
 using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
+using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.Valids.Services;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Randoms;
 using Alabo.Regexs;
 using Alabo.Users.Entities;
-using ZKCloud.App.Core.UserType.Domain.CallBacks;
 
 namespace Alabo.App.Market.UserRightss.Domain.Services {
 

@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Alabo.Domains.Services;
+using Microsoft.AspNetCore.Http;
 using MongoDB.Bson;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.Domains.Services;
 
-namespace Alabo.App.Core.Common.Domain.Services {
+namespace Alabo.Framework.Basic.Storages.Domain.Services {
 
     public interface IStorageFileService : IService<StorageFile, ObjectId> {
 

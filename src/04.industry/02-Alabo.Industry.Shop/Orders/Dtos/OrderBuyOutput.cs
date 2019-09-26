@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.Domains.Query.Dto;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
 
 namespace Alabo.App.Shop.Order.Domain.Dtos {
 

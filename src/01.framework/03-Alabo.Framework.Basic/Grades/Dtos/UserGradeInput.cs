@@ -1,10 +1,8 @@
-﻿using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.Domains.Entities;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Validations;
 
-namespace Alabo.App.Core.User.Domain.Dtos {
+namespace Alabo.Framework.Basic.Grades.Dtos {
 
     public class UserGradeInput {
 

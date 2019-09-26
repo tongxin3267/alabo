@@ -8,6 +8,7 @@ using Alabo.App.Core.Finance.ViewModels.Account;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 
 namespace Alabo.App.Core.Finance.Domain.Services {
 

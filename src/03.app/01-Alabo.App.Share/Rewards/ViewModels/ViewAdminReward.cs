@@ -20,6 +20,7 @@ using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.App.Share.Share.Domain.Entities;
 using Alabo.App.Share.Share.Domain.Enums;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Users.Entities;
 using ZKCloud.Open.Share.Models;
 using Alabo.Web.Mvc.Attributes;

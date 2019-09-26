@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.App.Core.User.Domain.Dtos {
+namespace Alabo.Framework.Basic.Address.Dtos {
 
     public class VantAddress {
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.Domains.Repositories;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 
 namespace Alabo.App.Core.User.Domain.Repositories {
 

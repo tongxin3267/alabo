@@ -1,6 +1,6 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Common.Domain {
+namespace Alabo.Framework.Basic.Notifications {
 
     public class MessageResult {
         public ResultType Type { get; set; }

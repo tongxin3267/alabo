@@ -1,11 +1,11 @@
+using Alabo.Framework.Basic.Letters.Domain.Entities;
+using Alabo.Framework.Basic.Letters.Domain.Services;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Share.Attach.Domain.Entities;
-using Alabo.Framework.Basic.Letters.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
-namespace Alabo.App.Share.Attach.Controllers {
+namespace Alabo.Framework.Basic.Letters.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/Letter/[action]")]

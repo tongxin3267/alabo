@@ -4,8 +4,8 @@ using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Validations;
-using ZKCloud.App.Core.UserType.Domain.CallBacks;
 
 namespace Alabo.App.Core.User {
 

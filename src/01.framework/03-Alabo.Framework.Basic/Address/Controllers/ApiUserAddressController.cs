@@ -5,7 +5,7 @@ using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
-namespace Alabo.App.Core.Common.Controllers
+namespace Alabo.Framework.Basic.Address.Controllers
 {
 
     [ApiExceptionFilter]

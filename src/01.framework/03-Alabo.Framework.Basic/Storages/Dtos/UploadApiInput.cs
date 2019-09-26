@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
 using Alabo.Validations;
 
-namespace Alabo.App.Core.Common.Domain.Dtos {
+namespace Alabo.Framework.Basic.Storages.Dtos {
 
     /// <summary>
     ///     文件上传

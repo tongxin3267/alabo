@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.App.Core.Common.Domain.Dtos {
+namespace Alabo.Framework.Basic.Address.Dtos {
 
     public class RegionWithChild {
 
