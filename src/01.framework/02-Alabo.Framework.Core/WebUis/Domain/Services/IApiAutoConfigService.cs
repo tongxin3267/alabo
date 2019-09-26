@@ -1,6 +1,6 @@
 ﻿using System;
+using Alabo.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Services;
-using Alabo.UI.AutoForms;
 
 namespace Alabo.Core.WebUis.Domain.Services {
 

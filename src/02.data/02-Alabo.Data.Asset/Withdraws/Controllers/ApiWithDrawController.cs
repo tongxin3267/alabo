@@ -21,9 +21,9 @@ using Alabo.Extensions;
 using Alabo.Mapping;
 using ZKCloud.Open.ApiBase.Models;
 using Alabo.RestfulApi;
-using Alabo.UI.AutoForms;
 using Alabo.App.Asset.Withdraws.Domain.Services;
 using Alabo.Core.WebApis.Controller;
+using Alabo.Core.WebUis.Design.AutoForms;
 
 namespace Alabo.App.Core.Finance.Controllers {
 

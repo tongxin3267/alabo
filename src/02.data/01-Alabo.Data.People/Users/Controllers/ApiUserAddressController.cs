@@ -15,8 +15,8 @@ using Alabo.Mapping;
 using ZKCloud.Open.ApiBase.Models;
 using Alabo.RestfulApi;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 using System.Linq;
+using Alabo.Core.WebUis.Design.AutoForms;
 using Alabo.Regexs;
 
 namespace Alabo.App.Core.User.Controllers {

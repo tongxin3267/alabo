@@ -13,12 +13,12 @@ using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
-using Alabo.UI.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Core.WebUis.Design.AutoForms;
 
 namespace Alabo.App.Share.Share.Domain.Services {
 

@@ -2,11 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using Alabo.App.Asset.Withdraws.Domain.Services;
 using Alabo.App.Core.Finance.Domain.Services;
+using Alabo.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Core.Finance.UI.AutoForm {
@@ -114,7 +114,7 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
 
         #endregion
 
-        public Alabo.UI.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public Alabo.Core.WebUis.Design.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
             var withDraw = Resolve<IWithdrawService>().GetAdminWithDraw(id.ConvertToLong());
             var form = new WithdrawResultwAutoForm();
             if (withDraw == null) {

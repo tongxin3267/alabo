@@ -1,7 +1,7 @@
 ﻿using System;
+using Alabo.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Entities;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 using Alabo.UI.AutoLists;
 
 namespace Alabo.App.Core.Finance.UI.AutoForm {
@@ -11,7 +11,7 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
     /// </summary>
     public class AssetAutoForm : UIBase, IAutoForm, IAutoList {
 
-        public Alabo.UI.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public Alabo.Core.WebUis.Design.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
             throw new NotImplementedException();
         }
 

@@ -3,10 +3,10 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using Alabo.App.Shop.Activitys.Domain.Entities;
 using Alabo.App.Shop.Activitys.Dtos;
+using Alabo.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
-using Alabo.UI.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 

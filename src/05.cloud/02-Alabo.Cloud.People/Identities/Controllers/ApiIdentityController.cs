@@ -7,9 +7,9 @@ using Alabo.Core.WebApis.Filter;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.Core.Enums.Enum;
+using Alabo.Core.WebUis.Design.AutoForms;
 using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.UI.AutoForms;
 
 namespace Alabo.App.Core.User.Controllers {
 

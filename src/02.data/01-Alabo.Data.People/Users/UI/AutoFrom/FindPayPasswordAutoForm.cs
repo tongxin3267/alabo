@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Services;
+using Alabo.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -10,7 +11,6 @@ using Alabo.Extensions;
 using Alabo.Mapping;
 using Alabo.Regexs;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 

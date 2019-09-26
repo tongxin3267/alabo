@@ -8,12 +8,12 @@ using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Maps;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Core.WebUis.Design.AutoForms;
 using Alabo.Core.WebUis.Design.AutoTables;
 
 namespace Alabo.App.Agent.Citys.Domain.Dtos {

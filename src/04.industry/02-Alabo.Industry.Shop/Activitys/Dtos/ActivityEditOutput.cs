@@ -5,8 +5,8 @@ using System.Text;
 using Alabo.App.Shop.Activitys.Domain.Entities;
 using Alabo.App.Shop.Activitys.Domain.Entities.Extension;
 using Alabo.Core.Enums.Enum;
+using Alabo.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Entities;
-using Alabo.UI.AutoForms;
 using Alabo.Validations;
 
 namespace Alabo.App.Shop.Activitys.Dtos

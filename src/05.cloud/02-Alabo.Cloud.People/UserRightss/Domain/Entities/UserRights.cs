@@ -13,7 +13,6 @@ using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using Alabo.Tenants;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 using Alabo.App.Market.UserRightss.Domain.Services;
 
 namespace Alabo.App.Market.UserRightss.Domain.Entities {

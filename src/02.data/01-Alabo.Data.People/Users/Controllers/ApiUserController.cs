@@ -18,6 +18,7 @@ using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Core.User.ViewModels;
 using Alabo.Core.Enums.Enum;
+using Alabo.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
@@ -25,7 +26,6 @@ using Alabo.Mapping;
 using Alabo.Maps;
 using ZKCloud.Open.ApiBase.Models;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 using Alabo.UI.AutoPreviews;
 using UserDetail = Alabo.Users.Entities.UserDetail;
 

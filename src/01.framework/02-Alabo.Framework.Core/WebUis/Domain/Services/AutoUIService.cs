@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Alabo.Core.Reflections.Services;
+using Alabo.Core.WebUis.Design.AutoForms;
 using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Base.Services;
@@ -9,7 +10,6 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.UI.AutoArticles;
 using Alabo.UI.AutoFaqs;
-using Alabo.UI.AutoForms;
 using Alabo.UI.AutoImages;
 using Alabo.UI.AutoIndexs;
 using Alabo.UI.AutoIntros;

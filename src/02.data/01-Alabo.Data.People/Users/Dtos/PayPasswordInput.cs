@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.App.Core.User.Domain.Services;
+using Alabo.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Mapping;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 

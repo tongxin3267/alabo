@@ -9,11 +9,11 @@ using Alabo.App.Shop.Activitys.Domain.Entities;
 using Alabo.App.Shop.Activitys.Dtos;
 using Alabo.App.Shop.Product.Domain.Entities;
 using Alabo.App.Shop.Product.Domain.Services;
+using Alabo.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Maps;
-using Alabo.UI.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 

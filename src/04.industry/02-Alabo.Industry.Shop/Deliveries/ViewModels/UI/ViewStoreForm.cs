@@ -4,12 +4,12 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Mapping;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.Core.WebUis.Design.AutoForms;
 using Alabo.Validations;
 
 namespace Alabo.App.Shop.Store.ViewModels {

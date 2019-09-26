@@ -6,8 +6,8 @@ using Alabo.Domains.Entities;
 using Alabo.Extensions;
 using Alabo.Maps;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 using System;
+using Alabo.Core.WebUis.Design.AutoForms;
 
 namespace Alabo.App.Agent.County.Domain.Dtos {
 

@@ -2,6 +2,7 @@
 using System.Linq;
 using Alabo.App.Core.UI.Dtos;
 using Alabo.AutoConfigs;
+using Alabo.Core.WebUis.Design.AutoForms;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
@@ -9,7 +10,6 @@ using Alabo.Domains.Services;
 using Alabo.Helpers;
 using Alabo.Linq.Dynamic;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 
 namespace Alabo.Core.WebUis.Domain.Services {
 

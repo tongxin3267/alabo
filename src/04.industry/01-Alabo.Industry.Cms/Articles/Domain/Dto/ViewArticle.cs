@@ -8,6 +8,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using Alabo.App.Cms.Articles.Domain.Entities;
 using Alabo.App.Cms.Articles.Domain.Services;
 using Alabo.App.Core.Common.Domain.CallBacks;
+using Alabo.Core.WebUis.Design.AutoForms;
 using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -15,7 +16,6 @@ using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Maps;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 

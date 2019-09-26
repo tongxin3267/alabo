@@ -10,13 +10,13 @@ using Alabo.App.Cms.Articles.Domain.Entities;
 using Alabo.App.Cms.Articles.Domain.Services;
 using Alabo.App.Core.Common.Domain.CallBacks;
 using Alabo.App.Core.Common.Domain.Services;
+using Alabo.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Mapping;
 using Alabo.Maps;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
@@ -204,7 +204,7 @@ namespace Alabo.App.Cms.Articles.UI.AutoForm
         /// <param name="id"></param>
         /// <param name="autoModel"></param>
         /// <returns></returns>
-        public Alabo.UI.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel)
+        public Alabo.Core.WebUis.Design.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel)
         {
             var dic = autoModel.Query.ToObject<Dictionary<string, string>>();
             dic.TryGetValue("ChannelId", out var channelId);

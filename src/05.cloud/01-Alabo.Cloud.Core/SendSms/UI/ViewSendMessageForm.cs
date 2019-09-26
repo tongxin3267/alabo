@@ -5,10 +5,10 @@ using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.Mapping;
 using Alabo.Regexs;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Core.WebUis.Design.AutoForms;
 
 namespace Alabo.App.Share.Messages.ViewsModels
 {

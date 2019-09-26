@@ -15,7 +15,6 @@ using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
@@ -152,7 +151,7 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
             };
         }
 
-        public Alabo.UI.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public Alabo.Core.WebUis.Design.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
             var result = ToAutoForm(new WithdrawAutoForm());
             result.AlertText = "【提现】将 储值 提取到自己的银行卡";
 

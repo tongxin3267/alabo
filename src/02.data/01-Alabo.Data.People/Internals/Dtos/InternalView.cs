@@ -7,13 +7,13 @@ using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Mapping;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Alabo.Core.WebUis.Design.AutoForms;
 using Alabo.Core.WebUis.Design.AutoTables;
 
 namespace Alabo.App.Agent.Internal.Domain.Dtos {

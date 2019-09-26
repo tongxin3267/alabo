@@ -6,6 +6,7 @@ using System.Linq;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.Core.Enums.Enum;
+using Alabo.Core.WebUis.Design.AutoForms;
 using Alabo.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -15,7 +16,6 @@ using Alabo.Helpers;
 using Alabo.Maps;
 using Alabo.Regexs;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
