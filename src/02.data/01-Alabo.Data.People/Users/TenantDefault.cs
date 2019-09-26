@@ -5,8 +5,8 @@ using Alabo.App.Core.User.Domain.Services;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Enums;
 using Alabo.Helpers;
-using Alabo.Initialize;
 using System;
+using Alabo.Core.Reflections.Interfaces;
 using Alabo.Extensions;
 using Alabo.Users.Entities;
 

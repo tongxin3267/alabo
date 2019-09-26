@@ -1,7 +1,7 @@
 ﻿using System;
 using Alabo.Core.Enums.Enum;
 
-namespace Alabo.App.Core.Common {
+namespace Alabo.Core.Reflections.Interfaces {
 
     /// <summary>
     ///     级联数据继承接口

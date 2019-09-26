@@ -7,6 +7,7 @@ using Alabo.Schedules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Core.Reflections.Interfaces;
 
 namespace Alabo.App.Core.User.Domain.Services {
 

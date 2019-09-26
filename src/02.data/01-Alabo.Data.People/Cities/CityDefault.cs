@@ -7,8 +7,8 @@ using Alabo.App.Agent.Citys.Domain.Services;
 using Alabo.App.Core.Admin;
 using Alabo.App.Core.Employes.Domain.Services;
 using Alabo.App.Core.User.Domain.Services;
+using Alabo.Core.Reflections.Interfaces;
 using Alabo.Helpers;
-using Alabo.Initialize;
 
 namespace Alabo.App.Agent.Citys {
 

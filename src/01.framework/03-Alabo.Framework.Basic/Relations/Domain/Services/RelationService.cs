@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Alabo.Core.Reflections.Interfaces;
 
 namespace Alabo.App.Core.Common.Domain.Services {
 
