@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using MongoDB.Bson;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.Linq.Dynamic;
+using Alabo.Tool.Payment;
 using Alabo.Users.Entities;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Order.Domain.Dtos
+namespace Alabo.Industry.Shop.Orders.Dtos
 {
 
     /// <summary>
@@ -312,7 +310,7 @@ namespace Alabo.App.Shop.Order.Domain.Dtos
         /// <summary>
         ///     Gets or sets the orders.
         /// </summary>
-        public IEnumerable<Entities.Order> Orders
+        public IEnumerable<Order> Orders
         {
             get; set;
         }

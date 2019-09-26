@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using MongoDB.Bson;
-using Alabo.App.Core.Tasks.Domain.Entities;
+using _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Entities;
 using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Tasks.Domain.Repositories {
+namespace _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Repositories {
 
     public interface IShareOrderReportRepository : IRepository<ShareOrderReport, ObjectId> {
 

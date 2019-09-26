@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alabo.App.Core.Tasks.ResultModel {
+namespace Alabo.Data.Things.Orders.ResultModel {
 
     public class AssetsDistributeRuleItem {
 

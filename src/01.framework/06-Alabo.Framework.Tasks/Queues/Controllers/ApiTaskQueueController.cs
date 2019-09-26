@@ -1,14 +1,14 @@
-using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Framework.Tasks.Queues.Domain.Entities;
+using Alabo.Framework.Tasks.Queues.Domain.Servcies;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Tasks.Controllers {
+namespace Alabo.Framework.Tasks.Queues.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/TaskQueue/[action]")]

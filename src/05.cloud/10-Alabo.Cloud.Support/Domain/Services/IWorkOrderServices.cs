@@ -1,10 +1,10 @@
-﻿using MongoDB.Bson;
-using Alabo.App.Cms.Support.Domain.Entities;
-using Alabo.App.Cms.Support.Domain.ViewModels;
+﻿using Alabo.Cloud.Support.Domain.Entities;
+using Alabo.Cloud.Support.Domain.ViewModels;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Cms.Support.Domain.Services {
+namespace Alabo.Cloud.Support.Domain.Services {
 
     public interface IWorkOrderServices : IService<WorkOrder, ObjectId> {
         /// <summary>

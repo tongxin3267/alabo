@@ -1,21 +1,22 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Extensions;
-using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.App.Open.Tasks.Modules;
+using Alabo.App.Share.OpenTasks.Base;
+using Alabo.App.Share.OpenTasks.Modules;
 using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Data.Things.Orders.ResultModel;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Tasks.Queues.Models;
+using Alabo.Framework.Tasks.Schedules.Domain.Enums;
 using Alabo.Users.Dtos;
-using ZKCloud.Open.ApiBase.Models;
 using Alabo.Web.Mvc.Attributes;
+using Newtonsoft.Json;
+using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Open.Tasks.Configs.TeamRange {
+namespace Alabo.App.Share.OpenTasks.Configs.TeamRange {
 
     /// <summary>
     /// Class TeamRangeRateConfig.
@@ -53,7 +54,7 @@ namespace Alabo.App.Open.Tasks.Configs.TeamRange {
     /// Class TeamRangeRateModule.
     /// </summary>
     [TaskModule("23B9A703-6B42-4915-816F-D1208CC7C00B", "团队级差收益(按比例)", SortOrder = 999999, ConfigurationType = typeof(TeamRangeRateConfig), IsSupportMultipleConfiguration = true,
-         FenRunResultType = Core.Tasks.Domain.Enums.FenRunResultType.Price, IsSupportSetDistriRatio = false,
+         FenRunResultType = FenRunResultType.Price, IsSupportSetDistriRatio = false,
          Intro = "不同的等级之间提成比例会有所不同，比如总监A的提成比例为30%，经理B的提成比例为20%,业务员的提成比例为10%。那么经理可以拿到业务员的级差为10%，总监可以拿到经理的级差为10%，业务员的级差为20%",
          RelationshipType = RelationshipType.UserRecommendedRelationship)]
     public class TeamRangeRateModule : AssetAllocationShareModuleBase<TeamRangeRateConfig> {

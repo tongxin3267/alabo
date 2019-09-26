@@ -1,24 +1,17 @@
-using System;
-using Microsoft.AspNetCore.Mvc;
-using Alabo.Framework.Core.WebApis.Filter;
-using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.RestfulApi;
-using Alabo.App.Market.PresaleProducts.Domain.Entities;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.App.Market.PresaleProducts.Domain.Services;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Market.PresaleProducts.Domain.Dtos;
+using Alabo.Cloud.Shop.PresaleProducts.Domain.Dtos;
+using Alabo.Cloud.Shop.PresaleProducts.Domain.Entities;
+using Alabo.Cloud.Shop.PresaleProducts.Domain.Services;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Industry.Shop.Products.Domain.Enums;
+using Alabo.Industry.Shop.Products.Dtos;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
-using Alabo.RestfulApi;
-
-using System.Collections.Generic;
-using MongoDB.Bson;
-using Alabo.App.Shop.Product.Domain.Enums;
-using Alabo.App.Shop.Product.DiyModels;
-using Alabo.App.Shop.Product.Domain.Dtos;
-
-namespace Alabo.App.Market.PresaleProducts.Controllers {
+namespace Alabo.Cloud.Shop.PresaleProducts.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/PresaleProduct/[action]")]

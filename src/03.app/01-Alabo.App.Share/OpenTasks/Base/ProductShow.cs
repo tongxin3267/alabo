@@ -1,8 +1,8 @@
-﻿using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Tasks.Base {
+namespace Alabo.App.Share.OpenTasks.Base {
 
     /// <summary>
     /// 分润在商品上面的展示

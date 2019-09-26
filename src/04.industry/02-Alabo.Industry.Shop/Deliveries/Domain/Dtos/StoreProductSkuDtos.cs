@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.App.Shop.Store.Domain.Dtos {
+namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos {
 
     /// <summary>
     ///     Class StoreProductSkuDtos.

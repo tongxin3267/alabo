@@ -1,11 +1,10 @@
-using MongoDB.Bson;
-using Alabo.App.Core.Markets.EnterpriseCertification.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Markets.EnterpriseCertification.Domain.Repositories {
+namespace Alabo.Cloud.People.Enterprise.Domain.Repositories {
 
-    public class EnterpriseRepository : RepositoryMongo<Enterprise, ObjectId>, IEnterpriseRepository {
+    public class EnterpriseRepository : RepositoryMongo<Entities.Enterprise, ObjectId>, IEnterpriseRepository {
 
         public EnterpriseRepository(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }

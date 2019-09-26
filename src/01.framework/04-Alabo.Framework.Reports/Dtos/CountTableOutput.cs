@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.App.Core.Reports.Domain.Dtos {
+namespace Alabo.Framework.Reports.Dtos {
 
     /// <summary>
     /// 输入报表表格格式

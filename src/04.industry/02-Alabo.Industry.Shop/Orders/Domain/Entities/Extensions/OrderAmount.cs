@@ -1,6 +1,6 @@
-﻿using Alabo.App.Shop.Order.Domain.Enums;
+﻿using Alabo.Industry.Shop.Orders.Domain.Enums;
 
-namespace Alabo.App.Shop.Order.Domain.Entities.Extensions
+namespace Alabo.Industry.Shop.Orders.Domain.Entities.Extensions
 {
 
     /// <summary>

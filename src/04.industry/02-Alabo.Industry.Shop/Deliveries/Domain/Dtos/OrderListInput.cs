@@ -1,7 +1,6 @@
-﻿using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.Domains.Query.Dto;
+﻿using Alabo.Domains.Query.Dto;
 
-namespace Alabo.App.Shop.Store.Domain.Dtos {
+namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos {
 
     /// <summary>
     ///     订单

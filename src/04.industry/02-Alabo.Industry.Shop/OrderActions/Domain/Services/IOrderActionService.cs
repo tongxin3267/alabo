@@ -1,17 +1,19 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Order.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Entities.Extensions;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.App.Shop.Order.ViewModels;
-using Alabo.App.Shop.Order.ViewModels.OrderEdit;
+﻿using System.Collections.Generic;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Framework.Basic.Address.Domain.Entities;
+using Alabo.Industry.Shop.OrderActions.Domain.Entities;
+using Alabo.Industry.Shop.OrderActions.Domain.Enums;
+using Alabo.Industry.Shop.Orders;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.Orders.Dtos;
+using Alabo.Industry.Shop.Orders.ViewModels;
+using Alabo.Industry.Shop.Orders.ViewModels.OrderEdit;
 using Alabo.Users.Entities;
+using Microsoft.AspNetCore.Http;
 
-namespace Alabo.App.Shop.Order.Domain.Services {
+namespace Alabo.Industry.Shop.OrderActions.Domain.Services {
 
     public interface IOrderActionService : IService<OrderAction, long> {
         /// <summary>
@@ -62,7 +64,7 @@ namespace Alabo.App.Shop.Order.Domain.Services {
         /// <param name="order">The order.</param>
         /// <param name="user">The user.</param>
         /// <param name="actionType">Type of the action.</param>
-        void Add(Entities.Order order, User user, OrderActionType actionType);
+        void Add(Order order, User user, OrderActionType actionType);
 
         /// <summary>
         ///     获取所有订单操作方式的特性

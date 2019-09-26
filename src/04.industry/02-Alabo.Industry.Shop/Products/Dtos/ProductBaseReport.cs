@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Shop.Product.Domain.Dtos {
+namespace Alabo.Industry.Shop.Products.Dtos {
 
     /// <summary>
     /// </summary>

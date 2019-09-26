@@ -1,9 +1,8 @@
-﻿using System.Threading.Tasks;
-using Alabo.App.Cms.Articles.Domain.Services;
-using Alabo.Framework.Core.Reflections.Interfaces;
+﻿using Alabo.Framework.Core.Reflections.Interfaces;
 using Alabo.Helpers;
+using Alabo.Industry.Cms.Articles.Domain.Services;
 
-namespace Alabo.App.Cms.Articles {
+namespace Alabo.Industry.Cms.Articles {
 
     public class ArticleDefaultInit : IDefaultInit {
         public bool IsTenant => false;

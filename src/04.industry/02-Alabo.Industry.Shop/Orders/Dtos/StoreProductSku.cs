@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Shop.Store.Domain.Dtos;
 using Alabo.Domains.Query.Dto;
+using Alabo.Industry.Shop.Deliveries.Domain.Dtos;
 
-namespace Alabo.App.Shop.Order.Domain.Dtos {
+namespace Alabo.Industry.Shop.Orders.Dtos {
 
     /// <summary>
     ///     店铺和商品Sku

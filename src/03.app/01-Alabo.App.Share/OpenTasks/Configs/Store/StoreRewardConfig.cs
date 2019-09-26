@@ -1,19 +1,18 @@
-﻿using Alabo.App.Core.Tasks.Extensions;
-using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.App.Open.Tasks.Modules;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Alabo.App.Share.OpenTasks.Base;
+using Alabo.App.Share.OpenTasks.Modules;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Data.Things.Orders.ResultModel;
+using Alabo.Framework.Tasks.Queues.Models;
+using Alabo.Framework.Tasks.Schedules.Domain.Enums;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Open.Tasks.Configs.Store {
+namespace Alabo.App.Share.OpenTasks.Configs.Store {
 
     /// <summary>
     /// Class StoreRewardConfig.
     /// 自身返利
     /// </summary>
-    /// <seealso cref="Alabo.App.Open.Tasks.Base.ShareBaseConfig" />
+    /// <seealso cref="ShareBaseConfig" />
     public class StoreRewardConfig : ShareBaseConfig {
     }
 
@@ -22,8 +21,8 @@ namespace Alabo.App.Open.Tasks.Configs.Store {
     /// </summary>
     [TaskModule(Id, "推荐供应商分润",
         ConfigurationType = typeof(StoreRewardConfig), SortOrder = 999990,
-        IsSupportMultipleConfiguration = true, FenRunResultType = Core.Tasks.Domain.Enums.FenRunResultType.Price,
-        RelationshipType = Core.Tasks.Domain.Enums.RelationshipType.UserRecommendedRelationship,
+        IsSupportMultipleConfiguration = true, FenRunResultType = FenRunResultType.Price,
+        RelationshipType = RelationshipType.UserRecommendedRelationship,
         Intro = "推荐供应商时分润")]
     public class StoreRewardConfigModule : AssetAllocationShareModuleBase<StoreRewardConfig> {
         public const string Id = "0734225B-08C0-4009-9B66-530DB887B200";

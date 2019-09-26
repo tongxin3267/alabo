@@ -1,23 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Grades.Domain.Services;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Mapping;
-using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Market.UserCard.UI {
+namespace Alabo.Cloud.People.UserCard.UI {
 
     /// <summary>
     /// 开卡

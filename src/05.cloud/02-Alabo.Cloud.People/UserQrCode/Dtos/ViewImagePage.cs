@@ -3,7 +3,7 @@ using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.Common.ViewModels {
+namespace Alabo.Cloud.People.UserQrCode.Dtos {
 
     /// <summary>
     /// 图片

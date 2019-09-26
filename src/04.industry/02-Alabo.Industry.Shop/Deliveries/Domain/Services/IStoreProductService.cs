@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Mvc;
-using Alabo.App.Shop.Store.Domain.Dtos;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Industry.Shop.Deliveries.Domain.Dtos;
 
-namespace Alabo.App.Shop.Store.Domain.Services {
+namespace Alabo.Industry.Shop.Deliveries.Domain.Services {
 
     public interface IStoreProductService : IService {
 

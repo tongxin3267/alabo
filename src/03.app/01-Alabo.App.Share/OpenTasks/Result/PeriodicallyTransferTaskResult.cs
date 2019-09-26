@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Tasks.Extensions;
-using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.App.Open.Tasks.Parameter;
+using Alabo.App.Share.OpenTasks.Base;
+using Alabo.App.Share.OpenTasks.Parameter;
 using Alabo.Data.People.Users.Domain.Repositories;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Data.Things.Orders.ResultModel;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Tasks.Queues.Models;
 
-namespace Alabo.App.Open.Tasks.Result {
+namespace Alabo.App.Share.OpenTasks.Result {
 
     public class PeriodicallyTransferTaskResult : ITaskResult {
         public TaskContext Context { get; private set; }

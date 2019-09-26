@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Alabo.App.Market.UserRightss.Domain.Dtos;
-using Alabo.App.Market.UserRightss.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Dtos;
+using Alabo.Cloud.People.UserRightss.Domain.Dtos;
+using Alabo.Cloud.People.UserRightss.Domain.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Industry.Shop.Orders.Dtos;
 
-namespace Alabo.App.Market.UserRightss.Domain.Services
+namespace Alabo.Cloud.People.UserRightss.Domain.Services
 {
 
     public interface IUserRightsService : IService<UserRights, long>

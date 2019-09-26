@@ -1,28 +1,27 @@
-﻿using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.App.Shop.Activitys.Domain.Entities;
-using Alabo.App.Shop.Activitys.Domain.Enum;
-using Alabo.App.Shop.Activitys.Dtos;
-using Alabo.App.Shop.Activitys.Extensions;
-using Alabo.App.Shop.Activitys.ViewModels;
-using Alabo.App.Shop.Product.Domain.CallBacks;
-using Alabo.App.Shop.Product.Domain.Enums;
-using Alabo.App.Shop.Product.Domain.Services;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Industry.Shop.Activitys.Domain.Entities;
+using Alabo.Industry.Shop.Activitys.Domain.Enum;
+using Alabo.Industry.Shop.Activitys.Dtos;
+using Alabo.Industry.Shop.Activitys.Extensions;
+using Alabo.Industry.Shop.Products.Domain.Configs;
+using Alabo.Industry.Shop.Products.Domain.Enums;
+using Alabo.Industry.Shop.Products.Domain.Services;
 using Alabo.Mapping;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Activitys.Modules.GroupBuy.Model
+namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Model
 {
 
     /// <summary>

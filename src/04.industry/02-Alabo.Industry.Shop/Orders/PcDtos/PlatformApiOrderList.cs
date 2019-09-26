@@ -1,25 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.App.Shop.Order.Domain.Services;
-using Alabo.App.Shop.Store.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebApis.Service;
-using Alabo.Framework.Core.WebUis.Design.AutoLists;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Exceptions;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Framework.Core.WebUis.Design.AutoLists;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Helpers;
-using Alabo.Mapping;
-using Alabo.UI;
+using Alabo.Industry.Shop.Deliveries.Domain.Services;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using Alabo.Industry.Shop.Orders.Domain.Services;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Order.Domain.PcDtos {
+namespace Alabo.Industry.Shop.Orders.PcDtos {
 
     /// <summary>
     /// 平台订单列表，只有管理员才可以查看
@@ -42,7 +39,7 @@ namespace Alabo.App.Shop.Order.Domain.PcDtos {
 
             var model = ToQuery<PlatformApiOrderList>();
 
-            var expressionQuery = new ExpressionQuery<Entities.Order>();
+            var expressionQuery = new ExpressionQuery<Order>();
             if (model.OrderStatus > 0) {
                 expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
             }
@@ -77,7 +74,7 @@ namespace Alabo.App.Shop.Order.Domain.PcDtos {
 
             var model = ToQuery<PlatformApiOrderList>();
 
-            var expressionQuery = new ExpressionQuery<Entities.Order> {
+            var expressionQuery = new ExpressionQuery<Order> {
                 PageIndex = 1,
                 EnablePaging = true
             };

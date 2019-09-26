@@ -1,7 +1,6 @@
 using System.Linq;
+using Alabo.App.Share.TaskExecutes.Domain.Services;
 using Xunit;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Open.Tasks.Configs.Area;
 using Alabo.Extensions;
 
 namespace Alabo.Test.Open.Tasks.Configs.Area {

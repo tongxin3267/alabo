@@ -1,7 +1,7 @@
 ﻿using System;
 using Alabo.UI.Enum;
 
-namespace Alabo.App.Shop.Order
+namespace Alabo.Industry.Shop.Orders
 {
 
     /// <summary>

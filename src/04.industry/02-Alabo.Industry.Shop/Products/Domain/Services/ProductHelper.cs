@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Alabo.Industry.Shop.Categories.Domain.Entities;
+using Microsoft.AspNetCore.Http;
 
-namespace Alabo.App.Shop.Product.Domain.Services {
+namespace Alabo.Industry.Shop.Products.Domain.Services {
 
     /// <summary>
     ///     ProductHelper 类为产品帮助工具类
@@ -60,7 +61,7 @@ namespace Alabo.App.Shop.Product.Domain.Services {
         /// <param name="request"></param>
         /// <param name="category"></param>
         public static Entities.Product HanderProperty(Entities.Product product, HttpRequest request,
-            Category.Domain.Entities.Category category) {
+            Category category) {
             // product.ProductPropertys.AllPropertys = new List<PropertyItem>();
             //foreach (var item in category.SalePropertys) {
             //    //var values = category.PropertyValues.Where(r => r.PropertyId == item.Id);
@@ -125,7 +126,7 @@ namespace Alabo.App.Shop.Product.Domain.Services {
         /// <param name="displayProperties"></param>
         /// <param name="category"></param>
         public static void HanderProperty(Entities.Product product, List<Guid> saleProperties,
-            List<Guid> displayProperties, Category.Domain.Entities.Category category) {
+            List<Guid> displayProperties, Category category) {
             //product.ProductPropertys.AllPropertys = new List<PropertyItem>();
             //foreach (var item in category.SalePropertys) {
             //    var values = category.PropertyValues.Where(r => r.PropertyId == item.Id && saleProperties.Contains(r.Id));

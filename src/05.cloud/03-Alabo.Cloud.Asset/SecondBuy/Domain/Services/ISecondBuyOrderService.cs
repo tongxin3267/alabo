@@ -1,12 +1,10 @@
-using System;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
-using Alabo.App.Market.SecondBuy.Domain.Entities;
-using Alabo.Domains.Entities;
 using System.Collections.Generic;
+using Alabo.Cloud.Asset.SecondBuy.Domain.Entities;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.SecondBuy.Domain.Services {
+namespace Alabo.Cloud.Asset.SecondBuy.Domain.Services {
 	public interface ISecondBuyOrderService : IService<SecondBuyOrder, ObjectId>  {
         /// <summary>
         /// ¹ºÂò

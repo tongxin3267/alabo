@@ -5,8 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
-using Alabo.App.Core.ApiStore;
-using Alabo.App.Core.Tasks;
 using Alabo.Apps;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Datas.Ef;
@@ -17,6 +15,7 @@ using Alabo.Extensions;
 using Alabo.Logging.Extensions;
 using Alabo.Runtime;
 using Alabo.Tenants.Extensions;
+using Alabo.Tool.Payment;
 using Alabo.Web.Extensions;
 using Alabo.Web.Mvc;
 

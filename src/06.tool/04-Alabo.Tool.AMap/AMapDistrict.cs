@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.App.Core.ApiStore.AMap.District {
+namespace Alabo.Tool.AMap {
 
     /// <summary>
     ///     高德地图说明

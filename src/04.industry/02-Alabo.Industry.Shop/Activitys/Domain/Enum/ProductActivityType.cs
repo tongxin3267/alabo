@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.Activitys.Modules.BuyPermision.Model;
-using Alabo.App.Shop.Activitys.Modules.MemberDiscount.Model;
-using Alabo.App.Shop.Activitys.Modules.PreSells.Model;
-using Alabo.App.Shop.Activitys.Modules.TimeLimitBuy.Model;
+using Alabo.Industry.Shop.Activitys.Modules.BuyPermision.Model;
+using Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Model;
+using Alabo.Industry.Shop.Activitys.Modules.PreSells.Model;
+using Alabo.Industry.Shop.Activitys.Modules.TimeLimitBuy.Model;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Activitys.Domain.Enum
+namespace Alabo.Industry.Shop.Activitys.Domain.Enum
 {
     /// <summary>
     /// product activity type

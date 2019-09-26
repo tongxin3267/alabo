@@ -1,43 +1,41 @@
-﻿using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Shop.Activitys.Domain.Enum;
-using Alabo.App.Shop.Activitys.Domain.Services;
-using Alabo.App.Shop.Activitys.Modules.BuyPermision.Model;
-using Alabo.App.Shop.Activitys.Modules.MemberDiscount.Callbacks;
-using Alabo.App.Shop.Activitys.Modules.MemberDiscount.Model;
-using Alabo.App.Shop.Activitys.Modules.TimeLimitBuy.Model;
-using Alabo.App.Shop.Category.Domain.Entities;
-using Alabo.App.Shop.Product.DiyModels;
-using Alabo.App.Shop.Product.Domain.CallBacks;
-using Alabo.App.Shop.Product.Domain.Dtos;
-using Alabo.App.Shop.Product.Domain.Entities;
-using Alabo.App.Shop.Product.Domain.Entities.Extensions;
-using Alabo.App.Shop.Product.Domain.Enums;
-using Alabo.App.Shop.Product.Domain.Repositories;
-using Alabo.App.Shop.Product.ViewModels;
-using Alabo.App.Shop.Store.Domain.Dtos;
-using Alabo.App.Shop.Store.Domain.Services;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Alabo.AutoConfigs;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.Helpers;
-using Alabo.Mapping;
-using Alabo.Maps;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.Framework.Basic.Relations.Domain.Services;
 using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Helpers;
+using Alabo.Industry.Shop.Activitys.Domain.Enum;
+using Alabo.Industry.Shop.Activitys.Domain.Services;
+using Alabo.Industry.Shop.Activitys.Modules.BuyPermision.Model;
+using Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Callbacks;
+using Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Model;
+using Alabo.Industry.Shop.Activitys.Modules.TimeLimitBuy.Model;
+using Alabo.Industry.Shop.Categories.Domain.Entities;
+using Alabo.Industry.Shop.Deliveries.Domain.Dtos;
+using Alabo.Industry.Shop.Deliveries.Domain.Services;
+using Alabo.Industry.Shop.Products.Domain.Configs;
+using Alabo.Industry.Shop.Products.Domain.Entities;
+using Alabo.Industry.Shop.Products.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.Products.Domain.Enums;
+using Alabo.Industry.Shop.Products.Domain.Repositories;
+using Alabo.Industry.Shop.Products.Dtos;
+using Alabo.Industry.Shop.Products.ViewModels;
+using Alabo.Mapping;
+using Alabo.Maps;
 
-namespace Alabo.App.Shop.Product.Domain.Services
+namespace Alabo.Industry.Shop.Products.Domain.Services
 {
 
     /// <summary>
@@ -232,7 +230,7 @@ namespace Alabo.App.Shop.Product.Domain.Services
             //product extension
             product.ProductExtensions = new ProductExtensions {
                 Store = Resolve<IShopStoreService>().GetSingle(e => e.Id == product.StoreId),
-                ProductCategory = product.Detail.PropertyJson.DeserializeJson<Category.Domain.Entities.Category>(),
+                ProductCategory = product.Detail.PropertyJson.DeserializeJson<Category>(),
                 ProductThums = productThums
             };
             // 处理商品不显示规格和属性的

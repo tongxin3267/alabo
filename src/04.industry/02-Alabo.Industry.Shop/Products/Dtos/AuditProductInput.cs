@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.App.Shop.Product.Domain.Enums;
+﻿using System.Collections.Generic;
+using Alabo.Industry.Shop.Products.Domain.Enums;
 
-namespace Alabo.App.Shop.Product.Domain.Dtos
+namespace Alabo.Industry.Shop.Products.Dtos
 {
     /// <summary>
     /// 审核输入

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Core.Tasks.ResultModel;
+using Alabo.Framework.Tasks.Queues.Models;
 
-namespace Alabo.App.Share.Share.Domain.Dtos {
+namespace Alabo.App.Share.RewardRuless.Dtos {
 
     /// <summary>
     ///

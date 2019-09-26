@@ -1,7 +1,7 @@
 ﻿using System;
-using Alabo.App.Shop.Product.Domain.Dtos;
+using Alabo.Industry.Shop.Products.Dtos;
 
-namespace Alabo.App.Shop.Order.Domain.Entities.Extensions {
+namespace Alabo.Industry.Shop.Orders.Domain.Entities.Extensions {
 
     /// <summary>
     ///     订单商品表，扩展属性

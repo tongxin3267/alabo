@@ -1,30 +1,18 @@
 using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using Alabo.Domains.Entities;
-using Microsoft.AspNetCore.Mvc;
-using Alabo.Framework.Core.WebApis.Filter;
-
-using MongoDB.Bson;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.RestfulApi;
-using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.Domains.Services;
-using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.Controllers;
-using Face = Alabo.App.Market.FacePay.Domain.Entities;
-using Alabo.App.Market.FacePay.Domain.Services;
-using ZKCloud.Open.ApiBase.Models;
-using Alabo.Helpers;
-using Alabo.App.Core.Finance.Domain.Services;
+using Alabo.App.Asset.Accounts.Domain.Services;
+using Alabo.App.Asset.Bills.Domain.Entities;
+using Alabo.App.Asset.Bills.Domain.Services;
+using Alabo.Cloud.Asset.FacePay.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Domains.Enums;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Helpers;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
+using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Market.FacePay.Controllers
+namespace Alabo.Cloud.Asset.FacePay.Controllers
 {
 
     [ApiExceptionFilter]
@@ -40,7 +28,7 @@ namespace Alabo.App.Market.FacePay.Controllers
         }
 
         [HttpPost]
-        public ApiResult Pay([FromBody] Face.FacePay model)
+        public ApiResult Pay([FromBody] Domain.Entities.FacePay model)
         {
             var user = Ioc.Resolve<IUserService>().GetSingle(x => x.Id == model.UserId);
             if (user == null)

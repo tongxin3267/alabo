@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.App.Shop.Order.Domain.Services;
-using Alabo.App.Shop.Order.ViewModels;
-using Alabo.App.Shop.Product.Domain.CallBacks;
-using Alabo.Cloud.Shop.ShopSaleReport.Services;
+using Alabo.Cloud.Shop.ShopSaleReport.Dtos;
 using Alabo.Data.People.Teams.Domain.Configs;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
@@ -15,10 +10,13 @@ using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using Alabo.Industry.Shop.Orders.Domain.Services;
+using Alabo.Industry.Shop.Products.Domain.Configs;
 using Alabo.Mapping;
-using ZKCloud.App.Core.User.Domain.Entities.Extensions;
 
-namespace _07_Alabo.Cloud.Shop.ShopSaleReport.Services {
+namespace Alabo.Cloud.Shop.ShopSaleReport.Services {
 
     /// <summary>
     /// 商城业绩统计
@@ -138,7 +136,7 @@ namespace _07_Alabo.Cloud.Shop.ShopSaleReport.Services {
             return Tuple.Create(dictionary, str);
         }
 
-        private ShopSale SetSalfInfoByOrderId(ShopSale shopSale, Alabo.App.Shop.Order.Domain.Entities.Order order) {
+        private ShopSale SetSalfInfoByOrderId(ShopSale shopSale, Order order) {
             // 统计下单会员自身业绩数据
             shopSale.TotalOrderCount += 1; // 总订单数加1
             shopSale.TotalPaymentAmount += order.PaymentAmount;

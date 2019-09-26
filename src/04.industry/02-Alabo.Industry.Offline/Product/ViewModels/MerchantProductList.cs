@@ -1,23 +1,23 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.App.Offline.Merchants.Domain.Services;
-using Alabo.App.Offline.Product.Domain.CallBacks;
-using Alabo.App.Offline.Product.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebApis.Service;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Relations.Domain.Services;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Helpers;
-using Alabo.UI;
+using Alabo.Industry.Offline.Merchants.Domain.Services;
+using Alabo.Industry.Offline.Product.Domain.CallBacks;
+using Alabo.Industry.Offline.Product.Domain.Entities;
+using Alabo.Industry.Offline.Product.Domain.Services;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Offline.Product.Domain.Entities
+namespace Alabo.Industry.Offline.Product.ViewModels
 {
     /// <summary>
     /// 商品列表

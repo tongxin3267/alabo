@@ -1,18 +1,17 @@
-using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
+using Alabo.Domains.Enums;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Shop.Category.Domain.Services;
-using Alabo.RestfulApi;
+using Alabo.Industry.Shop.Categories.Domain.Dtos;
+using Alabo.Industry.Shop.Categories.Domain.Entities;
+using Alabo.Industry.Shop.Categories.Domain.Services;
+using Alabo.Industry.Shop.Products.Domain.Services;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.App.Shop.Category.Domain.Dtos;
-using Alabo.App.Shop.Category.Domain.Entities;
-using Alabo.Domains.Enums;
-using Alabo.App.Shop.Product.Domain.Services;
 
-namespace Alabo.App.Shop.Category.Controllers
+namespace Alabo.Industry.Shop.Categories.Controllers
 {
 
     [ApiExceptionFilter]

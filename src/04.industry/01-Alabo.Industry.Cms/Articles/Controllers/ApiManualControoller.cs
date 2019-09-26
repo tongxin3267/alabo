@@ -1,20 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Alabo.App.Cms.Articles.Domain.Dto;
-using Alabo.App.Cms.Articles.Domain.Services;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Relations.Domain.Services;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Industry.Cms.Articles.Domain.Dto;
+using Alabo.Industry.Cms.Articles.Domain.Services;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Cms.Articles.Controllers {
+namespace Alabo.Industry.Cms.Articles.Controllers {
 
     /// <summary>
     /// 文章项目的Api

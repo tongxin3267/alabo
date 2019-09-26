@@ -1,40 +1,42 @@
-﻿using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Shop.Activitys.Domain.Entities;
-using Alabo.App.Shop.Activitys.Domain.Entities.Extension;
-using Alabo.App.Shop.Activitys.Domain.Enum;
-using Alabo.App.Shop.Activitys.Domain.Services;
-using Alabo.App.Shop.Activitys.Modules.GroupBuy.Model;
-using Alabo.App.Shop.Activitys.Services;
-using Alabo.App.Shop.Coupons.Domain.Enums;
-using Alabo.App.Shop.Coupons.Domain.Services;
-using Alabo.App.Shop.Order.Domain.CallBacks;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Order.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Entities.Extensions;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.App.Shop.Order.Domain.Repositories;
-using Alabo.App.Shop.Product.Domain.CallBacks;
-using Alabo.App.Shop.Product.Domain.Dtos;
-using Alabo.App.Shop.Product.Domain.Services;
-using Alabo.App.Shop.Store.Domain.Dtos;
-using Alabo.App.Shop.Store.Domain.Services;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Alabo.App.Asset.Accounts.Domain.Services;
+using Alabo.App.Asset.Coupons.Domain.Enums;
+using Alabo.App.Asset.Coupons.Domain.Services;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
-using Alabo.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Basic.Address.Domain.Entities;
 using Alabo.Framework.Basic.Address.Domain.Services;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Helpers;
+using Alabo.Industry.Shop.Activitys.Domain.Entities;
+using Alabo.Industry.Shop.Activitys.Domain.Entities.Extension;
+using Alabo.Industry.Shop.Activitys.Domain.Enum;
+using Alabo.Industry.Shop.Activitys.Domain.Services;
+using Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Model;
+using Alabo.Industry.Shop.Deliveries.Domain.Dtos;
+using Alabo.Industry.Shop.Deliveries.Domain.Entities;
+using Alabo.Industry.Shop.Deliveries.Domain.Services;
+using Alabo.Industry.Shop.OrderActions.Domain.Enums;
+using Alabo.Industry.Shop.OrderActions.Domain.Services;
+using Alabo.Industry.Shop.Orders.Domain.Configs;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using Alabo.Industry.Shop.Orders.Domain.Repositories;
+using Alabo.Industry.Shop.Orders.Dtos;
+using Alabo.Industry.Shop.Products.Domain.Configs;
+using Alabo.Industry.Shop.Products.Domain.Services;
+using Alabo.Industry.Shop.Products.Dtos;
 using Alabo.Users.Entities;
 using ZKCloud.Open.DynamicExpression;
 
-namespace Alabo.App.Shop.Order.Domain.Services {
+namespace Alabo.Industry.Shop.Orders.Domain.Services {
 
     /// <summary>
     ///     订单购物、订单价格计算相关的订单服务
@@ -446,7 +448,7 @@ namespace Alabo.App.Shop.Order.Domain.Services {
                             ExpressType = storeOrderItem.ExpressType
                         },
                         // 店铺快照
-                        Store = new Store.Domain.Entities.Store {
+                        Store = new Store {
                             Id = storeOrderItem.StoreId,
                             Name = storeItem.StoreName
                         },

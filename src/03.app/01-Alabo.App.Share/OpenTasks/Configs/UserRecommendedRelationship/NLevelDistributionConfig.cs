@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Extensions;
-using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.App.Open.Tasks.Modules;
+using Alabo.App.Share.OpenTasks.Base;
+using Alabo.App.Share.OpenTasks.Modules;
 using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Data.Things.Orders.ResultModel;
 using Alabo.Extensions;
+using Alabo.Framework.Tasks.Queues.Models;
+using Alabo.Framework.Tasks.Schedules.Domain.Enums;
 using Alabo.Users.Dtos;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Open.Tasks.Configs.UserRecommendedRelationship {
+namespace Alabo.App.Share.OpenTasks.Configs.UserRecommendedRelationship {
 
     /// <summary>
     /// 裂变分佣
     /// </summary>
-    /// <seealso cref="Alabo.App.Open.Tasks.Base.ShareBaseConfig" />
+    /// <seealso cref="ShareBaseConfig" />
     public class NLevelDistributionConfig : ShareBaseConfig {
     }
 
@@ -24,7 +25,7 @@ namespace Alabo.App.Open.Tasks.Configs.UserRecommendedRelationship {
     /// Class NLevelDistributionModule.
     /// </summary>
     [TaskModule("BD717F8D-AD00-44C9-9AA5-597E0AE55011", "裂变分佣", SortOrder = 999999, ConfigurationType = typeof(NLevelDistributionConfig), IsSupportMultipleConfiguration = true,
-      FenRunResultType = Core.Tasks.Domain.Enums.FenRunResultType.Price,
+      FenRunResultType = FenRunResultType.Price,
       Intro = "最常用的分润维度，基本上任何个客户都会使用到，应用最广，配置更灵活,根据会员关系图,计算下一级，上一级分润，包括常见的分润模型比如三级分销、三三复制,4M复制",
       RelationshipType = RelationshipType.UserRecommendedRelationship)]
     public class NLevelDistributionModule : AssetAllocationShareModuleBase<NLevelDistributionConfig> {

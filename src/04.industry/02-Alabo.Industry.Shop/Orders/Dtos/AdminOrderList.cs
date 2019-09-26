@@ -1,11 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.Domains.Enums;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.Users.Entities;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Order.Domain.Dtos {
+namespace Alabo.Industry.Shop.Orders.Dtos {
 
     /// <summary>
     /// </summary>
@@ -103,7 +104,7 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
         /// <summary>
         ///     订单详情
         /// </summary>
-        public Entities.Order Order { get; set; }
+        public Order Order { get; set; }
 
         /// <summary>
         ///     下单用户
@@ -214,6 +215,6 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
         [Field(ListShow = true, ControlsType = ControlsType.DateTimeRang, SupportSearchOrder = true, SortOrder = 1000)]
         public DateTime CreateTime { get; set; }
 
-        public Entities.Order Order { get; set; }
+        public Order Order { get; set; }
     }
 }

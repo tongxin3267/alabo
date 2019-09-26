@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Services;
+using Alabo.App.Asset.BankCards.Domain.Entities;
+using Alabo.App.Asset.BankCards.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoLists;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
-using Alabo.UI;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoLists;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Finance.UI.AutoForm {
+namespace Alabo.App.Asset.BankCards.UI {
 
     [ClassProperty(Name = "我的银行卡AutoList", Description = "我的银行卡")]
     public class BankCardAutoList : UIBase, IAutoList {

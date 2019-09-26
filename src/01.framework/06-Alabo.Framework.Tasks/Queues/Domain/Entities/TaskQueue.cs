@@ -1,21 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.Helpers;
-using Alabo.Tenants;
+using Alabo.Framework.Tasks.Queues.Domain.Enums;
 using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.ViewModel;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.App.Core.Tasks.Domain.Entities {
+namespace Alabo.Framework.Tasks.Queues.Domain.Entities {
 
     /// <summary>
     ///     任务队列

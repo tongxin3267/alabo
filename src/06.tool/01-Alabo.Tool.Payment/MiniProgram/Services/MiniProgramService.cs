@@ -1,11 +1,11 @@
-﻿using Alabo.App.Core.ApiStore.MiniProgram.Clients;
-using Alabo.App.Core.ApiStore.MiniProgram.Dtos;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Tool.Payment.MiniProgram.Clients;
+using Alabo.Tool.Payment.MiniProgram.Dtos;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.ApiStore.MiniProgram.Services {
+namespace Alabo.Tool.Payment.MiniProgram.Services {
 
     public class MiniProgramService : ServiceBase, IMiniProgramService {
         private readonly IMiniProgramClient _messageApiClient;

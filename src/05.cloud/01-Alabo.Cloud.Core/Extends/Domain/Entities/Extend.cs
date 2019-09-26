@@ -1,10 +1,10 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.Domains.Entities;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Share.Attach.Domain.Entities {
+namespace _01_Alabo.Cloud.Core.Extends.Domain.Entities {
 
     /// <summary>
     ///     扩展属性

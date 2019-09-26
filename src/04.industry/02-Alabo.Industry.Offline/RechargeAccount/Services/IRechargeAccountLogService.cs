@@ -1,12 +1,10 @@
-using System;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
-using Alabo.App.Offline.RechargeAccount.Entities;
 using Alabo.Domains.Entities;
-using Alabo.App.Offline.RechargeAccount.Domain.Dtos;
+using Alabo.Domains.Services;
+using Alabo.Industry.Offline.RechargeAccount.Domain.Dtos;
+using Alabo.Industry.Offline.RechargeAccount.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Offline.RechargeAccount.Services
+namespace Alabo.Industry.Offline.RechargeAccount.Services
 {
     public interface IRechargeAccountLogService : IService<RechargeAccountLog, ObjectId>
     {

@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,8 +6,9 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Core.User.Domain.Entities {
+namespace Alabo.Cloud.People.GradeInfos.Domain.Entities {
 
     /// <summary>
     ///   用户等级信息

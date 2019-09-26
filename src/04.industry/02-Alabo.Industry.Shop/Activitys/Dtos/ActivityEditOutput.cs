@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Alabo.App.Shop.Activitys.Domain.Entities;
-using Alabo.App.Shop.Activitys.Domain.Entities.Extension;
+﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Domains.Entities;
+using Alabo.Industry.Shop.Activitys.Domain.Entities;
 using Alabo.Validations;
 
-namespace Alabo.App.Shop.Activitys.Dtos
+namespace Alabo.Industry.Shop.Activitys.Dtos
 {
     /// <summary>
     /// activity edit model for output

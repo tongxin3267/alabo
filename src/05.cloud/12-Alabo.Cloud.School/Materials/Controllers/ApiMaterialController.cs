@@ -1,18 +1,17 @@
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Cloud.School.Materials.Domain.Entities;
+using Alabo.Cloud.School.Materials.Domain.Services;
+using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Market.PromotionalMaterial.Domain.Entities;
-using Alabo.App.Market.PromotionalMaterial.Domain.Services;
 using Alabo.Framework.Core.WebApis.Service;
-using Alabo.Extensions;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Market.PromotionalMaterial.Controllers {
+namespace Alabo.Cloud.School.Materials.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/Material/[action]")]

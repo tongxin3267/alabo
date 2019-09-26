@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Market.SecondBuy.Domain.Enums {
+namespace Alabo.Cloud.Shop.SecondBuy.Domain.Enums {
     public  enum  SecondBuyOrderStatus {
 
         [Display(Name = "未发货")]

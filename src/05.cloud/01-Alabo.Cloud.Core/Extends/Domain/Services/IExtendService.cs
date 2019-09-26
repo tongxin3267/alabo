@@ -1,8 +1,8 @@
-using Alabo.App.Share.Attach.Domain.Entities;
+using _01_Alabo.Cloud.Core.Extends.Domain.Entities;
 using Alabo.Domains.Services;
 using MongoDB.Bson;
 
-namespace ZKCloud.App.Open.Attach.Domain.Services {
+namespace _01_Alabo.Cloud.Core.Extends.Domain.Services {
 
     public interface IExtendService : IService<Extend, ObjectId> {
     }

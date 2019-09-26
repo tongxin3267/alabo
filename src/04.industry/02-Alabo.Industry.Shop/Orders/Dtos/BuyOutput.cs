@@ -1,8 +1,7 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Alabo.Domains.Query.Dto;
 
-namespace Alabo.App.Shop.Order.Domain.Dtos {
+namespace Alabo.Industry.Shop.Orders.Dtos {
 
     /// <summary>
     ///     订单购买数据传输

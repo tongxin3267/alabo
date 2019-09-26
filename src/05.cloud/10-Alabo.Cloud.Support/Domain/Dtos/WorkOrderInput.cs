@@ -3,7 +3,7 @@ using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Cms.Support.Domain.Dtos {
+namespace Alabo.Cloud.Support.Domain.Dtos {
 
     /// <summary>
     /// </summary>

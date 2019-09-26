@@ -1,17 +1,17 @@
 ﻿using System;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Core.Themes.Domain.Enums;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories.Mongo.Extension;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Themes.Domain.Enums;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Core.Themes.Domain.Entities {
+namespace Alabo.Framework.Themes.Domain.Entities {
 
     /// <summary>
     ///     主题模板配置

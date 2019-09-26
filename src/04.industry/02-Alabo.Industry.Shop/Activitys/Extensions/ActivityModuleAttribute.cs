@@ -1,7 +1,7 @@
 ﻿using System;
-using Alabo.App.Shop.Activitys.Domain.Enum;
+using Alabo.Industry.Shop.Activitys.Domain.Enum;
 
-namespace Alabo.App.Shop.Activitys.Extensions {
+namespace Alabo.Industry.Shop.Activitys.Extensions {
 
     /// <summary>
     ///     Class ActivityModuleAttribute.

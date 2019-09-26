@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Share.Share.Domain.Entities;
-using Alabo.App.Share.Share.Domain.Services;
+using Alabo.App.Share.Rewards.Domain.Entities;
+using Alabo.App.Share.Rewards.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoLists;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
-using Alabo.UI;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoLists;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Share.Share.UI.AutoForm {
+namespace Alabo.App.Share.Rewards.UI {
 
     [ClassProperty(Name = "分润记录", Description = "分润记录")]
     public class RewardAutoList : UIBase, IAutoList {

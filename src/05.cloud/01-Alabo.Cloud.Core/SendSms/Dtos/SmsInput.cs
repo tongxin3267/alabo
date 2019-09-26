@@ -1,6 +1,6 @@
-﻿using Alabo.App.Core.ApiStore.Sms.Enums;
+﻿using _01_Alabo.Cloud.Core.SendSms.Domain.Enums;
 
-namespace Alabo.App.Core.ApiStore.Sms.Models {
+namespace _01_Alabo.Cloud.Core.SendSms.Dtos {
 
     public class SmsInput {
 

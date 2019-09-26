@@ -1,11 +1,10 @@
-using Microsoft.AspNetCore.Mvc;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Shop.Activitys.Domain.Entities;
-using Alabo.App.Shop.Activitys.Domain.Services;
-using Alabo.RestfulApi;
+using Alabo.Industry.Shop.Activitys.Domain.Entities;
+using Alabo.Industry.Shop.Activitys.Domain.Services;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Alabo.App.Shop.Activitys.Controllers {
+namespace Alabo.Industry.Shop.Activitys.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/ActivityRecord/[action]")]

@@ -1,15 +1,13 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using Alabo.App.Core.Admin;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Framework.Core.Reflections.Interfaces;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Core.Reflections.Interfaces;
 using Alabo.Helpers;
 
-namespace Alabo.App.Core.Common {
+namespace _01_Alabo.Cloud.Core.RepairData {
 
     public class CommoCheckData : ICheckData {
 

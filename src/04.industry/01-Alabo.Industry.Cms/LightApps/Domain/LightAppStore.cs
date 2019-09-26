@@ -1,16 +1,16 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Repositories.Mongo.Context;
 using Alabo.Exceptions;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
-namespace Alabo.App.Core.LightApps.Domain {
+namespace Alabo.Industry.Cms.LightApps.Domain {
 
     /// <summary>
     /// 支持租户

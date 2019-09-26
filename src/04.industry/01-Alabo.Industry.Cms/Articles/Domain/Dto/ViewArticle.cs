@@ -1,27 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using AutoMapper;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using Alabo.App.Cms.Articles.Domain.Entities;
-using Alabo.App.Cms.Articles.Domain.Services;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
+using Alabo.Extensions;
 using Alabo.Framework.Core.Admins.Configs;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Framework.Core.WebUis.Design.AutoTables;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.Extensions;
 using Alabo.Helpers;
+using Alabo.Industry.Cms.Articles.Domain.Entities;
+using Alabo.Industry.Cms.Articles.Domain.Services;
 using Alabo.Maps;
-using Alabo.UI;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Cms.Articles.Domain.Dto
+namespace Alabo.Industry.Cms.Articles.Domain.Dto
 {
 
     public class ViewArticle : UIBase, IAutoForm, IAutoTable<Article>

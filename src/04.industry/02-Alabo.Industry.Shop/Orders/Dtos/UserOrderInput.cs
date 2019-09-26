@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using MongoDB.Bson;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.Domains.Entities;
 using Alabo.Framework.Basic.Address.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.Validations;
 
-namespace Alabo.App.Shop.Order.Domain.Dtos
+namespace Alabo.Industry.Shop.Orders.Dtos
 {
 
     /// <summary>

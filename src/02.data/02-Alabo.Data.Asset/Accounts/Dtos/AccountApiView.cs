@@ -1,6 +1,8 @@
-﻿namespace Alabo.App.Core.Finance.Domain.Dtos.Account {
+﻿using Alabo.App.Asset.Accounts.Domain.Entities;
 
-    public class AccountApiView : Entities.Account {
+namespace Alabo.App.Asset.Accounts.Dtos {
+
+    public class AccountApiView : Account {
         public string MoneyName { get; set; }
     }
 }

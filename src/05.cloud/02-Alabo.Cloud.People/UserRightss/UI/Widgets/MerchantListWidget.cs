@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Market.UserRightss.Domain.Entities;
-using Alabo.App.Market.UserRightss.Domain.Services;
-using Alabo.Framework.Core.WebUis.Design.Widgets;
+﻿using System.Collections.Generic;
+using Alabo.Cloud.People.UserRightss.Domain.Entities;
+using Alabo.Cloud.People.UserRightss.Domain.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
+using Alabo.Framework.Core.WebUis.Design.Widgets;
 using Alabo.Helpers;
 using Alabo.Mapping;
 
-namespace Alabo.App.Market.UI.Widgets {
+namespace Alabo.Cloud.People.UserRightss.UI.Widgets {
 
     public class MerchantListWidget : IWidget {
 

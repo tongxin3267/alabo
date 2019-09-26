@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alabo.App.Core.Tasks.Extensions {
+namespace Alabo.Data.Things.Orders.Extensions {
 
     public class TaskModuleNotFoundException : Exception {
 

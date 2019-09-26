@@ -1,5 +1,5 @@
+using Alabo.Industry.Shop.OrderActions.Domain.Services;
 using Xunit;
-using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
 

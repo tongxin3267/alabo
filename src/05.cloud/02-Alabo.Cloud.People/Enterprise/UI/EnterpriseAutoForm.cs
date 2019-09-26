@@ -1,20 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Markets.EnterpriseCertification.Domain.Entities;
-using Alabo.App.Core.Markets.EnterpriseCertification.Domain.Services;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Cloud.People.Enterprise.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Maps;
-using Alabo.UI;
+using Alabo.Users.Enum;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Markets.UI.AutoFrom {
+namespace Alabo.Cloud.People.Enterprise.UI {
 
     /// <summary>
     /// 实名认证
@@ -138,7 +136,7 @@ namespace Alabo.App.Core.Markets.UI.AutoFrom {
             var result = new AutoForm();
             if (model != null) {
                 if (model.Status == IdentityStatus.Failed) {
-                    result = ToAutoForm(new Enterprise());
+                    result = ToAutoForm(new Domain.Entities.Enterprise());
                 } else {
                     //if (model.Status == IdentityStatus.Succeed)
                     //{
@@ -146,7 +144,7 @@ namespace Alabo.App.Core.Markets.UI.AutoFrom {
                     //}
                 }
             } else {
-                result = ToAutoForm(new Enterprise());
+                result = ToAutoForm(new Domain.Entities.Enterprise());
             }
 
             result.AlertText = "【企业认证】主要对企业信息真实性进行的一种验证审核。有助于建立完善可靠的互联网信用平台。";
@@ -163,7 +161,7 @@ namespace Alabo.App.Core.Markets.UI.AutoFrom {
         public ServiceResult Save(object model, AutoBaseModel autoModel) {
             var enterprise = (EnterpriseAutoForm)model;
             enterprise.Status = IdentityStatus.IsPost;
-            var result = Resolve<IEnterpriseService>().AddOrUpdate(enterprise.MapTo<Enterprise>());
+            var result = Resolve<IEnterpriseService>().AddOrUpdate(enterprise.MapTo<Domain.Entities.Enterprise>());
 
             return result ? ServiceResult.Success : ServiceResult.Failed;
         }

@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Core.Reports.Controllers {
+namespace Alabo.Framework.Reports.Controllers {
 
     public class ReportResult<T> {
 

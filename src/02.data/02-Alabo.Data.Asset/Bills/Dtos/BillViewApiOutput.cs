@@ -1,13 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis.Design.AutoPreviews;
+using Alabo.App.Asset.Bills.Domain.Services;
 using Alabo.Domains.Query.Dto;
 using Alabo.Extensions;
-using Alabo.UI;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis.Design.AutoPreviews;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.Bill {
+namespace Alabo.App.Asset.Bills.Dtos {
 
     [ClassProperty(Name = "财务详情", Description = "财务详情")]
     public class BillViewApiOutput : EntityDto, IAutoPreview {

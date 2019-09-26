@@ -1,28 +1,22 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-using System.Text;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Market.UserRightss.Domain.Services;
-using Alabo.Extensions;
-using Alabo.Helpers;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Market.UserRightss.Domain.Dtos;
-using Alabo.App.Market.UserRightss.Domain.Entities;
-using Alabo.App.Core.User.Domain.Repositories;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.App.Market.UserRightss.Domain.CallBack;
-using Alabo.App.Core.User.Domain.Callbacks;
+using System.Linq;
+using Alabo.Cloud.People.UserRightss.Domain.Dtos;
+using Alabo.Cloud.People.UserRightss.Domain.Entities;
+using Alabo.Cloud.People.UserRightss.Domain.Services;
 using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.WebApis.Service;
-using Alabo.Framework.Core.WebUis.Design.Widgets;
+using Alabo.Domains.Repositories.EFCore;
 using Alabo.Exceptions;
+using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
+using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Framework.Core.WebUis.Design.Widgets;
+using Alabo.Helpers;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Market.UI.Widgets {
+namespace Alabo.Cloud.People.UserRightss.UI.Widgets {
 
     /// <summary>
     /// 营销中心Widget

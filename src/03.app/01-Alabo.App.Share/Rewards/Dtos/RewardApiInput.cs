@@ -1,6 +1,6 @@
 ﻿using Alabo.Domains.Query.Dto;
 
-namespace Alabo.App.Share.Share.Domain.Dto {
+namespace Alabo.App.Share.Rewards.Dtos {
 
     /// <summary>
     /// Class RewardApiInput.

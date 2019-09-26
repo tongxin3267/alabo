@@ -1,8 +1,8 @@
 using System;
 using Xunit;
-using Alabo.App.Cms.Articles.Domain.CallBacks;
-using Alabo.App.Shop.Product.Domain.CallBacks;
 using Alabo.Framework.Basic.Relations.Domain.Services;
+using Alabo.Industry.Cms.Articles.Domain.CallBacks;
+using Alabo.Industry.Shop.Products.Domain.Configs;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
 

@@ -1,18 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MongoDB.Bson.Serialization.Attributes;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Share.Share.Domain.Enums;
-using Alabo.App.Share.Share.Domain.Services;
+using Alabo.App.Share.Rewards.Domain.Enums;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.Tenants;
-using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Share.Share.Domain.Entities {
+namespace Alabo.App.Share.Rewards.Domain.Entities {
 
     /// <summary>
     ///     分润明细表，奖金表

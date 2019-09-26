@@ -1,29 +1,32 @@
-using Alabo.App.Shop.Category.Domain.Services;
-using Alabo.App.Shop.Order.Domain.Services;
-using Alabo.App.Shop.Product.Domain.Services;
-using Alabo.App.Shop.Store.Domain.Dtos;
-using Alabo.App.Shop.Store.Domain.Entities.Extensions;
-using Alabo.App.Shop.Store.Domain.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Alabo.AutoConfigs;
+using Alabo.Data.People.Employes.Dtos;
+using Alabo.Data.People.Users.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Relations.Domain.Services;
+using Alabo.Framework.Basic.Relations.Dtos;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.Framework.Core.WebUis.Domain.Services;
+using Alabo.Industry.Shop.Categories.Domain.Services;
+using Alabo.Industry.Shop.Deliveries.Domain.Dtos;
+using Alabo.Industry.Shop.Deliveries.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.Deliveries.Domain.Services;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Services;
+using Alabo.Industry.Shop.Products.Domain.Configs;
+using Alabo.Industry.Shop.Products.Domain.Entities;
+using Alabo.Industry.Shop.Products.Domain.Services;
 using Alabo.Mapping;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.Data.People.Employes.Dtos;
-using Alabo.Data.People.Users.Dtos;
-using Alabo.Framework.Basic.Relations.Dtos;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Shop.Store.Controllers
+namespace Alabo.Industry.Shop.Deliveries.Controllers
 {
 
     /// <summary>
@@ -50,7 +53,7 @@ namespace Alabo.App.Shop.Store.Controllers
                 return ApiResult.Failure<List<RelationApiOutput>>("用户ID不能为空");
             }
 
-            var result = Resolve<IRelationService>().GetClass(typeof(Product.Domain.CallBacks.ProductTagRelation).Name, userId)
+            var result = Resolve<IRelationService>().GetClass(typeof(ProductTagRelation).Name, userId)
                 .ToList();
             return ApiResult.Success(result);
         }
@@ -64,7 +67,7 @@ namespace Alabo.App.Shop.Store.Controllers
             if (userId == 0) {
                 return ApiResult.Failure<List<RelationApiOutput>>("用户ID不能为空");
             }
-            var ret = ApiResult.Success(Resolve<IRelationService>().GetClass(typeof(Product.Domain.CallBacks.ProductClassRelation).Name, userId).ToList());
+            var ret = ApiResult.Success(Resolve<IRelationService>().GetClass(typeof(ProductClassRelation).Name, userId).ToList());
 
             return ret;
         }
@@ -102,7 +105,7 @@ namespace Alabo.App.Shop.Store.Controllers
         /// <returns></returns>
         [HttpGet]
         public ApiResult<PagedList<ProductBrief>> GetProductList([FromQuery] ProductListInput input) {
-            var query = new ExpressionQuery<Product.Domain.Entities.Product>();
+            var query = new ExpressionQuery<Product>();
 
             query.And(e => e.StoreId == input.StoreId);
             query.PageIndex = (int)input.PageIndex;
@@ -206,14 +209,14 @@ namespace Alabo.App.Shop.Store.Controllers
                 return ApiResult.Failure("非法操作");
             }
 
-            var query = new ExpressionQuery<Order.Domain.Entities.Order> {
+            var query = new ExpressionQuery<Order> {
                 PageIndex = 1,
                 PageSize = 15
             };
             query.And(u => u.StoreId == store.Id);
             query.And(u => u.OrderStatus == model.Status);
             var view = Resolve<IOrderService>().GetPagedList(query);
-            var orders = new List<Order.Domain.Entities.Order>();
+            var orders = new List<Order>();
             foreach (var item in view) {
                 TimeSpan ts = DateTime.Now.Subtract(item.CreateTime);
                 if (ts.Days < model.Days) {

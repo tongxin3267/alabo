@@ -1,30 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using Alabo.App.Shop.Product.Domain.Entities.Extensions;
-using Alabo.App.Shop.Product.Domain.Enums;
-using Alabo.App.Shop.Product.ViewModels;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.Web.Mvc.Attributes;
+using Alabo.Industry.Shop.Deliveries.Domain.Entities;
+using Alabo.Industry.Shop.Products.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.Products.Domain.Enums;
+using Alabo.Industry.Shop.Products.ViewModels;
 using Alabo.Tenants;
-using Alabo.Web.Mvc.ViewModel;
-using Alabo.Extensions;
-using Alabo.App.Shop.Product.Domain.Services;
-using Alabo.App.Shop.Store.Domain.Services;
-using Alabo.UI;
-using Alabo.App.Shop.Product.Domain.Dtos;
 using Alabo.Validations;
+using Alabo.Web.Mvc.Attributes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.App.Shop.Product.Domain.Entities {
+namespace Alabo.Industry.Shop.Products.Domain.Entities {
 
     [ClassProperty(Name = "商品管理", Icon = "fa fa-puzzle-piece", Description = "产品线商品", PageType = ViewPageType.List, PostApi = "Api/Store/GetProductList", ListApi = "Api/Product/ProductList")]
     /// <summary>
@@ -265,7 +256,7 @@ namespace Alabo.App.Shop.Product.Domain.Entities {
         ///     Gets the store.
         /// </summary>
         [Display(Name = "获取库存")]
-        public Store.Domain.Entities.Store Store { get; internal set; }
+        public Store Store { get; internal set; }
 
         /// <summary>
         ///     商品活动扩展.

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Themes.Domain.Entities;
-using Alabo.App.Core.Themes.Domain.Enums;
 using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Themes.Domain.Entities;
+using Alabo.Framework.Themes.Domain.Enums;
 
-namespace Alabo.App.Core.Themes.Dtos {
+namespace Alabo.Framework.Themes.Dtos {
 
     /// <summary>
     /// 所有客户端页面

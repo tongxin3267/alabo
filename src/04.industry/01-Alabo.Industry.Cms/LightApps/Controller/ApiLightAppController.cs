@@ -1,19 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.LightApps.Domain;
-using Alabo.App.Core.LightApps.Domain.Services;
-using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.Helpers;
+using Alabo.Industry.Cms.LightApps.Domain;
+using Alabo.Industry.Cms.LightApps.Domain.Services;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.LightApps.Controller {
+namespace Alabo.Industry.Cms.LightApps.Controller {
 
     [ApiExceptionFilter]
     [Route("Api/LightApp/[action]")]

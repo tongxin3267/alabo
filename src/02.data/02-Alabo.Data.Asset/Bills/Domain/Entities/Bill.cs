@@ -1,17 +1,16 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Tenants;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.App.Core.Finance.Domain.Entities {
+namespace Alabo.App.Asset.Bills.Domain.Entities {
 
     /// <summary>
     ///     账单记录

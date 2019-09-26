@@ -1,23 +1,21 @@
 using System;
-using Alabo.Domains.Services;
-using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Repositories;
-using Alabo.App.Market.PresaleProducts.Domain.Entities;
-using Alabo.App.Market.PresaleProducts.Domain.Dtos;
-using Alabo.App.Market.PresaleProducts.Domain.Repositories;
-using Alabo.Domains.Entities;
 using System.Collections.Generic;
 using System.Linq;
-using MongoDB.Bson;
-using Alabo.Mapping;
-using Alabo.App.Shop.Product.Domain.Enums;
-using Alabo.App.Shop.Store.Domain.Services;
-using Alabo.App.Shop.Product.Domain.Dtos;
-using Alabo.App.Shop.Product.DiyModels;
-using Alabo.App.Shop.Product.Domain.Repositories;
+using Alabo.Cloud.Shop.PresaleProducts.Domain.Dtos;
+using Alabo.Cloud.Shop.PresaleProducts.Domain.Entities;
+using Alabo.Cloud.Shop.PresaleProducts.Domain.Repositories;
+using Alabo.Datas.UnitOfWorks;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Repositories;
+using Alabo.Domains.Services;
 using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Industry.Shop.Products.Domain.Enums;
+using Alabo.Industry.Shop.Products.Domain.Repositories;
+using Alabo.Industry.Shop.Products.Dtos;
+using Alabo.Mapping;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.PresaleProducts.Domain.Services {
+namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Services {
 
     public class PresaleProductService : ServiceBase<PresaleProduct, ObjectId>, IPresaleProductService {
         private long _storeId;

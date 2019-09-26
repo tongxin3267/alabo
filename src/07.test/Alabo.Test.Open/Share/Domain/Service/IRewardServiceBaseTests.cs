@@ -1,4 +1,4 @@
-using Alabo.App.Share.Share.Domain.Services;
+using Alabo.App.Share.Rewards.Domain.Services;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
 using Xunit;

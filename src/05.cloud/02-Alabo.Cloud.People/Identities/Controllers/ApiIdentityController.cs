@@ -1,17 +1,17 @@
+using System.ComponentModel.DataAnnotations;
+using Alabo.Cloud.People.Identities.Domain.Entities;
+using Alabo.Cloud.People.Identities.Domain.Services;
+using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Dtos;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Users.Enum;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Framework.Core.WebApis.Dtos;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.User.Controllers {
+namespace Alabo.Cloud.People.Identities.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/Identity/[action]")]

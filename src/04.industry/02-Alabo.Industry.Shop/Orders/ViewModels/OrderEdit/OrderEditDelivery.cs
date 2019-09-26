@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Shop.Order.ViewModels.OrderEdit {
+namespace Alabo.Industry.Shop.Orders.ViewModels.OrderEdit {
 
     /// <summary>
     ///     发货

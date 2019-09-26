@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.App.Shop.Product.ViewModels;
-using Alabo.Domains.Entities;
+﻿using System.Collections.Generic;
 using Alabo.Domains.Services;
 
-namespace Alabo.App.Shop.Product.Domain.Services {
+namespace Alabo.Industry.Shop.Products.Domain.Services {
 
     public interface IProductApiService : IService {
 

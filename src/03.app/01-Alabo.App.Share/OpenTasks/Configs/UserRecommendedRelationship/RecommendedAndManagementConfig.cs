@@ -2,24 +2,25 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Extensions;
-using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.App.Open.Tasks.Modules;
+using Alabo.App.Share.OpenTasks.Base;
+using Alabo.App.Share.OpenTasks.Modules;
 using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Data.Things.Orders.ResultModel;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Tasks.Queues.Models;
+using Alabo.Framework.Tasks.Schedules.Domain.Enums;
 using Alabo.Users.Dtos;
-using ZKCloud.Open.ApiBase.Models;
 using Alabo.Web.Mvc.Attributes;
+using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Open.Tasks.Configs.UserRecommendedRelationship {
+namespace Alabo.App.Share.OpenTasks.Configs.UserRecommendedRelationship {
 
     /// <summary>
     /// 直推与管理收益
     /// </summary>
-    /// <seealso cref="Alabo.App.Open.Tasks.Base.ShareBaseConfig" />
+    /// <seealso cref="ShareBaseConfig" />
     [ClassProperty]
     public class RecommendedAndManagementConfig : ShareBaseConfig {
 
@@ -42,7 +43,7 @@ namespace Alabo.App.Open.Tasks.Configs.UserRecommendedRelationship {
     /// Class NLevelDistributionModule.
     /// </summary>
     [TaskModule(Id, ModelName, SortOrder = 999999, ConfigurationType = typeof(RecommendedAndManagementConfig), IsSupportMultipleConfiguration = true,
-      FenRunResultType = Core.Tasks.Domain.Enums.FenRunResultType.Price,
+      FenRunResultType = FenRunResultType.Price,
       Intro = "直推与管理收益,比如A推荐了B,B推荐了C。C消费，B获得直推奖，A获得B直推奖的管理奖",
       RelationshipType = RelationshipType.UserRecommendedRelationship)]
     public class RecommendedAndManagementModule : AssetAllocationShareModuleBase<RecommendedAndManagementConfig> {

@@ -1,15 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
-using MongoDB.Bson.Serialization.Attributes;
-using Newtonsoft.Json;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Shop.Activitys.Domain.Entities;
-using Alabo.App.Shop.Activitys.Domain.Entities.Extension;
 using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Industry.Shop.Activitys.Domain.Entities;
+using Alabo.Industry.Shop.Activitys.Domain.Entities.Extension;
 using Alabo.Mapping.Dynamic;
 using Alabo.Web.Mvc.ViewModel;
+using Microsoft.AspNetCore.Http;
+using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Activitys.ViewModels {
+namespace Alabo.Industry.Shop.Activitys.ViewModels {
 
     /// <summary>
     ///     Class ViewActivityModel.

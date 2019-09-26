@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
 using Alabo.Validations;
 
-namespace Alabo.App.Shop.Order.ViewModels.OrderEdit {
+namespace Alabo.Industry.Shop.Orders.ViewModels.OrderEdit {
 
     /// <summary>
     ///     收银台视图

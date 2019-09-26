@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Open.Tasks.Base {
+namespace Alabo.App.Share.OpenTasks.Base {
 
     public abstract class ShareBaseConfig : BaseViewModel, IModuleConfig {
 

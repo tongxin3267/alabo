@@ -1,11 +1,11 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Offline.Order.Domain.Entities
+namespace Alabo.Industry.Offline.Order.Domain.Entities
 {
     /// <summary>
     /// merchant cart

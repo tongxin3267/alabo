@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Extensions;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
 
-namespace Alabo.App.Shop.Order.Domain.Repositories {
+namespace Alabo.Industry.Shop.Orders.Domain.Repositories {
 
     public class OrderRepository : RepositoryEfCore<Entities.Order, long>, IOrderRepository {
 

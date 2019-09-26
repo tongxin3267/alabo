@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Product.Domain.Dtos;
-using Alabo.App.Shop.Product.Domain.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Industry.Shop.Orders.Dtos;
+using Alabo.Industry.Shop.Products.Domain.Entities;
+using Alabo.Industry.Shop.Products.Dtos;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Shop.Product.Domain.Services
+namespace Alabo.Industry.Shop.Products.Domain.Services
 {
 
     public interface IProductSkuService : IService<ProductSku, long>

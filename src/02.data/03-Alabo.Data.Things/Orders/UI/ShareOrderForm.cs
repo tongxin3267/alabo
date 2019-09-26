@@ -1,18 +1,17 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Domain.Services;
+using Alabo.Data.Things.Orders.Domain.Entities;
+using Alabo.Data.Things.Orders.Domain.Services;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
 using Alabo.Mapping;
-using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Tasks.Domain.Entities {
+namespace Alabo.Data.Things.Orders.UI {
 
     /// <summary>
     ///     分润订单

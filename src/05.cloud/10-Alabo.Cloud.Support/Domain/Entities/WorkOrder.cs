@@ -1,14 +1,14 @@
-using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Cms.Support.Domain.Enum;
+using Alabo.Cloud.Support.Domain.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Cms.Support.Domain.Entities {
+namespace Alabo.Cloud.Support.Domain.Entities {
 
     /// <summary>
     ///     工单系统

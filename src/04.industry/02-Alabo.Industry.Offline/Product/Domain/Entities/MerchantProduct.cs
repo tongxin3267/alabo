@@ -1,16 +1,15 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Offline.Product.Domain.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Industry.Offline.Product.Domain.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Offline.Product.Domain.Entities
+namespace Alabo.Industry.Offline.Product.Domain.Entities
 {
     /// <summary>
     /// 商品

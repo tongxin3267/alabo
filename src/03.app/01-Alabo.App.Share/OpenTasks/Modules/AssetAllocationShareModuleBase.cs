@@ -1,16 +1,14 @@
-﻿using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Extensions;
-using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.Helpers;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Alabo.App.Share.OpenTasks.Base;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Data.Things.Orders.ResultModel;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Open.Tasks.Modules {
+namespace Alabo.App.Share.OpenTasks.Modules {
 
     using User = User;
 
@@ -96,7 +94,7 @@ namespace Alabo.App.Open.Tasks.Modules {
                          .Replace("{OrderPrice}", base.ShareOrder.Amount.ToString("F2"))
                         .Replace("{ShareAmount}", ruleAmount.ToString("F2"));
 
-                        var queueResult = new TaskQueueResult<ITaskResult>(Context) {
+                        var queueResult = new TaskExecutes.ResultModel.TaskQueueResult<ITaskResult>(Context) {
                             ShareResult = shareResult
                         };
                         resultList.Add(queueResult);

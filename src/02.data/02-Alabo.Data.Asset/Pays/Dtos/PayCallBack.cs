@@ -1,6 +1,6 @@
 ﻿using Alabo.Framework.Core.Enums.Enum;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.Pay {
+namespace Alabo.App.Asset.Pays.Dtos {
 
     public class PayCallBack {
 

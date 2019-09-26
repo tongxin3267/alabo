@@ -4,7 +4,7 @@ using Alabo.RestfulApi;
 using ZKCloud.Open.ApiBase.Connectors;
 using ZKCloud.Open.ApiBase.Formatters;
 
-namespace Alabo.App.Core.ApiStore.AMap.District {
+namespace Alabo.Tool.AMap {
 
     /// <summary>
     ///     高德地图区域查询

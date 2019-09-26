@@ -1,18 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Shop.Order.Domain.Entities.Extensions;
-using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Industry.Shop.OrderActions.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.Tenants;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.App.Shop.Order.Domain.Entities {
+namespace Alabo.Industry.Shop.Orders.Domain.Entities {
 
     /// <summary>
     ///     订单表

@@ -1,8 +1,8 @@
-﻿using Alabo.App.Shop.Order.Domain.Entities;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
+using Alabo.Industry.Shop.OrderDeliveries.Domain.Entities;
 
-namespace Alabo.App.Shop.Order.Domain.Repositories {
+namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Repositories {
 
     public class OrderDeliveryRepository : RepositoryEfCore<OrderDelivery, long>, IOrderDeliveryRepository {
 

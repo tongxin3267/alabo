@@ -6,7 +6,7 @@ using Alabo.Users.Entities;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Shop.Order.ViewModels {
+namespace Alabo.Industry.Shop.Orders.ViewModels {
 
     /// <summary>
     ///     发货记录表

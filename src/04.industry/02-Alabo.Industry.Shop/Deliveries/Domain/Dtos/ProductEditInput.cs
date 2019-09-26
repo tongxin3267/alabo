@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Alabo.App.Shop.Store.Domain.Dtos {
+namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos {
 
     /// <summary>
     /// 商品编辑输入模型

@@ -2,23 +2,19 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Market.UserRightss.Domain.Services;
+using Alabo.Cloud.People.UserRightss.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Mapping;
-using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Market.UserRightss.Domain.Dtos {
+namespace Alabo.Cloud.People.UserRightss.Domain.Dtos {
 
     public class ViewUserRights : UIBase, IAutoTable<ViewUserRights> {
 

@@ -1,22 +1,21 @@
-﻿using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
+using Alabo.App.Asset.BankCards.Domain.Entities;
+using Alabo.App.Asset.BankCards.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
 using Alabo.Exceptions;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Mapping;
-using Alabo.UI;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.BankCard {
+namespace Alabo.App.Asset.BankCards.Dtos {
 
     public class ViewBankCard : UIBase, IAutoTable<ViewBankCard> {
         public ObjectId Id { get; set; }
@@ -74,7 +73,7 @@ namespace Alabo.App.Core.Finance.Domain.Dtos.BankCard {
             var view = new PagedList<ViewBankCard>();
 
             if (autoModel.Filter == FilterType.Admin) {
-                var temp = new ExpressionQuery<Entities.BankCard> {
+                var temp = new ExpressionQuery<BankCard> {
                     EnablePaging = true,
                     PageIndex = (int)userInput.PageIndex,
                     PageSize = (int)15

@@ -1,6 +1,6 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Share.Kpi.Domain.Enum {
+namespace Alabo.App.Kpis.GradeKpis.Domain.Enum {
 
     [ClassProperty(Name = "升降类型")]
     public enum GradeKpiType {

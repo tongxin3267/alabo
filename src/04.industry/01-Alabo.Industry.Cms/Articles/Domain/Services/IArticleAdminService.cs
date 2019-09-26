@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
-using MongoDB.Bson;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Cms.Articles.Domain.Entities;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Industry.Cms.Articles.Domain.Entities;
+using Microsoft.AspNetCore.Http;
+using MongoDB.Bson;
 
-namespace Alabo.App.Cms.Articles.Domain.Services {
+namespace Alabo.Industry.Cms.Articles.Domain.Services {
 
     public interface IArticleAdminService : IService<Article, ObjectId> {
         /// <summary>

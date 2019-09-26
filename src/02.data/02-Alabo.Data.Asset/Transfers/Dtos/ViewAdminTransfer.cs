@@ -1,14 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Enums;
+using Alabo.App.Asset.Transfers.Domain.Configs;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.Finance.ViewModels.Transfer {
+namespace Alabo.App.Asset.Transfers.Dtos {
 
     /// <summary>
     ///     Class ViewAdminWithDraw.

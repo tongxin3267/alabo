@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Product.ViewModels {
+namespace Alabo.Industry.Shop.Products.ViewModels {
 
     public class EditorUploadResult {
         public const string STATE_SUCESS = "SUCESS";

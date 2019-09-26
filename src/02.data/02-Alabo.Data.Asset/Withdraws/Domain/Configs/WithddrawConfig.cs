@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Finance.Domain.CallBacks {
+namespace Alabo.App.Asset.Withdraws.Domain.Configs {
 
     /// <summary>
     ///     Class WithdRawConfig.

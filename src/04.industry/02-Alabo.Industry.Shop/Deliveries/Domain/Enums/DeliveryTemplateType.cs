@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Store.Domain.Enums {
+namespace Alabo.Industry.Shop.Deliveries.Domain.Enums {
 
     [ClassProperty(Name = "买卖方所选运费模板类型")]
     public enum DeliveryTemplateType {

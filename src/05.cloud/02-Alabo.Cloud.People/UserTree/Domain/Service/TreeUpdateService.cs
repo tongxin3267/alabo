@@ -1,24 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Repositories;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Core.User.ViewModels;
+using Alabo.Cloud.People.UserTree.Domain.Repositories;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Tasks.Queues.Domain.Servcies;
 using Alabo.Schedules;
-using _01_Alabo.Cloud.Core.UserTree.Domain.UI;
-using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Users.Dtos;
 
-namespace _01_Alabo.Cloud.Core.UserTree.Domain.Service {
+namespace Alabo.Cloud.People.UserTree.Domain.Service {
 
     public class TreeUpdateService : ServiceBase, ITreeUpdateService {
 

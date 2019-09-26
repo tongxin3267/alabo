@@ -1,22 +1,11 @@
-using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using Alabo.Domains.Entities;
-using Microsoft.AspNetCore.Mvc;
-using Alabo.Framework.Core.WebApis.Filter;
-
-using MongoDB.Bson;
-using Alabo.RestfulApi;
-using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.Domains.Services;
-using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.Controllers;
-using Alabo.App.Market.BookDonae.Domain.Entities;
+using Alabo.Cloud.Cms.BookDonae.Domain.Entities;
+using Alabo.Cloud.Cms.BookDonae.Domain.Services;
 using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.App.Market.BookDonae.Domain.Services;
+using Alabo.Framework.Core.WebApis.Filter;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.BookDonae.Controllers {
+namespace Alabo.Cloud.Cms.BookDonae.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/BooksClass/[action]")]

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Alabo.App.Shop.Product.Domain.Dtos {
+﻿namespace Alabo.Industry.Shop.Products.Dtos {
 
     public class ProductToExcel {
         public string RelationName { get; set; }

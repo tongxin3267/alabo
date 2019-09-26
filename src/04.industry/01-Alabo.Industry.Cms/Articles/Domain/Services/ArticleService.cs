@@ -1,13 +1,5 @@
-﻿using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Cms.Articles.Domain.CallBacks;
-using Alabo.App.Cms.Articles.Domain.Dto;
-using Alabo.App.Cms.Articles.Domain.Entities;
-using Alabo.App.Cms.Articles.ViewModels;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Framework.Core.WebUis.Models.Links;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
@@ -15,9 +7,16 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Relations.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Core.WebUis.Models.Links;
+using Alabo.Industry.Cms.Articles.Domain.CallBacks;
+using Alabo.Industry.Cms.Articles.Domain.Dto;
+using Alabo.Industry.Cms.Articles.Domain.Entities;
+using Alabo.Industry.Cms.Articles.ViewModels;
 using Alabo.Mapping;
+using MongoDB.Bson;
 
-namespace Alabo.App.Cms.Articles.Domain.Services {
+namespace Alabo.Industry.Cms.Articles.Domain.Services {
 
     public class ArticleService : ServiceBase<Article, ObjectId>, IArticleService {
 

@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
 using Alabo.Framework.Basic.Grades.Domain.Entities;
@@ -6,10 +7,9 @@ using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
-using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Tasks.Controllers
+namespace Alabo.Framework.Basic.Grades.Controllers
 {
 
     [ApiExceptionFilter]

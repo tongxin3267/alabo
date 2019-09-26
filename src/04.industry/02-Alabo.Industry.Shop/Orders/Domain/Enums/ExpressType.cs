@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Alabo.App.Shop.Order.Domain.Enums
+﻿namespace Alabo.Industry.Shop.Orders.Domain.Enums
 {
     /// <summary>
     /// ExpressType

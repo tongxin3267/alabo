@@ -1,8 +1,9 @@
 ﻿using System;
-using Alabo.App.Core.Tasks.Domain.Enums;
+using Alabo.Framework.Tasks.Queues.Domain.Enums;
+using Alabo.Framework.Tasks.Schedules.Domain.Enums;
 using ZKCloud.Open.Share.Enums;
 
-namespace Alabo.App.Core.Tasks.ResultModel {
+namespace Alabo.Framework.Tasks.Queues.Models {
 
     /// <summary>
     ///     Class TaskModuleAttribute.

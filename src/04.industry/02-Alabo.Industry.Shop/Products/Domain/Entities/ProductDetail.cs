@@ -1,13 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.Product.Domain.Entities.Extensions;
+﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
+using Alabo.Industry.Shop.Products.Domain.Entities.Extensions;
 using Alabo.Tenants;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.App.Shop.Product.Domain.Entities
+namespace Alabo.Industry.Shop.Products.Domain.Entities
 {
 
     /// <summary>

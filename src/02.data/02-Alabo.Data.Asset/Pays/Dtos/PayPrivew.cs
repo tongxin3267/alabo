@@ -1,14 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Finance.Dtos {
+namespace Alabo.App.Asset.Pays.Dtos {
 
     [ClassProperty(Name = "收银台", Icon = "fa fa-puzzle-piece", Description = "提现管理", PostApi = "Api/WithDraw/Add",
         SuccessReturn = "Api/WithDraw/Get")]

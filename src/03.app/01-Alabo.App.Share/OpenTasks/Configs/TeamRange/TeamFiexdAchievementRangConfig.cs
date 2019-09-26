@@ -1,23 +1,24 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Extensions;
-using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.App.Open.Tasks.Modules;
+using Alabo.App.Share.OpenTasks.Base;
+using Alabo.App.Share.OpenTasks.Modules;
 using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Data.Things.Orders.ResultModel;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Tasks.Queues.Models;
+using Alabo.Framework.Tasks.Schedules.Domain.Enums;
 using Alabo.Helpers;
 using Alabo.Users.Dtos;
-using ZKCloud.Open.ApiBase.Models;
 using Alabo.Web.Mvc.Attributes;
+using Newtonsoft.Json;
+using ZKCloud.Open.ApiBase.Models;
 using User = Alabo.Users.Entities.User;
 
-namespace Alabo.App.Open.Tasks.Configs.TeamRange {
+namespace Alabo.App.Share.OpenTasks.Configs.TeamRange {
 
     using User = User;
 
@@ -58,7 +59,7 @@ namespace Alabo.App.Open.Tasks.Configs.TeamRange {
     /// Class TeamFiexdAchievementRangModule.
     /// </summary>
     [TaskModule("23B9A703-6B42-4915-810F-01208CC0C000", "岗位绩效收益(按固定金额)", SortOrder = 999999, ConfigurationType = typeof(TeamFiexdAchievementRangConfig), IsSupportMultipleConfiguration = true,
-         FenRunResultType = Core.Tasks.Domain.Enums.FenRunResultType.Price,
+         FenRunResultType = FenRunResultType.Price,
          Intro = "不同岗位间的最高提成比例会有所不同，岗位低的会员不能拿完所有的绩效，多余的部分给岗位高的。比如公司有业务员、经理、总监三个岗位，直接销售一个订单，最高奖金分别为100,200,300。如果是业务员A成单，业务员A奖金100，经理奖金100,总监奖金100。如果是经理B成单，业务员A奖金0，经理B奖金200,总监C奖金100。如果是总监C成单，业务员A奖金0，经理B奖金0,总监C奖金300。",
          RelationshipType = RelationshipType.UserRecommendedRelationship)]
     public class TeamFiexdAchievementRangModule : AssetAllocationShareModuleBase<TeamFiexdAchievementRangConfig> {

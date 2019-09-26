@@ -1,4 +1,4 @@
-﻿namespace Alabo.App.Core.LightApps.Domain {
+﻿namespace Alabo.Industry.Cms.LightApps.Domain {
 
     /// <summary>
     ///

@@ -1,12 +1,13 @@
-using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Share.Kpi.Domain.CallBack;
-using Alabo.App.Share.Kpi.Domain.Entities;
-using Alabo.App.Share.Kpi.Domain.Enum;
-using Alabo.App.Share.Kpi.ViewModels;
+using Alabo.App.Kpis.GradeKpis.Domain.Configs;
+using Alabo.App.Kpis.GradeKpis.Domain.Entities;
+using Alabo.App.Kpis.GradeKpis.Dtos;
+using Alabo.App.Kpis.Kpis.Domain.Configs;
+using Alabo.App.Kpis.Kpis.Domain.Entities;
+using Alabo.App.Kpis.Kpis.Domain.Enum;
+using Alabo.App.Kpis.Kpis.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
@@ -16,11 +17,13 @@ using Alabo.Domains.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Tasks.Queues.Domain.Servcies;
 using Alabo.Linq;
 using Alabo.Schedules;
 using Alabo.Users.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Share.Kpi.Domain.Services {
+namespace Alabo.App.Kpis.GradeKpis.Domain.Services {
 
     /// <summary>
     /// µÈ¼¶¿¼ºË
@@ -128,7 +131,7 @@ namespace Alabo.App.Share.Kpi.Domain.Services {
             var kpiItemResult = false;
             var gradeKpiItemList = new List<GradeKpiItem>();
             foreach (var kpiItem in kpiItems) {
-                var kpi = new Entities.Kpi {
+                var kpi = new Kpi {
                     ModuleId = kpiItem.KpiConfigId,
                     UserId = user.Id,
                     Type = timeType,

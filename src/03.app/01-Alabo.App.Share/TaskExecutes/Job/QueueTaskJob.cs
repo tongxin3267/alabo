@@ -1,15 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
-using Quartz;
-using System;
+﻿using System;
 using System.Threading.Tasks;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.Framework.Core.Admins.Configs;
 using Alabo.Dependency;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.Admins.Configs;
+using Alabo.Framework.Tasks.Queues.Domain.Servcies;
 using Alabo.Runtime;
 using Alabo.Schedules.Job;
+using Microsoft.AspNetCore.Http;
+using Quartz;
 
-namespace Alabo.App.Core.Tasks.Job {
+namespace Alabo.App.Share.TaskExecutes.Job {
 
     /// <summary>
     ///     队列方式执行

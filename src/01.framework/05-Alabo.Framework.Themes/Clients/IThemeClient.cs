@@ -1,12 +1,12 @@
-﻿using Alabo.App.Core.Themes.Dtos;
-using Alabo.App.Core.Themes.Dtos.Service;
+﻿using System;
+using System.Threading.Tasks;
 using Alabo.Domains.Entities;
+using Alabo.Framework.Themes.Dtos;
+using Alabo.Framework.Themes.Dtos.Service;
 using Alabo.RestfulApi;
 using MongoDB.Bson;
-using System;
-using System.Threading.Tasks;
 
-namespace Alabo.App.Core.Themes.Clients {
+namespace Alabo.Framework.Themes.Clients {
 
     public interface IThemeClient : IClient {
 

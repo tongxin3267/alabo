@@ -1,30 +1,23 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using Senparc.NeuChar.Entities;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Alabo.App.Cms.Articles.Domain.CallBacks;
-using Alabo.App.Cms.Articles.Domain.Dto;
-using Alabo.App.Cms.Articles.Domain.Services;
+using Alabo.Datas.Queries.Enums;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
+using Alabo.Extensions;
 using Alabo.Framework.Core.Admins.Configs;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Framework.Core.WebUis.Design.AutoTables;
-using Alabo.Datas.Queries.Enums;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.Extensions;
 using Alabo.Helpers;
+using Alabo.Industry.Cms.Articles.Domain.Services;
 using Alabo.Mapping;
 using Alabo.Maps;
-using Alabo.UI;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Cms.Articles.UI.AutoForm {
+namespace Alabo.Industry.Cms.Articles.UI.AutoForm {
 
     [ClassProperty(Name = "商家头条", Description = "商家头条")]
     public class ArticleAutoFrom : UIBase, IAutoForm, IAutoTable<ArticleAutoFrom> {

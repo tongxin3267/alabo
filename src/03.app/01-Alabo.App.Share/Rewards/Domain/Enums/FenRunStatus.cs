@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Share.Share.Domain.Enums {
+namespace Alabo.App.Share.Rewards.Domain.Enums {
 
     /// <summary>
     /// 分润状态

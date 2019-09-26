@@ -1,7 +1,7 @@
 ﻿using System;
-using Alabo.App.Core.Tasks.ResultModel;
+using Alabo.Data.Things.Orders.ResultModel;
 
-namespace Alabo.App.Core.Tasks.Extensions {
+namespace Alabo.Data.Things.Orders.Extensions {
 
     /// <summary>
     ///     Class TaskResultUpdateException.

@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.ApiStore;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Finance.Domain.Enums {
+namespace Alabo.Tool.Payment {
 
     /// <summary>
     ///     支付方式

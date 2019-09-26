@@ -1,9 +1,9 @@
-using MongoDB.Bson;
-using Alabo.App.Core.Tasks.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
+using Alabo.Framework.Tasks.Schedules.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Tasks.Domain.Repositories {
+namespace Alabo.Framework.Tasks.Schedules.Domain.Repositories {
 
     public class ScheduleRepository : RepositoryMongo<Schedule, ObjectId>, IScheduleRepository {
 

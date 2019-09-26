@@ -1,18 +1,19 @@
-﻿using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Core.Tasks.Extensions;
-using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.App.Share.OpenTasks.Base;
 using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Data.Things.Orders.Domain.Entities;
+using Alabo.Data.Things.Orders.Domain.Services;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Data.Things.Orders.ResultModel;
+using Alabo.Extensions;
 using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Tasks.Queues.Models;
 using ZKCloud.Open.ApiBase.Models;
 using User = Alabo.Users.Entities.User;
 
-namespace Alabo.App.Open.Tasks {
+namespace Alabo.App.Share.OpenTasks {
 
     using User = User;
 

@@ -1,11 +1,10 @@
-﻿using Alabo.App.Core.Common.ViewModels;
-using Alabo.App.Core.User.Domain.Entities;
+﻿using Alabo.Cloud.People.UserQrCode.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
 using Alabo.Domains.Services;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Core.User.Domain.Services {
+namespace Alabo.Cloud.People.UserQrCode.Domain.Services {
 
     public interface IUserQrCodeService : IService<UserDetail, long> {
 

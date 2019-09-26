@@ -1,14 +1,13 @@
-﻿using MongoDB.Bson;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Core.Reports.Domain.Entities;
-using Alabo.Domains.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Domains.Services.Report;
 using Alabo.Domains.Services.Report.Dtos;
+using Alabo.Framework.Reports.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Reports.Domain.Services {
+namespace Alabo.Framework.Reports.Domain.Services {
 
     /// <summary>
     ///

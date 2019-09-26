@@ -1,22 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.Finance.Dtos;
+using Alabo.App.Asset.BankCards.Domain.Entities;
+using Alabo.App.Asset.BankCards.Domain.Services;
+using Alabo.App.Asset.BankCards.Dtos;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
+using Alabo.Extensions;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.Extensions;
 using Alabo.Maps;
-using Alabo.UI;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Finance.UI.AutoForm {
+namespace Alabo.App.Asset.BankCards.UI {
 
     [ClassProperty(Name = "银行卡", Description = "银行卡")]
     public class BankCardAutoForm : UIBase, IAutoForm {

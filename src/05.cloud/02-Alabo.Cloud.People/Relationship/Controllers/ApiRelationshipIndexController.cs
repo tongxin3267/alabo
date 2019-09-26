@@ -1,15 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
+using Alabo.Cloud.People.Relationship.Domain.Entities;
+using Alabo.Cloud.People.Relationship.Domain.Services;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 
-using Alabo.App.Core.User;
-using Alabo.App.Market.Relationship.Domain.Entities;
-using Alabo.App.Market.Relationship.Domain.Services;
-using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.RestfulApi;
-
-namespace Alabo.App.Market.Relationship.Controllers {
+namespace Alabo.Cloud.People.Relationship.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/RelationshipIndex/[action]")]

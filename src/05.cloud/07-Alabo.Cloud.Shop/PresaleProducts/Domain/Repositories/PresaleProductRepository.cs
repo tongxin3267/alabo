@@ -1,17 +1,17 @@
 using System;
-using Alabo.App.Market.PresaleProducts.Domain.Entities;
-using Alabo.Domains.Repositories;
-using Alabo.Datas.UnitOfWorks;
-using Alabo.App.Market.PresaleProducts.Domain.Dtos;
-using Alabo.App.Market.PresaleProducts.Domain.ViewModels;
-using System.Data;
 using System.Collections.Generic;
-using MongoDB.Bson;
+using System.Data;
+using Alabo.Cloud.Shop.PresaleProducts.Domain.Dtos;
+using Alabo.Cloud.Shop.PresaleProducts.Domain.Entities;
+using Alabo.Cloud.Shop.PresaleProducts.Domain.ViewModels;
+using Alabo.Datas.UnitOfWorks;
+using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Extensions;
-using Alabo.App.Shop.Product.Domain.Enums;
+using Alabo.Industry.Shop.Products.Domain.Enums;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.PresaleProducts.Domain.Repositories {
+namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Repositories {
 
     public class PresaleProductRepository : RepositoryEfCore<PresaleProduct, ObjectId>, IPresaleProductRepository {
 

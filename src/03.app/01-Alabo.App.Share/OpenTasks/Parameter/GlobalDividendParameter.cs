@@ -1,7 +1,7 @@
 ﻿using System;
-using Alabo.App.Core.Tasks.ResultModel;
+using Alabo.App.Share.TaskExecutes.ResultModel;
 
-namespace Alabo.App.Open.Tasks.Parameter {
+namespace Alabo.App.Share.OpenTasks.Parameter {
 
     public class GlobalDividendParameter : TaskQueueParameterBase {
 

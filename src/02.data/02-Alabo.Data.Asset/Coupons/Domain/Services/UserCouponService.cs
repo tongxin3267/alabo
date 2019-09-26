@@ -1,19 +1,16 @@
 using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
-using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Repositories;
-using Alabo.App.Shop.Coupons.Domain.Entities;
-using Alabo.Domains.Entities;
 using System.Collections.Generic;
-using Alabo.App.Shop.Coupons.Domain.Enums;
 using System.Text;
+using Alabo.App.Asset.Coupons.Domain.Entities;
+using Alabo.App.Asset.Coupons.Domain.Enums;
 using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Datas.UnitOfWorks;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Repositories;
+using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Shop.Coupons.Domain.Services
+namespace Alabo.App.Asset.Coupons.Domain.Services
 {
     public class UserCouponService : ServiceBase<UserCoupon, ObjectId>, IUserCouponService
     {

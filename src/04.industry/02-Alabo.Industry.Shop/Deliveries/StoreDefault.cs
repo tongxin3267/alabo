@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Alabo.App.Core.Themes.Domain.Enums;
-using Alabo.App.Shop.Store.Domain.Services;
-using Alabo.Framework.Core.Reflections.Interfaces;
+﻿using Alabo.Framework.Core.Reflections.Interfaces;
 using Alabo.Helpers;
+using Alabo.Industry.Shop.Deliveries.Domain.Services;
 
-namespace Alabo.App.Shop.Store {
+namespace Alabo.Industry.Shop.Deliveries {
 
     public class StoreDefault : IDefaultInit {
         public bool IsTenant => false;

@@ -1,27 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using Alabo.App.Shop.Category.Domain.Entities;
-using Alabo.App.Shop.Category.Domain.Services;
-using Alabo.App.Shop.Product.Domain.CallBacks;
-using Alabo.App.Shop.Product.Domain.Entities;
-using Alabo.App.Shop.Product.Domain.Repositories;
-using Alabo.App.Shop.Product.ViewModels;
-using Alabo.App.Shop.Store.Domain.Services;
-using Alabo.Cache;
 using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Files;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
-using Alabo.Mapping;
+using Alabo.Industry.Shop.Products.Domain.Configs;
+using Alabo.Industry.Shop.Products.ViewModels;
 
-namespace Alabo.App.Shop.Product.Domain.Services {
+namespace Alabo.Industry.Shop.Products.Domain.Services {
 
     public class ProductApiService : ServiceBase, IProductApiService {
 

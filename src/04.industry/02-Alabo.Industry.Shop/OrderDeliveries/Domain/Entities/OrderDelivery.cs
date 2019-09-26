@@ -1,15 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.Order.Domain.Entities.Extensions;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Industry.Shop.OrderDeliveries.Domain.Entities.Extensions;
 using Alabo.Tenants;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.App.Shop.Order.Domain.Entities
+namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities
 {
 
     /// <summary>

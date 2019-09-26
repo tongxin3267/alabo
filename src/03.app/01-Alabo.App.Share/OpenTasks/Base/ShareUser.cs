@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alabo.App.Open.Tasks.Base {
+namespace Alabo.App.Share.OpenTasks.Base {
 
     /// <summary>
     /// 分润用户，获取收益的用户

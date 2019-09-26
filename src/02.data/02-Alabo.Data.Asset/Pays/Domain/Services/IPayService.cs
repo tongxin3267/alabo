@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Core.ApiStore;
-using Alabo.App.Core.Finance.Domain.Dtos.Pay;
-using Alabo.App.Core.Finance.Domain.Entities;
+using Alabo.App.Asset.Pays.Domain.Entities;
+using Alabo.App.Asset.Pays.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Tool.Payment;
+using Microsoft.AspNetCore.Http;
 
-namespace Alabo.App.Core.Finance.Domain.Services {
+namespace Alabo.App.Asset.Pays.Domain.Services {
 
     public interface IPayService : IService<Pay, long> {
 

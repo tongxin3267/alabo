@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Tasks.Domain.Enums {
+namespace Alabo.App.Share.TaskExecutes.Domain.Enums {
 
     /// <summary>
     ///     封顶方式

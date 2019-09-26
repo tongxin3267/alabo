@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Alabo.App.Market.PresaleProducts.Domain.Dtos
+﻿namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Dtos
 {
     public class PresaleProductEdit
     {

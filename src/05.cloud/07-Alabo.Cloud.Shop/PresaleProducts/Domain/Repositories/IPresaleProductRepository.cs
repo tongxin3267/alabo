@@ -1,12 +1,11 @@
-using System;
-using Alabo.Domains.Repositories;
-using Alabo.App.Market.PresaleProducts.Domain.Entities;
-using Alabo.App.Market.PresaleProducts.Domain.Dtos;
-using Alabo.App.Market.PresaleProducts.Domain.ViewModels;
 using System.Collections.Generic;
+using Alabo.Cloud.Shop.PresaleProducts.Domain.Dtos;
+using Alabo.Cloud.Shop.PresaleProducts.Domain.Entities;
+using Alabo.Cloud.Shop.PresaleProducts.Domain.ViewModels;
+using Alabo.Domains.Repositories;
 using MongoDB.Bson;
 
-namespace Alabo.App.Market.PresaleProducts.Domain.Repositories {
+namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Repositories {
 
     public interface IPresaleProductRepository : IRepository<PresaleProduct, ObjectId> {
 

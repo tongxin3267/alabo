@@ -1,13 +1,11 @@
-﻿using Newtonsoft.Json;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Domains.Entities;
+﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Entities.Extensions;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Linq.Dynamic;
 using Alabo.Validations;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Core.Finance.Domain.Entities.Extension {
+namespace Alabo.App.Asset.Pays.Domain.Entities.Extension {
 
     /// <summary>
     ///     支付订单的扩展实体

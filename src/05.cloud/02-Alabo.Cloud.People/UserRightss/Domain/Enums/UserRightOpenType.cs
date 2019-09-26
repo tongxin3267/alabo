@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Market.UserRightss.Domain.Enums {
+namespace Alabo.Cloud.People.UserRightss.Domain.Enums {
 
     /// <summary>
     ///     会员权益开通方式

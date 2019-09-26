@@ -1,19 +1,18 @@
-﻿using Alabo.App.Shop.Store.Domain.Services;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.UI;
-using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoTables;
+using Alabo.Industry.Shop.Deliveries.Domain.Services;
 using Alabo.Validations;
+using Alabo.Web.Mvc.Attributes;
+using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Shop.Store.ViewModels {
+namespace Alabo.Industry.Shop.Deliveries.ViewModels {
 
     /// <summary>
     /// </summary>

@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Mvc;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.Data.People.Employes.Dtos;
+﻿using Alabo.Data.People.Employes.Dtos;
 using Alabo.Data.People.Users.Dtos;
 using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
-using Alabo.UI;
 
-namespace Alabo.App.Market.UserRightss.Controllers {
+namespace Alabo.Cloud.People.UserRightss.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/Market/[action]")]

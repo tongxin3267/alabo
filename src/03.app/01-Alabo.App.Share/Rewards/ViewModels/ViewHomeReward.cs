@@ -12,34 +12,32 @@
 // <summary></summary>
 // ***********************************************************************
 
-using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Share.Share.Domain.Dto;
-using Alabo.App.Share.Share.Domain.Entities;
-using Alabo.App.Share.Share.Domain.Enums;
-using Alabo.App.Share.Share.Domain.Services;
+using Alabo.App.Share.Rewards.Domain.Entities;
+using Alabo.App.Share.Rewards.Domain.Enums;
+using Alabo.App.Share.Rewards.Domain.Services;
+using Alabo.App.Share.Rewards.Dtos;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoLists;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoLists;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Helpers;
 using Alabo.Mapping;
-using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Share.Share.ViewModels {
+namespace Alabo.App.Share.Rewards.ViewModels {
 
     /// <summary>
     ///     Class ViewHomeReward.

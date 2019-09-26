@@ -1,18 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Shop.Product.Domain.CallBacks;
-using Alabo.App.Shop.Product.Domain.Entities;
-using Alabo.App.Shop.Product.Domain.Enums;
-using Alabo.App.Shop.Store.Domain.Entities.Extensions;
-using Alabo.Domains.Entities;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+using Alabo.Industry.Shop.Categories.Domain.Entities;
+using Alabo.Industry.Shop.Deliveries.Domain.Entities;
+using Alabo.Industry.Shop.Products.Domain.Configs;
+using Alabo.Industry.Shop.Products.Domain.Entities;
+using Alabo.Industry.Shop.Products.Domain.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.ViewModel;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace Alabo.App.Shop.Product.ViewModels {
+namespace Alabo.Industry.Shop.Products.ViewModels {
 
     /// <summary>
     ///     Class ViewProductEdit.
@@ -61,7 +60,7 @@ namespace Alabo.App.Shop.Product.ViewModels {
         ///     Gets or sets the category.
         /// </summary>
         /// <value>The category.</value>
-        public Category.Domain.Entities.Category Category { get; set; }
+        public Category Category { get; set; }
 
         /// <summary>
         ///     商品类目
@@ -103,7 +102,7 @@ namespace Alabo.App.Shop.Product.ViewModels {
         ///     Gets or sets the store.
         /// </summary>
         /// <value>The store.</value>
-        public Store.Domain.Entities.Store Store { get; set; }
+        public Store Store { get; set; }
 
         /// <summary>
         ///     Gets or sets the price style items.

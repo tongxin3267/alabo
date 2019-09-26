@@ -1,6 +1,6 @@
-﻿using Alabo.App.Offline.Order.Domain.Enums;
+﻿using Alabo.Industry.Offline.Order.Domain.Enums;
 
-namespace Alabo.App.Offline.Order.Domain.Dtos
+namespace Alabo.Industry.Offline.Order.Domain.Dtos
 {
     public class MerchantOrderListInput
     {

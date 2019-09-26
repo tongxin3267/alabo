@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Market.DataBackup.Domain.Enums {
+namespace _01_Alabo.Cloud.Core.DataBackup.Domain.Enums {
 
     /// <summary>
     ///     备份方式

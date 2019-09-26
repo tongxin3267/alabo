@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Shop.Activitys.Modules.GroupBuy.Dtos;
-using Alabo.App.Shop.Product.Domain.Dtos;
-using Alabo.Framework.Core.WebApis.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Framework.Core.WebApis.Dtos;
+using Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Dtos;
+using Alabo.Industry.Shop.Products.Dtos;
 
-namespace Alabo.App.Shop.Activitys.Modules.GroupBuy.Service {
+namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Service {
 
     /// <summary>
     ///     Interface IGroupBuyService

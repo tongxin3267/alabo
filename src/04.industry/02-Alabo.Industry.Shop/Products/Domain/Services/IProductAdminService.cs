@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using Alabo.App.Shop.Product.ViewModels;
+﻿using System;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Industry.Shop.Products.ViewModels;
+using Microsoft.AspNetCore.Http;
 
-namespace Alabo.App.Shop.Product.Domain.Services {
+namespace Alabo.Industry.Shop.Products.Domain.Services {
 
     /// <summary>
     ///     商品后台操作方法写到此处

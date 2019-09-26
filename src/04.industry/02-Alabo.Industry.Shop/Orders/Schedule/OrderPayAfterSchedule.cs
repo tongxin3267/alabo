@@ -1,24 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Threading;
+﻿using System;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Hosting;
-using Quartz;
-using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Domain.Repositories;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Shop.Order.Domain.Services;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Datas.UnitOfWorks;
+using Alabo.Data.Things.Orders.Domain.Repositories;
+using Alabo.Data.Things.Orders.Domain.Services;
 using Alabo.Dependency;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Tasks.Queues.Domain.Entities;
+using Alabo.Framework.Tasks.Queues.Domain.Enums;
+using Alabo.Framework.Tasks.Queues.Domain.Servcies;
 using Alabo.Schedules;
-using Alabo.Schedules.Enum;
 using Alabo.Schedules.Job;
+using Quartz;
 
-namespace Alabo.App.Shop.Order.Schedule {
+namespace Alabo.Industry.Shop.Orders.Schedule {
 
     /// <summary>
     ///     订单支付成功后处理任务

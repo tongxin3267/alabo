@@ -1,22 +1,4 @@
-﻿using Alabo.App.Core.ApiStore;
-using Alabo.App.Core.ApiStore.CallBacks;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Dtos.Pay;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Entities.Extension;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.App.Core.Finance.Domain.Repositories;
-using Alabo.App.Core.Finance.Dtos;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.Domains.Repositories;
-using Alabo.Domains.Services;
-using Alabo.Extensions;
-using Alabo.Helpers;
-using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,11 +8,29 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using Alabo.App.Asset.Accounts.Domain.Services;
+using Alabo.App.Asset.Bills.Domain.Repositories;
+using Alabo.App.Asset.Bills.Domain.Services;
+using Alabo.App.Asset.Pays.Domain.Entities;
+using Alabo.App.Asset.Pays.Domain.Entities.Extension;
+using Alabo.App.Asset.Pays.Domain.Repositories;
+using Alabo.App.Asset.Pays.Dtos;
 using Alabo.AutoConfigs;
 using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Datas.UnitOfWorks;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
+using Alabo.Domains.Repositories;
+using Alabo.Domains.Services;
+using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Helpers;
 using Alabo.Randoms;
+using Alabo.Tool.Payment;
+using Alabo.Tool.Payment.CallBacks;
+using Microsoft.AspNetCore.Http;
 using ZKCloud.Open.ApiStore.Payment.Modules.Alipay;
 using ZKCloud.Open.ApiStore.Payment.Modules.Alipay.Domain;
 using ZKCloud.Open.ApiStore.Payment.Modules.Alipay.Request;
@@ -41,7 +41,7 @@ using ZKCloud.Open.ApiStore.Payment.Modules.WeChatPay.Response;
 using ZKCloud.Open.Security;
 using Convert = System.Convert;
 
-namespace Alabo.App.Core.Finance.Domain.Services {
+namespace Alabo.App.Asset.Pays.Domain.Services {
 
     /// <summary>
     ///     支付数据服务

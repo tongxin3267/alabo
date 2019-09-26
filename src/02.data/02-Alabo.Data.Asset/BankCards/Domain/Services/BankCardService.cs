@@ -1,13 +1,12 @@
-using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using Alabo.App.Core.Finance.Domain.Dtos.BankCard;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Dtos;
+using Alabo.App.Asset.BankCards.Domain.Entities;
+using Alabo.App.Asset.BankCards.Dtos;
+using Alabo.App.Asset.Pays.Dtos;
 using Alabo.AutoConfigs;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
@@ -17,8 +16,9 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Mapping;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Finance.Domain.Services {
+namespace Alabo.App.Asset.BankCards.Domain.Services {
 
     public class BankCardService : ServiceBase<BankCard, ObjectId>, IBankCardService {
 

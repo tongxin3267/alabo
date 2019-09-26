@@ -2,7 +2,7 @@
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.Finance.ViewModels.Recharge {
+namespace Alabo.App.Asset.Recharges.Dtos {
 
     /// <summary>
     ///     Class RchargeView.

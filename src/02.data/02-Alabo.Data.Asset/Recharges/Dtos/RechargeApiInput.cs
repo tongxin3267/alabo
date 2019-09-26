@@ -4,7 +4,7 @@ using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.Recharge {
+namespace Alabo.App.Asset.Recharges.Dtos {
 
     /// <summary>
     ///     Class RechargeApiInput.

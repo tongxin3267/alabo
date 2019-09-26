@@ -1,19 +1,16 @@
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Alabo.Cloud.Shop.Favorites.Domain.Entities;
+using Alabo.Cloud.Shop.Favorites.Domain.Services;
+using Alabo.Cloud.Shop.Favorites.Dtos;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Share.Attach.Domain.Dtos;
-using Alabo.App.Share.Attach.Domain.Entities;
-using Alabo.App.Share.Attach.Domain.Services;
-using Alabo.App.Shop.Product.DiyModels;
 using Alabo.Framework.Core.WebApis.Service;
-using Alabo.Domains.Enums;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Share.Attach.Controllers {
+namespace Alabo.Cloud.Shop.Favorites.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/Favorite/[action]")]

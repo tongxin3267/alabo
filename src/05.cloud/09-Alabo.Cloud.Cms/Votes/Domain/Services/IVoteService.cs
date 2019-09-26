@@ -1,11 +1,8 @@
-using System;
-using System.Linq;
-using MongoDB.Bson;
+using Alabo.Cloud.Cms.Votes.Domain.Entities;
 using Alabo.Domains.Services;
-using Alabo.App.Market.Votes.Domain.Entities;
-using Alabo.Domains.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.Votes.Domain.Services {
+namespace Alabo.Cloud.Cms.Votes.Domain.Services {
 	public interface IVoteService : IService<Vote, ObjectId>  {
 	}
 	}

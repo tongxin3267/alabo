@@ -1,13 +1,12 @@
 ﻿using System;
-using Alabo.App.Core.Finance.Domain.Dtos.Recharge;
+using Alabo.App.Asset.Recharges.Dtos;
+using Alabo.Domains.Entities;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Domains.Entities;
-using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Finance.UI.AutoForm {
+namespace Alabo.App.Asset.Recharges.UI {
 
     [ClassProperty(Name = "充值", Description = "充值AutoForm")]
     public class RechargeAutoForm : UIBase, IAutoForm {

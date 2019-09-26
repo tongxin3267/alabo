@@ -1,22 +1,22 @@
-﻿using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.App.Shop.Activitys.Domain.Entities;
-using Alabo.App.Shop.Activitys.Dtos;
-using Alabo.App.Shop.Product.Domain.Entities;
-using Alabo.App.Shop.Product.Domain.Services;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Industry.Shop.Activitys.Domain.Entities;
+using Alabo.Industry.Shop.Activitys.Dtos;
+using Alabo.Industry.Shop.Products.Domain.Entities;
+using Alabo.Industry.Shop.Products.Domain.Services;
 using Alabo.Maps;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Activitys.Modules.MemberDiscount.Model
+namespace Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Model
 {
     /// <summary>
     /// 会员折扣(会员等级)

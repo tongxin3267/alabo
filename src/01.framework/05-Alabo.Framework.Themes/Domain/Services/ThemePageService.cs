@@ -1,17 +1,17 @@
-using Alabo.App.Core.Themes.Domain.Entities;
-using Alabo.App.Core.Themes.Dtos;
+using System.Collections.Generic;
+using Alabo.AutoConfigs.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
+using Alabo.Framework.Themes.Domain.Entities;
+using Alabo.Framework.Themes.Dtos;
 using Alabo.Helpers;
+using Alabo.Tool.Payment.CallBacks;
 using MongoDB.Bson;
-using System.Collections.Generic;
-using Alabo.App.Core.ApiStore.CallBacks;
-using Alabo.AutoConfigs.Services;
 
-namespace Alabo.App.Core.Themes.Domain.Services {
+namespace Alabo.Framework.Themes.Domain.Services {
 
     public class ThemePageService : ServiceBase<ThemePage, ObjectId>, IThemePageService {
 

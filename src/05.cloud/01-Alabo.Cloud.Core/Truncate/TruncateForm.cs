@@ -1,22 +1,21 @@
-﻿using Alabo.Domains.Base.Services;
+﻿using System.ComponentModel.DataAnnotations;
+using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
-using Alabo.Helpers;
-using Alabo.Maps;
-using Alabo.Runtime;
-using Alabo.UI;
-using Alabo.Web.Mvc.Attributes;
-using System.ComponentModel.DataAnnotations;
 using Alabo.Framework.Core.Admins.Repositories;
 using Alabo.Framework.Core.Admins.Services;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Helpers;
+using Alabo.Maps;
+using Alabo.Runtime;
 using Alabo.Users.Services;
 using Alabo.Validations;
+using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Cloud.Core.Truncate {
+namespace _01_Alabo.Cloud.Core.Truncate {
 
     /// <summary>
     /// 清空数据

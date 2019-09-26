@@ -1,7 +1,13 @@
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Core.User.Domain.Repositories;
-using Alabo.Framework.Core.Enums.Enum;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Alabo.App.Asset.Accounts.Domain.Services;
+using Alabo.Cloud.People.GradeInfos.Domain.Configs;
+using Alabo.Cloud.People.GradeInfos.Domain.Entities;
+using Alabo.Data.People.Teams.Domain.Services;
+using Alabo.Data.People.Users.Domain.Repositories;
+using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Data.People.Users.Dtos;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Attributes;
@@ -9,26 +15,17 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
-using Alabo.Linq;
-using Alabo.Schedules;
-using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.Data.People.Teams.Domain.Services;
-using Alabo.Data.People.Users.Domain.Repositories;
-using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Data.People.Users.Dtos;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Entities;
 using Alabo.Framework.Basic.Grades.Domain.Enums;
 using Alabo.Framework.Basic.Grades.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Tasks.Queues.Domain.Servcies;
+using Alabo.Linq;
+using Alabo.Schedules;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.User.Domain.Services {
+namespace Alabo.Cloud.People.GradeInfos.Domain.Servcies {
 
     /// <summary>
     /// 等级更新

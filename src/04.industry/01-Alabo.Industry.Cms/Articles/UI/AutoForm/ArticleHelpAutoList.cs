@@ -1,21 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MongoDB.Bson;
-using Alabo.App.Cms.Articles.Domain.Entities;
-using Alabo.App.Cms.Articles.Domain.Services;
-using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoLists;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
-using Alabo.UI;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoLists;
+using Alabo.Industry.Cms.Articles.Domain.Entities;
+using Alabo.Industry.Cms.Articles.Domain.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Cms.Articles.UI.AutoForm {
+namespace Alabo.Industry.Cms.Articles.UI.AutoForm {
 
     public class ArticleHelpAutoList : UIBase, IAutoList {
 

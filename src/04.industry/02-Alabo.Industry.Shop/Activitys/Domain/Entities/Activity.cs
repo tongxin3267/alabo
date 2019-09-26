@@ -1,18 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.Activitys.Domain.Entities.Extension;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Industry.Shop.Activitys.Domain.Entities.Extension;
 using Alabo.Tenants;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.App.Shop.Activitys.Domain.Entities
+namespace Alabo.Industry.Shop.Activitys.Domain.Entities
 {
 
     /// <summary>

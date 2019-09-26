@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using Alabo.App.Asset.Bills.Domain.Entities;
+using Alabo.App.Asset.Bills.Domain.Services;
 using Xunit;
 using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.AutoConfigs.Entities;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Test.Base.Core.Model;

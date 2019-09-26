@@ -1,20 +1,18 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using Alabo.App.Shop.Coupons.Domain.Enums;
-using Alabo.App.Shop.Coupons.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
+using Alabo.App.Asset.Coupons.Domain.Enums;
+using Alabo.App.Asset.Coupons.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.UI;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Shop.Coupons.Domain.Entities {
+namespace Alabo.App.Asset.Coupons.Domain.Entities {
 
     /// <summary>
     /// 用户优惠券

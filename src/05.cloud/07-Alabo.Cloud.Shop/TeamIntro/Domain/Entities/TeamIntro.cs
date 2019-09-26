@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Framework.Core.WebUis;
-using MongoDB.Bson.Serialization.Attributes;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.UI;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Market.TeamIntro.Domain.Entities {
+namespace Alabo.Cloud.Shop.TeamIntro.Domain.Entities {
 
     [BsonIgnoreExtraElements][Table("TeamIntro_TeamIntro")]
     [ClassProperty(Name = "团队介绍", Description = "团队介绍", Icon = IconFlaticon.route,

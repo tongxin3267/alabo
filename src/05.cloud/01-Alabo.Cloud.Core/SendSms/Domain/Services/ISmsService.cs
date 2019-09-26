@@ -1,8 +1,8 @@
-﻿using Alabo.App.Core.ApiStore.Sms.Entities;
+﻿using _01_Alabo.Cloud.Core.SendSms.Domain.Entities;
 using Alabo.Domains.Services;
 using MongoDB.Bson;
 
-namespace ZKCloud.App.Core.ApiStore.Sms.Services {
+namespace _01_Alabo.Cloud.Core.SendSms.Domain.Services {
 
     /// <summary>
     /// 发送短信服务

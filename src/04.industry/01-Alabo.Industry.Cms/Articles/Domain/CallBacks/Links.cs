@@ -1,10 +1,9 @@
-﻿
+﻿using Alabo.Domains.Enums;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.Reflections.Interfaces;
-using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Cms.Articles.Domain.CallBacks {
+namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
 
     /// <summary>
     ///     控制面板中 头条分类

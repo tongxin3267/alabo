@@ -1,7 +1,7 @@
-﻿using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.Domains.Entities.Extensions;
+﻿using Alabo.Domains.Entities.Extensions;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
 
-namespace Alabo.App.Shop.Order.Domain.Entities.Extensions {
+namespace Alabo.Industry.Shop.Orders.Domain.Entities.Extensions {
 
     /// <summary>
     ///     订单评价

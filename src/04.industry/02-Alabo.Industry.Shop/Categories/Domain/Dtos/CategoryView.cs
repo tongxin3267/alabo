@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.Category.Domain.Services;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoTables;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
 using Alabo.Helpers;
+using Alabo.Industry.Shop.Categories.Domain.Services;
 using Alabo.Maps;
-using Alabo.UI;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Category.Domain.Dtos
+namespace Alabo.Industry.Shop.Categories.Domain.Dtos
 {
     /// <summary>
     /// 前台编辑视图

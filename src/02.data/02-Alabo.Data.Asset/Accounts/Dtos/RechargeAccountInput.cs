@@ -1,9 +1,8 @@
 ﻿using System;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+using Alabo.Tool.Payment;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.Account {
+namespace Alabo.App.Asset.Accounts.Dtos {
 
     public class RechargeAccountInput {
 

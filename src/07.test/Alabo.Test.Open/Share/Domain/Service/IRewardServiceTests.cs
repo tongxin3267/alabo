@@ -1,10 +1,10 @@
-using Alabo.App.Share.Share.Domain.Services;
 using Alabo.Extensions;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.App.Share.Rewards.Domain.Services;
 using Xunit;
 using ZKCloud.Open.Share.Models;
 

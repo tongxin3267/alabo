@@ -1,14 +1,13 @@
-﻿using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Base;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using Alabo.App.Share.OpenTasks.Base;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
-using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Core.Enums.Enum;
 
-namespace Alabo.App.Share.Kpi {
+namespace Alabo.App.Kpis.Kpis {
 
     public abstract class KpiBaseConfig : BaseViewModel, IModuleConfig {
 

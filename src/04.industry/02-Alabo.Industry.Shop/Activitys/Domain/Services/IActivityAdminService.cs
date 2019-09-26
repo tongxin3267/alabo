@@ -1,12 +1,12 @@
-﻿using Alabo.App.Shop.Activitys.Dtos;
-using Alabo.App.Shop.Activitys.Extensions;
-using Alabo.App.Shop.Activitys.ViewModels;
+﻿using System;
+using System.Collections.Generic;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
-using System;
-using System.Collections.Generic;
+using Alabo.Industry.Shop.Activitys.Dtos;
+using Alabo.Industry.Shop.Activitys.Extensions;
+using Alabo.Industry.Shop.Activitys.ViewModels;
 
-namespace Alabo.App.Shop.Activitys.Domain.Services {
+namespace Alabo.Industry.Shop.Activitys.Domain.Services {
 
     /// <summary>
     ///     Interface IActivityAdminService

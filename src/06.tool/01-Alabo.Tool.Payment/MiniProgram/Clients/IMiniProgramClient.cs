@@ -1,9 +1,9 @@
-﻿using Alabo.App.Core.ApiStore.MiniProgram.Dtos;
+﻿using Alabo.Tool.Payment.MiniProgram.Dtos;
 using ZKCloud.Open.ApiBase.Models;
 
 /// <summary>
 /// </summary>
-namespace Alabo.App.Core.ApiStore.MiniProgram.Clients {
+namespace Alabo.Tool.Payment.MiniProgram.Clients {
 
     /// <summary>
     /// </summary>

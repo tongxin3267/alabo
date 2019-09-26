@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Order.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
-using Alabo.Extensions;
+using Alabo.Industry.Shop.OrderActions.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Dtos;
 
-namespace Alabo.App.Shop.Order.Domain.Repositories {
+namespace Alabo.Industry.Shop.OrderActions.Domain.Repositories {
 
     internal class OrderActionRepository : RepositoryEfCore<OrderAction, long>, IOrderActionRepository {
 

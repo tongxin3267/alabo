@@ -1,18 +1,11 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Hosting;
-using Quartz;
-using Alabo.App.Shop.Product.Domain.Services;
+﻿using System.Threading.Tasks;
 using Alabo.Cache;
-using Alabo.Datas.UnitOfWorks;
 using Alabo.Dependency;
-using Alabo.Schedules;
-using Alabo.Schedules.Enum;
+using Alabo.Industry.Shop.Products.Domain.Services;
 using Alabo.Schedules.Job;
+using Quartz;
 
-namespace Alabo.App.Shop.Product.Schedules {
+namespace Alabo.Industry.Shop.Products.Schedules {
 
     /// <summary>
     ///     自动更新商品Sku价格

@@ -1,4 +1,4 @@
-﻿namespace Alabo.App.Core.Themes.Dtos {
+﻿namespace Alabo.Framework.Themes.Dtos {
 
     /// <summary>
     /// 客户端站点设置

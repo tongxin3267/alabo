@@ -1,12 +1,9 @@
-using System;using Alabo.Domains.Repositories.EFCore;using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.App.Shop.Coupons.Domain.Entities;
-using Alabo.Domains.Repositories;
+using Alabo.App.Asset.Coupons.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
-using  Alabo.App.Shop.Coupons.Domain.Repositories;
+using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Shop.Coupons.Domain.Repositories {
+namespace Alabo.App.Asset.Coupons.Domain.Repositories {
 	public class CouponRepository : RepositoryMongo<Coupon, ObjectId>,ICouponRepository  {
 	public  CouponRepository(IUnitOfWork unitOfWork) : base(unitOfWork){
 	}

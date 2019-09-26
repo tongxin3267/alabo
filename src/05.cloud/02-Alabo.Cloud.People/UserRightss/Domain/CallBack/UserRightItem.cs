@@ -1,12 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Market.UserRightss.Domain.CallBack {
+namespace Alabo.Cloud.People.UserRightss.Domain.CallBack {
 
     /// <summary>
     ///     用户等级权益赠送数量设置

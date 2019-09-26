@@ -1,19 +1,17 @@
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Offline.Merchants.Domain.Dtos;
-using Alabo.App.Offline.Merchants.Domain.Entities;
-using Alabo.App.Offline.Merchants.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Industry.Offline.Merchants.Domain.Entities;
+using Alabo.Industry.Offline.Merchants.Domain.Services;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Offline.Merchants.Controllers
+namespace Alabo.Industry.Offline.Merchants.Controllers
 {
     [ApiExceptionFilter]
     [Route("Api/MerchantStore/[action]")]

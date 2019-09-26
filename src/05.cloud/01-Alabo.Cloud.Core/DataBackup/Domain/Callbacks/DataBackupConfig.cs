@@ -1,4 +1,4 @@
-﻿namespace Alabo.App.Market.DataBackup.Domain.Callbacks {
+﻿namespace _01_Alabo.Cloud.Core.DataBackup.Domain.Callbacks {
 
     public class DataBackupConfig {
     }

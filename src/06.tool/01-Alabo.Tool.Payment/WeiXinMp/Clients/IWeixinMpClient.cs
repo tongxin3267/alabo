@@ -1,7 +1,7 @@
-﻿using Senparc.Weixin.MP.Entities;
-using Alabo.Dependency;
+﻿using Alabo.Dependency;
+using Senparc.Weixin.MP.Entities;
 
-namespace Alabo.App.Core.ApiStore.WeiXinMp.Clients {
+namespace Alabo.Tool.Payment.WeiXinMp.Clients {
 
     /// <summary>
     /// 微信公众号相关接口

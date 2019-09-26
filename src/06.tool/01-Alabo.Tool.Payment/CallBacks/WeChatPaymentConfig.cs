@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.ApiStore.CallBacks {
+namespace Alabo.Tool.Payment.CallBacks {
 
     /// <summary>
     /// 公众号微信支付配置

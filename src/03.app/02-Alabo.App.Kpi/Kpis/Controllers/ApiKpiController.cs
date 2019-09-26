@@ -1,14 +1,14 @@
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Share.Kpi.Domain.CallBack;
-using Alabo.App.Share.Kpi.Domain.Services;
+using Alabo.App.Kpis.Kpis.Domain.Configs;
+using Alabo.App.Kpis.Kpis.Domain.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Share.Kpi.Controllers {
+namespace Alabo.App.Kpis.Kpis.Controllers {
 
     /// <summary>
     /// KPI¿¼ºË

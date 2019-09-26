@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alabo.App.Shop.Product.ViewModels {
+namespace Alabo.Industry.Shop.Products.ViewModels {
 
     /// <summary>
     ///     存入 OrderProduct 的商品活动信息

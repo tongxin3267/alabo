@@ -1,9 +1,8 @@
-﻿
+﻿using Alabo.Domains.Enums;
 using Alabo.Framework.Core.Reflections.Interfaces;
-using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Store.Domain.CallBacks {
+namespace Alabo.Industry.Shop.Deliveries.Domain.CallBacks {
 
     /// <summary>
     ///     店铺商品分类 （供应商（Supplier）添加商品时使用）

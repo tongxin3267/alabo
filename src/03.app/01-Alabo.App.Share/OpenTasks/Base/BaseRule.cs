@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Tasks.Base {
+namespace Alabo.App.Share.OpenTasks.Base {
 
     public class BaseRule {
 

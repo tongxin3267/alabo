@@ -1,12 +1,11 @@
-﻿using MongoDB.Bson;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
+﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.BankCard {
+namespace Alabo.App.Asset.BankCards.Dtos {
 
     public class ViewBankCardInput : ApiInputDto {
         public long UserId { get; set; }

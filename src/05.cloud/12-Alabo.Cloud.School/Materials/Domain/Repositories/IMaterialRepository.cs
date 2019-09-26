@@ -1,8 +1,8 @@
-using MongoDB.Bson;
-using Alabo.App.Market.PromotionalMaterial.Domain.Entities;
+using Alabo.Cloud.School.Materials.Domain.Entities;
 using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.PromotionalMaterial.Domain.Repositories {
+namespace Alabo.Cloud.School.Materials.Domain.Repositories {
 
     public interface IMaterialRepository : IRepository<Material, ObjectId> {
     }

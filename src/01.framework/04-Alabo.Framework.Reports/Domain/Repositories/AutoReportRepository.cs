@@ -1,12 +1,8 @@
-﻿using MongoDB.Bson;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
-using Alabo.App.Core.Reports.Domain.Entities;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Dtos;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
@@ -14,11 +10,13 @@ using Alabo.Domains.Services.Report;
 using Alabo.Domains.Services.Report.Dtos;
 using Alabo.Domains.Services.Report.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Reports.Domain.Entities;
 using Alabo.Helpers;
-using Alabo.UI;
 using Alabo.Users.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Reports.Domain.Repositories {
+namespace Alabo.Framework.Reports.Domain.Repositories {
 
     /// <summary>
     /// AutoReportRepository

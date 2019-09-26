@@ -1,7 +1,6 @@
-﻿using Alabo.App.Open.Attach.Domain.Enums;
-using Alabo.App.Share.Attach.Domain.Enums;
+﻿using Alabo.Cloud.Shop.Footprints.Domain.Enums;
 
-namespace Alabo.App.Share.Attach.Domain.Dtos {
+namespace Alabo.Cloud.Shop.Footprints.Dtos {
 
     /// <summary>
     /// 足迹模型

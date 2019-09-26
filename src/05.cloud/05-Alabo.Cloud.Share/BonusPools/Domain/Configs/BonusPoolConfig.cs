@@ -1,15 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Tasks.Domain.Enums;
+using _05_Alabo.Cloud.Share.BonusPools.Domain.Enums;
 using Alabo.AutoConfigs;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.UI;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.Tasks.Domain.CallBacks {
+namespace _05_Alabo.Cloud.Share.BonusPools.Domain.Configs {
 
     [ClassProperty(Name = "奖金池", Icon = IconFlaticon.menu, SortOrder = 1,
         SideBarType = SideBarType.BonusPoolBar)]

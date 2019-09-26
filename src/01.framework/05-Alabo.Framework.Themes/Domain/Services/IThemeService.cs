@@ -1,10 +1,10 @@
-using MongoDB.Bson;
-using Alabo.App.Core.Themes.Domain.Entities;
-using Alabo.App.Core.Themes.Dtos;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Services;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Themes.Domain.Entities;
+using Alabo.Framework.Themes.Dtos;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Themes.Domain.Services {
+namespace Alabo.Framework.Themes.Domain.Services {
 
     public interface IThemeService : IService<Theme, ObjectId> {
 

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Alabo.App.Shop.Activitys.ViewModels
+namespace Alabo.Industry.Shop.Activitys.ViewModels
 {
     /// <summary>
     /// ProductGradePrice

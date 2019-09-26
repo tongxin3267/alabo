@@ -1,24 +1,13 @@
-using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using Alabo.Domains.Entities;
-using Microsoft.AspNetCore.Mvc;
-using Alabo.Framework.Core.WebApis.Filter;
-
-using MongoDB.Bson;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.RestfulApi;
-using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.Domains.Services;
-using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.Controllers;
-using Alabo.App.Market.BookingSignup.Domain.Entities;
-using Alabo.App.Market.BookingSignup.Domain.Services;
+using Alabo.Cloud.School.BookingSignup.Domain.Entities;
+using Alabo.Cloud.School.BookingSignup.Domain.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Market.BookingSignup.Controllers {
+namespace Alabo.Cloud.School.BookingSignup.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/BookingSignupOrder/[action]")]

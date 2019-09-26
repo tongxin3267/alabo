@@ -1,4 +1,4 @@
-﻿namespace Alabo.App.Core.User.Domain.Dtos {
+﻿namespace Alabo.Cloud.People.Identities {
 
     public class IdentityApiResult {
 

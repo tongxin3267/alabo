@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Finance.Domain.Enums {
+namespace Alabo.App.Asset.Withdraws.Domain.Enums {
 
     /// <summary>
     /// 审核状态

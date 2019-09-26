@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.App.Offline.Order.ViewModels;
+﻿using System.Collections.Generic;
 using Alabo.Domains.Entities.Extensions;
+using Alabo.Industry.Offline.Order.ViewModels;
 
-namespace Alabo.App.Offline.Order.Domain.Entities.Extensions
+namespace Alabo.Industry.Offline.Order.Domain.Entities.Extensions
 {
     /// <summary>
     /// 订单扩展数据

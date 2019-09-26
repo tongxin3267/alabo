@@ -4,26 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using Alabo.App.Core.Finance.Domain.Entities.Extension;
-using Alabo.App.Core.Finance.Domain.Repositories;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Shop.AfterSale.Domain.Enums;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Order.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Entities.Extensions;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.App.Shop.Order.Domain.PcDtos;
-using Alabo.App.Shop.Order.Domain.Repositories;
-using Alabo.App.Shop.Order.ViewModels;
-using Alabo.App.Shop.Product.Domain.Enums;
-using Alabo.App.Shop.Product.Domain.Services;
-using Alabo.App.Shop.Store.Domain.Entities.Extensions;
-using Alabo.App.Shop.Store.Domain.Services;
+using Alabo.App.Asset.Pays.Domain.Entities.Extension;
+using Alabo.App.Asset.Pays.Domain.Services;
 using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Data.People.Users.Dtos;
-using Alabo.Framework.Core.WebApis.Service;
-using Alabo.Datas.Stores;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
@@ -32,7 +17,23 @@ using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Address.Domain.Services;
+using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Helpers;
+using Alabo.Industry.Shop.AfterSales.Domain.Enums;
+using Alabo.Industry.Shop.Deliveries.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.Deliveries.Domain.Services;
+using Alabo.Industry.Shop.OrderActions.Domain.Entities;
+using Alabo.Industry.Shop.OrderActions.Domain.Enums;
+using Alabo.Industry.Shop.OrderActions.Domain.Services;
+using Alabo.Industry.Shop.OrderDeliveries.Domain.Services;
+using Alabo.Industry.Shop.Orders.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using Alabo.Industry.Shop.Orders.Domain.Repositories;
+using Alabo.Industry.Shop.Orders.Dtos;
+using Alabo.Industry.Shop.Orders.PcDtos;
+using Alabo.Industry.Shop.Orders.ViewModels;
+using Alabo.Industry.Shop.Products.Domain.Enums;
+using Alabo.Industry.Shop.Products.Domain.Services;
 using Alabo.Mapping;
 using Alabo.Runtime;
 using Alabo.Tenants;
@@ -40,7 +41,7 @@ using Alabo.Tenants.Domain.Services;
 using File = System.IO.File;
 using String = System.String;
 
-namespace Alabo.App.Shop.Order.Domain.Services {
+namespace Alabo.Industry.Shop.Orders.Domain.Services {
 
     /// <summary>
     /// </summary>

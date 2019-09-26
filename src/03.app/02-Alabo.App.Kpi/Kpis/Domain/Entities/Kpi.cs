@@ -1,14 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.Tenants;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.App.Share.Kpi.Domain.Entities {
+namespace Alabo.App.Kpis.Kpis.Domain.Entities {
 
     /// <summary>
     ///     统计表（该表数据，只增，不编辑，不删除)

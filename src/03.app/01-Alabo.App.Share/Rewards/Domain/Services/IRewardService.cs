@@ -1,13 +1,13 @@
-﻿using Alabo.App.Open.Tasks;
-using Alabo.App.Share.Share.Domain.Dto;
-using Alabo.App.Share.Share.ViewModels;
+﻿using System;
+using System.Collections.Generic;
+using Alabo.App.Share.OpenTasks;
+using Alabo.App.Share.Rewards.Dtos;
+using Alabo.App.Share.Rewards.ViewModels;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
 
-namespace Alabo.App.Share.Share.Domain.Services {
+namespace Alabo.App.Share.Rewards.Domain.Services {
 
     using Reward = Entities.Reward;
 

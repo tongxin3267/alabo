@@ -1,11 +1,10 @@
-﻿using MongoDB.Bson;
-using Newtonsoft.Json;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
+﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Validations;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Core.Themes.Dtos.Service {
+namespace Alabo.Framework.Themes.Dtos.Service {
 
     public class ThemeDataInput {
 

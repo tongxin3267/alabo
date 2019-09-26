@@ -1,7 +1,9 @@
-﻿using System.Linq;
-using Alabo.App.Share.Kpi.Domain.CallBack;
-using Alabo.App.Share.Kpi.Domain.Repositories;
-using Alabo.App.Share.Kpi.ViewModels;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Alabo.App.Kpis.Kpis.Domain.Configs;
+using Alabo.App.Kpis.Kpis.Domain.Repositories;
+using Alabo.App.Kpis.Kpis.Dtos;
 using Alabo.Data.People.Teams.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
@@ -10,13 +12,10 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Exceptions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Share.Kpi.Domain.Services {
-
-    using System;
-    using System.Collections.Generic;
-    using Alabo.Framework.Core.Enums.Enum;
+namespace Alabo.App.Kpis.Kpis.Domain.Services {
     using Kpi = Entities.Kpi;
 
     /// <summary>

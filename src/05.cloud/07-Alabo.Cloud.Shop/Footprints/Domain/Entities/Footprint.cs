@@ -1,13 +1,12 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Open.Attach.Domain.Enums;
-using Alabo.App.Share.Attach.Domain.Enums;
+using Alabo.Cloud.Shop.Footprints.Domain.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Share.Attach.Domain.Entities {
+namespace Alabo.Cloud.Shop.Footprints.Domain.Entities {
 
     /// <summary>
     ///     通用足迹

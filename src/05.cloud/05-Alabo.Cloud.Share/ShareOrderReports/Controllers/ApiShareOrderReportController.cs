@@ -1,11 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
+using _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Entities;
+using _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Services;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Services;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Tasks.Controllers {
+namespace _05_Alabo.Cloud.Share.ShareOrderReports.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/ShareOrderReport/[action]")]

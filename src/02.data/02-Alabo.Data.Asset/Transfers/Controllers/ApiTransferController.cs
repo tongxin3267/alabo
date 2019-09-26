@@ -1,21 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
+using Alabo.App.Asset.Transfers.Domain.Services;
+using Alabo.App.Asset.Transfers.Dtos;
+using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-
-using Alabo.App.Core.Finance.Domain.Dtos.Transfer;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebUis.Models.Lists;
-using Alabo.Domains.Enums;
-using Alabo.Extensions;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Core.Finance.Controllers {
+namespace Alabo.App.Asset.Transfers.Controllers {
 
     /// <summary>
     ///     转账相关的Api接口

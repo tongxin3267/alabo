@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Alabo.Domains.Query.Dto;
 
-namespace Alabo.App.Market.PresaleProducts.Domain.Dtos
+namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Dtos
 {
     public class PresaleProductApiInput : ApiInputDto
     {

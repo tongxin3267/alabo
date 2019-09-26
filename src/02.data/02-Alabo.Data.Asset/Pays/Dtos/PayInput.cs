@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
+using Alabo.Tool.Payment;
 using Alabo.Validations;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.Pay {
+namespace Alabo.App.Asset.Pays.Dtos {
 
     /// <summary>
     ///     支付订单信息

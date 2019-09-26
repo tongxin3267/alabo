@@ -1,13 +1,9 @@
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Offline.Merchants.Domain.Services;
-using Alabo.App.Offline.Order.Domain.Dtos;
-using Alabo.App.Offline.Order.Domain.Entities;
-using Alabo.App.Offline.Order.Domain.Entities.Extensions;
-using Alabo.App.Offline.Order.Domain.Enums;
-using Alabo.App.Offline.Order.Domain.Repositories;
-using Alabo.App.Offline.Order.ViewModels;
-using Alabo.App.Offline.Product.Domain.Services;
-using Alabo.Framework.Core.Enums.Enum;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Alabo.App.Asset.Pays.Domain.Services;
+using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Data.People.Users.Dtos;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -15,16 +11,18 @@ using Alabo.Domains.Query;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
-using Alabo.Linq.Dynamic;
-using Alabo.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Data.People.Users.Dtos;
 using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Industry.Offline.Merchants.Domain.Services;
+using Alabo.Industry.Offline.Order.Domain.Dtos;
+using Alabo.Industry.Offline.Order.Domain.Entities;
+using Alabo.Industry.Offline.Order.Domain.Entities.Extensions;
+using Alabo.Industry.Offline.Order.Domain.Enums;
+using Alabo.Industry.Offline.Order.Domain.Repositories;
+using Alabo.Industry.Offline.Order.ViewModels;
+using Alabo.Industry.Offline.Product.Domain.Services;
+using Alabo.Mapping;
 
-namespace Alabo.App.Offline.Order.Domain.Services {
+namespace Alabo.Industry.Offline.Order.Domain.Services {
 
     /// <summary>
     /// MerchantOrderService

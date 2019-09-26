@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.Common.Domain.CallBacks {
+namespace Alabo.Cloud.People.UserQrCode.Domain.Configs {
 
     /// <summary>
     /// 二维码设置

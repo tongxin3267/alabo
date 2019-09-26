@@ -1,8 +1,8 @@
-using MongoDB.Bson;
-using Alabo.App.Market.Relationship.Domain.Entities;
+using Alabo.Cloud.People.Relationship.Domain.Entities;
 using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.Relationship.Domain.Repositories {
+namespace Alabo.Cloud.People.Relationship.Domain.Repositories {
 
     public interface IRelationshipIndexRepository : IRepository<RelationshipIndex, ObjectId> {
     }

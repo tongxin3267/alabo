@@ -1,6 +1,5 @@
+using Alabo.App.Share.TaskExecutes.Domain.Services;
 using Xunit;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Open.Tasks.Configs.Area;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Extensions;
 

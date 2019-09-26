@@ -1,21 +1,18 @@
-using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Core.Tasks.Domain.CallBacks;
-using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Domain.Repositories;
-using Alabo.Framework.Core.Enums.Enum;
+using _05_Alabo.Cloud.Share.BonusPools.Domain.Configs;
+using _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Entities;
+using Alabo.Data.Things.Orders.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
-using Alabo.Helpers;
+using Alabo.Framework.Core.Enums.Enum;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Tasks.Domain.Services {
+namespace _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Services {
 
     public class ShareOrderReportService : ServiceBase<ShareOrderReport, ObjectId>, IShareOrderReportService {
 

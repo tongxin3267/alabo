@@ -1,12 +1,10 @@
-﻿using Alabo.Domains.Entities;
-using Alabo.UI;
-using Alabo.Web.Mvc.Attributes;
-using System;
+﻿using System;
+using Alabo.Domains.Entities;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
-using IAutoForm = Alabo.Framework.Core.WebUis.Design.AutoForms.IAutoForm;
+using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Cms.Articles.UI {
+namespace Alabo.Industry.Cms.Articles.UI {
 
     [ClassProperty(Name = "文章", Description = "文章")]
     public class ArticleAutoWorkOrder : UIBase, Alabo.Framework.Core.WebUis.Design.AutoForms.IAutoForm {

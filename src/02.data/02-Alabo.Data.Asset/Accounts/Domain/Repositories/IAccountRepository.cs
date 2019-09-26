@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using Alabo.App.Core.Finance.Domain.Entities;
+using Alabo.App.Asset.Accounts.Domain.Entities;
 using Alabo.Domains.Repositories;
 
-namespace Alabo.App.Core.Finance.Domain.Repositories {
+namespace Alabo.App.Asset.Accounts.Domain.Repositories {
 
     /// <summary>
     ///     Interface IAccountRepository

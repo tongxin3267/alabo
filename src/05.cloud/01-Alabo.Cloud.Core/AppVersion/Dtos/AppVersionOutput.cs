@@ -1,6 +1,6 @@
-﻿using Alabo.App.Core.ApiStore.AppVersion.Enums;
+﻿using _01_Alabo.Cloud.Core.AppVersion.Domain.Enums;
 
-namespace Alabo.App.Core.ApiStore.AppVersion.Models {
+namespace _01_Alabo.Cloud.Core.AppVersion.Dtos {
 
     public class AppVersionOutput {
 

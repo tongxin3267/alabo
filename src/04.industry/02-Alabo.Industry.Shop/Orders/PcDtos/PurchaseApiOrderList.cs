@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Alabo.App.Shop.Order.Domain.Services;
-using Alabo.App.Shop.Store.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Exceptions;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Helpers;
-using Alabo.UI;
+using Alabo.Industry.Shop.Deliveries.Domain.Services;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Services;
 using Alabo.Web.Mvc.Attributes;
+using OrderType = Alabo.Industry.Shop.Orders.Domain.Enums.OrderType;
 
-namespace Alabo.App.Shop.Order.Domain.PcDtos {
+namespace Alabo.Industry.Shop.Orders.PcDtos {
 
     /// <summary>
     /// 采购订单
@@ -40,7 +40,7 @@ namespace Alabo.App.Shop.Order.Domain.PcDtos {
 
             var model = ToQuery<PlatformApiOrderList>();
 
-            var expressionQuery = new ExpressionQuery<Entities.Order>();
+            var expressionQuery = new ExpressionQuery<Order>();
             if (model.OrderStatus > 0) {
                 expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
             }
@@ -48,7 +48,7 @@ namespace Alabo.App.Shop.Order.Domain.PcDtos {
             expressionQuery.And(e => e.StoreId > 0);
             expressionQuery.And(e => e.UserId > 0);
 
-            if (Enum.IsDefined(typeof(Enums.OrderType), model.OrderType)) {
+            if (Enum.IsDefined(typeof(OrderType), model.OrderType)) {
                 expressionQuery.And(e => e.OrderType == model.OrderType);
             }
             if (autoModel.Filter == FilterType.Admin) {

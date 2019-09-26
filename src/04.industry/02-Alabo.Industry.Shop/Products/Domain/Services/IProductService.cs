@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.App.Shop.Product.DiyModels;
-using Alabo.App.Shop.Product.Domain.Dtos;
-using Alabo.App.Shop.Product.ViewModels;
-using Alabo.App.Shop.Store.Domain.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Framework.Basic.Relations.Domain.Entities;
+using Alabo.Industry.Shop.Deliveries.Domain.Dtos;
+using Alabo.Industry.Shop.Products.Dtos;
+using Alabo.Industry.Shop.Products.ViewModels;
 
-namespace Alabo.App.Shop.Product.Domain.Services
+namespace Alabo.Industry.Shop.Products.Domain.Services
 {
 
     public interface IProductService : IService<Entities.Product, long>

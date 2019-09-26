@@ -1,13 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.UI;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Finance.Dtos {
+namespace Alabo.App.Asset.BankCards.Dtos {
 
     [ClassProperty(Name = "银行卡管理", SideBarType = SideBarType.BankCardSideBar, PostApi = "Api/BankCard/AddBankCard", Icon = IconFontawesome.bank)]
     public class ApiBankCardInput : EntityDto {

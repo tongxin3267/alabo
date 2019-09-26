@@ -1,26 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using Alabo.App.Core.Finance.Domain.Dtos.Account;
-using Alabo.App.Offline.Product.Domain.Entities;
-using Alabo.App.Offline.RechargeAccount.Entities;
-using Alabo.App.Offline.RechargeAccount.Services;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
+using Alabo.Domains.Query;
+using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoLists;
 using Alabo.Framework.Core.WebUis.Design.AutoTables;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.Domains.Query;
-using Alabo.Extensions;
+using Alabo.Industry.Offline.RechargeAccount.Services;
 using Alabo.Maps;
-using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Offline.RechargeAccount.ViewModels
+namespace Alabo.Industry.Offline.RechargeAccount.ViewModels
 {
     /// <summary>
     /// 储值记录

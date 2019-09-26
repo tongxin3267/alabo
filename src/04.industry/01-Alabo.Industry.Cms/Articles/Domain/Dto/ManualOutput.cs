@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace Alabo.App.Cms.Articles.Domain.Dto {
+namespace Alabo.Industry.Cms.Articles.Domain.Dto {
 
     public class ManualOutput {
         public long RelationId { get; set; }

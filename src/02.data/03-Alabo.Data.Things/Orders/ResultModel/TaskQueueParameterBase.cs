@@ -1,4 +1,4 @@
-﻿namespace Alabo.App.Core.Tasks.ResultModel {
+﻿namespace Alabo.Data.Things.Orders.ResultModel {
 
     public abstract class TaskQueueParameterBase {
 

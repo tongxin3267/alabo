@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Alabo.Data.Things.Orders.ResultModel;
 
-namespace Alabo.App.Core.Tasks.ResultModel {
+namespace Alabo.App.Share.TaskExecutes.ResultModel {
 
     /// <summary>
     /// 共享分润结果

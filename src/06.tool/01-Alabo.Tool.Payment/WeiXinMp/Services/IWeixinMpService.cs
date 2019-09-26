@@ -1,7 +1,7 @@
-﻿using Alabo.App.Core.ApiStore.WeiXinMp.Models;
-using Alabo.Domains.Services;
+﻿using Alabo.Domains.Services;
+using Alabo.Tool.Payment.WeiXinMp.Models;
 
-namespace Alabo.App.Core.ApiStore.WeiXinMp.Services {
+namespace Alabo.Tool.Payment.WeiXinMp.Services {
 
     public interface IWeixinMpService : IService {
 

@@ -1,16 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.Finance.Domain.Dtos.Pay;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Order.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Entities.Extensions;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.App.Shop.Order.Domain.Repositories;
-using Alabo.App.Shop.Order.ViewModels;
-using Alabo.App.Shop.Order.ViewModels.OrderEdit;
+using Alabo.App.Asset.Pays.Domain.Services;
+using Alabo.App.Asset.Pays.Dtos;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
@@ -20,12 +12,27 @@ using Alabo.Extensions;
 using Alabo.Framework.Basic.Address.Domain.Entities;
 using Alabo.Framework.Basic.Address.Domain.Services;
 using Alabo.Helpers;
+using Alabo.Industry.Shop.Carts.Domain.Services;
+using Alabo.Industry.Shop.OrderActions.Domain.Entities;
+using Alabo.Industry.Shop.OrderActions.Domain.Enums;
+using Alabo.Industry.Shop.OrderActions.Domain.Repositories;
+using Alabo.Industry.Shop.OrderDeliveries.Domain.Entities;
+using Alabo.Industry.Shop.OrderDeliveries.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.OrderDeliveries.Domain.Services;
+using Alabo.Industry.Shop.Orders;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using Alabo.Industry.Shop.Orders.Domain.Repositories;
+using Alabo.Industry.Shop.Orders.Domain.Services;
+using Alabo.Industry.Shop.Orders.Dtos;
+using Alabo.Industry.Shop.Orders.ViewModels;
+using Alabo.Industry.Shop.Orders.ViewModels.OrderEdit;
 using Alabo.Mapping;
-using Alabo.Tenants;
-using Alabo.Tenants.Domain.Services;
 using Alabo.Users.Entities;
+using Microsoft.AspNetCore.Http;
 
-namespace Alabo.App.Shop.Order.Domain.Services {
+namespace Alabo.Industry.Shop.OrderActions.Domain.Services {
 
     /// <summary>
     ///     管理员操作
@@ -54,7 +61,7 @@ namespace Alabo.App.Shop.Order.Domain.Services {
                 return ServiceResult.FailedWithMessage("订单已付款或关闭，请刷新");
             }
 
-            IList<Entities.Order> orderList = new List<Entities.Order>
+            IList<Order> orderList = new List<Order>
             {
                 order
             };
@@ -238,7 +245,7 @@ namespace Alabo.App.Shop.Order.Domain.Services {
         /// <param name="order">The order.</param>
         /// <param name="user">The user.操作用户</param>
         /// <param name="actionType">Type of the action.</param>
-        public void Add(Entities.Order order, User user, OrderActionType actionType) {
+        public void Add(Order order, User user, OrderActionType actionType) {
             var orderAction = new OrderAction {
                 OrderId = order.Id,
                 OrderActionType = actionType,

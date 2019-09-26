@@ -1,12 +1,10 @@
-using Microsoft.AspNetCore.Mvc;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Shop.Product.Domain.Entities;
-using Alabo.App.Shop.Product.Domain.Services;
-using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.RestfulApi;
+using Alabo.Industry.Shop.Products.Domain.Entities;
+using Alabo.Industry.Shop.Products.Domain.Services;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Alabo.App.Shop.Product.Controllers {
+namespace Alabo.Industry.Shop.Products.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/ProductDetail/[action]")]

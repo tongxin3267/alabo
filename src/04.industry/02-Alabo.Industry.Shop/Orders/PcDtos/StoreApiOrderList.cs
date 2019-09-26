@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.App.Shop.Order.Domain.Services;
-using Alabo.App.Shop.Store.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
+﻿using System.Collections.Generic;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Exceptions;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Helpers;
-using Alabo.UI;
+using Alabo.Industry.Shop.Deliveries.Domain.Services;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Services;
 
-namespace Alabo.App.Shop.Order.Domain.PcDtos {
+namespace Alabo.Industry.Shop.Orders.PcDtos {
 
     /// <summary>
     /// 供应商订单，店铺订单
@@ -32,7 +30,7 @@ namespace Alabo.App.Shop.Order.Domain.PcDtos {
             var dic = HttpWeb.HttpContext.ToDictionary();
             dic = dic.RemoveKey("userId");// 否则查出的订单都是同一个用户
             var model = ToQuery<PlatformApiOrderList>();
-            var expressionQuery = new ExpressionQuery<Entities.Order>();
+            var expressionQuery = new ExpressionQuery<Order>();
             if (model.OrderStatus > 0) {
                 expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
             }

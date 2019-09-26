@@ -1,10 +1,9 @@
 using System;
 using System.Linq;
 using Xunit;
-using Alabo.App.Cms.Articles;
-using Alabo.App.Cms.Articles.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Extensions;
+using Alabo.Industry.Cms.Articles.Domain.Services;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
 

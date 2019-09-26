@@ -1,27 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Core.User.Domain.Repositories;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.Maps;
-using Alabo.Schedules;
-using Alabo.UI;
-using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Validations;
-using _01_Alabo.Cloud.Core.UserTree.Domain.Service;
+using Alabo.Cloud.People.UserTree.Domain.Service;
 using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
+using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Extensions;
+using Alabo.Maps;
 using Alabo.Validations;
+using Alabo.Web.Mvc.Attributes;
+using Alabo.Web.Validations;
 
-namespace _01_Alabo.Cloud.Core.UserTree.Domain.UI {
+namespace Alabo.Cloud.People.UserTree.Domain.UI {
 
     /// <summary>
     /// 修改推荐关系

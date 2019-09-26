@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Alabo.App.Core.ApiStore.AMap.District;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
@@ -12,6 +11,7 @@ using Alabo.Extensions;
 using Alabo.Framework.Basic.Address.Domain.Entities;
 using Alabo.Framework.Basic.Address.Dtos;
 using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Tool.AMap;
 using MongoDB.Bson;
 
 namespace Alabo.Framework.Basic.Address.Domain.Services {

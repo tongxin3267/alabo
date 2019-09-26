@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.App.Shop.Order.Domain.Services;
-using Alabo.App.Shop.Store.Domain.Services;
+﻿using System.Collections.Generic;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Exceptions;
-using Alabo.Extensions;
-using Alabo.Helpers;
-using Alabo.UI;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Services;
 
-namespace Alabo.App.Shop.Order.Domain.PcDtos {
+namespace Alabo.Industry.Shop.Orders.PcDtos {
 
     /// <summary>
     /// 会员订单
@@ -35,7 +30,7 @@ namespace Alabo.App.Shop.Order.Domain.PcDtos {
             if (user == null) {
                 throw new ValidException("您无权查看其他人订单");
             }
-            var expressionQuery = new ExpressionQuery<Entities.Order>();
+            var expressionQuery = new ExpressionQuery<Order>();
             if (model.UserId > 0) {
                 expressionQuery.And(e => e.UserId == user.Id);
             }

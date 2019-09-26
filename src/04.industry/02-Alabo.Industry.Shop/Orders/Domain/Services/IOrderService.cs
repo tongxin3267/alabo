@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.App.Shop.Order.ViewModels;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using Alabo.Industry.Shop.Orders.Dtos;
+using Alabo.Industry.Shop.Orders.ViewModels;
 
-namespace Alabo.App.Shop.Order.Domain.Services {
+namespace Alabo.Industry.Shop.Orders.Domain.Services {
 
     public interface IOrderService : IService<Entities.Order, long> {
 

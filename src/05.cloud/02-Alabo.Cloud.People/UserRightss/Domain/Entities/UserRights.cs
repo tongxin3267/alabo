@@ -1,23 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using MongoDB.Bson.Serialization.Attributes;
-using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.ViewModel;
-using Alabo.Tenants;
-using Alabo.UI;
-using Alabo.App.Market.UserRightss.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Framework.Core.WebUis;
+using Alabo.Web.Mvc.Attributes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Market.UserRightss.Domain.Entities {
+namespace Alabo.Cloud.People.UserRightss.Domain.Entities {
 
     /// <summary>
     ///     会员权益

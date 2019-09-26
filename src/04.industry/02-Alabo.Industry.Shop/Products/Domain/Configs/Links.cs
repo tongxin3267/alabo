@@ -1,9 +1,8 @@
-﻿
+﻿using Alabo.Domains.Enums;
 using Alabo.Framework.Core.Reflections.Interfaces;
-using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Product.Domain.CallBacks {
+namespace Alabo.Industry.Shop.Products.Domain.Configs {
 
     /// <summary>
     ///     控制面板中 商品标签

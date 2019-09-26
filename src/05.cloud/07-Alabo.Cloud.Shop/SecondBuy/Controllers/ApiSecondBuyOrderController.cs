@@ -1,22 +1,14 @@
-using System;using Alabo.Domains.Repositories.EFCore;using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using Alabo.Domains.Entities;
-using Microsoft.AspNetCore.Mvc;
-using Alabo.Framework.Core.WebApis.Filter;
-
-using MongoDB.Bson;
-using Alabo.RestfulApi;using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.Domains.Services;
-using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.Controllers;
-using Alabo.App.Market.SecondBuy.Domain.Entities;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.App.Market.SecondBuy.Domain.Services;
-using ZKCloud.Open.ApiBase.Models;
-using Alabo.Extensions;
 using System.Collections.Generic;
+using Alabo.Cloud.Shop.SecondBuy.Domain.Entities;
+using Alabo.Cloud.Shop.SecondBuy.Domain.Services;
+using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
+using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Market.SecondBuy.Controllers
+namespace Alabo.Cloud.Shop.SecondBuy.Controllers
 {
     [ApiExceptionFilter]
     [Route("Api/SecondBuyOrder/[action]")]

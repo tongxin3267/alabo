@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Market.UserRightss.Domain.Enums;
-using Alabo.App.Market.UserRightss.Domain.Services;
+using Alabo.Cloud.People.UserRightss.Domain.Enums;
+using Alabo.Cloud.People.UserRightss.Domain.Services;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoTables;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
 using Alabo.Mapping;
-using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Market.UserRightss.Domain.Dtos {
+namespace Alabo.Cloud.People.UserRightss.Domain.Dtos {
 
     /// <summary>
     ///     会员权益模型

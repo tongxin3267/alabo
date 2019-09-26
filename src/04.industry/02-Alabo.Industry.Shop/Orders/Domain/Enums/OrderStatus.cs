@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Order.Domain.Enums {
+namespace Alabo.Industry.Shop.Orders.Domain.Enums {
 
     /// <summary>
     ///     订单状态,订单状态足够，不需要再加额外业务处理

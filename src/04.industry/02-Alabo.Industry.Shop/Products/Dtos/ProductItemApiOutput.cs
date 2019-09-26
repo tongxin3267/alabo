@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Shop.Product.ViewModels;
 using Alabo.Domains.Query.Dto;
+using Alabo.Industry.Shop.Products.ViewModels;
 
-namespace Alabo.App.Shop.Product.Domain.Dtos {
+namespace Alabo.Industry.Shop.Products.Dtos {
 
     public class ProductItemApiOutput : ApiInputDto
     {

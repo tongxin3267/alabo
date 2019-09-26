@@ -1,23 +1,20 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
-
-using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Store.Domain.CallBacks {
+namespace Alabo.Industry.Shop.Deliveries.Domain.CallBacks {
 
     [NotMapped]
     /// <summary>

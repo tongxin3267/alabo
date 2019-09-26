@@ -1,31 +1,31 @@
-﻿using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Entities.Extensions;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Core.Tasks.ResultModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using System.Linq;
+using Alabo.App.Asset.Accounts.Domain.Repositories;
+using Alabo.Cache;
+using Alabo.Data.Things.Orders.Domain.Entities;
+using Alabo.Data.Things.Orders.Domain.Entities.Extensions;
+using Alabo.Data.Things.Orders.ResultModel;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Repositories.Extensions;
 using Alabo.Extensions;
-using Alabo.Helpers;
-using Alabo.Schedules;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
-using System.Linq;
-using Alabo.App.Core.Finance.Domain.Repositories;
-using Alabo.Cache;
 using Alabo.Framework.Basic.Grades.Domain.Entities;
 using Alabo.Framework.Basic.Grades.Domain.Enums;
 using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Tasks.Queues.Domain.Entities;
+using Alabo.Framework.Tasks.Queues.Domain.Enums;
+using Alabo.Helpers;
 using Alabo.Regexs;
+using Alabo.Schedules;
 using ZKCloud.Open.Message.Models;
 using Convert = System.Convert;
 
-namespace Alabo.App.Core.Tasks.Domain.Repositories {
+namespace Alabo.Data.Things.Orders.Domain.Repositories {
 
     /// <summary>
     ///     Class ShareOrderRepository.

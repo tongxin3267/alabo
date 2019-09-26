@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace Alabo.App.Shop.Order.Dtos
+namespace Alabo.Industry.Shop.Orders.Dtos
 {
     /// <summary>
     /// 货款输入

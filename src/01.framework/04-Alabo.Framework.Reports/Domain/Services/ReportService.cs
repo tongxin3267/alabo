@@ -1,25 +1,24 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using MongoDB.Bson;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Alabo.App.Core.Reports.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Reports.Domain.Entities;
 using Alabo.Reflections;
 using Alabo.Runtime;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.ViewFeatures;
-using Alabo.Framework.Reports;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using MongoDB.Bson;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
-namespace Alabo.App.Core.Reports.Domain.Services {
+namespace Alabo.Framework.Reports.Domain.Services {
 
     public class ReportService : ServiceBase<Report, ObjectId>, IReportService {
         private static readonly string _ReportCacheKey = "ReportCacheKey_";

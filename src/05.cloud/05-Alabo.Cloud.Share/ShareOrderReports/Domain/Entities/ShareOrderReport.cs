@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,8 +7,9 @@ using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Core.Tasks.Domain.Entities {
+namespace _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Entities {
 
     /// <summary>
     ///     分润订单统计

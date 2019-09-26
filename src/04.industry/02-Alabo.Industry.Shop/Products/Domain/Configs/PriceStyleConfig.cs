@@ -1,28 +1,23 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using MongoDB.Bson.Serialization.Attributes;
 using System.Linq;
 using System.Reflection;
-
-using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Shop.Product.Domain.Enums;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Industry.Shop.Products.Domain.Enums;
 using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Product.Domain.CallBacks {
+namespace Alabo.Industry.Shop.Products.Domain.Configs {
 
     /// <summary>
     ///     商城配置

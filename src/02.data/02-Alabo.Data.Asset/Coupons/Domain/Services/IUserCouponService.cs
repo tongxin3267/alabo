@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
-using Alabo.App.Shop.Coupons.Domain.Entities;
+using Alabo.App.Asset.Coupons.Domain.Entities;
 using Alabo.Domains.Entities;
+using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Shop.Coupons.Domain.Services {
+namespace Alabo.App.Asset.Coupons.Domain.Services {
 	public interface IUserCouponService : IService<UserCoupon, ObjectId>
     {
 

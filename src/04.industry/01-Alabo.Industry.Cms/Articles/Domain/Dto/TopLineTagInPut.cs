@@ -1,21 +1,18 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
+using Alabo.Framework.Basic.Relations.Domain.Services;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Framework.Core.WebUis.Design.AutoTables;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.Extensions;
-using Alabo.Framework.Basic.Relations.Domain.Services;
 using Alabo.Helpers;
 using Alabo.Maps;
-using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Cms.Articles.Domain.Dto
+namespace Alabo.Industry.Cms.Articles.Domain.Dto
 {
 
     /// <summary>

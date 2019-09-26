@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Market.FacePay.Domain.Entities {
+namespace Alabo.Cloud.Asset.FacePay.Domain.Entities {
 
     [BsonIgnoreExtraElements]
     [Table("FacePay")]

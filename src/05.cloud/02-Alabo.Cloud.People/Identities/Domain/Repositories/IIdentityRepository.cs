@@ -1,8 +1,8 @@
-using MongoDB.Bson;
-using Alabo.App.Core.User.Domain.Entities;
+using Alabo.Cloud.People.Identities.Domain.Entities;
 using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.User.Domain.Repositories {
+namespace Alabo.Cloud.People.Identities.Domain.Repositories {
 
     public interface IIdentityRepository : IRepository<Identity, ObjectId> {
     }

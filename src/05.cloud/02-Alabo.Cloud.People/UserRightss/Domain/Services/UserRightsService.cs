@@ -1,15 +1,16 @@
-using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Market.UserRightss.Domain.CallBack;
-using Alabo.App.Market.UserRightss.Domain.Dtos;
-using Alabo.App.Market.UserRightss.Domain.Entities;
-using Alabo.App.Market.UserRightss.Domain.Enums;
-using Alabo.App.Market.UserRightss.Domain.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Alabo.App.Kpis.Kpis.Domain.Entities;
+using Alabo.App.Kpis.Kpis.Domain.Services;
+using Alabo.Cloud.People.UserRightss.Domain.CallBack;
+using Alabo.Cloud.People.UserRightss.Domain.Dtos;
+using Alabo.Cloud.People.UserRightss.Domain.Entities;
+using Alabo.Cloud.People.UserRightss.Domain.Enums;
+using Alabo.Cloud.People.UserRightss.Domain.Repositories;
+using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Data.People.Users.Dtos;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
@@ -17,21 +18,6 @@ using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
-using Alabo.Linq.Dynamic;
-using Alabo.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Alabo.App.Share.Kpi.Domain.Entities;
-using Alabo.App.Share.Kpi.Domain.Services;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Order.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Entities.Extensions;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.App.Shop.Order.Domain.Services;
-using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Data.People.Users.Dtos;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Framework.Basic.Grades.Domain.Entities;
@@ -40,11 +26,18 @@ using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.Valids.Services;
 using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using Alabo.Industry.Shop.Orders.Domain.Services;
+using Alabo.Industry.Shop.Orders.Dtos;
+using Alabo.Linq.Dynamic;
+using Alabo.Mapping;
 using Alabo.Randoms;
 using Alabo.Regexs;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Market.UserRightss.Domain.Services {
+namespace Alabo.Cloud.People.UserRightss.Domain.Services {
 
     public class UserRightsService : ServiceBase<UserRights, long>, IUserRightsService {
 

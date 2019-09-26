@@ -1,20 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using QRCoder;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using Alabo.App.Shop.Category.Domain.Services;
-using Alabo.App.Shop.Product.Domain.CallBacks;
-using Alabo.App.Shop.Product.Domain.Entities;
-using Alabo.App.Shop.Product.Domain.Entities.Extensions;
-using Alabo.App.Shop.Product.Domain.Enums;
-using Alabo.App.Shop.Product.Domain.Repositories;
-using Alabo.App.Shop.Product.ViewModels;
-using Alabo.App.Shop.Store.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -23,10 +10,19 @@ using Alabo.Extensions;
 using Alabo.Files;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Relations.Domain.Services;
+using Alabo.Industry.Shop.Categories.Domain.Entities;
+using Alabo.Industry.Shop.Categories.Domain.Services;
+using Alabo.Industry.Shop.Deliveries.Domain.Services;
+using Alabo.Industry.Shop.Products.Domain.Configs;
+using Alabo.Industry.Shop.Products.Domain.Entities;
+using Alabo.Industry.Shop.Products.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.Products.Domain.Enums;
+using Alabo.Industry.Shop.Products.Domain.Repositories;
+using Alabo.Industry.Shop.Products.ViewModels;
 using Alabo.Mapping;
-using Alabo.Runtime;
+using Microsoft.AspNetCore.Http;
 
-namespace Alabo.App.Shop.Product.Domain.Services {
+namespace Alabo.Industry.Shop.Products.Domain.Services {
 
     /// <summary>
     /// </summary>
@@ -80,11 +76,11 @@ namespace Alabo.App.Shop.Product.Domain.Services {
                     Stock = config.Stock
                 };
                 viewProduct.ProductDetail = new ProductDetail();
-                viewProduct.Category = new Category.Domain.Entities.Category();
+                viewProduct.Category = new Category();
                 viewProduct.ProductStatus = ProductStatus.Online;
                 viewProduct.Product.ProductExtensions = new ProductExtensions {
                     ProductSkus = new List<ProductSku>(),
-                    ProductCategory = new Category.Domain.Entities.Category(),
+                    ProductCategory = new Category(),
                     ProductThums = new List<ProductThum>()
                 };
                 viewProduct.PriceStyleId = Resolve<IAutoConfigService>().GetList<PriceStyleConfig>().FirstOrDefault().Id;
@@ -246,7 +242,7 @@ namespace Alabo.App.Shop.Product.Domain.Services {
         /// <param name="categoryId"></param>
         /// <returns></returns>
         public bool CheckCategoryHasProduct(Guid categoryId) {
-            var query = Repository<IProductRepository>().RepositoryContext.Query<Alabo.App.Shop.Product.Domain.Entities.Product>();
+            var query = Repository<IProductRepository>().RepositoryContext.Query<Product>();
             query = query.Where(o => o.CategoryId == categoryId && o.ProductStatus == ProductStatus.Online);
             return query.Count() > 0;
             //return false;
@@ -439,7 +435,7 @@ namespace Alabo.App.Shop.Product.Domain.Services {
                 ProductSkus = Resolve<IProductSkuService>().GetList(e => e.ProductId == product.Id).ToList(), //商品SKU                                                                               // ProductBrand = Service<IStoreBrandService>().GetSingle(e => e.Id == product.BrandId),// 商品品牌
                 Store = Resolve<IShopStoreService>().GetSingle(e => e.Id == product.StoreId) // 商品所属店铺
             };
-            product.ProductExtensions.ProductCategory = product.Detail.PropertyJson.DeserializeJson<Category.Domain.Entities.Category>();
+            product.ProductExtensions.ProductCategory = product.Detail.PropertyJson.DeserializeJson<Category>();
             product.ProductExtensions.ProductThums = product.Detail.ImageJson.DeserializeJson<List<ProductThum>>();
             // product.ThumbnailUrl = Service<IApiService>().ApiImageUrl(product.ThumbnailUrl);
             //  product.SmallUrl = Service<IApiService>().ApiImageUrl(product.SmallUrl);

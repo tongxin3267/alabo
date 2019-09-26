@@ -1,14 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using MongoDB.Bson.Serialization.Attributes;
-using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Shop.Order.Domain.Entities {
+namespace Alabo.Industry.Shop.Carts.Domain.Entities {
 
     /// <summary>
     /// 购物车

@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Extensions;
-using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.App.Open.Tasks.Modules;
+using Alabo.App.Share.OpenTasks.Base;
+using Alabo.App.Share.OpenTasks.Modules;
 using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Data.Things.Orders.ResultModel;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Tasks.Queues.Models;
+using Alabo.Framework.Tasks.Schedules.Domain.Enums;
 using Alabo.Users.Dtos;
-using ZKCloud.Open.ApiBase.Models;
 using Alabo.Web.Mvc.Attributes;
+using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Open.Tasks.Configs.UserRecommendedRelationship {
+namespace Alabo.App.Share.OpenTasks.Configs.UserRecommendedRelationship {
 
     /// <summary>
     /// 高等级绩效
@@ -42,7 +43,7 @@ namespace Alabo.App.Open.Tasks.Configs.UserRecommendedRelationship {
     /// Class NLevelDistributionModule.
     /// </summary>
     [TaskModule("BD717555-A777-8809-9005-507E0AE59991", "高等级绩效", SortOrder = 999999, ConfigurationType = typeof(HighLevelPerformanceConfig), IsSupportMultipleConfiguration = true,
-      FenRunResultType = Core.Tasks.Domain.Enums.FenRunResultType.Price,
+      FenRunResultType = FenRunResultType.Price,
       Intro = "高等级绩效，当分润会员的等级>=基准等级时，可获得绩效奖励,比如经理以上级别（包括经理、总监、总经理、股东）可获得经理绩效，所有总监以上级别（包括总监、总经理、股东）可获得总监绩效",
       RelationshipType = RelationshipType.UserRecommendedRelationship)]
     public class HighLevelPerformanceModule : AssetAllocationShareModuleBase<HighLevelPerformanceConfig> {

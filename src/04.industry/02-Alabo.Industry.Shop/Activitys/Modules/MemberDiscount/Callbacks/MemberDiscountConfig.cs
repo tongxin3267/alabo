@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
 using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
@@ -14,7 +8,7 @@ using Alabo.Helpers;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Shop.Activitys.Modules.MemberDiscount.Callbacks
+namespace Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Callbacks
 {
 
 

@@ -1,6 +1,6 @@
 ﻿using Alabo.Domains.Entities.Extensions;
 
-namespace Alabo.App.Shop.Order.Domain.Entities.Extensions {
+namespace Alabo.Industry.Shop.Orders.Domain.Entities.Extensions {
 
     /// <summary>
     ///     订单留言

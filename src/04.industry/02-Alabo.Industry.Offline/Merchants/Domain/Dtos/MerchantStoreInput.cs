@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
 using Alabo.Validations;
 
-namespace Alabo.App.Offline.Merchants.Domain.Dtos
+namespace Alabo.Industry.Offline.Merchants.Domain.Dtos
 {
     public class MerchantStoreInput
     {

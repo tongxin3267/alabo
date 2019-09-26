@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Framework.Core.Enums.Enum
+namespace Alabo.Users.Enum
 {
     /// <summary>
     ///     Enum LastLoginIp

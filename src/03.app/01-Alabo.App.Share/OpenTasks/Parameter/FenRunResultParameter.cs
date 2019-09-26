@@ -1,18 +1,15 @@
-﻿using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.App.Share.Share.Domain.Enums;
-using Alabo.Framework.Core.Enums.Enum;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.App.Share.OpenTasks.Base;
+using Alabo.App.Share.Rewards.Domain.Enums;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Open.Tasks.Parameter {
-
-    using Alabo.App.Core.Tasks.Domain.Enums;
-    using Core.Finance.Domain.CallBacks;
+namespace Alabo.App.Share.OpenTasks.Parameter {
     using User = User;
 
     public class FenRunResultParameter {

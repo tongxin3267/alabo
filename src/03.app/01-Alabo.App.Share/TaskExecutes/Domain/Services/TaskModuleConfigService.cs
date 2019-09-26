@@ -1,22 +1,23 @@
-﻿using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Services;
-using Alabo.Extensions;
-using Alabo.Reflections;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Alabo.Datas.UnitOfWorks;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Services;
+using Alabo.Extensions;
+using Alabo.Framework.Tasks.Queues.Models;
+using Alabo.Reflections;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 using ZKCloud.Open.ApiBase.Configuration;
 using ZKCloud.Open.ApiBase.Services;
 using ZKCloud.Open.Share.Models;
 using ZKCloud.Open.Share.Services;
+using ITaskModule = Alabo.App.Share.TaskExecutes.ResultModel.ITaskModule;
 
-namespace Alabo.App.Core.Tasks.Domain.Services {
+namespace Alabo.App.Share.TaskExecutes.Domain.Services {
 
     public class TaskModuleConfigService : ServiceBase, ITaskModuleConfigService {
         private static readonly string _shareModuleCacheKey = "ShareModuleCacheKeyList";

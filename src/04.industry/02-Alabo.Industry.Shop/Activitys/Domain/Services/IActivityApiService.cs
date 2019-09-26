@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.App.Shop.Activitys.Domain.Entities;
-using Alabo.App.Shop.Activitys.Domain.Enum;
-using Alabo.App.Shop.Activitys.Dtos;
-using Alabo.App.Shop.Activitys.ViewModels;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Store.Domain.Dtos;
+﻿using System.Collections.Generic;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Industry.Shop.Activitys.Domain.Entities;
+using Alabo.Industry.Shop.Activitys.Domain.Enum;
+using Alabo.Industry.Shop.Activitys.Dtos;
+using Alabo.Industry.Shop.Activitys.ViewModels;
+using Alabo.Industry.Shop.Deliveries.Domain.Dtos;
+using Alabo.Industry.Shop.Orders.Dtos;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Shop.Activitys.Services
+namespace Alabo.Industry.Shop.Activitys.Domain.Services
 {
     /// <summary>
     /// activity api interface

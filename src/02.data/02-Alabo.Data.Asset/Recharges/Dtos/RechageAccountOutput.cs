@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.App.Core.Finance.Dtos {
+namespace Alabo.App.Asset.Recharges.Dtos {
 
     public class RechageAccountOutput {
 

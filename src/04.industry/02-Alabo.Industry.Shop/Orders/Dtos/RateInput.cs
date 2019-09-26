@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.Validations;
 
-namespace Alabo.App.Shop.Order.Domain.Dtos {
+namespace Alabo.Industry.Shop.Orders.Dtos {
 
     public class RateInput : ApiInputDto {
 

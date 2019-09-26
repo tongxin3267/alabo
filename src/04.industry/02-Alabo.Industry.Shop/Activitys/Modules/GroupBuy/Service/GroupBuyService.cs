@@ -1,24 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Shop.Activitys.Domain.Entities;
-using Alabo.App.Shop.Activitys.Domain.Enum;
-using Alabo.App.Shop.Activitys.Domain.Services;
-using Alabo.App.Shop.Activitys.Modules.GroupBuy.Dtos;
-using Alabo.App.Shop.Activitys.Modules.GroupBuy.Model;
-using Alabo.App.Shop.Order.Domain.Services;
-using Alabo.App.Shop.Product.DiyModels;
-using Alabo.App.Shop.Product.Domain.Dtos;
-using Alabo.App.Shop.Product.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.WebApis.Dtos;
-using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis.Dtos;
+using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Industry.Shop.Activitys.Domain.Entities;
+using Alabo.Industry.Shop.Activitys.Domain.Enum;
+using Alabo.Industry.Shop.Activitys.Domain.Services;
+using Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Dtos;
+using Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Model;
+using Alabo.Industry.Shop.Orders.Domain.Services;
+using Alabo.Industry.Shop.Products.Domain.Services;
+using Alabo.Industry.Shop.Products.Dtos;
 
-namespace Alabo.App.Shop.Activitys.Modules.GroupBuy.Service {
+namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Service {
 
     /// <summary>
     ///     Class GroupBuyService.

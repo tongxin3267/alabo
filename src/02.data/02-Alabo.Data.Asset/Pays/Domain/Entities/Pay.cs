@@ -1,21 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Core.Finance.Domain.Entities.Extension;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.Framework.Core.Enums.Enum;
+using Alabo.App.Asset.Pays.Domain.Entities.Extension;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Tenants;
+using Alabo.Tool.Payment;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.App.Core.Finance.Domain.Entities {
+namespace Alabo.App.Asset.Pays.Domain.Entities {
 
     /// <summary>
     ///     Invoice 类存放收银台发票记录

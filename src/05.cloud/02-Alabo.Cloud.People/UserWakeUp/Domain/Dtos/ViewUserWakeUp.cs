@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoTables;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.UI;
 using Alabo.Users.Enum;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Market.UserWakeUp.Domain.Dtos {
+namespace Alabo.Cloud.People.UserWakeUp.Domain.Dtos {
 
     public class ViewUserWakeUp : UIBase, IAutoTable<ViewUserWakeUp> {
 

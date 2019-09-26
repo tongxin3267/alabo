@@ -1,15 +1,13 @@
-using Microsoft.AspNetCore.Mvc;
 using System;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Shop.Category.Domain.Entities;
-using Alabo.App.Shop.Category.Domain.Services;
-using Alabo.App.Shop.Category.ViewModels;
-using ZKCloud.Open.ApiBase.Configuration;
+using Alabo.Industry.Shop.Categories.Domain.Entities;
+using Alabo.Industry.Shop.Categories.Domain.Services;
+using Alabo.Industry.Shop.Categories.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Shop.Category.Controllers
+namespace Alabo.Industry.Shop.Categories.Controllers
 {
 
     [ApiExceptionFilter]

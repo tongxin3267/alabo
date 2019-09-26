@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Themes.Domain.Entities;
+using Alabo.Framework.Themes.Domain.Entities;
 
-namespace Alabo.App.Core.Themes.Dtos {
+namespace Alabo.Framework.Themes.Dtos {
 
     /// <summary>
     /// 客户端页面设置

@@ -2,28 +2,22 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.App.Core.User;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebApis.Service;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
-using Alabo.Helpers;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Mapping;
-using Alabo.UI;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Market.UserCard.UI
+namespace Alabo.Cloud.People.UserCard.UI
 {
 
     [ClassProperty(Name = "会员卡设置")]

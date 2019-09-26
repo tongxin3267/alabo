@@ -5,7 +5,7 @@ using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Share.Kpi.Domain.CallBack {
+namespace Alabo.App.Kpis.Kpis.Domain.Configs {
 
     /// <summary>
     ///     Kpi考核项

@@ -1,10 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Alabo.App.Core.Tasks;
-using Alabo.App.Core.Tasks.Extensions;
-using Alabo.App.Core.Tasks.ResultModel;
+﻿using Alabo.App.Share.TaskExecutes;
 using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Data.Things.Orders.ResultModel;
+using Alabo.Framework.Tasks.Queues.Models;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Alabo.App.Open.Tasks.Result {
+namespace Alabo.App.Share.OpenTasks.Result {
 
     public class UserOutResult : ITaskResult {
         public TaskContext Context { get; private set; }

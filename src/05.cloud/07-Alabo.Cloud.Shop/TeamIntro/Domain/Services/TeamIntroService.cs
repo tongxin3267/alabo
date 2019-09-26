@@ -1,10 +1,10 @@
-using MongoDB.Bson;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.TeamIntro.Domain.Services {
+namespace Alabo.Cloud.Shop.TeamIntro.Domain.Services {
 
     public class TeamIntroService : ServiceBase<Entities.TeamIntro, ObjectId>, ITeamIntroService {
 

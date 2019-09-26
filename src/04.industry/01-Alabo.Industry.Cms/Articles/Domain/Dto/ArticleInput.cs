@@ -1,8 +1,8 @@
-﻿using Alabo.App.Cms.Articles.Domain.Enums;
+﻿using Alabo.Domains.Enums;
 using Alabo.Framework.Core.WebUis.Models.Lists;
-using Alabo.Domains.Enums;
+using Alabo.Industry.Cms.Articles.Domain.Enums;
 
-namespace Alabo.App.Cms.Articles.Domain.Dto {
+namespace Alabo.Industry.Cms.Articles.Domain.Dto {
 
     /// <summary>
     ///     Class ArticleInput.

@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Shop.Product.Domain.Dtos;
-using Alabo.App.Shop.Product.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Extensions;
+using Alabo.Industry.Shop.Products.Domain.Entities;
+using Alabo.Industry.Shop.Products.Dtos;
 
-namespace Alabo.App.Shop.Product.Domain.Repositories {
+namespace Alabo.Industry.Shop.Products.Domain.Repositories {
 
     internal class ProductSkuRepository : RepositoryEfCore<ProductSku, long>, IProductSkuRepository {
 

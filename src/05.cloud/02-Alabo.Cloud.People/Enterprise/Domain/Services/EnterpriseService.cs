@@ -1,8 +1,4 @@
-using MongoDB.Bson;
-using System;
-using Alabo.App.Core.Markets.EnterpriseCertification.Domain.Dtos;
-using Alabo.App.Core.Markets.EnterpriseCertification.Domain.Entities;
-using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Cloud.People.Enterprise.Domain.Dtos;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
@@ -10,12 +6,14 @@ using Alabo.Domains.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Mapping;
+using Alabo.Users.Enum;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Markets.EnterpriseCertification.Domain.Services {
+namespace Alabo.Cloud.People.Enterprise.Domain.Services {
 
-    public class EnterpriseService : ServiceBase<Enterprise, ObjectId>, IEnterpriseService {
+    public class EnterpriseService : ServiceBase<Entities.Enterprise, ObjectId>, IEnterpriseService {
 
-        public EnterpriseService(IUnitOfWork unitOfWork, IRepository<Enterprise, ObjectId> repository) : base(unitOfWork, repository) {
+        public EnterpriseService(IUnitOfWork unitOfWork, IRepository<Entities.Enterprise, ObjectId> repository) : base(unitOfWork, repository) {
         }
 
         public ServiceResult AddOrUpdate(EnterpriseView view) {
@@ -23,7 +21,7 @@ namespace Alabo.App.Core.Markets.EnterpriseCertification.Domain.Services {
                 throw new ValidException("输入不能为空");
             }
 
-            Enterprise enterprise = AutoMapping.SetValue<Enterprise>(view);
+            Entities.Enterprise enterprise = AutoMapping.SetValue<Entities.Enterprise>(view);
             enterprise.UserId = view.LoginUserId;
 
             var find = Resolve<IEnterpriseService>().GetSingle(u => u.LicenseNumber == view.LicenseNumber);

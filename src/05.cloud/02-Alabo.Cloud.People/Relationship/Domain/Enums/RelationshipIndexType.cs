@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Market.Relationship.Domain.Enums {
+namespace Alabo.Cloud.People.Relationship.Domain.Enums {
 
     /// <summary>
     ///     关系图类型

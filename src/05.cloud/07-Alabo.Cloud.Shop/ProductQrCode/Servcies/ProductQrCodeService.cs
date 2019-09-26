@@ -5,18 +5,17 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
-using Alabo.App.Core.Common.Domain.CallBacks;
-using Alabo.App.Shop.Product.Domain.Services;
-using Alabo.App.Shop.Product.ViewModels;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Runtime;
 using QRCoder;
-using _07_Alabo.Cloud.Shop.ProductQrCode.Servcies;
 using Alabo.AutoConfigs;
+using Alabo.Cloud.Shop.ProductQrCode.Configs;
 using Alabo.Files;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Industry.Shop.Products.Domain.Services;
+using Alabo.Industry.Shop.Products.ViewModels;
 
 namespace Alabo.Cloud.Shop.ProductQrCode.Servcies {
 

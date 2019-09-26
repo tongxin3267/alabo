@@ -1,21 +1,19 @@
-﻿using Microsoft.AspNetCore.Http;
-using Quartz;
-using System;
+﻿using System;
 using System.Threading.Tasks;
-
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Domain.Repositories;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.Framework.Core.Admins.Configs;
-using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Data.Things.Orders.Domain.Repositories;
+using Alabo.Data.Things.Orders.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Dependency;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Notifications;
+using Alabo.Framework.Core.Admins.Configs;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Runtime;
 using Alabo.Schedules.Job;
+using Microsoft.AspNetCore.Http;
+using Quartz;
 
-namespace Alabo.App.Core.Tasks.Job {
+namespace Alabo.App.Share.TaskExecutes.Job {
 
     public class ShareJob : JobBase {
 

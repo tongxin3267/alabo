@@ -1,7 +1,7 @@
 ﻿using System;
 using Alabo.Domains.Enums;
 
-namespace Alabo.App.Open.Tasks.Base {
+namespace Alabo.App.Share.OpenTasks.Base {
 
     /// <summary>
     /// 分期方式

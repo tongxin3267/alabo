@@ -1,28 +1,26 @@
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Offline.Merchants.Domain.Services;
-using Alabo.App.Offline.Merchants.ViewModels;
-using Alabo.App.Offline.Product.Domain.CallBacks;
-using Alabo.App.Offline.Product.Domain.Entities;
-using Alabo.App.Offline.Product.Domain.Services;
-using Alabo.App.Offline.Product.ViewModels;
-using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Relations.Domain.Services;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Industry.Offline.Merchants.Domain.Services;
+using Alabo.Industry.Offline.Merchants.ViewModels;
+using Alabo.Industry.Offline.Product.Domain.CallBacks;
+using Alabo.Industry.Offline.Product.Domain.Entities;
+using Alabo.Industry.Offline.Product.Domain.Services;
+using Alabo.Industry.Offline.Product.ViewModels;
 using Alabo.Mapping;
 using Alabo.Maps;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Offline.Product.Controllers
+namespace Alabo.Industry.Offline.Product.Controllers
 {
     [ApiExceptionFilter]
     [Route("Api/MerchantProduct/[action]")]

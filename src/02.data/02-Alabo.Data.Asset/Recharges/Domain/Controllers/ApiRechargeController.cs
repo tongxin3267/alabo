@@ -1,22 +1,11 @@
 using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using Alabo.Domains.Entities;
-using Microsoft.AspNetCore.Mvc;
-using Alabo.Framework.Core.WebApis.Filter;
-
-using MongoDB.Bson;
-using Alabo.RestfulApi;
-using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.Domains.Services;
-using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.Controllers;
 using Alabo.App.Asset.Recharges.Domain.Entities;
+using Alabo.App.Asset.Recharges.Domain.Services;
 using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.App.Core.Finance.Domain.Services;
+using Alabo.Framework.Core.WebApis.Filter;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Alabo.App.Asset.Recharges.Controllers {
+namespace Alabo.App.Asset.Recharges.Domain.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/Recharge/[action]")]

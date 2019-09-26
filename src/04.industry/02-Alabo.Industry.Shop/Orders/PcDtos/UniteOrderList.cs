@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.App.Shop.Order.Domain.Services;
-using Alabo.App.Shop.Store.Domain.Services;
+﻿using System.Collections.Generic;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Exceptions;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Helpers;
-using Alabo.UI;
+using Alabo.Industry.Shop.Deliveries.Domain.Services;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Services;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Order.Domain.PcDtos {
+namespace Alabo.Industry.Shop.Orders.PcDtos {
 
     /// <summary>
     /// 统一订单类, 统一[User, Store, Platform]订单列表 到此类
@@ -30,7 +28,7 @@ namespace Alabo.App.Shop.Order.Domain.PcDtos {
                 throw new ValidException("您无权查看其他人订单");
             }
 
-            var expressionQuery = new ExpressionQuery<Entities.Order>();
+            var expressionQuery = new ExpressionQuery<Order>();
             switch (model.Filter) {
                 case FilterType.All:
                     throw new ValidException("无权限查看订单");

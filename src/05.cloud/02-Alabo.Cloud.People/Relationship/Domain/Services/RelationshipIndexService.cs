@@ -1,12 +1,7 @@
-using MongoDB.Bson;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Market.Relationship.Domain.CallBacks;
-using Alabo.App.Market.Relationship.Domain.Entities;
+using Alabo.Cloud.People.Relationship.Domain.CallBacks;
+using Alabo.Cloud.People.Relationship.Domain.Entities;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
@@ -16,8 +11,9 @@ using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Users.Dtos;
 using Alabo.Users.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.Relationship.Domain.Services {
+namespace Alabo.Cloud.People.Relationship.Domain.Services {
 
     public class RelationshipIndexService : ServiceBase<RelationshipIndex, ObjectId>, IRelationshipIndexService {
 

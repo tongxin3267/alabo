@@ -1,9 +1,9 @@
-using Alabo.App.Shop.Activitys.Modules.MemberDiscount.Callbacks;
-using Alabo.App.Shop.Product.DiyModels;
-using Alabo.App.Shop.Product.Domain.CallBacks;
-using Alabo.App.Shop.Product.Domain.Dtos;
-using Alabo.App.Shop.Product.Domain.Enums;
-using Alabo.App.Shop.Product.Domain.Services;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Domains.Query.Dto;
@@ -14,20 +14,20 @@ using Alabo.Framework.Basic.Relations.Dtos;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Callbacks;
+using Alabo.Industry.Shop.Products.Domain.Configs;
+using Alabo.Industry.Shop.Products.Domain.Entities;
+using Alabo.Industry.Shop.Products.Domain.Enums;
+using Alabo.Industry.Shop.Products.Domain.Services;
+using Alabo.Industry.Shop.Products.Dtos;
 using Alabo.Mapping;
 using Alabo.Maps;
 using Alabo.Randoms;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Alabo.Data.People.Users.Domain.Services;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Shop.Product.Controllers
+namespace Alabo.Industry.Shop.Products.Controllers
 {
 
     [ApiExceptionFilter]
@@ -304,7 +304,7 @@ namespace Alabo.App.Shop.Product.Controllers
 
         [HttpGet]
         [Display(Description = "商品管理")]
-        public ApiResult<PageResult<Alabo.App.Shop.Product.Domain.Entities.Product>> ProductList([FromQuery] PagedInputDto parameter) {
+        public ApiResult<PageResult<Product>> ProductList([FromQuery] PagedInputDto parameter) {
             var query = new ExpressionQuery<Domain.Entities.Product> {
                 PageIndex = (int)parameter.PageIndex,
                 PageSize = (int)parameter.PageSize,

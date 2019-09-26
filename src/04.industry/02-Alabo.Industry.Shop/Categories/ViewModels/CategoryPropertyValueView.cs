@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alabo.App.Shop.Category.ViewModels {
+namespace Alabo.Industry.Shop.Categories.ViewModels {
 
     public class CategoryPropertyValueView {
         public Guid PropertyId { get; set; }

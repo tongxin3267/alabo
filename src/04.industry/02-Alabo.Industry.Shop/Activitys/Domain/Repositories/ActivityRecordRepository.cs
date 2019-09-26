@@ -1,8 +1,8 @@
-﻿using Alabo.App.Shop.Activitys.Domain.Entities;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
+using Alabo.Industry.Shop.Activitys.Domain.Entities;
 
-namespace Alabo.App.Shop.Activitys.Domain.Repositories {
+namespace Alabo.Industry.Shop.Activitys.Domain.Repositories {
 
     public class ActivityRecordRepository : RepositoryEfCore<ActivityRecord, long>, IActivityRecordRepository {
 

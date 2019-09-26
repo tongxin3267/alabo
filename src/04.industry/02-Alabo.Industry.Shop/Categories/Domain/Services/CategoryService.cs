@@ -1,19 +1,19 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Shop.Category.Domain.Entities;
 using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
 using Alabo.Domains.Repositories;
-using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Industry.Shop.Categories.Domain.Entities;
+using Alabo.Industry.Shop.Products.Domain.Entities;
+using Microsoft.AspNetCore.Http;
 
-namespace Alabo.App.Shop.Category.Domain.Services {
+namespace Alabo.Industry.Shop.Categories.Domain.Services {
 
     public class CategoryService : ServiceBase<Entities.Category, Guid>, ICategoryService {
 
@@ -60,7 +60,7 @@ namespace Alabo.App.Shop.Category.Domain.Services {
         /// </summary>
         /// <param name="product"></param>
         /// <param name="request"></param>
-        public string AddOrUpdateOrDeleteProductCategoryData(Product.Domain.Entities.Product product,
+        public string AddOrUpdateOrDeleteProductCategoryData(Product product,
             HttpRequest request) {
             var category = GetSingle(product.CategoryId);
             if (category == null) {

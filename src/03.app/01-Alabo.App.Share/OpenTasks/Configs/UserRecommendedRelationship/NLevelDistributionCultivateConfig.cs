@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Extensions;
-using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.App.Open.Tasks.Modules;
+using Alabo.App.Share.OpenTasks.Base;
+using Alabo.App.Share.OpenTasks.Modules;
 using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Data.Things.Orders.ResultModel;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Tasks.Queues.Models;
+using Alabo.Framework.Tasks.Schedules.Domain.Enums;
 using Alabo.Users.Dtos;
-using ZKCloud.Open.ApiBase.Models;
 using Alabo.Web.Mvc.Attributes;
+using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Open.Tasks.Configs.UserRecommendedRelationship {
+namespace Alabo.App.Share.OpenTasks.Configs.UserRecommendedRelationship {
 
     /// <summary>
     /// 裂变与培育
@@ -60,7 +61,7 @@ namespace Alabo.App.Open.Tasks.Configs.UserRecommendedRelationship {
     /// </summary>
     [TaskModule("BD717F8D-A000-4409-9A05-507E0AE50001", "裂变与培育", SortOrder = 999999,
         ConfigurationType = typeof(NLevelDistributionCultivateConfig), IsSupportMultipleConfiguration = true,
-        FenRunResultType = Core.Tasks.Domain.Enums.FenRunResultType.Price, IsSupportSetDistriRatio = false,
+        FenRunResultType = FenRunResultType.Price, IsSupportSetDistriRatio = false,
         Intro = "裂变与培育，支持不同等级的会员培育，培育对象必须得是同等级。比如A,B为系统的联合创始人,A在B的上面,B享受基础分润,A享受培育分润",
         RelationshipType = RelationshipType.UserRecommendedRelationship)]
     public class NLevelDistributionCultivateModule : AssetAllocationShareModuleBase<NLevelDistributionCultivateConfig> {

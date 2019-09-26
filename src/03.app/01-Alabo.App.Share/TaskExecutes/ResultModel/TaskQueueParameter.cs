@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Core.Tasks.ResultModel {
+namespace Alabo.App.Share.TaskExecutes.ResultModel {
 
     public class TaskQueueParameter {
 

@@ -1,7 +1,7 @@
 ﻿using System;
-using Alabo.App.Core.Tasks.Domain.Enums;
+using Alabo.Framework.Tasks.Schedules.Domain.Enums;
 
-namespace Alabo.App.Open.Tasks {
+namespace Alabo.App.Share.OpenTasks {
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
     public class ShareModulesAttribute : Attribute {

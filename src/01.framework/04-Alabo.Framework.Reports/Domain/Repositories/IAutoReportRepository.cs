@@ -1,12 +1,11 @@
-﻿using MongoDB.Bson;
-using System.Collections.Generic;
-using Alabo.App.Core.Reports.Domain.Entities;
-using Alabo.Domains.Dtos;
+﻿using System.Collections.Generic;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services.Report;
 using Alabo.Domains.Services.Report.Dtos;
+using Alabo.Framework.Reports.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Reports.Domain.Repositories {
+namespace Alabo.Framework.Reports.Domain.Repositories {
 
     /// <summary>
     /// 数据统计

@@ -1,10 +1,7 @@
-﻿
-
-using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
+﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Validations;
 
-namespace Alabo.App.Shop.Activitys.Dtos {
+namespace Alabo.Industry.Shop.Activitys.Dtos {
 
     /// <summary>
     ///     Class ActivityEditInput.

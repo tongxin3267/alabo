@@ -1,17 +1,17 @@
-﻿using MongoDB.Bson;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Product.Domain.Dtos;
-using Alabo.App.Shop.Store.Domain.Dtos;
-using Alabo.App.Shop.Store.Domain.Entities.Extensions;
-using Alabo.App.Shop.Store.ViewModels;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
 using Alabo.Domains.Services;
 using Alabo.Framework.Basic.Address.Domain.Entities;
+using Alabo.Industry.Shop.Deliveries.Domain.Dtos;
+using Alabo.Industry.Shop.Deliveries.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.Deliveries.ViewModels;
+using Alabo.Industry.Shop.Orders.Dtos;
+using Alabo.Industry.Shop.Products.Dtos;
+using MongoDB.Bson;
 
-namespace Alabo.App.Shop.Store.Domain.Services {
+namespace Alabo.Industry.Shop.Deliveries.Domain.Services {
 
     /// <summary>
     ///     Interface IStoreService

@@ -1,18 +1,18 @@
-﻿using Alabo.App.Core.Themes.Domain.Entities;
-using Alabo.App.Core.Themes.Domain.Services;
-using Alabo.App.Core.Themes.Dtos;
-using Alabo.App.Core.Themes.Dtos.Service;
-using Alabo.Domains.Entities;
-using Alabo.Helpers;
-using Alabo.RestfulApi;
-using MongoDB.Bson;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Alabo.Domains.Entities;
+using Alabo.Framework.Themes.Domain.Entities;
+using Alabo.Framework.Themes.Domain.Services;
+using Alabo.Framework.Themes.Dtos;
+using Alabo.Framework.Themes.Dtos.Service;
+using Alabo.Helpers;
+using Alabo.RestfulApi;
+using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Themes.Clients {
+namespace Alabo.Framework.Themes.Clients {
 
     public class ThemeClient : ClientBase, IThemeClient {
         private static readonly string _getInitOpenSite = "/Api/DiyService/InitOpenSiteAsync";

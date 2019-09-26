@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using Alabo.App.Core.ApiStore.CallBacks;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Data.People.Users.Dtos;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Tool.Payment.CallBacks;
 using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 

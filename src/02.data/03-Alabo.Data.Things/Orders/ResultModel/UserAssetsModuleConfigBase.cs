@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Alabo.Framework.Tasks.Queues.Models;
 
-namespace Alabo.App.Core.Tasks.ResultModel {
+namespace Alabo.Data.Things.Orders.ResultModel {
 
     /// <summary>
     /// </summary>

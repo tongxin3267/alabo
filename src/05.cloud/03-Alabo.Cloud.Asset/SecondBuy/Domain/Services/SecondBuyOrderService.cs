@@ -1,4 +1,6 @@
-using Alabo.App.Market.SecondBuy.Domain.Entities;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using Alabo.Cloud.Asset.SecondBuy.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
@@ -6,15 +8,12 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
-using MongoDB.Bson;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Alabo.App.Shop.Product.Domain.Services;
 using Alabo.Framework.Basic.Address.Domain.Services;
+using Alabo.Industry.Shop.Products.Domain.Services;
 using Alabo.Randoms;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.SecondBuy.Domain.Services {
+namespace Alabo.Cloud.Asset.SecondBuy.Domain.Services {
 
     public class SecondBuyOrderService : ServiceBase<SecondBuyOrder, ObjectId>, ISecondBuyOrderService {
 

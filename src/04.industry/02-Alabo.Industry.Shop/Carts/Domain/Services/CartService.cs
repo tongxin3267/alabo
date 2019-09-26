@@ -1,23 +1,21 @@
-﻿using MongoDB.Bson;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.Themes.Extensions;
-using Alabo.App.Shop.Activitys.Domain.Enum;
-using Alabo.App.Shop.Activitys.Domain.Services;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Order.Domain.Entities;
-using Alabo.App.Shop.Product.Domain.Repositories;
-using Alabo.App.Shop.Product.Domain.Services;
-using Alabo.App.Shop.Store.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Industry.Shop.Carts.Domain.Entities;
+using Alabo.Industry.Shop.Deliveries.Domain.Services;
+using Alabo.Industry.Shop.Orders.Domain.Services;
+using Alabo.Industry.Shop.Orders.Dtos;
+using Alabo.Industry.Shop.Products.Domain.Repositories;
+using Alabo.Industry.Shop.Products.Domain.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Shop.Order.Domain.Services
+namespace Alabo.Industry.Shop.Carts.Domain.Services
 {
 
     public class CartService : ServiceBase<Cart, ObjectId>, ICartService

@@ -21,6 +21,7 @@ using Alabo.Linq.Dynamic;
 using Alabo.Maps;
 using Alabo.Regexs;
 using Alabo.Users.Entities;
+using Alabo.Users.Enum;
 
 namespace Alabo.Data.People.Users.Domain.Services {
 

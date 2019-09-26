@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Alabo.App.Shop.Order.ViewModels;
+using Alabo.Cloud.Shop.ShopSaleReport.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 

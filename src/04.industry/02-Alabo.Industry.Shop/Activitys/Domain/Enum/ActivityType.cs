@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Activitys.Domain.Enum {
+namespace Alabo.Industry.Shop.Activitys.Domain.Enum {
 
     /// <summary>
     ///     活动类型

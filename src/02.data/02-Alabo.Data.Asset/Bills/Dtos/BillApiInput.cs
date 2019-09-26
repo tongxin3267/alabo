@@ -1,8 +1,8 @@
 ﻿using System;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Query.Dto;
+using Alabo.Framework.Core.Enums.Enum;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.Bill {
+namespace Alabo.App.Asset.Bills.Dtos {
 
     /// <summary>
     ///     Api 查询参数

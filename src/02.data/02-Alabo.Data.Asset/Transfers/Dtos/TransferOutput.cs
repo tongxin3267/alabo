@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.App.Asset.Withdraws.Domain.Enums;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.Transfer {
+namespace Alabo.App.Asset.Transfers.Dtos {
 
     /// <summary>
     ///     转账管理

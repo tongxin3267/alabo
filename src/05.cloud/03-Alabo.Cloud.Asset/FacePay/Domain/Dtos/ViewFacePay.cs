@@ -2,22 +2,20 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using Alabo.App.Market.FacePay.Domain.Services;
+using Alabo.Cloud.Asset.FacePay.Domain.Services;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
+using Alabo.Domains.Query;
+using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoLists;
 using Alabo.Framework.Core.WebUis.Design.AutoTables;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.Domains.Query;
-using Alabo.Extensions;
 using Alabo.Maps;
-using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Market.FacePay.Domain.Dtos
+namespace Alabo.Cloud.Asset.FacePay.Domain.Dtos
 {
 
     public class ViewFacePay : UIBase, IAutoTable<ViewFacePay>, IAutoList

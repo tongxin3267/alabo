@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using Alabo.App.Shop.Product.DiyModels;
-using Alabo.App.Shop.Product.Domain.CallBacks;
-using Alabo.App.Shop.Product.Domain.Enums;
-using Alabo.App.Shop.Product.ViewModels;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Extensions;
+using Alabo.Industry.Shop.Products.Domain.Configs;
+using Alabo.Industry.Shop.Products.Domain.Enums;
+using Alabo.Industry.Shop.Products.Dtos;
+using Alabo.Industry.Shop.Products.ViewModels;
 
-namespace Alabo.App.Shop.Product.Domain.Repositories {
+namespace Alabo.Industry.Shop.Products.Domain.Repositories {
 
     internal class ProductRepository : RepositoryEfCore<Entities.Product, long>, IProductRepository {
 

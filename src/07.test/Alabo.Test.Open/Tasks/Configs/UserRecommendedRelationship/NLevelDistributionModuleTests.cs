@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
+using Alabo.App.Asset.Accounts.Domain.Entities;
+using Alabo.App.Share.OpenTasks.Configs.UserRecommendedRelationship;
+using Alabo.App.Share.TaskExecutes.Domain.Services;
 using Xunit;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Open.Tasks.Configs.UserRecommendedRelationship;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Extensions;
 using Alabo.Users.Dtos;

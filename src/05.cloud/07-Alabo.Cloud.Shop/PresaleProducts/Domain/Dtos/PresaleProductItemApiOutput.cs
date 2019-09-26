@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.App.Market.PresaleProducts.Domain.ViewModels;
+﻿using System.Collections.Generic;
+using Alabo.Cloud.Shop.PresaleProducts.Domain.ViewModels;
 
-namespace Alabo.App.Market.PresaleProducts.Domain.Dtos
+namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Dtos
 {
     public class PresaleProductItemApiOutput
     {

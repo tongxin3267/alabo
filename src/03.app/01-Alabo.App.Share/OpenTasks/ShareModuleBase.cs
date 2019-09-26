@@ -1,26 +1,28 @@
-﻿using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Core.Tasks.Extensions;
-using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.App.Open.Tasks.Parameter;
-using Alabo.App.Open.Tasks.Result;
-using Alabo.Framework.Core.Enums.Enum;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Alabo.App.Asset.Accounts.Domain.Services;
+using Alabo.App.Share.OpenTasks.Base;
+using Alabo.App.Share.OpenTasks.Parameter;
+using Alabo.App.Share.OpenTasks.Result;
+using Alabo.Data.People.Teams.Domain.Configs;
+using Alabo.Data.Things.Orders.Domain.Services;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Data.Things.Orders.ResultModel;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.Data.People.Teams.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Tasks.Queues.Domain.Servcies;
+using Alabo.Framework.Tasks.Queues.Models;
 using ZKCloud.Open.ApiBase.Models;
+using AssetTaskResult = Alabo.App.Share.TaskExecutes.ResultModel.AssetTaskResult;
+using TaskQueueParameter = Alabo.App.Share.TaskExecutes.ResultModel.TaskQueueParameter;
 using User = Alabo.Users.Entities.User;
 
-namespace Alabo.App.Open.Tasks {
+namespace Alabo.App.Share.OpenTasks {
 
     /// <summary>
     /// Class ShareModuleBase.
@@ -259,7 +261,7 @@ namespace Alabo.App.Open.Tasks {
                         // IsAddIncomeChangeToQueue = Configuration.IsAddIncomeChangeToQueue,
                         FenRunResultParameterList = parametertmpList
                     };
-                    var queueResult = new TaskQueueResult<FenRunStagesResultParameter>(Context) {
+                    var queueResult = new TaskExecutes.ResultModel.TaskQueueResult<FenRunStagesResultParameter>(Context) {
                         //  ModuleId = new Guid(FenRunStagesResultDealwithModule.Id),
                         UserId = 0,
                         Parameter = ResultParameter,
@@ -477,7 +479,7 @@ namespace Alabo.App.Open.Tasks {
             if (queue == null) {
                 return;
             }
-            var result = new TaskQueueResult<TaskQueueParameter>(Context, queue.Id);
+            var result = new TaskExecutes.ResultModel.TaskQueueResult<TaskQueueParameter>(Context, queue.Id);
             resultList.Add(result);
         }
     }

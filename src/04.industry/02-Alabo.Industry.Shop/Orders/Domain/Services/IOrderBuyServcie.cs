@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Shop.Order.Domain.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Framework.Basic.Address.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Dtos;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Shop.Order.Domain.Services {
+namespace Alabo.Industry.Shop.Orders.Domain.Services {
 
     /// <summary>
     ///     订单购物、订单价格计算相关的订单服务

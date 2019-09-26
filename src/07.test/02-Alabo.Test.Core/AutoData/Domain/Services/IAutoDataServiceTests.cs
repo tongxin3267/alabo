@@ -4,8 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
-using Alabo.App.Core.LightApps.Domain.Services;
 using Alabo.Extensions;
+using Alabo.Industry.Cms.LightApps.Domain.Services;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
 

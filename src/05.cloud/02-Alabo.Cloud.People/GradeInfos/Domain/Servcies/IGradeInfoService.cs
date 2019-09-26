@@ -1,13 +1,12 @@
-using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Entities;
+using Alabo.Cloud.People.GradeInfos.Domain.Entities;
 using Alabo.Data.People.Users.Dtos;
 using Alabo.Domains.Attributes;
 using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.User.Domain.Services {
+namespace Alabo.Cloud.People.GradeInfos.Domain.Servcies {
 
     public interface IGradeInfoService : IService<GradeInfo, ObjectId> {
 

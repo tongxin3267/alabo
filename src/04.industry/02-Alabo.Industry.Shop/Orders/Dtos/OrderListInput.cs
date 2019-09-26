@@ -1,7 +1,7 @@
-﻿using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.Domains.Query.Dto;
+﻿using Alabo.Domains.Query.Dto;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
 
-namespace Alabo.App.Shop.Order.Domain.Dtos {
+namespace Alabo.Industry.Shop.Orders.Dtos {
 
     /// <summary>
     ///     订单
@@ -20,7 +20,7 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
         ///     AdminOrderList = 3 // 平台订单
         /// </summary>
 
-        public OrderType? OrderType { get; set; }=Enums.OrderType.Normal;
+        public OrderType? OrderType { get; set; }=Domain.Enums.OrderType.Normal;
 
         /// <summary>
         ///     获取会员Id

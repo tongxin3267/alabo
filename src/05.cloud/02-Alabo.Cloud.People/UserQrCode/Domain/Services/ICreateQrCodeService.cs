@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.Domains.Services;
+﻿using Alabo.Domains.Services;
 using Alabo.Users.Entities;
 
-namespace _01_Alabo.Cloud.Core.UserQrCode.Domain.Services {
+namespace Alabo.Cloud.People.UserQrCode.Domain.Services {
 
     public interface ICreateQrCodeService : IService {
 

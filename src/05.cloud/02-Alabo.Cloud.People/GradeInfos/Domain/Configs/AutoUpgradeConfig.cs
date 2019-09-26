@@ -1,16 +1,15 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.AutoConfigs;
 using Alabo.Data.People.Users.Dtos;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Core.User.Domain.Callbacks {
+namespace Alabo.Cloud.People.GradeInfos.Domain.Configs {
 
     /// <summary>
     ///     会员自动升级配置

@@ -1,5 +1,5 @@
+using Alabo.Framework.Reports.Domain.Services;
 using Xunit;
-using Alabo.App.Core.Reports.Domain.Services;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
 

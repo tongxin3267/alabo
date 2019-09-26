@@ -1,11 +1,11 @@
-using MongoDB.Bson;
-using Alabo.App.Market.PromotionalMaterial.Domain.Entities;
+using Alabo.Cloud.School.Materials.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.PromotionalMaterial.Domain.Services {
+namespace Alabo.Cloud.School.Materials.Domain.Services {
 
     public class MaterialService : ServiceBase<Material, ObjectId>, IMaterialService {
 

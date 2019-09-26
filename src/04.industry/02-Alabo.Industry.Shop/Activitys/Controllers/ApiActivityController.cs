@@ -1,16 +1,14 @@
-using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Shop.Activitys.Domain.Entities;
-using Alabo.App.Shop.Activitys.Dtos;
-using Alabo.App.Shop.Activitys.Modules.GroupBuy.Model;
-using Alabo.App.Shop.Activitys.Services;
-using Alabo.Extensions;
+using Alabo.Industry.Shop.Activitys.Domain.Entities;
+using Alabo.Industry.Shop.Activitys.Domain.Services;
+using Alabo.Industry.Shop.Activitys.Dtos;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Shop.Activitys.Controllers
+namespace Alabo.Industry.Shop.Activitys.Controllers
 {
 
     /// <summary>
@@ -30,11 +28,11 @@ namespace Alabo.App.Shop.Activitys.Controllers
         }
 
         /// <summary>
-        /// »ñÈ¡»î¶¯
+        /// ï¿½ï¿½È¡ï¿½î¶¯
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Display(Description = "»ñÈ¡»î¶¯")]
+        [Display(Description = "ï¿½ï¿½È¡ï¿½î¶¯")]
         public ApiResult<ActivityEditOutput> GetView([FromQuery]ActivityEditInput input)
         {
             if (!this.IsFormValid())
@@ -47,11 +45,11 @@ namespace Alabo.App.Shop.Activitys.Controllers
         }
 
         /// <summary>
-        /// ±£´æ»î¶¯
+        /// ï¿½ï¿½ï¿½ï¿½î¶¯
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [Display(Description = "±£´æ»î¶¯")]
+        [Display(Description = "ï¿½ï¿½ï¿½ï¿½î¶¯")]
         public ApiResult Save([FromBody]ActivityEditOutput input)
         {
             if (!this.IsFormValid())

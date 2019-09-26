@@ -1,13 +1,13 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using Alabo.App.Core.Tasks.Domain.Services;
+using Alabo.App.Share.TaskExecutes.Domain.Services;
 using Alabo.Exceptions;
 using Alabo.Files;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
 
-namespace Alabo.Test.Generation {
+namespace Alabo.Test.Cms {
 
     public class StartupShareTest : CoreTest {
 

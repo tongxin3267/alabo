@@ -1,12 +1,12 @@
-﻿using MongoDB.Bson;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Cms.Articles.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
+using Alabo.Industry.Cms.Articles.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Cms.Articles.Domain.Services {
+namespace Alabo.Industry.Cms.Articles.Domain.Services {
 
     public class AboutService : ServiceBase<About, ObjectId>, IAboutService {
 

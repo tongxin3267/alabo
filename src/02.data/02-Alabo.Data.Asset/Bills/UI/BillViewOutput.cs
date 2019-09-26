@@ -1,20 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Services;
+using Alabo.App.Asset.Bills.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoPreviews;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoPreviews;
 using Alabo.Mapping;
-using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Finance.UI.AutoForm {
+namespace Alabo.App.Asset.Bills.UI {
 
     [ClassProperty(Name = "财务详情Autopreview")]
     public class BillViewOutput : UIBase, IAutoPreview {

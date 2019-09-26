@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Dtos.Account;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.ViewModels.Account;
-using Alabo.Framework.Core.Enums.Enum;
+using Alabo.App.Asset.Accounts.Domain.Entities;
+using Alabo.App.Asset.Accounts.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+using Alabo.Framework.Core.Enums.Enum;
 
-namespace Alabo.App.Core.Finance.Domain.Services {
+namespace Alabo.App.Asset.Accounts.Domain.Services {
 
     /// <summary>
     ///     用户资产接口

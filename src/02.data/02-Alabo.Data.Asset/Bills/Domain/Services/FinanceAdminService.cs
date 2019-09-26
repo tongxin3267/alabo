@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Dtos.Bill;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Repositories;
-using Alabo.App.Core.Finance.ViewModels.Account;
-using Alabo.App.Core.Finance.ViewModels.Bill;
+using Alabo.App.Asset.Accounts.Domain.Repositories;
+using Alabo.App.Asset.Accounts.Dtos;
+using Alabo.App.Asset.Bills.Domain.Entities;
+using Alabo.App.Asset.Bills.Domain.Repositories;
+using Alabo.App.Asset.Bills.Dtos;
 using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Data.People.Users.Dtos;
@@ -18,7 +17,7 @@ using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Mapping;
 
-namespace Alabo.App.Core.Finance.Domain.Services {
+namespace Alabo.App.Asset.Bills.Domain.Services {
 
     /// <summary>
     ///     Class FinanceAdminService.

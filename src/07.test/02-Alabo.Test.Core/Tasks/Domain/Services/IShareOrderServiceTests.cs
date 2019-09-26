@@ -1,6 +1,6 @@
+using Alabo.Data.Things.Orders.Domain.Entities.Extensions;
+using Alabo.Data.Things.Orders.Domain.Services;
 using Xunit;
-using Alabo.App.Core.Tasks.Domain.Entities.Extensions;
-using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;

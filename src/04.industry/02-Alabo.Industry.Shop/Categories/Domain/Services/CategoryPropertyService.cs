@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Shop.Category.Domain.Entities;
-using Alabo.App.Shop.Category.Domain.Repositories;
-using Alabo.Framework.Core.Admins.Configs;
 using Alabo.Datas.UnitOfWorks;
-
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Core.Admins.Configs;
+using Alabo.Industry.Shop.Categories.Domain.Entities;
+using Alabo.Industry.Shop.Categories.Domain.Repositories;
 
-namespace Alabo.App.Shop.Category.Domain.Services {
+namespace Alabo.Industry.Shop.Categories.Domain.Services {
 
     public class CategoryPropertyService : ServiceBase<CategoryProperty, Guid>, ICategoryPropertyService {
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Alabo.App.Shop.Order.ViewModels
+﻿namespace Alabo.Industry.Shop.Orders.ViewModels
 {
     /// <summary>
     /// 订单操作View

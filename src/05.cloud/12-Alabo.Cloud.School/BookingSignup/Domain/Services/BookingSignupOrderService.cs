@@ -1,16 +1,12 @@
-using System;
 using System.Collections.Generic;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
+using Alabo.Cloud.School.BookingSignup.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Repositories;
-using Alabo.App.Market.BookingSignup.Domain.Entities;
 using Alabo.Domains.Entities;
+using Alabo.Domains.Repositories;
+using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.BookingSignup.Domain.Services {
+namespace Alabo.Cloud.School.BookingSignup.Domain.Services {
 
     public class BookingSignupOrderService : ServiceBase<BookingSignupOrder, ObjectId>, IBookingSignupOrderService {
 

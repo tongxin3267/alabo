@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Core.Themes.Domain.Entities;
-using Alabo.App.Core.Themes.Dtos;
-using Alabo.App.Core.Themes.Dtos.Service;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Themes.Domain.Entities;
+using Alabo.Framework.Themes.Dtos;
+using Alabo.Framework.Themes.Dtos.Service;
 using Alabo.Helpers;
 using Alabo.RestfulApi.Clients;
 
-namespace Alabo.App.Core.Themes.Domain.Services {
+namespace Alabo.Framework.Themes.Domain.Services {
 
     public class ThemeOpenService : ServiceBase, IThemeOpenService {
 

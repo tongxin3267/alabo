@@ -1,19 +1,18 @@
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.Reports.Domain.Entities;
-using Alabo.App.Core.Reports.Domain.Services;
-using Alabo.Domains.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services.Report;
 using Alabo.Domains.Services.Report.Dtos;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Framework.Reports.Domain.Entities;
+using Alabo.Framework.Reports.Domain.Services;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Reports.Controllers {
+namespace Alabo.Framework.Reports.Controllers {
 
     /// <summary>
     /// ±¨±í

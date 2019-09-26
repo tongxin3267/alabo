@@ -1,12 +1,9 @@
-using Xunit;
-using Alabo.App.Core.Themes.Domain.Services;
-using Alabo.App.Core.Themes.Dtos;
-using Alabo.Framework.Core.Enums;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
+using Xunit;
 
-namespace Alabo.Test.Open.Themes.Domain.Services
+namespace Alabo.Test.Core.Themes.Domain.Services
 {
     public class IThemeServiceTests : CoreTest
     {

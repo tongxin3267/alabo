@@ -2,9 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using Alabo.App.Asset.Withdraws.Domain.Entities.Extension;
 using Alabo.App.Asset.Withdraws.Domain.Enums;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Entities.Extension;
-using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;

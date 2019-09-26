@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Themes.Extensions;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Data.People.Users.Dtos;
 using Alabo.Domains.Entities;
@@ -14,6 +13,7 @@ using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoLists;
 using Alabo.Framework.Core.WebUis.Design.AutoPreviews;
+using Alabo.Framework.Themes.Extensions;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 

@@ -1,4 +1,4 @@
-﻿namespace Alabo.App.Shop.Order.ViewModels {
+﻿namespace Alabo.Industry.Shop.Orders.ViewModels {
 
     public class OrderAccountPay {
 

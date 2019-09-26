@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Repositories.Extensions;
+using Alabo.Framework.Tasks.Queues.Domain.Entities;
+using Alabo.Framework.Tasks.Queues.Domain.Enums;
 
-namespace Alabo.App.Core.Tasks.Domain.Repositories {
+namespace Alabo.Framework.Tasks.Queues.Domain.Repositories {
 
     internal class TaskQueueRepository : RepositoryEfCore<TaskQueue, long>, ITaskQueueRepository {
 

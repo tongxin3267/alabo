@@ -1,14 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using Alabo.Cloud.People.UserTree.Domain.Service;
+using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Extensions;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
-using UserDetail = Alabo.Users.Entities.UserDetail;
 
-namespace Alabo.App.Core.User.Controllers {
+namespace Alabo.Cloud.People.UserTree.Controllers {
 
     /// <summary>
     ///     用户相关Api接口

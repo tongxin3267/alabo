@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Alabo.Domains.Entities;
 using Alabo.Validations;
 
-namespace Alabo.App.Market.UserRightss.Domain.Dtos
+namespace Alabo.Cloud.People.UserRightss.Domain.Dtos
 {
     /// <summary>
     /// 增加端口

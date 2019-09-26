@@ -1,16 +1,15 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.Product.Domain.Enums;
 using Alabo.AutoConfigs;
 using Alabo.Datas.Queries.Enums;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Industry.Shop.Products.Domain.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Shop.Product.ViewModels {
+namespace Alabo.Industry.Shop.Products.ViewModels {
 
     public class ViewProductList : BaseViewModel {
 

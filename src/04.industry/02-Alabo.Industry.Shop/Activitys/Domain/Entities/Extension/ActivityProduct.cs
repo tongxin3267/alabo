@@ -1,6 +1,6 @@
 ﻿using Alabo.Domains.Entities.Extensions;
 
-namespace Alabo.App.Shop.Activitys.Domain.Entities.Extension {
+namespace Alabo.Industry.Shop.Activitys.Domain.Entities.Extension {
 
     /// <summary>
     ///     活动关联的商品

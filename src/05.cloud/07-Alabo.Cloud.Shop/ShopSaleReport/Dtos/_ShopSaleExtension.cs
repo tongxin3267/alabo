@@ -5,7 +5,7 @@ using Alabo.Domains.Entities.Extensions;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 
-namespace ZKCloud.App.Core.User.Domain.Entities.Extensions {
+namespace Alabo.Cloud.Shop.ShopSaleReport.Dtos {
 
     /// <summary>
     ///     商城销售统计

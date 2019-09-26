@@ -1,8 +1,8 @@
-using MongoDB.Bson;
-using Alabo.App.Offline.Order.Domain.Entities;
 using Alabo.Domains.Repositories;
+using Alabo.Industry.Offline.Order.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Offline.Order.Domain.Repositories
+namespace Alabo.Industry.Offline.Order.Domain.Repositories
 {
     public interface IMerchantCartRepository : IRepository<MerchantCart, ObjectId>
     {

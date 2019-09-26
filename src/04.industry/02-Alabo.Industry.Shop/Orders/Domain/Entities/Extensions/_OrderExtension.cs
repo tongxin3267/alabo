@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Shop.AfterSale.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Order.Dtos;
-using Alabo.App.Shop.Product.Domain.Dtos;
+using Alabo.App.Asset.Pays.Domain.Entities;
 using Alabo.Domains.Entities.Extensions;
 using Alabo.Framework.Basic.Address.Domain.Entities;
+using Alabo.Industry.Shop.AfterSales.Domain.Entities;
+using Alabo.Industry.Shop.Deliveries.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Dtos;
+using Alabo.Industry.Shop.Products.Dtos;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Shop.Order.Domain.Entities.Extensions
+namespace Alabo.Industry.Shop.Orders.Domain.Entities.Extensions
 {
 
     /// <summary>
@@ -81,7 +81,7 @@ namespace Alabo.App.Shop.Order.Domain.Entities.Extensions
         /// <summary>
         ///     订单所属店铺,快照数据
         /// </summary>
-        public Store.Domain.Entities.Store Store { get; set; } = new Store.Domain.Entities.Store();
+        public Store Store { get; set; } = new Store();
 
         /// <summary>
         ///     订单地址

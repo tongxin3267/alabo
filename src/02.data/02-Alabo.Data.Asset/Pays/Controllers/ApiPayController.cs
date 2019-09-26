@@ -1,20 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Alabo.App.Asset.Pays.Domain.Entities;
+using Alabo.App.Asset.Pays.Domain.Services;
+using Alabo.App.Asset.Pays.Dtos;
+using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.Finance.Domain.Dtos.Pay;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.Finance.Dtos;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Framework.Core.WebUis.Models.Lists;
-using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Mapping;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Finance.Controllers {
+namespace Alabo.App.Asset.Pays.Controllers {
 
     /// <summary>
     ///     Class PayApiController.

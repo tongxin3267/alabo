@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.AfterSales;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.AfterSale.Domain.Enums
+namespace Alabo.Industry.Shop.AfterSales.Domain.Enums
 {
 
     /// <summary>

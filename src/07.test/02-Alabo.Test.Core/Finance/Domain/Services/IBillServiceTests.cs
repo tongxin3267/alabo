@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
+using Alabo.App.Asset.Accounts.Dtos;
+using Alabo.App.Asset.Bills.Domain.Services;
+using Alabo.App.Asset.Transfers.Domain.Configs;
 using Xunit;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.Finance.ViewModels.Account;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;

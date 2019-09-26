@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.App.Core.User.ViewModels;
-using Alabo.Domains.Entities;
-using _01_Alabo.Cloud.Core.UserTree.Domain.UI;
+﻿using Alabo.Domains.Entities;
 
-namespace _01_Alabo.Cloud.Core.UserTree.Domain.Service {
+namespace Alabo.Cloud.People.UserTree.Domain.Service {
 
     public interface ITreeUpdateService {
 

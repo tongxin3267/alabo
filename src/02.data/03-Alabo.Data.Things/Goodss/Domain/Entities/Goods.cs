@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
-using Alabo.Data.Things.Brands.Domain.Entities.Extensions;
+using Alabo.Data.Things.Goodss.Domain.Entities.Extensions;
 using Alabo.Data.Things.Goodss.Domain.Enums;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Datas.Queries.Enums;

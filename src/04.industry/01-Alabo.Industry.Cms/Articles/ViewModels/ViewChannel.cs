@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Cms.Articles.ViewModels {
+namespace Alabo.Industry.Cms.Articles.ViewModels {
 
     /// <summary>
     ///     频道模型

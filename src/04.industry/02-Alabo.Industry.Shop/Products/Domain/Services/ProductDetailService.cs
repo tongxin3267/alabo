@@ -1,9 +1,9 @@
-﻿using Alabo.App.Shop.Product.Domain.Entities;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
+using Alabo.Industry.Shop.Products.Domain.Entities;
 
-namespace Alabo.App.Shop.Product.Domain.Services {
+namespace Alabo.Industry.Shop.Products.Domain.Services {
 
     public class ProductDetailService : ServiceBase<ProductDetail, long>, IProductDetailService {
 

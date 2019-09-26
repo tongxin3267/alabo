@@ -1,5 +1,5 @@
-﻿using Xunit;
-using Alabo.App.Core.ApiStore.AMap.District;
+﻿using Alabo.Tool.AMap;
+using Xunit;
 
 namespace Alabo.Test.Core.ApiStore.AMap
 {

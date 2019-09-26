@@ -2,24 +2,22 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Share.Share.Domain.Entities;
-using Alabo.App.Share.Share.Domain.Services;
+using Alabo.App.Share.Rewards.Domain.Entities;
+using Alabo.App.Share.Rewards.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Data.People.Users.Dtos;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoPreviews;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
-using ZKCloud.Open.Share.Models;
-using Alabo.UI;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoPreviews;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Web.Mvc.Attributes;
+using ZKCloud.Open.Share.Models;
 
-namespace Alabo.App.Share.Share.Domain.Dto {
+namespace Alabo.App.Share.Rewards.Dtos {
 
     /// <summary>
     /// Class RewardApiOutput.

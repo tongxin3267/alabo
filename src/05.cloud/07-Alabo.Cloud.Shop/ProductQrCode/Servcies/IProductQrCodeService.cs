@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.Domains.Services;
+﻿using Alabo.Domains.Services;
 
-namespace _07_Alabo.Cloud.Shop.ProductQrCode.Servcies {
+namespace Alabo.Cloud.Shop.ProductQrCode.Servcies {
 
     public interface IProductQrCodeService : IService {
 

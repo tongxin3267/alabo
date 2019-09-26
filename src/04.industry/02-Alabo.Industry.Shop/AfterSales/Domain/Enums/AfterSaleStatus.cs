@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.AfterSales.Domain.Enums
+namespace Alabo.Industry.Shop.AfterSales.Domain.Enums
 {
     /// <summary>
     /// 暂时只支持换货

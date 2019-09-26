@@ -1,34 +1,35 @@
-﻿using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Entities.Extension;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Order.Domain.Entities.Extensions;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.App.Shop.Order.Domain.Repositories;
-using Alabo.App.Shop.Order.ViewModels;
-using Alabo.App.Shop.Order.ViewModels.OrderEdit;
-using Alabo.App.Shop.Product.Domain.CallBacks;
-using Alabo.App.Shop.Product.Domain.Services;
-using Alabo.App.Shop.Store.Domain.Entities.Extensions;
-using Alabo.App.Shop.Store.Domain.Services;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.Domains.Services;
-using Alabo.Extensions;
-using Alabo.Mapping;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.Tasks.Domain.Services;
+using Alabo.App.Asset.Pays.Domain.Entities;
+using Alabo.App.Asset.Pays.Domain.Entities.Extension;
+using Alabo.App.Asset.Pays.Domain.Services;
 using Alabo.AutoConfigs;
 using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Data.Things.Orders.Domain.Services;
+using Alabo.Datas.UnitOfWorks;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Services;
+using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Industry.Shop.Deliveries.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.Deliveries.Domain.Services;
+using Alabo.Industry.Shop.OrderActions.Domain.Services;
+using Alabo.Industry.Shop.OrderDeliveries.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.OrderDeliveries.Domain.Services;
+using Alabo.Industry.Shop.Orders.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using Alabo.Industry.Shop.Orders.Domain.Repositories;
+using Alabo.Industry.Shop.Orders.Dtos;
+using Alabo.Industry.Shop.Orders.ViewModels;
+using Alabo.Industry.Shop.Orders.ViewModels.OrderEdit;
+using Alabo.Industry.Shop.Products.Domain.Services;
+using Alabo.Mapping;
+using Alabo.Tool.Payment;
 using Convert = System.Convert;
 
-namespace Alabo.App.Shop.Order.Domain.Services {
+namespace Alabo.Industry.Shop.Orders.Domain.Services {
 
     /// <summary>
     ///     订单后台操作相关 接口

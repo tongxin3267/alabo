@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Finance.Domain.Enums {
+namespace Alabo.App.Asset.Recharges.Domain.Enums {
 
     [ClassProperty(Name = "充值类型")]
     public enum RechargeType {

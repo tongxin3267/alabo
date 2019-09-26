@@ -1,7 +1,7 @@
-﻿using Alabo.App.Shop.Order.Domain.Entities;
-using Alabo.Domains.Services;
+﻿using Alabo.Domains.Services;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
 
-namespace Alabo.App.Shop.Order.Domain.Services {
+namespace Alabo.Industry.Shop.Orders.Domain.Services {
 
     public interface IOrderProductService : IService<OrderProduct, long> {
 

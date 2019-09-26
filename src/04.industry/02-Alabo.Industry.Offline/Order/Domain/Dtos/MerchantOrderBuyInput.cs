@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.App.Offline.Order.ViewModels;
-using Alabo.Domains.Entities;
+using Alabo.Industry.Offline.Order.ViewModels;
+using Alabo.Tool.Payment;
 using Alabo.Validations;
 
-namespace Alabo.App.Offline.Order.Domain.Dtos
+namespace Alabo.Industry.Offline.Order.Domain.Dtos
 {
     /// <summary>
     /// MerchantOrderBuyInput

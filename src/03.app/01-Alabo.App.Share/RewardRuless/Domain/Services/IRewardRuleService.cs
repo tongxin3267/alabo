@@ -1,14 +1,14 @@
-using Alabo.App.Core.Tasks;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.App.Share.Share.Domain.Dtos;
-using Alabo.App.Share.Share.Domain.Entities;
+using System;
+using Alabo.App.Share.OpenTasks.Base;
+using Alabo.App.Share.RewardRuless.Domain.Entities;
+using Alabo.App.Share.RewardRuless.Dtos;
+using Alabo.App.Share.TaskExecutes;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
-using MongoDB.Bson;
-using System;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using MongoDB.Bson;
 
-namespace Alabo.App.Share.Share.Domain.Services {
+namespace Alabo.App.Share.RewardRuless.Domain.Services {
 
     public interface IRewardRuleService : IService<RewardRule, ObjectId> {
 

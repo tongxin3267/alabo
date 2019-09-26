@@ -1,10 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.Themes.Domain.Entities;
-using Alabo.App.Core.Themes.Domain.Enums;
-using Alabo.App.Core.Themes.Domain.Services;
-using Alabo.App.Core.Themes.Dtos;
 using Alabo.Data.People.Employes.Domain.Entities;
 using Alabo.Data.People.Employes.Dtos;
 using Alabo.Data.People.Users.Domain.Services;
@@ -14,6 +10,10 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Themes.Domain.Entities;
+using Alabo.Framework.Themes.Domain.Enums;
+using Alabo.Framework.Themes.Domain.Services;
+using Alabo.Framework.Themes.Dtos;
 using Alabo.Maps;
 using MongoDB.Bson;
 

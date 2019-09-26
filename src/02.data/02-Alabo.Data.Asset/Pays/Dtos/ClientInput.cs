@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Domains.Entities;
 using Alabo.Validations;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.Pay {
+namespace Alabo.App.Asset.Pays.Dtos {
 
     /// <summary>
     ///     客户端类型

@@ -1,15 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.Common.ViewModels;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.Framework.Core.WebApis.Controller;
+﻿using System.ComponentModel.DataAnnotations;
+using Alabo.Cloud.People.UserQrCode.Domain.Services;
+using Alabo.Cloud.People.UserQrCode.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.User.Controllers {
+namespace Alabo.Cloud.People.UserQrCode.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/Qrcode/[action]")]

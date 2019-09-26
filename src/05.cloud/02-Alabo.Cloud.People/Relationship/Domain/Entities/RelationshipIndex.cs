@@ -1,13 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Framework.Core.WebUis;
-using MongoDB.Bson.Serialization.Attributes;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.UI;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Market.Relationship.Domain.Entities {
+namespace Alabo.Cloud.People.Relationship.Domain.Entities {
 
     /// <summary>
     ///     会员关系网

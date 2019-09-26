@@ -2,27 +2,16 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using Alabo.App.Asset.Withdraws.Domain.Services;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.App.Core.Finance.Domain.Services;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoTables;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.Exceptions;
-using Alabo.Extensions;
-using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
-using Alabo.Helpers;
-using Alabo.Mapping;
-using Alabo.UI;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.WithDraw {
+namespace Alabo.App.Asset.Withdraws.Dtos {
 
     /// <summary>
     ///     提现输出模型

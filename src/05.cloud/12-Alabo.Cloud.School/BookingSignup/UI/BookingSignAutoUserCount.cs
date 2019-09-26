@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using Alabo.App.Market.BookingSignup.Domain.Entities;
-using Alabo.App.Market.BookingSignup.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
+using Alabo.Cloud.School.BookingSignup.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Mapping;
-using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Market.BookingSignup.UI {
+namespace Alabo.Cloud.School.BookingSignup.UI {
 
     public class BookingSignAutoUserCount : UIBase, IAutoTable<BookingSignAutoUserCount> {
 

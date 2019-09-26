@@ -1,11 +1,10 @@
-﻿using MongoDB.Bson;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Core.User.ViewModels;
+﻿using Alabo.Cloud.People.Identities.Domain.Entities;
 using Alabo.Data.People.Users.ViewModels;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.User.Domain.Services {
+namespace Alabo.Cloud.People.Identities.Domain.Services {
 
     public interface IIdentityService : IService<Identity, ObjectId> {
         /// <summary>

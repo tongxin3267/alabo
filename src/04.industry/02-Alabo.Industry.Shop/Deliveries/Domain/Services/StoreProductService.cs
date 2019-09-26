@@ -1,18 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Castle.Components.DictionaryAdapter;
-using Alabo.App.Shop.Category.Domain.Entities;
-using Alabo.App.Shop.Category.Domain.Services;
-using Alabo.App.Shop.Product.Domain.CallBacks;
-using Alabo.App.Shop.Product.Domain.Entities;
-using Alabo.App.Shop.Product.Domain.Entities.Extensions;
-using Alabo.App.Shop.Product.Domain.Enums;
-using Alabo.App.Shop.Product.Domain.Repositories;
-using Alabo.App.Shop.Product.Domain.Services;
-using Alabo.App.Shop.Product.ViewModels;
-using Alabo.App.Shop.Store.Domain.Dtos;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
@@ -20,10 +8,17 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Relations.Domain.Services;
-using Alabo.Helpers;
-using ZKCloud.Open.ApiBase.Models;
+using Alabo.Industry.Shop.Categories.Domain.Entities;
+using Alabo.Industry.Shop.Categories.Domain.Services;
+using Alabo.Industry.Shop.Deliveries.Domain.Dtos;
+using Alabo.Industry.Shop.Products.Domain.Configs;
+using Alabo.Industry.Shop.Products.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.Products.Domain.Enums;
+using Alabo.Industry.Shop.Products.Domain.Repositories;
+using Alabo.Industry.Shop.Products.Domain.Services;
+using Alabo.Industry.Shop.Products.ViewModels;
 
-namespace Alabo.App.Shop.Store.Domain.Services
+namespace Alabo.Industry.Shop.Deliveries.Domain.Services
 {
 
     public class StoreProductService : ServiceBase, IStoreProductService
@@ -273,7 +268,7 @@ namespace Alabo.App.Shop.Store.Domain.Services
                 }
 
 
-                var outCategory = productView.ProductDetail.PropertyJson.ToObject<Category.Domain.Entities.Category>();
+                var outCategory = productView.ProductDetail.PropertyJson.ToObject<Category>();
                 //var categoryEntity = productView.Category;
 
 
@@ -337,10 +332,10 @@ namespace Alabo.App.Shop.Store.Domain.Services
             });
 
             relation.Classes = Resolve<IRelationService>()
-                .GetClass(typeof(Product.Domain.CallBacks.ProductClassRelation).Name, userId).ToList();
+                .GetClass(typeof(ProductClassRelation).Name, userId).ToList();
             //ProductTagRelation
             relation.Tags = Resolve<IRelationService>()
-                .GetKeyValues(typeof(Product.Domain.CallBacks.ProductTagRelation).Name, userId).ToList();
+                .GetKeyValues(typeof(ProductTagRelation).Name, userId).ToList();
 
             return relation;
         }

@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Shop.Order.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Repositories;
-using Alabo.App.Shop.Order.ViewModels;
-using Alabo.App.Shop.Store.Domain.CallBacks;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
-
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Industry.Shop.Deliveries.Domain.CallBacks;
+using Alabo.Industry.Shop.OrderDeliveries.Domain.Entities;
+using Alabo.Industry.Shop.OrderDeliveries.Domain.Repositories;
+using Alabo.Industry.Shop.Orders.Domain.Services;
+using Alabo.Industry.Shop.Orders.ViewModels;
 using Alabo.Mapping;
 
-namespace Alabo.App.Shop.Order.Domain.Services {
+namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Services {
 
     public class OrderDeliveryService : ServiceBase<OrderDelivery, long>, IOrderDeliveryService {
 

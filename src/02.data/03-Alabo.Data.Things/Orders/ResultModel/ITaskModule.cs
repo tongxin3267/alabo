@@ -1,6 +1,7 @@
-﻿using Alabo.App.Core.Tasks.Extensions;
+﻿using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Framework.Tasks.Queues.Models;
 
-namespace Alabo.App.Core.Tasks.ResultModel {
+namespace Alabo.Data.Things.Orders.ResultModel {
 
     public interface ITaskModule {
         TaskContext Context { get; }

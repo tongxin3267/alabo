@@ -1,6 +1,6 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Activitys.Domain.Enum {
+namespace Alabo.Industry.Shop.Activitys.Domain.Enum {
 
     [ClassProperty(Name = "活动优先级")]
     public enum ActivityPriority {

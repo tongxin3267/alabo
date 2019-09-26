@@ -1,6 +1,6 @@
-﻿using Alabo.App.Share.Attach.Domain.Enums;
+﻿using Alabo.Cloud.Shop.Favorites.Domain.Enums;
 
-namespace Alabo.App.Share.Attach.Domain.Dtos {
+namespace Alabo.Cloud.Shop.Favorites.Dtos {
 
     /// <summary>
     /// 添加收藏模型

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Alabo.App.Core.Tasks.Extensions {
+namespace Alabo.Data.Things.Orders.Extensions {
 
     public static class TaskModuleParameterSetting {
         private static readonly IDictionary<Guid, Type> _moduleParameterSetting = new Dictionary<Guid, Type>();

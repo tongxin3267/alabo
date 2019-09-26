@@ -1,24 +1,28 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Entities.Extensions;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Domain.Repositories;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Core.Tasks.Extensions;
-using Alabo.App.Core.Tasks.ResultModel;
+using Alabo.App.Share.TaskExecutes.Extensions;
 using Alabo.Data.People.Users.Domain.Repositories;
-using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Data.Things.Orders.Domain.Entities;
+using Alabo.Data.Things.Orders.Domain.Entities.Extensions;
+using Alabo.Data.Things.Orders.Domain.Repositories;
+using Alabo.Data.Things.Orders.Domain.Services;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Data.Things.Orders.ResultModel;
 using Alabo.Extensions;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Tasks.Queues.Domain.Entities;
+using Alabo.Framework.Tasks.Queues.Domain.Enums;
+using Alabo.Framework.Tasks.Queues.Domain.Servcies;
+using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Helpers;
-using ZKCloud.Open.ApiBase.Models;
 using Alabo.Reflections;
+using Microsoft.Extensions.Logging;
+using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Tasks {
+namespace Alabo.App.Share.TaskExecutes {
 
     public class TaskActuator : ITaskActuator {
         private static readonly string _moduleConfigrationIdKey = "ConfigurationId";
@@ -246,12 +250,12 @@ namespace Alabo.App.Core.Tasks {
 
             IList<long> shareUsreIds = new List<long>();
             foreach (var item in resultList) {
-                var shareResult = ((TaskQueueResult<ITaskResult>)item).ShareResult;
+                var shareResult = ((ResultModel.TaskQueueResult<ITaskResult>)item).ShareResult;
                 shareUsreIds.Add(shareResult.ShareUser.Id);
             }
 
             IList<ShareResult> shareResultList = new List<ShareResult>();
-            resultList.Foreach(r => { shareResultList.Add(((TaskQueueResult<ITaskResult>)r).ShareResult); });
+            resultList.Foreach(r => { shareResultList.Add(((ResultModel.TaskQueueResult<ITaskResult>)r).ShareResult); });
             // 更新分润结果，财务结果到数据库
             Ioc.Resolve<IShareOrderRepository>().UpdatePriceTaskResult(shareResultList);
         }

@@ -1,17 +1,13 @@
-﻿using QRCoder;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using Alabo.App.Core.Common.Domain.CallBacks;
-using Alabo.App.Core.Common.ViewModels;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.AutoConfigs;
+using Alabo.Cloud.People.UserQrCode.Domain.Configs;
+using Alabo.Cloud.People.UserQrCode.Dtos;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
@@ -20,13 +16,15 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Files;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Helpers;
 using Alabo.Runtime;
 using Alabo.Schedules;
 using Alabo.Users.Entities;
+using QRCoder;
 using File = System.IO.File;
 
-namespace Alabo.App.Core.User.Domain.Services {
+namespace Alabo.Cloud.People.UserQrCode.Domain.Services {
 
     public class UserQrCodeService : ServiceBase<UserDetail, long>, IUserQrCodeService {
 

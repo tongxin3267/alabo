@@ -1,20 +1,21 @@
-﻿using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.Tasks;
-using Alabo.App.Core.Tasks.Extensions;
-using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Parameter;
-using Alabo.Framework.Core.Enums.Enum;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Linq;
-using Alabo.App.Share.Share.Domain.Services;
+using Alabo.App.Asset.Accounts.Domain.Services;
+using Alabo.App.Asset.Bills.Domain.Entities;
+using Alabo.App.Asset.Bills.Domain.Services;
+using Alabo.App.Share.OpenTasks.Parameter;
+using Alabo.App.Share.Rewards.Domain.Services;
+using Alabo.App.Share.TaskExecutes;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Data.Things.Orders.ResultModel;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
-using Reward = Alabo.App.Share.Share.Domain.Entities.Reward;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Tasks.Queues.Models;
+using Microsoft.Extensions.DependencyInjection;
+using Reward = Alabo.App.Share.Rewards.Domain.Entities.Reward;
 
-namespace Alabo.App.Open.Tasks.Result {
+namespace Alabo.App.Share.OpenTasks.Result {
 
     public class InvoiceResult : ITaskResult {
         public TaskContext Context { get; private set; }

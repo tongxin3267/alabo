@@ -1,7 +1,7 @@
 ﻿using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 
-namespace Alabo.App.Core.ApiStore {
+namespace Alabo.Tool.Payment {
 
     public interface IApiStoreClient {
 

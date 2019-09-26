@@ -1,29 +1,20 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 using Alabo.App.Asset.Recharges.Domain.Enums;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Dtos.Recharge;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
+using Alabo.App.Asset.Recharges.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
-using Alabo.Exceptions;
 using Alabo.Extensions;
-using Alabo.Mapping;
-using Alabo.UI;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.Finance.ViewModels.Recharge {
+namespace Alabo.App.Asset.Recharges.Dtos {
 
     /// <summary>
     ///     充值管理

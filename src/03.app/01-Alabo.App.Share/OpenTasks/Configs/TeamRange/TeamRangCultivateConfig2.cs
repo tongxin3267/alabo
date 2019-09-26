@@ -1,21 +1,22 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Extensions;
-using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.App.Open.Tasks.Modules;
+using Alabo.App.Share.OpenTasks.Base;
+using Alabo.App.Share.OpenTasks.Modules;
 using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Data.Things.Orders.ResultModel;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Tasks.Queues.Models;
+using Alabo.Framework.Tasks.Schedules.Domain.Enums;
 using Alabo.Users.Dtos;
-using ZKCloud.Open.ApiBase.Models;
 using Alabo.Web.Mvc.Attributes;
+using Newtonsoft.Json;
+using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Open.Tasks.Configs.TeamRange {
+namespace Alabo.App.Share.OpenTasks.Configs.TeamRange {
 
     /// <summary>
     /// Class TeamRangCultivateConfig2.
@@ -65,7 +66,7 @@ namespace Alabo.App.Open.Tasks.Configs.TeamRange {
     /// </summary>
     [TaskModule("ED280C1A-718C-4146-991E-41B91BD45762", "企牛牛岗位极差与育成收益二(按比例)", SortOrder = 999999,
         ConfigurationType = typeof(TeamRangCultivateConfig2), IsSupportMultipleConfiguration = true,
-        FenRunResultType = Core.Tasks.Domain.Enums.FenRunResultType.Price, IsSupportSetDistriRatio = false,
+        FenRunResultType = FenRunResultType.Price, IsSupportSetDistriRatio = false,
         Intro = "不同岗位间的最高提成比例会有所不同，岗位低的会员不能拿完所有的绩效，多余的部分给岗位高的。比如公司有业务员、经理、总监三个岗位，直接销售一个订单",
         RelationshipType = RelationshipType.UserRecommendedRelationship)]
     public class TeamRangCultivateModule2 : AssetAllocationShareModuleBase<TeamRangCultivateConfig2> {

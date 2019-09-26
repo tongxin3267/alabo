@@ -1,30 +1,30 @@
-﻿using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Domain.Repositories;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Tasks.Queues.Domain.Entities;
+using Alabo.Framework.Tasks.Queues.Domain.Enums;
+using Alabo.Framework.Tasks.Queues.Domain.Repositories;
+using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Helpers;
 using Alabo.Reflections;
 using Alabo.Runtime;
 using Alabo.Schedules;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Alabo.App.Core.Tasks.ResultModel;
 
-namespace Alabo.App.Core.Tasks.Domain.Services {
+namespace Alabo.Framework.Tasks.Queues.Domain.Servcies {
 
     /// <summary>
     ///     Class TaskQueueService.
     /// </summary>
     /// <seealso cref="Alabo.Domains.Services.ServiceBase" />
-    /// <seealso cref="Alabo.App.Core.Tasks.Domain.Services.ITaskQueueService" />
+    /// <seealso cref="ITaskQueueService" />
     public class TaskQueueService : ServiceBase<TaskQueue, long>, ITaskQueueService {
 
         public TaskQueueService(IUnitOfWork unitOfWork, IRepository<TaskQueue, long> repository) : base(unitOfWork,

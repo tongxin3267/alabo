@@ -1,19 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
+using Alabo.Cloud.Cms.TeamIntro.Domain.Services;
+using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Market.TeamIntro.Domain.Services;
 using Alabo.Framework.Core.WebApis.Service;
-using Alabo.Extensions;
-using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.RestfulApi;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Market.TeamIntro.Controllers {
+namespace Alabo.Cloud.Cms.TeamIntro.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/Team/[action]")]

@@ -1,4 +1,4 @@
-﻿namespace Alabo.App.Core.ApiStore.AppVersion.Enums {
+﻿namespace _01_Alabo.Cloud.Core.AppVersion.Domain.Enums {
 
     /// <summary>
     /// 升级枚举

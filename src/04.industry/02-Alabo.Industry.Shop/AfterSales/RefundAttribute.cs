@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.App.Shop.Order.Domain.Enums;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
 
-namespace Alabo.App.Shop.AfterSales
+namespace Alabo.Industry.Shop.AfterSales
 {
     /// <summary>
     ///     订单操作方式

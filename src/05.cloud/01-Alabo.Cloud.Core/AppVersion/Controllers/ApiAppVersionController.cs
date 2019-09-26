@@ -1,30 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using _01_Alabo.Cloud.Core.AppVersion.Domain.Configs;
+using _01_Alabo.Cloud.Core.AppVersion.Domain.Enums;
+using _01_Alabo.Cloud.Core.AppVersion.Dtos;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.ApiStore.AppVersion.Entities;
-using Alabo.App.Core.ApiStore.AppVersion.Models;
-using Alabo.App.Core.ApiStore.MiniProgram.Dtos;
-using Alabo.App.Core.ApiStore.MiniProgram.Services;
-using Alabo.App.Core.ApiStore.Sms.Entities;
-using Alabo.App.Core.ApiStore.Sms.Enums;
-using Alabo.App.Core.ApiStore.Sms.Models;
-using Alabo.App.Core.ApiStore.WeiXinMp.Models;
-using Alabo.App.Core.ApiStore.WeiXinMp.Services;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Domains.Base.Services;
-using Alabo.Extensions;
-using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
-using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 using Microsoft.AspNetCore.Mvc;
+using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.ApiStore.Controllers {
+namespace _01_Alabo.Cloud.Core.AppVersion.Controllers {
 
     /// <summary>
     ///     ApiStore Api接口
@@ -47,7 +30,7 @@ namespace Alabo.App.Core.ApiStore.Controllers {
                 return new ApiResult<AppVersionOutput>() {
                     Result = new AppVersionOutput() {
                         Note = config.Note,
-                        Status = AppVersion.Enums.AppVersionStatus.Use,
+                        Status = AppVersionStatus.Use,
                         Url = config.Url
                     },
                     Status = ResultStatus.Success,
@@ -57,7 +40,7 @@ namespace Alabo.App.Core.ApiStore.Controllers {
             } else {
                 return new ApiResult<AppVersionOutput>() {
                     Result = new AppVersionOutput() {
-                        Status = AppVersion.Enums.AppVersionStatus.UnUp,
+                        Status = AppVersionStatus.UnUp,
                     },
                     Status = ResultStatus.Success,
                     Message = string.Empty,

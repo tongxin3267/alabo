@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using MongoDB.Bson;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Core.Reports.Domain.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
-using Alabo.Framework.Reports;
+using Alabo.Framework.Reports.Domain.Entities;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using MongoDB.Bson;
+using Newtonsoft.Json.Linq;
 
-namespace Alabo.App.Core.Reports.Domain.Services {
+namespace Alabo.Framework.Reports.Domain.Services {
 
     public interface IReportService : IService<Report, ObjectId> {
 

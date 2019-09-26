@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.Tenants.Domain.Entities;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Offline.RechargeAccount.Entities
+namespace Alabo.Industry.Offline.RechargeAccount.Entities
 {
     [BsonIgnoreExtraElements]
     [Table("RechargeAccountLog")]

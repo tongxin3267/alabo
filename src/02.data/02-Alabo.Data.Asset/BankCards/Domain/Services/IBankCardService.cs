@@ -1,12 +1,11 @@
-using MongoDB.Bson;
 using System.Collections.Generic;
-using Alabo.App.Core.Finance.Domain.Dtos.BankCard;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Dtos;
+using Alabo.App.Asset.BankCards.Domain.Entities;
+using Alabo.App.Asset.BankCards.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Finance.Domain.Services {
+namespace Alabo.App.Asset.BankCards.Domain.Services {
 
     public interface IBankCardService : IService<BankCard, ObjectId> {
 

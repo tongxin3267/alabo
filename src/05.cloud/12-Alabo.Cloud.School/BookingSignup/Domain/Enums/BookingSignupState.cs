@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Market.BookingSignup.Domain.Enums
+namespace Alabo.Cloud.School.BookingSignup.Domain.Enums
 {
     /// <summary>
     /// 活动状态

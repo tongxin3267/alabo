@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Data.Common;
-using Alabo.App.Core.Finance.Domain.Dtos.Bill;
-using Alabo.App.Core.Finance.Domain.Entities;
+using Alabo.App.Asset.Accounts.Domain.Entities;
+using Alabo.App.Asset.Bills.Domain.Entities;
+using Alabo.App.Asset.Bills.Dtos;
 using Alabo.Domains.Repositories;
 
-namespace Alabo.App.Core.Finance.Domain.Repositories {
+namespace Alabo.App.Asset.Bills.Domain.Repositories {
 
     public interface IBillRepository : IRepository<Bill, long> {
 

@@ -1,9 +1,9 @@
-using MongoDB.Bson;
-using Alabo.App.Offline.Merchants.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
+using Alabo.Industry.Offline.Merchants.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Offline.Merchants.Domain.Repositories
+namespace Alabo.Industry.Offline.Merchants.Domain.Repositories
 {
     public class MerchantStoreRepository : RepositoryMongo<MerchantStore, ObjectId>, IMerchantStoreRepository
     {

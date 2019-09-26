@@ -1,11 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
+using Alabo.Cloud.Shop.Comments.Domain.Entities;
+using Alabo.Cloud.Shop.Comments.Domain.Services;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Share.Attach.Domain.Entities;
-using Alabo.App.Share.Attach.Domain.Services;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 
-namespace Alabo.App.Share.Attach.Controllers {
+namespace Alabo.Cloud.Shop.Comments.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/Comment/[action]")]

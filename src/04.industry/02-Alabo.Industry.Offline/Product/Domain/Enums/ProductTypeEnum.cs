@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Offline.Product.Domain.Enums
+namespace Alabo.Industry.Offline.Product.Domain.Enums
 {
     [ClassProperty(Name = "商品套餐类型")]
     public enum ProductTypeEnum

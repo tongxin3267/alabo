@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Shop.Product.DiyModels;
-using Alabo.App.Shop.Product.ViewModels;
 using Alabo.Domains.Repositories;
+using Alabo.Industry.Shop.Products.Dtos;
+using Alabo.Industry.Shop.Products.ViewModels;
 
-namespace Alabo.App.Shop.Product.Domain.Repositories {
+namespace Alabo.Industry.Shop.Products.Domain.Repositories {
 
     public interface IProductRepository : IRepository<Entities.Product, long> {
 

@@ -1,17 +1,13 @@
-using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
-using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Repositories;
-using Alabo.App.Shop.Store.Domain.Entities;
 using System.Collections.Generic;
+using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
+using Alabo.Domains.Repositories;
+using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Industry.Shop.Deliveries.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Shop.Store.Domain.Services
+namespace Alabo.Industry.Shop.Deliveries.Domain.Services
 {
     public class DeliveryTemplateService : ServiceBase<DeliveryTemplate, ObjectId>, IDeliveryTemplateService
     {

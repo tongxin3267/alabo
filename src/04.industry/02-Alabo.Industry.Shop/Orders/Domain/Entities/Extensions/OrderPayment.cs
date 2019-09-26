@@ -1,7 +1,7 @@
 ﻿using System;
 using Alabo.Domains.Entities.Extensions;
 
-namespace Alabo.App.Shop.Order.Domain.Entities.Extensions {
+namespace Alabo.Industry.Shop.Orders.Domain.Entities.Extensions {
 
     /// <summary>
     ///     PayRecord 类为订单支付记录类

@@ -1,15 +1,8 @@
-﻿using MongoDB.Bson;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.Reports.Domain.Dtos;
-using Alabo.App.Core.Reports.Domain.Entities;
-using Alabo.App.Core.Reports.Domain.Repositories;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Base.Services;
-using Alabo.Domains.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Repositories;
@@ -19,11 +12,16 @@ using Alabo.Domains.Services.Report;
 using Alabo.Domains.Services.Report.Dtos;
 using Alabo.Domains.Services.Report.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Domain.Services;
+using Alabo.Framework.Reports.Domain.Entities;
+using Alabo.Framework.Reports.Domain.Repositories;
+using Alabo.Framework.Reports.Dtos;
 using Alabo.Linq.Dynamic;
 using Alabo.Reflections;
-using Alabo.UI;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Reports.Domain.Services {
+namespace Alabo.Framework.Reports.Domain.Services {
 
     ///
     public class AutoReportService : ServiceBase<Report, ObjectId>, IAutoReportService {

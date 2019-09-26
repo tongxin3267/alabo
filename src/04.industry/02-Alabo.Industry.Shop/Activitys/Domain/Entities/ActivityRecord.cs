@@ -1,14 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.Activitys.Domain.Entities.Extension;
-using Alabo.App.Shop.Activitys.Domain.Enum;
+﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
+using Alabo.Industry.Shop.Activitys.Domain.Entities.Extension;
+using Alabo.Industry.Shop.Activitys.Domain.Enum;
 using Alabo.Tenants;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.App.Shop.Activitys.Domain.Entities {
+namespace Alabo.Industry.Shop.Activitys.Domain.Entities {
 
     /// <summary>
     ///     活动记录表

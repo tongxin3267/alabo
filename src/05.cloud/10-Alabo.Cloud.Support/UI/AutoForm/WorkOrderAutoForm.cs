@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.App.Cms.Support.Domain.Dtos;
-using Alabo.App.Cms.Support.Domain.Entities;
-using Alabo.App.Cms.Support.Domain.Services;
+﻿using Alabo.Cloud.Support.Domain.Dtos;
+using Alabo.Cloud.Support.Domain.Entities;
+using Alabo.Cloud.Support.Domain.Services;
+using Alabo.Domains.Entities;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Domains.Entities;
 using Alabo.Mapping;
-using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Cms.Support.UI.AutoForm {
+namespace Alabo.Cloud.Support.UI.AutoForm {
 
     [ClassProperty(Name = "意见反馈AutoForm", Description = "意见反馈")]
     public class WorkOrderAutoForm : UIBase, IAutoForm {

@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Alabo.App.Shop.Activitys.Domain.Entities;
-using Alabo.App.Shop.Activitys.Dtos;
+﻿using Alabo.Domains.Entities;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Domains.Entities;
+using Alabo.Industry.Shop.Activitys.Domain.Entities;
+using Alabo.Industry.Shop.Activitys.Dtos;
+using Microsoft.AspNetCore.Http;
 
-namespace Alabo.App.Shop.Activitys
+namespace Alabo.Industry.Shop.Activitys
 {
     /// <summary>
     /// IActivity

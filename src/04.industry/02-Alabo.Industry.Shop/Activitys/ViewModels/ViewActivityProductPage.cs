@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.UI.Enum;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Shop.Activitys.ViewModels {
+namespace Alabo.Industry.Shop.Activitys.ViewModels {
 
     /// <summary>
     ///     Class ViewActivityProductPage.

@@ -1,7 +1,7 @@
 ﻿using System;
-using Alabo.App.Core.Tasks.Domain.Entities;
+using Alabo.Data.Things.Orders.Domain.Entities;
 
-namespace Alabo.App.Core.Tasks.ResultModel {
+namespace Alabo.Data.Things.Orders.ResultModel {
 
     /// <summary>
     ///     分润执行后的结果

@@ -1,20 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.Themes.Dtos.Service;
-using Alabo.App.Shop.Activitys.Modules.GroupBuy.Dtos;
-using Alabo.App.Shop.Activitys.Modules.GroupBuy.Service;
-using Alabo.App.Shop.Product.DiyModels;
-using Alabo.App.Shop.Product.Domain.Dtos;
-using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Dtos;
-using Alabo.Domains.Enums;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Framework.Themes.Dtos.Service;
+using Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Dtos;
+using Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Service;
+using Alabo.Industry.Shop.Products.Dtos;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Shop.Activitys.Modules.GroupBuy.Controller {
+namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Controller {
 
     /// <summary>
     ///     Class GroupBuyApiController.

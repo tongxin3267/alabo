@@ -1,16 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.Framework.Core.WebApis.Dtos;
+﻿using System.ComponentModel.DataAnnotations;
+using Alabo.Data.Things.Orders.Domain.Entities;
+using Alabo.Data.Things.Orders.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
-using ZKCloud.Open.ApiBase.Models;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Dtos;
+using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.RestfulApi;
+using Microsoft.AspNetCore.Mvc;
+using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Tasks.Controllers {
+namespace Alabo.Data.Things.Orders.Controllers {
 
     /// <summary>
     ///     分润订单相关接口

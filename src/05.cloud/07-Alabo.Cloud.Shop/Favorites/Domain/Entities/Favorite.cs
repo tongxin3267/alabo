@@ -1,15 +1,12 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Share.Attach.Domain.Enums;
-using Alabo.App.Share.Attach.Domain.Services;
+using Alabo.Cloud.Shop.Favorites.Domain.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Share.Attach.Domain.Entities {
+namespace Alabo.Cloud.Shop.Favorites.Domain.Entities {
 
     /// <summary>
     ///     通用收藏

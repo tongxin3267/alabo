@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Services;
 
-namespace Alabo.App.Shop.Activitys.Modules.MemberDiscount.Service
+namespace Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Service
 {
     /// <summary>
     /// 预售设置服务

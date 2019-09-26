@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Alabo.App.Core.Tasks.Extensions {
+namespace Alabo.Data.Things.Orders.Extensions {
 
     public class TaskContext {
         private ILoggerFactory _loggerFactory;

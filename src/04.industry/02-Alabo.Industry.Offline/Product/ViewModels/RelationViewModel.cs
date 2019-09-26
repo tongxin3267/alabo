@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using Alabo.App.Offline.Product.Domain.Entities;
-
-namespace Alabo.App.Offline.Product.ViewModels
+﻿namespace Alabo.Industry.Offline.Product.ViewModels
 {
     /// <summary>
     /// RelationViewModel

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.ResultModel;
+using Alabo.Data.Things.Orders.Domain.Entities;
+using Alabo.Data.Things.Orders.ResultModel;
 using Alabo.Domains.Repositories;
 
-namespace Alabo.App.Core.Tasks.Domain.Repositories {
+namespace Alabo.Data.Things.Orders.Domain.Repositories {
 
     /// <summary>
     ///     分润订单

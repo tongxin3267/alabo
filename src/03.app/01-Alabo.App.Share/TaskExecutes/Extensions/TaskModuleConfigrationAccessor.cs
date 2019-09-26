@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Alabo.App.Core.Tasks.Domain.Services;
+using Alabo.App.Share.TaskExecutes.Domain.Services;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using ZKCloud.Open.Share.Models;
 
-namespace Alabo.App.Core.Tasks.Extensions {
+namespace Alabo.App.Share.TaskExecutes.Extensions {
 
     public class TaskModuleConfigrationAccessor {
         private readonly TaskManager _taskManager;

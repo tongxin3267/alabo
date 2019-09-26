@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.Themes.Domain.Entities;
 using Alabo.Data.People.Employes.Domain.Entities;
 using Alabo.Data.People.Employes.Dtos;
 using Alabo.Data.People.Users.Domain.Services;
@@ -14,6 +13,7 @@ using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Framework.Core.Admins.Services;
 using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Themes.Domain.Entities;
 using Alabo.Helpers;
 using MongoDB.Bson;
 

@@ -1,14 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.Framework.Core.WebApis.Controller;
+﻿using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.Framework.Core.WebApis.Controller;
-using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Alabo.App.Shop.Activitys.Modules.BuyPermision.Controller
+namespace Alabo.Industry.Shop.Activitys.Modules.BuyPermision.Controller
 {
     /// <summary>
     /// 预售API

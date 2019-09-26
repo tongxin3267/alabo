@@ -1,22 +1,20 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
+using Alabo.App.Asset.Accounts.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
-using Alabo.UI;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Core.Finance.ViewModels.Account {
+namespace Alabo.App.Asset.Accounts.Dtos {
 
     [BsonIgnoreExtraElements]
     [ClassProperty(Name = "区块链钱包", Icon = "flaticon-route", SideBarType = SideBarType.FinanceBlockChainSideBar)]

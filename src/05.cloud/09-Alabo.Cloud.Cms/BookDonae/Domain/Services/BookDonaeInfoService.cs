@@ -1,17 +1,15 @@
 using System;
 using System.Collections.Generic;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
+using System.IO;
 using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
+using Alabo.Cloud.Cms.BookDonae.Domain.Dtos;
+using Alabo.Cloud.Cms.BookDonae.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
-using Alabo.App.Market.BookDonae.Domain.Entities;
-using System.IO;
-using Alabo.App.Market.BookDonae.Domain.Dtos;
+using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.BookDonae.Domain.Services {
+namespace Alabo.Cloud.Cms.BookDonae.Domain.Services {
 
     public class BookDonaeInfoService : ServiceBase<BookDonaeInfo, ObjectId>, IBookDonaeInfoService {
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.App.Shop.Activitys.Modules.GroupBuy.Dtos {
+namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Dtos {
 
     /// <summary>
     ///     Class GroupBuyProductRecord.

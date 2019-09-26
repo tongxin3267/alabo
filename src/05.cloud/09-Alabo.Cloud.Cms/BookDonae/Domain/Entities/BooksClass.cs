@@ -1,16 +1,12 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.UI;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Market.BookDonae.Domain.Entities {
+namespace Alabo.Cloud.Cms.BookDonae.Domain.Entities {
 
     /// <summary>
     ///     书籍分类

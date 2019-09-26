@@ -1,8 +1,8 @@
-using MongoDB.Bson;
-using Alabo.App.Offline.Merchants.Domain.Entities;
 using Alabo.Domains.Services;
+using Alabo.Industry.Offline.Merchants.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Offline.Merchants.Domain.Services
+namespace Alabo.Industry.Offline.Merchants.Domain.Services
 {
     public interface IMerchantService : IService<Merchant, ObjectId>
     {

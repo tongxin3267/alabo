@@ -1,18 +1,15 @@
-using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Shop.Order.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Services;
-using Alabo.App.Shop.Order.ViewModels;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
-using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.RestfulApi;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Industry.Shop.OrderDeliveries.Domain.Entities;
+using Alabo.Industry.Shop.OrderDeliveries.Domain.Services;
+using Alabo.Industry.Shop.Orders.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Shop.Order.Controllers {
+namespace Alabo.Industry.Shop.OrderDeliveries.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/OrderDelivery/[action]")]

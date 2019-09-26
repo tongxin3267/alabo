@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.Pay {
+namespace Alabo.App.Asset.Pays.Dtos {
 
     /// <summary>
     ///     商城支付订单信息

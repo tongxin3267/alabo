@@ -1,12 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.Transfer {
+namespace Alabo.App.Asset.Transfers.Dtos {
 
     [ClassProperty(Name = "转账", Icon = "fa fa-puzzle-piece", Description = "转账", PostApi = "Api/Transfer/Add",
         SuccessReturn = "Api/Transfer/Get")]

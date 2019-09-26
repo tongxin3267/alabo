@@ -1,6 +1,6 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Share.Attach.Domain.Enums {
+namespace Alabo.Cloud.Shop.Favorites.Domain.Enums {
 
     /// <summary>
     /// 收藏类型

@@ -1,11 +1,11 @@
-﻿using MongoDB.Bson;
-using System;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Order.Domain.Entities;
+﻿using System;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Industry.Shop.Carts.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Dtos;
+using MongoDB.Bson;
 
-namespace Alabo.App.Shop.Order.Domain.Services {
+namespace Alabo.Industry.Shop.Carts.Domain.Services {
 
     public interface ICartService : IService<Cart, ObjectId> {
 

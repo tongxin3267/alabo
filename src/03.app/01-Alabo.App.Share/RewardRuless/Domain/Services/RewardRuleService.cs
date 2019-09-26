@@ -1,27 +1,26 @@
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Tasks;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.App.Share.Share.Domain.Dtos;
-using Alabo.App.Share.Share.Domain.Entities;
-using Alabo.Framework.Core.Enums.Enum;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Alabo.App.Share.OpenTasks.Base;
+using Alabo.App.Share.RewardRuless.Domain.Entities;
+using Alabo.App.Share.RewardRuless.Dtos;
+using Alabo.App.Share.TaskExecutes;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
-using Alabo.Web.Mvc.Attributes;
-using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Tasks.Queues.Domain.Servcies;
+using Alabo.Framework.Tasks.Queues.Models;
+using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
 
-namespace Alabo.App.Share.Share.Domain.Services {
+namespace Alabo.App.Share.RewardRuless.Domain.Services {
 
     public class RewardRuleService : ServiceBase<RewardRule, ObjectId>, IRewardRuleService {
 

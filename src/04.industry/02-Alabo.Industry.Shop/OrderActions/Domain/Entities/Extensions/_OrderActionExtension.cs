@@ -1,7 +1,7 @@
 ﻿using Alabo.Domains.Entities.Extensions;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Shop.Order.Domain.Entities.Extensions {
+namespace Alabo.Industry.Shop.OrderActions.Domain.Entities.Extensions {
 
     /// <summary>
     ///     订单操作记录扩展

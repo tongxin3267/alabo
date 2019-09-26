@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Shop.Coupons.Domain.Enums {
+namespace Alabo.App.Asset.Coupons.Domain.Enums {
 
     /// <summary>
     /// 优惠方式

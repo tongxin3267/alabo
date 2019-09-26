@@ -1,12 +1,11 @@
 ﻿using System;
+using Alabo.Domains.Entities;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Framework.Core.WebUis.Design.AutoLists;
-using Alabo.Domains.Entities;
-using Alabo.UI;
 
-namespace Alabo.App.Core.Finance.UI.AutoForm {
+namespace Alabo.App.Asset.Accounts.UI {
 
     /// <summary>
     /// 资产

@@ -1,7 +1,7 @@
-﻿using Alabo.App.Offline.Order.ViewModels;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Alabo.Industry.Offline.Order.ViewModels;
 
-namespace Alabo.App.Offline.Order.Domain.Dtos {
+namespace Alabo.Industry.Offline.Order.Domain.Dtos {
 
     /// <summary>
     /// MerchantCartOutput

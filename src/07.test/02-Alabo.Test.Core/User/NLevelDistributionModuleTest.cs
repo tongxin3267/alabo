@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Alabo.App.Share.TaskExecutes;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
-using Alabo.App.Core.Tasks;
 using Alabo.Test.Base.Core.Model;
 
 namespace Alabo.Test.Core.User

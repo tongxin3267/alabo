@@ -1,10 +1,10 @@
-using MongoDB.Bson;
-using Alabo.App.Share.Attach.Domain.Dtos;
-using Alabo.App.Share.Attach.Domain.Entities;
+using Alabo.Cloud.Shop.Favorites.Domain.Entities;
+using Alabo.Cloud.Shop.Favorites.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Share.Attach.Domain.Services {
+namespace Alabo.Cloud.Shop.Favorites.Domain.Services {
 
     /// <summary>
     /// ÊÕ²Ø½Ó¿Ú

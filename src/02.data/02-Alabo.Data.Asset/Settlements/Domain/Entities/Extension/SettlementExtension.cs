@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Enums;
+using Alabo.App.Asset.Pays.Domain.Entities;
+using Alabo.App.Asset.Recharges.Domain.Enums;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;
+using Alabo.Tool.Payment;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using MongoDB.Bson.Serialization.Attributes;

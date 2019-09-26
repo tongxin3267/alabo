@@ -1,8 +1,8 @@
-using MongoDB.Bson;
-using Alabo.App.Core.ApiStore.Sms.Entities;
+using _01_Alabo.Cloud.Core.SendSms.Domain.Entities;
 using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.ApiStore.Sms.Repositories {
+namespace _01_Alabo.Cloud.Core.SendSms.Domain.Repositories {
 
     public interface ISmsSendRepository : IRepository<SmsSend, ObjectId> {
     }

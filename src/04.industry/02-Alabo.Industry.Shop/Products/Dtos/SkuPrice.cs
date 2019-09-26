@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alabo.App.Shop.Product.Domain.Dtos {
+namespace Alabo.Industry.Shop.Products.Dtos {
 
     /// <summary>
     ///     Sku价格

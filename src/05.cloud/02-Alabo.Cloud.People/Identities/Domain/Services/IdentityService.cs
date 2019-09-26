@@ -1,29 +1,27 @@
-﻿using MongoDB.Bson;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Core.User.ViewModels;
+using Alabo.Cloud.People.Identities.Domain.Entities;
 using Alabo.Data.People.Users.ViewModels;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Mapping;
+using Alabo.Users.Enum;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.User.Domain.Services {
+namespace Alabo.Cloud.People.Identities.Domain.Services {
 
     /// <summary>
     ///     Class IdentityService.
     /// </summary>
     /// <seealso cref="Alabo.Domains.Services.ServiceBase" />
-    /// <seealso cref="Alabo.App.Core.User.Domain.Services.IIdentityService" />
+    /// <seealso cref="IIdentityService" />
     public class IdentityService : ServiceBase<Identity, ObjectId>, IIdentityService {
 
         public IdentityService(IUnitOfWork unitOfWork, IRepository<Identity, ObjectId> repository) : base(unitOfWork,

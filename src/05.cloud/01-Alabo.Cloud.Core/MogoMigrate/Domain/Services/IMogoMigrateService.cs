@@ -1,8 +1,8 @@
-﻿using Alabo.App.Market.MogoMigrate.ViewModels;
+﻿using _01_Alabo.Cloud.Core.MogoMigrate.ViewModels;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 
-namespace Alabo.App.Market.MogoMigrate.Domain.Services {
+namespace _01_Alabo.Cloud.Core.MogoMigrate.Domain.Services {
 
     public interface IMogoMigrateService : IService {
 

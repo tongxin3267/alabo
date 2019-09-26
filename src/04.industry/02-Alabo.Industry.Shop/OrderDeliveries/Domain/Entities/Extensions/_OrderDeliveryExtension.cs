@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Entities.Extensions;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
 using Alabo.Users.Entities;
 using ZKCloud.Open.LogisticsTracking.kdniao;
 
-namespace Alabo.App.Shop.Order.Domain.Entities.Extensions {
+namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities.Extensions {
 
     /// <summary>
     ///     发货记录表

@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Alabo.App.Shop.Activitys.Extensions {
+namespace Alabo.Industry.Shop.Activitys.Extensions {
 
     /// <summary>
     ///

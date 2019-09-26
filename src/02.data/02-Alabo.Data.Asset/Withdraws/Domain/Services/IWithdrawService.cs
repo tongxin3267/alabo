@@ -4,9 +4,7 @@ using System.Linq;
 using MongoDB.Bson;
 using Alabo.Domains.Services;
 using Alabo.App.Asset.Withdraws.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Dtos.WithDraw;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.ViewModels.WithDraw;
+using Alabo.App.Asset.Withdraws.Dtos;
 using Alabo.Domains.Entities;
 using Microsoft.AspNetCore.Http;
 

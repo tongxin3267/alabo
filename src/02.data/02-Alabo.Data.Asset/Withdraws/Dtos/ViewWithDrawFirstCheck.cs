@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.App.Asset.Withdraws.Domain.Enums;
-using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.Finance.ViewModels.WithDraw {
+namespace Alabo.App.Asset.Withdraws.Dtos {
 
     /// <summary>
     ///     Class ViewWithDrawCheck.

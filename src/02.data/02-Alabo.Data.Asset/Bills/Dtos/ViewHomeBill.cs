@@ -1,16 +1,15 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Core.Finance.ViewModels.Bill {
+namespace Alabo.App.Asset.Bills.Dtos {
 
     /// <summary>
     ///     Class ViewAdminBill.

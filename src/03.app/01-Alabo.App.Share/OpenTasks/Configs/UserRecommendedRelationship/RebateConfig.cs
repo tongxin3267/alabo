@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.Tasks.Extensions;
-using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.App.Open.Tasks.Modules;
+using Alabo.App.Share.OpenTasks.Base;
+using Alabo.App.Share.OpenTasks.Modules;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Data.Things.Orders.ResultModel;
+using Alabo.Framework.Tasks.Queues.Models;
+using Alabo.Framework.Tasks.Schedules.Domain.Enums;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Open.Tasks.Configs.UserRecommendedRelationship {
+namespace Alabo.App.Share.OpenTasks.Configs.UserRecommendedRelationship {
 
     /// <summary>
     /// Class RebateConfig.
     /// 自身返利
     /// </summary>
-    /// <seealso cref="Alabo.App.Open.Tasks.Base.ShareBaseConfig" />
+    /// <seealso cref="ShareBaseConfig" />
     public class RebateConfig : ShareBaseConfig {
     }
 
@@ -22,8 +24,8 @@ namespace Alabo.App.Open.Tasks.Configs.UserRecommendedRelationship {
     /// </summary>
     [TaskModule(Id, "自身返利",
         ConfigurationType = typeof(RebateConfig), SortOrder = 999990,
-        IsSupportMultipleConfiguration = true, FenRunResultType = Core.Tasks.Domain.Enums.FenRunResultType.Price,
-        RelationshipType = Core.Tasks.Domain.Enums.RelationshipType.UserRecommendedRelationship,
+        IsSupportMultipleConfiguration = true, FenRunResultType = FenRunResultType.Price,
+        RelationshipType = RelationshipType.UserRecommendedRelationship,
         Intro = "会员商城消费时候，返还自己资产，比如返还积分，返还现金。比如消费100元，返自己10积分，比如注册赠送100积分")]
     public class RebateModule : AssetAllocationShareModuleBase<RebateConfig> {
         public const string Id = "0734225B-08C0-4229-9B66-530DB777B29A";

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Tasks.Domain.Enums {
+namespace _05_Alabo.Cloud.Share.BonusPools.Domain.Enums {
 
     /// <summary>
     ///     奖金池统计方式

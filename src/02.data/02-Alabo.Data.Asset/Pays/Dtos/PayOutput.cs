@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Alabo.Framework.Core.Enums.Enum;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.Pay {
+namespace Alabo.App.Asset.Pays.Dtos {
 
     /// <summary>
     ///     支付结果返回

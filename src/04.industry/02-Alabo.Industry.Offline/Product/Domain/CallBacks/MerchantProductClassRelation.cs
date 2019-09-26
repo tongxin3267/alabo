@@ -1,10 +1,9 @@
-﻿
+﻿using Alabo.Domains.Enums;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.Reflections.Interfaces;
-using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Offline.Product.Domain.CallBacks {
+namespace Alabo.Industry.Offline.Product.Domain.CallBacks {
 
     /// <summary>
     /// 线下商品分类

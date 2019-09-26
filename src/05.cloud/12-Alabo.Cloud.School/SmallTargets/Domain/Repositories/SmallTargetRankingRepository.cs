@@ -1,9 +1,9 @@
-using MongoDB.Bson;
-using Alabo.App.Market.SmallTargets.Domain.Entities;
+using Alabo.Cloud.School.SmallTargets.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.SmallTargets.Domain.Repositories {
+namespace Alabo.Cloud.School.SmallTargets.Domain.Repositories {
 
     public class SmallTargetRankingRepository : RepositoryMongo<SmallTargetRanking, ObjectId>,
         ISmallTargetRankingRepository {

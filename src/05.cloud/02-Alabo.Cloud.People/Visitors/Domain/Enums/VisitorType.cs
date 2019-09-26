@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.Markets.Visitors.Domain.Enums {
+namespace Alabo.Cloud.People.Visitors.Domain.Enums {
 
     public enum VisitorType {
 

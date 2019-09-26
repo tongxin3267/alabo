@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
 using Alabo.Domains.Entities.Extensions;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Store.Domain.Entities.Extensions {
+namespace Alabo.Industry.Shop.Deliveries.Domain.Entities.Extensions {
 
     /// <summary>
     ///     店铺拓展属性

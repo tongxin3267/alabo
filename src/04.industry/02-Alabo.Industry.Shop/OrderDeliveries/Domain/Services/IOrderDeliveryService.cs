@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Shop.Order.Domain.Entities;
-using Alabo.App.Shop.Order.ViewModels;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Industry.Shop.OrderDeliveries.Domain.Entities;
+using Alabo.Industry.Shop.Orders.ViewModels;
 
-namespace Alabo.App.Shop.Order.Domain.Services {
+namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Services {
 
     /// <summary>
     ///     发货记录

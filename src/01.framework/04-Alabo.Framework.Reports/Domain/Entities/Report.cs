@@ -1,11 +1,11 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.Domains.Entities;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Core.Reports.Domain.Entities {
+namespace Alabo.Framework.Reports.Domain.Entities {
 
     /// <summary>
     ///     通用配置

@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.Product.Domain.CallBacks;
-using Alabo.App.Shop.Product.Domain.Entities;
-using Alabo.App.Shop.Store.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.Categories.Domain.Entities;
+using Alabo.Industry.Shop.Deliveries.Domain.Entities;
+using Alabo.Industry.Shop.Products.Domain.Configs;
+using Alabo.Industry.Shop.Products.Domain.Entities;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Shop.Product.ViewModels {
+namespace Alabo.Industry.Shop.Products.ViewModels {
 
     /// <summary>
     ///     商品所有属性，包括商品参数和商品销售属性
@@ -15,7 +16,7 @@ namespace Alabo.App.Shop.Product.ViewModels {
         /// <summary>
         ///     类目,商品的类目数据 类目数据保存到数据库里
         /// </summary>
-        public Category.Domain.Entities.Category ProductCategory { get; set; }
+        public Category ProductCategory { get; set; }
 
         /// <summary>
         ///     商品缩略图列表(非数据库字段)
@@ -42,6 +43,6 @@ namespace Alabo.App.Shop.Product.ViewModels {
         /// <summary>
         ///     商品所属店铺
         /// </summary>
-        public Store.Domain.Entities.Store Store { get; set; }
+        public Store Store { get; set; }
     }
 }

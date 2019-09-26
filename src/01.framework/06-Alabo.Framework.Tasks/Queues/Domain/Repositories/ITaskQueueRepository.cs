@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Core.Tasks.Domain.Entities;
 using Alabo.Domains.Repositories;
+using Alabo.Framework.Tasks.Queues.Domain.Entities;
 
-namespace Alabo.App.Core.Tasks.Domain.Repositories {
+namespace Alabo.Framework.Tasks.Queues.Domain.Repositories {
 
     public interface ITaskQueueRepository : IRepository<TaskQueue, long> {
 

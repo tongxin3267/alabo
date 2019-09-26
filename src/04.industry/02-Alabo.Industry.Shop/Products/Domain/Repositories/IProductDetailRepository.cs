@@ -1,7 +1,7 @@
-﻿using Alabo.App.Shop.Product.Domain.Entities;
-using Alabo.Domains.Repositories;
+﻿using Alabo.Domains.Repositories;
+using Alabo.Industry.Shop.Products.Domain.Entities;
 
-namespace Alabo.App.Shop.Product.Domain.Repositories {
+namespace Alabo.Industry.Shop.Products.Domain.Repositories {
 
     public interface IProductDetailRepository : IRepository<ProductDetail, long> {
     }

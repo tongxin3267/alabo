@@ -1,25 +1,25 @@
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Entities.Extension;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Market.BookingSignup.Domain.Entities;
-using Alabo.App.Market.BookingSignup.Dtos;
-using Alabo.Framework.Core.Enums.Enum;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Alabo.App.Asset.Pays.Domain.Entities;
+using Alabo.App.Asset.Pays.Domain.Entities.Extension;
+using Alabo.App.Asset.Pays.Domain.Services;
+using Alabo.Cloud.School.BookingSignup.Domain.Entities;
+using Alabo.Cloud.School.BookingSignup.Dtos;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Linq.Dynamic;
 using Alabo.Mapping;
-using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Regexs;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.BookingSignup.Domain.Services {
+namespace Alabo.Cloud.School.BookingSignup.Domain.Services {
 
     public class BookingSignupService : ServiceBase<Entities.BookingSignup, ObjectId>, IBookingSignupService {
 

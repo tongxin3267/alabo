@@ -1,8 +1,8 @@
-using MongoDB.Bson;
-using Alabo.App.Core.Markets.Visitors.Domain.Entities;
+using Alabo.Cloud.People.Visitors.Domain.Entities;
 using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Markets.Visitors.Domain.Services {
+namespace Alabo.Cloud.People.Visitors.Domain.Services {
 
     public interface IVisitorService : IService<Visitor, ObjectId> {
     }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Core.Finance.Domain.Enums;
+using Alabo.Tool.Payment;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.Pay {
+namespace Alabo.App.Asset.Pays.Dtos {
 
     /// <summary>
     ///     返回的支付方式列表

@@ -1,22 +1,20 @@
-using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Offline.Merchants.Domain.Services;
-using Alabo.App.Offline.Order.Domain.Dtos;
-using Alabo.App.Offline.Order.Domain.Entities;
-using Alabo.App.Offline.Order.ViewModels;
-using Alabo.App.Offline.Product.Domain.Entities;
-using Alabo.App.Offline.Product.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Industry.Offline.Order.Domain.Dtos;
+using Alabo.Industry.Offline.Order.Domain.Entities;
+using Alabo.Industry.Offline.Order.ViewModels;
+using Alabo.Industry.Offline.Product.Domain.Services;
 using Alabo.Maps;
+using MongoDB.Bson;
 
-namespace Alabo.App.Offline.Order.Domain.Services
+namespace Alabo.Industry.Offline.Order.Domain.Services
 {
     public class MerchantCartService : ServiceBase<MerchantCart, ObjectId>, IMerchantCartService
     {

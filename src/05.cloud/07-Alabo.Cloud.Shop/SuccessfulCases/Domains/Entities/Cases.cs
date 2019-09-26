@@ -1,15 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Framework.Core.WebUis;
-using MongoDB.Bson.Serialization.Attributes;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.UI;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Market.SuccessfulCases.Domains.Entities {
+namespace Alabo.Cloud.Shop.SuccessfulCases.Domains.Entities {
 
     /// <summary>
     ///     成功案例

@@ -1,16 +1,15 @@
-using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Offline.Merchants.Domain.Dtos;
-using Alabo.App.Offline.Merchants.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Industry.Offline.Merchants.Domain.Dtos;
+using Alabo.Industry.Offline.Merchants.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Offline.Merchants.Domain.Services {
+namespace Alabo.Industry.Offline.Merchants.Domain.Services {
 
     public class MerchantStoreService : ServiceBase<MerchantStore, ObjectId>, IMerchantStoreService {
 

@@ -1,5 +1,5 @@
+using Alabo.Framework.Tasks.Queues.Domain.Servcies;
 using Xunit;
-using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
 

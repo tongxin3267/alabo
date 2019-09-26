@@ -1,16 +1,16 @@
-﻿using Quartz;
-using System;
+﻿using System;
 using System.Threading.Tasks;
-using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.Dependency;
 using Alabo.Extensions;
+using Alabo.Framework.Tasks.Queues.Domain.Entities;
+using Alabo.Framework.Tasks.Queues.Domain.Enums;
+using Alabo.Framework.Tasks.Queues.Domain.Servcies;
 using Alabo.Helpers;
 using Alabo.Schedules;
 using Alabo.Schedules.Job;
+using Quartz;
 
-namespace Alabo.App.Core.Tasks.Job {
+namespace Alabo.App.Share.TaskExecutes.Job {
 
     /// <summary>
     ///     后台任务执行

@@ -1,9 +1,11 @@
 ﻿using System;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.Tasks.Extensions;
+using Alabo.App.Asset.Accounts.Domain.Services;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Data.Things.Orders.ResultModel;
+using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Helpers;
 
-namespace Alabo.App.Core.Tasks.ResultModel {
+namespace Alabo.App.Share.TaskExecutes.ResultModel {
 
     /// <summary>
     ///     资产变化结果

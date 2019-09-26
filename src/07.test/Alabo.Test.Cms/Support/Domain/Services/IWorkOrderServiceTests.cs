@@ -1,5 +1,5 @@
-using Alabo.App.Cms.Support.Domain.Entities;
-using Alabo.App.Cms.Support.Domain.Services;
+using Alabo.Cloud.Support.Domain.Entities;
+using Alabo.Cloud.Support.Domain.Services;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
 using MongoDB.Bson;

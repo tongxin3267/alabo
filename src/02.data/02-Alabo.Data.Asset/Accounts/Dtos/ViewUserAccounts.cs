@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.Finance.ViewModels.Account {
+namespace Alabo.App.Asset.Accounts.Dtos {
 
     /// <summary>
     ///     Class ViewUserAccounts.

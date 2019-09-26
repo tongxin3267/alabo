@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Market.MogoMigrate.ViewModels;
+using _01_Alabo.Cloud.Core.MogoMigrate.ViewModels;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Base.Services;
@@ -14,7 +14,7 @@ using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Runtime;
 
-namespace Alabo.App.Market.MogoMigrate.Domain.Services {
+namespace _01_Alabo.Cloud.Core.MogoMigrate.Domain.Services {
 
     public class MogoMigrateService : ServiceBase, IMogoMigrateService {
 

@@ -1,15 +1,14 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Market.BookingSignup.Domain.Enums;
-using Alabo.Framework.Core.WebUis;
+using Alabo.Cloud.School.BookingSignup.Domain.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.UI;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Market.BookingSignup.Domain.Entities {
+namespace Alabo.Cloud.School.BookingSignup.Domain.Entities {
 
     [BsonIgnoreExtraElements]
     [Table("BookingSignup_BookingSignup")]

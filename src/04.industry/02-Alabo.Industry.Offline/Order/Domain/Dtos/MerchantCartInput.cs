@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Alabo.Domains.Entities;
+﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Validations;
 
-namespace Alabo.App.Offline.Order.Domain.Dtos
+namespace Alabo.Industry.Offline.Order.Domain.Dtos
 {
     /// <summary>
     /// MerchantCartInput

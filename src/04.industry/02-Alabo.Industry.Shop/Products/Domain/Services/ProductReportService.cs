@@ -1,10 +1,10 @@
-﻿using Alabo.App.Shop.Product.Domain.Dtos;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Industry.Shop.Products.Dtos;
 using Alabo.Mapping;
 
-namespace Alabo.App.Shop.Product.Domain.Services {
+namespace Alabo.Industry.Shop.Products.Domain.Services {
 
     /// <summary>
     ///     商品统计服务

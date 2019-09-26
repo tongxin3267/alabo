@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Quartz;
-using Alabo.App.Shop.Order.Domain.CallBacks;
-using Alabo.App.Shop.Order.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.App.Shop.Order.Domain.Services;
-using Alabo.App.Shop.Product.Domain.Services;
 using Alabo.Dependency;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
-using Alabo.Helpers;
+using Alabo.Industry.Shop.OrderActions.Domain.Entities;
+using Alabo.Industry.Shop.OrderActions.Domain.Enums;
+using Alabo.Industry.Shop.OrderActions.Domain.Services;
+using Alabo.Industry.Shop.Orders.Domain.Configs;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using Alabo.Industry.Shop.Orders.Domain.Services;
+using Alabo.Industry.Shop.Products.Domain.Services;
 using Alabo.Schedules.Job;
+using Quartz;
 
-namespace Alabo.App.Shop.Order.Job {
+namespace Alabo.Industry.Shop.Orders.Job {
 
     /// <summary>
     /// 定时修改订单状态 每小时执行一次

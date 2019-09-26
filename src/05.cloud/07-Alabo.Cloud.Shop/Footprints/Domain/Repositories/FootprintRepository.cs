@@ -1,9 +1,9 @@
-using MongoDB.Bson;
-using Alabo.App.Share.Attach.Domain.Entities;
+using Alabo.Cloud.Shop.Footprints.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Share.Attach.Domain.Repositories {
+namespace Alabo.Cloud.Shop.Footprints.Domain.Repositories {
 
     public class FootprintRepository : RepositoryMongo<Footprint, ObjectId>, IFootprintRepository {
 

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Product.Domain.Enums {
+namespace Alabo.Industry.Shop.Products.Domain.Enums {
 
     /// <summary>
     ///     商城行业模型

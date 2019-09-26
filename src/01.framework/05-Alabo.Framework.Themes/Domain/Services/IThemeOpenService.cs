@@ -1,10 +1,10 @@
-﻿using Alabo.App.Core.Themes.Domain.Entities;
-using Alabo.App.Core.Themes.Dtos;
-using Alabo.App.Core.Themes.Dtos.Service;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Framework.Themes.Domain.Entities;
+using Alabo.Framework.Themes.Dtos;
+using Alabo.Framework.Themes.Dtos.Service;
 
-namespace Alabo.App.Core.Themes.Domain.Services {
+namespace Alabo.Framework.Themes.Domain.Services {
 
     /// <summary>
     ///     数据保存

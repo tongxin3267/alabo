@@ -1,5 +1,5 @@
+using Alabo.Framework.Themes.Domain.Services;
 using Xunit;
-using Alabo.App.Core.Themes.Domain.Services;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
 

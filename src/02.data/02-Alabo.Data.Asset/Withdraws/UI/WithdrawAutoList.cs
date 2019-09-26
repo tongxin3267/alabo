@@ -1,20 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.App.Core.Finance.Domain.Services;
+using Alabo.Domains.Entities;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoLists;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Query;
-using Alabo.Extensions;
-using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Finance.UI.AutoForm {
+namespace Alabo.App.Asset.Withdraws.UI {
 
     [ClassProperty(Name = "提现记录AutoList", Description = "提现记录")]
     public class WithdrawAutoList : UIBase, IAutoList {

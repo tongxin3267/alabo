@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Dtos.Account;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Entities.Extension;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.App.Core.Finance.Dtos;
+using Alabo.App.Asset.Accounts.Dtos;
+using Alabo.App.Asset.Pays.Domain.Entities;
+using Alabo.App.Asset.Recharges.Dtos;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Attributes;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
-using Alabo.Extensions;
+using Alabo.Framework.Core.Enums.Enum;
 
-namespace Alabo.App.Core.Finance.Domain.Services {
+namespace Alabo.App.Asset.Accounts.Domain.Services {
 
     public class AccountPayService : ServiceBase, IAccountPayService {
 

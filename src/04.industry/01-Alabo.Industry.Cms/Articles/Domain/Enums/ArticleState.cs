@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Cms.Articles.Domain.Enums {
+namespace Alabo.Industry.Cms.Articles.Domain.Enums {
 
     [ClassProperty(Name = "文章显示动作类型")]
     public enum ArticleState {

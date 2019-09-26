@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Open.Tasks.Enums {
+namespace Alabo.App.Share.OpenTasks.Enums {
 
     /// <summary>
     /// 分润基数类型

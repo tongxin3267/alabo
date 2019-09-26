@@ -1,22 +1,19 @@
-﻿using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Core.User.Domain.Repositories;
-using Alabo.App.Core.User.Domain.Services;
+﻿using System;
+using System.Linq;
+using Alabo.Cloud.People.UserQrCode.Domain.Services;
+using Alabo.Data.People.Users.Domain.Repositories;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Exceptions;
 using Alabo.Extensions;
-using Alabo.Helpers;
-using System;
-using System.Linq;
-using Alabo.Data.People.Users.Domain.Repositories;
-using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Framework.Core.WebUis.Design.Widgets;
+using Alabo.Helpers;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Market.UI.Widgets {
+namespace Alabo.Cloud.People.UserRightss.UI.Widgets {
 
     public class MemberWidget : IWidget {
 

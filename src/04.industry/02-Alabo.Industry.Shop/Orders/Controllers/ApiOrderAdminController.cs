@@ -1,29 +1,27 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.App.Shop.Order.Domain.Services;
+using Alabo.App.Asset.Pays.Domain.Services;
+using Alabo.App.Asset.Pays.Dtos;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
-using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.RestfulApi;
-using ZKCloud.Open.ApiBase.Models;
-using Alabo.Domains.Query.Dto;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.Mapping;
-using Alabo.App.Core.Finance.Domain.Dtos.Pay;
-using Alabo.App.Shop.Order.ViewModels.OrderEdit;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.Helpers;
-using Alabo.App.Shop.Order.Domain.Entities.Extensions;
-using Alabo.App.Shop.Order.ViewModels;
-using Alabo.App.Shop.AfterSale.Domain.Services;
-using Alabo.App.Shop.Store.Domain.Services;
-using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Industry.Shop.AfterSales.Domain.Services;
+using Alabo.Industry.Shop.Deliveries.Domain.Services;
+using Alabo.Industry.Shop.OrderActions.Domain.Services;
+using Alabo.Industry.Shop.Orders.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using Alabo.Industry.Shop.Orders.Domain.Services;
+using Alabo.Industry.Shop.Orders.Dtos;
+using Alabo.Industry.Shop.Orders.ViewModels;
+using Alabo.Industry.Shop.Orders.ViewModels.OrderEdit;
+using Alabo.Mapping;
+using Microsoft.AspNetCore.Mvc;
+using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Shop.Order.Controllers {
+namespace Alabo.Industry.Shop.Orders.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/OrderAdmin/[action]")]

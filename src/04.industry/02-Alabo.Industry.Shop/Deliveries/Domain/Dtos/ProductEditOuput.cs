@@ -1,11 +1,12 @@
-﻿using Alabo.App.Shop.Product.Domain.Entities;
-using Alabo.Domains.Entities;
-using Alabo.Validations;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Domains.Entities;
 using Alabo.Framework.Basic.Relations.Dtos;
+using Alabo.Industry.Shop.Categories.Domain.Entities;
+using Alabo.Industry.Shop.Products.Domain.Entities;
+using Alabo.Validations;
 
-namespace Alabo.App.Shop.Store.Domain.Dtos
+namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos
 {
 
     public class ProductEditOuput {
@@ -15,7 +16,7 @@ namespace Alabo.App.Shop.Store.Domain.Dtos
         /// </summary>
         [Display(Name = "商品")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        public Product.Domain.Entities.Product Product { get; set; } = new Product.Domain.Entities.Product();
+        public Product Product { get; set; } = new Product();
 
         /// <summary>
         ///     商品sku列表
@@ -43,7 +44,7 @@ namespace Alabo.App.Shop.Store.Domain.Dtos
         /// </summary>
         [Display(Name = "商品类目")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        public Category.Domain.Entities.Category Category { get; set; }
+        public Category Category { get; set; }
 
         /// <summary>
         /// 设置信息

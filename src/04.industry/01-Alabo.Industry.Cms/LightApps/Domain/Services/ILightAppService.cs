@@ -1,9 +1,9 @@
-﻿using MongoDB.Bson;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.LightApps.Domain.Services {
+namespace Alabo.Industry.Cms.LightApps.Domain.Services {
 
     /// <summary>
     /// 自动数据接口

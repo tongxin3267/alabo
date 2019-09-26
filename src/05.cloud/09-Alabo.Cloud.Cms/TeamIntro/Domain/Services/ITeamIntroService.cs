@@ -1,8 +1,8 @@
-using MongoDB.Bson;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.TeamIntro.Domain.Services {
+namespace Alabo.Cloud.Cms.TeamIntro.Domain.Services {
 
     public interface ITeamIntroService : IService<Entities.TeamIntro, ObjectId> {
         Entities.TeamIntro GetCourseView(object id);

@@ -1,14 +1,14 @@
-﻿using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Enums;
+﻿using System;
+using System.Collections.Generic;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Domains.Services;
+using Alabo.Framework.Tasks.Queues.Domain.Entities;
+using Alabo.Framework.Tasks.Queues.Domain.Enums;
+using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Schedules;
-using System;
-using System.Collections.Generic;
-using Alabo.App.Core.Tasks.ResultModel;
 
-namespace Alabo.App.Core.Tasks.Domain.Services {
+namespace Alabo.Framework.Tasks.Queues.Domain.Servcies {
 
     /// <summary>
     ///     Interface ITaskQueueService

@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Entities;
+﻿using System.Collections.Generic;
+using Alabo.Cloud.People.UserTree.Domain.Configs;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
-using Alabo.Helpers;
 using Alabo.Users.Entities;
-using Convert = System.Convert;
 
-namespace Alabo.App.Core.User.Domain.Repositories {
+namespace Alabo.Cloud.People.UserTree.Domain.Repositories {
 
     public class UserMapRepository : RepositoryEfCore<UserMap, long>, IUserTreeRepository {
 
@@ -24,7 +16,7 @@ namespace Alabo.App.Core.User.Domain.Repositories {
 
         #region 组织架构图
 
-        public List<UserTree> GetTree(long userId, UserTreeConfig userTreeConfig, UserTypeConfig userType,
+        public List<Users.Entities.UserTree> GetTree(long userId, UserTreeConfig userTreeConfig, UserTypeConfig userType,
             List<UserGradeConfig> userGradeConfigList, UserTypeConfig userServiceConfig) {
             bool serviceFlag = true, levelFlag = true, directFlag = true;
             //long Level = 3;
@@ -48,7 +40,7 @@ namespace Alabo.App.Core.User.Domain.Repositories {
             //    str.Append(" or u.ParentId=u.Id");
             //}
 
-            var list = new List<UserTree>();
+            var list = new List<Users.Entities.UserTree>();
             using (var reader = RepositoryContext.ExecuteDataReader(str)) {
                 while (reader.Read()) {
                     var UserName = reader["UserName"].ToString();
@@ -60,7 +52,7 @@ namespace Alabo.App.Core.User.Domain.Repositories {
                     var childCount = reader["ChildCount"].ToInt64();
                     //decimal teamSales = reader.Read<decimal>("teamSales");
                     //long teamNumber = reader.Read<long>("TeamNumber");
-                    var userTree = new UserTree {
+                    var userTree = new Users.Entities.UserTree {
                         Id = reader["Id"].ToInt64(),
                         Name = UserName,
                         PId = userId

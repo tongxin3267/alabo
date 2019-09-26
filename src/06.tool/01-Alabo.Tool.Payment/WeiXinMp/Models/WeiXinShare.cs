@@ -1,4 +1,4 @@
-﻿namespace Alabo.App.Core.ApiStore.WeiXinMp.Models {
+﻿namespace Alabo.Tool.Payment.WeiXinMp.Models {
 
     /// <summary>
     /// 微信分享

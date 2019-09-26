@@ -1,9 +1,9 @@
 using System;
+using Alabo.App.Asset.Transfers.Domain.Configs;
 using Xunit;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Shop.Activitys.ViewModels;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Core.Reflections.Services;
+using Alabo.Industry.Shop.Activitys.ViewModels;
 using Alabo.Runtime.Config;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;

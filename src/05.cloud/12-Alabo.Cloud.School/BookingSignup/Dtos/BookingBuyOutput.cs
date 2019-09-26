@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Alabo.Domains.Query.Dto;
 using MongoDB.Bson;
-using Alabo.Domains.Query.Dto;
 
-namespace Alabo.App.Market.BookingSignup.Dtos
+namespace Alabo.Cloud.School.BookingSignup.Dtos
 {
     public class BookingBuyOutput : EntityDto
     {

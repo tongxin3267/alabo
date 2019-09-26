@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Core.Finance.Domain.Dtos.Pay;
-using Alabo.App.Core.Finance.Domain.Entities;
+using Alabo.App.Asset.Pays.Domain.Entities;
+using Alabo.App.Asset.Pays.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 
-namespace Alabo.App.Core.Finance.Domain.Repositories {
+namespace Alabo.App.Asset.Pays.Domain.Repositories {
 
     public interface IPayRepository : IRepository<Pay, long> {
 

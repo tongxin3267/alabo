@@ -1,25 +1,23 @@
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Market.UserRightss.Domain.Dtos;
-using Alabo.App.Market.UserRightss.Domain.Entities;
-using Alabo.App.Market.UserRightss.Domain.Services;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.Extensions;
-using Alabo.Helpers;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Alabo.Cloud.People.UserRightss.Domain.Dtos;
+using Alabo.Cloud.People.UserRightss.Domain.Entities;
+using Alabo.Cloud.People.UserRightss.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Helpers;
+using Alabo.Industry.Shop.Orders.Dtos;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Market.UserRightss.Controllers {
+namespace Alabo.Cloud.People.UserRightss.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/UserRights/[action]")]

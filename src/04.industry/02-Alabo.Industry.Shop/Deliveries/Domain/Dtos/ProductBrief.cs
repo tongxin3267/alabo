@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using Alabo.App.Shop.Product.Domain.Enums;
 using Alabo.Datas.Queries.Enums;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Industry.Shop.Products.Domain.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Store.Domain.Dtos
+namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos
 {
     public class ProductBrief
     {

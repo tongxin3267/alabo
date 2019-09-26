@@ -1,26 +1,21 @@
-﻿using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Extensions;
-using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.App.Open.Tasks.Modules;
-using Alabo.Framework.Core.Enums.Enum;
+﻿using System.ComponentModel.DataAnnotations;
+using Alabo.App.Share.OpenTasks.Base;
+using Alabo.App.Share.OpenTasks.Modules;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Data.Things.Orders.ResultModel;
 using Alabo.Domains.Enums;
-using Alabo.Extensions;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Tasks.Queues.Models;
+using Alabo.Framework.Tasks.Schedules.Domain.Enums;
 using Alabo.Web.Mvc.Attributes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using ZKCloud.Open.ApiBase.Models;
-using ICityService = Alabo.Data.People.Cities.Domain.Services.ICityService;
 
-namespace Alabo.App.Open.Tasks.Configs.Area {
+namespace Alabo.App.Share.OpenTasks.Configs.Area {
 
     [ShareModules(Name = "市代理分润",
-     FenRunResultType = Core.Tasks.Domain.Enums.FenRunResultType.Price,
+     FenRunResultType = FenRunResultType.Price,
       Intro = "市代理分润，根据全国661个城市来划分，一个城市所有的订单都会有分润。可配置市代理分润，推荐市代理分润，市代理见点分润等，配置方式灵活多变",
-      RelationshipType = Core.Tasks.Domain.Enums.RelationshipType.UserTypeRelationship,
+      RelationshipType = RelationshipType.UserTypeRelationship,
       ConfigHelp = "市代理在后台添加，市代理推荐人也在后台添加。分润比例设置成0.2,0.01 表示市代理分润比例为20%，推荐市代理的分润为1%",
      Id = "8e5968e1-77d9-49f3-b849-85064d305821", BackGround = "bg-green-seagreen", Icon = "icon-social-dribbble", IsIncludeShareModuleConfig = true
       )]
@@ -34,7 +29,7 @@ namespace Alabo.App.Open.Tasks.Configs.Area {
         public AddressLockType AddressLockType { get; set; }
     }
 
-    [TaskModule(Id, ModelName, SortOrder = 909998, FenRunResultType = Core.Tasks.Domain.Enums.FenRunResultType.Price,
+    [TaskModule(Id, ModelName, SortOrder = 909998, FenRunResultType = FenRunResultType.Price,
         Intro = "市代理分润，根据全国661个城市来划分，一个城市所有的订单都会有分润。可配置市代理分润，推荐市代理分润，市代理见点分润等，配置方式灵活多变"
        , ConfigurationType = typeof(CityShareConfig), RelationshipType = RelationshipType.UserTypeRelationship, IsSupportMultipleConfiguration = true)]
     public class CityModule : AssetAllocationShareModuleBase<CityShareConfig> {

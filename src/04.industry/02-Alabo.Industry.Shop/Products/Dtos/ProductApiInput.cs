@@ -1,11 +1,11 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Shop.Product.Domain.CallBacks;
-using Alabo.App.Shop.Product.Domain.Enums;
 using Alabo.Domains.Query.Dto;
+using Alabo.Industry.Shop.Products.Domain.Configs;
+using Alabo.Industry.Shop.Products.Domain.Enums;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Product.DiyModels {
+namespace Alabo.Industry.Shop.Products.Dtos {
 
     /// <summary>
     ///     商品列表

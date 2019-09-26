@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.Order.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.App.Shop.Product.Domain.Dtos;
 using Alabo.Data.People.Users.Dtos;
+using Alabo.Industry.Shop.OrderDeliveries.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using Alabo.Industry.Shop.Products.Dtos;
 
-namespace Alabo.App.Shop.Order.Domain.Dtos {
+namespace Alabo.Industry.Shop.Orders.Dtos {
 
     public class OrderShowOutput {
         /// <summary>
@@ -106,7 +106,7 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
         /// <summary>
         ///     订单信息
         /// </summary>
-        public Entities.Order Order { get; set; }
+        public Order Order { get; set; }
 
         /// <summary>
         ///     物流信息

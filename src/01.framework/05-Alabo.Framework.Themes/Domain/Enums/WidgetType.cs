@@ -1,6 +1,6 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Themes.Domain.Enums {
+namespace Alabo.Framework.Themes.Domain.Enums {
 
     [ClassProperty(Name = "窗口类型")]
     public enum WidgetType {

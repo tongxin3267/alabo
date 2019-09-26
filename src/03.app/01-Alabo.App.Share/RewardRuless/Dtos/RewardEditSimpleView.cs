@@ -1,7 +1,7 @@
 ﻿using System;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
 
-namespace Alabo.App.Share.Share.Domain.Dtos {
+namespace Alabo.App.Share.RewardRuless.Dtos {
 
     public class RewardEditSimpleView {
 

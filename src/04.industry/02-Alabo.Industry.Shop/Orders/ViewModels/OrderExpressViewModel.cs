@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Alabo.Domains.Entities;
+﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Validations;
 
-namespace Alabo.App.Shop.Order.ViewModels
+namespace Alabo.Industry.Shop.Orders.ViewModels
 {
     /// <summary>
     /// OrderExpressViewModel

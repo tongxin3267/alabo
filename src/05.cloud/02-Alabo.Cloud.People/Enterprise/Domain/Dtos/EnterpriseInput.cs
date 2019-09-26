@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Markets.EnterpriseCertification.Domain.Dtos {
+namespace Alabo.Cloud.People.Enterprise.Domain.Dtos {
 
     public class EnterpriseInput {
 

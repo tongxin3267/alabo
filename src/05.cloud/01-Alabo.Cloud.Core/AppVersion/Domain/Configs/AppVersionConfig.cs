@@ -1,7 +1,6 @@
 ﻿using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
 
-namespace Alabo.App.Core.ApiStore.AppVersion.Entities {
+namespace _01_Alabo.Cloud.Core.AppVersion.Domain.Configs {
 
     public class AppVersionConfig : IAutoConfig {
 

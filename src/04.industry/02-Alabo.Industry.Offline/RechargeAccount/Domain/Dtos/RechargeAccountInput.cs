@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Alabo.App.Offline.RechargeAccount.Domain.Dtos {
+namespace Alabo.Industry.Offline.RechargeAccount.Domain.Dtos {
    public  class RechargeAccountInput {
 
        public string  UserName { get; set; }

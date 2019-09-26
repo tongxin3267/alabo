@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.BankCard {
+namespace Alabo.App.Asset.Pays.Dtos {
 
     public class AliResult {
         public string CardType { get; set; }

@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using MongoDB.Bson;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Open.Tasks.Base;
+using Alabo.Domains.Enums;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
 
-namespace Alabo.App.Open.Tasks.Base
+namespace Alabo.App.Share.OpenTasks.Base
 {
     /// <summary>
     /// 分润编辑详情

@@ -1,20 +1,19 @@
-﻿using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.ApiStore.MiniProgram.Dtos;
-using Alabo.App.Core.ApiStore.MiniProgram.Services;
-using Alabo.App.Core.ApiStore.WeiXinMp.Models;
-using Alabo.App.Core.ApiStore.WeiXinMp.Services;
-using Alabo.Domains.Base.Services;
-using Alabo.Extensions;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Services;
+using Alabo.Domains.Base.Services;
+using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Tool.Payment.MiniProgram.Dtos;
+using Alabo.Tool.Payment.MiniProgram.Services;
+using Alabo.Tool.Payment.WeiXinMp.Models;
+using Alabo.Tool.Payment.WeiXinMp.Services;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.ApiStore.Controllers {
+namespace Alabo.Tool.Payment.Controllers {
 
     /// <summary>
     ///     ApiStore Api接口

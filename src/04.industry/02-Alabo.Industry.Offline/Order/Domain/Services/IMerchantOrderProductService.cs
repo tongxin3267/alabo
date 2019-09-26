@@ -1,7 +1,7 @@
-using Alabo.App.Offline.Order.Domain.Entities;
 using Alabo.Domains.Services;
+using Alabo.Industry.Offline.Order.Domain.Entities;
 
-namespace Alabo.App.Offline.Order.Domain.Services
+namespace Alabo.Industry.Offline.Order.Domain.Services
 {
     public interface IMerchantOrderProductService : IService<MerchantOrderProduct, long>
     {

@@ -1,19 +1,18 @@
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.Markets.EnterpriseCertification.Domain.Entities;
-using Alabo.App.Core.Markets.EnterpriseCertification.Domain.Services;
+using Alabo.Cloud.People.Enterprise.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Markets.EnterpriseCertification.Controllers {
+namespace Alabo.Cloud.People.Enterprise.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/Enterprise/[action]")]
-    public class ApiEnterpriseController : ApiBaseController<Enterprise, ObjectId> {
+    public class ApiEnterpriseController : ApiBaseController<Domain.Entities.Enterprise, ObjectId> {
 
         public ApiEnterpriseController() : base() {
             BaseService = Resolve<IEnterpriseService>();
@@ -21,7 +20,7 @@ namespace Alabo.App.Core.Markets.EnterpriseCertification.Controllers {
 
         [HttpGet]
         [Display(Description = "企业认证")]
-        public ApiResult<PagedList<Enterprise>> EnterpriseList([FromQuery] PagedInputDto parameter) {
+        public ApiResult<PagedList<Domain.Entities.Enterprise>> EnterpriseList([FromQuery] PagedInputDto parameter) {
             var model = Resolve<IEnterpriseService>().GetPagedList(Query);
             return ApiResult.Success(model);
         }
@@ -32,7 +31,7 @@ namespace Alabo.App.Core.Markets.EnterpriseCertification.Controllers {
         /// <param name="enterprise"></param>
         /// <returns></returns>
         [HttpPost]
-        public ApiResult Enterprise([FromBody]Enterprise enterprise) {
+        public ApiResult Enterprise([FromBody]Domain.Entities.Enterprise enterprise) {
             if (enterprise == null) {
                 return ApiResult.Failure("实体不能为空");
             }

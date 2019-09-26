@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Shop.Activitys.Modules.ProductNumberLimit.Dtos;
-using Alabo.App.Shop.Order.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Extensions;
+using Alabo.Industry.Shop.Activitys.Modules.ProductNumberLimit.Dtos;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
 
-namespace Alabo.App.Shop.Order.Domain.Repositories
+namespace Alabo.Industry.Shop.Orders.Domain.Repositories
 {
     /// <summary>
     /// OrderProductRepository

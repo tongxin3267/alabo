@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoTables;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using ZKCloud.Open.Message.Models;
-using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
+using ZKCloud.Open.Message.Models;
 
-namespace Alabo.App.Market.SMSMarketing.UI {
+namespace _01_Alabo.Cloud.Core.SendSms.UI {
 
     public class MessageRecordAutoTable : UIBase, IAutoTable<MessageRecordAutoTable> {
         public long UserId { get; set; }

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Offline.Merchants.ViewModels;
-using Alabo.App.Offline.Product.Domain.Entities;
+using Alabo.Industry.Offline.Merchants.ViewModels;
+using Alabo.Industry.Offline.Product.Domain.Entities;
 
-namespace Alabo.App.Offline.Product.ViewModels
+namespace Alabo.Industry.Offline.Product.ViewModels
 {
     /// <summary>
     /// MerchantProductViewModel

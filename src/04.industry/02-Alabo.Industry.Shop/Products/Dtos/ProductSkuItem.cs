@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.Product.Domain.Enums;
+using Alabo.Industry.Shop.Products.Domain.Enums;
 
-namespace Alabo.App.Shop.Product.Domain.Dtos
+namespace Alabo.Industry.Shop.Products.Dtos
 {
 
     /// <summary>

@@ -1,36 +1,22 @@
 using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
 using System.Threading.Tasks;
-using Alabo.Domains.Entities;
-using Microsoft.AspNetCore.Mvc;
-using Alabo.Framework.Core.WebApis.Filter;
-
-using MongoDB.Bson;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.RestfulApi;
-using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.Domains.Services;
-using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.Controllers;
-using Alabo.App.Shop.AfterSale.Domain.Entities;
-using Alabo.App.Shop.AfterSale.Domain.Services;
-using Alabo.App.Shop.Order.Domain.Services;
-using System.Net;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.IO;
-using Alabo.App.Core.Finance.Domain.Services;
-using ZKCloud.Open.ApiBase.Models;
+using Alabo.App.Asset.Pays.Domain.Entities.Extension;
+using Alabo.App.Asset.Pays.Domain.Services;
 using Alabo.Extensions;
-using Alabo.App.Core.Finance.Domain.Entities.Extension;
-using Alabo.App.Shop.Order.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.Domains.Enums;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Industry.Shop.AfterSales.Domain.Entities;
+using Alabo.Industry.Shop.AfterSales.Domain.Services;
+using Alabo.Industry.Shop.OrderActions.Domain.Entities;
+using Alabo.Industry.Shop.OrderActions.Domain.Enums;
+using Alabo.Industry.Shop.OrderActions.Domain.Services;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using Alabo.Industry.Shop.Orders.Domain.Services;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
+using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Shop.AfterSale.Controllers {
+namespace Alabo.Industry.Shop.AfterSales.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/Refund/[action]")]
@@ -64,10 +50,10 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
         public async Task<ZKCloud.Open.ApiBase.Models.ApiResult> Apply([FromBody]Refund parameter) {
             var order = Resolve<IOrderService>().GetSingle(parameter.OrderId);
             //未发货
-            if (order.OrderStatus == Order.Domain.Enums.OrderStatus.WaitingSellerSendGoods) {
-                order.OrderStatus = Order.Domain.Enums.OrderStatus.Refund;
-            } else if (order.OrderStatus == Order.Domain.Enums.OrderStatus.WaitingReceiptProduct) {
-                order.OrderStatus = Order.Domain.Enums.OrderStatus.AfterSale;
+            if (order.OrderStatus == OrderStatus.WaitingSellerSendGoods) {
+                order.OrderStatus = OrderStatus.Refund;
+            } else if (order.OrderStatus == OrderStatus.WaitingReceiptProduct) {
+                order.OrderStatus = OrderStatus.AfterSale;
             } else {
                 return await System.Threading.Tasks.Task.FromResult(ApiResult.Failure("订单状态已更改!"));
             }
@@ -122,13 +108,13 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
                 return ApiResult.Failure($"退款失败!refundFree.Item1:ErrorMessages=>{refundFree.Item1.ErrorMessages.Join()}/ReturnMessage=>{refundFree.Item1.ReturnMessage},refundFree.Item2:{refundFree.Item2}");
             }
             //未发货
-            if (order.OrderStatus == Order.Domain.Enums.OrderStatus.AfterSale) {
+            if (order.OrderStatus == OrderStatus.AfterSale) {
                 if (order.OrderExtension.RefundInfo.Process == Domain.Enums.RefundStatus.WaitSaleAllow) {
                     entity.Process = Domain.Enums.RefundStatus.Sucess;
                 } else {
                     return await System.Threading.Tasks.Task.FromResult(ApiResult.Failure("售后状态已被更改,操作失败!"));
                 }
-            } else if (order.OrderStatus == Order.Domain.Enums.OrderStatus.Refund) {
+            } else if (order.OrderStatus == OrderStatus.Refund) {
                 //退款可以在 同意之后或者 直接退款,退款后直接完成
                 if (order.OrderExtension.RefundInfo.Process == Domain.Enums.RefundStatus.BuyerApplyRefund) {
                     entity.Process = Domain.Enums.RefundStatus.Sucess;
@@ -139,7 +125,7 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
                 return await System.Threading.Tasks.Task.FromResult(ApiResult.Failure("订单状态已更改,操作失败!"));
             }
             //退款完成后将更改订单状态
-            order.OrderStatus = Order.Domain.Enums.OrderStatus.Refunded;
+            order.OrderStatus = OrderStatus.Refunded;
 
             entity.ProcessMessage = parameter.ProcessMessage;
 
@@ -205,10 +191,10 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
                 }
             }
             //未发货
-            if (order.OrderStatus == Order.Domain.Enums.OrderStatus.AfterSale) {
-                order.OrderStatus = Order.Domain.Enums.OrderStatus.WaitingReceiptProduct;
-            } else if (order.OrderStatus == Order.Domain.Enums.OrderStatus.Refund) {
-                order.OrderStatus = Order.Domain.Enums.OrderStatus.WaitingSellerSendGoods;
+            if (order.OrderStatus == OrderStatus.AfterSale) {
+                order.OrderStatus = OrderStatus.WaitingReceiptProduct;
+            } else if (order.OrderStatus == OrderStatus.Refund) {
+                order.OrderStatus = OrderStatus.WaitingSellerSendGoods;
             } else {
                 return await System.Threading.Tasks.Task.FromResult(ApiResult.Failure("订单状态已更改!"));
             }
@@ -250,10 +236,10 @@ namespace Alabo.App.Shop.AfterSale.Controllers {
                 }
             }
             //未发货
-            if (order.OrderStatus == Order.Domain.Enums.OrderStatus.AfterSale) {
-                order.OrderStatus = Order.Domain.Enums.OrderStatus.WaitingReceiptProduct;
-            } else if (order.OrderStatus == Order.Domain.Enums.OrderStatus.Refund) {
-                order.OrderStatus = Order.Domain.Enums.OrderStatus.WaitingSellerSendGoods;
+            if (order.OrderStatus == OrderStatus.AfterSale) {
+                order.OrderStatus = OrderStatus.WaitingReceiptProduct;
+            } else if (order.OrderStatus == OrderStatus.Refund) {
+                order.OrderStatus = OrderStatus.WaitingSellerSendGoods;
             } else {
                 return await System.Threading.Tasks.Task.FromResult(ApiResult.Failure("订单状态已更改!"));
             }

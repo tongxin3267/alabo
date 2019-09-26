@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Alabo.App.Shop.Order.Domain.Enums;
+﻿using System.ComponentModel.DataAnnotations;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.AfterSales.Domain.Enums
+namespace Alabo.Industry.Shop.AfterSales.Domain.Enums
 {
     /// <summary>
     /// 退货原因

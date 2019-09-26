@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
 using Alabo.App.Asset.Transfers.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Dtos.Transfer;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.ViewModels.Transfer;
+using Alabo.App.Asset.Transfers.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 
-namespace Alabo.App.Core.Finance.Domain.Services {
+namespace Alabo.App.Asset.Transfers.Domain.Services {
 
     /// <summary>
     ///     转账

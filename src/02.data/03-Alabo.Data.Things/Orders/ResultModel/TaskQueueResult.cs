@@ -1,10 +1,11 @@
 ﻿using System;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Core.Tasks.Extensions;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Framework.Tasks.Queues.Domain.Enums;
+using Alabo.Framework.Tasks.Queues.Domain.Servcies;
+using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Helpers;
 
-namespace Alabo.App.Core.Tasks.ResultModel {
+namespace Alabo.Data.Things.Orders.ResultModel {
 
     /// <summary>
     ///     此结果类型输入数据新增到任务队列表中

@@ -1,28 +1,26 @@
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Share.Share.Domain.Dto;
-using Alabo.App.Share.Share.Domain.Entities;
-using Alabo.App.Share.Share.Domain.Services;
+using Alabo.App.Share.Rewards.Domain.Entities;
+using Alabo.App.Share.Rewards.Domain.Services;
+using Alabo.App.Share.Rewards.Dtos;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Data.People.Users.Dtos;
-using Alabo.Framework.Core.WebApis.Dtos;
-using Alabo.Framework.Core.WebApis.Service;
-using Alabo.Framework.Core.WebUis.Models.Lists;
-using Alabo.Framework.Core.WebUis.Models.Previews;
 using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Dtos;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Framework.Core.WebUis.Models.Lists;
+using Alabo.Framework.Core.WebUis.Models.Previews;
 using Alabo.Mapping;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Share.Share.Controllers {
+namespace Alabo.App.Share.Rewards.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/Reward/[action]")]

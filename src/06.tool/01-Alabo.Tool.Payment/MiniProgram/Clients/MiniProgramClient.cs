@@ -1,12 +1,10 @@
 ﻿using System;
-using Alabo.App.Core.ApiStore.CallBacks;
-using Alabo.App.Core.ApiStore.MiniProgram.Dtos;
-using Alabo.Extensions;
+using Alabo.Tool.Payment.MiniProgram.Dtos;
 using ZKCloud.Open.ApiBase.Connectors;
 using ZKCloud.Open.ApiBase.Formatters;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.ApiStore.MiniProgram.Clients {
+namespace Alabo.Tool.Payment.MiniProgram.Clients {
 
     public class MiniProgramClient : ApiStoreClient, IMiniProgramClient {
         private static readonly Func<IConnector> _connectorCreator = () => new HttpClientConnector();

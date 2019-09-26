@@ -1,26 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 using Alabo.App.Asset.Withdraws.Domain.Enums;
 using Alabo.App.Asset.Withdraws.Domain.Services;
-using Alabo.App.Core.Finance.Domain.Dtos.WithDraw;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
+using Alabo.App.Asset.Withdraws.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Helpers;
 using Alabo.Mapping;
-using Alabo.UI;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Finance.UI.AutoForm {
+namespace Alabo.App.Asset.Withdraws.UI {
 
     [ClassProperty(Name = "", Description = "提现审核")]
     public class WithdrawAdminAutoForm : UIBase, IAutoTable<WithdrawAdminAutoForm>//, IAutoForm

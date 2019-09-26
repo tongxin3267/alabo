@@ -1,8 +1,8 @@
 ﻿using System;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Extensions;
+using Alabo.Framework.Core.Enums.Enum;
 
-namespace Alabo.App.Core.Themes.Extensions {
+namespace Alabo.Framework.Themes.Extensions {
 
     /// <summary>
     ///     模板扩展

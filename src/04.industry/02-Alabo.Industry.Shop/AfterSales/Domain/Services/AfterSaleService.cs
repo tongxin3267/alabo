@@ -1,14 +1,9 @@
-using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
-using Alabo.App.Shop.AfterSale.Domain.Entities;
+using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Shop.AfterSale.Domain.Services {
+namespace Alabo.Industry.Shop.AfterSales.Domain.Services {
 
     public class AfterSaleService : ServiceBase<Entities.AfterSale, ObjectId>, IAfterSaleService {
 

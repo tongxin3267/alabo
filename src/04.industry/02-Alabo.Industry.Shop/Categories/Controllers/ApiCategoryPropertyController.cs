@@ -1,13 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
 using System;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Shop.Category.Domain.Entities;
-using Alabo.App.Shop.Category.Domain.Services;
-using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.RestfulApi;
+using Alabo.Industry.Shop.Categories.Domain.Entities;
+using Alabo.Industry.Shop.Categories.Domain.Services;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Alabo.App.Shop.Category.Controllers {
+namespace Alabo.Industry.Shop.Categories.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/CategoryProperty/[action]")]

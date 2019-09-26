@@ -1,14 +1,13 @@
-﻿using Alabo.App.Market.FacePay.Domain.Services;
-using Alabo.Helpers;
-using Alabo.UI;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis.Design.AutoReports;
+using Alabo.Cloud.Asset.FacePay.Domain.Services;
 using Alabo.Domains.Services.Report;
 using Alabo.Domains.Services.Report.Enums;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis.Design.AutoReports;
+using Alabo.Helpers;
 
-namespace Alabo.App.Market.FacePay.Report {
+namespace Alabo.Cloud.Asset.FacePay.Report {
 
     public class FacePayReport : IAutoReport {
 

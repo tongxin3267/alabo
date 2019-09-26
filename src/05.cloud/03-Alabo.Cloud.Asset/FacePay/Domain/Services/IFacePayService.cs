@@ -1,11 +1,7 @@
-using System;
-using System.Linq;
-using MongoDB.Bson;
 using Alabo.Domains.Services;
-using Alabo.App.Market.FacePay.Domain.Entities;
-using Alabo.Domains.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.FacePay.Domain.Services {
+namespace Alabo.Cloud.Asset.FacePay.Domain.Services {
 
     public interface IFacePayService : IService<Entities.FacePay, ObjectId> {
     }

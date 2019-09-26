@@ -1,4 +1,4 @@
-﻿namespace Alabo.App.Core.ApiStore.Sms.Enums {
+﻿namespace _01_Alabo.Cloud.Core.SendSms.Domain.Enums {
 
     public enum SmsType {
 

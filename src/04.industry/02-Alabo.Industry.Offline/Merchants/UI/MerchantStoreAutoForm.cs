@@ -1,21 +1,18 @@
-﻿using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.App.Offline.Merchants.Domain.Dtos;
-using Alabo.App.Offline.Merchants.Domain.Entities;
-using Alabo.App.Offline.Merchants.Domain.Services;
+using Alabo.Domains.Entities;
+using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Domains.Entities;
-using Alabo.Extensions;
+using Alabo.Industry.Offline.Merchants.Domain.Entities;
+using Alabo.Industry.Offline.Merchants.Domain.Services;
 using Alabo.Maps;
-using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
 
-namespace Alabo.App.Offline.Merchants.UI
+namespace Alabo.Industry.Offline.Merchants.UI
 {
     /// <summary>
     /// 店铺设置

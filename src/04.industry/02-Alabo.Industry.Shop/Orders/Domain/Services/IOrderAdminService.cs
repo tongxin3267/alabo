@@ -1,11 +1,11 @@
 ﻿using System;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Order.ViewModels;
+using Alabo.App.Asset.Pays.Domain.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Industry.Shop.Orders.Dtos;
+using Alabo.Industry.Shop.Orders.ViewModels;
 
-namespace Alabo.App.Shop.Order.Domain.Services {
+namespace Alabo.Industry.Shop.Orders.Domain.Services {
 
     /// <summary>
     ///     订单后台操作相关的接口

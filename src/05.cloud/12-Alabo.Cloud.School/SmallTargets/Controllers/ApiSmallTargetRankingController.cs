@@ -1,13 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
+using Alabo.Cloud.School.SmallTargets.Domain.Entities;
+using Alabo.Cloud.School.SmallTargets.Domain.Services;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Market.SmallTargets.Domain.Entities;
-using Alabo.App.Market.SmallTargets.Domain.Services;
-using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.RestfulApi;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.SmallTargets.Controllers {
+namespace Alabo.Cloud.School.SmallTargets.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/SmallTargetRanking/[action]")]

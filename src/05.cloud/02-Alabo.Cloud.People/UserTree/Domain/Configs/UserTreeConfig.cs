@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.User.Domain.Callbacks {
+namespace Alabo.Cloud.People.UserTree.Domain.Configs {
 
     /// <summary>
     ///     组织架构图设置

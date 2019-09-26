@@ -1,19 +1,12 @@
-using System;using Alabo.Domains.Repositories.EFCore;using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using Alabo.Domains.Entities;
-using Microsoft.AspNetCore.Mvc;
-using Alabo.Framework.Core.WebApis.Filter;
-
-using MongoDB.Bson;
-using Alabo.RestfulApi;using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.Domains.Services;
-using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.Controllers;
-using Alabo.App.Shop.AfterSale.Domain.Entities;
-using Alabo.App.Shop.AfterSale.Domain.Services;
 using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Industry.Shop.AfterSales.Domain.Entities;
+using Alabo.Industry.Shop.AfterSales.Domain.Services;
+using Alabo.RestfulApi;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 
-namespace Alabo.App.Shop.AfterSale.Controllers {
+namespace Alabo.Industry.Shop.AfterSales.Controllers {
 		[ApiExceptionFilter]
 		[Route("Api/Evaluate/[action]")]
 		public class ApiEvaluateController : ApiBaseController<Evaluate,ObjectId>  {

@@ -1,20 +1,18 @@
-﻿using Alabo.App.Core.Finance.Domain.Dtos.Pay;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.Framework.Core.Enums.Enum;
+﻿using System;
+using System.Collections.Generic;
+using Alabo.App.Asset.Pays.Domain.Entities;
+using Alabo.App.Asset.Pays.Dtos;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Extensions;
-using Alabo.Helpers;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Linq.Dynamic;
-using System;
-using System.Collections.Generic;
+using Alabo.Tool.Payment;
 using Convert = System.Convert;
 
-namespace Alabo.App.Core.Finance.Domain.Repositories {
+namespace Alabo.App.Asset.Pays.Domain.Repositories {
 
     /// <summary>
     ///     Class PayRepository.

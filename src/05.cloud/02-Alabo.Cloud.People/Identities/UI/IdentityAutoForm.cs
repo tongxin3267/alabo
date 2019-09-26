@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Cloud.People.Identities.Domain.Entities;
+using Alabo.Cloud.People.Identities.Domain.Services;
+using Alabo.Domains.Entities;
+using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Domains.Entities;
-using Alabo.Extensions;
 using Alabo.Helpers;
-using Alabo.UI;
+using Alabo.Users.Enum;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.User.UI.AutoFrom {
+namespace Alabo.Cloud.People.Identities.UI {
 
     /// <summary>
     /// 实名认证

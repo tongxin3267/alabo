@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Category.Domain.Enums {
+namespace Alabo.Industry.Shop.Categories.Domain.Enums {
 
     [ClassProperty(Name = "控件显示类型")]
     public enum PropertyControlType {

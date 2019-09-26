@@ -1,24 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Order.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.App.Shop.Order.Domain.Services;
-using Alabo.App.Shop.Store.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Framework.Core.WebUis.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
-using Alabo.UI;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.WebUis.Domain.Services;
+using Alabo.Industry.Shop.Deliveries.Domain.Services;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using Alabo.Industry.Shop.Orders.Domain.Services;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Store.Domain.Dtos {
+namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos {
 
     public class StoreOrdersToExcel : UIBase, IAutoForm {
 
@@ -51,14 +48,14 @@ namespace Alabo.App.Shop.Store.Domain.Dtos {
                 return ServiceResult.FailedWithMessage("非法操作");
             }
 
-            var query = new ExpressionQuery<Order.Domain.Entities.Order> {
+            var query = new ExpressionQuery<Order> {
                 PageIndex = 1,
                 PageSize = 15
             };
             query.And(u => u.StoreId == store.Id);
             query.And(u => u.OrderStatus == condition.Status);
             var view = Resolve<IOrderService>().GetPagedList(query);
-            var orders = new List<Order.Domain.Entities.Order>();
+            var orders = new List<Order>();
             foreach (var item in view) {
                 TimeSpan ts = DateTime.Now.Subtract(item.CreateTime);
                 if (ts.Days < condition.Days) {

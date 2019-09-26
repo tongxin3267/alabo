@@ -1,4 +1,4 @@
-﻿namespace Alabo.App.Core.Finance.Dtos {
+﻿namespace Alabo.App.Asset.Pays.Dtos {
 
     public class WxMessage {
         public string DeviceInfo { get; set; }

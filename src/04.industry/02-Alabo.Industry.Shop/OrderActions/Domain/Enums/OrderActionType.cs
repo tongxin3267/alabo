@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Alabo.Industry.Shop.Orders;
 using Alabo.UI.Enum;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Order.Domain.Enums {
+namespace Alabo.Industry.Shop.OrderActions.Domain.Enums {
 
     /// <summary>
     ///     订单操作类型

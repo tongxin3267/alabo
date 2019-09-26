@@ -1,13 +1,11 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.Domains.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Shop.AfterSale.Domain.Entities
+namespace Alabo.Industry.Shop.AfterSales.Domain.Entities
 {
     /// <summary>
     /// 评价

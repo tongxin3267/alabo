@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.App.Cms.Articles.Domain.Services;
+﻿using Alabo.Domains.Entities;
+using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoArticles;
 using Alabo.Framework.Core.WebUis.Design.AutoNews;
-using Alabo.Domains.Entities;
-using Alabo.Extensions;
 using Alabo.Helpers;
+using Alabo.Industry.Cms.Articles.Domain.Services;
 using Alabo.Mapping;
-using Alabo.UI;
 
-namespace Alabo.App.Cms.Articles.UI {
+namespace Alabo.Industry.Cms.Articles.UI {
 
     public class ArticleAutoArticle : IAutoArticle, IAutoNews {
 

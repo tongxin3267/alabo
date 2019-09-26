@@ -1,22 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Data.Things.Orders.Domain.Entities;
+using Alabo.Data.Things.Orders.Domain.Services;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
 using Alabo.Maps;
-using Alabo.UI;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.ViewModel;
 using Alabo.Web.Validations;
 
-namespace Alabo.App.Core.Tasks.Domain.ViewModels {
+namespace _05_Alabo.Cloud.Share.ShareTests.UI {
 
     /// <summary>
     ///     分润订单

@@ -1,5 +1,5 @@
+using Alabo.App.Asset.Pays.Domain.Services;
 using Xunit;
-using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
 

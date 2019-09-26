@@ -1,19 +1,15 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Cms.Articles.Domain.Services;
-using Alabo.Framework.Core.Admins.Configs;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.UI;
+using Alabo.Framework.Core.Admins.Configs;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.ViewModel;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Cms.Articles.Domain.Entities {
+namespace Alabo.Industry.Cms.Articles.Domain.Entities {
 
     /// <summary>
     ///     文章类

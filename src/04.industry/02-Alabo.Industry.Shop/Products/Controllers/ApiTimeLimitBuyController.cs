@@ -1,17 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Shop.Product.Domain.Services;
-using Alabo.App.Shop.Product.ViewModels;
-using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Industry.Shop.Products.Domain.Services;
+using Alabo.Industry.Shop.Products.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Shop.Product.Controllers
+namespace Alabo.Industry.Shop.Products.Controllers
 {
     /// <summary>
     /// ApiTimeLimitBuyController

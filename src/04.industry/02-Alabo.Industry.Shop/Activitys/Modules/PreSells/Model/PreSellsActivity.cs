@@ -1,16 +1,16 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.Activitys.Domain.Entities;
-using Alabo.App.Shop.Activitys.Dtos;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Industry.Shop.Activitys.Domain.Entities;
+using Alabo.Industry.Shop.Activitys.Dtos;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using Microsoft.AspNetCore.Http;
 
-namespace Alabo.App.Shop.Activitys.Modules.PreSells.Model
+namespace Alabo.Industry.Shop.Activitys.Modules.PreSells.Model
 {
     /// <summary>
     /// 预售活动设置

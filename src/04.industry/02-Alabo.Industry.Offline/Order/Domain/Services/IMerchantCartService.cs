@@ -1,13 +1,13 @@
-using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
-using Alabo.App.Offline.Order.Domain.Dtos;
-using Alabo.App.Offline.Order.Domain.Entities;
-using Alabo.App.Offline.Order.ViewModels;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Industry.Offline.Order.Domain.Dtos;
+using Alabo.Industry.Offline.Order.Domain.Entities;
+using Alabo.Industry.Offline.Order.ViewModels;
+using MongoDB.Bson;
 
-namespace Alabo.App.Offline.Order.Domain.Services
+namespace Alabo.Industry.Offline.Order.Domain.Services
 {
     public interface IMerchantCartService : IService<MerchantCart, ObjectId>
     {

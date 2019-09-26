@@ -2,26 +2,23 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using Alabo.App.Cms.Articles.Domain.CallBacks;
-using Alabo.App.Cms.Articles.Domain.Entities;
-using Alabo.App.Cms.Articles.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Relations.Domain.Services;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Industry.Cms.Articles.Domain.CallBacks;
+using Alabo.Industry.Cms.Articles.Domain.Entities;
+using Alabo.Industry.Cms.Articles.Domain.Services;
 using Alabo.Mapping;
 using Alabo.Maps;
-using Alabo.UI;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Cms.Articles.UI.AutoForm
+namespace Alabo.Industry.Cms.Articles.UI.AutoForm
 {
     [ClassProperty(Name = "文章", GroupName = "基本设置,详细内容,搜索引擎优化,其他选项", Icon = "fa fa-puzzle-piece", SideBarType = SideBarType.ArticleSideBarSideBar)]
     public class ArticleAutoForm : UIBase, IAutoForm

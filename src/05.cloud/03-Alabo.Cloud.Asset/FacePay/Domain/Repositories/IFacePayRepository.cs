@@ -1,12 +1,7 @@
-using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
 using Alabo.Domains.Repositories;
-using Alabo.App.Market.FacePay.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.FacePay.Domain.Repositories {
+namespace Alabo.Cloud.Asset.FacePay.Domain.Repositories {
 
     public interface IFacePayRepository : IRepository<Entities.FacePay, ObjectId> {
     }

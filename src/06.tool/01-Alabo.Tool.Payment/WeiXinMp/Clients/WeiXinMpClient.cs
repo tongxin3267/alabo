@@ -1,13 +1,12 @@
-﻿using Senparc.Weixin.MP.CommonAPIs;
-using Senparc.Weixin.MP.Entities;
-using System;
-using Alabo.App.Core.ApiStore.CallBacks;
+﻿using System;
 using Alabo.Domains.Base.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Helpers;
+using Senparc.Weixin.MP.CommonAPIs;
+using Senparc.Weixin.MP.Entities;
 
-namespace Alabo.App.Core.ApiStore.WeiXinMp.Clients {
+namespace Alabo.Tool.Payment.WeiXinMp.Clients {
 
     /// <summary>
     ///

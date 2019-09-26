@@ -9,7 +9,7 @@ using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using Alabo.Web.Validations;
 
-namespace Alabo.App.Shop.Order.ViewModels {
+namespace Alabo.Cloud.Shop.ShopSaleReport.Dtos {
 
     /// <summary>
     ///     直推会员等级报表

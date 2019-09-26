@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using MongoDB.Bson;
-using Alabo.App.Shop.Coupons.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.App.Shop.Product.Domain.Dtos;
+﻿using System.Collections.Generic;
+using Alabo.App.Asset.Coupons.Domain.Entities;
 using Alabo.Domains.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using Alabo.Industry.Shop.Products.Dtos;
 
-namespace Alabo.App.Shop.Store.Domain.Dtos {
+namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos {
 
     /// <summary>
     ///     店铺对象

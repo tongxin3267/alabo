@@ -1,16 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using MongoDB.Bson.Serialization.Attributes;
-using Alabo.App.Offline.Order.Domain.Entities.Extensions;
-using Alabo.App.Offline.Order.Domain.Enums;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Industry.Offline.Order.Domain.Entities.Extensions;
+using Alabo.Industry.Offline.Order.Domain.Enums;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.App.Offline.Order.Domain.Entities
+namespace Alabo.Industry.Offline.Order.Domain.Entities
 {
     /// <summary>
     /// 订单

@@ -1,14 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.Framework.Core.WebApis.Controller;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Shop.Activitys.Modules.MemberDiscount.Controller
+namespace Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Controller
 {
     /// <summary>
     /// 预售API

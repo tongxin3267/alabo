@@ -1,7 +1,6 @@
-﻿using Alabo.App.Core.Finance.Domain.Enums;
-using System;
+﻿using System;
 
-namespace Alabo.App.Core.ApiStore {
+namespace Alabo.Tool.Payment {
 
     /// <summary>
     ///     运行的终端类型

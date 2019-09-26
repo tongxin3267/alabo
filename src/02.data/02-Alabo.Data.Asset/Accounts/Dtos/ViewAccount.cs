@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Regexs;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Finance.ViewModels.Account {
+namespace Alabo.App.Asset.Accounts.Dtos {
 
     /// <summary>
     ///     Class ViewAccount.

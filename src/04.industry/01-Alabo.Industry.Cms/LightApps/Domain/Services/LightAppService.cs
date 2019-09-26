@@ -1,6 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Driver;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Alabo.Datas.Queries.Enums;
@@ -10,8 +8,10 @@ using Alabo.Domains.Query.Dto;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Mapping;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
-namespace Alabo.App.Core.LightApps.Domain.Services {
+namespace Alabo.Industry.Cms.LightApps.Domain.Services {
 #pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
 
     public class LightAppService : ServiceBase, ILightAppService {

@@ -1,13 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;using MongoDB.Bson.Serialization.Attributes;
-using Alabo.App.Market.DataBackup.Domain.Enums;
-using Alabo.Framework.Core.WebUis;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using _01_Alabo.Cloud.Core.DataBackup.Domain.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.Model;
-using Alabo.UI;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Market.DataBackup.Domain.Entities {
+namespace _01_Alabo.Cloud.Core.DataBackup.Domain.Entities {
 
     /// <summary>
     ///     备份还原

@@ -1,11 +1,9 @@
-﻿using Alabo.App.Core.User;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Market.Relationship.Domain.Services;
+﻿using Alabo.Cloud.People.Relationship.Domain.Services;
 using Alabo.Framework.Core.Reflections.Interfaces;
 using Alabo.Helpers;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Market.Relationship {
+namespace Alabo.Cloud.People.Relationship {
 
     /// <summary>
     ///     更新会员关系网

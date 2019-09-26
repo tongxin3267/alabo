@@ -1,11 +1,12 @@
-﻿using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.Framework.Core.Enums.Enum;
+﻿using Alabo.App.Asset.Accounts.Domain.Entities;
+using Alabo.App.Asset.Bills.Domain.Entities;
+using Alabo.App.Asset.Transfers.Domain.Configs;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+using Alabo.Framework.Core.Enums.Enum;
 
-namespace Alabo.App.Core.Finance.Domain.Services {
+namespace Alabo.App.Asset.Bills.Domain.Services {
 
     /// <summary>
     ///     财务记录

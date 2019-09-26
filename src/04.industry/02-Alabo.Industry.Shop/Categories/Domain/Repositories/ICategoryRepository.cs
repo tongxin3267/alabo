@@ -1,9 +1,9 @@
 ﻿using System;
 using Alabo.Domains.Repositories;
-using CategoryModel = Alabo.App.Shop.Category.Domain.Entities.Category;
+using Alabo.Industry.Shop.Categories.Domain.Entities;
 
-namespace Alabo.App.Shop.Category.Domain.Repositories {
+namespace Alabo.Industry.Shop.Categories.Domain.Repositories {
 
-    public interface ICategoryRepository : IRepository<CategoryModel, Guid> {
+    public interface ICategoryRepository : IRepository<Category, Guid> {
     }
 }

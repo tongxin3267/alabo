@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.Activitys.Domain.Enum;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities.Extensions;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Industry.Shop.Activitys.Domain.Enum;
 
-namespace Alabo.App.Shop.Activitys.Domain.Entities.Extension {
+namespace Alabo.Industry.Shop.Activitys.Domain.Entities.Extension {
 
     /// <summary>
     ///     活动

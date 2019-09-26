@@ -2,7 +2,7 @@
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 
-namespace Alabo.App.Shop.Category.Domain.Repositories {
+namespace Alabo.Industry.Shop.Categories.Domain.Repositories {
 
     public class CategoryRepository : RepositoryEfCore<Entities.Category, Guid>, ICategoryRepository {
 

@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Datas.Ef.SqlServer;
@@ -9,8 +7,10 @@ using Alabo.Domains.Enums;
 using Alabo.Tenants;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.App.Shop.Category.Domain.Entities {
+namespace Alabo.Industry.Shop.Categories.Domain.Entities {
 
     /// <summary>
     ///     类目

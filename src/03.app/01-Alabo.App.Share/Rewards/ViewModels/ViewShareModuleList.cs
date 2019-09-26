@@ -1,9 +1,8 @@
-﻿using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Open.Tasks.Base;
-using System;
+﻿using System;
+using Alabo.App.Share.OpenTasks.Base;
 using Alabo.Framework.Core.Enums.Enum;
 
-namespace Alabo.App.Share.Share.ViewModels {
+namespace Alabo.App.Share.Rewards.ViewModels {
 
     public class ViewShareModuleList {
         public long Id { get; set; }

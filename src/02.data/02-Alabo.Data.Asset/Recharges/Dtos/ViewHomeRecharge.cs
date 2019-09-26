@@ -1,15 +1,14 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Domains.Entities;
+using Alabo.App.Asset.Recharges.Domain.Enums;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.Finance.ViewModels.Recharge {
+namespace Alabo.App.Asset.Recharges.Dtos {
 
     /// <summary>
     ///     Class ViewHomeRecharge.

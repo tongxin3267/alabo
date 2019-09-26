@@ -1,8 +1,8 @@
-﻿using MongoDB.Bson;
-using Alabo.App.Cms.Articles.Domain.Entities;
-using Alabo.Domains.Services;
+﻿using Alabo.Domains.Services;
+using Alabo.Industry.Cms.Articles.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Cms.Articles.Domain.Services {
+namespace Alabo.Industry.Cms.Articles.Domain.Services {
 
     public interface IAboutService : IService<About, ObjectId> {
 

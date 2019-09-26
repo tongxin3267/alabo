@@ -1,8 +1,8 @@
-﻿using Alabo.App.Core.Tasks.Extensions;
-using Alabo.Helpers;
-using System;
+﻿using System;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Framework.Tasks.Queues.Models;
 
-namespace Alabo.App.Core.Tasks.ResultModel {
+namespace Alabo.Data.Things.Orders.ResultModel {
 
     /// <summary>
     ///     资产变化结果

@@ -1,21 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
+using Alabo.Cloud.Shop.SuccessfulCases.Domains.Entities;
+using Alabo.Cloud.Shop.SuccessfulCases.Domains.Services;
+using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Market.SuccessfulCases.Domains.Entities;
-using Alabo.App.Market.SuccessfulCases.Domains.Services;
-using Alabo.App.Market.TeamIntro.Domain.Services;
 using Alabo.Framework.Core.WebApis.Service;
-using Alabo.Extensions;
-using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.RestfulApi;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Market.SuccessfulCases.Controllers {
+namespace Alabo.Cloud.Shop.SuccessfulCases.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/Cases/[action]")]

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Core.Themes.Domain.Entities;
 using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Themes.Domain.Entities;
 using MongoDB.Bson;
 
 namespace Alabo.Data.People.Employes.Dtos {

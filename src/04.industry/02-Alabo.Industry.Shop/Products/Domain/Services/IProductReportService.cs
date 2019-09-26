@@ -1,8 +1,8 @@
-﻿using Alabo.App.Shop.Product.Domain.Dtos;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Industry.Shop.Products.Dtos;
 
-namespace Alabo.App.Shop.Product.Domain.Services {
+namespace Alabo.Industry.Shop.Products.Domain.Services {
 
     /// <summary>
     ///     商品统计服务

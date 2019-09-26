@@ -1,11 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Validations;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.Transfer {
+namespace Alabo.App.Asset.Transfers.Dtos {
 
     public class TransferApiInput : ApiInputDto {
 

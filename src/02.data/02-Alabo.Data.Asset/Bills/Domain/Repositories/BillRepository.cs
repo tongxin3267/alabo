@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using Alabo.App.Core.Finance.Domain.Dtos.Bill;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.Framework.Core.Enums.Enum;
+using Alabo.App.Asset.Accounts.Domain.Entities;
+using Alabo.App.Asset.Bills.Domain.Entities;
+using Alabo.App.Asset.Bills.Dtos;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Repositories.Extensions;
 using Alabo.Extensions;
+using Alabo.Framework.Core.Enums.Enum;
 
-namespace Alabo.App.Core.Finance.Domain.Repositories {
+namespace Alabo.App.Asset.Bills.Domain.Repositories {
 
     public class BillRepository : RepositoryEfCore<Bill, long>, IBillRepository {
 

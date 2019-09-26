@@ -1,8 +1,8 @@
-using MongoDB.Bson;
-using Alabo.App.Share.Share.Domain.Entities;
+using Alabo.App.Share.RewardRuless.Domain.Entities;
 using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Share.Share.Domain.Repositories {
+namespace Alabo.App.Share.RewardRuless.Domain.Repositories {
 
     public interface IRewardRuleRepository : IRepository<RewardRule, ObjectId> {
     }

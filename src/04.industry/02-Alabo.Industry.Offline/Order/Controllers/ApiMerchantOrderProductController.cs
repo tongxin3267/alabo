@@ -1,12 +1,10 @@
-using Microsoft.AspNetCore.Mvc;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Offline.Order.Domain.Entities;
-using Alabo.App.Offline.Order.Domain.Services;
-using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.RestfulApi;
+using Alabo.Industry.Offline.Order.Domain.Entities;
+using Alabo.Industry.Offline.Order.Domain.Services;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Alabo.App.Offline.Order.Controllers
+namespace Alabo.Industry.Offline.Order.Controllers
 {
     [ApiExceptionFilter]
     [Route("Api/MerchantOrderProduct/[action]")]

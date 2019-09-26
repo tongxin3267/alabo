@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Offline.Order.ViewModels
+namespace Alabo.Industry.Offline.Order.ViewModels
 {
     /// <summary>
     /// MerchantCartViewModel

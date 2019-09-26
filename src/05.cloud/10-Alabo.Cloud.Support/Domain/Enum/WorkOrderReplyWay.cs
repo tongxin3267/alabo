@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Cms.Support.Domain.Enum {
+namespace Alabo.Cloud.Support.Domain.Enum {
 
     /// <summary>
     ///     工单回复方式

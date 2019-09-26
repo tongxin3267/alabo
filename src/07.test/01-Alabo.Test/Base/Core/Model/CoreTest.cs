@@ -1,5 +1,4 @@
-﻿using Alabo.App.Core.ApiStore;
-using Alabo.Apps;
+﻿using Alabo.Apps;
 using Alabo.Datas.Ef;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Datas.UnitOfWorks.SqlServer;
@@ -16,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using Alabo.Framework.Core.WebApis;
+using Alabo.Tool.Payment;
 
 namespace Alabo.Test.Base.Core.Model {
 

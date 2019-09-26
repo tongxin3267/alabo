@@ -1,4 +1,4 @@
-﻿namespace Alabo.App.Shop.Activitys.Modules.ProductNumberLimit.Dtos
+﻿namespace Alabo.Industry.Shop.Activitys.Modules.ProductNumberLimit.Dtos
 {
     /// <summary>
     /// ProductCount

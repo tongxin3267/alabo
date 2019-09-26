@@ -2,7 +2,7 @@
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.Recharge {
+namespace Alabo.App.Asset.Recharges.Dtos {
 
     [ClassProperty(Name = "充值", Icon = "fa fa-puzzle-piece", ListApi = "Api/RechargeApi/GetList",
        PageType = ViewPageType.List, PostApi = "Api/RechargeApi/GetList")]

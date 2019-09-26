@@ -1,19 +1,15 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using MongoDB.Bson.Serialization.Attributes;
-
-using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Market.UserRightss.Domain.CallBack
+namespace Alabo.Cloud.People.UserRightss.Domain.CallBack
 {
 
     /// <summary>

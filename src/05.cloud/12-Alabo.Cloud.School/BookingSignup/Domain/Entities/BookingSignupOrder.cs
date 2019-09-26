@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using Alabo.Framework.Core.WebUis;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.UI;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Market.BookingSignup.Domain.Entities {
+namespace Alabo.Cloud.School.BookingSignup.Domain.Entities {
 
     [BsonIgnoreExtraElements]
     [Table("BookingSignup_BookingSignupOrder")]

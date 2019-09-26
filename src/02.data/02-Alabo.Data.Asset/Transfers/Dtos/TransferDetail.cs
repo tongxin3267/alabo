@@ -1,4 +1,4 @@
-﻿namespace Alabo.App.Core.Finance.Domain.Dtos.Transfer {
+﻿namespace Alabo.App.Asset.Transfers.Dtos {
 
     public class TransferDetail {
 

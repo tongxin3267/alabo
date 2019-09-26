@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Tasks.Domain.Enums {
+namespace Alabo.Framework.Tasks.Queues.Domain.Enums {
 
     [ClassProperty(Name = "任务执行周期")]
     public enum TaskQueueType {

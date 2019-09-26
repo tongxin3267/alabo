@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace Alabo.App.Offline.Order.Domain.Dtos
+namespace Alabo.Industry.Offline.Order.Domain.Dtos
 {
     /// <summary>
     /// MerchantOrderBuyOutput

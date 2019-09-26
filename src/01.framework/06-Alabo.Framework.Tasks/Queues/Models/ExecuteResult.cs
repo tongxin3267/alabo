@@ -1,7 +1,7 @@
 ﻿using System;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Tasks.ResultModel {
+namespace Alabo.Framework.Tasks.Queues.Models {
 
     public class ExecuteResult {
 

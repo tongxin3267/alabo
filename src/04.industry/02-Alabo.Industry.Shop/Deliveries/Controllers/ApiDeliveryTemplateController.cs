@@ -1,25 +1,15 @@
 using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using Alabo.Domains.Entities;
-using Microsoft.AspNetCore.Mvc;
-using Alabo.Framework.Core.WebApis.Filter;
-
-using MongoDB.Bson;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.RestfulApi;
-using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.Domains.Services;
-using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.Controllers;
-using Alabo.App.Shop.Store.Domain.Entities;
-using Alabo.App.Shop.Store.Domain.Services;
-using ZKCloud.Open.ApiBase.Models;
 using System.Collections.Generic;
-using Alabo.App.Shop.Product.Domain.Services;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Industry.Shop.Deliveries.Domain.Entities;
+using Alabo.Industry.Shop.Deliveries.Domain.Services;
+using Alabo.Industry.Shop.Products.Domain.Services;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
+using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Shop.Store.Controllers
+namespace Alabo.Industry.Shop.Deliveries.Controllers
 {
 
     [ApiExceptionFilter]

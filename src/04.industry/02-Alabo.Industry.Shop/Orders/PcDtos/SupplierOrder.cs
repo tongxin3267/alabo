@@ -1,24 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.App.Shop.Order.Domain.Services;
-using Alabo.App.Shop.Store.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebApis.Service;
-using Alabo.Framework.Core.WebUis.Design.AutoLists;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Exceptions;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Framework.Core.WebUis.Design.AutoLists;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Helpers;
-using Alabo.Mapping;
-using Alabo.UI;
-using Alabo.Web.Mvc.Attributes;
+using Alabo.Industry.Shop.Deliveries.Domain.Services;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using Alabo.Industry.Shop.Orders.Domain.Services;
 
-namespace Alabo.App.Shop.Order.Domain.PcDtos {
+namespace Alabo.Industry.Shop.Orders.PcDtos {
 
     public class SupplierOrder : BaseApiOrderList, IAutoTable<SupplierOrder>, IAutoList {
 
@@ -37,7 +33,7 @@ namespace Alabo.App.Shop.Order.Domain.PcDtos {
 
             var model = ToQuery<PlatformApiOrderList>();
 
-            var expressionQuery = new ExpressionQuery<Entities.Order>();
+            var expressionQuery = new ExpressionQuery<Order>();
             if (model.OrderStatus > 0) {
                 expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
                 //expressionQuery.And(e => e.OrderStatus != OrderStatus.WaitingBuyerPay);
@@ -73,7 +69,7 @@ namespace Alabo.App.Shop.Order.Domain.PcDtos {
             dic = dic.RemoveKey("filter");
             // var model = ToQuery<SupplierOrder>();
             var model = dic.ToJson().ToObject<SupplierOrder>();
-            var expressionQuery = new ExpressionQuery<Entities.Order> {
+            var expressionQuery = new ExpressionQuery<Order> {
                 PageIndex = 1,
                 EnablePaging = true
             };

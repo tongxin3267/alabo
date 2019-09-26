@@ -1,11 +1,13 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using Alabo.App.Share.TaskExecutes.Domain.Services;
+using Alabo.App.Share.TaskExecutes.Extensions;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Framework.Tasks.Queues.Domain.Servcies;
+using Alabo.Framework.Tasks.Queues.Models;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
-using System;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Core.Tasks.Extensions;
-using Alabo.App.Core.Tasks.ResultModel;
 
-namespace Alabo.App.Core.Tasks {
+namespace Alabo.App.Share.TaskExecutes {
 
     /// <summary>
     ///     Class TaskExtensions.

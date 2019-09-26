@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using MongoDB.Bson;
-using Newtonsoft.Json;
 using Alabo.Domains.Entities.Extensions;
-using Alabo.Domains.Repositories.Mongo.Extension;
 
-namespace Alabo.App.Shop.Product.Domain.Entities.Extensions {
+namespace Alabo.Industry.Shop.Products.Domain.Entities.Extensions {
 
     /// <summary>
     ///     商品扩展详情

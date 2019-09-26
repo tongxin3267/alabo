@@ -1,17 +1,10 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Hosting;
-using Quartz;
-using Alabo.App.Shop.Order.Domain.Services;
-using Alabo.Datas.UnitOfWorks;
+﻿using System.Threading.Tasks;
 using Alabo.Dependency;
-using Alabo.Schedules;
-using Alabo.Schedules.Enum;
+using Alabo.Industry.Shop.Orders.Domain.Services;
 using Alabo.Schedules.Job;
+using Quartz;
 
-namespace Alabo.App.Shop.Product.Schedules {
+namespace Alabo.Industry.Shop.Products.Schedules {
 
     /// <summary>
     /// 商品库存更改

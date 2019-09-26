@@ -1,13 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.AutoConfigs;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Finance.Domain.CallBacks {
+namespace Alabo.App.Asset.Recharges.Domain.Configs {
 
     [ClassProperty(Name = "收款银行设置", Icon = "fa fa-external-link", Description = "收款设置", SortOrder = 23,
         SideBarType = SideBarType.RechargeSideBar)]

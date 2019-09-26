@@ -1,19 +1,18 @@
-using MongoDB.Bson;
-using System;
-using Alabo.App.Core.Themes.Clients;
-using Alabo.App.Core.Themes.Domain.Entities;
-using Alabo.App.Core.Themes.Dtos;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Themes.Clients;
+using Alabo.Framework.Themes.Domain.Entities;
+using Alabo.Framework.Themes.Dtos;
 using Alabo.Helpers;
+using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Configuration;
 using ZKCloud.Open.ApiBase.Services;
 
-namespace Alabo.App.Core.Themes.Domain.Services {
+namespace Alabo.Framework.Themes.Domain.Services {
 
     public class ThemeService : ServiceBase<Theme, ObjectId>, IThemeService {
         private RestClientConfiguration _restClientConfiugration;

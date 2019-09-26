@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Industry.Shop.Products.Domain.Entities;
+using Microsoft.AspNetCore.Http;
 
-namespace Alabo.App.Shop.Category.Domain.Services {
+namespace Alabo.Industry.Shop.Categories.Domain.Services {
 
     public interface ICategoryService : IService<Entities.Category, Guid> {
 
@@ -19,7 +20,7 @@ namespace Alabo.App.Shop.Category.Domain.Services {
         /// </summary>
         /// <param name="product"></param>
         /// <param name="request"></param>
-        string AddOrUpdateOrDeleteProductCategoryData(Product.Domain.Entities.Product product, HttpRequest request);
+        string AddOrUpdateOrDeleteProductCategoryData(Product product, HttpRequest request);
 
         Tuple<ServiceResult, Entities.Category> Delete(Guid id);
     }

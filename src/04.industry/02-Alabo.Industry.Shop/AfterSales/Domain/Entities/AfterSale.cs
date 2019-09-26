@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using Alabo.App.Shop.AfterSales.Domain.Enums;
 using Alabo.Domains.Entities;
+using Alabo.Industry.Shop.AfterSales.Domain.Enums;
 
-namespace Alabo.App.Shop.AfterSale.Domain.Entities
+namespace Alabo.Industry.Shop.AfterSales.Domain.Entities
 {
     /// <summary>
     /// 售后，订单完成以后开始

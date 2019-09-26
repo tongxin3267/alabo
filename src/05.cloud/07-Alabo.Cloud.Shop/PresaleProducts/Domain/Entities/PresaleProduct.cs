@@ -1,15 +1,10 @@
 ﻿using System;
-using Alabo.Domains.Entities;
-using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Datas.Ef.SqlServer;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
-using Alabo.Domains.Enums;
-using Alabo.Tenants;
+using Alabo.Domains.Entities;
+using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Market.PresaleProducts.Domain.Entities {
+namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Entities {
 
     /// <summary>
     /// 预售产品

@@ -1,9 +1,9 @@
 ﻿using System;
-using Alabo.App.Shop.Category.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
+using Alabo.Industry.Shop.Categories.Domain.Entities;
 
-namespace Alabo.App.Shop.Category.Domain.Repositories {
+namespace Alabo.Industry.Shop.Categories.Domain.Repositories {
 
     public class CategoryPropertyRepository : RepositoryEfCore<CategoryProperty, Guid>, ICategoryPropertyRepository {
 

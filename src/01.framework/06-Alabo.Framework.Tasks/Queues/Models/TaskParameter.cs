@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Alabo.App.Core.Tasks.ResultModel {
+namespace Alabo.Framework.Tasks.Queues.Models {
 
     public class TaskParameter {
         private readonly IDictionary<string, object> _dataCache = new Dictionary<string, object>();

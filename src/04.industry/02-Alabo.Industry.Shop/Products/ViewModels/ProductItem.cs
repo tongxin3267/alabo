@@ -1,12 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Datas.Queries.Enums;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Product.ViewModels {
+namespace Alabo.Industry.Shop.Products.ViewModels {
 
     /// <summary>
     ///     商品单元，用于商品列表页展示，商品首页展示

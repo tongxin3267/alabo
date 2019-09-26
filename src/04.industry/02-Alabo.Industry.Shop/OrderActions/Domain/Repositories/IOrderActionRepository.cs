@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Order.Domain.Entities;
 using Alabo.Domains.Repositories;
+using Alabo.Industry.Shop.OrderActions.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Dtos;
 
-namespace Alabo.App.Shop.Order.Domain.Repositories {
+namespace Alabo.Industry.Shop.OrderActions.Domain.Repositories {
 
     public interface IOrderActionRepository : IRepository<OrderAction, long> {
 

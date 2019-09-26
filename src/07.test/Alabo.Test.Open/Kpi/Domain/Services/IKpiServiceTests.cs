@@ -1,9 +1,9 @@
-using Alabo.App.Share.Kpi.Domain.Services;
 using Alabo.Domains.Enums;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
 using System;
 using System.Collections.Generic;
+using Alabo.App.Kpis.Kpis.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Randoms;
 using Xunit;
@@ -18,10 +18,10 @@ namespace Alabo.Test.Open.Kpi.Domain.Services {
             var result = Resolve<IKpiService>().Delete(r => r.ModuleId == TestModuleId);
         }
 
-        private App.Share.Kpi.Domain.Entities.Kpi GetSingleKpi(DateTime dateTime, TimeType timeType) {
+        private App.Kpis.Kpis.Domain.Entities.Kpi GetSingleKpi(DateTime dateTime, TimeType timeType) {
             var user = Resolve<IUserService>().GetSingle("admin");
 
-            var kpi = new App.Share.Kpi.Domain.Entities.Kpi {
+            var kpi = new App.Kpis.Kpis.Domain.Entities.Kpi {
                 EntityId = TestEntityId,
                 ModuleId = TestModuleId,
                 UserId = user.Id,
@@ -45,7 +45,7 @@ namespace Alabo.Test.Open.Kpi.Domain.Services {
 
         [Fact]
         public void AddTestModule() {
-            var list = new List<App.Share.Kpi.Domain.Entities.Kpi>();
+            var list = new List<App.Kpis.Kpis.Domain.Entities.Kpi>();
             for (var i = 0; i < 10; i++) {
                 var index = RandomHelper.Number(1, 400);
                 var kpi = GetSingleKpi(DateTime.Now.AddDays(-index), TimeType.HalfYear);
@@ -91,7 +91,7 @@ namespace Alabo.Test.Open.Kpi.Domain.Services {
         [TestMethod("GetLastSingle_StageType_Int64_Guid")]
         public void GetLastSingle_StageType_Int64_Guid_test() {
             var user = Resolve<IUserService>().GetSingle("admin");
-            var kpi = new App.Share.Kpi.Domain.Entities.Kpi {
+            var kpi = new App.Kpis.Kpis.Domain.Entities.Kpi {
                 EntityId = TestEntityId,
                 ModuleId = TestModuleId,
                 UserId = user.Id,

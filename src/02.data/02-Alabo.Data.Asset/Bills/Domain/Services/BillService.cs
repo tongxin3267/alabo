@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Linq;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Repositories;
-using Alabo.App.Core.Finance.ViewModels.Bill;
-using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Services;
+using Alabo.App.Asset.Accounts.Domain.Entities;
+using Alabo.App.Asset.Accounts.Domain.Services;
+using Alabo.App.Asset.Bills.Domain.Entities;
+using Alabo.App.Asset.Bills.Domain.Repositories;
+using Alabo.App.Asset.Bills.Dtos;
+using Alabo.App.Asset.Transfers.Domain.Configs;
 using Alabo.Data.People.Users;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -17,9 +16,12 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Tasks.Queues.Domain.Entities;
+using Alabo.Framework.Tasks.Queues.Domain.Servcies;
 using Alabo.Schedules;
 
-namespace Alabo.App.Core.Finance.Domain.Services {
+namespace Alabo.App.Asset.Bills.Domain.Services {
 
     /// <summary>
     /// </summary>

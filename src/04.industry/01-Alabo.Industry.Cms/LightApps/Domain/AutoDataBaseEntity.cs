@@ -1,15 +1,14 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Core.LightApps.Domain {
+namespace Alabo.Industry.Cms.LightApps.Domain {
 
     /// <summary>
     /// 表明统一以AutoData_开头

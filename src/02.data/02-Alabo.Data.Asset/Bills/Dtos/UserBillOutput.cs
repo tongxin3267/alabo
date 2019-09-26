@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Core.Finance.Domain.Services;
+using Alabo.App.Asset.Bills.Domain.Services;
+using Alabo.Domains.Entities;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoLists;
-using Alabo.Domains.Entities;
-using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Finance.ViewModels.Bill {
+namespace Alabo.App.Asset.Bills.Dtos {
 
     /// <summary>
     /// 用户财务详情

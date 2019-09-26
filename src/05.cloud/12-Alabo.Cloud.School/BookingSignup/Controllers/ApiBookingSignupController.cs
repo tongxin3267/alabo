@@ -1,30 +1,30 @@
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.ApiStore.CallBacks;
-using Alabo.App.Core.Finance.Domain.Dtos.Pay;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Market.BookingSignup.Domain.Entities;
-using Alabo.App.Market.BookingSignup.Domain.Services;
-using Alabo.App.Market.BookingSignup.Dtos;
-using Alabo.Domains.Enums;
-using Alabo.Extensions;
-using Alabo.Helpers;
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using Alabo.App.Asset.Pays.Domain.Services;
+using Alabo.App.Asset.Pays.Dtos;
+using Alabo.Cloud.School.BookingSignup.Domain.Entities;
+using Alabo.Cloud.School.BookingSignup.Domain.Services;
+using Alabo.Cloud.School.BookingSignup.Dtos;
 using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Domains.Enums;
+using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Helpers;
+using Alabo.Tool.Payment;
+using Alabo.Tool.Payment.CallBacks;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 using ZKCloud.Open.ApiStore.Payment.Modules.Alipay;
 using ZKCloud.Open.ApiStore.Payment.Modules.Alipay.Notify;
 using ZKCloud.Open.ApiStore.Payment.Modules.WeChatPay;
 using ZKCloud.Open.ApiStore.Payment.Modules.WeChatPay.Notify;
 
-namespace Alabo.App.Market.BookingSignup.Controllers {
+namespace Alabo.Cloud.School.BookingSignup.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/BookingSignup/[action]")]
@@ -88,11 +88,11 @@ namespace Alabo.App.Market.BookingSignup.Controllers {
             //};
             //Resolve<IBookingSignupOrderService>().Log("活动预约,支付宝回调唤起",LogsLevel.Success);
             try {
-                var config = Ioc.Resolve<IAutoConfigService>().GetValue<Alabo.App.Core.ApiStore.CallBacks.AlipayPaymentConfig>();
+                var config = Ioc.Resolve<IAutoConfigService>().GetValue<AlipayPaymentConfig>();
                 var _client = new AlipayNotifyClient("RSA2", config.RsaAlipayPublicKey);
 
                 var notify = _client.Execute<AlipayTradeWapPayNotifyResponse>(Request);
-                var aliPayConfig = Resolve<IAutoConfigService>().GetValue<Alabo.App.Core.ApiStore.CallBacks.AlipayPaymentConfig>();
+                var aliPayConfig = Resolve<IAutoConfigService>().GetValue<AlipayPaymentConfig>();
 
                 // 返回的商户号要与配置中的相同
                 if (aliPayConfig.AppId == notify.AppId) {

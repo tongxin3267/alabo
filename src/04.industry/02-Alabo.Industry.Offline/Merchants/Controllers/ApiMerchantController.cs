@@ -1,11 +1,11 @@
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Offline.Merchants.Domain.Entities;
-using Alabo.App.Offline.Merchants.Domain.Services;
+using Alabo.Industry.Offline.Merchants.Domain.Entities;
+using Alabo.Industry.Offline.Merchants.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
-namespace Alabo.App.Offline.Merchants.Controllers {
+namespace Alabo.Industry.Offline.Merchants.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/Merchant/[action]")]

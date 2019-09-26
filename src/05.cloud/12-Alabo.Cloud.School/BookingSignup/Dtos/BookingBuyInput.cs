@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using MongoDB.Bson;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.App.Market.BookingSignup.Domain.Entities;
-using Alabo.Domains.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+using Alabo.Tool.Payment;
 using Alabo.Validations;
 
-namespace Alabo.App.Market.BookingSignup.Dtos {
+namespace Alabo.Cloud.School.BookingSignup.Dtos {
 
     public class BookingBuyInput {
 

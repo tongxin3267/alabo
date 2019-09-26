@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.App.Shop.Product.ViewModels;
+using Alabo.App.Asset.Accounts.Domain.Entities;
+using Alabo.App.Asset.Pays.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using Alabo.Industry.Shop.Products.ViewModels;
 
-namespace Alabo.App.Shop.Order.ViewModels {
+namespace Alabo.Industry.Shop.Orders.ViewModels {
 
     public class ViewBuyOrder {
 

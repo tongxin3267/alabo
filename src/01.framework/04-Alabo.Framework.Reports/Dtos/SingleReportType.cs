@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.Reports.Domain.Dtos {
+namespace Alabo.Framework.Reports.Dtos {
 
     /// <summary>
     /// 单个数据统计动作

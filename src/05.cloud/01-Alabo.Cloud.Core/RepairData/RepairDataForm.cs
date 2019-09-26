@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using Alabo.App.Core.Admin;
-using Alabo.Cloud.Core.Truncate;
 using Alabo.Framework.Core.Reflections.Interfaces;
 using Alabo.Framework.Core.Reflections.Services;
 using Alabo.Framework.Core.WebApis;

@@ -1,18 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.App.Core.Finance.Domain.Services;
+using Alabo.Domains.Enums;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoPreviews;
-using Alabo.Domains.Enums;
-using Alabo.Extensions;
-using Alabo.Mapping;
-using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Finance.UI.AutoForm {
+namespace Alabo.App.Asset.Withdraws.UI {
 
     public class WithdrawViewOutput : UIBase, IAutoPreview {
 

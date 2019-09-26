@@ -1,13 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;using MongoDB.Bson.Serialization.Attributes;
-
+using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Shop.Store.Domain.CallBacks {
+namespace Alabo.Industry.Shop.Deliveries.Domain.CallBacks {
 
     [NotMapped]
     [ClassProperty(Name = "商品配送配置", GroupName = "商品配送配置", Icon = "fa fa-cloud-upload", Description = "商品图片上传",

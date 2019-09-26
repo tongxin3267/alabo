@@ -1,15 +1,7 @@
-﻿using Alabo.App.Shop.Activitys.Modules.GroupBuy.Model;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Product.Domain.Dtos;
-using Alabo.App.Shop.Product.Domain.Repositories;
-using Alabo.App.Shop.Product.Domain.Services;
-using Alabo.App.Shop.Store.Domain.Dtos;
-using Alabo.App.Shop.Store.Domain.Entities;
-using Alabo.App.Shop.Store.Domain.Entities.Extensions;
-using Alabo.App.Shop.Store.Domain.Enums;
-using Alabo.App.Shop.Store.Domain.Repositories;
-using Alabo.App.Shop.Store.ViewModels;
-using Alabo.Framework.Core.Enums.Enum;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -18,16 +10,24 @@ using Alabo.Domains.Query.Dto;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.Address.Domain.Entities;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Model;
+using Alabo.Industry.Shop.Deliveries.Domain.Dtos;
+using Alabo.Industry.Shop.Deliveries.Domain.Entities;
+using Alabo.Industry.Shop.Deliveries.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.Deliveries.Domain.Enums;
+using Alabo.Industry.Shop.Deliveries.Domain.Repositories;
+using Alabo.Industry.Shop.Deliveries.ViewModels;
+using Alabo.Industry.Shop.Orders.Dtos;
+using Alabo.Industry.Shop.Products.Domain.Repositories;
+using Alabo.Industry.Shop.Products.Domain.Services;
+using Alabo.Industry.Shop.Products.Dtos;
 using Alabo.Mapping;
 using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Framework.Basic.Address.Domain.Entities;
-using Alabo.Framework.Core.WebApis.Service;
 
-namespace Alabo.App.Shop.Store.Domain.Services {
+namespace Alabo.Industry.Shop.Deliveries.Domain.Services {
 
     /// <summary>
     /// </summary>

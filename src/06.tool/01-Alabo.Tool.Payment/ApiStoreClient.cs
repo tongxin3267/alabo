@@ -7,7 +7,7 @@ using ZKCloud.Open.ApiBase.Connectors;
 using ZKCloud.Open.ApiBase.Formatters;
 using ZKCloud.Open.DiyClient;
 
-namespace Alabo.App.Core.ApiStore {
+namespace Alabo.Tool.Payment {
 
     public abstract class ApiStoreClient : RestClientBase, IApiStoreClient {
 

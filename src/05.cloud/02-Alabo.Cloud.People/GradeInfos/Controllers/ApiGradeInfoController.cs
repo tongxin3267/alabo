@@ -1,15 +1,15 @@
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Core.User.Domain.Services;
+using Alabo.Cloud.People.GradeInfos.Domain.Entities;
+using Alabo.Cloud.People.GradeInfos.Domain.Servcies;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.User.Controllers {
+namespace Alabo.Cloud.People.GradeInfos.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/GradeInfo/[action]")]

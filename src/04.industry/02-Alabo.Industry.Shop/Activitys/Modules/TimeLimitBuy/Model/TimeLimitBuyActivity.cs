@@ -1,18 +1,18 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.Activitys.Domain.Entities;
-using Alabo.App.Shop.Activitys.Domain.Enum;
-using Alabo.App.Shop.Activitys.Dtos;
-using Alabo.App.Shop.Activitys.Extensions;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Industry.Shop.Activitys.Domain.Entities;
+using Alabo.Industry.Shop.Activitys.Domain.Enum;
+using Alabo.Industry.Shop.Activitys.Dtos;
+using Alabo.Industry.Shop.Activitys.Extensions;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using Microsoft.AspNetCore.Http;
 
-namespace Alabo.App.Shop.Activitys.Modules.TimeLimitBuy.Model
+namespace Alabo.Industry.Shop.Activitys.Modules.TimeLimitBuy.Model
 {
     /// <summary>
     /// 限时购

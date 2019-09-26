@@ -1,7 +1,7 @@
-﻿using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.Domains.Query.Dto;
+﻿using Alabo.Domains.Query.Dto;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
 
-namespace Alabo.App.Shop.Order.Domain.Dtos {
+namespace Alabo.Industry.Shop.Orders.Dtos {
 
     public class AdminOrderInput : PagedInputDto {
 

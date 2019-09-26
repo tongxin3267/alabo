@@ -1,7 +1,7 @@
-using MongoDB.Bson;
 using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.DataBackup.Domain.Services {
+namespace _01_Alabo.Cloud.Core.DataBackup.Domain.Services {
 
     public interface IDataBackupService : IService<Entities.DataBackup, ObjectId> {
     }

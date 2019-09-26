@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Offline.Merchants.ViewModels
+namespace Alabo.Industry.Offline.Merchants.ViewModels
 {
     public class MerchantStoreViewModel
     {

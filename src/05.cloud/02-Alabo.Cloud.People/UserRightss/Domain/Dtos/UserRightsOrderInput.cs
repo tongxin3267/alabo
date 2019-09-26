@@ -1,20 +1,15 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.User;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Market.UserRightss.Domain.Entities;
-using Alabo.App.Market.UserRightss.Domain.Enums;
+using Alabo.Cloud.People.UserRightss.Domain.Entities;
+using Alabo.Cloud.People.UserRightss.Domain.Enums;
 using Alabo.Data.People.Users.Dtos;
-using Alabo.Domains.Entities;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Users.Entities;
 using Alabo.Validations;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Market.UserRightss.Domain.Dtos {
+namespace Alabo.Cloud.People.UserRightss.Domain.Dtos {
 
     public class UserRightsOrderInput {
 

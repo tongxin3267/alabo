@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using Alabo.App.Core.Finance.Domain.Entities;
+using Alabo.App.Asset.Accounts.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Repositories.Extensions;
 using Alabo.Extensions;
 
-namespace Alabo.App.Core.Finance.Domain.Repositories {
+namespace Alabo.App.Asset.Accounts.Domain.Repositories {
 
     /// <summary>
     ///     Class AccountRepository.
     /// </summary>
-    /// <seealso cref="Alabo.App.Core.Finance.Domain.Repositories.IAccountRepository" />
+    /// <seealso cref="IAccountRepository" />
     internal class AccountRepository : RepositoryEfCore<Account, long>, IAccountRepository {
 
         public AccountRepository(IUnitOfWork unitOfWork) : base(unitOfWork) {
