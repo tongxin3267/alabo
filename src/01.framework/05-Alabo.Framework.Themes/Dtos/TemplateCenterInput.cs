@@ -6,12 +6,13 @@ using Microsoft.AspNetCore.Http;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 
-namespace Alabo.Framework.Themes.Dtos.Service {
-
+namespace Alabo.Framework.Themes.Dtos.Service
+{
     /// <summary>
     ///     模板中心
     /// </summary>
-    public class TemplateCenterInput : BaseViewModel {
+    public class TemplateCenterInput : BaseViewModel
+    {
         public ClientType ClientType { get; set; }
 
         /// <summary>
