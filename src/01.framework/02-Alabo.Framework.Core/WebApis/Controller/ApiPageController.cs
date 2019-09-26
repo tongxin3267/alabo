@@ -5,7 +5,7 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Api.Controller {
+namespace Alabo.Core.WebApis.Controller {
 
     public abstract class ApiPageController<TEntity, TKey> : ApiOtherController<TEntity, TKey>
         where TEntity : class, IAggregateRoot<TEntity, TKey> {

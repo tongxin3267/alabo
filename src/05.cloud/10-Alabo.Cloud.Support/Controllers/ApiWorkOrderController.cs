@@ -5,7 +5,7 @@ using Alabo.App.Cms.Support.Domain.Dtos;
 using Alabo.App.Cms.Support.Domain.Entities;
 using Alabo.App.Cms.Support.Domain.Enum;
 using Alabo.App.Cms.Support.Domain.Services;
-using Alabo.App.Core.Api.Controller;
+using Alabo.Core.WebApis.Controller;
 using Alabo.App.Core.Api.Filter;
 using Alabo.App.Core.Common;
 using Alabo.App.Core.User;

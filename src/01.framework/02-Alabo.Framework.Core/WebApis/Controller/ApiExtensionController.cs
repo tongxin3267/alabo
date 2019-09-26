@@ -9,7 +9,7 @@ using Alabo.Users.Services;
 using Alabo.Web.Mvc.Controllers;
 using ApiResult = ZKCloud.Open.ApiBase.Models.ApiResult;
 
-namespace Alabo.App.Core.Api.Controller {
+namespace Alabo.Core.WebApis.Controller {
 
     /// <summary>
     /// 扩展

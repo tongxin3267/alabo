@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using Alabo.App.Cms.Articles.Domain.Dto;
 using Alabo.App.Cms.Articles.Domain.Services;
-using Alabo.App.Core.Api.Controller;
+using Alabo.Core.WebApis.Controller;
 using Alabo.App.Core.Api.Filter;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.Core.WebApis.Controller;

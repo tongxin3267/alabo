@@ -4,7 +4,7 @@ using Xunit;
 using Alabo.App.Agent.Citys.Domain.CallBacks;
 using Alabo.App.Cms.Articles.Controllers;
 using Alabo.App.Core.Admin.Domain.Services;
-using Alabo.App.Core.Api.Controller;
+using Alabo.Core.WebApis.Controller;
 using Alabo.App.Core.Common.Controllers;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Market.SmallTargets.Controllers;

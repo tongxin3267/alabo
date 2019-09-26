@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.Api.Controller;
+using Alabo.Core.WebApis.Controller;
 using Alabo.App.Core.Common;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.AutoConfigs;

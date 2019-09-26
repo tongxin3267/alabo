@@ -6,7 +6,7 @@ using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
 using Convert = System.Convert;
 
-namespace Alabo.App.Core.Api.Controller {
+namespace Alabo.Core.WebApis.Controller {
 
     public abstract class ApiDeleteController<TEntity, TKey> : ApiByIdController<TEntity, TKey>
         where TEntity : class, IAggregateRoot<TEntity, TKey> {

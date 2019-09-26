@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Alabo.App.Core.Api.Controller;
+using Alabo.Core.WebApis.Controller;
 using Alabo.App.Core.Api.Domain.CallBacks;
 using Alabo.App.Core.Api.Filter;
 using Alabo.AutoConfigs.Services;

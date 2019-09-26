@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Alabo.App.Core.Api.Filter;
 using Alabo.App.Core.Common;
 using MongoDB.Bson;
-using Alabo.App.Core.Api.Controller;
+using Alabo.Core.WebApis.Controller;
 using Alabo.App.Core.User;
 using Alabo.RestfulApi;
 using ZKCloud.Open.ApiBase.Configuration;

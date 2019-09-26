@@ -7,7 +7,7 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Api.Controller {
+namespace Alabo.Core.WebApis.Controller {
 
     public abstract class ApiByIdController<TEntity, TKey> : ApiBaseController
         where TEntity : class, IAggregateRoot<TEntity, TKey> {

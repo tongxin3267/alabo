@@ -1,7 +1,9 @@
-﻿using Alabo.Domains.Entities;
+﻿using Alabo.Core.WebApis.Controller;
+using Alabo.Domains.Entities;
 using Alabo.RestfulApi;
 
-namespace Alabo.App.Core.Api.Controller {
+namespace Alabo.Core.WebApis.Controller
+{
 
     /// <summary>
     ///     通用Api接口

@@ -5,7 +5,7 @@ using Alabo.Extensions;
 using Alabo.Mapping;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Api.Controller {
+namespace Alabo.Core.WebApis.Controller {
 
     public abstract class ApiSaveController<TEntity, TKey> : ApiPageController<TEntity, TKey>
         where TEntity : class, IAggregateRoot<TEntity, TKey> {
