@@ -9,6 +9,7 @@ using Alabo.Domains.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Users.Dtos;
 using Alabo.Users.Entities;
 

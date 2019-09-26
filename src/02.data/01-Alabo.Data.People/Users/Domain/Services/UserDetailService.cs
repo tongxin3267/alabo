@@ -21,6 +21,7 @@ using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Regexs;
 using Alabo.Users.Entities;
+using Alabo.Framework.Basic.Grades.Domain.Services;
 
 namespace Alabo.App.Core.User.Domain.Services {
 

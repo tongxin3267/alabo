@@ -8,6 +8,7 @@ using Alabo.Framework.Core.Reflections.Interfaces;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Address.Domain.Services;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Users.Entities;
 
 namespace Alabo.App.Core.User {

@@ -3,6 +3,7 @@ using Alabo.Domains.Entities;
 using Alabo.Validations;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Framework.Basic.Relations.Dtos;
 
 namespace Alabo.App.Shop.Store.Domain.Dtos
 {

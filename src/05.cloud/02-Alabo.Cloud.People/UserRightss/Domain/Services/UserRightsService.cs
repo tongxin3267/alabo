@@ -32,6 +32,8 @@ using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
+using Alabo.Framework.Basic.Grades.Domain.Entities;
+using Alabo.Framework.Basic.Grades.Domain.Enums;
 using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.Valids.Services;

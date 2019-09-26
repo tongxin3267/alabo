@@ -1,14 +1,3 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Primitives;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.Common.Domain.Dtos;
-using Alabo.App.Core.Employes.Domain.Services;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Shop.Activitys.Modules.MemberDiscount.Callbacks;
 using Alabo.App.Shop.Product.DiyModels;
@@ -16,23 +5,30 @@ using Alabo.App.Shop.Product.Domain.CallBacks;
 using Alabo.App.Shop.Product.Domain.Dtos;
 using Alabo.App.Shop.Product.Domain.Enums;
 using Alabo.App.Shop.Product.Domain.Services;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
 using Alabo.Domains.Query.Dto;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Relations.Domain.Services;
 using Alabo.Framework.Basic.Relations.Dtos;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Mapping;
 using Alabo.Maps;
 using Alabo.Randoms;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Shop.Product.Controllers {
+namespace Alabo.App.Shop.Product.Controllers
+{
 
     [ApiExceptionFilter]
     [Route("Api/Product/[action]")]
