@@ -11,7 +11,7 @@ using Alabo.Domains.Services;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.Controllers;
 using Alabo.App.Market.SecondBuy.Domain.Entities;
-using Alabo.App.Core.Api.Controller;
+using Alabo.Core.WebApis.Controller;
 using Alabo.App.Market.SecondBuy.Domain.Services;
 using ZKCloud.Open.ApiBase.Models;
 using Alabo.Extensions;

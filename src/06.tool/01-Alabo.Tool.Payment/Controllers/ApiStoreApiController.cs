@@ -1,4 +1,4 @@
-﻿using Alabo.App.Core.Api.Controller;
+﻿using Alabo.Core.WebApis.Controller;
 using Alabo.App.Core.Api.Filter;
 using Alabo.App.Core.ApiStore.MiniProgram.Dtos;
 using Alabo.App.Core.ApiStore.MiniProgram.Services;
@@ -13,6 +13,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Services;
+using Alabo.Core.WebApis.Controller;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Core.ApiStore.Controllers {

@@ -15,7 +15,7 @@ using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.Controllers;
 using Alabo.App.Asset.Settlements.Domain.Entities;
 using Alabo.App.Asset.Settlements.Domain.Services;
-using Alabo.App.Core.Api.Controller;
+using Alabo.Core.WebApis.Controller;
 
 namespace Alabo.App.Asset.Settlements.Controllers {
 

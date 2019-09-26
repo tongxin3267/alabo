@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using Alabo.App.Cms.Articles.Domain.Entities;
 using Alabo.App.Cms.Articles.Domain.Services;
-using Alabo.App.Core.Api.Controller;
+using Alabo.Core.WebApis.Controller;
 using Alabo.App.Core.Api.Filter;
 using Alabo.RestfulApi;
 

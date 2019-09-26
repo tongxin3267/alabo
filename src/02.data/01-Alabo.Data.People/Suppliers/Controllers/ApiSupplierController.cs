@@ -1,6 +1,6 @@
 using System;using Alabo.Domains.Repositories.EFCore;using Alabo.Domains.Repositories.Model;
 using System.Linq;
-using Alabo.App.Core.Api.Controller;
+using Alabo.Core.WebApis.Controller;
 using Alabo.Domains.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Alabo.App.Core.Api.Filter;

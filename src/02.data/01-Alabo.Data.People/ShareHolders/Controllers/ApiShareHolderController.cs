@@ -14,7 +14,7 @@ using Alabo.Domains.Services;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.Controllers;
 using Alabo.App.Agent.ShareHolders.Domain.Entities;
-using Alabo.App.Core.Api.Controller;
+using Alabo.Core.WebApis.Controller;
 using Alabo.App.Agent.ShareHolders.Domain.Services;
 
 namespace Alabo.App.Agent.ShareHolders.Controllers {

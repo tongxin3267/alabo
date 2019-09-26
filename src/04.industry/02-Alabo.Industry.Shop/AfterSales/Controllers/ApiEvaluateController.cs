@@ -12,7 +12,7 @@ using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.Controllers;
 using Alabo.App.Shop.AfterSale.Domain.Entities;
 using Alabo.App.Shop.AfterSale.Domain.Services;
-using Alabo.App.Core.Api.Controller;
+using Alabo.Core.WebApis.Controller;
 
 namespace Alabo.App.Shop.AfterSale.Controllers {
 		[ApiExceptionFilter]

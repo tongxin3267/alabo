@@ -1,5 +1,5 @@
 ﻿using Alabo.App.Core.Admin.Domain.Services;
-using Alabo.App.Core.Api.Controller;
+using Alabo.Core.WebApis.Controller;
 using Alabo.App.Core.Api.Filter;
 using Alabo.App.Core.UI.Domain.Services;
 using Alabo.App.Core.UI.Dtos;
@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Core.WebApis.Controller;
 using Alabo.Domains.Services.Report;
 using ZKCloud.Open.ApiBase.Models;
 using IAutoPreview = Alabo.UI.AutoPreviews.IAutoPreview;

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
 using Alabo.App.Core.Admin.Domain.Services;
-using Alabo.App.Core.Api.Controller;
+using Alabo.Core.WebApis.Controller;
 using Alabo.App.Core.Api.Domain.Service;
 using Alabo.App.Core.Api.Filter;
 using Alabo.App.Core.Common.Domain.Entities;

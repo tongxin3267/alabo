@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Api.Controller;
+using Alabo.Core.WebApis.Controller;
 using Alabo.App.Core.Api.Filter;
 using Alabo.App.Core.Common;
 using Alabo.App.Core.User;

@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Api.Controller;
+using Alabo.Core.WebApis.Controller;
 using Alabo.App.Core.Api.Filter;
 using Alabo.App.Core.User.Domain.Services;
+using Alabo.Core.WebApis.Controller;
 using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
 using UserDetail = Alabo.Users.Entities.UserDetail;

@@ -16,7 +16,7 @@ using Alabo.Web.Mvc.Controllers;
 using Alabo.App.Agent.Province.Domain.Entities;
 using Alabo.App.Core.UI.Domain.Services;
 using Alabo.App.Agent.Province.Domain.Services;
-using Alabo.App.Core.Api.Controller;
+using Alabo.Core.WebApis.Controller;
 
 namespace Alabo.App.Agent.Province.Controllers {
 

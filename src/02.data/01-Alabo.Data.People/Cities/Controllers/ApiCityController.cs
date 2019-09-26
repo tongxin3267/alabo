@@ -15,7 +15,7 @@ using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.Controllers;
 using Alabo.App.Agent.Citys.Domain.Entities;
 using Alabo.App.Agent.Citys.Domain.Services;
-using Alabo.App.Core.Api.Controller;
+using Alabo.Core.WebApis.Controller;
 using Alabo.App.Core.Employes.Domain.Dtos;
 using Alabo.App.Core.Employes.Domain.Services;
 using Alabo.App.Core.User.Domain.Dtos;
