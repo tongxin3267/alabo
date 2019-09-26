@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Data.People.Stores.Domain.Entities;
+using Alabo.Data.People.Stores.Domain.Entities.Extensions;
+using Alabo.Data.People.Stores.Domain.Repositories;
+using Alabo.Data.People.Stores.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
@@ -31,7 +35,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services {
 
     /// <summary>
     /// </summary>
-    public class ShopStoreService : ServiceBase<Entities.Store, long>, IShopStoreService {
+    public class ShopStoreService : ServiceBase, IShopStoreService {
         private const string _storeItemListCacheKey = "GetStoreItemListFromCache";
 
         private readonly IProductSkuRepository _productSkuRepository;
@@ -41,7 +45,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services {
         /// <param name="dto"></param>
 
         public PagedList<ViewStore> GetViewStorePageList(PagedInputDto dto) {
-            var query = new ExpressionQuery<Entities.Store> {
+            var query = new ExpressionQuery<Store> {
                 PageIndex = (int)dto.PageIndex,
                 PageSize = (int)dto.PageSize
             };
@@ -77,7 +81,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services {
         ///     获取自营店铺
         ///     平台店铺，后台添加的时候，为平台商品
         /// </summary>
-        public Entities.Store PlanformStore() {
+        public Store PlanformStore() {
             var planformUser = Resolve<IUserService>().PlanformUser();
             if (planformUser == null) {
                 return null;
@@ -86,7 +90,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services {
             var store = GetSingle(r => r.UserId == planformUser.Id);
             // 如果店铺为空，则初始化店铺平台店铺
             if (store == null) {
-                store = new Entities.Store {
+                store = new Store {
                     UserId = planformUser.Id,
                     Name = "自营店铺",
                     ParentUserId = 0,
@@ -121,7 +125,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services {
         ///     获取会员店铺
         /// </summary>
         /// <param name="UserId">会员Id</param>
-        public Entities.Store GetUserStore(long UserId) {
+        public Store GetUserStore(long UserId) {
             var user = Resolve<IUserService>().GetNomarlUser(UserId);
             if (user == null) {
                 return null;
@@ -140,18 +144,15 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services {
         /// <param name="storeId"></param>
 
         public StoreExtension GetStoreExtension(long storeId) {
-            var store = GetSingle(r => r.Id == storeId);
+            //TODO 店铺Id修改
+            var store =Resolve<IStoreService>(). GetSingle(storeId);
             if (store == null) {
                 return null;
             }
 
-            if (!store.Extension.IsNullOrEmpty()) {
-                var ret = store.Extension.DeserializeJson<StoreExtension>();
+            return store.StoreExtension;
 
-                return ret;
-            }
 
-            return new StoreExtension(); // 如果数据库没有记录，则重新实例化一个对象
         }
 
         /// <summary>
@@ -195,7 +196,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services {
 
             var find = Resolve<IShopStoreService>().GetByIdNoTracking(u => u.Id == store.Id);
             if (find == null) {
-                find = new Entities.Store {
+                find = new Store {
                     UserId = user.Id,
                     Name = store.Name,
                     GradeId = store.GradeId,
@@ -397,7 +398,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services {
             return Tuple.Create(serviceResult, storeProductSku);
         }
 
-        public ShopStoreService(IUnitOfWork unitOfWork, IRepository<Entities.Store, long> repository) : base(unitOfWork, repository) {
+        public ShopStoreService(IUnitOfWork unitOfWork, IRepository<Store, long> repository) : base(unitOfWork, repository) {
             _productSkuRepository = Repository<IProductSkuRepository>();
         }
 

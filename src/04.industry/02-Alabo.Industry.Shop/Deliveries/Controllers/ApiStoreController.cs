@@ -34,7 +34,7 @@ namespace Alabo.Industry.Shop.Deliveries.Controllers
     /// </summary>
     [ApiExceptionFilter]
     [Route("Api/ShopStore/[action]")]
-    public class ApiStoreController : ApiBaseController<Domain.Entities.Store, long> {
+    public class ApiStoreController : ApiBaseController<Domain.Store, long> {
 
         /// <summary>
         ///

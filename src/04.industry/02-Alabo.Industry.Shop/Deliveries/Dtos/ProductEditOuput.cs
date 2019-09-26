@@ -56,7 +56,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos
         /// </summary>
         [Display(Name = "店铺")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        public Entities.Store Store { get; set; }
+        public Store Store { get; set; }
 
         /// <summary>
         /// 店铺通用级联

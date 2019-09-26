@@ -322,7 +322,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
 
         #region 获取级联相关数据
 
-        private StoreRelation GetRelationView(Entities.Store store, long userId)
+        private StoreRelation GetRelationView(Store store, long userId)
         {
             StoreRelation relation = new StoreRelation();
             var templates = Resolve<IDeliveryTemplateService>().GetList(x => x.StoreId == store.Id);

@@ -12,7 +12,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos {
         /// <summary>
         /// 店铺信息
         /// </summary>
-        public Entities.Store Store { get; set; }
+        public Store Store { get; set; }
 
         /// <summary>
         /// 用户信息

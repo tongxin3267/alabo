@@ -151,7 +151,7 @@ namespace Alabo.Web.CodeGeneration.TestCode {
             testBuilder.AppendLine("using User = Alabo.App.Core.User.Domain.Entities.User;");
             testBuilder.AppendLine("using Product = Alabo.App.Shop.Product.Domain.Entities.Product;");
             testBuilder.AppendLine("using Order = Alabo.App.Shop.Order.Domain.Entities.Order;");
-            testBuilder.AppendLine("using Store = Alabo.App.Shop.Store.Domain.Entities.Store;");
+            testBuilder.AppendLine("using Store = Alabo.App.Shop.Store.Domain.Store;");
             testBuilder.AppendLine("");
             testBuilder.AppendLine("using UserType = App.Core.UserType.Domain.Entities.UserType;");
 

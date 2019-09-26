@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using Alabo.Data.People.Stores.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Exceptions;
@@ -11,6 +12,7 @@ using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Industry.Shop.Deliveries.Domain.Enums;
 using Alabo.Industry.Shop.Deliveries.Domain.Services;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Deliveries.Domain.Entities {
 
@@ -22,7 +24,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Entities {
 
         #region 属性
 
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     运费模板方式
@@ -97,11 +99,11 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Entities {
             if (autoModel.Filter == FilterType.Admin) {
                 model = Resolve<IDeliveryTemplateService>().GetPagedList(query);
             } else if (autoModel.Filter == FilterType.User) {
-                var store = Resolve<IShopStoreService>().GetUserStore(autoModel.BasicUser.Id);
+                var store = Resolve<IStoreService>().GetUserStore(autoModel.BasicUser.Id);
                 if (store == null) {
                     throw new ValidException("您不是供应商");
                 }
-                model = Resolve<IDeliveryTemplateService>().GetPagedList(query, r => r.StoreId == store.Id);
+              //  model = Resolve<IDeliveryTemplateService>().GetPagedList(query, r => r.StoreId == store.Id);
             } else {
                 throw new ValidException("方式不对");
             }

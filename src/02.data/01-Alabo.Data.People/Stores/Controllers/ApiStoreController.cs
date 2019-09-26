@@ -8,7 +8,7 @@ namespace Alabo.Data.People.Stores.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/Store/[action]")]
-    public class ApiStoreController : ApiBaseController<Domain.Entities.Store, ObjectId> {
+    public class ApiStoreController : ApiBaseController<Domain.Store, ObjectId> {
 
         public ApiStoreController() : base() {
             BaseService = Resolve<IStoreService>();

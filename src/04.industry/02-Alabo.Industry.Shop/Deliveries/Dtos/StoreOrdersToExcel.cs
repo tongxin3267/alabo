@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Data.People.Stores.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
@@ -43,7 +44,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos {
 
         public ServiceResult Save(object model, AutoBaseModel autoModel) {
             var condition = (StoreOrdersToExcel)model;
-            var store = Resolve<IShopStoreService>().GetSingle(u => u.UserId == autoModel.BasicUser.Id);
+            var store = Resolve<IStoreService>().GetSingle(u => u.UserId == autoModel.BasicUser.Id);
             if (store == null) {
                 return ServiceResult.FailedWithMessage("非法操作");
             }
@@ -52,7 +53,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos {
                 PageIndex = 1,
                 PageSize = 15
             };
-            query.And(u => u.StoreId == store.Id);
+            //query.And(u => u.StoreId == store.Id);
             query.And(u => u.OrderStatus == condition.Status);
             var view = Resolve<IOrderService>().GetPagedList(query);
             var orders = new List<Order>();

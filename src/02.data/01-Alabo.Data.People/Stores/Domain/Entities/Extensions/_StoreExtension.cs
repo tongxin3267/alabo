@@ -44,14 +44,5 @@ namespace Alabo.Data.People.Stores.Domain.Entities.Extensions {
         [HelpBlock("详细介绍")]
         public string Intro { get; set; }
 
-        /// <summary>
-        ///     店铺地址
-        /// </summary>
-        public IList<string> Address { get; set; }
-
-        /// <summary>
-        ///     供应商对应银行卡 供财务打款使用
-        /// </summary>
-        public string BankCard { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace Alabo.Data.People.Stores.Domain.Entities {
         GroupName = "基本信息,高级选项", Icon = "fa fa-puzzle-piece", SortOrder = 1, Description = "设置以及查看供应商的详细信息")]
     [AutoDelete(IsAuto = true)]
     [Table("People_ShareHolder")]
-    public class Store : AggregateMongodbRoot<Store> {
+    public class Store : AggregateMongodbUserRoot<Store> {
 
         /// <summary>
         ///     供应商名称
