@@ -4,7 +4,7 @@ using Alabo.Domains.Repositories;
 
 namespace Alabo.Domains.Base.Repositories
 {
-    public interface ILogsRepository : IRepository<Logs, ObjectId>
+    public interface ITableRepository : IRepository<Table, ObjectId>
     {
     }
 }

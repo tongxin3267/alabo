@@ -5,9 +5,9 @@ using Alabo.Domains.Repositories;
 
 namespace Alabo.Domains.Base.Repositories
 {
-    public class LogsRepository : RepositoryMongo<Logs, ObjectId>, ILogsRepository
+    public class TableRepository : RepositoryMongo<Table, ObjectId>, ITableRepository
     {
-        public LogsRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public TableRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
     }
