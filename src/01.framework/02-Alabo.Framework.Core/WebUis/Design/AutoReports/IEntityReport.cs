@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.Framework.Core.WebApis;
 using Alabo.Domains.Services.Report;
+using Alabo.Framework.Core.WebApis;
 
 namespace Alabo.Framework.Core.WebUis.Design.AutoReports
 {

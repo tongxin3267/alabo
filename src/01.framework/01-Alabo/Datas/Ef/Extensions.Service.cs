@@ -1,7 +1,4 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Alabo.Datas.Dapper;
 using Alabo.Datas.Ef.Configs;
 using Alabo.Datas.Ef.MySql;
@@ -10,6 +7,9 @@ using Alabo.Datas.Ef.SqlServer;
 using Alabo.Datas.Enums;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Alabo.Datas.Ef
 {
@@ -57,17 +57,11 @@ namespace Alabo.Datas.Ef
         private static DatabaseType GetDbType<TUnitOfWork>()
         {
             var type = typeof(TUnitOfWork).BaseType;
-            if (type == typeof(MsSqlUnitOfWork)) {
-                return DatabaseType.SqlServer;
-            }
+            if (type == typeof(MsSqlUnitOfWork)) return DatabaseType.SqlServer;
 
-            if (type == typeof(MySqlUnitOfWork)) {
-                return DatabaseType.MySql;
-            }
+            if (type == typeof(MySqlUnitOfWork)) return DatabaseType.MySql;
 
-            if (type == typeof(PgSqlUnitOfWork)) {
-                return DatabaseType.PgSql;
-            }
+            if (type == typeof(PgSqlUnitOfWork)) return DatabaseType.PgSql;
 
             return DatabaseType.SqlServer;
         }

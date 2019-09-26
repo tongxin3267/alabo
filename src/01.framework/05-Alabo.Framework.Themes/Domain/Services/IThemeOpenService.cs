@@ -4,22 +4,22 @@ using Alabo.Framework.Themes.Domain.Entities;
 using Alabo.Framework.Themes.Dtos;
 using Alabo.Framework.Themes.Dtos.Service;
 
-namespace Alabo.Framework.Themes.Domain.Services {
-
+namespace Alabo.Framework.Themes.Domain.Services
+{
     /// <summary>
     ///     数据保存
     /// </summary>
-    public interface IThemeOpenService : IService {
-
+    public interface IThemeOpenService : IService
+    {
         /// <summary>
-        /// 站点发布
+        ///     站点发布
         /// </summary>
         /// <param name="themePublish"></param>
         /// <returns></returns>
         ServiceResult Publish(ThemePublish themePublish);
 
         /// <summary>
-        /// 重复器上获取默认模板
+        ///     重复器上获取默认模板
         /// </summary>
         /// <param name="themePageInput"></param>
         /// <returns></returns>

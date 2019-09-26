@@ -5,15 +5,15 @@ using Alabo.Domains.Entities.Extensions;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Data.People.Stores.Domain.Entities.Extensions {
-
+namespace Alabo.Data.People.Stores.Domain.Entities.Extensions
+{
     /// <summary>
     ///     店铺拓展属性
     /// </summary>
-    public class StoreExtension : EntityExtension {
-
+    public class StoreExtension : EntityExtension
+    {
         /// <summary>
-        /// 店铺分类
+        ///     店铺分类
         /// </summary>
         [Display(Name = "店铺分类")]
         public List<StoreCategory> StoreCategories { get; set; } = new List<StoreCategory>();

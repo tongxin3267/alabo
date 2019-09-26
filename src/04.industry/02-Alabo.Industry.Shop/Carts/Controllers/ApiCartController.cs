@@ -9,13 +9,14 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Industry.Shop.Carts.Controllers {
-
+namespace Alabo.Industry.Shop.Carts.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/Cart/[action]")]
-    public class ApiCartController : ApiBaseController<Cart, ObjectId> {
-
-        public ApiCartController() : base() {
+    public class ApiCartController : ApiBaseController<Cart, ObjectId>
+    {
+        public ApiCartController()
+        {
             BaseService = Resolve<ICartService>();
         }
 
@@ -26,10 +27,10 @@ namespace Alabo.Industry.Shop.Carts.Controllers {
         [HttpPost]
         [Display(Description = "添加商品到购物车")]
         [ApiAuth]
-        public ApiResult AddCart([FromBody] OrderProductInput parameter) {
-            if (!this.IsFormValid()) {
+        public ApiResult AddCart([FromBody] OrderProductInput parameter)
+        {
+            if (!this.IsFormValid())
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
-            }
 
             var serviceResult = Resolve<ICartService>().AddCart(parameter);
             return ToResult(serviceResult);
@@ -42,11 +43,10 @@ namespace Alabo.Industry.Shop.Carts.Controllers {
         [HttpGet]
         [Display(Description = "获取购物车数据")]
         [ApiAuth]
-        public ApiResult<StoreProductSku> GetCart([FromQuery] long loginUserId) {
+        public ApiResult<StoreProductSku> GetCart([FromQuery] long loginUserId)
+        {
             var result = Resolve<ICartService>().GetCart(loginUserId);
-            if (result.Item1.Succeeded) {
-                return ApiResult.Success(result.Item2);
-            }
+            if (result.Item1.Succeeded) return ApiResult.Success(result.Item2);
             var storeProductSku = new StoreProductSku();
             return ApiResult.Success(storeProductSku);
             //return ApiResult.Failure<StoreProductSku>(result.Item1.ToString(), MessageCodes.ParameterValidationFailure);
@@ -59,10 +59,10 @@ namespace Alabo.Industry.Shop.Carts.Controllers {
         [HttpGet]
         [Display(Description = "删除购物车")]
         [ApiAuth]
-        public ApiResult RemoveCart([FromQuery] OrderProductInput parameter) {
-            if (!this.IsFormValid()) {
+        public ApiResult RemoveCart([FromQuery] OrderProductInput parameter)
+        {
+            if (!this.IsFormValid())
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
-            }
 
             var serviceResult = Resolve<ICartService>().RemoveCart(parameter);
             return ToResult(serviceResult);
@@ -75,10 +75,10 @@ namespace Alabo.Industry.Shop.Carts.Controllers {
         [HttpPut]
         [Display(Description = "更新购物车")]
         [ApiAuth]
-        public ApiResult UpdateCart([FromBody] OrderProductInput parameter) {
-            if (!this.IsFormValid()) {
+        public ApiResult UpdateCart([FromBody] OrderProductInput parameter)
+        {
+            if (!this.IsFormValid())
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
-            }
 
             var serviceResult = Resolve<ICartService>().UpdateCart(parameter);
             return ToResult(serviceResult);

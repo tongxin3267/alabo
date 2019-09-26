@@ -6,21 +6,27 @@ using Alabo.Domains.Repositories.EFCore;
 using Alabo.Industry.Shop.OrderActions.Domain.Entities;
 using Alabo.Industry.Shop.Orders.Dtos;
 
-namespace Alabo.Industry.Shop.OrderActions.Domain.Repositories {
-
-    internal class OrderActionRepository : RepositoryEfCore<OrderAction, long>, IOrderActionRepository {
+namespace Alabo.Industry.Shop.OrderActions.Domain.Repositories
+{
+    internal class OrderActionRepository : RepositoryEfCore<OrderAction, long>, IOrderActionRepository
+    {
+        public OrderActionRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+        }
 
         /// <summary>
         ///     Deletes the cart buy order.
         ///     订单生成成功以后，删除购物车数据
         /// </summary>
         /// <exception cref="System.NotImplementedException"></exception>
-        public void DeleteCartBuyOrder() {
+        public void DeleteCartBuyOrder()
+        {
             throw new NotImplementedException();
         }
 
-        public List<OrderToExcel> GetOrderListToExcel() {
-            var sql = $@"select
+        public List<OrderToExcel> GetOrderListToExcel()
+        {
+            var sql = @"select
 orde.Id '订单号',
 users.[Name] '用户名',
 users.Mobile '电话',
@@ -75,10 +81,13 @@ where orde.OrderType=1 --过滤购买会员等级的商品
 and pay.PayType<>1  AND pay.PayType<>0 --去掉余额付款
 and orde.OrderStatus not in(201,50,51)-- 关闭已退款，申请退款，退货退款";
 
-            List<OrderToExcel> result = new List<OrderToExcel>();
-            using (var reader = RepositoryContext.ExecuteDataReader(sql)) {
-                while (reader.Read()) {
-                    OrderToExcel userProductCount = new OrderToExcel {
+            var result = new List<OrderToExcel>();
+            using (var reader = RepositoryContext.ExecuteDataReader(sql))
+            {
+                while (reader.Read())
+                {
+                    var userProductCount = new OrderToExcel
+                    {
                         OrderId = reader["订单号"].ToString(),
                         UserName = reader["用户名"].ToString(),
                         Mobile = reader["电话"].ToString(),
@@ -92,15 +101,13 @@ and orde.OrderStatus not in(201,50,51)-- 关闭已退款，申请退款，退货
                         Price = reader["单价"].ToString(),
                         PayType = reader["支付方式"].ToString(),
                         PayStatus = reader["支付状态"].ToString(),
-                        OrderStatus = reader["订单状态"].ToString(),
+                        OrderStatus = reader["订单状态"].ToString()
                     };
                     result.Add(userProductCount);
                 }
             }
-            return result;
-        }
 
-        public OrderActionRepository(IUnitOfWork unitOfWork) : base(unitOfWork) {
+            return result;
         }
     }
 }

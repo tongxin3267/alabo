@@ -5,13 +5,13 @@ using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Industry.Shop.Products.ViewModels {
-
+namespace Alabo.Industry.Shop.Products.ViewModels
+{
     /// <summary>
     ///     商品单元，用于商品列表页展示，商品首页展示
     /// </summary>
-    public class ProductItem {
-
+    public class ProductItem
+    {
         /// <summary>
         ///     商品Id
         /// </summary>
@@ -22,9 +22,11 @@ namespace Alabo.Industry.Shop.Products.ViewModels {
         /// </summary>
         [Display(Name = "商品名称")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, PlaceHolder = "请输入商品名称", Operator = Operator.Contains,
-            IsShowAdvancedSerach = true, DataSource = "Alabo.App.Shop.Product.Domain.Entities", GroupTabId = 1, IsMain = true, Width = "150",
-            ListShow = true, SortOrder = 1)]//, Link = "/Admin/Product/Edit?id=[[Id]]"
+        [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, PlaceHolder = "请输入商品名称",
+            Operator = Operator.Contains,
+            IsShowAdvancedSerach = true, DataSource = "Alabo.App.Shop.Product.Domain.Entities", GroupTabId = 1,
+            IsMain = true, Width = "150",
+            ListShow = true, SortOrder = 1)] //, Link = "/Admin/Product/Edit?id=[[Id]]"
         [StringLength(60, ErrorMessage = "60个字以内")]
         public string Name { get; set; }
 
@@ -33,8 +35,9 @@ namespace Alabo.Industry.Shop.Products.ViewModels {
         /// </summary>
         [Display(Name = "货号")]
         [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, PlaceHolder = "请输入货号",
-          IsShowAdvancedSerach = true, DataSource = "Alabo.App.Shop.Product.Domain.Entities", GroupTabId = 3, IsMain = true, Width = "150",
-          ListShow = true, SortOrder = 2, Link = "/Admin/Product/Edit?id=[[Id]]")]
+            IsShowAdvancedSerach = true, DataSource = "Alabo.App.Shop.Product.Domain.Entities", GroupTabId = 3,
+            IsMain = true, Width = "150",
+            ListShow = true, SortOrder = 2, Link = "/Admin/Product/Edit?id=[[Id]]")]
         [StringLength(60, ErrorMessage = "60个字以内")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         public string Bn { get; set; }
@@ -101,19 +104,17 @@ namespace Alabo.Industry.Shop.Products.ViewModels {
         ///     查看数量
         /// </summary>
         [Display(Name = "查看数量")]
-        [Field(ControlsType = ControlsType.TextBox, ListShow = true, Width = "120", SortOrder = 5)]        
+        [Field(ControlsType = ControlsType.TextBox, ListShow = true, Width = "120", SortOrder = 5)]
         public long ViewCount { get; set; }
 
         /// <summary>
-        /// 是否关联（预售商城，购物券商城）
+        ///     是否关联（预售商城，购物券商城）
         /// </summary>
         public bool IsLinked { get; set; }
+
         /// <summary>
-        /// 排序
+        ///     排序
         /// </summary>
         public long SortOrder { get; set; }
-
-
-
     }
 }

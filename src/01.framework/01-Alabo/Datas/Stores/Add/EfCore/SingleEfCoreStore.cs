@@ -22,9 +22,7 @@ namespace Alabo.Datas.Stores.Add.EfCore
         /// <param name="id">Id标识</param>
         public TEntity GetSingle(object id)
         {
-            if (id.SafeString().IsEmpty()) {
-                return null;
-            }
+            if (id.SafeString().IsEmpty()) return null;
 
             return Find(id);
         }
@@ -75,9 +73,7 @@ namespace Alabo.Datas.Stores.Add.EfCore
         {
             var queryCriteria = new ExpressionQuery<TEntity>();
             queryCriteria.OrderBy(keySelector);
-            if (predicate != null) {
-                queryCriteria.And(predicate);
-            }
+            if (predicate != null) queryCriteria.And(predicate);
 
             var find = queryCriteria.Execute(Set);
             return find.FirstOrDefault();
@@ -93,9 +89,7 @@ namespace Alabo.Datas.Stores.Add.EfCore
         {
             var queryCriteria = new ExpressionQuery<TEntity>();
             queryCriteria.OrderByDescending(keySelector);
-            if (predicate != null) {
-                queryCriteria.And(predicate);
-            }
+            if (predicate != null) queryCriteria.And(predicate);
 
             var find = queryCriteria.Execute(Set);
             return find.FirstOrDefault();

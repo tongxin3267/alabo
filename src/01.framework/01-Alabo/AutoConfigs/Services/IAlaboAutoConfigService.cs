@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using Alabo.AutoConfigs.Entities;
 using Alabo.Domains.Services;
 
-namespace Alabo.AutoConfigs.Services {
-
-    public interface IAlaboAutoConfigService : IService<AutoConfig, long> {
-
+namespace Alabo.AutoConfigs.Services
+{
+    public interface IAlaboAutoConfigService : IService<AutoConfig, long>
+    {
         /// <summary>
-        /// 获取单个数据
+        ///     获取单个数据
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>

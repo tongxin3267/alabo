@@ -12,9 +12,7 @@ namespace Alabo.Files
         {
             if (imageUrl != null)
             {
-                if (File.Exists(FileHelper.RootPath + imageUrl)) {
-                    return imageUrl;
-                }
+                if (File.Exists(FileHelper.RootPath + imageUrl)) return imageUrl;
             }
             else
             {

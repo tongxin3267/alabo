@@ -10,38 +10,40 @@ using Alabo.Helpers;
 using Microsoft.AspNetCore.Http;
 using MongoDB.Bson;
 
-namespace Alabo.Framework.Basic.Storages.Domain.Services {
-
-    public class StorageFileService : ServiceBase<StorageFile, ObjectId>, IStorageFileService {
-
+namespace Alabo.Framework.Basic.Storages.Domain.Services
+{
+    public class StorageFileService : ServiceBase<StorageFile, ObjectId>, IStorageFileService
+    {
         public StorageFileService(IUnitOfWork unitOfWork, IRepository<StorageFile, ObjectId> repository) : base(
-            unitOfWork, repository) {
+            unitOfWork, repository)
+        {
         }
 
         /// <summary>
-        /// 文件名
+        ///     文件名
         /// </summary>
         /// <param name="files"></param>
         /// <param name="basePath"></param>
         /// <returns></returns>
-        public StorageFile Upload(IFormFileCollection files, string basePath) {
+        public StorageFile Upload(IFormFileCollection files, string basePath)
+        {
             var pathBase = $"{basePath.ToLower()}/{DateTime.Now:yyyy-MM-dd}/";
             var uploadPath = Path.Combine(FileHelper.WwwRootPath, pathBase.TrimStart('/')).ToLower().Replace("//", "/");
 
-            if (!Directory.Exists(uploadPath)) {
-                Directory.CreateDirectory(uploadPath);
-            }
+            if (!Directory.Exists(uploadPath)) Directory.CreateDirectory(uploadPath);
 
             var uploadFile = files.First();
             var originalName = uploadFile.FileName;
-            var storageFile = new StorageFile {
+            var storageFile = new StorageFile
+            {
                 Size = uploadFile.Length,
                 Name = originalName,
-                Extension = GetFileExt(uploadFile),
+                Extension = GetFileExt(uploadFile)
             };
 
-            var filename = storageFile.Id.ToString() + storageFile.Extension;
-            using (var fileStream = new FileStream(Path.Combine(uploadPath, filename), FileMode.Create)) {
+            var filename = storageFile.Id + storageFile.Extension;
+            using (var fileStream = new FileStream(Path.Combine(uploadPath, filename), FileMode.Create))
+            {
                 uploadFile.CopyTo(fileStream);
             }
 
@@ -54,7 +56,8 @@ namespace Alabo.Framework.Basic.Storages.Domain.Services {
         /// <summary>
         ///     获取文件扩展名
         /// </summary>
-        private static string GetFileExt(IFormFile uploadFile) {
+        private static string GetFileExt(IFormFile uploadFile)
+        {
             var temp = uploadFile.FileName.Split('.');
             return "." + temp[temp.Length - 1].ToLower();
         }

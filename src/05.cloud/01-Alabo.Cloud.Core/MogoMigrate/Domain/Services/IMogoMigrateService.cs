@@ -2,10 +2,10 @@
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 
-namespace _01_Alabo.Cloud.Core.MogoMigrate.Domain.Services {
-
-    public interface IMogoMigrateService : IService {
-
+namespace _01_Alabo.Cloud.Core.MogoMigrate.Domain.Services
+{
+    public interface IMogoMigrateService : IService
+    {
         /// <summary>
         ///     获取迁移数据库视图
         /// </summary>

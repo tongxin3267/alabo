@@ -4,16 +4,16 @@ using Alabo.Domains.Entities;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Cloud.Shop.Comments.Domain.Entities {
-
+namespace Alabo.Cloud.Shop.Comments.Domain.Entities
+{
     /// <summary>
     ///     通用评论表
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Attach_Comment")]
     [ClassProperty(Name = "通用评论表")]
-    public class Comment : AggregateMongodbUserRoot<Comment> {
-
+    public class Comment : AggregateMongodbUserRoot<Comment>
+    {
         /// <summary>
         ///     评论类型
         ///     比如订单、商品、文章等评论

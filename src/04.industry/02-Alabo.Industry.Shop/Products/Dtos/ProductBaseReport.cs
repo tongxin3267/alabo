@@ -4,13 +4,14 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.Industry.Shop.Products.Dtos {
-
+namespace Alabo.Industry.Shop.Products.Dtos
+{
     /// <summary>
     /// </summary>
     [ClassProperty(Name = "商品数据统计", Icon = "fa fa-puzzle-piece", Description = "商品数据统计",
         SideBarType = SideBarType.ProductSideBar)]
-    public class ProductBaseReport : BaseViewModel {
+    public class ProductBaseReport : BaseViewModel
+    {
         public long Id { get; set; }
 
         /// <summary>

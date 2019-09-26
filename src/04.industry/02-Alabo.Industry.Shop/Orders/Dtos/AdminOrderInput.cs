@@ -1,10 +1,10 @@
 ﻿using Alabo.Domains.Query.Dto;
 using Alabo.Industry.Shop.Orders.Domain.Enums;
 
-namespace Alabo.Industry.Shop.Orders.Dtos {
-
-    public class AdminOrderInput : PagedInputDto {
-
+namespace Alabo.Industry.Shop.Orders.Dtos
+{
+    public class AdminOrderInput : PagedInputDto
+    {
         /// <summary>
         ///     订单状态
         /// </summary>

@@ -1,7 +1,7 @@
 using Alabo.Industry.Shop.Categories.Domain.Services;
-using Xunit;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
+using Xunit;
 
 namespace Alabo.Test.Shop.Category.Domain.Services
 {

@@ -3,26 +3,23 @@
 namespace Alabo.Industry.Offline.Order.Domain.Enums
 {
     /// <summary>
-    /// MerchantOrderStatus
+    ///     MerchantOrderStatus
     /// </summary>
     public enum MerchantOrderStatus
     {
         /// <summary>
-        /// Waiting to pay
+        ///     Waiting to pay
         /// </summary>
-        [Display(Name = "待付款")]
-        WaitingBuyerPay = 1,
+        [Display(Name = "待付款")] WaitingBuyerPay = 1,
 
         /// <summary>
-        /// Success
+        ///     Success
         /// </summary>
-        [Display(Name = "已完成")]
-        Success = 2,
+        [Display(Name = "已完成")] Success = 2,
 
         /// <summary>
-        /// Closed
+        ///     Closed
         /// </summary>
-        [Display(Name = "已关闭")]
-        Closed = 3
+        [Display(Name = "已关闭")] Closed = 3
     }
 }

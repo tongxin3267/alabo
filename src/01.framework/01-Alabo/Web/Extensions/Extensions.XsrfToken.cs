@@ -1,9 +1,9 @@
 ﻿using System;
+using Alabo.Helpers;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Alabo.Helpers;
 
 namespace Alabo.Web.Extensions
 {

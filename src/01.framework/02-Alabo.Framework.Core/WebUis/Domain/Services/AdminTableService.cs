@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using Alabo.Framework.Core.Reflections.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Files;
+using Alabo.Framework.Core.Reflections.Services;
 using Alabo.Linq.Dynamic;
 using Alabo.Mapping;
 using Alabo.Reflections;
@@ -17,11 +17,12 @@ using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using FileInfo = System.IO.FileInfo;
 
-namespace Alabo.Framework.Core.WebUis.Domain.Services {
-
-    public class AdminTableService : ServiceBase, IAdminTableService {
-
-        public AdminTableService(IUnitOfWork unitOfWork) : base(unitOfWork) {
+namespace Alabo.Framework.Core.WebUis.Domain.Services
+{
+    public class AdminTableService : ServiceBase, IAdminTableService
+    {
+        public AdminTableService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
         }
 
         /// <summary>
@@ -32,11 +33,11 @@ namespace Alabo.Framework.Core.WebUis.Domain.Services {
         /// <param name="service">获取数据的服务</param>
         /// <param name="method">获取数据的方法</param>
         /// <param name="query">Url参数，用户通过界面选择传递</param>
-        public Tuple<ServiceResult, string, string> ToExcel(string key, string service, string method, object query) {
+        public Tuple<ServiceResult, string, string> ToExcel(string key, string service, string method, object query)
+        {
             var type = key.GetTypeByFullName();
-            if (type == null) {
+            if (type == null)
                 return Tuple.Create(ServiceResult.FailedWithMessage($"类型不存在，请输入正确的{key}"), string.Empty, string.Empty);
-            }
 
             var classDescription = new ClassDescription(type);
             //获取excel显示字段
@@ -47,12 +48,14 @@ namespace Alabo.Framework.Core.WebUis.Domain.Services {
             FileHelper.CreateDirectory(FileHelper.WwwRootPath + "//excel");
             var file = new FileInfo(Path.Combine(FileHelper.WwwRootPath, "excel",
                 $"{classDescription.ClassPropertyAttribute.Name}_{DateTime.Now.ConvertDateTimeFileString()}.xlsx"));
-            using (var package = new ExcelPackage(file)) {
+            using (var package = new ExcelPackage(file))
+            {
                 // 添加worksheet
                 var worksheet = package.Workbook.Worksheets.Add(type.Name);
                 worksheet.DefaultRowHeight = 35; //行高25
                 //worksheet.Cells.Style.Font.Size = 9;
-                for (var i = 1; i < excelPropertys.Count() + 1; i++) {
+                for (var i = 1; i < excelPropertys.Count() + 1; i++)
+                {
                     var width = excelPropertys.ToList()[i - 1].FieldAttribute.Width; // 宽度
                     worksheet.Cells[1, i].Value = excelPropertys.ToList()[i - 1].DisplayAttribute.Name;
                     worksheet.Cells[1, i].Style.Font.Bold = true; //加粗
@@ -67,16 +70,20 @@ namespace Alabo.Framework.Core.WebUis.Domain.Services {
                 //添加值
                 var recordIndex = 2;
                 var pageList = new List<object>();
-                if (resultList.Item2 != null) {
-                    try {
-                        pageList = ((IEnumerable<object>)resultList.Item2).ToList();
-                    } catch {
+                if (resultList.Item2 != null)
+                    try
+                    {
+                        pageList = ((IEnumerable<object>) resultList.Item2).ToList();
+                    }
+                    catch
+                    {
                         Tuple.Create(ServiceResult.FailedMessage("该类型不支持Excel导出"), file.FullName, file.Name);
                     }
-                }
 
-                foreach (var data in pageList) {
-                    for (var i = 1; i < excelPropertys.Count() + 1; i++) {
+                foreach (var data in pageList)
+                {
+                    for (var i = 1; i < excelPropertys.Count() + 1; i++)
+                    {
                         var property = excelPropertys.ToList()[i - 1];
                         var value = property.Property.GetPropertyValue(data);
                         var chageResult = AutoMapping.TryChangeHtmlValue(value, property.Property.PropertyType);
@@ -99,11 +106,13 @@ namespace Alabo.Framework.Core.WebUis.Domain.Services {
             return Tuple.Create(ServiceResult.Success, file.FullName, file.Name);
         }
 
-        public Tuple<ServiceResult, string, string> ToExcel(string type, object query) {
+        public Tuple<ServiceResult, string, string> ToExcel(string type, object query)
+        {
             throw new NotImplementedException();
         }
 
-        public Tuple<ServiceResult, string, string> ToExcel(Type type, dynamic inputData) {
+        public Tuple<ServiceResult, string, string> ToExcel(Type type, dynamic inputData)
+        {
             //var service = "IAlaboUserService";
             //var method = "GetViewUserPageList";
             //var query = "";
@@ -119,12 +128,14 @@ namespace Alabo.Framework.Core.WebUis.Domain.Services {
             FileHelper.CreateDirectory(FileHelper.WwwRootPath + "//excel");
             var file = new FileInfo(Path.Combine(FileHelper.WwwRootPath, "excel",
                 $"{classDescription.ClassPropertyAttribute.Name}_{DateTime.Now.ConvertDateTimeFileString()}.xlsx"));
-            using (var package = new ExcelPackage(file)) {
+            using (var package = new ExcelPackage(file))
+            {
                 // 添加worksheet
                 var worksheet = package.Workbook.Worksheets.Add(type.Name);
                 worksheet.DefaultRowHeight = 35; //行高25
                 //worksheet.Cells.Style.Font.Size = 9;
-                for (var i = 1; i < excelPropertys.Count() + 1; i++) {
+                for (var i = 1; i < excelPropertys.Count() + 1; i++)
+                {
                     var width = excelPropertys.ToList()[i - 1].FieldAttribute.Width; // 宽度
                     worksheet.Cells[1, i].Value = excelPropertys.ToList()[i - 1].DisplayAttribute.Name;
                     worksheet.Cells[1, i].Style.Font.Bold = true; //加粗
@@ -151,8 +162,10 @@ namespace Alabo.Framework.Core.WebUis.Domain.Services {
                 //    }
                 //}
 
-                foreach (var data in resultList) {
-                    for (var i = 1; i < excelPropertys.Count() + 1; i++) {
+                foreach (var data in resultList)
+                {
+                    for (var i = 1; i < excelPropertys.Count() + 1; i++)
+                    {
                         var property = excelPropertys.ToList()[i - 1];
                         var value = property.Property.GetPropertyValue(data);
                         var chageResult = AutoMapping.TryChangeHtmlValue(value, property.Property.PropertyType);

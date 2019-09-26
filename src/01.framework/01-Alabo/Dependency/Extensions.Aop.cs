@@ -1,9 +1,9 @@
-﻿using AspectCore.DynamicProxy;
+﻿using Alabo.Reflections;
+using AspectCore.DynamicProxy;
 using AspectCore.DynamicProxy.Parameters;
 using AspectCore.Extensions.AspectScope;
 using AspectCore.Extensions.Autofac;
 using Autofac;
-using Alabo.Reflections;
 
 namespace Alabo.Dependency
 {

@@ -1059,14 +1059,10 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="connection">数据库连接</param>
         protected IDbConnection GetConnection(IDbConnection connection)
         {
-            if (connection != null) {
-                return connection;
-            }
+            if (connection != null) return connection;
 
             connection = _database?.GetConnection();
-            if (connection == null) {
-                throw new ArgumentNullException(nameof(connection));
-            }
+            if (connection == null) throw new ArgumentNullException(nameof(connection));
 
             return connection;
         }
@@ -1106,9 +1102,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         protected void AppendSql(StringBuilder result, string sql)
         {
-            if (string.IsNullOrWhiteSpace(sql)) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(sql)) return;
 
             result.AppendLine($"{sql} ");
         }

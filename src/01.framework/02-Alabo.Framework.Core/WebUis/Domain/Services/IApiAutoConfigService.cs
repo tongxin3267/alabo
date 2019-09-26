@@ -1,13 +1,13 @@
 ﻿using System;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Services;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 
-namespace Alabo.Framework.Core.WebUis.Domain.Services {
-
-    public interface IApIAlaboAutoConfigService : IService {
-
+namespace Alabo.Framework.Core.WebUis.Domain.Services
+{
+    public interface IApIAlaboAutoConfigService : IService
+    {
         /// <summary>
-        /// get view
+        ///     get view
         /// </summary>
         /// <param name="type"></param>
         /// <param name="id"></param>
@@ -15,7 +15,7 @@ namespace Alabo.Framework.Core.WebUis.Domain.Services {
         AutoForm GetView(Type type, object id);
 
         /// <summary>
-        /// save
+        ///     save
         /// </summary>
         /// <returns></returns>
         void Save(Type type, object model);

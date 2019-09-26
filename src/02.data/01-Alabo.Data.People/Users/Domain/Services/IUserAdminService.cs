@@ -2,14 +2,14 @@
 using Alabo.Domains.Services;
 using Alabo.Users.Entities;
 
-namespace Alabo.Data.People.Users.Domain.Services {
-
+namespace Alabo.Data.People.Users.Domain.Services
+{
     /// <summary>
     ///     后台用户操作接口
     /// </summary>
-    public interface IUserAdminService : IService {
-
-        ServiceResult UpdateUser(Alabo.Users.Entities.User user);
+    public interface IUserAdminService : IService
+    {
+        ServiceResult UpdateUser(User user);
 
         bool UpdateUserDetail(UserDetail userDetail);
 

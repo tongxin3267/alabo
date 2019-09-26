@@ -17,17 +17,14 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
         }
 
         /// <summary>
-        /// 获取运费模板
+        ///     获取运费模板
         /// </summary>
         /// <param name="storeId"></param>
         /// <returns></returns>
         public List<KeyValue> GetStoreDeliveryTemplateByCache(long storeId)
         {
             var store = Resolve<IShopStoreService>().GetSingleFromCache(storeId);
-            if (store == null)
-            {
-                return null;
-            }
+            if (store == null) return null;
             var result = new List<KeyValue>();
             var list = GetList(r => r.StoreId == storeId);
             list.Foreach(r => { result.Add(new KeyValue(r.Id, r.TemplateName)); });

@@ -2,12 +2,12 @@
 using Alabo.Industry.Cms.Articles.Domain.Entities;
 using MongoDB.Bson;
 
-namespace Alabo.Industry.Cms.Articles.Domain.Services {
-
-    public interface ISinglePageService : IService<SinglePage, ObjectId> {
-
+namespace Alabo.Industry.Cms.Articles.Domain.Services
+{
+    public interface ISinglePageService : IService<SinglePage, ObjectId>
+    {
         /// <summary>
-        /// 获取视图
+        ///     获取视图
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>

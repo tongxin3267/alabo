@@ -2,13 +2,13 @@
 using Alabo.Domains.Query.Dto;
 using Alabo.Validations;
 
-namespace Alabo.Industry.Shop.Orders.Dtos {
-
+namespace Alabo.Industry.Shop.Orders.Dtos
+{
     /// <summary>
     ///     Class BuyInfoInput.
     /// </summary>
-    public class BuyInfoInput : EntityDto {
-
+    public class BuyInfoInput : EntityDto
+    {
         /// <summary>
         ///     用户Id
         /// </summary>

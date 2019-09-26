@@ -1,17 +1,17 @@
 using System;
 using Alabo.App.Asset.Transfers.Domain.Configs;
-using Xunit;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Core.Reflections.Services;
 using Alabo.Industry.Shop.Activitys.ViewModels;
 using Alabo.Runtime.Config;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
+using Xunit;
 
-namespace Alabo.Test.Core.Admin.Domain.Services {
-
-    public class IClassServiceTests : CoreTest {
-
+namespace Alabo.Test.Core.Admin.Domain.Services
+{
+    public class IClassServiceTests : CoreTest
+    {
         [Theory]
         [InlineData(typeof(ViewActivityPage))]
         [InlineData(typeof(ViewActivityProductPage))]
@@ -19,7 +19,8 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
         [InlineData(typeof(MoneyTypeConfig))]
         [InlineData(typeof(TransferConfig))]
         [TestMethod("GetClassDescription_String")]
-        public void GetClassDescription_String_test(Type type) {
+        public void GetClassDescription_String_test(Type type)
+        {
             var fullName = type.FullName;
             var result = Resolve<IClassService>().GetClassDescription(fullName);
             Assert.NotNull(result);
@@ -31,7 +32,8 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
         [InlineData("Alabo.App.Core.Admin.Domain.CallBacks.PostRoleConfig")]
         [InlineData("Alabo.App.Shop.Activitys.ViewModels.ViewActivityPage")]
         [TestMethod("GetEditPropertys_String")]
-        public void GetEditPropertys_String_test(string fullName) {
+        public void GetEditPropertys_String_test(string fullName)
+        {
             var result = Resolve<IClassService>().GetEditPropertys(fullName);
             Assert.NotNull(result);
         }
@@ -43,7 +45,8 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
         [InlineData(typeof(MoneyTypeConfig))]
         [InlineData(typeof(TransferConfig))]
         [TestMethod("GetListPropertys_String")]
-        public void GetListPropertys_String_test(Type type) {
+        public void GetListPropertys_String_test(Type type)
+        {
             var fullName = type.FullName;
             var result = Resolve<IClassService>().GetListPropertys(fullName);
             Assert.NotNull(result);
@@ -56,7 +59,8 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
         [InlineData(typeof(MoneyTypeConfig))]
         [InlineData(typeof(TransferConfig))]
         [TestMethod("GetAllPropertys_String")]
-        public void GetAllPropertys_String_test(Type type) {
+        public void GetAllPropertys_String_test(Type type)
+        {
             var fullName = type.FullName;
             var result = Resolve<IClassService>().GetAllPropertys(fullName);
             Assert.NotNull(result);
@@ -69,7 +73,8 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
         [InlineData(typeof(MoneyTypeConfig))]
         [InlineData(typeof(TransferConfig))]
         [TestMethod("GetEditPropertys_Type")]
-        public void GetEditPropertys_Type_test(Type type) {
+        public void GetEditPropertys_Type_test(Type type)
+        {
             var result = Resolve<IClassService>().GetEditPropertys(type);
             Assert.NotNull(result);
         }
@@ -81,7 +86,8 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
         [InlineData(typeof(MoneyTypeConfig))]
         [InlineData(typeof(TransferConfig))]
         [TestMethod("GetListPropertys_Type")]
-        public void GetListPropertys_Type_test(Type type) {
+        public void GetListPropertys_Type_test(Type type)
+        {
             var result = Resolve<IClassService>().GetListPropertys(type);
             Assert.NotNull(result);
         }
@@ -93,7 +99,8 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
         [InlineData(typeof(MoneyTypeConfig))]
         [InlineData(typeof(TransferConfig))]
         [TestMethod("GetAllPropertys_Type")]
-        public void GetAllPropertys_Type_test(Type type) {
+        public void GetAllPropertys_Type_test(Type type)
+        {
             var result = Resolve<IClassService>().GetAllPropertys(type);
             Assert.NotNull(result);
         }
@@ -101,7 +108,8 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
         [Theory]
         [InlineData(-1)]
         [TestMethod("GetSingleFromCache_Test")]
-        public void GetSingleFromCache_Test_ExpectedBehavior(long entityId) {
+        public void GetSingleFromCache_Test_ExpectedBehavior(long entityId)
+        {
             //var model = Service<IAdminService>().GetRandom(entityId);
             //if (model != null)
             //{

@@ -107,9 +107,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <param name="expression">查询条件表达式</param>
         public void Where<TEntity>(Expression<Func<TEntity, bool>> expression) where TEntity : class
         {
-            if (expression == null) {
-                throw new ArgumentNullException(nameof(expression));
-            }
+            if (expression == null) throw new ArgumentNullException(nameof(expression));
 
             var condition = _expressionResolver.Resolve(expression);
             And(condition);
@@ -124,9 +122,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <param name="operator">运算符</param>
         public void WhereIf(string column, object value, bool condition, Operator @operator = Operator.Equal)
         {
-            if (condition) {
-                Where(column, value, @operator);
-            }
+            if (condition) Where(column, value, @operator);
         }
 
         /// <summary>
@@ -139,9 +135,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         public void WhereIf<TEntity>(Expression<Func<TEntity, object>> expression, object value, bool condition,
             Operator @operator = Operator.Equal) where TEntity : class
         {
-            if (condition) {
-                Where(expression, value, @operator);
-            }
+            if (condition) Where(expression, value, @operator);
         }
 
         /// <summary>
@@ -151,9 +145,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <param name="condition">该值为true时添加查询条件，否则忽略</param>
         public void WhereIf<TEntity>(Expression<Func<TEntity, bool>> expression, bool condition) where TEntity : class
         {
-            if (condition) {
-                Where(expression);
-            }
+            if (condition) Where(expression);
         }
 
         /// <summary>
@@ -164,9 +156,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <param name="operator">运算符</param>
         public void WhereIfNotEmpty(string column, object value, Operator @operator = Operator.Equal)
         {
-            if (string.IsNullOrWhiteSpace(Alabo.Extensions.Extensions.SafeString(value))) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(Alabo.Extensions.Extensions.SafeString(value))) return;
 
             Where(column, value, @operator);
         }
@@ -180,13 +170,9 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         public void WhereIfNotEmpty<TEntity>(Expression<Func<TEntity, object>> expression, object value,
             Operator @operator = Operator.Equal) where TEntity : class
         {
-            if (expression == null) {
-                throw new ArgumentNullException(nameof(expression));
-            }
+            if (expression == null) throw new ArgumentNullException(nameof(expression));
 
-            if (string.IsNullOrWhiteSpace(Alabo.Extensions.Extensions.SafeString(value))) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(Alabo.Extensions.Extensions.SafeString(value))) return;
 
             Where(expression, value, @operator);
         }
@@ -197,18 +183,14 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <param name="expression">查询条件表达式,如果参数值为空，则忽略该查询条件</param>
         public void WhereIfNotEmpty<TEntity>(Expression<Func<TEntity, bool>> expression) where TEntity : class
         {
-            if (expression == null) {
-                throw new ArgumentNullException(nameof(expression));
-            }
+            if (expression == null) throw new ArgumentNullException(nameof(expression));
 
-            if (Lambda.GetConditionCount(expression) > 1) {
+            if (Lambda.GetConditionCount(expression) > 1)
                 throw new InvalidOperationException(string.Format(LibraryResource.OnlyOnePredicate, expression));
-            }
 
             if (string.IsNullOrWhiteSpace(Alabo.Extensions.Extensions.SafeString(Lambda.GetValue(expression)))
-            ) {
+            )
                 return;
-            }
 
             Where(expression);
         }
@@ -452,9 +434,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         public string ToSql()
         {
             var condition = GetCondition();
-            if (string.IsNullOrWhiteSpace(condition)) {
-                return null;
-            }
+            if (string.IsNullOrWhiteSpace(condition)) return null;
 
             return $"Where {condition}";
         }
@@ -472,18 +452,12 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// </summary>
         private DateTime? GetMin(DateTime? min, DateTime? max, bool includeTime)
         {
-            if (min == null && max == null) {
-                return null;
-            }
+            if (min == null && max == null) return null;
 
             var result = min;
-            if (min > max) {
-                result = max;
-            }
+            if (min > max) result = max;
 
-            if (includeTime) {
-                return result;
-            }
+            if (includeTime) return result;
 
             return Alabo.Extensions.Extensions.SafeValue(result).Date;
         }
@@ -493,18 +467,12 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// </summary>
         private DateTime? GetMax(DateTime? min, DateTime? max, bool includeTime)
         {
-            if (min == null && max == null) {
-                return null;
-            }
+            if (min == null && max == null) return null;
 
             var result = max;
-            if (min > max) {
-                result = min;
-            }
+            if (min > max) result = min;
 
-            if (includeTime) {
-                return result;
-            }
+            if (includeTime) return result;
 
             return Alabo.Extensions.Extensions.SafeValue(result).Date.AddDays(1);
         }
@@ -514,13 +482,9 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// </summary>
         private Boundary GetBoundary(Boundary? boundary, bool includeTime)
         {
-            if (boundary != null) {
-                return Alabo.Extensions.Extensions.SafeValue(boundary);
-            }
+            if (boundary != null) return Alabo.Extensions.Extensions.SafeValue(boundary);
 
-            if (includeTime) {
-                return Boundary.Both;
-            }
+            if (includeTime) return Boundary.Both;
 
             return Boundary.Left;
         }

@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using Alabo.Domains.Query.Dto;
 
-namespace Alabo.Industry.Shop.Orders.Dtos {
-
+namespace Alabo.Industry.Shop.Orders.Dtos
+{
     /// <summary>
     ///     订单购买数据传输
     /// </summary>
-    public class BuyOutput : EntityDto {
-
+    public class BuyOutput : EntityDto
+    {
         /// <summary>
         ///     订单使用人民币支付的金额
         ///     是客户实际支付的金额，微信支付宝

@@ -3,8 +3,8 @@ using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.Reflections.Interfaces;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
-
+namespace Alabo.Industry.Cms.Articles.Domain.CallBacks
+{
     /// <summary>
     ///     控制面板中 头条分类
     /// </summary>
@@ -12,7 +12,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
         PageType = ViewPageType.List,
         SideBarType = SideBarType.NewsSideBar)]
     [RelationProperty(RelationType = RelationType.ClassRelation)]
-    public class ChannelTopLineClassRelation : IRelation {
+    public class ChannelTopLineClassRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -21,7 +22,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
     [ClassProperty(Name = "头条标签", Icon = "fa fa-question-circle", Description = "头条标签", SortOrder = 41,
         PageType = ViewPageType.List, SideBarType = SideBarType.NewsSideBar)]
     [RelationProperty(RelationType = RelationType.TagRelation)]
-    public class ChannelTopLineTagRelation : IRelation {
+    public class ChannelTopLineTagRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -31,7 +33,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
         PageType = ViewPageType.List,
         SideBarType = SideBarType.ArticleSideBarSideBar)]
     [RelationProperty(RelationType = RelationType.ClassRelation)]
-    public class ChannelArticleClassRelation : IRelation {
+    public class ChannelArticleClassRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -41,7 +44,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
         PageType = ViewPageType.List,
         SideBarType = SideBarType.ArticleSideBarSideBar)]
     [RelationProperty(RelationType = RelationType.TagRelation)]
-    public class ChannelArticleTagRelation : IRelation {
+    public class ChannelArticleTagRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -51,7 +55,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
         PageType = ViewPageType.List,
         SideBarType = SideBarType.HelpSideBar)]
     [RelationProperty(RelationType = RelationType.ClassRelation)]
-    public class ChannelHelpClassRelation : IRelation {
+    public class ChannelHelpClassRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -61,7 +66,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
         PageType = ViewPageType.List,
         SideBarType = SideBarType.HelpSideBar)]
     [RelationProperty(RelationType = RelationType.TagRelation)]
-    public class ChannelHelpTagRelation : IRelation {
+    public class ChannelHelpTagRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -71,7 +77,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
         PageType = ViewPageType.List,
         SideBarType = SideBarType.CommentSideBar)]
     [RelationProperty(RelationType = RelationType.ClassRelation)]
-    public class ChannelCommentClassRelation : IRelation {
+    public class ChannelCommentClassRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -80,7 +87,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
     [ClassProperty(Name = "评论标签", Icon = "fa fa-comments-o", Description = "评论标签", SortOrder = 47,
         PageType = ViewPageType.List, SideBarType = SideBarType.CommentSideBar)]
     [RelationProperty(RelationType = RelationType.TagRelation)]
-    public class ChannelCommentTagRelation : IRelation {
+    public class ChannelCommentTagRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -89,7 +97,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
     [ClassProperty(Name = "图片分类", Icon = "fa fa-file-image-o", Description = "图片分类", SortOrder = 48,
         PageType = ViewPageType.List, SideBarType = SideBarType.ImagesSideBar)]
     [RelationProperty(RelationType = RelationType.ClassRelation)]
-    public class ChannelImagesClassRelation : IRelation {
+    public class ChannelImagesClassRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -99,7 +108,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
         PageType = ViewPageType.List,
         SideBarType = SideBarType.ImagesSideBar)]
     [RelationProperty(RelationType = RelationType.TagRelation)]
-    public class ChannelImagesTagRelation : IRelation {
+    public class ChannelImagesTagRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -108,7 +118,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
     [ClassProperty(Name = "视频分类", Icon = "fa fa-video-camera", Description = "视频分类", SortOrder = 50,
         PageType = ViewPageType.List, SideBarType = SideBarType.VideoSideBar)]
     [RelationProperty(RelationType = RelationType.ClassRelation)]
-    public class ChannelVideoClassRelation : IRelation {
+    public class ChannelVideoClassRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -117,7 +128,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
     [ClassProperty(Name = "视频标签", Icon = "fa fa-file-video-o", Description = "视频标签", SortOrder = 51,
         PageType = ViewPageType.List, SideBarType = SideBarType.VideoSideBar)]
     [RelationProperty(RelationType = RelationType.TagRelation)]
-    public class ChannelVideoTagRelation : IRelation {
+    public class ChannelVideoTagRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -127,7 +139,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
         PageType = ViewPageType.List,
         SideBarType = SideBarType.DownSideBar)]
     [RelationProperty(RelationType = RelationType.ClassRelation)]
-    public class ChannelDownClassRelation : IRelation {
+    public class ChannelDownClassRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -136,7 +149,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
     [ClassProperty(Name = "下载标签", Icon = "fa fa-cloud-download", Description = "下载标签", SortOrder = 53,
         PageType = ViewPageType.List, SideBarType = SideBarType.DownSideBar)]
     [RelationProperty(RelationType = RelationType.TagRelation)]
-    public class ChannelDownTagRelation : IRelation {
+    public class ChannelDownTagRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -146,7 +160,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
         PageType = ViewPageType.List,
         SideBarType = SideBarType.QuestionSideBar)]
     [RelationProperty(RelationType = RelationType.ClassRelation)]
-    public class ChannelQuestionClassRelation : IRelation {
+    public class ChannelQuestionClassRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -155,7 +170,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
     [ClassProperty(Name = "问答标签", Icon = "fa fa-question-circle", Description = "问答标签", SortOrder = 55,
         PageType = ViewPageType.List, SideBarType = SideBarType.QuestionSideBar)]
     [RelationProperty(RelationType = RelationType.TagRelation)]
-    public class ChannelQuestionTagRelation : IRelation {
+    public class ChannelQuestionTagRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -165,7 +181,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
         PageType = ViewPageType.List,
         SideBarType = SideBarType.NoteBookSideBar)]
     [RelationProperty(RelationType = RelationType.ClassRelation)]
-    public class ChannelNoteBookClassRelation : IRelation {
+    public class ChannelNoteBookClassRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -175,7 +192,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
         PageType = ViewPageType.List,
         SideBarType = SideBarType.NoteBookSideBar)]
     [RelationProperty(RelationType = RelationType.TagRelation)]
-    public class ChannelNoteBookTagRelation : IRelation {
+    public class ChannelNoteBookTagRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -185,7 +203,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
         PageType = ViewPageType.List,
         SideBarType = SideBarType.JobSideBar)]
     [RelationProperty(RelationType = RelationType.ClassRelation)]
-    public class ChannelJobClassRelation : IRelation {
+    public class ChannelJobClassRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -195,7 +214,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
         PageType = ViewPageType.List,
         SideBarType = SideBarType.JobSideBar)]
     [RelationProperty(RelationType = RelationType.TagRelation)]
-    public class ChannelJobTagRelation : IRelation {
+    public class ChannelJobTagRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -205,7 +225,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
         PageType = ViewPageType.List,
         SideBarType = SideBarType.SinglePageSideBar)]
     [RelationProperty(RelationType = RelationType.TagRelation)]
-    public class ChannelMessageClassRelation : IRelation {
+    public class ChannelMessageClassRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -215,7 +236,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
         PageType = ViewPageType.List,
         SideBarType = SideBarType.JobSideBar)]
     [RelationProperty(RelationType = RelationType.TagRelation)]
-    public class ChannelUserNoticeClassRelation : IRelation {
+    public class ChannelUserNoticeClassRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -225,7 +247,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
         PageType = ViewPageType.List,
         SideBarType = SideBarType.SinglePageSideBar)]
     [RelationProperty(RelationType = RelationType.TagRelation)]
-    public class ChannelUserNoticeTagRelation : IRelation {
+    public class ChannelUserNoticeTagRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -235,7 +258,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
         PageType = ViewPageType.List,
         SideBarType = SideBarType.JobSideBar)]
     [RelationProperty(RelationType = RelationType.TagRelation)]
-    public class ChannelMessageTagRelation : IRelation {
+    public class ChannelMessageTagRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -245,7 +269,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
         PageType = ViewPageType.List,
         SideBarType = SideBarType.SinglePageSideBar)]
     [RelationProperty(RelationType = RelationType.ClassRelation)]
-    public class SingelClassRelation : IRelation {
+    public class SingelClassRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -255,7 +280,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
         PageType = ViewPageType.List,
         SideBarType = SideBarType.SinglePageSideBar)]
     [RelationProperty(RelationType = RelationType.TagRelation)]
-    public class SingleTagRelation : IRelation {
+    public class SingleTagRelation : IRelation
+    {
     }
 
     /// <summary>
@@ -264,6 +290,7 @@ namespace Alabo.Industry.Cms.Articles.Domain.CallBacks {
     [ClassProperty(Name = "工单分类", Icon = "fa fa-file-image-o", Description = "工单分类", SortOrder = 60,
         PageType = ViewPageType.List, SideBarType = SideBarType.CustomerServiceSideBar)]
     [RelationProperty(RelationType = RelationType.ClassRelation)]
-    public class WorkOrderClassRelation : IRelation {
+    public class WorkOrderClassRelation : IRelation
+    {
     }
 }

@@ -16,7 +16,6 @@ using Newtonsoft.Json;
 
 namespace Alabo.Data.People.Cities.Domain.CallBacks
 {
-
     /// <summary>
     ///     市代理等级
     /// </summary>
@@ -25,8 +24,8 @@ namespace Alabo.Data.People.Cities.Domain.CallBacks
         Description = "市代理等级", PageType = ViewPageType.List, SortOrder = 12,
         Validator = "SELECT 1 FROM  WHERE GradeId='{0}'",
         ValidateMessage = "该等级下存在用户或者为默认等级", SideBarType = SideBarType.CitySideBar)]
-    public class CityGradeConfig : BaseGradeConfig, IAutoConfig {
-
+    public class CityGradeConfig : BaseGradeConfig, IAutoConfig
+    {
         /// <summary>
         ///     会员类型Id，不同的会员类型有不同的等级
         /// </summary>
@@ -35,11 +34,14 @@ namespace Alabo.Data.People.Cities.Domain.CallBacks
         [Display(Name = "市代理等级")]
         public new Guid UserTypeId { get; set; } = Guid.Parse("71BE65E6-3A64-414D-972E-1A3D4A365102");
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
             var list = Ioc.Resolve<IAutoConfigService>().GetList<CityGradeConfig>();
-            if (list.Count < 1) {
+            if (list.Count < 1)
+            {
                 var configs = new List<CityGradeConfig>();
-                var config = new CityGradeConfig {
+                var config = new CityGradeConfig
+                {
                     Id = Guid.Parse("72be65e6-3a64-414d-972e-1a3d4a368000"),
                     Name = "市代理默认等级",
                     Icon = "/wwwroot/static/images/GradeIcon/City01.png",
@@ -47,7 +49,8 @@ namespace Alabo.Data.People.Cities.Domain.CallBacks
                 };
                 list.Add(config);
 
-                config = new CityGradeConfig {
+                config = new CityGradeConfig
+                {
                     Id = Guid.Parse("72be65e6-3a64-414d-972e-1a3d4a368001"),
                     Name = "黄金市代理",
                     Icon = "/wwwroot/static/images/GradeIcon/City02.png",
@@ -56,7 +59,8 @@ namespace Alabo.Data.People.Cities.Domain.CallBacks
                 };
                 list.Add(config);
 
-                config = new CityGradeConfig {
+                config = new CityGradeConfig
+                {
                     Id = Guid.Parse("72be65e6-3a64-414d-972e-1a3d4a368002"),
                     Name = "钻石市代理",
                     Icon = "/wwwroot/static/images/GradeIcon/City03.png",
@@ -66,7 +70,8 @@ namespace Alabo.Data.People.Cities.Domain.CallBacks
                 list.Add(config);
 
                 var typeclassProperty = config.GetType().GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
-                var autoConfig = new AutoConfig {
+                var autoConfig = new AutoConfig
+                {
                     Type = config.GetType().FullName,
                     // // AppName = typeclassProperty.AppName,
                     LastUpdated = DateTime.Now,
@@ -85,6 +90,7 @@ namespace Alabo.Data.People.Cities.Domain.CallBacks
         Mark = 0,
         SideBarType = SideBarType.CitySideBar)]
     // SideBar = "/Core/UserType/SideBar/CitySideBar")]
-    public class CityGradeRelation : IRelation {
+    public class CityGradeRelation : IRelation
+    {
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Alabo.Logging;
 using Alabo.Logging.Extensions;
+using Microsoft.AspNetCore.Http;
 
 namespace Alabo.Web.Middlewares
 {
@@ -45,9 +45,7 @@ namespace Alabo.Web.Middlewares
         /// </summary>
         private void WriteLog(HttpContext context, Exception ex)
         {
-            if (context == null) {
-                return;
-            }
+            if (context == null) return;
 
             var log = Log.GetLog().Caption("全局异常捕获").Content($"状态码：{context.Response.StatusCode}");
             ex.Log(log);

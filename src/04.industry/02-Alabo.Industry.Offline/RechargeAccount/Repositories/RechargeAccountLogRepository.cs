@@ -5,7 +5,8 @@ using MongoDB.Bson;
 
 namespace Alabo.Industry.Offline.RechargeAccount.Repositories
 {
-    public class RechargeAccountLogRepository : RepositoryMongo<RechargeAccountLog, ObjectId>, IRechargeAccountLogRepository
+    public class RechargeAccountLogRepository : RepositoryMongo<RechargeAccountLog, ObjectId>,
+        IRechargeAccountLogRepository
     {
         public RechargeAccountLogRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

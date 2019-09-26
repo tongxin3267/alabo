@@ -10,16 +10,14 @@ using Alabo.Users.Entities;
 
 namespace Alabo.Industry.Shop.Orders.Domain.Entities.Extensions
 {
-
     /// <summary>
     ///     订单扩展数据，以json格式保存到订单表
     /// </summary>
     public class OrderExtension : EntityExtension
     {
-
         /// <summary>
-        ///    供应商是否可以查看
-        /// 如果为False的时候，供应商不可以查看
+        ///     供应商是否可以查看
+        ///     如果为False的时候，供应商不可以查看
         /// </summary>
         public bool IsSupplierView { get; set; } = false;
 
@@ -37,7 +35,7 @@ namespace Alabo.Industry.Shop.Orders.Domain.Entities.Extensions
         public bool IsGroupBuy { get; set; } = false;
 
         /// <summary>
-        /// 允许使用的资产
+        ///     允许使用的资产
         /// </summary>
         public IList<OrderMoneyItem> AllowMoneys { get; set; } = new List<OrderMoneyItem>();
 
@@ -73,10 +71,7 @@ namespace Alabo.Industry.Shop.Orders.Domain.Entities.Extensions
         /// <summary>
         ///     买家的交易数据，快照数据，包括买家订单创建时候的数据
         /// </summary>
-        public User User
-        {
-            get; set;
-        }
+        public User User { get; set; }
 
         /// <summary>
         ///     订单所属店铺,快照数据
@@ -86,18 +81,12 @@ namespace Alabo.Industry.Shop.Orders.Domain.Entities.Extensions
         /// <summary>
         ///     订单地址
         /// </summary>
-        public UserAddress UserAddress
-        {
-            get; set;
-        }
+        public UserAddress UserAddress { get; set; }
 
         /// <summary>
         ///     对应的账单信息
         /// </summary>
-        public Pay Pay
-        {
-            get; set;
-        }
+        public Pay Pay { get; set; }
 
         /// <summary>
         ///     Gets or sets the product.
@@ -106,49 +95,44 @@ namespace Alabo.Industry.Shop.Orders.Domain.Entities.Extensions
         /// <value>
         ///     The product.
         /// </value>
-        public IList<ProductSkuItem> ProductSkuItems
-        {
-            get; set;
-        }
+        public IList<ProductSkuItem> ProductSkuItems { get; set; }
 
         /// <summary>
-        /// 额外的
+        ///     额外的
         /// </summary>
         public string AttachContent { get; set; }
 
 
         /// <summary>
-        /// 退货,退款 详情
+        ///     退货,退款 详情
         /// </summary>
         public Refund RefundInfo { get; set; }
 
         /// <summary>
-        /// 货款
+        ///     货款
         /// </summary>
         public PayGoodsAmountInput PayGoods { get; set; }
 
         /// <summary>
-        /// 租户信息
+        ///     租户信息
         /// </summary>
         public TenantOrderInfo TenantOrderInfo { get; set; }
-
-
     }
 
     /// <summary>
-    /// 租户订单信息
+    ///     租户订单信息
     /// </summary>
     public class TenantOrderInfo
     {
         /// <summary>
-        /// 如果存在主库, 代表租户的订单ID
-        /// 如果存在租库, 代表主库的订单ID
+        ///     如果存在主库, 代表租户的订单ID
+        ///     如果存在租库, 代表主库的订单ID
         /// </summary>
-        public  long OrderId { set; get; }
+        public long OrderId { set; get; }
 
 
         /// <summary>
-        /// 租户标识
+        ///     租户标识
         /// </summary>
         public string Tenant { get; set; }
     }

@@ -184,9 +184,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         public void On<TLeft, TRight>(Expression<Func<TLeft, TRight, bool>> expression)
             where TLeft : class where TRight : class
         {
-            if (expression == null) {
-                throw new ArgumentNullException(nameof(expression));
-            }
+            if (expression == null) throw new ArgumentNullException(nameof(expression));
 
             var expressions = Lambda.GetGroupPredicates(expression);
             expressions.ForEach(group => On(group, typeof(TLeft), typeof(TRight)));

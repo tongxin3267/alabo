@@ -4,13 +4,13 @@ using Alabo.App.Asset.Transfers.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 
-namespace Alabo.App.Asset.Transfers.Domain.Services {
-
+namespace Alabo.App.Asset.Transfers.Domain.Services
+{
     /// <summary>
     ///     转账
     /// </summary>
-    public interface ITransferService : IService<Transfer, long> {
-
+    public interface ITransferService : IService<Transfer, long>
+    {
         /// <summary>
         ///     转账
         /// </summary>

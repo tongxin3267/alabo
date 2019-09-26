@@ -9,10 +9,10 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.Industry.Shop.Products.ViewModels {
-
-    public class ViewProductList : BaseViewModel {
-
+namespace Alabo.Industry.Shop.Products.ViewModels
+{
+    public class ViewProductList : BaseViewModel
+    {
         /// <summary>
         ///     商品所属类目ID
         /// </summary>
@@ -156,11 +156,11 @@ namespace Alabo.Industry.Shop.Products.ViewModels {
         [Display(Name = "显示价格")]
         public string DisplayPrice { get; set; }
 
-        public string GetSmallUrl {
-            get {
-                if (SmallUrl != null) {
-                    return SmallUrl;
-                }
+        public string GetSmallUrl
+        {
+            get
+            {
+                if (SmallUrl != null) return SmallUrl;
 
                 return Resolve<IAutoConfigService>().GetValue<WebSiteConfig>().NoPic;
             }

@@ -8,30 +8,27 @@ using Alabo.Framework.Core.WebUis.Design.Widgets;
 using Alabo.Helpers;
 using Alabo.Mapping;
 
-namespace Alabo.Cloud.People.UserRightss.UI.Widgets {
-
-    public class MerchantListWidget : IWidget {
-
-        public object Get(string json) {
+namespace Alabo.Cloud.People.UserRightss.UI.Widgets
+{
+    public class MerchantListWidget : IWidget
+    {
+        public object Get(string json)
+        {
             var dic = json.ToObject<Dictionary<string, string>>();
 
             //前端传值需注意大小写 userId为必传项
-            dic.TryGetValue("userId", out string userId);
-            if (userId.IsNullOrEmpty()) {
-                return null;
-            }
+            dic.TryGetValue("userId", out var userId);
+            if (userId.IsNullOrEmpty()) return null;
 
             var userGradeList = Ioc.Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
             var resultList = new List<AutoMerchantItem>();
-            foreach (var item in userGradeList) {
+            foreach (var item in userGradeList)
+            {
                 //不显示18将 暂时写死 回头修改
-                if (item.SortOrder > 1005) {
-                    continue;
-                }
-                var userRight = Ioc.Resolve<IUserRightsService>().GetSingle(u => u.UserId == userId.ToInt64() && u.GradeId == item.Id);
-                if (userRight == null) {
-                    userRight = new UserRights();
-                }
+                if (item.SortOrder > 1005) continue;
+                var userRight = Ioc.Resolve<IUserRightsService>()
+                    .GetSingle(u => u.UserId == userId.ToInt64() && u.GradeId == item.Id);
+                if (userRight == null) userRight = new UserRights();
                 var merchant = AutoMapping.SetValue<AutoMerchantItem>(userRight);
                 merchant.GradeName = item.Name;
                 merchant.UsableCount = userRight.TotalCount - userRight.TotalUseCount;
@@ -41,7 +38,8 @@ namespace Alabo.Cloud.People.UserRightss.UI.Widgets {
             return resultList;
         }
 
-        public class AutoMerchantItem {
+        public class AutoMerchantItem
+        {
             public string GradeName { get; set; }
 
             /// <summary>

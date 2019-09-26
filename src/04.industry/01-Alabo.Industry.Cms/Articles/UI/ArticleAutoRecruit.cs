@@ -11,7 +11,6 @@ namespace Alabo.Industry.Cms.Articles.UI
     //招聘，暫定的十大神器使用
     public class ArticleAutoRecruit : IAutoNews
     {
-
         public PagedList<AutoNewsItem> ResultList(object query, AutoBaseModel autoModel)
         {
             var model = Ioc.Resolve<IArticleService>()
@@ -30,6 +29,7 @@ namespace Alabo.Industry.Cms.Articles.UI
                 };
                 list.Add(temp);
             }
+
             return list;
         }
 

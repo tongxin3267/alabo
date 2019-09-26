@@ -1,24 +1,27 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.App.Asset.Bills.Domain.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Users.Entities;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Asset.Bills.Dtos {
-
+namespace Alabo.App.Asset.Bills.Dtos
+{
     /// <summary>
     ///     Class ViewAdminBill.
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Asset_ViewHomeBill")]
-    [ClassProperty(Name = "资产明细", Icon = "fa fa-puzzle-piece", SideBarType = SideBarType.FullScreen, PageType = ViewPageType.List, PostApi = "Api/Account/List", ListApi = "Api/Account/List")]
-    public class ViewHomeBill : BaseViewModel {
-
+    [ClassProperty(Name = "资产明细", Icon = "fa fa-puzzle-piece", SideBarType = SideBarType.FullScreen,
+        PageType = ViewPageType.List, PostApi = "Api/Account/List", ListApi = "Api/Account/List")]
+    public class ViewHomeBill : BaseViewModel
+    {
         /// <summary>
         ///     Gets or sets Id标识
         /// </summary>
@@ -36,12 +39,12 @@ namespace Alabo.App.Asset.Bills.Dtos {
         /// <summary>
         ///     Gets or sets the bill.
         /// </summary>
-        public Domain.Entities.Bill Bill { get; set; }
+        public Bill Bill { get; set; }
 
         /// <summary>
         ///     交易用户
         /// </summary>
-        public Users.Entities.User User { get; set; }
+        public User User { get; set; }
 
         /// <summary>
         ///     Gets or sets the name of the 会员.
@@ -80,7 +83,7 @@ namespace Alabo.App.Asset.Bills.Dtos {
         /// <summary>
         ///     Gets or sets the other 会员.
         /// </summary>
-        public Users.Entities.User OtherUser { get; set; }
+        public User OtherUser { get; set; }
 
         /// <summary>
         ///     Gets or sets the name of the other 会员.
@@ -158,12 +161,12 @@ namespace Alabo.App.Asset.Bills.Dtos {
         /// <summary>
         ///     下一条账单
         /// </summary>
-        public Domain.Entities.Bill NextBill { get; set; }
+        public Bill NextBill { get; set; }
 
         /// <summary>
         ///     上一条账单
         /// </summary>
-        public Domain.Entities.Bill PrexBill { get; set; }
+        public Bill PrexBill { get; set; }
 
         /// <summary>
         ///     账单类型，操作类型，交易分类

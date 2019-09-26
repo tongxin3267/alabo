@@ -1,8 +1,8 @@
 using Alabo.Industry.Shop.Products.Domain.Services;
-using Xunit;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
+using Xunit;
 
 namespace Alabo.Test.Shop.Product.Domain.Services
 {
@@ -31,10 +31,7 @@ namespace Alabo.Test.Shop.Product.Domain.Services
         public void AutoUpdateSkuPrice_Int64_test(long productId)
         {
             var product = Resolve<IProductService>().GetRandom(productId);
-            if (product != null)
-            {
-                Resolve<IProductSkuService>().AutoUpdateSkuPrice(product.Id);
-            }
+            if (product != null) Resolve<IProductSkuService>().AutoUpdateSkuPrice(product.Id);
         }
 
         [Fact]

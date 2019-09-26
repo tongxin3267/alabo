@@ -8,45 +8,46 @@ using Alabo.Files;
 using Alabo.Industry.Cms.Articles.Domain.Entities;
 using MongoDB.Bson;
 
-namespace Alabo.Industry.Cms.Articles.Domain.Services {
+namespace Alabo.Industry.Cms.Articles.Domain.Services
+{
+    public class SpecialService : ServiceBase<Special, ObjectId>, ISpecialService
+    {
+        public SpecialService(IUnitOfWork unitOfWork, IRepository<Special, ObjectId> repository) : base(unitOfWork,
+            repository)
+        {
+        }
 
-    public class SpecialService : ServiceBase<Special, ObjectId>, ISpecialService {
-
-        public ServiceResult AddOrUpdate(Special model) {
+        public ServiceResult AddOrUpdate(Special model)
+        {
             var find = new Special();
-            if (model.Id.IsObjectIdNullOrEmpty()) {
+            if (model.Id.IsObjectIdNullOrEmpty())
                 find = GetSingle(r => r.Key == model.Key);
-            } else {
+            else
                 find = GetSingle(r => r.Key == model.Key && r.Id != model.Id);
-            }
 
-            if (find != null) {
-                return ServiceResult.FailedWithMessage("页面已经存在，请重新输入新的标识");
-            }
+            if (find != null) return ServiceResult.FailedWithMessage("页面已经存在，请重新输入新的标识");
 
             AddOrUpdate(model, model.Id.IsObjectIdNullOrEmpty());
             return ServiceResult.Success;
         }
 
-        public string GetPagePath(string key, bool ismobile) {
+        public string GetPagePath(string key, bool ismobile)
+        {
             var path = "";
-            if (ismobile) {
+            if (ismobile)
                 path = $@"/wwwroot/themes/{ThemeHelper.SeMobile}/Special/{key}.cshtml";
-            } else {
+            else
                 path = $@"/wwwroot/themes/{ThemeHelper.CurrentTheme}/Special/{key}.cshtml";
-            }
 
             var filePath = FileHelper.RootPath + "/" + path;
-            if (!File.Exists(filePath)) {
+            if (!File.Exists(filePath))
+            {
                 var diretory = FileHelper.RootPath + "/" + $@"wwwroot/themes/{ThemeHelper.CurrentTheme}/Special/";
                 FileHelper.CreateDirectory(diretory);
                 FileHelper.Write(filePath, $@"{key} 专题视图创建成功");
             }
 
             return path;
-        }
-
-        public SpecialService(IUnitOfWork unitOfWork, IRepository<Special, ObjectId> repository) : base(unitOfWork, repository) {
         }
     }
 }

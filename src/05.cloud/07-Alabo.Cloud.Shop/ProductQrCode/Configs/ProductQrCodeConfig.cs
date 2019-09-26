@@ -5,17 +5,17 @@ using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.Cloud.Shop.ProductQrCode.Configs {
-
+namespace Alabo.Cloud.Shop.ProductQrCode.Configs
+{
     /// <summary>
-    /// 二维码设置
+    ///     二维码设置
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "二维码设置",
         Icon = "fa fa-qrcode", SortOrder = 1, Description = "修改二维码设置，会员所有的二维码会重新生成",
         SideBarType = SideBarType.UserQrCodeSideBar)]
-    public class ProductQrCodeConfig : BaseViewModel, IAutoConfig {
-
+    public class ProductQrCodeConfig : BaseViewModel, IAutoConfig
+    {
         /// <summary>
         ///     背景图片
         /// </summary>
@@ -85,7 +85,8 @@ namespace Alabo.Cloud.Shop.ProductQrCode.Configs {
 
         /// <summary>
         /// </summary>
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

@@ -69,9 +69,8 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         {
             var result = ToSql();
             var parameters = GetParams();
-            foreach (var parameter in parameters) {
+            foreach (var parameter in parameters)
                 result = result.Replace(parameter.Key, SqlHelper.GetParamLiterals(parameter.Value));
-            }
 
             return result;
         }
@@ -186,9 +185,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// </summary>
         protected void AppendSql(StringBuilder result, string sql)
         {
-            if (string.IsNullOrWhiteSpace(sql)) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(sql)) return;
 
             result.AppendLine($"{sql} ");
         }

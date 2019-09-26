@@ -9,19 +9,21 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Cloud.People.GradeInfos.Controllers {
-
+namespace Alabo.Cloud.People.GradeInfos.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/GradeInfo/[action]")]
-    public class ApiGradeInfoController : ApiBaseController<GradeInfo, ObjectId> {
-
-        public ApiGradeInfoController() : base() {
+    public class ApiGradeInfoController : ApiBaseController<GradeInfo, ObjectId>
+    {
+        public ApiGradeInfoController()
+        {
             BaseService = Resolve<IGradeInfoService>();
         }
 
         [HttpGet]
         [Display(Description = "商家数据")]
-        public ApiResult<PagedList<GradeInfo>> GradeInfoList([FromQuery] PagedInputDto parameter) {
+        public ApiResult<PagedList<GradeInfo>> GradeInfoList([FromQuery] PagedInputDto parameter)
+        {
             var model = Resolve<IGradeInfoService>().GetPagedList(Query);
             return ApiResult.Success(model);
         }

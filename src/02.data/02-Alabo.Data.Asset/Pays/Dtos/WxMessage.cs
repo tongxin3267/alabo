@@ -1,6 +1,7 @@
-﻿namespace Alabo.App.Asset.Pays.Dtos {
-
-    public class WxMessage {
+﻿namespace Alabo.App.Asset.Pays.Dtos
+{
+    public class WxMessage
+    {
         public string DeviceInfo { get; set; }
         public string SignType { get; set; }
         public string OpenId { get; set; }
@@ -33,7 +34,8 @@
         public Parameters Parameters { get; set; }
     }
 
-    public class Parameters {
+    public class Parameters
+    {
         public string appid { get; set; }
         public string attach { get; set; }
         public string bank_type { get; set; }

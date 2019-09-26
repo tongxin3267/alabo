@@ -1,19 +1,20 @@
-﻿using Alabo.Dependency;
+﻿using System;
+using System.Threading.Tasks;
+using Alabo.Dependency;
 using Alabo.Schedules.Job;
 using Quartz;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
-namespace Alabo.Web.TaskShell.Job {
-
-    public class BookImportJob : JobBase {
-
-        public override TimeSpan? GetInterval() {
+namespace Alabo.Web.TaskShell.Job
+{
+    public class BookImportJob : JobBase
+    {
+        public override TimeSpan? GetInterval()
+        {
             return TimeSpan.FromDays(3);
         }
 
-        protected override async Task Execute(IJobExecutionContext context, IScope scope) {
+        protected override async Task Execute(IJobExecutionContext context, IScope scope)
+        {
             //var list = new List<BookPathHost>();
             //BookPathHost host = new BookPathHost();
             //host.Path = @"D:\服务器01(t1.dpnfs.com)";

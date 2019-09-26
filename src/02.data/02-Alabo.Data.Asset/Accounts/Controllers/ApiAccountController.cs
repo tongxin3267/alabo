@@ -24,16 +24,12 @@ using Alabo.Maps;
 using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Asset.Accounts.Controllers {
-
+namespace Alabo.App.Asset.Accounts.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/Account/[action]")]
-    public class ApiAccountController : ApiBaseController {
-
-        public ApiAccountController(
-           ) : base() {
-        }
-
+    public class ApiAccountController : ApiBaseController
+    {
         /// <summary>
         ///     所有s the accounts.
         /// </summary>
@@ -41,15 +37,20 @@ namespace Alabo.App.Asset.Accounts.Controllers {
         [HttpGet]
         [Display(Description = "所有S the accounts")]
         [ApiAuth]
-        public ApiResult<IList<AccountOutput>> AllAccounts([FromQuery] ApiBaseInput parameter) {
+        public ApiResult<IList<AccountOutput>> AllAccounts([FromQuery] ApiBaseInput parameter)
+        {
             var httpss = HttpContext.Request.QueryString;
             var model = Resolve<IAccountService>().GetUserAllAccount(parameter.LoginUserId);
             var moneys = Resolve<IAutoConfigService>().MoneyTypes();
             IList<AccountOutput> result = new List<AccountOutput>();
-            foreach (var item in model) {
-                var config = moneys.FirstOrDefault(r => r.Id == item.MoneyTypeId && r.IsShowFront && r.Status == Status.Normal);
-                if (config != null) {
-                    var apiOutput = new AccountOutput {
+            foreach (var item in model)
+            {
+                var config = moneys.FirstOrDefault(r =>
+                    r.Id == item.MoneyTypeId && r.IsShowFront && r.Status == Status.Normal);
+                if (config != null)
+                {
+                    var apiOutput = new AccountOutput
+                    {
                         MoneyTypeName = config.Name,
                         Amount = item.Amount,
                         MoneyTypeId = item.MoneyTypeId
@@ -63,25 +64,27 @@ namespace Alabo.App.Asset.Accounts.Controllers {
 
         [HttpGet]
         [Display(Description = "区块链钱包")]
-        public ApiResult<PagedList<ViewBlockChain>> BlockChainList([FromQuery] PagedInputDto parameter) {
+        public ApiResult<PagedList<ViewBlockChain>> BlockChainList([FromQuery] PagedInputDto parameter)
+        {
             var model = Resolve<IAccountService>().GetBlockChainList(Query);
             return ApiResult.Success(model);
         }
 
         /// <summary>
-        /// 获取账号金额
+        ///     获取账号金额
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="moneyConfigId"></param>
         /// <returns></returns>
         [HttpGet]
-        public ApiResult<Account> GetAccount(long userId, Guid moneyConfigId) {
+        public ApiResult<Account> GetAccount(long userId, Guid moneyConfigId)
+        {
             var result = Resolve<IAccountService>().GetAccount(userId, moneyConfigId);
             return ApiResult.Success(result);
         }
 
         /// <summary>
-        /// 资产列表
+        ///     资产列表
         /// </summary>
         /// <param name="parentName"></param>
         /// <param name="mobile"></param>
@@ -92,26 +95,22 @@ namespace Alabo.App.Asset.Accounts.Controllers {
         /// <param name="pageSize"></param>
         /// <returns></returns>
         [HttpGet]
-        public ApiResult DetailList(string parentName, string mobile, string UserName, string name, long serviceCenterId, long pageIndex = 1, long pageSize = 20) {
-            string getCondition() {
+        public ApiResult DetailList(string parentName, string mobile, string UserName, string name,
+            long serviceCenterId, long pageIndex = 1, long pageSize = 20)
+        {
+            string getCondition()
+            {
                 var sb = new StringBuilder();
-                if (!parentName.IsNullOrEmpty()) {
-                    sb.AppendFormat("{0}={1}&", nameof(parentName), parentName);
-                }
+                if (!parentName.IsNullOrEmpty()) sb.AppendFormat("{0}={1}&", nameof(parentName), parentName);
 
-                if (!mobile.IsNullOrEmpty()) {
-                    sb.AppendFormat("{0}={1}&", nameof(mobile), mobile);
-                }
+                if (!mobile.IsNullOrEmpty()) sb.AppendFormat("{0}={1}&", nameof(mobile), mobile);
 
-                if (!UserName.IsNullOrEmpty()) {
-                    sb.AppendFormat("{0}={1}&", nameof(UserName), UserName);
-                }
+                if (!UserName.IsNullOrEmpty()) sb.AppendFormat("{0}={1}&", nameof(UserName), UserName);
 
-                if (!name.IsNullOrEmpty()) {
-                    sb.AppendFormat("{0}={1}&", nameof(name), name);
-                }
+                if (!name.IsNullOrEmpty()) sb.AppendFormat("{0}={1}&", nameof(name), name);
 
-                if (sb.Length > 0) {
+                if (sb.Length > 0)
+                {
                     sb.Insert(0, "?");
                     sb.Remove(sb.Length - 1, 1);
                 }
@@ -122,7 +121,8 @@ namespace Alabo.App.Asset.Accounts.Controllers {
             ViewBag.Condition = getCondition();
             ViewBag.MoneyTypes = Resolve<IAutoConfigService>().MoneyTypes();
 
-            var userInput = new UserInput {
+            var userInput = new UserInput
+            {
                 Mobile = mobile,
                 Name = name,
                 UserName = UserName,
@@ -130,25 +130,22 @@ namespace Alabo.App.Asset.Accounts.Controllers {
                 PageSize = pageSize
             };
             var parentUser = Resolve<IUserService>().GetSingle(parentName);
-            if (parentUser != null) {
-                userInput.ParentId = parentUser.Id;
-            }
+            if (parentUser != null) userInput.ParentId = parentUser.Id;
 
             var model = Resolve<IFinanceAdminService>().GetViewUserPageList(userInput);
             return ApiResult.Success(model);
         }
 
         /// <summary>
-        /// 资产明细
+        ///     资产明细
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public ApiResult DetailEdit(long id) {
+        public ApiResult DetailEdit(long id)
+        {
             var user = Resolve<IUserService>().GetSingle(id);
-            if (user == null) {
-                return ApiResult.Failure("用户不存在", "当前用户不存在");
-            }
+            if (user == null) return ApiResult.Failure("用户不存在", "当前用户不存在");
 
             //初始化账户
             Resolve<IAccountService>().InitSingleUserAccount(user.Id);
@@ -160,82 +157,69 @@ namespace Alabo.App.Asset.Accounts.Controllers {
 
             rsAccList.ForEach(x => x.MoneyName = montypeList.FirstOrDefault(y => y.Id == x.MoneyTypeId).Name);
 
-            var view = new {
+            var view = new
+            {
                 User = user,
                 AccountList = rsAccList,
                 UserId = user.Id,
                 ActionType = 0,
-                MoneyTypeId = Resolve<IAutoConfigService>().MoneyTypes()?.FirstOrDefault().Id,
+                MoneyTypeId = Resolve<IAutoConfigService>().MoneyTypes()?.FirstOrDefault().Id
             };
 
             return ApiResult.Success(view);
         }
 
         /// <summary>
-        /// 资产明细
+        ///     资产明细
         /// </summary>
         /// <param name="view"></param>
         /// <returns></returns>
         [HttpPost]
-        public ApiResult DetailEdit([FromBody] AccountViewIn view) {
+        public ApiResult DetailEdit([FromBody] AccountViewIn view)
+        {
             var chargeUser = Resolve<IUserService>().GetSingle(view.ChargeUserId);
-            if (chargeUser == null) {
-                return ApiResult.Failure("对应编辑的用户ID不存在");
-            }
+            if (chargeUser == null) return ApiResult.Failure("对应编辑的用户ID不存在");
             view.User = chargeUser;
             view.AccountList = Resolve<IAccountService>().GetUserAllAccount(chargeUser.Id);
             //view.UserId = chargeUser.Id;
 
-            if (!this.IsFormValid()) {
-                return ApiResult.Failure(string.Empty, this.FormInvalidReason());
-            }
+            if (!this.IsFormValid()) return ApiResult.Failure(string.Empty, this.FormInvalidReason());
 
             var loginUser = Resolve<IUserService>().GetUserDetail(view.UserId);
-            if (loginUser.Status != Status.Normal) {
-                return ApiResult.Failure(string.Empty, "操作失败：您的账户不正常，不能进行资产操作");
-            }
+            if (loginUser.Status != Status.Normal) return ApiResult.Failure(string.Empty, "操作失败：您的账户不正常，不能进行资产操作");
 
             //var safePassword = HttpContext.Request.Form["SafePassWord"].ToString();
-            if (view.AdminPayPassword.IsNullOrEmpty()) {
-                return ApiResult.Failure(string.Empty, "操作失败：支付密码不能为空");
-            }
+            if (view.AdminPayPassword.IsNullOrEmpty()) return ApiResult.Failure(string.Empty, "操作失败：支付密码不能为空");
 
-            if (loginUser.Detail.PayPassword != view.AdminPayPassword.ToMd5HashString()) {
+            if (loginUser.Detail.PayPassword != view.AdminPayPassword.ToMd5HashString())
                 return ApiResult.Failure(string.Empty, "操作失败：支付密码不正确");
-            }
 
             var moneyType = Resolve<IAutoConfigService>().MoneyTypes().FirstOrDefault(r => r.Id == view.MoneyTypeId);
-            if (moneyType == null) {
-                return ApiResult.Failure("操作失败：对应的货币类型不支持!");
-            }
+            if (moneyType == null) return ApiResult.Failure("操作失败：对应的货币类型不支持!");
             var result = ServiceResult.Success;
-            if (view.ActionType == (int)FinanceActionType.Add) {
-                if (view.Amount > 1000000) {
-                    return ApiResult.Failure("Amount", "资产增加单次金额不能超过100W");
-                }
+            if (view.ActionType == (int) FinanceActionType.Add)
+            {
+                if (view.Amount > 1000000) return ApiResult.Failure("Amount", "资产增加单次金额不能超过100W");
 
-                result = Resolve<IBillService>().Increase(chargeUser, moneyType, view.Amount, "管理员后台手动增加资产" + view.Remark);
+                result = Resolve<IBillService>()
+                    .Increase(chargeUser, moneyType, view.Amount, "管理员后台手动增加资产" + view.Remark);
             }
 
-            if (view.ActionType == (int)FinanceActionType.Reduce) {
+            if (view.ActionType == (int) FinanceActionType.Reduce)
                 result = Resolve<IBillService>().Reduce(chargeUser, moneyType, view.Amount, "管理员后台减少" + view.Remark);
-            }
 
-            if (view.ActionType == (int)FinanceActionType.Freeze) {
+            if (view.ActionType == (int) FinanceActionType.Freeze)
                 result = Resolve<IBillService>().Treeze(chargeUser, moneyType, view.Amount, "管理员后台冻结" + view.Remark);
-            }
 
-            if (view.ActionType == (int)FinanceActionType.Unfreeze) {
-                result = Resolve<IBillService>().DeductTreeze(chargeUser, moneyType, view.Amount, "管理员后台解结" + view.Remark);
-            }
+            if (view.ActionType == (int) FinanceActionType.Unfreeze)
+                result = Resolve<IBillService>()
+                    .DeductTreeze(chargeUser, moneyType, view.Amount, "管理员后台解结" + view.Remark);
 
-            if (!result.Succeeded) {
-                return ApiResult.Failure(string.Empty, result.ToString());
-            }
+            if (!result.Succeeded) return ApiResult.Failure(string.Empty, result.ToString());
 
             Resolve<IAccountService>().Log(
                 $@"管理员{AutoModel.BasicUser.UserName}{GetAcctionName(view.ActionType)}会员{chargeUser.UserName}的资产，账户为:{moneyType.Name}，金额为:{view.Amount}"
-                );
+            );
             //通知会员后台手动添加资产
             var userAccount = Resolve<IAccountService>().GetAccount(chargeUser.Id, moneyType.Id);
             IDictionary<string, string> parameter = new Dictionary<string, string>
@@ -253,34 +237,28 @@ namespace Alabo.App.Asset.Accounts.Controllers {
             return ApiResult.Success($"{GetAcctionName(view.ActionType)}资产成功");
         }
 
-        private string GetAcctionName(long type) {
+        private string GetAcctionName(long type)
+        {
             var name = "手动增加";
-            if (type == (int)FinanceActionType.Reduce) {
-                name = "手动减少";
-            }
+            if (type == (int) FinanceActionType.Reduce) name = "手动减少";
 
-            if (type == (int)FinanceActionType.Freeze) {
-                name = "冻结";
-            }
+            if (type == (int) FinanceActionType.Freeze) name = "冻结";
 
-            if (type == (int)FinanceActionType.Unfreeze) {
-                name = "解结";
-            }
+            if (type == (int) FinanceActionType.Unfreeze) name = "解结";
 
             return name;
         }
 
         /// <summary>
-        /// 储值
+        ///     储值
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
-        public ApiResult<RechageAccountOutput> Recharge([FromBody] RechargeAccountInput input) {
+        public ApiResult<RechageAccountOutput> Recharge([FromBody] RechargeAccountInput input)
+        {
             var result = Resolve<IAccountPayService>().BuyAsync(input);
-            if (result.Result.Item1.Succeeded) {
-                return ApiResult.Result(result.Result.Item2);
-            }
+            if (result.Result.Item1.Succeeded) return ApiResult.Result(result.Result.Item2);
 
             return ApiResult.Failure<RechageAccountOutput>(null, "储值失败");
         }

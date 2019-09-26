@@ -6,12 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Alabo.Framework.Basic.Notifications.Controllers
 {
-
     [ApiExceptionFilter]
     [Route("Api/MessageQueue/[action]")]
-    public class ApiMessageQueueController : ApiBaseController<MessageQueue, long> {
-
-        public ApiMessageQueueController() : base() {
+    public class ApiMessageQueueController : ApiBaseController<MessageQueue, long>
+    {
+        public ApiMessageQueueController()
+        {
             BaseService = Resolve<IMessageQueueService>();
         }
     }

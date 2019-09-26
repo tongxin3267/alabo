@@ -17,13 +17,14 @@ using Alabo.Maps;
 using Alabo.Web.Mvc.Attributes;
 using AutoMapper;
 
-namespace Alabo.Data.People.Cities.Dtos {
-
-    public class CityView : UIBase, IAutoForm, IAutoTable<CityView> {
+namespace Alabo.Data.People.Cities.Dtos
+{
+    public class CityView : UIBase, IAutoForm, IAutoTable<CityView>
+    {
         public string Id { get; set; }
 
         /// <summary>
-        /// 名称
+        ///     名称
         /// </summary>
         [Display(Name = "名称")]
         [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1, Width = "280", ListShow = true,
@@ -31,17 +32,17 @@ namespace Alabo.Data.People.Cities.Dtos {
         public string Name { get; set; }
 
         /// <summary>
-        /// 所属区域
+        ///     所属区域
         /// </summary>
         public long RegionId { get; set; }
 
         /// <summary>
-        /// 所属区域
+        ///     所属区域
         /// </summary>
         public string RegionName { get; set; }
 
         /// <summary>
-        /// 代理费
+        ///     代理费
         /// </summary>
         public decimal Price { get; set; }
 
@@ -70,7 +71,7 @@ namespace Alabo.Data.People.Cities.Dtos {
         public string Intro { get; set; }
 
         /// <summary>
-        /// 所属用户名
+        ///     所属用户名
         /// </summary>
         [Display(Name = "所属用户名")]
         [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1, Width = "280", ListShow = true,
@@ -92,24 +93,49 @@ namespace Alabo.Data.People.Cities.Dtos {
         /// </summary>
         public UserTypeStatus Status { get; set; } = UserTypeStatus.Pending;
 
-        public List<TableAction> Actions() {
-            return new List<TableAction>();
-        }
-
-        public AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
             var str = id.ToString();
             var model = Resolve<ICityService>().GetSingle(u => u.Id == str.ToObjectId());
-            if (model != null) {
-                return ToAutoForm(model);
-            }
+            if (model != null) return ToAutoForm(model);
 
             return ToAutoForm(new City());
         }
 
-        public PageResult<CityView> PageTable(object query, AutoBaseModel autoModel) {
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
+            var city = (CityView) model;
+            var user = Resolve<IUserService>().GetSingle(u => u.UserName == city.UserName);
+            var parentUser = Resolve<IUserService>().GetSingle(u => u.UserName == city.ParentUserName);
+            var view = city.MapTo<City>();
+            if (user == null) return ServiceResult.FailedWithMessage("所属用户名不存在");
+
+            if (parentUser == null) return ServiceResult.FailedWithMessage("推荐人用户名不存在");
+            var partner = Resolve<ICityService>().GetSingle(u => u.RegionId == city.RegionId);
+
+            view.Id = city.Id.ToObjectId();
+            view.UserId = user.Id;
+            view.ParentUserId = parentUser.Id;
+            view.RegionName = Resolve<IRegionService>().GetRegionNameById(view.RegionId);
+            if (city.Id.IsNullOrEmpty() && partner != null)
+                return ServiceResult.FailedWithMessage("该地区已有合伙人，一个地区只允许有一个合伙人");
+
+            var result = Resolve<ICityService>().AddOrUpdate(view);
+            if (result) return ServiceResult.Success;
+            return ServiceResult.FailedWithMessage("操作失败，请重试");
+        }
+
+        public List<TableAction> Actions()
+        {
+            return new List<TableAction>();
+        }
+
+        public PageResult<CityView> PageTable(object query, AutoBaseModel autoModel)
+        {
             var model = Resolve<ICityService>().GetPagedList(query);
             var citys = new List<CityView>();
-            foreach (var item in model) {
+            foreach (var item in model)
+            {
                 var cityView = Mapper.Map<CityView>(item);
                 citys.Add(cityView);
             }
@@ -119,35 +145,6 @@ namespace Alabo.Data.People.Cities.Dtos {
             result.Result = citys;
 
             return result;
-        }
-
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
-            var city = (CityView)model;
-            var user = Resolve<IUserService>().GetSingle(u => u.UserName == city.UserName);
-            var parentUser = Resolve<IUserService>().GetSingle(u => u.UserName == city.ParentUserName);
-            var view = city.MapTo<City>();
-            if (user == null) {
-                return ServiceResult.FailedWithMessage("所属用户名不存在");
-            }
-
-            if (parentUser == null) {
-                return ServiceResult.FailedWithMessage("推荐人用户名不存在");
-            }
-            var partner = Resolve<ICityService>().GetSingle(u => u.RegionId == city.RegionId);
-
-            view.Id = city.Id.ToObjectId();
-            view.UserId = user.Id;
-            view.ParentUserId = parentUser.Id;
-            view.RegionName = Resolve<IRegionService>().GetRegionNameById(view.RegionId);
-            if (city.Id.IsNullOrEmpty() && partner != null) {
-                return ServiceResult.FailedWithMessage("该地区已有合伙人，一个地区只允许有一个合伙人");
-            }
-
-            var result = Resolve<ICityService>().AddOrUpdate(view);
-            if (result) {
-                return ServiceResult.Success;
-            }
-            return ServiceResult.FailedWithMessage("操作失败，请重试");
         }
     }
 }

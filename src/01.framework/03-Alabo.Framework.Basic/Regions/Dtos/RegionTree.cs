@@ -1,7 +1,7 @@
-﻿namespace Alabo.Framework.Basic.Address.Dtos {
-
-    public class RegionTree {
-
+﻿namespace Alabo.Framework.Basic.Address.Dtos
+{
+    public class RegionTree
+    {
         /// <summary>
         ///     区域Id
         /// </summary>

@@ -6,13 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Industry.Cms.Articles.Controllers {
-
+namespace Alabo.Industry.Cms.Articles.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/Channel/[action]")]
-    public class ApiChannelController : ApiBaseController<Channel, ObjectId> {
-
-        public ApiChannelController() : base() {
+    public class ApiChannelController : ApiBaseController<Channel, ObjectId>
+    {
+        public ApiChannelController()
+        {
             BaseService = Resolve<IChannelService>();
         }
 

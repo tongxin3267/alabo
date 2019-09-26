@@ -20,13 +20,13 @@ using Newtonsoft.Json;
 namespace Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Model
 {
     /// <summary>
-    /// 会员折扣(会员等级)
+    ///     会员折扣(会员等级)
     /// </summary>
     [ClassProperty(Name = "会员折扣")]
     public class MemberDiscountActivity : BaseViewModel, IActivity
     {
         /// <summary>
-        /// 会员等级
+        ///     会员等级
         /// </summary>
         [Display(Name = "设置会员等级价")]
         [Field(ControlsType = ControlsType.JsonList, ListShow = true, EditShow = true)]
@@ -34,22 +34,16 @@ namespace Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Model
         public List<MemberDiscountActivityItem> DiscountList { get; set; } = new List<MemberDiscountActivityItem>();
 
         /// <summary>
-        /// get auto form
+        ///     get auto form
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
         public AutoForm GetAutoForm(object obj)
         {
             //data
-            if (obj == null)
-            {
-                return null;
-            }
+            if (obj == null) return null;
             var discountList = obj.MapTo<MemberDiscountActivity>()?.DiscountList;
-            if (discountList == null || discountList.Count <= 0)
-            {
-                return null;
-            }
+            if (discountList == null || discountList.Count <= 0) return null;
 
             //builder auto form
             var fieldGroups = AutoFormMapping.GetFormFields(discountList).ToList();
@@ -61,10 +55,7 @@ namespace Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Model
                 jsonItems.Foreach(item =>
                 {
                     var tempField = item.Items.ToList().Find(i => i.Field == "price");
-                    if (tempField == null)
-                    {
-                        return;
-                    }
+                    if (tempField == null) return;
                     tempField.Name = item.Items.ToList().Find(i => i.Field == "name").Value?.ToString();
                     tempField.Field = item.Items.ToList().Find(i => i.Field == "id").Value?.ToString();
                     fields.Add(tempField);
@@ -79,14 +70,11 @@ namespace Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Model
         }
 
         /// <summary>
-        /// get default value
+        ///     get default value
         /// </summary>
         public object GetDefaultValue(ActivityEditInput activityEdit, Activity activity)
         {
-            if (activityEdit.ProductId <= 0)
-            {
-                return null;
-            }
+            if (activityEdit.ProductId <= 0) return null;
             var isDefault = true;
             var result = new MemberDiscountActivity();
             if (!string.IsNullOrWhiteSpace(activity.Value))
@@ -94,6 +82,7 @@ namespace Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Model
                 isDefault = false;
                 result = JsonConvert.DeserializeObject<MemberDiscountActivity>(activity.Value);
             }
+
             //grade price
             var productSkus = Resolve<IProductSkuService>().GetGradePrice(activityEdit.ProductId).ToList();
             if (isDefault)
@@ -119,10 +108,7 @@ namespace Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Model
                         var tempGrade = item.GradePriceList.Find(g => g.Id == grade.Id);
                         if (tempGrade != null)
                         {
-                            if (grade.Name != tempGrade.Name)
-                            {
-                                grade.Name = tempGrade.Name;
-                            }
+                            if (grade.Name != tempGrade.Name) grade.Name = tempGrade.Name;
                         }
                         else
                         {
@@ -137,25 +123,13 @@ namespace Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Model
             return result;
         }
 
-        private MemberDiscountActivityItem GetDefaultSku(ProductSku productSku)
-        {
-            return new MemberDiscountActivityItem
-            {
-                ProductSkuId = productSku.Id,
-                Name = productSku.PropertyValueDesc,
-                Bn = productSku.Bn,
-                Price = productSku.Price,
-                GradeItems = productSku.GradePriceList.MapTo<List<ProductSkuGradeItem>>()
-            };
-        }
-
         public ServiceResult SetValue(HttpContext httpContext)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// set value
+        ///     set value
         /// </summary>
         /// <param name="rules"></param>
         /// <returns></returns>
@@ -171,54 +145,64 @@ namespace Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Model
                     item.GradeItems.ForEach(grade =>
                     {
                         var tempGrade = userGrades.Find(g => g.Id == grade.Id);
-                        if (tempGrade != null)
-                        {
-                            grade.Name = tempGrade.Name;
-                        }
+                        if (tempGrade != null) grade.Name = tempGrade.Name;
                     });
                 });
             }
+
             var result = new ServiceResult(true);
             result.ReturnObject = model;
             return result;
         }
+
+        private MemberDiscountActivityItem GetDefaultSku(ProductSku productSku)
+        {
+            return new MemberDiscountActivityItem
+            {
+                ProductSkuId = productSku.Id,
+                Name = productSku.PropertyValueDesc,
+                Bn = productSku.Bn,
+                Price = productSku.Price,
+                GradeItems = productSku.GradePriceList.MapTo<List<ProductSkuGradeItem>>()
+            };
+        }
     }
 
     /// <summary>
-    /// item
+    ///     item
     /// </summary>
     public class MemberDiscountActivityItem
     {
         /// <summary>
-        /// SkuID
+        ///     SkuID
         /// </summary>
         [Display(Name = "SkuID")]
         [Field(ControlsType = ControlsType.Label, ListShow = true, EditShow = true)]
         public long ProductSkuId { get; set; }
 
         /// <summary>
-        /// 规格属性名称
+        ///     规格属性名称
         /// </summary>
         [Display(Name = "规格属性名称")]
         [Field(ControlsType = ControlsType.Label, ListShow = true, EditShow = true)]
         public string Name { get; set; }
 
         /// <summary>
-        /// 商品货号
+        ///     商品货号
         /// </summary>
         [Display(Name = "商品货号")]
         [Field(ControlsType = ControlsType.Label, ListShow = true, EditShow = true)]
         public string Bn { get; set; }
 
         /// <summary>
-        /// 销售价
+        ///     销售价
         /// </summary>
         [Display(Name = "销售价")]
         [Field(ControlsType = ControlsType.Label, ListShow = true, EditShow = true)]
         public decimal Price { get; set; }
 
         /// <summary>
-        /// grade items
+        ///     grade items
         /// </summary>
         [Display(Name = "等级价")]
         [Field(ControlsType = ControlsType.JsonList, ListShow = true, EditShow = true)]
@@ -226,26 +210,26 @@ namespace Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Model
     }
 
     /// <summary>
-    /// grade item
+    ///     grade item
     /// </summary>
     public class ProductSkuGradeItem
     {
         /// <summary>
-        /// 会员等级
+        ///     会员等级
         /// </summary>
         [Display(Name = "等级ID")]
         [Field(ControlsType = ControlsType.Hidden, ListShow = true, EditShow = true)]
         public Guid Id { get; set; }
 
         /// <summary>
-        /// 等级名称
+        ///     等级名称
         /// </summary>
         [Display(Name = "等级名称")]
         [Field(ControlsType = ControlsType.Label, ListShow = true, EditShow = true)]
         public string Name { get; set; }
 
         /// <summary>
-        /// 会员价
+        ///     会员价
         /// </summary>
         [Display(Name = "会员价")]
         [Field(ControlsType = ControlsType.Decimal, ListShow = true, EditShow = true, Width = "60")]

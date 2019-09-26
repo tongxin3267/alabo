@@ -92,9 +92,7 @@ namespace Alabo.Linq
             {
                 // 根据timeType获取条件,获取季度，年度、月份等条件,构建时间查询语句
                 var timeTypeCondition = DataRecordExtension.GetTimeTypeCondition(TimeType, ReferTime);
-                if (!timeTypeCondition.IsNullOrEmpty()) {
-                    sqlWhere += $" And {timeTypeCondition}";
-                }
+                if (!timeTypeCondition.IsNullOrEmpty()) sqlWhere += $" And {timeTypeCondition}";
             }
 
             return sqlWhere;
@@ -110,7 +108,7 @@ namespace Alabo.Linq
             where TEntity : class, IAggregateRoot<TEntity, TKey>
         {
             Expression<Func<TEntity, bool>> predicate = null;
-            if (Field.IsNotNullOrEmpty() && Value.IsNotNullOrEmpty()) {
+            if (Field.IsNotNullOrEmpty() && Value.IsNotNullOrEmpty())
                 switch (Operator)
                 {
                     case OperatorCompare.Equal:
@@ -137,7 +135,6 @@ namespace Alabo.Linq
                         predicate = Lambda.NotEqual<TEntity>(Field, Value);
                         break;
                 }
-            }
 
             // 根据时间和基准时间构建表达式
             predicate = TimeType.GetPredicate<TEntity, TKey>(ReferTime, predicate);

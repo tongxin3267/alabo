@@ -6,14 +6,14 @@ using Alabo.Data.People.Users;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Data.People.Internals.Domain.CallBacks {
-
+namespace Alabo.Data.People.Internals.Domain.CallBacks
+{
     [NotMapped]
     [ClassProperty(Name = "内部合伙人等级", Icon = "fa fa-user-times",
         Description = "内部合伙人等级", PageType = ViewPageType.List, SortOrder = 12,
         SideBarType = SideBarType.PartnerSideBar)]
-    public class InternalGradeConfig : BaseGradeConfig, IAutoConfig {
-
+    public class InternalGradeConfig : BaseGradeConfig, IAutoConfig
+    {
         /// <summary>
         ///     会员类型Id，不同的会员类型有不同的等级
         /// </summary>
@@ -22,7 +22,8 @@ namespace Alabo.Data.People.Internals.Domain.CallBacks {
         [Display(Name = "内部合伙人等级")]
         public new Guid UserTypeId { get; set; } = Guid.Parse("71BE65E6-3A64-415D-982E-1AEDEA365102");
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
             throw new NotImplementedException();
         }
     }

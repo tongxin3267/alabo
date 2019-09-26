@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Query.Dto;
 
-namespace Alabo.Framework.Core.WebApis.Dtos {
-
-    public class DiyBaseInput : ApiInputDto {
-
+namespace Alabo.Framework.Core.WebApis.Dtos
+{
+    public class DiyBaseInput : ApiInputDto
+    {
         /// <summary>
         ///     Diy对应的Key
         /// </summary>

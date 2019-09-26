@@ -1,9 +1,10 @@
-﻿namespace Alabo.Tool.Office.Core {
-
+﻿namespace Alabo.Tool.Office.Core
+{
     /// <summary>
-    /// 颜色
+    ///     颜色
     /// </summary>
-    public enum Color {
+    public enum Color
+    {
         Black,
         Brown,
         OliveGreen,

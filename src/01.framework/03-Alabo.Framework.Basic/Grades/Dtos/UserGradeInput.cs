@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations;
 using Alabo.Framework.Basic.Grades.Domain.Enums;
 using Alabo.Validations;
 
-namespace Alabo.Framework.Basic.Grades.Dtos {
-
-    public class UserGradeInput {
-
+namespace Alabo.Framework.Basic.Grades.Dtos
+{
+    public class UserGradeInput
+    {
         /// <summary>
         ///     用户Id不能为空
         /// </summary>

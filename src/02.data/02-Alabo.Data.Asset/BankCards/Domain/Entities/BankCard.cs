@@ -8,16 +8,16 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Asset.BankCards.Domain.Entities {
-
+namespace Alabo.App.Asset.BankCards.Domain.Entities
+{
     /// <summary>
     ///     银行卡
     /// </summary>
     [ClassProperty(Name = "银行卡管理", SideBarType = SideBarType.BankCardSideBar, Icon = IconFontawesome.bank)]
     [BsonIgnoreExtraElements]
     [Table("Asset_BankCard")]
-    public class BankCard : AggregateMongodbUserRoot<BankCard> {
-
+    public class BankCard : AggregateMongodbUserRoot<BankCard>
+    {
         /// <summary>
         ///     持卡人姓名
         /// </summary>
@@ -32,7 +32,8 @@ namespace Alabo.App.Asset.BankCards.Domain.Entities {
         /// </summary>
         [Display(Name = "银行类型")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        [Field(ControlsType = ControlsType.DropdownList, DataSource = "Alabo.Framework.Core.Enums.Enum.BankType", Width = "120", ListShow = true, SortOrder = 6)]
+        [Field(ControlsType = ControlsType.DropdownList, DataSource = "Alabo.Framework.Core.Enums.Enum.BankType",
+            Width = "120", ListShow = true, SortOrder = 6)]
         public BankType Type { get; set; }
 
         /// <summary>

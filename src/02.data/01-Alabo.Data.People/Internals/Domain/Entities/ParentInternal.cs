@@ -7,13 +7,13 @@ using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Data.People.Internals.Domain.Entities {
-
+namespace Alabo.Data.People.Internals.Domain.Entities
+{
     [ClassProperty(Name = "内部合伙人")]
     [BsonIgnoreExtraElements]
     [Table("People_ParentInternal")]
-    public class ParentInternal : AggregateMongodbUserRoot<ParentInternal> {
-
+    public class ParentInternal : AggregateMongodbUserRoot<ParentInternal>
+    {
         [Display(Name = "名称")]
         [Field(ListShow = true, ControlsType = ControlsType.TextBox, SortOrder = 700)]
         public string Name { get; set; }

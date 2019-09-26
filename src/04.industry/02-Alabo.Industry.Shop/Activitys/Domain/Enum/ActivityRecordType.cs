@@ -1,13 +1,13 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Industry.Shop.Activitys.Domain.Enum {
-
+namespace Alabo.Industry.Shop.Activitys.Domain.Enum
+{
     /// <summary>
     ///     活动记录类型
     /// </summary>
     [ClassProperty(Name = "活动记录类型")]
-    public enum ActivityRecordType {
-
+    public enum ActivityRecordType
+    {
         /// <summary>
         ///     行为，比如发起拼团，但是未必会产生了订单
         ///     OrderId=0

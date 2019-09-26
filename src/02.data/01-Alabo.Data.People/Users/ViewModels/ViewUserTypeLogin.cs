@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Validations;
 
-namespace Alabo.Data.People.Users.ViewModels {
-
-    public class ViewUserTypeLogin {
-
+namespace Alabo.Data.People.Users.ViewModels
+{
+    public class ViewUserTypeLogin
+    {
         [Display(Name = "用户名/邮箱/手机")]
         [Required(ErrorMessage = "用户名/邮箱/手机不能为空")]
         [RegularExpression(

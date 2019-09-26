@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Industry.Shop.Orders.Dtos {
-
-    public class OrderToExcel {
-
+namespace Alabo.Industry.Shop.Orders.Dtos
+{
+    public class OrderToExcel
+    {
         [Display(Name = "订单号")]
         [Field(ListShow = true, SortOrder = 1)]
         public string OrderId { get; set; }

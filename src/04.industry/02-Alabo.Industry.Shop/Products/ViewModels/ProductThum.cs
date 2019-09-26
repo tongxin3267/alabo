@@ -2,13 +2,13 @@
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.Industry.Shop.Products.ViewModels {
-
+namespace Alabo.Industry.Shop.Products.ViewModels
+{
     /// <summary>
     ///     商品缩略图
     /// </summary>
-    public class ProductThum : BaseViewModel {
-
+    public class ProductThum : BaseViewModel
+    {
         /// <summary>
         ///     原始图地址，保留绝对地址，或者原始URL,当商城的图片尺寸修改时候，可以重新生成图片,商品放大镜查看地址
         /// </summary>
@@ -24,10 +24,9 @@ namespace Alabo.Industry.Shop.Products.ViewModels {
         /// </summary>
         public string ShowCaseUrl { get; set; }
 
-        public string GetPicUrl(string ImageUrl) {
-            if (ImageUrl != null) {
-                return ImageUrl;
-            }
+        public string GetPicUrl(string ImageUrl)
+        {
+            if (ImageUrl != null) return ImageUrl;
 
             return Resolve<IAutoConfigService>().GetValue<WebSiteConfig>().NoPic;
         }

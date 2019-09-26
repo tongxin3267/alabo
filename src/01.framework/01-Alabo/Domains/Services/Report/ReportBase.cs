@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Alabo.Datas.Stores;
 using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services.Random;
 using Alabo.Domains.Services.Report.Dtos;

@@ -5,15 +5,15 @@ using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
-namespace Alabo.Cloud.People.Relationship.Controllers {
-
+namespace Alabo.Cloud.People.Relationship.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/RelationshipIndex/[action]")]
-    public class ApiRelationshipIndexController : ApiBaseController<RelationshipIndex, ObjectId> {
-
-        public ApiRelationshipIndexController() : base() {
+    public class ApiRelationshipIndexController : ApiBaseController<RelationshipIndex, ObjectId>
+    {
+        public ApiRelationshipIndexController()
+        {
             BaseService = Resolve<IRelationshipIndexService>();
-
         }
     }
 }

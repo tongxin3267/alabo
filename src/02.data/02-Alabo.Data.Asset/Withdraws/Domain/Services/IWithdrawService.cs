@@ -1,17 +1,14 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
 using Alabo.App.Asset.Withdraws.Domain.Entities;
 using Alabo.App.Asset.Withdraws.Dtos;
 using Alabo.Domains.Entities;
+using Alabo.Domains.Services;
 using Microsoft.AspNetCore.Http;
 
-namespace Alabo.App.Asset.Withdraws.Domain.Services {
-
-    public interface IWithdrawService : IService<Withdraw, long> {
-
+namespace Alabo.App.Asset.Withdraws.Domain.Services
+{
+    public interface IWithdrawService : IService<Withdraw, long>
+    {
         /// <summary>
         ///     提现
         ///     只支持人民币提现
@@ -72,7 +69,7 @@ namespace Alabo.App.Asset.Withdraws.Domain.Services {
         ViewAdminWithDraw GetAdminWithDraw(long id);
 
         /// <summary>
-        /// 提现审核
+        ///     提现审核
         /// </summary>
         /// <param name="view"></param>
         /// <returns></returns>

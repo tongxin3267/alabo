@@ -32,9 +32,7 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoPreviews
             //cache class descrption
             var fullName = model.GetType().FullName;
             var classDescription = fullName.GetClassDescription();
-            if (classDescription == null) {
-                return null;
-            }
+            if (classDescription == null) return null;
 
             var classPropertyAttribute = classDescription.ClassPropertyAttribute;
             return new AutoPreview
@@ -60,21 +58,16 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoPreviews
                 var propertyDesc = propertys.ToList().Find(p => p.Property.Name == propertyInfo.Name);
                 if (propertyDesc == null
                     || propertyDesc.FieldAttribute == null
-                    || !propertyDesc.FieldAttribute.EditShow) {
+                    || !propertyDesc.FieldAttribute.EditShow)
                     continue;
-                }
 
                 //check type
                 var fieldType = propertyDesc.Property.PropertyType;
-                if (fieldType.IsGenericType || fieldType.IsArray || fieldType.IsClass) {
-                    continue;
-                }
+                if (fieldType.IsGenericType || fieldType.IsArray || fieldType.IsClass) continue;
 
                 //enum
                 var value = propertyInfo.GetPropertyValue(model);
-                if (fieldType.IsEnum) {
-                    value = value.GetDisplayName();
-                }
+                if (fieldType.IsEnum) value = value.GetDisplayName();
 
                 //builder
                 var field = new KeyValue

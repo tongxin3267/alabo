@@ -1,5 +1,4 @@
 ﻿using Alabo.Datas.Sql.Queries.Builders.Abstractions;
-using Alabo.Helpers;
 using Alabo.Regexs;
 
 namespace Alabo.Datas.Sql.Queries.Builders.Core
@@ -33,9 +32,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <param name="raw">使用原始值</param>
         public SqlItem(string name, string prefix = null, string alias = null, bool raw = false)
         {
-            if (string.IsNullOrWhiteSpace(name)) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(name)) return;
 
             Prefix = prefix;
             Alias = alias;
@@ -88,13 +85,9 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         {
             var pattern = @"\s+[aA][sS]\s+";
             var list = Regex.Split(name, pattern);
-            if (list == null || list.Length == 0) {
-                return;
-            }
+            if (list == null || list.Length == 0) return;
 
-            if (list.Length == 2) {
-                Alias = list[1];
-            }
+            if (list.Length == 2) Alias = list[1];
 
             SetName(list[0]);
         }
@@ -105,13 +98,9 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         private void SetName(string name)
         {
             var result = new NameItem(name);
-            if (string.IsNullOrWhiteSpace(result.Prefix) == false) {
-                Prefix = result.Prefix;
-            }
+            if (string.IsNullOrWhiteSpace(result.Prefix) == false) Prefix = result.Prefix;
 
-            if (string.IsNullOrWhiteSpace(result.Name) == false) {
-                Name = result.Name;
-            }
+            if (string.IsNullOrWhiteSpace(result.Name) == false) Name = result.Name;
         }
 
         /// <summary>
@@ -119,13 +108,9 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// </summary>
         public string ToSql(IDialect dialect = null)
         {
-            if (string.IsNullOrWhiteSpace(Name)) {
-                return null;
-            }
+            if (string.IsNullOrWhiteSpace(Name)) return null;
 
-            if (Raw) {
-                return Name;
-            }
+            if (Raw) return Name;
 
             var column = string.IsNullOrWhiteSpace(Prefix)
                 ? GetSafeName(dialect, Name)
@@ -138,9 +123,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// </summary>
         private string GetSafeName(IDialect dialect, string name)
         {
-            if (dialect == null) {
-                return name;
-            }
+            if (dialect == null) return name;
 
             return dialect.SafeName(name);
         }

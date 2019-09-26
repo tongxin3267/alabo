@@ -7,11 +7,11 @@ using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.Users.Entities {
-
+namespace Alabo.Users.Entities
+{
     [ClassProperty(Name = "用户组织架构图")]
-    public class UserMap : AggregateDefaultUserRoot<UserMap> {
-
+    public class UserMap : AggregateDefaultUserRoot<UserMap>
+    {
         /// <summary>
         ///     直推会员数量
         /// </summary>
@@ -44,13 +44,15 @@ namespace Alabo.Users.Entities {
         public IList<ParentMap> ParentMapList { get; set; } = new List<ParentMap>();
     }
 
-    public class UserMapTableMap : MsSqlAggregateRootMap<UserMap> {
-
-        protected override void MapTable(EntityTypeBuilder<UserMap> builder) {
+    public class UserMapTableMap : MsSqlAggregateRootMap<UserMap>
+    {
+        protected override void MapTable(EntityTypeBuilder<UserMap> builder)
+        {
             builder.ToTable("User_UserMap");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<UserMap> builder) {
+        protected override void MapProperties(EntityTypeBuilder<UserMap> builder)
+        {
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.ParentMapList);
@@ -62,7 +64,8 @@ namespace Alabo.Users.Entities {
     /// <summary>
     ///     组织架构图
     /// </summary>
-    public class UserTree {
+    public class UserTree
+    {
         public long Id { get; set; }
         public long PId { get; set; }
         public string Name { get; set; }

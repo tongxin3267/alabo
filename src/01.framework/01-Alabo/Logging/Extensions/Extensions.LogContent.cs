@@ -13,9 +13,7 @@ namespace Alabo.Logging.Extensions
         /// </summary>
         public static void Append(this ILogContent content, StringBuilder result, string value)
         {
-            if (string.IsNullOrWhiteSpace(value)) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(value)) return;
 
             result.Append("   ");
             result.Append(value);

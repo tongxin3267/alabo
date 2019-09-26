@@ -13,18 +13,20 @@ using Alabo.Mapping;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Framework.Basic.Address.UI {
-
+namespace Alabo.Framework.Basic.Address.UI
+{
     /// <summary>
     ///     地区
     ///     这个对象中的值生成后不应该修改
     /// </summary>
-    [ClassProperty(Name = "国家区域", Icon = IconFlaticon.map_location, SideBarType = SideBarType.ControlSideBar, PageType = ViewPageType.List, PostApi = "Api/Region/RegionList")]
+    [ClassProperty(Name = "国家区域", Icon = IconFlaticon.map_location, SideBarType = SideBarType.ControlSideBar,
+        PageType = ViewPageType.List, PostApi = "Api/Region/RegionList")]
     [BsonIgnoreExtraElements]
     [Table("Basic_Region")]
-    public class RegionForm : UIBase, IAutoForm {
-
-        public RegionForm(long regionId, long parentId) {
+    public class RegionForm : UIBase, IAutoForm
+    {
+        public RegionForm(long regionId, long parentId)
+        {
             RegionId = regionId;
             ParentId = parentId;
             // this.Id = (regionId.ToString() + parentId.ToString()).ConvertToObjectId();
@@ -97,18 +99,20 @@ namespace Alabo.Framework.Basic.Address.UI {
         public RegionLevel Level { get; set; }
 
         /// <summary>
-        /// 转换成Id
+        ///     转换成Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
             var regionId = ToId<long>(id);
             var regionView = Resolve<IRegionService>().GetViewById(regionId);
             var model = AutoMapping.SetValue<RegionForm>(regionView);
             return ToAutoForm(model);
         }
 
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
             var regionView = AutoMapping.SetValue<Region>(model);
             var result = Resolve<IRegionService>().AddOrUpdate(regionView);
             return new ServiceResult(result);

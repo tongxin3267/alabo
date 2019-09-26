@@ -10,52 +10,36 @@ using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Industry.Shop.Activitys.Controllers
 {
-
     /// <summary>
-    /// api activity
+    ///     api activity
     /// </summary>
     [ApiExceptionFilter]
     [Route("Api/Activity/[action]")]
     public class ApiActivityController : ApiBaseController<Activity, long>
     {
-
         /// <summary>
-        /// constructor
-        /// </summary>
-        public ApiActivityController()
-            : base()
-        {
-        }
-
-        /// <summary>
-        /// ��ȡ�
+        ///     ��ȡ�
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         [Display(Description = "��ȡ�")]
-        public ApiResult<ActivityEditOutput> GetView([FromQuery]ActivityEditInput input)
+        public ApiResult<ActivityEditOutput> GetView([FromQuery] ActivityEditInput input)
         {
-            if (!this.IsFormValid())
-            {
-                return ApiResult.Failure<ActivityEditOutput>(this.FormInvalidReason());
-            }
-   
+            if (!this.IsFormValid()) return ApiResult.Failure<ActivityEditOutput>(this.FormInvalidReason());
+
             var model = Resolve<IActivityApiService>().GetView(input);
             return ApiResult.Success(model);
         }
 
         /// <summary>
-        /// ����
+        ///     ����
         /// </summary>
         /// <returns></returns>
         [HttpPost]
         [Display(Description = "����")]
-        public ApiResult Save([FromBody]ActivityEditOutput input)
+        public ApiResult Save([FromBody] ActivityEditOutput input)
         {
-            if (!this.IsFormValid())
-            {
-                return ApiResult.Failure<ActivityEditOutput>(this.FormInvalidReason());
-            }
+            if (!this.IsFormValid()) return ApiResult.Failure<ActivityEditOutput>(this.FormInvalidReason());
             var result = Resolve<IActivityApiService>().Save(input);
             return ToResult(result);
         }

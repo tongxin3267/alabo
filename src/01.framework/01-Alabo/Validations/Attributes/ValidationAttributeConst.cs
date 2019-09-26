@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
 
 namespace Alabo.Validations.Attributes
 {

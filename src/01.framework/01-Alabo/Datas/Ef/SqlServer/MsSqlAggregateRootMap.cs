@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Alabo.Domains.Entities.Core;
+﻿using Alabo.Domains.Entities.Core;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Alabo.Datas.Ef.SqlServer
 {

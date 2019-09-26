@@ -5,13 +5,14 @@ using Alabo.Industry.Cms.Articles.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
-namespace Alabo.Industry.Cms.Articles.Controllers {
-
+namespace Alabo.Industry.Cms.Articles.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/SinglePage/[action]")]
-    public class ApiSinglePageController : ApiBaseController<SinglePage, ObjectId> {
-
-        public ApiSinglePageController() : base() {
+    public class ApiSinglePageController : ApiBaseController<SinglePage, ObjectId>
+    {
+        public ApiSinglePageController()
+        {
             BaseService = Resolve<ISinglePageService>();
         }
     }

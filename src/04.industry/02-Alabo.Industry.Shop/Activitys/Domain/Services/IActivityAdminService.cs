@@ -6,13 +6,13 @@ using Alabo.Industry.Shop.Activitys.Dtos;
 using Alabo.Industry.Shop.Activitys.Extensions;
 using Alabo.Industry.Shop.Activitys.ViewModels;
 
-namespace Alabo.Industry.Shop.Activitys.Domain.Services {
-
+namespace Alabo.Industry.Shop.Activitys.Domain.Services
+{
     /// <summary>
     ///     Interface IActivityAdminService
     /// </summary>
-    public interface IActivityAdminService : IService {
-
+    public interface IActivityAdminService : IService
+    {
         /// <summary>
         ///     获取s the 所有 类型.
         /// </summary>

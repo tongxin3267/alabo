@@ -48,15 +48,12 @@ namespace Alabo.Helpers
         /// <param name="args">参数</param>
         public String Append(string value, params object[] args)
         {
-            if (args == null) {
-                args = new object[] {string.Empty};
-            }
+            if (args == null) args = new object[] {string.Empty};
 
-            if (args.Length == 0) {
+            if (args.Length == 0)
                 Builder.Append(value);
-            } else {
+            else
                 Builder.AppendFormat(value, args);
-            }
 
             return this;
         }
@@ -112,9 +109,7 @@ namespace Alabo.Helpers
         public String RemoveEnd(string end)
         {
             var result = Builder.ToString();
-            if (!result.EndsWith(end)) {
-                return this;
-            }
+            if (!result.EndsWith(end)) return this;
 
             Builder = new StringBuilder(result.TrimEnd(end.ToCharArray()));
             return this;

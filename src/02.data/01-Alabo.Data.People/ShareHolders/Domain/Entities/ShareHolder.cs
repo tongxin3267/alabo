@@ -7,14 +7,14 @@ using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Data.People.ShareHolders.Domain.Entities {
-
+namespace Alabo.Data.People.ShareHolders.Domain.Entities
+{
     [ClassProperty(Name = "股东")]
     [BsonIgnoreExtraElements]
     [AutoDelete(IsAuto = true)]
     [Table("People_ShareHolder")]
-    public class ShareHolder : AggregateMongodbRoot<ShareHolder> {
-
+    public class ShareHolder : AggregateMongodbRoot<ShareHolder>
+    {
         [Field(ListShow = false, EditShow = true, ControlsType = ControlsType.Hidden, SortOrder = 700)]
         public long UserId { get; set; }
 
@@ -36,7 +36,8 @@ namespace Alabo.Data.People.ShareHolders.Domain.Entities {
         ///     股东等级
         /// </summary>
         [Display(Name = "股东等级")]
-        [Field(ListShow = false, EditShow = true, ControlsType = ControlsType.DropdownList, DataSourceType = typeof(ShareHoldersGradeConfig), SortOrder = 700)]
+        [Field(ListShow = false, EditShow = true, ControlsType = ControlsType.DropdownList,
+            DataSourceType = typeof(ShareHoldersGradeConfig), SortOrder = 700)]
         public Guid GradeId { get; set; }
     }
 }

@@ -12,15 +12,15 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.Industry.Shop.Deliveries.ViewModels {
-
+namespace Alabo.Industry.Shop.Deliveries.ViewModels
+{
     /// <summary>
     /// </summary>
     /// <seealso cref="BaseViewModel" />
     [ClassProperty(Name = "店铺管理", Icon = "la la-users", Description = "店铺管理",
         SideBarType = SideBarType.SupplierSideBar)]
-    public class ViewStore : UIBase, IAutoTable<ViewStore> {
-
+    public class ViewStore : UIBase, IAutoTable<ViewStore>
+    {
         /// <summary>
         ///     Gets or sets Id标识
         /// </summary>
@@ -156,10 +156,30 @@ namespace Alabo.Industry.Shop.Deliveries.ViewModels {
         public DateTime CreateTime { get; set; }
 
         /// <summary>
+        ///     通用分页查询列表
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public PageResult<ViewStore> PageTable(object query, AutoBaseModel autoModel)
+        {
+            var list = Resolve<IShopStoreService>().GetPageList(query);
+            return ToPageResult(list);
+        }
+
+        public List<TableAction> Actions()
+        {
+            var list = new List<TableAction>
+            {
+                ToLinkAction("供应商", "/ViewStore/list")
+            };
+            return list;
+        }
+
+        /// <summary>
         ///     Views the links.
         /// </summary>
-
-        public IEnumerable<ViewLink> ViewLinks() {
+        public IEnumerable<ViewLink> ViewLinks()
+        {
             var quickLinks = new List<ViewLink>
             {
                 new ViewLink("供应商详情", "/Admin/Basic/Edit?Service=IstoreService&Method=GetView&id=[[Id]]", Icons.List,
@@ -168,24 +188,6 @@ namespace Alabo.Industry.Shop.Deliveries.ViewModels {
                     LinkType.FormQuickLink)
             };
             return quickLinks;
-        }
-
-        /// <summary>
-        /// 通用分页查询列表
-        /// </summary>
-        /// <param name="query"></param>
-        /// <returns></returns>
-        public PageResult<ViewStore> PageTable(object query, AutoBaseModel autoModel) {
-            var list = Resolve<IShopStoreService>().GetPageList(query);
-            return ToPageResult(list);
-        }
-
-        public List<TableAction> Actions() {
-            var list = new List<TableAction>
-            {
-                ToLinkAction("供应商", "/ViewStore/list")
-            };
-            return list;
         }
     }
 }

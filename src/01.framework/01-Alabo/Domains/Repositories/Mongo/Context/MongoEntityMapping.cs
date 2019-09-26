@@ -24,7 +24,7 @@ namespace Alabo.Domains.Repositories.Mongo.Context
                 if (attribute != null)
                 {
                     tableName = attribute.Name;
-                    if (!TableMappingCache.ContainsKey(type)) {
+                    if (!TableMappingCache.ContainsKey(type))
                         try
                         {
                             TableMappingCache.TryAdd(type, tableName);
@@ -33,7 +33,6 @@ namespace Alabo.Domains.Repositories.Mongo.Context
                         {
                             Console.WriteLine(ex.Message);
                         }
-                    }
                 }
             }
 

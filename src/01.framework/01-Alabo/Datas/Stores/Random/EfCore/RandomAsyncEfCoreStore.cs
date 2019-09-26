@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using Alabo.Datas.Stores.Page.EfCore;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
+using Microsoft.EntityFrameworkCore;
 
 namespace Alabo.Datas.Stores.Random.EfCore
 {

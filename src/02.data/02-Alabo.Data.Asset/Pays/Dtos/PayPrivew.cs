@@ -6,12 +6,12 @@ using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.Pays.Dtos {
-
+namespace Alabo.App.Asset.Pays.Dtos
+{
     [ClassProperty(Name = "收银台", Icon = "fa fa-puzzle-piece", Description = "提现管理", PostApi = "Api/WithDraw/Add",
         SuccessReturn = "Api/WithDraw/Get")]
-    public class PayPrivew {
-
+    public class PayPrivew
+    {
         /// <summary>
         ///     id
         /// </summary>

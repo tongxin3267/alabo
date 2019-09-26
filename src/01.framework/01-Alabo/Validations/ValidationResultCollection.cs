@@ -34,9 +34,7 @@ namespace Alabo.Validations
         public ValidationResultCollection(string result)
         {
             _results = new List<ValidationResult>();
-            if (string.IsNullOrWhiteSpace(result)) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(result)) return;
 
             _results.Add(new ValidationResult(result));
         }
@@ -73,9 +71,7 @@ namespace Alabo.Validations
         /// <param name="result">验证结果</param>
         public void Add(ValidationResult result)
         {
-            if (result == null) {
-                return;
-            }
+            if (result == null) return;
 
             _results.Add(result);
         }
@@ -86,13 +82,9 @@ namespace Alabo.Validations
         /// <param name="results">验证结果集合</param>
         public void AddList(IEnumerable<ValidationResult> results)
         {
-            if (results == null) {
-                return;
-            }
+            if (results == null) return;
 
-            foreach (var result in results) {
-                Add(result);
-            }
+            foreach (var result in results) Add(result);
         }
 
         /// <summary>
@@ -100,9 +92,7 @@ namespace Alabo.Validations
         /// </summary>
         public override string ToString()
         {
-            if (IsValid) {
-                return string.Empty;
-            }
+            if (IsValid) return string.Empty;
 
             return _results.First().ErrorMessage;
         }

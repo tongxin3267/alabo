@@ -1,9 +1,9 @@
-using MongoDB.Bson;
-using Xunit;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Industry.Cms.Articles.Domain.Services;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
+using MongoDB.Bson;
+using Xunit;
 
 namespace Alabo.Test.Cms.Articles.Domain.Services
 {

@@ -1,15 +1,14 @@
 ﻿using System.Threading.Tasks;
-using MongoDB.Bson;
 using Alabo.Domains.Services;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Domains.Base.Services {
-
+namespace Alabo.Domains.Base.Services
+{
     /// <summary>
     ///     授权服务
     /// </summary>
-    public interface IOpenService : IService {
-
+    public interface IOpenService : IService
+    {
         /// <summary>
         ///     平台预留手机号码
         /// </summary>
@@ -46,7 +45,7 @@ namespace Alabo.Domains.Base.Services {
         bool CheckVerifiyCode(string mobile, long code);
 
         /// <summary>
-        /// 验证手机格式
+        ///     验证手机格式
         /// </summary>
         /// <param name="mobile"></param>
         /// <returns></returns>

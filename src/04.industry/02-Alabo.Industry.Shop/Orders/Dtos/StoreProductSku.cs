@@ -2,14 +2,14 @@
 using Alabo.Domains.Query.Dto;
 using Alabo.Industry.Shop.Deliveries.Domain.Dtos;
 
-namespace Alabo.Industry.Shop.Orders.Dtos {
-
+namespace Alabo.Industry.Shop.Orders.Dtos
+{
     /// <summary>
     ///     店铺和商品Sku
     ///     确认下单页面
     /// </summary>
-    public class StoreProductSku : EntityDto {
-
+    public class StoreProductSku : EntityDto
+    {
         /// <summary>
         ///     总数量
         ///     包括店铺所有的商品

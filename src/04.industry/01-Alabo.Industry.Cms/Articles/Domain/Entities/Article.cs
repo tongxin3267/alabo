@@ -9,16 +9,16 @@ using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Industry.Cms.Articles.Domain.Entities {
-
+namespace Alabo.Industry.Cms.Articles.Domain.Entities
+{
     /// <summary>
     ///     文章类
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("CMS_Article")]
     [ClassProperty(Name = "文章", Icon = "fa fa-puzzle-piece", SideBarType = SideBarType.ArticleSideBarSideBar)]
-    public class Article : AggregateMongodbUserRoot<Article> {
-
+    public class Article : AggregateMongodbUserRoot<Article>
+    {
         /// <summary>
         ///     级联Id
         /// </summary>

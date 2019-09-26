@@ -15,14 +15,14 @@ using Alabo.Web.Mvc.Attributes;
 using Microsoft.AspNetCore.Mvc;
 using Random = Alabo.Randoms.Random;
 
-namespace Alabo.Data.People.Users.ViewModels {
-
+namespace Alabo.Data.People.Users.ViewModels
+{
     /// <summary>
     ///     Class ViewRegModels.
     /// </summary>
     [ClassProperty(Name = "用户注册", Icon = "fa fa-puzzle-piece", Description = "用户注册")]
-    public class ViewRegModels : UIBase, IAutoForm {
-
+    public class ViewRegModels : UIBase, IAutoForm
+    {
         /// <summary>
         ///     Gets or sets the name of the 会员.
         /// </summary>
@@ -30,7 +30,8 @@ namespace Alabo.Data.People.Users.ViewModels {
         [StringLength(15, MinimumLength = 4, ErrorMessage = "用户名大小需要在4-15个字符之间")]
         [Remote("ExistsUserName", "Verify", HttpMethod = "POST", ErrorMessage = "用户名已经存在，请重新输入")]
         [Required(ErrorMessage = "请正确填写用户名")]
-        [Field(ControlsType = ControlsType.TextBox, IsMain = true, EditShow = true, GroupTabId = 1, Width = "110", ListShow = true,
+        [Field(ControlsType = ControlsType.TextBox, IsMain = true, EditShow = true, GroupTabId = 1, Width = "110",
+            ListShow = true,
             SortOrder = 1)]
         [RegularExpression(RegularExpressionHelper.UserName, ErrorMessage = ErrorMessage.NotMatchFormat)]
         public string UserName { get; set; }
@@ -40,7 +41,8 @@ namespace Alabo.Data.People.Users.ViewModels {
         /// </summary>
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [DataType(DataType.Password)]
-        [Field(ControlsType = ControlsType.TextBox, IsMain = true, EditShow = true, GroupTabId = 1, Width = "110", ListShow = true,
+        [Field(ControlsType = ControlsType.TextBox, IsMain = true, EditShow = true, GroupTabId = 1, Width = "110",
+            ListShow = true,
             SortOrder = 2)]
         [StringLength(16, MinimumLength = 6, ErrorMessage = "6~16个字符，为了安全请使用字母加数字组合")]
         //[RegularExpression("^[@A-Za-z0-9!#$%^&*.~]{6,16}$",ErrorMessage = "6~16个字符，区分大小写,为了安全请使用大小写字母加数字组合")]
@@ -52,7 +54,8 @@ namespace Alabo.Data.People.Users.ViewModels {
         /// </summary>
         [Display(Name = "确认密码")]
         [DataType(DataType.Password)]
-        [Field(ControlsType = ControlsType.TextBox, IsMain = true, EditShow = true, GroupTabId = 1, Width = "110", ListShow = true,
+        [Field(ControlsType = ControlsType.TextBox, IsMain = true, EditShow = true, GroupTabId = 1, Width = "110",
+            ListShow = true,
             SortOrder = 3)]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [Compare("Password", ErrorMessage = "密码与确认密码不相同")]
@@ -69,7 +72,8 @@ namespace Alabo.Data.People.Users.ViewModels {
         ///     Gets or sets the email.
         /// </summary>
         [Display(Name = "邮箱")]
-        [Field(ControlsType = ControlsType.Email, IsMain = true, EditShow = true, GroupTabId = 1, Width = "110", ListShow = true,
+        [Field(ControlsType = ControlsType.Email, IsMain = true, EditShow = true, GroupTabId = 1, Width = "110",
+            ListShow = true,
             SortOrder = 4)]
         [Remote("verify_email", HttpMethod = "POST", ErrorMessage = ErrorMessage.IsUserd)]
         //[Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
@@ -80,7 +84,8 @@ namespace Alabo.Data.People.Users.ViewModels {
         ///     Gets or sets the mobile.
         /// </summary>
         [Display(Name = "手机")]
-        [Field(ControlsType = ControlsType.Phone, IsMain = true, EditShow = true, GroupTabId = 1, Width = "110", ListShow = true,
+        [Field(ControlsType = ControlsType.Phone, IsMain = true, EditShow = true, GroupTabId = 1, Width = "110",
+            ListShow = true,
             SortOrder = 5)]
         [Remote("verify_mobile", HttpMethod = "POST", ErrorMessage = ErrorMessage.IsUserd)]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
@@ -103,7 +108,8 @@ namespace Alabo.Data.People.Users.ViewModels {
         ///     Gets or sets the name.
         /// </summary>
         [Display(Name = "姓名")]
-        [Field(ControlsType = ControlsType.TextBox, IsMain = true, EditShow = true, GroupTabId = 1, Width = "110", ListShow = true,
+        [Field(ControlsType = ControlsType.TextBox, IsMain = true, EditShow = true, GroupTabId = 1, Width = "110",
+            ListShow = true,
             SortOrder = 6)]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [StringLength(15, MinimumLength = 2, ErrorMessage = "姓名长度应为2~15个字符")]
@@ -113,7 +119,8 @@ namespace Alabo.Data.People.Users.ViewModels {
         ///     Gets or sets the name of the record.
         /// </summary>
         [Display(Name = "推荐人")]
-        [Field(ControlsType = ControlsType.TextBox, IsMain = true, EditShow = true, GroupTabId = 1, Width = "110", ListShow = true,
+        [Field(ControlsType = ControlsType.TextBox, IsMain = true, EditShow = true, GroupTabId = 1, Width = "110",
+            ListShow = true,
             SortOrder = 7)]
         public string RecName { get; set; }
 
@@ -136,17 +143,21 @@ namespace Alabo.Data.People.Users.ViewModels {
         ///     Gets or sets the status.
         /// </summary>
         [Display(Name = "状态")]
-        [Field(ControlsType = ControlsType.RadioButtonMultipl, IsMain = true, EditShow = true, GroupTabId = 1, Width = "110", ListShow = true,
+        [Field(ControlsType = ControlsType.RadioButtonMultipl, IsMain = true, EditShow = true, GroupTabId = 1,
+            Width = "110", ListShow = true,
             SortOrder = 8)]
         public Status Status { get; set; } = Status.Normal;
 
-        public AutoForm GetView(object id, AutoBaseModel autoModel) {
-            var view = new ViewRegModels {
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
+            var view = new ViewRegModels
+            {
                 GradeId = Resolve<IGradeService>().DefaultUserGrade.Id,
                 Status = Status.Normal
             };
             var userConfig = Resolve<IAutoConfigService>().GetValue<UserConfig>();
-            if (userConfig.IsFixedData) {
+            if (userConfig.IsFixedData)
+            {
                 view.Mobile = RandomHelper.Mobile();
                 view.Email = RandomHelper.Email();
                 var sex = RandomHelper.GetSex();
@@ -157,7 +168,8 @@ namespace Alabo.Data.People.Users.ViewModels {
             return null;
         }
 
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
             //var user = new Domain.Entities.User
             //{
             //    Map = new UserMap(),

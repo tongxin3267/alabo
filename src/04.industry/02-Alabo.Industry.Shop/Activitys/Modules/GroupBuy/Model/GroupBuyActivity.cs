@@ -23,7 +23,6 @@ using Newtonsoft.Json;
 
 namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Model
 {
-
     /// <summary>
     ///     拼图
     ///     人多优惠大
@@ -40,7 +39,6 @@ namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Model
     [ClassProperty(Name = "拼团")]
     public class GroupBuyActivity : BaseViewModel, IActivity
     {
-
         /// <summary>
         ///     拼团人数
         /// </summary>
@@ -52,8 +50,8 @@ namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Model
 
 
         /// <summary>
-        /// 拼团价格设置
-        /// Mark=1表示可以批量填充数据
+        ///     拼团价格设置
+        ///     Mark=1表示可以批量填充数据
         /// </summary>
         [Field(ControlsType = ControlsType.JsonList, EditShow = true, Mark = "1")]
         [Display(Name = "拼团商品价格设置")]
@@ -129,17 +127,11 @@ namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Model
             var moneyTypes = Resolve<IAutoConfigService>().MoneyTypes(); // 所有货币类型
             var productId = httpContext.Request.Form["ProductId"].ConvertToLong();
             var product = Resolve<IProductService>().GetSingle(r => r.Id == productId);
-            if (product == null)
-            {
-                return ServiceResult.FailedWithMessage("商品不存在");
-            }
+            if (product == null) return ServiceResult.FailedWithMessage("商品不存在");
 
             var priceStyleConfig = Resolve<IAutoConfigService>().GetList<PriceStyleConfig>()
                 .FirstOrDefault(r => r.Id == product.PriceStyleId);
-            if (product.MinCashRate == 0)
-            {
-                product.MinCashRate = priceStyleConfig.MinCashRate;
-            }
+            if (product.MinCashRate == 0) product.MinCashRate = priceStyleConfig.MinCashRate;
 
             activityModule.SkuProducts.Foreach(r =>
             {
@@ -149,10 +141,7 @@ namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Model
                 if (priceStyleConfig != null)
                 {
                     var moneyConfig = moneyTypes.FirstOrDefault(e => e.Id == priceStyleConfig.MoneyTypeId);
-                    if (moneyConfig?.RateFee == 0)
-                    {
-                        moneyConfig.RateFee = 1;
-                    }
+                    if (moneyConfig?.RateFee == 0) moneyConfig.RateFee = 1;
                     // 如果不是现金商品
                     if (priceStyleConfig.PriceStyle != PriceStyle.CashProduct)
                     {
@@ -185,7 +174,6 @@ namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Model
     [ClassProperty(Name = "拼团商品价格设置")]
     public class GroupBuySkuProduct : BaseViewModel
     {
-
         /// <summary>
         ///     商品skuId
         /// </summary>

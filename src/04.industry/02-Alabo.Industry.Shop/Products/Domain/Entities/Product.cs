@@ -15,14 +15,15 @@ using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.Industry.Shop.Products.Domain.Entities {
-
-    [ClassProperty(Name = "商品管理", Icon = "fa fa-puzzle-piece", Description = "产品线商品", PageType = ViewPageType.List, PostApi = "Api/Store/GetProductList", ListApi = "Api/Product/ProductList")]
+namespace Alabo.Industry.Shop.Products.Domain.Entities
+{
+    [ClassProperty(Name = "商品管理", Icon = "fa fa-puzzle-piece", Description = "产品线商品", PageType = ViewPageType.List,
+        PostApi = "Api/Store/GetProductList", ListApi = "Api/Product/ProductList")]
     /// <summary>
     /// Class Product.
     /// </summary>
-    public class Product : AggregateDefaultRoot<Product> {
-
+    public class Product : AggregateDefaultRoot<Product>
+    {
         #region 属性
 
         /// <summary>
@@ -51,7 +52,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Entities {
         public Guid PriceStyleId { get; set; }
 
         /// <summary>
-        /// 运费模板ID
+        ///     运费模板ID
         /// </summary>
         [Display(Name = "运费模板ID")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
@@ -83,8 +84,10 @@ namespace Alabo.Industry.Shop.Products.Domain.Entities {
         /// </summary>
         [Display(Name = "商品名称")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, PlaceHolder = "请输入商品名称", Operator = Operator.Contains,
-            IsShowAdvancedSerach = true, DataSource = "Alabo.App.Shop.Product.Domain.Entities", GroupTabId = 1, IsMain = true, Width = "150",
+        [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, PlaceHolder = "请输入商品名称",
+            Operator = Operator.Contains,
+            IsShowAdvancedSerach = true, DataSource = "Alabo.App.Shop.Product.Domain.Entities", GroupTabId = 1,
+            IsMain = true, Width = "150",
             ListShow = true, SortOrder = 1, Link = "/Admin/Product/Edit?id=[[Id]]")]
         [StringLength(60, ErrorMessage = "60个字以内")]
         public string Name { get; set; }
@@ -94,7 +97,8 @@ namespace Alabo.Industry.Shop.Products.Domain.Entities {
         /// </summary>
         [Display(Name = "货号")]
         [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, PlaceHolder = "请输入货号",
-            IsShowAdvancedSerach = true, DataSource = "Alabo.App.Shop.Product.Domain.Entities", GroupTabId = 3, IsMain = true, Width = "150",
+            IsShowAdvancedSerach = true, DataSource = "Alabo.App.Shop.Product.Domain.Entities", GroupTabId = 3,
+            IsMain = true, Width = "150",
             ListShow = true, SortOrder = 2, Link = "/Admin/Product/Edit?id=[[Id]]")]
         [StringLength(60, ErrorMessage = "60个字以内")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
@@ -227,9 +231,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Entities {
         [Display(Name = "收藏量")]
         public long FavoriteCount { get; set; }
 
-        [Display(Name = "所属商城")]
-        [NotMapped]
-        public string PriceStyleName { get; set; }
+        [Display(Name = "所属商城")] [NotMapped] public string PriceStyleName { get; set; }
 
         /// <summary>
         ///     所属活动 ,使用Json保存
@@ -269,13 +271,15 @@ namespace Alabo.Industry.Shop.Products.Domain.Entities {
         #endregion 属性
     }
 
-    public class ProductTableMap : MsSqlAggregateRootMap<Product> {
-
-        protected override void MapTable(EntityTypeBuilder<Product> builder) {
+    public class ProductTableMap : MsSqlAggregateRootMap<Product>
+    {
+        protected override void MapTable(EntityTypeBuilder<Product> builder)
+        {
             builder.ToTable("Shop_Product");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<Product> builder) {
+        protected override void MapProperties(EntityTypeBuilder<Product> builder)
+        {
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Property(e => e.Name).HasMaxLength(250);
@@ -284,7 +288,8 @@ namespace Alabo.Industry.Shop.Products.Domain.Entities {
             builder.Ignore(e => e.Detail);
             builder.Ignore(e => e.Store);
             builder.Ignore(e => e.Version);
-            if (TenantContext.IsTenant) {
+            if (TenantContext.IsTenant)
+            {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
             }
         }

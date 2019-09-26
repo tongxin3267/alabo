@@ -6,14 +6,14 @@ using Alabo.Framework.Core.WebApis.Dtos;
 using Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Dtos;
 using Alabo.Industry.Shop.Products.Dtos;
 
-namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Service {
-
+namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Service
+{
     /// <summary>
     ///     Interface IGroupBuyService
     ///     拼团服务
     /// </summary>
-    public interface IGroupBuyService : IService {
-
+    public interface IGroupBuyService : IService
+    {
         /// <summary>
         ///     获取s the group buy product records.
         ///     获取拼团商品记录
@@ -29,13 +29,13 @@ namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Service {
         Tuple<ServiceResult, IList<GroupBuyRecordUser>> GetGrouyBuyUserByOrderId(long orderId);
 
         /// <summary>
-        /// 获取拼团商品列表
+        ///     获取拼团商品列表
         /// </summary>
         /// <param name="parameter">参数</param>
         ProductItemApiOutput GetProductItems(ApiBaseInput parameter);
 
         /// <summary>
-        /// 通过缓存获取所有的拼团商品Id
+        ///     通过缓存获取所有的拼团商品Id
         /// </summary>
         List<long> GetAllProductIds();
     }

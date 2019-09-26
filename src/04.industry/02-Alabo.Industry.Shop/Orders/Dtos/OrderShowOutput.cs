@@ -6,9 +6,10 @@ using Alabo.Industry.Shop.Orders.Domain.Entities;
 using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.Industry.Shop.Products.Dtos;
 
-namespace Alabo.Industry.Shop.Orders.Dtos {
-
-    public class OrderShowOutput {
+namespace Alabo.Industry.Shop.Orders.Dtos
+{
+    public class OrderShowOutput
+    {
         /// <summary>
         ///     商品属性ID
         /// </summary>
@@ -119,7 +120,7 @@ namespace Alabo.Industry.Shop.Orders.Dtos {
         public IList<OrderActionTypeAttribute> Methods { get; set; }
 
         /// <summary>
-        /// 物流信息
+        ///     物流信息
         /// </summary>
         public Deliver Deliver { get; set; }
     }

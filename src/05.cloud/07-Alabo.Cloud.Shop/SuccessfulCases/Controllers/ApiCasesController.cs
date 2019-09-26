@@ -11,18 +11,19 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Cloud.Shop.SuccessfulCases.Controllers {
-
+namespace Alabo.Cloud.Shop.SuccessfulCases.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/Cases/[action]")]
-    public class ApiCasesController : ApiBaseController<Cases, ObjectId> {
-
-        public ApiCasesController() : base() {
+    public class ApiCasesController : ApiBaseController<Cases, ObjectId>
+    {
+        public ApiCasesController()
+        {
             BaseService = Resolve<ICasesService>();
         }
 
         /// <summary>
-        /// 获取成功案例列表
+        ///     获取成功案例列表
         /// </summary>
         /// <returns></returns>
         [HttpGet]

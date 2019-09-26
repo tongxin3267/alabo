@@ -6,19 +6,22 @@ using Alabo.Helpers;
 using Alabo.Industry.Cms.Articles.Domain.Services;
 using MongoDB.Bson;
 
-namespace Alabo.Industry.Cms.Articles.UI {
-
+namespace Alabo.Industry.Cms.Articles.UI
+{
     /// <summary>
-    /// 头条新闻
+    ///     头条新闻
     /// </summary>
-    public class ArticleAutoNews : IAutoNews {
-
-        public PagedList<AutoNewsItem> ResultList(object query, AutoBaseModel autoModel) {
+    public class ArticleAutoNews : IAutoNews
+    {
+        public PagedList<AutoNewsItem> ResultList(object query, AutoBaseModel autoModel)
+        {
             var model = Ioc.Resolve<IArticleService>()
                 .GetPagedList(query, u => u.ChannelId == ObjectId.Parse("e02220001110000000000009"));
             var list = new PagedList<AutoNewsItem>();
-            foreach (var item in model) {
-                var temp = new AutoNewsItem {
+            foreach (var item in model)
+            {
+                var temp = new AutoNewsItem
+                {
                     Intro = item.Intro,
                     CreateTime = item.CreateTime,
                     Title = item.Title,
@@ -28,11 +31,14 @@ namespace Alabo.Industry.Cms.Articles.UI {
                 };
                 list.Add(temp);
             }
+
             return list;
         }
 
-        public AutoSetting Setting() {
-            var setting = new AutoSetting {
+        public AutoSetting Setting()
+        {
+            var setting = new AutoSetting
+            {
                 Name = "头条新闻",
                 Icon = "flaticon-network"
             };

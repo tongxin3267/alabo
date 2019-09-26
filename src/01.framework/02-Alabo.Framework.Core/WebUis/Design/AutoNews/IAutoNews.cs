@@ -1,6 +1,6 @@
-﻿using Alabo.Framework.Core.WebApis;
-using Alabo.Dependency;
+﻿using Alabo.Dependency;
 using Alabo.Domains.Entities;
+using Alabo.Framework.Core.WebApis;
 
 namespace Alabo.Framework.Core.WebUis.Design.AutoNews
 {

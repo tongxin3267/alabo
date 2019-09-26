@@ -7,10 +7,10 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.Cloud.Support.Domain.ViewModels {
-
-    public class ViewWorkOrder : BaseViewModel {
-
+namespace Alabo.Cloud.Support.Domain.ViewModels
+{
+    public class ViewWorkOrder : BaseViewModel
+    {
         [Display(Name = "标题")]
         [Required(ErrorMessage = ErrorMessage.NameNotCorrect)]
         public string Title { get; set; }

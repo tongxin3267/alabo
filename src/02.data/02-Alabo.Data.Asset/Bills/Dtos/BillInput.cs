@@ -5,9 +5,10 @@ using Alabo.Domains.Query.Dto;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.Bills.Dtos {
-
-    public class BillInput : PagedInputDto {
+namespace Alabo.App.Asset.Bills.Dtos
+{
+    public class BillInput : PagedInputDto
+    {
         public long? Id { get; set; } = null;
 
         /// <summary>

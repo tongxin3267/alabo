@@ -3,52 +3,52 @@
 namespace Alabo.Industry.Shop.Products.ViewModels
 {
     /// <summary>
-    /// TimeLimitBuyItem
+    ///     TimeLimitBuyItem
     /// </summary>
     public class TimeLimitBuyItem
     {
         /// <summary>
-        /// id
+        ///     id
         /// </summary>
         public long Id { get; set; }
 
         /// <summary>
-        /// name
+        ///     name
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// bn
+        ///     bn
         /// </summary>
         public string Bn { get; set; }
 
         /// <summary>
-        /// price
+        ///     price
         /// </summary>
         public decimal Price { get; set; }
 
         /// <summary>
-        /// thumbnail url
+        ///     thumbnail url
         /// </summary>
         public string ThumbnailUrl { get; set; }
 
         /// <summary>
-        /// start time
+        ///     start time
         /// </summary>
         public DateTime StartTime { get; set; }
 
         /// <summary>
-        /// end time
+        ///     end time
         /// </summary>
         public DateTime EndTime { get; set; }
 
         /// <summary>
-        /// Stock
+        ///     Stock
         /// </summary>
         public long Stock { get; set; }
 
         /// <summary>
-        /// sold count
+        ///     sold count
         /// </summary>
         public long SoldCount { get; set; }
     }

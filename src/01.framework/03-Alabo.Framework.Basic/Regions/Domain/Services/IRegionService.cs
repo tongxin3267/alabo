@@ -6,10 +6,10 @@ using Alabo.Framework.Basic.Address.Dtos;
 using Alabo.Framework.Core.Enums.Enum;
 using MongoDB.Bson;
 
-namespace Alabo.Framework.Basic.Address.Domain.Services {
-
-    public interface IRegionService : IService<Region, ObjectId> {
-
+namespace Alabo.Framework.Basic.Address.Domain.Services
+{
+    public interface IRegionService : IService<Region, ObjectId>
+    {
         /// <summary>
         ///     导入初始数据
         /// </summary>
@@ -25,7 +25,6 @@ namespace Alabo.Framework.Basic.Address.Domain.Services {
         ///     获取省份
         /// </summary>
         /// <param name="query"></param>
-
         PagedList<Region> GetProvincePagedList(object query);
 
         /// <summary>

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Alabo.Datas.UnitOfWorks;
+using Alabo.Domains.Entities.Core;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
-using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Entities.Core;
 
 namespace Alabo.Datas.Stores.Add.Mongo
 {

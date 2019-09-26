@@ -1,5 +1,5 @@
-﻿using Xunit;
-using Alabo.Test.Base.Core.Model;
+﻿using Alabo.Test.Base.Core.Model;
+using Xunit;
 
 namespace Alabo.Test.Core.User.Controllers
 {

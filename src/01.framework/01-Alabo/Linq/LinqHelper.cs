@@ -59,13 +59,9 @@ namespace Alabo.Linq
             foreach (var dic in dictionary)
             {
                 var key = dic.Key;
-                if (dic.Key == "loginUserId") {
-                    key = "UserId";
-                }
+                if (dic.Key == "loginUserId") key = "UserId";
 
-                if (key == "dataId" || key == "widgetId" || key == "sign") {
-                    continue;
-                }
+                if (key == "dataId" || key == "widgetId" || key == "sign") continue;
 
                 var dicValue = dic.Value;
                 //  var _operator = SetOperator(ref dicValue);
@@ -73,9 +69,7 @@ namespace Alabo.Linq
                 try
                 {
                     var expression = Lambda.ParsePredicate<TEntity>(key, dicValue, _operator);
-                    if (expression != null) {
-                        query.And(expression);
-                    }
+                    if (expression != null) query.And(expression);
                 }
                 catch
                 {
@@ -95,9 +89,8 @@ namespace Alabo.Linq
             if (!value.IsNullOrEmpty() && value.Length > 2)
             {
                 var key = value.Substring(0, 2).ToLower();
-                if (GetOperators().TryGetValue(key, out _operator)) {
+                if (GetOperators().TryGetValue(key, out _operator))
                     value = value.Replace(key, "", StringComparison.OrdinalIgnoreCase);
-                }
             }
 
             return _operator;
@@ -133,18 +126,13 @@ namespace Alabo.Linq
         public static Expression<Func<TEntity, bool>> GetWhereIfNotEmptyExpression<TEntity>(
             Expression<Func<TEntity, bool>> predicate) where TEntity : class
         {
-            if (predicate == null) {
-                return null;
-            }
+            if (predicate == null) return null;
 
-            if (Lambda.GetConditionCount(predicate) > 1) {
+            if (Lambda.GetConditionCount(predicate) > 1)
                 throw new InvalidOperationException(string.Format("仅允许添加一个条件,条件：{0}", predicate));
-            }
 
             var value = predicate.Value();
-            if (string.IsNullOrWhiteSpace(value.ToString())) {
-                return null;
-            }
+            if (string.IsNullOrWhiteSpace(value.ToString())) return null;
 
             return predicate;
         }

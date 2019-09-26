@@ -87,9 +87,8 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// </summary>
         public void Validate()
         {
-            if (string.IsNullOrWhiteSpace(_item?.Name)) {
+            if (string.IsNullOrWhiteSpace(_item?.Name))
                 throw new InvalidOperationException(LibraryResource.TableIsEmpty);
-            }
         }
 
         /// <summary>
@@ -98,9 +97,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         public string ToSql()
         {
             var table = _item?.ToSql(_dialect);
-            if (string.IsNullOrWhiteSpace(table)) {
-                return null;
-            }
+            if (string.IsNullOrWhiteSpace(table)) return null;
 
             return $"From {table}";
         }

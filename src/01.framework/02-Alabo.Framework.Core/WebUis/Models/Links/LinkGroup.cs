@@ -4,15 +4,17 @@ using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Framework.Core.WebUis.Models.Links {
-
+namespace Alabo.Framework.Core.WebUis.Models.Links
+{
     [ClassProperty(Name = "链接")]
-    public class LinkGroup : BaseComponent {
-
-        public LinkGroup() {
+    public class LinkGroup : BaseComponent
+    {
+        public LinkGroup()
+        {
         }
 
-        public LinkGroup(string name, string url, string image) {
+        public LinkGroup(string name, string url, string image)
+        {
             Name = name;
             Url = url;
             Image = image;

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Alabo.Industry.Offline.Order.Domain.Entities
 {
     /// <summary>
-    /// 订单
+    ///     订单
     /// </summary>
     [ClassProperty(Name = "订单")]
     [Table("Offline_MerchantOrder")]
@@ -27,34 +27,31 @@ namespace Alabo.Industry.Offline.Order.Domain.Entities
             get
             {
                 var searSerial = $"9{Id.ToString().PadLeft(9, '0')}";
-                if (Id.ToString().Length == 10)
-                {
-                    searSerial = $"{Id.ToString()}";
-                }
+                if (Id.ToString().Length == 10) searSerial = $"{Id.ToString()}";
                 return searSerial;
             }
         }
 
         /// <summary>
-        /// 店铺id
+        ///     店铺id
         /// </summary>
         [Display(Name = "店铺id")]
         public string MerchantStoreId { get; set; }
 
         /// <summary>
-        /// 支付方式Id
+        ///     支付方式Id
         /// </summary>
         [Display(Name = "支付方式Id")]
         public long PayId { get; set; } = 0;
 
         /// <summary>
-        /// 订单交易状态
+        ///     订单交易状态
         /// </summary>
         [Display(Name = "订单状态")]
         public MerchantOrderStatus OrderStatus { get; set; }
 
         /// <summary>
-        /// 订单类型
+        ///     订单类型
         /// </summary>
         public MerchantOrderType OrderType { get; set; }
 
@@ -88,12 +85,12 @@ namespace Alabo.Industry.Offline.Order.Domain.Entities
         public string AccountPay { get; set; }
 
         /// <summary>
-        /// 扩展信息以json方式保存
+        ///     扩展信息以json方式保存
         /// </summary>
         public string Extension { get; set; }
 
         /// <summary>
-        /// extension
+        ///     extension
         /// </summary>
         public MerchantOrderExtension MerchantOrderExtension { get; set; }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Alabo.Data.People.Counties.Domain.Entities;
 using Alabo.Data.People.Counties.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
@@ -10,23 +11,24 @@ using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Maps;
 
-namespace Alabo.Data.People.Counties.Domain.Dtos {
-
-    public class CountyView : UIBase, IAutoForm {
+namespace Alabo.Data.People.Counties.Domain.Dtos
+{
+    public class CountyView : UIBase, IAutoForm
+    {
         public string Id { get; set; }
 
         /// <summary>
-        /// 名称
+        ///     名称
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// 所属区域
+        ///     所属区域
         /// </summary>
         public long RegionId { get; set; }
 
         /// <summary>
-        /// 代理费
+        ///     代理费
         /// </summary>
         public decimal Price { get; set; }
 
@@ -52,7 +54,7 @@ namespace Alabo.Data.People.Counties.Domain.Dtos {
         public string Intro { get; set; }
 
         /// <summary>
-        /// 所属用户名
+        ///     所属用户名
         /// </summary>
         public string UserName { get; set; }
 
@@ -71,28 +73,24 @@ namespace Alabo.Data.People.Counties.Domain.Dtos {
         /// </summary>
         public UserTypeStatus Status { get; set; } = UserTypeStatus.Pending;
 
-        public AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
             var str = id.ToString();
             var model = Resolve<ICountyService>().GetSingle(u => u.Id == str.ToObjectId());
-            if (model != null) {
-                return ToAutoForm(model);
-            }
+            if (model != null) return ToAutoForm(model);
 
-            return ToAutoForm(new Entities.County());
+            return ToAutoForm(new County());
         }
 
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
-            var city = (CountyView)model;
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
+            var city = (CountyView) model;
             var user = Resolve<IUserService>().GetSingle(u => u.UserName == city.UserName);
             var parentUser = Resolve<IUserService>().GetSingle(u => u.UserName == city.ParentUserName);
-            var view = city.MapTo<Entities.County>();
-            if (user == null) {
-                return ServiceResult.FailedWithMessage("所属用户名不存在");
-            }
+            var view = city.MapTo<County>();
+            if (user == null) return ServiceResult.FailedWithMessage("所属用户名不存在");
 
-            if (parentUser == null) {
-                return ServiceResult.FailedWithMessage("推荐人用户名不存在");
-            }
+            if (parentUser == null) return ServiceResult.FailedWithMessage("推荐人用户名不存在");
 
             var partner = Resolve<ICountyService>().GetSingle(u => u.RegionId == city.RegionId);
 
@@ -100,9 +98,8 @@ namespace Alabo.Data.People.Counties.Domain.Dtos {
             view.UserId = user.Id;
             view.ParentUserId = parentUser.Id;
             view.RegionName = Resolve<IRegionService>().GetRegionNameById(view.RegionId);
-            if (city.Id.IsNullOrEmpty() && partner != null) {
+            if (city.Id.IsNullOrEmpty() && partner != null)
                 return ServiceResult.FailedWithMessage("该地区已有合伙人，一个地区只允许有一个合伙人");
-            }
 
             //var result = false;
             //if (partner != null) {
@@ -112,9 +109,7 @@ namespace Alabo.Data.People.Counties.Domain.Dtos {
             //}
 
             var result = Resolve<ICountyService>().AddOrUpdate(view);
-            if (result) {
-                return ServiceResult.Success;
-            }
+            if (result) return ServiceResult.Success;
             return ServiceResult.FailedWithMessage("操作失败，请重试");
         }
     }

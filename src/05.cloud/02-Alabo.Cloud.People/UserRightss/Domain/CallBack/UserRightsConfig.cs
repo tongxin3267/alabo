@@ -11,7 +11,6 @@ using Newtonsoft.Json;
 
 namespace Alabo.Cloud.People.UserRightss.Domain.CallBack
 {
-
     /// <summary>
     ///     等级权益设置
     /// </summary>
@@ -21,7 +20,6 @@ namespace Alabo.Cloud.People.UserRightss.Domain.CallBack
         SideBarType = SideBarType.UserRightsSideBar)]
     public class UserRightsConfig : BaseViewModel, IAutoConfig
     {
-
         /// <summary>
         ///     Id自增，主键
         /// </summary>
@@ -80,49 +78,55 @@ namespace Alabo.Cloud.People.UserRightss.Domain.CallBack
         [HelpBlock("考核等级，一个等级降职配置只能有一条，有多条时默认选择第一条")]
         public Guid GradeId { get; set; }
 
-        [Field(ControlsType = ControlsType.Switch, PlaceHolder = "是否开放", ListShow = true, SortOrder = 109, EditShow = true)]
+        [Field(ControlsType = ControlsType.Switch, PlaceHolder = "是否开放", ListShow = true, SortOrder = 109,
+            EditShow = true)]
         [Display(Name = "是否开放")]
         public bool IsOpen { get; set; } = true;
 
 
         /// <summary>
-        /// 有端口是否需要支付
+        ///     有端口是否需要支付
         /// </summary>
-        [Field(ControlsType = ControlsType.Switch, PlaceHolder = "有端口是否需要支付", ListShow = true, SortOrder = 109, EditShow = true)]
+        [Field(ControlsType = ControlsType.Switch, PlaceHolder = "有端口是否需要支付", ListShow = true, SortOrder = 109,
+            EditShow = true)]
         [Display(Name = "有端口是否需要支付,开启后，继续需要扣端口，也需要扣钱")]
         public bool IsHavePortNeedToPay { get; set; }
 
 
         /// <summary>
-        /// 无端口能否付费开通
+        ///     无端口能否付费开通
         /// </summary>
-        [Field(ControlsType = ControlsType.Switch, PlaceHolder = "无端口能否付费开通该等级", ListShow = true, SortOrder = 109, EditShow = true)]
+        [Field(ControlsType = ControlsType.Switch, PlaceHolder = "无端口能否付费开通该等级", ListShow = true, SortOrder = 109,
+            EditShow = true)]
         [Display(Name = "无端口能否付费开通该等级")]
         public bool HaveNotPortCanOpen { get; set; }
 
 
         /// <summary>
-        /// 能否自己升级,付费升级
-        /// 场景：比如免费会员不能付费升级
+        ///     能否自己升级,付费升级
+        ///     场景：比如免费会员不能付费升级
         /// </summary>
-        [Field(ControlsType = ControlsType.Switch, PlaceHolder = "无端口能否付费开通", ListShow = true, SortOrder = 109, EditShow = true)]
+        [Field(ControlsType = ControlsType.Switch, PlaceHolder = "无端口能否付费开通", ListShow = true, SortOrder = 109,
+            EditShow = true)]
         [Display(Name = "该等级能否付费升级，场景：比如免费会员不能付费升级")]
         public bool CanUpgradeBySelf { get; set; }
 
         /// <summary>
-        /// 是否显示该等级页面
+        ///     是否显示该等级页面
         /// </summary>
 
-        [Field(ControlsType = ControlsType.Switch, PlaceHolder = "是否显示该等级页面", ListShow = true, SortOrder = 109, EditShow = true)]
+        [Field(ControlsType = ControlsType.Switch, PlaceHolder = "是否显示该等级页面", ListShow = true, SortOrder = 109,
+            EditShow = true)]
         [Display(Name = "是否显示该等级页面")]
         public bool IsShowGradePage { get; set; }
 
 
         /// <summary>
-        /// 该等级是否只有管理员可以开通
+        ///     该等级是否只有管理员可以开通
         /// </summary>
 
-        [Field(ControlsType = ControlsType.Switch, PlaceHolder = "该等级是否只有管理员可以开通", ListShow = true, SortOrder = 109, EditShow = true)]
+        [Field(ControlsType = ControlsType.Switch, PlaceHolder = "该等级是否只有管理员可以开通", ListShow = true, SortOrder = 109,
+            EditShow = true)]
         [Display(Name = "该等级是否只有管理员可以开通")]
         public bool IsCanOnlyAdminOpen { get; set; }
 

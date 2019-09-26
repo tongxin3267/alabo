@@ -23,9 +23,7 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoTables
                 {
                     var type = fullName.GetTypeByFullName();
                     var classDescription = fullName.GetClassDescription();
-                    if (classDescription == null) {
-                        return null;
-                    }
+                    if (classDescription == null) return null;
 
                     var classPropertyAttribute = classDescription.ClassPropertyAttribute;
                     var auto = new AutoTable
@@ -58,12 +56,10 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoTables
                     #region 列相关的字段操作
 
                     var propertys = classDescription.Propertys;
-                    foreach (var item in propertys) {
+                    foreach (var item in propertys)
                         if (item.FieldAttribute != null && item.FieldAttribute.ListShow)
                         {
-                            if (item.Name == "Id") {
-                                continue;
-                            }
+                            if (item.Name == "Id") continue;
 
                             var tableColumn = new TableColumn
                             {
@@ -72,13 +68,11 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoTables
                                 Width = item.FieldAttribute.Width
                             };
                             tableColumn = GetType(tableColumn, item.Property, item.FieldAttribute);
-                            if (!item.FieldAttribute.Width.IsNullOrEmpty()) {
+                            if (!item.FieldAttribute.Width.IsNullOrEmpty())
                                 tableColumn.Width = item.FieldAttribute.Width;
-                            }
 
                             auto.Columns.Add(tableColumn);
                         }
-                    }
 
                     #endregion
 
@@ -97,17 +91,11 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoTables
         {
             var config = Activator.CreateInstance(type);
             // 如果是继承了IAutoTable，则优先使用/Api/Auto/Table接口
-            if (config is IAutoTable) {
-                return "/Api/Auto/Table";
-            }
+            if (config is IAutoTable) return "/Api/Auto/Table";
 
-            if (!apiUrl.IsNullOrEmpty()) {
-                return apiUrl;
-            }
+            if (!apiUrl.IsNullOrEmpty()) return apiUrl;
 
-            if (apiUrl.IsNotNullOrEmpty()) {
-                return "/Api/Auto/Table";
-            }
+            if (apiUrl.IsNotNullOrEmpty()) return "/Api/Auto/Table";
             //if (GetTableType(type) == TableType.AutoConfig)
             //{
             //    var url = $"Api/AutoConfig/List?Key={type.FullName}";
@@ -136,7 +124,7 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoTables
         public static TableColumn GetType(TableColumn tableColumn, PropertyInfo propertyInfo,
             FieldAttribute fieldAttributes)
         {
-            if (propertyInfo.PropertyType.BaseType == typeof(System.Enum))
+            if (propertyInfo.PropertyType.BaseType == typeof(Enum))
             {
                 tableColumn.Type = "enum";
                 tableColumn.Options = propertyInfo.Name;
@@ -238,7 +226,7 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoTables
         {
             var list = new List<SearchOptionForm>();
             var advancedList = new List<SearchOptionForm>();
-            foreach (var item in propertys) {
+            foreach (var item in propertys)
                 if (item.FieldAttribute != null)
                 {
                     var type = item.Property.PropertyType;
@@ -250,15 +238,10 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoTables
                         Type = item.FieldAttribute.ControlsType.ToString(),
                         SortOrder = item.FieldAttribute.SortOrder
                     };
-                    if (item.FieldAttribute.IsShowBaseSerach) {
-                        list.Add(form);
-                    }
+                    if (item.FieldAttribute.IsShowBaseSerach) list.Add(form);
 
-                    if (item.FieldAttribute.IsShowAdvancedSerach) {
-                        advancedList.Add(form);
-                    }
+                    if (item.FieldAttribute.IsShowAdvancedSerach) advancedList.Add(form);
                 }
-            }
 
             return new SearchOptions
             {
@@ -280,9 +263,7 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoTables
                 if (item.FieldAttribute != null && item.FieldAttribute.IsTabSearch && type.IsEnum)
                 {
                     result = KeyValueExtesions.EnumToKeyValues(type).ToList();
-                    if (result != null) {
-                        result.ForEach(r => r.Name = item.Name);
-                    }
+                    if (result != null) result.ForEach(r => r.Name = item.Name);
 
                     break;
                 }

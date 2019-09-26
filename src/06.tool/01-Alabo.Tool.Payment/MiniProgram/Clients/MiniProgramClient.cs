@@ -4,9 +4,10 @@ using ZKCloud.Open.ApiBase.Connectors;
 using ZKCloud.Open.ApiBase.Formatters;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Tool.Payment.MiniProgram.Clients {
-
-    public class MiniProgramClient : ApiStoreClient, IMiniProgramClient {
+namespace Alabo.Tool.Payment.MiniProgram.Clients
+{
+    public class MiniProgramClient : ApiStoreClient, IMiniProgramClient
+    {
         private static readonly Func<IConnector> _connectorCreator = () => new HttpClientConnector();
 
         private static readonly Func<IDataFormatter> _formmaterCreator = () => new JsonFormatter();
@@ -17,14 +18,16 @@ namespace Alabo.Tool.Payment.MiniProgram.Clients {
         ///     Initializes a new instance of the <see cref="MiniProgramClient" /> class.
         /// </summary>
         public MiniProgramClient()
-            : base(_baseUri, _connectorCreator(), _formmaterCreator()) {
+            : base(_baseUri, _connectorCreator(), _formmaterCreator())
+        {
         }
 
         /// <summary>
         ///     Logins the asynchronous.
         /// </summary>
         /// <param name="miniProgramLoginInput">The mini program login input.</param>
-        public ApiResult<SessionOutput> Login(LoginInput miniProgramLoginInput) {
+        public ApiResult<SessionOutput> Login(LoginInput miniProgramLoginInput)
+        {
             //var miniProgram = Service<IAutoConfigService>().GetValue<MiniProgramConfig>();
             //var loginUrl =
             //    $"/sns/jscode2session?appid={miniProgram.AppID}&secret={miniProgram.AppSecret}&js_code={miniProgramLoginInput.JsCode}&grant_type={miniProgramLoginInput.GrantType}";
@@ -47,7 +50,8 @@ namespace Alabo.Tool.Payment.MiniProgram.Clients {
             return null;
         }
 
-        public ApiResult<SessionOutput> PubLogin(LoginInput miniProgramLoginInput) {
+        public ApiResult<SessionOutput> PubLogin(LoginInput miniProgramLoginInput)
+        {
             //var miniProgram = Service<IAutoConfigService>().GetValue<WeChatPaymentConfig>();
             //var loginUrl =
             //    $"/sns/oauth2/access_token?appid={miniProgram.AppId}&secret={miniProgram.AppSecret}&code={miniProgramLoginInput.JsCode}&grant_type=authorization_code";

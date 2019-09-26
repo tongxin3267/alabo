@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using MongoDB.Driver;
 using Alabo.Runtime;
 using Alabo.Tenants;
+using MongoDB.Driver;
 
 namespace Alabo.Domains.Repositories.Mongo.Context
 {
@@ -52,7 +52,7 @@ namespace Alabo.Domains.Repositories.Mongo.Context
             ////  */
             ////
             ////ClientSettings.ConnectionMode = ConnectionMode.Direct;
-          
+
             ////ClientSettings.MinConnectionPoolSize = 8; //当链接空闲时,空闲线程池中最大链接数，默认0
             ////ClientSettings.MaxConnectionPoolSize = 300; //默认100
             ////ClientSettings.WriteConcern = WriteConcern.Acknowledged;
@@ -61,15 +61,15 @@ namespace Alabo.Domains.Repositories.Mongo.Context
 
             ClientSettings = MongoClientSettings.FromUrl(MongoUrl);
             ClientSettings.ConnectTimeout = new TimeSpan(0, 0, 1, 30, 0); //1分30秒超时
-            ClientSettings.MaxConnectionPoolSize = 2000;//设置连接池最大连接数
-            MongoCredential credentials = MongoCredential.CreateCredential(DataBaseName, MongoUrl.Username, MongoUrl.Password);//添加用户名、密码
+            ClientSettings.MaxConnectionPoolSize = 2000; //设置连接池最大连接数
+            var credentials =
+                MongoCredential.CreateCredential(DataBaseName, MongoUrl.Username, MongoUrl.Password); //添加用户名、密码
             ClientSettings.Credential = credentials;
-            ClientSettings.Server = MongoUrl.Server;//服务器地址
+            ClientSettings.Server = MongoUrl.Server; //服务器地址
             ClientSettings.ReadPreference = new ReadPreference(ReadPreferenceMode.Primary);
             ClientSettings.WriteConcern = WriteConcern.Acknowledged;
-                 ClientSettings.ConnectionMode = ConnectionMode.Direct;
+            ClientSettings.ConnectionMode = ConnectionMode.Direct;
             Client = new MongoClient(ClientSettings);
-
         }
 
         /// <summary>
@@ -97,14 +97,11 @@ namespace Alabo.Domains.Repositories.Mongo.Context
             get
             {
                 var database = RuntimeContext.GetTenantDataBase();
-                if (!TenantContext.IsTenant) {
-                    return database;
-                }
+                if (!TenantContext.IsTenant) return database;
 
                 var tenantName = TenantContext.CurrentTenant;
-                if (string.IsNullOrWhiteSpace(tenantName) || tenantName.ToLower() == TenantContext.Master.ToLower()) {
+                if (string.IsNullOrWhiteSpace(tenantName) || tenantName.ToLower() == TenantContext.Master.ToLower())
                     return database;
-                }
 
                 return RuntimeContext.GetTenantDataBase(tenantName);
             }
@@ -126,10 +123,7 @@ namespace Alabo.Domains.Repositories.Mongo.Context
         {
             var dataBaseName = DataBaseName;
             //exists database return
-            if (_mongoDatabase.ContainsKey(dataBaseName))
-            {
-                return _mongoDatabase[dataBaseName];
-            }
+            if (_mongoDatabase.ContainsKey(dataBaseName)) return _mongoDatabase[dataBaseName];
 
             //not exists add adn return
             var database = Client.GetDatabase(dataBaseName);

@@ -4,10 +4,10 @@ using Alabo.Domains.Query.Dto;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Validations;
 
-namespace Alabo.App.Asset.Transfers.Dtos {
-
-    public class TransferApiInput : ApiInputDto {
-
+namespace Alabo.App.Asset.Transfers.Dtos
+{
+    public class TransferApiInput : ApiInputDto
+    {
         /// <summary>
         ///     Gets or sets the name of the other 会员.
         /// </summary>

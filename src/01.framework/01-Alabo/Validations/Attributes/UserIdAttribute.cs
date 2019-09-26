@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Linq.Dynamic;
+using Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 namespace Alabo.Validations.Attributes
 {
@@ -33,23 +33,15 @@ namespace Alabo.Validations.Attributes
     {
         public override bool IsValid(object value)
         {
-            if (value == null) {
-                return false;
-            }
+            if (value == null) return false;
 
-            var userId = value.ConvertToLong(-1);
-            if (userId <= 0) {
-                return false;
-            }
+            var userId = value.ConvertToLong();
+            if (userId <= 0) return false;
 
             var find = EntityDynamicService.GetSingleUser(userId);
-            if (find == null) {
-                return false;
-            }
+            if (find == null) return false;
 
-            if (find.Status != Status.Normal) {
-                return false;
-            }
+            if (find.Status != Status.Normal) return false;
 
             return true;
         }

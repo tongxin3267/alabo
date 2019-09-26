@@ -88,9 +88,7 @@ namespace Alabo.Domains.Query
         /// <param name="query">查询</param>
         public int ExecuteCountQuery(IQueryable<TEntity> query)
         {
-            if (query == null) {
-                return 0;
-            }
+            if (query == null) return 0;
 
             return _predicateQuery.Execute(query).Count();
         }
@@ -174,9 +172,7 @@ namespace Alabo.Domains.Query
         /// <param name="query">查询</param>
         public IQueryable<TEntity> Execute(IQueryable<TEntity> query)
         {
-            if (query == null) {
-                return query;
-            }
+            if (query == null) return query;
 
             query = _predicateQuery.Execute(query);
             query = _orderQuery.Execute(query);

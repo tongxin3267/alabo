@@ -7,18 +7,20 @@ using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.Industry.Shop.Categories.Domain.Entities {
-
+namespace Alabo.Industry.Shop.Categories.Domain.Entities
+{
     /// <summary>
     ///     类目属性值表
     /// </summary>
     [ClassProperty(Name = "类目属性值表")]
-    public class CategoryPropertyValue : AggregateRoot<CategoryPropertyValue, Guid> {
-
-        public CategoryPropertyValue() : this(Guid.Empty) {
+    public class CategoryPropertyValue : AggregateRoot<CategoryPropertyValue, Guid>
+    {
+        public CategoryPropertyValue() : this(Guid.Empty)
+        {
         }
 
-        public CategoryPropertyValue(Guid id) : base(id) {
+        public CategoryPropertyValue(Guid id) : base(id)
+        {
         }
 
         /// <summary>
@@ -54,26 +56,29 @@ namespace Alabo.Industry.Shop.Categories.Domain.Entities {
         public long SortOrder { get; set; } = 1000;
 
         /// <summary>
-        /// 是否选择
+        ///     是否选择
         /// </summary>
         [Display(Name = "是否选择")]
         public bool IsCheck { get; set; }
     }
 
-    public class CategoryPropertyValueTableMap : MsSqlAggregateRootMap<CategoryPropertyValue> {
-
-        protected override void MapTable(EntityTypeBuilder<CategoryPropertyValue> builder) {
+    public class CategoryPropertyValueTableMap : MsSqlAggregateRootMap<CategoryPropertyValue>
+    {
+        protected override void MapTable(EntityTypeBuilder<CategoryPropertyValue> builder)
+        {
             builder.ToTable("Shop_CategoryPropertyValue");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<CategoryPropertyValue> builder) {
+        protected override void MapProperties(EntityTypeBuilder<CategoryPropertyValue> builder)
+        {
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.ValueAlias);
             builder.Ignore(e => e.Image);
             builder.Ignore(e => e.IsCheck);
             builder.Ignore(e => e.Version);
-            if (TenantContext.IsTenant) {
+            if (TenantContext.IsTenant)
+            {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
             }
         }

@@ -9,44 +9,44 @@ using Alabo.Schedules.Job;
 using Microsoft.AspNetCore.Http;
 using Quartz;
 
-namespace Alabo.App.Share.TaskExecutes.Job {
-
+namespace Alabo.App.Share.TaskExecutes.Job
+{
     /// <summary>
     ///     队列方式执行
     ///     执行队列
     /// </summary>
-    public class QueueTaskJob : JobBase {
-
-        public override TimeSpan? GetInterval() {
+    public class QueueTaskJob : JobBase
+    {
+        public override TimeSpan? GetInterval()
+        {
             return TimeSpan.FromMinutes(3);
         }
 
-        protected override async Task Execute(IJobExecutionContext context, IScope scope) {
+        protected override async Task Execute(IJobExecutionContext context, IScope scope)
+        {
             var taskActuator = scope.Resolve<ITaskActuator>();
             var taskManager = scope.Resolve<TaskManager>();
 
             var httpContextAccessor = scope.Resolve<IHttpContextAccessor>();
-            if (httpContextAccessor != null) {
-                httpContextAccessor.HttpContext = new DefaultHttpContext {
-                    RequestServices = scope.Resolve<IServiceProvider>(),
+            if (httpContextAccessor != null)
+                httpContextAccessor.HttpContext = new DefaultHttpContext
+                {
+                    RequestServices = scope.Resolve<IServiceProvider>()
                 };
-            }
 
             // 平台暂停分润
-            if (RuntimeContext.Current.WebsiteConfig.IsDevelopment == false) {
+            if (RuntimeContext.Current.WebsiteConfig.IsDevelopment == false)
+            {
                 var adminCenterConfig = scope.Resolve<IAutoConfigService>().GetValue<AdminCenterConfig>();
-                if (adminCenterConfig.StartFenrun == false) {
-                    return;
-                }
+                if (adminCenterConfig.StartFenrun == false) return;
             }
 
             var updateGradeQueue = scope.Resolve<ITaskQueueService>().GetUpgradePendingList();
 
-            foreach (var item in updateGradeQueue) {
+            foreach (var item in updateGradeQueue)
+            {
                 var moduleTypeArray = taskManager.GetModuleUpgradeArray();
-                foreach (var type in moduleTypeArray) {
-                    taskActuator.ExecuteQueue(type, item, new { QueueId = item.Id });
-                }
+                foreach (var type in moduleTypeArray) taskActuator.ExecuteQueue(type, item, new {QueueId = item.Id});
             }
         }
     }

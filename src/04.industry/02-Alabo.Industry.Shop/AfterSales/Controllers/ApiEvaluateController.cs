@@ -6,17 +6,15 @@ using Alabo.RestfulApi;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
-namespace Alabo.Industry.Shop.AfterSales.Controllers {
-		[ApiExceptionFilter]
-		[Route("Api/Evaluate/[action]")]
-		public class ApiEvaluateController : ApiBaseController<Evaluate,ObjectId>  {
-
- public ApiEvaluateController(RestClientConfig restClientConfig ) : base() 
-	{ 
-	
-		BaseService = Resolve<IEvaluateService>();
-
-	}
-
-	}
+namespace Alabo.Industry.Shop.AfterSales.Controllers
+{
+    [ApiExceptionFilter]
+    [Route("Api/Evaluate/[action]")]
+    public class ApiEvaluateController : ApiBaseController<Evaluate, ObjectId>
+    {
+        public ApiEvaluateController(RestClientConfig restClientConfig)
+        {
+            BaseService = Resolve<IEvaluateService>();
+        }
+    }
 }

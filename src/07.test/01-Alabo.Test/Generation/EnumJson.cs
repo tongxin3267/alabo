@@ -1,25 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Text;
-using Xunit;
-using Alabo.Framework.Core.Enums.Enum;
+﻿using Alabo.Extensions;
 using Alabo.Framework.Core.Reflections.Services;
-using Alabo.Domains.Entities;
-using Alabo.Extensions;
-using Alabo.Helpers;
 using Alabo.Test.Base.Core.Model;
-using Convert = System.Convert;
+using Xunit;
 
-namespace Alabo.Test.Generation {
-
+namespace Alabo.Test.Generation
+{
     /// <summary>
-    /// 后台所有的枚举数据
+    ///     后台所有的枚举数据
     /// </summary>
-    public class EnumJson : CoreTest {
-
+    public class EnumJson : CoreTest
+    {
         [Fact]
-        public void CreateJson() {
+        public void CreateJson()
+        {
             var list = Resolve<ITypeService>().GetEnumList();
             var json = list.ToJsoCamelCase();
         }

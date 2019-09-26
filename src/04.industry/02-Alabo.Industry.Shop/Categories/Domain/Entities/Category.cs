@@ -10,19 +10,20 @@ using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.Industry.Shop.Categories.Domain.Entities {
-
+namespace Alabo.Industry.Shop.Categories.Domain.Entities
+{
     /// <summary>
     ///     类目
     /// </summary>
     [ClassProperty(Name = "类目")]
-    public class Category : AggregateRoot<Category, Guid> {
+    public class Category : AggregateRoot<Category, Guid>
+    {
         /// <summary>
         ///     初始化
         /// </summary>
-
         public Category()
-            : this(Guid.Empty) {
+            : this(Guid.Empty)
+        {
         }
 
         /// <summary>
@@ -30,7 +31,8 @@ namespace Alabo.Industry.Shop.Categories.Domain.Entities {
         /// </summary>
         /// <param name="id">主键ID</param>
         public Category(Guid id)
-            : base(id) {
+            : base(id)
+        {
         }
 
         /// <summary>
@@ -87,7 +89,8 @@ namespace Alabo.Industry.Shop.Categories.Domain.Entities {
         ///     排序,越小排在越前面
         /// </summary>
         [Display(Name = "排序", Order = 1000)]
-        [Field(ControlsType = ControlsType.Numberic, ListShow = true, EditShow = true, SortOrder = 10000, Width = "110")]
+        [Field(ControlsType = ControlsType.Numberic, ListShow = true, EditShow = true, SortOrder = 10000,
+            Width = "110")]
         [Range(0, 99999, ErrorMessage = "请输入0-99999之间的数字")]
         [HelpBlock("排序,越小排在越前面，请输入0-99999之间的数字")]
         public long SortOrder { get; set; } = 1000;
@@ -111,20 +114,23 @@ namespace Alabo.Industry.Shop.Categories.Domain.Entities {
         public Status Status { get; set; } = Status.Normal;
     }
 
-    public class CategoryTableMap : MsSqlAggregateRootMap<Category> {
-
-        protected override void MapTable(EntityTypeBuilder<Category> builder) {
+    public class CategoryTableMap : MsSqlAggregateRootMap<Category>
+    {
+        protected override void MapTable(EntityTypeBuilder<Category> builder)
+        {
             builder.ToTable("Shop_Category");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<Category> builder) {
+        protected override void MapProperties(EntityTypeBuilder<Category> builder)
+        {
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Property(e => e.Name).IsRequired();
             builder.Ignore(e => e.DisplayPropertys);
             builder.Ignore(e => e.SalePropertys);
             builder.Ignore(e => e.Version);
-            if (TenantContext.IsTenant) {
+            if (TenantContext.IsTenant)
+            {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
             }
         }

@@ -1,22 +1,22 @@
-﻿namespace Alabo.Tool.QrCode {
-
+﻿namespace Alabo.Tool.QrCode
+{
     /// <summary>
-    /// 二维码尺寸
+    ///     二维码尺寸
     /// </summary>
-    public enum QrSize {
-
+    public enum QrSize
+    {
         /// <summary>
-        /// 小
+        ///     小
         /// </summary>
         Small = 5,
 
         /// <summary>
-        /// 中
+        ///     中
         /// </summary>
         Middle = 10,
 
         /// <summary>
-        /// 大
+        ///     大
         /// </summary>
         Large = 20
     }

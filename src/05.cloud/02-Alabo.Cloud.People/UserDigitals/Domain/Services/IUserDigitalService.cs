@@ -1,11 +1,10 @@
-using System;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
 using Alabo.Cloud.People.UserDigitals.Domain.Entities;
-using Alabo.Domains.Entities;
+using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.Cloud.People.UserDigitals.Domain.Services {
-	public interface IUserDigitalService : IService<UserDigital, ObjectId>  {
-	}
-	}
+namespace Alabo.Cloud.People.UserDigitals.Domain.Services
+{
+    public interface IUserDigitalService : IService<UserDigital, ObjectId>
+    {
+    }
+}

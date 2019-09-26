@@ -4,13 +4,13 @@ using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.Recharges.Dtos {
-
+namespace Alabo.App.Asset.Recharges.Dtos
+{
     /// <summary>
     ///     Class RechargeApiInput.
     /// </summary>
-    public class RechargeApiInput : PagedInputDto {
-
+    public class RechargeApiInput : PagedInputDto
+    {
         /// <summary>
         ///     Gets or sets Id标识
         /// </summary>

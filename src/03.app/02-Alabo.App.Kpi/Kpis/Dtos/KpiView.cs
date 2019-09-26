@@ -4,14 +4,14 @@ using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Kpis.Kpis.Dtos {
-
+namespace Alabo.App.Kpis.Kpis.Dtos
+{
     /// <summary>
     /// </summary>
     /// <seealso cref="BaseViewModel" />
     [ClassProperty(Name = "KPI绩效", Icon = "flaticon-route", SideBarType = SideBarType.KpiSideBar)]
-    public class KpiView : BaseViewModel {
-
+    public class KpiView : BaseViewModel
+    {
         /// <summary>
         ///     Id
         /// </summary>

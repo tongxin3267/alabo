@@ -10,11 +10,10 @@ using MongoDB.Bson;
 
 namespace Alabo.Data.People.Cities.Domain.Services
 {
-
     public class CityService : ServiceBase<City, ObjectId>, ICityService
     {
-
-        public CityService(IUnitOfWork unitOfWork, IRepository<City, ObjectId> repository) : base(unitOfWork, repository)
+        public CityService(IUnitOfWork unitOfWork, IRepository<City, ObjectId> repository) : base(unitOfWork,
+            repository)
         {
         }
 
@@ -26,11 +25,8 @@ namespace Alabo.Data.People.Cities.Domain.Services
         public ServiceResult ChangeUserStatus(string userId, string Status)
         {
             var user = Resolve<IUserService>().GetSingle(userId);
-            if (user == null)
-            {
-                return ServiceResult.FailedMessage("用户不存在");
-            }
-            var model = new User()
+            if (user == null) return ServiceResult.FailedMessage("用户不存在");
+            var model = new User
             {
                 Id = Convert.ToInt32(userId),
                 Status = Domains.Enums.Status.Normal
@@ -39,6 +35,5 @@ namespace Alabo.Data.People.Cities.Domain.Services
 
             return ServiceResult.Success;
         }
-
     }
 }

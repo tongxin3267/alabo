@@ -4,25 +4,25 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using MongoDB.Bson;
 
-namespace Alabo.Cloud.Shop.Footprints.Domain.Services {
-
-    public interface IFootprintService : IService<Footprint, ObjectId> {
-
+namespace Alabo.Cloud.Shop.Footprints.Domain.Services
+{
+    public interface IFootprintService : IService<Footprint, ObjectId>
+    {
         /// <summary>
-        /// ÉÌÆ·×ã¼£
+        ///     ÉÌÆ·×ã¼£
         /// </summary>
         /// <param name="query"></param>
         PagedList<Footprint> GetProductPagedList(object query);
 
         /// <summary>
-        /// Ìí¼Ó×ã¼£
+        ///     Ìí¼Ó×ã¼£
         /// </summary>
         /// <param name="footprintInput"></param>
         /// <returns></returns>
         ServiceResult Add(FootprintInput footprintInput);
 
         /// <summary>
-        /// Çå¿Õ×ã¼£
+        ///     Çå¿Õ×ã¼£
         /// </summary>
         /// <param name="loginUserId"></param>
         /// <returns></returns>

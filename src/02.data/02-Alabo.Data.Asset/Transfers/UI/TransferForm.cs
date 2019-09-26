@@ -5,10 +5,10 @@ using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoPreviews;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.Transfers.UI {
-
-    public class TransferForm : UIBase, IAutoPreview {
-
+namespace Alabo.App.Asset.Transfers.UI
+{
+    public class TransferForm : UIBase, IAutoPreview
+    {
         /// <summary>
         ///     对方用户名
         /// </summary>
@@ -17,7 +17,6 @@ namespace Alabo.App.Asset.Transfers.UI {
         public string OtherUserName { get; set; }
 
         /// <summary>
-        ///
         ///     金额
         /// </summary>
         [Display(Name = "金额")]
@@ -31,7 +30,8 @@ namespace Alabo.App.Asset.Transfers.UI {
         [Display(Name = "备注")]
         public string Intro { get; set; } = "无";
 
-        public AutoPreview GetPreview(string id, AutoBaseModel autoModel) {
+        public AutoPreview GetPreview(string id, AutoBaseModel autoModel)
+        {
             //TODO 2019年9月25日 转账优化
             //  var model = Resolve<ITradeService>().GetSingle(u => u.Id == id.ToInt64() && u.Type == TradeType.Transfer);
             //  var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();

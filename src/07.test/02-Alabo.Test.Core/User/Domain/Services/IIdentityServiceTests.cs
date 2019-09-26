@@ -1,20 +1,21 @@
-using Xunit;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
+using Xunit;
 
-namespace Alabo.Test.Core.User.Domain.Services {
-
-    public class IIdentityServiceTests : CoreTest {
-
+namespace Alabo.Test.Core.User.Domain.Services
+{
+    public class IIdentityServiceTests : CoreTest
+    {
         [Theory]
         [InlineData(2)]
         [InlineData(1)]
         [InlineData(-1)]
         [TestMethod("GetSingle_Int64")]
         [TestIgnore]
-        public void GetSingle_Int64_test(long userId) {
+        public void GetSingle_Int64_test(long userId)
+        {
             //         var user = Service<IUserService>().GetRandom(userId);
             //         var result = Service<IIdentityService>().GetSingle( user.Id);
             //Assert.NotNull(result);
@@ -25,7 +26,8 @@ namespace Alabo.Test.Core.User.Domain.Services {
         [InlineData(1)]
         [InlineData(-1)]
         [TestMethod("IsIdentity_Int64")]
-        public void IsIdentity_Int64_test(long userId) {
+        public void IsIdentity_Int64_test(long userId)
+        {
             var user = Resolve<IUserService>().GetRandom(userId);
             var result = Resolve<IIdentityService>().IsIdentity(user.Id);
 
@@ -44,7 +46,8 @@ namespace Alabo.Test.Core.User.Domain.Services {
         [Fact]
         [TestMethod("AddOrUpdate_Identity")]
         [TestIgnore]
-        public void AddOrUpdate_Identity_test() {
+        public void AddOrUpdate_Identity_test()
+        {
             //Identity input = null;
             //var result = Service<IIdentityService>().AddOrUpdate( input);
             //Assert.NotNull(result);

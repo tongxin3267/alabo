@@ -1,18 +1,18 @@
-﻿namespace _01_Alabo.Cloud.Core.AppVersion.Domain.Enums {
-
+﻿namespace _01_Alabo.Cloud.Core.AppVersion.Domain.Enums
+{
     /// <summary>
-    /// app客户端
+    ///     app客户端
     /// </summary>
-    public enum AppClient {
-
+    public enum AppClient
+    {
         /// <summary>
-        /// 安卓
+        ///     安卓
         /// </summary>
         Android = 4,
 
         /// <summary>
-        /// 苹果
+        ///     苹果
         /// </summary>
-        Ios = 3,
+        Ios = 3
     }
 }

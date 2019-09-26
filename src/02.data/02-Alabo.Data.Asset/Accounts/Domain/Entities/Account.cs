@@ -9,16 +9,16 @@ using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.App.Asset.Accounts.Domain.Entities {
-
+namespace Alabo.App.Asset.Accounts.Domain.Entities
+{
     /// <summary>
     ///     用户资产账户
     ///     资产账户保留用户所有的资产信息
     ///     一个会员可以有多个状态
     /// </summary>
     [ClassProperty(Name = "用户资产账户")]
-    public class Account : AggregateDefaultUserRoot<Account> {
-
+    public class Account : AggregateDefaultUserRoot<Account>
+    {
         /// <summary>
         ///     货币类型id
         /// </summary>
@@ -58,19 +58,22 @@ namespace Alabo.App.Asset.Accounts.Domain.Entities {
         public MoneyTypeConfig MoneyTypeConfig { get; set; }
     }
 
-    public class AccountTableMap : MsSqlAggregateRootMap<Account> {
-
-        protected override void MapTable(EntityTypeBuilder<Account> builder) {
+    public class AccountTableMap : MsSqlAggregateRootMap<Account>
+    {
+        protected override void MapTable(EntityTypeBuilder<Account> builder)
+        {
             builder.ToTable("Asset_Account");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<Account> builder) {
+        protected override void MapProperties(EntityTypeBuilder<Account> builder)
+        {
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.MoneyTypeConfig);
             builder.Ignore(e => e.UserName);
             builder.Ignore(e => e.Version);
-            if (TenantContext.IsTenant) {
+            if (TenantContext.IsTenant)
+            {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
             }
         }

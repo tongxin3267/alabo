@@ -4,14 +4,14 @@ using Alabo.Domains.Services;
 using Alabo.Industry.Shop.Products.ViewModels;
 using Microsoft.AspNetCore.Http;
 
-namespace Alabo.Industry.Shop.Products.Domain.Services {
-
+namespace Alabo.Industry.Shop.Products.Domain.Services
+{
     /// <summary>
     ///     商品后台操作方法写到此处
     /// </summary>
     /// <seealso cref="Alabo.Domains.Services.IService" />
-    public interface IProductAdminService : IService {
-
+    public interface IProductAdminService : IService
+    {
         /// <summary>
         ///     获取商品编辑页面详情
         /// </summary>
@@ -44,14 +44,12 @@ namespace Alabo.Industry.Shop.Products.Domain.Services {
         ///     后台商品搜索
         /// </summary>
         /// <param name="query"></param>
-
         PagedList<ViewProductList> GetViewProductList(object query);
 
         /// <summary>
         ///     类目下是否有商品
         /// </summary>
         /// <param name="categoryId"></param>
-
         bool CheckCategoryHasProduct(Guid categoryId);
     }
 }

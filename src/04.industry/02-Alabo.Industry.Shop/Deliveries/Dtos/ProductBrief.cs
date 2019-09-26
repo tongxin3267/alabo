@@ -208,6 +208,5 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos
         [Field(ExtensionJson = "Alabo.App.Shop.Product.Domain.Entities.Extensions.ProductActivityExtension")]
         [Display(Name = "所属活动")]
         public string Activity { get; set; }
-
     }
 }

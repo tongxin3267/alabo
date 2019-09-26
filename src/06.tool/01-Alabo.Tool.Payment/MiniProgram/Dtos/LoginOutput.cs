@@ -1,10 +1,10 @@
-﻿namespace Alabo.Tool.Payment.MiniProgram.Dtos {
-
+﻿namespace Alabo.Tool.Payment.MiniProgram.Dtos
+{
     /// <summary>
     ///     小程序登录以后返回的状态
     /// </summary>
-    public class LoginOutput {
-
+    public class LoginOutput
+    {
         /// <summary>
         ///     用户是否注册
         /// </summary>
@@ -23,6 +23,6 @@
         ///     登录用户
         /// </summary>
         /// <value>The user.</value>
-     //   public UserOutput User { get; set; }
+        //   public UserOutput User { get; set; }
     }
 }

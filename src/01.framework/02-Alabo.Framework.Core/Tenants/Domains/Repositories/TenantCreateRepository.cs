@@ -5,26 +5,29 @@ using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Extensions;
+using Alabo.Users.Entities;
 
-namespace Alabo.Framework.Core.Tenants.Domains.Repositories {
-
+namespace Alabo.Framework.Core.Tenants.Domains.Repositories
+{
     /// <summary>
     ///     TenantCreateRepository
     /// </summary>
-    public class TenantCreateRepository : RepositoryEfCore<Users.Entities.User, long>, ITenantCreateRepository {
-
+    public class TenantCreateRepository : RepositoryEfCore<User, long>, ITenantCreateRepository
+    {
         /// <summary>
         ///     TenantCreateRepository
         /// </summary>
         /// <param name="unitOfWork"></param>
-        public TenantCreateRepository(IUnitOfWork unitOfWork) : base(unitOfWork) {
+        public TenantCreateRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
         }
 
         /// <summary>
         ///     init tenant sql
         /// </summary>
         /// <returns></returns>
-        public void InitTenantSql() {
+        public void InitTenantSql()
+        {
             var sqlList = new List<string>
             {
                 //Core_AutoConfig
@@ -132,7 +135,8 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories {
         ///     create database
         /// </summary>
         /// <param name="databaseName"></param>
-        public void CreateDatabase(string databaseName) {
+        public void CreateDatabase(string databaseName)
+        {
             var sqlList = new List<string>
             {
                 $"CREATE DATABASE {databaseName};",
@@ -148,7 +152,8 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories {
         /// </summary>
         /// <param name="databaseName"></param>
         /// <returns></returns>
-        public bool IsExistsDatabase(string databaseName) {
+        public bool IsExistsDatabase(string databaseName)
+        {
             var sql = $"select COUNT(1) From master.dbo.sysdatabases where name='{databaseName.ToLower()}'";
             var obj = RepositoryContext.ExecuteScalar(sql);
             return obj.ToInt16() > 0;
@@ -158,16 +163,21 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories {
         ///     execute sql
         /// </summary>
         /// <param name="sqlList"></param>
-        public void ExecuteSql(List<string> sqlList) {
+        public void ExecuteSql(List<string> sqlList)
+        {
             foreach (var item in sqlList)
-                try {
+                try
+                {
                     RepositoryContext.ExecuteNonQuery(item);
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                     Trace.WriteLine(ex.Message);
                 }
         }
 
-        public void DeleteDatabase(string databaseName) {
+        public void DeleteDatabase(string databaseName)
+        {
             var sqlList = new List<string>
             {
                 $"Drop DATABASE {databaseName};"
@@ -177,7 +187,8 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories {
             ExecuteSql(sqlList);
         }
 
-        private List<string> TableCreateSqlList() {
+        private List<string> TableCreateSqlList()
+        {
             var sqlList = new List<string>
             {
                 //Core_AutoConfig

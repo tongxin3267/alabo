@@ -4,13 +4,13 @@ using System.Data.Common;
 using Alabo.App.Asset.Accounts.Domain.Entities;
 using Alabo.Domains.Repositories;
 
-namespace Alabo.App.Asset.Accounts.Domain.Repositories {
-
+namespace Alabo.App.Asset.Accounts.Domain.Repositories
+{
     /// <summary>
     ///     Interface IAccountRepository
     /// </summary>
-    public interface IAccountRepository : IRepository<Account, long> {
-
+    public interface IAccountRepository : IRepository<Account, long>
+    {
         /// <summary>
         ///     获取没有资产账号的所有会员Id
         /// </summary>

@@ -7,15 +7,15 @@ using Alabo.Framework.Core.WebUis;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace _05_Alabo.Cloud.Share.BonusPools.Domain.Configs {
-
+namespace _05_Alabo.Cloud.Share.BonusPools.Domain.Configs
+{
     [ClassProperty(Name = "奖金池", Icon = IconFlaticon.menu, SortOrder = 1,
         SideBarType = SideBarType.BonusPoolBar)]
     /// <summary>
     ///     奖金池配置
     /// </summary>
-    public class BonusPoolConfig : BaseViewModel, IAutoConfig {
-
+    public class BonusPoolConfig : BaseViewModel, IAutoConfig
+    {
         /// <summary>
         ///     奖金池基数比例
         /// </summary>
@@ -75,7 +75,8 @@ namespace _05_Alabo.Cloud.Share.BonusPools.Domain.Configs {
         [Display(Name = "订单最大金额")]
         public decimal MaxAmount { get; set; }
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

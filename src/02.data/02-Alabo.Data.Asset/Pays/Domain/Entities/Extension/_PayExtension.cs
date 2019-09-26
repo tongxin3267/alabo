@@ -2,18 +2,19 @@
 using Alabo.Domains.Entities.Extensions;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Linq.Dynamic;
+using Alabo.Users.Entities;
 using Alabo.Validations;
 using Newtonsoft.Json;
 
-namespace Alabo.App.Asset.Pays.Domain.Entities.Extension {
-
+namespace Alabo.App.Asset.Pays.Domain.Entities.Extension
+{
     /// <summary>
     ///     支付订单的扩展实体
     /// </summary>
-    public class PayExtension : EntityExtension {
-
+    public class PayExtension : EntityExtension
+    {
         /// <summary>
-        /// 支付成功后跳转链接
+        ///     支付成功后跳转链接
         /// </summary>
         public string RedirectUrl { get; set; }
 
@@ -111,34 +112,33 @@ namespace Alabo.App.Asset.Pays.Domain.Entities.Extension {
         public string UserName { get; set; }
 
         /// <summary>
-        /// 支付成功后执行的方法
-        /// 注意以下几点：否则无法执行
-        /// 1. 类型必须为void
-        /// 2. 参数
+        ///     支付成功后执行的方法
+        ///     注意以下几点：否则无法执行
+        ///     1. 类型必须为void
+        ///     2. 参数
         /// </summary>
         public BaseServiceMethod AfterSuccess { get; set; }
 
         /// <summary>
-        /// 返回Sql脚本对象
-        /// 注意以下几点
-        /// 1. 返回类型必须为List<String>
-        ///
+        ///     返回Sql脚本对象
+        ///     注意以下几点
+        ///     1. 返回类型必须为List<String>
         /// </summary>
         public BaseServiceMethod ExcecuteSqlList { get; set; }
 
         /// <summary>
-        /// 支付失败后执行的方法
-        /// 注意以下几点：否则无法执行
-        /// 1. 类型必须为void
-        /// 2. 参数
+        ///     支付失败后执行的方法
+        ///     注意以下几点：否则无法执行
+        ///     1. 类型必须为void
+        ///     2. 参数
         /// </summary>
         public BaseServiceMethod AfterFail { get; set; }
 
         /// <summary>
-        /// 支付账单的人，实际订单人
-        /// 比如：会员权益购买
+        ///     支付账单的人，实际订单人
+        ///     比如：会员权益购买
         /// </summary>
-        public Users.Entities.User OrderUser { get; set; }
+        public User OrderUser { get; set; }
 
         public TriggerType TriggerType { get; set; }
     }

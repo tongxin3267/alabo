@@ -16,15 +16,13 @@ namespace Alabo.Industry.Offline.Order.Controllers
     [Route("Api/MerchantOrder/[action]")]
     public class ApiMerchantOrderController : ApiBaseController<MerchantOrder, long>
     {
-
         public ApiMerchantOrderController()
-            : base()
         {
             BaseService = Resolve<IMerchantOrderService>();
         }
 
         /// <summary>
-        /// 确认订单信息
+        ///     确认订单信息
         /// </summary>
         /// <param name="parameter"></param>
         [HttpPost]
@@ -33,21 +31,19 @@ namespace Alabo.Industry.Offline.Order.Controllers
         public ApiResult<MerchantCartOutput> BuyInfo([FromBody] MerchantBuyInfoInput parameter)
         {
             if (!this.IsFormValid())
-            {
-                return ApiResult.Failure<MerchantCartOutput>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
-            }
+                return ApiResult.Failure<MerchantCartOutput>(this.FormInvalidReason(),
+                    MessageCodes.ParameterValidationFailure);
 
             var serviceResult = Resolve<IMerchantOrderService>().BuyInfo(parameter);
             if (!serviceResult.Item1.Succeeded)
-            {
-                return ApiResult.Failure<MerchantCartOutput>(serviceResult.Item1.ToString(), MessageCodes.ServiceFailure);
-            }
+                return ApiResult.Failure<MerchantCartOutput>(serviceResult.Item1.ToString(),
+                    MessageCodes.ServiceFailure);
 
             return ApiResult.Success(serviceResult.Item2);
         }
 
         /// <summary>
-        /// 提交订单
+        ///     提交订单
         /// </summary>
         /// <param name="parameter"></param>
         [HttpPost]
@@ -56,21 +52,18 @@ namespace Alabo.Industry.Offline.Order.Controllers
         public ApiResult<MerchantOrderBuyOutput> Buy([FromBody] MerchantOrderBuyInput parameter)
         {
             if (!this.IsFormValid())
-            {
-                return ApiResult.Failure<MerchantOrderBuyOutput>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
-            }
+                return ApiResult.Failure<MerchantOrderBuyOutput>(this.FormInvalidReason(),
+                    MessageCodes.ParameterValidationFailure);
 
             var result = Resolve<IMerchantOrderService>().Buy(parameter);
             if (!result.Item1.Succeeded)
-            {
                 return ApiResult.Failure<MerchantOrderBuyOutput>(result.Item1.ToString(), MessageCodes.ServiceFailure);
-            }
 
             return ApiResult.Success(result.Item2);
         }
 
         /// <summary>
-        /// 订单列表
+        ///     订单列表
         /// </summary>
         /// <param name="parameter"></param>
         [HttpGet]
@@ -79,15 +72,14 @@ namespace Alabo.Industry.Offline.Order.Controllers
         public ApiResult<PagedList<MerchantOrderList>> BuyOrderList([FromQuery] MerchantOrderListInput parameter)
         {
             if (!this.IsFormValid())
-            {
-                return ApiResult.Failure<PagedList<MerchantOrderList>>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
-            }
+                return ApiResult.Failure<PagedList<MerchantOrderList>>(this.FormInvalidReason(),
+                    MessageCodes.ParameterValidationFailure);
             var result = Resolve<IMerchantOrderService>().GetOrderList(parameter);
             return ApiResult.Success(result);
         }
 
         /// <summary>
-        /// 订单详情
+        ///     订单详情
         /// </summary>
         [HttpGet]
         [Display(Description = "订单详情")]
@@ -95,10 +87,7 @@ namespace Alabo.Industry.Offline.Order.Controllers
         public ApiResult GetOrder(long id)
         {
             var result = Resolve<IMerchantOrderService>().GetOrderSingle(id);
-            if (!result.Item1.Succeeded)
-            {
-                return ApiResult.Failure(result.Item1.ErrorMessages);
-            }
+            if (!result.Item1.Succeeded) return ApiResult.Failure(result.Item1.ErrorMessages);
 
             return ApiResult.Success(result.Item2);
         }

@@ -1,13 +1,12 @@
 ﻿namespace Alabo.Industry.Shop.Orders.Dtos
 {
     /// <summary>
-    /// 订单
+    ///     订单
     /// </summary>
     public class OrderInput
     {
         /// <summary>
-        /// ID
-        /// 
+        ///     ID
         /// </summary>
         public long OrderID { get; set; }
     }

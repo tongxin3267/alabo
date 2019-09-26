@@ -2,12 +2,12 @@
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.Recharges.Dtos {
-
+namespace Alabo.App.Asset.Recharges.Dtos
+{
     [ClassProperty(Name = "充值", Icon = "fa fa-puzzle-piece", ListApi = "Api/RechargeApi/GetList",
-       PageType = ViewPageType.List, PostApi = "Api/RechargeApi/GetList")]
-    public class RechargeDetail {
-
+        PageType = ViewPageType.List, PostApi = "Api/RechargeApi/GetList")]
+    public class RechargeDetail
+    {
         /// <summary>
         ///     id
         /// </summary>
@@ -35,7 +35,7 @@ namespace Alabo.App.Asset.Recharges.Dtos {
         /// </summary>
         [Display(Name = "交易时间")]
         [Field(ControlsType = ControlsType.TextBox, IsShowAdvancedSerach = true, IsShowBaseSerach = true, Width = "100",
-        ListShow = true, SortOrder = 3)]
+            ListShow = true, SortOrder = 3)]
         public string DateTime { get; set; }
 
         public string moneyTypeName { get; set; }

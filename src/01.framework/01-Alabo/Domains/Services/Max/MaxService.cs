@@ -34,9 +34,7 @@ namespace Alabo.Domains.Services.Max
         {
             if (typeof(TKey) == typeof(long))
             {
-                if (Max() == null) {
-                    return 0;
-                }
+                if (Max() == null) return 0;
 
                 return Max().Id.ConvertToLong();
             }

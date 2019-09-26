@@ -1,8 +1,8 @@
 using Alabo.App.Share.TaskExecutes.Domain.Services;
-using Xunit;
 using Alabo.Data.People.Users.Domain.Services;
-//using Alabo.App.Open.Tasks.Configs.SingleUser;
 using Alabo.Extensions;
+using Xunit;
+//using Alabo.App.Open.Tasks.Configs.SingleUser;
 
 namespace Alabo.Test.Open.Tasks.Configs.SingleUser
 {

@@ -2,13 +2,13 @@
 using Alabo.Domains.Query.Dto;
 using Alabo.Validations;
 
-namespace Alabo.Framework.Basic.Storages.Dtos {
-
+namespace Alabo.Framework.Basic.Storages.Dtos
+{
     /// <summary>
     ///     文件上传
     /// </summary>
-    public class UploadApiInput : ApiInputDto {
-
+    public class UploadApiInput : ApiInputDto
+    {
         /// <summary>
         ///     文件保存路径
         /// </summary>

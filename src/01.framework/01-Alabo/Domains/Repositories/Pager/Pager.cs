@@ -48,9 +48,7 @@
         {
             get
             {
-                if (_pageIndex <= 0) {
-                    _pageIndex = 1;
-                }
+                if (_pageIndex <= 0) _pageIndex = 1;
 
                 return _pageIndex;
             }
@@ -72,9 +70,7 @@
         /// </summary>
         public int GetPageCount()
         {
-            if (TotalCount % PageSize == 0) {
-                return TotalCount / PageSize;
-            }
+            if (TotalCount % PageSize == 0) return TotalCount / PageSize;
 
             return TotalCount / PageSize + 1;
         }
@@ -84,9 +80,7 @@
         /// </summary>
         public int GetSkipCount()
         {
-            if (Page > GetPageCount()) {
-                Page = GetPageCount();
-            }
+            if (Page > GetPageCount()) Page = GetPageCount();
 
             return PageSize * (Page - 1);
         }

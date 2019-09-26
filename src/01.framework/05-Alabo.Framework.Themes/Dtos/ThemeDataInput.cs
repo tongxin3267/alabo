@@ -4,10 +4,10 @@ using Alabo.Validations;
 using MongoDB.Bson;
 using Newtonsoft.Json;
 
-namespace Alabo.Framework.Themes.Dtos.Service {
-
-    public class ThemeDataInput {
-
+namespace Alabo.Framework.Themes.Dtos.Service
+{
+    public class ThemeDataInput
+    {
         [Display(Name = "Id")]
         [JsonConverter(typeof(ObjectIdConverter))]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]

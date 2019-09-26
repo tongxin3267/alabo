@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Framework.Core.WebUis.Models.Lists {
-
+namespace Alabo.Framework.Core.WebUis.Models.Lists
+{
     /// <summary>
     ///     通过列表输出，对应前端Api接口
     /// </summary>
     [ClassProperty(Name = "链接")]
-    public class ListOutput : BaseComponent {
-
+    public class ListOutput : BaseComponent
+    {
         /// <summary>
         ///     样式格式，不通的数据可能显示不同的格式
         /// </summary>
@@ -25,8 +25,8 @@ namespace Alabo.Framework.Core.WebUis.Models.Lists {
         public List<ListItem> ApiDataList { get; set; } = new List<ListItem>();
     }
 
-    public class ListItem {
-
+    public class ListItem
+    {
         /// <summary>
         ///     主键ID
         /// </summary>

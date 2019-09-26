@@ -13,17 +13,17 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Validations;
 
-namespace _05_Alabo.Cloud.Share.ShareTests.UI {
-
+namespace _05_Alabo.Cloud.Share.ShareTests.UI
+{
     /// <summary>
     ///     分润订单
     /// </summary>
     [ClassProperty(Name = "分润测试", Icon = "fa fa-file", Description = "分润测试",
         SideBarType = SideBarType.ShareOrderTestSideBar)]
-    public class TestShareOrderView : UIBase, IAutoForm {
-
+    public class TestShareOrderView : UIBase, IAutoForm
+    {
         /// <summary>
-        /// 要更改的用户名
+        ///     要更改的用户名
         /// </summary>
         [Display(Name = "要更改的用户名")]
         [Required(ErrorMessage = "请输入要更改的用户名")]
@@ -48,7 +48,7 @@ namespace _05_Alabo.Cloud.Share.ShareTests.UI {
         public string Summary { get; set; } = string.Empty;
 
         /// <summary>
-        /// 支付密码
+        ///     支付密码
         /// </summary>
         [Display(Name = "支付密码")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
@@ -57,31 +57,28 @@ namespace _05_Alabo.Cloud.Share.ShareTests.UI {
         [DataType(DataType.Password)]
         public string PayPassword { get; set; }
 
-        public AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
             var view = new TestShareOrderView();
             return ToAutoForm(view);
         }
 
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
             var view = model.MapTo<TestShareOrderView>();
             var user = Resolve<IUserService>().GetSingle(view.UserName);
-            if (user == null) {
-                return ServiceResult.FailedWithMessage("用户不存在");
-            }
+            if (user == null) return ServiceResult.FailedWithMessage("用户不存在");
 
-            if (view.Amount <= 0) {
-                return ServiceResult.FailedWithMessage("分润金额不能小于0");
-            }
+            if (view.Amount <= 0) return ServiceResult.FailedWithMessage("分润金额不能小于0");
 
-            ShareOrder shareOrder = new ShareOrder {
+            var shareOrder = new ShareOrder
+            {
                 UserId = user.Id,
                 EntityId = user.Id,
                 Amount = view.Amount,
-                TriggerType = TriggerType.Other,
+                TriggerType = TriggerType.Other
             };
-            if (!Resolve<IShareOrderService>().Add(shareOrder)) {
-                return ServiceResult.FailedWithMessage("添加失败");
-            }
+            if (!Resolve<IShareOrderService>().Add(shareOrder)) return ServiceResult.FailedWithMessage("添加失败");
             return ServiceResult.Success;
         }
     }

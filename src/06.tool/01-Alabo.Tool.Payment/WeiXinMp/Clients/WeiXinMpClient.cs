@@ -6,20 +6,19 @@ using Alabo.Helpers;
 using Senparc.Weixin.MP.CommonAPIs;
 using Senparc.Weixin.MP.Entities;
 
-namespace Alabo.Tool.Payment.WeiXinMp.Clients {
-
+namespace Alabo.Tool.Payment.WeiXinMp.Clients
+{
     /// <summary>
-    ///
     /// </summary>
-    public class WeiXinMpClient : IWeixinMpClient {
-
-        public JsApiTicketResult GetTicketByAccessToken() {
+    public class WeiXinMpClient : IWeixinMpClient
+    {
+        public JsApiTicketResult GetTicketByAccessToken()
+        {
             var token = Ioc.Resolve<IWeixinMpClient>().GetToken();
-            if (token == null) {
-                throw new ValidException("access_token获取失败");
-            }
+            if (token == null) throw new ValidException("access_token获取失败");
 
-            if (token.access_token.IsNullOrEmpty()) {
+            if (token.access_token.IsNullOrEmpty())
+            {
                 Ioc.Resolve<ITableService>().Log("微信分享接口获取错误" + token.errmsg);
                 throw new SystemException(token.errmsg);
             }
@@ -44,7 +43,8 @@ namespace Alabo.Tool.Payment.WeiXinMp.Clients {
             //  }, "GetTicketByAccessToken", TimeSpan.FromHours(1)).Value;
         }
 
-        public AccessTokenResult GetToken() {
+        public AccessTokenResult GetToken()
+        {
             //var wexinConfig = Ioc.Resolve<IAutoConfigService>().GetValue<WeChatPaymentConfig>();
             //var token = CommonApi.GetToken(wexinConfig.AppId, wexinConfig.AppSecret);
 
@@ -52,7 +52,8 @@ namespace Alabo.Tool.Payment.WeiXinMp.Clients {
             return null;
         }
 
-        public WeixinUserInfoResult GetUserInfo(string openId) {
+        public WeixinUserInfoResult GetUserInfo(string openId)
+        {
             return CommonApi.GetUserInfo("", openId);
         }
     }

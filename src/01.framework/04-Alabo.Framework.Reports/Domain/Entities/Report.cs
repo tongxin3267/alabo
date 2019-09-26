@@ -5,16 +5,16 @@ using Alabo.Domains.Entities;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Framework.Reports.Domain.Entities {
-
+namespace Alabo.Framework.Reports.Domain.Entities
+{
     /// <summary>
     ///     通用配置
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Basic_Report")]
     [ClassProperty(Name = "通用配置")]
-    public class Report : AggregateMongodbRoot<Report> {
-
+    public class Report : AggregateMongodbRoot<Report>
+    {
         /// <summary>
         ///     所属应用名称
         /// </summary>

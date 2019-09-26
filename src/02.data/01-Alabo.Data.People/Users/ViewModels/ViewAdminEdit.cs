@@ -2,30 +2,29 @@
 using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Users.Entities;
 using Alabo.Users.Enum;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.Data.People.Users.ViewModels {
-
+namespace Alabo.Data.People.Users.ViewModels
+{
     /// <summary>
     ///     后台用户编辑视图
     /// </summary>
-    public class ViewAdminEdit : BaseViewModel {
-
+    public class ViewAdminEdit : BaseViewModel
+    {
         /// <summary>
-        /// 登录用户ID
+        ///     登录用户ID
         /// </summary>
         public long LoginUserId { get; set; }
 
         /// <summary>
-        /// 要Edit的用户ID
+        ///     要Edit的用户ID
         /// </summary>
         public long EditUserId { get; set; }
 
         /// <summary>
-        /// 所属门店
+        ///     所属门店
         /// </summary>
         [Display(Name = "所属门店")]
         public string ServiceCenterName { get; set; }
@@ -33,7 +32,7 @@ namespace Alabo.Data.People.Users.ViewModels {
         /// <summary>
         ///     Gets or sets the 会员.
         /// </summary>
-        public Alabo.Users.Entities.User User { get; set; }
+        public User User { get; set; }
 
         /// <summary>
         ///     Gets or sets the 会员 detail.
@@ -81,7 +80,7 @@ namespace Alabo.Data.People.Users.ViewModels {
         /// <summary>
         ///     Gets or sets the parent.
         /// </summary>
-        public Alabo.Users.Entities.User Parent { get; set; }
+        public User Parent { get; set; }
 
         /// <summary>
         ///     所属区域
@@ -90,7 +89,7 @@ namespace Alabo.Data.People.Users.ViewModels {
         public long RegionId { get; set; }
 
         /// <summary>
-        /// 地址
+        ///     地址
         /// </summary>
         [Display(Name = "详细地址")]
         public string Address { get; set; }
@@ -113,7 +112,7 @@ namespace Alabo.Data.People.Users.ViewModels {
         public IdentityStatus IdentityStatus { get; set; } = IdentityStatus.IsNoPost;
 
         /// <summary>
-        /// 会员等级列表
+        ///     会员等级列表
         /// </summary>
         public List<UserGradeConfig> GradeList { get; set; }
 

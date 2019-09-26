@@ -4,10 +4,10 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using MongoDB.Bson;
 
-namespace _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Services {
-
-    public interface IShareOrderReportService : IService<ShareOrderReport, ObjectId> {
-
+namespace _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Services
+{
+    public interface IShareOrderReportService : IService<ShareOrderReport, ObjectId>
+    {
         /// <summary>
         ///     统计数据
         /// </summary>

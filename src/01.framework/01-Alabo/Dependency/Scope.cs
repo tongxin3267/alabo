@@ -1,6 +1,6 @@
 ﻿using System;
-using Autofac;
 using Alabo.Helpers;
+using Autofac;
 
 namespace Alabo.Dependency
 {

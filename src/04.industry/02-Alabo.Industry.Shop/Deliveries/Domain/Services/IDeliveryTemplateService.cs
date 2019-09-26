@@ -8,14 +8,11 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
 {
     public interface IDeliveryTemplateService : IService<DeliveryTemplate, ObjectId>
     {
-
         /// <summary>
-        /// 获取运费模板
+        ///     获取运费模板
         /// </summary>
         /// <param name="storeId"></param>
         /// <returns></returns>
         List<KeyValue> GetStoreDeliveryTemplateByCache(long storeId);
-
     }
-
 }

@@ -9,14 +9,14 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.Industry.Shop.Activitys.ViewModels {
-
+namespace Alabo.Industry.Shop.Activitys.ViewModels
+{
     /// <summary>
     ///     Class ViewActivityPage.
     /// </summary>
     [ClassProperty(Name = "活动")]
-    public class ViewActivityPage : BaseViewModel {
-
+    public class ViewActivityPage : BaseViewModel
+    {
         /// <summary>
         ///     Key
         /// </summary>
@@ -128,7 +128,8 @@ namespace Alabo.Industry.Shop.Activitys.ViewModels {
         /// <summary>
         ///     获取链接
         /// </summary>
-        public IEnumerable<ViewLink> ViewLinks() {
+        public IEnumerable<ViewLink> ViewLinks()
+        {
             var quickLinks = new List<ViewLink>
             {
                 new ViewLink("活动管理", "/Admin/Activitys/Index?Key=[[Key]]", Icons.List, LinkType.FormQuickLink),

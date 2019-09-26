@@ -6,19 +6,21 @@ using Alabo.Framework.Tasks.Queues.Domain.Servcies;
 using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Helpers;
 
-namespace Alabo.App.Share.TaskExecutes.ResultModel {
-
+namespace Alabo.App.Share.TaskExecutes.ResultModel
+{
     /// <summary>
     ///     此结果类型输入数据新增到任务队列表中
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class TaskQueueResult<T> : ITaskResult where T : class {
-
-        public TaskQueueResult(TaskContext context) {
+    public class TaskQueueResult<T> : ITaskResult where T : class
+    {
+        public TaskQueueResult(TaskContext context)
+        {
             Context = context;
         }
 
-        public TaskQueueResult(TaskContext context, long queueId) {
+        public TaskQueueResult(TaskContext context, long queueId)
+        {
             Context = context;
             QueueId = queueId;
         }
@@ -40,25 +42,26 @@ namespace Alabo.App.Share.TaskExecutes.ResultModel {
         public ShareResult ShareResult { get; set; }
         public TaskContext Context { get; }
 
-        public ExecuteResult Update() {
-            try {
-                if (typeof(T) == typeof(TaskQueueParameter)) {
-                    if (QueueId < 1) {
-                        return ExecuteResult.Cancel("QueueId is empty.");
-                    }
+        public ExecuteResult Update()
+        {
+            try
+            {
+                if (typeof(T) == typeof(TaskQueueParameter))
+                {
+                    if (QueueId < 1) return ExecuteResult.Cancel("QueueId is empty.");
 
                     Ioc.Resolve<ITaskQueueService>().Handle(QueueId);
                     return ExecuteResult.Success();
                 }
 
-                if (Parameter == null) {
-                    return ExecuteResult.Cancel("parameter is null.");
-                }
+                if (Parameter == null) return ExecuteResult.Cancel("parameter is null.");
 
                 Ioc.Resolve<ITaskQueueService>()
                     .Add(UserId, ModuleId, Type, ExecutionTime, MaxExecutionTimes, Parameter);
                 return ExecuteResult.Success();
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 return ExecuteResult.Error(e);
             }
         }

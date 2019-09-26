@@ -3,13 +3,13 @@ using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Cloud.Support.Domain.Dtos {
-
+namespace Alabo.Cloud.Support.Domain.Dtos
+{
     /// <summary>
     /// </summary>
     [ClassProperty(Name = "工单系统")]
-    public class WorkOrderInput : ApiInputDto {
-
+    public class WorkOrderInput : ApiInputDto
+    {
         /// <summary>
         /// </summary>
         [Required(ErrorMessage = "描述不能为空")]

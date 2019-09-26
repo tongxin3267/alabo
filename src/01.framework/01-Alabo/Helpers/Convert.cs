@@ -28,16 +28,12 @@ namespace Alabo.Helpers
         public static int? ToIntOrNull(object input)
         {
             var success = int.TryParse(input.SafeString(), out var result);
-            if (success) {
-                return result;
-            }
+            if (success) return result;
 
             try
             {
                 var temp = ToDoubleOrNull(input, 0);
-                if (temp == null) {
-                    return null;
-                }
+                if (temp == null) return null;
 
                 return System.Convert.ToInt32(temp);
             }
@@ -63,16 +59,12 @@ namespace Alabo.Helpers
         public static long? ToLongOrNull(object input)
         {
             var success = long.TryParse(input.SafeString(), out var result);
-            if (success) {
-                return result;
-            }
+            if (success) return result;
 
             try
             {
                 var temp = ToDecimalOrNull(input, 0);
-                if (temp == null) {
-                    return null;
-                }
+                if (temp == null) return null;
 
                 return System.Convert.ToInt64(temp);
             }
@@ -100,13 +92,9 @@ namespace Alabo.Helpers
         public static float? ToFloatOrNull(object input, int? digits = null)
         {
             var success = float.TryParse(input.SafeString(), out var result);
-            if (!success) {
-                return null;
-            }
+            if (!success) return null;
 
-            if (digits == null) {
-                return result;
-            }
+            if (digits == null) return result;
 
             return (float) Math.Round(result, digits.Value);
         }
@@ -129,13 +117,9 @@ namespace Alabo.Helpers
         public static double? ToDoubleOrNull(object input, int? digits = null)
         {
             var success = double.TryParse(input.SafeString(), out var result);
-            if (!success) {
-                return null;
-            }
+            if (!success) return null;
 
-            if (digits == null) {
-                return result;
-            }
+            if (digits == null) return result;
 
             return Math.Round(result, digits.Value);
         }
@@ -158,13 +142,9 @@ namespace Alabo.Helpers
         public static decimal? ToDecimalOrNull(object input, int? digits = null)
         {
             var success = decimal.TryParse(input.SafeString(), out var result);
-            if (!success) {
-                return null;
-            }
+            if (!success) return null;
 
-            if (digits == null) {
-                return result;
-            }
+            if (digits == null) return result;
 
             return Math.Round(result, digits.Value);
         }
@@ -185,9 +165,7 @@ namespace Alabo.Helpers
         public static bool? ToBoolOrNull(object input)
         {
             var value = GetBool(input);
-            if (value != null) {
-                return value.Value;
-            }
+            if (value != null) return value.Value;
 
             return bool.TryParse(input.SafeString(), out var result) ? (bool?) result : null;
         }
@@ -286,9 +264,7 @@ namespace Alabo.Helpers
         public static List<T> ToList<T>(string input)
         {
             var result = new List<T>();
-            if (string.IsNullOrWhiteSpace(input)) {
-                return result;
-            }
+            if (string.IsNullOrWhiteSpace(input)) return result;
 
             var array = input.Split(',');
             result.AddRange(from each in array where !string.IsNullOrWhiteSpace(each) select To<T>(each));
@@ -302,54 +278,39 @@ namespace Alabo.Helpers
         /// <param name="value">输入值</param>
         public static T To<T>(object value)
         {
-            if (value == null) {
-                return default;
-            }
+            if (value == null) return default;
 
             var type = Common.GetType<T>();
             if (type == typeof(string))
             {
                 var changeValue = value.ToStr();
-                if (!changeValue.IsNullOrEmpty()) {
-                    return (T) (object) changeValue;
-                }
+                if (!changeValue.IsNullOrEmpty()) return (T) (object) changeValue;
             }
             else if (type == typeof(int))
             {
-                if (value.ToStr().ConvertToInt(-1) != -1) {
-                    return (T) (object) value.ToStr().ConvertToInt(-1);
-                }
+                if (value.ToStr().ConvertToInt() != -1) return (T) (object) value.ToStr().ConvertToInt();
             }
             else if (type == typeof(decimal))
             {
-                if (value.ToStr().ConvertToDecimal(-1) != -1) {
-                    return (T) (object) value.ToStr().ConvertToDecimal(-1);
-                }
+                if (value.ToStr().ConvertToDecimal() != -1) return (T) (object) value.ToStr().ConvertToDecimal();
             }
             else if (type == typeof(long))
             {
-                if (value.ToStr().ConvertToLong(-1) != -1) {
-                    return (T) (object) value.ToStr().ConvertToLong(-1);
-                }
+                if (value.ToStr().ConvertToLong() != -1) return (T) (object) value.ToStr().ConvertToLong();
             }
             else if (type == typeof(DateTime))
             {
-                if (value.ToStr().ConvertToDateTime().Year != 1900) {
+                if (value.ToStr().ConvertToDateTime().Year != 1900)
                     return (T) (object) value.ToStr().ConvertToDateTime();
-                }
             }
             else if (type == typeof(bool) || type == typeof(bool))
             {
                 var valueDefault = value.ConvertToNullableBool();
-                if (valueDefault.HasValue) {
-                    return (T) value;
-                }
+                if (valueDefault.HasValue) return (T) value;
             }
             else if (type == typeof(Guid))
             {
-                if (!value.ToGuid().IsGuidNullOrEmpty()) {
-                    return (T) (object) value.ToGuid();
-                }
+                if (!value.ToGuid().IsGuidNullOrEmpty()) return (T) (object) value.ToGuid();
             }
             else if (type.GetTypeInfo().BaseType?.Name == nameof(Enum))
             {
@@ -361,9 +322,7 @@ namespace Alabo.Helpers
             {
                 try
                 {
-                    if (value is IConvertible) {
-                        return (T) System.Convert.ChangeType(value, type);
-                    }
+                    if (value is IConvertible) return (T) System.Convert.ChangeType(value, type);
                 }
                 catch (Exception ex)
                 {

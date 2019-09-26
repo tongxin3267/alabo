@@ -18,7 +18,6 @@ namespace Alabo.Industry.Offline.Merchants.Controllers
     public class ApiMerchantStoreController : ApiBaseController<MerchantStore, ObjectId>
     {
         public ApiMerchantStoreController()
-            : base()
         {
             BaseService = Resolve<IMerchantStoreService>();
         }
@@ -29,7 +28,8 @@ namespace Alabo.Industry.Offline.Merchants.Controllers
             var merchant = Resolve<IMerchantService>().GetSingle(x => x.UserId == userId);
             if (merchant != null)
             {
-                var merchantStore = Resolve<IMerchantStoreService>().GetSingle(x => x.MerchantId == merchant.Id.ToString());
+                var merchantStore = Resolve<IMerchantStoreService>()
+                    .GetSingle(x => x.MerchantId == merchant.Id.ToString());
 
                 return Json(merchantStore.Id);
             }
@@ -38,7 +38,7 @@ namespace Alabo.Industry.Offline.Merchants.Controllers
         }
 
         /// <summary>
-        /// 获取用户店铺信息
+        ///     获取用户店铺信息
         /// </summary>
         [HttpGet]
         [ApiAuth]
@@ -46,15 +46,11 @@ namespace Alabo.Industry.Offline.Merchants.Controllers
         public ApiResult<MerchantStore> GetMerchantStore(long userId)
         {
             if (!this.IsFormValid())
-            {
-                return ApiResult.Failure<MerchantStore>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
-            }
+                return ApiResult.Failure<MerchantStore>(this.FormInvalidReason(),
+                    MessageCodes.ParameterValidationFailure);
             var result = new MerchantStore();
             var store = Resolve<IMerchantStoreService>().GetMerchantStore(userId);
-            if (store.Count > 0)
-            {
-                result = store.First();
-            }
+            if (store.Count > 0) result = store.First();
             return ApiResult.Success(result);
         }
 
@@ -64,15 +60,9 @@ namespace Alabo.Industry.Offline.Merchants.Controllers
         {
             //get merchant store
             var merchantStores = Resolve<IMerchantStoreService>().GetMerchantStore(userId);
-            if (merchantStores.Count <= 0)
-            {
-                return ApiResult.Failure<List<KeyValue>>("当前商家没有开通门店");
-            }
+            if (merchantStores.Count <= 0) return ApiResult.Failure<List<KeyValue>>("当前商家没有开通门店");
             var keyValues = new List<KeyValue>();
-            foreach (var item in merchantStores)
-            {
-                keyValues.Add(new KeyValue { Key = item.Id, Value = item.Name });
-            }
+            foreach (var item in merchantStores) keyValues.Add(new KeyValue {Key = item.Id, Value = item.Name});
 
             return ApiResult.Success(keyValues);
         }

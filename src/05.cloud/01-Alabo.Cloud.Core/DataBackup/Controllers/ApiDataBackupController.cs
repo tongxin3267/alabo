@@ -4,15 +4,15 @@ using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
-namespace _01_Alabo.Cloud.Core.DataBackup.Controllers {
-
+namespace _01_Alabo.Cloud.Core.DataBackup.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/DataBackup/[action]")]
-    public class ApiDataBackupController : ApiBaseController<Domain.Entities.DataBackup, ObjectId> {
-
-        public ApiDataBackupController() : base() {
+    public class ApiDataBackupController : ApiBaseController<Domain.Entities.DataBackup, ObjectId>
+    {
+        public ApiDataBackupController()
+        {
             BaseService = Resolve<IDataBackupService>();
-
         }
     }
 }

@@ -7,10 +7,10 @@ using Alabo.Industry.Shop.Products.Domain.Enums;
 using Alabo.Industry.Shop.Products.Dtos;
 using MongoDB.Bson;
 
-namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Services {
-
-    public interface IPresaleProductService : IService<PresaleProduct, ObjectId> {
-
+namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Services
+{
+    public interface IPresaleProductService : IService<PresaleProduct, ObjectId>
+    {
         ProductItemApiOutput GetProducts(ProductApiInput productApiInput);
 
         PresaleProductItemApiOutput GetPresaleProducts(PresaleProductApiInput input);

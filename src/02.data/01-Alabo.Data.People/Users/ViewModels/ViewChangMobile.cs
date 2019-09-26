@@ -2,13 +2,13 @@
 using Alabo.Regexs;
 using Alabo.Validations;
 
-namespace Alabo.Data.People.Users.ViewModels {
-
+namespace Alabo.Data.People.Users.ViewModels
+{
     /// <summary>
     ///     Class ViewChangMobile.
     /// </summary>
-    public class ViewChangMobile {
-
+    public class ViewChangMobile
+    {
         /// <summary>
         ///     Gets or sets the name of the 会员.
         /// </summary>

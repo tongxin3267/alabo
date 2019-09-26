@@ -10,25 +10,25 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Cloud.Shop.TeamIntro.Controllers {
-
+namespace Alabo.Cloud.Shop.TeamIntro.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/Team/[action]")]
-    public class ApiTeamIntroController : ApiBaseController<Domain.Entities.TeamIntro, ObjectId> {
-
-        public ApiTeamIntroController() : base() {
+    public class ApiTeamIntroController : ApiBaseController<Domain.Entities.TeamIntro, ObjectId>
+    {
+        public ApiTeamIntroController()
+        {
             BaseService = Resolve<ITeamIntroService>();
         }
 
         /// <summary>
-        /// 获取团队成员列表
+        ///     获取团队成员列表
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         [Display(Description = "获取团队成员列表")]
         public ApiResult<IList<Domain.Entities.TeamIntro>> List()
         {
-
             try
             {
                 var apiService = Resolve<IApiService>();

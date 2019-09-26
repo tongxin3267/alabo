@@ -2,22 +2,22 @@
 using System.ComponentModel.DataAnnotations;
 using Alabo.Framework.Themes.Domain.Entities;
 
-namespace Alabo.Framework.Themes.Dtos {
-
+namespace Alabo.Framework.Themes.Dtos
+{
     /// <summary>
-    /// 客户端页面设置
+    ///     客户端页面设置
     /// </summary>
-    public class ClientPage {
-
+    public class ClientPage
+    {
         /// <summary>
-        /// 页面Id
+        ///     页面Id
         /// </summary>
         public string Id { get; set; }
 
         /// <summary>
-        /// 是否为母版页
-        /// 如果是PC的时候，可以是有母版页
-        /// 移动端暂不支持母版页布局
+        ///     是否为母版页
+        ///     如果是PC的时候，可以是有母版页
+        ///     移动端暂不支持母版页布局
         /// </summary>
         public bool IsLayoutPage { get; set; } = false;
 
@@ -46,12 +46,12 @@ namespace Alabo.Framework.Themes.Dtos {
         public IList<PageLayout> Layouts { get; set; } = new List<PageLayout>();
 
         /// <summary>
-        /// 模块
+        ///     模块
         /// </summary>
         public IList<PageWidget> Widgets { get; set; } = new List<PageWidget>();
 
         /// <summary>
-        /// 页面设置
+        ///     页面设置
         /// </summary>
         public PageSetting Setting { get; set; } = new PageSetting();
     }

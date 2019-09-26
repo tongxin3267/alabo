@@ -20,20 +20,87 @@ using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
 using Newtonsoft.Json;
 
-namespace Alabo.Data.People.Users.UI.AutoFrom {
-
+namespace Alabo.Data.People.Users.UI.AutoFrom
+{
     /// <summary>
     ///     用户地址
     ///     用户用户 查看自己的地址
     /// </summary>
     [ClassProperty(Name = "用户地址", PageType = ViewPageType.List, Icon = IconFontawesome.address_book,
         SideBarType = SideBarType.UserAddressSideBar)]
-    public class UserAddressAutoFrom : UIBase, IAutoTable<UserAddressAutoFrom>, IAutoForm {
+    public class UserAddressAutoFrom : UIBase, IAutoTable<UserAddressAutoFrom>, IAutoForm
+    {
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
+            var result = new AutoForm();
+
+            if (id.ToString().ToObjectId() != ObjectId.Empty)
+            {
+                var model = Resolve<IUserAddressService>().GetSingle(id);
+                if (model == null) result = ToAutoForm(new UserAddressAutoFrom());
+
+                var resultModel = model.MapTo<UserAddressAutoFrom>();
+                resultModel.RootUserId = model.UserId;
+                result = ToAutoForm(resultModel);
+            }
+            else
+            {
+                result = ToAutoForm(new UserAddressAutoFrom());
+            }
+
+            result.AlertText = "【编辑地址】请您认真填写收货人姓名、手机及其详细地址，便于确认收货的地址";
+
+            result.ButtomHelpText = new List<string>
+            {
+                "建议您务必输入收货人姓名、手机号码",
+                "建议您务必选择正确的区域及输入详细地址"
+            };
+
+            return result;
+        }
+
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
+            var input = (UserAddressAutoFrom) model;
+            var inputModel = input.MapTo<UserAddress>();
+            inputModel.UserId = input.RootUserId;
+            //详细地址传入的是null 给跪
+            inputModel.AddressDescription = inputModel.Address;
+            var result = Resolve<IUserAddressService>().AddOrUpdate(inputModel);
+
+            return result ? ServiceResult.Success : ServiceResult.Failed;
+        }
+
+        public List<TableAction> Actions()
+        {
+            return new List<TableAction>
+            {
+                ToLinkAction("编辑", "Edit", TableActionType.ColumnAction)
+                //ToLinkAction("删除", "/Api/UserAddress/Delete",ActionLinkType.Delete,TableActionType.ColumnAction)
+            };
+        }
+
+        /// <summary>
+        ///     PageTable
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="autoModel"></param>
+        /// <returns></returns>
+        public PageResult<UserAddressAutoFrom> PageTable(object query, AutoBaseModel autoModel)
+        {
+            var dic = HttpWeb.HttpContext.ToDictionary();
+            //dic = dic.RemoveKey("type");// 移除该type否则无法正常lambda
+            var id = autoModel.BasicUser.Id;
+            if (dic.TryGetValue("id", out var userid)) id = userid.ConvertToLong();
+            var result = Resolve<IUserAddressService>().GetAllList(id);
+
+            return ToPageResult(result.MapTo<PagedList<UserAddressAutoFrom>>());
+        }
 
         #region 属性
 
         /// <summary>
-        /// id
+        ///     id
         /// </summary>
         [Required(ErrorMessage = "Id不能为空")]
         [Key]
@@ -48,7 +115,8 @@ namespace Alabo.Data.People.Users.UI.AutoFrom {
         [Display(Name = "收货姓名")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [HelpBlock("请您务必输入收货人姓名")]
-        [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, Width = "100", ListShow = true, EditShow = true,
+        [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, Width = "100", ListShow = true,
+            EditShow = true,
             SortOrder = 2)]
         public string Name { get; set; }
 
@@ -57,7 +125,8 @@ namespace Alabo.Data.People.Users.UI.AutoFrom {
         /// </summary>
         [Display(Name = "手机号码")]
         [RegularExpression(RegularExpressionHelper.ChinaMobile, ErrorMessage = ErrorMessage.NotMatchFormat)]
-        [Field(ControlsType = ControlsType.Numberic, IsShowBaseSerach = true, IsShowAdvancedSerach = true, EditShow = true, Width = "90",
+        [Field(ControlsType = ControlsType.Numberic, IsShowBaseSerach = true, IsShowAdvancedSerach = true,
+            EditShow = true, Width = "90",
             ListShow = true, SortOrder = 3)]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [HelpBlock("请您务必输入收货人手机号码")]
@@ -93,7 +162,8 @@ namespace Alabo.Data.People.Users.UI.AutoFrom {
         [Display(Name = "详细地址")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [StringLength(40, ErrorMessage = ErrorMessage.MaxStringLength)]
-        [Field(ControlsType = ControlsType.TextArea, IsShowAdvancedSerach = true, EditShow = true, ListShow = true, Width = "150", SortOrder = 7)]
+        [Field(ControlsType = ControlsType.TextArea, IsShowAdvancedSerach = true, EditShow = true, ListShow = true,
+            Width = "150", SortOrder = 7)]
         [HelpBlock("请您务必详细地址")]
         public string Address { get; set; }
 
@@ -108,14 +178,14 @@ namespace Alabo.Data.People.Users.UI.AutoFrom {
         public string ZipCode { get; set; }
 
         /// <summary>
-        /// 用户id
+        ///     用户id
         /// </summary>
         [Display(Name = "用户Id")]
         [Field(ControlsType = ControlsType.Hidden, EditShow = true)]
         public long UserId { get; set; }
 
         /// <summary>
-        /// 所属用户id
+        ///     所属用户id
         /// </summary>
         [Display(Name = "所属用户Id")]
         [Field(ControlsType = ControlsType.Hidden, EditShow = true)]
@@ -142,67 +212,5 @@ namespace Alabo.Data.People.Users.UI.AutoFrom {
         public long City { get; set; }
 
         #endregion 属性
-
-        public List<TableAction> Actions() {
-            return new List<TableAction>
-            {
-                ToLinkAction("编辑", "Edit",TableActionType.ColumnAction),
-                //ToLinkAction("删除", "/Api/UserAddress/Delete",ActionLinkType.Delete,TableActionType.ColumnAction)
-            };
-        }
-
-        public AutoForm GetView(object id, AutoBaseModel autoModel) {
-            var result = new AutoForm();
-
-            if (id.ToString().ToObjectId() != ObjectId.Empty) {
-                var model = Resolve<IUserAddressService>().GetSingle(id);
-                if (model == null) {
-                    result = ToAutoForm(new UserAddressAutoFrom());
-                }
-
-                var resultModel = model.MapTo<UserAddressAutoFrom>();
-                resultModel.RootUserId = model.UserId;
-                result = ToAutoForm(resultModel);
-            } else {
-                result = ToAutoForm(new UserAddressAutoFrom());
-            }
-            result.AlertText = "【编辑地址】请您认真填写收货人姓名、手机及其详细地址，便于确认收货的地址";
-
-            result.ButtomHelpText = new List<string> {
-                "建议您务必输入收货人姓名、手机号码",
-                "建议您务必选择正确的区域及输入详细地址",
-            };
-
-            return result;
-        }
-
-        /// <summary>
-        /// PageTable
-        /// </summary>
-        /// <param name="query"></param>
-        /// <param name="autoModel"></param>
-        /// <returns></returns>
-        public PageResult<UserAddressAutoFrom> PageTable(object query, AutoBaseModel autoModel) {
-            var dic = HttpWeb.HttpContext.ToDictionary();
-            //dic = dic.RemoveKey("type");// 移除该type否则无法正常lambda
-            var id = autoModel.BasicUser.Id;
-            if (dic.TryGetValue("id", out string userid)) {
-                id = userid.ConvertToLong();
-            }
-            var result = Resolve<IUserAddressService>().GetAllList(id);
-
-            return ToPageResult(result.MapTo<PagedList<UserAddressAutoFrom>>());
-        }
-
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
-            var input = (UserAddressAutoFrom)model;
-            var inputModel = input.MapTo<UserAddress>();
-            inputModel.UserId = input.RootUserId;
-            //详细地址传入的是null 给跪
-            inputModel.AddressDescription = inputModel.Address;
-            var result = Resolve<IUserAddressService>().AddOrUpdate(inputModel);
-
-            return result ? ServiceResult.Success : ServiceResult.Failed;
-        }
     }
 }

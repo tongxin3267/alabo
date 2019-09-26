@@ -28,9 +28,7 @@ namespace Alabo.Domains.Repositories.SqlServer
 
         public void Open()
         {
-            if (DbConnection != null) {
-                DbConnection.Open();
-            }
+            if (DbConnection != null) DbConnection.Open();
         }
 
         public IRepositoryTransaction OpenTransaction()
@@ -55,9 +53,7 @@ namespace Alabo.Domains.Repositories.SqlServer
         public void BeginTransaction()
         {
             RaseExceptionIfConnectionIsNotInitialization();
-            if (_transactionCount <= 0) {
-                DbTransaction = DbConnection.BeginTransaction();
-            }
+            if (_transactionCount <= 0) DbTransaction = DbConnection.BeginTransaction();
 
             _transactionCount++;
         }
@@ -65,9 +61,7 @@ namespace Alabo.Domains.Repositories.SqlServer
         public void BeginTransaction(IsolationLevel isolationLevel)
         {
             RaseExceptionIfConnectionIsNotInitialization();
-            if (_transactionCount <= 0) {
-                DbTransaction = DbConnection.BeginTransaction(isolationLevel);
-            }
+            if (_transactionCount <= 0) DbTransaction = DbConnection.BeginTransaction(isolationLevel);
 
             _transactionCount++;
         }
@@ -75,25 +69,17 @@ namespace Alabo.Domains.Repositories.SqlServer
         public void CommitTransaction()
         {
             RaseExceptionIfConnectionIsNotInitialization();
-            if (_transactionCount > 0) {
-                _transactionCount--;
-            }
+            if (_transactionCount > 0) _transactionCount--;
 
-            if (_transactionCount == 0) {
-                DbTransaction.Commit();
-            }
+            if (_transactionCount == 0) DbTransaction.Commit();
         }
 
         public void RollbackTransaction()
         {
             RaseExceptionIfConnectionIsNotInitialization();
-            if (_transactionCount > 0) {
-                _transactionCount--;
-            }
+            if (_transactionCount > 0) _transactionCount--;
 
-            if (_transactionCount == 0) {
-                DbTransaction.Rollback();
-            }
+            if (_transactionCount == 0) DbTransaction.Rollback();
         }
 
         public void DisposeTransaction()
@@ -112,9 +98,7 @@ namespace Alabo.Domains.Repositories.SqlServer
 
         private void RaseExceptionIfConnectionIsNotInitialization()
         {
-            if (DbContext == null) {
-                throw new System.Exception("sql connection is not initialization.");
-            }
+            if (DbContext == null) throw new System.Exception("sql connection is not initialization.");
         }
     }
 }

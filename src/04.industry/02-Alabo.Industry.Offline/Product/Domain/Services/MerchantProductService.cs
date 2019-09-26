@@ -8,7 +8,7 @@ namespace Alabo.Industry.Offline.Product.Domain.Services
 {
     public class MerchantProductService : ServiceBase<MerchantProduct, ObjectId>, IMerchantProductService
     {
-        public MerchantProductService(IUnitOfWork unitOfWork, IRepository<MerchantProduct, ObjectId> repository) 
+        public MerchantProductService(IUnitOfWork unitOfWork, IRepository<MerchantProduct, ObjectId> repository)
             : base(unitOfWork, repository)
         {
         }

@@ -8,13 +8,13 @@ using Microsoft.AspNetCore.Http;
 using ZKCloud.Open.Share.Models;
 using ITaskModule = Alabo.App.Share.TaskExecutes.ResultModel.ITaskModule;
 
-namespace Alabo.App.Share.TaskExecutes.Domain.Services {
-
+namespace Alabo.App.Share.TaskExecutes.Domain.Services
+{
     /// <summary>
     ///     Task模块配置服务
     /// </summary>
-    public interface ITaskModuleConfigService : IService {
-
+    public interface ITaskModuleConfigService : IService
+    {
         /// <summary>
         ///     添加或更新一个分润配置
         /// </summary>
@@ -63,7 +63,6 @@ namespace Alabo.App.Share.TaskExecutes.Domain.Services {
         /// </summary>
         /// <typeparam name="TModule"></typeparam>
         /// <typeparam name="TConfiguration"></typeparam>
-
         IEnumerable<TConfiguration> GetList<TModule, TConfiguration>()
             where TModule : ITaskModule
             where TConfiguration : IModuleConfig;

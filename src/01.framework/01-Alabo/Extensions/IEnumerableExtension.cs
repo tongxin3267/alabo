@@ -17,13 +17,9 @@ namespace Alabo.Extensions
         /// <param name="action">The action.</param>
         public static IEnumerable<T> Foreach<T>(this IEnumerable<T> source, Action<T> action)
         {
-            if (source == null) {
-                throw new ArgumentNullException("source");
-            }
+            if (source == null) throw new ArgumentNullException("source");
 
-            foreach (var item in source) {
-                action(item);
-            }
+            foreach (var item in source) action(item);
 
             return source;
         }
@@ -35,17 +31,11 @@ namespace Alabo.Extensions
         /// <param name="data">The data.</param>
         public static ICollection<T> AddRange<T>(this ICollection<T> source, IEnumerable<T> data)
         {
-            if (source == null) {
-                throw new ArgumentNullException(nameof(source));
-            }
+            if (source == null) throw new ArgumentNullException(nameof(source));
 
-            if (data == null) {
-                return source;
-            }
+            if (data == null) return source;
 
-            foreach (var item in data) {
-                source.Add(item);
-            }
+            foreach (var item in data) source.Add(item);
 
             return source;
         }
@@ -60,9 +50,7 @@ namespace Alabo.Extensions
         public static void AddBefore<T>(this IEnumerable<T> items, Predicate<T> before, T obj)
         {
             var index = items.FindIndex(x => before(x));
-            if (index < 0) {
-                index = 0;
-            }
+            if (index < 0) index = 0;
 
             items.ToList().Insert(index, obj);
         }
@@ -92,9 +80,7 @@ namespace Alabo.Extensions
         public static void AddAfter<T>(this IEnumerable<T> items, Predicate<T> after, T obj)
         {
             var index = items.FindLastIndex(x => after(x));
-            if (index < 0) {
-                index = items.Count() - 1;
-            }
+            if (index < 0) index = items.Count() - 1;
         }
 
         /// <summary>
@@ -104,9 +90,7 @@ namespace Alabo.Extensions
         public static bool IsDistinct(this IEnumerable<string> items)
         {
             var distinct = items.Distinct();
-            if (distinct.Count() < items.Count()) {
-                return false;
-            }
+            if (distinct.Count() < items.Count()) return false;
 
             return true;
         }
@@ -120,11 +104,9 @@ namespace Alabo.Extensions
         /// <param name="match">The match.</param>
         public static int FindIndex<T>(this IEnumerable<T> items, int startIndex, Predicate<T> match)
         {
-            for (var i = Math.Max(startIndex, 0); i < items.Count(); ++i) {
-                if (match(items.ToList()[i])) {
+            for (var i = Math.Max(startIndex, 0); i < items.Count(); ++i)
+                if (match(items.ToList()[i]))
                     return i;
-                }
-            }
 
             return -1;
         }
@@ -149,11 +131,9 @@ namespace Alabo.Extensions
         /// <param name="match">The match.</param>
         public static int FindLastIndex<T>(this IEnumerable<T> items, int startIndex, Predicate<T> match)
         {
-            for (var i = Math.Min(startIndex, items.Count() - 1); i >= 0; --i) {
-                if (match(items.ToList()[i])) {
+            for (var i = Math.Min(startIndex, items.Count() - 1); i >= 0; --i)
+                if (match(items.ToList()[i]))
                     return i;
-                }
-            }
 
             return -1;
         }
@@ -177,13 +157,9 @@ namespace Alabo.Extensions
         /// <param name="spliter">分隔符</param>
         public static string JoinToString<T>(this IEnumerable<T> objList, string spliter)
         {
-            if (objList.IsNullOrEmpty()) {
-                return string.Empty;
-            }
+            if (objList.IsNullOrEmpty()) return string.Empty;
 
-            if (objList.ToList().Count == 0) {
-                return string.Empty;
-            }
+            if (objList.ToList().Count == 0) return string.Empty;
 
             return string.Join(spliter, from v in objList where v != null select v.ConvertToString());
         }
@@ -251,9 +227,7 @@ namespace Alabo.Extensions
             this IEnumerable<TSource> list, Func<TSource, TKey> toKey, Func<TSource, TValue> toValue)
         {
             var dict = new Dictionary<TKey, TValue>();
-            foreach (var item in list) {
-                dict[toKey(item)] = toValue(item);
-            }
+            foreach (var item in list) dict[toKey(item)] = toValue(item);
 
             return dict;
         }
@@ -265,9 +239,7 @@ namespace Alabo.Extensions
             this IEnumerable<TSource> list, Func<TSource, TKey> toKey, Func<TSource, TValue> toValue)
         {
             var dict = new SortedDictionary<TKey, TValue>();
-            foreach (var item in list) {
-                dict[toKey(item)] = toValue(item);
-            }
+            foreach (var item in list) dict[toKey(item)] = toValue(item);
 
             return dict;
         }
@@ -281,9 +253,7 @@ namespace Alabo.Extensions
         public static IEnumerable<KeyValuePair<int, T>> IterIndex<T>(this IEnumerable<T> iter)
         {
             var index = 0;
-            foreach (var value in iter) {
-                yield return new KeyValuePair<int, T>(index++, value);
-            }
+            foreach (var value in iter) yield return new KeyValuePair<int, T>(index++, value);
         }
 
         /// <summary>
@@ -300,22 +270,15 @@ namespace Alabo.Extensions
             //计算可能出现的组合数量
             var count = 1;
             var groupsCount = groups.Count();
-            if (groupsCount <= 0) {
-                return new T[0][];
-            }
+            if (groupsCount <= 0) return new T[0][];
 
-            foreach (var set in groups) {
-                count *= set.Count();
-            }
+            foreach (var set in groups) count *= set.Count();
             //判断是否超过最大允许的组合数量
-            if (count > maxCount) {
+            if (count > maxCount)
                 throw new ArgumentOutOfRangeException("combination count {0} large than max count {1}");
-            }
             //确保内存
             var combList = new T[count][];
-            for (var _ = 0; _ < count; _++) {
-                combList[_] = new T[groupsCount];
-            }
+            for (var _ = 0; _ < count; _++) combList[_] = new T[groupsCount];
             //计算可能出现的组合
             var repat = count; //当前集合中单个值需要的重复次数
             foreach (var pair in groups.IterIndex())
@@ -324,15 +287,13 @@ namespace Alabo.Extensions
                 repat /= setCount; //更新当前集合中单个值需要的重复次数
                 //当前计算的组合位置
                 var index = 0;
-                for (int min = 0, max = count / repat / setCount; min < max; min++) {
-                    foreach (var value in pair.Value) {
+                for (int min = 0, max = count / repat / setCount; min < max; min++)
+                    foreach (var value in pair.Value)
                         for (var _ = 0; _ < repat; _++)
                         {
                             combList[index][pair.Key] = value;
                             index++;
                         }
-                    }
-                }
             }
 
             //Console.WriteLine(ObjectHelper.ObjectToJson(groups));
@@ -355,9 +316,7 @@ namespace Alabo.Extensions
             var enumeratorB = b.GetEnumerator();
             while (enumeratorA.MoveNext())
             {
-                if (!enumeratorB.MoveNext()) {
-                    yield break;
-                }
+                if (!enumeratorB.MoveNext()) yield break;
 
                 yield return new KeyValuePair<T, TV>
                 (

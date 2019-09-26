@@ -1,10 +1,10 @@
 ﻿using System;
 using Alabo.Domains.Query.Dto;
 
-namespace Alabo.App.Asset.Accounts.Dtos {
-
-    public class AccountOutput : EntityDto {
-
+namespace Alabo.App.Asset.Accounts.Dtos
+{
+    public class AccountOutput : EntityDto
+    {
         /// <summary>
         ///     货币类型
         /// </summary>

@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
 using Alabo.Helpers;
+using Microsoft.EntityFrameworkCore;
 
 namespace Alabo.Datas.Stores.Add.EfCore
 {
@@ -26,9 +26,7 @@ namespace Alabo.Datas.Stores.Add.EfCore
             CancellationToken cancellationToken = default)
         {
             var entities = await FindByIdsNoTrackingAsync(id);
-            if (entities == null || entities.Count == 0) {
-                return null;
-            }
+            if (entities == null || entities.Count == 0) return null;
 
             return entities[0];
         }
@@ -50,9 +48,7 @@ namespace Alabo.Datas.Stores.Add.EfCore
         public async Task<List<TEntity>> FindByIdsNoTrackingAsync(IEnumerable<TKey> ids,
             CancellationToken cancellationToken = default)
         {
-            if (ids == null) {
-                return null;
-            }
+            if (ids == null) return null;
 
             return await FindAsNoTracking().Where(t => ids.Contains(t.Id)).ToListAsync(cancellationToken);
         }

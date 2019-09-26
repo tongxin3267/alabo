@@ -6,38 +6,40 @@ using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Framework.Tasks.Schedules.Domain.Enums;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Share.OpenTasks.Configs.Store {
-
+namespace Alabo.App.Share.OpenTasks.Configs.Store
+{
     /// <summary>
-    /// Class StoreCityRewardConfig.
-    /// 自身返利
+    ///     Class StoreCityRewardConfig.
+    ///     自身返利
     /// </summary>
     /// <seealso cref="ShareBaseConfig" />
-    public class StoreCityRewardConfig : ShareBaseConfig {
+    public class StoreCityRewardConfig : ShareBaseConfig
+    {
     }
 
     /// <summary>
-    /// Class RebateModul.
+    ///     Class RebateModul.
     /// </summary>
     [TaskModule(Id, "城市供应商分润",
         ConfigurationType = typeof(StoreCityRewardConfig), SortOrder = 999990,
         IsSupportMultipleConfiguration = true, FenRunResultType = FenRunResultType.Price,
         RelationshipType = RelationshipType.UserRecommendedRelationship,
         Intro = "城市供应商分润")]
-    public class StoreCityRewardConfigModule : AssetAllocationShareModuleBase<StoreCityRewardConfig> {
+    public class StoreCityRewardConfigModule : AssetAllocationShareModuleBase<StoreCityRewardConfig>
+    {
         public const string Id = "0734225B-0000-4009-9B66-530DB887B200";
 
         public const string ModuleName = "供应商分润";
 
         public StoreCityRewardConfigModule(TaskContext context, StoreCityRewardConfig config)
-            : base(context, config) {
+            : base(context, config)
+        {
         }
 
-        public override ExecuteResult<ITaskResult[]> Execute(TaskParameter parameter) {
+        public override ExecuteResult<ITaskResult[]> Execute(TaskParameter parameter)
+        {
             var baseResult = base.Execute(parameter);
-            if (baseResult.Status != ResultStatus.Success) {
-                return baseResult;
-            }
+            if (baseResult.Status != ResultStatus.Success) return baseResult;
 
             //TODO 2019年9月24日 供应商订单重构
             // 同时下多个供应商订单的时候，分开

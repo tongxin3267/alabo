@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Validations;
 
-namespace Alabo.Framework.Basic.Address.Dtos {
-
+namespace Alabo.Framework.Basic.Address.Dtos
+{
     /// <summary>
     ///     默认地址修改
     /// </summary>
-    public class AddressDefaultInput {
-
+    public class AddressDefaultInput
+    {
         /// <summary>
         ///     地址Id
         /// </summary>

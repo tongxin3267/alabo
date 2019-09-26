@@ -4,31 +4,31 @@ using Alabo.Domains.Repositories;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Users.Entities;
 
-namespace Alabo.Data.People.Users.Domain.Repositories {
+namespace Alabo.Data.People.Users.Domain.Repositories
+{
+    public interface IUserRepository : IRepository<User, long>
+    {
+        User UserTeam(long userId);
 
-    public interface IUserRepository : IRepository<User, long> {
+        User GetSingle(long userId);
 
-        Alabo.Users.Entities.User UserTeam(long userId);
+        User GetSingle(string UserName);
 
-        Alabo.Users.Entities.User GetSingle(long userId);
+        User GetSingleByMail(string mail);
 
-        Alabo.Users.Entities.User GetSingle(string UserName);
+        User GetSingleByMobile(string mobile);
 
-        Alabo.Users.Entities.User GetSingleByMail(string mail);
+        User GetUserDetail(long userId);
 
-        Alabo.Users.Entities.User GetSingleByMobile(string mobile);
+        User GetUserDetail(string UserName);
 
-        Alabo.Users.Entities.User GetUserDetail(long userId);
+        User Add(User User, List<MoneyTypeConfig> moneyTypes);
 
-        Alabo.Users.Entities.User GetUserDetail(string UserName);
-
-        Alabo.Users.Entities.User Add(Alabo.Users.Entities.User User, List<MoneyTypeConfig> moneyTypes);
-
-        bool UpdateSingle(Alabo.Users.Entities.User user);
+        bool UpdateSingle(User user);
 
         bool CheckUserExists(string UserName, string password, out long userId);
 
-        IList<Alabo.Users.Entities.User> GetList(IList<long> userIds);
+        IList<User> GetList(IList<long> userIds);
 
         bool ExistsName(string name);
 
@@ -39,13 +39,13 @@ namespace Alabo.Data.People.Users.Domain.Repositories {
         bool ExistsMobile(string mobile);
 
         /// <summary>
-        /// 物理删除会员
+        ///     物理删除会员
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
         bool Delete(long userId);
 
-        IList<Alabo.Users.Entities.User> GetViewUserList(UserInput userInput, out long count);
+        IList<User> GetViewUserList(UserInput userInput, out long count);
 
         /// <summary>
         ///     会员删除时推荐关系修改

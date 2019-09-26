@@ -11,23 +11,24 @@ using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Maps;
 
-namespace Alabo.Data.People.Provinces.Dtos {
-
-    public class ProvinceView : UIBase, IAutoForm {
+namespace Alabo.Data.People.Provinces.Dtos
+{
+    public class ProvinceView : UIBase, IAutoForm
+    {
         public string Id { get; set; }
 
         /// <summary>
-        /// 名称
+        ///     名称
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// 所属区域
+        ///     所属区域
         /// </summary>
         public long RegionId { get; set; }
 
         /// <summary>
-        /// 代理费
+        ///     代理费
         /// </summary>
         public decimal Price { get; set; }
 
@@ -53,7 +54,7 @@ namespace Alabo.Data.People.Provinces.Dtos {
         public string Intro { get; set; }
 
         /// <summary>
-        /// 所属用户名
+        ///     所属用户名
         /// </summary>
         public string UserName { get; set; }
 
@@ -72,28 +73,24 @@ namespace Alabo.Data.People.Provinces.Dtos {
         /// </summary>
         public UserTypeStatus Status { get; set; } = UserTypeStatus.Pending;
 
-        public AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
             var str = id.ToString();
             var model = Resolve<IProvinceService>().GetSingle(u => u.Id == str.ToObjectId());
-            if (model != null) {
-                return ToAutoForm(model);
-            }
+            if (model != null) return ToAutoForm(model);
 
             return ToAutoForm(new Province());
         }
 
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
-            var city = (ProvinceView)model;
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
+            var city = (ProvinceView) model;
             var user = Resolve<IUserService>().GetSingle(u => u.UserName == city.UserName);
             var parentUser = Resolve<IUserService>().GetSingle(u => u.UserName == city.ParentUserName);
             var view = city.MapTo<Province>();
-            if (user == null) {
-                return ServiceResult.FailedWithMessage("所属用户名不存在");
-            }
+            if (user == null) return ServiceResult.FailedWithMessage("所属用户名不存在");
 
-            if (parentUser == null) {
-                return ServiceResult.FailedWithMessage("推荐人用户名不存在");
-            }
+            if (parentUser == null) return ServiceResult.FailedWithMessage("推荐人用户名不存在");
 
             var partner = Resolve<IProvinceService>().GetSingle(u => u.RegionId == city.RegionId);
 
@@ -101,9 +98,8 @@ namespace Alabo.Data.People.Provinces.Dtos {
             view.UserId = user.Id;
             view.ParentUserId = parentUser.Id;
             view.RegionName = Resolve<IRegionService>().GetRegionNameById(view.RegionId);
-            if (city.Id.IsNullOrEmpty() && partner != null) {
+            if (city.Id.IsNullOrEmpty() && partner != null)
                 return ServiceResult.FailedWithMessage("该地区已有合伙人，一个地区只允许有一个合伙人");
-            }
 
             //var result = false;
             //if (partner != null) {
@@ -112,9 +108,7 @@ namespace Alabo.Data.People.Provinces.Dtos {
             //    result = Resolve<ICountyService>().Add(view);
             //}
             var result = Resolve<IProvinceService>().AddOrUpdate(view);
-            if (result) {
-                return ServiceResult.Success;
-            }
+            if (result) return ServiceResult.Success;
             return ServiceResult.FailedWithMessage("操作失败，请重试");
         }
     }

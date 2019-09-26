@@ -1,22 +1,22 @@
-﻿namespace Alabo.Tool.Office.Core {
-
+﻿namespace Alabo.Tool.Office.Core
+{
     /// <summary>
-    /// 垂直对齐
+    ///     垂直对齐
     /// </summary>
-    public enum VerticalAlignment {
-
+    public enum VerticalAlignment
+    {
         /// <summary>
-        /// 顶部对齐
+        ///     顶部对齐
         /// </summary>
         Top,
 
         /// <summary>
-        /// 底部对齐
+        ///     底部对齐
         /// </summary>
         Bottom,
 
         /// <summary>
-        /// 居中对齐
+        ///     居中对齐
         /// </summary>
         Center
     }

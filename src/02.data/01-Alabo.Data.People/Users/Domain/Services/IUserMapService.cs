@@ -2,10 +2,10 @@
 using Alabo.Domains.Services;
 using Alabo.Users.Entities;
 
-namespace Alabo.Data.People.Users.Domain.Services {
-
-    public interface IUserMapService : IService<UserMap, long> {
-
+namespace Alabo.Data.People.Users.Domain.Services
+{
+    public interface IUserMapService : IService<UserMap, long>
+    {
         /// <summary>
         ///     获取组织架构图信息,优先从缓存中读取
         /// </summary>
@@ -27,7 +27,7 @@ namespace Alabo.Data.People.Users.Domain.Services {
         void UpdateMap(long userId, long parentId);
 
         /// <summary>
-        /// 会员物理删除后，修改推荐人
+        ///     会员物理删除后，修改推荐人
         /// </summary>
         /// <returns></returns>
         ServiceResult UpdateParentUserAfterUserDelete(long userId, long parentId);

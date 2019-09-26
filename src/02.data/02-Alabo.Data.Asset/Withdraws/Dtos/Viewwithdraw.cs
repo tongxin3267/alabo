@@ -2,13 +2,13 @@
 using Alabo.Validations;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Asset.Withdraws.Dtos {
-
+namespace Alabo.App.Asset.Withdraws.Dtos
+{
     /// <summary>
     ///     Class ViewWithdraw.
     /// </summary>
-    public class ViewWithdraw : BaseViewModel {
-
+    public class ViewWithdraw : BaseViewModel
+    {
         /// <summary>
         ///     银行卡ID
         /// </summary>

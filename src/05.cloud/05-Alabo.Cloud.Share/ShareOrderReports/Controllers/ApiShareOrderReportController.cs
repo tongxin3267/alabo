@@ -5,13 +5,14 @@ using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
-namespace _05_Alabo.Cloud.Share.ShareOrderReports.Controllers {
-
+namespace _05_Alabo.Cloud.Share.ShareOrderReports.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/ShareOrderReport/[action]")]
-    public class ApiShareOrderReportController : ApiBaseController<ShareOrderReport, ObjectId> {
-
-        public ApiShareOrderReportController() : base() {
+    public class ApiShareOrderReportController : ApiBaseController<ShareOrderReport, ObjectId>
+    {
+        public ApiShareOrderReportController()
+        {
             BaseService = Resolve<IShareOrderReportService>();
         }
     }

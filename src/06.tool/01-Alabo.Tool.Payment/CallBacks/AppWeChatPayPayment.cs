@@ -5,8 +5,8 @@ using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.Tool.Payment.CallBacks {
-
+namespace Alabo.Tool.Payment.CallBacks
+{
     [NotMapped]
     /// <summary>
     /// APP微信支付配置
@@ -14,8 +14,8 @@ namespace Alabo.Tool.Payment.CallBacks {
     [ClassProperty(Name = "APP微信支付配置", Icon = "fa fa-puzzle-piece",
         SideBarType = SideBarType.ApiStoreSideBar,
         SortOrder = 2, Description = "APP微信支付配置")]
-    public class AppWeChatPaymentConfig : BaseViewModel, IAutoConfig {
-
+    public class AppWeChatPaymentConfig : BaseViewModel, IAutoConfig
+    {
         /// <summary>
         ///     是否启用
         /// </summary>
@@ -61,7 +61,8 @@ namespace Alabo.Tool.Payment.CallBacks {
         [Display(Name = "商户号API秘钥")]
         public string APISecretKey { get; set; } = "";
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

@@ -9,8 +9,8 @@ using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Cloud.People.Identities.Domain.Entities {
-
+namespace Alabo.Cloud.People.Identities.Domain.Entities
+{
     /// <summary>
     ///     用户身份认证
     /// </summary>
@@ -18,15 +18,16 @@ namespace Alabo.Cloud.People.Identities.Domain.Entities {
         SideBarType = SideBarType.IdentitySideBar, PostApi = "/Api/Identity/Identity")]
     [BsonIgnoreExtraElements]
     [Table("Cloud_People_Identity")]
-    [AutoDelete(IsAuto = true)]//  /Api/Identity/QueryDelete
-    public class Identity : AggregateMongodbUserRoot<Identity> {
-
+    [AutoDelete(IsAuto = true)] //  /Api/Identity/QueryDelete
+    public class Identity : AggregateMongodbUserRoot<Identity>
+    {
         /// <summary>
         ///     真实姓名
         /// </summary>
         [Display(Name = "真实姓名")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        [Field(ControlsType = ControlsType.TextBox, IsMain = true, EditShow = true, GroupTabId = 1, Width = "110", ListShow = true,
+        [Field(ControlsType = ControlsType.TextBox, IsMain = true, EditShow = true, GroupTabId = 1, Width = "110",
+            ListShow = true,
             SortOrder = 2)]
         [HelpBlock("请务必填写【真实姓名】")]
         public string RealName { get; set; }
@@ -35,7 +36,8 @@ namespace Alabo.Cloud.People.Identities.Domain.Entities {
         ///     证件号
         /// </summary>
         [Display(Name = "身份证号码")]
-        [Field(ControlsType = ControlsType.TextBox, EditShow = true, GroupTabId = 1, Width = "110", ListShow = true, SortOrder = 5)]
+        [Field(ControlsType = ControlsType.TextBox, EditShow = true, GroupTabId = 1, Width = "110", ListShow = true,
+            SortOrder = 5)]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [HelpBlock("请务必填写【身份证号码】")]
         public string CardNo { get; set; }
@@ -119,7 +121,8 @@ namespace Alabo.Cloud.People.Identities.Domain.Entities {
         /// <summary>
         ///     获取链接
         /// </summary>
-        public IEnumerable<ViewLink> ViewLinks() {
+        public IEnumerable<ViewLink> ViewLinks()
+        {
             var quickLinks = new List<ViewLink>
             {
                 new ViewLink("实名审核", "/Admin/Identity/Edit?Id=[[Id]]", Icons.Edit, LinkType.ColumnLink)

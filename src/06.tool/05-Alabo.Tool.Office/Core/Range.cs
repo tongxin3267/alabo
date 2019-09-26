@@ -1,42 +1,54 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.Tool.Office.Core {
-
+namespace Alabo.Tool.Office.Core
+{
     /// <summary>
-    /// 区
+    ///     区
     /// </summary>
-    public class Range {
+    public class Range
+    {
+        /// <summary>
+        ///     行集
+        /// </summary>
+        private readonly List<Row> _rows;
 
         /// <summary>
-        /// 初始化区
+        ///     起始索引
+        /// </summary>
+        private readonly int _startIndex;
+
+        /// <summary>
+        ///     初始化区
         /// </summary>
         /// <param name="startIndex">起始索引</param>
-        public Range(int startIndex = 0) {
+        public Range(int startIndex = 0)
+        {
             _rows = new List<Row>();
             _startIndex = startIndex;
         }
 
         /// <summary>
-        /// 行集
-        /// </summary>
-        private readonly List<Row> _rows;
-
-        /// <summary>
-        /// 起始索引
-        /// </summary>
-        private readonly int _startIndex;
-
-        /// <summary>
-        /// 获取行
+        ///     获取行
         /// </summary>
         /// <param name="index">索引</param>
         public Row this[int index] => _rows[index];
 
         /// <summary>
-        /// 获取行
+        ///     列数
+        /// </summary>
+        public int ColumnNumber => _rows.Count > 0 ? _rows[0].ColumnNumber : 0;
+
+        /// <summary>
+        ///     行数
+        /// </summary>
+        public int Count => _rows.Count;
+
+        /// <summary>
+        ///     获取行
         /// </summary>
         /// <param name="index">外部索引</param>
-        public Row GetRow(int index) {
+        public Row GetRow(int index)
+        {
             var realIndex = index - _startIndex;
             if (realIndex < 0)
                 return null;
@@ -46,28 +58,20 @@ namespace Alabo.Tool.Office.Core {
         }
 
         /// <summary>
-        /// 列数
+        ///     获取行
         /// </summary>
-        public int ColumnNumber => _rows.Count > 0 ? _rows[0].ColumnNumber : 0;
-
-        /// <summary>
-        /// 行数
-        /// </summary>
-        public int Count => _rows.Count;
-
-        /// <summary>
-        /// 获取行
-        /// </summary>
-        public List<Row> GetRows() {
+        public List<Row> GetRows()
+        {
             return _rows;
         }
 
         /// <summary>
-        /// 添加行
+        ///     添加行
         /// </summary>
         /// <param name="rowIndex">行索引</param>
         /// <param name="cells">单元格集合</param>
-        public void AddRow(int rowIndex, IEnumerable<Cell> cells) {
+        public void AddRow(int rowIndex, IEnumerable<Cell> cells)
+        {
             if (cells == null)
                 return;
             var row = CreateRow(rowIndex);
@@ -76,9 +80,10 @@ namespace Alabo.Tool.Office.Core {
         }
 
         /// <summary>
-        /// 创建行
+        ///     创建行
         /// </summary>
-        private Row CreateRow(int index) {
+        private Row CreateRow(int index)
+        {
             var row = GetRow(index);
             if (row != null)
                 return row;
@@ -88,28 +93,31 @@ namespace Alabo.Tool.Office.Core {
         }
 
         /// <summary>
-        /// 添加单元格
+        ///     添加单元格
         /// </summary>
-        private void AddCell(Row row, Cell cell, int rowIndex) {
+        private void AddCell(Row row, Cell cell, int rowIndex)
+        {
             row.Add(cell);
             if (cell.RowSpan <= 1)
                 return;
-            for (int i = 1; i < cell.RowSpan; i++)
+            for (var i = 1; i < cell.RowSpan; i++)
                 AddPlaceholderCell(cell, rowIndex + i);
         }
 
         /// <summary>
-        /// 为下方受rowspan影响的行添加占位单元格
+        ///     为下方受rowspan影响的行添加占位单元格
         /// </summary>
-        private void AddPlaceholderCell(Cell cell, int rowIndex) {
+        private void AddPlaceholderCell(Cell cell, int rowIndex)
+        {
             var row = CreateRow(rowIndex);
-            row.Add(new NullCell { ColumnIndex = cell.ColumnIndex, ColumnSpan = cell.ColumnSpan });
+            row.Add(new NullCell {ColumnIndex = cell.ColumnIndex, ColumnSpan = cell.ColumnSpan});
         }
 
         /// <summary>
-        /// 清空
+        ///     清空
         /// </summary>
-        public void Clear() {
+        public void Clear()
+        {
             _rows.Clear();
         }
     }

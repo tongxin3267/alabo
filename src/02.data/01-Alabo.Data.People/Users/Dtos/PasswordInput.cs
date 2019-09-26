@@ -8,14 +8,14 @@ using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Data.People.Users.Dtos {
-
+namespace Alabo.Data.People.Users.Dtos
+{
     /// <summary>
     ///     密码修改传输层
     /// </summary>
     [ClassProperty(Name = "密码修改", Icon = "fa fa-puzzle-piece", Description = "密码修改",
         PostApi = "Api/User/ChangePassword", SuccessReturn = "pages/user/index")]
-    public class PasswordInput : UIBase, IAutoForm//EntityDto
+    public class PasswordInput : UIBase, IAutoForm //EntityDto
     {
         /// <summary>
         ///     用户Id不能为空
@@ -71,19 +71,20 @@ namespace Alabo.Data.People.Users.Dtos {
         //[Compare("Password", ErrorMessage = "密码与确认密码不相同")]
         public string ConfirmPassword { get; set; }
 
-        [Display(Name = "手机验证码")]
-        public string MobileVerifiyCode { get; set; }
+        [Display(Name = "手机验证码")] public string MobileVerifiyCode { get; set; }
 
         //public IObjectCache ObjectCache => throw new System.NotImplementedException();
 
-        public AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
             var result = new AutoForm();
             result = ToAutoForm(new PasswordInput());
             result.AlertText = "【修改登录密码】为了更好的保护你的帐号安全，避免您和您的好友受到损失，建议您设置密码";
 
-            result.ButtomHelpText = new List<string> {
+            result.ButtomHelpText = new List<string>
+            {
                 "建议确保登录密码与支付密码不同！",
-                "建议密码采用字母和数字混合，并且不短于6位。",
+                "建议密码采用字母和数字混合，并且不短于6位。"
             };
             return result;
         }
@@ -93,14 +94,15 @@ namespace Alabo.Data.People.Users.Dtos {
         //    throw new System.NotImplementedException();
         //}
 
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
             return null;
         }
     }
 
     [ClassProperty(Name = "密码类型")]
-    public enum PasswordType {
-
+    public enum PasswordType
+    {
         /// <summary>
         ///     登录密码
         /// </summary>

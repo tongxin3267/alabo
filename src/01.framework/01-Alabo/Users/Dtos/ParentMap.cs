@@ -1,10 +1,10 @@
-﻿namespace Alabo.Users.Dtos {
-
+﻿namespace Alabo.Users.Dtos
+{
     /// <summary>
     ///     组织架构关系图
     /// </summary>
-    public class ParentMap {
-
+    public class ParentMap
+    {
         /// <summary>
         ///     层次
         /// </summary>

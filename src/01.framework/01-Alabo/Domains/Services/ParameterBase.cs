@@ -15,9 +15,7 @@ namespace Alabo.Domains.Services
         public virtual ValidationResultCollection Validate()
         {
             var result = DataAnnotationValidation.Validate(this);
-            if (result.IsValid) {
-                return ValidationResultCollection.Success;
-            }
+            if (result.IsValid) return ValidationResultCollection.Success;
 
             throw new ValidException(result.First().ErrorMessage);
         }

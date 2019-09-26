@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
 using Alabo.Domains.Entities.Core;
+using Newtonsoft.Json;
 
 namespace Alabo.Domains.Entities
 {
@@ -55,9 +55,7 @@ namespace Alabo.Domains.Entities
         {
             get
             {
-                if (PageSize == 0) {
-                    return 0;
-                }
+                if (PageSize == 0) return 0;
 
                 return RecordCount % PageSize == 0 ? RecordCount / PageSize : RecordCount / PageSize + 1;
             }

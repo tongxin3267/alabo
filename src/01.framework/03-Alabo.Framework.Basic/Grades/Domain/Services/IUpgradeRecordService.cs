@@ -7,11 +7,10 @@ using MongoDB.Bson;
 
 namespace Alabo.Framework.Basic.Grades.Domain.Services
 {
-
-    public interface IUpgradeRecordService : IService<UpgradeRecord, ObjectId> {
-
+    public interface IUpgradeRecordService : IService<UpgradeRecord, ObjectId>
+    {
         /// <summary>
-        /// 修改用户等级，同时增加记录
+        ///     锟睫革拷锟矫伙拷锟饺硷拷锟斤拷同时锟斤拷锟接硷拷录
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="afterGradeId"></param>

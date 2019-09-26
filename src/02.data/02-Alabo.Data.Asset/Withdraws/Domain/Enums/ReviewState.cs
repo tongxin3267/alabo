@@ -1,25 +1,23 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.Withdraws.Domain.Enums {
-
+namespace Alabo.App.Asset.Withdraws.Domain.Enums
+{
     /// <summary>
-    /// 审核状态
+    ///     审核状态
     /// </summary>
-    public enum ReviewState {
-
+    public enum ReviewState
+    {
         /// <summary>
-        /// 通过
+        ///     通过
         /// </summary>
-        [Display(Name = "通过")]
-        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "通过")] [LabelCssClass(BadgeColorCalss.Success)]
         Pass = 1,
 
         /// <summary>
-        /// 拒绝
+        ///     拒绝
         /// </summary>
-        [Display(Name = "拒绝")]
-        [LabelCssClass(BadgeColorCalss.Warning)]
+        [Display(Name = "拒绝")] [LabelCssClass(BadgeColorCalss.Warning)]
         Reject
     }
 }

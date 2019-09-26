@@ -51,9 +51,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <param name="register">实体别名注册器</param>
         public string ToSql(IDialect dialect, IEntityAliasRegister register)
         {
-            if (Raw) {
-                return Columns;
-            }
+            if (Raw) return Columns;
 
             var columns = Columns.Split(',').Select(column => new SqlItem(column, GetTableAlias(register))).ToList();
             return Alabo.Extensions.Extensions.Join(columns.Select(item => item.ToSql(dialect)));
@@ -64,9 +62,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// </summary>
         private string GetTableAlias(IEntityAliasRegister register)
         {
-            if (register.Contains(Table)) {
-                return register.GetAlias(Table);
-            }
+            if (register.Contains(Table)) return register.GetAlias(Table);
 
             return TableAlias;
         }

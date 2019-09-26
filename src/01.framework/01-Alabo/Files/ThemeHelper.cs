@@ -22,9 +22,7 @@ namespace Alabo.Files
 
         public static string GetCurrentTheme(HttpContext ctx)
         {
-            if (IsMobile(ctx)) {
-                return RuntimeContext.Current.WebsiteConfig.MobileTheme;
-            }
+            if (IsMobile(ctx)) return RuntimeContext.Current.WebsiteConfig.MobileTheme;
 
             return RuntimeContext.Current.WebsiteConfig.Theme;
         }
@@ -41,9 +39,7 @@ namespace Alabo.Files
                 var path = string.Format(formatUrl, RuntimeContext.Current.WebsiteConfig.MobileTheme);
                 var pathPhy = RuntimeContext.Current.Path.RootPath + @"\wwwroot\themes" +
                               path.Replace(@"~/", @"\").Replace(@"/", @"\");
-                if (File.Exists(pathPhy)) {
-                    return path.Replace(@"~/", @"~/wwwroot/themes/");
-                }
+                if (File.Exists(pathPhy)) return path.Replace(@"~/", @"~/wwwroot/themes/");
 
                 return string.Format(formatUrl, "Mobile");
             }
@@ -52,9 +48,7 @@ namespace Alabo.Files
                 var path = string.Format(formatUrl, RuntimeContext.Current.WebsiteConfig.Theme);
                 var pathPhy = RuntimeContext.Current.Path.RootPath + @"\wwwroot\themes" +
                               path.Replace(@"~/", @"\").Replace(@"/", @"\");
-                if (File.Exists(pathPhy)) {
-                    return path.Replace(@"~/", @"~/wwwroot/themes/");
-                }
+                if (File.Exists(pathPhy)) return path.Replace(@"~/", @"~/wwwroot/themes/");
 
                 return string.Format(formatUrl, "Views");
             }
@@ -62,9 +56,7 @@ namespace Alabo.Files
 
         public static string GetCurrentTheme(bool isMobile)
         {
-            if (isMobile) {
-                return RuntimeContext.Current.WebsiteConfig.MobileTheme;
-            }
+            if (isMobile) return RuntimeContext.Current.WebsiteConfig.MobileTheme;
 
             return RuntimeContext.Current.WebsiteConfig.Theme;
         }
@@ -132,17 +124,11 @@ namespace Alabo.Files
             var index = widgetPath.LastIndexOf(".");
             widgetPath = widgetPath.Substring(0, index);
             widgetPath = widgetPath.Replace(".", "/");
-            if (type == WidgetType.Cshtml) {
-                return Path.Combine(FileHelper.RootPath, widgetPath, $@"{key}.cshtml");
-            }
+            if (type == WidgetType.Cshtml) return Path.Combine(FileHelper.RootPath, widgetPath, $@"{key}.cshtml");
 
-            if (type == WidgetType.Css) {
-                return Path.Combine(FileHelper.RootPath, widgetPath, $@"{key}.css");
-            }
+            if (type == WidgetType.Css) return Path.Combine(FileHelper.RootPath, widgetPath, $@"{key}.css");
 
-            if (type == WidgetType.Js) {
-                return Path.Combine(FileHelper.RootPath, widgetPath, $@"{key}.JS");
-            }
+            if (type == WidgetType.Js) return Path.Combine(FileHelper.RootPath, widgetPath, $@"{key}.JS");
 
             return string.Empty;
         }

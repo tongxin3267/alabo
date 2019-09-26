@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Extensions;
-using Microsoft.AspNetCore.Http.Internal;
-using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -21,22 +16,28 @@ using Alabo.Tenants;
 using Alabo.Tenants.Domain.Entities;
 using Alabo.Tenants.Domain.Services;
 using Alabo.Web.Clients;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Http.Internal;
+using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using HttpRequest = Microsoft.AspNetCore.Http.HttpRequest;
 using WebClient = Alabo.Web.Clients.WebClient;
 
-namespace Alabo.Helpers {
-
+namespace Alabo.Helpers
+{
     /// <summary>
     ///     Web操作
     /// </summary>
-    public static class HttpWeb {
-
+    public static class HttpWeb
+    {
         #region 静态构造方法
 
         /// <summary>
         ///     初始化Web操作
         /// </summary>
-        static HttpWeb() {
+        static HttpWeb()
+        {
             HttpContextAccessor = Ioc.Resolve<IHttpContextAccessor>();
             Environment = Ioc.Resolve<IHostingEnvironment>();
         }
@@ -48,8 +49,10 @@ namespace Alabo.Helpers {
         /// <summary>
         ///     是否为租户模式
         /// </summary>
-        public static bool IsTenant {
-            get {
+        public static bool IsTenant
+        {
+            get
+            {
                 var result = RuntimeContext.Current.WebsiteConfig.IsTenant;
                 return result;
             }
@@ -62,12 +65,12 @@ namespace Alabo.Helpers {
         /// <summary>
         ///     当前登录用户的租户
         /// </summary>
-        public static string Tenant {
-            get {
+        public static string Tenant
+        {
+            get
+            {
                 var result = TenantContext.CurrentTenant;
-                if (result.IsNullOrEmpty()) {
-                    result = "master";
-                }
+                if (result.IsNullOrEmpty()) result = "master";
 
                 return result;
             }
@@ -78,11 +81,9 @@ namespace Alabo.Helpers {
         #region 获取当前访问的站点或租户的站点
 
         /// <summary>
-        /// 获取当前访问的站点，或租户的站点
+        ///     获取当前访问的站点，或租户的站点
         /// </summary>
-        public static TenantSite Site {
-            get { return Ioc.Resolve<ITenantService>().Site(); }
-        }
+        public static TenantSite Site => Ioc.Resolve<ITenantService>().Site();
 
         #endregion 获取当前访问的站点或租户的站点
 
@@ -91,11 +92,11 @@ namespace Alabo.Helpers {
         /// <summary>
         ///     当前用户身份
         /// </summary>
-        public static ClaimsIdentity Identity {
-            get {
-                if (Claims.Identity is ClaimsIdentity identity) {
-                    return identity;
-                }
+        public static ClaimsIdentity Identity
+        {
+            get
+            {
+                if (Claims.Identity is ClaimsIdentity identity) return identity;
 
                 return UnauthenticatedIdentity.Instance;
             }
@@ -108,9 +109,12 @@ namespace Alabo.Helpers {
         /// <summary>
         ///     请求正文
         /// </summary>
-        public static string Body {
-            get {
-                using (var reader = new StreamReader(Request.Body)) {
+        public static string Body
+        {
+            get
+            {
+                using (var reader = new StreamReader(Request.Body))
+                {
                     return reader.ReadToEnd();
                 }
             }
@@ -152,11 +156,10 @@ namespace Alabo.Helpers {
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="key"></param>
-        public static T GetValue<T>(string key) {
+        public static T GetValue<T>(string key)
+        {
             var value = HttpContext.Request.Form[key];
-            if (value.IsNullOrEmpty()) {
-                return Convert.To<T>(null);
-            }
+            if (value.IsNullOrEmpty()) return Convert.To<T>(null);
 
             var result = Convert.To<T>(value);
             return result;
@@ -169,12 +172,11 @@ namespace Alabo.Helpers {
         /// <summary>
         ///     获取客户端文件集合
         /// </summary>
-        public static List<IFormFile> GetFiles() {
+        public static List<IFormFile> GetFiles()
+        {
             var result = new List<IFormFile>();
             var files = HttpContext.Request.Form.Files;
-            if (files == null || files.Count == 0) {
-                return result;
-            }
+            if (files == null || files.Count == 0) return result;
 
             result.AddRange(files.Where(file => file?.Length > 0));
             return result;
@@ -187,7 +189,8 @@ namespace Alabo.Helpers {
         /// <summary>
         ///     获取客户端文件
         /// </summary>
-        public static IFormFile GetFile() {
+        public static IFormFile GetFile()
+        {
             var files = GetFiles();
             return files.Count == 0 ? null : files[0];
         }
@@ -206,13 +209,13 @@ namespace Alabo.Helpers {
         ///     格式：http://localhost:2000
         ///     https://www.5ug.com
         /// </summary>
-        public static string ClientHost {
-            get {
-                var host = ((HttpRequestHeaders)HttpContext.Request.Headers).HeaderOrigin;
+        public static string ClientHost
+        {
+            get
+            {
+                var host = ((HttpRequestHeaders) HttpContext.Request.Headers).HeaderOrigin;
                 var clientHost = string.Empty;
-                if (!host.IsNullOrEmpty()) {
-                    clientHost = host[0].ToStr();
-                }
+                if (!host.IsNullOrEmpty()) clientHost = host[0].ToStr();
 
                 return clientHost;
             }
@@ -223,10 +226,12 @@ namespace Alabo.Helpers {
         ///     格式：http://localhost:9018
         ///     https://diyservice.5ug.com
         /// </summary>
-        public static string ServiceHost {
-            get {
+        public static string ServiceHost
+        {
+            get
+            {
                 var host =
-                    ((HttpRequestHeaders)((HttpProtocol)((DefaultHttpContext)HttpContext).Features).RequestHeaders)
+                    ((HttpRequestHeaders) ((HttpProtocol) ((DefaultHttpContext) HttpContext).Features).RequestHeaders)
                     .HeaderHost;
 
                 var features = HttpContext.Features;
@@ -241,14 +246,16 @@ namespace Alabo.Helpers {
         ///     格式：http://localhost:9018
         ///     https://diyservice.5ug.com
         /// </summary>
-        public static string ServiceHostUrl {
-            get {
+        public static string ServiceHostUrl
+        {
+            get
+            {
                 var host =
-                    ((HttpRequestHeaders)((HttpProtocol)((DefaultHttpContext)HttpContext).Features).RequestHeaders)
+                    ((HttpRequestHeaders) ((HttpProtocol) ((DefaultHttpContext) HttpContext).Features).RequestHeaders)
                     .HeaderHost;
 
                 var features = HttpContext.Features;
-                var scheme = ((HttpProtocol)features).Scheme;
+                var scheme = ((HttpProtocol) features).Scheme;
                 var serviceHost = scheme + "://" + host; //改成http
                 return serviceHost;
             }
@@ -261,13 +268,14 @@ namespace Alabo.Helpers {
         /// <summary>
         ///     当前登录用户
         /// </summary>
-        public static BasicUser User {
-            get {
-                if ((UserId == 0) | UserName.IsNullOrEmpty()) {
-                    return null;
-                }
+        public static BasicUser User
+        {
+            get
+            {
+                if ((UserId == 0) | UserName.IsNullOrEmpty()) return null;
 
-                var user = new BasicUser {
+                var user = new BasicUser
+                {
                     Id = UserId,
                     UserName = UserName
                 };
@@ -275,7 +283,8 @@ namespace Alabo.Helpers {
                 user.Name = Identity.GetValue(ClaimTypes.Name);
 
                 var authType = Identity.GetValue(ClaimTypes.AuthorizationDecision);
-                if (!Enum.TryParse(authType, out LoginAuthorizeType authorizeType)) {
+                if (!Enum.TryParse(authType, out LoginAuthorizeType authorizeType))
+                {
                     authorizeType = LoginAuthorizeType.Login;
                     user.LoginAuthorizeType = authorizeType;
                 }
@@ -287,8 +296,10 @@ namespace Alabo.Helpers {
         /// <summary>
         ///     当前登录用户Id
         /// </summary>
-        public static long UserId {
-            get {
+        public static long UserId
+        {
+            get
+            {
                 var result = Identity.GetValue(ClaimTypes.NameIdentifier);
                 return result.ConvertToLong();
             }
@@ -297,8 +308,10 @@ namespace Alabo.Helpers {
         /// <summary>
         ///     用户名
         /// </summary>
-        public static string UserName {
-            get {
+        public static string UserName
+        {
+            get
+            {
                 var result = Identity.GetValue(ClaimTypes.Name);
                 return result;
             }
@@ -307,15 +320,13 @@ namespace Alabo.Helpers {
         /// <summary>
         ///     当前用户安全主体
         /// </summary>
-        public static ClaimsPrincipal Claims {
-            get {
-                if (HttpContext == null) {
-                    return UnauthenticatedPrincipal.Instance;
-                }
+        public static ClaimsPrincipal Claims
+        {
+            get
+            {
+                if (HttpContext == null) return UnauthenticatedPrincipal.Instance;
 
-                if (HttpContext.User is ClaimsPrincipal principal) {
-                    return principal;
-                }
+                if (HttpContext.User is ClaimsPrincipal principal) return principal;
 
                 return UnauthenticatedPrincipal.Instance;
             }
@@ -357,7 +368,8 @@ namespace Alabo.Helpers {
         /// <summary>
         ///     Web客户端，用于发送Http请求
         /// </summary>
-        public static WebClient Client() {
+        public static WebClient Client()
+        {
             return new WebClient();
         }
 
@@ -365,7 +377,8 @@ namespace Alabo.Helpers {
         ///     Web客户端，用于发送Http请求
         /// </summary>
         /// <typeparam name="TResult">返回结果类型</typeparam>
-        public static WebClient<TResult> Client<TResult>() where TResult : class {
+        public static WebClient<TResult> Client<TResult>() where TResult : class
+        {
             return new WebClient<TResult>();
         }
 
@@ -382,31 +395,31 @@ namespace Alabo.Helpers {
         ///     设置Ip地址
         /// </summary>
         /// <param name="ip">Ip地址</param>
-        public static void SetIp(string ip) {
+        public static void SetIp(string ip)
+        {
             _ip = ip;
         }
 
         /// <summary>
         ///     重置Ip地址
         /// </summary>
-        public static void ResetIp() {
+        public static void ResetIp()
+        {
             _ip = null;
         }
 
         /// <summary>
         ///     客户端Ip地址
         /// </summary>
-        public static string Ip {
-            get {
-                if (string.IsNullOrWhiteSpace(_ip) == false) {
-                    return _ip;
-                }
+        public static string Ip
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(_ip) == false) return _ip;
 
-                var list = new[] { "127.0.0.1", "::1" };
+                var list = new[] {"127.0.0.1", "::1"};
                 var result = (HttpContext?.Connection?.RemoteIpAddress).SafeString();
-                if (string.IsNullOrWhiteSpace(result) || list.Contains(result)) {
-                    result = GetLanIp();
-                }
+                if (string.IsNullOrWhiteSpace(result) || list.Contains(result)) result = GetLanIp();
 
                 return result;
             }
@@ -415,12 +428,11 @@ namespace Alabo.Helpers {
         /// <summary>
         ///     获取局域网IP
         /// </summary>
-        private static string GetLanIp() {
-            foreach (var hostAddress in Dns.GetHostAddresses(Dns.GetHostName())) {
-                if (hostAddress.AddressFamily == AddressFamily.InterNetwork) {
+        private static string GetLanIp()
+        {
+            foreach (var hostAddress in Dns.GetHostAddresses(Dns.GetHostName()))
+                if (hostAddress.AddressFamily == AddressFamily.InterNetwork)
                     return hostAddress.ToString();
-                }
-            }
 
             return string.Empty;
         }
@@ -439,19 +451,19 @@ namespace Alabo.Helpers {
         /// </summary>
         public static string Domain =>
             ((DefaultHttpRequest)
-                ((DefaultHttpContext)HttpContext).Request).Host.ToString();
+                ((DefaultHttpContext) HttpContext).Request).Host.ToString();
 
         /// <summary>
         ///     请求路径
         /// </summary>
         public static string Path =>
             ((DefaultHttpRequest)
-                ((DefaultHttpContext)HttpContext).Request).Path;
+                ((DefaultHttpContext) HttpContext).Request).Path;
 
         /// <summary>
         ///     结构，比如http或https
         /// </summary>
-        public static string Scheme => ((DefaultHttpRequest)Request).Scheme;
+        public static string Scheme => ((DefaultHttpRequest) Request).Scheme;
 
         /// <summary>
         ///     全域名比如：http://www.5ug.com/ http://localhost:9012
@@ -461,16 +473,13 @@ namespace Alabo.Helpers {
         /// <summary>
         ///     获取Web客户端主机名
         /// </summary>
-        private static string GetClientHostName() {
+        private static string GetClientHostName()
+        {
             var address = GetRemoteAddress();
-            if (string.IsNullOrWhiteSpace(address)) {
-                return Dns.GetHostName();
-            }
+            if (string.IsNullOrWhiteSpace(address)) return Dns.GetHostName();
 
             var result = Dns.GetHostEntry(IPAddress.Parse(address)).HostName;
-            if (result == "localhost.localdomain") {
-                result = Dns.GetHostName();
-            }
+            if (result == "localhost.localdomain") result = Dns.GetHostName();
 
             return result;
         }
@@ -478,7 +487,8 @@ namespace Alabo.Helpers {
         /// <summary>
         ///     获取远程地址
         /// </summary>
-        private static string GetRemoteAddress() {
+        private static string GetRemoteAddress()
+        {
             return HttpContext?.Request?.Headers["HTTP_X_FORWARDED_FOR"] ??
                    HttpContext?.Request?.Headers["REMOTE_ADDR"];
         }
@@ -492,7 +502,8 @@ namespace Alabo.Helpers {
         /// </summary>
         /// <param name="url">url</param>
         /// <param name="isUpper">编码字符是否转成大写,范例,"http://"转成"http%3A%2F%2F"</param>
-        public static string UrlEncode(string url, bool isUpper = false) {
+        public static string UrlEncode(string url, bool isUpper = false)
+        {
             return UrlEncode(url, Encoding.UTF8, isUpper);
         }
 
@@ -502,7 +513,8 @@ namespace Alabo.Helpers {
         /// <param name="url">url</param>
         /// <param name="encoding">字符编码</param>
         /// <param name="isUpper">编码字符是否转成大写,范例,"http://"转成"http%3A%2F%2F"</param>
-        public static string UrlEncode(string url, string encoding, bool isUpper = false) {
+        public static string UrlEncode(string url, string encoding, bool isUpper = false)
+        {
             encoding = string.IsNullOrWhiteSpace(encoding) ? "UTF-8" : encoding;
             return UrlEncode(url, Encoding.GetEncoding(encoding), isUpper);
         }
@@ -513,11 +525,10 @@ namespace Alabo.Helpers {
         /// <param name="url">url</param>
         /// <param name="encoding">字符编码</param>
         /// <param name="isUpper">编码字符是否转成大写,范例,"http://"转成"http%3A%2F%2F"</param>
-        public static string UrlEncode(string url, Encoding encoding, bool isUpper = false) {
+        public static string UrlEncode(string url, Encoding encoding, bool isUpper = false)
+        {
             var result = HttpUtility.UrlEncode(url, encoding);
-            if (isUpper == false) {
-                return result;
-            }
+            if (isUpper == false) return result;
 
             return GetUpperEncode(result);
         }
@@ -525,18 +536,16 @@ namespace Alabo.Helpers {
         /// <summary>
         ///     获取大写编码字符串
         /// </summary>
-        private static string GetUpperEncode(string encode) {
+        private static string GetUpperEncode(string encode)
+        {
             var result = new StringBuilder();
             var index = int.MinValue;
-            for (var i = 0; i < encode.Length; i++) {
+            for (var i = 0; i < encode.Length; i++)
+            {
                 var character = encode[i].ToString();
-                if (character == "%") {
-                    index = i;
-                }
+                if (character == "%") index = i;
 
-                if (i - index == 1 || i - index == 2) {
-                    character = character.ToUpper();
-                }
+                if (i - index == 1 || i - index == 2) character = character.ToUpper();
 
                 result.Append(character);
             }
@@ -552,7 +561,8 @@ namespace Alabo.Helpers {
         ///     Url解码
         /// </summary>
         /// <param name="url">url</param>
-        public static string UrlDecode(string url) {
+        public static string UrlDecode(string url)
+        {
             return HttpUtility.UrlDecode(url);
         }
 
@@ -561,7 +571,8 @@ namespace Alabo.Helpers {
         /// </summary>
         /// <param name="url">url</param>
         /// <param name="encoding">字符编码</param>
-        public static string UrlDecode(string url, Encoding encoding) {
+        public static string UrlDecode(string url, Encoding encoding)
+        {
             return HttpUtility.UrlDecode(url, encoding);
         }
 

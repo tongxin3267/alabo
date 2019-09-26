@@ -8,15 +8,19 @@ using Alabo.Extensions;
 using Alabo.Industry.Shop.Categories.Domain.Entities;
 using Alabo.Industry.Shop.Categories.Domain.Repositories;
 
-namespace Alabo.Industry.Shop.Categories.Domain.Services {
+namespace Alabo.Industry.Shop.Categories.Domain.Services
+{
+    public class CategoryPropertyValueService : ServiceBase<CategoryPropertyValue, Guid>, ICategoryPropertyValueService
+    {
+        public CategoryPropertyValueService(IUnitOfWork unitOfWork, IRepository<CategoryPropertyValue, Guid> repository)
+            : base(unitOfWork, repository)
+        {
+        }
 
-    public class CategoryPropertyValueService : ServiceBase<CategoryPropertyValue, Guid>, ICategoryPropertyValueService {
-
-        public CategoryPropertyValue GetGuidCategoryPropertyValue(string Guid) {
+        public CategoryPropertyValue GetGuidCategoryPropertyValue(string Guid)
+        {
             var value = Resolve<ICategoryPropertyValueService>().GetSingle(r => r.Id == Guid.ToGuid());
-            if (value != null) {
-                return value;
-            }
+            if (value != null) return value;
 
             return null;
         }
@@ -25,7 +29,8 @@ namespace Alabo.Industry.Shop.Categories.Domain.Services {
         ///     根据 ProductSku 的 PropertyJson 获取对于的属性
         /// </summary>
         /// <param name="ListPropertyId"></param>
-        public IEnumerable<CategoryPropertyValue> GetCategoryPropertyValueList(List<Guid> ListPropertyId) {
+        public IEnumerable<CategoryPropertyValue> GetCategoryPropertyValueList(List<Guid> ListPropertyId)
+        {
             return Resolve<ICategoryPropertyValueService>().GetList(w => ListPropertyId.Contains(w.Id));
         }
 
@@ -33,16 +38,14 @@ namespace Alabo.Industry.Shop.Categories.Domain.Services {
         ///     根据商品的GUID 获取 属性值
         /// </summary>
         /// <param name="ProductGuid"></param>
-        public IEnumerable<CategoryPropertyValue> GetProductGuidList(Guid ProductGuid) {
+        public IEnumerable<CategoryPropertyValue> GetProductGuidList(Guid ProductGuid)
+        {
             var crQuery = Repository<ICategoryPropertyRepository>().GetList();
             var listId = (from cr in crQuery
-                          where cr.CategoryId == ProductGuid
-                          select cr.Id).ToList();
+                where cr.CategoryId == ProductGuid
+                select cr.Id).ToList();
 
             return Resolve<ICategoryPropertyValueService>().GetList(w => listId.Contains(w.PropertyId));
-        }
-
-        public CategoryPropertyValueService(IUnitOfWork unitOfWork, IRepository<CategoryPropertyValue, Guid> repository) : base(unitOfWork, repository) {
         }
     }
 }

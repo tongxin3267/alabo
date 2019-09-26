@@ -74,9 +74,7 @@ namespace Alabo.Datas.Queries.Criterias
         /// </summary>
         private void Adjust(TValue? min, TValue? max)
         {
-            if (IsMinGreaterMax(min, max) == false) {
-                return;
-            }
+            if (IsMinGreaterMax(min, max) == false) return;
 
             _min = max;
             _max = min;
@@ -94,9 +92,7 @@ namespace Alabo.Datas.Queries.Criterias
         /// </summary>
         private void CreateLeftExpression()
         {
-            if (_min == null) {
-                return;
-            }
+            if (_min == null) return;
 
             _builder.Append(_propertyExpression, CreateLeftOperator(_boundary), GetMinValue());
         }
@@ -132,9 +128,7 @@ namespace Alabo.Datas.Queries.Criterias
         /// </summary>
         private void CreateRightExpression()
         {
-            if (_max == null) {
-                return;
-            }
+            if (_max == null) return;
 
             _builder.Append(_propertyExpression, CreateRightOperator(_boundary), GetMaxValue());
         }

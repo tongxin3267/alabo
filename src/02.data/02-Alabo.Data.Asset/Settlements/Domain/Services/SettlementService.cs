@@ -1,18 +1,15 @@
-using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
+using Alabo.App.Asset.Settlements.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
-using Alabo.App.Asset.Settlements.Domain.Entities;
+using Alabo.Domains.Services;
 
-namespace Alabo.App.Asset.Settlements.Domain.Services {
-
-    public class SettlementService : ServiceBase<Settlement, long>, ISettlementService {
-
-        public SettlementService(IUnitOfWork unitOfWork, IRepository<Settlement, long> repository) : base(unitOfWork, repository) {
+namespace Alabo.App.Asset.Settlements.Domain.Services
+{
+    public class SettlementService : ServiceBase<Settlement, long>, ISettlementService
+    {
+        public SettlementService(IUnitOfWork unitOfWork, IRepository<Settlement, long> repository) : base(unitOfWork,
+            repository)
+        {
         }
     }
 }

@@ -1,7 +1,7 @@
 using Alabo.Data.Things.Orders.Domain.Services;
-using Xunit;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
+using Xunit;
 
 namespace Alabo.Test.Core.Tasks.Domain.Services
 {

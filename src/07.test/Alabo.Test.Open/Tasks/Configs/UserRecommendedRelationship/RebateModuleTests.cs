@@ -1,17 +1,18 @@
 using Alabo.App.Share.OpenTasks.Configs.UserRecommendedRelationship;
 using Alabo.App.Share.TaskExecutes.Domain.Services;
-using Xunit;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Extensions;
+using Xunit;
 
-namespace Alabo.Test.Open.Tasks.Configs.UserRecommendedRelationship {
-
+namespace Alabo.Test.Open.Tasks.Configs.UserRecommendedRelationship
+{
     /// <summary>
     ///     请登录网站http://test.5ug.com 手动添加条相关的记录
     /// </summary>
-    public class RebateModuleTests : BaseShareTest {
-
-        public RebateModuleTests() {
+    public class RebateModuleTests : BaseShareTest
+    {
+        public RebateModuleTests()
+        {
             RegModuleConfigId = 316;
             ShopModuleConfigId = 317;
             ModuleType = typeof(RebateModule);
@@ -24,13 +25,14 @@ namespace Alabo.Test.Open.Tasks.Configs.UserRecommendedRelationship {
         //[InlineData("B001")]
         //[InlineData("B002")]
         [InlineData("admin")]
-        public void UserRegTest(string userName) {
+        public void UserRegTest(string userName)
+        {
             var user = Resolve<IUserService>().GetSingle(userName);
             var shareOrder = UserRegShareOrder(user);
             var beforeAccount = GetShareAccount(user.Id);
 
             TaskActuator.ExecuteTask(ModuleType, shareOrder,
-                new { ShareOrderId = shareOrder.Id, shareOrder.TriggerType, BaseFenRunAmount = shareOrder.Amount });
+                new {ShareOrderId = shareOrder.Id, shareOrder.TriggerType, BaseFenRunAmount = shareOrder.Amount});
 
             var afterAccount = GetShareAccount(user.Id);
             var ratios = Ratios(RegModuleConfigId);
@@ -43,13 +45,15 @@ namespace Alabo.Test.Open.Tasks.Configs.UserRecommendedRelationship {
         [Theory]
         //[InlineData("B003")]
         [InlineData("admin")]
-        public void ShopOrderTest(string userName) {
+        public void ShopOrderTest(string userName)
+        {
             var user = Resolve<IUserService>().GetSingle(userName);
             var orderResult = GetShopOrder(user);
             var beforeAccount = GetShareAccount(user.Id);
 
             TaskActuator.ExecuteTask(ModuleType, orderResult.Item1,
-                new {
+                new
+                {
                     ShareOrderId = orderResult.Item1.Id, orderResult.Item1.TriggerType, OrderId = orderResult.Item2.Id
                 });
 
@@ -63,7 +67,8 @@ namespace Alabo.Test.Open.Tasks.Configs.UserRecommendedRelationship {
         }
 
         [Fact]
-        public void ModuleAttributeTest() {
+        public void ModuleAttributeTest()
+        {
             var moduleAttribute = Resolve<ITaskModuleConfigService>().GetModuleAttribute(ModuleType);
             Assert.NotNull(moduleAttribute);
             Assert.False(moduleAttribute.Id.IsGuidNullOrEmpty());

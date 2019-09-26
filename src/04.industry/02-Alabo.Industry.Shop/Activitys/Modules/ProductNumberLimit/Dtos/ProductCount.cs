@@ -1,7 +1,7 @@
 ﻿namespace Alabo.Industry.Shop.Activitys.Modules.ProductNumberLimit.Dtos
 {
     /// <summary>
-    /// ProductCount
+    ///     ProductCount
     /// </summary>
     public class ProductCount
     {

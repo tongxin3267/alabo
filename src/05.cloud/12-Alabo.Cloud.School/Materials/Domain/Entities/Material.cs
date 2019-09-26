@@ -9,23 +9,25 @@ using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Cloud.School.Materials.Domain.Entities {
-
+namespace Alabo.Cloud.School.Materials.Domain.Entities
+{
     /// <summary>
     ///     推广素材
     /// </summary>
-    [BsonIgnoreExtraElements][Table("PromotionalMaterial_Material")]
+    [BsonIgnoreExtraElements]
+    [Table("PromotionalMaterial_Material")]
     [ClassProperty(Name = "素材", Description = "素材", Icon = IconFlaticon.route,
         SideBarType = SideBarType.PromotionalMaterialSideBar)]
-    public class Material : AggregateMongodbRoot<Material> {
-        
+    public class Material : AggregateMongodbRoot<Material>
+    {
         /// <summary>
         ///     状态
         /// </summary>
         [Display(Name = "状态")]
         [Required(ErrorMessage = "状态不能为空")]
         [Field(ControlsType = ControlsType.DropdownList, DataSource = " Alabo.Domains.Enums.Status", Width = "100",
-            IsShowAdvancedSerach = true, IsShowBaseSerach = true, ListShow = true, SortOrder = 5, GroupTabId = 2, IsTabSearch = true)]
+            IsShowAdvancedSerach = true, IsShowBaseSerach = true, ListShow = true, SortOrder = 5, GroupTabId = 2,
+            IsTabSearch = true)]
         public Status Status { get; set; } = Status.Normal;
 
         /// <summary>
@@ -33,12 +35,14 @@ namespace Alabo.Cloud.School.Materials.Domain.Entities {
         /// </summary>
         [Display(Name = "标题")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        [Field(ControlsType = ControlsType.TextBox, IsMain = true, ListShow = true, IsShowBaseSerach = true, EditShow = true, Link = "/Admin/Material/Edit?id=[[Id]]", GroupTabId = 1, SortOrder = 0)]
+        [Field(ControlsType = ControlsType.TextBox, IsMain = true, ListShow = true, IsShowBaseSerach = true,
+            EditShow = true, Link = "/Admin/Material/Edit?id=[[Id]]", GroupTabId = 1, SortOrder = 0)]
         public string Name { get; set; }
 
         /// <summary>
         /// </summary>
-        [Field(ControlsType = ControlsType.AlbumUploder, SortOrder = 1, IsImagePreview = true, ListShow = true,EditShow = true, Width = "15%")]
+        [Field(ControlsType = ControlsType.AlbumUploder, SortOrder = 1, IsImagePreview = true, ListShow = true,
+            EditShow = true, Width = "15%")]
         [Display(Name = "图片")]
         public string Image { get; set; }
 

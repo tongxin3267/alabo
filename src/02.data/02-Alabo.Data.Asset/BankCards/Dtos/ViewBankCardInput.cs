@@ -5,9 +5,10 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
 
-namespace Alabo.App.Asset.BankCards.Dtos {
-
-    public class ViewBankCardInput : ApiInputDto {
+namespace Alabo.App.Asset.BankCards.Dtos
+{
+    public class ViewBankCardInput : ApiInputDto
+    {
         public long UserId { get; set; }
 
         public ObjectId Id { get; set; }
@@ -22,7 +23,7 @@ namespace Alabo.App.Asset.BankCards.Dtos {
         public string Name { get; set; }
 
         /// <summary>
-        /// 银行类型
+        ///     银行类型
         /// </summary>
         [Display(Name = "银行类型")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]

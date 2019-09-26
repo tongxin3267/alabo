@@ -23,9 +23,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <param name="name">名称</param>
         public NameItem(string name)
         {
-            if (string.IsNullOrWhiteSpace(name)) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(name)) return;
 
             var list = name.Split('.');
             if (list.Length == 1)
@@ -67,9 +65,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         public string ToSql(IDialect dialect, string prefix)
         {
             Prefix = GetPrefix(prefix);
-            if (string.IsNullOrWhiteSpace(Prefix)) {
-                return dialect.SafeName(Name);
-            }
+            if (string.IsNullOrWhiteSpace(Prefix)) return dialect.SafeName(Name);
 
             return $"{dialect.SafeName(Prefix)}.{dialect.SafeName(Name)}";
         }
@@ -79,9 +75,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// </summary>
         private string GetPrefix(string prefix)
         {
-            if (string.IsNullOrWhiteSpace(Prefix)) {
-                return prefix;
-            }
+            if (string.IsNullOrWhiteSpace(Prefix)) return prefix;
 
             return Prefix;
         }

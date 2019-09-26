@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
@@ -8,29 +7,23 @@ using Alabo.Industry.Shop.Products.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Industry.Shop.Activitys.Modules.TimeLimitBuy.Controller {
-
+namespace Alabo.Industry.Shop.Activitys.Modules.TimeLimitBuy.Controller
+{
     /// <summary>
-    /// 预售API
+    ///     预售API
     /// </summary>
-    [ApiExceptionFilter, Route("Api/TimeLimitBuy/[action]")]
-    public class TimeLimitBuyApiController : ApiBaseController {
-
+    [ApiExceptionFilter]
+    [Route("Api/TimeLimitBuy/[action]")]
+    public class TimeLimitBuyApiController : ApiBaseController
+    {
         /// <summary>
-        /// ctor
-        /// </summary>
-        public TimeLimitBuyApiController() : base()
-        {
-        }
-
-        /// <summary>
-        /// PreSellsList
+        ///     PreSellsList
         /// </summary>
         /// <param name="productId"></param>
         /// <returns></returns>
-        public ApiResult<List<String>> T1([FromQuery] long productId)
+        public ApiResult<List<string>> T1([FromQuery] long productId)
         {
-            return ApiResult.Success(new List<String>() { "T1", "T2" });
+            return ApiResult.Success(new List<string> {"T1", "T2"});
         }
 
         /// <summary>

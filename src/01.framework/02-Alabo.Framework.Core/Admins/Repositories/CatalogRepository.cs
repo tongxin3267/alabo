@@ -2,29 +2,33 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Alabo.Framework.Core.Reflections.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Repositories.Mongo.Context;
 using Alabo.Extensions;
+using Alabo.Framework.Core.Reflections.Services;
 using Alabo.Helpers;
+using Alabo.Users.Entities;
 
-namespace Alabo.Framework.Core.Admins.Repositories {
-
-    public class CatalogRepository : RepositoryEfCore<Users.Entities.User, long>, ICatalogRepository {
-
-        public CatalogRepository(IUnitOfWork unitOfWork) : base(unitOfWork) {
+namespace Alabo.Framework.Core.Admins.Repositories
+{
+    public class CatalogRepository : RepositoryEfCore<User, long>, ICatalogRepository
+    {
+        public CatalogRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
         }
 
         /// <summary>
         ///     更新数据库脚本
         ///     https://www.cnblogs.com/jes_shaw/archive/2013/05/14/3077215.html
         /// </summary>
-        public void UpdateDataBase() {
-            var sqlList = new List<string> {
+        public void UpdateDataBase()
+        {
+            var sqlList = new List<string>
+            {
                 //// 2019-03-14 (zhangzulian)
-                "alter table Shop_Product add  DeliveryTemplateId  nvarchar(255)",
+                "alter table Shop_Product add  DeliveryTemplateId  nvarchar(255)"
                 //"update Shop_Product set DeliveryTemplateId='' where DeliveryTemplateId is null", // 新增钱包地址
             };
             ExecuteSql(sqlList);
@@ -32,7 +36,8 @@ namespace Alabo.Framework.Core.Admins.Repositories {
 
         #region 清空表单
 
-        public void TruncateTable() {
+        public void TruncateTable()
+        {
             // ZKCloud项目
             DropMongoDbTable("Core_Logs");
             DropMongoDbTable("Core_Table");
@@ -82,7 +87,7 @@ namespace Alabo.Framework.Core.Admins.Repositories {
                 // 财务相关表
                 "truncate table Asset_Account",
                 "truncate table Asset_Bill",
-                      "truncate table Asset_Pay",
+                "truncate table Asset_Pay",
                 "truncate table Asset_Trade",
 
                 //绩效相关表
@@ -106,7 +111,7 @@ namespace Alabo.Framework.Core.Admins.Repositories {
                 "truncate table Basic_MessageQueue",
 
                 //客户相关
-                 "truncate table Insurance_Order",
+                "truncate table Insurance_Order"
             };
 
             ExecuteSql(sqlList);
@@ -119,21 +124,22 @@ namespace Alabo.Framework.Core.Admins.Repositories {
         /// <summary>
         ///     获取所有的Sql表实体
         /// </summary>
-
-        public List<string> GetSqlTable() {
+        public List<string> GetSqlTable()
+        {
             var entityNames = Ioc.Resolve<ITypeService>().GetAllEntityType().Select(r => r.Name).ToList();
             var list = new List<string>();
             var sql = "select name from sys.tables";
             using (var reader =
-                RepositoryContext.ExecuteDataReader(sql)) {
-                while (reader.Read()) {
+                RepositoryContext.ExecuteDataReader(sql))
+            {
+                while (reader.Read())
+                {
                     var tableName = reader["name"].ToStr();
                     var arrarys = tableName.SplitString("_").ToList();
-                    if (arrarys.Count > 1) {
+                    if (arrarys.Count > 1)
+                    {
                         var entity = arrarys[1];
-                        if (entityNames.Contains(entity)) {
-                            list.Add(tableName);
-                        }
+                        if (entityNames.Contains(entity)) list.Add(tableName);
                     }
                 }
             }
@@ -145,7 +151,8 @@ namespace Alabo.Framework.Core.Admins.Repositories {
 
         #region 过期的Sql脚本
 
-        private void OldSql() {
+        private void OldSql()
+        {
             // 过期的Sql脚本
             var sqlList = new List<string>
             {
@@ -222,6 +229,27 @@ namespace Alabo.Framework.Core.Admins.Repositories {
 
         #endregion 过期的Sql脚本
 
+        #region others
+
+        /// <summary>
+        ///     执行脚本
+        /// </summary>
+        /// <param name="sqlList"></param>
+        private void ExecuteSql(List<string> sqlList)
+        {
+            foreach (var item in sqlList)
+                try
+                {
+                    RepositoryContext.ExecuteNonQuery(item);
+                }
+                catch (Exception ex)
+                {
+                    Trace.WriteLine(ex.Message);
+                }
+        }
+
+        #endregion others
+
         #region 设置索引、主键、唯一等
 
         /// <summary>
@@ -229,7 +257,8 @@ namespace Alabo.Framework.Core.Admins.Repositories {
         /// </summary>
         /// <param name="tableName"></param>
         /// <param name="column"></param>
-        private string SetNonclustered(string tableName, string column) {
+        private string SetNonclustered(string tableName, string column)
+        {
             var sql =
                 $"CREATE NONCLUSTERED INDEX [NonClusteredIndex-{column}] ON [dbo].[{tableName}](	[{column}] ASC)WITH (PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]";
             return sql;
@@ -240,7 +269,8 @@ namespace Alabo.Framework.Core.Admins.Repositories {
         /// </summary>
         /// <param name="tableName"></param>
         /// <param name="column"></param>
-        private string SetUnique(string tableName, string column) {
+        private string SetUnique(string tableName, string column)
+        {
             var sql =
                 $"CREATE unique  INDEX [uniqueIndex-{column}] ON [dbo].[{tableName}](	[{column}] ASC)WITH (PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]";
             return sql;
@@ -251,42 +281,29 @@ namespace Alabo.Framework.Core.Admins.Repositories {
         /// </summary>
         /// <param name="tableName"></param>
         /// <param name="key"></param>
-        private string SetPrimaryKey(string tableName, string key = "Id") {
+        private string SetPrimaryKey(string tableName, string key = "Id")
+        {
             var sql =
                 $"ALTER TABLE [dbo].[{tableName}] ADD  CONSTRAINT [PK_{tableName}] PRIMARY KEY CLUSTERED ([{key}] ASC)";
             return sql;
         }
 
         /// <summary>
-        /// 清空mongodb表
+        ///     清空mongodb表
         /// </summary>
         /// <param name="tableName"></param>
-        private void DropMongoDbTable(string tableName) {
-            try {
+        private void DropMongoDbTable(string tableName)
+        {
+            try
+            {
                 MongoRepositoryConnection.DropTable(tableName);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 Trace.WriteLine(ex.Message);
             }
         }
 
         #endregion 设置索引、主键、唯一等
-
-        #region others
-
-        /// <summary>
-        /// 执行脚本
-        /// </summary>
-        /// <param name="sqlList"></param>
-        private void ExecuteSql(List<string> sqlList) {
-            foreach (var item in sqlList) {
-                try {
-                    RepositoryContext.ExecuteNonQuery(item);
-                } catch (Exception ex) {
-                    Trace.WriteLine(ex.Message);
-                }
-            }
-        }
-
-        #endregion others
     }
 }

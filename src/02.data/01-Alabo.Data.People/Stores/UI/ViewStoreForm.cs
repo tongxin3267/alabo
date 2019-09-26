@@ -13,15 +13,15 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.Industry.Shop.Deliveries.ViewModels.UI {
-
+namespace Alabo.Industry.Shop.Deliveries.ViewModels.UI
+{
     /// <summary>
     /// </summary>
     /// <seealso cref="BaseViewModel" />
     [ClassProperty(Name = "店铺管理", Icon = "la la-users", Description = "店铺管理",
         SideBarType = SideBarType.SupplierSideBar)]
-    public class ViewStoreForm : UIBase, IAutoForm {
-
+    public class ViewStoreForm : UIBase, IAutoForm
+    {
         /// <summary>
         ///     Gets or sets Id标识
         /// </summary>
@@ -157,18 +157,20 @@ namespace Alabo.Industry.Shop.Deliveries.ViewModels.UI {
         public DateTime CreateTime { get; set; }
 
         /// <summary>
-        /// 转换成Id
+        ///     转换成Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
             var viewStoreId = ToId<long>(id);
             var viewStore = Resolve<IShopStoreService>().GetView(viewStoreId);
             var model = AutoMapping.SetValue<ViewStoreForm>(viewStore);
             return ToAutoForm(model);
         }
 
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
             var viewStoreView = AutoMapping.SetValue<ViewStore>(model);
             var result = Resolve<IShopStoreService>().AddOrUpdate(viewStoreView);
             return result;

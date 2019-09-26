@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using Alabo.Domains.Services;
 using Alabo.Web.ViewFeatures;
 
-namespace Alabo.Framework.Core.Reflections.Services {
-
+namespace Alabo.Framework.Core.Reflections.Services
+{
     /// <summary>
     ///     类反射相关操作
     /// </summary>
-    public interface IClassService : IService {
-
+    public interface IClassService : IService
+    {
         /// <summary>
         ///     获取类的特性，包括字段属性，字段特性等
         /// </summary>

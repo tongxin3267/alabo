@@ -14,53 +14,48 @@ namespace Alabo.Cloud.Shop.SecondBuy.Controllers
     [Route("Api/SecondBuyOrder/[action]")]
     public class ApiSecondBuyOrderController : ApiBaseController<SecondBuyOrder, ObjectId>
     {
-
-        public ApiSecondBuyOrderController(): base()
+        public ApiSecondBuyOrderController()
         {
-
             BaseService = Resolve<ISecondBuyOrderService>();
         }
 
         /// <summary>
-        ///下单
+        ///     下单
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public ApiResult Buy([FromBody]SecondBuyOrder model) {
-            if (!this.IsFormValid()) {
+        public ApiResult Buy([FromBody] SecondBuyOrder model)
+        {
+            if (!this.IsFormValid())
                 return ApiResult.Failure(this.FormInvalidReason(),
                     MessageCodes.ParameterValidationFailure);
-            }
             var result = Resolve<ISecondBuyOrderService>().Buy(model);
             return ToResult(result);
         }
 
         /// <summary>
-        /// 最近购买
+        ///     最近购买
         /// </summary>
         /// <param name="productId"></param>
         /// <returns></returns>
         [HttpGet]
-        public ApiResult<List<string>> BuyList([FromQuery]long productId) {
-           
+        public ApiResult<List<string>> BuyList([FromQuery] long productId)
+        {
             var result = Resolve<ISecondBuyOrderService>().BuyList(productId);
             return ApiResult.Success(result);
-  
         }
 
         /// <summary>
-        /// 最近购买
+        ///     最近购买
         /// </summary>
         /// <param name="productId"></param>
         /// <returns></returns>
         [HttpGet]
-        public ApiResult<List<string>> BuyListRcently([FromQuery]long productId) {
-
+        public ApiResult<List<string>> BuyListRcently([FromQuery] long productId)
+        {
             var result = Resolve<ISecondBuyOrderService>().BuyListRcently(productId);
             return ApiResult.Success(result);
-
         }
-
     }
 }

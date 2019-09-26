@@ -9,15 +9,15 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Asset.Transfers.Dtos {
-
+namespace Alabo.App.Asset.Transfers.Dtos
+{
     /// <summary>
     ///     转账管理
     /// </summary>
     [ClassProperty(Name = "转账管理", Icon = "fa fa-puzzle-piece", Description = "转账管理",
         SideBarType = SideBarType.TransferSideBar)]
-    public class TransferOutput : EntityDto {
-
+    public class TransferOutput : EntityDto
+    {
         /// <summary>
         ///     id
         /// </summary>
@@ -105,7 +105,8 @@ namespace Alabo.App.Asset.Transfers.Dtos {
         /// <summary>
         ///     视图s the links.
         /// </summary>
-        public IEnumerable<ViewLink> ViewLinks() {
+        public IEnumerable<ViewLink> ViewLinks()
+        {
             var quickLinks = new List<ViewLink>
             {
                 new ViewLink("编辑", "/Admin/Transfer/Edit?Id=[[Id]]", Icons.Edit, LinkType.ColumnLink)

@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos {
-
+namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos
+{
     /// <summary>
     ///     Class StoreProductSkuDtos.
     /// </summary>
-    public class StoreProductSkuDtos {
-
+    public class StoreProductSkuDtos
+    {
         /// <summary>
         ///     Gets or sets the store ids.
         /// </summary>

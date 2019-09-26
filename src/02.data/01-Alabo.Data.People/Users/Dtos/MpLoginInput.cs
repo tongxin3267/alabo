@@ -3,9 +3,10 @@ using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Data.People.Users.Dtos {
-
-    public class MpLoginInput {
+namespace Alabo.Data.People.Users.Dtos
+{
+    public class MpLoginInput
+    {
         public string code { get; set; }
 
         /// <summary>用户昵称</summary>
@@ -24,7 +25,7 @@ namespace Alabo.Data.People.Users.Dtos {
         public string country { get; set; }
 
         /// <summary>
-        /// 用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640*640正方形头像），用户没有头像时该项为空
+        ///     用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640*640正方形头像），用户没有头像时该项为空
         /// </summary>
         public string avatarUrl { get; set; }
     }
@@ -32,8 +33,8 @@ namespace Alabo.Data.People.Users.Dtos {
     /// <summary>
     ///     登录模块
     /// </summary>
-    public class MpBindInput {
-
+    public class MpBindInput
+    {
         /// <summary>
         ///     Gets or sets the open identifier.
         /// </summary>

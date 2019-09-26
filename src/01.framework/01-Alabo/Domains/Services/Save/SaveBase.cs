@@ -24,9 +24,7 @@ namespace Alabo.Domains.Services.Save
         public bool AddOrUpdate(TEntity model, Expression<Func<TEntity, bool>> predicate)
         {
             var result = false;
-            if (model == null) {
-                throw new ArgumentNullException(nameof(model));
-            }
+            if (model == null) throw new ArgumentNullException(nameof(model));
 
             var find = GetByIdNoTracking(predicate);
             if (find == null)
@@ -43,19 +41,16 @@ namespace Alabo.Domains.Services.Save
                 {
                     var proeprties = model.GetType().GetProperties();
                     var dest = find.GetType().GetProperties();
-                    foreach (var item in proeprties) {
-                        foreach (var d in dest)
+                    foreach (var item in proeprties)
+                    foreach (var d in dest)
                     {
-                        if (!d.CanWrite) {
-                                continue;
-                            }
+                        if (!d.CanWrite) continue;
 
-                            if (d.Name == item.Name)
+                        if (d.Name == item.Name)
                         {
                             d.SetValue(find, item.GetValue(model));
                             break;
                         }
-                    }
                     }
 
                     result = Store.UpdateSingle(model);
@@ -73,13 +68,9 @@ namespace Alabo.Domains.Services.Save
         public bool AddOrUpdate(TEntity model, bool predicate)
         {
             var result = false;
-            if (model == null) {
-                throw new ArgumentNullException(nameof(model));
-            }
+            if (model == null) throw new ArgumentNullException(nameof(model));
 
-            if (!predicate) {
-                result = Add(model);
-            }
+            if (!predicate) result = Add(model);
 
             result = Store.UpdateSingle(model);
             return result;

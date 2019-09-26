@@ -1,11 +1,10 @@
-using System;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
 using Alabo.Cloud.Contracts.Domain.Entities;
-using Alabo.Domains.Entities;
+using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.Cloud.Contracts.Domain.Services {
-	public interface IContractRecordService : IService<ContractRecord, ObjectId>  {
-	}
-	}
+namespace Alabo.Cloud.Contracts.Domain.Services
+{
+    public interface IContractRecordService : IService<ContractRecord, ObjectId>
+    {
+    }
+}

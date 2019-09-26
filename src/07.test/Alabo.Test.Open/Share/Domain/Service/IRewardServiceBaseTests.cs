@@ -3,16 +3,18 @@ using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
 using Xunit;
 
-namespace Alabo.Test.Open.Share.Domain.Service {
-
-    public class IRewardServiceBaseTests : CoreTest {
-
+namespace Alabo.Test.Open.Share.Domain.Service
+{
+    public class IRewardServiceBaseTests : CoreTest
+    {
         [Theory]
         [InlineData(-1)]
         [TestMethod("GetSingleFromCache_Test")]
-        public void GetSingleFromCache_Test_ExpectedBehavior(long entityId) {
+        public void GetSingleFromCache_Test_ExpectedBehavior(long entityId)
+        {
             var model = Resolve<IRewardService>().GetRandom(entityId);
-            if (model != null) {
+            if (model != null)
+            {
                 var newModel = Resolve<IRewardService>().GetSingleFromCache(model.Id);
                 Assert.NotNull(newModel);
                 Assert.Equal(newModel.Id, model.Id);
@@ -21,7 +23,8 @@ namespace Alabo.Test.Open.Share.Domain.Service {
 
         [Fact]
         [TestMethod("Count_Expected_Test")]
-        public void Count_ExpectedBehavior() {
+        public void Count_ExpectedBehavior()
+        {
             var count = Resolve<IRewardService>().Count();
             Assert.True(count >= 0);
 

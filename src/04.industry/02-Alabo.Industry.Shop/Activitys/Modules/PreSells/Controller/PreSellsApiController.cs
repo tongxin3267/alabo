@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
@@ -11,26 +10,20 @@ using ZKCloud.Open.ApiBase.Models;
 namespace Alabo.Industry.Shop.Activitys.Modules.PreSells.Controller
 {
     /// <summary>
-    /// 预售API
+    ///     预售API
     /// </summary>
-    [ApiExceptionFilter, Route("Api/PreSells/[action]")]
+    [ApiExceptionFilter]
+    [Route("Api/PreSells/[action]")]
     public class PreSellsApiController : ApiBaseController
     {
         /// <summary>
-        /// ctor
-        /// </summary>
-        public PreSellsApiController() : base()
-        {
-        }
-
-        /// <summary>
-        /// PreSellsList
+        ///     PreSellsList
         /// </summary>
         /// <param name="productId"></param>
         /// <returns></returns>
-        public ApiResult<List<String>> PreSellsList([FromQuery] long productId)
+        public ApiResult<List<string>> PreSellsList([FromQuery] long productId)
         {
-            return ApiResult.Success(new List<String>() { "T1", "T2" });
+            return ApiResult.Success(new List<string> {"T1", "T2"});
         }
 
         /// <summary>

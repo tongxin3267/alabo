@@ -9,17 +9,18 @@ using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoTables;
+using Alabo.Users.Entities;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Asset.Accounts.Dtos {
-
+namespace Alabo.App.Asset.Accounts.Dtos
+{
     [BsonIgnoreExtraElements]
     [ClassProperty(Name = "区块链钱包", Icon = "flaticon-route", SideBarType = SideBarType.FinanceBlockChainSideBar)]
-    public class ViewBlockChain : UIBase, IAutoTable<ViewBlockChain> {
-
+    public class ViewBlockChain : UIBase, IAutoTable<ViewBlockChain>
+    {
         /// <summary>
         ///     Gets or sets Id标识
         /// </summary>
@@ -66,7 +67,8 @@ namespace Alabo.App.Asset.Accounts.Dtos {
         /// </summary>
         [Display(Name = "金额")]
         [Field(ControlsType = ControlsType.TextBox, ListShow = true, TableDispalyStyle = TableDispalyStyle.Code,
-            IsShowBaseSerach = true, IsShowAdvancedSerach = true, IsMain = true, GroupTabId = 1, Width = "80", SortOrder = 10)]
+            IsShowBaseSerach = true, IsShowAdvancedSerach = true, IsMain = true, GroupTabId = 1, Width = "80",
+            SortOrder = 10)]
         public decimal Amount { get; set; }
 
         /// <summary>
@@ -88,7 +90,7 @@ namespace Alabo.App.Asset.Accounts.Dtos {
         /// <summary>
         ///     交易用户
         /// </summary>
-        public Users.Entities.User User { get; set; }
+        public User User { get; set; }
 
         /// <summary>
         ///     Gets or sets the money 类型 configuration.
@@ -96,7 +98,8 @@ namespace Alabo.App.Asset.Accounts.Dtos {
         [Display(Name = "操作类型")]
         public MoneyTypeConfig MoneyTypeConfig { get; set; }
 
-        public List<TableAction> Actions() {
+        public List<TableAction> Actions()
+        {
             var list = new List<TableAction>
             {
                 ToLinkAction("资产操作", "/Account/BlockChain")
@@ -104,13 +107,15 @@ namespace Alabo.App.Asset.Accounts.Dtos {
             return list;
         }
 
-        public PageResult<ViewBlockChain> PageTable(object query, AutoBaseModel autoModel) {
+        public PageResult<ViewBlockChain> PageTable(object query, AutoBaseModel autoModel)
+        {
             var model = Resolve<IAccountService>().GetBlockChainList(query);
             var result = ToPageResult(model);
             return result;
         }
 
-        public IEnumerable ViewLinks() {
+        public IEnumerable ViewLinks()
+        {
             var quickLinks = new List<ViewLink>
             {
                 new ViewLink("钱包操作", "/Admin/Account/Edit?Id=[[UserId]]", Icons.Edit, LinkType.ColumnLink)

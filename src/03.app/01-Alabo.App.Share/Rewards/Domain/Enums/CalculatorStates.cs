@@ -1,23 +1,21 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Share.Rewards.Domain.Enums {
-
+namespace Alabo.App.Share.Rewards.Domain.Enums
+{
     [ClassProperty(Name = "启用状态")]
-    public enum CalculatorStates {
-
+    public enum CalculatorStates
+    {
         /// <summary>
-        /// 启用
+        ///     启用
         /// </summary>
-        [Display(Name = "启用")]
-        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "启用")] [LabelCssClass(BadgeColorCalss.Success)]
         Q = 0,
 
         /// <summary>
-        /// 停用
+        ///     停用
         /// </summary>
-        [Display(Name = "停用")]
-        [LabelCssClass(BadgeColorCalss.Warning)]
-        T = 1,
+        [Display(Name = "停用")] [LabelCssClass(BadgeColorCalss.Warning)]
+        T = 1
     }
 }

@@ -11,24 +11,27 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Cloud.School.Materials.Controllers {
-
+namespace Alabo.Cloud.School.Materials.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/Material/[action]")]
-    public class ApiMaterialController : ApiBaseController<Material, ObjectId> {
-
-        public ApiMaterialController() : base() {
+    public class ApiMaterialController : ApiBaseController<Material, ObjectId>
+    {
+        public ApiMaterialController()
+        {
             BaseService = Resolve<IMaterialService>();
         }
 
         /// <summary>
-        /// 获取宣传材料列表
+        ///     获取宣传材料列表
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         [Display(Description = "获取宣传材料列表")]
-        public ApiResult<IList<Material>> List() {
-            try {
+        public ApiResult<IList<Material>> List()
+        {
+            try
+            {
                 var apiService = Resolve<IApiService>();
 
                 var ret = Resolve<IMaterialService>().GetList();
@@ -36,7 +39,9 @@ namespace Alabo.Cloud.School.Materials.Controllers {
                 ret.Foreach(material => material.Image = apiService.ApiImageUrl(material.Image));
 
                 return ApiResult.Success(ret);
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 return ApiResult.Failure<IList<Material>>(e.Message);
             }
         }

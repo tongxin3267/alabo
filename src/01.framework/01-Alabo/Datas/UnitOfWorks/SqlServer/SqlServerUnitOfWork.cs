@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Alabo.Datas.Ef.SqlServer;
+﻿using Alabo.Datas.Ef.SqlServer;
+using Microsoft.EntityFrameworkCore;
 
 namespace Alabo.Datas.UnitOfWorks.SqlServer
 {

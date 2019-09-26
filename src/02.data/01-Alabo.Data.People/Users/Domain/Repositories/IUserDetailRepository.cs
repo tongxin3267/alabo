@@ -3,10 +3,10 @@ using Alabo.Data.People.Users.Dtos;
 using Alabo.Domains.Repositories;
 using Alabo.Users.Entities;
 
-namespace Alabo.Data.People.Users.Domain.Repositories {
-
-    public interface IUserDetailRepository : IRepository<UserDetail, long> {
-
+namespace Alabo.Data.People.Users.Domain.Repositories
+{
+    public interface IUserDetailRepository : IRepository<UserDetail, long>
+    {
         UserDetail Add(UserDetail userDetail);
 
         /// <summary>

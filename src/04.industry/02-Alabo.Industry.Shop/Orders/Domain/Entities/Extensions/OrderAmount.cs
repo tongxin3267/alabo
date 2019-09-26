@@ -2,13 +2,11 @@
 
 namespace Alabo.Industry.Shop.Orders.Domain.Entities.Extensions
 {
-
     /// <summary>
     ///     订单价格数据
     /// </summary>
     public class OrderAmount
     {
-
         /// <summary>
         ///     商品总金额/商品总价值
         ///     商品总金额=所有商品订单价格相加
@@ -16,12 +14,12 @@ namespace Alabo.Industry.Shop.Orders.Domain.Entities.Extensions
         public decimal TotalProductAmount { get; set; } = 0;
 
         /// <summary>
-        /// 邮费金额(实际邮费)
+        ///     邮费金额(实际邮费)
         /// </summary>
         public decimal ExpressAmount { get; set; } = 0;
 
         /// <summary>
-        /// 邮费金额
+        ///     邮费金额
         /// </summary>
         public decimal CalculateExpressAmount { get; set; } = 0;
 
@@ -55,12 +53,12 @@ namespace Alabo.Industry.Shop.Orders.Domain.Entities.Extensions
         public decimal FeeAmount { get; set; }
 
         /// <summary>
-        /// 快递方式
+        ///     快递方式
         /// </summary>
         public ExpressType ExpressType { get; set; } = ExpressType.Express;
 
         /// <summary>
-        /// 运费说明
+        ///     运费说明
         /// </summary>
         public string ExpressDescription { get; set; }
     }

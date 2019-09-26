@@ -5,29 +5,29 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.Industry.Shop.Deliveries.Domain.Dtos;
+using Alabo.Industry.Shop.Products.Domain.Entities;
 using Alabo.Industry.Shop.Products.Dtos;
 using Alabo.Industry.Shop.Products.ViewModels;
 
 namespace Alabo.Industry.Shop.Products.Domain.Services
 {
-
-    public interface IProductService : IService<Entities.Product, long>
+    public interface IProductService : IService<Product, long>
     {
-
         /// <summary>
-        /// 获取产品数量
+        ///     获取产品数量
         /// </summary>
         /// <returns></returns>
         long GetProductCount();
 
         /// <summary>
-        ///  通过店铺获取产品数据
+        ///     通过店铺获取产品数据
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         long GetProductByStoreCount(long id);
+
         /// <summary>
-        /// get time limit buy products
+        ///     get time limit buy products
         /// </summary>
         List<TimeLimitBuyItem> GetTimeLimitBuyList();
 
@@ -37,27 +37,26 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         List<Relation> GetProductClassList();
 
         /// <summary>
-        ///
         /// </summary>
         /// <returns></returns>
         List<Relation> GetProductRelations();
 
         /// <summary>
-        /// 根据分类Id获取商品列表
+        ///     根据分类Id获取商品列表
         /// </summary>
         /// <param name="relationId"></param>
         /// <returns></returns>
-        List<Entities.Product> GetProductsByRelationId(long relationId);
+        List<Product> GetProductsByRelationId(long relationId);
 
         /// <summary>
-        /// 获取推荐商品
+        ///     获取推荐商品
         /// </summary>
         /// <param name="productId"></param>
         /// <returns></returns>
         IList<ProductItem> GetRecommendProduct(long productId);
 
         /// <summary>
-        /// 根据商品ID获取店铺信息
+        ///     根据商品ID获取店铺信息
         /// </summary>
         /// <param name="productId"></param>
         /// <returns></returns>
@@ -70,13 +69,11 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         ProductItemApiOutput GetProductItems(ProductApiInput productApiInput);
 
 
-
         /// <summary>
         ///     商品查询列表，次函数基本完成了商品列表的所有功能 异步
         /// </summary>
         /// <param name="productApiInput"></param>
         Task<ProductItemApiOutput> GetProductItemsAsync(ProductApiInput productApiInput);
-
 
 
         /// <summary>
@@ -85,7 +82,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         /// </summary>
         /// <param name="id">主键ID</param>
         /// <param name="userId"></param>
-        Entities.Product GetShow(long id, long userId);
+        Product GetShow(long id, long userId);
 
         /// <summary>
         ///     商品价格的最终显示方式，整个系统显示的价格都由改服务计算
@@ -101,6 +98,6 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         /// </summary>
         /// <param name="id">Id标识</param>
         /// <param name="userId"></param>
-        Tuple<ServiceResult, Entities.Product> Show(long id, long userId);
+        Tuple<ServiceResult, Product> Show(long id, long userId);
     }
 }

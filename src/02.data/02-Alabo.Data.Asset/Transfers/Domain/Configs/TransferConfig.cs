@@ -16,16 +16,16 @@ using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
 using Newtonsoft.Json;
 
-namespace Alabo.App.Asset.Transfers.Domain.Configs {
-
+namespace Alabo.App.Asset.Transfers.Domain.Configs
+{
     /// <summary>
     ///     账户转账设置
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "账户转账设置", Icon = "fa fa-exchange", Description = "账户转账设置", PageType = ViewPageType.List,
         SortOrder = 23, SideBarType = SideBarType.TransferSideBar)]
-    public class TransferConfig : AutoConfigBase, IAutoConfig {
-
+    public class TransferConfig : AutoConfigBase, IAutoConfig
+    {
         /// <summary>
         ///     转账名称
         /// </summary>
@@ -110,9 +110,11 @@ namespace Alabo.App.Asset.Transfers.Domain.Configs {
         /// <summary>
         ///     设置默认值
         /// </summary>
-        public void SetDefault() {
+        public void SetDefault()
+        {
             var list = Ioc.Resolve<IAutoConfigService>().GetList<TransferConfig>();
-            if (list.Count == 0) {
+            if (list.Count == 0)
+            {
                 var configs = new List<TransferConfig>();
                 var config = new TransferConfig();
 
@@ -120,8 +122,10 @@ namespace Alabo.App.Asset.Transfers.Domain.Configs {
 
                 //现金转现金(体外转）
                 var cnyType = moneyTypes.FirstOrDefault(r => r.Currency == Currency.Cny);
-                if (cnyType != null) {
-                    config = new TransferConfig {
+                if (cnyType != null)
+                {
+                    config = new TransferConfig
+                    {
                         Name = "现金转现金(体外转）",
                         CanTransferOther = true,
                         Id = Guid.Parse("E0000000-1479-49BD-BFC7-E00000000001"),
@@ -135,8 +139,10 @@ namespace Alabo.App.Asset.Transfers.Domain.Configs {
 
                 //积分转转积分(体外转）
                 var pointType = moneyTypes.FirstOrDefault(r => r.Currency == Currency.Point);
-                if (pointType != null) {
-                    config = new TransferConfig {
+                if (pointType != null)
+                {
+                    config = new TransferConfig
+                    {
                         Name = "积分转积分(体外转）",
                         CanTransferOther = true,
                         Id = Guid.Parse("E0000000-1479-49BD-BFC7-E00000000002"),
@@ -150,8 +156,10 @@ namespace Alabo.App.Asset.Transfers.Domain.Configs {
 
                 //虚拟币转虚拟币(体外转）
                 var virtualType = moneyTypes.FirstOrDefault(r => r.Currency == Currency.Virtual);
-                if (pointType != null) {
-                    config = new TransferConfig {
+                if (pointType != null)
+                {
+                    config = new TransferConfig
+                    {
                         Name = "虚拟币转虚拟币(体外转）",
                         Id = Guid.Parse("E0000000-1479-49BD-BFC7-E00000000003"),
                         CanTransferOther = true,
@@ -165,8 +173,10 @@ namespace Alabo.App.Asset.Transfers.Domain.Configs {
 
                 //授信转授信(体外转）
                 var creditType = moneyTypes.FirstOrDefault(r => r.Currency == Currency.Credit);
-                if (pointType != null && creditType != null) {
-                    config = new TransferConfig {
+                if (pointType != null && creditType != null)
+                {
+                    config = new TransferConfig
+                    {
                         Name = "授信转授信(体外转）",
                         CanTransferOther = true,
                         Fee = 1,
@@ -179,8 +189,10 @@ namespace Alabo.App.Asset.Transfers.Domain.Configs {
                 }
 
                 //现金转积分(体内体外转）
-                if (pointType != null && cnyType != null) {
-                    config = new TransferConfig {
+                if (pointType != null && cnyType != null)
+                {
+                    config = new TransferConfig
+                    {
                         Name = "现金转积分(体内体外转）",
                         CanTransferOther = true,
                         CanTransferSelf = true,
@@ -194,8 +206,10 @@ namespace Alabo.App.Asset.Transfers.Domain.Configs {
                 }
 
                 //现金转授信(体内）
-                if (creditType != null && cnyType != null) {
-                    config = new TransferConfig {
+                if (creditType != null && cnyType != null)
+                {
+                    config = new TransferConfig
+                    {
                         Name = "现金转授信(体内）",
                         CanTransferOther = false,
                         Id = Guid.Parse("E0000000-1479-49BD-BFC7-E00000000006"),
@@ -209,8 +223,10 @@ namespace Alabo.App.Asset.Transfers.Domain.Configs {
                 }
 
                 //现金转虚拟币(体内）
-                if (virtualType != null && cnyType != null) {
-                    config = new TransferConfig {
+                if (virtualType != null && cnyType != null)
+                {
+                    config = new TransferConfig
+                    {
                         Name = "现金转虚拟币(体内）",
                         CanTransferOther = false,
                         CanTransferSelf = true,
@@ -224,7 +240,8 @@ namespace Alabo.App.Asset.Transfers.Domain.Configs {
                 }
 
                 var typeclassProperty = config.GetType().GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
-                var autoConfig = new AutoConfig {
+                var autoConfig = new AutoConfig
+                {
                     Type = config.GetType().FullName,
                     // AppName = typeclassProperty.AppName,
                     LastUpdated = DateTime.Now,

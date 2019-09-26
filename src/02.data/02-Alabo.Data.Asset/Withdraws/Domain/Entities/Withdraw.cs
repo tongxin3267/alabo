@@ -9,11 +9,11 @@ using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.App.Asset.Withdraws.Domain.Entities {
-
+namespace Alabo.App.Asset.Withdraws.Domain.Entities
+{
     [ClassProperty(Name = "提现", Icon = "fa fa-puzzle-piece", Description = "提现")]
-    public class Withdraw : AggregateDefaultUserRoot<Withdraw> {
-
+    public class Withdraw : AggregateDefaultUserRoot<Withdraw>
+    {
         /// <summary>
         ///     本次变动的货币类型id
         ///     与配置 MoneyTypeConfig 关联
@@ -23,7 +23,7 @@ namespace Alabo.App.Asset.Withdraws.Domain.Entities {
         public Guid MoneyTypeId { get; set; }
 
         /// <summary>
-        /// 银行卡Id
+        ///     银行卡Id
         /// </summary>
         public string BankCardId { get; set; }
 
@@ -67,12 +67,12 @@ namespace Alabo.App.Asset.Withdraws.Domain.Entities {
         public decimal Fee { get; set; }
 
         /// <summary>
-        /// 银行卡提现扩展
+        ///     银行卡提现扩展
         /// </summary>
         public WithdrawExtension WithdrawExtension { get; set; }
 
         /// <summary>
-        /// 扩展数据保存
+        ///     扩展数据保存
         /// </summary>
         public string Extensions { get; set; }
 
@@ -80,25 +80,27 @@ namespace Alabo.App.Asset.Withdraws.Domain.Entities {
         ///     Gets the serial.
         /// </summary>
         [Display(Name = "序号")]
-        public string Serial {
-            get {
+        public string Serial
+        {
+            get
+            {
                 var searSerial = $"T{Id.ToString().PadLeft(9, '0')}";
-                if (Id.ToString().Length == 10) {
-                    searSerial = $"{Id.ToString()}";
-                }
+                if (Id.ToString().Length == 10) searSerial = $"{Id.ToString()}";
 
                 return searSerial;
             }
         }
     }
 
-    public class WithdrawTableMap : MsSqlAggregateRootMap<Withdraw> {
-
-        protected override void MapTable(EntityTypeBuilder<Withdraw> builder) {
+    public class WithdrawTableMap : MsSqlAggregateRootMap<Withdraw>
+    {
+        protected override void MapTable(EntityTypeBuilder<Withdraw> builder)
+        {
             builder.ToTable("Asset_Withdraw");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<Withdraw> builder) {
+        protected override void MapProperties(EntityTypeBuilder<Withdraw> builder)
+        {
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.Serial);

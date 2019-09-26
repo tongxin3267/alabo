@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 using Alabo.App.Asset.Recharges.Domain.Entities.Extension;
 using Alabo.App.Asset.Recharges.Domain.Enums;
 using Alabo.Datas.Ef.SqlServer;
@@ -12,11 +10,11 @@ using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.App.Asset.Recharges.Domain.Entities {
-
+namespace Alabo.App.Asset.Recharges.Domain.Entities
+{
     [ClassProperty(Name = "充值", Icon = "fa fa-puzzle-piece", Description = "充值")]
-    public class Recharge : AggregateDefaultUserRoot<Recharge> {
-
+    public class Recharge : AggregateDefaultUserRoot<Recharge>
+    {
         /// <summary>
         ///     本次变动的货币类型id
         ///     与配置 MoneyTypeConfig 关联
@@ -79,25 +77,27 @@ namespace Alabo.App.Asset.Recharges.Domain.Entities {
         ///     Gets the serial.
         /// </summary>
         [Display(Name = "序号")]
-        public string Serial {
-            get {
+        public string Serial
+        {
+            get
+            {
                 var searSerial = $"T{Id.ToString().PadLeft(9, '0')}";
-                if (Id.ToString().Length == 10) {
-                    searSerial = $"{Id.ToString()}";
-                }
+                if (Id.ToString().Length == 10) searSerial = $"{Id.ToString()}";
 
                 return searSerial;
             }
         }
     }
 
-    public class RechargeTableMap : MsSqlAggregateRootMap<Recharge> {
-
-        protected override void MapTable(EntityTypeBuilder<Recharge> builder) {
+    public class RechargeTableMap : MsSqlAggregateRootMap<Recharge>
+    {
+        protected override void MapTable(EntityTypeBuilder<Recharge> builder)
+        {
             builder.ToTable("Asset_Recharge");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<Recharge> builder) {
+        protected override void MapProperties(EntityTypeBuilder<Recharge> builder)
+        {
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.RechargeExtension);

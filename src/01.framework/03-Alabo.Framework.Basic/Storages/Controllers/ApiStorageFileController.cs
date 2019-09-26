@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Storages.Domain.Entities;
@@ -13,12 +14,12 @@ using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Framework.Basic.Storages.Controllers
 {
-
     [ApiExceptionFilter]
     [Route("Api/StorageFile/[action]")]
-    public class ApiStorageFileController : ApiBaseController<StorageFile, ObjectId> {
-
-        public ApiStorageFileController() : base() {
+    public class ApiStorageFileController : ApiBaseController<StorageFile, ObjectId>
+    {
+        public ApiStorageFileController()
+        {
             BaseService = Resolve<IStorageFileService>();
         }
 
@@ -28,28 +29,27 @@ namespace Alabo.Framework.Basic.Storages.Controllers
         /// <param name="parameter">参数</param>
         [HttpPost]
         [Display(Description = "获取上传状态")]
-        public ApiResult<StorageFile> Upload(UploadApiInput parameter) {
-            if (!this.IsFormValid()) {
+        public ApiResult<StorageFile> Upload(UploadApiInput parameter)
+        {
+            if (!this.IsFormValid())
                 return ApiResult.Failure<StorageFile>(this.FormInvalidReason(),
                     MessageCodes.ParameterValidationFailure);
-            }
 
-            if (parameter.SavePath.IsNullOrEmpty()) {
-                parameter.SavePath = "/uploads/api/";
-            }
+            if (parameter.SavePath.IsNullOrEmpty()) parameter.SavePath = "/uploads/api/";
 
-            try {
+            try
+            {
                 var formFile = Request.Form.Files;
 
-                foreach (var item in formFile) {
-                    if (!parameter.FileType.Split(',').ToList().Contains(System.IO.Path.GetExtension(item.FileName))) {
+                foreach (var item in formFile)
+                    if (!parameter.FileType.Split(',').ToList().Contains(Path.GetExtension(item.FileName)))
                         return ApiResult.Failure<StorageFile>("后缀不支持!");
-                    }
-                }
 
                 var info = Resolve<IStorageFileService>().Upload(formFile, parameter.SavePath); //获取上传状态
                 return ApiResult.Success(info);
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 return ApiResult.Failure<StorageFile>(e.Message);
             }
         }

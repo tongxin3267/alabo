@@ -1,26 +1,24 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.Refunds.Domain.Enums {
-
+namespace Alabo.App.Asset.Refunds.Domain.Enums
+{
     /// <summary>
     ///     提现转账 状态
     /// </summary>
     [ClassProperty(Name = "提现转账状态")]
-    public enum RefundStatus {
-
+    public enum RefundStatus
+    {
         /// <summary>
         ///     待处理
         /// </summary>
-        [Display(Name = "待处理")]
-        [LabelCssClass(BadgeColorCalss.Primary)]
+        [Display(Name = "待处理")] [LabelCssClass(BadgeColorCalss.Primary)]
         Pending = 1,
 
         /// <summary>
         ///     等待审核
         /// </summary>
-        [Display(Name = "初审成功")]
-        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "初审成功")] [LabelCssClass(BadgeColorCalss.Success)]
         FirstCheckSuccess = 2,
 
         ///// <summary>
@@ -34,15 +32,13 @@ namespace Alabo.App.Asset.Refunds.Domain.Enums {
         /// <summary>
         ///     失败
         /// </summary>
-        [Display(Name = "失败")]
-        [LabelCssClass(BadgeColorCalss.Danger)]
+        [Display(Name = "失败")] [LabelCssClass(BadgeColorCalss.Danger)]
         Failured = 5,
 
         /// <summary>
         ///     付款成功
         /// </summary>
-        [Display(Name = "付款成功")]
-        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "付款成功")] [LabelCssClass(BadgeColorCalss.Success)]
         Success = 6
     }
 }

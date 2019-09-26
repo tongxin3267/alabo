@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Alabo.Framework.Core.WebApis;
 using Alabo.Domains.Entities;
-using Alabo.UI;
+using Alabo.Framework.Core.WebApis;
 
 namespace Alabo.Framework.Core.WebUis.Design.AutoTables
 {

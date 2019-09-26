@@ -1,12 +1,12 @@
 ﻿using Alabo.Domains.Services;
 
-namespace Alabo.Framework.Core.WebApis.Service {
-
+namespace Alabo.Framework.Core.WebApis.Service
+{
     /// <summary>
     ///     Api处理函数
     /// </summary>
-    public interface IApiService : IService {
-
+    public interface IApiService : IService
+    {
         /// <summary>
         ///     Api 图片地址
         /// </summary>

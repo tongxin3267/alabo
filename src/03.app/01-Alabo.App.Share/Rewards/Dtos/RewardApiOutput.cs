@@ -17,54 +17,56 @@ using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 using ZKCloud.Open.Share.Models;
 
-namespace Alabo.App.Share.Rewards.Dtos {
-
+namespace Alabo.App.Share.Rewards.Dtos
+{
     /// <summary>
-    /// Class RewardApiOutput.
+    ///     Class RewardApiOutput.
     /// </summary>
-    public class RewardApiOutput {
-
+    public class RewardApiOutput
+    {
         /// <summary>
-        /// Gets or sets the reward.
+        ///     Gets or sets the reward.
         /// </summary>
         /// <value>The reward.</value>
         [Display(Name = "奖赏")]
         public Reward Reward { get; set; }
 
         /// <summary>
-        /// Gets or sets the share user.
+        ///     Gets or sets the share user.
         /// </summary>
         /// <value>The share user.</value>
         [Display(Name = "用户分享")]
         public UserOutput ShareUser { get; set; }
 
         /// <summary>
-        /// Gets or sets the order user.
+        ///     Gets or sets the order user.
         /// </summary>
         /// <value>The order user.</value>
         [Display(Name = "订购用户")]
         public UserOutput OrderUser { get; set; }
 
         /// <summary>
-        /// Gets or sets the name of the money type.
+        ///     Gets or sets the name of the money type.
         /// </summary>
         /// <value>The name of the money type.</value>
         [Display(Name = "货币类型")]
         public string MoneyTypeName { get; set; }
 
         /// <summary>
-        /// Gets or sets the share module.
+        ///     Gets or sets the share module.
         /// </summary>
         /// <value>The share module.</value>
         [Display(Name = "共享模块")]
         public ShareModule ShareModule { get; set; }
 
-        public PageResult<RewardApiOutput> PageTable(object query, AutoBaseModel autoModel) {
+        public PageResult<RewardApiOutput> PageTable(object query, AutoBaseModel autoModel)
+        {
             throw new NotImplementedException();
         }
     }
 
-    public class RewardPriviewOutput : UIBase, IAutoTable<RewardApiOutput>, IAutoPreview {
+    public class RewardPriviewOutput : UIBase, IAutoTable<RewardApiOutput>, IAutoPreview
+    {
         public long Id { get; set; }
 
         /// <summary>
@@ -160,26 +162,19 @@ namespace Alabo.App.Share.Rewards.Dtos {
         /// </summary>
         [Display(Name = "编号")]
         [Field(ListShow = true, EditShow = true, SortOrder = 4)]
-        public string Serial {
-            get {
+        public string Serial
+        {
+            get
+            {
                 var searSerial = $"9{Id.ToString().PadLeft(9, '0')}";
-                if (Id.ToString().Length == 10) {
-                    searSerial = $"{Id.ToString()}";
-                }
+                if (Id.ToString().Length == 10) searSerial = $"{Id.ToString()}";
 
                 return searSerial;
             }
         }
 
-        public List<TableAction> Actions() {
-            var list = new List<TableAction>
-            {
-                ToLinkAction("分润", "/Reward/list")
-            };
-            return list;
-        }
-
-        public AutoPreview GetPreview(string id, AutoBaseModel autoModel) {
+        public AutoPreview GetPreview(string id, AutoBaseModel autoModel)
+        {
             var model = Resolve<IRewardService>().GetSingle(u => u.Id == id.ToInt64());
             var monetypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
 
@@ -188,7 +183,8 @@ namespace Alabo.App.Share.Rewards.Dtos {
             //var moneyType = temp.KeyValues.FirstOrDefault(s => s.Key.ToString() == "MoneyTypeId");
             //?.Value = "";//
 
-            var result = new RewardPriviewOutput() {
+            var result = new RewardPriviewOutput
+            {
                 Id = model.Id,
                 OrderId = model.OrderId,
                 MoneyTypeId = model.MoneyTypeId,
@@ -205,16 +201,27 @@ namespace Alabo.App.Share.Rewards.Dtos {
             return temp;
         }
 
-        /// <summary>
-        /// 构建自动表单
-        /// </summary>
-        /// <param name="query"></param>
-        /// <returns></returns>
-        public PageResult<RewardPriviewOutput> PageTable(object query, AutoBaseModel autoModel) {
+        public List<TableAction> Actions()
+        {
+            var list = new List<TableAction>
+            {
+                ToLinkAction("分润", "/Reward/list")
+            };
+            return list;
+        }
+
+        PageResult<RewardApiOutput> IAutoTable<RewardApiOutput>.PageTable(object query, AutoBaseModel autoModel)
+        {
             throw new NotImplementedException();
         }
 
-        PageResult<RewardApiOutput> IAutoTable<RewardApiOutput>.PageTable(object query, AutoBaseModel autoModel) {
+        /// <summary>
+        ///     构建自动表单
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public PageResult<RewardPriviewOutput> PageTable(object query, AutoBaseModel autoModel)
+        {
             throw new NotImplementedException();
         }
     }

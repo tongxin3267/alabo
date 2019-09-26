@@ -4,15 +4,15 @@ using Alabo.Industry.Shop.Orders.Domain.Entities;
 using Alabo.Industry.Shop.Orders.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Alabo.Industry.Shop.Orders.Controllers {
-
+namespace Alabo.Industry.Shop.Orders.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/OrderProduct/[action]")]
-    public class ApiOrderProductController : ApiBaseController<OrderProduct, long> {
-
-        public ApiOrderProductController() : base() {
+    public class ApiOrderProductController : ApiBaseController<OrderProduct, long>
+    {
+        public ApiOrderProductController()
+        {
             BaseService = Resolve<IOrderProductService>();
-
         }
     }
 }

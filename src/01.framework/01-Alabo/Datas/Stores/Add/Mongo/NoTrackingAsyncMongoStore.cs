@@ -20,9 +20,7 @@ namespace Alabo.Datas.Stores.Add.Mongo
             CancellationToken cancellationToken = default)
         {
             var entities = await FindByIdsNoTrackingAsync(id);
-            if (entities == null || entities.Count == 0) {
-                return null;
-            }
+            if (entities == null || entities.Count == 0) return null;
 
             return entities[0];
         }

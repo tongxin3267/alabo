@@ -20,9 +20,7 @@ namespace Alabo.Datas.Stores.Count.EfCore
         /// <param name="predicate">条件</param>
         public long Count(Expression<Func<TEntity, bool>> predicate)
         {
-            if (predicate == null) {
-                return Set.Count();
-            }
+            if (predicate == null) return Set.Count();
 
             return Set.Count(predicate);
         }

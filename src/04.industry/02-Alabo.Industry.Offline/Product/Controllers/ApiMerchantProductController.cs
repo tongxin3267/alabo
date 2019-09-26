@@ -27,7 +27,6 @@ namespace Alabo.Industry.Offline.Product.Controllers
     public class ApiMerchantProductController : ApiBaseController<MerchantProduct, ObjectId>
     {
         public ApiMerchantProductController()
-            : base()
         {
             BaseService = Resolve<IMerchantProductService>();
         }
@@ -36,7 +35,6 @@ namespace Alabo.Industry.Offline.Product.Controllers
         [Display(Description = "店商商品")]
         public ApiResult<MerchantProductViewModel> GetMerchantProducts(string merchantStoreId)
         {
-
             //get merchant store
             //var merchant = Resolve<IMerchantStoreService>().GetMerchantByMerchantStoreId(merchantStoreId);
             //if (merchant == null || merchant.Item1 == null || merchant.Item2 == null)
@@ -45,11 +43,13 @@ namespace Alabo.Industry.Offline.Product.Controllers
             //}
 
             //var merchantInfo = merchant.Item1;
-            var merchantStore = Resolve<IMerchantStoreService>().FirstOrDefault();// merchant.Item2;//merchantStoreId
+            var merchantStore = Resolve<IMerchantStoreService>().FirstOrDefault(); // merchant.Item2;//merchantStoreId
             //relation
-            var allRelations = Resolve<IRelationService>().GetClass(typeof(MerchantProductClassRelation).FullName).ToList();//, merchantInfo.UserId
+            var allRelations = Resolve<IRelationService>().GetClass(typeof(MerchantProductClassRelation).FullName)
+                .ToList(); //, merchantInfo.UserId
             //products filter merchant store id
-            var allProducts = Resolve<IMerchantProductService>().GetList(); //p => p.MerchantStoreId == merchantStore.Id.ToString()
+            var allProducts =
+                Resolve<IMerchantProductService>().GetList(); //p => p.MerchantStoreId == merchantStore.Id.ToString()
             var apiService = Resolve<IApiService>();
             var products = new List<MerchantProduct>();
             allRelations.ForEach(item =>
@@ -57,7 +57,6 @@ namespace Alabo.Industry.Offline.Product.Controllers
                 var tempProducts = allProducts.Where(p => p.ClassId == item.Id).ToList();
                 tempProducts.ForEach(product =>
                 {
-
                     product.ThumbnailUrl = apiService.ApiImageUrl(product.ThumbnailUrl);
                     product.Images = product.Images.Select(p => apiService.ApiImageUrl(p)).ToList();
                     product.Stock = product.Skus.Sum(s => s.Stock);
@@ -79,23 +78,25 @@ namespace Alabo.Industry.Offline.Product.Controllers
         }
 
 
-
         [HttpGet]
         [Display(Description = "店商商品详情")]
         public ApiResult<MerchantProduct> GetMerchantProduct(string merchantStoreProductId)
         {
             var merchantStore = Resolve<IMerchantStoreService>().FirstOrDefault();
             //relation
-            var allRelations = Resolve<IRelationService>().GetClass(typeof(MerchantProductClassRelation).FullName).ToList();//, merchantInfo.UserId
+            var allRelations = Resolve<IRelationService>().GetClass(typeof(MerchantProductClassRelation).FullName)
+                .ToList(); //, merchantInfo.UserId
             //products filter merchant store id
-            var product = Resolve<IMerchantProductService>().GetSingle(s => s.Id == ObjectId.Parse(merchantStoreProductId)); //p => p.MerchantStoreId == merchantStore.Id.ToString()
+            var product = Resolve<IMerchantProductService>()
+                .GetSingle(s =>
+                    s.Id == ObjectId.Parse(
+                        merchantStoreProductId)); //p => p.MerchantStoreId == merchantStore.Id.ToString()
             var apiService = Resolve<IApiService>();
             product.ThumbnailUrl = apiService.ApiImageUrl(product.ThumbnailUrl);
             product.Images = product.Images.Select(p => apiService.ApiImageUrl(p)).ToList();
-            product.Stock = product.Skus.Sum(s => s.Stock);            
+            product.Stock = product.Skus.Sum(s => s.Stock);
             return ApiResult.Success(product);
         }
-
 
 
         [HttpGet]
@@ -107,15 +108,12 @@ namespace Alabo.Industry.Offline.Product.Controllers
         }
 
         /// <summary>
-        /// 删除商品
+        ///     删除商品
         /// </summary>
         [HttpDelete]
         public ApiResult Delete(string Id)
         {
-            if (Resolve<IMerchantProductService>().Delete(Id))
-            {
-                return ApiResult.Success("商品删除成功");
-            }
+            if (Resolve<IMerchantProductService>().Delete(Id)) return ApiResult.Success("商品删除成功");
 
             return ApiResult.Failure("商品删除失败,服务异常，请稍后再试");
         }
@@ -130,56 +128,35 @@ namespace Alabo.Industry.Offline.Product.Controllers
         /// </summary>
         [HttpPost]
         [Display(Description = "修改或删除")]
-        public new ApiResult<MerchantProduct> SaveMerchantProduct([FromBody]MerchantProduct paramaer)
+        public ApiResult<MerchantProduct> SaveMerchantProduct([FromBody] MerchantProduct paramaer)
         {
-            if (BaseService == null)
-            {
-                return ApiResult.Failure<MerchantProduct>("请在控制器中定义BaseService");
-            }
+            if (BaseService == null) return ApiResult.Failure<MerchantProduct>("请在控制器中定义BaseService");
 
-            if (paramaer == null)
-            {
-                return ApiResult.Failure<MerchantProduct>("参数值为空,请认真检查服务器特性配置：比如ObjectId是否配置特性");
-            }
-            if (!this.IsFormValid())
-            {
-                return ApiResult.Failure<MerchantProduct>(this.FormInvalidReason());
-            }
+            if (paramaer == null) return ApiResult.Failure<MerchantProduct>("参数值为空,请认真检查服务器特性配置：比如ObjectId是否配置特性");
+            if (!this.IsFormValid()) return ApiResult.Failure<MerchantProduct>(this.FormInvalidReason());
 
             foreach (var item in paramaer.Skus)
-            {
-                if (string.IsNullOrEmpty(item.SkuId) || item.SkuId == ObjectId.Empty.ToString() || item.SkuId == "000000000000000000000000")
-                {
+                if (string.IsNullOrEmpty(item.SkuId) || item.SkuId == ObjectId.Empty.ToString() ||
+                    item.SkuId == "000000000000000000000000")
                     item.SkuId = ObjectId.GenerateNewId().ToString();
-                }
-            }
 
             var find = Resolve<IMerchantProductService>().GetSingle(paramaer.Id);
             if (find == null)
             {
                 var result = Resolve<IMerchantProductService>().Add(paramaer);
-                if (result == false)
-                {
-                    return ApiResult.Failure<MerchantProduct>("添加失败");
-                }
+                if (result == false) return ApiResult.Failure<MerchantProduct>("添加失败");
                 return ApiResult.Success(paramaer);
             }
             else
             {
                 find = AutoMapping.SetValue<MerchantProduct>(paramaer);
                 var result = Resolve<IMerchantProductService>().Update(find);
-                if (result == false)
-                {
-                    return ApiResult.Failure<MerchantProduct>("添加失败");
-                }
+                if (result == false) return ApiResult.Failure<MerchantProduct>("添加失败");
 
                 return ApiResult.Success(find);
             }
         }
 
         #endregion 增加单条记录
-
-
-
     }
 }

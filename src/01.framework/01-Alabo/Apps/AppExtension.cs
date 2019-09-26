@@ -5,19 +5,20 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Alabo.Apps {
-
+namespace Alabo.Apps
+{
     /// <summary>
     ///     项目扩展
     /// </summary>
-    public static class AppExtension {
-
+    public static class AppExtension
+    {
         /// <summary>
         ///     底层项目启动服务
         /// </summary>
         /// <param name="services">The services.</param>
         /// <param name="configuration">The configuration.</param>
-        public static IServiceCollection AddAppServcie(this IServiceCollection services, IConfiguration configuration) {
+        public static IServiceCollection AddAppServcie(this IServiceCollection services, IConfiguration configuration)
+        {
             services.AddApplicationInsightsTelemetry(configuration);
             // 项目Runtime 配置
             services.AddRuntimeConfiguration(configuration);
@@ -33,7 +34,8 @@ namespace Alabo.Apps {
         ///     项目底层启动服务
         /// </summary>
         /// <param name="app">The application.</param>
-        public static IApplicationBuilder UseAppApplication(this IApplicationBuilder app) {
+        public static IApplicationBuilder UseAppApplication(this IApplicationBuilder app)
+        {
             // 项目Runtime配置
             app.UseRuntimeContext();
             return app;

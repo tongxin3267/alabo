@@ -14,33 +14,18 @@ using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Cloud.Asset.FacePay.Controllers
 {
-
     [ApiExceptionFilter]
     [Route("Api/FacePay/[action]")]
     public class ApiFacePayController : ApiBaseController<Domain.Entities.FacePay, ObjectId>
     {
-        
-       
-
-        public ApiFacePayController(
-            ) : base()
-        {
-        }
-
         [HttpPost]
         public ApiResult Pay([FromBody] Domain.Entities.FacePay model)
         {
             var user = Ioc.Resolve<IUserService>().GetSingle(x => x.Id == model.UserId);
-            if (user == null)
-            {
-                return ApiResult.Failure($"用户不存在!");
-            }
+            if (user == null) return ApiResult.Failure("用户不存在!");
 
             var account = Resolve<IAccountService>().GetAccount(user.Id, Currency.Cny);
-            if (account.Amount < model.Amount)
-            {
-                return ApiResult.Failure("余额不足，请充值");
-            }
+            if (account.Amount < model.Amount) return ApiResult.Failure("余额不足，请充值");
 
             var rs = Ioc.Resolve<IFacePayService>().Add(model);
             if (rs)
@@ -50,7 +35,7 @@ namespace Alabo.Cloud.Asset.FacePay.Controllers
 
                 if (rsUpdate)
                 {
-                    Bill billModel = new Bill()
+                    var billModel = new Bill
                     {
                         AfterAmount = account.Amount,
                         CreateTime = DateTime.Now,
@@ -59,10 +44,9 @@ namespace Alabo.Cloud.Asset.FacePay.Controllers
                         Intro = "当面付支出-" + model.Amount,
                         Type = BillActionType.Shopping,
                         UserId = user.Id,
-                        UserName = user.UserName,
+                        UserName = user.UserName
                     };
                     Ioc.Resolve<IBillService>().AddOrUpdate(billModel);
-
                 }
 
                 return ApiResult.Success(rsUpdate);

@@ -1,8 +1,8 @@
-using Xunit;
 using Alabo.Framework.Basic.Notifications.Domain.Services;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
+using Xunit;
 
 namespace Alabo.Test.Core.Common.Domain.Services
 {
@@ -48,7 +48,7 @@ namespace Alabo.Test.Core.Common.Domain.Services
             var code = 0;
             var mobile = "";
             var ipAdress = "";
-            Resolve<IMessageQueueService>().AddTemplateQueue(code, mobile, ipAdress, null);
+            Resolve<IMessageQueueService>().AddTemplateQueue(code, mobile, ipAdress);
         }
 
         [Fact]

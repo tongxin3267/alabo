@@ -21,13 +21,14 @@ using Alabo.Mapping;
 using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Share.Rewards.Controllers {
-
+namespace Alabo.App.Share.Rewards.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/Reward/[action]")]
-    public class ApiRewardController : ApiBaseController<Reward, long> {
-
-        public ApiRewardController() : base() {
+    public class ApiRewardController : ApiBaseController<Reward, long>
+    {
+        public ApiRewardController()
+        {
             BaseService = Resolve<IRewardService>();
         }
 
@@ -66,22 +67,19 @@ namespace Alabo.App.Share.Rewards.Controllers {
         //}
 
         /// <summary>
-        /// Shows the specified parameter.
+        ///     Shows the specified parameter.
         /// </summary>
         /// <param name="parameter">参数</param>
         /// <returns>ApiResult&lt;RewardApiOutput&gt;.</returns>
         [HttpGet]
         [Display(Description = "列出指定的参数")]
         [ApiAuth]
-        public ApiResult<RewardApiOutput> Show([FromQuery]ApiBaseInput parameter) {
-            if (parameter.EntityId.ConvertToLong() <= 0) {
-                return ApiResult.Failure<RewardApiOutput>("输入参数不合法！");
-            }
+        public ApiResult<RewardApiOutput> Show([FromQuery] ApiBaseInput parameter)
+        {
+            if (parameter.EntityId.ConvertToLong() <= 0) return ApiResult.Failure<RewardApiOutput>("输入参数不合法！");
             var model = new RewardApiOutput();
             var rewardView = Resolve<IRewardService>().GetRewardView(parameter.EntityId.ConvertToLong());
-            if (rewardView == null) {
-                return ApiResult.Failure<RewardApiOutput>("该分润记录不存在！");
-            }
+            if (rewardView == null) return ApiResult.Failure<RewardApiOutput>("该分润记录不存在！");
             model.Reward = rewardView.Reward;
             var userOutput = AutoMapping.SetValue<UserOutput>(rewardView.OrderUser);
             userOutput.GradeName = Resolve<IGradeService>().GetGrade(rewardView.OrderUser.GradeId)?.Name;
@@ -90,33 +88,39 @@ namespace Alabo.App.Share.Rewards.Controllers {
             userOutput.Avator = Resolve<IApiService>().ApiUserAvator(rewardView.OrderUser.Id);
             model.OrderUser = userOutput;
 
-            model.MoneyTypeName = Resolve<IAutoConfigService>().MoneyTypes().First(r => r.Id == rewardView.Reward.MoneyTypeId).Name;
+            model.MoneyTypeName = Resolve<IAutoConfigService>().MoneyTypes()
+                .First(r => r.Id == rewardView.Reward.MoneyTypeId).Name;
             return ApiResult.Success(model);
         }
 
         /// <summary>
-        ///分润数据
+        ///     分润数据
         /// </summary>
         [HttpGet]
         [Display(Description = "分润数据")]
         [ApiAuth]
-        public ApiResult<ListOutput> List([FromQuery]ListInput parameter) {
-            var rewardInput = new RewardInput {
+        public ApiResult<ListOutput> List([FromQuery] ListInput parameter)
+        {
+            var rewardInput = new RewardInput
+            {
                 PageIndex = parameter.PageIndex,
                 UserId = parameter.LoginUserId,
                 PageSize = parameter.PageSize
             };
 
-            var model = Resolve<IRewardService>().GetViewRewardPageList(rewardInput, this.HttpContext);
-            var apiOutput = new ListOutput {
+            var model = Resolve<IRewardService>().GetViewRewardPageList(rewardInput, HttpContext);
+            var apiOutput = new ListOutput
+            {
                 TotalSize = model.PageCount,
                 StyleType = 1
             };
             var users = Resolve<IUserService>().GetList();
-            foreach (var item in model) {
+            foreach (var item in model)
+            {
                 var orderUser = users.FirstOrDefault(u => u.Id == item.OrderUserId);
 
-                var apiData = new ListItem {
+                var apiData = new ListItem
+                {
                     Id = item.Reward.Id,
                     Intro = $"{item.Reward.CreateTime:yyyy-MM-dd hh:ss}",
                     Title = $"{orderUser.UserName}",
@@ -126,6 +130,7 @@ namespace Alabo.App.Share.Rewards.Controllers {
                 };
                 apiOutput.ApiDataList.Add(apiData);
             }
+
             return ApiResult.Success(apiOutput);
         }
 
@@ -136,14 +141,13 @@ namespace Alabo.App.Share.Rewards.Controllers {
         [HttpGet]
         [Display(Description = "分润详情")]
         [ApiAuth]
-        public ApiResult<List<KeyValue>> Preview([FromQuery] PreviewInput parameter) {
-            if (!this.IsFormValid()) {
-                return ApiResult.Failure<List<KeyValue>>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
-            }
+        public ApiResult<List<KeyValue>> Preview([FromQuery] PreviewInput parameter)
+        {
+            if (!this.IsFormValid())
+                return ApiResult.Failure<List<KeyValue>>(this.FormInvalidReason(),
+                    MessageCodes.ParameterValidationFailure);
             var view = Resolve<IRewardService>().GetRewardView(parameter.Id.ConvertToLong());
-            if (view == null) {
-                return ApiResult.Failure<List<KeyValue>>("该分润记录不存在！");
-            }
+            if (view == null) return ApiResult.Failure<List<KeyValue>>("该分润记录不存在！");
             //var result = view.Reward.ToKeyValues();
             var result = AutoMapping.SetValue<RewardPriviewOutput>(view.Reward);
             result.MoneyTypeName = view.MoneyTypeName;
@@ -155,7 +159,8 @@ namespace Alabo.App.Share.Rewards.Controllers {
 
         [HttpGet]
         [Display(Description = "启用配置")]
-        public ApiResult<PagedList<Reward>> RewardList([FromQuery] PagedInputDto parameter) {
+        public ApiResult<PagedList<Reward>> RewardList([FromQuery] PagedInputDto parameter)
+        {
             var model = Resolve<IRewardService>().GetPagedList(Query);
             return ApiResult.Success(model);
         }

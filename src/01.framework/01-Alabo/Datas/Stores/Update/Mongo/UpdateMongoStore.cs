@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using MongoDB.Driver;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
 using Alabo.Validations.Aspects;
+using MongoDB.Driver;
 
 namespace Alabo.Datas.Stores.Update.Mongo
 {
@@ -81,9 +81,7 @@ namespace Alabo.Datas.Stores.Update.Mongo
             var expression = IdPredicate(entity.Id);
             var filter = ToFilter(entity.Id);
             var updateModel = Collection.FindOneAndReplace(filter, entity);
-            if (updateModel != null) {
-                return true;
-            }
+            if (updateModel != null) return true;
 
             return true;
         }

@@ -16,32 +16,35 @@ using Alabo.Industry.Cms.Articles.ViewModels;
 using Alabo.Mapping;
 using MongoDB.Bson;
 
-namespace Alabo.Industry.Cms.Articles.Domain.Services {
+namespace Alabo.Industry.Cms.Articles.Domain.Services
+{
+    public class ArticleService : ServiceBase<Article, ObjectId>, IArticleService
+    {
+        public ArticleService(IUnitOfWork unitOfWork, IRepository<Article, ObjectId> repository) : base(unitOfWork,
+            repository)
+        {
+        }
 
-    public class ArticleService : ServiceBase<Article, ObjectId>, IArticleService {
-
-        public List<ArticleItem> GetArticleList(ArticleInput articleInput) {
+        public List<ArticleItem> GetArticleList(ArticleInput articleInput)
+        {
             var query = new ExpressionQuery<Article>();
 
             query.OrderByAscending(e => e.CreateTime);
-            if (!articleInput.ChannelId.IsNullOrEmpty()) {
+            if (!articleInput.ChannelId.IsNullOrEmpty())
                 query.And(r => r.ChannelId == articleInput.ChannelId.ToObjectId());
-            }
 
-            if (articleInput.OrderType == 0) {
+            if (articleInput.OrderType == 0)
                 query.OrderByAscending(a => a.ViewCount);
-            } else {
+            else
                 query.OrderByDescending(a => a.ViewCount);
-            }
 
             var list = GetList(query);
-            List<ArticleItem> result = new List<ArticleItem>();
-            foreach (var item in list) {
-                if (articleInput.TotalCount > 0 && result.Count >= articleInput.TotalCount) {
-                    break;
-                }
+            var result = new List<ArticleItem>();
+            foreach (var item in list)
+            {
+                if (articleInput.TotalCount > 0 && result.Count >= articleInput.TotalCount) break;
 
-                ArticleItem articleItem = AutoMapping.SetValue<ArticleItem>(item);
+                var articleItem = AutoMapping.SetValue<ArticleItem>(item);
                 articleItem.RelationId = item.RelationId;
                 result.Add(articleItem);
             }
@@ -49,17 +52,19 @@ namespace Alabo.Industry.Cms.Articles.Domain.Services {
             return result;
         }
 
-        public Article GetArticle(string id) {
+        public Article GetArticle(string id)
+        {
             return GetSingleFromCache(id.ToObjectId());
         }
 
         /// <summary>
-        /// 获取
+        ///     获取
         /// </summary>
-
-        public IList<LinkGroup> GetHelpNav() {
+        public IList<LinkGroup> GetHelpNav()
+        {
             var cacheKey = "GetHelpNav";
-            if (!ObjectCache.TryGet(cacheKey, out IList<LinkGroup> list)) {
+            if (!ObjectCache.TryGet(cacheKey, out IList<LinkGroup> list))
+            {
                 var helpChannelId = ChannelType.Help.GetFieldAttribute().GuidId.ToObjectId();
                 var classList = Resolve<IRelationService>()
                     .GetList(r => r.Type == typeof(ChannelHelpClassRelation).FullName && r.Status == Status.Normal);
@@ -68,15 +73,19 @@ namespace Alabo.Industry.Cms.Articles.Domain.Services {
                 var relationIndexList = Resolve<IRelationIndexService>()
                     .GetList(r => r.Type == typeof(ChannelHelpClassRelation).FullName).ToList();
                 list = new List<LinkGroup>();
-                foreach (var itemClass in classList) {
-                    LinkGroup group = new LinkGroup {
+                foreach (var itemClass in classList)
+                {
+                    var group = new LinkGroup
+                    {
                         Name = itemClass.Name
                     };
 
                     var relationIds = relationIndexList.Where(r => r.Type == itemClass.Type).Select(r => r.EntityId);
                     var articleItems = articleList.Where(r => relationIds.Contains(r.RelationId));
-                    foreach (var item in articleItems) {
-                        Link link = new Link {
+                    foreach (var item in articleItems)
+                    {
+                        var link = new Link
+                        {
                             Name = item.Title, Image = item.ImageUrl, Url = $"/articles/help/show?id={item.Id}"
                         };
                         group.Links.Add(link);
@@ -87,10 +96,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.Services {
 
                 ObjectCache.Set(cacheKey, list);
             }
-            return list;
-        }
 
-        public ArticleService(IUnitOfWork unitOfWork, IRepository<Article, ObjectId> repository) : base(unitOfWork, repository) {
+            return list;
         }
     }
 }

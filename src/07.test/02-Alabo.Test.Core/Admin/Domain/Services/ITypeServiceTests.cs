@@ -1,16 +1,12 @@
 using System;
 using System.Linq;
-using Xunit;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.App.Market.SmallTargets.Controllers;
 using Alabo.AutoConfigs;
 using Alabo.Data.People.Cities.Domain.CallBacks;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.Reflections.Services;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebUis.Controllers;
-using Alabo.Domains.Entities;
-using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Industry.Cms.Articles.Controllers;
 using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.Reflections;
@@ -18,22 +14,18 @@ using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
 using Alabo.Users.Enum;
+using Xunit;
 
-namespace Alabo.Test.Core.Admin.Domain.Services {
-
-    public class ITypeServiceTests : CoreTest {
-
-        [Fact]
-        public void AllKeyValues_Test() {
-            var result = Resolve<ITypeService>().AllKeyValues();
-            Assert.NotNull(result);
-        }
-
+namespace Alabo.Test.Core.Admin.Domain.Services
+{
+    public class ITypeServiceTests : CoreTest
+    {
         [Theory]
         [InlineData(typeof(UserGradeConfig))]
         [InlineData(typeof(CityGradeConfig))]
         [TestMethod("GetAutoConfigDictionary_String")]
-        public void GetAutoConfigDictionary_String_test(Type type) {
+        public void GetAutoConfigDictionary_String_test(Type type)
+        {
             var configName = type.FullName;
             var result = Resolve<ITypeService>().GetAutoConfigDictionary(configName);
             Assert.NotNull(result);
@@ -84,11 +76,10 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
         [InlineData("ViewLocation")]
         [InlineData("ZoneTime")]
         [TestMethod("GetEnumDictionary_String")]
-        public void GetEnumDictionary_String_test(string enumName) {
+        public void GetEnumDictionary_String_test(string enumName)
+        {
             var result = Resolve<ITypeService>().GetEnumDictionary(enumName);
-            if (result == null) {
-                Console.WriteLine(result);
-            }
+            if (result == null) Console.WriteLine(result);
 
             Assert.NotNull(result);
         }
@@ -142,7 +133,8 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
         [InlineData(typeof(ZoneTime))]
         [InlineData(typeof(BankType))]
         [TestMethod("GetEnumSelectItem_Type")]
-        public void GetEnumSelectItem_Type_test(Type type) {
+        public void GetEnumSelectItem_Type_test(Type type)
+        {
             var result = Resolve<ITypeService>().GetEnumSelectItem(type);
             Assert.NotNull(result);
         }
@@ -155,7 +147,8 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
         [InlineData(typeof(BillActionType))]
         [InlineData(typeof(BillStatus))]
         [TestMethod("GetEnumDictionary_Type")]
-        public void GetEnumDictionary_Type_test(Type type) {
+        public void GetEnumDictionary_Type_test(Type type)
+        {
             var result = Resolve<ITypeService>().GetEnumDictionary(type);
             Assert.NotNull(result);
         }
@@ -164,7 +157,8 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
         [InlineData("BankType")]
         [InlineData("AccountFlow")]
         [TestIgnore]
-        public void GetEnumType_String_test(string enumName) {
+        public void GetEnumType_String_test(string enumName)
+        {
             //var result = Service<ITypeService>().GetEnumType(enumName);
             //Assert.NotNull(result);
         }
@@ -172,7 +166,8 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
         [Theory]
         [InlineData(typeof(IAutoConfig))]
         [TestMethod("GetAllTypeByInterface_Type")]
-        public void GetAllTypeByInterface_Type_test(Type interfaceType) {
+        public void GetAllTypeByInterface_Type_test(Type interfaceType)
+        {
             var result = Resolve<ITypeService>().GetAllTypeByInterface(interfaceType);
             Assert.NotNull(result);
             Assert.True(result.Any());
@@ -181,7 +176,8 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
         [Theory]
         [TestMethod("GetAppName_Type")]
         [InlineData(null, "")]
-        public void GetAppName_Type_test(Type type, string appName) {
+        public void GetAppName_Type_test(Type type, string appName)
+        {
             var result = Resolve<ITypeService>().GetAppName(type);
             Assert.Equal(result, appName);
         }
@@ -189,7 +185,8 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
         [Theory]
         [TestMethod("GetAppName_Type")]
         [InlineData(null, "")]
-        public void GetGroupName_Type_test(Type type, string groupName) {
+        public void GetGroupName_Type_test(Type type, string groupName)
+        {
             var result = Resolve<ITypeService>().GetGroupName(type);
             Assert.Equal(result, groupName);
         }
@@ -197,14 +194,23 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
         [Theory]
         [InlineData(typeof(ArticleApiController))]
         [InlineData(typeof(ApiSmallTargetController))]
-        public void BaseTypeContains_Test(Type type) {
+        public void BaseTypeContains_Test(Type type)
+        {
             var topBaseType = Reflection.BaseTypeContains(type, typeof(ApiBaseController));
             Assert.True(topBaseType);
         }
 
         [Fact]
+        public void AllKeyValues_Test()
+        {
+            var result = Resolve<ITypeService>().AllKeyValues();
+            Assert.NotNull(result);
+        }
+
+        [Fact]
         [TestMethod("GetAllApiController")]
-        public void GetAllApiController_test() {
+        public void GetAllApiController_test()
+        {
             var type = typeof(ArticleApiController);
             var result = Resolve<ITypeService>().GetAllApiController().ToList();
 
@@ -221,7 +227,8 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
         [Fact]
         [TestMethod("GetAllConfigType_String")]
         [TestIgnore]
-        public void GetAllConfigType_String_test() {
+        public void GetAllConfigType_String_test()
+        {
             //var confinName = "";
             //var result = Service<ITypeService>().GetAllConfigType( confinName);
             //Assert.NotNull(result);
@@ -229,7 +236,8 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
 
         [Fact]
         [TestMethod("GetAllConfigType")]
-        public void GetAllConfigType_test() {
+        public void GetAllConfigType_test()
+        {
             var result = Resolve<ITypeService>().GetAllConfigType();
             Assert.NotNull(result);
         }
@@ -237,7 +245,8 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
         [Fact]
         [TestMethod("GetAllEntityType")]
         [TestIgnore]
-        public void GetAllEntityType_test() {
+        public void GetAllEntityType_test()
+        {
             //var result = Service<ITypeService>().GetAllEntityType();
             //Assert.NotNull(result);
         }
@@ -245,21 +254,24 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
         [Fact]
         [TestMethod("GetAllEnumType")]
         [TestIgnore]
-        public void GetAllEnumType_test() {
+        public void GetAllEnumType_test()
+        {
             var result = Resolve<ITypeService>().GetAllEnumType();
             Assert.NotNull(result);
         }
 
         [Fact]
         [TestMethod("GetAllServiceType")]
-        public void GetAllServiceType_test() {
+        public void GetAllServiceType_test()
+        {
             var result = Resolve<ITypeService>().GetAllServiceType();
             Assert.NotNull(result);
         }
 
         [Fact]
         [TestMethod("GetAutoConfigType_String")]
-        public void GetAutoConfigType_String_test() {
+        public void GetAutoConfigType_String_test()
+        {
             var configName = "";
             var result = Resolve<ITypeService>().GetAutoConfigType(configName);
             Assert.NotNull(result);
@@ -268,7 +280,8 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
         [Fact]
         [TestMethod("GetEntityType_Object")]
         [TestIgnore]
-        public void GetEntityType_Object_test() {
+        public void GetEntityType_Object_test()
+        {
             //Object entityName = null;
             //var result = Service<ITypeService>().GetEntityType( entityName);
             //Assert.NotNull(result);
@@ -277,7 +290,8 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
         [Fact]
         [TestMethod("GetEntityType_String")]
         [TestIgnore]
-        public void GetEntityType_String_test() {
+        public void GetEntityType_String_test()
+        {
             //var entityName = "";
             //var result = Service<ITypeService>().GetEntityType( entityName);
             //Assert.NotNull(result);
@@ -286,7 +300,8 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
         [Fact]
         [TestMethod("GetEnumType_String")]
         [TestIgnore]
-        public void GetEnumType_String_test1() {
+        public void GetEnumType_String_test1()
+        {
             //var enumName = "";
             //var result = Service<ITypeService>().GetEnumType( enumName);
             //Assert.NotNull(result);
@@ -294,7 +309,8 @@ namespace Alabo.Test.Core.Admin.Domain.Services {
 
         [Fact]
         [TestMethod("GetServiceType_String")]
-        public void GetServiceType_String_test() {
+        public void GetServiceType_String_test()
+        {
             var serviceName = "";
             var result = Resolve<ITypeService>().GetServiceType(serviceName);
             Assert.NotNull(result);

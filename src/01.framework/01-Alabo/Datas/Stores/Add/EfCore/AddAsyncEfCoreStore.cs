@@ -22,11 +22,9 @@ namespace Alabo.Datas.Stores.Add.EfCore
 
         public async Task<bool> AddSingleAsync(TEntity entity)
         {
-            if (entity == null) {
-                throw new ArgumentNullException(nameof(entity));
-            }
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
 
-            await Set.AddAsync(entity, default);
+            await Set.AddAsync(entity);
             return true;
         }
     }

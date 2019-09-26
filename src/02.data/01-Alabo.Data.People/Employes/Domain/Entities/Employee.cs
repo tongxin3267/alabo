@@ -8,16 +8,16 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 
-namespace Alabo.Data.People.Employes.Domain.Entities {
-
+namespace Alabo.Data.People.Employes.Domain.Entities
+{
     [BsonIgnoreExtraElements]
     [Table("Admin_Employee")]
     [ClassProperty(Name = "员工")]
     [AutoDelete(IsAuto = true)]
-    public class Employee : AggregateMongodbUserRoot<Employee> {
-
+    public class Employee : AggregateMongodbUserRoot<Employee>
+    {
         /// <summary>
-        /// 员工名称
+        ///     员工名称
         /// </summary>
         [Display(Name = "员工名称")]
         [Required]
@@ -28,35 +28,36 @@ namespace Alabo.Data.People.Employes.Domain.Entities {
         public string Name { get; set; }
 
         /// <summary>
-        /// 岗位、角色，部门ID
+        ///     岗位、角色，部门ID
         /// </summary>
         [Display(Name = "岗位")]
         [Required]
         [HelpBlock("请选择岗位")]
-        [Field(ControlsType = ControlsType.DropdownList, ApiDataSource = "Api/PostRole/GetKeyValues", GroupTabId = 1, Width = "150", IsShowBaseSerach = true,
-           EditShow = true,
-          ListShow = true, SortOrder = 1)]
+        [Field(ControlsType = ControlsType.DropdownList, ApiDataSource = "Api/PostRole/GetKeyValues", GroupTabId = 1,
+            Width = "150", IsShowBaseSerach = true,
+            EditShow = true,
+            ListShow = true, SortOrder = 1)]
         [JsonConverter(typeof(ObjectIdConverter))]
         public ObjectId PostRoleId { get; set; }
 
         /// <summary>
-        /// 是否启用
+        ///     是否启用
         /// </summary>
         [Display(Name = "是否有效")]
         [Required]
         [HelpBlock("该员工是否有效")]
         [Field(ControlsType = ControlsType.Switch, GroupTabId = 1, Width = "150", IsShowBaseSerach = true,
-         EditShow = true,
-         ListShow = true, SortOrder = 1)]
+            EditShow = true,
+            ListShow = true, SortOrder = 1)]
         public bool IsEnable { get; set; }
 
         /// <summary>
-        /// 是否为超级管理员
+        ///     是否为超级管理员
         /// </summary>
         public bool IsSuperAdmin { get; set; }
 
         /// <summary>
-        /// 员工详细说明
+        ///     员工详细说明
         /// </summary>
         [Display(Name = "详细说明")]
         [HelpBlock("输入员工的详细介绍")]

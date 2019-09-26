@@ -5,21 +5,19 @@ using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Cloud.People.UserRightss.Controllers {
-
+namespace Alabo.Cloud.People.UserRightss.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/Market/[action]")]
-    public class ApiMarketController : ApiBaseController {
-
-        public ApiMarketController() : base() {
-        }
-
+    public class ApiMarketController : ApiBaseController
+    {
         /// <summary>
-        /// 营销中心登录
+        ///     营销中心登录
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public ApiResult<RoleOuput> Login([FromBody]UserOutput userOutput) {
+        public ApiResult<RoleOuput> Login([FromBody] UserOutput userOutput)
+        {
             return null;
             //var result = Resolve<IEmployeeService>().Login(userOutput, () =>
             //{

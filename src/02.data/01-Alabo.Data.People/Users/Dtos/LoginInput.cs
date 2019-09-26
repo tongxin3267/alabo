@@ -4,16 +4,16 @@ using Alabo.Domains.Query.Dto;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Data.People.Users.Dtos {
-
+namespace Alabo.Data.People.Users.Dtos
+{
     /// <summary>
     ///     登录模块
     /// </summary>
     [ClassProperty(Name = "会员登陆", PostApi = "Api/User/Login", SuccessReturn = "pages/index")]
-    public class LoginInput : EntityDto {
-
+    public class LoginInput : EntityDto
+    {
         /// <summary>
-        ///    用户名和手机号
+        ///     用户名和手机号
         /// </summary>
         [Display(Name = "用户名/手机")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
@@ -21,7 +21,7 @@ namespace Alabo.Data.People.Users.Dtos {
         public string UserName { get; set; }
 
         /// <summary>
-        ///   密码
+        ///     密码
         /// </summary>
         [Display(Name = "密码")]
         [DataType(DataType.Password)]
@@ -29,7 +29,7 @@ namespace Alabo.Data.People.Users.Dtos {
         public string Password { get; set; }
 
         /// <summary>
-        /// 手机验证码
+        ///     手机验证码
         /// </summary>
         [Display(Name = "验证码")]
         public string VerifyCode { get; set; }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Data.People.Circles.Domain.Entities;
+using Alabo.Data.People.Circles.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
@@ -13,11 +14,11 @@ using Alabo.Mapping;
 using Alabo.Maps;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
-using ICircleService = Alabo.Data.People.Circles.Domain.Services.ICircleService;
 
-namespace Alabo.Data.People.Circles.Dtos {
-
-    public class CircleView : UIBase, IAutoForm, IAutoTable {
+namespace Alabo.Data.People.Circles.Dtos
+{
+    public class CircleView : UIBase, IAutoForm, IAutoTable
+    {
         public string Id { get; set; }
 
         /// <summary>
@@ -72,25 +73,38 @@ namespace Alabo.Data.People.Circles.Dtos {
             IsShowBaseSerach = true)]
         public string FullName { get; set; }
 
-        public List<TableAction> Actions() {
-            return new List<TableAction>();
-        }
-
-        public AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
             var str = id.ToString();
             var model = Resolve<ICircleService>().GetSingle(u => u.Id == str.ToObjectId());
-            if (model != null) {
-                return ToAutoForm(model);
-            }
+            if (model != null) return ToAutoForm(model);
 
             return ToAutoForm(new Circle());
         }
 
-        public PageResult<CircleView> PageTable(object query, AutoBaseModel autoModel) {
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
+            var circleView = (CircleView) model;
+            var view = circleView.MapTo<Circle>();
+            view.Id = circleView.Id.ToObjectId();
+            view.RegionName = Resolve<IRegionService>().GetRegionNameById(view.RegionId);
+            var result = Resolve<ICircleService>().AddOrUpdate(view);
+            if (result) return ServiceResult.Success;
+            return ServiceResult.FailedWithMessage("操作失败，请重试");
+        }
+
+        public List<TableAction> Actions()
+        {
+            return new List<TableAction>();
+        }
+
+        public PageResult<CircleView> PageTable(object query, AutoBaseModel autoModel)
+        {
             var model = Resolve<ICircleService>().GetPagedList(query);
             var circles = new List<CircleView>();
 
-            foreach (var item in model) {
+            foreach (var item in model)
+            {
                 var cityView = AutoMapping.SetValue<CircleView>(item);
                 cityView.RegionName = Resolve<IRegionService>().GetRegionNameById(item.RegionId);
                 circles.Add(cityView);
@@ -101,18 +115,6 @@ namespace Alabo.Data.People.Circles.Dtos {
             result.Result = circles;
 
             return result;
-        }
-
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
-            var circleView = (CircleView)model;
-            var view = circleView.MapTo<Circle>();
-            view.Id = circleView.Id.ToObjectId();
-            view.RegionName = Resolve<IRegionService>().GetRegionNameById(view.RegionId);
-            var result = Resolve<ICircleService>().AddOrUpdate(view);
-            if (result) {
-                return ServiceResult.Success;
-            }
-            return ServiceResult.FailedWithMessage("操作失败，请重试");
         }
     }
 }

@@ -5,14 +5,14 @@ using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.Cloud.People.UserRightss.Domain.CallBack {
-
+namespace Alabo.Cloud.People.UserRightss.Domain.CallBack
+{
     /// <summary>
     ///     用户等级权益赠送数量设置
     /// </summary>
     [ClassProperty(Name = "用户等级权益赠送数量设置")]
-    public class UserRightItem : BaseViewModel {
-
+    public class UserRightItem : BaseViewModel
+    {
         /// <summary>
         ///     会员等级
         /// </summary>

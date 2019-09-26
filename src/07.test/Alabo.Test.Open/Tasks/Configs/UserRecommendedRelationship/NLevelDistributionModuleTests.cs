@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using Alabo.App.Asset.Accounts.Domain.Entities;
 using Alabo.App.Share.OpenTasks.Configs.UserRecommendedRelationship;
 using Alabo.App.Share.TaskExecutes.Domain.Services;
-using Xunit;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Extensions;
 using Alabo.Users.Dtos;
 using Alabo.Users.Entities;
+using Xunit;
 
 namespace Alabo.Test.Open.Tasks.Configs.UserRecommendedRelationship
 {
@@ -47,17 +47,11 @@ namespace Alabo.Test.Open.Tasks.Configs.UserRecommendedRelationship
                 var beforeAccounts = new List<Account>();
                 for (var i = 0; i < ratios.Count; i++)
                 {
-                    if (map.Count < i + 1)
-                    {
-                        break;
-                    }
+                    if (map.Count < i + 1) break;
 
                     var item = map[i];
                     var shareUser = Resolve<IUserService>().GetNomarlUser(item.UserId);
-                    if (shareUser == null)
-                    {
-                        break;
-                    }
+                    if (shareUser == null) break;
 
                     shareUserList.Add(shareUser);
                     var ratio = Convert.ToDecimal(ratios[i]);
@@ -101,17 +95,11 @@ namespace Alabo.Test.Open.Tasks.Configs.UserRecommendedRelationship
                 var beforeAccounts = new List<Account>();
                 for (var i = 0; i < ratios.Count; i++)
                 {
-                    if (map.Count < i + 1)
-                    {
-                        break;
-                    }
+                    if (map.Count < i + 1) break;
 
                     var item = map[i];
                     var shareUser = Resolve<IUserService>().GetNomarlUser(item.UserId);
-                    if (shareUser == null)
-                    {
-                        break;
-                    }
+                    if (shareUser == null) break;
 
                     shareUserList.Add(shareUser);
                     var ratio = Convert.ToDecimal(ratios[i]);

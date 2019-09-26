@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations;
 using Alabo.Validations;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.Industry.Cms.Articles.ViewModels {
-
+namespace Alabo.Industry.Cms.Articles.ViewModels
+{
     /// <summary>
     /// </summary>
-    public class ArticleItem : BaseViewModel {
-
+    public class ArticleItem : BaseViewModel
+    {
         /// <summary>
         ///     Gets or sets Id标识
         /// </summary>

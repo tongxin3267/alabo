@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Microsoft.AspNetCore.Http;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
+using Microsoft.AspNetCore.Http;
 
 namespace Alabo.Mapping
 {
@@ -21,15 +21,11 @@ namespace Alabo.Mapping
         /// <param name="instance">传入的对象示例，对传入的值进行赋值，对象不能为空</param>
         public static T SetValue<T>(object data, T instance)
         {
-            if (instance == null) {
-                return default;
-            }
+            if (instance == null) return default;
 
-            if (data == null) {
-                return instance;
-            }
+            if (data == null) return instance;
             // 如果是字典类型
-            if (data.GetType().FullName.Contains("System.Collections.Generic.Dictionary")) {
+            if (data.GetType().FullName.Contains("System.Collections.Generic.Dictionary"))
                 try
                 {
                     var dic = (Dictionary<string, string>) data;
@@ -39,7 +35,6 @@ namespace Alabo.Mapping
                 {
                     Console.WriteLine(ex.Message);
                 }
-            }
 
             var outputPropertyInfo = instance.GetType().GetPropertiesFromCache(); //从缓存中读取属性，加快速度
 
@@ -89,27 +84,23 @@ namespace Alabo.Mapping
             var outputPropertyInfo = outputType.GetPropertiesFromCache(); //从缓存中读取属性，加快速度
             var output = (T) outputType.GetInstanceByType();
 
-            foreach (var item in outputPropertyInfo) {
+            foreach (var item in outputPropertyInfo)
                 try
                 {
                     object value = null;
-                    foreach (var dic in dictionary) {
+                    foreach (var dic in dictionary)
                         if (item.Name.Equals(dic.Key, StringComparison.OrdinalIgnoreCase))
                         {
                             value = dic.Value;
                             break;
                         }
-                    }
 
-                    if (!value.IsNullOrEmpty()) {
-                        SetPropertyInfoValue(output, item, value);
-                    }
+                    if (!value.IsNullOrEmpty()) SetPropertyInfoValue(output, item, value);
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
-            }
 
             return output;
         }
@@ -121,20 +112,17 @@ namespace Alabo.Mapping
         /// <param name="instance">The instance.</param>
         public static object SetValue(HttpContext httpContext, object instance)
         {
-            if (instance == null) {
-                return instance;
-            }
+            if (instance == null) return instance;
 
             var formCollection = httpContext.Request.Form;
             var outputPropertyInfo = instance.GetType().GetPropertiesFromCache(); //从缓存中读取属性，加快速度
-            foreach (var item in outputPropertyInfo) {
+            foreach (var item in outputPropertyInfo)
                 if (formCollection.ContainsKey(item.Name))
                 {
                     // 使用第一个值，解决如果页面上有两个元素时所造成的bug
                     var value = formCollection[item.Name][0];
                     SetPropertyInfoValue(instance, item, value);
                 }
-            }
 
             return instance;
         }
@@ -146,14 +134,12 @@ namespace Alabo.Mapping
         /// <param name="instance">The instance.</param>
         public static T SetValue<T>(HttpContext httpContext, T instance)
         {
-            if (instance == null) {
-                return default;
-            }
+            if (instance == null) return default;
 
             var formCollection = httpContext.Request.Form;
             var outputPropertyInfo = instance.GetType().GetPropertiesFromCache(); //从缓存中读取属性，加快速度
-            foreach (var item in outputPropertyInfo) {
-                if (formCollection.ContainsKey(item.Name)) {
+            foreach (var item in outputPropertyInfo)
+                if (formCollection.ContainsKey(item.Name))
                     try
                     {
                         var value = formCollection[item.Name];
@@ -165,17 +151,14 @@ namespace Alabo.Mapping
                         {
                             var value = formCollection[item.Name];
                             // swtich表单异常
-                            if (value.ToString() == "on") {
+                            if (value.ToString() == "on")
                                 SetPropertyInfoValue(instance, item, true);
-                            } else {
+                            else
                                 SetPropertyInfoValue(instance, item, false);
-                            }
                         }
 
                         Console.WriteLine(ex.Message);
                     }
-                }
-            }
 
             return instance;
         }
@@ -215,13 +198,9 @@ namespace Alabo.Mapping
         /// <param name="value">值，为空时不处理</param>
         public static T SetPropertyInfoValue<T>(T instance, PropertyInfo propertyInfo, object value)
         {
-            if (value == null || propertyInfo == null) {
-                return instance;
-            }
+            if (value == null || propertyInfo == null) return instance;
             // 序列号不映射
-            if (propertyInfo.Name == "Serial") {
-                return instance;
-            }
+            if (propertyInfo.Name == "Serial") return instance;
 
             if (propertyInfo.PropertyType == typeof(string))
             {
@@ -302,60 +281,42 @@ namespace Alabo.Mapping
         public static Tuple<bool, object> TryChangeHtmlValue(object value, Type type)
         {
             var changeValue = value;
-            if (value == null || value.ToStr().IsNullOrEmpty()) {
-                return Tuple.Create(false, changeValue);
-            }
+            if (value == null || value.ToStr().IsNullOrEmpty()) return Tuple.Create(false, changeValue);
 
             if (type == typeof(string))
             {
                 changeValue = value.ToStr();
-                if (!changeValue.IsNullOrEmpty()) {
-                    return Tuple.Create(true, changeValue);
-                }
+                if (!changeValue.IsNullOrEmpty()) return Tuple.Create(true, changeValue);
             }
             else if (type == typeof(int))
             {
-                if (value.ToStr().ConvertToInt(-1) != -1) {
-                    return Tuple.Create(true, value);
-                }
+                if (value.ToStr().ConvertToInt() != -1) return Tuple.Create(true, value);
             }
             else if (type == typeof(decimal))
             {
-                if (value.ToStr().ConvertToDecimal(-1) != -1) {
-                    return Tuple.Create(true, value);
-                }
+                if (value.ToStr().ConvertToDecimal() != -1) return Tuple.Create(true, value);
             }
             else if (type == typeof(decimal?))
             {
-                if (value.ToStr().ConvertToDecimal(-1) != -1) {
-                    return Tuple.Create(true, value);
-                }
+                if (value.ToStr().ConvertToDecimal() != -1) return Tuple.Create(true, value);
             }
             else if (type == typeof(long))
             {
-                if (value.ToStr().ConvertToLong(-1) != -1) {
-                    return Tuple.Create(true, value);
-                }
+                if (value.ToStr().ConvertToLong() != -1) return Tuple.Create(true, value);
             }
             else if (type == typeof(DateTime))
             {
-                if (value.ToStr().ConvertToDateTime().Year != 1900) {
-                    return Tuple.Create(true, value);
-                }
+                if (value.ToStr().ConvertToDateTime().Year != 1900) return Tuple.Create(true, value);
             }
             else if (type == typeof(bool) || type == typeof(bool))
             {
                 var valueDefault = value.ConvertToNullableBool();
                 changeValue = (bool) value ? "是" : "否";
-                if (valueDefault.HasValue) {
-                    return Tuple.Create(true, changeValue);
-                }
+                if (valueDefault.HasValue) return Tuple.Create(true, changeValue);
             }
             else if (type == typeof(Guid))
             {
-                if (!value.ToGuid().IsGuidNullOrEmpty()) {
-                    return Tuple.Create(true, value);
-                }
+                if (!value.ToGuid().IsGuidNullOrEmpty()) return Tuple.Create(true, value);
             }
             else if (type.GetTypeInfo().BaseType?.Name == nameof(Enum))
             {
@@ -390,9 +351,7 @@ namespace Alabo.Mapping
         {
             var resultList = new PagedList<T>();
             // 数据传入对象非PagedList对象
-            if (!dataSource.GetType().FullName.Contains("Alabo.Domains.Entities.PagedList")) {
-                return null;
-            }
+            if (!dataSource.GetType().FullName.Contains("Alabo.Domains.Entities.PagedList")) return null;
 
             var pagedList = (dynamic) dataSource;
             foreach (var item in pagedList)

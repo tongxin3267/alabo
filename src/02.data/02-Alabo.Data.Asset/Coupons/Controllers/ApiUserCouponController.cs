@@ -8,34 +8,27 @@ using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Asset.Coupons.Controllers
 {
-
     [ApiExceptionFilter]
     [Route("Api/UserCoupon/[action]")]
-    public class ApiUserCouponController : ApiBaseController<UserCoupon, ObjectId> {
-
-        public ApiUserCouponController() : base()
+    public class ApiUserCouponController : ApiBaseController<UserCoupon, ObjectId>
+    {
+        public ApiUserCouponController()
         {
             BaseService = Resolve<IUserCouponService>();
         }
 
         /// <summary>
-        /// 给指定用户发放优惠券
+        ///     给指定用户发放优惠券
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         public ApiResult SendCoupon(string usersStr, string couponId)
         {
-            if(string.IsNullOrEmpty(usersStr))
-            {
-                return ApiResult.Failure("请输入正确的用户名！");
-            }
+            if (string.IsNullOrEmpty(usersStr)) return ApiResult.Failure("请输入正确的用户名！");
 
-            if(couponId==null)
-            {
-                return ApiResult.Failure("请选择有效的优惠券！");
-            }
+            if (couponId == null) return ApiResult.Failure("请选择有效的优惠券！");
 
-          var result= Resolve<IUserCouponService>().Send(usersStr,couponId);
+            var result = Resolve<IUserCouponService>().Send(usersStr, couponId);
 
             return ApiResult.Success(result.ReturnMessage);
         }
