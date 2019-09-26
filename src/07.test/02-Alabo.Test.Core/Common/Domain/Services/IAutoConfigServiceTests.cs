@@ -4,6 +4,7 @@ using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Shop.Activitys.ViewModels;
 using Alabo.AutoConfigs;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Runtime.Config;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;

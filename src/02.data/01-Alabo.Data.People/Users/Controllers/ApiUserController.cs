@@ -24,6 +24,7 @@ using Alabo.Framework.Core.WebUis.Models.Previews;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Mapping;
 using Alabo.Maps;
 using ZKCloud.Open.ApiBase.Models;

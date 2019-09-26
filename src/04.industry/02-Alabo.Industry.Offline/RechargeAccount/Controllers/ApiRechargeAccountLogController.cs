@@ -10,6 +10,7 @@ using Alabo.App.Offline.RechargeAccount.Domain.Dtos;
 using Alabo.App.Offline.RechargeAccount.Entities;
 using Alabo.App.Offline.RechargeAccount.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Helpers;
 using ZKCloud.Open.ApiBase.Models;
 

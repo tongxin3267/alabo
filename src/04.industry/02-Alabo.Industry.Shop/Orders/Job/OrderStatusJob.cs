@@ -11,6 +11,7 @@ using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.App.Shop.Product.Domain.Services;
 using Alabo.Dependency;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Helpers;
 using Alabo.Schedules.Job;
 

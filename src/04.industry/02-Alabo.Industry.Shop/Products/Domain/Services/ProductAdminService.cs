@@ -22,6 +22,7 @@ using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Files;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Relations.Domain.Services;
 using Alabo.Mapping;
 using Alabo.Runtime;

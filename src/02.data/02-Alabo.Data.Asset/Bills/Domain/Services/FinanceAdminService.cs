@@ -14,6 +14,7 @@ using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Mapping;
 
 namespace Alabo.App.Core.Finance.Domain.Services {

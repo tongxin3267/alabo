@@ -5,6 +5,7 @@ using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.Entities;
 using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.AutoConfigs.Entities;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Test.Base.Core.Model;
 
 namespace Alabo.Test.Tenant {

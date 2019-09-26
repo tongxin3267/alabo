@@ -1,16 +1,15 @@
-﻿using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Services;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Services;
 using Alabo.Framework.Core.WebUis.Models.Links;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json.Linq;
 
-namespace Alabo.App.Core.Common.Domain.Services {
+namespace Alabo.Framework.Basic.AutoConfigs.Domain.Services {
 
     public interface IAutoConfigService : IService<AutoConfig, long> {
 

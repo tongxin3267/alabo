@@ -12,6 +12,7 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Mapping;
 
 namespace Alabo.App.Shop.Order.Domain.Services {

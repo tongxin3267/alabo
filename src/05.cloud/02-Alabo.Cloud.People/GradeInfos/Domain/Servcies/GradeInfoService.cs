@@ -20,6 +20,7 @@ using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.Tasks.Domain.Entities;
 using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Core.Tasks.Domain.Services;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 
 namespace Alabo.App.Core.User.Domain.Services {
 

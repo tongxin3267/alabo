@@ -23,6 +23,7 @@ using Alabo.App.Core.User.Domain.Services;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Domains.Base.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using ZKCloud.Open.ApiBase.Models;
 using Alabo.RestfulApi;
 using Microsoft.AspNetCore.Mvc;

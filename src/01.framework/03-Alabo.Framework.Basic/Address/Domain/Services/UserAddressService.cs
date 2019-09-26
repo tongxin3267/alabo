@@ -12,6 +12,7 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Mapping;
 using Alabo.Users.Services;
 

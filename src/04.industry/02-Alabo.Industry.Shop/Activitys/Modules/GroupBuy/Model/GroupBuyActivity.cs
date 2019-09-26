@@ -17,6 +17,7 @@ using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Mapping;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;

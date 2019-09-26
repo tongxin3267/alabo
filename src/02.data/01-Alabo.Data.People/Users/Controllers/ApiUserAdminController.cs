@@ -16,6 +16,7 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Core.User.Controllers {

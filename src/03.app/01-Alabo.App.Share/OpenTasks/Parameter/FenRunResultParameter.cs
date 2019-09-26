@@ -5,6 +5,7 @@ using Alabo.Framework.Core.Enums.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Users.Entities;
 
 namespace Alabo.App.Open.Tasks.Parameter {

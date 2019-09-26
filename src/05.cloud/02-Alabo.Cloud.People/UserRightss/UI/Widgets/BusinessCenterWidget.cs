@@ -17,6 +17,7 @@ using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Framework.Core.WebUis.Design.Widgets;
 using Alabo.Exceptions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Users.Entities;
 
 namespace Alabo.App.Market.UI.Widgets {

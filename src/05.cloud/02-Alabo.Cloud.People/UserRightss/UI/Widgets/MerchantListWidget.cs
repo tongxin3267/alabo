@@ -7,6 +7,7 @@ using Alabo.App.Market.UserRightss.Domain.Entities;
 using Alabo.App.Market.UserRightss.Domain.Services;
 using Alabo.Framework.Core.WebUis.Design.Widgets;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Helpers;
 using Alabo.Mapping;
 

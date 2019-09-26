@@ -6,6 +6,7 @@ using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Share.Kpi.Domain.CallBack;
 using Alabo.App.Share.Kpi.Domain.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Share.Kpi.Controllers {

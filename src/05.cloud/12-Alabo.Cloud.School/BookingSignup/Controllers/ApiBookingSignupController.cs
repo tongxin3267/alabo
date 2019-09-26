@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using ZKCloud.Open.ApiBase.Models;
 using ZKCloud.Open.ApiStore.Payment.Modules.Alipay;
 using ZKCloud.Open.ApiStore.Payment.Modules.Alipay.Notify;

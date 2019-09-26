@@ -18,6 +18,7 @@ using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Framework.Core.WebUis.Models.Lists;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Relations.Domain.Services;
 using ZKCloud.Open.ApiBase.Models;
 using Alabo.RestfulApi;

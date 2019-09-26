@@ -7,6 +7,7 @@ using Alabo.App.Open.Tasks.Base;
 using Alabo.Helpers;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Users.Entities;
 
 namespace Alabo.App.Open.Tasks.Modules {

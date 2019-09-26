@@ -15,6 +15,7 @@ using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Domains.Base.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using ZKCloud.Open.ApiBase.Models;
 using Alabo.Web.Mvc.Controllers;
 using UserDetail = Alabo.Users.Entities.UserDetail;

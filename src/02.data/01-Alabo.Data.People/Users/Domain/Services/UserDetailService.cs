@@ -16,6 +16,7 @@ using Alabo.Maps;
 using Alabo.UI;
 using System;
 using System.Collections.Generic;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebApis.Service;

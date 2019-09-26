@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Helpers;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;

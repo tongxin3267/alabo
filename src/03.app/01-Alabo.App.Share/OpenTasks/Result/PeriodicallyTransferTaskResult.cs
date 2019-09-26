@@ -10,6 +10,7 @@ using Alabo.App.Core.User.Domain.Repositories;
 using Alabo.App.Open.Tasks.Base;
 using Alabo.App.Open.Tasks.Parameter;
 using Alabo.Domains.Repositories.EFCore;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 
 namespace Alabo.App.Open.Tasks.Result {
 

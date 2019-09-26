@@ -17,6 +17,7 @@ using Alabo.Framework.Core.WebUis.Models.Previews;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using ZKCloud.Open.ApiBase.Models;
 using ApiResult = ZKCloud.Open.ApiBase.Models.ApiResult;
 

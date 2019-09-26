@@ -1,5 +1,6 @@
 ﻿using Alabo.App.Core.Common.Domain.Services;
 using Alabo.AutoConfigs;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Web.Mvc.ViewModel;
 
 namespace Alabo.App.Shop.Product.ViewModels {

@@ -1,12 +1,20 @@
-﻿using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.App.Core.Common.Domain.Repositories;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 using Alabo.App.Core.Finance.Domain.CallBacks;
+using Alabo.AutoConfigs;
+using Alabo.AutoConfigs.Entities;
+using Alabo.AutoConfigs.Repositories;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Core.Reflections.Services;
+using Alabo.Framework.Core.WebUis.Models.Links;
 using Alabo.Reflections;
 using Alabo.Runtime;
 using Alabo.Web.Mvc.Attributes;
@@ -14,18 +22,8 @@ using Alabo.Web.ViewFeatures;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using Alabo.AutoConfigs;
-using Alabo.AutoConfigs.Entities;
-using Alabo.AutoConfigs.Repositories;
-using Alabo.Framework.Core.Reflections.Services;
-using Alabo.Framework.Core.WebUis.Models.Links;
 
-namespace Alabo.App.Core.Common.Domain.Services {
+namespace Alabo.Framework.Basic.AutoConfigs.Domain.Services {
 
     public class AutoConfigService : ServiceBase<AutoConfig, long>, IAutoConfigService {
         private static readonly string AutoConfigCacheKey = "AutoConfigCacheKey_";

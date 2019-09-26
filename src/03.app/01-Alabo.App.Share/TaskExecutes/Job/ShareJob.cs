@@ -11,6 +11,7 @@ using Alabo.Framework.Core.Admins.Configs;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Dependency;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Runtime;
 using Alabo.Schedules.Job;
 

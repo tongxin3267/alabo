@@ -15,6 +15,7 @@ using Alabo.Domains.Base.Entities;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Helpers;
 using ZKCloud.Open.ApiStore.Payment.Modules.Alipay;
 using ZKCloud.Open.ApiStore.Payment.Modules.Alipay.Notify;

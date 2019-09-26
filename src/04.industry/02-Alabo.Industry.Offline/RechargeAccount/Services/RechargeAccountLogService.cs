@@ -13,6 +13,7 @@ using Alabo.Extensions;
 using MongoDB.Bson;
 using System;
 using System.Linq;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 
 namespace Alabo.App.Offline.RechargeAccount.Services {
 

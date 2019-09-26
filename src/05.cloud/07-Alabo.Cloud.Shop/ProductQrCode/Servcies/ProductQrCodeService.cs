@@ -17,6 +17,7 @@ using QRCoder;
 using _07_Alabo.Cloud.Shop.ProductQrCode.Servcies;
 using Alabo.AutoConfigs;
 using Alabo.Files;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 
 namespace Alabo.Cloud.Shop.ProductQrCode.Servcies {
 

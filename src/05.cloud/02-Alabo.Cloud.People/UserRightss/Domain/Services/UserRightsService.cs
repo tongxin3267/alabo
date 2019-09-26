@@ -31,6 +31,7 @@ using Alabo.App.Shop.Order.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Entities.Extensions;
 using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.App.Shop.Order.Domain.Services;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.Valids.Services;
 using Alabo.Framework.Core.WebApis.Service;

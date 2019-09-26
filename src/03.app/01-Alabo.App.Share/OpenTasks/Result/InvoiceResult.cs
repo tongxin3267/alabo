@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using Alabo.App.Share.Share.Domain.Services;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Reward = Alabo.App.Share.Share.Domain.Entities.Reward;
 
 namespace Alabo.App.Open.Tasks.Result {
