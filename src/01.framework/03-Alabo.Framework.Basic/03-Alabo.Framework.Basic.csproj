@@ -16,6 +16,7 @@
     <Folder Include="Letters\Domain\Configs\" />
     <Folder Include="Letters\Domain\Repositories\" />
     <Folder Include="Letters\Dtos\" />
+    <Folder Include="Regions\Domain\Configs\" />
   </ItemGroup>
 
 </Project>
