@@ -25,6 +25,7 @@ using Alabo.Domains.Query.Dto;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Relations.Domain.Services;
+using Alabo.Framework.Basic.Relations.Dtos;
 using Alabo.Mapping;
 using Alabo.Maps;
 using Alabo.Randoms;

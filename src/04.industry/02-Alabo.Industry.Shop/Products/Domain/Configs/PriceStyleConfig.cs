@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Linq;
 using System.Reflection;
-using Alabo.App.Core.Common;
+
 using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Shop.Product.Domain.Enums;

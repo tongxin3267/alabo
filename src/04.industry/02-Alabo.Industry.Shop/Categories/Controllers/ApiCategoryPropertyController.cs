@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.Common;
+
 using Alabo.App.Core.User;
 using Alabo.App.Shop.Category.Domain.Entities;
 using Alabo.App.Shop.Category.Domain.Services;

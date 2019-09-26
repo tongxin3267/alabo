@@ -36,7 +36,7 @@ namespace Alabo.Test.Generation.CodeTemplate {
                 testBuilder.AppendLine("using Alabo.Domains.Entities;");
                 testBuilder.AppendLine("using Microsoft.AspNetCore.Mvc;");
                 testBuilder.AppendLine("using Alabo.Framework.Core.WebApis.Filter;");
-                testBuilder.AppendLine("using Alabo.App.Core.Common;");
+                testBuilder.AppendLine("");
                 testBuilder.AppendLine("using MongoDB.Bson;");
                 testBuilder.AppendLine("using Alabo.App.Core.User;");
                 testBuilder.AppendLine("using Alabo.RestfulApi;using ZKCloud.Open.ApiBase.Configuration;");

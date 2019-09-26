@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Castle.Components.DictionaryAdapter;
-using OfficeOpenXml.Drawing.Vml;
-using Alabo.App.Core.Common.Domain.Dtos;
-using Alabo.App.Shop.Category.Domain.Entities;
-using Alabo.App.Shop.Product.Domain.Entities;
-using Alabo.App.Shop.Product.Domain.Entities.Extensions;
+﻿using Alabo.App.Shop.Product.Domain.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Validations;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Shop.Store.Domain.Dtos {
+namespace Alabo.App.Shop.Store.Domain.Dtos
+{
 
     public class ProductEditOuput {
 

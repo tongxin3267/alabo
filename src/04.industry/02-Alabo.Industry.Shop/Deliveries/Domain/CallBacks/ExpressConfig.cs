@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;using MongoDB.Bson.Serialization.Attributes;
 using System.Reflection;
-using Alabo.App.Core.Common;
+
 using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.App.Shop.Store.Domain.Enums;
 using Alabo.AutoConfigs;

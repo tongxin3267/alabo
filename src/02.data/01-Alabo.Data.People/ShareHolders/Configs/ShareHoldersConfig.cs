@@ -1,12 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Core.Common;
-using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
+﻿using Alabo.AutoConfigs;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.App.Agent.ShareHolders.CallBacks {
+namespace Alabo.App.Agent.ShareHolders.CallBacks
+{
 
     /// <summary>
     ///     股东配置

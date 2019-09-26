@@ -1,25 +1,18 @@
-using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.Common;
 using Alabo.App.Core.Employes.Domain.Dtos;
 using Alabo.App.Core.Employes.Domain.Entities;
 using Alabo.App.Core.Employes.Domain.Services;
-using Alabo.App.Core.User;
 using Alabo.App.Core.User.Controllers;
 using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.Exceptions;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
-using Alabo.UI;
 using ApiResult = ZKCloud.Open.ApiBase.Models.ApiResult;
 
-namespace Alabo.App.Core.Employes.Controllers {
+namespace Alabo.App.Core.Employes.Controllers
+{
 
     [ApiExceptionFilter]
     [Route("Api/Employee/[action]")]

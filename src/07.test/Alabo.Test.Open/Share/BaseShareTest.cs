@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
-using Alabo.App.Core.Common.Domain;
+
 using Alabo.App.Core.Tasks;
 using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Core.Tasks.Domain.Services;

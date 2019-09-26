@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Common;
+
 using Alabo.AutoConfigs;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;

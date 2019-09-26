@@ -1,10 +1,9 @@
-﻿using Alabo.App.Core.Common;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.App.Core.User;
+﻿using Alabo.App.Core.User;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.Reflections.Interfaces;
 using Alabo.Helpers;
 using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
@@ -15,11 +14,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
 
-using Alabo.AutoConfigs;
-using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
-using Alabo.Framework.Core.Reflections.Interfaces;
-
-namespace Alabo.App.Agent.Citys.Domain.CallBacks {
+namespace Alabo.App.Agent.Citys.Domain.CallBacks
+{
 
     /// <summary>
     ///     市代理等级

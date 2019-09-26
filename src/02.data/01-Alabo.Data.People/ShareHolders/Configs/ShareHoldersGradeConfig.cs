@@ -1,23 +1,21 @@
-﻿using Newtonsoft.Json;
+﻿using Alabo.App.Core.User;
+using Alabo.AutoConfigs;
+using Alabo.AutoConfigs.Entities;
+using Alabo.Domains.Enums;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.Reflections.Interfaces;
+using Alabo.Helpers;
+using Alabo.Reflections;
+using Alabo.Web.Mvc.Attributes;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
-using Alabo.App.Core.Common;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.App.Core.User;
-using Alabo.AutoConfigs;
-using Alabo.AutoConfigs.Entities;
-using Alabo.Framework.Core.Reflections.Interfaces;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
-using Alabo.Helpers;
-using Alabo.Reflections;
-using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Agent.ShareHolders.CallBacks {
+namespace Alabo.App.Agent.ShareHolders.CallBacks
+{
 
     /// <summary>
     ///     股东等级

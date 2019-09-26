@@ -1,23 +1,11 @@
-using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using Alabo.Domains.Entities;
-using Microsoft.AspNetCore.Mvc;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.Common;
-using MongoDB.Bson;
-using Alabo.App.Core.User;
-using Alabo.RestfulApi;
-using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.Domains.Services;
-using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.Controllers;
-using Alabo.App.Agent.Province.Domain.Entities;
 using Alabo.App.Agent.Province.Domain.Services;
 using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 
-namespace Alabo.App.Agent.Province.Controllers {
+namespace Alabo.App.Agent.Province.Controllers
+{
 
     [ApiExceptionFilter]
     [Route("Api/Province/[action]")]

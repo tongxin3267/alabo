@@ -2,7 +2,7 @@
 using Quartz;
 using System;
 using System.Threading.Tasks;
-using Alabo.App.Core.Common.Domain;
+
 using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Core.Tasks.Domain.Repositories;
 using Alabo.App.Core.Tasks.Domain.Services;
@@ -11,6 +11,7 @@ using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Dependency;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Basic.Notifications;
 using Alabo.Runtime;
 using Alabo.Schedules.Job;
 
