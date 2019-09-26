@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using MongoDB.Bson;
-using Alabo.App.Core.Common.Domain.Entities;
+using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.Domains.Services;
 
 namespace Alabo.App.Core.Common.Domain.Services {

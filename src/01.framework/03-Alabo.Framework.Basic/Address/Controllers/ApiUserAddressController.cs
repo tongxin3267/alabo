@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Alabo.Core.WebApis.Controller;
 using Alabo.App.Core.Api.Filter;
-using Alabo.App.Core.Common.Domain.Entities;
+using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Services;

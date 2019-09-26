@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection;
-using Alabo.App.Core.Common.Domain.Entities;
+using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.AutoConfigs;

@@ -8,7 +8,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.Message.Models;
 
-namespace Alabo.App.Core.Common.Domain.Entities {
+namespace Alabo.Framework.Basic.Relations.Domain.Entities {
 
     /// <summary>
     ///     消息发送队列

@@ -12,7 +12,7 @@ using Alabo.App.Agent.Circle.Domain.Services;
 using Alabo.App.Agent.Circle.Domain.Entities;
 using Alabo.Validations;
 
-namespace Alabo.App.Core.Common.Domain.Entities {
+namespace Alabo.Framework.Basic.Relations.Domain.Entities {
 
     /// <summary>
     ///     商圈

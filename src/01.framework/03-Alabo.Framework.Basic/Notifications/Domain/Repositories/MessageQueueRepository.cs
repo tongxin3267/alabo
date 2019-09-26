@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using ZKCloud.Open.Message.Models;
-using MessageQueue = Alabo.App.Core.Common.Domain.Entities.MessageQueue;
+using MessageQueue = Alabo.Framework.Basic.Relations.Domain.Entities.MessageQueue;
 
 namespace Alabo.App.Core.Common.Domain.Repositories {
 

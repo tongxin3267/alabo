@@ -3,7 +3,7 @@ using MongoDB.Bson;
 using System;
 using System.IO;
 using System.Linq;
-using Alabo.App.Core.Common.Domain.Entities;
+using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;

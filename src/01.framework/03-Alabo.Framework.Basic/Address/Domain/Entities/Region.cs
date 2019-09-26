@@ -12,7 +12,7 @@ using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.Common.Domain.Entities {
+namespace Alabo.Framework.Basic.Relations.Domain.Entities {
 
     /// <summary>
     ///     地区

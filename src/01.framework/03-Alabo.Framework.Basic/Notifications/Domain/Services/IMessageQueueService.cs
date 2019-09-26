@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Alabo.App.Core.Common.Domain.Entities;
+using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.Domains.Services;
 
 namespace Alabo.App.Core.Common.Domain.Services {

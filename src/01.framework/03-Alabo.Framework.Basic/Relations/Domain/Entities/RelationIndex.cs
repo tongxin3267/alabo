@@ -6,7 +6,7 @@ using Alabo.Domains.Entities;
 using Alabo.Tenants;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Common.Domain.Entities {
+namespace Alabo.Framework.Basic.Relations.Domain.Entities {
 
     /// <summary>
     ///     级联关系 与实体之间的索引、可以实现一对多、多对多的关系图

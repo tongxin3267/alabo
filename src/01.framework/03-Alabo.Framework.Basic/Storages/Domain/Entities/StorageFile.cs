@@ -4,7 +4,7 @@ using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Common.Domain.Entities {
+namespace Alabo.Framework.Basic.Relations.Domain.Entities {
 
     /// <summary>
     /// </summary>

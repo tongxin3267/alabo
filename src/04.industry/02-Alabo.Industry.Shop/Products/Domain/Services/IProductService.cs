@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Alabo.App.Core.Common.Domain.Entities;
+using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.App.Shop.Product.DiyModels;
 using Alabo.App.Shop.Product.Domain.Dtos;
 using Alabo.App.Shop.Product.ViewModels;

@@ -9,7 +9,7 @@ using Alabo.App.Core.Admin.Domain.Services;
 using Alabo.Core.WebApis.Controller;
 using Alabo.App.Core.Api.Domain.Service;
 using Alabo.App.Core.Api.Filter;
-using Alabo.App.Core.Common.Domain.Entities;
+using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Themes.DiyModels.Links;
 using Alabo.Extensions;
