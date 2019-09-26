@@ -1,5 +1,4 @@
 using Xunit;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.Framework.Basic.Notifications.Domain.Services;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;

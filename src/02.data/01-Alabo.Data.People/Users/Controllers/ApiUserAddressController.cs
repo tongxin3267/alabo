@@ -4,9 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;
@@ -16,6 +14,8 @@ using ZKCloud.Open.ApiBase.Models;
 using Alabo.RestfulApi;
 using Alabo.UI;
 using System.Linq;
+using Alabo.Framework.Basic.Address.Domain.Entities;
+using Alabo.Framework.Basic.Address.Domain.Services;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Regexs;
 

@@ -9,7 +9,6 @@ using Alabo.Domains.Repositories;
 using Alabo.App.Agent.Citys.Domain.Entities;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.Domains.Entities;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.Users.Entities;
 
 namespace Alabo.App.Agent.Citys.Domain.Services

@@ -17,7 +17,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Share.Share.Domain.Entities;
 using Alabo.App.Share.Share.Domain.Enums;
 using Alabo.Domains.Enums;

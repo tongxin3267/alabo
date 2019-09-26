@@ -9,12 +9,12 @@ using Alabo.Domains.Repositories;
 using Alabo.App.Market.SecondBuy.Domain.Entities;
 using Alabo.Domains.Entities;
 using System.Collections.Generic;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Shop.Product.Domain.Services;
 using System.Text.RegularExpressions;
 using Alabo.Domains.Base.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.Address.Domain.Services;
 using Alabo.Randoms;
 
 namespace Alabo.App.Market.SecondBuy.Domain.Services {

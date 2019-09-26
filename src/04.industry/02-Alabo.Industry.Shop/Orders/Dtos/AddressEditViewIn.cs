@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Alabo.App.Core.User.Domain.Entities;
+using Alabo.Framework.Basic.Address.Domain.Entities;
 
 namespace Alabo.App.Shop.Order.Domain.Dtos
 {

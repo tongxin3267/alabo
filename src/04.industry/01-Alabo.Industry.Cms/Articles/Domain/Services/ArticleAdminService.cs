@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Alabo.App.Cms.Articles.Domain.Entities;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;

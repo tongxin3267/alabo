@@ -1,7 +1,5 @@
-﻿using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.User.Domain.Callbacks;
+﻿using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Base.Services;

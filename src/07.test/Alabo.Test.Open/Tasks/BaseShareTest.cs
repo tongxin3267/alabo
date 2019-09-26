@@ -4,7 +4,6 @@ using Alabo.App.Core.Tasks;
 using Alabo.App.Core.Tasks.Domain.Entities;
 using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
@@ -16,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using Alabo.App.Share.Share.Domain.Services;
+using Alabo.Framework.Basic.Address.Domain.Entities;
 using Alabo.Users.Entities;
 using Xunit;
 

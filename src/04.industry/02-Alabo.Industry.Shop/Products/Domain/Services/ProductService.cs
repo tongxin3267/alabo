@@ -1,5 +1,4 @@
-﻿using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Finance.Domain.CallBacks;
+﻿using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Shop.Activitys.Domain.Enum;
 using Alabo.App.Shop.Activitys.Domain.Services;

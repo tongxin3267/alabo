@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using Xunit;
 using Alabo.App.Agent.Citys.Domain.CallBacks;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.UserType.Modules.City;
 using Alabo.Test.Base.Attribute;

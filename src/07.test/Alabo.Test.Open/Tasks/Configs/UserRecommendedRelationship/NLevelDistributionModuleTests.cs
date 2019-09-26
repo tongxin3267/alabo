@@ -4,7 +4,6 @@ using Xunit;
 using Alabo.App.Core.Finance.Domain.Entities;
 using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Open.Tasks.Configs.UserRecommendedRelationship;
 using Alabo.Extensions;

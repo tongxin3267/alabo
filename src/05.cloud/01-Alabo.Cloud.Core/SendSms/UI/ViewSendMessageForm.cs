@@ -1,5 +1,4 @@
-﻿using Alabo.App.Core.Common.Domain.Services;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.Mapping;

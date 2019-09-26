@@ -1,11 +1,10 @@
-﻿using MongoDB.Bson;
-using System.Collections.Generic;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Entities;
+﻿using System.Collections.Generic;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Framework.Basic.Address.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.User.Domain.Services {
+namespace Alabo.Framework.Basic.Address.Domain.Services {
 
     /// <summary>
     ///     用户地址管理

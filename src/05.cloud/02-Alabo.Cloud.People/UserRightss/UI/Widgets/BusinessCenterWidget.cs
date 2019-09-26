@@ -12,7 +12,6 @@ using Alabo.App.Market.UserRightss.Domain.Entities;
 using Alabo.App.Core.User.Domain.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.App.Market.UserRightss.Domain.CallBack;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Framework.Core.WebUis.Design.Widgets;

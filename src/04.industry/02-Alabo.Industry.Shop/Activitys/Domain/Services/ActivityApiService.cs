@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Shop.Activitys.Domain.Entities;
 using Alabo.App.Shop.Activitys.Domain.Enum;
 using Alabo.App.Shop.Activitys.Domain.Repositories;

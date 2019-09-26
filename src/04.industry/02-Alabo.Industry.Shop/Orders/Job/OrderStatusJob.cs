@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Quartz;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Shop.Order.Domain.CallBacks;
 using Alabo.App.Shop.Order.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Enums;

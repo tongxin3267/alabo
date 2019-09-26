@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Shop.AfterSale.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Dtos;
 using Alabo.App.Shop.Order.Dtos;
 using Alabo.App.Shop.Product.Domain.Dtos;
 using Alabo.Domains.Entities.Extensions;
+using Alabo.Framework.Basic.Address.Domain.Entities;
 using Alabo.Users.Entities;
 
 namespace Alabo.App.Shop.Order.Domain.Entities.Extensions

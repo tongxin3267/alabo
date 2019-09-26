@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Offline.Merchants.Domain.Services;
 using Alabo.App.Offline.Product.Domain.CallBacks;
 using Alabo.App.Offline.Product.Domain.Services;

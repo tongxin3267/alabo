@@ -1,6 +1,4 @@
-﻿using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Employes.Domain.Services;
-using Alabo.App.Core.User.Domain.Entities;
+﻿using Alabo.App.Core.Employes.Domain.Services;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Enums;
@@ -8,6 +6,7 @@ using Alabo.Helpers;
 using System;
 using Alabo.Framework.Core.Reflections.Interfaces;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.Address.Domain.Services;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Users.Entities;
 

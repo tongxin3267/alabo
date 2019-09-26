@@ -1,7 +1,6 @@
 using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Share.Kpi.Domain.CallBack;
 using Alabo.App.Share.Kpi.Domain.Entities;
 using Alabo.App.Share.Kpi.ViewModels;

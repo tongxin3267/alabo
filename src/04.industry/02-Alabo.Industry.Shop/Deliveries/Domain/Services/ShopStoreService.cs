@@ -1,6 +1,4 @@
-﻿using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Core.User.Domain.Services;
+﻿using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Shop.Activitys.Modules.GroupBuy.Model;
 using Alabo.App.Shop.Order.Domain.Dtos;
 using Alabo.App.Shop.Product.Domain.Dtos;
@@ -26,6 +24,7 @@ using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Framework.Basic.Address.Domain.Entities;
 using Alabo.Framework.Core.WebApis.Service;
 
 namespace Alabo.App.Shop.Store.Domain.Services {

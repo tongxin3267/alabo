@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Share.Kpi.ViewModels;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;

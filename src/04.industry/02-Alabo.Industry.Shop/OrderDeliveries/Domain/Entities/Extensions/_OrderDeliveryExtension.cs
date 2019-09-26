@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.Domains.Entities.Extensions;
 using Alabo.Users.Entities;
 using ZKCloud.Open.LogisticsTracking.kdniao;

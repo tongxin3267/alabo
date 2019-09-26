@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Shop.Product.ViewModels;
 using Alabo.Users.Entities;
 

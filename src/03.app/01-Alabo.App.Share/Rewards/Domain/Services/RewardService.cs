@@ -1,5 +1,4 @@
-﻿using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Finance.Domain.CallBacks;
+﻿using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.App.Core.User;

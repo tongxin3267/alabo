@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 using Alabo.App.Core.Common;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.AutoConfigs;
 using Alabo.Domains.Entities;

@@ -1,7 +1,6 @@
 ﻿using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Dtos;
 using Alabo.App.Shop.Product.Domain.Dtos;
 using Alabo.App.Shop.Store.Domain.Dtos;
@@ -10,6 +9,7 @@ using Alabo.App.Shop.Store.ViewModels;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
 using Alabo.Domains.Services;
+using Alabo.Framework.Basic.Address.Domain.Entities;
 
 namespace Alabo.App.Shop.Store.Domain.Services {
 

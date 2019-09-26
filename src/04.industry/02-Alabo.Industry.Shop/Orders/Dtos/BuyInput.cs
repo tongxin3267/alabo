@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using MongoDB.Bson;
 using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;

@@ -5,7 +5,6 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
 using Alabo.App.Core.Common.Domain.CallBacks;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.AutoConfigs;

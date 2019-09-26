@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Xunit;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Core.User.ViewModels;
 using Alabo.Extensions;

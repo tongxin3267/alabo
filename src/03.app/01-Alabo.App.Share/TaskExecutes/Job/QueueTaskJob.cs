@@ -2,7 +2,6 @@
 using Quartz;
 using System;
 using System.Threading.Tasks;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.Framework.Core.Admins.Configs;
 using Alabo.Dependency;

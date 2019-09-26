@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.App.Core.Themes;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Entities.Extensions;
 using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.App.Shop.Product.Domain.Dtos;

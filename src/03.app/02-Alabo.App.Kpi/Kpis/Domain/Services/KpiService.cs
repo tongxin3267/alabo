@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Share.Kpi.Domain.CallBack;
 using Alabo.App.Share.Kpi.Domain.Repositories;
@@ -16,7 +15,6 @@ namespace Alabo.App.Share.Kpi.Domain.Services {
 
     using System;
     using System.Collections.Generic;
-    using Alabo.App.Core.User.Domain.Entities;
     using Alabo.Framework.Core.Enums.Enum;
     using Kpi = Entities.Kpi;
 

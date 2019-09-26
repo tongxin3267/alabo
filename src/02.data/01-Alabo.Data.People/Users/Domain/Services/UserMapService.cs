@@ -1,8 +1,6 @@
-﻿using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Tasks.Domain.Services;
+﻿using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Repositories;
 using Alabo.App.Core.User.ViewModels;
 using Alabo.App.Core.User.ViewModels.Admin;

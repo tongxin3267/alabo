@@ -6,7 +6,6 @@ using System.ComponentModel.DataAnnotations.Schema;using MongoDB.Bson.Serializat
 using System.Reflection;
 using Alabo.App.Core.Common;
 using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
 using Alabo.Framework.Core.Enums.Enum;

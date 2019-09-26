@@ -6,7 +6,6 @@ using System.Linq;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.App.Core.Common.Domain.Dtos;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Employes.Domain.Dtos;
 using Alabo.App.Core.Employes.Domain.Services;
 using Alabo.App.Core.User.Domain.Dtos;

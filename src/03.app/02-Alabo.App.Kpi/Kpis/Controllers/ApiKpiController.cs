@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Share.Kpi.Domain.CallBack;
 using Alabo.App.Share.Kpi.Domain.Services;
 using Alabo.Extensions;

@@ -1,12 +1,11 @@
-﻿using MongoDB.Bson;
-using System.Collections.Generic;
-using Alabo.App.Core.Common.Domain.Dtos;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.Framework.Core.Enums.Enum;
+﻿using System.Collections.Generic;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Framework.Basic.Address.Domain.Entities;
+using Alabo.Framework.Core.Enums.Enum;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Common.Domain.Services {
+namespace Alabo.Framework.Basic.Address.Domain.Services {
 
     public interface IRegionService : IService<Region, ObjectId> {
 

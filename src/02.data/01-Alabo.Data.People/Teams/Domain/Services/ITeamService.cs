@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.Domains.Services;
 using Alabo.Users.Dtos;
 using Alabo.Users.Entities;

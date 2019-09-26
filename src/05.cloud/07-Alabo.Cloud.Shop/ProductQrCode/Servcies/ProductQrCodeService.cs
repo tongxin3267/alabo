@@ -6,7 +6,6 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
 using Alabo.App.Core.Common.Domain.CallBacks;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Shop.Product.Domain.Services;
 using Alabo.App.Shop.Product.ViewModels;
 using Alabo.Datas.UnitOfWorks;

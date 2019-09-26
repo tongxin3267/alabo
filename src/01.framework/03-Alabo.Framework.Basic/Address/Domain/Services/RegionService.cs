@@ -1,20 +1,18 @@
-﻿using Alabo.App.Core.Common.Domain.Dtos;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.Framework.Core.Enums.Enum;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Alabo.App.Core.ApiStore.AMap.District;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
+using Alabo.Framework.Core.Enums.Enum;
 using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Alabo.App.Core.ApiStore.AMap.District;
 
-namespace Alabo.App.Core.Common.Domain.Services {
+namespace Alabo.Framework.Basic.Address.Domain.Services {
 
     public class RegionService : ServiceBase<Region, ObjectId>, IRegionService {
 

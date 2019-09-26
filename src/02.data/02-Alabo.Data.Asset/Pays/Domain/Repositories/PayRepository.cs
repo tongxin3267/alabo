@@ -1,5 +1,4 @@
-﻿using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Finance.Domain.Dtos.Pay;
+﻿using Alabo.App.Core.Finance.Domain.Dtos.Pay;
 using Alabo.App.Core.Finance.Domain.Entities;
 using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.App.Core.Tasks.Domain.Enums;

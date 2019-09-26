@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Dtos;
 using Alabo.App.Shop.Order.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Entities.Extensions;
@@ -9,6 +8,7 @@ using Alabo.App.Shop.Order.ViewModels;
 using Alabo.App.Shop.Order.ViewModels.OrderEdit;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Framework.Basic.Address.Domain.Entities;
 using Alabo.Users.Entities;
 
 namespace Alabo.App.Shop.Order.Domain.Services {

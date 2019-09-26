@@ -1,6 +1,5 @@
 ﻿using Alabo.App.Core.Common;
 using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;

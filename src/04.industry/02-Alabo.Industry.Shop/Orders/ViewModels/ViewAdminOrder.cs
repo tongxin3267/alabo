@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Alabo.App.Core.Finance.Domain.Entities;
 using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Entities.Extensions;
 using Alabo.App.Shop.Order.ViewModels.OrderEdit;

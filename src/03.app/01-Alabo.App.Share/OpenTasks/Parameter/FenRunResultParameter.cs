@@ -11,7 +11,6 @@ using Alabo.Users.Entities;
 namespace Alabo.App.Open.Tasks.Parameter {
 
     using Alabo.App.Core.Tasks.Domain.Enums;
-    using Core.Common.Domain.Services;
     using Core.Finance.Domain.CallBacks;
     using User = User;
 

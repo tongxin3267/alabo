@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using Xunit;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.Finance.ViewModels.Account;

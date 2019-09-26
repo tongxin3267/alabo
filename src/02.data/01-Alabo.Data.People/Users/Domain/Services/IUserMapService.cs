@@ -1,5 +1,4 @@
-﻿using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Core.User.ViewModels;
+﻿using Alabo.App.Core.User.ViewModels;
 using Alabo.App.Core.User.ViewModels.Admin;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;

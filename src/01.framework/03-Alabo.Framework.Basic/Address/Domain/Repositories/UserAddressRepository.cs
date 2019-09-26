@@ -1,7 +1,7 @@
 using MongoDB.Bson;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
+using Alabo.Framework.Basic.Address.Domain.Entities;
 
 namespace Alabo.App.Core.User.Domain.Repositories {
 

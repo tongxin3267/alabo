@@ -7,7 +7,6 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Shop.Category.Domain.Services;
 using Alabo.App.Shop.Product.Domain.CallBacks;
 using Alabo.App.Shop.Product.Domain.Entities;
