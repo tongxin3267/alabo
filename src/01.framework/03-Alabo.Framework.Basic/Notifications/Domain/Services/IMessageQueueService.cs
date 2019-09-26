@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.Domains.Services;
+using Alabo.Framework.Basic.Notifications.Domain.Entities;
 
-namespace Alabo.App.Core.Common.Domain.Services {
+namespace Alabo.Framework.Basic.Notifications.Domain.Services {
 
     public interface IMessageQueueService : IService<MessageQueue, long> {
 

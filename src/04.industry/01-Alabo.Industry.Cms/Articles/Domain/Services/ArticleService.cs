@@ -15,6 +15,7 @@ using Alabo.Domains.Query;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.Relations.Domain.Services;
 using Alabo.Mapping;
 
 namespace Alabo.App.Cms.Articles.Domain.Services {

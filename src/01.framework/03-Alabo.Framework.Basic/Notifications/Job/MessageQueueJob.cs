@@ -8,13 +8,14 @@ using Alabo.App.Core.Common.Domain;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.Cache;
 using Alabo.Dependency;
+using Alabo.Framework.Basic.Notifications.Domain.Services;
 using Alabo.Regexs;
 using ZKCloud.Open;
 using ZKCloud.Open.ApiBase.Configuration;
 using ZKCloud.Open.ApiBase.Models;
 using ZKCloud.Open.Message.Models;
 using ZKCloud.Open.Message.Services;
-using MessageQueue = Alabo.Framework.Basic.Relations.Domain.Entities.MessageQueue;
+using MessageQueue = Alabo.Framework.Basic.Notifications.Domain.Entities.MessageQueue;
 
 namespace Alabo.App.Core.Common.Job {
 

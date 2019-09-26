@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.Domains.Repositories;
+using Alabo.Framework.Basic.Notifications.Domain.Entities;
 
 namespace Alabo.App.Core.Common.Domain.Repositories {
 

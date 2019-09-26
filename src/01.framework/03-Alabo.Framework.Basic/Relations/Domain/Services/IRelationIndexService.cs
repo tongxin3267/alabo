@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Alabo.Framework.Core.Reflections.Interfaces;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Framework.Basic.Relations.Domain.Entities;
+using Alabo.Framework.Core.Reflections.Interfaces;
 
-namespace Alabo.App.Core.Common.Domain.Services {
+namespace Alabo.Framework.Basic.Relations.Domain.Services {
 
     public interface IRelationIndexService : IService<RelationIndex, long> {
 

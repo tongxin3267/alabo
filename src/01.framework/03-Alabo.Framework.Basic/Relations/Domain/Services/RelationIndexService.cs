@@ -8,6 +8,7 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.Relations.Domain.Services;
 
 namespace Alabo.App.Core.Common.Domain.Services {
 

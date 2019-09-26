@@ -1,14 +1,14 @@
-﻿using Alabo.Datas.Ef.SqlServer;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.Message.Models;
 
-namespace Alabo.Framework.Basic.Relations.Domain.Entities {
+namespace Alabo.Framework.Basic.Notifications.Domain.Entities {
 
     /// <summary>
     ///     消息发送队列
