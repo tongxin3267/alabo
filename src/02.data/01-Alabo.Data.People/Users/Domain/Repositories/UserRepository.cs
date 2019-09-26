@@ -28,7 +28,7 @@ namespace Alabo.App.Core.User.Domain.Repositories {
                  dbo.User_UserDetail.LastLoginTime, dbo.User_UserDetail.ModifiedTime, dbo.User_UserDetail.LoginNum,
                  dbo.User_UserDetail.LastLoginIp, dbo.User_UserDetail.RegisterIp, dbo.User_UserDetail.CreateTime,
                  dbo.User_UserDetail.Birthday, dbo.User_UserDetail.Avator, dbo.User_UserDetail.Sex, dbo.User_UserDetail.AddressId,
-                 dbo.User_UserDetail.RegionId,dbo.User_UserDetail.ServiceCenterUserId, dbo.User_UserDetail.IsServiceCenter,
+                 dbo.User_UserDetail.RegionId,dbo.User_UserDetail.ServiceCenterUserId, dbo.User_UserDetail.Identity,
                   dbo.User_UserDetail.PayPassword, dbo.User_UserDetail.Password,
                  dbo.User_UserMap.LevelNumber, dbo.User_UserMap.TeamNumber,
                  dbo.User_UserMap.TeamSales, dbo.User_UserMap.ChildNode, dbo.User_UserMap.ParentMap,
@@ -411,12 +411,12 @@ namespace Alabo.App.Core.User.Domain.Repositories {
            ([UserId],[Password],[PayPassword] ,
             [RegionId],[AddressId],[Sex],[Birthday]
            ,[CreateTime],[RegisterIp],[LoginNum],[LastLoginIp],[LastLoginTime],
-           [ModifiedTime],[OpenId],[Avator])
+           [ModifiedTime],[OpenId],[Avator],[Identity])
              VALUES
            (@UserId,@Password,@PayPassword ,
             @RegionId,@AddressId,@Sex,@Birthday
            ,@CreateTime,@RegisterIp,@LoginNum,@LastLoginIp,@LastLoginTime,
-           @ModifiedTime,@OpenId,@Avator);
+           @ModifiedTime,@OpenId,@Avator,@Identity);
             select @@identity;";
 
             var parameters = new[]
@@ -439,7 +439,8 @@ namespace Alabo.App.Core.User.Domain.Repositories {
                 RepositoryContext.CreateParameter("@OpenId", userDetail.OpenId ?? "default"),
                 RepositoryContext.CreateParameter("@Avator", userDetail.Avator ?? ""),
 
-                RepositoryContext.CreateParameter("@ModifiedTime", userDetail.ModifiedTime)
+                RepositoryContext.CreateParameter("@ModifiedTime", userDetail.ModifiedTime),
+                RepositoryContext.CreateParameter("@Identity", userDetail.Identity)
 
                 // RepositoryContext.CreateParameter("@Remark",userDetail.Remark)
             };
@@ -458,17 +459,16 @@ namespace Alabo.App.Core.User.Domain.Repositories {
             }
 
             var sql = @"INSERT INTO [dbo].[User_UserMap]
-               ([UserId] ,[LevelNumber],[TeamNumber] ,[TeamSales]
+               ([UserId] ,[LevelNumber],[TeamNumber] ,
                ,[ChildNode] ,[ParentMap])
                  VALUES
-             (@UserId,@LevelNumber,@TeamNumber ,@TeamSales
+             (@UserId,@LevelNumber,@TeamNumber
               ,@ChildNode ,@ParentMap);
                 select @@identity;";
             var parameters = new[]
             {
                 RepositoryContext.CreateParameter("@UserId", userMap.UserId),
                 RepositoryContext.CreateParameter("@LevelNumber", userMap.LevelNumber),
-                RepositoryContext.CreateParameter("@TeamSales", userMap.TeamSales),
                 RepositoryContext.CreateParameter("@TeamNumber", userMap.TeamNumber),
                 RepositoryContext.CreateParameter("@ChildNode", userMap.ChildNode),
                 RepositoryContext.CreateParameter("@ParentMap", userMap.ParentMap)
@@ -517,7 +517,8 @@ namespace Alabo.App.Core.User.Domain.Repositories {
                 Avator = reader["Avator"].ToString(),
                 OpenId = reader["OpenId"].ToString(),
                 ModifiedTime = reader["ModifiedTime"].ToDateTime(),
-                Remark = reader["Remark"].ToString()
+                Remark = reader["Remark"].ToString(),
+                Identity = (bool)reader["Identity"],
             };
             return userDetail;
         }
@@ -527,7 +528,6 @@ namespace Alabo.App.Core.User.Domain.Repositories {
                 Id = reader["DetailId"].ConvertToLong(0),
                 UserId = reader["Id"].ConvertToLong(),
                 LevelNumber = reader["LevelNumber"].ConvertToLong(),
-                TeamSales = reader["TeamSales"].ConvertToDecimal(),
                 TeamNumber = reader["TeamNumber"].ConvertToLong(),
                 ChildNode = reader["ChildNode"].ToString(),
                 ParentMap = reader["ParentMap"].ToString()
@@ -547,8 +547,7 @@ namespace Alabo.App.Core.User.Domain.Repositories {
 
                 ParentId = reader["ParentId"].ConvertToLong(0),
                 IdentityStatus = (IdentityStatus)reader["IdentityStatus"],
-                IsServiceCenter = (bool)reader["IsServiceCenter"],
-                ServiceCenterUserId = reader["ServiceCenterUserId"].ConvertToLong(0),
+                IsIdentity = (bool)reader["Identity"],
                 Sex = (Sex)reader["Sex"].ConvertToLong(0),
                 Avator = reader["Avator"].ToString(),
                 CreateTime = reader["CreateTime"].ConvertToDateTime()

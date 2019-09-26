@@ -134,17 +134,9 @@ namespace Alabo.App.Core.User.ViewModels {
         public string IdentityName { get; set; }
 
         /// <summary>
-        ///     会员是否是门店
+        /// 是否实名认证
         /// </summary>
-        [Display(Name = "是否门店")]
-        [HelpBlock("请确定是否门店")]
-        [Field(ControlsType = ControlsType.DropdownList, EditShow = false, GroupTabId = 1, Width = "150", ListShow = true, SortOrder = 9)]
-        public bool IsServiceCenter { get; set; } = false;
-
-        /// <summary>
-        ///     门店 UserId
-        /// </summary>
-        public long ServiceCenterUserId { get; set; } = 0;
+        public bool IsIdentity { get; set; }
 
         /// <summary>
         ///     性别

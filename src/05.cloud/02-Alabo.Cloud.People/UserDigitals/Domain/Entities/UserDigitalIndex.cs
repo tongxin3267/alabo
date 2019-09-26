@@ -17,10 +17,5 @@ namespace Alabo.Cloud.People.UserDigitals.Domain.Entities {
         /// 数字画像Id
         /// </summary>
         public ObjectId DigitalId { get; set; }
-
-        /// <summary>
-        /// 用户Id
-        /// </summary>
-        public long UserId { get; set; }
     }
 }

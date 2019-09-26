@@ -11,7 +11,7 @@ namespace Alabo.Cloud.People.UserDigitals.Domain.Entities {
     /// TODO 云应用 用户画像
     /// </summary>
     [Table("Cloud_People_UserDigital")]
-    public class UserDigital : AggregateMongodbUserRoot<UserDigital> {
+    public class UserDigital : AggregateMongodbRoot<UserDigital> {
 
         /// <summary>
         /// 标签名称

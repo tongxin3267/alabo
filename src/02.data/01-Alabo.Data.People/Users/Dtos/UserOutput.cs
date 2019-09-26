@@ -111,18 +111,6 @@ namespace Alabo.App.Core.User.Domain.Dtos {
         public string IdentityStatusName { get; set; }
 
         /// <summary>
-        ///     会员是否是门店
-        /// </summary>
-        [DynamicIgnore]
-        public bool IsServiceCenter { get; set; } = false;
-
-        /// <summary>
-        ///     门店 UserId
-        /// </summary>
-        [DynamicIgnore]
-        public long ServiceCenterUserId { get; set; } = 0;
-
-        /// <summary>
         ///     所属区域ID
         /// </summary>
         [Display(Name = "所属区域")]

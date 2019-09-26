@@ -29,15 +29,14 @@ namespace Alabo.App.Core.User.Domain.Repositories {
             }
 
             var sql = @"INSERT INTO [dbo].[User_UserMap]
-               ([UserId] ,[LevelNumber],[TeamNumber] ,[TeamSales]
+               ([UserId] ,[LevelNumber],[TeamNumber]
                ,[ChildNode] ,[ParentMap])
                  VALUES
-             (@UserId ,@LevelNumber,@TeamNumber ,@TeamSales
+             (@UserId ,@LevelNumber,@TeamNumber
               ,@ChildNode ,@ParentMap)";
             var parameters = new[]
             {
                 RepositoryContext.CreateParameter("@LevelNumber", userMap.LevelNumber),
-                RepositoryContext.CreateParameter("@TeamSales", userMap.TeamSales),
                 RepositoryContext.CreateParameter("@TeamNumber", userMap.TeamNumber),
                 RepositoryContext.CreateParameter("@ChildNode", userMap.ChildNode),
                 RepositoryContext.CreateParameter("@ParentMap", userMap.ParentMap)
@@ -130,7 +129,6 @@ namespace Alabo.App.Core.User.Domain.Repositories {
                 ParentMap = reader["ParentMap"].ToString(),
                 LevelNumber = reader["LevelNumber"].ConvertToLong(0),
                 TeamNumber = reader["TeamNumber"].ConvertToLong(0),
-                TeamSales = reader["TeamSales"].ConvertToDecimal(0),
                 ChildNode = reader["ChildNode"].ToString()
             };
             return user;

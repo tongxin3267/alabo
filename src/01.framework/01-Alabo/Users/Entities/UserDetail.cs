@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.Core.Enums.Enum;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -127,7 +128,7 @@ namespace Alabo.Users.Entities {
         /// <summary>
         /// 是否实名认证
         /// </summary>
-        public bool Identity { get; set; }
+        public IdentityStatus IdentityStatus { get; set; }
     }
 
     /// <summary>

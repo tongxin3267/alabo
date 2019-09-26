@@ -118,27 +118,6 @@ namespace Alabo.App.Core.User.ViewModels {
         public IdentityStatus IdentityStatus { get; set; } = IdentityStatus.IsNoPost;
 
         /// <summary>
-        ///
-        /// </summary>
-        [Display(Name = "实名情况")]
-        [HelpBlock("请确定实名")]
-        [Field(ControlsType = ControlsType.Label, GroupTabId = 1, Width = "150", ListShow = false, EditShow = false, SortOrder = 8)]
-        public string IdentityName { get; set; }
-
-        /// <summary>
-        ///     会员是否是门店
-        /// </summary>
-        [Display(Name = "是否门店")]
-        [HelpBlock("请确定是否门店")]
-        [Field(ControlsType = ControlsType.DropdownList, EditShow = false, GroupTabId = 1, Width = "150", ListShow = true, SortOrder = 9)]
-        public bool IsServiceCenter { get; set; } = false;
-
-        /// <summary>
-        ///     门店 UserId
-        /// </summary>
-        public long ServiceCenterUserId { get; set; } = 0;
-
-        /// <summary>
         ///     性别
         /// </summary>
         [Display(Name = "性别")]

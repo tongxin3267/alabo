@@ -26,12 +26,6 @@ namespace Alabo.Users.Entities {
         public long TeamNumber { get; set; } = 0;
 
         /// <summary>
-        ///     团队业绩
-        /// </summary>
-        [Display(Name = "团队业绩")]
-        public decimal TeamSales { get; set; } = 0.0M;
-
-        /// <summary>
         ///     下级会员ID
         /// </summary>
         [Display(Name = "下级会员")]
