@@ -4,7 +4,7 @@ using MongoDB.Bson;
 
 namespace Alabo.Domains.Base.Repositories
 {
-    public interface ITableRepository : IRepository<Table, ObjectId>
+    public interface ILogsRepository : IRepository<Logs, ObjectId>
     {
     }
 }

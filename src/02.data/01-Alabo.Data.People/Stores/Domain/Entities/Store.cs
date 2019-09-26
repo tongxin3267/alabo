@@ -8,8 +8,8 @@ using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Data.People.Stores.Domain.Entities {
-
+namespace Alabo.Data.People.Stores.Domain.Entities
+{
     /// <summary>
     ///     线上商城店铺
     /// </summary>
@@ -17,8 +17,8 @@ namespace Alabo.Data.People.Stores.Domain.Entities {
         GroupName = "基本信息,高级选项", Icon = "fa fa-puzzle-piece", SortOrder = 1, Description = "设置以及查看供应商的详细信息")]
     [AutoDelete(IsAuto = true)]
     [Table("People_ShareHolder")]
-    public class Store : AggregateMongodbUserRoot<Store> {
-
+    public class Store : AggregateMongodbUserRoot<Store>
+    {
         /// <summary>
         ///     供应商名称
         /// </summary>
@@ -59,5 +59,13 @@ namespace Alabo.Data.People.Stores.Domain.Entities {
         /// </summary>
         [Display(Name = "店铺的扩展属性")]
         public StoreExtension StoreExtension { get; set; }
+
+        /// <summary>
+        ///     详细地址
+        /// </summary>
+        [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1, SortOrder = 5)]
+        [Display(Name = "详细地址")]
+        [HelpBlock("详细地址")]
+        public string Address { get; set; }
     }
 }

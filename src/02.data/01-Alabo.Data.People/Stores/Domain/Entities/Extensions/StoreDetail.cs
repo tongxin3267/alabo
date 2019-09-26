@@ -46,14 +46,6 @@ namespace Alabo.Data.People.Stores.Domain.Entities.Extensions
         public long CircleId { get; set; }
 
         /// <summary>
-        ///     详细地址
-        /// </summary>
-        [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1, SortOrder = 5)]
-        [Display(Name = "详细地址")]
-        [HelpBlock("详细地址")]
-        public string Address { get; set; }
-
-        /// <summary>
         ///     联系方式
         ///     可以有多个联系人，List<LinkMan> 的json数据
         /// </summary>

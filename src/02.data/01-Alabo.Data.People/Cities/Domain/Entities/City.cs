@@ -44,14 +44,6 @@ namespace Alabo.Data.People.Cities.Domain.Entities
         public long RegionId { get; set; }
 
         /// <summary>
-        ///     区域名称
-        /// </summary>
-        [Display(Name = "所属城市")]
-        [Field(ControlsType = ControlsType.CityDropList, GroupTabId = 1, EditShow = false, ListShow = true,
-            Width = "120", SortOrder = 600)]
-        public string RegionName { get; set; }
-
-        /// <summary>
         ///     代理费
         /// </summary>
         public decimal Price { get; set; }
@@ -63,14 +55,6 @@ namespace Alabo.Data.People.Cities.Domain.Entities
         [HelpBlock("填写正确的推荐人用户名")]
         [Field(ListShow = false, EditShow = false, SortOrder = 700)]
         public long ParentUserId { get; set; }
-
-        /// <summary>
-        ///     推荐人用户Id
-        /// </summary>
-        [Display(Name = "推荐人")]
-        [HelpBlock("填写正确的推荐人用户名")]
-        [Field(ListShow = false, EditShow = true, ControlsType = ControlsType.TextBox, SortOrder = 700)]
-        public string ParentUserName { get; set; }
 
         /// <summary>
         ///     用户等级Id
@@ -90,14 +74,6 @@ namespace Alabo.Data.People.Cities.Domain.Entities
         [Field(ControlsType = ControlsType.TextArea, GroupTabId = 2, Width = "280", ListShow = false, EditShow = true,
             SortOrder = 2500)]
         public string Intro { get; set; }
-
-        /// <summary>
-        ///     所属用户名
-        /// </summary>
-        [Display(Name = "所属用户名")]
-        [Required]
-        [Field(ControlsType = ControlsType.TextBox, ListShow = true, GroupTabId = 1, Width = "120", SortOrder = 600)]
-        public string UserName { get; set; }
 
         /// <summary>
         ///     详细地址
@@ -121,28 +97,7 @@ namespace Alabo.Data.People.Cities.Domain.Entities
         /// </summary>
         [Display(Name = "状态")]
         [HelpBlock("只有通过审核的情况下才能进行操作")]
-        [Field(ControlsType = ControlsType.RadioButton, GroupTabId = 1, IsTabSearch = true,
-            IsShowAdvancedSerach = false,
-            DataSourceType = typeof(UserTypeStatus),
-            //DataSource = "Alabo.App.Core.UserType.Domain.Enums.UserTypeStatus",
-            Width = "150",
-            EditShow = true, SortOrder = 1005)]
+        [Field(ControlsType = ControlsType.RadioButton, GroupTabId = 1, IsTabSearch = true, IsShowAdvancedSerach = false, DataSourceType = typeof(UserTypeStatus), Width = "150", EditShow = true, SortOrder = 1005)]
         public UserTypeStatus Status { get; set; } = UserTypeStatus.Pending;
-
-        /// <summary>
-        ///     状态
-        /// </summary>
-        [Display(Name = "状态")]
-        [HelpBlock("只有通过审核的情况下才能进行操作")]
-        [Field(ControlsType = ControlsType.Label, GroupTabId = 1,
-            IsShowAdvancedSerach = false,
-            //DataSource = "Alabo.App.Core.UserType.Domain.Enums.UserTypeStatus",
-            Width = "150", ListShow = true,
-            SortOrder = 1005)]
-        public string StatusName
-        {
-            get => Status.GetDisplayName();
-            set => _ = value;
-        }
     }
 }
