@@ -11,7 +11,7 @@ namespace Alabo.App.Core.Markets.Visitors.Domain.Entities {
     /// 游客表
     /// </summary>
     [BsonIgnoreExtraElements]
-    [Table("Visitors_Visitor")]
+    [Table("Cloud_People_Visitor")]
     public class Visitor : AggregateMongodbRoot<Visitor> {
         public string OpenId { get; set; }
 

@@ -16,7 +16,7 @@ namespace Alabo.App.Core.User.Domain.Entities {
     [ClassProperty(Name = "用户等级信息", Icon = "fa fa-puzzle-piece", Description = "用户等级信息", PageType = ViewPageType.List, ListApi = "Api/GradeInfo/UserList",
         SideBarType = SideBarType.GradeInfoSideBar, PostApi = "Api/GradeInfo/UserList")]
     [BsonIgnoreExtraElements]
-    [Table("User_GradeInfo")]
+    [Table("Cloud_People_GradeInfo")]
     public class GradeInfo : AggregateMongodbUserRoot<GradeInfo> {
 
         /// <summary>

@@ -17,7 +17,7 @@ namespace Alabo.App.Core.User.Domain.Entities {
     [ClassProperty(Name = "个人认证", Icon = "fa fa-puzzle-piece", Description = "个人认证",
         SideBarType = SideBarType.IdentitySideBar, PostApi = "/Api/Identity/Identity")]
     [BsonIgnoreExtraElements]
-    [Table("User_Identity")]
+    [Table("Cloud_People_Identity")]
     [AutoDelete(IsAuto = true)]//  /Api/Identity/QueryDelete
     public class Identity : AggregateMongodbUserRoot<Identity> {
 
