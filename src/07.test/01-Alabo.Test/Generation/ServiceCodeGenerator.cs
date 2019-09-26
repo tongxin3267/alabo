@@ -13,6 +13,7 @@ using Alabo.Test.Generation.CodeTemplate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Core.Reflections.Services;
 using Xunit;
 
 namespace Alabo.Test.Generation {

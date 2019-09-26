@@ -12,6 +12,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using Alabo.Core.Reflections.Services;
 using Xunit;
 
 namespace Alabo.Test.Generation {

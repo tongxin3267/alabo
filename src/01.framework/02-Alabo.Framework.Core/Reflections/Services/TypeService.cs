@@ -1,10 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Common;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.AutoConfigs;
 using Alabo.Core.Enums.Enum;
 using Alabo.Core.Reflections.Interfaces;
@@ -20,13 +16,13 @@ using Alabo.Reflections;
 using Alabo.Runtime;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Admin.Domain.Services {
+namespace Alabo.Core.Reflections.Services {
 
     /// <summary>
     ///     Class TypeService.
     /// </summary>
     /// <seealso cref="Alabo.Domains.Services.ServiceBase" />
-    /// <seealso cref="Alabo.App.Core.Admin.Domain.Services.ITypeService" />
+    /// <seealso cref="ITypeService" />
     public class TypeService : ServiceBase, ITypeService {
 
         /// <summary>

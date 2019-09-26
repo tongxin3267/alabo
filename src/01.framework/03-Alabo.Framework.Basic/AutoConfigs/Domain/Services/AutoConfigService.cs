@@ -24,6 +24,7 @@ using System.Reflection;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
 using Alabo.AutoConfigs.Repositories;
+using Alabo.Core.Reflections.Services;
 
 namespace Alabo.App.Core.Common.Domain.Services {
 
