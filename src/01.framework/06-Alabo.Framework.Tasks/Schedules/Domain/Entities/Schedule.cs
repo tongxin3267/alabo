@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.Core.WebUis;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.UI;

@@ -4,7 +4,7 @@ using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Core.WebUis.Models.Links {
+namespace Alabo.Framework.Core.WebUis.Models.Links {
 
     [ClassProperty(Name = "链接")]
     public class LinkGroup : BaseComponent {

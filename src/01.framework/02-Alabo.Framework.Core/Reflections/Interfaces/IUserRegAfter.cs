@@ -1,4 +1,4 @@
-﻿namespace Alabo.Core.Reflections.Interfaces {
+﻿namespace Alabo.Framework.Core.Reflections.Interfaces {
 
     /// <summary>
     /// 用户注册后时间

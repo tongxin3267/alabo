@@ -35,7 +35,7 @@ namespace Alabo.Web.CodeGeneration.EntityCode.Templates {
 
                 testBuilder.AppendLine("using Alabo.Domains.Entities;");
                 testBuilder.AppendLine("using Microsoft.AspNetCore.Mvc;");
-                testBuilder.AppendLine("using Alabo.Core.WebApis.Filter;");
+                testBuilder.AppendLine("using Alabo.Framework.Core.WebApis.Filter;");
                 testBuilder.AppendLine("using Alabo.App.Core.Common;");
                 testBuilder.AppendLine("using MongoDB.Bson;");
                 testBuilder.AppendLine("using Alabo.App.Core.User;");

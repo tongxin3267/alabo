@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;
 
 namespace Alabo.App.Core.User.ViewModels {

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Alabo.Core.WebApis;
+using Alabo.Framework.Core.WebApis;
 using Alabo.Domains.Services.Report;
 
-namespace Alabo.Core.WebUis.Design.AutoReports
+namespace Alabo.Framework.Core.WebUis.Design.AutoReports
 {
     public interface IAutoReport
     {

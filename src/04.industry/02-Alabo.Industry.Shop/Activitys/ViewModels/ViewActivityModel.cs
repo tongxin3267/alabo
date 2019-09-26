@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.App.Shop.Activitys.Domain.Entities;
 using Alabo.App.Shop.Activitys.Domain.Entities.Extension;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Mapping.Dynamic;
 using Alabo.Web.Mvc.ViewModel;
 

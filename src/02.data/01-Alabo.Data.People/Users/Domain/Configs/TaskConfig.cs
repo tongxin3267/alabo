@@ -10,7 +10,7 @@ using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
@@ -37,7 +37,7 @@ namespace Alabo.App.Core.User.Domain.Callbacks {
         public string Name { get; set; }
 
         [Field(ControlsType = ControlsType.DropdownList, SortOrder = 2,
-            DataSource = "Alabo.Core.Enums.Enum.TaskType")]
+            DataSource = "Alabo.Framework.Core.Enums.Enum.TaskType")]
         [Display(Name = "任务类型")]
         [Required(ErrorMessage = "请选择任务类型")]
         [HelpBlock("任务的类型，每个任务对应不同的任务类型,任务的条件有系统后台触发，任务类型只能用系统人员添加")]

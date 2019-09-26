@@ -14,7 +14,7 @@ using Alabo.Web.Mvc.ViewModel;
 using Alabo.Tenants;
 using Alabo.UI;
 using Alabo.App.Market.UserRightss.Domain.Services;
-using Alabo.Core.WebUis;
+using Alabo.Framework.Core.WebUis;
 
 namespace Alabo.App.Market.UserRightss.Domain.Entities {
 

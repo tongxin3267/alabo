@@ -1,7 +1,7 @@
 ﻿using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.App.Open.Tasks.Base;
 using Alabo.App.Share.Share.Domain.Enums;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;

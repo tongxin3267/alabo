@@ -1,6 +1,6 @@
-﻿using Alabo.Core.Tenants.Domains.Dtos;
-using Alabo.Core.Tenants.Domains.Services;
-using Alabo.Core.WebApis.Controller;
+﻿using Alabo.Framework.Core.Tenants.Domains.Dtos;
+using Alabo.Framework.Core.Tenants.Domains.Services;
+using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Extensions;
 using Alabo.Runtime;
 using Alabo.Tenants.Domain.Entities;
@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Core.Tenants.Controllers {
+namespace Alabo.Framework.Core.Tenants.Controllers {
 
     [Route("Api/Tenant/[action]")]
     public class ApiTenantController : ApiBaseController<Tenant, ObjectId> {

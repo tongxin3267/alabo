@@ -9,8 +9,8 @@ using Alabo.Extensions;
 using Alabo.Helpers;
 using System;
 using System.Linq;
-using Alabo.Core.WebApis.Service;
-using Alabo.Core.WebUis.Design.Widgets;
+using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Framework.Core.WebUis.Design.Widgets;
 using Alabo.Users.Entities;
 
 namespace Alabo.App.Market.UI.Widgets {

@@ -2,10 +2,10 @@
 using System.ComponentModel.DataAnnotations;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.Core.Enums.Enum;
-using Alabo.Core.WebApis;
-using Alabo.Core.WebUis;
-using Alabo.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
 using Alabo.Helpers;

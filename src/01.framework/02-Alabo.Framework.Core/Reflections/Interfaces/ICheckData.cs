@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Alabo.Core.Reflections.Interfaces {
+namespace Alabo.Framework.Core.Reflections.Interfaces {
 
     /// <summary>
     /// 数据一致性检查

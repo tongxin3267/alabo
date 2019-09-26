@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Alabo.Validations;
 using Newtonsoft.Json;
 
-namespace Alabo.Core.WebUis.Dtos {
+namespace Alabo.Framework.Core.WebUis.Dtos {
 
     /// <summary>
     /// view form

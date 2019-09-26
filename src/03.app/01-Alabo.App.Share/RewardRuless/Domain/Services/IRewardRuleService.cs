@@ -6,7 +6,7 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using MongoDB.Bson;
 using System;
-using Alabo.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 
 namespace Alabo.App.Share.Share.Domain.Services {
 

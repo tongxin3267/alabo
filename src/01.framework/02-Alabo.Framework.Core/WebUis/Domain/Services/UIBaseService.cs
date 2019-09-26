@@ -4,7 +4,7 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 
-namespace Alabo.Core.WebUis.Domain.Services {
+namespace Alabo.Framework.Core.WebUis.Domain.Services {
 
     public class UIBaseService : ServiceBase, IUIBaseService {
 

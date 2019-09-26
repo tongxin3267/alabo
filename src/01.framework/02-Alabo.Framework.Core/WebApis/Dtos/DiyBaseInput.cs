@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Query.Dto;
 
-namespace Alabo.Core.WebApis.Dtos {
+namespace Alabo.Framework.Core.WebApis.Dtos {
 
     public class DiyBaseInput : ApiInputDto {
 

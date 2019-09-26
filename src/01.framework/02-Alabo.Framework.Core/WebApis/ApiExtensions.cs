@@ -1,11 +1,11 @@
 ﻿using System;
-using Alabo.Core.WebApis.Swagger;
+using Alabo.Framework.Core.WebApis.Swagger;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Alabo.Core.WebApis {
+namespace Alabo.Framework.Core.WebApis {
 
     /// <summary>
     ///     Class ApiExtensions.

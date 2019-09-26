@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Alabo.AutoConfigs;
-using Alabo.Core.Enums.Enum;
-using Alabo.Core.Reflections.Interfaces;
-using Alabo.Core.WebApis.Controller;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Core.Reflections.Interfaces;
+using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
@@ -16,7 +16,7 @@ using Alabo.Reflections;
 using Alabo.Runtime;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Core.Reflections.Services {
+namespace Alabo.Framework.Core.Reflections.Services {
 
     /// <summary>
     ///     Class TypeService.

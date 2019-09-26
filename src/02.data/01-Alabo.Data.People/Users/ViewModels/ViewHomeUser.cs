@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Users.Enum;
@@ -89,14 +89,14 @@ namespace Alabo.App.Core.User.ViewModels {
         /// </summary>
         [Display(Name = "实名?")]
         [Field(ControlsType = ControlsType.DropdownList, GroupTabId = 1, Width = "150",
-            DataSource = "Alabo.Core.Enums.Enum.IdentityStatus", ListShow = true, SortOrder = 8)]
+            DataSource = "Alabo.Framework.Core.Enums.Enum.IdentityStatus", ListShow = true, SortOrder = 8)]
         public IdentityStatus IdentityStatus { get; set; } = IdentityStatus.IsNoPost;
 
         /// <summary>
         ///     性别
         /// </summary>
         [Display(Name = "性别")]
-        [Field(ControlsType = ControlsType.DropdownList, GroupTabId = 1, DataSource = "Alabo.Core.Enums.Enum.Sex",
+        [Field(ControlsType = ControlsType.DropdownList, GroupTabId = 1, DataSource = "Alabo.Framework.Core.Enums.Enum.Sex",
             Width = "150", ListShow = true, SortOrder = 10)]
         public Sex Sex { get; set; } = Sex.Man;
 

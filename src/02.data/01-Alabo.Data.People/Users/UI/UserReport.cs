@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Alabo.App.Core.User.Domain.Repositories;
-using Alabo.Core.WebApis;
-using Alabo.Core.WebUis;
-using Alabo.Core.WebUis.Design.AutoReports;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoReports;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Services.Report;
 using Alabo.Domains.Services.Report.Enums;

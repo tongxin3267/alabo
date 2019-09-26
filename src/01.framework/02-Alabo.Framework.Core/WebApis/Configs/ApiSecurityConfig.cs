@@ -4,7 +4,7 @@ using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.Core.WebApis.Configs {
+namespace Alabo.Framework.Core.WebApis.Configs {
 
     [ClassProperty(Name = "Api接口安全", Icon = "fa	fa-exclamation-circle", SortOrder = 1,
         SideBarType = SideBarType.ControlSideBar)]

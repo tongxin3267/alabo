@@ -7,9 +7,9 @@ using Alabo.Web.Mvc.Attributes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Core.WebApis;
-using Alabo.Core.WebUis;
-using Alabo.Core.WebUis.Design.AutoTables;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 
 namespace Alabo.App.Agent.Citys.Domain.Dtos {
 

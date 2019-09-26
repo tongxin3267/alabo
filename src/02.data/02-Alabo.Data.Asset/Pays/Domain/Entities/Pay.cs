@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.App.Core.Finance.Domain.Entities.Extension;
 using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -32,7 +32,7 @@ namespace Alabo.App.Core.Finance.Domain.Entities {
         /// </summary>
         [Display(Name = "订单类型")]
         [Field(ControlsType = ControlsType.DropdownList, EditShow = true, Width = "150",
-            DataSource = "Alabo.Core.Enums.Enum.CheckoutType", ListShow = true, IsShowBaseSerach = true,
+            DataSource = "Alabo.Framework.Core.Enums.Enum.CheckoutType", ListShow = true, IsShowBaseSerach = true,
             IsShowAdvancedSerach = true, SortOrder = 5)]
         public CheckoutType Type { get; set; } = 0;
 
@@ -79,7 +79,7 @@ namespace Alabo.App.Core.Finance.Domain.Entities {
         /// </summary>
         [Display(Name = "是否回调完成")]
         [Field(ControlsType = ControlsType.DropdownList, EditShow = true,
-            DataSource = "Alabo.Core.Enums.Enum.PayStatus",
+            DataSource = "Alabo.Framework.Core.Enums.Enum.PayStatus",
             IsShowBaseSerach = true, IsShowAdvancedSerach = true, Width = "180", ListShow = true, SortOrder = 7)]
         public PayStatus Status { get; set; } = PayStatus.WaiPay;
 

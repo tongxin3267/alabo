@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 
-namespace Alabo.Core.Reflections.Services {
+namespace Alabo.Framework.Core.Reflections.Services {
 
     /// <summary>
     ///     类型相关操作服务

@@ -1,6 +1,6 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Core.WebUis
+namespace Alabo.Framework.Core.WebUis
 {
     /// <summary>
     ///     http://ui.5ug.com/metronic_v5.0.6.1/metronic_v5.0.6.1/theme/default/dist/default/components/icons/flaticon.html

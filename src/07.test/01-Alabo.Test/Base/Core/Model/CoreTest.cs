@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using Alabo.Core.WebApis;
+using Alabo.Framework.Core.WebApis;
 
 namespace Alabo.Test.Base.Core.Model {
 

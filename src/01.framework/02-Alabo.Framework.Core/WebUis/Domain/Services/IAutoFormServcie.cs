@@ -1,12 +1,12 @@
 ﻿using System;
-using Alabo.Core.WebApis;
-using Alabo.Core.WebUis.Design.AutoForms;
-using Alabo.Core.WebUis.Dtos;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.WebUis.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.UI;
 
-namespace Alabo.Core.WebUis.Domain.Services {
+namespace Alabo.Framework.Core.WebUis.Domain.Services {
 
     public interface IAutoFormServcie : IService {
 

@@ -3,7 +3,7 @@ using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using Alabo.App.Cms.Articles.Domain.Entities;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 

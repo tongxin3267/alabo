@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Alabo.Extensions;
 
-namespace Alabo.Core.Enums
+namespace Alabo.Framework.Core.Enums
 {
     public class EnumHelper
     {

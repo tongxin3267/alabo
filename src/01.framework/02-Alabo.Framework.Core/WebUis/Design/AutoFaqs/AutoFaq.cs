@@ -1,4 +1,4 @@
-﻿namespace Alabo.Core.WebUis.Design.AutoFaqs
+﻿namespace Alabo.Framework.Core.WebUis.Design.AutoFaqs
 {
     public class AutoFaq
     {

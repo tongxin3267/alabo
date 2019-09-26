@@ -22,8 +22,8 @@ using System.Reflection;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
 using Alabo.AutoConfigs.Repositories;
-using Alabo.Core.Reflections.Services;
-using Alabo.Core.WebUis.Models.Links;
+using Alabo.Framework.Core.Reflections.Services;
+using Alabo.Framework.Core.WebUis.Models.Links;
 
 namespace Alabo.App.Core.Common.Domain.Services {
 

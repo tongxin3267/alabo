@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Core.WebApis.Filter;
+using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
 using Convert = System.Convert;
 
-namespace Alabo.Core.WebApis.Controller {
+namespace Alabo.Framework.Core.WebApis.Controller {
 
     public abstract class ApiDeleteController<TEntity, TKey> : ApiByIdController<TEntity, TKey>
         where TEntity : class, IAggregateRoot<TEntity, TKey> {

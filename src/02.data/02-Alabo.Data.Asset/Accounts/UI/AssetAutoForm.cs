@@ -1,8 +1,8 @@
 ﻿using System;
-using Alabo.Core.WebApis;
-using Alabo.Core.WebUis;
-using Alabo.Core.WebUis.Design.AutoForms;
-using Alabo.Core.WebUis.Design.AutoLists;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.WebUis.Design.AutoLists;
 using Alabo.Domains.Entities;
 using Alabo.UI;
 
@@ -13,7 +13,7 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
     /// </summary>
     public class AssetAutoForm : UIBase, IAutoForm, IAutoList {
 
-        public Alabo.Core.WebUis.Design.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public Alabo.Framework.Core.WebUis.Design.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
             throw new NotImplementedException();
         }
 

@@ -9,7 +9,7 @@ using Alabo.App.Core.Common.Domain.Services;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
 using Alabo.AutoConfigs.Services;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
@@ -60,7 +60,7 @@ namespace Alabo.App.Core.User.Domain.Callbacks {
         ///     类型
         /// </summary>
         [Field(ControlsType = ControlsType.DropdownList, SortOrder = 2, EnumUniqu = true, ListShow = true,
-            DataSource = "Alabo.Core.Enums.Enum.UserTypeEnum", GroupTabId = 1)]
+            DataSource = "Alabo.Framework.Core.Enums.Enum.UserTypeEnum", GroupTabId = 1)]
         [Display(Name = "系统类型")]
         [HelpBlock("系统对应的类型，有会员，省代理")]
         public UserTypeEnum TypeClass { get; set; } = UserTypeEnum.Member;
@@ -88,7 +88,7 @@ namespace Alabo.App.Core.User.Domain.Callbacks {
 
         [Display(Name = "推荐方式")]
         [Field(ControlsType = ControlsType.DropdownList, SortOrder = 2,
-            DataSource = "Alabo.Core.Enums.Enum.RecommendModel",
+            DataSource = "Alabo.Framework.Core.Enums.Enum.RecommendModel",
             ListShow = false, GroupTabId = 1)]
         [HelpBlock("根据会员类型的推荐方式进行推荐")]
         public RecommendModel RecommendModel { get; set; }

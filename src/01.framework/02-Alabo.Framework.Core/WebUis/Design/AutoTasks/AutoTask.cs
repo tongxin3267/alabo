@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alabo.Core.WebUis.Design.AutoTasks
+namespace Alabo.Framework.Core.WebUis.Design.AutoTasks
 {
     public class AutoTask
     {

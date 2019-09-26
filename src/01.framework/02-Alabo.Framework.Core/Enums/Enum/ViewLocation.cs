@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Core.Enums.Enum
+namespace Alabo.Framework.Core.Enums.Enum
 {
     [ClassProperty(Name = "显示位置")]
     public enum ViewLocation

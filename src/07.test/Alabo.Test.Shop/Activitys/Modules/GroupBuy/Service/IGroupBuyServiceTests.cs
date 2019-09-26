@@ -5,7 +5,7 @@ using Alabo.App.Shop.Activitys.Modules.GroupBuy.Model;
 using Alabo.App.Shop.Activitys.Modules.GroupBuy.Service;
 using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.App.Shop.Product.Domain.Services;
-using Alabo.Core.WebApis.Dtos;
+using Alabo.Framework.Core.WebApis.Dtos;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
 

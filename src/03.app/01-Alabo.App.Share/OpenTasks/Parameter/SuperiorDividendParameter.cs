@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Open.Tasks.Base;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 
 namespace Alabo.App.Open.Tasks.Parameter {
 

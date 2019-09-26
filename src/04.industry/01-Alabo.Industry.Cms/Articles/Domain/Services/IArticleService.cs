@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Alabo.App.Cms.Articles.Domain.Dto;
 using Alabo.App.Cms.Articles.Domain.Entities;
 using Alabo.App.Cms.Articles.ViewModels;
-using Alabo.Core.WebUis.Models.Links;
+using Alabo.Framework.Core.WebUis.Models.Links;
 using Alabo.Domains.Services;
 
 namespace Alabo.App.Cms.Articles.Domain.Services {

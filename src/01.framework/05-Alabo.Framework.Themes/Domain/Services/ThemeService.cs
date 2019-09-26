@@ -3,7 +3,7 @@ using System;
 using Alabo.App.Core.Themes.Clients;
 using Alabo.App.Core.Themes.Domain.Entities;
 using Alabo.App.Core.Themes.Dtos;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;

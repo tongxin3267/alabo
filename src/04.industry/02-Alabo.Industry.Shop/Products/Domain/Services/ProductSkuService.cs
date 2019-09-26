@@ -12,7 +12,7 @@ using Alabo.App.Shop.Product.Domain.Dtos;
 using Alabo.App.Shop.Product.Domain.Entities;
 using Alabo.App.Shop.Product.Domain.Enums;
 using Alabo.App.Shop.Product.Domain.Repositories;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;

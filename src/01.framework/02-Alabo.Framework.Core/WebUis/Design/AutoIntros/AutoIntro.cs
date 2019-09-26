@@ -1,4 +1,4 @@
-﻿namespace Alabo.Core.WebUis.Design.AutoIntros
+﻿namespace Alabo.Framework.Core.WebUis.Design.AutoIntros
 {
     internal class AutoIntro
     {

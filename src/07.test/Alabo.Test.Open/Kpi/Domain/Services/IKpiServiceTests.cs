@@ -106,7 +106,7 @@ namespace Alabo.Test.Open.Kpi.Domain.Services {
         [Fact]
         [TestMethod("GetLastSingle_StageType_Int64_Int64")]
         public void GetLastSingle_StageType_Int64_Int64_test() {
-            //var stageType = (Alabo.Core.Enums.Enum.StageType)0;
+            //var stageType = (Alabo.Framework.Core.Enums.Enum.StageType)0;
             //StageType stageType = null;
             //var userId = 0;
             //Int64 userId = 0;

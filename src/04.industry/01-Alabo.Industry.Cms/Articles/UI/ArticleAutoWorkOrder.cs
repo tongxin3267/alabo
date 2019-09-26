@@ -2,16 +2,16 @@
 using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
 using System;
-using Alabo.Core.WebApis;
-using Alabo.Core.WebUis;
-using IAutoForm = Alabo.Core.WebUis.Design.AutoForms.IAutoForm;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using IAutoForm = Alabo.Framework.Core.WebUis.Design.AutoForms.IAutoForm;
 
 namespace Alabo.App.Cms.Articles.UI {
 
     [ClassProperty(Name = "文章", Description = "文章")]
-    public class ArticleAutoWorkOrder : UIBase, Alabo.Core.WebUis.Design.AutoForms.IAutoForm {
+    public class ArticleAutoWorkOrder : UIBase, Alabo.Framework.Core.WebUis.Design.AutoForms.IAutoForm {
 
-        public Alabo.Core.WebUis.Design.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public Alabo.Framework.Core.WebUis.Design.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
             throw new NotImplementedException();
         }
 

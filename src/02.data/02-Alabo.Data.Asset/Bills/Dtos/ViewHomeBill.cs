@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
@@ -120,7 +120,7 @@ namespace Alabo.App.Core.Finance.ViewModels.Bill {
         /// <summary>
         ///     Gets or sets the flow.
         /// </summary>
-        [Field(ControlsType = ControlsType.TextBox, DataSource = "Alabo.Core.Enums.Enum.AccountFlow",
+        [Field(ControlsType = ControlsType.TextBox, DataSource = "Alabo.Framework.Core.Enums.Enum.AccountFlow",
             ListShow = false,
             Width = "120", SortOrder = 4)]
         public AccountFlow Flow { get; set; }

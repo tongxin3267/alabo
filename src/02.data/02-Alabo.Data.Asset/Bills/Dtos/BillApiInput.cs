@@ -1,5 +1,5 @@
 ﻿using System;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Query.Dto;
 
 namespace Alabo.App.Core.Finance.Domain.Dtos.Bill {

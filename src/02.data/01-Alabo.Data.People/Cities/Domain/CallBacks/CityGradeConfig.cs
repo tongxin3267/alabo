@@ -17,7 +17,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
 
 using Alabo.AutoConfigs;
-using Alabo.Core.Reflections.Interfaces;
+using Alabo.Framework.Core.Reflections.Interfaces;
 
 namespace Alabo.App.Agent.Citys.Domain.CallBacks {
 

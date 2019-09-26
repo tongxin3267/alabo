@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.App.Market.BookingSignup.Domain.Enums;
-using Alabo.Core.WebUis;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.UI;

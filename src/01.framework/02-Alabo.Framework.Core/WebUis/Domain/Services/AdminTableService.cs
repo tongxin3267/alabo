@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using Alabo.Core.Reflections.Services;
+using Alabo.Framework.Core.Reflections.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
@@ -17,7 +17,7 @@ using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using FileInfo = System.IO.FileInfo;
 
-namespace Alabo.Core.WebUis.Domain.Services {
+namespace Alabo.Framework.Core.WebUis.Domain.Services {
 
     public class AdminTableService : ServiceBase, IAdminTableService {
 

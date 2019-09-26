@@ -2,7 +2,7 @@
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Core.User.ViewModels;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;

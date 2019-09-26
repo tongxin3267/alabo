@@ -13,7 +13,7 @@ using Alabo.App.Shop.Activitys.ViewModels;
 using Alabo.App.Shop.Product.Domain.CallBacks;
 using Alabo.App.Shop.Product.Domain.Enums;
 using Alabo.App.Shop.Product.Domain.Services;
-using Alabo.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;

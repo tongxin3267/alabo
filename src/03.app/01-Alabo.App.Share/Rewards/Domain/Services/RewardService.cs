@@ -12,7 +12,7 @@ using Alabo.App.Share.Share.Domain.Dto;
 using Alabo.App.Share.Share.Domain.Enums;
 using Alabo.App.Share.Share.Domain.Repositories;
 using Alabo.App.Share.Share.ViewModels;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Data.Things.Goodss.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;

@@ -9,7 +9,7 @@ using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
@@ -38,7 +38,7 @@ namespace Alabo.App.Shop.Store.Domain.CallBacks {
         ///     市场类型
         /// </summary>
         [Field(ControlsType = ControlsType.DropdownList, SortOrder = 1, EnumUniqu = true, ListShow = true,
-            DataSource = "Alabo.Core.MarketEnum")]
+            DataSource = "Alabo.Framework.Core.MarketEnum")]
         [Display(Name = "系统类型")]
         [HelpBlock("系统类型")]
         public MarketEnum MarketGuid { get; set; }

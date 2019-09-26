@@ -1,7 +1,7 @@
 ﻿using System;
 using Alabo.App.Core.ApiStore;
 using Alabo.Apps;
-using Alabo.Core.WebApis;
+using Alabo.Framework.Core.WebApis;
 using Alabo.Datas.Ef;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Datas.UnitOfWorks.SqlServer;

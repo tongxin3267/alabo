@@ -16,9 +16,9 @@ using Alabo.Maps;
 using Alabo.UI;
 using System;
 using System.Collections.Generic;
-using Alabo.Core.Enums.Enum;
-using Alabo.Core.WebApis;
-using Alabo.Core.WebApis.Service;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Regexs;
 using Alabo.Users.Entities;
 

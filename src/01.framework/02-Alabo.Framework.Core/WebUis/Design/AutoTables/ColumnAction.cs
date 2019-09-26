@@ -1,4 +1,4 @@
-﻿namespace Alabo.Core.WebUis.Design.AutoTables
+﻿namespace Alabo.Framework.Core.WebUis.Design.AutoTables
 {
     /// <summary>
     ///     表格列上操作，通常用来做审核功能

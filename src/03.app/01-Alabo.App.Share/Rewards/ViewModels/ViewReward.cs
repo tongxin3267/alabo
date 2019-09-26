@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using Alabo.App.Share.Share.Domain.Entities;
 using Alabo.App.Share.Share.Domain.Enums;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Validations;

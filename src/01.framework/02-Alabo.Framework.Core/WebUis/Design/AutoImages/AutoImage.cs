@@ -4,7 +4,7 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Newtonsoft.Json;
 
-namespace Alabo.Core.WebUis.Design.AutoImages
+namespace Alabo.Framework.Core.WebUis.Design.AutoImages
 {
     /// <summary>
     ///     通用图片

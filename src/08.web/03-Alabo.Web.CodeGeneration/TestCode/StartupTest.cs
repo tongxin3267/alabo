@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
-using Alabo.Core.Reflections.Services;
+using Alabo.Framework.Core.Reflections.Services;
 using File = System.IO.File;
 
 namespace Alabo.Web.CodeGeneration.TestCode {

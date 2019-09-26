@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Core.WebApis.Controller {
+namespace Alabo.Framework.Core.WebApis.Controller {
 
     public abstract class ApiByIdController<TEntity, TKey> : ApiBaseController
         where TEntity : class, IAggregateRoot<TEntity, TKey> {

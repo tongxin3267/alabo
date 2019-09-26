@@ -11,7 +11,7 @@ using Alabo.Web.Mvc.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Validations;
 using ZKCloud.Open.Share.Models;
 

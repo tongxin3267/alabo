@@ -4,9 +4,9 @@ using System.Text;
 using Alabo.App.Cms.Support.Domain.Dtos;
 using Alabo.App.Cms.Support.Domain.Entities;
 using Alabo.App.Cms.Support.Domain.Services;
-using Alabo.Core.WebApis;
-using Alabo.Core.WebUis;
-using Alabo.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Entities;
 using Alabo.Mapping;
 using Alabo.UI;
@@ -17,7 +17,7 @@ namespace Alabo.App.Cms.Support.UI.AutoForm {
     [ClassProperty(Name = "意见反馈AutoForm", Description = "意见反馈")]
     public class WorkOrderAutoForm : UIBase, IAutoForm {
 
-        public Alabo.Core.WebUis.Design.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public Alabo.Framework.Core.WebUis.Design.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
             return ToAutoForm(new WorkOrderInput());
         }
 

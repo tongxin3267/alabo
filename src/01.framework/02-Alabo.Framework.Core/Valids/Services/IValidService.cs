@@ -2,7 +2,7 @@
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 
-namespace Alabo.Core.Valids.Services {
+namespace Alabo.Framework.Core.Valids.Services {
 
     public interface IValidService : IService {
 

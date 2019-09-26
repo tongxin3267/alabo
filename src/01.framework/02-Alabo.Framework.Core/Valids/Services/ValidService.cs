@@ -7,7 +7,7 @@ using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Users.Services;
 
-namespace Alabo.Core.Valids.Services {
+namespace Alabo.Framework.Core.Valids.Services {
 
     public class ValidService : ServiceBase, IValidService {
 

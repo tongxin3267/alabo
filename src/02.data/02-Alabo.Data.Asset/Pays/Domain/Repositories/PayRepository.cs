@@ -3,7 +3,7 @@ using Alabo.App.Core.Finance.Domain.Dtos.Pay;
 using Alabo.App.Core.Finance.Domain.Entities;
 using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;

@@ -1,4 +1,4 @@
-﻿namespace Alabo.Core.WebUis
+﻿namespace Alabo.Framework.Core.WebUis
 {
     public class ThemeColor
     {

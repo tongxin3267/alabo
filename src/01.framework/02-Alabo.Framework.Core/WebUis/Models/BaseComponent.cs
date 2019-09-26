@@ -5,7 +5,7 @@ using Alabo.Web.Mvc.ViewModel;
 using MongoDB.Bson;
 using Newtonsoft.Json;
 
-namespace Alabo.Core.WebUis.Models {
+namespace Alabo.Framework.Core.WebUis.Models {
 
     /// <summary>
     ///     前端组件基类

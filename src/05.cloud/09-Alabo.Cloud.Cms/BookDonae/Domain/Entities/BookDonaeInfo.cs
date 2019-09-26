@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 using System.Text;
-using Alabo.Core.WebUis;
+using Alabo.Framework.Core.WebUis;
 using MongoDB.Bson;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;

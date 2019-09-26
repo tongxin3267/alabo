@@ -5,7 +5,7 @@ using ZKCloud.Open.ApiBase.Models;
 using Alabo.Runtime;
 using Alabo.UI;
 
-namespace Alabo.Core.WebApis.Filter {
+namespace Alabo.Framework.Core.WebApis.Filter {
 
     /// <summary>
     ///     Api 接口，用户登录授权

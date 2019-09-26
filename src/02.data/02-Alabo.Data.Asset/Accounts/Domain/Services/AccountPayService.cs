@@ -10,7 +10,7 @@ using Alabo.App.Core.Finance.Domain.Entities.Extension;
 using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.App.Core.Finance.Dtos;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Attributes;
 using Alabo.Domains.Entities;

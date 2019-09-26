@@ -1,7 +1,7 @@
 ﻿using System;
 using Alabo.Domains.Entities;
 
-namespace Alabo.Core.WebUis.Design.AutoNews
+namespace Alabo.Framework.Core.WebUis.Design.AutoNews
 {
     public class AutoNews
     {

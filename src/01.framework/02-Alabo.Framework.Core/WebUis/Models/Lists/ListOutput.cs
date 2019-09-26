@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Core.WebUis.Models.Lists {
+namespace Alabo.Framework.Core.WebUis.Models.Lists {
 
     /// <summary>
     ///     通过列表输出，对应前端Api接口

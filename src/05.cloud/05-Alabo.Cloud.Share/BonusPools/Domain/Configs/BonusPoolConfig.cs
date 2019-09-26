@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.AutoConfigs;
-using Alabo.Core.WebUis;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.UI;

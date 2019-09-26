@@ -4,7 +4,7 @@ using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Market.BookingSignup.Domain.Entities;
 using Alabo.App.Market.BookingSignup.Dtos;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;

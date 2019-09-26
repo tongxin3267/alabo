@@ -2,7 +2,7 @@
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Entities;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
@@ -13,7 +13,7 @@ using Alabo.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.Core.Admins.Configs;
+using Alabo.Framework.Core.Admins.Configs;
 using Alabo.Users.Dtos;
 using Alabo.Users.Entities;
 using UserDetail = Alabo.Users.Entities.UserDetail;

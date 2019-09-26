@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Alabo.App.Shop.Category.Domain.Entities;
 using Alabo.App.Shop.Category.Domain.Repositories;
-using Alabo.Core.Admins.Configs;
+using Alabo.Framework.Core.Admins.Configs;
 using Alabo.Datas.UnitOfWorks;
 
 using Alabo.Domains.Entities;

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Alabo.App.Cms.Articles.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Services;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;

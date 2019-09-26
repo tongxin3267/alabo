@@ -6,7 +6,7 @@ using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.Finance.ViewModels.Account;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Test.Base.Attribute;
@@ -38,7 +38,7 @@ namespace Alabo.Test.Core.Finance.Domain.Services
         {
             //Account account = null;
             //var changeAmount = 0;
-            //var actionType = (Alabo.Core.Enums.Enum.BillActionType)0;
+            //var actionType = (Alabo.Framework.Core.Enums.Enum.BillActionType)0;
             //var intro = "";
             //var targetUserId = 0;
             //var orderSerial = "";
@@ -54,7 +54,7 @@ namespace Alabo.Test.Core.Finance.Domain.Services
         {
             //Account account = null;
             //var changeAmount = 0;
-            //var actionType = (Alabo.Core.Enums.Enum.BillActionType)0;
+            //var actionType = (Alabo.Framework.Core.Enums.Enum.BillActionType)0;
             //var prefixIntro = "";
             //var result = Service<IBillService>().CreateBill(account, changeAmount, actionType, prefixIntro);
             //Assert.NotNull(result);
@@ -100,7 +100,7 @@ namespace Alabo.Test.Core.Finance.Domain.Services
         public void Increase_User_Currency_Decimal_String_test()
         {
             //User user = null;
-            //var currency = (Alabo.Core.Enums.Enum.Currency)0;
+            //var currency = (Alabo.Framework.Core.Enums.Enum.Currency)0;
             //var amount = 0;
             //var Intro = "";
             //var result = Service<IBillService>().Increase(user, currency, amount, Intro);

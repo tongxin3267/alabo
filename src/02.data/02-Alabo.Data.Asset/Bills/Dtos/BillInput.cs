@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Web.Mvc.Attributes;
@@ -38,7 +38,7 @@ namespace Alabo.App.Core.Finance.Domain.Dtos.Bill {
         ///     操作类型
         /// </summary>
         //[Field(ControlsType = ControlsType.DropdownList, IsShowAdvancedSerach = true,
-        //    DataSource = "Alabo.Core.Enums.Enum.BillActionType", IsShowBaseSerach = false, SortOrder = 200)]
+        //    DataSource = "Alabo.Framework.Core.Enums.Enum.BillActionType", IsShowBaseSerach = false, SortOrder = 200)]
         //[Display(Name = "货币类型")]
         //public BillActionType Type { get; set; }
 
@@ -56,7 +56,7 @@ namespace Alabo.App.Core.Finance.Domain.Dtos.Bill {
         public Guid? MoneyTypeId { get; set; }
 
         [Field(ControlsType = ControlsType.DropdownList, IsShowAdvancedSerach = true,
-            DataSource = "Alabo.Core.Enums.Enum.AccountFlow", IsShowBaseSerach = false, SortOrder = 200)]
+            DataSource = "Alabo.Framework.Core.Enums.Enum.AccountFlow", IsShowBaseSerach = false, SortOrder = 200)]
         [Display(Name = "货币类型")]
         public AccountFlow? Flow { get; set; }
 

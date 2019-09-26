@@ -1,8 +1,8 @@
-﻿using Alabo.Core.WebApis;
+﻿using Alabo.Framework.Core.WebApis;
 using Alabo.Dependency;
 using Alabo.Domains.Entities;
 
-namespace Alabo.Core.WebUis.Design.AutoNews
+namespace Alabo.Framework.Core.WebUis.Design.AutoNews
 {
     /// <summary>
     ///     自动新闻列表

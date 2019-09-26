@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.App.Core.Themes.Domain.Enums;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 
 namespace Alabo.App.Core.Themes.Dtos {
 

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
-using Alabo.Core.WebApis.Controller;
-using Alabo.Core.WebUis.Design.AutoTasks;
-using Alabo.Core.WebUis.Domain.Services;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebUis.Design.AutoTasks;
+using Alabo.Framework.Core.WebUis.Domain.Services;
 using Alabo.Schedules;
 using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Core.WebUis.Controllers {
+namespace Alabo.Framework.Core.WebUis.Controllers {
 
     /// <summary>
     /// 自动任务

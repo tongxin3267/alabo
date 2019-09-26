@@ -1,6 +1,6 @@
-﻿using Alabo.Core.Admins.Services;
-using Alabo.Core.Tenants.Domains.Dtos;
-using Alabo.Core.Tenants.Domains.Repositories;
+﻿using Alabo.Framework.Core.Admins.Services;
+using Alabo.Framework.Core.Tenants.Domains.Dtos;
+using Alabo.Framework.Core.Tenants.Domains.Repositories;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
@@ -12,7 +12,7 @@ using Alabo.Tenants;
 using Alabo.Tenants.Domain.Services;
 using Alabo.Users.Services;
 
-namespace Alabo.Core.Tenants.Domains.Services {
+namespace Alabo.Framework.Core.Tenants.Domains.Services {
 
     public class TenantCreateService : ServiceBase, ITenantCreateService {
         private readonly ITenantCreateRepository _tenantCreateRepository;

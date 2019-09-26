@@ -5,7 +5,7 @@ using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
 using Newtonsoft.Json;
 
-namespace Alabo.Core.WebUis.Models.Links {
+namespace Alabo.Framework.Core.WebUis.Models.Links {
 
     /// <summary>
     ///     链接、支持图片、链接、广告等

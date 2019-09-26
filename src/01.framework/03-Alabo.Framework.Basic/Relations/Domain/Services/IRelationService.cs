@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Alabo.App.Core.Common.Domain.Dtos;
-using Alabo.Core.WebUis.Models.Links;
+using Alabo.Framework.Core.WebUis.Models.Links;
 using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;

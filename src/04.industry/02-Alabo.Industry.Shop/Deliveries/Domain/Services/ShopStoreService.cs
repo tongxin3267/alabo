@@ -12,7 +12,7 @@ using Alabo.App.Shop.Store.Domain.Entities.Extensions;
 using Alabo.App.Shop.Store.Domain.Enums;
 using Alabo.App.Shop.Store.Domain.Repositories;
 using Alabo.App.Shop.Store.ViewModels;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -26,7 +26,7 @@ using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.Core.WebApis.Service;
+using Alabo.Framework.Core.WebApis.Service;
 
 namespace Alabo.App.Shop.Store.Domain.Services {
 

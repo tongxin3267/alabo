@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.AutoConfigs;
-using Alabo.Core.WebUis;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.Core.Admins.Configs {
+namespace Alabo.Framework.Core.Admins.Configs {
 
     [NotMapped]
     /// <summary>

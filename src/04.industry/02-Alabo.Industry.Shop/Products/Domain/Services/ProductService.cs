@@ -33,7 +33,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Alabo.Core.WebApis.Service;
+using Alabo.Framework.Core.WebApis.Service;
 
 namespace Alabo.App.Shop.Product.Domain.Services
 {

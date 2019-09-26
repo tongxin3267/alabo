@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Alabo.App.Core.Common.Job;
 using Alabo.App.Core.Tasks.Job;
 using Alabo.App.Shop.Order.Job;
-using Alabo.Core.Admins.Job;
+using Alabo.Framework.Core.Admins.Job;
 using Alabo.Runtime;
 using Alabo.Schedules;
 using Alabo.Schedules.Job;

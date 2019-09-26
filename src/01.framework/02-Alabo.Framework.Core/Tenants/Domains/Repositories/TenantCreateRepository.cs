@@ -6,7 +6,7 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Extensions;
 
-namespace Alabo.Core.Tenants.Domains.Repositories {
+namespace Alabo.Framework.Core.Tenants.Domains.Repositories {
 
     /// <summary>
     ///     TenantCreateRepository

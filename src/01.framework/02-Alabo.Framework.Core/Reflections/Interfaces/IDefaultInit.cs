@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alabo.Core.Reflections.Interfaces {
+namespace Alabo.Framework.Core.Reflections.Interfaces {
 
     /// <summary>
     ///     默认数据初始

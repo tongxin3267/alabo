@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using Alabo.App.Core.Admin;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.Core.Enums.Enum;
-using Alabo.Core.Reflections.Interfaces;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Core.Reflections.Interfaces;
 using Alabo.Domains.Enums;
 using Alabo.Helpers;
 

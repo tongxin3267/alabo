@@ -9,7 +9,7 @@ using Alabo.App.Offline.Order.Domain.Enums;
 using Alabo.App.Offline.Order.Domain.Repositories;
 using Alabo.App.Offline.Order.ViewModels;
 using Alabo.App.Offline.Product.Domain.Services;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -22,7 +22,7 @@ using Alabo.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.Core.WebApis.Service;
+using Alabo.Framework.Core.WebApis.Service;
 
 namespace Alabo.App.Offline.Order.Domain.Services {
 

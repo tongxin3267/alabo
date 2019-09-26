@@ -8,7 +8,7 @@ using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Mapping;
 
-namespace Alabo.Core.WebApis.Service {
+namespace Alabo.Framework.Core.WebApis.Service {
 
     /// <summary>
     ///     Api处理函数

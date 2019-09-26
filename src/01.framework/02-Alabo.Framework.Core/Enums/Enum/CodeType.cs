@@ -1,4 +1,4 @@
-﻿namespace Alabo.Core.Enums.Enum
+﻿namespace Alabo.Framework.Core.Enums.Enum
 {
     public enum CodeType
     {

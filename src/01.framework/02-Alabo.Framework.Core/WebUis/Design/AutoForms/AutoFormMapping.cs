@@ -8,7 +8,7 @@ using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.Web.ViewFeatures;
 
-namespace Alabo.Core.WebUis.Design.AutoForms
+namespace Alabo.Framework.Core.WebUis.Design.AutoForms
 {
     public static class AutoFormMapping
     {

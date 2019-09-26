@@ -5,7 +5,7 @@ using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.Tasks;
 using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 
 namespace Alabo.App.Open.Tasks.Result {
 

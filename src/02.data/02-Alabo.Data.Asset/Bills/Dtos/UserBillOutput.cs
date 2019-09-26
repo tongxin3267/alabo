@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.Core.WebApis;
-using Alabo.Core.WebApis.Service;
-using Alabo.Core.WebUis;
-using Alabo.Core.WebUis.Design.AutoLists;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoLists;
 using Alabo.Domains.Entities;
 using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;

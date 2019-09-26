@@ -22,8 +22,8 @@
 //using Alabo.App.Core.Finance.ViewModels.WithDraw;
 //using Alabo.App.Core.User;
 //using Alabo.App.Core.User.Domain.Services;
-//using Alabo.Core.Enums.Enum;
-//using Alabo.Core.Extensions;
+//using Alabo.Framework.Core.Enums.Enum;
+//using Alabo.Framework.Core.Extensions;
 //using Alabo.Domains.Entities;
 //using Alabo.Domains.Enums;
 //using Alabo.Domains.Query;

@@ -2,7 +2,7 @@ using System;
 using Xunit;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Shop.Activitys.ViewModels;
-using Alabo.Core.Reflections.Services;
+using Alabo.Framework.Core.Reflections.Services;
 using Alabo.Runtime.Config;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;

@@ -17,8 +17,8 @@ using Alabo.Mapping;
 using Alabo.UI;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.Core.WebApis;
-using Alabo.Core.WebApis.Service;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebApis.Service;
 
 namespace Alabo.App.Core.User.Domain.Services {
 

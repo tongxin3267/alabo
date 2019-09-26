@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Alabo.Core.WebApis;
+using Alabo.Framework.Core.WebApis;
 using Alabo.Domains.Entities;
 using Alabo.UI;
 
-namespace Alabo.Core.WebUis.Design.AutoTables
+namespace Alabo.Framework.Core.WebUis.Design.AutoTables
 {
     /// <summary>
     ///     自动表单，可以构建前台自动列表

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Alabo.Domains.Services;
 
-namespace Alabo.Core.Admins.Services {
+namespace Alabo.Framework.Core.Admins.Services {
 
     /// <summary>
     ///     数据库操作服务

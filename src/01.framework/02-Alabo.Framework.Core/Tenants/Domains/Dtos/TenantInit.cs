@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Validations;
 
-namespace Alabo.Core.Tenants.Domains.Dtos {
+namespace Alabo.Framework.Core.Tenants.Domains.Dtos {
 
     /// <summary>
     /// 租户输入模型

@@ -4,10 +4,10 @@ using Alabo.Domains.Repositories.Model;
 using System.Linq;
 using Alabo.Domains.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Alabo.Core.WebApis.Filter;
+using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.App.Core.Common;
 using MongoDB.Bson;
-using Alabo.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Finance.Domain.Entities;
 using Alabo.App.Core.User;
@@ -22,7 +22,7 @@ using ZKCloud.Open.ApiBase.Models;
 using Alabo.Helpers;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;
 
 namespace Alabo.App.Market.FacePay.Controllers

@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Web.Mvc.ViewModel;
 
 namespace Alabo.App.Core.Finance.ViewModels.Recharge {

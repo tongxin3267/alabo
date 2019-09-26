@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Alabo.Core.Admins.Repositories;
+using Alabo.Framework.Core.Admins.Repositories;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Services;
 
-namespace Alabo.Core.Admins.Services {
+namespace Alabo.Framework.Core.Admins.Services {
 
     /// <summary>
     ///     Class CatalogService.

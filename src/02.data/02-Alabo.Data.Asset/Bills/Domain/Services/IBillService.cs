@@ -1,6 +1,6 @@
 ﻿using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 

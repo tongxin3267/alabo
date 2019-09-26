@@ -15,7 +15,7 @@ using Alabo.App.Shop.Store.Domain.Services;
 using Alabo.App.Shop.Product.Domain.Dtos;
 using Alabo.App.Shop.Product.DiyModels;
 using Alabo.App.Shop.Product.Domain.Repositories;
-using Alabo.Core.WebApis.Service;
+using Alabo.Framework.Core.WebApis.Service;
 
 namespace Alabo.App.Market.PresaleProducts.Domain.Services {
 

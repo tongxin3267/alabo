@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Core.WebUis.Controllers {
+namespace Alabo.Framework.Core.WebUis.Controllers {
 
     /// <summary>
     ///  控制类型

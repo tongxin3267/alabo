@@ -1,8 +1,8 @@
-﻿using Alabo.Core.Tenants.Domains.Dtos;
+﻿using Alabo.Framework.Core.Tenants.Domains.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 
-namespace Alabo.Core.Tenants.Domains.Services {
+namespace Alabo.Framework.Core.Tenants.Domains.Services {
 
     /// <summary>
     /// ITenantCreateService

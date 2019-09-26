@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Alabo.Domains.Entities;
 
-namespace Alabo.Core.WebUis.Design.AutoPreviews
+namespace Alabo.Framework.Core.WebUis.Design.AutoPreviews
 {
     /// <summary>
     ///     自动预览对应zk-priview组件

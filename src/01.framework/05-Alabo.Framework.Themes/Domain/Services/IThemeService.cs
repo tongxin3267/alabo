@@ -1,7 +1,7 @@
 using MongoDB.Bson;
 using Alabo.App.Core.Themes.Domain.Entities;
 using Alabo.App.Core.Themes.Dtos;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Services;
 
 namespace Alabo.App.Core.Themes.Domain.Services {

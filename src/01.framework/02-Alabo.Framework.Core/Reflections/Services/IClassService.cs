@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Alabo.Domains.Services;
 using Alabo.Web.ViewFeatures;
 
-namespace Alabo.Core.Reflections.Services {
+namespace Alabo.Framework.Core.Reflections.Services {
 
     /// <summary>
     ///     类反射相关操作

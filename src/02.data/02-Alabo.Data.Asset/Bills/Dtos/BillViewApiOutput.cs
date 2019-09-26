@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.Core.WebApis;
-using Alabo.Core.WebUis.Design.AutoPreviews;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis.Design.AutoPreviews;
 using Alabo.Domains.Query.Dto;
 using Alabo.Extensions;
 using Alabo.UI;

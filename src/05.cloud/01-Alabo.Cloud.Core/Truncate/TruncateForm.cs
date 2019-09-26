@@ -9,11 +9,11 @@ using Alabo.Runtime;
 using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Core.Admins.Repositories;
-using Alabo.Core.Admins.Services;
-using Alabo.Core.WebApis;
-using Alabo.Core.WebUis;
-using Alabo.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.Admins.Repositories;
+using Alabo.Framework.Core.Admins.Services;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Users.Services;
 using Alabo.Validations;
 

@@ -3,8 +3,8 @@ using Alabo.Helpers;
 using Alabo.UI;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.Core.WebApis;
-using Alabo.Core.WebUis.Design.AutoReports;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis.Design.AutoReports;
 using Alabo.Domains.Services.Report;
 using Alabo.Domains.Services.Report.Enums;
 

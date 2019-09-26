@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.Core.Reflections.Services;
-using Alabo.Core.WebApis.Controller;
+using Alabo.Framework.Core.Reflections.Services;
+using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Domains.Entities;
 using Alabo.RestfulApi;
 using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Core.WebUis.Controllers {
+namespace Alabo.Framework.Core.WebUis.Controllers {
 
     /// <summary>
     /// 客户端列表

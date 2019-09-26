@@ -8,7 +8,7 @@ using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
@@ -115,7 +115,7 @@ namespace Alabo.App.Core.Finance.Domain.CallBacks {
         ///     货币类型
         /// </summary>
         [Field(ControlsType = ControlsType.DropdownList, SortOrder = 1, EnumUniqu = true, ListShow = true,
-            DataSource = "Alabo.Core.Enums.Enum.Currency")]
+            DataSource = "Alabo.Framework.Core.Enums.Enum.Currency")]
         [Display(Name = "货币类型")]
         [HelpBlock("除自定义货币以外，一种货币类型只能添加一次。如需添加非系统指定货币，可选择自定义类型。常见货币类型：人民币，积分、卡券、红包、虚拟币、授信、美元等")]
         public Currency Currency { get; set; }
@@ -154,7 +154,7 @@ namespace Alabo.App.Core.Finance.Domain.CallBacks {
         ///     背景颜色
         /// </summary>
         [Field(ControlsType = ControlsType.DropdownList, SortOrder = 3, ListShow = true,
-            DataSource = "Alabo.Core.UI.Enum.ColorLibrary", DisplayMode = DisplayMode.Text)]
+            DataSource = "Alabo.Framework.Core.UI.Enum.ColorLibrary", DisplayMode = DisplayMode.Text)]
         [Display(Name = "背景颜色")]
         [HelpBlock("目前不是所有的下拉框的颜色都支持，请认真验证")]
         public ColorLibrary BackGroudColor { get; set; } = ColorLibrary.Blue;

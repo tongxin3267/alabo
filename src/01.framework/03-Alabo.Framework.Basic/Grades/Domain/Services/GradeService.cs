@@ -1,7 +1,7 @@
 ﻿using Alabo.App.Core.Common.Domain.Repositories;
 using Alabo.App.Core.User;
 using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;

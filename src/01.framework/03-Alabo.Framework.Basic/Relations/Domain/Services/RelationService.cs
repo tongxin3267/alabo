@@ -14,8 +14,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Alabo.Core.Reflections.Interfaces;
-using Alabo.Core.WebUis.Models.Links;
+using Alabo.Framework.Core.Reflections.Interfaces;
+using Alabo.Framework.Core.WebUis.Models.Links;
 
 namespace Alabo.App.Core.Common.Domain.Services {
 

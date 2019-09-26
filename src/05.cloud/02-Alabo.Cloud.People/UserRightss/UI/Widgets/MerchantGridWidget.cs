@@ -7,7 +7,7 @@ using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Market.UserRightss.Domain.Entities;
 using Alabo.App.Market.UserRightss.Domain.Services;
-using Alabo.Core.WebUis.Design.Widgets;
+using Alabo.Framework.Core.WebUis.Design.Widgets;
 using Alabo.Extensions;
 using Alabo.Helpers;
 

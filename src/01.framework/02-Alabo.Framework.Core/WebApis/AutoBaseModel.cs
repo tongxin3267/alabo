@@ -1,6 +1,6 @@
 ﻿using Alabo.Security;
 
-namespace Alabo.Core.WebApis
+namespace Alabo.Framework.Core.WebApis
 {
     public class AutoBaseModel
     {

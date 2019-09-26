@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.Core.Reflections.Services;
-using Alabo.Core.WebUis.Design.AutoArticles;
-using Alabo.Core.WebUis.Design.AutoFaqs;
-using Alabo.Core.WebUis.Design.AutoForms;
-using Alabo.Core.WebUis.Design.AutoImages;
-using Alabo.Core.WebUis.Design.AutoIndexs;
-using Alabo.Core.WebUis.Design.AutoIntros;
-using Alabo.Core.WebUis.Design.AutoLists;
-using Alabo.Core.WebUis.Design.AutoNews;
-using Alabo.Core.WebUis.Design.AutoPreviews;
-using Alabo.Core.WebUis.Design.AutoReports;
-using Alabo.Core.WebUis.Design.AutoTables;
-using Alabo.Core.WebUis.Design.AutoTasks;
-using Alabo.Core.WebUis.Design.AutoVideos;
+using Alabo.Framework.Core.Reflections.Services;
+using Alabo.Framework.Core.WebUis.Design.AutoArticles;
+using Alabo.Framework.Core.WebUis.Design.AutoFaqs;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.WebUis.Design.AutoImages;
+using Alabo.Framework.Core.WebUis.Design.AutoIndexs;
+using Alabo.Framework.Core.WebUis.Design.AutoIntros;
+using Alabo.Framework.Core.WebUis.Design.AutoLists;
+using Alabo.Framework.Core.WebUis.Design.AutoNews;
+using Alabo.Framework.Core.WebUis.Design.AutoPreviews;
+using Alabo.Framework.Core.WebUis.Design.AutoReports;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
+using Alabo.Framework.Core.WebUis.Design.AutoTasks;
+using Alabo.Framework.Core.WebUis.Design.AutoVideos;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 
-namespace Alabo.Core.WebUis.Domain.Services {
+namespace Alabo.Framework.Core.WebUis.Domain.Services {
 
     public class AutoUIService : ServiceBase, IAutoUIService {
 

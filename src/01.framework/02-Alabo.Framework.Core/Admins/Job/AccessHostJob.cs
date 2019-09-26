@@ -7,7 +7,7 @@ using Alabo.Extensions;
 using Alabo.Schedules.Job;
 using Quartz;
 
-namespace Alabo.Core.Admins.Job {
+namespace Alabo.Framework.Core.Admins.Job {
 
     /// <summary>
     /// 3分钟定时访问网站

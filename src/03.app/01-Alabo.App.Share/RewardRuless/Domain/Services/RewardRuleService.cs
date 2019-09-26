@@ -6,7 +6,7 @@ using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.App.Open.Tasks.Base;
 using Alabo.App.Share.Share.Domain.Dtos;
 using Alabo.App.Share.Share.Domain.Entities;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -18,7 +18,7 @@ using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 
 namespace Alabo.App.Share.Share.Domain.Services {
 

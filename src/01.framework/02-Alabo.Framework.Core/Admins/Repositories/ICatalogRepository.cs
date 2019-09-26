@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Alabo.Domains.Repositories;
 
-namespace Alabo.Core.Admins.Repositories {
+namespace Alabo.Framework.Core.Admins.Repositories {
 
     public interface ICatalogRepository : IRepository<Users.Entities.User, long> {
 

@@ -7,10 +7,10 @@ using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.Dtos.WithDraw;
 using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.Core.WebApis;
-using Alabo.Core.WebUis;
-using Alabo.Core.WebUis.Design.AutoForms;
-using Alabo.Core.WebUis.Design.AutoTables;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Exceptions;
@@ -146,7 +146,7 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
             return null;
         }
 
-        public Alabo.Core.WebUis.Design.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public Alabo.Framework.Core.WebUis.Design.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
             var result = ToAutoForm(new WithdrawAutoForm());
             result.AlertText = "【提现】将 储值 提取到自己的银行卡";
 

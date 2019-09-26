@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.AutoConfigs;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
@@ -19,7 +19,7 @@ namespace Alabo.App.Core.Finance.Domain.CallBacks {
         [Display(Name = "银行名称")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [Field(ControlsType = ControlsType.DropdownList, ListShow = true,
-            DataSource = "Alabo.Core.Enums.Enum.BankType")]
+            DataSource = "Alabo.Framework.Core.Enums.Enum.BankType")]
         public BankType BankType { get; set; }
 
         /// <summary>

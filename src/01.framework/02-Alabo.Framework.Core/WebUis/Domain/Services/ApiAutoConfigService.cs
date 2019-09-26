@@ -1,15 +1,15 @@
 ﻿using System;
 using Alabo.AutoConfigs.Entities;
 using Alabo.AutoConfigs.Services;
-using Alabo.Core.Reflections.Services;
-using Alabo.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.Reflections.Services;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Helpers;
 
-namespace Alabo.Core.WebUis.Domain.Services {
+namespace Alabo.Framework.Core.WebUis.Domain.Services {
 
     public class ApIAlaboAutoConfigService : ServiceBase, IApIAlaboAutoConfigService {
 

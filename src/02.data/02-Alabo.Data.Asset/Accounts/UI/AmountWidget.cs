@@ -5,8 +5,8 @@ using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.Core.Enums.Enum;
-using Alabo.Core.WebUis.Design.Widgets;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Core.WebUis.Design.Widgets;
 using Alabo.Extensions;
 using Alabo.Helpers;
 

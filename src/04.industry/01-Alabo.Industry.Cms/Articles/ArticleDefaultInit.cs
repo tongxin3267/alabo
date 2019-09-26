@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Alabo.App.Cms.Articles.Domain.Services;
-using Alabo.Core.Reflections.Interfaces;
+using Alabo.Framework.Core.Reflections.Interfaces;
 using Alabo.Helpers;
 
 namespace Alabo.App.Cms.Articles {

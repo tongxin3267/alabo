@@ -1,7 +1,7 @@
-﻿using Alabo.Core.Enums.Enum;
+﻿using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;
 
-namespace Alabo.Core.Admins.Configs {
+namespace Alabo.Framework.Core.Admins.Configs {
 
     /// <summary>
     ///     数据库字段，CSS内容管理系统，代码生成，可视化编辑都需要此字段

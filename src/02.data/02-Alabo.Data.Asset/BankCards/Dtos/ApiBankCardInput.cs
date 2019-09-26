@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
@@ -37,7 +37,7 @@ namespace Alabo.App.Core.Finance.Dtos {
         /// </summary>
         [Display(Name = "银行类型")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        [Field(ControlsType = ControlsType.DropdownList, DataSource = "Alabo.Core.Enums.Enum.BankType", Width = "120", EditShow = true, ListShow = true, SortOrder = 3)]
+        [Field(ControlsType = ControlsType.DropdownList, DataSource = "Alabo.Framework.Core.Enums.Enum.BankType", Width = "120", EditShow = true, ListShow = true, SortOrder = 3)]
         public BankType Type { get; set; }
 
         /// <summary>

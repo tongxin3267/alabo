@@ -6,10 +6,10 @@ using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Finance.Domain.Dtos.Bill;
 using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.Core.Enums.Enum;
-using Alabo.Core.WebApis;
-using Alabo.Core.WebUis;
-using Alabo.Core.WebUis.Design.AutoTables;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.UI;
@@ -124,7 +124,7 @@ namespace Alabo.App.Core.Finance.ViewModels.Bill {
         /// <summary>
         ///     Gets or sets the flow.
         /// </summary>
-        [Field(ControlsType = ControlsType.TextBox, DataSource = "Alabo.Core.Enums.Enum.AccountFlow",
+        [Field(ControlsType = ControlsType.TextBox, DataSource = "Alabo.Framework.Core.Enums.Enum.AccountFlow",
             ListShow = false,
             Width = "120", SortOrder = 4)]
         public AccountFlow Flow { get; set; }

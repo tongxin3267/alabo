@@ -4,7 +4,7 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Newtonsoft.Json;
 
-namespace Alabo.Core.WebUis.Design.AutoVideos
+namespace Alabo.Framework.Core.WebUis.Design.AutoVideos
 {
     public class AutoVideo
     {

@@ -1,5 +1,5 @@
-using Alabo.Core.WebApis.Controller;
-using Alabo.Core.WebApis.Filter;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.App.Core.ApiStore.CallBacks;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.Dtos.Pay;
@@ -185,7 +185,7 @@ namespace Alabo.App.Market.BookingSignup.Controllers {
                 Resolve<IPayService>().Log("PublicPayAsyncByPayId  useId 不一样");
                 return NoContent();
             }
-            if (payInput.ClientType != Alabo.Core.Enums.Enum.ClientType.WeChat) {
+            if (payInput.ClientType != Alabo.Framework.Core.Enums.Enum.ClientType.WeChat) {
                 Resolve<IPayService>().Log("PublicPayAsyncByPayId 非微信公众号");
                 return NoContent();
             }
