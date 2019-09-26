@@ -1,12 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using Alabo.App.Core.User.Domain.Callbacks;
+﻿using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.Core.Enums.Enum;
@@ -14,7 +6,6 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Exceptions;
 using Alabo.Extensions;
-using Alabo.Mapping;
 using Alabo.Maps;
 using Alabo.UI;
 using Alabo.UI.AutoForms;
@@ -22,6 +13,11 @@ using Alabo.UI.AutoTables;
 using Alabo.Users.Enum;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Core.User.ViewModels {
 
