@@ -16,6 +16,7 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Files;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Helpers;
 using Alabo.Runtime;

@@ -11,6 +11,7 @@ using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
+using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Framework.Tasks.Schedules.Domain.Enums;
 using Alabo.Users.Dtos;

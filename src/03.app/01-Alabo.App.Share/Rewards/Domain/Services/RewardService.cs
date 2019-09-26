@@ -22,6 +22,7 @@ using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
+using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Tasks.Queues.Domain.Servcies;
 using Alabo.Framework.Tasks.Queues.Models;

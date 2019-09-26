@@ -10,6 +10,7 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Dtos;
 using Alabo.Framework.Core.WebApis.Filter;

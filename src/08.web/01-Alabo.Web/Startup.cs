@@ -1,27 +1,27 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using System;
-using Alabo.App.Share.Messages;
-using Alabo.App.Share.TaskExecutes;
+﻿using Alabo.App.Share.TaskExecutes;
 using Alabo.Apps;
-using Alabo.Framework.Core.WebApis;
 using Alabo.Datas.Ef;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Datas.UnitOfWorks.SqlServer;
 using Alabo.Events.Default;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis;
 using Alabo.Logging.Extensions;
 using Alabo.Runtime;
 using Alabo.Tenants.Extensions;
 using Alabo.Tool.Payment;
 using Alabo.Web.Extensions;
 using Alabo.Web.Mvc;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using System;
 
-namespace Alabo.Web {
+namespace Alabo.Web
+{
 
     /// <summary>
     /// startup

@@ -17,6 +17,7 @@ using Alabo.Domains.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Framework.Tasks.Queues.Domain.Servcies;
 using Alabo.Linq;
 using Alabo.Schedules;
