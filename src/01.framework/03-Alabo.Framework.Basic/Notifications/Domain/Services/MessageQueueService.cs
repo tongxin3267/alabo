@@ -5,6 +5,7 @@ using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.Notifications.Domain.Repositories;
 using ZKCloud.Open.Message.Models;
 using MessageQueue = Alabo.Framework.Basic.Notifications.Domain.Entities.MessageQueue;
 

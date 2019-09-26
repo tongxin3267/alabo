@@ -2,6 +2,7 @@
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Framework.Basic.Address.Domain.Entities;
+using Alabo.Framework.Basic.Address.Dtos;
 using MongoDB.Bson;
 
 namespace Alabo.Framework.Basic.Address.Domain.Services {

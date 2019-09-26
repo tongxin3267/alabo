@@ -5,6 +5,7 @@ using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Files;
+using Alabo.Framework.Basic.Storages.Domain.Entities;
 using Alabo.Helpers;
 using Microsoft.AspNetCore.Http;
 using MongoDB.Bson;

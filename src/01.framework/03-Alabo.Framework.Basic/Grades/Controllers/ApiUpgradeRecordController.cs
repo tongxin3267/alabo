@@ -1,15 +1,16 @@
+using Alabo.Domains.Entities;
+using Alabo.Domains.Query.Dto;
+using Alabo.Framework.Basic.Grades.Domain.Entities;
+using Alabo.Framework.Basic.Grades.Domain.Services;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Query.Dto;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Tasks.Controllers {
+namespace Alabo.App.Core.Tasks.Controllers
+{
 
     [ApiExceptionFilter]
     [Route("Api/UpgradeRecord/[action]")]

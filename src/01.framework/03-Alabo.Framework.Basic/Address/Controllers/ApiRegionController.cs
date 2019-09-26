@@ -6,6 +6,7 @@ using Alabo.Domains.Query.Dto;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Address.Domain.Entities;
 using Alabo.Framework.Basic.Address.Domain.Services;
+using Alabo.Framework.Basic.Address.Dtos;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
@@ -28,7 +29,7 @@ namespace Alabo.Framework.Basic.Address.Controllers {
         /// </summary>
         [HttpGet]
         [Display(Description = "国家区域树形结构")]
-        public ApiResult<List<Domain.Dtos.RegionTree>> Tree() {
+        public ApiResult<List<RegionTree>> Tree() {
             var result = Resolve<IRegionService>().RegionTrees().ToList();
             return ApiResult.Success(result);
         }
@@ -38,8 +39,8 @@ namespace Alabo.Framework.Basic.Address.Controllers {
         /// </summary>
         [HttpGet]
         [Display(Description = "国家区域树形结构")]
-        public ApiResult<List<Domain.Dtos.RegionWithChild>> all() {
-            var list = Resolve<IRegionService>().RegionTrees().Select(r => new Domain.Dtos.RegionWithChild {
+        public ApiResult<List<RegionWithChild>> all() {
+            var list = Resolve<IRegionService>().RegionTrees().Select(r => new RegionWithChild {
                 Id = r.Id,
                 Name = r.Name,
                 ParentId = r.ParentId

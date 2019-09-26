@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Framework.Basic.Grades.Domain.Enums;
 using Alabo.Validations;
 
 namespace Alabo.Framework.Basic.Grades.Dtos {

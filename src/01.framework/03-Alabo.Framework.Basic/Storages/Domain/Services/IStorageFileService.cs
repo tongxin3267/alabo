@@ -1,4 +1,5 @@
 ﻿using Alabo.Domains.Services;
+using Alabo.Framework.Basic.Storages.Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using MongoDB.Bson;
 

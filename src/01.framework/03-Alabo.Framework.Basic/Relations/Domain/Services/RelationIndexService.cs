@@ -6,6 +6,7 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Relations.Domain.Entities;
+using Alabo.Framework.Basic.Relations.Domain.Repositories;
 using Alabo.Framework.Core.Reflections.Interfaces;
 
 namespace Alabo.Framework.Basic.Relations.Domain.Services {

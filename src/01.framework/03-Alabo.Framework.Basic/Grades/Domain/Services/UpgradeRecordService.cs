@@ -3,6 +3,8 @@ using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
+using Alabo.Framework.Basic.Grades.Domain.Entities;
+using Alabo.Framework.Basic.Grades.Domain.Enums;
 using Alabo.Users.Services;
 using MongoDB.Bson;
 
