@@ -28,10 +28,10 @@ namespace Alabo.App.Core.User.Domain.Repositories {
                  dbo.User_UserDetail.LastLoginTime, dbo.User_UserDetail.ModifiedTime, dbo.User_UserDetail.LoginNum,
                  dbo.User_UserDetail.LastLoginIp, dbo.User_UserDetail.RegisterIp, dbo.User_UserDetail.CreateTime,
                  dbo.User_UserDetail.Birthday, dbo.User_UserDetail.Avator, dbo.User_UserDetail.Sex, dbo.User_UserDetail.AddressId,
-                 dbo.User_UserDetail.RegionId,dbo.User_UserDetail.ServiceCenterUserId, dbo.User_UserDetail.Identity,
+                 dbo.User_UserDetail.RegionId, dbo.User_UserDetail.IdentityStatus,
                   dbo.User_UserDetail.PayPassword, dbo.User_UserDetail.Password,
                  dbo.User_UserMap.LevelNumber, dbo.User_UserMap.TeamNumber,
-                 dbo.User_UserMap.TeamSales, dbo.User_UserMap.ChildNode, dbo.User_UserMap.ParentMap,
+                 dbo.User_UserMap.ChildNode, dbo.User_UserMap.ParentMap,
                  dbo.User_UserDetail.Id AS DetailId, dbo.User_UserMap.Id AS MapId
  FROM      dbo.User_User INNER JOIN
                  dbo.User_UserDetail ON dbo.User_User.Id = dbo.User_UserDetail.UserId INNER JOIN
