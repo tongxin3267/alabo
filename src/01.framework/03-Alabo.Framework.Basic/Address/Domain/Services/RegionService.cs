@@ -1,6 +1,5 @@
 ﻿using Alabo.App.Core.Common.Domain.Dtos;
 using Alabo.App.Core.Common.Domain.Entities;
-using Alabo.App.Core.Common.Domain.Enum;
 using Alabo.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;

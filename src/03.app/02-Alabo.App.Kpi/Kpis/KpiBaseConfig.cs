@@ -6,6 +6,7 @@ using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using System;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Core.Enums.Enum;
 
 namespace Alabo.App.Share.Kpi {
 

@@ -288,7 +288,7 @@ namespace Alabo.App.Share.Share.Domain.Services {
                     }
                 }
                 //如果是商城订单
-                if (shareBaseConfig.TriggerType == Core.Tasks.Domain.Enums.TriggerType.Order) {
+                if (shareBaseConfig.TriggerType == TriggerType.Order) {
                     viewShare.ProductRangIntro += shareBaseConfig.ProductRule.AmountType.GetDisplayName() + " ";
                     viewShare.ProductRangIntro += shareBaseConfig.ProductRule.ProductModel.GetDisplayName() + "<br/>";
                     if (shareBaseConfig.ProductRule.ProductModel == ProductModelType.ProductLine) {

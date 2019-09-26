@@ -8,6 +8,7 @@ using Alabo.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Core.Enums.Enum;
 using ZKCloud.Open.ApiBase.Models;
 using User = Alabo.Users.Entities.User;
 
@@ -73,7 +74,7 @@ namespace Alabo.App.Open.Tasks {
             if (shareOrder == null) {
                 return ExecuteResult<ITaskResult[]>.Fail($"分润订单为空，shareorder with id {shareOrderId} is null.");
             }
-            if (shareOrder.Status != Core.Tasks.Domain.Enums.ShareOrderStatus.Pending) {
+            if (shareOrder.Status != ShareOrderStatus.Pending) {
                 return ExecuteResult<ITaskResult[]>.Fail($"分润订单状态不是代理状态，不触发分润.");
             }
             if (shareOrder.Amount <= 0) {

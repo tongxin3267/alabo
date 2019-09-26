@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Common.Domain.Enum {
+namespace Alabo.Core.Enums.Enum {
 
     [ClassProperty(Name = "地区类型")]
     public enum RegionLevel {

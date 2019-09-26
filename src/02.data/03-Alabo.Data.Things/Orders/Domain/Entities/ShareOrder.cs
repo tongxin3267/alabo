@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using Alabo.App.Core.Tasks.Domain.Entities.Extensions;
 using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Core.Tasks.Domain.Services;
+using Alabo.Core.Enums.Enum;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;

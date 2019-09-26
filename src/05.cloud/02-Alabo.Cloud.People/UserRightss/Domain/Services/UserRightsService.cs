@@ -33,6 +33,7 @@ using Alabo.App.Shop.Order.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Entities.Extensions;
 using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.App.Shop.Order.Domain.Services;
+using Alabo.Core.Enums.Enum;
 using Alabo.Randoms;
 using Alabo.Regexs;
 using Alabo.Users.Entities;

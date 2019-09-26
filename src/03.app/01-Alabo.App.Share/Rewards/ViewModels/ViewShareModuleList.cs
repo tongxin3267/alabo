@@ -1,6 +1,7 @@
 ﻿using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Open.Tasks.Base;
 using System;
+using Alabo.Core.Enums.Enum;
 
 namespace Alabo.App.Share.Share.ViewModels {
 
