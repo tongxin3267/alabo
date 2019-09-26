@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Alabo.Extensions;
 
-namespace Alabo.UI
+namespace Alabo.Framework.Core.WebUis
 {
     /// <summary>
     ///     UI相关的函数

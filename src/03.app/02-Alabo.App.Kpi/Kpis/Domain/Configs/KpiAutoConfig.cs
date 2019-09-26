@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.AutoConfigs;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
@@ -50,7 +50,7 @@ namespace Alabo.App.Share.Kpi.Domain.CallBack {
         /// </summary>
         [Display(Name = "考核范围")]
         [Field(ControlsType = ControlsType.RadioButton, ListShow = true, GroupTabId = 1, EditShow = true,
-            SortOrder = 103, Width = "110", DataSource = "Alabo.Core.Enums.Enum.KpiTeamType")]
+            SortOrder = 103, Width = "110", DataSource = "Alabo.Framework.Core.Enums.Enum.KpiTeamType")]
         public KpiTeamType KpiTeamType { get; set; }
 
         /// <summary>

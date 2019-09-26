@@ -1,4 +1,4 @@
-﻿namespace Alabo.App.Core.UI.Domain.Services {
+﻿namespace Alabo.Framework.Core.WebUis.Domain.Services {
 
     public interface IAutoArticleService {
     }

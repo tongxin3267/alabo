@@ -1,18 +1,15 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using Alabo.App.Core.Admin.Domain.Services;
+﻿using System;
 using Alabo.AutoConfigs.Entities;
 using Alabo.AutoConfigs.Services;
+using Alabo.Framework.Core.Reflections.Services;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Helpers;
-using Alabo.Reflections;
-using Alabo.UI.AutoForms;
 
-namespace Alabo.App.Core.Common.Domain.Services {
+namespace Alabo.Framework.Core.WebUis.Domain.Services {
 
     public class ApIAlaboAutoConfigService : ServiceBase, IApIAlaboAutoConfigService {
 

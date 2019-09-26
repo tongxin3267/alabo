@@ -8,7 +8,7 @@ using Alabo.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using ZKCloud.Open.ApiBase.Models;
 using User = Alabo.Users.Entities.User;
 

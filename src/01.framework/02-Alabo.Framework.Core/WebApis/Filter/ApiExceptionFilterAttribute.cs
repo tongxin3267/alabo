@@ -4,7 +4,7 @@ using System.Net;
 using ZKCloud.Open.ApiBase.Models;
 using Alabo.Runtime;
 
-namespace Alabo.Core.WebApis.Filter {
+namespace Alabo.Framework.Core.WebApis.Filter {
 
     /// <summary>
     ///     Api异常过滤接口

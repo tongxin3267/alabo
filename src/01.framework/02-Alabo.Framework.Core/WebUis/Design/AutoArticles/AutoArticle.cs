@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alabo.UI.AutoArticles
+namespace Alabo.Framework.Core.WebUis.Design.AutoArticles
 {
     public class AutoArticle
     {

@@ -1,5 +1,4 @@
-﻿using Alabo.App.Core.Admin.Domain.Services;
-using Alabo.Extensions;
+﻿using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Linq.Dynamic;
 using System;
@@ -10,6 +9,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using Alabo.Framework.Core.Reflections.Services;
 using File = System.IO.File;
 
 namespace Alabo.Web.CodeGeneration.TestCode {

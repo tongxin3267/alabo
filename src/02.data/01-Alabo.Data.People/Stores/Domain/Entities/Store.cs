@@ -1,5 +1,5 @@
 ﻿using Alabo.App.Shop.Store.Domain.Entities.Extensions;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;

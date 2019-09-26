@@ -5,7 +5,7 @@ using System.Linq;
 using Alabo.Domains.Entities;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Core.WebApis.Controller {
+namespace Alabo.Framework.Core.WebApis.Controller {
 
     public abstract class ApiListController<TEntity, TKey> : ApiDeleteController<TEntity, TKey>
         where TEntity : class, IAggregateRoot<TEntity, TKey> {

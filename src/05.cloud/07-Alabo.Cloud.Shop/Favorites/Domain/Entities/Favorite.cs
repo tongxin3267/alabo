@@ -7,7 +7,6 @@ using Alabo.App.Share.Attach.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.UI;
-using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Share.Attach.Domain.Entities {

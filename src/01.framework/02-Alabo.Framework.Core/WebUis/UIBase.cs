@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using Newtonsoft.Json;
 using Alabo.Cache;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.WebUis.Design.AutoLists;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Mapping;
-using Alabo.UI.AutoForms;
-using Alabo.UI.AutoLists;
-using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.ViewModel;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
-namespace Alabo.UI
+namespace Alabo.Framework.Core.WebUis
 {
     public abstract class UIBase : BaseViewModel, IUI
     {

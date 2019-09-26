@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using MongoDB.Bson;
 using Alabo.App.Cms.Articles.Domain.Services;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoNews;
 using Alabo.Domains.Entities;
 using Alabo.Helpers;
 using Alabo.UI;
-using Alabo.UI.AutoNews;
 
 namespace Alabo.App.Cms.Articles.UI
 {

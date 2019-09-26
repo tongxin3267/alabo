@@ -2,8 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Core.WebApis.Controller;
-using Alabo.Core.WebApis.Filter;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.App.Core.Reports.Domain.Entities;
 using Alabo.App.Core.Reports.Domain.Services;
 using Alabo.Domains.Dtos;
@@ -12,7 +12,6 @@ using Alabo.Domains.Services.Report;
 using Alabo.Domains.Services.Report.Dtos;
 using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.UI.AutoReports;
 
 namespace Alabo.App.Core.Reports.Controllers {
 

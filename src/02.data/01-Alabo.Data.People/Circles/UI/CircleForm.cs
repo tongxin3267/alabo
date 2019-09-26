@@ -6,10 +6,12 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Mapping;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.App.Agent.Circle.Domain.Services;
 using Alabo.App.Agent.Circle.Domain.Entities;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Validations;
 
 namespace Alabo.Framework.Basic.Relations.Domain.Entities {

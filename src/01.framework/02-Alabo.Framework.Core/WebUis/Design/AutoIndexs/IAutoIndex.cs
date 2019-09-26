@@ -1,4 +1,4 @@
-﻿namespace Alabo.UI.AutoIndexs
+﻿namespace Alabo.Framework.Core.WebUis.Design.AutoIndexs
 {
     public interface IAutoIndex
     {

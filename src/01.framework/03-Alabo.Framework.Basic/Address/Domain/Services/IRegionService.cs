@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Alabo.App.Core.Common.Domain.Dtos;
 using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 

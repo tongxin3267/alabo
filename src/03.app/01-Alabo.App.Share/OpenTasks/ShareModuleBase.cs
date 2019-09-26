@@ -9,7 +9,7 @@ using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Open.Tasks.Base;
 using Alabo.App.Open.Tasks.Parameter;
 using Alabo.App.Open.Tasks.Result;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 using Alabo.Extensions;

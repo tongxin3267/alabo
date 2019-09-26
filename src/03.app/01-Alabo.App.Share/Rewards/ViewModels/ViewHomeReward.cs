@@ -25,6 +25,10 @@ using Alabo.App.Share.Share.Domain.Dto;
 using Alabo.App.Share.Share.Domain.Entities;
 using Alabo.App.Share.Share.Domain.Enums;
 using Alabo.App.Share.Share.Domain.Services;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoLists;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
@@ -32,8 +36,6 @@ using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.UI;
-using Alabo.UI.AutoLists;
-using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Share.Share.ViewModels {

@@ -1,6 +1,4 @@
-﻿using Alabo.App.Core.Admin.Domain.Repositories;
-using Alabo.App.Core.Admin.Domain.Services;
-using Alabo.App.Core.User.Domain.Services;
+﻿using Alabo.App.Core.User.Domain.Services;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -9,9 +7,13 @@ using Alabo.Helpers;
 using Alabo.Maps;
 using Alabo.Runtime;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Framework.Core.Admins.Repositories;
+using Alabo.Framework.Core.Admins.Services;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Users.Services;
 using Alabo.Validations;
 

@@ -16,7 +16,7 @@ namespace Alabo.App.Share.Kpi.Domain.Services {
     using System;
     using System.Collections.Generic;
     using Alabo.App.Core.User.Domain.Entities;
-    using Alabo.Core.Enums.Enum;
+    using Alabo.Framework.Core.Enums.Enum;
     using Kpi = Entities.Kpi;
 
     /// <summary>

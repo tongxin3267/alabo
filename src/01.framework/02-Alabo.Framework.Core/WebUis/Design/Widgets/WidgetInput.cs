@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
 using Alabo.Validations;
 
-namespace Alabo.UI.Widgets
+namespace Alabo.Framework.Core.WebUis.Design.Widgets
 {
     /// <summary>
     ///     模块参数获取

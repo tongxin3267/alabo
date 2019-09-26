@@ -1,4 +1,4 @@
-﻿namespace Alabo.UI.AutoTasks
+﻿namespace Alabo.Framework.Core.WebUis.Design.AutoTasks
 {
     public interface IAutoTask
     {

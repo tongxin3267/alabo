@@ -7,7 +7,7 @@ using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Services;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Extensions;
 using Alabo.Mapping;
 using Alabo.Test.Base.Core.Model;

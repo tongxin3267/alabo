@@ -6,11 +6,13 @@ using System.Linq;
 using Alabo.App.Offline.Merchants.Domain.Dtos;
 using Alabo.App.Offline.Merchants.Domain.Entities;
 using Alabo.App.Offline.Merchants.Domain.Services;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
 using Alabo.Maps;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Offline.Merchants.UI

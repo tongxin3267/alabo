@@ -1,5 +1,5 @@
 ﻿using Alabo.App.Cms.Articles.Domain.Enums;
-using Alabo.App.Core.Themes.DiyModels.Lists;
+using Alabo.Framework.Core.WebUis.Models.Lists;
 using Alabo.Domains.Enums;
 
 namespace Alabo.App.Cms.Articles.Domain.Dto {

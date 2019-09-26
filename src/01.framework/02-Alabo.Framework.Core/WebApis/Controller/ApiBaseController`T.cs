@@ -1,8 +1,8 @@
-﻿using Alabo.Core.WebApis.Controller;
+﻿using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Domains.Entities;
 using Alabo.RestfulApi;
 
-namespace Alabo.Core.WebApis.Controller
+namespace Alabo.Framework.Core.WebApis.Controller
 {
 
     /// <summary>

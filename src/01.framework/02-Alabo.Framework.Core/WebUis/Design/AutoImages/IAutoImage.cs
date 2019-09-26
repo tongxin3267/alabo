@@ -1,4 +1,4 @@
-﻿namespace Alabo.UI.AutoImages
+﻿namespace Alabo.Framework.Core.WebUis.Design.AutoImages
 {
     public interface IAutoImage
     {

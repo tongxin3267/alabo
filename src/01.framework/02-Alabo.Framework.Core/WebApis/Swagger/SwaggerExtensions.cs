@@ -1,15 +1,14 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.IO;
+using System.Linq;
+using Alabo.Framework.Core.WebApis.Controller;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.Swagger;
-using System.IO;
-using System.Linq;
-using Alabo.Core.WebApis.Controller;
-using Alabo.Core.WebApis.Controller;
 
-namespace Alabo.App.Core.Api.Swagger {
+namespace Alabo.Framework.Core.WebApis.Swagger {
 
     public static class SwaggerExtensions {
 

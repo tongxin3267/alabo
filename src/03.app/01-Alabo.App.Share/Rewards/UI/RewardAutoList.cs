@@ -6,11 +6,13 @@ using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Share.Share.Domain.Entities;
 using Alabo.App.Share.Share.Domain.Services;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoLists;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
 using Alabo.UI;
-using Alabo.UI.AutoLists;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Share.Share.UI.AutoForm {

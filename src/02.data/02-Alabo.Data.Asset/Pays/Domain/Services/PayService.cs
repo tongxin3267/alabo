@@ -1,6 +1,5 @@
 ﻿using Alabo.App.Core.ApiStore;
 using Alabo.App.Core.ApiStore.CallBacks;
-using Alabo.App.Core.Common.Domain.CallBacks;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Core.Finance.Domain.Dtos.Pay;
@@ -10,7 +9,7 @@ using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.App.Core.Finance.Domain.Repositories;
 using Alabo.App.Core.Finance.Dtos;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;

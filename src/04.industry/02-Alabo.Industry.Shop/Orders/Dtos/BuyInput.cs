@@ -6,7 +6,7 @@ using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
@@ -410,7 +410,7 @@ namespace Alabo.App.Shop.Order.Domain.Dtos
         /// </summary>
         [Display(Name = "订单类型")]
         [Field(ControlsType = ControlsType.DropdownList, EditShow = true, Width = "150",
-            DataSource = "Alabo.Core.Enums.Enum.CheckoutType", ListShow = true, IsShowBaseSerach = true,
+            DataSource = "Alabo.Framework.Core.Enums.Enum.CheckoutType", ListShow = true, IsShowBaseSerach = true,
             IsShowAdvancedSerach = true, SortOrder = 5)]
         public CheckoutType Type { get; set; } = 0;
 

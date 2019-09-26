@@ -1,7 +1,7 @@
 using Xunit;
 using Alabo.App.Core.Themes.Domain.Services;
 using Alabo.App.Core.Themes.Dtos;
-using Alabo.Core.Enums;
+using Alabo.Framework.Core.Enums;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
@@ -26,7 +26,7 @@ namespace Alabo.Test.Open.Themes.Domain.Services
         [TestIgnore]
         public void GetDefaultTheme_ClientType_HttpContext_test()
         {
-            //			var clientType = (Alabo.Core.Enums.ClientType)0;
+            //			var clientType = (Alabo.Framework.Core.Enums.ClientType)0;
             //			HttpContext context = null;
             //			var result = Service<IThemeService>().GetDefaultTheme( clientType, context);
             //			Assert.NotNull(result);

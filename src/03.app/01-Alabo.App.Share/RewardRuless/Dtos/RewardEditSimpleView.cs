@@ -1,5 +1,5 @@
 ﻿using System;
-using Alabo.UI.AutoForms;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 
 namespace Alabo.App.Share.Share.Domain.Dtos {
 

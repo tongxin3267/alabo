@@ -17,7 +17,6 @@ using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Tenants;
 using Alabo.Web.Mvc.ViewModel;
-using Alabo.UI.AutoTables;
 using Alabo.Extensions;
 using Alabo.App.Shop.Product.Domain.Services;
 using Alabo.App.Shop.Store.Domain.Services;

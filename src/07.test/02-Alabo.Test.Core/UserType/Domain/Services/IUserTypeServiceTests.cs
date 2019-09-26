@@ -101,7 +101,7 @@ namespace Alabo.Test.Core.UserType.Domain.Services
         public void GetSingle_Int64_UserTypeEnum_test()
         {
             //var userId = 0;
-            //var userTypeEnum = (Alabo.Core.Enums.Enum.UserTypeEnum)0;
+            //var userTypeEnum = (Alabo.Framework.Core.Enums.Enum.UserTypeEnum)0;
             //var result = Service<IUserTypeService>().GetSingle(userId, userTypeEnum);
             //Assert.NotNull(result);
         }

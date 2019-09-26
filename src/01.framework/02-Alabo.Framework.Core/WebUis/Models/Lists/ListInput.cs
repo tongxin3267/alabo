@@ -1,12 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Themes.DiyModels.Base;
-using Alabo.Core.Enums.Enum;
-using Alabo.Domains.Entities;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Themes.DiyModels.Lists {
+namespace Alabo.Framework.Core.WebUis.Models.Lists {
 
     /// <summary>
     ///     zk-list 分页数据

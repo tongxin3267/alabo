@@ -1,6 +1,6 @@
 ﻿using System;
 using Xunit;
-using Alabo.App.Core.Admin.Domain.Services;
+using Alabo.Framework.Core.Reflections.Services;
 using Alabo.Test.Base.Core.Model;
 
 namespace Alabo.Test.Generation

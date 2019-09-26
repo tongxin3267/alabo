@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Alabo.Initialize;
+using Alabo.Framework.Core.Reflections.Interfaces;
 
 namespace Alabo.Cloud.Contracts.Domain {
 

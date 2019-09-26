@@ -2,15 +2,15 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using Alabo.Core.WebApis.Controller;
-using Alabo.Core.WebApis.Filter;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.App.Core.ApiStore.CallBacks;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.Finance.Domain.Dtos.Pay;
 using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Domains.Base.Entities;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Enums;
@@ -171,7 +171,7 @@ namespace Alabo.App.Core.Finance.Controllers {
                 Resolve<IPayService>().Log("PublicPayAsyncByPayId  useId 不一样");
                 return NoContent();
             }
-            if (payInput.ClientType != Alabo.Core.Enums.Enum.ClientType.WeChat) {
+            if (payInput.ClientType != Alabo.Framework.Core.Enums.Enum.ClientType.WeChat) {
                 Resolve<IPayService>().Log("PublicPayAsyncByPayId 非微信公众号");
                 return NoContent();
             }

@@ -2,19 +2,21 @@
 using Alabo.App.Agent.Citys.Domain.Services;
 using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Maps;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
-using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 
 namespace Alabo.App.Agent.Citys.Domain.Dtos {
 

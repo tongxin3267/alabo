@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Alabo.Domains.Repositories;
 
-namespace Alabo.App.Core.Admin.Domain.Repositories
+namespace Alabo.Framework.Core.Tenants.Domains.Repositories
 {
     /// <summary>
     ///     ITenantCreateRepository

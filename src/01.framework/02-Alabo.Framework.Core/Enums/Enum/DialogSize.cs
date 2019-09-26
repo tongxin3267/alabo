@@ -1,6 +1,6 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Core.Enums.Enum
+namespace Alabo.Framework.Core.Enums.Enum
 {
     [ClassProperty(Name = "对话框大小")]
     public enum DialogSize

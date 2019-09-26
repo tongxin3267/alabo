@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Text;
 using Alabo.App.Core.Reports.Domain.Entities;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Dtos;
 using Alabo.Domains.Enums;
@@ -15,7 +16,6 @@ using Alabo.Domains.Services.Report.Enums;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.UI;
-using Alabo.UI.AutoReports;
 using Alabo.Users.Repositories;
 
 namespace Alabo.App.Core.Reports.Domain.Repositories {

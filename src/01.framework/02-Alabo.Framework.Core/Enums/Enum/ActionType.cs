@@ -1,6 +1,6 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Core.Enums.Enum {
+namespace Alabo.Framework.Core.Enums.Enum {
 
     [ClassProperty(Name = "用户操作类型")]
     public enum UserActionType {

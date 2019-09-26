@@ -1,8 +1,9 @@
 ﻿using System;
-using Newtonsoft.Json;
 using Alabo.Extensions;
+using Alabo.UI;
+using Newtonsoft.Json;
 
-namespace Alabo.UI.AutoTables
+namespace Alabo.Framework.Core.WebUis.Design.AutoTables
 {
     /// <summary>
     ///     表格操作

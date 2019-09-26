@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Domain.CallBacks;
-using Alabo.Core.WebApis.Filter;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.AutoConfigs.Services;
+using Alabo.Framework.Core.WebApis.Configs;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Runtime;
@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Mvc.Filters;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Core.WebApis.Controller {
+namespace Alabo.Framework.Core.WebApis.Controller {
 
     public abstract class ApiBaseController : ApiExtensionController {
         protected AccessToken Token;

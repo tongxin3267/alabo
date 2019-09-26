@@ -1,5 +1,5 @@
+using Alabo.Framework.Core.WebApis.Service;
 using Xunit;
-using Alabo.App.Core.Api.Domain.Service;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;

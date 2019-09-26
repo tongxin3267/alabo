@@ -1,18 +1,16 @@
-﻿using Alabo.App.Core.Admin.Domain.Services;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.UI.Domain.Services;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
+using Alabo.Framework.Core.WebUis.Domain.Services;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
-using Alabo.UI.AutoTables;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Alabo.Core.WebApis.Controller;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Common.Controllers {
+namespace Alabo.Framework.Core.WebUis.Controllers {
 
     /// <summary>
     /// Api type controller

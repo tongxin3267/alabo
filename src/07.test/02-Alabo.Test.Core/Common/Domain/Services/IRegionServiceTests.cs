@@ -61,7 +61,7 @@ namespace Alabo.Test.Core.Common.Domain.Services {
         [TestMethod("GetNewId_Country_Int32_Int64")]
         [TestIgnore]
         public void GetNewId_Country_Int32_Int64_test() {
-            //var country = (Alabo.Core.Enums.Enum.Country)0;
+            //var country = (Alabo.Framework.Core.Enums.Enum.Country)0;
             //var level = 0;
             //var parentId = 0;
             //var result = Service<IRegionService>().GetNewId(country, level, parentId);

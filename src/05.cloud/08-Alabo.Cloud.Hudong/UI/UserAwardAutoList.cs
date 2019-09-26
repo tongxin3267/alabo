@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.Api.Domain.Service;
 using Alabo.App.Share.HuDong.Domain.Entities;
 using Alabo.App.Share.HuDong.Domain.Services;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoLists;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
 using Alabo.UI;
-using Alabo.UI.AutoLists;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Share.HuDong.UI {

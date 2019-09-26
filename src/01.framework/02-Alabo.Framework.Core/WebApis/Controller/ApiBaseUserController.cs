@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Core.WebApis.Filter;
+using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.Domains.Entities;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Core.WebApis.Controller {
+namespace Alabo.Framework.Core.WebApis.Controller {
 
     public abstract class ApiBaseUserController<TEntity, TKey> : ApiSingleController<TEntity, TKey>
           where TEntity : class, IAggregateRoot<TEntity, TKey> {

@@ -5,13 +5,16 @@ using Alabo.App.Core.Common.Domain.Services;
 using Alabo.App.Offline.Merchants.Domain.Services;
 using Alabo.App.Offline.Product.Domain.CallBacks;
 using Alabo.App.Offline.Product.Domain.Services;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.UI;
-using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Offline.Product.Domain.Entities
@@ -149,7 +152,7 @@ namespace Alabo.App.Offline.Product.Domain.Entities
                 }
             }
             //query
-            var apiService = Resolve<Alabo.App.Core.Api.Domain.Service.IApiService>();
+            var apiService = Resolve<IApiService>();
             var list = Resolve<IMerchantProductService>().GetPagedList<MerchantProductList>(dic.ToJson(), expressionQuery.BuildExpression());
             list.ForEach(item =>
             {

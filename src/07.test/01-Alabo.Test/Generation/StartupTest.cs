@@ -1,5 +1,4 @@
-﻿using Alabo.App.Core.Admin.Domain.Services;
-using Alabo.App.Core.LightApps.Domain.Services;
+﻿using Alabo.App.Core.LightApps.Domain.Services;
 using Alabo.Extensions;
 using Alabo.Linq.Dynamic;
 using Alabo.Test.Base.Core;
@@ -12,6 +11,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using Alabo.Framework.Core.Reflections.Services;
 using Xunit;
 
 namespace Alabo.Test.Generation {

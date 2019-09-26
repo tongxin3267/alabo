@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
@@ -52,7 +52,7 @@ namespace Alabo.App.Core.Finance.Domain.Dtos.Recharge {
         ///     线下充值时，汇款银行必须填写
         /// </summary>
         [Display(Name = "汇款银行")]
-        [Field(ControlsType = ControlsType.DropdownList, EditShow = false, DataSource = "Alabo.Core.Enums.Enum.BankType", Width = "80",
+        [Field(ControlsType = ControlsType.DropdownList, EditShow = false, DataSource = "Alabo.Framework.Core.Enums.Enum.BankType", Width = "80",
             SortOrder = 3)]
         public BankType BankType { get; set; }
 

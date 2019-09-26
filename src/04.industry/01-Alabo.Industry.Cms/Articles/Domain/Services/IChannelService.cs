@@ -2,8 +2,8 @@
 using System;
 using System.Collections.Generic;
 using Alabo.App.Cms.Articles.Domain.Entities;
-using Alabo.App.Core.Common.Domain.CallBacks;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Admins.Configs;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 

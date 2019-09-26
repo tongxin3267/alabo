@@ -5,7 +5,7 @@ using Alabo.App.Agent.Circle.Domain.Entities;
 using Alabo.App.Core.ApiStore.MiniProgram.Clients;
 using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.App.Core.Common.Domain.Services;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using ZKCloud.Open.ApiBase.Connectors;

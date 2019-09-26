@@ -6,7 +6,7 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Web.ViewFeatures;
 
-namespace Alabo.App.Core.Admin.Domain.Services {
+namespace Alabo.Framework.Core.Reflections.Services {
 
     /// <summary>
     ///     Class CalssService.

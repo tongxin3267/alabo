@@ -1,6 +1,6 @@
 ﻿using Alabo.Domains.Services;
 
-namespace Alabo.App.Core.Api.Domain.Service {
+namespace Alabo.Framework.Core.WebApis.Service {
 
     /// <summary>
     ///     Api处理函数

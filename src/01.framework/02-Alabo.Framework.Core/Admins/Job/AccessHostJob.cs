@@ -1,13 +1,13 @@
-﻿using Quartz;
-using System;
+﻿using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Alabo.Dependency;
 using Alabo.Extensions;
 using Alabo.Schedules.Job;
+using Quartz;
 
-namespace Alabo.App.Share.Operate.Job {
+namespace Alabo.Framework.Core.Admins.Job {
 
     /// <summary>
     /// 3分钟定时访问网站

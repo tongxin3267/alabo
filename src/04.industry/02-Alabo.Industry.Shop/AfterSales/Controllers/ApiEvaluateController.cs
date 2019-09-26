@@ -2,7 +2,7 @@ using System;using Alabo.Domains.Repositories.EFCore;using Alabo.Domains.Reposit
 using System.Linq;
 using Alabo.Domains.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Alabo.Core.WebApis.Filter;
+using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.App.Core.Common;
 using MongoDB.Bson;
 using Alabo.App.Core.User;
@@ -12,7 +12,7 @@ using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.Controllers;
 using Alabo.App.Shop.AfterSale.Domain.Entities;
 using Alabo.App.Shop.AfterSale.Domain.Services;
-using Alabo.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Controller;
 
 namespace Alabo.App.Shop.AfterSale.Controllers {
 		[ApiExceptionFilter]

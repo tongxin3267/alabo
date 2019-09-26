@@ -23,14 +23,14 @@ using Alabo.App.Shop.Product.Domain.Entities.Extensions;
 using Alabo.App.Shop.Product.Domain.Services;
 using Alabo.App.Shop.Store.Domain.Dtos;
 using Alabo.Cache;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Mapping;
-using Alabo.UI.AutoForms;
 using Alabo.Users.Entities;
 
 namespace Alabo.App.Shop.Activitys.Services

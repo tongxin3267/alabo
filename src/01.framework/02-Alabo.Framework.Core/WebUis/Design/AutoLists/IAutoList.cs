@@ -1,7 +1,8 @@
 ﻿using System;
+using Alabo.Framework.Core.WebApis;
 using Alabo.Domains.Entities;
 
-namespace Alabo.UI.AutoLists
+namespace Alabo.Framework.Core.WebUis.Design.AutoLists
 {
     /// <summary>
     ///     自动列表接口

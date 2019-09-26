@@ -8,10 +8,12 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Maps;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Validations;
 using _01_Alabo.Cloud.Core.UserTree.Domain.Service;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Extensions;
 using Alabo.Validations;
 

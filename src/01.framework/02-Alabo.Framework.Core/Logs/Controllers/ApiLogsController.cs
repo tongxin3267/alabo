@@ -1,19 +1,18 @@
-﻿using Alabo.Core.WebApis.Controller;
-using Alabo.Core.WebApis.Filter;
-using Alabo.Domains.Base.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.Domains.Base.Services;
 using Alabo.Extensions;
+using Alabo.Users.Services;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Users.Services;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Admin.Controllers {
+namespace Alabo.Framework.Core.Logs.Controllers {
 
     [ApiExceptionFilter]
     [Route("Api/Logs/[action]")]
-    public class ApiLogsController : ApiBaseController<Logs, ObjectId> {
+    public class ApiLogsController : ApiBaseController<Domains.Base.Entities.Logs, ObjectId> {
 
         public ApiLogsController() : base() {
             BaseService = Resolve<ILogsService>();

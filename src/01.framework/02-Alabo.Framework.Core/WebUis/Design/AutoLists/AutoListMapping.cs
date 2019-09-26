@@ -1,9 +1,9 @@
 ﻿using Alabo.Cache;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Extensions;
 using Alabo.Helpers;
-using Alabo.UI.AutoTables;
 
-namespace Alabo.UI.AutoLists
+namespace Alabo.Framework.Core.WebUis.Design.AutoLists
 {
     public static class AutoListMapping
     {

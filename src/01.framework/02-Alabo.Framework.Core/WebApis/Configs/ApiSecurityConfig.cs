@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.Api.Domain.CallBacks {
+namespace Alabo.Framework.Core.WebApis.Configs {
 
     [ClassProperty(Name = "Api接口安全", Icon = "fa	fa-exclamation-circle", SortOrder = 1,
         SideBarType = SideBarType.ControlSideBar)]

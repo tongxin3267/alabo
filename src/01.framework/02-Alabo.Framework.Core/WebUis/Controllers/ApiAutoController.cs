@@ -1,29 +1,26 @@
-﻿using Alabo.App.Core.Admin.Domain.Services;
-using Alabo.Core.WebApis.Controller;
-using Alabo.Core.WebApis.Filter;
-using Alabo.App.Core.UI.Domain.Services;
-using Alabo.App.Core.UI.Dtos;
-using Alabo.Domains.Entities.Core;
-using Alabo.Extensions;
-using Alabo.UI;
-using Alabo.UI.AutoArticles;
-using Alabo.UI.AutoForms;
-using Alabo.UI.AutoLists;
-using Alabo.UI.AutoNews;
-using Alabo.UI.AutoPreviews;
-using Alabo.UI.AutoReports;
-using Alabo.UI.AutoTables;
-using Castle.Core.Internal;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Framework.Core.WebUis.Design.AutoArticles;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.WebUis.Design.AutoLists;
+using Alabo.Framework.Core.WebUis.Design.AutoNews;
+using Alabo.Framework.Core.WebUis.Design.AutoPreviews;
+using Alabo.Framework.Core.WebUis.Design.AutoReports;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
+using Alabo.Framework.Core.WebUis.Domain.Services;
+using Alabo.Framework.Core.WebUis.Dtos;
+using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Services.Report;
+using Alabo.Extensions;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
-using IAutoPreview = Alabo.UI.AutoPreviews.IAutoPreview;
+using IAutoPreview = Alabo.Framework.Core.WebUis.Design.AutoPreviews.IAutoPreview;
 
-namespace Alabo.App.Core.UI.Controllers {
+namespace Alabo.Framework.Core.WebUis.Controllers {
 
     /// <summary>
     /// 对应前端 form  image table task report等通用页面

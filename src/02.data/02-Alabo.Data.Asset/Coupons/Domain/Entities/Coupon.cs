@@ -11,8 +11,6 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Maps;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
-using Alabo.UI.AutoTables;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 

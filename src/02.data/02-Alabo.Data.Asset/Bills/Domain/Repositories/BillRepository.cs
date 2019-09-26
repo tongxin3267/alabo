@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.Common;
 using Alabo.App.Core.Finance.Domain.Dtos.Bill;
 using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;

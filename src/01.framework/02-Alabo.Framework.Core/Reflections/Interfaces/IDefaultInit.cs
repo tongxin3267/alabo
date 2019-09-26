@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Threading.Tasks;
 
-namespace Alabo.Initialize {
+namespace Alabo.Framework.Core.Reflections.Interfaces {
 
     /// <summary>
     ///     默认数据初始

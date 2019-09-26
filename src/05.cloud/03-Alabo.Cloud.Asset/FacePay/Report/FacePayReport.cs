@@ -1,9 +1,10 @@
 ﻿using Alabo.App.Market.FacePay.Domain.Services;
 using Alabo.Helpers;
 using Alabo.UI;
-using Alabo.UI.AutoReports;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis.Design.AutoReports;
 using Alabo.Domains.Services.Report;
 using Alabo.Domains.Services.Report.Enums;
 

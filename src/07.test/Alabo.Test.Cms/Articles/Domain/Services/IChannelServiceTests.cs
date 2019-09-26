@@ -3,7 +3,7 @@ using System.Linq;
 using Xunit;
 using Alabo.App.Cms.Articles;
 using Alabo.App.Cms.Articles.Domain.Services;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Extensions;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;

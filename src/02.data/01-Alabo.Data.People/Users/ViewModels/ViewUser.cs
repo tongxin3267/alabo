@@ -1,15 +1,13 @@
 ﻿using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Services;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Maps;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
-using Alabo.UI.AutoTables;
 using Alabo.Users.Enum;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
@@ -18,6 +16,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 
 namespace Alabo.App.Core.User.ViewModels {
 
@@ -118,7 +120,7 @@ namespace Alabo.App.Core.User.ViewModels {
         [Display(Name = "实名?")]
         [HelpBlock("请确定实名")]
         [Field(ControlsType = ControlsType.DropdownList, GroupTabId = 1, Width = "150",
-            DataSource = "Alabo.Core.Enums.Enum.IdentityStatus", ListShow = true, EditShow = false, SortOrder = 8)]
+            DataSource = "Alabo.Framework.Core.Enums.Enum.IdentityStatus", ListShow = true, EditShow = false, SortOrder = 8)]
         public IdentityStatus IdentityStatus { get; set; } = IdentityStatus.IsNoPost;
 
         /// <summary>
@@ -126,7 +128,7 @@ namespace Alabo.App.Core.User.ViewModels {
         /// </summary>
         [Display(Name = "性别")]
         [HelpBlock("选择您的性别")]
-        [Field(ControlsType = ControlsType.RadioButton, GroupTabId = 1, DataSource = "Alabo.Core.Enums.Enum.Sex",
+        [Field(ControlsType = ControlsType.RadioButton, GroupTabId = 1, DataSource = "Alabo.Framework.Core.Enums.Enum.Sex",
             Width = "150", ListShow = true, SortOrder = 10)]
         public Sex Sex { get; set; } = Sex.Man;
 

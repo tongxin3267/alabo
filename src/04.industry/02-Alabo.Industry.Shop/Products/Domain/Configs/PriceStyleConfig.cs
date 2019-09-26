@@ -13,7 +13,7 @@ using Alabo.App.Core.Finance.Domain.CallBacks;
 using Alabo.App.Shop.Product.Domain.Enums;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;

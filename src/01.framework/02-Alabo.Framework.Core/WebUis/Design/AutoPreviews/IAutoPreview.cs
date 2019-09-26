@@ -1,4 +1,6 @@
-﻿namespace Alabo.UI.AutoPreviews
+﻿using Alabo.Framework.Core.WebApis;
+
+namespace Alabo.Framework.Core.WebUis.Design.AutoPreviews
 {
     /// <summary>
     ///     预览组件，对应移动端zk-preview

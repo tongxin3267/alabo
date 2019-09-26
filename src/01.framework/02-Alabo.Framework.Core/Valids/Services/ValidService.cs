@@ -1,5 +1,4 @@
 ﻿using System;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -8,7 +7,7 @@ using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Users.Services;
 
-namespace Alabo.App.Core.Admin.Domain.Services {
+namespace Alabo.Framework.Core.Valids.Services {
 
     public class ValidService : ServiceBase, IValidService {
 

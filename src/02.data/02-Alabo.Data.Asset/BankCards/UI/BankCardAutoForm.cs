@@ -4,13 +4,15 @@ using System.Text.RegularExpressions;
 using Alabo.App.Core.Finance.Domain.Entities;
 using Alabo.App.Core.Finance.Domain.Services;
 using Alabo.App.Core.Finance.Dtos;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Maps;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
@@ -50,7 +52,7 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
         [Display(Name = "银行类型")]
         [HelpBlock("请选择银行卡对应的银行类型")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        [Field(ControlsType = ControlsType.DropdownList, DataSource = "Alabo.Core.Enums.Enum.BankType", Width = "120",
+        [Field(ControlsType = ControlsType.DropdownList, DataSource = "Alabo.Framework.Core.Enums.Enum.BankType", Width = "120",
             EditShow = true, GroupTabId = 1, ListShow = true, SortOrder = 3)]
         public BankType Type { get; set; }
 
@@ -71,7 +73,7 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
         /// <param name="id"></param>
         /// <param name="autoModel"></param>
         /// <returns></returns>
-        public Alabo.UI.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public Alabo.Framework.Core.WebUis.Design.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
             //不允许更改
             //return ToAutoForm(new BankCardAutoForm());
 

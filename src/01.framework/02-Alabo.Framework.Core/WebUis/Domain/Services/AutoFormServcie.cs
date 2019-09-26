@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.UI.Dtos;
 using Alabo.AutoConfigs;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.WebUis.Dtos;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
@@ -10,9 +11,8 @@ using Alabo.Domains.Services;
 using Alabo.Helpers;
 using Alabo.Linq.Dynamic;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
 
-namespace Alabo.App.Core.UI.Domain.Services {
+namespace Alabo.Framework.Core.WebUis.Domain.Services {
 
     public class AutoFormServcie : ServiceBase, IAutoFormServcie {
 

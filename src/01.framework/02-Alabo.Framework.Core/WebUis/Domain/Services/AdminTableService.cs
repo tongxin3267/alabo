@@ -1,22 +1,23 @@
-﻿using Alabo.Datas.UnitOfWorks;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using Alabo.Framework.Core.Reflections.Services;
+using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Files;
 using Alabo.Linq.Dynamic;
 using Alabo.Mapping;
 using Alabo.Reflections;
 using Alabo.Web.ViewFeatures;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using Alabo.Files;
 using FileInfo = System.IO.FileInfo;
 
-namespace Alabo.App.Core.Admin.Domain.Services {
+namespace Alabo.Framework.Core.WebUis.Domain.Services {
 
     public class AdminTableService : ServiceBase, IAdminTableService {
 

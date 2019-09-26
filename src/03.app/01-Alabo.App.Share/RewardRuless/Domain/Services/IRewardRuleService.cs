@@ -4,9 +4,9 @@ using Alabo.App.Share.Share.Domain.Dtos;
 using Alabo.App.Share.Share.Domain.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
-using Alabo.UI.AutoForms;
 using MongoDB.Bson;
 using System;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
 
 namespace Alabo.App.Share.Share.Domain.Services {
 

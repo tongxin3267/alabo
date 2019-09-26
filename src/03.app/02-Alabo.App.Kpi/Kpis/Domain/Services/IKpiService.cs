@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Share.Kpi.ViewModels;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Users.Entities;

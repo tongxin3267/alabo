@@ -1,11 +1,9 @@
-﻿using Alabo.Core.WebApis.Controller;
-using Alabo.Core.WebApis.Filter;
+﻿using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.App.Core.ApiStore.MiniProgram.Dtos;
 using Alabo.App.Core.ApiStore.MiniProgram.Services;
 using Alabo.App.Core.ApiStore.WeiXinMp.Models;
 using Alabo.App.Core.ApiStore.WeiXinMp.Services;
-using Alabo.App.Core.Common.Domain.CallBacks;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.Domains.Base.Services;
 using Alabo.Extensions;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +11,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Services;
-using Alabo.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Controller;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Core.ApiStore.Controllers {

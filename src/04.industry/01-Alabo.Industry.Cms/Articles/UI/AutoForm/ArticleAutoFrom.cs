@@ -8,8 +8,12 @@ using System.Text;
 using Alabo.App.Cms.Articles.Domain.CallBacks;
 using Alabo.App.Cms.Articles.Domain.Dto;
 using Alabo.App.Cms.Articles.Domain.Services;
-using Alabo.App.Core.Common.Domain.CallBacks;
 using Alabo.App.Core.Common.Domain.Services;
+using Alabo.Framework.Core.Admins.Configs;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -18,8 +22,6 @@ using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.Maps;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
-using Alabo.UI.AutoTables;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
@@ -223,7 +225,7 @@ namespace Alabo.App.Cms.Articles.UI.AutoForm {
             return list;
         }
 
-        public Alabo.UI.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public Alabo.Framework.Core.WebUis.Design.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
             var dic = autoModel.Query.ToObject<Dictionary<string, string>>();
             dic.TryGetValue("ChannelId", out var channelId);
             //var channel = Resolve<IChannelService>().GetSingle(r => r.Id == channelId.ToObjectId());

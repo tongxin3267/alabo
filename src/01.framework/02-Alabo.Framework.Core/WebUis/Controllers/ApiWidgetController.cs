@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Core.WebApis.Controller;
-using Alabo.Core.WebApis.Controller;
+﻿using System.ComponentModel.DataAnnotations;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebUis.Design.Widgets;
 using Alabo.Extensions;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.UI.Widgets;
 
-namespace Alabo.App.Core.Common.Controllers {
+namespace Alabo.Framework.Core.WebUis.Controllers {
 
     /// <summary>
     /// 对应前端的Widget模块

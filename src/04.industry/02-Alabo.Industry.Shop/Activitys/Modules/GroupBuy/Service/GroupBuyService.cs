@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.Api.Domain.Service;
-using Alabo.App.Core.Api.Dtos;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Shop.Activitys.Domain.Entities;
 using Alabo.App.Shop.Activitys.Domain.Enum;
@@ -13,6 +11,8 @@ using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.App.Shop.Product.DiyModels;
 using Alabo.App.Shop.Product.Domain.Dtos;
 using Alabo.App.Shop.Product.Domain.Services;
+using Alabo.Framework.Core.WebApis.Dtos;
+using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;

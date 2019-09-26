@@ -5,13 +5,15 @@ using Alabo.App.Core.User.Domain.Entities;
 using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.App.Shop.Order.Domain.Services;
 using Alabo.App.Shop.Product.Domain.Dtos;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Framework.Core.WebUis.Design.AutoLists;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.UI;
-using Alabo.UI.AutoLists;
-using Alabo.UI.AutoTables;
 using Alabo.Users.Entities;
 using Alabo.Web.Mvc.Attributes;
 

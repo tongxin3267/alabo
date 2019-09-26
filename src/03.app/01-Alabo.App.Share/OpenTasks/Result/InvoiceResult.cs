@@ -6,7 +6,7 @@ using Alabo.App.Core.Tasks;
 using Alabo.App.Core.Tasks.Extensions;
 using Alabo.App.Core.Tasks.ResultModel;
 using Alabo.App.Open.Tasks.Parameter;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;

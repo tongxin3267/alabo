@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Validations;
@@ -81,7 +81,7 @@ namespace Alabo.App.Core.User.ViewModels {
         ///     审核状态（0：已提交，1：审核中(暂时不用)，2：审核通过，3：审核不通过）
         /// </summary>
         [Display(Name = "审核状态")]
-        [Field(ControlsType = ControlsType.RadioButton, DataSource = "Alabo.Core.Enums.Enum.IdentityStatus",
+        [Field(ControlsType = ControlsType.RadioButton, DataSource = "Alabo.Framework.Core.Enums.Enum.IdentityStatus",
             Width = "110", ListShow = false, IsShowAdvancedSerach = false, IsShowBaseSerach = false,
             SortOrder = 11)]
         public IdentityStatus Status { get; set; }

@@ -7,7 +7,7 @@ using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.App.Core.User.Domain.Services;
 using Alabo.App.Open.Tasks.Base;
 using Alabo.App.Open.Tasks.Modules;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Web.Mvc.Attributes;
@@ -32,7 +32,7 @@ namespace Alabo.App.Open.Tasks.Configs.Area {
         /// <summary>
         /// 地址锁定方式
         /// </summary>
-        [Field(ControlsType = ControlsType.DropdownList, DataSource = "Alabo.Core.Enums.Enum.AddressLockType", ListShow = true, EditShow = true)]
+        [Field(ControlsType = ControlsType.DropdownList, DataSource = "Alabo.Framework.Core.Enums.Enum.AddressLockType", ListShow = true, EditShow = true)]
         [Display(Name = "地址锁定方式", Description = "选择地址锁定方式。订单收货地址：在用户下单的时候用户自行填写。会员资料地址：在会员中心修改")]
         public AddressLockType AddressLockType { get; set; }
     }

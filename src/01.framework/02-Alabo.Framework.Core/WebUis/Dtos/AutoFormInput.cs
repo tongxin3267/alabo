@@ -1,10 +1,9 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
 using Alabo.Validations;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Core.UI.Dtos {
+namespace Alabo.Framework.Core.WebUis.Dtos {
 
     /// <summary>
     /// view form

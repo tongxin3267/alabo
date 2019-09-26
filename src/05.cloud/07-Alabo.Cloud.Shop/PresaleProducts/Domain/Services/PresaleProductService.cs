@@ -5,7 +5,6 @@ using Alabo.Domains.Repositories;
 using Alabo.App.Market.PresaleProducts.Domain.Entities;
 using Alabo.App.Market.PresaleProducts.Domain.Dtos;
 using Alabo.App.Market.PresaleProducts.Domain.Repositories;
-using Alabo.App.Core.Api.Domain.Service;
 using Alabo.Domains.Entities;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +15,7 @@ using Alabo.App.Shop.Store.Domain.Services;
 using Alabo.App.Shop.Product.Domain.Dtos;
 using Alabo.App.Shop.Product.DiyModels;
 using Alabo.App.Shop.Product.Domain.Repositories;
+using Alabo.Framework.Core.WebApis.Service;
 
 namespace Alabo.App.Market.PresaleProducts.Domain.Services {
 

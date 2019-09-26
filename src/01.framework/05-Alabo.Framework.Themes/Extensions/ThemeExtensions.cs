@@ -1,5 +1,5 @@
 ﻿using System;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Extensions;
 
 namespace Alabo.App.Core.Themes.Extensions {

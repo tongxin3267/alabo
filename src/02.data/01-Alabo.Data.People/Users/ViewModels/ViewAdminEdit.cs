@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.App.Core.User.Domain.Entities;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Users.Entities;
 using Alabo.Users.Enum;

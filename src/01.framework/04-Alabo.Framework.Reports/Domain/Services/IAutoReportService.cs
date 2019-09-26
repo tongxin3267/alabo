@@ -7,7 +7,6 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Domains.Services.Report;
 using Alabo.Domains.Services.Report.Dtos;
-using Alabo.UI.AutoReports;
 
 namespace Alabo.App.Core.Reports.Domain.Services {
 

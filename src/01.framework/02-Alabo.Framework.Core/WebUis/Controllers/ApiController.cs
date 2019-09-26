@@ -1,17 +1,16 @@
-﻿using Alabo.Core.WebApis.Controller;
-using Alabo.Core.WebApis.Filter;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
+using Alabo.Regexs;
 using Alabo.RestfulApi;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Core.WebApis.Controller;
-using Alabo.Regexs;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Common.Controllers {
+namespace Alabo.Framework.Core.WebUis.Controllers {
 
     /// <summary>
     ///     通用Api接口文档

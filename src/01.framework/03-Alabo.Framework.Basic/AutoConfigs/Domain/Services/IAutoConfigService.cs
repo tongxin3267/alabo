@@ -1,6 +1,5 @@
 ﻿using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Themes.DiyModels.Links;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
+using Alabo.Framework.Core.WebUis.Models.Links;
 
 namespace Alabo.App.Core.Common.Domain.Services {
 

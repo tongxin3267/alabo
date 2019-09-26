@@ -2,7 +2,7 @@ using MongoDB.Bson;
 using System;
 using Alabo.App.Core.Markets.EnterpriseCertification.Domain.Dtos;
 using Alabo.App.Core.Markets.EnterpriseCertification.Domain.Entities;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;

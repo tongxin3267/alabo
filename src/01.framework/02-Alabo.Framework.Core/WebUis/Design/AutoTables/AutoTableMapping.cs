@@ -12,7 +12,7 @@ using Alabo.Helpers;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.ViewFeatures;
 
-namespace Alabo.UI.AutoTables
+namespace Alabo.Framework.Core.WebUis.Design.AutoTables
 {
     public class AutoTableMapping
     {

@@ -1,24 +1,23 @@
-﻿using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Base.Services;
-using Alabo.Domains.Services;
-using Alabo.Extensions;
-using Alabo.Initialize;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
+using Alabo.Framework.Core.Reflections.Interfaces;
+using Alabo.Framework.Core.Reflections.Services;
+using Alabo.Datas.UnitOfWorks;
+using Alabo.Domains.Base.Services;
+using Alabo.Domains.Services;
 using ZKCloud.Open.ApiBase.Configuration;
 using ZKCloud.Open.ApiBase.Services;
 
-namespace Alabo.App.Core.Admin.Domain.Services {
+namespace Alabo.Framework.Core.Admins.Services {
 
     /// <summary>
     ///     Class AdminService.
     /// </summary>
     /// <seealso cref="Alabo.Domains.Services.ServiceBase" />
-    /// <seealso cref="Alabo.App.Core.Admin.Domain.Services.IAdminService" />
+    /// <seealso cref="IAdminService" />
     public class AdminService : ServiceBase, IAdminService {
 
         /// <summary>
