@@ -13,6 +13,9 @@ using System.Linq;
 using Alabo.App.Core.User.Domain.Dtos;
 using Alabo.AutoConfigs.Repositories;
 using Alabo.AutoConfigs.Services;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
+using Alabo.Framework.Basic.Grades.Domain.Services;
+using Alabo.Framework.Basic.Grades.Dtos;
 
 namespace Alabo.App.Core.Common.Domain.Services {
 
