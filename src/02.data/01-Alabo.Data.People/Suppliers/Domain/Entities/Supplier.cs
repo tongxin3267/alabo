@@ -9,6 +9,9 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Alabo.Data.People.Suppliers.Domain.Entities
 {
+    /// <summary>
+    /// 供应商
+    /// </summary>
     [ClassProperty(Name = "供应商")]
     [BsonIgnoreExtraElements]
     [Table("People_Supplier")]

@@ -263,38 +263,6 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
             return ServiceResult.FailedWithMessage("地址保存失败");
         }
 
-        public VantAddress GetVantAddress()
-        {
-            var cacheKey = "GetVantAddress";
-            return ObjectCache.GetOrSet(() =>
-            {
-                var regionList = Resolve<IRegionService>().GetList();
-                var result = new VantAddress();
-                // 省份
-                var dictionary = new Dictionary<string, string>();
-                foreach (var item in regionList.Where(r => r.Level == RegionLevel.Province))
-                    dictionary.Add(item.RegionId.ToString(), item.Name);
-
-                result.province_list = dictionary;
-
-                //城市
-                dictionary = new Dictionary<string, string>();
-                foreach (var item in regionList.Where(r => r.Level == RegionLevel.City))
-                    dictionary.Add(item.RegionId.ToString(), item.Name);
-
-                result.city_list = dictionary;
-
-                //区县
-                dictionary = new Dictionary<string, string>();
-                foreach (var item in regionList.Where(r => r.Level == RegionLevel.County))
-                    dictionary.Add(item.RegionId.ToString(), item.Name);
-
-                result.county_list = dictionary;
-
-                return result;
-            }, cacheKey).Value;
-        }
-
         /// <summary>
         ///     Initializes the default address.
         ///     初始化默认地址，如果默认地址不存在的时候，设置为第一个

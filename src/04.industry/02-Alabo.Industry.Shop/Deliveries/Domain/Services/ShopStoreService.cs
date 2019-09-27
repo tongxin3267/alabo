@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.Data.People.Stores.Domain.Entities;
+﻿using Alabo.Data.People.Stores.Domain.Entities;
 using Alabo.Data.People.Stores.Domain.Entities.Extensions;
 using Alabo.Data.People.Stores.Domain.Repositories;
 using Alabo.Data.People.Stores.Domain.Services;
@@ -20,7 +17,6 @@ using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Model;
 using Alabo.Industry.Shop.Deliveries.Domain.Dtos;
 using Alabo.Industry.Shop.Deliveries.Domain.Entities;
-using Alabo.Industry.Shop.Deliveries.Domain.Entities.Extensions;
 using Alabo.Industry.Shop.Deliveries.Domain.Enums;
 using Alabo.Industry.Shop.Deliveries.Domain.Repositories;
 using Alabo.Industry.Shop.Deliveries.ViewModels;
@@ -30,6 +26,9 @@ using Alabo.Industry.Shop.Products.Domain.Services;
 using Alabo.Industry.Shop.Products.Dtos;
 using Alabo.Mapping;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.Industry.Shop.Deliveries.Domain.Services
 {
@@ -37,270 +36,18 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
     /// </summary>
     public class ShopStoreService : ServiceBase, IShopStoreService
     {
+        public ShopStoreService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+            _productSkuRepository = Repository<IProductSkuRepository>();
+        }
+
         private const string _storeItemListCacheKey = "GetStoreItemListFromCache";
 
         private readonly IProductSkuRepository _productSkuRepository;
 
         /// <summary>
         /// </summary>
-        /// <param name="dto"></param>
-
-        public PagedList<ViewStore> GetViewStorePageList(PagedInputDto dto)
-        {
-            var query = new ExpressionQuery<Store>
-            {
-                PageIndex = (int)dto.PageIndex,
-                PageSize = (int)dto.PageSize
-            };
-            query.OrderByDescending(r => r.Id);
-            var stores = GetPagedList(query);
-            IList<ViewStore> result = new List<ViewStore>();
-            //店铺名称、等级、推荐人、是否自营、状态、创建时间
-            //  var grades = Resolve<IAutoConfigService>().GetList<SupplierGradeConfig>();
-            var parentUsers = Resolve<IUserService>().GetList(stores.Select(e => e.ParentUserId).ToList());
-            foreach (var item in stores)
-            {
-                var viewStore = new ViewStore
-                {
-                    Id = item.Id,
-                    ParentUserId = item.ParentUserId,
-                    ParentUserName = parentUsers.FirstOrDefault(e => e.Id == item.ParentUserId)?.UserName,
-                    Name = item.Name,
-                    IsPlanform = item.IsPlanform,
-                    //   Status = item.Status,
-                    CreateTime = item.CreateTime
-                };
-                //if (grades != null || grades.FirstOrDefault(e => e.Id.Equals(item.GradeId)) != null)
-                //{
-                //    viewStore.SupplierGradeConfig = grades.FirstOrDefault(e => e.Id.Equals(item.GradeId));
-                //    viewStore.GradeName = grades.FirstOrDefault(e => e.Id.Equals(item.GradeId))?.Name;
-                //}
-
-                result.Add(viewStore);
-            }
-
-            return PagedList<ViewStore>.Create(result, stores.RecordCount, stores.PageSize, stores.PageIndex);
-        }
-
-        /// <summary>
-        ///     获取自营店铺
-        ///     平台店铺，后台添加的时候，为平台商品
-        /// </summary>
-        public Store PlanformStore()
-        {
-            var planformUser = Resolve<IUserService>().PlanformUser();
-            if (planformUser == null)
-            {
-                return null;
-            }
-
-            var store = GetSingle(r => r.UserId == planformUser.Id);
-            // 如果店铺为空，则初始化店铺平台店铺
-            if (store == null)
-            {
-                store = new Store
-                {
-                    UserId = planformUser.Id,
-                    Name = "自营店铺",
-                    ParentUserId = 0,
-                    GradeId = Guid.Parse("72BE65E6-3A64-414D-972E-1A3D4A36F701"),
-                    CreateTime = DateTime.Now,
-                    Status = UserTypeStatus.Success
-                };
-
-                var context = Repository<IStoreRepository>().RepositoryContext;
-                context.BeginTransaction();
-                try
-                {
-                    Add(store);
-
-                    context.SaveChanges();
-                    context.CommitTransaction();
-                }
-                catch (Exception ex)
-                {
-                    context.RollbackTransaction();
-                }
-                finally
-                {
-                    context.DisposeTransaction();
-                }
-
-                //Resolve<IDeliveryTemplateService>().InitAllStoreDelivery();
-            }
-
-            store = GetSingle(r => r.UserId == planformUser.Id);
-
-            return store;
-        }
-
-        /// <summary>
-        ///     获取s the 会员 store.
-        ///     获取会员店铺
-        /// </summary>
-        /// <param name="UserId">会员Id</param>
-        public Store GetUserStore(long UserId)
-        {
-            var user = Resolve<IUserService>().GetNomarlUser(UserId);
-            if (user == null)
-            {
-                return null;
-            }
-
-            var store = GetSingle(r => r.UserId == user.Id && r.Status == UserTypeStatus.Success);
-            if (store != null)
-            {
-                // store.StoreExtension = store.Extension.ToObject<StoreExtension>();
-            }
-
-            return store;
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="storeId"></param>
-
-        public StoreExtension GetStoreExtension(long storeId)
-        {
-            //TODO 店铺Id修改
-            var store = Resolve<IStoreService>().GetSingle(storeId);
-            if (store == null)
-            {
-                return null;
-            }
-
-            return store.StoreExtension;
-        }
-
-        /// <summary>
-        /// </summary>
         /// <param name="store"></param>
-
-        public ServiceResult AddOrUpdate(ViewStore store)
-        {
-            var user = Resolve<IUserService>().GetSingle(store.UserName);
-            if (user == null)
-            {
-                return ServiceResult.FailedWithMessage("所属用户不存在");
-            }
-
-            if (user.Status != Status.Normal)
-            {
-                return ServiceResult.FailedWithMessage("该用户状态不正常");
-            }
-            var userStore = Resolve<IShopStoreService>().GetSingle(u => u.UserId == user.Id);
-            if (userStore != null)
-            {
-                if (userStore.Id != store.Id)
-                {
-                    return ServiceResult.FailedWithMessage("该用户已经是供应商，无法重复添加");
-                }
-            }
-
-            var find = Resolve<IShopStoreService>().GetByIdNoTracking(u => u.Id == store.Id);
-            if (find == null)
-            {
-                find = new Store
-                {
-                    UserId = user.Id,
-                    Name = store.Name,
-                    GradeId = store.GradeId,
-                    //   Status = store.Status,
-                };
-            }
-            else
-            {
-                find.Name = store.Name;
-                find.GradeId = store.GradeId;
-                find.UserId = user.Id;
-                //   find.Status = store.Status;
-            }
-
-            if (!store.ParentUserName.IsNullOrEmpty())
-            {
-                var parentUser = Resolve<IUserService>().GetSingle(store.ParentUserName);
-                if (parentUser == null)
-                {
-                    return ServiceResult.FailedWithMessage("推荐用户不存在");
-                }
-                find.ParentUserId = parentUser.Id;
-            }
-
-            // 如果没有扩展属性，初始化扩展属性
-            if (find.Extension.IsNullOrEmpty())
-            {
-                var storeExtension = new StoreExtension { };
-                find.Extension = ObjectExtension.ToJson(storeExtension);
-            }
-
-            var result = ServiceResult.Success;
-            if (find.Id == 0)
-            {
-                if (!Add(find))
-                {
-                    result = ServiceResult.FailedWithMessage("供应商添加失败");
-                }
-            }
-            else
-            {
-                if (!Update(find))
-                {
-                    result = ServiceResult.FailedWithMessage("供应商更新失败");
-                }
-            }
-            ObjectCache.Remove(_storeItemListCacheKey); // 清除店铺缓存
-            return result;
-        }
-
-        public ViewStore GetView(long id)
-        {
-            ViewStore view = new ViewStore();
-            var store = Resolve<IShopStoreService>().GetByIdNoTracking(id);
-
-            if (store != null)
-            {
-                view = AutoMapping.SetValue<ViewStore>(store);
-                var user = Resolve<IUserService>().GetSingle(r => r.Id == store.UserId);
-                view.UserName = user?.UserName;
-                if (store.ParentUserId > 0)
-                {
-                    view.ParentUserName = Resolve<IUserService>().GetSingle(r => r.Id == store.ParentUserId)?.UserName;
-                }
-            }
-            return view;
-        }
-
-        /// <summary>
-        /// </summary>
-        public ViewStore GetViewStore(long Id)
-        {
-            var store = GetSingle(e => e.Id.Equals(Id));
-            if (store == null)
-            {
-                //var stroreGrade = Resolve<IAutoConfigService>()
-                //    .GetList<SupplierGradeConfig>(r => r.Status == Status.Normal);
-                //var viewStore = new ViewStore
-                //{
-                //    GradeId = stroreGrade.FirstOrDefault().Id
-                //};
-                // return viewStore;
-            }
-
-            var user = Resolve<IUserService>().GetSingle(store.UserId);
-            var parentUser = Resolve<IUserService>().GetSingle(store.ParentUserId);
-
-            return new ViewStore
-            {
-                Name = store.Name,
-                UserId = store.UserId,
-                ParentUserId = store.ParentUserId,
-                GradeId = store.GradeId,
-                IsPlanform = store.IsPlanform,
-                UserName = user?.UserName,
-                ParentUserName = parentUser?.UserName,
-                //  Status = store.Status
-            };
-        }
 
         /// <summary>
         ///     Gets the store item list from cache.
@@ -314,7 +61,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
             {
                 result = new List<StoreItem>();
                 var delivertyTemplates = Resolve<IDeliveryTemplateService>().GetList();
-                var storeList = GetList(r => r.Status == UserTypeStatus.Success);
+                var storeList = Resolve<IStoreService>().GetList(r => r.Status == UserTypeStatus.Success);
                 foreach (var item in storeList)
                 {
                     var storeItem = new StoreItem
@@ -338,30 +85,6 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
             }
 
             return result;
-        }
-
-        /// <summary>
-        /// </summary>
-        /// <param name="query"></param>
-
-        public PagedList<ViewStore> GetPageList(object query)
-        {
-            var stores = Resolve<IShopStoreService>().GetPagedList(query);
-            var users = Resolve<IUserService>().GetList();
-            var list = new List<ViewStore>();
-            //var grades = Resolve<IAutoConfigService>().GetList<SupplierGradeConfig>();
-            foreach (var item in stores)
-            {
-                var viewStore = AutoMapping.SetValue<ViewStore>(item);
-                var user = users.FirstOrDefault(u => u.Id == item.UserId);
-                // viewStore.SupplierGradeConfig = grades.FirstOrDefault(u => u.Id == item.GradeId);
-                // viewStore.GradeName = grades.FirstOrDefault(u => u.Id == item.GradeId)?.Name;
-                viewStore.UserName = Resolve<IUserService>().GetUserStyle(user);
-                viewStore.ParentUserName = users.FirstOrDefault(u => u.Id == item.ParentUserId)?.UserName;
-                list.Add(viewStore);
-            }
-
-            return PagedList<ViewStore>.Create(list, list.Count, stores.PageSize, stores.PageIndex);
         }
 
         /// <summary>
@@ -437,11 +160,6 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
 
             storeItemList = storeItemList.Where(r => r.ProductSkuItems.Count > 0); // 店铺商品数大于0的店铺，如果商品不存在，或者下架则不显示
             return Tuple.Create(serviceResult, storeProductSku);
-        }
-
-        public ShopStoreService(IUnitOfWork unitOfWork, IRepository<Store, long> repository) : base(unitOfWork, repository)
-        {
-            _productSkuRepository = Repository<IProductSkuRepository>();
         }
 
         /// <summary>

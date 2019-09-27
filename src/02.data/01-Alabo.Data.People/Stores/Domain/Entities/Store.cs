@@ -25,12 +25,43 @@ namespace Alabo.Data.People.Stores.Domain.Entities
         ///     平台只能有一个
         /// </summary>
         [Display(Name = "是否为平台")]
-        public bool IsPlanform { get; set; } = false;
+        public bool IsPlatform { get; set; } = false;
 
         /// <summary>
         ///     店铺评分相关数据
         /// </summary>
         [Display(Name = "店铺评分")]
         public StoreScore Score { get; set; }
+    }
+
+    /// <summary>
+    ///     店铺评分
+    /// </summary>
+    public class StoreScore
+    {
+        /// <summary>
+        ///     人气
+        /// </summary>
+        public string Popularity { get; set; }
+
+        /// <summary>
+        ///     综合评分
+        /// </summary>
+        public decimal TotalScore { get; set; }
+
+        /// <summary>
+        ///     商品得分
+        /// </summary>
+        public decimal ProductScore { get; set; }
+
+        /// <summary>
+        ///     服务得分
+        /// </summary>
+        public decimal ServiceScore { get; set; }
+
+        /// <summary>
+        ///     物流得分
+        /// </summary>
+        public decimal LogisticsScore { get; set; }
     }
 }

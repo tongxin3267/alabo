@@ -58,7 +58,7 @@ namespace Alabo.Data.People.Users.Domain.Services
         /// <summary>
         ///     获取平台用户,没有平台用户，很多功能没有办法使用
         /// </summary>
-        User PlanformUser();
+        User PlatformUser();
 
         /// <summary>
         ///     获取用户的详细信息，包括User表、UserDetail、UserMap表

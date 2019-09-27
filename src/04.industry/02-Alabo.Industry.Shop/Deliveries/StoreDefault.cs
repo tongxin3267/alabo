@@ -13,7 +13,7 @@ namespace Alabo.Industry.Shop.Deliveries
         /// </summary>
         public void Init()
         {
-            Ioc.Resolve<IShopStoreService>().PlanformStore();
+            Ioc.Resolve<IShopStoreService>().PlatformStore();
         }
     }
 }

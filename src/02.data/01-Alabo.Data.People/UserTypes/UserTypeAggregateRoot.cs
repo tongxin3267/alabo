@@ -94,7 +94,7 @@ namespace Alabo.Data.People.UserTypes
         public string Intro { get; set; }
 
         /// <summary>
-        /// 价格
+        /// 价格，代理费
         /// </summary>
         public string Price { get; set; }
 

@@ -15,7 +15,7 @@ namespace Alabo.Datas.Ef.SqlServer
         /// </summary>
         protected override void MapVersion(EntityTypeBuilder<TEntity> builder)
         {
-            builder.Property(t => t.Version).IsRowVersion();
+            //  builder.Property(t => t.Version).IsRowVersion();
         }
     }
 }

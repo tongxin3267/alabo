@@ -3,6 +3,7 @@ using Alabo.App.Asset.Coupons.Domain.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.Industry.Shop.Products.Dtos;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos
 {
@@ -14,7 +15,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos
         /// <summary>
         ///     店铺Id
         /// </summary>
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     店铺名称

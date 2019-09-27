@@ -295,7 +295,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
             //如果是后台添加商品,则商品关联平台店铺
             if (viewProduct.IsAdminAddProduct)
             {
-                var planform = Resolve<IShopStoreService>().PlanformStore();
+                var planform = Resolve<IShopStoreService>().PlatformStore();
                 if (planform == null) return ServiceResult.FailedWithMessage("请先添加平台店铺");
 
                 viewProduct.Product.StoreId = planform.Id;

@@ -342,10 +342,10 @@ namespace Alabo.Test.Core.User.Domain.Services
         }
 
         [Fact]
-        [TestMethod("PlanformUser")]
-        public void PlanformUser_test()
+        [TestMethod("PlatformUser")]
+        public void PlatformUser_test()
         {
-            var result = Resolve<IUserService>().PlanformUser();
+            var result = Resolve<IUserService>().PlatformUser();
             Assert.NotNull(result);
         }
 

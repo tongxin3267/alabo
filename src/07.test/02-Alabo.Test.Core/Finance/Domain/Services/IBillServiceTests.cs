@@ -165,7 +165,7 @@ namespace Alabo.Test.Core.Finance.Domain.Services
         {
             var config = Resolve<IAutoConfigService>().GetList<TransferConfig>()
                 .FirstOrDefault(r => r.Status == Status.Normal);
-            var user = Resolve<IUserService>().PlanformUser();
+            var user = Resolve<IUserService>().PlatformUser();
             var targetUser = Resolve<IUserService>().GetSingle("admin");
 
             var result = Resolve<IBillService>().Transfer(user, targetUser, config, 0.01m);
@@ -176,7 +176,7 @@ namespace Alabo.Test.Core.Finance.Domain.Services
         [TestMethod("Treeze_User_Currency_Decimal_String")]
         public void Treeze_User_Currency_Decimal_String_test()
         {
-            var user = Resolve<IUserService>().PlanformUser();
+            var user = Resolve<IUserService>().PlatformUser();
             var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>(r => r.Status == Status.Normal)
                 .ToList();
             foreach (var moneyType in moneyTypes)
@@ -196,7 +196,7 @@ namespace Alabo.Test.Core.Finance.Domain.Services
         [TestMethod("Treeze_User_MoneyTypeConfig_Decimal_String")]
         public void Treeze_User_MoneyTypeConfig_Decimal_String_test()
         {
-            var user = Resolve<IUserService>().PlanformUser();
+            var user = Resolve<IUserService>().PlatformUser();
             var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>(r => r.Status == Status.Normal)
                 .ToList();
             foreach (var moneyType in moneyTypes)
@@ -216,7 +216,7 @@ namespace Alabo.Test.Core.Finance.Domain.Services
         [TestMethod("TreezeSingle_User_MoneyTypeConfig_Decimal_String")]
         public void TreezeSingle_User_MoneyTypeConfig_Decimal_String_test()
         {
-            var user = Resolve<IUserService>().PlanformUser();
+            var user = Resolve<IUserService>().PlatformUser();
             var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>(r => r.Status == Status.Normal)
                 .ToList();
             foreach (var moneyType in moneyTypes)

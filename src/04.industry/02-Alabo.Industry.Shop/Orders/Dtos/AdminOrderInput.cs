@@ -36,6 +36,6 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         /// <value>
         ///     <c>true</c> if this instance is planform; otherwise, <c>false</c>.
         /// </value>
-        public bool IsPlanform { get; set; } = false;
+        public bool IsPlatform { get; set; } = false;
     }
 }

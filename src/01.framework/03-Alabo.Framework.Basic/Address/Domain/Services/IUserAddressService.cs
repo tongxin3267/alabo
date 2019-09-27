@@ -62,10 +62,5 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
         /// <param name="userId"></param>
         /// <param name="addressId"></param>
         ServiceResult SetDefault(long userId, ObjectId addressId);
-
-        /// <summary>
-        ///     前台vant地址格式数据
-        /// </summary>
-        VantAddress GetVantAddress();
     }
 }

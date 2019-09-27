@@ -115,7 +115,7 @@ namespace Alabo.Data.People.Users.Domain.Services
         /// <summary>
         ///     获取平台用户
         /// </summary>
-        public User PlanformUser()
+        public User PlatformUser()
         {
             //平台用户的用户名固定为planform
             return GetSingle("admin");

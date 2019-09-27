@@ -25,12 +25,6 @@ namespace Alabo.Data.People.Stores.Domain.Entities.Extensions
         public List<Guid> CategoryIds { get; set; }
 
         /// <summary>
-        ///     店铺详细信息
-        /// </summary>
-        [Display(Name = "店铺详细信息")]
-        public StoreDetail Detail { get; set; }
-
-        /// <summary>
         ///     详细介绍
         /// </summary>
         [Field(ControlsType = ControlsType.TextArea, GroupTabId = 1, SortOrder = 15)]

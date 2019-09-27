@@ -15,7 +15,7 @@ namespace Alabo.Datas.Ef.PgSql
         /// </summary>
         protected override void MapVersion(EntityTypeBuilder<TEntity> builder)
         {
-            builder.Property(t => t.Version).IsConcurrencyToken();
+            // builder.Property(t => t.Version).IsConcurrencyToken();
         }
     }
 }
