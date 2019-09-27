@@ -5,12 +5,12 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Framework.Tasks.Queues.Domain.Entities;
 using Alabo.Framework.Tasks.Queues.Domain.Enums;
 using Alabo.Framework.Tasks.Queues.Domain.Servcies;
 using Alabo.Mapping;
 using Alabo.UI;
+using Alabo.UI.Design.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.Framework.Tasks.Queues.UI

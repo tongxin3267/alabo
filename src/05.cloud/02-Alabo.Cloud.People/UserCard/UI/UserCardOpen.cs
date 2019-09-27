@@ -8,8 +8,9 @@ using Alabo.Extensions;
 using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Mapping;
+using Alabo.UI;
+using Alabo.UI.Design.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.Cloud.People.UserCard.UI

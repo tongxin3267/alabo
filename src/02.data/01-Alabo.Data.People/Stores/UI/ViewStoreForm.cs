@@ -1,22 +1,15 @@
 ﻿using Alabo.Data.People.Stores.Domain.Entities;
+using Alabo.Data.People.Stores.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Extensions;
 using Alabo.Mapping;
-using Alabo.Validations;
+using Alabo.UI;
+using Alabo.UI.Design.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Data.People.Stores.Domain.Services;
-using Alabo.Extensions;
-using MongoDB.Bson;
 
-namespace Alabo.Industry.Shop.Deliveries.ViewModels.UI
+namespace Alabo.Data.People.Stores.UI
 {
     /// <summary>
     /// </summary>

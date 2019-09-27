@@ -1,7 +1,7 @@
 ﻿using Alabo.Domains.Entities;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Industry.Shop.Activitys.Domain.Entities;
 using Alabo.Industry.Shop.Activitys.Dtos;
+using Alabo.UI.Design.AutoForms;
 using Microsoft.AspNetCore.Http;
 
 namespace Alabo.Industry.Shop.Activitys

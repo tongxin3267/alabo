@@ -1,8 +1,8 @@
-﻿using Alabo.Domains.Query.Dto;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Alabo.Domains.Query.Dto;
 
-namespace Alabo.Domains.Services.Report.Dtos
+namespace Alabo.UI.Design.AutoReports.Dtos
 {
     public class SumTableInput : PagedInputDto
     {

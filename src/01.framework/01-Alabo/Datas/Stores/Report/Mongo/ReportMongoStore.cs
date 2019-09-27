@@ -3,12 +3,13 @@ using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Services.Report;
-using Alabo.Domains.Services.Report.Dtos;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Alabo.UI.Design.AutoReports;
+using Alabo.UI.Design.AutoReports.Dtos;
 
 namespace Alabo.Datas.Stores.Report.Mongo
 {

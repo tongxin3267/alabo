@@ -1,7 +1,7 @@
-﻿using Alabo.Web.Mvc.Attributes;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Framework.Core.Enums.Enum
+namespace Alabo.Data.People.UserTypes.Enums
 {
     /// <summary>
     ///     用户类型状态

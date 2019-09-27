@@ -8,13 +8,13 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
-using Alabo.Framework.Basic.Address.Domain.Entities;
-using Alabo.Framework.Basic.Address.Dtos;
+using Alabo.Framework.Basic.Regions.Domain.Entities;
+using Alabo.Framework.Basic.Regions.Dtos;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Tool.AMap;
 using MongoDB.Bson;
 
-namespace Alabo.Framework.Basic.Address.Domain.Services
+namespace Alabo.Framework.Basic.Regions.Domain.Services
 {
     public class RegionService : ServiceBase<Region, ObjectId>, IRegionService
     {

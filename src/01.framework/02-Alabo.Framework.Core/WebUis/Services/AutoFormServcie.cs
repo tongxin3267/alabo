@@ -5,13 +5,13 @@ using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Framework.Core.WebUis.Dtos;
 using Alabo.Helpers;
 using Alabo.Linq.Dynamic;
+using Alabo.UI;
+using Alabo.UI.Design.AutoForms;
 
-namespace Alabo.Framework.Core.WebUis.Domain.Services
+namespace Alabo.Framework.Core.WebUis.Services
 {
     public class AutoFormServcie : ServiceBase, IAutoFormServcie
     {

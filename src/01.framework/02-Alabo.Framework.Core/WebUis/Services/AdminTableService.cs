@@ -17,7 +17,7 @@ using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using FileInfo = System.IO.FileInfo;
 
-namespace Alabo.Framework.Core.WebUis.Domain.Services
+namespace Alabo.Framework.Core.WebUis.Services
 {
     public class AdminTableService : ServiceBase, IAdminTableService
     {

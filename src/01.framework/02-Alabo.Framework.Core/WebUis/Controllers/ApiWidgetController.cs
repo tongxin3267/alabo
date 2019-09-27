@@ -1,8 +1,8 @@
 ﻿using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis.Controller;
-using Alabo.Framework.Core.WebUis.Design.Widgets;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using Alabo.UI.Design.Widgets;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Framework.Core.WebUis.Controllers

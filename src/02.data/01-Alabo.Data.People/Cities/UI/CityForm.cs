@@ -5,10 +5,12 @@ using Alabo.Domains.Entities;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Address.Domain.Services;
 using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Maps;
 using System.Collections.Generic;
+using Alabo.Framework.Basic.Regions.Domain.Services;
+using Alabo.UI;
+using Alabo.UI.Design.AutoForms;
+using Alabo.UI.Design.AutoTables;
 
 namespace Alabo.Data.People.Cities.UI
 {

@@ -1,9 +1,10 @@
 ﻿using Alabo.Domains.Entities;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoNews;
 using Alabo.Helpers;
 using Alabo.Industry.Cms.Articles.Domain.Services;
+using Alabo.UI;
+using Alabo.UI.Design.AutoNews;
 using MongoDB.Bson;
 
 namespace Alabo.Industry.Cms.Articles.UI

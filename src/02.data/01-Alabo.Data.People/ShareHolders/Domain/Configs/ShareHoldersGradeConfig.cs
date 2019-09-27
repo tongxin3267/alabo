@@ -14,7 +14,7 @@ using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
 using Newtonsoft.Json;
 
-namespace Alabo.Data.People.ShareHolders.Configs
+namespace Alabo.Data.People.ShareHolders.Domain.Configs
 {
     /// <summary>
     ///     股东等级

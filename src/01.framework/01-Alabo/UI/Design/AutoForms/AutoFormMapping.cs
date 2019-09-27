@@ -8,7 +8,7 @@ using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.Web.ViewFeatures;
 
-namespace Alabo.Framework.Core.WebUis.Design.AutoForms
+namespace Alabo.UI.Design.AutoForms
 {
     public static class AutoFormMapping
     {
@@ -126,7 +126,7 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoForms
                 if (!item.FieldAttribute.ApiDataSource.IsNullOrEmpty())
                     formField.DataSource = item.FieldAttribute.ApiDataSource;
                 // 如果是枚举类型
-                if (item.Property.PropertyType.BaseType == typeof(Enum))
+                if (item.Property.PropertyType.BaseType == typeof(System.Enum))
                     formField.DataSource =
                         $"Api/Common/GetKeyValuesByEnum?type={item.Property.PropertyType.FullName}";
 
@@ -296,14 +296,14 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoForms
                     else
                     {
                         // enum
-                        if (propertyDesc.Property.PropertyType.BaseType == typeof(Enum))
+                        if (propertyDesc.Property.PropertyType.BaseType == typeof(System.Enum))
                             formField.DataSource =
                                 $"Api/Type/GetKeyValue?type={propertyDesc.Property.PropertyType.Name}";
                     }
                 }
 
                 // enum
-                if (propertyDesc.Property.PropertyType.BaseType == typeof(Enum))
+                if (propertyDesc.Property.PropertyType.BaseType == typeof(System.Enum))
                     formField.DataSource = $"Api/Type/GetKeyValue?type={propertyDesc.Property.PropertyType.Name}";
 
                 //Json

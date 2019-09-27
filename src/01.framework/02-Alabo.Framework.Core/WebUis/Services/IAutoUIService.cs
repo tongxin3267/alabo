@@ -2,7 +2,7 @@
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 
-namespace Alabo.Framework.Core.WebUis.Domain.Services
+namespace Alabo.Framework.Core.WebUis.Services
 {
     /// <summary>
     ///     自动UI相关的服务

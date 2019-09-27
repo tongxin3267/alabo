@@ -1,4 +1,4 @@
-﻿namespace Alabo.Framework.Core.WebUis
+﻿namespace Alabo.UI
 {
     /// <summary>
     ///     自动页面设置

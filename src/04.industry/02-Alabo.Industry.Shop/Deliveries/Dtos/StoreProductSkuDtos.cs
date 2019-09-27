@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using MongoDB.Bson;
 
-namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos
+namespace Alabo.Industry.Shop.Deliveries.Dtos
 {
     /// <summary>
     ///     Class StoreProductSkuDtos.

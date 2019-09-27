@@ -1,9 +1,9 @@
 ﻿using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Base.Entities;
 using Alabo.Domains.Repositories;
+using Alabo.Tables.Domain.Entities;
 using MongoDB.Bson;
 
-namespace Alabo.Domains.Base.Repositories
+namespace Alabo.Tables.Domain.Repositories
 {
     public class TableRepository : RepositoryMongo<Table, ObjectId>, ITableRepository
     {

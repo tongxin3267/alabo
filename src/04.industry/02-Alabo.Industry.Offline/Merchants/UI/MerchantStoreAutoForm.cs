@@ -6,10 +6,11 @@ using Alabo.Domains.Entities;
 using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Industry.Offline.Merchants.Domain.Entities;
 using Alabo.Industry.Offline.Merchants.Domain.Services;
 using Alabo.Maps;
+using Alabo.UI;
+using Alabo.UI.Design.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
 

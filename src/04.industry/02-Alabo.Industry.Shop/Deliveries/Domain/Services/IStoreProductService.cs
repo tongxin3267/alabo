@@ -1,6 +1,6 @@
 ﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
-using Alabo.Industry.Shop.Deliveries.Domain.Dtos;
+using Alabo.Industry.Shop.Deliveries.Dtos;
 
 namespace Alabo.Industry.Shop.Deliveries.Domain.Services
 {

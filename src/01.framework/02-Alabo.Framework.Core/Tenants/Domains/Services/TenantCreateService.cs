@@ -1,5 +1,4 @@
 ﻿using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
@@ -8,6 +7,7 @@ using Alabo.Framework.Core.Tenants.Domains.Dtos;
 using Alabo.Framework.Core.Tenants.Domains.Repositories;
 using Alabo.Helpers;
 using Alabo.Runtime;
+using Alabo.Tables.Domain.Services;
 using Alabo.Tenants;
 using Alabo.Tenants.Domain.Services;
 using Alabo.Users.Services;

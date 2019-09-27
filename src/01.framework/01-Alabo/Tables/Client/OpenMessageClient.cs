@@ -7,7 +7,7 @@ using ZKCloud.Open.ApiBase.Formatters;
 using ZKCloud.Open.ApiBase.Models;
 using ZKCloud.Open.Message.Models;
 
-namespace Alabo.Domains.Base.Client
+namespace Alabo.Tables.Client
 {
     public sealed class OpenMessageClient : RestClientBase, IOpenMessageClient
     {

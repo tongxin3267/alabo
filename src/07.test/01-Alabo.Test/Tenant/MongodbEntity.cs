@@ -1,5 +1,5 @@
-﻿using Alabo.Domains.Base.Entities;
-using Alabo.Domains.Base.Services;
+﻿using Alabo.Logging.Logs.Entities;
+using Alabo.Logging.Logs.Services;
 using Alabo.Test.Base.Core.Model;
 using Xunit;
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.Data.People.UserTypes.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Web.Mvc.Attributes;

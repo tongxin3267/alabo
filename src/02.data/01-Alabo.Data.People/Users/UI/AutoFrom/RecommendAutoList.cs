@@ -11,9 +11,10 @@ using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoLists;
-using Alabo.Framework.Core.WebUis.Design.AutoPreviews;
 using Alabo.Framework.Themes.Extensions;
+using Alabo.UI;
+using Alabo.UI.Design.AutoLists;
+using Alabo.UI.Design.AutoPreviews;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 

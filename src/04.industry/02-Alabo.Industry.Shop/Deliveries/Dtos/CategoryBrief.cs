@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos
+namespace Alabo.Industry.Shop.Deliveries.Dtos
 {
     public class CategoryBrief
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.Domains.Services.Report.Dtos
+namespace Alabo.UI.Design.AutoReports.Dtos
 {
     /// <summary>
     ///     表格

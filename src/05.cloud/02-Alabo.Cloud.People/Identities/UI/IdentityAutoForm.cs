@@ -6,8 +6,9 @@ using Alabo.Domains.Entities;
 using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Helpers;
+using Alabo.UI;
+using Alabo.UI.Design.AutoForms;
 using Alabo.Users.Enum;
 using Alabo.Web.Mvc.Attributes;
 

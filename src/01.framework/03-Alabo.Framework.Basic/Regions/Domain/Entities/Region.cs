@@ -9,7 +9,7 @@ using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Framework.Basic.Address.Domain.Entities
+namespace Alabo.Framework.Basic.Regions.Domain.Entities
 {
     /// <summary>
     ///     地区

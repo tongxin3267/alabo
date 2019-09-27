@@ -2,7 +2,8 @@
 using Alabo.Domains.Enums;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoPreviews;
+using Alabo.UI;
+using Alabo.UI.Design.AutoPreviews;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Asset.Withdraws.UI

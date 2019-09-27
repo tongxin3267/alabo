@@ -3,7 +3,7 @@ using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.Framework.Themes.Domain.Services;
-using Alabo.Framework.Themes.Dtos.Service;
+using Alabo.Framework.Themes.Dtos;
 using Alabo.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;

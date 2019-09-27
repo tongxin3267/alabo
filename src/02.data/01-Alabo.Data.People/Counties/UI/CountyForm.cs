@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.Data.People.Cities.Domain.Services;
-using Alabo.Data.People.Cities.UI;
+﻿using System.Collections.Generic;
 using Alabo.Data.People.Counties.Domain.Entities;
 using Alabo.Data.People.Counties.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
-using Alabo.Framework.Basic.Address.Domain.Services;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
+using Alabo.Framework.Basic.Regions.Domain.Services;
 using Alabo.Maps;
+using Alabo.UI;
+using Alabo.UI.Design.AutoForms;
+using Alabo.UI.Design.AutoTables;
 
-namespace Alabo.Data.People.Counties.Domain.Dtos
+namespace Alabo.Data.People.Counties.UI
 {
     public class CountyForm : County, IAutoForm, IAutoTable<CountyForm>
     {

@@ -8,8 +8,8 @@ using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Framework.Core.WebUis.Design.Widgets;
 using Alabo.Helpers;
+using Alabo.UI.Design.Widgets;
 
 namespace Alabo.App.Asset.Accounts.UI
 {

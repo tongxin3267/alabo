@@ -4,7 +4,7 @@ using Alabo.Domains.Entities;
 using Alabo.Extensions;
 using Alabo.Web.ViewFeatures;
 
-namespace Alabo.Framework.Core.WebUis.Design.AutoPreviews
+namespace Alabo.UI.Design.AutoPreviews
 {
     /// <summary>
     ///     AutoPreviewMapping

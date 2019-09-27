@@ -2,10 +2,10 @@
 using System.ComponentModel.DataAnnotations;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Services;
-using Alabo.Domains.Base.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Tables.Domain.Services;
 using Alabo.Tool.Payment.MiniProgram.Dtos;
 using Alabo.Tool.Payment.MiniProgram.Services;
 using Alabo.Tool.Payment.WeiXinMp.Models;

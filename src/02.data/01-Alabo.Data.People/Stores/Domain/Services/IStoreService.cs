@@ -1,8 +1,5 @@
 using Alabo.Data.People.Stores.Domain.Entities;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Query.Dto;
 using Alabo.Domains.Services;
-using Alabo.Industry.Shop.Deliveries.ViewModels;
 using MongoDB.Bson;
 
 namespace Alabo.Data.People.Stores.Domain.Services

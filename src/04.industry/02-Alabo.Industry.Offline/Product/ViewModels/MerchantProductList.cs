@@ -9,12 +9,13 @@ using Alabo.Framework.Basic.Relations.Domain.Services;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Helpers;
 using Alabo.Industry.Offline.Merchants.Domain.Services;
 using Alabo.Industry.Offline.Product.Domain.CallBacks;
 using Alabo.Industry.Offline.Product.Domain.Entities;
 using Alabo.Industry.Offline.Product.Domain.Services;
+using Alabo.UI;
+using Alabo.UI.Design.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.Industry.Offline.Product.ViewModels

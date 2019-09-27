@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using Alabo.AutoConfigs;
-using Alabo.Data.People.Cities.Domain.CallBacks;
+using Alabo.Data.People.Cities.Domain.Configs;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.Reflections.Services;

@@ -1,10 +1,10 @@
-﻿using Alabo.Domains.Base.Entities;
+﻿using System.Collections.Generic;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Tables.Domain.Entities;
 using MongoDB.Bson;
-using System.Collections.Generic;
 
-namespace Alabo.Domains.Base.Services
+namespace Alabo.Tables.Domain.Services
 {
     /// <summary>
     ///     表结构相关服务

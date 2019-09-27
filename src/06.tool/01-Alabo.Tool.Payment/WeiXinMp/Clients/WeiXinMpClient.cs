@@ -1,8 +1,8 @@
 ﻿using System;
-using Alabo.Domains.Base.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Helpers;
+using Alabo.Tables.Domain.Services;
 using Senparc.Weixin.MP.CommonAPIs;
 using Senparc.Weixin.MP.Entities;
 

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Validations;
 
-namespace Alabo.Framework.Themes.Dtos.Service
+namespace Alabo.Framework.Themes.Dtos
 {
     public class WidgeInput
     {

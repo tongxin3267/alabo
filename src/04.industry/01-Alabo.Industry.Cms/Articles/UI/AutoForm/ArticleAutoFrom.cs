@@ -7,13 +7,14 @@ using Alabo.Extensions;
 using Alabo.Framework.Core.Admins.Configs;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Helpers;
 using Alabo.Industry.Cms.Articles.Domain.Entities;
 using Alabo.Industry.Cms.Articles.Domain.Services;
 using Alabo.Mapping;
 using Alabo.Maps;
+using Alabo.UI;
+using Alabo.UI.Design.AutoForms;
+using Alabo.UI.Design.AutoTables;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
@@ -23,7 +24,7 @@ namespace Alabo.Industry.Cms.Articles.UI.AutoForm
     [ClassProperty(Name = "商家头条", Description = "商家头条")]
     public class ArticleAutoFrom : UIBase, IAutoForm, IAutoTable<ArticleAutoFrom>
     {
-        public Framework.Core.WebUis.Design.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel)
+        public Alabo.UI.Design.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel)
         {
             var dic = autoModel.Query.ToObject<Dictionary<string, string>>();
             dic.TryGetValue("ChannelId", out var channelId);

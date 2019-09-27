@@ -1,17 +1,17 @@
-﻿using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Base.Dtos;
-using Alabo.Domains.Enums;
-using Alabo.Domains.Services;
-using Alabo.Extensions;
-using Alabo.Helpers;
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
+using Alabo.Datas.UnitOfWorks;
+using Alabo.Domains.Enums;
+using Alabo.Domains.Services;
+using Alabo.Extensions;
+using Alabo.Helpers;
+using Alabo.Tables.Dtos;
 using Convert = System.Convert;
 
-namespace Alabo.Domains.Base.Services
+namespace Alabo.Tables.Domain.Services
 {
     public class SmsService : ServiceBase, ISmsService
     {

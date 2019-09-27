@@ -1,8 +1,6 @@
-﻿using Alabo.Cache;
-using Alabo.Dependency;
-using Alabo.Domains.Repositories;
+﻿using Alabo.Dependency;
 
-namespace Alabo.Framework.Core.WebUis
+namespace Alabo.UI
 {
     public interface IUI : IScopeDependency
     {

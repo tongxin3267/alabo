@@ -12,7 +12,7 @@ using Alabo.Helpers;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.ViewFeatures;
 
-namespace Alabo.Framework.Core.WebUis.Design.AutoTables
+namespace Alabo.UI.Design.AutoTables
 {
     public class AutoTableMapping
     {
@@ -124,7 +124,7 @@ namespace Alabo.Framework.Core.WebUis.Design.AutoTables
         public static TableColumn GetType(TableColumn tableColumn, PropertyInfo propertyInfo,
             FieldAttribute fieldAttributes)
         {
-            if (propertyInfo.PropertyType.BaseType == typeof(Enum))
+            if (propertyInfo.PropertyType.BaseType == typeof(System.Enum))
             {
                 tableColumn.Type = "enum";
                 tableColumn.Options = propertyInfo.Name;

@@ -2,7 +2,7 @@
 using Alabo.Extensions;
 using Newtonsoft.Json;
 
-namespace Alabo.Framework.Core.WebUis.Design.AutoTables
+namespace Alabo.UI.Design.AutoTables
 {
     /// <summary>
     ///     表格操作

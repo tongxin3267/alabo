@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Services.Report;
-using Alabo.Domains.Services.Report.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis.Design.AutoReports;
 using Alabo.Helpers;
+using Alabo.UI;
+using Alabo.UI.Design.AutoReports;
+using Alabo.UI.Design.AutoReports.Enums;
 
 namespace Alabo.Data.People.Users.UI
 {

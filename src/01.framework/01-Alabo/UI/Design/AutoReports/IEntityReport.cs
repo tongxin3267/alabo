@@ -1,9 +1,7 @@
-﻿using Alabo.Domains.Services.Report;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Alabo.Framework.Core.WebApis;
 
-namespace Alabo.Framework.Core.WebUis.Design.AutoReports
+namespace Alabo.UI.Design.AutoReports
 {
     /// <summary>
     ///     实体统计报表

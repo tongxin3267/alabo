@@ -6,17 +6,15 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Framework.Core.WebUis.Domain.Services;
-using Alabo.Industry.Shop.Deliveries.Domain.Services;
+using Alabo.Framework.Core.WebUis.Services;
 using Alabo.Industry.Shop.Orders.Domain.Entities;
 using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.Industry.Shop.Orders.Domain.Services;
+using Alabo.UI;
+using Alabo.UI.Design.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos {
+namespace Alabo.Industry.Shop.Deliveries.Dtos {
 
     public class StoreOrdersToExcel : UIBase, IAutoForm {
 

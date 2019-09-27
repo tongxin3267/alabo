@@ -7,7 +7,7 @@ using Alabo.Industry.Shop.Products.Domain.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos
+namespace Alabo.Industry.Shop.Deliveries.Dtos
 {
     public class ProductBrief
     {

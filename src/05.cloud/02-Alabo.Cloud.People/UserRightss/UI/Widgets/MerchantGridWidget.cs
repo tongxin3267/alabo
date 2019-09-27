@@ -5,8 +5,8 @@ using Alabo.Cloud.People.UserRightss.Domain.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
-using Alabo.Framework.Core.WebUis.Design.Widgets;
 using Alabo.Helpers;
+using Alabo.UI.Design.Widgets;
 
 namespace Alabo.Cloud.People.UserRightss.UI.Widgets
 {

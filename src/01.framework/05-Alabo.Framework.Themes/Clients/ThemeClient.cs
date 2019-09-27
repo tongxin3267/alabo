@@ -6,7 +6,6 @@ using Alabo.Domains.Entities;
 using Alabo.Framework.Themes.Domain.Entities;
 using Alabo.Framework.Themes.Domain.Services;
 using Alabo.Framework.Themes.Dtos;
-using Alabo.Framework.Themes.Dtos.Service;
 using Alabo.Helpers;
 using Alabo.RestfulApi;
 using MongoDB.Bson;

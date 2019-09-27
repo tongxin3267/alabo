@@ -1,16 +1,16 @@
-﻿using Alabo.Data.People.Internals.Domain.Entities;
+﻿using System.Collections.Generic;
+using Alabo.Data.People.Internals.Domain.Entities;
 using Alabo.Data.People.Internals.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
-using Alabo.Framework.Basic.Address.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
+using Alabo.Framework.Basic.Regions.Domain.Services;
 using Alabo.Maps;
-using System.Collections.Generic;
+using Alabo.UI;
+using Alabo.UI.Design.AutoForms;
+using Alabo.UI.Design.AutoTables;
 
-namespace Alabo.Data.People.Cities.UI
+namespace Alabo.Data.People.Internals.UI
 {
     public class InternalForm : Internal, IAutoForm, IAutoTable<InternalForm>
     {

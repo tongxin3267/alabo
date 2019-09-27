@@ -17,10 +17,11 @@ using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Address.Domain.Services;
+using Alabo.Framework.Basic.Regions.Domain.Services;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Helpers;
 using Alabo.Industry.Shop.AfterSales.Domain.Enums;
-using Alabo.Industry.Shop.Deliveries.Domain.Entities.Extensions;
+
 using Alabo.Industry.Shop.Deliveries.Domain.Services;
 using Alabo.Industry.Shop.OrderActions.Domain.Entities;
 using Alabo.Industry.Shop.OrderActions.Domain.Enums;
@@ -436,8 +437,8 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
 
             if (orderInput.OrderType > 0) query.And(e => e.OrderType == orderInput.OrderType);
 
-            query.PageIndex = (int) orderInput.PageIndex;
-            query.PageSize = (int) orderInput.PageSize;
+            query.PageIndex = (int)orderInput.PageIndex;
+            query.PageSize = (int)orderInput.PageSize;
             query.EnablePaging = true;
             query.OrderByDescending(e => e.Id);
             var orders = Resolve<IOrderService>().GetPagedList(query);
@@ -960,16 +961,16 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
             //1e2e7e4a7afef7f2cc1dbb3795fc3d33 贾恒
             var url =
                 $"http://v.juhe.cn/exp/index?key=1e2e7e4a7afef7f2cc1dbb3795fc3d33&com={model.ExpressNo}&no={model.ExpressNum}";
-            var httpRequest = (HttpWebRequest) WebRequest.CreateDefault(new Uri(url));
+            var httpRequest = (HttpWebRequest)WebRequest.CreateDefault(new Uri(url));
             HttpWebResponse httpResponse = null;
 
             try
             {
-                httpResponse = (HttpWebResponse) httpRequest.GetResponse();
+                httpResponse = (HttpWebResponse)httpRequest.GetResponse();
             }
             catch (WebException ex)
             {
-                httpResponse = (HttpWebResponse) ex.Response;
+                httpResponse = (HttpWebResponse)ex.Response;
             }
 
             var st = httpResponse.GetResponseStream();

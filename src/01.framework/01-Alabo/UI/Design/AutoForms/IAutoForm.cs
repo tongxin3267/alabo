@@ -1,7 +1,6 @@
 ﻿using Alabo.Domains.Entities;
-using Alabo.Framework.Core.WebApis;
 
-namespace Alabo.Framework.Core.WebUis.Design.AutoForms
+namespace Alabo.UI.Design.AutoForms
 {
     /// <summary>
     ///     自动表单接口

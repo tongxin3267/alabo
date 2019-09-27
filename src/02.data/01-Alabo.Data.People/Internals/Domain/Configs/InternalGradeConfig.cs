@@ -6,7 +6,7 @@ using Alabo.Data.People.Users;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Data.People.Internals.Domain.CallBacks
+namespace Alabo.Data.People.Internals.Domain.Configs
 {
     [NotMapped]
     [ClassProperty(Name = "内部合伙人等级", Icon = "fa fa-user-times",

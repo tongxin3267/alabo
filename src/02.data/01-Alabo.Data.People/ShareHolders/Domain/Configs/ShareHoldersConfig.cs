@@ -4,7 +4,7 @@ using Alabo.AutoConfigs;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Data.People.ShareHolders.Configs
+namespace Alabo.Data.People.ShareHolders.Domain.Configs
 {
     /// <summary>
     ///     股东配置

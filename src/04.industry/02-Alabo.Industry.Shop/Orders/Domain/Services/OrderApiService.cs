@@ -6,6 +6,7 @@ using Alabo.Domains.Query;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Address.Domain.Services;
+using Alabo.Framework.Basic.Regions.Domain.Services;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Industry.Shop.Orders.Domain.Entities;
 using Alabo.Industry.Shop.Orders.Domain.Entities.Extensions;

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Dtos;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.Framework.Themes.Dtos.Service;
+using Alabo.Framework.Themes.Dtos;
 using Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Dtos;
 using Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Service;
 using Alabo.Industry.Shop.Products.Dtos;

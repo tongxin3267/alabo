@@ -8,7 +8,6 @@ using Alabo.Cloud.School.BookingSignup.Domain.Entities;
 using Alabo.Cloud.School.BookingSignup.Dtos;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
@@ -17,6 +16,7 @@ using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Linq.Dynamic;
 using Alabo.Mapping;
 using Alabo.Regexs;
+using Alabo.Tables.Domain.Services;
 using MongoDB.Bson;
 
 namespace Alabo.Cloud.School.BookingSignup.Domain.Services

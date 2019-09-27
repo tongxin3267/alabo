@@ -1,5 +1,8 @@
-﻿using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Base.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Repositories;
@@ -9,14 +12,11 @@ using Alabo.Extensions;
 using Alabo.Linq.Dynamic;
 using Alabo.Reflections;
 using Alabo.Runtime;
+using Alabo.Tables.Domain.Entities;
 using Alabo.Web.ViewFeatures;
 using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 
-namespace Alabo.Domains.Base.Services
+namespace Alabo.Tables.Domain.Services
 {
     /// <summary>
     ///     表相关服务

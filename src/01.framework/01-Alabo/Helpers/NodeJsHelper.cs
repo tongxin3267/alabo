@@ -1,10 +1,10 @@
-﻿using Alabo.Domains.Base.Entities;
-using Alabo.Domains.Base.Services;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
 using Alabo.Exceptions;
 using Alabo.Extensions;
 using System;
 using System.Diagnostics;
+using Alabo.Logging.Logs.Entities;
+using Alabo.Logging.Logs.Services;
 
 namespace Alabo.Helpers
 {

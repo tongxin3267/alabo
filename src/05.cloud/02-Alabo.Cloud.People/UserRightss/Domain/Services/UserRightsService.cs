@@ -12,7 +12,6 @@ using Alabo.Cloud.People.UserRightss.Domain.Repositories;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Data.People.Users.Dtos;
 using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
@@ -35,6 +34,7 @@ using Alabo.Linq.Dynamic;
 using Alabo.Mapping;
 using Alabo.Randoms;
 using Alabo.Regexs;
+using Alabo.Tables.Domain.Services;
 using Alabo.Users.Entities;
 
 namespace Alabo.Cloud.People.UserRightss.Domain.Services

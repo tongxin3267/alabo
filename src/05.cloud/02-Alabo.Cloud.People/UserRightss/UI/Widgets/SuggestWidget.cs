@@ -2,8 +2,8 @@
 using Alabo.Cloud.People.UserRightss.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Extensions;
-using Alabo.Framework.Core.WebUis.Design.Widgets;
 using Alabo.Helpers;
+using Alabo.UI.Design.Widgets;
 
 namespace Alabo.Cloud.People.UserRightss.UI.Widgets
 {

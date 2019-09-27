@@ -2,6 +2,7 @@
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Framework.Core.WebApis;
+using Alabo.UI;
 
 namespace Alabo.Data.People.Users.Dtos
 {

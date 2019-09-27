@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.Framework.Basic.Address.Dtos
+namespace Alabo.Framework.Basic.Regions.Dtos
 {
     public class RegionView
     {

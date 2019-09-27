@@ -12,8 +12,6 @@ using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoLists;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Helpers;
 using Alabo.Industry.Offline.Merchants.Domain.Services;
 using Alabo.Industry.Offline.Order.Domain.Entities;
@@ -22,6 +20,9 @@ using Alabo.Industry.Offline.Order.Domain.Enums;
 using Alabo.Industry.Offline.Order.Domain.Services;
 using Alabo.Mapping;
 using Alabo.Tenants;
+using Alabo.UI;
+using Alabo.UI.Design.AutoLists;
+using Alabo.UI.Design.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.Industry.Offline.Order.ViewModels

@@ -5,7 +5,7 @@ using Alabo.App.Share.RewardRuless.Dtos;
 using Alabo.App.Share.TaskExecutes;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.UI.Design.AutoForms;
 using MongoDB.Bson;
 
 namespace Alabo.App.Share.RewardRuless.Domain.Services

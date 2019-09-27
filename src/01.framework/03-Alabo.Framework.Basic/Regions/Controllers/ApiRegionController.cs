@@ -4,9 +4,9 @@ using System.Linq;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
 using Alabo.Extensions;
-using Alabo.Framework.Basic.Address.Domain.Entities;
-using Alabo.Framework.Basic.Address.Domain.Services;
-using Alabo.Framework.Basic.Address.Dtos;
+using Alabo.Framework.Basic.Regions.Domain.Entities;
+using Alabo.Framework.Basic.Regions.Domain.Services;
+using Alabo.Framework.Basic.Regions.Dtos;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Framework.Basic.Address.Controllers
+namespace Alabo.Framework.Basic.Regions.Controllers
 {
     [ApiExceptionFilter]
     [Route("Api/Region/[action]")]

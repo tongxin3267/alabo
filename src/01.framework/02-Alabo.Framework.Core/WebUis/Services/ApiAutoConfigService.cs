@@ -6,10 +6,10 @@ using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Core.Reflections.Services;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Helpers;
+using Alabo.UI.Design.AutoForms;
 
-namespace Alabo.Framework.Core.WebUis.Domain.Services
+namespace Alabo.Framework.Core.WebUis.Services
 {
     public class ApIAlaboAutoConfigService : ServiceBase, IApIAlaboAutoConfigService
     {

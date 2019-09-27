@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 
-namespace Alabo.Framework.Themes.Dtos.Service
+namespace Alabo.Framework.Themes.Dtos
 {
     /// <summary>
     ///     模板中心

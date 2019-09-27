@@ -1,6 +1,6 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Framework.Core.WebUis.Design.AutoForms
+namespace Alabo.UI.Design.AutoForms
 {
     [ClassProperty(Name = "表单布局类型")]
     public enum FormLayoutType

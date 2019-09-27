@@ -1,14 +1,15 @@
 ﻿using System;
 using Alabo.Data.People.Employes.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
-using Alabo.Domains.Base.Services;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Address.Domain.Services;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Services;
+using Alabo.Framework.Basic.Regions.Domain.Services;
 using Alabo.Framework.Core.Reflections.Interfaces;
 using Alabo.Helpers;
+using Alabo.Tables.Domain.Services;
 using Alabo.Users.Entities;
 
 namespace Alabo.Data.People.Users

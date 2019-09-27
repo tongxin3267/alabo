@@ -8,12 +8,13 @@ using Alabo.Extensions;
 using Alabo.Framework.Basic.Relations.Domain.Services;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Industry.Cms.Articles.Domain.CallBacks;
 using Alabo.Industry.Cms.Articles.Domain.Entities;
 using Alabo.Industry.Cms.Articles.Domain.Services;
 using Alabo.Mapping;
 using Alabo.Maps;
+using Alabo.UI;
+using Alabo.UI.Design.AutoForms;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
@@ -30,7 +31,7 @@ namespace Alabo.Industry.Cms.Articles.UI.AutoForm
         /// <param name="id"></param>
         /// <param name="autoModel"></param>
         /// <returns></returns>
-        public Framework.Core.WebUis.Design.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel)
+        public Alabo.UI.Design.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel)
         {
             var dic = autoModel.Query.ToObject<Dictionary<string, string>>();
             dic.TryGetValue("ChannelId", out var channelId);

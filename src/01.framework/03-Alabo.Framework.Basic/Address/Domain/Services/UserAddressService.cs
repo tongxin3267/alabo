@@ -11,6 +11,7 @@ using Alabo.Framework.Basic.Address.Domain.Configs;
 using Alabo.Framework.Basic.Address.Domain.Entities;
 using Alabo.Framework.Basic.Address.Dtos;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Basic.Regions.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Mapping;
 using Alabo.Users.Services;

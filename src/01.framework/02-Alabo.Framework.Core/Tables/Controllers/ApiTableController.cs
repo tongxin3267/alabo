@@ -1,7 +1,7 @@
-﻿using Alabo.Domains.Base.Entities;
-using Alabo.Domains.Base.Services;
-using Alabo.Framework.Core.WebApis.Controller;
+﻿using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Tables.Domain.Entities;
+using Alabo.Tables.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 

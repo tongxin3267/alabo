@@ -1,5 +1,5 @@
 ﻿using System;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.UI.Design.AutoForms;
 
 namespace Alabo.App.Share.RewardRuless.Dtos
 {

@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services.Report;
-using Alabo.Domains.Services.Report.Dtos;
 using Alabo.Framework.Reports.Domain.Entities;
+using Alabo.UI.Design.AutoReports;
+using Alabo.UI.Design.AutoReports.Dtos;
 using MongoDB.Bson;
 
 namespace Alabo.Framework.Reports.Domain.Repositories

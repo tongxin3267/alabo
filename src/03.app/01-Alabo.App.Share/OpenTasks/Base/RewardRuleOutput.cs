@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.UI.Design.AutoForms;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;

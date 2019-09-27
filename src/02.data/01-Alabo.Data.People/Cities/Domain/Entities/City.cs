@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Data.People.Cities.Domain.CallBacks;
 using Alabo.Data.People.Cities.Domain.Enums;
 using Alabo.Data.People.UserTypes;
 using Alabo.Domains.Entities;

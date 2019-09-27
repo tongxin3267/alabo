@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Alabo.Domains.Entities;
 
-namespace Alabo.Framework.Core.WebUis.Design.AutoTables
+namespace Alabo.UI.Design.AutoTables
 {
     /// <summary>
     ///     自动表格

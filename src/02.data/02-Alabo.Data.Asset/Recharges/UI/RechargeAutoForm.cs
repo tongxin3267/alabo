@@ -3,7 +3,8 @@ using Alabo.App.Asset.Recharges.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.UI;
+using Alabo.UI.Design.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Asset.Recharges.UI

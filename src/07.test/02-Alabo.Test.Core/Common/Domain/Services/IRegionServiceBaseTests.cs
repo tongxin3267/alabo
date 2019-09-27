@@ -1,4 +1,5 @@
 using Alabo.Framework.Basic.Address.Domain.Services;
+using Alabo.Framework.Basic.Regions.Domain.Services;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
 using Xunit;

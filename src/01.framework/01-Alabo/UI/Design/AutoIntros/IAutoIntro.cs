@@ -1,4 +1,4 @@
-﻿namespace Alabo.Framework.Core.WebUis.Design.AutoIntros
+﻿namespace Alabo.UI.Design.AutoIntros
 {
     public interface IAutoIntro
     {

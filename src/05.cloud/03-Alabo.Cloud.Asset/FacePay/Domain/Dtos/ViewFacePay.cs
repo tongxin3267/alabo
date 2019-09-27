@@ -10,9 +10,10 @@ using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoLists;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Maps;
+using Alabo.UI;
+using Alabo.UI.Design.AutoLists;
+using Alabo.UI.Design.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.Cloud.Asset.FacePay.Domain.Dtos

@@ -1,6 +1,6 @@
 ﻿using Alabo.Domains.Query.Dto;
 
-namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos
+namespace Alabo.Industry.Shop.Deliveries.Dtos
 {
     /// <summary>
     ///     订单

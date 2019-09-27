@@ -8,7 +8,8 @@ using Alabo.Domains.Query;
 using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoLists;
+using Alabo.UI;
+using Alabo.UI.Design.AutoLists;
 
 namespace Alabo.Cloud.School.BookingSignup.UI
 {

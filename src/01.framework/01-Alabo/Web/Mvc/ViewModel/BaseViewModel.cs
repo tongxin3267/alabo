@@ -1,5 +1,5 @@
-﻿using Alabo.Framework.Core.WebUis;
-using Alabo.Helpers;
+﻿using Alabo.Helpers;
+using Alabo.UI;
 
 namespace Alabo.Web.Mvc.ViewModel
 {

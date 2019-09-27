@@ -1,7 +1,7 @@
-﻿using Alabo.Domains.Services.Report.Enums;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Alabo.UI.Design.AutoReports.Enums;
 
-namespace Alabo.Domains.Services.Report
+namespace Alabo.UI.Design.AutoReports
 {
     /// <summary>
     ///     数据表数据格式

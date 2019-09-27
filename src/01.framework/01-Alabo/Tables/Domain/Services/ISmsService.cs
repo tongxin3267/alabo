@@ -1,7 +1,7 @@
-﻿using Alabo.Domains.Base.Dtos;
-using Alabo.Domains.Services;
+﻿using Alabo.Domains.Services;
+using Alabo.Tables.Dtos;
 
-namespace Alabo.Domains.Base.Services
+namespace Alabo.Tables.Domain.Services
 {
     public interface ISmsService : IService
     {

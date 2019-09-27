@@ -1,8 +1,8 @@
-﻿using Alabo.Domains.Services;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Alabo.Domains.Services;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Domains.Base.Services
+namespace Alabo.Tables.Domain.Services
 {
     /// <summary>
     ///     授权服务

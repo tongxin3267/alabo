@@ -2,8 +2,9 @@
 using Alabo.Domains.Entities;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
-using Alabo.Framework.Core.WebUis.Design.AutoLists;
+using Alabo.UI;
+using Alabo.UI.Design.AutoForms;
+using Alabo.UI.Design.AutoLists;
 
 namespace Alabo.App.Asset.Accounts.UI
 {

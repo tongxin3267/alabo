@@ -1,5 +1,5 @@
 using System;
-using Alabo.Data.People.Cities.Domain.CallBacks;
+using Alabo.Data.People.Cities.Domain.Configs;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;

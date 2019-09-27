@@ -8,8 +8,9 @@ using Alabo.Domains.Query;
 using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Mapping;
+using Alabo.UI;
+using Alabo.UI.Design.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.Cloud.School.BookingSignup.UI

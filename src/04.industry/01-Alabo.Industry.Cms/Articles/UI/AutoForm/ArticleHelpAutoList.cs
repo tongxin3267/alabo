@@ -6,9 +6,10 @@ using Alabo.Domains.Query;
 using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoLists;
 using Alabo.Industry.Cms.Articles.Domain.Entities;
 using Alabo.Industry.Cms.Articles.Domain.Services;
+using Alabo.UI;
+using Alabo.UI.Design.AutoLists;
 using MongoDB.Bson;
 
 namespace Alabo.Industry.Cms.Articles.UI.AutoForm

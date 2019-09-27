@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Alabo.Domains.Query.Dto;
-using Alabo.Industry.Shop.Deliveries.Domain.Dtos;
+using Alabo.Industry.Shop.Deliveries.Dtos;
 
 namespace Alabo.Industry.Shop.Orders.Dtos
 {

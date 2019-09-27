@@ -3,7 +3,7 @@ using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.ViewModel;
 using Alabo.Web.Validations;
 
-namespace Alabo.Framework.Core.WebUis.Design.AutoForms
+namespace Alabo.UI.Design.AutoForms
 {
     public class AutoForm
     {

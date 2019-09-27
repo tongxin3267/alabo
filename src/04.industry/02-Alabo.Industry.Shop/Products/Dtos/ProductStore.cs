@@ -8,7 +8,6 @@ using Alabo.Domains.Enums;
 using Alabo.Exceptions;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Industry.Shop.Deliveries.Domain.Entities;
 using Alabo.Industry.Shop.Deliveries.Domain.Services;
 using Alabo.Industry.Shop.Products.Domain.Entities;
@@ -16,6 +15,8 @@ using Alabo.Industry.Shop.Products.Domain.Entities.Extensions;
 using Alabo.Industry.Shop.Products.Domain.Enums;
 using Alabo.Industry.Shop.Products.Domain.Services;
 using Alabo.Industry.Shop.Products.ViewModels;
+using Alabo.UI;
+using Alabo.UI.Design.AutoTables;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 

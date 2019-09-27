@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.Industry.Shop.Deliveries.Domain.Dtos;
+using Alabo.Industry.Shop.Deliveries.Dtos;
 using Alabo.Industry.Shop.Products.Domain.Entities;
 using Alabo.Industry.Shop.Products.Dtos;
 using Alabo.Industry.Shop.Products.ViewModels;

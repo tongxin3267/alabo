@@ -4,7 +4,7 @@ using ZKCloud.Open.ApiBase.Models;
 using ZKCloud.Open.ApiBase.Services;
 using ZKCloud.Open.Message.Models;
 
-namespace Alabo.Domains.Base.Client
+namespace Alabo.Tables.Client
 {
     public interface IOpenMessageClient : IRestClient
     {

@@ -1,18 +1,12 @@
-using System;
 using Alabo.Data.People.Stores.Domain.Entities;
-using Alabo.Data.People.Stores.Domain.Entities.Extensions;
 using Alabo.Data.People.Stores.Domain.Repositories;
 using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Data.People.UserTypes.Enums;
 using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
-using Alabo.Extensions;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Industry.Shop.Deliveries.ViewModels;
-using Alabo.Mapping;
 using MongoDB.Bson;
+using System;
 
 namespace Alabo.Data.People.Stores.Domain.Services
 {

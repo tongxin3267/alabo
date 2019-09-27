@@ -4,7 +4,6 @@ using System.Linq;
 using Alabo.Data.People.Users.Domain.Configs;
 using Alabo.Data.People.Users.Dtos;
 using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
@@ -15,6 +14,7 @@ using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Framework.Core.Admins.Configs;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Helpers;
+using Alabo.Tables.Domain.Services;
 using Alabo.Users.Dtos;
 using Alabo.Users.Entities;
 

@@ -2,7 +2,8 @@
 using Alabo.Domains.Entities;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoLists;
+using Alabo.UI;
+using Alabo.UI.Design.AutoLists;
 using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.App.Asset.Transfers.UI

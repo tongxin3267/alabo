@@ -1,7 +1,7 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.Framework.Core.WebUis.Design.AutoForms
+namespace Alabo.UI.Design.AutoForms
 {
     /// <summary>
     ///     form信息框

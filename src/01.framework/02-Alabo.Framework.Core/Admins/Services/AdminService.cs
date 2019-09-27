@@ -1,5 +1,4 @@
 ﻿using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Base.Services;
 using Alabo.Domains.Services;
 using Alabo.Framework.Core.Reflections.Interfaces;
 using Alabo.Framework.Core.Reflections.Services;
@@ -8,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using Alabo.Tables.Domain.Services;
 using ZKCloud.Open.ApiBase.Configuration;
 using ZKCloud.Open.ApiBase.Services;
 

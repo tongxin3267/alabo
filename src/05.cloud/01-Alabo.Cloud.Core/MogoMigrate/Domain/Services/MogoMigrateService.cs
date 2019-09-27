@@ -4,7 +4,6 @@ using System.Linq;
 using _01_Alabo.Cloud.Core.MogoMigrate.ViewModels;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
@@ -13,6 +12,7 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Runtime;
+using Alabo.Tables.Domain.Services;
 
 namespace _01_Alabo.Cloud.Core.MogoMigrate.Domain.Services
 {

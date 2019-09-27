@@ -5,7 +5,7 @@ using Alabo.Industry.Shop.Activitys.Domain.Entities;
 using Alabo.Industry.Shop.Activitys.Domain.Enum;
 using Alabo.Industry.Shop.Activitys.Dtos;
 using Alabo.Industry.Shop.Activitys.ViewModels;
-using Alabo.Industry.Shop.Deliveries.Domain.Dtos;
+using Alabo.Industry.Shop.Deliveries.Dtos;
 using Alabo.Industry.Shop.Orders.Dtos;
 using Alabo.Users.Entities;
 

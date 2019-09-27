@@ -3,11 +3,10 @@ using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Entities;
 using Alabo.Framework.Basic.Relations.Dtos;
 using Alabo.Industry.Shop.Categories.Domain.Entities;
-using Alabo.Industry.Shop.Deliveries.Domain.Entities;
 using Alabo.Industry.Shop.Products.Domain.Entities;
 using Alabo.Validations;
 
-namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos
+namespace Alabo.Industry.Shop.Deliveries.Dtos
 {
     public class ProductEditOuput
     {

@@ -14,9 +14,9 @@ using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Framework.Tasks.Queues.Domain.Servcies;
 using Alabo.Framework.Tasks.Queues.Models;
+using Alabo.UI.Design.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
 

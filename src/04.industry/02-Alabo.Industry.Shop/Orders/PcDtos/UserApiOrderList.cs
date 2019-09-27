@@ -4,9 +4,10 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Exceptions;
 using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Industry.Shop.Orders.Domain.Entities;
 using Alabo.Industry.Shop.Orders.Domain.Services;
+using Alabo.UI;
+using Alabo.UI.Design.AutoTables;
 
 namespace Alabo.Industry.Shop.Orders.PcDtos
 {

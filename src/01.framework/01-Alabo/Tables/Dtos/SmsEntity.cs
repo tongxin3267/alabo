@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.Domains.Base.Dtos
+namespace Alabo.Tables.Dtos
 {
     /// <summary>
     ///     v2响应数据

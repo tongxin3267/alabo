@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using Alabo.Industry.Shop.Deliveries.Domain.Entities;
 using Alabo.Industry.Shop.Products.ViewModels;
 using Alabo.Users.Entities;
 
-namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos
+namespace Alabo.Industry.Shop.Deliveries.Dtos
 {
     /// <summary>
     ///     店铺信息

@@ -6,7 +6,6 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Themes.Domain.Entities;
 using Alabo.Framework.Themes.Dtos;
-using Alabo.Framework.Themes.Dtos.Service;
 using Alabo.Helpers;
 using Alabo.RestfulApi.Clients;
 

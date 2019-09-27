@@ -14,7 +14,7 @@ using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
 using Newtonsoft.Json;
 
-namespace Alabo.Data.People.Cities.Domain.CallBacks
+namespace Alabo.Data.People.Cities.Domain.Configs
 {
     /// <summary>
     ///     市代理等级

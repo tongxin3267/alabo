@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Industry.Shop.Activitys.Domain.Entities;
+using Alabo.UI.Design.AutoForms;
 using Alabo.Validations;
 
 namespace Alabo.Industry.Shop.Activitys.Dtos

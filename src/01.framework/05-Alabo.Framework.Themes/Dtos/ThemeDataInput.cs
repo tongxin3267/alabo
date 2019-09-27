@@ -4,7 +4,7 @@ using Alabo.Validations;
 using MongoDB.Bson;
 using Newtonsoft.Json;
 
-namespace Alabo.Framework.Themes.Dtos.Service
+namespace Alabo.Framework.Themes.Dtos
 {
     public class ThemeDataInput
     {

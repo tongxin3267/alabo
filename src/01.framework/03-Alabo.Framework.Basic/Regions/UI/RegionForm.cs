@@ -3,17 +3,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.Mongo.Extension;
-using Alabo.Framework.Basic.Address.Domain.Entities;
-using Alabo.Framework.Basic.Address.Domain.Services;
+using Alabo.Framework.Basic.Regions.Domain.Entities;
+using Alabo.Framework.Basic.Regions.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Mapping;
+using Alabo.UI;
+using Alabo.UI.Design.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Framework.Basic.Address.UI
+namespace Alabo.Framework.Basic.Regions.UI
 {
     /// <summary>
     ///     地区

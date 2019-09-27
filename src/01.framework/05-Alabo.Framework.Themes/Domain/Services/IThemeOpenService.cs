@@ -2,7 +2,6 @@
 using Alabo.Domains.Services;
 using Alabo.Framework.Themes.Domain.Entities;
 using Alabo.Framework.Themes.Dtos;
-using Alabo.Framework.Themes.Dtos.Service;
 
 namespace Alabo.Framework.Themes.Domain.Services
 {

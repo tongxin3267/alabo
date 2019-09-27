@@ -5,7 +5,7 @@ using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.Industry.Shop.Products.Dtos;
 using MongoDB.Bson;
 
-namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos
+namespace Alabo.Industry.Shop.Deliveries.Dtos
 {
     /// <summary>
     ///     店铺对象

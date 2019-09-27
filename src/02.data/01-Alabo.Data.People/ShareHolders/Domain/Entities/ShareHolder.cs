@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Data.People.ShareHolders.Configs;
 using Alabo.Data.People.UserTypes;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;

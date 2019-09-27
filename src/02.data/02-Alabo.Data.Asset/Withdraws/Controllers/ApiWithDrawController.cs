@@ -4,8 +4,8 @@ using Alabo.App.Asset.Withdraws.Dtos;
 using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Framework.Core.WebUis.Models.Lists;
+using Alabo.UI.Design.AutoForms;
 using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 

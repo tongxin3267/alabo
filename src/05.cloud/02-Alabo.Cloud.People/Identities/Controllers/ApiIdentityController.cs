@@ -5,7 +5,7 @@ using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Dtos;
 using Alabo.Framework.Core.WebApis.Filter;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.UI.Design.AutoForms;
 using Alabo.Users.Enum;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;

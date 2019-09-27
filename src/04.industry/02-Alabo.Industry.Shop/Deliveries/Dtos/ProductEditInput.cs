@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos
+namespace Alabo.Industry.Shop.Deliveries.Dtos
 {
     /// <summary>
     ///     商品编辑输入模型

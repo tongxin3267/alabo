@@ -2,11 +2,11 @@
 
 using System.Linq;
 using Alabo.Data.People.Employes.Domain.Entities;
-using Alabo.Domains.Base.Services;
 using Alabo.Domains.Repositories.Model;
 using Alabo.Extensions;
 using Alabo.Framework.Core.Reflections.Services;
 using Alabo.Helpers;
+using Alabo.Tables.Domain.Services;
 using Alabo.Test.Base.Core.Model;
 using Alabo.Test.Generation.CodeTemplate;
 using Xunit;

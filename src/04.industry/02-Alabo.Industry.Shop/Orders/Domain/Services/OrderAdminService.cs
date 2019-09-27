@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Asset.Pays.Domain.Entities;
+﻿using Alabo.App.Asset.Pays.Domain.Entities;
 using Alabo.App.Asset.Pays.Domain.Entities.Extension;
 using Alabo.App.Asset.Pays.Domain.Services;
 using Alabo.AutoConfigs;
@@ -14,7 +11,6 @@ using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Industry.Shop.Deliveries.Domain.Entities.Extensions;
 using Alabo.Industry.Shop.Deliveries.Domain.Services;
 using Alabo.Industry.Shop.OrderActions.Domain.Services;
 using Alabo.Industry.Shop.OrderDeliveries.Domain.Entities.Extensions;
@@ -28,6 +24,9 @@ using Alabo.Industry.Shop.Orders.ViewModels.OrderEdit;
 using Alabo.Industry.Shop.Products.Domain.Services;
 using Alabo.Mapping;
 using Alabo.Tool.Payment;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.Industry.Shop.Orders.Domain.Services
 {
@@ -174,9 +173,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                         productDeliveryInfos.AddRange(item.OrderDeliveryExtension.ProductDeliveryInfo);
                     // 已发货数量
                     view.DeliveryProduct = (from ProductDeliveryInfo p in productDeliveryInfos
-                        group p by p.ProductSkuId
+                                            group p by p.ProductSkuId
                         into g
-                        select new OrderEditDeliveryProduct {SkuId = g.Key, Count = g.Sum(e => e.Count)}).ToList();
+                                            select new OrderEditDeliveryProduct { SkuId = g.Key, Count = g.Sum(e => e.Count) }).ToList();
                 }
 
                 //上下记录

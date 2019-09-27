@@ -1,20 +1,19 @@
-﻿using Alabo.AutoConfigs;
-using Alabo.AutoConfigs.Entities;
-using Alabo.Domains.Enums;
-using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
-using Alabo.Framework.Core.Reflections.Interfaces;
-using Alabo.Helpers;
-using Alabo.Web.Mvc.Attributes;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
+using Alabo.AutoConfigs;
+using Alabo.AutoConfigs.Entities;
 using Alabo.Data.People.Users;
+using Alabo.Domains.Enums;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Helpers;
 using Alabo.Reflections;
+using Alabo.Web.Mvc.Attributes;
+using Newtonsoft.Json;
 
-namespace ZKCloud.App.Core.UserType.Modules.Circle
+namespace Alabo.Data.People.Circles.Domain.Configs
 {
     /// <summary>
     ///     商圈等级

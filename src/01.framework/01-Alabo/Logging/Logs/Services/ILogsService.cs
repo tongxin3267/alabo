@@ -1,10 +1,9 @@
-﻿using Alabo.Domains.Base.Entities;
-using Alabo.Domains.Services;
+﻿using Alabo.Domains.Services;
 using MongoDB.Bson;
 
-namespace Alabo.Domains.Base.Services
+namespace Alabo.Logging.Logs.Services
 {
-    public interface ILogsService : IService<Logs, ObjectId>
+    public interface ILogsService : IService<Entities.Logs, ObjectId>
     {
     }
 }

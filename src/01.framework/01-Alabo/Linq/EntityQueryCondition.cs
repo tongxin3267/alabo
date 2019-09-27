@@ -1,13 +1,13 @@
 ﻿using Alabo.Datas.Queries.Enums;
-using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.Extensions;
-using Alabo.Domains.Services.Report.Enums;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using System;
 using System.Linq.Expressions;
+using Alabo.Tables.Domain.Services;
+using Alabo.UI.Design.AutoReports.Enums;
 
 namespace Alabo.Linq
 {

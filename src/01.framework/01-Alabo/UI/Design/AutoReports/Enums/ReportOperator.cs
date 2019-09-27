@@ -1,7 +1,7 @@
-﻿using Alabo.Web.Mvc.Attributes;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Domains.Services.Report.Enums
+namespace Alabo.UI.Design.AutoReports.Enums
 {
     /// <summary>
     ///     报表运算符,支持等于和不等于两种方式即可

@@ -1,4 +1,4 @@
-﻿namespace Alabo.Domains.Services.Report.Dtos
+﻿namespace Alabo.UI.Design.AutoReports.Dtos
 {
     /// <summary>
     ///     报表表格

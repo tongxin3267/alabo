@@ -4,7 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using Alabo.AutoConfigs;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.UI;
+using Alabo.UI.Design.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
