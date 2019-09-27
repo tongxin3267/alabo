@@ -98,7 +98,7 @@ namespace Alabo.Industry.Shop.Orders.PcDtos
             if (Enum.IsDefined(typeof(OrderType), model.OrderType))
                 expressionQuery.And(e => e.OrderType == model.OrderType);
 
-            var store = Resolve<IShopStoreService>().GetSingle(u => u.UserId == autoModel.BasicUser.Id);
+            var store = Resolve<IStoreService>().GetSingle(u => u.UserId == autoModel.BasicUser.Id);
             if (store == null) throw new ValidException("您不是供应商,暂无店铺");
             expressionQuery.And(e => e.StoreId == store.Id);
 

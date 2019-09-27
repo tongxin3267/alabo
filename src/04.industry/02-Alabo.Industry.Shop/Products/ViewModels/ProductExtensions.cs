@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Data.People.Stores.Domain.Entities;
 using Alabo.Industry.Shop.Categories.Domain.Entities;
 using Alabo.Industry.Shop.Deliveries.Domain.Entities;
 using Alabo.Industry.Shop.Products.Domain.Configs;

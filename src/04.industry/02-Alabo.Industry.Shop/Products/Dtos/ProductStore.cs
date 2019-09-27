@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.Data.People.Stores.Domain.Entities;
+using Alabo.Data.People.Stores.Domain.Services;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -38,11 +40,12 @@ namespace Alabo.Industry.Shop.Products.Dtos
         {
             var model = new PagedList<Product>();
 
-            var store = Resolve<IShopStoreService>().GetUserStore(autoModel.BasicUser.Id);
+            var store = Resolve<IStoreService>().GetUserStore(autoModel.BasicUser.Id);
             if (store == null) throw new ValidException("您不是供应商,暂无店铺");
-            model = Resolve<IProductService>().GetPagedList(query, r => r.StoreId == store.Id);
+            // model = Resolve<IProductService>().GetPagedList(query, r => r.StoreId == store.Id);
 
-            return ToPageResult(model);
+            // return ToPageResult(model);
+            return null;
         }
 
         public List<TableAction> Actions()
@@ -312,7 +315,7 @@ namespace Alabo.Industry.Shop.Products.Dtos
     //        builder.Ignore(e => e.ProductActivityExtension);
     //        builder.Ignore(e => e.Detail);
     //        builder.Ignore(e => e.Store);
-    //     
+    //
     //        if (TenantContext.IsTenant)
     //        {
     //            // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);

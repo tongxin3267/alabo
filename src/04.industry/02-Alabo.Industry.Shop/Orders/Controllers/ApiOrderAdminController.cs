@@ -63,7 +63,7 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         [ApiAuth]
         public ApiResult<OrderShowOutput> SupplierShow(long id, long loginUserId)
         {
-            var store = Resolve<IShopStoreService>().GetSingle(u => u.UserId == loginUserId);
+            var store = Resolve<IStoreService>().GetSingle(u => u.UserId == loginUserId);
             var order = Resolve<IOrderService>().GetSingle(u => u.Id == id);
             if (order?.StoreId != store?.Id) return ApiResult.Failure<OrderShowOutput>("你无权查看该订单");
 

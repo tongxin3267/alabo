@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.Data.People.Stores.Domain.Entities;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
@@ -287,11 +288,6 @@ namespace Alabo.Industry.Shop.Products.Domain.Entities
             builder.Ignore(e => e.ProductActivityExtension);
             builder.Ignore(e => e.Detail);
             builder.Ignore(e => e.Store);
-         
-            if (TenantContext.IsTenant)
-            {
-                // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
-            }
         }
     }
 }

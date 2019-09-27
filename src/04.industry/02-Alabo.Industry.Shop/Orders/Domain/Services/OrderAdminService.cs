@@ -27,6 +27,8 @@ using Alabo.Tool.Payment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Data.People.Stores.Domain.Entities.Extensions;
+using Alabo.Data.People.Stores.Domain.Services;
 
 namespace Alabo.Industry.Shop.Orders.Domain.Services
 {
@@ -156,8 +158,8 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
             {
                 view.Order = order;
                 // 获取门店信息
-                var store = Resolve<IShopStoreService>().GetSingle(e => e.Id == order.StoreId);
-                if (store.Extension != null) store.StoreExtension = store.Extension.DeserializeJson<StoreExtension>();
+                var store = Resolve<IStoreService>().GetSingle(order.StoreId);
+                //if (store.Extension != null) store.StoreExtension = store.Extension.DeserializeJson<StoreExtension>();
 
                 view.Order.OrderExtension.Store = store;
                 view.Actions = Resolve<IOrderActionService>().GetList(e => e.OrderId == order.Id)

@@ -159,7 +159,7 @@ namespace _01_Alabo.Cloud.Core.Truncate
             //    return ServiceResult.FailedWithMessage("公司名称填写错误,不能进行该操作");
             //}
 
-            Repository<ICatalogRepository>().TruncateTable();
+            Ioc.Resolve<ICatalogRepository>().TruncateTable();
 
             // 先更新数据库脚本
             Resolve<ICatalogService>().UpdateDatabase();

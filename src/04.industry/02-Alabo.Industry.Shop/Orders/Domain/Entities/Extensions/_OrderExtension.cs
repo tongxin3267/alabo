@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Alabo.App.Asset.Pays.Domain.Entities;
+using Alabo.Data.People.Stores.Domain.Entities;
 using Alabo.Domains.Entities.Extensions;
 using Alabo.Framework.Basic.Address.Domain.Entities;
 using Alabo.Industry.Shop.AfterSales.Domain.Entities;
@@ -20,7 +21,6 @@ namespace Alabo.Industry.Shop.Orders.Domain.Entities.Extensions
         ///     如果为False的时候，供应商不可以查看
         /// </summary>
         public bool IsSupplierView { get; set; } = false;
-
 
         /// <summary>
         ///     是否来自于订购页面
@@ -102,7 +102,6 @@ namespace Alabo.Industry.Shop.Orders.Domain.Entities.Extensions
         /// </summary>
         public string AttachContent { get; set; }
 
-
         /// <summary>
         ///     退货,退款 详情
         /// </summary>
@@ -129,7 +128,6 @@ namespace Alabo.Industry.Shop.Orders.Domain.Entities.Extensions
         ///     如果存在租库, 代表主库的订单ID
         /// </summary>
         public long OrderId { set; get; }
-
 
         /// <summary>
         ///     租户标识

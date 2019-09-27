@@ -6,6 +6,8 @@ using System.Net;
 using System.Text;
 using Alabo.App.Asset.Pays.Domain.Entities.Extension;
 using Alabo.App.Asset.Pays.Domain.Services;
+using Alabo.Data.People.Stores.Domain.Entities.Extensions;
+using Alabo.Data.People.Stores.Domain.Services;
 using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Data.People.Users.Dtos;
@@ -111,8 +113,8 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
             var orderDeliveries = Resolve<IOrderDeliveryService>().GetList(e => e.OrderId == order.Id);
             foreach (var item in orderDeliveries)
             {
-                var store = Resolve<IShopStoreService>().GetSingle(e => e.Id == item.StoreId);
-                store.StoreExtension = store.Extension.DeserializeJson<StoreExtension>();
+                var store = Resolve<IStoreService>().GetSingle(item.StoreId);
+                //  store.StoreExtension = store.Extension.DeserializeJson<StoreExtension>();
                 //item.Name = store.StoreExtension.DeliveryTemplate
                 //    .SingleOrDefault(e => e.ExpressId == item.ExpressGuid)?.TemplateName;
                 orderShow.OrderDeliverys.Add(item);
@@ -312,8 +314,8 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
             var orderDeliveries = Resolve<IOrderDeliveryService>().GetList(e => e.OrderId == order.Id);
             foreach (var item in orderDeliveries)
             {
-                var store = Resolve<IShopStoreService>().GetSingle(e => e.Id == item.StoreId);
-                store.StoreExtension = store.Extension.DeserializeJson<StoreExtension>();
+                var store = Resolve<IStoreService>().GetSingle(item.StoreId);
+                //  store.StoreExtension = store.Extension.DeserializeJson<StoreExtension>();
                 //item.Name = store.StoreExtension.DeliveryTemplate
                 //    .SingleOrDefault(e => e.ExpressId == item.ExpressGuid)?.TemplateName;
                 orderShow.OrderDeliverys.Add(item);
@@ -399,8 +401,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
             var orderDeliveries = Resolve<IOrderDeliveryService>().GetList(e => e.OrderId == order.Id);
             foreach (var item in orderDeliveries)
             {
-                var store = Resolve<IShopStoreService>().GetSingle(e => e.Id == item.StoreId);
-                store.StoreExtension = store.Extension.DeserializeJson<StoreExtension>();
+                //TODO 2019年9月27日 订单修改
+                var store = Resolve<IStoreService>().GetSingle(item.StoreId);
+                //   store.StoreExtension = store.Extension.DeserializeJson<StoreExtension>();
                 //item.Name = store.StoreExtension.DeliveryTemplate
                 //    .SingleOrDefault(e => e.ExpressId == item.ExpressGuid)?.TemplateName;
                 orderShow.OrderDeliverys.Add(item);
@@ -839,7 +842,7 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
 
                 if (deliverRes)
                 {
-                    var store = Resolve<IShopStoreService>().GetSingle(u => u.Id == order.StoreId);
+                    var store = Resolve<IStoreService>().GetSingle(order.StoreId);
 
                     //添加订单操作记录
                     var orderAction = new OrderAction

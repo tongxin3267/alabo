@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Data.People.Stores.Domain.Entities;
+using Alabo.Data.People.Stores.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
@@ -37,13 +39,13 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
             #region 基础数据赋值
 
             parameter.Product.CategoryId = parameter.Category.Id;
-            if (parameter.Product.Id == 0) parameter.Product.StoreId = parameter.Store.Id;
+            //if (parameter.Product.Id == 0) parameter.Product.StoreId = parameter.Store.Id;
 
             parameter.Product.DisplayPrice = Resolve<IProductService>().GetDisplayPrice(parameter.Product.Price,
                 parameter.Product.PriceStyleId, parameter.Product.MinCashRate);
             parameter.Product.ModifiedTime = DateTime.Now;
             parameter.ProductDetail.ProductId = parameter.Product.Id;
-            //如果是管理员就直接上架或者下架            
+            //如果是管理员就直接上架或者下架
             if (Resolve<IUserService>().IsAdmin(parameter.Store.UserId))
             {
                 if (parameter.OnSale)
@@ -82,7 +84,6 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
 
             if (parameter.Product.CostPrice > parameter.Product.MarketPrice)
                 return ServiceResult.FailedWithMessage("商品市场价必须为大于等于成本价");
-
 
             //判断sku的价格是否低于成本
             foreach (var item in parameter.ProductSkus)
@@ -180,7 +181,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
             var user = Resolve<IUserService>().GetNomarlUser(parameter.UserId);
             if (user == null) throw new Exception("用户不存在");
 
-            var store = Resolve<IShopStoreService>().GetUserStore(user.Id);
+            var store = Resolve<IStoreService>().GetUserStore(user.Id);
             if (store == null) throw new Exception("当前用户不存在店铺");
             productEditOuput.Store = store;
 
@@ -218,10 +219,8 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
                     .GetList(o => o.ProductId == parameter.ProductId)?.ToList();
                 if (productEditOuput.ProductSkus == null) throw new Exception("商品SKU不存在");
 
-
                 var outCategory = productView.ProductDetail.PropertyJson.ToObject<Category>();
                 //var categoryEntity = productView.Category;
-
 
                 //var checkCategory = outCategory.SalePropertys?[0]?.PropertyValues;
                 if (outCategory != null && outCategory.SalePropertys != null && outCategory.SalePropertys.Count > 0 &&

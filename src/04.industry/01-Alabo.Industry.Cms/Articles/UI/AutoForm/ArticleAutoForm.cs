@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Alabo.Cache;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Relations.Domain.Services;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
+using Alabo.Helpers;
 using Alabo.Industry.Cms.Articles.Domain.CallBacks;
 using Alabo.Industry.Cms.Articles.Domain.Entities;
 using Alabo.Industry.Cms.Articles.Domain.Services;
@@ -18,6 +20,7 @@ using Alabo.UI.Design.AutoForms;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
+using Convert = System.Convert;
 
 namespace Alabo.Industry.Cms.Articles.UI.AutoForm
 {
@@ -79,7 +82,6 @@ namespace Alabo.Industry.Cms.Articles.UI.AutoForm
             return autoForm;
         }
 
-
         /// <summary>
         ///     保存
         /// </summary>
@@ -95,7 +97,6 @@ namespace Alabo.Industry.Cms.Articles.UI.AutoForm
             if (aform.Classes != null) input.Classes = aform.Classes.Join();
             if (aform.Tags != null) input.Tags = aform.Tags.Join();
             input.ChannelId = aform.ChannelId.ToObjectId();
-
 
             var article = AutoMapping.SetValue<Article>(input);
             var channel = Resolve<IChannelService>().GetSingle(r => r.Id == article.ChannelId);
@@ -153,7 +154,7 @@ namespace Alabo.Industry.Cms.Articles.UI.AutoForm
 
         private void DeleteCache()
         {
-            ObjectCache.Remove("GetHelpNav");
+            Ioc.Resolve<IObjectCache>().Remove("GetHelpNav");
         }
 
         private long GetMaxRelationId()
@@ -329,7 +330,6 @@ namespace Alabo.Industry.Cms.Articles.UI.AutoForm
         [Display(Name = "来源")]
         [Field(ControlsType = ControlsType.TextBox, IsShowAdvancedSerach = false, IsShowBaseSerach = false,
             ListShow = false, SortOrder = 2, GroupTabId = 4)]
-
         public string Source { get; set; }
 
         /// <summary>

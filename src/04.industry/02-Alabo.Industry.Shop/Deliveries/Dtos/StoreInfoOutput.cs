@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Alabo.Data.People.Stores.Domain.Entities;
 using Alabo.Industry.Shop.Products.ViewModels;
 using Alabo.Users.Entities;
 

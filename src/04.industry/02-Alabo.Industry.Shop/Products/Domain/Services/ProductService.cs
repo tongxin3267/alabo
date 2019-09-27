@@ -214,7 +214,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
             //product extension
             product.ProductExtensions = new ProductExtensions
             {
-                Store = Resolve<IShopStoreService>().GetSingle(e => e.Id == product.StoreId),
+                Store = Resolve<IStoreService>().GetSingle(e => e.Id == product.StoreId),
                 ProductCategory = product.Detail.PropertyJson.DeserializeJson<Category>(),
                 ProductThums = productThums
             };
@@ -424,7 +424,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         {
             var product = GetSingle(u => u.Id == productId);
             if (product == null) return null;
-            var storeInfo = Resolve<IShopStoreService>().GetSingle(u => u.Id == product.StoreId);
+            var storeInfo = Resolve<IStoreService>().GetSingle(u => u.Id == product.StoreId);
             // var grade = Resolve<IAutoConfigService>().GetList<SupplierGradeConfig>(u => u.Id == storeInfo.GradeId);
             var model = new StoreInfoOutput
             {
