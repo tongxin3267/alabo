@@ -17,7 +17,7 @@ using Newtonsoft.Json;
 
 namespace Alabo.Framework.Core.WebUis
 {
-    public abstract class UIBase : BaseViewModel, IUI
+    public abstract class UIBase
     {
         #region 转换成自动表单
 
@@ -53,7 +53,7 @@ namespace Alabo.Framework.Core.WebUis
 
             if (typeof(TKey) == typeof(ObjectId)) id = ObjectId.Parse(id.ToStr());
 
-            return (TKey) id;
+            return (TKey)id;
         }
 
         #endregion 转换成Id
@@ -73,7 +73,6 @@ namespace Alabo.Framework.Core.WebUis
         }
 
         #endregion 将前台URL查询参数转化成对象
-
 
         #region 转换成删除链接
 
@@ -95,8 +94,7 @@ namespace Alabo.Framework.Core.WebUis
             return tableAction;
         }
 
-        #endregion 转换成访问链接
-
+        #endregion 转换成删除链接
 
         #region 转换成删除链接
 
@@ -118,8 +116,7 @@ namespace Alabo.Framework.Core.WebUis
             return tableAction;
         }
 
-        #endregion 转换成访问链接
-
+        #endregion 转换成删除链接
 
         #region 转换成PageList对象
 
@@ -146,26 +143,7 @@ namespace Alabo.Framework.Core.WebUis
             return apiRusult;
         }
 
-        #endregion
-
-        #region 基础对象
-
-        /// <summary>
-        ///     获取数据操作对象服务
-        /// </summary>
-        public T Repository<T>() where T : IRepository
-        {
-            return Ioc.Resolve<T>();
-        }
-
-        /// <summary>
-        ///     缓存
-        /// </summary>
-        [JsonIgnore]
-        [BsonIgnore]
-        public IObjectCache ObjectCache => Ioc.Resolve<IObjectCache>();
-
-        #endregion 基础对象
+        #endregion 转换成PageList对象
 
         #region 转换成前端分页类类型
 
@@ -222,7 +200,6 @@ namespace Alabo.Framework.Core.WebUis
 
         #endregion 转换成前端分页类类型
 
-
         #region 转换成访问链接
 
         /// <summary>
@@ -257,7 +234,6 @@ namespace Alabo.Framework.Core.WebUis
             return tableAction;
         }
 
-
         public static TableAction ToLinkAction(string name, string url, TableActionType tableActionType,
             Flaticon flaticon = Flaticon.Interface5)
         {
@@ -271,7 +247,6 @@ namespace Alabo.Framework.Core.WebUis
             };
             return tableAction;
         }
-
 
         public static TableAction ToLinkAction(string name, string url, ActionLinkType linkType,
             TableActionType tableActionType, Flaticon flaticon = Flaticon.Interface5)

@@ -1,6 +1,6 @@
-﻿using System;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Framework.Core.WebApis;
+using System;
 
 namespace Alabo.Framework.Core.WebUis.Design.AutoLists
 {

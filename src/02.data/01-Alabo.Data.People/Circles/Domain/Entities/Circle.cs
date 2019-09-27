@@ -1,34 +1,24 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.Data.People.UserTypes;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace Alabo.Data.People.Circles.Domain.Entities
 {
+    /// <summary>
+    /// 商圈
+    /// </summary>
     [ClassProperty(Name = "商圈")]
     [BsonIgnoreExtraElements]
     [Table("People_Circle")]
     [AutoDelete(IsAuto = true)]
-    public class Circle : AggregateMongodbRoot<Circle>
+    public class Circle : UserTypeAggregateRoot<Circle, UserGradeConfig>
     {
-        /// <summary>
-        ///     商圈名称
-        /// </summary>
-        [Display(Name = "商圈名称")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        [Field(ListShow = true, SortOrder = 1, Width = "150", LabelColor = LabelColor.Brand,
-            ControlsType = ControlsType.TextBox, IsShowBaseSerach = true)]
-        public string Name { get; set; }
-
-        [Display(Name = "所属区域")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        [Field(ListShow = false, SortOrder = 1, Width = "150", LabelColor = LabelColor.Brand,
-            ControlsType = ControlsType.CityDropList)]
-        public long RegionId { get; set; }
-
         /// <summary>
         ///     所属区域
         /// </summary>

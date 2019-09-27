@@ -1,11 +1,12 @@
-﻿using Alabo.Helpers;
+﻿using Alabo.Framework.Core.WebUis;
+using Alabo.Helpers;
 
 namespace Alabo.Web.Mvc.ViewModel
 {
     /// <summary>
     ///     ViewModel基类
     /// </summary>
-    public abstract class BaseViewModel
+    public abstract class BaseViewModel : UIBase
     {
         /// <summary>
         ///     Resolves this instance.
