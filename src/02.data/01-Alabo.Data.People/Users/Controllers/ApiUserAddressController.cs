@@ -26,18 +26,6 @@ namespace Alabo.Data.People.Users.Controllers
         }
 
         /// <summary>
-        ///     前端H5 vant组件地址json格式
-        /// </summary>
-        [HttpGet]
-        [Display(Description = "vant组件地址json格式")]
-        public ApiResult<VantAddress> VantAddress()
-        {
-            if (BaseService == null) return ApiResult.Failure<VantAddress>("请在控制器中定义BaseService");
-            var result = Resolve<IUserAddressService>().GetVantAddress();
-            return ApiResult.Success(result);
-        }
-
-        /// <summary>
         ///     Gets the reg form.
         /// </summary>
         [HttpGet]
