@@ -107,7 +107,7 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Entities
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.UserName);
             builder.Ignore(e => e.ModuleName);
-            builder.Ignore(e => e.Version);
+         
         }
     }
 }

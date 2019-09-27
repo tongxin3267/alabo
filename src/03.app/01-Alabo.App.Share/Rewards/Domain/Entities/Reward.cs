@@ -116,7 +116,7 @@ namespace Alabo.App.Share.Rewards.Domain.Entities
             builder.Property(e => e.MoneyTypeId).HasColumnType("uniqueidentifier");
             builder.Property(e => e.Intro).HasMaxLength(255);
             builder.Ignore(e => e.Serial);
-            builder.Ignore(e => e.Version);
+         
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using Alabo.Cache;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
+using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
 using Alabo.Framework.Core.WebUis.Design.AutoLists;
@@ -19,6 +20,18 @@ namespace Alabo.Framework.Core.WebUis
 {
     public abstract class UIBase
     {
+        #region 基础对象
+
+        /// <summary>
+        ///     获取数据操作对象服务
+        /// </summary>
+        public T Resolve<T>() where T : IService
+        {
+            return Ioc.Resolve<T>();
+        }
+
+        #endregion 基础对象
+
         #region 转换成自动表单
 
         /// <summary>

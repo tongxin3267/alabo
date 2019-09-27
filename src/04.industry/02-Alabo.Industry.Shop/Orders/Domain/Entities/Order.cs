@@ -167,7 +167,7 @@ namespace Alabo.Industry.Shop.Orders.Domain.Entities
             builder.Ignore(e => e.Serial);
             builder.Ignore(e => e.AccountPayPair);
             builder.Ignore(e => e.OrderExtension);
-            builder.Ignore(e => e.Version);
+         
             if (TenantContext.IsTenant)
             {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);

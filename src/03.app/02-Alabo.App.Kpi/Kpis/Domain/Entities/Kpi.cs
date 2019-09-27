@@ -63,7 +63,7 @@ namespace Alabo.App.Kpis.Kpis.Domain.Entities
         protected override void MapProperties(EntityTypeBuilder<Kpi> builder)
         {
             builder.HasKey(e => e.Id);
-            builder.Ignore(e => e.Version);
+         
         }
     }
 }

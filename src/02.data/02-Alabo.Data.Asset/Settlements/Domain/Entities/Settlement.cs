@@ -90,7 +90,7 @@ namespace Alabo.App.Asset.Settlements.Domain.Entities
             builder.Ignore(e => e.SettlementExtension);
             builder.Ignore(e => e.Serial);
             builder.Ignore(e => e.UserName);
-            builder.Ignore(e => e.Version);
+         
         }
     }
 }

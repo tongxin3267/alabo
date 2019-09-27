@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.Data.People.Circles.Domain.Entities;
 using Alabo.Data.People.Circles.Domain.Services;
@@ -7,6 +8,7 @@ using Alabo.Domains.Enums;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Design.AutoForms;
+using Alabo.Framework.Core.WebUis.Design.AutoTables;
 using Alabo.Mapping;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
@@ -17,21 +19,9 @@ namespace Alabo.Data.People.Circles.UI
     /// <summary>
     ///     商圈
     /// </summary>
-    [BsonIgnoreExtraElements]
-    [Table("Basic_Circle")]
-    [ClassProperty(Name = "商圈", Icon = IconFlaticon.map_location, SideBarType = SideBarType.ControlSideBar,
-        PageType = ViewPageType.List, PostApi = "Api/Circle/CircleList")]
-    public class CircleForm : UIBase, IAutoForm
+    [ClassProperty(Name = "商圈")]
+    public class CircleForm : Circle, IAutoForm, IAutoTable<CircleForm>
     {
-        /// <summary>
-        ///     商圈名称
-        /// </summary>
-        [Display(Name = "商圈名称")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        [Field(ListShow = true, SortOrder = 1, Width = "150", LabelColor = LabelColor.Brand,
-            ControlsType = ControlsType.TextBox, IsShowBaseSerach = true)]
-        public string Name { get; set; }
-
         /// <summary>
         ///     商圈所属省份
         /// </summary>
@@ -85,6 +75,16 @@ namespace Alabo.Data.People.Circles.UI
             var circleView = AutoMapping.SetValue<Circle>(model);
             var result = Resolve<ICircleService>().AddOrUpdate(circleView);
             return new ServiceResult(result);
+        }
+
+        public PageResult<CircleForm> PageTable(object query, AutoBaseModel autoModel)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public List<TableAction> Actions()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

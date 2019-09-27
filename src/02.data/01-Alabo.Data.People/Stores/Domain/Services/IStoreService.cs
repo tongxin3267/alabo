@@ -5,10 +5,10 @@ using Alabo.Domains.Services;
 using Alabo.Industry.Shop.Deliveries.ViewModels;
 using MongoDB.Bson;
 
-namespace Alabo.Data.People.Stores.Domain.Services {
-
-    public interface IStoreService : IService<Store, ObjectId> {
-
+namespace Alabo.Data.People.Stores.Domain.Services
+{
+    public interface IStoreService : IService<Store, ObjectId>
+    {
         /// <summary>
         ///     获取自营店铺
         ///     平台店铺，后台添加的时候，为平台商品
@@ -28,13 +28,11 @@ namespace Alabo.Data.People.Stores.Domain.Services {
         /// <param name="store">The store.</param>
         ServiceResult AddOrUpdate(ViewStore store);
 
-
         /// <summary>
         ///     获取s the 视图 store 分页 list.
         /// </summary>
         /// <param name="dto">The dto.</param>
         PagedList<ViewStore> GetViewStorePageList(PagedInputDto dto);
-
 
         /// <summary>
         ///     获取s the 视图 store.
@@ -48,7 +46,11 @@ namespace Alabo.Data.People.Stores.Domain.Services {
         /// <param name="query">查询</param>
         PagedList<ViewStore> GetPageList(object query);
 
+        /// <summary>
+        /// 获取视图
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         ViewStore GetView(long id);
-
     }
 }

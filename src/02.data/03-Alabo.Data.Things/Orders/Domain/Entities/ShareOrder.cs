@@ -149,7 +149,7 @@ namespace Alabo.Data.Things.Orders.Domain.Entities
             builder.Ignore(r => r.UserName);
             builder.Ignore(r => r.ShareOrderExtension);
             builder.Ignore(r => r.DisplayName);
-            builder.Ignore(e => e.Version);
+         
             if (TenantContext.IsTenant)
             {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);

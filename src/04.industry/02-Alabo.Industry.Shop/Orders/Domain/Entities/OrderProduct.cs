@@ -93,7 +93,7 @@ namespace Alabo.Industry.Shop.Orders.Domain.Entities
             builder.HasKey(e => e.Id);
             builder.Property(e => e.FenRunAmount).IsRequired();
             builder.Ignore(e => e.OrderProductExtension);
-            builder.Ignore(e => e.Version);
+         
             if (TenantContext.IsTenant)
             {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);

@@ -43,18 +43,6 @@ namespace Alabo.Industry.Shop.Deliveries.ViewModels
             ListShow = true, IsMain = true, Link = "/Admin/User/Edit?id=[[UserId]]", SortOrder = 2)]
         public string Name { get; set; }
 
-        /// <summary>
-        ///     是否为平台,
-        ///     平台只能有一个
-        /// </summary>
-        /// <value>
-        ///     <c>true</c> if this instance is planform; otherwise, <c>false</c>.
-        /// </value>
-        [Display(Name = "是否平台")]
-        [Field(ControlsType = ControlsType.Switch, IsShowAdvancedSerach = true, Width = "180",
-            ListShow = true, SortOrder = 7)]
-        public bool IsPlanform { get; set; } = false;
-
         ///// <summary>
         /////     供应商状态
         ///// </summary>

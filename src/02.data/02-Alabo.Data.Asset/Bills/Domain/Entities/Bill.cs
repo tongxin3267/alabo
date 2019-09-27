@@ -129,7 +129,7 @@ namespace Alabo.App.Asset.Bills.Domain.Entities
             builder.Property(e => e.Intro).IsRequired();
             builder.Property(e => e.Amount).IsRequired();
             builder.Ignore(e => e.Serial);
-            builder.Ignore(e => e.Version);
+         
             if (TenantContext.IsTenant)
             {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);

@@ -103,7 +103,7 @@ namespace Alabo.App.Asset.Recharges.Domain.Entities
             builder.Ignore(e => e.RechargeExtension);
             builder.Ignore(e => e.Serial);
             builder.Ignore(e => e.UserName);
-            builder.Ignore(e => e.Version);
+         
         }
     }
 }

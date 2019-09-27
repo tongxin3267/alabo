@@ -76,7 +76,7 @@ namespace Alabo.Industry.Shop.Categories.Domain.Entities
             builder.Ignore(e => e.ValueAlias);
             builder.Ignore(e => e.Image);
             builder.Ignore(e => e.IsCheck);
-            builder.Ignore(e => e.Version);
+         
             if (TenantContext.IsTenant)
             {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);

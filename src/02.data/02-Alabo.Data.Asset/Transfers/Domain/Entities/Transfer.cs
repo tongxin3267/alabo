@@ -82,7 +82,7 @@ namespace Alabo.App.Asset.Transfers.Domain.Entities
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.Serial);
             builder.Ignore(e => e.UserName);
-            builder.Ignore(e => e.Version);
+         
         }
     }
 }

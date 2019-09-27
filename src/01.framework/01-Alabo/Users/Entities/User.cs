@@ -139,7 +139,7 @@ namespace Alabo.Users.Entities
         {
             //应用程序编号
             builder.HasKey(t => t.Id);
-            builder.Ignore(e => e.Version);
+         
             builder.Ignore(e => e.Tenant);
             builder.Ignore(e => e.Map);
             builder.Ignore(e => e.Detail);

@@ -113,7 +113,7 @@ namespace Alabo.Industry.Shop.Categories.Domain.Entities
             builder.Ignore(e => e.DisplayValue);
             builder.Ignore(e => e.PropertyValueJson);
             builder.Ignore(e => e.SelfDefineValue);
-            builder.Ignore(e => e.Version);
+         
             if (TenantContext.IsTenant)
             {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);

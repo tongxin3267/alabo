@@ -112,7 +112,7 @@ namespace Alabo.Data.Things.Goodss.Domain.Entities
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Property(e => e.Name).HasMaxLength(250);
-            builder.Ignore(e => e.Version);
+         
             builder.Ignore(e => e.GoodsExtensions);
         }
     }

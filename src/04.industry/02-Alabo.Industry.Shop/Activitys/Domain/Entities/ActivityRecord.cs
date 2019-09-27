@@ -81,7 +81,7 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Entities
                 //应用程序编号
                 builder.HasKey(e => e.Id);
                 builder.Ignore(e => e.ActivityRecordExtension);
-                builder.Ignore(e => e.Version);
+             
                 if (TenantContext.IsTenant)
                 {
                     // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);

@@ -90,7 +90,7 @@ namespace Alabo.App.Asset.Refunds.Domain.Entities
             builder.Ignore(e => e.RefundExtension);
             builder.Ignore(e => e.Serial);
             builder.Ignore(e => e.UserName);
-            builder.Ignore(e => e.Version);
+         
         }
     }
 }

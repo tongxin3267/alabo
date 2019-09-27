@@ -86,12 +86,5 @@ namespace Alabo.Domains.Entities
         [NotMapped]
         [BsonIgnore]
         public string UserName { get; set; }
-
-        /// <summary>
-        ///     版本号(乐观锁)
-        /// </summary>
-        [BsonIgnore]
-        [JsonIgnore]
-        public byte[] Version { get; set; }
     }
 }

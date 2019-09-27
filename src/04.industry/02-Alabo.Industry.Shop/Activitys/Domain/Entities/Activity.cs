@@ -136,7 +136,7 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Entities
                 //应用程序编号
                 builder.HasKey(e => e.Id);
                 builder.Ignore(e => e.ActivityExtension);
-                builder.Ignore(e => e.Version);
+             
                 //builder.Ignore(e => e.ProductIdList);
                 if (TenantContext.IsTenant)
                 {

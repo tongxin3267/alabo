@@ -31,18 +31,11 @@ namespace Alabo.Data.People.Stores.Domain.Entities.Extensions
         public StoreDetail Detail { get; set; }
 
         /// <summary>
-        ///     店铺评分相关数据
-        /// </summary>
-        [Display(Name = "店铺评分")]
-        public StoreScore Score { get; set; }
-
-        /// <summary>
         ///     详细介绍
         /// </summary>
         [Field(ControlsType = ControlsType.TextArea, GroupTabId = 1, SortOrder = 15)]
         [Display(Name = "详细介绍")]
         [HelpBlock("详细介绍")]
         public string Intro { get; set; }
-
     }
 }

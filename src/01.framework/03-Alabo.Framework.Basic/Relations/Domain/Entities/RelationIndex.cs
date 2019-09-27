@@ -50,7 +50,7 @@ namespace Alabo.Framework.Basic.Relations.Domain.Entities
             //应用程序编号
             builder.HasKey(t => t.Id);
             builder.Property(e => e.Type).HasMaxLength(255);
-            builder.Ignore(e => e.Version);
+         
             if (TenantContext.IsTenant)
             {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);

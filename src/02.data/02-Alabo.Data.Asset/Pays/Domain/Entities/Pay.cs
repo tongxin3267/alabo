@@ -161,7 +161,7 @@ namespace Alabo.App.Asset.Pays.Domain.Entities
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.User);
             builder.Ignore(e => e.AccountPayPair);
-            builder.Ignore(e => e.Version);
+         
             if (TenantContext.IsTenant)
             {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);

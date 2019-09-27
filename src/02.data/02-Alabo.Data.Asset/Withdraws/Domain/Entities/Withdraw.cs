@@ -106,7 +106,7 @@ namespace Alabo.App.Asset.Withdraws.Domain.Entities
             builder.Ignore(e => e.Serial);
             builder.Ignore(e => e.UserName);
             builder.Ignore(e => e.WithdrawExtension);
-            builder.Ignore(e => e.Version);
+         
         }
     }
 }

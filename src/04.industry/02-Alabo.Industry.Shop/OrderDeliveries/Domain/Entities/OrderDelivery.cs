@@ -86,11 +86,6 @@ namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.OrderDeliveryExtension);
             builder.Ignore(e => e.Name);
-            builder.Ignore(e => e.Version);
-            if (TenantContext.IsTenant)
-            {
-                // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
-            }
         }
     }
 }

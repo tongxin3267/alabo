@@ -84,7 +84,7 @@ namespace Alabo.Industry.Offline.Order.Domain.Entities
         protected override void MapProperties(EntityTypeBuilder<MerchantOrderProduct> builder)
         {
             builder.HasKey(e => e.Id);
-            builder.Ignore(e => e.Version);
+         
             builder.Ignore(e => e.MerchantOrderProductExtension);
         }
     }

@@ -311,7 +311,7 @@ namespace Alabo.Industry.Shop.Products.Dtos
     //        builder.Ignore(e => e.ProductActivityExtension);
     //        builder.Ignore(e => e.Detail);
     //        builder.Ignore(e => e.Store);
-    //        builder.Ignore(e => e.Version);
+    //     
     //        if (TenantContext.IsTenant)
     //        {
     //            // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);

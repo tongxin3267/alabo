@@ -213,7 +213,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Entities
         {
             //应用程序编号
             builder.HasKey(e => e.Id);
-            builder.Ignore(e => e.Version);
+         
             builder.Ignore(e => e.GradePriceList);
             if (TenantContext.IsTenant)
             {
