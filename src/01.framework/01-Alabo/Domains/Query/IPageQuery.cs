@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using Alabo.Domains.Entities.Core;
+﻿using Alabo.Domains.Entities.Core;
+using System.Linq;
 
 namespace Alabo.Domains.Query
 {

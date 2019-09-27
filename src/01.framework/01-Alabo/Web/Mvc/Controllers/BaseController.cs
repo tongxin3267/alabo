@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Alabo.Cache;
+﻿using Alabo.Cache;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
@@ -13,6 +9,10 @@ using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Validations;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Alabo.Web.Mvc.Controllers
 {
@@ -74,7 +74,7 @@ namespace Alabo.Web.Mvc.Controllers
 
                     var displayAttribute = attributes.FirstOrDefault(r => r.GetType() == typeof(DisplayAttribute));
                     var displayName = property.Name;
-                    if (displayAttribute != null) displayName = ((DisplayAttribute) displayAttribute).Name;
+                    if (displayAttribute != null) displayName = ((DisplayAttribute)displayAttribute).Name;
 
                     foreach (var attribute in attributes)
                     {
@@ -88,17 +88,17 @@ namespace Alabo.Web.Mvc.Controllers
 
                         // 验证长度大小
                         if (attribute.GetType() == typeof(StringLengthAttribute))
-                            if (stringValue.Length > ((StringLengthAttribute) attribute).MaximumLength)
+                            if (stringValue.Length > ((StringLengthAttribute)attribute).MaximumLength)
                             {
                                 errorMessage = displayName +
-                                               $"长度不能超过{((StringLengthAttribute) attribute).MaximumLength}字符";
+                                               $"长度不能超过{((StringLengthAttribute)attribute).MaximumLength}字符";
                                 return false;
                             }
 
                         // 验证远程信息
                         if (attribute.GetType() == typeof(FieldAttribute))
                         {
-                            var fieldAttribute = (FieldAttribute) attribute;
+                            var fieldAttribute = (FieldAttribute)attribute;
                             if (fieldAttribute.ValidType == ValidType.UserName ||
                                 fieldAttribute.ValidType == ValidType.ParentUserName)
                             {

@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Alabo.Datas.UnitOfWorks;
+using Alabo.Domains.Entities.Core;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Entities.Core;
 using Convert = Alabo.Helpers.Convert;
 
 namespace Alabo.Datas.Stores.Add.Mongo
@@ -27,7 +27,7 @@ namespace Alabo.Datas.Stores.Add.Mongo
 
         public async Task<List<TEntity>> FindByIdsNoTrackingAsync(params TKey[] ids)
         {
-            return await FindByIdsNoTrackingAsync((IEnumerable<TKey>) ids);
+            return await FindByIdsNoTrackingAsync((IEnumerable<TKey>)ids);
         }
 
         /// <summary>

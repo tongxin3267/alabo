@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Security.Cryptography;
-using System.Text;
-using Alabo.Domains.Repositories.Mongo.Extension;
+﻿using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Mapping;
 using Microsoft.AspNetCore.Http;
 using MongoDB.Bson;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Alabo.Extensions
 {
@@ -38,7 +38,7 @@ namespace Alabo.Extensions
 
         public static T Cast<T>(this object obj, T t)
         {
-            return (T) obj;
+            return (T)obj;
         }
 
         /// <summary>
@@ -252,7 +252,7 @@ namespace Alabo.Extensions
 
         public static T ToClass<T>(this object obj)
         {
-            if (obj != null) return (T) obj;
+            if (obj != null) return (T)obj;
 
             return JsonConvert.DeserializeObject<T>(string.Empty);
         }
@@ -274,7 +274,7 @@ namespace Alabo.Extensions
         {
             if (obj == null) return defaultValue;
 
-            if (obj is int) return (int) obj;
+            if (obj is int) return (int)obj;
 
             if (!int.TryParse(obj.ToString().Trim(), out var result)) return defaultValue;
 
@@ -288,7 +288,7 @@ namespace Alabo.Extensions
         {
             if (obj == null) return defaultValue;
 
-            if (obj is long) return (long) obj;
+            if (obj is long) return (long)obj;
 
             if (!long.TryParse(obj.ToString().Trim(), out var result)) return defaultValue;
 
@@ -302,7 +302,7 @@ namespace Alabo.Extensions
         {
             if (obj == null) return defaultValue;
 
-            if (obj is decimal) return (decimal) obj;
+            if (obj is decimal) return (decimal)obj;
 
             if (!decimal.TryParse(obj.ToString().Trim(), out var result)) return defaultValue;
 
@@ -316,7 +316,7 @@ namespace Alabo.Extensions
         {
             if (obj == null) return defaultValue;
 
-            if (obj is double) return (double) obj;
+            if (obj is double) return (double)obj;
 
             if (!double.TryParse(obj.ToString().Trim(), out var result)) return defaultValue;
 
@@ -330,7 +330,7 @@ namespace Alabo.Extensions
         {
             if (obj == null) return defaultValue;
 
-            if (obj is DateTime) return (DateTime) obj;
+            if (obj is DateTime) return (DateTime)obj;
 
             if (!DateTime.TryParse(obj.ToString().Trim(), out var result)) return defaultValue;
 
@@ -358,7 +358,6 @@ namespace Alabo.Extensions
 
             return new DateTime(1900, 1, 1);
         }
-
 
         /// <summary>
         ///     把object转换为utc dateTime，失败时返回default_value
@@ -394,7 +393,7 @@ namespace Alabo.Extensions
             if (obj == null) return null;
 
             if (obj is DateTime)
-                result = (DateTime) obj;
+                result = (DateTime)obj;
             else if (DateTime.TryParse(obj.ConvertToString(string.Empty).Trim(), out result))
                 GC.KeepAlive(result);
             else
@@ -413,7 +412,7 @@ namespace Alabo.Extensions
         {
             if (obj == null) return Guid.Empty;
 
-            if (obj is Guid) return (Guid) obj;
+            if (obj is Guid) return (Guid)obj;
 
             if (!Guid.TryParse(obj.ToString().Trim(), out var guid)) return Guid.Empty;
 
@@ -440,7 +439,7 @@ namespace Alabo.Extensions
         {
             if (obj == null) return null;
 
-            if (obj is bool) return (bool) obj;
+            if (obj is bool) return (bool)obj;
 
             var value = obj.ToString().ToLower();
             if (value == "true") return true;
@@ -463,9 +462,9 @@ namespace Alabo.Extensions
             var result = new List<int>();
             if (data == null) return result;
 
-            if (data is List<int>) return (List<int>) data;
+            if (data is List<int>) return (List<int>)data;
 
-            if (data is IEnumerable<int>) return ((IEnumerable<int>) data).ToList();
+            if (data is IEnumerable<int>) return ((IEnumerable<int>)data).ToList();
 
             var str = data.ToString().Trim();
             //按逗号分割并添加到列表
@@ -485,9 +484,9 @@ namespace Alabo.Extensions
             var result = new List<uint>();
             if (data == null) return result;
 
-            if (data is List<uint>) return (List<uint>) data;
+            if (data is List<uint>) return (List<uint>)data;
 
-            if (data is IEnumerable<uint>) return ((IEnumerable<uint>) data).ToList();
+            if (data is IEnumerable<uint>) return ((IEnumerable<uint>)data).ToList();
 
             var str = data.ToString().Trim();
             //按逗号分割并添加到列表
@@ -512,7 +511,7 @@ namespace Alabo.Extensions
             //直接转换失败时解析 解析失败时返回null
             if (uri == null && !Uri.TryCreate(data.ToString(), kind, out uri)) return null;
             //判断是否匹配
-            if (allowedScheme.IsNullOrEmpty()) allowedScheme = new[] {"http", "https"};
+            if (allowedScheme.IsNullOrEmpty()) allowedScheme = new[] { "http", "https" };
 
             if (kind == UriKind.Relative && uri.IsAbsoluteUri ||
                 kind == UriKind.Absolute && !uri.IsAbsoluteUri ||
@@ -534,7 +533,7 @@ namespace Alabo.Extensions
 
             var type = typeof(T);
             //创建目标类型的对象
-            var result = (T) Activator.CreateInstance(typeof(T));
+            var result = (T)Activator.CreateInstance(typeof(T));
             //复制所有字段
             var fieldList = type.GetFields(
                 BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
@@ -578,7 +577,7 @@ namespace Alabo.Extensions
         {
             if (obj == null) return null;
 
-            if (obj is DateTime) return (DateTime) obj;
+            if (obj is DateTime) return (DateTime)obj;
 
             if (!DateTime.TryParse(obj.ToString().Trim(), out var result)) return null;
 

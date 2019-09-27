@@ -26,7 +26,7 @@ namespace Alabo.Files
                 var ow = originalImage.Width;
                 var oh = originalImage.Height;
                 //裁剪同等比例大小,不变形
-                if (originalImage.Width / (double) originalImage.Height > towidth / (double) toheight)
+                if (originalImage.Width / (double)originalImage.Height > towidth / (double)toheight)
                 {
                     oh = originalImage.Height;
                     ow = originalImage.Height * towidth / toheight;
@@ -88,7 +88,7 @@ namespace Alabo.Files
         {
             //设置 原图片 对象的 EncoderParameters 对象
             var parameters = new EncoderParameters(1);
-            parameters.Param[0] = new EncoderParameter(Encoder.Quality, (long) 100);
+            parameters.Param[0] = new EncoderParameter(Encoder.Quality, (long)100);
             image.Save(savePath, ici, parameters);
             parameters.Dispose();
         }

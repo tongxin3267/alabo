@@ -1,9 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Globalization;
-using Alabo.Extensions;
+﻿using Alabo.Extensions;
 using Alabo.Properties;
 using Alabo.Regexs;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 
 namespace Alabo.Validations.Validators
 {

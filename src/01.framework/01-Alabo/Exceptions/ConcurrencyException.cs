@@ -1,5 +1,5 @@
-﻿using System;
-using Alabo.Properties;
+﻿using Alabo.Properties;
+using System;
 
 namespace Alabo.Exceptions
 {

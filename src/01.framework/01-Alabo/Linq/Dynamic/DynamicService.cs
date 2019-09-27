@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Attributes;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Reflections;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using ZKCloud.Open.DynamicExpression;
 using Convert = System.Convert;
 
@@ -56,7 +56,7 @@ namespace Alabo.Linq.Dynamic
             if (predicate == null)
             {
                 var result = target.Eval("service.GetList()");
-                return (IEnumerable<T>) result;
+                return (IEnumerable<T>)result;
             }
             else
             {
@@ -65,7 +65,7 @@ namespace Alabo.Linq.Dynamic
                     new Parameter("predicate", predicate)
                 };
                 var result = target.Eval("service.GetList(predicate)", parameters);
-                return (IEnumerable<T>) result;
+                return (IEnumerable<T>)result;
             }
         }
 

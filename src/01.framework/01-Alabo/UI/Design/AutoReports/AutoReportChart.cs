@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Alabo.Domains.Services.Report.Enums;
+﻿using Alabo.Domains.Services.Report.Enums;
+using System.Collections.Generic;
 
 namespace Alabo.Domains.Services.Report
 {

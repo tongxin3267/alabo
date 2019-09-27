@@ -1,5 +1,4 @@
-﻿using System;
-using Alabo.Datas.Dapper;
+﻿using Alabo.Datas.Dapper;
 using Alabo.Datas.Ef.Configs;
 using Alabo.Datas.Ef.MySql;
 using Alabo.Datas.Ef.PgSql;
@@ -10,6 +9,7 @@ using Alabo.Domains.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using System;
 
 namespace Alabo.Datas.Ef
 {

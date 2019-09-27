@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Alabo.Domains.Repositories;
+﻿using Alabo.Domains.Repositories;
 using Alabo.Users.Entities;
+using System.Collections.Generic;
 
 namespace Alabo.Framework.Core.Tenants.Domains.Repositories
 {

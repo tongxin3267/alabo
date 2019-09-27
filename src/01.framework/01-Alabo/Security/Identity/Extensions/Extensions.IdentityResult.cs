@@ -1,7 +1,7 @@
-﻿using System;
-using System.Linq;
-using Alabo.Exceptions;
+﻿using Alabo.Exceptions;
 using Microsoft.AspNetCore.Identity;
+using System;
+using System.Linq;
 
 namespace Alabo.Security.Identity.Extensions
 {

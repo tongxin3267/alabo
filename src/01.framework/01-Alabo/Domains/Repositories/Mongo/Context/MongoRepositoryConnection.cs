@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Concurrent;
-using Alabo.Runtime;
+﻿using Alabo.Runtime;
 using Alabo.Tenants;
 using MongoDB.Driver;
+using System;
+using System.Collections.Concurrent;
 
 namespace Alabo.Domains.Repositories.Mongo.Context
 {
@@ -57,7 +57,6 @@ namespace Alabo.Domains.Repositories.Mongo.Context
             ////ClientSettings.MaxConnectionPoolSize = 300; //默认100
             ////ClientSettings.WriteConcern = WriteConcern.Acknowledged;
             ////Client = new MongoClient(ClientSettings);
-
 
             ClientSettings = MongoClientSettings.FromUrl(MongoUrl);
             ClientSettings.ConnectTimeout = new TimeSpan(0, 0, 1, 30, 0); //1分30秒超时

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.Datas.Stores;
+﻿using Alabo.Datas.Stores;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services.Update;
 using Alabo.Extensions;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.Domains.Services.View
 {
@@ -84,7 +84,7 @@ namespace Alabo.Domains.Services.View
             var genericType = typeof(List<>).MakeGenericType(type);
             var result = Activator.CreateInstance(genericType);
             var addMethod = genericType.GetMethod("Add");
-            addMethod.Invoke(result, new[] {value});
+            addMethod.Invoke(result, new[] { value });
             return result;
         }
 

@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Alabo.Contexts;
+﻿using Alabo.Contexts;
 using Alabo.Events.Handlers;
 using Alabo.Helpers;
 using Alabo.Reflections;
 using Autofac;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Alabo.Dependency
 {
@@ -124,7 +124,7 @@ namespace Alabo.Dependency
             foreach (var handler in handlerTypes)
                 _builder.RegisterType(handler).As(handler.FindInterfaces(
                     (filter, criteria) => filter.IsGenericType &&
-                                          ((Type) criteria).IsAssignableFrom(filter.GetGenericTypeDefinition())
+                                          ((Type)criteria).IsAssignableFrom(filter.GetGenericTypeDefinition())
                     , handlerType
                 )).InstancePerLifetimeScope();
         }

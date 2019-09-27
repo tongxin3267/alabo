@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Alabo.Domains.Entities.Core;
+using Alabo.Validations.Aspects;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Alabo.Domains.Entities.Core;
-using Alabo.Validations.Aspects;
 
 namespace Alabo.Datas.Stores.Update
 {

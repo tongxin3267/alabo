@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Alabo.Exceptions;
+using Alabo.Web.Mvc.Attributes;
+using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using Alabo.Exceptions;
-using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.Helpers.Internal
 {
@@ -148,7 +148,7 @@ namespace Alabo.Helpers.Internal
         public RSA CreateRsaProviderFromPublicKey(string publicKeyString)
         {
             // encoded OID sequence for  PKCS #1 rsaEncryption szOID_RSA_RSA = "1.2.840.113549.1.1.1"
-            byte[] seqOid = {0x30, 0x0D, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x01, 0x01, 0x05, 0x00};
+            byte[] seqOid = { 0x30, 0x0D, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x01, 0x01, 0x05, 0x00 };
             var seq = new byte[15];
 
             var x509Key = System.Convert.FromBase64String(publicKeyString);
@@ -230,7 +230,7 @@ namespace Alabo.Helpers.Internal
                         return null;
 
                     var expbytes =
-                        (int) binr
+                        (int)binr
                             .ReadByte(); // should only need one byte for actual exponent data (for all useful values)
                     var exponent = binr.ReadBytes(expbytes);
 
@@ -269,7 +269,7 @@ namespace Alabo.Helpers.Internal
             {
                 var highbyte = binr.ReadByte();
                 var lowbyte = binr.ReadByte();
-                byte[] modint = {lowbyte, highbyte, 0x00, 0x00};
+                byte[] modint = { lowbyte, highbyte, 0x00, 0x00 };
                 count = BitConverter.ToInt32(modint, 0);
             }
             else

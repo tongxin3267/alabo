@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Linq.Dynamic;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Validations.Attributes
 {

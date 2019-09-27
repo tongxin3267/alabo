@@ -54,7 +54,7 @@ namespace Alabo.Logging
         /// </summary>
         protected override LogContent GetContent()
         {
-            return new LogContent {Class = _class};
+            return new LogContent { Class = _class };
         }
 
         /// <summary>

@@ -1,5 +1,5 @@
-﻿using System.Text;
-using Alabo.Helpers;
+﻿using Alabo.Helpers;
+using System.Text;
 
 namespace Alabo.Events.Messages
 {

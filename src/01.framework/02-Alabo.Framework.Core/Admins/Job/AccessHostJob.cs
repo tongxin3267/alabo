@@ -1,12 +1,12 @@
-﻿using System;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using Alabo.Dependency;
+﻿using Alabo.Dependency;
 using Alabo.Extensions;
 using Alabo.Runtime;
 using Alabo.Schedules.Job;
 using Quartz;
+using System;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Alabo.Framework.Core.Admins.Job
 {

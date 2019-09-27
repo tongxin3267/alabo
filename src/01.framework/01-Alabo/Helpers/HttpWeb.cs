@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Security.Claims;
-using System.Text;
-using System.Web;
-using Alabo.Extensions;
+﻿using Alabo.Extensions;
 using Alabo.Runtime;
 using Alabo.Security;
 using Alabo.Security.Enums;
@@ -21,6 +12,15 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Sockets;
+using System.Security.Claims;
+using System.Text;
+using System.Web;
 using HttpRequest = Microsoft.AspNetCore.Http.HttpRequest;
 using WebClient = Alabo.Web.Clients.WebClient;
 
@@ -213,7 +213,7 @@ namespace Alabo.Helpers
         {
             get
             {
-                var host = ((HttpRequestHeaders) HttpContext.Request.Headers).HeaderOrigin;
+                var host = ((HttpRequestHeaders)HttpContext.Request.Headers).HeaderOrigin;
                 var clientHost = string.Empty;
                 if (!host.IsNullOrEmpty()) clientHost = host[0].ToStr();
 
@@ -231,7 +231,7 @@ namespace Alabo.Helpers
             get
             {
                 var host =
-                    ((HttpRequestHeaders) ((HttpProtocol) ((DefaultHttpContext) HttpContext).Features).RequestHeaders)
+                    ((HttpRequestHeaders)((HttpProtocol)((DefaultHttpContext)HttpContext).Features).RequestHeaders)
                     .HeaderHost;
 
                 var features = HttpContext.Features;
@@ -251,11 +251,11 @@ namespace Alabo.Helpers
             get
             {
                 var host =
-                    ((HttpRequestHeaders) ((HttpProtocol) ((DefaultHttpContext) HttpContext).Features).RequestHeaders)
+                    ((HttpRequestHeaders)((HttpProtocol)((DefaultHttpContext)HttpContext).Features).RequestHeaders)
                     .HeaderHost;
 
                 var features = HttpContext.Features;
-                var scheme = ((HttpProtocol) features).Scheme;
+                var scheme = ((HttpProtocol)features).Scheme;
                 var serviceHost = scheme + "://" + host; //改成http
                 return serviceHost;
             }
@@ -417,7 +417,7 @@ namespace Alabo.Helpers
             {
                 if (string.IsNullOrWhiteSpace(_ip) == false) return _ip;
 
-                var list = new[] {"127.0.0.1", "::1"};
+                var list = new[] { "127.0.0.1", "::1" };
                 var result = (HttpContext?.Connection?.RemoteIpAddress).SafeString();
                 if (string.IsNullOrWhiteSpace(result) || list.Contains(result)) result = GetLanIp();
 
@@ -451,19 +451,19 @@ namespace Alabo.Helpers
         /// </summary>
         public static string Domain =>
             ((DefaultHttpRequest)
-                ((DefaultHttpContext) HttpContext).Request).Host.ToString();
+                ((DefaultHttpContext)HttpContext).Request).Host.ToString();
 
         /// <summary>
         ///     请求路径
         /// </summary>
         public static string Path =>
             ((DefaultHttpRequest)
-                ((DefaultHttpContext) HttpContext).Request).Path;
+                ((DefaultHttpContext)HttpContext).Request).Path;
 
         /// <summary>
         ///     结构，比如http或https
         /// </summary>
-        public static string Scheme => ((DefaultHttpRequest) Request).Scheme;
+        public static string Scheme => ((DefaultHttpRequest)Request).Scheme;
 
         /// <summary>
         ///     全域名比如：http://www.5ug.com/ http://localhost:9012

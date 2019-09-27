@@ -1,7 +1,7 @@
-﻿using System.Net;
-using Alabo.Runtime;
+﻿using Alabo.Runtime;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Net;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Framework.Core.WebApis.Filter
@@ -28,7 +28,7 @@ namespace Alabo.Framework.Core.WebApis.Filter
 
             context.Result = new JsonResult(exceptionApiResult)
             {
-                StatusCode = (int) HttpStatusCode.BadRequest
+                StatusCode = (int)HttpStatusCode.BadRequest
             };
             context.ExceptionHandled = true;
         }

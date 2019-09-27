@@ -1,8 +1,8 @@
-﻿using System.Diagnostics;
-using Alabo.Contexts;
+﻿using Alabo.Contexts;
 using Alabo.Helpers;
 using Alabo.Logging.Abstractions;
 using Alabo.Logging.Internal;
+using System.Diagnostics;
 
 namespace Alabo.Logging.Core
 {

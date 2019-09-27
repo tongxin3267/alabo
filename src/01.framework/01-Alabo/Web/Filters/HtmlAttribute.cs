@@ -1,7 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using Alabo.Extensions;
+﻿using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Logging;
 using Alabo.Logging.Extensions;
@@ -13,6 +10,9 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 using File = System.IO.File;
 
 namespace Alabo.Web.Filters
@@ -94,7 +94,7 @@ namespace Alabo.Web.Filters
             var razorViewEngine = Ioc.Resolve<IRazorViewEngine>();
             var tempDataProvider = Ioc.Resolve<ITempDataProvider>();
             var serviceProvider = Ioc.Resolve<IServiceProvider>();
-            var httpContext = new DefaultHttpContext {RequestServices = serviceProvider};
+            var httpContext = new DefaultHttpContext { RequestServices = serviceProvider };
             var actionContext = new ActionContext(httpContext, context.RouteData, new ActionDescriptor());
             using (var stringWriter = new StringWriter())
             {
@@ -103,7 +103,7 @@ namespace Alabo.Web.Filters
 
                 var viewDictionary =
                     new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())
-                        {Model = model};
+                    { Model = model };
                 var viewContext = new ViewContext(actionContext, viewResult.View, viewDictionary,
                     new TempDataDictionary(actionContext.HttpContext, tempDataProvider), stringWriter,
                     new HtmlHelperOptions());

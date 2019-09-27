@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.AutoConfigs.Entities;
+﻿using Alabo.AutoConfigs.Entities;
 using Alabo.Domains.Services;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.AutoConfigs.Services
 {

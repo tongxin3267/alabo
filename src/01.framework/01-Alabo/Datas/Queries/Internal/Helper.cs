@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq.Expressions;
-using Alabo.Extensions;
+﻿using Alabo.Extensions;
 using Alabo.Linq;
 using Alabo.Properties;
+using System;
+using System.Linq.Expressions;
 
 namespace Alabo.Datas.Queries.Internal
 {

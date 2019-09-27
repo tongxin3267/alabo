@@ -1,5 +1,5 @@
-﻿using System;
-using Alabo.Web.Mvc.ViewModel;
+﻿using Alabo.Web.Mvc.ViewModel;
+using System;
 
 namespace Alabo.Domains.Query.Dto
 {

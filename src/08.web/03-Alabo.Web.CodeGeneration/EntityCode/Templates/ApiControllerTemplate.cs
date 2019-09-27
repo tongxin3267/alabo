@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Alabo.Exceptions;
+using Alabo.Files;
+using System;
 using System.IO;
 using System.Text;
-using Alabo.Exceptions;
-using Alabo.Files;
 
 namespace Alabo.Web.CodeGeneration.EntityCode.Templates
 {

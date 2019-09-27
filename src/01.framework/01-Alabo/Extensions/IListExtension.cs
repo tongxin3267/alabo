@@ -68,7 +68,7 @@ namespace Alabo.Extensions
 
         public static IList<int> ToIntList(this string val)
         {
-            var data = val.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
+            var data = val.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             var retList = new List<int>();
             data.Foreach(o => retList.Add(o.ToInt()));
             return retList;
@@ -76,7 +76,7 @@ namespace Alabo.Extensions
 
         public static IList<long> ToLongList(this string val)
         {
-            var data = val.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
+            var data = val.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             var retList = new List<long>();
             data.Foreach(o => retList.Add(o.ConvertToLong()));
             return retList;

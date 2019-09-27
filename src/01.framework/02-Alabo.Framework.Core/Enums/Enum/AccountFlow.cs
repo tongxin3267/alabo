@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Framework.Core.Enums.Enum
 {
@@ -12,13 +12,15 @@ namespace Alabo.Framework.Core.Enums.Enum
         /// <summary>
         ///     支出
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Danger)] [Display(Name = "支出")]
+        [LabelCssClass(BadgeColorCalss.Danger)]
+        [Display(Name = "支出")]
         Spending = 1,
 
         /// <summary>
         ///     收入
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "收入")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "收入")]
         Income = 2
     }
 }

@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel;
 
 namespace Alabo.Framework.Core.Enums.Enum
 {

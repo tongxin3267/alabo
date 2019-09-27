@@ -1,6 +1,6 @@
-﻿using System;
-using Alabo.Extensions;
+﻿using Alabo.Extensions;
 using Alabo.Security.Sessions;
+using System;
 
 namespace Alabo.Domains.Auditing
 {
@@ -89,7 +89,7 @@ namespace Alabo.Domains.Auditing
         /// </summary>
         private void InitGuid()
         {
-            var result = (IModificationAudited<Guid>) _entity;
+            var result = (IModificationAudited<Guid>)_entity;
             result.LastModificationTime = DateTime.Now;
             result.LastModifierId = _session.UserId.ToGuid();
         }
@@ -99,7 +99,7 @@ namespace Alabo.Domains.Auditing
         /// </summary>
         private void InitNullableGuid()
         {
-            var result = (IModificationAudited<Guid?>) _entity;
+            var result = (IModificationAudited<Guid?>)_entity;
             result.LastModificationTime = DateTime.Now;
             result.LastModifierId = _session.UserId.ToGuidOrNull();
         }
@@ -109,7 +109,7 @@ namespace Alabo.Domains.Auditing
         /// </summary>
         private void InitInt()
         {
-            var result = (IModificationAudited<int>) _entity;
+            var result = (IModificationAudited<int>)_entity;
             result.LastModificationTime = DateTime.Now;
             result.LastModifierId = _session.UserId.ToInt();
         }
@@ -119,7 +119,7 @@ namespace Alabo.Domains.Auditing
         /// </summary>
         private void InitNullableInt()
         {
-            var result = (IModificationAudited<int?>) _entity;
+            var result = (IModificationAudited<int?>)_entity;
             result.LastModificationTime = DateTime.Now;
             result.LastModifierId = _session.UserId.ToIntOrNull();
         }
@@ -129,7 +129,7 @@ namespace Alabo.Domains.Auditing
         /// </summary>
         private void InitString()
         {
-            var result = (IModificationAudited<string>) _entity;
+            var result = (IModificationAudited<string>)_entity;
             result.LastModificationTime = DateTime.Now;
             result.LastModifierId = _session.UserId.SafeString();
         }
@@ -139,7 +139,7 @@ namespace Alabo.Domains.Auditing
         /// </summary>
         private void InitLong()
         {
-            var result = (IModificationAudited<long>) _entity;
+            var result = (IModificationAudited<long>)_entity;
             result.LastModificationTime = DateTime.Now;
             result.LastModifierId = _session.UserId.ToLong();
         }
@@ -149,7 +149,7 @@ namespace Alabo.Domains.Auditing
         /// </summary>
         private void InitNullableLong()
         {
-            var result = (IModificationAudited<long?>) _entity;
+            var result = (IModificationAudited<long?>)_entity;
             result.LastModificationTime = DateTime.Now;
             result.LastModifierId = _session.UserId.ToLongOrNull();
         }

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Alabo.Exceptions;
+using Alabo.Reflections;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Exceptions;
-using Alabo.Reflections;
 
 namespace Alabo.Schedules
 {

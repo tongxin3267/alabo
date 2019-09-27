@@ -1,11 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using Alabo.Cloud.People.UserDigitals.Domain.Entities;
+﻿using Alabo.Cloud.People.UserDigitals.Domain.Entities;
 using Alabo.Dependency;
 using Alabo.Reflections;
 using Alabo.Schedules.Job;
 using Alabo.Web.CodeGeneration.EntityCode.Templates;
 using Quartz;
+using System;
+using System.Threading.Tasks;
 
 namespace Alabo.Web.CodeGeneration.EntityCode
 {

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq.Expressions;
-using Alabo.Datas.Queries.Enums;
+﻿using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -8,6 +6,8 @@ using Alabo.Domains.Repositories.Extensions;
 using Alabo.Domains.Services.Report.Enums;
 using Alabo.Extensions;
 using Alabo.Helpers;
+using System;
+using System.Linq.Expressions;
 
 namespace Alabo.Linq
 {
@@ -58,7 +58,6 @@ namespace Alabo.Linq
         /// </summary>
         public DateTime EndTime { get; set; }
 
-
         /// <summary>
         ///     获取表名
         /// </summary>
@@ -97,7 +96,6 @@ namespace Alabo.Linq
 
             return sqlWhere;
         }
-
 
         /// <summary>
         ///     转换成Linq查询条件

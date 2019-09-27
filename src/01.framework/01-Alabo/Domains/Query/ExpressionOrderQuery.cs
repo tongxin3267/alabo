@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Alabo.Domains.Entities.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Alabo.Domains.Entities.Core;
 
 namespace Alabo.Domains.Query
 {

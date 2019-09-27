@@ -1,6 +1,6 @@
-﻿using System.Security.Claims;
-using Alabo.Security.Principals;
+﻿using Alabo.Security.Principals;
 using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace Alabo.Extensions
 {

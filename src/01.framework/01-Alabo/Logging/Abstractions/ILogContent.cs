@@ -1,5 +1,5 @@
-﻿using System.Text;
-using Alabo.Exceptions;
+﻿using Alabo.Exceptions;
+using System.Text;
 
 namespace Alabo.Logging.Abstractions
 {

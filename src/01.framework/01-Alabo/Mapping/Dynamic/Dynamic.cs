@@ -1,10 +1,10 @@
+using Alabo.Extensions;
+using Alabo.Reflections;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Reflection;
-using Alabo.Extensions;
-using Alabo.Reflections;
 
 namespace Alabo.Mapping.Dynamic
 {
@@ -76,7 +76,7 @@ namespace Alabo.Mapping.Dynamic
         {
             try
             {
-                if (type == typeof(Guid)) return Guid.Parse((string) value);
+                if (type == typeof(Guid)) return Guid.Parse((string)value);
 
                 if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
                 {
@@ -95,7 +95,7 @@ namespace Alabo.Mapping.Dynamic
 
         private static bool IsExcludedProperty(string propertyName)
         {
-            IEnumerable<string> defaultExcludedProperies = new[] {"ID"};
+            IEnumerable<string> defaultExcludedProperies = new[] { "ID" };
             return defaultExcludedProperies.Contains(propertyName.ToUpper());
         }
     }

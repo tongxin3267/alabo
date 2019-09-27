@@ -1,11 +1,11 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
+using System;
+using System.ComponentModel.DataAnnotations;
 using Convert = Alabo.Helpers.Convert;
 
 namespace Alabo.Domains.Entities.Core
@@ -112,7 +112,7 @@ namespace Alabo.Domains.Entities.Core
         /// </summary>
         public static bool operator ==(EntityBase<TEntity, TKey> left, EntityBase<TEntity, TKey> right)
         {
-            if ((object) left == null && (object) right == null) return true;
+            if ((object)left == null && (object)right == null) return true;
 
             if (!(left is TEntity) || !(right is TEntity)) return false;
 

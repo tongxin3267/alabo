@@ -13,6 +13,8 @@
 // -----------------------------------------------------------------
 // --------------------------WARNING--------------------------------
 
+using Alabo.Exceptions;
+using Alabo.Runtime;
 using System;
 using System.Collections;
 using System.Collections.Concurrent;
@@ -30,8 +32,6 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
-using Alabo.Exceptions;
-using Alabo.Runtime;
 
 namespace Alabo.Datas.PetaPoco
 {
@@ -104,7 +104,7 @@ namespace Alabo.Datas.PetaPoco
             //if (ConfigurationManager.ConnectionStrings.Count == 0)
             //    throw new InvalidOperationException("One or more connection strings must be registered to use the no paramater constructor");
 
-            var entry = new {ConnectionString = "", ProviderName = ""}; //    ConfigurationManager.ConnectionStrings[0];
+            var entry = new { ConnectionString = "", ProviderName = "" }; //    ConfigurationManager.ConnectionStrings[0];
             ConnectionString = entry.ConnectionString;
             var providerName = !string.IsNullOrEmpty(entry.ProviderName) ? entry.ProviderName : "System.Data.SqlClient";
             Initialise(DatabaseProvider.Resolve(providerName, false, ConnectionString), null);
@@ -183,7 +183,8 @@ namespace Alabo.Datas.PetaPoco
 
             var entry = new
             {
-                ConnectionString = "", ProviderName = ""
+                ConnectionString = "",
+                ProviderName = ""
             }; //  ConfigurationManager.ConnectionStrings[connectionStringName];
 
             if (entry == null)
@@ -228,12 +229,12 @@ namespace Alabo.Datas.PetaPoco
         {
             if (configuration == null) throw new ArgumentNullException("configuration");
 
-            var settings = (IBuildConfigurationSettings) configuration;
+            var settings = (IBuildConfigurationSettings)configuration;
 
             IMapper defaultMapper = null;
             settings.TryGetSetting<IMapper>(DatabaseConfigurationExtensions.DefaultMapper, v => defaultMapper = v);
 
-            var entry = new {ConnectionString = "", ProviderName = ""};
+            var entry = new { ConnectionString = "", ProviderName = "" };
 
             //ConnectionStringSettings entry = null;
             //settings.TryGetSetting<string>(DatabaseConfigurationExtensions.ConnectionString, cs => _connectionString = cs, () =>
@@ -506,7 +507,7 @@ namespace Alabo.Datas.PetaPoco
                 var t = value.GetType();
                 if (t.IsEnum) // PostgreSQL .NET driver wont cast enum to int
                 {
-                    p.Value = Convert.ChangeType(value, ((Enum) value).GetTypeCode());
+                    p.Value = Convert.ChangeType(value, ((Enum)value).GetTypeCode());
                 }
                 else if (t == typeof(Guid) && !Provider.HasNativeGuidSupport)
                 {
@@ -719,7 +720,7 @@ namespace Alabo.Datas.PetaPoco
                         var u = Nullable.GetUnderlyingType(typeof(T));
                         if (u != null && (val == null || val == DBNull.Value)) return default;
 
-                        return (T) Convert.ChangeType(val, u == null ? typeof(T) : u);
+                        return (T)Convert.ChangeType(val, u == null ? typeof(T) : u);
                     }
                 }
                 finally
@@ -1653,7 +1654,7 @@ namespace Alabo.Datas.PetaPoco
                             PocoColumn col;
                             pkpi = pd.Columns.TryGetValue(primaryKeyName, out col)
                                 ? col.PropertyInfo
-                                : new {Id = primaryKeyValue}.GetType().GetProperties()[0];
+                                : new { Id = primaryKeyValue }.GetType().GetProperties()[0];
                         }
 
                         cmd.CommandText = string.Format("UPDATE {0} SET {1} WHERE {2} = {3}{4}",
@@ -1845,23 +1846,23 @@ namespace Alabo.Datas.PetaPoco
             if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>) || !type.IsValueType)
                 return pk == null;
 
-            if (type == typeof(string)) return string.IsNullOrEmpty((string) pk);
+            if (type == typeof(string)) return string.IsNullOrEmpty((string)pk);
 
             if (!pi.PropertyType.IsValueType) return pk == null;
 
-            if (type == typeof(long)) return (long) pk == default;
+            if (type == typeof(long)) return (long)pk == default;
 
-            if (type == typeof(int)) return (int) pk == default;
+            if (type == typeof(int)) return (int)pk == default;
 
-            if (type == typeof(Guid)) return (Guid) pk == default;
+            if (type == typeof(Guid)) return (Guid)pk == default;
 
-            if (type == typeof(ulong)) return (ulong) pk == default;
+            if (type == typeof(ulong)) return (ulong)pk == default;
 
-            if (type == typeof(uint)) return (uint) pk == default;
+            if (type == typeof(uint)) return (uint)pk == default;
 
-            if (type == typeof(short)) return (short) pk == default(short);
+            if (type == typeof(short)) return (short)pk == default(short);
 
-            if (type == typeof(ushort)) return (ushort) pk == default(ushort);
+            if (type == typeof(ushort)) return (ushort)pk == default(ushort);
 
             // Create a default instance and compare
             return pk == Activator.CreateInstance(pk.GetType());
@@ -1992,7 +1993,7 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>A collection of POCO's as an IEnumerable</returns>
         public IEnumerable<TRet> Query<T1, T2, TRet>(Func<T1, T2, TRet> cb, string sql, params object[] args)
         {
-            return Query<TRet>(new[] {typeof(T1), typeof(T2)}, cb, sql, args);
+            return Query<TRet>(new[] { typeof(T1), typeof(T2) }, cb, sql, args);
         }
 
         /// <summary>
@@ -2008,7 +2009,7 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>A collection of POCO's as an IEnumerable</returns>
         public IEnumerable<TRet> Query<T1, T2, T3, TRet>(Func<T1, T2, T3, TRet> cb, string sql, params object[] args)
         {
-            return Query<TRet>(new[] {typeof(T1), typeof(T2), typeof(T3)}, cb, sql, args);
+            return Query<TRet>(new[] { typeof(T1), typeof(T2), typeof(T3) }, cb, sql, args);
         }
 
         /// <summary>
@@ -2026,7 +2027,7 @@ namespace Alabo.Datas.PetaPoco
         public IEnumerable<TRet> Query<T1, T2, T3, T4, TRet>(Func<T1, T2, T3, T4, TRet> cb, string sql,
             params object[] args)
         {
-            return Query<TRet>(new[] {typeof(T1), typeof(T2), typeof(T3), typeof(T4)}, cb, sql, args);
+            return Query<TRet>(new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4) }, cb, sql, args);
         }
 
         /// <summary>
@@ -2045,7 +2046,7 @@ namespace Alabo.Datas.PetaPoco
         public IEnumerable<TRet> Query<T1, T2, T3, T4, T5, TRet>(Func<T1, T2, T3, T4, T5, TRet> cb, string sql,
             params object[] args)
         {
-            return Query<TRet>(new[] {typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5)}, cb, sql, args);
+            return Query<TRet>(new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5) }, cb, sql, args);
         }
 
         /// <summary>
@@ -2121,7 +2122,7 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>A collection of POCO's as an IEnumerable</returns>
         public IEnumerable<TRet> Query<T1, T2, TRet>(Func<T1, T2, TRet> cb, Sql sql)
         {
-            return Query<TRet>(new[] {typeof(T1), typeof(T2)}, cb, sql.SQL, sql.Arguments);
+            return Query<TRet>(new[] { typeof(T1), typeof(T2) }, cb, sql.SQL, sql.Arguments);
         }
 
         /// <summary>
@@ -2136,7 +2137,7 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>A collection of POCO's as an IEnumerable</returns>
         public IEnumerable<TRet> Query<T1, T2, T3, TRet>(Func<T1, T2, T3, TRet> cb, Sql sql)
         {
-            return Query<TRet>(new[] {typeof(T1), typeof(T2), typeof(T3)}, cb, sql.SQL, sql.Arguments);
+            return Query<TRet>(new[] { typeof(T1), typeof(T2), typeof(T3) }, cb, sql.SQL, sql.Arguments);
         }
 
         /// <summary>
@@ -2152,7 +2153,7 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>A collection of POCO's as an IEnumerable</returns>
         public IEnumerable<TRet> Query<T1, T2, T3, T4, TRet>(Func<T1, T2, T3, T4, TRet> cb, Sql sql)
         {
-            return Query<TRet>(new[] {typeof(T1), typeof(T2), typeof(T3), typeof(T4)}, cb, sql.SQL, sql.Arguments);
+            return Query<TRet>(new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4) }, cb, sql.SQL, sql.Arguments);
         }
 
         /// <summary>
@@ -2169,7 +2170,7 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>A collection of POCO's as an IEnumerable</returns>
         public IEnumerable<TRet> Query<T1, T2, T3, T4, T5, TRet>(Func<T1, T2, T3, T4, T5, TRet> cb, Sql sql)
         {
-            return Query<TRet>(new[] {typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5)}, cb, sql.SQL,
+            return Query<TRet>(new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5) }, cb, sql.SQL,
                 sql.Arguments);
         }
 
@@ -2241,7 +2242,7 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>A collection of POCO's as an IEnumerable</returns>
         public IEnumerable<T1> Query<T1, T2>(string sql, params object[] args)
         {
-            return Query<T1>(new[] {typeof(T1), typeof(T2)}, null, sql, args);
+            return Query<T1>(new[] { typeof(T1), typeof(T2) }, null, sql, args);
         }
 
         /// <summary>
@@ -2255,7 +2256,7 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>A collection of POCO's as an IEnumerable</returns>
         public IEnumerable<T1> Query<T1, T2, T3>(string sql, params object[] args)
         {
-            return Query<T1>(new[] {typeof(T1), typeof(T2), typeof(T3)}, null, sql, args);
+            return Query<T1>(new[] { typeof(T1), typeof(T2), typeof(T3) }, null, sql, args);
         }
 
         /// <summary>
@@ -2270,7 +2271,7 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>A collection of POCO's as an IEnumerable</returns>
         public IEnumerable<T1> Query<T1, T2, T3, T4>(string sql, params object[] args)
         {
-            return Query<T1>(new[] {typeof(T1), typeof(T2), typeof(T3), typeof(T4)}, null, sql, args);
+            return Query<T1>(new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4) }, null, sql, args);
         }
 
         /// <summary>
@@ -2286,7 +2287,7 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>A collection of POCO's as an IEnumerable</returns>
         public IEnumerable<T1> Query<T1, T2, T3, T4, T5>(string sql, params object[] args)
         {
-            return Query<T1>(new[] {typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5)}, null, sql, args);
+            return Query<T1>(new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5) }, null, sql, args);
         }
 
         /// <summary>
@@ -2352,7 +2353,7 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>A collection of POCO's as an IEnumerable</returns>
         public IEnumerable<T1> Query<T1, T2>(Sql sql)
         {
-            return Query<T1>(new[] {typeof(T1), typeof(T2)}, null, sql.SQL, sql.Arguments);
+            return Query<T1>(new[] { typeof(T1), typeof(T2) }, null, sql.SQL, sql.Arguments);
         }
 
         /// <summary>
@@ -2365,7 +2366,7 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>A collection of POCO's as an IEnumerable</returns>
         public IEnumerable<T1> Query<T1, T2, T3>(Sql sql)
         {
-            return Query<T1>(new[] {typeof(T1), typeof(T2), typeof(T3)}, null, sql.SQL, sql.Arguments);
+            return Query<T1>(new[] { typeof(T1), typeof(T2), typeof(T3) }, null, sql.SQL, sql.Arguments);
         }
 
         /// <summary>
@@ -2379,7 +2380,7 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>A collection of POCO's as an IEnumerable</returns>
         public IEnumerable<T1> Query<T1, T2, T3, T4>(Sql sql)
         {
-            return Query<T1>(new[] {typeof(T1), typeof(T2), typeof(T3), typeof(T4)}, null, sql.SQL, sql.Arguments);
+            return Query<T1>(new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4) }, null, sql.SQL, sql.Arguments);
         }
 
         /// <summary>
@@ -2394,7 +2395,7 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>A collection of POCO's as an IEnumerable</returns>
         public IEnumerable<T1> Query<T1, T2, T3, T4, T5>(Sql sql)
         {
-            return Query<T1>(new[] {typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5)}, null, sql.SQL,
+            return Query<T1>(new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4), typeof(T5) }, null, sql.SQL,
                 sql.Arguments);
         }
 
@@ -2458,7 +2459,7 @@ namespace Alabo.Datas.PetaPoco
 
                         if (bNeedTerminator)
                         {
-                            var poco = (TRet) (cb as Delegate).DynamicInvoke(new object[types.Length]);
+                            var poco = (TRet)(cb as Delegate).DynamicInvoke(new object[types.Length]);
                             if (poco != null)
                                 yield return poco;
                             else
@@ -2681,7 +2682,7 @@ namespace Alabo.Datas.PetaPoco
             // Note: no argument checking because, pref, enduser unlikely and handled by RT/FW
             object setting;
             if (_settings.TryGetValue(key, out setting))
-                setSetting((T) setting);
+                setSetting((T)setting);
             else if (onFail != null) onFail();
         }
 
@@ -2718,7 +2719,7 @@ namespace Alabo.Datas.PetaPoco
 
         private static void SetSetting(this IDatabaseBuildConfiguration source, string key, object value)
         {
-            ((IBuildConfigurationSettings) source).SetSetting(key, value);
+            ((IBuildConfigurationSettings)source).SetSetting(key, value);
         }
 
         /// <summary>
@@ -4241,12 +4242,12 @@ namespace Alabo.Datas.PetaPoco
 
         public override DbConnection CreateConnection()
         {
-            return (DbConnection) Activator.CreateInstance(_connectionType);
+            return (DbConnection)Activator.CreateInstance(_connectionType);
         }
 
         public override DbCommand CreateCommand()
         {
-            var command = (DbCommand) Activator.CreateInstance(_commandType);
+            var command = (DbCommand)Activator.CreateInstance(_commandType);
 
             var oracleCommandBindByName = _commandType.GetProperty("BindByName");
             oracleCommandBindByName.SetValue(command, true, null);
@@ -4559,7 +4560,7 @@ namespace Alabo.Datas.PetaPoco
             // Read attribute
             if (colAttrs.Length > 0)
             {
-                var colattr = (ColumnAttribute) colAttrs[0];
+                var colattr = (ColumnAttribute)colAttrs[0];
                 ci.InsertTemplate = colattr.InsertTemplate;
                 ci.UpdateTemplate = colattr.UpdateTemplate;
                 ci.ColumnName = colattr.Name == null ? propertyInfo.Name : colattr.Name;
@@ -4866,7 +4867,7 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>The converted value</returns>
         public virtual object MapParameterValue(object value)
         {
-            if (value is bool) return (bool) value ? 1 : 0;
+            if (value is bool) return (bool)value ? 1 : 0;
 
             return value;
         }
@@ -4891,7 +4892,7 @@ namespace Alabo.Datas.PetaPoco
         public virtual string BuildPageQuery(long skip, long take, SQLParts parts, ref object[] args)
         {
             var sql = string.Format("{0}\nLIMIT @{1} OFFSET @{2}", parts.Sql, args.Length, args.Length + 1);
-            args = args.Concat(new object[] {take, skip}).ToArray();
+            args = args.Concat(new object[] { take, skip }).ToArray();
             return sql;
         }
 
@@ -4956,7 +4957,7 @@ namespace Alabo.Datas.PetaPoco
 
             if (ft == null) throw new ArgumentException("Could not load the " + GetType().Name + " DbProviderFactory.");
 
-            return (DbProviderFactory) ft.GetField("Instance").GetValue(null);
+            return (DbProviderFactory)ft.GetField("Instance").GetValue(null);
         }
 
         /// <summary>
@@ -5187,7 +5188,7 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>A collection of POCO's as an IEnumerable</returns>
         public IEnumerable<T1> Read<T1, T2>()
         {
-            return MultiPocoFromIDataReader<T1>(_gridIndex, new[] {typeof(T1), typeof(T2)}, null);
+            return MultiPocoFromIDataReader<T1>(_gridIndex, new[] { typeof(T1), typeof(T2) }, null);
         }
 
         /// <summary>
@@ -5199,7 +5200,7 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>A collection of POCO's as an IEnumerable</returns>
         public IEnumerable<T1> Read<T1, T2, T3>()
         {
-            return MultiPocoFromIDataReader<T1>(_gridIndex, new[] {typeof(T1), typeof(T2), typeof(T3)}, null);
+            return MultiPocoFromIDataReader<T1>(_gridIndex, new[] { typeof(T1), typeof(T2), typeof(T3) }, null);
         }
 
         /// <summary>
@@ -5213,7 +5214,7 @@ namespace Alabo.Datas.PetaPoco
         public IEnumerable<T1> Read<T1, T2, T3, T4>()
         {
             return MultiPocoFromIDataReader<T1>(_gridIndex,
-                new[] {typeof(T1), typeof(T2), typeof(T3), typeof(T4)}, null);
+                new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4) }, null);
         }
 
         /// <summary>
@@ -5226,7 +5227,7 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>A collection of POCO's as an IEnumerable</returns>
         public IEnumerable<TRet> Read<T1, T2, TRet>(Func<T1, T2, TRet> cb)
         {
-            return MultiPocoFromIDataReader<TRet>(_gridIndex, new[] {typeof(T1), typeof(T2)}, cb);
+            return MultiPocoFromIDataReader<TRet>(_gridIndex, new[] { typeof(T1), typeof(T2) }, cb);
         }
 
         /// <summary>
@@ -5240,7 +5241,7 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>A collection of POCO's as an IEnumerable</returns>
         public IEnumerable<TRet> Read<T1, T2, T3, TRet>(Func<T1, T2, T3, TRet> cb)
         {
-            return MultiPocoFromIDataReader<TRet>(_gridIndex, new[] {typeof(T1), typeof(T2), typeof(T3)}, cb);
+            return MultiPocoFromIDataReader<TRet>(_gridIndex, new[] { typeof(T1), typeof(T2), typeof(T3) }, cb);
         }
 
         /// <summary>
@@ -5256,7 +5257,7 @@ namespace Alabo.Datas.PetaPoco
         public IEnumerable<TRet> Read<T1, T2, T3, T4, TRet>(Func<T1, T2, T3, T4, TRet> cb)
         {
             return MultiPocoFromIDataReader<TRet>(_gridIndex,
-                new[] {typeof(T1), typeof(T2), typeof(T3), typeof(T4)}, cb);
+                new[] { typeof(T1), typeof(T2), typeof(T3), typeof(T4) }, cb);
         }
 
         #endregion public Read<T> methods
@@ -5369,7 +5370,7 @@ namespace Alabo.Datas.PetaPoco
 
                 if (bNeedTerminator)
                 {
-                    var poco = (TRet) (cb as Delegate).DynamicInvoke(new object[types.Length]);
+                    var poco = (TRet)(cb as Delegate).DynamicInvoke(new object[types.Length]);
                     if (poco != null)
                         yield return poco;
                     else
@@ -5897,7 +5898,7 @@ namespace Alabo.Datas.PetaPoco
             string connectionString, string sql, IDataReader r, IMapper defaultMapper)
         {
             var m = new DynamicMethod("petapoco_multipoco_factory", typeof(TRet),
-                new[] {typeof(MultiPocoFactory), typeof(IDataReader), typeof(object)},
+                new[] { typeof(MultiPocoFactory), typeof(IDataReader), typeof(object) },
                 typeof(MultiPocoFactory));
             var il = m.GetILGenerator();
 
@@ -5927,12 +5928,12 @@ namespace Alabo.Datas.PetaPoco
 
             // By now we should have the callback and the N pocos all on the stack.  Call the callback and we're done
             il.Emit(OpCodes.Callvirt,
-                Expression.GetFuncType(types.Concat(new[] {typeof(TRet)}).ToArray()).GetMethod("Invoke"));
+                Expression.GetFuncType(types.Concat(new[] { typeof(TRet) }).ToArray()).GetMethod("Invoke"));
             il.Emit(OpCodes.Ret);
 
             // Finish up
-            return (Func<IDataReader, object, TRet>) m.CreateDelegate(typeof(Func<IDataReader, object, TRet>),
-                new MultiPocoFactory {_delegates = dels});
+            return (Func<IDataReader, object, TRet>)m.CreateDelegate(typeof(Func<IDataReader, object, TRet>),
+                new MultiPocoFactory { _delegates = dels });
         }
 
         internal static void FlushCaches()
@@ -5948,7 +5949,7 @@ namespace Alabo.Datas.PetaPoco
             var key = Tuple.Create(typeof(TRet), new ArrayKey<Type>(types), connectionString, sql);
 
             return
-                (Func<IDataReader, object, TRet>) MultiPocoFactories.Get(key,
+                (Func<IDataReader, object, TRet>)MultiPocoFactories.Get(key,
                     () => CreateMultiPocoFactory<TRet>(types, connectionString, sql, r, defaultMapper));
         }
     }
@@ -6025,7 +6026,7 @@ namespace Alabo.Datas.PetaPoco
         private static readonly Cache<Type, PocoData> _pocoDatas = new Cache<Type, PocoData>();
         private static readonly List<Func<object, object>> _converters = new List<Func<object, object>>();
         private static readonly object _converterLock = new object();
-        private static readonly MethodInfo fnGetValue = typeof(IDataRecord).GetMethod("GetValue", new[] {typeof(int)});
+        private static readonly MethodInfo fnGetValue = typeof(IDataRecord).GetMethod("GetValue", new[] { typeof(int) });
         private static readonly MethodInfo fnIsDBNull = typeof(IDataRecord).GetMethod("IsDBNull");
 
         private static readonly FieldInfo fldConverters = typeof(PocoData).GetField("_converters",
@@ -6095,12 +6096,12 @@ namespace Alabo.Datas.PetaPoco
                 var pd = new PocoData();
                 pd.TableInfo = new TableInfo();
                 pd.Columns = new Dictionary<string, PocoColumn>(StringComparer.OrdinalIgnoreCase);
-                pd.Columns.Add(primaryKeyName, new ExpandoColumn {ColumnName = primaryKeyName});
+                pd.Columns.Add(primaryKeyName, new ExpandoColumn { ColumnName = primaryKeyName });
                 pd.TableInfo.PrimaryKey = primaryKeyName;
                 pd.TableInfo.AutoIncrement = true;
                 foreach (var col in (obj as IDictionary<string, object>).Keys)
                     if (col != primaryKeyName)
-                        pd.Columns.Add(col, new ExpandoColumn {ColumnName = col});
+                        pd.Columns.Add(col, new ExpandoColumn { ColumnName = col });
 
                 return pd;
             }
@@ -6133,7 +6134,7 @@ namespace Alabo.Datas.PetaPoco
                 {
                     // Create the method
                     var m = new DynamicMethod("petapoco_factory_" + PocoFactories.Count, Type,
-                        new[] {typeof(IDataReader)}, true);
+                        new[] { typeof(IDataReader) }, true);
                     var il = m.GetILGenerator();
                     var mapper = Mappers.GetMapper(Type, defaultMapper);
 
@@ -6265,7 +6266,7 @@ namespace Alabo.Datas.PetaPoco
                             if (converter == null)
                             {
                                 var valuegetter =
-                                    typeof(IDataRecord).GetMethod("Get" + srcType.Name, new[] {typeof(int)});
+                                    typeof(IDataRecord).GetMethod("Get" + srcType.Name, new[] { typeof(int) });
                                 if (valuegetter != null
                                     && valuegetter.ReturnType == srcType
                                     && (valuegetter.ReturnType == dstType ||
@@ -6278,7 +6279,7 @@ namespace Alabo.Datas.PetaPoco
                                     // Convert to Nullable
                                     if (Nullable.GetUnderlyingType(dstType) != null)
                                         il.Emit(OpCodes.Newobj,
-                                            dstType.GetConstructor(new[] {Nullable.GetUnderlyingType(dstType)}));
+                                            dstType.GetConstructor(new[] { Nullable.GetUnderlyingType(dstType) }));
 
                                     il.Emit(OpCodes.Callvirt, pc.PropertyInfo.GetSetMethod(true)); // poco
                                     Handled = true;
@@ -6360,7 +6361,7 @@ namespace Alabo.Datas.PetaPoco
             // Standard DateTime->Utc mapper
             if (pc != null && pc.ForceToUtc && srcType == typeof(DateTime) &&
                 (dstType == typeof(DateTime) || dstType == typeof(DateTime?)))
-                return delegate(object src) { return new DateTime(((DateTime) src).Ticks, DateTimeKind.Utc); };
+                return delegate (object src) { return new DateTime(((DateTime)src).Ticks, DateTimeKind.Utc); };
 
             // unwrap nullable types
             var underlyingDstType = Nullable.GetUnderlyingType(dstType);
@@ -6370,20 +6371,20 @@ namespace Alabo.Datas.PetaPoco
             if (dstType.IsEnum && IsIntegralType(srcType))
             {
                 var backingDstType = Enum.GetUnderlyingType(dstType);
-                if (underlyingDstType != null) return delegate(object src) { return Enum.ToObject(dstType, src); };
+                if (underlyingDstType != null) return delegate (object src) { return Enum.ToObject(dstType, src); };
 
                 if (srcType != backingDstType)
-                    return delegate(object src) { return Convert.ChangeType(src, backingDstType, null); };
+                    return delegate (object src) { return Convert.ChangeType(src, backingDstType, null); };
             }
             else if (!dstType.IsAssignableFrom(srcType))
             {
                 if (dstType.IsEnum && srcType == typeof(string))
-                    return delegate(object src) { return EnumMapper.EnumFromString(dstType, (string) src); };
+                    return delegate (object src) { return EnumMapper.EnumFromString(dstType, (string)src); };
 
                 if (dstType == typeof(Guid) && srcType == typeof(string))
-                    return delegate(object src) { return Guid.Parse((string) src); };
+                    return delegate (object src) { return Guid.Parse((string)src); };
 
-                return delegate(object src) { return Convert.ChangeType(src, dstType, null); };
+                return delegate (object src) { return Convert.ChangeType(src, dstType, null); };
             }
 
             return null;
@@ -7386,7 +7387,7 @@ namespace Alabo.Datas.PetaPoco
         public override string BuildPageQuery(long skip, long take, SQLParts parts, ref object[] args)
         {
             var sql = string.Format("{0}\nROWS @{1} TO @{2}", parts.Sql, args.Length, args.Length + 1);
-            args = args.Concat(new object[] {skip + 1, skip + take}).ToArray();
+            args = args.Concat(new object[] { skip + 1, skip + take }).ToArray();
             return sql;
         }
 
@@ -7594,7 +7595,7 @@ namespace Alabo.Datas.PetaPoco
 
         public override object MapParameterValue(object value)
         {
-            if (value.GetType() == typeof(uint)) return (long) (uint) value;
+            if (value.GetType() == typeof(uint)) return (long)(uint)value;
 
             return base.MapParameterValue(value);
         }
@@ -7631,7 +7632,7 @@ namespace Alabo.Datas.PetaPoco
 
             var sqlPage = string.Format("{0}\nOFFSET @{1} ROWS FETCH NEXT @{2} ROWS ONLY", parts.Sql, args.Length,
                 args.Length + 1);
-            args = args.Concat(new object[] {skip, take}).ToArray();
+            args = args.Concat(new object[] { skip, take }).ToArray();
             return sqlPage;
         }
 
@@ -7652,7 +7653,7 @@ namespace Alabo.Datas.PetaPoco
 
         public override string BuildPageQuery(long skip, long take, SQLParts parts, ref object[] args)
         {
-            var helper = (PagingHelper) PagingUtility;
+            var helper = (PagingHelper)PagingUtility;
             // when the query does not contain an "order by", it is very slow
             if (helper.SimpleRegexOrderBy.IsMatch(parts.SqlSelectRemoved))
             {
@@ -7671,7 +7672,7 @@ namespace Alabo.Datas.PetaPoco
                 string.Format(
                     "SELECT * FROM (SELECT ROW_NUMBER() OVER ({0}) peta_rn, {1}) peta_paged WHERE peta_rn > @{2} AND peta_rn <= @{3}",
                     parts.SqlOrderBy ?? "ORDER BY (SELECT NULL)", parts.SqlSelectRemoved, args.Length, args.Length + 1);
-            args = args.Concat(new object[] {skip, skip + take}).ToArray();
+            args = args.Concat(new object[] { skip, skip + take }).ToArray();
             return sqlPage;
         }
 

@@ -1,9 +1,9 @@
-﻿using System;
-using Alabo.Helpers;
+﻿using Alabo.Helpers;
 using Alabo.Logging.Abstractions;
 using Alabo.Logging.Extensions;
 using Alabo.Security.Sessions;
 using Microsoft.Extensions.Logging;
+using System;
 using Thread = System.Threading.Thread;
 
 namespace Alabo.Logging.Core
@@ -61,7 +61,7 @@ namespace Alabo.Logging.Core
             if (action == null) throw new ArgumentNullException(nameof(action));
 
             ILogContent content = LogContent;
-            action((T) content);
+            action((T)content);
             return this;
         }
 

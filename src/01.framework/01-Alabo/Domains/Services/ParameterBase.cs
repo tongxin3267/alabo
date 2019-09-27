@@ -1,6 +1,6 @@
-﻿using System.Linq;
-using Alabo.Exceptions;
+﻿using Alabo.Exceptions;
 using Alabo.Validations;
+using System.Linq;
 
 namespace Alabo.Domains.Services
 {

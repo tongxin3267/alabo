@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using Alabo.Dependency;
+﻿using Alabo.Dependency;
 using Alabo.Schedules.Job;
 using Quartz;
+using System;
+using System.Threading.Tasks;
 
 namespace Alabo.Tenants
 {

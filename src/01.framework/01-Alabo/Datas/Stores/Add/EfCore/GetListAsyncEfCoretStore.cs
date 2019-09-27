@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Alabo.Datas.UnitOfWorks;
+using Alabo.Domains.Entities.Core;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Entities.Core;
-using Microsoft.EntityFrameworkCore;
 
 namespace Alabo.Datas.Stores.Add.EfCore
 {

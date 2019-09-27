@@ -1,7 +1,7 @@
-﻿using System;
-using Alabo.Contexts;
+﻿using Alabo.Contexts;
 using Alabo.Helpers;
 using Alabo.Logging.Internal;
+using System;
 
 namespace Alabo.Logging.Exceptionless
 {

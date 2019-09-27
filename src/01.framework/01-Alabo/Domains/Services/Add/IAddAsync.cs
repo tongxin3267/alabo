@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
-using Alabo.Domains.Dtos;
+﻿using Alabo.Domains.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.UnitOfWork;
 using Alabo.Validations.Aspects;
+using System.Threading.Tasks;
 
 namespace Alabo.Domains.Services.Add
 {

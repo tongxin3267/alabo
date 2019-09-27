@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.Datas.Stores;
+﻿using Alabo.Datas.Stores;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Services.Save;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.Domains.Services.Sql
 {

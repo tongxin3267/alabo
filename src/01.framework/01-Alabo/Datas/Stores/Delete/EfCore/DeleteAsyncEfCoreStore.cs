@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Alabo.Datas.Stores.Count.EfCore;
+﻿using Alabo.Datas.Stores.Count.EfCore;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.Stores.Delete.EfCore
 {

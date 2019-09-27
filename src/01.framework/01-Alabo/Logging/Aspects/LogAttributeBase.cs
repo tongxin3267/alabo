@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using Alabo.Aspects.Base;
+﻿using Alabo.Aspects.Base;
 using Alabo.Extensions;
 using Alabo.Logging.Extensions;
 using AspectCore.DynamicProxy;
 using AspectCore.DynamicProxy.Parameters;
+using System.Threading.Tasks;
 
 namespace Alabo.Logging.Aspects
 {

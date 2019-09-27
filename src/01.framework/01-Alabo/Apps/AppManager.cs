@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Alabo.Extensions;
+using Alabo.Runtime;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
-using Alabo.Extensions;
-using Alabo.Runtime;
 
 namespace Alabo.Apps
 {
@@ -62,7 +62,7 @@ namespace Alabo.Apps
                 if (appType == null) // no app cs file, not a app binary
                     continue;
 
-                var app = (IApp) Activator.CreateInstance(appType);
+                var app = (IApp)Activator.CreateInstance(appType);
                 app.Initialize(assembly, appPath, AppType.Binary);
                 appList.Add(app);
             }
@@ -87,7 +87,7 @@ namespace Alabo.Apps
                 .ToArray();
             foreach (var type in appTypes)
             {
-                var app = (IApp) Activator.CreateInstance(type);
+                var app = (IApp)Activator.CreateInstance(type);
                 //promise: app namespace eg:Alabo.Web.Apps.Demo01, app name is "Demo01"
                 var appName = type.Namespace.Split('.').Last();
                 var appPath = Path.Combine(appRootPath, appName);

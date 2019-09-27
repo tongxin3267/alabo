@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Alabo.Extensions;
+using System.Collections.Generic;
 using System.Linq;
-using Alabo.Extensions;
 
 namespace Alabo.Domains.Trees
 {

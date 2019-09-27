@@ -232,9 +232,9 @@ namespace Alabo.Helpers
             if (data == null) return new List<int>();
             //转换
             var result = (from s in data.Split(',')
-                let v = TryToInt(s)
-                where v.HasValue // v != null
-                select v.Value).ToList();
+                          let v = TryToInt(s)
+                          where v.HasValue // v != null
+                          select v.Value).ToList();
             return result;
         }
 
@@ -285,9 +285,9 @@ namespace Alabo.Helpers
             if (data == null) return new List<uint>();
             //转换
             var result = (from s in data.Split(',')
-                let v = TryToUInt(s)
-                where v.HasValue // v != null
-                select v.Value).ToList();
+                          let v = TryToUInt(s)
+                          where v.HasValue // v != null
+                          select v.Value).ToList();
             return result;
         }
 
@@ -367,7 +367,7 @@ namespace Alabo.Helpers
             sTemp = source;
             iLength = delimiter.Length;
             bEnd = sTemp.EndsWith(delimiter);
-            for (;;)
+            for (; ; )
             {
                 iPos = sTemp.IndexOf(delimiter);
                 if (iPos < 0) break;

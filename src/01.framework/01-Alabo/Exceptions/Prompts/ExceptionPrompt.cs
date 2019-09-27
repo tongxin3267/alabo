@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.Extensions;
+﻿using Alabo.Extensions;
 using Alabo.Properties;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.Exceptions.Prompts
 {

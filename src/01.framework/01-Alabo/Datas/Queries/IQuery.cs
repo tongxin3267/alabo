@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq.Expressions;
-using Alabo.Datas.Queries.Enums;
+﻿using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.Pager;
+using System;
+using System.Linq.Expressions;
 
 namespace Alabo.Datas.Queries
 {

@@ -1,11 +1,11 @@
-﻿using System;
-using System.IO;
-using System.IO.Compression;
-using System.Text;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Runtime;
+using System;
+using System.IO;
+using System.IO.Compression;
+using System.Text;
 
 namespace Alabo.Files
 {

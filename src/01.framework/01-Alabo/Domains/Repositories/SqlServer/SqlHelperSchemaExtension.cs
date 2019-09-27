@@ -105,7 +105,7 @@ namespace Alabo.Domains.Repositories.SqlServer
             #endregion SQL
 
             var param = new SqlParameter("@tableName", SqlDbType.NVarChar, 100)
-                {Value = string.Format("{0}.{1}.{2}", database, schema, tableName)};
+            { Value = string.Format("{0}.{1}.{2}", database, schema, tableName) };
             var dt = ExecuteDataTable(connectionString, sql, param);
             return dt.Rows.Cast<DataRow>().Select(row => new DbColumn
             {
@@ -163,7 +163,7 @@ namespace Alabo.Domains.Repositories.SqlServer
             #endregion SQL
 
             var param = new SqlParameter("@tableName", SqlDbType.NVarChar, 100)
-                {Value = string.Format("{0}.{1}.{2}", database, schema, tableName)};
+            { Value = string.Format("{0}.{1}.{2}", database, schema, tableName) };
             var dt = ExecuteDataTable(connectionString, sql, param);
             return dt.Rows.Cast<DataRow>().Select(row => new DbIndex()).ToList();
         }

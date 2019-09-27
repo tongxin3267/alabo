@@ -421,7 +421,7 @@ namespace Alabo.Domains.Repositories.SqlServer
             var result = ExecuteScalar(connectionString, commandText, parms);
             if (result != null)
             {
-                return (T) Convert.ChangeType(result, typeof(T));
+                return (T)Convert.ChangeType(result, typeof(T));
                 ;
             }
 

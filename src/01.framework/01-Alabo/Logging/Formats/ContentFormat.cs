@@ -1,8 +1,8 @@
-﻿using System;
-using System.Text;
-using Alabo.Logging.Abstractions;
+﻿using Alabo.Logging.Abstractions;
 using Alabo.Logging.Contents;
 using Alabo.Properties;
+using System;
+using System.Text;
 
 namespace Alabo.Logging.Formats
 {

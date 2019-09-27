@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Alabo.Domains.Entities;
+using Alabo.Domains.Query;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Query;
 
 namespace Alabo.Domains.Services.Page
 {
@@ -21,7 +21,6 @@ namespace Alabo.Domains.Services.Page
         /// <param name="dictionary">字典类型</param>
         PagedList<TEntity> GetPagedList(object paramater, Dictionary<string, string> dictionary);
 
-
         /// <summary>
         ///     通过object获取分页数据，转换成前台Api接口绑定对象
         ///     与前台x-table先对应
@@ -29,7 +28,6 @@ namespace Alabo.Domains.Services.Page
         /// <param name="paramater"></param>
         /// <returns></returns>
         PageResult<TEntity> GetApiPagedList(object paramater);
-
 
         /// <summary>
         ///     获取分页，通过AutoMapping转换成对象

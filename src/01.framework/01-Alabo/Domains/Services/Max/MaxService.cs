@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq.Expressions;
-using Alabo.Datas.Stores;
+﻿using Alabo.Datas.Stores;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
+using System;
+using System.Linq.Expressions;
 
 namespace Alabo.Domains.Services.Max
 {
@@ -23,7 +23,6 @@ namespace Alabo.Domains.Services.Max
         {
             return Store.Max();
         }
-
 
         public TEntity Max(Expression<Func<TEntity, bool>> predicate)
         {

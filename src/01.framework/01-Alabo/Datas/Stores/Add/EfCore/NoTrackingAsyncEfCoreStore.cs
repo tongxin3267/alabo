@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
 using Alabo.Helpers;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.Stores.Add.EfCore
 {
@@ -37,7 +37,7 @@ namespace Alabo.Datas.Stores.Add.EfCore
         /// <param name="ids">标识列表</param>
         public async Task<List<TEntity>> FindByIdsNoTrackingAsync(params TKey[] ids)
         {
-            return await FindByIdsNoTrackingAsync((IEnumerable<TKey>) ids);
+            return await FindByIdsNoTrackingAsync((IEnumerable<TKey>)ids);
         }
 
         /// <summary>

@@ -49,7 +49,7 @@ namespace Alabo.Files
         /// </summary>
         public int GetSize()
         {
-            return (int) Size;
+            return (int)Size;
         }
 
         /// <summary>

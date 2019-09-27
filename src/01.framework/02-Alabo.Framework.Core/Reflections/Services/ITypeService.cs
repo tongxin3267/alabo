@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.Framework.Core.Reflections.Services
 {

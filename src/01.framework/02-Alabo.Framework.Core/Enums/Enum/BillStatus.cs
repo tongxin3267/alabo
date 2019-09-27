@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Framework.Core.Enums.Enum
 {
@@ -60,43 +60,50 @@ namespace Alabo.Framework.Core.Enums.Enum
         ///     会员创建记录，或者会员前台进行申请
         ///     等待管理员初审
         /// </summary>
-        [Display(Name = "进行中")] [LabelCssClass("m-badge--primary")]
+        [Display(Name = "进行中")]
+        [LabelCssClass("m-badge--primary")]
         InProcess = 0,
 
         /// <summary>
         ///     等待审核
         /// </summary>
-        [Display(Name = "等待审核")] [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "等待审核")]
+        [LabelCssClass(BadgeColorCalss.Success)]
         WaitCheck = 1,
 
         /// <summary>
         ///     等待付款
         /// </summary>
-        [Display(Name = "等待付款")] [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "等待付款")]
+        [LabelCssClass(BadgeColorCalss.Success)]
         WaitPay = 2,
 
         /// <summary>
         ///     成功
         /// </summary>
-        [Display(Name = "成功")] [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "成功")]
+        [LabelCssClass(BadgeColorCalss.Success)]
         Success = 3,
 
         /// <summary>
         ///     失败
         /// </summary>
-        [Display(Name = "失败")] [LabelCssClass(BadgeColorCalss.Danger)]
+        [Display(Name = "失败")]
+        [LabelCssClass(BadgeColorCalss.Danger)]
         Failured = 4,
 
         /// <summary>
         ///     维权
         /// </summary>
-        [Display(Name = "维权")] [LabelCssClass(BadgeColorCalss.Danger)]
+        [Display(Name = "维权")]
+        [LabelCssClass(BadgeColorCalss.Danger)]
         Activist = 5,
 
         /// <summary>
         ///     付款成功
         /// </summary>
-        [Display(Name = "付款成功")] [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "付款成功")]
+        [LabelCssClass(BadgeColorCalss.Success)]
         Successful = 6
     }
 }

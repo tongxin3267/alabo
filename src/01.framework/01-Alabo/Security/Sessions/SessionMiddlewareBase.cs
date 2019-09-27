@@ -1,8 +1,8 @@
-﻿using System.Security.Claims;
-using System.Threading.Tasks;
-using Alabo.Extensions;
+﻿using Alabo.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Alabo.Security.Sessions
 {

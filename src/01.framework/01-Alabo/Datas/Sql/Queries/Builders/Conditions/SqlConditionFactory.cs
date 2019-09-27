@@ -1,7 +1,7 @@
-﻿using System;
-using Alabo.Datas.Queries.Enums;
+﻿using Alabo.Datas.Queries.Enums;
 using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 using Alabo.Extensions;
+using System;
 
 namespace Alabo.Datas.Sql.Queries.Builders.Conditions
 {

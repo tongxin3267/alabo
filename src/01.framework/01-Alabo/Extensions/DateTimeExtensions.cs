@@ -306,7 +306,7 @@ namespace Alabo.Extensions
         /// </summary>
         public static DateTime GetWeekBegin(this DateTime time)
         {
-            return time.Date.AddDays(-(int) time.DayOfWeek);
+            return time.Date.AddDays(-(int)time.DayOfWeek);
         }
 
         /// <summary>

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Repositories.Mongo.Context;
@@ -10,6 +6,10 @@ using Alabo.Extensions;
 using Alabo.Framework.Core.Reflections.Services;
 using Alabo.Helpers;
 using Alabo.Users.Entities;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace Alabo.Framework.Core.Admins.Repositories
 {

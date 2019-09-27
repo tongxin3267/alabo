@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Alabo.Domains.Repositories.Pager;
+﻿using Alabo.Domains.Repositories.Pager;
 using Alabo.Extensions;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.Ef
 {

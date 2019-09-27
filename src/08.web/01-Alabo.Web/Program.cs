@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Alabo.App.Share.TaskExecutes.Job;
+﻿using Alabo.App.Share.TaskExecutes.Job;
 using Alabo.Framework.Basic.Notifications.Job;
 using Alabo.Framework.Core.Admins.Job;
 using Alabo.Industry.Shop.Orders.Job;
@@ -8,6 +7,7 @@ using Alabo.Schedules.Job;
 using Alabo.Tenants.Domain.Entities;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using System.Threading.Tasks;
 
 namespace Alabo.Web
 {

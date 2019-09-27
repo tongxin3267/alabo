@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using Alabo.Datas.Sql;
+﻿using Alabo.Datas.Sql;
 using Alabo.Datas.Sql.Queries;
 using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 using Alabo.Domains.Repositories.Pager;
@@ -10,6 +6,10 @@ using Alabo.Helpers;
 using Alabo.Logging;
 using Alabo.Logging.Extensions;
 using Dapper;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.Dapper
 {

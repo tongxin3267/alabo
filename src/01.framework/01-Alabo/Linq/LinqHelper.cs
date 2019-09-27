@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using Alabo.Datas.Queries.Enums;
+﻿using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using ZKCloud.Open.DynamicExpression;
 
 namespace Alabo.Linq

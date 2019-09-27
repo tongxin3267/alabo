@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Alabo.Datas.Queries.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using Alabo.Datas.Queries.Enums;
 
 namespace Alabo.Datas.Sql.Queries.Builders.Abstractions
 {

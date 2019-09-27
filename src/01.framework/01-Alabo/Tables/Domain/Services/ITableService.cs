@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Alabo.Domains.Base.Entities;
+﻿using Alabo.Domains.Base.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using MongoDB.Bson;
+using System.Collections.Generic;
 
 namespace Alabo.Domains.Base.Services
 {
@@ -16,11 +16,9 @@ namespace Alabo.Domains.Base.Services
         /// </summary>
         void Init();
 
-
         List<KeyValue> MongodbCatalogEntityKeyValues();
 
         List<KeyValue> SqlServcieCatalogEntityKeyValues();
-
 
         List<KeyValue> CatalogEntityKeyValues();
     }

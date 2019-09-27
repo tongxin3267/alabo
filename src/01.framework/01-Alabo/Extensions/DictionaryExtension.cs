@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
-using Microsoft.AspNetCore.Http;
 
 namespace Alabo.Extensions
 {
@@ -314,7 +314,7 @@ namespace Alabo.Extensions
                 var value = httpContext.Request.Query[item];
                 if (value == "-1" || item == "_currentMode") continue;
 
-                var list = value.ToString().SplitList(new[] {','});
+                var list = value.ToString().SplitList(new[] { ',' });
                 var defaultValue = list.FirstOrDefault();
                 if (!defaultValue.IsNullOrEmpty()) dictionary.Add(item, defaultValue);
             }
@@ -335,7 +335,7 @@ namespace Alabo.Extensions
                 var value = httpContext.Request.Query[item];
                 if (value == "-1" || item == "_currentMode") continue;
 
-                var list = value.ToString().SplitList(new[] {','});
+                var list = value.ToString().SplitList(new[] { ',' });
                 var defaultValue = list.FirstOrDefault();
                 if (!defaultValue.IsNullOrEmpty()) nameValueCollection.Add(item, defaultValue);
             }

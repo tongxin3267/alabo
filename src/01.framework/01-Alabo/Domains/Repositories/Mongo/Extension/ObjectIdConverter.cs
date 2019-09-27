@@ -1,7 +1,7 @@
-﻿using System;
-using Alabo.Extensions;
+﻿using Alabo.Extensions;
 using MongoDB.Bson;
 using Newtonsoft.Json;
+using System;
 
 namespace Alabo.Domains.Repositories.Mongo.Extension
 {

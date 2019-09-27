@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Alabo.Domains.Dtos;
+﻿using Alabo.Domains.Dtos;
 using Alabo.Domains.Entities;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Alabo.Domains.Services.ById
 {

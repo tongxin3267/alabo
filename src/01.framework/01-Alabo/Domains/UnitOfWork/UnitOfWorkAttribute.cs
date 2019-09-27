@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using Alabo.Aspects.Base;
+﻿using Alabo.Aspects.Base;
 using Alabo.Datas.UnitOfWorks;
 using AspectCore.DynamicProxy;
 using AspectCore.Extensions.AspectScope;
 using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
 
 namespace Alabo.Domains.UnitOfWork
 {

@@ -27,7 +27,7 @@ namespace Alabo.Extensions
             var orderByExpression = Expression.Lambda(propertyAccessExpression, param);
 
             var methodName = ascending ? "OrderBy" : "OrderByDescending";
-            var resultExp = Expression.Call(typeof(Queryable), methodName, new[] {type, property.PropertyType},
+            var resultExp = Expression.Call(typeof(Queryable), methodName, new[] { type, property.PropertyType },
                 source.Expression, Expression.Quote(orderByExpression)); //第三个类型为泛型的类型
             return source.Provider.CreateQuery<T>(resultExp);
         }

@@ -1,8 +1,8 @@
-﻿using System;
-using Alabo.Domains.Repositories.Mongo.Extension;
+﻿using Alabo.Domains.Repositories.Mongo.Extension;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
+using System;
 
 namespace Alabo.Domains.Entities.Core
 {

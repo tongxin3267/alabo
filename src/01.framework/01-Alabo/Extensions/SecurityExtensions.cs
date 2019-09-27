@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Alabo.Helpers.Internal;
+using System;
 using System.Security.Cryptography;
 using System.Text;
-using Alabo.Helpers.Internal;
 
 namespace Alabo.Extensions
 {

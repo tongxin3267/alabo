@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.Cache;
+﻿using Alabo.Cache;
 using Alabo.Domains.Entities;
 using Alabo.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Convert = System.Convert;
 
 namespace Alabo.Extensions
@@ -71,7 +71,7 @@ namespace Alabo.Extensions
                     foreach (var item in Enum.GetValues(enumType))
                     {
                         var value = item.GetDisplayName();
-                        var icon = ((Enum) item).GetIcon();
+                        var icon = ((Enum)item).GetIcon();
                         var key = Convert.ToInt64(item);
                         var keyValueItem = new KeyValue(key, value, enumType.Name)
                         {

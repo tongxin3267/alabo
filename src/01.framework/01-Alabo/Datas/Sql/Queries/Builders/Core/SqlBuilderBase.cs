@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text;
-using Alabo.Datas.Matedatas;
+﻿using Alabo.Datas.Matedatas;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 using Alabo.Datas.Sql.Queries.Builders.Clauses;
 using Alabo.Domains.Repositories.Pager;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Text;
 
 namespace Alabo.Datas.Sql.Queries.Builders.Core
 {

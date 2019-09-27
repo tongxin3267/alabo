@@ -37,7 +37,7 @@ namespace Alabo.Helpers
             {
                 var gb2312 = Encoding.GetEncoding("GB2312");
                 var unicode = Encoding.Unicode;
-                var unicodeBytes = unicode.GetBytes(new[] {chinese});
+                var unicodeBytes = unicode.GetBytes(new[] { chinese });
                 var asciiBytes = Encoding.Convert(unicode, gb2312, unicodeBytes);
                 if (asciiBytes.Length < 2) return chinese; //待转换的字符在ascii码表示范围内
 

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Microsoft.Extensions.PlatformAbstractions;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using Microsoft.Extensions.PlatformAbstractions;
 
 namespace Alabo.Reflections
 {

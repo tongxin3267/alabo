@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 
 namespace Alabo.Extensions
 {
@@ -53,7 +53,7 @@ namespace Alabo.Extensions
 
             if (req == null) throw new ArgumentNullException(nameof(req));
 
-            var handler = new HttpClientHandler {UseCookies = false};
+            var handler = new HttpClientHandler { UseCookies = false };
             var client = new HttpClient(handler);
 
             var request = new HttpRequestMessage(method == "GET" ? HttpMethod.Get : HttpMethod.Post, url);
@@ -62,7 +62,7 @@ namespace Alabo.Extensions
 
             foreach (var item in req.Cookies) request.Headers.Add("Cookie", item.Value);
 
-            var formContent = new FormUrlEncodedContent(new[] {context});
+            var formContent = new FormUrlEncodedContent(new[] { context });
 
             response = await client.PostAsync(url, formContent);
 

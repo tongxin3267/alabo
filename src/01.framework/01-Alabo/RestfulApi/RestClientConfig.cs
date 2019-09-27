@@ -1,13 +1,13 @@
-﻿using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Alabo.Extensions;
+﻿using Alabo.Extensions;
 using Alabo.Runtime;
 using Alabo.Security;
 using Alabo.Security.Sessions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Alabo.RestfulApi
 {

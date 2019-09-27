@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Alabo.Linq;
+﻿using Alabo.Linq;
+using System.Collections.Generic;
 
 namespace Alabo.Domains.Services.Report.Dtos
 {
@@ -9,7 +9,6 @@ namespace Alabo.Domains.Services.Report.Dtos
         ///     实体类型，通过Type可以获取表格
         /// </summary>
         public string EntityType { get; set; }
-
 
         /// <summary>
         ///     字段查询提交
@@ -33,7 +32,6 @@ namespace Alabo.Domains.Services.Report.Dtos
         ///     5.支付根据状态统计：type:Pay,SpecialField:Status
         /// </summary>
         public string Field { get; set; }
-
 
         /// <summary>
         ///     分页信息，构建table

@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Alabo.Cache;
+using Alabo.Domains.Services;
+using Alabo.Helpers;
+using Alabo.Runtime;
+using AspectCore.Extensions.Reflection;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Alabo.Cache;
-using Alabo.Domains.Services;
-using Alabo.Helpers;
-using Alabo.Runtime;
-using AspectCore.Extensions.Reflection;
 using Convert = Alabo.Helpers.Convert;
 
 namespace Alabo.Reflections
@@ -293,7 +293,7 @@ namespace Alabo.Reflections
                     return member.ToString() == "System.Boolean";
 
                 case MemberTypes.Property:
-                    return IsBool((PropertyInfo) member);
+                    return IsBool((PropertyInfo)member);
             }
 
             return false;
@@ -318,10 +318,10 @@ namespace Alabo.Reflections
             switch (member.MemberType)
             {
                 case MemberTypes.TypeInfo:
-                    return ((TypeInfo) member).IsEnum;
+                    return ((TypeInfo)member).IsEnum;
 
                 case MemberTypes.Property:
-                    return IsEnum((PropertyInfo) member);
+                    return IsEnum((PropertyInfo)member);
             }
 
             return false;
@@ -354,7 +354,7 @@ namespace Alabo.Reflections
                     return member.ToString() == "System.DateTime";
 
                 case MemberTypes.Property:
-                    return IsDate((PropertyInfo) member);
+                    return IsDate((PropertyInfo)member);
             }
 
             return false;
@@ -387,7 +387,7 @@ namespace Alabo.Reflections
                            member.ToString() == "System.Int64";
 
                 case MemberTypes.Property:
-                    return IsInt((PropertyInfo) member);
+                    return IsInt((PropertyInfo)member);
             }
 
             return false;
@@ -430,7 +430,7 @@ namespace Alabo.Reflections
                            member.ToString() == "System.Single";
 
                 case MemberTypes.Property:
-                    return IsNumber((PropertyInfo) member);
+                    return IsNumber((PropertyInfo)member);
             }
 
             return false;

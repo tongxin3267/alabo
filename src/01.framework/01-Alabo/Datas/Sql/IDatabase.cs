@@ -1,5 +1,5 @@
-﻿using System.Data;
-using Alabo.Aspects;
+﻿using Alabo.Aspects;
+using System.Data;
 
 namespace Alabo.Datas.Sql
 {

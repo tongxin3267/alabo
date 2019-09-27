@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using Alabo.Dependency;
+﻿using Alabo.Dependency;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.UnitOfWorks
 {

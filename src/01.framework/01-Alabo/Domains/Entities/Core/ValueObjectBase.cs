@@ -33,7 +33,7 @@ namespace Alabo.Domains.Entities.Core
         /// </summary>
         public static bool operator ==(ValueObjectBase<TValueObject> left, ValueObjectBase<TValueObject> right)
         {
-            if ((object) left == null && (object) right == null) return true;
+            if ((object)left == null && (object)right == null) return true;
 
             if (!(left is TValueObject) || !(right is TValueObject)) return false;
 

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Alabo.Helpers.Internal;
+using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using Alabo.Helpers.Internal;
 
 namespace Alabo.Helpers
 {
@@ -140,7 +140,7 @@ namespace Alabo.Helpers
         private static TripleDESCryptoServiceProvider CreateDesProvider(string key)
         {
             return new TripleDESCryptoServiceProvider
-                {Key = Encoding.ASCII.GetBytes(key), Mode = CipherMode.ECB, Padding = PaddingMode.PKCS7};
+            { Key = Encoding.ASCII.GetBytes(key), Mode = CipherMode.ECB, Padding = PaddingMode.PKCS7 };
         }
 
         /// <summary>

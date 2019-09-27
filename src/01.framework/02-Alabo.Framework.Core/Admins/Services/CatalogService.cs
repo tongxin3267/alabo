@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Services;
 using Alabo.Framework.Core.Admins.Repositories;
+using System.Collections.Generic;
 
 namespace Alabo.Framework.Core.Admins.Services
 {

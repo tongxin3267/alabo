@@ -1,8 +1,8 @@
-﻿using System.IO;
-using Alabo.Domains.Repositories.Mongo.Context;
+﻿using Alabo.Domains.Repositories.Mongo.Context;
 using Alabo.Extensions;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using System.IO;
 
 namespace Alabo.Runtime.Config
 {

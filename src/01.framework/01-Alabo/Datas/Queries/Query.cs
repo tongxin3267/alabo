@@ -1,11 +1,11 @@
-﻿using System;
-using System.Linq.Expressions;
-using Alabo.Datas.Queries.Criterias;
+﻿using Alabo.Datas.Queries.Criterias;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Datas.Queries.Internal;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.Pager;
 using Alabo.Linq;
+using System;
+using System.Linq.Expressions;
 
 namespace Alabo.Datas.Queries
 {

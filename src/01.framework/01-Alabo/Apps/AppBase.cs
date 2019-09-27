@@ -1,7 +1,7 @@
-﻿using System.IO;
+﻿using Newtonsoft.Json;
+using System.IO;
 using System.Linq;
 using System.Reflection;
-using Newtonsoft.Json;
 
 namespace Alabo.Apps
 {
@@ -71,7 +71,7 @@ namespace Alabo.Apps
                     using (var sr = new StreamReader(fs))
                     {
                         var appConfig = JsonConvert.DeserializeAnonymousType(sr.ReadToEnd(),
-                            new {Name = string.Empty, Description = string.Empty});
+                            new { Name = string.Empty, Description = string.Empty });
                         Name = appConfig.Name;
                         Description = appConfig.Description;
                     }

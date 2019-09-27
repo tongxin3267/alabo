@@ -1,6 +1,6 @@
-﻿using System;
-using Alabo.Exceptions;
+﻿using Alabo.Exceptions;
 using Alabo.Extensions;
+using System;
 
 namespace Alabo.Logging.Extensions
 {

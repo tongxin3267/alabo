@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.Domains.Entities.Core;
+﻿using Alabo.Domains.Entities.Core;
 using Alabo.Domains.EntityHistory;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.Extensions
 {

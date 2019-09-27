@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text.RegularExpressions;
-using Alabo.Datas.Queries.Enums;
+﻿using Alabo.Datas.Queries.Enums;
 using Alabo.Datas.Stores;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
@@ -14,6 +9,11 @@ using Alabo.Helpers;
 using Alabo.Linq.Dynamic;
 using Alabo.Mapping;
 using Alabo.Web.ViewFeatures;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 using ZKCloud.Open.DynamicExpression;
 using Lambda = Alabo.Linq.Lambda;
 
@@ -111,8 +111,8 @@ namespace Alabo.Domains.Services.Page
                 var pagedInput = AutoMapping.SetValue<PagedInputDto>(dictionary);
                 if (pagedInput != null)
                 {
-                    query.PageIndex = (int) pagedInput.PageIndex;
-                    query.PageSize = (int) pagedInput.PageSize;
+                    query.PageIndex = (int)pagedInput.PageIndex;
+                    query.PageSize = (int)pagedInput.PageSize;
                 }
             }
 
@@ -315,11 +315,11 @@ namespace Alabo.Domains.Services.Page
                 var userResult = new List<TEntity>();
                 foreach (var item in pageList)
                 {
-                    var dynamicItem = (dynamic) item;
+                    var dynamicItem = (dynamic)item;
                     var userExpression = $"user.UserId=={dynamicItem.UserId} ";
                     users.Foreach(r =>
                     {
-                        var dynamicUser = (dynamic) r;
+                        var dynamicUser = (dynamic)r;
                         if (dynamicUser.Id == dynamicItem.UserId)
                         {
                             var gradeConfig = EntityDynamicService.GetUserGrade(dynamicUser.GradeId);

@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
@@ -8,6 +6,8 @@ using Alabo.RestfulApi.Clients;
 using Alabo.Runtime;
 using Alabo.Tenants.Domain.Entities;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.Tenants.Domain.Services
 {

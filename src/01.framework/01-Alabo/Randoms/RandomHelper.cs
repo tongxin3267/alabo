@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Alabo.Users.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.Users.Enum;
 
 namespace Alabo.Randoms
 {

@@ -1,5 +1,5 @@
-﻿using System;
-using Alabo.Domains.Trees;
+﻿using Alabo.Domains.Trees;
+using System;
 
 namespace Alabo.Datas.Persistence
 {

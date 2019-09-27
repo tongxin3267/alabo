@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
-using Alabo.Domains.Entities.Core;
+﻿using Alabo.Domains.Entities.Core;
 using Alabo.Extensions;
 using Alabo.Web.ViewFeatures;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using System;
+using System.Linq;
 
 namespace Alabo.Mapping
 {
@@ -123,7 +123,7 @@ namespace Alabo.Mapping
         public static T HttpContextToExtension<T>(object instance, HttpContext httpContext)
         {
             instance = HttpContextToExtension(instance, typeof(T), httpContext);
-            return (T) instance;
+            return (T)instance;
         }
 
         /// <summary>

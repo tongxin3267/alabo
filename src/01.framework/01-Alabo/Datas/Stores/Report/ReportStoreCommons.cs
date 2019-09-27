@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Services.Report;
 using Alabo.Domains.Services.Report.Dtos;
 using Alabo.Extensions;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.Datas.Stores.Report
 {
@@ -16,7 +16,7 @@ namespace Alabo.Datas.Stores.Report
             var rsList = new List<AutoReport>();
             var gpListByDate = queryList.GroupBy(x => x.CreateTime.Date).OrderBy(x => x.Key);
 
-            var colList = new List<string> {"日期", "全部"};
+            var colList = new List<string> { "日期", "全部" };
             var rowList = new List<object>();
 
             var dicEnumNameValue = new Dictionary<string, string>();
@@ -116,7 +116,7 @@ namespace Alabo.Datas.Stores.Report
                 {
                     var enumDispayName = enumItem.Key;
                     if (coluList.Where(x => x.type == enumItem.Key).Count() < 1)
-                        coluList.Add(new Columns {name = enumDispayName, type = enumItem.Key});
+                        coluList.Add(new Columns { name = enumDispayName, type = enumItem.Key });
 
                     var gListByEnum = WhereQuery(gpDataDate, inputParas.Field, enumItem.Value).ToList();
                     rowDic[enumItem.Key] = gListByEnum.Count.ToString();
@@ -155,7 +155,7 @@ namespace Alabo.Datas.Stores.Report
 
             var gpListByDate = queryList.GroupBy(x => x.CreateTime.Date).OrderBy(x => x.Key);
 
-            var colList = new List<string> {"日期"};
+            var colList = new List<string> { "日期" };
             var rowList = new List<object>();
 
             var dicEnumNameValue = new Dictionary<string, string>();
@@ -284,7 +284,7 @@ namespace Alabo.Datas.Stores.Report
                             {
                                 var keyName = $"{fieldDispName}[{enumItem.Key}]";
                                 if (colList.Where(x => x.type == keyName).Count() < 1)
-                                    colList.Add(new SumColumns {name = keyName, type = keyName});
+                                    colList.Add(new SumColumns { name = keyName, type = keyName });
 
                                 var gListByEnum = WhereQuery(gItemList, inputParas.SpecialField, enumItem.Value)
                                     .ToList();
@@ -298,7 +298,7 @@ namespace Alabo.Datas.Stores.Report
                         else
                         {
                             if (colList.Where(x => x.type == fieldDispName).Count() < 1)
-                                colList.Add(new SumColumns {name = fieldDispName, type = fieldDispName});
+                                colList.Add(new SumColumns { name = fieldDispName, type = fieldDispName });
 
                             var prop = type.GetProperty(fieldName);
                             var rsSum = 0M;
@@ -311,8 +311,8 @@ namespace Alabo.Datas.Stores.Report
                     rowList.Add(dic);
                 }
 
-            var rsRowList = rowList.Skip((int) ((inputParas.PageIndex - 1) * inputParas.PageSize))
-                .Take((int) inputParas.PageSize).ToList();
+            var rsRowList = rowList.Skip((int)((inputParas.PageIndex - 1) * inputParas.PageSize))
+                .Take((int)inputParas.PageSize).ToList();
             rsList.Add(new SumReportTable
             {
                 Name = $"{inputParas.Type} SumTable 统计",

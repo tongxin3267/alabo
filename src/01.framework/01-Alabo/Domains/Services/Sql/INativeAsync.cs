@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
 
 namespace Alabo.Domains.Services.Sql
 {

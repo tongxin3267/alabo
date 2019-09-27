@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
-using Alabo.Events.Handlers;
+﻿using Alabo.Events.Handlers;
 using Alabo.Events.Messages;
+using System.Threading.Tasks;
 
 namespace Alabo.Events.Default
 {

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Alabo.Extensions;
+using Alabo.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -7,8 +9,6 @@ using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
-using Alabo.Extensions;
-using Alabo.Helpers;
 
 namespace Alabo.Web.Clients
 {
@@ -183,7 +183,7 @@ namespace Alabo.Web.Clients
         /// </summary>
         private TRequest This()
         {
-            return (TRequest) (object) this;
+            return (TRequest)(object)this;
         }
 
         /// <summary>
@@ -365,7 +365,8 @@ namespace Alabo.Web.Clients
             {
                 CookieContainer = _cookieContainer,
                 ServerCertificateCustomValidationCallback = _serverCertificateCustomValidationCallback
-            }) {Timeout = _timeout};
+            })
+            { Timeout = _timeout };
         }
 
         /// <summary>

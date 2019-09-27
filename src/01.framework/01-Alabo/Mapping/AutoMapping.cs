@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Alabo.Domains.Entities;
+using Alabo.Extensions;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Alabo.Domains.Entities;
-using Alabo.Extensions;
-using Microsoft.AspNetCore.Http;
 
 namespace Alabo.Mapping
 {
@@ -28,7 +28,7 @@ namespace Alabo.Mapping
             if (data.GetType().FullName.Contains("System.Collections.Generic.Dictionary"))
                 try
                 {
-                    var dic = (Dictionary<string, string>) data;
+                    var dic = (Dictionary<string, string>)data;
                     return SetValueDictionary<T>(dic);
                 }
                 catch (Exception ex)
@@ -68,7 +68,7 @@ namespace Alabo.Mapping
         public static T SetValue<T>(object data)
         {
             var outputType = typeof(T);
-            var instance = (T) outputType.GetInstanceByType();
+            var instance = (T)outputType.GetInstanceByType();
             return SetValue(data, instance);
         }
 
@@ -82,7 +82,7 @@ namespace Alabo.Mapping
             // 输出类型
             var outputType = typeof(T);
             var outputPropertyInfo = outputType.GetPropertiesFromCache(); //从缓存中读取属性，加快速度
-            var output = (T) outputType.GetInstanceByType();
+            var output = (T)outputType.GetInstanceByType();
 
             foreach (var item in outputPropertyInfo)
                 try
@@ -172,7 +172,7 @@ namespace Alabo.Mapping
         {
             var outputType = typeof(T);
             var outputPropertyInfo = outputType.GetPropertiesFromCache(); //从缓存中读取属性，加快速度
-            var output = (T) outputType.GetInstanceByType();
+            var output = (T)outputType.GetInstanceByType();
 
             return SetValue(httpContext, output);
         }
@@ -311,7 +311,7 @@ namespace Alabo.Mapping
             else if (type == typeof(bool) || type == typeof(bool))
             {
                 var valueDefault = value.ConvertToNullableBool();
-                changeValue = (bool) value ? "是" : "否";
+                changeValue = (bool)value ? "是" : "否";
                 if (valueDefault.HasValue) return Tuple.Create(true, changeValue);
             }
             else if (type == typeof(Guid))
@@ -353,7 +353,7 @@ namespace Alabo.Mapping
             // 数据传入对象非PagedList对象
             if (!dataSource.GetType().FullName.Contains("Alabo.Domains.Entities.PagedList")) return null;
 
-            var pagedList = (dynamic) dataSource;
+            var pagedList = (dynamic)dataSource;
             foreach (var item in pagedList)
             {
                 T result = SetValue<T>(item);
