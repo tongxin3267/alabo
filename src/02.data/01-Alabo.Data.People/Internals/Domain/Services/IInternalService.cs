@@ -4,7 +4,7 @@ using MongoDB.Bson;
 
 namespace Alabo.Data.People.Internals.Domain.Services
 {
-    public interface IParentInternalService : IService<ParentInternal, ObjectId>
+    public interface IInternalService : IService<Internal, ObjectId>
     {
     }
 }

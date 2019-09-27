@@ -170,7 +170,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
         /// <param name="templId">The express identifier.</param>
         /// <param name="userAddress">用户地址</param>
         /// <param name="weight">The weight.</param>
-        public Tuple<ServiceResult, decimal> CountExpressFee(long storeId, ObjectId templId, UserAddress userAddress, decimal weight)
+        public Tuple<ServiceResult, decimal> CountExpressFee(ObjectId storeId, ObjectId templId, UserAddress userAddress, decimal weight)
         {
             var expressFee = 0m; // 快递费用
             var express = Resolve<IDeliveryTemplateService>().GetSingle(t => t.StoreId == storeId && t.Id == templId);
@@ -226,7 +226,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
         /// <param name="storeId">The stroe identifier.</param>
         /// <param name="userAddress">用户地址</param>
         /// <param name="productSkuItems">The weight.</param>
-        public Tuple<ServiceResult, decimal> CountExpressFee(long storeId, UserAddress userAddress, IList<ProductSkuItem> productSkuItems)
+        public Tuple<ServiceResult, decimal> CountExpressFee(ObjectId storeId, UserAddress userAddress, IList<ProductSkuItem> productSkuItems)
         {
             //total
             var totalExpressFee = 0m;

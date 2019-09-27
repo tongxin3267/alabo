@@ -20,11 +20,24 @@ namespace Alabo.Data.People.Circles.Domain.Entities
     public class Circle : UserTypeAggregateRoot<Circle>
     {
         /// <summary>
-        ///     所属区域
+        ///     商圈所属省份
         /// </summary>
-        [Display(Name = "所属区域")]
-        [Field(ListShow = true, EditShow = false, SortOrder = 1, Width = "150", LabelColor = LabelColor.Brand,
-            ControlsType = ControlsType.CityDropList)]
-        public string RegionName { get; set; }
+        [Display(Name = "省份编码")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
+        public long ProvinceId { get; set; }
+
+        /// <summary>
+        ///     商圈所属城市，可以等于null
+        /// </summary>
+        [Display(Name = "城市编码")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
+        public long CityId { get; set; }
+
+        /// <summary>
+        ///     商圈所属区域
+        /// </summary>
+        [Display(Name = "区县编码")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
+        public long CountyId { get; set; }
     }
 }

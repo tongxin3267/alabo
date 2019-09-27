@@ -6,9 +6,9 @@ using MongoDB.Bson;
 
 namespace Alabo.Data.People.Internals.Domain.Services
 {
-    public class ParentInternalService : ServiceBase<ParentInternal, ObjectId>, IParentInternalService
+    public class InternalService : ServiceBase<Internal, ObjectId>, IInternalService
     {
-        public ParentInternalService(IUnitOfWork unitOfWork, IRepository<ParentInternal, ObjectId> repository) : base(
+        public InternalService(IUnitOfWork unitOfWork, IRepository<Internal, ObjectId> repository) : base(
             unitOfWork, repository)
         {
         }

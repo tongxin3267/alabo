@@ -16,7 +16,7 @@ namespace Alabo.Data.People.Internals.Domain.Entities
     [ClassProperty(Name = "内部合伙人")]
     [BsonIgnoreExtraElements]
     [Table("People_ParentInternal")]
-    public class ParentInternal : UserTypeAggregateRoot<ParentInternal>
+    public class Internal : UserTypeAggregateRoot<Internal>
     {
     }
 }

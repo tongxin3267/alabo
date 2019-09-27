@@ -33,5 +33,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Circles\Domain\Configs\" />
+    <Folder Include="Cities\Dtos\" />
   </ItemGroup>
 </Project>

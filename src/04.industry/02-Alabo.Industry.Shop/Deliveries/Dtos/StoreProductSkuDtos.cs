@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos
 {
@@ -10,7 +11,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Dtos
         /// <summary>
         ///     Gets or sets the store ids.
         /// </summary>
-        public IEnumerable<long> StoreIds { get; set; }
+        public IEnumerable<ObjectId> StoreIds { get; set; }
 
         /// <summary>
         ///     Gets or sets the product sku ids.

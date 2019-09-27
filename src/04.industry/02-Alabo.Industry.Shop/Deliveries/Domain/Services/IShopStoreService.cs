@@ -1,28 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.Data.People.Stores.Domain.Entities;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Query.Dto;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Framework.Basic.Address.Domain.Entities;
 using Alabo.Industry.Shop.Deliveries.Domain.Dtos;
-using Alabo.Industry.Shop.Deliveries.Domain.Entities.Extensions;
-using Alabo.Industry.Shop.Deliveries.ViewModels;
 using Alabo.Industry.Shop.Orders.Dtos;
 using Alabo.Industry.Shop.Products.Dtos;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
 
-namespace Alabo.Industry.Shop.Deliveries.Domain.Services {
-
+namespace Alabo.Industry.Shop.Deliveries.Domain.Services
+{
     /// <summary>
     ///     Interface IStoreService
     /// </summary>
-    public interface IShopStoreService : IService {
-
-      
-
-
-
+    public interface IShopStoreService : IService
+    {
         /// <summary>
         ///     Counts the express fee.
         ///     根据客户选择的物流方式，商品重量，计算快递费用
@@ -31,24 +23,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services {
         /// <param name="templateId">The express identifier.</param>
         /// <param name="userAddress">用户地址</param>
         /// <param name="weight">The weight.</param>
-        Tuple<ServiceResult, decimal> CountExpressFee(long storeId, ObjectId templateId, UserAddress userAddress, decimal weight);
-
-    
-
-        /// <summary>
-        ///     Gets the store extension.d
-        /// </summary>
-        /// <param name="storeId">The store identifier.</param>
-        StoreExtension GetStoreExtension(long storeId);
-
-        /// <summary>
-        ///     Updates the extensions.
-        /// </summary>
-        /// <param name="storeId">The store identifier.</param>
-        /// <param name="storeExtension">The store extension.</param>
-        ServiceResult UpdateExtensions(long storeId, StoreExtension storeExtension);
-
-       
+        Tuple<ServiceResult, decimal> CountExpressFee(ObjectId storeId, ObjectId templateId, UserAddress userAddress, decimal weight);
 
         /// <summary>
         ///     Gets the store item list from cache.
@@ -56,8 +31,6 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services {
         ///     如果店铺数据多的情况下，该方法需要优化
         /// </summary>
         IEnumerable<StoreItem> GetStoreItemListFromCache();
-
-   
 
         /// <summary>
         ///     根据店铺Id列表，和商品skuId列表，输出店铺商品显示对象
@@ -68,8 +41,6 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services {
         /// <param name="storeProductSkuDtos">The store product sku dtos.</param>
         Tuple<ServiceResult, StoreProductSku> GetStoreProductSku(StoreProductSkuDtos storeProductSkuDtos);
 
-   
-
         /// <summary>
         /// Counts the express fee.
         /// </summary>
@@ -77,6 +48,6 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services {
         /// <param name="userAddress"></param>
         /// <param name="productSkuItems"></param>
         /// <returns></returns>
-        Tuple<ServiceResult, decimal> CountExpressFee(long storeId, UserAddress userAddress, IList<ProductSkuItem> productSkuItems);
+        Tuple<ServiceResult, decimal> CountExpressFee(ObjectId storeId, UserAddress userAddress, IList<ProductSkuItem> productSkuItems);
     }
 }

@@ -9,11 +9,11 @@ namespace Alabo.Data.People.Internals.Controllers
 {
     [ApiExceptionFilter]
     [Route("Api/Internal/[action]")]
-    public class ApiInternalController : ApiBaseController<ParentInternal, ObjectId>
+    public class ApiInternalController : ApiBaseController<Internal, ObjectId>
     {
         public ApiInternalController()
         {
-            BaseService = Resolve<IParentInternalService>();
+            BaseService = Resolve<IInternalService>();
         }
     }
 }

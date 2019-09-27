@@ -5,9 +5,9 @@ using MongoDB.Bson;
 
 namespace Alabo.Data.People.Internals.Domain.Repositories
 {
-    public class ParentInternalRepository : RepositoryMongo<ParentInternal, ObjectId>, IParentInternalRepository
+    public class InternalRepository : RepositoryMongo<Internal, ObjectId>, IInternalRepository
     {
-        public ParentInternalRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public InternalRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {
         }
     }
