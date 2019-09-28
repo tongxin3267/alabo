@@ -6,6 +6,7 @@ using Alabo.Domains.Repositories.EFCore;
 using Alabo.Extensions;
 using Alabo.Industry.Shop.Products.Domain.Entities;
 using Alabo.Industry.Shop.Products.Dtos;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Products.Domain.Repositories
 {
@@ -72,7 +73,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Repositories
                     {
                         ProductSkuId = reader["ProductSkuId"].ConvertToLong(0),
                         ProductId = reader["ProductId"].ConvertToLong(0),
-                        StoreId = reader["StoreId"].ConvertToLong(0),
+                        StoreId = reader["StoreId"].ToObjectId(),
                         Name = reader["name"].ToString(),
                         Stock = reader["Stock"].ConvertToLong(),
                         Bn = reader["Bn"].ToString(),
@@ -99,12 +100,12 @@ namespace Alabo.Industry.Shop.Products.Domain.Repositories
         ///     根据商品SkuId，获取店铺Id
         /// </summary>
         /// <param name="productSkuId"></param>
-        public long GetStoreIdByProductSkuId(long productSkuId)
+        public ObjectId GetStoreIdByProductSkuId(long productSkuId)
         {
             var sql =
                 $"SELECT  Shop_Product.StoreId FROM Shop_Product INNER JOIN  Shop_ProductSku ON Shop_Product.Id = Shop_ProductSku.ProductId where Shop_ProductSku.Id={productSkuId}";
-            var result = RepositoryContext.ExecuteScalar(sql).ToInt64();
-            return result;
+            var result = RepositoryContext.ExecuteScalar(sql);
+            return result.ToObjectId();
         }
 
         /// <summary>

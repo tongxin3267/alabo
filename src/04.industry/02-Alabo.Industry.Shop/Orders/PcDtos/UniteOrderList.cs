@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Alabo.Data.People.Stores.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
@@ -34,44 +35,44 @@ namespace Alabo.Industry.Shop.Orders.PcDtos
                 case FilterType.All:
                     throw new ValidException("无权限查看订单");
                 case FilterType.User:
-                {
-                    if (model.UserId > 0) expressionQuery.And(e => e.UserId == user.Id);
+                    {
+                        if (model.UserId > 0) expressionQuery.And(e => e.UserId == user.Id);
 
-                    list = Resolve<IOrderApiService>().GetPageList(query, expressionQuery);
-                    break;
-                }
+                        list = Resolve<IOrderApiService>().GetPageList(query, expressionQuery);
+                        break;
+                    }
 
                 case FilterType.Admin:
-                {
-                    var dic = HttpWeb.HttpContext.ToDictionary();
-                    dic = dic.RemoveKey("userId"); // 否则查出的订单都是同一个用户
+                    {
+                        var dic = HttpWeb.HttpContext.ToDictionary();
+                        dic = dic.RemoveKey("userId"); // 否则查出的订单都是同一个用户
 
-                    if (model.OrderStatus > 0) expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
+                        if (model.OrderStatus > 0) expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
 
-                    var isAdmin = Resolve<IUserService>().IsAdmin(model.UserId);
-                    if (!isAdmin) throw new ValidException("非管理员不能查看平台订单");
-                    expressionQuery.And(e => e.StoreId > 0);
-                    expressionQuery.And(e => e.UserId > 0);
+                        var isAdmin = Resolve<IUserService>().IsAdmin(model.UserId);
+                        if (!isAdmin) throw new ValidException("非管理员不能查看平台订单");
+                        // expressionQuery.And(e => e.StoreId > 0);
+                        expressionQuery.And(e => e.UserId > 0);
 
-                    model.UserId = 0;
-                    list = Resolve<IOrderApiService>().GetPageList(dic.ToJson(), expressionQuery);
-                    break;
-                }
+                        model.UserId = 0;
+                        list = Resolve<IOrderApiService>().GetPageList(dic.ToJson(), expressionQuery);
+                        break;
+                    }
 
                 case FilterType.Store:
-                {
-                    var dic = HttpWeb.HttpContext.ToDictionary();
-                    dic = dic.RemoveKey("userId"); // 否则查出的订单都是同一个用户
-                    if (model.OrderStatus > 0) expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
+                    {
+                        var dic = HttpWeb.HttpContext.ToDictionary();
+                        dic = dic.RemoveKey("userId"); // 否则查出的订单都是同一个用户
+                        if (model.OrderStatus > 0) expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
 
-                    var store = Resolve<IShopStoreService>().GetUserStore(model.UserId);
-                    if (store == null) throw new ValidException("您无权查看其他店铺订单");
-                    expressionQuery.And(e => e.StoreId == store.Id);
+                        var store = Resolve<IStoreService>().GetUserStore(model.UserId);
+                        if (store == null) throw new ValidException("您无权查看其他店铺订单");
+                        expressionQuery.And(e => e.StoreId == store.Id);
 
-                    model.UserId = 0;
-                    list = Resolve<IOrderApiService>().GetPageList(dic.ToJson(), expressionQuery);
-                    break;
-                }
+                        model.UserId = 0;
+                        list = Resolve<IOrderApiService>().GetPageList(dic.ToJson(), expressionQuery);
+                        break;
+                    }
 
                 case FilterType.Offline:
                     break;

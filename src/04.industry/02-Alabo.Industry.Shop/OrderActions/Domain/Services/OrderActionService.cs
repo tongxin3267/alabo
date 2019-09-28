@@ -33,6 +33,7 @@ using Alabo.Industry.Shop.Orders.ViewModels.OrderEdit;
 using Alabo.Mapping;
 using Alabo.Users.Entities;
 using Microsoft.AspNetCore.Http;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.OrderActions.Domain.Services
 {
@@ -193,7 +194,7 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
         /// <param name="orderBuyInput"></param>
         public void DeleteCartBuyOrder(BuyInput orderBuyInput)
         {
-            var storeList = new List<long>();
+            var storeList = new List<ObjectId>();
             var productSkus = new List<long>();
             orderBuyInput.StoreOrders = orderBuyInput.StoreOrderJson.Deserialize<StoreOrderItem>();
             orderBuyInput.StoreOrders.ToList().ForEach(e =>
@@ -258,15 +259,15 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
                     productDeliveryInfos.AddRange(item.OrderDeliveryExtension.ProductDeliveryInfo);
                 // 已发货数量
                 var Records = from ProductDeliveryInfo p in productDeliveryInfos
-                    group p by p.ProductSkuId
+                              group p by p.ProductSkuId
                     into g
-                    select new {skuId = g.Key, Count = g.Sum(e => e.Count)};
+                              select new { skuId = g.Key, Count = g.Sum(e => e.Count) };
 
                 foreach (var sku in model.DeliveryProductSkus)
                 {
                     var item = order.OrderExtension.ProductSkuItems.SingleOrDefault(e => e.ProductSkuId == sku.SkuId);
                     var record = Records.SingleOrDefault(e => e.skuId == sku.SkuId);
-                    if (record == null) record = new {skuId = sku.SkuId, Count = 0L};
+                    if (record == null) record = new { skuId = sku.SkuId, Count = 0L };
 
                     var productDeliveryInfo = AutoMapping.SetValue<ProductDeliveryInfo>(item);
                     productDeliveryInfo.Count = sku.Count;
@@ -294,7 +295,7 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
                 }
             }
 
-            orderDelivery.Extension = orderDelivery.OrderDeliveryExtension.ToJson();
+            orderDelivery.Extension = ObjectExtension.ToJson(orderDelivery.OrderDeliveryExtension);
             if (Judgement)
                 order.OrderStatus = OrderStatus.WaitingReceiptProduct;
             else
@@ -353,7 +354,7 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
             if (order.OrderExtension.OrderRemark == null) order.OrderExtension.OrderRemark = new OrderRemark();
 
             order.OrderExtension.OrderRemark.PlatplatformRemark = orderRemark.PlatplatformRemark;
-            order.Extension = order.OrderExtension.ToJson();
+            order.Extension = ObjectExtension.ToJson(order.OrderExtension);
             var result = Resolve<IOrderService>().Update(order);
             if (result) return ServiceResult.Success;
 
@@ -524,7 +525,7 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
             if (order == null) return ServiceResult.FailedWithMessage("订单不存在");
 
             order.OrderExtension.OrderRate.SellerRate = orderRate;
-            order.Extension = order.OrderExtension.ToJson();
+            order.Extension = ObjectExtension.ToJson(order.OrderExtension);
             var result = Resolve<IOrderService>().Update(order);
             if (result) return ServiceResult.Success;
 
@@ -543,7 +544,7 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
             if (order == null) return ServiceResult.FailedWithMessage("订单不存在");
 
             order.OrderExtension.OrderRate.SellerRate = orderRate;
-            order.Extension = order.OrderExtension.ToJson();
+            order.Extension = ObjectExtension.ToJson(order.OrderExtension);
             var result = Resolve<IOrderService>().Update(order);
             if (result) return ServiceResult.Success;
 
@@ -592,7 +593,7 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
             address.AddressDescription =
                 $"{Resolve<IRegionService>().GetFullName(address.RegionId)} {address.Address} ";
             order.OrderExtension.UserAddress = address;
-            order.Extension = order.OrderExtension.ToJson();
+            order.Extension = ObjectExtension.ToJson(order.OrderExtension);
             var result = Resolve<IOrderService>().Update(order);
             if (result) return ServiceResult.Success;
 
@@ -613,7 +614,7 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
             if (order.OrderExtension.OrderRemark == null) order.OrderExtension.OrderRemark = new OrderRemark();
 
             order.OrderExtension.Message.PlatplatformMessage = orderMessage.PlatplatformMessage;
-            order.Extension = order.OrderExtension.ToJson();
+            order.Extension = ObjectExtension.ToJson(order.OrderExtension);
             var result = Resolve<IOrderService>().Update(order);
             if (result) return ServiceResult.Success;
 

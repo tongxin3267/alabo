@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Alabo.AutoConfigs;
+using Alabo.Data.People.Stores.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
@@ -34,6 +35,7 @@ using Alabo.Industry.Shop.Products.Dtos;
 using Alabo.Industry.Shop.Products.ViewModels;
 using Alabo.Mapping;
 using Alabo.Maps;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Products.Domain.Services
 {
@@ -67,9 +69,9 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public long GetProductByStoreCount(long id)
+        public long GetProductByStoreCount(ObjectId storeId)
         {
-            var count = Resolve<IProductService>().GetList().Where(l => l.StoreId == id).Count().ConvertToLong();
+            var count = Resolve<IProductService>().GetList().Where(l => l.StoreId == storeId).Count().ConvertToLong();
             return count;
         }
 
@@ -245,7 +247,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
             var allActivities = Resolve<IActivityService>()
                 .GetList(a => a.ProductId == id && a.IsEnable).ToList();
             var activityRules = allActivities.Select(a => new ProductActivity
-                {Id = a.Id, Name = a.Name, Key = a.Key, Value = a.Value}).ToList();
+            { Id = a.Id, Name = a.Name, Key = a.Key, Value = a.Value }).ToList();
             //user permissions
             var userPermissions = new UserPermissions();
             var key = ProductActivityType.BuyPermission.GetDisplayResourceTypeName();
@@ -292,7 +294,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                 var showGradeIds = new List<string>();
                 var showGrade = Resolve<IAutoConfigService>().GetValue<MemberDiscountConfig>();
                 if (showGrade != null && !showGrade.GradeIds.IsNullOrEmpty())
-                    showGradeIds = showGrade.GradeIds.Split(new[] {','}).ToList();
+                    showGradeIds = showGrade.GradeIds.Split(new[] { ',' }).ToList();
                 var rules = memberDiscountActivity.Value.ToObject<MemberDiscountActivity>();
                 productSkus.Foreach(item =>
                 {
@@ -358,8 +360,8 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                 || priceStyleConfig.PriceStyle == PriceStyle.VirtualProduct
                 || priceStyleConfig.PriceStyle == PriceStyle.CreditProduct
                 || priceStyleConfig.PriceStyle == PriceStyle.ShopAmount
-                //|| priceStyleConfig.PriceStyle == PriceStyle.CashAndVirtual
-                //|| priceStyleConfig.PriceStyle == PriceStyle.CashAndCredit
+            //|| priceStyleConfig.PriceStyle == PriceStyle.CashAndVirtual
+            //|| priceStyleConfig.PriceStyle == PriceStyle.CashAndCredit
             )
                 priceStyle = Math.Round(price / moneyTypeConfig.RateFee, 2).ToString("F2") + moneyTypeConfig.Unit;
 

@@ -1,4 +1,5 @@
-﻿using Alabo.Framework.Core.Reflections.Interfaces;
+﻿using Alabo.Data.People.Stores.Domain.Services;
+using Alabo.Framework.Core.Reflections.Interfaces;
 using Alabo.Helpers;
 using Alabo.Industry.Shop.Deliveries.Domain.Services;
 
@@ -13,7 +14,7 @@ namespace Alabo.Industry.Shop.Deliveries
         /// </summary>
         public void Init()
         {
-            Ioc.Resolve<IShopStoreService>().PlatformStore();
+            Ioc.Resolve<IStoreService>().PlatformStore();
         }
     }
 }

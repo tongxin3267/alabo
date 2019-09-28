@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Alabo.Data.People.Stores.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
@@ -46,7 +47,7 @@ namespace Alabo.Industry.Shop.Orders.PcDtos
             var expressionQuery = new ExpressionQuery<Order>();
             if (model.OrderStatus > 0) expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
 
-            expressionQuery.And(e => e.StoreId > 0);
+            //  expressionQuery.And(e => e.StoreId.IsObjectIdNullOrEmpty());
             expressionQuery.And(e => e.UserId > 0);
 
             if (Enum.IsDefined(typeof(OrderType), model.OrderType))
@@ -58,7 +59,7 @@ namespace Alabo.Industry.Shop.Orders.PcDtos
             }
             else if (autoModel.Filter == FilterType.Store)
             {
-                var store = Resolve<IShopStoreService>().GetUserStore(autoModel.BasicUser.Id);
+                var store = Resolve<IStoreService>().GetUserStore(autoModel.BasicUser.Id);
                 if (store == null) throw new ValidException("您不是供应商,暂无店铺");
                 expressionQuery.And(e => e.StoreId == store.Id);
                 // 供应商

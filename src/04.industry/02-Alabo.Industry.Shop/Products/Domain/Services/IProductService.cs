@@ -8,6 +8,7 @@ using Alabo.Industry.Shop.Deliveries.Dtos;
 using Alabo.Industry.Shop.Products.Domain.Entities;
 using Alabo.Industry.Shop.Products.Dtos;
 using Alabo.Industry.Shop.Products.ViewModels;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Products.Domain.Services
 {
@@ -24,7 +25,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        long GetProductByStoreCount(long id);
+        long GetProductByStoreCount(ObjectId storeId);
 
         /// <summary>
         ///     get time limit buy products
@@ -68,13 +69,11 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         /// <param name="productApiInput"></param>
         ProductItemApiOutput GetProductItems(ProductApiInput productApiInput);
 
-
         /// <summary>
         ///     商品查询列表，次函数基本完成了商品列表的所有功能 异步
         /// </summary>
         /// <param name="productApiInput"></param>
         Task<ProductItemApiOutput> GetProductItemsAsync(ProductApiInput productApiInput);
-
 
         /// <summary>
         ///     获取前台商品详情

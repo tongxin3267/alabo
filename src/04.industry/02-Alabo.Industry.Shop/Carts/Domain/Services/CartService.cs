@@ -42,13 +42,12 @@ namespace Alabo.Industry.Shop.Carts.Domain.Services
 
             if (productSku == null) return ServiceResult.FailedWithMessage("商品SKU错误");
 
-            if (storeId == 0) return ServiceResult.FailedWithMessage("storeId错误");
+            if (storeId.IsObjectIdNullOrEmpty()) return ServiceResult.FailedWithMessage("storeId错误");
 
             var cartSingle = Resolve<ICartService>().GetSingle(u =>
                 u.ProductId == orderProductInput.ProductId && u.ProductSkuId == orderProductInput.ProductSkuId
                                                            && u.UserId == orderProductInput.LoginUserId &&
                                                            u.Status == Status.Normal);
-
 
             if (cartSingle == null)
             {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Alabo.Data.People.Stores.Domain.Services;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.Industry.Shop.Deliveries.Domain.Entities;
@@ -41,7 +42,7 @@ namespace Alabo.Industry.Shop.Deliveries.Controllers
         /// <param name="storeId"></param>
         /// <returns></returns>
         [HttpGet]
-        public ApiResult GetDeliveryTemplateList([FromQuery] ObjectId StoreId)
+        public ApiResult GetDeliveryTemplateList([FromQuery] ObjectId storeId)
         {
             var template = Resolve<IDeliveryTemplateService>().GetList(x => x.StoreId == storeId);
 
@@ -80,7 +81,7 @@ namespace Alabo.Industry.Shop.Deliveries.Controllers
                 {
                     //同意账号下运费模板不能重复
 
-                    var store = Resolve<IShopStoreService>().GetUserStore(template.UserId);
+                    var store = Resolve<IStoreService>().GetUserStore(template.UserId);
                     if (store != null)
                     {
                         template.StoreId = store.Id;

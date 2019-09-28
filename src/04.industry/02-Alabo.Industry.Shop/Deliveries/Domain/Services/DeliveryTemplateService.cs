@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Alabo.Data.People.Stores.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
@@ -21,9 +22,9 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
         /// </summary>
         /// <param name="storeId"></param>
         /// <returns></returns>
-        public List<KeyValue> GetStoreDeliveryTemplateByCache(ObjectId StoreId)
+        public List<KeyValue> GetStoreDeliveryTemplateByCache(ObjectId storeId)
         {
-            var store = Resolve<IShopStoreService>().GetSingleFromCache(storeId);
+            var store = Resolve<IStoreService>().GetSingleFromCache(storeId);
             if (store == null) return null;
             var result = new List<KeyValue>();
             var list = GetList(r => r.StoreId == storeId);

@@ -2,6 +2,7 @@
 using Alabo.Domains.Repositories;
 using Alabo.Industry.Shop.Products.Domain.Entities;
 using Alabo.Industry.Shop.Products.Dtos;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Products.Domain.Repositories
 {
@@ -11,7 +12,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Repositories
         ///     根据商品SkuId，获取店铺Id
         /// </summary>
         /// <param name="productSkuId"></param>
-        long GetStoreIdByProductSkuId(long productSkuId);
+        ObjectId GetStoreIdByProductSkuId(long productSkuId);
 
         /// <summary>
         ///     添加商品库存
