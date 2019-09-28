@@ -22,7 +22,7 @@ namespace Alabo.Data.People.Cities.Domain.Services
             return GetSingle(r => r.UserId == userId);
         }
 
-        public ServiceResult ChangeUserStatus(string userId, string Status)
+        public ServiceResult ChangeUserStatus(string userId, string status)
         {
             var user = Resolve<IUserService>().GetSingle(userId);
             if (user == null) return ServiceResult.FailedMessage("用户不存在");

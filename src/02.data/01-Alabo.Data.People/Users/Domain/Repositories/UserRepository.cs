@@ -18,7 +18,7 @@ namespace Alabo.Data.People.Users.Domain.Repositories
 {
     public class UserRepository : RepositoryEfCore<User, long>, IUserRepository
     {
-        private const string userDetailSql =
+        private const string UserDetailSql =
             @"SELECT dbo.User_User.Id, dbo.User_User.UserName, dbo.User_User.Name, dbo.User_User.Mobile, dbo.User_User.Email, dbo.User_User.ParentId,
                  dbo.User_User.Status, dbo.User_User.GradeId, dbo.User_UserDetail.Remark,
                  dbo.User_UserDetail.OpenId,
@@ -64,11 +64,11 @@ namespace Alabo.Data.People.Users.Domain.Repositories
             }
         }
 
-        public User GetSingle(string UserName)
+        public User GetSingle(string userName)
         {
             var sql = @"SELECT * FROM User_User WHERE UserName = @UserName";
             using (var reader =
-                RepositoryContext.ExecuteDataReader(sql, RepositoryContext.CreateParameter("@UserName", UserName)))
+                RepositoryContext.ExecuteDataReader(sql, RepositoryContext.CreateParameter("@UserName", userName)))
             {
                 User user = null;
                 if (reader.Read()) user = ReadUser(reader);
@@ -107,7 +107,7 @@ namespace Alabo.Data.People.Users.Domain.Repositories
 
         public User GetUserDetail(long userId)
         {
-            var sql = $"{userDetailSql}  where User_User.Id={userId}";
+            var sql = $"{UserDetailSql}  where User_User.Id={userId}";
             using (var reader = RepositoryContext.ExecuteDataReader(sql))
             {
                 User user = null;
@@ -122,9 +122,9 @@ namespace Alabo.Data.People.Users.Domain.Repositories
             }
         }
 
-        public User GetUserDetail(string UserName)
+        public User GetUserDetail(string userName)
         {
-            var sql = $"{userDetailSql} where User_User.UserName='{UserName}'";
+            var sql = $"{UserDetailSql} where User_User.UserName='{userName}'";
             using (var reader = RepositoryContext.ExecuteDataReader(sql))
             {
                 User user = null;
@@ -139,12 +139,12 @@ namespace Alabo.Data.People.Users.Domain.Repositories
             }
         }
 
-        public bool CheckUserExists(string UserName, string password, out long userId)
+        public bool CheckUserExists(string userName, string password, out long userId)
         {
             var sql = "SELECT TOP 1 Id FROM dbo.User_User WHERE Name=@Name AND Password=@Password";
             var parameters = new[]
             {
-                RepositoryContext.CreateParameter("@Name", UserName),
+                RepositoryContext.CreateParameter("@Name", userName),
                 RepositoryContext.CreateParameter("@Password", password)
             };
             userId = RepositoryContext.ExecuteScalar(sql, parameters).ToInt64();

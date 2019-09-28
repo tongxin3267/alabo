@@ -189,7 +189,7 @@ namespace Alabo.Data.People.Users.Controllers
             if (user != null)
             {
                 if (user.ParentId <= 0) return ApiResult.Success(true, "该手机用户无人推荐!");
-                if (user.ParentId == parameter.UserID)
+                if (user.ParentId == parameter.UserId)
                     return ApiResult.Success(true, "该手机用户已是您的推荐用户");
                 return ApiResult.Success(false, "该手机用户不是您的推荐用户,请谨慎操作!");
             }
@@ -407,9 +407,9 @@ namespace Alabo.Data.People.Users.Controllers
         /// </summary>
         [HttpDelete]
         [ApiAuth(Filter = FilterType.Admin)]
-        public ApiResult Delete(long Id)
+        public ApiResult Delete(long id)
         {
-            if (Resolve<IUserAdminService>().DeleteUser(Id)) return ApiResult.Success("会员删除成功");
+            if (Resolve<IUserAdminService>().DeleteUser(id)) return ApiResult.Success("会员删除成功");
             return ApiResult.Failure("会员删除失败,服务异常，请稍后再试");
         }
 

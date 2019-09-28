@@ -32,7 +32,7 @@ namespace Alabo.Data.People.Users.Domain.Services
         /// <summary>
         ///     The single 会员 cache key
         /// </summary>
-        private static readonly string _singleUserCacheKey = "SingleUserCacheKey";
+        private static readonly string SingleUserCacheKey = "SingleUserCacheKey";
 
         /// <summary>
         ///     The 会员 map repository
@@ -58,7 +58,7 @@ namespace Alabo.Data.People.Users.Domain.Services
         public User GetSingle(long userId)
         {
             return ObjectCache.GetOrSet(() => { return Repository<IUserRepository>().GetSingle(userId); },
-                $"{_singleUserCacheKey}_Id_{userId}").Value;
+                $"{SingleUserCacheKey}_Id_{userId}").Value;
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Alabo.Data.People.Users.Domain.Services
         public User UserTeam(long userId)
         {
             return ObjectCache.GetOrSet(() => { return Repository<IUserRepository>().UserTeam(userId); },
-                $"{_singleUserCacheKey}_UserTeam_{userId}").Value;
+                $"{SingleUserCacheKey}_UserTeam_{userId}").Value;
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace Alabo.Data.People.Users.Domain.Services
         {
             if (userName.IsNullOrEmpty()) return null;
 
-            var cacheKey = _singleUserCacheKey + "_UserName_" + userName;
+            var cacheKey = SingleUserCacheKey + "_UserName_" + userName;
             if (!ObjectCache.TryGet(cacheKey, out User result))
             {
                 result = Repository<IUserRepository>().GetSingle(userName.Trim());
@@ -148,7 +148,7 @@ namespace Alabo.Data.People.Users.Domain.Services
         /// <param name="userId">会员Id</param>
         public User GetUserDetail(long userId)
         {
-            var cacheKey = _singleUserCacheKey + "_Detail_Id_" + userId;
+            var cacheKey = SingleUserCacheKey + "_Detail_Id_" + userId;
             if (!ObjectCache.TryGet(cacheKey, out User result))
             {
                 result = Repository<IUserRepository>().GetUserDetail(userId);
@@ -162,15 +162,15 @@ namespace Alabo.Data.People.Users.Domain.Services
         /// <summary>
         ///     获取s the 会员 detail.
         /// </summary>
-        /// <param name="UserName">Name of the 会员.</param>
-        public User GetUserDetail(string UserName)
+        /// <param name="userName">Name of the 会员.</param>
+        public User GetUserDetail(string userName)
         {
-            if (UserName.IsNullOrEmpty()) return null;
+            if (userName.IsNullOrEmpty()) return null;
 
-            var cacheKey = _singleUserCacheKey + "_Detail_UserName_" + UserName;
+            var cacheKey = SingleUserCacheKey + "_Detail_UserName_" + userName;
             if (!ObjectCache.TryGet(cacheKey, out User result))
             {
-                result = Repository<IUserRepository>().GetUserDetail(UserName.Trim());
+                result = Repository<IUserRepository>().GetUserDetail(userName.Trim());
                 if (result != null) ObjectCache.Set(cacheKey, result);
             }
 
@@ -441,20 +441,20 @@ namespace Alabo.Data.People.Users.Domain.Services
         ///     删除缓存
         /// </summary>
         /// <param name="userId">会员Id</param>
-        /// <param name="UserName">Name of the 会员.</param>
-        public void DeleteUserCache(long userId, string UserName)
+        /// <param name="userName">Name of the 会员.</param>
+        public void DeleteUserCache(long userId, string userName)
         {
-            var cacheKey = _singleUserCacheKey + "_Id_" + userId;
+            var cacheKey = SingleUserCacheKey + "_Id_" + userId;
             ObjectCache.Remove(cacheKey);
-            cacheKey = _singleUserCacheKey + "_UserName_" + UserName.Trim();
+            cacheKey = SingleUserCacheKey + "_UserName_" + userName.Trim();
             ObjectCache.Remove(cacheKey);
-            cacheKey = _singleUserCacheKey + "_Detail_UserName_" + UserName.Trim();
+            cacheKey = SingleUserCacheKey + "_Detail_UserName_" + userName.Trim();
             ObjectCache.Remove(cacheKey);
-            cacheKey = _singleUserCacheKey + "_Detail_Id_" + userId;
+            cacheKey = SingleUserCacheKey + "_Detail_Id_" + userId;
             ObjectCache.Remove(cacheKey);
             cacheKey = "UserAllGradeId" + userId;
             ObjectCache.Remove(cacheKey);
-            cacheKey = "dynamic_GetSingleUser" + UserName;
+            cacheKey = "dynamic_GetSingleUser" + userName;
             ObjectCache.Remove(cacheKey);
         }
 

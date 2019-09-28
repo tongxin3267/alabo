@@ -21,8 +21,8 @@ namespace Alabo.Data.People.Users.Domain.Services
         /// <summary>
         ///     根据ParentId计算组织架构图
         /// </summary>
-        /// <param name="ParentId"></param>
-        string GetParentMap(long ParentId);
+        /// <param name="parentId"></param>
+        string GetParentMap(long parentId);
 
         void UpdateMap(long userId, long parentId);
 

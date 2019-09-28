@@ -139,7 +139,7 @@ namespace Alabo.Data.People.Users.Domain.Repositories
 
         private UserDetail ReadUser(IDataReader reader)
         {
-            var UserDetail = new UserDetail
+            var userDetail = new UserDetail
             {
                 Id = reader["Id"].ConvertToLong(0),
                 UserId = reader["UserId"].ConvertToLong(0),
@@ -151,7 +151,7 @@ namespace Alabo.Data.People.Users.Domain.Repositories
                 Avator = reader["Avator"].ToString(),
                 OpenId = reader["OpenId"].ToString()
             };
-            return UserDetail;
+            return userDetail;
         }
 
         private long ReadUserId(IDataReader reader)

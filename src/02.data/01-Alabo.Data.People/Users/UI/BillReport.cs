@@ -18,35 +18,35 @@ namespace Alabo.Data.People.Users.UI
             var dbContext = Ioc.Resolve<IUserRepository>().RepositoryContext;
             //总账单额度
             var sqlTotalBill = @" select sum(Amount) from [dbo].[Asset_Bill]   ";
-            var TotalBill = dbContext.ExecuteScalar(sqlTotalBill);
+            var totalBill = dbContext.ExecuteScalar(sqlTotalBill);
             //最近总账单额度
             var sqlNewTotalBill =
                 @"select sum(Amount) from [dbo].[Asset_Bill] where  DateDiff(dd,CreateTime,getdate())<=3";
-            var NewTotalBill = dbContext.ExecuteScalar(sqlNewTotalBill);
+            var newTotalBill = dbContext.ExecuteScalar(sqlNewTotalBill);
             //最近七天总账单额度
             var sqlWeekTotalBill =
                 @"select sum(Amount) from [dbo].[Asset_Bill] where  DateDiff(dd,CreateTime,getdate())<=7";
-            var WeekTotalBill = dbContext.ExecuteScalar(sqlWeekTotalBill);
+            var weekTotalBill = dbContext.ExecuteScalar(sqlWeekTotalBill);
             //最近一个月总账单额度
             var sqlMonthTotalBill =
                 @"select sum(Amount) from [dbo].[Asset_Bill] where  DateDiff(dd,CreateTime,getdate())<=31";
-            var MonthTotalBill = dbContext.ExecuteScalar(sqlMonthTotalBill);
+            var monthTotalBill = dbContext.ExecuteScalar(sqlMonthTotalBill);
 
             //总充值金额
             var sqlTotalRecharge = @" select sum(Amount) from [dbo].[Asset_Bill]   ";
-            var TotalRecharge = dbContext.ExecuteScalar(sqlTotalRecharge);
+            var totalRecharge = dbContext.ExecuteScalar(sqlTotalRecharge);
             //总提现金额
             var sqlTotalCash =
                 @"select sum(Amount) from [dbo].[Asset_Bill] where  DateDiff(dd,CreateTime,getdate())<=3";
-            var TotalCash = dbContext.ExecuteScalar(sqlTotalCash);
+            var totalCash = dbContext.ExecuteScalar(sqlTotalCash);
             //总消费金额
             var sqlTotalConsume =
                 @"select sum(Amount) from [dbo].[Asset_Bill] where  DateDiff(dd,CreateTime,getdate())<=7";
-            var TotalConsume = dbContext.ExecuteScalar(sqlTotalConsume);
+            var totalConsume = dbContext.ExecuteScalar(sqlTotalConsume);
             //总销售金额
             var sqlTotalSale =
                 @"select sum(Amount) from [dbo].[Asset_Bill] where  DateDiff(dd,CreateTime,getdate())<=31";
-            var TotalSale = dbContext.ExecuteScalar(sqlTotalSale);
+            var totalSale = dbContext.ExecuteScalar(sqlTotalSale);
 
             //多维度分析
             var sqlCountByDay = @" SELECT CONVERT(VARCHAR(100), CreateTime, 23) Day
@@ -62,44 +62,44 @@ namespace Alabo.Data.People.Users.UI
             {
                 new AutoReprotDataItem
                 {
-                    Color = "Green", FontColor = "White", Name = "总账单额度", Intro = TotalBill.ToString(),
-                    Value = TotalBill.ToString().ToDecimal(), Icon = "aa1.ico"
+                    Color = "Green", FontColor = "White", Name = "总账单额度", Intro = totalBill.ToString(),
+                    Value = totalBill.ToString().ToDecimal(), Icon = "aa1.ico"
                 },
                 new AutoReprotDataItem
                 {
-                    Color = "Lime", FontColor = "White", Name = "最近总账单额度", Intro = NewTotalBill.ToString(),
-                    Value = NewTotalBill.ToString().ToDecimal(), Icon = "aa2.ico"
+                    Color = "Lime", FontColor = "White", Name = "最近总账单额度", Intro = newTotalBill.ToString(),
+                    Value = newTotalBill.ToString().ToDecimal(), Icon = "aa2.ico"
                 },
                 new AutoReprotDataItem
                 {
-                    Color = "Orange", FontColor = "White", Name = "最近七天总账单额度", Intro = WeekTotalBill.ToString(),
-                    Value = WeekTotalBill.ToString().ToDecimal(), Icon = "aa3.ico"
+                    Color = "Orange", FontColor = "White", Name = "最近七天总账单额度", Intro = weekTotalBill.ToString(),
+                    Value = weekTotalBill.ToString().ToDecimal(), Icon = "aa3.ico"
                 },
                 new AutoReprotDataItem
                 {
-                    Color = "Red", FontColor = "White", Name = "最近一个月总账单额度", Intro = MonthTotalBill.ToString(),
-                    Value = MonthTotalBill.ToString().ToDecimal(), Icon = "aa4.ico"
+                    Color = "Red", FontColor = "White", Name = "最近一个月总账单额度", Intro = monthTotalBill.ToString(),
+                    Value = monthTotalBill.ToString().ToDecimal(), Icon = "aa4.ico"
                 },
 
                 new AutoReprotDataItem
                 {
-                    Color = "Green", FontColor = "White", Name = "总充值金额", Intro = TotalRecharge.ToString(),
-                    Value = TotalRecharge.ToString().ToDecimal(), Icon = "aa1.ico"
+                    Color = "Green", FontColor = "White", Name = "总充值金额", Intro = totalRecharge.ToString(),
+                    Value = totalRecharge.ToString().ToDecimal(), Icon = "aa1.ico"
                 },
                 new AutoReprotDataItem
                 {
-                    Color = "Lime", FontColor = "White", Name = "总提现金额", Intro = TotalCash.ToString(),
-                    Value = TotalCash.ToString().ToDecimal(), Icon = "aa2.ico"
+                    Color = "Lime", FontColor = "White", Name = "总提现金额", Intro = totalCash.ToString(),
+                    Value = totalCash.ToString().ToDecimal(), Icon = "aa2.ico"
                 },
                 new AutoReprotDataItem
                 {
-                    Color = "Orange", FontColor = "White", Name = "总消费金额", Intro = TotalConsume.ToString(),
-                    Value = TotalConsume.ToString().ToDecimal(), Icon = "aa3.ico"
+                    Color = "Orange", FontColor = "White", Name = "总消费金额", Intro = totalConsume.ToString(),
+                    Value = totalConsume.ToString().ToDecimal(), Icon = "aa3.ico"
                 },
                 new AutoReprotDataItem
                 {
-                    Color = "Red", FontColor = "White", Name = "总销售金额", Intro = TotalSale.ToString(),
-                    Value = TotalSale.ToString().ToDecimal(), Icon = "aa4.ico"
+                    Color = "Red", FontColor = "White", Name = "总销售金额", Intro = totalSale.ToString(),
+                    Value = totalSale.ToString().ToDecimal(), Icon = "aa4.ico"
                 }
             };
             var chartCols = new List<string> {"日期", "总账户额度", "帐单进出次数", "消费额度", "销售额度", "变动后账户额度"};

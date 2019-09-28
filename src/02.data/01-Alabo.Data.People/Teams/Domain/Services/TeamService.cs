@@ -167,8 +167,8 @@ namespace Alabo.Data.People.Teams.Domain.Services
                 var userIds = new List<long>();
                 userIdStrings.ForEach(e =>
                 {
-                    var _userId = e.Trim().ConvertToLong(0);
-                    if (_userId > 0) userIds.Add(_userId);
+                    var userId = e.Trim().ConvertToLong(0);
+                    if (userId > 0) userIds.Add(userId);
                 });
                 var users = Resolve<IUserService>().GetList(userIds);
                 return users;
@@ -237,8 +237,8 @@ namespace Alabo.Data.People.Teams.Domain.Services
                 var userIds = new List<long>();
                 userIdStrings.ForEach(e =>
                 {
-                    var _userId = e.Trim().ConvertToLong(0);
-                    if (_userId > 0) userIds.Add(_userId);
+                    var userId = e.Trim().ConvertToLong(0);
+                    if (userId > 0) userIds.Add(userId);
                 });
                 var users = Resolve<IUserService>().GetList(userIds);
                 return users;

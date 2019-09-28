@@ -13,7 +13,7 @@ namespace Alabo.Data.People.Users.Domain.Services
         /// <summary>
         ///     The single 会员 cache key
         /// </summary>
-        private static readonly string _singleUserCacheKey = "SingleUserCacheKey";
+        private static readonly string SingleUserCacheKey = "SingleUserCacheKey";
 
         /// <summary>
         ///     The 会员 map repository

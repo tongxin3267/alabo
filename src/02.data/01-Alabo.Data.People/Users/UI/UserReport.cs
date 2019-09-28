@@ -27,29 +27,29 @@ namespace Alabo.Data.People.Users.UI
             //新用户数
             var sqlNewMember = @"select count(*) from  [dbo].[User_User]
                                      where DateDiff(dd,CreateTime,getdate())<=3 ";
-            var NewMemberTotal = dbContext.ExecuteScalar(sqlMemberCount);
+            var newMemberTotal = dbContext.ExecuteScalar(sqlMemberCount);
             //近一个星期访客
             var sqlWeekMember = @"select count(*) from  [dbo].[User_User]
                                      where DateDiff(dd,CreateTime,getdate())<=7";
-            var WeekMemberCount = dbContext.ExecuteScalar(sqlWeekMember);
+            var weekMemberCount = dbContext.ExecuteScalar(sqlWeekMember);
 
             //近一个月访客数
             var sqlMonthMember = @"select count(*) from  [dbo].[User_User]
                                      where DateDiff(dd,CreateTime,getdate())<=31";
-            var MonthMemberCount = dbContext.ExecuteScalar(sqlMonthMember);
+            var monthMemberCount = dbContext.ExecuteScalar(sqlMonthMember);
 
             //总订单数
             var sqlTotalOrder = @" SELECT COUNT(*) FROM Shop_Order";
-            var TotalOrderCount = dbContext.ExecuteScalar(sqlTotalOrder);
+            var totalOrderCount = dbContext.ExecuteScalar(sqlTotalOrder);
             //新订单数
             var sqlNewOrder = @" SELECT COUNT(*) FROM Shop_Order where DateDiff(dd,CreateTime,getdate())<=3";
             var newOrderCount = dbContext.ExecuteScalar(sqlNewOrder);
             //近一个星期订单
             var sqlWeekOrder = @" SELECT COUNT(*) FROM Shop_Order WHERE DateDiff(dd,CreateTime,getdate())<=7";
-            var WeekOrderCount = dbContext.ExecuteScalar(sqlNewOrder);
+            var weekOrderCount = dbContext.ExecuteScalar(sqlNewOrder);
             //近一个月订单数
             var sqlMonthOrder = @" SELECT COUNT(*) FROM Shop_Order WHERE DateDiff(dd,CreateTime,getdate())<=31 ";
-            var MonthOrderCount = dbContext.ExecuteScalar(sqlNewOrder);
+            var monthOrderCount = dbContext.ExecuteScalar(sqlNewOrder);
 
             //var outOrderRate = newOrderCount.ToString().ToDecimal() / 1.8m;
 
@@ -69,24 +69,24 @@ namespace Alabo.Data.People.Users.UI
                 },
                 new AutoReprotDataItem
                 {
-                    Color = "Orange", FontColor = "White", Name = "新用户数", Intro = NewMemberTotal.ToString(),
-                    Value = NewMemberTotal.ToString().ToDecimal(), Icon = "aa1.ico"
+                    Color = "Orange", FontColor = "White", Name = "新用户数", Intro = newMemberTotal.ToString(),
+                    Value = newMemberTotal.ToString().ToDecimal(), Icon = "aa1.ico"
                 },
                 new AutoReprotDataItem
                 {
-                    Color = "Green", FontColor = "White", Name = "近一个星期访客", Intro = WeekMemberCount.ToString(),
-                    Value = WeekMemberCount.ToString().ToDecimal(), Icon = "aa1.ico"
+                    Color = "Green", FontColor = "White", Name = "近一个星期访客", Intro = weekMemberCount.ToString(),
+                    Value = weekMemberCount.ToString().ToDecimal(), Icon = "aa1.ico"
                 },
                 new AutoReprotDataItem
                 {
-                    Color = "Lime", FontColor = "White", Name = "近一个月访客数", Intro = MonthMemberCount.ToString(),
-                    Value = MonthMemberCount.ToString().ToDecimal(), Icon = "aa2.ico"
+                    Color = "Lime", FontColor = "White", Name = "近一个月访客数", Intro = monthMemberCount.ToString(),
+                    Value = monthMemberCount.ToString().ToDecimal(), Icon = "aa2.ico"
                 },
 
                 new AutoReprotDataItem
                 {
-                    Color = "Red", FontColor = "White", Name = "总订单数", Intro = TotalOrderCount.ToString(),
-                    Value = TotalOrderCount.ToString().ToDecimal(), Icon = "aa3.ico"
+                    Color = "Red", FontColor = "White", Name = "总订单数", Intro = totalOrderCount.ToString(),
+                    Value = totalOrderCount.ToString().ToDecimal(), Icon = "aa3.ico"
                 },
                 new AutoReprotDataItem
                 {
@@ -95,13 +95,13 @@ namespace Alabo.Data.People.Users.UI
                 },
                 new AutoReprotDataItem
                 {
-                    Color = "Green", FontColor = "White", Name = "近一个星期订单", Intro = WeekOrderCount.ToString(),
-                    SubValue = 5, Value = WeekOrderCount.ToString().ToDecimal(), Icon = "aa3.ico"
+                    Color = "Green", FontColor = "White", Name = "近一个星期订单", Intro = weekOrderCount.ToString(),
+                    SubValue = 5, Value = weekOrderCount.ToString().ToDecimal(), Icon = "aa3.ico"
                 },
                 new AutoReprotDataItem
                 {
-                    Color = "Lime", FontColor = "White", Name = "近一个月订单数", Intro = MonthOrderCount.ToString(),
-                    SubValue = 5, Value = MonthOrderCount.ToString().ToDecimal(), Icon = "aa3.ico"
+                    Color = "Lime", FontColor = "White", Name = "近一个月订单数", Intro = monthOrderCount.ToString(),
+                    SubValue = 5, Value = monthOrderCount.ToString().ToDecimal(), Icon = "aa3.ico"
                 }
             };
 

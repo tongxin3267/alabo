@@ -19,6 +19,6 @@ namespace Alabo.Data.People.Cities.Domain.Services
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        ServiceResult ChangeUserStatus(string userId, string Status);
+        ServiceResult ChangeUserStatus(string userId, string status);
     }
 }

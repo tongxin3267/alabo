@@ -128,7 +128,7 @@ namespace Alabo.Data.People.Users.ViewModels
         /// <summary>
         ///     Gets or sets the verifycode.
         /// </summary>
-        public string verifycode { get; set; }
+        public string Verifycode { get; set; }
 
         /// <summary>
         ///     Gets or sets the parent identifier.
