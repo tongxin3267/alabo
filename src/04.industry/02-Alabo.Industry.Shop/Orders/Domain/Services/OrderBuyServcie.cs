@@ -647,7 +647,7 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                             ParentId = orderBuyInput.ActivityRecordId,
                             OrderId = order.Id,
                             UserId = order.UserId,
-                            StoreId = order.StoreId.ToObjectId(),
+                            StoreId = order.StoreId,
                             Status = ActivityRecordStatus.Processing,
                             ActivityRecordExtension = new ActivityRecordExtension
                             {

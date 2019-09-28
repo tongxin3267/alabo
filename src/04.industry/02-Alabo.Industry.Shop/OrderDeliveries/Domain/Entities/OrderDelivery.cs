@@ -21,6 +21,12 @@ namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities
         PostApi = "Api/OrderDelivery/List", ListApi = "Api/OrderDelivery/List")]
     public class OrderDelivery : AggregateDefaultUserRoot<OrderDelivery>
     {
+        /// <summary>
+        ///     快递公司的名称
+        /// </summary>
+        [Display(Name = "快递公司的名称")]
+        public string Name { get; set; }
+
         #region
 
         /// <summary>
@@ -33,7 +39,8 @@ namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities
         ///     店铺Id
         /// </summary>
         [Display(Name = "店铺Id")]
-        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))]
+        public string StoreId { get; set; }
 
         /// <summary>
         ///     快递公司guid
@@ -66,12 +73,6 @@ namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities
 
         [Display(Name = "订单发货数据")]
         public OrderDeliveryExtension OrderDeliveryExtension { get; set; } = new OrderDeliveryExtension();
-
-        /// <summary>
-        ///     快递公司的名称
-        /// </summary>
-        [Display(Name = "快递公司的名称")]
-        public string Name { get; set; }
 
         #endregion
     }

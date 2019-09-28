@@ -45,7 +45,8 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Entities
         ///     所属店铺
         /// </summary>
         [Display(Name = "所属店铺")]
-        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))]
+        public string StoreId { get; set; }
 
         /// <summary>
         ///     关联订单
