@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Industry.Shop.Activitys.Domain.Entities.Extension;
 using Alabo.Industry.Shop.Activitys.Domain.Enum;
 using Alabo.Tenants;
@@ -8,6 +9,7 @@ using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace Alabo.Industry.Shop.Activitys.Domain.Entities
 {
@@ -43,7 +45,8 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Entities
         ///     所属店铺
         /// </summary>
         [Display(Name = "所属店铺")]
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))]
+        public string StoreId { get; set; }
 
         /// <summary>
         ///     关联订单
@@ -82,11 +85,6 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Entities
                 //应用程序编号
                 builder.HasKey(e => e.Id);
                 builder.Ignore(e => e.ActivityRecordExtension);
-
-                if (TenantContext.IsTenant)
-                {
-                    // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
-                }
             }
         }
     }

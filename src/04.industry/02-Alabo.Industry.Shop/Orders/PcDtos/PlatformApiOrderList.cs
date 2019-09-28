@@ -108,7 +108,7 @@ namespace Alabo.Industry.Shop.Orders.PcDtos
             {
                 var store = Resolve<IStoreService>().GetUserStore(autoModel.BasicUser.Id);
                 if (store == null) throw new ValidException("您不是供应商,暂无店铺");
-                expressionQuery.And(e => e.StoreId == store.Id);
+                expressionQuery.And(e => e.StoreId == store.Id.ToString());
                 // 供应商
                 //expressionQuery.And(e => e.OrderExtension.IsSupplierView == true);
                 expressionQuery.And(u => u.OrderStatus == OrderStatus.Remited);

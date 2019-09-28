@@ -3,10 +3,12 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Enums;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Industry.Shop.Products.Domain.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace Alabo.Industry.Shop.Deliveries.Dtos
 {
@@ -22,7 +24,7 @@ namespace Alabo.Industry.Shop.Deliveries.Dtos
         ///     供应商 Id，0 表示平台商品
         /// </summary>
         [Display(Name = "供应商")]
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     商品价格模式的配置Id 与PriceStyleConfig 对应

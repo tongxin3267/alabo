@@ -67,7 +67,7 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         {
             var store = Resolve<IStoreService>().GetSingle(u => u.UserId == loginUserId);
             var order = Resolve<IOrderService>().GetSingle(u => u.Id == id);
-            if (order?.StoreId != store?.Id) return ApiResult.Failure<OrderShowOutput>("你无权查看该订单");
+            if (order?.StoreId != store?.Id.ToString()) return ApiResult.Failure<OrderShowOutput>("你无权查看该订单");
 
             var orderShow = Resolve<IOrderService>().GetSingleAdmin(id, loginUserId);
 
@@ -139,7 +139,7 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         [HttpGet]
         [Display(Description = "订单取消")]
         [ApiAuth]
-        public ApiResult StoreCancel(long id, ObjectId storeId)
+        public ApiResult StoreCancel(long id, string storeId)
         {
             var order = Resolve<IOrderService>().GetSingle(e =>
                 e.Id == id && e.StoreId == storeId && e.OrderStatus == OrderStatus.WaitingBuyerPay);

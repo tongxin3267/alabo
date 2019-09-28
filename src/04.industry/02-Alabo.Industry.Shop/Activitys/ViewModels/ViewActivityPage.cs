@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Enums;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Extensions;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.UI.Enum;
@@ -9,6 +10,7 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace Alabo.Industry.Shop.Activitys.ViewModels
 {
@@ -27,7 +29,7 @@ namespace Alabo.Industry.Shop.Activitys.ViewModels
         ///     活动对应的店铺Id
         /// </summary>
         [Display(Name = "活动对应的店铺Id")]
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     活动名称:比如活动券，满就送，一元夺宝等等

@@ -387,7 +387,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
                 var order = new Order
                 {
                     UserId = orderInput.BuyUser.Id,
-                    StoreId = ObjectId.Empty,
+                    StoreId = string.Empty,
                     OrderStatus = OrderStatus.WaitingBuyerPay,
                     OrderType = OrderType.VirtualOrder,
                     TotalAmount = payPrice.Item2,

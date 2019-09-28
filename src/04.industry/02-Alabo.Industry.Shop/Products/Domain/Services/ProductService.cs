@@ -71,7 +71,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         /// <returns></returns>
         public long GetProductByStoreCount(ObjectId storeId)
         {
-            var count = Resolve<IProductService>().GetList().Where(l => l.StoreId == storeId).Count().ConvertToLong();
+            var count = Resolve<IProductService>().GetList().Where(l => l.StoreId == storeId.ToString()).Count().ConvertToLong();
             return count;
         }
 
@@ -216,7 +216,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
             //product extension
             product.ProductExtensions = new ProductExtensions
             {
-                Store = Resolve<IStoreService>().GetSingle(e => e.Id == product.StoreId),
+                Store = Resolve<IStoreService>().GetSingle(e => e.Id == product.StoreId.ToObjectId()),
                 ProductCategory = product.Detail.PropertyJson.DeserializeJson<Category>(),
                 ProductThums = productThums
             };
@@ -426,7 +426,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         {
             var product = GetSingle(u => u.Id == productId);
             if (product == null) return null;
-            var storeInfo = Resolve<IStoreService>().GetSingle(u => u.Id == product.StoreId);
+            var storeInfo = Resolve<IStoreService>().GetSingle(u => u.Id == product.StoreId.ToObjectId());
             // var grade = Resolve<IAutoConfigService>().GetList<SupplierGradeConfig>(u => u.Id == storeInfo.GradeId);
             var model = new StoreInfoOutput
             {

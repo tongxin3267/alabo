@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.Domains.Enums;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Extensions;
 using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.UI.Enum;
@@ -10,6 +11,7 @@ using Alabo.Users.Entities;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace Alabo.Industry.Shop.Activitys.ViewModels
 {
@@ -71,7 +73,7 @@ namespace Alabo.Industry.Shop.Activitys.ViewModels
         ///     所属店铺
         /// </summary>
         [Display(Name = "所属店铺")]
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     订单交易状态,OrderStatus等待付款WaitingBuyerPay = 0,等待发货WaitingSellerSendGoods = 1,已发货WaitingBuyerConfirm = 2,交易成功Success =

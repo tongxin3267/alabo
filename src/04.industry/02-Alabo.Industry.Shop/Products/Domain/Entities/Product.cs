@@ -35,7 +35,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Entities
         [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, PlaceHolder = "请输入供应商",
             IsShowAdvancedSerach = true, DataField = "StoreId", GroupTabId = 2, IsMain = true, Width = "150",
             ListShow = false, SortOrder = 2, Link = "/Admin/Product/Edit?id=[[Id]]")]
-        public ObjectId StoreId { get; set; }
+        public string StoreId { get; set; }
 
         /// <summary>
         ///     用于列表页显示的名称

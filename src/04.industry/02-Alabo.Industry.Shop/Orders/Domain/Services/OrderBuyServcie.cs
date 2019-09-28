@@ -399,7 +399,7 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                     var order = new Order
                     {
                         UserId = orderBuyInput.UserId,
-                        StoreId = storeOrderItem.StoreId,
+                        StoreId = storeOrderItem.StoreId.ToString(),
                         OrderStatus = OrderStatus.WaitingBuyerPay,
                         OrderType = orderBuyInput.OrderType,
                         AddressId = orderBuyInput.AddressId,

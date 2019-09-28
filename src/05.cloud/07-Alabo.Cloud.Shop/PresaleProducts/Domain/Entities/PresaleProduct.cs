@@ -2,8 +2,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.Domains.Entities;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Entities
 {
@@ -18,6 +20,7 @@ namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Entities
         ///     供应商 Id，0 表示平台商品
         /// </summary>
         [Display(Name = "供应商")]
+        [JsonConverter(typeof(ObjectIdConverter))]
         public ObjectId StoreId { get; set; }
 
         /// <summary>

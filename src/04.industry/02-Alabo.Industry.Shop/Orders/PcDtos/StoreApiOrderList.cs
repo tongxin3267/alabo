@@ -39,7 +39,7 @@ namespace Alabo.Industry.Shop.Orders.PcDtos
 
             var store = Resolve<IStoreService>().GetUserStore(model.UserId);
             if (store == null) throw new ValidException("您无权查看其他店铺订单");
-            expressionQuery.And(e => e.StoreId == store.Id);
+            expressionQuery.And(e => e.StoreId == store.Id.ToString());
 
             model.UserId = 0;
             var list = Resolve<IOrderApiService>().GetPageList(dic.ToJson(), expressionQuery);

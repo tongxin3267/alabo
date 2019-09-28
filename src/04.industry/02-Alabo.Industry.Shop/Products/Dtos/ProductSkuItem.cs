@@ -1,7 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Industry.Shop.Products.Domain.Enums;
 using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace Alabo.Industry.Shop.Products.Dtos
 {
@@ -16,7 +18,7 @@ namespace Alabo.Industry.Shop.Products.Dtos
         /// <value>
         ///     The store identifier.
         /// </value>
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     商品ID

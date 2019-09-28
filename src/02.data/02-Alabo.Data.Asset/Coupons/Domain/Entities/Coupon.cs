@@ -1,13 +1,15 @@
-﻿using Alabo.App.Asset.Coupons.Domain.Enums;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.App.Asset.Coupons.Domain.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
 
 namespace Alabo.App.Asset.Coupons.Domain.Entities
 {
@@ -32,7 +34,7 @@ namespace Alabo.App.Asset.Coupons.Domain.Entities
         /// <summary>
         ///     店铺Id，根据店铺来设置优惠券
         /// </summary>
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     消费满多少可用, 0不限制（使用条件）

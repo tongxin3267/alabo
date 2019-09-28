@@ -3,12 +3,14 @@ using System.ComponentModel.DataAnnotations;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Industry.Shop.OrderDeliveries.Domain.Entities.Extensions;
 using Alabo.Tenants;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities
 {
@@ -19,6 +21,12 @@ namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities
         PostApi = "Api/OrderDelivery/List", ListApi = "Api/OrderDelivery/List")]
     public class OrderDelivery : AggregateDefaultUserRoot<OrderDelivery>
     {
+        /// <summary>
+        ///     快递公司的名称
+        /// </summary>
+        [Display(Name = "快递公司的名称")]
+        public string Name { get; set; }
+
         #region
 
         /// <summary>
@@ -31,7 +39,8 @@ namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities
         ///     店铺Id
         /// </summary>
         [Display(Name = "店铺Id")]
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))]
+        public string StoreId { get; set; }
 
         /// <summary>
         ///     快递公司guid
@@ -64,12 +73,6 @@ namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities
 
         [Display(Name = "订单发货数据")]
         public OrderDeliveryExtension OrderDeliveryExtension { get; set; } = new OrderDeliveryExtension();
-
-        /// <summary>
-        ///     快递公司的名称
-        /// </summary>
-        [Display(Name = "快递公司的名称")]
-        public string Name { get; set; }
 
         #endregion
     }

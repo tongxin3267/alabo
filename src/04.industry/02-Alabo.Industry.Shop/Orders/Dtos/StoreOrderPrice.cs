@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace Alabo.Industry.Shop.Orders.Dtos
 {
@@ -110,7 +112,7 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         /// <summary>
         ///     店铺Id
         /// </summary>
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     实际店铺运费

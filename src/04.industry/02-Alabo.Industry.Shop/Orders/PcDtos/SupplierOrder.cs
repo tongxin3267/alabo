@@ -101,7 +101,7 @@ namespace Alabo.Industry.Shop.Orders.PcDtos
 
             var store = Resolve<IStoreService>().GetSingle(u => u.UserId == autoModel.BasicUser.Id);
             if (store == null) throw new ValidException("您不是供应商,暂无店铺");
-            expressionQuery.And(e => e.StoreId == store.Id);
+            expressionQuery.And(e => e.StoreId == store.Id.ToString());
 
             //if (autoModel.Filter == FilterType.Admin || autoModel.Filter == FilterType.All) {
             //var isAdmin = Resolve<IUserService>().IsAdmin(autoModel.BasicUser.Id);

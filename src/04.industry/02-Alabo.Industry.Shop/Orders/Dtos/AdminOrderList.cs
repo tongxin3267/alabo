@@ -1,11 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Enums;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Industry.Shop.Orders.Domain.Entities;
 using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.Users.Entities;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace Alabo.Industry.Shop.Orders.Dtos
 {
@@ -38,7 +40,7 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         /// <summary>
         ///     所属店铺
         /// </summary>
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     店铺名称
