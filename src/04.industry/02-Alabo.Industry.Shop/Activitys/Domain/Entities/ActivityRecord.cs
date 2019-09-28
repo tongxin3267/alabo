@@ -7,6 +7,7 @@ using Alabo.Tenants;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Activitys.Domain.Entities
 {
@@ -42,7 +43,7 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Entities
         ///     所属店铺
         /// </summary>
         [Display(Name = "所属店铺")]
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     关联订单
@@ -81,7 +82,7 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Entities
                 //应用程序编号
                 builder.HasKey(e => e.Id);
                 builder.Ignore(e => e.ActivityRecordExtension);
-             
+
                 if (TenantContext.IsTenant)
                 {
                     // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);

@@ -11,6 +11,7 @@ using Alabo.Industry.Shop.Products.Domain.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.ViewModel;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Products.ViewModels
 {
@@ -211,6 +212,6 @@ namespace Alabo.Industry.Shop.Products.ViewModels
         /// <summary>
         ///     供应商Id
         /// </summary>
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
     }
 }

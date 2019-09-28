@@ -9,6 +9,7 @@ using Alabo.UI.Enum;
 using Alabo.Users.Entities;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Activitys.ViewModels
 {
@@ -67,7 +68,7 @@ namespace Alabo.Industry.Shop.Activitys.ViewModels
         ///     所属店铺
         /// </summary>
         [Display(Name = "所属店铺")]
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     订单交易状态,OrderStatus等待付款WaitingBuyerPay = 0,等待发货WaitingSellerSendGoods = 1,已发货WaitingBuyerConfirm = 2,交易成功Success =

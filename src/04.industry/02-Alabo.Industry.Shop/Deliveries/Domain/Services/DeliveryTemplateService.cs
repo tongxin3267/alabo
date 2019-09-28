@@ -21,7 +21,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
         /// </summary>
         /// <param name="storeId"></param>
         /// <returns></returns>
-        public List<KeyValue> GetStoreDeliveryTemplateByCache(long storeId)
+        public List<KeyValue> GetStoreDeliveryTemplateByCache(ObjectId StoreId)
         {
             var store = Resolve<IShopStoreService>().GetSingleFromCache(storeId);
             if (store == null) return null;

@@ -10,6 +10,7 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Activitys.Domain.Entities
 {
@@ -25,7 +26,7 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Entities
         ///     活动对应的店铺Id
         /// </summary>
         [Display(Name = "活动对应的店铺Id")]
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     活动名称:比如活动券，满就送，一元夺宝等等
@@ -136,7 +137,7 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Entities
                 //应用程序编号
                 builder.HasKey(e => e.Id);
                 builder.Ignore(e => e.ActivityExtension);
-             
+
                 //builder.Ignore(e => e.ProductIdList);
                 if (TenantContext.IsTenant)
                 {

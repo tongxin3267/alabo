@@ -13,6 +13,6 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
         /// </summary>
         /// <param name="storeId"></param>
         /// <returns></returns>
-        List<KeyValue> GetStoreDeliveryTemplateByCache(long storeId);
+        List<KeyValue> GetStoreDeliveryTemplateByCache(ObjectId StoreId);
     }
 }

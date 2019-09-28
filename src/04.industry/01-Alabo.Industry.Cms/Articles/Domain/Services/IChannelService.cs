@@ -24,12 +24,6 @@ namespace Alabo.Industry.Cms.Articles.Domain.Services
         void InitialData();
 
         /// <summary>
-        ///     根据频道Id获取类型
-        /// </summary>
-        /// <param name="channeId"></param>
-        SideBarType GetSideBarTypeById(ObjectId channeId);
-
-        /// <summary>
         ///     获取频道分类类型
         /// </summary>
         /// <param name="channel"></param>

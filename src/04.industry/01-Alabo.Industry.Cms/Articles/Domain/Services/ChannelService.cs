@@ -21,25 +21,6 @@ namespace Alabo.Industry.Cms.Articles.Domain.Services
         }
 
         /// <summary>
-        ///     根据频道Id获取类型
-        /// </summary>
-        /// <param name="channeId"></param>
-        public SideBarType GetSideBarTypeById(ObjectId channeId)
-        {
-            var channel = GetSingle(r => r.Id == channeId);
-            if (channel != null)
-            {
-                //所有频道左边菜单Id都是在ChannelType+9000
-                var sideBarid = 80 + Convert.ToInt16(channel.ChannelType);
-
-                sideBarid.IntToEnum(out var sideBarType);
-                return sideBarType;
-            }
-
-            return SideBarType.CmsSideBar;
-        }
-
-        /// <summary>
         ///     获取频道分类类型
         /// </summary>
         /// <param name="channel"></param>
@@ -90,7 +71,7 @@ namespace Alabo.Industry.Cms.Articles.Domain.Services
                 var channelTypeEnum = typeof(ChannelType);
                 foreach (var channelTypeName in Enum.GetNames(channelTypeEnum))
                 {
-                    var channelType = (ChannelType) Enum.Parse(channelTypeEnum, channelTypeName);
+                    var channelType = (ChannelType)Enum.Parse(channelTypeEnum, channelTypeName);
                     if (channelType >= 0)
                     {
                         var channel = new Channel

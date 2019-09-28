@@ -67,7 +67,7 @@ namespace Alabo.Test.Cms.Articles.Domain.Services
         [TestMethod("GetChannelId_ChannelType")]
         public void GetChannelId_ChannelType_test()
         {
-            var channelType = (ChannelType) 0;
+            var channelType = (ChannelType)0;
             var result = Resolve<IChannelService>().GetChannelId(channelType);
             Assert.NotNull(result);
         }
@@ -105,21 +105,6 @@ namespace Alabo.Test.Cms.Articles.Domain.Services
             //var channeId = ObjectId.Empty;
             //var result = Service<IChannelService>().GetSideBarTypeById(channeId);
             //Assert.NotNull(result);
-        }
-
-        [Fact]
-        [TestMethod("GetSideBarTypeById_String")]
-        public void GetSideBarTypeById_String_test()
-        {
-            var channelList = Resolve<IChannelService>().GetList();
-            foreach (var item in channelList)
-            {
-                var result = Resolve<IChannelService>().GetSideBarTypeById(item.Id);
-
-                Assert.True(result > 0);
-                var fatherId = 9000 + Convert.ToInt32(item.ChannelType);
-                //  Assert.Equal(result, fatherId);
-            }
         }
 
         [Fact]

@@ -5,6 +5,7 @@ using Alabo.Industry.Shop.Orders.Domain.Entities;
 using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.Users.Entities;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Orders.Dtos
 {
@@ -37,7 +38,7 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         /// <summary>
         ///     所属店铺
         /// </summary>
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     店铺名称

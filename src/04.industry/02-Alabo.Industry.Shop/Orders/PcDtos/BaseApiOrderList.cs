@@ -9,6 +9,7 @@ using Alabo.Industry.Shop.Products.Dtos;
 using Alabo.UI;
 using Alabo.Users.Entities;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Orders.PcDtos
 {
@@ -62,7 +63,7 @@ namespace Alabo.Industry.Shop.Orders.PcDtos
         /// <summary>
         ///     所属店铺
         /// </summary>
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     店铺名称

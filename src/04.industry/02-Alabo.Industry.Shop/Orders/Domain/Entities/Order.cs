@@ -11,6 +11,7 @@ using Alabo.Tenants;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Orders.Domain.Entities
 {
@@ -32,7 +33,7 @@ namespace Alabo.Industry.Shop.Orders.Domain.Entities
         [Display(Name = "所属店铺")]
         [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1, Width = "150", ListShow = true,
             IsShowBaseSerach = true, IsShowAdvancedSerach = true, SortOrder = 1)]
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     订单交易状态,OrderStatus等待付款WaitingBuyerPay = 0,等待发货WaitingSellerSendGoods = 1,已发货WaitingBuyerConfirm = 2,交易成功Success =
@@ -167,7 +168,7 @@ namespace Alabo.Industry.Shop.Orders.Domain.Entities
             builder.Ignore(e => e.Serial);
             builder.Ignore(e => e.AccountPayPair);
             builder.Ignore(e => e.OrderExtension);
-         
+
             if (TenantContext.IsTenant)
             {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);

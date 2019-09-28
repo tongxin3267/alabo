@@ -11,6 +11,7 @@ using Alabo.Tool.Payment;
 using Alabo.Users.Entities;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Orders.Dtos
 {
@@ -144,7 +145,7 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         [Display(Name = "店铺Id")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [Range(0, 99999999, ErrorMessage = ErrorMessage.NameNotCorrect)]
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     配送方式 Id 与DeliveryTemplate 的Id对应
@@ -220,7 +221,7 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         /// <summary>
         ///     Gets or sets the store identifier.
         /// </summary>
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     商品数量

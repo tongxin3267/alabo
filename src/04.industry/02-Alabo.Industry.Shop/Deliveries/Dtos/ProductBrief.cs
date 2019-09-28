@@ -6,6 +6,7 @@ using Alabo.Domains.Enums;
 using Alabo.Industry.Shop.Products.Domain.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Deliveries.Dtos
 {
@@ -21,7 +22,7 @@ namespace Alabo.Industry.Shop.Deliveries.Dtos
         ///     供应商 Id，0 表示平台商品
         /// </summary>
         [Display(Name = "供应商")]
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     商品价格模式的配置Id 与PriceStyleConfig 对应
@@ -34,7 +35,6 @@ namespace Alabo.Industry.Shop.Deliveries.Dtos
         /// </summary>
         [Display(Name = "商品类目")]
         public Guid CategoryId { get; set; }
-
 
         /// <summary>
         ///     商品类目名称

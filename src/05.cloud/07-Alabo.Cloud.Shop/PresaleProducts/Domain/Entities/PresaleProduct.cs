@@ -17,7 +17,7 @@ namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Entities
         ///     供应商 Id，0 表示平台商品
         /// </summary>
         [Display(Name = "供应商")]
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     产品id

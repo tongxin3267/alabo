@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.Domains.Entities;
 using Alabo.Industry.Shop.AfterSales.Domain.Enums;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace Alabo.Industry.Shop.AfterSales.Domain.Entities
@@ -24,7 +25,7 @@ namespace Alabo.Industry.Shop.AfterSales.Domain.Entities
         ///     店铺ID,该字段为冗余字段,方便以后查询
         /// </summary>
         [Required]
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     订单ID

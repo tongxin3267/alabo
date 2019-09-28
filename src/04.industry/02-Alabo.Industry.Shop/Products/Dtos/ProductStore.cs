@@ -21,6 +21,7 @@ using Alabo.UI;
 using Alabo.UI.Design.AutoTables;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Products.Dtos
 {
@@ -71,7 +72,7 @@ namespace Alabo.Industry.Shop.Products.Dtos
         [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, PlaceHolder = "请输入供应商",
             IsShowAdvancedSerach = true, DataField = "StoreId", GroupTabId = 2, IsMain = true, Width = "150",
             ListShow = true, SortOrder = 2, Link = "/Admin/Product/Edit?id=[[Id]]")]
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     商品价格模式的配置Id 与PriceStyleConfig 对应

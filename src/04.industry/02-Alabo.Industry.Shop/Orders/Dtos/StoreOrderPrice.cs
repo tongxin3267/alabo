@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Orders.Dtos
 {
@@ -109,7 +110,7 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         /// <summary>
         ///     店铺Id
         /// </summary>
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     实际店铺运费

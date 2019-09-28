@@ -41,7 +41,7 @@ namespace Alabo.Industry.Shop.Deliveries.Controllers
         /// <param name="storeId"></param>
         /// <returns></returns>
         [HttpGet]
-        public ApiResult GetDeliveryTemplateList([FromQuery] long storeId)
+        public ApiResult GetDeliveryTemplateList([FromQuery] ObjectId StoreId)
         {
             var template = Resolve<IDeliveryTemplateService>().GetList(x => x.StoreId == storeId);
 

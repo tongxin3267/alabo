@@ -3,6 +3,7 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Industry.Shop.Products.ViewModels;
 using Microsoft.AspNetCore.Http;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Products.Domain.Services
 {
@@ -18,7 +19,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         /// <param name="productId">The product identifier.</param>
         /// <param name="storeId">The store identifier.</param>
         /// <returns>ViewProductEdit.</returns>
-        ViewProductEdit GetViewProductEdit(long productId, long storeId);
+        ViewProductEdit GetViewProductEdit(long productId, ObjectId StoreId);
 
         /// <summary>
         ///     保存商品

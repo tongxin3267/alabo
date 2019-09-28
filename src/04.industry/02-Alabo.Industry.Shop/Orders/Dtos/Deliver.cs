@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.Domains.Entities;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Orders.Dtos
 {
@@ -31,7 +32,6 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         /// </summary>
         public string Remark { get; set; }
 
-
         /// <summary>
         ///     订单Id
         /// </summary>
@@ -40,7 +40,7 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         /// <summary>
         ///     店铺Id
         /// </summary>
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     用户Id

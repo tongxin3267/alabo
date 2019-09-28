@@ -8,6 +8,7 @@ using Alabo.Industry.Shop.Products.Domain.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Products.ViewModels
 {
@@ -24,7 +25,7 @@ namespace Alabo.Industry.Shop.Products.ViewModels
         [Field(IsShowAdvancedSerach = true, IsShowBaseSerach = true, ControlsType = ControlsType.TextBox)]
         public string StoreName { get; set; }
 
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
 
         [Display(Name = "商品名称")]
         [Field(ControlsType = ControlsType.TextBox, IsShowAdvancedSerach = true, IsShowBaseSerach = true,

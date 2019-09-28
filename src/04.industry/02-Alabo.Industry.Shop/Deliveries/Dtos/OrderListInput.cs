@@ -1,4 +1,5 @@
 ﻿using Alabo.Domains.Query.Dto;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Deliveries.Dtos
 {
@@ -7,6 +8,6 @@ namespace Alabo.Industry.Shop.Deliveries.Dtos
     /// </summary>
     public class ProductListInput : ApiInputDto
     {
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
     }
 }

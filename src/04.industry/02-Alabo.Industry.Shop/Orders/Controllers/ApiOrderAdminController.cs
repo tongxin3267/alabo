@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Alabo.App.Asset.Pays.Domain.Services;
 using Alabo.App.Asset.Pays.Dtos;
+using Alabo.Data.People.Stores.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
@@ -20,6 +21,7 @@ using Alabo.Industry.Shop.Orders.ViewModels;
 using Alabo.Industry.Shop.Orders.ViewModels.OrderEdit;
 using Alabo.Mapping;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Industry.Shop.Orders.Controllers
@@ -137,7 +139,7 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         [HttpGet]
         [Display(Description = "订单取消")]
         [ApiAuth]
-        public ApiResult StoreCancel(long id, long storeId)
+        public ApiResult StoreCancel(long id, ObjectId storeId)
         {
             var order = Resolve<IOrderService>().GetSingle(e =>
                 e.Id == id && e.StoreId == storeId && e.OrderStatus == OrderStatus.WaitingBuyerPay);
@@ -201,7 +203,7 @@ namespace Alabo.Industry.Shop.Orders.Controllers
             if (order.OrderExtension.OrderRemark == null) order.OrderExtension.OrderRemark = new OrderRemark();
 
             order.OrderExtension.OrderRemark.PlatplatformRemark = modelIn.PlatplatformRemark;
-            order.Extension = order.OrderExtension.ToJson();
+            order.Extension = ObjectExtension.ToJson(order.OrderExtension);
             var result = Resolve<IOrderService>().Update(order);
             if (result) return ApiResult.Success("备注成功!");
 

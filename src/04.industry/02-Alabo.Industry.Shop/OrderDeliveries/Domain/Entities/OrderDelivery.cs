@@ -8,6 +8,7 @@ using Alabo.Tenants;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities
 {
@@ -30,7 +31,7 @@ namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities
         ///     店铺Id
         /// </summary>
         [Display(Name = "店铺Id")]
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     快递公司guid

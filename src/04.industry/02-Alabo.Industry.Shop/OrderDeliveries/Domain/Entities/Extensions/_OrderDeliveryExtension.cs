@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Entities.Extensions;
 using Alabo.Industry.Shop.Orders.Domain.Entities;
 using Alabo.Users.Entities;
+using MongoDB.Bson;
 using ZKCloud.Open.LogisticsTracking.kdniao;
 
 namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities.Extensions
@@ -52,7 +53,7 @@ namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities.Extensions
         /// <value>
         ///     The store identifier.
         /// </value>
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     商品ID

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Alabo.Data.People.Stores.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -22,6 +23,7 @@ using Alabo.Industry.Shop.Products.Domain.Repositories;
 using Alabo.Industry.Shop.Products.ViewModels;
 using Alabo.Mapping;
 using Microsoft.AspNetCore.Http;
+using MongoDB.Bson;
 using File = System.IO.File;
 
 namespace Alabo.Industry.Shop.Products.Domain.Services
@@ -38,7 +40,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         /// </summary>
         /// <param name="productId"></param>
         /// <param name="storeId"></param>
-        public ViewProductEdit GetViewProductEdit(long productId, long storeId)
+        public ViewProductEdit GetViewProductEdit(long productId, ObjectId storeId)
         {
             var viewProduct = new ViewProductEdit
             {
@@ -119,7 +121,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
             viewProduct.PriceStyleItems = Resolve<IAutoConfigService>()
                 .GetList<PriceStyleConfig>(r => r.Status == Status.Normal).OrderBy(r => r.SortOrder).ToList();
 
-            if (viewProduct.Product.StoreId > 0)
+            if (!viewProduct.Product.StoreId.IsObjectIdNullOrEmpty())
                 viewProduct.Store = Resolve<IStoreService>().GetSingle(r => r.Id == viewProduct.Product.StoreId);
 
             if (viewProduct.Product.PriceStyleId.IsGuidNullOrEmpty())
@@ -234,7 +236,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
             view.PriceStyleItems = Resolve<IAutoConfigService>()
                 .GetList<PriceStyleConfig>(r => r.Status == Status.Normal).OrderBy(r => r.SortOrder).ToList();
             view.StoreId = view.Product.StoreId;
-            if (view.Product.StoreId > 0)
+            if (!view.Product.StoreId.IsObjectIdNullOrEmpty())
                 view.Store = Resolve<IStoreService>().GetSingle(r => r.Id == view.Product.StoreId);
 
             if (view.Product.PriceStyleId.IsGuidNullOrEmpty())
@@ -259,9 +261,9 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                     if (store != null) dic.Add("StoreId", store.Id.ToString());
                 }
 
-            var pageList = Resolve<IProductService>().GetPagedList<ViewProductList>(dic.ToJson());
+            var pageList = Resolve<IProductService>().GetPagedList<ViewProductList>(ObjectExtension.ToJson(dic));
             var storesId = pageList.Select(r => r.StoreId).Distinct();
-            var stores = Resolve<IShopStoreService>().GetList(r => storesId.Contains(r.Id));
+            var stores = Resolve<IStoreService>().GetList(r => storesId.Contains(r.Id));
             pageList.ForEach(r => { r.StoreName = stores.FirstOrDefault(e => e.Id == r.StoreId)?.Name; });
             return pageList;
         }
@@ -295,13 +297,13 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
             //如果是后台添加商品,则商品关联平台店铺
             if (viewProduct.IsAdminAddProduct)
             {
-                var planform = Resolve<IShopStoreService>().PlatformStore();
+                var planform = Resolve<IStoreService>().PlatformStore();
                 if (planform == null) return ServiceResult.FailedWithMessage("请先添加平台店铺");
 
                 viewProduct.Product.StoreId = planform.Id;
             }
 
-            if (viewProduct.Product.StoreId <= 0) return ServiceResult.FailedWithMessage("请为商品选择店铺");
+            if (viewProduct.Product.StoreId.IsObjectIdNullOrEmpty()) return ServiceResult.FailedWithMessage("请为商品选择店铺");
 
             if (viewProduct.SkuJson.IsNullOrEmpty()) return ServiceResult.FailedWithMessage("请设置商品Sku");
 
@@ -333,7 +335,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
             if (viewProduct.ProductDetail == null) viewProduct.ProductDetail = new ProductDetail();
 
             viewProduct.ProductDetail = AutoMapping.SetValue(viewProduct, viewProduct.ProductDetail); // 动态赋值
-            viewProduct.ProductDetail.Extension = viewProduct.ProductDetail.ProductDetailExtension.ToJson(); // 扩展属性序列
+            viewProduct.ProductDetail.Extension = ObjectExtension.ToJson(viewProduct.ProductDetail.ProductDetailExtension); // 扩展属性序列
 
             ///商品属性值处理
             viewProduct.ProductDetail.PropertyJson = Resolve<ICategoryService>()
@@ -354,7 +356,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         private string CreateImage(Product product, string images)
         {
             var list = new List<ProductThum>();
-            if (images.IsNullOrEmpty()) return list.ToJson();
+            if (images.IsNullOrEmpty()) return ObjectExtension.ToJson(list);
 
             var config = Resolve<IAutoConfigService>().GetValue<ProductConfig>();
             if (config.WidthThanHeight <= 0) throw new InvalidOperationException("缩略图高宽比例必须>0.");
@@ -364,7 +366,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
             if (config.ShowCaseWidth <= 0) throw new InvalidOperationException("详情页橱窗图宽度必须>0.");
 
             var i = 0;
-            foreach (var item in images.SplitList(new[] {','}))
+            foreach (var item in images.SplitList(new[] { ',' }))
                 if (!item.IsNullOrEmpty())
                 {
                     var savePath = "";
@@ -425,7 +427,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                     list.Add(thum);
                 }
 
-            return list.ToJson();
+            return ObjectExtension.ToJson(list);
         }
 
         /// <summary>

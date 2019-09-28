@@ -4,6 +4,7 @@ using System.Linq;
 using Alabo.App.Asset.Accounts.Domain.Services;
 using Alabo.App.Asset.Coupons.Domain.Enums;
 using Alabo.App.Asset.Coupons.Domain.Services;
+using Alabo.Data.People.Stores.Domain.Entities;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
@@ -34,6 +35,7 @@ using Alabo.Industry.Shop.Products.Domain.Configs;
 using Alabo.Industry.Shop.Products.Domain.Services;
 using Alabo.Industry.Shop.Products.Dtos;
 using Alabo.Users.Entities;
+using MongoDB.Bson;
 using ZKCloud.Open.DynamicExpression;
 
 namespace Alabo.Industry.Shop.Orders.Domain.Services
@@ -278,7 +280,7 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
             checkResult = activityService.CheckTimeLimitBuyActivity(orderBuyInput.StoreOrders);
             if (!checkResult.Succeeded) return Tuple.Create(checkResult, new BuyOutput());
             var timeLimitActivities = new List<Activity>();
-            if (checkResult.ReturnObject != null) timeLimitActivities = (List<Activity>) checkResult.ReturnObject;
+            if (checkResult.ReturnObject != null) timeLimitActivities = (List<Activity>)checkResult.ReturnObject;
 
             //购买权限
             checkResult = activityService.CheckBuyPermissionActivity(orderBuyInput.StoreOrders, user);
@@ -346,7 +348,7 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                 {
                     new Parameter("buyInput", orderBuyInput)
                 };
-                deliverUser = (User) target.Eval("dynamicInstance.GetDeliverUser(buyInput)", parameters);
+                deliverUser = (User)target.Eval("dynamicInstance.GetDeliverUser(buyInput)", parameters);
             }
 
             #endregion 订购模式指定发货人
@@ -358,7 +360,7 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                 context.BeginTransaction();
 
                 // 店铺Sku 分类   //orderBuyInput.MoneyItems  amount 判断是否足够支付所有的积分
-                var keys = new Dictionary<long, string>();
+                var keys = new Dictionary<ObjectId, string>();
                 orderBuyInput.StoreOrders.ToList().ForEach(e =>
                 {
                     keys.Add(e.StoreId, e.ProductSkuItems.Select(a => a.ProductSkuId).ToList().ToString());
@@ -443,8 +445,8 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                     {
                         order.AccountPayPair.Add(new KeyValuePair<Guid, decimal>(r.MoneyTypeId, r.Amount));
                     });
-                    order.AccountPay = order.AccountPayPair.ToJson();
-                    order.Extension = order.OrderExtension.ToJson();
+                    order.AccountPay = ObjectExtension.ToJson(order.AccountPayPair);
+                    order.Extension = ObjectExtension.ToJson(order.OrderExtension);
 
                     // 如果发货人不为空
                     if (deliverUser != null) order.DeliverUserId = deliverUser.Id;
@@ -513,7 +515,7 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                             TotalWeight = storeItemSku.Weight * storeItem.TotalCount, // 总重量
                             ReduceAmount = reduceAcount // 减少的资产，改sku使用其他支付的资产
                         };
-                        orderProduct.Extension = orderProduct.OrderProductExtension.ToJson();
+                        orderProduct.Extension = ObjectExtension.ToJson(orderProduct.OrderProductExtension);
                         orderProducts.Add(orderProduct);
                     }
 
@@ -654,7 +656,7 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                             }
                             // ProductId
                         };
-                        activityRecord.Extension = activityRecord.ActivityRecordExtension.ToJson();
+                        activityRecord.Extension = ObjectExtension.ToJson(activityRecord.ActivityRecordExtension);
                         Resolve<IActivityRecordService>().Add(activityRecord);
                     }
 
@@ -851,10 +853,10 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                     .GetStoreMoneyBuySkus(allProductSkus, buyInfoInput.LoginUserId).ToList();
                 // 根据用户名，店铺Id列表，SkuIds列表，生成签名,使用时间
                 storeProductSku.Sign = $"{buyInfoInput.LoginUserId}" +
-                                       $"{storeItems.Select(r => r.TotalCount).ToJson()}" +
-                                       $"{storeItems.Select(r => r.StoreId).ToJson()}" +
-                                       $"{orderProductInputList.Select(r => r.Count).ToList().ToJson()}" +
-                                       $"{orderProductInputList.Select(r => r.ProductSkuId).ToList().Distinct().ToJson() + DateTime.Now.ToString("yyyy-MM-dd-HH")}";
+                                       $"{ObjectExtension.ToJson(storeItems.Select(r => r.TotalCount))}" +
+                                       $"{ObjectExtension.ToJson(storeItems.Select(r => r.StoreId))}" +
+                                       $"{ObjectExtension.ToJson(orderProductInputList.Select(r => r.Count).ToList())}" +
+                                       $"{ObjectExtension.ToJson(orderProductInputList.Select(r => r.ProductSkuId).ToList().Distinct()) + DateTime.Now.ToString("yyyy-MM-dd-HH")}";
                 storeProductSku.Sign = storeProductSku.Sign.ToMd5HashString();
                 var cacheKey = $"OrderPrice_{storeProductSku.Sign}";
                 if (!ObjectCache.TryGet(cacheKey, out OrderPriceCache orderPriceCache))
@@ -1203,7 +1205,7 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
             {
                 LoginUserId = orderBuyInput.UserId,
                 IsBuy = true,
-                ProductJson = orderProductInputList.ToJson()
+                ProductJson = ObjectExtension.ToJson(orderProductInputList)
             };
 
             return buyInfoInput;

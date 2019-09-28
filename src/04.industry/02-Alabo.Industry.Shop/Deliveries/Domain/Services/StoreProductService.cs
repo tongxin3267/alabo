@@ -20,6 +20,7 @@ using Alabo.Industry.Shop.Products.Domain.Enums;
 using Alabo.Industry.Shop.Products.Domain.Repositories;
 using Alabo.Industry.Shop.Products.Domain.Services;
 using Alabo.Industry.Shop.Products.ViewModels;
+using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Deliveries.Domain.Services
 {
@@ -67,7 +68,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
                 parameter.Product.PriceStyleId = priceStyleConfig.FirstOrDefault().Id;
             }
 
-            parameter.ProductDetail.PropertyJson = parameter.Category.ToJson();
+            parameter.ProductDetail.PropertyJson = ObjectExtension.ToJson(parameter.Category);
 
             #endregion 基础数据赋值
 
@@ -96,7 +97,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
                     item.FenRunPrice > item.MarketPrice) return ServiceResult.FailedWithMessage("分润价格不能大于其他价格");
             }
 
-            if (parameter.Product.StoreId <= 0) return ServiceResult.FailedWithMessage("请为商品选择店铺");
+            if (parameter.Product.StoreId.IsObjectIdNullOrEmpty()) return ServiceResult.FailedWithMessage("请为商品选择店铺");
             var category = Resolve<ICategoryService>().GetSingle(parameter.Product.CategoryId);
             if (category == null) return ServiceResult.FailedWithMessage("未选择商品类目，或者商品类目已不存在");
             if (Repository<IProductRepository>()
@@ -119,7 +120,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
             context.BeginTransaction();
             try
             {
-                parameter.ProductDetail.Extension = parameter.ProductDetail.ProductDetailExtension.ToJson();
+                parameter.ProductDetail.Extension = ObjectExtension.ToJson(parameter.ProductDetail.ProductDetailExtension);
 
                 if (parameter.Product.Id == 0)
                 {
@@ -196,7 +197,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
 
             #endregion 安全验证
 
-            var productView = Resolve<IProductAdminService>().GetViewProductEdit(parameter.ProductId, 0);
+            var productView = Resolve<IProductAdminService>().GetViewProductEdit(parameter.ProductId, ObjectId.Empty);
             if (productView == null) throw new Exception("商品不存在");
             productEditOuput.Product = productView.Product;
             productEditOuput.ProductDetail = productView.ProductDetail;

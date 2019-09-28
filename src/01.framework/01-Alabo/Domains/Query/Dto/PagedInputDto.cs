@@ -1,4 +1,6 @@
-﻿namespace Alabo.Domains.Query.Dto
+﻿using MongoDB.Bson;
+
+namespace Alabo.Domains.Query.Dto
 {
     /// <summary>
     ///     Class PagedInputDto.
@@ -28,7 +30,7 @@
         /// <summary>
         ///     供应商
         /// </summary>
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     会员ID

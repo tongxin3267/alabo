@@ -11,6 +11,7 @@ using Alabo.Mapping;
 using Alabo.UI;
 using Alabo.UI.Design.AutoForms;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace Alabo.Industry.Shop.Carts.UI
@@ -28,7 +29,7 @@ namespace Alabo.Industry.Shop.Carts.UI
         /// <summary>
         ///     店铺Id
         /// </summary>
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     商品Id

@@ -5,6 +5,7 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace Alabo.Industry.Shop.Carts.Domain.Entities
@@ -22,7 +23,7 @@ namespace Alabo.Industry.Shop.Carts.Domain.Entities
         /// <summary>
         ///     店铺Id
         /// </summary>
-        public long StoreId { get; set; }
+        public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     商品Id
