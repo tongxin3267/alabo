@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.UI.Design.AutoTables;
 using Alabo.Web.Mvc.Attributes;
+using System.Collections.Generic;
 
 namespace Alabo.UI.Design.AutoLists
 {
@@ -22,7 +22,6 @@ namespace Alabo.UI.Design.AutoLists
         ///     搜索相关
         /// </summary>
         public SearchOptions SearchOptions { get; set; } = new SearchOptions();
-
 
         /// <summary>
         ///     分页数据

@@ -13,7 +13,6 @@
 
         primary = 4,
 
-
         success = 5,
 
         warning = 6,

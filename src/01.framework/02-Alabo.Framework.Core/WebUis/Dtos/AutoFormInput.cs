@@ -1,7 +1,7 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Validations;
+﻿using Alabo.Validations;
 using Newtonsoft.Json;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Framework.Core.WebUis.Dtos
 {

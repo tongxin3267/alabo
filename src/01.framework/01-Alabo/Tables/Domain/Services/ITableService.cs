@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Tables.Domain.Entities;
 using MongoDB.Bson;
+using System.Collections.Generic;
 
 namespace Alabo.Tables.Domain.Services
 {

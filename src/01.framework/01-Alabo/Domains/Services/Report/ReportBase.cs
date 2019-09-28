@@ -2,9 +2,9 @@
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services.Random;
-using System.Collections.Generic;
 using Alabo.UI.Design.AutoReports;
 using Alabo.UI.Design.AutoReports.Dtos;
+using System.Collections.Generic;
 
 namespace Alabo.Domains.Services.Report
 {

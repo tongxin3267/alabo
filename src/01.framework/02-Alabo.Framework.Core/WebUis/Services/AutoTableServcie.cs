@@ -1,5 +1,4 @@
-﻿using System;
-using Alabo.AutoConfigs;
+﻿using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
@@ -8,6 +7,7 @@ using Alabo.Domains.Services;
 using Alabo.Linq.Dynamic;
 using Alabo.UI;
 using Alabo.UI.Design.AutoTables;
+using System;
 using ZKCloud.Open.DynamicExpression;
 
 namespace Alabo.Framework.Core.WebUis.Services

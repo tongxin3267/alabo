@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Validations;
+﻿using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Framework.Core.WebUis.Models.Previews
 {

@@ -1,6 +1,6 @@
-﻿using System;
-using Alabo.Extensions;
+﻿using Alabo.Extensions;
 using Newtonsoft.Json;
+using System;
 
 namespace Alabo.UI.Design.AutoTables
 {
@@ -25,7 +25,6 @@ namespace Alabo.UI.Design.AutoTables
             if (Name.Contains("删除")) Type = ActionLinkType.Delete;
         }
 
-
         public TableAction(string name, string url, TableActionType tableAction)
         {
             Name = name;
@@ -33,7 +32,6 @@ namespace Alabo.UI.Design.AutoTables
             Type = ActionLinkType.Link;
             ActionType = tableAction;
         }
-
 
         public TableAction(string name, string url, ActionLinkType type)
         {
@@ -53,7 +51,6 @@ namespace Alabo.UI.Design.AutoTables
         ///     删除的时候对应Api接口
         /// </summary>
         public string Url { get; set; }
-
 
         /// <summary>
         ///     图标

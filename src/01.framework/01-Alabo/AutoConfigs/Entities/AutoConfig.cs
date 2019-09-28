@@ -48,7 +48,6 @@ namespace Alabo.AutoConfigs.Entities
             builder.HasKey(e => e.Id);
             builder.Property(e => e.Type).HasMaxLength(255);
             builder.Property(p => p.Value).HasColumnType("ntext");
-         
         }
     }
 }

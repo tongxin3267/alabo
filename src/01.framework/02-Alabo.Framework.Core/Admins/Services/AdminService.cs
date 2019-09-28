@@ -2,12 +2,12 @@
 using Alabo.Domains.Services;
 using Alabo.Framework.Core.Reflections.Interfaces;
 using Alabo.Framework.Core.Reflections.Services;
+using Alabo.Tables.Domain.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using Alabo.Tables.Domain.Services;
 using ZKCloud.Open.ApiBase.Configuration;
 using ZKCloud.Open.ApiBase.Services;
 

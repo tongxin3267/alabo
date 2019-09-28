@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Alabo.Domains.Query.Dto;
+using System;
 using System.Collections.Generic;
-using Alabo.Domains.Query.Dto;
 
 namespace Alabo.UI.Design.AutoReports.Dtos
 {

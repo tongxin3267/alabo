@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Alabo.UI.Design.AutoReports.Enums;
+﻿using Alabo.UI.Design.AutoReports.Enums;
+using System.Collections.Generic;
 
 namespace Alabo.UI.Design.AutoReports
 {

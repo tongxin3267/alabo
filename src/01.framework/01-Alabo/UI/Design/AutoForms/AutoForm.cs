@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.ViewModel;
 using Alabo.Web.Validations;
+using System.Collections.Generic;
 
 namespace Alabo.UI.Design.AutoForms
 {

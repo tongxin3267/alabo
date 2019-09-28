@@ -4,10 +4,10 @@ using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.Extensions;
 using Alabo.Extensions;
 using Alabo.Helpers;
-using System;
-using System.Linq.Expressions;
 using Alabo.Tables.Domain.Services;
 using Alabo.UI.Design.AutoReports.Enums;
+using System;
+using System.Linq.Expressions;
 
 namespace Alabo.Linq
 {

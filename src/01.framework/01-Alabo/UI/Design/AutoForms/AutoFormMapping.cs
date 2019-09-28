@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.Cache;
+﻿using Alabo.Cache;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.Web.ViewFeatures;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.UI.Design.AutoForms
 {
@@ -66,7 +66,7 @@ namespace Alabo.UI.Design.AutoForms
 
                         if (groups.Length == 0)
                         {
-                            var fieldGroup = new FieldGroup {GroupName = "default"};
+                            var fieldGroup = new FieldGroup { GroupName = "default" };
                             fieldGroup.Items.AddRange(GetFormFieds(propertys));
                             auto.Groups.Add(fieldGroup);
                         }
@@ -155,7 +155,7 @@ namespace Alabo.UI.Design.AutoForms
         /// <returns></returns>
         private static FieldGroup GetGroup(PropertyDescription[] propertys)
         {
-            var fieldGroup = new FieldGroup {GroupName = "default"};
+            var fieldGroup = new FieldGroup { GroupName = "default" };
             fieldGroup.Items.AddRange(GetFormFieds(propertys));
             return fieldGroup;
         }
@@ -192,7 +192,7 @@ namespace Alabo.UI.Design.AutoForms
 
             if (groups.Length == 0)
             {
-                var fieldGroup = new FieldGroup {GroupName = "default"};
+                var fieldGroup = new FieldGroup { GroupName = "default" };
                 fieldGroup.Items.AddRange(GetFormFieds(propertys, model));
                 auto.Groups.Add(fieldGroup);
             }
@@ -337,7 +337,7 @@ namespace Alabo.UI.Design.AutoForms
         /// <returns></returns>
         private static FieldGroup GetGroup(PropertyDescription[] propertys, object model)
         {
-            var fieldGroup = new FieldGroup {GroupName = "default"};
+            var fieldGroup = new FieldGroup { GroupName = "default" };
             fieldGroup.Items.AddRange(GetFormFieds(propertys, model));
             return fieldGroup;
         }

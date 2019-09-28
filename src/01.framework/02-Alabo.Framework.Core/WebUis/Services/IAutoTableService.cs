@@ -1,8 +1,8 @@
-﻿using System;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.UI;
 using Alabo.UI.Design.AutoTables;
+using System;
 
 namespace Alabo.Framework.Core.WebUis.Services
 {

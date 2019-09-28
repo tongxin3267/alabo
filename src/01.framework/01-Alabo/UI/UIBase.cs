@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Helpers;
@@ -10,6 +7,9 @@ using Alabo.UI.Design.AutoForms;
 using Alabo.UI.Design.AutoLists;
 using Alabo.UI.Design.AutoTables;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.UI
 {

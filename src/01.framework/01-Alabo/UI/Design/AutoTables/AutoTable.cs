@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
+using System.Collections.Generic;
 
 namespace Alabo.UI.Design.AutoTables
 {
@@ -74,7 +74,6 @@ namespace Alabo.UI.Design.AutoTables
         /// </summary>
         public string Options { get; set; }
     }
-
 
     public class SearchOptions
     {

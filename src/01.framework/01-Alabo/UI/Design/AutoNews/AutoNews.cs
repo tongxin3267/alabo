@@ -1,5 +1,5 @@
-﻿using System;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
+using System;
 
 namespace Alabo.UI.Design.AutoNews
 {

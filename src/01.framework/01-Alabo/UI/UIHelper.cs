@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Alabo.Extensions;
+using System;
 using System.Collections.Generic;
-using Alabo.Extensions;
 
 namespace Alabo.UI
 {

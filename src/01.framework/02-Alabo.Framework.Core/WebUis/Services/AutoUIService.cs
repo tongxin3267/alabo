@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
@@ -19,6 +17,8 @@ using Alabo.UI.Design.AutoReports;
 using Alabo.UI.Design.AutoTables;
 using Alabo.UI.Design.AutoTasks;
 using Alabo.UI.Design.AutoVideos;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.Framework.Core.WebUis.Services
 {

@@ -1,14 +1,8 @@
 ﻿using Alabo.Domains.Entities.Core;
-using Alabo.Domains.Services.Report;
 using Alabo.Extensions;
-using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.Framework.Core.WebUis.Dtos;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using Alabo.Framework.Core.WebUis.Services;
 using Alabo.UI;
 using Alabo.UI.Design.AutoArticles;
@@ -18,6 +12,10 @@ using Alabo.UI.Design.AutoNews;
 using Alabo.UI.Design.AutoPreviews;
 using Alabo.UI.Design.AutoReports;
 using Alabo.UI.Design.AutoTables;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Framework.Core.WebUis.Controllers

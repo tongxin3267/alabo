@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Alabo.Linq;
+﻿using Alabo.Linq;
+using System.Collections.Generic;
 
 namespace Alabo.UI.Design.AutoReports.Dtos
 {

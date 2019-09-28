@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.Collections.Generic;
 
 namespace Alabo.Framework.Core.WebUis.Models.Lists
 {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Alabo.AutoConfigs;
+﻿using Alabo.AutoConfigs;
 using Alabo.Cache;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
@@ -11,6 +7,10 @@ using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.ViewFeatures;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Alabo.UI.Design.AutoTables
 {
@@ -34,7 +34,7 @@ namespace Alabo.UI.Design.AutoTables
                         Icon = classPropertyAttribute.Icon
                     };
 
-                    #region  如果不包含操作按钮，则不显示操作这一列
+                    #region 如果不包含操作按钮，则不显示操作这一列
 
                     // 如果不包含操作按钮，则不显示操作这一列
                     auto.TableActions = GetActions(type, classPropertyAttribute); // 操作链接
@@ -50,8 +50,7 @@ namespace Alabo.UI.Design.AutoTables
                         auto.Columns.Add(actionColumn);
                     }
 
-                    #endregion
-
+                    #endregion 如果不包含操作按钮，则不显示操作这一列
 
                     #region 列相关的字段操作
 
@@ -74,8 +73,7 @@ namespace Alabo.UI.Design.AutoTables
                             auto.Columns.Add(tableColumn);
                         }
 
-                    #endregion
-
+                    #endregion 列相关的字段操作
 
                     auto.SearchOptions = GetSearchOptions(propertys); // 搜索相关链接
                     auto.Tabs = GetTabs(propertys); // Tabs导航
@@ -172,7 +170,6 @@ namespace Alabo.UI.Design.AutoTables
             return tableColumn;
         }
 
-
         #region 获取操作链接
 
         /// <summary>
@@ -213,7 +210,7 @@ namespace Alabo.UI.Design.AutoTables
             return list;
         }
 
-        #endregion
+        #endregion 获取操作链接
 
         #region 获取搜索框
 
@@ -250,7 +247,7 @@ namespace Alabo.UI.Design.AutoTables
             };
         }
 
-        #endregion
+        #endregion 获取搜索框
 
         #region 获取标签
 
@@ -272,6 +269,6 @@ namespace Alabo.UI.Design.AutoTables
             return result;
         }
 
-        #endregion
+        #endregion 获取标签
     }
 }

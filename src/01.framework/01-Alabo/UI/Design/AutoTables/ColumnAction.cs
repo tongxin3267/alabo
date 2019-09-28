@@ -11,7 +11,6 @@
         /// </summary>
         public string Name { get; set; }
 
-
         /// <summary>
         ///     弹窗表格的Form对象
         ///     必须继承IAutoForm

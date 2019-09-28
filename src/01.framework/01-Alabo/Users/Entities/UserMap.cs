@@ -57,7 +57,6 @@ namespace Alabo.Users.Entities
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.ParentMapList);
             builder.Ignore(e => e.UserName);
-         
         }
     }
 

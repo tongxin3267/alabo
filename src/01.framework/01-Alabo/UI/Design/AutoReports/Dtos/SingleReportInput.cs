@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Linq;
+﻿using Alabo.Linq;
 using Alabo.UI.Design.AutoReports.Enums;
 using Alabo.Validations;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.UI.Design.AutoReports.Dtos
 {

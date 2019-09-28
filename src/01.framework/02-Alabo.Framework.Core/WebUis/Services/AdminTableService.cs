@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
@@ -15,6 +10,11 @@ using Alabo.Reflections;
 using Alabo.Web.ViewFeatures;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Linq;
 using FileInfo = System.IO.FileInfo;
 
 namespace Alabo.Framework.Core.WebUis.Services
@@ -73,7 +73,7 @@ namespace Alabo.Framework.Core.WebUis.Services
                 if (resultList.Item2 != null)
                     try
                     {
-                        pageList = ((IEnumerable<object>) resultList.Item2).ToList();
+                        pageList = ((IEnumerable<object>)resultList.Item2).ToList();
                     }
                     catch
                     {

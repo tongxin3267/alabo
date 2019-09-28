@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Alabo.AutoConfigs;
+﻿using Alabo.AutoConfigs;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
@@ -10,6 +8,8 @@ using Alabo.Helpers;
 using Alabo.Linq.Dynamic;
 using Alabo.UI;
 using Alabo.UI.Design.AutoForms;
+using System;
+using System.Linq;
 
 namespace Alabo.Framework.Core.WebUis.Services
 {
@@ -86,7 +86,7 @@ namespace Alabo.Framework.Core.WebUis.Services
             }
             else
             {
-                entity = (object) model;
+                entity = (object)model;
                 var result = DynamicService.ResolveMethod(type.Name, "Update", entity);
                 if (!result.Item1.Succeeded) return ServiceResult.FailedWithMessage($"{type.Name},更新失败");
             }
