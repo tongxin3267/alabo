@@ -8,6 +8,7 @@ using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
+using Alabo.Helpers;
 using Alabo.Maps;
 using Alabo.UI;
 using Alabo.UI.Design.AutoForms;
@@ -81,7 +82,7 @@ namespace Alabo.Cloud.People.UserTree.Domain.UI
                 return ServiceResult.FailedWithMessage("支付密码错误！");
 
             var result = ServiceResult.Success;
-            var context = Repository<IUserRepository>().RepositoryContext;
+            var context = Ioc.Resolve<IUserRepository>().RepositoryContext;
             try
             {
                 context.BeginTransaction();

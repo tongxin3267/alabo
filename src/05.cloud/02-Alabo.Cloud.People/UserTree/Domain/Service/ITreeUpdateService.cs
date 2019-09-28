@@ -1,8 +1,9 @@
 ﻿using Alabo.Domains.Entities;
+using Alabo.Domains.Services;
 
 namespace Alabo.Cloud.People.UserTree.Domain.Service
 {
-    public interface ITreeUpdateService
+    public interface ITreeUpdateService : IService
     {
         /// <summary>
         ///     更新所有会员的组织架构图

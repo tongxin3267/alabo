@@ -36,6 +36,7 @@ using Alabo.Randoms;
 using Alabo.Regexs;
 using Alabo.Tables.Domain.Services;
 using Alabo.Users.Entities;
+using MongoDB.Bson;
 
 namespace Alabo.Cloud.People.UserRightss.Domain.Services
 {
@@ -386,7 +387,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
                 var order = new Order
                 {
                     UserId = orderInput.BuyUser.Id,
-                    StoreId = 0,
+                    StoreId = ObjectId.Empty,
                     OrderStatus = OrderStatus.WaitingBuyerPay,
                     OrderType = OrderType.VirtualOrder,
                     TotalAmount = payPrice.Item2,

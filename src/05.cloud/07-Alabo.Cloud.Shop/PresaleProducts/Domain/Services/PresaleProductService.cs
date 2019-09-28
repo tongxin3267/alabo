@@ -20,7 +20,7 @@ namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Services
     public class PresaleProductService : ServiceBase<PresaleProduct, ObjectId>, IPresaleProductService
     {
         private readonly Guid _presaleProductStyleId = new Guid("e0000000-1478-49bd-bfc7-e73a5d699111");
-        private long _storeId;
+        private ObjectId _storeId;
 
         public PresaleProductService(IUnitOfWork unitOfWork, IRepository<PresaleProduct, ObjectId> repository)
             : base(unitOfWork, repository)
@@ -113,7 +113,7 @@ namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Services
                     // tempItem.Id = o;
                     tempItem.StoreId = _storeId;
                     tempItem.PriceStyleId = _presaleProductStyleId;
-                    tempItem.Status = (int) ProductStatus.Online;
+                    tempItem.Status = (int)ProductStatus.Online;
                     datas.Add(tempItem);
                 });
             if (datas.Count > 0) repository.AddMany(datas);
@@ -149,7 +149,7 @@ namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Services
             var repository = Repository<IPresaleProductRepository>();
             var data = repository.GetSingle(id);
             if (data == null) ServiceResult.FailedWithMessage("产品不存在");
-            data.Status = (int) status;
+            data.Status = (int)status;
             repository.UpdateSingle(data);
 
             return ServiceResult.Success;

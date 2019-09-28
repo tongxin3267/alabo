@@ -10,6 +10,7 @@ using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
+using Alabo.Helpers;
 using Alabo.Maps;
 using Alabo.UI;
 using Alabo.UI.Design.AutoForms;
@@ -104,7 +105,7 @@ namespace Alabo.Cloud.People.UserTree.Domain.UI
 
             var childUsers = Resolve<IUserService>().GetList(r => r.ParentId == userId);
             var childUserIds = childUsers.Select(r => r.Id).ToList();
-            var result = Repository<IUserRepository>().UpdateRecommend(childUserIds, parentId);
+            var result = Ioc.Resolve<IUserRepository>().UpdateRecommend(childUserIds, parentId);
 
             if (result)
             {
