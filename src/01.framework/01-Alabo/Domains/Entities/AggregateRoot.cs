@@ -60,12 +60,6 @@ namespace Alabo.Domains.Entities
             : base(id)
         {
         }
-
-        /// <summary>
-        ///     版本号(乐观锁)
-        /// </summary>
-        [NotMapped]
-        public byte[] Version { get; set; }
     }
 
     /// <summary>
@@ -105,12 +99,6 @@ namespace Alabo.Domains.Entities
         [BsonIgnore]
         [IgnoreMap]
         public string UserName { get; set; }
-
-        /// <summary>
-        ///     版本号(乐观锁)
-        /// </summary>
-        [IgnoreMap]
-        public byte[] Version { get; set; }
     }
 
     /// <summary>

@@ -234,7 +234,7 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
             var orderDelivery = new OrderDelivery
             {
                 TotalCount = model.DeliveryProductSkus.Sum(e => e.Count),
-                StoreId = order.StoreId.ToObjectId(),
+                StoreId = order.StoreId,
                 UserId = model.AdminUserId,
                 ExpressGuid = model.ExpressGuid,
                 ExpressNumber = model.ExpressNumber,
