@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Industry.Shop.Orders.Domain.Entities;
 using Alabo.Industry.Shop.Orders.Domain.Enums;
@@ -12,6 +13,7 @@ using Alabo.Users.Entities;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace Alabo.Industry.Shop.Orders.Dtos
 {
@@ -145,7 +147,7 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         [Display(Name = "店铺Id")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [Range(0, 99999999, ErrorMessage = ErrorMessage.NameNotCorrect)]
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     配送方式 Id 与DeliveryTemplate 的Id对应
@@ -221,7 +223,7 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         /// <summary>
         ///     Gets or sets the store identifier.
         /// </summary>
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     商品数量

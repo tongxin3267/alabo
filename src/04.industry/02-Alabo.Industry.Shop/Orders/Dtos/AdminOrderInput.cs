@@ -1,6 +1,8 @@
 ﻿using Alabo.Domains.Query.Dto;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Industry.Shop.Orders.Domain.Enums;
 using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace Alabo.Industry.Shop.Orders.Dtos
 {
@@ -28,7 +30,7 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         /// <summary>
         ///     店铺Id
         /// </summary>
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether this instance is planform.

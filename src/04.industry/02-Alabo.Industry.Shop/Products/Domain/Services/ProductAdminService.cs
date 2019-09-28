@@ -122,7 +122,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                 .GetList<PriceStyleConfig>(r => r.Status == Status.Normal).OrderBy(r => r.SortOrder).ToList();
 
             if (!viewProduct.Product.StoreId.IsObjectIdNullOrEmpty())
-                viewProduct.Store = Resolve<IStoreService>().GetSingle(r => r.Id == viewProduct.Product.StoreId);
+                viewProduct.Store = Resolve<IStoreService>().GetSingle(r => r.Id == viewProduct.Product.StoreId.ToObjectId());
 
             if (viewProduct.Product.PriceStyleId.IsGuidNullOrEmpty())
                 viewProduct.PriceStyleConfig = viewProduct.PriceStyleItems.FirstOrDefault();
@@ -157,7 +157,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                 }
                 else
                 {
-                    viewProduct.Product.StoreId = viewProduct.StoreId; //供应商Id单独处理
+                    viewProduct.Product.StoreId = viewProduct.StoreId.ToString(); //供应商Id单独处理
                     Resolve<IProductService>().Update(viewProduct.Product); // 更新Shop_product 表
                     Resolve<IProductDetailService>()
                         .UpdateNoTracking(viewProduct.ProductDetail); // 更新Shop_productdetai表
@@ -235,9 +235,9 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
             view.ProductConfig = Resolve<IAutoConfigService>().GetValue<ProductConfig>();
             view.PriceStyleItems = Resolve<IAutoConfigService>()
                 .GetList<PriceStyleConfig>(r => r.Status == Status.Normal).OrderBy(r => r.SortOrder).ToList();
-            view.StoreId = view.Product.StoreId;
+            view.StoreId = view.Product.StoreId.ToObjectId();
             if (!view.Product.StoreId.IsObjectIdNullOrEmpty())
-                view.Store = Resolve<IStoreService>().GetSingle(r => r.Id == view.Product.StoreId);
+                view.Store = Resolve<IStoreService>().GetSingle(r => r.Id == view.Product.StoreId.ToObjectId());
 
             if (view.Product.PriceStyleId.IsGuidNullOrEmpty())
                 view.PriceStyleConfig = view.PriceStyleItems.FirstOrDefault();
@@ -300,7 +300,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                 var planform = Resolve<IStoreService>().PlatformStore();
                 if (planform == null) return ServiceResult.FailedWithMessage("请先添加平台店铺");
 
-                viewProduct.Product.StoreId = planform.Id;
+                viewProduct.Product.StoreId = planform.Id.ToString();
             }
 
             if (viewProduct.Product.StoreId.IsObjectIdNullOrEmpty()) return ServiceResult.FailedWithMessage("请为商品选择店铺");
@@ -448,7 +448,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                 ProductSkus =
                     Resolve<IProductSkuService>().GetList(e => e.ProductId == product.Id)
                         .ToList(), //商品SKU                                                                               // ProductBrand = Service<IStoreBrandService>().GetSingle(e => e.Id == product.BrandId),// 商品品牌
-                Store = Resolve<IStoreService>().GetSingle(e => e.Id == product.StoreId) // 商品所属店铺
+                Store = Resolve<IStoreService>().GetSingle(e => e.Id == product.StoreId.ToObjectId()) // 商品所属店铺
             };
             product.ProductExtensions.ProductCategory = product.Detail.PropertyJson.DeserializeJson<Category>();
             product.ProductExtensions.ProductThums = product.Detail.ImageJson.DeserializeJson<List<ProductThum>>();

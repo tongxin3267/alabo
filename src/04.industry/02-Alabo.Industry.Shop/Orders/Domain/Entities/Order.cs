@@ -33,7 +33,7 @@ namespace Alabo.Industry.Shop.Orders.Domain.Entities
         [Display(Name = "所属店铺")]
         [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1, Width = "150", ListShow = true,
             IsShowBaseSerach = true, IsShowAdvancedSerach = true, SortOrder = 1)]
-        public ObjectId StoreId { get; set; }
+        public string StoreId { get; set; }
 
         /// <summary>
         ///     订单交易状态,OrderStatus等待付款WaitingBuyerPay = 0,等待发货WaitingSellerSendGoods = 1,已发货WaitingBuyerConfirm = 2,交易成功Success =

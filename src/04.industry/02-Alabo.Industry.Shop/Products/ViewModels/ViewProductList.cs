@@ -3,12 +3,14 @@ using System.ComponentModel.DataAnnotations;
 using Alabo.AutoConfigs;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Enums;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Industry.Shop.Products.Domain.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace Alabo.Industry.Shop.Products.ViewModels
 {
@@ -25,7 +27,7 @@ namespace Alabo.Industry.Shop.Products.ViewModels
         [Field(IsShowAdvancedSerach = true, IsShowBaseSerach = true, ControlsType = ControlsType.TextBox)]
         public string StoreName { get; set; }
 
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         [Display(Name = "商品名称")]
         [Field(ControlsType = ControlsType.TextBox, IsShowAdvancedSerach = true, IsShowBaseSerach = true,

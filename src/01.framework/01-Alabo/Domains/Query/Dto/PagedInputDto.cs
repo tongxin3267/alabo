@@ -1,4 +1,6 @@
-﻿using MongoDB.Bson;
+﻿using Alabo.Domains.Repositories.Mongo.Extension;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace Alabo.Domains.Query.Dto
 {
@@ -30,7 +32,7 @@ namespace Alabo.Domains.Query.Dto
         /// <summary>
         ///     供应商
         /// </summary>
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     会员ID

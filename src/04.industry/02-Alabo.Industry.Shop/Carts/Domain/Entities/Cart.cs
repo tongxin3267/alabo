@@ -3,10 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
 namespace Alabo.Industry.Shop.Carts.Domain.Entities
 {
@@ -23,7 +25,7 @@ namespace Alabo.Industry.Shop.Carts.Domain.Entities
         /// <summary>
         ///     店铺Id
         /// </summary>
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     商品Id

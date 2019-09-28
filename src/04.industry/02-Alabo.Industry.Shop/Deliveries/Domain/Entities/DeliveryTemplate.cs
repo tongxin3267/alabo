@@ -6,6 +6,7 @@ using System.Linq;
 using Alabo.Data.People.Stores.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Exceptions;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebApis.Service;
@@ -14,6 +15,7 @@ using Alabo.Industry.Shop.Deliveries.Domain.Services;
 using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace Alabo.Industry.Shop.Deliveries.Domain.Entities
 {
@@ -25,7 +27,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Entities
     {
         #region 属性
 
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     运费模板方式

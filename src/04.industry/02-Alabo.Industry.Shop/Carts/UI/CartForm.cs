@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Industry.Shop.Carts.Domain.Entities;
@@ -13,6 +14,7 @@ using Alabo.UI.Design.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
 namespace Alabo.Industry.Shop.Carts.UI
 {
@@ -29,7 +31,7 @@ namespace Alabo.Industry.Shop.Carts.UI
         /// <summary>
         ///     店铺Id
         /// </summary>
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     商品Id

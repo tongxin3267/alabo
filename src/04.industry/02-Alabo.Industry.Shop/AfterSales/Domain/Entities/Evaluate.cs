@@ -2,9 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.Domains.Entities;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Industry.Shop.Orders.Domain.Enums;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
 namespace Alabo.Industry.Shop.AfterSales.Domain.Entities
 {
@@ -25,7 +27,7 @@ namespace Alabo.Industry.Shop.AfterSales.Domain.Entities
         ///     店铺ID,该字段为冗余字段,方便以后查询
         /// </summary>
         [Required]
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     订单ID

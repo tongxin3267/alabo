@@ -7,6 +7,7 @@ using Alabo.Data.People.Stores.Domain.Services;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Exceptions;
 using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
@@ -22,6 +23,7 @@ using Alabo.UI.Design.AutoTables;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace Alabo.Industry.Shop.Products.Dtos
 {
@@ -72,7 +74,7 @@ namespace Alabo.Industry.Shop.Products.Dtos
         [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, PlaceHolder = "请输入供应商",
             IsShowAdvancedSerach = true, DataField = "StoreId", GroupTabId = 2, IsMain = true, Width = "150",
             ListShow = true, SortOrder = 2, Link = "/Admin/Product/Edit?id=[[Id]]")]
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     商品价格模式的配置Id 与PriceStyleConfig 对应

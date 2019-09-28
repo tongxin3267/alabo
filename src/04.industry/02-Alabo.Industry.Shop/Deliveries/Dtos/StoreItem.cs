@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using Alabo.App.Asset.Coupons.Domain.Entities;
 using Alabo.Domains.Entities;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.Industry.Shop.Products.Dtos;
 using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace Alabo.Industry.Shop.Deliveries.Dtos
 {
@@ -15,7 +17,7 @@ namespace Alabo.Industry.Shop.Deliveries.Dtos
         /// <summary>
         ///     店铺Id
         /// </summary>
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     店铺名称

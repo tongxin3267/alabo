@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Data.People.Users.Dtos;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Industry.Shop.OrderDeliveries.Domain.Entities;
 using Alabo.Industry.Shop.Orders.Domain.Entities;
 using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.Industry.Shop.Products.Dtos;
 using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace Alabo.Industry.Shop.Orders.Dtos
 {
@@ -36,7 +38,7 @@ namespace Alabo.Industry.Shop.Orders.Dtos
         /// <summary>
         ///     所属店铺
         /// </summary>
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     订单交易状态,OrderStatus等待付款WaitingBuyerPay = 0,等待发货WaitingSellerSendGoods = 1,已发货WaitingBuyerConfirm = 2,交易成功Success =

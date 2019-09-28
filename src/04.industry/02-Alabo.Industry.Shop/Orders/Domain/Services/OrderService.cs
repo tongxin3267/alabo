@@ -430,7 +430,7 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
             var query = new ExpressionQuery<Order>();
             if (orderInput.OrderStatus > 0) query.And(e => e.OrderStatus == orderInput.OrderStatus);
             if (orderInput.OrderType.HasValue) query.And(e => e.OrderType == orderInput.OrderType);
-            if (!orderInput.StoreId.IsObjectIdNullOrEmpty()) query.And(e => e.StoreId == orderInput.StoreId);
+            if (!orderInput.StoreId.IsObjectIdNullOrEmpty()) query.And(e => e.StoreId == orderInput.StoreId.ToString());
             if (orderInput.DeliverUserId > 0) // 发货记录
                 query.And(e => e.DeliverUserId == orderInput.DeliverUserId);
             if (orderInput.UserId > 0) //订单记录

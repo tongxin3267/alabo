@@ -33,7 +33,7 @@ namespace Alabo.App.Asset.Coupons.Domain.Entities
         ///     店铺Id，根据店铺来设置优惠券
         /// </summary>
         [Field(ControlsType = ControlsType.Hidden)]
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     优惠券名称

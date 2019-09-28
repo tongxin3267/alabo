@@ -85,7 +85,7 @@ namespace Alabo.Industry.Shop.Deliveries.Controllers
         {
             var query = new ExpressionQuery<Product>();
 
-            query.And(e => e.StoreId == input.StoreId);
+            query.And(e => e.StoreId == input.StoreId.ToString());
             query.PageIndex = (int)input.PageIndex;
             query.PageSize = (int)input.PageSize;
             query.EnablePaging = true;

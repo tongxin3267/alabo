@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Entities.Extensions;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Industry.Shop.Orders.Domain.Entities;
 using Alabo.Users.Entities;
 using MongoDB.Bson;
+using Newtonsoft.Json;
 using ZKCloud.Open.LogisticsTracking.kdniao;
 
 namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities.Extensions
@@ -53,7 +55,7 @@ namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities.Extensions
         /// <value>
         ///     The store identifier.
         /// </value>
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     商品ID

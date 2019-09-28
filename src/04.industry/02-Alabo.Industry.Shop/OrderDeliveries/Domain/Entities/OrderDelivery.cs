@@ -3,12 +3,14 @@ using System.ComponentModel.DataAnnotations;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Industry.Shop.OrderDeliveries.Domain.Entities.Extensions;
 using Alabo.Tenants;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MongoDB.Bson;
+using Newtonsoft.Json;
 
 namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities
 {
@@ -31,7 +33,7 @@ namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities
         ///     店铺Id
         /// </summary>
         [Display(Name = "店铺Id")]
-        public ObjectId StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     快递公司guid

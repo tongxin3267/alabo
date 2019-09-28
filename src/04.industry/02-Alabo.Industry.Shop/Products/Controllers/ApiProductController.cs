@@ -353,7 +353,7 @@ namespace Alabo.Industry.Shop.Products.Controllers
                 EnablePaging = true
             };
             //query.And(e => e.StoreId == parameter.StoreId);
-            if (!parameter.StoreId.IsObjectIdNullOrEmpty()) query.And(s => s.StoreId == parameter.StoreId);
+            if (!parameter.StoreId.IsObjectIdNullOrEmpty()) query.And(s => s.StoreId == parameter.StoreId.ToString());
 
             if (parameter.Bn != null) query.And(s => s.Bn.Contains(parameter.Bn));
 
