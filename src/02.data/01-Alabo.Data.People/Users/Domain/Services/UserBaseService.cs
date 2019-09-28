@@ -14,9 +14,11 @@ using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Framework.Core.Admins.Configs;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Helpers;
+using Alabo.Linq.Dynamic;
 using Alabo.Tables.Domain.Services;
 using Alabo.Users.Dtos;
 using Alabo.Users.Entities;
+using ZKCloud.Open.DynamicExpression;
 
 namespace Alabo.Data.People.Users.Domain.Services
 {
@@ -90,19 +92,17 @@ namespace Alabo.Data.People.Users.Domain.Services
             if (!loginInput.OpenId.IsNullOrEmpty()) find.Detail.OpenId = loginInput.OpenId;
             Ioc.Resolve<IUserDetailService>().Update(find.Detail);
 
-            //TODO 9月重构注释
-            //初始化用户资产账户
-            //   Resolve<IAccountService>().InitSingleUserAccount(find.Id);
+            // 动态初始化用户数据资产数据
+            var accountService = DynamicService.Resolve("Account");
+            var target = new Interpreter().SetVariable("AccountService", accountService);
+            var parameters = new[]
+            {
+                new Parameter("userId", find.Id)
+            };
+            target.Eval("AccountService.InitSingleUserAccount(userId)", parameters);
 
-            try
-            {
-                var userOutput = Resolve<IUserDetailService>().GetUserOutput(find.Id);
-                return new Tuple<ServiceResult, UserOutput>(ServiceResult.Success, userOutput);
-            }
-            catch (Exception ex)
-            {
-                return new Tuple<ServiceResult, UserOutput>(ServiceResult.FailedWithMessage(ex.Message), null);
-            }
+            var userOutput = Resolve<IUserDetailService>().GetUserOutput(find.Id);
+            return new Tuple<ServiceResult, UserOutput>(ServiceResult.Success, userOutput);
         }
 
         public Tuple<ServiceResult, UserOutput> Reg(RegInput regInput)
