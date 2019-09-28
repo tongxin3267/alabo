@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Users.Entities;
 using Alabo.Users.Enum;
 using Alabo.Web.Mvc.ViewModel;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Data.People.Users.ViewModels
 {

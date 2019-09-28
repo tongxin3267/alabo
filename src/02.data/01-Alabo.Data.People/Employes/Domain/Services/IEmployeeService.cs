@@ -1,10 +1,10 @@
-using System;
 using Alabo.Data.People.Employes.Domain.Entities;
 using Alabo.Data.People.Employes.Dtos;
 using Alabo.Data.People.Users.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using MongoDB.Bson;
+using System;
 
 namespace Alabo.Data.People.Employes.Domain.Services
 {

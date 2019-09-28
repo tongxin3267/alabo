@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using Alabo.Data.People.Circles.Domain.Entities;
-using Alabo.Data.People.UserTypes;
+﻿using Alabo.Data.People.UserTypes;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Alabo.Data.People.ServiceCenters.Domain.Entities
 {

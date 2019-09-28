@@ -1,8 +1,8 @@
-using System.Collections.Generic;
 using Alabo.App.Asset.Coupons.Domain.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using MongoDB.Bson;
+using System.Collections.Generic;
 
 namespace Alabo.App.Asset.Coupons.Domain.Services
 {

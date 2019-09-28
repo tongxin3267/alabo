@@ -1,10 +1,8 @@
-﻿using System;
-using Alabo.Domains.Entities;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
+﻿using Alabo.Domains.Entities;
 using Alabo.UI;
 using Alabo.UI.Design.AutoLists;
 using Alabo.Web.Mvc.Attributes;
+using System;
 
 namespace Alabo.App.Asset.Transfers.UI
 {

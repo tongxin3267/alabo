@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Alabo.Data.Things.Goodss.Domain.Entities;
+﻿using Alabo.Data.Things.Goodss.Domain.Entities;
+using System.Collections.Generic;
 
 namespace Alabo.Data.Things.Goodss.Dtos
 {

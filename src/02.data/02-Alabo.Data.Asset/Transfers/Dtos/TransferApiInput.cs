@@ -1,8 +1,8 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Query.Dto;
+﻿using Alabo.Domains.Query.Dto;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Validations;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.Transfers.Dtos
 {

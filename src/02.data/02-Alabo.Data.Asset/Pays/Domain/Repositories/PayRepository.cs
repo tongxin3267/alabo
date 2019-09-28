@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.App.Asset.Pays.Domain.Entities;
+﻿using Alabo.App.Asset.Pays.Domain.Entities;
 using Alabo.App.Asset.Pays.Dtos;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
@@ -10,6 +8,8 @@ using Alabo.Extensions;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Linq.Dynamic;
 using Alabo.Tool.Payment;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.App.Asset.Pays.Domain.Repositories
 {
@@ -116,7 +116,7 @@ namespace Alabo.App.Asset.Pays.Domain.Repositories
                             orderUserId = pay.PayExtension.OrderUser.Id;
                         if (pay.PayType == PayType.AdminPay)
                         {
-                            var order = EntityDynamicService.GetSingleOrder((long) item);
+                            var order = EntityDynamicService.GetSingleOrder((long)item);
                             orderUserId = order.UserId;
                         }
 
@@ -134,15 +134,15 @@ namespace Alabo.App.Asset.Pays.Domain.Repositories
 
                         // 分润订单, UserId 有等于 OrderId的可能, 用 EntityId = {trade.Id}) AND TriggerType != 1 联合进行限制
                         sql =
-                            $" IF NOT EXISTS(SELECT * FROM Task_ShareOrder WHERE EntityId = {(long) item} AND TriggerType != 1) " +
+                            $" IF NOT EXISTS(SELECT * FROM Task_ShareOrder WHERE EntityId = {(long)item} AND TriggerType != 1) " +
                             "INSERT INTO [dbo].[Task_ShareOrder]([UserId] ,[Amount] ,[EntityId],[Parameters] ,[Status],[SystemStatus] , [TriggerType] ,[Summary] ,[CreateTime] ,[UpdateTime],[Extension],[ExecuteCount]) " +
-                            $"VALUES ({orderUserId} ,{pay.Amount},{(long) item},'{string.Empty}' ,{(int) ShareOrderStatus.Pending} ,{(int) ShareOrderSystemStatus.Pending} ,{(int) triggerType} ,'{string.Empty}' ,'{DateTime.Now}' ,'{DateTime.Now}','',0)";
+                            $"VALUES ({orderUserId} ,{pay.Amount},{(long)item},'{string.Empty}' ,{(int)ShareOrderStatus.Pending} ,{(int)ShareOrderSystemStatus.Pending} ,{(int)triggerType} ,'{string.Empty}' ,'{DateTime.Now}' ,'{DateTime.Now}','',0)";
                         sqlList.Add(sql);
 
                         // 订单操作记录
                         sql =
                             "INSERT INTO [dbo].[Shop_OrderAction] ([OrderId] ,[ActionUserId] ,[Intro]  ,[Extensions]  ,[CreateTime],[OrderActionType])" +
-                            $"VALUES({(long) item},{pay.UserId},'会员支付订单，支付方式为{pay.PayType.GetDisplayName()},支付现金金额为{pay.Amount}','','{DateTime.Now}',102)";
+                            $"VALUES({(long)item},{pay.UserId},'会员支付订单，支付方式为{pay.PayType.GetDisplayName()},支付现金金额为{pay.Amount}','','{DateTime.Now}',102)";
                         sqlList.Add(sql);
 
                         #region 如果是拼团购买
@@ -189,7 +189,7 @@ namespace Alabo.App.Asset.Pays.Domain.Repositories
                         excecuteSqlList.Method, entityIdList);
                     if (resolveResult.Item1.Succeeded)
                     {
-                        var afterSqlList = (IList<string>) resolveResult.Item2;
+                        var afterSqlList = (IList<string>)resolveResult.Item2;
                         if (afterSqlList.Count > 0) sqlList.AddRange(afterSqlList);
                     }
                 }

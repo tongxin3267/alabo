@@ -1,14 +1,11 @@
-﻿using System.Collections.Generic;
-using Alabo.Data.People.Users.Domain.Repositories;
+﻿using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Services.Report;
 using Alabo.Extensions;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Helpers;
 using Alabo.UI;
 using Alabo.UI.Design.AutoReports;
 using Alabo.UI.Design.AutoReports.Enums;
+using System.Collections.Generic;
 
 namespace Alabo.Data.People.Users.UI
 {
@@ -105,7 +102,7 @@ namespace Alabo.Data.People.Users.UI
                 }
             };
 
-            var chartCols = new List<string> {"日期", "访问用户", "下单用户"};
+            var chartCols = new List<string> { "日期", "访问用户", "下单用户" };
 
             var chartRows = new List<object>();
             using (var dr = dbContext.ExecuteDataReader(sqlCountByDay))

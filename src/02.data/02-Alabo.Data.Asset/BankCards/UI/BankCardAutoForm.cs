@@ -1,20 +1,18 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text.RegularExpressions;
-using Alabo.App.Asset.BankCards.Domain.Entities;
+﻿using Alabo.App.Asset.BankCards.Domain.Entities;
 using Alabo.App.Asset.BankCards.Domain.Services;
 using Alabo.App.Asset.BankCards.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Maps;
 using Alabo.UI;
 using Alabo.UI.Design.AutoForms;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace Alabo.App.Asset.BankCards.UI
 {
@@ -62,7 +60,7 @@ namespace Alabo.App.Asset.BankCards.UI
 
         public ServiceResult Save(object model, AutoBaseModel autoModel)
         {
-            var temp = ((BankCardAutoForm) model).MapTo<ApiBankCardInput>();
+            var temp = ((BankCardAutoForm)model).MapTo<ApiBankCardInput>();
             temp.LoginUserId = autoModel.BasicUser.Id;
 
             //银行卡必须为数字不能以0开头

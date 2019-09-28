@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
-using Alabo.App.Asset.Accounts.Domain.Entities;
+﻿using Alabo.App.Asset.Accounts.Domain.Entities;
 using Alabo.App.Asset.Bills.Domain.Entities;
 using Alabo.App.Asset.Bills.Dtos;
 using Alabo.Datas.UnitOfWorks;
@@ -11,6 +7,10 @@ using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Repositories.Extensions;
 using Alabo.Extensions;
 using Alabo.Framework.Core.Enums.Enum;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
 
 namespace Alabo.App.Asset.Bills.Domain.Repositories
 {
@@ -61,7 +61,7 @@ namespace Alabo.App.Asset.Bills.Domain.Repositories
             //}
 
             var sqlWhere = string.Empty;
-            if (userInput.Flow.HasValue) sqlWhere = $"{sqlWhere} AND Flow={(int) userInput.Flow}";
+            if (userInput.Flow.HasValue) sqlWhere = $"{sqlWhere} AND Flow={(int)userInput.Flow}";
 
             if (userInput.OtherUserId > 0) sqlWhere = $"{sqlWhere} AND ParentId={userInput.OtherUserId}";
 
@@ -98,7 +98,7 @@ namespace Alabo.App.Asset.Bills.Domain.Repositories
             if (billApiInput.PageSize > 100) billApiInput.PageSize = 100;
 
             var sqlWhere = string.Empty;
-            if (billApiInput.Flow.HasValue) sqlWhere = $"{sqlWhere} AND Flow={(int) billApiInput.Flow}";
+            if (billApiInput.Flow.HasValue) sqlWhere = $"{sqlWhere} AND Flow={(int)billApiInput.Flow}";
 
             if (!billApiInput.MoneyTypeId.IsGuidNullOrEmpty())
                 sqlWhere = $"{sqlWhere} AND MoneyTypeId= '{billApiInput.MoneyTypeId}' ";
@@ -124,8 +124,8 @@ namespace Alabo.App.Asset.Bills.Domain.Repositories
                         Id = dr.Read<long>("Id"),
                         Amount = dr.Read<decimal>("Amount"),
                         AfterAmount = dr.Read<decimal>("AfterAmount"),
-                        Type = (BillActionType) dr["Type"].ToInt16(),
-                        Flow = (AccountFlow) dr["Flow"].ToInt16(),
+                        Type = (BillActionType)dr["Type"].ToInt16(),
+                        Flow = (AccountFlow)dr["Flow"].ToInt16(),
                         CreateTime = dr.Read<DateTime>("CreateTime"),
                         MoneyTypeId = dr.Read<Guid>("MoneyTypeId")
                     };
@@ -148,8 +148,8 @@ namespace Alabo.App.Asset.Bills.Domain.Repositories
                                  VALUES
                                        ({bill.UserId}
                                        ,{bill.OtherUserId}
-                                       ,{(int) bill.Type}
-                                       ,{(int) bill.Flow}
+                                       ,{(int)bill.Type}
+                                       ,{(int)bill.Flow}
                                        ,'{bill.MoneyTypeId}'
                                        ,{bill.Amount}
                                        ,{bill.AfterAmount}
@@ -170,8 +170,8 @@ namespace Alabo.App.Asset.Bills.Domain.Repositories
                 Amount = dr.Read<decimal>("Amount"),
                 AfterAmount = dr.Read<decimal>("AfterAmount"),
                 Intro = dr.Read<string>("Intro"),
-                Type = (BillActionType) dr["Type"].ToInt16(),
-                Flow = (AccountFlow) dr["Flow"].ToInt16(),
+                Type = (BillActionType)dr["Type"].ToInt16(),
+                Flow = (AccountFlow)dr["Flow"].ToInt16(),
                 CreateTime = dr.Read<DateTime>("CreateTime"),
                 MoneyTypeId = dr.Read<Guid>("MoneyTypeId")
             };

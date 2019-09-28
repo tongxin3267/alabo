@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Alabo.App.Asset.Pays.Domain.Entities;
+﻿using Alabo.App.Asset.Pays.Domain.Entities;
 using Alabo.App.Asset.Pays.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
+using System.Collections.Generic;
 
 namespace Alabo.App.Asset.Pays.Domain.Repositories
 {

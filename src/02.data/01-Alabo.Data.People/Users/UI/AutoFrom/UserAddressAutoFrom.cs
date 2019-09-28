@@ -1,14 +1,10 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Address.Domain.Entities;
 using Alabo.Framework.Basic.Address.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Helpers;
 using Alabo.Maps;
 using Alabo.Regexs;
@@ -19,6 +15,8 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Data.People.Users.UI.AutoFrom
 {
@@ -61,7 +59,7 @@ namespace Alabo.Data.People.Users.UI.AutoFrom
 
         public ServiceResult Save(object model, AutoBaseModel autoModel)
         {
-            var input = (UserAddressAutoFrom) model;
+            var input = (UserAddressAutoFrom)model;
             var inputModel = input.MapTo<UserAddress>();
             inputModel.UserId = input.RootUserId;
             //详细地址传入的是null 给跪

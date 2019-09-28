@@ -1,17 +1,15 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Asset.Withdraws.Domain.Enums;
+﻿using Alabo.App.Asset.Withdraws.Domain.Enums;
 using Alabo.App.Asset.Withdraws.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
 using Alabo.UI;
 using Alabo.UI.Design.AutoForms;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.Withdraws.UI
 {
@@ -43,7 +41,7 @@ namespace Alabo.App.Asset.Withdraws.UI
         public ServiceResult Save(object model, AutoBaseModel autoModel)
         {
             //TODO 提现审核注释
-            var withDraw = (WithdrawReviewAutoForm) model;
+            var withDraw = (WithdrawReviewAutoForm)model;
             //withDraw.UserId = autoModel.BasicUser.Id;
 
             //var adminWithDraw = Resolve<IWithdrawService>().GetAdminWithDraw(withDraw.Id);

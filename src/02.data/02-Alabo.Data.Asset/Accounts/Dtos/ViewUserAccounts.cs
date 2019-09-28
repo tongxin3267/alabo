@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Alabo.App.Asset.Accounts.Domain.Entities;
+﻿using Alabo.App.Asset.Accounts.Domain.Entities;
 using Alabo.Users.Entities;
 using Alabo.Web.Mvc.ViewModel;
+using System.Collections.Generic;
 
 namespace Alabo.App.Asset.Accounts.Dtos
 {

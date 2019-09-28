@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Regexs;
+﻿using Alabo.Regexs;
 using Alabo.Validations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Data.People.Users.ViewModels
 {

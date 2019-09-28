@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Alabo.Data.People.Users.Domain.Services;
+﻿using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Data.People.Users.Dtos;
 using Alabo.Data.People.Users.ViewModels;
 using Alabo.Domains.Entities;
@@ -19,6 +16,9 @@ using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.Framework.Core.WebApis.Service;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Data.People.Users.Controllers
@@ -59,8 +59,8 @@ namespace Alabo.Data.People.Users.Controllers
                 Parent = parent,
                 GradeList = Resolve<IAutoConfigService>().GetList<UserGradeConfig>(),
                 StatusList = Enum.GetValues(typeof(Status)).Cast<Status>()
-                    .ToDictionary(x => (long) x, x => x.GetDisplayName())
-                    .Select(x => new {Name = x.Value, Value = x.Key}).ToList()
+                    .ToDictionary(x => (long)x, x => x.GetDisplayName())
+                    .Select(x => new { Name = x.Value, Value = x.Key }).ToList()
             };
 
             view.RegionId = user.Detail.RegionId;

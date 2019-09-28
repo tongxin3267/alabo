@@ -1,9 +1,9 @@
-using System.Collections.Generic;
 using Alabo.App.Asset.Withdraws.Domain.Entities;
 using Alabo.App.Asset.Withdraws.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 
 namespace Alabo.App.Asset.Withdraws.Domain.Services
 {

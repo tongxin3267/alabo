@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Asset.Accounts.Domain.Entities;
+﻿using Alabo.App.Asset.Accounts.Domain.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Core.Enums.Enum;
@@ -9,6 +6,9 @@ using Alabo.Regexs;
 using Alabo.Users.Entities;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.Accounts.Dtos
 {

@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Asset.Coupons.Domain.Enums;
+﻿using Alabo.App.Asset.Coupons.Domain.Enums;
 using Alabo.App.Asset.Coupons.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.Framework.Core.WebApis;
 using Alabo.UI;
 using Alabo.UI.Design.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Alabo.App.Asset.Coupons.Domain.Entities
 {

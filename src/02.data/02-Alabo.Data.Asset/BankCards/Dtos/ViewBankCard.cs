@@ -1,20 +1,18 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Asset.BankCards.Domain.Entities;
+﻿using Alabo.App.Asset.BankCards.Domain.Entities;
 using Alabo.App.Asset.BankCards.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
 using Alabo.Exceptions;
 using Alabo.Extensions;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Mapping;
 using Alabo.UI;
 using Alabo.UI.Design.AutoTables;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.BankCards.Dtos
 {
@@ -80,7 +78,7 @@ namespace Alabo.App.Asset.BankCards.Dtos
                 var temp = new ExpressionQuery<BankCard>
                 {
                     EnablePaging = true,
-                    PageIndex = (int) userInput.PageIndex,
+                    PageIndex = (int)userInput.PageIndex,
                     PageSize = 15
                 };
                 if (!userInput.Name.IsNullOrEmpty()) temp.And(u => u.Name.Contains(userInput.Name));

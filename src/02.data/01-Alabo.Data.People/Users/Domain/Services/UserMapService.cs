@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Alabo.Data.People.Users.Domain.Repositories;
+﻿using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
@@ -9,6 +8,7 @@ using Alabo.Framework.Tasks.Queues.Domain.Servcies;
 using Alabo.Schedules;
 using Alabo.Users.Dtos;
 using Alabo.Users.Entities;
+using System.Collections.Generic;
 
 namespace Alabo.Data.People.Users.Domain.Services
 {

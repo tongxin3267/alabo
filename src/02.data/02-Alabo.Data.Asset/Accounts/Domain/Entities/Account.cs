@@ -1,5 +1,3 @@
-using System;
-using System.ComponentModel.DataAnnotations;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
@@ -8,6 +6,8 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.Accounts.Domain.Entities
 {
@@ -71,7 +71,7 @@ namespace Alabo.App.Asset.Accounts.Domain.Entities
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.MoneyTypeConfig);
             builder.Ignore(e => e.UserName);
-         
+
             if (TenantContext.IsTenant)
             {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);

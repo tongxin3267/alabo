@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.AutoConfigs;
+﻿using Alabo.AutoConfigs;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Alabo.App.Asset.Recharges.Domain.Configs
 {

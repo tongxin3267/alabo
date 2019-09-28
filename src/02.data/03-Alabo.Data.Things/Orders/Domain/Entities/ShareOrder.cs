@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Data.Things.Orders.Domain.Entities.Extensions;
+﻿using Alabo.Data.Things.Orders.Domain.Entities.Extensions;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -11,6 +8,9 @@ using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Data.Things.Orders.Domain.Entities
 {
@@ -149,7 +149,7 @@ namespace Alabo.Data.Things.Orders.Domain.Entities
             builder.Ignore(r => r.UserName);
             builder.Ignore(r => r.ShareOrderExtension);
             builder.Ignore(r => r.DisplayName);
-         
+
             if (TenantContext.IsTenant)
             {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);

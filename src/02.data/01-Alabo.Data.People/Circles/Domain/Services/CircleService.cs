@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Alabo.Data.People.Circles.Client;
 using Alabo.Data.People.Circles.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
@@ -6,6 +5,7 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Mapping;
 using MongoDB.Bson;
+using System.Collections.Generic;
 
 namespace Alabo.Data.People.Circles.Domain.Services
 {

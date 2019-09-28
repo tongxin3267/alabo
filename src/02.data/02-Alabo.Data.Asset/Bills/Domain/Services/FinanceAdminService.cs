@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Asset.Accounts.Domain.Repositories;
+﻿using Alabo.App.Asset.Accounts.Domain.Repositories;
 using Alabo.App.Asset.Accounts.Dtos;
 using Alabo.App.Asset.Bills.Domain.Entities;
 using Alabo.App.Asset.Bills.Domain.Repositories;
@@ -17,6 +15,8 @@ using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Mapping;
 using Alabo.Users.Entities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.App.Asset.Bills.Domain.Services
 {

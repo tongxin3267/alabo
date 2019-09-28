@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.Withdraws.Domain.Enums
 {
@@ -8,13 +8,15 @@ namespace Alabo.App.Asset.Withdraws.Domain.Enums
         /// <summary>
         ///     待处理
         /// </summary>
-        [Display(Name = "待处理")] [LabelCssClass(BadgeColorCalss.Primary)]
+        [Display(Name = "待处理")]
+        [LabelCssClass(BadgeColorCalss.Primary)]
         Pending = 1,
 
         /// <summary>
         ///     等待审核
         /// </summary>
-        [Display(Name = "初审成功")] [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "初审成功")]
+        [LabelCssClass(BadgeColorCalss.Success)]
         FirstCheckSuccess = 2,
 
         ///// <summary>
@@ -28,13 +30,15 @@ namespace Alabo.App.Asset.Withdraws.Domain.Enums
         /// <summary>
         ///     失败
         /// </summary>
-        [Display(Name = "失败")] [LabelCssClass(BadgeColorCalss.Danger)]
+        [Display(Name = "失败")]
+        [LabelCssClass(BadgeColorCalss.Danger)]
         Failured = 5,
 
         /// <summary>
         ///     付款成功
         /// </summary>
-        [Display(Name = "付款成功")] [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "付款成功")]
+        [LabelCssClass(BadgeColorCalss.Success)]
         Success = 6
     }
 }

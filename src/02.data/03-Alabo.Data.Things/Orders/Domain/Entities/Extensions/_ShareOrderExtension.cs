@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Alabo.Domains.Entities.Extensions;
+using System;
 using System.Collections.Generic;
-using Alabo.Domains.Entities.Extensions;
 
 namespace Alabo.Data.Things.Orders.Domain.Entities.Extensions
 {

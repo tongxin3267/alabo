@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Validations;
+﻿using Alabo.Validations;
 using Alabo.Web.Mvc.ViewModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.Withdraws.Dtos
 {

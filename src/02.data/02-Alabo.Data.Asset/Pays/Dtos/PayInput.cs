@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Query.Dto;
+﻿using Alabo.Domains.Query.Dto;
 using Alabo.Tool.Payment;
 using Alabo.Validations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.Pays.Dtos
 {

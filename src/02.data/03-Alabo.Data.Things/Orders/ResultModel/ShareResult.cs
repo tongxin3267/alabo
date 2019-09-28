@@ -1,6 +1,6 @@
-﻿using System;
-using Alabo.Data.Things.Orders.Domain.Entities;
+﻿using Alabo.Data.Things.Orders.Domain.Entities;
 using Alabo.Users.Entities;
+using System;
 
 namespace Alabo.Data.Things.Orders.ResultModel
 {

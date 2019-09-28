@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Asset.Bills.Domain.Entities;
+﻿using Alabo.App.Asset.Bills.Domain.Entities;
 using Alabo.App.Asset.Bills.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
@@ -9,12 +6,13 @@ using Alabo.Domains.Query;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
-using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebApis.Service;
-using Alabo.Framework.Core.WebUis;
 using Alabo.UI;
 using Alabo.UI.Design.AutoLists;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.App.Asset.Bills.UI
 {
@@ -32,12 +30,12 @@ namespace Alabo.App.Asset.Bills.UI
             var temp = new ExpressionQuery<Bill>
             {
                 EnablePaging = true,
-                PageIndex = (int) pageIndex,
+                PageIndex = (int)pageIndex,
                 PageSize = 15
             };
             temp.And(e => e.UserId == userId.ToInt64());
             var model = Resolve<IBillService>()
-                .GetListByPageDesc(15, (int) pageIndex, u => u.UserId == userId.ToInt64());
+                .GetListByPageDesc(15, (int)pageIndex, u => u.UserId == userId.ToInt64());
             var page = Resolve<IBillService>().GetPagedList(temp);
             page.Result = model.ToList();
             var users = Resolve<IUserDetailService>().GetList();

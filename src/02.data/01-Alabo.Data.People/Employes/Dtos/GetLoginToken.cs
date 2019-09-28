@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Validations;
+﻿using Alabo.Validations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Data.People.Employes.Dtos
 {

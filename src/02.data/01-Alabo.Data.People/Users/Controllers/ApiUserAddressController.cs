@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Address.Domain.Entities;
 using Alabo.Framework.Basic.Address.Domain.Services;
@@ -13,6 +10,9 @@ using Alabo.Regexs;
 using Alabo.UI.Design.AutoForms;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Data.People.Users.Controllers

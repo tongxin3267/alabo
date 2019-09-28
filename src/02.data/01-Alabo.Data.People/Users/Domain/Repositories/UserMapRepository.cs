@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using Alabo.Data.People.Teams.Domain.Configs;
+﻿using Alabo.Data.People.Teams.Domain.Configs;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
@@ -12,6 +8,10 @@ using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Helpers;
 using Alabo.Users.Dtos;
 using Alabo.Users.Entities;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using Convert = System.Convert;
 
 namespace Alabo.Data.People.Users.Domain.Repositories

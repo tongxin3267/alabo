@@ -1,4 +1,3 @@
-using System;
 using Alabo.Data.People.Cities.Domain.Entities;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
@@ -7,6 +6,7 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Users.Entities;
 using MongoDB.Bson;
+using System;
 
 namespace Alabo.Data.People.Cities.Domain.Services
 {

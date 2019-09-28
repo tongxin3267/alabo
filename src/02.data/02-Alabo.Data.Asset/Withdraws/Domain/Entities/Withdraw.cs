@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Asset.Withdraws.Domain.Entities.Extension;
+﻿using Alabo.App.Asset.Withdraws.Domain.Entities.Extension;
 using Alabo.App.Asset.Withdraws.Domain.Enums;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
@@ -8,6 +6,8 @@ using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.Withdraws.Domain.Entities
 {
@@ -106,7 +106,6 @@ namespace Alabo.App.Asset.Withdraws.Domain.Entities
             builder.Ignore(e => e.Serial);
             builder.Ignore(e => e.UserName);
             builder.Ignore(e => e.WithdrawExtension);
-         
         }
     }
 }

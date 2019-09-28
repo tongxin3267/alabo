@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
-using Alabo.App.Asset.Accounts.Domain.Services;
+﻿using Alabo.App.Asset.Accounts.Domain.Services;
 using Alabo.App.Asset.Bills.Domain.Repositories;
 using Alabo.App.Asset.Bills.Domain.Services;
 using Alabo.App.Asset.Pays.Domain.Entities;
@@ -32,6 +22,16 @@ using Alabo.Tool.Payment;
 using Alabo.Tool.Payment.CallBacks;
 using Alabo.Users.Entities;
 using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
 using ZKCloud.Open.ApiStore.Payment.Modules.Alipay;
 using ZKCloud.Open.ApiStore.Payment.Modules.Alipay.Domain;
 using ZKCloud.Open.ApiStore.Payment.Modules.Alipay.Request;
@@ -178,32 +178,32 @@ namespace Alabo.App.Asset.Pays.Domain.Services
                 switch (payInput.PayType)
                 {
                     case PayType.BalancePayment:
-                    {
-                        result = BalancePayment(ref pay); // 现金账户余额支付
-                        if (result.Succeeded)
                         {
-                            pay.PayType = PayType.BalancePayment;
-
-                            var callback = _payRepository.AfterPay(orderIds, pay, result.Succeeded);
-                            if (!callback.Succeeded) payOutput.Message += "回调失败!";
-
-                            if (orderIds.Count > 1)
+                            result = BalancePayment(ref pay); // 现金账户余额支付
+                            if (result.Succeeded)
                             {
-                                payOutput.Url = "/pages/user?path=order_index";
-                            }
-                            else
-                            {
-                                payOutput.Url = $"/pages/index?path=order_show&id={orderIds.FirstOrDefault()}";
-                                payOutput.Message = $"/pages/index?path=order_show&id={orderIds.FirstOrDefault()}";
+                                pay.PayType = PayType.BalancePayment;
+
+                                var callback = _payRepository.AfterPay(orderIds, pay, result.Succeeded);
+                                if (!callback.Succeeded) payOutput.Message += "回调失败!";
+
+                                if (orderIds.Count > 1)
+                                {
+                                    payOutput.Url = "/pages/user?path=order_index";
+                                }
+                                else
+                                {
+                                    payOutput.Url = $"/pages/index?path=order_show&id={orderIds.FirstOrDefault()}";
+                                    payOutput.Message = $"/pages/index?path=order_show&id={orderIds.FirstOrDefault()}";
+                                }
+
+                                // 如果前台跳转不为空
+                                if (!pay.PayExtension.RedirectUrl.IsNullOrEmpty())
+                                    payOutput.Url = pay.PayExtension.RedirectUrl;
                             }
 
-                            // 如果前台跳转不为空
-                            if (!pay.PayExtension.RedirectUrl.IsNullOrEmpty())
-                                payOutput.Url = pay.PayExtension.RedirectUrl;
+                            break;
                         }
-
-                        break;
-                    }
 
                     case PayType.AlipayWeb:
                         payResult = AlipayWebPayment(ref pay, url, serviceUrl, orderIds.FirstOrDefault()); // 支付宝电脑端支付
@@ -282,20 +282,20 @@ namespace Alabo.App.Asset.Pays.Domain.Services
                     //    break;
 
                     case PayType.AdminPay:
-                    {
-                        result = BalancePayment(ref pay); // 管理员代付
-                        if (result.Succeeded)
                         {
-                            pay.PayType = PayType.AdminPay;
-                            result = _payRepository.AfterPay(orderIds, pay, result.Succeeded);
-                            if (orderIds.Count > 1)
-                                payOutput.Url = "/pages/index?path=order_list";
-                            else
-                                payOutput.Url = $"/pages/index?path=order_show&id={orderIds.FirstOrDefault()}";
-                        }
+                            result = BalancePayment(ref pay); // 管理员代付
+                            if (result.Succeeded)
+                            {
+                                pay.PayType = PayType.AdminPay;
+                                result = _payRepository.AfterPay(orderIds, pay, result.Succeeded);
+                                if (orderIds.Count > 1)
+                                    payOutput.Url = "/pages/index?path=order_list";
+                                else
+                                    payOutput.Url = $"/pages/index?path=order_show&id={orderIds.FirstOrDefault()}";
+                            }
 
-                        break;
-                    }
+                            break;
+                        }
                 }
 
                 #endregion 开始支付
@@ -402,7 +402,7 @@ namespace Alabo.App.Asset.Pays.Domain.Services
 
                 var request = new WeChatPayUnifiedOrderRequest
                 {
-                    TotalFee = (int) (pay.Amount * 100),
+                    TotalFee = (int)(pay.Amount * 100),
                     TradeType = "APP",
                     Body = $"支付订单(编号{pay.PayExtension.TradeNo})",
                     OutTradeNo = pay.PayExtension.TradeNo + RandomHelper.Number(1000, 9999),
@@ -451,7 +451,7 @@ namespace Alabo.App.Asset.Pays.Domain.Services
 
                 // 组合"调起支付接口"所需参数 :
                 var unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-                var timeStamp = (long) (DateTime.Now - unixEpoch).TotalSeconds;
+                var timeStamp = (long)(DateTime.Now - unixEpoch).TotalSeconds;
 
                 var dic = new WeChatPayDictionary
                 {
@@ -644,7 +644,7 @@ namespace Alabo.App.Asset.Pays.Domain.Services
 
                 var request = new WeChatPayUnifiedOrderRequest
                 {
-                    TotalFee = (int) (pay.Amount * 100),
+                    TotalFee = (int)(pay.Amount * 100),
                     TradeType = "JSAPI",
                     Body = $"支付订单(编号{pay.PayExtension.TradeNo})",
                     OutTradeNo = pay.PayExtension.TradeNo + RandomHelper.Number(1000, 9999),
@@ -693,7 +693,7 @@ namespace Alabo.App.Asset.Pays.Domain.Services
 
                 // 组合"调起支付接口"所需参数 :
                 var unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-                var timeStamp = (long) (DateTime.Now - unixEpoch).TotalSeconds;
+                var timeStamp = (long)(DateTime.Now - unixEpoch).TotalSeconds;
 
                 var dic = new WeChatPayDictionary
                 {
@@ -763,7 +763,7 @@ namespace Alabo.App.Asset.Pays.Domain.Services
 
             var request = new WeChatPayUnifiedOrderRequest
             {
-                TotalFee = (int) (pay.Amount * 100),
+                TotalFee = (int)(pay.Amount * 100),
                 TradeType = "JSAPI",
                 Body = $"支付订单(编号{pay.PayExtension.TradeNo})",
                 OutTradeNo = pay.PayExtension.TradeNo + RandomHelper.Number(1000, 9999),
@@ -812,7 +812,7 @@ namespace Alabo.App.Asset.Pays.Domain.Services
 
             // 组合"调起支付接口"所需参数 :
             var unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-            var timeStamp = (long) (DateTime.Now - unixEpoch).TotalSeconds;
+            var timeStamp = (long)(DateTime.Now - unixEpoch).TotalSeconds;
 
             var dic = new WeChatPayDictionary
             {
@@ -1204,7 +1204,7 @@ namespace Alabo.App.Asset.Pays.Domain.Services
             var refundUrl = "https://api.mch.weixin.qq.com/secapi/pay/refund"; //请求地址
             ServicePointManager.ServerCertificateValidationCallback = CheckValidationResult;
             var cer = new X509Certificate2(cert, password);
-            var webrequest = (HttpWebRequest) WebRequest.Create(refundUrl);
+            var webrequest = (HttpWebRequest)WebRequest.Create(refundUrl);
             webrequest.ClientCertificates.Add(cer);
             var bs = Encoding.UTF8.GetBytes(data);
 

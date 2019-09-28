@@ -1,6 +1,6 @@
-﻿using System;
-using Alabo.Domains.Query.Dto;
+﻿using Alabo.Domains.Query.Dto;
 using Alabo.Framework.Core.Enums.Enum;
+using System;
 
 namespace Alabo.App.Asset.Bills.Dtos
 {

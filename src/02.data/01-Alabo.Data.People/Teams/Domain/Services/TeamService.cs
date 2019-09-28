@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.Data.People.Teams.Domain.Configs;
+﻿using Alabo.Data.People.Teams.Domain.Configs;
 using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
@@ -12,6 +9,9 @@ using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Users.Dtos;
 using Alabo.Users.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.Data.People.Teams.Domain.Services
 {

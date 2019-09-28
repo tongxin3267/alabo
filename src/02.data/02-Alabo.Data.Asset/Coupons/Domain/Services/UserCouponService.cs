@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Alabo.App.Asset.Coupons.Domain.Entities;
 using Alabo.App.Asset.Coupons.Domain.Enums;
 using Alabo.Data.People.Users.Domain.Services;
@@ -9,6 +6,9 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Alabo.App.Asset.Coupons.Domain.Services
 {
@@ -43,7 +43,7 @@ namespace Alabo.App.Asset.Coupons.Domain.Services
                 return ServiceResult.FailedMessage("当前优惠券不存在！");
             }
 
-            //计算优惠券有效期 
+            //计算优惠券有效期
             if (couponModel.TimeLimit == CouponTimeLimit.Days)
             {
                 var day = couponModel.AfterDays; //有效期= 发放当天+ AfterDays

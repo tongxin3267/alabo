@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Repositories.Mongo.Extension;
+﻿using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Validations;
 using MongoDB.Bson;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Data.People.Employes.Dtos
 {

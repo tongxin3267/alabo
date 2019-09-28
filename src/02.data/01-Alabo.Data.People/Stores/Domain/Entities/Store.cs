@@ -1,13 +1,7 @@
-﻿using System;
+﻿using Alabo.Data.People.UserTypes;
+using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Data.People.Stores.Domain.Entities.Extensions;
-using Alabo.Data.People.UserTypes;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Validations;
-using Alabo.Web.Mvc.Attributes;
 
 namespace Alabo.Data.People.Stores.Domain.Entities
 {

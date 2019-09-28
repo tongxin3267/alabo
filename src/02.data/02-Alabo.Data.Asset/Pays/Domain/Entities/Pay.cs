@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Asset.Pays.Domain.Entities.Extension;
+﻿using Alabo.App.Asset.Pays.Domain.Entities.Extension;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -15,6 +11,10 @@ using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Alabo.App.Asset.Pays.Domain.Entities
 {
@@ -161,7 +161,7 @@ namespace Alabo.App.Asset.Pays.Domain.Entities
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.User);
             builder.Ignore(e => e.AccountPayPair);
-         
+
             if (TenantContext.IsTenant)
             {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);

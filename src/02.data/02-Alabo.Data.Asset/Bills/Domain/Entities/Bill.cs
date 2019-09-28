@@ -1,5 +1,3 @@
-using System;
-using System.ComponentModel.DataAnnotations;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -9,6 +7,8 @@ using Alabo.Tenants;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.Bills.Domain.Entities
 {
@@ -129,7 +129,7 @@ namespace Alabo.App.Asset.Bills.Domain.Entities
             builder.Property(e => e.Intro).IsRequired();
             builder.Property(e => e.Amount).IsRequired();
             builder.Ignore(e => e.Serial);
-         
+
             if (TenantContext.IsTenant)
             {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);

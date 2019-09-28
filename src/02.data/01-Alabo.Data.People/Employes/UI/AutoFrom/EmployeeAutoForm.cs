@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Data.People.Employes.Domain.Entities;
+﻿using Alabo.Data.People.Employes.Domain.Entities;
 using Alabo.Data.People.Employes.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Data.People.Users.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.Mongo.Extension;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Maps;
 using Alabo.Regexs;
 using Alabo.UI;
@@ -20,6 +15,9 @@ using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Data.People.Employes.UI.AutoFrom
 {

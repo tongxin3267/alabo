@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Alabo.Extensions;
+﻿using Alabo.Extensions;
 using Alabo.Users.Entities;
+using System.Collections.Generic;
 
 namespace Alabo.Data.People.Users
 {

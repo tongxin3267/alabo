@@ -1,10 +1,10 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.AutoConfigs;
+﻿using Alabo.AutoConfigs;
 using Alabo.Data.People.Users;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Alabo.Data.People.Internals.Domain.Configs
 {

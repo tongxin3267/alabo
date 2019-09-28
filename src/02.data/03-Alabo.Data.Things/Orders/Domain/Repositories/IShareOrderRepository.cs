@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Alabo.Data.Things.Orders.Domain.Entities;
+﻿using Alabo.Data.Things.Orders.Domain.Entities;
 using Alabo.Data.Things.Orders.ResultModel;
 using Alabo.Domains.Repositories;
+using System.Collections.Generic;
 
 namespace Alabo.Data.Things.Orders.Domain.Repositories
 {

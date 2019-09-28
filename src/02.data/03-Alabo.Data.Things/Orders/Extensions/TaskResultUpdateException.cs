@@ -1,5 +1,5 @@
-﻿using System;
-using Alabo.Data.Things.Orders.ResultModel;
+﻿using Alabo.Data.Things.Orders.ResultModel;
+using System;
 
 namespace Alabo.Data.Things.Orders.Extensions
 {

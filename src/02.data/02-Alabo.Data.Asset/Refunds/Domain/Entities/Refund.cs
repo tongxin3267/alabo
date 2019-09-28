@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Asset.Refunds.Domain.Entities.Extension;
+﻿using Alabo.App.Asset.Refunds.Domain.Entities.Extension;
 using Alabo.App.Asset.Refunds.Domain.Enums;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
@@ -8,6 +6,8 @@ using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.Refunds.Domain.Entities
 {
@@ -90,7 +90,6 @@ namespace Alabo.App.Asset.Refunds.Domain.Entities
             builder.Ignore(e => e.RefundExtension);
             builder.Ignore(e => e.Serial);
             builder.Ignore(e => e.UserName);
-         
         }
     }
 }

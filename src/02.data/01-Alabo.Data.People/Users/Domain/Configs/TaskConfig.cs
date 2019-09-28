@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Reflection;
-using Alabo.AutoConfigs;
+﻿using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
@@ -17,6 +11,12 @@ using Alabo.Reflections;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Reflection;
 
 namespace Alabo.Data.People.Users.Domain.Configs
 {

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Services;
 using Alabo.Framework.Core.Reflections.Interfaces;
 using Alabo.Framework.Core.Reflections.Services;
 using Alabo.Schedules;
 using Alabo.Users.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.Data.People.Users.Domain.Services
 {

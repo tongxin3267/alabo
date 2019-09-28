@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Core.Enums.Enum;
+﻿using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Web.Mvc.ViewModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.Recharges.Dtos
 {

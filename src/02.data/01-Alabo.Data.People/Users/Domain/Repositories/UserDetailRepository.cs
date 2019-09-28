@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using Alabo.Data.People.Users.Dtos;
+﻿using Alabo.Data.People.Users.Dtos;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Extensions;
 using Alabo.Users.Entities;
 using Alabo.Users.Enum;
+using System;
+using System.Collections.Generic;
+using System.Data;
 
 namespace Alabo.Data.People.Users.Domain.Repositories
 {
@@ -145,7 +145,7 @@ namespace Alabo.Data.People.Users.Domain.Repositories
                 UserId = reader["UserId"].ConvertToLong(0),
                 RegionId = reader["RegionId"].ConvertToLong(),
                 AddressId = reader["AddressId"].ToString(),
-                Sex = (Sex) reader["Sex"].ConvertToInt(0),
+                Sex = (Sex)reader["Sex"].ConvertToInt(0),
                 Birthday = reader["Birthday"].ConvertToDateTime(),
                 CreateTime = reader["CreateTime"].ConvertToDateTime(),
                 Avator = reader["Avator"].ToString(),

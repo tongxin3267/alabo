@@ -1,6 +1,6 @@
-﻿using System;
-using Alabo.Data.Things.Orders.Extensions;
+﻿using Alabo.Data.Things.Orders.Extensions;
 using Alabo.Framework.Tasks.Queues.Models;
+using System;
 
 namespace Alabo.Data.Things.Orders.ResultModel
 {

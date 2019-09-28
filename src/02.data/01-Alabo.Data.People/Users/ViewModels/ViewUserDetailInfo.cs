@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
 using Alabo.Framework.Core.Enums.Enum;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.Data.People.Users.ViewModels
 {

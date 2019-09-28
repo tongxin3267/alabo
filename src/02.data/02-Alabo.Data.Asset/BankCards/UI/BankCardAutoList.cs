@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.App.Asset.BankCards.Domain.Entities;
+﻿using Alabo.App.Asset.BankCards.Domain.Entities;
 using Alabo.App.Asset.BankCards.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
 using Alabo.UI;
 using Alabo.UI.Design.AutoLists;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.App.Asset.BankCards.UI
 {
@@ -28,7 +26,7 @@ namespace Alabo.App.Asset.BankCards.UI
             var temp = new ExpressionQuery<BankCard>
             {
                 EnablePaging = true,
-                PageIndex = (int) pageIndex,
+                PageIndex = (int)pageIndex,
                 PageSize = 15
             };
             temp.And(e => e.UserId == userId.ToInt64());

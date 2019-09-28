@@ -1,7 +1,7 @@
-﻿using System;
-using Alabo.Data.People.Users.Dtos;
+﻿using Alabo.Data.People.Users.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using System;
 
 namespace Alabo.Data.People.Users.Domain.Services
 {

@@ -1,15 +1,13 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Asset.Withdraws.Domain.Services;
+﻿using Alabo.App.Asset.Withdraws.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
 using Alabo.UI;
 using Alabo.UI.Design.AutoForms;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.Withdraws.UI
 {

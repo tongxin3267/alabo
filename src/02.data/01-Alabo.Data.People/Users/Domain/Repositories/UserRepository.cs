@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
-using Alabo.Data.People.Users.Dtos;
+﻿using Alabo.Data.People.Users.Dtos;
 using Alabo.Data.People.Users.ViewModels;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Enums;
@@ -13,6 +9,10 @@ using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Users.Entities;
 using Alabo.Users.Enum;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
 
 namespace Alabo.Data.People.Users.Domain.Repositories
 {
@@ -275,7 +275,7 @@ namespace Alabo.Data.People.Users.Domain.Repositories
             if (userInput.PageSize > 100) userInput.PageSize = 100;
 
             var sqlWhere = string.Empty;
-            if (Convert.ToInt16(userInput.Status) > 0) sqlWhere = $"{sqlWhere} AND Status={(int) userInput.Status}";
+            if (Convert.ToInt16(userInput.Status) > 0) sqlWhere = $"{sqlWhere} AND Status={(int)userInput.Status}";
 
             if (userInput.ParentId > 0) sqlWhere = $"{sqlWhere} AND ParentId={userInput.ParentId}";
 
@@ -471,7 +471,7 @@ namespace Alabo.Data.People.Users.Domain.Repositories
                 Mobile = reader["Mobile"].ToString(),
                 Name = reader["Name"].ToString(),
                 GradeId = reader["GradeId"].ToGuid(),
-                Status = (Status) reader["Status"].ConvertToInt(0)
+                Status = (Status)reader["Status"].ConvertToInt(0)
             };
             return user;
         }
@@ -487,7 +487,7 @@ namespace Alabo.Data.People.Users.Domain.Repositories
 
                 RegionId = reader["RegionId"].ConvertToLong(),
                 AddressId = reader["AddressId"].ToString(),
-                Sex = (Sex) reader["Sex"].ConvertToInt(),
+                Sex = (Sex)reader["Sex"].ConvertToInt(),
                 Birthday = reader["Birthday"].ToDateTime(),
 
                 CreateTime = reader["CreateTime"].ToDateTime(),
@@ -500,7 +500,7 @@ namespace Alabo.Data.People.Users.Domain.Repositories
                 OpenId = reader["OpenId"].ToString(),
                 ModifiedTime = reader["ModifiedTime"].ToDateTime(),
                 Remark = reader["Remark"].ToString(),
-                IdentityStatus = (IdentityStatus) reader["IdentityStatus"]
+                IdentityStatus = (IdentityStatus)reader["IdentityStatus"]
             };
             return userDetail;
         }
@@ -529,11 +529,11 @@ namespace Alabo.Data.People.Users.Domain.Repositories
                 Mobile = reader["Mobile"].ToString(),
                 Name = reader["Name"].ToString(),
                 GradeId = reader["GradeId"].ToGuid(),
-                Status = (Status) reader["Status"].ConvertToInt(0),
+                Status = (Status)reader["Status"].ConvertToInt(0),
 
                 ParentId = reader["ParentId"].ConvertToLong(0),
-                IdentityStatus = (IdentityStatus) reader["IdentityStatus"],
-                Sex = (Sex) reader["Sex"].ConvertToLong(0),
+                IdentityStatus = (IdentityStatus)reader["IdentityStatus"],
+                Sex = (Sex)reader["Sex"].ConvertToLong(0),
                 Avator = reader["Avator"].ToString(),
                 CreateTime = reader["CreateTime"].ConvertToDateTime()
             };

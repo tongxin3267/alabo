@@ -1,5 +1,5 @@
-﻿using System;
-using Alabo.Domains.Query.Dto;
+﻿using Alabo.Domains.Query.Dto;
+using System;
 
 namespace Alabo.Data.People.Users.Dtos
 {

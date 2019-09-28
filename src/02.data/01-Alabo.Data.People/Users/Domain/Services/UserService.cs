@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Alabo.Data.People.Employes.Domain.Services;
+﻿using Alabo.Data.People.Employes.Domain.Services;
 using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Data.People.Users.Dtos;
 using Alabo.Data.People.Users.ViewModels;
@@ -15,12 +13,13 @@ using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Framework.Basic.Grades.Domain.Services;
-using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.UI;
 using Alabo.Users.Entities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.Data.People.Users.Domain.Services
 {

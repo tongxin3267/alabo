@@ -1,10 +1,10 @@
-using System.Collections.Generic;
 using Alabo.Data.People.Employes.Domain.Entities;
 using Alabo.Data.People.Employes.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Framework.Themes.Domain.Entities;
 using MongoDB.Bson;
+using System.Collections.Generic;
 
 namespace Alabo.Data.People.Employes.Domain.Services
 {

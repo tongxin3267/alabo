@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Alabo.App.Asset.Transfers.Domain.Entities;
+﻿using Alabo.App.Asset.Transfers.Domain.Entities;
 using Alabo.App.Asset.Transfers.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using System.Collections.Generic;
 
 namespace Alabo.App.Asset.Transfers.Domain.Services
 {

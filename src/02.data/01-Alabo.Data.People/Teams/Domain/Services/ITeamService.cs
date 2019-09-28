@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.Domains.Services;
+﻿using Alabo.Domains.Services;
 using Alabo.Users.Dtos;
 using Alabo.Users.Entities;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.Data.People.Teams.Domain.Services
 {

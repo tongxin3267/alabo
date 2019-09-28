@@ -3,14 +3,12 @@ using Alabo.Data.People.Cities.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
-using Alabo.Framework.Basic.Address.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Maps;
-using System.Collections.Generic;
 using Alabo.Framework.Basic.Regions.Domain.Services;
+using Alabo.Maps;
 using Alabo.UI;
 using Alabo.UI.Design.AutoForms;
 using Alabo.UI.Design.AutoTables;
+using System.Collections.Generic;
 
 namespace Alabo.Data.People.Cities.UI
 {

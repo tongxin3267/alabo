@@ -1,6 +1,6 @@
-﻿using System;
-using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+﻿using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Tool.Payment;
+using System;
 
 namespace Alabo.App.Asset.Accounts.Dtos
 {

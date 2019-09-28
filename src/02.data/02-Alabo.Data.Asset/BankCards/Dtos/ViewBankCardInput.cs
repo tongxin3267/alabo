@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.BankCards.Dtos
 {

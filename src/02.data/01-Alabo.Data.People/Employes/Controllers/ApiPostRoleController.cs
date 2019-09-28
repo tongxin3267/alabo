@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using Alabo.Data.People.Employes.Domain.Entities;
 using Alabo.Data.People.Employes.Domain.Services;
 using Alabo.Data.People.Employes.Dtos;
@@ -9,6 +6,9 @@ using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Data.People.Employes.Controllers

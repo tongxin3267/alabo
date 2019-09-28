@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using Alabo.Data.People.Users.Dtos;
+﻿using Alabo.Data.People.Users.Dtos;
 using Alabo.Data.People.Users.ViewModels;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Users.Entities;
+using System.Collections.Generic;
 
 namespace Alabo.Data.People.Users.Domain.Services
 {

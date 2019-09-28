@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Data.People.Users.Domain.Services;
+﻿using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Data.People.Users.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebApis.Service;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Themes.Extensions;
 using Alabo.UI;
 using Alabo.UI.Design.AutoLists;
 using Alabo.UI.Design.AutoPreviews;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Data.People.Users.UI.AutoFrom
 {
@@ -36,7 +34,7 @@ namespace Alabo.Data.People.Users.UI.AutoFrom
             if (pageIndex <= 0) pageIndex = 1;
             var userInput = new UserInput
             {
-                PageIndex = (int) pageIndex,
+                PageIndex = (int)pageIndex,
                 ParentId = userId.ToInt64(),
                 PageSize = 15
             };

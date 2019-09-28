@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.Data.Things.Orders.Domain.Entities;
+﻿using Alabo.Data.Things.Orders.Domain.Entities;
 using Alabo.Data.Things.Orders.Domain.Entities.Extensions;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.Data.Things.Orders.Domain.Services
 {

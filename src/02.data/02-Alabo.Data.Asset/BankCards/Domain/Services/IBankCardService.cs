@@ -1,9 +1,9 @@
-using System.Collections.Generic;
 using Alabo.App.Asset.BankCards.Domain.Entities;
 using Alabo.App.Asset.BankCards.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using MongoDB.Bson;
+using System.Collections.Generic;
 
 namespace Alabo.App.Asset.BankCards.Domain.Services
 {

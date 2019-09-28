@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using Alabo.AutoConfigs;
-using Alabo.Data.People.UserTypes.Enums;
+﻿using Alabo.Data.People.UserTypes.Enums;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Validations;
 using Alabo.Validations.Attributes;
 using Alabo.Web.Mvc.Attributes;
-using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Alabo.Data.People.UserTypes
 {

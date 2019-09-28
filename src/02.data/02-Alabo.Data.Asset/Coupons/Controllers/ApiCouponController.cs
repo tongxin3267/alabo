@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Alabo.App.Asset.Coupons.Domain.Entities;
 using Alabo.App.Asset.Coupons.Domain.Services;
 using Alabo.Extensions;
@@ -6,6 +5,7 @@ using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using System.Collections.Generic;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Asset.Coupons.Controllers
@@ -57,7 +57,6 @@ namespace Alabo.App.Asset.Coupons.Controllers
 
             return ApiResult.Success("����ɹ�");
         }
-
 
         /// <summary>
         ///     �Ż�ȯ����

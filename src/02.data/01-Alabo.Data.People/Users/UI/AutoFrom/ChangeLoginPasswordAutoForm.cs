@@ -1,17 +1,15 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Data.People.Users.Domain.Services;
+﻿using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Data.People.Users.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Mapping;
 using Alabo.UI;
 using Alabo.UI.Design.AutoForms;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Data.People.Users.UI.AutoFrom
 {
@@ -74,7 +72,7 @@ namespace Alabo.Data.People.Users.UI.AutoFrom
 
         public ServiceResult Save(object model, AutoBaseModel autoModel)
         {
-            var parameter = (ChangeLoginPasswordAutoForm) model;
+            var parameter = (ChangeLoginPasswordAutoForm)model;
 
             var view = AutoMapping.SetValue<PasswordInput>(parameter);
             view.Type = PasswordType.LoginPassword;

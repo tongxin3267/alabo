@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.Data.People.Users.Domain.Configs;
+﻿using Alabo.Data.People.Users.Domain.Configs;
 using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Data.People.Users.Dtos;
 using Alabo.Data.People.Users.ViewModels;
@@ -10,11 +8,9 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
-using Alabo.Framework.Basic.Address.Domain.Services;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Framework.Basic.Regions.Domain.Services;
-using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Helpers;
 using Alabo.Linq.Dynamic;
@@ -23,6 +19,8 @@ using Alabo.Regexs;
 using Alabo.UI;
 using Alabo.Users.Entities;
 using Alabo.Users.Enum;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.Data.People.Users.Domain.Services
 {

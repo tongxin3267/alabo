@@ -1,9 +1,9 @@
-﻿using System;
-using Alabo.Data.People.Users.Domain.Repositories;
+﻿using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Users.Entities;
+using System;
 
 namespace Alabo.Data.People.Users.Domain.Services
 {

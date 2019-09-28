@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Alabo.Framework.Core.Enums.Enum;
+﻿using Alabo.Framework.Core.Enums.Enum;
+using System.Collections.Generic;
 
 namespace Alabo.App.Asset.Pays.Dtos
 {

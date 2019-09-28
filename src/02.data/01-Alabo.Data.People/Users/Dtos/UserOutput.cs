@@ -1,9 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Query.Dto;
+﻿using Alabo.Domains.Query.Dto;
 using Alabo.Mapping.Dynamic;
 using Alabo.Users.Enum;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Data.People.Users.Dtos
 {

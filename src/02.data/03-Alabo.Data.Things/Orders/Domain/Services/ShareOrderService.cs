@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.Data.People.Users.Domain.Services;
+﻿using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Data.Things.Orders.Domain.Entities;
 using Alabo.Data.Things.Orders.Domain.Entities.Extensions;
 using Alabo.Data.Things.Orders.Domain.Repositories;
@@ -10,6 +8,8 @@ using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.Data.Things.Orders.Domain.Services
 {

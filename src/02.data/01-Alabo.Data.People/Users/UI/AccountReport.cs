@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-using Alabo.Data.People.Users.Domain.Repositories;
+﻿using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Services.Report;
 using Alabo.Extensions;
-using Alabo.Framework.Core.WebApis;
 using Alabo.Helpers;
 using Alabo.UI;
 using Alabo.UI.Design.AutoReports;
 using Alabo.UI.Design.AutoReports.Enums;
+using System.Collections.Generic;
 
 namespace Alabo.Data.People.Users.UI
 {
@@ -105,7 +103,7 @@ namespace Alabo.Data.People.Users.UI
                     Value = totalCoupon.ToString().ToDecimal(), Icon = "aa4.ico"
                 }
             };
-            var chartCols = new List<string> {"日期", "资产额度", "人民币额度", "积分额度", "消费额额度", "优惠券额度"};
+            var chartCols = new List<string> { "日期", "资产额度", "人民币额度", "积分额度", "消费额额度", "优惠券额度" };
 
             var chartRows = new List<object>();
             using (var dr = dbContext.ExecuteDataReader(sqlCountByDay))

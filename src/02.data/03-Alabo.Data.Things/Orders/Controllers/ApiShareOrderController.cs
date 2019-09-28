@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Data.Things.Orders.Domain.Entities;
+﻿using Alabo.Data.Things.Orders.Domain.Entities;
 using Alabo.Data.Things.Orders.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
@@ -8,6 +7,7 @@ using Alabo.Framework.Core.WebApis.Dtos;
 using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.RestfulApi;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Data.Things.Orders.Controllers

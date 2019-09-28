@@ -1,15 +1,13 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Data.People.Users.Domain.Services;
+﻿using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Mapping;
 using Alabo.UI;
 using Alabo.UI.Design.AutoForms;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Data.People.Users.Dtos
 {
@@ -98,7 +96,7 @@ namespace Alabo.Data.People.Users.Dtos
 
         public ServiceResult Save(object model, AutoBaseModel autoModel)
         {
-            var parameter = (PayPasswordInput) model;
+            var parameter = (PayPasswordInput)model;
             var view = AutoMapping.SetValue<PasswordInput>(parameter);
             view.Type = PasswordType.PayPassword;
             var result = Resolve<IUserDetailService>().ChangePassword(view);

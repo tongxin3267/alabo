@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Text;
-using System.Text.RegularExpressions;
 using Alabo.App.Asset.BankCards.Domain.Entities;
 using Alabo.App.Asset.BankCards.Dtos;
 using Alabo.App.Asset.Pays.Dtos;
@@ -17,6 +11,12 @@ using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Mapping;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Alabo.App.Asset.BankCards.Domain.Services
 {
@@ -46,16 +46,16 @@ namespace Alabo.App.Asset.BankCards.Domain.Services
 
             var checkUrl =
                 $"https://ccdcapi.alipay.com/validateAndCacheCardInfo.json?_input_charset=utf-8&cardNo={view.BankCardId}&cardBinCheck=true";
-            var httpRequest = (HttpWebRequest) WebRequest.CreateDefault(new Uri(checkUrl));
+            var httpRequest = (HttpWebRequest)WebRequest.CreateDefault(new Uri(checkUrl));
             HttpWebResponse httpResponse = null;
 
             try
             {
-                httpResponse = (HttpWebResponse) httpRequest.GetResponse();
+                httpResponse = (HttpWebResponse)httpRequest.GetResponse();
             }
             catch (WebException ex)
             {
-                httpResponse = (HttpWebResponse) ex.Response;
+                httpResponse = (HttpWebResponse)ex.Response;
             }
 
             var st = httpResponse.GetResponseStream();
@@ -148,8 +148,8 @@ namespace Alabo.App.Asset.BankCards.Domain.Services
         {
             var query = new ExpressionQuery<BankCard>
             {
-                PageIndex = (int) parameter.PageIndex,
-                PageSize = (int) parameter.PageSize
+                PageIndex = (int)parameter.PageIndex,
+                PageSize = (int)parameter.PageSize
             };
             query.And(e => e.UserId == parameter.UserId);
 

@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Asset.Recharges.Domain.Entities.Extension;
+﻿using Alabo.App.Asset.Recharges.Domain.Entities.Extension;
 using Alabo.App.Asset.Recharges.Domain.Enums;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
@@ -9,6 +7,8 @@ using Alabo.Tool.Payment;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.Recharges.Domain.Entities
 {
@@ -103,7 +103,6 @@ namespace Alabo.App.Asset.Recharges.Domain.Entities
             builder.Ignore(e => e.RechargeExtension);
             builder.Ignore(e => e.Serial);
             builder.Ignore(e => e.UserName);
-         
         }
     }
 }

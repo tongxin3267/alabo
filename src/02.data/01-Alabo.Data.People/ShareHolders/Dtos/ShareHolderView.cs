@@ -1,14 +1,12 @@
-﻿using System;
-using Alabo.Data.People.ShareHolders.Domain.Entities;
+﻿using Alabo.Data.People.ShareHolders.Domain.Entities;
 using Alabo.Data.People.ShareHolders.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Maps;
 using Alabo.UI;
 using Alabo.UI.Design.AutoForms;
+using System;
 
 namespace Alabo.Data.People.ShareHolders.Dtos
 {
@@ -47,7 +45,7 @@ namespace Alabo.Data.People.ShareHolders.Dtos
 
         public ServiceResult Save(object model, AutoBaseModel autoModel)
         {
-            var shareHolderView = (ShareHolderView) model;
+            var shareHolderView = (ShareHolderView)model;
             var user = Resolve<IUserService>().GetSingle(u => u.UserName == shareHolderView.UserName);
 
             var view = shareHolderView.MapTo<ShareHolder>();

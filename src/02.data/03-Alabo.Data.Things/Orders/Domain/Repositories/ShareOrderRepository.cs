@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
-using System.Linq;
-using Alabo.App.Asset.Accounts.Domain.Repositories;
+﻿using Alabo.App.Asset.Accounts.Domain.Repositories;
 using Alabo.Cache;
 using Alabo.Data.Things.Orders.Domain.Entities;
 using Alabo.Data.Things.Orders.Domain.Entities.Extensions;
@@ -22,6 +17,11 @@ using Alabo.Framework.Tasks.Queues.Domain.Enums;
 using Alabo.Helpers;
 using Alabo.Regexs;
 using Alabo.Schedules;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Common;
+using System.Linq;
 using ZKCloud.Open.Message.Models;
 using Convert = System.Convert;
 
@@ -86,7 +86,7 @@ namespace Alabo.Data.Things.Orders.Domain.Repositories
         public IList<long> GetUnHandledIdList()
         {
             var sql =
-                $"select  top 10 Id from Task_ShareOrder where Status={(byte) ShareOrderStatus.Pending} order by id   "; //每次处理10条
+                $"select  top 10 Id from Task_ShareOrder where Status={(byte)ShareOrderStatus.Pending} order by id   "; //每次处理10条
             IList<long> list = new List<long>();
             using (var dr = RepositoryContext.ExecuteDataReader(sql))
             {
@@ -430,9 +430,9 @@ namespace Alabo.Data.Things.Orders.Domain.Repositories
                 Amount = reader["Amount"].ConvertToDecimal(0),
                 Extension = reader["Extension"].ToString(),
                 Parameters = reader["Parameters"].ToString(),
-                SystemStatus = (ShareOrderSystemStatus) reader["SystemStatus"].ConvertToInt(0),
-                TriggerType = (TriggerType) reader["TriggerType"].ConvertToInt(0),
-                Status = (ShareOrderStatus) reader["Status"].ConvertToInt(0)
+                SystemStatus = (ShareOrderSystemStatus)reader["SystemStatus"].ConvertToInt(0),
+                TriggerType = (TriggerType)reader["TriggerType"].ConvertToInt(0),
+                Status = (ShareOrderStatus)reader["Status"].ConvertToInt(0)
             };
             if (!shareOrder.Extension.IsNullOrEmpty())
                 shareOrder.ShareOrderExtension = shareOrder.Extension.ToObject<ShareOrderExtension>();

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.App.Asset.Withdraws.Domain.Services;
+﻿using Alabo.App.Asset.Withdraws.Domain.Services;
 using Alabo.App.Asset.Withdraws.Dtos;
 using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis.Controller;
@@ -7,6 +6,7 @@ using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.Framework.Core.WebUis.Models.Lists;
 using Alabo.UI.Design.AutoForms;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Asset.Withdraws.Controllers

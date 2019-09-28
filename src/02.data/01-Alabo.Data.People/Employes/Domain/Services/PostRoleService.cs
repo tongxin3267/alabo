@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Alabo.Data.People.Employes.Domain.Entities;
 using Alabo.Data.People.Employes.Dtos;
 using Alabo.Data.People.Users.Domain.Services;
@@ -16,6 +13,9 @@ using Alabo.Framework.Themes.Domain.Services;
 using Alabo.Framework.Themes.Dtos;
 using Alabo.Maps;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.Data.People.Employes.Domain.Services
 {

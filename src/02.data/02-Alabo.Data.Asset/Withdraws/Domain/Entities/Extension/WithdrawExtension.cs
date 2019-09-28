@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.App.Asset.BankCards.Domain.Entities;
+﻿using Alabo.App.Asset.BankCards.Domain.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.Withdraws.Domain.Entities.Extension
 {

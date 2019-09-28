@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
 using Alabo.App.Asset.Accounts.Domain.Entities;
 using Alabo.App.Asset.Accounts.Domain.Services;
 using Alabo.App.Asset.Accounts.Dtos;
@@ -22,6 +17,11 @@ using Alabo.Framework.Core.WebApis.Dtos;
 using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.Maps;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Asset.Accounts.Controllers
@@ -197,7 +197,7 @@ namespace Alabo.App.Asset.Accounts.Controllers
             var moneyType = Resolve<IAutoConfigService>().MoneyTypes().FirstOrDefault(r => r.Id == view.MoneyTypeId);
             if (moneyType == null) return ApiResult.Failure("操作失败：对应的货币类型不支持!");
             var result = ServiceResult.Success;
-            if (view.ActionType == (int) FinanceActionType.Add)
+            if (view.ActionType == (int)FinanceActionType.Add)
             {
                 if (view.Amount > 1000000) return ApiResult.Failure("Amount", "资产增加单次金额不能超过100W");
 
@@ -205,13 +205,13 @@ namespace Alabo.App.Asset.Accounts.Controllers
                     .Increase(chargeUser, moneyType, view.Amount, "管理员后台手动增加资产" + view.Remark);
             }
 
-            if (view.ActionType == (int) FinanceActionType.Reduce)
+            if (view.ActionType == (int)FinanceActionType.Reduce)
                 result = Resolve<IBillService>().Reduce(chargeUser, moneyType, view.Amount, "管理员后台减少" + view.Remark);
 
-            if (view.ActionType == (int) FinanceActionType.Freeze)
+            if (view.ActionType == (int)FinanceActionType.Freeze)
                 result = Resolve<IBillService>().Treeze(chargeUser, moneyType, view.Amount, "管理员后台冻结" + view.Remark);
 
-            if (view.ActionType == (int) FinanceActionType.Unfreeze)
+            if (view.ActionType == (int)FinanceActionType.Unfreeze)
                 result = Resolve<IBillService>()
                     .DeductTreeze(chargeUser, moneyType, view.Amount, "管理员后台解结" + view.Remark);
 
@@ -240,11 +240,11 @@ namespace Alabo.App.Asset.Accounts.Controllers
         private string GetAcctionName(long type)
         {
             var name = "手动增加";
-            if (type == (int) FinanceActionType.Reduce) name = "手动减少";
+            if (type == (int)FinanceActionType.Reduce) name = "手动减少";
 
-            if (type == (int) FinanceActionType.Freeze) name = "冻结";
+            if (type == (int)FinanceActionType.Freeze) name = "冻结";
 
-            if (type == (int) FinanceActionType.Unfreeze) name = "解结";
+            if (type == (int)FinanceActionType.Unfreeze) name = "解结";
 
             return name;
         }

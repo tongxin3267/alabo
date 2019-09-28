@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Data.People.Users.Domain.Configs;
+﻿using Alabo.Data.People.Users.Domain.Configs;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
@@ -8,8 +6,6 @@ using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Randoms;
 using Alabo.Regexs;
 using Alabo.UI;
@@ -17,6 +13,8 @@ using Alabo.UI.Design.AutoForms;
 using Alabo.Users.Entities;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.ComponentModel.DataAnnotations;
 using Random = System.Random;
 
 namespace Alabo.Data.People.Users.UI.AutoFrom
@@ -57,7 +55,7 @@ namespace Alabo.Data.People.Users.UI.AutoFrom
         /// <returns></returns>
         public ServiceResult Save(object model, AutoBaseModel autoModel)
         {
-            var view = (AdminUserAddAutoForm) model;
+            var view = (AdminUserAddAutoForm)model;
 
             var user = new User
             {

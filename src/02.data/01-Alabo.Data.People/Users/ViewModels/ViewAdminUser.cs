@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Data.People.Users.Domain.Services;
+﻿using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
 using Alabo.UI;
 using Alabo.UI.Design.AutoTables;
 using Alabo.Users.Enum;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Data.People.Users.ViewModels
 {
@@ -82,7 +80,7 @@ namespace Alabo.Data.People.Users.ViewModels
             IsShowAdvancedSerach = true, DataField = "UserId", GroupTabId = 1, IsMain = true, Width = "150",
             EditShow = true,
             ListShow = true, SortOrder = 2 //,
-            //Link = "/Admin/User/Edit?id=[[Id]]"
+                                           //Link = "/Admin/User/Edit?id=[[Id]]"
         )]
         public string UserName { get; set; }
 

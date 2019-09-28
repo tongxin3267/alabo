@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.App.Asset.Withdraws.Domain.Enums;
+﻿using Alabo.App.Asset.Withdraws.Domain.Enums;
 using Alabo.Web.Mvc.ViewModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.Withdraws.Dtos
 {

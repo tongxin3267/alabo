@@ -1,8 +1,7 @@
-﻿using System;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
-using Alabo.Framework.Core.WebApis;
 using Alabo.UI;
+using System;
 
 namespace Alabo.Data.People.Users.Dtos
 {

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Data.Things.Goodss.Domain.Entities.Extensions;
+﻿using Alabo.Data.Things.Goodss.Domain.Entities.Extensions;
 using Alabo.Data.Things.Goodss.Domain.Enums;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Datas.Queries.Enums;
@@ -9,6 +8,7 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Data.Things.Goodss.Domain.Entities
 {
@@ -112,7 +112,7 @@ namespace Alabo.Data.Things.Goodss.Domain.Entities
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Property(e => e.Name).HasMaxLength(250);
-         
+
             builder.Ignore(e => e.GoodsExtensions);
         }
     }

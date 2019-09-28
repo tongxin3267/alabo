@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Alabo.Data.People.Users.Dtos;
+﻿using Alabo.Data.People.Users.Dtos;
 using Alabo.Domains.Repositories;
 using Alabo.Users.Entities;
+using System.Collections.Generic;
 
 namespace Alabo.Data.People.Users.Domain.Repositories
 {

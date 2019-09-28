@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Alabo.Data.People.Internals.Domain.Entities;
+﻿using Alabo.Data.People.Internals.Domain.Entities;
 using Alabo.Data.People.Internals.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
@@ -9,6 +8,7 @@ using Alabo.Maps;
 using Alabo.UI;
 using Alabo.UI.Design.AutoForms;
 using Alabo.UI.Design.AutoTables;
+using System.Collections.Generic;
 
 namespace Alabo.Data.People.Internals.UI
 {

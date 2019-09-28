@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Alabo.App.Asset.Accounts.Domain.Entities;
+using Alabo.Domains.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using Alabo.App.Asset.Accounts.Domain.Entities;
-using Alabo.Domains.Repositories;
 
 namespace Alabo.App.Asset.Accounts.Domain.Repositories
 {

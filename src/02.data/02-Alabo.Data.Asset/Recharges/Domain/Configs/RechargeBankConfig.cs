@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.AutoConfigs;
+﻿using Alabo.AutoConfigs;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.Recharges.Domain.Configs
 {

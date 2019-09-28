@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Asset.Withdraws.Domain.Enums;
+﻿using Alabo.App.Asset.Withdraws.Domain.Enums;
 using Alabo.App.Asset.Withdraws.Domain.Services;
 using Alabo.App.Asset.Withdraws.Dtos;
 using Alabo.Domains.Entities;
@@ -9,8 +6,6 @@ using Alabo.Domains.Enums;
 using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.Maps;
@@ -19,6 +14,9 @@ using Alabo.UI.Design.AutoForms;
 using Alabo.UI.Design.AutoTables;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.Withdraws.UI
 {
@@ -43,7 +41,7 @@ namespace Alabo.App.Asset.Withdraws.UI
 
         public ServiceResult Save(object model, AutoBaseModel autoModel)
         {
-            var withDraw = (WithdrawAutoForm) model;
+            var withDraw = (WithdrawAutoForm)model;
             withDraw.UserId = autoModel.BasicUser.Id;
             withDraw.Status = WithdrawStatus.FirstCheckSuccess;
             //如果为空则直接赋值为 储值/现金

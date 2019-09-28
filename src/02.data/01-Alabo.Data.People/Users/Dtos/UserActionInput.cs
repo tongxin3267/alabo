@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Query.Dto;
+﻿using Alabo.Domains.Query.Dto;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Data.People.Users.Dtos
 {

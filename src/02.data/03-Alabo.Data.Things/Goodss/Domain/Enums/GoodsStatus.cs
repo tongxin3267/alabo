@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Data.Things.Goodss.Domain.Enums
 {
@@ -11,25 +11,29 @@ namespace Alabo.Data.Things.Goodss.Domain.Enums
         /// <summary>
         ///     审核中
         /// </summary>
-        [Display(Name = "审核中")] [LabelCssClass(BadgeColorCalss.Metal)]
+        [Display(Name = "审核中")]
+        [LabelCssClass(BadgeColorCalss.Metal)]
         Auditing = 1,
 
         /// <summary>
         ///     已上架
         /// </summary>
-        [Display(Name = "已上架")] [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "已上架")]
+        [LabelCssClass(BadgeColorCalss.Success)]
         Online = 2,
 
         /// <summary>
         ///     已下架
         /// </summary>
-        [Display(Name = "已下架")] [LabelCssClass(BadgeColorCalss.Danger)]
+        [Display(Name = "已下架")]
+        [LabelCssClass(BadgeColorCalss.Danger)]
         SoldOut = 3,
 
         /// <summary>
         ///     审核删除
         /// </summary>
-        [Display(Name = "已删除")] [LabelCssClass(BadgeColorCalss.Danger)]
+        [Display(Name = "已删除")]
+        [LabelCssClass(BadgeColorCalss.Danger)]
         Deleted = 4
     }
 }
