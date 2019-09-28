@@ -99,7 +99,7 @@ namespace Alabo.Data.People.Users.Controllers
         public async Task<ApiResult<UserOutput>> MpLogin([FromQuery] MpLoginInput input)
         {
             var config = Resolve<IAutoConfigService>().GetValue<MiniProgramConfig>();
-            var openId = SnsApi.JsCode2Json(config.AppID, config.AppSecret, input.code)
+            var openId = SnsApi.JsCode2Json(config.AppID, config.AppSecret, input.Code)
                 .openid;
             if (openId.IsNullOrEmpty()) return ApiResult.Failure<UserOutput>("获取openId失败");
 

@@ -13,6 +13,6 @@
         /// <summary>
         ///     用户id
         /// </summary>
-        public long UserID { get; set; }
+        public long UserId { get; set; }
     }
 }

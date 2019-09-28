@@ -20,22 +20,22 @@ namespace Alabo.Data.People.Circles.Client
     /// </summary>
     public class CircleMapClient : ApiStoreClient
     {
-        private static readonly Func<IConnector> _connectorCreator = () => new HttpClientConnector();
+        private static readonly Func<IConnector> ConnectorCreator = () => new HttpClientConnector();
 
-        private static readonly Func<IDataFormatter> _formmaterCreator = () => new JsonFormatter();
+        private static readonly Func<IDataFormatter> FormmaterCreator = () => new JsonFormatter();
 
-        private static readonly Uri _baseUri = new Uri("http://ui.5ug.com");
+        private static readonly Uri BaseUri = new Uri("http://ui.5ug.com");
 
         /// <summary>
         ///     秘钥
         /// </summary>
-        private string key = "7a0bfcba0cbd3490c8cbf1331a5e68c2";
+        private string _key = "7a0bfcba0cbd3490c8cbf1331a5e68c2";
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="MiniProgramClient" /> class.
         /// </summary>
         public CircleMapClient()
-            : base(_baseUri, _connectorCreator(), _formmaterCreator())
+            : base(BaseUri, ConnectorCreator(), FormmaterCreator())
         {
         }
 

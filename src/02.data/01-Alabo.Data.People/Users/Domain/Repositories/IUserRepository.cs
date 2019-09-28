@@ -12,7 +12,7 @@ namespace Alabo.Data.People.Users.Domain.Repositories
 
         User GetSingle(long userId);
 
-        User GetSingle(string UserName);
+        User GetSingle(string userName);
 
         User GetSingleByMail(string mail);
 
@@ -20,13 +20,13 @@ namespace Alabo.Data.People.Users.Domain.Repositories
 
         User GetUserDetail(long userId);
 
-        User GetUserDetail(string UserName);
+        User GetUserDetail(string userName);
 
-        User Add(User User, List<MoneyTypeConfig> moneyTypes);
+        User Add(User user, List<MoneyTypeConfig> moneyTypes);
 
         bool UpdateSingle(User user);
 
-        bool CheckUserExists(string UserName, string password, out long userId);
+        bool CheckUserExists(string userName, string password, out long userId);
 
         IList<User> GetList(IList<long> userIds);
 

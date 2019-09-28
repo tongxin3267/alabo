@@ -75,8 +75,8 @@ namespace Alabo.Data.People.Users.Domain.Services
         /// <summary>
         ///     获取s the 会员 detail.
         /// </summary>
-        /// <param name="UserName">Name of the 会员.</param>
-        User GetUserDetail(string UserName);
+        /// <param name="userName">Name of the 会员.</param>
+        User GetUserDetail(string userName);
 
         /// <summary>
         ///     获取s the list.
@@ -93,8 +93,8 @@ namespace Alabo.Data.People.Users.Domain.Services
         /// <summary>
         ///     Existses the name of the 会员.
         /// </summary>
-        /// <param name="UserName">Name of the 会员.</param>
-        bool ExistsUserName(string UserName);
+        /// <param name="userName">Name of the 会员.</param>
+        bool ExistsUserName(string userName);
 
         /// <summary>
         ///     Existses the mail.
@@ -149,8 +149,8 @@ namespace Alabo.Data.People.Users.Domain.Services
         ///     删除缓存
         /// </summary>
         /// <param name="userId">会员Id</param>
-        /// <param name="UserName">Name of the 会员.</param>
-        void DeleteUserCache(long userId, string UserName);
+        /// <param name="userName">Name of the 会员.</param>
+        void DeleteUserCache(long userId, string userName);
 
         /// <summary>
         ///     删除缓存

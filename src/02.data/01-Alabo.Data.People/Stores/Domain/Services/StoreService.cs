@@ -66,10 +66,10 @@ namespace Alabo.Data.People.Stores.Domain.Services
         /// <summary>
         ///     获取会员店铺
         /// </summary>
-        /// <param name="UserId">会员Id</param>
-        public Store GetUserStore(long UserId)
+        /// <param name="userId">会员Id</param>
+        public Store GetUserStore(long userId)
         {
-            return GetSingle(r => r.UserId == UserId && r.Status == UserTypeStatus.Success);
+            return GetSingle(r => r.UserId == userId && r.Status == UserTypeStatus.Success);
         }
     }
 }

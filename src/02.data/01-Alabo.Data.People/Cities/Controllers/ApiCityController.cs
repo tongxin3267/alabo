@@ -36,10 +36,10 @@ namespace Alabo.Data.People.Cities.Controllers
         }
 
         [HttpGet]
-        public ApiResult ChangeStatus([FromQuery] string UserId, string Status)
+        public ApiResult ChangeStatus([FromQuery] string userId, string status)
         {
-            if (string.IsNullOrEmpty(UserId)) return ApiResult.Failure("参数传入失败");
-            var b = Resolve<ICityService>().ChangeUserStatus(UserId, Status);
+            if (string.IsNullOrEmpty(userId)) return ApiResult.Failure("参数传入失败");
+            var b = Resolve<ICityService>().ChangeUserStatus(userId, status);
 
             if (b.Succeeded)
                 return ApiResult.Success();

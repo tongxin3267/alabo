@@ -16,7 +16,7 @@ namespace Alabo.Data.People.Stores.Domain.Services
         ///     获取s the 会员 store.
         ///     获取会员店铺
         /// </summary>
-        /// <param name="UserId">会员Id</param>
-        Store GetUserStore(long UserId);
+        /// <param name="userId">会员Id</param>
+        Store GetUserStore(long userId);
     }
 }
