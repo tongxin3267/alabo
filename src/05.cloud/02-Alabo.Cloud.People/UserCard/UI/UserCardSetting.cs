@@ -2,45 +2,41 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using Alabo.App.Core.Api.Domain.Service;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.User;
-using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Extensions;
-using Alabo.Helpers;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Mapping;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
-using Alabo.UI.AutoLists;
-using Alabo.UI.AutoTables;
+using Alabo.UI.Design.AutoForms;
+using Alabo.UI.Design.AutoTables;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Market.UserCard.UI
+namespace Alabo.Cloud.People.UserCard.UI
 {
-
     [ClassProperty(Name = "会员卡设置")]
     public class UserCardSetting : UIBase, IAutoForm, IAutoTable<UserCardSetting>
     {
-
         //[Field(ControlsType = ControlsType.Label, SortOrder = 2, ListShow = false, EditShow = false, Width = "40%", IsShowBaseSerach = false)]
         //public decimal Height { get; set; }
 
         /// <summary>
-        /// ID
+        ///     ID
         /// </summary>
-        public Guid Id { get; set; } = new Guid();
+        public Guid Id { get; set; }
 
         /// <summary>
         ///     等级名称
         /// </summary>
         [Main]
-        [Field(ControlsType = ControlsType.TextBox, SortOrder = 2, ListShow = true, EditShow = true, Width = "40%", IsShowBaseSerach = true)]
+        [Field(ControlsType = ControlsType.TextBox, SortOrder = 2, ListShow = true, EditShow = true, Width = "40%",
+            IsShowBaseSerach = true)]
         [Display(Name = "等级名称")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [HelpBlock("等级名称，比如高级会员，中级会员，钻石会员，黄金股东等等")]
@@ -59,9 +55,10 @@ namespace Alabo.App.Market.UserCard.UI
         public decimal Discount { get; set; } = 1;
 
         /// <summary>
-        /// 会员卡背景图
+        ///     会员卡背景图
         /// </summary>
-        [Field(ControlsType = ControlsType.AlbumUploder, ListShow = true, EditShow = true, SortOrder = 1, IsImagePreview = true)]
+        [Field(ControlsType = ControlsType.AlbumUploder, ListShow = true, EditShow = true, SortOrder = 1,
+            IsImagePreview = true)]
         [Display(Name = "会员卡背景图")]
         [HelpBlock("请上传会员卡背景图")]
         public string CardImage { get; set; }
@@ -75,7 +72,7 @@ namespace Alabo.App.Market.UserCard.UI
         public decimal Price { get; set; } = 0;
 
         /// <summary>
-        /// 会员卡介绍
+        ///     会员卡介绍
         /// </summary>
         [Display(Name = "会员卡介绍")]
         [HelpBlock("会员卡介绍")]
@@ -91,21 +88,14 @@ namespace Alabo.App.Market.UserCard.UI
         public bool IsDefault { get; set; } = false;
 
 
-
         public AutoForm GetView(object id, AutoBaseModel autoModel)
         {
             var list = Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
             var model = list.FirstOrDefault(u => u.Id == id.ToGuid());
-            if (model == null)
-            {
-                return ToAutoForm(new UserCardSetting());
-            }
+            if (model == null) return ToAutoForm(new UserCardSetting());
 
             var autoForm = AutoMapping.SetValue<UserCardSetting>(model);
-            if (!string.IsNullOrEmpty(model.Icon))
-            {
-                autoForm.CardImage = model.Icon;
-            }
+            if (!string.IsNullOrEmpty(model.Icon)) autoForm.CardImage = model.Icon;
 
             return ToAutoForm(autoForm);
         }
@@ -113,7 +103,7 @@ namespace Alabo.App.Market.UserCard.UI
 
         public ServiceResult Save(object model, AutoBaseModel autoModel)
         {
-            var view = (UserCardSetting)model;
+            var view = (UserCardSetting) model;
             var list = Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
             var userGrade = list.FirstOrDefault(u => u.Id == view.Id);
             if (userGrade == null)
@@ -124,19 +114,12 @@ namespace Alabo.App.Market.UserCard.UI
             }
             else
             {
-                if (view.Id.ToString() == "00000000-0000-0000-0000-000000000000")
-                {
-                    view.Id = Guid.NewGuid();
-                }
+                if (view.Id.ToString() == "00000000-0000-0000-0000-000000000000") view.Id = Guid.NewGuid();
 
                 var mapList = new List<UserGradeConfig>();
                 foreach (var item in list)
-                {
                     if (userGrade.Name != item.Name)
-                    {
                         mapList.Add(item);
-                    }
-                }
 
                 userGrade.Id = view.Id;
                 userGrade.Discount = view.Discount;
@@ -148,6 +131,7 @@ namespace Alabo.App.Market.UserCard.UI
                 mapList.Add(userGrade);
                 list = mapList;
             }
+
             Resolve<IAutoConfigService>().AddOrUpdate<UserGradeConfig>(list);
             return ServiceResult.Success;
         }
@@ -158,9 +142,7 @@ namespace Alabo.App.Market.UserCard.UI
 
             var userGradeConfig = Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
             if (model.Name.IsNotNullOrEmpty())
-            {
                 userGradeConfig = Resolve<IAutoConfigService>().GetList<UserGradeConfig>(l => l.Name == model.Name);
-            }
 
             var result = new PagedList<UserCardSetting>();
             var apiService = Resolve<IApiService>();
@@ -168,9 +150,7 @@ namespace Alabo.App.Market.UserCard.UI
             userGradeConfig.ForEach(u =>
             {
                 var view = AutoMapping.SetValue<UserCardSetting>(u);
-                if (!string.IsNullOrEmpty(u.Icon)) {
-                    view.CardImage = apiService.ApiImageUrl(u.Icon);
-                }
+                if (!string.IsNullOrEmpty(u.Icon)) view.CardImage = apiService.ApiImageUrl(u.Icon);
 
                 result.Add(view);
             });
@@ -183,10 +163,10 @@ namespace Alabo.App.Market.UserCard.UI
             //数据保存到UserGardeConfig中
             var list = new List<TableAction>
             {
-                ToLinkAction("增加会员等级","/User/UserCard/Edit",TableActionType.QuickAction),
-                ToLinkAction("编辑", "/User/UserCard/Edit",TableActionType.ColumnAction),
-              //  ToLinkAction("删除", "/api/AutoConfig/Delete",ActionLinkType.Delete,TableActionType.ColumnAction)
-                ToLinkAction("删除", "/api/Auto/DeleteUserCard",ActionLinkType.Delete,TableActionType.ColumnAction)
+                ToLinkAction("增加会员等级", "/User/UserCard/Edit", TableActionType.QuickAction),
+                ToLinkAction("编辑", "/User/UserCard/Edit", TableActionType.ColumnAction),
+                //  ToLinkAction("删除", "/api/AutoConfig/Delete",ActionLinkType.Delete,TableActionType.ColumnAction)
+                ToLinkAction("删除", "/api/Auto/DeleteUserCard", ActionLinkType.Delete, TableActionType.ColumnAction)
             };
             return list;
         }
@@ -197,7 +177,5 @@ namespace Alabo.App.Market.UserCard.UI
             public string Name { get; set; }
             public decimal Discount { get; set; }
         }
-
-
     }
 }

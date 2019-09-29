@@ -1,14 +1,14 @@
 ﻿using System;
-using Alabo.App.Shop.Activitys.Domain.Enum;
+using Alabo.Industry.Shop.Activitys.Domain.Enum;
 
-namespace Alabo.App.Shop.Activitys.Extensions {
-
+namespace Alabo.Industry.Shop.Activitys.Extensions
+{
     /// <summary>
     ///     Class ActivityModuleAttribute.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
-    public class ActivityModuleAttribute : Attribute {
-
+    public class ActivityModuleAttribute : Attribute
+    {
         /// <summary>
         ///     模块名称
         /// </summary>
@@ -97,7 +97,7 @@ namespace Alabo.App.Shop.Activitys.Extensions {
         public bool IsSupportCard { get; set; } = false;
 
         /// <summary>
-        /// 是否开启最大库存
+        ///     是否开启最大库存
         /// </summary>
         public bool IsSupportMaxStock { get; set; }
 

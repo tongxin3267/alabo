@@ -1,8 +1,8 @@
-using Xunit;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Open.Tasks.Configs.TeamRange;
+using Alabo.App.Share.OpenTasks.Configs.TeamRange;
+using Alabo.App.Share.TaskExecutes.Domain.Services;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Extensions;
+using Xunit;
 
 namespace Alabo.Test.Open.Tasks.Configs.TeamRange
 {

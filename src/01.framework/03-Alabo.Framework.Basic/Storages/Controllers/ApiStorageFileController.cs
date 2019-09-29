@@ -1,23 +1,25 @@
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.IO;
+using System.Linq;
+using Alabo.Extensions;
+using Alabo.Framework.Basic.Storages.Domain.Entities;
+using Alabo.Framework.Basic.Storages.Domain.Services;
+using Alabo.Framework.Basic.Storages.Dtos;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.App.Core.Common.Domain.Services;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Common.Domain.Dtos;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.Extensions;
-using System;
-using System.Linq;
 
-namespace Alabo.App.Core.Common.Controllers {
-
+namespace Alabo.Framework.Basic.Storages.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/StorageFile/[action]")]
-    public class ApiStorageFileController : ApiBaseController<StorageFile, ObjectId> {
-
-        public ApiStorageFileController() : base() {
+    public class ApiStorageFileController : ApiBaseController<StorageFile, ObjectId>
+    {
+        public ApiStorageFileController()
+        {
             BaseService = Resolve<IStorageFileService>();
         }
 
@@ -27,28 +29,27 @@ namespace Alabo.App.Core.Common.Controllers {
         /// <param name="parameter">参数</param>
         [HttpPost]
         [Display(Description = "获取上传状态")]
-        public ApiResult<StorageFile> Upload(UploadApiInput parameter) {
-            if (!this.IsFormValid()) {
+        public ApiResult<StorageFile> Upload(UploadApiInput parameter)
+        {
+            if (!this.IsFormValid())
                 return ApiResult.Failure<StorageFile>(this.FormInvalidReason(),
                     MessageCodes.ParameterValidationFailure);
-            }
 
-            if (parameter.SavePath.IsNullOrEmpty()) {
-                parameter.SavePath = "/uploads/api/";
-            }
+            if (parameter.SavePath.IsNullOrEmpty()) parameter.SavePath = "/uploads/api/";
 
-            try {
+            try
+            {
                 var formFile = Request.Form.Files;
 
-                foreach (var item in formFile) {
-                    if (!parameter.FileType.Split(',').ToList().Contains(System.IO.Path.GetExtension(item.FileName))) {
+                foreach (var item in formFile)
+                    if (!parameter.FileType.Split(',').ToList().Contains(Path.GetExtension(item.FileName)))
                         return ApiResult.Failure<StorageFile>("后缀不支持!");
-                    }
-                }
 
                 var info = Resolve<IStorageFileService>().Upload(formFile, parameter.SavePath); //获取上传状态
                 return ApiResult.Success(info);
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 return ApiResult.Failure<StorageFile>(e.Message);
             }
         }

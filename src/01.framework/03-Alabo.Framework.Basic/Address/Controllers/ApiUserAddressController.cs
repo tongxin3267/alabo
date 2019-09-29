@@ -1,19 +1,18 @@
+using Alabo.Framework.Basic.Address.Domain.Entities;
+using Alabo.Framework.Basic.Address.Domain.Services;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Core.User.Domain.Services;
 using MongoDB.Bson;
 
-namespace Alabo.App.Core.Common.Controllers {
-
+namespace Alabo.Framework.Basic.Address.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/UserAddress/[action]")]
-    public class ApiUserAddressController : ApiBaseController<UserAddress, ObjectId> {
-
-        public ApiUserAddressController() : base() {
+    public class ApiUserAddressController : ApiBaseController<UserAddress, ObjectId>
+    {
+        public ApiUserAddressController()
+        {
             BaseService = Resolve<IUserAddressService>();
         }
     }

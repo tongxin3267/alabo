@@ -1,25 +1,26 @@
-using MongoDB.Bson;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.TeamIntro.Domain.Services {
-
-    public class TeamIntroService : ServiceBase<Entities.TeamIntro, ObjectId>, ITeamIntroService {
-
-        public TeamIntroService(IUnitOfWork unitOfWork, IRepository<Entities.TeamIntro, ObjectId> repository) : base(unitOfWork,
-            repository) {
-
-            
+namespace Alabo.Cloud.Cms.TeamIntro.Domain.Services
+{
+    public class TeamIntroService : ServiceBase<Entities.TeamIntro, ObjectId>, ITeamIntroService
+    {
+        public TeamIntroService(IUnitOfWork unitOfWork, IRepository<Entities.TeamIntro, ObjectId> repository) : base(
+            unitOfWork,
+            repository)
+        {
         }
-        
+
         public Entities.TeamIntro GetCourseView(object id)
         {
             var find = GetSingle(id);
             if (find == null)
             {
-                return new Entities.TeamIntro(); ;
+                return new Entities.TeamIntro();
+                ;
             }
 
             return find;
@@ -30,18 +31,13 @@ namespace Alabo.App.Market.TeamIntro.Domain.Services {
             var find = GetSingle(view.Id);
             if (find == null)
             {
-                if (Add(view))
-                {
-                    return ServiceResult.Success;
-                }
+                if (Add(view)) return ServiceResult.Success;
             }
             else
             {
-                if (Update(view))
-                {
-                    return ServiceResult.Success;
-                }
+                if (Update(view)) return ServiceResult.Success;
             }
+
             return ServiceResult.Failed;
         }
     }

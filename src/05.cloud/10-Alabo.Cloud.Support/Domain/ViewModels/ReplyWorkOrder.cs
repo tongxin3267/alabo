@@ -1,15 +1,14 @@
-﻿using MongoDB.Bson;
-using Newtonsoft.Json;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Cms.Support.Domain.Enum;
-using Alabo.Domains.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+using Alabo.Cloud.Support.Domain.Enum;
 using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Validations;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Cms.Support.Domain.ViewModels {
-
-    public class ReplyWorkOrder {
-
+namespace Alabo.Cloud.Support.Domain.ViewModels
+{
+    public class ReplyWorkOrder
+    {
         [JsonConverter(typeof(ObjectIdConverter))]
         public ObjectId Id { get; set; }
 

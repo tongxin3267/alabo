@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Data.Common;
-using Alabo.App.Core.Finance.Domain.Dtos.Bill;
-using Alabo.App.Core.Finance.Domain.Entities;
+﻿using Alabo.App.Asset.Accounts.Domain.Entities;
+using Alabo.App.Asset.Bills.Domain.Entities;
+using Alabo.App.Asset.Bills.Dtos;
 using Alabo.Domains.Repositories;
+using System.Collections.Generic;
+using System.Data.Common;
 
-namespace Alabo.App.Core.Finance.Domain.Repositories {
-
-    public interface IBillRepository : IRepository<Bill, long> {
-
+namespace Alabo.App.Asset.Bills.Domain.Repositories
+{
+    public interface IBillRepository : IRepository<Bill, long>
+    {
         void AddSingleNative(Bill bill);
 
         IList<Bill> GetBillList(BillInput userInput, out long count);

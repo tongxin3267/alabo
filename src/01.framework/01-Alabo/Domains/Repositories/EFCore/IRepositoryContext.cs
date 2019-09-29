@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Alabo.Datas.UnitOfWorks;
+using System;
 using System.Data;
 using System.Linq;
-using Alabo.Datas.UnitOfWorks;
 
 namespace Alabo.Domains.Repositories.EFCore
 {

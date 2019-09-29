@@ -1,15 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.App.Asset.Withdraws.Domain.Enums;
-using Alabo.App.Core.Finance.Domain.Enums;
+﻿using Alabo.App.Asset.Withdraws.Domain.Enums;
 using Alabo.Web.Mvc.ViewModel;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.Finance.ViewModels.WithDraw {
-
+namespace Alabo.App.Asset.Withdraws.Dtos
+{
     /// <summary>
     ///     Class ViewWithDrawCheck.
     /// </summary>
-    public class ViewWithDrawCheck : BaseViewModel {
-
+    public class ViewWithDrawCheck : BaseViewModel
+    {
         /// <summary>
         ///     账单失败原因
         /// </summary>

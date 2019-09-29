@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Framework.Basic.Address.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Dtos;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Shop.Order.Domain.Services {
-
+namespace Alabo.Industry.Shop.Orders.Domain.Services
+{
     /// <summary>
     ///     订单购物、订单价格计算相关的订单服务
     ///     会员订单业务，管理员订单业务，请不要写到此处
     /// </summary>
     /// <seealso cref="Alabo.Domains.Services.IService" />
-    public interface IOrderBuyServcie : IService {
-
+    public interface IOrderBuyServcie : IService
+    {
         /// <summary>
-        /// 订单支付
+        ///     订单支付
         /// </summary>
         /// <param name="orderId"></param>
         /// <param name="userId"></param>

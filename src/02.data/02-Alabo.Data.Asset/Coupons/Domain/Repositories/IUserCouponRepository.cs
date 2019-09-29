@@ -1,10 +1,10 @@
-using System;using Alabo.Domains.Repositories.EFCore;using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
+using Alabo.App.Asset.Coupons.Domain.Entities;
 using Alabo.Domains.Repositories;
-using Alabo.App.Shop.Coupons.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Shop.Coupons.Domain.Repositories {
-	public interface IUserCouponRepository : IRepository<UserCoupon, ObjectId>  {
-	}
+namespace Alabo.App.Asset.Coupons.Domain.Repositories
+{
+    public interface IUserCouponRepository : IRepository<UserCoupon, ObjectId>
+    {
+    }
 }

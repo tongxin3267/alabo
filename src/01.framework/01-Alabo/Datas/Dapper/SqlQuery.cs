@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using Dapper;
-using Alabo.Datas.Sql;
+﻿using Alabo.Datas.Sql;
 using Alabo.Datas.Sql.Queries;
 using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 using Alabo.Domains.Repositories.Pager;
 using Alabo.Helpers;
 using Alabo.Logging;
 using Alabo.Logging.Extensions;
+using Dapper;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.Dapper
 {
@@ -110,9 +110,7 @@ namespace Alabo.Datas.Dapper
         /// <param name="connection">数据库连接</param>
         public override PagerList<TResult> ToPagerList<TResult>(IPager parameter, IDbConnection connection = null)
         {
-            if (parameter.TotalCount == 0) {
-                parameter.TotalCount = GetCount(connection);
-            }
+            if (parameter.TotalCount == 0) parameter.TotalCount = GetCount(connection);
 
             SetPager(parameter);
             return new PagerList<TResult>(parameter, ToList<TResult>(connection));
@@ -148,9 +146,7 @@ namespace Alabo.Datas.Dapper
         public override async Task<PagerList<TResult>> ToPagerListAsync<TResult>(IPager parameter,
             IDbConnection connection = null)
         {
-            if (parameter.TotalCount == 0) {
-                parameter.TotalCount = await GetCountAsync(connection);
-            }
+            if (parameter.TotalCount == 0) parameter.TotalCount = await GetCountAsync(connection);
 
             SetPager(parameter);
             return new PagerList<TResult>(parameter, await ToListAsync<TResult>(connection));
@@ -177,14 +173,11 @@ namespace Alabo.Datas.Dapper
         protected override void WriteTraceLog(string sql, IDictionary<string, object> parameters)
         {
             var log = GetLog();
-            if (log.IsTraceEnabled == false) {
-                return;
-            }
+            if (log.IsTraceEnabled == false) return;
 
             var debugSql = sql;
-            foreach (var parameter in parameters) {
+            foreach (var parameter in parameters)
                 debugSql = debugSql.Replace(parameter.Key, SqlHelper.GetParamLiterals(parameter.Value));
-            }
 
             log.Class(GetType().FullName)
                 .Caption("SqlQuery查询调试:")

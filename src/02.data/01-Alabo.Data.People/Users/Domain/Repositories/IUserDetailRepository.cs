@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Entities;
+﻿using Alabo.Data.People.Users.Dtos;
 using Alabo.Domains.Repositories;
 using Alabo.Users.Entities;
+using System.Collections.Generic;
 
-namespace Alabo.App.Core.User.Domain.Repositories {
-
-    public interface IUserDetailRepository : IRepository<UserDetail, long> {
-
+namespace Alabo.Data.People.Users.Domain.Repositories
+{
+    public interface IUserDetailRepository : IRepository<UserDetail, long>
+    {
         UserDetail Add(UserDetail userDetail);
 
         /// <summary>

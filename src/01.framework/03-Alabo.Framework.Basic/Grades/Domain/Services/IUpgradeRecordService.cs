@@ -1,16 +1,16 @@
-using MongoDB.Bson;
 using System;
-using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Framework.Basic.Grades.Domain.Entities;
+using Alabo.Framework.Basic.Grades.Domain.Enums;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Tasks.Domain.Services {
-
-    public interface IUpgradeRecordService : IService<UpgradeRecord, ObjectId> {
-
+namespace Alabo.Framework.Basic.Grades.Domain.Services
+{
+    public interface IUpgradeRecordService : IService<UpgradeRecord, ObjectId>
+    {
         /// <summary>
-        /// 修改用户等级，同时增加记录
+        ///     锟睫革拷锟矫伙拷锟饺硷拷锟斤拷同时锟斤拷锟接硷拷录
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="afterGradeId"></param>

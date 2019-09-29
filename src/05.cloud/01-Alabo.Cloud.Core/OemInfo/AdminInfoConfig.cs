@@ -1,38 +1,37 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.UI;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.Admin.Domain.CallBacks {
-
+namespace _01_Alabo.Cloud.Core.OemInfo
+{
     /// <summary>
-    /// 公司信息
+    ///     公司信息
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "登陆页公司信息", Icon = IconFlaticon.computer, SortOrder = 1,
         SideBarType = SideBarType.ControlSideBar)]
-    public class AdminInfoConfig : BaseViewModel, IAutoConfig {
-
+    public class AdminInfoConfig : BaseViewModel, IAutoConfig
+    {
         /// <summary>
-        /// 登陆页显示公司名称
+        ///     登陆页显示公司名称
         /// </summary>
         [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1)]
         [Display(Name = "公司名称")]
         public string Name { get; set; } = "广东中酷网络科技有限公司";
 
         /// <summary>
-        /// 登陆页显示公司网址
+        ///     登陆页显示公司网址
         /// </summary>
         [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1)]
         [Display(Name = "公司网址")]
         public string Url { get; set; } = "5ug.com";
 
         /// <summary>
-        /// 登陆页logo
+        ///     登陆页logo
         /// </summary>
         [Field(ControlsType = ControlsType.AlbumUploder, GroupTabId = 1)]
         [Display(Name = "登陆页Logo")]
@@ -46,7 +45,8 @@ namespace Alabo.App.Core.Admin.Domain.CallBacks {
         //[Field(ControlsType = ControlsType.AlbumUploder, GroupTabId = 1)]
         //public string AdminLogo { get; set; } = "/wwwroot/static/images/adminlogo.png";
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

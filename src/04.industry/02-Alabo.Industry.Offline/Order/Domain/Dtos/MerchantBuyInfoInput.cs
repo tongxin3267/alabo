@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Offline.Order.ViewModels;
-using Alabo.Domains.Entities;
+using Alabo.Industry.Offline.Order.ViewModels;
 using Alabo.Validations;
 
-namespace Alabo.App.Offline.Order.Domain.Dtos
+namespace Alabo.Industry.Offline.Order.Domain.Dtos
 {
     /// <summary>
-    /// MerchantBuyInfoInput
+    ///     MerchantBuyInfoInput
     /// </summary>
     public class MerchantBuyInfoInput
     {
         /// <summary>
-        /// User id
+        ///     User id
         /// </summary>
         [Display(Name = "用户Id")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
@@ -20,14 +19,14 @@ namespace Alabo.App.Offline.Order.Domain.Dtos
         public long UserId { get; set; }
 
         /// <summary>
-        /// Merchant store id
+        ///     Merchant store id
         /// </summary>
         [Display(Name = "门店id")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         public string MerchantStoreId { get; set; }
 
         /// <summary>
-        /// Product items
+        ///     Product items
         /// </summary>
         public List<MerchantCartViewModel> ProductItems { get; set; }
     }

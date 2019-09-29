@@ -1,24 +1,24 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.Domains.Base.Services;
+﻿using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Data.People.Users.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Mapping;
 using Alabo.Regexs;
+using Alabo.Tables.Domain.Services;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
+using Alabo.UI.Design.AutoForms;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
-namespace Alabo.App.Core.User.UI.AutoFrom {
-
+namespace Alabo.Data.People.Users.UI.AutoFrom
+{
     [ClassProperty(Name = "找回支付密码", Description = "根据手机号码，手机验证码，找回支付密码")]
-    public class FindPayPasswordAutoForm : UIBase, IAutoForm {
-
+    public class FindPayPasswordAutoForm : UIBase, IAutoForm
+    {
         /// <summary>
         ///     手机号码
         /// </summary>
@@ -60,29 +60,29 @@ namespace Alabo.App.Core.User.UI.AutoFrom {
 
         public long UserId { get; set; }
 
-        public AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
             var result = new AutoForm();
             result = ToAutoForm(new FindPayPasswordAutoForm());
             result.AlertText = "【找回支付密码】为了更好的保护你的帐号安全，避免您和您的好友受到损失，建议您设置密码";
 
-            result.ButtomHelpText = new List<string> {
+            result.ButtomHelpText = new List<string>
+            {
                 "建议确保登录密码与支付密码不同！",
-                "建议密码采用字母和数字混合，并且不短于6位。",
+                "建议密码采用字母和数字混合，并且不短于6位。"
             };
             return result;
         }
 
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
             var parameter = (FindPayPasswordAutoForm)model;
 
-            if (!Resolve<IOpenService>().CheckVerifiyCode(parameter.Mobile, parameter.MobileVerifiyCode.ConvertToLong())) {
-                return ServiceResult.FailedWithMessage("验证码错误");
-            }
+            if (!Resolve<IOpenService>().CheckVerifiyCode(parameter.Mobile, parameter.MobileVerifiyCode.ConvertToLong())
+            ) return ServiceResult.FailedWithMessage("验证码错误");
             var view = AutoMapping.SetValue<FindPasswordInput>(parameter);
             var result = Resolve<IUserDetailService>().FindPayPassword(view);
-            if (result.Succeeded) {
-                return ServiceResult.Success;
-            }
+            if (result.Succeeded) return ServiceResult.Success;
 
             var resList = result.ErrorMessages.ToList();
             return ServiceResult.FailedWithMessage(resList[0]);

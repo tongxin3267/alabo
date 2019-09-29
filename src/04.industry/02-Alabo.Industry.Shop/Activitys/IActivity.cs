@@ -1,24 +1,24 @@
-﻿using Microsoft.AspNetCore.Http;
-using Alabo.App.Shop.Activitys.Domain.Entities;
-using Alabo.App.Shop.Activitys.Dtos;
-using Alabo.Domains.Entities;
-using Alabo.UI.AutoForms;
+﻿using Alabo.Domains.Entities;
+using Alabo.Industry.Shop.Activitys.Domain.Entities;
+using Alabo.Industry.Shop.Activitys.Dtos;
+using Alabo.UI.Design.AutoForms;
+using Microsoft.AspNetCore.Http;
 
-namespace Alabo.App.Shop.Activitys
+namespace Alabo.Industry.Shop.Activitys
 {
     /// <summary>
-    /// IActivity
+    ///     IActivity
     /// </summary>
     public interface IActivity
     {
         /// <summary>
-        /// get default value.
+        ///     get default value.
         /// </summary>
         /// <returns></returns>
         object GetDefaultValue(ActivityEditInput activityEdit, Activity Activity);
 
         /// <summary>
-        /// get auto form
+        ///     get auto form
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
@@ -33,7 +33,7 @@ namespace Alabo.App.Shop.Activitys
         ServiceResult SetValue(HttpContext httpContext);
 
         /// <summary>
-        /// set value
+        ///     set value
         /// </summary>
         ServiceResult SetValueOfRule(object rules);
 

@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.UI.Enum
 {
@@ -10,13 +10,16 @@ namespace Alabo.UI.Enum
     [ClassProperty(Name = "显示样式")]
     public enum LabelStyle
     {
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "自己创建")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "自己创建")]
         Label = 1,
 
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "自己创建")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "自己创建")]
         Badges = 2,
 
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "自己创建")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "自己创建")]
         RoundlessBadges = 3
     }
 }

@@ -1,23 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Helpers;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using Alabo.Web.Validations;
 
-namespace Alabo.App.Shop.Order.ViewModels {
-
+namespace Alabo.Cloud.Shop.ShopSaleReport.Dtos
+{
     /// <summary>
     ///     直推会员等级报表
     /// </summary>
     [ClassProperty(Name = "会员等级报表", Icon = "fa fa-puzzle-piece", Description = "会员等级报表",
         SideBarType = SideBarType.FullScreen,
         GroupName = "基本信息,高级选项")]
-    public class ViewPriceStyleSale : BaseViewModel {
+    public class ViewPriceStyleSale : BaseViewModel
+    {
         [Field(ListShow = true)] [Key] public long Id { get; set; }
 
         /// <summary>
@@ -91,7 +92,8 @@ namespace Alabo.App.Shop.Order.ViewModels {
         /// <summary>
         ///     获取链接
         /// </summary>
-        public IEnumerable<ViewLink> ViewLinks() {
+        public IEnumerable<ViewLink> ViewLinks()
+        {
             var quickLinks = new List<ViewLink>
             {
                 //    new ViewLink("数据更新","/Admin/Basic/Run?Service=IOrderAdminService&Method=UpdateUserTeamGrade&query=[[Id]]",Icons.Settings,LinkType.ColumnLink),
@@ -100,10 +102,11 @@ namespace Alabo.App.Shop.Order.ViewModels {
                 new ViewLink("财务详情", "/Admin/Account/Edit?Id=[[Id]]", Icons.Coins, LinkType.ColumnLink)
             };
 
-            var priceStyleConfinJson = Alabo.Helpers.Ioc.Resolve<IAutoConfigService>()
+            var priceStyleConfinJson = Ioc.Resolve<IAutoConfigService>()
                 .GetList("Alabo.App.Shop.Product.Domain.CallBacks.PriceStyleConfig");
             var i = 1;
-            foreach (var item in priceStyleConfinJson) {
+            foreach (var item in priceStyleConfinJson)
+            {
                 var name = item.ToStr().SubstringBetween("\"Name\": \"", "\",");
                 var id = item.ToStr().SubstringBetween("\"Id\": \"", "\",");
                 long planfromId = 997100 + i++;

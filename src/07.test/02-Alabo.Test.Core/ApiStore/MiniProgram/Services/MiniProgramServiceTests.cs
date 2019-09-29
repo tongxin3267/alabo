@@ -1,8 +1,8 @@
-using Xunit;
-using Alabo.App.Core.ApiStore.MiniProgram.Dtos;
-using Alabo.App.Core.ApiStore.MiniProgram.Services;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
+using Alabo.Tool.Payment.MiniProgram.Dtos;
+using Alabo.Tool.Payment.MiniProgram.Services;
+using Xunit;
 
 namespace Alabo.Test.Core.ApiStore.MiniProgram.Services
 {

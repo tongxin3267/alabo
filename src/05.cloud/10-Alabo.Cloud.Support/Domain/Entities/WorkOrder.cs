@@ -1,24 +1,25 @@
-using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Cms.Support.Domain.Enum;
+using Alabo.Cloud.Support.Domain.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Cms.Support.Domain.Entities {
-
+namespace Alabo.Cloud.Support.Domain.Entities
+{
     /// <summary>
     ///     工单系统
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Cms_WorkOrder")]
-    [ClassProperty(Name = "工单系统", Icon = "fa fa-puzzle-piece", Description = "工单系统", ListApi = "Api/WorkOrder/WordOrderList",
+    [ClassProperty(Name = "工单系统", Icon = "fa fa-puzzle-piece", Description = "工单系统",
+        ListApi = "Api/WorkOrder/WordOrderList",
         PageType = ViewPageType.List, PostApi = "Api/WorkOrder/WordOrderList")]
-    public class WorkOrder : AggregateMongodbRoot<WorkOrder> {
-
+    public class WorkOrder : AggregateMongodbRoot<WorkOrder>
+    {
         /// <summary>
         ///     标题
         /// </summary>

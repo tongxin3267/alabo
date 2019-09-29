@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using Alabo.Datas.Queries.Enums;
+﻿using Alabo.Datas.Queries.Enums;
 using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 using Alabo.Datas.Sql.Queries.Builders.Core;
 using Alabo.Datas.Sql.Queries.Builders.Extensions;
 using Alabo.Linq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
 
 namespace Alabo.Datas.Sql.Queries.Builders.Clauses
 {
@@ -184,9 +184,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         public void On<TLeft, TRight>(Expression<Func<TLeft, TRight, bool>> expression)
             where TLeft : class where TRight : class
         {
-            if (expression == null) {
-                throw new ArgumentNullException(nameof(expression));
-            }
+            if (expression == null) throw new ArgumentNullException(nameof(expression));
 
             var expressions = Lambda.GetGroupPredicates(expression);
             expressions.ForEach(group => On(group, typeof(TLeft), typeof(TRight)));

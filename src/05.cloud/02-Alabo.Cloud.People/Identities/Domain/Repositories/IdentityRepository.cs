@@ -1,13 +1,14 @@
-using MongoDB.Bson;
-using Alabo.App.Core.User.Domain.Entities;
+using Alabo.Cloud.People.Identities.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.User.Domain.Repositories {
-
-    public class IdentityRepository : RepositoryMongo<Identity, ObjectId>, IIdentityRepository {
-
-        public IdentityRepository(IUnitOfWork unitOfWork) : base(unitOfWork) {
+namespace Alabo.Cloud.People.Identities.Domain.Repositories
+{
+    public class IdentityRepository : RepositoryMongo<Identity, ObjectId>, IIdentityRepository
+    {
+        public IdentityRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
         }
     }
 }

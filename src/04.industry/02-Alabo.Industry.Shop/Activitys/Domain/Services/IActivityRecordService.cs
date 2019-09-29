@@ -1,8 +1,9 @@
-﻿using Alabo.App.Shop.Activitys.Domain.Entities;
-using Alabo.Domains.Services;
+﻿using Alabo.Domains.Services;
+using Alabo.Industry.Shop.Activitys.Domain.Entities;
 
-namespace Alabo.App.Shop.Activitys.Domain.Services {
-
-    public interface IActivityRecordService : IService<ActivityRecord, long> {
+namespace Alabo.Industry.Shop.Activitys.Domain.Services
+{
+    public interface IActivityRecordService : IService<ActivityRecord, long>
+    {
     }
 }

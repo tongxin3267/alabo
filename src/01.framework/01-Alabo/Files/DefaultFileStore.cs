@@ -1,8 +1,8 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-using Alabo.Exceptions;
+﻿using Alabo.Exceptions;
 using Alabo.Files.Paths;
 using Alabo.Helpers;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Alabo.Files
 {
@@ -34,13 +34,9 @@ namespace Alabo.Files
             var path = _generator.Generate(fileControl.FileName);
             var physicalPath = Common.GetWebRootPath(path);
             var directory = Path.GetDirectoryName(physicalPath);
-            if (string.IsNullOrEmpty(directory)) {
-                throw new ValidException("上传失败");
-            }
+            if (string.IsNullOrEmpty(directory)) throw new ValidException("上传失败");
 
-            if (Directory.Exists(directory) == false) {
-                Directory.CreateDirectory(directory);
-            }
+            if (Directory.Exists(directory) == false) Directory.CreateDirectory(directory);
 
             using (var stream = new FileStream(physicalPath, FileMode.Create))
             {

@@ -20,28 +20,18 @@ namespace Alabo.Helpers
         /// <returns>截取后的字符串</returns>
         public static string SubstringBetween(this string source, string beforeValue, string afterValue)
         {
-            if (string.IsNullOrEmpty(beforeValue)) {
-                return source;
-            }
+            if (string.IsNullOrEmpty(beforeValue)) return source;
 
-            if (string.IsNullOrEmpty(afterValue)) {
-                return source;
-            }
+            if (string.IsNullOrEmpty(afterValue)) return source;
 
             var compareInfo = CultureInfo.InvariantCulture.CompareInfo;
             var index = compareInfo.IndexOf(source, beforeValue, CompareOptions.IgnoreCase);
-            if (index < 0) {
-                return source;
-            }
+            if (index < 0) return source;
 
             var lastIndex = compareInfo.IndexOf(source, afterValue, index, CompareOptions.IgnoreCase);
-            if (lastIndex < 0) {
-                return source;
-            }
+            if (lastIndex < 0) return source;
 
-            if (lastIndex < index + beforeValue.Length) {
-                return source;
-            }
+            if (lastIndex < index + beforeValue.Length) return source;
 
             source = source.Substring(index + beforeValue.Length, lastIndex - index - beforeValue.Length);
             return source;
@@ -59,15 +49,11 @@ namespace Alabo.Helpers
         /// <returns>截取后的字符串</returns>
         public static string SubstringAfter(this string source, string value)
         {
-            if (string.IsNullOrEmpty(value)) {
-                return source;
-            }
+            if (string.IsNullOrEmpty(value)) return source;
 
             var compareInfo = CultureInfo.InvariantCulture.CompareInfo;
             var index = compareInfo.IndexOf(source, value, CompareOptions.Ordinal);
-            if (index < 0) {
-                return string.Empty;
-            }
+            if (index < 0) return string.Empty;
 
             return source.Substring(index + value.Length);
         }
@@ -84,15 +70,11 @@ namespace Alabo.Helpers
         /// <returns>截取后的字符串</returns>
         public static string SubstringBefore(this string source, string value)
         {
-            if (string.IsNullOrEmpty(value)) {
-                return value;
-            }
+            if (string.IsNullOrEmpty(value)) return value;
 
             var compareInfo = CultureInfo.InvariantCulture.CompareInfo;
             var index = compareInfo.IndexOf(source, value, CompareOptions.Ordinal);
-            if (index < 0) {
-                return string.Empty;
-            }
+            if (index < 0) return string.Empty;
 
             return source.Substring(0, index);
         }
@@ -130,7 +112,7 @@ namespace Alabo.Helpers
         /// <returns>A string.</returns>
         public static string RemoveHtml(this string input)
         {
-            var stripTags = new System.Text.RegularExpressions.Regex("</?[a-z][^<>]*>", RegexOptions.IgnoreCase);
+            var stripTags = new Regex("</?[a-z][^<>]*>", RegexOptions.IgnoreCase);
             return stripTags.Replace(input, string.Empty);
         }
 
@@ -143,14 +125,12 @@ namespace Alabo.Helpers
         /// </summary>
         public static string InputTexts(string text)
         {
-            if (string.IsNullOrEmpty(text)) {
-                return string.Empty;
-            }
+            if (string.IsNullOrEmpty(text)) return string.Empty;
 
-            text = System.Text.RegularExpressions.Regex.Replace(text, @"[\s]{2,}", " ");
-            text = System.Text.RegularExpressions.Regex.Replace(text, @"(<[b|B][r|R]/*>)+|(<[p|P](.|\n)*?>)", "\n");
-            text = System.Text.RegularExpressions.Regex.Replace(text, @"(\s*&[n|N][b|B][s|S][p|P];\s*)+", " ");
-            text = System.Text.RegularExpressions.Regex.Replace(text, @"<(.|\n)*?>", string.Empty);
+            text = Regex.Replace(text, @"[\s]{2,}", " ");
+            text = Regex.Replace(text, @"(<[b|B][r|R]/*>)+|(<[p|P](.|\n)*?>)", "\n");
+            text = Regex.Replace(text, @"(\s*&[n|N][b|B][s|S][p|P];\s*)+", " ");
+            text = Regex.Replace(text, @"<(.|\n)*?>", string.Empty);
             text = text.Replace("'", "''");
             return text;
         }
@@ -164,9 +144,7 @@ namespace Alabo.Helpers
         /// </summary>
         public static double String2Double(string str)
         {
-            if (!double.TryParse((str ?? string.Empty).Trim(), out var result)) {
-                return -1;
-            }
+            if (!double.TryParse((str ?? string.Empty).Trim(), out var result)) return -1;
 
             return result;
         }
@@ -180,9 +158,7 @@ namespace Alabo.Helpers
         /// </summary>
         public static decimal StringToDecimal(string str, decimal defaultValue = -1M)
         {
-            if (!decimal.TryParse((str ?? string.Empty).Trim(), out var result)) {
-                return defaultValue;
-            }
+            if (!decimal.TryParse((str ?? string.Empty).Trim(), out var result)) return defaultValue;
 
             return result;
         }
@@ -196,9 +172,7 @@ namespace Alabo.Helpers
         /// </summary>
         public static DateTime StringToDateTime(string str)
         {
-            if (!DateTime.TryParse((str ?? string.Empty).Trim(), out var result)) {
-                return new DateTime(1970, 1, 1);
-            }
+            if (!DateTime.TryParse((str ?? string.Empty).Trim(), out var result)) return new DateTime(1970, 1, 1);
 
             return result;
         }
@@ -212,9 +186,7 @@ namespace Alabo.Helpers
         /// </summary>
         public static int StringToInt(string str, int defaultValue = -1)
         {
-            if (!int.TryParse((str ?? string.Empty).Trim(), out var result)) {
-                return defaultValue;
-            }
+            if (!int.TryParse((str ?? string.Empty).Trim(), out var result)) return defaultValue;
 
             return result;
         }
@@ -240,9 +212,7 @@ namespace Alabo.Helpers
         /// </summary>
         public static int? TryToInt(object data)
         {
-            if (!int.TryParse(data.ToString(), out var v)) {
-                return null;
-            }
+            if (!int.TryParse(data.ToString(), out var v)) return null;
 
             return v;
         }
@@ -259,14 +229,12 @@ namespace Alabo.Helpers
         public static List<int> StringToIntList(string data)
         {
             //如果字符串为null则返回空列表
-            if (data == null) {
-                return new List<int>();
-            }
+            if (data == null) return new List<int>();
             //转换
             var result = (from s in data.Split(',')
-                let v = TryToInt(s)
-                where v.HasValue // v != null
-                select v.Value).ToList();
+                          let v = TryToInt(s)
+                          where v.HasValue // v != null
+                          select v.Value).ToList();
             return result;
         }
 
@@ -282,9 +250,7 @@ namespace Alabo.Helpers
         public static string IntListToString(IEnumerable<int> intList)
         {
             //如果列表为null则返回空字符串
-            if (intList == null) {
-                return string.Empty;
-            }
+            if (intList == null) return string.Empty;
             //转换
             var result = string.Join(",", from v in intList select v.ToString());
             return result;
@@ -299,9 +265,7 @@ namespace Alabo.Helpers
         /// </summary>
         public static uint? TryToUInt(object data)
         {
-            if (!uint.TryParse(data.ToString(), out var v)) {
-                return null;
-            }
+            if (!uint.TryParse(data.ToString(), out var v)) return null;
 
             return v;
         }
@@ -318,14 +282,12 @@ namespace Alabo.Helpers
         public static List<uint> StringToUIntList(string data)
         {
             //如果字符串为null则返回空列表
-            if (data == null) {
-                return new List<uint>();
-            }
+            if (data == null) return new List<uint>();
             //转换
             var result = (from s in data.Split(',')
-                let v = TryToUInt(s)
-                where v.HasValue // v != null
-                select v.Value).ToList();
+                          let v = TryToUInt(s)
+                          where v.HasValue // v != null
+                          select v.Value).ToList();
             return result;
         }
 
@@ -341,9 +303,7 @@ namespace Alabo.Helpers
         public static string UIntListToString(IEnumerable<uint> uintList)
         {
             //如果列表为null则返回空字符串
-            if (uintList == null) {
-                return string.Empty;
-            }
+            if (uintList == null) return string.Empty;
             //转换
             var result = string.Join(",", from v in uintList select v.ToString());
             return result;
@@ -363,9 +323,7 @@ namespace Alabo.Helpers
         public static string GetDecimalString(object obj, int retain)
         {
             var dec = obj as decimal?;
-            if (dec == null) {
-                dec = StringToDecimal(obj.ToString());
-            }
+            if (dec == null) dec = StringToDecimal(obj.ToString());
 
             dec = Math.Round(dec.Value, retain, MidpointRounding.AwayFromZero);
             var str = string.Format("{0:0." + new string('0', retain) + "}", dec);
@@ -379,10 +337,10 @@ namespace Alabo.Helpers
         /// <summary>
         ///     通配符转换到正则
         /// </summary>
-        public static System.Text.RegularExpressions.Regex WillcardToRegex(string willcard)
+        public static Regex WillcardToRegex(string willcard)
         {
-            return new System.Text.RegularExpressions.Regex(
-                "^" + System.Text.RegularExpressions.Regex.Escape(willcard).Replace(@"\*", ".*").Replace(@"\?", ".") +
+            return new Regex(
+                "^" + Regex.Escape(willcard).Replace(@"\*", ".*").Replace(@"\?", ".") +
                 "$",
                 RegexOptions.IgnoreCase | RegexOptions.Singleline
             );
@@ -394,9 +352,7 @@ namespace Alabo.Helpers
 
         public static string Left(string str, int len)
         {
-            if (str.Length > len) {
-                return str.Substring(0, len);
-            }
+            if (str.Length > len) return str.Substring(0, len);
 
             return str + "...";
         }
@@ -411,20 +367,16 @@ namespace Alabo.Helpers
             sTemp = source;
             iLength = delimiter.Length;
             bEnd = sTemp.EndsWith(delimiter);
-            for (;;)
+            for (; ; )
             {
                 iPos = sTemp.IndexOf(delimiter);
-                if (iPos < 0) {
-                    break;
-                }
+                if (iPos < 0) break;
 
                 list.Add(sTemp.Substring(0, iPos));
                 sTemp = sTemp.Substring(iPos + iLength);
             }
 
-            if (sTemp.Length >= 0 || bEnd) {
-                list.Add(sTemp);
-            }
+            if (sTemp.Length >= 0 || bEnd) list.Add(sTemp);
 
             var array = new string[list.Count];
             var k = 0;
@@ -442,9 +394,7 @@ namespace Alabo.Helpers
             IList<string> list = new List<string>();
             var array = SplitString(source, delimiter);
 
-            foreach (var item in array) {
-                list.Add(item);
-            }
+            foreach (var item in array) list.Add(item);
 
             return list;
         }
@@ -466,11 +416,10 @@ namespace Alabo.Helpers
             var k = 0;
             foreach (var item in list)
             {
-                if (k < list.Count - 1) {
+                if (k < list.Count - 1)
                     str += item + split;
-                } else {
+                else
                     str += item;
-                }
 
                 k++;
             }
@@ -485,20 +434,19 @@ namespace Alabo.Helpers
         public static string ClearRepeatChar(string str)
         {
             var temp = str;
-            for (var i = 0; i < str.Length; i++) {
+            for (var i = 0; i < str.Length; i++)
                 try
                 {
                     var item = str.Substring(i, 1);
                     if (item != ".")
                     {
                         var partter = item + "{3,}";
-                        str = System.Text.RegularExpressions.Regex.Replace(str, partter, item);
+                        str = Regex.Replace(str, partter, item);
                     }
                 }
                 catch
                 {
                 }
-            }
 
             return str;
         }
@@ -509,9 +457,7 @@ namespace Alabo.Helpers
         /// <param name="str"></param>
         public static string ObjectToString(object str)
         {
-            if (str == null) {
-                return string.Empty;
-            }
+            if (str == null) return string.Empty;
 
             return str.ToString();
         }

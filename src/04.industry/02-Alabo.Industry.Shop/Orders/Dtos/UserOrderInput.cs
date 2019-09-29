@@ -1,20 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using MongoDB.Bson;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.Domains.Entities;
+using Alabo.Framework.Basic.Address.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.Validations;
 
-namespace Alabo.App.Shop.Order.Domain.Dtos
+namespace Alabo.Industry.Shop.Orders.Dtos
 {
-
     /// <summary>
     ///     用户输入参数
     /// </summary>
     public class UserOrderInput
     {
+        /// <summary>
+        ///     Gets or sets the store express.
+        ///     店铺和运费方式列表
+        /// </summary>
+        /// <value>
+        ///     The store express.
+        /// </value>
+        public List<StoreExpress> StoreExpress = new List<StoreExpress>();
 
         /// <summary>
         ///     购物订单签名
@@ -39,15 +44,6 @@ namespace Alabo.App.Shop.Order.Domain.Dtos
         [Display(Name = "登陆用户Id")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         public long LoginUserId { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the store express.
-        ///     店铺和运费方式列表
-        /// </summary>
-        /// <value>
-        ///     The store express.
-        /// </value>
-        public List<StoreExpress> StoreExpress = new List<StoreExpress>();
 
         /// <summary>
         ///     Gets or sets the store express json.
@@ -77,7 +73,7 @@ namespace Alabo.App.Shop.Order.Domain.Dtos
         public string ReduceMoneysJson { get; set; }
 
         /// <summary>
-        /// 优惠券信息, Json数组
+        ///     优惠券信息, Json数组
         /// </summary>
         public string CouponJson { get; set; }
     }
@@ -87,7 +83,6 @@ namespace Alabo.App.Shop.Order.Domain.Dtos
     /// </summary>
     public class OrderPriceCache
     {
-
         /// <summary>
         ///     下单的用户地址列表
         /// </summary>
@@ -111,22 +106,22 @@ namespace Alabo.App.Shop.Order.Domain.Dtos
     }
 
     /// <summary>
-    /// StoreExpress
+    ///     StoreExpress
     /// </summary>
     public class StoreExpress
     {
         /// <summary>
-        /// key
+        ///     key
         /// </summary>
         public string Key { get; set; }
 
         /// <summary>
-        /// value
+        ///     value
         /// </summary>
         public string Value { get; set; }
 
         /// <summary>
-        /// 快递方式
+        ///     快递方式
         /// </summary>
         public ExpressType ExpressType { get; set; } = ExpressType.Express;
     }

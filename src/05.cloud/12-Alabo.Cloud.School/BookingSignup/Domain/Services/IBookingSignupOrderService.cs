@@ -1,16 +1,14 @@
-using System;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
-using Alabo.App.Market.BookingSignup.Domain.Entities;
+using Alabo.Cloud.School.BookingSignup.Domain.Entities;
 using Alabo.Domains.Entities;
+using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.BookingSignup.Domain.Services {
-
-    public interface IBookingSignupOrderService : IService<BookingSignupOrder, ObjectId> {
-
+namespace Alabo.Cloud.School.BookingSignup.Domain.Services
+{
+    public interface IBookingSignupOrderService : IService<BookingSignupOrder, ObjectId>
+    {
         /// <summary>
-        /// »áÔ±Ç©µ½
+        ///     ï¿½ï¿½Ô±Ç©ï¿½ï¿½
         /// </summary>
         /// <param name="view"></param>
         /// <returns></returns>

@@ -1,19 +1,16 @@
-using System;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
-using Alabo.App.Market.PresaleProducts.Domain.Entities;
-using Alabo.Domains.Entities;
-using Alabo.App.Market.PresaleProducts.Domain.Dtos;
 using System.Collections.Generic;
-using Alabo.App.Shop.Product.Domain.Enums;
-using Alabo.App.Shop.Product.DiyModels;
-using Alabo.App.Shop.Product.Domain.Dtos;
+using Alabo.Cloud.Shop.PresaleProducts.Domain.Dtos;
+using Alabo.Cloud.Shop.PresaleProducts.Domain.Entities;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Services;
+using Alabo.Industry.Shop.Products.Domain.Enums;
+using Alabo.Industry.Shop.Products.Dtos;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.PresaleProducts.Domain.Services {
-
-    public interface IPresaleProductService : IService<PresaleProduct, ObjectId> {
-
+namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Services
+{
+    public interface IPresaleProductService : IService<PresaleProduct, ObjectId>
+    {
         ProductItemApiOutput GetProducts(ProductApiInput productApiInput);
 
         PresaleProductItemApiOutput GetPresaleProducts(PresaleProductApiInput input);

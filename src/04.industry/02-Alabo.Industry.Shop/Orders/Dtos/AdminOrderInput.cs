@@ -1,10 +1,13 @@
-﻿using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.Domains.Query.Dto;
+﻿using Alabo.Domains.Query.Dto;
+using Alabo.Domains.Repositories.Mongo.Extension;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Order.Domain.Dtos {
-
-    public class AdminOrderInput : PagedInputDto {
-
+namespace Alabo.Industry.Shop.Orders.Dtos
+{
+    public class AdminOrderInput : PagedInputDto
+    {
         /// <summary>
         ///     订单状态
         /// </summary>
@@ -27,7 +30,7 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
         /// <summary>
         ///     店铺Id
         /// </summary>
-        public long StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     Gets or sets a value indicating whether this instance is planform.
@@ -36,6 +39,6 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
         /// <value>
         ///     <c>true</c> if this instance is planform; otherwise, <c>false</c>.
         /// </value>
-        public bool IsPlanform { get; set; } = false;
+        public bool IsPlatform { get; set; } = false;
     }
 }

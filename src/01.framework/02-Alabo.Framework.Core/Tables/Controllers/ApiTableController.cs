@@ -1,17 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Tables.Domain.Entities;
+using Alabo.Tables.Domain.Services;
+using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
-using Alabo.Domains.Base.Entities;
-using Alabo.Domains.Base.Services;
 
-namespace Alabo.App.Core.Admin.Controllers {
-
+namespace Alabo.Framework.Core.Tables.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/Table/[action]")]
-    public class ApiTableController : ApiBaseController<Table, ObjectId> {
-
-        public ApiTableController() : base() {
+    public class ApiTableController : ApiBaseController<Table, ObjectId>
+    {
+        public ApiTableController()
+        {
             BaseService = Resolve<ITableService>();
         }
     }

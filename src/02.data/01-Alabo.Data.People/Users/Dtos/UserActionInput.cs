@@ -1,13 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Query.Dto;
+﻿using Alabo.Domains.Query.Dto;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.User.Domain.Dtos {
-
+namespace Alabo.Data.People.Users.Dtos
+{
     /// <summary>
     ///     用户操作类型
     /// </summary>
-    public class UserActionInput : ApiInputDto {
-
+    public class UserActionInput : ApiInputDto
+    {
         /// <summary>
         ///     操作类型
         /// </summary>

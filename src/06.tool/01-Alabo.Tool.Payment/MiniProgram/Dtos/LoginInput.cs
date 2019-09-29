@@ -3,13 +3,13 @@ using Alabo.Domains.Query.Dto;
 
 /// <summary>
 /// </summary>
-namespace Alabo.App.Core.ApiStore.MiniProgram.Dtos {
-
+namespace Alabo.Tool.Payment.MiniProgram.Dtos
+{
     /// <summary>
     ///     小程序登录Input
     /// </summary>
-    public class LoginInput : EntityDto {
-
+    public class LoginInput : EntityDto
+    {
         /// <summary>
         ///     登录时获取的code
         /// </summary>

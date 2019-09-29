@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Dynamic.Core;
-using System.Linq.Expressions;
-using Alabo.Datas.Queries.Criterias;
+﻿using Alabo.Datas.Queries.Criterias;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Datas.Queries.Internal;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.Pager;
+using System;
+using System.Linq;
+using System.Linq.Dynamic.Core;
+using System.Linq.Expressions;
 
 namespace Alabo.Extensions
 {
@@ -24,18 +24,12 @@ namespace Alabo.Extensions
         public static IQueryable<TEntity> Where<TEntity>(this IQueryable<TEntity> source, ICriteria<TEntity> criteria)
             where TEntity : class
         {
-            if (source == null) {
-                throw new ArgumentNullException(nameof(source));
-            }
+            if (source == null) throw new ArgumentNullException(nameof(source));
 
-            if (criteria == null) {
-                throw new ArgumentNullException(nameof(criteria));
-            }
+            if (criteria == null) throw new ArgumentNullException(nameof(criteria));
 
             var predicate = criteria.GetPredicate();
-            if (predicate == null) {
-                return source;
-            }
+            if (predicate == null) return source;
 
             return source.Where(predicate);
         }
@@ -50,13 +44,9 @@ namespace Alabo.Extensions
         public static IQueryable<TEntity> WhereIf<TEntity>(this IQueryable<TEntity> source,
             Expression<Func<TEntity, bool>> predicate, bool condition) where TEntity : class
         {
-            if (source == null) {
-                throw new ArgumentNullException(nameof(source));
-            }
+            if (source == null) throw new ArgumentNullException(nameof(source));
 
-            if (condition == false) {
-                return source;
-            }
+            if (condition == false) return source;
 
             return source.Where(predicate);
         }
@@ -73,14 +63,10 @@ namespace Alabo.Extensions
         public static IQueryable<TEntity> WhereIfNotEmpty<TEntity>(this IQueryable<TEntity> source,
             Expression<Func<TEntity, bool>> predicate) where TEntity : class
         {
-            if (source == null) {
-                throw new ArgumentNullException(nameof(source));
-            }
+            if (source == null) throw new ArgumentNullException(nameof(source));
 
             predicate = Helper.GetWhereIfNotEmptyExpression(predicate);
-            if (predicate == null) {
-                return source;
-            }
+            if (predicate == null) return source;
 
             return source.Where(predicate);
         }
@@ -99,9 +85,7 @@ namespace Alabo.Extensions
             Expression<Func<TEntity, TProperty>> propertyExpression, int? min, int? max,
             Boundary boundary = Boundary.Both) where TEntity : class
         {
-            if (source == null) {
-                throw new ArgumentNullException(nameof(source));
-            }
+            if (source == null) throw new ArgumentNullException(nameof(source));
 
             return source.Where(new IntSegmentCriteria<TEntity, TProperty>(propertyExpression, min, max, boundary));
         }
@@ -120,9 +104,7 @@ namespace Alabo.Extensions
             Expression<Func<TEntity, TProperty>> propertyExpression, double? min, double? max,
             Boundary boundary = Boundary.Both) where TEntity : class
         {
-            if (source == null) {
-                throw new ArgumentNullException(nameof(source));
-            }
+            if (source == null) throw new ArgumentNullException(nameof(source));
 
             return source.Where(new DoubleSegmentCriteria<TEntity, TProperty>(propertyExpression, min, max, boundary));
         }
@@ -141,9 +123,7 @@ namespace Alabo.Extensions
             Expression<Func<TEntity, TProperty>> propertyExpression, decimal? min, decimal? max,
             Boundary boundary = Boundary.Both) where TEntity : class
         {
-            if (source == null) {
-                throw new ArgumentNullException(nameof(source));
-            }
+            if (source == null) throw new ArgumentNullException(nameof(source));
 
             return source.Where(new DecimalSegmentCriteria<TEntity, TProperty>(propertyExpression, min, max, boundary));
         }
@@ -163,14 +143,11 @@ namespace Alabo.Extensions
             Expression<Func<TEntity, TProperty>> propertyExpression, DateTime? min, DateTime? max,
             bool includeTime = true, Boundary? boundary = null) where TEntity : class
         {
-            if (source == null) {
-                throw new ArgumentNullException(nameof(source));
-            }
+            if (source == null) throw new ArgumentNullException(nameof(source));
 
-            if (includeTime) {
+            if (includeTime)
                 return source.Where(new DateTimeSegmentCriteria<TEntity, TProperty>(propertyExpression, min, max,
                     boundary ?? Boundary.Both));
-            }
 
             return source.Where(
                 new DateSegmentCriteria<TEntity, TProperty>(propertyExpression, min, max, boundary ?? Boundary.Left));
@@ -184,23 +161,15 @@ namespace Alabo.Extensions
         /// <param name="pager">分页对象</param>
         public static IQueryable<TEntity> Page<TEntity>(this IQueryable<TEntity> source, IPager pager)
         {
-            if (source == null) {
-                throw new ArgumentNullException(nameof(source));
-            }
+            if (source == null) throw new ArgumentNullException(nameof(source));
 
-            if (pager == null) {
-                throw new ArgumentNullException(nameof(pager));
-            }
+            if (pager == null) throw new ArgumentNullException(nameof(pager));
 
             InitOrder(source, pager);
-            if (pager.TotalCount <= 0) {
-                pager.TotalCount = source.Count();
-            }
+            if (pager.TotalCount <= 0) pager.TotalCount = source.Count();
 
             var orderedQueryable = GetOrderedQueryable(source, pager);
-            if (orderedQueryable == null) {
-                throw new ArgumentException("必须设置排序字段");
-            }
+            if (orderedQueryable == null) throw new ArgumentException("必须设置排序字段");
 
             return orderedQueryable.Skip(pager.GetSkipCount()).Take(pager.PageSize);
         }
@@ -210,13 +179,9 @@ namespace Alabo.Extensions
         /// </summary>
         private static void InitOrder<TEntity>(this IQueryable<TEntity> source, IPager pager)
         {
-            if (string.IsNullOrWhiteSpace(pager.Order) == false) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(pager.Order) == false) return;
 
-            if (SafeString(source.Expression).Contains(".OrderBy(")) {
-                return;
-            }
+            if (SafeString(source.Expression).Contains(".OrderBy(")) return;
 
             pager.Order = "Id";
         }
@@ -227,9 +192,7 @@ namespace Alabo.Extensions
         private static IOrderedQueryable<TEntity> GetOrderedQueryable<TEntity>(this IQueryable<TEntity> source,
             IPager pager)
         {
-            if (string.IsNullOrWhiteSpace(pager.Order)) {
-                return source as IOrderedQueryable<TEntity>;
-            }
+            if (string.IsNullOrWhiteSpace(pager.Order)) return source as IOrderedQueryable<TEntity>;
 
             return source.OrderBy(pager.Order);
         }
@@ -242,13 +205,9 @@ namespace Alabo.Extensions
         /// <param name="pager">分页对象</param>
         public static PagerList<TEntity> ToPagerList<TEntity>(this IQueryable<TEntity> source, IPager pager)
         {
-            if (source == null) {
-                throw new ArgumentNullException(nameof(source));
-            }
+            if (source == null) throw new ArgumentNullException(nameof(source));
 
-            if (pager == null) {
-                throw new ArgumentNullException(nameof(pager));
-            }
+            if (pager == null) throw new ArgumentNullException(nameof(pager));
 
             return new PagerList<TEntity>(pager, source.Page(pager).ToList());
         }

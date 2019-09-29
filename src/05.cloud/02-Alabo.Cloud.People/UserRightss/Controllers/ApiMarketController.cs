@@ -1,32 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Alabo.Data.People.Employes.Dtos;
+using Alabo.Data.People.Users.Dtos;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
-using Alabo.App.Core.Employes.Domain.Dtos;
-using Alabo.App.Core.Employes.Domain.Services;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.Core.WebApis.Controller;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
-using Alabo.UI;
 
-namespace Alabo.App.Market.UserRightss.Controllers {
-
+namespace Alabo.Cloud.People.UserRightss.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/Market/[action]")]
-    public class ApiMarketController : ApiBaseController {
-
-        public ApiMarketController() : base() {
-        }
-
+    public class ApiMarketController : ApiBaseController
+    {
         /// <summary>
-        /// 营销中心登录
+        ///     营销中心登录
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public ApiResult<RoleOuput> Login([FromBody]UserOutput userOutput) {
+        public ApiResult<RoleOuput> Login([FromBody] UserOutput userOutput)
+        {
             return null;
             //var result = Resolve<IEmployeeService>().Login(userOutput, () =>
             //{

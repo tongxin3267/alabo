@@ -1,27 +1,27 @@
 ﻿using System;
-using Alabo.UI.AutoForms;
+using Alabo.UI.Design.AutoForms;
 
-namespace Alabo.App.Share.Share.Domain.Dtos {
-
-    public class RewardEditSimpleView {
-
+namespace Alabo.App.Share.RewardRuless.Dtos
+{
+    public class RewardEditSimpleView
+    {
         /// <summary>
-        /// 名称
+        ///     名称
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// 简介
+        ///     简介
         /// </summary>
         public string Intro { get; set; }
 
         /// <summary>
-        /// Id
+        ///     Id
         /// </summary>
         public Guid Id { get; set; }
 
         /// <summary>
-        /// 自动表单
+        ///     自动表单
         /// </summary>
         public AutoForm AutoForm { get; set; }
     }

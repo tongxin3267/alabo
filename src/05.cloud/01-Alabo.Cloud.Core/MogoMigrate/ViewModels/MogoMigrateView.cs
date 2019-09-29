@@ -1,19 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.UI;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Market.MogoMigrate.ViewModels {
-
+namespace _01_Alabo.Cloud.Core.MogoMigrate.ViewModels
+{
     /// <summary>
     ///     Mongo数据迁移
     /// </summary>
     [ClassProperty(Name = "Mogo数据迁移", Icon = IconFlaticon.alert_off, SideBarType = SideBarType.MogoMigrateSideBar)]
-    public class MogoMigrateView : BaseViewModel {
-
+    public class MogoMigrateView : BaseViewModel
+    {
         /// <summary>
         ///     激活Key
         /// </summary>

@@ -1,22 +1,22 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.User.Domain.Services;
+﻿using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Mapping;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
+using Alabo.UI.Design.AutoForms;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.User.Domain.Dtos {
-
+namespace Alabo.Data.People.Users.Dtos
+{
     /// <summary>
-    /// 支付密码修改传输层
+    ///     支付密码修改传输层
     /// </summary>
     [ClassProperty(Name = "支付密码修改", Icon = "fa fa-puzzle-piece", Description = "支付密码修改",
         PostApi = "Api/User/ChangePayPassword", SuccessReturn = "pages/user/index")]
-    public class PayPasswordInput : UIBase, IAutoForm//EntityDto
+    public class PayPasswordInput : UIBase, IAutoForm //EntityDto
     {
         /// <summary>
         ///     用户Id不能为空
@@ -71,19 +71,20 @@ namespace Alabo.App.Core.User.Domain.Dtos {
         //[Compare("Password", ErrorMessage = "密码与确认密码不相同")]
         public string ConfirmPassword { get; set; }
 
-        [Display(Name = "手机验证码")]
-        public string MobileVerifiyCode { get; set; }
+        [Display(Name = "手机验证码")] public string MobileVerifiyCode { get; set; }
 
         //public IObjectCache ObjectCache => throw new System.NotImplementedException();
 
-        public AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
             var result = new AutoForm();
             result = ToAutoForm(new PasswordInput());
             result.AlertText = "【修改支付密码】为了更好的保护你的帐号安全，避免您和您的好友受到损失，建议您设置密码";
 
-            result.ButtomHelpText = new List<string> {
+            result.ButtomHelpText = new List<string>
+            {
                 "建议确保登录密码与支付密码不同！",
-                "建议密码采用字母和数字混合，并且不短于6位。",
+                "建议密码采用字母和数字混合，并且不短于6位。"
             };
             return result;
         }
@@ -93,14 +94,13 @@ namespace Alabo.App.Core.User.Domain.Dtos {
         //    throw new System.NotImplementedException();
         //}
 
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
             var parameter = (PayPasswordInput)model;
             var view = AutoMapping.SetValue<PasswordInput>(parameter);
             view.Type = PasswordType.PayPassword;
-            var result = Resolve<IUserDetailService>().ChangePassword(view, true);
-            if (result.Succeeded) {
-                return ServiceResult.Success;
-            }
+            var result = Resolve<IUserDetailService>().ChangePassword(view);
+            if (result.Succeeded) return ServiceResult.Success;
 
             return ServiceResult.FailedWithMessage(result.ReturnMessage);
         }

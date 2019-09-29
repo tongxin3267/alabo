@@ -1,7 +1,7 @@
-﻿using System;
-using Alabo.Datas.Queries.Enums;
+﻿using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Enums;
 using Alabo.Web.Validations;
+using System;
 
 namespace Alabo.Web.Mvc.Attributes
 {

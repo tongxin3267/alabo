@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq.Expressions;
-using Alabo.Extensions;
+﻿using Alabo.Extensions;
 using Alabo.Linq;
 using Alabo.Properties;
+using System;
+using System.Linq.Expressions;
 
 namespace Alabo.Datas.Queries.Internal
 {
@@ -21,18 +21,13 @@ namespace Alabo.Datas.Queries.Internal
         public static Expression<Func<TEntity, bool>> GetWhereIfNotEmptyExpression<TEntity>(
             Expression<Func<TEntity, bool>> predicate) where TEntity : class
         {
-            if (predicate == null) {
-                return null;
-            }
+            if (predicate == null) return null;
 
-            if (Lambda.GetConditionCount(predicate) > 1) {
+            if (Lambda.GetConditionCount(predicate) > 1)
                 throw new InvalidOperationException(string.Format(LibraryResource.OnlyOnePredicate, predicate));
-            }
 
             var value = predicate.Value();
-            if (string.IsNullOrWhiteSpace(value.SafeString())) {
-                return null;
-            }
+            if (string.IsNullOrWhiteSpace(value.SafeString())) return null;
 
             return predicate;
         }

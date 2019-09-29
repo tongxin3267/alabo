@@ -1,13 +1,13 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.UI.Enum {
-
+namespace Alabo.UI.Enum
+{
     /// <summary>
     ///     Font Awesome图标
     /// </summary>
     [ClassProperty(Name = "Font Awesome图标")]
-    public enum FontAwesomeIcon {
-
+    public enum FontAwesomeIcon
+    {
         /// <summary>
         ///     fa-glass
         /// </summary>

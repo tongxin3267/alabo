@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Alabo.Datas.UnitOfWorks;
+using Alabo.Domains.Entities.Core;
+using System;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
-using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Entities.Core;
 
 namespace Alabo.Datas.Stores.Count.EfCore
 {
@@ -20,9 +20,7 @@ namespace Alabo.Datas.Stores.Count.EfCore
         /// <param name="predicate">条件</param>
         public long Count(Expression<Func<TEntity, bool>> predicate)
         {
-            if (predicate == null) {
-                return Set.Count();
-            }
+            if (predicate == null) return Set.Count();
 
             return Set.Count(predicate);
         }

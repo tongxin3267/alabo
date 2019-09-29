@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Domains.Enums
 {
@@ -10,25 +10,32 @@ namespace Alabo.Domains.Enums
     [ClassProperty(Name = "显示样式")]
     public enum LabelColor
     {
-        [Display(Name = "灰色")] [LabelCssClass(BadgeColorCalss.Metal)]
+        [Display(Name = "灰色")]
+        [LabelCssClass(BadgeColorCalss.Metal)]
         Default = 1,
 
-        [Display(Name = "深蓝")] [LabelCssClass(BadgeColorCalss.Primary)]
+        [Display(Name = "深蓝")]
+        [LabelCssClass(BadgeColorCalss.Primary)]
         Primary = 2,
 
-        [Display(Name = "浅蓝")] [LabelCssClass(BadgeColorCalss.Info)]
+        [Display(Name = "浅蓝")]
+        [LabelCssClass(BadgeColorCalss.Info)]
         Info = 3,
 
-        [Display(Name = "绿色")] [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "绿色")]
+        [LabelCssClass(BadgeColorCalss.Success)]
         Success = 4,
 
-        [Display(Name = "红色")] [LabelCssClass(BadgeColorCalss.Danger)]
+        [Display(Name = "红色")]
+        [LabelCssClass(BadgeColorCalss.Danger)]
         Danger = 5,
 
-        [Display(Name = "黄色")] [LabelCssClass("m-badge-warning")]
+        [Display(Name = "黄色")]
+        [LabelCssClass("m-badge-warning")]
         Warning = 6,
 
-        [Display(Name = "黄色")] [LabelCssClass("m-badge-warning")]
+        [Display(Name = "黄色")]
+        [LabelCssClass("m-badge-warning")]
         Brand = 7
     }
 }

@@ -1,35 +1,174 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Api.Domain.Service;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.Core.Enums.Enum;
+﻿using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Data.People.Users.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Exceptions;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
+using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Maps;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
-using Alabo.UI.AutoLists;
-using Alabo.UI.AutoTables;
+using Alabo.UI.Design.AutoForms;
+using Alabo.UI.Design.AutoLists;
+using Alabo.UI.Design.AutoTables;
 using Alabo.Users.Enum;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.User.ViewModels {
-
+namespace Alabo.Data.People.Users.ViewModels
+{
     /// <summary>
     ///     会员管理 (租户)
     /// </summary>
-    [ClassProperty(Name = "会员管理", Icon = "fa fa-puzzle-piece", Description = "管理系统所有会员", ListApi = "Api/UserAdmin/UserList",
+    [ClassProperty(Name = "会员管理", Icon = "fa fa-puzzle-piece", Description = "管理系统所有会员",
+        ListApi = "Api/UserAdmin/UserList",
         PageType = ViewPageType.List, PostApi = "Api/User/AddUser")]
     [BsonIgnoreExtraElements]
-    public class ViewCrmUser : UIBase, IAutoTable<ViewUser>, IAutoForm, IAutoList {
+    public class ViewCrmUser : UIBase, IAutoTable<ViewUser>, IAutoForm, IAutoList
+    {
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
+            return null;
+        }
+
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
+            var view = new ViewUser();
+
+            if (!string.IsNullOrEmpty(id.ToString()))
+            {
+                var result = Resolve<IUserService>().GetSingle(id.ConvertToLong());
+                if (result == null) return ToAutoForm(view);
+
+                var model = result.MapTo<AutoForm>();
+
+                return ToAutoForm(model);
+            }
+
+            return ToAutoForm(view);
+        }
+
+        public PageResult<AutoListItem> PageList(object query, AutoBaseModel autoModel)
+        {
+            var dic = query.ToObject<Dictionary<string, string>>();
+
+            dic.TryGetValue("loginUserId", out var userId);
+
+            dic.TryGetValue("pageIndex", out var pageIndexStr);
+            dic.TryGetValue("Status", out var userStatus);
+            if (string.IsNullOrEmpty(userStatus)) userStatus = "1";
+            var pageIndex = pageIndexStr.ToInt64();
+            if (pageIndex <= 0) pageIndex = 1;
+            var userInput = new UserInput
+            {
+                PageIndex = (int)pageIndex,
+                //ParentId = userId.ToInt64(),
+                PageSize = 15,
+                Status = userStatus == "1" ? Status.Normal : userStatus == "2" ? Status.Freeze : Status.Deleted
+            };
+
+            var model = Resolve<IUserService>().GetViewUserPageList(userInput);
+
+            var list = new List<AutoListItem>();
+            foreach (var item in model)
+            {
+                // var grade = Resolve<IGradeService>().GetGrade(item.GradeId);
+                var apiData = new AutoListItem
+                {
+                    Title = item.UserName.ReplaceHtmlTag(), //标题
+                    Intro = $"{item.Mobile}/{item.CreateTime.ToString("yyyy-MM-dd hh:ss")}", //简介
+                    Value = item.GradeName, //会员等级
+                    Image = Resolve<IApiService>()
+                        .ApiImageUrl(item.Avator), //users.FirstOrDefault(u => u.UserId == item.Id)?.Avator,//左边头像
+                    Id = item.Id //id
+                };
+
+                list.Add(apiData);
+            }
+
+            return ToPageList(list, model);
+        }
+
+        public Type SearchType()
+        {
+            return typeof(ViewCrmUser);
+        }
+
+        public List<TableAction> Actions()
+        {
+            var rsList = new List<TableAction>
+            {
+                ToLinkAction("编辑", "Edit", TableActionType.ColumnAction),
+                ToLinkAction("资产", "Account", TableActionType.ColumnAction),
+                ToLinkAction("删除", "Api/User/Delete", ActionLinkType.Delete, TableActionType.ColumnAction)
+            };
+
+            return rsList;
+        }
+
+        public PageResult<ViewUser> PageTable(object query, AutoBaseModel autoModel)
+        {
+            var userInput = ToQuery<UserInput>();
+            if (autoModel.Filter == FilterType.Admin)
+            {
+                var model = Resolve<IUserService>().GetViewUserPageList(userInput);
+                return ToPageResult(model);
+            }
+
+            if (autoModel.Filter == FilterType.User)
+            {
+                // 查找自己推荐的会员
+                // userInput.ParentId = autoModel.BasicUser.Id;
+                var model = Resolve<IUserService>().GetViewUserPageList(userInput);
+                return ToPageResult(model);
+            }
+
+            throw new ValidException("类型权限不正确");
+        }
+
+        /// <summary>
+        ///     获取s the avator.
+        /// </summary>
+        /// <param name="size">The size.</param>
+        public string GetAvator(int size = 48)
+        {
+            if (Avator.IsNullOrEmpty()) return $@"/wwwroot/static/images/avator/{Sex}_{size}.png";
+
+            return Avator;
+        }
+
+        /// <summary>
+        ///     获取s the name of the 会员.
+        /// </summary>
+        public string GetUserName()
+        {
+            var name = $@"{UserName}({Name})";
+            return name;
+        }
+
+        /// <summary>
+        ///     操作链接
+        /// </summary>
+        public IEnumerable ViewLinks()
+        {
+            var quickLinks = new List<ViewLink>
+            {
+                new ViewLink("添加会员", "/Admin/User/Add", Icons.Edit, LinkType.TableQuickLink),
+                new ViewLink("会员等级",
+                    "/Admin/AutoConfig/List?key=Alabo.App.Core.User.Domain.CallBacks.UserGradeConfig", "fa fa-signal",
+                    LinkType.TableQuickLink),
+                new ViewLink("详情", "/Admin/User/Edit?id=[[Id]]", Icons.Edit, LinkType.ColumnLink),
+                new ViewLink("Ta的推荐", "/Admin/user/ParentUser?UserId=[[Id]]", Icons.Edit, LinkType.ColumnLink)
+                //new ViewLink("前台登录", "/admin/user/loginother?userId=[[Id]]", Icons.Edit, LinkType.ColumnLink)
+            };
+            return quickLinks;
+        }
+
         #region
 
         /// <summary>
@@ -44,7 +183,8 @@ namespace Alabo.App.Core.User.ViewModels {
         /// </summary>
         [Display(Name = "用户名")]
         [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, PlaceHolder = "请输入用户名，一般与手机号相同",
-            IsShowAdvancedSerach = true, DataField = "UserId", GroupTabId = 1, IsMain = true, Width = "150", EditShow = true,
+            IsShowAdvancedSerach = true, DataField = "UserId", GroupTabId = 1, IsMain = true, Width = "150",
+            EditShow = true,
             ListShow = true, SortOrder = 2, Link = "/Admin/User/Edit?id=[[Id]]")]
         public string UserName { get; set; }
 
@@ -53,7 +193,8 @@ namespace Alabo.App.Core.User.ViewModels {
         /// </summary>
         [Display(Name = "姓名")]
         [HelpBlock("请输入姓名")]
-        [Field(ControlsType = ControlsType.TextBox, IsMain = true, GroupTabId = 1, Width = "150", ListShow = true, EditShow = true,
+        [Field(ControlsType = ControlsType.TextBox, IsMain = true, GroupTabId = 1, Width = "150", ListShow = true,
+            EditShow = true,
             SortOrder = 3, Link = "/Admin/User/Edit?id=[[Id]]")]
         public string Name { get; set; }
 
@@ -71,7 +212,8 @@ namespace Alabo.App.Core.User.ViewModels {
         /// </summary>
         [Display(Name = "邮箱")]
         [HelpBlock("请输入邮箱")]
-        [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1, Width = "150", IsShowBaseSerach = true, EditShow = true,
+        [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1, Width = "150", IsShowBaseSerach = true,
+            EditShow = true,
             IsShowAdvancedSerach = true, ListShow = true, SortOrder = 5)]
         public string Email { get; set; }
 
@@ -95,7 +237,8 @@ namespace Alabo.App.Core.User.ViewModels {
         /// </summary>
         [Display(Name = "等级")]
         [Field(ControlsType = ControlsType.DropdownList, LabelColor = LabelColor.Info, IsShowAdvancedSerach = true,
-            DataSource = "Alabo.App.Core.User.Domain.Callbacks.UserGradeConfig", EditShow = false, GroupTabId = 1, Width = "150",
+            DataSource = "Alabo.App.Core.User.Domain.Callbacks.UserGradeConfig", EditShow = false, GroupTabId = 1,
+            Width = "150",
             ListShow = false, SortOrder = 5)]
         public Guid GradeId { get; set; }
 
@@ -104,7 +247,8 @@ namespace Alabo.App.Core.User.ViewModels {
         /// </summary>
         [Display(Name = "等级")]
         [HelpBlock("请输入等级")]
-        [Field(ControlsType = ControlsType.TextBox, LabelColor = LabelColor.Info, EditShow = false, GroupTabId = 1, Width = "150",
+        [Field(ControlsType = ControlsType.TextBox, LabelColor = LabelColor.Info, EditShow = false, GroupTabId = 1,
+            Width = "150",
             ListShow = true, SortOrder = 5)]
         public string GradeName { get; set; }
 
@@ -114,7 +258,8 @@ namespace Alabo.App.Core.User.ViewModels {
         [Display(Name = "实名?")]
         [HelpBlock("请确定实名")]
         [Field(ControlsType = ControlsType.DropdownList, GroupTabId = 1, Width = "150",
-            DataSource = "Alabo.Core.Enums.Enum.IdentityStatus", ListShow = true, EditShow = false, SortOrder = 8)]
+            DataSource = "Alabo.Framework.Core.Enums.Enum.IdentityStatus", ListShow = true, EditShow = false,
+            SortOrder = 8)]
         public IdentityStatus IdentityStatus { get; set; } = IdentityStatus.IsNoPost;
 
         /// <summary>
@@ -122,7 +267,8 @@ namespace Alabo.App.Core.User.ViewModels {
         /// </summary>
         [Display(Name = "性别")]
         [HelpBlock("选择您的性别")]
-        [Field(ControlsType = ControlsType.RadioButton, GroupTabId = 1, DataSource = "Alabo.Core.Enums.Enum.Sex",
+        [Field(ControlsType = ControlsType.RadioButton, GroupTabId = 1,
+            DataSource = "Alabo.Framework.Core.Enums.Enum.Sex",
             Width = "150", ListShow = true, SortOrder = 10)]
         public Sex Sex { get; set; } = Sex.Man;
 
@@ -150,7 +296,8 @@ namespace Alabo.App.Core.User.ViewModels {
         /// </summary>
         [Display(Name = "注册时间")]
         [HelpBlock("请输入注册时间")]
-        [Field(ControlsType = ControlsType.DateTimePicker, GroupTabId = 1, Width = "150", EditShow = false, ListShow = true, SortOrder = 1000)]
+        [Field(ControlsType = ControlsType.DateTimePicker, GroupTabId = 1, Width = "150", EditShow = false,
+            ListShow = true, SortOrder = 1000)]
         public DateTime CreateTime { get; set; } = DateTime.Now;
 
         /// <summary>
@@ -159,133 +306,5 @@ namespace Alabo.App.Core.User.ViewModels {
         public UserGradeConfig UserGradeConfig { get; set; }
 
         #endregion
-
-        public List<TableAction> Actions() {
-            var rsList = new List<TableAction>
-            {
-                ToLinkAction("编辑", "Edit",TableActionType.ColumnAction),
-                ToLinkAction("资产", "Account",TableActionType.ColumnAction),
-                ToLinkAction("删除", "Api/User/Delete",ActionLinkType.Delete,TableActionType.ColumnAction),
-            };
-
-            return rsList;
-        }
-
-        /// <summary>
-        ///     获取s the avator.
-        /// </summary>
-        /// <param name="size">The size.</param>
-        public string GetAvator(int size = 48) {
-            if (Avator.IsNullOrEmpty()) {
-                return $@"/wwwroot/static/images/avator/{Sex}_{size}.png";
-            }
-
-            return Avator;
-        }
-
-        /// <summary>
-        ///     获取s the name of the 会员.
-        /// </summary>
-        public string GetUserName() {
-            var name = $@"{UserName}({Name})";
-            return name;
-        }
-
-        public PageResult<ViewUser> PageTable(object query, AutoBaseModel autoModel) {
-            var userInput = ToQuery<UserInput>();
-            if (autoModel.Filter == FilterType.Admin) {
-                var model = Resolve<IUserService>().GetViewUserPageList(userInput);
-                return ToPageResult(model);
-            }
-            if (autoModel.Filter == FilterType.User) {
-                // 查找自己推荐的会员
-                // userInput.ParentId = autoModel.BasicUser.Id;
-                var model = Resolve<IUserService>().GetViewUserPageList(userInput);
-                return ToPageResult(model);
-            } else {
-                throw new ValidException("类型权限不正确");
-            }
-        }
-
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
-            return null;
-        }
-
-        public AutoForm GetView(object id, AutoBaseModel autoModel) {
-            var view = new ViewUser();
-
-            if (!string.IsNullOrEmpty(id.ToString())) {
-                var result = Resolve<IUserService>().GetSingle(id.ConvertToLong());
-                if (result == null) {
-                    return ToAutoForm(view);
-                }
-
-                var model = result.MapTo<AutoForm>();
-
-                return ToAutoForm(model);
-            }
-
-            return ToAutoForm(view);
-        }
-
-        /// <summary>
-        ///     操作链接
-        /// </summary>
-        public IEnumerable ViewLinks() {
-            var quickLinks = new List<ViewLink>
-            {
-                new ViewLink("添加会员", "/Admin/User/Add", Icons.Edit, LinkType.TableQuickLink),
-                new ViewLink("会员等级",
-                    "/Admin/AutoConfig/List?key=Alabo.App.Core.User.Domain.CallBacks.UserGradeConfig", "fa fa-signal",
-                    LinkType.TableQuickLink),
-                new ViewLink("详情", "/Admin/User/Edit?id=[[Id]]", Icons.Edit, LinkType.ColumnLink),
-                new ViewLink("Ta的推荐", "/Admin/user/ParentUser?UserId=[[Id]]", Icons.Edit, LinkType.ColumnLink)
-                //new ViewLink("前台登录", "/admin/user/loginother?userId=[[Id]]", Icons.Edit, LinkType.ColumnLink)
-            };
-            return quickLinks;
-        }
-
-        public PageResult<AutoListItem> PageList(object query, AutoBaseModel autoModel) {
-            var dic = query.ToObject<Dictionary<string, string>>();
-
-            dic.TryGetValue("loginUserId", out string userId);
-
-            dic.TryGetValue("pageIndex", out string pageIndexStr);
-            dic.TryGetValue("Status", out string userStatus);
-            if (string.IsNullOrEmpty(userStatus)) {
-                userStatus = "1";
-            }
-            var pageIndex = pageIndexStr.ToInt64();
-            if (pageIndex <= 0) {
-                pageIndex = 1;
-            }
-            var userInput = new UserInput {
-                PageIndex = (int)pageIndex,
-                //ParentId = userId.ToInt64(),
-                PageSize = (int)15,
-                Status = userStatus == "1" ? Status.Normal : (userStatus == "2" ? Status.Freeze : Status.Deleted)
-            };
-
-            var model = Resolve<IUserService>().GetViewUserPageList(userInput);
-
-            var list = new List<AutoListItem>();
-            foreach (var item in model) {
-                // var grade = Resolve<IGradeService>().GetGrade(item.GradeId);
-                var apiData = new AutoListItem {
-                    Title = item.UserName.ReplaceHtmlTag(),//标题
-                    Intro = $"{item.Mobile}/{item.CreateTime.ToString("yyyy-MM-dd hh:ss")}",//简介
-                    Value = item.GradeName,//会员等级
-                    Image = Resolve<IApiService>().ApiImageUrl(item.Avator), //users.FirstOrDefault(u => u.UserId == item.Id)?.Avator,//左边头像
-                    Id = item.Id,//id
-                };
-
-                list.Add(apiData);
-            }
-            return ToPageList(list, model);
-        }
-
-        public Type SearchType() {
-            return typeof(ViewCrmUser);
-        }
     }
 }

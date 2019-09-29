@@ -1,20 +1,21 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Common.Domain.CallBacks;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Shop.Product.Domain.Enums;
 using Alabo.AutoConfigs;
 using Alabo.Datas.Queries.Enums;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Domains.Repositories.Mongo.Extension;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Industry.Shop.Products.Domain.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Product.ViewModels {
-
-    public class ViewProductList : BaseViewModel {
-
+namespace Alabo.Industry.Shop.Products.ViewModels
+{
+    public class ViewProductList : BaseViewModel
+    {
         /// <summary>
         ///     商品所属类目ID
         /// </summary>
@@ -26,7 +27,7 @@ namespace Alabo.App.Shop.Product.ViewModels {
         [Field(IsShowAdvancedSerach = true, IsShowBaseSerach = true, ControlsType = ControlsType.TextBox)]
         public string StoreName { get; set; }
 
-        public long StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         [Display(Name = "商品名称")]
         [Field(ControlsType = ControlsType.TextBox, IsShowAdvancedSerach = true, IsShowBaseSerach = true,
@@ -158,11 +159,11 @@ namespace Alabo.App.Shop.Product.ViewModels {
         [Display(Name = "显示价格")]
         public string DisplayPrice { get; set; }
 
-        public string GetSmallUrl {
-            get {
-                if (SmallUrl != null) {
-                    return SmallUrl;
-                }
+        public string GetSmallUrl
+        {
+            get
+            {
+                if (SmallUrl != null) return SmallUrl;
 
                 return Resolve<IAutoConfigService>().GetValue<WebSiteConfig>().NoPic;
             }

@@ -1,30 +1,86 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using AutoMapper;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using Alabo.App.Cms.Articles.Domain.Entities;
-using Alabo.App.Cms.Articles.Domain.Services;
-using Alabo.App.Core.Common.Domain.CallBacks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Core.Admins.Configs;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Helpers;
+using Alabo.Industry.Cms.Articles.Domain.Entities;
+using Alabo.Industry.Cms.Articles.Domain.Services;
 using Alabo.Maps;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
-using Alabo.UI.AutoTables;
+using Alabo.UI.Design.AutoForms;
+using Alabo.UI.Design.AutoTables;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Cms.Articles.Domain.Dto
+namespace Alabo.Industry.Cms.Articles.Domain.Dto
 {
-
     public class ViewArticle : UIBase, IAutoForm, IAutoTable<Article>
     {
+        /// <summary>
+        ///     获取详情
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="autoModel"></param>
+        /// <returns></returns>
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
+            var str = id.ToString();
+            var model = Ioc.Resolve<IArticleService>().GetSingle(u => u.Id == str.ToObjectId());
+            if (model != null) return ToAutoForm(model.MapTo<ViewArticle>());
+
+            return ToAutoForm(new ViewArticle());
+        }
+
+        /// <summary>
+        ///     保存
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="autoModel"></param>
+        /// <returns></returns>
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
+            var ArticlModel = model.MapTo<Article>();
+            var result = Resolve<IArticleService>().AddOrUpdate(ArticlModel);
+            if (result) return ServiceResult.Success;
+            return ServiceResult.FailedWithMessage("操作失败，请重试");
+        }
+
+
+        /// <summary>
+        ///     分页列表
+        /// </summary>
+        /// <param name="query"></param>
+        /// <param name="autoModel"></param>
+        /// <returns></returns>
+        public PageResult<Article> PageTable(object query, AutoBaseModel autoModel)
+        {
+            var list = Resolve<IArticleService>().GetPagedList(query);
+
+
+            return ToPageResult(list);
+        }
+
+        /// <summary>
+        ///     操作
+        /// </summary>
+        /// <returns></returns>
+        public List<TableAction> Actions()
+        {
+            var list = new List<TableAction>
+            {
+                ToLinkAction("编辑", "Edit", TableActionType.ColumnAction),
+                ToLinkAction("删除", "/Api/Article/Delete", ActionLinkType.Delete, TableActionType.ColumnAction)
+            };
+            return list;
+        }
+
         #region
+
         /// <summary>
         ///     级联Id
         /// </summary>
@@ -183,69 +239,5 @@ namespace Alabo.App.Cms.Articles.Domain.Dto
         public string Tags { get; set; }
 
         #endregion
-
-
-        /// <summary>
-        /// 分页列表
-        /// </summary>
-        /// <param name="query"></param>
-        /// <param name="autoModel"></param>
-        /// <returns></returns>
-        public PageResult<Article> PageTable(object query, AutoBaseModel autoModel)
-        {
-            var list = Resolve<IArticleService>().GetPagedList(query);
-   
-
-            return ToPageResult(list);
-        }
-
-        /// <summary>
-        /// 操作
-        /// </summary>
-        /// <returns></returns>
-        public List<TableAction> Actions()
-        {
-            var list = new List<TableAction>
-            {
-                ToLinkAction("编辑", "Edit",TableActionType.ColumnAction),
-                ToLinkAction("删除", "/Api/Article/Delete",ActionLinkType.Delete,TableActionType.ColumnAction)
-            };
-            return list;
-        }
-
-        /// <summary>
-        /// 获取详情
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="autoModel"></param>
-        /// <returns></returns>
-        public AutoForm GetView(object id, AutoBaseModel autoModel)
-        {
-            var str = id.ToString();
-            var model = Ioc.Resolve<IArticleService>().GetSingle(u => u.Id == str.ToObjectId());
-            if (model != null)
-            {
-                return ToAutoForm(model.MapTo<ViewArticle>());
-            }
-
-            return ToAutoForm(new ViewArticle());
-        }
-
-        /// <summary>
-        /// 保存
-        /// </summary>
-        /// <param name="model"></param>
-        /// <param name="autoModel"></param>
-        /// <returns></returns>
-        public ServiceResult Save(object model, AutoBaseModel autoModel)
-        {
-            var ArticlModel = model.MapTo<Article>();
-            var result = Resolve<IArticleService>().AddOrUpdate(ArticlModel);
-            if (result)
-            {
-                return ServiceResult.Success;
-            }
-            return ServiceResult.FailedWithMessage("操作失败，请重试");
-        }
     }
 }

@@ -1,54 +1,59 @@
 ﻿using Alabo.Extensions;
 using QRCoder;
 
-namespace Alabo.Tool.QrCode.QrCoder {
-
+namespace Alabo.Tool.QrCode.QrCoder
+{
     /// <summary>
-    /// QRCoder二维码服务
+    ///     QRCoder二维码服务
     /// </summary>
-    public class QrCoderService : IQrCodeService {
-
+    public class QrCoderService : IQrCodeService
+    {
         /// <summary>
-        /// 二维码尺寸
-        /// </summary>
-        private int _size;
-
-        /// <summary>
-        /// 容错级别
+        ///     容错级别
         /// </summary>
         private QRCodeGenerator.ECCLevel _level;
 
         /// <summary>
-        /// 初始化QRCoder组件二维码服务
+        ///     二维码尺寸
         /// </summary>
-        public QrCoderService() {
+        private int _size;
+
+        /// <summary>
+        ///     初始化QRCoder组件二维码服务
+        /// </summary>
+        public QrCoderService()
+        {
             _size = 10;
             _level = QRCodeGenerator.ECCLevel.L;
         }
 
         /// <summary>
-        /// 设置二维码尺寸
+        ///     设置二维码尺寸
         /// </summary>
         /// <param name="size">二维码尺寸</param>
-        public IQrCodeService Size(QrSize size) {
+        public IQrCodeService Size(QrSize size)
+        {
             return Size(size.Value());
         }
 
         /// <summary>
-        /// 设置二维码尺寸
+        ///     设置二维码尺寸
         /// </summary>
         /// <param name="size">二维码尺寸</param>
-        public IQrCodeService Size(int size) {
+        public IQrCodeService Size(int size)
+        {
             _size = size;
             return this;
         }
 
         /// <summary>
-        /// 容错处理
+        ///     容错处理
         /// </summary>
         /// <param name="level">容错级别</param>
-        public IQrCodeService Correction(ErrorCorrectionLevel level) {
-            switch (level) {
+        public IQrCodeService Correction(ErrorCorrectionLevel level)
+        {
+            switch (level)
+            {
                 case ErrorCorrectionLevel.L:
                     _level = QRCodeGenerator.ECCLevel.L;
                     break;
@@ -65,17 +70,19 @@ namespace Alabo.Tool.QrCode.QrCoder {
                     _level = QRCodeGenerator.ECCLevel.H;
                     break;
             }
+
             return this;
         }
 
         /// <summary>
-        /// 创建二维码
+        ///     创建二维码
         /// </summary>
         /// <param name="content">内容</param>
-        public byte[] CreateQrCode(string content) {
-            QRCodeGenerator generator = new QRCodeGenerator();
-            QRCodeData data = generator.CreateQrCode(content, _level);
-            BitmapByteQRCode qrCode = new BitmapByteQRCode(data);
+        public byte[] CreateQrCode(string content)
+        {
+            var generator = new QRCodeGenerator();
+            var data = generator.CreateQrCode(content, _level);
+            var qrCode = new BitmapByteQRCode(data);
             return qrCode.GetGraphic(_size);
         }
     }

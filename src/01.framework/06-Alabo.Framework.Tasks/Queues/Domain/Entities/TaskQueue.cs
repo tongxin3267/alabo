@@ -1,30 +1,27 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Domain.Services;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.Helpers;
-using Alabo.Tenants;
+using Alabo.Framework.Tasks.Queues.Domain.Enums;
 using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.ViewModel;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.App.Core.Tasks.Domain.Entities {
-
+namespace Alabo.Framework.Tasks.Queues.Domain.Entities
+{
     /// <summary>
     ///     任务队列
     /// </summary>
-    [ClassProperty(Name = "后台任务队列", Icon = IconFontawesome.dedent, Description = "后台任务队列", ListApi = "Api/TaskQueue/TaskQueueList",
+    [ClassProperty(Name = "后台任务队列", Icon = IconFontawesome.dedent, Description = "后台任务队列",
+        ListApi = "Api/TaskQueue/TaskQueueList",
         PageType = ViewPageType.List, PostApi = "Api/TaskQueue/TaskQueueList",
         SideBarType = SideBarType.TaskQueueSideBar)]
     [Table("Task_TaskQueue")]
-    public class TaskQueue : AggregateDefaultUserRoot<TaskQueue> {
+    public class TaskQueue : AggregateDefaultUserRoot<TaskQueue>
+    {
         [Display(Name = "模块标识")] public Guid ModuleId { get; set; }
 
         /// <summary>
@@ -95,20 +92,22 @@ namespace Alabo.App.Core.Tasks.Domain.Entities {
     }
 
     /// <summary>
-    /// Task_TaskQueue
+    ///     Task_TaskQueue
     /// </summary>
-    public class TaskQueueTableMap : MsSqlAggregateRootMap<TaskQueue> {
-
-        protected override void MapTable(EntityTypeBuilder<TaskQueue> builder) {
+    public class TaskQueueTableMap : MsSqlAggregateRootMap<TaskQueue>
+    {
+        protected override void MapTable(EntityTypeBuilder<TaskQueue> builder)
+        {
             builder.ToTable("Task_TaskQueue");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<TaskQueue> builder) {
+        protected override void MapProperties(EntityTypeBuilder<TaskQueue> builder)
+        {
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.UserName);
             builder.Ignore(e => e.ModuleName);
-            builder.Ignore(e => e.Version);
+         
         }
     }
 }

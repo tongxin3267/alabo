@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Dapper;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Linq;
-using Dapper;
 
 namespace Alabo.Domains.Repositories.EFCore
 {
@@ -30,9 +30,7 @@ namespace Alabo.Domains.Repositories.EFCore
             where T : class
         {
             var connection = context.Connection();
-            if (connection.State != ConnectionState.Open) {
-                connection.Open();
-            }
+            if (connection.State != ConnectionState.Open) connection.Open();
 
             var result = connection.QueryFirstOrDefault<T>(sql, param);
             return result;
@@ -42,9 +40,7 @@ namespace Alabo.Domains.Repositories.EFCore
             where T : class
         {
             var connection = context.Connection();
-            if (connection.State != ConnectionState.Open) {
-                connection.Open();
-            }
+            if (connection.State != ConnectionState.Open) connection.Open();
 
             var result = connection.Query<T>(sql, param);
             return result;
@@ -54,9 +50,7 @@ namespace Alabo.Domains.Repositories.EFCore
             string sql, Func<TFirst, TSecond, TReturn> map)
         {
             var connection = context.Connection();
-            if (connection.State != ConnectionState.Open) {
-                connection.Open();
-            }
+            if (connection.State != ConnectionState.Open) connection.Open();
 
             var result = connection.Query(sql, map);
             return result;
@@ -66,9 +60,7 @@ namespace Alabo.Domains.Repositories.EFCore
             Func<TFirst, TSecond, TReturn> map)
         {
             var connection = context.Connection();
-            if (connection.State != ConnectionState.Open) {
-                connection.Open();
-            }
+            if (connection.State != ConnectionState.Open) connection.Open();
 
             var result = connection.Query(sql, map);
             return result.FirstOrDefault();

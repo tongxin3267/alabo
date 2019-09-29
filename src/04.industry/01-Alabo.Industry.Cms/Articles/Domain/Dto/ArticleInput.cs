@@ -1,15 +1,15 @@
-﻿using Alabo.App.Cms.Articles.Domain.Enums;
-using Alabo.App.Core.Themes.DiyModels.Lists;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
+using Alabo.Framework.Core.WebUis.Models.Lists;
+using Alabo.Industry.Cms.Articles.Domain.Enums;
 
-namespace Alabo.App.Cms.Articles.Domain.Dto {
-
+namespace Alabo.Industry.Cms.Articles.Domain.Dto
+{
     /// <summary>
     ///     Class ArticleInput.
     /// </summary>
     /// <seealso cref="Alabo.Domains.Query.Dto.PagedInputDto" />
-    public class ArticleInput : ListInput {
-
+    public class ArticleInput : ListInput
+    {
         /// <summary>
         ///     频道Id
         /// </summary>

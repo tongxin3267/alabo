@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.App.Core.Finance.Dtos {
-
-    public class RechageAccountOutput {
-
+namespace Alabo.App.Asset.Recharges.Dtos
+{
+    public class RechageAccountOutput
+    {
         /// <summary>
         ///     订单使用人民币支付的金额
         ///     是客户实际支付的金额，微信支付宝

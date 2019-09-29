@@ -1,7 +1,7 @@
-﻿using System;
-using System.Linq.Expressions;
-using Alabo.Domains.Repositories;
+﻿using Alabo.Domains.Repositories;
 using Alabo.Extensions;
+using System;
+using System.Linq.Expressions;
 
 namespace Alabo.Datas.Queries.Criterias
 {

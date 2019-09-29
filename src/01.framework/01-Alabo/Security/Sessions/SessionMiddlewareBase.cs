@@ -1,8 +1,8 @@
-﻿using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using Alabo.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Alabo.Extensions;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Alabo.Security.Sessions
 {
@@ -41,9 +41,7 @@ namespace Alabo.Security.Sessions
         protected virtual async Task Authenticate(HttpContext context)
         {
             await AuthenticateBefore(context);
-            if (IsAuthenticated(context) == false) {
-                return;
-            }
+            if (IsAuthenticated(context) == false) return;
 
             await LoadClaims(context, context.GetIdentity());
             await AuthenticateAfter(context);
@@ -63,13 +61,9 @@ namespace Alabo.Security.Sessions
         /// </summary>
         protected virtual bool IsAuthenticated(HttpContext context)
         {
-            if (context.User == null) {
-                return false;
-            }
+            if (context.User == null) return false;
 
-            if (context.User.Identity.IsAuthenticated == false) {
-                return false;
-            }
+            if (context.User.Identity.IsAuthenticated == false) return false;
 
             return true;
         }

@@ -1,45 +1,39 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Share.Share.Domain.Enums {
-
+namespace Alabo.App.Share.Rewards.Domain.Enums
+{
     [ClassProperty(Name = "封顶限制")]
-    public enum UpperLimitType {
+    public enum UpperLimitType
+    {
+        /// <summary>
+        ///     没有封顶
+        /// </summary>
+        [Display(Name = "无")] No = 1,
 
         /// <summary>
-        /// 没有封顶
+        ///     日封顶
         /// </summary>
-        [Display(Name = "无")]
-        No = 1,
+        [Display(Name = "日封顶")] Days = 2,
 
         /// <summary>
-        /// 日封顶
+        ///     周封顶
         /// </summary>
-        [Display(Name = "日封顶")]
-        Days = 2,
+        [Display(Name = "周封顶")] Weeks = 3,
 
         /// <summary>
-        /// 周封顶
+        ///     月封顶
         /// </summary>
-        [Display(Name = "周封顶")]
-        Weeks = 3,
+        [Display(Name = "月封顶")] Months = 4,
 
         /// <summary>
-        /// 月封顶
+        ///     年封顶
         /// </summary>
-        [Display(Name = "月封顶")]
-        Months = 4,
+        [Display(Name = "年封顶")] Years = 5,
 
         /// <summary>
-        /// 年封顶
+        ///     无限期
         /// </summary>
-        [Display(Name = "年封顶")]
-        Years = 5,
-
-        /// <summary>
-        /// 无限期
-        /// </summary>
-        [Display(Name = "无限期")]
-        Undefined = 6
+        [Display(Name = "无限期")] Undefined = 6
     }
 }

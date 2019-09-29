@@ -1,18 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Alabo.Domains.Entities;
+using Alabo.Linq;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
-using Alabo.Linq;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Core.WebApis.Controller {
-
+namespace Alabo.Framework.Core.WebApis.Controller
+{
     public abstract class ApiOtherController<TEntity, TKey> : ApiListController<TEntity, TKey>
-        where TEntity : class, IAggregateRoot<TEntity, TKey> {
-
-        protected ApiOtherController() : base() {
-        }
-
+        where TEntity : class, IAggregateRoot<TEntity, TKey>
+    {
         #region 动态统计数据
 
         /// <summary>
@@ -20,10 +17,9 @@ namespace Alabo.Core.WebApis.Controller {
         /// </summary>
         [HttpGet]
         [Display(Description = "动态统计数据")]
-        public ApiResult<IList<KeyValue>> GetKeyValue() {
-            if (BaseService == null) {
-                return ApiResult.Failure<IList<KeyValue>>("请在控制器中定义BaseService");
-            }
+        public ApiResult<IList<KeyValue>> GetKeyValue()
+        {
+            if (BaseService == null) return ApiResult.Failure<IList<KeyValue>>("请在控制器中定义BaseService");
 
             var predicate = LinqHelper.DictionaryToLinq<TEntity>(QueryDictionary());
             var expression = predicate.BuildExpression();
@@ -40,10 +36,9 @@ namespace Alabo.Core.WebApis.Controller {
         /// </summary>
         [HttpGet]
         [Display(Description = "动态统计数据")]
-        public ApiResult<long> QueryCount() {
-            if (BaseService == null) {
-                return ApiResult.Failure<long>("请在控制器中定义BaseService");
-            }
+        public ApiResult<long> QueryCount()
+        {
+            if (BaseService == null) return ApiResult.Failure<long>("请在控制器中定义BaseService");
 
             var predicate = LinqHelper.DictionaryToLinq<TEntity>(QueryDictionary());
             var expression = predicate.BuildExpression();

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Alabo.Randoms
+﻿namespace Alabo.Randoms
 {
     /// <summary>
     ///     随机数字生成器

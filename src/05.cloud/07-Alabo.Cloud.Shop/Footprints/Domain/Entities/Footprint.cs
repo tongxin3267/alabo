@@ -1,22 +1,22 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Open.Attach.Domain.Enums;
-using Alabo.App.Share.Attach.Domain.Enums;
+using Alabo.Cloud.Shop.Footprints.Domain.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Share.Attach.Domain.Entities {
-
+namespace Alabo.Cloud.Shop.Footprints.Domain.Entities
+{
     /// <summary>
     ///     通用足迹
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Attach_FootPrint")]
-    [ClassProperty(Name = "足迹", SideBarType = SideBarType.FullScreen, ListApi = "Api/Footprint/List", PostApi = "Api/Footprint/List")]
-    public class Footprint : AggregateMongodbUserRoot<Footprint> {
-
+    [ClassProperty(Name = "足迹", SideBarType = SideBarType.FullScreen, ListApi = "Api/Footprint/List",
+        PostApi = "Api/Footprint/List")]
+    public class Footprint : AggregateMongodbUserRoot<Footprint>
+    {
         /// <summary>
         ///     评论类型
         ///     比如订单、商品、文章等评论
@@ -31,17 +31,17 @@ namespace Alabo.App.Share.Attach.Domain.Entities {
         public string EntityId { get; set; }
 
         /// <summary>
-        /// 名称
+        ///     名称
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// 图片
+        ///     图片
         /// </summary>
         public string Image { get; set; }
 
         /// <summary>
-        /// 链接地址
+        ///     链接地址
         /// </summary>
         public string Url { get; set; }
     }

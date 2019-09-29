@@ -1,9 +1,9 @@
-using MongoDB.Bson;
-using Alabo.App.Market.TeamIntro.Domain.Entities;
 using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.TeamIntro.Domain.Repositories {
-
-    public interface ITeamIntroRepository : IRepository<Entities.TeamIntro, ObjectId> {
+namespace Alabo.Cloud.Cms.TeamIntro.Domain.Repositories
+{
+    public interface ITeamIntroRepository : IRepository<Entities.TeamIntro, ObjectId>
+    {
     }
 }

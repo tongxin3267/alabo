@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Shop.Order.Domain.Enums;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
 
-namespace Alabo.App.Shop.Order.ViewModels {
-
-    public class ViewBuyProduct {
+namespace Alabo.Industry.Shop.Orders.ViewModels
+{
+    public class ViewBuyProduct
+    {
         public long ProductId { get; set; }
 
         /// <summary>

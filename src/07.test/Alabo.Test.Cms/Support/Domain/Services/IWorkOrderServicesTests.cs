@@ -1,13 +1,13 @@
-using Alabo.App.Cms.Support.Domain.Services;
+using Alabo.Cloud.Support.Domain.Services;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
 using Xunit;
 
-namespace Alabo.Test.Cms.Support.Domain.Services {
-
-    public class IWorkOrderServicesTests : CoreTest {
-
+namespace Alabo.Test.Cms.Support.Domain.Services
+{
+    public class IWorkOrderServicesTests : CoreTest
+    {
         [Theory]
         [InlineData(1)]
         [InlineData(2)]
@@ -22,9 +22,11 @@ namespace Alabo.Test.Cms.Support.Domain.Services {
         [InlineData(33)]
         [InlineData(-1)]
         [TestMethod("GetSingleFromCache_Test")]
-        public void GetSingleFromCache_Test_ExpectedBehavior(long entityId) {
+        public void GetSingleFromCache_Test_ExpectedBehavior(long entityId)
+        {
             var model = Resolve<IWorkOrderServices>().GetRandom(entityId);
-            if (model != null) {
+            if (model != null)
+            {
                 var newModel = Resolve<IWorkOrderServices>().GetSingleFromCache(model.Id);
                 Assert.NotNull(newModel);
                 Assert.Equal(newModel.Id, model.Id);
@@ -33,7 +35,8 @@ namespace Alabo.Test.Cms.Support.Domain.Services {
 
         [Fact]
         [TestMethod("AddOrUpdate_ViewWorkOrder")]
-        public void AddOrUpdate_ViewWorkOrder_test() {
+        public void AddOrUpdate_ViewWorkOrder_test()
+        {
             //ViewWorkOrder view = null;
             //var result = Service<IWorkOrderServices>().AddOrUpdate(view);
             //Assert.NotNull(result);
@@ -42,7 +45,8 @@ namespace Alabo.Test.Cms.Support.Domain.Services {
         [Fact]
         [TestIgnore]
         [TestMethod("GetSingle_ObjectId")]
-        public void GetSingle_ObjectId_test() {
+        public void GetSingle_ObjectId_test()
+        {
             //  ObjectId id = ObjectId.Empty;
             //var result = Service<IWorkOrderServices>().GetSingle(id);
             //Assert.NotNull(result);
@@ -51,7 +55,8 @@ namespace Alabo.Test.Cms.Support.Domain.Services {
         [Fact]
         [TestIgnore]
         [TestMethod("GetView_ObjectId")]
-        public void GetView_ObjectId_test() {
+        public void GetView_ObjectId_test()
+        {
             //ObjectId id = ObjectId.Empty;
             //var result = Service<IWorkOrderServices>().GetView(id);
             //Assert.NotNull(result);

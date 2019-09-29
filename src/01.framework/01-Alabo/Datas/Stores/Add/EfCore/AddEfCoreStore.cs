@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
 using Alabo.Validations.Aspects;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.Datas.Stores.Add.EfCore
 {
@@ -20,15 +20,11 @@ namespace Alabo.Datas.Stores.Add.EfCore
         /// <param name="entity"></param>
         public bool AddSingle([Valid] TEntity entity)
         {
-            if (entity == null) {
-                throw new ArgumentNullException(nameof(entity));
-            }
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
 
             UnitOfWork.Add(entity);
             var count = UnitOfWork.SaveChanges();
-            if (count > 0) {
-                return true;
-            }
+            if (count > 0) return true;
 
             return false;
         }
@@ -39,9 +35,7 @@ namespace Alabo.Datas.Stores.Add.EfCore
         /// <param name="soucre"></param>
         public void AddMany(IEnumerable<TEntity> soucre)
         {
-            if (soucre == null) {
-                throw new ArgumentNullException(nameof(soucre));
-            }
+            if (soucre == null) throw new ArgumentNullException(nameof(soucre));
 
             UnitOfWork.AddRange(soucre);
             var count = UnitOfWork.SaveChanges();

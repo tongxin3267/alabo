@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Market.UserRightss.Domain.Enums;
-using Alabo.App.Market.UserRightss.Domain.Services;
+using Alabo.Cloud.People.UserRightss.Domain.Enums;
+using Alabo.Cloud.People.UserRightss.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Mapping;
 using Alabo.UI;
-using Alabo.UI.AutoTables;
+using Alabo.UI.Design.AutoTables;
 using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Market.UserRightss.Domain.Dtos {
-
+namespace Alabo.Cloud.People.UserRightss.Domain.Dtos
+{
     /// <summary>
     ///     会员权益模型
     /// </summary>
-    public class UserRightsOutput : UIBase, IAutoTable<UserRightsOutput> {
-
+    public class UserRightsOutput : UIBase, IAutoTable<UserRightsOutput>
+    {
         /// <summary>
-        /// 是否已经登记地址
+        ///     是否已经登记地址
         /// </summary>
         public bool IsRegion { get; set; } = true;
 
@@ -35,17 +36,17 @@ namespace Alabo.App.Market.UserRightss.Domain.Dtos {
         public string Name { get; set; }
 
         /// <summary>
-        /// 用户名
+        ///     用户名
         /// </summary>
         public string UserName { get; set; }
 
         /// <summary>
-        /// 当前会员等级
+        ///     当前会员等级
         /// </summary>
         public string CurrnetGradeName { get; set; }
 
         /// <summary>
-        /// 销售价
+        ///     销售价
         /// </summary>
         public decimal SalePrice { get; set; }
 
@@ -110,19 +111,22 @@ namespace Alabo.App.Market.UserRightss.Domain.Dtos {
         public long TotalCount { get; set; } = 0;
 
         /// <summary>
-        /// 用户等级是否开放
+        ///     用户等级是否开放
         /// </summary>
         public bool IsOpen { get; set; } = false;
 
-        public List<TableAction> Actions() {
+        public List<TableAction> Actions()
+        {
             return new List<TableAction>();
         }
 
-        public PageResult<UserRightsOutput> PageTable(object query, AutoBaseModel autoModel) {
+        public PageResult<UserRightsOutput> PageTable(object query, AutoBaseModel autoModel)
+        {
             var input = ToQuery<UserRightsOrderInput>();
             var userRightses = Resolve<IUserRightsService>().GetList(u => u.UserId == input.UserId);
             var result = new List<UserRightsOutput>();
-            foreach (var item in userRightses) {
+            foreach (var item in userRightses)
+            {
                 var view = AutoMapping.SetValue<UserRightsOutput>(item);
                 result.Add(view);
             }
@@ -134,8 +138,8 @@ namespace Alabo.App.Market.UserRightss.Domain.Dtos {
     /// <summary>
     ///     等级权益
     /// </summary>
-    public class PrivilegesItem {
-
+    public class PrivilegesItem
+    {
         /// <summary>
         ///     特权图标
         /// </summary>

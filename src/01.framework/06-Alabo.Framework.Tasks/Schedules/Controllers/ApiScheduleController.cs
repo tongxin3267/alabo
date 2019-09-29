@@ -1,17 +1,18 @@
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Framework.Tasks.Schedules.Domain.Entities;
+using Alabo.Framework.Tasks.Schedules.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
-using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Services;
 
-namespace Alabo.App.Core.Tasks.Controllers {
-
+namespace Alabo.Framework.Tasks.Schedules.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/Schedule/[action]")]
-    public class ApiScheduleController : ApiBaseController<Schedule, ObjectId> {
-
-        public ApiScheduleController() : base() {
+    public class ApiScheduleController : ApiBaseController<Schedule, ObjectId>
+    {
+        public ApiScheduleController()
+        {
             BaseService = Resolve<IScheduleService>();
         }
     }

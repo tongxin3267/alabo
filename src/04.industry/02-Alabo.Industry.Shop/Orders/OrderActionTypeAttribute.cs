@@ -1,9 +1,8 @@
 ﻿using System;
 using Alabo.UI.Enum;
 
-namespace Alabo.App.Shop.Order
+namespace Alabo.Industry.Shop.Orders
 {
-
     /// <summary>
     ///     订单操作方式
     ///     更加状态自动判断订单是否可以操作
@@ -11,7 +10,6 @@ namespace Alabo.App.Shop.Order
     [AttributeUsage(AttributeTargets.Field)]
     public class OrderActionTypeAttribute : Attribute
     {
-
         /// <summary>
         ///     界面的操作方法
         /// </summary>
@@ -36,18 +34,19 @@ namespace Alabo.App.Shop.Order
         ///     允许操作的状态，多个状态用,隔开
         /// </summary>
         public string AllowStatus { get; set; }
+
         /// <summary>
-        /// 使用者,
-        /// -1:未使用(默认)
-        /// 0:用户
-        /// 1:店家
-        /// 2:管理员
-        /// 3:线下商店
+        ///     使用者,
+        ///     -1:未使用(默认)
+        ///     0:用户
+        ///     1:店家
+        ///     2:管理员
+        ///     3:线下商店
         /// </summary>
         public int AllowUser { get; set; } = -1;
 
         /// <summary>
-        /// 操作类型 用于前端判断
+        ///     操作类型 用于前端判断
         /// </summary>
         public string Type { get; set; }
 

@@ -1,15 +1,21 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Alabo.App.Core.Tasks;
-using Alabo.App.Core.Tasks.Extensions;
-using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Parameter;
+﻿using Alabo.App.Share.OpenTasks.Parameter;
+using Alabo.App.Share.TaskExecutes;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Data.Things.Orders.ResultModel;
+using Alabo.Framework.Tasks.Queues.Models;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Alabo.App.Open.Tasks.Result {
-
-    public class SharesValueChangeResult : ITaskResult {
-        public TaskContext Context { get; private set; }
-
+namespace Alabo.App.Share.OpenTasks.Result
+{
+    public class SharesValueChangeResult : ITaskResult
+    {
         private readonly TaskManager _taskManager;
+
+        public SharesValueChangeResult(TaskContext context)
+        {
+            Context = context;
+            _taskManager = Context.HttpContextAccessor.HttpContext.RequestServices.GetService<TaskManager>();
+        }
 
         #region invoice properties
 
@@ -17,12 +23,10 @@ namespace Alabo.App.Open.Tasks.Result {
 
         #endregion invoice properties
 
-        public SharesValueChangeResult(TaskContext context) {
-            Context = context;
-            _taskManager = Context.HttpContextAccessor.HttpContext.RequestServices.GetService<TaskManager>();
-        }
+        public TaskContext Context { get; }
 
-        public ExecuteResult Update() {
+        public ExecuteResult Update()
+        {
             //var lastSharesValue = Alabo.Helpers.Ioc.Resolve<ISharesValueService>().GetLastRecored(Parameter.ModuleConfigId);
             //if (lastSharesValue == null) {
             //    // 设置初始默认值

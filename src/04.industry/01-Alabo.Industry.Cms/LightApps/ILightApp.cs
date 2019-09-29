@@ -1,5 +1,6 @@
-﻿namespace Alabo.App.Core.LightApp {
-
-    public interface ILightApp {
+﻿namespace Alabo.Industry.Cms.LightApps
+{
+    public interface ILightApp
+    {
     }
 }

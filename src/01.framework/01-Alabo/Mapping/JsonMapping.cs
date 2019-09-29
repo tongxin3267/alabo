@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
-using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using Alabo.Domains.Entities.Core;
+﻿using Alabo.Domains.Entities.Core;
 using Alabo.Extensions;
 using Alabo.Web.ViewFeatures;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using System;
+using System.Linq;
 
 namespace Alabo.Mapping
 {
@@ -25,17 +25,13 @@ namespace Alabo.Mapping
         /// <param name="instance">The instance.</param>
         public static T EntityToExtension<T>(T instance) where T : class, IEntity
         {
-            if (instance == null) {
-                return instance;
-            }
+            if (instance == null) return instance;
 
             var type = typeof(T);
             var classDescription = new ClassDescription(type);
             //获取有枚举的属性
             var propertys = classDescription.Propertys.Where(r => !r.FieldAttribute.ExtensionJson.IsNullOrEmpty());
-            if (propertys == null || propertys.Count() == 0) {
-                return instance;
-            }
+            if (propertys == null || propertys.Count() == 0) return instance;
 
             var propertyInfo = type.GetPropertiesFromCache();
             foreach (var item in propertyInfo)
@@ -49,7 +45,7 @@ namespace Alabo.Mapping
                     {
                         var extesionName = property.FieldAttribute.ExtensionJson;
                         var extensionField = propertyInfo.FirstOrDefault(r => r.Name == extesionName);
-                        if (!extensionField.IsNullOrEmpty()) {
+                        if (!extensionField.IsNullOrEmpty())
                             if (extensionField != null)
                             {
                                 //设置值
@@ -57,7 +53,6 @@ namespace Alabo.Mapping
                                     JsonConvert.DeserializeObject(value.ToString(), extensionField.PropertyType);
                                 extensionField.SetValue(instance, extesionValue);
                             }
-                        }
                     }
                 }
             }
@@ -76,20 +71,14 @@ namespace Alabo.Mapping
         /// <param name="instance">The instance.</param>
         public static T ConvertToExtension<T>(T instance) where T : class, IEntity
         {
-            if (instance == null) {
-                return instance;
-            }
+            if (instance == null) return instance;
 
             var type = typeof(T);
             var classDescription = new ClassDescription(type);
-            if (classDescription.Propertys == null) {
-                return instance;
-            }
+            if (classDescription.Propertys == null) return instance;
             //获取有枚举的属性
             var propertys = classDescription.Propertys.Where(r => !r.FieldAttribute.ExtensionJson.IsNullOrEmpty());
-            if (propertys == null || !propertys.Any()) {
-                return instance;
-            }
+            if (propertys == null || !propertys.Any()) return instance;
 
             var propertyInfo = type.GetPropertiesFromCache();
             foreach (var item in propertyInfo)
@@ -105,7 +94,7 @@ namespace Alabo.Mapping
                         // 获取扩展字段
                         var extensionType = extesionName.GetTypeByName();
                         var extensionField = propertyInfo.FirstOrDefault(r => r.Name == extensionType?.Name);
-                        if (extensionField != null && extensionType != null) {
+                        if (extensionField != null && extensionType != null)
                             try
                             {
                                 var extesionValue = JsonConvert.DeserializeObject(value.ToString(), extensionType);
@@ -115,7 +104,6 @@ namespace Alabo.Mapping
                             {
                                 Console.WriteLine(ex.Message);
                             }
-                        }
                     }
                 }
             }
@@ -135,7 +123,7 @@ namespace Alabo.Mapping
         public static T HttpContextToExtension<T>(object instance, HttpContext httpContext)
         {
             instance = HttpContextToExtension(instance, typeof(T), httpContext);
-            return (T) instance;
+            return (T)instance;
         }
 
         /// <summary>
@@ -162,14 +150,13 @@ namespace Alabo.Mapping
                     {
                         var extesionName = property.FieldAttribute.ExtensionJson;
                         var extensionField = propertyInfo.FirstOrDefault(r => r.Name == extesionName);
-                        if (!extensionField.IsNullOrEmpty()) {
+                        if (!extensionField.IsNullOrEmpty())
                             if (extensionField != null)
                             {
                                 //设置值
                                 var extesionValue = JsonConvert.DeserializeObject(value, extensionField.PropertyType);
                                 extensionField.SetValue(instance, extesionValue);
                             }
-                        }
                     }
                 }
             }
@@ -194,21 +181,19 @@ namespace Alabo.Mapping
             {
                 var property = propertys.FirstOrDefault(r => r.Name == item.Name);
 
-                if (property != null) {
+                if (property != null)
                     if (!value.IsNullOrEmpty())
                     {
                         var extesionName = property.FieldAttribute.ExtensionJson;
                         var extensionField = propertyInfo.FirstOrDefault(r => r.Name == extesionName);
-                        if (!extensionField.IsNullOrEmpty()) {
+                        if (!extensionField.IsNullOrEmpty())
                             if (extensionField != null)
                             {
                                 //设置值
                                 var extesionValue = JsonConvert.DeserializeObject(value, extensionField.PropertyType);
                                 extensionField.SetValue(instance, extesionValue);
                             }
-                        }
                     }
-                }
             }
 
             return instance;

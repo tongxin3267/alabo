@@ -1,94 +1,85 @@
-﻿using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Core.User.Domain.Repositories;
-using Alabo.App.Core.User.ViewModels;
-using Alabo.App.Core.User.ViewModels.Admin;
+﻿using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
-using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Tasks.Queues.Domain.Servcies;
 using Alabo.Schedules;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Alabo.Users.Dtos;
 using Alabo.Users.Entities;
+using System.Collections.Generic;
 
-namespace Alabo.App.Core.User.Domain.Services {
-
-    public class UserMapService : ServiceBase<UserMap, long>, IUserMapService {
+namespace Alabo.Data.People.Users.Domain.Services
+{
+    public class UserMapService : ServiceBase<UserMap, long>, IUserMapService
+    {
         private readonly IDictionary<long, UserMap> _parentMapCache = new Dictionary<long, UserMap>();
 
         public UserMapService(IUnitOfWork unitOfWork, IRepository<UserMap, long> repository) : base(unitOfWork,
-            repository) {
+            repository)
+        {
         }
 
         /// <summary>
         ///     从缓存中读取架构图
         /// </summary>
         /// <param name="userId">用户Id</param>
-        public UserMap GetParentMapFromCache(long userId) {
-            if (!_parentMapCache.TryGetValue(userId, out var result)) {
+        public UserMap GetParentMapFromCache(long userId)
+        {
+            if (!_parentMapCache.TryGetValue(userId, out var result))
+            {
                 result = Repository<IUserMapRepository>().GetParentMap(userId);
-                if (result != null) {
+                if (result != null)
+                {
                     result.ParentMapList = result.ParentMap.DeserializeJson<List<ParentMap>>();
-                    if (result.ParentMapList == null) {
-                        result.ParentMapList = new List<ParentMap>();
-                    }
+                    if (result.ParentMapList == null) result.ParentMapList = new List<ParentMap>();
 
-                    if (!_parentMapCache.ContainsKey(userId)) {
-                        _parentMapCache.Add(userId, result);
-                    }
+                    if (!_parentMapCache.ContainsKey(userId)) _parentMapCache.Add(userId, result);
                 }
             }
 
             return result;
         }
 
-        public UserMap GetSingle(long userId) {
+        public UserMap GetSingle(long userId)
+        {
             //var userMap= Repository<IUserMapRepository>().GetSingle(userId);
             var userMap = GetSingle(r => r.UserId == userId);
-            if (userMap != null) {
+            if (userMap != null)
+            {
                 //userMap.GradeInfoExtension = userMap.GradeInfo.DeserializeJson<GradeInfoExtension>();
                 //if (userMap.GradeInfoExtension == null) {
                 //    userMap.GradeInfoExtension = new GradeInfoExtension();
                 //}
 
                 userMap.ParentMapList = userMap.ParentMap.DeserializeJson<List<ParentMap>>();
-                if (userMap.ParentMapList == null) {
-                    userMap.ParentMapList = new List<ParentMap>();
-                }
+                if (userMap.ParentMapList == null) userMap.ParentMapList = new List<ParentMap>();
             }
 
             return userMap;
         }
 
-        public string GetParentMap(long parentId) {
-            if (parentId == 0) {
-                return new List<ParentMap>().ToJson();
-            }
+        public string GetParentMap(long parentId)
+        {
+            if (parentId == 0) return new List<ParentMap>().ToJson();
 
             var userMap = GetSingle(parentId);
 
             var parentMapList = new List<ParentMap>();
             // 如果为空，则给默认值
-            if (userMap == null || parentId <= 0) {
-                return new List<ParentMap>().ToJson();
-            }
+            if (userMap == null || parentId <= 0) return new List<ParentMap>().ToJson();
 
             // 如果推荐的关系图为空个，则初始化推荐人关系图
             // userMap.ParentMap.ToStr().Length<10 字符串格式不正确
-            if (userMap.ParentMap.IsNullOrEmpty() || userMap.ParentMap.ToStr().Length < 10) {
+            if (userMap.ParentMap.IsNullOrEmpty() || userMap.ParentMap.ToStr().Length < 10)
+            {
                 userMap.ParentMap = new List<ParentMap>().ToJson(); // 默认值
                 Repository<IUserMapRepository>().UpdateMap(userMap.UserId, userMap.ParentMap);
                 userMap = GetSingle(parentId);
-            } else {
+            }
+            else
+            {
                 parentMapList = userMap.ParentMap.DeserializeJson<List<ParentMap>>();
             }
 
@@ -103,24 +94,24 @@ namespace Alabo.App.Core.User.Domain.Services {
                 }
             };
             // 将老会员赋值上去
-            foreach (var item in parentMapList) {
-                newParentMapList.Add(new ParentMap {
+            foreach (var item in parentMapList)
+                newParentMapList.Add(new ParentMap
+                {
                     UserId = item.UserId,
                     ParentLevel = item.ParentLevel + 1
                 });
-            }
 
             return newParentMapList.ToJson();
         }
 
-        public void UpdateMap(long userId, long parentId) {
+        public void UpdateMap(long userId, long parentId)
+        {
             var map = GetParentMap(parentId);
-            if (!map.IsNullOrEmpty()) {
-                Repository<IUserMapRepository>().UpdateMap(userId, map);
-            }
+            if (!map.IsNullOrEmpty()) Repository<IUserMapRepository>().UpdateMap(userId, map);
         }
 
-        public ServiceResult UpdateParentUserAfterUserDelete(long userId, long parentId) {
+        public ServiceResult UpdateParentUserAfterUserDelete(long userId, long parentId)
+        {
             //TODO 9月重构注释
             //var userTreeConfig = Resolve<IAutoConfigService>().GetValue<UserTreeConfig>();
             //// 不修改
@@ -155,8 +146,10 @@ namespace Alabo.App.Core.User.Domain.Services {
             return null;
         }
 
-        public void ParentMapTaskQueue() {
-            var backJobParameter = new BackJobParameter {
+        public void ParentMapTaskQueue()
+        {
+            var backJobParameter = new BackJobParameter
+            {
                 ModuleId = TaskQueueModuleId.UserParentUpdate,
                 CheckLastOne = true,
                 ServiceName = typeof(IUserMapService).Name,

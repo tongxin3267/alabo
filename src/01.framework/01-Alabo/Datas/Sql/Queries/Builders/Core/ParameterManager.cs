@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Alabo.Datas.Queries.Enums;
+﻿using Alabo.Datas.Queries.Enums;
 using Alabo.Datas.Sql.Queries.Builders.Abstractions;
+using System.Collections.Generic;
 
 namespace Alabo.Datas.Sql.Queries.Builders.Core
 {
@@ -59,9 +59,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <param name="operator">运算符</param>
         public void Add(string name, object value, Operator? @operator = null)
         {
-            if (string.IsNullOrWhiteSpace(name)) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(name)) return;
 
             _params.Add(name, GetValue(value, @operator));
         }
@@ -71,9 +69,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// </summary>
         private object GetValue(object value, Operator? @operator)
         {
-            if (string.IsNullOrWhiteSpace(Alabo.Extensions.Extensions.SafeString(value))) {
-                return value;
-            }
+            if (string.IsNullOrWhiteSpace(Alabo.Extensions.Extensions.SafeString(value))) return value;
 
             switch (@operator)
             {

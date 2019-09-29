@@ -1,19 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Api.Filter;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis.Filter;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
-using Convert = System.Convert;
 
-namespace Alabo.Core.WebApis.Controller {
-
+namespace Alabo.Framework.Core.WebApis.Controller
+{
     public abstract class ApiDeleteController<TEntity, TKey> : ApiByIdController<TEntity, TKey>
-        where TEntity : class, IAggregateRoot<TEntity, TKey> {
-
-        protected ApiDeleteController() : base() {
-        }
-
+        where TEntity : class, IAggregateRoot<TEntity, TKey>
+    {
         #region 动态删除
 
         /// <summary>
@@ -22,21 +19,16 @@ namespace Alabo.Core.WebApis.Controller {
         [HttpDelete]
         [Display(Description = "删除单条记录")]
         [ApiAuth]
-        public ApiResult QueryDelete([FromBody]TEntity entity) {
+        public ApiResult QueryDelete([FromBody] TEntity entity)
+        {
             var checkResult = RelationCheck(entity);
-            if (!checkResult.Succeeded) {
-                return ApiResult.Failure(checkResult.ToString());
-            }
+            if (!checkResult.Succeeded) return ApiResult.Failure(checkResult.ToString());
 
             var find = BaseService.GetSingle(entity.Id);
-            if (find == null) {
-                return ApiResult.Failure($"删除的数据不存在,Id:{entity.Id}");
-            }
+            if (find == null) return ApiResult.Failure($"删除的数据不存在,Id:{entity.Id}");
 
             var result = BaseService.Delete(entity.Id);
-            if (result) {
-                return ApiResult.Success("删除成功");
-            }
+            if (result) return ApiResult.Success("删除成功");
 
             return ApiResult.Failure("删除失败");
         }
@@ -51,25 +43,19 @@ namespace Alabo.Core.WebApis.Controller {
         [HttpDelete]
         [Display(Description = "删除单条记录")]
         [ApiAuth]
-        public ApiResult QueryUserDelete([FromBody]TEntity entity) {
+        public ApiResult QueryUserDelete([FromBody] TEntity entity)
+        {
             var checkResult = RelationCheck(entity);
-            if (!checkResult.Succeeded) {
-                return ApiResult.Failure(checkResult.ToString());
-            }
+            if (!checkResult.Succeeded) return ApiResult.Failure(checkResult.ToString());
             var find = BaseService.GetSingle(entity.Id);
-            if (find == null) {
-                return ApiResult.Failure($"删除的数据不存在,Id:{entity.Id}");
-            }
+            if (find == null) return ApiResult.Failure($"删除的数据不存在,Id:{entity.Id}");
 
             var dynamicFind = (dynamic)find;
-            if (Convert.ToInt64(dynamicFind.UserId) != AutoModel.BasicUser && AutoModel.BasicUser.Id > 0) {
+            if (Convert.ToInt64(dynamicFind.UserId) != AutoModel.BasicUser && AutoModel.BasicUser.Id > 0)
                 return ApiResult.Failure("您无权删除该数据");
-            }
 
             var result = BaseService.Delete(entity.Id);
-            if (result) {
-                return ApiResult.Success("删除成功");
-            }
+            if (result) return ApiResult.Success("删除成功");
 
             return ApiResult.Failure("删除失败");
         }
@@ -85,46 +71,38 @@ namespace Alabo.Core.WebApis.Controller {
         [HttpPost]
         [Display(Description = "删除单条记录")]
         [ApiAuth]
-        public ApiResult BatchDelete([FromBody] string ids) {
+        public ApiResult BatchDelete([FromBody] string ids)
+        {
             return ApiResult.Failure("改类型不支持api 接口删除");
         }
 
         #endregion 批量删除
 
         /// <summary>
-        /// 删除前判断级联数据
+        ///     删除前判断级联数据
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        private ServiceResult RelationCheck(TEntity entity) {
-            if (entity.Id.IsNullOrEmpty()) {
-                return ServiceResult.FailedWithMessage($"{typeof(TEntity).Name}Id不能为空");
-            }
+        private ServiceResult RelationCheck(TEntity entity)
+        {
+            if (entity.Id.IsNullOrEmpty()) return ServiceResult.FailedWithMessage($"{typeof(TEntity).Name}Id不能为空");
             var deleteAttribute = typeof(TEntity).FullName.GetAutoDeleteAttribute();
-            if (deleteAttribute == null) {
-                return ServiceResult.FailedWithMessage($"{typeof(TEntity).Name}未配置删除特性，不能删除");
-            }
-            if (deleteAttribute.IsAuto && deleteAttribute.EntityType == null) {
-                return ServiceResult.Success;
-            }
-            if (deleteAttribute.EntityType == null) {
+            if (deleteAttribute == null) return ServiceResult.FailedWithMessage($"{typeof(TEntity).Name}未配置删除特性，不能删除");
+            if (deleteAttribute.IsAuto && deleteAttribute.EntityType == null) return ServiceResult.Success;
+            if (deleteAttribute.EntityType == null)
                 return ServiceResult.FailedWithMessage($"{typeof(TEntity).Name}未配置删除级联，不能删除");
-            }
 
-            if (deleteAttribute.RelationId.IsNullOrEmpty()) {
+            if (deleteAttribute.RelationId.IsNullOrEmpty())
                 return ServiceResult.FailedWithMessage($"{typeof(TEntity).Name}未配置RelationId，不能删除");
-            }
             var entityRelation =
                 // var lambda= Lambda.Equal<>()
-                Alabo.Linq.Dynamic.DynamicService.ResolveMethod(deleteAttribute.EntityType.Name, "GetSingle", deleteAttribute.RelationId,
+                Linq.Dynamic.DynamicService.ResolveMethod(deleteAttribute.EntityType.Name, "GetSingle",
+                    deleteAttribute.RelationId,
                     entity.Id);
-            if (!entityRelation.Item1.Succeeded) {
+            if (!entityRelation.Item1.Succeeded)
                 return ServiceResult.FailedWithMessage(entityRelation.Item1.ToString());
-            }
 
-            if (entityRelation.Item2 != null) {
-                return ServiceResult.FailedWithMessage($"有关联数据不能删除");
-            }
+            if (entityRelation.Item2 != null) return ServiceResult.FailedWithMessage("有关联数据不能删除");
 
             return ServiceResult.Success;
         }

@@ -1,9 +1,10 @@
-using MongoDB.Bson;
-using Alabo.App.Cms.Articles.Domain.Entities;
 using Alabo.Domains.Repositories;
+using Alabo.Industry.Cms.Articles.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Cms.Articles.Domain.Repositories {
-
-    public interface IAboutRepository : IRepository<About, ObjectId> {
+namespace Alabo.Industry.Cms.Articles.Domain.Repositories
+{
+    public interface IAboutRepository : IRepository<About, ObjectId>
+    {
     }
 }

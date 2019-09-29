@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Alabo.Datas.Queries.Enums;
+using Alabo.Extensions;
+using Alabo.Reflections;
+using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using MongoDB.Bson;
-using Alabo.Datas.Queries.Enums;
-using Alabo.Extensions;
-using Alabo.Reflections;
 
 namespace Alabo.Linq
 {
@@ -25,20 +25,14 @@ namespace Alabo.Linq
         public static List<string> GetNames<T>(Expression<Func<T, object[]>> expression)
         {
             var result = new List<string>();
-            if (expression == null) {
-                return result;
-            }
+            if (expression == null) return result;
 
-            if (!(expression.Body is NewArrayExpression arrayExpression)) {
-                return result;
-            }
+            if (!(expression.Body is NewArrayExpression arrayExpression)) return result;
 
             foreach (var each in arrayExpression.Expressions)
             {
                 var name = GetName(each);
-                if (string.IsNullOrWhiteSpace(name) == false) {
-                    result.Add(name);
-                }
+                if (string.IsNullOrWhiteSpace(name) == false) result.Add(name);
             }
 
             return result;
@@ -56,9 +50,7 @@ namespace Alabo.Linq
         public static string GetLastName(Expression expression, bool right = false)
         {
             var memberExpression = GetMemberExpression(expression, right);
-            if (memberExpression == null) {
-                return string.Empty;
-            }
+            if (memberExpression == null) return string.Empty;
 
             var result = memberExpression.ToString();
             return result.Substring(result.LastIndexOf(".", StringComparison.Ordinal) + 1);
@@ -76,20 +68,14 @@ namespace Alabo.Linq
         public static List<string> GetLastNames<T>(Expression<Func<T, object[]>> expression)
         {
             var result = new List<string>();
-            if (expression == null) {
-                return result;
-            }
+            if (expression == null) return result;
 
-            if (!(expression.Body is NewArrayExpression arrayExpression)) {
-                return result;
-            }
+            if (!(expression.Body is NewArrayExpression arrayExpression)) return result;
 
             foreach (var each in arrayExpression.Expressions)
             {
                 var name = GetLastName(each);
-                if (string.IsNullOrWhiteSpace(name) == false) {
-                    result.Add(name);
-                }
+                if (string.IsNullOrWhiteSpace(name) == false) result.Add(name);
             }
 
             return result;
@@ -105,17 +91,15 @@ namespace Alabo.Linq
         /// <param name="expression">表达式，范例：t.Name</param>
         public static ParameterExpression GetParameter(Expression expression)
         {
-            if (expression == null) {
-                return null;
-            }
+            if (expression == null) return null;
 
             switch (expression.NodeType)
             {
                 case ExpressionType.Lambda:
-                    return GetParameter(((LambdaExpression) expression).Body);
+                    return GetParameter(((LambdaExpression)expression).Body);
 
                 case ExpressionType.Convert:
-                    return GetParameter(((UnaryExpression) expression).Operand);
+                    return GetParameter(((UnaryExpression)expression).Operand);
 
                 case ExpressionType.Equal:
                 case ExpressionType.NotEqual:
@@ -123,16 +107,16 @@ namespace Alabo.Linq
                 case ExpressionType.LessThan:
                 case ExpressionType.GreaterThanOrEqual:
                 case ExpressionType.LessThanOrEqual:
-                    return GetParameter(((BinaryExpression) expression).Left);
+                    return GetParameter(((BinaryExpression)expression).Left);
 
                 case ExpressionType.MemberAccess:
-                    return GetParameter(((MemberExpression) expression).Expression);
+                    return GetParameter(((MemberExpression)expression).Expression);
 
                 case ExpressionType.Call:
-                    return GetParameter(((MethodCallExpression) expression).Object);
+                    return GetParameter(((MethodCallExpression)expression).Object);
 
                 case ExpressionType.Parameter:
-                    return (ParameterExpression) expression;
+                    return (ParameterExpression)expression;
             }
 
             return null;
@@ -151,9 +135,7 @@ namespace Alabo.Linq
         /// </param>
         public static int GetConditionCount(LambdaExpression expression)
         {
-            if (expression == null) {
-                return 0;
-            }
+            if (expression == null) return 0;
 
             var result = expression.ToString().Replace("AndAlso", "|").Replace("OrElse", "|");
             return result.Split('|').Count();
@@ -189,70 +171,53 @@ namespace Alabo.Linq
         public static ConstantExpression Constant(Expression expression, object value)
         {
             var memberExpression = expression as MemberExpression;
-            if (memberExpression == null) {
-                return Expression.Constant(value);
-            }
+            if (memberExpression == null) return Expression.Constant(value);
             //类型转换
-            if (value == null || value.ToStr().IsNullOrEmpty()) {
-                return null;
-            }
+            if (value == null || value.ToStr().IsNullOrEmpty()) return null;
 
             if (memberExpression.Type == typeof(ObjectId))
             {
                 var changeValue = value.ToStr();
-                if (!changeValue.IsNullOrEmpty()) {
+                if (!changeValue.IsNullOrEmpty())
                     return Expression.Constant(changeValue.ToObjectId(), memberExpression.Type);
-                }
             }
 
             if (memberExpression.Type == typeof(string))
             {
                 var changeValue = value.ToStr();
-                if (!changeValue.IsNullOrEmpty()) {
-                    return Expression.Constant(changeValue, memberExpression.Type);
-                }
+                if (!changeValue.IsNullOrEmpty()) return Expression.Constant(changeValue, memberExpression.Type);
             }
             else if (memberExpression.Type == typeof(int))
             {
-                if (value.ToStr().ConvertToInt(-1) != -1) {
-                    return Expression.Constant(value.ToStr().ConvertToInt(-1), memberExpression.Type);
-                }
+                if (value.ToStr().ConvertToInt() != -1)
+                    return Expression.Constant(value.ToStr().ConvertToInt(), memberExpression.Type);
             }
             else if (memberExpression.Type == typeof(decimal))
             {
-                if (value.ToStr().ConvertToDecimal(-1) != -1) {
-                    return Expression.Constant(value.ToStr().ConvertToDecimal(-1), memberExpression.Type);
-                }
+                if (value.ToStr().ConvertToDecimal() != -1)
+                    return Expression.Constant(value.ToStr().ConvertToDecimal(), memberExpression.Type);
             }
             else if (memberExpression.Type == typeof(long))
             {
-                if (value.ToStr().ConvertToLong(-1) != -1) {
-                    return Expression.Constant(value.ToStr().ConvertToLong(-1), memberExpression.Type);
-                }
+                if (value.ToStr().ConvertToLong() != -1)
+                    return Expression.Constant(value.ToStr().ConvertToLong(), memberExpression.Type);
             }
             else if (memberExpression.Type == typeof(DateTime))
             {
                 var dateTime = value.ToStr().ConvertToDateTime();
-                if (dateTime.Year == 1900) {
-                    dateTime = value.ConvertToDateTimeOfTimeStamp();
-                }
+                if (dateTime.Year == 1900) dateTime = value.ConvertToDateTimeOfTimeStamp();
 
-                if (dateTime.Year != 1900) {
-                    return Expression.Constant(dateTime, memberExpression.Type);
-                }
+                if (dateTime.Year != 1900) return Expression.Constant(dateTime, memberExpression.Type);
             }
             else if (memberExpression.Type == typeof(bool) || memberExpression.Type == typeof(bool))
             {
                 var valueDefault = value.ConvertToNullableBool();
-                if (valueDefault.HasValue) {
-                    return Expression.Constant(value, memberExpression.Type);
-                }
+                if (valueDefault.HasValue) return Expression.Constant(value, memberExpression.Type);
             }
             else if (memberExpression.Type == typeof(Guid))
             {
-                if (!value.ToGuid().IsGuidNullOrEmpty()) {
+                if (!value.ToGuid().IsGuidNullOrEmpty())
                     return Expression.Constant(value.ToGuid(), memberExpression.Type);
-                }
             }
             else if (memberExpression.Type.GetTypeInfo().BaseType?.Name == nameof(Enum))
             {
@@ -442,21 +407,19 @@ namespace Alabo.Linq
         /// <param name="right">取表达式右侧,(l,r) => l.id == r.id，设置为true,返回r.id表达式</param>
         public static MemberExpression GetMemberExpression(Expression expression, bool right = false)
         {
-            if (expression == null) {
-                return null;
-            }
+            if (expression == null) return null;
 
             switch (expression.NodeType)
             {
                 case ExpressionType.Lambda:
-                    return GetMemberExpression(((LambdaExpression) expression).Body, right);
+                    return GetMemberExpression(((LambdaExpression)expression).Body, right);
 
                 case ExpressionType.Convert:
                 case ExpressionType.Not:
-                    return GetMemberExpression(((UnaryExpression) expression).Operand, right);
+                    return GetMemberExpression(((UnaryExpression)expression).Operand, right);
 
                 case ExpressionType.MemberAccess:
-                    return (MemberExpression) expression;
+                    return (MemberExpression)expression;
 
                 case ExpressionType.Equal:
                 case ExpressionType.NotEqual:
@@ -465,7 +428,7 @@ namespace Alabo.Linq
                 case ExpressionType.GreaterThanOrEqual:
                 case ExpressionType.LessThanOrEqual:
                     return GetMemberExpression(
-                        right ? ((BinaryExpression) expression).Right : ((BinaryExpression) expression).Left, right);
+                        right ? ((BinaryExpression)expression).Right : ((BinaryExpression)expression).Left, right);
 
                 case ExpressionType.Call:
                     return GetMethodCallExpressionName(expression);
@@ -479,14 +442,13 @@ namespace Alabo.Linq
         /// </summary>
         private static MemberExpression GetMethodCallExpressionName(Expression expression)
         {
-            var methodCallExpression = (MethodCallExpression) expression;
-            var left = (MemberExpression) methodCallExpression.Object;
+            var methodCallExpression = (MethodCallExpression)expression;
+            var left = (MemberExpression)methodCallExpression.Object;
             if (Reflection.IsGenericCollection(left?.Type))
             {
                 var argumentExpression = methodCallExpression.Arguments.FirstOrDefault();
-                if (argumentExpression != null && argumentExpression.NodeType == ExpressionType.MemberAccess) {
-                    return (MemberExpression) argumentExpression;
-                }
+                if (argumentExpression != null && argumentExpression.NodeType == ExpressionType.MemberAccess)
+                    return (MemberExpression)argumentExpression;
             }
 
             return left;
@@ -511,9 +473,7 @@ namespace Alabo.Linq
         /// </summary>
         public static string GetMemberName(MemberExpression memberExpression)
         {
-            if (memberExpression == null) {
-                return string.Empty;
-            }
+            if (memberExpression == null) return string.Empty;
 
             var result = memberExpression.ToString();
             return result.Substring(result.IndexOf(".", StringComparison.Ordinal) + 1);
@@ -529,17 +489,15 @@ namespace Alabo.Linq
         /// <param name="expression">表达式,范例：t => t.Name == "A"</param>
         public static object GetValue(Expression expression)
         {
-            if (expression == null) {
-                return null;
-            }
+            if (expression == null) return null;
 
             switch (expression.NodeType)
             {
                 case ExpressionType.Lambda:
-                    return GetValue(((LambdaExpression) expression).Body);
+                    return GetValue(((LambdaExpression)expression).Body);
 
                 case ExpressionType.Convert:
-                    return GetValue(((UnaryExpression) expression).Operand);
+                    return GetValue(((UnaryExpression)expression).Operand);
 
                 case ExpressionType.Equal:
                 case ExpressionType.NotEqual:
@@ -547,21 +505,19 @@ namespace Alabo.Linq
                 case ExpressionType.LessThan:
                 case ExpressionType.GreaterThanOrEqual:
                 case ExpressionType.LessThanOrEqual:
-                    return GetValue(((BinaryExpression) expression).Right);
+                    return GetValue(((BinaryExpression)expression).Right);
 
                 case ExpressionType.Call:
                     return GetMethodCallExpressionValue(expression);
 
                 case ExpressionType.MemberAccess:
-                    return GetMemberValue((MemberExpression) expression);
+                    return GetMemberValue((MemberExpression)expression);
 
                 case ExpressionType.Constant:
                     return GetConstantExpressionValue(expression);
 
                 case ExpressionType.Not:
-                    if (expression.Type == typeof(bool)) {
-                        return false;
-                    }
+                    if (expression.Type == typeof(bool)) return false;
 
                     return null;
             }
@@ -574,16 +530,13 @@ namespace Alabo.Linq
         /// </summary>
         private static object GetMethodCallExpressionValue(Expression expression)
         {
-            var methodCallExpression = (MethodCallExpression) expression;
+            var methodCallExpression = (MethodCallExpression)expression;
             var value = GetValue(methodCallExpression.Arguments.FirstOrDefault());
-            if (value != null) {
-                return value;
-            }
+            if (value != null) return value;
 
-            if (methodCallExpression.Object == null) {
+            if (methodCallExpression.Object == null)
                 return methodCallExpression.Type.InvokeMember(methodCallExpression.Method.Name,
                     BindingFlags.InvokeMethod, null, null, null);
-            }
 
             return GetValue(methodCallExpression.Object);
         }
@@ -593,9 +546,7 @@ namespace Alabo.Linq
         /// </summary>
         private static object GetMemberValue(MemberExpression expression)
         {
-            if (expression == null) {
-                return null;
-            }
+            if (expression == null) return null;
 
             var field = expression.Member as FieldInfo;
             if (field != null)
@@ -605,20 +556,14 @@ namespace Alabo.Linq
             }
 
             var property = expression.Member as PropertyInfo;
-            if (property == null) {
-                return null;
-            }
+            if (property == null) return null;
 
-            if (expression.Expression == null) {
-                return property.GetValue(null);
-            }
+            if (expression.Expression == null) return property.GetValue(null);
 
             var value = GetMemberValue(expression.Expression as MemberExpression);
             if (value == null)
             {
-                if (property.PropertyType == typeof(bool)) {
-                    return true;
-                }
+                if (property.PropertyType == typeof(bool)) return true;
 
                 return null;
             }
@@ -631,7 +576,7 @@ namespace Alabo.Linq
         /// </summary>
         private static object GetConstantExpressionValue(Expression expression)
         {
-            var constantExpression = (ConstantExpression) expression;
+            var constantExpression = (ConstantExpression)expression;
             return constantExpression.Value;
         }
 
@@ -645,17 +590,15 @@ namespace Alabo.Linq
         /// <param name="expression">表达式,范例：t => t.Name == "A"</param>
         public static Operator? GetOperator(Expression expression)
         {
-            if (expression == null) {
-                return null;
-            }
+            if (expression == null) return null;
 
             switch (expression.NodeType)
             {
                 case ExpressionType.Lambda:
-                    return GetOperator(((LambdaExpression) expression).Body);
+                    return GetOperator(((LambdaExpression)expression).Body);
 
                 case ExpressionType.Convert:
-                    return GetOperator(((UnaryExpression) expression).Operand);
+                    return GetOperator(((UnaryExpression)expression).Operand);
 
                 case ExpressionType.Equal:
                     return Operator.Equal;
@@ -687,7 +630,7 @@ namespace Alabo.Linq
         /// </summary>
         private static Operator? GetMethodCallExpressionOperator(Expression expression)
         {
-            var methodCallExpression = (MethodCallExpression) expression;
+            var methodCallExpression = (MethodCallExpression)expression;
             switch (methodCallExpression?.Method?.Name?.ToLower())
             {
                 case "contains":
@@ -714,9 +657,7 @@ namespace Alabo.Linq
         public static List<List<Expression>> GetGroupPredicates(Expression expression)
         {
             var result = new List<List<Expression>>();
-            if (expression == null) {
-                return result;
-            }
+            if (expression == null) return result;
 
             AddPredicates(expression, result, CreateGroup(result));
             return result;
@@ -740,17 +681,17 @@ namespace Alabo.Linq
             switch (expression.NodeType)
             {
                 case ExpressionType.Lambda:
-                    AddPredicates(((LambdaExpression) expression).Body, result, group);
+                    AddPredicates(((LambdaExpression)expression).Body, result, group);
                     break;
 
                 case ExpressionType.OrElse:
-                    AddPredicates(((BinaryExpression) expression).Left, result, group);
-                    AddPredicates(((BinaryExpression) expression).Right, result, CreateGroup(result));
+                    AddPredicates(((BinaryExpression)expression).Left, result, group);
+                    AddPredicates(((BinaryExpression)expression).Right, result, CreateGroup(result));
                     break;
 
                 case ExpressionType.AndAlso:
-                    AddPredicates(((BinaryExpression) expression).Left, result, group);
-                    AddPredicates(((BinaryExpression) expression).Right, result, group);
+                    AddPredicates(((BinaryExpression)expression).Left, result, group);
+                    AddPredicates(((BinaryExpression)expression).Right, result, group);
                     break;
 
                 default:

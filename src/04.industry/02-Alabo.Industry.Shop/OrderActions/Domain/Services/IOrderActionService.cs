@@ -1,28 +1,30 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Order.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Entities.Extensions;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.App.Shop.Order.ViewModels;
-using Alabo.App.Shop.Order.ViewModels.OrderEdit;
+﻿using System.Collections.Generic;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Framework.Basic.Address.Domain.Entities;
+using Alabo.Industry.Shop.OrderActions.Domain.Entities;
+using Alabo.Industry.Shop.OrderActions.Domain.Enums;
+using Alabo.Industry.Shop.Orders;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.Orders.Dtos;
+using Alabo.Industry.Shop.Orders.ViewModels;
+using Alabo.Industry.Shop.Orders.ViewModels.OrderEdit;
 using Alabo.Users.Entities;
+using Microsoft.AspNetCore.Http;
 
-namespace Alabo.App.Shop.Order.Domain.Services {
-
-    public interface IOrderActionService : IService<OrderAction, long> {
+namespace Alabo.Industry.Shop.OrderActions.Domain.Services
+{
+    public interface IOrderActionService : IService<OrderAction, long>
+    {
         /// <summary>
         ///     添加卖家评价
         /// </summary>
         /// <param name="httpContext"></param>
-
         ServiceResult Rate(DefaultHttpContext httpContext);
 
         /// <summary>
-        /// 添加卖家评价 (2019.03.31 新用途)
+        ///     添加卖家评价 (2019.03.31 新用途)
         /// </summary>
         /// <param name="modelIn"></param>
         /// <returns></returns>
@@ -32,7 +34,6 @@ namespace Alabo.App.Shop.Order.Domain.Services {
         ///     取消订单
         /// </summary>
         /// <param name="httpContext"></param>
-
         ServiceResult Cancle(DefaultHttpContext httpContext);
 
         /// <summary>
@@ -45,11 +46,10 @@ namespace Alabo.App.Shop.Order.Domain.Services {
         ///     删除订单
         /// </summary>
         /// <param name="httpContext"></param>
-
         ServiceResult Delete(DefaultHttpContext httpContext);
 
         /// <summary>
-        /// 删除订单(03.31 新用途)
+        ///     删除订单(03.31 新用途)
         /// </summary>
         /// <param name="modelIn"></param>
         /// <returns></returns>
@@ -62,7 +62,7 @@ namespace Alabo.App.Shop.Order.Domain.Services {
         /// <param name="order">The order.</param>
         /// <param name="user">The user.</param>
         /// <param name="actionType">Type of the action.</param>
-        void Add(Entities.Order order, User user, OrderActionType actionType);
+        void Add(Order order, User user, OrderActionType actionType);
 
         /// <summary>
         ///     获取所有订单操作方式的特性
@@ -123,7 +123,7 @@ namespace Alabo.App.Shop.Order.Domain.Services {
         ServiceResult Address(DefaultHttpContext httpContext);
 
         /// <summary>
-        /// 修改地址 (2019.03.31 新用途)
+        ///     修改地址 (2019.03.31 新用途)
         /// </summary>
         /// <param name="modelIn"></param>
         /// <param name="orderId"></param>
@@ -131,7 +131,7 @@ namespace Alabo.App.Shop.Order.Domain.Services {
         ServiceResult Address(UserAddress modelIn, long orderId);
 
         /// <summary>
-        /// 导出表格
+        ///     导出表格
         /// </summary>
         /// <returns></returns>
         PagedList<OrderToExcel> GetOrdersToExcel(object query);

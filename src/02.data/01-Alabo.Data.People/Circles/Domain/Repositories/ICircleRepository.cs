@@ -1,13 +1,10 @@
-using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
+using Alabo.Data.People.Circles.Domain.Entities;
 using Alabo.Domains.Repositories;
-using Alabo.App.Agent.Circle.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Agent.Circle.Domain.Repositories {
-
-    public interface ICircleRepository : IRepository<Entities.Circle, ObjectId> {
+namespace Alabo.Data.People.Circles.Domain.Repositories
+{
+    public interface ICircleRepository : IRepository<Circle, ObjectId>
+    {
     }
 }

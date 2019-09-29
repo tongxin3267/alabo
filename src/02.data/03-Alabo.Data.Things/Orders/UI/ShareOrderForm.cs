@@ -1,24 +1,25 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.Core.Enums.Enum;
+﻿using Alabo.Data.Things.Orders.Domain.Entities;
+using Alabo.Data.Things.Orders.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Mapping;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
+using Alabo.UI.Design.AutoForms;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.Tasks.Domain.Entities {
-
+namespace Alabo.Data.Things.Orders.UI
+{
     /// <summary>
     ///     分润订单
     /// </summary>
-    [ClassProperty(Name = "分润订单", Icon = "fa fa-file", Description = "分润订单", ListApi = "Api//AdminBasic/List?Service=IShareOrderService&Method=GetPagedList",
+    [ClassProperty(Name = "分润订单", Icon = "fa fa-file", Description = "分润订单",
+        ListApi = "Api//AdminBasic/List?Service=IShareOrderService&Method=GetPagedList",
         SideBarType = SideBarType.FenRunSideBar)]
-    public class ShareOrderForm : UIBase, IAutoForm {
-
+    public class ShareOrderForm : UIBase, IAutoForm
+    {
         /// <summary>
         ///     订单金额，分润的金额基数，如果是商品金额，则写商品金额，如果是分润价则使用分润价
         /// </summary>
@@ -99,18 +100,20 @@ namespace Alabo.App.Core.Tasks.Domain.Entities {
         public long ExecuteCount { get; set; }
 
         /// <summary>
-        /// 转换成Id
+        ///     转换成Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
             var shareOrderId = ToId<long>(id);
             var shareOrderView = Resolve<IShareOrderService>().GetViewById(shareOrderId);
             var model = AutoMapping.SetValue<ShareOrderForm>(shareOrderView);
             return ToAutoForm(model);
         }
 
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
             var cartView = AutoMapping.SetValue<ShareOrder>(model);
             var result = Resolve<IShareOrderService>().AddOrUpdate(cartView);
             return new ServiceResult(result);

@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.App.Shop.Activitys.Modules.GroupBuy.Dtos {
-
+namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Dtos
+{
     /// <summary>
     ///     Class GroupBuyProductRecord.
     ///     商品拼团记录
     /// </summary>
-    public class GroupBuyProductRecord {
-
+    public class GroupBuyProductRecord
+    {
         /// <summary>
         ///     Gets or sets the total count.
         ///     总拼团人员
@@ -50,8 +50,8 @@ namespace Alabo.App.Shop.Activitys.Modules.GroupBuy.Dtos {
     /// <summary>
     ///     Class ProductRecordUser.
     /// </summary>
-    public class GroupBuyRecordUser {
-
+    public class GroupBuyRecordUser
+    {
         /// <summary>
         ///     Gets or sets the is father.
         ///     是否为拼主

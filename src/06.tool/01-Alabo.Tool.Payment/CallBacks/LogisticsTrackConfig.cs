@@ -1,13 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.ApiStore.CallBacks {
-
+namespace Alabo.Tool.Payment.CallBacks
+{
     [NotMapped]
     /// <summary>
     /// 物流跟踪配置
@@ -15,8 +14,8 @@ namespace Alabo.App.Core.ApiStore.CallBacks {
     [ClassProperty(Name = "物流跟踪配置", Icon = "fa fa-puzzle-piece",
         SideBarType = SideBarType.ApiStoreSideBar,
         SortOrder = 2, Description = "物流跟踪配置")]
-    public class LogisticsTrackConfig : BaseViewModel, IAutoConfig {
-
+    public class LogisticsTrackConfig : BaseViewModel, IAutoConfig
+    {
         /// <summary>
         ///     是否启用
         /// </summary>
@@ -45,7 +44,8 @@ namespace Alabo.App.Core.ApiStore.CallBacks {
         [Required]
         public string Key { get; set; } = "";
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

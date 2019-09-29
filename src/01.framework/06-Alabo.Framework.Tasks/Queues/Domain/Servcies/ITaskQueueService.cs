@@ -1,36 +1,36 @@
-﻿using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Enums;
+﻿using System;
+using System.Collections.Generic;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Domains.Services;
+using Alabo.Framework.Tasks.Queues.Domain.Entities;
+using Alabo.Framework.Tasks.Queues.Domain.Enums;
+using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Schedules;
-using System;
-using System.Collections.Generic;
-using Alabo.App.Core.Tasks.ResultModel;
 
-namespace Alabo.App.Core.Tasks.Domain.Services {
-
+namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
+{
     /// <summary>
     ///     Interface ITaskQueueService
     /// </summary>
     /// <seealso cref="Alabo.Domains.Services.IService" />
-    public interface ITaskQueueService : IService<TaskQueue, long> {
-
+    public interface ITaskQueueService : IService<TaskQueue, long>
+    {
         /// <summary>
-        /// 添加后台队列任务，比如二维码更新、推荐下修改、奖金池统计等
+        ///     添加后台队列任务，比如二维码更新、推荐下修改、奖金池统计等
         /// </summary>
         /// <param name="backJobParameter"></param>
         /// <returns></returns>
         ServiceResult AddBackJob(BackJobParameter backJobParameter);
 
         /// <summary>
-        /// 获取为处理的后台作业订单
+        ///     获取为处理的后台作业订单
         /// </summary>
         /// <returns></returns>
         IList<TaskQueue> GetBackJobPendingList();
 
         /// <summary>
-        /// 获取后台升级相关，未处理的订单
+        ///     获取后台升级相关，未处理的订单
         /// </summary>
         /// <returns></returns>
         IList<TaskQueue> GetUpgradePendingList();

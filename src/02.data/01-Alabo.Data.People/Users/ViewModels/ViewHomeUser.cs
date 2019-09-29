@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.Core.Enums.Enum;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Users.Enum;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.User.ViewModels {
-
+namespace Alabo.Data.People.Users.ViewModels
+{
     /// <summary>
     ///     会员管理
     /// </summary>
     [ClassProperty(Name = "我推荐的会员", Icon = "fa fa-puzzle-piece", Description = "我推荐的会员")]
-    public class ViewHomeUser : BaseViewModel {
-
+    public class ViewHomeUser : BaseViewModel
+    {
         /// <summary>
         ///     Gets or sets Id标识
         /// </summary>
@@ -89,14 +88,15 @@ namespace Alabo.App.Core.User.ViewModels {
         /// </summary>
         [Display(Name = "实名?")]
         [Field(ControlsType = ControlsType.DropdownList, GroupTabId = 1, Width = "150",
-            DataSource = "Alabo.Core.Enums.Enum.IdentityStatus", ListShow = true, SortOrder = 8)]
+            DataSource = "Alabo.Framework.Core.Enums.Enum.IdentityStatus", ListShow = true, SortOrder = 8)]
         public IdentityStatus IdentityStatus { get; set; } = IdentityStatus.IsNoPost;
 
         /// <summary>
         ///     性别
         /// </summary>
         [Display(Name = "性别")]
-        [Field(ControlsType = ControlsType.DropdownList, GroupTabId = 1, DataSource = "Alabo.Core.Enums.Enum.Sex",
+        [Field(ControlsType = ControlsType.DropdownList, GroupTabId = 1,
+            DataSource = "Alabo.Framework.Core.Enums.Enum.Sex",
             Width = "150", ListShow = true, SortOrder = 10)]
         public Sex Sex { get; set; } = Sex.Man;
 
@@ -133,10 +133,9 @@ namespace Alabo.App.Core.User.ViewModels {
         ///     获取s the avator.
         /// </summary>
         /// <param name="size">The size.</param>
-        public string GetAvator(int size = 48) {
-            if (Avator.IsNullOrEmpty()) {
-                return $@"/wwwroot/static/images/avator/{Sex}_{size}.png";
-            }
+        public string GetAvator(int size = 48)
+        {
+            if (Avator.IsNullOrEmpty()) return $@"/wwwroot/static/images/avator/{Sex}_{size}.png";
 
             return Avator;
         }
@@ -144,7 +143,8 @@ namespace Alabo.App.Core.User.ViewModels {
         /// <summary>
         ///     操作链接
         /// </summary>
-        public IEnumerable ViewLinks() {
+        public IEnumerable ViewLinks()
+        {
             var quickLinks = new List<ViewLink>
             {
                 new ViewLink("详情", "/Admin/User/Edit?id=[[Id]]", Icons.Edit, LinkType.ColumnLink)

@@ -12,13 +12,9 @@ namespace Alabo.Datas.Dapper.MySql
         /// </summary>
         public string SafeName(string name)
         {
-            if (string.IsNullOrWhiteSpace(name)) {
-                return string.Empty;
-            }
+            if (string.IsNullOrWhiteSpace(name)) return string.Empty;
 
-            if (name == "*") {
-                return name;
-            }
+            if (name == "*") return name;
 
             name = name.Trim().TrimStart('`').TrimEnd('`');
             return $"`{name}`";

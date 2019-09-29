@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Alabo.Domains.Entities;
+﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Validations;
 
-namespace Alabo.App.Market.UserRightss.Domain.Dtos
+namespace Alabo.Cloud.People.UserRightss.Domain.Dtos
 {
     /// <summary>
-    /// 增加端口
+    ///     增加端口
     /// </summary>
     public class AddPortsInput
     {
         /// <summary>
-        /// 登陆用户Id
+        ///     登陆用户Id
         /// </summary>
-        [Range(0, UInt64.MaxValue, ErrorMessage = "用户ID必须大于0")]
+        [Range(0, ulong.MaxValue, ErrorMessage = "用户ID必须大于0")]
         public long LoginUserId { get; set; }
 
         /// <summary>
@@ -26,33 +22,33 @@ namespace Alabo.App.Market.UserRightss.Domain.Dtos
         public string Mobile { get; set; }
 
         /// <summary>
-        /// 标准商家
+        ///     标准商家
         /// </summary>
-        [Range(0, UInt64.MaxValue, ErrorMessage = "数值范围必须大于0")]
+        [Range(0, ulong.MaxValue, ErrorMessage = "数值范围必须大于0")]
         public long Grade1 { get; set; }
 
         /// <summary>
-        /// 众享商家
+        ///     众享商家
         /// </summary>
-        [Range(0, UInt64.MaxValue, ErrorMessage = "数值范围必须大于0")]
+        [Range(0, ulong.MaxValue, ErrorMessage = "数值范围必须大于0")]
         public long Grade2 { get; set; }
 
         /// <summary>
-        /// 至尊商家
+        ///     至尊商家
         /// </summary>
-        [Range(0, UInt64.MaxValue, ErrorMessage = "数值范围必须大于0")]
+        [Range(0, ulong.MaxValue, ErrorMessage = "数值范围必须大于0")]
         public long Grade3 { get; set; }
 
         /// <summary>
-        /// 准营销中心
+        ///     准营销中心
         /// </summary>
-        [Range(0, UInt64.MaxValue, ErrorMessage = "数值范围必须大于0")]
+        [Range(0, ulong.MaxValue, ErrorMessage = "数值范围必须大于0")]
         public long Grade4 { get; set; }
 
         /// <summary>
-        /// 营销中心
+        ///     营销中心
         /// </summary>
-        [Range(0, UInt64.MaxValue, ErrorMessage = "数值范围必须大于0")]
+        [Range(0, ulong.MaxValue, ErrorMessage = "数值范围必须大于0")]
         public long Grade5 { get; set; }
     }
 }

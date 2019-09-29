@@ -1,18 +1,18 @@
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Industry.Cms.Articles.Domain.Entities;
+using Alabo.Industry.Cms.Articles.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
-using Alabo.App.Cms.Articles.Domain.Entities;
-using Alabo.App.Cms.Articles.Domain.Services;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Cms.Articles.Controllers {
-
+namespace Alabo.Industry.Cms.Articles.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/SinglePage/[action]")]
-    public class ApiSinglePageController : ApiBaseController<SinglePage, ObjectId> {
-
-        public ApiSinglePageController() : base() {
+    public class ApiSinglePageController : ApiBaseController<SinglePage, ObjectId>
+    {
+        public ApiSinglePageController()
+        {
             BaseService = Resolve<ISinglePageService>();
         }
     }

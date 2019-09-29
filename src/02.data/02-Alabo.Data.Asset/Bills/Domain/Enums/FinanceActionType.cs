@@ -1,37 +1,37 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.Finance.Domain.Enums {
-
+namespace Alabo.App.Asset.Bills.Domain.Enums
+{
     /// <summary>
-    /// FinanceActionType
+    ///     FinanceActionType
     /// </summary>
     [ClassProperty(Name = "资金变化类型")]
-    public enum FinanceActionType {
-
+    public enum FinanceActionType
+    {
         /// <summary>
-        /// 增加
+        ///     增加
         /// </summary>
         [Display(Name = "增加")]
         [LabelCssClass(BadgeColorCalss.Metal)]
         Add,
 
         /// <summary>
-        /// 减少
+        ///     减少
         /// </summary>
         [Display(Name = "减少")]
         [LabelCssClass(BadgeColorCalss.Metal)]
         Reduce,
 
         /// <summary>
-        /// 冻结
+        ///     冻结
         /// </summary>
         [Display(Name = "冻结")]
         [LabelCssClass(BadgeColorCalss.Metal)]
         Freeze,
 
         /// <summary>
-        /// 解冻
+        ///     解冻
         /// </summary>
         [Display(Name = "解冻")]
         [LabelCssClass(BadgeColorCalss.Metal)]

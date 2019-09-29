@@ -1,21 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Regexs;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.User.Domain.Dtos {
-
+namespace Alabo.Data.People.Users.Dtos
+{
     /// <summary>
     ///     找回密码
     /// </summary>
     [ClassProperty(Name = "找回密码", Icon = "fa fa-puzzle-piece", Description = "找回密码", PostApi = "Api/User/FindPassword",
         SuccessReturn = "Api/User/GetLoginform")]
-    public class FindPasswordInput : EntityDto {
-
+    public class FindPasswordInput : EntityDto
+    {
         /// <summary>
         ///     用户名
         /// </summary>

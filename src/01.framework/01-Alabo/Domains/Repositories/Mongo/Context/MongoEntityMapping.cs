@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Alabo.Reflections;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Reflections;
 
 namespace Alabo.Domains.Repositories.Mongo.Context
 {
@@ -24,7 +24,7 @@ namespace Alabo.Domains.Repositories.Mongo.Context
                 if (attribute != null)
                 {
                     tableName = attribute.Name;
-                    if (!TableMappingCache.ContainsKey(type)) {
+                    if (!TableMappingCache.ContainsKey(type))
                         try
                         {
                             TableMappingCache.TryAdd(type, tableName);
@@ -33,7 +33,6 @@ namespace Alabo.Domains.Repositories.Mongo.Context
                         {
                             Console.WriteLine(ex.Message);
                         }
-                    }
                 }
             }
 

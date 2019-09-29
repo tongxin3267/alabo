@@ -1,14 +1,13 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Core.Enums.Enum;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Query.Dto;
+﻿using Alabo.Domains.Query.Dto;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Validations;
+using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.Transfer {
-
-    public class TransferApiInput : ApiInputDto {
-
+namespace Alabo.App.Asset.Transfers.Dtos
+{
+    public class TransferApiInput : ApiInputDto
+    {
         /// <summary>
         ///     Gets or sets the name of the other 会员.
         /// </summary>

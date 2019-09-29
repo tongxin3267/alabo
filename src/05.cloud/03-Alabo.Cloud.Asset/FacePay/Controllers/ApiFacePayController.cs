@@ -1,59 +1,31 @@
 using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using Alabo.Domains.Entities;
-using Microsoft.AspNetCore.Mvc;
-using Alabo.App.Core.Api.Filter;
-using Alabo.App.Core.Common;
-using MongoDB.Bson;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.User;
-using Alabo.RestfulApi;
-using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.Domains.Services;
-using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.Controllers;
-using Face = Alabo.App.Market.FacePay.Domain.Entities;
-using Alabo.App.Market.FacePay.Domain.Services;
-using ZKCloud.Open.ApiBase.Models;
+using Alabo.App.Asset.Accounts.Domain.Services;
+using Alabo.App.Asset.Bills.Domain.Entities;
+using Alabo.App.Asset.Bills.Domain.Services;
+using Alabo.Cloud.Asset.FacePay.Domain.Services;
+using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.Helpers;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.Core.Enums.Enum;
-using Alabo.Domains.Enums;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
+using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Market.FacePay.Controllers
+namespace Alabo.Cloud.Asset.FacePay.Controllers
 {
-
     [ApiExceptionFilter]
     [Route("Api/FacePay/[action]")]
     public class ApiFacePayController : ApiBaseController<Domain.Entities.FacePay, ObjectId>
     {
-        
-       
-
-        public ApiFacePayController(
-            ) : base()
-        {
-        }
-
         [HttpPost]
-        public ApiResult Pay([FromBody] Face.FacePay model)
+        public ApiResult Pay([FromBody] Domain.Entities.FacePay model)
         {
             var user = Ioc.Resolve<IUserService>().GetSingle(x => x.Id == model.UserId);
-            if (user == null)
-            {
-                return ApiResult.Failure($"用户不存在!");
-            }
+            if (user == null) return ApiResult.Failure("用户不存在!");
 
             var account = Resolve<IAccountService>().GetAccount(user.Id, Currency.Cny);
-            if (account.Amount < model.Amount)
-            {
-                return ApiResult.Failure("余额不足，请充值");
-            }
+            if (account.Amount < model.Amount) return ApiResult.Failure("余额不足，请充值");
 
             var rs = Ioc.Resolve<IFacePayService>().Add(model);
             if (rs)
@@ -63,7 +35,7 @@ namespace Alabo.App.Market.FacePay.Controllers
 
                 if (rsUpdate)
                 {
-                    Bill billModel = new Bill()
+                    var billModel = new Bill
                     {
                         AfterAmount = account.Amount,
                         CreateTime = DateTime.Now,
@@ -72,10 +44,9 @@ namespace Alabo.App.Market.FacePay.Controllers
                         Intro = "当面付支出-" + model.Amount,
                         Type = BillActionType.Shopping,
                         UserId = user.Id,
-                        UserName = user.UserName,
+                        UserName = user.UserName
                     };
                     Ioc.Resolve<IBillService>().AddOrUpdate(billModel);
-
                 }
 
                 return ApiResult.Success(rsUpdate);

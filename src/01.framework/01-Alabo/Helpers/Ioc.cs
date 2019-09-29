@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Alabo.Dependency;
+using Alabo.Extensions;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Extensions.DependencyInjection;
-using Alabo.Dependency;
-using Alabo.Extensions;
 
 namespace Alabo.Helpers
 {
@@ -47,7 +47,7 @@ namespace Alabo.Helpers
         /// <param name="name">服务名称</param>
         public static List<T> ResolveAll<T>(Type type, string name = null)
         {
-            return ((IEnumerable<T>) DefaultContainer.CreateList(type, name)).ToList();
+            return ((IEnumerable<T>)DefaultContainer.CreateList(type, name)).ToList();
         }
 
         /// <summary>
@@ -58,9 +58,7 @@ namespace Alabo.Helpers
         public static T Resolve<T>(string name = null)
         {
             var scope = GetScope(CurrentScope);
-            if (scope != null) {
-                return scope.Resolve<T>();
-            }
+            if (scope != null) return scope.Resolve<T>();
 
             return DefaultContainer.Create<T>(name);
         }
@@ -73,7 +71,7 @@ namespace Alabo.Helpers
         /// <param name="name">服务名称</param>
         public static T Resolve<T>(Type type, string name = null)
         {
-            return (T) DefaultContainer.Create(type, name);
+            return (T)DefaultContainer.Create(type, name);
         }
 
         /// <summary>
@@ -92,9 +90,7 @@ namespace Alabo.Helpers
         public static object Resolve(string fullName)
         {
             var type = fullName.GetTypeByName();
-            if (type != null) {
-                return ResolveType(type);
-            }
+            if (type != null) return ResolveType(type);
 
             return null;
         }
@@ -155,9 +151,7 @@ namespace Alabo.Helpers
         /// <param name="scope"></param>
         public static void AddScope(int hashCode, IScope scope)
         {
-            if (!_scopeDictionaries.ContainsKey(hashCode)) {
-                _scopeDictionaries.TryAdd(hashCode, scope);
-            }
+            if (!_scopeDictionaries.ContainsKey(hashCode)) _scopeDictionaries.TryAdd(hashCode, scope);
         }
 
         /// <summary>
@@ -167,9 +161,7 @@ namespace Alabo.Helpers
         /// <returns></returns>
         private static IScope GetScope(int hashCode)
         {
-            if (_scopeDictionaries.ContainsKey(hashCode)) {
-                return _scopeDictionaries[hashCode];
-            }
+            if (_scopeDictionaries.ContainsKey(hashCode)) return _scopeDictionaries[hashCode];
 
             return null;
         }
@@ -185,6 +177,6 @@ namespace Alabo.Helpers
             return scope;
         }
 
-        #endregion
+        #endregion scope
     }
 }

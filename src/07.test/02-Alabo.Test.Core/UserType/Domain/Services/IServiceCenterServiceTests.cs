@@ -1,8 +1,7 @@
-using Xunit;
-using Alabo.App.Core.UserType.Domain.Services;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
+using Xunit;
 
 namespace Alabo.Test.Core.UserType.Domain.Services
 {

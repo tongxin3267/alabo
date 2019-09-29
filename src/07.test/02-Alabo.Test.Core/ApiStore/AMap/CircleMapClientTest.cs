@@ -1,8 +1,7 @@
-﻿using Xunit;
-using Alabo.App.Core.ApiStore.AMap.CircleMap;
-using Alabo.App.Core.Common.Domain.Services;
+﻿using Alabo.Data.People.Circles.Client;
 using Alabo.Extensions;
 using Alabo.Test.Base.Core.Model;
+using Xunit;
 
 namespace Alabo.Test.Core.ApiStore.AMap
 {

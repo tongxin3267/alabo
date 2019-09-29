@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Alabo.App.Shop.Product.Domain.Dtos {
-
+namespace Alabo.Industry.Shop.Products.Dtos
+{
     /// <summary>
     ///     Sku价格
     /// </summary>
-    public class SkuPrice {
-
+    public class SkuPrice
+    {
         /// <summary>
         ///     Gets or sets the sku identifier.
         /// </summary>

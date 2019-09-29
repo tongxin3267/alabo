@@ -1,7 +1,7 @@
+using Alabo.Extensions;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Alabo.Extensions;
 
 namespace Alabo.Files
 {
@@ -22,9 +22,7 @@ namespace Alabo.Files
             {
                 childPath += $"{item}\\";
                 var directoryInfo = new DirectoryInfo(childPath);
-                if (!Directory.Exists(directoryInfo.FullName)) {
-                    Directory.CreateDirectory(directoryInfo.FullName);
-                }
+                if (!Directory.Exists(directoryInfo.FullName)) Directory.CreateDirectory(directoryInfo.FullName);
             }
         }
 

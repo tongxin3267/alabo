@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Linq;
-using System.Threading.Tasks;
-using MongoDB.Bson;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Dependency;
 using Alabo.Helpers;
 using Alabo.Runtime;
 using Alabo.Tenants.Domain.Entities;
-using Alabo.Tenants.Domain.Services;
-using Alabo.Tenants.Extensions;
+using MongoDB.Bson;
+using System;
+using System.Collections.Concurrent;
 
-namespace Alabo.Tenants {
-
-    public class TenantContext {
-
+namespace Alabo.Tenants
+{
+    public class TenantContext
+    {
         /// <summary>
         ///     Tenants
         /// </summary>
@@ -24,8 +20,7 @@ namespace Alabo.Tenants {
         /// <summary>
         ///     current tenant thread static
         /// </summary>
-        [ThreadStatic]
-        public static string CurrentTenant;
+        [ThreadStatic] public static string CurrentTenant;
 
         /// <summary>
         ///     is tenant
@@ -38,7 +33,7 @@ namespace Alabo.Tenants {
         public static string Master => "master";
 
         /// <summary>
-        /// 当前租户的站点Id
+        ///     当前租户的站点Id
         /// </summary>
         public static ObjectId SiteId { get; set; }
 
@@ -46,10 +41,9 @@ namespace Alabo.Tenants {
         ///     get current tenant
         /// </summary>
         /// <returns></returns>
-        public static string GetCurrentTenant() {
-            if (string.IsNullOrWhiteSpace(CurrentTenant)) {
-                return string.Empty;
-            }
+        public static string GetCurrentTenant()
+        {
+            if (string.IsNullOrWhiteSpace(CurrentTenant)) return string.Empty;
 
             return GetTenant(CurrentTenant);
         }
@@ -58,7 +52,8 @@ namespace Alabo.Tenants {
         ///     get master tenant
         /// </summary>
         /// <returns></returns>
-        public static string GetMasterTenant() {
+        public static string GetMasterTenant()
+        {
             return GetTenant(Master);
         }
 
@@ -66,10 +61,9 @@ namespace Alabo.Tenants {
         ///     get tenant
         /// </summary>
         /// <param name="name"></param>
-        public static string GetTenant(string name) {
-            if (_tenantDictionary.ContainsKey(name)) {
-                return _tenantDictionary[name];
-            }
+        public static string GetTenant(string name)
+        {
+            if (_tenantDictionary.ContainsKey(name)) return _tenantDictionary[name];
 
             return string.Empty;
         }
@@ -78,7 +72,8 @@ namespace Alabo.Tenants {
         ///     add master tenant
         /// </summary>
         /// <param name="value"></param>
-        public static void AddMasterTenant(string value) {
+        public static void AddMasterTenant(string value)
+        {
             AddTenant(Master, value);
         }
 
@@ -87,18 +82,19 @@ namespace Alabo.Tenants {
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
-        public static void AddTenant(string name, string value) {
-            if (!_tenantDictionary.ContainsKey(name)) {
-                _tenantDictionary.TryAdd(name, value);
-            }
+        public static void AddTenant(string name, string value)
+        {
+            if (!_tenantDictionary.ContainsKey(name)) _tenantDictionary.TryAdd(name, value);
         }
 
         /// <summary>
         ///     get master tenant
         /// </summary>
         /// <returns></returns>
-        public static Tenant GetDefaultMasterTenant() {
-            return new Tenant {
+        public static Tenant GetDefaultMasterTenant()
+        {
+            return new Tenant
+            {
                 Name = Master,
                 DatabaseName = RuntimeContext.GetTenantDataBase()
             };
@@ -109,10 +105,9 @@ namespace Alabo.Tenants {
         /// </summary>
         /// <param name="scope"></param>
         /// <param name="tenantName"></param>
-        public static void SwitchDatabase(IScope scope, string tenantName) {
-            if (string.IsNullOrWhiteSpace(tenantName)) {
-                return;
-            }
+        public static void SwitchDatabase(IScope scope, string tenantName)
+        {
+            if (string.IsNullOrWhiteSpace(tenantName)) return;
 
             CurrentTenant = tenantName;
             Ioc.CurrentScope = scope.GetHashCode();

@@ -1,32 +1,32 @@
-﻿using MongoDB.Bson;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Core.User.ViewModels;
-using Alabo.Core.Enums.Enum;
+using Alabo.Cloud.People.Identities.Domain.Entities;
+using Alabo.Data.People.Users.ViewModels;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Mapping;
+using Alabo.Users.Enum;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.User.Domain.Services {
-
+namespace Alabo.Cloud.People.Identities.Domain.Services
+{
     /// <summary>
     ///     Class IdentityService.
     /// </summary>
     /// <seealso cref="Alabo.Domains.Services.ServiceBase" />
-    /// <seealso cref="Alabo.App.Core.User.Domain.Services.IIdentityService" />
-    public class IdentityService : ServiceBase<Identity, ObjectId>, IIdentityService {
-
+    /// <seealso cref="IIdentityService" />
+    public class IdentityService : ServiceBase<Identity, ObjectId>, IIdentityService
+    {
         public IdentityService(IUnitOfWork unitOfWork, IRepository<Identity, ObjectId> repository) : base(unitOfWork,
-            repository) {
+            repository)
+        {
         }
 
         /// <summary>
@@ -77,10 +77,11 @@ namespace Alabo.App.Core.User.Domain.Services {
 
         //    return ServiceResult.FailedWithMessage("实名认证失败");
         //}
-
-        public IdentityView GetView(string id) {
-            IdentityView view = new IdentityView();
-            if (!id.IsNullOrEmpty()) {
+        public IdentityView GetView(string id)
+        {
+            var view = new IdentityView();
+            if (!id.IsNullOrEmpty())
+            {
                 var identity = Resolve<IIdentityService>().GetSingle(u => u.Id == id.ToObjectId());
                 view = AutoMapping.SetValue<IdentityView>(identity);
             }
@@ -88,63 +89,68 @@ namespace Alabo.App.Core.User.Domain.Services {
             return view;
         }
 
-        public bool IsIdentity(long userId) {
+        public bool IsIdentity(long userId)
+        {
             var model = GetSingle(r => r.UserId == userId);
-            if (model == null) {
-                return false;
-            }
-            if (model.Status == IdentityStatus.Succeed) {
-                return true;
-            }
+            if (model == null) return false;
+            if (model.Status == IdentityStatus.Succeed) return true;
             return false;
         }
 
-        public ServiceResult Identity(Identity view) {
-            String url = $"http://apistore.5ug.com/Api/ApiStore/Identity?IdentifyNum={view.CardNo}&UserName={view.RealName}";
-            HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.CreateDefault(new Uri(url));
+        public ServiceResult Identity(Identity view)
+        {
+            var url =
+                $"http://apistore.5ug.com/Api/ApiStore/Identity?IdentifyNum={view.CardNo}&UserName={view.RealName}";
+            var httpRequest = (HttpWebRequest) WebRequest.CreateDefault(new Uri(url));
             HttpWebResponse httpResponse = null;
 
-            try {
-                httpResponse = (HttpWebResponse)httpRequest.GetResponse();
-            } catch (WebException ex) {
-                httpResponse = (HttpWebResponse)ex.Response;
+            try
+            {
+                httpResponse = (HttpWebResponse) httpRequest.GetResponse();
             }
-            Stream st = httpResponse.GetResponseStream();
-            StreamReader reader = new StreamReader(st, Encoding.GetEncoding("utf-8"));
+            catch (WebException ex)
+            {
+                httpResponse = (HttpWebResponse) ex.Response;
+            }
+
+            var st = httpResponse.GetResponseStream();
+            var reader = new StreamReader(st, Encoding.GetEncoding("utf-8"));
             var temp = reader.ReadToEnd();
             var result = temp.DeserializeJson<IdentityApiResult>();
             var model = Resolve<IIdentityService>().GetSingle(u => u.UserId == view.UserId);
-            if (result.Status == "1") {
-                if (model == null) {
+            if (result.Status == "1")
+            {
+                if (model == null)
+                {
                     view.Status = IdentityStatus.Succeed;
                     view.UserId = view.UserId;
                     Resolve<IIdentityService>().Add(view);
                 }
+
                 return ServiceResult.Success;
-            } else {
-                view.Status = IdentityStatus.Failed;
-                if (model == null) {
-                    Resolve<IIdentityService>().Add(view);
-                }
-                return ServiceResult.FailedWithMessage(result.Message);
             }
+
+            view.Status = IdentityStatus.Failed;
+            if (model == null) Resolve<IIdentityService>().Add(view);
+            return ServiceResult.FailedWithMessage(result.Message);
 
             return ServiceResult.FailedWithMessage("实名认证失败");
         }
 
-        public ServiceResult FaceIdentity(Identity view) {
+        public ServiceResult FaceIdentity(Identity view)
+        {
             var url = new Uri("http://apistore.5ug.com/Api/ApiStore/FaceIdentity");
             var httpClient = new HttpClient();
             var body = new FormUrlEncodedContent(new Dictionary<string, string>
             {
-                { "IdCardNum", view.CardNo},
-                { "RealName", view.RealName},
-               // { "Image", view.FaceImage}
+                {"IdCardNum", view.CardNo},
+                {"RealName", view.RealName}
+                // { "Image", view.FaceImage}
             });
 
             var response = httpClient.PostAsync(url, body).Result;
             var data = response.Content.ReadAsStringAsync().Result;
-            return null;//接口调用成功数据
+            return null; //接口调用成功数据
         }
     }
 }

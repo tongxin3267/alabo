@@ -1,17 +1,14 @@
-using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
-using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Repositories;
-using Alabo.App.Shop.Store.Domain.Entities;
 using System.Collections.Generic;
+using Alabo.Data.People.Stores.Domain.Services;
+using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
+using Alabo.Domains.Repositories;
+using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Industry.Shop.Deliveries.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Shop.Store.Domain.Services
+namespace Alabo.Industry.Shop.Deliveries.Domain.Services
 {
     public class DeliveryTemplateService : ServiceBase<DeliveryTemplate, ObjectId>, IDeliveryTemplateService
     {
@@ -21,17 +18,14 @@ namespace Alabo.App.Shop.Store.Domain.Services
         }
 
         /// <summary>
-        /// 获取运费模板
+        ///     获取运费模板
         /// </summary>
         /// <param name="storeId"></param>
         /// <returns></returns>
-        public List<KeyValue> GetStoreDeliveryTemplateByCache(long storeId)
+        public List<KeyValue> GetStoreDeliveryTemplateByCache(ObjectId storeId)
         {
-            var store = Resolve<IShopStoreService>().GetSingleFromCache(storeId);
-            if (store == null)
-            {
-                return null;
-            }
+            var store = Resolve<IStoreService>().GetSingleFromCache(storeId);
+            if (store == null) return null;
             var result = new List<KeyValue>();
             var list = GetList(r => r.StoreId == storeId);
             list.Foreach(r => { result.Add(new KeyValue(r.Id, r.TemplateName)); });

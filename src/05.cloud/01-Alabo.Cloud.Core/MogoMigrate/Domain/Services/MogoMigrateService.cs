@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Market.MogoMigrate.ViewModels;
+using _01_Alabo.Cloud.Core.MogoMigrate.ViewModels;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Base.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
@@ -13,19 +12,24 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Runtime;
+using Alabo.Tables.Domain.Services;
 
-namespace Alabo.App.Market.MogoMigrate.Domain.Services {
-
-    public class MogoMigrateService : ServiceBase, IMogoMigrateService {
-
-        public MogoMigrateService(IUnitOfWork unitOfWork) : base(unitOfWork) {
+namespace _01_Alabo.Cloud.Core.MogoMigrate.Domain.Services
+{
+    public class MogoMigrateService : ServiceBase, IMogoMigrateService
+    {
+        public MogoMigrateService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
         }
 
-        public MogoMigrateView GetMogoMigrateView(long id) {
-            if (id.ConvertToLong() == 10000) {
-                var view = new MogoMigrateView {
+        public MogoMigrateView GetMogoMigrateView(long id)
+        {
+            if (id.ConvertToLong() == 10000)
+            {
+                var view = new MogoMigrateView
+                {
                     UserTable = "User_User",
-                    Key = RuntimeContext.Current.WebsiteConfig.OpenApiSetting.Key,
+                    Key = RuntimeContext.Current.WebsiteConfig.OpenApiSetting.Key
                     //  ProjectId = project.ProjectId.ToString()
                 };
                 return view;
@@ -34,46 +38,36 @@ namespace Alabo.App.Market.MogoMigrate.Domain.Services {
             return new MogoMigrateView();
         }
 
-        public ServiceResult Migrate(MogoMigrateView view) {
-            if (!HttpWeb.UserName.Equal("admin")) {
-                return ServiceResult.FailedWithMessage("当前操作用户名非admin,不能进行该操作");
-            }
+        public ServiceResult Migrate(MogoMigrateView view)
+        {
+            if (!HttpWeb.UserName.Equal("admin")) return ServiceResult.FailedWithMessage("当前操作用户名非admin,不能进行该操作");
 
-            if (view.MongoTableName.IsNullOrEmpty()) {
-                return ServiceResult.FailedWithMessage("Mongodb数据库不能为空");
-            }
+            if (view.MongoTableName.IsNullOrEmpty()) return ServiceResult.FailedWithMessage("Mongodb数据库不能为空");
 
-            if (view.MongoConnectionString.IsNullOrEmpty()) {
-                return ServiceResult.FailedWithMessage("Mongodb链接字符串不能为空");
-            }
+            if (view.MongoConnectionString.IsNullOrEmpty()) return ServiceResult.FailedWithMessage("Mongodb链接字符串不能为空");
 
             var user = Resolve<IUserService>().GetSingle(HttpWeb.UserId);
-            if (user.Status != Status.Normal) {
-                return ServiceResult.FailedWithMessage("用户状态不正常,不能进行该操作");
-            }
+            if (user.Status != Status.Normal) return ServiceResult.FailedWithMessage("用户状态不正常,不能进行该操作");
 
-            if (!user.UserName.Equal("admin")) {
-                return ServiceResult.FailedWithMessage("当前操作用户名非admin,不能进行该操作");
-            }
+            if (!user.UserName.Equal("admin")) return ServiceResult.FailedWithMessage("当前操作用户名非admin,不能进行该操作");
 
-            if (!view.UserTable.Equals("User_User")) {
-                return ServiceResult.FailedWithMessage("用户数据表填写出错,不能进行该操作");
-            }
+            if (!view.UserTable.Equals("User_User")) return ServiceResult.FailedWithMessage("用户数据表填写出错,不能进行该操作");
 
             //if (!view.ProjectId.Equals(HttpWeb.Token.ProjectId.ToString())) {
             //    return ServiceResult.FailedWithMessage("项目Id填写错误,不能进行该操作");
             //}
 
-            if (!view.Key.Equals(RuntimeContext.Current.WebsiteConfig.OpenApiSetting.Key)) {
+            if (!view.Key.Equals(RuntimeContext.Current.WebsiteConfig.OpenApiSetting.Key))
                 return ServiceResult.FailedWithMessage("秘钥填写错误,不能进行该操作");
-            }
 
-            var connection = new MongoDbConnection {
+            var connection = new MongoDbConnection
+            {
                 ConnectionString = view.MongoConnectionString,
                 Database = view.MongoTableName
             };
             var types = GetMongoEntityTypes();
-            foreach (var type in types) {
+            foreach (var type in types)
+            {
                 //// 使用Mongodb的上下文链接字符串
                 //MongoRepositoryConnection.MongoDbConnectionContext = connection;
                 //// 读取需要迁移数据库中所有的数据
@@ -96,7 +90,8 @@ namespace Alabo.App.Market.MogoMigrate.Domain.Services {
             return ServiceResult.Success;
         }
 
-        public static IList<Type> GetMongoEntityTypes() {
+        public static IList<Type> GetMongoEntityTypes()
+        {
             var types = RuntimeContext.Current.GetPlatformRuntimeAssemblies().SelectMany(a => a.GetTypes()
                 .Where(t => t.GetInterfaces().Contains(typeof(IEntity)) ||
                             t.GetInterfaces().Contains(typeof(IMongoEntity))));

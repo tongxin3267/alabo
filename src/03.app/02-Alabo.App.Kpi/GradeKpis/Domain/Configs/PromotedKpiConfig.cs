@@ -1,16 +1,16 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.App.Kpis.Kpis.Domain.Configs;
 using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Share.Kpi.Domain.CallBack {
-
+namespace Alabo.App.Kpis.GradeKpis.Domain.Configs
+{
     /// <summary>
     ///     绩效配置
     /// </summary>
@@ -18,8 +18,8 @@ namespace Alabo.App.Share.Kpi.Domain.CallBack {
     [ClassProperty(Name = "绩效晋升配置", Icon = "fa fa-cny", Description = "绩效晋升配置",
         PageType = ViewPageType.List, SortOrder = 20,
         SideBarType = SideBarType.KpiSideBar)]
-    public class PromotedKpiConfig : BaseViewModel, IAutoConfig {
-
+    public class PromotedKpiConfig : BaseViewModel, IAutoConfig
+    {
         /// <summary>
         ///     Id自增，主键
         /// </summary>
@@ -41,7 +41,8 @@ namespace Alabo.App.Share.Kpi.Domain.CallBack {
         /// <summary>
         ///     会员等级
         /// </summary>
-        [Field(ControlsType = ControlsType.DropdownList, ListShow = true, DisplayMode = DisplayMode.Grade, EditShow = true, SortOrder = 1,
+        [Field(ControlsType = ControlsType.DropdownList, ListShow = true, DisplayMode = DisplayMode.Grade,
+            EditShow = true, SortOrder = 1,
             DataSource = "Alabo.App.Core.User.Domain.Callbacks.UserGradeConfig")]
         [Display(Name = "会员等级")]
         [HelpBlock("考核等级，一个等级晋升配置只能有一条，有多条时默认选择第一条")]
@@ -50,7 +51,8 @@ namespace Alabo.App.Share.Kpi.Domain.CallBack {
         /// <summary>
         ///     晋升等级
         /// </summary>
-        [Field(ControlsType = ControlsType.DropdownList, ListShow = true, DisplayMode = DisplayMode.Grade, EditShow = true, SortOrder = 1,
+        [Field(ControlsType = ControlsType.DropdownList, ListShow = true, DisplayMode = DisplayMode.Grade,
+            EditShow = true, SortOrder = 1,
             DataSource = "Alabo.App.Core.User.Domain.Callbacks.UserGradeConfig")]
         [Display(Name = "晋升等级")]
         [HelpBlock("晋升等级")]
@@ -94,7 +96,8 @@ namespace Alabo.App.Share.Kpi.Domain.CallBack {
                    "<br>其中A、B、C、D、F为KPI配置的唯一标识，大小字母A-Z")]
         public string LogicalOperator { get; set; }
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

@@ -1,16 +1,18 @@
-﻿using System;
-using Alabo.Core.Enums.Enum;
+﻿using Alabo.Framework.Core.Enums.Enum;
+using System;
 
-namespace Alabo.App.Core.Common {
-
+namespace Alabo.Framework.Core.Reflections.Interfaces
+{
     /// <summary>
     ///     级联数据继承接口
     /// </summary>
-    public interface IRelation {
+    public interface IRelation
+    {
     }
 
     [AttributeUsage(AttributeTargets.Class)]
-    public class RelationPropertyAttribute : Attribute {
+    public class RelationPropertyAttribute : Attribute
+    {
         public RelationType RelationType { get; set; }
 
         /// <summary>

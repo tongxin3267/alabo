@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Alabo.Datas.Stores;
+﻿using Alabo.Datas.Stores;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services.Attach;
 using Alabo.Extensions;
 using Alabo.Validations.Aspects;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Alabo.Domains.Services.Bulk
 {
@@ -27,9 +27,7 @@ namespace Alabo.Domains.Services.Bulk
 
         public async Task AddManyAsync(IEnumerable<TEntity> soucre)
         {
-            if (soucre == null || !soucre.Any()) {
-                return;
-            }
+            if (soucre == null || !soucre.Any()) return;
 
             var addList = new List<TEntity>();
             soucre.Foreach(r =>
@@ -40,13 +38,12 @@ namespace Alabo.Domains.Services.Bulk
                     addList.Add(r);
                 }
             });
-            if (!addList.Any()) {
-                return;
-            }
+            if (!addList.Any()) return;
 
             await Store.AddManyAsync(addList);
             Log($"成功新增{{Table}}记录{addList.Count}条,新增记录Id:{addList.Select(r => r.Id).SplitString()}");
         }
+
         //public ServiceResult AddMany(IEnumerable<TEntity> soucre)
         //{
         //    if (soucre == null || !soucre.Any()) return ServiceResult.Failed;

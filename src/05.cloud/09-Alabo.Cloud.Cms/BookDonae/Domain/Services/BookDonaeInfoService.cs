@@ -1,39 +1,43 @@
 using System;
 using System.Collections.Generic;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
+using System.IO;
 using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
+using Alabo.Cloud.Cms.BookDonae.Domain.Dtos;
+using Alabo.Cloud.Cms.BookDonae.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
-using Alabo.App.Market.BookDonae.Domain.Entities;
-using System.IO;
-using Alabo.App.Market.BookDonae.Domain.Dtos;
+using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.BookDonae.Domain.Services {
-
-    public class BookDonaeInfoService : ServiceBase<BookDonaeInfo, ObjectId>, IBookDonaeInfoService {
-
-        public BookDonaeInfoService(IUnitOfWork unitOfWork, IRepository<BookDonaeInfo, ObjectId> repository) : base(unitOfWork, repository) {
+namespace Alabo.Cloud.Cms.BookDonae.Domain.Services
+{
+    public class BookDonaeInfoService : ServiceBase<BookDonaeInfo, ObjectId>, IBookDonaeInfoService
+    {
+        public BookDonaeInfoService(IUnitOfWork unitOfWork, IRepository<BookDonaeInfo, ObjectId> repository) : base(
+            unitOfWork, repository)
+        {
         }
 
         /// <summary>
         ///     导入
         /// </summary>
-        public void Init(BookPathHost pathHost) {
+        public void Init(BookPathHost pathHost)
+        {
             var directoryInfo = new DirectoryInfo(pathHost.Path);
 
             var directories = directoryInfo.GetDirectories();
 
-            foreach (var directoryItem in directories) {
-                var bookClass = new BooksClass {
+            foreach (var directoryItem in directories)
+            {
+                var bookClass = new BooksClass
+                {
                     Name = directoryItem.Name.Trim(),
-                    Host = pathHost.Host,
+                    Host = pathHost.Host
                 };
                 // 分类
                 var findClass = Resolve<IBooksClassService>().GetSingle(r => r.Name == bookClass.Name);
-                if (findClass == null) {
+                if (findClass == null)
+                {
                     Resolve<IBooksClassService>().Add(bookClass);
                     findClass = bookClass;
                     Console.WriteLine($"成功添加分类:{bookClass.Name}");
@@ -45,8 +49,10 @@ namespace Alabo.App.Market.BookDonae.Domain.Services {
                 var directory = new DirectoryInfo(filePath);
                 var books = directory.GetFiles();
                 var findBooks = GetList(r => r.ClassId == findClass.Id);
-                foreach (var bookItem in books) {
-                    var view = new BookDonaeInfo {
+                foreach (var bookItem in books)
+                {
+                    var view = new BookDonaeInfo
+                    {
                         Name = bookItem.Name.Trim().Replace(".pdf", ""),
                         IsOnSale = true,
                         ClassName = findClass.Name,
@@ -54,9 +60,7 @@ namespace Alabo.App.Market.BookDonae.Domain.Services {
                         ClassId = findClass.Id
                     };
                     var find = findBooks.FirstOrDefault(r => r.Name == view.Name);
-                    if (find == null) {
-                        bookList.Add(view);
-                    }
+                    if (find == null) bookList.Add(view);
                 }
 
                 Resolve<IBookDonaeInfoService>().AddMany(bookList);

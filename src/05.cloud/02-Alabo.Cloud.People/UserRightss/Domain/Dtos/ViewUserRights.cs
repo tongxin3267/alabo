@@ -2,22 +2,23 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Market.UserRightss.Domain.Services;
+using Alabo.Cloud.People.UserRightss.Domain.Services;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Mapping;
 using Alabo.UI;
-using Alabo.UI.AutoTables;
+using Alabo.UI.Design.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Market.UserRightss.Domain.Dtos {
-
-    public class ViewUserRights : UIBase, IAutoTable<ViewUserRights> {
-
+namespace Alabo.Cloud.People.UserRightss.Domain.Dtos
+{
+    public class ViewUserRights : UIBase, IAutoTable<ViewUserRights>
+    {
         /// <summary>
         /// </summary>
         public Guid GradeId { get; set; }
@@ -30,9 +31,10 @@ namespace Alabo.App.Market.UserRightss.Domain.Dtos {
         public string Name { get; set; }
 
         /// <summary>
-        /// 用户名
+        ///     用户名
         /// </summary>
-        [Field(ListShow = true, SortOrder = 1, EditShow = true,IsShowBaseSerach = true,ControlsType = ControlsType.TextBox)]
+        [Field(ListShow = true, SortOrder = 1, EditShow = true, IsShowBaseSerach = true,
+            ControlsType = ControlsType.TextBox)]
         [Display(Name = "用户名")]
         public string UserName { get; set; }
 
@@ -49,7 +51,7 @@ namespace Alabo.App.Market.UserRightss.Domain.Dtos {
         /// </summary>
         [Field(ListShow = true, SortOrder = 4, EditShow = true, ControlsType = ControlsType.TextBox)]
         [Display(Name = "总数量")]
-        public long RemainCount { get; set; } = 0;
+        public long RemainCount { get; set; }
 
         /// <summary>
         ///     开通时间
@@ -59,12 +61,13 @@ namespace Alabo.App.Market.UserRightss.Domain.Dtos {
         public DateTime CreateTime { get; set; }
 
 
-
-        public List<TableAction> Actions() {
+        public List<TableAction> Actions()
+        {
             return new List<TableAction>();
         }
 
-        public PageResult<ViewUserRights> PageTable(object query, AutoBaseModel autoModel) {
+        public PageResult<ViewUserRights> PageTable(object query, AutoBaseModel autoModel)
+        {
             var usergradelist = Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
 
             //var model = Resolve<IUserService>().GetViewUserPageList(userInput);
@@ -73,16 +76,16 @@ namespace Alabo.App.Market.UserRightss.Domain.Dtos {
 
 
             var result = new List<ViewUserRights>();
-            foreach (var item in userRightses) {
-
+            foreach (var item in userRightses)
+            {
                 var view = AutoMapping.SetValue<ViewUserRights>(item);
                 var userModel = Resolve<IUserService>().GetSingle(item.Id);
 
                 view.CreateTime = userModel.CreateTime;
                 view.UserName = userModel.UserName;
-                view.RemainCount = item.TotalCount;//剩余数量
-                view.TotalUseCount = item.TotalUseCount;//使用数量
-                view.Name = usergradelist.FirstOrDefault(u => u.Id == view.GradeId)?.Name;//等级名称
+                view.RemainCount = item.TotalCount; //剩余数量
+                view.TotalUseCount = item.TotalUseCount; //使用数量
+                view.Name = usergradelist.FirstOrDefault(u => u.Id == view.GradeId)?.Name; //等级名称
                 result.Add(view);
             }
 

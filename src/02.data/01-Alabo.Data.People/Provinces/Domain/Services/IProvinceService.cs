@@ -1,12 +1,10 @@
-using System;
-using System.Linq;
-using MongoDB.Bson;
+using Alabo.Data.People.Provinces.Domain.Entities;
 using Alabo.Domains.Services;
-using Alabo.App.Agent.Province.Domain.Entities;
-using Alabo.Domains.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Agent.Province.Domain.Services {
-
-    public interface IProvinceService : IService<Entities.Province, ObjectId> {
+namespace Alabo.Data.People.Provinces.Domain.Services
+{
+    public interface IProvinceService : IService<Province, ObjectId>
+    {
     }
 }

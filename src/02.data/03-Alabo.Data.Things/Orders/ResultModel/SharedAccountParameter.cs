@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.App.Core.Tasks.ResultModel {
-
-    public class SharedAccountParameter {
-
+namespace Alabo.Data.Things.Orders.ResultModel
+{
+    public class SharedAccountParameter
+    {
         /// <summary>
         ///     总分润金额
         /// </summary>
@@ -12,8 +12,8 @@ namespace Alabo.App.Core.Tasks.ResultModel {
         public List<UserParameter> UserParameters { get; set; }
     }
 
-    public class UserParameter {
-
+    public class UserParameter
+    {
         /// <summary>
         ///     用
         /// </summary>

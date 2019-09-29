@@ -1,16 +1,16 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.Recharge {
-
+namespace Alabo.App.Asset.Recharges.Dtos
+{
     /// <summary>
     ///     Class RechargeApiInput.
     /// </summary>
-    public class RechargeApiInput : PagedInputDto {
-
+    public class RechargeApiInput : PagedInputDto
+    {
         /// <summary>
         ///     Gets or sets Id标识
         /// </summary>

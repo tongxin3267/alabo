@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.Datas.Stores;
+﻿using Alabo.Datas.Stores;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services.Update;
 using Alabo.Extensions;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.Domains.Services.View
 {
@@ -20,9 +20,7 @@ namespace Alabo.Domains.Services.View
             if (!id.IsNullOrEmpty())
             {
                 var model = GetSingle(id);
-                if (model != null) {
-                    return model;
-                }
+                if (model != null) return model;
             }
 
             return GetDefaultModel();
@@ -46,23 +44,17 @@ namespace Alabo.Domains.Services.View
             var type = obj.GetType();
             foreach (var p in type.GetProperties())
             {
-                if (!p.CanWrite) {
-                    continue;
-                }
+                if (!p.CanWrite) continue;
 
                 var propertyType = p.PropertyType;
-                if (IsValueType(propertyType) || propertyType.IsAbstract || propertyType.IsArray) {
-                    continue;
-                }
+                if (IsValueType(propertyType) || propertyType.IsAbstract || propertyType.IsArray) continue;
 
                 //reference type
                 if (propertyType.IsGenericType)
                 {
                     var subItemType = propertyType.GetGenericArguments()[0];
                     //解决循环依赖创建
-                    if (subItemType == type || IsValueType(subItemType)) {
-                        continue;
-                    }
+                    if (subItemType == type || IsValueType(subItemType)) continue;
 
                     var subItem = Activator.CreateInstance(subItemType);
                     CreateSubInstance(subItem);
@@ -72,9 +64,7 @@ namespace Alabo.Domains.Services.View
                 else
                 {
                     //解决循环依赖创建
-                    if (propertyType == type) {
-                        continue;
-                    }
+                    if (propertyType == type) continue;
 
                     var subItem = Activator.CreateInstance(propertyType);
                     CreateSubInstance(subItem);
@@ -94,7 +84,7 @@ namespace Alabo.Domains.Services.View
             var genericType = typeof(List<>).MakeGenericType(type);
             var result = Activator.CreateInstance(genericType);
             var addMethod = genericType.GetMethod("Add");
-            addMethod.Invoke(result, new[] {value});
+            addMethod.Invoke(result, new[] { value });
             return result;
         }
 

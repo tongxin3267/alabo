@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.Withdraws.Domain.Enums {
-
-    public enum WithdrawStatus {
-
+namespace Alabo.App.Asset.Withdraws.Domain.Enums
+{
+    public enum WithdrawStatus
+    {
         /// <summary>
         ///     待处理
         /// </summary>

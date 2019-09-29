@@ -1,5 +1,5 @@
-﻿using System.Text;
-using Alabo.Logging.Abstractions;
+﻿using Alabo.Logging.Abstractions;
+using System.Text;
 
 namespace Alabo.Logging.Extensions
 {
@@ -13,9 +13,7 @@ namespace Alabo.Logging.Extensions
         /// </summary>
         public static void Append(this ILogContent content, StringBuilder result, string value)
         {
-            if (string.IsNullOrWhiteSpace(value)) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(value)) return;
 
             result.Append("   ");
             result.Append(value);

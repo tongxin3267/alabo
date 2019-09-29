@@ -1,13 +1,13 @@
-﻿using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.Domains.Entities.Extensions;
+﻿using Alabo.Domains.Entities.Extensions;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
 
-namespace Alabo.App.Shop.Order.Domain.Entities.Extensions {
-
+namespace Alabo.Industry.Shop.Orders.Domain.Entities.Extensions
+{
     /// <summary>
     ///     订单评价
     /// </summary>
-    public class OrderRate : EntityExtension {
-
+    public class OrderRate : EntityExtension
+    {
         /// <summary>
         ///     买家评价
         /// </summary>
@@ -22,10 +22,10 @@ namespace Alabo.App.Shop.Order.Domain.Entities.Extensions {
     /// <summary>
     ///     评价详情
     /// </summary>
-    public class OrderRateInfo {
-
+    public class OrderRateInfo
+    {
         /// <summary>
-        /// 订单ID
+        ///     订单ID
         /// </summary>
         public long OrderId { get; set; }
 

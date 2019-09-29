@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Alabo.Datas.Queries.Enums;
+using Alabo.Datas.Sql.Queries.Builders.Abstractions;
+using Alabo.Domains.Repositories.Pager;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Alabo.Datas.Queries.Enums;
-using Alabo.Datas.Sql.Queries.Builders.Abstractions;
-using Alabo.Domains.Repositories.Pager;
 using Convert = Alabo.Helpers.Convert;
 
 namespace Alabo.Datas.Sql.Queries
@@ -1059,14 +1059,10 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="connection">数据库连接</param>
         protected IDbConnection GetConnection(IDbConnection connection)
         {
-            if (connection != null) {
-                return connection;
-            }
+            if (connection != null) return connection;
 
             connection = _database?.GetConnection();
-            if (connection == null) {
-                throw new ArgumentNullException(nameof(connection));
-            }
+            if (connection == null) throw new ArgumentNullException(nameof(connection));
 
             return connection;
         }
@@ -1106,9 +1102,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         protected void AppendSql(StringBuilder result, string sql)
         {
-            if (string.IsNullOrWhiteSpace(sql)) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(sql)) return;
 
             result.AppendLine($"{sql} ");
         }

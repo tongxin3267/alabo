@@ -1,17 +1,17 @@
-﻿using System;
+﻿using Alabo.Domains.Repositories.Mongo.Extension;
+using Alabo.Mapping;
+using Microsoft.AspNetCore.Http;
+using MongoDB.Bson;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
-using Microsoft.AspNetCore.Http;
-using MongoDB.Bson;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
-using Alabo.Domains.Repositories.Mongo.Extension;
-using Alabo.Mapping;
 
 namespace Alabo.Extensions
 {
@@ -27,9 +27,7 @@ namespace Alabo.Extensions
 
             var data = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(value));
             var sb = new StringBuilder();
-            for (var i = 0; i < data.Length; i++) {
-                sb.AppendFormat("{0:x2}", data[i]);
-            }
+            for (var i = 0; i < data.Length; i++) sb.AppendFormat("{0:x2}", data[i]);
 
             var md5Value = sb.ToString();
             md5Value = md5Value.Replace("-", "").ToLower().Substring(0, 24);
@@ -40,7 +38,7 @@ namespace Alabo.Extensions
 
         public static T Cast<T>(this object obj, T t)
         {
-            return (T) obj;
+            return (T)obj;
         }
 
         /// <summary>
@@ -79,9 +77,7 @@ namespace Alabo.Extensions
                 {
                     DateTimeFormat = "yyyy-MM-dd HH:mm:ss"
                 };
-                if (obj == null) {
-                    obj = string.Empty;
-                }
+                if (obj == null) obj = string.Empty;
 
                 return JsonConvert.SerializeObject(obj, Formatting.Indented, timeFormat);
             }
@@ -104,9 +100,7 @@ namespace Alabo.Extensions
                 {
                     DateTimeFormat = "yyyy-MM-dd HH:mm:ss"
                 };
-                if (obj == null) {
-                    obj = string.Empty;
-                }
+                if (obj == null) obj = string.Empty;
 
                 var serializerSettings = new JsonSerializerSettings
                 {
@@ -198,13 +192,9 @@ namespace Alabo.Extensions
         /// <paramref name="type" />
         public static object ToObject(this object obj, Type type)
         {
-            if (obj.IsNullOrEmpty()) {
-                return null;
-            }
+            if (obj.IsNullOrEmpty()) return null;
 
-            if (type == null) {
-                return null;
-            }
+            if (type == null) return null;
 
             var result = JsonConvert.DeserializeObject(obj.ToStr(), type);
             return result;
@@ -218,13 +208,9 @@ namespace Alabo.Extensions
         /// <returns></returns>
         public static object ToObjectIgnoreNull(this object obj, Type type)
         {
-            if (obj.IsNullOrEmpty()) {
-                return null;
-            }
+            if (obj.IsNullOrEmpty()) return null;
 
-            if (type == null) {
-                return null;
-            }
+            if (type == null) return null;
 
             var jsonSerializerSettings = new JsonSerializerSettings
             {
@@ -242,9 +228,7 @@ namespace Alabo.Extensions
         /// <param name="obj"></param>
         public static T DeserializeJson<T>(this object obj) where T : new()
         {
-            if (obj == null) {
-                obj = string.Empty;
-            }
+            if (obj == null) obj = string.Empty;
 
             var settings = new JsonSerializerSettings
             {
@@ -253,18 +237,14 @@ namespace Alabo.Extensions
             settings.Converters.Add(new ObjectIdConverter());
 
             var result = JsonConvert.DeserializeObject<T>(obj.ToString());
-            if (result == null) {
-                result = new T();
-            }
+            if (result == null) result = new T();
 
             return result;
         }
 
         public static object DeserializeJson<T>(this string jsonString, T defaultValue)
         {
-            if (jsonString == null) {
-                throw new ArgumentNullException(nameof(jsonString));
-            }
+            if (jsonString == null) throw new ArgumentNullException(nameof(jsonString));
 
             var result = JsonConvert.DeserializeAnonymousType(jsonString, defaultValue);
             return result;
@@ -272,9 +252,7 @@ namespace Alabo.Extensions
 
         public static T ToClass<T>(this object obj)
         {
-            if (obj != null) {
-                return (T) obj;
-            }
+            if (obj != null) return (T)obj;
 
             return JsonConvert.DeserializeObject<T>(string.Empty);
         }
@@ -284,9 +262,7 @@ namespace Alabo.Extensions
         /// </summary>
         public static string ConvertToString(this object obj, string defaultValue = "")
         {
-            if (obj == null) {
-                return defaultValue;
-            }
+            if (obj == null) return defaultValue;
 
             return obj.ToString() ?? defaultValue;
         }
@@ -296,17 +272,11 @@ namespace Alabo.Extensions
         /// </summary>
         public static int ConvertToInt(this object obj, int defaultValue = -1)
         {
-            if (obj == null) {
-                return defaultValue;
-            }
+            if (obj == null) return defaultValue;
 
-            if (obj is int) {
-                return (int) obj;
-            }
+            if (obj is int) return (int)obj;
 
-            if (!int.TryParse(obj.ToString().Trim(), out var result)) {
-                return defaultValue;
-            }
+            if (!int.TryParse(obj.ToString().Trim(), out var result)) return defaultValue;
 
             return result;
         }
@@ -316,17 +286,11 @@ namespace Alabo.Extensions
         /// </summary>
         public static long ConvertToLong(this object obj, long defaultValue = -1)
         {
-            if (obj == null) {
-                return defaultValue;
-            }
+            if (obj == null) return defaultValue;
 
-            if (obj is long) {
-                return (long) obj;
-            }
+            if (obj is long) return (long)obj;
 
-            if (!long.TryParse(obj.ToString().Trim(), out var result)) {
-                return defaultValue;
-            }
+            if (!long.TryParse(obj.ToString().Trim(), out var result)) return defaultValue;
 
             return result;
         }
@@ -336,17 +300,11 @@ namespace Alabo.Extensions
         /// </summary>
         public static decimal ConvertToDecimal(this object obj, decimal defaultValue = -1M)
         {
-            if (obj == null) {
-                return defaultValue;
-            }
+            if (obj == null) return defaultValue;
 
-            if (obj is decimal) {
-                return (decimal) obj;
-            }
+            if (obj is decimal) return (decimal)obj;
 
-            if (!decimal.TryParse(obj.ToString().Trim(), out var result)) {
-                return defaultValue;
-            }
+            if (!decimal.TryParse(obj.ToString().Trim(), out var result)) return defaultValue;
 
             return result;
         }
@@ -356,17 +314,11 @@ namespace Alabo.Extensions
         /// </summary>
         public static double ConvertToDouble(this object obj, double defaultValue = -1)
         {
-            if (obj == null) {
-                return defaultValue;
-            }
+            if (obj == null) return defaultValue;
 
-            if (obj is double) {
-                return (double) obj;
-            }
+            if (obj is double) return (double)obj;
 
-            if (!double.TryParse(obj.ToString().Trim(), out var result)) {
-                return defaultValue;
-            }
+            if (!double.TryParse(obj.ToString().Trim(), out var result)) return defaultValue;
 
             return result;
         }
@@ -376,17 +328,11 @@ namespace Alabo.Extensions
         /// </summary>
         public static DateTime ConvertToDateTime(this object obj, DateTime defaultValue)
         {
-            if (obj == null) {
-                return defaultValue;
-            }
+            if (obj == null) return defaultValue;
 
-            if (obj is DateTime) {
-                return (DateTime) obj;
-            }
+            if (obj is DateTime) return (DateTime)obj;
 
-            if (!DateTime.TryParse(obj.ToString().Trim(), out var result)) {
-                return defaultValue;
-            }
+            if (!DateTime.TryParse(obj.ToString().Trim(), out var result)) return defaultValue;
 
             return result;
         }
@@ -408,13 +354,10 @@ namespace Alabo.Extensions
         {
             var startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1)); // 当地时区
             var value = obj.ConvertToLong();
-            if (value > 0) {
-                return startTime.AddMilliseconds(value);
-            }
+            if (value > 0) return startTime.AddMilliseconds(value);
 
             return new DateTime(1900, 1, 1);
         }
-
 
         /// <summary>
         ///     把object转换为utc dateTime，失败时返回default_value
@@ -447,21 +390,16 @@ namespace Alabo.Extensions
         public static DateTime? ConvertToUtcDateTime(this object obj, DateTimeKind sourceKind)
         {
             DateTime result;
-            if (obj == null) {
-                return null;
-            }
+            if (obj == null) return null;
 
-            if (obj is DateTime) {
-                result = (DateTime) obj;
-            } else if (DateTime.TryParse(obj.ConvertToString(string.Empty).Trim(), out result)) {
+            if (obj is DateTime)
+                result = (DateTime)obj;
+            else if (DateTime.TryParse(obj.ConvertToString(string.Empty).Trim(), out result))
                 GC.KeepAlive(result);
-            } else {
+            else
                 return null;
-            }
             //TODO: 进行时区转换
-            if (result.Kind == DateTimeKind.Unspecified) {
-                result = DateTime.SpecifyKind(result, sourceKind);
-            }
+            if (result.Kind == DateTimeKind.Unspecified) result = DateTime.SpecifyKind(result, sourceKind);
 
             result = result.ToUniversalTime();
             return result;
@@ -472,17 +410,11 @@ namespace Alabo.Extensions
         /// </summary>
         public static Guid ConvertToGuid(this object obj)
         {
-            if (obj == null) {
-                return Guid.Empty;
-            }
+            if (obj == null) return Guid.Empty;
 
-            if (obj is Guid) {
-                return (Guid) obj;
-            }
+            if (obj is Guid) return (Guid)obj;
 
-            if (!Guid.TryParse(obj.ToString().Trim(), out var guid)) {
-                return Guid.Empty;
-            }
+            if (!Guid.TryParse(obj.ToString().Trim(), out var guid)) return Guid.Empty;
 
             return guid;
         }
@@ -492,14 +424,10 @@ namespace Alabo.Extensions
         /// </summary>
         public static bool ConvertToBool(this object obj, bool defaultValue = false)
         {
-            if (obj.IsNullOrEmpty()) {
-                return false;
-            }
+            if (obj.IsNullOrEmpty()) return false;
 
             var value = obj.ConvertToNullableBool();
-            if (value.HasValue) {
-                return value.Value;
-            }
+            if (value.HasValue) return value.Value;
 
             return defaultValue;
         }
@@ -509,30 +437,18 @@ namespace Alabo.Extensions
         /// </summary>
         public static bool? ConvertToNullableBool(this object obj)
         {
-            if (obj == null) {
-                return null;
-            }
+            if (obj == null) return null;
 
-            if (obj is bool) {
-                return (bool) obj;
-            }
+            if (obj is bool) return (bool)obj;
 
             var value = obj.ToString().ToLower();
-            if (value == "true") {
-                return true;
-            }
+            if (value == "true") return true;
 
-            if (value == "false") {
-                return false;
-            }
+            if (value == "false") return false;
 
-            if (!int.TryParse(value, out var x)) {
-                return null;
-            }
+            if (!int.TryParse(value, out var x)) return null;
 
-            if (x != 0) {
-                return true;
-            }
+            if (x != 0) return true;
 
             return false;
         }
@@ -544,25 +460,17 @@ namespace Alabo.Extensions
         {
             //如果字符串为null则返回空列表
             var result = new List<int>();
-            if (data == null) {
-                return result;
-            }
+            if (data == null) return result;
 
-            if (data is List<int>) {
-                return (List<int>) data;
-            }
+            if (data is List<int>) return (List<int>)data;
 
-            if (data is IEnumerable<int>) {
-                return ((IEnumerable<int>) data).ToList();
-            }
+            if (data is IEnumerable<int>) return ((IEnumerable<int>)data).ToList();
 
             var str = data.ToString().Trim();
             //按逗号分割并添加到列表
-            foreach (var s in str.Split(',')) {
-                if (int.TryParse(s.Trim(), out var n)) {
+            foreach (var s in str.Split(','))
+                if (int.TryParse(s.Trim(), out var n))
                     result.Add(n);
-                }
-            }
 
             return result;
         }
@@ -574,25 +482,17 @@ namespace Alabo.Extensions
         {
             //如果字符串为null则返回空列表
             var result = new List<uint>();
-            if (data == null) {
-                return result;
-            }
+            if (data == null) return result;
 
-            if (data is List<uint>) {
-                return (List<uint>) data;
-            }
+            if (data is List<uint>) return (List<uint>)data;
 
-            if (data is IEnumerable<uint>) {
-                return ((IEnumerable<uint>) data).ToList();
-            }
+            if (data is IEnumerable<uint>) return ((IEnumerable<uint>)data).ToList();
 
             var str = data.ToString().Trim();
             //按逗号分割并添加到列表
-            foreach (var s in str.Split(',')) {
-                if (uint.TryParse(s.Trim(), out var n)) {
+            foreach (var s in str.Split(','))
+                if (uint.TryParse(s.Trim(), out var n))
                     result.Add(n);
-                }
-            }
 
             return result;
         }
@@ -605,25 +505,18 @@ namespace Alabo.Extensions
         /// <param name="allowedScheme"></param>
         public static Uri ConvertToUri(this object data, UriKind kind, params string[] allowedScheme)
         {
-            if (data == null) {
-                return null;
-            }
+            if (data == null) return null;
             //直接转换
             var uri = data as Uri;
             //直接转换失败时解析 解析失败时返回null
-            if (uri == null && !Uri.TryCreate(data.ToString(), kind, out uri)) {
-                return null;
-            }
+            if (uri == null && !Uri.TryCreate(data.ToString(), kind, out uri)) return null;
             //判断是否匹配
-            if (allowedScheme.IsNullOrEmpty()) {
-                allowedScheme = new[] {"http", "https"};
-            }
+            if (allowedScheme.IsNullOrEmpty()) allowedScheme = new[] { "http", "https" };
 
             if (kind == UriKind.Relative && uri.IsAbsoluteUri ||
                 kind == UriKind.Absolute && !uri.IsAbsoluteUri ||
-                uri.IsAbsoluteUri && !allowedScheme.Contains(uri.Scheme)) {
+                uri.IsAbsoluteUri && !allowedScheme.Contains(uri.Scheme))
                 return null;
-            }
 
             return uri;
         }
@@ -636,19 +529,15 @@ namespace Alabo.Extensions
         /// <returns>复制后的对象</returns>
         public static T CopyObject<T>(this T self) where T : class
         {
-            if (self == null) {
-                return null;
-            }
+            if (self == null) return null;
 
             var type = typeof(T);
             //创建目标类型的对象
-            var result = (T) Activator.CreateInstance(typeof(T));
+            var result = (T)Activator.CreateInstance(typeof(T));
             //复制所有字段
             var fieldList = type.GetFields(
                 BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            foreach (var field in fieldList) {
-                field.SetValue(result, field.GetValue(self));
-            }
+            foreach (var field in fieldList) field.SetValue(result, field.GetValue(self));
 
             return result;
         }
@@ -664,22 +553,18 @@ namespace Alabo.Extensions
             {
                 var destEnumerator = (obj as IEnumerable).GetEnumerator();
                 var srcEnumerator = (obj as IEnumerable).GetEnumerator();
-                while (destEnumerator.MoveNext() && srcEnumerator.MoveNext()) {
+                while (destEnumerator.MoveNext() && srcEnumerator.MoveNext())
                     destEnumerator.Current.CopyPropertyValuesFrom(srcEnumerator.Current);
-                }
             }
             else
             {
                 foreach (var propertyInfo in source.GetType().GetProperties())
                 {
                     var destPropertyInfo = obj.GetType().GetProperty(propertyInfo.Name);
-                    if (destPropertyInfo == null) {
-                        continue;
-                    }
+                    if (destPropertyInfo == null) continue;
 
-                    if (destPropertyInfo.CanWrite) {
+                    if (destPropertyInfo.CanWrite)
                         destPropertyInfo.SetValue(obj, propertyInfo.GetValue(source, null), null);
-                    }
                 }
             }
         }
@@ -690,26 +575,18 @@ namespace Alabo.Extensions
         /// <param name="obj"></param>
         public static DateTime? ConvertToNullableDateTime(this object obj)
         {
-            if (obj == null) {
-                return null;
-            }
+            if (obj == null) return null;
 
-            if (obj is DateTime) {
-                return (DateTime) obj;
-            }
+            if (obj is DateTime) return (DateTime)obj;
 
-            if (!DateTime.TryParse(obj.ToString().Trim(), out var result)) {
-                return null;
-            }
+            if (!DateTime.TryParse(obj.ToString().Trim(), out var result)) return null;
 
             return result;
         }
 
         public static bool CheckJsonIsEmpty(this string str)
         {
-            if (string.IsNullOrEmpty(str) || str == "[]" || str == "{}") {
-                return true;
-            }
+            if (string.IsNullOrEmpty(str) || str == "[]" || str == "{}") return true;
 
             return false;
         }
@@ -741,9 +618,7 @@ namespace Alabo.Extensions
         public static string Substring(this string charStrand, string label)
         {
             var index = charStrand.IndexOf(label + "=\"", StringComparison.OrdinalIgnoreCase);
-            if (index < 1) {
-                return charStrand;
-            }
+            if (index < 1) return charStrand;
 
             charStrand = charStrand.Substring(index + (label + "=\"").Length);
             index = charStrand.IndexOf("\"", StringComparison.OrdinalIgnoreCase);
@@ -753,9 +628,7 @@ namespace Alabo.Extensions
         public static string Replaces(this string str, string strRep, string rep)
         {
             var index = str.IndexOf(strRep, StringComparison.OrdinalIgnoreCase);
-            if (index < 1) {
-                return str;
-            }
+            if (index < 1) return str;
 
             var strStart = str.Substring(0, index);
             var strStop = str.Substring(index + strRep.Length);
@@ -765,14 +638,10 @@ namespace Alabo.Extensions
         public static int GetCount(this string str, string strCount)
         {
             var result = 0;
-            if (string.IsNullOrEmpty(str)) {
-                return result;
-            }
+            if (string.IsNullOrEmpty(str)) return result;
 
             var index = str.IndexOf(strCount, StringComparison.OrdinalIgnoreCase);
-            if (index < 1) {
-                return result;
-            }
+            if (index < 1) return result;
 
             str = str.Substring(index + strCount.Length);
             while (index > 0)
@@ -794,9 +663,7 @@ namespace Alabo.Extensions
         public static string InsertAfter(this string str, string newChild, string refChild)
         {
             var index = str.IndexOf(refChild);
-            if (index < 0) {
-                return str;
-            }
+            if (index < 0) return str;
 
             var strart = str.Substring(0, index + refChild.Length);
             var stop = str.Substring(index + refChild.Length);
@@ -812,9 +679,7 @@ namespace Alabo.Extensions
         public static string InsertBefore(this string str, string newChild, string refChild)
         {
             var index = str.IndexOf(refChild);
-            if (index < 0) {
-                return str;
-            }
+            if (index < 0) return str;
 
             var strart = str.Substring(0, index);
             var stop = str.Substring(index);
@@ -824,9 +689,7 @@ namespace Alabo.Extensions
         public static string RemoveIndexOf(this string str, string refChild)
         {
             var index = str.IndexOf(refChild);
-            if (index < 0) {
-                return str;
-            }
+            if (index < 0) return str;
 
             var strart = str.Substring(0, index);
             var stop = str.Substring(index + refChild.Length);

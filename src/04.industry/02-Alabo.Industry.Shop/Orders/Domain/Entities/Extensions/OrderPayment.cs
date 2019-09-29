@@ -1,13 +1,13 @@
 ﻿using System;
 using Alabo.Domains.Entities.Extensions;
 
-namespace Alabo.App.Shop.Order.Domain.Entities.Extensions {
-
+namespace Alabo.Industry.Shop.Orders.Domain.Entities.Extensions
+{
     /// <summary>
     ///     PayRecord 类为订单支付记录类
     /// </summary>
-    public class OrderPayment : EntityExtension {
-
+    public class OrderPayment : EntityExtension
+    {
         /// <summary>
         ///     获取或设置支付的支付记录号码
         /// </summary>
@@ -53,13 +53,16 @@ namespace Alabo.App.Shop.Order.Domain.Entities.Extensions {
         /// </summary>
         /// <param name="order"></param>
         /// <param name="payType"></param>
-        public static OrderPayment Create(Order order, string payType) {
+        public static OrderPayment Create(Order order, string payType)
+        {
             return Create(order.Id, order.Serial, order.UserId, order.PaymentAmount, payType);
         }
 
         public static OrderPayment Create(long orderId, string serial, long UserId, decimal paymentAmount,
-            string payType) {
-            return new OrderPayment {
+            string payType)
+        {
+            return new OrderPayment
+            {
                 OrderId = orderId,
                 UserId = UserId,
                 Serial = serial,

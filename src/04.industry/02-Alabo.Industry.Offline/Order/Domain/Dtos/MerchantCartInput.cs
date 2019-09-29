@@ -1,29 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Alabo.Domains.Entities;
+﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Validations;
 
-namespace Alabo.App.Offline.Order.Domain.Dtos
+namespace Alabo.Industry.Offline.Order.Domain.Dtos
 {
     /// <summary>
-    /// MerchantCartInput
+    ///     MerchantCartInput
     /// </summary>
     public class MerchantCartInput
     {
         /// <summary>
-        /// cart Id
+        ///     cart Id
         /// </summary>
         public string Id { get; set; }
 
         /// <summary>
-        /// Merchant store id
+        ///     Merchant store id
         /// </summary>
         public string MerchantStoreId { get; set; }
 
         /// <summary>
-        /// User id
+        ///     User id
         /// </summary>
         [Display(Name = "用户Id")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
@@ -31,19 +27,19 @@ namespace Alabo.App.Offline.Order.Domain.Dtos
         public long UserId { get; set; }
 
         /// <summary>
-        /// Merchant product id
+        ///     Merchant product id
         /// </summary>
         public string MerchantProductId { get; set; }
 
         /// <summary>
-        /// SkuId
+        ///     SkuId
         /// </summary>
         [Display(Name = "SkuId")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         public string SkuId { get; set; }
 
         /// <summary>
-        /// Count
+        ///     Count
         /// </summary>
         [Display(Name = "数量")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]

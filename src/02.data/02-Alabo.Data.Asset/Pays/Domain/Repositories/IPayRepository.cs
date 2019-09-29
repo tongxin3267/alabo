@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using Alabo.App.Core.Finance.Domain.Dtos.Pay;
-using Alabo.App.Core.Finance.Domain.Entities;
+﻿using Alabo.App.Asset.Pays.Domain.Entities;
+using Alabo.App.Asset.Pays.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
+using System.Collections.Generic;
 
-namespace Alabo.App.Core.Finance.Domain.Repositories {
-
-    public interface IPayRepository : IRepository<Pay, long> {
-
+namespace Alabo.App.Asset.Pays.Domain.Repositories
+{
+    public interface IPayRepository : IRepository<Pay, long>
+    {
         /// <summary>
         ///     根据实体Id列表获取订单金额
         /// </summary>

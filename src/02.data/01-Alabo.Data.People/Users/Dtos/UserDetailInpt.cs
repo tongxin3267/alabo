@@ -1,7 +1,8 @@
 ﻿using Alabo.Domains.Query.Dto;
 
-namespace Alabo.App.Core.User.Domain.Dtos {
-
-    public class UserDetailInpt : PagedInputDto {
+namespace Alabo.Data.People.Users.Dtos
+{
+    public class UserDetailInpt : PagedInputDto
+    {
     }
 }

@@ -1,14 +1,16 @@
-using MongoDB.Bson;
-using Alabo.App.Share.Attach.Domain.Entities;
+using Alabo.Cloud.Shop.Comments.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Share.Attach.Domain.Services {
-
-    public class CommentService : ServiceBase<Comment, ObjectId>, ICommentService {
-
-        public CommentService(IUnitOfWork unitOfWork, IRepository<Comment, ObjectId> repository) : base(unitOfWork, repository) {
+namespace Alabo.Cloud.Shop.Comments.Domain.Services
+{
+    public class CommentService : ServiceBase<Comment, ObjectId>, ICommentService
+    {
+        public CommentService(IUnitOfWork unitOfWork, IRepository<Comment, ObjectId> repository) : base(unitOfWork,
+            repository)
+        {
         }
     }
 }

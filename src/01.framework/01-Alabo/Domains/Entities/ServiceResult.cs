@@ -44,16 +44,14 @@ namespace Alabo.Domains.Entities
 
         public override string ToString()
         {
-            if (ErrorMessages == null) {
-                return string.Empty;
-            }
+            if (ErrorMessages == null) return string.Empty;
 
             return string.Join("<br />", ErrorMessages);
         }
 
         public static ServiceResult FailedWithMessage(string message)
         {
-            return FailedWithMessage(new[] {message});
+            return FailedWithMessage(new[] { message });
         }
 
         public static ServiceResult SuccessWithObject(object resultObject)
@@ -75,7 +73,7 @@ namespace Alabo.Domains.Entities
 
         public static ServiceResult FailedMessage(string v)
         {
-            return new ServiceResult(false, returnMessage: v, errorMessages: new List<string> {v});
+            return new ServiceResult(false, returnMessage: v, errorMessages: new List<string> { v });
         }
     }
 }

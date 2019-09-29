@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Alabo.Domains.Entities;
+﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Validations;
 
-namespace Alabo.App.Shop.Order.ViewModels
+namespace Alabo.Industry.Shop.Orders.ViewModels
 {
     /// <summary>
-    /// OrderExpressViewModel
+    ///     OrderExpressViewModel
     /// </summary>
     public class OrderExpressViewModel
     {
         /// <summary>
-        /// Login user id
+        ///     Login user id
         /// </summary>
         [Display(Name = "用户ID")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
@@ -21,7 +17,7 @@ namespace Alabo.App.Shop.Order.ViewModels
         public long LoginUserId { get; set; }
 
         /// <summary>
-        /// Order id
+        ///     Order id
         /// </summary>
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [Range(1, 99999999, ErrorMessage = "订单ID必须大于0")]
@@ -29,7 +25,7 @@ namespace Alabo.App.Shop.Order.ViewModels
         public long OrderId { get; set; }
 
         /// <summary>
-        /// Express amount
+        ///     Express amount
         /// </summary>
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [Range(0, 99999999, ErrorMessage = "金额不能小于0")]
@@ -37,12 +33,12 @@ namespace Alabo.App.Shop.Order.ViewModels
         public decimal ExpressAmount { get; set; }
 
         /// <summary>
-        /// Calculate express amount
+        ///     Calculate express amount
         /// </summary>
         public decimal CalculateExpressAmount { get; set; }
 
         /// <summary>
-        /// Express description
+        ///     Express description
         /// </summary>
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [Display(Name = "修改邮费原因")]

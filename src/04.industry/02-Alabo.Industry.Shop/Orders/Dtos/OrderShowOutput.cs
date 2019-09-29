@@ -1,14 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Shop.Order.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.App.Shop.Product.Domain.Dtos;
+using Alabo.Data.People.Users.Dtos;
+using Alabo.Domains.Repositories.Mongo.Extension;
+using Alabo.Industry.Shop.OrderDeliveries.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using Alabo.Industry.Shop.Products.Dtos;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Order.Domain.Dtos {
-
-    public class OrderShowOutput {
+namespace Alabo.Industry.Shop.Orders.Dtos
+{
+    public class OrderShowOutput
+    {
         /// <summary>
         ///     商品属性ID
         /// </summary>
@@ -34,7 +38,7 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
         /// <summary>
         ///     所属店铺
         /// </summary>
-        public long StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     订单交易状态,OrderStatus等待付款WaitingBuyerPay = 0,等待发货WaitingSellerSendGoods = 1,已发货WaitingBuyerConfirm = 2,交易成功Success =
@@ -106,7 +110,7 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
         /// <summary>
         ///     订单信息
         /// </summary>
-        public Entities.Order Order { get; set; }
+        public Order Order { get; set; }
 
         /// <summary>
         ///     物流信息
@@ -119,7 +123,7 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
         public IList<OrderActionTypeAttribute> Methods { get; set; }
 
         /// <summary>
-        /// 物流信息
+        ///     物流信息
         /// </summary>
         public Deliver Deliver { get; set; }
     }

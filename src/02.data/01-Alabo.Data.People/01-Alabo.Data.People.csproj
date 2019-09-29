@@ -31,4 +31,8 @@
     <ProjectReference Include="..\..\01.framework\06-Alabo.Framework.Tasks\06-Alabo.Framework.Tasks.csproj" />
     <ProjectReference Include="..\..\06.tool\01-Alabo.Tool.Payment\05-Alabo.Tool.Payment.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Circles\Domain\Configs\" />
+    <Folder Include="Cities\Dtos\" />
+  </ItemGroup>
 </Project>

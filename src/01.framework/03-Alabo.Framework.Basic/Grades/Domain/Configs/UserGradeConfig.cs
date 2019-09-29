@@ -1,22 +1,19 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
 using Alabo.AutoConfigs.Services;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Helpers;
 using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Core.User.Domain.Callbacks {
-
+namespace Alabo.Framework.Basic.Grades.Domain.Configs
+{
     /// <summary>
     ///     用户等级设置
     /// </summary>
@@ -27,8 +24,8 @@ namespace Alabo.App.Core.User.Domain.Callbacks {
         Description = "用户等级", PageType = ViewPageType.List, SortOrder = 12,
         SideBarType = SideBarType.UserSideBar,
         ValidateMessage = "该会员等级下存在用户，或者该等级为默认等级不能删除")]
-    public class UserGradeConfig : BaseGradeConfig, IAutoConfig {
-
+    public class UserGradeConfig : BaseGradeConfig, IAutoConfig
+    {
         /// <summary>
         ///     会员类型Id，不同的会员类型有不同的等级
         /// </summary>
@@ -73,38 +70,47 @@ namespace Alabo.App.Core.User.Domain.Callbacks {
         /// <summary>
         ///     Sets the default.
         /// </summary>
-        public void SetDefault() {
+        public void SetDefault()
+        {
             var list = Ioc.Resolve<IAlaboAutoConfigService>().GetList<UserGradeConfig>();
-            if (list.Count < 1) {
+            if (list.Count < 1)
+            {
                 var configs = new List<UserGradeConfig>();
-                var config = new UserGradeConfig {
+                var config = new UserGradeConfig
+                {
                     Id = Guid.Parse("72be65e6-3000-414d-972e-1a3d4a366000"),
                     Name = "红钻会员",
-                    Icon = @"https://s-open.qiniuniu99.com//wwwroot/uploads/api/2019-06-13/5d0231d97d430d0ffc85242b.png",
+                    Icon =
+                        @"https://s-open.qiniuniu99.com//wwwroot/uploads/api/2019-06-13/5d0231d97d430d0ffc85242b.png",
                     IsDefault = true
                 };
                 list.Add(config);
 
-                config = new UserGradeConfig {
+                config = new UserGradeConfig
+                {
                     Id = Guid.Parse("72be65e6-3000-414d-972e-1a3d4a366001"),
                     Name = "金钻会员",
-                    Icon = @"https://s-open.qiniuniu99.com//wwwroot/uploads/api/2019-06-13/5d0231d97d430d0ffc85242c.png",
+                    Icon =
+                        @"https://s-open.qiniuniu99.com//wwwroot/uploads/api/2019-06-13/5d0231d97d430d0ffc85242c.png",
                     IsDefault = false,
                     Contribute = 10000
                 };
                 list.Add(config);
 
-                config = new UserGradeConfig {
+                config = new UserGradeConfig
+                {
                     Id = Guid.Parse("72be65e6-3000-414d-972e-1a3d4a366002"),
                     Name = "紫钻会员",
-                    Icon = @"https://s-open.qiniuniu99.com//wwwroot/uploads/api/2019-06-13/5d0231d97d430d0ffc85242d.png ",
+                    Icon =
+                        @"https://s-open.qiniuniu99.com//wwwroot/uploads/api/2019-06-13/5d0231d97d430d0ffc85242d.png ",
                     IsDefault = false,
                     Contribute = 100000
                 };
                 list.Add(config);
 
                 var typeclassProperty = config.GetType().GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
-                var autoConfig = new AutoConfig {
+                var autoConfig = new AutoConfig
+                {
                     Type = config.GetType().FullName,
 
                     LastUpdated = DateTime.Now,
@@ -117,8 +123,8 @@ namespace Alabo.App.Core.User.Domain.Callbacks {
 
     /// <summary>
     /// </summary>
-    public class GradeHelper {
-
+    public class GradeHelper
+    {
         /// <summary>
         ///     Gets or sets Id标识
         /// </summary>

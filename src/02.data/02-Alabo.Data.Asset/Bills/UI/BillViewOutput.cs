@@ -1,30 +1,31 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.User.Domain.Services;
+﻿using Alabo.App.Asset.Bills.Domain.Services;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Mapping;
 using Alabo.UI;
-using Alabo.UI.AutoPreviews;
+using Alabo.UI.Design.AutoPreviews;
 using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
-namespace Alabo.App.Core.Finance.UI.AutoForm {
-
+namespace Alabo.App.Asset.Bills.UI
+{
     [ClassProperty(Name = "财务详情Autopreview")]
-    public class BillViewOutput : UIBase, IAutoPreview {
+    public class BillViewOutput : UIBase, IAutoPreview
+    {
         public long Id { get; set; }
 
         [Field(ControlsType = ControlsType.Label, ListShow = false, EditShow = true, SortOrder = 2, Width = "160")]
         [Display(Name = "编号")]
-        public string Serial {
-            get {
+        public string Serial
+        {
+            get
+            {
                 var searSerial = $"9{Id.ToString().PadLeft(8, '0')}";
-                if (Id.ToString().Length >= 9) {
-                    searSerial = $"{Id.ToString()}";
-                }
+                if (Id.ToString().Length >= 9) searSerial = $"{Id.ToString()}";
 
                 return searSerial;
             }
@@ -93,7 +94,8 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
         [Display(Name = "交易时间")]
         public string CreateTime { get; set; }
 
-        public AutoPreview GetPreview(string id, AutoBaseModel autoModel) {
+        public AutoPreview GetPreview(string id, AutoBaseModel autoModel)
+        {
             var model = Resolve<IBillService>().GetSingle(u => u.Id == id.ToInt64());
             var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
             var item = AutoMapping.SetValue<BillViewOutput>(model);
@@ -103,7 +105,8 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
             item.UserName = Resolve<IUserService>().GetSingle(u => u.Id == model.UserId)?.UserName;
             item.AcctionType = model.Type.GetDisplayName();
             item.OtherUserName = otherUserName;
-            var result = new AutoPreview {
+            var result = new AutoPreview
+            {
                 KeyValues = item.ToKeyValues()
             };
 

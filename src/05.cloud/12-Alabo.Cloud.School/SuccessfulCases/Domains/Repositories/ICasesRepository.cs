@@ -1,9 +1,10 @@
-using MongoDB.Bson;
-using Alabo.App.Market.SuccessfulCases.Domains.Entities;
+using Alabo.Cloud.School.SuccessfulCases.Domains.Entities;
 using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.SuccessfulCases.Domains.Repositories {
-
-    public interface ICasesRepository : IRepository<Cases, ObjectId> {
+namespace Alabo.Cloud.School.SuccessfulCases.Domains.Repositories
+{
+    public interface ICasesRepository : IRepository<Cases, ObjectId>
+    {
     }
 }

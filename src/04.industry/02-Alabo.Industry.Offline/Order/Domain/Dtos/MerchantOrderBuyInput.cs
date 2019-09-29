@@ -1,35 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.App.Offline.Order.ViewModels;
-using Alabo.Domains.Entities;
+using Alabo.Industry.Offline.Order.ViewModels;
+using Alabo.Tool.Payment;
 using Alabo.Validations;
 
-namespace Alabo.App.Offline.Order.Domain.Dtos
+namespace Alabo.Industry.Offline.Order.Domain.Dtos
 {
     /// <summary>
-    /// MerchantOrderBuyInput
+    ///     MerchantOrderBuyInput
     /// </summary>
     public class MerchantOrderBuyInput
     {
         /// <summary>
-        /// Gets or sets user id
+        ///     Gets or sets user id
         /// </summary>
         [Display(Name = "用户Id")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         public long UserId { get; set; }
 
         /// <summary>
-        /// Merchant store id
+        ///     Merchant store id
         /// </summary>
         [Display(Name = "店铺id")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         public string MerchantStoreId { get; set; }
 
         /// <summary>
-        /// Total amount
+        ///     Total amount
         /// </summary>
         [Display(Name = "订单总金额")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
@@ -37,7 +34,7 @@ namespace Alabo.App.Offline.Order.Domain.Dtos
         public decimal TotalAmount { get; set; }
 
         /// <summary>
-        /// Total count
+        ///     Total count
         /// </summary>
         [Display(Name = "订单商品总数")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
@@ -45,7 +42,7 @@ namespace Alabo.App.Offline.Order.Domain.Dtos
         public long TotalCount { get; set; }
 
         /// <summary>
-        /// Pay amount
+        ///     Pay amount
         /// </summary>
         [Display(Name = "支付金额")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
@@ -53,14 +50,14 @@ namespace Alabo.App.Offline.Order.Domain.Dtos
         public decimal PaymentAmount { get; set; }
 
         /// <summary>
-        /// Pay type
+        ///     Pay type
         /// </summary>
         [Display(Name = "支付方式")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         public PayType PayType { get; set; }
 
         /// <summary>
-        /// Products
+        ///     Products
         /// </summary>
         public List<MerchantCartViewModel> Products { get; set; }
     }

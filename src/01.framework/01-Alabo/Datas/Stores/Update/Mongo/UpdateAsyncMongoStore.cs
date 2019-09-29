@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Alabo.Datas.Stores.Report.Mongo;
+﻿using Alabo.Datas.Stores.Report.Mongo;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
 using Alabo.Validations.Aspects;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.Stores.Update.Mongo
 {

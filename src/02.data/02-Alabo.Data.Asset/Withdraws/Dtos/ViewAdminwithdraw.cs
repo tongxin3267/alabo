@@ -1,33 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Alabo.App.Asset.BankCards.Domain.Entities;
 using Alabo.App.Asset.Withdraws.Domain.Enums;
 using Alabo.App.Asset.Withdraws.Domain.Services;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Dtos.WithDraw;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Exceptions;
-using Alabo.Mapping;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.UI;
-using Alabo.UI.AutoTables;
+using Alabo.UI.Design.AutoTables;
+using Alabo.Users.Entities;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.App.Core.Finance.ViewModels.WithDraw {
-
+namespace Alabo.App.Asset.Withdraws.Dtos
+{
     /// <summary>
     ///     Class ViewAdminWithDraw.
     /// </summary>
     [ClassProperty(Name = "提现管理", Icon = "fa fa-puzzle-piece", Description = "提现管理",
         SideBarType = SideBarType.FinanceSideBar)]
-    public class ViewAdminWithDraw : UIBase, IAutoTable<ViewAdminWithDraw> {
-
+    public class ViewAdminWithDraw : UIBase, IAutoTable<ViewAdminWithDraw>
+    {
         /// <summary>
         ///     序列号
         ///     10位数序列号
@@ -45,7 +42,7 @@ namespace Alabo.App.Core.Finance.ViewModels.WithDraw {
         /// <summary>
         ///     交易用户
         /// </summary>
-        public Users.Entities.User User { get; set; }
+        public User User { get; set; }
 
         /// <summary>
         ///     Gets or sets 会员Id
@@ -159,10 +156,9 @@ namespace Alabo.App.Core.Finance.ViewModels.WithDraw {
         public string Intro { get; set; }
 
         /// <summary>
-
-        /// <summary>
-        ///     Json 格式的银行卡信息
-        /// </summary>
+        ///     <summary>
+        ///         Json 格式的银行卡信息
+        ///     </summary>
         public string ExtraDate { get; set; }
 
         /// <summary>
@@ -179,19 +175,17 @@ namespace Alabo.App.Core.Finance.ViewModels.WithDraw {
         [Required(ErrorMessage = "请填写您的支付密码，不可以为空")]
         public string PayPassword { get; set; }
 
-        public List<TableAction> Actions() {
+        public List<TableAction> Actions()
+        {
             return new List<TableAction>();
         }
 
-        public PageResult<ViewAdminWithDraw> PageTable(object query) {
-            var model = Resolve<IWithdrawService>().GetAdminPageList(query);
-            return ToPageResult(model);
-        }
-
-        public PageResult<ViewAdminWithDraw> PageTable(object query, AutoBaseModel autoModel) {
+        public PageResult<ViewAdminWithDraw> PageTable(object query, AutoBaseModel autoModel)
+        {
             var userInput = ToQuery<WithDrawApiInput>();
 
-            if (autoModel.Filter == FilterType.Admin) {
+            if (autoModel.Filter == FilterType.Admin)
+            {
                 //var model = Resolve<IWithdrawService>().GetUserList(userInput);
                 //var view = new PagedList<ViewAdminWithDraw>();
                 //foreach (var item in model) {
@@ -200,7 +194,9 @@ namespace Alabo.App.Core.Finance.ViewModels.WithDraw {
                 //}
                 //return ToPageResult(view);
             }
-            if (autoModel.Filter == FilterType.User) {
+
+            if (autoModel.Filter == FilterType.User)
+            {
                 //// userInput.UserId = autoModel.BasicUser.Id;
                 //// userInput.LoginUserId = autoModel.BasicUser.Id;
                 //var model = Resolve<IWithdrawService>().GetUserList(userInput);
@@ -210,11 +206,19 @@ namespace Alabo.App.Core.Finance.ViewModels.WithDraw {
                 //    view.Add(outPut);
                 //}
                 //return ToPageResult(view);
-            } else {
+            }
+            else
+            {
                 throw new ValidException("类型权限不正确");
             }
 
             return null;
+        }
+
+        public PageResult<ViewAdminWithDraw> PageTable(object query)
+        {
+            var model = Resolve<IWithdrawService>().GetAdminPageList(query);
+            return ToPageResult(model);
         }
     }
 }

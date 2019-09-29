@@ -1,7 +1,7 @@
-using Xunit;
-using Alabo.App.Shop.Order.Domain.Services;
+using Alabo.Industry.Shop.OrderDeliveries.Domain.Services;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
+using Xunit;
 
 namespace Alabo.Test.Shop.Order.Domain.Service
 {

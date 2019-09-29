@@ -1,39 +1,34 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Cloud.Shop.TeamIntro.Domain.Services;
+using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Framework.Core.WebApis.Service;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Domain.Service;
-using Alabo.App.Core.Api.Filter;
-using Alabo.App.Core.Common;
-using Alabo.App.Core.User;
-using Alabo.App.Market.TeamIntro.Domain.Services;
-using Alabo.Extensions;
-using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.RestfulApi;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Market.TeamIntro.Controllers {
-
+namespace Alabo.Cloud.Shop.TeamIntro.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/Team/[action]")]
-    public class ApiTeamIntroController : ApiBaseController<Domain.Entities.TeamIntro, ObjectId> {
-
-        public ApiTeamIntroController() : base() {
+    public class ApiTeamIntroController : ApiBaseController<Domain.Entities.TeamIntro, ObjectId>
+    {
+        public ApiTeamIntroController()
+        {
             BaseService = Resolve<ITeamIntroService>();
         }
 
         /// <summary>
-        /// 获取团队成员列表
+        ///     获取团队成员列表
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         [Display(Description = "获取团队成员列表")]
         public ApiResult<IList<Domain.Entities.TeamIntro>> List()
         {
-
             try
             {
                 var apiService = Resolve<IApiService>();

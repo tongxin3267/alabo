@@ -1,34 +1,28 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Themes.DiyModels.Base;
-using Alabo.Core.Enums.Enum;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.Themes.DiyModels.Lists {
-
+namespace Alabo.Framework.Core.WebUis.Models.Lists
+{
     /// <summary>
     ///     zk-list 分页数据
     /// </summary>
     [ClassProperty(Name = "链接")]
-    public class ListInput : BaseComponent {
-
+    public class ListInput : BaseComponent
+    {
         /// <summary>
         ///     数据ID
         /// </summary>
         [Display(Name = "数据序号")]
-        public string DataId {
-            get; set;
-        }
+        public string DataId { get; set; }
 
         /// <summary>
         ///     客户端当前登录用户的Id
         /// </summary>
         [Display(Name = "客户端当前登录用户的Id")]
-        public long LoginUserId {
-            get; set;
-        }
+        public long LoginUserId { get; set; }
 
         /// <summary>
         ///     当前页
@@ -45,10 +39,8 @@ namespace Alabo.App.Core.Themes.DiyModels.Lists {
         public long PageSize { get; set; } = 15;
 
         /// <summary>
-        /// 终端类型
+        ///     终端类型
         /// </summary>
-        public ClientType ClientType {
-            get; set;
-        }
+        public ClientType ClientType { get; set; }
     }
 }

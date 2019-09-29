@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
-using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.Tasks.ResultModel;
+﻿using Alabo.Data.Things.Orders.Domain.Entities;
+using Alabo.Data.Things.Orders.ResultModel;
 using Alabo.Domains.Repositories;
+using System.Collections.Generic;
 
-namespace Alabo.App.Core.Tasks.Domain.Repositories {
-
+namespace Alabo.Data.Things.Orders.Domain.Repositories
+{
     /// <summary>
     ///     分润订单
     /// </summary>
-    public interface IShareOrderRepository : IRepository<ShareOrder, long> {
-
+    public interface IShareOrderRepository : IRepository<ShareOrder, long>
+    {
         /// <summary>
         ///     获取s the un handled identifier list.
         /// </summary>
@@ -23,7 +23,7 @@ namespace Alabo.App.Core.Tasks.Domain.Repositories {
         void ErrorOrder(long shareOrderId, string message);
 
         /// <summary>
-        /// 更新成功
+        ///     更新成功
         /// </summary>
         /// <param name="shareOrderId"></param>
         void SuccessOrder(long shareOrderId);

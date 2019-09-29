@@ -1,67 +1,61 @@
-﻿using Alabo.App.Shop.Store.Domain.Entities.Extensions;
-using Alabo.Core.Enums.Enum;
-using Alabo.Datas.Ef.SqlServer;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.Tenants;
+﻿using Alabo.Data.People.UserTypes;
 using Alabo.Web.Mvc.Attributes;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Validations;
 
-namespace Alabo.App.Shop.Store.Domain.Entities {
-
+namespace Alabo.Data.People.Stores.Domain.Entities
+{
     /// <summary>
     ///     线上商城店铺
     /// </summary>
     [ClassProperty(Name = "供应商管理",
         GroupName = "基本信息,高级选项", Icon = "fa fa-puzzle-piece", SortOrder = 1, Description = "设置以及查看供应商的详细信息")]
     [AutoDelete(IsAuto = true)]
-    [Table("People_ShareHolder")]
-    public class Store : AggregateMongodbRoot<Store> {
-
-        /// <summary>
-        ///     供应商名称
-        /// </summary>
-        [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1, SortOrder = 1)]
-        [Display(Name = "供应商名称")]
-        [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        [HelpBlock("供应商名称")]
-        public string Name { get; set; }
-
-        /// <summary>
-        ///     店铺等级
-        ///     与AutoConfig中的SupplierGradeConfig对应
-        /// </summary>
-        [Display(Name = "店铺等级")]
-        public Guid GradeId { get; set; }
-
-        /// <summary>
-        ///     推荐人用户Id
-        /// </summary>
-        [Display(Name = "推荐人")]
-        public long ParentUserId { get; set; }
-
-        /// <summary>
-        ///     店铺状态
-        /// </summary>
-        [Display(Name = "店铺状态")]
-        public UserTypeStatus Status { get; set; } = UserTypeStatus.Pending;
-
+    [Table("People_Store")]
+    public class Store : UserTypeAggregateRoot<Store>
+    {
         /// <summary>
         ///     是否为平台,
         ///     平台只能有一个
         /// </summary>
         [Display(Name = "是否为平台")]
-        public bool IsPlanform { get; set; } = false;
+        public bool IsPlatform { get; set; } = false;
 
         /// <summary>
-        ///     店铺的扩展属性
+        ///     店铺评分相关数据
         /// </summary>
-        [Display(Name = "店铺的扩展属性")]
-        public StoreExtension StoreExtension { get; set; }
+        [Display(Name = "店铺评分")]
+        public StoreScore Score { get; set; }
+    }
+
+    /// <summary>
+    ///     店铺评分
+    /// </summary>
+    public class StoreScore
+    {
+        /// <summary>
+        ///     人气
+        /// </summary>
+        public string Popularity { get; set; }
+
+        /// <summary>
+        ///     综合评分
+        /// </summary>
+        public decimal TotalScore { get; set; }
+
+        /// <summary>
+        ///     商品得分
+        /// </summary>
+        public decimal ProductScore { get; set; }
+
+        /// <summary>
+        ///     服务得分
+        /// </summary>
+        public decimal ServiceScore { get; set; }
+
+        /// <summary>
+        ///     物流得分
+        /// </summary>
+        public decimal LogisticsScore { get; set; }
     }
 }

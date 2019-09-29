@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.Domains.Entities.Extensions;
+using Alabo.Domains.Repositories.Mongo.Extension;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
 using Alabo.Users.Entities;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 using ZKCloud.Open.LogisticsTracking.kdniao;
 
-namespace Alabo.App.Shop.Order.Domain.Entities.Extensions {
-
+namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities.Extensions
+{
     /// <summary>
     ///     发货记录表
     /// </summary>
-    public class OrderDeliveryExtension : EntityExtension {
-
+    public class OrderDeliveryExtension : EntityExtension
+    {
         /// <summary>
         ///     操作时管理员
         /// </summary>
@@ -44,15 +47,15 @@ namespace Alabo.App.Shop.Order.Domain.Entities.Extensions {
     ///     发货商品信息
     ///     根据OrderProduct来
     /// </summary>
-    public class ProductDeliveryInfo {
-
+    public class ProductDeliveryInfo
+    {
         /// <summary>
         ///     Gets or sets the store identifier.
         /// </summary>
         /// <value>
         ///     The store identifier.
         /// </value>
-        public long StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     商品ID

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-using MongoDB.Driver;
-using MongoDB.Driver.Linq;
-using Alabo.Datas.Stores.Page.Mongo;
+﻿using Alabo.Datas.Stores.Page.Mongo;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
+using System;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.Stores.Random.Mongo
 {

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
 using Alabo.Validations.Aspects;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.Stores.Add.EfCore
 {
@@ -22,11 +22,9 @@ namespace Alabo.Datas.Stores.Add.EfCore
 
         public async Task<bool> AddSingleAsync(TEntity entity)
         {
-            if (entity == null) {
-                throw new ArgumentNullException(nameof(entity));
-            }
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
 
-            await Set.AddAsync(entity, default);
+            await Set.AddAsync(entity);
             return true;
         }
     }

@@ -1,113 +1,142 @@
-﻿using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Base;
-using Alabo.App.Share.Share.Domain.Enums;
-using Alabo.Core.Enums.Enum;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.App.Share.OpenTasks.Base;
+using Alabo.App.Share.Rewards.Domain.Enums;
+using Alabo.Domains.Enums;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Tasks.Queues.Models;
+using Alabo.Helpers;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Open.Tasks.Parameter {
+namespace Alabo.App.Share.OpenTasks.Parameter
+{
+    public class FenRunResultParameter
+    {
+        public FenRunResultParameter()
+        {
+        }
 
-    using Alabo.App.Core.Tasks.Domain.Enums;
-    using Core.Common.Domain.Services;
-    using Core.Finance.Domain.CallBacks;
-    using User = User;
-
-    public class FenRunResultParameter {
+        public FenRunResultParameter(FenRunResultParameter para)
+        {
+            ModuleId = para.ModuleId;
+            ModuleName = para.ModuleName;
+            MoneyTypeId = para.MoneyTypeId;
+            TriggerUserId = para.TriggerUserId;
+            OrderUserName = para.OrderUserName;
+            TriggerUserTypeId = para.TriggerUserTypeId;
+            TriggerGradeId = para.TriggerGradeId;
+            ReceiveUserId = para.ReceiveUserId;
+            ReceiveUserName = para.ReceiveUserName;
+            UserRemark = para.UserRemark;
+            ShareLevel = para.ShareLevel;
+            Amount = para.Amount;
+            BillStatus = para.BillStatus;
+            ShareStatus = para.ShareStatus;
+            Summary = para.Summary;
+            TriggerType = para.TriggerType;
+            Order = para.Order;
+            ExtraDate = para.ExtraDate;
+            ModuleConfigId = para.ModuleConfigId;
+            Fee = para.Fee;
+            BonusId = para.BonusId;
+            ModuleTypeName = para.ModuleTypeName;
+        }
 
         /// <summary>
-        /// 模块Guid
+        ///     模块Guid
         /// </summary>
         public Guid ModuleId { get; set; }
 
         /// <summary>
-        /// 模块名
+        ///     模块名
         /// </summary>
         public string ModuleName { get; set; }
 
         /// <summary>
-        /// moneytype对应id
+        ///     moneytype对应id
         /// </summary>
         public Guid MoneyTypeId { get; set; }
 
         /// <summary>
-        /// 触发用户id
+        ///     触发用户id
         /// </summary>
         public long TriggerUserId { get; set; }
 
         /// <summary>
-        /// 触发用户名
+        ///     触发用户名
         /// </summary>
         public string OrderUserName { get; set; }
 
         /// <summary>
-        /// 触发用户类型id
+        ///     触发用户类型id
         /// </summary>
         public Guid TriggerUserTypeId { get; set; }
 
         /// <summary>
-        /// 触发用户gradeid
+        ///     触发用户gradeid
         /// </summary>
         public Guid TriggerGradeId { get; set; }
 
         /// <summary>
-        /// 接收用户id
+        ///     接收用户id
         /// </summary>
         public long ReceiveUserId { get; set; }
 
         /// <summary>
-        /// 接收用户name
+        ///     接收用户name
         /// </summary>
         public string ReceiveUserName { get; set; }
 
         /// <summary>
-        /// 管理员备注信息
+        ///     管理员备注信息
         /// </summary>
         public string Remark { get; set; }
 
         /// <summary>
-        /// 用户remark信息
+        ///     用户remark信息
         /// </summary>
         public string UserRemark { get; set; }
 
         /// <summary>
-        /// 等级
+        ///     等级
         /// </summary>
         public long ShareLevel { get; set; }
 
         /// <summary>
-        /// 金额
+        ///     金额
         /// </summary>
         public decimal Amount { get; set; }
 
         /// <summary>
-        /// 支付状态
+        ///     支付状态
         /// </summary>
         public BillStatus BillStatus { get; set; }
 
         /// <summary>
-        /// 执行状态
+        ///     执行状态
         /// </summary>
         public FenRunStatus ShareStatus { get; set; }
 
         /// <summary>
-        /// 文字说明
+        ///     文字说明
         /// </summary>
         public string Summary { get; set; }
 
         /// <summary>
-        /// 分润费率
+        ///     分润费率
         /// </summary>
         public decimal Fee { get; set; }
 
         /// <summary>
-        /// 对应订单信息
+        ///     对应订单信息
         /// </summary>
         public InvoiceOrder Order { get; set; }
 
         /// <summary>
-        /// 分润触发类型 （1：报单 2：订单）
+        ///     分润触发类型 （1：报单 2：订单）
         /// </summary>
         public TriggerType TriggerType { get; set; }
 
@@ -116,16 +145,12 @@ namespace Alabo.App.Open.Tasks.Parameter {
         public string ExtraDate { get; set; }
 
         /// <summary>
-        /// 分润类型名称
-        /// 比如说裂变分佣，省代理分润等
+        ///     分润类型名称
+        ///     比如说裂变分佣，省代理分润等
         /// </summary>
         public string ModuleTypeName { get; set; }
 
-        public FenRunResultParameter() {
-        }
-
         /// <summary>
-        ///
         /// </summary>
         /// <param name="shareAamount"></param>
         /// <param name="triggerUser"></param>
@@ -133,28 +158,30 @@ namespace Alabo.App.Open.Tasks.Parameter {
         /// <param name="config"></param>
         /// <param name="parameter"></param>
         /// <param name="shareLevel"></param>
-
-        public static List<FenRunResultParameter> ResultParameters(decimal shareAamount, User triggerUser, User shareUser, ShareBaseConfig config, TaskParameter parameter, long shareLevel = 0) {
+        public static List<FenRunResultParameter> ResultParameters(decimal shareAamount, User triggerUser,
+            User shareUser, ShareBaseConfig config, TaskParameter parameter, long shareLevel = 0)
+        {
             //如果分润金额小于等于0,则退出
-            if (shareAamount <= 0) {
-                return null;
-            }
+            if (shareAamount <= 0) return null;
 
             //判断用户是否满足type与grade要求，不满足则跳过当前用户
 
-            var moneyTypes = Alabo.Helpers.Ioc.Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>(r => r.Status == Alabo.Domains.Enums.Status.Normal);
+            var moneyTypes = Ioc.Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>(r => r.Status == Status.Normal);
             var ParameterList = new List<FenRunResultParameter>();
-            foreach (var rule in config.RuleItems) {
+            foreach (var rule in config.RuleItems)
+            {
                 var shareAmount = shareAamount * rule.Ratio;
                 var ruleMoneyType = moneyTypes.FirstOrDefault(r => r.Id == rule.MoneyTypeId);
-                var Parameter = Create(shareAmount, triggerUser, shareUser, ruleMoneyType, config, parameter, shareLevel);
+                var Parameter = Create(shareAmount, triggerUser, shareUser, ruleMoneyType, config, parameter,
+                    shareLevel);
                 ParameterList.Add(Parameter);
             }
+
             return ParameterList;
         }
 
         /// <summary>
-        ///创建分润参数
+        ///     创建分润参数
         /// </summary>
         /// <param name="shareAamount"></param>
         /// <param name="triggerUser">触发用户</param>
@@ -163,24 +190,31 @@ namespace Alabo.App.Open.Tasks.Parameter {
         /// <param name="config">分润维度配置数据</param>
         /// <param name="parameter">分润触发通用参数</param>
         /// <param name="shareLevel"></param>
-
-        public static FenRunResultParameter Create(decimal shareAamount, User triggerUser, User shareUser, MoneyTypeConfig moneyType, ShareBaseConfig config, TaskParameter parameter, long shareLevel = 0) {
+        public static FenRunResultParameter Create(decimal shareAamount, User triggerUser, User shareUser,
+            MoneyTypeConfig moneyType, ShareBaseConfig config, TaskParameter parameter, long shareLevel = 0)
+        {
             parameter.TryGetValue("OrderId", out long orderId);
             parameter.TryGetValue("OrderSerial", out string orderSerial);
-            var Order = new InvoiceOrder() {
+            var Order = new InvoiceOrder
+            {
                 Id = orderId,
                 Serial = orderSerial,
                 Amount = shareAamount
             };
 
             //替换分润描述
-            var summary = config.TemplateRule.LoggerTemplate.Replace("{OrderUserName}", triggerUser.UserName).Replace("{ShareUserNickName}", triggerUser.Name).Replace("{ShareUserRealName}", triggerUser.Name)
-                                 .Replace("{GainerUserName}", shareUser.UserName).Replace("{GainerNickName}", shareUser.Name).Replace("{GainerRealName}", shareUser.Name)
-                                 .Replace("{OrderSerial}", orderSerial).Replace("{AccountName}", moneyType.Name).Replace("{ShareUserAmount}", triggerUser.ToString()).Replace("{DividendAmount}", shareAamount.ToString());
+            var summary = config.TemplateRule.LoggerTemplate.Replace("{OrderUserName}", triggerUser.UserName)
+                .Replace("{ShareUserNickName}", triggerUser.Name).Replace("{ShareUserRealName}", triggerUser.Name)
+                .Replace("{GainerUserName}", shareUser.UserName).Replace("{GainerNickName}", shareUser.Name)
+                .Replace("{GainerRealName}", shareUser.Name)
+                .Replace("{OrderSerial}", orderSerial).Replace("{AccountName}", moneyType.Name)
+                .Replace("{ShareUserAmount}", triggerUser.ToString())
+                .Replace("{DividendAmount}", shareAamount.ToString());
 
-            return new FenRunResultParameter() {
+            return new FenRunResultParameter
+            {
                 Amount = shareAamount,
-                ModuleName = "招商奖",//读取配置的的名称，未实现
+                ModuleName = "招商奖", //读取配置的的名称，未实现
 
                 //分润记录信息
                 ShareStatus = FenRunStatus.Success,
@@ -210,40 +244,15 @@ namespace Alabo.App.Open.Tasks.Parameter {
 
                 //财务信息
                 MoneyTypeId = moneyType.Id,
-                BillStatus = BillStatus.Success,
+                BillStatus = BillStatus.Success
             };
-        }
-
-        public FenRunResultParameter(FenRunResultParameter para) {
-            ModuleId = para.ModuleId;
-            ModuleName = para.ModuleName;
-            MoneyTypeId = para.MoneyTypeId;
-            TriggerUserId = para.TriggerUserId;
-            OrderUserName = para.OrderUserName;
-            TriggerUserTypeId = para.TriggerUserTypeId;
-            TriggerGradeId = para.TriggerGradeId;
-            ReceiveUserId = para.ReceiveUserId;
-            ReceiveUserName = para.ReceiveUserName;
-            UserRemark = para.UserRemark;
-            ShareLevel = para.ShareLevel;
-            Amount = para.Amount;
-            BillStatus = para.BillStatus;
-            ShareStatus = para.ShareStatus;
-            Summary = para.Summary;
-            TriggerType = para.TriggerType;
-            Order = para.Order;
-            ExtraDate = para.ExtraDate;
-            ModuleConfigId = para.ModuleConfigId;
-            Fee = para.Fee;
-            BonusId = para.BonusId;
-            ModuleTypeName = para.ModuleTypeName;
         }
     }
 
-    public class InvoiceOrder {
-
+    public class InvoiceOrder
+    {
         /// <summary>
-        /// dingdan
+        ///     dingdan
         /// </summary>
         public long Id { get; set; }
 

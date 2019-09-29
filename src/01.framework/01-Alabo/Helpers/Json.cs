@@ -13,9 +13,7 @@ namespace Alabo.Helpers
         /// <param name="json">Json字符串</param>
         public static T ToObject<T>(string json)
         {
-            if (string.IsNullOrWhiteSpace(json)) {
-                return default;
-            }
+            if (string.IsNullOrWhiteSpace(json)) return default;
 
             return JsonConvert.DeserializeObject<T>(json);
         }
@@ -27,14 +25,10 @@ namespace Alabo.Helpers
         /// <param name="isConvertToSingleQuotes">是否将双引号转成单引号</param>
         public static string ToJson(object target, bool isConvertToSingleQuotes = false)
         {
-            if (target == null) {
-                return "{}";
-            }
+            if (target == null) return "{}";
 
             var result = JsonConvert.SerializeObject(target);
-            if (isConvertToSingleQuotes) {
-                result = result.Replace("\"", "'");
-            }
+            if (isConvertToSingleQuotes) result = result.Replace("\"", "'");
 
             return result;
         }

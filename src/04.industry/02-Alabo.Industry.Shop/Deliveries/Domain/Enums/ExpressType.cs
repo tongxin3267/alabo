@@ -1,15 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Store.Domain.Enums {
-
+namespace Alabo.Industry.Shop.Deliveries.Domain.Enums
+{
     /// <summary>
     ///     快递来源
     ///     https://www.kuaidi100.com/all/index.shtml?from=newindex
     /// </summary>
     [ClassProperty(Name = "快递来源")]
-    public enum ExpressType {
-
+    public enum ExpressType
+    {
         /// <summary>
         ///     顺丰快递
         /// </summary>

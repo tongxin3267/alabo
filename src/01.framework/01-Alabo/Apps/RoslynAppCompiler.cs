@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 
 namespace Alabo.Apps
 {
@@ -62,9 +62,7 @@ namespace Alabo.Apps
         /// <param name="encoding">The encoding.</param>
         public IDynamicAppCompiler AddFile(string path, Encoding encoding)
         {
-            if (!File.Exists(path)) {
-                throw new FileNotFoundException("file not found.", path);
-            }
+            if (!File.Exists(path)) throw new FileNotFoundException("file not found.", path);
 
             using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
@@ -95,9 +93,7 @@ namespace Alabo.Apps
         /// <param name="assemblyPath">The assembly path.</param>
         public IDynamicAppCompiler AddReference(string assemblyPath)
         {
-            if (!File.Exists(assemblyPath)) {
-                throw new FileNotFoundException("file not found.", assemblyPath);
-            }
+            if (!File.Exists(assemblyPath)) throw new FileNotFoundException("file not found.", assemblyPath);
 
             var reference = MetadataReference.CreateFromFile(assemblyPath);
             _references.Add(reference);
@@ -110,9 +106,7 @@ namespace Alabo.Apps
         /// <param name="usingString">The using string.</param>
         public IDynamicAppCompiler AddUsing(string usingString)
         {
-            if (string.IsNullOrWhiteSpace(usingString)) {
-                throw new ArgumentNullException(nameof(usingString));
-            }
+            if (string.IsNullOrWhiteSpace(usingString)) throw new ArgumentNullException(nameof(usingString));
 
             _usings.Add(usingString);
             return this;

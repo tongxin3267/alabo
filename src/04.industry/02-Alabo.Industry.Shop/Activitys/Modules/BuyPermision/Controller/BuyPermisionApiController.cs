@@ -1,26 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
-using Alabo.Core.WebApis.Controller;
-using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
+﻿using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Alabo.App.Shop.Activitys.Modules.BuyPermision.Controller
+namespace Alabo.Industry.Shop.Activitys.Modules.BuyPermision.Controller
 {
     /// <summary>
-    /// 预售API
+    ///     预售API
     /// </summary>
-    [ApiExceptionFilter, Route("Api/BuyPermision/[action]")]
+    [ApiExceptionFilter]
+    [Route("Api/BuyPermision/[action]")]
     public class BuyPermisionApiController : ApiBaseController
     {
-        /// <summary>
-        /// ctor
-        /// </summary>
-        public BuyPermisionApiController() : base()
-        {
-        }
     }
 }

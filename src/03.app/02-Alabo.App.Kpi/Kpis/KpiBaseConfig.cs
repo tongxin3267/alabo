@@ -1,41 +1,30 @@
-﻿using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Base;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using Alabo.App.Share.OpenTasks.Base;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
-using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Core.Enums.Enum;
 
-namespace Alabo.App.Share.Kpi {
-
-    public abstract class KpiBaseConfig : BaseViewModel, IModuleConfig {
-
+namespace Alabo.App.Kpis.Kpis
+{
+    public abstract class KpiBaseConfig : BaseViewModel, IModuleConfig
+    {
         /// <summary>
-        /// 模块ID与，远程OpenID对应
-        /// </summary>
-        [Field(ControlsType = ControlsType.Hidden, ListShow = false, EditShow = false, SortOrder = 1)]
-        public long Id { get; set; }
-
-        /// <summary>
-        /// 模块名称
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// 模块Id
+        ///     模块Id
         /// </summary>
         public Guid ModuleId { get; set; }
 
-        ///<summary>
-        ///触发类型
-        ///</summary>>
+        /// <summary>
+        ///     触发类型
+        /// </summary>
+        /// >
         [Field(ControlsType = ControlsType.Numberic, ListShow = true, EditShow = false)]
         public TriggerType TriggerType { get; set; } = TriggerType.Order;
 
         /// <summary>
-        /// 分润比例
+        ///     分润比例
         /// </summary>
         [Field(ControlsType = ControlsType.TextBox, ListShow = true, EditShow = false, SortOrder = 1)]
         [HelpBlock(
@@ -44,39 +33,50 @@ namespace Alabo.App.Share.Kpi {
         public virtual string DistriRatio { get; set; } = "0.0,0.0";
 
         /// <summary>
-        /// 最小触发金额
+        ///     最小触发金额
         /// </summary>
         public BaseRule BaseRule { get; set; }
 
         /// <summary>
-        /// 分润用户，收益用户
+        ///     分润用户，收益用户
         /// </summary>
         public ShareUser ShareUser { get; set; }
 
         /// <summary>
-        /// 交易用户、触发用户、下单用户的用户类型
+        ///     交易用户、触发用户、下单用户的用户类型
         /// </summary>
         public OrderUser OrderUser { get; set; }
 
         /// <summary>
-        /// 商品范围
+        ///     商品范围
         /// </summary>
         public ProductRule ProductRule { get; set; }
 
         /// <summary>
-        /// 分期规则
+        ///     分期规则
         /// </summary>
         public StageRule StageRule { get; set; }
 
         /// <summary>
-        /// 模板信息
+        ///     模板信息
         /// </summary>
         public TemplateRule TemplateRule { get; set; }
 
         /// <summary>
-        /// 是否锁定
-        /// 维度锁定以后，不能编辑，只能查看
+        ///     是否锁定
+        ///     维度锁定以后，不能编辑，只能查看
         /// </summary>
         public bool IsLock { get; set; } = false;
+
+        /// <summary>
+        ///     模块ID与，远程OpenID对应
+        /// </summary>
+        [Field(ControlsType = ControlsType.Hidden, ListShow = false, EditShow = false, SortOrder = 1)]
+        public long Id { get; set; }
+
+        /// <summary>
+        ///     模块名称
+        /// </summary>
+        public string Name { get; set; }
     }
 }

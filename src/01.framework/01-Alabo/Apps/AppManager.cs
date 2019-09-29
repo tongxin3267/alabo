@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Alabo.Extensions;
+using Alabo.Runtime;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
-using Alabo.Extensions;
-using Alabo.Runtime;
 
 namespace Alabo.Apps
 {
@@ -36,9 +36,8 @@ namespace Alabo.Apps
             foreach (var item in appDirectories)
             {
                 var appBinPath = Path.Combine(item.FullName, "bin");
-                if (Directory.Exists(appBinPath) && new DirectoryInfo(appBinPath).GetFiles("*.dll").Length > 0) {
+                if (Directory.Exists(appBinPath) && new DirectoryInfo(appBinPath).GetFiles("*.dll").Length > 0)
                     _loadedApps.AddRange(LoadBinaryApp(item.FullName));
-                }
             }
         }
 
@@ -61,11 +60,9 @@ namespace Alabo.Apps
                                 typeof(IApp).IsAssignableFrom(e))
                     .FirstOrDefault();
                 if (appType == null) // no app cs file, not a app binary
-{
                     continue;
-                }
 
-                var app = (IApp) Activator.CreateInstance(appType);
+                var app = (IApp)Activator.CreateInstance(appType);
                 app.Initialize(assembly, appPath, AppType.Binary);
                 appList.Add(app);
             }
@@ -90,7 +87,7 @@ namespace Alabo.Apps
                 .ToArray();
             foreach (var type in appTypes)
             {
-                var app = (IApp) Activator.CreateInstance(type);
+                var app = (IApp)Activator.CreateInstance(type);
                 //promise: app namespace eg:Alabo.Web.Apps.Demo01, app name is "Demo01"
                 var appName = type.Namespace.Split('.').Last();
                 var appPath = Path.Combine(appRootPath, appName);
@@ -107,9 +104,7 @@ namespace Alabo.Apps
         /// <param name="path">The path.</param>
         private static Stream GetAssemblyMemoryStream(string path)
         {
-            if (!File.Exists(path)) {
-                throw new FileNotFoundException();
-            }
+            if (!File.Exists(path)) throw new FileNotFoundException();
 
             using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
@@ -127,14 +122,10 @@ namespace Alabo.Apps
         /// <param name="path">The path.</param>
         private static Stream GetAssemblySymbolsMemoryStream(string path)
         {
-            if (!File.Exists(path)) {
-                throw new FileNotFoundException();
-            }
+            if (!File.Exists(path)) throw new FileNotFoundException();
 
             var pdbPath = Path.Combine(Path.GetDirectoryName(path), $"{Path.GetFileNameWithoutExtension(path)}.pdb");
-            if (!File.Exists(pdbPath)) {
-                return null;
-            }
+            if (!File.Exists(pdbPath)) return null;
 
             using (var fs = new FileStream(pdbPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {

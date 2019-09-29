@@ -1,37 +1,37 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Tenants.Domains.Dtos;
-using Alabo.App.Core.Tenants.Domains.Services;
-using Alabo.Extensions;
-using ZKCloud.Open.ApiBase.Models;
+﻿using Alabo.Extensions;
+using Alabo.Framework.Core.Tenants.Domains.Dtos;
+using Alabo.Framework.Core.Tenants.Domains.Services;
+using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Runtime;
 using Alabo.Tenants.Domain.Entities;
 using Alabo.Tenants.Domain.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
+using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Tenants.Controllers {
-
+namespace Alabo.Framework.Core.Tenants.Controllers
+{
     [Route("Api/Tenant/[action]")]
-    public class ApiTenantController : ApiBaseController<Tenant, ObjectId> {
-
-        public ApiTenantController() : base() {
+    public class ApiTenantController : ApiBaseController<Tenant, ObjectId>
+    {
+        public ApiTenantController()
+        {
             BaseService = Resolve<ITenantService>();
         }
 
         #region 租户初始化默认数据
 
         /// <summary>
-        /// 初始化所有的默认数据
+        ///     初始化所有的默认数据
         /// </summary>
         /// <param name="tenantInit"></param>
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public ApiResult DeleteTenant([FromBody] TenantInit tenantInit) {
-            if (!this.IsFormValid()) {
-                return ApiResult.Failure(this.FormInvalidReason());
-            }
+        public ApiResult DeleteTenant([FromBody] TenantInit tenantInit)
+        {
+            if (!this.IsFormValid()) return ApiResult.Failure(this.FormInvalidReason());
 
             tenantInit.IsTenant = false;
             var result = Resolve<ITenantCreateService>().DeleteTenant(tenantInit);
@@ -43,16 +43,15 @@ namespace Alabo.App.Core.Tenants.Controllers {
         #region 租户初始化默认数据
 
         /// <summary>
-        /// 初始化所有的默认数据
+        ///     初始化所有的默认数据
         /// </summary>
         /// <param name="tenantInit"></param>
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public ApiResult InitAll([FromBody] TenantInit tenantInit) {
-            if (!this.IsFormValid()) {
-                return ApiResult.Failure(this.FormInvalidReason());
-            }
+        public ApiResult InitAll([FromBody] TenantInit tenantInit)
+        {
+            if (!this.IsFormValid()) return ApiResult.Failure(this.FormInvalidReason());
 
             tenantInit.IsTenant = false;
             var result = Resolve<ITenantCreateService>().InitTenantDefaultData(tenantInit);
@@ -64,16 +63,15 @@ namespace Alabo.App.Core.Tenants.Controllers {
         #region 租户初始化默认数据
 
         /// <summary>
-        /// 租户初始化默认数据
+        ///     租户初始化默认数据
         /// </summary>
         /// <param name="tenantInit"></param>
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public ApiResult InitDefault([FromBody] TenantInit tenantInit) {
-            if (!this.IsFormValid()) {
-                return ApiResult.Failure(this.FormInvalidReason());
-            }
+        public ApiResult InitDefault([FromBody] TenantInit tenantInit)
+        {
+            if (!this.IsFormValid()) return ApiResult.Failure(this.FormInvalidReason());
             tenantInit.IsTenant = true;
             var result = Resolve<ITenantCreateService>().InitTenantDefaultData(tenantInit);
             return ToResult(result);
@@ -84,16 +82,15 @@ namespace Alabo.App.Core.Tenants.Controllers {
         #region 租户初始化模板数据
 
         /// <summary>
-        /// 租户初始化模板数据
+        ///     租户初始化模板数据
         /// </summary>
         /// <param name="tenantInit"></param>
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public ApiResult InitTheme([FromBody] TenantInit tenantInit) {
-            if (!this.IsFormValid()) {
-                return ApiResult.Failure(this.FormInvalidReason());
-            }
+        public ApiResult InitTheme([FromBody] TenantInit tenantInit)
+        {
+            if (!this.IsFormValid()) return ApiResult.Failure(this.FormInvalidReason());
 
             var result = Resolve<ITenantCreateService>().InitTenantTheme(tenantInit);
             return ToResult(result);
@@ -104,13 +101,14 @@ namespace Alabo.App.Core.Tenants.Controllers {
         #region 租户信息
 
         /// <summary>
-        /// 检查租户不存在
+        ///     检查租户不存在
         /// </summary>
         /// <param name="tenant"></param>
         /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
-        public ApiResult NoTenant(string tenant) {
+        public ApiResult NoTenant(string tenant)
+        {
             var result = Resolve<ITenantCreateService>().NoTenant(tenant);
             return ToResult(result);
         }
@@ -122,25 +120,26 @@ namespace Alabo.App.Core.Tenants.Controllers {
         /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
-        public ApiResult HaveTenant(string tenant) {
+        public ApiResult HaveTenant(string tenant)
+        {
             var result = Resolve<ITenantCreateService>().HaveTenant(tenant);
             return ToResult(result);
         }
 
         /// <summary>
-        /// 创建租户
+        ///     创建租户
         /// </summary>
         /// <param name="tenant"></param>
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public ApiResult CreateSassTenant([FromBody]Tenant tenant) {
-            if (tenant == null) {
-                return ApiResult.Failure("对象不能为空");
-            }
+        public ApiResult CreateSassTenant([FromBody] Tenant tenant)
+        {
+            if (tenant == null) return ApiResult.Failure("对象不能为空");
 
             var result = Resolve<ITenantCreateService>().InitTenantDatabase(tenant.Sign);
-            if (result.Succeeded) {
+            if (result.Succeeded)
+            {
                 tenant.DatabaseName = RuntimeContext.GetTenantDataBase(tenant.Sign);
                 Resolve<ITenantService>().Add(tenant);
             }

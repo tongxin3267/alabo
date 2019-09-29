@@ -1,20 +1,20 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Data.Things.Brands.Domain.Entities {
-
+namespace Alabo.Data.Things.Brands.Domain.Entities
+{
     /// <summary>
-    /// 店铺品牌
+    ///     店铺品牌
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Things_Brand")]
-    public class Brand : AggregateMongodbRoot<Brand> {
-
+    public class Brand : AggregateMongodbRoot<Brand>
+    {
         [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1, ListShow = true, SortOrder = 1)]
         [Display(Name = "品牌名称")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]

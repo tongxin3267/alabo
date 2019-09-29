@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Alabo.Events.Handlers;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Alabo.Events.Handlers;
 
 namespace Alabo.Events.Default
 {

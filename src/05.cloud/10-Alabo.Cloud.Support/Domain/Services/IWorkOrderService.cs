@@ -1,13 +1,13 @@
-using MongoDB.Bson;
 using System.Collections.Generic;
-using Alabo.App.Cms.Support.Domain.Entities;
+using Alabo.Cloud.Support.Domain.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Cms.Support.Domain.Services {
-
-    public interface IWorkOrderService : IService<WorkOrder, ObjectId> {
-
+namespace Alabo.Cloud.Support.Domain.Services
+{
+    public interface IWorkOrderService : IService<WorkOrder, ObjectId>
+    {
         ServiceResult Delete(ObjectId id);
 
         PagedList<WorkOrder> GetPageList(object query);

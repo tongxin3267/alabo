@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Alabo.Events.Handlers;
+﻿using Alabo.Events.Handlers;
 using Alabo.Helpers;
+using System.Collections.Generic;
 
 namespace Alabo.Events.Default
 {

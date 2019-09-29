@@ -1,7 +1,7 @@
-﻿using System.IO;
+﻿using Newtonsoft.Json;
+using System.IO;
 using System.Linq;
 using System.Reflection;
-using Newtonsoft.Json;
 
 namespace Alabo.Apps
 {
@@ -53,9 +53,8 @@ namespace Alabo.Apps
             AppAssembly = appAssembly;
             AppBaseDirectory = appBaseDirectory;
             Type = type;
-            if (type == AppType.Binary) {
+            if (type == AppType.Binary)
                 InitializeSettings(); //only binary app maybe have json config file, dynamic app use code config
-            }
         }
 
         /// <summary>
@@ -72,7 +71,7 @@ namespace Alabo.Apps
                     using (var sr = new StreamReader(fs))
                     {
                         var appConfig = JsonConvert.DeserializeAnonymousType(sr.ReadToEnd(),
-                            new {Name = string.Empty, Description = string.Empty});
+                            new { Name = string.Empty, Description = string.Empty });
                         Name = appConfig.Name;
                         Description = appConfig.Description;
                     }
@@ -82,9 +81,7 @@ namespace Alabo.Apps
             {
                 //no config file, create auto config message
                 Name = appConfigPath.Split('\\').Reverse().Skip(2).FirstOrDefault();
-                if (string.IsNullOrWhiteSpace(Name)) {
-                    throw new AppConfigErrorException("can not get app name.");
-                }
+                if (string.IsNullOrWhiteSpace(Name)) throw new AppConfigErrorException("can not get app name.");
 
                 Description = Name;
             }

@@ -1,5 +1,5 @@
-﻿using System.Text;
-using Alabo.Helpers;
+﻿using Alabo.Helpers;
+using System.Text;
 
 namespace Alabo.Events.Messages
 {
@@ -31,13 +31,9 @@ namespace Alabo.Events.Messages
             var result = new StringBuilder();
             result.AppendLine($"事件标识: {Id}");
             result.AppendLine($"事件时间:{Extensions.Extensions.ToMillisecondString(Time)}");
-            if (string.IsNullOrWhiteSpace(Target) == false) {
-                result.AppendLine($"发送目标:{Target}");
-            }
+            if (string.IsNullOrWhiteSpace(Target) == false) result.AppendLine($"发送目标:{Target}");
 
-            if (string.IsNullOrWhiteSpace(Callback) == false) {
-                result.AppendLine($"回调:{Callback}");
-            }
+            if (string.IsNullOrWhiteSpace(Callback) == false) result.AppendLine($"回调:{Callback}");
 
             result.Append($"事件数据：{Json.ToJson(Data)}");
             return result.ToString();

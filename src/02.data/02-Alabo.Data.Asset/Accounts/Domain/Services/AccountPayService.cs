@@ -1,31 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Dtos.Account;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Entities.Extension;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.App.Core.Finance.Dtos;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.Core.Enums.Enum;
+﻿using Alabo.App.Asset.Accounts.Dtos;
+using Alabo.App.Asset.Pays.Domain.Entities;
+using Alabo.App.Asset.Recharges.Dtos;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Attributes;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
-using Alabo.Extensions;
+using Alabo.Framework.Core.Enums.Enum;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace Alabo.App.Core.Finance.Domain.Services {
-
-    public class AccountPayService : ServiceBase, IAccountPayService {
-
-        public AccountPayService(IUnitOfWork unitOfWork) : base(unitOfWork) {
+namespace Alabo.App.Asset.Accounts.Domain.Services
+{
+    public class AccountPayService : ServiceBase, IAccountPayService
+    {
+        public AccountPayService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
         }
 
         [Method]
-        public void AfterPaySuccess(long tradeId) {
+        public void AfterPaySuccess(long tradeId)
+        {
             //            // var ssss = tradeId;
             //            //Resolve<IPayService>().Log(" 执行预留方法:AfterPaySuccess!");
             //            //var input = (RechargeAccountInput)model;
@@ -53,36 +49,39 @@ namespace Alabo.App.Core.Finance.Domain.Services {
             //            }
         }
 
-        public Task<Tuple<ServiceResult, RechageAccountOutput>> BuyAsync(RechargeAccountInput rechargeAccount) {
+        public Task<Tuple<ServiceResult, RechageAccountOutput>> BuyAsync(RechargeAccountInput rechargeAccount)
+        {
             var input = rechargeAccount;
 
             #region 安全验证
 
-            if (rechargeAccount == null) {
-                return Task.FromResult(Tuple.Create(ServiceResult.FailedWithMessage("对象不能为空"), new RechageAccountOutput()));
-            }
-            if (rechargeAccount.Money <= 0) {
-                return Task.FromResult(Tuple.Create(ServiceResult.FailedWithMessage("金额不能小于等于0!"), new RechageAccountOutput()));
-            }
-            if (rechargeAccount.UserId <= 0) {
-                return Task.FromResult(Tuple.Create(ServiceResult.FailedWithMessage("用户id不能为空!"), new RechageAccountOutput()));
-            }
+            if (rechargeAccount == null)
+                return Task.FromResult(Tuple.Create(ServiceResult.FailedWithMessage("对象不能为空"),
+                    new RechageAccountOutput()));
+            if (rechargeAccount.Money <= 0)
+                return Task.FromResult(Tuple.Create(ServiceResult.FailedWithMessage("金额不能小于等于0!"),
+                    new RechageAccountOutput()));
+            if (rechargeAccount.UserId <= 0)
+                return Task.FromResult(Tuple.Create(ServiceResult.FailedWithMessage("用户id不能为空!"),
+                    new RechageAccountOutput()));
             var user = Resolve<IUserService>().GetSingle(rechargeAccount.UserId);
-            if (user == null) {
-                return Task.FromResult(Tuple.Create(ServiceResult.FailedWithMessage("用户不存在"), new RechageAccountOutput()));
-            }
+            if (user == null)
+                return Task.FromResult(Tuple.Create(ServiceResult.FailedWithMessage("用户不存在"),
+                    new RechageAccountOutput()));
 
             #endregion 安全验证
 
-            var pay = new Pay {
+            var pay = new Pay
+            {
                 Status = PayStatus.WaiPay,
                 Type = CheckoutType.Recharge,
                 Amount = input.Money,
-                UserId = input.UserId,
+                UserId = input.UserId
                 //EntityId = tradeInfo.Id.ToString()
             };
             var ids = new List<long>();
-            try {
+            try
+            {
                 //TODO 2019年9月25日 重构注释
                 //var tradeInfo = new Trade() {
                 //    Amount = input.Money,
@@ -133,11 +132,16 @@ namespace Alabo.App.Core.Finance.Domain.Services {
                 //} else {
                 //    return Task.FromResult(Tuple.Create(ServiceResult.FailedWithMessage("储值失败"), new RechageAccountOutput()));
                 //}
-            } catch (Exception ex) {
-                return Task.FromResult(Tuple.Create(ServiceResult.FailedWithMessage("储值失败" + ex.Message), new RechageAccountOutput()));
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(Tuple.Create(ServiceResult.FailedWithMessage("储值失败" + ex.Message),
+                    new RechageAccountOutput()));
                 //return ApiResult.Failure<object>("订单记录失败," + ex.Message);
             }
-            var outPut = new RechageAccountOutput {
+
+            var outPut = new RechageAccountOutput
+            {
                 PayId = pay.Id,
                 PayAmount = input.Money,
                 OrderIds = ids

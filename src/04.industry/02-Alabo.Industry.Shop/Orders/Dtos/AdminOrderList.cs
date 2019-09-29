@@ -1,19 +1,22 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.Domains.Enums;
+using Alabo.Domains.Repositories.Mongo.Extension;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.Users.Entities;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Order.Domain.Dtos {
-
+namespace Alabo.Industry.Shop.Orders.Dtos
+{
     /// <summary>
     /// </summary>
     [ClassProperty(Name = "订单管理", Icon = "fa fa-puzzle-piece", Description = "订单管理",
         PageType = ViewPageType.List)]
-    public class AdminOrderList {
-
+    public class AdminOrderList
+    {
         /// <summary>
         ///     Id
         /// </summary>
@@ -37,7 +40,7 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
         /// <summary>
         ///     所属店铺
         /// </summary>
-        public long StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     店铺名称
@@ -51,7 +54,8 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
         ///     3,已取消Cancelled = 4,已作废Invalid = 5,
         /// </summary>
         [Display(Name = "订单状态")]
-        [Field(IsTabSearch = true, IsShowAdvancedSerach = true, ControlsType = ControlsType.DropdownList, ListShow = true,
+        [Field(IsTabSearch = true, IsShowAdvancedSerach = true, ControlsType = ControlsType.DropdownList,
+            ListShow = true,
             SupportSearchOrder = true, DataSource = "Alabo.App.Shop.Order.Domain.Enums.OrderStatus")]
         public OrderStatus OrderStatus { get; set; }
 
@@ -68,14 +72,16 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
         ///     订单总金额=商品总金额-优惠金额-（+）调整金额+税费金额+邮费金额 -其他账户支出
         /// </summary>
         [Display(Name = "订单总金额")]
-        [Field(IsShowAdvancedSerach = true, ControlsType = ControlsType.NumberRang, SupportSearchOrder = true, ListShow = true)]
+        [Field(IsShowAdvancedSerach = true, ControlsType = ControlsType.NumberRang, SupportSearchOrder = true,
+            ListShow = true)]
         public decimal TotalAmount { get; set; }
 
         /// <summary>
         ///     订单总数量
         /// </summary>
         [Display(Name = "订单总数量")]
-        [Field(IsShowAdvancedSerach = true, ControlsType = ControlsType.NumberRang, SupportSearchOrder = true, ListShow = true)]
+        [Field(IsShowAdvancedSerach = true, ControlsType = ControlsType.NumberRang, SupportSearchOrder = true,
+            ListShow = true)]
         public long TotalCount { get; set; }
 
         /// <summary>
@@ -83,28 +89,31 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
         ///     订单实际支付的金额=商品总金额-优惠金额-（+）调整金额+邮费金额 -其他账户支出
         /// </summary>
         [Display(Name = "总支付现金")]
-        [Field(IsShowAdvancedSerach = true, ControlsType = ControlsType.NumberRang, SupportSearchOrder = true, ListShow = true)]
+        [Field(IsShowAdvancedSerach = true, ControlsType = ControlsType.NumberRang, SupportSearchOrder = true,
+            ListShow = true)]
         public decimal PaymentAmount { get; set; }
 
         /// <summary>
         ///     下单时间，订单创建时间
         /// </summary>
         [Display(Name = "下单时间")]
-        [Field(IsShowAdvancedSerach = true, ControlsType = ControlsType.DateTimeRang, SupportSearchOrder = true, ListShow = true)]
+        [Field(IsShowAdvancedSerach = true, ControlsType = ControlsType.DateTimeRang, SupportSearchOrder = true,
+            ListShow = true)]
         public DateTime CreateTime { get; set; } = DateTime.Now;
 
         /// <summary>
         ///     根据Id自动生成12位序列号
         /// </summary>
         [Display(Name = "序号")]
-        [Field(IsShowBaseSerach = true, ControlsType = ControlsType.TextBox, PlaceHolder = "请输入订单号", DataField = "Id", ListShow = true,
+        [Field(IsShowBaseSerach = true, ControlsType = ControlsType.TextBox, PlaceHolder = "请输入订单号", DataField = "Id",
+            ListShow = true,
             SortOrder = 1)]
         public string Serial { get; set; }
 
         /// <summary>
         ///     订单详情
         /// </summary>
-        public Entities.Order Order { get; set; }
+        public Order Order { get; set; }
 
         /// <summary>
         ///     下单用户
@@ -117,7 +126,8 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
         /// <summary>
         ///     所属商城
         /// </summary>
-        [Field(ControlsType = ControlsType.TextBox, PlaceHolder = "请输入订单号", DataField = "PriceStyleName", ListShow = true,
+        [Field(ControlsType = ControlsType.TextBox, PlaceHolder = "请输入订单号", DataField = "PriceStyleName",
+            ListShow = true,
             SortOrder = 1)]
         public string PriceStyleName { get; set; }
 
@@ -127,8 +137,8 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
         public string ForCash { get; set; }
     }
 
-    public class OrderExcelOutPut {
-
+    public class OrderExcelOutPut
+    {
         /// <summary>
         ///     Id
         /// </summary>
@@ -139,7 +149,8 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
         ///     根据Id自动生成12位序列号
         /// </summary>
         [Display(Name = "订单编号")]
-        [Field(IsShowBaseSerach = true, ListShow = true, ControlsType = ControlsType.TextBox, PlaceHolder = "请输入订单号", DataField = "Id",
+        [Field(IsShowBaseSerach = true, ListShow = true, ControlsType = ControlsType.TextBox, PlaceHolder = "请输入订单号",
+            DataField = "Id",
             SortOrder = 1)]
         public string Serial { get; set; }
 
@@ -152,14 +163,14 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
         public string UserName { get; set; }
 
         /// <summary>
-        ///手机号
+        ///     手机号
         /// </summary>
         [Display(Name = "手机号")]
         [Field(ListShow = true, ControlsType = ControlsType.TextBox, SortOrder = 3)]
         public string Mobile { get; set; }
 
         /// <summary>
-        /// 收货地址
+        ///     收货地址
         /// </summary>
         [Display(Name = "收货地址")]
         [Field(ListShow = true, ControlsType = ControlsType.TextBox, SortOrder = 4)]
@@ -215,6 +226,6 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
         [Field(ListShow = true, ControlsType = ControlsType.DateTimeRang, SupportSearchOrder = true, SortOrder = 1000)]
         public DateTime CreateTime { get; set; }
 
-        public Entities.Order Order { get; set; }
+        public Order Order { get; set; }
     }
 }

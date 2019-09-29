@@ -1,24 +1,24 @@
-﻿using MongoDB.Bson;
+﻿using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
+using Alabo.Validations;
+using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.Validations;
-using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Employes.Domain.Entities {
-
+namespace Alabo.Data.People.Employes.Domain.Entities
+{
     /// <summary>
-    /// 岗位，也可立即成部门表
+    ///     岗位，也可立即成部门表
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Admin_PostRole")]
     [ClassProperty(Name = "岗位权限")]
     [AutoDelete(IsAuto = true, EntityType = typeof(Employee), RelationId = "PostRoleId")]
-    public class PostRole : AggregateMongodbRoot<PostRole> {
-
+    public class PostRole : AggregateMongodbRoot<PostRole>
+    {
         /// <summary>
         ///     岗位名称
         /// </summary>
@@ -36,7 +36,7 @@ namespace Alabo.App.Core.Employes.Domain.Entities {
         public string Summary { get; set; }
 
         /// <summary>
-        /// 岗位权限IDs
+        ///     岗位权限IDs
         /// </summary>
         public List<ObjectId> RoleIds { get; set; }
     }

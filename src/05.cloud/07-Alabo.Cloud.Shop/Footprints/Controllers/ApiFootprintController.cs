@@ -1,19 +1,5 @@
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
-using Alabo.App.Share.Attach.Domain.Dtos;
-using Alabo.App.Share.Attach.Domain.Entities;
-using Alabo.App.Share.Attach.Domain.Enums;
-using Alabo.App.Share.Attach.Domain.Services;
-using Alabo.App.Shop.Product.DiyModels;
-using Alabo.Domains.Enums;
-using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
-using Alabo.App.Open.Attach.Domain.Enums;
-
-namespace Alabo.App.Share.Attach.Controllers {
+namespace Alabo.Cloud.Shop.Footprints.Controllers
+{
     //2019年9月24日 重构注释
     ///// <summary>
     /////

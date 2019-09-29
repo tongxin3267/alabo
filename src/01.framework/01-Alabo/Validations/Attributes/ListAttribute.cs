@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.DataAnnotations;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 namespace Alabo.Validations.Attributes
 {
@@ -25,9 +25,7 @@ namespace Alabo.Validations.Attributes
     {
         public override bool IsValid(object value)
         {
-            if (value == null) {
-                return false;
-            }
+            if (value == null) return false;
 
             return true;
         }

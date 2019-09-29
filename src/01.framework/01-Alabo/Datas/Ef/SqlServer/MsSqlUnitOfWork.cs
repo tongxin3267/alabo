@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Alabo.Datas.Ef.Map;
+﻿using Alabo.Datas.Ef.Map;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Reflections;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace Alabo.Datas.Ef.SqlServer
 {

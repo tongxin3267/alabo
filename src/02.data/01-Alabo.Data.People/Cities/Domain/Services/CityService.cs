@@ -1,24 +1,19 @@
-using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
+using Alabo.Data.People.Cities.Domain.Entities;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Repositories;
-using Alabo.App.Agent.Citys.Domain.Entities;
-using Alabo.App.Core.User.Domain.Services;
 using Alabo.Domains.Entities;
-using Alabo.App.Core.User.Domain.Entities;
+using Alabo.Domains.Repositories;
+using Alabo.Domains.Services;
 using Alabo.Users.Entities;
+using MongoDB.Bson;
+using System;
 
-namespace Alabo.App.Agent.Citys.Domain.Services
+namespace Alabo.Data.People.Cities.Domain.Services
 {
-
     public class CityService : ServiceBase<City, ObjectId>, ICityService
     {
-
-        public CityService(IUnitOfWork unitOfWork, IRepository<City, ObjectId> repository) : base(unitOfWork, repository)
+        public CityService(IUnitOfWork unitOfWork, IRepository<City, ObjectId> repository) : base(unitOfWork,
+            repository)
         {
         }
 
@@ -27,14 +22,11 @@ namespace Alabo.App.Agent.Citys.Domain.Services
             return GetSingle(r => r.UserId == userId);
         }
 
-        public ServiceResult ChangeUserStatus(string userId, string Status)
+        public ServiceResult ChangeUserStatus(string userId, string status)
         {
             var user = Resolve<IUserService>().GetSingle(userId);
-            if (user == null)
-            {
-                return ServiceResult.FailedMessage("用户不存在");
-            }
-            var model = new User()
+            if (user == null) return ServiceResult.FailedMessage("用户不存在");
+            var model = new User
             {
                 Id = Convert.ToInt32(userId),
                 Status = Domains.Enums.Status.Normal
@@ -43,6 +35,5 @@ namespace Alabo.App.Agent.Citys.Domain.Services
 
             return ServiceResult.Success;
         }
-
     }
 }

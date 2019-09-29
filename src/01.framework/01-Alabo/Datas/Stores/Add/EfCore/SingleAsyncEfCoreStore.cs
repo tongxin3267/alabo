@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
 using Alabo.Extensions;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.Stores.Add.EfCore
 {
@@ -23,11 +23,9 @@ namespace Alabo.Datas.Stores.Add.EfCore
 
         public async Task<TEntity> GetSingleAsync(object id)
         {
-            if (id.SafeString().IsEmpty()) {
-                return null;
-            }
+            if (id.SafeString().IsEmpty()) return null;
 
-            return await Set.FindAsync(new[] {id}, default);
+            return await Set.FindAsync(new[] { id }, default);
         }
 
         public async Task<TEntity> GetSingleAsync(Expression<Func<TEntity, bool>> predicate)

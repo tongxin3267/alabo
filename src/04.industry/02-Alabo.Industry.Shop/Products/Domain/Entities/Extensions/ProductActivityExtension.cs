@@ -1,30 +1,30 @@
 ﻿using System.Collections.Generic;
 using Alabo.Domains.Entities.Extensions;
 
-namespace Alabo.App.Shop.Product.Domain.Entities.Extensions {
-
+namespace Alabo.Industry.Shop.Products.Domain.Entities.Extensions
+{
     /// <summary>
     ///     活动扩展
     /// </summary>
-    public class ProductActivityExtension : EntityExtension {
-
+    public class ProductActivityExtension : EntityExtension
+    {
         /// <summary>
-        /// IsGroupBuy
+        ///     IsGroupBuy
         /// </summary>
         public bool IsGroupBuy { get; set; } = false;
 
         /// <summary>
-        ///  activities
+        ///     activities
         /// </summary>
         public IList<ProductActivity> Activitys { get; set; } = new List<ProductActivity>();
 
         /// <summary>
-        /// user permission
+        ///     user permission
         /// </summary>
         public UserPermissions UserPermissions { get; set; }
 
         /// <summary>
-        /// UserGradePrice
+        ///     UserGradePrice
         /// </summary>
         public List<UserGradePriceView> UserGradePrices { get; set; }
     }
@@ -32,8 +32,8 @@ namespace Alabo.App.Shop.Product.Domain.Entities.Extensions {
     /// <summary>
     ///     Class ProductActivity.
     /// </summary>
-    public class ProductActivity {
-
+    public class ProductActivity
+    {
         /// <summary>
         ///     Key
         /// </summary>
@@ -57,53 +57,53 @@ namespace Alabo.App.Shop.Product.Domain.Entities.Extensions {
     }
 
     /// <summary>
-    /// UserPermissions
+    ///     UserPermissions
     /// </summary>
-    public class UserPermissions {
-
+    public class UserPermissions
+    {
         /// <summary>
-        /// 单次最多购买
+        ///     单次最多购买
         /// </summary>
         public long SingleBuyCountMax { get; set; }
 
         /// <summary>
-        /// 单次最低购买
+        ///     单次最低购买
         /// </summary>
         public long SingleBuyCountMin { get; set; }
 
         /// <summary>
-        /// 用户购买此商品数量限制
+        ///     用户购买此商品数量限制
         /// </summary>
         public long TotalBuyCountMax { get; set; }
 
         /// <summary>
-        /// have lever to view
+        ///     have lever to view
         /// </summary>
         public bool IsMemberLeverView { get; set; } = true;
 
         /// <summary>
-        /// have lever to buy
+        ///     have lever to buy
         /// </summary>
         public bool IsMemberLeverBuy { get; set; } = true;
     }
 
     /// <summary>
-    /// UserGradePriceView
+    ///     UserGradePriceView
     /// </summary>
-    public class UserGradePriceView {
-
+    public class UserGradePriceView
+    {
         /// <summary>
-        /// name
+        ///     name
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// low price
+        ///     low price
         /// </summary>
         public decimal LowPrice { get; set; }
 
         /// <summary>
-        /// high price
+        ///     high price
         /// </summary>
         public decimal HighPrice { get; set; }
     }

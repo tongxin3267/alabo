@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Asset.Transfers.Domain.Entities {
-
+namespace Alabo.App.Asset.Transfers.Domain.Entities
+{
     [ClassProperty(Name = "充值", Icon = "fa fa-puzzle-piece", Description = "充值")]
-    public class Transfer : AggregateDefaultUserRoot<Transfer> {
-
+    public class Transfer : AggregateDefaultUserRoot<Transfer>
+    {
         /// <summary>
         ///     转账配置Id
         /// </summary>
@@ -57,30 +57,31 @@ namespace Alabo.App.Asset.Transfers.Domain.Entities {
         ///     Gets the serial.
         /// </summary>
         [Display(Name = "序号")]
-        public string Serial {
-            get {
+        public string Serial
+        {
+            get
+            {
                 var searSerial = $"T{Id.ToString().PadLeft(9, '0')}";
-                if (Id.ToString().Length == 10) {
-                    searSerial = $"{Id.ToString()}";
-                }
+                if (Id.ToString().Length == 10) searSerial = $"{Id.ToString()}";
 
                 return searSerial;
             }
         }
     }
 
-    public class TransferTableMap : MsSqlAggregateRootMap<Transfer> {
-
-        protected override void MapTable(EntityTypeBuilder<Transfer> builder) {
+    public class TransferTableMap : MsSqlAggregateRootMap<Transfer>
+    {
+        protected override void MapTable(EntityTypeBuilder<Transfer> builder)
+        {
             builder.ToTable("Asset_Transfer");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<Transfer> builder) {
+        protected override void MapProperties(EntityTypeBuilder<Transfer> builder)
+        {
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.Serial);
             builder.Ignore(e => e.UserName);
-            builder.Ignore(e => e.Version);
         }
     }
 }

@@ -1,27 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace Alabo.App.Shop.Order.Dtos
+namespace Alabo.Industry.Shop.Orders.Dtos
 {
     /// <summary>
-    /// 货款输入
+    ///     货款输入
     /// </summary>
     public class PayGoodsAmountInput
     {
         /// <summary>
-        /// 订单id
+        ///     订单id
         /// </summary>
         public long OrderId { get; set; }
+
         /// <summary>
-        /// 说明
+        ///     说明
         /// </summary>
         public string Desc { get; set; }
 
         /// <summary>
-        /// 凭证 最多三个
+        ///     凭证 最多三个
         /// </summary>
         public List<string> Icertificate { get; set; }
-
     }
 }

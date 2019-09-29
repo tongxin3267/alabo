@@ -1,23 +1,24 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.Product.Domain.Enums;
+using Alabo.Domains.Repositories.Mongo.Extension;
+using Alabo.Industry.Shop.Products.Domain.Enums;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Product.Domain.Dtos
+namespace Alabo.Industry.Shop.Products.Dtos
 {
-
     /// <summary>
     ///     商品Sku数据传输，一般购物车，下单等流程
     /// </summary>
     public class ProductSkuItem
     {
-
         /// <summary>
         ///     Gets or sets the store identifier.
         /// </summary>
         /// <value>
         ///     The store identifier.
         /// </value>
-        public long StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     商品ID
@@ -68,6 +69,7 @@ namespace Alabo.App.Shop.Product.Domain.Dtos
 
         /// <summary> 平台价 平台显示的价格，和订单计算会员优惠相关，用于订单中计算会员和平台的价格优惠差值 </summary>
         public decimal PlatformPrice { get; set; } = 0M;
+
         /// <summary>
         ///     免邮费
         /// </summary>
@@ -122,16 +124,13 @@ namespace Alabo.App.Shop.Product.Domain.Dtos
         public decimal MinPayCash { get; set; }
 
         /// <summary>
-        /// 运费模板
+        ///     运费模板
         /// </summary>
         public string DeliveryTemplateId { get; set; }
 
         /// <summary>
-        ///    商品状态
-        /// </summary> 
+        ///     商品状态
+        /// </summary>
         public ProductStatus ProductStatus { get; set; } = ProductStatus.Online;
-
-
-
     }
 }

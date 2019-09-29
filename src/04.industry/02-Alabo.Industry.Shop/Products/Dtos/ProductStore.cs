@@ -1,39 +1,69 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using Alabo.App.Shop.Product.Domain.Entities.Extensions;
-using Alabo.App.Shop.Product.Domain.Enums;
-using Alabo.App.Shop.Product.ViewModels;
-using Alabo.Datas.Ef.SqlServer;
+using Alabo.Data.People.Stores.Domain.Entities;
+using Alabo.Data.People.Stores.Domain.Services;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.Web.Mvc.Attributes;
-using Alabo.Tenants;
-using Alabo.Web.Mvc.ViewModel;
-using Alabo.UI.AutoTables;
-using Alabo.Extensions;
-using Alabo.App.Shop.Product.Domain.Services;
-using Alabo.App.Shop.Store.Domain.Services;
-using Alabo.UI;
-using Alabo.App.Shop.Product.Domain.Dtos;
-using Alabo.Helpers;
-using Alabo.Domains.Query;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Exceptions;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Industry.Shop.Deliveries.Domain.Entities;
+using Alabo.Industry.Shop.Deliveries.Domain.Services;
+using Alabo.Industry.Shop.Products.Domain.Entities;
+using Alabo.Industry.Shop.Products.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.Products.Domain.Enums;
+using Alabo.Industry.Shop.Products.Domain.Services;
+using Alabo.Industry.Shop.Products.ViewModels;
+using Alabo.UI;
+using Alabo.UI.Design.AutoTables;
 using Alabo.Validations;
+using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Product.Domain.Entities {
-
-    [ClassProperty(Name = "供应商商品管理", Icon = "fa fa-puzzle-piece", Description = "供应商商品", PageType = ViewPageType.List, PostApi = "Api/Store/GetProductList", ListApi = "Api/Product/ProductList")]
+namespace Alabo.Industry.Shop.Products.Dtos
+{
+    [ClassProperty(Name = "供应商商品管理", Icon = "fa fa-puzzle-piece", Description = "供应商商品", PageType = ViewPageType.List,
+        PostApi = "Api/Store/GetProductList", ListApi = "Api/Product/ProductList")]
     /// <summary>
     /// Class Product.
     /// </summary>
-    public class ProductStore : UIBase, IAutoTable<Product> {
+    public class ProductStore : UIBase, IAutoTable<Product>
+    {
+        /// <summary>
+        ///     构建自动表单
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public PageResult<Product> PageTable(object query, AutoBaseModel autoModel)
+        {
+            var model = new PagedList<Product>();
+
+            var store = Resolve<IStoreService>().GetUserStore(autoModel.BasicUser.Id);
+            if (store == null) throw new ValidException("您不是供应商,暂无店铺");
+            // model = Resolve<IProductService>().GetPagedList(query, r => r.StoreId == store.Id);
+
+            // return ToPageResult(model);
+            return null;
+        }
+
+        public List<TableAction> Actions()
+        {
+            var list = new List<TableAction>
+            {
+                ToLinkAction("商品添加", "/User/Product/Store/Edit", TableActionType.QuickAction), //供应商增加
+
+                ToLinkAction("商品编辑", "/User/Product/Store/Edit", TableActionType.ColumnAction), //供应商编辑
+                //ToLinkAction("商品活动", "/User/Activity/Store/Index",TableActionType.ColumnAction),//管理员活动
+                ToLinkAction("删除商品", "/Api/Store/DeleteProduct", ActionLinkType.Delete,
+                    TableActionType.ColumnAction) //供应商删除
+            };
+            return list;
+        }
 
         #region 属性
 
@@ -44,7 +74,7 @@ namespace Alabo.App.Shop.Product.Domain.Entities {
         [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, PlaceHolder = "请输入供应商",
             IsShowAdvancedSerach = true, DataField = "StoreId", GroupTabId = 2, IsMain = true, Width = "150",
             ListShow = true, SortOrder = 2, Link = "/Admin/Product/Edit?id=[[Id]]")]
-        public long StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     商品价格模式的配置Id 与PriceStyleConfig 对应
@@ -53,7 +83,7 @@ namespace Alabo.App.Shop.Product.Domain.Entities {
         public Guid PriceStyleId { get; set; }
 
         /// <summary>
-        /// 运费模板ID
+        ///     运费模板ID
         /// </summary>
         [Display(Name = "运费模板ID")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
@@ -85,8 +115,10 @@ namespace Alabo.App.Shop.Product.Domain.Entities {
         /// </summary>
         [Display(Name = "商品名称")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, PlaceHolder = "请输入商品名称", Operator = Operator.Contains,
-            IsShowAdvancedSerach = true, DataSource = "Alabo.App.Shop.Product.Domain.Entities", GroupTabId = 1, IsMain = true, Width = "150",
+        [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, PlaceHolder = "请输入商品名称",
+            Operator = Operator.Contains,
+            IsShowAdvancedSerach = true, DataSource = "Alabo.App.Shop.Product.Domain.Entities", GroupTabId = 1,
+            IsMain = true, Width = "150",
             ListShow = true, SortOrder = 1, Link = "/Admin/Product/Edit?id=[[Id]]")]
         [StringLength(60, ErrorMessage = "60个字以内")]
         public string Name { get; set; }
@@ -96,7 +128,8 @@ namespace Alabo.App.Shop.Product.Domain.Entities {
         /// </summary>
         [Display(Name = "货号")]
         [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, PlaceHolder = "请输入货号",
-            IsShowAdvancedSerach = true, DataSource = "Alabo.App.Shop.Product.Domain.Entities", GroupTabId = 3, IsMain = true, Width = "150",
+            IsShowAdvancedSerach = true, DataSource = "Alabo.App.Shop.Product.Domain.Entities", GroupTabId = 3,
+            IsMain = true, Width = "150",
             ListShow = true, SortOrder = 2, Link = "/Admin/Product/Edit?id=[[Id]]")]
         [StringLength(60, ErrorMessage = "60个字以内")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
@@ -229,9 +262,7 @@ namespace Alabo.App.Shop.Product.Domain.Entities {
         [Display(Name = "收藏量")]
         public long FavoriteCount { get; set; }
 
-        [Display(Name = "所属商城")]
-        [NotMapped]
-        public string PriceStyleName { get; set; }
+        [Display(Name = "所属商城")] [NotMapped] public string PriceStyleName { get; set; }
 
         /// <summary>
         ///     所属活动 ,使用Json保存
@@ -258,7 +289,7 @@ namespace Alabo.App.Shop.Product.Domain.Entities {
         ///     Gets the store.
         /// </summary>
         [Display(Name = "获取库存")]
-        public Store.Domain.Entities.Store Store { get; internal set; }
+        public Store Store { get; internal set; }
 
         /// <summary>
         ///     商品活动扩展.
@@ -269,35 +300,6 @@ namespace Alabo.App.Shop.Product.Domain.Entities {
         #endregion 以下字段程序使用,不生成数据库
 
         #endregion 属性
-
-        /// <summary>
-        /// 构建自动表单
-        /// </summary>
-        /// <param name="query"></param>
-        /// <returns></returns>
-        public PageResult<Product> PageTable(object query, AutoBaseModel autoModel) {
-            var model = new PagedList<Product>();
-
-            var store = Resolve<IShopStoreService>().GetUserStore(autoModel.BasicUser.Id);
-            if (store == null) {
-                throw new ValidException("您不是供应商,暂无店铺");
-            }
-            model = Resolve<IProductService>().GetPagedList(query, r => r.StoreId == store.Id);
-
-            return ToPageResult(model);
-        }
-
-        public List<TableAction> Actions() {
-            var list = new List<TableAction>
-            {
-                ToLinkAction("商品添加", "/User/Product/Store/Edit",TableActionType.QuickAction),//供应商增加
-
-                ToLinkAction("商品编辑", "/User/Product/Store/Edit",TableActionType.ColumnAction),//供应商编辑
-                //ToLinkAction("商品活动", "/User/Activity/Store/Index",TableActionType.ColumnAction),//管理员活动
-                ToLinkAction("删除商品", "/Api/Store/DeleteProduct",ActionLinkType.Delete,TableActionType.ColumnAction)//供应商删除
-            };
-            return list;
-        }
     }
 
     //public class ProductStoreTableMap : MsSqlAggregateRootMap<ProductStore>
@@ -316,7 +318,7 @@ namespace Alabo.App.Shop.Product.Domain.Entities {
     //        builder.Ignore(e => e.ProductActivityExtension);
     //        builder.Ignore(e => e.Detail);
     //        builder.Ignore(e => e.Store);
-    //        builder.Ignore(e => e.Version);
+    //
     //        if (TenantContext.IsTenant)
     //        {
     //            // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);

@@ -1,12 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
+﻿using Alabo.AutoConfigs;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.App.Core.UserType.Modules.Province {
-
+namespace Alabo.Data.People.Provinces.Domain.Configs
+{
     /// <summary>
     ///     省代理配置
     /// </summary>
@@ -14,8 +13,8 @@ namespace Alabo.App.Core.UserType.Modules.Province {
     [ClassProperty(Name = "省代理配置", Icon = "fa fa-user-times",
         Description = "省代理配置", PageType = ViewPageType.Edit, SortOrder = 12,
         SideBarType = SideBarType.PartnerSideBar)]
-    public class ProvinceConfig : IAutoConfig {
-
+    public class ProvinceConfig : IAutoConfig
+    {
         /// <summary>
         ///     服务条款
         ///     留空时使用默认条款
@@ -25,7 +24,8 @@ namespace Alabo.App.Core.UserType.Modules.Province {
         [HelpBlock("请输入省代理服务条款，默认值为省代理服务条款")]
         public string ProvinceServiceAgreement { get; set; } = "省代理服务条款";
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
             // throw new NotImplementedException();
         }
     }

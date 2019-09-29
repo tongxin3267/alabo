@@ -2,32 +2,174 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using Alabo.App.Cms.Articles.Domain.CallBacks;
-using Alabo.App.Cms.Articles.Domain.Entities;
-using Alabo.App.Cms.Articles.Domain.Services;
-using Alabo.App.Core.Common.Domain.CallBacks;
-using Alabo.App.Core.Common.Domain.Services;
+using Alabo.Cache;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.Relations.Domain.Services;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
+using Alabo.Helpers;
+using Alabo.Industry.Cms.Articles.Domain.CallBacks;
+using Alabo.Industry.Cms.Articles.Domain.Entities;
+using Alabo.Industry.Cms.Articles.Domain.Services;
 using Alabo.Mapping;
 using Alabo.Maps;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
+using Alabo.UI.Design.AutoForms;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
+using Convert = System.Convert;
 
-namespace Alabo.App.Cms.Articles.UI.AutoForm
+namespace Alabo.Industry.Cms.Articles.UI.AutoForm
 {
-    [ClassProperty(Name = "文章", GroupName = "基本设置,详细内容,搜索引擎优化,其他选项", Icon = "fa fa-puzzle-piece", SideBarType = SideBarType.ArticleSideBarSideBar)]
+    [ClassProperty(Name = "文章", GroupName = "基本设置,详细内容,搜索引擎优化,其他选项", Icon = "fa fa-puzzle-piece",
+        SideBarType = SideBarType.ArticleSideBarSideBar)]
     public class ArticleAutoForm : UIBase, IAutoForm
     {
-        #region
         /// <summary>
-        /// id
+        ///     获取view
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="autoModel"></param>
+        /// <returns></returns>
+        public Alabo.UI.Design.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
+            var dic = autoModel.Query.ToObject<Dictionary<string, string>>();
+            dic.TryGetValue("ChannelId", out var channelId);
+            var result = Resolve<IArticleService>().GetSingle(id);
+            var articleForm = new ArticleAutoForm();
+            if (result != null) articleForm = result.MapTo<ArticleAutoForm>();
+
+            articleForm.Id = id.ToString();
+            if (channelId == null)
+                articleForm.ChannelId = result.ChannelId.ToString();
+            else
+                articleForm.ChannelId = channelId;
+            if (result != null)
+            {
+                var channel = Resolve<IChannelService>().GetSingle(r => r.Id == articleForm.ChannelId.ToObjectId());
+                if (channel != null)
+                {
+                    var classType = Resolve<IChannelService>().GetChannelClassType(channel);
+                    var tagType = Resolve<IChannelService>().GetChannelTagType(channel);
+
+                    var classlist = Resolve<IRelationIndexService>()
+                        .GetRelationIds(classType.FullName, result.RelationId); //文章分类
+                    if (!string.IsNullOrEmpty(classlist))
+                    {
+                        var clas = classlist.ToSplitList();
+                        if (clas.Count > 0)
+                            clas.ForEach(p => { articleForm.Classes.Add(Convert.ToInt16(p)); });
+                    }
+
+                    var relationList = Resolve<IRelationIndexService>()
+                        .GetRelationIds(tagType.FullName, result.RelationId); //文章标签
+
+                    if (!string.IsNullOrEmpty(relationList))
+                    {
+                        articleForm.Tags.Clear();
+                        var tags = relationList.ToSplitList();
+                        if (tags.Count > 0)
+                            tags.ForEach(p => { articleForm.Tags.Add(Convert.ToInt16(p)); });
+                    }
+                }
+            }
+
+            var autoForm = ToAutoForm(articleForm);
+
+            return autoForm;
+        }
+
+        /// <summary>
+        ///     保存
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="autoModel"></param>
+        /// <returns></returns>
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
+            if (model == null) return ServiceResult.FailedMessage("保存的内容不能为空");
+            var aform = model.MapTo<ArticleAutoForm>();
+
+            var input = model.MapTo<Article>();
+            if (aform.Classes != null) input.Classes = aform.Classes.Join();
+            if (aform.Tags != null) input.Tags = aform.Tags.Join();
+            input.ChannelId = aform.ChannelId.ToObjectId();
+
+            var article = AutoMapping.SetValue<Article>(input);
+            var channel = Resolve<IChannelService>().GetSingle(r => r.Id == article.ChannelId);
+            if (channel == null) Tuple.Create(ServiceResult.FailedWithMessage("频道不存在"), new Article());
+            var SerResult = ServiceResult.Success;
+            article.RelationId = GetMaxRelationId();
+            article.Id = aform.Id.ToObjectId();
+            article.Tags = input.Tags;
+            var entity = Resolve<IArticleAdminService>().GetSingle(article.Id);
+            var result = false;
+            if (entity == null)
+            {
+                result = Resolve<IArticleAdminService>().Add(article);
+                if (result)
+                    SerResult = ServiceResult.Success;
+                else
+                    SerResult = ServiceResult.Failed;
+            }
+            else
+            {
+                result = Resolve<IArticleAdminService>().Update(article);
+            }
+
+            if (result)
+            {
+                if (!string.IsNullOrEmpty(input.Classes))
+                {
+                    // 添加标签和分类
+                    var classType = Resolve<IChannelService>().GetChannelClassType(channel);
+                    var classIds = input.Classes;
+                    Resolve<IRelationIndexService>()
+                        .AddUpdateOrDelete(classType.FullName, article.RelationId, classIds);
+                }
+
+                if (!string.IsNullOrEmpty(input.Tags))
+                {
+                    var tagType = Resolve<IChannelService>().GetChannelTagType(channel);
+                    var tagIds = input.Tags;
+
+                    Resolve<IRelationIndexService>()
+                        .AddUpdateOrDelete(tagType.FullName, article.RelationId, tagIds);
+                }
+
+                DeleteCache();
+
+                SerResult = ServiceResult.Success;
+            }
+            else
+            {
+                SerResult = ServiceResult.Failed;
+            }
+
+            return SerResult;
+        }
+
+        private void DeleteCache()
+        {
+            Ioc.Resolve<IObjectCache>().Remove("GetHelpNav");
+        }
+
+        private long GetMaxRelationId()
+        {
+            var articles = Resolve<IRelationIndexService>().GetList();
+            var article = articles.OrderByDescending(r => r.RelationId).FirstOrDefault();
+            if (article != null)
+                return article.RelationId + 1;
+            return 1;
+        }
+
+        #region
+
+        /// <summary>
+        ///     id
         /// </summary>
         [Field(ControlsType = ControlsType.Hidden, GroupTabId = 1, ListShow = true, SortOrder = 1, EditShow = true)]
         public string Id { get; set; }
@@ -81,7 +223,8 @@ namespace Alabo.App.Cms.Articles.UI.AutoForm
         /// </summary>
         /// <value>The content.</value>
         [Display(Name = "详细内容")]
-        [Field(ControlsType = ControlsType.Editor, IsShowAdvancedSerach = false, IsShowBaseSerach = false, GroupTabId = 2,
+        [Field(ControlsType = ControlsType.Editor, IsShowAdvancedSerach = false, IsShowBaseSerach = false,
+            GroupTabId = 2,
             ListShow = false, SortOrder = 2)]
         public string Content { get; set; }
 
@@ -163,7 +306,8 @@ namespace Alabo.App.Cms.Articles.UI.AutoForm
         /// </summary>
         /// <value>The classes.</value>
         [BsonIgnore]
-        [Field(ControlsType = ControlsType.RelationClass, DataSourceType = typeof(ChannelArticleClassRelation), Width = "100", GroupTabId = 1,
+        [Field(ControlsType = ControlsType.RelationClass, DataSourceType = typeof(ChannelArticleClassRelation),
+            Width = "100", GroupTabId = 1,
             IsShowAdvancedSerach = true, IsShowBaseSerach = true, ListShow = true, SortOrder = 5)]
         [Display(Name = "分类")]
         public List<long> Classes { get; set; }
@@ -174,7 +318,8 @@ namespace Alabo.App.Cms.Articles.UI.AutoForm
         /// <value>The tags.</value>
         [BsonIgnore]
         [Display(Name = "标签")]
-        [Field(ControlsType = ControlsType.RelationTags, DataSourceType = typeof(ChannelArticleTagRelation), Width = "100", GroupTabId = 1,
+        [Field(ControlsType = ControlsType.RelationTags, DataSourceType = typeof(ChannelArticleTagRelation),
+            Width = "100", GroupTabId = 1,
             IsShowAdvancedSerach = true, IsShowBaseSerach = true, ListShow = true, SortOrder = 5)]
         public List<long> Tags { get; set; }
 
@@ -185,7 +330,6 @@ namespace Alabo.App.Cms.Articles.UI.AutoForm
         [Display(Name = "来源")]
         [Field(ControlsType = ControlsType.TextBox, IsShowAdvancedSerach = false, IsShowBaseSerach = false,
             ListShow = false, SortOrder = 2, GroupTabId = 4)]
-
         public string Source { get; set; }
 
         /// <summary>
@@ -198,180 +342,5 @@ namespace Alabo.App.Cms.Articles.UI.AutoForm
         public string Author { get; set; }
 
         #endregion
-        /// <summary>
-        /// 获取view
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="autoModel"></param>
-        /// <returns></returns>
-        public Alabo.UI.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel)
-        {
-            var dic = autoModel.Query.ToObject<Dictionary<string, string>>();
-            dic.TryGetValue("ChannelId", out var channelId);
-            var result = Resolve<IArticleService>().GetSingle(id);
-            var articleForm = new ArticleAutoForm();
-            if (result != null)
-            {
-                articleForm = result.MapTo<ArticleAutoForm>();
-            }
-
-            articleForm.Id = id.ToString();
-            if (channelId == null)
-            {
-                articleForm.ChannelId = result.ChannelId.ToString();
-            }
-            else
-            {
-                articleForm.ChannelId = channelId.ToString();
-            }
-            if (result != null)
-            {
-                var channel = Resolve<IChannelService>().GetSingle(r => r.Id == articleForm.ChannelId.ToObjectId());
-                if (channel != null)
-                {
-                    var classType = Resolve<IChannelService>().GetChannelClassType(channel);
-                    var tagType = Resolve<IChannelService>().GetChannelTagType(channel);
-
-                    var classlist = Resolve<IRelationIndexService>().GetRelationIds(classType.FullName, result.RelationId); //文章分类
-                    if (!string.IsNullOrEmpty(classlist))
-                    {
-                        var clas = classlist.ToSplitList(",");
-                        if (clas.Count > 0)
-                        {
-                            clas.ForEach(p =>
-                            {
-                                articleForm.Classes.Add(Convert.ToInt16(p));
-                            });
-                        }
-                    }
-
-                    var relationList = Resolve<IRelationIndexService>().GetRelationIds(tagType.FullName, result.RelationId); //文章标签
-
-                    if (!string.IsNullOrEmpty(relationList))
-                    {
-                        articleForm.Tags.Clear();
-                        var tags = relationList.ToSplitList(",");
-                        if (tags.Count > 0)
-                        {
-                            tags.ForEach(p =>
-                            {
-                                articleForm.Tags.Add(Convert.ToInt16(p));
-                            });
-                        }
-                    }
-                }
-            }
-
-            var autoForm = ToAutoForm(articleForm);
-
-            return autoForm;
-        }
-
-
-        /// <summary>
-        /// 保存
-        /// </summary>
-        /// <param name="model"></param>
-        /// <param name="autoModel"></param>
-        /// <returns></returns>
-        public ServiceResult Save(object model, AutoBaseModel autoModel)
-        {
-            if (model == null)
-            {
-                return ServiceResult.FailedMessage("保存的内容不能为空");
-            }
-            var aform = model.MapTo<ArticleAutoForm>();
-
-            var input = model.MapTo<Article>();
-            if (aform.Classes != null)
-            {
-                input.Classes = aform.Classes.Join("").ToString();
-            }
-            if (aform.Tags != null)
-            {
-                input.Tags = aform.Tags.Join("").ToString();
-            }
-            input.ChannelId = aform.ChannelId.ToObjectId();
-           
-
-            var article = AutoMapping.SetValue<Article>(input);
-            var channel = Resolve<IChannelService>().GetSingle(r => r.Id == article.ChannelId);
-            if (channel == null)
-            {
-                Tuple.Create(ServiceResult.FailedWithMessage("频道不存在"), new Article());
-            }
-            var SerResult = ServiceResult.Success;
-            article.RelationId = GetMaxRelationId();
-            article.Id = aform.Id.ToObjectId();
-            article.Tags = input.Tags;
-            var entity = Resolve<IArticleAdminService>().GetSingle(article.Id);
-            var result = false;
-            if (entity == null)
-            {
-                result = Resolve<IArticleAdminService>().Add(article);
-                if (result)
-                {
-                    SerResult = ServiceResult.Success;
-                }
-                else
-                {
-                    SerResult = ServiceResult.Failed;
-                }
-            }
-            else
-            {
-                result = Resolve<IArticleAdminService>().Update(article);
-
-            }
-            if (result)
-            {
-                if (!string.IsNullOrEmpty(input.Classes))
-                {
-                    // 添加标签和分类
-                    var classType = Resolve<IChannelService>().GetChannelClassType(channel);
-                    var classIds = input.Classes;
-                    Resolve<IRelationIndexService>()
-                          .AddUpdateOrDelete(classType.FullName, article.RelationId, classIds);
-                }
-                if (!string.IsNullOrEmpty(input.Tags))
-                {
-                    var tagType = Resolve<IChannelService>().GetChannelTagType(channel);
-                    var tagIds = input.Tags;
-
-                    Resolve<IRelationIndexService>()
-                        .AddUpdateOrDelete(tagType.FullName, article.RelationId, tagIds);
-                }
-
-                DeleteCache();
-
-                SerResult = ServiceResult.Success;
-            }
-            else
-            {
-                SerResult = ServiceResult.Failed;
-            }
-
-            return SerResult;
-        }
-
-        private void DeleteCache()
-        {
-            ObjectCache.Remove("GetHelpNav");
-        }
-
-        private long GetMaxRelationId()
-        {
-            var articles = Resolve<IRelationIndexService>().GetList();
-            var article = articles.OrderByDescending(r => r.RelationId).FirstOrDefault();
-            if (article != null)
-            {
-                return article.RelationId + 1;
-            }
-            else
-            {
-                return 1;
-            }
-        }
     }
 }
-

@@ -1,18 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
+﻿using Alabo.AutoConfigs;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.App.Core.Finance.Domain.CallBacks {
-
+namespace Alabo.App.Asset.Settlements.Domain.Configs
+{
     [ClassProperty(Name = "充值设置", Icon = "fa fa-plus-square", Description = "充值设置", SortOrder = 23,
         SideBarType = SideBarType.RechargeSideBar)]
     [NotMapped]
-    public class SettlementConfig : AutoConfigBase, IAutoConfig {
-
+    public class SettlementConfig : AutoConfigBase, IAutoConfig
+    {
         [Field(ControlsType = ControlsType.Switch, ListShow = true)]
         [Display(Name = "开启充值")]
         [HelpBlock("是否允许会员充值")]
@@ -85,7 +84,8 @@ namespace Alabo.App.Core.Finance.Domain.CallBacks {
         [Required]
         public decimal ServiceRate { get; set; } = 0M;
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

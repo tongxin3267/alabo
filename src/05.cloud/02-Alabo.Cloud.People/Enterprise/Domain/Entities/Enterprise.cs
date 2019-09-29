@@ -1,26 +1,27 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Core.Enums.Enum;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Regexs;
+using Alabo.Users.Enum;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Core.Markets.EnterpriseCertification.Domain.Entities {
-
+namespace Alabo.Cloud.People.Enterprise.Domain.Entities
+{
     /// <summary>
-    /// 商家认证
-    /// 企业资质认证
+    ///     商家认证
+    ///     企业资质认证
     /// </summary>
-    [BsonIgnoreExtraElements]//PostApi = "Api/Enterprise/EnterpriseList", ListApi = "Api/Enterprise/EnterpriseList"
+    [BsonIgnoreExtraElements] //PostApi = "Api/Enterprise/EnterpriseList", ListApi = "Api/Enterprise/EnterpriseList"
     [ClassProperty(Name = "企业认证", Icon = "fa fa-puzzle-piece", Description = "企业认证",
         PageType = ViewPageType.List)]
     [Table("Cloud_People_Enterprise")]
-    public class Enterprise : AggregateMongodbRoot<Enterprise> {
-
-        /// <summary>`
+    public class Enterprise : AggregateMongodbRoot<Enterprise>
+    {
+        /// <summary>
+        ///     `
         /// </summary>
         [Display(Name = "联系电话")]
         [RegularExpression(RegularExpressionHelper.ChinaMobile, ErrorMessage = ErrorMessage.NotMatchFormat)]
@@ -29,16 +30,17 @@ namespace Alabo.App.Core.Markets.EnterpriseCertification.Domain.Entities {
         public string Mobile { get; set; }
 
         /// <summary>
-        /// 联系人
+        ///     联系人
         /// </summary>
         [Display(Name = "联系人")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [HelpBlock("请您务必输入联系人")]
-        [Field(ControlsType = ControlsType.TextBox, ListShow = true, EditShow = true, Width = "80", SortOrder = 5, IsShowBaseSerach = true, IsShowAdvancedSerach = true)]
+        [Field(ControlsType = ControlsType.TextBox, ListShow = true, EditShow = true, Width = "80", SortOrder = 5,
+            IsShowBaseSerach = true, IsShowAdvancedSerach = true)]
         public string LinkMan { get; set; }
 
         /// <summary>
-        /// 地址Id
+        ///     地址Id
         /// </summary>
         [Display(Name = "地址")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
@@ -47,7 +49,7 @@ namespace Alabo.App.Core.Markets.EnterpriseCertification.Domain.Entities {
         public long RegionId { get; set; }
 
         /// <summary>
-        /// 详细地址
+        ///     详细地址
         /// </summary>
         [Display(Name = "详细地址")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
@@ -56,7 +58,7 @@ namespace Alabo.App.Core.Markets.EnterpriseCertification.Domain.Entities {
         public string Address { get; set; }
 
         /// <summary>
-        /// 企业主页
+        ///     企业主页
         /// </summary>
         [Display(Name = "企业主页")]
         [HelpBlock("请您输入企业主页地址")]
@@ -64,16 +66,17 @@ namespace Alabo.App.Core.Markets.EnterpriseCertification.Domain.Entities {
         public string EnterpriseUrl { get; set; }
 
         /// <summary>
-        /// 企业名称
+        ///     企业名称
         /// </summary>
         [Display(Name = "企业名称")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [HelpBlock("请您务必填写企业名称【必须与营业执照图片保持一致】")]
-        [Field(ControlsType = ControlsType.TextBox, ListShow = true, Width = "80", EditShow = true, SortOrder = 1, IsShowBaseSerach = true, IsShowAdvancedSerach = true)]
+        [Field(ControlsType = ControlsType.TextBox, ListShow = true, Width = "80", EditShow = true, SortOrder = 1,
+            IsShowBaseSerach = true, IsShowAdvancedSerach = true)]
         public string EnterpriseName { get; set; }
 
         /// <summary>
-        /// 企业主要产品
+        ///     企业主要产品
         /// </summary>
         [Display(Name = "主要产品")]
         [HelpBlock("请您填写您企业主要产品")]
@@ -81,50 +84,53 @@ namespace Alabo.App.Core.Markets.EnterpriseCertification.Domain.Entities {
         public string EnterpriseProductIntro { get; set; }
 
         /// <summary>
-        /// 应用领域
+        ///     应用领域
         /// </summary>
         [Display(Name = "应用领域")]
         [HelpBlock("请您填写企业应用领域")]
-        [Field(ControlsType = ControlsType.TextBox, ListShow = false, Width = "80", EditShow = true, SortOrder = 4, IsShowBaseSerach = true, IsShowAdvancedSerach = true)]
+        [Field(ControlsType = ControlsType.TextBox, ListShow = false, Width = "80", EditShow = true, SortOrder = 4,
+            IsShowBaseSerach = true, IsShowAdvancedSerach = true)]
         public string ApplicationArea { get; set; }
 
         /// <summary>
-        /// 营业执照号码
+        ///     营业执照号码
         /// </summary>
         [Display(Name = "营业执照号码")]
         [HelpBlock("请您务必填写营业执照号码【必须与营业执照图片保持一致】")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        [Field(ControlsType = ControlsType.TextBox, ListShow = true, Width = "80", EditShow = true, SortOrder = 900, IsShowBaseSerach = true, IsShowAdvancedSerach = true)]
+        [Field(ControlsType = ControlsType.TextBox, ListShow = true, Width = "80", EditShow = true, SortOrder = 900,
+            IsShowBaseSerach = true, IsShowAdvancedSerach = true)]
         public string LicenseNumber { get; set; }
 
         /// <summary>
-        /// 营业执照图
+        ///     营业执照图
         /// </summary>
         [Display(Name = "营业执照图")]
         [HelpBlock("请您务必上传企业营业执照图【图片清晰】")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        [Field(ControlsType = ControlsType.AlbumUploder, ListShow = false, EditShow = true, Width = "80", SortOrder = 1000)]
+        [Field(ControlsType = ControlsType.AlbumUploder, ListShow = false, EditShow = true, Width = "80",
+            SortOrder = 1000)]
         public string LicenseImage { get; set; }
 
         /// <summary>
-        /// 会员Id
+        ///     会员Id
         /// </summary>
         public long UserId { get; set; }
 
         /// <summary>
-        /// 门店坐标（经度）
+        ///     门店坐标（经度）
         /// </summary>
         [Display(Name = "门店坐标（经度）")]
         public decimal Longitude { get; set; }
 
         /// <summary>
-        /// 门店坐标（纬度）
+        ///     门店坐标（纬度）
         /// </summary>
         [Display(Name = "门店坐标（纬度）")]
         public decimal Latitude { get; set; }
 
         /// <summary>
-        /// 状态
+        ///     状态
         /// </summary>
         [Display(Name = "状态")]
         [HelpBlock("请输入状态")]

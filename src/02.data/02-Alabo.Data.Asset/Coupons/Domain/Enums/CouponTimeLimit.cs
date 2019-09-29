@@ -1,25 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Shop.Coupons.Domain.Enums {
-
+namespace Alabo.App.Asset.Coupons.Domain.Enums
+{
     /// <summary>
-    /// 有效期方式
+    ///     有效期方式
     /// </summary>
-    public enum CouponTimeLimit {
+    public enum CouponTimeLimit
+    {
+        /// <summary>
+        ///     领券后多少天
+        /// </summary>
+        [Display(Name = "领券后多少天")] Days = 1,
 
         /// <summary>
-        /// 领券后多少天
+        ///     有效期内
         /// </summary>
-        [Display(Name = "领券后多少天")]
-        Days = 1,
-
-        /// <summary>
-        /// 有效期内
-        /// </summary>
-        [Display(Name = "有效期内")]
-        PeriodOfValidity = 2,
+        [Display(Name = "有效期内")] PeriodOfValidity = 2
     }
 }

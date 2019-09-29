@@ -1,17 +1,17 @@
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Industry.Shop.Activitys.Domain.Entities;
+using Alabo.Industry.Shop.Activitys.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
-using Alabo.App.Shop.Activitys.Domain.Entities;
-using Alabo.App.Shop.Activitys.Domain.Services;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Shop.Activitys.Controllers {
-
+namespace Alabo.Industry.Shop.Activitys.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/ActivityRecord/[action]")]
-    public class ApiActivityRecordController : ApiBaseController<ActivityRecord, long> {
-
-        public ApiActivityRecordController() : base() {
+    public class ApiActivityRecordController : ApiBaseController<ActivityRecord, long>
+    {
+        public ApiActivityRecordController()
+        {
             BaseService = Resolve<IActivityRecordService>();
         }
     }

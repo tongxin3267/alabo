@@ -1,17 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Alabo.Domains.Entities;
+using Alabo.Framework.Core.WebApis.Filter;
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Api.Filter;
-using Alabo.Domains.Entities;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Core.WebApis.Controller {
-
+namespace Alabo.Framework.Core.WebApis.Controller
+{
     public abstract class ApiBaseUserController<TEntity, TKey> : ApiSingleController<TEntity, TKey>
-          where TEntity : class, IAggregateRoot<TEntity, TKey> {
-
-        protected ApiBaseUserController() : base() {
-        }
-
+        where TEntity : class, IAggregateRoot<TEntity, TKey>
+    {
         #region 查询登录用户分页数据
 
         /// <summary>
@@ -20,10 +17,9 @@ namespace Alabo.Core.WebApis.Controller {
         [HttpGet]
         [Display(Description = "查询登录用户分页数据")]
         [ApiAuth]
-        public ApiResult<PagedList<TEntity>> QueryUserList() {
-            if (BaseService == null) {
-                return ApiResult.Failure<PagedList<TEntity>>("请在控制器中定义BaseService");
-            }
+        public ApiResult<PagedList<TEntity>> QueryUserList()
+        {
+            if (BaseService == null) return ApiResult.Failure<PagedList<TEntity>>("请在控制器中定义BaseService");
 
             var result = BaseService.GetPagedList(Query);
             return ApiResult.Success(result);

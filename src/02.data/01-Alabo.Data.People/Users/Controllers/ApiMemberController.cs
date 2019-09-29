@@ -1,30 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Data.People.Users.Dtos;
+using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Tool.Payment.CallBacks;
 using Microsoft.AspNetCore.Mvc;
 using Senparc.Weixin.WxOpen.AdvancedAPIs.Sns;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
-using Alabo.App.Core.ApiStore.CallBacks;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.Core.Enums.Enum;
-using Alabo.Core.WebApis.Controller;
-using Alabo.Domains.Base.Services;
-using Alabo.Extensions;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.Web.Mvc.Controllers;
-using UserDetail = Alabo.Users.Entities.UserDetail;
 
-namespace Alabo.App.Core.User.Controllers {
-
+namespace Alabo.Data.People.Users.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/Member/[action]")]
-    public class ApiMemberController : ApiBaseController {
-
+    public class ApiMemberController : ApiBaseController
+    {
         #region 会员注册
 
         /// <summary>
@@ -33,10 +25,10 @@ namespace Alabo.App.Core.User.Controllers {
         /// <param name="parameter">参数</param>
         [HttpPost]
         [Display(Description = "会员注册")]
-        public ApiResult<UserOutput> Reg([FromBody] RegInput parameter) {
-            if (!this.IsFormValid()) {
+        public ApiResult<UserOutput> Reg([FromBody] RegInput parameter)
+        {
+            if (!this.IsFormValid())
                 return ApiResult.Failure<UserOutput>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
-            }
             var result = Resolve<IUserBaseService>().Reg(parameter);
             return ToResult(result);
         }
@@ -50,10 +42,10 @@ namespace Alabo.App.Core.User.Controllers {
         /// <param name="parameter">参数</param>
         [HttpPost]
         [Display(Description = "会员登录")]
-        public ApiResult<UserOutput> Login([FromBody] LoginInput parameter) {
-            if (!this.IsFormValid()) {
+        public ApiResult<UserOutput> Login([FromBody] LoginInput parameter)
+        {
+            if (!this.IsFormValid())
                 return ApiResult.Failure<UserOutput>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
-            }
             var result = Resolve<IUserBaseService>().Login(parameter);
             return ToResult(result);
         }
@@ -66,10 +58,10 @@ namespace Alabo.App.Core.User.Controllers {
         /// <param name="parameter">参数</param>
         [HttpPost]
         [Display(Description = "使用openid 完成会员登录")]
-        public ApiResult<UserOutput> LoginByOpenId([FromBody] LoginInput parameter) {
-            if (!this.IsFormValid()) {
+        public ApiResult<UserOutput> LoginByOpenId([FromBody] LoginInput parameter)
+        {
+            if (!this.IsFormValid())
                 return ApiResult.Failure<UserOutput>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
-            }
 
             var result = Resolve<IUserBaseService>().Login(parameter);
             return ToResult(result);
@@ -80,15 +72,15 @@ namespace Alabo.App.Core.User.Controllers {
         #region 使用手机号和验证登录
 
         /// <summary>
-        /// 使用手机号和验证登录
+        ///     使用手机号和验证登录
         /// </summary>
         /// <param name="parameter"></param>
         /// <returns></returns>
         [HttpPost]
-        public ApiResult<UserOutput> LoginByMobile([FromBody] LoginInput parameter) {
-            if (!this.IsFormValid()) {
+        public ApiResult<UserOutput> LoginByMobile([FromBody] LoginInput parameter)
+        {
+            if (!this.IsFormValid())
                 return ApiResult.Failure<UserOutput>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
-            }
 
             var result = Resolve<IUserBaseService>().Login(parameter);
             return ToResult(result);
@@ -104,13 +96,12 @@ namespace Alabo.App.Core.User.Controllers {
         /// </summary>
         [HttpGet]
         [Display(Description = "小程序获取Openid")]
-        public async Task<ApiResult<UserOutput>> MpLogin([FromQuery] MpLoginInput input) {
+        public async Task<ApiResult<UserOutput>> MpLogin([FromQuery] MpLoginInput input)
+        {
             var config = Resolve<IAutoConfigService>().GetValue<MiniProgramConfig>();
-            var openId = Senparc.Weixin.WxOpen.AdvancedAPIs.Sns.SnsApi.JsCode2Json(config.AppID, config.AppSecret, input.code)
+            var openId = SnsApi.JsCode2Json(config.AppID, config.AppSecret, input.Code)
                 .openid;
-            if (openId.IsNullOrEmpty()) {
-                return ApiResult.Failure<UserOutput>("获取openId失败");
-            }
+            if (openId.IsNullOrEmpty()) return ApiResult.Failure<UserOutput>("获取openId失败");
 
             return null;
 
@@ -152,10 +143,10 @@ namespace Alabo.App.Core.User.Controllers {
         /// <param name="parameter">参数</param>
         [HttpPost]
         [Display(Description = "找回密码，密码传入明文")]
-        public ApiResult<UserOutput> MpBind([FromBody] MpBindInput parameter) {
-            if (!this.IsFormValid()) {
+        public ApiResult<UserOutput> MpBind([FromBody] MpBindInput parameter)
+        {
+            if (!this.IsFormValid())
                 return ApiResult.Failure<UserOutput>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
-            }
 
             ////if (!_messageManager.CheckMobileVerifiyCode(parameter.Mobile, parameter.MobileVerifiyCode.ConvertToLong())) {
             ////    return ApiResult.Failure<UserOutput>("手机验证码错误", MessageCodes.ParameterValidationFailure);

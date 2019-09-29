@@ -1,24 +1,25 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using Alabo.App.Shop.Product.ViewModels;
+﻿using System;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Industry.Shop.Products.ViewModels;
+using Microsoft.AspNetCore.Http;
+using MongoDB.Bson;
 
-namespace Alabo.App.Shop.Product.Domain.Services {
-
+namespace Alabo.Industry.Shop.Products.Domain.Services
+{
     /// <summary>
     ///     商品后台操作方法写到此处
     /// </summary>
     /// <seealso cref="Alabo.Domains.Services.IService" />
-    public interface IProductAdminService : IService {
-
+    public interface IProductAdminService : IService
+    {
         /// <summary>
         ///     获取商品编辑页面详情
         /// </summary>
         /// <param name="productId">The product identifier.</param>
         /// <param name="storeId">The store identifier.</param>
         /// <returns>ViewProductEdit.</returns>
-        ViewProductEdit GetViewProductEdit(long productId, long storeId);
+        ViewProductEdit GetViewProductEdit(long productId, ObjectId StoreId);
 
         /// <summary>
         ///     保存商品
@@ -44,14 +45,12 @@ namespace Alabo.App.Shop.Product.Domain.Services {
         ///     后台商品搜索
         /// </summary>
         /// <param name="query"></param>
-
         PagedList<ViewProductList> GetViewProductList(object query);
 
         /// <summary>
         ///     类目下是否有商品
         /// </summary>
         /// <param name="categoryId"></param>
-
         bool CheckCategoryHasProduct(Guid categoryId);
     }
 }

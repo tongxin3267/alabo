@@ -1,4 +1,4 @@
-﻿namespace Alabo.UI
+﻿namespace Alabo.Framework.Core.WebUis
 {
     public static class IconFlaticon
     {

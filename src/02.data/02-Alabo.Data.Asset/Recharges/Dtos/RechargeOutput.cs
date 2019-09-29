@@ -1,37 +1,27 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using Alabo.App.Asset.Recharges.Domain.Enums;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Dtos.Recharge;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.User.Domain.Services;
+﻿using Alabo.App.Asset.Recharges.Domain.Enums;
+using Alabo.App.Asset.Recharges.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
-using Alabo.Exceptions;
 using Alabo.Extensions;
-using Alabo.Mapping;
 using Alabo.UI;
-using Alabo.UI.AutoTables;
+using Alabo.UI.Design.AutoTables;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.ViewModel;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.App.Core.Finance.ViewModels.Recharge {
-
+namespace Alabo.App.Asset.Recharges.Dtos
+{
     /// <summary>
     ///     充值管理
     /// </summary>
     [ClassProperty(Name = "充值管理", Icon = "fa fa-puzzle-piece", Description = "充值管理",
         SideBarType = SideBarType.RechargeSideBar)]
-    public class RechargeOutput : UIBase, IAutoTable<RechargeOutput> {
-
+    public class RechargeOutput : UIBase, IAutoTable<RechargeOutput>
+    {
         /// <summary>
         ///     id
         /// </summary>
@@ -99,9 +89,10 @@ namespace Alabo.App.Core.Finance.ViewModels.Recharge {
         [Display(Name = "状态")]
         [Field(ControlsType = ControlsType.TextBox, Width = "80", LabelColor = LabelColor.Info, EditShow = false,
             ListShow = true, SortOrder = 9)]
-        public string StatusName {
-            get { return this.Status.GetDisplayName(); }
-            set { _ = value; }
+        public string StatusName
+        {
+            get => Status.GetDisplayName();
+            set => _ = value;
         }
 
         /// <summary>
@@ -134,7 +125,8 @@ namespace Alabo.App.Core.Finance.ViewModels.Recharge {
         /// </summary>
         public string ExtraDate { get; set; }
 
-        public List<TableAction> Actions() {
+        public List<TableAction> Actions()
+        {
             return null;
             //var list = new List<TableAction>
             //{
@@ -143,18 +135,8 @@ namespace Alabo.App.Core.Finance.ViewModels.Recharge {
             //return list;
         }
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="query"></param>
-        /// <returns></returns>
-        public PageResult<RechargeOutput> PageTable(object query) {
-            var model = Resolve<IRechargeService>().GetPageList(query);
-            var result = ToPageResult(model);
-            return result;
-        }
-
-        public PageResult<RechargeOutput> PageTable(object query, AutoBaseModel autoModel) {
+        public PageResult<RechargeOutput> PageTable(object query, AutoBaseModel autoModel)
+        {
             //    var queryInput = ToQuery<RechargeOutputPara>();
             //    if (queryInput.Amount != null) {
             //        var i = 0M;
@@ -220,9 +202,20 @@ namespace Alabo.App.Core.Finance.ViewModels.Recharge {
         }
 
         /// <summary>
-        ///
         /// </summary>
-        public class RechargeOutputPara : PagedInputDto {
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public PageResult<RechargeOutput> PageTable(object query)
+        {
+            var model = Resolve<IRechargeService>().GetPageList(query);
+            var result = ToPageResult(model);
+            return result;
+        }
+
+        /// <summary>
+        /// </summary>
+        public class RechargeOutputPara : PagedInputDto
+        {
             public string UserName { get; set; }
 
             public string Amount { get; set; }

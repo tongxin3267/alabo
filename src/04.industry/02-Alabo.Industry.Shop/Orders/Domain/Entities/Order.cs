@@ -1,25 +1,26 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Shop.Order.Domain.Entities.Extensions;
-using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Industry.Shop.OrderActions.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.Tenants;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MongoDB.Bson;
 
-namespace Alabo.App.Shop.Order.Domain.Entities {
-
+namespace Alabo.Industry.Shop.Orders.Domain.Entities
+{
     /// <summary>
     ///     订单表
     /// </summary>
     [ClassProperty(Name = "订单表", Description = "店铺管理", PageType = ViewPageType.List, ListApi = "Api/Order/Index")]
-    public class Order : AggregateDefaultUserRoot<Order> {
-
+    public class Order : AggregateDefaultUserRoot<Order>
+    {
         /// <summary>
         ///     发货用户Id
         /// </summary>
@@ -32,7 +33,7 @@ namespace Alabo.App.Shop.Order.Domain.Entities {
         [Display(Name = "所属店铺")]
         [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1, Width = "150", ListShow = true,
             IsShowBaseSerach = true, IsShowAdvancedSerach = true, SortOrder = 1)]
-        public long StoreId { get; set; }
+        public string StoreId { get; set; }
 
         /// <summary>
         ///     订单交易状态,OrderStatus等待付款WaitingBuyerPay = 0,等待发货WaitingSellerSendGoods = 1,已发货WaitingBuyerConfirm = 2,交易成功Success =
@@ -137,12 +138,12 @@ namespace Alabo.App.Shop.Order.Domain.Entities {
         ///     根据Id自动生成12位序列号
         /// </summary>
         [Display(Name = "根据Id自动生成12位序列号")]
-        public string Serial {
-            get {
+        public string Serial
+        {
+            get
+            {
                 var searSerial = $"9{Id.ToString().PadLeft(9, '0')}";
-                if (Id.ToString().Length == 10) {
-                    searSerial = $"{Id.ToString()}";
-                }
+                if (Id.ToString().Length == 10) searSerial = $"{Id.ToString()}";
 
                 return searSerial;
             }
@@ -151,13 +152,15 @@ namespace Alabo.App.Shop.Order.Domain.Entities {
         #endregion 以下为非数据库字段
     }
 
-    public class OrderTableMap : MsSqlAggregateRootMap<Order> {
-
-        protected override void MapTable(EntityTypeBuilder<Order> builder) {
+    public class OrderTableMap : MsSqlAggregateRootMap<Order>
+    {
+        protected override void MapTable(EntityTypeBuilder<Order> builder)
+        {
             builder.ToTable("Shop_Order");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<Order> builder) {
+        protected override void MapProperties(EntityTypeBuilder<Order> builder)
+        {
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.Actions);
@@ -165,8 +168,9 @@ namespace Alabo.App.Shop.Order.Domain.Entities {
             builder.Ignore(e => e.Serial);
             builder.Ignore(e => e.AccountPayPair);
             builder.Ignore(e => e.OrderExtension);
-            builder.Ignore(e => e.Version);
-            if (TenantContext.IsTenant) {
+
+            if (TenantContext.IsTenant)
+            {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
             }
         }

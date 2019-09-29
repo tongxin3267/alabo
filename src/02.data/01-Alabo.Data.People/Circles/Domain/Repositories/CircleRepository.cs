@@ -1,18 +1,14 @@
-using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.App.Agent.Circle.Domain.Entities;
-using Alabo.Domains.Repositories;
+using Alabo.Data.People.Circles.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
-using Alabo.App.Agent.Circle.Domain.Repositories;
+using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Agent.Circle.Domain.Repositories {
-
-    public class CircleRepository : RepositoryMongo<Entities.Circle, ObjectId>, ICircleRepository {
-
-        public CircleRepository(IUnitOfWork unitOfWork) : base(unitOfWork) {
+namespace Alabo.Data.People.Circles.Domain.Repositories
+{
+    public class CircleRepository : RepositoryMongo<Circle, ObjectId>, ICircleRepository
+    {
+        public CircleRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
         }
     }
 }

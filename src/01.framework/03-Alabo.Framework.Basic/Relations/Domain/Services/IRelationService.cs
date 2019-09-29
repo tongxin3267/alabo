@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Core.Common.Domain.Dtos;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.App.Core.Themes.DiyModels.Links;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Framework.Basic.Relations.Domain.Entities;
+using Alabo.Framework.Basic.Relations.Dtos;
+using Alabo.Framework.Core.WebUis.Models.Links;
 
-namespace Alabo.App.Core.Common.Domain.Services {
-
-    public interface IRelationService : IService<Relation, long> {
-
+namespace Alabo.Framework.Basic.Relations.Domain.Services
+{
+    public interface IRelationService : IService<Relation, long>
+    {
         /// <summary>
         ///     检查分类是否存在
         /// </summary>
@@ -75,7 +75,6 @@ namespace Alabo.App.Core.Common.Domain.Services {
         IEnumerable<KeyValue> GetKeyValues2(string type);
 
         /// <summary>
-        ///
         /// </summary>
         /// <param name="type"></param>
         /// <param name="userId"></param>
@@ -89,13 +88,13 @@ namespace Alabo.App.Core.Common.Domain.Services {
         Type FindType(string typeName);
 
         /// <summary>
-        /// 获取所有分类的链接地址
+        ///     获取所有分类的链接地址
         /// </summary>
         /// <returns></returns>
         List<Link> GetClassLinks();
 
         /// <summary>
-        /// 获取所有标签的链接地址
+        ///     获取所有标签的链接地址
         /// </summary>
         /// <returns></returns>
         List<Link> GetTagLinks();

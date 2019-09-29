@@ -1,22 +1,23 @@
-﻿using System;
-using Alabo.App.Core.Tasks.Domain.Entities;
+﻿using Alabo.Data.Things.Orders.Domain.Entities;
+using Alabo.Users.Entities;
+using System;
 
-namespace Alabo.App.Core.Tasks.ResultModel {
-
+namespace Alabo.Data.Things.Orders.ResultModel
+{
     /// <summary>
     ///     分润执行后的结果
     /// </summary>
-    public class ShareResult {
-
+    public class ShareResult
+    {
         /// <summary>
         ///     订单用户
         /// </summary>
-        public Users.Entities.User OrderUser { get; set; }
+        public User OrderUser { get; set; }
 
         /// <summary>
         ///     分润用户
         /// </summary>
-        public Users.Entities.User ShareUser { get; set; }
+        public User ShareUser { get; set; }
 
         /// <summary>
         ///     分润订单

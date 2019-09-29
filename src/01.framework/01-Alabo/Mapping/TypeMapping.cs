@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Alabo.Extensions;
+using System;
 using System.Reflection;
-using Alabo.Extensions;
 
 namespace Alabo.Mapping
 {
@@ -19,54 +19,38 @@ namespace Alabo.Mapping
         public static Tuple<bool, object> TryChangeHtmlValue(object value, Type type)
         {
             var changeValue = value;
-            if (value == null || value.ToStr().IsNullOrEmpty()) {
-                return Tuple.Create(false, changeValue);
-            }
+            if (value == null || value.ToStr().IsNullOrEmpty()) return Tuple.Create(false, changeValue);
 
             if (type == typeof(string))
             {
                 changeValue = value.ToStr();
-                if (!changeValue.IsNullOrEmpty()) {
-                    return Tuple.Create(true, changeValue);
-                }
+                if (!changeValue.IsNullOrEmpty()) return Tuple.Create(true, changeValue);
             }
             else if (type == typeof(int))
             {
-                if (value.ToStr().ConvertToInt(-1) != -1) {
-                    return Tuple.Create(true, value);
-                }
+                if (value.ToStr().ConvertToInt() != -1) return Tuple.Create(true, value);
             }
             else if (type == typeof(decimal))
             {
-                if (value.ToStr().ConvertToDecimal(-1) != -1) {
-                    return Tuple.Create(true, value);
-                }
+                if (value.ToStr().ConvertToDecimal() != -1) return Tuple.Create(true, value);
             }
             else if (type == typeof(long))
             {
-                if (value.ToStr().ConvertToLong(-1) != -1) {
-                    return Tuple.Create(true, value);
-                }
+                if (value.ToStr().ConvertToLong() != -1) return Tuple.Create(true, value);
             }
             else if (type == typeof(DateTime))
             {
-                if (value.ToStr().ConvertToDateTime().Year != 1900) {
-                    return Tuple.Create(true, value);
-                }
+                if (value.ToStr().ConvertToDateTime().Year != 1900) return Tuple.Create(true, value);
             }
             else if (type == typeof(bool) || type == typeof(bool))
             {
                 var valueDefault = value.ConvertToNullableBool();
-                changeValue = valueDefault != null && (bool) valueDefault ? "是" : "否";
-                if (valueDefault.HasValue) {
-                    return Tuple.Create(true, changeValue);
-                }
+                changeValue = valueDefault != null && (bool)valueDefault ? "是" : "否";
+                if (valueDefault.HasValue) return Tuple.Create(true, changeValue);
             }
             else if (type == typeof(Guid))
             {
-                if (!value.ToGuid().IsGuidNullOrEmpty()) {
-                    return Tuple.Create(true, value);
-                }
+                if (!value.ToGuid().IsGuidNullOrEmpty()) return Tuple.Create(true, value);
             }
             else if (type.GetTypeInfo().BaseType?.Name == nameof(Enum))
             {

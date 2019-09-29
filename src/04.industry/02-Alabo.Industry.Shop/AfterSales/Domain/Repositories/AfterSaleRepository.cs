@@ -1,18 +1,14 @@
-using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.App.Shop.AfterSale.Domain.Entities;
-using Alabo.Domains.Repositories;
 using Alabo.Datas.UnitOfWorks;
-using Alabo.App.Shop.AfterSale.Domain.Repositories;
+using Alabo.Domains.Repositories;
+using Alabo.Industry.Shop.AfterSales.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Shop.AfterSale.Domain.Repositories {
-
-    public class AfterSaleRepository : RepositoryMongo<Entities.AfterSale, ObjectId>, IAfterSaleRepository {
-
-        public AfterSaleRepository(IUnitOfWork unitOfWork) : base(unitOfWork) {
+namespace Alabo.Industry.Shop.AfterSales.Domain.Repositories
+{
+    public class AfterSaleRepository : RepositoryMongo<AfterSale, ObjectId>, IAfterSaleRepository
+    {
+        public AfterSaleRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
         }
     }
 }

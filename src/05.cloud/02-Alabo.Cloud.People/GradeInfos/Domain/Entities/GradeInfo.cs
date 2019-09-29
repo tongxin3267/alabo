@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -7,18 +6,20 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Core.User.Domain.Entities {
-
+namespace Alabo.Cloud.People.GradeInfos.Domain.Entities
+{
     /// <summary>
-    ///   用户等级信息
+    ///     用户等级信息
     /// </summary>
-    [ClassProperty(Name = "用户等级信息", Icon = "fa fa-puzzle-piece", Description = "用户等级信息", PageType = ViewPageType.List, ListApi = "Api/GradeInfo/UserList",
+    [ClassProperty(Name = "用户等级信息", Icon = "fa fa-puzzle-piece", Description = "用户等级信息", PageType = ViewPageType.List,
+        ListApi = "Api/GradeInfo/UserList",
         SideBarType = SideBarType.GradeInfoSideBar, PostApi = "Api/GradeInfo/UserList")]
     [BsonIgnoreExtraElements]
     [Table("Cloud_People_GradeInfo")]
-    public class GradeInfo : AggregateMongodbUserRoot<GradeInfo> {
-
+    public class GradeInfo : AggregateMongodbUserRoot<GradeInfo>
+    {
         /// <summary>
         ///     直推会员个数
         /// </summary>
@@ -77,8 +78,8 @@ namespace Alabo.App.Core.User.Domain.Entities {
     ///     用户直推会员数量
     /// </summary>
     [ClassProperty(Name = "等级信息", SideBarType = SideBarType.GradeInfoSideBar)]
-    public class GradeInfoItem : BaseViewModel {
-
+    public class GradeInfoItem : BaseViewModel
+    {
         /// <summary>
         ///     等级Guid
         /// </summary>
@@ -90,7 +91,8 @@ namespace Alabo.App.Core.User.Domain.Entities {
         ///     等级数量
         /// </summary>
         [Display(Name = "等级数量")]
-        [Field(TableDispalyStyle = TableDispalyStyle.Code, ListShow = true, Width = "120", EditShow = false, SortOrder = 1)]
+        [Field(TableDispalyStyle = TableDispalyStyle.Code, ListShow = true, Width = "120", EditShow = false,
+            SortOrder = 1)]
         public long Count { get; set; } = 0;
 
         /// <summary>

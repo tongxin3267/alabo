@@ -1,7 +1,7 @@
-using Xunit;
-using Alabo.Domains.Base.Services;
+using Alabo.Logging.Logs.Services;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
+using Xunit;
 
 namespace Alabo.Test.Core.Common.Domain.Services
 {

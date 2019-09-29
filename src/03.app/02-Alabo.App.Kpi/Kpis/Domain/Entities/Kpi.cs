@@ -1,15 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.Tenants;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.App.Share.Kpi.Domain.Entities {
-
+namespace Alabo.App.Kpis.Kpis.Domain.Entities
+{
     /// <summary>
     ///     统计表（该表数据，只增，不编辑，不删除)
     ///     通过此表结构实现（绩效管理、数据统计）
@@ -20,8 +19,8 @@ namespace Alabo.App.Share.Kpi.Domain.Entities {
     ///     5.后期给来做统计报表
     /// </summary>
     [ClassProperty(Name = "统计表")]
-    public class Kpi : AggregateDefaultUserRoot<Kpi> {
-
+    public class Kpi : AggregateDefaultUserRoot<Kpi>
+    {
         /// <summary>
         ///     考核类型Id，通过
         /// </summary>
@@ -54,15 +53,17 @@ namespace Alabo.App.Share.Kpi.Domain.Entities {
         public decimal TotalValue { get; set; }
     }
 
-    public class KPITableMap : MsSqlAggregateRootMap<Kpi> {
-
-        protected override void MapTable(EntityTypeBuilder<Kpi> builder) {
+    public class KPITableMap : MsSqlAggregateRootMap<Kpi>
+    {
+        protected override void MapTable(EntityTypeBuilder<Kpi> builder)
+        {
             builder.ToTable("Kpi_Kpi");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<Kpi> builder) {
+        protected override void MapProperties(EntityTypeBuilder<Kpi> builder)
+        {
             builder.HasKey(e => e.Id);
-            builder.Ignore(e => e.Version);
+         
         }
     }
 }

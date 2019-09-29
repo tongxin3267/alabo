@@ -1,25 +1,34 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.Order.Domain.Entities.Extensions;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Domains.Repositories.Mongo.Extension;
+using Alabo.Industry.Shop.OrderDeliveries.Domain.Entities.Extensions;
 using Alabo.Tenants;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Order.Domain.Entities
+namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities
 {
-
     /// <summary>
     ///     发货记录表
     /// </summary>
-    [ClassProperty(Name = "发货记录表", Description = "店铺管理", SideBarType = SideBarType.SupplierSideBar, PostApi = "Api/OrderDelivery/List", ListApi = "Api/OrderDelivery/List")]
+    [ClassProperty(Name = "发货记录表", Description = "店铺管理", SideBarType = SideBarType.SupplierSideBar,
+        PostApi = "Api/OrderDelivery/List", ListApi = "Api/OrderDelivery/List")]
     public class OrderDelivery : AggregateDefaultUserRoot<OrderDelivery>
     {
+        /// <summary>
+        ///     快递公司的名称
+        /// </summary>
+        [Display(Name = "快递公司的名称")]
+        public string Name { get; set; }
 
-        #region 
+        #region
+
         /// <summary>
         ///     订单号ID
         /// </summary>
@@ -30,7 +39,8 @@ namespace Alabo.App.Shop.Order.Domain.Entities
         ///     店铺Id
         /// </summary>
         [Display(Name = "店铺Id")]
-        public long StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))]
+        public string StoreId { get; set; }
 
         /// <summary>
         ///     快递公司guid
@@ -64,22 +74,11 @@ namespace Alabo.App.Shop.Order.Domain.Entities
         [Display(Name = "订单发货数据")]
         public OrderDeliveryExtension OrderDeliveryExtension { get; set; } = new OrderDeliveryExtension();
 
-        /// <summary>
-        ///     快递公司的名称
-        /// </summary>
-        [Display(Name = "快递公司的名称")]
-        public string Name { get; set; }
-
-
-        #endregion 
-
-
-
+        #endregion
     }
 
     public class OrderDeliveryTableMap : MsSqlAggregateRootMap<OrderDelivery>
     {
-
         protected override void MapTable(EntityTypeBuilder<OrderDelivery> builder)
         {
             builder.ToTable("Shop_OrderDelivery");
@@ -91,11 +90,6 @@ namespace Alabo.App.Shop.Order.Domain.Entities
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.OrderDeliveryExtension);
             builder.Ignore(e => e.Name);
-            builder.Ignore(e => e.Version);
-            if (TenantContext.IsTenant)
-            {
-                // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
-            }
         }
     }
 }

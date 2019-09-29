@@ -1,13 +1,14 @@
-using MongoDB.Bson;
-using Alabo.App.Market.SuccessfulCases.Domains.Entities;
+using Alabo.Cloud.School.SuccessfulCases.Domains.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.SuccessfulCases.Domains.Repositories {
-
-    public class CasesRepository : RepositoryMongo<Cases, ObjectId>, ICasesRepository {
-
-        public CasesRepository(IUnitOfWork unitOfWork) : base(unitOfWork) {
+namespace Alabo.Cloud.School.SuccessfulCases.Domains.Repositories
+{
+    public class CasesRepository : RepositoryMongo<Cases, ObjectId>, ICasesRepository
+    {
+        public CasesRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
         }
     }
 }

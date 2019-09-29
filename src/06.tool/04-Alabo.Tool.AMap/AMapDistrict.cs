@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.App.Core.ApiStore.AMap.District {
-
+namespace Alabo.Tool.AMap
+{
     /// <summary>
     ///     高德地图说明
     ///     https://lbs.amap.com/api/webservice/guide/api/district
     /// </summary>
-    public class AMapDistrict {
-
+    public class AMapDistrict
+    {
         /// <summary>
         ///     返回结果状态值
         ///     值为0或1，0表示失败；1表示成功
@@ -33,8 +33,8 @@ namespace Alabo.App.Core.ApiStore.AMap.District {
     /// <summary>
     ///     国家
     /// </summary>
-    public class CountryDistrict {
-
+    public class CountryDistrict
+    {
         /// <summary>
         ///     行政区名称
         /// </summary>
@@ -66,8 +66,8 @@ namespace Alabo.App.Core.ApiStore.AMap.District {
     /// <summary>
     ///     省份
     /// </summary>
-    public class ProvinceDistrict {
-
+    public class ProvinceDistrict
+    {
         /// <summary>
         ///     区域编码
         /// </summary>
@@ -104,7 +104,8 @@ namespace Alabo.App.Core.ApiStore.AMap.District {
     /// <summary>
     ///     城市
     /// </summary>
-    public class CityDistrict {
+    public class CityDistrict
+    {
         ///// <summary>
         ///// 城市编码
         ///// </summary>
@@ -146,7 +147,8 @@ namespace Alabo.App.Core.ApiStore.AMap.District {
     /// <summary>
     ///     区县
     /// </summary>
-    public class DistrictDistrict {
+    public class DistrictDistrict
+    {
         ///// <summary>
         ///// 城市编码
         ///// </summary>
@@ -188,7 +190,8 @@ namespace Alabo.App.Core.ApiStore.AMap.District {
     /// <summary>
     ///     商圈
     /// </summary>
-    public class CircleDistrict {
+    public class CircleDistrict
+    {
         ///// <summary>
         ///// 城市编码
         ///// </summary>
@@ -227,7 +230,8 @@ namespace Alabo.App.Core.ApiStore.AMap.District {
         public IList<MapDistrict> Districts { get; set; }
     }
 
-    public class MapDistrict {
+    public class MapDistrict
+    {
         ///// <summary>
         ///// 城市编码
         ///// </summary>

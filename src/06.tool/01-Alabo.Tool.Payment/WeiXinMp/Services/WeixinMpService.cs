@@ -1,30 +1,20 @@
-﻿using Senparc.Weixin.MP.Helpers;
-using System;
-using Alabo.App.Core.Api.Domain.Service;
-using Alabo.App.Core.ApiStore.CallBacks;
-using Alabo.App.Core.ApiStore.WeiXinMp.Clients;
-using Alabo.App.Core.ApiStore.WeiXinMp.Models;
-using Alabo.App.Core.Common.Domain.CallBacks;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Base.Services;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Services;
-using Alabo.Exceptions;
-using Alabo.Extensions;
-using Alabo.Helpers;
-using CollectionExtensions = Castle.Core.Internal.CollectionExtensions;
+using Alabo.Tool.Payment.WeiXinMp.Models;
 
-namespace Alabo.App.Core.ApiStore.WeiXinMp.Services {
-
+namespace Alabo.Tool.Payment.WeiXinMp.Services
+{
     /// <summary>
-    /// 微信公众号相关接口
+    ///     微信公众号相关接口
     /// </summary>
-    public class WeixinMpService : ServiceBase, IWeixinMpService {
-
-        public WeixinMpService(IUnitOfWork unitOfWork) : base(unitOfWork) {
+    public class WeixinMpService : ServiceBase, IWeixinMpService
+    {
+        public WeixinMpService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
         }
 
-        public WeiXinShare WeiXinShare(WeiXinShareInput shareInput) {
+        public WeiXinShare WeiXinShare(WeiXinShareInput shareInput)
+        {
             //var wexinConfig = Ioc.Resolve<IAutoConfigService>().GetValue<WeChatPaymentConfig>();
 
             //var jsApiTicketResult = Ioc.Resolve<IWeixinMpClient>().GetTicketByAccessToken();

@@ -1,33 +1,19 @@
-using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using Alabo.Domains.Entities;
+using Alabo.Data.People.ShareHolders.Domain.Entities;
+using Alabo.Data.People.ShareHolders.Domain.Services;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
-using Alabo.App.Core.Api.Filter;
-using Alabo.App.Core.Common;
 using MongoDB.Bson;
-using Alabo.App.Core.User;
-using Alabo.RestfulApi;
-using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.Domains.Services;
-using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.Controllers;
-using Alabo.App.Agent.ShareHolders.Domain.Entities;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Agent.ShareHolders.Domain.Services;
 
-namespace Alabo.App.Agent.ShareHolders.Controllers {
-
+namespace Alabo.Data.People.ShareHolders.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/ShareHolder/[action]")]
-    public class ApiShareHolderController : ApiBaseController<ShareHolder, ObjectId> {
-        
-       
-
-        public ApiShareHolderController() : base() {
+    public class ApiShareHolderController : ApiBaseController<ShareHolder, ObjectId>
+    {
+        public ApiShareHolderController()
+        {
             BaseService = Resolve<IShareHolderService>();
-       
         }
     }
 }

@@ -1,21 +1,20 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Core.Enums.Enum;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Regexs;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.User.Domain.Dtos {
-
+namespace Alabo.Framework.Basic.Address.Dtos
+{
     /// <summary>
-    /// 地址输入
+    ///     地址输入
     /// </summary>
-    public class AddressInput : EntityDto {
-
+    public class AddressInput : EntityDto
+    {
         /// <summary>
-        /// 地址ID
+        ///     地址ID
         /// </summary>
         public string Id { get; set; }
 
@@ -78,12 +77,12 @@ namespace Alabo.App.Core.User.Domain.Dtos {
     }
 
     /// <summary>
-    /// 用户备案地址修改
+    ///     用户备案地址修改
     /// </summary>
-    public class UserInfoAddressInput : EntityDto {
-
+    public class UserInfoAddressInput : EntityDto
+    {
         /// <summary>
-        /// 地址ID
+        ///     地址ID
         /// </summary>
         public string Id { get; set; }
 
@@ -112,7 +111,7 @@ namespace Alabo.App.Core.User.Domain.Dtos {
         public string Address { get; set; }
 
         /// <summary>
-        /// 地址方式
+        ///     地址方式
         /// </summary>
         public AddressLockType Type { get; set; } = AddressLockType.OrderAddress;
     }

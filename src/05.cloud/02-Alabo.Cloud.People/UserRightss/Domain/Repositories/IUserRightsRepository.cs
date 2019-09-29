@@ -1,8 +1,9 @@
-using Alabo.App.Market.UserRightss.Domain.Entities;
+using Alabo.Cloud.People.UserRightss.Domain.Entities;
 using Alabo.Domains.Repositories;
 
-namespace Alabo.App.Market.UserRightss.Domain.Repositories {
-
-    public interface IUserRightsRepository : IRepository<UserRights, long> {
+namespace Alabo.Cloud.People.UserRightss.Domain.Repositories
+{
+    public interface IUserRightsRepository : IRepository<UserRights, long>
+    {
     }
 }

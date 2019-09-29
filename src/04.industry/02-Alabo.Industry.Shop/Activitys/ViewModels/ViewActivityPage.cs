@@ -1,23 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Core.Enums.Enum;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Extensions;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.UI.Enum;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Activitys.ViewModels {
-
+namespace Alabo.Industry.Shop.Activitys.ViewModels
+{
     /// <summary>
     ///     Class ViewActivityPage.
     /// </summary>
     [ClassProperty(Name = "活动")]
-    public class ViewActivityPage : BaseViewModel {
-
+    public class ViewActivityPage : BaseViewModel
+    {
         /// <summary>
         ///     Key
         /// </summary>
@@ -27,7 +29,7 @@ namespace Alabo.App.Shop.Activitys.ViewModels {
         ///     活动对应的店铺Id
         /// </summary>
         [Display(Name = "活动对应的店铺Id")]
-        public long StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     活动名称:比如活动券，满就送，一元夺宝等等
@@ -129,7 +131,8 @@ namespace Alabo.App.Shop.Activitys.ViewModels {
         /// <summary>
         ///     获取链接
         /// </summary>
-        public IEnumerable<ViewLink> ViewLinks() {
+        public IEnumerable<ViewLink> ViewLinks()
+        {
             var quickLinks = new List<ViewLink>
             {
                 new ViewLink("活动管理", "/Admin/Activitys/Index?Key=[[Key]]", Icons.List, LinkType.FormQuickLink),

@@ -160,9 +160,7 @@ namespace Alabo.Extensions
         /// <param name="obj">字符串集合</param>
         public static List<Guid> ToGuidList(this IList<string> obj)
         {
-            if (obj == null) {
-                return new List<Guid>();
-            }
+            if (obj == null) return new List<Guid>();
 
             return obj.Select(t => t.ToGuid()).ToList();
         }

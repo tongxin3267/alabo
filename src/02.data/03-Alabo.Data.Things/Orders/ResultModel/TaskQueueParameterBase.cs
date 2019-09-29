@@ -1,8 +1,9 @@
-﻿namespace Alabo.App.Core.Tasks.ResultModel {
-
-    public abstract class TaskQueueParameterBase {
-
-        public TaskQueueParameterBase(int configurationId) {
+﻿namespace Alabo.Data.Things.Orders.ResultModel
+{
+    public abstract class TaskQueueParameterBase
+    {
+        public TaskQueueParameterBase(int configurationId)
+        {
             ConfigurationId = configurationId;
         }
 

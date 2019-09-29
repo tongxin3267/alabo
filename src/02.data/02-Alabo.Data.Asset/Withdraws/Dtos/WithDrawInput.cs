@@ -1,21 +1,20 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.WithDraw {
-
+namespace Alabo.App.Asset.Withdraws.Dtos
+{
     /// <summary>
     ///     Class WithDrawInput.
     ///     提现申请
     /// </summary>
     [ClassProperty(Name = "提现管理", Icon = "fa fa-puzzle-piece", Description = "提现管理", PostApi = "Api/WithDraw/Add",
         SuccessReturn = "pages/WithDraw/view")]
-    public class WithDrawInput : EntityDto {
-
+    public class WithDrawInput : EntityDto
+    {
         /// <summary>
         ///     Id
         /// </summary>

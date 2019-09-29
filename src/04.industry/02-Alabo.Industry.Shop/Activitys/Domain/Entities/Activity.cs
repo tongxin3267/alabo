@@ -1,20 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.Activitys.Domain.Entities.Extension;
-using Alabo.Core.Enums.Enum;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Industry.Shop.Activitys.Domain.Entities.Extension;
 using Alabo.Tenants;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MongoDB.Bson;
 
-namespace Alabo.App.Shop.Activitys.Domain.Entities
+namespace Alabo.Industry.Shop.Activitys.Domain.Entities
 {
-
     /// <summary>
     ///     活动
     ///     活动类型：
@@ -23,12 +22,11 @@ namespace Alabo.App.Shop.Activitys.Domain.Entities
     [ClassProperty(Name = "活动")]
     public class Activity : AggregateDefaultRoot<Activity>
     {
-
         /// <summary>
         ///     活动对应的店铺Id
         /// </summary>
         [Display(Name = "活动对应的店铺Id")]
-        public long StoreId { get; set; }
+        public string StoreId { get; set; }
 
         /// <summary>
         ///     活动名称:比如活动券，满就送，一元夺宝等等
@@ -110,7 +108,7 @@ namespace Alabo.App.Shop.Activitys.Domain.Entities
         public DateTime EndTime { get; set; }
 
         /// <summary>
-        ///  活动商品
+        ///     活动商品
         /// </summary>
         [Display(Name = "活动商品")]
         public long ProductId { get; set; }
@@ -125,12 +123,10 @@ namespace Alabo.App.Shop.Activitys.Domain.Entities
         ///     活动扩展属性
         /// </summary>
         [Display(Name = "活动扩展属性")]
-
         public ActivityExtension ActivityExtension { get; set; } = new ActivityExtension();
 
         public class ActivityTableMap : MsSqlAggregateRootMap<Activity>
         {
-
             protected override void MapTable(EntityTypeBuilder<Activity> builder)
             {
                 builder.ToTable("Shop_Activity");
@@ -141,12 +137,8 @@ namespace Alabo.App.Shop.Activitys.Domain.Entities
                 //应用程序编号
                 builder.HasKey(e => e.Id);
                 builder.Ignore(e => e.ActivityExtension);
-                builder.Ignore(e => e.Version);
+
                 //builder.Ignore(e => e.ProductIdList);
-                if (TenantContext.IsTenant)
-                {
-                    // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
-                }
             }
         }
     }

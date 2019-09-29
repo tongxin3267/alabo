@@ -1,13 +1,13 @@
-﻿using System;
-using System.Linq.Expressions;
-using Alabo.Datas.Queries.Enums;
-using Alabo.Domains.Base.Services;
+﻿using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.Extensions;
-using Alabo.Domains.Services.Report.Enums;
 using Alabo.Extensions;
 using Alabo.Helpers;
+using Alabo.Tables.Domain.Services;
+using Alabo.UI.Design.AutoReports.Enums;
+using System;
+using System.Linq.Expressions;
 
 namespace Alabo.Linq
 {
@@ -58,7 +58,6 @@ namespace Alabo.Linq
         /// </summary>
         public DateTime EndTime { get; set; }
 
-
         /// <summary>
         ///     获取表名
         /// </summary>
@@ -92,14 +91,11 @@ namespace Alabo.Linq
             {
                 // 根据timeType获取条件,获取季度，年度、月份等条件,构建时间查询语句
                 var timeTypeCondition = DataRecordExtension.GetTimeTypeCondition(TimeType, ReferTime);
-                if (!timeTypeCondition.IsNullOrEmpty()) {
-                    sqlWhere += $" And {timeTypeCondition}";
-                }
+                if (!timeTypeCondition.IsNullOrEmpty()) sqlWhere += $" And {timeTypeCondition}";
             }
 
             return sqlWhere;
         }
-
 
         /// <summary>
         ///     转换成Linq查询条件
@@ -110,7 +106,7 @@ namespace Alabo.Linq
             where TEntity : class, IAggregateRoot<TEntity, TKey>
         {
             Expression<Func<TEntity, bool>> predicate = null;
-            if (Field.IsNotNullOrEmpty() && Value.IsNotNullOrEmpty()) {
+            if (Field.IsNotNullOrEmpty() && Value.IsNotNullOrEmpty())
                 switch (Operator)
                 {
                     case OperatorCompare.Equal:
@@ -137,7 +133,6 @@ namespace Alabo.Linq
                         predicate = Lambda.NotEqual<TEntity>(Field, Value);
                         break;
                 }
-            }
 
             // 根据时间和基准时间构建表达式
             predicate = TimeType.GetPredicate<TEntity, TKey>(ReferTime, predicate);

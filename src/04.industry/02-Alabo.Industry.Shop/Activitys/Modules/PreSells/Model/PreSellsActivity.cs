@@ -1,25 +1,25 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.Activitys.Domain.Entities;
-using Alabo.App.Shop.Activitys.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
-using Alabo.UI.AutoForms;
+using Alabo.Industry.Shop.Activitys.Domain.Entities;
+using Alabo.Industry.Shop.Activitys.Dtos;
+using Alabo.UI.Design.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using Microsoft.AspNetCore.Http;
 
-namespace Alabo.App.Shop.Activitys.Modules.PreSells.Model
+namespace Alabo.Industry.Shop.Activitys.Modules.PreSells.Model
 {
     /// <summary>
-    /// 预售活动设置
+    ///     预售活动设置
     /// </summary>
     [ClassProperty(Name = "预售活动设置")]
     public class PreSellsActivity : BaseViewModel, IActivity
     {
         /// <summary>
-        /// 预售价格
+        ///     预售价格
         /// </summary>
         [Display(Name = "预售价格")]
         [Field(ControlsType = ControlsType.Decimal, ListShow = true, EditShow = true)]
@@ -27,7 +27,7 @@ namespace Alabo.App.Shop.Activitys.Modules.PreSells.Model
         public decimal PreSellPrice { get; set; }
 
         /// <summary>
-        /// 预售开始时间
+        ///     预售开始时间
         /// </summary>
         [Display(Name = "预售开始时间")]
         [Field(ControlsType = ControlsType.DateTimePicker, ListShow = true, EditShow = true)]
@@ -35,7 +35,7 @@ namespace Alabo.App.Shop.Activitys.Modules.PreSells.Model
         public DateTime PreSellStartTime { get; set; }
 
         /// <summary>
-        /// 预售结束时间
+        ///     预售结束时间
         /// </summary>
         [Display(Name = "预售结束时间")]
         [Field(ControlsType = ControlsType.DateTimePicker, ListShow = true, EditShow = true)]
@@ -43,7 +43,7 @@ namespace Alabo.App.Shop.Activitys.Modules.PreSells.Model
         public DateTime PreSellEndTime { get; set; }
 
         /// <summary>
-        /// 固定发货时间
+        ///     固定发货时间
         /// </summary>
         [Display(Name = "发货时间")]
         [Field(ControlsType = ControlsType.DateTimePicker, ListShow = true, EditShow = true)]
@@ -56,7 +56,7 @@ namespace Alabo.App.Shop.Activitys.Modules.PreSells.Model
         }
 
         /// <summary>
-        /// get default value
+        ///     get default value
         /// </summary>
         /// <returns></returns>
         public object GetDefaultValue(ActivityEditInput activityEdit, Activity activity)
@@ -72,14 +72,9 @@ namespace Alabo.App.Shop.Activitys.Modules.PreSells.Model
         public ServiceResult SetValueOfRule(object rules)
         {
             var model = rules.ToObject<PreSellsActivity>();
-            if (model == null)
-            {
-                return ServiceResult.FailedWithMessage("活动规则数据异常");
-            }
+            if (model == null) return ServiceResult.FailedWithMessage("活动规则数据异常");
             if (model.PreSellStartTime >= model.PreSellEndTime)
-            {
                 return ServiceResult.FailedWithMessage("预售开始时间必须小于且不等于结束时间");
-            }
             return new ServiceResult(true);
         }
     }

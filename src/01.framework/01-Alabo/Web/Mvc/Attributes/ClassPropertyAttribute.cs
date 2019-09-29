@@ -1,20 +1,22 @@
-﻿using System;
-using Alabo.Domains.Enums;
-using Alabo.UI;
+﻿using Alabo.Domains.Enums;
+using System;
 
-namespace Alabo.Web.Mvc.Attributes {
-
+namespace Alabo.Web.Mvc.Attributes
+{
     /// <summary>
     ///     类属性特性信息
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Enum)]
-    public class ClassPropertyAttribute : Attribute {
+    public class ClassPropertyAttribute : Attribute
+    {
         private string v;
 
-        public ClassPropertyAttribute() {
+        public ClassPropertyAttribute()
+        {
         }
 
-        public ClassPropertyAttribute(string v, string Icon, string Description) {
+        public ClassPropertyAttribute(string v, string Icon, string Description)
+        {
             this.v = v;
             this.Icon = Icon;
             this.Description = Description;

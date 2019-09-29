@@ -1,11 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
-using Alabo.Validations;
+﻿using Alabo.Validations;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.User.ViewModels {
-
-    public class ViewUserLogin {
-
+namespace Alabo.Data.People.Users.ViewModels
+{
+    public class ViewUserLogin
+    {
         [Display(Name = "用户名/手机")]
         [Required(ErrorMessage = "用户名/手机")]
         public string UserName { get; set; }

@@ -1,15 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Validations;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Order.Domain.Dtos {
-
+namespace Alabo.Industry.Shop.Orders.Dtos
+{
     /// <summary>
     ///     订单商品信息
     /// </summary>
-    public class OrderProductInput : EntityDto {
-
+    public class OrderProductInput : EntityDto
+    {
         /// <summary>
         ///     用户Id
         /// </summary>
@@ -38,7 +40,7 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
         /// <value>
         ///     The store identifier.
         /// </value>
-        public long StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     商品数量

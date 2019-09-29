@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using Alabo.Exceptions;
+﻿using Alabo.Exceptions;
+using System.Linq;
 
 namespace Alabo.Validations
 {
@@ -14,9 +14,7 @@ namespace Alabo.Validations
         /// <param name="results">验证结果集合</param>
         public void Handle(ValidationResultCollection results)
         {
-            if (results.IsValid) {
-                return;
-            }
+            if (results.IsValid) return;
 
             throw new ValidException(results.First().ErrorMessage);
         }

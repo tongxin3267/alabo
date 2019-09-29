@@ -1,14 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Core.Enums.Enum {
-
+namespace Alabo.Framework.Core.Enums.Enum
+{
     /// <summary>
     ///     分润触发类型
     /// </summary>
     [ClassProperty(Name = "分润触发类型")]
-    public enum TriggerType {
-
+    public enum TriggerType
+    {
         /// <summary>
         ///     用户注册
         ///     用户注册(会员注册时触发）
@@ -56,24 +56,24 @@ namespace Alabo.Core.Enums.Enum {
         Task = 20,
 
         /// <summary>
-        /// 文章收藏、商品收藏
-        /// 对应 FavoriteType 类型
+        ///     文章收藏、商品收藏
+        ///     对应 FavoriteType 类型
         /// </summary>
         [Display(Name = "收藏")]
         [LabelCssClass(BadgeColorCalss.Metal)]
         Favorite = 21,
 
         /// <summary>
-        /// 文章收藏、商品收藏
-        /// 对应 CommentType 类型
+        ///     文章收藏、商品收藏
+        ///     对应 CommentType 类型
         /// </summary>
         [Display(Name = "评论")]
         [LabelCssClass(BadgeColorCalss.Metal)]
         Comment = 22,
 
         /// <summary>
-        /// 文章收藏、商品收藏
-        /// 对应 FavoriteType 类型
+        ///     文章收藏、商品收藏
+        ///     对应 FavoriteType 类型
         /// </summary>
         [Display(Name = "分享")]
         [LabelCssClass(BadgeColorCalss.Metal)]

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Alabo.Domains.Enums;
+using System;
 using System.Data;
-using Alabo.Domains.Enums;
 
 namespace Alabo.Domains.Repositories.Extensions
 {
@@ -39,7 +39,7 @@ namespace Alabo.Domains.Repositories.Extensions
         public static T Read<T>(this IDataRecord reader, int i)
         {
             var invoker = Cache<T>.Invoker;
-            if (invoker != null) {
+            if (invoker != null)
                 try
                 {
                     return invoker(reader, i);
@@ -48,12 +48,11 @@ namespace Alabo.Domains.Repositories.Extensions
                 {
                     return default;
                 }
-            }
 
             var objectValue = reader.GetValue(i);
             try
             {
-                return (T) objectValue;
+                return (T)objectValue;
             }
             catch
             {

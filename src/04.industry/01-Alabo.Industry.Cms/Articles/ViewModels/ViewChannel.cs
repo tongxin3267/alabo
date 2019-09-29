@@ -1,16 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Core.Enums.Enum;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Cms.Articles.ViewModels {
-
+namespace Alabo.Industry.Cms.Articles.ViewModels
+{
     /// <summary>
     ///     频道模型
     /// </summary>
-    public class ViewChannel : BaseViewModel {
-
+    public class ViewChannel : BaseViewModel
+    {
         /// <summary>
         ///     频道名称
         /// </summary>

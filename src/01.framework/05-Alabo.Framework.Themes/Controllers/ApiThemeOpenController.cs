@@ -1,34 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
-using Alabo.App.Core.Themes.Domain.Services;
-using Alabo.App.Core.Themes.Dtos.Service;
-using Alabo.Core.WebApis.Controller;
+﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Framework.Themes.Domain.Services;
+using Alabo.Framework.Themes.Dtos;
 using Alabo.Helpers;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Themes.Controllers {
-
+namespace Alabo.Framework.Themes.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/ThemeOpen/[action]")]
-    public class ApiThemeOpenController : ApiBaseController {
-
-        public ApiThemeOpenController() : base() {
-        }
-
+    public class ApiThemeOpenController : ApiBaseController
+    {
         /// <summary>
         ///     发布
         /// </summary>
         /// <param name="parameter"></param>
         [HttpPost]
         [Display(Description = "站点发布")]
-        public ApiResult PublishAsync([FromBody] ThemePublish parameter) {
+        public ApiResult PublishAsync([FromBody] ThemePublish parameter)
+        {
             var tenant = HttpWeb.Tenant;
-            if (!this.IsFormValid()) {
-                return ApiResult.Failure(this.FormInvalidReason());
-            }
+            if (!this.IsFormValid()) return ApiResult.Failure(this.FormInvalidReason());
 
             var result = Resolve<IThemeOpenService>().Publish(parameter);
             return ToResult(result);

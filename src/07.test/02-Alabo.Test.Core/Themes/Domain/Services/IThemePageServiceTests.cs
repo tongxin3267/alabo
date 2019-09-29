@@ -2,7 +2,7 @@
 //using Xunit;
 //using Alabo.App.Core.Themes.Domain.Services;
 //using Alabo.App.Core.Themes.Dtos;
-//using Alabo.Core.Enums;
+//using Alabo.Framework.Core.Enums;
 //using Alabo.Test.Base.Core;
 //using Alabo.Test.Base.Core.Model;
 
@@ -70,3 +70,4 @@
 //        }
 //    }
 //}
+

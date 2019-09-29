@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
-using Alabo.Domains.Repositories;
+﻿using Alabo.Domains.Repositories;
+using Alabo.Users.Entities;
+using System.Collections.Generic;
 
-namespace Alabo.App.Core.Admin.Domain.Repositories
+namespace Alabo.Framework.Core.Tenants.Domains.Repositories
 {
     /// <summary>
     ///     ITenantCreateRepository
     /// </summary>
-    public interface ITenantCreateRepository : IRepository<Users.Entities.User, long>
+    public interface ITenantCreateRepository : IRepository<User, long>
     {
         /// <summary>
         ///     init tenant sql

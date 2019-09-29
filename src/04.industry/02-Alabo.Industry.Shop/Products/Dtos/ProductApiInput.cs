@@ -1,17 +1,17 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Shop.Product.Domain.CallBacks;
-using Alabo.App.Shop.Product.Domain.Enums;
 using Alabo.Domains.Query.Dto;
+using Alabo.Industry.Shop.Products.Domain.Configs;
+using Alabo.Industry.Shop.Products.Domain.Enums;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Product.DiyModels {
-
+namespace Alabo.Industry.Shop.Products.Dtos
+{
     /// <summary>
     ///     商品列表
     /// </summary>
-    public class ProductApiInput : ApiInputDto {
-
+    public class ProductApiInput : ApiInputDto
+    {
         /// <summary>
         ///     商品排序方式
         /// </summary>
@@ -33,10 +33,11 @@ namespace Alabo.App.Shop.Product.DiyModels {
         public decimal? MaxPrice { get; set; }
 
         /// <summary>
-        /// 价格区间
-        /// 将PriceRang转换MinPrice,和MaxPrice
+        ///     价格区间
+        ///     将PriceRang转换MinPrice,和MaxPrice
         /// </summary>
         public string PriceRang { get; set; }
+
         /// <summary>
         ///     商品分类Id，多个ID用逗号隔开
         /// </summary>
@@ -71,12 +72,12 @@ namespace Alabo.App.Shop.Product.DiyModels {
         /// <summary>
         ///     总数量
         ///     如果为0，显示符合条件的
-        /// 如果不为0，则显示具体的数量,不需要分页
+        ///     如果不为0，则显示具体的数量,不需要分页
         /// </summary>
         public long Count { get; set; } = 0;
 
         /// <summary>
-        /// 库存: 小于这个库存的才显示
+        ///     库存: 小于这个库存的才显示
         /// </summary>
         public int Stock { get; set; } = 0;
 
@@ -95,7 +96,5 @@ namespace Alabo.App.Shop.Product.DiyModels {
         ///     是否为拼团商品
         /// </summary>
         public bool IsGroupBuy { get; set; } = true;
-
-
     }
 }

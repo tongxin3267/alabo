@@ -1,14 +1,14 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.Product.Domain.Enums;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
+using Alabo.Industry.Shop.Products.Domain.Enums;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Product.Domain.Dtos {
-
-    public class ProductInput : PagedInputDto {
-
+namespace Alabo.Industry.Shop.Products.Dtos
+{
+    public class ProductInput : PagedInputDto
+    {
         /// <summary>
         ///     价格方式
         /// </summary>

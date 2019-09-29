@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Alabo.Datas.Sql.Queries.Builders.Abstractions;
+using System.Collections.Generic;
 using System.Text;
-using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 
 namespace Alabo.Datas.Sql.Queries.Builders.Conditions
 {
@@ -35,9 +35,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Conditions
         /// </summary>
         public string GetCondition()
         {
-            if (string.IsNullOrWhiteSpace(_name) || _values == null || _values.Count == 0) {
-                return null;
-            }
+            if (string.IsNullOrWhiteSpace(_name) || _values == null || _values.Count == 0) return null;
 
             var result = new StringBuilder();
             result.Append($"{_name} In (");

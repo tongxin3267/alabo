@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MongoDB.Bson;
-using Alabo.App.Cms.Articles.Domain.Services;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Helpers;
+using Alabo.Industry.Cms.Articles.Domain.Services;
 using Alabo.UI;
-using Alabo.UI.AutoNews;
+using Alabo.UI.Design.AutoNews;
+using MongoDB.Bson;
 
-namespace Alabo.App.Cms.Articles.UI
+namespace Alabo.Industry.Cms.Articles.UI
 {
     //招聘，暫定的十大神器使用
     public class ArticleAutoRecruit : IAutoNews
     {
-
         public PagedList<AutoNewsItem> ResultList(object query, AutoBaseModel autoModel)
         {
             var model = Ioc.Resolve<IArticleService>()
@@ -32,6 +30,7 @@ namespace Alabo.App.Cms.Articles.UI
                 };
                 list.Add(temp);
             }
+
             return list;
         }
 

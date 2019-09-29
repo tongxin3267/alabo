@@ -1,23 +1,24 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.Core.Enums.Enum;
+﻿using Alabo.App.Asset.Pays.Domain.Entities;
+using Alabo.App.Asset.Recharges.Domain.Enums;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Tool.Payment;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.App.Asset.Settlements.Domain.Entities.Extension {
-
+namespace Alabo.App.Asset.Settlements.Domain.Entities.Extension
+{
     /// <summary>
     ///     充值表
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Finace_TradeRecharge")]
     [ClassProperty(Name = "充值管理", Icon = "fa fa-puzzle-piece", Description = "充值管理", PageType = ViewPageType.List)]
-    public class SettlementExtension : BaseViewModel {
-
+    public class SettlementExtension : BaseViewModel
+    {
         /// <summary>
         ///     充值方式
         ///     线上充值，和线下充值

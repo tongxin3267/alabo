@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Product.Domain.Enums {
-
+namespace Alabo.Industry.Shop.Products.Domain.Enums
+{
     /// <summary>
     ///     商城行业模型
     /// </summary>
     [ClassProperty(Name = "商城行业模型")]
-    public enum IndustrySytle {
-
+    public enum IndustrySytle
+    {
         /// <summary>
         ///     通用商品模型，百货商品，比如服装、眼睛、箱包
         /// </summary>

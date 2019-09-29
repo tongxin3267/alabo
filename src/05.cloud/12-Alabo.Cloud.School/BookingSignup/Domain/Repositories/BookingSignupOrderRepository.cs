@@ -1,14 +1,15 @@
-using System;using Alabo.Domains.Repositories.EFCore;using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.App.Market.BookingSignup.Domain.Entities;
-using Alabo.Domains.Repositories;
+using Alabo.Cloud.School.BookingSignup.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
-using  Alabo.App.Market.BookingSignup.Domain.Repositories;
+using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.BookingSignup.Domain.Repositories {
-	public class BookingSignupOrderRepository : RepositoryMongo<BookingSignupOrder, ObjectId>,IBookingSignupOrderRepository  {
-	public  BookingSignupOrderRepository(IUnitOfWork unitOfWork) : base(unitOfWork){
-	}
-	}
+namespace Alabo.Cloud.School.BookingSignup.Domain.Repositories
+{
+    public class BookingSignupOrderRepository : RepositoryMongo<BookingSignupOrder, ObjectId>,
+        IBookingSignupOrderRepository
+    {
+        public BookingSignupOrderRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+        }
+    }
 }

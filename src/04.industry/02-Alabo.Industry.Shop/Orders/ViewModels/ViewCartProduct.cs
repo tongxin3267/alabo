@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
 using Alabo.Validations;
 
-namespace Alabo.App.Shop.Order.ViewModels {
-
-    public class ViewCartProduct {
-
+namespace Alabo.Industry.Shop.Orders.ViewModels
+{
+    public class ViewCartProduct
+    {
         /// <summary>
         ///     属性值ID
         /// </summary>

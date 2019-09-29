@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Alabo.Datas.UnitOfWorks;
+using Alabo.Domains.Entities.Core;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using MongoDB.Driver;
-using MongoDB.Driver.Linq;
-using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Entities.Core;
 
 namespace Alabo.Datas.Stores.Add.Mongo
 {
@@ -25,9 +25,7 @@ namespace Alabo.Datas.Stores.Add.Mongo
 
         public async Task<IEnumerable<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            if (predicate == null) {
-                return await Collection.AsQueryable().ToListAsync(CancellationToken.None);
-            }
+            if (predicate == null) return await Collection.AsQueryable().ToListAsync(CancellationToken.None);
 
             var list = Collection.AsQueryable().Where(predicate).ToListAsync(CancellationToken.None);
             return await list;

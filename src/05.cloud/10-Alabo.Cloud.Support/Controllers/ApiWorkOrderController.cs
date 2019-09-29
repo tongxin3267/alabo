@@ -1,44 +1,39 @@
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Cms.Support.Domain.Dtos;
-using Alabo.App.Cms.Support.Domain.Entities;
-using Alabo.App.Cms.Support.Domain.Enum;
-using Alabo.App.Cms.Support.Domain.Services;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
-using Alabo.App.Core.Common;
-using Alabo.App.Core.User;
-using Alabo.App.Core.User.Domain.Services;
+using Alabo.Cloud.Support.Domain.Dtos;
+using Alabo.Cloud.Support.Domain.Entities;
+using Alabo.Cloud.Support.Domain.Enum;
+using Alabo.Cloud.Support.Domain.Services;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Cms.Support.Controllers {
-
+namespace Alabo.Cloud.Support.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/WorkOrder/[action]")]
-    public class ApiWorkOrderController : ApiBaseController<WorkOrder, ObjectId> {
-        
-
-        public ApiWorkOrderController() : base() {
-            
+    public class ApiWorkOrderController : ApiBaseController<WorkOrder, ObjectId>
+    {
+        public ApiWorkOrderController()
+        {
             BaseService = Resolve<IWorkOrderService>();
         }
 
         [HttpPost]
-        public ApiResult Add([FromBody] WorkOrderInput workOrder) {
-            if (!this.IsFormValid()) {
+        public ApiResult Add([FromBody] WorkOrderInput workOrder)
+        {
+            if (!this.IsFormValid())
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
-            }
 
             var user = Resolve<IUserService>().GetSingle(u => u.Id == workOrder.LoginUserId);
-            if (user == null) {
-                return ApiResult.Failure("会员为空");
-            }
-            var view = new WorkOrder {
+            if (user == null) return ApiResult.Failure("会员为空");
+            var view = new WorkOrder
+            {
                 Description = workOrder.Description,
                 ClassId = WorkOrderType.Problem.Value(),
                 Title = $"用户[{user.UserName}]问题反馈",
@@ -53,7 +48,8 @@ namespace Alabo.App.Cms.Support.Controllers {
 
         [HttpGet]
         [Display(Description = "工单系统")]
-        public ApiResult<PagedList<WorkOrder>> WordOrderList([FromQuery] PagedInputDto parameter) {
+        public ApiResult<PagedList<WorkOrder>> WordOrderList([FromQuery] PagedInputDto parameter)
+        {
             var model = Resolve<IWorkOrderServices>().GetPagedList(Query);
             return ApiResult.Success(model);
         }

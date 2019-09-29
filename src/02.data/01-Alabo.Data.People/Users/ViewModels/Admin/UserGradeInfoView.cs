@@ -1,20 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using Alabo.Web.Validations;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.User.ViewModels.Admin {
-
+namespace Alabo.Data.People.Users.ViewModels.Admin
+{
     /// <summary>
     ///     直推会员等级报表
     /// </summary>
     [ClassProperty(Name = "会员等级报表", Icon = "fa fa-puzzle-piece", Description = "会员等级报表",
         SideBarType = SideBarType.FullScreen,
         GroupName = "基本信息,高级选项")]
-    public class UserGradeInfoView : BaseViewModel {
+    public class UserGradeInfoView : BaseViewModel
+    {
         [Field(ListShow = true)] [Key] public long Id { get; set; }
 
         /// <summary>
@@ -86,7 +87,8 @@ namespace Alabo.App.Core.User.ViewModels.Admin {
         /// <summary>
         ///     获取链接
         /// </summary>
-        public IEnumerable<ViewLink> ViewLinks() {
+        public IEnumerable<ViewLink> ViewLinks()
+        {
             var quickLinks = new List<ViewLink>
             {
                 new ViewLink("推荐会员等级报表",

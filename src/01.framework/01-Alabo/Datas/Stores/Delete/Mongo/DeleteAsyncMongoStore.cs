@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Alabo.Datas.Stores.Count.Mongo;
+﻿using Alabo.Datas.Stores.Count.Mongo;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.Stores.Delete.Mongo
 {
@@ -19,9 +19,7 @@ namespace Alabo.Datas.Stores.Delete.Mongo
         {
             var filter = ToFilter(IdPredicate(entity.Id));
             var result = await Collection.DeleteOneAsync(filter);
-            if (result.DeletedCount > 0) {
-                return true;
-            }
+            if (result.DeletedCount > 0) return true;
 
             return false;
         }
@@ -31,9 +29,7 @@ namespace Alabo.Datas.Stores.Delete.Mongo
             var ids = entities.Select(r => r.Id);
             var filter = ToFilter(r => ids.Contains(r.Id));
             var result = await Collection.DeleteManyAsync(filter);
-            if (result.DeletedCount > 0) {
-                return true;
-            }
+            if (result.DeletedCount > 0) return true;
 
             return false;
         }

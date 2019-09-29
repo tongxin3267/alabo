@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Threading;
-using MongoDB.Driver;
-using MongoDB.Driver.Linq;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Query;
+using MongoDB.Driver;
+using MongoDB.Driver.Linq;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Threading;
 
 namespace Alabo.Datas.Stores.Page.Mongo
 {
@@ -27,13 +27,9 @@ namespace Alabo.Datas.Stores.Page.Mongo
 
         public PagedList<TEntity> GetPagedList(Expression<Func<TEntity, bool>> predicate, int pageSize, int pageIndex)
         {
-            if (pageSize < 1) {
-                pageSize = 1;
-            }
+            if (pageSize < 1) pageSize = 1;
 
-            if (pageIndex < 1) {
-                pageIndex = 1;
-            }
+            if (pageIndex < 1) pageIndex = 1;
 
             long totalCount;
             List<TEntity> resultList;
@@ -75,18 +71,12 @@ namespace Alabo.Datas.Stores.Page.Mongo
         public IEnumerable<TEntity> GetListByPage(Expression<Func<TEntity, bool>> predicate, int pageSize,
             int pageIndex)
         {
-            if (pageSize < 1) {
-                pageSize = 1;
-            }
+            if (pageSize < 1) pageSize = 1;
 
-            if (pageIndex < 1) {
-                pageIndex = 1;
-            }
+            if (pageIndex < 1) pageIndex = 1;
 
             var query = Collection.AsQueryable();
-            if (predicate != null) {
-                query = query.Where(predicate);
-            }
+            if (predicate != null) query = query.Where(predicate);
 
             var source = query
                 .OrderBy(r => r.Id)
@@ -99,18 +89,12 @@ namespace Alabo.Datas.Stores.Page.Mongo
         public IEnumerable<TEntity> GetListByPageDesc(Expression<Func<TEntity, bool>> predicate, int pageSize,
             int pageIndex)
         {
-            if (pageSize < 1) {
-                pageSize = 1;
-            }
+            if (pageSize < 1) pageSize = 1;
 
-            if (pageIndex < 1) {
-                pageIndex = 1;
-            }
+            if (pageIndex < 1) pageIndex = 1;
 
             var query = Collection.AsQueryable();
-            if (predicate != null) {
-                query = query.Where(predicate);
-            }
+            if (predicate != null) query = query.Where(predicate);
 
             var source = query
                 .OrderBy(r => r.Id)

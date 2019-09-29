@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Alabo.Exceptions;
+using Alabo.Files;
+using System;
 using System.IO;
 using System.Text;
-using Alabo.Exceptions;
-using Alabo.Files;
 
-namespace Alabo.Web.CodeGeneration.EntityCode.Templates {
-
-    public static class ApiControllerTemplate {
-
+namespace Alabo.Web.CodeGeneration.EntityCode.Templates
+{
+    public static class ApiControllerTemplate
+    {
         #region 生成API接口
 
         /// <summary>
@@ -15,28 +15,28 @@ namespace Alabo.Web.CodeGeneration.EntityCode.Templates {
         ///     生成服务接口，与服务方法
         /// </summary>
         /// <param name="type"></param>
-        public static void CreateApiController(Type type, string idType, string entityPath) {
+        public static void CreateApiController(Type type, string idType, string entityPath)
+        {
             //  type = typeof(WidgetHistory);
             //if (type.BaseType.FullName != typeof(MongoEntity).FullName) throw new ValidException("非Mongodb实体方法，不支持服务方法生成");
 
-            if (!type.BaseType.FullName.Contains("Entities")) {
-                throw new ValidException("命名空间必须包含Entities");
-            }
+            if (!type.BaseType.FullName.Contains("Entities")) throw new ValidException("命名空间必须包含Entities");
 
             var testBuilder = new StringBuilder();
             var filePath = BaseTemplate.GetFilePath(type, "Controllers", entityPath);
 
             DirectoryHelper.CreateIfNotExists(filePath);
             var fileName = filePath + $"\\Api{type.Name}Controller.cs";
-            if (!File.Exists(fileName)) {
+            if (!File.Exists(fileName))
+            {
                 testBuilder.AppendLine(
                     "using System;using Alabo.Domains.Repositories.EFCore;using Alabo.Domains.Repositories.Model;");
                 testBuilder.AppendLine("using System.Linq;");
 
                 testBuilder.AppendLine("using Alabo.Domains.Entities;");
                 testBuilder.AppendLine("using Microsoft.AspNetCore.Mvc;");
-                testBuilder.AppendLine("using Alabo.App.Core.Api.Filter;");
-                testBuilder.AppendLine("using Alabo.App.Core.Common;");
+                testBuilder.AppendLine("using Alabo.Framework.Core.WebApis.Filter;");
+                testBuilder.AppendLine("");
                 testBuilder.AppendLine("using MongoDB.Bson;");
                 testBuilder.AppendLine("using Alabo.App.Core.User;");
                 testBuilder.AppendLine("using Alabo.RestfulApi;using ZKCloud.Open.ApiBase.Configuration;");
@@ -45,9 +45,8 @@ namespace Alabo.Web.CodeGeneration.EntityCode.Templates {
                 testBuilder.AppendLine("using Alabo.Web.Mvc.Controllers;");
                 testBuilder.AppendLine($"using {type.Namespace};");
 
-                if (testBuilder.ToString().IndexOf(type.Namespace, StringComparison.OrdinalIgnoreCase) == -1) {
+                if (testBuilder.ToString().IndexOf(type.Namespace, StringComparison.OrdinalIgnoreCase) == -1)
                     testBuilder.AppendLine($"using {type.Namespace};");
-                }
 
                 testBuilder.AppendLine();
                 testBuilder.AppendLine(
@@ -69,8 +68,10 @@ namespace Alabo.Web.CodeGeneration.EntityCode.Templates {
                 testBuilder.AppendLine("}");
                 //创建文件
 
-                using (var stream = File.Create(fileName)) {
-                    using (var writer = new StreamWriter(stream)) {
+                using (var stream = File.Create(fileName))
+                {
+                    using (var writer = new StreamWriter(stream))
+                    {
                         writer.Write(testBuilder);
                     }
                 }

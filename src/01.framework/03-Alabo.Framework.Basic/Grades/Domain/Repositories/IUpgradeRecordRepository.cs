@@ -1,9 +1,10 @@
-using MongoDB.Bson;
-using Alabo.App.Core.Tasks.Domain.Entities;
 using Alabo.Domains.Repositories;
+using Alabo.Framework.Basic.Grades.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Tasks.Domain.Repositories {
-
-    public interface IUpgradeRecordRepository : IRepository<UpgradeRecord, ObjectId> {
+namespace Alabo.Framework.Basic.Grades.Domain.Repositories
+{
+    public interface IUpgradeRecordRepository : IRepository<UpgradeRecord, ObjectId>
+    {
     }
 }

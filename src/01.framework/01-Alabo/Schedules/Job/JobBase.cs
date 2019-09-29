@@ -1,13 +1,13 @@
-﻿using System;
-using System.Threading.Tasks;
-using Alabo.Cache;
+﻿using Alabo.Cache;
 using Alabo.Dependency;
 using Alabo.Helpers;
-using ZKCloud.Open.ApiBase.Models;
-using ZKCloud.Open.ApiBase.Services;
 using Alabo.Tenants;
 using Alabo.Tenants.Domain.Entities;
 using Alabo.Web.Mvc.Exception;
+using System;
+using System.Threading.Tasks;
+using ZKCloud.Open.ApiBase.Models;
+using ZKCloud.Open.ApiBase.Services;
 using Qz = Quartz;
 using Thread = System.Threading.Thread;
 
@@ -70,12 +70,10 @@ namespace Alabo.Schedules.Job
             {
                 try
                 {
-                    //get tenant and switch 
+                    //get tenant and switch
                     var jobDataMap = context.JobDetail.JobDataMap;
                     var tenantName = jobDataMap.GetString(nameof(Tenant));
-                    if (!string.IsNullOrWhiteSpace(tenantName)) {
-                        TenantContext.SwitchDatabase(scope, tenantName);
-                    }
+                    if (!string.IsNullOrWhiteSpace(tenantName)) TenantContext.SwitchDatabase(scope, tenantName);
                     //execute
                     await Execute(context, scope);
                 }

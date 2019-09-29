@@ -1,24 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.Domains.Enums;
-using Alabo.Extensions;
-using Alabo.Mapping;
+﻿using Alabo.Domains.Enums;
 using Alabo.UI;
-using Alabo.UI.AutoPreviews;
+using Alabo.UI.Design.AutoPreviews;
 using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.Finance.UI.AutoForm {
-
+namespace Alabo.App.Asset.Recharges.UI
+{
     [ClassProperty(Name = "充值详情(autopreview)")]
-    public class RechargeViewOutPut : UIBase, IAutoPreview {
-
+    public class RechargeViewOutPut : UIBase, IAutoPreview
+    {
         /// <summary>
-        /// 编号
+        ///     编号
         /// </summary>
         [Field(ControlsType = ControlsType.Label, ListShow = false, EditShow = true, SortOrder = 2, Width = "160")]
         [Display(Name = "编号")]
@@ -73,7 +65,8 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
         [Display(Name = "交易时间")]
         public string CreateTime { get; set; }
 
-        public AutoPreview GetPreview(string id, AutoBaseModel autoModel) {
+        public AutoPreview GetPreview(string id, AutoBaseModel autoModel)
+        {
             //var model = Resolve<ITradeService>().GetSingle(u => u.Id == id.ToInt64() && u.Type == TradeType.Recharge);
             //var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
             //var item = AutoMapping.SetValue<RechargeViewOutPut>(model);

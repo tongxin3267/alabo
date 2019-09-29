@@ -1,14 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Core.Enums.Enum;
+﻿using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Web.Mvc.ViewModel;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.Finance.ViewModels.Recharge {
-
+namespace Alabo.App.Asset.Recharges.Dtos
+{
     /// <summary>
     ///     Class RchargeView.
     /// </summary>
-    public class RchargeView : BaseViewModel {
-
+    public class RchargeView : BaseViewModel
+    {
         /// <summary>
         ///     Gets or sets the action 类型.
         /// </summary>

@@ -1,42 +1,44 @@
-﻿using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using System.Threading.Tasks;
-using Alabo.App.Core.Common.Job;
-using Alabo.App.Core.Tasks.Job;
-using Alabo.App.Share.Operate.Job;
-using Alabo.App.Shop.Order.Job;
+﻿using Alabo.App.Share.TaskExecutes.Job;
+using Alabo.Framework.Basic.Notifications.Job;
+using Alabo.Framework.Core.Admins.Job;
+using Alabo.Industry.Shop.Orders.Job;
 using Alabo.Runtime;
-using Alabo.Schedules;
 using Alabo.Schedules.Job;
 using Alabo.Tenants.Domain.Entities;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+using System.Threading.Tasks;
 
-namespace Alabo.Web {
-
+namespace Alabo.Web
+{
     /// <summary>
-    /// Program
+    ///     Program
     /// </summary>
-    public class Program {
-
+    public class Program
+    {
         /// <summary>
-        /// Defines the entry point of the application.
+        ///     Defines the entry point of the application.
         /// </summary>
         /// <param name="args">The arguments.</param>
-        public static void Main(string[] args) {
+        public static void Main(string[] args)
+        {
             var host = BuildWebHost(args);
             //   RunJobs(host).GetAwaiter().GetResult();
             host.Run();
         }
 
         /// <summary>
-        /// Run jobs
+        ///     Run jobs
         /// </summary>
-        private static async Task RunJobs(IWebHost host) {
+        private static async Task RunJobs(IWebHost host)
+        {
             // 授权调度,30分钟一次
             //This scheduler is only in master teant.
             var scheduler = new Scheduler();
             //   await scheduler.AddJobAsync<ServerAuthenticationJob>();
 
-            if (RuntimeContext.Current.WebsiteConfig.IsDevelopment == false) {
+            if (RuntimeContext.Current.WebsiteConfig.IsDevelopment == false)
+            {
                 // 发送,2秒一次
                 await scheduler.AddJobAsync<MessageQueueJob>();
                 // 分润调度,3分钟一次
@@ -63,10 +65,11 @@ namespace Alabo.Web {
         }
 
         /// <summary>
-        /// 租户调度任务
+        ///     租户调度任务
         /// </summary>
         /// <param name="tenant"></param>
-        private static async void TenantJobs(Tenant tenant) {
+        private static async void TenantJobs(Tenant tenant)
+        {
             var scheduler = new Scheduler(tenant);
             // product sync job (Default 10 Minutes)
             //await scheduler.AddJobAsync<ProductSyncJob>();
@@ -79,13 +82,14 @@ namespace Alabo.Web {
         }
 
         /// <summary>
-        /// Builds the web host.
+        ///     Builds the web host.
         /// </summary>
         /// <param name="args">The arguments.</param>
-
-        public static IWebHost BuildWebHost(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IWebHost BuildWebHost(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .Build();
+        }
     }
 }

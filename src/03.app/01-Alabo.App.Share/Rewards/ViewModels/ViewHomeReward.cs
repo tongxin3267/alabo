@@ -12,40 +12,43 @@
 // <summary></summary>
 // ***********************************************************************
 
-using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Share.Share.Domain.Dto;
-using Alabo.App.Share.Share.Domain.Entities;
-using Alabo.App.Share.Share.Domain.Enums;
-using Alabo.App.Share.Share.Domain.Services;
+using Alabo.App.Share.Rewards.Domain.Entities;
+using Alabo.App.Share.Rewards.Domain.Enums;
+using Alabo.App.Share.Rewards.Domain.Services;
+using Alabo.App.Share.Rewards.Dtos;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.UI;
-using Alabo.UI.AutoLists;
-using Alabo.UI.AutoTables;
+using Alabo.UI.Design.AutoLists;
+using Alabo.UI.Design.AutoTables;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Share.Share.ViewModels {
-
+namespace Alabo.App.Share.Rewards.ViewModels
+{
     /// <summary>
     ///     Class ViewHomeReward.
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Share_ViewHomeReward")]
-    [ClassProperty(Name = "我的分润", Icon = "fa fa-puzzle-piece", Description = "我的分润", PageType = ViewPageType.List, PostApi = "Api/Reward/RewardList", ListApi = "Api/Reward/RewardList")]
-    public class ViewHomeReward : UIBase, IAutoTable<ViewHomeReward>, IAutoList {
-
+    [ClassProperty(Name = "我的分润", Icon = "fa fa-puzzle-piece", Description = "我的分润", PageType = ViewPageType.List,
+        PostApi = "Api/Reward/RewardList", ListApi = "Api/Reward/RewardList")]
+    public class ViewHomeReward : UIBase, IAutoTable<ViewHomeReward>, IAutoList
+    {
         /// <summary>
         ///     Gets or sets the serial.
         /// </summary>
@@ -140,34 +143,30 @@ namespace Alabo.App.Share.Share.ViewModels {
         [Display(Name = "编号")]
         [Field(ControlsType = ControlsType.TextBox, TableDispalyStyle = TableDispalyStyle.Code, Width = "100",
             ListShow = true, SortOrder = 1)]
-        public string Serial {
-            get {
+        public string Serial
+        {
+            get
+            {
                 var searSerial = $"9{Id.ToString().PadLeft(8, '0')}";
-                if (Id.ToString().Length >= 9) {
-                    searSerial = $"{Id.ToString()}";
-                }
+                if (Id.ToString().Length >= 9) searSerial = $"{Id.ToString()}";
 
                 return searSerial;
             }
         }
 
-        public List<TableAction> Actions() {
-            return new List<TableAction>();
-        }
-
-        public PageResult<AutoListItem> PageList(object query, AutoBaseModel autoModel) {
+        public PageResult<AutoListItem> PageList(object query, AutoBaseModel autoModel)
+        {
             var dic = query.ToObject<Dictionary<string, string>>();
 
-            dic.TryGetValue("loginUserId", out string userId);
-            dic.TryGetValue("pageIndex", out string pageIndexStr);
+            dic.TryGetValue("loginUserId", out var userId);
+            dic.TryGetValue("pageIndex", out var pageIndexStr);
             var pageIndex = pageIndexStr.ToInt64();
-            if (pageIndex <= 0) {
-                pageIndex = 1;
-            }
-            var temp = new ExpressionQuery<Reward> {
+            if (pageIndex <= 0) pageIndex = 1;
+            var temp = new ExpressionQuery<Reward>
+            {
                 EnablePaging = true,
-                PageIndex = (int)pageIndex,
-                PageSize = (int)15
+                PageIndex = (int) pageIndex,
+                PageSize = 15
             };
             temp.And(e => e.UserId == userId.ToInt64());
             temp.OrderByDescending(s => s.CreateTime);
@@ -176,10 +175,13 @@ namespace Alabo.App.Share.Share.ViewModels {
             var model = Resolve<IRewardService>().GetPagedList(temp);
             var users = Resolve<IUserDetailService>().GetList();
             var list = new List<AutoListItem>();
-            foreach (var item in model) {
-                var apiData = new AutoListItem {
-                    Title = moneyTypes.FirstOrDefault(u => u.Id == item.MoneyTypeId)?.Name,// + " - " + item.Type.GetDisplayName(),
-                    Intro = item.Intro,//$"{item.CreateTime}",
+            foreach (var item in model)
+            {
+                var apiData = new AutoListItem
+                {
+                    Title = moneyTypes.FirstOrDefault(u => u.Id == item.MoneyTypeId)
+                        ?.Name, // + " - " + item.Type.GetDisplayName(),
+                    Intro = item.Intro, //$"{item.CreateTime}",
                     Value = item.Amount,
                     Image = users.FirstOrDefault(u => u.UserId == item.UserId)?.Avator,
                     Id = item.Id,
@@ -187,27 +189,44 @@ namespace Alabo.App.Share.Share.ViewModels {
                 };
                 list.Add(apiData);
             }
+
             return ToPageList(list, model);
         }
 
-        public PageResult<ViewHomeReward> PageTable(object query, AutoBaseModel autoModel) {
+        public Type SearchType()
+        {
+            return typeof(Reward);
+        }
+
+        public List<TableAction> Actions()
+        {
+            return new List<TableAction>();
+        }
+
+        public PageResult<ViewHomeReward> PageTable(object query, AutoBaseModel autoModel)
+        {
             var userInput = ToQuery<RewardInput>();
-            if (autoModel.Filter == FilterType.Admin) {
+            if (autoModel.Filter == FilterType.Admin)
+            {
                 var rewardList = Resolve<IRewardService>().GetViewRewardPageList(userInput, HttpWeb.HttpContext);
                 // var users = Resolve<IUserService>().GetList();
                 var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
                 var result = new List<ViewHomeReward>();
-                rewardList.ForEach(u => {
+                rewardList.ForEach(u =>
+                {
                     var view = AutoMapping.SetValue<ViewHomeReward>(u);
                     view.Amount = u.RewardAmount;
                     //view.OrderUserName = Resolve<IUserService>().GetHomeUserStyle(users.FirstOrDefault(z => z.Id == u.UserId));
                     //view.MoneyTypeName = moneyTypes.FirstOrDefault(z => z.Id == u.MoneyTypeId)?.Name;
                     result.Add(view);
                 });
-                var model = PagedList<ViewHomeReward>.Create(result, rewardList.RecordCount, rewardList.PageSize, rewardList.PageIndex);
+                var model = PagedList<ViewHomeReward>.Create(result, rewardList.RecordCount, rewardList.PageSize,
+                    rewardList.PageIndex);
                 return ToPageResult(model);
             }
-            if (autoModel.Filter == FilterType.User) {
+
+            if (autoModel.Filter == FilterType.User)
+            {
                 userInput.UserId = autoModel.BasicUser.Id;
                 var rewardList = Resolve<IRewardService>().GetViewRewardPageList(userInput, HttpWeb.HttpContext);
                 var userIds = rewardList.Select(r => r.OrderUserId).ToList();
@@ -215,7 +234,8 @@ namespace Alabo.App.Share.Share.ViewModels {
                 var users = Resolve<IUserService>().GetList(userIds);
                 var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
                 var result = new List<ViewHomeReward>();
-                rewardList.ForEach(u => {
+                rewardList.ForEach(u =>
+                {
                     var view = AutoMapping.SetValue<ViewHomeReward>(u);
                     view.Amount = u.RewardAmount;
                     view.OrderUserName = string.Empty;
@@ -226,15 +246,12 @@ namespace Alabo.App.Share.Share.ViewModels {
                     //view.MoneyTypeName = moneyTypes.FirstOrDefault(z => z.Id == u.MoneyTypeId)?.Name;
                     result.Add(view);
                 });
-                var model = PagedList<ViewHomeReward>.Create(result, rewardList.RecordCount, rewardList.PageSize, rewardList.PageIndex);
+                var model = PagedList<ViewHomeReward>.Create(result, rewardList.RecordCount, rewardList.PageSize,
+                    rewardList.PageIndex);
                 return ToPageResult(model);
             }
 
             return null;
-        }
-
-        public Type SearchType() {
-            return typeof(Reward);
         }
 
         //#region

@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Alabo.App.Shop.Product.Domain.Dtos {
-
-    public class ProductToExcel {
+﻿namespace Alabo.Industry.Shop.Products.Dtos
+{
+    public class ProductToExcel
+    {
         public string RelationName { get; set; }
 
         public string ProductName { get; set; }
@@ -27,12 +24,10 @@ namespace Alabo.App.Shop.Product.Domain.Dtos {
         public decimal PremiumPrice { get; set; }
 
         /// <summary>
-        ///
         /// </summary>
         public decimal UltimatePrice { get; set; }
 
         /// <summary>
-        ///
         /// </summary>
         public decimal MajordomoPrice { get; set; }
 

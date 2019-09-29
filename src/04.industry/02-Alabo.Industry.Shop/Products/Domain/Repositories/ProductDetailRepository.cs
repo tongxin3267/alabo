@@ -1,12 +1,13 @@
-﻿using Alabo.App.Shop.Product.Domain.Entities;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
+using Alabo.Industry.Shop.Products.Domain.Entities;
 
-namespace Alabo.App.Shop.Product.Domain.Repositories {
-
-    public class ProductDetailRepository : RepositoryEfCore<ProductDetail, long>, IProductDetailRepository {
-
-        public ProductDetailRepository(IUnitOfWork unitOfWork) : base(unitOfWork) {
+namespace Alabo.Industry.Shop.Products.Domain.Repositories
+{
+    public class ProductDetailRepository : RepositoryEfCore<ProductDetail, long>, IProductDetailRepository
+    {
+        public ProductDetailRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
         }
     }
 }

@@ -1,27 +1,31 @@
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Share.Kpi.Domain.Services;
-using Alabo.Domains.Enums;
-using Alabo.Test.Base.Core;
-using Alabo.Test.Base.Core.Model;
 using System;
 using System.Collections.Generic;
+using Alabo.App.Kpis.Kpis.Domain.Services;
+using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Domains.Enums;
 using Alabo.Randoms;
+using Alabo.Test.Base.Core;
+using Alabo.Test.Base.Core.Model;
 using Xunit;
 
-namespace Alabo.Test.Open.Kpi.Domain.Services {
-
-    public class IKpiServiceTests : CoreTest {
+namespace Alabo.Test.Open.Kpi.Domain.Services
+{
+    public class IKpiServiceTests : CoreTest
+    {
         private readonly Guid TestModuleId = Guid.Parse("DF000650-C400-46aa-9EC0-9A4401018888");
         private readonly long TestEntityId = 198471;
 
-        public void DeleteModlue() {
+        public void DeleteModlue()
+        {
             var result = Resolve<IKpiService>().Delete(r => r.ModuleId == TestModuleId);
         }
 
-        private App.Share.Kpi.Domain.Entities.Kpi GetSingleKpi(DateTime dateTime, TimeType timeType) {
+        private App.Kpis.Kpis.Domain.Entities.Kpi GetSingleKpi(DateTime dateTime, TimeType timeType)
+        {
             var user = Resolve<IUserService>().GetSingle("admin");
 
-            var kpi = new App.Share.Kpi.Domain.Entities.Kpi {
+            var kpi = new App.Kpis.Kpis.Domain.Entities.Kpi
+            {
                 EntityId = TestEntityId,
                 ModuleId = TestModuleId,
                 UserId = user.Id,
@@ -34,7 +38,8 @@ namespace Alabo.Test.Open.Kpi.Domain.Services {
 
         [Fact]
         [TestMethod("AddSingle_Kpi")]
-        public void AddSingle_Kpi_test() {
+        public void AddSingle_Kpi_test()
+        {
             DeleteModlue();
 
             var kpi = GetSingleKpi(DateTime.Now, TimeType.Month);
@@ -44,9 +49,11 @@ namespace Alabo.Test.Open.Kpi.Domain.Services {
         }
 
         [Fact]
-        public void AddTestModule() {
-            var list = new List<App.Share.Kpi.Domain.Entities.Kpi>();
-            for (var i = 0; i < 10; i++) {
+        public void AddTestModule()
+        {
+            var list = new List<App.Kpis.Kpis.Domain.Entities.Kpi>();
+            for (var i = 0; i < 10; i++)
+            {
                 var index = RandomHelper.Number(1, 400);
                 var kpi = GetSingleKpi(DateTime.Now.AddDays(-index), TimeType.HalfYear);
                 list.Add(kpi);
@@ -59,7 +66,8 @@ namespace Alabo.Test.Open.Kpi.Domain.Services {
         ///     测试当天统计
         /// </summary>
         [Fact]
-        public void DayMonth() {
+        public void DayMonth()
+        {
             DeleteModlue();
             var kpi = GetSingleKpi(DateTime.Now, TimeType.Day);
             Resolve<IKpiService>().AddSingle(kpi);
@@ -89,9 +97,11 @@ namespace Alabo.Test.Open.Kpi.Domain.Services {
 
         [Fact]
         [TestMethod("GetLastSingle_StageType_Int64_Guid")]
-        public void GetLastSingle_StageType_Int64_Guid_test() {
+        public void GetLastSingle_StageType_Int64_Guid_test()
+        {
             var user = Resolve<IUserService>().GetSingle("admin");
-            var kpi = new App.Share.Kpi.Domain.Entities.Kpi {
+            var kpi = new App.Kpis.Kpis.Domain.Entities.Kpi
+            {
                 EntityId = TestEntityId,
                 ModuleId = TestModuleId,
                 UserId = user.Id,
@@ -105,8 +115,9 @@ namespace Alabo.Test.Open.Kpi.Domain.Services {
 
         [Fact]
         [TestMethod("GetLastSingle_StageType_Int64_Int64")]
-        public void GetLastSingle_StageType_Int64_Int64_test() {
-            //var stageType = (Alabo.Core.Enums.Enum.StageType)0;
+        public void GetLastSingle_StageType_Int64_Int64_test()
+        {
+            //var stageType = (Alabo.Framework.Core.Enums.Enum.StageType)0;
             //StageType stageType = null;
             //var userId = 0;
             //Int64 userId = 0;
@@ -123,7 +134,8 @@ namespace Alabo.Test.Open.Kpi.Domain.Services {
         ///     测试当小时统计
         /// </summary>
         [Fact]
-        public void HoursMonth() {
+        public void HoursMonth()
+        {
             DeleteModlue();
             var kpi = GetSingleKpi(DateTime.Now, TimeType.Hours);
             Resolve<IKpiService>().AddSingle(kpi);
@@ -167,7 +179,8 @@ namespace Alabo.Test.Open.Kpi.Domain.Services {
         ///     测试分钟统计
         /// </summary>
         [Fact]
-        public void MinuteMonth() {
+        public void MinuteMonth()
+        {
             DeleteModlue();
             var time = DateTime.Now;
             var kpi = GetSingleKpi(time, TimeType.Minute);
@@ -200,7 +213,8 @@ namespace Alabo.Test.Open.Kpi.Domain.Services {
         ///     测试季度统计
         /// </summary>
         [Fact]
-        public void TestHalfYear() {
+        public void TestHalfYear()
+        {
             DeleteModlue();
             var kpi = GetSingleKpi(DateTime.Now, TimeType.HalfYear);
             Resolve<IKpiService>().AddSingle(kpi);
@@ -234,7 +248,8 @@ namespace Alabo.Test.Open.Kpi.Domain.Services {
         ///     测试月份统计
         /// </summary>
         [Fact]
-        public void TestMonth() {
+        public void TestMonth()
+        {
             DeleteModlue();
             var kpi = GetSingleKpi(DateTime.Now, TimeType.Month);
             Resolve<IKpiService>().AddSingle(kpi);
@@ -262,7 +277,8 @@ namespace Alabo.Test.Open.Kpi.Domain.Services {
         ///     测试季度统计
         /// </summary>
         [Fact]
-        public void TestQuarter() {
+        public void TestQuarter()
+        {
             DeleteModlue();
             var kpi = GetSingleKpi(DateTime.Now, TimeType.Quarter);
             Resolve<IKpiService>().AddSingle(kpi);
@@ -290,7 +306,8 @@ namespace Alabo.Test.Open.Kpi.Domain.Services {
         ///     测试季度统计
         /// </summary>
         [Fact]
-        public void TestYear() {
+        public void TestYear()
+        {
             DeleteModlue();
             var kpi = GetSingleKpi(DateTime.Now, TimeType.Year);
             Resolve<IKpiService>().AddSingle(kpi);
@@ -318,7 +335,8 @@ namespace Alabo.Test.Open.Kpi.Domain.Services {
         ///     测试当周统计
         /// </summary>
         [Fact]
-        public void WeekMonth() {
+        public void WeekMonth()
+        {
             DeleteModlue();
             var kpi = GetSingleKpi(DateTime.Now, TimeType.Week);
             Resolve<IKpiService>().AddSingle(kpi);

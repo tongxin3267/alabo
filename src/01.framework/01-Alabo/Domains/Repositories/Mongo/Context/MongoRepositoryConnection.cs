@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Concurrent;
-using MongoDB.Driver;
-using Alabo.Runtime;
+﻿using Alabo.Runtime;
 using Alabo.Tenants;
+using MongoDB.Driver;
+using System;
+using System.Collections.Concurrent;
 
 namespace Alabo.Domains.Repositories.Mongo.Context
 {
@@ -46,16 +46,28 @@ namespace Alabo.Domains.Repositories.Mongo.Context
         {
             ConnectString = RuntimeContext.Current.WebsiteConfig.MongoDbConnection.ConnectionString;
             MongoUrl = new MongoUrl(ConnectString);
-            /*
-             mongo实例其实已经是一个现成的连接池了，而且线程安全。
-             这个内置的连接池默认初始了10个连接，每一个操作（增删改查等）都会获取一个连接，执行操作后释放连接。
-              */
+            /////*
+            //// mongo实例其实已经是一个现成的连接池了，而且线程安全。
+            //// 这个内置的连接池默认初始了10个连接，每一个操作（增删改查等）都会获取一个连接，执行操作后释放连接。
+            ////  */
+            ////
+            ////ClientSettings.ConnectionMode = ConnectionMode.Direct;
+
+            ////ClientSettings.MinConnectionPoolSize = 8; //当链接空闲时,空闲线程池中最大链接数，默认0
+            ////ClientSettings.MaxConnectionPoolSize = 300; //默认100
+            ////ClientSettings.WriteConcern = WriteConcern.Acknowledged;
+            ////Client = new MongoClient(ClientSettings);
+
             ClientSettings = MongoClientSettings.FromUrl(MongoUrl);
-            ClientSettings.ConnectionMode = ConnectionMode.Direct;
-            ClientSettings.ConnectTimeout = new TimeSpan(0, 0, 0, 30, 0); //30秒超时
-            ClientSettings.MinConnectionPoolSize = 8; //当链接空闲时,空闲线程池中最大链接数，默认0
-            ClientSettings.MaxConnectionPoolSize = 300; //默认100
+            ClientSettings.ConnectTimeout = new TimeSpan(0, 0, 1, 30, 0); //1分30秒超时
+            ClientSettings.MaxConnectionPoolSize = 2000; //设置连接池最大连接数
+            var credentials =
+                MongoCredential.CreateCredential(DataBaseName, MongoUrl.Username, MongoUrl.Password); //添加用户名、密码
+            ClientSettings.Credential = credentials;
+            ClientSettings.Server = MongoUrl.Server; //服务器地址
+            ClientSettings.ReadPreference = new ReadPreference(ReadPreferenceMode.Primary);
             ClientSettings.WriteConcern = WriteConcern.Acknowledged;
+            ClientSettings.ConnectionMode = ConnectionMode.Direct;
             Client = new MongoClient(ClientSettings);
         }
 
@@ -84,14 +96,11 @@ namespace Alabo.Domains.Repositories.Mongo.Context
             get
             {
                 var database = RuntimeContext.GetTenantDataBase();
-                if (!TenantContext.IsTenant) {
-                    return database;
-                }
+                if (!TenantContext.IsTenant) return database;
 
                 var tenantName = TenantContext.CurrentTenant;
-                if (string.IsNullOrWhiteSpace(tenantName) || tenantName.ToLower() == TenantContext.Master.ToLower()) {
+                if (string.IsNullOrWhiteSpace(tenantName) || tenantName.ToLower() == TenantContext.Master.ToLower())
                     return database;
-                }
 
                 return RuntimeContext.GetTenantDataBase(tenantName);
             }
@@ -113,10 +122,7 @@ namespace Alabo.Domains.Repositories.Mongo.Context
         {
             var dataBaseName = DataBaseName;
             //exists database return
-            if (_mongoDatabase.ContainsKey(dataBaseName))
-            {
-                return _mongoDatabase[dataBaseName];
-            }
+            if (_mongoDatabase.ContainsKey(dataBaseName)) return _mongoDatabase[dataBaseName];
 
             //not exists add adn return
             var database = Client.GetDatabase(dataBaseName);

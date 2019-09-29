@@ -1,9 +1,10 @@
-﻿using MongoDB.Bson;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.Domains.Repositories;
+﻿using Alabo.Domains.Repositories;
+using Alabo.Framework.Basic.Regions.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Common.Domain.Repositories {
-
-    public interface IRegionRepository : IRepository<Region, ObjectId> {
+namespace Alabo.Framework.Basic.Address.Domain.Repositories
+{
+    public interface IRegionRepository : IRepository<Region, ObjectId>
+    {
     }
 }

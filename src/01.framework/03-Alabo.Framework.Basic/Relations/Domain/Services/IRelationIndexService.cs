@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Framework.Basic.Relations.Domain.Entities;
+using Alabo.Framework.Core.Reflections.Interfaces;
 
-namespace Alabo.App.Core.Common.Domain.Services {
-
-    public interface IRelationIndexService : IService<RelationIndex, long> {
-
+namespace Alabo.Framework.Basic.Relations.Domain.Services
+{
+    public interface IRelationIndexService : IService<RelationIndex, long>
+    {
         /// <summary>
         ///     批量更新RealtionIndex
         ///     批量更新分类、标签等，包括删除、添加、更新操作

@@ -1,7 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using Alabo.Exceptions;
 using Microsoft.AspNetCore.Identity;
-using Alabo.Exceptions;
+using System;
+using System.Linq;
 
 namespace Alabo.Security.Identity.Extensions
 {
@@ -16,13 +16,9 @@ namespace Alabo.Security.Identity.Extensions
         /// <param name="result">Identity结果</param>
         public static void ThrowIfError(this IdentityResult result)
         {
-            if (result == null) {
-                throw new ArgumentNullException(nameof(result));
-            }
+            if (result == null) throw new ArgumentNullException(nameof(result));
 
-            if (result.Succeeded == false) {
-                throw new ValidException(result.Errors.First().Description);
-            }
+            if (result.Succeeded == false) throw new ValidException(result.Errors.First().Description);
         }
     }
 }

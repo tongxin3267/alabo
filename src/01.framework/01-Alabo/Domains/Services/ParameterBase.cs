@@ -1,6 +1,6 @@
-﻿using System.Linq;
-using Alabo.Exceptions;
+﻿using Alabo.Exceptions;
 using Alabo.Validations;
+using System.Linq;
 
 namespace Alabo.Domains.Services
 {
@@ -15,9 +15,7 @@ namespace Alabo.Domains.Services
         public virtual ValidationResultCollection Validate()
         {
             var result = DataAnnotationValidation.Validate(this);
-            if (result.IsValid) {
-                return ValidationResultCollection.Success;
-            }
+            if (result.IsValid) return ValidationResultCollection.Success;
 
             throw new ValidException(result.First().ErrorMessage);
         }

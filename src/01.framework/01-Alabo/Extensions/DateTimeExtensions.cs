@@ -50,9 +50,7 @@ namespace Alabo.Extensions
         /// <param name="removeSecond">是否移除秒</param>
         public static string ToDateTimeString(this DateTime? dateTime, bool removeSecond = false)
         {
-            if (dateTime == null) {
-                return string.Empty;
-            }
+            if (dateTime == null) return string.Empty;
 
             return ToTimeString(dateTime.Value, removeSecond);
         }
@@ -72,9 +70,7 @@ namespace Alabo.Extensions
         /// <param name="dateTime">日期</param>
         public static string ToDateString(this DateTime? dateTime)
         {
-            if (dateTime == null) {
-                return string.Empty;
-            }
+            if (dateTime == null) return string.Empty;
 
             return ToDateString(dateTime.Value);
         }
@@ -94,9 +90,7 @@ namespace Alabo.Extensions
         /// <param name="dateTime">日期</param>
         public static string ToTimeString(this DateTime? dateTime)
         {
-            if (dateTime == null) {
-                return string.Empty;
-            }
+            if (dateTime == null) return string.Empty;
 
             return dateTime.Value.ToString("yy-MM-dd HH:mm");
         }
@@ -116,9 +110,7 @@ namespace Alabo.Extensions
         /// <param name="dateTime">日期</param>
         public static string ToMillisecondString(this DateTime? dateTime)
         {
-            if (dateTime == null) {
-                return string.Empty;
-            }
+            if (dateTime == null) return string.Empty;
 
             return ToMillisecondString(dateTime.Value);
         }
@@ -138,9 +130,7 @@ namespace Alabo.Extensions
         /// <param name="dateTime">日期</param>
         public static string ToChineseDateString(this DateTime? dateTime)
         {
-            if (dateTime == null) {
-                return string.Empty;
-            }
+            if (dateTime == null) return string.Empty;
 
             return ToChineseDateString(dateTime.Value);
         }
@@ -155,9 +145,7 @@ namespace Alabo.Extensions
             var result = new StringBuilder();
             result.AppendFormat("{0}年{1}月{2}日", dateTime.Year, dateTime.Month, dateTime.Day);
             result.AppendFormat(" {0}时{1}分", dateTime.Hour, dateTime.Minute);
-            if (removeSecond == false) {
-                result.AppendFormat("{0}秒", dateTime.Second);
-            }
+            if (removeSecond == false) result.AppendFormat("{0}秒", dateTime.Second);
 
             return result.ToString();
         }
@@ -169,9 +157,7 @@ namespace Alabo.Extensions
         /// <param name="removeSecond">是否移除秒</param>
         public static string ToChineseDateTimeString(this DateTime? dateTime, bool removeSecond = false)
         {
-            if (dateTime == null) {
-                return string.Empty;
-            }
+            if (dateTime == null) return string.Empty;
 
             return ToChineseDateTimeString(dateTime.Value, removeSecond);
         }
@@ -183,25 +169,15 @@ namespace Alabo.Extensions
         public static string Description(this TimeSpan span)
         {
             var result = new StringBuilder();
-            if (span.Days > 0) {
-                result.AppendFormat("{0}天", span.Days);
-            }
+            if (span.Days > 0) result.AppendFormat("{0}天", span.Days);
 
-            if (span.Hours > 0) {
-                result.AppendFormat("{0}小时", span.Hours);
-            }
+            if (span.Hours > 0) result.AppendFormat("{0}小时", span.Hours);
 
-            if (span.Minutes > 0) {
-                result.AppendFormat("{0}分", span.Minutes);
-            }
+            if (span.Minutes > 0) result.AppendFormat("{0}分", span.Minutes);
 
-            if (span.Seconds > 0) {
-                result.AppendFormat("{0}秒", span.Seconds);
-            }
+            if (span.Seconds > 0) result.AppendFormat("{0}秒", span.Seconds);
 
-            if (span.Milliseconds > 0) {
-                result.AppendFormat("{0}毫秒", span.Milliseconds);
-            }
+            if (span.Milliseconds > 0) result.AppendFormat("{0}毫秒", span.Milliseconds);
 
             return result.Length > 0 ? result.ToString() : $"{span.TotalSeconds * 1000}毫秒";
         }
@@ -234,21 +210,13 @@ namespace Alabo.Extensions
             string hours = ts.Hours.ToString(),
                 minutes = ts.Minutes.ToString(),
                 seconds = ts.Seconds.ToString();
-            if (ts.Seconds <= 60) {
-                return "刚刚";
-            }
+            if (ts.Seconds <= 60) return "刚刚";
 
-            if (ts.Minutes <= 60) {
-                return $"{ts.Minutes}分钟前";
-            }
+            if (ts.Minutes <= 60) return $"{ts.Minutes}分钟前";
 
-            if (ts.Hours <= 24) {
-                return $"{ts.Hours}小时前";
-            }
+            if (ts.Hours <= 24) return $"{ts.Hours}小时前";
 
-            if (ts.Days <= 30) {
-                return $"{ts.Days}天前";
-            }
+            if (ts.Days <= 30) return $"{ts.Days}天前";
 
             return dateTime.ToString("yyyy-MM-dd HH:ss");
         }
@@ -274,14 +242,10 @@ namespace Alabo.Extensions
         {
             string str;
             var month = time.Month.ToString();
-            if (month.Length == 1) {
-                month = "0" + month;
-            }
+            if (month.Length == 1) month = "0" + month;
 
             var day = time.Day.ToString();
-            if (day.Length == 1) {
-                day = "0" + month;
-            }
+            if (day.Length == 1) day = "0" + month;
 
             str = string.Format("{0}-{1}-{2}", time.Year, month, day);
             return str;
@@ -295,14 +259,10 @@ namespace Alabo.Extensions
         {
             var str = string.Empty;
             var month = time.Month.ToString();
-            if (month.Length == 1) {
-                month = "0" + month;
-            }
+            if (month.Length == 1) month = "0" + month;
 
             var day = time.Day.ToString();
-            if (day.Length == 1) {
-                day = "0" + month;
-            }
+            if (day.Length == 1) day = "0" + month;
 
             str = $"{time.Year}{month}{day}{time.Hour}{time.Minute}{time.Second}";
             return str;
@@ -316,14 +276,10 @@ namespace Alabo.Extensions
         {
             var str = string.Empty;
             var month = time.Month.ToString();
-            if (month.Length == 1) {
-                month = "0" + month;
-            }
+            if (month.Length == 1) month = "0" + month;
 
             var day = time.Day.ToString();
-            if (day.Length == 1) {
-                day = "0" + month;
-            }
+            if (day.Length == 1) day = "0" + month;
 
             str = string.Format("{0}-{1}-{2}", time.Year, month, day);
             return str;
@@ -350,7 +306,7 @@ namespace Alabo.Extensions
         /// </summary>
         public static DateTime GetWeekBegin(this DateTime time)
         {
-            return time.Date.AddDays(-(int) time.DayOfWeek);
+            return time.Date.AddDays(-(int)time.DayOfWeek);
         }
 
         /// <summary>

@@ -1,8 +1,8 @@
-﻿using System.Diagnostics;
-using Alabo.Contexts;
+﻿using Alabo.Contexts;
 using Alabo.Helpers;
 using Alabo.Logging.Abstractions;
 using Alabo.Logging.Internal;
+using System.Diagnostics;
 
 namespace Alabo.Logging.Core
 {
@@ -71,15 +71,11 @@ namespace Alabo.Logging.Core
         /// </summary>
         private LogContextInfo GetInfo()
         {
-            if (_info != null) {
-                return _info;
-            }
+            if (_info != null) return _info;
 
             var key = "Util.Logs.LogContext";
             _info = Context.Get<LogContextInfo>(key);
-            if (_info != null) {
-                return _info;
-            }
+            if (_info != null) return _info;
 
             _info = CreateInfo();
             Context.Add(key, _info);

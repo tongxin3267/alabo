@@ -1,19 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.App.Share.Kpi.Domain.Enum;
+using Alabo.App.Kpis.Kpis.Domain.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Share.Kpi.ViewModels {
-
+namespace Alabo.App.Kpis.GradeKpis.Dtos
+{
     /// <summary>
-    /// 修改会员等级
+    ///     修改会员等级
     /// </summary>
     [ClassProperty(Name = "修改会员等级", SideBarType = SideBarType.KpiSideBar)]
-    public class GradeChangeView : BaseViewModel {
-
+    public class GradeChangeView : BaseViewModel
+    {
         /// <summary>
-        /// Id
+        ///     Id
         /// </summary>
         [Field(ControlsType = ControlsType.Hidden)]
         public string Id { get; set; }
@@ -42,7 +42,7 @@ namespace Alabo.App.Share.Kpi.ViewModels {
         public string GradeName { get; set; }
 
         /// <summary>
-        /// 修改后会员等级
+        ///     修改后会员等级
         /// </summary>
         [Display(Name = "修改后会员等级")]
         [Field(ControlsType = ControlsType.Label, SortOrder = 4)]

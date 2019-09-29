@@ -1,21 +1,21 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Cms.Articles.Domain.Entities {
-
+namespace Alabo.Industry.Cms.Articles.Domain.Entities
+{
     /// <summary>
     ///     专题
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("CMS_Special")]
     [ClassProperty(Name = "专题")]
-    public class Special : AggregateMongodbRoot<Special> {
-
+    public class Special : AggregateMongodbRoot<Special>
+    {
         /// <summary>
         ///     标识,专题标识，唯一
         ///     url通过此专题来访问

@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Alabo.Tool.Payment;
+using System;
 using System.Collections.Generic;
-using Alabo.App.Core.Finance.Domain.Enums;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.Pay {
-
+namespace Alabo.App.Asset.Pays.Dtos
+{
     /// <summary>
     ///     返回的支付方式列表
     /// </summary>
-    public class PayTypeOutput {
-
+    public class PayTypeOutput
+    {
         /// <summary>
         ///     提示文字
         ///     比如
@@ -36,8 +36,8 @@ namespace Alabo.App.Core.Finance.Domain.Dtos.Pay {
     /// <summary>
     ///     支付方式列表
     /// </summary>
-    public class PayTypeList {
-
+    public class PayTypeList
+    {
         /// <summary>
         ///     支付方式的Id
         /// </summary>

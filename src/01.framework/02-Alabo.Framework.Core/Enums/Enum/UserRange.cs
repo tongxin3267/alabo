@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Core.Enums.Enum
+namespace Alabo.Framework.Core.Enums.Enum
 {
     /// <summary>
     ///     活动的适用范围
@@ -12,13 +12,15 @@ namespace Alabo.Core.Enums.Enum
         /// <summary>
         ///     所有会员
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "所有会员")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "所有会员")]
         AllUser = 1,
 
         /// <summary>
         ///     根据会员等级
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "根据会员等级")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "根据会员等级")]
         ByUserGrade = 2
     }
 }

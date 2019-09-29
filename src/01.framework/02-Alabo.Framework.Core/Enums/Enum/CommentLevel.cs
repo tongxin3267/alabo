@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Core.Enums.Enum
+namespace Alabo.Framework.Core.Enums.Enum
 {
     /// <summary>
     ///     评论级别
@@ -12,19 +12,22 @@ namespace Alabo.Core.Enums.Enum
         /// <summary>
         ///     好评
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "好评")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "好评")]
         Good = 0,
 
         /// <summary>
         ///     中评
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "中评")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "中评")]
         Middle = 1,
 
         /// <summary>
         ///     差评
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "差评")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "差评")]
         Bad = 2
     }
 }

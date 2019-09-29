@@ -1,13 +1,13 @@
-using MongoDB.Bson;
 using System.Collections.Generic;
-using Alabo.App.Core.Tasks.Domain.Entities;
+using _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Tasks.Domain.Services {
-
-    public interface IShareOrderReportService : IService<ShareOrderReport, ObjectId> {
-
+namespace _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Services
+{
+    public interface IShareOrderReportService : IService<ShareOrderReport, ObjectId>
+    {
         /// <summary>
         ///     统计数据
         /// </summary>

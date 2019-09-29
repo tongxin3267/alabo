@@ -1,17 +1,17 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Core.Enums.Enum;
-using Alabo.Domains.Query.Dto;
+﻿using Alabo.Domains.Query.Dto;
 using Alabo.Mapping.Dynamic;
+using Alabo.Users.Enum;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.User.Domain.Dtos {
-
+namespace Alabo.Data.People.Users.Dtos
+{
     /// <summary>
     ///     用户的输出情况
     /// </summary>
-    public class UserOutput : EntityDto {
-
+    public class UserOutput : EntityDto
+    {
         /// <summary>
         ///     Gets or sets Id标识
         /// </summary>
@@ -104,7 +104,7 @@ namespace Alabo.App.Core.User.Domain.Dtos {
         public IdentityStatus IdentityStatus { get; set; } = IdentityStatus.IsNoPost;
 
         /// <summary>
-        /// 是否认证通过
+        ///     是否认证通过
         /// </summary>
         [Display(Name = "是否实名认证")]
         [Field(SortOrder = 4)]
@@ -143,22 +143,22 @@ namespace Alabo.App.Core.User.Domain.Dtos {
         public string OpenId { get; set; }
 
         /// <summary>
-        /// 加密Token
+        ///     加密Token
         /// </summary>
         public string Token { get; set; }
 
         /// <summary>
-        /// 是否是管理员
+        ///     是否是管理员
         /// </summary>
         public bool IsAdmin { get; set; }
 
         /// <summary>
-        /// 店铺ID
+        ///     店铺ID
         /// </summary>
         public dynamic Store { get; set; }
 
         /// <summary>
-        /// 是否需要修改支付密码
+        ///     是否需要修改支付密码
         /// </summary>
         public bool IsNeedSetPayPassword { get; set; } = false;
     }

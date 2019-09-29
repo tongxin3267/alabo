@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 using System.Reflection;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Alabo.Extensions
 {
@@ -34,9 +34,7 @@ namespace Alabo.Extensions
             foreach (var value in controller.ModelState.Values)
             {
                 var error = value.Errors.FirstOrDefault();
-                if (error != null) {
-                    return error.ErrorMessage;
-                }
+                if (error != null) return error.ErrorMessage;
             }
 
             return null;
@@ -51,8 +49,8 @@ namespace Alabo.Extensions
         public static bool TryUpdateModelForObject(
             this Controller controller, object obj)
         {
-            return (bool) TryUpdateModelMethodInfo.Value.MakeGenericMethod(
-                obj.GetType()).Invoke(controller, new[] {obj});
+            return (bool)TryUpdateModelMethodInfo.Value.MakeGenericMethod(
+                obj.GetType()).Invoke(controller, new[] { obj });
         }
     }
 }

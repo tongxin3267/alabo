@@ -1,17 +1,17 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Share.Kpi.Domain.Enum;
+using Alabo.App.Kpis.Kpis.Domain.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Share.Kpi.ViewModels {
-
+namespace Alabo.App.Kpis.GradeKpis.Dtos
+{
     /// <summary>
     /// </summary>
     [ClassProperty(Name = "等级考核", Icon = "flaticon-route", SideBarType = SideBarType.KpiSideBar)]
-    public class GradeKpiView : BaseViewModel {
-
+    public class GradeKpiView : BaseViewModel
+    {
         /// <summary>
         ///     用户类型Id
         /// </summary>
@@ -93,8 +93,8 @@ namespace Alabo.App.Share.Kpi.ViewModels {
     /// <summary>
     /// </summary>
     [ClassProperty(Name = "考核详情", Icon = "flaticon-route", SideBarType = SideBarType.GradeKpiSideBar)]
-    public class GradeKpiDetailView : BaseViewModel {
-
+    public class GradeKpiDetailView : BaseViewModel
+    {
         /// <summary>
         ///     用户类型Id
         /// </summary>

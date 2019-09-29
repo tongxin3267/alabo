@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Alabo.Datas.Queries.Enums;
+using Alabo.Datas.Sql.Queries.Builders.Abstractions;
+using Alabo.Domains.Repositories.Pager;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Alabo.Datas.Queries.Enums;
-using Alabo.Datas.Sql.Queries.Builders.Abstractions;
-using Alabo.Domains.Repositories.Pager;
 
 namespace Alabo.Datas.Sql.Queries
 {

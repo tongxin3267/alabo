@@ -1,6 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
+﻿using Alabo.Extensions;
+using Alabo.Helpers;
+using Alabo.Logging;
+using Alabo.Logging.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
@@ -9,10 +10,9 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Alabo.Extensions;
-using Alabo.Helpers;
-using Alabo.Logging;
-using Alabo.Logging.Extensions;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 using File = System.IO.File;
 
 namespace Alabo.Web.Filters
@@ -59,19 +59,13 @@ namespace Alabo.Web.Filters
             try
             {
                 var html = await RenderToStringAsync(context);
-                if (string.IsNullOrWhiteSpace(html)) {
-                    return;
-                }
+                if (string.IsNullOrWhiteSpace(html)) return;
 
                 var path = Common.GetPhysicalPath(string.IsNullOrWhiteSpace(Path) ? GetPath(context) : Path);
                 var directory = System.IO.Path.GetDirectoryName(path);
-                if (string.IsNullOrWhiteSpace(directory)) {
-                    return;
-                }
+                if (string.IsNullOrWhiteSpace(directory)) return;
 
-                if (Directory.Exists(directory) == false) {
-                    Directory.CreateDirectory(directory);
-                }
+                if (Directory.Exists(directory) == false) Directory.CreateDirectory(directory);
 
                 File.WriteAllText(path, html);
             }
@@ -100,18 +94,16 @@ namespace Alabo.Web.Filters
             var razorViewEngine = Ioc.Resolve<IRazorViewEngine>();
             var tempDataProvider = Ioc.Resolve<ITempDataProvider>();
             var serviceProvider = Ioc.Resolve<IServiceProvider>();
-            var httpContext = new DefaultHttpContext {RequestServices = serviceProvider};
+            var httpContext = new DefaultHttpContext { RequestServices = serviceProvider };
             var actionContext = new ActionContext(httpContext, context.RouteData, new ActionDescriptor());
             using (var stringWriter = new StringWriter())
             {
                 var viewResult = razorViewEngine.FindView(actionContext, viewName, true);
-                if (viewResult.View == null) {
-                    throw new ArgumentNullException($"未找到视图： {viewName}");
-                }
+                if (viewResult.View == null) throw new ArgumentNullException($"未找到视图： {viewName}");
 
                 var viewDictionary =
                     new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())
-                        {Model = model};
+                    { Model = model };
                 var viewContext = new ViewContext(actionContext, viewResult.View, viewDictionary,
                     new TempDataDictionary(actionContext.HttpContext, tempDataProvider), stringWriter,
                     new HtmlHelperOptions());

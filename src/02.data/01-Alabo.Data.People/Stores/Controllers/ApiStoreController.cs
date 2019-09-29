@@ -1,16 +1,18 @@
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
-using Alabo.App.Shop.Store.Domain.Services;
+using Alabo.Data.People.Stores.Domain.Entities;
+using Alabo.Data.People.Stores.Domain.Services;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
-namespace Alabo.App.Shop.Store.Controllers {
-
+namespace Alabo.Data.People.Stores.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/Store/[action]")]
-    public class ApiStoreController : ApiBaseController<Domain.Entities.Store, ObjectId> {
-
-        public ApiStoreController() : base() {
+    public class ApiStoreController : ApiBaseController<Store, ObjectId>
+    {
+        public ApiStoreController() : base()
+        {
             BaseService = Resolve<IStoreService>();
         }
     }

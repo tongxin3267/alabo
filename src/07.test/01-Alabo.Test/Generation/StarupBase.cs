@@ -1,7 +1,7 @@
 ﻿using System;
-using Xunit;
-using Alabo.App.Core.Admin.Domain.Services;
+using Alabo.Framework.Core.Reflections.Services;
 using Alabo.Test.Base.Core.Model;
+using Xunit;
 
 namespace Alabo.Test.Generation
 {
@@ -14,7 +14,6 @@ namespace Alabo.Test.Generation
             var allServiceType = Resolve<ITypeService>().GetAllEntityService(); //.Where(o=>!o.IsAbstract);
 
             foreach (var type in allServiceType)
-            {
                 try
                 {
                     var startupTest = new StartupTest();
@@ -22,7 +21,6 @@ namespace Alabo.Test.Generation
                 catch (Exception ex)
                 {
                 }
-            }
         } /*end*/
 
         [Fact]

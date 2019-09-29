@@ -1,43 +1,46 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.Domains.Entities;
+using Alabo.Domains.Repositories.Mongo.Extension;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.AfterSale.Domain.Entities
+namespace Alabo.Industry.Shop.AfterSales.Domain.Entities
 {
     /// <summary>
-    /// 评价
+    ///     评价
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("AfterSale_Evaluate")]
     public class Evaluate : AggregateMongodbUserRoot<Evaluate>
     {
         /// <summary>
-        /// 商品ID
+        ///     商品ID
         /// </summary>
         [Required]
         public long ProductId { get; set; }
-        /// <summary>
-        /// 店铺ID,该字段为冗余字段,方便以后查询
-        /// </summary>
-        [Required]
-        public long StoreId { get; set; }
 
         /// <summary>
-        /// 订单ID
+        ///     店铺ID,该字段为冗余字段,方便以后查询
+        /// </summary>
+        [Required]
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
+
+        /// <summary>
+        ///     订单ID
         /// </summary>
         [Required]
         public long OrderId { get; set; }
 
         /// <summary>
-        /// 评价内容
+        ///     评价内容
         /// </summary>
         [Required]
         public string Content { get; set; }
+
         /// <summary>
         ///     评价方式，好评中评，差评
         /// </summary>
@@ -66,7 +69,7 @@ namespace Alabo.App.Shop.AfterSale.Domain.Entities
         public long ServiceScore { get; set; }
 
         /// <summary>
-        /// 图片 逗号隔开(路径),最多五个
+        ///     图片 逗号隔开(路径),最多五个
         /// </summary>
         public List<string> Images { get; set; }
     }

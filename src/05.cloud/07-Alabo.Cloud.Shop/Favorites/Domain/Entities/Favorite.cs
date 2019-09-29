@@ -1,17 +1,13 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Share.Attach.Domain.Enums;
-using Alabo.App.Share.Attach.Domain.Services;
+using Alabo.Cloud.Shop.Favorites.Domain.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.UI;
-using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Share.Attach.Domain.Entities {
-
+namespace Alabo.Cloud.Shop.Favorites.Domain.Entities
+{
     /// <summary>
     ///     通用收藏
     /// </summary>
@@ -19,8 +15,8 @@ namespace Alabo.App.Share.Attach.Domain.Entities {
     [Table("Attach_Favorite")]
     [AutoDelete(IsAuto = true)]
     [ClassProperty(Name = "收藏", SideBarType = SideBarType.FullScreen)]
-    public class Favorite : AggregateMongodbUserRoot<Favorite> {
-
+    public class Favorite : AggregateMongodbUserRoot<Favorite>
+    {
         /// <summary>
         ///     收藏类型
         ///     比如订单、商品、文章等评论
@@ -35,21 +31,22 @@ namespace Alabo.App.Share.Attach.Domain.Entities {
         public string EntityId { get; set; }
 
         /// <summary>
-        /// 收藏名称
+        ///     收藏名称
         /// </summary>
         [Display(Name = "商品")]
-        [Field(ControlsType = ControlsType.TextBox, ListShow = true, IsShowBaseSerach = true, SortOrder = 2, IsShowAdvancedSerach = true)]
+        [Field(ControlsType = ControlsType.TextBox, ListShow = true, IsShowBaseSerach = true, SortOrder = 2,
+            IsShowAdvancedSerach = true)]
         public string Name { get; set; }
 
         /// <summary>
-        /// 图片
+        ///     图片
         /// </summary>
         [Display(Name = "图片")]
         [Field(ControlsType = ControlsType.AlbumUploder, ListShow = true, SortOrder = 1, IsImagePreview = true)]
         public string Image { get; set; }
 
         /// <summary>
-        /// 链接地址
+        ///     链接地址
         /// </summary>
         public string Url { get; set; }
     }

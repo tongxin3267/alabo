@@ -1,7 +1,7 @@
-﻿namespace Alabo.App.Shop.Order.ViewModels {
-
-    public class OrderAccountPay {
-
+﻿namespace Alabo.Industry.Shop.Orders.ViewModels
+{
+    public class OrderAccountPay
+    {
         /// <summary>
         ///     用户的账户信息
         /// </summary>

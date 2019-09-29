@@ -1,16 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
-using Alabo.Regexs;
+﻿using Alabo.Regexs;
 using Alabo.Validations;
+using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.User.ViewModels {
-
+namespace Alabo.Data.People.Users.ViewModels
+{
     /// <summary>
     ///     Class ViewForgotPassword.
     /// </summary>
-    public class ViewForgotPassword {
-
+    public class ViewForgotPassword
+    {
         /// <summary>
         ///     Gets or sets the password.
         /// </summary>

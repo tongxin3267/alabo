@@ -1,26 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
-using Alabo.App.Core.Common;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.User.Domain.Callbacks;
 using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
+using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Helpers;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Shop.Activitys.Modules.MemberDiscount.Callbacks
+namespace Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Callbacks
 {
-
-
     /// <summary>
-    /// 会员等级前台显示配置
+    ///     会员等级前台显示配置
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "会员等级前台显示配置", Icon = "fa fa-cny", Description = "",
@@ -29,15 +22,15 @@ namespace Alabo.App.Shop.Activitys.Modules.MemberDiscount.Callbacks
     public class MemberDiscountConfig : BaseViewModel, IAutoConfig
     {
         /// <summary>
-        /// GradeIds
+        ///     GradeIds
         /// </summary>
-        [Field(ControlsType = ControlsType.Switch,EditShow =true)]
+        [Field(ControlsType = ControlsType.Switch, EditShow = true)]
         [Display(Name = "显示默认会员等级价")]
         [HelpBlock("不选择时，商品需要设置活动才显示会员等级价。")]
         public bool IsShowDefaultGradePrice { get; set; }
 
         /// <summary>
-        /// GradeIds
+        ///     GradeIds
         /// </summary>
         [Field(ControlsType = ControlsType.CheckBoxMultipl, SortOrder = 2, DataSourceType = typeof(UserGradeConfig))]
         [Display(Name = "显示会员等级价")]
@@ -45,7 +38,7 @@ namespace Alabo.App.Shop.Activitys.Modules.MemberDiscount.Callbacks
         public string GradeIds { get; set; }
 
         /// <summary>
-        /// 免费会员前台是否显示价格
+        ///     免费会员前台是否显示价格
         /// </summary>
         [Field(ControlsType = ControlsType.Switch)]
         [Display(Name = "免费会员前台是否显示价格")]
@@ -53,7 +46,7 @@ namespace Alabo.App.Shop.Activitys.Modules.MemberDiscount.Callbacks
         public bool IsFrontShowPrice { get; set; }
 
         /// <summary>
-        /// 不显示价格的替代文本
+        ///     不显示价格的替代文本
         /// </summary>
         [Field(ControlsType = ControlsType.TextBox)]
         [Display(Name = "前台价格替代文本")]

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Alabo.Reflections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Alabo.Reflections;
 
 namespace Alabo.Helpers
 {
@@ -11,8 +11,6 @@ namespace Alabo.Helpers
     /// </summary>
     public static class Enums
     {
-
-
         /// <summary>
         ///     获取实例
         /// </summary>
@@ -23,14 +21,12 @@ namespace Alabo.Helpers
             var value = Extensions.Extensions.SafeString(member);
             if (string.IsNullOrWhiteSpace(value))
             {
-                if (typeof(TEnum).IsGenericType) {
-                    return default;
-                }
+                if (typeof(TEnum).IsGenericType) return default;
 
                 throw new ArgumentNullException(nameof(member));
             }
 
-            return (TEnum) Enum.Parse(Common.GetType<TEnum>(), value, true);
+            return (TEnum)Enum.Parse(Common.GetType<TEnum>(), value, true);
         }
 
         /// <summary>
@@ -50,21 +46,13 @@ namespace Alabo.Helpers
         /// <param name="member">成员名、值、实例均可</param>
         public static string GetName(Type type, object member)
         {
-            if (type == null) {
-                return string.Empty;
-            }
+            if (type == null) return string.Empty;
 
-            if (member == null) {
-                return string.Empty;
-            }
+            if (member == null) return string.Empty;
 
-            if (member is string) {
-                return member.ToString();
-            }
+            if (member is string) return member.ToString();
 
-            if (type.GetTypeInfo().IsEnum == false) {
-                return string.Empty;
-            }
+            if (type.GetTypeInfo().IsEnum == false) return string.Empty;
 
             return Enum.GetName(type, member);
         }
@@ -87,13 +75,11 @@ namespace Alabo.Helpers
         public static int GetValue(Type type, object member)
         {
             var value = Extensions.Extensions.SafeString(member);
-            if (string.IsNullOrWhiteSpace(value)) {
-                throw new ArgumentNullException(nameof(member));
-            }
+            if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(nameof(member));
 
             try
             {
-                return (int) Enum.Parse(type, member.ToString(), true);
+                return (int)Enum.Parse(type, member.ToString(), true);
             }
             catch
             {
@@ -137,14 +123,10 @@ namespace Alabo.Helpers
         public static List<Item> GetItems(Type type)
         {
             type = Common.GetType(type);
-            if (type.IsEnum == false) {
-                throw new InvalidOperationException($"类型 {type} 不是枚举");
-            }
+            if (type.IsEnum == false) throw new InvalidOperationException($"类型 {type} 不是枚举");
 
             var result = new List<Item>();
-            foreach (var field in type.GetFields()) {
-                AddItem(type, result, field);
-            }
+            foreach (var field in type.GetFields()) AddItem(type, result, field);
 
             return result.OrderBy(t => t.SortId).ToList();
         }
@@ -154,9 +136,7 @@ namespace Alabo.Helpers
         /// </summary>
         private static void AddItem(Type type, ICollection<Item> result, FieldInfo field)
         {
-            if (!field.FieldType.IsEnum) {
-                return;
-            }
+            if (!field.FieldType.IsEnum) return;
 
             var value = 0;
             try

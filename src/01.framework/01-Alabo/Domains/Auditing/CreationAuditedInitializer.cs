@@ -1,6 +1,6 @@
-﻿using System;
-using Alabo.Extensions;
+﻿using Alabo.Extensions;
 using Alabo.Security.Sessions;
+using System;
 
 namespace Alabo.Domains.Auditing
 {
@@ -81,9 +81,7 @@ namespace Alabo.Domains.Auditing
                 return;
             }
 
-            if (_entity is ICreationAudited<long?>) {
-                InitNullableLong();
-            }
+            if (_entity is ICreationAudited<long?>) InitNullableLong();
         }
 
         /// <summary>
@@ -100,7 +98,7 @@ namespace Alabo.Domains.Auditing
         /// </summary>
         private void InitGuid()
         {
-            var result = (ICreationAudited<Guid>) _entity;
+            var result = (ICreationAudited<Guid>)_entity;
             result.CreationTime = DateTime.Now;
             result.CreatorId = _session.UserId.ToGuid();
         }
@@ -110,7 +108,7 @@ namespace Alabo.Domains.Auditing
         /// </summary>
         private void InitNullableGuid()
         {
-            var result = (ICreationAudited<Guid?>) _entity;
+            var result = (ICreationAudited<Guid?>)_entity;
             result.CreationTime = DateTime.Now;
             result.CreatorId = _session.UserId.ToGuidOrNull();
         }
@@ -120,7 +118,7 @@ namespace Alabo.Domains.Auditing
         /// </summary>
         private void InitInt()
         {
-            var result = (ICreationAudited<int>) _entity;
+            var result = (ICreationAudited<int>)_entity;
             result.CreationTime = DateTime.Now;
             result.CreatorId = _session.UserId.ToInt();
         }
@@ -130,7 +128,7 @@ namespace Alabo.Domains.Auditing
         /// </summary>
         private void InitNullableInt()
         {
-            var result = (ICreationAudited<int?>) _entity;
+            var result = (ICreationAudited<int?>)_entity;
             result.CreationTime = DateTime.Now;
             result.CreatorId = _session.UserId.ToIntOrNull();
         }
@@ -140,7 +138,7 @@ namespace Alabo.Domains.Auditing
         /// </summary>
         private void InitString()
         {
-            var result = (ICreationAudited<string>) _entity;
+            var result = (ICreationAudited<string>)_entity;
             result.CreationTime = DateTime.Now;
             result.CreatorId = _session.UserId.SafeString();
         }
@@ -150,7 +148,7 @@ namespace Alabo.Domains.Auditing
         /// </summary>
         private void InitLong()
         {
-            var result = (ICreationAudited<long>) _entity;
+            var result = (ICreationAudited<long>)_entity;
             result.CreationTime = DateTime.Now;
             result.CreatorId = _session.UserId.ToLong();
         }
@@ -160,7 +158,7 @@ namespace Alabo.Domains.Auditing
         /// </summary>
         private void InitNullableLong()
         {
-            var result = (ICreationAudited<long?>) _entity;
+            var result = (ICreationAudited<long?>)_entity;
             result.CreationTime = DateTime.Now;
             result.CreatorId = _session.UserId.ToLongOrNull();
         }

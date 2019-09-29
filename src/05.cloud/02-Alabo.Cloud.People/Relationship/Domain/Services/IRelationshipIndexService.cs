@@ -1,13 +1,12 @@
-using MongoDB.Bson;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Market.Relationship.Domain.Entities;
+using Alabo.Cloud.People.Relationship.Domain.Entities;
 using Alabo.Domains.Services;
 using Alabo.Users.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.Relationship.Domain.Services {
-
-    public interface IRelationshipIndexService : IService<RelationshipIndex, ObjectId> {
-
+namespace Alabo.Cloud.People.Relationship.Domain.Services
+{
+    public interface IRelationshipIndexService : IService<RelationshipIndex, ObjectId>
+    {
         /// <summary>
         ///     �û�ע����¼�
         /// </summary>

@@ -1,12 +1,12 @@
 using System;
-using Microsoft.AspNetCore.Http;
-using Xunit;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Core.Tasks.ResultModel;
-using ZKCloud.Open.Share.Models;
+using Alabo.App.Share.TaskExecutes.Domain.Services;
+using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
+using Microsoft.AspNetCore.Http;
+using Xunit;
+using ZKCloud.Open.Share.Models;
 
 namespace Alabo.Test.Core.Tasks.Domain.Services
 {

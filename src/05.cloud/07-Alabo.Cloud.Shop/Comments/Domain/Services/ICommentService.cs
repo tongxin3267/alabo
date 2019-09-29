@@ -1,9 +1,10 @@
-using MongoDB.Bson;
-using Alabo.App.Share.Attach.Domain.Entities;
+using Alabo.Cloud.Shop.Comments.Domain.Entities;
 using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Share.Attach.Domain.Services {
-
-    public interface ICommentService : IService<Comment, ObjectId> {
+namespace Alabo.Cloud.Shop.Comments.Domain.Services
+{
+    public interface ICommentService : IService<Comment, ObjectId>
+    {
     }
 }

@@ -1,31 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.UI.AutoForms;
+using Alabo.Framework.Core.WebApis;
+using Alabo.UI;
+using Alabo.UI.Design.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Offline.RechargeAccount.Domain.Callbacks
+namespace Alabo.Industry.Offline.RechargeAccount.Domain.Callbacks
 {
     /// <summary>
-    /// 储值规则
+    ///     储值规则
     /// </summary>
     [ClassProperty(Name = "储值规则", Description = "储值规则", PageType = ViewPageType.List)]
     public class RechargeAccountConfig : BaseViewModel, IAutoConfig
     {
         /// <summary>
-        /// Id
+        ///     Id
         /// </summary>
         [Field(ControlsType = ControlsType.TextBox, EditShow = false)]
         [Display(Name = "Id")]
         public Guid Id { get; set; }
 
         /// <summary>
-        /// 描述
+        ///     描述
         /// </summary>
         [Field(ControlsType = ControlsType.TextBox, ListShow = true, EditShow = true, IsShowBaseSerach = true)]
         [Display(Name = "描述")]
@@ -33,7 +33,7 @@ namespace Alabo.App.Offline.RechargeAccount.Domain.Callbacks
         public string Intro { get; set; }
 
         /// <summary>
-        /// 储值金额
+        ///     储值金额
         /// </summary>
         [Field(ControlsType = ControlsType.Numberic, ListShow = true, EditShow = true)]
         [Display(Name = "储值金额")]
@@ -41,15 +41,15 @@ namespace Alabo.App.Offline.RechargeAccount.Domain.Callbacks
         public decimal StoreAmount { get; set; }
 
         /// <summary>
-        /// 到账金额
+        ///     到账金额
         /// </summary>
-        [Field(ControlsType = ControlsType.Numberic,ListShow = true,EditShow = true)]
+        [Field(ControlsType = ControlsType.Numberic, ListShow = true, EditShow = true)]
         [Display(Name = "到账金额")]
         [HelpBlock("请您输入到账金额")]
         public decimal ArriveAmount { get; set; }
 
         /// <summary>
-        /// 赠送消费额
+        ///     赠送消费额
         /// </summary>
         [Field(ControlsType = ControlsType.Numberic, ListShow = true, EditShow = true)]
         [Display(Name = "赠送消费额")]
@@ -57,7 +57,7 @@ namespace Alabo.App.Offline.RechargeAccount.Domain.Callbacks
         public decimal GiveChangeAmount { get; set; }
 
         /// <summary>
-        /// 赠送优惠券
+        ///     赠送优惠券
         /// </summary>
         [Field(ControlsType = ControlsType.Numberic, ListShow = false, EditShow = false)]
         [Display(Name = "赠送优惠券")]
@@ -66,7 +66,7 @@ namespace Alabo.App.Offline.RechargeAccount.Domain.Callbacks
 
 
         /// <summary>
-        /// 赠送积分
+        ///     赠送积分
         /// </summary>
         [Field(ControlsType = ControlsType.Numberic, ListShow = true, EditShow = true)]
         [Display(Name = "赠送积分")]
@@ -74,9 +74,14 @@ namespace Alabo.App.Offline.RechargeAccount.Domain.Callbacks
         public decimal DiscountAmount { get; set; }
 
 
-        public AutoForm GetView(object id, UI.AutoBaseModel autoModel)
+        public void SetDefault()
         {
-            AutoForm autoForm = new AutoForm();
+        }
+
+
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
+            var autoForm = new AutoForm();
             autoForm.AlertText = "用户可通过多种途径获取积分，积分可用于积分商城消费";
             autoForm.ButtomHelpText = new List<string>
             {
@@ -85,17 +90,11 @@ namespace Alabo.App.Offline.RechargeAccount.Domain.Callbacks
                 "消费用途：积分商城消费",
                 "消费用途：积分商城消费，消费用途：积分商城消费",
                 "消费用途：积分商城消费，消费用途：积分商城消费",
-                "消费用途：积分商城消费，消费用途：积分商城消费",
+                "消费用途：积分商城消费，消费用途：积分商城消费"
             };
 
             // 操作PriceStyleConfig
             return autoForm;
-        }
-
-
-        public void SetDefault()
-        {
-
         }
     }
 }

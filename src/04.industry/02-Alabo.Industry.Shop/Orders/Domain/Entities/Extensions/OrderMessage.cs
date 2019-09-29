@@ -1,12 +1,12 @@
 ﻿using Alabo.Domains.Entities.Extensions;
 
-namespace Alabo.App.Shop.Order.Domain.Entities.Extensions {
-
+namespace Alabo.Industry.Shop.Orders.Domain.Entities.Extensions
+{
     /// <summary>
     ///     订单留言
     /// </summary>
-    public class OrderMessage : EntityExtension {
-
+    public class OrderMessage : EntityExtension
+    {
         /// <summary>
         ///     买家留言
         /// </summary>
@@ -29,10 +29,10 @@ namespace Alabo.App.Shop.Order.Domain.Entities.Extensions {
     /// <summary>
     ///     订单备注
     /// </summary>
-    public class OrderRemark : EntityExtension {
-
+    public class OrderRemark : EntityExtension
+    {
         /// <summary>
-        /// 订单ID
+        ///     订单ID
         /// </summary>
         public long OrderId { get; set; }
 

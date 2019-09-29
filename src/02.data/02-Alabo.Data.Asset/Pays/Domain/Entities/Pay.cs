@@ -1,22 +1,23 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Alabo.App.Asset.Pays.Domain.Entities.Extension;
+using Alabo.Datas.Ef.SqlServer;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Tenants;
+using Alabo.Tool.Payment;
+using Alabo.Users.Entities;
+using Alabo.Validations;
+using Alabo.Web.Mvc.Attributes;
+using Alabo.Web.Mvc.ViewModel;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Core.Finance.Domain.Entities.Extension;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.Core.Enums.Enum;
-using Alabo.Datas.Ef.SqlServer;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.Tenants;
-using Alabo.Validations;
-using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.Finance.Domain.Entities {
-
+namespace Alabo.App.Asset.Pays.Domain.Entities
+{
     /// <summary>
     ///     Invoice 类存放收银台发票记录
     ///     收银台支付信息
@@ -24,15 +25,15 @@ namespace Alabo.App.Core.Finance.Domain.Entities {
     /// </summary>
     [ClassProperty(Name = "收银台", Icon = "fa fa-puzzle-piece", Description = "收银台",
         SideBarType = SideBarType.FinancePaySideBar)]
-    public class Pay : AggregateDefaultUserRoot<Pay> {
-
+    public class Pay : AggregateDefaultUserRoot<Pay>
+    {
         /// <summary>
         ///     结算类型
         ///     支付订单类型
         /// </summary>
         [Display(Name = "订单类型")]
         [Field(ControlsType = ControlsType.DropdownList, EditShow = true, Width = "150",
-            DataSource = "Alabo.Core.Enums.Enum.CheckoutType", ListShow = true, IsShowBaseSerach = true,
+            DataSource = "Alabo.Framework.Core.Enums.Enum.CheckoutType", ListShow = true, IsShowBaseSerach = true,
             IsShowAdvancedSerach = true, SortOrder = 5)]
         public CheckoutType Type { get; set; } = 0;
 
@@ -52,9 +53,7 @@ namespace Alabo.App.Core.Finance.Domain.Entities {
         ///     用Json格式保存
         /// </summary>
         [Display(Name = "获取或设置实体 Id")]
-        public string EntityId {
-            get; set;
-        }
+        public string EntityId { get; set; }
 
         /// <summary>
         ///     需要支付的金额
@@ -62,24 +61,20 @@ namespace Alabo.App.Core.Finance.Domain.Entities {
         [Display(Name = "订单金额")]
         [Field(ControlsType = ControlsType.NumberRang, EditShow = true, Width = "180", IsShowBaseSerach = true,
             IsShowAdvancedSerach = true, ListShow = true, IsMain = true, SortOrder = 3)]
-        public decimal Amount {
-            get; set;
-        }
+        public decimal Amount { get; set; }
 
         /// <summary>
         ///     使用账户支付的部分
         /// </summary>
         [Display(Name = "使用账户支付的部分")]
-        public string AccountPay {
-            get; set;
-        }
+        public string AccountPay { get; set; }
 
         /// <summary>
         ///     获取或设置是否回调完成
         /// </summary>
         [Display(Name = "是否回调完成")]
         [Field(ControlsType = ControlsType.DropdownList, EditShow = true,
-            DataSource = "Alabo.Core.Enums.Enum.PayStatus",
+            DataSource = "Alabo.Framework.Core.Enums.Enum.PayStatus",
             IsShowBaseSerach = true, IsShowAdvancedSerach = true, Width = "180", ListShow = true, SortOrder = 7)]
         public PayStatus Status { get; set; } = PayStatus.WaiPay;
 
@@ -128,25 +123,22 @@ namespace Alabo.App.Core.Finance.Domain.Entities {
         /// </value>
         [NotMapped]
         [Display(Name = "用户")]
-        public Users.Entities.User User {
-            get; set;
-        }
+        public User User { get; set; }
 
         /// <summary>
         ///     使用账户支付的部分
         ///     键值对
         /// </summary>
         [Display(Name = "使用账户支付的部分")]
-        public IList<KeyValuePair<Guid, decimal>> AccountPayPair {
-            get; set;
-        } =
+        public IList<KeyValuePair<Guid, decimal>> AccountPayPair { get; set; } =
             new List<KeyValuePair<Guid, decimal>>();
 
         /// <summary>
         ///     Views the links.
         /// </summary>
         [Display(Name = "查看链接")]
-        public IEnumerable<ViewLink> ViewLinks() {
+        public IEnumerable<ViewLink> ViewLinks()
+        {
             var quickLinks = new List<ViewLink>
             {
                 new ViewLink("编辑", "/Admin/Bill/Pay?id=[[Id]]", Icons.Edit, LinkType.ColumnLink)
@@ -155,20 +147,23 @@ namespace Alabo.App.Core.Finance.Domain.Entities {
         }
     }
 
-    public class InvoiceTableMap : MsSqlAggregateRootMap<Pay> {
-
-        protected override void MapTable(EntityTypeBuilder<Pay> builder) {
+    public class InvoiceTableMap : MsSqlAggregateRootMap<Pay>
+    {
+        protected override void MapTable(EntityTypeBuilder<Pay> builder)
+        {
             builder.ToTable("Asset_Pay");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<Pay> builder) {
+        protected override void MapProperties(EntityTypeBuilder<Pay> builder)
+        {
             //应用程序编号
             builder.Ignore(e => e.PayExtension);
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.User);
             builder.Ignore(e => e.AccountPayPair);
-            builder.Ignore(e => e.Version);
-            if (TenantContext.IsTenant) {
+
+            if (TenantContext.IsTenant)
+            {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
             }
         }

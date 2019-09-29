@@ -1,8 +1,8 @@
 ﻿using System;
-using Xunit;
-using Alabo.App.Core.Common.Job;
+using Alabo.Framework.Basic.Notifications.Job;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core.Model;
+using Xunit;
 
 namespace Alabo.Test.Core.User
 {

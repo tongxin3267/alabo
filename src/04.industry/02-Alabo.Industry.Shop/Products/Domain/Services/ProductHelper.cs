@@ -1,19 +1,22 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Alabo.Industry.Shop.Categories.Domain.Entities;
+using Alabo.Industry.Shop.Products.Domain.Entities;
+using Microsoft.AspNetCore.Http;
 
-namespace Alabo.App.Shop.Product.Domain.Services {
-
+namespace Alabo.Industry.Shop.Products.Domain.Services
+{
     /// <summary>
     ///     ProductHelper 类为产品帮助工具类
     /// </summary>
-    public static class ProductHelper {
-
+    public static class ProductHelper
+    {
         /// <summary>
         ///     将现金价格转换为 积分，授信，虚拟货币等，如果不是以上类型不转换
         /// </summary>
         /// <param name="product"></param>
-        public static void PriceFromCash(this Entities.Product product) {
+        public static void PriceFromCash(this Product product)
+        {
             //switch (product.PriceStyle)
             //{
             //    case PriceStyle.PointProduct:
@@ -34,7 +37,8 @@ namespace Alabo.App.Shop.Product.Domain.Services {
         ///     将积分，授信，虚拟货币等 转换为现金,如果不是以上类型不转换
         /// </summary>
         /// <param name="product"></param>
-        public static void PriceToCash(this Entities.Product product) {
+        public static void PriceToCash(this Product product)
+        {
             //switch (product.PriceStyle)
             //{
             //    case PriceStyle.PointProduct:
@@ -59,8 +63,9 @@ namespace Alabo.App.Shop.Product.Domain.Services {
         /// <param name="product"></param>
         /// <param name="request"></param>
         /// <param name="category"></param>
-        public static Entities.Product HanderProperty(Entities.Product product, HttpRequest request,
-            Category.Domain.Entities.Category category) {
+        public static Product HanderProperty(Product product, HttpRequest request,
+            Category category)
+        {
             // product.ProductPropertys.AllPropertys = new List<PropertyItem>();
             //foreach (var item in category.SalePropertys) {
             //    //var values = category.PropertyValues.Where(r => r.PropertyId == item.Id);
@@ -124,8 +129,9 @@ namespace Alabo.App.Shop.Product.Domain.Services {
         /// <param name="saleProperties"></param>
         /// <param name="displayProperties"></param>
         /// <param name="category"></param>
-        public static void HanderProperty(Entities.Product product, List<Guid> saleProperties,
-            List<Guid> displayProperties, Category.Domain.Entities.Category category) {
+        public static void HanderProperty(Product product, List<Guid> saleProperties,
+            List<Guid> displayProperties, Category category)
+        {
             //product.ProductPropertys.AllPropertys = new List<PropertyItem>();
             //foreach (var item in category.SalePropertys) {
             //    var values = category.PropertyValues.Where(r => r.PropertyId == item.Id && saleProperties.Contains(r.Id));

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq.Expressions;
-using Alabo.Datas.Sql.Queries.Builders.Abstractions;
+﻿using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 using Alabo.Datas.Sql.Queries.Builders.Conditions;
 using Alabo.Datas.Sql.Queries.Builders.Internal;
+using System;
+using System.Linq.Expressions;
 
 namespace Alabo.Datas.Sql.Queries.Builders.Core
 {
@@ -36,9 +36,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <param name="expression">谓词表达式</param>
         public ICondition Resolve<TEntiy>(Expression<Func<TEntiy, bool>> expression)
         {
-            if (expression == null) {
-                return NullCondition.Instance;
-            }
+            if (expression == null) return NullCondition.Instance;
 
             return ResolveExpression(expression, typeof(TEntiy));
         }
@@ -51,13 +49,13 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
             switch (expression.NodeType)
             {
                 case ExpressionType.Lambda:
-                    return ResolveExpression(((LambdaExpression) expression).Body, type);
+                    return ResolveExpression(((LambdaExpression)expression).Body, type);
 
                 case ExpressionType.OrElse:
-                    return ResolveOrExpression((BinaryExpression) expression, type);
+                    return ResolveOrExpression((BinaryExpression)expression, type);
 
                 case ExpressionType.AndAlso:
-                    return ResolveAndExpression((BinaryExpression) expression, type);
+                    return ResolveAndExpression((BinaryExpression)expression, type);
 
                 default:
                     return _helper.CreateCondition(expression, type);

@@ -1,17 +1,19 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using Alabo.App.Share.TaskExecutes.Domain.Services;
+using Alabo.App.Share.TaskExecutes.Extensions;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Framework.Tasks.Queues.Domain.Servcies;
+using Alabo.Framework.Tasks.Queues.Models;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
-using System;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.App.Core.Tasks.Extensions;
-using Alabo.App.Core.Tasks.ResultModel;
 
-namespace Alabo.App.Core.Tasks {
-
+namespace Alabo.App.Share.TaskExecutes
+{
     /// <summary>
     ///     Class TaskExtensions.
     /// </summary>
-    public static class TaskExtensions {
-
+    public static class TaskExtensions
+    {
         /// <summary>
         ///     The serializer settings
         /// </summary>
@@ -21,10 +23,9 @@ namespace Alabo.App.Core.Tasks {
         ///     To the repository string.
         /// </summary>
         /// <param name="config">The configuration.</param>
-        public static string ToRepositoryString(this IModuleConfig config) {
-            if (config == null) {
-                throw new ArgumentNullException(nameof(config));
-            }
+        public static string ToRepositoryString(this IModuleConfig config)
+        {
+            if (config == null) throw new ArgumentNullException(nameof(config));
 
             return JsonConvert.SerializeObject(config, _serializerSettings);
         }
@@ -33,10 +34,9 @@ namespace Alabo.App.Core.Tasks {
         ///     Converts to 模块 configuration.
         /// </summary>
         /// <param name="value">The value.</param>
-        public static T ConvertToModuleConfig<T>(this string value) where T : IModuleConfig {
-            if (string.IsNullOrWhiteSpace(value)) {
-                return default(T);
-            }
+        public static T ConvertToModuleConfig<T>(this string value) where T : IModuleConfig
+        {
+            if (string.IsNullOrWhiteSpace(value)) return default;
 
             return JsonConvert.DeserializeObject<T>(value, _serializerSettings);
         }
@@ -47,10 +47,9 @@ namespace Alabo.App.Core.Tasks {
         /// <param name="value">The value.</param>
         /// <param name="id">Id标识</param>
         /// <param name="name">The name.</param>
-        public static T ConvertToModuleConfig<T>(this string value, int id, string name) where T : IModuleConfig {
-            if (string.IsNullOrWhiteSpace(value)) {
-                return default(T);
-            }
+        public static T ConvertToModuleConfig<T>(this string value, int id, string name) where T : IModuleConfig
+        {
+            if (string.IsNullOrWhiteSpace(value)) return default;
 
             var result = JsonConvert.DeserializeObject<T>(value, _serializerSettings);
             result.Id = id;
@@ -63,10 +62,9 @@ namespace Alabo.App.Core.Tasks {
         /// </summary>
         /// <param name="value">The value.</param>
         /// <param name="type">The 类型.</param>
-        public static object ConvertToModuleConfig(this string value, Type type) {
-            if (string.IsNullOrWhiteSpace(value)) {
-                return null;
-            }
+        public static object ConvertToModuleConfig(this string value, Type type)
+        {
+            if (string.IsNullOrWhiteSpace(value)) return null;
 
             return JsonConvert.DeserializeObject(value, type, _serializerSettings);
         }
@@ -75,10 +73,9 @@ namespace Alabo.App.Core.Tasks {
         ///     添加s the tasks.
         /// </summary>
         /// <param name="services">The services.</param>
-        public static IServiceCollection AddTasks(this IServiceCollection services) {
-            if (services == null) {
-                throw new ArgumentNullException(nameof(services));
-            }
+        public static IServiceCollection AddTasks(this IServiceCollection services)
+        {
+            if (services == null) throw new ArgumentNullException(nameof(services));
 
             //TaskManager taskManager = new TaskManager();
             services.AddSingleton<TaskManager>(); //注册taskManager

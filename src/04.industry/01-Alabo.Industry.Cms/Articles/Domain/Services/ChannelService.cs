@@ -1,66 +1,61 @@
-﻿using MongoDB.Bson;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Cms.Articles.Domain.Entities;
-using Alabo.App.Core.Common.Domain.CallBacks;
-using Alabo.Core.Enums.Enum;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Core.Admins.Configs;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Industry.Cms.Articles.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Cms.Articles.Domain.Services {
-
-    public class ChannelService : ServiceBase<Channel, ObjectId>, IChannelService {
-
-        /// <summary>
-        ///     根据频道Id获取类型
-        /// </summary>
-        /// <param name="channeId"></param>
-        public SideBarType GetSideBarTypeById(ObjectId channeId) {
-            var channel = GetSingle(r => r.Id == channeId);
-            if (channel != null) {
-                //所有频道左边菜单Id都是在ChannelType+9000
-                var sideBarid = 80 + Convert.ToInt16(channel.ChannelType);
-
-                EnumExtensions.IntToEnum<SideBarType>(sideBarid, out SideBarType sideBarType);
-                return sideBarType;
-            }
-            return SideBarType.CmsSideBar;
+namespace Alabo.Industry.Cms.Articles.Domain.Services
+{
+    public class ChannelService : ServiceBase<Channel, ObjectId>, IChannelService
+    {
+        public ChannelService(IUnitOfWork unitOfWork, IRepository<Channel, ObjectId> repository) : base(unitOfWork,
+            repository)
+        {
         }
 
         /// <summary>
-        /// 获取频道分类类型
+        ///     获取频道分类类型
         /// </summary>
         /// <param name="channel"></param>
-        public Type GetChannelClassType(Channel channel) {
-            string fullName = $"Alabo.App.Cms.Articles.Domain.CallBacks.Channel{channel.ChannelType.ToString()}ClassRelation";
+        public Type GetChannelClassType(Channel channel)
+        {
+            var fullName =
+                $"Alabo.App.Cms.Articles.Domain.CallBacks.Channel{channel.ChannelType.ToString()}ClassRelation";
             // string fullName = $"Alabo.App.Cms.Articles.Domain.CallBacks.ChannelArticleCalssRelation";
             var type = fullName.GetTypeByFullName();
             return type;
         }
 
         /// <summary>
-        /// 获取频道标签类型
+        ///     获取频道标签类型
         /// </summary>
         /// <param name="channel"></param>
-
-        public Type GetChannelTagType(Channel channel) {
-            string fullName = $"Alabo.App.Cms.Articles.Domain.CallBacks.Channel{channel.ChannelType.ToString()}TagRelation";
+        public Type GetChannelTagType(Channel channel)
+        {
+            var fullName =
+                $"Alabo.App.Cms.Articles.Domain.CallBacks.Channel{channel.ChannelType.ToString()}TagRelation";
             var type = fullName.GetTypeByFullName();
             return type;
         }
 
-        public bool Check(string script) {
+        public bool Check(string script)
+        {
             // return Repository.IsHavingData(script);
             return false;
         }
 
-        public List<DataField> DataFields(string channelId) {
+        public List<DataField> DataFields(string channelId)
+        {
             var channel = GetSingle(r => r.Id == channelId.ToObjectId());
-            if (channel != null) {
+            if (channel != null)
+            {
                 var list = channel.FieldJson.DeserializeJson<List<DataField>>();
                 return list;
             }
@@ -68,14 +63,19 @@ namespace Alabo.App.Cms.Articles.Domain.Services {
             return null;
         }
 
-        public void InitialData() {
+        public void InitialData()
+        {
             var list = GetList();
-            if (!list.Any()) {
+            if (!list.Any())
+            {
                 var channelTypeEnum = typeof(ChannelType);
-                foreach (var channelTypeName in Enum.GetNames(channelTypeEnum)) {
+                foreach (var channelTypeName in Enum.GetNames(channelTypeEnum))
+                {
                     var channelType = (ChannelType)Enum.Parse(channelTypeEnum, channelTypeName);
-                    if (channelType >= 0) {
-                        var channel = new Channel {
+                    if (channelType >= 0)
+                    {
+                        var channel = new Channel
+                        {
                             ChannelType = channelType,
                             Name = channelType.GetDisplayName(),
                             Status = Status.Normal,
@@ -88,8 +88,10 @@ namespace Alabo.App.Cms.Articles.Domain.Services {
             }
         }
 
-        public SideBarType GetSideByTypeByChannel(Channel channel) {
-            switch (channel.ChannelType) {
+        public SideBarType GetSideByTypeByChannel(Channel channel)
+        {
+            switch (channel.ChannelType)
+            {
                 case ChannelType.Article:
                     return SideBarType.ArticleSideBarSideBar;
 
@@ -127,8 +129,10 @@ namespace Alabo.App.Cms.Articles.Domain.Services {
             return SideBarType.ArticleSideBarSideBar;
         }
 
-        public ObjectId GetChannelId(ChannelType channelType) {
-            switch (channelType) {
+        public ObjectId GetChannelId(ChannelType channelType)
+        {
+            switch (channelType)
+            {
                 case ChannelType.Article:
                     return ChannelType.Article.GetFieldAttribute().GuidId.ToSafeObjectId();
 
@@ -164,9 +168,6 @@ namespace Alabo.App.Cms.Articles.Domain.Services {
             }
 
             return ChannelType.Article.GetFieldAttribute().GuidId.ToSafeObjectId();
-        }
-
-        public ChannelService(IUnitOfWork unitOfWork, IRepository<Channel, ObjectId> repository) : base(unitOfWork, repository) {
         }
     }
 }

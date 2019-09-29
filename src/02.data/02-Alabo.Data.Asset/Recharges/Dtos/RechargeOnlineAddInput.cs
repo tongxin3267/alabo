@@ -1,17 +1,16 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.Domains.Entities;
+﻿using Alabo.App.Asset.Recharges.Domain.Enums;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.Recharge {
-
+namespace Alabo.App.Asset.Recharges.Dtos
+{
     [ClassProperty(Name = "线上充值")]
-    public class RechargeOnlineAddInput : ApiInputDto {
-
+    public class RechargeOnlineAddInput : ApiInputDto
+    {
         /// <summary>
         ///     充值方式
         ///     线上充值，和线下充值

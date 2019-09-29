@@ -28,13 +28,9 @@ namespace Alabo.Test.Generation.CodeTemplate
             var host = new TestHostingEnvironment();
             var proj = string.Empty;
             if (type.Module.Name == "ZKCloud")
-            {
                 proj = type.Assembly.GetName().Name + ".Test";
-            }
             else
-            {
                 proj = type.Assembly.GetName().Name.Replace("Entities", "Services").Replace("zkcloudv11s", projectName);
-            }
 
             var paths = type.Namespace.Replace(type.Assembly.GetName().Name, "")
                 .Split(".", StringSplitOptions.RemoveEmptyEntries);

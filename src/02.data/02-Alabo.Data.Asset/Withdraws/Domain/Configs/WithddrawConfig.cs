@@ -1,21 +1,20 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
+﻿using Alabo.AutoConfigs;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.App.Core.Finance.Domain.CallBacks {
-
+namespace Alabo.App.Asset.Withdraws.Domain.Configs
+{
     /// <summary>
     ///     Class WithdRawConfig.
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "提现设置", Icon = "fa fa-paw", PageType = ViewPageType.Edit, Description = "提现设置",
         SortOrder = 24, SideBarType = SideBarType.WithDrawSideBar)]
-    public class WithddrawConfig : AutoConfigBase, IAutoConfig {
-
+    public class WithddrawConfig : AutoConfigBase, IAutoConfig
+    {
         /// <summary>
         ///     是否允许会员提现
         /// </summary>
@@ -101,7 +100,8 @@ namespace Alabo.App.Core.Finance.Domain.CallBacks {
         /// <summary>
         ///     Sets the default.
         /// </summary>
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

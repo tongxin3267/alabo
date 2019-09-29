@@ -1,48 +1,21 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.UI;
+﻿using Alabo.Data.People.UserTypes;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
-using ICircleService = Alabo.App.Agent.Circle.Domain.Services.ICircleService;
+using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.App.Agent.Circle.Domain.Entities {
-
+namespace Alabo.Data.People.Circles.Domain.Entities
+{
+    /// <summary>
+    /// 商圈
+    /// </summary>
     [ClassProperty(Name = "商圈")]
     [BsonIgnoreExtraElements]
     [Table("People_Circle")]
     [AutoDelete(IsAuto = true)]
-    public class Circle : AggregateMongodbRoot<Circle> {
-
-        /// <summary>
-        ///     商圈名称
-        /// </summary>
-        [Display(Name = "商圈名称")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        [Field(ListShow = true, SortOrder = 1, Width = "150", LabelColor = LabelColor.Brand,
-            ControlsType = ControlsType.TextBox, IsShowBaseSerach = true)]
-        public string Name { get; set; }
-
-        [Display(Name = "所属区域")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        [Field(ListShow = false, SortOrder = 1, Width = "150", LabelColor = LabelColor.Brand,
-            ControlsType = ControlsType.CityDropList)]
-        public long RegionId { get; set; }
-
-        /// <summary>
-        ///     所属区域
-        /// </summary>
-        [Display(Name = "所属区域")]
-        [Field(ListShow = true, EditShow = false, SortOrder = 1, Width = "150", LabelColor = LabelColor.Brand,
-            ControlsType = ControlsType.CityDropList)]
-        public string RegionName { get; set; }
-
+    public class Circle : UserTypeAggregateRoot<Circle>
+    {
         /// <summary>
         ///     商圈所属省份
         /// </summary>
@@ -63,13 +36,5 @@ namespace Alabo.App.Agent.Circle.Domain.Entities {
         [Display(Name = "区县编码")]
         [Required(AllowEmptyStrings = false, ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         public long CountyId { get; set; }
-
-        /// <summary>
-        ///     全称
-        /// </summary>
-        [Display(Name = "全称")]
-        [Field(ListShow = true, SortOrder = 5, Width = "350", ControlsType = ControlsType.TextBox,
-            IsShowBaseSerach = true)]
-        public string FullName { get; set; }
     }
 }

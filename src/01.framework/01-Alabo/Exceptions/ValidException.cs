@@ -1,16 +1,16 @@
-﻿using System;
+﻿using Alabo.Properties;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections;
 using System.Text;
-using Microsoft.Extensions.Logging;
-using Alabo.Properties;
 
-namespace Alabo.Exceptions {
-
+namespace Alabo.Exceptions
+{
     /// <summary>
     ///     应用程序异常
     /// </summary>
-    public class ValidException : Exception {
-
+    public class ValidException : Exception
+    {
         /// <summary>
         ///     错误消息
         /// </summary>
@@ -21,7 +21,8 @@ namespace Alabo.Exceptions {
         /// </summary>
         /// <param name="message">错误消息</param>
         public ValidException(string message)
-            : this(message, "") {
+            : this(message, "")
+        {
         }
 
         /// <summary>
@@ -29,7 +30,8 @@ namespace Alabo.Exceptions {
         /// </summary>
         /// <param name="exception">异常</param>
         public ValidException(Exception exception)
-            : this("", "", exception) {
+            : this("", "", exception)
+        {
         }
 
         /// <summary>
@@ -38,7 +40,8 @@ namespace Alabo.Exceptions {
         /// <param name="message">错误消息</param>
         /// <param name="code">错误码</param>
         public ValidException(string message, string code)
-            : this(message, code, null) {
+            : this(message, code, null)
+        {
         }
 
         /// <summary>
@@ -48,7 +51,8 @@ namespace Alabo.Exceptions {
         /// <param name="code">错误码</param>
         /// <param name="exception">异常</param>
         public ValidException(string message, string code, Exception exception)
-            : base(message ?? "", exception) {
+            : base(message ?? "", exception)
+        {
             Code = code;
             _message = GetMessage();
         }
@@ -56,11 +60,11 @@ namespace Alabo.Exceptions {
         /// <summary>
         ///     错误消息
         /// </summary>
-        public override string Message {
-            get {
-                if (Data.Count == 0) {
-                    return _message;
-                }
+        public override string Message
+        {
+            get
+            {
+                if (Data.Count == 0) return _message;
 
                 var result = new StringBuilder();
                 result.AppendLine(_message);
@@ -77,15 +81,13 @@ namespace Alabo.Exceptions {
         /// <summary>
         ///     堆栈跟踪
         /// </summary>
-        public override string StackTrace {
-            get {
-                if (!string.IsNullOrWhiteSpace(base.StackTrace)) {
-                    return base.StackTrace;
-                }
+        public override string StackTrace
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(base.StackTrace)) return base.StackTrace;
 
-                if (InnerException == null) {
-                    return string.Empty;
-                }
+                if (InnerException == null) return string.Empty;
 
                 return InnerException.StackTrace;
             }
@@ -94,7 +96,8 @@ namespace Alabo.Exceptions {
         /// <summary>
         ///     获取错误消息
         /// </summary>
-        private string GetMessage() {
+        private string GetMessage()
+        {
             var result = new StringBuilder();
             AppendSelfMessage(result);
             AppendInnerMessage(result, InnerException);
@@ -104,10 +107,9 @@ namespace Alabo.Exceptions {
         /// <summary>
         ///     添加外层异常消息
         /// </summary>
-        private void AppendSelfMessage(StringBuilder result) {
-            if (string.IsNullOrWhiteSpace(base.Message)) {
-                return;
-            }
+        private void AppendSelfMessage(StringBuilder result)
+        {
+            if (string.IsNullOrWhiteSpace(base.Message)) return;
 
             result.AppendLine(base.Message);
         }
@@ -115,12 +117,12 @@ namespace Alabo.Exceptions {
         /// <summary>
         ///     添加内部异常消息
         /// </summary>
-        private void AppendInnerMessage(StringBuilder result, Exception exception) {
-            if (exception == null) {
-                return;
-            }
+        private void AppendInnerMessage(StringBuilder result, Exception exception)
+        {
+            if (exception == null) return;
 
-            if (exception is ValidException) {
+            if (exception is ValidException)
+            {
                 result.AppendLine(exception.Message);
                 return;
             }
@@ -133,20 +135,19 @@ namespace Alabo.Exceptions {
         /// <summary>
         ///     添加额外数据
         /// </summary>
-        private void AppendData(StringBuilder result, Exception ex) {
-            foreach (DictionaryEntry data in ex.Data) {
+        private void AppendData(StringBuilder result, Exception ex)
+        {
+            foreach (DictionaryEntry data in ex.Data)
                 result.AppendFormat("{0}:{1}{2}", data.Key, data.Value, Environment.NewLine);
-            }
         }
 
         /// <summary>
         ///     获取友情提示
         /// </summary>
         /// <param name="level">日志级别</param>
-        public string GetPrompt(LogLevel level) {
-            if (level == LogLevel.Error) {
-                return R.SystemError;
-            }
+        public string GetPrompt(LogLevel level)
+        {
+            if (level == LogLevel.Error) return R.SystemError;
 
             return Message;
         }

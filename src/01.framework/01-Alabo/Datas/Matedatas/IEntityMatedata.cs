@@ -1,5 +1,5 @@
-﻿using System;
-using Alabo.Aspects;
+﻿using Alabo.Aspects;
+using System;
 
 namespace Alabo.Datas.Matedatas
 {

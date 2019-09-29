@@ -1,9 +1,10 @@
-using MongoDB.Bson;
-using Alabo.App.Core.Tasks.Domain.Entities;
 using Alabo.Domains.Repositories;
+using Alabo.Framework.Tasks.Schedules.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Tasks.Domain.Repositories {
-
-    public interface IScheduleRepository : IRepository<Schedule, ObjectId> {
+namespace Alabo.Framework.Tasks.Schedules.Domain.Repositories
+{
+    public interface IScheduleRepository : IRepository<Schedule, ObjectId>
+    {
     }
 }

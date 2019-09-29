@@ -1,16 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Finance.Domain.Services;
+﻿using Alabo.App.Asset.Bills.Domain.Services;
 using Alabo.Domains.Query.Dto;
 using Alabo.Extensions;
 using Alabo.UI;
-using Alabo.UI.AutoPreviews;
+using Alabo.UI.Design.AutoPreviews;
 using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.Bill {
-
+namespace Alabo.App.Asset.Bills.Dtos
+{
     [ClassProperty(Name = "财务详情", Description = "财务详情")]
-    public class BillViewApiOutput : EntityDto, IAutoPreview {
-
+    public class BillViewApiOutput : EntityDto, IAutoPreview
+    {
         /// <summary>
         ///     使用Id做序列号，10位数序列号
         /// </summary>
@@ -83,7 +83,8 @@ namespace Alabo.App.Core.Finance.Domain.Dtos.Bill {
         [Display(Name = "交易时间")]
         public string CreateTime { get; set; }
 
-        public AutoPreview GetPreview(string id, AutoBaseModel autoModel) {
+        public AutoPreview GetPreview(string id, AutoBaseModel autoModel)
+        {
             var model = Resolve<IBillService>().GetSingle(u => u.Id == id.ToInt64());
             var temp = new AutoPreview();
             temp.KeyValues = model.ToKeyValues();

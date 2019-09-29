@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Data.Things.Goodss.Domain.Enums {
-
+namespace Alabo.Data.Things.Goodss.Domain.Enums
+{
     /// <summary>
-    /// 平台商品状态
+    ///     平台商品状态
     /// </summary>
-    public enum GoodsStatus {
-
+    public enum GoodsStatus
+    {
         /// <summary>
         ///     审核中
         /// </summary>

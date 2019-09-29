@@ -1,13 +1,13 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Shop.Order.Domain.Enums {
-
+namespace Alabo.Industry.Shop.Orders.Domain.Enums
+{
     /// <summary>
     ///     评价方式 好评、中评、差评
     /// </summary>
     [ClassProperty(Name = "评价方式")]
-    public enum ReviewType {
-
+    public enum ReviewType
+    {
         /// <summary>
         ///     好评
         /// </summary>

@@ -1,27 +1,29 @@
-﻿using System.Collections;
+﻿using Alabo.App.Asset.Bills.Domain.Entities;
+using Alabo.App.Asset.Bills.Domain.Services;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.UI;
+using Alabo.UI.Design.AutoTables;
+using Alabo.Users.Entities;
+using Alabo.Web.Mvc.Attributes;
+using Alabo.Web.Mvc.ViewModel;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Dtos.Bill;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.Core.Enums.Enum;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.UI;
-using Alabo.UI.AutoTables;
-using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.Finance.ViewModels.Bill {
-
+namespace Alabo.App.Asset.Bills.Dtos
+{
     /// <summary>
     ///     Class ViewAdminBill.
     /// </summary>
-    [ClassProperty(Name = "财务明细", Icon = "fa fa-puzzle-piece", SideBarType = SideBarType.FullScreen, PageType = ViewPageType.List, PostApi = "Api/Bill/ViewBillList", ListApi = "Api/Bill/ViewBillList")]
-    public class ViewAdminBill : UIBase, IAutoTable<ViewAdminBill> {
-
+    [ClassProperty(Name = "财务明细", Icon = "fa fa-puzzle-piece", SideBarType = SideBarType.FullScreen,
+        PageType = ViewPageType.List, PostApi = "Api/Bill/ViewBillList", ListApi = "Api/Bill/ViewBillList")]
+    public class ViewAdminBill : UIBase, IAutoTable<ViewAdminBill>
+    {
         /// <summary>
         ///     Gets or sets Id标识
         /// </summary>
@@ -39,12 +41,12 @@ namespace Alabo.App.Core.Finance.ViewModels.Bill {
         /// <summary>
         ///     Gets or sets the bill.
         /// </summary>
-        public Domain.Entities.Bill Bill { get; set; }
+        public Bill Bill { get; set; }
 
         /// <summary>
         ///     交易用户
         /// </summary>
-        public Users.Entities.User User { get; set; }
+        public User User { get; set; }
 
         /// <summary>
         ///     Gets or sets the name of the 会员.
@@ -81,7 +83,7 @@ namespace Alabo.App.Core.Finance.ViewModels.Bill {
         /// <summary>
         ///     Gets or sets the other 会员.
         /// </summary>
-        public Users.Entities.User OtherUser { get; set; }
+        public User OtherUser { get; set; }
 
         /// <summary>
         ///     Gets or sets the name of the other 会员.
@@ -122,7 +124,7 @@ namespace Alabo.App.Core.Finance.ViewModels.Bill {
         /// <summary>
         ///     Gets or sets the flow.
         /// </summary>
-        [Field(ControlsType = ControlsType.TextBox, DataSource = "Alabo.Core.Enums.Enum.AccountFlow",
+        [Field(ControlsType = ControlsType.TextBox, DataSource = "Alabo.Framework.Core.Enums.Enum.AccountFlow",
             ListShow = false,
             Width = "120", SortOrder = 4)]
         public AccountFlow Flow { get; set; }
@@ -160,48 +162,53 @@ namespace Alabo.App.Core.Finance.ViewModels.Bill {
         /// <summary>
         ///     下一条账单
         /// </summary>
-        public Domain.Entities.Bill NextBill { get; set; }
+        public Bill NextBill { get; set; }
 
         /// <summary>
         ///     上一条账单
         /// </summary>
-        public Domain.Entities.Bill PrexBill { get; set; }
+        public Bill PrexBill { get; set; }
+
+        public PageResult<ViewAdminBill> PageTable(object query, AutoBaseModel autoModel)
+        {
+            var userInput = ToQuery<BillInput>();
+            var model = new PagedList<ViewAdminBill>();
+            if (autoModel.Filter == FilterType.Admin)
+            {
+                model = Resolve<IFinanceAdminService>().GetViewBillPageList(userInput);
+            }
+            else if (autoModel.Filter == FilterType.User || autoModel.Filter == FilterType.City)
+            {
+                userInput.UserId = autoModel.BasicUser.Id;
+                model = Resolve<IFinanceAdminService>().GetViewBillPageList(userInput);
+            }
+            else
+            {
+                userInput.UserId = autoModel.BasicUser.Id;
+                model = Resolve<IFinanceAdminService>().GetViewBillPageList(userInput);
+                //throw new ValidException("非法请求");//去掉非法请求,默认请求自己下级的
+            }
+
+            if (autoModel.Filter == FilterType.User) model.ForEach(r => { r.UserName = r.User?.GetUserName(); });
+            return ToPageResult(model);
+        }
+
+        public List<TableAction> Actions()
+        {
+            var list = new List<TableAction>();
+            return list;
+        }
 
         /// <summary>
         ///     视图s the links.
         /// </summary>
-        public IEnumerable ViewLinks() {
+        public IEnumerable ViewLinks()
+        {
             var quickLinks = new List<ViewLink>
             {
                 new ViewLink("财务详情", "/Admin/Bill/Edit?id=[[Id]]", Icons.Edit, LinkType.ColumnLink)
             };
             return quickLinks;
-        }
-
-        public PageResult<ViewAdminBill> PageTable(object query, AutoBaseModel autoModel) {
-            var userInput = ToQuery<BillInput>();
-            var model = new PagedList<ViewAdminBill>();
-            if (autoModel.Filter == FilterType.Admin) {
-                model = Resolve<IFinanceAdminService>().GetViewBillPageList(userInput);
-            } else if (autoModel.Filter == FilterType.User || autoModel.Filter == FilterType.City) {
-                userInput.UserId = autoModel.BasicUser.Id;
-                model = Resolve<IFinanceAdminService>().GetViewBillPageList(userInput);
-            } else {
-                userInput.UserId = autoModel.BasicUser.Id;
-                model = Resolve<IFinanceAdminService>().GetViewBillPageList(userInput);
-                //throw new ValidException("非法请求");//去掉非法请求,默认请求自己下级的
-            }
-            if (autoModel.Filter == FilterType.User) {
-                model.ForEach(r => { r.UserName = r.User?.GetUserName(); });
-            }
-            return ToPageResult(model);
-        }
-
-        public List<TableAction> Actions() {
-            var list = new List<TableAction> {
-                //ToLinkAction("财务明细", "Edit")
-            };
-            return list;
         }
     }
 }

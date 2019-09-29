@@ -1,28 +1,30 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Dtos.Bill;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Repositories;
-using Alabo.App.Core.Finance.ViewModels.Account;
-using Alabo.App.Core.Finance.ViewModels.Bill;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Repositories;
-using Alabo.App.Core.User.Domain.Services;
+﻿using Alabo.App.Asset.Accounts.Domain.Repositories;
+using Alabo.App.Asset.Accounts.Dtos;
+using Alabo.App.Asset.Bills.Domain.Entities;
+using Alabo.App.Asset.Bills.Domain.Repositories;
+using Alabo.App.Asset.Bills.Dtos;
+using Alabo.Data.People.Users.Domain.Repositories;
+using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Data.People.Users.Dtos;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Mapping;
+using Alabo.Users.Entities;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace Alabo.App.Core.Finance.Domain.Services {
-
+namespace Alabo.App.Asset.Bills.Domain.Services
+{
     /// <summary>
     ///     Class FinanceAdminService.
     /// </summary>
-    public class FinanceAdminService : ServiceBase, IFinanceAdminService {
-
+    public class FinanceAdminService : ServiceBase, IFinanceAdminService
+    {
         /// <summary>
         ///     The account repository
         /// </summary>
@@ -38,7 +40,8 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// </summary>
         private readonly IUserRepository _userRepository;
 
-        public FinanceAdminService(IUnitOfWork unitOfWork) : base(unitOfWork) {
+        public FinanceAdminService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
             _accountRepository = Repository<IAccountRepository>();
             _billRepository = Repository<IBillRepository>();
             _userRepository = Repository<IUserRepository>();
@@ -52,7 +55,8 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         /// </summary>
         /// <param name="billApiInput">The bill API input.</param>
         /// <param name="count">The count.</param>
-        public IList<Bill> GetApiBillPageList(BillApiInput billApiInput, out long count) {
+        public IList<Bill> GetApiBillPageList(BillApiInput billApiInput, out long count)
+        {
             var billList = _billRepository.GetApiBillList(billApiInput, out count);
             return billList;
         }
@@ -61,10 +65,10 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         ///     获取s the 视图 bill 分页 list.
         /// </summary>
         /// <param name="userInput">The 会员 input.</param>
-        public PagedList<ViewAdminBill> GetViewBillPageList(BillInput userInput) {
-            if (!userInput.Serial.IsNullOrEmpty() && userInput.Serial.Length > 8) {
+        public PagedList<ViewAdminBill> GetViewBillPageList(BillInput userInput)
+        {
+            if (!userInput.Serial.IsNullOrEmpty() && userInput.Serial.Length > 8)
                 userInput.Id = long.Parse(userInput.Serial.Substring(1, userInput.Serial.Length - 1).TrimStart('0'));
-            }
 
             var billList = _billRepository.GetBillList(userInput, out var count);
 
@@ -74,22 +78,28 @@ namespace Alabo.App.Core.Finance.Domain.Services {
             var users = _userRepository.GetList(userIds);
             var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
             IList<ViewAdminBill> result = new List<ViewAdminBill>();
-            foreach (var item in billList) {
-                var viewUser = new ViewAdminBill {
+            foreach (var item in billList)
+            {
+                var viewUser = new ViewAdminBill
+                {
                     Bill = item,
                     Id = item.Id
                 };
                 var user = users.FirstOrDefault(r => r.Id == item.UserId);
-                if (user != null) {
+                if (user != null)
+                {
                     viewUser.User = user;
                     viewUser.UserId = viewUser.User.Id;
                     viewUser.UserName = Resolve<IUserService>().GetUserStyle(user);
-                } else {
-                    viewUser.User = new Users.Entities.User();
+                }
+                else
+                {
+                    viewUser.User = new User();
                 }
 
                 var otherUser = users.FirstOrDefault(r => r.Id == item.OtherUserId);
-                if (otherUser != null) {
+                if (otherUser != null)
+                {
                     viewUser.OtherUser = otherUser;
                     viewUser.OtherUserName = Resolve<IUserService>().GetUserStyle(otherUser);
                     viewUser.OtherUserId = viewUser.OtherUser.Id;
@@ -109,8 +119,10 @@ namespace Alabo.App.Core.Finance.Domain.Services {
             return PagedList<ViewAdminBill>.Create(result, count, userInput.PageSize, userInput.PageIndex);
         }
 
-        public BillViewApiOutput GetBillOutput(ViewAdminBill view) {
-            BillViewApiOutput apiOutput = new BillViewApiOutput {
+        public BillViewApiOutput GetBillOutput(ViewAdminBill view)
+        {
+            var apiOutput = new BillViewApiOutput
+            {
                 Amount = view.Bill.Amount.ToDecimal(),
                 AfterAmount = view.Bill.AfterAmount.ToDecimal(),
                 UserName = view.User.GetUserName(),
@@ -130,15 +142,15 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         ///     获取s the 视图 bill single.
         /// </summary>
         /// <param name="id">Id标识</param>
-        public ViewAdminBill GetViewBillSingle(long id) {
+        public ViewAdminBill GetViewBillSingle(long id)
+        {
             var bill = Resolve<IBillService>().GetSingle(r => r.Id == id);
-            if (bill == null) {
-                return null;
-            }
+            if (bill == null) return null;
 
             var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
             var grades = Resolve<IGradeService>().GetUserGradeList();
-            var viewAdminBill = new ViewAdminBill {
+            var viewAdminBill = new ViewAdminBill
+            {
                 Bill = bill,
                 User = Resolve<IUserService>().GetSingle(bill.UserId),
                 OtherUser = Resolve<IUserService>().GetSingle(bill.OtherUserId),
@@ -158,15 +170,18 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         ///     获取s the 视图 会员 分页 list.
         /// </summary>
         /// <param name="userInput">The 会员 input.</param>
-        public PagedList<ViewUserAccounts> GetViewUserPageList(UserInput userInput) {
+        public PagedList<ViewUserAccounts> GetViewUserPageList(UserInput userInput)
+        {
             var viewUserList = _userRepository.GetViewUserList(userInput, out var count);
             var userIds = viewUserList.Select(r => r.Id).Distinct().ToList();
             var accounts = _accountRepository.GetAccountByUserIds(userIds);
 
             IList<ViewUserAccounts> result = new List<ViewUserAccounts>();
 
-            foreach (var item in viewUserList) {
-                var viewUser = new ViewUserAccounts {
+            foreach (var item in viewUserList)
+            {
+                var viewUser = new ViewUserAccounts
+                {
                     User = item,
                     Accounts = accounts.Where(r => r.UserId == item.Id).ToList()
                 };
@@ -180,7 +195,8 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         ///     获取s the bill 分页 list.
         /// </summary>
         /// <param name="query">查询</param>
-        public PagedList<ViewAdminBill> GetBillPageList(object query) {
+        public PagedList<ViewAdminBill> GetBillPageList(object query)
+        {
             var dic = query.ToObject<Dictionary<string, string>>();
             var userInput = AutoMapping.SetValue<BillInput>(dic);
             var model = GetViewBillPageList(userInput);

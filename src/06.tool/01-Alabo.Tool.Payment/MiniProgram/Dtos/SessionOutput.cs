@@ -1,10 +1,10 @@
-﻿namespace Alabo.App.Core.ApiStore.MiniProgram.Dtos {
-
+﻿namespace Alabo.Tool.Payment.MiniProgram.Dtos
+{
     /// <summary>
     ///     微信小程序登录后返回的信息
     /// </summary>
-    public class SessionOutput {
-
+    public class SessionOutput
+    {
         /// <summary>
         ///     用户唯一标识
         /// </summary>

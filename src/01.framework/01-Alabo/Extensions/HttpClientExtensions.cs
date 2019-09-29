@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 
 namespace Alabo.Extensions
 {
@@ -16,18 +16,12 @@ namespace Alabo.Extensions
         /// <param name="header">当前的httpheader信息</param>
         public static async Task<string> GetStringAsync(this HttpClient client, string url, IHeaderDictionary header)
         {
-            if (client == null) {
-                throw new ArgumentNullException(nameof(client));
-            }
+            if (client == null) throw new ArgumentNullException(nameof(client));
 
-            if (header == null) {
-                throw new ArgumentNullException(nameof(header));
-            }
+            if (header == null) throw new ArgumentNullException(nameof(header));
 
             var request = new HttpRequestMessage(HttpMethod.Get, url);
-            foreach (var item in header) {
-                request.Headers.Add(item.Key, item.Value.ToString());
-            }
+            foreach (var item in header) request.Headers.Add(item.Key, item.Value.ToString());
 
             var response = await client.SendAsync(request);
             return await response.Content.ReadAsStringAsync();
@@ -36,25 +30,17 @@ namespace Alabo.Extensions
         public static async Task<string> GetAsync(this HttpClient client, string url, HttpRequest req,
             string method = "Get", string context = "")
         {
-            if (client == null) {
-                throw new ArgumentNullException(nameof(client));
-            }
+            if (client == null) throw new ArgumentNullException(nameof(client));
 
-            if (req == null) {
-                throw new ArgumentNullException(nameof(req));
-            }
+            if (req == null) throw new ArgumentNullException(nameof(req));
 
             var request = method == "Get"
                 ? new HttpRequestMessage(HttpMethod.Get, url)
                 : new HttpRequestMessage(HttpMethod.Post, url);
 
-            foreach (var item in req.Headers) {
-                request.Headers.Add(item.Key, item.Value.ToString());
-            }
+            foreach (var item in req.Headers) request.Headers.Add(item.Key, item.Value.ToString());
 
-            foreach (var item in req.Cookies) {
-                request.Headers.Add("Cookie", item.Value);
-            }
+            foreach (var item in req.Cookies) request.Headers.Add("Cookie", item.Value);
 
             var response = await client.SendAsync(request);
             return await response.Content.ReadAsStringAsync();
@@ -65,24 +51,18 @@ namespace Alabo.Extensions
         {
             var response = new HttpResponseMessage();
 
-            if (req == null) {
-                throw new ArgumentNullException(nameof(req));
-            }
+            if (req == null) throw new ArgumentNullException(nameof(req));
 
-            var handler = new HttpClientHandler {UseCookies = false};
+            var handler = new HttpClientHandler { UseCookies = false };
             var client = new HttpClient(handler);
 
             var request = new HttpRequestMessage(method == "GET" ? HttpMethod.Get : HttpMethod.Post, url);
 
-            foreach (var item in req.Headers) {
-                request.Headers.Add(item.Key, item.Value.ToString());
-            }
+            foreach (var item in req.Headers) request.Headers.Add(item.Key, item.Value.ToString());
 
-            foreach (var item in req.Cookies) {
-                request.Headers.Add("Cookie", item.Value);
-            }
+            foreach (var item in req.Cookies) request.Headers.Add("Cookie", item.Value);
 
-            var formContent = new FormUrlEncodedContent(new[] {context});
+            var formContent = new FormUrlEncodedContent(new[] { context });
 
             response = await client.PostAsync(url, formContent);
 

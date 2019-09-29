@@ -1,5 +1,5 @@
-﻿using System;
-using Alabo.Domains.Repositories.EFCore;
+﻿using Alabo.Domains.Repositories.EFCore;
+using System;
 
 namespace Alabo.Domains.Repositories.SqlServer
 {
@@ -9,9 +9,7 @@ namespace Alabo.Domains.Repositories.SqlServer
 
         public SqlServerRepositoryTransaction(SqlServerRepositoryContext context)
         {
-            if (context == null) {
-                throw new ArgumentNullException(nameof(context));
-            }
+            if (context == null) throw new ArgumentNullException(nameof(context));
 
             _context = context;
             _context.BeginTransaction();

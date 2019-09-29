@@ -1,18 +1,16 @@
-using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
+using Alabo.Data.People.Counties.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
-using Alabo.App.Agent.County.Domain.Entities;
+using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Agent.County.Domain.Services {
-
-    public class CountyService : ServiceBase<Domain.Entities.County, ObjectId>, ICountyService {
-
-        public CountyService(IUnitOfWork unitOfWork, IRepository<Domain.Entities.County, ObjectId> repository) : base(unitOfWork, repository) {
+namespace Alabo.Data.People.Counties.Domain.Services
+{
+    public class CountyService : ServiceBase<County, ObjectId>, ICountyService
+    {
+        public CountyService(IUnitOfWork unitOfWork, IRepository<County, ObjectId> repository) : base(unitOfWork,
+            repository)
+        {
         }
     }
 }

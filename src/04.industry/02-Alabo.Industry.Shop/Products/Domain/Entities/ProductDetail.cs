@@ -1,15 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.Product.Domain.Entities.Extensions;
+﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
+using Alabo.Industry.Shop.Products.Domain.Entities.Extensions;
 using Alabo.Tenants;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.App.Shop.Product.Domain.Entities
+namespace Alabo.Industry.Shop.Products.Domain.Entities
 {
-
     /// <summary>
     ///     商品统计数据
     /// </summary>
@@ -88,6 +87,7 @@ namespace Alabo.App.Shop.Product.Domain.Entities
         [Field(ExtensionJson = "ProductDetailExtension")]
         [Display(Name = "扩展属性")]
         public string Extension { get; set; }
+
         /// <summary>
         ///     扩展属性
         /// </summary>
@@ -96,7 +96,6 @@ namespace Alabo.App.Shop.Product.Domain.Entities
 
         public class ProductDetailTableMap : MsSqlAggregateRootMap<ProductDetail>
         {
-
             protected override void MapTable(EntityTypeBuilder<ProductDetail> builder)
             {
                 builder.ToTable("Shop_ProductDetail");
@@ -107,7 +106,7 @@ namespace Alabo.App.Shop.Product.Domain.Entities
                 //应用程序编号
                 builder.HasKey(e => e.Id);
                 builder.Ignore(e => e.ProductDetailExtension);
-                builder.Ignore(e => e.Version);
+             
                 if (TenantContext.IsTenant)
                 {
                     // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);

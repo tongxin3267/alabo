@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.Cache;
+﻿using Alabo.Cache;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Extensions;
 using Alabo.Helpers;
+using System;
+using System.Collections.Generic;
 using ZKCloud.Open.DynamicExpression;
 
 namespace Alabo.Linq.Dynamic
@@ -31,7 +31,7 @@ namespace Alabo.Linq.Dynamic
             {
                 new Parameter("userIds", userIds)
             };
-            var users = (IEnumerable<object>) target.Eval("userService.GetList(userIds)", parameters);
+            var users = (IEnumerable<object>)target.Eval("userService.GetList(userIds)", parameters);
             return users;
         }
 
@@ -47,9 +47,7 @@ namespace Alabo.Linq.Dynamic
         /// <returns>dynamic.</returns>
         public static dynamic GetUserGrade(Guid gradeId)
         {
-            if (gradeId.IsGuidNullOrEmpty()) {
-                return null;
-            }
+            if (gradeId.IsGuidNullOrEmpty()) return null;
             // 获取等级
             var gardeService = DynamicService.Resolve("GradeService");
             var gradeTarget = new Interpreter().SetVariable("gardeService", gardeService);
@@ -58,7 +56,7 @@ namespace Alabo.Linq.Dynamic
             {
                 new Parameter("gradeId", gradeId)
             };
-            var gradeConfig = (dynamic) gradeTarget.Eval("gardeService.GetGrade(gradeId)", parameters);
+            var gradeConfig = (dynamic)gradeTarget.Eval("gardeService.GetGrade(gradeId)", parameters);
             return gradeConfig;
         }
 
@@ -80,12 +78,11 @@ namespace Alabo.Linq.Dynamic
             {
                 new Parameter("orderId", orderId)
             };
-            var user = (dynamic) target.Eval("orderService.GetSingle(orderId)", parameters);
+            var user = (dynamic)target.Eval("orderService.GetSingle(orderId)", parameters);
             return user;
         }
 
         #endregion 动态获取订单
-
 
         #region 动态获取店铺
 
@@ -102,11 +99,11 @@ namespace Alabo.Linq.Dynamic
             {
                 new Parameter("userId", userId)
             };
-            var user = (dynamic) target.Eval("storeService.GetUserStore(userId)", parameters);
+            var user = (dynamic)target.Eval("storeService.GetUserStore(userId)", parameters);
             return user;
         }
 
-        #endregion 动态获取订单
+        #endregion 动态获取店铺
 
         #region 动态获取城市合伙人
 
@@ -123,7 +120,7 @@ namespace Alabo.Linq.Dynamic
             {
                 new Parameter("userId", userId)
             };
-            var user = (dynamic) target.Eval("cityService.GetCityByUserId(userId)", parameters);
+            var user = (dynamic)target.Eval("cityService.GetCityByUserId(userId)", parameters);
             return user;
         }
 
@@ -145,7 +142,7 @@ namespace Alabo.Linq.Dynamic
             {
                 new Parameter("tradeId", tradeId)
             };
-            var trade = (dynamic) target.Eval("tradeService.GetSingle(tradeId)", parameters);
+            var trade = (dynamic)target.Eval("tradeService.GetSingle(tradeId)", parameters);
             return trade;
         }
 
@@ -163,7 +160,7 @@ namespace Alabo.Linq.Dynamic
             var service = DynamicService.Resolve("TypeService");
             var target = new Interpreter().SetVariable("service", service);
             var result = target.Eval("service.GetAllEnumType()");
-            return (IEnumerable<Type>) result;
+            return (IEnumerable<Type>)result;
         }
 
         #endregion 动态获取所有枚举
@@ -180,7 +177,7 @@ namespace Alabo.Linq.Dynamic
             var service = DynamicService.Resolve("Relation");
             var target = new Interpreter().SetVariable("service", service);
             var result = target.Eval("service.GetAllTypes()");
-            return (IEnumerable<Type>) result;
+            return (IEnumerable<Type>)result;
         }
 
         #endregion 动态获取所有级联
@@ -197,7 +194,7 @@ namespace Alabo.Linq.Dynamic
             var service = DynamicService.Resolve("AutoConfig");
             var target = new Interpreter().SetVariable("service", service);
             var result = target.Eval("service.GetAllTypes()");
-            return (IEnumerable<Type>) result;
+            return (IEnumerable<Type>)result;
         }
 
         #endregion 动态获取所有AutoConfig
@@ -218,7 +215,7 @@ namespace Alabo.Linq.Dynamic
             {
                 new Parameter("orderId", orderId)
             };
-            var user = (dynamic) target.Eval("userStockService.UpdateUserStock(orderId)", parameters);
+            var user = (dynamic)target.Eval("userStockService.UpdateUserStock(orderId)", parameters);
             return user;
         }
 
@@ -232,7 +229,7 @@ namespace Alabo.Linq.Dynamic
             var repositoryType = "CatalogRepository".GetTypeByName();
             var repository = Activator.CreateInstance(repositoryType, unitOfWork);
             var target = new Interpreter().SetVariable("repository", repository);
-            var user = (dynamic) target.Eval("repository.GetSqlTable()");
+            var user = (dynamic)target.Eval("repository.GetSqlTable()");
             return user;
         }
 
@@ -258,7 +255,7 @@ namespace Alabo.Linq.Dynamic
                     {
                         new Parameter("userName", userName)
                     };
-                    var user = (dynamic) target.Eval("userService.GetSingle(userName)", parameters);
+                    var user = (dynamic)target.Eval("userService.GetSingle(userName)", parameters);
                     return user;
                 }, "dynamic_GetSingleUser" + userName, TimeSpan.FromHours(1)).Value;
         }
@@ -277,7 +274,7 @@ namespace Alabo.Linq.Dynamic
             {
                 new Parameter("userId", userId)
             };
-            var user = (dynamic) target.Eval("userService.GetSingle(userId)", parameters);
+            var user = (dynamic)target.Eval("userService.GetSingle(userId)", parameters);
             return user;
         }
 
@@ -295,7 +292,7 @@ namespace Alabo.Linq.Dynamic
             {
                 new Parameter("userId", userId)
             };
-            var user = (dynamic) target.Eval("userService.IsAdmin(userId)", parameters);
+            var user = (dynamic)target.Eval("userService.IsAdmin(userId)", parameters);
             return user;
         }
 

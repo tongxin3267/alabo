@@ -1,18 +1,16 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Cms.Support.Domain.Enum;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.Domains.Entities;
+using Alabo.Cloud.Support.Domain.Enum;
 using Alabo.Domains.Enums;
 using Alabo.Users.Entities;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Cms.Support.Domain.ViewModels {
-
-    public class ViewWorkOrder : BaseViewModel {
-
+namespace Alabo.Cloud.Support.Domain.ViewModels
+{
+    public class ViewWorkOrder : BaseViewModel
+    {
         [Display(Name = "标题")]
         [Required(ErrorMessage = ErrorMessage.NameNotCorrect)]
         public string Title { get; set; }

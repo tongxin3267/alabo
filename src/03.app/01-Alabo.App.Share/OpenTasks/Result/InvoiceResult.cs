@@ -1,23 +1,25 @@
-﻿using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.Tasks;
-using Alabo.App.Core.Tasks.Extensions;
-using Alabo.App.Core.Tasks.ResultModel;
-using Alabo.App.Open.Tasks.Parameter;
-using Alabo.Core.Enums.Enum;
-using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 using System.Linq;
-using Alabo.App.Share.Share.Domain.Services;
-using Reward = Alabo.App.Share.Share.Domain.Entities.Reward;
+using Alabo.App.Asset.Accounts.Domain.Services;
+using Alabo.App.Asset.Bills.Domain.Entities;
+using Alabo.App.Asset.Bills.Domain.Services;
+using Alabo.App.Share.OpenTasks.Parameter;
+using Alabo.App.Share.Rewards.Domain.Entities;
+using Alabo.App.Share.Rewards.Domain.Services;
+using Alabo.App.Share.TaskExecutes;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Data.Things.Orders.ResultModel;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Tasks.Queues.Models;
+using Alabo.Helpers;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Alabo.App.Open.Tasks.Result {
-
-    public class InvoiceResult : ITaskResult {
-        public TaskContext Context { get; private set; }
-
+namespace Alabo.App.Share.OpenTasks.Result
+{
+    public class InvoiceResult : ITaskResult
+    {
         private readonly TaskManager _taskManager;
 
         #region invoice properties
@@ -26,22 +28,25 @@ namespace Alabo.App.Open.Tasks.Result {
 
         #endregion invoice properties
 
-        public InvoiceResult(TaskContext context) {
+        public InvoiceResult(TaskContext context)
+        {
             Context = context;
             _taskManager = Context.HttpContextAccessor.HttpContext.RequestServices.GetService<TaskManager>();
         }
 
-        public ExecuteResult Update() {
+        public TaskContext Context { get; }
+
+        public ExecuteResult Update()
+        {
             var currentTime = DateTime.Now;
-            var moneyType = Alabo.Helpers.Ioc.Resolve<IAutoConfigService>()
+            var moneyType = Ioc.Resolve<IAutoConfigService>()
                 .GetList<MoneyTypeConfig>()
                 .FirstOrDefault(e => e.Id == Parameter.MoneyTypeId);
-            if (moneyType == null) {
-                return ExecuteResult.Fail($"未找到MoneyTypeId为{Parameter.MoneyTypeId}的货币类型.");
-            }
+            if (moneyType == null) return ExecuteResult.Fail($"未找到MoneyTypeId为{Parameter.MoneyTypeId}的货币类型.");
 
-            var userAccount = Alabo.Helpers.Ioc.Resolve<IAccountService>().GetAccount(Parameter.ReceiveUserId, moneyType.Id);
-            var invoiceReward = new Reward() {
+            var userAccount = Ioc.Resolve<IAccountService>().GetAccount(Parameter.ReceiveUserId, moneyType.Id);
+            var invoiceReward = new Reward
+            {
                 AfterAmount = userAccount.Amount,
                 CreateTime = currentTime,
 
@@ -56,11 +61,10 @@ namespace Alabo.App.Open.Tasks.Result {
                 //TriggerType = Parameter.TriggerType,
                 ModuleConfigId = Parameter.ModuleConfigId
             };
-            if (Parameter.Order != null) {
-                invoiceReward.OrderId = Parameter.Order.Id;
-            }
-            Alabo.Helpers.Ioc.Resolve<IRewardService>().AddOrUpdate(invoiceReward);
-            var invoiceBill = new Bill() {
+            if (Parameter.Order != null) invoiceReward.OrderId = Parameter.Order.Id;
+            Ioc.Resolve<IRewardService>().AddOrUpdate(invoiceReward);
+            var invoiceBill = new Bill
+            {
                 Type = BillActionType.FenRun,
 
                 AfterAmount = userAccount.Amount,
@@ -75,9 +79,9 @@ namespace Alabo.App.Open.Tasks.Result {
 
                 //Remark = Parameter.Remark,
                 UserId = Parameter.ReceiveUserId,
-                OtherUserId = Parameter.TriggerUserId,
+                OtherUserId = Parameter.TriggerUserId
             };
-            Alabo.Helpers.Ioc.Resolve<IBillService>().Add(invoiceBill);
+            Ioc.Resolve<IBillService>().Add(invoiceBill);
             return ExecuteResult.Success();
         }
     }

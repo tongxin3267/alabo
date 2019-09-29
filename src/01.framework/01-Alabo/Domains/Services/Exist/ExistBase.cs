@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Linq.Expressions;
-using Alabo.Datas.Stores;
+﻿using Alabo.Datas.Stores;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace Alabo.Domains.Services.Exist
 {
@@ -38,13 +38,9 @@ namespace Alabo.Domains.Services.Exist
         public bool Exists(Expression<Func<TEntity, bool>> predicate, TKey id)
         {
             var find = GetSingle(predicate);
-            if (find == null) {
-                return false;
-            }
+            if (find == null) return false;
 
-            if (find.Id.Equals(id)) {
-                return false;
-            }
+            if (find.Id.Equals(id)) return false;
 
             return true;
         }

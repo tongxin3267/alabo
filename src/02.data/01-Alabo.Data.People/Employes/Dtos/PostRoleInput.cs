@@ -1,20 +1,19 @@
-﻿using MongoDB.Bson;
+﻿using Alabo.Domains.Repositories.Mongo.Extension;
+using Alabo.Validations;
+using MongoDB.Bson;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Repositories.Mongo.Extension;
-using Alabo.Validations;
 
-namespace Alabo.App.Core.Employes.Domain.Dtos {
-
+namespace Alabo.Data.People.Employes.Dtos
+{
     /// <summary>
-    /// 岗位编辑
+    ///     岗位编辑
     /// </summary>
-    public class PostRoleInput {
-
+    public class PostRoleInput
+    {
         /// <summary>
-        /// id
+        ///     id
         /// </summary>
         [Display(Name = "Id")]
         [JsonConverter(typeof(ObjectIdConverter))]
@@ -34,7 +33,7 @@ namespace Alabo.App.Core.Employes.Domain.Dtos {
         public string Summary { get; set; }
 
         /// <summary>
-        /// 岗位权限IDs
+        ///     岗位权限IDs
         /// </summary>
         public List<string> RoleIds { get; set; } = new List<string>();
     }

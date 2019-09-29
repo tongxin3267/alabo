@@ -1,14 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.Finance.Domain.Enums {
-
+namespace Alabo.App.Asset.Refunds.Domain.Enums
+{
     /// <summary>
     ///     提现转账 状态
     /// </summary>
     [ClassProperty(Name = "提现转账状态")]
-    public enum RefundStatus {
-
+    public enum RefundStatus
+    {
         /// <summary>
         ///     待处理
         /// </summary>

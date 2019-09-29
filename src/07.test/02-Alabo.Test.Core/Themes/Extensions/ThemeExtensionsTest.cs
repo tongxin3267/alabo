@@ -1,5 +1,5 @@
-﻿using Xunit;
-using Alabo.App.Core.Themes.Extensions;
+﻿using Alabo.Framework.Themes.Extensions;
+using Xunit;
 
 namespace Alabo.Test.Core.Themes.Extensions
 {

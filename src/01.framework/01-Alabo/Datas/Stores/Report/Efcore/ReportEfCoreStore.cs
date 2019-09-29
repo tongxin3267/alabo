@@ -1,15 +1,14 @@
-﻿using System;
+﻿using Alabo.Datas.Stores.Random.EfCore;
+using Alabo.Datas.UnitOfWorks;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Entities.Core;
+using Alabo.Extensions;
+using Alabo.UI.Design.AutoReports;
+using Alabo.UI.Design.AutoReports.Dtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Alabo.Datas.Stores.Random.EfCore;
-using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Dtos;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Entities.Core;
-using Alabo.Domains.Services.Report;
-using Alabo.Domains.Services.Report.Dtos;
-using Alabo.Extensions;
 
 namespace Alabo.Datas.Stores.Report.Efcore
 {
@@ -56,9 +55,8 @@ namespace Alabo.Datas.Stores.Report.Efcore
         public PagedList<SumReportTable> GetSumReportTable(SumTableInput inputParas)
         {
             Expression<Func<TEntity, bool>> predicate = x => x.CreateTime > DateTime.MinValue;
-            if (inputParas.StartTime != null && inputParas.EndTime != null) {
+            if (inputParas.StartTime != null && inputParas.EndTime != null)
                 predicate = predicate.And(x => x.CreateTime >= inputParas.StartTime);
-            }
 
             var queryList = QueryList(predicate);
             var rsList = ReportStoreCommons<TEntity, TKey>.GetSumReportTable(queryList, inputParas);

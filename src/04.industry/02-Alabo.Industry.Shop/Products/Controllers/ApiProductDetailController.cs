@@ -1,22 +1,18 @@
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Industry.Shop.Products.Domain.Entities;
+using Alabo.Industry.Shop.Products.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
-using Alabo.App.Core.Common;
-using Alabo.App.Core.User;
-using Alabo.App.Shop.Product.Domain.Entities;
-using Alabo.App.Shop.Product.Domain.Services;
-using ZKCloud.Open.ApiBase.Configuration;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Shop.Product.Controllers {
-
+namespace Alabo.Industry.Shop.Products.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/ProductDetail/[action]")]
-    public class ApiProductDetailController : ApiBaseController<ProductDetail, long> {
-
-        public ApiProductDetailController() : base() {
+    public class ApiProductDetailController : ApiBaseController<ProductDetail, long>
+    {
+        public ApiProductDetailController()
+        {
             BaseService = Resolve<IProductDetailService>();
-
         }
     }
 }

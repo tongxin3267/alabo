@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using Alabo.Domains.Repositories.Mongo.Extension;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Order.Domain.Dtos {
-
+namespace Alabo.Industry.Shop.Orders.Dtos
+{
     /// <summary>
     ///     店铺订单价格，与总订单价格
     /// </summary>
-    public class StoreOrderPrice {
-
+    public class StoreOrderPrice
+    {
         /// <summary>
         ///     订单总价格
         /// </summary>
@@ -46,8 +49,8 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
     /// <summary>
     ///     店铺资产数据
     /// </summary>
-    public class OrderMoneyItem {
-
+    public class OrderMoneyItem
+    {
         /// <summary>
         ///     Gets or sets the money identifier.
         /// </summary>
@@ -104,12 +107,12 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
     /// <summary>
     ///     店铺价格
     /// </summary>
-    public class StorePrice {
-
+    public class StorePrice
+    {
         /// <summary>
         ///     店铺Id
         /// </summary>
-        public long StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     实际店铺运费
@@ -145,7 +148,7 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
         public decimal FeeAmount { get; set; }
 
         /// <summary>
-        /// member discount amount
+        ///     member discount amount
         /// </summary>
         public decimal MemberDiscountAmount { get; set; } = 0.0m;
     }

@@ -1,5 +1,5 @@
-﻿using System;
-using Alabo.Logging.Abstractions;
+﻿using Alabo.Logging.Abstractions;
+using System;
 
 namespace Alabo.Logging.Formats
 {
@@ -27,9 +27,7 @@ namespace Alabo.Logging.Formats
         /// </summary>
         public string Format(string format, object arg, IFormatProvider formatProvider)
         {
-            if (!(arg is ILogContent content)) {
-                return string.Empty;
-            }
+            if (!(arg is ILogContent content)) return string.Empty;
 
             return _format.Format(content);
         }

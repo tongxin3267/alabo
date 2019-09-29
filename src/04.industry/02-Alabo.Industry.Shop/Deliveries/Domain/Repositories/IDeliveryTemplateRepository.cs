@@ -1,10 +1,10 @@
-using System;using Alabo.Domains.Repositories.EFCore;using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
 using Alabo.Domains.Repositories;
-using Alabo.App.Shop.Store.Domain.Entities;
+using Alabo.Industry.Shop.Deliveries.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Shop.Store.Domain.Repositories {
-	public interface IDeliveryTemplateRepository : IRepository<DeliveryTemplate, ObjectId>  {
-	}
+namespace Alabo.Industry.Shop.Deliveries.Domain.Repositories
+{
+    public interface IDeliveryTemplateRepository : IRepository<DeliveryTemplate, ObjectId>
+    {
+    }
 }

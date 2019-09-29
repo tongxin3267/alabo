@@ -1,7 +1,7 @@
-﻿using System;
-using Alabo.Datas.Queries.Enums;
+﻿using Alabo.Datas.Queries.Enums;
 using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 using Alabo.Extensions;
+using System;
 
 namespace Alabo.Datas.Sql.Queries.Builders.Conditions
 {
@@ -21,16 +21,12 @@ namespace Alabo.Datas.Sql.Queries.Builders.Conditions
             switch (@operator)
             {
                 case Operator.Equal:
-                    if (right == null) {
-                        return new IsNullCondition(left);
-                    }
+                    if (right == null) return new IsNullCondition(left);
 
                     return new EqualCondition(left, right);
 
                 case Operator.NotEqual:
-                    if (right == null) {
-                        return new IsNotNullCondition(left);
-                    }
+                    if (right == null) return new IsNotNullCondition(left);
 
                     return new NotEqualCondition(left, right);
 

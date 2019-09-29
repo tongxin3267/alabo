@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Alabo.Cache.Memory;
+﻿using Alabo.Cache.Memory;
 using Alabo.Cache.Redis;
 using Alabo.Runtime;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Alabo.Cache
 {

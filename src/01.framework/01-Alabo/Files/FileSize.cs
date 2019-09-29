@@ -49,7 +49,7 @@ namespace Alabo.Files
         /// </summary>
         public int GetSize()
         {
-            return (int) Size;
+            return (int)Size;
         }
 
         /// <summary>
@@ -81,17 +81,11 @@ namespace Alabo.Files
         /// </summary>
         public override string ToString()
         {
-            if (Size >= 1024 * 1024 * 1024) {
-                return $"{GetSizeByG()} {FileSizeUnit.G.Description()}";
-            }
+            if (Size >= 1024 * 1024 * 1024) return $"{GetSizeByG()} {FileSizeUnit.G.Description()}";
 
-            if (Size >= 1024 * 1024) {
-                return $"{GetSizeByM()} {FileSizeUnit.M.Description()}";
-            }
+            if (Size >= 1024 * 1024) return $"{GetSizeByM()} {FileSizeUnit.M.Description()}";
 
-            if (Size >= 1024) {
-                return $"{GetSizeByK()} {FileSizeUnit.K.Description()}";
-            }
+            if (Size >= 1024) return $"{GetSizeByK()} {FileSizeUnit.K.Description()}";
 
             return $"{Size} {FileSizeUnit.Byte.Description()}";
         }

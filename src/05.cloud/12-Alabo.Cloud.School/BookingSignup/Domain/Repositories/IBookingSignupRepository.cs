@@ -1,10 +1,9 @@
-using System;using Alabo.Domains.Repositories.EFCore;using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
 using Alabo.Domains.Repositories;
-using Alabo.App.Market.BookingSignup.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.BookingSignup.Domain.Repositories {
-	public interface IBookingSignupRepository : IRepository<Entities.BookingSignup, ObjectId>  {
-	}
+namespace Alabo.Cloud.School.BookingSignup.Domain.Repositories
+{
+    public interface IBookingSignupRepository : IRepository<Entities.BookingSignup, ObjectId>
+    {
+    }
 }

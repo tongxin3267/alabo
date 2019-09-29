@@ -1,22 +1,22 @@
-using System;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
-using Alabo.App.Market.SecondBuy.Domain.Entities;
-using Alabo.Domains.Entities;
 using System.Collections.Generic;
+using Alabo.Cloud.Shop.SecondBuy.Domain.Entities;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.SecondBuy.Domain.Services {
-	public interface ISecondBuyOrderService : IService<SecondBuyOrder, ObjectId>  {
+namespace Alabo.Cloud.Shop.SecondBuy.Domain.Services
+{
+    public interface ISecondBuyOrderService : IService<SecondBuyOrder, ObjectId>
+    {
         /// <summary>
-        /// 购买
+        ///     购买
         /// </summary>
         /// <param name="order"></param>
         /// <returns></returns>
         ServiceResult Buy(SecondBuyOrder order);
 
         /// <summary>
-        /// 购买列表
+        ///     购买列表
         /// </summary>
         /// <param name="productId"></param>
         /// <returns></returns>
@@ -24,10 +24,10 @@ namespace Alabo.App.Market.SecondBuy.Domain.Services {
 
 
         /// <summary>
-        /// 最近购买
+        ///     最近购买
         /// </summary>
         /// <param name="productId"></param>
         /// <returns></returns>
         List<string> BuyListRcently(long productId);
     }
-	}
+}

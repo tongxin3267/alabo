@@ -1,9 +1,10 @@
-using MongoDB.Bson;
-using Alabo.App.Cms.Support.Domain.Entities;
+using Alabo.Cloud.Support.Domain.Entities;
 using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Cms.Support.Domain.Repositories {
-
-    public interface IWorkOrderRepository : IRepository<WorkOrder, ObjectId> {
+namespace Alabo.Cloud.Support.Domain.Repositories
+{
+    public interface IWorkOrderRepository : IRepository<WorkOrder, ObjectId>
+    {
     }
 }

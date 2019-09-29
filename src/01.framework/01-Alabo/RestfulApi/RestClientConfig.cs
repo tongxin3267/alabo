@@ -1,13 +1,13 @@
-﻿using System;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using Alabo.Extensions;
+﻿using Alabo.Extensions;
 using Alabo.Runtime;
 using Alabo.Security;
 using Alabo.Security.Sessions;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Alabo.RestfulApi
 {
@@ -33,9 +33,7 @@ namespace Alabo.RestfulApi
                 if (string.IsNullOrWhiteSpace(_openApiId))
                 {
                     var openApiSetting = _systemConfiguration.GetSection("OpenApiSetting");
-                    if (openApiSetting != null) {
-                        _openApiId = openApiSetting.GetSection("Id")?.Value;
-                    }
+                    if (openApiSetting != null) _openApiId = openApiSetting.GetSection("Id")?.Value;
                 }
 
                 return _openApiId;
@@ -53,9 +51,7 @@ namespace Alabo.RestfulApi
                 if (string.IsNullOrWhiteSpace(_openApiKey))
                 {
                     var openApiSetting = _systemConfiguration.GetSection("OpenApiSetting");
-                    if (openApiSetting != null) {
-                        _openApiKey = openApiSetting.GetSection("Key")?.Value;
-                    }
+                    if (openApiSetting != null) _openApiKey = openApiSetting.GetSection("Key")?.Value;
                 }
 
                 return _openApiKey;
@@ -69,9 +65,7 @@ namespace Alabo.RestfulApi
         /// <returns></returns>
         public async Task SetTenant(string tenant)
         {
-            if (tenant.IsNullOrEmpty()) {
-                throw new ArgumentNullException(nameof(tenant));
-            }
+            if (tenant.IsNullOrEmpty()) throw new ArgumentNullException(nameof(tenant));
 
             var session = new Session();
             var basicUser = new BasicUser

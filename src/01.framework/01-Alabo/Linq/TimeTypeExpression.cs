@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq.Expressions;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
+using System;
+using System.Linq.Expressions;
 
 namespace Alabo.Linq
 {
@@ -24,9 +24,7 @@ namespace Alabo.Linq
             where TEntity : class, IAggregateRoot<TEntity, TKey>
         {
             var query = new ExpressionQuery<TEntity>();
-            if (predicate != null) {
-                query.And(predicate);
-            }
+            if (predicate != null) query.And(predicate);
 
             query.OrderByAscending(e => e.Id);
             switch (timeType)

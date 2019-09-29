@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
 using Alabo.Validations;
 
-namespace Alabo.App.Shop.Order.Domain.Dtos {
-
-    public class ConfirmInput : ApiInputDto {
-
+namespace Alabo.Industry.Shop.Orders.Dtos
+{
+    public class ConfirmInput : ApiInputDto
+    {
         /// <summary>
         ///     支付密码
         /// </summary>

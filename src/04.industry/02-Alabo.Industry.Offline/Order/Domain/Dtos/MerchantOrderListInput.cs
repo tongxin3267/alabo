@@ -1,21 +1,21 @@
-﻿using Alabo.App.Offline.Order.Domain.Enums;
+﻿using Alabo.Industry.Offline.Order.Domain.Enums;
 
-namespace Alabo.App.Offline.Order.Domain.Dtos
+namespace Alabo.Industry.Offline.Order.Domain.Dtos
 {
     public class MerchantOrderListInput
     {
         /// <summary>
-        /// 订单状态
+        ///     订单状态
         /// </summary>
         public MerchantOrderStatus OrderStatus { get; set; }
 
         /// <summary>
-        /// 获取会员Id
+        ///     获取会员Id
         /// </summary>
         public long UserId { get; set; }
 
         /// <summary>
-        ///  店铺Id
+        ///     店铺Id
         /// </summary>
         public string MerchantStoreId { get; set; }
 

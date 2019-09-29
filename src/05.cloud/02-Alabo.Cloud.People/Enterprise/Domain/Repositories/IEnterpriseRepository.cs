@@ -1,9 +1,9 @@
-using MongoDB.Bson;
-using Alabo.App.Core.Markets.EnterpriseCertification.Domain.Entities;
 using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Markets.EnterpriseCertification.Domain.Repositories {
-
-    public interface IEnterpriseRepository : IRepository<Enterprise, ObjectId> {
+namespace Alabo.Cloud.People.Enterprise.Domain.Repositories
+{
+    public interface IEnterpriseRepository : IRepository<Entities.Enterprise, ObjectId>
+    {
     }
 }

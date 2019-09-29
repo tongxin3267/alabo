@@ -1,13 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using MongoDB.Bson.Serialization.Attributes;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.UI;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Market.Relationship.Domain.Entities {
-
+namespace Alabo.Cloud.People.Relationship.Domain.Entities
+{
     /// <summary>
     ///     会员关系网
     ///     后期可拓展各种用户类型关系网
@@ -16,8 +16,8 @@ namespace Alabo.App.Market.Relationship.Domain.Entities {
     [Table("Cloud_People_RelationshipIndex")]
     [ClassProperty(Name = "会员关系网", Description = "查看会员的关系网", Icon = IconFlaticon.route,
         SideBarType = SideBarType.RelationshipIndexSideBar)]
-    public class RelationshipIndex : AggregateMongodbUserRoot<RelationshipIndex> {
-
+    public class RelationshipIndex : AggregateMongodbUserRoot<RelationshipIndex>
+    {
         /// <summary>
         ///     配置类型
         ///     与UserRelationshipIndexConfig相互对应

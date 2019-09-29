@@ -1,9 +1,10 @@
-﻿namespace Alabo.Tool.Office.Core {
-
+﻿namespace Alabo.Tool.Office.Core
+{
     /// <summary>
-    /// 填充模式
+    ///     填充模式
     /// </summary>
-    public enum FillPattern {
+    public enum FillPattern
+    {
         NoFill = 0,
         SolidForeground = 1,
         FineDots = 2,

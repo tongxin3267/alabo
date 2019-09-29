@@ -1,81 +1,65 @@
+using Alabo.App.Asset.Coupons.Domain.Entities;
+using Alabo.App.Asset.Coupons.Domain.Services;
+using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using System.Collections.Generic;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
-using Alabo.App.Shop.Coupons.Domain.Entities;
-using Alabo.App.Shop.Coupons.Domain.Services;
-using Alabo.Domains.Entities;
-using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Shop.Coupons.Controllers
+namespace Alabo.App.Asset.Coupons.Controllers
 {
-
     [ApiExceptionFilter]
     [Route("Api/Coupon/[action]")]
     public class ApiCouponController : ApiBaseController<Coupon, ObjectId>
     {
-
-        public ApiCouponController() : base()
+        public ApiCouponController()
         {
             BaseService = Resolve<ICouponService>();
         }
 
         /// <summary>
-        /// ±£´æºÍ±à¼­ÓÅ»ÝÈ¯
+        ///     ï¿½ï¿½ï¿½ï¿½Í±à¼­ï¿½Å»ï¿½È¯
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public ApiResult<Coupon> GetCouponView([FromQuery]string id = "")
+        public ApiResult<Coupon> GetCouponView([FromQuery] string id = "")
         {
             var view = new Coupon();
             if (!this.IsFormValid())
-            {
                 return ApiResult.Failure<Coupon>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
-            }
             if (!string.IsNullOrEmpty(id) && !id.Equals("undefined"))
             {
                 view = Resolve<ICouponService>().GetSingle(id.ToObjectId());
                 if (view != null)
-                {
-                    if (view.StartPeriodOfValidity.ToString() != "0001/1/1 0:00:00" || view.EndPeriodOfValidity.ToString() != "0001/1/1 0:00:00")
-                    {
+                    if (view.StartPeriodOfValidity.ToString() != "0001/1/1 0:00:00" ||
+                        view.EndPeriodOfValidity.ToString() != "0001/1/1 0:00:00")
                         view.AfterDays = -1;
-                    }
-                }
             }
 
             return ApiResult.Success(view);
         }
 
         /// <summary>
-        /// ±£´æ
+        ///     ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         /// <param name="coupon"></param>
         /// <returns></returns>
         [HttpPost]
-        public ApiResult SaveCoupon([FromBody]Coupon coupon)
+        public ApiResult SaveCoupon([FromBody] Coupon coupon)
         {
-            if (coupon == null)
-            {
-                return ApiResult.Failure("Êý¾ÝÎª¿Õ£¡");
-            }
+            if (coupon == null) return ApiResult.Failure("ï¿½ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½");
 
-            if (string.IsNullOrEmpty(coupon.Name))
-            {
-                return ApiResult.Failure("ÓÅ»ÝÈ¯Ãû³Æ²»ÄÜÎª¿Õ£¡");
-            }
+            if (string.IsNullOrEmpty(coupon.Name)) return ApiResult.Failure("ï¿½Å»ï¿½È¯ï¿½ï¿½ï¿½Æ²ï¿½ï¿½ï¿½Îªï¿½Õ£ï¿½");
             var serviceResult = Resolve<ICouponService>().EditOrAdd(coupon);
 
-            return ApiResult.Success("±£´æ³É¹¦");
+            return ApiResult.Success("ï¿½ï¿½ï¿½ï¿½É¹ï¿½");
         }
 
-
         /// <summary>
-        /// ÓÅ»ÝÈ¯ÏÂÀ­
+        ///     ï¿½Å»ï¿½È¯ï¿½ï¿½ï¿½ï¿½
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -86,27 +70,18 @@ namespace Alabo.App.Shop.Coupons.Controllers
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete]
         public ApiResult DeleteCoupon(string id)
         {
-            if (string.IsNullOrEmpty(id))
-            {
-                return ApiResult.Failure("´«ÈëidÎª¿Õ£¬É¾³ýÊ§°Ü£¡");
-            }
+            if (string.IsNullOrEmpty(id)) return ApiResult.Failure("ï¿½ï¿½ï¿½ï¿½idÎªï¿½Õ£ï¿½É¾ï¿½ï¿½Ê§ï¿½Ü£ï¿½");
             var result = Resolve<ICouponService>().Delete(id);
             if (result)
-            {
-                return ApiResult.Success("É¾³ý³É¹¦!");
-            }
+                return ApiResult.Success("É¾ï¿½ï¿½ï¿½É¹ï¿½!");
 
-            else
-            {
-                return ApiResult.Failure("É¾³ýÊ§°Ü£¡");
-            }
+            return ApiResult.Failure("É¾ï¿½ï¿½Ê§ï¿½Ü£ï¿½");
         }
     }
 }

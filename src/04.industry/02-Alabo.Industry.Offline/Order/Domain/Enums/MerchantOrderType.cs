@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Offline.Order.Domain.Enums
+namespace Alabo.Industry.Offline.Order.Domain.Enums
 {
     /// <summary>
-    /// MerchantOrderType
+    ///     MerchantOrderType
     /// </summary>
     public enum MerchantOrderType
     {
         /// <summary>
-        /// 普通订单
+        ///     普通订单
         /// </summary>
-        [Display(Name = "普通订单")]
-        Normal = 1,
+        [Display(Name = "普通订单")] Normal = 1
     }
 }

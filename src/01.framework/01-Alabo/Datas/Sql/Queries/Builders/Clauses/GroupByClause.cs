@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Alabo.Datas.Sql.Queries.Builders.Abstractions;
+using Alabo.Datas.Sql.Queries.Builders.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
-using Alabo.Datas.Sql.Queries.Builders.Abstractions;
-using Alabo.Datas.Sql.Queries.Builders.Core;
 
 namespace Alabo.Datas.Sql.Queries.Builders.Clauses
 {
@@ -59,9 +59,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <param name="having">分组条件</param>
         public void GroupBy(string group, string having = null)
         {
-            if (string.IsNullOrWhiteSpace(group)) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(group)) return;
 
             _group.AddRange(group.Split(',').Select(item => new SqlItem(item)));
             _having = having;
@@ -75,9 +73,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <param name="having">分组条件</param>
         public void GroupBy<TEntity>(Expression<Func<TEntity, object>> column, string having = null)
         {
-            if (column == null) {
-                return;
-            }
+            if (column == null) return;
 
             _group.Add(new SqlItem(_resolver.GetColumn(column), _register.GetAlias(typeof(TEntity))));
             _having = having;
@@ -89,9 +85,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <param name="sql">Sql语句</param>
         public void AppendSql(string sql)
         {
-            if (string.IsNullOrWhiteSpace(sql)) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(sql)) return;
 
             _group.Add(new SqlItem(sql, raw: true));
         }
@@ -101,15 +95,11 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// </summary>
         public string ToSql()
         {
-            if (_group.Count == 0) {
-                return null;
-            }
+            if (_group.Count == 0) return null;
 
             var result = new StringBuilder();
             result.Append($"Group By {Alabo.Extensions.Extensions.Join(_group.Select(t => t.ToSql(_dialect)))}");
-            if (string.IsNullOrWhiteSpace(_having)) {
-                return result.ToString();
-            }
+            if (string.IsNullOrWhiteSpace(_having)) return result.ToString();
 
             result.Append($" Having {_having}");
             return result.ToString();

@@ -1,14 +1,14 @@
-using System;using Alabo.Domains.Repositories.EFCore;using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.App.Market.BookDonae.Domain.Entities;
-using Alabo.Domains.Repositories;
+using Alabo.Cloud.Cms.BookDonae.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
-using  Alabo.App.Market.BookDonae.Domain.Repositories;
+using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.BookDonae.Domain.Repositories {
-	public class BookDonaeInfoRepository : RepositoryMongo<BookDonaeInfo, ObjectId>,IBookDonaeInfoRepository  {
-	public  BookDonaeInfoRepository(IUnitOfWork unitOfWork) : base(unitOfWork){
-	}
-	}
+namespace Alabo.Cloud.Cms.BookDonae.Domain.Repositories
+{
+    public class BookDonaeInfoRepository : RepositoryMongo<BookDonaeInfo, ObjectId>, IBookDonaeInfoRepository
+    {
+        public BookDonaeInfoRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+        }
+    }
 }

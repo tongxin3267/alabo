@@ -1,60 +1,67 @@
-using System.Collections.Generic;
-using MongoDB.Bson;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Helpers;
 using Alabo.RestfulApi.Clients;
+using Alabo.Runtime;
 using Alabo.Tenants.Domain.Entities;
+using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
 
-namespace Alabo.Tenants.Domain.Services {
-
+namespace Alabo.Tenants.Domain.Services
+{
     /// <summary>
     ///     TenantService
     /// </summary>
-    public class TenantService : ServiceBase<Tenant, ObjectId>, ITenantService {
-
+    public class TenantService : ServiceBase<Tenant, ObjectId>, ITenantService
+    {
         /// <summary>
         ///     Constructor
         /// </summary>
         /// <param name="unitOfWork"></param>
         /// <param name="repository"></param>
         public TenantService(IUnitOfWork unitOfWork, IRepository<Tenant, ObjectId> repository) : base(unitOfWork,
-            repository) {
+            repository)
+        {
         }
 
-        public void InitSite() {
+        public void InitSite()
+        {
             // 不存在时才初始化
-            if (!Exists()) {
+            if (!Exists())
+            {
                 var apiUrl = "Api/Site/GetTenantSite";
                 var sign = HttpWeb.Tenant;
-                var siteId = Runtime.RuntimeContext.Current.WebsiteConfig.OpenApiSetting.Id;
+                var siteId = RuntimeContext.Current.WebsiteConfig.OpenApiSetting.Id;
                 IDictionary<string, string> parameters = new Dictionary<string, string>
                 {
                     {"siteId", siteId},
                     {"sign", sign}
                 };
                 var tenantSite = Ioc.Resolve<IOpenClient>().Get<Tenant>(apiUrl, parameters);
-                if (tenantSite != null) {
-                    Add(tenantSite);
-                }
+                if (tenantSite != null) Add(tenantSite);
             }
         }
 
         /// <summary>
-        /// 获取租户的站点
+        ///     获取租户的站点
         /// </summary>
         /// <returns></returns>
-        public TenantSite Site() {
-            return ObjectCache.GetOrSet(() => {
+        public TenantSite Site()
+        {
+            return ObjectCache.GetOrSet(() =>
+            {
                 var find = FirstOrDefault();
-                if (find == null) {
+                if (find == null)
+                {
                     InitSite();
                     find = FirstOrDefault();
                 }
+
                 return find?.Site;
             }, "TenantSite").Value;
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,14 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;using MongoDB.Bson.Serialization.Attributes;
-using Alabo.App.Core.Common;
+using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Shop.Product.Domain.CallBacks {
-
+namespace Alabo.Industry.Shop.Products.Domain.Configs
+{
     /// <summary>
     ///     商品图片上传设置
     /// </summary>
@@ -17,9 +15,8 @@ namespace Alabo.App.Shop.Product.Domain.CallBacks {
         SortOrder = 400, SideBarType = SideBarType.ProductSideBar)]
     public class ProductConfig : BaseViewModel, IAutoConfig
     {
-
         /// <summary>
-        /// 是否自动更新销售数量
+        ///     是否自动更新销售数量
         /// </summary>
         [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1)]
         [Display(Name = "是否自动更新销售数量")]
@@ -27,7 +24,7 @@ namespace Alabo.App.Shop.Product.Domain.CallBacks {
         public bool IsAutoUpdateSold { get; set; } = true;
 
         /// <summary>
-        /// 默认货号
+        ///     默认货号
         /// </summary>
         [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1)]
         [Display(Name = "默认货号")]
@@ -136,7 +133,8 @@ namespace Alabo.App.Shop.Product.Domain.CallBacks {
         // [Field("宽比高比例", ControlsType.TextBox)]
         //public int Id { get; set; } = 1;
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

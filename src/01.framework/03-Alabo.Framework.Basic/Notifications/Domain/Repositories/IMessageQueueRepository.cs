@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
 using Alabo.Domains.Repositories;
+using Alabo.Framework.Basic.Notifications.Domain.Entities;
 
-namespace Alabo.App.Core.Common.Domain.Repositories {
-
-    public interface IMessageQueueRepository : IRepository<MessageQueue, long> {
-
+namespace Alabo.Framework.Basic.Notifications.Domain.Repositories
+{
+    public interface IMessageQueueRepository : IRepository<MessageQueue, long>
+    {
         void Add(MessageQueue entity);
 
         void HandleQueue(long id, string message = null, string summary = null);

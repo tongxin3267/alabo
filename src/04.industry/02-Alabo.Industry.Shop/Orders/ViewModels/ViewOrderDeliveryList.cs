@@ -1,21 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.User.Domain.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Users.Entities;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Order.ViewModels {
-
+namespace Alabo.Industry.Shop.Orders.ViewModels
+{
     /// <summary>
     ///     发货记录表
     /// </summary>
-    [ClassProperty(Name = "发货记录", Icon = "fa fa-puzzle-piece", Description = "发货记录",PageType = ViewPageType.List,ListApi = "Api/OrderDelivery/OrderDeliveryList",
+    [ClassProperty(Name = "发货记录", Icon = "fa fa-puzzle-piece", Description = "发货记录", PageType = ViewPageType.List,
+        ListApi = "Api/OrderDelivery/OrderDeliveryList",
         SideBarType = SideBarType.OrderSideBar, PostApi = "Api/OrderDelivery/OrderDeliveryList")]
-    public class ViewOrderDeliveryList : BaseViewModel {
-
+    public class ViewOrderDeliveryList : BaseViewModel
+    {
         /// <summary>
         ///     序号    ///
         /// </summary>
@@ -47,7 +50,7 @@ namespace Alabo.App.Shop.Order.ViewModels {
         /// <summary>
         ///     所属店铺
         /// </summary>
-        public long StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     店铺名称
@@ -153,8 +156,8 @@ namespace Alabo.App.Shop.Order.ViewModels {
         /// <summary>
         ///     Views the links.
         /// </summary>
-
-        public IEnumerable<ViewLink> ViewLinks() {
+        public IEnumerable<ViewLink> ViewLinks()
+        {
             var quickLinks = new List<ViewLink>
             {
                 new ViewLink("详情", "/Admin/Order/DeliveryEdit?id=[[Id]]", Icons.List, LinkType.ColumnLink)

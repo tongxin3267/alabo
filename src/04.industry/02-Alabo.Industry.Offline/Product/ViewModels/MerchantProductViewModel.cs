@@ -1,26 +1,26 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Offline.Merchants.ViewModels;
-using Alabo.App.Offline.Product.Domain.Entities;
+using Alabo.Industry.Offline.Merchants.ViewModels;
+using Alabo.Industry.Offline.Product.Domain.Entities;
 
-namespace Alabo.App.Offline.Product.ViewModels
+namespace Alabo.Industry.Offline.Product.ViewModels
 {
     /// <summary>
-    /// MerchantProductViewModel
+    ///     MerchantProductViewModel
     /// </summary>
     public class MerchantProductViewModel
     {
         /// <summary>
-        /// Merchant store info
+        ///     Merchant store info
         /// </summary>
         public MerchantStoreViewModel MerchantStore { get; set; }
 
         /// <summary>
-        /// Relations
+        ///     Relations
         /// </summary>
         public List<RelationViewModel> Relations { get; set; }
 
         /// <summary>
-        /// Merchant products
+        ///     Merchant products
         /// </summary>
         public List<MerchantProduct> Products { get; set; }
     }

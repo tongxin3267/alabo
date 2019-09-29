@@ -1,7 +1,7 @@
-﻿using System;
-using Microsoft.Extensions.Logging;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Logging;
+using Microsoft.Extensions.Logging;
+using System;
 
 namespace Alabo.Datas.Ef.Logs
 {

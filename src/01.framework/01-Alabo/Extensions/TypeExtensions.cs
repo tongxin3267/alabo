@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Data;
-using System.Linq;
-using System.Reflection;
-using Alabo.Cache;
+﻿using Alabo.Cache;
 using Alabo.Helpers;
 using Alabo.Reflections;
 using Alabo.Runtime;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.ViewFeatures;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data;
+using System.Linq;
+using System.Reflection;
 
 namespace Alabo.Extensions
 {
@@ -47,9 +47,7 @@ namespace Alabo.Extensions
         /// <param name="type"></param>
         public static PropertyInfo[] GetPropertiesFromCache(this Type type)
         {
-            if (type == null) {
-                return null;
-            }
+            if (type == null) return null;
 
             var cacheKey = "GetProperties" + type.FullName;
             var objectCache = Ioc.Resolve<IObjectCache>();
@@ -69,9 +67,7 @@ namespace Alabo.Extensions
         /// <param name="type"></param>
         public static IList<PropertyResult> GetPropertyResultFromCache(this Type type)
         {
-            if (type == null) {
-                return null;
-            }
+            if (type == null) return null;
 
             var cacheKey = "GetPropertyResult" + type.FullName;
             var objectCache = Ioc.Resolve<IObjectCache>();
@@ -104,15 +100,13 @@ namespace Alabo.Extensions
         /// <param name="input"></param>
         public static Type GetTypeByFullName(this string input)
         {
-            if (input.IsNullOrEmpty()) {
-                throw new InvalidExpressionException("类型名称不能为空");
-            }
+            if (input.IsNullOrEmpty()) throw new InvalidExpressionException("类型名称不能为空");
 
             var cacheKey = "GetTypeByFullName" + input;
             var objectCache = Ioc.Resolve<IObjectCache>();
             if (!objectCache.TryGetPublic(cacheKey, out Type type))
             {
-                if (input.Length > 110) {
+                if (input.Length > 110)
                     if (input.Contains("System.Collections.Generic.List"))
                     {
                         // var typefullName = input.CutString("1[[", ", ZKCloud");
@@ -123,20 +117,15 @@ namespace Alabo.Extensions
                             return findType;
                         }
                     }
-                }
 
                 var types = RuntimeContext.Current.GetPlatformRuntimeAssemblies().SelectMany(a => a.GetTypes());
                 type = types?.FirstOrDefault(t => t.FullName.Equals(input.Trim(), StringComparison.OrdinalIgnoreCase));
-                if (type != null) {
-                    objectCache.Set(cacheKey, type);
-                }
+                if (type != null) objectCache.Set(cacheKey, type);
 
                 if (type == null)
                 {
                     type = types?.FirstOrDefault(t => t.FullName == input.Trim());
-                    if (type != null) {
-                        objectCache.Set(cacheKey, type);
-                    }
+                    if (type != null) objectCache.Set(cacheKey, type);
                 }
             }
 
@@ -153,9 +142,7 @@ namespace Alabo.Extensions
         /// <param name="input"></param>
         public static Type GetTypeByName(this string input)
         {
-            if (input.IsNullOrEmpty()) {
-                throw new InvalidExpressionException("类型名称不能为空");
-            }
+            if (input.IsNullOrEmpty()) throw new InvalidExpressionException("类型名称不能为空");
 
             var objectCache = Ioc.Resolve<IObjectCache>();
             var cacheKey = "GetTypeByName" + input;
@@ -164,9 +151,8 @@ namespace Alabo.Extensions
                 var types = RuntimeContext.Current.GetPlatformRuntimeAssemblies().SelectMany(a => a.GetTypes());
                 var type = types?.FirstOrDefault(t =>
                     t.FullName.Equals(input.Trim(), StringComparison.OrdinalIgnoreCase));
-                if (type == null) {
+                if (type == null)
                     type = types?.FirstOrDefault(t => t.Name.Equals(input.Trim(), StringComparison.OrdinalIgnoreCase));
-                }
 
                 //if (type == null) {
                 //    throw new InvalidExpressionException("动态获取类型,失败请确定fullName输入是否正确");
@@ -183,15 +169,11 @@ namespace Alabo.Extensions
         public static object GetInstanceByName(this string input)
         {
             var find = input.GetTypeByName();
-            if (find == null) {
-                return null;
-            }
+            if (find == null) return null;
 
             var cacheKey = "GetInstanceByName" + find.FullName;
             var objectCache = Ioc.Resolve<IObjectCache>();
-            if (!objectCache.TryGetPublic(cacheKey, out object config)) {
-                config = Activator.CreateInstance(find);
-            }
+            if (!objectCache.TryGetPublic(cacheKey, out object config)) config = Activator.CreateInstance(find);
 
             return config;
         }
@@ -205,9 +187,7 @@ namespace Alabo.Extensions
         {
             var cacheKey = "GetInstanceByName" + type.FullName;
             var objectCache = Ioc.Resolve<IObjectCache>();
-            if (!objectCache.TryGetPublic(cacheKey, out object config)) {
-                config = Activator.CreateInstance(type);
-            }
+            if (!objectCache.TryGetPublic(cacheKey, out object config)) config = Activator.CreateInstance(type);
 
             return config;
         }
@@ -262,9 +242,7 @@ namespace Alabo.Extensions
             var objectCache = Ioc.Resolve<IObjectCache>();
             if (!objectCache.TryGetPublic(cacheKey, out ClassDescription configDescription))
             {
-                if (fullName.IsNullOrEmpty()) {
-                    return null;
-                }
+                if (fullName.IsNullOrEmpty()) return null;
 
                 var t = fullName.GetTypeByFullName();
                 var typeclassProperty = t.GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
@@ -288,19 +266,15 @@ namespace Alabo.Extensions
             if (type != null)
             {
                 var classDescription = type.FullName.GetClassDescription();
-                if (classDescription != null) {
-                    foreach (var item in classDescription.Propertys) {
+                if (classDescription != null)
+                    foreach (var item in classDescription.Propertys)
                         if (item.Property.Name.Equals(filedName, StringComparison.CurrentCultureIgnoreCase))
                         {
                             displayName = item.DisplayAttribute?.Name;
-                            if (displayName.IsNullOrEmpty()) {
-                                displayName = item.Property.Name;
-                            }
+                            if (displayName.IsNullOrEmpty()) displayName = item.Property.Name;
 
                             break;
                         }
-                    }
-                }
             }
 
             return displayName;
@@ -319,15 +293,13 @@ namespace Alabo.Extensions
             if (type != null)
             {
                 var classDescription = type.FullName.GetClassDescription();
-                if (classDescription != null) {
-                    foreach (var item in classDescription.Propertys) {
+                if (classDescription != null)
+                    foreach (var item in classDescription.Propertys)
                         if (item.Property.Name.Equals(filedName, StringComparison.CurrentCultureIgnoreCase))
                         {
                             displayName = item.Property.PropertyType;
                             break;
                         }
-                    }
-                }
             }
 
             return displayName;
@@ -367,9 +339,7 @@ namespace Alabo.Extensions
         public static IEnumerable<PropertyDescription> GetListPropertys(string fullName)
         {
             var propertys = GetAllPropertys(fullName);
-            if (propertys != null) {
-                return propertys.Where(r => r.FieldAttribute.ListShow);
-            }
+            if (propertys != null) return propertys.Where(r => r.FieldAttribute.ListShow);
 
             return null;
         }

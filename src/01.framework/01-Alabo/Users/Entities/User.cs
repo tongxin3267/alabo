@@ -1,5 +1,3 @@
-using System;
-using System.ComponentModel.DataAnnotations;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -10,15 +8,17 @@ using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MongoDB.Bson.Serialization.Attributes;
+using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Users.Entities {
-
+namespace Alabo.Users.Entities
+{
     /// <summary>
     ///     用户
     /// </summary>
     [ClassProperty(Name = "用户")]
-    public class User : AggregateDefaultRoot<User> {
-
+    public class User : AggregateDefaultRoot<User>
+    {
         /// <summary>
         ///     用户名（以字母开头，包括a-z,0-9和_）：[a-zA-z][a-zA-Z0-9_]{2,15}
         /// </summary>
@@ -66,7 +66,7 @@ namespace Alabo.Users.Entities {
         public Status Status { get; set; } = Status.Normal;
 
         /// <summary>
-        /// 租户
+        ///     租户
         /// </summary>
         public string Tenant { get; set; }
 
@@ -93,24 +93,27 @@ namespace Alabo.Users.Entities {
         /// <summary>
         ///     获取s the name of the 会员.
         /// </summary>
-        public string GetUserName() {
+        public string GetUserName()
+        {
             var name = $@"{UserName}({Name})";
             return name;
         }
 
         /// <summary>
-        /// 转换成基础用户
+        ///     转换成基础用户
         /// </summary>
         /// <returns></returns>
-        public BasicUser ToBasicUser() {
-            BasicUser loginUser = new BasicUser {
-                UserName = this.UserName,
-                Email = this.Email,
-                GradeId = this.GradeId,
-                Status = this.Status,
-                Id = this.Id,
-                Name = this.Name,
-                Tenant = this.Tenant
+        public BasicUser ToBasicUser()
+        {
+            var loginUser = new BasicUser
+            {
+                UserName = UserName,
+                Email = Email,
+                GradeId = GradeId,
+                Status = Status,
+                Id = Id,
+                Name = Name,
+                Tenant = Tenant
             };
             return loginUser;
         }
@@ -119,22 +122,24 @@ namespace Alabo.Users.Entities {
     /// <summary>
     ///     应用程序映射配置
     /// </summary>
-    public class UserTableMap : MsSqlAggregateRootMap<User> {
-
+    public class UserTableMap : MsSqlAggregateRootMap<User>
+    {
         /// <summary>
         ///     映射表
         /// </summary>
-        protected override void MapTable(EntityTypeBuilder<User> builder) {
+        protected override void MapTable(EntityTypeBuilder<User> builder)
+        {
             builder.ToTable("User_User");
         }
 
         /// <summary>
         ///     映射属性
         /// </summary>
-        protected override void MapProperties(EntityTypeBuilder<User> builder) {
+        protected override void MapProperties(EntityTypeBuilder<User> builder)
+        {
             //应用程序编号
             builder.HasKey(t => t.Id);
-            builder.Ignore(e => e.Version);
+
             builder.Ignore(e => e.Tenant);
             builder.Ignore(e => e.Map);
             builder.Ignore(e => e.Detail);

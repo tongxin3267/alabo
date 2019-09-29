@@ -1,25 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Asset.Withdraws.Domain.Enums;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.Domains.Entities;
+﻿using Alabo.App.Asset.Withdraws.Domain.Enums;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.Transfer {
-
+namespace Alabo.App.Asset.Transfers.Dtos
+{
     /// <summary>
     ///     转账管理
     /// </summary>
     [ClassProperty(Name = "转账管理", Icon = "fa fa-puzzle-piece", Description = "转账管理",
         SideBarType = SideBarType.TransferSideBar)]
-    public class TransferOutput : EntityDto {
-
+    public class TransferOutput : EntityDto
+    {
         /// <summary>
         ///     id
         /// </summary>
@@ -107,7 +105,8 @@ namespace Alabo.App.Core.Finance.Domain.Dtos.Transfer {
         /// <summary>
         ///     视图s the links.
         /// </summary>
-        public IEnumerable<ViewLink> ViewLinks() {
+        public IEnumerable<ViewLink> ViewLinks()
+        {
             var quickLinks = new List<ViewLink>
             {
                 new ViewLink("编辑", "/Admin/Transfer/Edit?Id=[[Id]]", Icons.Edit, LinkType.ColumnLink)

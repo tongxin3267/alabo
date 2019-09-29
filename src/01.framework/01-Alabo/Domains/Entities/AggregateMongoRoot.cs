@@ -1,32 +1,34 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using Newtonsoft.Json;
-using Alabo.Domains.Entities.Core;
+﻿using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Domains.Entities {
-
+namespace Alabo.Domains.Entities
+{
     /// <summary>
     ///     Mongodb聚合根
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
     public abstract class AggregateMongodbRoot<TEntity> : EntityBase<TEntity, ObjectId>,
-        IAggregateMongoRoot<TEntity> where TEntity : IAggregateRoot {
-
+        IAggregateMongoRoot<TEntity> where TEntity : IAggregateRoot
+    {
         /// <summary>
         ///     初始化聚合根
         /// </summary>
         /// <param name="id">标识</param>
         protected AggregateMongodbRoot(ObjectId id)
-            : base(id) {
+            : base(id)
+        {
         }
 
         protected AggregateMongodbRoot()
-            : this(ObjectId.GenerateNewId()) {
+            : this(ObjectId.GenerateNewId())
+        {
         }
 
         /// <summary>
@@ -35,10 +37,9 @@ namespace Alabo.Domains.Entities {
         [BsonIgnore]
         public byte[] Version { get; set; }
 
-        public bool IsObjectIdEmpty() {
-            if (Id == ObjectId.Empty) {
-                return true;
-            }
+        public bool IsObjectIdEmpty()
+        {
+            if (Id == ObjectId.Empty) return true;
 
             return false;
         }
@@ -49,18 +50,20 @@ namespace Alabo.Domains.Entities {
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
     public abstract class AggregateMongodbUserRoot<TEntity> : EntityUserBase<TEntity, ObjectId>,
-        IAggregateRoot<TEntity, ObjectId> where TEntity : IAggregateRoot {
-
+        IAggregateRoot<TEntity, ObjectId> where TEntity : IAggregateRoot
+    {
         /// <summary>
         ///     初始化聚合根
         /// </summary>
         /// <param name="id">标识</param>
         protected AggregateMongodbUserRoot(ObjectId id)
-            : base(id) {
+            : base(id)
+        {
         }
 
         protected AggregateMongodbUserRoot()
-            : this(ObjectId.Empty) {
+            : this(ObjectId.Empty)
+        {
         }
 
         /// <summary>
@@ -83,12 +86,5 @@ namespace Alabo.Domains.Entities {
         [NotMapped]
         [BsonIgnore]
         public string UserName { get; set; }
-
-        /// <summary>
-        ///     版本号(乐观锁)
-        /// </summary>
-        [BsonIgnore]
-        [JsonIgnore]
-        public byte[] Version { get; set; }
     }
 }

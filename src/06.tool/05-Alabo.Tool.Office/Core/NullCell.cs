@@ -1,21 +1,23 @@
-﻿namespace Alabo.Tool.Office.Core {
-
+﻿namespace Alabo.Tool.Office.Core
+{
     /// <summary>
-    /// 空单元格
+    ///     空单元格
     /// </summary>
-    public class NullCell : Cell {
-
+    public class NullCell : Cell
+    {
         /// <summary>
-        /// 初始化空单元格
+        ///     初始化空单元格
         /// </summary>
         public NullCell()
-            : base("") {
+            : base("")
+        {
         }
 
         /// <summary>
-        /// 是否为空
+        ///     是否为空
         /// </summary>
-        public override bool IsNull() {
+        public override bool IsNull()
+        {
             return true;
         }
     }

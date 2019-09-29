@@ -1,7 +1,7 @@
-﻿using System;
-using System.Text;
+﻿using Alabo.Dependency;
 using Microsoft.Extensions.DependencyInjection;
-using Alabo.Dependency;
+using System;
+using System.Text;
 
 namespace Alabo.Extensions
 {

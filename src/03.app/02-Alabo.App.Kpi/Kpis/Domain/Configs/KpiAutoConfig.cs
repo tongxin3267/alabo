@@ -2,14 +2,13 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.AutoConfigs;
-using Alabo.Core.Enums.Enum;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Share.Kpi.Domain.CallBack {
-
+namespace Alabo.App.Kpis.Kpis.Domain.Configs
+{
     /// <summary>
     ///     绩效配置
     /// </summary>
@@ -17,8 +16,8 @@ namespace Alabo.App.Share.Kpi.Domain.CallBack {
     [ClassProperty(Name = "绩效配置", Icon = "fa fa-cny", Description = "绩效配置", GroupName = "基本设置,高级选项",
         PageType = ViewPageType.List, SortOrder = 20,
         SideBarType = SideBarType.KpiSideBar)]
-    public class KpiAutoConfig : BaseViewModel, IAutoConfig {
-
+    public class KpiAutoConfig : BaseViewModel, IAutoConfig
+    {
         /// <summary>
         ///     Id自增，主键
         /// </summary>
@@ -50,7 +49,7 @@ namespace Alabo.App.Share.Kpi.Domain.CallBack {
         /// </summary>
         [Display(Name = "考核范围")]
         [Field(ControlsType = ControlsType.RadioButton, ListShow = true, GroupTabId = 1, EditShow = true,
-            SortOrder = 103, Width = "110", DataSource = "Alabo.Core.Enums.Enum.KpiTeamType")]
+            SortOrder = 103, Width = "110", DataSource = "Alabo.Framework.Core.Enums.Enum.KpiTeamType")]
         public KpiTeamType KpiTeamType { get; set; }
 
         /// <summary>
@@ -81,7 +80,8 @@ namespace Alabo.App.Share.Kpi.Domain.CallBack {
         ///     排序,越小排在越前面
         /// </summary>
         [Display(Name = "排序", Order = 1000)]
-        [Field(ControlsType = ControlsType.Numberic, ListShow = true, EditShow = true, SortOrder = 10000, Width = "110")]
+        [Field(ControlsType = ControlsType.Numberic, ListShow = true, EditShow = true, SortOrder = 10000,
+            Width = "110")]
         [Range(0, 99999, ErrorMessage = "请输入0-99999之间的数字")]
         [HelpBlock("排序,越小排在越前面，请输入0-99999之间的数字")]
         public long SortOrder { get; set; } = 1000;
@@ -95,7 +95,8 @@ namespace Alabo.App.Share.Kpi.Domain.CallBack {
             SortOrder = 10003, Width = "110", DataSource = "Alabo.Domains.Enums.Status")]
         public Status Status { get; set; } = Status.Normal;
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

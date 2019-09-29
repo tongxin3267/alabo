@@ -1,13 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Cms.Articles.ViewModels {
-
-    public class ViewArticle : BaseViewModel {
+namespace Alabo.Industry.Cms.Articles.ViewModels
+{
+    public class ViewArticle : BaseViewModel
+    {
         [Display(Name = "编号")] public long Id { get; set; }
 
         [Display(Name = "标题")]

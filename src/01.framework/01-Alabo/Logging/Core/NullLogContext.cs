@@ -1,5 +1,5 @@
-﻿using System.Diagnostics;
-using Alabo.Logging.Abstractions;
+﻿using Alabo.Logging.Abstractions;
+using System.Diagnostics;
 
 namespace Alabo.Logging.Core
 {

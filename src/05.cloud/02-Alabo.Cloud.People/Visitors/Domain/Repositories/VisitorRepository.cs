@@ -1,13 +1,14 @@
-using MongoDB.Bson;
-using Alabo.App.Core.Markets.Visitors.Domain.Entities;
+using Alabo.Cloud.People.Visitors.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Markets.Visitors.Domain.Repositories {
-
-    public class VisitorRepository : RepositoryMongo<Visitor, ObjectId>, IVisitorRepository {
-
-        public VisitorRepository(IUnitOfWork unitOfWork) : base(unitOfWork) {
+namespace Alabo.Cloud.People.Visitors.Domain.Repositories
+{
+    public class VisitorRepository : RepositoryMongo<Visitor, ObjectId>, IVisitorRepository
+    {
+        public VisitorRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
         }
     }
 }

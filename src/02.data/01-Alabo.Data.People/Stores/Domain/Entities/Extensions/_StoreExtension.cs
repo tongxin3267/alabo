@@ -1,20 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
-using Alabo.Domains.Entities.Extensions;
+﻿using Alabo.Domains.Entities.Extensions;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Shop.Store.Domain.Entities.Extensions {
-
+namespace Alabo.Data.People.Stores.Domain.Entities.Extensions
+{
     /// <summary>
     ///     店铺拓展属性
     /// </summary>
-    public class StoreExtension : EntityExtension {
-
+    public class StoreExtension : EntityExtension
+    {
         /// <summary>
-        /// 店铺分类
+        ///     店铺分类
         /// </summary>
         [Display(Name = "店铺分类")]
         public List<StoreCategory> StoreCategories { get; set; } = new List<StoreCategory>();
@@ -26,33 +25,11 @@ namespace Alabo.App.Shop.Store.Domain.Entities.Extensions {
         public List<Guid> CategoryIds { get; set; }
 
         /// <summary>
-        ///     店铺详细信息
-        /// </summary>
-        [Display(Name = "店铺详细信息")]
-        public StoreDetail Detail { get; set; }
-
-        /// <summary>
-        ///     店铺评分相关数据
-        /// </summary>
-        [Display(Name = "店铺评分")]
-        public StoreScore Score { get; set; }
-
-        /// <summary>
         ///     详细介绍
         /// </summary>
         [Field(ControlsType = ControlsType.TextArea, GroupTabId = 1, SortOrder = 15)]
         [Display(Name = "详细介绍")]
         [HelpBlock("详细介绍")]
         public string Intro { get; set; }
-
-        /// <summary>
-        ///     店铺地址
-        /// </summary>
-        public IList<string> Address { get; set; }
-
-        /// <summary>
-        ///     供应商对应银行卡 供财务打款使用
-        /// </summary>
-        public string BankCard { get; set; }
     }
 }

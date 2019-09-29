@@ -1,40 +1,36 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Cms.Support.Domain.Enum {
-
+namespace Alabo.Cloud.Support.Domain.Enum
+{
     /// <summary>
     ///     工单优先级
     /// </summary>
     [ClassProperty(Name = "工单优先级")]
-    public enum WorkOrderPriority {
-
+    public enum WorkOrderPriority
+    {
         /// <summary>
         ///     低
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "低")]
+        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "低")]
         Low = 0,
 
         /// <summary>
         ///     中
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "中")]
+        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "中")]
         Middle = 1,
 
         /// <summary>
         ///     高
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "高")]
+        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "高")]
         Hight = 2,
 
         /// <summary>
         ///     紧急
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "紧急")]
+        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "紧急")]
         Exigency = 3
     }
 }

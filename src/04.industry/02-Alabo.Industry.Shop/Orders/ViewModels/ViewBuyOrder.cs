@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.App.Shop.Product.ViewModels;
+using Alabo.App.Asset.Accounts.Domain.Entities;
+using Alabo.App.Asset.Pays.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using Alabo.Industry.Shop.Products.ViewModels;
 
-namespace Alabo.App.Shop.Order.ViewModels {
-
-    public class ViewBuyOrder {
-
+namespace Alabo.Industry.Shop.Orders.ViewModels
+{
+    public class ViewBuyOrder
+    {
         /// <summary>
         ///     选中的支付方式
         /// </summary>
@@ -170,8 +171,8 @@ namespace Alabo.App.Shop.Order.ViewModels {
     /// <summary>
     ///     AccountUse 账户使用情况
     /// </summary>
-    public class AccountUse {
-
+    public class AccountUse
+    {
         /// <summary>
         ///     限制的用户的账户ID
         /// </summary>
@@ -210,8 +211,10 @@ namespace Alabo.App.Shop.Order.ViewModels {
         /// <param name="min">允许使用的下限额度</param>
         /// <param name="moneyTypeId">货币类型ID</param>
         /// <param name="rate">转换比率</param>
-        public static AccountUse Create(long accountId, decimal max, decimal min, Guid moneyTypeId, decimal rate) {
-            return new AccountUse {
+        public static AccountUse Create(long accountId, decimal max, decimal min, Guid moneyTypeId, decimal rate)
+        {
+            return new AccountUse
+            {
                 AccountId = accountId,
                 Rate = rate,
                 Max = max,

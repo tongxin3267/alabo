@@ -1,23 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Core.Enums.Enum;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Users.Enum;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.App.Core.User.ViewModels {
-
+namespace Alabo.Data.People.Users.ViewModels
+{
     /// <summary>
     ///     用户身份认证
     /// </summary>
     [ClassProperty(Name = "实名认证", Icon = "fa fa-puzzle-piece", Description = "实名认证",
         SideBarType = SideBarType.IdentitySideBar)]
-    public class IdentityView : BaseViewModel {
-
+    public class IdentityView : BaseViewModel
+    {
         /// <summary>
         ///     真实姓名
         /// </summary>
@@ -41,7 +41,8 @@ namespace Alabo.App.Core.User.ViewModels {
         ///     证件类型0：身份证 1：护照 2：营业执照 3：驾照
         /// </summary>
         [Display(Name = "证件类型")]
-        [Field(ControlsType = ControlsType.Label, Width = "200", DataSourceType = typeof(CardType), ListShow = true, SortOrder = 3)]
+        [Field(ControlsType = ControlsType.Label, Width = "200", DataSourceType = typeof(CardType), ListShow = true,
+            SortOrder = 3)]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         public CardType CardType { get; set; }
 
@@ -81,7 +82,7 @@ namespace Alabo.App.Core.User.ViewModels {
         ///     审核状态（0：已提交，1：审核中(暂时不用)，2：审核通过，3：审核不通过）
         /// </summary>
         [Display(Name = "审核状态")]
-        [Field(ControlsType = ControlsType.RadioButton, DataSource = "Alabo.Core.Enums.Enum.IdentityStatus",
+        [Field(ControlsType = ControlsType.RadioButton, DataSource = "Alabo.Framework.Core.Enums.Enum.IdentityStatus",
             Width = "110", ListShow = false, IsShowAdvancedSerach = false, IsShowBaseSerach = false,
             SortOrder = 11)]
         public IdentityStatus Status { get; set; }
@@ -110,10 +111,12 @@ namespace Alabo.App.Core.User.ViewModels {
         /// <summary>
         ///     获取链接
         /// </summary>
-        public IEnumerable<ViewLink> ViewLinks() {
+        public IEnumerable<ViewLink> ViewLinks()
+        {
             var quickLinks = new List<ViewLink>
             {
-                new ViewLink("实名审核", "/Admin/Basic/Edit?Service=IIdentityService&Method=GetView&userId=[[LoginUserId]]", Icons.Edit, LinkType.ColumnLink)
+                new ViewLink("实名审核", "/Admin/Basic/Edit?Service=IIdentityService&Method=GetView&userId=[[LoginUserId]]",
+                    Icons.Edit, LinkType.ColumnLink)
             };
             return quickLinks;
         }

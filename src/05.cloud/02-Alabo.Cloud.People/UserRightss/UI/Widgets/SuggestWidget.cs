@@ -1,17 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.App.Market.UserRightss.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Market.UserRightss.Domain.Services;
+﻿using System.Collections.Generic;
+using Alabo.Cloud.People.UserRightss.Domain.Services;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Extensions;
 using Alabo.Helpers;
-using Alabo.UI.Widgets;
-using Alabo.App.Core.Admin.Domain.Services;
-using Alabo.App.Core.Employes.Domain.Services;
+using Alabo.UI.Design.Widgets;
 
-namespace Alabo.App.Market.UI.Widgets
+namespace Alabo.Cloud.People.UserRightss.UI.Widgets
 {
     public class SuggestWidget : IWidget
     {

@@ -1,17 +1,63 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Asset.Withdraws.Domain.Services;
-using Alabo.App.Core.Finance.Domain.Services;
+﻿using Alabo.App.Asset.Withdraws.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
+using Alabo.UI.Design.AutoForms;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.Finance.UI.AutoForm {
+namespace Alabo.App.Asset.Withdraws.UI
+{
+    internal class WithdrawResultwAutoForm : UIBase, IAutoForm
+    {
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
+            var withDraw = Resolve<IWithdrawService>().GetAdminWithDraw(id.ConvertToLong());
+            var form = new WithdrawResultwAutoForm();
+            if (withDraw == null)
+                form = new WithdrawResultwAutoForm();
+            else
+                form = new WithdrawResultwAutoForm
+                {
+                    Status = withDraw.Status.GetDisplayName(),
+                    Amount = withDraw.Amount,
+                    Fee = withDraw.Fee,
+                    PaymentAmount = withDraw.Amount - withDraw.Fee,
 
-    internal class WithdrawResultwAutoForm : UIBase, IAutoForm {
+                    BankCardId = withDraw.BankCard?.Number,
+                    CreateTime = withDraw.CreateTime,
+                    //FailuredReason = withDraw.FailuredReason,
+                    Id = withDraw.Id,
+                    MoneyTypeId = withDraw.MoneyTypeConfig?.Id,
+
+                    //审核结果
+                    ReviewRemark = withDraw.FailuredReason.IsNullOrEmpty() ? withDraw.Remark : withDraw.FailuredReason,
+
+                    UserRemark = withDraw.UserRemark,
+                    UserId = withDraw.UserId
+                };
+            // withDraw.MapTo<WithdrawReviewAutoForm>();
+            var result = ToAutoForm(form);
+            result.AlertText = "【审核结果】";
+
+            //result.ButtomHelpText = new List<string> {
+            //    "提现金额为【储值】",
+            //    "提现到账为T+3请耐心等待审核",
+            //    "提现金额必须为100的整数倍",
+            //    "最大提现金额为10000金额/次",
+            //    "提现手续费为0.3%"
+            //};
+            return result;
+        }
+
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
+            return null;
+        }
+
         #region
 
         /// <summary>
@@ -31,12 +77,12 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
         /// </summary>
         [Display(Name = "单号")]
         [Field(ControlsType = ControlsType.Label, EditShow = true, SortOrder = 1)]
-        public string Serial {
-            get {
+        public string Serial
+        {
+            get
+            {
                 var searSerial = $"9{Id.ToString().PadLeft(9, '0')}";
-                if (Id.ToString().Length == 10) {
-                    searSerial = $"{Id.ToString()}";
-                }
+                if (Id.ToString().Length == 10) searSerial = $"{Id.ToString()}";
 
                 return searSerial;
             }
@@ -62,7 +108,7 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
 
         [Display(Name = "提现账户")]
         [Field(ControlsType = ControlsType.DropdownList, EditShow = false,
-            DataSourceType = typeof(Domain.CallBacks.MoneyTypeConfig),
+            DataSourceType = typeof(MoneyTypeConfig),
             SortOrder = 200)]
         public Guid? MoneyTypeId { get; set; } = Guid.Parse("e97ccd1e-1478-49bd-bfc7-e73a5d699000");
 
@@ -99,62 +145,19 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
         public string UserRemark { get; set; }
 
         /// <summary>
-        ///    时间
+        ///     时间
         /// </summary>
         [Display(Name = "时间")]
         [Field(ControlsType = ControlsType.Label, EditShow = false, SortOrder = 11)]
         public DateTime CreateTime { get; set; }
 
         /// <summary>
-        /// 审核信息
+        ///     审核信息
         /// </summary>
         [Display(Name = "审核信息")]
         [Field(ControlsType = ControlsType.Label, EditShow = true, SortOrder = 12)]
         public string ReviewRemark { get; set; }
 
         #endregion
-
-        public Alabo.UI.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
-            var withDraw = Resolve<IWithdrawService>().GetAdminWithDraw(id.ConvertToLong());
-            var form = new WithdrawResultwAutoForm();
-            if (withDraw == null) {
-                form = new WithdrawResultwAutoForm();
-            } else {
-                form = new WithdrawResultwAutoForm() {
-                    Status = withDraw.Status.GetDisplayName(),
-                    Amount = withDraw.Amount,
-                    Fee = withDraw.Fee,
-                    PaymentAmount = withDraw.Amount - withDraw.Fee,
-
-                    BankCardId = withDraw.BankCard?.Number,
-                    CreateTime = withDraw.CreateTime,
-                    //FailuredReason = withDraw.FailuredReason,
-                    Id = withDraw.Id,
-                    MoneyTypeId = withDraw.MoneyTypeConfig?.Id,
-
-                    //审核结果
-                    ReviewRemark = withDraw.FailuredReason.IsNullOrEmpty() ? withDraw.Remark : withDraw.FailuredReason,
-
-                    UserRemark = withDraw.UserRemark,
-                    UserId = withDraw.UserId
-                };
-                // withDraw.MapTo<WithdrawReviewAutoForm>();
-            }
-            var result = ToAutoForm(form);
-            result.AlertText = "【审核结果】";
-
-            //result.ButtomHelpText = new List<string> {
-            //    "提现金额为【储值】",
-            //    "提现到账为T+3请耐心等待审核",
-            //    "提现金额必须为100的整数倍",
-            //    "最大提现金额为10000金额/次",
-            //    "提现手续费为0.3%"
-            //};
-            return result;
-        }
-
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
-            return null;
-        }
     }
 }

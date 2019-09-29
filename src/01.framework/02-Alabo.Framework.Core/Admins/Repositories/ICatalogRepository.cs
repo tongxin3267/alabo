@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
-using Alabo.Domains.Repositories;
+﻿using Alabo.Domains.Repositories;
+using Alabo.Users.Entities;
+using System.Collections.Generic;
 
-namespace Alabo.App.Core.Admin.Domain.Repositories {
-
-    public interface ICatalogRepository : IRepository<Users.Entities.User, long> {
-
+namespace Alabo.Framework.Core.Admins.Repositories
+{
+    public interface ICatalogRepository : IRepository<User, long>
+    {
         /// <summary>
         ///     更新数据库
         /// </summary>

@@ -1,28 +1,68 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.Core.Enums.Enum;
+﻿using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.UI;
-using Alabo.UI.AutoTables;
+using Alabo.UI.Design.AutoTables;
 using Alabo.Users.Enum;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.User.ViewModels {
-
+namespace Alabo.Data.People.Users.ViewModels
+{
     /// <summary>
     ///     会员管理
     ///     管理员专用 其他界面不允许调用 否则会出异常
     /// </summary>
-    [ClassProperty(Name = "会员管理", Icon = "fa fa-puzzle-piece", Description = "管理系统所有会员", ListApi = "Api/UserAdmin/UserList",
+    [ClassProperty(Name = "会员管理", Icon = "fa fa-puzzle-piece", Description = "管理系统所有会员",
+        ListApi = "Api/UserAdmin/UserList",
         PageType = ViewPageType.List, PostApi = "Api/User/AddUser")]
     [BsonIgnoreExtraElements]
-    public class ViewAdminUser : UIBase, IAutoTable<ViewAdminUser>, IUserView {
+    public class ViewAdminUser : UIBase, IAutoTable<ViewAdminUser>, IUserView
+    {
+        public List<TableAction> Actions()
+        {
+            return new List<TableAction>
+            {
+                ToLinkAction("用户地址", "/Admin/UserAddress/List", TableActionType.ColumnAction),
+                ToLinkAction("编辑", "Edit", TableActionType.ColumnAction)
+                //ToLinkAction("资产", "Account",TableActionType.ColumnAction),
+                //ToLinkAction("删除", "Api/User/Delete",ActionLinkType.Delete,TableActionType.ColumnAction),
+            };
+
+            //return rsList;
+        }
+
+        public PageResult<ViewAdminUser> PageTable(object query, AutoBaseModel autoModel)
+        {
+            var model = Resolve<IUserService>().GetViewAdminUserPageList(query);
+            return ToPageResult(model);
+        }
+
+        /// <summary>
+        ///     获取s the avator.
+        /// </summary>
+        /// <param name="size">The size.</param>
+        public string GetAvator(int size = 48)
+        {
+            if (Avator.IsNullOrEmpty()) return $@"/wwwroot/static/images/avator/{Sex}_{size}.png";
+
+            return Avator;
+        }
+
+        /// <summary>
+        ///     获取s the name of the 会员.
+        /// </summary>
+        public string GetUserName()
+        {
+            var name = $@"{UserName}({Name})";
+            return name;
+        }
+
         #region
 
         /// <summary>
@@ -37,10 +77,11 @@ namespace Alabo.App.Core.User.ViewModels {
         /// </summary>
         [Display(Name = "用户名")]
         [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, PlaceHolder = "请输入用户名，一般与手机号相同",
-            IsShowAdvancedSerach = true, DataField = "UserId", GroupTabId = 1, IsMain = true, Width = "150", EditShow = true,
-            ListShow = true, SortOrder = 2//,
-                                          //Link = "/Admin/User/Edit?id=[[Id]]"
-            )]
+            IsShowAdvancedSerach = true, DataField = "UserId", GroupTabId = 1, IsMain = true, Width = "150",
+            EditShow = true,
+            ListShow = true, SortOrder = 2 //,
+                                           //Link = "/Admin/User/Edit?id=[[Id]]"
+        )]
         public string UserName { get; set; }
 
         /// <summary>
@@ -52,7 +93,7 @@ namespace Alabo.App.Core.User.ViewModels {
             EditShow = true,
             Link = "/Admin/User/Edit?id=[[Id]]",
             SortOrder = 3
-            )]
+        )]
         public string Name { get; set; }
 
         /// <summary>
@@ -69,7 +110,8 @@ namespace Alabo.App.Core.User.ViewModels {
         /// </summary>
         [Display(Name = "邮箱")]
         [HelpBlock("请输入邮箱")]
-        [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1, Width = "150", IsShowBaseSerach = true, EditShow = true,
+        [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1, Width = "150", IsShowBaseSerach = true,
+            EditShow = true,
             IsShowAdvancedSerach = true, ListShow = true, SortOrder = 5)]
         public string Email { get; set; }
 
@@ -94,7 +136,8 @@ namespace Alabo.App.Core.User.ViewModels {
         /// </summary>
         [Display(Name = "等级")]
         [Field(ControlsType = ControlsType.DropdownList, LabelColor = LabelColor.Info, IsShowAdvancedSerach = true,
-            DataSource = "Alabo.App.Core.User.Domain.Callbacks.UserGradeConfig", EditShow = false, GroupTabId = 1, Width = "150",
+            DataSource = "Alabo.App.Core.User.Domain.Callbacks.UserGradeConfig", EditShow = false, GroupTabId = 1,
+            Width = "150",
             ListShow = false, SortOrder = 5)]
         public Guid GradeId { get; set; }
 
@@ -103,7 +146,8 @@ namespace Alabo.App.Core.User.ViewModels {
         /// </summary>
         [Display(Name = "等级")]
         [HelpBlock("请输入等级")]
-        [Field(ControlsType = ControlsType.TextBox, LabelColor = LabelColor.Info, EditShow = false, GroupTabId = 1, Width = "150",
+        [Field(ControlsType = ControlsType.TextBox, LabelColor = LabelColor.Info, EditShow = false, GroupTabId = 1,
+            Width = "150",
             ListShow = true, SortOrder = 5)]
         public string GradeName { get; set; }
 
@@ -113,15 +157,16 @@ namespace Alabo.App.Core.User.ViewModels {
         [Display(Name = "实名?")]
         [HelpBlock("请确定实名")]
         [Field(ControlsType = ControlsType.DropdownList, GroupTabId = 1, Width = "150",
-            DataSource = "Alabo.Core.Enums.Enum.IdentityStatus", ListShow = true, EditShow = false, SortOrder = 8)]
+            DataSource = "Alabo.Framework.Core.Enums.Enum.IdentityStatus", ListShow = true, EditShow = false,
+            SortOrder = 8)]
         public IdentityStatus IdentityStatus { get; set; } = IdentityStatus.IsNoPost;
 
         /// <summary>
-        ///
         /// </summary>
         [Display(Name = "实名情况")]
         [HelpBlock("请确定实名")]
-        [Field(ControlsType = ControlsType.Label, GroupTabId = 1, Width = "150", ListShow = false, EditShow = false, SortOrder = 8)]
+        [Field(ControlsType = ControlsType.Label, GroupTabId = 1, Width = "150", ListShow = false, EditShow = false,
+            SortOrder = 8)]
         public string IdentityName { get; set; }
 
         /// <summary>
@@ -129,7 +174,8 @@ namespace Alabo.App.Core.User.ViewModels {
         /// </summary>
         [Display(Name = "性别")]
         [HelpBlock("选择您的性别")]
-        [Field(ControlsType = ControlsType.RadioButton, GroupTabId = 1, DataSource = "Alabo.Core.Enums.Enum.Sex",
+        [Field(ControlsType = ControlsType.RadioButton, GroupTabId = 1,
+            DataSource = "Alabo.Framework.Core.Enums.Enum.Sex",
             Width = "150", ListShow = true, SortOrder = 10)]
         public Sex Sex { get; set; } = Sex.Man;
 
@@ -157,7 +203,8 @@ namespace Alabo.App.Core.User.ViewModels {
         /// </summary>
         [Display(Name = "注册时间")]
         [HelpBlock("请输入注册时间")]
-        [Field(ControlsType = ControlsType.DateTimePicker, GroupTabId = 1, Width = "150", EditShow = false, ListShow = true, SortOrder = 1000)]
+        [Field(ControlsType = ControlsType.DateTimePicker, GroupTabId = 1, Width = "150", EditShow = false,
+            ListShow = true, SortOrder = 1000)]
         public DateTime CreateTime { get; set; } = DateTime.Now;
 
         /// <summary>
@@ -166,43 +213,6 @@ namespace Alabo.App.Core.User.ViewModels {
         public UserGradeConfig UserGradeConfig { get; set; }
 
         #endregion
-
-        public List<TableAction> Actions() {
-            return new List<TableAction>
-            {
-                ToLinkAction("用户地址", "/Admin/UserAddress/List",TableActionType.ColumnAction),
-                ToLinkAction("编辑", "Edit",TableActionType.ColumnAction),
-                //ToLinkAction("资产", "Account",TableActionType.ColumnAction),
-                //ToLinkAction("删除", "Api/User/Delete",ActionLinkType.Delete,TableActionType.ColumnAction),
-            };
-
-            //return rsList;
-        }
-
-        /// <summary>
-        ///     获取s the avator.
-        /// </summary>
-        /// <param name="size">The size.</param>
-        public string GetAvator(int size = 48) {
-            if (Avator.IsNullOrEmpty()) {
-                return $@"/wwwroot/static/images/avator/{Sex}_{size}.png";
-            }
-
-            return Avator;
-        }
-
-        /// <summary>
-        ///     获取s the name of the 会员.
-        /// </summary>
-        public string GetUserName() {
-            var name = $@"{UserName}({Name})";
-            return name;
-        }
-
-        public PageResult<ViewAdminUser> PageTable(object query, AutoBaseModel autoModel) {
-            var model = Resolve<IUserService>().GetViewAdminUserPageList(query);
-            return ToPageResult(model);
-        }
 
         /// <summary>
         ///     操作链接
@@ -224,9 +234,10 @@ namespace Alabo.App.Core.User.ViewModels {
     }
 
     /// <summary>
-    /// viewuser的约束接口
+    ///     viewuser的约束接口
     /// </summary>
-    public interface IUserView {
+    public interface IUserView
+    {
         #region
 
         /// <summary>
@@ -281,7 +292,6 @@ namespace Alabo.App.Core.User.ViewModels {
         IdentityStatus IdentityStatus { get; set; }
 
         /// <summary>
-        ///
         /// </summary>
         string IdentityName { get; set; }
 

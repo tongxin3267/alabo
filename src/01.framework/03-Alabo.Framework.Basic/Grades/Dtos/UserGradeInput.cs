@@ -1,13 +1,12 @@
-﻿using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.Domains.Entities;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Framework.Basic.Grades.Domain.Enums;
 using Alabo.Validations;
 
-namespace Alabo.App.Core.User.Domain.Dtos {
-
-    public class UserGradeInput {
-
+namespace Alabo.Framework.Basic.Grades.Dtos
+{
+    public class UserGradeInput
+    {
         /// <summary>
         ///     用户Id不能为空
         /// </summary>

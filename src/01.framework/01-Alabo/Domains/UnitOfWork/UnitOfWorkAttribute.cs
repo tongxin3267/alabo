@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using Alabo.Aspects.Base;
+using Alabo.Datas.UnitOfWorks;
 using AspectCore.DynamicProxy;
 using AspectCore.Extensions.AspectScope;
 using Microsoft.Extensions.DependencyInjection;
-using Alabo.Aspects.Base;
-using Alabo.Datas.UnitOfWorks;
+using System.Threading.Tasks;
 
 namespace Alabo.Domains.UnitOfWork
 {
@@ -24,14 +24,10 @@ namespace Alabo.Domains.UnitOfWork
         {
             await next(context);
             var manager = context.ServiceProvider.GetService<IUnitOfWorkManager>();
-            if (manager == null) {
-                return;
-            }
+            if (manager == null) return;
 
             await manager.CommitAsync();
-            if (context.Implementation is ICommitAfter service) {
-                service.CommitAfter();
-            }
+            if (context.Implementation is ICommitAfter service) service.CommitAfter();
         }
     }
 }

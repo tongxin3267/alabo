@@ -1,10 +1,8 @@
 using System;
-using Xunit;
-using Alabo.App.Core.UserType.Domain.Services;
-using Alabo.Extensions;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
+using Xunit;
 
 namespace Alabo.Test.Core.UserType.Domain.Services
 {
@@ -101,7 +99,7 @@ namespace Alabo.Test.Core.UserType.Domain.Services
         public void GetSingle_Int64_UserTypeEnum_test()
         {
             //var userId = 0;
-            //var userTypeEnum = (Alabo.Core.Enums.Enum.UserTypeEnum)0;
+            //var userTypeEnum = (Alabo.Framework.Core.Enums.Enum.UserTypeEnum)0;
             //var result = Service<IUserTypeService>().GetSingle(userId, userTypeEnum);
             //Assert.NotNull(result);
         }

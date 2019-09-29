@@ -1,25 +1,23 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
-using Alabo.Core.Enums.Enum;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Helpers;
 using Alabo.Reflections;
 using Alabo.UI.Enum;
 using Alabo.Web.Mvc.Attributes;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Core.Finance.Domain.CallBacks {
-
+namespace Alabo.Framework.Basic.AutoConfigs.Domain.Configs
+{
     /// <summary>
     ///     货币类型配置
     /// </summary>
@@ -28,8 +26,8 @@ namespace Alabo.App.Core.Finance.Domain.CallBacks {
         PageType = ViewPageType.List, SortOrder = 20,
         Validator = "select 1 from Asset_Account where MoneyTypeId ='{0}'", ValidateMessage = "当前有账户正在使用当前货币",
         SideBarType = SideBarType.ControlSideBar)]
-    public class MoneyTypeConfig : AutoConfigBase, IAutoConfig {
-
+    public class MoneyTypeConfig : AutoConfigBase, IAutoConfig
+    {
         /// <summary>
         ///     人民币
         /// </summary>
@@ -56,50 +54,50 @@ namespace Alabo.App.Core.Finance.Domain.CallBacks {
         public static readonly Guid ShopAmount = Guid.Parse("E97CCD1E-1478-49BD-BFC7-E73A5D699756");
 
         /// <summary>
-        /// 优惠券
+        ///     优惠券
         /// </summary>
         public static readonly Guid Preferential = Guid.Parse("e97ccd1e-1478-49bd-bfc7-e73a5d699009");
 
         /// <summary>
         ///     设置默认值
         /// </summary>
-        public void SetDefault() {
+        public void SetDefault()
+        {
             var list = Ioc.Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
-            if (list == null || list.Count == 0) {
+            if (list == null || list.Count == 0)
+            {
                 var configs = new List<MoneyTypeConfig>();
                 var config = new MoneyTypeConfig();
-                foreach (Currency item in Enum.GetValues(typeof(Currency))) {
-                    config = new MoneyTypeConfig {
+                foreach (Currency item in Enum.GetValues(typeof(Currency)))
+                {
+                    config = new MoneyTypeConfig
+                    {
                         Currency = item,
                         Unit = item.GetFieldAttribute().Mark
                     };
                     var color = item.GetFieldAttribute().Selection;
-                    if (!color.IsNullOrEmpty()) {
-                        config.BackGroudColor = (ColorLibrary)Enum.Parse(typeof(ColorLibrary), color);
-                    }
+                    if (!color.IsNullOrEmpty())
+                        config.BackGroudColor = (ColorLibrary) Enum.Parse(typeof(ColorLibrary), color);
 
-                    if (item.GetFieldAttribute().SortOrder > 0) {
-                        SortOrder = item.GetFieldAttribute().SortOrder;
-                    }
+                    if (item.GetFieldAttribute().SortOrder > 0) SortOrder = item.GetFieldAttribute().SortOrder;
 
-                    if (config.Currency == Currency.Custom) {
+                    if (config.Currency == Currency.Custom)
                         config.Id = Guid.NewGuid();
-                    } else {
+                    else
                         config.Id = item.GetFieldAttribute().GuidId.ToGuid();
-                    }
 
                     config.Name = item.GetDisplayName();
-                    if (item.IsDefault()) {
+                    if (item.IsDefault())
                         config.Status = Status.Normal;
-                    } else {
+                    else
                         config.Status = Status.Freeze;
-                    }
 
                     configs.Add(config);
                 }
 
                 var typeclassProperty = config.GetType().GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
-                var autoConfig = new AutoConfig {
+                var autoConfig = new AutoConfig
+                {
                     Type = config.GetType().FullName,
                     //// AppName = typeclassProperty.AppName,
                     LastUpdated = DateTime.Now,
@@ -115,7 +113,7 @@ namespace Alabo.App.Core.Finance.Domain.CallBacks {
         ///     货币类型
         /// </summary>
         [Field(ControlsType = ControlsType.DropdownList, SortOrder = 1, EnumUniqu = true, ListShow = true,
-            DataSource = "Alabo.Core.Enums.Enum.Currency")]
+            DataSource = "Alabo.Framework.Core.Enums.Enum.Currency")]
         [Display(Name = "货币类型")]
         [HelpBlock("除自定义货币以外，一种货币类型只能添加一次。如需添加非系统指定货币，可选择自定义类型。常见货币类型：人民币，积分、卡券、红包、虚拟币、授信、美元等")]
         public Currency Currency { get; set; }
@@ -123,7 +121,8 @@ namespace Alabo.App.Core.Finance.Domain.CallBacks {
         /// <summary>
         ///     货币名称
         /// </summary>
-        [Field(ControlsType = ControlsType.TextBox, SortOrder = 0, IsMain = true, ListShow = true, Width = "110", IsShowBaseSerach = true, IsShowAdvancedSerach = true)]
+        [Field(ControlsType = ControlsType.TextBox, SortOrder = 0, IsMain = true, ListShow = true, Width = "110",
+            IsShowBaseSerach = true, IsShowAdvancedSerach = true)]
         [Required]
         [Display(Name = "货币名称")]
         [Main]
@@ -154,7 +153,7 @@ namespace Alabo.App.Core.Finance.Domain.CallBacks {
         ///     背景颜色
         /// </summary>
         [Field(ControlsType = ControlsType.DropdownList, SortOrder = 3, ListShow = true,
-            DataSource = "Alabo.Core.UI.Enum.ColorLibrary", DisplayMode = DisplayMode.Text)]
+            DataSource = "Alabo.Framework.Core.UI.Enum.ColorLibrary", DisplayMode = DisplayMode.Text)]
         [Display(Name = "背景颜色")]
         [HelpBlock("目前不是所有的下拉框的颜色都支持，请认真验证")]
         public ColorLibrary BackGroudColor { get; set; } = ColorLibrary.Blue;

@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using Alabo.Domains.Entities.Core;
+﻿using Alabo.Domains.Entities.Core;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.Stores.Random
 {

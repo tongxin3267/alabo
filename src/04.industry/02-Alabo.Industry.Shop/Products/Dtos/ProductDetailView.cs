@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Alabo.Industry.Shop.Products.Domain.Entities;
 
-namespace Alabo.App.Shop.Product.Domain.Dtos
+namespace Alabo.Industry.Shop.Products.Dtos
 {
     /// <summary>
-    /// 商品详情ViewModel
+    ///     商品详情ViewModel
     /// </summary>
-    public class ProductDetailView : Entities.Product
+    public class ProductDetailView : Product
     {
         /// <summary>
-        /// 是否显示价格
+        ///     是否显示价格
         /// </summary>
         public bool IsFrontShowPrice { get; set; }
 
         /// <summary>
-        /// 价格替代文本
+        ///     价格替代文本
         /// </summary>
         public string PriceAlterText { get; set; }
     }

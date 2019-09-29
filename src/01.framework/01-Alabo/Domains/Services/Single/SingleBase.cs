@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq.Expressions;
-using Alabo.Datas.Stores;
+﻿using Alabo.Datas.Stores;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Domains.Services.Add;
 using Alabo.Linq;
 using Alabo.Mapping;
+using System;
+using System.Linq.Expressions;
 
 namespace Alabo.Domains.Services.Single
 {
@@ -49,28 +49,24 @@ namespace Alabo.Domains.Services.Single
         public TEntity GetSingle(Expression<Func<TEntity, bool>> predicate)
         {
             var find = Store.GetSingle(predicate);
-            if (find != null) {
-                find = JsonMapping.ConvertToExtension(find);
-            }
+            if (find != null) find = JsonMapping.ConvertToExtension(find);
 
             return find;
         }
 
         public TEntity Next(TEntity model)
         {
-            var dynamic = (dynamic) model;
+            var dynamic = (dynamic)model;
             var dynamicWhere = LinqHelper.GetExpression<TEntity, bool>($"entity.Id > {dynamic.Id}", "entity");
             var next = GetSingle(dynamicWhere);
-            if (next == null) {
-                next = model;
-            }
+            if (next == null) next = model;
 
             return next;
         }
 
         public TEntity Prex(TEntity model)
         {
-            var dynamic = (dynamic) model;
+            var dynamic = (dynamic)model;
 
             var query = new ExpressionQuery<TEntity>();
             var dynamicWhere = LinqHelper.GetExpression<TEntity, bool>($"entity.Id < {dynamic.Id}", "entity");
@@ -79,9 +75,7 @@ namespace Alabo.Domains.Services.Single
             var orderExpression = LinqHelper.GetExpression<TEntity, long>("entity.Id", "entity");
             query.OrderByDescending(orderExpression);
             var prex = GetSingle(query);
-            if (prex == null) {
-                prex = model;
-            }
+            if (prex == null) prex = model;
 
             return prex;
         }

@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.Domains.Query.Dto;
-
-namespace Alabo.App.Shop.Order.Domain.Dtos
+﻿namespace Alabo.Industry.Shop.Orders.Dtos
 {
     /// <summary>
-    /// 订单
+    ///     订单
     /// </summary>
     public class OrderInput
     {
         /// <summary>
-        /// ID
-        /// 
+        ///     ID
         /// </summary>
         public long OrderID { get; set; }
     }

@@ -1,24 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Alabo.Datas.Sql.Queries;
+﻿using Alabo.Datas.Sql.Queries;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Repositories.EFCore.Context;
 using Alabo.Extensions;
 using Alabo.Helpers;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Data.Common;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading;
+using System.Threading.Tasks;
 
-namespace Alabo.Datas.Stores.Add.EfCore {
-
+namespace Alabo.Datas.Stores.Add.EfCore
+{
     public abstract class EfCoreStoreBase<TEntity, TKey> : StoreBase
-        where TEntity : class, IKey<TKey>, IVersion, IEntity {
-
+        where TEntity : class, IKey<TKey>, IVersion, IEntity
+    {
         /// <summary>
         ///     工作单元
         /// </summary>
@@ -40,23 +40,26 @@ namespace Alabo.Datas.Stores.Add.EfCore {
         ///     初始化查询存储器
         /// </summary>
         /// <param name="unitOfWork">工作单元</param>
-        protected EfCoreStoreBase(IUnitOfWork unitOfWork) {
+        protected EfCoreStoreBase(IUnitOfWork unitOfWork)
+        {
             _unitOfWorkBase = (UnitOfWorkBase)unitOfWork;
             traceId = _unitOfWorkBase.TraceId;
         }
 
-        public IRepositoryContext RepositoryContext {
-            get {
+        public IRepositoryContext RepositoryContext
+        {
+            get
+            {
                 var context = new EfCoreRepositoryContext(_unitOfWorkBase);
                 return context;
             }
         }
 
-        public DbConnection DbConnection {
-            get {
-                if (dbContext == null) {
-                    dbContext = _unitOfWorkBase.Database.GetDbConnection();
-                }
+        public DbConnection DbConnection
+        {
+            get
+            {
+                if (dbContext == null) dbContext = _unitOfWorkBase.Database.GetDbConnection();
 
                 return dbContext;
             }
@@ -80,7 +83,8 @@ namespace Alabo.Datas.Stores.Add.EfCore {
         /// <summary>
         ///     获取未跟踪查询对象
         /// </summary>
-        public IQueryable<TEntity> FindAsNoTracking() {
+        public IQueryable<TEntity> FindAsNoTracking()
+        {
             return Set.AsNoTracking();
         }
 
@@ -88,11 +92,10 @@ namespace Alabo.Datas.Stores.Add.EfCore {
         ///     获取查询对象
         /// </summary>
         /// <param name="predicate">条件</param>
-        public IQueryable<TEntity> ToQueryable(Expression<Func<TEntity, bool>> predicate = null) {
+        public IQueryable<TEntity> ToQueryable(Expression<Func<TEntity, bool>> predicate = null)
+        {
             var work = HttpWeb.Tenant;
-            if (predicate == null) {
-                return Set;
-            }
+            if (predicate == null) return Set;
 
             return Set.Where(predicate);
         }
@@ -101,10 +104,9 @@ namespace Alabo.Datas.Stores.Add.EfCore {
         ///     获取查询对象
         /// </summary>
         /// <param name="predicate">条件</param>
-        public IQueryable<TEntity> ToQueryableAsNoTracking(Expression<Func<TEntity, bool>> predicate = null) {
-            if (predicate == null) {
-                return Set.AsNoTracking();
-            }
+        public IQueryable<TEntity> ToQueryableAsNoTracking(Expression<Func<TEntity, bool>> predicate = null)
+        {
+            if (predicate == null) return Set.AsNoTracking();
 
             return Set.AsNoTracking().Where(predicate);
         }
@@ -113,14 +115,11 @@ namespace Alabo.Datas.Stores.Add.EfCore {
         ///     查找实体
         /// </summary>
         /// <param name="id">标识</param>
-        public TEntity Find(object id) {
-            if (id.SafeString().IsEmpty()) {
-                return null;
-            }
+        public TEntity Find(object id)
+        {
+            if (id.SafeString().IsEmpty()) return null;
 
-            if (id.ToString() == "0") {
-                return null;
-            }
+            if (id.ToString() == "0") return null;
 
             return Set.Find(id);
         }
@@ -131,10 +130,9 @@ namespace Alabo.Datas.Stores.Add.EfCore {
         /// <param name="id">标识</param>
         /// <param name="cancellationToken">取消令牌</param>
         public async Task<TEntity> FindAsync(object id,
-            CancellationToken cancellationToken = default) {
-            if (id.SafeString().IsEmpty()) {
-                return null;
-            }
+            CancellationToken cancellationToken = default)
+        {
+            if (id.SafeString().IsEmpty()) return null;
 
             return await Set.FindAsync(new[] { id }, cancellationToken);
         }
@@ -143,7 +141,8 @@ namespace Alabo.Datas.Stores.Add.EfCore {
         ///     查找实体列表
         /// </summary>
         /// <param name="ids">标识列表</param>
-        public List<TEntity> FindByIds(params TKey[] ids) {
+        public List<TEntity> FindByIds(params TKey[] ids)
+        {
             return FindByIds((IEnumerable<TKey>)ids);
         }
 
@@ -151,10 +150,9 @@ namespace Alabo.Datas.Stores.Add.EfCore {
         ///     查找实体列表
         /// </summary>
         /// <param name="ids">标识列表</param>
-        public List<TEntity> FindByIds(IEnumerable<TKey> ids) {
-            if (ids == null) {
-                return null;
-            }
+        public List<TEntity> FindByIds(IEnumerable<TKey> ids)
+        {
+            if (ids == null) return null;
 
             return ToQueryable(t => ids.Contains(t.Id)).ToList();
         }
@@ -164,7 +162,8 @@ namespace Alabo.Datas.Stores.Add.EfCore {
         /// </summary>
         /// <param name="newEntity">新实体</param>
         /// <param name="oldEntity">旧实体</param>
-        protected void ValidateVersion(TEntity newEntity, TEntity oldEntity) {
+        protected void ValidateVersion(TEntity newEntity, TEntity oldEntity)
+        {
             //if (newEntity.Version == null)
             //  //  throw new ConcurrencyException();
             //if (newEntity.Version.Length != oldEntity.Version.Length)
@@ -180,7 +179,8 @@ namespace Alabo.Datas.Stores.Add.EfCore {
         /// </summary>
         /// <param name="newEntities">新实体集合</param>
         /// <param name="oldEntities">旧实体集合</param>
-        protected void ValidateVersion(List<TEntity> newEntities, List<TEntity> oldEntities) {
+        protected void ValidateVersion(List<TEntity> newEntities, List<TEntity> oldEntities)
+        {
             //if (oldEntities == null)
             //    throw new ArgumentNullException(nameof(oldEntities));
             //if (newEntities.Count != oldEntities.Count)

@@ -1,15 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
 using Alabo.Validations;
 
-namespace Alabo.App.Core.Common.Domain.Dtos {
-
+namespace Alabo.Framework.Basic.Storages.Dtos
+{
     /// <summary>
     ///     文件上传
     /// </summary>
-    public class UploadApiInput : ApiInputDto {
-
+    public class UploadApiInput : ApiInputDto
+    {
         /// <summary>
         ///     文件保存路径
         /// </summary>

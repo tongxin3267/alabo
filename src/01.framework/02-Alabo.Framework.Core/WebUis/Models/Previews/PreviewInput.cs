@@ -1,13 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
-using Alabo.Validations;
+﻿using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.Themes.DiyModels.Previews {
-
+namespace Alabo.Framework.Core.WebUis.Models.Previews
+{
     [ClassProperty(Name = "链接")]
-    public class PreviewInput {
-
+    public class PreviewInput
+    {
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         public string Id { get; set; }
 

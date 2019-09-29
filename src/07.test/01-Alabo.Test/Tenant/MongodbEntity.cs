@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
-using Alabo.Domains.Base.Entities;
-using Alabo.Domains.Base.Services;
+﻿using Alabo.Logging.Logs.Entities;
+using Alabo.Logging.Logs.Services;
 using Alabo.Test.Base.Core.Model;
+using Xunit;
 
-namespace Alabo.Test.Tenant {
-
-    public class MongodbEntity : CoreTest {
-
+namespace Alabo.Test.Tenant
+{
+    public class MongodbEntity : CoreTest
+    {
         [Fact]
-        public void Log_Test() {
-            Logs logs = new Logs {
+        public void Log_Test()
+        {
+            var logs = new Logs
+            {
                 Content = "测试"
             };
             Resolve<ILogsService>().Add(logs);

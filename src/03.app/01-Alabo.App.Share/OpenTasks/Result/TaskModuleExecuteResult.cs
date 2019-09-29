@@ -1,23 +1,20 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using Alabo.App.Core.Tasks;
-using Alabo.App.Core.Tasks.Extensions;
-using Alabo.App.Core.Tasks.ResultModel;
+﻿using System;
+using Alabo.App.Share.TaskExecutes;
+using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Data.Things.Orders.ResultModel;
+using Alabo.Framework.Tasks.Queues.Models;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Alabo.App.Open.Tasks.Result {
-
-    public class TaskModuleExecuteResult : ITaskResult {
-        public TaskContext Context { get; private set; }
-
-        public Guid ModuleId { get; set; }
-
-        public TaskParameter Parameter { get; private set; } = new TaskParameter();
-
+namespace Alabo.App.Share.OpenTasks.Result
+{
+    public class TaskModuleExecuteResult : ITaskResult
+    {
         private readonly ITaskActuator _taskActuator;
 
-        private TaskManager _taskManager;
+        private readonly TaskManager _taskManager;
 
-        public TaskModuleExecuteResult(TaskContext context) {
+        public TaskModuleExecuteResult(TaskContext context)
+        {
             Context = context;
             _taskActuator = Context
                 .HttpContextAccessor
@@ -31,27 +28,29 @@ namespace Alabo.App.Open.Tasks.Result {
                 .GetService<TaskManager>();
         }
 
-        public ExecuteResult Update() {
-            try {
-                if (_taskActuator == null) {
-                    return ExecuteResult.Cancel("task actuator is null.");
-                }
+        public Guid ModuleId { get; set; }
 
-                if (_taskManager == null) {
-                    return ExecuteResult.Cancel("task manager is null.");
-                }
+        public TaskParameter Parameter { get; } = new TaskParameter();
+        public TaskContext Context { get; }
 
-                if (ModuleId == Guid.Empty) {
-                    return ExecuteResult.Cancel("module is is empty, return.");
-                }
+        public ExecuteResult Update()
+        {
+            try
+            {
+                if (_taskActuator == null) return ExecuteResult.Cancel("task actuator is null.");
 
-                if (!_taskManager.ContainsModuleId(ModuleId)) {
+                if (_taskManager == null) return ExecuteResult.Cancel("task manager is null.");
+
+                if (ModuleId == Guid.Empty) return ExecuteResult.Cancel("module is is empty, return.");
+
+                if (!_taskManager.ContainsModuleId(ModuleId))
                     return ExecuteResult.Fail($"module with id {ModuleId} not found.");
-                }
                 // 注释可能出现出错
                 // _taskActuator.ExecuteTaskAndUpdateResults(ModuleId, Parameter);
                 return ExecuteResult.Success();
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 return ExecuteResult.Error(e);
             }
         }

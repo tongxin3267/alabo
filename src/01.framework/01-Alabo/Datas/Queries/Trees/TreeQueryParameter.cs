@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Alabo.Extensions;
+using Alabo.Reflections;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.Extensions;
-using Alabo.Reflections;
 
 namespace Alabo.Datas.Queries.Trees
 {
@@ -60,9 +60,7 @@ namespace Alabo.Datas.Queries.Trees
         /// </summary>
         protected virtual bool IsSearchProperty(string name, object value)
         {
-            if (value.SafeString().IsEmpty()) {
-                return false;
-            }
+            if (value.SafeString().IsEmpty()) return false;
 
             switch (name.SafeString().ToLower())
             {

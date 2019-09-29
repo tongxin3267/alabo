@@ -1,21 +1,28 @@
-﻿using System;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
-using Alabo.UI.AutoLists;
+using Alabo.UI.Design.AutoForms;
+using Alabo.UI.Design.AutoLists;
+using System;
 
-namespace Alabo.App.Core.Finance.UI.AutoForm {
-
+namespace Alabo.App.Asset.Accounts.UI
+{
     /// <summary>
-    /// 资产
+    ///     资产
     /// </summary>
-    public class AssetAutoForm : UIBase, IAutoForm, IAutoList {
-
-        public Alabo.UI.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
+    public class AssetAutoForm : UIBase, IAutoForm, IAutoList
+    {
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
             throw new NotImplementedException();
         }
 
-        public PageResult<AutoListItem> PageList(object query, AutoBaseModel autoModel) {
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public PageResult<AutoListItem> PageList(object query, AutoBaseModel autoModel)
+        {
             ////初始化账户
             //Resolve<IAccountService>().InitSingleUserAccount(autoModel.BasicUser.Id);
             //var montypeList = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
@@ -35,11 +42,8 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
             return null;
         }
 
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
-            throw new NotImplementedException();
-        }
-
-        public Type SearchType() {
+        public Type SearchType()
+        {
             throw new NotImplementedException();
         }
     }

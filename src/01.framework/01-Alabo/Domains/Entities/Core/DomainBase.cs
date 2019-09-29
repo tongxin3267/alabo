@@ -1,30 +1,30 @@
-﻿using System;
+﻿using Alabo.Domains.EntityHistory;
+using Alabo.Extensions;
+using Alabo.Linq;
+using Alabo.Reflections;
+using Alabo.Validations;
+using Alabo.Web.Mvc.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
-using Alabo.Domains.EntityHistory;
-using Alabo.Extensions;
-using Alabo.Linq;
-using Alabo.Reflections;
-using Alabo.UI;
-using Alabo.Validations;
-using Alabo.Web.Mvc.ViewModel;
 using Convert = Alabo.Helpers.Convert;
 
-namespace Alabo.Domains.Entities.Core {
-
+namespace Alabo.Domains.Entities.Core
+{
     /// <summary>
     ///     领域层顶级基类
     /// </summary>
-    public abstract class DomainBase<T> : BaseViewModel, IDomainObject, ICompareChange<T> where T : IDomainObject {
-
+    public abstract class DomainBase<T> : BaseViewModel, IDomainObject, ICompareChange<T> where T : IDomainObject
+    {
         #region 构造方法
 
         /// <summary>
         ///     初始化领域层顶级基类
         /// </summary>
-        protected DomainBase() {
+        protected DomainBase()
+        {
             _rules = new List<IValidationRule>();
             _handler = new ThrowHandler();
         }
@@ -37,10 +37,9 @@ namespace Alabo.Domains.Entities.Core {
         ///     设置验证处理器
         /// </summary>
         /// <param name="handler">验证处理器</param>
-        public void SetValidationHandler(IValidationHandler handler) {
-            if (handler == null) {
-                return;
-            }
+        public void SetValidationHandler(IValidationHandler handler)
+        {
+            if (handler == null) return;
 
             _handler = handler;
         }
@@ -53,14 +52,11 @@ namespace Alabo.Domains.Entities.Core {
         ///     添加验证规则列表
         /// </summary>
         /// <param name="rules">验证规则列表</param>
-        public void AddValidationRules(IEnumerable<IValidationRule> rules) {
-            if (rules == null) {
-                return;
-            }
+        public void AddValidationRules(IEnumerable<IValidationRule> rules)
+        {
+            if (rules == null) return;
 
-            foreach (var rule in rules) {
-                AddValidationRule(rule);
-            }
+            foreach (var rule in rules) AddValidationRule(rule);
         }
 
         #endregion AddValidationRules(添加验证规则列表)
@@ -71,10 +67,9 @@ namespace Alabo.Domains.Entities.Core {
         ///     添加验证规则
         /// </summary>
         /// <param name="rule">验证规则</param>
-        public void AddValidationRule(IValidationRule rule) {
-            if (rule == null) {
-                return;
-            }
+        public void AddValidationRule(IValidationRule rule)
+        {
+            if (rule == null) return;
 
             _rules.Add(rule);
         }
@@ -86,7 +81,8 @@ namespace Alabo.Domains.Entities.Core {
         /// <summary>
         ///     输出对象状态
         /// </summary>
-        public override string ToString() {
+        public override string ToString()
+        {
             _description = new StringBuilder();
             AddDescriptions();
             return _description.ToString().TrimEnd().TrimEnd(',');
@@ -123,7 +119,8 @@ namespace Alabo.Domains.Entities.Core {
         /// <summary>
         ///     验证
         /// </summary>
-        public virtual ValidationResultCollection Validate() {
+        public virtual ValidationResultCollection Validate()
+        {
             var result = GetValidationResults();
             HandleValidationResults(result);
             return result;
@@ -132,12 +129,11 @@ namespace Alabo.Domains.Entities.Core {
         /// <summary>
         ///     获取验证结果
         /// </summary>
-        private ValidationResultCollection GetValidationResults() {
+        private ValidationResultCollection GetValidationResults()
+        {
             var result = DataAnnotationValidation.Validate(this);
             Validate(result);
-            foreach (var rule in _rules) {
-                result.Add(rule.Validate());
-            }
+            foreach (var rule in _rules) result.Add(rule.Validate());
 
             return result;
         }
@@ -146,16 +142,16 @@ namespace Alabo.Domains.Entities.Core {
         ///     验证并添加到验证结果集合
         /// </summary>
         /// <param name="results">验证结果集合</param>
-        protected virtual void Validate(ValidationResultCollection results) {
+        protected virtual void Validate(ValidationResultCollection results)
+        {
         }
 
         /// <summary>
         ///     处理验证结果
         /// </summary>
-        private void HandleValidationResults(ValidationResultCollection results) {
-            if (results.IsValid) {
-                return;
-            }
+        private void HandleValidationResults(ValidationResultCollection results)
+        {
+            if (results.IsValid) return;
 
             _handler.Handle(results);
         }
@@ -168,11 +164,10 @@ namespace Alabo.Domains.Entities.Core {
         ///     获取变更属性
         /// </summary>
         /// <param name="newEntity">新对象</param>
-        public ChangeValueCollection GetChanges(T newEntity) {
+        public ChangeValueCollection GetChanges(T newEntity)
+        {
             _changeValues = new ChangeValueCollection();
-            if (Equals(newEntity, null)) {
-                return _changeValues;
-            }
+            if (Equals(newEntity, null)) return _changeValues;
 
             AddChanges(newEntity);
             return _changeValues;
@@ -182,7 +177,8 @@ namespace Alabo.Domains.Entities.Core {
         ///     添加变更列表
         /// </summary>
         /// <param name="newEntity">新对象</param>
-        protected virtual void AddChanges(T newEntity) {
+        protected virtual void AddChanges(T newEntity)
+        {
         }
 
         /// <summary>
@@ -190,7 +186,8 @@ namespace Alabo.Domains.Entities.Core {
         /// </summary>
         /// <param name="expression">属性表达式,范例：t => t.Name</param>
         /// <param name="newValue">新值,范例：newEntity.Name</param>
-        protected void AddChange<TProperty, TValue>(Expression<Func<T, TProperty>> expression, TValue newValue) {
+        protected void AddChange<TProperty, TValue>(Expression<Func<T, TProperty>> expression, TValue newValue)
+        {
             var member = Lambda.GetMemberExpression(expression);
             var name = Lambda.GetMemberName(member);
             var description = Reflection.GetDisplayNameOrDescription(member.Member);
@@ -205,16 +202,13 @@ namespace Alabo.Domains.Entities.Core {
         /// <param name="description">描述</param>
         /// <param name="oldValue">旧值,范例：this.Name</param>
         /// <param name="newValue">新值,范例：newEntity.Name</param>
-        protected void AddChange<TValue>(string propertyName, string description, TValue oldValue, TValue newValue) {
-            if (Equals(oldValue, newValue)) {
-                return;
-            }
+        protected void AddChange<TValue>(string propertyName, string description, TValue oldValue, TValue newValue)
+        {
+            if (Equals(oldValue, newValue)) return;
 
             var oldValueString = oldValue.SafeString().ToLower().Trim();
             var newValueString = newValue.SafeString().ToLower().Trim();
-            if (oldValueString == newValueString) {
-                return;
-            }
+            if (oldValueString == newValueString) return;
 
             _changeValues.Add(propertyName, description, oldValueString, newValueString);
         }
@@ -225,14 +219,11 @@ namespace Alabo.Domains.Entities.Core {
         /// <param name="oldObject">旧对象</param>
         /// <param name="newObject">新对象</param>
         protected void AddChange<TDomainObject>(ICompareChange<TDomainObject> oldObject, TDomainObject newObject)
-            where TDomainObject : IDomainObject {
-            if (Equals(oldObject, null)) {
-                return;
-            }
+            where TDomainObject : IDomainObject
+        {
+            if (Equals(oldObject, null)) return;
 
-            if (Equals(newObject, null)) {
-                return;
-            }
+            if (Equals(newObject, null)) return;
 
             _changeValues.AddRange(oldObject.GetChanges(newObject));
         }
@@ -243,21 +234,17 @@ namespace Alabo.Domains.Entities.Core {
         /// <param name="oldObjects">旧对象列表</param>
         /// <param name="newObjects">新对象列表</param>
         protected void AddChange<TDomainObject>(IEnumerable<ICompareChange<TDomainObject>> oldObjects,
-            IEnumerable<TDomainObject> newObjects) where TDomainObject : IDomainObject {
-            if (Equals(oldObjects, null)) {
-                return;
-            }
+            IEnumerable<TDomainObject> newObjects) where TDomainObject : IDomainObject
+        {
+            if (Equals(oldObjects, null)) return;
 
-            if (Equals(newObjects, null)) {
-                return;
-            }
+            if (Equals(newObjects, null)) return;
 
             var oldList = oldObjects.ToList();
             var newList = newObjects.ToList();
-            for (var i = 0; i < oldList.Count; i++) {
-                if (newList.Count <= i) {
-                    return;
-                }
+            for (var i = 0; i < oldList.Count; i++)
+            {
+                if (newList.Count <= i) return;
 
                 AddChange(oldList[i], newList[i]);
             }
@@ -270,16 +257,16 @@ namespace Alabo.Domains.Entities.Core {
         /// <summary>
         ///     添加描述
         /// </summary>
-        protected virtual void AddDescriptions() {
+        protected virtual void AddDescriptions()
+        {
         }
 
         /// <summary>
         ///     添加描述
         /// </summary>
-        protected void AddDescription(string description) {
-            if (string.IsNullOrWhiteSpace(description)) {
-                return;
-            }
+        protected void AddDescription(string description)
+        {
+            if (string.IsNullOrWhiteSpace(description)) return;
 
             _description.Append(description);
         }
@@ -287,10 +274,9 @@ namespace Alabo.Domains.Entities.Core {
         /// <summary>
         ///     添加描述
         /// </summary>
-        protected void AddDescription<TValue>(string name, TValue value) {
-            if (string.IsNullOrWhiteSpace(value.SafeString())) {
-                return;
-            }
+        protected void AddDescription<TValue>(string name, TValue value)
+        {
+            if (string.IsNullOrWhiteSpace(value.SafeString())) return;
 
             _description.AppendFormat("{0}:{1},", name, value);
         }
@@ -299,13 +285,12 @@ namespace Alabo.Domains.Entities.Core {
         ///     添加描述
         /// </summary>
         /// <param name="expression">属性表达式,范例：t => t.Name</param>
-        protected void AddDescription<TProperty>(Expression<Func<T, TProperty>> expression) {
+        protected void AddDescription<TProperty>(Expression<Func<T, TProperty>> expression)
+        {
             var member = Lambda.GetMember(expression);
             var description = Reflection.GetDisplayNameOrDescription(member);
             var value = member.GetPropertyValue(this);
-            if (Reflection.IsBool(member)) {
-                value = Convert.ToBool(value).Description();
-            }
+            if (Reflection.IsBool(member)) value = Convert.ToBool(value).Description();
 
             AddDescription(description, value);
         }

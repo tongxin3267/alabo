@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Alabo.Datas.Ef.Internal;
+﻿using Alabo.Datas.Ef.Internal;
 using Alabo.Datas.Ef.Map;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Reflections;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Collections.Generic;
 
 namespace Alabo.Datas.Ef.MySql
 {

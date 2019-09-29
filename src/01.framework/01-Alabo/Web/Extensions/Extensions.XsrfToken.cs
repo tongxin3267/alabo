@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Alabo.Helpers;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using Alabo.Helpers;
+using System;
 
 namespace Alabo.Web.Extensions
 {
@@ -36,7 +36,7 @@ namespace Alabo.Web.Extensions
                 {
                     var tokens = antiforgery.GetAndStoreTokens(context);
                     context.Response.Cookies.Append("XSRF-TOKEN", tokens.RequestToken,
-                        new CookieOptions {HttpOnly = false});
+                        new CookieOptions { HttpOnly = false });
                 }
 
                 return next(context);

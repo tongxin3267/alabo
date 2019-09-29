@@ -3,28 +3,31 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Text;
-using Alabo.App.Core.Api.Domain.Service;
-using Alabo.App.Shop.Store.Domain.Enums;
-using Alabo.App.Shop.Store.Domain.Services;
+using Alabo.Data.People.Stores.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Exceptions;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebApis.Service;
+using Alabo.Industry.Shop.Deliveries.Domain.Enums;
+using Alabo.Industry.Shop.Deliveries.Domain.Services;
 using Alabo.UI;
-using Alabo.UI.AutoTables;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Store.Domain.Entities {
-
+namespace Alabo.Industry.Shop.Deliveries.Domain.Entities
+{
     /// <summary>
     /// 店铺运费模板
     /// </summary>
     [Table("Shop_DeliveryTemplate")]
-    public class DeliveryTemplate : AggregateMongodbUserRoot<DeliveryTemplate> {
-
+    public class DeliveryTemplate : AggregateMongodbUserRoot<DeliveryTemplate>
+    {
         #region 属性
 
-        public long StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     运费模板方式
@@ -94,20 +97,28 @@ namespace Alabo.App.Shop.Store.Domain.Entities {
 
         #endregion 属性
 
-        public PageResult<DeliveryTemplate> PageTable(object query, AutoBaseModel autoModel) {
+        public PageResult<DeliveryTemplate> PageTable(object query, AutoBaseModel autoModel)
+        {
             var model = new PagedList<DeliveryTemplate>();
-            if (autoModel.Filter == FilterType.Admin) {
+            if (autoModel.Filter == FilterType.Admin)
+            {
                 model = Resolve<IDeliveryTemplateService>().GetPagedList(query);
-            } else if (autoModel.Filter == FilterType.User) {
-                var store = Resolve<IShopStoreService>().GetUserStore(autoModel.BasicUser.Id);
-                if (store == null) {
+            }
+            else if (autoModel.Filter == FilterType.User)
+            {
+                var store = Resolve<IStoreService>().GetUserStore(autoModel.BasicUser.Id);
+                if (store == null)
+                {
                     throw new ValidException("您不是供应商");
                 }
-                model = Resolve<IDeliveryTemplateService>().GetPagedList(query, r => r.StoreId == store.Id);
-            } else {
+                //  model = Resolve<IDeliveryTemplateService>().GetPagedList(query, r => r.StoreId == store.Id);
+            }
+            else
+            {
                 throw new ValidException("方式不对");
             }
-            model.Result = model.Result.Select(s => {
+            model.Result = model.Result.Select(s =>
+            {
                 //ConvertToApiImageUrl
                 s.UserName = Resolve<IApiService>().ConvertToApiImageUrl(s.UserName);
                 return s;
@@ -120,8 +131,8 @@ namespace Alabo.App.Shop.Store.Domain.Entities {
     ///     运费模板费用
     ///     区域模板费用
     /// </summary>
-    public class RegionTemplateFee {
-
+    public class RegionTemplateFee
+    {
         /// <summary>
         ///     区域ID可以是城市ID，也可以是区域ID，也可以是省份ID
         /// </summary>

@@ -1,16 +1,18 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Tasks.Domain.Entities;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Entities.Extensions;
-using Alabo.App.Shop.Order.ViewModels.OrderEdit;
+using Alabo.App.Asset.Pays.Domain.Entities;
+using Alabo.Data.Things.Orders.Domain.Entities;
+using Alabo.Industry.Shop.OrderActions.Domain.Entities;
+using Alabo.Industry.Shop.OrderDeliveries.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.Orders.ViewModels.OrderEdit;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Shop.Order.ViewModels {
-
-    public class ViewAdminOrder {
-        public Domain.Entities.Order Order { get; set; } = new Domain.Entities.Order();
+namespace Alabo.Industry.Shop.Orders.ViewModels
+{
+    public class ViewAdminOrder
+    {
+        public Order Order { get; set; } = new Order();
 
         /// <summary>
         ///     订单所包含的所有商品

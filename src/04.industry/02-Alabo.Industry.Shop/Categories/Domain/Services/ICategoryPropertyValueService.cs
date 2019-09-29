@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Shop.Category.Domain.Entities;
 using Alabo.Domains.Services;
+using Alabo.Industry.Shop.Categories.Domain.Entities;
 
-namespace Alabo.App.Shop.Category.Domain.Services {
-
-    public interface ICategoryPropertyValueService : IService<CategoryPropertyValue, Guid> {
-
+namespace Alabo.Industry.Shop.Categories.Domain.Services
+{
+    public interface ICategoryPropertyValueService : IService<CategoryPropertyValue, Guid>
+    {
         CategoryPropertyValue GetGuidCategoryPropertyValue(string Guid);
 
         /// <summary>

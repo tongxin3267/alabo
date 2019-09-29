@@ -1,13 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.ApiStore.CallBacks {
-
+namespace Alabo.Tool.Payment.CallBacks
+{
     [NotMapped]
     /// <summary>
     /// QQ钱包支付配置
@@ -15,8 +14,8 @@ namespace Alabo.App.Core.ApiStore.CallBacks {
     [ClassProperty(Name = "QQ钱包支付配置", Icon = "fa fa-puzzle-piece",
         SideBarType = SideBarType.ApiStoreSideBar,
         SortOrder = 2, Description = "QQ钱包支付配置")]
-    public class QPayPaymentConfig : BaseViewModel, IAutoConfig {
-
+    public class QPayPaymentConfig : BaseViewModel, IAutoConfig
+    {
         /// <summary>
         ///     是否启用
         /// </summary>
@@ -63,7 +62,8 @@ namespace Alabo.App.Core.ApiStore.CallBacks {
         [Display(Name = "商户收款邮箱")]
         public string Email { get; set; } = "";
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

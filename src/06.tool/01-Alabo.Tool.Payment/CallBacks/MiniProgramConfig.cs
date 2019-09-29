@@ -1,15 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
 /// <summary>
 /// </summary>
-namespace Alabo.App.Core.ApiStore.CallBacks {
-
+namespace Alabo.Tool.Payment.CallBacks
+{
     [NotMapped]
     /// <summary>
     /// 微信小程序配置
@@ -17,8 +16,8 @@ namespace Alabo.App.Core.ApiStore.CallBacks {
     [ClassProperty(Name = "微信小程序配置", Icon = "fa fa-puzzle-piece",
         SideBarType = SideBarType.ApiStoreSideBar,
         SortOrder = 2, Description = "微信小程序配置")]
-    public class MiniProgramConfig : BaseViewModel, IAutoConfig {
-
+    public class MiniProgramConfig : BaseViewModel, IAutoConfig
+    {
         /// <summary>
         ///     是否启用
         /// </summary>
@@ -49,7 +48,8 @@ namespace Alabo.App.Core.ApiStore.CallBacks {
         ///     Sets the default.
         /// </summary>
         /// <exception cref="System.NotImplementedException"></exception>
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

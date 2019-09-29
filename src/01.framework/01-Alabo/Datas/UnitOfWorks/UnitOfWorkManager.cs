@@ -27,9 +27,7 @@ namespace Alabo.Datas.UnitOfWorks
         /// </summary>
         public void Commit()
         {
-            foreach (var unitOfWork in _unitOfWorks) {
-                unitOfWork.Commit();
-            }
+            foreach (var unitOfWork in _unitOfWorks) unitOfWork.Commit();
         }
 
         /// <summary>
@@ -37,9 +35,7 @@ namespace Alabo.Datas.UnitOfWorks
         /// </summary>
         public async Task CommitAsync()
         {
-            foreach (var unitOfWork in _unitOfWorks) {
-                await unitOfWork.CommitAsync();
-            }
+            foreach (var unitOfWork in _unitOfWorks) await unitOfWork.CommitAsync();
         }
 
         /// <summary>
@@ -48,13 +44,9 @@ namespace Alabo.Datas.UnitOfWorks
         /// <param name="unitOfWork">工作单元</param>
         public void Register(IUnitOfWork unitOfWork)
         {
-            if (unitOfWork == null) {
-                throw new ArgumentNullException(nameof(unitOfWork));
-            }
+            if (unitOfWork == null) throw new ArgumentNullException(nameof(unitOfWork));
 
-            if (_unitOfWorks.Contains(unitOfWork) == false) {
-                _unitOfWorks.Add(unitOfWork);
-            }
+            if (_unitOfWorks.Contains(unitOfWork) == false) _unitOfWorks.Add(unitOfWork);
         }
     }
 }

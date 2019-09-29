@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Alabo.Helpers;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
-using Alabo.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.Dependency
 {
@@ -26,11 +26,9 @@ namespace Alabo.Dependency
         public List<T> CreateList<T>(string name = null)
         {
             var result = CreateList(typeof(T), name);
-            if (result == null) {
-                return new List<T>();
-            }
+            if (result == null) return new List<T>();
 
-            return ((IEnumerable<T>) result).ToList();
+            return ((IEnumerable<T>)result).ToList();
         }
 
         /// <summary>
@@ -51,7 +49,7 @@ namespace Alabo.Dependency
         /// <param name="name">服务名称</param>
         public T Create<T>(string name = null)
         {
-            return (T) Create(typeof(T), name);
+            return (T)Create(typeof(T), name);
         }
 
         /// <summary>
@@ -115,9 +113,7 @@ namespace Alabo.Dependency
         private object GetServiceFromHttpContext(Type type, string name)
         {
             var serviceProvider = HttpWeb.HttpContext.RequestServices;
-            if (name == null) {
-                return serviceProvider.GetService(type);
-            }
+            if (name == null) return serviceProvider.GetService(type);
 
             var context = serviceProvider.GetService<IComponentContext>();
             return context.ResolveNamed(name, type);
@@ -128,9 +124,7 @@ namespace Alabo.Dependency
         /// </summary>
         private object GetService(Type type, string name)
         {
-            if (name == null) {
-                return _container.Resolve(type);
-            }
+            if (name == null) return _container.Resolve(type);
 
             return _container.ResolveNamed(name, type);
         }
@@ -160,15 +154,11 @@ namespace Alabo.Dependency
         {
             var builder = new ContainerBuilder();
             actionBefore?.Invoke(builder);
-            if (configs != null) {
-                foreach (var config in configs) {
+            if (configs != null)
+                foreach (var config in configs)
                     builder.RegisterModule(config);
-                }
-            }
 
-            if (services != null) {
-                builder.Populate(services);
-            }
+            if (services != null) builder.Populate(services);
 
             return builder;
         }

@@ -1,15 +1,14 @@
-﻿using System;
+﻿using Alabo.Datas.Stores.Random.Mongo;
+using Alabo.Datas.UnitOfWorks;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Entities.Core;
+using Alabo.UI.Design.AutoReports;
+using Alabo.UI.Design.AutoReports.Dtos;
+using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using MongoDB.Driver;
-using Alabo.Datas.Stores.Random.Mongo;
-using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Dtos;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Entities.Core;
-using Alabo.Domains.Services.Report;
-using Alabo.Domains.Services.Report.Dtos;
 
 namespace Alabo.Datas.Stores.Report.Mongo
 {

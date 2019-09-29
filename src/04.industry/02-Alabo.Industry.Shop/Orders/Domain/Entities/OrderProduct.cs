@@ -1,20 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.Order.Domain.Entities.Extensions;
+﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Entities.Extensions;
 using Alabo.Tenants;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Alabo.App.Shop.Order.Domain.Entities {
-
+namespace Alabo.Industry.Shop.Orders.Domain.Entities
+{
     /// <summary>
     ///     订单商品表
     /// </summary>
     [ClassProperty(Name = "发货记录表")]
-    public class OrderProduct : AggregateDefaultRoot<OrderProduct> {
-
+    public class OrderProduct : AggregateDefaultRoot<OrderProduct>
+    {
         /// <summary>
         ///     订单号ID
         /// </summary>
@@ -77,23 +77,25 @@ namespace Alabo.App.Shop.Order.Domain.Entities {
         [Display(Name = "保存订单商品扩展数据")]
         public string Extension { get; set; }
 
-        [Display(Name = "订单产品扩展")]
-        public OrderProductExtension OrderProductExtension { get; set; }
+        [Display(Name = "订单产品扩展")] public OrderProductExtension OrderProductExtension { get; set; }
     }
 
-    public class OrderProductTableMap : MsSqlAggregateRootMap<OrderProduct> {
-
-        protected override void MapTable(EntityTypeBuilder<OrderProduct> builder) {
+    public class OrderProductTableMap : MsSqlAggregateRootMap<OrderProduct>
+    {
+        protected override void MapTable(EntityTypeBuilder<OrderProduct> builder)
+        {
             builder.ToTable("Shop_OrderProduct");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<OrderProduct> builder) {
+        protected override void MapProperties(EntityTypeBuilder<OrderProduct> builder)
+        {
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Property(e => e.FenRunAmount).IsRequired();
             builder.Ignore(e => e.OrderProductExtension);
-            builder.Ignore(e => e.Version);
-            if (TenantContext.IsTenant) {
+         
+            if (TenantContext.IsTenant)
+            {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
             }
         }

@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Shop.Product.Domain.Dtos;
-using Alabo.App.Shop.Product.Domain.Entities;
 using Alabo.Domains.Repositories;
+using Alabo.Industry.Shop.Products.Domain.Entities;
+using Alabo.Industry.Shop.Products.Dtos;
+using MongoDB.Bson;
 
-namespace Alabo.App.Shop.Product.Domain.Repositories {
-
-    public interface IProductSkuRepository : IRepository<ProductSku, long> {
-
+namespace Alabo.Industry.Shop.Products.Domain.Repositories
+{
+    public interface IProductSkuRepository : IRepository<ProductSku, long>
+    {
         /// <summary>
         ///     根据商品SkuId，获取店铺Id
         /// </summary>
         /// <param name="productSkuId"></param>
-        long GetStoreIdByProductSkuId(long productSkuId);
+        ObjectId GetStoreIdByProductSkuId(long productSkuId);
 
         /// <summary>
         ///     添加商品库存

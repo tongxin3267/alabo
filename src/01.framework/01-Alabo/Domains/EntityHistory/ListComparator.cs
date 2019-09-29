@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Alabo.Domains.Entities.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.Domains.Entities.Core;
 
 namespace Alabo.Domains.EntityHistory
 {
@@ -19,13 +19,9 @@ namespace Alabo.Domains.EntityHistory
         /// <param name="oldList">旧实体集合</param>
         public ListCompareResult<TEntity, TKey> Compare(IEnumerable<TEntity> newList, IEnumerable<TEntity> oldList)
         {
-            if (newList == null) {
-                throw new ArgumentNullException(nameof(newList));
-            }
+            if (newList == null) throw new ArgumentNullException(nameof(newList));
 
-            if (oldList == null) {
-                throw new ArgumentNullException(nameof(oldList));
-            }
+            if (oldList == null) throw new ArgumentNullException(nameof(oldList));
 
             var newEntities = newList.ToList();
             var oldEntities = oldList.ToList();

@@ -1,4 +1,8 @@
-﻿namespace Alabo.Domains.Query.Dto
+﻿using Alabo.Domains.Repositories.Mongo.Extension;
+using MongoDB.Bson;
+using Newtonsoft.Json;
+
+namespace Alabo.Domains.Query.Dto
 {
     /// <summary>
     ///     Class PagedInputDto.
@@ -28,7 +32,7 @@
         /// <summary>
         ///     供应商
         /// </summary>
-        public long StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     会员ID

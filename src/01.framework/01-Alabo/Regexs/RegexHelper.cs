@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Alabo.Extensions;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Alabo.Extensions;
 
 namespace Alabo.Regexs
 {
@@ -45,13 +45,9 @@ namespace Alabo.Regexs
         /// <param name="mobile"></param>
         public static bool CheckMobile(string mobile)
         {
-            if (mobile.IsNullOrEmpty()) {
-                return false;
-            }
+            if (mobile.IsNullOrEmpty()) return false;
 
-            if (mobile.Length != 11) {
-                return false;
-            }
+            if (mobile.Length != 11) return false;
 
             var rg = new System.Text.RegularExpressions.Regex(RegularExpressionHelper.ChinaMobile);
             var m = rg.Match(mobile);
@@ -60,9 +56,7 @@ namespace Alabo.Regexs
 
         public static bool CheckEmail(string mail)
         {
-            if (mail.IsNullOrEmpty()) {
-                return false;
-            }
+            if (mail.IsNullOrEmpty()) return false;
             //if (mail.Length != 11) {
             //    return false;
             //}
@@ -77,13 +71,9 @@ namespace Alabo.Regexs
         /// <param name="password"></param>
         public static bool CheckPayPasswrod(string password)
         {
-            if (password.IsNullOrEmpty()) {
-                return false;
-            }
+            if (password.IsNullOrEmpty()) return false;
 
-            if (password.Length != 6) {
-                return false;
-            }
+            if (password.Length != 6) return false;
 
             var rg = new System.Text.RegularExpressions.Regex(RegularExpressionHelper.Digits);
             var m = rg.Match(password);
@@ -101,14 +91,10 @@ namespace Alabo.Regexs
             RegexOptions options = RegexOptions.IgnoreCase)
         {
             var result = new Dictionary<string, string>();
-            if (string.IsNullOrWhiteSpace(input)) {
-                return result;
-            }
+            if (string.IsNullOrWhiteSpace(input)) return result;
 
             var match = System.Text.RegularExpressions.Regex.Match(input, pattern, options);
-            if (match.Success == false) {
-                return result;
-            }
+            if (match.Success == false) return result;
 
             AddResults(result, match, resultPatterns);
             return result;
@@ -125,9 +111,7 @@ namespace Alabo.Regexs
                 return;
             }
 
-            foreach (var resultPattern in resultPatterns) {
-                result.Add(resultPattern, match.Result(resultPattern));
-            }
+            foreach (var resultPattern in resultPatterns) result.Add(resultPattern, match.Result(resultPattern));
         }
 
         /// <summary>
@@ -140,14 +124,10 @@ namespace Alabo.Regexs
         public static string GetValue(string input, string pattern, string resultPattern = "",
             RegexOptions options = RegexOptions.IgnoreCase)
         {
-            if (string.IsNullOrWhiteSpace(input)) {
-                return string.Empty;
-            }
+            if (string.IsNullOrWhiteSpace(input)) return string.Empty;
 
             var match = System.Text.RegularExpressions.Regex.Match(input, pattern, options);
-            if (match.Success == false) {
-                return string.Empty;
-            }
+            if (match.Success == false) return string.Empty;
 
             return string.IsNullOrWhiteSpace(resultPattern) ? match.Value : match.Result(resultPattern);
         }
@@ -160,9 +140,7 @@ namespace Alabo.Regexs
         /// <param name="options">选项</param>
         public static string[] Split(string input, string pattern, RegexOptions options = RegexOptions.IgnoreCase)
         {
-            if (string.IsNullOrWhiteSpace(input)) {
-                return new string[] { };
-            }
+            if (string.IsNullOrWhiteSpace(input)) return new string[] { };
 
             return System.Text.RegularExpressions.Regex.Split(input, pattern, options);
         }
@@ -177,9 +155,7 @@ namespace Alabo.Regexs
         public static string Replace(string input, string pattern, string replacement,
             RegexOptions options = RegexOptions.IgnoreCase)
         {
-            if (string.IsNullOrWhiteSpace(input)) {
-                return string.Empty;
-            }
+            if (string.IsNullOrWhiteSpace(input)) return string.Empty;
 
             return System.Text.RegularExpressions.Regex.Replace(input, pattern, replacement, options);
         }

@@ -1,11 +1,7 @@
-﻿using Alabo.App.Core.Api.Domain.Service;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Employes.Domain.Services;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Repositories;
-using Alabo.App.Core.User.ViewModels;
+﻿using Alabo.Data.People.Employes.Domain.Services;
+using Alabo.Data.People.Users.Domain.Repositories;
+using Alabo.Data.People.Users.Dtos;
+using Alabo.Data.People.Users.ViewModels;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -13,23 +9,29 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
+using Alabo.Framework.Basic.Grades.Domain.Services;
+using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.UI;
+using Alabo.Users.Entities;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Alabo.App.Core.User.Domain.Services {
-
+namespace Alabo.Data.People.Users.Domain.Services
+{
     /// <summary>
     ///     Class UserService.
     /// </summary>
-    public class UserService : ServiceBase<Users.Entities.User, long>, IUserService {
-
+    public class UserService : ServiceBase<User, long>, IUserService
+    {
         /// <summary>
         ///     The single 会员 cache key
         /// </summary>
-        private static readonly string _singleUserCacheKey = "SingleUserCacheKey";
+        private static readonly string SingleUserCacheKey = "SingleUserCacheKey";
 
         /// <summary>
         ///     The 会员 map repository
@@ -41,8 +43,9 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// </summary>
         private readonly IUserRepository _userRepository;
 
-        public UserService(IUnitOfWork unitOfWork, IRepository<Users.Entities.User, long> repository) : base(unitOfWork,
-            repository) {
+        public UserService(IUnitOfWork unitOfWork, IRepository<User, long> repository) : base(unitOfWork,
+            repository)
+        {
             _userRepository = Repository<IUserRepository>();
             _userMapRepository = Repository<IUserMapRepository>();
         }
@@ -51,39 +54,43 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     从缓存中获取用户
         /// </summary>
         /// <param name="userId">会员Id</param>
-        public Users.Entities.User GetSingle(long userId) {
+        public User GetSingle(long userId)
+        {
             return ObjectCache.GetOrSet(() => { return Repository<IUserRepository>().GetSingle(userId); },
-                $"{_singleUserCacheKey}_Id_{userId}").Value;
+                $"{SingleUserCacheKey}_Id_{userId}").Value;
         }
 
         /// <summary>
         ///     会员s the team.
         /// </summary>
         /// <param name="userId">会员Id</param>
-        public Users.Entities.User UserTeam(long userId) {
+        public User UserTeam(long userId)
+        {
             return ObjectCache.GetOrSet(() => { return Repository<IUserRepository>().UserTeam(userId); },
-                $"{_singleUserCacheKey}_UserTeam_{userId}").Value;
+                $"{SingleUserCacheKey}_UserTeam_{userId}").Value;
         }
 
         /// <summary>
         ///     获取用户
         /// </summary>
         /// <param name="userId">会员Id</param>
-        public Users.Entities.User GetNomarlUser(long userId) {
+        public User GetNomarlUser(long userId)
+        {
             var user = GetSingle(userId);
-            if (user != null && user.Status == Status.Normal) {
-                return user;
-            }
+            if (user != null && user.Status == Status.Normal) return user;
 
             return null;
         }
 
-        public Users.Entities.User GetSingleByUserNameOrMobile(string userName) {
+        public User GetSingleByUserNameOrMobile(string userName)
+        {
             var user = GetSingle(r => r.UserName == userName || r.Email == userName || r.Mobile == userName);
-            if (user != null) {
+            if (user != null)
+            {
                 user = GetUserDetail(user.Id);
                 return user;
             }
+
             return null;
         }
 
@@ -91,17 +98,15 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     获取s the single.
         /// </summary>
         /// <param name="userName">Name of the 会员.</param>
-        public Users.Entities.User GetSingle(string userName) {
-            if (userName.IsNullOrEmpty()) {
-                return null;
-            }
+        public User GetSingle(string userName)
+        {
+            if (userName.IsNullOrEmpty()) return null;
 
-            var cacheKey = _singleUserCacheKey + "_UserName_" + userName;
-            if (!ObjectCache.TryGet(cacheKey, out Users.Entities.User result)) {
+            var cacheKey = SingleUserCacheKey + "_UserName_" + userName;
+            if (!ObjectCache.TryGet(cacheKey, out User result))
+            {
                 result = Repository<IUserRepository>().GetSingle(userName.Trim());
-                if (result != null) {
-                    ObjectCache.Set(cacheKey, result);
-                }
+                if (result != null) ObjectCache.Set(cacheKey, result);
             }
 
             return result;
@@ -110,7 +115,8 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// <summary>
         ///     获取平台用户
         /// </summary>
-        public Users.Entities.User PlanformUser() {
+        public User PlatformUser()
+        {
             //平台用户的用户名固定为planform
             return GetSingle("admin");
         }
@@ -119,7 +125,8 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     获取s the single by mobile.
         /// </summary>
         /// <param name="mobile">The mobile.</param>
-        public Users.Entities.User GetSingleByMobile(string mobile) {
+        public User GetSingleByMobile(string mobile)
+        {
             var result = Repository<IUserRepository>().GetSingleByMobile(mobile); //不能用缓存，手机号码可以修改
             return result;
         }
@@ -128,7 +135,8 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     获取s the single by mail.
         /// </summary>
         /// <param name="mail">The mail.</param>
-        public Users.Entities.User GetSingleByMail(string mail) {
+        public User GetSingleByMail(string mail)
+        {
             var result = Repository<IUserRepository>().GetSingleByMail(mail); //不能用缓存，邮箱可以修改
             return result;
         }
@@ -137,14 +145,14 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     获取用户的详细信息，包括User表、UserDetail、UserMap表
         /// </summary>
         /// <param name="userId">会员Id</param>
-        public Users.Entities.User GetUserDetail(long userId) {
-            var cacheKey = _singleUserCacheKey + "_Detail_Id_" + userId;
-            if (!ObjectCache.TryGet(cacheKey, out Users.Entities.User result)) {
+        public User GetUserDetail(long userId)
+        {
+            var cacheKey = SingleUserCacheKey + "_Detail_Id_" + userId;
+            if (!ObjectCache.TryGet(cacheKey, out User result))
+            {
                 result = Repository<IUserRepository>().GetUserDetail(userId);
-                if (result != null) {
-                    ObjectCache.Set(cacheKey, result);
-                    //  result.UserGradeConfig = Resolve<IGradeService>().GetGrade(result.GradeId);
-                }
+                if (result != null) ObjectCache.Set(cacheKey, result);
+                //  result.UserGradeConfig = Resolve<IGradeService>().GetGrade(result.GradeId);
             }
 
             return result;
@@ -153,18 +161,16 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// <summary>
         ///     获取s the 会员 detail.
         /// </summary>
-        /// <param name="UserName">Name of the 会员.</param>
-        public Users.Entities.User GetUserDetail(string UserName) {
-            if (UserName.IsNullOrEmpty()) {
-                return null;
-            }
+        /// <param name="userName">Name of the 会员.</param>
+        public User GetUserDetail(string userName)
+        {
+            if (userName.IsNullOrEmpty()) return null;
 
-            var cacheKey = _singleUserCacheKey + "_Detail_UserName_" + UserName;
-            if (!ObjectCache.TryGet(cacheKey, out Users.Entities.User result)) {
-                result = Repository<IUserRepository>().GetUserDetail(UserName.Trim());
-                if (result != null) {
-                    ObjectCache.Set(cacheKey, result);
-                }
+            var cacheKey = SingleUserCacheKey + "_Detail_UserName_" + userName;
+            if (!ObjectCache.TryGet(cacheKey, out User result))
+            {
+                result = Repository<IUserRepository>().GetUserDetail(userName.Trim());
+                if (result != null) ObjectCache.Set(cacheKey, result);
             }
 
             return result;
@@ -175,12 +181,11 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// </summary>
         /// <param name="model">The 视图.</param>
         /// <!-- 对于成员“M:Alabo.Domains.Services.WriteService`2.Update(`0)”忽略有格式错误的 XML 注释 -->
-        public bool UpdateUser(Users.Entities.User model) {
+        public bool UpdateUser(User model)
+        {
             var result = _userRepository.UpdateSingle(model);
 
-            if (result) {
-                DeleteUserCache(model.Id, model.UserName);
-            }
+            if (result) DeleteUserCache(model.Id, model.UserName);
 
             return result;
         }
@@ -189,7 +194,8 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     Existses the name of the 会员.
         /// </summary>
         /// <param name="name">The name.</param>
-        public bool ExistsUserName(string name) {
+        public bool ExistsUserName(string name)
+        {
             return _userRepository.ExistsName(name);
         }
 
@@ -197,7 +203,8 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     Existses the mail.
         /// </summary>
         /// <param name="mail">The mail.</param>
-        public bool ExistsMail(string mail) {
+        public bool ExistsMail(string mail)
+        {
             return _userRepository.ExistsMail(mail);
         }
 
@@ -205,7 +212,8 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     Existses the mobile.
         /// </summary>
         /// <param name="mobile">The mobile.</param>
-        public bool ExistsMobile(string mobile) {
+        public bool ExistsMobile(string mobile)
+        {
             return _userRepository.ExistsMobile(mobile);
         }
 
@@ -213,7 +221,8 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     获取s the list.
         /// </summary>
         /// <param name="userIds">The 会员 ids.</param>
-        public IList<Users.Entities.User> GetList(IList<long> userIds) {
+        public IList<User> GetList(IList<long> userIds)
+        {
             return _userRepository.GetList(userIds);
         }
 
@@ -221,9 +230,11 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     获取s the 会员 detail by open identifier.
         /// </summary>
         /// <param name="openId">The open identifier.</param>
-        public Users.Entities.User GetUserDetailByOpenId(string openId) {
+        public User GetUserDetailByOpenId(string openId)
+        {
             var find = Resolve<IUserDetailService>().GetSingle(r => r.OpenId == openId);
-            if (find != null) {
+            if (find != null)
+            {
                 var user = GetUserDetail(find.UserId);
                 return user;
             }
@@ -235,7 +246,8 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     会员注册
         /// </summary>
         /// <param name="user">The 会员.</param>
-        public Users.Entities.User AddUser(Users.Entities.User user) {
+        public User AddUser(User user)
+        {
             var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>()
                 .Where(r => r.Status == Status.Normal).ToList();
             var result = _userRepository.Add(user, moneyTypes);
@@ -250,7 +262,8 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// <summary>
         ///     获取最大的ID
         /// </summary>
-        public long MaxUserId() {
+        public long MaxUserId()
+        {
             var model = _userRepository.MaxUserId();
             return model;
         }
@@ -259,7 +272,8 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     获取s the 视图 会员 分页 list.
         /// </summary>
         /// <param name="viewUser">The 视图 会员.</param>
-        public PagedList<ViewUser> GetViewUserPageList(ViewUser viewUser) {
+        public PagedList<ViewUser> GetViewUserPageList(ViewUser viewUser)
+        {
             var userInput = AutoMapping.SetValue<UserInput>(viewUser);
             return GetViewUserPageList(userInput);
         }
@@ -268,7 +282,8 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     会员分页查询
         /// </summary>
         /// <param name="query"></param>
-        public PagedList<ViewUser> GetViewUserPageList(object query) {
+        public PagedList<ViewUser> GetViewUserPageList(object query)
+        {
             var dic = query.ToObject<Dictionary<string, string>>();
             var userInput = AutoMapping.SetValue<UserInput>(dic);
             return GetViewUserPageList(userInput);
@@ -278,7 +293,8 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     管理员查询会员分页
         /// </summary>
         /// <param name="query"></param>
-        public PagedList<ViewAdminUser> GetViewAdminUserPageList(object query) {
+        public PagedList<ViewAdminUser> GetViewAdminUserPageList(object query)
+        {
             var dic = query.ToObject<Dictionary<string, string>>();
             var userInput = AutoMapping.SetValue<UserInput>(dic);
             return GetViewUserPageList<ViewAdminUser>(userInput);
@@ -288,7 +304,8 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     获取s the 视图 会员 分页 list.
         /// </summary>
         /// <param name="userInput">The 会员 input.</param>
-        public PagedList<ViewUser> GetViewUserPageList(UserInput userInput) {
+        public PagedList<ViewUser> GetViewUserPageList(UserInput userInput)
+        {
             var viewUserList = _userRepository.GetViewUserList(userInput, out var count);
             var userIds = viewUserList.Select(r => r.Id).Distinct().ToList();
 
@@ -302,8 +319,10 @@ namespace Alabo.App.Core.User.Domain.Services {
 
             IList<ViewUser> userResult = new List<ViewUser>();
 
-            foreach (var item in viewUserList) {
-                var viewUser = new ViewUser {
+            foreach (var item in viewUserList)
+            {
+                var viewUser = new ViewUser
+                {
                     Id = item.Id,
                     UserName = GetUserStyle(item),
                     Name = item.Name,
@@ -315,14 +334,10 @@ namespace Alabo.App.Core.User.Domain.Services {
                 var grade = Resolve<IGradeService>().GetGrade(item.GradeId);
                 viewUser.UserGradeConfig = grade;
 
-                if (grade != null) {
-                    viewUser.GradeName = grade.Name;
-                }
+                if (grade != null) viewUser.GradeName = grade.Name;
 
                 var userDetail = userDetailList.FirstOrDefault(r => r.UserId == item.Id);
-                if (userDetail == null) {
-                    continue;
-                }
+                if (userDetail == null) continue;
 
                 viewUser.CreateTime = userDetail.CreateTime;
                 viewUser.Sex = userDetail.Sex;
@@ -330,7 +345,8 @@ namespace Alabo.App.Core.User.Domain.Services {
                 viewUser.UserGradeConfig = Resolve<IGradeService>().GetGrade(viewUser.GradeId);
 
                 var parentItemUser = parentUsers.FirstOrDefault(r => r.Id == item.ParentId);
-                if (parentItemUser != null) {
+                if (parentItemUser != null)
+                {
                     viewUser.ParentName = GetUserStyle(parentItemUser);
                     viewUser.ParentId = parentItemUser.Id;
                 }
@@ -340,9 +356,7 @@ namespace Alabo.App.Core.User.Domain.Services {
                 //    viewUser.IdentityStatus = identityItem.Status;
                 //}
 
-                if (userInput.FilterType == FilterType.User) {
-                    viewUser.UserName = item.GetUserName();
-                }
+                if (userInput.FilterType == FilterType.User) viewUser.UserName = item.GetUserName();
                 userResult.Add(viewUser);
             }
 
@@ -353,7 +367,8 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     获取s the 视图 会员 分页 list.
         /// </summary>
         /// <param name="userInput">The 会员 input.</param>
-        public PagedList<T> GetViewUserPageList<T>(UserInput userInput) where T : class, IUserView, new() {
+        public PagedList<T> GetViewUserPageList<T>(UserInput userInput) where T : class, IUserView, new()
+        {
             var viewUserList = _userRepository.GetViewUserList(userInput, out var count);
             var userIds = viewUserList.Select(r => r.Id).Distinct().ToList();
 
@@ -366,8 +381,10 @@ namespace Alabo.App.Core.User.Domain.Services {
 
             IList<T> userResult = new List<T>();
 
-            foreach (var item in viewUserList) {
-                var viewUser = new T() {
+            foreach (var item in viewUserList)
+            {
+                var viewUser = new T
+                {
                     Id = item.Id,
                     UserName = GetUserStyle(item),
                     Name = item.Name,
@@ -379,14 +396,10 @@ namespace Alabo.App.Core.User.Domain.Services {
                 var grade = Resolve<IGradeService>().GetGrade(item.GradeId);
                 viewUser.UserGradeConfig = grade;
 
-                if (grade != null) {
-                    viewUser.GradeName = grade.Name;
-                }
+                if (grade != null) viewUser.GradeName = grade.Name;
 
                 var userDetail = userDetailList.FirstOrDefault(r => r.UserId == item.Id);
-                if (userDetail == null) {
-                    continue;
-                }
+                if (userDetail == null) continue;
 
                 viewUser.CreateTime = userDetail.CreateTime;
                 viewUser.Sex = userDetail.Sex;
@@ -394,7 +407,8 @@ namespace Alabo.App.Core.User.Domain.Services {
                 viewUser.UserGradeConfig = Resolve<IGradeService>().GetGrade(viewUser.GradeId);
 
                 var parentItemUser = parentUsers.FirstOrDefault(r => r.Id == item.ParentId);
-                if (parentItemUser != null) {
+                if (parentItemUser != null)
+                {
                     viewUser.ParentName = GetUserStyle(parentItemUser);
                     viewUser.ParentId = parentItemUser.Id;
                 }
@@ -404,9 +418,7 @@ namespace Alabo.App.Core.User.Domain.Services {
                 //    viewUser.IdentityStatus = identityItem.Status;
                 //}
 
-                if (userInput.FilterType == FilterType.User) {
-                    viewUser.UserName = item.GetUserName();
-                }
+                if (userInput.FilterType == FilterType.User) viewUser.UserName = item.GetUserName();
 
                 userResult.Add(viewUser);
             }
@@ -418,30 +430,30 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     删除缓存
         /// </summary>
         /// <param name="userId">会员Id</param>
-        public void DeleteUserCache(long userId) {
+        public void DeleteUserCache(long userId)
+        {
             var user = GetSingle(userId);
-            if (user != null) {
-                DeleteUserCache(user.Id, user.UserName);
-            }
+            if (user != null) DeleteUserCache(user.Id, user.UserName);
         }
 
         /// <summary>
         ///     删除缓存
         /// </summary>
         /// <param name="userId">会员Id</param>
-        /// <param name="UserName">Name of the 会员.</param>
-        public void DeleteUserCache(long userId, string UserName) {
-            var cacheKey = _singleUserCacheKey + "_Id_" + userId;
+        /// <param name="userName">Name of the 会员.</param>
+        public void DeleteUserCache(long userId, string userName)
+        {
+            var cacheKey = SingleUserCacheKey + "_Id_" + userId;
             ObjectCache.Remove(cacheKey);
-            cacheKey = _singleUserCacheKey + "_UserName_" + UserName.Trim();
+            cacheKey = SingleUserCacheKey + "_UserName_" + userName.Trim();
             ObjectCache.Remove(cacheKey);
-            cacheKey = _singleUserCacheKey + "_Detail_UserName_" + UserName.Trim();
+            cacheKey = SingleUserCacheKey + "_Detail_UserName_" + userName.Trim();
             ObjectCache.Remove(cacheKey);
-            cacheKey = _singleUserCacheKey + "_Detail_Id_" + userId;
+            cacheKey = SingleUserCacheKey + "_Detail_Id_" + userId;
             ObjectCache.Remove(cacheKey);
             cacheKey = "UserAllGradeId" + userId;
             ObjectCache.Remove(cacheKey);
-            cacheKey = "dynamic_GetSingleUser" + UserName;
+            cacheKey = "dynamic_GetSingleUser" + userName;
             ObjectCache.Remove(cacheKey);
         }
 
@@ -449,10 +461,9 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     用户美化
         /// </summary>
         /// <param name="user">用户</param>
-        public string GetUserStyle(Users.Entities.User user) {
-            if (user == null) {
-                return string.Empty;
-            }
+        public string GetUserStyle(User user)
+        {
+            if (user == null) return string.Empty;
 
             var gradeConfig = Resolve<IGradeService>().GetGrade(user.GradeId);
             var userName =
@@ -467,15 +478,14 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     会员中心用户美化
         /// </summary>
         /// <param name="user">The user.</param>
-        public string GetHomeUserStyle(Users.Entities.User user) {
-            if (user == null) {
-                return string.Empty;
-            }
+        public string GetHomeUserStyle(User user)
+        {
+            if (user == null) return string.Empty;
 
             var gradeConfig = Resolve<IGradeService>().GetGrade(user.GradeId);
             var userName =
                 $" <img src='{gradeConfig.Icon}' alt='{gradeConfig.Name}' class='user-pic' style='width:18px;height:18px;' /><a class='primary-link margin-8'" +
-                $" href='/Home/User/Edit?id=" + $"{user.Id}'" +
+                " href='/Home/User/Edit?id=" + $"{user.Id}'" +
                 $" title='{user.UserName}({user.Name}) 等级:{gradeConfig?.Name}'>{user.UserName}({user.Name})</a>";
 
             return userName;
@@ -484,13 +494,12 @@ namespace Alabo.App.Core.User.Domain.Services {
         /// <summary>
         ///     数据同步 获取等级团队中心
         /// </summary>
-        public long GetTeamCenterService(long userId, long grade) {
+        public long GetTeamCenterService(long userId, long grade)
+        {
             var grades = Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
             var user = GetSingle(userId);
 
-            if (user.ParentId == 0 || user.Id == user.ParentId) {
-                return 0;
-            }
+            if (user.ParentId == 0 || user.Id == user.ParentId) return 0;
 
             return GetTeamCenterService(user.ParentId, grade);
         }
@@ -500,22 +509,23 @@ namespace Alabo.App.Core.User.Domain.Services {
         ///     判断当前登陆用户是否为后台管理
         /// </summary>
         /// <param name="userId">用户Id</param>
-        public bool IsAdmin(long userId) {
+        public bool IsAdmin(long userId)
+        {
             var find = Resolve<IEmployeeService>().GetSingle(r => r.UserId == userId);
-            if (find == null) {
-                return false;
-            }
+            if (find == null) return false;
             return true;
         }
 
         /// <summary>
         ///     我推荐的会员
         /// </summary>
-        public PagedList<ViewHomeUser> GetRecommondUserPage(object query) {
+        public PagedList<ViewHomeUser> GetRecommondUserPage(object query)
+        {
             var user = query.ToUserObject();
             var users = Resolve<IUserService>().GetPagedList<ViewHomeUser>(query, u => u.ParentId == user.Id);
-            users.ForEach(u => {
-                var userStyle = AutoMapping.SetValue<Users.Entities.User>(u);
+            users.ForEach(u =>
+            {
+                var userStyle = AutoMapping.SetValue<User>(u);
                 u.UserName = GetHomeUserStyle(userStyle);
                 u.GradeName = Resolve<IGradeService>().GetGrade(u.GradeId)?.Name;
             });
@@ -523,29 +533,29 @@ namespace Alabo.App.Core.User.Domain.Services {
         }
 
         /// <summary>
-        /// 获取用户Token
+        ///     获取用户Token
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public string GetUserToken(Users.Entities.User user) {
-            return ObjectCache.GetOrSet(() => {
-                if (user == null) {
-                    throw new ValidException("用户不能为空");
-                }
+        public string GetUserToken(User user)
+        {
+            return ObjectCache.GetOrSet(() =>
+                {
+                    if (user == null) throw new ValidException("用户不能为空");
 
-                //     var accout = Resolve<IAccountService>().GetSingle(r => r.UserId == user.Id);
-                //if (accout == null) {
-                //    throw new ValidException("用户不合法");
-                //}
+                    //     var accout = Resolve<IAccountService>().GetSingle(r => r.UserId == user.Id);
+                    //if (accout == null) {
+                    //    throw new ValidException("用户不合法");
+                    //}
 
-                var key = user?.Id + user?.UserName + HttpWeb.Site.Id + HttpWeb.Tenant;
-                var key2 = user?.Id + user?.UserName + HttpWeb.Site.Id;
-                var key3 = user?.Id + user?.UserName + HttpWeb.Site.Id +
-                           HttpWeb.Site.Id + user?.Detail?.Id;
-                var token = key.ToMd5HashString() +
-                            key2.ToMd5HashString().Substring(3, 18) + key3.ToMd5HashString();
-                return token;
-            }, "GetUserToken_" + user?.Id).Value;
+                    var key = user?.Id + user?.UserName + HttpWeb.Site.Id + HttpWeb.Tenant;
+                    var key2 = user?.Id + user?.UserName + HttpWeb.Site.Id;
+                    var key3 = user?.Id + user?.UserName + HttpWeb.Site.Id +
+                               HttpWeb.Site.Id + user?.Detail?.Id;
+                    var token = key.ToMd5HashString() +
+                                key2.ToMd5HashString().Substring(3, 18) + key3.ToMd5HashString();
+                    return token;
+                }, "GetUserToken_" + user?.Id).Value;
         }
     }
 }

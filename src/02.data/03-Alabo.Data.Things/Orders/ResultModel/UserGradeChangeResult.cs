@@ -1,14 +1,17 @@
-﻿using System;
-using Alabo.App.Core.Tasks.Extensions;
+﻿using Alabo.Data.Things.Orders.Extensions;
+using Alabo.Framework.Tasks.Queues.Models;
+using System;
 
-namespace Alabo.App.Core.Tasks.ResultModel {
-
-    public class UserGradeChangeResult : ITaskResult {
-
-        public UserGradeChangeResult() {
+namespace Alabo.Data.Things.Orders.ResultModel
+{
+    public class UserGradeChangeResult : ITaskResult
+    {
+        public UserGradeChangeResult()
+        {
         }
 
-        public UserGradeChangeResult(TaskContext context) {
+        public UserGradeChangeResult(TaskContext context)
+        {
             Context = context;
         }
 
@@ -19,7 +22,8 @@ namespace Alabo.App.Core.Tasks.ResultModel {
 
         public TaskContext Context { get; }
 
-        public ExecuteResult Update() {
+        public ExecuteResult Update()
+        {
             //try {
             //    var memberTypeConfig = Alabo.Helpers.Ioc.Resolve<IAutoConfigService>()
             //        .GetList<UserTypeConfig>(e => e.TypeClass == UserTypeEnum.Member)
@@ -41,8 +45,8 @@ namespace Alabo.App.Core.Tasks.ResultModel {
         }
     }
 
-    public class GradeChangeResult {
-
+    public class GradeChangeResult
+    {
         /// <summary>
         ///     用户Id
         /// </summary>

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.Cache;
+﻿using Alabo.Cache;
 using Alabo.Domains.Entities;
 using Alabo.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Convert = System.Convert;
 
 namespace Alabo.Extensions
@@ -20,14 +20,12 @@ namespace Alabo.Extensions
         /// <param name="instance"></param>
         public static List<KeyValue> ToKeyValues<T>(this T instance)
         {
-            if (instance == null) {
-                return null;
-            }
+            if (instance == null) return null;
 
             var outputType = typeof(T);
             var list = new List<KeyValue>();
             var outputPropertyInfo = outputType.GetPropertyResultFromCache(); //从缓存中读取属性，加快速度
-            foreach (var item in outputPropertyInfo) {
+            foreach (var item in outputPropertyInfo)
                 if (item.FieldAttribute != null)
                 {
                     var keyValue = new KeyValue
@@ -36,9 +34,7 @@ namespace Alabo.Extensions
                         Name = item.PropertyInfo.Name
                     };
                     // keyValue.Name = item.FieldAttribute.FieldName;
-                    if (item.DisplayAttribute != null) {
-                        keyValue.Name = item.DisplayAttribute.Name;
-                    }
+                    if (item.DisplayAttribute != null) keyValue.Name = item.DisplayAttribute.Name;
 
                     keyValue.SortOrder = item.FieldAttribute.SortOrder;
 
@@ -46,7 +42,6 @@ namespace Alabo.Extensions
                     // string name=item.PropertyType.Name
                     list.Add(keyValue);
                 }
-            }
 
             return list.OrderBy(r => r.SortOrder).ToList();
         }
@@ -58,9 +53,7 @@ namespace Alabo.Extensions
         public static IList<KeyValue> EnumToKeyValues(string enumName)
         {
             var type = enumName.GetTypeByName();
-            if (type == null) {
-                return null;
-            }
+            if (type == null) return null;
 
             return EnumToKeyValues(type);
         }
@@ -78,7 +71,7 @@ namespace Alabo.Extensions
                     foreach (var item in Enum.GetValues(enumType))
                     {
                         var value = item.GetDisplayName();
-                        var icon = ((Enum) item).GetIcon();
+                        var icon = ((Enum)item).GetIcon();
                         var key = Convert.ToInt64(item);
                         var keyValueItem = new KeyValue(key, value, enumType.Name)
                         {

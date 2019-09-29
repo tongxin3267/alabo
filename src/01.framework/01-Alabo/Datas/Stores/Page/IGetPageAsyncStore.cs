@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Query;
+using System;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.Stores.Page
 {

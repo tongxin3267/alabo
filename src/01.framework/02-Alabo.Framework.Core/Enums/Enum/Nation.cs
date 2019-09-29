@@ -1,7 +1,7 @@
-﻿using System.ComponentModel;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel;
 
-namespace Alabo.Core.Enums.Enum
+namespace Alabo.Framework.Core.Enums.Enum
 {
     /// <summary>
     ///     民族

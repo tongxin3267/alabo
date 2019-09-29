@@ -1,24 +1,21 @@
 ﻿using System.Collections.Generic;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Product.Domain.Dtos;
-using Alabo.App.Shop.Product.Domain.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Industry.Shop.Orders.Dtos;
+using Alabo.Industry.Shop.Products.Domain.Entities;
+using Alabo.Industry.Shop.Products.Dtos;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Shop.Product.Domain.Services
+namespace Alabo.Industry.Shop.Products.Domain.Services
 {
-
     public interface IProductSkuService : IService<ProductSku, long>
     {
-
         /// <summary>
         ///     更新、添加、或删除商品SKU
         /// </summary>
         /// <param name="product"></param>
         /// <param name="skuList"></param>
-        ServiceResult AddUpdateOrDelete(Entities.Product product, List<ProductSku> skuList);
+        ServiceResult AddUpdateOrDelete(Product product, List<ProductSku> skuList);
 
         /// <summary>
         ///     Gets the store money buy skus.
@@ -35,18 +32,17 @@ namespace Alabo.App.Shop.Product.Domain.Services
         void AutoUpdateSkuPrice(long productId = 0);
 
         /// <summary>
-        /// 获取会员等级价
+        ///     获取会员等级价
         /// </summary>
         /// <param name="productId"></param>
         /// <returns></returns>
         List<ProductSku> GetGradePrice(long productId);
 
         /// <summary>
-        /// 更新会员等级价
+        ///     更新会员等级价
         /// </summary>
         /// <param name="productSkus"></param>
         /// <returns></returns>
         ApiResult UpdateGradePrice(List<ProductSku> productSkus);
-
     }
 }

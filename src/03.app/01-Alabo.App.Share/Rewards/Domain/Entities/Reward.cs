@@ -1,27 +1,24 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using MongoDB.Bson.Serialization.Attributes;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Share.Share.Domain.Enums;
-using Alabo.App.Share.Share.Domain.Services;
+using Alabo.App.Share.Rewards.Domain.Enums;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.Tenants;
-using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Share.Share.Domain.Entities {
-
+namespace Alabo.App.Share.Rewards.Domain.Entities
+{
     /// <summary>
     ///     分润明细表，奖金表
     ///     奖金明细，奖励明细
     /// </summary>
     [ClassProperty(Name = "奖励明细", PageType = ViewPageType.List)]
     [BsonIgnoreExtraElements]
-    public class Reward : AggregateDefaultUserRoot<Reward> {
-
+    public class Reward : AggregateDefaultUserRoot<Reward>
+    {
         /// <summary>
         ///     分润订单Id,对应ShareOrder表，不是商城的Order_Order 表
         /// </summary>
@@ -94,30 +91,32 @@ namespace Alabo.App.Share.Share.Domain.Entities {
         ///     根据Id自动生成12位序列号
         /// </summary>
         [Display(Name = "根据Id自动生成12位序列号")]
-        public string Serial {
-            get {
+        public string Serial
+        {
+            get
+            {
                 var searSerial = $"9{Id.ToString().PadLeft(9, '0')}";
-                if (Id.ToString().Length == 10) {
-                    searSerial = $"{Id.ToString()}";
-                }
+                if (Id.ToString().Length == 10) searSerial = $"{Id.ToString()}";
 
                 return searSerial;
             }
         }
     }
 
-    public class DetailTableMap : MsSqlAggregateRootMap<Reward> {
-
-        protected override void MapTable(EntityTypeBuilder<Reward> builder) {
+    public class DetailTableMap : MsSqlAggregateRootMap<Reward>
+    {
+        protected override void MapTable(EntityTypeBuilder<Reward> builder)
+        {
             builder.ToTable("Share_Reward");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<Reward> builder) {
+        protected override void MapProperties(EntityTypeBuilder<Reward> builder)
+        {
             builder.HasKey(e => e.Id);
             builder.Property(e => e.MoneyTypeId).HasColumnType("uniqueidentifier");
             builder.Property(e => e.Intro).HasMaxLength(255);
             builder.Ignore(e => e.Serial);
-            builder.Ignore(e => e.Version);
+         
         }
     }
 }

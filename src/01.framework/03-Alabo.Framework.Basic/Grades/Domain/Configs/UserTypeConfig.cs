@@ -1,39 +1,36 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
 using Alabo.AutoConfigs.Services;
-using Alabo.Core.Enums.Enum;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Helpers;
 using Alabo.Reflections;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Core.User.Domain.Callbacks {
-
+namespace Alabo.Framework.Basic.Grades.Domain.Configs
+{
     [NotMapped]
     [ClassProperty(Name = "用户类型", Icon = "fa fa-users",
         Description = "用户类型", PageType = ViewPageType.List, SortOrder = 11, SideBarType = SideBarType.ControlSideBar,
         Validator = "SELECT * FROM User_UserType where UserTypeId='{0}'",
         GroupName = "基本信息,加盟信息,高级选项", ValidateMessage = "该用户类型下存在用户")]
-    public class UserTypeConfig : AutoConfigBase, IAutoConfig {
-
-        public UserTypeConfig() {
-            if (TypeClass != UserTypeEnum.Customer) {
+    public class UserTypeConfig : AutoConfigBase, IAutoConfig
+    {
+        public UserTypeConfig()
+        {
+            if (TypeClass != UserTypeEnum.Customer)
                 Id = TypeClass.GetCustomAttr<FieldAttribute>().GuidId.ToGuid();
-            } else {
+            else
                 Id = Guid.NewGuid();
-            }
         }
 
         #region
@@ -60,7 +57,7 @@ namespace Alabo.App.Core.User.Domain.Callbacks {
         ///     类型
         /// </summary>
         [Field(ControlsType = ControlsType.DropdownList, SortOrder = 2, EnumUniqu = true, ListShow = true,
-            DataSource = "Alabo.Core.Enums.Enum.UserTypeEnum", GroupTabId = 1)]
+            DataSource = "Alabo.Framework.Core.Enums.Enum.UserTypeEnum", GroupTabId = 1)]
         [Display(Name = "系统类型")]
         [HelpBlock("系统对应的类型，有会员，省代理")]
         public UserTypeEnum TypeClass { get; set; } = UserTypeEnum.Member;
@@ -88,7 +85,7 @@ namespace Alabo.App.Core.User.Domain.Callbacks {
 
         [Display(Name = "推荐方式")]
         [Field(ControlsType = ControlsType.DropdownList, SortOrder = 2,
-            DataSource = "Alabo.Core.Enums.Enum.RecommendModel",
+            DataSource = "Alabo.Framework.Core.Enums.Enum.RecommendModel",
             ListShow = false, GroupTabId = 1)]
         [HelpBlock("根据会员类型的推荐方式进行推荐")]
         public RecommendModel RecommendModel { get; set; }
@@ -170,32 +167,35 @@ namespace Alabo.App.Core.User.Domain.Callbacks {
 
         #endregion
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
             var list = Ioc.Resolve<IAlaboAutoConfigService>().GetList<UserTypeConfig>();
-            if (list == null || list.Count == 0) {
+            if (list == null || list.Count == 0)
+            {
                 var configs = new List<UserTypeConfig>();
                 var config = new UserTypeConfig();
-                foreach (UserTypeEnum item in Enum.GetValues(typeof(UserTypeEnum))) {
-                    if (item.IsDefault()) {
-                        config = new UserTypeConfig {
+                foreach (UserTypeEnum item in Enum.GetValues(typeof(UserTypeEnum)))
+                    if (item.IsDefault())
+                    {
+                        config = new UserTypeConfig
+                        {
                             TypeClass = item,
                             Icon = item.GetFieldAttribute().Icon
                         };
-                        if (config.TypeClass == UserTypeEnum.Customer) {
+                        if (config.TypeClass == UserTypeEnum.Customer)
                             config.Id = Guid.NewGuid();
-                        } else {
+                        else
                             config.Id = item.GetCustomAttr<FieldAttribute>().GuidId.ToGuid();
-                        }
 
                         config.Name = item.GetDisplayName();
                         config.Name = item.GetDisplayName();
                         config.FrontName = item.GetDisplayName() + "中心";
                         configs.Add(config);
                     }
-                }
 
                 var typeclassProperty = config.GetType().GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
-                var autoConfig = new AutoConfig {
+                var autoConfig = new AutoConfig
+                {
                     Type = config.GetType().FullName,
                     // AppName = typeclassProperty.AppName,
                     LastUpdated = DateTime.Now,

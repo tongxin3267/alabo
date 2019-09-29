@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.App.Shop.Order.ViewModels;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Industry.Shop.Orders.Domain.Entities;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using Alabo.Industry.Shop.Orders.Dtos;
+using Alabo.Industry.Shop.Orders.ViewModels;
 
-namespace Alabo.App.Shop.Order.Domain.Services {
-
-    public interface IOrderService : IService<Entities.Order, long> {
-
+namespace Alabo.Industry.Shop.Orders.Domain.Services
+{
+    public interface IOrderService : IService<Order, long>
+    {
         /// <summary>
         ///     确认收货
         /// </summary>
@@ -23,41 +24,44 @@ namespace Alabo.App.Shop.Order.Domain.Services {
         ServiceResult ConfirmToMaster(ConfirmInput parameter);
 
         /// <summary>
-        /// 获取快递信息
+        ///     获取快递信息
         /// </summary>
         /// <param name="expressId"></param>
         string GetExpressInfo(string expressId);
 
         /// <summary>
-        /// 获取快递列表
+        ///     获取快递列表
         /// </summary>
         /// <param name="orderId">订单ID</param>
         /// <returns></returns>
         IList<Deliver> GetExpressList(long orderId);
+
         /// <summary>
-        /// 发货
+        ///     发货
         /// </summary>
         ServiceResult Deliver(OrderInput model);
 
         /// <summary>
-        /// 发货 支持一个快递
+        ///     发货 支持一个快递
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
         ServiceResult Deliver(Deliver model);
+
         /// <summary>
-        /// 增加快递
+        ///     增加快递
         /// </summary>
         ServiceResult AddExpress(Deliver model);
+
         /// <summary>
-        /// 获取订单详情
+        ///     获取订单详情
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         OrderShowOutput Show(long id);
 
         /// <summary>
-        /// 获取快递列表
+        ///     获取快递列表
         /// </summary>
         /// <returns></returns>
         string GetExpress();
@@ -72,7 +76,7 @@ namespace Alabo.App.Shop.Order.Domain.Services {
         ///     获取单条订单记录
         /// </summary>
         /// <param name="orderId"></param>
-        Entities.Order GetSingle(long orderId);
+        Order GetSingle(long orderId);
 
         /// <summary>
         ///     获取前端单条订单记录
@@ -83,7 +87,7 @@ namespace Alabo.App.Shop.Order.Domain.Services {
         ///     获取订单和订单商品
         /// </summary>
         /// <param name="orderId"></param>
-        Entities.Order GetSingleWithProducts(long orderId);
+        Order GetSingleWithProducts(long orderId);
 
         /// <summary>
         ///     获取订单信息
@@ -115,17 +119,17 @@ namespace Alabo.App.Shop.Order.Domain.Services {
         /// <summary>
         ///     删除订单
         /// </summary>
-        Tuple<ServiceResult, Entities.Order> Delete(long id);
+        Tuple<ServiceResult, Order> Delete(long id);
 
         /// <summary>
-        /// GetExpressAmount
+        ///     GetExpressAmount
         /// </summary>
         /// <param name="orderId"></param>
         /// <returns></returns>
         Tuple<ServiceResult, OrderExpressViewModel> GetExpressAmount(long orderId);
 
         /// <summary>
-        /// UpdateExpressAmount
+        ///     UpdateExpressAmount
         /// </summary>
         /// <param name="orderExpressInput"></param>
         /// <returns></returns>

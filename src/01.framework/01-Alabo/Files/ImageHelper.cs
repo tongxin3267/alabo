@@ -26,7 +26,7 @@ namespace Alabo.Files
                 var ow = originalImage.Width;
                 var oh = originalImage.Height;
                 //裁剪同等比例大小,不变形
-                if (originalImage.Width / (double) originalImage.Height > towidth / (double) toheight)
+                if (originalImage.Width / (double)originalImage.Height > towidth / (double)toheight)
                 {
                     oh = originalImage.Height;
                     ow = originalImage.Height * towidth / toheight;
@@ -88,7 +88,7 @@ namespace Alabo.Files
         {
             //设置 原图片 对象的 EncoderParameters 对象
             var parameters = new EncoderParameters(1);
-            parameters.Param[0] = new EncoderParameter(Encoder.Quality, (long) 100);
+            parameters.Param[0] = new EncoderParameter(Encoder.Quality, (long)100);
             image.Save(savePath, ici, parameters);
             parameters.Dispose();
         }
@@ -101,11 +101,9 @@ namespace Alabo.Files
         private static ImageCodecInfo GetCodecInfo(string mimeType)
         {
             var codecInfo = ImageCodecInfo.GetImageEncoders();
-            foreach (var ici in codecInfo) {
-                if (ici.MimeType == mimeType) {
+            foreach (var ici in codecInfo)
+                if (ici.MimeType == mimeType)
                     return ici;
-                }
-            }
 
             return null;
         }
@@ -118,11 +116,9 @@ namespace Alabo.Files
         {
             var fileExt = fileName.Substring(fileName.LastIndexOf(".") + 1).ToUpper();
             var codecInfo = ImageCodecInfo.GetImageEncoders();
-            foreach (var ici in codecInfo) {
-                if (ici.FilenameExtension.Contains(fileExt)) {
+            foreach (var ici in codecInfo)
+                if (ici.FilenameExtension.Contains(fileExt))
                     return ici;
-                }
-            }
 
             return null;
         }

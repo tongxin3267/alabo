@@ -1,30 +1,28 @@
-﻿using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Shop.Activitys.Domain.Entities;
-using Alabo.App.Shop.Activitys.Domain.Enum;
-using Alabo.App.Shop.Activitys.Dtos;
-using Alabo.App.Shop.Activitys.Extensions;
-using Alabo.App.Shop.Activitys.ViewModels;
-using Alabo.App.Shop.Product.Domain.CallBacks;
-using Alabo.App.Shop.Product.Domain.Enums;
-using Alabo.App.Shop.Product.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Industry.Shop.Activitys.Domain.Entities;
+using Alabo.Industry.Shop.Activitys.Domain.Enum;
+using Alabo.Industry.Shop.Activitys.Dtos;
+using Alabo.Industry.Shop.Activitys.Extensions;
+using Alabo.Industry.Shop.Products.Domain.Configs;
+using Alabo.Industry.Shop.Products.Domain.Enums;
+using Alabo.Industry.Shop.Products.Domain.Services;
 using Alabo.Mapping;
-using Alabo.UI.AutoForms;
+using Alabo.UI.Design.AutoForms;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Activitys.Modules.GroupBuy.Model
+namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Model
 {
-
     /// <summary>
     ///     拼图
     ///     人多优惠大
@@ -41,7 +39,6 @@ namespace Alabo.App.Shop.Activitys.Modules.GroupBuy.Model
     [ClassProperty(Name = "拼团")]
     public class GroupBuyActivity : BaseViewModel, IActivity
     {
-
         /// <summary>
         ///     拼团人数
         /// </summary>
@@ -53,8 +50,8 @@ namespace Alabo.App.Shop.Activitys.Modules.GroupBuy.Model
 
 
         /// <summary>
-        /// 拼团价格设置
-        /// Mark=1表示可以批量填充数据
+        ///     拼团价格设置
+        ///     Mark=1表示可以批量填充数据
         /// </summary>
         [Field(ControlsType = ControlsType.JsonList, EditShow = true, Mark = "1")]
         [Display(Name = "拼团商品价格设置")]
@@ -130,17 +127,11 @@ namespace Alabo.App.Shop.Activitys.Modules.GroupBuy.Model
             var moneyTypes = Resolve<IAutoConfigService>().MoneyTypes(); // 所有货币类型
             var productId = httpContext.Request.Form["ProductId"].ConvertToLong();
             var product = Resolve<IProductService>().GetSingle(r => r.Id == productId);
-            if (product == null)
-            {
-                return ServiceResult.FailedWithMessage("商品不存在");
-            }
+            if (product == null) return ServiceResult.FailedWithMessage("商品不存在");
 
             var priceStyleConfig = Resolve<IAutoConfigService>().GetList<PriceStyleConfig>()
                 .FirstOrDefault(r => r.Id == product.PriceStyleId);
-            if (product.MinCashRate == 0)
-            {
-                product.MinCashRate = priceStyleConfig.MinCashRate;
-            }
+            if (product.MinCashRate == 0) product.MinCashRate = priceStyleConfig.MinCashRate;
 
             activityModule.SkuProducts.Foreach(r =>
             {
@@ -150,10 +141,7 @@ namespace Alabo.App.Shop.Activitys.Modules.GroupBuy.Model
                 if (priceStyleConfig != null)
                 {
                     var moneyConfig = moneyTypes.FirstOrDefault(e => e.Id == priceStyleConfig.MoneyTypeId);
-                    if (moneyConfig?.RateFee == 0)
-                    {
-                        moneyConfig.RateFee = 1;
-                    }
+                    if (moneyConfig?.RateFee == 0) moneyConfig.RateFee = 1;
                     // 如果不是现金商品
                     if (priceStyleConfig.PriceStyle != PriceStyle.CashProduct)
                     {
@@ -186,7 +174,6 @@ namespace Alabo.App.Shop.Activitys.Modules.GroupBuy.Model
     [ClassProperty(Name = "拼团商品价格设置")]
     public class GroupBuySkuProduct : BaseViewModel
     {
-
         /// <summary>
         ///     商品skuId
         /// </summary>

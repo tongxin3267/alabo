@@ -6,9 +6,7 @@ namespace Alabo.Cache.Redis
     {
         public static RedisCacheContext OfRedis(this ICacheContext context)
         {
-            if (context is RedisCacheContext) {
-                return context as RedisCacheContext;
-            }
+            if (context is RedisCacheContext) return context as RedisCacheContext;
 
             throw new InvalidCastException("context is not a RedisCacheContext instance.");
         }

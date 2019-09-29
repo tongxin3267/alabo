@@ -1,19 +1,18 @@
-﻿using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Themes.DiyModels.Links;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Services;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Services;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+using Alabo.Framework.Core.WebUis.Models.Links;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json.Linq;
 
-namespace Alabo.App.Core.Common.Domain.Services {
-
-    public interface IAutoConfigService : IService<AutoConfig, long> {
-
+namespace Alabo.Framework.Basic.AutoConfigs.Domain.Services
+{
+    public interface IAutoConfigService : IService<AutoConfig, long>
+    {
         /// <summary>
         ///     更新配置的值
         /// </summary>
@@ -81,13 +80,13 @@ namespace Alabo.App.Core.Common.Domain.Services {
         void InitDefaultData();
 
         /// <summary>
-        /// 获取所有AutoConfig的链接地址
+        ///     获取所有AutoConfig的链接地址
         /// </summary>
         /// <returns></returns>
         List<Link> GetAllLinks();
 
         /// <summary>
-        /// 清空缓存
+        ///     清空缓存
         /// </summary>
         /// <param name="type"></param>
         void UpdateCache(string type);

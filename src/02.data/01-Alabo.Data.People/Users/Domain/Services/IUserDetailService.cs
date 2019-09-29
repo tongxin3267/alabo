@@ -1,20 +1,18 @@
-﻿using System.Collections.Generic;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Core.User.ViewModels;
+﻿using Alabo.Data.People.Users.Dtos;
+using Alabo.Data.People.Users.ViewModels;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Users.Entities;
 
-namespace Alabo.App.Core.User.Domain.Services {
-
+namespace Alabo.Data.People.Users.Domain.Services
+{
     /// <summary>
     ///     Interface IUserDetailService
     /// </summary>
-    public interface IUserDetailService : IService<UserDetail, long> {
-
+    public interface IUserDetailService : IService<UserDetail, long>
+    {
         /// <summary>
-        /// 检查当前登录用户的支付密码
+        ///     检查当前登录用户的支付密码
         /// </summary>
         /// <param name="payPassword"></param>
         /// <param name="loginUserId"></param>
@@ -28,7 +26,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         bool UpdateSingle(UserDetail userDetail);
 
         /// <summary>
-        /// 确认支付密码 传入明文
+        ///     确认支付密码 传入明文
         /// </summary>
         ServiceResult ConfirmPayPassword(string payPassWord, long loginUserId);
 
@@ -72,7 +70,7 @@ namespace Alabo.App.Core.User.Domain.Services {
         void UpdateOpenId(string openId, long userId);
 
         /// <summary>
-        /// 是否实名认证
+        ///     是否实名认证
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>

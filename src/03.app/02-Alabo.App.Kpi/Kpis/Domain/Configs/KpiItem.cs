@@ -5,14 +5,14 @@ using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Share.Kpi.Domain.CallBack {
-
+namespace Alabo.App.Kpis.Kpis.Domain.Configs
+{
     /// <summary>
     ///     Kpi考核项
     /// </summary>
     [ClassProperty(Name = "Kpi考核基准配置")]
-    public class KpiItem : BaseViewModel {
-
+    public class KpiItem : BaseViewModel
+    {
         /// <summary>
         ///     唯一标识(不能重复)
         /// </summary>
@@ -31,7 +31,8 @@ namespace Alabo.App.Share.Kpi.Domain.CallBack {
         /// <summary>
         ///     预算符
         /// </summary>
-        [Field(ControlsType = ControlsType.DropdownList, ListShow = true, EditShow = true, DataSource = "OperatorCompare",
+        [Field(ControlsType = ControlsType.DropdownList, ListShow = true, EditShow = true,
+            DataSource = "OperatorCompare",
             SortOrder = 4)]
         [Display(Name = "预算符")]
         public OperatorCompare OperatorCompare { get; set; } = OperatorCompare.GreaterEqual;

@@ -10,13 +10,9 @@ namespace Alabo.Extensions
         /// </summary>
         public static IList<T> MapEach<T>(this IList<T> list, Func<T, T> method)
         {
-            if (list == null) {
-                return list;
-            }
+            if (list == null) return list;
 
-            for (var n = 0; n < list.Count; n++) {
-                list[n] = method(list[n]);
-            }
+            for (var n = 0; n < list.Count; n++) list[n] = method(list[n]);
 
             return list;
         }
@@ -40,9 +36,7 @@ namespace Alabo.Extensions
         /// <param name="length">要复制的长度</param>
         public static void CopyArray<T>(this IList<T> src, int srcIndex, IList<T> dst, int dstIndex, int length)
         {
-            for (var n = 0; n < length; n++) {
-                dst[dstIndex++] = src[srcIndex++];
-            }
+            for (var n = 0; n < length; n++) dst[dstIndex++] = src[srcIndex++];
         }
 
         /// <summary>
@@ -63,24 +57,18 @@ namespace Alabo.Extensions
         /// <param name="defaultValue"></param>
         public static T GetIndex<T>(this IList<T> list, int index, T defaultValue = default)
         {
-            if (list == null) {
-                return defaultValue;
-            }
+            if (list == null) return defaultValue;
 
-            if (index < 0) {
-                index = list.Count + index;
-            }
+            if (index < 0) index = list.Count + index;
 
-            if (index < 0 || index >= list.Count) {
-                return defaultValue;
-            }
+            if (index < 0 || index >= list.Count) return defaultValue;
 
             return list[index];
         }
 
         public static IList<int> ToIntList(this string val)
         {
-            var data = val.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
+            var data = val.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             var retList = new List<int>();
             data.Foreach(o => retList.Add(o.ToInt()));
             return retList;
@@ -88,7 +76,7 @@ namespace Alabo.Extensions
 
         public static IList<long> ToLongList(this string val)
         {
-            var data = val.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
+            var data = val.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             var retList = new List<long>();
             data.Foreach(o => retList.Add(o.ConvertToLong()));
             return retList;

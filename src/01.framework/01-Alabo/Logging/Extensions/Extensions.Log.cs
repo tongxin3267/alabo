@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.Datas.Sql;
+﻿using Alabo.Datas.Sql;
 using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Logging.Abstractions;
 using Alabo.Logging.Contents;
 using Alabo.Properties;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.Logging.Extensions
 {
@@ -50,13 +50,10 @@ namespace Alabo.Logging.Extensions
         /// <param name="dictionary">字典</param>
         public static ILog Content(this ILog log, IDictionary<string, string> dictionary)
         {
-            if (dictionary == null) {
-                return log;
-            }
+            if (dictionary == null) return log;
 
-            foreach (var keyValue in dictionary) {
+            foreach (var keyValue in dictionary)
                 log.Set<ILogContent>(content => content.Content($"{keyValue.Key} : {keyValue.Value}"));
-            }
 
             return log;
         }
@@ -70,9 +67,7 @@ namespace Alabo.Logging.Extensions
         {
             return log.Set<LogContent>(content =>
             {
-                if (string.IsNullOrWhiteSpace(content.BusinessId) == false) {
-                    content.BusinessId += ",";
-                }
+                if (string.IsNullOrWhiteSpace(content.BusinessId) == false) content.BusinessId += ",";
 
                 content.BusinessId += businessId;
             });
@@ -148,13 +143,9 @@ namespace Alabo.Logging.Extensions
         /// <param name="dictionary">字典</param>
         public static ILog Params(this ILog log, IDictionary<string, object> dictionary)
         {
-            if (dictionary == null || dictionary.Count == 0) {
-                return log;
-            }
+            if (dictionary == null || dictionary.Count == 0) return log;
 
-            foreach (var item in dictionary) {
-                Params(log, item.Key, item.Value.SafeString());
-            }
+            foreach (var item in dictionary) Params(log, item.Key, item.Value.SafeString());
 
             return log;
         }
@@ -196,9 +187,7 @@ namespace Alabo.Logging.Extensions
         /// <param name="dictionary">字典</param>
         public static ILog SqlParams(this ILog log, IDictionary<string, object> dictionary)
         {
-            if (dictionary == null || dictionary.Count == 0) {
-                return log;
-            }
+            if (dictionary == null || dictionary.Count == 0) return log;
 
             return SqlParams(log,
                 StringExtensions.SafeStringJoin(dictionary.Select(t =>
@@ -213,9 +202,7 @@ namespace Alabo.Logging.Extensions
         /// <param name="errorCode">错误码</param>
         public static ILog Exception(this ILog log, Exception exception, string errorCode = "")
         {
-            if (exception == null) {
-                return log;
-            }
+            if (exception == null) return log;
 
             return Exception(log, new ValidException("", errorCode, exception));
         }
@@ -227,9 +214,7 @@ namespace Alabo.Logging.Extensions
         /// <param name="exception">异常</param>
         public static ILog Exception(this ILog log, ValidException exception)
         {
-            if (exception == null) {
-                return log;
-            }
+            if (exception == null) return log;
 
             return log.Set<LogContent>(content =>
             {

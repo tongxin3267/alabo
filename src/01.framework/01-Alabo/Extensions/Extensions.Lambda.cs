@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Alabo.Datas.Queries.Enums;
+using Alabo.Linq;
+using Alabo.Linq.Expressions;
+using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Alabo.Datas.Queries.Enums;
-using Alabo.Linq;
-using Alabo.Linq.Expressions;
 
 namespace Alabo.Extensions
 {
@@ -35,7 +35,7 @@ namespace Alabo.Extensions
         /// <param name="value">值</param>
         public static Expression StartsWith(this Expression left, object value)
         {
-            return left.Call("StartsWith", new[] {typeof(string)}, value);
+            return left.Call("StartsWith", new[] { typeof(string) }, value);
         }
 
         #endregion StartsWith(头匹配)
@@ -49,7 +49,7 @@ namespace Alabo.Extensions
         /// <param name="value">值</param>
         public static Expression EndsWith(this Expression left, object value)
         {
-            return left.Call("EndsWith", new[] {typeof(string)}, value);
+            return left.Call("EndsWith", new[] { typeof(string) }, value);
         }
 
         #endregion EndsWith(尾匹配)
@@ -63,7 +63,7 @@ namespace Alabo.Extensions
         /// <param name="value">值</param>
         public static Expression Contains(this Expression left, object value)
         {
-            return left.Call("Contains", new[] {typeof(string)}, value);
+            return left.Call("Contains", new[] { typeof(string) }, value);
         }
 
         #endregion Contains(模糊匹配)
@@ -125,7 +125,7 @@ namespace Alabo.Extensions
         internal static Expression<T> Compose<T>(this Expression<T> first, Expression<T> second,
             Func<Expression, Expression, Expression> merge)
         {
-            var map = first.Parameters.Select((f, i) => new {f, s = second.Parameters[i]})
+            var map = first.Parameters.Select((f, i) => new { f, s = second.Parameters[i] })
                 .ToDictionary(p => p.s, p => p.f);
             var secondBody = ParameterRebinder.ReplaceParameters(map, second.Body);
             return Expression.Lambda<T>(merge(first.Body, secondBody), first.Parameters);
@@ -144,9 +144,7 @@ namespace Alabo.Extensions
         public static Expression<TDelegate> ToLambda<TDelegate>(this Expression body,
             params ParameterExpression[] parameters)
         {
-            if (body == null) {
-                return null;
-            }
+            if (body == null) return null;
 
             return Expression.Lambda<TDelegate>(body, parameters);
         }
@@ -162,9 +160,7 @@ namespace Alabo.Extensions
         /// <param name="propertyName">属性名,支持多级属性名，与句点分隔，范例：Customer.Name</param>
         public static Expression Property(this Expression expression, string propertyName)
         {
-            if (propertyName.All(t => t != '.')) {
-                return Expression.Property(expression, propertyName);
-            }
+            if (propertyName.All(t => t != '.')) return Expression.Property(expression, propertyName);
 
             var propertyNameList = propertyName.Split('.');
             Expression result = null;
@@ -203,13 +199,9 @@ namespace Alabo.Extensions
         /// <param name="right">右操作数</param>
         public static Expression And(this Expression left, Expression right)
         {
-            if (left == null) {
-                return right;
-            }
+            if (left == null) return right;
 
-            if (right == null) {
-                return left;
-            }
+            if (right == null) return left;
 
             return Expression.AndAlso(left, right);
         }
@@ -223,13 +215,9 @@ namespace Alabo.Extensions
         public static Expression<Func<T, bool>> And<T>(this Expression<Func<T, bool>> left,
             Expression<Func<T, bool>> right)
         {
-            if (left == null) {
-                return right;
-            }
+            if (left == null) return right;
 
-            if (right == null) {
-                return left;
-            }
+            if (right == null) return left;
 
             return left.Compose(right, Expression.AndAlso);
         }
@@ -245,13 +233,9 @@ namespace Alabo.Extensions
         /// <param name="right">右操作数</param>
         public static Expression Or(this Expression left, Expression right)
         {
-            if (left == null) {
-                return right;
-            }
+            if (left == null) return right;
 
-            if (right == null) {
-                return left;
-            }
+            if (right == null) return left;
 
             return Expression.OrElse(left, right);
         }
@@ -265,13 +249,9 @@ namespace Alabo.Extensions
         public static Expression<Func<T, bool>> Or<T>(this Expression<Func<T, bool>> left,
             Expression<Func<T, bool>> right)
         {
-            if (left == null) {
-                return right;
-            }
+            if (left == null) return right;
 
-            if (right == null) {
-                return left;
-            }
+            if (right == null) return left;
 
             return left.Compose(right, Expression.OrElse);
         }
@@ -434,11 +414,9 @@ namespace Alabo.Extensions
         {
             var type = instance.Type.GetTypeInfo();
             var methods = type.GetMethods();
-            foreach (var method in methods) {
-                if (method.Name == methodName) {
+            foreach (var method in methods)
+                if (method.Name == methodName)
                     return Expression.Call(instance, method, values);
-                }
-            }
 
             return null;
         }
@@ -451,9 +429,8 @@ namespace Alabo.Extensions
         /// <param name="values">参数值列表</param>
         public static Expression Call(this Expression instance, string methodName, params object[] values)
         {
-            if (values == null || values.Length == 0) {
+            if (values == null || values.Length == 0)
                 return Expression.Call(instance, instance.Type.GetTypeInfo().GetMethod(methodName));
-            }
 
             return Expression.Call(instance, instance.Type.GetTypeInfo().GetMethod(methodName),
                 values.Select(Expression.Constant));
@@ -469,9 +446,8 @@ namespace Alabo.Extensions
         public static Expression Call(this Expression instance, string methodName, Type[] paramTypes,
             params object[] values)
         {
-            if (values == null || values.Length == 0) {
+            if (values == null || values.Length == 0)
                 return Expression.Call(instance, instance.Type.GetTypeInfo().GetMethod(methodName, paramTypes));
-            }
 
             return Expression.Call(instance, instance.Type.GetTypeInfo().GetMethod(methodName, paramTypes),
                 values.Select(Expression.Constant));

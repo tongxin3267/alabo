@@ -1,21 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.Core.Enums.Enum;
-using Alabo.Domains.Entities;
+﻿using Alabo.App.Asset.Accounts.Domain.Entities;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Regexs;
+using Alabo.Users.Entities;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.Finance.ViewModels.Account {
-
+namespace Alabo.App.Asset.Accounts.Dtos
+{
     /// <summary>
     ///     Class ViewAccount.
     /// </summary>
-    public class ViewAccount {
-
+    public class ViewAccount
+    {
         /// <summary>
         ///     Gets or sets Id标识
         /// </summary>
@@ -73,7 +74,7 @@ namespace Alabo.App.Core.Finance.ViewModels.Account {
         /// <summary>
         ///     Gets or sets the 会员.
         /// </summary>
-        public Users.Entities.User User { get; set; }
+        public User User { get; set; }
 
         /// <summary>
         ///     Gets or sets the money 类型 configuration.
@@ -84,7 +85,7 @@ namespace Alabo.App.Core.Finance.ViewModels.Account {
         /// <summary>
         ///     Gets or sets the account list.
         /// </summary>
-        public IList<Domain.Entities.Account> AccountList { get; set; }
+        public IList<Account> AccountList { get; set; }
 
         /// <summary>
         ///     备注，主要用于视图的页面操作

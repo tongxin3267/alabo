@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Alabo.Linq.Dynamic;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Alabo.Linq.Dynamic;
 
 namespace Alabo.Web.ViewFeatures
 {
@@ -48,13 +48,12 @@ namespace Alabo.Web.ViewFeatures
             IEnumerable<T> elements,
             Func<T, object> textSelector, Func<T, object> valueSelector)
         {
-            foreach (var element in elements) {
+            foreach (var element in elements)
                 yield return new SelectListItem
                 {
                     Text = textSelector(element)?.ToString(),
                     Value = valueSelector(element)?.ToString()
                 };
-            }
         }
     }
 }

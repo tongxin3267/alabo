@@ -44,13 +44,9 @@ namespace Alabo.Datas.Sql.Queries.Builders.Conditions
         /// </summary>
         public string GetCondition()
         {
-            if (string.IsNullOrWhiteSpace(_left)) {
-                return _right;
-            }
+            if (string.IsNullOrWhiteSpace(_left)) return _right;
 
-            if (string.IsNullOrWhiteSpace(_right)) {
-                return _left;
-            }
+            if (string.IsNullOrWhiteSpace(_right)) return _left;
 
             return $"{_left} And {_right}";
         }

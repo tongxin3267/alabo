@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.Extensions.Caching.Memory;
+﻿using Microsoft.Extensions.Caching.Memory;
+using System;
 
 namespace Alabo.Cache.Memory
 {
@@ -15,9 +15,7 @@ namespace Alabo.Cache.Memory
 
         public void Dispose()
         {
-            if (Instance is IDisposable) {
-                (Instance as IDisposable).Dispose();
-            }
+            if (Instance is IDisposable) (Instance as IDisposable).Dispose();
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿namespace Alabo.App.Core.Tasks.ResultModel {
-
-    public interface IModuleConfig {
-
+﻿namespace Alabo.Framework.Tasks.Queues.Models
+{
+    public interface IModuleConfig
+    {
         /// <summary>
         ///     配置存入数据库的主键Id
         /// </summary>

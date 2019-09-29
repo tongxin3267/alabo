@@ -1,21 +1,20 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Core.LightApps.Domain {
-
+namespace Alabo.Industry.Cms.LightApps.Domain
+{
     /// <summary>
-    /// 表明统一以AutoData_开头
+    ///     表明统一以AutoData_开头
     /// </summary>
-    public class AutoDataBaseEntity {
-
+    public class AutoDataBaseEntity
+    {
         /// <summary>
         ///     标识
         /// </summary>
@@ -23,7 +22,8 @@ namespace Alabo.App.Core.LightApps.Domain {
         [Key]
         [Display(Name = "ID", Order = 1)]
         [Field(ControlsType = ControlsType.Hidden, ListShow = false, EditShow = true, SortOrder = 1, Width = "50")]
-        [JsonConverter(typeof(ObjectIdConverter)), JsonIgnore]
+        [JsonConverter(typeof(ObjectIdConverter))]
+        [JsonIgnore]
         public ObjectId Id { get; set; }
 
         /// <summary>
@@ -41,12 +41,12 @@ namespace Alabo.App.Core.LightApps.Domain {
         public DateTime CreateTime { get; set; } = DateTime.Now;
 
         /// <summary>
-        /// 用户id
+        ///     用户id
         /// </summary>
         public long UserId { get; set; }
 
         /// <summary>
-        /// 数据分类ID保存到Commone_Relation中
+        ///     数据分类ID保存到Commone_Relation中
         /// </summary>
         public long ClassId { get; set; }
 

@@ -1,5 +1,5 @@
-﻿using System;
-using Alabo.Extensions;
+﻿using Alabo.Extensions;
+using System;
 
 namespace Alabo.Helpers
 {

@@ -1,5 +1,5 @@
-﻿using MongoDB.Bson;
-using Alabo.Domains.Entities.Core;
+﻿using Alabo.Domains.Entities.Core;
+using MongoDB.Bson;
 
 namespace Alabo.Domains.Entities
 {

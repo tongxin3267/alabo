@@ -1,14 +1,11 @@
-using System;
-using System.Linq;
-using MongoDB.Bson;
+using Alabo.Data.People.Circles.Domain.Entities;
 using Alabo.Domains.Services;
-using Alabo.App.Agent.Circle.Domain.Entities;
-using Alabo.Domains.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Agent.Circle.Domain.Services {
-
-    public interface ICircleService : IService<Entities.Circle, ObjectId> {
-
+namespace Alabo.Data.People.Circles.Domain.Services
+{
+    public interface ICircleService : IService<Circle, ObjectId>
+    {
         void Init();
     }
 }

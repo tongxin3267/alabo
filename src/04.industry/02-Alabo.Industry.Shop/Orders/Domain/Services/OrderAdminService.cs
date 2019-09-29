@@ -1,51 +1,57 @@
-﻿using Alabo.App.Core.Common.Domain.CallBacks;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Entities.Extension;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.App.Shop.Order.Domain.Entities.Extensions;
-using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.App.Shop.Order.Domain.Repositories;
-using Alabo.App.Shop.Order.ViewModels;
-using Alabo.App.Shop.Order.ViewModels.OrderEdit;
-using Alabo.App.Shop.Product.Domain.CallBacks;
-using Alabo.App.Shop.Product.Domain.Services;
-using Alabo.App.Shop.Store.Domain.Entities.Extensions;
-using Alabo.App.Shop.Store.Domain.Services;
-using Alabo.Core.Enums.Enum;
+﻿using Alabo.App.Asset.Pays.Domain.Entities;
+using Alabo.App.Asset.Pays.Domain.Entities.Extension;
+using Alabo.App.Asset.Pays.Domain.Services;
+using Alabo.AutoConfigs;
+using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Data.Things.Orders.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Basic.Grades.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Industry.Shop.Deliveries.Domain.Services;
+using Alabo.Industry.Shop.OrderActions.Domain.Services;
+using Alabo.Industry.Shop.OrderDeliveries.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.OrderDeliveries.Domain.Services;
+using Alabo.Industry.Shop.Orders.Domain.Entities.Extensions;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using Alabo.Industry.Shop.Orders.Domain.Repositories;
+using Alabo.Industry.Shop.Orders.Dtos;
+using Alabo.Industry.Shop.Orders.ViewModels;
+using Alabo.Industry.Shop.Orders.ViewModels.OrderEdit;
+using Alabo.Industry.Shop.Products.Domain.Services;
 using Alabo.Mapping;
+using Alabo.Tool.Payment;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.AutoConfigs;
-using Convert = System.Convert;
+using Alabo.Data.People.Stores.Domain.Entities.Extensions;
+using Alabo.Data.People.Stores.Domain.Services;
 
-namespace Alabo.App.Shop.Order.Domain.Services {
-
+namespace Alabo.Industry.Shop.Orders.Domain.Services
+{
     /// <summary>
     ///     订单后台操作相关 接口
     /// </summary>
-    public class OrderAdminService : ServiceBase, IOrderAdminService {
+    public class OrderAdminService : ServiceBase, IOrderAdminService
+    {
+        public OrderAdminService(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+        }
 
         /// <summary>
         ///     根据订单和用户生成支付记录
         ///     生成的支付记录没有，支付方式，支付方式有前端返回来
         /// </summary>
         /// <param name="singlePayInput">The order.</param>
-        public Tuple<ServiceResult, Pay> AddSinglePay(SinglePayInput singlePayInput) {
+        public Tuple<ServiceResult, Pay> AddSinglePay(SinglePayInput singlePayInput)
+        {
             var webSite = Resolve<IAutoConfigService>().GetValue<WebSiteConfig>();
 
-            var pay = new Pay {
+            var pay = new Pay
+            {
                 EntityId = singlePayInput.Orders.Select(r => r.Id).ToJson(),
                 Status = PayStatus.WaiPay,
                 Type = singlePayInput.CheckoutType,
@@ -54,15 +60,12 @@ namespace Alabo.App.Shop.Order.Domain.Services {
                 UserId = singlePayInput.User.Id
             };
             // 是否为管理员代付
-            if (singlePayInput.IsAdminPay) {
-                pay.PayType = PayType.AdminPay;
-            }
+            if (singlePayInput.IsAdminPay) pay.PayType = PayType.AdminPay;
 
-            if (singlePayInput.Type == CheckoutType.Customer) {
-                pay.Type = singlePayInput.Type;
-            }
+            if (singlePayInput.Type == CheckoutType.Customer) pay.Type = singlePayInput.Type;
 
-            var payExtension = new PayExtension {
+            var payExtension = new PayExtension
+            {
                 TradeNo =
                     singlePayInput.Orders.FirstOrDefault()
                         .Serial, // 使用第一个订单作为交易号                                              // Subject = order.OrderExtension?.Product?.Name, // 支付标题为商品名称
@@ -70,36 +73,29 @@ namespace Alabo.App.Shop.Order.Domain.Services {
                 Body = $"您正在{webSite.WebSiteName}商城上购买商品，请认真核对订单信息",
                 // ProductCode = order.OrderExtension?.Product?.Bn,
                 UserName = singlePayInput.User.GetUserName(),
-                IsFromOrder = singlePayInput.IsFromOrder,
+                IsFromOrder = singlePayInput.IsFromOrder
             };
-            if (singlePayInput.IsGroupBuy) {
+            if (singlePayInput.IsGroupBuy)
+            {
                 //是否为拼团购买
                 payExtension.IsGroupBuy = true;
                 payExtension.BuyerCount = singlePayInput.BuyerCount;
             }
 
-            if (singlePayInput.ExcecuteSqlList != null) {
-                payExtension.ExcecuteSqlList = singlePayInput.ExcecuteSqlList;
-            }
-            if (singlePayInput.AfterSuccess != null) {
-                payExtension.AfterSuccess = singlePayInput.AfterSuccess;
-            }
+            if (singlePayInput.ExcecuteSqlList != null) payExtension.ExcecuteSqlList = singlePayInput.ExcecuteSqlList;
+            if (singlePayInput.AfterSuccess != null) payExtension.AfterSuccess = singlePayInput.AfterSuccess;
 
-            if (singlePayInput.OrderUser != null) {
-                payExtension.OrderUser = singlePayInput.OrderUser;
-            }
+            if (singlePayInput.OrderUser != null) payExtension.OrderUser = singlePayInput.OrderUser;
             payExtension.RedirectUrl = singlePayInput.RedirectUrl;
-            if (Convert.ToInt16(singlePayInput.TriggerType) > 0) {
-                payExtension.TriggerType = singlePayInput.TriggerType;
-            }
+            if (Convert.ToInt16(singlePayInput.TriggerType) > 0) payExtension.TriggerType = singlePayInput.TriggerType;
 
-            if (!singlePayInput.EntityId.IsNullOrEmpty()) {
-                pay.EntityId = singlePayInput.EntityId;
-            }
+            if (!singlePayInput.EntityId.IsNullOrEmpty()) pay.EntityId = singlePayInput.EntityId;
             IList<KeyValuePair<Guid, decimal>> acmountPay = new List<KeyValuePair<Guid, decimal>>();
-            if (singlePayInput.ReduceMoneys != null && singlePayInput.ReduceMoneys.Count > 0) {
+            if (singlePayInput.ReduceMoneys != null && singlePayInput.ReduceMoneys.Count > 0)
+            {
                 payExtension.Note = "扣除";
-                singlePayInput.ReduceMoneys.Foreach(r => {
+                singlePayInput.ReduceMoneys.Foreach(r =>
+                {
                     payExtension.Note += " " + r.Name + r.MaxPayPrice;
                     acmountPay.Add(new KeyValuePair<Guid, decimal>(r.MoneyId, r.MaxPayPrice));
                 });
@@ -107,70 +103,43 @@ namespace Alabo.App.Shop.Order.Domain.Services {
 
             pay.AccountPay = acmountPay.ToJson();
 
-            if (!singlePayInput.RedirectUrl.IsNullOrEmpty()) {
-                payExtension.RedirectUrl = singlePayInput.RedirectUrl;
-            }
+            if (!singlePayInput.RedirectUrl.IsNullOrEmpty()) payExtension.RedirectUrl = singlePayInput.RedirectUrl;
 
             pay.Extensions = payExtension.ToJson();
 
-            if (Resolve<IPayService>().Add(pay)) {
-                return Tuple.Create(ServiceResult.Success, pay);
-            }
+            if (Resolve<IPayService>().Add(pay)) return Tuple.Create(ServiceResult.Success, pay);
 
             return Tuple.Create(ServiceResult.FailedWithMessage("支付订单创建失败"), new Pay());
-        }
-
-        /// <summary>
-        /// 订单管理页导出表格
-        /// </summary>
-        /// <param name="query"></param>
-        /// <returns></returns>
-        public PagedList<OrderExcelOutPut> GetOrderPageList(object query) {
-            var orders = Resolve<IOrderService>().GetPagedList(query, typeof(AdminOrderList));
-            var model = new List<OrderExcelOutPut>();
-            foreach (var item in orders) {
-                var view = AutoMapping.SetValue<OrderExcelOutPut>(item);
-                view.Serial = item.Serial;
-                view.Order = item;
-                view.Address = item.OrderExtension.UserAddress.AddressDescription;
-                view.Mobile = item.OrderExtension.User.Mobile;
-                view.Message = item.OrderExtension.OrderRemark.BuyerRemark;
-                view.Status = item.OrderStatus;
-                view.OrderStatusName = item.OrderStatus.GetDisplayName();
-
-                model.Add(view);
-            }
-
-            orders.PageSize = model.Count;
-            return PagedList<OrderExcelOutPut>.Create(model, orders.RecordCount, orders.PageSize, 1);
         }
 
         /// <summary>
         ///     获取订单列表
         /// </summary>
         /// <param name="query"></param>
-        public PagedList<AdminOrderList> GetAdminPageList(object query) {
+        public PagedList<AdminOrderList> GetAdminPageList(object query)
+        {
             //所有的绑定都使用快照数据，而不是使用当前数据库中的数据
             var orders = Resolve<IOrderService>().GetPagedList(query, typeof(AdminOrderList));
 
             var model = new List<AdminOrderList>();
-            foreach (var item in orders) {
+            foreach (var item in orders)
+            {
                 var listOutput = AutoMapping.SetValue<AdminOrderList>(item);
                 listOutput.Order = item;
                 listOutput.Order.OrderExtension = item.Extension.DeserializeJson<OrderExtension>();
                 listOutput.Serial = item.Serial;
                 listOutput.User = listOutput.Order.OrderExtension.User;
-                if (listOutput.User != null) {
+                if (listOutput.User != null)
+                {
                     var gradeConfig = Resolve<IGradeService>().GetGrade(listOutput.User.GradeId);
                     listOutput.UserName =
                         $"<img src='{gradeConfig?.Icon}' alt='{gradeConfig?.Name}' class='user-pic' style='width:18px;height:18px;' /><a class='primary-link margin-8' href='/Admin/User/Edit?id={listOutput.User?.Id}' title='{listOutput.User?.UserName}({listOutput.User?.Name}) 等级:{gradeConfig?.Name}'>{listOutput.User?.UserName}({listOutput.User?.Name})</a>";
                 }
 
-                listOutput.Order.OrderExtension.ReduceAmounts.Foreach(e => {
+                listOutput.Order.OrderExtension.ReduceAmounts.Foreach(e =>
+                {
                     listOutput.ForCash += $"{e.MoneyName}{e.Amount}抵现{e.ForCashAmount}";
-                    if (e.FeeAmount > 0) {
-                        listOutput.ForCash += $"服务费{e.FeeAmount}";
-                    }
+                    if (e.FeeAmount > 0) listOutput.ForCash += $"服务费{e.FeeAmount}";
 
                     listOutput.ForCash += "</br>";
                 });
@@ -181,16 +150,16 @@ namespace Alabo.App.Shop.Order.Domain.Services {
             return PagedList<AdminOrderList>.Create(model, orders.RecordCount, orders.PageSize, orders.PageIndex);
         }
 
-        public ViewAdminOrder GetViewAdminOrder(long id, long UserId) {
+        public ViewAdminOrder GetViewAdminOrder(long id, long UserId)
+        {
             var view = new ViewAdminOrder();
             var order = Resolve<IOrderService>().GetSingle(e => e.Id == id);
-            if (order != null) {
+            if (order != null)
+            {
                 view.Order = order;
                 // 获取门店信息
-                var store = Resolve<IShopStoreService>().GetSingle(e => e.Id == order.StoreId);
-                if (store.Extension != null) {
-                    store.StoreExtension = store.Extension.DeserializeJson<StoreExtension>();
-                }
+                var store = Resolve<IStoreService>().GetSingle(order.StoreId);
+                //if (store.Extension != null) store.StoreExtension = store.Extension.DeserializeJson<StoreExtension>();
 
                 view.Order.OrderExtension.Store = store;
                 view.Actions = Resolve<IOrderActionService>().GetList(e => e.OrderId == order.Id)
@@ -200,10 +169,10 @@ namespace Alabo.App.Shop.Order.Domain.Services {
 
                 //处理发货数量
                 IList<ProductDeliveryInfo> productDeliveryInfos = new List<ProductDeliveryInfo>();
-                if (view.OrderDeliveries.Count > 0) {
-                    foreach (var item in view.OrderDeliveries) {
+                if (view.OrderDeliveries.Count > 0)
+                {
+                    foreach (var item in view.OrderDeliveries)
                         productDeliveryInfos.AddRange(item.OrderDeliveryExtension.ProductDeliveryInfo);
-                    }
                     // 已发货数量
                     view.DeliveryProduct = (from ProductDeliveryInfo p in productDeliveryInfos
                                             group p by p.ProductSkuId
@@ -219,16 +188,16 @@ namespace Alabo.App.Shop.Order.Domain.Services {
                 view.OrderExtension = order.OrderExtension;
 
                 var isAdmin = Resolve<IUserService>().IsAdmin(UserId);
-                if (isAdmin) {
+                if (isAdmin)
                     view.Methods = Resolve<IOrderService>().GetMethodByStatus(order.OrderStatus)
                         .Where(r => r.Method.Contains("Admin")).ToList();
-                } else {
+                else
                     view.Methods = Resolve<IOrderService>().GetMethodByStatus(order.OrderStatus)
                         .Where(r => r.Method.Contains("Seller")).ToList();
-                }
 
                 view.Pay = Resolve<IPayService>().GetSingle(order.PayId);
-                view.OrderExtension.ReduceAmounts.Foreach(r => {
+                view.OrderExtension.ReduceAmounts.Foreach(r =>
+                {
                     view.ReduceMoneyIntro += $"{r.MoneyName}:{r.Amount}(抵现{r.ForCashAmount})  ";
                 });
             }
@@ -236,22 +205,49 @@ namespace Alabo.App.Shop.Order.Domain.Services {
             return view;
         }
 
-        public void ProductStockUpdate() {
+        public void ProductStockUpdate()
+        {
             var orders = Repository<IOrderRepository>().GetOrders();
-            if (orders.Count() > 0) {
+            if (orders.Count() > 0)
+            {
                 var orderIds = orders.Select(e => e.Id).ToList();
                 var orderProducts = Resolve<IOrderProductService>().GetList(e => orderIds.Contains(e.OrderId));
-                foreach (var item in orderProducts) {
+                foreach (var item in orderProducts)
+                {
                     Resolve<IProductSkuService>().Update(r => { r.Stock += item.Count; }, e => e.Id == item.SkuId);
                     Resolve<IProductService>().Update(r => { r.Stock += item.Count; }, e => e.Id == item.ProductId);
                 }
-                foreach (var a in orders) {
+
+                foreach (var a in orders)
                     Resolve<IOrderService>().Update(r => { r.OrderStatus = OrderStatus.Closed; }, e => e.Id == a.Id);
-                }
             }
         }
 
-        public OrderAdminService(IUnitOfWork unitOfWork) : base(unitOfWork) {
+        /// <summary>
+        ///     订单管理页导出表格
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public PagedList<OrderExcelOutPut> GetOrderPageList(object query)
+        {
+            var orders = Resolve<IOrderService>().GetPagedList(query, typeof(AdminOrderList));
+            var model = new List<OrderExcelOutPut>();
+            foreach (var item in orders)
+            {
+                var view = AutoMapping.SetValue<OrderExcelOutPut>(item);
+                view.Serial = item.Serial;
+                view.Order = item;
+                view.Address = item.OrderExtension.UserAddress.AddressDescription;
+                view.Mobile = item.OrderExtension.User.Mobile;
+                view.Message = item.OrderExtension.OrderRemark.BuyerRemark;
+                view.Status = item.OrderStatus;
+                view.OrderStatusName = item.OrderStatus.GetDisplayName();
+
+                model.Add(view);
+            }
+
+            orders.PageSize = model.Count;
+            return PagedList<OrderExcelOutPut>.Create(model, orders.RecordCount, orders.PageSize, 1);
         }
     }
 }

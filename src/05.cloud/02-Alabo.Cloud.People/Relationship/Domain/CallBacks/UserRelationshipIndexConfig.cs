@@ -1,26 +1,23 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
-using Alabo.App.Core.Common;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Market.Relationship.Domain.Enums;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
-using Alabo.Domains.Entities;
+using Alabo.Cloud.People.Relationship.Domain.Enums;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Helpers;
 using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Market.Relationship.Domain.CallBacks {
-
+namespace Alabo.Cloud.People.Relationship.Domain.CallBacks
+{
     /// <summary>
     /// </summary>
     [NotMapped]
@@ -28,8 +25,8 @@ namespace Alabo.App.Market.Relationship.Domain.CallBacks {
         Description = "会员关系网配置较为复杂，需要在专业人员的指导下完成配置，请慎重修改，配置不当将会影响整个系统的分润数据",
         PageType = ViewPageType.List, SortOrder = 20,
         SideBarType = SideBarType.RelationshipIndexSideBar)]
-    public class UserRelationshipIndexConfig : BaseViewModel, IAutoConfig {
-
+    public class UserRelationshipIndexConfig : BaseViewModel, IAutoConfig
+    {
         /// <summary>
         ///     标识
         /// </summary>
@@ -98,13 +95,16 @@ namespace Alabo.App.Market.Relationship.Domain.CallBacks {
         [Display(Name = "简要说明")]
         public string Intro { get; set; }
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
             //  Ioc.Resolve<IAutoConfigService>().Delete(r => r.Type == typeof(UserRelationshipIndexConfig).Name);
             var list = Ioc.Resolve<IAutoConfigService>().GetList<UserRelationshipIndexConfig>();
-            if (list == null || list.Count == 0) {
+            if (list == null || list.Count == 0)
+            {
                 var configs = new List<UserRelationshipIndexConfig>();
                 var config = new UserRelationshipIndexConfig();
-                foreach (RelationshipIndexType item in Enum.GetValues(typeof(RelationshipIndexType))) {
+                foreach (RelationshipIndexType item in Enum.GetValues(typeof(RelationshipIndexType)))
+                {
                     config = new UserRelationshipIndexConfig();
                     config.Id = item.GetFieldAttribute().GuidId.ToGuid();
                     config.Name = item.GetDisplayName();
@@ -113,7 +113,8 @@ namespace Alabo.App.Market.Relationship.Domain.CallBacks {
                 }
 
                 var typeclassProperty = config.GetType().GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
-                var autoConfig = new AutoConfig {
+                var autoConfig = new AutoConfig
+                {
                     Type = config.GetType().FullName,
                     //// AppName = typeclassProperty.AppName,
                     LastUpdated = DateTime.Now,

@@ -1,15 +1,16 @@
-using MongoDB.Bson;
-using Alabo.App.Market.SmallTargets.Domain.Entities;
+using Alabo.Cloud.School.SmallTargets.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
+using MongoDB.Bson;
 
-namespace Alabo.App.Market.SmallTargets.Domain.Services {
-
-    public class SmallTargetRankingService : ServiceBase<SmallTargetRanking, ObjectId>, ISmallTargetRankingService {
-
+namespace Alabo.Cloud.School.SmallTargets.Domain.Services
+{
+    public class SmallTargetRankingService : ServiceBase<SmallTargetRanking, ObjectId>, ISmallTargetRankingService
+    {
         public SmallTargetRankingService(IUnitOfWork unitOfWork, IRepository<SmallTargetRanking, ObjectId> repository) :
-            base(unitOfWork, repository) {
+            base(unitOfWork, repository)
+        {
         }
     }
 }

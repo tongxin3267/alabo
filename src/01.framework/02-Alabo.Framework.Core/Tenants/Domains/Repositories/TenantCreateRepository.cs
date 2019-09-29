@@ -1,30 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Extensions;
+using Alabo.Users.Entities;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
-namespace Alabo.App.Core.Admin.Domain.Repositories {
-
+namespace Alabo.Framework.Core.Tenants.Domains.Repositories
+{
     /// <summary>
     ///     TenantCreateRepository
     /// </summary>
-    public class TenantCreateRepository : RepositoryEfCore<Users.Entities.User, long>, ITenantCreateRepository {
-
+    public class TenantCreateRepository : RepositoryEfCore<User, long>, ITenantCreateRepository
+    {
         /// <summary>
         ///     TenantCreateRepository
         /// </summary>
         /// <param name="unitOfWork"></param>
-        public TenantCreateRepository(IUnitOfWork unitOfWork) : base(unitOfWork) {
+        public TenantCreateRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
         }
 
         /// <summary>
         ///     init tenant sql
         /// </summary>
         /// <returns></returns>
-        public void InitTenantSql() {
+        public void InitTenantSql()
+        {
             var sqlList = new List<string>
             {
                 //Core_AutoConfig
@@ -63,7 +66,7 @@ namespace Alabo.App.Core.Admin.Domain.Repositories {
                 //User_UserDetail
                 "CREATE TABLE [dbo].[User_UserDetail]([Id] [bigint] IDENTITY(1,1) NOT NULL,[UserId] [bigint] NOT NULL,[Password] [nvarchar](255) NOT NULL,[PayPassword] [nvarchar](255) NULL,[IdentityStatus] [bit] NOT NULL,[RegionId] [bigint] NOT NULL,[Sex] [int] NOT NULL,[Birthday] [datetime2](7) NOT NULL,[CreateTime] [datetime2](7) NOT NULL,[RegisterIp] [nvarchar](max) NULL,[LoginNum] [bigint] NOT NULL,[LastLoginIp] [nvarchar](50) NULL,[LastLoginTime] [datetime2](7) NOT NULL,[ModifiedTime] [datetime2](7) NOT NULL,[OpenId] [nvarchar](255) NULL,[Remark] [nvarchar](max) NULL,[Avator] [nvarchar](255) NULL,[NickName] [nvarchar](50) NULL,[AddressId] [nvarchar](50) NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
                 //User_UserMap
-                "CREATE TABLE [dbo].[User_UserMap]([Id] [bigint] IDENTITY(1,1) NOT NULL,[UserId] [bigint] NOT NULL,[LevelNumber] [bigint] NOT NULL,[TeamNumber] [bigint] NOT NULL,[TeamSales] [decimal](18, 2) NOT NULL,[ChildNode] [varchar](max) NULL,[ParentMap] [nvarchar](max) NOT NULL,[ShopSaleInfo] [text] NULL,[CreateTime] [datetime2](7) NOT NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
+                "CREATE TABLE [dbo].[User_UserMap]([Id] [bigint] IDENTITY(1,1) NOT NULL,[UserId] [bigint] NOT NULL,[LevelNumber] [bigint] NOT NULL,[TeamNumber] [bigint] NOT NULL,,[ChildNode] [varchar](max) NULL,[ParentMap] [nvarchar](max) NOT NULL,[ShopSaleInfo] [text] NULL,[CreateTime] [datetime2](7) NOT NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
                 //Shop_Activity
                 "CREATE TABLE [dbo].[Shop_Activity]([Id] [bigint] IDENTITY(1,1) NOT NULL,[Name] [nvarchar](255) NOT NULL,[StoreId] [bigint] NOT NULL,[Key] [nvarchar](255) NOT NULL,[Value] [nvarchar](max) NULL,[IsEnable] [bit] NOT NULL,[Status] [int] NOT NULL,[LimitGradeId] [uniqueidentifier] NOT NULL,[MaxStock] [bigint] NOT NULL,[UsedStock] [bigint] NOT NULL,[Extension] [nvarchar](max) NULL,[StartTime] [datetime2](7) NOT NULL,[EndTime] [datetime2](7) NOT NULL,[CreateTime] [datetime2](7) NOT NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
                 //Shop_ActivityRecord
@@ -93,7 +96,7 @@ namespace Alabo.App.Core.Admin.Domain.Repositories {
                 //Shop_ProductSku
                 "CREATE TABLE [dbo].[Shop_ProductSku]([Id] [bigint] IDENTITY(1,1) NOT NULL,[ProductId] [bigint] NOT NULL,[Bn] [nvarchar](max) NULL,[ProductStatus] [int] NOT NULL,[BarCode] [nvarchar](max) NULL,[PurchasePrice] [decimal](18, 2) NOT NULL,[CostPrice] [decimal](18, 2) NOT NULL,[MarketPrice] [decimal](18, 2) NOT NULL,[Price] [decimal](18, 2) NOT NULL,[FenRunPrice] [decimal](18, 2) NULL,[Weight] [decimal](18, 2) NOT NULL,[Size] [decimal](18, 2) NOT NULL,[Stock] [bigint] NOT NULL,[StorePlace] [nvarchar](max) NULL,[PropertyJson] [nvarchar](max) NULL,[PropertyValueDesc] [nvarchar](max) NULL,[CreateTime] [datetime2](7) NOT NULL,[Modified] [datetime2](7) NOT NULL,[SpecSn] [nvarchar](max) NULL,[DisplayPrice] [nvarchar](50) NULL,[MinPayCash] [decimal](18, 2) NULL,[MaxPayPrice] [decimal](18, 2) NULL,[GradePrice] [nvarchar](max) NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
                 //Shop_Store
-                "CREATE TABLE [dbo].[Shop_Store]([Id] [bigint] IDENTITY(1,1) NOT NULL,[UserID] [bigint] NOT NULL,[Name] [nvarchar](50) NOT NULL,[GradeId] [uniqueidentifier] NOT NULL,[ParentUserId] [bigint] NOT NULL,[IsPlanform] [bit] NOT NULL,[Status] [int] NOT NULL,[Extension] [nvarchar](max) NULL,[CreateTime] [datetime2](7) NOT NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
+                "CREATE TABLE [dbo].[Shop_Store]([Id] [bigint] IDENTITY(1,1) NOT NULL,[UserID] [bigint] NOT NULL,[Name] [nvarchar](50) NOT NULL,[GradeId] [uniqueidentifier] NOT NULL,[ParentUserId] [bigint] NOT NULL,[IsPlatform] [bit] NOT NULL,[Status] [int] NOT NULL,[Extension] [nvarchar](max) NULL,[CreateTime] [datetime2](7) NOT NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
                 //alter
                 "ALTER TABLE [dbo].[Core_AutoConfig] ADD  DEFAULT (getdate()) FOR [CreateTime]",
                 "ALTER TABLE [dbo].[Basic_MessageQueue] ADD  DEFAULT ((0)) FOR [TemplateCode]",
@@ -132,7 +135,8 @@ namespace Alabo.App.Core.Admin.Domain.Repositories {
         ///     create database
         /// </summary>
         /// <param name="databaseName"></param>
-        public void CreateDatabase(string databaseName) {
+        public void CreateDatabase(string databaseName)
+        {
             var sqlList = new List<string>
             {
                 $"CREATE DATABASE {databaseName};",
@@ -148,7 +152,8 @@ namespace Alabo.App.Core.Admin.Domain.Repositories {
         /// </summary>
         /// <param name="databaseName"></param>
         /// <returns></returns>
-        public bool IsExistsDatabase(string databaseName) {
+        public bool IsExistsDatabase(string databaseName)
+        {
             var sql = $"select COUNT(1) From master.dbo.sysdatabases where name='{databaseName.ToLower()}'";
             var obj = RepositoryContext.ExecuteScalar(sql);
             return obj.ToInt16() > 0;
@@ -158,16 +163,21 @@ namespace Alabo.App.Core.Admin.Domain.Repositories {
         ///     execute sql
         /// </summary>
         /// <param name="sqlList"></param>
-        public void ExecuteSql(List<string> sqlList) {
+        public void ExecuteSql(List<string> sqlList)
+        {
             foreach (var item in sqlList)
-                try {
+                try
+                {
                     RepositoryContext.ExecuteNonQuery(item);
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                     Trace.WriteLine(ex.Message);
                 }
         }
 
-        public void DeleteDatabase(string databaseName) {
+        public void DeleteDatabase(string databaseName)
+        {
             var sqlList = new List<string>
             {
                 $"Drop DATABASE {databaseName};"
@@ -177,7 +187,8 @@ namespace Alabo.App.Core.Admin.Domain.Repositories {
             ExecuteSql(sqlList);
         }
 
-        private List<string> TableCreateSqlList() {
+        private List<string> TableCreateSqlList()
+        {
             var sqlList = new List<string>
             {
                 //Core_AutoConfig
@@ -244,7 +255,7 @@ namespace Alabo.App.Core.Admin.Domain.Repositories {
                 //Shop_ProductSku
                 "CREATE TABLE [dbo].[Shop_ProductSku]([Id] [bigint] IDENTITY(1,1) NOT NULL,[ProductId] [bigint] NOT NULL,[Bn] [nvarchar](max) NULL,[ProductStatus] [int] NOT NULL,[BarCode] [nvarchar](max) NULL,[PurchasePrice] [decimal](18, 2) NOT NULL,[CostPrice] [decimal](18, 2) NOT NULL,[MarketPrice] [decimal](18, 2) NOT NULL,[Price] [decimal](18, 2) NOT NULL,[FenRunPrice] [decimal](18, 2) NULL,[Weight] [decimal](18, 2) NOT NULL,[Size] [decimal](18, 2) NOT NULL,[Stock] [bigint] NOT NULL,[StorePlace] [nvarchar](max) NULL,[PropertyJson] [nvarchar](max) NULL,[PropertyValueDesc] [nvarchar](max) NULL,[CreateTime] [datetime2](7) NOT NULL,[Modified] [datetime2](7) NOT NULL,[SpecSn] [nvarchar](max) NULL,[DisplayPrice] [nvarchar](50) NULL,[MinPayCash] [decimal](18, 2) NULL,[MaxPayPrice] [decimal](18, 2) NULL,[GradePrice] [nvarchar](max) NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
                 //Shop_Store
-                "CREATE TABLE [dbo].[Shop_Store]([Id] [bigint] IDENTITY(1,1) NOT NULL,[UserID] [bigint] NOT NULL,[Name] [nvarchar](50) NOT NULL,[GradeId] [uniqueidentifier] NOT NULL,[ParentUserId] [bigint] NOT NULL,[IsPlanform] [bit] NOT NULL,[Status] [int] NOT NULL,[Extension] [nvarchar](max) NULL,[CreateTime] [datetime2](7) NOT NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
+                "CREATE TABLE [dbo].[Shop_Store]([Id] [bigint] IDENTITY(1,1) NOT NULL,[UserID] [bigint] NOT NULL,[Name] [nvarchar](50) NOT NULL,[GradeId] [uniqueidentifier] NOT NULL,[ParentUserId] [bigint] NOT NULL,[IsPlatform] [bit] NOT NULL,[Status] [int] NOT NULL,[Extension] [nvarchar](max) NULL,[CreateTime] [datetime2](7) NOT NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
                 //alter
                 "ALTER TABLE [dbo].[Core_AutoConfig] ADD  DEFAULT (getdate()) FOR [CreateTime]",
                 "ALTER TABLE [dbo].[Basic_MessageQueue] ADD  DEFAULT ((0)) FOR [TemplateCode]",

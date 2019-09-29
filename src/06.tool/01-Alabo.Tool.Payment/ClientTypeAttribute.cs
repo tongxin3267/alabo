@@ -1,15 +1,14 @@
-﻿using Alabo.App.Core.Finance.Domain.Enums;
-using System;
+﻿using System;
 
-namespace Alabo.App.Core.ApiStore {
-
+namespace Alabo.Tool.Payment
+{
     /// <summary>
     ///     运行的终端类型
     ///     值与ClientType 对应
     /// </summary>
     [AttributeUsage(AttributeTargets.Field)]
-    public class ClientTypeAttribute : Attribute {
-
+    public class ClientTypeAttribute : Attribute
+    {
         /// <summary>
         ///     允许终端类型的状态，多个状态用,隔开
         /// </summary>

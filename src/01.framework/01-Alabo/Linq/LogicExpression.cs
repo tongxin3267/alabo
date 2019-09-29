@@ -29,13 +29,11 @@ namespace Alabo.Linq
             var arrVariable = logicExpressionVariable.Split(',');
 
             //条件名称替换成其对应的bool值
-            for (var i = 0; i < arrVariable.Length; i++) {
-                if (arrVariable[i].Contains("!")) {
+            for (var i = 0; i < arrVariable.Length; i++)
+                if (arrVariable[i].Contains("!"))
                     logicExpression = logicExpression.Replace(arrVariable[i], (!logicValueBool[i]).ToString());
-                } else {
+                else
                     logicExpression = logicExpression.Replace(arrVariable[i], logicValueBool[i].ToString());
-                }
-            }
 
             return Operate(logicExpression);
         }
@@ -69,9 +67,7 @@ namespace Alabo.Linq
                     //获取字符串中的第i个字符
                     var tempChar = logicExpression.Substring(i, 1);
                     //如果是左括号，则将该字符的索引号给lasttLeftBracketIndex，直到最后一个
-                    if (tempChar == "(") {
-                        lasttLeftBracketIndex = i;
-                    }
+                    if (tempChar == "(") lasttLeftBracketIndex = i;
                 }
 
                 //找到与最后第一个左括号对应的右括号
@@ -79,9 +75,7 @@ namespace Alabo.Linq
                 {
                     //获取字符串中的第i个字符
                     var tempChar = logicExpression.Substring(i, 1);
-                    if (tempChar == ")" && firstRightBracketIndex == -1) {
-                        firstRightBracketIndex = i;
-                    }
+                    if (tempChar == ")" && firstRightBracketIndex == -1) firstRightBracketIndex = i;
                 }
 
                 var calculateExpression = logicExpression.Substring(lasttLeftBracketIndex + 1,
@@ -113,9 +107,8 @@ namespace Alabo.Linq
             logicExpressionOperator = logicExpressionOperator.Replace("True", ",");
             logicExpressionOperator = logicExpressionOperator.Replace("False", ",");
             logicExpressionOperator = logicExpressionOperator.Remove(0, 1);
-            if (logicExpressionOperator.Length > 0) {
+            if (logicExpressionOperator.Length > 0)
                 logicExpressionOperator = logicExpressionOperator.Remove(logicExpressionOperator.Length - 1, 1);
-            }
 
             var arrOperator = logicExpressionOperator.Split(',');
 
@@ -123,13 +116,10 @@ namespace Alabo.Linq
             var logicResult = Convert.ToBoolean(arrLogicValue[0]);
 
             //更具逻辑运算符的数量通过循环进行运算（不包含"!"）
-            for (var i = 0; i < arrOperator.Length; i++) {
-                if (arrOperator[i] == "&&") {
+            for (var i = 0; i < arrOperator.Length; i++)
+                if (arrOperator[i] == "&&")
                     logicResult = logicResult && Convert.ToBoolean(arrLogicValue[i + 1]);
-                } else if (arrOperator[i] == "||") {
-                    logicResult = logicResult || Convert.ToBoolean(arrLogicValue[i + 1]);
-                }
-            }
+                else if (arrOperator[i] == "||") logicResult = logicResult || Convert.ToBoolean(arrLogicValue[i + 1]);
 
             return logicResult;
         }

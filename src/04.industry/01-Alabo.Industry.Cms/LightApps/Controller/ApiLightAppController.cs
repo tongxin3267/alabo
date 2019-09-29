@@ -1,32 +1,27 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MongoDB.Bson;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
-using Alabo.App.Core.LightApps.Domain;
-using Alabo.App.Core.LightApps.Domain.Services;
-using Alabo.Core.WebApis.Controller;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.Helpers;
+using Alabo.Industry.Cms.LightApps.Domain;
+using Alabo.Industry.Cms.LightApps.Domain.Services;
+using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.LightApps.Controller {
-
+namespace Alabo.Industry.Cms.LightApps.Controller
+{
     [ApiExceptionFilter]
     [Route("Api/LightApp/[action]")]
-    public class ApiLightAppController : ApiBaseController {
-
-        public ApiLightAppController() : base() {
-        }
-
+    public class ApiLightAppController : ApiBaseController
+    {
         [HttpPost]
-        public ApiResult Add([FromBody] LightAppAddView input) {
-            if (input.TableName.IsNullOrEmpty()) {
-                return ApiResult.Failure("未正确指定数据表表名");
-            }
+        public ApiResult Add([FromBody] LightAppAddView input)
+        {
+            if (input.TableName.IsNullOrEmpty()) return ApiResult.Failure("未正确指定数据表表名");
 
             var rs = Ioc.Resolve<ILightAppService>().Add(input.TableName, input.DataJson);
 
@@ -34,10 +29,9 @@ namespace Alabo.App.Core.LightApps.Controller {
         }
 
         [HttpPost]
-        public ApiResult Update([FromBody] LightAppAddView input) {
-            if (input.TableName.IsNullOrEmpty()) {
-                return ApiResult.Failure("未正确指定数据表表名");
-            }
+        public ApiResult Update([FromBody] LightAppAddView input)
+        {
+            if (input.TableName.IsNullOrEmpty()) return ApiResult.Failure("未正确指定数据表表名");
 
             var rs = Ioc.Resolve<ILightAppService>().Update(input.TableName, input.DataJson, input.Id.ToObjectId());
 
@@ -45,10 +39,9 @@ namespace Alabo.App.Core.LightApps.Controller {
         }
 
         [HttpDelete]
-        public ApiResult Delete(string tableName, string id) {
-            if (!ObjectId.TryParse(id, out ObjectId oId)) {
-                return ApiResult.Failure("参数id不是有效的ObjectId!");
-            }
+        public ApiResult Delete(string tableName, string id)
+        {
+            if (!ObjectId.TryParse(id, out var oId)) return ApiResult.Failure("参数id不是有效的ObjectId!");
 
             var rs = Ioc.Resolve<ILightAppService>().Delete(tableName, oId);
 
@@ -56,15 +49,14 @@ namespace Alabo.App.Core.LightApps.Controller {
         }
 
         [HttpGet]
-        public ApiResult GetSingle(string tableName, string id) {
+        public ApiResult GetSingle(string tableName, string id)
+        {
             var dic = new Dictionary<string, string>
             {
-                {"_id", id },
+                {"_id", id}
             };
             var model = Ioc.Resolve<ILightAppService>().GetSingle(tableName, dic);
-            if (model != null) {
-                return ApiResult.Success(model);
-            }
+            if (model != null) return ApiResult.Success(model);
 
             return ApiResult.Failure("未查到相应数据");
         }
@@ -74,13 +66,17 @@ namespace Alabo.App.Core.LightApps.Controller {
         /// </summary>
         [HttpGet]
         [Display(Description = "根据Url获取列表")]
-        public ApiResult<List<dynamic>> GetList() {
+        public ApiResult<List<dynamic>> GetList()
+        {
             var tableName = "";
             var dicQuery = QueryDictionary();
-            if (dicQuery.ContainsKey("TableName")) {
+            if (dicQuery.ContainsKey("TableName"))
+            {
                 tableName = dicQuery["TableName"];
                 dicQuery.Remove("TableName");
-            } else {
+            }
+            else
+            {
                 return ApiResult.Failure<List<dynamic>>("参数错误: 未指定对应的数据表名!");
             }
 
@@ -89,22 +85,27 @@ namespace Alabo.App.Core.LightApps.Controller {
         }
 
         /// <summary>
-        ///    分页获取List
+        ///     分页获取List
         /// </summary>
         [HttpGet]
         [Display(Description = "根据Url获取列表")]
-        public ApiResult<PageResult<dynamic>> GetPagedList() {
+        public ApiResult<PageResult<dynamic>> GetPagedList()
+        {
             var tableName = "";
             var dicQuery = QueryDictionary();
-            if (dicQuery.ContainsKey("TableName")) {
+            if (dicQuery.ContainsKey("TableName"))
+            {
                 tableName = dicQuery["TableName"];
                 dicQuery.Remove("TableName");
-            } else {
+            }
+            else
+            {
                 return ApiResult.Failure<PageResult<dynamic>>("参数错误: 未指定对应的数据表名!");
             }
 
             var result = Ioc.Resolve<ILightAppService>().GetPagedList(tableName, dicQuery.ToJsons());
-            var apiRusult = new PageResult<dynamic> {
+            var apiRusult = new PageResult<dynamic>
+            {
                 PageCount = result.PageCount,
                 Result = result,
                 RecordCount = result.RecordCount,

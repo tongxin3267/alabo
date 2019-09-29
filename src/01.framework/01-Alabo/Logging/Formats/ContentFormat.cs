@@ -1,8 +1,8 @@
-﻿using System;
-using System.Text;
-using Alabo.Logging.Abstractions;
+﻿using Alabo.Logging.Abstractions;
 using Alabo.Logging.Contents;
 using Alabo.Properties;
+using System;
+using System.Text;
 
 namespace Alabo.Logging.Formats
 {
@@ -22,9 +22,7 @@ namespace Alabo.Logging.Formats
         /// <param name="logContent">日志内容</param>
         public string Format(ILogContent logContent)
         {
-            if (!(logContent is LogContent content)) {
-                return string.Empty;
-            }
+            if (!(logContent is LogContent content)) return string.Empty;
 
             return Format(content);
         }
@@ -79,9 +77,7 @@ namespace Alabo.Logging.Formats
         /// </summary>
         protected void Append(StringBuilder result, string caption, string value)
         {
-            if (string.IsNullOrWhiteSpace(value)) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(value)) return;
 
             result.AppendFormat("{0}: {1}   ", caption, value);
         }
@@ -96,9 +92,7 @@ namespace Alabo.Logging.Formats
                 r.AppendFormat("{0}: {1} >> ", c.Level, c.LogName);
                 r.AppendFormat("{0}: {1}   ", LogResource.TraceId, c.TraceId);
                 r.AppendFormat("{0}: {1}   ", LogResource.OperationTime, c.OperationTime);
-                if (string.IsNullOrWhiteSpace(c.Duration)) {
-                    return;
-                }
+                if (string.IsNullOrWhiteSpace(c.Duration)) return;
 
                 r.AppendFormat("{0}: {1} ", LogResource.Duration, c.Duration);
             }, ref line);
@@ -122,9 +116,7 @@ namespace Alabo.Logging.Formats
         /// </summary>
         protected void Line3(StringBuilder result, LogContent content, ref int line)
         {
-            if (string.IsNullOrWhiteSpace(content.Browser)) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(content.Browser)) return;
 
             AppendLine(result, content, (r, c) => Append(r, LogResource.Browser, c.Browser), ref line);
         }
@@ -134,9 +126,7 @@ namespace Alabo.Logging.Formats
         /// </summary>
         protected void Line4(StringBuilder result, LogContent content, ref int line)
         {
-            if (string.IsNullOrWhiteSpace(content.Url)) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(content.Url)) return;
 
             AppendLine(result, content, (r, c) => r.Append("Url: " + c.Url), ref line);
         }
@@ -147,9 +137,8 @@ namespace Alabo.Logging.Formats
         protected void Line5(StringBuilder result, LogContent content, ref int line)
         {
             if (string.IsNullOrWhiteSpace(content.UserId) && string.IsNullOrWhiteSpace(content.Operator)
-                                                          && string.IsNullOrWhiteSpace(content.Role)) {
+                                                          && string.IsNullOrWhiteSpace(content.Role))
                 return;
-            }
 
             AppendLine(result, content, (r, c) =>
             {
@@ -166,9 +155,8 @@ namespace Alabo.Logging.Formats
         {
             if (string.IsNullOrWhiteSpace(content.BusinessId) && string.IsNullOrWhiteSpace(content.Tenant)
                                                               && string.IsNullOrWhiteSpace(content.Application) &&
-                                                              string.IsNullOrWhiteSpace(content.Module)) {
+                                                              string.IsNullOrWhiteSpace(content.Module))
                 return;
-            }
 
             AppendLine(result, content, (r, c) =>
             {
@@ -184,9 +172,7 @@ namespace Alabo.Logging.Formats
         /// </summary>
         protected void Line7(StringBuilder result, LogContent content, ref int line)
         {
-            if (string.IsNullOrWhiteSpace(content.Class) && string.IsNullOrWhiteSpace(content.Method)) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(content.Class) && string.IsNullOrWhiteSpace(content.Method)) return;
 
             AppendLine(result, content, (r, c) =>
             {
@@ -200,9 +186,7 @@ namespace Alabo.Logging.Formats
         /// </summary>
         protected void Line8(StringBuilder result, LogContent content, ref int line)
         {
-            if (content.Params.Length == 0) {
-                return;
-            }
+            if (content.Params.Length == 0) return;
 
             Append(result, content, (r, c) =>
             {
@@ -216,9 +200,7 @@ namespace Alabo.Logging.Formats
         /// </summary>
         protected void Line9(StringBuilder result, LogContent content, ref int line)
         {
-            if (string.IsNullOrWhiteSpace(content.Caption)) {
-                return;
-            }
+            if (string.IsNullOrWhiteSpace(content.Caption)) return;
 
             AppendLine(result, content, (r, c) => { r.AppendFormat("{0}: {1}", LogResource.Caption, c.Caption); },
                 ref line);
@@ -229,9 +211,7 @@ namespace Alabo.Logging.Formats
         /// </summary>
         protected void Line10(StringBuilder result, LogContent content, ref int line)
         {
-            if (content.Content.Length == 0) {
-                return;
-            }
+            if (content.Content.Length == 0) return;
 
             Append(result, content, (r, c) =>
             {
@@ -245,9 +225,7 @@ namespace Alabo.Logging.Formats
         /// </summary>
         protected void Line11(StringBuilder result, LogContent content, ref int line)
         {
-            if (content.Sql.Length == 0) {
-                return;
-            }
+            if (content.Sql.Length == 0) return;
 
             Append(result, content, (r, c) =>
             {
@@ -261,9 +239,7 @@ namespace Alabo.Logging.Formats
         /// </summary>
         protected void Line12(StringBuilder result, LogContent content, ref int line)
         {
-            if (content.SqlParams.Length == 0) {
-                return;
-            }
+            if (content.SqlParams.Length == 0) return;
 
             Append(result, content, (r, c) =>
             {
@@ -277,9 +253,7 @@ namespace Alabo.Logging.Formats
         /// </summary>
         protected void Line13(StringBuilder result, LogContent content, ref int line)
         {
-            if (content.Exception == null) {
-                return;
-            }
+            if (content.Exception == null) return;
 
             AppendLine(result, content, (r, c) =>
             {
@@ -293,9 +267,7 @@ namespace Alabo.Logging.Formats
         /// </summary>
         private string GetErrorCode(string errorCode)
         {
-            if (string.IsNullOrWhiteSpace(errorCode)) {
-                return string.Empty;
-            }
+            if (string.IsNullOrWhiteSpace(errorCode)) return string.Empty;
 
             return $"-- {LogResource.ErrorCode}: {errorCode}";
         }
@@ -305,9 +277,7 @@ namespace Alabo.Logging.Formats
         /// </summary>
         protected void Line14(StringBuilder result, LogContent content, ref int line)
         {
-            if (content.Exception == null) {
-                return;
-            }
+            if (content.Exception == null) return;
 
             AppendLine(result, content, (r, c) =>
             {
@@ -321,9 +291,7 @@ namespace Alabo.Logging.Formats
         /// </summary>
         protected void Finish(StringBuilder result)
         {
-            for (var i = 0; i < 125; i++) {
-                result.Append("-");
-            }
+            for (var i = 0; i < 125; i++) result.Append("-");
         }
     }
 }

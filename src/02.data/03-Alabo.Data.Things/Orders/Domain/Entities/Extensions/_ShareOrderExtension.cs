@@ -1,16 +1,16 @@
-﻿using System;
+﻿using Alabo.Domains.Entities.Extensions;
+using System;
 using System.Collections.Generic;
-using Alabo.Domains.Entities.Extensions;
 
-namespace Alabo.App.Core.Tasks.Domain.Entities.Extensions {
-
+namespace Alabo.Data.Things.Orders.Domain.Entities.Extensions
+{
     /// <summary>
     ///     Class ShareOrderExtension.
     ///     分润订单扩展
     /// </summary>
     /// <seealso cref="Alabo.Domains.Entities.Extensions.EntityExtension" />
-    public class ShareOrderExtension : EntityExtension {
-
+    public class ShareOrderExtension : EntityExtension
+    {
         /// <summary>
         ///     Gets or sets the task message.
         ///     模块执行信息记录
@@ -27,8 +27,8 @@ namespace Alabo.App.Core.Tasks.Domain.Entities.Extensions {
     /// <summary>
     ///     执行消息
     /// </summary>
-    public class TaskMessage {
-
+    public class TaskMessage
+    {
         /// <summary>
         ///     模块Id
         /// </summary>

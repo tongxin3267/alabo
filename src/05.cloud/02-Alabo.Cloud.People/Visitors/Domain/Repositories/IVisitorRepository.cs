@@ -1,9 +1,10 @@
-using MongoDB.Bson;
-using Alabo.App.Core.Markets.Visitors.Domain.Entities;
+using Alabo.Cloud.People.Visitors.Domain.Entities;
 using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Markets.Visitors.Domain.Repositories {
-
-    public interface IVisitorRepository : IRepository<Visitor, ObjectId> {
+namespace Alabo.Cloud.People.Visitors.Domain.Repositories
+{
+    public interface IVisitorRepository : IRepository<Visitor, ObjectId>
+    {
     }
 }

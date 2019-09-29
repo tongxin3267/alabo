@@ -1,131 +1,118 @@
-﻿using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Core.User.ViewModels;
-using Alabo.Core.Enums.Enum;
+﻿using Alabo.Data.People.Users.Dtos;
+using Alabo.Data.People.Users.ViewModels;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Users.Entities;
+using Alabo.Users.Enum;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.Users.Entities;
-using Alabo.Users.Enum;
-using Convert = System.Convert;
 
-namespace Alabo.App.Core.User.Domain.Repositories {
-
-    public class UserRepository : RepositoryEfCore<Users.Entities.User, long>, IUserRepository {
-
-        private const string userDetailSql =
+namespace Alabo.Data.People.Users.Domain.Repositories
+{
+    public class UserRepository : RepositoryEfCore<User, long>, IUserRepository
+    {
+        private const string UserDetailSql =
             @"SELECT dbo.User_User.Id, dbo.User_User.UserName, dbo.User_User.Name, dbo.User_User.Mobile, dbo.User_User.Email, dbo.User_User.ParentId,
                  dbo.User_User.Status, dbo.User_User.GradeId, dbo.User_UserDetail.Remark,
                  dbo.User_UserDetail.OpenId,
                  dbo.User_UserDetail.LastLoginTime, dbo.User_UserDetail.ModifiedTime, dbo.User_UserDetail.LoginNum,
                  dbo.User_UserDetail.LastLoginIp, dbo.User_UserDetail.RegisterIp, dbo.User_UserDetail.CreateTime,
                  dbo.User_UserDetail.Birthday, dbo.User_UserDetail.Avator, dbo.User_UserDetail.Sex, dbo.User_UserDetail.AddressId,
-                 dbo.User_UserDetail.RegionId,dbo.User_UserDetail.ServiceCenterUserId, dbo.User_UserDetail.Identity,
+                 dbo.User_UserDetail.RegionId, dbo.User_UserDetail.IdentityStatus,
                   dbo.User_UserDetail.PayPassword, dbo.User_UserDetail.Password,
                  dbo.User_UserMap.LevelNumber, dbo.User_UserMap.TeamNumber,
-                 dbo.User_UserMap.TeamSales, dbo.User_UserMap.ChildNode, dbo.User_UserMap.ParentMap,
+                 dbo.User_UserMap.ChildNode, dbo.User_UserMap.ParentMap,
                  dbo.User_UserDetail.Id AS DetailId, dbo.User_UserMap.Id AS MapId
  FROM      dbo.User_User INNER JOIN
                  dbo.User_UserDetail ON dbo.User_User.Id = dbo.User_UserDetail.UserId INNER JOIN
                  dbo.User_UserMap ON dbo.User_User.Id = dbo.User_UserMap.UserId ";
 
-        public UserRepository(IUnitOfWork unitOfWork) : base(unitOfWork) {
+        public UserRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
         }
 
-        public Users.Entities.User GetSingleByMail(string mail) {
+        public User GetSingleByMail(string mail)
+        {
             var sql = @"SELECT * FROM User_User WHERE Email = @Email";
             using (var reader =
-                RepositoryContext.ExecuteDataReader(sql, RepositoryContext.CreateParameter("@Email", mail))) {
-                Users.Entities.User user = null;
-                if (reader.Read()) {
-                    user = ReadUser(reader);
-                }
+                RepositoryContext.ExecuteDataReader(sql, RepositoryContext.CreateParameter("@Email", mail)))
+            {
+                User user = null;
+                if (reader.Read()) user = ReadUser(reader);
 
                 return user;
             }
         }
 
-        public Users.Entities.User GetSingleByMobile(string mobile) {
+        public User GetSingleByMobile(string mobile)
+        {
             var sql = @"SELECT * FROM User_User WHERE Mobile = @Mobile";
             using (var reader =
-                RepositoryContext.ExecuteDataReader(sql, RepositoryContext.CreateParameter("@Mobile", mobile))) {
-                Users.Entities.User user = null;
-                if (reader.Read()) {
-                    user = ReadUser(reader);
-                }
+                RepositoryContext.ExecuteDataReader(sql, RepositoryContext.CreateParameter("@Mobile", mobile)))
+            {
+                User user = null;
+                if (reader.Read()) user = ReadUser(reader);
 
                 return user;
             }
         }
 
-        public Users.Entities.User GetSingle(string UserName) {
+        public User GetSingle(string userName)
+        {
             var sql = @"SELECT * FROM User_User WHERE UserName = @UserName";
             using (var reader =
-                RepositoryContext.ExecuteDataReader(sql, RepositoryContext.CreateParameter("@UserName", UserName))) {
-                Users.Entities.User user = null;
-                if (reader.Read()) {
-                    user = ReadUser(reader);
-                }
+                RepositoryContext.ExecuteDataReader(sql, RepositoryContext.CreateParameter("@UserName", userName)))
+            {
+                User user = null;
+                if (reader.Read()) user = ReadUser(reader);
 
                 return user;
             }
         }
 
-        public Users.Entities.User GetSingle(long userId) {
+        public User GetSingle(long userId)
+        {
             var sql = @"SELECT * FROM User_User WHERE Id = @Id";
             using (var reader =
-                RepositoryContext.ExecuteDataReader(sql, RepositoryContext.CreateParameter("@Id", userId))) {
-                Users.Entities.User user = null;
-                if (reader.Read()) {
-                    user = ReadUser(reader);
-                }
+                RepositoryContext.ExecuteDataReader(sql, RepositoryContext.CreateParameter("@Id", userId)))
+            {
+                User user = null;
+                if (reader.Read()) user = ReadUser(reader);
 
                 return user;
             }
         }
 
-        public Users.Entities.User UserTeam(long userId) {
+        public User UserTeam(long userId)
+        {
             var sql =
                 @"SELECT u.* ,vi.ServiceCenterUserId from User_User u  ,(SELECT ud.userId ,ud.ServiceCenterUserId FROM user_userDetail ud  )
                          vi  WHERE vi.userId=u.id and u.Id=@Id";
             using (var reader =
-                RepositoryContext.ExecuteDataReader(sql, RepositoryContext.CreateParameter("@Id", userId))) {
-                Users.Entities.User user = null;
-                if (reader.Read()) {
-                    user = ReadUser(reader);
-                }
+                RepositoryContext.ExecuteDataReader(sql, RepositoryContext.CreateParameter("@Id", userId)))
+            {
+                User user = null;
+                if (reader.Read()) user = ReadUser(reader);
 
                 return user;
             }
         }
 
-        public Users.Entities.User GetUserDetail(long userId) {
-            var sql = $"{userDetailSql}  where User_User.Id={userId}";
-            using (var reader = RepositoryContext.ExecuteDataReader(sql)) {
-                Users.Entities.User user = null;
-                if (reader.Read()) {
-                    user = ReadUser(reader);
-                    user.Detail = ReadUserDetail(reader);
-                    user.Map = ReadUserMap(reader);
-                }
-
-                return user;
-            }
-        }
-
-        public Users.Entities.User GetUserDetail(string UserName) {
-            var sql = $"{userDetailSql} where User_User.UserName='{UserName}'";
-            using (var reader = RepositoryContext.ExecuteDataReader(sql)) {
-                Users.Entities.User user = null;
-                if (reader.Read()) {
+        public User GetUserDetail(long userId)
+        {
+            var sql = $"{UserDetailSql}  where User_User.Id={userId}";
+            using (var reader = RepositoryContext.ExecuteDataReader(sql))
+            {
+                User user = null;
+                if (reader.Read())
+                {
                     user = ReadUser(reader);
                     user.Detail = ReadUserDetail(reader);
                     user.Map = ReadUserMap(reader);
@@ -135,52 +122,66 @@ namespace Alabo.App.Core.User.Domain.Repositories {
             }
         }
 
-        public bool CheckUserExists(string UserName, string password, out long userId) {
+        public User GetUserDetail(string userName)
+        {
+            var sql = $"{UserDetailSql} where User_User.UserName='{userName}'";
+            using (var reader = RepositoryContext.ExecuteDataReader(sql))
+            {
+                User user = null;
+                if (reader.Read())
+                {
+                    user = ReadUser(reader);
+                    user.Detail = ReadUserDetail(reader);
+                    user.Map = ReadUserMap(reader);
+                }
+
+                return user;
+            }
+        }
+
+        public bool CheckUserExists(string userName, string password, out long userId)
+        {
             var sql = "SELECT TOP 1 Id FROM dbo.User_User WHERE Name=@Name AND Password=@Password";
             var parameters = new[]
             {
-                RepositoryContext.CreateParameter("@Name", UserName),
+                RepositoryContext.CreateParameter("@Name", userName),
                 RepositoryContext.CreateParameter("@Password", password)
             };
             userId = RepositoryContext.ExecuteScalar(sql, parameters).ToInt64();
             return userId > 0;
         }
 
-        public bool ExistsName(string name) {
+        public bool ExistsName(string name)
+        {
             var sql = "select count(Id) from User_User where UserName=@UserName";
             var result = RepositoryContext.ExecuteScalar(sql, RepositoryContext.CreateParameter("@UserName", name));
-            if (result == null || result == DBNull.Value) {
-                return false;
-            }
+            if (result == null || result == DBNull.Value) return false;
 
             return Convert.ToInt64(result) > 0;
         }
 
-        public bool ExistsMail(string mail) {
+        public bool ExistsMail(string mail)
+        {
             var sql = "select count(Id) from User_User where EMail=@EMail";
             var result = RepositoryContext.ExecuteScalar(sql, RepositoryContext.CreateParameter("@EMail", mail));
-            if (result == null || result == DBNull.Value) {
-                return false;
-            }
+            if (result == null || result == DBNull.Value) return false;
 
             return Convert.ToInt64(result) > 0;
         }
 
-        public bool ExistsMobile(string mobile) {
+        public bool ExistsMobile(string mobile)
+        {
             var sql = "select count(Id) from User_User where Mobile=@mobile";
             var result = RepositoryContext.ExecuteScalar(sql, RepositoryContext.CreateParameter("@mobile", mobile));
-            if (result == null || result == DBNull.Value) {
-                return false;
-            }
+            if (result == null || result == DBNull.Value) return false;
 
             return Convert.ToInt64(result) > 0;
         }
 
         [Obsolete("the Transation has bug")]
-        public Users.Entities.User Add(Users.Entities.User user, List<MoneyTypeConfig> moneyTypes) {
-            if (user == null) {
-                throw new ArgumentNullException("user");
-            }
+        public User Add(User user, List<MoneyTypeConfig> moneyTypes)
+        {
+            if (user == null) throw new ArgumentNullException("user");
 
             var sql =
                 "INSERT INTO dbo.User_User ([Name], [Email], [Mobile], [UserName],[Status],[GradeId],[ParentId] ) VALUES  (@Name,@Email,@Mobile,@UserName ,@Status,@GradeId,@ParentId); select @@identity;";
@@ -195,12 +196,12 @@ namespace Alabo.App.Core.User.Domain.Repositories {
                 RepositoryContext.CreateParameter("@UserName", user.UserName)
             };
 
-            using (var transaction = RepositoryContext.BeginNativeDbTransaction()) {
-                try {
+            using (var transaction = RepositoryContext.BeginNativeDbTransaction())
+            {
+                try
+                {
                     var result = Convert.ToInt64(RepositoryContext.ExecuteScalar(transaction, sql, parameters));
-                    if (result != 0) {
-                        user.Id = Convert.ToInt64(result);
-                    }
+                    if (result != 0) user.Id = Convert.ToInt64(result);
 
                     user.Map.UserId = user.Id;
                     user.Map = AddUserMap(transaction, user.Map);
@@ -213,7 +214,9 @@ namespace Alabo.App.Core.User.Domain.Repositories {
                     //TODO 9月重构注释
                     AddShareOrder(transaction, user.Id);
                     transaction.Commit();
-                } catch (Exception ex) {
+                }
+                catch (Exception ex)
+                {
                     transaction.Rollback();
                     throw ex;
                 }
@@ -222,10 +225,9 @@ namespace Alabo.App.Core.User.Domain.Repositories {
             }
         }
 
-        public bool UpdateSingle(Users.Entities.User model) {
-            if (model == null) {
-                throw new ArgumentNullException("model");
-            }
+        public bool UpdateSingle(User model)
+        {
+            if (model == null) throw new ArgumentNullException("model");
 
             var sql =
                 "UPDATE dbo.User_User SET Name=@Name, Email=@Email, Mobile=@Mobile, Status=@Status,GradeId=@GradeId WHERE Id=@Id";
@@ -239,9 +241,7 @@ namespace Alabo.App.Core.User.Domain.Repositories {
                 RepositoryContext.CreateParameter("@Id", model.Id)
             };
             var count = RepositoryContext.ExecuteNonQuery(sql, parameters);
-            if (count > 0) {
-                return true;
-            }
+            if (count > 0) return true;
 
             return false;
         }
@@ -251,7 +251,8 @@ namespace Alabo.App.Core.User.Domain.Repositories {
         /// </summary>
         /// <param name="userId">用户Id</param>
         [Obsolete("This function is not debug 17/12/21", true)]
-        public bool Delete(long userId) {
+        public bool Delete(long userId)
+        {
             var sqlList = new List<string>
             {
                 $"delete from User_User where Id={userId};",
@@ -261,102 +262,84 @@ namespace Alabo.App.Core.User.Domain.Repositories {
                 $"delete from [User_UserDetail] where UserId={userId};"
             };
             var count = RepositoryContext.ExecuteSqlList(sqlList);
-            if (count > 0) {
-                return true;
-            }
+            if (count > 0) return true;
 
             return false;
         }
 
-        public IList<Users.Entities.User> GetViewUserList(UserInput userInput, out long count) {
-            if (userInput.PageIndex < 0) {
+        public IList<User> GetViewUserList(UserInput userInput, out long count)
+        {
+            if (userInput.PageIndex < 0)
                 throw new ArgumentNullException("pageIndex", "pageindex has to be greater than 1");
-            }
 
-            if (userInput.PageSize > 100) {
-                userInput.PageSize = 100;
-            }
+            if (userInput.PageSize > 100) userInput.PageSize = 100;
 
             var sqlWhere = string.Empty;
-            if (Convert.ToInt16(userInput.Status) > 0) {
-                sqlWhere = $"{sqlWhere} AND Status={(int)userInput.Status}";
-            }
+            if (Convert.ToInt16(userInput.Status) > 0) sqlWhere = $"{sqlWhere} AND Status={(int)userInput.Status}";
 
-            if (userInput.ParentId > 0) {
-                sqlWhere = $"{sqlWhere} AND ParentId={userInput.ParentId}";
-            }
+            if (userInput.ParentId > 0) sqlWhere = $"{sqlWhere} AND ParentId={userInput.ParentId}";
 
-            if (!userInput.Email.IsNullOrEmpty()) {
-                sqlWhere = $"{sqlWhere} AND Email= '{userInput.Email}' ";
-            }
+            if (!userInput.Email.IsNullOrEmpty()) sqlWhere = $"{sqlWhere} AND Email= '{userInput.Email}' ";
 
-            if (!userInput.Mobile.IsNullOrEmpty()) {
-                sqlWhere = $"{sqlWhere} AND Mobile= '{userInput.Mobile}' ";
-            }
+            if (!userInput.Mobile.IsNullOrEmpty()) sqlWhere = $"{sqlWhere} AND Mobile= '{userInput.Mobile}' ";
 
-            if (!userInput.UserName.IsNullOrEmpty()) {
-                sqlWhere = $"{sqlWhere} AND UserName='{userInput.UserName}' ";
-            }
+            if (!userInput.UserName.IsNullOrEmpty()) sqlWhere = $"{sqlWhere} AND UserName='{userInput.UserName}' ";
 
-            if (!userInput.Name.IsNullOrEmpty()) {
-                sqlWhere = $"{sqlWhere} AND Name='{userInput.Name}'";
-            }
+            if (!userInput.Name.IsNullOrEmpty()) sqlWhere = $"{sqlWhere} AND Name='{userInput.Name}'";
 
-            if (!userInput.GradeId.IsGuidNullOrEmpty()) {
-                sqlWhere = $"{sqlWhere} AND GradeId='{userInput.GradeId}'";
-            }
+            if (!userInput.GradeId.IsGuidNullOrEmpty()) sqlWhere = $"{sqlWhere} AND GradeId='{userInput.GradeId}'";
 
-            if (userInput.ServiceCenterId > 0) {
+            if (userInput.ServiceCenterId > 0)
                 sqlWhere = $"{sqlWhere} AND ServiceCenterUserId={userInput.ServiceCenterId}";
-            }
 
             var sqlCount = $"SELECT COUNT(Id) [Count] FROM User_User where 1=1 {sqlWhere}";
             count = RepositoryContext.ExecuteScalar(sqlCount)?.ConvertToLong() ?? 0;
 
-            var result = new List<Users.Entities.User>();
+            var result = new List<User>();
             var sql = $@"SELECT TOP {userInput.PageSize} * FROM (
                         SELECT  ROW_NUMBER() OVER (ORDER BY id desc) AS RowNumber,* FROM User_User where 1=1 {sqlWhere}
                                ) as A
                         WHERE RowNumber > {userInput.PageSize}*({userInput.PageIndex}-1)  ";
-            using (var dr = RepositoryContext.ExecuteDataReader(sql)) {
-                while (dr.Read()) {
-                    result.Add(ReadUser(dr));
-                }
+            using (var dr = RepositoryContext.ExecuteDataReader(sql))
+            {
+                while (dr.Read()) result.Add(ReadUser(dr));
             }
 
             return result;
         }
 
-        public IList<Users.Entities.User> GetList(IList<long> userIds) {
+        public IList<User> GetList(IList<long> userIds)
+        {
             var sql = $@"SELECT * FROM User_User WHERE Id in ({userIds.ToSqlString()})";
-            var result = new List<Users.Entities.User>();
-            using (var reader = RepositoryContext.ExecuteDataReader(sql)) {
-                while (reader.Read()) {
-                    result.Add(ReadUser(reader));
-                }
+            var result = new List<User>();
+            using (var reader = RepositoryContext.ExecuteDataReader(sql))
+            {
+                while (reader.Read()) result.Add(ReadUser(reader));
 
                 return result;
             }
         }
 
-        public long MaxUserId() {
+        public long MaxUserId()
+        {
             var sql = "select MAX(Id) from  User_User ";
             var result = RepositoryContext.ExecuteScalar(sql);
             return result.ConvertToLong();
         }
 
-        public bool UpdateRecommend(List<long> userIds, long parentId) {
+        public bool UpdateRecommend(List<long> userIds, long parentId)
+        {
             var sql = $" update  user_user set parentId={parentId} where Id in ({userIds.ToSqlString()})";
             var result = RepositoryContext.ExecuteNonQuery(sql);
-            if (result > 0) {
-                return true;
-            }
+            if (result > 0) return true;
 
             return false;
         }
 
-        private void AddAccount(DbTransaction transaction, long userId, List<MoneyTypeConfig> moneyTypes) {
-            foreach (var item in moneyTypes) {
+        private void AddAccount(DbTransaction transaction, long userId, List<MoneyTypeConfig> moneyTypes)
+        {
+            foreach (var item in moneyTypes)
+            {
                 var sql = @"INSERT INTO [dbo].[Asset_Account]
                             ([UserId],[MoneyTypeId],[Amount],[FreezeAmount],[HistoryAmount],[Token]) VALUES
                              (@UserId,@MoneyTypeId,0,0,0,@Token)";
@@ -378,7 +361,8 @@ namespace Alabo.App.Core.User.Domain.Repositories {
         /// </summary>
         /// <param name="transaction"></param>
         /// <param name="userId">用户Id</param>
-        private void AddShareOrder(DbTransaction transaction, long userId) {
+        private void AddShareOrder(DbTransaction transaction, long userId)
+        {
             var sql =
                 @"INSERT INTO [dbo].[Task_ShareOrder] ([UserId] ,[Amount]   ,[EntityId] ,[Parameters] ,[Status],[SystemStatus]  ,[TriggerType] ,[Summary],[CreateTime] ,[UpdateTime],[Extension],[ExecuteCount])
                             VALUES
@@ -402,10 +386,9 @@ namespace Alabo.App.Core.User.Domain.Repositories {
             RepositoryContext.ExecuteScalar(transaction, sql, parameters);
         }
 
-        private UserDetail AddUserDetail(DbTransaction transaction, UserDetail userDetail) {
-            if (userDetail == null) {
-                throw new ArgumentNullException("userDetail");
-            }
+        private UserDetail AddUserDetail(DbTransaction transaction, UserDetail userDetail)
+        {
+            if (userDetail == null) throw new ArgumentNullException("userDetail");
 
             var sql = @"INSERT INTO [dbo].[User_UserDetail]
            ([UserId],[Password],[PayPassword] ,
@@ -446,17 +429,14 @@ namespace Alabo.App.Core.User.Domain.Repositories {
             };
 
             var result = RepositoryContext.ExecuteScalar(transaction, sql, parameters);
-            if (result != null && result != DBNull.Value) {
-                userDetail.Id = Convert.ToInt64(result);
-            }
+            if (result != null && result != DBNull.Value) userDetail.Id = Convert.ToInt64(result);
 
             return userDetail;
         }
 
-        private UserMap AddUserMap(DbTransaction transaction, UserMap userMap) {
-            if (userMap == null) {
-                throw new ArgumentNullException("userMap");
-            }
+        private UserMap AddUserMap(DbTransaction transaction, UserMap userMap)
+        {
+            if (userMap == null) throw new ArgumentNullException("userMap");
 
             var sql = @"INSERT INTO [dbo].[User_UserMap]
                ([UserId] ,[LevelNumber],[TeamNumber] ,
@@ -475,15 +455,15 @@ namespace Alabo.App.Core.User.Domain.Repositories {
             };
 
             var result = RepositoryContext.ExecuteScalar(transaction, sql, parameters);
-            if (result != null && result != DBNull.Value) {
-                userMap.Id = Convert.ToInt64(result);
-            }
+            if (result != null && result != DBNull.Value) userMap.Id = Convert.ToInt64(result);
 
             return userMap;
         }
 
-        private Users.Entities.User ReadUser(IDataReader reader) {
-            var user = new Users.Entities.User {
+        private User ReadUser(IDataReader reader)
+        {
+            var user = new User
+            {
                 Id = reader["Id"].ConvertToLong(0),
                 ParentId = reader["ParentId"].ConvertToLong(0),
                 UserName = reader["UserName"].ToString(),
@@ -496,8 +476,10 @@ namespace Alabo.App.Core.User.Domain.Repositories {
             return user;
         }
 
-        private UserDetail ReadUserDetail(IDataReader reader) {
-            var userDetail = new UserDetail {
+        private UserDetail ReadUserDetail(IDataReader reader)
+        {
+            var userDetail = new UserDetail
+            {
                 Id = reader["DetailId"].ConvertToLong(0),
                 UserId = reader["Id"].ConvertToLong(),
                 Password = reader["Password"].ToString(),
@@ -518,13 +500,15 @@ namespace Alabo.App.Core.User.Domain.Repositories {
                 OpenId = reader["OpenId"].ToString(),
                 ModifiedTime = reader["ModifiedTime"].ToDateTime(),
                 Remark = reader["Remark"].ToString(),
-                IdentityStatus = (IdentityStatus)reader["IdentityStatus"],
+                IdentityStatus = (IdentityStatus)reader["IdentityStatus"]
             };
             return userDetail;
         }
 
-        private UserMap ReadUserMap(IDataReader reader) {
-            var userMap = new UserMap {
+        private UserMap ReadUserMap(IDataReader reader)
+        {
+            var userMap = new UserMap
+            {
                 Id = reader["DetailId"].ConvertToLong(0),
                 UserId = reader["Id"].ConvertToLong(),
                 LevelNumber = reader["LevelNumber"].ConvertToLong(),
@@ -535,8 +519,10 @@ namespace Alabo.App.Core.User.Domain.Repositories {
             return userMap;
         }
 
-        private ViewUser ReadViewUser(IDataReader reader) {
-            var user = new ViewUser {
+        private ViewUser ReadViewUser(IDataReader reader)
+        {
+            var user = new ViewUser
+            {
                 Id = reader["Id"].ConvertToLong(0),
                 UserName = reader["UserName"].ToString(),
                 Email = reader["Email"].ToString(),

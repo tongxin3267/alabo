@@ -12,7 +12,7 @@
 //using User = Alabo.App.Core.User.Domain.Entities.User;
 //using Product = Alabo.App.Shop.Product.Domain.Entities.Product;
 //using Order = Alabo.App.Shop.Order.Domain.Entities.Order;
-//using Store = Alabo.App.Shop.Store.Domain.Entities.Store;
+//using Store = Alabo.App.Shop.Store.Domain.Store;
 //
 //using UserType = App.Core.UserType.Domain.Entities.UserType;
 //	public class ITaskModuleLimitServiceTests : CoreTest {

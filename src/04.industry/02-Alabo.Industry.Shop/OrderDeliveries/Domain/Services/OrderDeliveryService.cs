@@ -1,45 +1,54 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.App.Shop.Order.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Repositories;
-using Alabo.App.Shop.Order.ViewModels;
-using Alabo.App.Shop.Store.Domain.CallBacks;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
-
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Industry.Shop.Deliveries.Domain.CallBacks;
+using Alabo.Industry.Shop.OrderDeliveries.Domain.Entities;
+using Alabo.Industry.Shop.OrderDeliveries.Domain.Repositories;
+using Alabo.Industry.Shop.Orders.Domain.Services;
+using Alabo.Industry.Shop.Orders.ViewModels;
 using Alabo.Mapping;
 
-namespace Alabo.App.Shop.Order.Domain.Services {
-
-    public class OrderDeliveryService : ServiceBase<OrderDelivery, long>, IOrderDeliveryService {
+namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Services
+{
+    public class OrderDeliveryService : ServiceBase<OrderDelivery, long>, IOrderDeliveryService
+    {
+        public OrderDeliveryService(IUnitOfWork unitOfWork, IRepository<OrderDelivery, long> repository) : base(
+            unitOfWork, repository)
+        {
+        }
 
         /// <summary>
         ///     根据订单ID获取发货记录
         /// </summary>
         /// <param name="orderId"></param>
-        public List<OrderDelivery> GetOrderDeliveries(long orderId) {
+        public List<OrderDelivery> GetOrderDeliveries(long orderId)
+        {
             return Repository<IOrderDeliveryRepository>().GetList(p => p.OrderId == orderId).ToList();
         }
 
         /// <summary>
         /// </summary>
         /// <param name="query"></param>
-        public PagedList<ViewOrderDeliveryList> GetPageList(object query) {
+        public PagedList<ViewOrderDeliveryList> GetPageList(object query)
+        {
             var page = GetPagedList(query);
             var list = new List<ViewOrderDeliveryList>();
             var orderIds = page.Select(r => r.OrderId).ToList();
             var orders = Resolve<IOrderService>().GetList(r => orderIds.Contains(r.Id));
             var users = Resolve<IUserService>().GetList();
             var expressConfig = Resolve<IAutoConfigService>().GetList<ExpressConfig>(r => r.Status == Status.Normal);
-            foreach (var item in page) {
+            foreach (var item in page)
+            {
                 var viewOrderDelivery = AutoMapping.SetValue<ViewOrderDeliveryList>(item);
                 var order = orders.FirstOrDefault(r => r.Id == item.OrderId);
-                if (order != null) {
+                if (order != null)
+                {
                     viewOrderDelivery = AutoMapping.SetValue<ViewOrderDeliveryList>(order);
                     viewOrderDelivery.Id = item.Id;
                     viewOrderDelivery.ExpressName = expressConfig.FirstOrDefault(r => r.Id == item.ExpressGuid)?.Name;
@@ -48,20 +57,24 @@ namespace Alabo.App.Shop.Order.Domain.Services {
                     list.Add(viewOrderDelivery);
                 }
             }
+
             return PagedList<ViewOrderDeliveryList>.Create(list, page.RecordCount, page.PageSize, page.PageIndex);
         }
 
         /// <summary>
-        /// Gets the view order delivery edit.
+        ///     Gets the view order delivery edit.
         /// </summary>
         /// <param name="id">Id标识</param>
-
-        public ViewOrderDeliveryList GetViewOrderDeliveryEdit(long id) {
-            ViewOrderDeliveryList view = new ViewOrderDeliveryList();
-            if (id > 0) {
+        public ViewOrderDeliveryList GetViewOrderDeliveryEdit(long id)
+        {
+            var view = new ViewOrderDeliveryList();
+            if (id > 0)
+            {
                 var orderDelivery = Resolve<IOrderDeliveryService>().GetSingle(id);
-                var expressConfig = Resolve<IAutoConfigService>().GetList<ExpressConfig>(r => r.Status == Status.Normal);
-                if (orderDelivery.Extension != null) {
+                var expressConfig =
+                    Resolve<IAutoConfigService>().GetList<ExpressConfig>(r => r.Status == Status.Normal);
+                if (orderDelivery.Extension != null)
+                {
                     view = AutoMapping.SetValue<ViewOrderDeliveryList>(orderDelivery);
                     view = AutoMapping.SetValue<ViewOrderDeliveryList>(orderDelivery.OrderDeliveryExtension.Order);
                     var order = Resolve<IOrderService>().GetSingle(orderDelivery.OrderId);
@@ -70,10 +83,9 @@ namespace Alabo.App.Shop.Order.Domain.Services {
                     view.User = Resolve<IUserService>().GetSingle(view.UserId);
                     view.ExpressName = expressConfig.FirstOrDefault(r => r.Id == orderDelivery.ExpressGuid)?.Name;
                     var productInfo = orderDelivery.OrderDeliveryExtension.ProductDeliveryInfo;
-                    foreach (var item in productInfo) {
-                        view.ProductName = item.Name;
-                    }
-                    view.Address = orderDelivery.OrderDeliveryExtension.Order.OrderExtension.UserAddress.AddressDescription;
+                    foreach (var item in productInfo) view.ProductName = item.Name;
+                    view.Address = orderDelivery.OrderDeliveryExtension.Order.OrderExtension.UserAddress
+                        .AddressDescription;
                     view.Remark = orderDelivery.OrderDeliveryExtension.Remark;
                     //view.UserId = orderDelivery.OrderDeliveryExtension.Order.UserId;
                     //view.UserName = Service<IUserService>().GetSingle(view.UserId).UserName;
@@ -82,23 +94,19 @@ namespace Alabo.App.Shop.Order.Domain.Services {
                     //view.TotalCount = orderDelivery.OrderDeliveryExtension.Order.TotalCount;
                 }
             }
+
             return view;
         }
 
         /// <summary>
-        /// 根据订单Id获取订单的发货用户Id
+        ///     根据订单Id获取订单的发货用户Id
         /// </summary>
         /// <param name="orderId">The order identifier.</param>
-
-        public long GetOrderDeliverUserId(long orderId) {
+        public long GetOrderDeliverUserId(long orderId)
+        {
             var order = Resolve<IOrderService>().GetSingle(orderId);
-            if (order != null) {
-                return order.DeliverUserId;
-            }
+            if (order != null) return order.DeliverUserId;
             return 0;
-        }
-
-        public OrderDeliveryService(IUnitOfWork unitOfWork, IRepository<OrderDelivery, long> repository) : base(unitOfWork, repository) {
         }
     }
 }

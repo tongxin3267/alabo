@@ -1,12 +1,12 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using Alabo.Cache;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Alabo.Cache;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Alabo.Runtime
 {
@@ -23,13 +23,9 @@ namespace Alabo.Runtime
         public static IServiceCollection AddRuntimeConfiguration(this IServiceCollection services,
             IConfiguration configuration)
         {
-            if (services == null) {
-                throw new ArgumentNullException(nameof(services));
-            }
+            if (services == null) throw new ArgumentNullException(nameof(services));
 
-            if (configuration == null) {
-                throw new ArgumentNullException(nameof(configuration));
-            }
+            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
 
             services.AddSingleton(configuration);
             services.AddSingleton<RuntimeContext>();

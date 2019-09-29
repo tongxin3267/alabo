@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Alabo.Datas.Stores.Column.EfCore;
+﻿using Alabo.Datas.Stores.Column.EfCore;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.Stores.Count.EfCore
 {
@@ -22,9 +22,7 @@ namespace Alabo.Datas.Stores.Count.EfCore
         /// <param name="predicate">条件</param>
         public async Task<long> CountAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            if (predicate == null) {
-                return await Set.CountAsync();
-            }
+            if (predicate == null) return await Set.CountAsync();
 
             return await Set.CountAsync(predicate);
         }

@@ -1,36 +1,113 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using Senparc.NeuChar.Entities;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Alabo.App.Cms.Articles.Domain.CallBacks;
-using Alabo.App.Cms.Articles.Domain.Dto;
-using Alabo.App.Cms.Articles.Domain.Services;
-using Alabo.App.Core.Common.Domain.CallBacks;
-using Alabo.App.Core.Common.Domain.Services;
 using Alabo.Datas.Queries.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Core.Admins.Configs;
+using Alabo.Framework.Core.WebApis;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Helpers;
+using Alabo.Industry.Cms.Articles.Domain.Entities;
+using Alabo.Industry.Cms.Articles.Domain.Services;
 using Alabo.Mapping;
 using Alabo.Maps;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
-using Alabo.UI.AutoTables;
+using Alabo.UI.Design.AutoForms;
+using Alabo.UI.Design.AutoTables;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Cms.Articles.UI.AutoForm {
-
+namespace Alabo.Industry.Cms.Articles.UI.AutoForm
+{
     [ClassProperty(Name = "商家头条", Description = "商家头条")]
-    public class ArticleAutoFrom : UIBase, IAutoForm, IAutoTable<ArticleAutoFrom> {
+    public class ArticleAutoFrom : UIBase, IAutoForm, IAutoTable<ArticleAutoFrom>
+    {
+        public Alabo.UI.Design.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
+            var dic = autoModel.Query.ToObject<Dictionary<string, string>>();
+            dic.TryGetValue("ChannelId", out var channelId);
+            //var channel = Resolve<IChannelService>().GetSingle(r => r.Id == channelId.ToObjectId());
+            //if (channel == null) {
+            //    return null;
+            //}
+            //// 频道的分类 标签
+            //var classType = Resolve<IChannelService>().GetChannelClassType(channel);
+            //var tagType = Resolve<IChannelService>().GetChannelTagType(channel);
+
+            var result = Ioc.Resolve<IArticleService>().GetSingle(id);
+            var articleForm = new ArticleAutoFrom();
+            if (result != null) articleForm = result.MapTo<ArticleAutoFrom>();
+
+            articleForm.Id = id.ToString();
+            articleForm.ChannelId = channelId; // channel.Id.ToString();
+
+            var autoForm = ToAutoForm(articleForm);
+            //autoForm.Groups.Foreach(r => {
+            //    r.Items.Foreach(e => {
+            //        //if (e.Field == "classes") {
+            //        //    e.DataSource = $"Api/Relation/GetClassTree?Type={classType.Name}";
+            //        //}
+
+            //        if (e.Field == "tags") {
+            //            e.DataSource = $"Api/Relation/GetTags?Type={tagType.Name}";
+            //        }
+            //    });
+            //});
+
+            autoForm.AlertText = "【头条编辑】针对于店铺商家头条信息更新";
+            autoForm.ButtomHelpText = new List<string>
+            {
+                "缩略图：请您务必上传头条封面图片 支持jpg,jpeg,gif,png,等图片格式",
+                "标题：头条新闻标题 简单 精简 扼要",
+                "详细内容：主要是头条新闻的详细描述"
+            };
+
+            return autoForm;
+        }
+
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
+            var input = (ArticleAutoFrom) model;
+            var article = AutoMapping.SetValue<Article>(input);
+            article.Id = input.Id.ToObjectId();
+            article.ChannelId = input.ChannelId.ToObjectId();
+            article.Tags = input.Tags;
+            var entity = Resolve<IArticleAdminService>().GetSingle(article.Id);
+            if (entity == null)
+            {
+                var addResult = Resolve<IArticleAdminService>().Add(article);
+                if (addResult) return ServiceResult.Success;
+                return ServiceResult.Failed;
+            }
+
+            var result = Resolve<IArticleAdminService>().Update(article);
+            if (result) return ServiceResult.Success;
+            return ServiceResult.Failed;
+        }
+
+        public List<TableAction> Actions()
+        {
+            var list = new List<TableAction>
+            {
+                ToLinkAction("编辑", "Edit?ChannelId=e02220001110000000000009", TableActionType.ColumnAction),
+                ToLinkAction("删除", "/Api/Article/Delete", ActionLinkType.Delete, TableActionType.ColumnAction)
+            };
+            return list;
+        }
+
+        public PageResult<ArticleAutoFrom> PageTable(object query, AutoBaseModel autoModel)
+        {
+            var list = Ioc.Resolve<IArticleService>().GetPagedList(query);
+            var plList = list.MapTo<PagedList<ArticleAutoFrom>>();
+            return ToPageResult(plList);
+        }
+
         #region
 
         /// <summary>
-        /// id
+        ///     id
         /// </summary>
         [Field(ControlsType = ControlsType.Hidden, GroupTabId = 1, ListShow = true, SortOrder = 1, EditShow = true)]
         public string Id { get; set; }
@@ -40,7 +117,8 @@ namespace Alabo.App.Cms.Articles.UI.AutoForm {
         /// </summary>
         /// <value>The image URL.</value>
         [Display(Name = "缩略图")]
-        [Field(ControlsType = ControlsType.AlbumUploder, GroupTabId = 1, ListShow = true, SortOrder = 1, EditShow = true)]
+        [Field(ControlsType = ControlsType.AlbumUploder, GroupTabId = 1, ListShow = true, SortOrder = 1,
+            EditShow = true)]
         [HelpBlock("请您务必上传头条封面图片 支持jpg,jpeg,gif,png,等图片格式")]
         public string ImageUrl { get; set; }
 
@@ -66,7 +144,8 @@ namespace Alabo.App.Cms.Articles.UI.AutoForm {
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [StringLength(50, MinimumLength = 1, ErrorMessage = ErrorMessage.MaxStringLength)]
         [Display(Name = "标题")]
-        [Field(ControlsType = ControlsType.TextBox, IsShowAdvancedSerach = true, IsShowBaseSerach = true, IsMain = true, Operator = Operator.Contains,
+        [Field(ControlsType = ControlsType.TextBox, IsShowAdvancedSerach = true, IsShowBaseSerach = true, IsMain = true,
+            Operator = Operator.Contains,
             ListShow = true, GroupTabId = 1, SortOrder = 1)]
         [HelpBlock("请您务必输入头条标题内容 标题最多100字符")]
         public string Title { get; set; }
@@ -76,7 +155,8 @@ namespace Alabo.App.Cms.Articles.UI.AutoForm {
         /// </summary>
         /// <value>The sub title.</value>
         [Display(Name = "副标题")]
-        [Field(ControlsType = ControlsType.TextBox, IsShowAdvancedSerach = false, EditShow = false,   Operator = Operator.Contains,
+        [Field(ControlsType = ControlsType.TextBox, IsShowAdvancedSerach = false, EditShow = false,
+            Operator = Operator.Contains,
             ListShow = false, GroupTabId = 1, SortOrder = 2)]
         [HelpBlock("输入头条的副标题，长度不要超过100个字符")]
         public string SubTitle { get; set; }
@@ -121,7 +201,7 @@ namespace Alabo.App.Cms.Articles.UI.AutoForm {
         /// <value>The author.</value>
         [Display(Name = "作者")]
         [Field(ControlsType = ControlsType.TextBox, IsShowAdvancedSerach = false, IsShowBaseSerach = false,
-            ListShow = false,  EditShow =false, SortOrder = 3)]
+            ListShow = false, EditShow = false, SortOrder = 3)]
         [HelpBlock("请输入头条作者")]
         public string Author { get; set; }
 
@@ -137,7 +217,7 @@ namespace Alabo.App.Cms.Articles.UI.AutoForm {
         /// </summary>
         /// <value>The view count.</value>
         [Display(Name = "浏览次数")]
-        [Field(ControlsType = ControlsType.Numberic,ListShow = false, EditShow = false, SortOrder = 4)]
+        [Field(ControlsType = ControlsType.Numberic, ListShow = false, EditShow = false, SortOrder = 4)]
         [HelpBlock("头条浏览次数必须大于等于0")]
         public int ViewCount { get; set; }
 
@@ -177,7 +257,7 @@ namespace Alabo.App.Cms.Articles.UI.AutoForm {
         /// </summary>
         [Display(Name = "状态")]
         [Field(ControlsType = ControlsType.RadioButton, DataSource = "Alabo.Domains.Enums.Status",
-          EditShow = true, ListShow = true, SortOrder = 5)]
+            EditShow = true, ListShow = true, SortOrder = 5)]
         [HelpBlock("正常：用户可正常浏览等操作。冻结和删除不能进行浏览。该删除是软删除，不是真正的删除")]
         public Status Status { get; set; } = Status.Normal;
 
@@ -213,85 +293,5 @@ namespace Alabo.App.Cms.Articles.UI.AutoForm {
         public string Tags { get; set; }
 
         #endregion
-
-        public List<TableAction> Actions() {
-            var list = new List<TableAction>
-            {
-                ToLinkAction("编辑", "Edit?ChannelId=e02220001110000000000009",TableActionType.ColumnAction),
-                ToLinkAction("删除", "/Api/Article/Delete",ActionLinkType.Delete,TableActionType.ColumnAction)
-            };
-            return list;
-        }
-
-        public Alabo.UI.AutoForms.AutoForm GetView(object id, AutoBaseModel autoModel) {
-            var dic = autoModel.Query.ToObject<Dictionary<string, string>>();
-            dic.TryGetValue("ChannelId", out var channelId);
-            //var channel = Resolve<IChannelService>().GetSingle(r => r.Id == channelId.ToObjectId());
-            //if (channel == null) {
-            //    return null;
-            //}
-            //// 频道的分类 标签
-            //var classType = Resolve<IChannelService>().GetChannelClassType(channel);
-            //var tagType = Resolve<IChannelService>().GetChannelTagType(channel);
-
-            var result = Ioc.Resolve<IArticleService>().GetSingle(id);
-            var articleForm = new ArticleAutoFrom();
-            if (result != null) {
-                articleForm = result.MapTo<ArticleAutoFrom>();
-            }
-
-            articleForm.Id = id.ToString();
-            articleForm.ChannelId = channelId;// channel.Id.ToString();
-
-            var autoForm = ToAutoForm(articleForm);
-            //autoForm.Groups.Foreach(r => {
-            //    r.Items.Foreach(e => {
-            //        //if (e.Field == "classes") {
-            //        //    e.DataSource = $"Api/Relation/GetClassTree?Type={classType.Name}";
-            //        //}
-
-            //        if (e.Field == "tags") {
-            //            e.DataSource = $"Api/Relation/GetTags?Type={tagType.Name}";
-            //        }
-            //    });
-            //});
-
-            autoForm.AlertText = "【头条编辑】针对于店铺商家头条信息更新";
-            autoForm.ButtomHelpText = new List<string>
-            {
-                "缩略图：请您务必上传头条封面图片 支持jpg,jpeg,gif,png,等图片格式",
-                "标题：头条新闻标题 简单 精简 扼要",
-                "详细内容：主要是头条新闻的详细描述",
-            };
-
-            return autoForm;
-        }
-
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
-            var input = (ArticleAutoFrom)model;
-            var article = AutoMapping.SetValue<Domain.Entities.Article>(input);
-            article.Id = input.Id.ToObjectId();
-            article.ChannelId = input.ChannelId.ToObjectId();
-            article.Tags = input.Tags;
-            var entity = Resolve<IArticleAdminService>().GetSingle(article.Id);
-            if (entity == null) {
-                var addResult = Resolve<IArticleAdminService>().Add(article);
-                if (addResult) {
-                    return ServiceResult.Success;
-                }
-                return ServiceResult.Failed;
-            }
-            var result = Resolve<IArticleAdminService>().Update(article);
-            if (result) {
-                return ServiceResult.Success;
-            }
-            return ServiceResult.Failed;
-        }
-
-        public PageResult<ArticleAutoFrom> PageTable(object query, AutoBaseModel autoModel) {
-            var list = Ioc.Resolve<IArticleService>().GetPagedList(query);
-            var plList = list.MapTo<PagedList<ArticleAutoFrom>>();
-            return ToPageResult(plList);
-        }
     }
 }

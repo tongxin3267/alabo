@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Alabo.Cache;
+using Alabo.Extensions;
+using Alabo.Helpers;
+using Alabo.Reflections;
+using Alabo.Web.Mvc.Attributes;
+using Alabo.Web.Mvc.ViewModel;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Alabo.Cache;
-using Alabo.Extensions;
-using Alabo.Helpers;
 using ZKCloud.Open.DynamicExpression;
-using Alabo.Reflections;
-using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.ViewModel;
 
 namespace Alabo.Web.ViewFeatures
 {
@@ -88,9 +88,7 @@ namespace Alabo.Web.ViewFeatures
             if (!objectCache.TryGet(cacheKey, out CacheClassDescription cacheDescription))
             {
                 cacheDescription = Create(baseType);
-                if (cacheDescription != null) {
-                    objectCache.Set(cacheKey, cacheDescription);
-                }
+                if (cacheDescription != null) objectCache.Set(cacheKey, cacheDescription);
             }
 
             if (cacheDescription != null)
@@ -139,7 +137,7 @@ namespace Alabo.Web.ViewFeatures
                     // 使用动态方法获取链接地址
                     var config = Activator.CreateInstance(configType);
                     var target = new Interpreter().SetVariable("baseViewModel", config);
-                    links = (List<ViewLink>) target.Eval("baseViewModel.ViewLinks()");
+                    links = (List<ViewLink>)target.Eval("baseViewModel.ViewLinks()");
                 }
 
                 cacheDescription = new CacheClassDescription

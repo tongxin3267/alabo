@@ -1,23 +1,22 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.Core.Enums.Enum;
-using Alabo.Domains.Entities;
+﻿using Alabo.App.Asset.Recharges.Domain.Enums;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.App.Core.Finance.ViewModels.Recharge {
-
+namespace Alabo.App.Asset.Recharges.Dtos
+{
     /// <summary>
     ///     Class ViewHomeRecharge.
     ///     会员中心充值记录
     /// </summary>
     [ClassProperty(Name = "充值管理", Icon = "fa fa-puzzle-piece")]
-    public class ViewHomeRecharge : BaseViewModel {
-
+    public class ViewHomeRecharge : BaseViewModel
+    {
         /// <summary>
         ///     id
         /// </summary>
@@ -57,7 +56,7 @@ namespace Alabo.App.Core.Finance.ViewModels.Recharge {
         /// </summary>
         [Display(Name = "银行名称")]
         [HelpBlock("如果为线下充值 请填写银行信息")]
-        [Field(ControlsType = ControlsType.DropdownList, DataSource = "Alabo.Core.Enums.Enum.BankType",
+        [Field(ControlsType = ControlsType.DropdownList, DataSource = "Alabo.Framework.Core.Enums.Enum.BankType",
             LabelColor = LabelColor.Info, ListShow = false, EditShow = true, Width = "100", SortOrder = 4)]
         public BankType BankType { get; set; }
 

@@ -1,9 +1,10 @@
-using MongoDB.Bson;
-using Alabo.App.Core.Employes.Domain.Entities;
+using Alabo.Data.People.Employes.Domain.Entities;
 using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Core.Employes.Domain.Repositories {
-
-    public interface IPostRoleOldRepository : IRepository<PostRole, ObjectId> {
+namespace Alabo.Data.People.Employes.Domain.Repositories
+{
+    public interface IPostRoleOldRepository : IRepository<PostRole, ObjectId>
+    {
     }
 }

@@ -1,14 +1,14 @@
-﻿using System;
-using Alabo.Core.Enums.Enum;
-using Alabo.Domains.Query.Dto;
+﻿using Alabo.Domains.Query.Dto;
+using Alabo.Framework.Core.Enums.Enum;
+using System;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.Bill {
-
+namespace Alabo.App.Asset.Bills.Dtos
+{
     /// <summary>
     ///     Api 查询参数
     /// </summary>
-    public class BillApiInput : ApiInputDto {
-
+    public class BillApiInput : ApiInputDto
+    {
         /// <summary>
         ///     Gets or sets Id标识
         /// </summary>

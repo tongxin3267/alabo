@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Alabo.App.Asset.Refunds.Domain.Entities.Extension;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Entities.Extension;
-using Alabo.App.Core.Finance.Domain.Enums;
+﻿using Alabo.App.Asset.Refunds.Domain.Entities.Extension;
+using Alabo.App.Asset.Refunds.Domain.Enums;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Asset.Refunds.Domain.Entities {
-
+namespace Alabo.App.Asset.Refunds.Domain.Entities
+{
     [ClassProperty(Name = "财务交易", Icon = "fa fa-puzzle-piece", Description = "提现管理")]
-    public class Refund : AggregateDefaultUserRoot<Refund> {
-
+    public class Refund : AggregateDefaultUserRoot<Refund>
+    {
         /// <summary>
         ///     本次变动的货币类型id
         ///     与配置 MoneyTypeConfig 关联
@@ -68,31 +64,32 @@ namespace Alabo.App.Asset.Refunds.Domain.Entities {
         ///     Gets the serial.
         /// </summary>
         [Display(Name = "序号")]
-        public string Serial {
-            get {
+        public string Serial
+        {
+            get
+            {
                 var searSerial = $"T{Id.ToString().PadLeft(9, '0')}";
-                if (Id.ToString().Length == 10) {
-                    searSerial = $"{Id.ToString()}";
-                }
+                if (Id.ToString().Length == 10) searSerial = $"{Id.ToString()}";
 
                 return searSerial;
             }
         }
     }
 
-    public class RefundTableMap : MsSqlAggregateRootMap<Refund> {
-
-        protected override void MapTable(EntityTypeBuilder<Refund> builder) {
+    public class RefundTableMap : MsSqlAggregateRootMap<Refund>
+    {
+        protected override void MapTable(EntityTypeBuilder<Refund> builder)
+        {
             builder.ToTable("Asset_Refund");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<Refund> builder) {
+        protected override void MapProperties(EntityTypeBuilder<Refund> builder)
+        {
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.RefundExtension);
             builder.Ignore(e => e.Serial);
             builder.Ignore(e => e.UserName);
-            builder.Ignore(e => e.Version);
         }
     }
 }

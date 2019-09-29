@@ -1,40 +1,39 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Themes.Dtos {
-
-    public class AppNavOutput {
-
+namespace Alabo.Framework.Themes.Dtos
+{
+    public class AppNavOutput
+    {
         /// <summary>
-        /// 所属应用
+        ///     所属应用
         /// </summary>
         public string App { get; set; }
 
         /// <summary>
-        /// 名称
+        ///     名称
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// 图标
+        ///     图标
         /// </summary>
         public string Icon { get; set; }
 
         /// <summary>
-        /// 链接
+        ///     链接
         /// </summary>
         public List<AppNavOutputLink> Links { get; set; }
     }
 
     /// <summary>
-    /// 左侧导航链接
+    ///     左侧导航链接
     /// </summary>
-    public class AppNavOutputLink {
-
+    public class AppNavOutputLink
+    {
         /// <summary>
         ///     图标
         /// </summary>
@@ -61,16 +60,15 @@ namespace Alabo.App.Core.Themes.Dtos {
         public string Url { get; set; }
 
         /// <summary>
-        /// 子导航链接
+        ///     子导航链接
         /// </summary>
         public List<AppNavOutputLinkItem> SubLinks { get; set; }
     }
 
     /// <summary>
-    ///
     /// </summary>
-    public class AppNavOutputLinkItem {
-
+    public class AppNavOutputLinkItem
+    {
         /// <summary>
         ///     图标
         /// </summary>

@@ -1,8 +1,8 @@
-﻿using System;
-using Alabo.Datas.Sql.Queries.Builders.Abstractions;
+﻿using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 using Alabo.Datas.Sql.Queries.Builders.Core;
 using Alabo.Datas.Sql.Queries.Builders.Extensions;
 using Alabo.Properties;
+using System;
 
 namespace Alabo.Datas.Sql.Queries.Builders.Clauses
 {
@@ -87,9 +87,8 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// </summary>
         public void Validate()
         {
-            if (string.IsNullOrWhiteSpace(_item?.Name)) {
+            if (string.IsNullOrWhiteSpace(_item?.Name))
                 throw new InvalidOperationException(LibraryResource.TableIsEmpty);
-            }
         }
 
         /// <summary>
@@ -98,9 +97,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         public string ToSql()
         {
             var table = _item?.ToSql(_dialect);
-            if (string.IsNullOrWhiteSpace(table)) {
-                return null;
-            }
+            if (string.IsNullOrWhiteSpace(table)) return null;
 
             return $"From {table}";
         }

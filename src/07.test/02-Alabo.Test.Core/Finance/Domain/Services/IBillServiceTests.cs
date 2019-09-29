@@ -1,17 +1,18 @@
 using System;
 using System.Linq;
-using Xunit;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.Finance.ViewModels.Account;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.Core.Enums.Enum;
+using Alabo.App.Asset.Accounts.Dtos;
+using Alabo.App.Asset.Bills.Domain.Services;
+using Alabo.App.Asset.Transfers.Domain.Configs;
+using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Test.Base.Attribute;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
+using Xunit;
 
 namespace Alabo.Test.Core.Finance.Domain.Services
 {
@@ -38,7 +39,7 @@ namespace Alabo.Test.Core.Finance.Domain.Services
         {
             //Account account = null;
             //var changeAmount = 0;
-            //var actionType = (Alabo.Core.Enums.Enum.BillActionType)0;
+            //var actionType = (Alabo.Framework.Core.Enums.Enum.BillActionType)0;
             //var intro = "";
             //var targetUserId = 0;
             //var orderSerial = "";
@@ -54,7 +55,7 @@ namespace Alabo.Test.Core.Finance.Domain.Services
         {
             //Account account = null;
             //var changeAmount = 0;
-            //var actionType = (Alabo.Core.Enums.Enum.BillActionType)0;
+            //var actionType = (Alabo.Framework.Core.Enums.Enum.BillActionType)0;
             //var prefixIntro = "";
             //var result = Service<IBillService>().CreateBill(account, changeAmount, actionType, prefixIntro);
             //Assert.NotNull(result);
@@ -100,7 +101,7 @@ namespace Alabo.Test.Core.Finance.Domain.Services
         public void Increase_User_Currency_Decimal_String_test()
         {
             //User user = null;
-            //var currency = (Alabo.Core.Enums.Enum.Currency)0;
+            //var currency = (Alabo.Framework.Core.Enums.Enum.Currency)0;
             //var amount = 0;
             //var Intro = "";
             //var result = Service<IBillService>().Increase(user, currency, amount, Intro);
@@ -164,7 +165,7 @@ namespace Alabo.Test.Core.Finance.Domain.Services
         {
             var config = Resolve<IAutoConfigService>().GetList<TransferConfig>()
                 .FirstOrDefault(r => r.Status == Status.Normal);
-            var user = Resolve<IUserService>().PlanformUser();
+            var user = Resolve<IUserService>().PlatformUser();
             var targetUser = Resolve<IUserService>().GetSingle("admin");
 
             var result = Resolve<IBillService>().Transfer(user, targetUser, config, 0.01m);
@@ -175,7 +176,7 @@ namespace Alabo.Test.Core.Finance.Domain.Services
         [TestMethod("Treeze_User_Currency_Decimal_String")]
         public void Treeze_User_Currency_Decimal_String_test()
         {
-            var user = Resolve<IUserService>().PlanformUser();
+            var user = Resolve<IUserService>().PlatformUser();
             var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>(r => r.Status == Status.Normal)
                 .ToList();
             foreach (var moneyType in moneyTypes)
@@ -195,7 +196,7 @@ namespace Alabo.Test.Core.Finance.Domain.Services
         [TestMethod("Treeze_User_MoneyTypeConfig_Decimal_String")]
         public void Treeze_User_MoneyTypeConfig_Decimal_String_test()
         {
-            var user = Resolve<IUserService>().PlanformUser();
+            var user = Resolve<IUserService>().PlatformUser();
             var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>(r => r.Status == Status.Normal)
                 .ToList();
             foreach (var moneyType in moneyTypes)
@@ -215,7 +216,7 @@ namespace Alabo.Test.Core.Finance.Domain.Services
         [TestMethod("TreezeSingle_User_MoneyTypeConfig_Decimal_String")]
         public void TreezeSingle_User_MoneyTypeConfig_Decimal_String_test()
         {
-            var user = Resolve<IUserService>().PlanformUser();
+            var user = Resolve<IUserService>().PlatformUser();
             var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>(r => r.Status == Status.Normal)
                 .ToList();
             foreach (var moneyType in moneyTypes)

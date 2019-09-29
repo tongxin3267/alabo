@@ -5,11 +5,10 @@
         public static string GetHtmlName(this bool value)
         {
             var result = string.Empty;
-            if (value) {
+            if (value)
                 result = @"<span class='m-badge m-badge--wide  m-badge--success'>是</span>";
-            } else {
+            else
                 result = @"<span class='m-badge m-badge--wide m-badge--danger'>否</span>";
-            }
 
             return result;
         }
@@ -17,11 +16,10 @@
         public static string GetDisplayName(this bool value)
         {
             var result = string.Empty;
-            if (value) {
+            if (value)
                 result = @"是";
-            } else {
+            else
                 result = @"否";
-            }
 
             return result;
         }

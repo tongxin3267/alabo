@@ -1,22 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Alabo.App.Asset.Transfers.Domain.Entities;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Enums;
-using Alabo.App.Core.Finance.Domain.Services;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.Domains.Enums;
-using Alabo.Extensions;
-using Alabo.Mapping;
+﻿using Alabo.Domains.Enums;
 using Alabo.UI;
-using Alabo.UI.AutoPreviews;
+using Alabo.UI.Design.AutoPreviews;
 using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.Finance.UI.AutoForm {
-
-    public class TransferForm : UIBase, IAutoPreview {
-
+namespace Alabo.App.Asset.Transfers.UI
+{
+    public class TransferForm : UIBase, IAutoPreview
+    {
         /// <summary>
         ///     对方用户名
         /// </summary>
@@ -25,7 +16,6 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
         public string OtherUserName { get; set; }
 
         /// <summary>
-        ///
         ///     金额
         /// </summary>
         [Display(Name = "金额")]
@@ -39,7 +29,8 @@ namespace Alabo.App.Core.Finance.UI.AutoForm {
         [Display(Name = "备注")]
         public string Intro { get; set; } = "无";
 
-        public AutoPreview GetPreview(string id, AutoBaseModel autoModel) {
+        public AutoPreview GetPreview(string id, AutoBaseModel autoModel)
+        {
             //TODO 2019年9月25日 转账优化
             //  var model = Resolve<ITradeService>().GetSingle(u => u.Id == id.ToInt64() && u.Type == TradeType.Transfer);
             //  var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();

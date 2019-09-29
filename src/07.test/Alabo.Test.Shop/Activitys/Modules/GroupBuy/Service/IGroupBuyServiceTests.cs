@@ -1,13 +1,13 @@
 using System.Linq;
-using Xunit;
-using Alabo.App.Core.Api.Dtos;
-using Alabo.App.Shop.Activitys.Domain.Services;
-using Alabo.App.Shop.Activitys.Modules.GroupBuy.Model;
-using Alabo.App.Shop.Activitys.Modules.GroupBuy.Service;
-using Alabo.App.Shop.Order.Domain.Services;
-using Alabo.App.Shop.Product.Domain.Services;
+using Alabo.Framework.Core.WebApis.Dtos;
+using Alabo.Industry.Shop.Activitys.Domain.Services;
+using Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Model;
+using Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Service;
+using Alabo.Industry.Shop.Orders.Domain.Services;
+using Alabo.Industry.Shop.Products.Domain.Services;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
+using Xunit;
 
 namespace Alabo.Test.Shop.Activitys.Modules.GroupBuy.Service
 {
@@ -81,10 +81,7 @@ namespace Alabo.Test.Shop.Activitys.Modules.GroupBuy.Service
             Assert.NotNull(result);
             var activitys = Resolve<IActivityService>().GetList(r => r.Key == typeof(GroupBuyActivity).FullName);
 
-            if (activitys.Count() > 0)
-            {
-                Assert.True(result.ProductItems.Count() > 0);
-            }
+            if (activitys.Count() > 0) Assert.True(result.ProductItems.Count() > 0);
         }
     }
 }

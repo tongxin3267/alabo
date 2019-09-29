@@ -1,22 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
+﻿using Alabo.AutoConfigs;
 using Alabo.Domains.Enums;
-using Alabo.UI;
+using Alabo.Framework.Core.WebUis;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.App.Core.Common.Domain.CallBacks {
-
+namespace Alabo.Framework.Core.Admins.Configs
+{
     [NotMapped]
     /// <summary>
     /// 管理控制台
     /// </summary>
     [ClassProperty(Name = "管理控制台", Icon = IconFlaticon.menu, SortOrder = 1,
         SideBarType = SideBarType.ControlSideBar)]
-    public class AdminCenterConfig : BaseViewModel, IAutoConfig {
-
+    public class AdminCenterConfig : BaseViewModel, IAutoConfig
+    {
         [Field(ControlsType = ControlsType.Switch, GroupTabId = 1)]
         [Display(Name = "不开启PC网站")]
         public bool IsAllowOpenPc { get; set; } = true;
@@ -62,7 +61,8 @@ namespace Alabo.App.Core.Common.Domain.CallBacks {
         [HelpBlock("开启分润与升级")]
         public bool StartFenrun { get; set; } = true;
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

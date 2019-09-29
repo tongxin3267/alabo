@@ -1,20 +1,19 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
+﻿using Alabo.App.Asset.Pays.Domain.Entities;
 using Alabo.App.Asset.Recharges.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Dtos.Recharge;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.ViewModels.Recharge;
+using Alabo.App.Asset.Recharges.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
 
-namespace Alabo.App.Core.Finance.Domain.Services {
-
+namespace Alabo.App.Asset.Recharges.Domain.Services
+{
     /// <summary>
     ///     充值
     /// </summary>
-    public interface IRechargeService : IService<Recharge, long> {
-
+    public interface IRechargeService : IService<Recharge, long>
+    {
         /// <summary>
         ///     线上充值
         /// </summary>

@@ -1,13 +1,10 @@
-using System;
-using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
 using Alabo.Domains.Repositories;
-using Alabo.App.Shop.AfterSale.Domain.Entities;
+using Alabo.Industry.Shop.AfterSales.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Shop.AfterSale.Domain.Repositories {
-
-    public interface IAfterSaleRepository : IRepository<Entities.AfterSale, ObjectId> {
+namespace Alabo.Industry.Shop.AfterSales.Domain.Repositories
+{
+    public interface IAfterSaleRepository : IRepository<AfterSale, ObjectId>
+    {
     }
 }

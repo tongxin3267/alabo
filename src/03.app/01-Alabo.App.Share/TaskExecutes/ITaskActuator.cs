@@ -1,13 +1,14 @@
 ﻿using System;
-using Alabo.App.Core.Tasks.Domain.Entities;
+using Alabo.Data.Things.Orders.Domain.Entities;
+using Alabo.Framework.Tasks.Queues.Domain.Entities;
 
-namespace Alabo.App.Core.Tasks {
-
+namespace Alabo.App.Share.TaskExecutes
+{
     /// <summary>
     ///     task执行器
     /// </summary>
-    public interface ITaskActuator : IDisposable {
-
+    public interface ITaskActuator : IDisposable
+    {
         /// <summary>
         ///     开始执行task任务，，分润等
         ///     Executes the task.

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Globalization;
@@ -7,16 +9,14 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using MongoDB.Bson;
-using Newtonsoft.Json;
 
-namespace Alabo.Extensions {
-
+namespace Alabo.Extensions
+{
     /// <summary>
     ///     文本类型数据扩展
     /// </summary>
-    public static class StringExtensions {
-
+    public static class StringExtensions
+    {
         /// <summary>
         ///     空白字符串的定义
         /// </summary>
@@ -37,7 +37,8 @@ namespace Alabo.Extensions {
         /// </summary>
         private static readonly byte[] FalseByteMap = { 254, 253, 251, 247, 239, 223, 191, 127 };
 
-        internal static string SafeStringJoin(IEnumerable<string> enumerable) {
+        internal static string SafeStringJoin(IEnumerable<string> enumerable)
+        {
             throw new NotImplementedException();
         }
 
@@ -49,26 +50,23 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="url">url链接</param>
         /// <param name="baseUrl"></param>
-        public static NameValueCollection ParseUrl(string url, out string baseUrl) {
+        public static NameValueCollection ParseUrl(string url, out string baseUrl)
+        {
             baseUrl = "";
-            if (string.IsNullOrEmpty(url)) {
-                return null;
-            }
+            if (string.IsNullOrEmpty(url)) return null;
 
             var nvc = new NameValueCollection();
 
-            try {
+            try
+            {
                 var questionMarkIndex = url.IndexOf('?');
 
-                if (questionMarkIndex == -1) {
+                if (questionMarkIndex == -1)
                     baseUrl = url;
-                } else {
+                else
                     baseUrl = url.Substring(0, questionMarkIndex);
-                }
 
-                if (questionMarkIndex == url.Length - 1) {
-                    return null;
-                }
+                if (questionMarkIndex == url.Length - 1) return null;
 
                 var ps = url.Substring(questionMarkIndex + 1);
 
@@ -76,10 +74,10 @@ namespace Alabo.Extensions {
                 var re = new Regex(@"(^|&)?(\w+)=([^&]+)(&|$)?", RegexOptions.Compiled);
                 var mc = re.Matches(ps);
 
-                foreach (Match m in mc) {
-                    nvc.Add(m.Result("$2").ToLower(), m.Result("$3"));
-                }
-            } catch {
+                foreach (Match m in mc) nvc.Add(m.Result("$2").ToLower(), m.Result("$3"));
+            }
+            catch
+            {
             }
 
             return nvc;
@@ -95,19 +93,14 @@ namespace Alabo.Extensions {
         /// <param name="list">集合</param>
         /// <param name="quotes">引号，默认不带引号，范例：单引号 "'"</param>
         /// <param name="separator">分隔符，默认使用逗号分隔</param>
-        public static string Join<T>(IEnumerable<T> list, string quotes = "", string separator = ",") {
-            if (list == null) {
-                return string.Empty;
-            }
+        public static string Join<T>(IEnumerable<T> list, string quotes = "", string separator = ",")
+        {
+            if (list == null) return string.Empty;
 
             var result = new StringBuilder();
-            foreach (var each in list) {
-                result.AppendFormat("{0}{1}{0}{2}", quotes, each, separator);
-            }
+            foreach (var each in list) result.AppendFormat("{0}{1}{0}{2}", quotes, each, separator);
 
-            if (separator == "") {
-                return result.ToString();
-            }
+            if (separator == "") return result.ToString();
 
             return result.ToString().TrimEnd(separator.ToCharArray());
         }
@@ -131,14 +124,11 @@ namespace Alabo.Extensions {
         /// <param name="maxLength">最大长度</param>
         /// <param name="suffix">后缀，默认值是"..."</param>
         public static string LeftString(
-            this string str, int maxLength, string suffix = null) {
-            if (str.IsNullOrEmpty()) {
-                return str;
-            }
+            this string str, int maxLength, string suffix = null)
+        {
+            if (str.IsNullOrEmpty()) return str;
 
-            if (str.Length > maxLength) {
-                str = str.Substring(0, maxLength) + (suffix ?? string.Empty);
-            }
+            if (str.Length > maxLength) str = str.Substring(0, maxLength) + (suffix ?? string.Empty);
 
             return str;
         }
@@ -149,11 +139,11 @@ namespace Alabo.Extensions {
         /// <param name="input"></param>
         /// <param name="compareString"></param>
         /// <returns></returns>
-        public static bool Equal(this string input, string compareString) {
-            if (input.IsNullOrEmpty()) {
-                if (compareString.IsNullOrEmpty()) {
-                    return true;
-                }
+        public static bool Equal(this string input, string compareString)
+        {
+            if (input.IsNullOrEmpty())
+            {
+                if (compareString.IsNullOrEmpty()) return true;
 
                 return false;
             }
@@ -166,13 +156,12 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="delimiter">The delimiter.</param>
-        public static List<string> ToSplitList(this object source, string delimiter = ",") {
+        public static List<string> ToSplitList(this object source, string delimiter = ",")
+        {
             var list = new List<string>();
             var array = SplitString(source, delimiter);
 
-            foreach (var item in array) {
-                list.Add(item);
-            }
+            foreach (var item in array) list.Add(item);
 
             return list;
         }
@@ -182,7 +171,8 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="splitChar">The split character.</param>
-        public static List<string> SplitList(this string source, char[] splitChar) {
+        public static List<string> SplitList(this string source, char[] splitChar)
+        {
             return source.Split(splitChar, StringSplitOptions.RemoveEmptyEntries).ToList();
         }
 
@@ -191,10 +181,12 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static List<Guid> SliptToGuidList(this string input) {
+        public static List<Guid> SliptToGuidList(this string input)
+        {
             var list = input.SplitList(new[] { ',' });
             var resultList = new List<Guid>();
-            foreach (var item in list) {
+            foreach (var item in list)
+            {
                 var guid = item.ToGuid();
                 resultList.Add(guid);
             }
@@ -206,18 +198,18 @@ namespace Alabo.Extensions {
         ///     转换为Mongodb的ObjectId
         /// </summary>
         /// <param name="str"></param>
-        public static ObjectId ToObjectId(this string str) {
-            if (str.IsNullOrEmpty()) {
-                return ObjectId.Empty;
-            }
+        public static ObjectId ToObjectId(this string str)
+        {
+            if (str.IsNullOrEmpty()) return ObjectId.Empty;
 
-            if (str.Length != 24) {
-                return ObjectId.Empty;
-            }
+            if (str.Length != 24) return ObjectId.Empty;
 
-            try {
+            try
+            {
                 return ObjectId.Parse(str);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 throw new ArgumentException("转换出错" + ex.Message);
             }
         }
@@ -227,15 +219,20 @@ namespace Alabo.Extensions {
         ///     如果出错时候，直接抛出异常
         /// </summary>
         /// <param name="str"></param>
-        public static ObjectId ToSafeObjectId(this string str) {
-            try {
+        public static ObjectId ToSafeObjectId(this string str)
+        {
+            try
+            {
                 return ObjectId.Parse(str);
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 throw new ArgumentException("转换出错" + ex.Message);
             }
         }
 
-        public static List<string> GetEnumMemberList(this Enum insEnum) {
+        public static List<string> GetEnumMemberList(this Enum insEnum)
+        {
             var rs = new List<string>();
 
             return rs;
@@ -245,7 +242,8 @@ namespace Alabo.Extensions {
         ///     字符串不是空
         /// </summary>
         /// <param name="str">字符串</param>
-        public static bool IsNotNullOrEmpty(this object str) {
+        public static bool IsNotNullOrEmpty(this object str)
+        {
             return !str.IsNullOrEmpty();
         }
 
@@ -253,14 +251,11 @@ namespace Alabo.Extensions {
         ///     字符串是否为NUL或者为空
         /// </summary>
         /// <param name="str">字符串</param>
-        public static bool IsNullOrEmpty(this string str) {
-            if (str == null) {
-                return true;
-            }
+        public static bool IsNullOrEmpty(this string str)
+        {
+            if (str == null) return true;
 
-            if (!string.IsNullOrEmpty(str.Trim())) {
-                return false;
-            }
+            if (!string.IsNullOrEmpty(str.Trim())) return false;
 
             return true;
         }
@@ -269,22 +264,18 @@ namespace Alabo.Extensions {
         ///     字符串是否为NUL或者为空
         /// </summary>
         /// <param name="str">字符串</param>
-        public static bool IsNullOrEmpty(this object str) {
-            if (str == null) {
-                return true;
-            }
+        public static bool IsNullOrEmpty(this object str)
+        {
+            if (str == null) return true;
 
-            if (!string.IsNullOrEmpty(str.ToString())) {
-                return false;
-            }
+            if (!string.IsNullOrEmpty(str.ToString())) return false;
 
             return true;
         }
 
-        public static bool IsNullOrEmpty(this ObjectId objectId) {
-            if (objectId == ObjectId.Empty) {
-                return true;
-            }
+        public static bool IsNullOrEmpty(this ObjectId objectId)
+        {
+            if (objectId == ObjectId.Empty) return true;
 
             return false;
         }
@@ -293,18 +284,13 @@ namespace Alabo.Extensions {
         ///     Determines whether [is unique identifier null 或 empty] [the specified string].
         /// </summary>
         /// <param name="str">The string.</param>
-        public static bool IsGuidNullOrEmpty(this object str) {
-            if (str.IsNullOrEmpty()) {
-                return true;
-            }
+        public static bool IsGuidNullOrEmpty(this object str)
+        {
+            if (str.IsNullOrEmpty()) return true;
 
-            if (str.ToString().Length != 36) {
-                return true;
-            }
+            if (str.ToString().Length != 36) return true;
 
-            if (str.ToString() == "00000000-0000-0000-0000-000000000000") {
-                return true;
-            }
+            if (str.ToString() == "00000000-0000-0000-0000-000000000000") return true;
 
             return false;
         }
@@ -313,18 +299,13 @@ namespace Alabo.Extensions {
         ///     判断OjbectId是否为空，或null
         /// </summary>
         /// <param name="str"></param>
-        public static bool IsObjectIdNullOrEmpty(this object str) {
-            if (str.IsNullOrEmpty()) {
-                return true;
-            }
+        public static bool IsObjectIdNullOrEmpty(this object str)
+        {
+            if (str.IsNullOrEmpty()) return true;
 
-            if (str.ToString().Length != 24) {
-                return true;
-            }
+            if (str.ToString().Length != 24) return true;
 
-            if (str.ToStr().ToObjectId() == ObjectId.Empty) {
-                return true;
-            }
+            if (str.ToStr().ToObjectId() == ObjectId.Empty) return true;
 
             return false;
         }
@@ -334,15 +315,14 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="delimiter">The delimiter.</param>
-        public static string[] SplitString(this object source, string delimiter = ",") {
+        public static string[] SplitString(this object source, string delimiter = ",")
+        {
             int iPos, iLength;
             bool bEnd;
             string sTemp;
             IList<string> list = new List<string>();
 
-            if (source.IsNullOrEmpty()) {
-                return list.ToArray();
-            }
+            if (source.IsNullOrEmpty()) return list.ToArray();
 
             sTemp = source.ToString();
             iLength = delimiter.Length;
@@ -350,21 +330,18 @@ namespace Alabo.Extensions {
             for (; ; )
             {
                 iPos = sTemp.IndexOf(delimiter);
-                if (iPos < 0) {
-                    break;
-                }
+                if (iPos < 0) break;
 
                 list.Add(sTemp.Substring(0, iPos));
                 sTemp = sTemp.Substring(iPos + iLength);
             }
 
-            if (sTemp.Length >= 0 || bEnd) {
-                list.Add(sTemp);
-            }
+            if (sTemp.Length >= 0 || bEnd) list.Add(sTemp);
 
             var array = new string[list.Count];
             var k = 0;
-            foreach (var item in list) {
+            foreach (var item in list)
+            {
                 array[k] = item;
                 k++;
             }
@@ -377,16 +354,13 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="str">The string.</param>
         /// <param name="t">The t.</param>
-        public static List<T> Deserialize<T>(this string str, T t) {
+        public static List<T> Deserialize<T>(this string str, T t)
+        {
             var js = new JsonSerializer();
-            if (str.IsNullOrEmpty()) {
-                return null;
-            }
+            if (str.IsNullOrEmpty()) return null;
 
             var obj = js.Deserialize(new JsonTextReader(new StringReader(str)), typeof(List<T>));
-            if (obj == null) {
-                return default;
-            }
+            if (obj == null) return default;
 
             return (List<T>)obj;
         }
@@ -395,16 +369,13 @@ namespace Alabo.Extensions {
         ///     将字符串反序列化成T类型
         /// </summary>
         /// <param name="str">The string.</param>
-        public static List<T> Deserialize<T>(this string str) {
-            if (str == null) {
-                return null;
-            }
+        public static List<T> Deserialize<T>(this string str)
+        {
+            if (str == null) return null;
 
             var js = new JsonSerializer();
             var obj = js.Deserialize(new JsonTextReader(new StringReader(str)), typeof(List<T>));
-            if (obj == null) {
-                return new List<T>();
-            }
+            if (obj == null) return new List<T>();
 
             return (List<T>)obj;
         }
@@ -413,11 +384,15 @@ namespace Alabo.Extensions {
         ///     判断是否能转型成功
         /// </summary>
         /// <param name="str">The string.</param>
-        public static bool IsDeserialize<T>(this string str) {
+        public static bool IsDeserialize<T>(this string str)
+        {
             var isDeserialize = true;
-            try {
+            try
+            {
                 JsonConvert.DeserializeObject<T>(str);
-            } catch (Exception) {
+            }
+            catch (Exception)
+            {
                 isDeserialize = false;
             }
 
@@ -429,13 +404,12 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="input">The input.</param>
         /// <param name="throwExceptionIfFailed">if set to <c>true</c> [throw exception if failed].</param>
-        public static DateTime ToDate(this string input, bool throwExceptionIfFailed = false) {
+        public static DateTime ToDate(this string input, bool throwExceptionIfFailed = false)
+        {
             var valid = DateTime.TryParse(input, out var result);
-            if (!valid) {
-                if (throwExceptionIfFailed) {
+            if (!valid)
+                if (throwExceptionIfFailed)
                     throw new FormatException(string.Format("'{0}' cannot be converted as DateTime", input));
-                }
-            }
 
             return result;
         }
@@ -446,7 +420,8 @@ namespace Alabo.Extensions {
         /// <param name="input">The input.</param>
         /// <param name="oldString">The old string.</param>
         /// <param name="newString">The new string.</param>
-        public static string ReplaceRegex(this string input, string oldString, string newString) {
+        public static string ReplaceRegex(this string input, string oldString, string newString)
+        {
             input.Replace(oldString, newString);
             var regex = new Regex(oldString);
             regex.Replace(oldString, newString);
@@ -458,11 +433,10 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="input">The input.</param>
         /// <param name="throwExceptionIfFailed">if set to <c>true</c> [throw exception if failed].</param>
-        public static int ToInt(this string input, bool throwExceptionIfFailed = false) {
+        public static int ToInt(this string input, bool throwExceptionIfFailed = false)
+        {
             var match = Regex.Match(input, @"^[0-9]+$", RegexOptions.IgnoreCase);
-            if (match.Success) {
-                return Convert.ToInt32(input);
-            }
+            if (match.Success) return Convert.ToInt32(input);
 
             return 0;
         }
@@ -472,14 +446,13 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="input">The input.</param>
         /// <param name="throwExceptionIfFailed">if set to <c>true</c> [throw exception if failed].</param>
-        public static double ToDouble(this string input, bool throwExceptionIfFailed = false) {
+        public static double ToDouble(this string input, bool throwExceptionIfFailed = false)
+        {
             var valid = double.TryParse(input, NumberStyles.AllowDecimalPoint,
                 new NumberFormatInfo { NumberDecimalSeparator = "." }, out var result);
-            if (!valid) {
-                if (throwExceptionIfFailed) {
+            if (!valid)
+                if (throwExceptionIfFailed)
                     throw new FormatException(string.Format("'{0}' cannot be converted as double", input));
-                }
-            }
 
             return result;
         }
@@ -489,10 +462,9 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="input">The input.</param>
         /// <param name="defaultValue">The default value.</param>
-        public static long ToLong(this string input, long defaultValue = 0) {
-            if (long.TryParse(input, out var value)) {
-                return value;
-            }
+        public static long ToLong(this string input, long defaultValue = 0)
+        {
+            if (long.TryParse(input, out var value)) return value;
 
             return defaultValue;
         }
@@ -501,10 +473,9 @@ namespace Alabo.Extensions {
         ///     To the decimal.
         /// </summary>
         /// <param name="val">The value.</param>
-        public static decimal ToDecimal(this object val) {
-            if (val.IsNullOrEmpty()) {
-                return 0;
-            }
+        public static decimal ToDecimal(this object val)
+        {
+            if (val.IsNullOrEmpty()) return 0;
 
             return Convert.ToDecimal(val.ToString());
         }
@@ -513,10 +484,9 @@ namespace Alabo.Extensions {
         ///     To the int16.
         /// </summary>
         /// <param name="val">The value.</param>
-        public static short ToInt16(this object val) {
-            if (val.IsNullOrEmpty()) {
-                return 0;
-            }
+        public static short ToInt16(this object val)
+        {
+            if (val.IsNullOrEmpty()) return 0;
 
             return Convert.ToInt16(val.ToString());
         }
@@ -525,14 +495,11 @@ namespace Alabo.Extensions {
         ///     To the int64.
         /// </summary>
         /// <param name="val">The value.</param>
-        public static long ToInt64(this object val) {
-            if (val.IsNullOrEmpty()) {
-                return 0;
-            }
+        public static long ToInt64(this object val)
+        {
+            if (val.IsNullOrEmpty()) return 0;
 
-            if (long.TryParse(val.ToString(), out var result)) {
-                return result;
-            }
+            if (long.TryParse(val.ToString(), out var result)) return result;
 
             return 0;
         }
@@ -541,12 +508,11 @@ namespace Alabo.Extensions {
         ///     转换Guid
         /// </summary>
         /// <param name="obj">The object.</param>
-        public static Guid ToGuid(this object obj) {
-            if (!obj.IsNullOrEmpty()) {
-                if (!obj.IsGuidNullOrEmpty()) {
+        public static Guid ToGuid(this object obj)
+        {
+            if (!obj.IsNullOrEmpty())
+                if (!obj.IsGuidNullOrEmpty())
                     return Guid.Parse(obj.ToString());
-                }
-            }
 
             return Guid.NewGuid();
         }
@@ -555,12 +521,11 @@ namespace Alabo.Extensions {
         ///     To the boolean.
         /// </summary>
         /// <param name="val">The value.</param>
-        public static bool ToBoolean(this object val) {
-            if (!val.IsNullOrEmpty()) {
-                if (val.ToString() == "1" || val.ToString().ToLower() == "true") {
+        public static bool ToBoolean(this object val)
+        {
+            if (!val.IsNullOrEmpty())
+                if (val.ToString() == "1" || val.ToString().ToLower() == "true")
                     return true;
-                }
-            }
 
             return false;
         }
@@ -569,14 +534,17 @@ namespace Alabo.Extensions {
         ///     转换成ObjectId
         /// </summary>
         /// <param name="input"></param>
-        public static ObjectId ToObjectId(this object input) {
-            if (!input.IsNullOrEmpty()) {
-                try {
+        public static ObjectId ToObjectId(this object input)
+        {
+            if (!input.IsNullOrEmpty())
+                try
+                {
                     ObjectId.Parse(input.ToStr());
-                } catch {
+                }
+                catch
+                {
                     return ObjectId.Empty;
                 }
-            }
 
             return ObjectId.Empty;
         }
@@ -585,10 +553,9 @@ namespace Alabo.Extensions {
         ///     To the date time.
         /// </summary>
         /// <param name="val">The value.</param>
-        public static DateTime ToDateTime(this object val) {
-            if (val.IsNullOrEmpty()) {
-                return DateTime.Now;
-            }
+        public static DateTime ToDateTime(this object val)
+        {
+            if (val.IsNullOrEmpty()) return DateTime.Now;
 
             var valid = DateTime.TryParse(val.ToString(), out var result);
             return result;
@@ -598,7 +565,8 @@ namespace Alabo.Extensions {
         ///     Determines whether the specified input is email.
         /// </summary>
         /// <param name="input">The input.</param>
-        public static bool IsEmail(this string input) {
+        public static bool IsEmail(this string input)
+        {
             var match = Regex.Match(input,
                 @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", RegexOptions.IgnoreCase);
             return match.Success;
@@ -608,7 +576,8 @@ namespace Alabo.Extensions {
         ///     Determines whether the specified input is number.
         /// </summary>
         /// <param name="input">The input.</param>
-        public static bool IsNumber(this string input) {
+        public static bool IsNumber(this string input)
+        {
             var match = Regex.Match(input, @"^[0-9]+$", RegexOptions.IgnoreCase);
             return match.Success;
         }
@@ -619,19 +588,14 @@ namespace Alabo.Extensions {
         ///     判断是否完整链接
         /// </summary>
         /// <param name="url">The URL.</param>
-        public static bool IsUrl(this string url) {
+        public static bool IsUrl(this string url)
+        {
             url = url.Trim();
-            if (url.StartsWith("http://")) {
-                return true;
-            }
+            if (url.StartsWith("http://")) return true;
 
-            if (url.StartsWith("ftp://")) {
-                return true;
-            }
+            if (url.StartsWith("ftp://")) return true;
 
-            if (url.StartsWith("https://")) {
-                return true;
-            }
+            if (url.StartsWith("https://")) return true;
 
             return false;
         }
@@ -644,12 +608,12 @@ namespace Alabo.Extensions {
         /// <param name="source">来源字符串</param>
         /// <param name="spliter">分割符</param>
         /// <param name="limit">最大分割限制（小于等于0时为不限制）</param>
-        public static IEnumerable<string> SplitString(this string source, string spliter, int limit = -1) {
-            if (source == null) {
-                yield break;
-            }
+        public static IEnumerable<string> SplitString(this string source, string spliter, int limit = -1)
+        {
+            if (source == null) yield break;
             //如分割符为空则直接返回source
-            if (string.IsNullOrEmpty(spliter)) {
+            if (string.IsNullOrEmpty(spliter))
+            {
                 yield return source;
                 yield break;
             }
@@ -657,10 +621,12 @@ namespace Alabo.Extensions {
             //循环分割字符串
             var count = 0;
             var index = 0;
-            while (index >= 0) {
+            while (index >= 0)
+            {
                 var nextIndex = source.IndexOf(spliter, index);
                 //如找不到下一个或已达到限制，返回剩余字符串
-                if (nextIndex < 0 || limit > 0 && count >= limit - 1) {
+                if (nextIndex < 0 || limit > 0 && count >= limit - 1)
+                {
                     yield return source.Substring(index);
                     yield break;
                 }
@@ -677,37 +643,38 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="text">字符串</param>
         /// <param name="count">最多分割的数量，-1为不限制</param>
-        public static List<string> SplitBlank(this string text, int count = -1) {
+        public static List<string> SplitBlank(this string text, int count = -1)
+        {
             var strList = new List<string>();
             int offset = 0, x = 0;
             string str;
-            while (offset < text.Length) {
+            while (offset < text.Length)
+            {
                 //跳过字符串前的空白
-                if (BlankChars.Contains(text[offset])) {
+                if (BlankChars.Contains(text[offset]))
+                {
                     offset++;
                     continue;
                 }
 
                 //如果没有达到分割限制
-                if (count < 1 || strList.Count < count - 1) {
+                if (count < 1 || strList.Count < count - 1)
+                {
                     x = text.IndexOfAny(BlankChars, offset);
                     if (x < 0) //如果没有找到下一个空格，则截取到字符串末尾
-{
                         x = text.Length;
-                    }
 
                     str = text.Substring(offset, x - offset).Trim();
                     offset += str.Length;
-                } else //如果已达到分割限制，读取剩余的所有字符
-                  {
+                }
+                else //如果已达到分割限制，读取剩余的所有字符
+                {
                     str = text.Substring(offset).Trim();
                     offset += str.Length;
                 }
 
                 //如果字符串不为空白则加入到返回列表中
-                if (str.Length != 0) {
-                    strList.Add(str);
-                }
+                if (str.Length != 0) strList.Add(str);
             }
 
             //返回分割后的字符串列表
@@ -718,14 +685,14 @@ namespace Alabo.Extensions {
         ///     根据换行转换成数组
         /// </summary>
         /// <param name="str">The string.</param>
-        public static List<string> SplitLine(this string str) {
+        public static List<string> SplitLine(this string str)
+        {
             var lines = Regex.Split(str, "\r\n");
             var strList = new List<string>();
-            foreach (var item in lines) {
+            foreach (var item in lines)
+            {
                 var text = item.Replace("/t", string.Empty);
-                if (!text.Trim().IsNullOrEmpty()) {
-                    strList.Add(text.Trim());
-                }
+                if (!text.Trim().IsNullOrEmpty()) strList.Add(text.Trim());
             }
 
             return strList;
@@ -735,10 +702,9 @@ namespace Alabo.Extensions {
         ///     替换所有字符串中的空白
         /// </summary>
         /// <param name="source">The source.</param>
-        public static string ReplaceSpace(this string source) {
-            foreach (var space in SpaceList) {
-                source = source.Replace(space, string.Empty);
-            }
+        public static string ReplaceSpace(this string source)
+        {
+            foreach (var space in SpaceList) source = source.Replace(space, string.Empty);
 
             return source;
         }
@@ -748,7 +714,8 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="source">来源字符串</param>
         /// <param name="target">目标字符串</param>
-        public static bool FuzzyContains(this string source, string target) {
+        public static bool FuzzyContains(this string source, string target)
+        {
             source = source.ReplaceSpace();
             target = target.ReplaceSpace();
             return !target.IsNullOrEmpty() && source.Contains(target);
@@ -759,7 +726,8 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="source">来源字符串</param>
         /// <param name="target">目标字符串</param>
-        public static bool FuzzyEquals(this string source, string target) {
+        public static bool FuzzyEquals(this string source, string target)
+        {
             return source.ReplaceSpace() == target.ReplaceSpace();
         }
 
@@ -767,10 +735,9 @@ namespace Alabo.Extensions {
         ///     byte[]转换到base64字符串
         /// </summary>
         /// <param name="self">The self.</param>
-        public static string EncodeToBase64(this byte[] self) {
-            if (self.IsNullOrEmpty()) {
-                return string.Empty;
-            }
+        public static string EncodeToBase64(this byte[] self)
+        {
+            if (self.IsNullOrEmpty()) return string.Empty;
 
             return Convert.ToBase64String(self);
         }
@@ -780,14 +747,16 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="self">The self.</param>
         /// <param name="defaultValue"></param>
-        public static byte[] DecodeAsBase64(this string self, byte[] defaultValue = null) {
-            if (self.IsNullOrEmpty()) {
-                return new byte[0];
-            }
+        public static byte[] DecodeAsBase64(this string self, byte[] defaultValue = null)
+        {
+            if (self.IsNullOrEmpty()) return new byte[0];
 
-            try {
+            try
+            {
                 return Convert.FromBase64String(self);
-            } catch {
+            }
+            catch
+            {
                 return defaultValue;
             }
         }
@@ -797,10 +766,9 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="str">The string.</param>
         /// <param name="strLength">Length of the string.</param>
-        public static string StrSub(this string str, int strLength = 10) {
-            if (str.Length <= strLength) {
-                return str;
-            }
+        public static string StrSub(this string str, int strLength = 10)
+        {
+            if (str.Length <= strLength) return str;
 
             return str.Substring(0, strLength);
         }
@@ -809,10 +777,9 @@ namespace Alabo.Extensions {
         ///     把byte[]转换到hex字符串
         /// </summary>
         /// <param name="self">The self.</param>
-        public static string EncodeToHexdigest(this byte[] self) {
-            if (self == null) {
-                return string.Empty;
-            }
+        public static string EncodeToHexdigest(this byte[] self)
+        {
+            if (self == null) return string.Empty;
 
             return BitConverter.ToString(self).Replace("-", string.Empty).ToLower();
         }
@@ -824,18 +791,15 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="self">The self.</param>
         /// <param name="defaultValue"></param>
-        public static byte[] DecodeAsHexdigest(this string self, byte[] defaultValue = null) {
-            if (self == null || self.Length % 2 != 0) {
-                return defaultValue;
-            }
+        public static byte[] DecodeAsHexdigest(this string self, byte[] defaultValue = null)
+        {
+            if (self == null || self.Length % 2 != 0) return defaultValue;
 
             var bytes = new byte[self.Length / 2];
-            for (var index = 0; index < bytes.Length; index++) {
+            for (var index = 0; index < bytes.Length; index++)
                 if (!byte.TryParse(self.Substring(index * 2, 2),
-                    NumberStyles.HexNumber, CultureInfo.InvariantCulture, out bytes[index])) {
+                    NumberStyles.HexNumber, CultureInfo.InvariantCulture, out bytes[index]))
                     return defaultValue;
-                }
-            }
 
             return bytes;
         }
@@ -844,7 +808,8 @@ namespace Alabo.Extensions {
         ///     To the bytes.
         /// </summary>
         /// <param name="str">The string.</param>
-        public static byte[] ToBytes(this string str) {
+        public static byte[] ToBytes(this string str)
+        {
             return Encoding.UTF8.GetBytes(str);
         }
 
@@ -852,7 +817,8 @@ namespace Alabo.Extensions {
         ///     移除换行
         /// </summary>
         /// <param name="str">The string.</param>
-        public static string ToReplace(this string str) {
+        public static string ToReplace(this string str)
+        {
             return str.Replace("\r\n", string.Empty).Replace(" ", string.Empty);
         }
 
@@ -860,7 +826,8 @@ namespace Alabo.Extensions {
         ///     将已经为在 URL 中传输而编码的字符串转换为解码的字符串
         /// </summary>
         /// <param name="str">The string.</param>
-        public static string ToUrlDecode(this string str) {
+        public static string ToUrlDecode(this string str)
+        {
             return WebUtility.UrlDecode(str);
         }
 
@@ -868,7 +835,8 @@ namespace Alabo.Extensions {
         ///     将文本字符串转换为 URL 编码的字符串。
         /// </summary>
         /// <param name="str">The string.</param>
-        public static string ToUrlEncode(this string str) {
+        public static string ToUrlEncode(this string str)
+        {
             return WebUtility.UrlEncode(str);
         }
 
@@ -877,13 +845,12 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="self">来源字符串</param>
         /// <param name="target">要计算的字符</param>
-        public static int CountChar(this string self, char target) {
+        public static int CountChar(this string self, char target)
+        {
             var count = 0;
-            for (var n = 0; n < self.Length; n++) {
-                if (self[n] == target) {
+            for (var n = 0; n < self.Length; n++)
+                if (self[n] == target)
                     count++;
-                }
-            }
 
             return count;
         }
@@ -895,10 +862,9 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="self">来源字符串</param>
         /// <param name="args">格式化参数</param>
-        public static string FormatWith(this string self, params object[] args) {
-            if (self == null) {
-                return null;
-            }
+        public static string FormatWith(this string self, params object[] args)
+        {
+            if (self == null) return null;
 
             return string.Format(self, args);
         }
@@ -912,26 +878,25 @@ namespace Alabo.Extensions {
         /// <param name="value">设置的值</param>
         /// <param name="realloced">重新分配内存时调用的事件 没有重新分配时不会调用</param>
         public static void SetBitValue(
-            this byte[] bytes, int bitIndex, bool value, Action<byte[]> realloced) {
-            if (bitIndex < 0) {
-                throw new ArgumentException("bit index must not be less than 0");
-            }
+            this byte[] bytes, int bitIndex, bool value, Action<byte[]> realloced)
+        {
+            if (bitIndex < 0) throw new ArgumentException("bit index must not be less than 0");
             //计算长度
             var bitLength = bitIndex + 1; //位长度
             var byteLength = (bitLength + (8 - bitLength % 8) % 8) / 8; //字节长度
             //数组长度比需要的字节长度小时重新分配内存
-            if (bytes == null || bytes.Length < byteLength) {
+            if (bytes == null || bytes.Length < byteLength)
+            {
                 bytes = bytes ?? new byte[0];
                 Array.Resize(ref bytes, byteLength);
                 realloced(bytes);
             }
 
             //设置指定位置的位的值
-            if (value) {
+            if (value)
                 bytes[byteLength - 1] |= TrueByteMap[bitIndex % 8];
-            } else {
+            else
                 bytes[byteLength - 1] &= FalseByteMap[bitIndex % 8];
-            }
         }
 
         /// <summary>
@@ -940,17 +905,14 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="bytes">获取的数组</param>
         /// <param name="bitIndex"></param>
-        public static bool? GetBitValue(this byte[] bytes, int bitIndex) {
-            if (bitIndex < 0) {
-                throw new ArgumentException("bit index must not be less than 0");
-            }
+        public static bool? GetBitValue(this byte[] bytes, int bitIndex)
+        {
+            if (bitIndex < 0) throw new ArgumentException("bit index must not be less than 0");
             //计算长度
             var bitLength = bitIndex + 1; //位长度
             var byteLength = (bitLength + (8 - bitLength % 8) % 8) / 8; //字节长度
             //数组长度比需要的字节长度小时返回null
-            if (bytes == null || bytes.Length < byteLength) {
-                return null;
-            }
+            if (bytes == null || bytes.Length < byteLength) return null;
             //获取指定位置的位的值
             var value = bytes[byteLength - 1] & TrueByteMap[bitIndex % 8];
             return value > 0;
@@ -962,16 +924,15 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="str">The string.</param>
         /// <param name="isLower">后面的字母是否全部换成小写</param>
-        public static string ToFristUpper(this string str, bool isLower = false) {
-            if (!str.IsNullOrEmpty()) {
-                if (str.Length == 1) {
-                    return str = str.Substring(0, 1).ToUpper();
-                }
+        public static string ToFristUpper(this string str, bool isLower = false)
+        {
+            if (!str.IsNullOrEmpty())
+            {
+                if (str.Length == 1) return str = str.Substring(0, 1).ToUpper();
 
-                if (str.Length > 1) {
-                    if (!isLower) {
-                        return str = str.Substring(0, 1).ToUpper() + str.Substring(1, str.Length - 1);
-                    }
+                if (str.Length > 1)
+                {
+                    if (!isLower) return str = str.Substring(0, 1).ToUpper() + str.Substring(1, str.Length - 1);
 
                     return str = str.Substring(0, 1).ToUpper() + str.Substring(1, str.Length - 1).ToLower();
                 }
@@ -980,15 +941,13 @@ namespace Alabo.Extensions {
             return string.Empty;
         }
 
-        public static string ToFristLower(this string str) {
-            if (!str.IsNullOrEmpty()) {
-                if (str.Length == 1) {
-                    return str = str.Substring(0, 1).ToLower();
-                }
+        public static string ToFristLower(this string str)
+        {
+            if (!str.IsNullOrEmpty())
+            {
+                if (str.Length == 1) return str = str.Substring(0, 1).ToLower();
 
-                if (str.Length > 1) {
-                    return str = str.Substring(0, 1).ToLower() + str.Substring(1, str.Length - 1);
-                }
+                if (str.Length > 1) return str = str.Substring(0, 1).ToLower() + str.Substring(1, str.Length - 1);
             }
 
             return string.Empty;
@@ -998,10 +957,9 @@ namespace Alabo.Extensions {
         ///     To the string.
         /// </summary>
         /// <param name="input">The input.</param>
-        public static string ToStr(this object input) {
-            if (input.IsNullOrEmpty()) {
-                return string.Empty;
-            }
+        public static string ToStr(this object input)
+        {
+            if (input.IsNullOrEmpty()) return string.Empty;
 
             return input.ToString();
         }
@@ -1011,7 +969,8 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="str">The string.</param>
         /// <param name="charset">The charset.</param>
-        public static string ToEncoding(this string str, string charset = "utf-8") {
+        public static string ToEncoding(this string str, string charset = "utf-8")
+        {
             return Encoding.GetEncoding(charset).GetString(ToBytes(str));
         }
 
@@ -1019,14 +978,11 @@ namespace Alabo.Extensions {
         ///     To the camel case string.
         /// </summary>
         /// <param name="s">The s.</param>
-        public static string ToCamelCaseString(this string s) {
-            if (string.IsNullOrWhiteSpace(s)) {
-                return string.Empty;
-            }
+        public static string ToCamelCaseString(this string s)
+        {
+            if (string.IsNullOrWhiteSpace(s)) return string.Empty;
 
-            if (char.IsUpper(s[0])) {
-                return $"{char.ToLower(s[0])}{s.Substring(1)}";
-            }
+            if (char.IsUpper(s[0])) return $"{char.ToLower(s[0])}{s.Substring(1)}";
 
             return s;
         }
@@ -1036,14 +992,14 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="html">The HTML.</param>
         /// <param name="length">The length.</param>
-        public static string ReplaceHtmlTag(this string html, int length = 0) {
-            if (!html.IsNullOrEmpty()) {
+        public static string ReplaceHtmlTag(this string html, int length = 0)
+        {
+            if (!html.IsNullOrEmpty())
+            {
                 var strText = Regex.Replace(html, "<[^>]+>", string.Empty);
                 strText = Regex.Replace(strText, "&[^;]+;", string.Empty);
 
-                if (length > 0 && strText.Length > length) {
-                    return strText.Substring(0, length);
-                }
+                if (length > 0 && strText.Length > length) return strText.Substring(0, length);
 
                 return strText;
             }
@@ -1057,19 +1013,17 @@ namespace Alabo.Extensions {
         ///     过滤字符串中的sql命令
         /// </summary>
         /// <param name="sInput">The s input.</param>
-        public static string Filter(this string sInput) {
-            if (sInput == null || sInput == string.Empty) {
-                return null;
-            }
+        public static string Filter(this string sInput)
+        {
+            if (sInput == null || sInput == string.Empty) return null;
 
             var sInput1 = sInput.ToLower();
             var output = sInput;
             var pattern = "*|and|exec|insert|select|delete|update|count|master|truncate|declare|char(|mid(|chr(|'";
-            if (Regex.Match(sInput1, Regex.Escape(pattern), RegexOptions.IgnoreCase).Success) {
+            if (Regex.Match(sInput1, Regex.Escape(pattern), RegexOptions.IgnoreCase).Success)
                 output = output.Replace(sInput, "''");
-            } else {
+            else
                 output = output.Replace("'", "''");
-            }
 
             return output;
         }
@@ -1082,10 +1036,9 @@ namespace Alabo.Extensions {
         ///     解码网页参数中的字符串
         /// </summary>
         /// <param name="text">The text.</param>
-        public static string InputTexts(this string text) {
-            if (string.IsNullOrEmpty(text)) {
-                return string.Empty;
-            }
+        public static string InputTexts(this string text)
+        {
+            if (string.IsNullOrEmpty(text)) return string.Empty;
 
             text = Regex.Replace(text, @"[\s]{2,}", " ");
             text = Regex.Replace(text, @"(<[b|B][r|R]/*>)+|(<[p|P](.|\n)*?>)", "\n");
@@ -1104,30 +1057,30 @@ namespace Alabo.Extensions {
         /// <param name="paramData">PostData</param>
         /// <param name="contentType">default = "application/json"</param>
         /// <returns></returns>
-        public static string Post(this string url, string paramData, Dictionary<string, string> dicHeader = null) {
+        public static string Post(this string url, string paramData, Dictionary<string, string> dicHeader = null)
+        {
             return Post(url, paramData, Encoding.UTF8, dicHeader);
         }
 
         private static string Post(string url, string paramData, Encoding encoding,
-            Dictionary<string, string> dicHeader = null) {
+            Dictionary<string, string> dicHeader = null)
+        {
             string result;
 
-            if (url.ToLower().IndexOf("https", StringComparison.Ordinal) > -1) {
+            if (url.ToLower().IndexOf("https", StringComparison.Ordinal) > -1)
                 ServicePointManager.ServerCertificateValidationCallback =
                     (sender, certificate, chain, errors) => { return true; };
-            }
 
             var wc = new WebClient();
-            if (string.IsNullOrEmpty(wc.Headers["Content-Type"])) {
+            if (string.IsNullOrEmpty(wc.Headers["Content-Type"]))
+            {
                 var contentType = "application/json";
                 wc.Headers.Add("Content-Type", contentType);
             }
 
-            if (dicHeader != null) {
-                foreach (var item in dicHeader) {
+            if (dicHeader != null)
+                foreach (var item in dicHeader)
                     wc.Headers.Add(item.Key, item.Value);
-                }
-            }
 
             wc.Encoding = encoding;
 
@@ -1141,19 +1094,25 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static string HttpGet(this string url) {
+        public static string HttpGet(this string url)
+        {
             return HttpGet(url, Encoding.UTF8);
         }
 
-        private static string HttpGet(string url, Encoding encoding) {
-            try {
+        private static string HttpGet(string url, Encoding encoding)
+        {
+            try
+            {
                 var wc = new WebClient { Encoding = encoding };
                 var readStream = wc.OpenRead(url);
-                using (var sr = new StreamReader(readStream, encoding)) {
+                using (var sr = new StreamReader(readStream, encoding))
+                {
                     var result = sr.ReadToEnd();
                     return result;
                 }
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 return e.Message;
             }
         }
@@ -1165,11 +1124,10 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="soucreStr">The soucre string.</param>
         /// <param name="len">长度</param>
-        public static string Substring(this string soucreStr, int len) {
+        public static string Substring(this string soucreStr, int len)
+        {
             var result = soucreStr;
-            if (soucreStr.Length >= len) {
-                result = soucreStr.Substring(0, len);
-            }
+            if (soucreStr.Length >= len) result = soucreStr.Substring(0, len);
 
             return result;
         }
@@ -1180,13 +1138,12 @@ namespace Alabo.Extensions {
         /// <param name="str">The string.</param>
         /// <param name="beginStr">开始字符串，必须唯一</param>
         /// <param name="endStr">结束字符串，必须唯一</param>
-        public static string CutString(this string str, string beginStr, string endStr) {
+        public static string CutString(this string str, string beginStr, string endStr)
+        {
             var begin = str.IndexOf(beginStr) + beginStr.Length;
             var end = str.LastIndexOf(endStr);
             var lenth = end - begin;
-            if (lenth > 0) {
-                return str.Substring(begin, lenth);
-            }
+            if (lenth > 0) return str.Substring(begin, lenth);
 
             return string.Empty;
         }
@@ -1196,13 +1153,12 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="str">The string.</param>
         /// <param name="endStr">开始字符串，必须唯一</param>
-        public static string SubStringEnd(this string str, string endStr) {
+        public static string SubStringEnd(this string str, string endStr)
+        {
             var begin = str.LastIndexOf(endStr, StringComparison.Ordinal) + endStr.Length;
             var end = str.Length;
             var lenth = end - begin;
-            if (lenth > 0) {
-                return str.Substring(begin, lenth);
-            }
+            if (lenth > 0) return str.Substring(begin, lenth);
 
             return string.Empty;
         }
@@ -1212,13 +1168,12 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="str">The string.</param>
         /// <param name="beginStr">开始字符串，必须唯一</param>
-        public static string SubStringEndLast(this string str, string beginStr) {
+        public static string SubStringEndLast(this string str, string beginStr)
+        {
             var begin = str.LastIndexOf(beginStr, StringComparison.Ordinal) + beginStr.Length;
             var end = str.Length;
             var lenth = end - begin;
-            if (lenth > 0) {
-                return str.Substring(begin, lenth);
-            }
+            if (lenth > 0) return str.Substring(begin, lenth);
 
             return string.Empty;
         }
@@ -1228,11 +1183,10 @@ namespace Alabo.Extensions {
         /// </summary>
         /// <param name="str">The string.</param>
         /// <param name="beginStr">开始字符串，必须唯一</param>
-        public static string SubStringLastEnd(this string str, string beginStr) {
+        public static string SubStringLastEnd(this string str, string beginStr)
+        {
             var begin = str.LastIndexOf(beginStr, StringComparison.Ordinal);
-            if (begin > 0) {
-                return str.Substring(0, begin);
-            }
+            if (begin > 0) return str.Substring(0, begin);
 
             return string.Empty;
         }
@@ -1243,8 +1197,8 @@ namespace Alabo.Extensions {
     /// <summary>
     ///     ContentTypes List for reference using
     /// </summary>
-    public class ContentTypes {
-
+    public class ContentTypes
+    {
         /// <summary>
         ///     application/json
         /// </summary>

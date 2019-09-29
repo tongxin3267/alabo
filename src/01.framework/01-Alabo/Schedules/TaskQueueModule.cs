@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Alabo.Exceptions;
+using Alabo.Reflections;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Exceptions;
-using Alabo.Reflections;
 
-namespace Alabo.Schedules {
-
-    public static class TaskQueueModuleId {
-
+namespace Alabo.Schedules
+{
+    public static class TaskQueueModuleId
+    {
         /// <summary>
         ///     按照升级点升级
         /// </summary>
@@ -70,20 +70,20 @@ namespace Alabo.Schedules {
         public static Guid ParnterModuleGuid = Guid.Parse("FF000999-1111-1111-2222-600000000008");
     }
 
-    public static class TaskQueueModule {
-
+    public static class TaskQueueModule
+    {
         /// <summary>
         ///     升级任务等级Id
         /// </summary>
         /// <returns></returns>
-        public static Dictionary<Guid, string> GetTaskQueueModuleIds() {
+        public static Dictionary<Guid, string> GetTaskQueueModuleIds()
+        {
             var result = new Dictionary<Guid, string>();
             var fields = typeof(TaskQueueModuleId).GetFields();
-            foreach (var item in fields) {
+            foreach (var item in fields)
+            {
                 var displayAttribute = item.GetAttribute<DisplayAttribute>();
-                if (displayAttribute == null) {
-                    throw new ValidException("请设置DisplayAttribute特性");
-                }
+                if (displayAttribute == null) throw new ValidException("请设置DisplayAttribute特性");
 
                 var value = item.GetValue(null);
                 result.Add(Guid.Parse(value.ToString()), displayAttribute.Name);

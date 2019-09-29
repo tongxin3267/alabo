@@ -1,34 +1,31 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Share.Share.Domain.Enums {
-
+namespace Alabo.App.Share.Rewards.Domain.Enums
+{
     /// <summary>
-    /// 商品范围
+    ///     商品范围
     /// </summary>
     [ClassProperty(Name = "商品范围")]
-    public enum ProductModelType {
-
+    public enum ProductModelType
+    {
         /// <summary>
-        /// 全商品模式
+        ///     全商品模式
         /// </summary>
-        [Display(Name = "所有商品")]
-        [LabelCssClass(BadgeColorCalss.Warning)]
+        [Display(Name = "所有商品")] [LabelCssClass(BadgeColorCalss.Warning)]
         All = 0,
 
         /// <summary>
-        /// 产品线模式
+        ///     产品线模式
         /// </summary>
-        [Display(Name = "按所属商品线选择")]
-        [LabelCssClass(BadgeColorCalss.Warning)]
+        [Display(Name = "按所属商品线选择")] [LabelCssClass(BadgeColorCalss.Warning)]
         ProductLine = 1,
 
         /// <summary>
-        /// 商城模式
+        ///     商城模式
         /// </summary>
-        [Display(Name = "按所属商城选择")]
-        [LabelCssClass(BadgeColorCalss.Warning)]
-        ShoppingMall = 2,
+        [Display(Name = "按所属商城选择")] [LabelCssClass(BadgeColorCalss.Warning)]
+        ShoppingMall = 2
 
         ///// <summary>
         ///// 多商品

@@ -1,29 +1,27 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Alabo.Data.Things.Orders.Domain.Entities.Extensions;
+using Alabo.Datas.Ef.SqlServer;
+using Alabo.Domains.Entities;
+using Alabo.Domains.Enums;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Tenants;
+using Alabo.Web.Mvc.Attributes;
+using Alabo.Web.Mvc.ViewModel;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.Tasks.Domain.Entities.Extensions;
-using Alabo.App.Core.Tasks.Domain.Enums;
-using Alabo.App.Core.Tasks.Domain.Services;
-using Alabo.Core.Enums.Enum;
-using Alabo.Datas.Ef.SqlServer;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
-using Alabo.Tenants;
-using Alabo.UI;
-using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.Tasks.Domain.Entities {
-
+namespace Alabo.Data.Things.Orders.Domain.Entities
+{
     /// <summary>
     ///     分润订单
     /// </summary>
-    [ClassProperty(Name = "分润订单", Icon = "fa fa-file", Description = "分润订单", ListApi = "Api//AdminBasic/List?Service=IShareOrderService&Method=GetPagedList",
+    [ClassProperty(Name = "分润订单", Icon = "fa fa-file", Description = "分润订单",
+        ListApi = "Api//AdminBasic/List?Service=IShareOrderService&Method=GetPagedList",
         SideBarType = SideBarType.FenRunSideBar)]
-    public class ShareOrder : AggregateDefaultUserRoot<ShareOrder> {
-
+    public class ShareOrder : AggregateDefaultUserRoot<ShareOrder>
+    {
         /// <summary>
         ///     订单金额，分润的金额基数，如果是商品金额，则写商品金额，如果是分润价则使用分润价
         /// </summary>
@@ -122,7 +120,8 @@ namespace Alabo.App.Core.Tasks.Domain.Entities {
         /// <summary>
         ///     获取链接
         /// </summary>
-        public IEnumerable<ViewLink> ViewLinks() {
+        public IEnumerable<ViewLink> ViewLinks()
+        {
             var quickLinks = new List<ViewLink>
             {
                 new ViewLink("分润测试", "/Admin/ShareOrder/Edit", Icons.Add, LinkType.TableQuickLink),
@@ -136,20 +135,23 @@ namespace Alabo.App.Core.Tasks.Domain.Entities {
         #endregion 以下字段不插入数据库
     }
 
-    public class ShareOrderTableMap : MsSqlAggregateRootMap<ShareOrder> {
-
-        protected override void MapTable(EntityTypeBuilder<ShareOrder> builder) {
+    public class ShareOrderTableMap : MsSqlAggregateRootMap<ShareOrder>
+    {
+        protected override void MapTable(EntityTypeBuilder<ShareOrder> builder)
+        {
             builder.ToTable("Task_ShareOrder");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<ShareOrder> builder) {
+        protected override void MapProperties(EntityTypeBuilder<ShareOrder> builder)
+        {
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Ignore(r => r.UserName);
             builder.Ignore(r => r.ShareOrderExtension);
             builder.Ignore(r => r.DisplayName);
-            builder.Ignore(e => e.Version);
-            if (TenantContext.IsTenant) {
+
+            if (TenantContext.IsTenant)
+            {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
             }
         }

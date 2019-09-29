@@ -1,18 +1,18 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Core.Markets.Visitors.Domain.Enums;
-using Alabo.Core.Enums.Enum;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.Cloud.People.Visitors.Domain.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Users.Enum;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Core.Markets.Visitors.Domain.Entities {
-
+namespace Alabo.Cloud.People.Visitors.Domain.Entities
+{
     /// <summary>
-    /// 游客表
+    ///     游客表
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Cloud_People_Visitor")]
-    public class Visitor : AggregateMongodbRoot<Visitor> {
+    public class Visitor : AggregateMongodbRoot<Visitor>
+    {
         public string OpenId { get; set; }
 
         public string Avator { get; set; }
@@ -26,22 +26,22 @@ namespace Alabo.App.Core.Markets.Visitors.Domain.Entities {
         public string City { get; set; }
 
         /// <summary>
-        /// 父级Id
+        ///     父级Id
         /// </summary>
         public long FatherId { get; set; }
 
         /// <summary>
-        /// 访问次数
+        ///     访问次数
         /// </summary>
         public long VisitorCount { get; set; }
 
         /// <summary>
-        /// 类型
+        ///     类型
         /// </summary>
         public VisitorType Type { get; set; }
 
         /// <summary>
-        /// 访问的URL
+        ///     访问的URL
         /// </summary>
         public string Url { get; set; }
     }

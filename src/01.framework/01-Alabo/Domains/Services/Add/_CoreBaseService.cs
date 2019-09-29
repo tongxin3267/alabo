@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using Alabo.Datas.Stores;
+﻿using Alabo.Datas.Stores;
 using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Base.Entities;
-using Alabo.Domains.Base.Services;
 using Alabo.Domains.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -12,8 +7,13 @@ using Alabo.Domains.Repositories.Model;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Linq;
+using Alabo.Logging.Logs.Entities;
+using Alabo.Logging.Logs.Services;
 using Alabo.Maps;
 using Alabo.Reflections;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using Convert = Alabo.Helpers.Convert;
 
 namespace Alabo.Domains.Services.Add
@@ -49,9 +49,7 @@ namespace Alabo.Domains.Services.Add
         {
             get
             {
-                if (typeof(TEntity).BaseType.Name.Contains("Mongo")) {
-                    return TableType.Mongodb;
-                }
+                if (typeof(TEntity).BaseType.Name.Contains("Mongo")) return TableType.Mongodb;
 
                 return TableType.SqlServer;
             }
@@ -91,9 +89,7 @@ namespace Alabo.Domains.Services.Add
         protected IEnumerable<TDto> ToDto<TDto>(IEnumerable<TEntity> entities)
             where TDto : IResponse, new()
         {
-            if (entities == null) {
-                return null;
-            }
+            if (entities == null) return null;
 
             IList<TDto> resultList = new List<TDto>();
             entities.Foreach(r => { resultList.Add(ToDto<TDto>(r)); });
@@ -125,7 +121,7 @@ namespace Alabo.Domains.Services.Add
                     Level = level,
                     Type = typeof(TEntity).Name
                 };
-                if (HttpWeb.HttpContext != null) {
+                if (HttpWeb.HttpContext != null)
                     try
                     {
                         log.Url = HttpWeb.Url;
@@ -137,11 +133,8 @@ namespace Alabo.Domains.Services.Add
                     {
                         // ignored
                     }
-                }
 
-                if (log.Type != "Logs") {
-                    Ioc.Resolve<ILogsService>().Add(log);
-                }
+                if (log.Type != "Logs") Ioc.Resolve<ILogsService>().Add(log);
             }
         }
     }

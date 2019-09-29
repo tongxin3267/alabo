@@ -1,14 +1,16 @@
-using System;using Alabo.Domains.Repositories.EFCore;using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Domains.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
-using Alabo.App.Shop.AfterSale.Domain.Entities;
+using Alabo.Domains.Services;
+using Alabo.Industry.Shop.AfterSales.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Shop.AfterSale.Domain.Services {
-	public class EvaluateService : ServiceBase<Evaluate, ObjectId>,IEvaluateService  {
-	public  EvaluateService(IUnitOfWork unitOfWork, IRepository<Evaluate, ObjectId> repository) : base(unitOfWork, repository){
-	}
-	}
+namespace Alabo.Industry.Shop.AfterSales.Domain.Services
+{
+    public class EvaluateService : ServiceBase<Evaluate, ObjectId>, IEvaluateService
+    {
+        public EvaluateService(IUnitOfWork unitOfWork, IRepository<Evaluate, ObjectId> repository) : base(unitOfWork,
+            repository)
+        {
+        }
+    }
 }

@@ -1,63 +1,45 @@
-using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
-using Alabo.App.Shop.Activitys.Domain.Entities;
-using Alabo.App.Shop.Activitys.Dtos;
-using Alabo.App.Shop.Activitys.Modules.GroupBuy.Model;
-using Alabo.App.Shop.Activitys.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Industry.Shop.Activitys.Domain.Entities;
+using Alabo.Industry.Shop.Activitys.Domain.Services;
+using Alabo.Industry.Shop.Activitys.Dtos;
+using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
-using Alabo.RestfulApi;
 
-namespace Alabo.App.Shop.Activitys.Controllers
+namespace Alabo.Industry.Shop.Activitys.Controllers
 {
-
     /// <summary>
-    /// api activity
+    ///     api activity
     /// </summary>
     [ApiExceptionFilter]
     [Route("Api/Activity/[action]")]
     public class ApiActivityController : ApiBaseController<Activity, long>
     {
-
         /// <summary>
-        /// constructor
-        /// </summary>
-        public ApiActivityController()
-            : base()
-        {
-        }
-
-        /// <summary>
-        /// »ñÈ¡»î¶¯
+        ///     ï¿½ï¿½È¡ï¿½î¶¯
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Display(Description = "»ñÈ¡»î¶¯")]
-        public ApiResult<ActivityEditOutput> GetView([FromQuery]ActivityEditInput input)
+        [Display(Description = "ï¿½ï¿½È¡ï¿½î¶¯")]
+        public ApiResult<ActivityEditOutput> GetView([FromQuery] ActivityEditInput input)
         {
-            if (!this.IsFormValid())
-            {
-                return ApiResult.Failure<ActivityEditOutput>(this.FormInvalidReason());
-            }
-   
+            if (!this.IsFormValid()) return ApiResult.Failure<ActivityEditOutput>(this.FormInvalidReason());
+
             var model = Resolve<IActivityApiService>().GetView(input);
             return ApiResult.Success(model);
         }
 
         /// <summary>
-        /// ±£´æ»î¶¯
+        ///     ï¿½ï¿½ï¿½ï¿½î¶¯
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [Display(Description = "±£´æ»î¶¯")]
-        public ApiResult Save([FromBody]ActivityEditOutput input)
+        [Display(Description = "ï¿½ï¿½ï¿½ï¿½î¶¯")]
+        public ApiResult Save([FromBody] ActivityEditOutput input)
         {
-            if (!this.IsFormValid())
-            {
-                return ApiResult.Failure<ActivityEditOutput>(this.FormInvalidReason());
-            }
+            if (!this.IsFormValid()) return ApiResult.Failure<ActivityEditOutput>(this.FormInvalidReason());
             var result = Resolve<IActivityApiService>().Save(input);
             return ToResult(result);
         }

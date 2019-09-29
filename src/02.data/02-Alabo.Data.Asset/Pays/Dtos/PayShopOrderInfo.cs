@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.Pay {
-
+namespace Alabo.App.Asset.Pays.Dtos
+{
     /// <summary>
     ///     商城支付订单信息
     /// </summary>
-    public class PayShopOrderInfo {
-
+    public class PayShopOrderInfo
+    {
         /// <summary>
         ///     订单实际支付的金额
         ///     订单实际支付的金额=商品总金额-优惠金额-（+）调整金额+邮费金额 -其他账户支出

@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Alabo.Datas.Stores.Report.Efcore;
+using Alabo.Datas.UnitOfWorks;
+using Alabo.Domains.Entities.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Alabo.Datas.Stores.Report.Efcore;
-using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Entities.Core;
 
 namespace Alabo.Datas.Stores.Update.EfCore
 {
@@ -43,9 +43,7 @@ namespace Alabo.Datas.Stores.Update.EfCore
         /// <param name="entities">实体集合</param>
         public virtual async Task UpdateManyAsync(IEnumerable<TEntity> entities)
         {
-            if (entities == null) {
-                throw new ArgumentNullException(nameof(entities));
-            }
+            if (entities == null) throw new ArgumentNullException(nameof(entities));
 
             var newEntities = entities.ToList();
             var oldEntities = await FindByIdsNoTrackingAsync(newEntities.Select(t => t.Id));

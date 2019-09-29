@@ -1,9 +1,9 @@
-using Xunit;
-using Alabo.App.Cms.Articles.Domain.Dto;
-using Alabo.App.Cms.Articles.Domain.Services;
-using Alabo.Core.Enums.Enum;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Industry.Cms.Articles.Domain.Dto;
+using Alabo.Industry.Cms.Articles.Domain.Services;
 using Alabo.Test.Base.Core;
 using Alabo.Test.Base.Core.Model;
+using Xunit;
 
 namespace Alabo.Test.Cms.Articles.Domain.Services
 {

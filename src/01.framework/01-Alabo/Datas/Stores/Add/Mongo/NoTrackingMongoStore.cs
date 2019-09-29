@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Alabo.Datas.UnitOfWorks;
+using Alabo.Domains.Entities.Core;
+using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using MongoDB.Driver;
-using Alabo.Datas.UnitOfWorks;
-using Alabo.Domains.Entities.Core;
 using Convert = Alabo.Helpers.Convert;
 
 namespace Alabo.Datas.Stores.Add.Mongo
@@ -24,9 +24,7 @@ namespace Alabo.Datas.Stores.Add.Mongo
         public TEntity FindByIdNoTracking(TKey id)
         {
             var entities = FindByIdsNoTracking(id);
-            if (entities == null || entities.Count == 0) {
-                return null;
-            }
+            if (entities == null || entities.Count == 0) return null;
 
             return entities[0];
         }
@@ -37,7 +35,7 @@ namespace Alabo.Datas.Stores.Add.Mongo
         /// <param name="ids">标识列表</param>
         public List<TEntity> FindByIdsNoTracking(params TKey[] ids)
         {
-            return FindByIdsNoTracking((IEnumerable<TKey>) ids);
+            return FindByIdsNoTracking((IEnumerable<TKey>)ids);
         }
 
         /// <summary>

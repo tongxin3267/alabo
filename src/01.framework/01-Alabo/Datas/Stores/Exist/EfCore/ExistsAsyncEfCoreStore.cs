@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Alabo.Datas.Stores.Distinct.EfCore;
+﻿using Alabo.Datas.Stores.Distinct.EfCore;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.Stores.Exist.EfCore
 {
@@ -22,9 +22,7 @@ namespace Alabo.Datas.Stores.Exist.EfCore
         /// <param name="predicate">条件</param>
         public async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            if (predicate == null) {
-                return false;
-            }
+            if (predicate == null) return false;
 
             return await Set.AnyAsync(predicate);
         }

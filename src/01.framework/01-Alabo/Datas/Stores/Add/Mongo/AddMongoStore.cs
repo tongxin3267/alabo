@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
 using Alabo.Extensions;
 using Alabo.Validations.Aspects;
+using System;
+using System.Collections.Generic;
+using System.Data;
 
 namespace Alabo.Datas.Stores.Add.Mongo
 {
@@ -27,9 +27,7 @@ namespace Alabo.Datas.Stores.Add.Mongo
 
         public bool AddSingle([Valid] TEntity entity)
         {
-            if (entity.Id.IsNullOrEmpty()) {
-                throw new InvalidExpressionException("Id不能为空,添加时");
-            }
+            if (entity.Id.IsNullOrEmpty()) throw new InvalidExpressionException("Id不能为空,添加时");
 
             entity.CreateTime = DateTime.Now;
             Collection.InsertOne(entity);

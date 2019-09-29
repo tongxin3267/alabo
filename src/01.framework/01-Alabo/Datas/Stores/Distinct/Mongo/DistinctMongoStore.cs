@@ -1,6 +1,6 @@
-﻿using System;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
+using System;
 
 namespace Alabo.Datas.Stores.Distinct.Mongo
 {

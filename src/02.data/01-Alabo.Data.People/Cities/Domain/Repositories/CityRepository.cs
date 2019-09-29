@@ -1,14 +1,14 @@
-using System;using Alabo.Domains.Repositories.EFCore;using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.App.Agent.Citys.Domain.Entities;
-using Alabo.Domains.Repositories;
+using Alabo.Data.People.Cities.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
-using  Alabo.App.Agent.Citys.Domain.Repositories;
+using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.App.Agent.Citys.Domain.Repositories {
-	public class CityRepository : RepositoryMongo<City, ObjectId>,ICityRepository  {
-	public  CityRepository(IUnitOfWork unitOfWork) : base(unitOfWork){
-	}
-	}
+namespace Alabo.Data.People.Cities.Domain.Repositories
+{
+    public class CityRepository : RepositoryMongo<City, ObjectId>, ICityRepository
+    {
+        public CityRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+        }
+    }
 }

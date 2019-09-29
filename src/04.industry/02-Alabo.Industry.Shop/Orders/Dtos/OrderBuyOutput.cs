@@ -1,16 +1,15 @@
-﻿using Newtonsoft.Json;
-using System.Collections.Generic;
-using Alabo.App.Core.User.Domain.Callbacks;
-using Alabo.App.Core.User.Domain.Dtos;
+﻿using System.Collections.Generic;
+using Alabo.Data.People.Users.Dtos;
 using Alabo.Domains.Query.Dto;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
 
-namespace Alabo.App.Shop.Order.Domain.Dtos {
-
+namespace Alabo.Industry.Shop.Orders.Dtos
+{
     /// <summary>
     ///     订单购买数据传输
     /// </summary>
-    public class OrderBuyOutput : EntityDto {
-
+    public class OrderBuyOutput : EntityDto
+    {
         /// <summary>
         ///     订单使用人民币支付的金额
         ///     是客户实际支付的金额，微信支付宝
@@ -28,7 +27,7 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
         public List<long> OrderIds { get; set; } = new List<long>();
 
         /// <summary>
-        /// 注册的用户
+        ///     注册的用户
         /// </summary>
         public RegInput RegUser { get; set; }
 

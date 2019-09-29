@@ -1,15 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Alabo.App.Core.ApiStore;
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Core.Finance.Domain.Enums {
-
+namespace Alabo.Tool.Payment
+{
     /// <summary>
     ///     支付方式
     /// </summary>
     [ClassProperty(Name = "支付方式")]
-    public enum PayType {
-
+    public enum PayType
+    {
         /// <summary>
         ///     余额支付
         ///     会员在系统内的余额
@@ -112,8 +111,8 @@ namespace Alabo.App.Core.Finance.Domain.Enums {
         //[Field(IsDefault = false, GuidId = "E0000000-1481-49BD-BFC7-E00000000011")]
         //WeChatPayWap = 11,
 
-        ///<summary>
-        /// 微信小程序支付
+        /// <summary>
+        ///     微信小程序支付
         /// </summary>
         [Display(Name = "微信小程序支付")]
         [ClientType(AllowClient = "WeChatLite", Icon = "zk-wechatpay", Intro = "使用微信小程序支付")]

@@ -1,21 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Core.Finance.Domain.Dtos.Account;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.ViewModels.Account;
-using Alabo.Core.Enums.Enum;
+﻿using Alabo.App.Asset.Accounts.Domain.Entities;
+using Alabo.App.Asset.Accounts.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+using Alabo.Framework.Core.Enums.Enum;
+using System;
+using System.Collections.Generic;
+using System.Data.Common;
 
-namespace Alabo.App.Core.Finance.Domain.Services {
-
+namespace Alabo.App.Asset.Accounts.Domain.Services
+{
     /// <summary>
     ///     用户资产接口
     /// </summary>
-    public interface IAccountService : IService<Account, long> {
-
+    public interface IAccountService : IService<Account, long>
+    {
         /// <summary>
         ///     获取用户的资产账户
         /// </summary>
@@ -93,14 +92,14 @@ namespace Alabo.App.Core.Finance.Domain.Services {
         void InitAllUserIdsWidthOutAccount();
 
         /// <summary>
-        /// 充值
+        ///     充值
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         ServiceResult Add(RechargeAccountInput input);
 
         /// <summary>
-        /// 充值
+        ///     充值
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>

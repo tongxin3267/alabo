@@ -1,28 +1,26 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using MongoDB.Bson.Serialization.Attributes;
 using System.Linq;
 using System.Reflection;
-using Alabo.App.Core.Common;
-using Alabo.Framework.Basic.Relations.Domain.Entities;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.Finance.Domain.CallBacks;
-using Alabo.App.Shop.Product.Domain.Enums;
 using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
-using Alabo.Core.Enums.Enum;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Helpers;
+using Alabo.Industry.Shop.Products.Domain.Enums;
 using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
+using Newtonsoft.Json;
+using Convert = System.Convert;
 
-namespace Alabo.App.Shop.Product.Domain.CallBacks {
-
+namespace Alabo.Industry.Shop.Products.Domain.Configs
+{
     /// <summary>
     ///     商城配置
     /// </summary>
@@ -30,8 +28,8 @@ namespace Alabo.App.Shop.Product.Domain.CallBacks {
     [ClassProperty(Name = "商城配置", GroupName = "Shop", Icon = "fa fa-fire",
         PageType = ViewPageType.List, Description = "商城配置,不同的商城使用不同的购买模式购买",
         SideBarType = SideBarType.ProductSideBar, SortOrder = 400)]
-    public class PriceStyleConfig : AutoConfigBase, IAutoConfig {
-
+    public class PriceStyleConfig : AutoConfigBase, IAutoConfig
+    {
         /// <summary>
         ///     名称
         /// </summary>
@@ -126,35 +124,41 @@ namespace Alabo.App.Shop.Product.Domain.CallBacks {
         //[HelpBlock("是否显示运费模板")]
         //public bool IsShowDeliveryTemplateId { get; set; } = true;
 
-        public void SetDefault() {
-            var list = Alabo.Helpers.Ioc.Resolve<IAutoConfigService>().GetList<PriceStyleConfig>();
-            var moneyTypelist = Alabo.Helpers.Ioc.Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
-            if (moneyTypelist.Count == 0) {
-                new MoneyTypeConfig().SetDefault();
-            }
+        public void SetDefault()
+        {
+            var list = Ioc.Resolve<IAutoConfigService>().GetList<PriceStyleConfig>();
+            var moneyTypelist = Ioc.Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
+            if (moneyTypelist.Count == 0) new MoneyTypeConfig().SetDefault();
 
-            if (list.Count == 0) {
+            if (list.Count == 0)
+            {
                 var configs = new List<PriceStyleConfig>();
                 var config = new PriceStyleConfig();
                 MoneyTypeConfig mt = null;
-                moneyTypelist = Alabo.Helpers.Ioc.Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
-                foreach (PriceStyle item in Enum.GetValues(typeof(PriceStyle))) {
-                    if (Convert.ToInt32(item) >= 0) {
-                        config = new PriceStyleConfig {
+                moneyTypelist = Ioc.Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
+                foreach (PriceStyle item in Enum.GetValues(typeof(PriceStyle)))
+                    if (Convert.ToInt32(item) >= 0)
+                    {
+                        config = new PriceStyleConfig
+                        {
                             //Intro = item.GetDisplayName(),
                             // MaxCashRate = 1.00m,
                             MinCashRate = 0.50m,
 
                             Name = item.GetDisplayName()
                         };
-                        if (item == PriceStyle.Customer) {
+                        if (item == PriceStyle.Customer)
+                        {
                             config.Id = Guid.NewGuid();
-                        } else {
+                        }
+                        else
+                        {
                             config.Id = item.GetFieldAttribute().GuidId.ToGuid();
                             config.IndexUrl = item.GetFieldAttribute().Mark; ///首页
                         }
 
-                        switch (item) {
+                        switch (item)
+                        {
                             case PriceStyle.CashAndCredit: //现金+授信
                                 config.PriceStyle = PriceStyle.CashAndCredit;
                                 config.Status = Status.Normal;
@@ -206,7 +210,7 @@ namespace Alabo.App.Shop.Product.Domain.CallBacks {
                                 config.MinCashRate = 0;
                                 break;
 
-                            case PriceStyle.ShopAmount:     // 消费额
+                            case PriceStyle.ShopAmount: // 消费额
                                 mt = moneyTypelist.FirstOrDefault(p => p.Currency == Currency.Withdrawal);
                                 config.PriceStyle = PriceStyle.ShopAmount;
                                 config.Status = Status.Normal;
@@ -214,27 +218,23 @@ namespace Alabo.App.Shop.Product.Domain.CallBacks {
                                 break;
                         }
 
-                        if (mt == null) {
-                            continue;
-                        }
+                        if (mt == null) continue;
 
                         config.MoneyTypeId = mt.Id;
-                        if (Convert.ToInt32(item) > 1000) {
-                            config.Status = Status.Freeze;
-                        }
+                        if (Convert.ToInt32(item) > 1000) config.Status = Status.Freeze;
 
                         configs.Add(config);
                     }
-                }
 
                 var typeclassProperty = config.GetType().GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
-                var autoConfig = new AutoConfig {
+                var autoConfig = new AutoConfig
+                {
                     Type = config.GetType().FullName,
 
                     LastUpdated = DateTime.Now,
                     Value = JsonConvert.SerializeObject(configs)
                 };
-                Alabo.Helpers.Ioc.Resolve<IAutoConfigService>().AddOrUpdate(autoConfig);
+                Ioc.Resolve<IAutoConfigService>().AddOrUpdate(autoConfig);
             }
         }
     }

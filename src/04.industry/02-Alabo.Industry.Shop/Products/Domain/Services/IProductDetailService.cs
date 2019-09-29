@@ -1,8 +1,9 @@
-﻿using Alabo.App.Shop.Product.Domain.Entities;
-using Alabo.Domains.Services;
+﻿using Alabo.Domains.Services;
+using Alabo.Industry.Shop.Products.Domain.Entities;
 
-namespace Alabo.App.Shop.Product.Domain.Services {
-
-    public interface IProductDetailService : IService<ProductDetail, long> {
+namespace Alabo.Industry.Shop.Products.Domain.Services
+{
+    public interface IProductDetailService : IService<ProductDetail, long>
+    {
     }
 }

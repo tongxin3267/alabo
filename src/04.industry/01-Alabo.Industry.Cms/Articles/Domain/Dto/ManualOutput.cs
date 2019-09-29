@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using Alabo.Industry.Cms.Articles.Domain.Entities;
 
-namespace Alabo.App.Cms.Articles.Domain.Dto {
-
-    public class ManualOutput {
+namespace Alabo.Industry.Cms.Articles.Domain.Dto
+{
+    public class ManualOutput
+    {
         public long RelationId { get; set; }
 
         public string RelationName { get; set; }
 
-        public List<Domain.Entities.Article> Article { get; set; }
+        public List<Article> Article { get; set; }
     }
 }

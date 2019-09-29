@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.App.Asset.Settlements.Domain.Enums {
-
-    public enum SettlementStatus {
-
+namespace Alabo.App.Asset.Settlements.Domain.Enums
+{
+    public enum SettlementStatus
+    {
         /// <summary>
         ///     待处理
         /// </summary>

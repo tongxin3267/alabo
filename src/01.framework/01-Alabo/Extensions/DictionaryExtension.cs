@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
-using Microsoft.AspNetCore.Http;
 
 namespace Alabo.Extensions
 {
@@ -24,9 +24,7 @@ namespace Alabo.Extensions
             self.Foreach(r =>
             {
                 var dicKey = r.Key.ToStr();
-                if (!dicKey.Equals(key, StringComparison.OrdinalIgnoreCase)) {
-                    dic.Add(r.Key, r.Value);
-                }
+                if (!dicKey.Equals(key, StringComparison.OrdinalIgnoreCase)) dic.Add(r.Key, r.Value);
             });
             return dic;
         }
@@ -38,9 +36,7 @@ namespace Alabo.Extensions
         /// <param name="keys">The keys.</param>
         public static Dictionary<T, TV> RemoveKey<T, TV>(this Dictionary<T, TV> self, params string[] keys)
         {
-            foreach (var key in keys) {
-                self = self.RemoveKey(key);
-            }
+            foreach (var key in keys) self = self.RemoveKey(key);
 
             return self;
         }
@@ -54,9 +50,7 @@ namespace Alabo.Extensions
             var dic = new Dictionary<T, TV>();
             self.Foreach(r =>
             {
-                if (!r.Value.ToStr().IsNullOrEmpty()) {
-                    dic.Add(r.Key, r.Value);
-                }
+                if (!r.Value.ToStr().IsNullOrEmpty()) dic.Add(r.Key, r.Value);
             });
             return dic;
         }
@@ -70,9 +64,7 @@ namespace Alabo.Extensions
         public static Dictionary<TKey, TValue> TryAdd<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key,
             TValue value)
         {
-            if (dict.ContainsKey(key) == false) {
-                dict.Add(key, value);
-            }
+            if (dict.ContainsKey(key) == false) dict.Add(key, value);
 
             return dict;
         }
@@ -99,11 +91,9 @@ namespace Alabo.Extensions
         public static Dictionary<TKey, TValue> AddRange<TKey, TValue>(this Dictionary<TKey, TValue> dict,
             IEnumerable<KeyValuePair<TKey, TValue>> values, bool replaceExisted)
         {
-            foreach (var item in values) {
-                if (dict.ContainsKey(item.Key) == false || replaceExisted) {
+            foreach (var item in values)
+                if (dict.ContainsKey(item.Key) == false || replaceExisted)
                     dict[item.Key] = item.Value;
-                }
-            }
 
             return dict;
         }
@@ -116,13 +106,9 @@ namespace Alabo.Extensions
         /// <param name="defaultValue"></param>
         public static TV GetValue<T, TV>(this IDictionary<T, TV> self, T key, TV defaultValue = default)
         {
-            if (key == null) {
-                return defaultValue;
-            }
+            if (key == null) return defaultValue;
 
-            if (!self.TryGetValue(key, out var value)) {
-                return defaultValue;
-            }
+            if (!self.TryGetValue(key, out var value)) return defaultValue;
 
             return value;
         }
@@ -135,13 +121,9 @@ namespace Alabo.Extensions
         /// <param name="defaultValue"></param>
         public static string GetString<T, TV>(this IDictionary<T, TV> self, T key, string defaultValue = null)
         {
-            if (key == null) {
-                return defaultValue;
-            }
+            if (key == null) return defaultValue;
 
-            if (!self.TryGetValue(key, out var value)) {
-                return defaultValue;
-            }
+            if (!self.TryGetValue(key, out var value)) return defaultValue;
 
             return value.ConvertToString(defaultValue);
         }
@@ -154,17 +136,11 @@ namespace Alabo.Extensions
         /// <param name="defaultValue"></param>
         public static int GetInt<T, TV>(this IDictionary<T, TV> self, T key, int defaultValue = -1)
         {
-            if (key == null) {
-                return defaultValue;
-            }
+            if (key == null) return defaultValue;
 
-            if (!self.TryGetValue(key, out var value)) {
-                return defaultValue;
-            }
+            if (!self.TryGetValue(key, out var value)) return defaultValue;
 
-            if (!int.TryParse(value.ConvertToString(), out var result)) {
-                return defaultValue;
-            }
+            if (!int.TryParse(value.ConvertToString(), out var result)) return defaultValue;
 
             return result;
         }
@@ -177,14 +153,10 @@ namespace Alabo.Extensions
         /// <param name="defaultValue"></param>
         public static bool GetBool<T, TV>(this IDictionary<T, TV> self, T key, bool defaultValue)
         {
-            if (key == null) {
-                return defaultValue;
-            }
+            if (key == null) return defaultValue;
 
             var value = self.GetNullableBool(key);
-            if (value.HasValue) {
-                return value.Value;
-            }
+            if (value.HasValue) return value.Value;
 
             return defaultValue;
         }
@@ -197,13 +169,9 @@ namespace Alabo.Extensions
         /// <param name="defaultValue"></param>
         public static bool? GetNullableBool<T, TV>(this IDictionary<T, TV> self, T key, bool? defaultValue = null)
         {
-            if (key == null) {
-                return defaultValue;
-            }
+            if (key == null) return defaultValue;
 
-            if (!self.TryGetValue(key, out var value)) {
-                return defaultValue;
-            }
+            if (!self.TryGetValue(key, out var value)) return defaultValue;
 
             return value.ConvertToNullableBool();
         }
@@ -216,17 +184,11 @@ namespace Alabo.Extensions
         /// <param name="defaultValue"></param>
         public static decimal GetDecimal<T, TV>(this IDictionary<T, TV> self, T key, decimal defaultValue = -1)
         {
-            if (key == null) {
-                return defaultValue;
-            }
+            if (key == null) return defaultValue;
 
-            if (!self.TryGetValue(key, out var value)) {
-                return defaultValue;
-            }
+            if (!self.TryGetValue(key, out var value)) return defaultValue;
 
-            if (!decimal.TryParse(value.ConvertToString(), out var result)) {
-                return defaultValue;
-            }
+            if (!decimal.TryParse(value.ConvertToString(), out var result)) return defaultValue;
 
             return result;
         }
@@ -240,17 +202,11 @@ namespace Alabo.Extensions
         public static DateTime GetDateTime<T, TV>(this IDictionary<T, TV> self, T key,
             DateTime defaultValue = default)
         {
-            if (key == null) {
-                return defaultValue;
-            }
+            if (key == null) return defaultValue;
 
-            if (!self.TryGetValue(key, out var value)) {
-                return defaultValue;
-            }
+            if (!self.TryGetValue(key, out var value)) return defaultValue;
 
-            if (!DateTime.TryParse(value.ConvertToString(), out var result)) {
-                return defaultValue;
-            }
+            if (!DateTime.TryParse(value.ConvertToString(), out var result)) return defaultValue;
 
             return result;
         }
@@ -264,17 +220,11 @@ namespace Alabo.Extensions
         public static IList<int> GetIntList<T, TV>(this IDictionary<T, TV> self, T key, IList<int> defaultValue = null)
         {
             IList<int> result;
-            if (key == null) {
-                return defaultValue;
-            }
+            if (key == null) return defaultValue;
 
-            if (!self.TryGetValue(key, out var value)) {
-                return defaultValue;
-            }
+            if (!self.TryGetValue(key, out var value)) return defaultValue;
 
-            if (value == null) {
-                return null;
-            }
+            if (value == null) return null;
 
             result = value.ConvertToString().ConvertToIntList();
             return result;
@@ -308,9 +258,7 @@ namespace Alabo.Extensions
         {
             foreach (var pair in source)
             {
-                if (!replace && self.ContainsKey(pair.Key)) {
-                    continue;
-                }
+                if (!replace && self.ContainsKey(pair.Key)) continue;
 
                 self[pair.Key] = pair.Value;
             }
@@ -323,9 +271,7 @@ namespace Alabo.Extensions
         /// <param name="key">The key.</param>
         public static string GetVaule(this IDictionary<long, string> dic, long key)
         {
-            if (dic.TryGetValue(key, out var str)) {
-                return str;
-            }
+            if (dic.TryGetValue(key, out var str)) return str;
 
             return string.Empty;
         }
@@ -337,9 +283,7 @@ namespace Alabo.Extensions
         /// <param name="key">The key.</param>
         public static string GetVaule(this IDictionary<string, string> dic, string key)
         {
-            if (dic.TryGetValue(key, out var str)) {
-                return str;
-            }
+            if (dic.TryGetValue(key, out var str)) return str;
 
             return string.Empty;
         }
@@ -360,24 +304,19 @@ namespace Alabo.Extensions
             foreach (var item in keyDictionary)
             {
                 // 指定搜索
-                if (!currentMode.ToString().IsNullOrEmpty()) {
+                if (!currentMode.ToString().IsNullOrEmpty())
                     if (!(item == currentMode || item == "Service" || item == "Method"))
                     {
                         continue;
                         ;
                     }
-                }
 
                 var value = httpContext.Request.Query[item];
-                if (value == "-1" || item == "_currentMode") {
-                    continue;
-                }
+                if (value == "-1" || item == "_currentMode") continue;
 
-                var list = value.ToString().SplitList(new[] {','});
+                var list = value.ToString().SplitList(new[] { ',' });
                 var defaultValue = list.FirstOrDefault();
-                if (!defaultValue.IsNullOrEmpty()) {
-                    dictionary.Add(item, defaultValue);
-                }
+                if (!defaultValue.IsNullOrEmpty()) dictionary.Add(item, defaultValue);
             }
 
             return dictionary;
@@ -394,15 +333,11 @@ namespace Alabo.Extensions
             foreach (var item in keyDictionary)
             {
                 var value = httpContext.Request.Query[item];
-                if (value == "-1" || item == "_currentMode") {
-                    continue;
-                }
+                if (value == "-1" || item == "_currentMode") continue;
 
-                var list = value.ToString().SplitList(new[] {','});
+                var list = value.ToString().SplitList(new[] { ',' });
                 var defaultValue = list.FirstOrDefault();
-                if (!defaultValue.IsNullOrEmpty()) {
-                    nameValueCollection.Add(item, defaultValue);
-                }
+                if (!defaultValue.IsNullOrEmpty()) nameValueCollection.Add(item, defaultValue);
             }
 
             return nameValueCollection;
@@ -425,9 +360,7 @@ namespace Alabo.Extensions
             foreach (var item in dic)
             {
                 var value = item.Value;
-                if (item.Key != "PageIndex") {
-                    sb.AppendFormat("{0}={1}&", item.Key, item.Value);
-                }
+                if (item.Key != "PageIndex") sb.AppendFormat("{0}={1}&", item.Key, item.Value);
             }
 
             if (sb.Length > 0)

@@ -1,13 +1,16 @@
-﻿using Alabo.App.Shop.Order.Domain.Enums;
-using Alabo.Domains.Query.Dto;
+﻿using Alabo.Domains.Query.Dto;
+using Alabo.Domains.Repositories.Mongo.Extension;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Order.Domain.Dtos {
-
+namespace Alabo.Industry.Shop.Orders.Dtos
+{
     /// <summary>
     ///     订单
     /// </summary>
-    public class OrderListInput : ApiInputDto {
-
+    public class OrderListInput : ApiInputDto
+    {
         /// <summary>
         ///     订单状态
         /// </summary>
@@ -20,7 +23,7 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
         ///     AdminOrderList = 3 // 平台订单
         /// </summary>
 
-        public OrderType? OrderType { get; set; }=Enums.OrderType.Normal;
+        public OrderType? OrderType { get; set; } = Domain.Enums.OrderType.Normal;
 
         /// <summary>
         ///     获取会员Id
@@ -30,7 +33,7 @@ namespace Alabo.App.Shop.Order.Domain.Dtos {
         /// <summary>
         ///     店铺Id
         /// </summary>
-        public long StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     发货用户Id

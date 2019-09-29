@@ -1,18 +1,19 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Core.Enums.Enum;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
+using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.User.Domain.Callbacks {
-
+namespace Alabo.Data.People.Users.Dtos
+{
     /// <summary>
     ///     会员自动升级配置项
     /// </summary>
     [ClassProperty(Name = "会员自动升级配置项")]
-    public class AutoUpgradeItem : BaseViewModel {
-
+    public class AutoUpgradeItem : BaseViewModel
+    {
         /// <summary>
         ///     唯一标识(不能重复)
         /// </summary>
@@ -32,7 +33,8 @@ namespace Alabo.App.Core.User.Domain.Callbacks {
         /// <summary>
         ///     会员等级
         /// </summary>
-        [Field(ControlsType = ControlsType.DropdownList, ListShow = true, DisplayMode = DisplayMode.Grade, EditShow = true, SortOrder = 5,
+        [Field(ControlsType = ControlsType.DropdownList, ListShow = true, DisplayMode = DisplayMode.Grade,
+            EditShow = true, SortOrder = 5,
             DataSourceType = typeof(UserGradeConfig))]
         [Display(Name = "会员等级")]
         public Guid GradeId { get; set; }

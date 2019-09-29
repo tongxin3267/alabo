@@ -1,26 +1,31 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Shop.Activitys.Domain.Entities.Extension;
-using Alabo.App.Shop.Activitys.Domain.Enum;
+﻿using System.ComponentModel.DataAnnotations;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
+using Alabo.Domains.Repositories.Mongo.Extension;
+using Alabo.Industry.Shop.Activitys.Domain.Entities.Extension;
+using Alabo.Industry.Shop.Activitys.Domain.Enum;
 using Alabo.Tenants;
 using Alabo.Web.Mvc.Attributes;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Activitys.Domain.Entities {
-
+namespace Alabo.Industry.Shop.Activitys.Domain.Entities
+{
     /// <summary>
     ///     活动记录表
     ///     表结构尚未考虑完整，程序完成时补充
     /// </summary>
     [ClassProperty(Name = "活动记录表")]
-    public class ActivityRecord : AggregateUserRoot<ActivityRecord, long> {
-
-        public ActivityRecord() : this(0) {
+    public class ActivityRecord : AggregateUserRoot<ActivityRecord, long>
+    {
+        public ActivityRecord() : this(0)
+        {
         }
 
-        public ActivityRecord(long id) : base(id) {
+        public ActivityRecord(long id) : base(id)
+        {
         }
 
         /// <summary>
@@ -40,7 +45,8 @@ namespace Alabo.App.Shop.Activitys.Domain.Entities {
         ///     所属店铺
         /// </summary>
         [Display(Name = "所属店铺")]
-        public long StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))]
+        public string StoreId { get; set; }
 
         /// <summary>
         ///     关联订单
@@ -65,21 +71,20 @@ namespace Alabo.App.Shop.Activitys.Domain.Entities {
         ///     活动记录扩展
         /// </summary>
         [Display(Name = "活动记录扩展")]
+        public ActivityRecordExtension ActivityRecordExtension { get; set; } = new ActivityRecordExtension();
 
-        public ActivityRecordExtension ActivityRecordExtension { get; set; } = new ActivityRecordExtension(); public class ActivityRecoredRecordTableMap : MsSqlAggregateRootMap<ActivityRecord> {
-
-            protected override void MapTable(EntityTypeBuilder<ActivityRecord> builder) {
+        public class ActivityRecoredRecordTableMap : MsSqlAggregateRootMap<ActivityRecord>
+        {
+            protected override void MapTable(EntityTypeBuilder<ActivityRecord> builder)
+            {
                 builder.ToTable("Shop_ActivityRecord");
             }
 
-            protected override void MapProperties(EntityTypeBuilder<ActivityRecord> builder) {
+            protected override void MapProperties(EntityTypeBuilder<ActivityRecord> builder)
+            {
                 //应用程序编号
                 builder.HasKey(e => e.Id);
                 builder.Ignore(e => e.ActivityRecordExtension);
-                builder.Ignore(e => e.Version);
-                if (TenantContext.IsTenant) {
-                    // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
-                }
             }
         }
     }

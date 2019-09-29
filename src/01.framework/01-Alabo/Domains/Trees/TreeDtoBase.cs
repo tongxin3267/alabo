@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Alabo.Domains.Dtos;
+using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
-using Alabo.Domains.Dtos;
 
 namespace Alabo.Domains.Trees
 {

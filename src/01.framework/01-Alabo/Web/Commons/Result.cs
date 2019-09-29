@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using Alabo.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using Alabo.Extensions;
+using System.Threading.Tasks;
 
 namespace Alabo.Web.Commons
 {

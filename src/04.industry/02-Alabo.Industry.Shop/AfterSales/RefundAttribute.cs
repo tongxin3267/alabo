@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Alabo.App.Shop.Order.Domain.Enums;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
 
-namespace Alabo.App.Shop.AfterSales
+namespace Alabo.Industry.Shop.AfterSales
 {
     /// <summary>
     ///     订单操作方式
@@ -12,9 +10,8 @@ namespace Alabo.App.Shop.AfterSales
     [AttributeUsage(AttributeTargets.Field)]
     public class RefundTypeAttribute : Attribute
     {
-
         /// <summary>
-        /// 操作类型 用于前端判断
+        ///     操作类型 用于前端判断
         /// </summary>
         public OrderStatus Type { get; set; }
     }

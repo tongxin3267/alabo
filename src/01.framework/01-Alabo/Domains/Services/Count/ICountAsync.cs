@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Alabo.Domains.Entities;
+using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Alabo.Domains.Entities;
 
 namespace Alabo.Domains.Services.Count
 {

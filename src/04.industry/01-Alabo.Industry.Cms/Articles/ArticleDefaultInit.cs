@@ -1,15 +1,15 @@
-﻿using System.Threading.Tasks;
-using Alabo.App.Cms.Articles.Domain.Services;
-using Alabo.App.Core.Admin;
+﻿using Alabo.Framework.Core.Reflections.Interfaces;
 using Alabo.Helpers;
-using Alabo.Initialize;
+using Alabo.Industry.Cms.Articles.Domain.Services;
 
-namespace Alabo.App.Cms.Articles {
-
-    public class ArticleDefaultInit : IDefaultInit {
+namespace Alabo.Industry.Cms.Articles
+{
+    public class ArticleDefaultInit : IDefaultInit
+    {
         public bool IsTenant => false;
 
-        public void Init() {
+        public void Init()
+        {
             //频道数据初始化
             Ioc.Resolve<IChannelService>().InitialData();
 

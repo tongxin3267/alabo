@@ -1,14 +1,14 @@
-﻿using MongoDB.Bson;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.Finance.Domain.Dtos.BankCard {
-
-    public class ViewBankCardInput : ApiInputDto {
+namespace Alabo.App.Asset.BankCards.Dtos
+{
+    public class ViewBankCardInput : ApiInputDto
+    {
         public long UserId { get; set; }
 
         public ObjectId Id { get; set; }
@@ -23,7 +23,7 @@ namespace Alabo.App.Core.Finance.Domain.Dtos.BankCard {
         public string Name { get; set; }
 
         /// <summary>
-        /// 银行类型
+        ///     银行类型
         /// </summary>
         [Display(Name = "银行类型")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]

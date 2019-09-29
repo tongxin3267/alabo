@@ -2,22 +2,25 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Shop.Order.Domain.Enums;
 using Alabo.Domains.Enums;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Extensions;
+using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.UI.Enum;
 using Alabo.Users.Entities;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 
-namespace Alabo.App.Shop.Activitys.ViewModels {
-
+namespace Alabo.Industry.Shop.Activitys.ViewModels
+{
     /// <summary>
     /// </summary>
     [ClassProperty(Name = "活动订单统计", Icon = "fa fa-puzzle-piece", Description = "活动订单统计",
         SideBarType = SideBarType.OrderSideBar)]
-    public class ViewActivityOrderPage : BaseViewModel {
+    public class ViewActivityOrderPage : BaseViewModel
+    {
         /// <summary>
         ///     Key
         /// </summary>
@@ -70,7 +73,7 @@ namespace Alabo.App.Shop.Activitys.ViewModels {
         ///     所属店铺
         /// </summary>
         [Display(Name = "所属店铺")]
-        public long StoreId { get; set; }
+        [JsonConverter(typeof(ObjectIdConverter))] public ObjectId StoreId { get; set; }
 
         /// <summary>
         ///     订单交易状态,OrderStatus等待付款WaitingBuyerPay = 0,等待发货WaitingSellerSendGoods = 1,已发货WaitingBuyerConfirm = 2,交易成功Success =
@@ -195,7 +198,8 @@ namespace Alabo.App.Shop.Activitys.ViewModels {
         /// <summary>
         ///     获取链接
         /// </summary>
-        public IEnumerable<ViewLink> ViewLinks() {
+        public IEnumerable<ViewLink> ViewLinks()
+        {
             var quickLinks = new List<ViewLink>
             {
                 new ViewLink("活动管理", "/Admin/Activitys/Index?Key=[[Key]]", Icons.List, LinkType.FormQuickLink),

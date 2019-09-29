@@ -1,13 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Core.ApiStore.CallBacks {
-
+namespace Alabo.Tool.Payment.CallBacks
+{
     [NotMapped]
     /// <summary>
     /// 支付宝配置
@@ -15,14 +14,17 @@ namespace Alabo.App.Core.ApiStore.CallBacks {
     [ClassProperty(Name = "支付宝配置", Icon = "fa fa-puzzle-piece",
         SideBarType = SideBarType.ApiStoreSideBar,
         SortOrder = 2, Description = "支付宝配置,支持PC电脑端、手机移动端、苹果手机、安卓手机")]
-    public class AlipayPaymentConfig : BaseViewModel, IAutoConfig {//internal
+    public class AlipayPaymentConfig : BaseViewModel, IAutoConfig
+    {
+        //internal
 
         /// <summary>
         ///     是否启用
         /// </summary>
         [Field(ControlsType = ControlsType.Switch, GroupTabId = 1)]
         [Display(Name = "是否启用")]
-        [HelpBlock("启用以后，同时保证合作伙伴（开发平台）身份（APPID）、收款账户Key（应用私钥），支付宝公钥、商户收款MD5秘钥、商户收款邮箱设置正确的情况下才可以支付宝支付<br/><code><a href='http://ui.5ug.com/static/jc/alipay.pdf' target='_blank'>支付宝配置教程</a></code>")]
+        [HelpBlock(
+            "启用以后，同时保证合作伙伴（开发平台）身份（APPID）、收款账户Key（应用私钥），支付宝公钥、商户收款MD5秘钥、商户收款邮箱设置正确的情况下才可以支付宝支付<br/><code><a href='http://ui.5ug.com/static/jc/alipay.pdf' target='_blank'>支付宝配置教程</a></code>")]
         public bool IsEnable { get; set; } = true;
 
         /// <summary>
@@ -30,7 +32,8 @@ namespace Alabo.App.Core.ApiStore.CallBacks {
         ///     从支付宝等第三方平台获取
         /// </summary>
         [Field(ControlsType = ControlsType.TextBox, ListShow = true)]
-        [HelpBlock("商户收款账户，即合作伙伴身份（开放平台APPID），可支付宝等第三方平台获取，<br/><code><a href='https://www.alipay.com/' target='_blank'>支付宝首页</a></code>")]
+        [HelpBlock(
+            "商户收款账户，即合作伙伴身份（开放平台APPID），可支付宝等第三方平台获取，<br/><code><a href='https://www.alipay.com/' target='_blank'>支付宝首页</a></code>")]
         [Display(Name = "商户收款账户")]
         [Required]
         public string AppId { get; set; }
@@ -40,7 +43,8 @@ namespace Alabo.App.Core.ApiStore.CallBacks {
         ///     从支付宝等第三方平台获取
         /// </summary>
         [Field(ControlsType = ControlsType.TextArea, Row = 5)]
-        [HelpBlock("支付宝公钥，确定是支付宝公钥,而不是应用公钥;该公钥用于解密支付宝回调(回调签名用的是支付宝私钥=>无法查看的)，<br/><code><a href='https://docs.open.alipay.com/200/105310' target='_blank'>公钥与私钥说明</a></code>")]
+        [HelpBlock(
+            "支付宝公钥，确定是支付宝公钥,而不是应用公钥;该公钥用于解密支付宝回调(回调签名用的是支付宝私钥=>无法查看的)，<br/><code><a href='https://docs.open.alipay.com/200/105310' target='_blank'>公钥与私钥说明</a></code>")]
         [Display(Name = "支付宝公钥")]
         [Required]
         public string RsaAlipayPublicKey { get; set; }
@@ -75,7 +79,8 @@ namespace Alabo.App.Core.ApiStore.CallBacks {
         public string PIDEmail { get; set; } = "";
 
         [Display(Name = "设置默认值")]
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

@@ -1,36 +1,34 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Alabo.App.Core.Employes.Domain.Entities;
-using Alabo.App.Core.Employes.Domain.Services;
-using Alabo.App.Core.User;
-using Alabo.App.Core.User.Domain.Dtos;
-using Alabo.App.Core.User.Domain.Services;
+﻿using Alabo.Data.People.Employes.Domain.Entities;
+using Alabo.Data.People.Employes.Domain.Services;
+using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Data.People.Users.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Maps;
 using Alabo.Regexs;
 using Alabo.UI;
-using Alabo.UI.AutoForms;
-using Alabo.UI.AutoTables;
+using Alabo.UI.Design.AutoForms;
+using Alabo.UI.Design.AutoTables;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Core.Employes.UI.AutoFrom {
-
+namespace Alabo.Data.People.Employes.UI.AutoFrom
+{
     /// <summary>
-    /// 员工操作
+    ///     员工操作
     /// </summary>
     [AutoDelete(IsAuto = true)]
-    public class EmployeeAutoForm : UIBase, IAutoTable<EmployeeAutoForm>, IAutoForm {
-
+    public class EmployeeAutoForm : UIBase, IAutoTable<EmployeeAutoForm>, IAutoForm
+    {
         /// <summary>
-        /// id 编辑时候用
+        ///     id 编辑时候用
         /// </summary>
         [Display(Name = "id")]
         [HelpBlock("填写员工的名称，长度不能超过10个字")]
@@ -39,7 +37,7 @@ namespace Alabo.App.Core.Employes.UI.AutoFrom {
         public ObjectId Id { get; set; }
 
         /// <summary>
-        /// 员工名称
+        ///     员工名称
         /// </summary>
         [Display(Name = "员工名称")]
         [HelpBlock("填写员工的名称，长度不能超过10个字")]
@@ -49,7 +47,7 @@ namespace Alabo.App.Core.Employes.UI.AutoFrom {
         public string Name { get; set; }
 
         /// <summary>
-        /// 所属用户名
+        ///     所属用户名
         /// </summary>
         [Display(Name = "所属用户名")]
         [HelpBlock("输入员工所关联的用户名。如果用户名不存在，则自动添加会员账号，默认密码为：<x-code>admin_112233</x-code>")]
@@ -59,7 +57,7 @@ namespace Alabo.App.Core.Employes.UI.AutoFrom {
         public string UserName { get; set; }
 
         /// <summary>
-        /// 所属用户名
+        ///     所属用户名
         /// </summary>
         [Display(Name = "用户id")]
         [Field(ControlsType = ControlsType.Hidden,
@@ -67,7 +65,7 @@ namespace Alabo.App.Core.Employes.UI.AutoFrom {
         public long UserId { get; set; }
 
         /// <summary>
-        /// 岗位、角色，部门ID
+        ///     岗位、角色，部门ID
         /// </summary>
         [Display(Name = "岗位")]
         [Required]
@@ -79,7 +77,7 @@ namespace Alabo.App.Core.Employes.UI.AutoFrom {
         public ObjectId PostRoleId { get; set; }
 
         /// <summary>
-        /// 岗位名称
+        ///     岗位名称
         /// </summary>
         [Display(Name = "岗位")]
         [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1, Width = "150", IsShowBaseSerach = true,
@@ -87,7 +85,7 @@ namespace Alabo.App.Core.Employes.UI.AutoFrom {
         public string PostRoleName { get; set; }
 
         /// <summary>
-        /// 是否启用
+        ///     是否启用
         /// </summary>
         [Display(Name = "是否有效")]
         [Required]
@@ -98,7 +96,7 @@ namespace Alabo.App.Core.Employes.UI.AutoFrom {
         public bool IsEnable { get; set; } = true;
 
         /// <summary>
-        /// 是否为超级管理员
+        ///     是否为超级管理员
         /// </summary>
 
         [Display(Name = "是否为超级管理员")]
@@ -120,7 +118,7 @@ namespace Alabo.App.Core.Employes.UI.AutoFrom {
         public DateTime CreateTime { get; set; } = DateTime.Now;
 
         /// <summary>
-        /// 员工详细说明
+        ///     员工详细说明
         /// </summary>
         [Display(Name = "详细说明")]
         [HelpBlock("输入员工的详细介绍")]
@@ -129,25 +127,15 @@ namespace Alabo.App.Core.Employes.UI.AutoFrom {
             IsShowAdvancedSerach = true, ListShow = true, SortOrder = 99)]
         public string Intro { get; set; }
 
-        public List<TableAction> Actions() {
-            return new List<TableAction>
-            {
-                ToLinkAction("编辑", "Edit", TableActionType.ColumnAction),
-                ToLinkAction("删除", "/Api/Employee/QueryDelete", ActionLinkType.Delete, TableActionType.ColumnAction)
-            };
-        }
-
-        public AutoForm GetView(object id, AutoBaseModel autoModel) {
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
+        {
             var model = new Employee();
-            if (ObjectId.TryParse(id.ToString(), out ObjectId objectId)) {
+            if (ObjectId.TryParse(id.ToString(), out var objectId))
                 model = Resolve<IEmployeeService>().GetSingle(s => s.Id == objectId);
-            } else {
+            else
                 return ToAutoForm(new EmployeeAutoForm());
-            }
 
-            if (model == null) {
-                return ToAutoForm(new EmployeeAutoForm());
-            }
+            if (model == null) return ToAutoForm(new EmployeeAutoForm());
 
             var resultEntity = model.MapTo<EmployeeAutoForm>();
             var user = Resolve<IUserService>().GetSingle(s => s.Id == resultEntity.UserId);
@@ -155,27 +143,19 @@ namespace Alabo.App.Core.Employes.UI.AutoFrom {
             return ToAutoForm(resultEntity);
         }
 
-        public PageResult<EmployeeAutoForm> PageTable(object query, AutoBaseModel autoModel) {
-            return null;
-            //var model = Resolve<IEmployeeService>().GetPagedList(query);
-            //var result = model.Result.MapTo<List<EmployeeAutoForm>>();
-            //result.ForEach(item => {
-            //    item.PostRoleName = Resolve<IPostRoleOldService>().GetSingle(s => s.Id == item.PostRoleId)?.Name;
-            //});
-            //return ToPageResult(PagedList<EmployeeAutoForm>.Create(result, model.RecordCount, 15, model.PageIndex));
-        }
-
-        public ServiceResult Save(object model, AutoBaseModel autoModel) {
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
+        {
             var result = ServiceResult.FailedMessage("保存失败");
             var entity = model.MapTo<Employee>();
 
             var user = Resolve<IUserService>().GetSingleByUserNameOrMobile(entity.UserName);
-            if (user == null) {
-                if (!RegexHelper.CheckMobile(entity.UserName)) {
+            if (user == null)
+            {
+                if (!RegexHelper.CheckMobile(entity.UserName))
                     return ServiceResult.FailedWithMessage("当用户不存在，添加新员工时用户名必须为手机号");
-                }
 
-                var regInput = new RegInput {
+                var regInput = new RegInput
+                {
                     Mobile = entity.UserName,
                     UserName = entity.UserName,
                     Password = "admin_112233" // 默认员工密码
@@ -185,27 +165,40 @@ namespace Alabo.App.Core.Employes.UI.AutoFrom {
                 user = Resolve<IUserService>().GetSingleByUserNameOrMobile(entity.UserName);
             }
 
-            if (user == null) {
-                return ServiceResult.FailedWithMessage("用户不存在");
-            }
+            if (user == null) return ServiceResult.FailedWithMessage("用户不存在");
 
-            if (!(user?.Id).HasValue) {
-                return ServiceResult.FailedMessage("找不到该用户");
-            }
+            if (!(user?.Id).HasValue) return ServiceResult.FailedMessage("找不到该用户");
 
             var employee = Resolve<IEmployeeService>().GetSingle(s => s.UserId == user.Id);
-            if (employee != null && employee.Id != entity.Id) {
+            if (employee != null && employee.Id != entity.Id)
                 return ServiceResult.FailedMessage($"该用户已关联员工:{employee.Name}");
-            }
 
             //如果没有 就赋值
             entity.UserId = user.Id;
 
-            if (!Resolve<IEmployeeService>().AddOrUpdate(entity)) {
-                return ServiceResult.FailedWithMessage("员工添加失败");
-            }
+            if (!Resolve<IEmployeeService>().AddOrUpdate(entity)) return ServiceResult.FailedWithMessage("员工添加失败");
 
             return ServiceResult.Success;
+        }
+
+        public List<TableAction> Actions()
+        {
+            return new List<TableAction>
+            {
+                ToLinkAction("编辑", "Edit", TableActionType.ColumnAction),
+                ToLinkAction("删除", "/Api/Employee/QueryDelete", ActionLinkType.Delete, TableActionType.ColumnAction)
+            };
+        }
+
+        public PageResult<EmployeeAutoForm> PageTable(object query, AutoBaseModel autoModel)
+        {
+            return null;
+            //var model = Resolve<IEmployeeService>().GetPagedList(query);
+            //var result = model.Result.MapTo<List<EmployeeAutoForm>>();
+            //result.ForEach(item => {
+            //    item.PostRoleName = Resolve<IPostRoleOldService>().GetSingle(s => s.Id == item.PostRoleId)?.Name;
+            //});
+            //return ToPageResult(PagedList<EmployeeAutoForm>.Create(result, model.RecordCount, 15, model.PageIndex));
         }
     }
 }

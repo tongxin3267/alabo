@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>Alabo.Framework.Core</AssemblyName>
-    <RootNamespace>Alabo.Core</RootNamespace>
+    <RootNamespace>Alabo.Framework.Core</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,5 +13,4 @@
   <ItemGroup>
     <ProjectReference Include="..\01-Alabo\01-Alabo.csproj" />
   </ItemGroup>
-
 </Project>

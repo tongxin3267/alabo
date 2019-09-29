@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using Alabo.Datas.Stores.Distinct.Mongo;
+﻿using Alabo.Datas.Stores.Distinct.Mongo;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
+using System;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Alabo.Datas.Stores.Exist.Mongo
 {
@@ -18,9 +18,7 @@ namespace Alabo.Datas.Stores.Exist.Mongo
         public async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate)
         {
             var find = await GetSingleAsync(predicate);
-            if (find == null) {
-                return false;
-            }
+            if (find == null) return false;
 
             return true;
         }

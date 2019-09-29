@@ -1,14 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;using MongoDB.Bson.Serialization.Attributes;
-using Alabo.App.Core.Common;
+using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.AutoConfigs;
-using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.App.Shop.Store.Domain.CallBacks {
-
+namespace Alabo.Industry.Shop.Deliveries.Domain.CallBacks
+{
     [NotMapped]
     /// <summary>
     /// 店铺商品发布规则
@@ -17,8 +15,8 @@ namespace Alabo.App.Shop.Store.Domain.CallBacks {
         PageType = ViewPageType.Edit,
         SideBarType = SideBarType.SupplierSideBar)]
     //SideBar = "Shop/StoreSideBar")]
-    public class StorePublishConfig : BaseViewModel, IAutoConfig {
-
+    public class StorePublishConfig : BaseViewModel, IAutoConfig
+    {
         [Field(ControlsType = ControlsType.Switch)]
         [Display(Name = "是否启用商家入驻申请")]
         [HelpBlock("关闭以后供应商在前台不可以申请")]
@@ -44,7 +42,8 @@ namespace Alabo.App.Shop.Store.Domain.CallBacks {
         [HelpBlock("商家入驻协议")]
         public string Agreement { get; set; }
 
-        public void SetDefault() {
+        public void SetDefault()
+        {
         }
     }
 }

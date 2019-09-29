@@ -1,18 +1,18 @@
-﻿namespace Alabo.App.Share.HuDong.Domain.Enums {
-
+﻿namespace Alabo.App.Share.HuDong.Domain.Enums
+{
     /// <summary>
-    /// 奖项状态
+    ///     奖项状态
     /// </summary>
-    public enum AwardStatus {
-
+    public enum AwardStatus
+    {
         /// <summary>
-        /// 未兑换
+        ///     未兑换
         /// </summary>
         NotExchange = 0,
 
         /// <summary>
-        /// 已兑换
+        ///     已兑换
         /// </summary>
-        Exchage = 1,
+        Exchage = 1
     }
 }

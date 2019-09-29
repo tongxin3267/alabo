@@ -1,11 +1,9 @@
-using System;
-using System.Linq;
-using MongoDB.Bson;
 using Alabo.Domains.Services;
-using Alabo.App.Shop.Order.Domain.Dtos;
-using Alabo.Domains.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.App.Shop.Order.Domain.Dtos {
-	public interface IDeliverService : IService<Deliver, ObjectId>  {
-	}
-	}
+namespace Alabo.Industry.Shop.Orders.Dtos
+{
+    public interface IDeliverService : IService<Deliver, ObjectId>
+    {
+    }
+}

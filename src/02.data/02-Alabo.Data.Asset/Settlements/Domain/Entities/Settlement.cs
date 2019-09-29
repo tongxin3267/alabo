@@ -1,22 +1,19 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Asset.Settlements.Domain.Entities.Extension;
+﻿using Alabo.App.Asset.Settlements.Domain.Entities.Extension;
 using Alabo.App.Asset.Settlements.Domain.Enums;
-using Alabo.App.Core.Finance.Domain.Entities;
-using Alabo.App.Core.Finance.Domain.Entities.Extension;
-using Alabo.App.Core.Finance.Domain.Enums;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.App.Asset.Settlements.Domain.Entities {
-
+namespace Alabo.App.Asset.Settlements.Domain.Entities
+{
     [ClassProperty(Name = "结算", Icon = "fa fa-puzzle-piece", Description = "充值")]
-    public class Settlement : AggregateDefaultUserRoot<Settlement> {
-
+    public class Settlement : AggregateDefaultUserRoot<Settlement>
+    {
         /// <summary>
         ///     本次变动的货币类型id
         ///     与配置 MoneyTypeConfig 关联
@@ -67,31 +64,32 @@ namespace Alabo.App.Asset.Settlements.Domain.Entities {
         ///     Gets the serial.
         /// </summary>
         [Display(Name = "序号")]
-        public string Serial {
-            get {
+        public string Serial
+        {
+            get
+            {
                 var searSerial = $"T{Id.ToString().PadLeft(9, '0')}";
-                if (Id.ToString().Length == 10) {
-                    searSerial = $"{Id.ToString()}";
-                }
+                if (Id.ToString().Length == 10) searSerial = $"{Id.ToString()}";
 
                 return searSerial;
             }
         }
     }
 
-    public class SettlementTableMap : MsSqlAggregateRootMap<Settlement> {
-
-        protected override void MapTable(EntityTypeBuilder<Settlement> builder) {
+    public class SettlementTableMap : MsSqlAggregateRootMap<Settlement>
+    {
+        protected override void MapTable(EntityTypeBuilder<Settlement> builder)
+        {
             builder.ToTable("Asset_Settlement");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<Settlement> builder) {
+        protected override void MapProperties(EntityTypeBuilder<Settlement> builder)
+        {
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.SettlementExtension);
             builder.Ignore(e => e.Serial);
             builder.Ignore(e => e.UserName);
-            builder.Ignore(e => e.Version);
         }
     }
 }

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Alabo.Industry.Shop.Products.Domain.Entities;
 
-namespace Alabo.App.Shop.Order.Domain.PcDtos
+namespace Alabo.Industry.Shop.Orders.PcDtos
 {
-    public class PickUpProductView : Product.Domain.Entities.Product
+    public class PickUpProductView : Product
     {
         public long OrderId { get; set; }
     }

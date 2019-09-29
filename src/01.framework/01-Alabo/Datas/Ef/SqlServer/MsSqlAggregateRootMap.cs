@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Alabo.Domains.Entities.Core;
+﻿using Alabo.Domains.Entities.Core;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Alabo.Datas.Ef.SqlServer
 {
@@ -15,7 +15,7 @@ namespace Alabo.Datas.Ef.SqlServer
         /// </summary>
         protected override void MapVersion(EntityTypeBuilder<TEntity> builder)
         {
-            builder.Property(t => t.Version).IsRowVersion();
+            //  builder.Property(t => t.Version).IsRowVersion();
         }
     }
 }

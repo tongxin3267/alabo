@@ -1,21 +1,21 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.App.Cms.Articles.Domain.Entities {
-
+namespace Alabo.Industry.Cms.Articles.Domain.Entities
+{
     /// <summary>
     ///     单页面
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("CMS_SinglePage")]
     [ClassProperty(Name = "文章")]
-    public class SinglePage : AggregateMongodbRoot<SinglePage> {
-
+    public class SinglePage : AggregateMongodbRoot<SinglePage>
+    {
         /// <summary>
         ///     标识,页面标识，唯一
         ///     url通过此页面来访问
@@ -62,7 +62,6 @@ namespace Alabo.App.Cms.Articles.Domain.Entities {
         [Field(ListShow = false, EditShow = true, ControlsType = ControlsType.TextArea)]
         public string MetaDescription { get; set; }
 
-        [Display(Name = "状态")]
-        public Status Status { get; set; }
+        [Display(Name = "状态")] public Status Status { get; set; }
     }
 }

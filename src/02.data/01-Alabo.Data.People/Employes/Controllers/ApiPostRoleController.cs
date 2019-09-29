@@ -1,48 +1,48 @@
+using Alabo.Data.People.Employes.Domain.Entities;
+using Alabo.Data.People.Employes.Domain.Services;
+using Alabo.Data.People.Employes.Dtos;
+using Alabo.Extensions;
+using Alabo.Framework.Core.WebApis.Controller;
+using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Alabo.Core.WebApis.Controller;
-using Alabo.App.Core.Api.Filter;
-using Alabo.App.Core.Employes.Domain.Dtos;
-using Alabo.App.Core.Employes.Domain.Entities;
-using Alabo.App.Core.Employes.Domain.Services;
-using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.App.Core.Employes.Controllers {
-
+namespace Alabo.Data.People.Employes.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/PostRole/[action]")]
-    public class ApiPostRoleController : ApiBaseController<PostRole, ObjectId> {
-
-        public ApiPostRoleController() : base() {
+    public class ApiPostRoleController : ApiBaseController<PostRole, ObjectId>
+    {
+        public ApiPostRoleController()
+        {
             BaseService = Resolve<IPostRoleService>();
         }
 
         /// <summary>
-        /// 权限编辑
+        ///     权限编辑
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-
         [HttpPost]
-        public ApiResult Edit([FromBody] PostRoleInput model) {
-            if (!this.IsFormValid()) {
-                return ApiResult.Failure(this.FormInvalidReason());
-            }
+        public ApiResult Edit([FromBody] PostRoleInput model)
+        {
+            if (!this.IsFormValid()) return ApiResult.Failure(this.FormInvalidReason());
 
             var result = Resolve<IPostRoleService>().Edit(model);
             return ToResult(result);
         }
 
         /// <summary>
-        /// 岗位树形菜单
+        ///     岗位树形菜单
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ApiResult Tree() {
+        public ApiResult Tree()
+        {
             var result = Resolve<IPostRoleService>().RoleTrees();
             return ApiResult.Success(result);
         }
@@ -64,10 +64,9 @@ namespace Alabo.App.Core.Employes.Controllers {
         /// <param name="id">标识</param>
         [HttpGet]
         [Display(Description = "根据Id获取单个实例")]
-        public override ApiResult<PostRole> ViewById(string id) {
-            if (BaseService == null) {
-                return ApiResult.Failure<PostRole>("请在控制器中定义BaseService");
-            }
+        public override ApiResult<PostRole> ViewById(string id)
+        {
+            if (BaseService == null) return ApiResult.Failure<PostRole>("请在控制器中定义BaseService");
             var result = Resolve<IPostRoleService>().GetViewById(id);
             var tree = Resolve<IPostRoleService>().RoleTrees();
             //判断第一级 是否勾选,如果勾选 判断第二季是否全选
@@ -80,34 +79,33 @@ namespace Alabo.App.Core.Employes.Controllers {
         }
 
         /// <summary>
-        /// 获取选中的id ,如果下级未全选则上级不返回
+        ///     获取选中的id ,如果下级未全选则上级不返回
         /// </summary>
         /// <param name="input"></param>
         /// <param name="ids"></param>
         /// <returns></returns>
-        private List<ObjectId> GetPostRoleId(IList<PlatformRoleTreeOutput> input, IList<ObjectId> ids) {
+        private List<ObjectId> GetPostRoleId(IList<PlatformRoleTreeOutput> input, IList<ObjectId> ids)
+        {
             var result = new List<ObjectId>();
-            if (ids == null || input == null) {
-                return result;
+            if (ids == null || input == null) return result;
+
+            foreach (var item in input)
+            {
+                foreach (var items in item.AppItems)
+                {
+                    foreach (var itemNode in items.AppItems)
+                    {
+                        var id = ids.SingleOrDefault(s => s == itemNode.Id);
+                        if (id != null && ObjectId.Empty != id) result.Add(itemNode.Id); //第三级全部加入
+                    }
+
+                    //如果全选则把上级写入
+                    if (items.AppItems.Count == items.AppItems.Count(s => ids.Contains(s.Id))) result.Add(items.Id);
+                }
+
+                if (item.AppItems.Count == item.AppItems.Count(s => ids.Contains(s.Id))) result.Add(item.Id);
             }
 
-            foreach (var item in input) {
-                foreach (var items in item.AppItems) {
-                    foreach (var itemNode in items.AppItems) {
-                        var id = ids.SingleOrDefault(s => s == itemNode.Id);
-                        if (id != null && ObjectId.Empty != id) {
-                            result.Add(itemNode.Id);//第三级全部加入
-                        }
-                    }
-                    //如果全选则把上级写入
-                    if (items.AppItems.Count == items.AppItems.Count(s => ids.Contains(s.Id))) {
-                        result.Add(items.Id);
-                    }
-                }
-                if (item.AppItems.Count == item.AppItems.Count(s => ids.Contains(s.Id))) {
-                    result.Add(item.Id);
-                }
-            }
             return result;
         }
     }

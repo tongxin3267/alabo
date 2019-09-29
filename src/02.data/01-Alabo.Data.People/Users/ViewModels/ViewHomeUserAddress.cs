@@ -1,5 +1,6 @@
-﻿namespace Alabo.App.Core.User.ViewModels {
-
-    public class ViewHomeUserAddress {
+﻿namespace Alabo.Data.People.Users.ViewModels
+{
+    public class ViewHomeUserAddress
+    {
     }
 }
