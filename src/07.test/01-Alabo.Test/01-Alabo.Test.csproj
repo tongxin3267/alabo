@@ -6,6 +6,8 @@
     <IsPackable>false</IsPackable>
 
     <LangVersion>7.1</LangVersion>
+
+    <AssemblyName>Alabo.Test</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
