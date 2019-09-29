@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Alabo.Data.Things.Orders.Domain.Repositories;
+﻿using Alabo.Data.Things.Orders.Domain.Repositories;
 using Alabo.Data.Things.Orders.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Dependency;
@@ -12,6 +10,8 @@ using Alabo.Runtime;
 using Alabo.Schedules.Job;
 using Microsoft.AspNetCore.Http;
 using Quartz;
+using System;
+using System.Threading.Tasks;
 
 namespace Alabo.App.Share.TaskExecutes.Job
 {
@@ -71,14 +71,16 @@ namespace Alabo.App.Share.TaskExecutes.Job
                             // 确认收货的时候，产生分润
                             if (shareOrder.SystemStatus != ShareOrderSystemStatus.Pending) continue;
                             taskActuator.ExecuteTask(type, shareOrder,
-                                new {ShareOrderId = queueId, shareOrder.TriggerType, OrderId = shareOrder.EntityId});
+                                new { ShareOrderId = queueId, shareOrder.TriggerType, OrderId = shareOrder.EntityId });
                         }
                         else
                         {
                             taskActuator.ExecuteTask(type, shareOrder,
                                 new
                                 {
-                                    ShareOrderId = queueId, shareOrder.TriggerType, BaseFenRunAmount = shareOrder.Amount
+                                    ShareOrderId = queueId,
+                                    shareOrder.TriggerType,
+                                    BaseFenRunAmount = shareOrder.Amount
                                 });
                         }
 

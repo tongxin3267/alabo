@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.App.Kpis.GradeKpis.Domain.Enum;
 using Alabo.App.Kpis.Kpis.Domain.Enum;
 using Alabo.Domains.Entities;
@@ -9,6 +5,10 @@ using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using MongoDB.Bson.Serialization.Attributes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Alabo.App.Kpis.GradeKpis.Domain.Entities
 {

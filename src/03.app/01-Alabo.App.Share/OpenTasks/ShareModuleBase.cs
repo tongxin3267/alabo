@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Asset.Accounts.Domain.Services;
+﻿using Alabo.App.Asset.Accounts.Domain.Services;
 using Alabo.App.Share.OpenTasks.Base;
 using Alabo.App.Share.OpenTasks.Parameter;
 using Alabo.App.Share.OpenTasks.Result;
@@ -18,6 +15,9 @@ using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Tasks.Queues.Domain.Servcies;
 using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using ZKCloud.Open.ApiBase.Models;
 using AssetTaskResult = Alabo.App.Share.TaskExecutes.ResultModel.AssetTaskResult;
 using Convert = System.Convert;
@@ -120,7 +120,7 @@ namespace Alabo.App.Share.OpenTasks
 
             if (parameter.TryGetValue(TriggerTypeKey, out int triggerType))
             {
-                TriggerType = (TriggerType) triggerType;
+                TriggerType = (TriggerType)triggerType;
                 if (Configuration.TriggerType != TriggerType) //触发类型与配置的触发类型不一致，直接退出
                     return ExecuteResult<ITaskResult[]>.Cancel(
                         $"模块实际触发类型{triggerType}与模块设置的触发类型{Configuration.TriggerType}不一致,退出模块.");
@@ -293,7 +293,7 @@ namespace Alabo.App.Share.OpenTasks
                         .FirstOrDefault(r => r.Id == item.MoneyTypeId);
                     //AddContributionChangeToQueue(item.ReceiveUserId, moneyType, item.Amount, resultList);
                     resultList.Add(new AssetTaskResult(Context)
-                        {UserId = item.ReceiveUserId, AccountId = account.Id, ChangeAmount = item.Amount});
+                    { UserId = item.ReceiveUserId, AccountId = account.Id, ChangeAmount = item.Amount });
                     var invoiceResult = new InvoiceResult(Context)
                     {
                         Parameter = item

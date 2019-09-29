@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Alabo.App.Share.OpenTasks.Base;
 using Alabo.App.Share.RewardRuless.Domain.Entities;
 using Alabo.App.Share.RewardRuless.Dtos;
@@ -19,6 +16,9 @@ using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.UI.Design.AutoForms;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.App.Share.RewardRuless.Domain.Services
 {

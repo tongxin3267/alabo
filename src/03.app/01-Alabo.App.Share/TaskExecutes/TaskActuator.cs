@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using Alabo.App.Share.TaskExecutes.Extensions;
+﻿using Alabo.App.Share.TaskExecutes.Extensions;
 using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Data.Things.Orders.Domain.Entities;
 using Alabo.Data.Things.Orders.Domain.Entities.Extensions;
@@ -20,6 +15,11 @@ using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Helpers;
 using Alabo.Reflections;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Share.TaskExecutes
@@ -134,7 +134,7 @@ namespace Alabo.App.Share.TaskExecutes
             IList<UserGradeChangeResult> gradeResultList = new List<UserGradeChangeResult>();
             foreach (var graderesult in resultList)
                 if (graderesult is UserGradeChangeResult)
-                    gradeResultList.Add((UserGradeChangeResult) graderesult);
+                    gradeResultList.Add((UserGradeChangeResult)graderesult);
 
             // 更新分润结果，财务结果到数据库
             Ioc.Resolve<IShareOrderRepository>().UpdateUpgradeTaskResult(gradeResultList);
@@ -193,11 +193,11 @@ namespace Alabo.App.Share.TaskExecutes
             foreach (var item in modules)
             {
                 // 通过动态类型获取配置属性
-                var configuration = ((dynamic) item).Configuration;
-                var triggerType = (TriggerType) configuration.TriggerType;
+                var configuration = ((dynamic)item).Configuration;
+                var triggerType = (TriggerType)configuration.TriggerType;
                 if (triggerType != shareOrder.TriggerType) continue;
 
-                taskMessage.ConfigName = (string) configuration.Name;
+                taskMessage.ConfigName = (string)configuration.Name;
                 taskParameter.TryGetValue("ShareOrderId", out long ShareOrderId);
                 try
                 {
@@ -249,13 +249,13 @@ namespace Alabo.App.Share.TaskExecutes
             IList<long> shareUsreIds = new List<long>();
             foreach (var item in resultList)
             {
-                var shareResult = ((ResultModel.TaskQueueResult<ITaskResult>) item).ShareResult;
+                var shareResult = ((ResultModel.TaskQueueResult<ITaskResult>)item).ShareResult;
                 shareUsreIds.Add(shareResult.ShareUser.Id);
             }
 
             IList<ShareResult> shareResultList = new List<ShareResult>();
             resultList.Foreach(
-                r => { shareResultList.Add(((ResultModel.TaskQueueResult<ITaskResult>) r).ShareResult); });
+                r => { shareResultList.Add(((ResultModel.TaskQueueResult<ITaskResult>)r).ShareResult); });
             // 更新分润结果，财务结果到数据库
             Ioc.Resolve<IShareOrderRepository>().UpdatePriceTaskResult(shareResultList);
         }

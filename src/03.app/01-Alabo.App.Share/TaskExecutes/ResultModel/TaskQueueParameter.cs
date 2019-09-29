@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
 
 namespace Alabo.App.Share.TaskExecutes.ResultModel
 {
@@ -61,7 +61,7 @@ namespace Alabo.App.Share.TaskExecutes.ResultModel
 
             if (value.GetType() != typeof(T)) value = Convert.ChangeType(value, typeof(T));
 
-            return (T) value;
+            return (T)value;
         }
 
         public bool TryGetValue<T>(string name, out T value)
@@ -79,7 +79,7 @@ namespace Alabo.App.Share.TaskExecutes.ResultModel
             }
 
             var res = Convert.ChangeType(item.Value, item.Type);
-            value = (T) res;
+            value = (T)res;
             return true;
         }
 

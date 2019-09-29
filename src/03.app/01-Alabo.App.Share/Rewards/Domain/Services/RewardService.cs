@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Alabo.App.Share.OpenTasks;
+﻿using Alabo.App.Share.OpenTasks;
 using Alabo.App.Share.OpenTasks.Base;
 using Alabo.App.Share.Rewards.Domain.Entities;
 using Alabo.App.Share.Rewards.Domain.Enums;
@@ -34,6 +30,10 @@ using Alabo.Users.Entities;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using ZKCloud.Open.Share.Models;
 
 namespace Alabo.App.Share.Rewards.Domain.Services
@@ -314,7 +314,7 @@ namespace Alabo.App.Share.Rewards.Domain.Services
                     if (shareBaseConfig.ProductRule.ProductModel == ProductModelType.ProductLine)
                     {
                         var limitProductIdArray = shareBaseConfig.ProductRule.ProductLines
-                            .Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries)
+                            .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
                             .Where(e => e.IsNumber())
                             .Select(e => Convert.ToInt64(e))
                             .ToArray();

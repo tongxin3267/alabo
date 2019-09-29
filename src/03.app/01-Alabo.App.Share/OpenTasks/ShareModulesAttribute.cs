@@ -1,5 +1,5 @@
-﻿using System;
-using Alabo.Framework.Tasks.Schedules.Domain.Enums;
+﻿using Alabo.Framework.Tasks.Schedules.Domain.Enums;
+using System;
 
 namespace Alabo.App.Share.OpenTasks
 {

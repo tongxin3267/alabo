@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using Alabo.App.Share.Rewards.Domain.Entities;
+﻿using Alabo.App.Share.Rewards.Domain.Entities;
 using Alabo.App.Share.Rewards.Domain.Enums;
 using Alabo.App.Share.Rewards.Dtos;
 using Alabo.Datas.UnitOfWorks;
@@ -9,6 +6,9 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Repositories.Extensions;
 using Alabo.Extensions;
+using System;
+using System.Collections.Generic;
+using System.Data;
 
 namespace Alabo.App.Share.Rewards.Domain.Repositories
 {
@@ -76,7 +76,7 @@ namespace Alabo.App.Share.Rewards.Domain.Repositories
                 AfterAmount = dr.Read<decimal>("AfterAmount"),
                 ModuleId = dr.Read<Guid>("ModuleId"),
                 Intro = dr.Read<string>("Intro"),
-                Status = (FenRunStatus) dr.Read<int>("Status"),
+                Status = (FenRunStatus)dr.Read<int>("Status"),
                 CreateTime = dr.Read<DateTime>("CreateTime")
             };
             return result;

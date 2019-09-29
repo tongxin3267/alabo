@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Alabo.App.Kpis.Kpis.Domain.Configs;
 using Alabo.App.Kpis.Kpis.Domain.Entities;
 using Alabo.App.Kpis.Kpis.Domain.Services;
@@ -7,6 +6,7 @@ using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Kpis.Kpis.Controllers

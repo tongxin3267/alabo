@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Kpis.Kpis.Domain.Configs;
+﻿using Alabo.App.Kpis.Kpis.Domain.Configs;
 using Alabo.App.Kpis.Kpis.Domain.Entities;
 using Alabo.App.Kpis.Kpis.Domain.Repositories;
 using Alabo.App.Kpis.Kpis.Dtos;
@@ -15,6 +12,9 @@ using Alabo.Exceptions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Users.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.App.Kpis.Kpis.Domain.Services
 {

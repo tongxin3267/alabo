@@ -1,11 +1,11 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Datas.Ef.SqlServer;
+﻿using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Kpis.Kpis.Domain.Entities
 {
@@ -63,7 +63,6 @@ namespace Alabo.App.Kpis.Kpis.Domain.Entities
         protected override void MapProperties(EntityTypeBuilder<Kpi> builder)
         {
             builder.HasKey(e => e.Id);
-         
         }
     }
 }

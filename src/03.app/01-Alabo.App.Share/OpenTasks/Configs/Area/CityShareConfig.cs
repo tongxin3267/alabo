@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.App.Share.OpenTasks.Base;
+﻿using Alabo.App.Share.OpenTasks.Base;
 using Alabo.App.Share.OpenTasks.Modules;
 using Alabo.Data.Things.Orders.Extensions;
 using Alabo.Data.Things.Orders.ResultModel;
@@ -8,6 +7,7 @@ using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Framework.Tasks.Schedules.Domain.Enums;
 using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Share.OpenTasks.Configs.Area

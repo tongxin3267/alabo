@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Share.OpenTasks.Base
 {
@@ -31,10 +31,12 @@ namespace Alabo.App.Share.OpenTasks.Base
     [ClassProperty(Name = "价格限制方式")]
     public enum PriceLimitType
     {
-        [Display(Name = "订单总金额")] [LabelCssClass(BadgeColorCalss.Danger)]
+        [Display(Name = "订单总金额")]
+        [LabelCssClass(BadgeColorCalss.Danger)]
         OrderPrice = 0,
 
-        [Display(Name = "商品单价")] [LabelCssClass(BadgeColorCalss.Danger)]
+        [Display(Name = "商品单价")]
+        [LabelCssClass(BadgeColorCalss.Danger)]
         ProductPrice = 1
     }
 }

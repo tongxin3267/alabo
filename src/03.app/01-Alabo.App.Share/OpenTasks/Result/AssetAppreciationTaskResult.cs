@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using Alabo.App.Share.OpenTasks.Base;
+﻿using Alabo.App.Share.OpenTasks.Base;
 using Alabo.App.Share.OpenTasks.Parameter;
 using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Data.Things.Orders.Extensions;
@@ -10,6 +6,10 @@ using Alabo.Data.Things.Orders.ResultModel;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Data.Common;
+using System.Linq;
 
 namespace Alabo.App.Share.OpenTasks.Result
 {

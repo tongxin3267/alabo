@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Share.Rewards.Domain.Enums;
+﻿using Alabo.App.Share.Rewards.Domain.Enums;
 using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -8,6 +6,8 @@ using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MongoDB.Bson.Serialization.Attributes;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Share.Rewards.Domain.Entities
 {
@@ -116,7 +116,6 @@ namespace Alabo.App.Share.Rewards.Domain.Entities
             builder.Property(e => e.MoneyTypeId).HasColumnType("uniqueidentifier");
             builder.Property(e => e.Intro).HasMaxLength(255);
             builder.Ignore(e => e.Serial);
-         
         }
     }
 }

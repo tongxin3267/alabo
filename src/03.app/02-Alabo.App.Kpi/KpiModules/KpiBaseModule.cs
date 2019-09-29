@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Kpis.Kpis;
+﻿using Alabo.App.Kpis.Kpis;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Data.Things.Orders.Domain.Entities;
 using Alabo.Data.Things.Orders.Domain.Services;
@@ -13,6 +10,9 @@ using Alabo.Extensions;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using ZKCloud.Open.ApiBase.Models;
 using User = Alabo.Users.Entities.User;
 

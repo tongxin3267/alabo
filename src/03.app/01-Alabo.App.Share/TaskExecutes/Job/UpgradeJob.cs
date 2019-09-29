@@ -1,11 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using Alabo.Dependency;
+﻿using Alabo.Dependency;
 using Alabo.Framework.Tasks.Queues.Domain.Enums;
 using Alabo.Framework.Tasks.Queues.Domain.Servcies;
 using Alabo.Helpers;
 using Alabo.Schedules.Job;
 using Quartz;
+using System;
+using System.Threading.Tasks;
 
 namespace Alabo.App.Share.TaskExecutes.Job
 {

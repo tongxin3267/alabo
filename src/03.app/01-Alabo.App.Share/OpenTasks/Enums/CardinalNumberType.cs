@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Share.OpenTasks.Enums
 {
@@ -12,19 +12,22 @@ namespace Alabo.App.Share.OpenTasks.Enums
         /// <summary>
         ///     指定数额
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "指定数额")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "指定数额")]
         FixedAmount = 1,
 
         /// <summary>
         ///     个人业绩
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "个人业绩")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "个人业绩")]
         PersonalAchievement = 2,
 
         /// <summary>
         ///     团队业绩
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "团队业绩")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "团队业绩")]
         TeamAchievement = 3
     }
 }

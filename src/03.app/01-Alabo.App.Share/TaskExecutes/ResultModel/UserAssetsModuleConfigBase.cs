@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Alabo.Framework.Tasks.Queues.Models;
+using System;
 using System.Collections.Generic;
-using Alabo.Framework.Tasks.Queues.Models;
 
 namespace Alabo.App.Share.TaskExecutes.ResultModel
 {
