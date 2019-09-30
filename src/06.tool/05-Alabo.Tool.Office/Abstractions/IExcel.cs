@@ -1,5 +1,5 @@
-﻿using System.IO;
-using Alabo.Tool.Office.Core;
+﻿using Alabo.Tool.Office.Core;
+using System.IO;
 
 namespace Alabo.Tool.Office.Abstractions
 {

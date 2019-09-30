@@ -18,7 +18,7 @@ namespace Alabo.Tool.Office.Core
         /// </summary>
         public IndexManager()
         {
-            _list = new List<IndexRange> {new IndexRange(0, 10000)};
+            _list = new List<IndexRange> { new IndexRange(0, 10000) };
         }
 
         /// <summary>

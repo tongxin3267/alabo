@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.AutoConfigs;
+﻿using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis.Controller;
@@ -11,6 +9,8 @@ using Alabo.Tool.Payment.MiniProgram.Services;
 using Alabo.Tool.Payment.WeiXinMp.Models;
 using Alabo.Tool.Payment.WeiXinMp.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Tool.Payment.Controllers
