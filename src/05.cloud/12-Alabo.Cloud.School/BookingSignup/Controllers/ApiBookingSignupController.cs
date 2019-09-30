@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
 using Alabo.App.Asset.Pays.Domain.Services;
 using Alabo.App.Asset.Pays.Dtos;
 using Alabo.Cloud.School.BookingSignup.Domain.Entities;
@@ -19,6 +15,10 @@ using Alabo.Tool.Payment;
 using Alabo.Tool.Payment.CallBacks;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 using ZKCloud.Open.ApiBase.Models;
 using ZKCloud.Open.ApiStore.Payment.Modules.Alipay;
 using ZKCloud.Open.ApiStore.Payment.Modules.Alipay.Notify;
@@ -110,7 +110,7 @@ namespace Alabo.Cloud.School.BookingSignup.Controllers
                                 Resolve<IPayService>().AfterPay(pay, true);
 
                                 Resolve<IBookingSignupService>()
-                                    .AfterPaySuccess(new List<object> {pay.PayExtension.TradeNo});
+                                    .AfterPaySuccess(new List<object> { pay.PayExtension.TradeNo });
                             }
                             else
                             {
@@ -159,7 +159,7 @@ namespace Alabo.Cloud.School.BookingSignup.Controllers
                         pay.ResponseSerial = notify.Attach;
                         pay.PayType = PayType.WeChatPayPublic;
                         var res = Resolve<IPayService>().AfterPay(pay, true);
-                        Resolve<IBookingSignupService>().AfterPaySuccess(new List<object> {pay.PayExtension.TradeNo});
+                        Resolve<IBookingSignupService>().AfterPaySuccess(new List<object> { pay.PayExtension.TradeNo });
                         //Resolve<IPayService>().Log("微信公众号支付回调结果:" + res.ToJson(), LogsLevel.Warning);
                     }
 
@@ -225,7 +225,7 @@ namespace Alabo.Cloud.School.BookingSignup.Controllers
                 //pay.ResponseSerial = notify.TradeNo;
                 pay.PayType = PayType.WeChatPayPublic;
                 var res = Resolve<IPayService>().AfterPay(pay, true);
-                Resolve<IBookingSignupService>().AfterPaySuccess(new List<object> {pay.PayExtension.TradeNo});
+                Resolve<IBookingSignupService>().AfterPaySuccess(new List<object> { pay.PayExtension.TradeNo });
                 return NoContent();
             }
             catch (Exception ex)

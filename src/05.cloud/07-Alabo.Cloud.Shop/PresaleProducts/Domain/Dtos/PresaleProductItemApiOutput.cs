@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Alabo.Cloud.Shop.PresaleProducts.Domain.ViewModels;
+﻿using Alabo.Cloud.Shop.PresaleProducts.Domain.ViewModels;
+using System.Collections.Generic;
 
 namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Dtos
 {

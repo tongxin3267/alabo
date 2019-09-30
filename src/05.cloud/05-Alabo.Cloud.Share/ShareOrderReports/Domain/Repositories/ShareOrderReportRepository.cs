@@ -1,10 +1,10 @@
-using System.Collections.Generic;
 using _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Extensions;
 using MongoDB.Bson;
+using System.Collections.Generic;
 
 namespace _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Repositories
 {

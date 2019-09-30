@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Alabo.Cloud.People.UserDigitals.Domain.Entities
 {

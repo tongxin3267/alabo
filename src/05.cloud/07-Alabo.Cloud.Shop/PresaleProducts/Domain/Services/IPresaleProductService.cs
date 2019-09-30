@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Alabo.Cloud.Shop.PresaleProducts.Domain.Dtos;
 using Alabo.Cloud.Shop.PresaleProducts.Domain.Entities;
 using Alabo.Domains.Entities;
@@ -6,6 +5,7 @@ using Alabo.Domains.Services;
 using Alabo.Industry.Shop.Products.Domain.Enums;
 using Alabo.Industry.Shop.Products.Dtos;
 using MongoDB.Bson;
+using System.Collections.Generic;
 
 namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Services
 {

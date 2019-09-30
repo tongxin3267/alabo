@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using Alabo.Cloud.Shop.PresaleProducts.Domain.Dtos;
 using Alabo.Cloud.Shop.PresaleProducts.Domain.Entities;
 using Alabo.Cloud.Shop.PresaleProducts.Domain.Services;
@@ -9,6 +7,8 @@ using Alabo.Industry.Shop.Products.Domain.Enums;
 using Alabo.Industry.Shop.Products.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Cloud.Shop.PresaleProducts.Controllers
@@ -56,7 +56,7 @@ namespace Alabo.Cloud.Shop.PresaleProducts.Controllers
         [Display(Description = "添加预售商品接口")]
         public ApiResult Add([FromBody] PresaleProductEdit presaleProduct)
         {
-            return AddMany(new List<PresaleProductEdit> {presaleProduct});
+            return AddMany(new List<PresaleProductEdit> { presaleProduct });
         }
 
         /// <summary>

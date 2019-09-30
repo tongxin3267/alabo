@@ -1,10 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
 using Alabo.Framework.Core.Admins.Repositories;
 using Alabo.Framework.Core.Admins.Services;
-using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Helpers;
 using Alabo.Maps;
@@ -15,6 +13,7 @@ using Alabo.UI.Design.AutoForms;
 using Alabo.Users.Services;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace _01_Alabo.Cloud.Core.Truncate
 {

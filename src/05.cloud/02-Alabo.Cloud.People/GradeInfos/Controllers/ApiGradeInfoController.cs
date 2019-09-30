@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using Alabo.Cloud.People.GradeInfos.Domain.Entities;
 using Alabo.Cloud.People.GradeInfos.Domain.Servcies;
 using Alabo.Domains.Entities;
@@ -7,6 +6,7 @@ using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Cloud.People.GradeInfos.Controllers

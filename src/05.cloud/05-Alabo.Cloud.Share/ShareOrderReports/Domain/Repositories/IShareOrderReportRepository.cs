@@ -1,7 +1,7 @@
-using System.Collections.Generic;
 using _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Entities;
 using Alabo.Domains.Repositories;
 using MongoDB.Bson;
+using System.Collections.Generic;
 
 namespace _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Repositories
 {

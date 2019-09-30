@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Alabo.Cloud.Shop.SuccessfulCases.Domains.Entities
 {
@@ -54,7 +54,6 @@ namespace Alabo.Cloud.Shop.SuccessfulCases.Domains.Entities
         [Field(ControlsType = ControlsType.Editor, EditShow = true, SortOrder = 2)]
         [HelpBlock("编写案例详情")]
         public string Intro { get; set; }
-
 
         public IEnumerable<ViewLink> ViewLinks()
         {

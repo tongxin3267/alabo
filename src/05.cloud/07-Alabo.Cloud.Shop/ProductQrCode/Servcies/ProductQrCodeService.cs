@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using Alabo.AutoConfigs;
+﻿using Alabo.AutoConfigs;
 using Alabo.Cloud.Shop.ProductQrCode.Configs;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Services;
@@ -15,6 +9,12 @@ using Alabo.Industry.Shop.Products.Domain.Services;
 using Alabo.Industry.Shop.Products.ViewModels;
 using Alabo.Runtime;
 using QRCoder;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 
 namespace Alabo.Cloud.Shop.ProductQrCode.Servcies
 {

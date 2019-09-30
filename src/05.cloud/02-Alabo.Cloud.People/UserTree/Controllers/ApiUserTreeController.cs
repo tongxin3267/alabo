@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Cloud.People.UserTree.Domain.Service;
+﻿using Alabo.Cloud.People.UserTree.Domain.Service;
 using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Cloud.People.UserTree.Controllers

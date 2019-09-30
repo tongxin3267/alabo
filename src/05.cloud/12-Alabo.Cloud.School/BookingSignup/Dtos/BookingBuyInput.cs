@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Tool.Payment;
+﻿using Alabo.Tool.Payment;
 using Alabo.Validations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Cloud.School.BookingSignup.Dtos
 {

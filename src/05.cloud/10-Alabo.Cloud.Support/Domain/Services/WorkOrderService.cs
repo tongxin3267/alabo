@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using Alabo.Cloud.Support.Domain.Entities;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
@@ -8,6 +6,8 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using MongoDB.Bson;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.Cloud.Support.Domain.Services
 {

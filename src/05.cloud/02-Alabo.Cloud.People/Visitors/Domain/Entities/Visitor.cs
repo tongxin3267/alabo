@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Cloud.People.Visitors.Domain.Enums;
+﻿using Alabo.Cloud.People.Visitors.Domain.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Users.Enum;
 using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Alabo.Cloud.People.Visitors.Domain.Entities
 {

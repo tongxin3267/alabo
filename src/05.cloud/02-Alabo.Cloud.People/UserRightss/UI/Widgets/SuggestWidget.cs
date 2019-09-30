@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using Alabo.Cloud.People.UserRightss.Domain.Services;
+﻿using Alabo.Cloud.People.UserRightss.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.UI.Design.Widgets;
+using System.Collections.Generic;
 
 namespace Alabo.Cloud.People.UserRightss.UI.Widgets
 {
@@ -14,7 +14,6 @@ namespace Alabo.Cloud.People.UserRightss.UI.Widgets
             var jsonObj = json.ToObject<Dictionary<string, long>>();
 
             var para = json.ToObject<UserInfoMap>();
-
 
             var userId = jsonObj.GetValue("userId");
             var isAdmin = Ioc.Resolve<IUserService>().IsAdmin(userId);

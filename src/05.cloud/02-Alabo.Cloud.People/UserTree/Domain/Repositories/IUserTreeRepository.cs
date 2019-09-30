@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using Alabo.Cloud.People.UserTree.Domain.Configs;
+﻿using Alabo.Cloud.People.UserTree.Domain.Configs;
 using Alabo.Domains.Repositories;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Users.Entities;
+using System.Collections.Generic;
 
 namespace Alabo.Cloud.People.UserTree.Domain.Repositories
 {

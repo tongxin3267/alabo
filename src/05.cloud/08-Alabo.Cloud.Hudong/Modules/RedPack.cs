@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Alabo.App.Share.HuDong.Domain.Entities;
+﻿using Alabo.App.Share.HuDong.Domain.Entities;
 using Alabo.App.Share.HuDong.Domain.Enums;
 using Alabo.Web.Mvc.Attributes;
+using System.Collections.Generic;
 
 namespace Alabo.App.Share.HuDong.Modules
 {

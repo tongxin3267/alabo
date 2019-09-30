@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Alabo.App.Kpis.Kpis.Domain.Entities;
 using Alabo.App.Kpis.Kpis.Domain.Services;
 using Alabo.Cloud.People.UserRightss.Domain.CallBack;
@@ -36,7 +32,10 @@ using Alabo.Randoms;
 using Alabo.Regexs;
 using Alabo.Tables.Domain.Services;
 using Alabo.Users.Entities;
-using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Alabo.Cloud.People.UserRightss.Domain.Services
 {

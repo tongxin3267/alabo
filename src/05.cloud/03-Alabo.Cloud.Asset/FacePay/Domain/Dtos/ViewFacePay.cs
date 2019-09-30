@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Alabo.Cloud.Asset.FacePay.Domain.Services;
+﻿using Alabo.Cloud.Asset.FacePay.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
-using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebApis.Service;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Maps;
 using Alabo.UI;
 using Alabo.UI.Design.AutoLists;
 using Alabo.UI.Design.AutoTables;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Alabo.Cloud.Asset.FacePay.Domain.Dtos
 {
@@ -68,7 +66,7 @@ namespace Alabo.Cloud.Asset.FacePay.Domain.Dtos
             var orderQuery = new ExpressionQuery<Entities.FacePay>
             {
                 EnablePaging = true,
-                PageIndex = (int) pageIndex,
+                PageIndex = (int)pageIndex,
                 PageSize = 15
             };
 

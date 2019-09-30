@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Alabo.App.Share.HuDong.Domain.Entities;
+﻿using Alabo.App.Share.HuDong.Domain.Entities;
+using System.Collections.Generic;
 
 namespace Alabo.App.Share.HuDong
 {

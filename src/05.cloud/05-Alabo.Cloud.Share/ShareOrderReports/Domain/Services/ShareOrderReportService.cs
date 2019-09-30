@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using _05_Alabo.Cloud.Share.BonusPools.Domain.Configs;
 using _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Entities;
 using Alabo.Data.Things.Orders.Domain.Services;
@@ -11,6 +9,8 @@ using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
 
 namespace _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Services
 {

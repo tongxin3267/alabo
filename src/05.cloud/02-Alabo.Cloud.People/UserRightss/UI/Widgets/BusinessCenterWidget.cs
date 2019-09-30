@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.Cloud.People.UserRightss.Domain.Dtos;
+﻿using Alabo.Cloud.People.UserRightss.Domain.Dtos;
 using Alabo.Cloud.People.UserRightss.Domain.Entities;
 using Alabo.Cloud.People.UserRightss.Domain.Services;
 using Alabo.Data.People.Users.Domain.Repositories;
@@ -15,6 +12,9 @@ using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Helpers;
 using Alabo.UI.Design.Widgets;
 using Alabo.Users.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.Cloud.People.UserRightss.UI.Widgets
 {

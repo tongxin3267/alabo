@@ -1,9 +1,9 @@
-using System;
-using System.Collections.Generic;
 using Alabo.Cloud.School.BookingSignup.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.Cloud.School.BookingSignup.Domain.Services
 {

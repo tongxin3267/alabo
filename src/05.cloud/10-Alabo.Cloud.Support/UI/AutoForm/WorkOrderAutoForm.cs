@@ -2,8 +2,6 @@
 using Alabo.Cloud.Support.Domain.Entities;
 using Alabo.Cloud.Support.Domain.Services;
 using Alabo.Domains.Entities;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Mapping;
 using Alabo.UI;
 using Alabo.UI.Design.AutoForms;
@@ -21,7 +19,7 @@ namespace Alabo.Cloud.Support.UI.AutoForm
 
         public ServiceResult Save(object model, AutoBaseModel autoModel)
         {
-            var temp = (WorkOrderInput) model;
+            var temp = (WorkOrderInput)model;
             var item = AutoMapping.SetValue<WorkOrder>(temp);
             var result = Resolve<IWorkOrderService>().AddWorkOrder(item);
             return result;

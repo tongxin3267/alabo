@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using Alabo.Cloud.People.Identities.Domain.Entities;
+﻿using Alabo.Cloud.People.Identities.Domain.Entities;
 using Alabo.Data.People.Users.ViewModels;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
@@ -14,6 +8,12 @@ using Alabo.Extensions;
 using Alabo.Mapping;
 using Alabo.Users.Enum;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Text;
 
 namespace Alabo.Cloud.People.Identities.Domain.Services
 {
@@ -101,16 +101,16 @@ namespace Alabo.Cloud.People.Identities.Domain.Services
         {
             var url =
                 $"http://apistore.5ug.com/Api/ApiStore/Identity?IdentifyNum={view.CardNo}&UserName={view.RealName}";
-            var httpRequest = (HttpWebRequest) WebRequest.CreateDefault(new Uri(url));
+            var httpRequest = (HttpWebRequest)WebRequest.CreateDefault(new Uri(url));
             HttpWebResponse httpResponse = null;
 
             try
             {
-                httpResponse = (HttpWebResponse) httpRequest.GetResponse();
+                httpResponse = (HttpWebResponse)httpRequest.GetResponse();
             }
             catch (WebException ex)
             {
-                httpResponse = (HttpWebResponse) ex.Response;
+                httpResponse = (HttpWebResponse)ex.Response;
             }
 
             var st = httpResponse.GetResponseStream();

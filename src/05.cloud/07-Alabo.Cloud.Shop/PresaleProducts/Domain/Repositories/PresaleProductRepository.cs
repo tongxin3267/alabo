@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Data;
 using Alabo.Cloud.Shop.PresaleProducts.Domain.Dtos;
 using Alabo.Cloud.Shop.PresaleProducts.Domain.Entities;
 using Alabo.Cloud.Shop.PresaleProducts.Domain.ViewModels;
@@ -10,6 +7,9 @@ using Alabo.Domains.Repositories.EFCore;
 using Alabo.Extensions;
 using Alabo.Industry.Shop.Products.Domain.Enums;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.Data;
 
 namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Repositories
 {
@@ -33,7 +33,7 @@ namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Repositories
             if (input.StartPrice > 0 && input.EndPrice > 0)
                 sqlWhere += $" AND presale.VirtualPrice>={input.StartPrice} AND presale.VirtualPrice<={input.EndPrice}";
             //status
-            var status = (int) ProductStatus.Online;
+            var status = (int)ProductStatus.Online;
             sqlWhere += $" AND product.ProductStatus= {status}  AND product.StoreId>0 AND presale.Status={status}";
 
             //count

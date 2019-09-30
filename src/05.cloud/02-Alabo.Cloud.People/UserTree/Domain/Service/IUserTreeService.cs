@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Alabo.Cloud.People.UserTree.Domain.Configs;
+﻿using Alabo.Cloud.People.UserTree.Domain.Configs;
 using Alabo.Domains.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
+using System.Collections.Generic;
 
 namespace Alabo.Cloud.People.UserTree.Domain.Service
 {

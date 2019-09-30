@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Cloud.Support.Domain.Enum
 {
@@ -12,13 +12,15 @@ namespace Alabo.Cloud.Support.Domain.Enum
         /// <summary>
         ///     公开回复方式
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "公开回复方式")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "公开回复方式")]
         PublicWay = 0,
 
         /// <summary>
         ///     私密回复方式
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "私密回复方式")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "私密回复方式")]
         PrivateWay = 1
     }
 }

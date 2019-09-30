@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.Cloud.Shop.ShopSaleReport.Dtos;
+﻿using Alabo.Cloud.Shop.ShopSaleReport.Dtos;
 using Alabo.Data.People.Teams.Domain.Configs;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
@@ -15,6 +12,9 @@ using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.Industry.Shop.Orders.Domain.Services;
 using Alabo.Industry.Shop.Products.Domain.Configs;
 using Alabo.Mapping;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.Cloud.Shop.ShopSaleReport.Services
 {

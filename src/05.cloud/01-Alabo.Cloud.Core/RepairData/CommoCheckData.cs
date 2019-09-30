@@ -1,11 +1,11 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Core.Reflections.Interfaces;
 using Alabo.Helpers;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace _01_Alabo.Cloud.Core.RepairData
 {
