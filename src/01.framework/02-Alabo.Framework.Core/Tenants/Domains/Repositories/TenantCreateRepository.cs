@@ -82,8 +82,8 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories
         {
             var sqlList = new List<string>
             {
-                //Core_AutoConfig
-                "CREATE TABLE [dbo].[Core_AutoConfig]([Id] [bigint] IDENTITY(1,1) NOT NULL,[AppName] [nvarchar](max) NULL,[Type] [nvarchar](255) NULL,[Value] [ntext] NULL,[LastUpdated] [datetime2](7) NOT NULL,[CreateTime] [datetime2](7) NOT NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
+            //Core_AutoConfig
+            "CREATE TABLE [dbo].[Core_AutoConfig]([Id] [bigint] IDENTITY(1,1) NOT NULL,[AppName] [nvarchar](max) NULL,[Type] [nvarchar](255) NULL,[Value] [ntext] NULL,[LastUpdated] [datetime2](7) NOT NULL,[CreateTime] [datetime2](7) NOT NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
                 //Basic_MessageQueue
                 "CREATE TABLE [dbo].[Basic_MessageQueue]([Id] [bigint] IDENTITY(1,1) NOT NULL,[TemplateCode] [bigint] NOT NULL,[Mobile] [nvarchar](30) NOT NULL,[Content] [nvarchar](500) NOT NULL,[Parameters] [nvarchar](2000) NOT NULL,[Status] [tinyint] NOT NULL,[Message] [nvarchar](max) NOT NULL,[Summary] [nvarchar](max) NOT NULL,[IpAdress] [nvarchar](50) NOT NULL,[RequestTime] [datetime2](7) NOT NULL,[SendTime] [datetime2](7) NOT NULL,[CreateTime] [datetime2](7) NOT NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
                 //Basic_Record
@@ -112,8 +112,7 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories
                 "CREATE TABLE [dbo].[Task_TaskQueue]([Id] [bigint] IDENTITY(1,1) NOT NULL,[CreateTime] [datetime2](7) NOT NULL,[ExecutionTime] [datetime2](7) NOT NULL,[ExecutionTimes] [int] NOT NULL,[HandleTime] [datetime2](7) NOT NULL,[MaxExecutionTimes] [int] NOT NULL,[ModuleId] [uniqueidentifier] NOT NULL,[Parameter] [nvarchar](max) NULL,[Type] [int] NOT NULL,[UserId] [bigint] NOT NULL,[Status] [int] NOT NULL,[Message] [text] NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
                 //User_User
                 "CREATE TABLE [dbo].[User_User]([Id] [bigint] IDENTITY(1,1) NOT NULL,[UserName] [nvarchar](50) NOT NULL,[Name] [nvarchar](50) NOT NULL,[Mobile] [nvarchar](20) NOT NULL,[Email] [nvarchar](255) NULL,[Status] [int] NOT NULL,[GradeId] [uniqueidentifier] NOT NULL,[ParentId] [bigint] NOT NULL,[CreateTime] [datetime2](7) NOT NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY]",
-                //User_UserDetail
-                "CREATE TABLE [dbo].[User_UserDetail]([Id] [bigint] IDENTITY(1,1) NOT NULL,[UserId] [bigint] NOT NULL,[Password] [nvarchar](255) NOT NULL,[PayPassword] [nvarchar](255) NULL,[IdentityStatus] [bit] NOT NULL,[RegionId] [bigint] NOT NULL,[Sex] [int] NOT NULL,[Birthday] [datetime2](7) NOT NULL,[CreateTime] [datetime2](7) NOT NULL,[RegisterIp] [nvarchar](max) NULL,[LoginNum] [bigint] NOT NULL,[LastLoginIp] [nvarchar](50) NULL,[LastLoginTime] [datetime2](7) NOT NULL,[ModifiedTime] [datetime2](7) NOT NULL,[OpenId] [nvarchar](255) NULL,[Remark] [nvarchar](max) NULL,[Avator] [nvarchar](255) NULL,[NickName] [nvarchar](50) NULL,[AddressId] [nvarchar](50) NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
+
                 //User_UserMap
                 "CREATE TABLE [dbo].[User_UserMap]([Id] [bigint] IDENTITY(1,1) NOT NULL,[UserId] [bigint] NOT NULL,[LevelNumber] [bigint] NOT NULL,[TeamNumber] [bigint] NOT NULL,[TeamSales] [decimal](18, 2) NOT NULL,[ChildNode] [varchar](max) NULL,[ParentMap] [nvarchar](max) NOT NULL,[ShopSaleInfo] [text] NULL,[CreateTime] [datetime2](7) NOT NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
 
@@ -154,7 +153,6 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories
                 "ALTER TABLE [dbo].[Things_ShareOrder] ADD  DEFAULT ((0)) FOR [EntityId]",
                 "ALTER TABLE [dbo].[User_User] ADD  DEFAULT ((0)) FOR [ParentId]",
                 "ALTER TABLE [dbo].[User_User] ADD  DEFAULT (getdate()) FOR [CreateTime]",
-                "ALTER TABLE [dbo].[User_UserDetail] ADD  DEFAULT ('') FOR [Avator]",
                 "ALTER TABLE [dbo].[User_UserMap] ADD  DEFAULT (getdate()) FOR [CreateTime]",
                 "ALTER TABLE [dbo].[Shop_Activity] ADD  DEFAULT (getdate()) FOR [CreateTime]",
                 "ALTER TABLE [dbo].[Shop_CateryProperty] ADD  DEFAULT (getdate()) FOR [CreateTime]",
@@ -170,8 +168,36 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories
                 "ALTER TABLE [dbo].[Shop_Product]  WITH CHECK ADD CHECK  (([MinCashRate]>=(0) AND [MinCashRate]<=(1)))",
                 "ALTER TABLE [dbo].[Shop_Product]  WITH CHECK ADD CHECK(([MinCashRate]>= (0) AND[MinCashRate] <= (1)))"
             };
-
             var sql =
+                @"CREATE TABLE [dbo].[User_UserDetail](
+	                [Id] [bigint] IDENTITY(1,1) NOT NULL,
+	                [UserId] [bigint] NOT NULL,
+	                [Password] [nvarchar](255) NOT NULL,
+	                [PayPassword] [nvarchar](255) NULL,
+	                [RegionId] [bigint] NOT NULL,
+	                [Sex] [int] NOT NULL,
+	                [Birthday] [datetime2](7) NOT NULL,
+	                [CreateTime] [datetime2](7) NOT NULL,
+	                [RegisterIp] [nvarchar](max) NULL,
+	                [LoginNum] [bigint] NOT NULL,
+	                [LastLoginIp] [nvarchar](50) NULL,
+	                [LastLoginTime] [datetime2](7) NOT NULL,
+	                [ModifiedTime] [datetime2](7) NOT NULL,
+	                [OpenId] [nvarchar](255) NULL,
+	                [Remark] [nvarchar](max) NULL,
+	                [Avator] [nvarchar](255) NULL,
+	                [NickName] [nvarchar](50) NULL,
+	                [AddressId] [nvarchar](50) NULL,
+	                [IdentityStatus] [int] NULL,
+                PRIMARY KEY CLUSTERED
+                (
+	                [Id] ASC
+                )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+                ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]";
+            sqlList.Add(sql);
+            sqlList.Add("ALTER TABLE [dbo].[User_UserDetail] ADD  DEFAULT ('') FOR [Avator]");
+
+            sql =
                 @"CREATE TABLE [dbo].[Offline_MerchantOrder](
                         [Id][bigint] IDENTITY(1, 1) NOT NULL,
                         [UserId] BIGINT NOT NULL,
@@ -211,6 +237,32 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories
                         )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
                      ) ON [PRIMARY]";
             sqlList.Add(sql);
+
+            // 提现表
+            sql =
+                @"CREATE TABLE [dbo].[Asset_Withdraw](
+	                    [Id] [bigint] IDENTITY(1,1) NOT NULL,
+	                    [UserId] [bigint] NOT NULL,
+	                    [BankCardId] [NVARCHAR](127)  NULL,
+	                    [MoneyTypeId] [uniqueidentifier] NOT NULL,
+	                    [Type] [int] NOT NULL,
+	                    [Amount] [decimal](18, 2) NOT NULL,
+	                    [CheckAmount] [decimal](18, 2) NOT NULL,
+	                    [Fee] [decimal](18, 2) NOT NULL,
+	                    [Status] [int] NOT NULL,
+                            UserRemark [text] NULL,
+						  Remark [text] NULL,
+						   FailureReason [text] NULL,
+	                    [CreateTime] [datetime2](7) NOT NULL,
+	                    [PayTime] [datetime2](7) NOT NULL,
+	                    [Extension] [text] NULL,
+                    PRIMARY KEY CLUSTERED
+                    (
+	                    [Id] ASC
+                    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+                    ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]";
+            sqlList.Add(sql);
+
             return sqlList;
         }
     }

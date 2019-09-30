@@ -16,6 +16,9 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Alabo.App.Asset.Recharges.Domain.Repositories;
+using Alabo.App.Asset.Refunds.Domain.Repositories;
+using Alabo.App.Asset.Settlements.Domain.Repositories;
 using Alabo.App.Asset.Transfers.Domain.Repositories;
 using Alabo.App.Asset.Transfers.Domain.Services;
 using Alabo.App.Asset.Withdraws.Domain.Repositories;
@@ -43,6 +46,13 @@ namespace Alabo.App.Asset.Bills.Controllers
             Ioc.Resolve<IWithdrawRepository>().FirstOrDefault();
 
             Ioc.Resolve<ITransferRepository>().FirstOrDefault();
+
+            Ioc.Resolve<IRechargeRepository>().FirstOrDefault();
+
+            Ioc.Resolve<IRefundRepository>().FirstOrDefault();
+
+            Ioc.Resolve<ISettlementRepository>().FirstOrDefault();
+
             var withdraw = Resolve<ITransferService>().FirstOrDefault();
             return ApiResult.Success();
         }

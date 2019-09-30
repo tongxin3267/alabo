@@ -11,7 +11,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.Refunds.Domain.Entities
 {
-    [ClassProperty(Name = "财务交易", Icon = "fa fa-puzzle-piece", Description = "提现管理")]
+    [ClassProperty(Name = "退款管理", Icon = "fa fa-puzzle-piece", Description = "退款管理")]
     public class Refund : AggregateDefaultUserRoot<Refund>
     {
         /// <summary>
@@ -23,6 +23,13 @@ namespace Alabo.App.Asset.Refunds.Domain.Entities
         public Guid MoneyTypeId { get; set; }
 
         /// <summary>
+        /// 退款原因
+        /// </summary>
+        [Display(Name = "退款原因")]
+        [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1, Width = "150", ListShow = true, SortOrder = 3)]
+        public Guid ConfigId { get; set; }
+
+        /// <summary>
         ///     本次变动的货币量
         ///     资金流向为收入时货币量大于0
         ///     资金流向为支出时货币量小于0
@@ -32,6 +39,11 @@ namespace Alabo.App.Asset.Refunds.Domain.Entities
         [Range(0, 99999999, ErrorMessage = "金额不能小于0")]
         [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1, Width = "150", ListShow = true, SortOrder = 5)]
         public decimal Amount { get; set; }
+
+        /// <summary>
+        /// 手续费
+        /// </summary>
+        public decimal Fee { get; set; }
 
         /// <summary>
         ///     状态
@@ -59,6 +71,24 @@ namespace Alabo.App.Asset.Refunds.Domain.Entities
         /// </summary>
         [Display(Name = "贸易扩展")]
         public RefundExtension RefundExtension { get; set; } = new RefundExtension();
+
+        /// <summary>
+        ///     会员备注
+        /// </summary>
+        [Display(Name = "会员备注")]
+        public string UserRemark { get; set; }
+
+        /// <summary>
+        ///     ss
+        ///     备注，此备注表示管理员备注，前台会员不可以修改
+        /// </summary>
+        [Display(Name = "备注")]
+        public string Remark { get; set; }
+
+        /// <summary>
+        ///     失败原因
+        /// </summary>
+        public string FailureReason { get; set; }
 
         /// <summary>
         ///     Gets the serial.

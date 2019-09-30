@@ -49,13 +49,6 @@ namespace Alabo.App.Asset.Recharges.Domain.Entities
         public DateTime PayTime { get; set; } = DateTime.MinValue;
 
         /// <summary>
-        ///     Gets or sets the 扩展.
-        /// </summary>
-        [Field(ExtensionJson = "RechargeExtension")]
-        [Display(Name = "扩展")]
-        public string Extension { get; set; }
-
-        /// <summary>
         ///     充值方式
         ///     线上充值，和线下充值
         /// </summary>
@@ -68,10 +61,35 @@ namespace Alabo.App.Asset.Recharges.Domain.Entities
         public PayType PayType { get; set; }
 
         /// <summary>
+        ///     会员备注
+        /// </summary>
+        [Display(Name = "会员备注")]
+        public string UserRemark { get; set; }
+
+        /// <summary>
+        ///     ss
+        ///     备注，此备注表示管理员备注，前台会员不可以修改
+        /// </summary>
+        [Display(Name = "备注")]
+        public string Remark { get; set; }
+
+        /// <summary>
+        ///     失败原因
+        /// </summary>
+        public string FailureReason { get; set; }
+
+        /// <summary>
         ///     Gets or sets the with draw 扩展.
         /// </summary>
         [Display(Name = "充值扩展")]
         public RechargeExtension RechargeExtension { get; set; } = new RechargeExtension();
+
+        /// <summary>
+        ///     Gets or sets the 扩展.
+        /// </summary>
+        [Field(ExtensionJson = "RechargeExtension")]
+        [Display(Name = "扩展")]
+        public string Extension { get; set; }
 
         /// <summary>
         ///     Gets the serial.

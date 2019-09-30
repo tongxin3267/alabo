@@ -67,6 +67,24 @@ namespace Alabo.App.Asset.Withdraws.Domain.Entities
         public decimal Fee { get; set; }
 
         /// <summary>
+        ///     会员备注
+        /// </summary>
+        [Display(Name = "会员备注")]
+        public string UserRemark { get; set; }
+
+        /// <summary>
+        ///     ss
+        ///     备注，此备注表示管理员备注，前台会员不可以修改
+        /// </summary>
+        [Display(Name = "备注")]
+        public string Remark { get; set; }
+
+        /// <summary>
+        ///     失败原因
+        /// </summary>
+        public string FailureReason { get; set; }
+
+        /// <summary>
         ///     银行卡提现扩展
         /// </summary>
         public WithdrawExtension WithdrawExtension { get; set; }
@@ -74,7 +92,7 @@ namespace Alabo.App.Asset.Withdraws.Domain.Entities
         /// <summary>
         ///     扩展数据保存
         /// </summary>
-        public string Extensions { get; set; }
+        public string Extension { get; set; }
 
         /// <summary>
         ///     Gets the serial.

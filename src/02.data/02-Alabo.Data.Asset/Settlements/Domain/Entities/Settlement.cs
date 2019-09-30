@@ -15,6 +15,11 @@ namespace Alabo.App.Asset.Settlements.Domain.Entities
     public class Settlement : AggregateDefaultUserRoot<Settlement>
     {
         /// <summary>
+        /// 提现Id
+        /// </summary>
+        public long WithdrawId { get; set; }
+
+        /// <summary>
         ///     本次变动的货币类型id
         ///     与配置 MoneyTypeConfig 关联
         /// </summary>
@@ -34,18 +39,15 @@ namespace Alabo.App.Asset.Settlements.Domain.Entities
         public decimal Amount { get; set; }
 
         /// <summary>
+        /// 手续费
+        /// </summary>
+        public decimal Fee { get; set; }
+
+        /// <summary>
         ///     状态
         /// </summary>
         [Display(Name = "状态")]
         public SettlementStatus Status { get; set; } = SettlementStatus.Pending;
-
-        /// <summary>
-        ///     付款时间
-        /// </summary>
-        [Display(Name = "交易时间")]
-        [Field(ControlsType = ControlsType.DateTimePicker, GroupTabId = 1, Width = "150", ListShow = true,
-            SortOrder = 7)]
-        public DateTime PayTime { get; set; } = DateTime.MinValue;
 
         /// <summary>
         ///     Gets or sets the 扩展.
