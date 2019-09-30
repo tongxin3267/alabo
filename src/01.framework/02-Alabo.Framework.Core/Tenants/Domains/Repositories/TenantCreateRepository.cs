@@ -239,22 +239,21 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories
             sqlList.Add(sql);
 
             // 提现表
-            sql =
-                @"CREATE TABLE [dbo].[Asset_Withdraw](
+            sql = @"CREATE TABLE [dbo].[Asset_Withdraw](
 	                    [Id] [bigint] IDENTITY(1,1) NOT NULL,
 	                    [UserId] [bigint] NOT NULL,
-	                    [BankCardId] [NVARCHAR](127)  NULL,
+	                    [BankCardId] [nvarchar](127) NULL,
 	                    [MoneyTypeId] [uniqueidentifier] NOT NULL,
 	                    [Type] [int] NOT NULL,
 	                    [Amount] [decimal](18, 2) NOT NULL,
 	                    [CheckAmount] [decimal](18, 2) NOT NULL,
 	                    [Fee] [decimal](18, 2) NOT NULL,
 	                    [Status] [int] NOT NULL,
-                            UserRemark [text] NULL,
-						  Remark [text] NULL,
-						   FailureReason [text] NULL,
 	                    [CreateTime] [datetime2](7) NOT NULL,
 	                    [PayTime] [datetime2](7) NOT NULL,
+	                    [UserRemark] [text] NULL,
+	                    [Remark] [text] NULL,
+	                    [FailureReason] [text] NULL,
 	                    [Extension] [text] NULL,
                     PRIMARY KEY CLUSTERED
                     (
@@ -262,6 +261,119 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories
                     )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
                     ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]";
             sqlList.Add(sql);
+
+            // 转账表
+            sql = @"CREATE TABLE [dbo].[Asset_Transfer](
+	                    [Id] [bigint] IDENTITY(1,1) NOT NULL,
+	                    [UserId] [bigint] NOT NULL,
+	                    [OtherUserId] [bigint] NOT NULL,
+	                    [MoneyTypeId] [uniqueidentifier] NOT NULL,
+	                    [ConfigId] [uniqueidentifier] NOT NULL,
+	                    [Amount] [decimal](18, 2) NOT NULL,
+	                    [Fee] [decimal](18, 2) NOT NULL,
+	                    [Intro] [text] NULL,
+	                    [CreateTime] [datetime2](7) NOT NULL,
+                    PRIMARY KEY CLUSTERED
+                    (
+	                    [Id] ASC
+                    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+                    ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]";
+            sqlList.Add(sql);
+
+            // 充值表
+            sql = @"CREATE TABLE [dbo].[Asset_Recharge](
+	                [Id] [bigint] IDENTITY(1,1) NOT NULL,
+	                [UserId] [bigint] NOT NULL,
+	                [BankCardId] [nvarchar](127) NULL,
+	                [MoneyTypeId] [uniqueidentifier] NOT NULL,
+	                [Type] [int] NOT NULL,
+	                [Amount] [decimal](18, 2) NOT NULL,
+	                [CheckAmount] [decimal](18, 2) NOT NULL,
+	                [Fee] [decimal](18, 2) NOT NULL,
+	                [Status] [int] NOT NULL,
+	                [PayType] [int] NOT NULL,
+	                [RechargeType] [int] NOT NULL,
+	                [CreateTime] [datetime2](7) NOT NULL,
+	                [PayTime] [datetime2](7) NOT NULL,
+	                [UserRemark] [text] NULL,
+	                [Remark] [text] NULL,
+	                [FailureReason] [text] NULL,
+	                [Extension] [text] NULL,
+                PRIMARY KEY CLUSTERED
+                (
+	                [Id] ASC
+                )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+                ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]";
+            sqlList.Add(sql);
+
+            // 退款表
+            sql = @"CREATE TABLE [dbo].[Asset_Recharge](
+	                [Id] [bigint] IDENTITY(1,1) NOT NULL,
+	                [UserId] [bigint] NOT NULL,
+	                [BankCardId] [nvarchar](127) NULL,
+	                [MoneyTypeId] [uniqueidentifier] NOT NULL,
+	                [Type] [int] NOT NULL,
+	                [Amount] [decimal](18, 2) NOT NULL,
+	                [CheckAmount] [decimal](18, 2) NOT NULL,
+	                [Fee] [decimal](18, 2) NOT NULL,
+	                [Status] [int] NOT NULL,
+	                [PayType] [int] NOT NULL,
+	                [RechargeType] [int] NOT NULL,
+	                [CreateTime] [datetime2](7) NOT NULL,
+	                [PayTime] [datetime2](7) NOT NULL,
+	                [UserRemark] [text] NULL,
+	                [Remark] [text] NULL,
+	                [FailureReason] [text] NULL,
+	                [Extension] [text] NULL,
+                PRIMARY KEY CLUSTERED
+                (
+	                [Id] ASC
+                )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+                ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]";
+            sqlList.Add(sql);
+
+            // 退款表
+            sql = @"CREATE TABLE [dbo].[Asset_Refund](
+	                    [Id] [bigint] IDENTITY(1,1) NOT NULL,
+	                    [UserId] [bigint] NOT NULL,
+	                    [MoneyTypeId] [uniqueidentifier] NOT NULL,
+	                    [ConfigId] [uniqueidentifier] NOT NULL,
+	                    [Amount] [decimal](18, 2) NOT NULL,
+	                    [Fee] [decimal](18, 2) NOT NULL,
+	                    [Status] [int] NOT NULL,
+	                    [CreateTime] [datetime2](7) NOT NULL,
+	                    [PayTime] [datetime2](7) NOT NULL,
+	                    [UserRemark] [text] NULL,
+	                    [Remark] [text] NULL,
+	                    [FailureReason] [text] NULL,
+	                    [Extension] [text] NULL,
+                    PRIMARY KEY CLUSTERED
+                    (
+	                    [Id] ASC
+                    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+                    ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]";
+            sqlList.Add(sql);
+
+            // 清算表
+            sql = @"CREATE TABLE [dbo].[Asset_Settlement](
+	                    [Id] [bigint] IDENTITY(1,1) NOT NULL,
+	                    [UserId] [bigint] NOT NULL,
+	                    [WithdrawId] [bigint] NOT NULL,
+	                    [MoneyTypeId] [uniqueidentifier] NOT NULL,
+	                    [ConfigId] [uniqueidentifier] NOT NULL,
+	                    [Amount] [decimal](18, 2) NOT NULL,
+	                    [Fee] [decimal](18, 2) NOT NULL,
+	                    [Status] [int] NOT NULL,
+	                    [CreateTime] [datetime2](7) NOT NULL,
+	                    [Extension] [text] NULL,
+                    PRIMARY KEY CLUSTERED
+                    (
+	                    [Id] ASC
+                    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+                    ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]";
+            sqlList.Add(sql);
+
+            ExecuteSql(sqlList);
 
             return sqlList;
         }
