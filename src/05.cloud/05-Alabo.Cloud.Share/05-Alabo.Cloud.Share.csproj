@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <RootNamespace>_05_Alabo.Cloud.Share</RootNamespace>
     <AssemblyName>Alabo.Cloud.Share</AssemblyName>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

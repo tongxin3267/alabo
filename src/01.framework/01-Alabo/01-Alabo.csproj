@@ -21,7 +21,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <ProjectGuid>{86D265D9-1BB5-465D-8838-64C1C9B7836F}</ProjectGuid>
+    <ProjectGuid>{3BB13FDE-E902-413B-9800-FAEF00448369}</ProjectGuid>
     <AssemblyName>Alabo</AssemblyName>
     <LangVersion>7.1</LangVersion>
     <RootNamespace>Alabo</RootNamespace>

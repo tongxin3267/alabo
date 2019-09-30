@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Alabo.App.Core.Common.Domain.Services;
-using Alabo.App.Core.User.Domain.Entities;
-using Alabo.App.Core.User.Domain.Services;
-using Alabo.Domains.Services;
-using _06.Alabo.Cloud.Reports.UserRecommend.Services;
-using Alabo.App.Core.User.ViewModels.Admin;
+﻿using _06.Alabo.Cloud.Reports.UserRecommend.Services;
+using Alabo.Cloud.People.GradeInfos.Domain.Servcies;
+using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Data.People.Users.ViewModels.Admin;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
+using Alabo.Domains.Services;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.Grades.Domain.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Alabo.Cloud.People.GradeInfos.Domain.Entities;
 
 namespace Alabo.Cloud.Reports.UserRecommend.Services {
 

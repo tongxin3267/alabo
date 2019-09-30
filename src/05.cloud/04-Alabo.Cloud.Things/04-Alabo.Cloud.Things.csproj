@@ -7,6 +7,7 @@
     <ApplicationIcon />
     <StartupObject />
     <AssemblyName>Alabo.Cloud.Things</AssemblyName>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

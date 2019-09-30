@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <RootNamespace>Alabo.Tool.WeiXin</RootNamespace>
     <AssemblyName>Alabo.Tool.WeiXin</AssemblyName>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
 </Project>

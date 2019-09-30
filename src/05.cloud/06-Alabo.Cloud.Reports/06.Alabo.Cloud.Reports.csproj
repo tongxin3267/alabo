@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <RootNamespace>Alabo.Cloud.Reports</RootNamespace>
     <AssemblyName>Alabo.Cloud.Reports</AssemblyName>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +13,7 @@
     <ProjectReference Include="..\..\01.framework\03-Alabo.Framework.Basic\03-Alabo.Framework.Basic.csproj" />
     <ProjectReference Include="..\..\02.data\01-Alabo.Data.People\01-Alabo.Data.People.csproj" />
     <ProjectReference Include="..\..\03.app\01-Alabo.App.Share\01-Alabo.App.Share.csproj" />
+    <ProjectReference Include="..\02-Alabo.Cloud.People\02-Alabo.Cloud.People.csproj" />
   </ItemGroup>
 
 </Project>
