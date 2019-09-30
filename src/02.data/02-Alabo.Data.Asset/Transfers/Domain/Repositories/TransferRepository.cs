@@ -4,7 +4,7 @@ using Alabo.Domains.Repositories;
 
 namespace Alabo.App.Asset.Transfers.Domain.Repositories
 {
-    public class TransferRepository : RepositoryMongo<Transfer, long>, ITransferRepository
+    public class TransferRepository : RepositoryEfCore<Transfer, long>, ITransferRepository
     {
         public TransferRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

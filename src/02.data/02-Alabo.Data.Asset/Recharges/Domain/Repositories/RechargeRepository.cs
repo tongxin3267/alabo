@@ -4,7 +4,7 @@ using Alabo.Domains.Repositories;
 
 namespace Alabo.App.Asset.Recharges.Domain.Repositories
 {
-    public class RechargeRepository : RepositoryMongo<Recharge, long>, IRechargeRepository
+    public class RechargeRepository : RepositoryEfCore<Recharge, long>, IRechargeRepository
     {
         public RechargeRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

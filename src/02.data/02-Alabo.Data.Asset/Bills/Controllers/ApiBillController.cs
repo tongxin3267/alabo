@@ -16,6 +16,12 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Alabo.App.Asset.Transfers.Domain.Repositories;
+using Alabo.App.Asset.Transfers.Domain.Services;
+using Alabo.App.Asset.Withdraws.Domain.Repositories;
+using Alabo.Data.People.Users.Domain.Services;
+using Alabo.Framework.Core.Admins.Repositories;
+using Alabo.Helpers;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Asset.Bills.Controllers
@@ -27,6 +33,18 @@ namespace Alabo.App.Asset.Bills.Controllers
         public ApiBillController()
         {
             BaseService = Resolve<IBillService>();
+        }
+
+        [HttpGet]
+        public ApiResult Init()
+        {
+            Ioc.Resolve<ICatalogRepository>().UpdateDataBase();
+
+            Ioc.Resolve<IWithdrawRepository>().FirstOrDefault();
+
+            Ioc.Resolve<ITransferRepository>().FirstOrDefault();
+            var withdraw = Resolve<ITransferService>().FirstOrDefault();
+            return ApiResult.Success();
         }
 
         /// <summary>

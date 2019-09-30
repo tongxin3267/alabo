@@ -4,7 +4,7 @@ using Alabo.Domains.Repositories;
 
 namespace Alabo.App.Asset.Refunds.Domain.Repositories
 {
-    public class RefundRepository : RepositoryMongo<Refund, long>, IRefundRepository
+    public class RefundRepository : RepositoryEfCore<Refund, long>, IRefundRepository
     {
         public RefundRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

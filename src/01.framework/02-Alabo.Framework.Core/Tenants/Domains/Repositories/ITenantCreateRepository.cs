@@ -10,12 +10,6 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories
     public interface ITenantCreateRepository : IRepository<User, long>
     {
         /// <summary>
-        ///     init tenant sql
-        /// </summary>
-        /// <returns></returns>
-        void InitTenantSql();
-
-        /// <summary>
         ///     create database
         /// </summary>
         void CreateDatabase(string databaseName);

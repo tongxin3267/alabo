@@ -4,7 +4,7 @@ using Alabo.Domains.Repositories;
 
 namespace Alabo.App.Asset.Withdraws.Domain.Repositories
 {
-    public class WithdrawRepository : RepositoryMongo<Withdraw, long>, IWithdrawRepository
+    public class WithdrawRepository : RepositoryEfCore<Withdraw, long>, IWithdrawRepository
     {
         public WithdrawRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
         {

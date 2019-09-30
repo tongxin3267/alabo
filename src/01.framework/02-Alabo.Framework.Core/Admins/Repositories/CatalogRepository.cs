@@ -44,10 +44,10 @@ namespace Alabo.Framework.Core.Admins.Repositories
                 "EXEC sp_rename 'ZKShop_Order', 'Shop_Order'",
                 "EXEC sp_rename 'ZKShop_ActivityRecord', 'Shop_ActivityRecord'",
 
-                "EXEC sp_rename 'Common_MessageQueue', 'Core_MessageQueue'",
-                "EXEC sp_rename 'Common_Record', 'Core_Record'",
-                "EXEC sp_rename 'Common_RelationIndex', 'Core_RelationIndex'",
-                "EXEC sp_rename 'Common_Relation', 'Core_Relation'",
+                "EXEC sp_rename 'Common_MessageQueue', 'Basic_MessageQueue'",
+                "EXEC sp_rename 'Common_Record', 'Basic_Record'",
+                "EXEC sp_rename 'Common_RelationIndex', 'Basic_RelationIndex'",
+                "EXEC sp_rename 'Common_Relation', 'Basic_Relation'",
 
                 "EXEC sp_rename 'Finance_Bill', 'Asset_Bill'",
                 "EXEC sp_rename 'Finance_Pay', 'Asset_Pay'",

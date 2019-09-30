@@ -28,9 +28,8 @@ namespace Alabo.Framework.Core.Admins.Controllers
         [HttpGet]
         public ApiResult Init()
         {
-            Ioc.Resolve<ICatalogRepository>().UpdateDataBase();
             // 数据脚本，数据初始等
-            // Resolve<IAdminService>().DefaultInit();
+            Resolve<IAdminService>().DefaultInit();
             return ApiResult.Success();
         }
     }

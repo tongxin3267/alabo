@@ -83,6 +83,6 @@
     <ProjectReference Include="..\..\06.tool\06-Alabo.Tool.QrCode\01-Alabo.Tool.QrCode.csproj" />
   </ItemGroup>
   <ProjectExtensions>
-    <VisualStudio><UserProperties appsettings_1json__JsonSchema="http://json.schemastore.org/asmdef" /></VisualStudio>
+    <VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio>
   </ProjectExtensions>
 </Project>
