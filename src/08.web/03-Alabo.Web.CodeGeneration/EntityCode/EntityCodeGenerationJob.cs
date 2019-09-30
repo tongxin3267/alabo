@@ -6,6 +6,7 @@ using Alabo.Web.CodeGeneration.EntityCode.Templates;
 using Quartz;
 using System;
 using System.Threading.Tasks;
+using Alabo.App.Asset.Withdraws.Domain.Entities;
 
 namespace Alabo.Web.CodeGeneration.EntityCode
 {
@@ -17,10 +18,8 @@ namespace Alabo.Web.CodeGeneration.EntityCode
         protected override async Task Execute(IJobExecutionContext context, IScope scope)
         {
             //手动修改,实体路径，可右键实体手动复制路径
-            var entityPath = @"C:\alaboshu.com\alabo\src\05.cloud\02-Alabo.Cloud.People\UserDigitals\Domain\Entities\";
-            CreateCode(typeof(UserDigital), entityPath);
-
-            CreateCode(typeof(UserDigitalIndex), entityPath);
+            var entityPath = @"C:\alaboshu.com\alabo\src\02.data\02-Alabo.Data.Asset\Withdraws\Domain\Entities\";
+            CreateCode(typeof(Withdraw), entityPath);
 
             Console.WriteLine(@"所有代码生成完成");
         }

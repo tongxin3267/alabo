@@ -17,11 +17,15 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Alabo.App.Asset.Recharges.Domain.Repositories;
+using Alabo.App.Asset.Recharges.Domain.Services;
 using Alabo.App.Asset.Refunds.Domain.Repositories;
+using Alabo.App.Asset.Refunds.Domain.Services;
 using Alabo.App.Asset.Settlements.Domain.Repositories;
+using Alabo.App.Asset.Settlements.Domain.Services;
 using Alabo.App.Asset.Transfers.Domain.Repositories;
 using Alabo.App.Asset.Transfers.Domain.Services;
 using Alabo.App.Asset.Withdraws.Domain.Repositories;
+using Alabo.App.Asset.Withdraws.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Framework.Core.Admins.Repositories;
 using Alabo.Helpers;
@@ -36,25 +40,6 @@ namespace Alabo.App.Asset.Bills.Controllers
         public ApiBillController()
         {
             BaseService = Resolve<IBillService>();
-        }
-
-        [HttpGet]
-        public ApiResult Init()
-        {
-            Ioc.Resolve<ICatalogRepository>().UpdateDataBase();
-
-            Ioc.Resolve<IWithdrawRepository>().FirstOrDefault();
-
-            Ioc.Resolve<ITransferRepository>().FirstOrDefault();
-
-            Ioc.Resolve<IRechargeRepository>().FirstOrDefault();
-
-            Ioc.Resolve<IRefundRepository>().FirstOrDefault();
-
-            Ioc.Resolve<ISettlementRepository>().FirstOrDefault();
-
-            var withdraw = Resolve<ITransferService>().FirstOrDefault();
-            return ApiResult.Success();
         }
 
         /// <summary>
