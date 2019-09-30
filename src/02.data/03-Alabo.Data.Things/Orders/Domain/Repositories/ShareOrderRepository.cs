@@ -38,7 +38,7 @@ namespace Alabo.Data.Things.Orders.Domain.Repositories
 
         public void SuccessOrder(long shareOrderId)
         {
-            var sql = "update Task_ShareOrder set Status=@Status ,UpdateTime=GETDATE() where Id=@Id";
+            var sql = "update Things_ShareOrder set Status=@Status ,UpdateTime=GETDATE() where Id=@Id";
             var parameters = new[]
             {
                 RepositoryContext.CreateParameter("@Id", shareOrderId),
@@ -53,7 +53,7 @@ namespace Alabo.Data.Things.Orders.Domain.Repositories
         /// <param name="shareOrderId">The share order identifier.</param>
         public ShareOrder GetSingleNative(long shareOrderId)
         {
-            var sql = $"select  * from Task_ShareOrder where id={shareOrderId}  "; //每次处理10条
+            var sql = $"select  * from Things_ShareOrder where id={shareOrderId}  "; //每次处理10条
             var shareOrder = new ShareOrder();
             using (var dr = RepositoryContext.ExecuteDataReader(sql))
             {
@@ -70,7 +70,7 @@ namespace Alabo.Data.Things.Orders.Domain.Repositories
         /// <param name="message">The message.</param>
         public void ErrorOrder(long shareOrderId, string message)
         {
-            var sql = "update Task_ShareOrder set Summary=@Summary ,Status=@Status ,UpdateTime=GETDATE() where Id=@Id";
+            var sql = "update Things_ShareOrder set Summary=@Summary ,Status=@Status ,UpdateTime=GETDATE() where Id=@Id";
             var parameters = new[]
             {
                 RepositoryContext.CreateParameter("@Id", shareOrderId),
@@ -86,7 +86,7 @@ namespace Alabo.Data.Things.Orders.Domain.Repositories
         public IList<long> GetUnHandledIdList()
         {
             var sql =
-                $"select  top 10 Id from Task_ShareOrder where Status={(byte)ShareOrderStatus.Pending} order by id   "; //每次处理10条
+                $"select  top 10 Id from Things_ShareOrder where Status={(byte)ShareOrderStatus.Pending} order by id   "; //每次处理10条
             IList<long> list = new List<long>();
             using (var dr = RepositoryContext.ExecuteDataReader(sql))
             {
@@ -103,7 +103,7 @@ namespace Alabo.Data.Things.Orders.Domain.Repositories
         /// <param name="count">The count.</param>
         public void UpdateExcuteCount(long shareOrderId, long count)
         {
-            var sql = $"update Task_ShareOrder set ExecuteCount=ExecuteCount+{count}  where Id={shareOrderId}";
+            var sql = $"update Things_ShareOrder set ExecuteCount=ExecuteCount+{count}  where Id={shareOrderId}";
             RepositoryContext.ExecuteNonQuery(sql);
         }
 
@@ -264,7 +264,7 @@ namespace Alabo.Data.Things.Orders.Domain.Repositories
             #endregion //获取得到升级点的用户，并加入升级队列
 
             // //更新ShareOrder状态
-            sql = "update Task_ShareOrder set Summary='sucess sql' ,Status=@Status ,UpdateTime=GETDATE() where Id=@Id";
+            sql = "update Things_ShareOrder set Summary='sucess sql' ,Status=@Status ,UpdateTime=GETDATE() where Id=@Id";
             parameters = new[]
             {
                 repositoryContext.CreateParameter("@Id", shareOrderId),
@@ -275,7 +275,7 @@ namespace Alabo.Data.Things.Orders.Domain.Repositories
 
             try
             {
-                sql = $"select Status from Task_ShareOrder where Id={shareOrderId}";
+                sql = $"select Status from Things_ShareOrder where Id={shareOrderId}";
                 //Thread.Sleep(1); // 停留1，防止重复触发
                 var shareOrderStatus = repositoryContext.ExecuteScalar(sql).ConvertToInt();
                 // 如果订单状态==1，在执行数据操作
@@ -283,7 +283,7 @@ namespace Alabo.Data.Things.Orders.Domain.Repositories
             }
             catch (Exception ex)
             {
-                sql = "update Task_ShareOrder set Summary=@Summary ,Status=@Status ,UpdateTime=GETDATE() where Id=@Id";
+                sql = "update Things_ShareOrder set Summary=@Summary ,Status=@Status ,UpdateTime=GETDATE() where Id=@Id";
                 parameters = new[]
                 {
                     repositoryContext.CreateParameter("@Id", shareOrderId),
@@ -407,7 +407,7 @@ namespace Alabo.Data.Things.Orders.Domain.Repositories
         {
             var shareOrders = new List<ShareOrder>();
             var strSql =
-                $"SELECT T.Id,T.EntityId,T.UserId,T.CreateTime FROM Task_ShareOrder T WHERE EntityId IN ({EntityIds.ToSqlString()}) ";
+                $"SELECT T.Id,T.EntityId,T.UserId,T.CreateTime FROM Things_ShareOrder T WHERE EntityId IN ({EntityIds.ToSqlString()}) ";
             using (var dr = RepositoryContext.ExecuteDataReader(strSql))
             {
                 while (dr.Read()) shareOrders.Add(ShareOrder(dr));

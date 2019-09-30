@@ -27,9 +27,44 @@ namespace Alabo.Framework.Core.Admins.Repositories
         {
             var sqlList = new List<string>
             {
-                //// 2019-03-14 (zhangzulian)
-                "alter table Shop_Product add  DeliveryTemplateId  nvarchar(255)"
-                //"update Shop_Product set DeliveryTemplateId='' where DeliveryTemplateId is null", // 新增钱包地址
+                // 重构 2019年9月30日
+                "drop table User_UserType",
+                "drop table User_TypeUser",
+                "EXEC sp_rename 'Common_AutoConfig', 'Core_AutoConfig'",
+                "EXEC sp_rename 'ZKShop_Category', 'Shop_Category'",
+                "EXEC sp_rename 'ZKShop_CategoryProperty', 'Shop_CategoryProperty'",
+                " EXEC sp_rename 'ZKShop_CategoryPropertyValue', 'Shop_CategoryPropertyValue'",
+                " EXEC sp_rename 'ZKShop_Activity', 'Shop_Activity'",
+                " EXEC sp_rename 'ZKShop_OrderAction', 'Shop_OrderAction'",
+                "  EXEC sp_rename 'ZKShop_OrderDelivery', 'Shop_OrderDelivery'",
+                " EXEC sp_rename 'ZKShop_OrderProduct', 'Shop_OrderProduct'",
+                " EXEC sp_rename 'ZKShop_ProductDetail', 'Shop_ProductDetail'",
+                "EXEC sp_rename 'ZKShop_ProductSku', 'Shop_ProductSku'",
+                "EXEC sp_rename 'ZKShop_Product', 'Shop_Product'",
+                "EXEC sp_rename 'ZKShop_Order', 'Shop_Order'",
+                "EXEC sp_rename 'ZKShop_ActivityRecord', 'Shop_ActivityRecord'",
+
+                "EXEC sp_rename 'Common_MessageQueue', 'Core_MessageQueue'",
+                "EXEC sp_rename 'Common_Record', 'Core_Record'",
+                "EXEC sp_rename 'Common_RelationIndex', 'Core_RelationIndex'",
+                "EXEC sp_rename 'Common_Relation', 'Core_Relation'",
+
+                "EXEC sp_rename 'Finance_Bill', 'Asset_Bill'",
+                "EXEC sp_rename 'Finance_Pay', 'Asset_Pay'",
+                "EXEC sp_rename 'Finance_Account', 'Asset_Account'",
+                "EXEC sp_rename 'Task_ShareOrder', 'Things_ShareOrder'",
+
+                "drop table ZKShop_Store",
+                "drop table Finance_Trade",
+                " drop table ZKShop_ProductLine",
+                "alter table User_UserDetail  drop column IsServiceCenter",
+                " alter table User_UserDetail  drop column ServiceCenterUserId",
+
+                " alter table User_Map  drop column ShopSaleInfo",
+                "alter table User_Map  drop column TeamSales",
+
+                "  ALTER TABLE User_UserDetail Add IdentityStatus  [int]",
+                " update User_UserDetail set IdentityStatus = 1 where IdentityStatus is null",
             };
             ExecuteSql(sqlList);
         }
@@ -56,7 +91,7 @@ namespace Alabo.Framework.Core.Admins.Repositories
             // 任务
             DropMongoDbTable("Task_UpgradeRecord");
             DropMongoDbTable("Task_Schedule");
-            DropMongoDbTable("Task_ShareOrderReport");
+            DropMongoDbTable("Things_ShareOrderReport");
 
             // shop项目
             DropMongoDbTable("Order_Cart");
@@ -94,7 +129,7 @@ namespace Alabo.Framework.Core.Admins.Repositories
                 "truncate table Kpi_Kpi",
 
                 // 分润相关表
-                "truncate table Task_ShareOrder",
+                "truncate table Things_ShareOrder",
                 "truncate table Share_Reward",
                 "truncate table Task_TaskQueue",
 
@@ -148,86 +183,6 @@ namespace Alabo.Framework.Core.Admins.Repositories
         }
 
         #endregion 获取所有的Sql表实体
-
-        #region 过期的Sql脚本
-
-        private void OldSql()
-        {
-            // 过期的Sql脚本
-            var sqlList = new List<string>
-            {
-                //// 总分润金额 2018年9月21日
-                //"ALTER TABLE Task_ShareOrder ADD  [TotalAmount] [decimal](18, 2)",
-                //"update Task_ShareOrder set TotalAmount=0 where TotalAmount is null", // 新增分润总金额
-
-                //新增钱包地址 2018年8月21日
-                "ALTER TABLE Asset_Account ADD Token  nvarchar(255)  ",
-                "update Asset_Account set Token='' where Token is null", // 新增钱包地址
-
-                // 2018年6月21日 新增免邮费
-                " ALTER TABLE Shop_Product Add IsFreeShipping  [bit] ",
-                "update Shop_Product set IsFreeShipping = 0 where IsFreeShipping is null",
-
-                // 修改头像
-                "ALTER TABLE User_UserDetail",
-                "ALTER COLUMN Avator nvarchar(255)",
-                // 2018年6月7日 新增发货用户ID
-                " ALTER TABLE Shop_Order Add DeliverUserId  [bigint] ",
-                "update Shop_Order set DeliverUserId = 0 where DeliverUserId is null",
-
-                "alter table Shop_ActivityRecord  drop column [Type]",
-                "alter table Shop_ActivityRecord  drop column [ProductId]",
-                "ALTER TABLE Shop_ActivityRecord Add ParentId bigint",
-                "update Shop_ActivityRecord set ParentId = 0 where ParentId is null",
-
-                // 财务交易表
-                "CREATE TABLE [dbo].[Asset_Trade]([Id] [bigint] IDENTITY(1,1) NOT NULL,[UserId] [bigint] NOT NULL,[MoneyTypeId] [uniqueidentifier] NOT NULL,[Type] [int] NOT NULL,[Amount] [decimal](18, 2) NOT NULL,[Status] [int] NOT NULL,[CreateTime] [datetime2](7) NOT NULL,[PayTime] [datetime2](7) NOT NULL,[Extension] [text] NULL)",
-                " ALTER TABLE Asset_Trade ADD  CONSTRAINT [PK_Asset_Trade] PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF,KPI_NORECOMPUTE = OFF,SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF,ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]",
-                //删除充值，提现表
-                "drop table  Asset_Recharge",
-                "drop table  Asset_WithDraw",
-                //删除权限表
-                "drop table  User_Role",
-
-                //2018年5月13日 活动
-                " ALTER TABLE Shop_ActivityRecord Add Status int",
-                "update Shop_ActivityRecord set Status = 0 where Status is null",
-                " ALTER TABLE Shop_ActivityRecord Add ProductId bigint",
-                "update Shop_ActivityRecord set ProductId = 0 where ProductId is null",
-                " ALTER TABLE Shop_ActivityRecord Add OrderId bigint",
-                "update Shop_ActivityRecord set OrderId = 0 where OrderId is null",
-                //2018年5月4日 活动
-                "alter table Shop_ActivityRecord  drop column [ActivityRecordExtension]",
-                "CREATE TABLE [dbo].[Shop_Activity]([Id] [bigint] IDENTITY(1,1) NOT NULL,[Name] [nvarchar](255) NOT NULL,[StoreId] [bigint] NOT NULL,[Key] [nvarchar](255) NOT NULL,[Value] [nvarchar](max) NULL,[IsEnable] [bit] NOT NULL,[Status] [int] NOT NULL,[LimitGradeId] [uniqueidentifier] NOT NULL,[MaxStock] [bigint] NOT NULL,[UsedStock] [bigint] NOT NULL,[Extension] [nvarchar](max) NULL,[StartTime] [datetime2](7) NOT NULL,[EndTime] [datetime2](7) NOT NULL)",
-                " ALTER TABLE[dbo].[Shop_Activity] ADD CONSTRAINT[PK_Shop_Activity] PRIMARY KEY CLUSTERED([Id] ASC)WITH(PAD_INDEX = OFF,KPI_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON[PRIMARY]",
-                //2018年5月4日 活动记录
-                "CREATE TABLE [dbo].[Shop_ActivityRecord]([Id] [bigint] IDENTITY(1,1) NOT NULL,[ActivityId] [bigint] NOT NULL,[StoreId] [bigint] NOT NULL,[Type] [int] NOT NULL,[UserId] [bigint] NOT NULL,[OrderId] [bigint] NOT NULL,[Extension] [nvarchar](max) NULL,[CreateTime] [datetime2](7) NOT NULL)",
-                "ALTER TABLE [dbo].[Shop_ActivityRecord] ADD  CONSTRAINT [PK_Shop_ActivityRecord] PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF,KPI_NORECOMPUTE = OFF,SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF,ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]",
-
-                // 2018年5月4日 商品活动
-                "ALTER TABLE Shop_Product ADD Activity  text",
-                "update Shop_Product set Activity='' where Activity is null",
-                // 2018年5月2日
-                " ALTER TABLE Shop_Order Add PayId  [bigint] ",
-                "update Shop_Order set PayId = 0 where PayId is null",
-
-                // 发货记录表 个和主键2018年5月2日
-
-                "CREATE TABLE [dbo].[Shop_OrderDelivery]([Id] [bigint] IDENTITY(1,1) NOT NULL,[OrderId] [bigint] NOT NULL,[StoreId] [bigint] NOT NULL,[TotalCount] [bigint] NOT NULL,[UserId] [bigint] NOT NULL,[ExpressGuid] [uniqueidentifier] NOT NULL,[ExpressNumber] [nvarchar](100) NULL,[Extension] [nvarchar](max) NULL,[CreateTime] [datetime2](7) NOT NULL)",
-                "ALTER TABLE [dbo].[Shop_OrderDelivery] ADD  CONSTRAINT [PK_Shop_OrderDelivery] PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, KPI_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]",
-
-                //2018年4月23日 修改ShareOrder
-                " ALTER TABLE Task_ShareOrder Add SystemStatus int",
-                "update Task_ShareOrder set SystemStatus = 0 where SystemStatus is null",
-
-                // 2018年4月22日 修改UserMap字段
-                "exec sp_rename 'User_UserMap.Extension','GradeInfo','column'", // 修改列名
-                "ALTER TABLE User_UserMap ADD ShopSaleInfo  text",
-                "update User_UserMap set ShopSaleInfo='' where ShopSaleInfo is null"
-            };
-        }
-
-        #endregion 过期的Sql脚本
 
         #region others
 

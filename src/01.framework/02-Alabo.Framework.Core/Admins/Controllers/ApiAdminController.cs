@@ -1,6 +1,8 @@
-﻿using Alabo.Framework.Core.Admins.Services;
+﻿using Alabo.Framework.Core.Admins.Repositories;
+using Alabo.Framework.Core.Admins.Services;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
@@ -26,8 +28,9 @@ namespace Alabo.Framework.Core.Admins.Controllers
         [HttpGet]
         public ApiResult Init()
         {
+            Ioc.Resolve<ICatalogRepository>().UpdateDataBase();
             // 数据脚本，数据初始等
-            Resolve<IAdminService>().DefaultInit();
+            // Resolve<IAdminService>().DefaultInit();
             return ApiResult.Success();
         }
     }

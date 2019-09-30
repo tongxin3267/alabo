@@ -23,7 +23,7 @@ namespace Alabo.Web
         public static void Main(string[] args)
         {
             var host = BuildWebHost(args);
-            //   RunJobs(host).GetAwaiter().GetResult();
+            // RunJobs(host).GetAwaiter().GetResult();
             host.Run();
         }
 

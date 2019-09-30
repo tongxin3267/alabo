@@ -364,7 +364,7 @@ namespace Alabo.Data.People.Users.Domain.Repositories
         private void AddShareOrder(DbTransaction transaction, long userId)
         {
             var sql =
-                @"INSERT INTO [dbo].[Task_ShareOrder] ([UserId] ,[Amount]   ,[EntityId] ,[Parameters] ,[Status],[SystemStatus]  ,[TriggerType] ,[Summary],[CreateTime] ,[UpdateTime],[Extension],[ExecuteCount])
+                @"INSERT INTO [dbo].[Things_ShareOrder] ([UserId] ,[Amount]   ,[EntityId] ,[Parameters] ,[Status],[SystemStatus]  ,[TriggerType] ,[Summary],[CreateTime] ,[UpdateTime],[Extension],[ExecuteCount])
                             VALUES
                          (@UserId ,@Amount   ,@EntityId ,@Parameters ,@Status,@SystemStatus  ,@TriggerType ,@Summary,@CreateTime ,@UpdateTime,@Extension,@ExecuteCount)
             ";

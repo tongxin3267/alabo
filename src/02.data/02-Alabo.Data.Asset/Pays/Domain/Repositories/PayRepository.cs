@@ -134,8 +134,8 @@ namespace Alabo.App.Asset.Pays.Domain.Repositories
 
                         // 分润订单, UserId 有等于 OrderId的可能, 用 EntityId = {trade.Id}) AND TriggerType != 1 联合进行限制
                         sql =
-                            $" IF NOT EXISTS(SELECT * FROM Task_ShareOrder WHERE EntityId = {(long)item} AND TriggerType != 1) " +
-                            "INSERT INTO [dbo].[Task_ShareOrder]([UserId] ,[Amount] ,[EntityId],[Parameters] ,[Status],[SystemStatus] , [TriggerType] ,[Summary] ,[CreateTime] ,[UpdateTime],[Extension],[ExecuteCount]) " +
+                            $" IF NOT EXISTS(SELECT * FROM Things_ShareOrder WHERE EntityId = {(long)item} AND TriggerType != 1) " +
+                            "INSERT INTO [dbo].[Things_ShareOrder]([UserId] ,[Amount] ,[EntityId],[Parameters] ,[Status],[SystemStatus] , [TriggerType] ,[Summary] ,[CreateTime] ,[UpdateTime],[Extension],[ExecuteCount]) " +
                             $"VALUES ({orderUserId} ,{pay.Amount},{(long)item},'{string.Empty}' ,{(int)ShareOrderStatus.Pending} ,{(int)ShareOrderSystemStatus.Pending} ,{(int)triggerType} ,'{string.Empty}' ,'{DateTime.Now}' ,'{DateTime.Now}','',0)";
                         sqlList.Add(sql);
 

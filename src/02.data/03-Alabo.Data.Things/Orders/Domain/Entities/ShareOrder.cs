@@ -139,7 +139,7 @@ namespace Alabo.Data.Things.Orders.Domain.Entities
     {
         protected override void MapTable(EntityTypeBuilder<ShareOrder> builder)
         {
-            builder.ToTable("Task_ShareOrder");
+            builder.ToTable("Things_ShareOrder");
         }
 
         protected override void MapProperties(EntityTypeBuilder<ShareOrder> builder)

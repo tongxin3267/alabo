@@ -55,8 +55,8 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories
 
                 //Share_Reward
                 "CREATE TABLE [dbo].[Share_Reward]([Id] [bigint] IDENTITY(1,1) NOT NULL,[UserId] [bigint] NOT NULL,[OrderUserId] [bigint] NOT NULL,[OrderId] [bigint] NOT NULL,[MoneyTypeId] [uniqueidentifier] NOT NULL,[Amount] [decimal](18, 2) NOT NULL,[AfterAmount] [decimal](18, 2) NOT NULL,[ModuleId] [uniqueidentifier] NOT NULL,[ModuleConfigId] [bigint] NOT NULL,[Intro] [nvarchar](255) NOT NULL,[CreateTime] [datetime2](7) NOT NULL,[Status] [int] NOT NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY]",
-                //Task_ShareOrder
-                "CREATE TABLE [dbo].[Task_ShareOrder]([Id] [bigint] IDENTITY(1,1) NOT NULL,[UserId] [bigint] NOT NULL,[Amount] [decimal](18, 2) NOT NULL,[EntityId] [bigint] NULL,[Parameters] [nvarchar](2000) NULL,[Status] [int] NOT NULL,[TriggerType] [int] NOT NULL,[Summary] [nvarchar](max) NULL,[CreateTime] [datetime2](7) NOT NULL,[UpdateTime] [datetime2](7) NOT NULL,[Extension] [text] NULL,[ExecuteCount] [bigint] NULL,[SystemStatus] [int] NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
+                //Things_ShareOrder
+                "CREATE TABLE [dbo].[Things_ShareOrder]([Id] [bigint] IDENTITY(1,1) NOT NULL,[UserId] [bigint] NOT NULL,[Amount] [decimal](18, 2) NOT NULL,[EntityId] [bigint] NULL,[Parameters] [nvarchar](2000) NULL,[Status] [int] NOT NULL,[TriggerType] [int] NOT NULL,[Summary] [nvarchar](max) NULL,[CreateTime] [datetime2](7) NOT NULL,[UpdateTime] [datetime2](7) NOT NULL,[Extension] [text] NULL,[ExecuteCount] [bigint] NULL,[SystemStatus] [int] NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
                 //Task_TaskQueue
                 "CREATE TABLE [dbo].[Task_TaskQueue]([Id] [bigint] IDENTITY(1,1) NOT NULL,[CreateTime] [datetime2](7) NOT NULL,[ExecutionTime] [datetime2](7) NOT NULL,[ExecutionTimes] [int] NOT NULL,[HandleTime] [datetime2](7) NOT NULL,[MaxExecutionTimes] [int] NOT NULL,[ModuleId] [uniqueidentifier] NOT NULL,[Parameter] [nvarchar](max) NULL,[Type] [int] NOT NULL,[UserId] [bigint] NOT NULL,[Status] [int] NOT NULL,[Message] [text] NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
                 //User_TypeUser
@@ -107,7 +107,7 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories
                 "ALTER TABLE [dbo].[Basic_RelationIndex] ADD  DEFAULT (getdate()) FOR [CreateTime]",
                 "ALTER TABLE [dbo].[Asset_Account] ADD  DEFAULT (getdate()) FOR [CreateTime]",
                 "ALTER TABLE [dbo].[Asset_Bill] ADD  DEFAULT ((0)) FOR [EntityId]",
-                "ALTER TABLE [dbo].[Task_ShareOrder] ADD  DEFAULT ((0)) FOR [EntityId]",
+                "ALTER TABLE [dbo].[Things_ShareOrder] ADD  DEFAULT ((0)) FOR [EntityId]",
                 "ALTER TABLE [dbo].[User_TypeUser] ADD  DEFAULT (getdate()) FOR [CreateTime]",
                 "ALTER TABLE [dbo].[User_User] ADD  DEFAULT ((0)) FOR [ParentId]",
                 "ALTER TABLE [dbo].[User_User] ADD  DEFAULT (getdate()) FOR [CreateTime]",
@@ -215,8 +215,8 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories
 
                 //Share_Reward
                 "CREATE TABLE [dbo].[Share_Reward]([Id] [bigint] IDENTITY(1,1) NOT NULL,[UserId] [bigint] NOT NULL,[OrderUserId] [bigint] NOT NULL,[OrderId] [bigint] NOT NULL,[MoneyTypeId] [uniqueidentifier] NOT NULL,[Amount] [decimal](18, 2) NOT NULL,[AfterAmount] [decimal](18, 2) NOT NULL,[ModuleId] [uniqueidentifier] NOT NULL,[ModuleConfigId] [bigint] NOT NULL,[Intro] [nvarchar](255) NOT NULL,[CreateTime] [datetime2](7) NOT NULL,[Status] [int] NOT NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY]",
-                //Task_ShareOrder
-                "CREATE TABLE [dbo].[Task_ShareOrder]([Id] [bigint] IDENTITY(1,1) NOT NULL,[UserId] [bigint] NOT NULL,[Amount] [decimal](18, 2) NOT NULL,[EntityId] [bigint] NULL,[Parameters] [nvarchar](2000) NULL,[Status] [int] NOT NULL,[TriggerType] [int] NOT NULL,[Summary] [nvarchar](max) NULL,[CreateTime] [datetime2](7) NOT NULL,[UpdateTime] [datetime2](7) NOT NULL,[Extension] [text] NULL,[ExecuteCount] [bigint] NULL,[SystemStatus] [int] NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
+                //Things_ShareOrder
+                "CREATE TABLE [dbo].[Things_ShareOrder]([Id] [bigint] IDENTITY(1,1) NOT NULL,[UserId] [bigint] NOT NULL,[Amount] [decimal](18, 2) NOT NULL,[EntityId] [bigint] NULL,[Parameters] [nvarchar](2000) NULL,[Status] [int] NOT NULL,[TriggerType] [int] NOT NULL,[Summary] [nvarchar](max) NULL,[CreateTime] [datetime2](7) NOT NULL,[UpdateTime] [datetime2](7) NOT NULL,[Extension] [text] NULL,[ExecuteCount] [bigint] NULL,[SystemStatus] [int] NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
                 //Task_TaskQueue
                 "CREATE TABLE [dbo].[Task_TaskQueue]([Id] [bigint] IDENTITY(1,1) NOT NULL,[CreateTime] [datetime2](7) NOT NULL,[ExecutionTime] [datetime2](7) NOT NULL,[ExecutionTimes] [int] NOT NULL,[HandleTime] [datetime2](7) NOT NULL,[MaxExecutionTimes] [int] NOT NULL,[ModuleId] [uniqueidentifier] NOT NULL,[Parameter] [nvarchar](max) NULL,[Type] [int] NOT NULL,[UserId] [bigint] NOT NULL,[Status] [int] NOT NULL,[Message] [text] NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
                 //User_TypeUser
@@ -266,7 +266,7 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories
                 "ALTER TABLE [dbo].[Basic_RelationIndex] ADD  DEFAULT (getdate()) FOR [CreateTime]",
                 "ALTER TABLE [dbo].[Asset_Account] ADD  DEFAULT (getdate()) FOR [CreateTime]",
                 "ALTER TABLE [dbo].[Asset_Bill] ADD  DEFAULT ((0)) FOR [EntityId]",
-                "ALTER TABLE [dbo].[Task_ShareOrder] ADD  DEFAULT ((0)) FOR [EntityId]",
+                "ALTER TABLE [dbo].[Things_ShareOrder] ADD  DEFAULT ((0)) FOR [EntityId]",
                 "ALTER TABLE [dbo].[User_TypeUser] ADD  DEFAULT (getdate()) FOR [CreateTime]",
                 "ALTER TABLE [dbo].[User_User] ADD  DEFAULT ((0)) FOR [ParentId]",
                 "ALTER TABLE [dbo].[User_User] ADD  DEFAULT (getdate()) FOR [CreateTime]",

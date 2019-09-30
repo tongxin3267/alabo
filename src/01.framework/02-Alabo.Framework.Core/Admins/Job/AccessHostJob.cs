@@ -7,6 +7,8 @@ using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Alabo.Framework.Core.Admins.Repositories;
+using Alabo.Helpers;
 
 namespace Alabo.Framework.Core.Admins.Job
 {

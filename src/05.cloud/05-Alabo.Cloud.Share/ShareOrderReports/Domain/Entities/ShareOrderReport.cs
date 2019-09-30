@@ -17,7 +17,7 @@ namespace _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Entities
     [ClassProperty(Name = "分润订单统计", Icon = "fa fa-file", Description = "分润订单统计",
         SideBarType = SideBarType.BonusPoolBar)]
     [BsonIgnoreExtraElements]
-    [Table("Task_ShareOrderReport")]
+    [Table("Things_ShareOrderReport")]
     public class ShareOrderReport : AggregateMongodbUserRoot<ShareOrderReport>
     {
         /// <summary>
