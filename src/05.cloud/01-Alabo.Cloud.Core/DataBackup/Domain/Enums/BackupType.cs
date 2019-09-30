@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace _01_Alabo.Cloud.Core.DataBackup.Domain.Enums
 {
@@ -12,13 +12,15 @@ namespace _01_Alabo.Cloud.Core.DataBackup.Domain.Enums
         /// <summary>
         ///     增量备份
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Metal)] [Display(Name = "增量备份")]
+        [LabelCssClass(BadgeColorCalss.Metal)]
+        [Display(Name = "增量备份")]
         Increment = 1,
 
         /// <summary>
         ///     完全备份
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Metal)] [Display(Name = "完全备份")]
+        [LabelCssClass(BadgeColorCalss.Metal)]
+        [Display(Name = "完全备份")]
         Completely = 2
     }
 }

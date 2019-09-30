@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Alabo.App.Share.HuDong.Domain.Entities;
 using Alabo.App.Share.HuDong.Domain.Services;
 using Alabo.App.Share.HuDong.Dtos;
@@ -9,6 +7,8 @@ using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Share.HuDong.Controllers
@@ -128,7 +128,7 @@ namespace Alabo.App.Share.HuDong.Controllers
             var name = type?.GetInstanceByName()?.GetType()?.FullName?.GetClassDescription()?.ClassPropertyAttribute
                 ?.Name;
             var list = new List<HudongAward>();
-            for (var i = 0; i < 8; i++) list.Add(new HudongAward {Intro = $"{name}»ñ½±{i + 1}"});
+            for (var i = 0; i < 8; i++) list.Add(new HudongAward { Intro = $"{name}»ñ½±{i + 1}" });
 
             return list;
         }

@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Alabo.App.Asset.Bills.Domain.Services;
 using Alabo.App.Share.HuDong.Domain.Entities;
 using Alabo.App.Share.HuDong.Domain.Enums;
@@ -13,6 +10,9 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.App.Share.HuDong.Domain.Services
 {
@@ -200,7 +200,7 @@ namespace Alabo.App.Share.HuDong.Domain.Services
             var rateDic = new Dictionary<Guid, int>();
             list.ForEach(a =>
             {
-                if (a.Count > 0) rateDic.Add(a.AwardId, (int) a.Rate * 100);
+                if (a.Count > 0) rateDic.Add(a.AwardId, (int)a.Rate * 100);
             });
 
             var resultsDic = Lottery(rateDic); //获取抽奖结果

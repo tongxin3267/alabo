@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Share.Rewards.Domain.Enums
 {
@@ -12,19 +12,22 @@ namespace Alabo.App.Share.Rewards.Domain.Enums
         /// <summary>
         ///     全商品模式
         /// </summary>
-        [Display(Name = "所有商品")] [LabelCssClass(BadgeColorCalss.Warning)]
+        [Display(Name = "所有商品")]
+        [LabelCssClass(BadgeColorCalss.Warning)]
         All = 0,
 
         /// <summary>
         ///     产品线模式
         /// </summary>
-        [Display(Name = "按所属商品线选择")] [LabelCssClass(BadgeColorCalss.Warning)]
+        [Display(Name = "按所属商品线选择")]
+        [LabelCssClass(BadgeColorCalss.Warning)]
         ProductLine = 1,
 
         /// <summary>
         ///     商城模式
         /// </summary>
-        [Display(Name = "按所属商城选择")] [LabelCssClass(BadgeColorCalss.Warning)]
+        [Display(Name = "按所属商城选择")]
+        [LabelCssClass(BadgeColorCalss.Warning)]
         ShoppingMall = 2
 
         ///// <summary>

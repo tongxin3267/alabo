@@ -1,6 +1,6 @@
-﻿using System;
-using Alabo.App.Share.OpenTasks.Base;
+﻿using Alabo.App.Share.OpenTasks.Base;
 using Alabo.Framework.Core.Enums.Enum;
+using System;
 
 namespace Alabo.App.Share.Rewards.ViewModels
 {

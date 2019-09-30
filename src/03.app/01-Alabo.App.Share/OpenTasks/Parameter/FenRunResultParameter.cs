@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Share.OpenTasks.Base;
+﻿using Alabo.App.Share.OpenTasks.Base;
 using Alabo.App.Share.Rewards.Domain.Enums;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
@@ -10,6 +7,9 @@ using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Helpers;
 using Alabo.Users.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.App.Share.OpenTasks.Parameter
 {

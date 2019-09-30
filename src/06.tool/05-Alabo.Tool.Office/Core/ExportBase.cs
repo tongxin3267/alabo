@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Alabo.Extensions;
+using Alabo.Linq;
+using Alabo.Reflections;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,9 +9,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Alabo.Extensions;
-using Alabo.Linq;
-using Alabo.Reflections;
 
 namespace Alabo.Tool.Office.Core
 {

@@ -27,32 +27,41 @@ using Alabo.Extensions;
 using ZKCloud.Open.ApiBase.Models;
 using Alabo.RestfulApi;
 
-namespace Alabo.App.Core.ApiStore.Controllers {
+namespace Alabo.App.Core.ApiStore.Controllers
+{
     /// <summary>
     ///     ApiStore Api接口
     /// </summary>
     [ApiExceptionFilter]
     [Route("Api/SendSms/[action]")]
-    public class ApiSendSmsController : ApiBaseController {
+    public class ApiSendSmsController : ApiBaseController
+    {
         /// <summary>
         /// 发送短息
         /// </summary>
         /// <param name="input">内容</param>
         /// <returns></returns>
         [HttpPost]
-        public ApiResult SendSms([FromBody]SmsInput input) {
-            try {
-                if (string.IsNullOrEmpty(input.Message)) {
+        public ApiResult SendSms([FromBody]SmsInput input)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(input.Message))
+                {
                     return ApiResult.Failure("请输入message内容");
                 }
-                if (input.Type == Sms.Enums.SmsType.Phone && string.IsNullOrEmpty(input.Phone)) {
+                if (input.Type == Sms.Enums.SmsType.Phone && string.IsNullOrEmpty(input.Phone))
+                {
                     return ApiResult.Failure("type为指定手机号码时,phone 不能为空");
                 }
                 IList<SmsSend> phones = new List<SmsSend>();
-                if (input.Type == Sms.Enums.SmsType.All) {
+                if (input.Type == Sms.Enums.SmsType.All)
+                {
                     var users = Resolve<IUserService>().GetList();
-                    if (Resolve<ApiStore.Sms.Services.ISmsSendService>().GetAll(SendState.Root).Count() <= 0) {
-                        var sendList = users.Select(s => new SmsSend {
+                    if (Resolve<ApiStore.Sms.Services.ISmsSendService>().GetAll(SendState.Root).Count() <= 0)
+                    {
+                        var sendList = users.Select(s => new SmsSend
+                        {
                             State = SendState.Root,
                             Phone = s.Mobile,
                             UserId = s.Id,
@@ -61,7 +70,9 @@ namespace Alabo.App.Core.ApiStore.Controllers {
                         }).ToList();
                         Resolve<ApiStore.Sms.Services.ISmsSendService>().Add(sendList);
                         phones = Resolve<ApiStore.Sms.Services.ISmsSendService>().GetAll(input.State);
-                    } else {
+                    }
+                    else
+                    {
                         phones = Resolve<ApiStore.Sms.Services.ISmsSendService>().GetAll(input.State);
                     }
 
@@ -76,21 +87,29 @@ namespace Alabo.App.Core.ApiStore.Controllers {
                     //    State = SendState.Root,
                     //    Phone = s,
                     //}).ToList();
-                } else {
-                    phones = input.Phone.Split(",").Select(s => new SmsSend {
+                }
+                else
+                {
+                    phones = input.Phone.Split(",").Select(s => new SmsSend
+                    {
                         State = SendState.Root,
                         Phone = s,
                     }).ToList();
                 }
-                for (int i = 1249; i < phones.Count; i++) {
-                    if (!string.IsNullOrEmpty(input.Message)) {
+                for (int i = 1249; i < phones.Count; i++)
+                {
+                    if (!string.IsNullOrEmpty(input.Message))
+                    {
                         //Task.Factory.StartNew(() =>
                         //{
                         var result = Resolve<IOpenService>().SendRaw(phones[i].Phone, input.Message);
-                        if (result.Status == ResultStatus.Success) {
+                        if (result.Status == ResultStatus.Success)
+                        {
                             phones[i].State = SendState.Success;
                             Resolve<ApiStore.Sms.Services.ISmsSendService>().Update(phones[i]);
-                        } else {
+                        }
+                        else
+                        {
                             phones[i].State = SendState.Fail;
                             Resolve<ApiStore.Sms.Services.ISmsSendService>().Update(phones[i]);
                         }
@@ -103,7 +122,9 @@ namespace Alabo.App.Core.ApiStore.Controllers {
                     // i++;
                 }
                 return ApiResult.Success("执行完毕");
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
                 return ApiResult.Failure(ex.Message);
             }
         }

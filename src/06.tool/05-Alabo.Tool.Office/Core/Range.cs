@@ -110,7 +110,7 @@ namespace Alabo.Tool.Office.Core
         private void AddPlaceholderCell(Cell cell, int rowIndex)
         {
             var row = CreateRow(rowIndex);
-            row.Add(new NullCell {ColumnIndex = cell.ColumnIndex, ColumnSpan = cell.ColumnSpan});
+            row.Add(new NullCell { ColumnIndex = cell.ColumnIndex, ColumnSpan = cell.ColumnSpan });
         }
 
         /// <summary>

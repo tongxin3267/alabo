@@ -1,22 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query.Dto;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
-using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebApis.Service;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Mapping;
 using Alabo.UI;
 using Alabo.UI.Design.AutoForms;
 using Alabo.UI.Design.AutoTables;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Alabo.Cloud.People.UserCard.UI
 {
@@ -87,7 +85,6 @@ namespace Alabo.Cloud.People.UserCard.UI
         //[HelpBlock("一种类型的有且只能有一个默认等级，在设置的是请注意，否则是导致数据出错")]
         public bool IsDefault { get; set; } = false;
 
-
         public AutoForm GetView(object id, AutoBaseModel autoModel)
         {
             var list = Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
@@ -100,10 +97,9 @@ namespace Alabo.Cloud.People.UserCard.UI
             return ToAutoForm(autoForm);
         }
 
-
         public ServiceResult Save(object model, AutoBaseModel autoModel)
         {
-            var view = (UserCardSetting) model;
+            var view = (UserCardSetting)model;
             var list = Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
             var userGrade = list.FirstOrDefault(u => u.Id == view.Id);
             if (userGrade == null)
@@ -170,7 +166,6 @@ namespace Alabo.Cloud.People.UserCard.UI
             };
             return list;
         }
-
 
         public class QueryWhere : ApiInputDto
         {

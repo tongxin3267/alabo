@@ -1,8 +1,8 @@
-using System.Collections.Generic;
 using Alabo.Cloud.Shop.SecondBuy.Domain.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using MongoDB.Bson;
+using System.Collections.Generic;
 
 namespace Alabo.Cloud.Shop.SecondBuy.Domain.Services
 {
@@ -21,7 +21,6 @@ namespace Alabo.Cloud.Shop.SecondBuy.Domain.Services
         /// <param name="productId"></param>
         /// <returns></returns>
         List<string> BuyList(long productId);
-
 
         /// <summary>
         ///     ×î½ü¹ºÂò

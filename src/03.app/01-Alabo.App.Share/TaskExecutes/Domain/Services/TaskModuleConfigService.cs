@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
@@ -11,6 +6,11 @@ using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Reflections;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 using ZKCloud.Open.ApiBase.Configuration;
 using ZKCloud.Open.ApiBase.Services;
 using ZKCloud.Open.Share.Models;
@@ -41,12 +41,12 @@ namespace Alabo.App.Share.TaskExecutes.Domain.Services
                 if (shareModuleList != null)
                     ObjectCache.Set(_shareModuleCacheKey, shareModuleList);
 
-                //var shareModuleReports = new ShareModuleReports {
-                //    ConfigCount = shareModuleList.Count,
-                //    EnableCount = shareModuleList.Count(r => r.IsEnable),
-                //    ShareModuleList = shareModuleList.ToJson()
-                //};
-                //Resolve<IReportService>().AddOrUpdate(shareModuleReports);
+            //var shareModuleReports = new ShareModuleReports {
+            //    ConfigCount = shareModuleList.Count,
+            //    EnableCount = shareModuleList.Count(r => r.IsEnable),
+            //    ShareModuleList = shareModuleList.ToJson()
+            //};
+            //Resolve<IReportService>().AddOrUpdate(shareModuleReports);
 
             return shareModuleList;
         }

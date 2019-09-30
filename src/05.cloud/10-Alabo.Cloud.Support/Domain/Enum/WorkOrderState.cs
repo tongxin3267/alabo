@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Cloud.Support.Domain.Enum
 {
@@ -12,13 +12,15 @@ namespace Alabo.Cloud.Support.Domain.Enum
         /// <summary>
         ///     受理中
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Danger)] [Display(Name = "等待回复")]
+        [LabelCssClass(BadgeColorCalss.Danger)]
+        [Display(Name = "等待回复")]
         Accept = 0,
 
         /// <summary>
         ///     已解决
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = "已解决")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "已解决")]
         Resolved = 1
     }
 }

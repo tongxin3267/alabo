@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Alabo.Cloud.Shop.SecondBuy.Domain.Entities;
 using Alabo.Cloud.Shop.SecondBuy.Domain.Services;
 using Alabo.Extensions;
@@ -6,6 +5,7 @@ using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using System.Collections.Generic;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Cloud.Shop.SecondBuy.Controllers

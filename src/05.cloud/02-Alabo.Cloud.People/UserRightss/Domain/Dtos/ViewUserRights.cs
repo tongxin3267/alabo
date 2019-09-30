@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Alabo.Cloud.People.UserRightss.Domain.Services;
+﻿using Alabo.Cloud.People.UserRightss.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Mapping;
 using Alabo.UI;
 using Alabo.UI.Design.AutoTables;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Alabo.Cloud.People.UserRightss.Domain.Dtos
 {
@@ -38,7 +36,6 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Dtos
         [Display(Name = "用户名")]
         public string UserName { get; set; }
 
-
         /// <summary>
         ///     使用数量
         /// </summary>
@@ -60,7 +57,6 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Dtos
         [Display(Name = "开通时间")]
         public DateTime CreateTime { get; set; }
 
-
         public List<TableAction> Actions()
         {
             return new List<TableAction>();
@@ -73,7 +69,6 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Dtos
             //var model = Resolve<IUserService>().GetViewUserPageList(userInput);
 
             var userRightses = Resolve<IUserRightsService>().GetList(u => u.UserId == autoModel.BasicUser.Id);
-
 
             var result = new List<ViewUserRights>();
             foreach (var item in userRightses)

@@ -1,6 +1,6 @@
-﻿using System;
-using Alabo.Data.Things.Orders.Domain.Entities;
+﻿using Alabo.Data.Things.Orders.Domain.Entities;
 using Alabo.Framework.Tasks.Queues.Domain.Entities;
+using System;
 
 namespace Alabo.App.Share.TaskExecutes
 {

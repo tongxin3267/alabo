@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using Alabo.Cloud.People.UserQrCode.Domain.Services;
+﻿using Alabo.Cloud.People.UserQrCode.Domain.Services;
 using Alabo.Data.People.Users.Domain.Repositories;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Domains.Repositories.EFCore;
@@ -12,6 +10,8 @@ using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Helpers;
 using Alabo.UI.Design.Widgets;
 using Alabo.Users.Entities;
+using System;
+using System.Linq;
 
 namespace Alabo.Cloud.People.UserRightss.UI.Widgets
 {

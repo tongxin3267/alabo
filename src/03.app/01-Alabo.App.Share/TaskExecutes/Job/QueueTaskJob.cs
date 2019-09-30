@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Alabo.Dependency;
+﻿using Alabo.Dependency;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Core.Admins.Configs;
 using Alabo.Framework.Tasks.Queues.Domain.Servcies;
@@ -8,6 +6,8 @@ using Alabo.Runtime;
 using Alabo.Schedules.Job;
 using Microsoft.AspNetCore.Http;
 using Quartz;
+using System;
+using System.Threading.Tasks;
 
 namespace Alabo.App.Share.TaskExecutes.Job
 {
@@ -46,7 +46,7 @@ namespace Alabo.App.Share.TaskExecutes.Job
             foreach (var item in updateGradeQueue)
             {
                 var moduleTypeArray = taskManager.GetModuleUpgradeArray();
-                foreach (var type in moduleTypeArray) taskActuator.ExecuteQueue(type, item, new {QueueId = item.Id});
+                foreach (var type in moduleTypeArray) taskActuator.ExecuteQueue(type, item, new { QueueId = item.Id });
             }
         }
     }

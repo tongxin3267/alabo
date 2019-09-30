@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
 using Alabo.App.Share.HuDong.Domain.Entities;
 using Alabo.App.Share.HuDong.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.App.Share.HuDong.Domain.Services
 {

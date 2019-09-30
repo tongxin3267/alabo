@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using Alabo.Cloud.Shop.Footprints.Domain.Entities;
 using Alabo.Cloud.Shop.Footprints.Domain.Enums;
 using Alabo.Cloud.Shop.Footprints.Domain.Services;
@@ -7,6 +6,7 @@ using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Cloud.Shop.Footprints.Domain

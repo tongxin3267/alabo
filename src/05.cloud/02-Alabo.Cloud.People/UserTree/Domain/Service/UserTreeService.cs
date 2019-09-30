@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.Cloud.People.UserTree.Domain.Configs;
+﻿using Alabo.Cloud.People.UserTree.Domain.Configs;
 using Alabo.Cloud.People.UserTree.Domain.Repositories;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Services;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.Cloud.People.UserTree.Domain.Service
 {

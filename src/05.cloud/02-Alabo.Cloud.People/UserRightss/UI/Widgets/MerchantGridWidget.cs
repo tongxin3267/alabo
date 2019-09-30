@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Alabo.Cloud.People.UserRightss.Domain.Entities;
+﻿using Alabo.Cloud.People.UserRightss.Domain.Entities;
 using Alabo.Cloud.People.UserRightss.Domain.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Helpers;
 using Alabo.UI.Design.Widgets;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.Cloud.People.UserRightss.UI.Widgets
 {

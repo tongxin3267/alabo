@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using _01_Alabo.Cloud.Core.DataBackup.Domain.Enums;
+﻿using _01_Alabo.Cloud.Core.DataBackup.Domain.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.Model;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace _01_Alabo.Cloud.Core.DataBackup.Domain.Entities
 {

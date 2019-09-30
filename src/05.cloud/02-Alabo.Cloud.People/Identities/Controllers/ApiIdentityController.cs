@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using Alabo.Cloud.People.Identities.Domain.Entities;
 using Alabo.Cloud.People.Identities.Domain.Services;
 using Alabo.Extensions;
@@ -9,6 +8,7 @@ using Alabo.UI.Design.AutoForms;
 using Alabo.Users.Enum;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Cloud.People.Identities.Controllers

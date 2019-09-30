@@ -1,11 +1,11 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Share.OpenTasks.Base;
+﻿using Alabo.App.Share.OpenTasks.Base;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Kpis.Kpis
 {

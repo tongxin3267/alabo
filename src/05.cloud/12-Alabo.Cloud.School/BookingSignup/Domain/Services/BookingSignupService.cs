@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Alabo.App.Asset.Pays.Domain.Entities;
 using Alabo.App.Asset.Pays.Domain.Entities.Extension;
 using Alabo.App.Asset.Pays.Domain.Services;
@@ -18,6 +15,9 @@ using Alabo.Mapping;
 using Alabo.Regexs;
 using Alabo.Tables.Domain.Services;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.Cloud.School.BookingSignup.Domain.Services
 {

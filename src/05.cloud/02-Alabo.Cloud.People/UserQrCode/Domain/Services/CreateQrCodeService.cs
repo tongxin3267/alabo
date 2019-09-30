@@ -1,8 +1,4 @@
-﻿using System;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using Alabo.AutoConfigs;
+﻿using Alabo.AutoConfigs;
 using Alabo.Cloud.People.UserQrCode.Domain.Configs;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
@@ -18,6 +14,10 @@ using Alabo.Runtime;
 using Alabo.Schedules;
 using Alabo.Users.Entities;
 using QRCoder;
+using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using File = System.IO.File;
 
 namespace Alabo.Cloud.People.UserQrCode.Domain.Services

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using Alabo.AutoConfigs;
+﻿using Alabo.AutoConfigs;
 using Alabo.Cloud.People.UserQrCode.Domain.Configs;
 using Alabo.Cloud.People.UserQrCode.Dtos;
 using Alabo.Data.People.Users.Domain.Services;
@@ -23,6 +17,12 @@ using Alabo.Runtime;
 using Alabo.Schedules;
 using Alabo.Users.Entities;
 using QRCoder;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Linq;
 using File = System.IO.File;
 
 namespace Alabo.Cloud.People.UserQrCode.Domain.Services
@@ -183,7 +183,7 @@ namespace Alabo.Cloud.People.UserQrCode.Domain.Services
         public PagedList<ViewImagePage> GetQrCodeList(PagedInputDto parameter)
         {
             var users = Resolve<IUserService>()
-                .GetListByPageDesc(15, (int) parameter.PageIndex, u => u.ParentId == parameter.UserId);
+                .GetListByPageDesc(15, (int)parameter.PageIndex, u => u.ParentId == parameter.UserId);
             var usersCount = Resolve<IUserService>().GetList(u => u.ParentId == parameter.UserId).Count();
             var list = new List<ViewImagePage>();
             users.ToList().ForEach(r =>

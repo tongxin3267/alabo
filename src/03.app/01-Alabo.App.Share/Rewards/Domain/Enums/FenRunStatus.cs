@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Share.Rewards.Domain.Enums
 {
@@ -12,19 +12,22 @@ namespace Alabo.App.Share.Rewards.Domain.Enums
         /// <summary>
         ///     待确认
         /// </summary>
-        [Display(Name = "待确认")] [LabelCssClass(BadgeColorCalss.Warning)]
+        [Display(Name = "待确认")]
+        [LabelCssClass(BadgeColorCalss.Warning)]
         TobeConfirm = 1,
 
         /// <summary>
         ///     已成功
         /// </summary>
-        [Display(Name = "已成功")] [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "已成功")]
+        [LabelCssClass(BadgeColorCalss.Success)]
         Success = 3,
 
         /// <summary>
         ///     已取消
         /// </summary>
-        [Display(Name = "已取消")] [LabelCssClass(BadgeColorCalss.Danger)]
+        [Display(Name = "已取消")]
+        [LabelCssClass(BadgeColorCalss.Danger)]
         Cancel = 4
     }
 }

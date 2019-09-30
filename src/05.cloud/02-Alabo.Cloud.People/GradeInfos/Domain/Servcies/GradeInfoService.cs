@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Alabo.App.Asset.Accounts.Domain.Services;
 using Alabo.Cloud.People.GradeInfos.Domain.Configs;
 using Alabo.Cloud.People.GradeInfos.Domain.Entities;
@@ -25,6 +22,9 @@ using Alabo.Linq;
 using Alabo.Schedules;
 using Alabo.Users.Entities;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.Cloud.People.GradeInfos.Domain.Servcies
 {

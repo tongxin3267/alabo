@@ -1,11 +1,11 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using _05_Alabo.Cloud.Share.BonusPools.Domain.Enums;
+﻿using _05_Alabo.Cloud.Share.BonusPools.Domain.Enums;
 using Alabo.AutoConfigs;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Core.WebUis;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace _05_Alabo.Cloud.Share.BonusPools.Domain.Configs
 {

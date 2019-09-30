@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Cloud.People.UserRightss.Domain.Enums
 {
@@ -33,7 +33,6 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Enums
         ///     支付现金帮朋友开通
         /// </summary>
         [Display(Name = "支付现金帮朋友开通")] OpenToOtherByPay = 4,
-
 
         /// <summary>
         ///     管理员开通高等级商家

@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Cloud.People.UserRightss.Domain.Entities;
+﻿using Alabo.Cloud.People.UserRightss.Domain.Entities;
 using Alabo.Cloud.People.UserRightss.Domain.Enums;
 using Alabo.Data.People.Users.Dtos;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Users.Entities;
 using Alabo.Validations;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Cloud.People.UserRightss.Domain.Dtos
 {

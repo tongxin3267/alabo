@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using Alabo.Cloud.People.Relationship.Domain.CallBacks;
 using Alabo.Cloud.People.Relationship.Domain.Entities;
 using Alabo.Data.People.Users.Domain.Services;
@@ -12,6 +10,8 @@ using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Users.Dtos;
 using Alabo.Users.Entities;
 using MongoDB.Bson;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.Cloud.People.Relationship.Domain.Services
 {

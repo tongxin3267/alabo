@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using Alabo.Cloud.People.UserRightss.Domain.Dtos;
 using Alabo.Cloud.People.UserRightss.Domain.Entities;
 using Alabo.Cloud.People.UserRightss.Domain.Services;
@@ -15,6 +10,11 @@ using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.Helpers;
 using Alabo.Industry.Shop.Orders.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Cloud.People.UserRightss.Controllers

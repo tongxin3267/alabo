@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Alabo.Data.Things.Orders.ResultModel;
+﻿using Alabo.Data.Things.Orders.ResultModel;
+using System.Collections.Generic;
 
 namespace Alabo.App.Share.TaskExecutes.ResultModel
 {

@@ -1,16 +1,14 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Cloud.People.Identities.Domain.Entities;
+﻿using Alabo.Cloud.People.Identities.Domain.Entities;
 using Alabo.Cloud.People.Identities.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Helpers;
 using Alabo.UI;
 using Alabo.UI.Design.AutoForms;
 using Alabo.Users.Enum;
 using Alabo.Web.Mvc.Attributes;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Cloud.People.Identities.UI
 {
@@ -48,7 +46,7 @@ namespace Alabo.Cloud.People.Identities.UI
 
         public ServiceResult Save(object model, AutoBaseModel autoModel)
         {
-            var identity = (Identity) model;
+            var identity = (Identity)model;
             var result = Resolve<IIdentityService>().Identity(identity);
             return result;
         }

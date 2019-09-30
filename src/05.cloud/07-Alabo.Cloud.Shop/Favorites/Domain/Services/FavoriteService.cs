@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Alabo.Cloud.Shop.Favorites.Domain.Entities;
 using Alabo.Cloud.Shop.Favorites.Dtos;
 using Alabo.Datas.UnitOfWorks;
@@ -9,6 +8,7 @@ using Alabo.Extensions;
 using Alabo.Industry.Shop.Products.Domain.Services;
 using Alabo.Industry.Shop.Products.ViewModels;
 using MongoDB.Bson;
+using System.Collections.Generic;
 
 namespace Alabo.Cloud.Shop.Favorites.Domain.Services
 {

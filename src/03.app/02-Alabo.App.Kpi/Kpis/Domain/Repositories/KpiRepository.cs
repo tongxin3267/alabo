@@ -1,12 +1,12 @@
-﻿using System;
-using System.Data;
-using Alabo.App.Kpis.Kpis.Domain.Entities;
+﻿using Alabo.App.Kpis.Kpis.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Repositories.Extensions;
 using Alabo.Extensions;
+using System;
+using System.Data;
 
 namespace Alabo.App.Kpis.Kpis.Domain.Repositories
 {
@@ -48,7 +48,7 @@ namespace Alabo.App.Kpis.Kpis.Domain.Repositories
                 UserId = reader["UserId"].ConvertToLong(),
 
                 CreateTime = reader["CreateTime"].ConvertToDateTime(),
-                Type = (TimeType) reader["Type"].ConvertToInt(0),
+                Type = (TimeType)reader["Type"].ConvertToInt(0),
                 EntityId = reader["EntityId"].ConvertToLong(),
 
                 TotalValue = reader["TotalValue"].ToDecimal(),

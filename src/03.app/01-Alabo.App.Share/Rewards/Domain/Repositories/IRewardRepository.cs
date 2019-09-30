@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Alabo.App.Share.Rewards.Dtos;
+﻿using Alabo.App.Share.Rewards.Dtos;
 using Alabo.Domains.Repositories;
+using System.Collections.Generic;
 using RewardModel = Alabo.App.Share.Rewards.Domain.Entities.Reward;
 
 namespace Alabo.App.Share.Rewards.Domain.Repositories

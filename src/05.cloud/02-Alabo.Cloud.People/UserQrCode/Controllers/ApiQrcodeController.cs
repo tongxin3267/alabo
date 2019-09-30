@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Cloud.People.UserQrCode.Domain.Services;
+﻿using Alabo.Cloud.People.UserQrCode.Domain.Services;
 using Alabo.Cloud.People.UserQrCode.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query.Dto;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.Cloud.People.UserQrCode.Controllers

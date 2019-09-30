@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Alabo.Cloud.People.UserTree.Domain.Repositories;
+﻿using Alabo.Cloud.People.UserTree.Domain.Repositories;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
@@ -10,6 +8,8 @@ using Alabo.Extensions;
 using Alabo.Framework.Tasks.Queues.Domain.Servcies;
 using Alabo.Schedules;
 using Alabo.Users.Dtos;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.Cloud.People.UserTree.Domain.Service
 {

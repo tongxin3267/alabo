@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Share.Rewards.Domain.Enums
 {
@@ -9,13 +9,15 @@ namespace Alabo.App.Share.Rewards.Domain.Enums
         /// <summary>
         ///     启用
         /// </summary>
-        [Display(Name = "启用")] [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "启用")]
+        [LabelCssClass(BadgeColorCalss.Success)]
         Q = 0,
 
         /// <summary>
         ///     停用
         /// </summary>
-        [Display(Name = "停用")] [LabelCssClass(BadgeColorCalss.Warning)]
+        [Display(Name = "停用")]
+        [LabelCssClass(BadgeColorCalss.Warning)]
         T = 1
     }
 }

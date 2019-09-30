@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Alabo.App.Share.OpenTasks.Base;
+﻿using Alabo.App.Share.OpenTasks.Base;
 using Alabo.Framework.Core.Enums.Enum;
+using System.Collections.Generic;
 
 namespace Alabo.App.Share.OpenTasks.Parameter
 {

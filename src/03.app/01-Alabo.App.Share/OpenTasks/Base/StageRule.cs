@@ -1,5 +1,5 @@
-﻿using System;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
+using System;
 
 namespace Alabo.App.Share.OpenTasks.Base
 {

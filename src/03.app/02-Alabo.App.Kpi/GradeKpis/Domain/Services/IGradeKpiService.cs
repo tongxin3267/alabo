@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Alabo.App.Kpis.GradeKpis.Domain.Entities;
 using Alabo.App.Kpis.GradeKpis.Dtos;
 using Alabo.App.Kpis.Kpis.Domain.Configs;
@@ -8,6 +6,8 @@ using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 using Alabo.Users.Entities;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.App.Kpis.GradeKpis.Domain.Services
 {

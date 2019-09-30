@@ -1,17 +1,15 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Cloud.People.Enterprise.Domain.Services;
+﻿using Alabo.Cloud.People.Enterprise.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Maps;
 using Alabo.UI;
 using Alabo.UI.Design.AutoForms;
 using Alabo.Users.Enum;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Cloud.People.Enterprise.UI
 {
@@ -170,7 +168,7 @@ namespace Alabo.Cloud.People.Enterprise.UI
 
         public ServiceResult Save(object model, AutoBaseModel autoModel)
         {
-            var enterprise = (EnterpriseAutoForm) model;
+            var enterprise = (EnterpriseAutoForm)model;
             enterprise.Status = IdentityStatus.IsPost;
             var result = Resolve<IEnterpriseService>().AddOrUpdate(enterprise.MapTo<Domain.Entities.Enterprise>());
 

@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using ZKCloud.Open.ApiStore.Payment.Modules.JdPay;
 using ZKCloud.Open.ApiStore.Payment.Modules.QPay;
 using ZKCloud.Open.ApiStore.Payment.Modules.WeChatPay;

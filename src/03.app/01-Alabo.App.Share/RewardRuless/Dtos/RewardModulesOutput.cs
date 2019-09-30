@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Alabo.Framework.Tasks.Queues.Models;
+﻿using Alabo.Framework.Tasks.Queues.Models;
+using System.Collections.Generic;
 
 namespace Alabo.App.Share.RewardRuless.Dtos
 {

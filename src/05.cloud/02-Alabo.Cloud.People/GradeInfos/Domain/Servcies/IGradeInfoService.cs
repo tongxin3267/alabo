@@ -1,11 +1,11 @@
-using System;
-using System.Collections.Generic;
 using Alabo.Cloud.People.GradeInfos.Domain.Entities;
 using Alabo.Data.People.Users.Dtos;
 using Alabo.Domains.Attributes;
 using Alabo.Domains.Services;
 using Alabo.Users.Entities;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
 
 namespace Alabo.Cloud.People.GradeInfos.Domain.Servcies
 {

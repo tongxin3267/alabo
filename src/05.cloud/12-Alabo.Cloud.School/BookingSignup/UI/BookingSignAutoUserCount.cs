@@ -1,17 +1,15 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using Alabo.Cloud.School.BookingSignup.Domain.Services;
+﻿using Alabo.Cloud.School.BookingSignup.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Mapping;
 using Alabo.UI;
 using Alabo.UI.Design.AutoTables;
 using Alabo.Web.Mvc.Attributes;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Alabo.Cloud.School.BookingSignup.UI
 {
@@ -61,7 +59,7 @@ namespace Alabo.Cloud.School.BookingSignup.UI
             var signInput = new ExpressionQuery<Domain.Entities.BookingSignup>
             {
                 EnablePaging = true,
-                PageIndex = (int) pageIndex,
+                PageIndex = (int)pageIndex,
                 PageSize = 15
             };
 
@@ -73,11 +71,11 @@ namespace Alabo.Cloud.School.BookingSignup.UI
                     .ToList();
                 var users = new List<BookingSignupOrderUser>();
                 foreach (var item in model)
-                foreach (var temp in item.Contacts)
-                {
-                    var view = AutoMapping.SetValue<BookingSignupOrderUser>(temp);
-                    users.Add(view);
-                }
+                    foreach (var temp in item.Contacts)
+                    {
+                        var view = AutoMapping.SetValue<BookingSignupOrderUser>(temp);
+                        users.Add(view);
+                    }
 
                 var userCount = new BookingSignAutoUserCount
                 {
@@ -89,7 +87,7 @@ namespace Alabo.Cloud.School.BookingSignup.UI
             }
 
             return ToPageResult(
-                PagedList<BookingSignAutoUserCount>.Create(result, result.Count(), 15, (int) pageIndex));
+                PagedList<BookingSignAutoUserCount>.Create(result, result.Count(), 15, (int)pageIndex));
         }
     }
 }

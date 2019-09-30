@@ -1,8 +1,8 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Share.Rewards.Domain.Enums;
+﻿using Alabo.App.Share.Rewards.Domain.Enums;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Share.OpenTasks.Base
 {

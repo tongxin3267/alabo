@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.App.Share.HuDong.Domain.Entities;
+﻿using Alabo.App.Share.HuDong.Domain.Entities;
 using Alabo.App.Share.HuDong.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
-using Alabo.Framework.Core.WebApis;
 using Alabo.Framework.Core.WebApis.Service;
-using Alabo.Framework.Core.WebUis;
 using Alabo.UI;
 using Alabo.UI.Design.AutoLists;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.App.Share.HuDong.UI
 {
@@ -32,7 +30,7 @@ namespace Alabo.App.Share.HuDong.UI
             var orderQuery = new ExpressionQuery<HudongRecord>
             {
                 EnablePaging = true,
-                PageIndex = (int) pageIndex,
+                PageIndex = (int)pageIndex,
                 PageSize = 15
             };
             orderQuery.And(e => e.UserId == userId.ToInt64());

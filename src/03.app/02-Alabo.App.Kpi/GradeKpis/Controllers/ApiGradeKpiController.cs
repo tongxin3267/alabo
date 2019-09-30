@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using Alabo.App.Kpis.GradeKpis.Domain.Entities;
 using Alabo.App.Kpis.GradeKpis.Domain.Services;
 using Alabo.Domains.Entities;
@@ -7,6 +6,7 @@ using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
 namespace Alabo.App.Kpis.GradeKpis.Controllers

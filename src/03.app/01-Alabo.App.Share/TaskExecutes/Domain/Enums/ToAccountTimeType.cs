@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Share.TaskExecutes.Domain.Enums
 {
@@ -104,7 +104,8 @@ namespace Alabo.App.Share.TaskExecutes.Domain.Enums
         /// <summary>
         ///     分期到账
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)] [Display(Name = " 分期到账（分期到账，需单独设置循环周期，循环周期单位为天。比如循环周期为2天时，表示两天执行一次）")]
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = " 分期到账（分期到账，需单独设置循环周期，循环周期单位为天。比如循环周期为2天时，表示两天执行一次）")]
         SpecifyTimePeriodicTo = 100
     }
 }

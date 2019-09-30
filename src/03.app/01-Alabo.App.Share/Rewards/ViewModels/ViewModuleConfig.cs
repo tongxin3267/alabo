@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.App.Share.OpenTasks;
+﻿using Alabo.App.Share.OpenTasks;
 using Alabo.App.Share.OpenTasks.Base;
 using Alabo.App.Share.Rewards.Domain.Enums;
 using Alabo.App.Share.TaskExecutes;
@@ -11,6 +8,9 @@ using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.Share.Models;
 
 namespace Alabo.App.Share.Rewards.ViewModels

@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using _01_Alabo.Cloud.Core.SendSms.Domain.Enums;
+﻿using _01_Alabo.Cloud.Core.SendSms.Domain.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace _01_Alabo.Cloud.Core.SendSms.Domain.Entities
 {

@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using Alabo.App.Kpis.Kpis.Domain.Entities;
+﻿using Alabo.App.Kpis.Kpis.Domain.Entities;
 using Alabo.App.Kpis.Kpis.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Users.Entities;
+using System.Collections.Generic;
 
 namespace Alabo.App.Kpis.Kpis.Domain.Services
 {

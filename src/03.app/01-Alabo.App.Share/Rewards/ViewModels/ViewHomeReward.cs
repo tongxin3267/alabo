@@ -12,11 +12,6 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 using Alabo.App.Share.Rewards.Domain.Entities;
 using Alabo.App.Share.Rewards.Domain.Enums;
 using Alabo.App.Share.Rewards.Domain.Services;
@@ -28,8 +23,6 @@ using Alabo.Domains.Query;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Helpers;
 using Alabo.Mapping;
 using Alabo.UI;
@@ -37,6 +30,11 @@ using Alabo.UI.Design.AutoLists;
 using Alabo.UI.Design.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace Alabo.App.Share.Rewards.ViewModels
 {
@@ -165,7 +163,7 @@ namespace Alabo.App.Share.Rewards.ViewModels
             var temp = new ExpressionQuery<Reward>
             {
                 EnablePaging = true,
-                PageIndex = (int) pageIndex,
+                PageIndex = (int)pageIndex,
                 PageSize = 15
             };
             temp.And(e => e.UserId == userId.ToInt64());

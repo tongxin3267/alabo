@@ -14,7 +14,6 @@ namespace Alabo.Cloud.Shop.SuccessfulCases.Domains.Services
         {
         }
 
-
         public Cases GetCourseView(object id)
         {
             var find = GetSingle(id);

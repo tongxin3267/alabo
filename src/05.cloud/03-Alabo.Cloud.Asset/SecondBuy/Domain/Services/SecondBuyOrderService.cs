@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using Alabo.Cloud.Asset.SecondBuy.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
@@ -7,12 +5,13 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
-using Alabo.Framework.Basic.Address.Domain.Services;
 using Alabo.Framework.Basic.Regions.Domain.Services;
 using Alabo.Industry.Shop.Products.Domain.Services;
 using Alabo.Randoms;
 using Alabo.Tables.Domain.Services;
 using MongoDB.Bson;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Alabo.Cloud.Asset.SecondBuy.Domain.Services
 {

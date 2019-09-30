@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.AutoConfigs;
+﻿using Alabo.AutoConfigs;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Alabo.Cloud.People.UserRightss.Domain.CallBack
 {
@@ -83,7 +83,6 @@ namespace Alabo.Cloud.People.UserRightss.Domain.CallBack
         [Display(Name = "是否开放")]
         public bool IsOpen { get; set; } = true;
 
-
         /// <summary>
         ///     有端口是否需要支付
         /// </summary>
@@ -92,7 +91,6 @@ namespace Alabo.Cloud.People.UserRightss.Domain.CallBack
         [Display(Name = "有端口是否需要支付,开启后，继续需要扣端口，也需要扣钱")]
         public bool IsHavePortNeedToPay { get; set; }
 
-
         /// <summary>
         ///     无端口能否付费开通
         /// </summary>
@@ -100,7 +98,6 @@ namespace Alabo.Cloud.People.UserRightss.Domain.CallBack
             EditShow = true)]
         [Display(Name = "无端口能否付费开通该等级")]
         public bool HaveNotPortCanOpen { get; set; }
-
 
         /// <summary>
         ///     能否自己升级,付费升级
@@ -120,7 +117,6 @@ namespace Alabo.Cloud.People.UserRightss.Domain.CallBack
         [Display(Name = "是否显示该等级页面")]
         public bool IsShowGradePage { get; set; }
 
-
         /// <summary>
         ///     该等级是否只有管理员可以开通
         /// </summary>
@@ -129,7 +125,6 @@ namespace Alabo.Cloud.People.UserRightss.Domain.CallBack
             EditShow = true)]
         [Display(Name = "该等级是否只有管理员可以开通")]
         public bool IsCanOnlyAdminOpen { get; set; }
-
 
         /// <summary>
         ///     等级权益设置

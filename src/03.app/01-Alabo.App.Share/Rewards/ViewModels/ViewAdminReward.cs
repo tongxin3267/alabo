@@ -12,9 +12,6 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using Alabo.App.Share.Rewards.Domain.Entities;
 using Alabo.App.Share.Rewards.Domain.Enums;
 using Alabo.Domains.Enums;
@@ -23,6 +20,9 @@ using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Users.Entities;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.Share.Models;
 
 namespace Alabo.App.Share.Rewards.ViewModels

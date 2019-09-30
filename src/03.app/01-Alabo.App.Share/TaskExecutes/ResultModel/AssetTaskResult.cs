@@ -1,9 +1,9 @@
-﻿using System;
-using Alabo.App.Asset.Accounts.Domain.Services;
+﻿using Alabo.App.Asset.Accounts.Domain.Services;
 using Alabo.Data.Things.Orders.Extensions;
 using Alabo.Data.Things.Orders.ResultModel;
 using Alabo.Framework.Tasks.Queues.Models;
 using Alabo.Helpers;
+using System;
 
 namespace Alabo.App.Share.TaskExecutes.ResultModel
 {

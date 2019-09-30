@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Cloud.School.BookingSignup.Domain.Entities;
+﻿using Alabo.Cloud.School.BookingSignup.Domain.Entities;
 using Alabo.Cloud.School.BookingSignup.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Mapping;
 using Alabo.UI;
 using Alabo.UI.Design.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Cloud.School.BookingSignup.UI
 {
@@ -97,7 +95,7 @@ namespace Alabo.Cloud.School.BookingSignup.UI
             var input = new ExpressionQuery<BookingSignupOrder>
             {
                 EnablePaging = true,
-                PageIndex = (int) pageIndex,
+                PageIndex = (int)pageIndex,
                 PageSize = 15
             };
             input.And(u => u.IsPay);

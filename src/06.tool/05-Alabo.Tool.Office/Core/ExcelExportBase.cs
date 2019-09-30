@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Alabo.Tool.Office.Abstractions;
+using System.Collections.Generic;
 using System.IO;
-using Alabo.Tool.Office.Abstractions;
 
 namespace Alabo.Tool.Office.Core
 {

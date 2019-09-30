@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.Cloud.School.BookingSignup.Domain.Entities;
+﻿using Alabo.Cloud.School.BookingSignup.Domain.Entities;
 using Alabo.Cloud.School.BookingSignup.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Extensions;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
 using Alabo.UI;
 using Alabo.UI.Design.AutoLists;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Alabo.Cloud.School.BookingSignup.UI
 {
@@ -26,7 +24,7 @@ namespace Alabo.Cloud.School.BookingSignup.UI
             var orderQuery = new ExpressionQuery<BookingSignupOrder>
             {
                 EnablePaging = true,
-                PageIndex = (int) pageIndex,
+                PageIndex = (int)pageIndex,
                 PageSize = 15
             };
             orderQuery.And(e => e.UserId == userId.ToInt64());
@@ -34,16 +32,16 @@ namespace Alabo.Cloud.School.BookingSignup.UI
             var model = Resolve<IBookingSignupOrderService>().GetPagedList(orderQuery);
             var list = new List<AutoListItem>();
             foreach (var item in model.ToList())
-            foreach (var temp in item.Contacts)
-            {
-                var apiData = new AutoListItem
+                foreach (var temp in item.Contacts)
                 {
-                    Title = temp.Name,
-                    Intro = temp.Mobile,
-                    Image = "https://diyservice.5ug.com/wwwroot/uploads/api/2019-03-20/5c924388397d411c8c07de3e.png"
-                };
-                list.Add(apiData);
-            }
+                    var apiData = new AutoListItem
+                    {
+                        Title = temp.Name,
+                        Intro = temp.Mobile,
+                        Image = "https://diyservice.5ug.com/wwwroot/uploads/api/2019-03-20/5c924388397d411c8c07de3e.png"
+                    };
+                    list.Add(apiData);
+                }
 
             return ToPageList(list, model);
         }
