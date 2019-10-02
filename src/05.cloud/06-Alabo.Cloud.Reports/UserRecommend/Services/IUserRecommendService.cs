@@ -2,7 +2,7 @@
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 
-namespace _06.Alabo.Cloud.Reports.UserRecommend.Services {
+namespace Alabo.Cloud.Reports.UserRecommend.Services {
 
     public interface IUserRecommendService : IService {
 

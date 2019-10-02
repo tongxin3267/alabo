@@ -1,5 +1,4 @@
-﻿using _06.Alabo.Cloud.Reports.UserRecommend.Services;
-using Alabo.Cloud.People.GradeInfos.Domain.Servcies;
+﻿using Alabo.Cloud.People.GradeInfos.Domain.Servcies;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Data.People.Users.ViewModels.Admin;
 using Alabo.Datas.UnitOfWorks;

@@ -7,8 +7,7 @@ using Quartz;
 using System;
 using System.Threading.Tasks;
 using Alabo.App.Asset.Withdraws.Domain.Entities;
-using Alabo.Data.People.BranchCompanys.Domain.Entities;
-using Alabo.Data.People.PartnerCompays.Domain.Entities;
+using Alabo.Data.People.PartnerCompanies.Domain.Entities;
 using Alabo.Data.People.Regionals.Domain.Entities;
 using Alabo.Data.People.ServiceCenters.Domain.Entities;
 

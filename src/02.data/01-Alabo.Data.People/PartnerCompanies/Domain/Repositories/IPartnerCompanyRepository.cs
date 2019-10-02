@@ -1,10 +1,8 @@
-using System;using Alabo.Domains.Repositories.EFCore;using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
+using Alabo.Data.People.PartnerCompanies.Domain.Entities;
 using Alabo.Domains.Repositories;
-using Alabo.Data.People.PartnerCompays.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.Data.People.PartnerCompays.Domain.Repositories {
+namespace Alabo.Data.People.PartnerCompanies.Domain.Repositories {
 	public interface IPartnerCompanyRepository : IRepository<PartnerCompany, ObjectId>  {
 	}
 }

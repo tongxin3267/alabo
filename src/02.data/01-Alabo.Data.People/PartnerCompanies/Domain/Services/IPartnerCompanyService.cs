@@ -1,11 +1,8 @@
-using System;
-using System.Linq;
-using MongoDB.Bson;
+using Alabo.Data.People.PartnerCompanies.Domain.Entities;
 using Alabo.Domains.Services;
-using Alabo.Data.People.PartnerCompays.Domain.Entities;
-using Alabo.Domains.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.Data.People.PartnerCompays.Domain.Services {
+namespace Alabo.Data.People.PartnerCompanies.Domain.Services {
 	public interface IPartnerCompanyService : IService<PartnerCompany, ObjectId>  {
 	}
 	}
