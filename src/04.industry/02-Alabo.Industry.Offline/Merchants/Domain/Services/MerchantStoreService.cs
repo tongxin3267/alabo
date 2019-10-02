@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Data.People.Merchants.Domain.Entities;
+using Alabo.Data.People.Merchants.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;

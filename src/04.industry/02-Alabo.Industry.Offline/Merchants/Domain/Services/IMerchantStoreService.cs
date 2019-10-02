@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Alabo.Data.People.Merchants.Domain.Entities;
 using Alabo.Domains.Services;
 using Alabo.Industry.Offline.Merchants.Domain.Dtos;
 using Alabo.Industry.Offline.Merchants.Domain.Entities;

@@ -140,7 +140,7 @@ namespace Alabo.Framework.Core.Tenants.Controllers
             var result = Resolve<ITenantCreateService>().InitTenantDatabase(tenant.Sign);
             if (result.Succeeded)
             {
-                tenant.DatabaseName = RuntimeContext.GetTenantDataBase(tenant.Sign);
+                tenant.DatabaseName = RuntimeContext.GetTenantMongodbDataBase(tenant.Sign);
                 Resolve<ITenantService>().Add(tenant);
             }
 

@@ -29,7 +29,7 @@ namespace Alabo.Framework.Core.Tenants.Domains.Services
             var result = Check(tenantInit);
             if (!result.Succeeded) return result;
             if (tenantInit.Tenant == "master") return ServiceResult.FailedWithMessage("主库不能初始化");
-            var dataBase = RuntimeContext.GetTenantDataBase(tenantInit.Tenant);
+            var dataBase = RuntimeContext.GetTenantMongodbDataBase(tenantInit.Tenant);
             // 删除数据库
             _tenantCreateRepository.DeleteDatabase(dataBase);
             return ServiceResult.Success;
@@ -82,7 +82,7 @@ namespace Alabo.Framework.Core.Tenants.Domains.Services
 
             if (string.IsNullOrWhiteSpace(tenant)) return ServiceResult.FailedWithMessage("租户不能为空");
 
-            var tenantName = RuntimeContext.GetTenantDataBase(tenant);
+            var tenantName = RuntimeContext.GetTenantMongodbDataBase(tenant);
             var isExists = _tenantCreateRepository.IsExistsDatabase(tenantName);
             if (!isExists) _tenantCreateRepository.CreateDatabase(tenantName);
             isExists = _tenantCreateRepository.IsExistsDatabase(tenantName);
@@ -97,7 +97,7 @@ namespace Alabo.Framework.Core.Tenants.Domains.Services
 
             var find = Resolve<ITenantService>().GetSingle(r => r.Sign == tenant);
             if (find == null) return ServiceResult.FailedWithMessage("租户不存在");
-            var tenantName = RuntimeContext.GetTenantDataBase(tenant);
+            var tenantName = RuntimeContext.GetTenantMongodbDataBase(tenant);
             var isExists = _tenantCreateRepository.IsExistsDatabase(tenantName);
             if (!isExists) return ServiceResult.FailedWithMessage("租户数据库不存在");
             return ServiceResult.Success;

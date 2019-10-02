@@ -66,7 +66,7 @@ namespace Alabo.Test.Base.Core.Model
 
             //添加工作单元
             var config = Configuration.GetConnectionString("ConnectionString");
-            var database = RuntimeContext.GetTenantDataBase();
+            var database = RuntimeContext.GetTenantMongodbDataBase();
             config = config.Replace(RuntimeContext.Current.WebsiteConfig.MongoDbConnection.Database, database);
             services.AddUnitOfWork<IUnitOfWork, SqlServerUnitOfWork>(config);
 

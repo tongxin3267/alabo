@@ -98,7 +98,9 @@ namespace Alabo.Runtime.Config
             {
                 if (_connectionString.IsNullOrEmpty())
                 {
-                    var setting = _systemConfiguration.GetSection("ConnectionString");
+                    var connections = _systemConfiguration.GetSection("ConnectionStrings");
+                    var setting = connections.GetSection("ConnectionString");
+
                     if (setting != null) _connectionString = setting.Value;
                 }
 

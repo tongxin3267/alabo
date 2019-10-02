@@ -96,7 +96,7 @@ namespace Alabo.Tenants
             return new Tenant
             {
                 Name = Master,
-                DatabaseName = RuntimeContext.GetTenantDataBase()
+                DatabaseName = RuntimeContext.GetTenantMongodbDataBase()
             };
         }
 

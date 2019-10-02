@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyModel;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -88,7 +89,7 @@ namespace Alabo.Runtime
         ///     租户数据库
         ///     宿主数据库名称,在appsetings.json中配置，Mongodb的数据库名称必须和SqlService的数据库名称一样
         /// </summary>
-        public static string TenantDataBase => GetTenantDataBase(CurrentTenant);
+        public static string TenantDataBase => GetTenantMongodbDataBase(CurrentTenant);
 
         /// <summary>
         ///     Gets the path.
@@ -159,16 +160,36 @@ namespace Alabo.Runtime
         }
 
         /// <summary>
-        ///     get tenant database
+        ///     获取Mongodb租户数据库
         /// </summary>
         /// <param name="tenant"></param>
         /// <returns></returns>
-        public static string GetTenantDataBase(string tenant = "")
+        public static string GetTenantMongodbDataBase(string tenant = "")
         {
             var database = Current.WebsiteConfig.MongoDbConnection.Database;
+            database = database.Replace($"{Version}_", "");
+
             return tenant == "master" || string.IsNullOrWhiteSpace(tenant)
                 ? $"{Version}_{database}"
                 : $"{Version}_{database}_{tenant}";
+        }
+
+        /// <summary>
+        ///     获取Mongodb租户数据库
+        /// </summary>
+        /// <param name="tenant"></param>
+        /// <returns></returns>
+        public static string GetTenantSqlDataBase(string tenant = "")
+        {
+            var connectionString = Current.WebsiteConfig.ConnectionString;
+            var sqlConnection = new SqlConnection(connectionString);
+            var database = sqlConnection.Database;
+            database = database.Replace($"{Version}_", "");
+
+            database = tenant == "master" || string.IsNullOrWhiteSpace(tenant)
+                ? $"{Version}_{database}"
+                : $"{Version}_{database}_{tenant}";
+            return database;
         }
 
         /// <summary>

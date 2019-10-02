@@ -95,14 +95,14 @@ namespace Alabo.Domains.Repositories.Mongo.Context
         {
             get
             {
-                var database = RuntimeContext.GetTenantDataBase();
+                var database = RuntimeContext.GetTenantMongodbDataBase();
                 if (!TenantContext.IsTenant) return database;
 
                 var tenantName = TenantContext.CurrentTenant;
                 if (string.IsNullOrWhiteSpace(tenantName) || tenantName.ToLower() == TenantContext.Master.ToLower())
                     return database;
 
-                return RuntimeContext.GetTenantDataBase(tenantName);
+                return RuntimeContext.GetTenantMongodbDataBase(tenantName);
             }
         }
 
