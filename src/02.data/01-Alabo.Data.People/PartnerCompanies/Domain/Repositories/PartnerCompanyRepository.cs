@@ -1,12 +1,9 @@
-using System;using Alabo.Domains.Repositories.EFCore;using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
-using Alabo.Data.People.PartnerCompays.Domain.Entities;
-using Alabo.Domains.Repositories;
+using Alabo.Data.People.PartnerCompanies.Domain.Entities;
 using Alabo.Datas.UnitOfWorks;
-using  Alabo.Data.People.PartnerCompays.Domain.Repositories;
+using Alabo.Domains.Repositories;
+using MongoDB.Bson;
 
-namespace Alabo.Data.People.PartnerCompays.Domain.Repositories {
+namespace Alabo.Data.People.PartnerCompanies.Domain.Repositories {
 	public class PartnerCompanyRepository : RepositoryMongo<PartnerCompany, ObjectId>,IPartnerCompanyRepository  {
 	public  PartnerCompanyRepository(IUnitOfWork unitOfWork) : base(unitOfWork){
 	}

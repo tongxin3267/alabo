@@ -1,9 +1,9 @@
-﻿using Alabo.Data.People.UserTypes;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.Data.People.UserTypes;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Data.People.PartnerCompays.Domain.Entities
+namespace Alabo.Data.People.PartnerCompanies.Domain.Entities
 {
     /// <summary>
     /// 合作公司

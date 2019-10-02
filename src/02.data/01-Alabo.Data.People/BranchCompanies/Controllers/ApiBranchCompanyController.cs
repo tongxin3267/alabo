@@ -1,11 +1,11 @@
-using Alabo.Data.People.BranchCompanys.Domain.Entities;
-using Alabo.Data.People.BranchCompanys.Domain.Services;
+using Alabo.Data.People.BranchCompanies.Domain.Entities;
+using Alabo.Data.People.BranchCompanies.Domain.Services;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
-namespace Alabo.Data.People.BranchCompanys.Controllers
+namespace Alabo.Data.People.BranchCompanies.Controllers
 {
     [ApiExceptionFilter]
     [Route("Api/BranchCompany/[action]")]

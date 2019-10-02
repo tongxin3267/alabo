@@ -1,9 +1,9 @@
-﻿using Alabo.Data.People.UserTypes;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.Data.People.UserTypes;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Data.People.BranchCompanys.Domain.Entities
+namespace Alabo.Data.People.BranchCompanies.Domain.Entities
 {
     /// <summary>
     /// 分公司
