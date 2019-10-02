@@ -88,6 +88,7 @@ namespace Alabo.Data.People.UserTypes
         [Display(Name = "推荐人")]
         [Field(IsShowBaseSerach = true, IsShowAdvancedSerach = true, PlaceHolder = "请输入用户名", Link = "/Admin/User/Edit?id=[[UserId]]", ControlsType = ControlsType.TextBox,
             GroupTabId = 1, Width = "180", ListShow = true, EditShow = true, SortOrder = 2)]
+        [BsonIgnore]
         public string ParentUserName { get; set; }
 
         /// <summary>

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Alabo.Data.People.Merchants.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis.Controller;
@@ -62,7 +63,7 @@ namespace Alabo.Industry.Offline.Merchants.Controllers
             var merchantStores = Resolve<IMerchantStoreService>().GetMerchantStore(userId);
             if (merchantStores.Count <= 0) return ApiResult.Failure<List<KeyValue>>("当前商家没有开通门店");
             var keyValues = new List<KeyValue>();
-            foreach (var item in merchantStores) keyValues.Add(new KeyValue {Key = item.Id, Value = item.Name});
+            foreach (var item in merchantStores) keyValues.Add(new KeyValue { Key = item.Id, Value = item.Name });
 
             return ApiResult.Success(keyValues);
         }
