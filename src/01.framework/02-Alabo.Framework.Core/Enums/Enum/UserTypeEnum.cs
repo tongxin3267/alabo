@@ -153,14 +153,6 @@ namespace Alabo.Framework.Core.Enums.Enum
         VentureCompany = 108,
 
         /// <summary>
-        ///     商学院
-        /// </summary>
-        [Display(Name = "分公司")]
-        [Field(IsDefault = false, GuidId = "71BE65E6-3A64-414D-972E-1A3D4A365109", Icon = "icon-reload")]
-        [LabelCssClass(BadgeColorCalss.Metal)]
-        BranchCompnay = 109,
-
-        /// <summary>
         ///     创客
         /// </summary>
         [Display(Name = "创客")]

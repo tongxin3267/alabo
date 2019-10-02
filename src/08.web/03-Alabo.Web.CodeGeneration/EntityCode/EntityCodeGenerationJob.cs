@@ -7,6 +7,10 @@ using Quartz;
 using System;
 using System.Threading.Tasks;
 using Alabo.App.Asset.Withdraws.Domain.Entities;
+using Alabo.Data.People.BranchCompanys.Domain.Entities;
+using Alabo.Data.People.PartnerCompays.Domain.Entities;
+using Alabo.Data.People.Regionals.Domain.Entities;
+using Alabo.Data.People.ServiceCenters.Domain.Entities;
 
 namespace Alabo.Web.CodeGeneration.EntityCode
 {
@@ -18,8 +22,11 @@ namespace Alabo.Web.CodeGeneration.EntityCode
         protected override async Task Execute(IJobExecutionContext context, IScope scope)
         {
             //手动修改,实体路径，可右键实体手动复制路径
-            var entityPath = @"C:\alaboshu.com\alabo\src\02.data\02-Alabo.Data.Asset\Withdraws\Domain\Entities\";
-            CreateCode(typeof(Withdraw), entityPath);
+            var entityPath = @"C:\alaboshu.com\alabo\src\02.data\01-Alabo.Data.People\Regionals\Domain\Entities\";
+            CreateCode(typeof(Regional), entityPath);
+
+            entityPath = @"C:\alaboshu.com\alabo\src\02.data\01-Alabo.Data.People\PartnerCompanies\Domain\Entities\";
+            CreateCode(typeof(PartnerCompany), entityPath);
 
             Console.WriteLine(@"所有代码生成完成");
         }

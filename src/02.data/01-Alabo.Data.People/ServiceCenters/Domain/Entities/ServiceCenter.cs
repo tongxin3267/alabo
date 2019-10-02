@@ -11,9 +11,9 @@ namespace Alabo.Data.People.ServiceCenters.Domain.Entities
 
     [ClassProperty(Name = "合作公司")]
     [BsonIgnoreExtraElements]
-    [Table("People_PartnerCompay")]
+    [Table("People_ServiceCenter")]
     [AutoDelete(IsAuto = true)]
-    public class PartnerCompay : UserTypeAggregateRoot<PartnerCompay>
+    public class ServiceCenter : UserTypeAggregateRoot<ServiceCenter>
     {
     }
 }

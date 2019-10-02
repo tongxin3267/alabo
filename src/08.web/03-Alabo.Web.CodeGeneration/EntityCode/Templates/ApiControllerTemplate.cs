@@ -38,12 +38,13 @@ namespace Alabo.Web.CodeGeneration.EntityCode.Templates
                 testBuilder.AppendLine("using Alabo.Framework.Core.WebApis.Filter;");
                 testBuilder.AppendLine("");
                 testBuilder.AppendLine("using MongoDB.Bson;");
-                testBuilder.AppendLine("using Alabo.App.Core.User;");
+                testBuilder.AppendLine("using Alabo.Framework.Core.WebApis.Controller;");
                 testBuilder.AppendLine("using Alabo.RestfulApi;using ZKCloud.Open.ApiBase.Configuration;");
                 testBuilder.AppendLine("using Alabo.Domains.Services;");
                 testBuilder.AppendLine("using Alabo.Web.Mvc.Attributes;");
                 testBuilder.AppendLine("using Alabo.Web.Mvc.Controllers;");
                 testBuilder.AppendLine($"using {type.Namespace};");
+                testBuilder.AppendLine($"using {type.Namespace.Replace("Entities", "Services")};");
 
                 if (testBuilder.ToString().IndexOf(type.Namespace, StringComparison.OrdinalIgnoreCase) == -1)
                     testBuilder.AppendLine($"using {type.Namespace};");
