@@ -10,7 +10,7 @@
     <RootNamespace>Alabo.Web.TaskShell</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="appsettings.json">
+    <Content Include="web.json">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
@@ -28,7 +28,7 @@
     <ProjectReference Include="..\..\06.tool\04-Alabo.Tool.AMap\04-Alabo.Tool.AMap.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="appsettings.json">
+    <None Update="web.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

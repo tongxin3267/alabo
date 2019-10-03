@@ -29,7 +29,7 @@ namespace Alabo.Test.Base.Core.Model
         {
             var testHostingEnvironment = new TestHostingEnvironment();
             var builder = new ConfigurationBuilder()
-                .SetBasePath(testHostingEnvironment.WebRootPath).AddJsonFile("appsettings.json", true, true)
+                .SetBasePath(testHostingEnvironment.WebRootPath).AddJsonFile("web.json", true, true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
             Configuration.ConfigurationRuntimePath(testHostingEnvironment.WebRootPath);

@@ -73,7 +73,7 @@ namespace Alabo.Runtime
         /// <summary>
         ///     appsettings 配置文件
         /// </summary>
-        public string AppSettings => Path.Combine(RootPath, "appsettings.json");
+        public string AppSettings => Path.Combine(RootPath, "web.json");
 
         /// <summary>
         ///     模块文件路径

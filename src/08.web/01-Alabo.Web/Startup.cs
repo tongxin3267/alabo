@@ -32,11 +32,10 @@ namespace Alabo.Web
         /// </summary>
         /// <param name="configuration">配置</param>
         /// <param name="env">主机111111123</param>
-        public Startup(IConfiguration configuration, IHostingEnvironment env)
-        {
+        public Startup(IConfiguration configuration, IHostingEnvironment env) {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile("web.json", true, true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
             env.ConfigurationRuntimePath(Configuration);
@@ -51,8 +50,7 @@ namespace Alabo.Web
         /// <summary>
         ///     配置服务
         /// </summary>
-        public IServiceProvider ConfigureServices(IServiceCollection services)
-        {
+        public IServiceProvider ConfigureServices(IServiceCollection services) {
             // 项目底层配置服务
             services.AddAppServcie(Configuration);
 
@@ -83,8 +81,7 @@ namespace Alabo.Web
         /// <summary>
         ///     公共配置
         /// </summary>
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
             // 项目底层启动服务
             app.UseAppApplication();
             app.UseErrorLog();

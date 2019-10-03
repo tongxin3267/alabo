@@ -35,7 +35,7 @@ namespace Alabo.Web.CodeGeneration
         {
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", true, true)
+                .AddJsonFile("web.json", true, true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
             env.ConfigurationRuntimePath(Configuration);
