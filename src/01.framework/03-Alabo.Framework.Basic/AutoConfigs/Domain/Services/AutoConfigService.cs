@@ -62,7 +62,10 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Services
             if (config == null) throw new ArgumentNullException(nameof(config));
 
             AutoConfig find = null;
-            if (config.Id > 0) find = Repository<IAutoConfigRepository>().GetSingle(e => e.Id == config.Id);
+            if (config.Id > 0)
+            {
+                find = Repository<IAutoConfigRepository>().GetSingle(e => e.Id == config.Id);
+            }
 
             if (find == null) find = Repository<IAutoConfigRepository>().GetSingle(e => e.Type == config.Type);
             var appName = Resolve<ITypeService>().GetAppName(config.Type);
@@ -194,7 +197,7 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Services
                 var request = JsonConvert.DeserializeObject<List<JObject>>(config.Value);
                 foreach (var item in request)
                 {
-                    var data = (T) Activator.CreateInstance(typeof(T));
+                    var data = (T)Activator.CreateInstance(typeof(T));
                     PropertyDescription.SetValue(data, item);
                     values.Add(data);
                 }
