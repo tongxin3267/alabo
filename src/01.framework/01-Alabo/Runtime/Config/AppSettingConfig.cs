@@ -1,8 +1,10 @@
-﻿using Alabo.Domains.Repositories.Mongo.Context;
+﻿using System.Data.SqlClient;
+using Alabo.Domains.Repositories.Mongo.Context;
 using Alabo.Extensions;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System.IO;
+using Alabo.Domains.Repositories.EFCore;
 
 namespace Alabo.Runtime.Config
 {
@@ -19,16 +21,16 @@ namespace Alabo.Runtime.Config
 
         private MongoDbConnection _mongoDbConnection;
 
+        private MsSqlDbConnection _msSqlDbConnection;
+
         /// <summary>
         /// </summary>
         /// <param name="systemConfiguration"></param>
-        public AppSettingConfig(IConfiguration systemConfiguration)
-        {
+        public AppSettingConfig(IConfiguration systemConfiguration) {
             _systemConfiguration = systemConfiguration;
         }
 
-        private AppSettingConfig()
-        {
+        private AppSettingConfig() {
         }
 
         /// <summary>
@@ -37,10 +39,8 @@ namespace Alabo.Runtime.Config
         ///     支持redis缓存 redis
         ///     值为：redis或memory
         /// </summary>
-        public string CacheScheme
-        {
-            get
-            {
+        public string CacheScheme {
+            get {
                 var value = "memory";
                 var setting = _systemConfiguration.GetSection("CacheScheme");
                 if (setting != null) {
@@ -58,10 +58,8 @@ namespace Alabo.Runtime.Config
         ///     可以指定这些值
         ///     postgresql, sqlite, mysql, mssql
         /// </summary>
-        public string Database
-        {
-            get
-            {
+        public string Database {
+            get {
                 var value = "mssql";
                 var setting = _systemConfiguration.GetSection("Database");
                 if (setting != null) {
@@ -77,12 +75,9 @@ namespace Alabo.Runtime.Config
         /// <summary>
         ///     iis访问站点
         /// </summary>
-        public string ClientHost
-        {
-            get
-            {
-                if (_clientHost.IsNullOrEmpty())
-                {
+        public string ClientHost {
+            get {
+                if (_clientHost.IsNullOrEmpty()) {
                     var setting = _systemConfiguration.GetSection("ClientHost");
                     if (setting != null) {
                         _clientHost = setting.Value;
@@ -100,12 +95,9 @@ namespace Alabo.Runtime.Config
         /// <summary>
         ///     数据库的链接字符串
         /// </summary>
-        public string ConnectionString
-        {
-            get
-            {
-                if (_connectionString.IsNullOrEmpty())
-                {
+        public string ConnectionString {
+            get {
+                if (_connectionString.IsNullOrEmpty()) {
                     var connections = _systemConfiguration.GetSection("ConnectionStrings");
                     var setting = connections.GetSection("ConnectionString");
 
@@ -121,10 +113,8 @@ namespace Alabo.Runtime.Config
         /// <summary>
         ///     cookie认证标识
         /// </summary>
-        public string AuthenticationScheme
-        {
-            get
-            {
+        public string AuthenticationScheme {
+            get {
                 var value = "Cookies";
 
                 return value;
@@ -132,20 +122,38 @@ namespace Alabo.Runtime.Config
         }
 
         /// <summary>
+        /// mssql 数据配置
+        /// </summary>
+        public MsSqlDbConnection MsSqlDbConnection {
+            get {
+                if (_msSqlDbConnection == null) {
+                    var connections = _systemConfiguration.GetSection("ConnectionStrings");
+                    var setting = connections.GetSection("ConnectionString");
+                    if (setting != null) {
+                        var sqlConnection = new SqlConnection(setting.Value);
+                        _msSqlDbConnection = new MsSqlDbConnection {
+                            Database = sqlConnection.Database,
+                            ConnectionString = sqlConnection.ConnectionString,
+                            UserName = sqlConnection.ConnectionString.CutString("UID=", ";PWD=")
+                        };
+                    }
+                }
+
+                return _msSqlDbConnection;
+            }
+        }
+
+        /// <summary>
         ///     Gets or sets the mongo database connection string.
         ///     MongoDb数据库链接字符串
         /// </summary>
-        public MongoDbConnection MongoDbConnection
-        {
-            get
-            {
-                if (_mongoDbConnection == null)
-                {
+        public MongoDbConnection MongoDbConnection {
+            get {
+                if (_mongoDbConnection == null) {
                     var connections = _systemConfiguration.GetSection("ConnectionStrings");
                     var setting = connections.GetSection("MongoDbConnection");
                     if (setting != null) {
-                        _mongoDbConnection = new MongoDbConnection
-                        {
+                        _mongoDbConnection = new MongoDbConnection {
                             Database = setting.GetSection("Database").Value,
                             IsRoot = setting.GetSection("IsRoot").Value.ConvertToBool(),
                             ConnectionString = setting.GetSection("ConnectionString").Value
@@ -160,15 +168,11 @@ namespace Alabo.Runtime.Config
         /// <summary>
         ///     测试配置
         /// </summary>
-        public OpenApiSetting OpenApiSetting
-        {
-            get
-            {
+        public OpenApiSetting OpenApiSetting {
+            get {
                 var setting = _systemConfiguration.GetSection("OpenApiSetting");
-                if (setting != null)
-                {
-                    var testConnection = new OpenApiSetting
-                    {
+                if (setting != null) {
+                    var testConnection = new OpenApiSetting {
                         Id = setting.GetSection("Id").Value,
                         Key = setting.GetSection("Key").Value,
                         DiyUrl = setting.GetSection("DiyUrl").Value,
@@ -185,15 +189,11 @@ namespace Alabo.Runtime.Config
         /// <summary>
         ///     测试配置
         /// </summary>
-        public TestBaseConfig TestConfig
-        {
-            get
-            {
+        public TestBaseConfig TestConfig {
+            get {
                 var setting = _systemConfiguration.GetSection("TestConfig");
-                if (setting != null)
-                {
-                    var testConnection = new TestBaseConfig
-                    {
+                if (setting != null) {
+                    var testConnection = new TestBaseConfig {
                         BaseUrl = setting.GetSection("BaseUrl").Value,
                         UserName = setting.GetSection("UserName").Value,
                         Password = setting.GetSection("Password").Value
@@ -213,10 +213,8 @@ namespace Alabo.Runtime.Config
         /// <summary>
         ///     上传最大限制，单位KB
         /// </summary>
-        public long UploadMaxSize
-        {
-            get
-            {
+        public long UploadMaxSize {
+            get {
                 var setting = _systemConfiguration.GetSection("UploadMaxSize");
                 if (setting != null) {
                     return setting.Value.ConvertToLong(20480000);
@@ -229,10 +227,8 @@ namespace Alabo.Runtime.Config
         /// <summary>
         ///     非托管文件允许上传的类型
         /// </summary>
-        public string UploadFiles
-        {
-            get
-            {
+        public string UploadFiles {
+            get {
                 var setting = _systemConfiguration.GetSection("UploadFiles");
                 if (setting != null) {
                     if (setting.Value != null) {
@@ -247,10 +243,8 @@ namespace Alabo.Runtime.Config
         /// <summary>
         ///     是否为开发环境
         /// </summary>
-        public bool IsDevelopment
-        {
-            get
-            {
+        public bool IsDevelopment {
+            get {
                 var setting = _systemConfiguration.GetSection("IsDevelopment");
                 if (setting != null) {
                     return setting.Value.ConvertToBool();
@@ -263,10 +257,8 @@ namespace Alabo.Runtime.Config
         /// <summary>
         ///     是否为多租户模式
         /// </summary>
-        public bool IsTenant
-        {
-            get
-            {
+        public bool IsTenant {
+            get {
                 var setting = _systemConfiguration.GetSection("IsTenant");
                 if (setting != null) {
                     return setting.Value.ConvertToBool();
@@ -281,8 +273,7 @@ namespace Alabo.Runtime.Config
         /// </summary>
         public string TenantMaster { get; set; } = "master";
 
-        public MySqlConfig MySqlConfig => new MySqlConfig
-        {
+        public MySqlConfig MySqlConfig => new MySqlConfig {
             ConnectionString = _systemConfiguration["ConnectionStrings:MySQL:ConnectionString"],
             ProviderName = _systemConfiguration["ConnectionStrings:MySQL:ProviderName"]
         };
@@ -291,8 +282,7 @@ namespace Alabo.Runtime.Config
         ///     从文件读取网站配置
         /// </summary>
         /// <param name="path"></param>
-        internal static AppSettingConfig FromFile(string path)
-        {
+        internal static AppSettingConfig FromFile(string path) {
             var json = File.ReadAllText(path);
             var config = JsonConvert.DeserializeObject<AppSettingConfig>(json);
             return config;
@@ -302,8 +292,7 @@ namespace Alabo.Runtime.Config
         ///     从配置中读取webSiteConfig
         /// </summary>
         /// <param name="configuration"></param>
-        internal static AppSettingConfig FromConfig(IConfiguration configuration)
-        {
+        internal static AppSettingConfig FromConfig(IConfiguration configuration) {
             var websiteConfig = new AppSettingConfig(configuration);
             return websiteConfig;
         }

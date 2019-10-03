@@ -19,13 +19,11 @@ namespace Alabo.Framework.Core.Tenants.Domains.Services
         private readonly ITenantCreateRepository _tenantCreateRepository;
 
         public TenantCreateService(IUnitOfWork unitOfWork, ITenantCreateRepository tenantCreateRepository)
-            : base(unitOfWork)
-        {
+            : base(unitOfWork) {
             _tenantCreateRepository = tenantCreateRepository;
         }
 
-        public ServiceResult DeleteTenant(TenantInit tenantInit)
-        {
+        public ServiceResult DeleteTenant(TenantInit tenantInit) {
             var result = Check(tenantInit);
             if (!result.Succeeded) {
                 return result;
@@ -41,8 +39,7 @@ namespace Alabo.Framework.Core.Tenants.Domains.Services
             return ServiceResult.Success;
         }
 
-        public ServiceResult InitTenantDefaultData(TenantInit tenantInit)
-        {
+        public ServiceResult InitTenantDefaultData(TenantInit tenantInit) {
             var result = Check(tenantInit);
             if (!result.Succeeded) {
                 return result;
@@ -58,8 +55,7 @@ namespace Alabo.Framework.Core.Tenants.Domains.Services
             Resolve<IAdminService>().DefaultInit(tenantInit.IsTenant);
             // 修改管理员的账号
             var user = Resolve<IAlaboUserService>().GetSingle(r => r.UserName == "admin");
-            if (user != null)
-            {
+            if (user != null) {
                 user.Mobile = tenantInit.Mobile;
                 Resolve<IAlaboUserService>().Update(user);
             }
@@ -67,8 +63,7 @@ namespace Alabo.Framework.Core.Tenants.Domains.Services
             return ServiceResult.Success;
         }
 
-        public ServiceResult InitTenantTheme(TenantInit tenantInit)
-        {
+        public ServiceResult InitTenantTheme(TenantInit tenantInit) {
             var result = Check(tenantInit);
             if (!result.Succeeded) {
                 return result;
@@ -88,8 +83,7 @@ namespace Alabo.Framework.Core.Tenants.Domains.Services
             return ServiceResult.Success;
         }
 
-        public ServiceResult InitTenantDatabase(string tenant)
-        {
+        public ServiceResult InitTenantDatabase(string tenant) {
             if (!TenantContext.IsTenant) {
                 return ServiceResult.FailedWithMessage("非租户模式不能创建租户");
             }
@@ -106,14 +100,13 @@ namespace Alabo.Framework.Core.Tenants.Domains.Services
 
             isExists = _tenantCreateRepository.IsExistsDatabase(tenantName);
             if (isExists == false) {
-                return ServiceResult.FailedWithMessage("数据库创建失败，没有 CREATE DATABASE 权限，请手动添加数据库用户的 CREATE DATABASE 权限");
+                return ServiceResult.FailedWithMessage($"数据库创建失败，用户{RuntimeContext.Current.WebsiteConfig.MsSqlDbConnection.UserName}没有 CREATE DATABASE 权限，请手动添加数据库用户的 CREATE DATABASE 权限");
             }
 
             return ServiceResult.Success;
         }
 
-        public ServiceResult HaveTenant(string tenant)
-        {
+        public ServiceResult HaveTenant(string tenant) {
             if (tenant.IsNullOrEmpty()) {
                 return ServiceResult.FailedWithMessage("租户标识不能为空");
             }
@@ -132,8 +125,7 @@ namespace Alabo.Framework.Core.Tenants.Domains.Services
             return ServiceResult.Success;
         }
 
-        public ServiceResult NoTenant(string tenant)
-        {
+        public ServiceResult NoTenant(string tenant) {
             if (tenant.IsNullOrEmpty()) {
                 return ServiceResult.FailedWithMessage("租户标识不能为空");
             }
@@ -146,16 +138,14 @@ namespace Alabo.Framework.Core.Tenants.Domains.Services
             return ServiceResult.Success;
         }
 
-        public string Token(string tenant, string siteId)
-        {
+        public string Token(string tenant, string siteId) {
             var key = tenant + siteId;
             var token =
                 $"{key.ToMd5HashString().Substring(1, 20)}{key.ToMd5HashString().Substring(15, 10)}{tenant.ToMd5HashString().Substring(5, 10)}";
             return token.ToLower().Trim();
         }
 
-        private ServiceResult Check(TenantInit tenantInit)
-        {
+        private ServiceResult Check(TenantInit tenantInit) {
             var tenantToken = HttpWeb.HttpContext.Request.Headers["zk-tenant"];
             if (TenantContext.CurrentTenant == TenantContext.Master) {
                 return ServiceResult.FailedWithMessage("主库不能初始化");

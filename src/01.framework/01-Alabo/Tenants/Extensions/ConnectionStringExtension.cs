@@ -10,17 +10,14 @@ namespace Alabo.Tenants.Extensions
         /// </summary>
         /// <param name="connectionString"></param>
         /// <returns></returns>
-        public static string GetConnectionStringForMaster(this string connectionString)
-        {
+        public static string GetConnectionStringForMaster(this string connectionString) {
             if (string.IsNullOrWhiteSpace(connectionString)) {
                 return string.Empty;
             }
 
-            var sqlConnection = new SqlConnection(connectionString);
-
             var database = RuntimeContext.GetTenantSqlDataBase();
             connectionString = connectionString.Replace(
-               "Initial Catalog=" + sqlConnection.Database,
+               "Initial Catalog=" + RuntimeContext.Current.WebsiteConfig.MsSqlDbConnection.Database,
                "Initial Catalog=" + database);
             return connectionString;
         }
@@ -31,8 +28,7 @@ namespace Alabo.Tenants.Extensions
         /// <param name="connectionString"></param>
         /// <param name="tenantName"></param>
         /// <returns></returns>
-        public static string GetConnectionStringForTenant(this string connectionString, string tenantName)
-        {
+        public static string GetConnectionStringForTenant(this string connectionString, string tenantName) {
             if (string.IsNullOrWhiteSpace(connectionString) || string.IsNullOrWhiteSpace(tenantName)) {
                 return string.Empty;
             }

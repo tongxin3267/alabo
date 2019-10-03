@@ -99,12 +99,9 @@ namespace Alabo.Runtime
         /// <summary>
         ///     Gets the website configuration.
         /// </summary>
-        public AppSettingConfig WebsiteConfig
-        {
-            get
-            {
-                if (_websiteConfig == null)
-                {
+        public AppSettingConfig WebsiteConfig {
+            get {
+                if (_websiteConfig == null) {
                     _websiteConfig = new Lazy<AppSettingConfig>(() => AppSettingConfig.FromConfig(Configuration), true);
                     return _websiteConfig.Value;
                 }
@@ -116,10 +113,8 @@ namespace Alabo.Runtime
         /// <summary>
         ///     Gets the request services.
         /// </summary>
-        public IServiceProvider RequestServices
-        {
-            get
-            {
+        public IServiceProvider RequestServices {
+            get {
                 var threadId = Thread.CurrentThread.ManagedThreadId;
                 ServiceProviderCache.TryGetValue(threadId, out var result);
                 return result;
@@ -130,10 +125,8 @@ namespace Alabo.Runtime
         ///     获取当前运行环境下所有程序集
         /// </summary>
 
-        public AssemblyName[] RuntimeAssemblies
-        {
-            get
-            {
+        public AssemblyName[] RuntimeAssemblies {
+            get {
                 if (_runtimeAssemblies == null) {
                     _runtimeAssemblies = _dependencyContext.RuntimeLibraries
                         .SelectMany(library => library.GetDefaultAssemblyNames(_dependencyContext)).ToArray();
@@ -145,12 +138,9 @@ namespace Alabo.Runtime
 
         /// <summary>
         /// </summary>
-        public string CacheConfigurationString
-        {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(_cacheConfigurationString))
-                {
+        public string CacheConfigurationString {
+            get {
+                if (string.IsNullOrWhiteSpace(_cacheConfigurationString)) {
                     _cacheConfigurationString = Configuration.GetSection("CacheConfigurationString")?.Value;
                     if (_cacheConfigurationString.IsNullOrEmpty()) {
                         _cacheConfigurationString = "localhost";
@@ -167,8 +157,7 @@ namespace Alabo.Runtime
         /// </summary>
         /// <param name="tenant"></param>
         /// <returns></returns>
-        public static string GetTenantMongodbDataBase(string tenant = "")
-        {
+        public static string GetTenantMongodbDataBase(string tenant = "") {
             var database = Current.WebsiteConfig.MongoDbConnection.Database;
             database = database.Replace($"{Version}_", "");
 
@@ -182,11 +171,8 @@ namespace Alabo.Runtime
         /// </summary>
         /// <param name="tenant"></param>
         /// <returns></returns>
-        public static string GetTenantSqlDataBase(string tenant = "")
-        {
-            var connectionString = Current.WebsiteConfig.ConnectionString;
-            var sqlConnection = new SqlConnection(connectionString);
-            var database = sqlConnection.Database;
+        public static string GetTenantSqlDataBase(string tenant = "") {
+            var database = RuntimeContext.Current.WebsiteConfig.MsSqlDbConnection.Database;
             database = database.Replace($"{Version}_", "");
 
             database = tenant == "master" || string.IsNullOrWhiteSpace(tenant)
@@ -199,8 +185,7 @@ namespace Alabo.Runtime
         ///     获取当前运行环境下符合筛选条件的程序集
         /// </summary>
         /// <param name="predicate">筛选条件</param>
-        public Assembly[] GetRuntimeAssemblies(Func<AssemblyName, bool> predicate)
-        {
+        public Assembly[] GetRuntimeAssemblies(Func<AssemblyName, bool> predicate) {
             if (predicate == null) {
                 throw new ArgumentNullException(nameof(predicate));
             }
@@ -212,8 +197,7 @@ namespace Alabo.Runtime
         /// <summary>
         ///     获取当前运行环境下属于ZKCloud平台的程序集
         /// </summary>
-        public Assembly[] GetPlatformRuntimeAssemblies()
-        {
+        public Assembly[] GetPlatformRuntimeAssemblies() {
             if (_platformRuntimeAssemblie == null) {
                 _platformRuntimeAssemblie = GetRuntimeAssemblies(e =>
                     (e.FullName.StartsWith("Alabo") || e.FullName.StartsWith("ZKOpen") ||
@@ -229,8 +213,7 @@ namespace Alabo.Runtime
         /// </summary>
         /// <param name="threadId">The thread identifier.</param>
         /// <param name="serviceProvider">The 服务 provider.</param>
-        internal static void SetRequestServices(int threadId, IServiceProvider serviceProvider)
-        {
+        internal static void SetRequestServices(int threadId, IServiceProvider serviceProvider) {
             ServiceProviderCache.AddOrUpdate(threadId, serviceProvider, (_1, _2) => serviceProvider);
         }
     }
