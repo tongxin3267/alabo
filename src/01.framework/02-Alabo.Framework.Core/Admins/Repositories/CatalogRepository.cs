@@ -271,9 +271,82 @@ namespace Alabo.Framework.Core.Admins.Repositories {
             var uniqueList = new List<string>
             {
                SetUnique("Core_AutoConfig","type"),
+
+               // user 用户部分
+               SetNonclustered("User_User","UserName"),
+               SetNonclustered("User_User","Mobile"),
+               SetNonclustered("User_User","Email"),
+               SetNonclustered("User_User","GradeId"),
+               SetNonclustered("User_User","Status"),
+               SetNonclustered("User_User","ParentId"),
+
                SetNonclustered("User_UserDetail","UserId"),
                SetNonclustered("User_UserMap","UserId"),
+
+               // asset 资产部分
+               SetNonclustered("Asset_Account","UserId"),
+               SetNonclustered("Asset_Account","MoneyTypeId"),
+
+               SetNonclustered("Asset_Bill","UserId"),
+               SetNonclustered("Asset_Bill","MoneyTypeId"),
+               SetNonclustered("Asset_Bill","Type"),
+
+               SetNonclustered("Asset_Pay","UserId"),
+               SetNonclustered("Asset_Pay","PayType"),
+               SetNonclustered("Asset_Pay","Status"),
+               SetNonclustered("Asset_Pay","Type"),
+
+               SetNonclustered("Asset_Recharge","UserId"),
+               SetNonclustered("Asset_Recharge","MoneyTypeId"),
+               SetNonclustered("Asset_Recharge","Status"),
+
+               SetNonclustered("Asset_Refund","UserId"),
+               SetNonclustered("Asset_Refund","MoneyTypeId"),
+               SetNonclustered("Asset_Refund","Status"),
+
+               SetNonclustered("Asset_Settlement","UserId"),
+               SetNonclustered("Asset_Settlement","MoneyTypeId"),
+               SetNonclustered("Asset_Settlement","Status"),
+               SetNonclustered("Asset_Settlement","ConfigId"),
+
                SetNonclustered("Asset_Transfer","UserId"),
+               SetNonclustered("Asset_Transfer","MoneyTypeId"),
+
+               SetNonclustered("Asset_Withdraw","UserId"),
+               SetNonclustered("Asset_Withdraw","MoneyTypeId"),
+               SetNonclustered("Asset_Withdraw","Status"),
+
+               SetNonclustered("Basic_MessageQueue","Status"),
+
+               SetNonclustered("Basic_MessageQueue","Status"),
+               SetNonclustered("Basic_Relation","Type"),
+               SetNonclustered("Basic_RelationIndex","RelationId"),
+
+               SetNonclustered("Kpi_Kpi","UserId"),
+               SetNonclustered("Kpi_Kpi","ModuleId"),
+               SetNonclustered("Kpi_Kpi","Type"),
+
+               SetNonclustered("Market_UserRights","UserId"),
+               SetNonclustered("Market_UserRights","GradeId"),
+
+               SetNonclustered("Offline_MerchantOrder","UserId"),
+               SetNonclustered("Offline_MerchantOrderProduct","ModuleId"),
+
+               SetNonclustered("Share_Reward","ModuleId"),
+               SetNonclustered("Share_Reward","UserId"),
+               SetNonclustered("Share_Reward","UserId"),
+               SetNonclustered("Share_Reward","OrderUserId"),
+               SetNonclustered("Share_Reward","OrderId"),
+               SetNonclustered("Share_Reward","MoneyTypeId"),
+               SetNonclustered("Share_Reward","Status"),
+
+               SetNonclustered("Shop_Activity","ProductId"),
+               SetNonclustered("Share_Reward","UserId"),
+               SetNonclustered("Share_Reward","UserId"),
+               SetNonclustered("Share_Reward","OrderUserId"),
+               SetNonclustered("Share_Reward","OrderId"),
+               SetNonclustered("Share_Reward","MoneyTypeId"),
+               SetNonclustered("Share_Reward","Status"),
             };
             sqlList.AddRange(uniqueList);
 
