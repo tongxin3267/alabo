@@ -16,24 +16,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netcoreapp2.0\ZKCloud.Web.xml</DocumentationFile>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Remove="Admin\Base\Sql\**" />
-    <Compile Remove="Admin\Cusomer\**" />
-    <Compile Remove="Admin\Reports\新文件夹\**" />
-    <Compile Remove="Views\**" />
-    <Content Remove="Admin\Base\Sql\**" />
-    <Content Remove="Admin\Cusomer\**" />
-    <Content Remove="Admin\Reports\新文件夹\**" />
-    <Content Remove="Views\**" />
-    <EmbeddedResource Remove="Admin\Base\Sql\**" />
-    <EmbeddedResource Remove="Admin\Cusomer\**" />
-    <EmbeddedResource Remove="Admin\Reports\新文件夹\**" />
-    <EmbeddedResource Remove="Views\**" />
-    <None Remove="Admin\Base\Sql\**" />
-    <None Remove="Admin\Cusomer\**" />
-    <None Remove="Admin\Reports\新文件夹\**" />
-    <None Remove="Views\**" />
-  </ItemGroup>
+
   <ItemGroup>
     <Content Remove="Admin\Shop\Product\AdminProduct_ImgBg.cshtml" />
   </ItemGroup>
@@ -85,6 +68,8 @@
     <ProjectReference Include="..\..\06.tool\06-Alabo.Tool.QrCode\01-Alabo.Tool.QrCode.csproj" />
   </ItemGroup>
   <ProjectExtensions>
-    <VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio>
+    <VisualStudio>
+      <UserProperties appsettings_1json__JsonSchema="" />
+    </VisualStudio>
   </ProjectExtensions>
 </Project>

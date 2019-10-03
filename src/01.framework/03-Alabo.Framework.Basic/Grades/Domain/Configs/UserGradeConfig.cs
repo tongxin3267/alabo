@@ -51,9 +51,6 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs
         [Display(Name = "提现手续费减免")]
         public decimal WithDrawDiscount { get; set; } = 0;
 
-        /// <summary>
-        ///     Gets or sets the discount.
-        /// </summary>
         /// <value>
         ///     The discount.
         /// </value>
@@ -115,28 +112,5 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs
                 Ioc.Resolve<IAutoConfigService>().AddOrUpdate(autoConfig);
             }
         }
-    }
-
-    /// <summary>
-    /// </summary>
-    public class GradeHelper
-    {
-        /// <summary>
-        ///     Gets or sets Id标识
-        /// </summary>
-        /// <value>
-        ///     Id标识
-        /// </value>
-        [Display(Name = "Id标识")]
-        public Guid Id { get; set; }
-
-        /// <summary>
-        ///     Gets or sets the name.
-        /// </summary>
-        /// <value>
-        ///     The name.
-        /// </value>
-        [Display(Name = "名称")]
-        public string Name { get; set; }
     }
 }
