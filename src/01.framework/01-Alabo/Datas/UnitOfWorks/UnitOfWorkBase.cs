@@ -290,7 +290,7 @@ namespace Alabo.Datas.UnitOfWorks
 
         /// <summary>
         ///     保存更改前操作
-        /// </summary>
+        /// </summary>An error occurred while updating the entries
         protected virtual void SaveChangesBefore()
         {
             foreach (var entry in ChangeTracker.Entries())

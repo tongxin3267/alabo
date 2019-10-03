@@ -58,7 +58,6 @@ namespace Alabo.Framework.Core.Admins.Services
             var dicSort = from item in dic orderby item.Value select item;
             foreach (var item in dicSort)
             {
-                var time1 = DateTime.Now;
                 var type = types.Find(t => t.FullName == item.Key);
                 if (type == null) continue;
                 try
@@ -72,14 +71,12 @@ namespace Alabo.Framework.Core.Admins.Services
                                 if (set.IsTenant)
                                 {
                                     set.Init();
-                                    ;
                                 }
                             }
                             else
                             {
                                 // 非租户执行模式
                                 set.Init();
-                                ;
                             }
                         }
                         catch (Exception ex)
@@ -91,8 +88,6 @@ namespace Alabo.Framework.Core.Admins.Services
                 {
                     Trace.WriteLine(ex.Message);
                 }
-
-                var time2 = DateTime.Now;
             }
 
             Resolve<IAdminService>().ClearCache();

@@ -4,6 +4,7 @@ using Alabo.Data.People.Employes.Dtos;
 using Alabo.Data.People.Users.Controllers;
 using Alabo.Data.People.Users.Dtos;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,7 @@ namespace Alabo.Data.People.Employes.Controllers
         [HttpPost]
         public ApiResult<UserOutput> LoginByToken([FromBody] GetLoginToken loginByToken)
         {
+            Resolve<IGradeService>().GetUserGradeList();
             if (!this.IsFormValid())
                 return ApiResult.Failure<UserOutput>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
 

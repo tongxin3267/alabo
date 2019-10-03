@@ -4,6 +4,7 @@ using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Web.Mvc.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 
 namespace Alabo.App.Asset.Bills.Dtos
 {
@@ -51,7 +52,7 @@ namespace Alabo.App.Asset.Bills.Dtos
         ///     货币类型
         /// </summary>
         [Field(ControlsType = ControlsType.DropdownList, IsShowAdvancedSerach = true,
-            DataSource = "Alabo.App.Core.Finance.Domain.CallBacks.MoneyTypeConfig", IsShowBaseSerach = false,
+           DataSourceType = typeof(MoneyTypeConfig), IsShowBaseSerach = false,
             SortOrder = 200)]
         [Display(Name = "货币类型")]
         public Guid? MoneyTypeId { get; set; }

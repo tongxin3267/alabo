@@ -60,9 +60,6 @@ namespace Alabo.Framework.Core.Admins.Repositories
                 "alter table User_UserDetail  drop column IsServiceCenter",
                 " alter table User_UserDetail  drop column ServiceCenterUserId",
 
-                " alter table User_Map  drop column ShopSaleInfo",
-                "alter table User_Map  drop column TeamSales",
-
                 "  ALTER TABLE User_UserDetail Add IdentityStatus  [int]",
                 " update User_UserDetail set IdentityStatus = 1 where IdentityStatus is null",
             };

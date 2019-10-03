@@ -4,6 +4,7 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 
 namespace Alabo.App.Asset.Withdraws.Dtos
 {
@@ -38,7 +39,7 @@ namespace Alabo.App.Asset.Withdraws.Dtos
         [Display(Name = "提现账户")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [Field(ControlsType = ControlsType.DropdownList, ListShow = true, EditShow = true,
-            DataSource = "Alabo.App.Core.Finance.Domain.CallBacks.MoneyTypeConfig", IsShowBaseSerach = false,
+           DataSourceType = typeof(MoneyTypeConfig), IsShowBaseSerach = false,
             SortOrder = 200)]
         public string MoneyTypeName { get; set; } = "提现账户";
 
@@ -46,7 +47,7 @@ namespace Alabo.App.Asset.Withdraws.Dtos
         ///     货币类型
         /// </summary>
         //[Field(ControlsType = ControlsType.Label, IsShowAdvancedSerach = true, ListShow = true, EditShow = true,
-        //    DataSource = "Alabo.App.Core.Finance.Domain.CallBacks.MoneyTypeConfig", IsShowBaseSerach = false,
+        //   DataSourceType = typeof(MoneyTypeConfig), IsShowBaseSerach = false,
         //    SortOrder = 200)]
         [Display(Name = "提现账户")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]

@@ -81,7 +81,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Configs
         ///     附加货币，不附加货币时为空
         /// </summary>
         [Field(ControlsType = ControlsType.DropdownList, SortOrder = 4, ListShow = false,
-            DataSource = "Alabo.App.Core.Finance.Domain.CallBacks.MoneyTypeConfig")]
+           DataSourceType = typeof(MoneyTypeConfig))]
         [Display(Name = "附加货币")]
         [HelpBlock("附加货币。常见货币类型：人民币，积分、卡券、红包、虚拟币、授信、美元等")]
         public Guid MoneyTypeId { get; set; }

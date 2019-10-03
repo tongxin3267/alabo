@@ -41,8 +41,7 @@ namespace Alabo.Data.People.Users.Domain.Configs
         [HelpBlock("任务的类型，每个任务对应不同的任务类型,任务的条件有系统后台触发，任务类型只能用系统人员添加")]
         public TaskType TaskType { get; set; } = 0;
 
-        [Field(ControlsType = ControlsType.DropdownList, ListShow = false, SortOrder = 2,
-            DataSource = "Alabo.App.Core.Finance.Domain.CallBacks.MoneyTypeConfig")]
+        [Field(ControlsType = ControlsType.DropdownList, ListShow = false, SortOrder = 2, DataSourceType = typeof(MoneyTypeConfig))]
         [Display(Name = "奖励货币类型")]
         [Required(ErrorMessage = "请选择奖励货币类型")]
         [HelpBlock("完成任务奖励的货币类型，比如推荐一个会员赠送20个升级点，奖励货币类型为升级点。注册一个会员赠送20元人民币，奖励货币类型为人民币")]
@@ -81,8 +80,6 @@ namespace Alabo.Data.People.Users.Domain.Configs
                         config.Id = Guid.NewGuid();
                         // configs.Add(config);
                     }
-
-                var typeclassProperty = config.GetType().GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
                 var autoConfig = new AutoConfig
                 {
                     Type = config.GetType().FullName,

@@ -5,6 +5,7 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 
 namespace Alabo.App.Asset.Recharges.Dtos
 {
@@ -23,7 +24,7 @@ namespace Alabo.App.Asset.Recharges.Dtos
         /// </summary>
         [Display(Name = "货币类型")]
         [Field(ControlsType = ControlsType.DropdownList, IsShowAdvancedSerach = true,
-            DataSource = "Alabo.App.Core.Finance.Domain.CallBacks.MoneyTypeConfig", IsShowBaseSerach = false,
+           DataSourceType = typeof(MoneyTypeConfig), IsShowBaseSerach = false,
             SortOrder = 200)]
         public Guid MoneyTypeId { get; set; } = Guid.Parse("E97CCD1E-1478-49BD-BFC7-E73A5D699000");
 

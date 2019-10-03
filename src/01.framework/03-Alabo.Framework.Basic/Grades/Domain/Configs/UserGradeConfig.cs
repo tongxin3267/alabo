@@ -7,6 +7,7 @@ using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
 using Alabo.AutoConfigs.Services;
 using Alabo.Domains.Enums;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Helpers;
 using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
@@ -17,7 +18,7 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs
     /// <summary>
     ///     用户等级设置
     /// </summary>
-    /// <seealso cref="Alabo.App.Core.User.BaseGradeConfig" />
+    /// <seealso cref="BaseGradeConfig" />
     /// <seealso cref="IAutoConfig" />
     [NotMapped]
     [ClassProperty(Name = "用户等级", Icon = "fa fa-user-times",
@@ -72,16 +73,15 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs
         /// </summary>
         public void SetDefault()
         {
-            var list = Ioc.Resolve<IAlaboAutoConfigService>().GetList<UserGradeConfig>();
+            var list = Ioc.Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
             if (list.Count < 1)
             {
                 var configs = new List<UserGradeConfig>();
                 var config = new UserGradeConfig
                 {
                     Id = Guid.Parse("72be65e6-3000-414d-972e-1a3d4a366000"),
-                    Name = "红钻会员",
-                    Icon =
-                        @"https://s-open.qiniuniu99.com//wwwroot/uploads/api/2019-06-13/5d0231d97d430d0ffc85242b.png",
+                    Name = "会员默认等级",
+                    Icon = "/wwwroot/static/images/GradeIcon/User01.png",
                     IsDefault = true
                 };
                 list.Add(config);
@@ -89,9 +89,8 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs
                 config = new UserGradeConfig
                 {
                     Id = Guid.Parse("72be65e6-3000-414d-972e-1a3d4a366001"),
-                    Name = "金钻会员",
-                    Icon =
-                        @"https://s-open.qiniuniu99.com//wwwroot/uploads/api/2019-06-13/5d0231d97d430d0ffc85242c.png",
+                    Name = "钻石会员",
+                    Icon = "/wwwroot/static/images/GradeIcon/User02.png",
                     IsDefault = false,
                     Contribute = 10000
                 };
@@ -100,23 +99,20 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs
                 config = new UserGradeConfig
                 {
                     Id = Guid.Parse("72be65e6-3000-414d-972e-1a3d4a366002"),
-                    Name = "紫钻会员",
-                    Icon =
-                        @"https://s-open.qiniuniu99.com//wwwroot/uploads/api/2019-06-13/5d0231d97d430d0ffc85242d.png ",
+                    Name = "黄金会员",
+                    Icon = "/wwwroot/static/images/GradeIcon/User03.png",
                     IsDefault = false,
                     Contribute = 100000
                 };
                 list.Add(config);
 
-                var typeclassProperty = config.GetType().GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
                 var autoConfig = new AutoConfig
                 {
                     Type = config.GetType().FullName,
-
                     LastUpdated = DateTime.Now,
                     Value = JsonConvert.SerializeObject(list)
                 };
-                Ioc.Resolve<IAlaboAutoConfigService>().AddOrUpdate(autoConfig);
+                Ioc.Resolve<IAutoConfigService>().AddOrUpdate(autoConfig);
             }
         }
     }

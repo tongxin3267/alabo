@@ -53,7 +53,7 @@ namespace Alabo.App.Asset.Withdraws.Dtos
         /// </summary>
         [Display(Name = "申请账户")]
         [Field(ControlsType = ControlsType.DropdownList, IsShowAdvancedSerach = true,
-            DataSource = "Alabo.App.Core.Finance.Domain.CallBacks.MoneyTypeConfig", LabelColor = LabelColor.Info,
+           DataSourceType = typeof(MoneyTypeConfig), LabelColor = LabelColor.Info,
             ListShow = true, Width = "80",
             SortOrder = 2)]
         public string MoneyTypeName { get; set; }

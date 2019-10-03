@@ -3,6 +3,7 @@ using Alabo.App.Asset.Transfers.Domain.Configs;
 using Alabo.AutoConfigs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Configs;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
+using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Industry.Shop.Activitys.ViewModels;
 using Alabo.Runtime.Config;
 using Alabo.Test.Base.Attribute;
@@ -61,8 +62,8 @@ namespace Alabo.Test.Core.Common.Domain.Services
         [TestIgnore]
         public void AddOrUpdate_AutoConfig_test()
         {
-            //AutoConfig config = null;
-            //Service<IAutoConfigService>().AddOrUpdate(config);
+            UserGradeConfig config = new UserGradeConfig();
+            config.SetDefault();
         }
 
         [Fact]
