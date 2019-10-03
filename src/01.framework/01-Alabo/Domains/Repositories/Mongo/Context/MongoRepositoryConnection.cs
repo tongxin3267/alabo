@@ -58,16 +58,22 @@ namespace Alabo.Domains.Repositories.Mongo.Context
             ////ClientSettings.WriteConcern = WriteConcern.Acknowledged;
             ////Client = new MongoClient(ClientSettings);
 
+            var rootDataBase = DataBaseName;
+            if (RuntimeContext.Current.WebsiteConfig.MongoDbConnection.IsRoot)
+            {
+                rootDataBase = "admin";
+            }
             ClientSettings = MongoClientSettings.FromUrl(MongoUrl);
             ClientSettings.ConnectTimeout = new TimeSpan(0, 0, 1, 30, 0); //1分30秒超时
             ClientSettings.MaxConnectionPoolSize = 2000; //设置连接池最大连接数
             var credentials =
-                MongoCredential.CreateCredential(DataBaseName, MongoUrl.Username, MongoUrl.Password); //添加用户名、密码
+                MongoCredential.CreateCredential(rootDataBase, MongoUrl.Username, MongoUrl.Password); //添加用户名、密码
             ClientSettings.Credential = credentials;
             ClientSettings.Server = MongoUrl.Server; //服务器地址
             ClientSettings.ReadPreference = new ReadPreference(ReadPreferenceMode.Primary);
             ClientSettings.WriteConcern = WriteConcern.Acknowledged;
             ClientSettings.ConnectionMode = ConnectionMode.Direct;
+
             Client = new MongoClient(ClientSettings);
         }
 

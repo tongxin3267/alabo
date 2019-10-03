@@ -41,23 +41,8 @@ namespace Alabo.Data.People.Stores.Domain.Services
                     Status = UserTypeStatus.Success
                 };
 
-                var context = Repository<IStoreRepository>().RepositoryContext;
-                context.BeginTransaction();
-                try
-                {
-                    Add(store);
+                Add(store);
 
-                    context.SaveChanges();
-                    context.CommitTransaction();
-                }
-                catch (Exception ex)
-                {
-                    context.RollbackTransaction();
-                }
-                finally
-                {
-                    context.DisposeTransaction();
-                }
                 store = GetSingle(r => r.UserId == planformUser.Id);
             }
             return store;

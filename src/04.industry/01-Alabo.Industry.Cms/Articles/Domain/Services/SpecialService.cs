@@ -30,24 +30,5 @@ namespace Alabo.Industry.Cms.Articles.Domain.Services
             AddOrUpdate(model, model.Id.IsObjectIdNullOrEmpty());
             return ServiceResult.Success;
         }
-
-        public string GetPagePath(string key, bool ismobile)
-        {
-            var path = "";
-            if (ismobile)
-                path = $@"/wwwroot/themes/{ThemeHelper.SeMobile}/Special/{key}.cshtml";
-            else
-                path = $@"/wwwroot/themes/{ThemeHelper.CurrentTheme}/Special/{key}.cshtml";
-
-            var filePath = FileHelper.RootPath + "/" + path;
-            if (!File.Exists(filePath))
-            {
-                var diretory = FileHelper.RootPath + "/" + $@"wwwroot/themes/{ThemeHelper.CurrentTheme}/Special/";
-                FileHelper.CreateDirectory(diretory);
-                FileHelper.Write(filePath, $@"{key} 专题视图创建成功");
-            }
-
-            return path;
-        }
     }
 }

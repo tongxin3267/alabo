@@ -137,6 +137,7 @@ namespace Alabo.Runtime.Config
                         _mongoDbConnection = new MongoDbConnection
                         {
                             Database = setting.GetSection("Database").Value,
+                            IsRoot = setting.GetSection("IsRoot").Value.ConvertToBool(),
                             ConnectionString = setting.GetSection("ConnectionString").Value
                         };
                 }
@@ -190,60 +191,6 @@ namespace Alabo.Runtime.Config
                 }
 
                 return null;
-            }
-        }
-
-        /// <summary>
-        ///     当前模板路径
-        /// </summary>
-        public string Theme
-        {
-            get
-            {
-                var value = "Theme";
-                var setting = _systemConfiguration.GetSection("Theme");
-                if (setting != null)
-                    if (!setting.Value.IsNullOrEmpty())
-                        value = setting.Value;
-
-                return value;
-            }
-        }
-
-        /// <summary>
-        ///     当前手机模板路径
-        /// </summary>
-        public string MobileTheme
-        {
-            get
-            {
-                var value = "Theme";
-                var setting = _systemConfiguration.GetSection("MobileTheme");
-                if (setting != null)
-                    if (!setting.Value.IsNullOrEmpty())
-                        value = setting.Value;
-
-                return value;
-            }
-        }
-
-        /// <summary>
-        ///     模板启用模式，方便调试模板用
-        ///     auto :表示根据浏览器自动识别
-        ///     pc:表示启用电脑版本模板
-        ///     moblie:表示启用手机版本模板
-        /// </summary>
-        public string ThemeModel
-        {
-            get
-            {
-                var value = "auto";
-                var setting = _systemConfiguration.GetSection("ThemeModel");
-                if (setting != null)
-                    if (!setting.Value.IsNullOrEmpty())
-                        value = setting.Value;
-
-                return value;
             }
         }
 
@@ -314,23 +261,6 @@ namespace Alabo.Runtime.Config
         ///     主租户
         /// </summary>
         public string TenantMaster { get; set; } = "master";
-
-        /// <summary>
-        ///     diy全局css保持方式(all:所有系统存在的组件，used:只在数据库中使用的组件，默认为all)
-        /// </summary>
-        public string SaveStyle
-        {
-            get
-            {
-                var value = "all";
-                var setting = _systemConfiguration.GetSection("SaveStyle");
-                if (setting != null)
-                    if (!setting.Value.IsNullOrEmpty())
-                        value = setting.Value;
-
-                return value;
-            }
-        }
 
         public MySqlConfig MySqlConfig => new MySqlConfig
         {
