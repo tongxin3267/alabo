@@ -31,7 +31,9 @@ namespace Alabo.Framework.Themes.Clients
 
             var result = Connector.Get(uri, parameters);
             var apiResult = DataFormatter.ToObject<ApiResult<ThemePublish>>(result);
-            if (apiResult.Status == ResultStatus.Success) return apiResult.Result;
+            if (apiResult.Status == ResultStatus.Success) {
+                return apiResult.Result;
+            }
 
             return null;
         }
@@ -53,7 +55,9 @@ namespace Alabo.Framework.Themes.Clients
 
             var result = await Connector.GetAsync(uri, parameters);
             var apiResult = DataFormatter.ToObject<ApiResult<ThemePublish>>(result);
-            if (apiResult.Status == ResultStatus.Success) return apiResult.Result;
+            if (apiResult.Status == ResultStatus.Success) {
+                return apiResult.Result;
+            }
 
             return null;
         }
@@ -68,17 +72,24 @@ namespace Alabo.Framework.Themes.Clients
             };
             var result = await Connector.GetAsync(uri, parameters);
             var apiResult = DataFormatter.ToObject<ApiResult<List<Theme>>>(result);
-            if (apiResult.Status != ResultStatus.Success) return ServiceResult.FailedWithMessage(apiResult.Message);
+            if (apiResult.Status != ResultStatus.Success) {
+                return ServiceResult.FailedWithMessage(apiResult.Message);
+            }
+
             var themeList = Ioc.Resolve<IThemeService>().GetList();
             var addList = new List<Theme>();
 
             foreach (var item in apiResult.Result)
             {
                 var find = themeList.FirstOrDefault(r => r.Id == item.Id);
-                if (find == null) addList.Add(item);
+                if (find == null) {
+                    addList.Add(item);
+                }
             }
 
-            if (addList.Count > 0) Ioc.Resolve<IThemeService>().AddMany(addList);
+            if (addList.Count > 0) {
+                Ioc.Resolve<IThemeService>().AddMany(addList);
+            }
 
             return ServiceResult.Success;
         }

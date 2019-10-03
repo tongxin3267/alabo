@@ -41,9 +41,14 @@ namespace Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Model
         public AutoForm GetAutoForm(object obj)
         {
             //data
-            if (obj == null) return null;
+            if (obj == null) {
+                return null;
+            }
+
             var discountList = obj.MapTo<MemberDiscountActivity>()?.DiscountList;
-            if (discountList == null || discountList.Count <= 0) return null;
+            if (discountList == null || discountList.Count <= 0) {
+                return null;
+            }
 
             //builder auto form
             var fieldGroups = AutoFormMapping.GetFormFields(discountList).ToList();
@@ -55,7 +60,10 @@ namespace Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Model
                 jsonItems.Foreach(item =>
                 {
                     var tempField = item.Items.ToList().Find(i => i.Field == "price");
-                    if (tempField == null) return;
+                    if (tempField == null) {
+                        return;
+                    }
+
                     tempField.Name = item.Items.ToList().Find(i => i.Field == "name").Value?.ToString();
                     tempField.Field = item.Items.ToList().Find(i => i.Field == "id").Value?.ToString();
                     fields.Add(tempField);
@@ -74,7 +82,10 @@ namespace Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Model
         /// </summary>
         public object GetDefaultValue(ActivityEditInput activityEdit, Activity activity)
         {
-            if (activityEdit.ProductId <= 0) return null;
+            if (activityEdit.ProductId <= 0) {
+                return null;
+            }
+
             var isDefault = true;
             var result = new MemberDiscountActivity();
             if (!string.IsNullOrWhiteSpace(activity.Value))
@@ -108,7 +119,9 @@ namespace Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Model
                         var tempGrade = item.GradePriceList.Find(g => g.Id == grade.Id);
                         if (tempGrade != null)
                         {
-                            if (grade.Name != tempGrade.Name) grade.Name = tempGrade.Name;
+                            if (grade.Name != tempGrade.Name) {
+                                grade.Name = tempGrade.Name;
+                            }
                         }
                         else
                         {
@@ -145,7 +158,9 @@ namespace Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Model
                     item.GradeItems.ForEach(grade =>
                     {
                         var tempGrade = userGrades.Find(g => g.Id == grade.Id);
-                        if (tempGrade != null) grade.Name = tempGrade.Name;
+                        if (tempGrade != null) {
+                            grade.Name = tempGrade.Name;
+                        }
                     });
                 });
             }

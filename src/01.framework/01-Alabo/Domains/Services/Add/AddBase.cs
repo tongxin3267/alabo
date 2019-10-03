@@ -31,7 +31,9 @@ namespace Alabo.Domains.Services.Add
             var result = Store.AddSingle(model);
             //if (result) Log($"成功新增[{typeof(TEntity).Name}]记录一条,新增记录Id:{model.Id}");
             //失败再打印日志,避免资源浪费
-            if (!result) Log($"新增[{typeof(TEntity).Name}]失败,新增记录:{model.ToJson()}");
+            if (!result) {
+                Log($"新增[{typeof(TEntity).Name}]失败,新增记录:{model.ToJson()}");
+            }
 
             var cacheKey = $"{typeof(TEntity).Name}_ReadCache_{model.Id.ToStr().Trim()}";
             ObjectCache.Remove(cacheKey);

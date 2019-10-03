@@ -22,7 +22,9 @@ namespace Alabo.App.Asset.Bills.Domain.Repositories
 
         public void AddSingleNative(Bill bill)
         {
-            if (bill == null) throw new ArgumentNullException(nameof(bill));
+            if (bill == null) {
+                throw new ArgumentNullException(nameof(bill));
+            }
 
             var sql = @"INSERT INTO dbo.Asset_Bill
             ([Serial],[UserId],[OtherUserId],[Type],MoneyTypeId
@@ -47,13 +49,16 @@ namespace Alabo.App.Asset.Bills.Domain.Repositories
                 RepositoryContext.CreateParameter("@UserId", bill.UserId)
             };
             var result = RepositoryContext.ExecuteScalar(sql, parameters);
-            if (result != null && result != DBNull.Value) bill.Id = Convert.ToInt32(result);
+            if (result != null && result != DBNull.Value) {
+                bill.Id = Convert.ToInt32(result);
+            }
         }
 
         public IList<Bill> GetBillList(BillInput userInput, out long count)
         {
-            if (userInput.PageIndex < 0)
+            if (userInput.PageIndex < 0) {
                 throw new ArgumentNullException("pageIndex", "pageindex has to be greater than 1");
+            }
 
             // TODO: ??? why set this at first??
             //if (userInput.PageSize > 100) {
@@ -61,16 +66,25 @@ namespace Alabo.App.Asset.Bills.Domain.Repositories
             //}
 
             var sqlWhere = string.Empty;
-            if (userInput.Flow.HasValue) sqlWhere = $"{sqlWhere} AND Flow={(int)userInput.Flow}";
+            if (userInput.Flow.HasValue) {
+                sqlWhere = $"{sqlWhere} AND Flow={(int)userInput.Flow}";
+            }
 
-            if (userInput.OtherUserId > 0) sqlWhere = $"{sqlWhere} AND ParentId={userInput.OtherUserId}";
+            if (userInput.OtherUserId > 0) {
+                sqlWhere = $"{sqlWhere} AND ParentId={userInput.OtherUserId}";
+            }
 
-            if (userInput.Id > 0) sqlWhere = $"{sqlWhere} AND Id= '{userInput.Id}' ";
+            if (userInput.Id > 0) {
+                sqlWhere = $"{sqlWhere} AND Id= '{userInput.Id}' ";
+            }
 
-            if (!userInput.MoneyTypeId.IsGuidNullOrEmpty())
+            if (!userInput.MoneyTypeId.IsGuidNullOrEmpty()) {
                 sqlWhere = $"{sqlWhere} AND MoneyTypeId= '{userInput.MoneyTypeId}' ";
+            }
 
-            if (userInput.UserId > 0) sqlWhere = $"{sqlWhere} AND UserId='{userInput.UserId}' ";
+            if (userInput.UserId > 0) {
+                sqlWhere = $"{sqlWhere} AND UserId='{userInput.UserId}' ";
+            }
 
             var sqlCount = $"SELECT COUNT(Id) [Count] FROM [Asset_Bill] where 1=1 {sqlWhere}";
             count = RepositoryContext.ExecuteScalar(sqlCount)?.ConvertToLong() ?? 0;
@@ -84,7 +98,9 @@ namespace Alabo.App.Asset.Bills.Domain.Repositories
                         WHERE RowNumber > {userInput.PageSize}*({userInput.PageIndex}-1)  ";
             using (var dr = RepositoryContext.ExecuteDataReader(sql))
             {
-                while (dr.Read()) result.Add(ReadBill(dr));
+                while (dr.Read()) {
+                    result.Add(ReadBill(dr));
+                }
             }
 
             return result;
@@ -92,18 +108,26 @@ namespace Alabo.App.Asset.Bills.Domain.Repositories
 
         public IList<Bill> GetApiBillList(BillApiInput billApiInput, out long count)
         {
-            if (billApiInput.PageIndex < 0)
+            if (billApiInput.PageIndex < 0) {
                 throw new ArgumentNullException("pageIndex", "pageindex has to be greater than 1");
+            }
 
-            if (billApiInput.PageSize > 100) billApiInput.PageSize = 100;
+            if (billApiInput.PageSize > 100) {
+                billApiInput.PageSize = 100;
+            }
 
             var sqlWhere = string.Empty;
-            if (billApiInput.Flow.HasValue) sqlWhere = $"{sqlWhere} AND Flow={(int)billApiInput.Flow}";
+            if (billApiInput.Flow.HasValue) {
+                sqlWhere = $"{sqlWhere} AND Flow={(int)billApiInput.Flow}";
+            }
 
-            if (!billApiInput.MoneyTypeId.IsGuidNullOrEmpty())
+            if (!billApiInput.MoneyTypeId.IsGuidNullOrEmpty()) {
                 sqlWhere = $"{sqlWhere} AND MoneyTypeId= '{billApiInput.MoneyTypeId}' ";
+            }
 
-            if (billApiInput.LoginUserId > 0) sqlWhere = $"{sqlWhere} AND UserId='{billApiInput.LoginUserId}' ";
+            if (billApiInput.LoginUserId > 0) {
+                sqlWhere = $"{sqlWhere} AND UserId='{billApiInput.LoginUserId}' ";
+            }
 
             var sqlCount = $"SELECT COUNT(Id) [Count] FROM [Asset_Bill] where 1=1 {sqlWhere}";
             count = RepositoryContext.ExecuteScalar(sqlCount)?.ConvertToLong() ?? 0;

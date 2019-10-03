@@ -67,7 +67,9 @@ namespace Alabo.Framework.Tasks.Queues.Models
 
         public new static ExecuteResult<T> Error(Exception exception)
         {
-            if (exception == null) throw new ArgumentNullException(nameof(exception));
+            if (exception == null) {
+                throw new ArgumentNullException(nameof(exception));
+            }
 
             return new ExecuteResult<T>
             {

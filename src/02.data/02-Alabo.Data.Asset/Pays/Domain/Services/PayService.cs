@@ -94,23 +94,30 @@ namespace Alabo.App.Asset.Pays.Domain.Services
 
                 #region 通用安全验证
 
-                if (payInput.Amount < 0) return Tuple.Create(ServiceResult.FailedWithMessage("支付金额不能小于0"), payOutput);
+                if (payInput.Amount < 0) {
+                    return Tuple.Create(ServiceResult.FailedWithMessage("支付金额不能小于0"), payOutput);
+                }
 
-                if (payInput.Amount > Convert.ToDecimal(99999999))
+                if (payInput.Amount > Convert.ToDecimal(99999999)) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("支付金额不能大于100000"), payOutput);
+                }
 
                 var pay = GetSingle(payInput.PayId);
                 pay.PayExtension = pay.Extensions.ToObject<PayExtension>();
-                if (pay == null && pay.Status != PayStatus.WaiPay)
+                if (pay == null && pay.Status != PayStatus.WaiPay) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("支付记录不存在，或已处理"), payOutput);
+                }
 
-                if (pay.EntityId == null) return Tuple.Create(ServiceResult.FailedWithMessage("实体订单已不存在"), payOutput);
+                if (pay.EntityId == null) {
+                    return Tuple.Create(ServiceResult.FailedWithMessage("实体订单已不存在"), payOutput);
+                }
 
                 try
                 {
                     orderIds = pay.EntityId.DeserializeJson<List<object>>();
-                    if (orderIds == null || orderIds.Count < 1)
+                    if (orderIds == null || orderIds.Count < 1) {
                         return Tuple.Create(ServiceResult.FailedWithMessage("实体订单已不存在"), payOutput);
+                    }
                 }
                 catch
                 {
@@ -118,13 +125,18 @@ namespace Alabo.App.Asset.Pays.Domain.Services
                 }
 
                 var user = Resolve<IUserService>().GetSingle(payInput.LoginUserId);
-                if (user == null && user.Status != Status.Normal)
+                if (user == null && user.Status != Status.Normal) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("用户不存在，或状态不正常"), payOutput);
+                }
 
                 if (pay.PayType != PayType.AdminPay) // 非管理员支付，验证用户Id
-                    if (user.Id != pay.UserId)
-                        if (user.Id != pay.PayExtension.OrderUser.Id)
+{
+                    if (user.Id != pay.UserId) {
+                        if (user.Id != pay.PayExtension.OrderUser.Id) {
                             return Tuple.Create(ServiceResult.FailedWithMessage("用户Id和支付记录Id不一样"), payOutput);
+                        }
+                    }
+                }
 
                 #endregion 通用安全验证
 
@@ -134,17 +146,20 @@ namespace Alabo.App.Asset.Pays.Domain.Services
                 if (pay.Type == CheckoutType.Order)
                 {
                     var payShopOrders = _payRepository.GetOrderPayAccount(orderIds);
-                    if (!pay.Amount.EqualsDigits(payShopOrders.Sum(r => r.PaymentAmount)))
+                    if (!pay.Amount.EqualsDigits(payShopOrders.Sum(r => r.PaymentAmount))) {
                         return Tuple.Create(ServiceResult.FailedWithMessage("支付金额与订单金额不一致"), payOutput);
+                    }
 
                     foreach (var payPair in pay.AccountPayPair)
                     {
                         var value = 0.0m;
-                        foreach (var order in payShopOrders)
+                        foreach (var order in payShopOrders) {
                             value += order.AccountPayPair.Where(r => r.Key == payPair.Key).Sum(r => r.Value);
+                        }
 
-                        if (!value.EqualsDigits(payPair.Value))
+                        if (!value.EqualsDigits(payPair.Value)) {
                             return Tuple.Create(ServiceResult.FailedWithMessage("账户支付金额不一致"), payOutput);
+                        }
                     }
                 }
 
@@ -185,7 +200,9 @@ namespace Alabo.App.Asset.Pays.Domain.Services
                                 pay.PayType = PayType.BalancePayment;
 
                                 var callback = _payRepository.AfterPay(orderIds, pay, result.Succeeded);
-                                if (!callback.Succeeded) payOutput.Message += "回调失败!";
+                                if (!callback.Succeeded) {
+                                    payOutput.Message += "回调失败!";
+                                }
 
                                 if (orderIds.Count > 1)
                                 {
@@ -198,8 +215,9 @@ namespace Alabo.App.Asset.Pays.Domain.Services
                                 }
 
                                 // 如果前台跳转不为空
-                                if (!pay.PayExtension.RedirectUrl.IsNullOrEmpty())
+                                if (!pay.PayExtension.RedirectUrl.IsNullOrEmpty()) {
                                     payOutput.Url = pay.PayExtension.RedirectUrl;
+                                }
                             }
 
                             break;
@@ -288,10 +306,11 @@ namespace Alabo.App.Asset.Pays.Domain.Services
                             {
                                 pay.PayType = PayType.AdminPay;
                                 result = _payRepository.AfterPay(orderIds, pay, result.Succeeded);
-                                if (orderIds.Count > 1)
+                                if (orderIds.Count > 1) {
                                     payOutput.Url = "/pages/index?path=order_list";
-                                else
+                                } else {
                                     payOutput.Url = $"/pages/index?path=order_show&id={orderIds.FirstOrDefault()}";
+                                }
                             }
 
                             break;
@@ -302,7 +321,9 @@ namespace Alabo.App.Asset.Pays.Domain.Services
 
                 payOutput.EntityIds = orderIds;
                 payOutput.PayId = payInput.PayId;
-                if (!pay.PayExtension.RedirectUrl.IsNullOrEmpty()) payOutput.Url = pay.PayExtension.RedirectUrl;
+                if (!pay.PayExtension.RedirectUrl.IsNullOrEmpty()) {
+                    payOutput.Url = pay.PayExtension.RedirectUrl;
+                }
             }
             catch (Exception ex)
             {
@@ -320,12 +341,18 @@ namespace Alabo.App.Asset.Pays.Domain.Services
         {
             #region 通用安全验证
 
-            if (pay == null && pay.Status != PayStatus.WaiPay) return ServiceResult.FailedWithMessage("支付记录不存在，或已处理");
+            if (pay == null && pay.Status != PayStatus.WaiPay) {
+                return ServiceResult.FailedWithMessage("支付记录不存在，或已处理");
+            }
 
-            if (pay.EntityId == null) return ServiceResult.FailedWithMessage("实体订单已不存在");
+            if (pay.EntityId == null) {
+                return ServiceResult.FailedWithMessage("实体订单已不存在");
+            }
 
             var orderIds = pay.EntityId.DeserializeJson<List<object>>();
-            if (orderIds == null || orderIds.Count < 1) return ServiceResult.FailedWithMessage("实体订单已不存在");
+            if (orderIds == null || orderIds.Count < 1) {
+                return ServiceResult.FailedWithMessage("实体订单已不存在");
+            }
 
             if (pay.Type == CheckoutType.Recharge)
             {
@@ -382,19 +409,24 @@ namespace Alabo.App.Asset.Pays.Domain.Services
 
             var orderInfo = new object();
             var config = Resolve<IAutoConfigService>().GetValue<AppWeChatPaymentConfig>();
-            if (!config.IsEnable) return Tuple.Create(ServiceResult.FailedWithMessage("微信配置未启用，请在后台开启"), orderInfo);
+            if (!config.IsEnable) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("微信配置未启用，请在后台开启"), orderInfo);
+            }
 
-            if (config.AppSecret.IsNullOrEmpty() || config.APISecretKey.IsNullOrEmpty())
+            if (config.AppSecret.IsNullOrEmpty() || config.APISecretKey.IsNullOrEmpty()) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("微信AppSecret或商户号API秘钥为空，请在后台配置"), orderInfo);
+            }
+
             var noncestr = Guid.NewGuid().ToString("N");
             try
             {
                 var returnUrl = string.Empty;
                 var orderIds = pay.EntityId.DeserializeJson<List<object>>();
-                if (orderIds.Count > 1)
+                if (orderIds.Count > 1) {
                     returnUrl = $"{url}/pages/index?path=order_list";
-                else
+                } else {
                     returnUrl = $"{url}/pages/index?path=order_show&id={orderIds.FirstOrDefault()}";
+                }
                 //Resolve<IPayService>().Log($"returnUrl:{returnUrl}");
 
                 var client = new WeChatPayClient(config.AppId, config.AppSecret, config.MchId, config.APISecretKey);
@@ -413,8 +445,9 @@ namespace Alabo.App.Asset.Pays.Domain.Services
                 };
 
                 //购买活动设置回调
-                if (!pay.PayExtension.ReturnUrl.IsNullOrEmpty())
+                if (!pay.PayExtension.ReturnUrl.IsNullOrEmpty()) {
                     request.NotifyUrl = $"{HttpWeb.ServiceHost}/Api/BookingSignup/PublicPayAsync";
+                }
                 //Resolve<IPayService>().Log("微信公众支付请求参数:" + request.ToJson());
                 var sortedTxtParams = new WeChatPayDictionary(request.GetParameters())
                 {
@@ -521,7 +554,9 @@ namespace Alabo.App.Asset.Pays.Domain.Services
                     {
                         result = Resolve<IBillService>().TreezeSingle(user, moneyConfig, payPair.Value,
                             $"支付订单(编号{pay.PayExtension.TradeNo})前冻结{moneyConfig.Name}资产");
-                        if (!result.Succeeded) return result;
+                        if (!result.Succeeded) {
+                            return result;
+                        }
                     }
                 }
 
@@ -554,18 +589,30 @@ namespace Alabo.App.Asset.Pays.Domain.Services
             //var userAccount = Resolve<IAccountService>().GetAccount(pay.UserId, Currency.Cny); //获取现金账户
             var userAccount = Resolve<IAccountService>().GetSingle(r =>
                 r.UserId == userId && r.MoneyTypeId == Guid.Parse("E97CCD1E-1478-49BD-BFC7-E73A5D699000"));
-            if (pay.Amount < 0) return ServiceResult.FailedWithMessage("支付金额不能小于0");
+            if (pay.Amount < 0) {
+                return ServiceResult.FailedWithMessage("支付金额不能小于0");
+            }
 
-            if (userAccount == null) return ServiceResult.FailedWithMessage("现金账户不存在，或者余额不足");
+            if (userAccount == null) {
+                return ServiceResult.FailedWithMessage("现金账户不存在，或者余额不足");
+            }
 
-            if (userAccount.Amount < pay.Amount) return ServiceResult.FailedWithMessage("余额不足，请充值");
+            if (userAccount.Amount < pay.Amount) {
+                return ServiceResult.FailedWithMessage("余额不足，请充值");
+            }
 
             var actionType = BillActionType.Shopping;
-            if (pay.Type == CheckoutType.Recharge) actionType = BillActionType.Recharge;
+            if (pay.Type == CheckoutType.Recharge) {
+                actionType = BillActionType.Recharge;
+            }
 
-            if (pay.Type == CheckoutType.GradeBuy) actionType = BillActionType.Declaration;
+            if (pay.Type == CheckoutType.GradeBuy) {
+                actionType = BillActionType.Declaration;
+            }
 
-            if (pay.Type == CheckoutType.Customer) actionType = BillActionType.Custommer;
+            if (pay.Type == CheckoutType.Customer) {
+                actionType = BillActionType.Custommer;
+            }
 
             var bill = Resolve<IBillService>()
                 .CreateBill(userAccount, -pay.Amount, actionType, $"支付订单(编号{pay.PayExtension.TradeNo})");
@@ -617,26 +664,34 @@ namespace Alabo.App.Asset.Pays.Domain.Services
             {
                 var userId = pay.UserId;
                 var userDetail = Resolve<IUserDetailService>().GetSingle(r => r.UserId == userId);
-                if (userDetail != null) openId = userDetail.OpenId;
-                if (openId.IsNullOrEmpty())
+                if (userDetail != null) {
+                    openId = userDetail.OpenId;
+                }
+
+                if (openId.IsNullOrEmpty()) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("OpenId未空"), new PayOutput());
+                }
             }
 
             var payOutput = new PayOutput();
             var config = Resolve<IAutoConfigService>().GetValue<WeChatPaymentConfig>();
-            if (!config.IsEnable) return Tuple.Create(ServiceResult.FailedWithMessage("微信配置未启用，请在后台开启"), payOutput);
+            if (!config.IsEnable) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("微信配置未启用，请在后台开启"), payOutput);
+            }
 
-            if (config.AppSecret.IsNullOrEmpty() || config.APISecretKey.IsNullOrEmpty())
+            if (config.AppSecret.IsNullOrEmpty() || config.APISecretKey.IsNullOrEmpty()) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("微信公众号AppSecret或商户号API秘钥为空，请在后台配置"), payOutput);
+            }
 
             try
             {
                 var returnUrl = string.Empty;
                 var orderIds = pay.EntityId.DeserializeJson<List<object>>();
-                if (orderIds.Count > 1)
+                if (orderIds.Count > 1) {
                     returnUrl = $"{url}/pages/index?path=order_list";
-                else
+                } else {
                     returnUrl = $"{url}/pages/index?path=order_show&id={orderIds.FirstOrDefault()}";
+                }
                 //Resolve<IPayService>().Log($"returnUrl:{returnUrl}");
 
                 var client = new WeChatPayClient(config.AppId, config.AppSecret, config.MchId, config.APISecretKey);
@@ -654,8 +709,9 @@ namespace Alabo.App.Asset.Pays.Domain.Services
                     Attach = pay.Id.ToString()
                 };
                 //购买活动设置回调
-                if (!pay.PayExtension.ReturnUrl.IsNullOrEmpty())
+                if (!pay.PayExtension.ReturnUrl.IsNullOrEmpty()) {
                     request.NotifyUrl = $"{HttpWeb.ServiceHost}/Api/BookingSignup/PublicPayAsync";
+                }
 
                 Resolve<IPayService>().Log("微信公众支付请求参数:" + request.ToJson(), LogsLevel.Warning);
                 var sortedTxtParams = new WeChatPayDictionary(request.GetParameters())
@@ -736,25 +792,33 @@ namespace Alabo.App.Asset.Pays.Domain.Services
             {
                 var userId = pay.UserId;
                 var userDetail = Resolve<IUserDetailService>().GetSingle(r => r.UserId == userId);
-                if (userDetail != null) openId = userDetail.OpenId;
-                if (openId.IsNullOrEmpty())
+                if (userDetail != null) {
+                    openId = userDetail.OpenId;
+                }
+
+                if (openId.IsNullOrEmpty()) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("OpenId未空"), new PayOutput());
+                }
             }
 
             var payOutput = new PayOutput();
             var mpConfig = Resolve<IAutoConfigService>().GetValue<MiniProgramConfig>();
             var weixinConfig = Resolve<IAutoConfigService>().GetValue<WeChatPaymentConfig>();
-            if (!mpConfig.IsEnable) return Tuple.Create(ServiceResult.FailedWithMessage("微信配置未启用，请在后台开启"), payOutput);
+            if (!mpConfig.IsEnable) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("微信配置未启用，请在后台开启"), payOutput);
+            }
 
-            if (mpConfig.AppSecret.IsNullOrEmpty() || weixinConfig.APISecretKey.IsNullOrEmpty())
+            if (mpConfig.AppSecret.IsNullOrEmpty() || weixinConfig.APISecretKey.IsNullOrEmpty()) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("微信公众号AppSecret或商户号API秘钥为空，请在后台配置"), payOutput);
+            }
 
             var returnUrl = string.Empty;
             var orderIds = pay.EntityId.DeserializeJson<List<object>>();
-            if (orderIds.Count > 1)
+            if (orderIds.Count > 1) {
                 returnUrl = $"{url}/order/list";
-            else
+            } else {
                 returnUrl = $"{url}/pages/index?path=order_show&id={orderIds.FirstOrDefault()}";
+            }
 
             var client = new WeChatPayClient(mpConfig.AppID, mpConfig.AppSecret, weixinConfig.MchId,
                 weixinConfig.APISecretKey);
@@ -774,8 +838,9 @@ namespace Alabo.App.Asset.Pays.Domain.Services
             };
 
             //购买活动设置回调
-            if (!pay.PayExtension.ReturnUrl.IsNullOrEmpty())
+            if (!pay.PayExtension.ReturnUrl.IsNullOrEmpty()) {
                 request.NotifyUrl = $"{HttpWeb.ServiceHost}/Api/BookingSignup/PublicPayAsync";
+            }
 
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters())
             {
@@ -847,10 +912,13 @@ namespace Alabo.App.Asset.Pays.Domain.Services
             var serverUrl = "https://openapi.alipay.com/gateway.do";
             var payOutput = new PayOutput();
             var config = Ioc.Resolve<IAutoConfigService>().GetValue<AlipayPaymentConfig>();
-            if (!config.IsEnable) return Tuple.Create(ServiceResult.FailedWithMessage("支付宝配置未启用，请在后台开启"), payOutput);
+            if (!config.IsEnable) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("支付宝配置未启用，请在后台开启"), payOutput);
+            }
 
-            if (config.RsaPrivateKey.IsNullOrEmpty() || config.RsaAlipayPublicKey.IsNullOrEmpty())
+            if (config.RsaPrivateKey.IsNullOrEmpty() || config.RsaAlipayPublicKey.IsNullOrEmpty()) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("支付宝私钥或支付宝秘钥为空，请在后台配置"), payOutput);
+            }
 
             var client = new AlipayClient(serverUrl, config.AppId, config.RsaPrivateKey);
             //var request = new AlipayTradeWapPayRequest();
@@ -868,10 +936,11 @@ namespace Alabo.App.Asset.Pays.Domain.Services
             var orderIds = pay.EntityId.DeserializeJson<List<object>>();
             if (pay.Type == CheckoutType.Order)
             {
-                if (orderIds.Count > 1)
+                if (orderIds.Count > 1) {
                     request.SetReturnUrl($"{url}/pages/index?path=order_list");
-                else
+                } else {
                     request.SetReturnUrl($"{url}/pages/index?path=order_show&id={orderIds.FirstOrDefault()}");
+                }
             }
 
             if (pay.Type == CheckoutType.Recharge)
@@ -923,10 +992,13 @@ namespace Alabo.App.Asset.Pays.Domain.Services
             var serverUrl = "https://openapi.alipay.com/gateway.do";
             var payOutput = new PayOutput();
             var config = Ioc.Resolve<IAutoConfigService>().GetValue<AlipayPaymentConfig>();
-            if (!config.IsEnable) return Tuple.Create(ServiceResult.FailedWithMessage("支付宝配置未启用，请在后台开启"), payOutput);
+            if (!config.IsEnable) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("支付宝配置未启用，请在后台开启"), payOutput);
+            }
 
-            if (config.RsaPrivateKey.IsNullOrEmpty() || config.RsaAlipayPublicKey.IsNullOrEmpty())
+            if (config.RsaPrivateKey.IsNullOrEmpty() || config.RsaAlipayPublicKey.IsNullOrEmpty()) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("支付宝私钥或支付宝秘钥为空，请在后台配置"), payOutput);
+            }
 
             var client = new AlipayClient(serverUrl, config.AppId, config.RsaPrivateKey);
             var request = new AlipayTradeWapPayRequest();
@@ -941,18 +1013,21 @@ namespace Alabo.App.Asset.Pays.Domain.Services
             var orderIds = pay.EntityId.DeserializeJson<List<object>>();
             if (pay.Type == CheckoutType.Order)
             {
-                if (orderIds.Count > 1)
+                if (orderIds.Count > 1) {
                     request.SetReturnUrl($"{url}/pages/index?path=order_list");
-                else
+                } else {
                     request.SetReturnUrl($"{url}/pages/index?path=order_show&id={orderIds.FirstOrDefault()}");
+                }
             }
 
             if (pay.Type == CheckoutType.Recharge)
             {
-                if (orderIds.Count > 1)
+                if (orderIds.Count > 1) {
                     request.SetReturnUrl($"{url}/pages/index?path=Asset_recharge_list");
-                else
+                } else {
                     request.SetReturnUrl($"{url}/pages/index?path=Asset_recharge_list");
+                }
+
                 request.SetNotifyUrl($"{serviceUrl}/Pay/WapPayAsync");
             }
             else
@@ -999,10 +1074,14 @@ namespace Alabo.App.Asset.Pays.Domain.Services
             var serverUrl = "https://openapi.alipay.com/gateway.do";
             var payOutput = new PayOutput();
             var config = Ioc.Resolve<IAutoConfigService>().GetValue<AlipayPaymentConfig>();
-            if (!config.IsEnable) return Tuple.Create(ServiceResult.FailedWithMessage("支付宝配置未启用，请在后台开启"), payOutput);
+            if (!config.IsEnable) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("支付宝配置未启用，请在后台开启"), payOutput);
+            }
 
-            if (config.RsaPrivateKey.IsNullOrEmpty() || config.RsaAlipayPublicKey.IsNullOrEmpty())
+            if (config.RsaPrivateKey.IsNullOrEmpty() || config.RsaAlipayPublicKey.IsNullOrEmpty()) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("支付宝私钥或支付宝秘钥为空，请在后台配置"), payOutput);
+            }
+
             var request = new AlipayTradeAppPayRequest();
 
             var orderIds = pay.EntityId.DeserializeJson<List<object>>();
@@ -1036,9 +1115,11 @@ namespace Alabo.App.Asset.Pays.Domain.Services
             {
                 if (!pay.PayExtension.RedirectUrl.IsNullOrEmpty()
                 ) //request.SetReturnUrl($"{url}{pay.PayExtension.RedirectUrl}");
+{
                     request.SetNotifyUrl($"{serviceUrl}/Api/BookingSignup/WapPayAsync");
-                else
+                } else {
                     request.SetNotifyUrl($"{serviceUrl}/Pay/WapPayAsync");
+                }
             }
 
             var client = new AlipayClient(serverUrl, config.AppId, config.RsaPrivateKey);
@@ -1105,24 +1186,32 @@ namespace Alabo.App.Asset.Pays.Domain.Services
                 //请求结果  <return_code><![CDATA[SUCCESS]]></return_code>
                 if (wechatRefundResult.Item2.ToUpper()
                         .IndexOf("<return_code><![CDATA[SUCCESS]]></return_code>".ToUpper()) <=
-                    -1) return Tuple.Create(ServiceResult.FailedMessage("请求微信退款失败"), string.Empty);
+                    -1) {
+                    return Tuple.Create(ServiceResult.FailedMessage("请求微信退款失败"), string.Empty);
+                }
                 //判断返回退款是否有异常     <result_code><![CDATA[SUCCESS]]></result_code>
                 if (wechatRefundResult.Item2.ToUpper()
                         .IndexOf("<result_code><![CDATA[FAIL]]></result_code>".ToUpper()) >=
-                    0) return Tuple.Create(ServiceResult.FailedMessage("微信退款失败"), string.Empty);
+                    0) {
+                    return Tuple.Create(ServiceResult.FailedMessage("微信退款失败"), string.Empty);
+                }
 
                 return wechatRefundResult;
             }
 
-            if (pay.PayType == PayType.BalancePayment)
+            if (pay.PayType == PayType.BalancePayment) {
                 return BalanceRefund(ref pay, fee, refundNo);
+            }
+
             if (pay.PayType == PayType.AlipayApp
                 || pay.PayType == PayType.AliPayBar
                 || pay.PayType == PayType.AliPayQrCode
                 || pay.PayType == PayType.AlipayWap
                 || pay.PayType == PayType.AlipayWeb
-            )
+            ) {
                 return AliRefund(ref pay, fee, refundNo);
+            }
+
             return Tuple.Create(ServiceResult.FailedMessage("暂不支持该退款方式"), string.Empty);
         }
 
@@ -1145,8 +1234,10 @@ namespace Alabo.App.Asset.Pays.Domain.Services
             var refundMsg = $"会员订单{pay.PayExtension.TradeNo}退款";
 
             var res = Resolve<IBillService>().Increase(user, moneyConfig, fee / 100m, refundMsg);
-            if (res.Succeeded)
+            if (res.Succeeded) {
                 return Tuple.Create(res, refundMsg);
+            }
+
             return Tuple.Create(ServiceResult.FailedMessage("余额退款失败"), refundMsg);
         }
 
@@ -1162,10 +1253,13 @@ namespace Alabo.App.Asset.Pays.Domain.Services
             var result = ServiceResult.Success;
             var mpConfig = Resolve<IAutoConfigService>().GetValue<MiniProgramConfig>();
             var weixinConfig = Resolve<IAutoConfigService>().GetValue<WeChatPaymentConfig>();
-            if (!mpConfig.IsEnable) return Tuple.Create(ServiceResult.FailedMessage("微信配置未启用，请在后台开启"), string.Empty);
+            if (!mpConfig.IsEnable) {
+                return Tuple.Create(ServiceResult.FailedMessage("微信配置未启用，请在后台开启"), string.Empty);
+            }
 
-            if (mpConfig.AppSecret.IsNullOrEmpty() || weixinConfig.APISecretKey.IsNullOrEmpty())
+            if (mpConfig.AppSecret.IsNullOrEmpty() || weixinConfig.APISecretKey.IsNullOrEmpty()) {
                 return Tuple.Create(ServiceResult.FailedMessage("微信公众号AppSecret或商户号API秘钥为空，请在后台配置"), string.Empty);
+            }
 
             var data = string.Empty;
 
@@ -1316,7 +1410,9 @@ namespace Alabo.App.Asset.Pays.Domain.Services
         private static bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain,
             SslPolicyErrors errors)
         {
-            if (errors == SslPolicyErrors.None) return true;
+            if (errors == SslPolicyErrors.None) {
+                return true;
+            }
 
             return false;
         }
@@ -1333,23 +1429,32 @@ namespace Alabo.App.Asset.Pays.Domain.Services
         public Tuple<ServiceResult, PayTypeOutput> GetPayType(ClientInput parameter)
         {
             var pay = GetSingle(parameter.PayId);
-            if (pay == null) return Tuple.Create(ServiceResult.FailedWithMessage("支付账单不存在"), new PayTypeOutput());
+            if (pay == null) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("支付账单不存在"), new PayTypeOutput());
+            }
 
-            if (pay.Status != PayStatus.WaiPay)
+            if (pay.Status != PayStatus.WaiPay) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("支付账单已支付或取消"), new PayTypeOutput());
+            }
 
-            if (!pay.Amount.EqualsDigits(parameter.Amount))
+            if (!pay.Amount.EqualsDigits(parameter.Amount)) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("支付账单金额不正确"), new PayTypeOutput());
+            }
 
-            if (pay.UserId != parameter.LoginUserId)
-                if (pay.PayExtension?.OrderUser?.Id != parameter.LoginUserId)
+            if (pay.UserId != parameter.LoginUserId) {
+                if (pay.PayExtension?.OrderUser?.Id != parameter.LoginUserId) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("您无权访问别人账单"), new PayTypeOutput());
+                }
+            }
 
             var user = Resolve<IUserService>().GetSingle(parameter.LoginUserId);
-            if (user == null) return Tuple.Create(ServiceResult.FailedWithMessage("该用户已不存在"), new PayTypeOutput());
+            if (user == null) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("该用户已不存在"), new PayTypeOutput());
+            }
 
-            if (user.Status != Status.Normal)
+            if (user.Status != Status.Normal) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("用户状态不正常"), new PayTypeOutput());
+            }
 
             var payTypeOutput = new PayTypeOutput
             {
@@ -1361,7 +1466,7 @@ namespace Alabo.App.Asset.Pays.Domain.Services
             if (pay.PayExtension.IsFromOrder)
             {
                 // 线下转账给卖家
-                foreach (var clientType in GetAllPayClientTypeAttribute())
+                foreach (var clientType in GetAllPayClientTypeAttribute()) {
                     if (clientType.PayType == PayType.OffineToSeller)
                     {
                         var itemOutput = new PayTypeList
@@ -1375,12 +1480,13 @@ namespace Alabo.App.Asset.Pays.Domain.Services
                         };
                         payTypeOutput.PayTypeList.Add(itemOutput);
                     }
+                }
             }
             else
             {
                 var alipayPaymentConfig = Resolve<IAutoConfigService>().GetValue<AlipayPaymentConfig>();
                 var weChatPaymentConfig = Resolve<IAutoConfigService>().GetValue<WeChatPaymentConfig>();
-                foreach (var clientType in GetAllPayClientTypeAttribute())
+                foreach (var clientType in GetAllPayClientTypeAttribute()) {
                     if (clientType.AllowClient.Split(',').Contains(parameter.BrowserType.ToString()))
                     {
                         //if (parameter.BrowserType == ClientType.WeChat)
@@ -1401,13 +1507,18 @@ namespace Alabo.App.Asset.Pays.Domain.Services
                             Id = clientType.Id
                         };
                         //储值不返回余额支付
-                        if (pay.Type == CheckoutType.Recharge && itemOutput.PayType == PayType.BalancePayment) continue;
+                        if (pay.Type == CheckoutType.Recharge && itemOutput.PayType == PayType.BalancePayment) {
+                            continue;
+                        }
 
                         //阿里支付
-                        if (clientType.PayType == PayType.AlipayWap && alipayPaymentConfig?.IsEnable == false) continue;
-                        //微信支付
-                        if (clientType.PayType == PayType.WeChatPayPublic && weChatPaymentConfig?.IsEnable == false)
+                        if (clientType.PayType == PayType.AlipayWap && alipayPaymentConfig?.IsEnable == false) {
                             continue;
+                        }
+                        //微信支付
+                        if (clientType.PayType == PayType.WeChatPayPublic && weChatPaymentConfig?.IsEnable == false) {
+                            continue;
+                        }
                         //如果使用余额支付，则获取该账户人民币的余额
                         if (itemOutput.PayType == PayType.BalancePayment)
                         {
@@ -1419,6 +1530,7 @@ namespace Alabo.App.Asset.Pays.Domain.Services
 
                         payTypeOutput.PayTypeList.Add(itemOutput);
                     }
+                }
             }
 
             return Tuple.Create(ServiceResult.Success, payTypeOutput);
@@ -1440,7 +1552,9 @@ namespace Alabo.App.Asset.Pays.Domain.Services
                     clientType.PayType = item;
                     clientType.Name = item.GetDisplayName();
                     clientType.Id = item.GetFieldId();
-                    if (item.GetFieldAttribute().IsDefault) clientTypeAttributeList.Add(clientType);
+                    if (item.GetFieldAttribute().IsDefault) {
+                        clientTypeAttributeList.Add(clientType);
+                    }
                 }
 
                 ObjectCache.Set(cacheKey, clientTypeAttributeList);

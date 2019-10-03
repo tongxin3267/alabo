@@ -33,7 +33,9 @@ namespace Alabo.App.Asset.Recharges.Controllers
         public ApiResult GetAccountType()
         {
             var result = Resolve<IRechargeService>().GetRechargeMoneys();
-            if (result != null) return ApiResult.Success(result);
+            if (result != null) {
+                return ApiResult.Success(result);
+            }
 
             return ApiResult.Failure("充值类型获取失败", MessageCodes.ParameterValidationFailure);
         }
@@ -47,8 +49,9 @@ namespace Alabo.App.Asset.Recharges.Controllers
         [ApiAuth]
         public ApiResult Add([FromBody] RechargeAddInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var serviceResult = ServiceResult.Success;
             serviceResult = Resolve<IRechargeService>().AddOffOnline(parameter);
@@ -64,8 +67,9 @@ namespace Alabo.App.Asset.Recharges.Controllers
         [ApiAuth]
         public ApiResult AddOffOnline([FromBody] RechargeAddInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var serviceResult = ServiceResult.Success;
             serviceResult = Resolve<IRechargeService>().AddOffOnline(parameter);
@@ -81,11 +85,14 @@ namespace Alabo.App.Asset.Recharges.Controllers
         [ApiAuth]
         public ApiResult<Pay> AddOnline([FromBody] RechargeOnlineAddInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<Pay>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var result = Resolve<IRechargeService>().AddOnline(parameter);
-            if (result.Item1.Succeeded) return ApiResult.Success(result.Item2);
+            if (result.Item1.Succeeded) {
+                return ApiResult.Success(result.Item2);
+            }
 
             return ApiResult.Failure<Pay>(result.ToString(), MessageCodes.ServiceFailure);
         }
@@ -100,8 +107,9 @@ namespace Alabo.App.Asset.Recharges.Controllers
         [ApiAuth]
         public ApiResult Delete([FromQuery] long loginUserId, long id)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var serviceResult = Resolve<IRechargeService>().Delete(loginUserId, id);
             return ToResult(serviceResult);
@@ -120,7 +128,9 @@ namespace Alabo.App.Asset.Recharges.Controllers
             var result = Resolve<IRechargeService>().GetSingle(id);
             if (result != null)
             {
-                if (result.UserId != loginUserId) return ApiResult.Failure("对不起，您无权查看他人充值详情");
+                if (result.UserId != loginUserId) {
+                    return ApiResult.Failure("对不起，您无权查看他人充值详情");
+                }
 
                 return ApiResult.Success(result);
             }

@@ -44,7 +44,9 @@ namespace Alabo.Domains.Entities
 
         public override string ToString()
         {
-            if (ErrorMessages == null) return string.Empty;
+            if (ErrorMessages == null) {
+                return string.Empty;
+            }
 
             return string.Join("<br />", ErrorMessages);
         }

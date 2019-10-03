@@ -30,7 +30,10 @@ namespace Alabo.App.Share.OpenTasks.Result
             foreach (var item in BillList)
             {
                 var userAccout = Ioc.Resolve<IAccountService>().GetAccount(item.UserId, item.MoneyTypeId);
-                if (userAccout == null) continue;
+                if (userAccout == null) {
+                    continue;
+                }
+
                 item.AfterAmount = userAccout.Amount;
                 Ioc.Resolve<IBillService>().Add(item);
             }

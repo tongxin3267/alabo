@@ -39,7 +39,9 @@ namespace Alabo.Domains.Entities
 
         public bool IsObjectIdEmpty()
         {
-            if (Id == ObjectId.Empty) return true;
+            if (Id == ObjectId.Empty) {
+                return true;
+            }
 
             return false;
         }

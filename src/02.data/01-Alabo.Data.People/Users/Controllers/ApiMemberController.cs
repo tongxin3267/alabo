@@ -27,8 +27,10 @@ namespace Alabo.Data.People.Users.Controllers
         [Display(Description = "会员注册")]
         public ApiResult<UserOutput> Reg([FromBody] RegInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<UserOutput>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
+
             var result = Resolve<IUserBaseService>().Reg(parameter);
             return ToResult(result);
         }
@@ -44,8 +46,10 @@ namespace Alabo.Data.People.Users.Controllers
         [Display(Description = "会员登录")]
         public ApiResult<UserOutput> Login([FromBody] LoginInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<UserOutput>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
+
             var result = Resolve<IUserBaseService>().Login(parameter);
             return ToResult(result);
         }
@@ -60,8 +64,9 @@ namespace Alabo.Data.People.Users.Controllers
         [Display(Description = "使用openid 完成会员登录")]
         public ApiResult<UserOutput> LoginByOpenId([FromBody] LoginInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<UserOutput>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var result = Resolve<IUserBaseService>().Login(parameter);
             return ToResult(result);
@@ -79,8 +84,9 @@ namespace Alabo.Data.People.Users.Controllers
         [HttpPost]
         public ApiResult<UserOutput> LoginByMobile([FromBody] LoginInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<UserOutput>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var result = Resolve<IUserBaseService>().Login(parameter);
             return ToResult(result);
@@ -101,7 +107,9 @@ namespace Alabo.Data.People.Users.Controllers
             var config = Resolve<IAutoConfigService>().GetValue<MiniProgramConfig>();
             var openId = SnsApi.JsCode2Json(config.AppID, config.AppSecret, input.Code)
                 .openid;
-            if (openId.IsNullOrEmpty()) return ApiResult.Failure<UserOutput>("获取openId失败");
+            if (openId.IsNullOrEmpty()) {
+                return ApiResult.Failure<UserOutput>("获取openId失败");
+            }
 
             return null;
 
@@ -145,8 +153,9 @@ namespace Alabo.Data.People.Users.Controllers
         [Display(Description = "找回密码，密码传入明文")]
         public ApiResult<UserOutput> MpBind([FromBody] MpBindInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<UserOutput>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             ////if (!_messageManager.CheckMobileVerifiyCode(parameter.Mobile, parameter.MobileVerifiyCode.ConvertToLong())) {
             ////    return ApiResult.Failure<UserOutput>("手机验证码错误", MessageCodes.ParameterValidationFailure);

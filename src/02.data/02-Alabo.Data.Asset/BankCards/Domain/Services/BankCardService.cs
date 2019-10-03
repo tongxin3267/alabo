@@ -36,11 +36,17 @@ namespace Alabo.App.Asset.BankCards.Domain.Services
         {
             //银行卡必须为数字不能以0开头
             var r = new Regex("^([1-9][0-9]*)$");
-            if (!r.IsMatch(view.BankCardId)) return ServiceResult.FailedWithMessage("请正确输入银行卡号");
+            if (!r.IsMatch(view.BankCardId)) {
+                return ServiceResult.FailedWithMessage("请正确输入银行卡号");
+            }
 
-            if (view.BankCardId.Length < 10) return ServiceResult.FailedWithMessage("请正确输入银行卡号");
+            if (view.BankCardId.Length < 10) {
+                return ServiceResult.FailedWithMessage("请正确输入银行卡号");
+            }
 
-            if (view.Type == 0) return ServiceResult.FailedWithMessage("请选择银行类型");
+            if (view.Type == 0) {
+                return ServiceResult.FailedWithMessage("请选择银行类型");
+            }
 
             #region 使用阿里接口判断银行卡是否正确
 
@@ -64,7 +70,9 @@ namespace Alabo.App.Asset.BankCards.Domain.Services
             try
             {
                 var aliResult = readResult.DeserializeJson<AliResult>();
-                if (aliResult.Validated != "true") return ServiceResult.FailedWithMessage("请正确输入银行卡号");
+                if (aliResult.Validated != "true") {
+                    return ServiceResult.FailedWithMessage("请正确输入银行卡号");
+                }
             }
             catch (Exception e)
             {
@@ -74,7 +82,9 @@ namespace Alabo.App.Asset.BankCards.Domain.Services
             #endregion 使用阿里接口判断银行卡是否正确
 
             var bankCardList = Resolve<IBankCardService>().GetList(u => u.UserId == view.LoginUserId);
-            if (bankCardList.Count >= 10) return ServiceResult.FailedWithMessage("银行卡最多只可绑定十张");
+            if (bankCardList.Count >= 10) {
+                return ServiceResult.FailedWithMessage("银行卡最多只可绑定十张");
+            }
 
             var model = Resolve<IBankCardService>().GetSingle(u => u.Number == view.BankCardId);
             var bankCard = new BankCard
@@ -90,7 +100,10 @@ namespace Alabo.App.Asset.BankCards.Domain.Services
             if (model == null)
             {
                 var result = Add(bankCard);
-                if (!result) return ServiceResult.Failed;
+                if (!result) {
+                    return ServiceResult.Failed;
+                }
+
                 return ServiceResult.Success;
             }
 
@@ -153,9 +166,14 @@ namespace Alabo.App.Asset.BankCards.Domain.Services
             };
             query.And(e => e.UserId == parameter.UserId);
 
-            if (!parameter.Name.IsNullOrEmpty()) query.And(u => u.Name.Contains(parameter.Name));
+            if (!parameter.Name.IsNullOrEmpty()) {
+                query.And(u => u.Name.Contains(parameter.Name));
+            }
 
-            if (!parameter.Number.IsNullOrEmpty()) query.And(u => u.Number.Contains(parameter.Number));
+            if (!parameter.Number.IsNullOrEmpty()) {
+                query.And(u => u.Number.Contains(parameter.Number));
+            }
+
             var model = Resolve<IBankCardService>().GetPagedList(query);
             return model;
         }
@@ -164,7 +182,10 @@ namespace Alabo.App.Asset.BankCards.Domain.Services
         {
             var model = Resolve<IBankCardService>().GetSingle(u => u.Id == id.ToObjectId());
             var result = Delete(model);
-            if (result) return ServiceResult.Success;
+            if (result) {
+                return ServiceResult.Success;
+            }
+
             return ServiceResult.Failed;
         }
 

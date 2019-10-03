@@ -35,10 +35,15 @@ namespace Alabo.Industry.Shop.Orders.PcDtos
             dic = dic.RemoveKey("userId"); // 否则查出的订单都是同一个用户
             var model = ToQuery<PlatformApiOrderList>();
             var expressionQuery = new ExpressionQuery<Order>();
-            if (model.OrderStatus > 0) expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
+            if (model.OrderStatus > 0) {
+                expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
+            }
 
             var store = Resolve<IStoreService>().GetUserStore(model.UserId);
-            if (store == null) throw new ValidException("您无权查看其他店铺订单");
+            if (store == null) {
+                throw new ValidException("您无权查看其他店铺订单");
+            }
+
             expressionQuery.And(e => e.StoreId == store.Id.ToString());
 
             model.UserId = 0;

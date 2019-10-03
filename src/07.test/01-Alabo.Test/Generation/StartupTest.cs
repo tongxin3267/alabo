@@ -37,37 +37,48 @@ namespace Alabo.Test.Generation
             // 参考Alabo.Linq.Dynamic.DynamicService.ResolveMethod
             var instanse = DynamicService.Resolve(type.Name);
             var instanseType = type;
-            if (instanse == null) instanseType = instanseType.GetType();
+            if (instanse == null) {
+                instanseType = instanseType.GetType();
+            }
 
             var host = new TestHostingEnvironment();
             var testBuilder = new StringBuilder();
             var proj = string.Empty;
-            if (type.Module.Name == "ZKCloud") proj = type.Assembly.GetName().Name + ".Test";
+            if (type.Module.Name == "ZKCloud") {
+                proj = type.Assembly.GetName().Name + ".Test";
+            }
 
             proj = type.Assembly.GetName().Name.Replace(".App.", ".Test.");
 
             var paths = type.Namespace.Replace(type.Assembly.GetName().Name, "")
                 .Split(".", StringSplitOptions.RemoveEmptyEntries);
             var filePath = $"{host.TestRootPath}\\{proj}";
-            if (isZkcloud) filePath += ".Test";
+            if (isZkcloud) {
+                filePath += ".Test";
+            }
 
             foreach (var item in paths)
             {
                 filePath += "\\" + item;
-                if (!Directory.Exists(filePath)) Directory.CreateDirectory(filePath);
+                if (!Directory.Exists(filePath)) {
+                    Directory.CreateDirectory(filePath);
+                }
             }
 
             var fileName = $"{filePath}\\{type.Name}Tests.cs";
-            if (isBase) fileName = $"{filePath}\\{type.Name}BaseTests.cs";
+            if (isBase) {
+                fileName = $"{filePath}\\{type.Name}BaseTests.cs";
+            }
 
             var methods = instanseType.GetMethods(); // 当前服务所有的方法
             // 底层继承的方法不显示
 
             methods = methods.Where(r => r.Module.Name.Contains("ZKCloud")).ToArray();
-            if (isZkcloud)
+            if (isZkcloud) {
                 methods = methods.Where(r => r.Module.Name == "Alabo.dll").ToArray();
-            else
+            } else {
                 methods = methods.Where(r => r.Module.Name != "Alabo.dll").ToArray();
+            }
 
             // methods = methods.Where(r => r.Name == "AddOrUpdate").ToArray();
             var namespaceList = new List<string>();
@@ -95,13 +106,16 @@ namespace Alabo.Test.Generation
                     {
                         foreach (var method in methods)
                         {
-                            if (HanderMethod(method) == null) continue;
+                            if (HanderMethod(method) == null) {
+                                continue;
+                            }
 
                             var methodParameters = method.GetParameters(); // 方法参数
                             var name = method.Name + GetTestNameFromParameterInfo(methodParameters, out var param);
 
-                            if (text.IndexOf($@"[TestMethod(""{name}"")]", StringComparison.OrdinalIgnoreCase) != -1)
+                            if (text.IndexOf($@"[TestMethod(""{name}"")]", StringComparison.OrdinalIgnoreCase) != -1) {
                                 continue;
+                            }
 
                             //生成测试方法
                             testBuilder.Append(CreateMethodTest(method, type));
@@ -112,12 +126,13 @@ namespace Alabo.Test.Generation
                     testBuilder.AppendLine("/*end*/");
                     text = text.Replace("/*end*/", testBuilder.ToString());
 
-                    if (isAppend)
+                    if (isAppend) {
                         using (var writer = new StreamWriter(stream))
                         {
                             stream.Position = 0;
                             writer.Write(text);
                         }
+                    }
                 }
 
                 return;
@@ -134,18 +149,23 @@ namespace Alabo.Test.Generation
             testBuilder.AppendLine("using System.Collections.Generic;");
             testBuilder.AppendLine("using Alabo.Test.Base.Core.Model;");
 
-            if (!isBase)
+            if (!isBase) {
                 foreach (var method in methods)
                 {
-                    if (HanderMethod(method) == null) continue;
+                    if (HanderMethod(method) == null) {
+                        continue;
+                    }
 
                     var methodParameters = method.GetParameters(); // 方法参数
                     var param = string.Empty;
-                    foreach (var item in methodParameters)
+                    foreach (var item in methodParameters) {
                         if (testBuilder.ToString()
-                                .IndexOf(item.ParameterType.Namespace, StringComparison.OrdinalIgnoreCase) == -1)
+                                .IndexOf(item.ParameterType.Namespace, StringComparison.OrdinalIgnoreCase) == -1) {
                             testBuilder.AppendLine($"using {item.ParameterType.Namespace};");
+                        }
+                    }
                 }
+            }
 
             testBuilder.AppendLine();
             testBuilder.AppendLine($"namespace {type.Namespace.Replace(".App.", ".Test.")} {{");
@@ -158,13 +178,17 @@ namespace Alabo.Test.Generation
 
             #endregion 命名空间处理
 
-            if (isBase) testBuilder.AppendLine($"\tpublic class {type.Name}BaseTests : CoreTest {{");
+            if (isBase) {
+                testBuilder.AppendLine($"\tpublic class {type.Name}BaseTests : CoreTest {{");
+            }
 
             testBuilder.AppendLine($"\tpublic class {type.Name}Tests : CoreTest {{");
 
-            if (!isBase)
-                foreach (var method in methods)
+            if (!isBase) {
+                foreach (var method in methods) {
                     testBuilder.Append(CreateMethodTest(method, type));
+                }
+            }
 
             testBuilder.AppendLine("/*end*/");
             testBuilder.AppendLine("\t}");
@@ -185,7 +209,9 @@ namespace Alabo.Test.Generation
         private StringBuilder CreateMethodTest(MethodInfo method, Type type)
         {
             var testBuilder = new StringBuilder();
-            if (HanderMethod(method) == null) return testBuilder;
+            if (HanderMethod(method) == null) {
+                return testBuilder;
+            }
 
             var methodParameters = method.GetParameters(); // 方法参数
             var name = method.Name + GetTestNameFromParameterInfo(methodParameters, out var param);
@@ -198,50 +224,69 @@ namespace Alabo.Test.Generation
             {
                 // 泛型 ?类型
                 var parameterType = item.ParameterType;
-                if (item.ParameterType.Name.Contains("Nullable"))
+                if (item.ParameterType.Name.Contains("Nullable")) {
                     parameterType = item.ParameterType.GenericTypeArguments[0];
+                }
 
                 if (parameterType == typeof(int) ||
                     parameterType == typeof(long) ||
                     parameterType == typeof(decimal) ||
                     parameterType == typeof(float) ||
-                    parameterType == typeof(double))
+                    parameterType == typeof(double)) {
                     testBuilder.AppendLine($"\t\t\tvar {item.Name} = 0;");
+                }
 
-                if (parameterType == typeof(string)) testBuilder.AppendLine($"\t\t\tvar {item.Name} = \"\";");
+                if (parameterType == typeof(string)) {
+                    testBuilder.AppendLine($"\t\t\tvar {item.Name} = \"\";");
+                }
 
-                if (parameterType == typeof(Guid)) testBuilder.AppendLine($"\t\t\tvar {item.Name} =Guid.Empty ;");
+                if (parameterType == typeof(Guid)) {
+                    testBuilder.AppendLine($"\t\t\tvar {item.Name} =Guid.Empty ;");
+                }
 
-                if (parameterType == typeof(bool)) testBuilder.AppendLine($"\t\t\tvar {item.Name} = false;");
+                if (parameterType == typeof(bool)) {
+                    testBuilder.AppendLine($"\t\t\tvar {item.Name} = false;");
+                }
 
-                if (parameterType.IsEnum) testBuilder.AppendLine($"\t\t\tvar {item.Name} = ({parameterType})0;");
+                if (parameterType.IsEnum) {
+                    testBuilder.AppendLine($"\t\t\tvar {item.Name} = ({parameterType})0;");
+                }
 
                 if (parameterType is object)
                 {
-                    if (parameterType.IsGenericType) continue;
+                    if (parameterType.IsGenericType) {
+                        continue;
+                    }
 
                     var parameterTypeName = parameterType.Name.Replace("&", "");
-                    if (parameterTypeName.Replace("&", "").Equals("Int64", StringComparison.OrdinalIgnoreCase))
+                    if (parameterTypeName.Replace("&", "").Equals("Int64", StringComparison.OrdinalIgnoreCase)) {
                         testBuilder.AppendLine($"\t\t\t{parameterTypeName} {item.Name} = 0;");
+                    }
 
                     testBuilder.AppendLine($"\t\t\t{parameterTypeName} {item.Name} = null;");
                 }
             }
 
             var methodName = method.Name;
-            if (method.IsGenericMethod) methodName = method.Name.Replace("`", "");
+            if (method.IsGenericMethod) {
+                methodName = method.Name.Replace("`", "");
+            }
 
             if (method.ReturnType != typeof(void))
             {
                 testBuilder.AppendLine(
                     $"\t\t\tvar result = Service<{type.Name}>().{methodName}({param.TrimStart(',')});");
-                if (method.ReturnType == typeof(bool)) testBuilder.AppendLine("\t\t\tAssert.True(result);");
+                if (method.ReturnType == typeof(bool)) {
+                    testBuilder.AppendLine("\t\t\tAssert.True(result);");
+                }
 
-                if (method.ReturnType == typeof(long) || method.ReturnType == typeof(int))
+                if (method.ReturnType == typeof(long) || method.ReturnType == typeof(int)) {
                     testBuilder.AppendLine("\t\t\tAssert.True(result>0);");
+                }
 
-                if (method.ReturnType == typeof(Guid))
+                if (method.ReturnType == typeof(Guid)) {
                     testBuilder.AppendLine("\t\t\t Assert.True(result.IsGuidNullOrEmpty());");
+                }
 
                 testBuilder.AppendLine("\t\t\tAssert.NotNull(result);");
             }
@@ -259,8 +304,9 @@ namespace Alabo.Test.Generation
             if (method.IsSpecialName || method.IsConstructor || method.Name == "ToString" ||
                 method.Name == "GetHashCode" ||
                 method.Name == "Equals" || method.Name == "GetType" || method.IsPrivate ||
-                method.Name == "Repository" || method.Name == "Service")
+                method.Name == "Repository" || method.Name == "Service") {
                 return null;
+            }
 
             return method;
         }
@@ -332,7 +378,7 @@ namespace Alabo.Test.Generation
         {
             Console.WriteLine(@"开始生成代码");
             var allServiceType = Resolve<ITypeService>().GetAllServiceType(); //.Where(o=>!o.IsAbstract);
-            foreach (var type in allServiceType)
+            foreach (var type in allServiceType) {
                 try
                 {
                     //  StartSingleServieCode(type);
@@ -341,6 +387,7 @@ namespace Alabo.Test.Generation
                 {
                     Console.WriteLine(ex.Message);
                 }
+            }
         } /*end*/
 
         [Fact]

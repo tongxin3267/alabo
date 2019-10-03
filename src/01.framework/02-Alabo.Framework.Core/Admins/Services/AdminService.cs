@@ -40,7 +40,9 @@ namespace Alabo.Framework.Core.Admins.Services
         public void DefaultInit(bool isTenant = false)
         {
             if (!isTenant) // 先更新数据库脚本,非租户时执行
+{
                 Resolve<ICatalogService>().UpdateDatabase();
+            }
 
             //初始化实体类表结构
             Resolve<ITableService>().Init();
@@ -51,19 +53,27 @@ namespace Alabo.Framework.Core.Admins.Services
             types.ForEach(item =>
             {
                 var attr = item.GetCustomAttribute<DefaultInitSortAttribute>();
-                if (attr == null) attr = new DefaultInitSortAttribute();
-                if (!dic.ContainsKey(item.FullName)) dic.Add(item.FullName, attr.SortIndex);
+                if (attr == null) {
+                    attr = new DefaultInitSortAttribute();
+                }
+
+                if (!dic.ContainsKey(item.FullName)) {
+                    dic.Add(item.FullName, attr.SortIndex);
+                }
             });
             //asc sort
             var dicSort = from item in dic orderby item.Value select item;
             foreach (var item in dicSort)
             {
                 var type = types.Find(t => t.FullName == item.Key);
-                if (type == null) continue;
+                if (type == null) {
+                    continue;
+                }
+
                 try
                 {
                     var config = Activator.CreateInstance(type);
-                    if (config is IDefaultInit set)
+                    if (config is IDefaultInit set) {
                         try
                         {
                             if (isTenant)
@@ -83,6 +93,7 @@ namespace Alabo.Framework.Core.Admins.Services
                         {
                             Trace.WriteLine(ex.Message);
                         }
+                    }
                 }
                 catch (Exception ex)
                 {

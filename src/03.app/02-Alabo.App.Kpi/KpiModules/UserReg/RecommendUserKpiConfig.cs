@@ -90,12 +90,16 @@ namespace Alabo.App.Kpis.KpiModules.UserReg
         public override ExecuteResult<ITaskResult[]> Execute(TaskParameter parameter)
         {
             var baseResult = base.Execute(parameter);
-            if (baseResult.Status != ResultStatus.Success)
+            if (baseResult.Status != ResultStatus.Success) {
                 return ExecuteResult<ITaskResult[]>.Cancel("未找到触发会员的Parent Map.");
+            }
 
             var userMap = Service<IUserMapService>().GetParentMapFromCache(ShareOrderUser.Id);
             var map = userMap.ParentMap.DeserializeJson<List<ParentMap>>();
-            if (map == null) return ExecuteResult<ITaskResult[]>.Cancel("未找到触发会员的Parent Map.");
+            if (map == null) {
+                return ExecuteResult<ITaskResult[]>.Cancel("未找到触发会员的Parent Map.");
+            }
+
             IList<ITaskResult> resultList = new List<ITaskResult>();
             // 获取最大极差比例
 

@@ -23,18 +23,28 @@ namespace Alabo.App.Asset.Coupons.Domain.Services
         /// <returns></returns>
         public ServiceResult EditOrAdd(Coupon coupon)
         {
-            if (coupon == null) return ServiceResult.FailedMessage("传入参数为空");
-            if (coupon.Type == CouponType.Reduce)
-                if (coupon.MinOrderPrice <= coupon.Value)
+            if (coupon == null) {
+                return ServiceResult.FailedMessage("传入参数为空");
+            }
+
+            if (coupon.Type == CouponType.Reduce) {
+                if (coupon.MinOrderPrice <= coupon.Value) {
                     return ServiceResult.FailedMessage("立减金额只能小于消费额");
-            if (coupon.TimeLimit == CouponTimeLimit.Days)
-                if (coupon.AfterDays <= 0)
+                }
+            }
+
+            if (coupon.TimeLimit == CouponTimeLimit.Days) {
+                if (coupon.AfterDays <= 0) {
                     return ServiceResult.FailedMessage("获得后有效期天数必须大于0");
+                }
+            }
 
             var model = coupon;
             var result = AddOrUpdate(model);
-            if (result)
+            if (result) {
                 return ServiceResult.Success;
+            }
+
             return ServiceResult.Failed;
         }
 
@@ -47,13 +57,16 @@ namespace Alabo.App.Asset.Coupons.Domain.Services
             var list = new List<CouponDrList>();
             var results = Resolve<ICouponService>().GetList();
 
-            if (results != null)
-                foreach (var item in results)
+            if (results != null) {
+                foreach (var item in results) {
                     list.Add(new CouponDrList
                     {
                         Id = item.Id,
                         Name = item.Name
                     });
+                }
+            }
+
             return list;
         }
     }

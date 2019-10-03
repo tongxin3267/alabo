@@ -26,9 +26,13 @@ namespace Alabo.Logging.Extensions
         /// </summary>
         private static string GetParameterValue(Parameter parameter)
         {
-            if (Reflection.IsGenericCollection(parameter.RawType) == false) return parameter.Value.SafeString();
+            if (Reflection.IsGenericCollection(parameter.RawType) == false) {
+                return parameter.Value.SafeString();
+            }
 
-            if (!(parameter.Value is IEnumerable<object> list)) return parameter.Value.SafeString();
+            if (!(parameter.Value is IEnumerable<object> list)) {
+                return parameter.Value.SafeString();
+            }
 
             return StringExtensions.SafeStringJoin(list.Select(t => t.SafeString()));
         }

@@ -31,7 +31,10 @@ namespace Alabo.App.Share.OpenTasks.Result
             foreach (var item in BillList)
             {
                 var userAccout = Ioc.Resolve<IAccountService>().GetAccount(item.UserId, item.MoneyTypeId);
-                if (userAccout == null) continue;
+                if (userAccout == null) {
+                    continue;
+                }
+
                 userAccout.Amount += item.Flow == AccountFlow.Income ? item.Amount : -item.Amount;
                 userAccout.HistoryAmount += item.Flow == AccountFlow.Income ? item.Amount : 0;
                 Ioc.Resolve<IAccountService>().Update(userAccout);

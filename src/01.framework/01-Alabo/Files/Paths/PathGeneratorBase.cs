@@ -32,7 +32,9 @@ namespace Alabo.Files.Paths
         /// <param name="fileName">文件名，必须包含扩展名，如果仅传入扩展名则生成随机文件名</param>
         public string Generate(string fileName)
         {
-            if (string.IsNullOrWhiteSpace(fileName)) throw new ArgumentNullException(nameof(fileName));
+            if (string.IsNullOrWhiteSpace(fileName)) {
+                throw new ArgumentNullException(nameof(fileName));
+            }
 
             return GeneratePath(GetFileName(fileName));
         }
@@ -56,7 +58,9 @@ namespace Alabo.Files.Paths
                 name = string.Empty;
             }
 
-            if (string.IsNullOrWhiteSpace(name)) name = _randomGenerator.Generate();
+            if (string.IsNullOrWhiteSpace(name)) {
+                name = _randomGenerator.Generate();
+            }
 
             name = FilterFileName(name);
             return $"{name}-{Time.GetDateTime():HHmmss}.{extension}";

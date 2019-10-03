@@ -307,7 +307,9 @@ namespace Alabo.Domains.Repositories.SqlServer
     {
         public static string MapCsharpType(string dbtype)
         {
-            if (string.IsNullOrEmpty(dbtype)) return dbtype;
+            if (string.IsNullOrEmpty(dbtype)) {
+                return dbtype;
+            }
 
             dbtype = dbtype.ToLower();
             var csharpType = "object";
@@ -447,7 +449,9 @@ namespace Alabo.Domains.Repositories.SqlServer
 
         public static Type MapCommonType(string dbtype)
         {
-            if (string.IsNullOrEmpty(dbtype)) return Type.Missing.GetType();
+            if (string.IsNullOrEmpty(dbtype)) {
+                return Type.Missing.GetType();
+            }
 
             dbtype = dbtype.ToLower();
             var commonType = typeof(object);

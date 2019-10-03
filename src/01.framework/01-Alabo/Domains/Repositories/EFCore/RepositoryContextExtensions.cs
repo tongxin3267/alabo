@@ -23,10 +23,14 @@ namespace Alabo.Domains.Repositories.EFCore
         public static int ExecuteNonQuery(this IRepositoryContext context, string sql)
         {
             var command = context.Connection().CreateCommand();
-            if (context.IsInTransaction) command.Transaction = context.GetDbTransaction();
+            if (context.IsInTransaction) {
+                command.Transaction = context.GetDbTransaction();
+            }
 
             command.CommandText = sql;
-            if (command.Connection.State == ConnectionState.Closed) command.Connection.Open();
+            if (command.Connection.State == ConnectionState.Closed) {
+                command.Connection.Open();
+            }
 
             return command.ExecuteNonQuery();
         }
@@ -40,10 +44,14 @@ namespace Alabo.Domains.Repositories.EFCore
         {
             var result = false;
             var command = context.Connection().CreateCommand();
-            if (context.IsInTransaction) command.Transaction = context.GetDbTransaction();
+            if (context.IsInTransaction) {
+                command.Transaction = context.GetDbTransaction();
+            }
 
             command.CommandText = sql;
-            if (command.Connection.State == ConnectionState.Closed) command.Connection.Open();
+            if (command.Connection.State == ConnectionState.Closed) {
+                command.Connection.Open();
+            }
 
             var reader = command.ExecuteReader();
             result = reader.HasRows;
@@ -76,7 +84,9 @@ namespace Alabo.Domains.Repositories.EFCore
         public static DbTransaction BeginNativeDbTransaction(this IRepositoryContext context)
         {
             var connection = context.Connection();
-            if (connection.State != ConnectionState.Open) connection.Open();
+            if (connection.State != ConnectionState.Open) {
+                connection.Open();
+            }
 
             return connection.BeginTransaction();
         }
@@ -90,12 +100,18 @@ namespace Alabo.Domains.Repositories.EFCore
         public static int ExecuteNonQuery(this IRepositoryContext context, string sql, params DbParameter[] parameters)
         {
             var command = context.Connection().CreateCommand();
-            if (context.IsInTransaction) command.Transaction = context.GetDbTransaction();
+            if (context.IsInTransaction) {
+                command.Transaction = context.GetDbTransaction();
+            }
 
             command.CommandText = sql;
-            if (parameters != null && parameters.Length > 0) command.Parameters.AddRange(parameters);
+            if (parameters != null && parameters.Length > 0) {
+                command.Parameters.AddRange(parameters);
+            }
 
-            if (command.Connection.State == ConnectionState.Closed) command.Connection.Open();
+            if (command.Connection.State == ConnectionState.Closed) {
+                command.Connection.Open();
+            }
 
             return command.ExecuteNonQuery();
         }
@@ -108,7 +124,9 @@ namespace Alabo.Domains.Repositories.EFCore
         public static int ExecuteSqlList(this IRepositoryContext context, List<string> sqlStringList)
         {
             var command = context.Connection().CreateCommand();
-            if (command.Connection.State == ConnectionState.Closed) command.Connection.Open();
+            if (command.Connection.State == ConnectionState.Closed) {
+                command.Connection.Open();
+            }
 
             DbTransaction transaction = null;
             var count = 0;
@@ -133,7 +151,9 @@ namespace Alabo.Domains.Repositories.EFCore
             }
             finally
             {
-                if (transaction != null) transaction.Dispose();
+                if (transaction != null) {
+                    transaction.Dispose();
+                }
 
                 command.Dispose();
             }
@@ -163,7 +183,9 @@ namespace Alabo.Domains.Repositories.EFCore
             IEnumerable<DbParameter[]> paramList)
         {
             var command = context.Connection().CreateCommand();
-            if (command.Connection.State == ConnectionState.Closed) command.Connection.Open();
+            if (command.Connection.State == ConnectionState.Closed) {
+                command.Connection.Open();
+            }
 
             DbTransaction trans = null;
             try
@@ -177,7 +199,9 @@ namespace Alabo.Domains.Repositories.EFCore
                     command.CommandText = sqlList.ElementAt(i);
                     command.Parameters.Clear();
                     parameters = paramList.ElementAt(i);
-                    foreach (var pm in parameters) command.Parameters.Add(pm);
+                    foreach (var pm in parameters) {
+                        command.Parameters.Add(pm);
+                    }
 
                     command.ExecuteNonQuery();
                 }
@@ -188,13 +212,17 @@ namespace Alabo.Domains.Repositories.EFCore
             catch (System.Exception ex)
             {
                 Trace.WriteLine(ex.Message);
-                if (trans != null) trans.Rollback();
+                if (trans != null) {
+                    trans.Rollback();
+                }
 
                 throw;
             }
             finally
             {
-                if (trans != null) trans.Dispose();
+                if (trans != null) {
+                    trans.Dispose();
+                }
 
                 command.Dispose();
             }
@@ -208,10 +236,14 @@ namespace Alabo.Domains.Repositories.EFCore
         public static object ExecuteScalar(this IRepositoryContext context, string sql)
         {
             var command = context.Connection().CreateCommand();
-            if (context.IsInTransaction) command.Transaction = context.GetDbTransaction();
+            if (context.IsInTransaction) {
+                command.Transaction = context.GetDbTransaction();
+            }
 
             command.CommandText = sql;
-            if (command.Connection.State == ConnectionState.Closed) command.Connection.Open();
+            if (command.Connection.State == ConnectionState.Closed) {
+                command.Connection.Open();
+            }
 
             return command.ExecuteScalar();
         }
@@ -225,12 +257,18 @@ namespace Alabo.Domains.Repositories.EFCore
         public static object ExecuteScalar(this IRepositoryContext context, string sql, params DbParameter[] parameters)
         {
             var command = context.Connection().CreateCommand();
-            if (context.IsInTransaction) command.Transaction = context.GetDbTransaction();
+            if (context.IsInTransaction) {
+                command.Transaction = context.GetDbTransaction();
+            }
 
             command.CommandText = sql;
-            if (parameters != null && parameters.Length > 0) command.Parameters.AddRange(parameters);
+            if (parameters != null && parameters.Length > 0) {
+                command.Parameters.AddRange(parameters);
+            }
 
-            if (command.Connection.State == ConnectionState.Closed) command.Connection.Open();
+            if (command.Connection.State == ConnectionState.Closed) {
+                command.Connection.Open();
+            }
 
             return command.ExecuteScalar();
         }
@@ -243,10 +281,14 @@ namespace Alabo.Domains.Repositories.EFCore
         public static DbDataReader ExecuteDataReader(this IRepositoryContext context, string sql)
         {
             var command = context.Connection().CreateCommand();
-            if (context.IsInTransaction) command.Transaction = context.GetDbTransaction();
+            if (context.IsInTransaction) {
+                command.Transaction = context.GetDbTransaction();
+            }
 
             command.CommandText = sql;
-            if (command.Connection.State == ConnectionState.Closed) command.Connection.Open();
+            if (command.Connection.State == ConnectionState.Closed) {
+                command.Connection.Open();
+            }
 
             return command.ExecuteReader();
         }
@@ -261,12 +303,18 @@ namespace Alabo.Domains.Repositories.EFCore
             params DbParameter[] parameters)
         {
             var command = context.Connection().CreateCommand();
-            if (context.IsInTransaction) command.Transaction = context.GetDbTransaction();
+            if (context.IsInTransaction) {
+                command.Transaction = context.GetDbTransaction();
+            }
 
             command.CommandText = sql;
-            if (parameters != null && parameters.Length > 0) command.Parameters.AddRange(parameters);
+            if (parameters != null && parameters.Length > 0) {
+                command.Parameters.AddRange(parameters);
+            }
 
-            if (command.Connection.State == ConnectionState.Closed) command.Connection.Open();
+            if (command.Connection.State == ConnectionState.Closed) {
+                command.Connection.Open();
+            }
 
             return command.ExecuteReader();
         }
@@ -284,9 +332,13 @@ namespace Alabo.Domains.Repositories.EFCore
             var command = context.Connection().CreateCommand();
             command.Transaction = transaction;
             command.CommandText = sql;
-            if (parameters != null && parameters.Length > 0) command.Parameters.AddRange(parameters);
+            if (parameters != null && parameters.Length > 0) {
+                command.Parameters.AddRange(parameters);
+            }
 
-            if (command.Connection.State == ConnectionState.Closed) command.Connection.Open();
+            if (command.Connection.State == ConnectionState.Closed) {
+                command.Connection.Open();
+            }
 
             return command.ExecuteNonQuery();
         }
@@ -302,7 +354,9 @@ namespace Alabo.Domains.Repositories.EFCore
             var command = context.Connection().CreateCommand();
             command.Transaction = transaction;
             command.CommandText = sql;
-            if (command.Connection.State == ConnectionState.Closed) command.Connection.Open();
+            if (command.Connection.State == ConnectionState.Closed) {
+                command.Connection.Open();
+            }
 
             return command.ExecuteScalar();
         }
@@ -320,9 +374,13 @@ namespace Alabo.Domains.Repositories.EFCore
             var command = context.Connection().CreateCommand();
             command.Transaction = transaction;
             command.CommandText = sql;
-            if (parameters != null && parameters.Length > 0) command.Parameters.AddRange(parameters);
+            if (parameters != null && parameters.Length > 0) {
+                command.Parameters.AddRange(parameters);
+            }
 
-            if (command.Connection.State == ConnectionState.Closed) command.Connection.Open();
+            if (command.Connection.State == ConnectionState.Closed) {
+                command.Connection.Open();
+            }
 
             return command.ExecuteScalar();
         }
@@ -339,7 +397,9 @@ namespace Alabo.Domains.Repositories.EFCore
             var command = context.Connection().CreateCommand();
             command.Transaction = transaction;
             command.CommandText = sql;
-            if (command.Connection.State == ConnectionState.Closed) command.Connection.Open();
+            if (command.Connection.State == ConnectionState.Closed) {
+                command.Connection.Open();
+            }
 
             return command.ExecuteReader();
         }
@@ -357,9 +417,13 @@ namespace Alabo.Domains.Repositories.EFCore
             var command = context.Connection().CreateCommand();
             command.Transaction = transaction;
             command.CommandText = sql;
-            if (parameters != null && parameters.Length > 0) command.Parameters.AddRange(parameters);
+            if (parameters != null && parameters.Length > 0) {
+                command.Parameters.AddRange(parameters);
+            }
 
-            if (command.Connection.State == ConnectionState.Closed) command.Connection.Open();
+            if (command.Connection.State == ConnectionState.Closed) {
+                command.Connection.Open();
+            }
 
             return command.ExecuteReader();
         }
@@ -465,7 +529,9 @@ namespace Alabo.Domains.Repositories.EFCore
                 {
                     var propCache = new Dictionary<string, PropertyInfo>();
                     var drFields = new List<string>();
-                    for (var i = 0; i < dr.FieldCount; i++) drFields.Add(dr.GetName(i));
+                    for (var i = 0; i < dr.FieldCount; i++) {
+                        drFields.Add(dr.GetName(i));
+                    }
 
                     while (dr.Read())
                     {
@@ -477,7 +543,9 @@ namespace Alabo.Domains.Repositories.EFCore
                             {
                                 var prop = propCache[field];
                                 var value = dr[field];
-                                if (value != DBNull.Value) prop.SetValue(insT, value, null);
+                                if (value != DBNull.Value) {
+                                    prop.SetValue(insT, value, null);
+                                }
                             }
                         }
                         else
@@ -486,14 +554,22 @@ namespace Alabo.Domains.Repositories.EFCore
                             foreach (var prop in propList)
                             {
                                 var field = prop.Name;
-                                if (!drFields.Contains(field)) continue;
+                                if (!drFields.Contains(field)) {
+                                    continue;
+                                }
 
-                                if (!prop.CanWrite) continue;
+                                if (!prop.CanWrite) {
+                                    continue;
+                                }
 
                                 var value = dr[field];
-                                if (value != DBNull.Value) prop.SetValue(insT, value, null);
+                                if (value != DBNull.Value) {
+                                    prop.SetValue(insT, value, null);
+                                }
 
-                                if (!propCache.ContainsKey(field)) propCache.Add(field, prop);
+                                if (!propCache.ContainsKey(field)) {
+                                    propCache.Add(field, prop);
+                                }
                             }
 
                             // Re-balance PropCache & drFields
@@ -503,7 +579,9 @@ namespace Alabo.Domains.Repositories.EFCore
                                 drFields = interset;
 
                                 var subSet = propCache.Select(x => x.Key).Except(interset);
-                                foreach (var item in subSet) propCache.Remove(item);
+                                foreach (var item in subSet) {
+                                    propCache.Remove(item);
+                                }
                             }
                         }
 

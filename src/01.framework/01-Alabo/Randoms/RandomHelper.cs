@@ -214,7 +214,9 @@ namespace Alabo.Randoms
             string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
         {
             var buffer = new char[length];
-            for (var n = 0; n < length; ++n) buffer[n] = chars[Generator.Next(chars.Length)];
+            for (var n = 0; n < length; ++n) {
+                buffer[n] = chars[Generator.Next(chars.Length)];
+            }
 
             return new string(buffer);
         }
@@ -285,7 +287,9 @@ namespace Alabo.Randoms
         {
             var i = new System.Random().Next(0, 100000);
             var sex = Sex.Man;
-            if (i % 2 == 0) sex = Sex.WoMan;
+            if (i % 2 == 0) {
+                sex = Sex.WoMan;
+            }
 
             return sex;
         }
@@ -298,7 +302,9 @@ namespace Alabo.Randoms
         public static string Name(Sex sex)
         {
             var nameList = _lastNameMan.ToCharArray().ToList(); //151的男士名
-            if (sex == Sex.WoMan) nameList = _lastNameWoMan.ToCharArray().ToList(); //151个女士名
+            if (sex == Sex.WoMan) {
+                nameList = _lastNameWoMan.ToCharArray().ToList(); //151个女士名
+            }
 
             var lastNameIndex = new System.Random().Next(0, nameList.Count);
             var lastName = nameList[lastNameIndex];

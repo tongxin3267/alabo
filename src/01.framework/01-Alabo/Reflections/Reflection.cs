@@ -32,7 +32,9 @@ namespace Alabo.Reflections
         public static object GetPropertyValue(this string propertyName, object instance)
         {
             var property = instance.GetType().GetProperty(propertyName);
-            if (property == null) return null;
+            if (property == null) {
+                return null;
+            }
 
             return GetPropertyValue(property, instance);
         }
@@ -56,9 +58,11 @@ namespace Alabo.Reflections
         /// <param name="instance">成员所在的类实例</param>
         public static object GetPropertyValue(this PropertyInfo property, object instance)
         {
-            if (instance == null) return null;
+            if (instance == null) {
+                return null;
+            }
 
-            if (property != null)
+            if (property != null) {
                 try
                 {
                     var reflector = property.GetReflector();
@@ -69,6 +73,7 @@ namespace Alabo.Reflections
                     Console.WriteLine(ex.Message);
                     return null;
                 }
+            }
 
             return null;
         }
@@ -99,9 +104,13 @@ namespace Alabo.Reflections
         /// <param name="memberName">成员名称</param>
         public static MemberInfo GetMember(Type type, string memberName)
         {
-            if (type == null) return null;
+            if (type == null) {
+                return null;
+            }
 
-            if (string.IsNullOrWhiteSpace(memberName)) return null;
+            if (string.IsNullOrWhiteSpace(memberName)) {
+                return null;
+            }
 
             return type.GetTypeInfo().GetMember(memberName).FirstOrDefault();
         }
@@ -113,10 +122,15 @@ namespace Alabo.Reflections
         /// <param name="memberName">成员名称</param>
         public static Type GetMemberType(Type type, string memberName)
         {
-            if (type == null) return null;
+            if (type == null) {
+                return null;
+            }
+
             var memberInfo = type.GetProperty(memberName);
 
-            if (memberInfo == null) return null;
+            if (memberInfo == null) {
+                return null;
+            }
 
             return memberInfo.PropertyType;
         }
@@ -128,9 +142,13 @@ namespace Alabo.Reflections
         /// <param name="memberName">成员名称</param>
         public static string GetDescription(Type type, string memberName)
         {
-            if (type == null) return string.Empty;
+            if (type == null) {
+                return string.Empty;
+            }
 
-            if (string.IsNullOrWhiteSpace(memberName)) return string.Empty;
+            if (string.IsNullOrWhiteSpace(memberName)) {
+                return string.Empty;
+            }
 
             return GetDescription(type.GetTypeInfo().GetMember(memberName).FirstOrDefault());
         }
@@ -146,13 +164,19 @@ namespace Alabo.Reflections
             var cacheKey = type.FullName + memberName;
             return Ioc.Resolve<IObjectCache>().GetOrSet(() =>
             {
-                if (type == null) return null;
+                if (type == null) {
+                    return null;
+                }
 
-                if (string.IsNullOrWhiteSpace(memberName)) return null;
+                if (string.IsNullOrWhiteSpace(memberName)) {
+                    return null;
+                }
 
                 var methods = type.GetMethods()
                     .Where(e => e.Name.Equals(memberName, StringComparison.OrdinalIgnoreCase));
-                if (methods == null || methods.Count() < 0) return null;
+                if (methods == null || methods.Count() < 0) {
+                    return null;
+                }
 
                 var method = methods.FirstOrDefault();
                 return method;
@@ -165,7 +189,9 @@ namespace Alabo.Reflections
         /// <param name="member">成员</param>
         public static string GetDescription(MemberInfo member)
         {
-            if (member == null) return string.Empty;
+            if (member == null) {
+                return string.Empty;
+            }
 
             return member.GetCustomAttribute<DescriptionAttribute>() is DescriptionAttribute attribute
                 ? attribute.Description
@@ -186,13 +212,17 @@ namespace Alabo.Reflections
         /// </summary>
         public static string GetDisplayName(MemberInfo member)
         {
-            if (member == null) return string.Empty;
+            if (member == null) {
+                return string.Empty;
+            }
 
-            if (member.GetCustomAttribute<DisplayAttribute>() is DisplayAttribute displayAttribute)
+            if (member.GetCustomAttribute<DisplayAttribute>() is DisplayAttribute displayAttribute) {
                 return displayAttribute.Name;
+            }
 
-            if (member.GetCustomAttribute<DisplayNameAttribute>() is DisplayNameAttribute displayNameAttribute)
+            if (member.GetCustomAttribute<DisplayNameAttribute>() is DisplayNameAttribute displayNameAttribute) {
                 return displayNameAttribute.DisplayName;
+            }
 
             return string.Empty;
         }
@@ -239,11 +269,12 @@ namespace Alabo.Reflections
             var typeInterface = typeof(TInterface);
 
             var result = new List<TInterface>();
-            foreach (var assembly in Assemblies)
+            foreach (var assembly in Assemblies) {
                 result.AddRange(assembly.GetTypes()
                     .Where(t => typeInterface.GetTypeInfo().IsAssignableFrom(t) && t != typeInterface &&
                                 t.GetTypeInfo().IsAbstract == false)
                     .Select(t => CreateInstance<TInterface>(t)).ToList());
+            }
 
             return result;
         }
@@ -285,7 +316,9 @@ namespace Alabo.Reflections
         /// <param name="member">成员</param>
         public static bool IsBool(MemberInfo member)
         {
-            if (member == null) return false;
+            if (member == null) {
+                return false;
+            }
 
             switch (member.MemberType)
             {
@@ -313,7 +346,9 @@ namespace Alabo.Reflections
         /// <param name="member">成员</param>
         public static bool IsEnum(MemberInfo member)
         {
-            if (member == null) return false;
+            if (member == null) {
+                return false;
+            }
 
             switch (member.MemberType)
             {
@@ -332,10 +367,14 @@ namespace Alabo.Reflections
         /// </summary>
         private static bool IsEnum(PropertyInfo property)
         {
-            if (property.PropertyType.GetTypeInfo().IsEnum) return true;
+            if (property.PropertyType.GetTypeInfo().IsEnum) {
+                return true;
+            }
 
             var value = Nullable.GetUnderlyingType(property.PropertyType);
-            if (value == null) return false;
+            if (value == null) {
+                return false;
+            }
 
             return value.GetTypeInfo().IsEnum;
         }
@@ -346,7 +385,9 @@ namespace Alabo.Reflections
         /// <param name="member">成员</param>
         public static bool IsDate(MemberInfo member)
         {
-            if (member == null) return false;
+            if (member == null) {
+                return false;
+            }
 
             switch (member.MemberType)
             {
@@ -365,9 +406,13 @@ namespace Alabo.Reflections
         /// </summary>
         private static bool IsDate(PropertyInfo property)
         {
-            if (property.PropertyType == typeof(DateTime)) return true;
+            if (property.PropertyType == typeof(DateTime)) {
+                return true;
+            }
 
-            if (property.PropertyType == typeof(DateTime?)) return true;
+            if (property.PropertyType == typeof(DateTime?)) {
+                return true;
+            }
 
             return false;
         }
@@ -378,7 +423,9 @@ namespace Alabo.Reflections
         /// <param name="member">成员</param>
         public static bool IsInt(MemberInfo member)
         {
-            if (member == null) return false;
+            if (member == null) {
+                return false;
+            }
 
             switch (member.MemberType)
             {
@@ -398,17 +445,29 @@ namespace Alabo.Reflections
         /// </summary>
         private static bool IsInt(PropertyInfo property)
         {
-            if (property.PropertyType == typeof(int)) return true;
+            if (property.PropertyType == typeof(int)) {
+                return true;
+            }
 
-            if (property.PropertyType == typeof(int?)) return true;
+            if (property.PropertyType == typeof(int?)) {
+                return true;
+            }
 
-            if (property.PropertyType == typeof(short)) return true;
+            if (property.PropertyType == typeof(short)) {
+                return true;
+            }
 
-            if (property.PropertyType == typeof(short?)) return true;
+            if (property.PropertyType == typeof(short?)) {
+                return true;
+            }
 
-            if (property.PropertyType == typeof(long)) return true;
+            if (property.PropertyType == typeof(long)) {
+                return true;
+            }
 
-            if (property.PropertyType == typeof(long?)) return true;
+            if (property.PropertyType == typeof(long?)) {
+                return true;
+            }
 
             return false;
         }
@@ -419,9 +478,13 @@ namespace Alabo.Reflections
         /// <param name="member">成员</param>
         public static bool IsNumber(MemberInfo member)
         {
-            if (member == null) return false;
+            if (member == null) {
+                return false;
+            }
 
-            if (IsInt(member)) return true;
+            if (IsInt(member)) {
+                return true;
+            }
 
             switch (member.MemberType)
             {
@@ -441,17 +504,29 @@ namespace Alabo.Reflections
         /// </summary>
         private static bool IsNumber(PropertyInfo property)
         {
-            if (property.PropertyType == typeof(double)) return true;
+            if (property.PropertyType == typeof(double)) {
+                return true;
+            }
 
-            if (property.PropertyType == typeof(double?)) return true;
+            if (property.PropertyType == typeof(double?)) {
+                return true;
+            }
 
-            if (property.PropertyType == typeof(decimal)) return true;
+            if (property.PropertyType == typeof(decimal)) {
+                return true;
+            }
 
-            if (property.PropertyType == typeof(decimal?)) return true;
+            if (property.PropertyType == typeof(decimal?)) {
+                return true;
+            }
 
-            if (property.PropertyType == typeof(float)) return true;
+            if (property.PropertyType == typeof(float)) {
+                return true;
+            }
 
-            if (property.PropertyType == typeof(float?)) return true;
+            if (property.PropertyType == typeof(float?)) {
+                return true;
+            }
 
             return false;
         }
@@ -462,7 +537,9 @@ namespace Alabo.Reflections
         /// <param name="type">类型</param>
         public static bool IsCollection(Type type)
         {
-            if (type.IsArray) return true;
+            if (type.IsArray) {
+                return true;
+            }
 
             return IsGenericCollection(type);
         }
@@ -473,7 +550,9 @@ namespace Alabo.Reflections
         /// <param name="type">类型</param>
         public static bool IsGenericCollection(Type type)
         {
-            if (!type.IsGenericType) return false;
+            if (!type.IsGenericType) {
+                return false;
+            }
 
             var typeDefinition = type.GetGenericTypeDefinition();
             return typeDefinition == typeof(IEnumerable<>)
@@ -520,11 +599,17 @@ namespace Alabo.Reflections
         /// <param name="type">类型</param>
         public static Type GetTopBaseType(Type type)
         {
-            if (type == null) return null;
+            if (type == null) {
+                return null;
+            }
 
-            if (type.IsInterface) return type;
+            if (type.IsInterface) {
+                return type;
+            }
 
-            if (type.BaseType == typeof(object)) return type;
+            if (type.BaseType == typeof(object)) {
+                return type;
+            }
 
             return GetTopBaseType(type.BaseType);
         }
@@ -536,11 +621,17 @@ namespace Alabo.Reflections
         /// <returns></returns>
         public static bool BaseTypeContains(Type type, Type baseType)
         {
-            if (type == null) return false;
+            if (type == null) {
+                return false;
+            }
 
-            if (type.IsInterface) return false;
+            if (type.IsInterface) {
+                return false;
+            }
 
-            if (type.BaseType == baseType) return true;
+            if (type.BaseType == baseType) {
+                return true;
+            }
 
             return BaseTypeContains(type.BaseType, baseType);
         }

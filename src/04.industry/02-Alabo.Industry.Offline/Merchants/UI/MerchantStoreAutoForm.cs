@@ -68,15 +68,21 @@ namespace Alabo.Industry.Offline.Merchants.UI
             if (id == null)
             {
                 var store = Resolve<IMerchantStoreService>().GetMerchantStore(autoModel.BasicUser.Id);
-                if (store != null) result = store.FirstOrDefault();
+                if (store != null) {
+                    result = store.FirstOrDefault();
+                }
             }
             else
             {
                 var store = Resolve<IMerchantStoreService>().GetMerchantStore(id.ConvertToLong());
-                if (store != null) result = store.FirstOrDefault();
+                if (store != null) {
+                    result = store.FirstOrDefault();
+                }
             }
 
-            if (result == null) result = new MerchantStore();
+            if (result == null) {
+                result = new MerchantStore();
+            }
 
             autoForm = ToAutoForm(result);
 
@@ -103,7 +109,9 @@ namespace Alabo.Industry.Offline.Merchants.UI
                     //instance.Id= mapInstance.Id.ToObjectId();
                     var merchantStore = Resolve<IMerchantStoreService>()
                         .GetSingle(x => x.Id == mapInstance.Id.ToObjectId());
-                    if (merchantStore != null) instance.Id = merchantStore.Id;
+                    if (merchantStore != null) {
+                        instance.Id = merchantStore.Id;
+                    }
                 }
                 else
                 {

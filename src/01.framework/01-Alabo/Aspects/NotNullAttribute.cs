@@ -16,7 +16,9 @@ namespace Alabo.Aspects
         /// </summary>
         public override Task Invoke(ParameterAspectContext context, ParameterAspectDelegate next)
         {
-            if (context.Parameter.Value == null) throw new ArgumentNullException(context.Parameter.Name);
+            if (context.Parameter.Value == null) {
+                throw new ArgumentNullException(context.Parameter.Name);
+            }
 
             return next(context);
         }

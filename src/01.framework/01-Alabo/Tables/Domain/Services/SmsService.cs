@@ -63,7 +63,9 @@ namespace Alabo.Tables.Domain.Services
                 write.Flush();
                 var response = (HttpWebResponse)request.GetResponse();
                 var encoding = response.ContentEncoding;
-                if (encoding == null || encoding.Length < 1) encoding = "UTF-8";
+                if (encoding == null || encoding.Length < 1) {
+                    encoding = "UTF-8";
+                }
 
                 var reader = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding(encoding));
                 var retstring = reader.ReadToEnd();
@@ -111,9 +113,11 @@ namespace Alabo.Tables.Domain.Services
         private static string BytesToHexString(byte[] bytes)
         {
             var returnStr = new StringBuilder();
-            if (bytes != null || bytes.Length == 0)
-                for (var i = 0; i < bytes.Length; i++)
+            if (bytes != null || bytes.Length == 0) {
+                for (var i = 0; i < bytes.Length; i++) {
                     returnStr.Append(bytes[i].ToString("X2"));
+                }
+            }
 
             return returnStr.ToString();
         }
@@ -125,13 +129,19 @@ namespace Alabo.Tables.Domain.Services
         /// <returns>byte array</returns>
         private static byte[] HexStringToBytes(string hexString)
         {
-            if (hexString == null || string.IsNullOrEmpty(hexString)) return null;
+            if (hexString == null || string.IsNullOrEmpty(hexString)) {
+                return null;
+            }
 
             var length = hexString.Length / 2;
-            if (hexString.Length % 2 != 0) return null;
+            if (hexString.Length % 2 != 0) {
+                return null;
+            }
 
             var d = new byte[length];
-            for (var i = 0; i < length; i++) d[i] = Convert.ToByte(hexString.Substring(i * 2, 2), 16);
+            for (var i = 0; i < length; i++) {
+                d[i] = Convert.ToByte(hexString.Substring(i * 2, 2), 16);
+            }
 
             return d;
         }

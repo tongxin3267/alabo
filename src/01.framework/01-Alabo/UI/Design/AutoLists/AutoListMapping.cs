@@ -32,10 +32,12 @@ namespace Alabo.UI.Design.AutoLists
                         //tabs
                         auto.Tabs = AutoTableMapping.GetTabs(propertys);
 
-                        foreach (var item in propertys)
+                        foreach (var item in propertys) {
                             if (item.FieldAttribute != null && item.FieldAttribute.ListShow)
                             {
-                                if (item.Name == "Id") continue;
+                                if (item.Name == "Id") {
+                                    continue;
+                                }
 
                                 var tableColumn = new TableColumn
                                 {
@@ -45,9 +47,11 @@ namespace Alabo.UI.Design.AutoLists
                                     Width = item.FieldAttribute.Width
                                 };
                                 tableColumn = AutoTableMapping.GetType(tableColumn, item.Property, item.FieldAttribute);
-                                if (!item.FieldAttribute.Width.IsNullOrEmpty())
+                                if (!item.FieldAttribute.Width.IsNullOrEmpty()) {
                                     tableColumn.Width = item.FieldAttribute.Width;
+                                }
                             }
+                        }
 
                         return auto;
                     }

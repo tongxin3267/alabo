@@ -72,10 +72,14 @@ namespace Alabo.App.Share.TaskExecutes.Extensions
             var configurations = _taskModuleConfigrationAccessor.GetConfigurations(moduleType);
             foreach (var item in configurations)
             {
-                if (item == null) break;
+                if (item == null) {
+                    break;
+                }
 
                 var module = CreateModule(moduleType, item);
-                if (module != null) list.Add(module);
+                if (module != null) {
+                    list.Add(module);
+                }
             }
 
             return list;
@@ -88,7 +92,9 @@ namespace Alabo.App.Share.TaskExecutes.Extensions
         public ITaskModule CreateModule(long id)
         {
             var configuration = _taskModuleConfigrationAccessor.GetConfiguration(id);
-            if (configuration == null) return null;
+            if (configuration == null) {
+                return null;
+            }
 
             return CreateModule(configuration.Item1, configuration.Item2);
         }
@@ -100,15 +106,21 @@ namespace Alabo.App.Share.TaskExecutes.Extensions
         /// <param name="taskConfiguration">The task configuration.</param>
         private ITaskModule CreateModule(Type moduleType, object taskConfiguration)
         {
-            if (!_taskManager.TryGetModuleAttribute(moduleType, out var moduleAttribute)) return null;
+            if (!_taskManager.TryGetModuleAttribute(moduleType, out var moduleAttribute)) {
+                return null;
+            }
 
-            if (moduleAttribute.ConfigurationType != taskConfiguration.GetType()) return null;
+            if (moduleAttribute.ConfigurationType != taskConfiguration.GetType()) {
+                return null;
+            }
 
             ITaskModule result = null;
             var constructors = moduleType.GetConstructors();
-            foreach (var item in constructors)
-                if (TryCreateTaskModule(item, taskConfiguration, out result))
+            foreach (var item in constructors) {
+                if (TryCreateTaskModule(item, taskConfiguration, out result)) {
                     break;
+                }
+            }
 
             return result;
         }
@@ -124,7 +136,7 @@ namespace Alabo.App.Share.TaskExecutes.Extensions
         {
             IList<Expression> taskModuleParameters = new List<Expression>();
             var parameters = moduleConstructor.GetParameters();
-            foreach (var item in parameters)
+            foreach (var item in parameters) {
                 if (item.ParameterType == taskConfiguration.GetType())
                 {
                     var taskConfigurationExpression = Expression.Constant(taskConfiguration);
@@ -146,6 +158,7 @@ namespace Alabo.App.Share.TaskExecutes.Extensions
                     var parameterConvertExpression = Expression.Convert(parameterExpression, item.ParameterType);
                     taskModuleParameters.Add(parameterConvertExpression);
                 }
+            }
 
             var newExpression = Expression.New(moduleConstructor, taskModuleParameters.ToArray());
             var lambdaExpression = Expression.Lambda<Func<ITaskModule>>(newExpression);

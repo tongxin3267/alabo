@@ -64,7 +64,9 @@ namespace Alabo.Exceptions
         {
             get
             {
-                if (Data.Count == 0) return _message;
+                if (Data.Count == 0) {
+                    return _message;
+                }
 
                 var result = new StringBuilder();
                 result.AppendLine(_message);
@@ -85,9 +87,13 @@ namespace Alabo.Exceptions
         {
             get
             {
-                if (!string.IsNullOrWhiteSpace(base.StackTrace)) return base.StackTrace;
+                if (!string.IsNullOrWhiteSpace(base.StackTrace)) {
+                    return base.StackTrace;
+                }
 
-                if (InnerException == null) return string.Empty;
+                if (InnerException == null) {
+                    return string.Empty;
+                }
 
                 return InnerException.StackTrace;
             }
@@ -109,7 +115,9 @@ namespace Alabo.Exceptions
         /// </summary>
         private void AppendSelfMessage(StringBuilder result)
         {
-            if (string.IsNullOrWhiteSpace(base.Message)) return;
+            if (string.IsNullOrWhiteSpace(base.Message)) {
+                return;
+            }
 
             result.AppendLine(base.Message);
         }
@@ -119,7 +127,9 @@ namespace Alabo.Exceptions
         /// </summary>
         private void AppendInnerMessage(StringBuilder result, Exception exception)
         {
-            if (exception == null) return;
+            if (exception == null) {
+                return;
+            }
 
             if (exception is ValidException)
             {
@@ -137,8 +147,9 @@ namespace Alabo.Exceptions
         /// </summary>
         private void AppendData(StringBuilder result, Exception ex)
         {
-            foreach (DictionaryEntry data in ex.Data)
+            foreach (DictionaryEntry data in ex.Data) {
                 result.AppendFormat("{0}:{1}{2}", data.Key, data.Value, Environment.NewLine);
+            }
         }
 
         /// <summary>
@@ -147,7 +158,9 @@ namespace Alabo.Exceptions
         /// <param name="level">日志级别</param>
         public string GetPrompt(LogLevel level)
         {
-            if (level == LogLevel.Error) return R.SystemError;
+            if (level == LogLevel.Error) {
+                return R.SystemError;
+            }
 
             return Message;
         }

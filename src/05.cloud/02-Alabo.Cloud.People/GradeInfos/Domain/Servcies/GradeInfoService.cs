@@ -57,7 +57,10 @@ namespace Alabo.Cloud.People.GradeInfos.Domain.Servcies
 
                 var itemGradeInfo = GetSingle(r => r.UserId == item.UserId); // 必须重新获取，因为如果下级会员更新成功，会自动更新
                 var itemUser = users.FirstOrDefault(r => r.Id == item.UserId);
-                if (itemGradeInfo == null || itemUser == null) continue;
+                if (itemGradeInfo == null || itemUser == null) {
+                    continue;
+                }
+
                 var kpiResult = GetKpiResult(itemGradeInfo, itemUser);
                 if (kpiResult.Item1)
                 {
@@ -98,7 +101,10 @@ namespace Alabo.Cloud.People.GradeInfos.Domain.Servcies
                 var grade = grades.FirstOrDefault(r => r.Id == userAutoUpgradeConfig.GradeId);
                 var changeGrade = grades.FirstOrDefault(r => r.Id == userAutoUpgradeConfig.ChangeGradeId);
                 if (changeGrade?.Contribute <= grade?.Contribute || grade == null || changeGrade == null) // 配置出错
+{
                     return Tuple.Create(false, Guid.Empty);
+                }
+
                 var logicalOperator = userAutoUpgradeConfig.LogicalOperator;
                 foreach (var upgradeItem in userAutoUpgradeConfig.UpgradeItems)
                 {
@@ -109,7 +115,9 @@ namespace Alabo.Cloud.People.GradeInfos.Domain.Servcies
 
                 var kpiResult = LogicExpression.Operate(logicalOperator);
                 if (kpiResult) // 考核通过
+{
                     return Tuple.Create(true, userAutoUpgradeConfig.ChangeGradeId);
+                }
             }
 
             return Tuple.Create(false, Guid.Empty);
@@ -190,10 +198,14 @@ namespace Alabo.Cloud.People.GradeInfos.Domain.Servcies
                     $"SELECT TOP 30 Id FROM (SELECT  ROW_NUMBER() OVER (ORDER BY id desc ) AS RowNumber,Id FROM User_User  ) as A WHERE RowNumber > {pageCount}*({i}-1)  ";
                 using (var reader = Repository<IUserMapRepository>().RepositoryContext.ExecuteDataReader(sql))
                 {
-                    while (reader.Read()) userIds.Add(reader["Id"].ConvertToLong());
+                    while (reader.Read()) {
+                        userIds.Add(reader["Id"].ConvertToLong());
+                    }
                 }
 
-                foreach (var userId in userIds) UpdateSingle(userId);
+                foreach (var userId in userIds) {
+                    UpdateSingle(userId);
+                }
             }
         }
 
@@ -205,7 +217,9 @@ namespace Alabo.Cloud.People.GradeInfos.Domain.Servcies
         public void UpdateSingle(long userId)
         {
             var gradeInfo = GetSingle(r => r.UserId == userId);
-            if (gradeInfo == null) gradeInfo = new GradeInfo();
+            if (gradeInfo == null) {
+                gradeInfo = new GradeInfo();
+            }
 
             gradeInfo.UserId = userId;
             // 获取推荐的用户等级关系
@@ -225,10 +239,11 @@ namespace Alabo.Cloud.People.GradeInfos.Domain.Servcies
 
             gradeInfo.ModifiedTime = DateTime.Now;
 
-            if (gradeInfo.Id.IsObjectIdNullOrEmpty())
+            if (gradeInfo.Id.IsObjectIdNullOrEmpty()) {
                 Add(gradeInfo);
-            else
+            } else {
                 Update(gradeInfo);
+            }
         }
 
         /// <summary>
@@ -241,11 +256,12 @@ namespace Alabo.Cloud.People.GradeInfos.Domain.Servcies
             if (users != null)
             {
                 var grades = Resolve<IGradeService>().GetUserGradeList();
-                foreach (var grade in grades)
+                foreach (var grade in grades) {
                     gradeList.Add(new GradeInfoItem
                     {
                         GradeId = grade.Id
                     });
+                }
 
                 gradeList.ForEach(r =>
                 {

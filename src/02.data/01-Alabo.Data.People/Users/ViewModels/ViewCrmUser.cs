@@ -43,7 +43,9 @@ namespace Alabo.Data.People.Users.ViewModels
             if (!string.IsNullOrEmpty(id.ToString()))
             {
                 var result = Resolve<IUserService>().GetSingle(id.ConvertToLong());
-                if (result == null) return ToAutoForm(view);
+                if (result == null) {
+                    return ToAutoForm(view);
+                }
 
                 var model = result.MapTo<AutoForm>();
 
@@ -61,9 +63,15 @@ namespace Alabo.Data.People.Users.ViewModels
 
             dic.TryGetValue("pageIndex", out var pageIndexStr);
             dic.TryGetValue("Status", out var userStatus);
-            if (string.IsNullOrEmpty(userStatus)) userStatus = "1";
+            if (string.IsNullOrEmpty(userStatus)) {
+                userStatus = "1";
+            }
+
             var pageIndex = pageIndexStr.ToInt64();
-            if (pageIndex <= 0) pageIndex = 1;
+            if (pageIndex <= 0) {
+                pageIndex = 1;
+            }
+
             var userInput = new UserInput
             {
                 PageIndex = (int)pageIndex,
@@ -137,7 +145,9 @@ namespace Alabo.Data.People.Users.ViewModels
         /// <param name="size">The size.</param>
         public string GetAvator(int size = 48)
         {
-            if (Avator.IsNullOrEmpty()) return $@"/wwwroot/static/images/avator/{Sex}_{size}.png";
+            if (Avator.IsNullOrEmpty()) {
+                return $@"/wwwroot/static/images/avator/{Sex}_{size}.png";
+            }
 
             return Avator;
         }

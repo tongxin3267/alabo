@@ -9,7 +9,9 @@ namespace Alabo.Domains.Repositories.SqlServer
 
         public SqlServerRepositoryTransaction(SqlServerRepositoryContext context)
         {
-            if (context == null) throw new ArgumentNullException(nameof(context));
+            if (context == null) {
+                throw new ArgumentNullException(nameof(context));
+            }
 
             _context = context;
             _context.BeginTransaction();

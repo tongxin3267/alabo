@@ -21,7 +21,9 @@ namespace Alabo.Domains.Services.Bulk
 
         public void AddMany(IEnumerable<TEntity> soucre)
         {
-            if (soucre == null || !soucre.Any()) return;
+            if (soucre == null || !soucre.Any()) {
+                return;
+            }
 
             var addList = new List<TEntity>();
             soucre.Foreach(r =>
@@ -32,7 +34,9 @@ namespace Alabo.Domains.Services.Bulk
                     addList.Add(r);
                 }
             });
-            if (!addList.Any()) return;
+            if (!addList.Any()) {
+                return;
+            }
 
             Store.AddMany(addList);
         }

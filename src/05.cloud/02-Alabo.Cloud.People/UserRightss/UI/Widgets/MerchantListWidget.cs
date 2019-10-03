@@ -18,17 +18,25 @@ namespace Alabo.Cloud.People.UserRightss.UI.Widgets
 
             //前端传值需注意大小写 userId为必传项
             dic.TryGetValue("userId", out var userId);
-            if (userId.IsNullOrEmpty()) return null;
+            if (userId.IsNullOrEmpty()) {
+                return null;
+            }
 
             var userGradeList = Ioc.Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
             var resultList = new List<AutoMerchantItem>();
             foreach (var item in userGradeList)
             {
                 //不显示18将 暂时写死 回头修改
-                if (item.SortOrder > 1005) continue;
+                if (item.SortOrder > 1005) {
+                    continue;
+                }
+
                 var userRight = Ioc.Resolve<IUserRightsService>()
                     .GetSingle(u => u.UserId == userId.ToInt64() && u.GradeId == item.Id);
-                if (userRight == null) userRight = new UserRights();
+                if (userRight == null) {
+                    userRight = new UserRights();
+                }
+
                 var merchant = AutoMapping.SetValue<AutoMerchantItem>(userRight);
                 merchant.GradeName = item.Name;
                 merchant.UsableCount = userRight.TotalCount - userRight.TotalUseCount;

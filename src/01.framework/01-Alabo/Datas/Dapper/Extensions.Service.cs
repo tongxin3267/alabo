@@ -73,8 +73,9 @@ namespace Alabo.Datas.Dapper
             }
 
             services.TryAddScoped<ISqlQuery, SqlQuery>();
-            if (entityMatedata != null)
+            if (entityMatedata != null) {
                 services.TryAddScoped(typeof(IEntityMatedata), t => t.GetService(entityMatedata));
+            }
 
             var config = new SqlQueryConfig();
             action?.Invoke(config);

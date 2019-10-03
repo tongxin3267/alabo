@@ -7,9 +7,13 @@ namespace Alabo.Mapping.Dynamic
     {
         public void Apply(IList<TModel> deltas)
         {
-            if (deltas == null) throw new ArgumentNullException(nameof(deltas));
+            if (deltas == null) {
+                throw new ArgumentNullException(nameof(deltas));
+            }
 
-            for (var i = 0; i < deltas.Count; i++) this[i].SetValue(deltas[i]);
+            for (var i = 0; i < deltas.Count; i++) {
+                this[i].SetValue(deltas[i]);
+            }
         }
     }
 }

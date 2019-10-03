@@ -55,7 +55,9 @@ namespace Alabo.Domains.Entities
         {
             get
             {
-                if (PageSize == 0) return 0;
+                if (PageSize == 0) {
+                    return 0;
+                }
 
                 return RecordCount % PageSize == 0 ? RecordCount / PageSize : RecordCount / PageSize + 1;
             }

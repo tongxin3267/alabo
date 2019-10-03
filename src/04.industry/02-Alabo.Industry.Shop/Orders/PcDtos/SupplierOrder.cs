@@ -29,7 +29,9 @@ namespace Alabo.Industry.Shop.Orders.PcDtos
             var model = ToQuery<PlatformApiOrderList>();
 
             var expressionQuery = new ExpressionQuery<Order>();
-            if (model.OrderStatus > 0) expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
+            if (model.OrderStatus > 0) {
+                expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
+            }
             //expressionQuery.And(e => e.OrderStatus != OrderStatus.WaitingBuyerPay);
 
             //var isAdmin = Resolve<IUserService>().IsAdmin(model.UserId);
@@ -96,11 +98,15 @@ namespace Alabo.Industry.Shop.Orders.PcDtos
             // // expressionQuery.And(e => e.StoreId > 0);
             expressionQuery.And(e => e.UserId > 0);
 
-            if (Enum.IsDefined(typeof(OrderType), model.OrderType))
+            if (Enum.IsDefined(typeof(OrderType), model.OrderType)) {
                 expressionQuery.And(e => e.OrderType == model.OrderType);
+            }
 
             var store = Resolve<IStoreService>().GetSingle(u => u.UserId == autoModel.BasicUser.Id);
-            if (store == null) throw new ValidException("您不是供应商,暂无店铺");
+            if (store == null) {
+                throw new ValidException("您不是供应商,暂无店铺");
+            }
+
             expressionQuery.And(e => e.StoreId == store.Id.ToString());
 
             //if (autoModel.Filter == FilterType.Admin || autoModel.Filter == FilterType.All) {

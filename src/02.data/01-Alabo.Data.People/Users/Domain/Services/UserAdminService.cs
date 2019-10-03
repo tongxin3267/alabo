@@ -42,8 +42,10 @@ namespace Alabo.Data.People.Users.Domain.Services
         {
             var model = Resolve<IUserService>().GetUserDetail(userId);
 
-            if (!_userRepository.Delete(userId))
+            if (!_userRepository.Delete(userId)) {
                 return false;
+            }
+
             Resolve<IUserService>().DeleteUserCache(model.Id, model.UserName);
             return true;
         }

@@ -57,10 +57,14 @@ namespace Alabo.Tool.Sms.LuoSiMao
         {
             var result = Json.ToObject<LuoSiMaoResult>(message);
             result.CheckNull(nameof(result));
-            if (result.error == "0")
+            if (result.error == "0") {
                 return SmsResult.Ok;
-            if (result.msg == "WRONG_MOBILE")
+            }
+
+            if (result.msg == "WRONG_MOBILE") {
                 return new SmsResult(false, message, SmsErrorCode.MobileError);
+            }
+
             return new SmsResult(false, message);
         }
     }

@@ -32,7 +32,7 @@ namespace Alabo.Framework.Core.WebUis.Services
         {
             var allAutoFormTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoForm));
             var resultList = new List<KeyValue>();
-            foreach (var item in allAutoFormTypes)
+            foreach (var item in allAutoFormTypes) {
                 try
                 {
                     var classProperty = item.FullName.GetClassDescription();
@@ -47,6 +47,7 @@ namespace Alabo.Framework.Core.WebUis.Services
                 {
                     Console.WriteLine(exception.Message);
                 }
+            }
 
             // 叠加实体类型
             var catalogEntity = Resolve<ITableService>().CatalogEntityKeyValues();
@@ -59,7 +60,7 @@ namespace Alabo.Framework.Core.WebUis.Services
         {
             var allAutoTableTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoTable));
             var resultList = new List<KeyValue>();
-            foreach (var item in allAutoTableTypes)
+            foreach (var item in allAutoTableTypes) {
                 try
                 {
                     var classProperty = item.FullName.GetClassDescription();
@@ -74,6 +75,7 @@ namespace Alabo.Framework.Core.WebUis.Services
                 {
                     Console.WriteLine(exception.Message);
                 }
+            }
 
             // 叠加实体类型
             var catalogEntity = Resolve<ITableService>().CatalogEntityKeyValues();
@@ -86,7 +88,7 @@ namespace Alabo.Framework.Core.WebUis.Services
         {
             var allAutoListTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoList));
             var resultList = new List<KeyValue>();
-            foreach (var item in allAutoListTypes)
+            foreach (var item in allAutoListTypes) {
                 try
                 {
                     var classProperty = item.FullName.GetClassDescription();
@@ -101,6 +103,7 @@ namespace Alabo.Framework.Core.WebUis.Services
                 {
                     Console.WriteLine(exception.Message);
                 }
+            }
 
             return resultList;
         }
@@ -109,7 +112,7 @@ namespace Alabo.Framework.Core.WebUis.Services
         {
             var allAutoPreviewTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoPreview));
             var resultList = new List<KeyValue>();
-            foreach (var item in allAutoPreviewTypes)
+            foreach (var item in allAutoPreviewTypes) {
                 try
                 {
                     var classProperty = item.FullName.GetClassDescription();
@@ -124,6 +127,7 @@ namespace Alabo.Framework.Core.WebUis.Services
                 {
                     Console.WriteLine(exception.Message);
                 }
+            }
 
             return resultList;
         }
@@ -132,7 +136,7 @@ namespace Alabo.Framework.Core.WebUis.Services
         {
             var allAutoNewsTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoNews));
             var resultList = new List<KeyValue>();
-            foreach (var item in allAutoNewsTypes)
+            foreach (var item in allAutoNewsTypes) {
                 try
                 {
                     var classProperty = item.FullName.GetClassDescription();
@@ -147,6 +151,7 @@ namespace Alabo.Framework.Core.WebUis.Services
                 {
                     Console.WriteLine(exception.Message);
                 }
+            }
 
             return resultList;
         }
@@ -155,7 +160,7 @@ namespace Alabo.Framework.Core.WebUis.Services
         {
             var allAutoArticleTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoArticle));
             var resultList = new List<KeyValue>();
-            foreach (var item in allAutoArticleTypes)
+            foreach (var item in allAutoArticleTypes) {
                 try
                 {
                     var classProperty = item.FullName.GetClassDescription();
@@ -170,6 +175,7 @@ namespace Alabo.Framework.Core.WebUis.Services
                 {
                     Console.WriteLine(exception.Message);
                 }
+            }
 
             return resultList;
         }
@@ -178,7 +184,7 @@ namespace Alabo.Framework.Core.WebUis.Services
         {
             var allAutoReportTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoReport));
             var resultList = new List<KeyValue>();
-            foreach (var item in allAutoReportTypes)
+            foreach (var item in allAutoReportTypes) {
                 try
                 {
                     var classProperty = item.FullName.GetClassDescription();
@@ -193,6 +199,7 @@ namespace Alabo.Framework.Core.WebUis.Services
                 {
                     Console.WriteLine(exception.Message);
                 }
+            }
 
             return resultList;
         }
@@ -201,7 +208,7 @@ namespace Alabo.Framework.Core.WebUis.Services
         {
             var allAutoFaqsTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoFaq));
             var resultList = new List<KeyValue>();
-            foreach (var item in allAutoFaqsTypes)
+            foreach (var item in allAutoFaqsTypes) {
                 try
                 {
                     var classProperty = item.FullName.GetClassDescription();
@@ -216,6 +223,7 @@ namespace Alabo.Framework.Core.WebUis.Services
                 {
                     Console.WriteLine(exception.Message);
                 }
+            }
 
             return resultList;
         }
@@ -224,7 +232,7 @@ namespace Alabo.Framework.Core.WebUis.Services
         {
             var allAutoImageTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoImage));
             var resultList = new List<KeyValue>();
-            foreach (var item in allAutoImageTypes)
+            foreach (var item in allAutoImageTypes) {
                 try
                 {
                     var classProperty = item.FullName.GetClassDescription();
@@ -239,6 +247,7 @@ namespace Alabo.Framework.Core.WebUis.Services
                 {
                     Console.WriteLine(exception.Message);
                 }
+            }
 
             return resultList;
         }
@@ -247,7 +256,7 @@ namespace Alabo.Framework.Core.WebUis.Services
         {
             var allAutoIndexTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoIndex));
             var resultList = new List<KeyValue>();
-            foreach (var item in allAutoIndexTypes)
+            foreach (var item in allAutoIndexTypes) {
                 try
                 {
                     var classProperty = item.FullName.GetClassDescription();
@@ -262,6 +271,7 @@ namespace Alabo.Framework.Core.WebUis.Services
                 {
                     Console.WriteLine(exception.Message);
                 }
+            }
 
             return resultList;
         }
@@ -270,7 +280,7 @@ namespace Alabo.Framework.Core.WebUis.Services
         {
             var allAutoIntroTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoIntro));
             var resultList = new List<KeyValue>();
-            foreach (var item in allAutoIntroTypes)
+            foreach (var item in allAutoIntroTypes) {
                 try
                 {
                     var classProperty = item.FullName.GetClassDescription();
@@ -285,6 +295,7 @@ namespace Alabo.Framework.Core.WebUis.Services
                 {
                     Console.WriteLine(exception.Message);
                 }
+            }
 
             return resultList;
         }
@@ -293,7 +304,7 @@ namespace Alabo.Framework.Core.WebUis.Services
         {
             var allAutoTaskTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoTask));
             var resultList = new List<KeyValue>();
-            foreach (var item in allAutoTaskTypes)
+            foreach (var item in allAutoTaskTypes) {
                 try
                 {
                     var classProperty = item.FullName.GetClassDescription();
@@ -308,6 +319,7 @@ namespace Alabo.Framework.Core.WebUis.Services
                 {
                     Console.WriteLine(exception.Message);
                 }
+            }
 
             return resultList;
         }
@@ -316,7 +328,7 @@ namespace Alabo.Framework.Core.WebUis.Services
         {
             var allAutoVideoTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoVideo));
             var resultList = new List<KeyValue>();
-            foreach (var item in allAutoVideoTypes)
+            foreach (var item in allAutoVideoTypes) {
                 try
                 {
                     var classProperty = item.FullName.GetClassDescription();
@@ -331,6 +343,7 @@ namespace Alabo.Framework.Core.WebUis.Services
                 {
                     Console.WriteLine(exception.Message);
                 }
+            }
 
             return resultList;
         }
@@ -338,37 +351,67 @@ namespace Alabo.Framework.Core.WebUis.Services
         public ServiceResult GetAutoComponents(string type)
         {
             var resultList = new List<string>();
-            if (type.IsNullOrEmpty() || type == "undefined") return ServiceResult.FailedWithMessage("类型不能为空");
+            if (type.IsNullOrEmpty() || type == "undefined") {
+                return ServiceResult.FailedWithMessage("类型不能为空");
+            }
 
             var typeIntance = type.GetTypeByName();
             var find = type.GetInstanceByName();
-            if (find == null || typeIntance == null) return ServiceResult.FailedWithMessage($"类型不存在，请确认{type}输入是否正确");
+            if (find == null || typeIntance == null) {
+                return ServiceResult.FailedWithMessage($"类型不存在，请确认{type}输入是否正确");
+            }
             //config
-            if (find is IAutoTable) resultList.Add("admin-auto-table");
+            if (find is IAutoTable) {
+                resultList.Add("admin-auto-table");
+            }
 
-            if (find is IAutoImage) resultList.Add("admin-auto-image");
+            if (find is IAutoImage) {
+                resultList.Add("admin-auto-image");
+            }
 
-            if (find is IAutoArticle) resultList.Add("admin-auto-article");
+            if (find is IAutoArticle) {
+                resultList.Add("admin-auto-article");
+            }
 
-            if (find is IAutoFaq) resultList.Add("admin-auto-faq");
+            if (find is IAutoFaq) {
+                resultList.Add("admin-auto-faq");
+            }
 
-            if (find is IAutoForm) resultList.Add("admin-auto-form");
+            if (find is IAutoForm) {
+                resultList.Add("admin-auto-form");
+            }
 
-            if (find is IAutoIndex) resultList.Add("admin-auto-index");
+            if (find is IAutoIndex) {
+                resultList.Add("admin-auto-index");
+            }
 
-            if (find is IAutoIntro) resultList.Add("admin-auto-intro");
+            if (find is IAutoIntro) {
+                resultList.Add("admin-auto-intro");
+            }
 
-            if (find is IAutoList) resultList.Add("admin-auto-list");
+            if (find is IAutoList) {
+                resultList.Add("admin-auto-list");
+            }
 
-            if (find is IAutoNews) resultList.Add("admin-auto-news");
+            if (find is IAutoNews) {
+                resultList.Add("admin-auto-news");
+            }
 
-            if (find is IAutoPreview) resultList.Add("admin-auto-preview");
+            if (find is IAutoPreview) {
+                resultList.Add("admin-auto-preview");
+            }
 
-            if (find is IAutoReport) resultList.Add("admin-auto-report");
+            if (find is IAutoReport) {
+                resultList.Add("admin-auto-report");
+            }
 
-            if (find is IAutoTask) resultList.Add("admin-auto-task");
+            if (find is IAutoTask) {
+                resultList.Add("admin-auto-task");
+            }
 
-            if (find is IAutoVideo) resultList.Add("admin-auto-video");
+            if (find is IAutoVideo) {
+                resultList.Add("admin-auto-video");
+            }
 
             return ServiceResult.SuccessWithObject(resultList);
         }
@@ -406,7 +449,7 @@ namespace Alabo.Framework.Core.WebUis.Services
 
         private static void ProcessUrls(List<KeyValue> result, string baseUrl, IEnumerable<Type> autoTypeList)
         {
-            foreach (var type in autoTypeList)
+            foreach (var type in autoTypeList) {
                 try
                 {
                     var classProperty = type.FullName.GetClassDescription();
@@ -421,6 +464,7 @@ namespace Alabo.Framework.Core.WebUis.Services
                 {
                     Console.WriteLine(exception.Message);
                 }
+            }
         }
     }
 }

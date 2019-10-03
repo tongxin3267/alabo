@@ -50,10 +50,14 @@ namespace Alabo.App.Share.TaskExecutes
             foreach (var type in moduleTypes)
             {
                 var attributes = type.GetTypeInfo().GetAttributes<TaskModuleAttribute>();
-                if (attributes == null || attributes.Count() <= 0) continue;
+                if (attributes == null || attributes.Count() <= 0) {
+                    continue;
+                }
 
                 var attribute = attributes.First();
-                if (_taskIdCache.Contains(attribute.Id) || _taskTypeCache.Contains(type)) continue;
+                if (_taskIdCache.Contains(attribute.Id) || _taskTypeCache.Contains(type)) {
+                    continue;
+                }
 
                 //add to cache with id key
                 _taskIdCache.Add(attribute.Id);
@@ -64,9 +68,13 @@ namespace Alabo.App.Share.TaskExecutes
                 _taskModuleTypeAttributeCache.Add(type, attribute);
                 _taskModuleIdCache.Add(type, attribute.Id);
 
-                if (attribute.FenRunResultType == FenRunResultType.Price) _taskTypePriceCache.Add(type); // 价格类型模块
+                if (attribute.FenRunResultType == FenRunResultType.Price) {
+                    _taskTypePriceCache.Add(type); // 价格类型模块
+                }
 
-                if (attribute.FenRunResultType == FenRunResultType.Queue) _taskTypeUpgradeCache.Add(type); // 升级类型
+                if (attribute.FenRunResultType == FenRunResultType.Queue) {
+                    _taskTypeUpgradeCache.Add(type); // 升级类型
+                }
             }
         }
 

@@ -24,7 +24,9 @@ namespace Alabo.Framework.Core.WebUis.Services
             object instanceFind = null;
             AutoTable autoTable = null;
             var checkType = Resolve<IUIBaseService>().CheckType(type, ref typeFind, ref instanceFind);
-            if (!checkType.Succeeded) return new Tuple<ServiceResult, AutoTable>(checkType, new AutoTable());
+            if (!checkType.Succeeded) {
+                return new Tuple<ServiceResult, AutoTable>(checkType, new AutoTable());
+            }
 
             autoTable = AutoTableMapping.Convert(typeFind.FullName);
 
@@ -73,7 +75,9 @@ namespace Alabo.Framework.Core.WebUis.Services
             else if (instanceFind is IEntity)
             {
                 var result = DynamicService.ResolveMethod(typeFind.Name, "GetApiPagedList", query);
-                if (!result.Item1.Succeeded) return new Tuple<ServiceResult, AutoTable>(result.Item1, new AutoTable());
+                if (!result.Item1.Succeeded) {
+                    return new Tuple<ServiceResult, AutoTable>(result.Item1, new AutoTable());
+                }
 
                 autoTable.Result = result.Item2;
             }
@@ -89,7 +93,9 @@ namespace Alabo.Framework.Core.WebUis.Services
             object instanceFind = null;
             AutoTable autoTable = null;
             var checkType = Resolve<IUIBaseService>().CheckType(type, ref typeFind, ref instanceFind);
-            if (!checkType.Succeeded) return new Tuple<ServiceResult, AutoTable>(checkType, new AutoTable());
+            if (!checkType.Succeeded) {
+                return new Tuple<ServiceResult, AutoTable>(checkType, new AutoTable());
+            }
 
             autoTable = AutoTableMapping.Convert(typeFind.FullName);
 

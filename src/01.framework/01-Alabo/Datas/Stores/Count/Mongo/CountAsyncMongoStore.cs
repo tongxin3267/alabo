@@ -19,7 +19,9 @@ namespace Alabo.Datas.Stores.Count.Mongo
 
         public async Task<long> CountAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            if (predicate == null) return await Collection.AsQueryable().LongCountAsync();
+            if (predicate == null) {
+                return await Collection.AsQueryable().LongCountAsync();
+            }
 
             return await Collection.AsQueryable().LongCountAsync(predicate);
         }

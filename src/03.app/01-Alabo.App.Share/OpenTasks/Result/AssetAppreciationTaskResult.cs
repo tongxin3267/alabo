@@ -43,8 +43,9 @@ namespace Alabo.App.Share.OpenTasks.Result
                     var addAmount = item.Ratio * Amount;
                     sql =
                         $"update Asset_Account set Amount=Amount+{addAmount}, HistoryAmount=HistoryAmount+{addAmount}, ModifiedTime=GetDate() where MoneyTypeId='{item.MoneyTypeId}' and UserId={UserId}";
-                    if (repositoryContext.ExecuteNonQuery(transaction, sql) <= 0)
+                    if (repositoryContext.ExecuteNonQuery(transaction, sql) <= 0) {
                         return ExecuteResult.Fail($"sql script:\"{sql}\" execute with 0 line update.");
+                    }
                     //此处继续加入Share_Reward与Asset_Bill表的记录
                     sql =
                         @"insert into Share_Reward(AfterAcount, ConfirmTime, CreateTime, ExtraDate, Fee, FenRunDate, Intro, IsAccount, [Level], ModifiedTime, ModuleId, ModuleName, MoneyTypeId, MoneyTypeName, OrderId,OrderPrice, OrderSerial, OrderUserId, OrderUserNick, Price, Remark, Serial, SortOrder, State, Status, UserId, UserNikeName, TriggerType, ModuleConfigId, BonusId)

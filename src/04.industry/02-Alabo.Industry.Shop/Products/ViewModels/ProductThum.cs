@@ -26,7 +26,9 @@ namespace Alabo.Industry.Shop.Products.ViewModels
 
         public string GetPicUrl(string ImageUrl)
         {
-            if (ImageUrl != null) return ImageUrl;
+            if (ImageUrl != null) {
+                return ImageUrl;
+            }
 
             return Resolve<IAutoConfigService>().GetValue<WebSiteConfig>().NoPic;
         }

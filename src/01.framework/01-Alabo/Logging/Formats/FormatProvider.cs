@@ -27,7 +27,9 @@ namespace Alabo.Logging.Formats
         /// </summary>
         public string Format(string format, object arg, IFormatProvider formatProvider)
         {
-            if (!(arg is ILogContent content)) return string.Empty;
+            if (!(arg is ILogContent content)) {
+                return string.Empty;
+            }
 
             return _format.Format(content);
         }

@@ -50,7 +50,9 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <param name="operator">条件运算符</param>
         public void On(string left, string right, Operator @operator)
         {
-            if (string.IsNullOrWhiteSpace(left) || string.IsNullOrWhiteSpace(right)) return;
+            if (string.IsNullOrWhiteSpace(left) || string.IsNullOrWhiteSpace(right)) {
+                return;
+            }
 
             var conditions = GetFirstConditions();
             conditions.Add(new OnItem(left, right, @operator));
@@ -77,7 +79,9 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <param name="items">连接条件列表</param>
         public void On(List<OnItem> items)
         {
-            if (items == null) return;
+            if (items == null) {
+                return;
+            }
 
             Conditions.Add(items);
         }
@@ -96,7 +100,9 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// </summary>
         private string GetOn(IDialect dialect)
         {
-            if (Conditions.Count == 0) return null;
+            if (Conditions.Count == 0) {
+                return null;
+            }
 
             var result = new StringBuilder();
             Conditions.ForEach(items =>

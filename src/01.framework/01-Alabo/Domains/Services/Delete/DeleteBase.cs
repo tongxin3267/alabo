@@ -24,7 +24,9 @@ namespace Alabo.Domains.Services.Delete
         public bool Delete(TEntity entity)
         {
             var result = Store.Delete(entity);
-            if (result) Log($"删除{{Table}}记录一条,删除记录Id:{entity.Id}");
+            if (result) {
+                Log($"删除{{Table}}记录一条,删除记录Id:{entity.Id}");
+            }
 
             return result;
         }

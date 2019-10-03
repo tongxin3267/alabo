@@ -81,7 +81,9 @@ namespace Alabo.Datas.Stores.Update.Mongo
             var expression = IdPredicate(entity.Id);
             var filter = ToFilter(entity.Id);
             var updateModel = Collection.FindOneAndReplace(filter, entity);
-            if (updateModel != null) return true;
+            if (updateModel != null) {
+                return true;
+            }
 
             return true;
         }

@@ -48,7 +48,9 @@ namespace Alabo.Datas.Stores.Report
                 foreach (var enumItem in dicEnumNameValue)
                 {
                     var enumDispayName = enumItem.Key;
-                    if (!colList.Contains(enumDispayName)) colList.Add(enumDispayName);
+                    if (!colList.Contains(enumDispayName)) {
+                        colList.Add(enumDispayName);
+                    }
 
                     var gListByEnum = WhereQuery(gpDataDate, inputParas.Field, enumItem.Value).ToList();
                     rowDic[enumDispayName] = gListByEnum.Count.ToString();
@@ -115,8 +117,9 @@ namespace Alabo.Datas.Stores.Report
                 foreach (var enumItem in dicEnumNameValue)
                 {
                     var enumDispayName = enumItem.Key;
-                    if (coluList.Where(x => x.type == enumItem.Key).Count() < 1)
+                    if (coluList.Where(x => x.type == enumItem.Key).Count() < 1) {
                         coluList.Add(new Columns { name = enumDispayName, type = enumItem.Key });
+                    }
 
                     var gListByEnum = WhereQuery(gpDataDate, inputParas.Field, enumItem.Value).ToList();
                     rowDic[enumItem.Key] = gListByEnum.Count.ToString();
@@ -176,7 +179,7 @@ namespace Alabo.Datas.Stores.Report
                 }
             }
 
-            if (inputParas.Fields.Count > 0)
+            if (inputParas.Fields.Count > 0) {
                 foreach (var gItemList in gpListByDate)
                 {
                     var dic = new Dictionary<string, string>
@@ -193,25 +196,33 @@ namespace Alabo.Datas.Stores.Report
                             foreach (var enumItem in dicEnumNameValue)
                             {
                                 var keyName = $"{fieldDispName}[{enumItem.Key}]";
-                                if (colList.Where(x => x == keyName).Count() < 1) colList.Add(keyName);
+                                if (colList.Where(x => x == keyName).Count() < 1) {
+                                    colList.Add(keyName);
+                                }
 
                                 var gListByEnum = WhereQuery(gItemList, inputParas.SpecialField, enumItem.Value)
                                     .ToList();
                                 var rsSum = 0M;
                                 var prop = type.GetProperty(fieldName);
-                                foreach (var row in gListByEnum) rsSum += prop.GetValue(row).ToDecimal();
+                                foreach (var row in gListByEnum) {
+                                    rsSum += prop.GetValue(row).ToDecimal();
+                                }
 
                                 dic.Add(keyName, rsSum.ToString());
                             }
                         }
                         else
                         {
-                            if (!colList.Contains(fieldName)) colList.Add(fieldName);
+                            if (!colList.Contains(fieldName)) {
+                                colList.Add(fieldName);
+                            }
 
                             var prop = type.GetProperty(fieldName);
 
                             var rsSum = 0M;
-                            foreach (var row in gItemList) rsSum += prop.GetValue(row).ToDecimal();
+                            foreach (var row in gItemList) {
+                                rsSum += prop.GetValue(row).ToDecimal();
+                            }
 
                             dic.Add(fieldName, rsSum.ToString());
                         }
@@ -219,6 +230,7 @@ namespace Alabo.Datas.Stores.Report
                         rowList.Add(dic);
                     }
                 }
+            }
 
             rsList.Add(new AutoReport
             {
@@ -266,7 +278,7 @@ namespace Alabo.Datas.Stores.Report
                 }
             }
 
-            if (inputParas.Fields.Count > 0)
+            if (inputParas.Fields.Count > 0) {
                 foreach (var gItemList in gpListByDate)
                 {
                     var dic = new Dictionary<string, string>
@@ -283,26 +295,32 @@ namespace Alabo.Datas.Stores.Report
                             foreach (var enumItem in dicEnumNameValue)
                             {
                                 var keyName = $"{fieldDispName}[{enumItem.Key}]";
-                                if (colList.Where(x => x.type == keyName).Count() < 1)
+                                if (colList.Where(x => x.type == keyName).Count() < 1) {
                                     colList.Add(new SumColumns { name = keyName, type = keyName });
+                                }
 
                                 var gListByEnum = WhereQuery(gItemList, inputParas.SpecialField, enumItem.Value)
                                     .ToList();
                                 var rsSum = 0M;
                                 var prop = type.GetProperty(fieldName);
-                                foreach (var row in gListByEnum) rsSum += prop.GetValue(row).ToDecimal();
+                                foreach (var row in gListByEnum) {
+                                    rsSum += prop.GetValue(row).ToDecimal();
+                                }
 
                                 dic.Add(keyName, rsSum.ToString());
                             }
                         }
                         else
                         {
-                            if (colList.Where(x => x.type == fieldDispName).Count() < 1)
+                            if (colList.Where(x => x.type == fieldDispName).Count() < 1) {
                                 colList.Add(new SumColumns { name = fieldDispName, type = fieldDispName });
+                            }
 
                             var prop = type.GetProperty(fieldName);
                             var rsSum = 0M;
-                            foreach (var row in gItemList) rsSum += prop.GetValue(row).ToDecimal();
+                            foreach (var row in gItemList) {
+                                rsSum += prop.GetValue(row).ToDecimal();
+                            }
 
                             dic.Add(fieldName, rsSum.ToString());
                         }
@@ -310,6 +328,7 @@ namespace Alabo.Datas.Stores.Report
 
                     rowList.Add(dic);
                 }
+            }
 
             var rsRowList = rowList.Skip((int)((inputParas.PageIndex - 1) * inputParas.PageSize))
                 .Take((int)inputParas.PageSize).ToList();

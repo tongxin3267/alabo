@@ -21,9 +21,13 @@ namespace Alabo.Datas.Ef
         public static async Task<PagerList<TEntity>> ToPagerListAsync<TEntity>(this IQueryable<TEntity> source,
             IPager pager)
         {
-            if (source == null) throw new ArgumentNullException(nameof(source));
+            if (source == null) {
+                throw new ArgumentNullException(nameof(source));
+            }
 
-            if (pager == null) throw new ArgumentNullException(nameof(pager));
+            if (pager == null) {
+                throw new ArgumentNullException(nameof(pager));
+            }
 
             return new PagerList<TEntity>(pager, await source.Page(pager).ToListAsync());
         }

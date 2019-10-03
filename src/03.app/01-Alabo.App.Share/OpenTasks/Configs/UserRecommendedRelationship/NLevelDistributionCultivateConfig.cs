@@ -75,23 +75,31 @@ namespace Alabo.App.Share.OpenTasks.Configs.UserRecommendedRelationship
         public override ExecuteResult<ITaskResult[]> Execute(TaskParameter parameter)
         {
             var baseResult = base.Execute(parameter);
-            if (baseResult.Status != ResultStatus.Success)
+            if (baseResult.Status != ResultStatus.Success) {
                 return ExecuteResult<ITaskResult[]>.Cancel("基础验证未通过" + baseResult.Message);
+            }
 
             var userMap = Resolve<IUserMapService>().GetParentMapFromCache(ShareOrderUser.Id);
             var map = userMap.ParentMap.DeserializeJson<List<ParentMap>>();
-            if (map == null) return ExecuteResult<ITaskResult[]>.Cancel("未找到触发会员的Parent Map.");
+            if (map == null) {
+                return ExecuteResult<ITaskResult[]>.Cancel("未找到触发会员的Parent Map.");
+            }
 
             var parentUserIds = map.OrderBy(r => r.ParentLevel).Select(r => r.UserId);
-            if (Configuration.UserGradeId.IsGuidNullOrEmpty()) return ExecuteResult<ITaskResult[]>.Cancel("会员等级设置错误");
+            if (Configuration.UserGradeId.IsGuidNullOrEmpty()) {
+                return ExecuteResult<ITaskResult[]>.Cancel("会员等级设置错误");
+            }
 
             var allUserGradeIds = Resolve<IGradeService>().GetUserGradeList().Select(r => r.Id);
-            if (!allUserGradeIds.Contains(Configuration.UserGradeId))
+            if (!allUserGradeIds.Contains(Configuration.UserGradeId)) {
                 return ExecuteResult<ITaskResult[]>.Cancel("会员等级不存在，不是有效的会员等级");
+            }
 
             var shareUsersList = Resolve<IUserService>()
                 .GetList(r => r.GradeId == Configuration.UserGradeId && parentUserIds.Contains(r.Id)).ToList();
-            if (!shareUsersList.Any()) return ExecuteResult<ITaskResult[]>.Cancel("符合条件的会员不存在");
+            if (!shareUsersList.Any()) {
+                return ExecuteResult<ITaskResult[]>.Cancel("符合条件的会员不存在");
+            }
 
             var shareUsersListIds = shareUsersList.Select(r => r.Id).ToList();
 
@@ -102,7 +110,9 @@ namespace Alabo.App.Share.OpenTasks.Configs.UserRecommendedRelationship
                 if (shareUsersListIds.Contains(parentId))
                 {
                     base.GetShareUser(parentId, out var shareUser); //从基类获取分润用户
-                    if (shareUser == null) continue;
+                    if (shareUser == null) {
+                        continue;
+                    }
 
                     count++;
                     //基础分润
@@ -129,7 +139,9 @@ namespace Alabo.App.Share.OpenTasks.Configs.UserRecommendedRelationship
                     }
                 }
 
-                if (count >= 3) break;
+                if (count >= 3) {
+                    break;
+                }
             }
 
             return ExecuteResult<ITaskResult[]>.Success(resultList.ToArray());

@@ -61,9 +61,9 @@ namespace Alabo.Test.Core.AutoData.Domain.Services
             var count = Resolve<ILightAppService>().Count(testTableName);
 
             // If TestDataTable count less than 15, insert 15 items.
-            if (count < 15)
-                for (var n = 0; n < 3; n++)
-                for (var i = 0; i < 5; i++)
+            if (count < 15) {
+                for (var n = 0; n < 3; n++) {
+                    for (var i = 0; i < 5; i++)
                 {
                     var model = new
                     {
@@ -75,6 +75,8 @@ namespace Alabo.Test.Core.AutoData.Domain.Services
                     var dataJson = model.ToJsons();
                     var result = Resolve<ILightAppService>().Add(testTableName, dataJson);
                 }
+                }
+            }
         }
 
         [Fact]

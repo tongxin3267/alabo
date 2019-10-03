@@ -20,7 +20,9 @@ namespace Alabo.Industry.Shop.Categories.Domain.Services
         public CategoryPropertyValue GetGuidCategoryPropertyValue(string Guid)
         {
             var value = Resolve<ICategoryPropertyValueService>().GetSingle(r => r.Id == Guid.ToGuid());
-            if (value != null) return value;
+            if (value != null) {
+                return value;
+            }
 
             return null;
         }

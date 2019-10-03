@@ -93,9 +93,13 @@ namespace Alabo.App.Asset.Bills.Controllers
         public ApiResult BillView([FromQuery] PreviewInput parameter)
         {
             var view = Resolve<IFinanceAdminService>().GetViewBillSingle(parameter.Id.ConvertToLong());
-            if (view == null) return ApiResult.Failure("账单不存在或者已经删除！");
+            if (view == null) {
+                return ApiResult.Failure("账单不存在或者已经删除！");
+            }
 
-            if (view.Bill.UserId != parameter.LoginUserId) return ApiResult.Failure("您无权查看该账单！");
+            if (view.Bill.UserId != parameter.LoginUserId) {
+                return ApiResult.Failure("您无权查看该账单！");
+            }
 
             var apiOutput = Resolve<IFinanceAdminService>().GetBillOutput(view);
             var temp = apiOutput.ToKeyValues();
@@ -118,7 +122,10 @@ namespace Alabo.App.Asset.Bills.Controllers
                 PageSize = list.PageSize
             };
 
-            if (list.Count < 0) return ApiResult.Success(new PageResult<ViewAdminBill>());
+            if (list.Count < 0) {
+                return ApiResult.Success(new PageResult<ViewAdminBill>());
+            }
+
             return ApiResult.Success(apiRusult);
         }
     }

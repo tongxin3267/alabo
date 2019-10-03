@@ -65,7 +65,9 @@ namespace Alabo.Files
         {
             if (imageUrl != null)
             {
-                if (File.Exists(RootPath + imageUrl)) return imageUrl;
+                if (File.Exists(RootPath + imageUrl)) {
+                    return imageUrl;
+                }
             }
             else
             {
@@ -136,7 +138,9 @@ namespace Alabo.Files
         /// <param name="filePath">Path of the file</param>
         public static void DeleteIfExists(string filePath)
         {
-            if (File.Exists(filePath)) File.Delete(filePath);
+            if (File.Exists(filePath)) {
+                File.Delete(filePath);
+            }
         }
 
         public static ServiceResult FileSave(string filePath, string fileContext)
@@ -181,7 +185,7 @@ namespace Alabo.Files
         /// <param name="encoding"></param>
         public static string Read(string path)
         {
-            if (File.Exists(path))
+            if (File.Exists(path)) {
                 using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
                     using (var sr = new StreamReader(fs))
@@ -189,6 +193,7 @@ namespace Alabo.Files
                         return sr.ReadToEnd();
                     }
                 }
+            }
 
             return string.Empty;
         }
@@ -200,7 +205,7 @@ namespace Alabo.Files
         /// <param name="encoding"></param>
         public static byte[] ReadBuffer(string path)
         {
-            if (File.Exists(path))
+            if (File.Exists(path)) {
                 using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
                 {
                     using (var sr = new BinaryReader(fs))
@@ -221,6 +226,7 @@ namespace Alabo.Files
                         return bufferRes;
                     }
                 }
+            }
 
             return null;
         }
@@ -240,14 +246,17 @@ namespace Alabo.Files
         {
             var dic = new Dictionary<string, string>();
             filePath = Path.Combine(RootPath, filePath);
-            if (!Directory.Exists(filePath)) return dic;
+            if (!Directory.Exists(filePath)) {
+                return dic;
+            }
 
             var di = new DirectoryInfo(filePath);
             var filelist = di.GetFiles();
 
-            foreach (var fi in filelist)
+            foreach (var fi in filelist) {
                 dic.Add(fi.Name.Substring(0, fi.Name.IndexOf(".")),
                     $"{di.FullName.Replace(RootPath, string.Empty)}\\{fi.Name}");
+            }
 
             return dic;
         }
@@ -256,7 +265,9 @@ namespace Alabo.Files
         {
             try
             {
-                if (!File.Exists(source) || !Directory.Exists(target)) return;
+                if (!File.Exists(source) || !Directory.Exists(target)) {
+                    return;
+                }
 
                 File.Copy(source, $"{target}/{Path.GetFileName(source)}", true);
             }

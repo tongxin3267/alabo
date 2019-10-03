@@ -31,7 +31,9 @@
         /// </summary>
         public string Generate()
         {
-            if (Desc) return $"{Name} desc";
+            if (Desc) {
+                return $"{Name} desc";
+            }
 
             return Name;
         }

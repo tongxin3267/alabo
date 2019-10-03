@@ -224,7 +224,9 @@ namespace Alabo.Test.Core.User.Domain.Services
         public void AddUser_User_test()
         {
             var user = Resolve<IUserService>().GetRandom(10);
-            if (user.UserName.Length > 10) user.UserName = user.UserName.Substring(2, 5);
+            if (user.UserName.Length > 10) {
+                user.UserName = user.UserName.Substring(2, 5);
+            }
 
             user.UserName = user.UserName + RandomHelper.Number(10, 90);
             user.Detail = new UserDetail();

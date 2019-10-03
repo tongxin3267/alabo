@@ -76,10 +76,11 @@ namespace Alabo.Domains.Repositories.EFCore.Context
         public void BeginTransaction()
         {
             RaseExceptionIfConnectionIsNotInitialization();
-            if (_transactionCount <= 0)
+            if (_transactionCount <= 0) {
                 _transaction = _context.Database.BeginTransaction();
-            else
+            } else {
                 _transactionCount++;
+            }
         }
 
         /// <summary>
@@ -89,10 +90,11 @@ namespace Alabo.Domains.Repositories.EFCore.Context
         public void BeginTransaction(IsolationLevel isolationLevel)
         {
             RaseExceptionIfConnectionIsNotInitialization();
-            if (_transactionCount <= 0)
+            if (_transactionCount <= 0) {
                 _transaction = _context.Database.BeginTransaction(isolationLevel);
-            else
+            } else {
                 _transactionCount++;
+            }
         }
 
         /// <summary>
@@ -101,10 +103,11 @@ namespace Alabo.Domains.Repositories.EFCore.Context
         public void CommitTransaction()
         {
             RaseExceptionIfConnectionIsNotInitialization();
-            if (_transactionCount > 0)
+            if (_transactionCount > 0) {
                 _transactionCount--;
-            else
+            } else {
                 _transaction.Commit();
+            }
         }
 
         /// <summary>
@@ -113,10 +116,11 @@ namespace Alabo.Domains.Repositories.EFCore.Context
         public void RollbackTransaction()
         {
             RaseExceptionIfConnectionIsNotInitialization();
-            if (_transactionCount > 0)
+            if (_transactionCount > 0) {
                 _transactionCount--;
-            else
+            } else {
                 _transaction.Rollback();
+            }
         }
 
         /// <summary>
@@ -192,10 +196,14 @@ namespace Alabo.Domains.Repositories.EFCore.Context
             where T : class
         {
             var query = Query<T>();
-            if (predicate != null) query = query.Where(predicate);
+            if (predicate != null) {
+                query = query.Where(predicate);
+            }
 
             var source = query.ToList();
-            foreach (var item in source) action(item);
+            foreach (var item in source) {
+                action(item);
+            }
 
             SaveChanges();
         }
@@ -207,7 +215,9 @@ namespace Alabo.Domains.Repositories.EFCore.Context
 
         private void RaseExceptionIfConnectionIsNotInitialization()
         {
-            if (_context == null) throw new RepositoryContextException("sqlite connection is not initialization.");
+            if (_context == null) {
+                throw new RepositoryContextException("sqlite connection is not initialization.");
+            }
         }
     }
 }

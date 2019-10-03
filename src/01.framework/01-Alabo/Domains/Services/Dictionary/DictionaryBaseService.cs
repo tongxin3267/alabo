@@ -46,7 +46,7 @@ namespace Alabo.Domains.Services.Dictionary
         {
             var list = GetList(predicate);
             var result = new List<KeyValue>();
-            if (list != null)
+            if (list != null) {
                 foreach (var item in list)
                 {
                     var keyValue = new KeyValue
@@ -58,6 +58,7 @@ namespace Alabo.Domains.Services.Dictionary
                     keyValue.Value = dynamicItem.Name;
                     result.Add(keyValue);
                 }
+            }
 
             return result;
         }

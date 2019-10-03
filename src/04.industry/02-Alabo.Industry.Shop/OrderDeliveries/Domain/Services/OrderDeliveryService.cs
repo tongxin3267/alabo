@@ -83,7 +83,10 @@ namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Services
                     view.User = Resolve<IUserService>().GetSingle(view.UserId);
                     view.ExpressName = expressConfig.FirstOrDefault(r => r.Id == orderDelivery.ExpressGuid)?.Name;
                     var productInfo = orderDelivery.OrderDeliveryExtension.ProductDeliveryInfo;
-                    foreach (var item in productInfo) view.ProductName = item.Name;
+                    foreach (var item in productInfo) {
+                        view.ProductName = item.Name;
+                    }
+
                     view.Address = orderDelivery.OrderDeliveryExtension.Order.OrderExtension.UserAddress
                         .AddressDescription;
                     view.Remark = orderDelivery.OrderDeliveryExtension.Remark;
@@ -105,7 +108,10 @@ namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Services
         public long GetOrderDeliverUserId(long orderId)
         {
             var order = Resolve<IOrderService>().GetSingle(orderId);
-            if (order != null) return order.DeliverUserId;
+            if (order != null) {
+                return order.DeliverUserId;
+            }
+
             return 0;
         }
     }

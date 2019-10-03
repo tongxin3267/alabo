@@ -33,7 +33,9 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
         public void InitRegion()
         {
             var check = Resolve<IRegionService>().GetList();
-            if (check.Count > 0) return;
+            if (check.Count > 0) {
+                return;
+            }
 
             var fileDir = Environment.CurrentDirectory;
             var province = File.ReadAllText(fileDir + @"\wwwroot\static\js\region\province.js");
@@ -56,8 +58,8 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
                 regionList.Add(region);
             }
 
-            foreach (var temp in cityList)
-            foreach (var item in temp)
+            foreach (var temp in cityList) {
+                foreach (var item in temp)
             {
                 var region = new Region
                 {
@@ -69,10 +71,11 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
                 };
                 regionList.Add(region);
             }
+            }
 
-            foreach (var item in areaList)
-            foreach (var temp in item)
-            foreach (var tent in temp)
+            foreach (var item in areaList) {
+                foreach (var temp in item) {
+                    foreach (var tent in temp)
             {
                 var region = new Region
                 {
@@ -84,6 +87,8 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
                     ParentId = tent.Value.Substring(0, 4).ToInt64()
                 };
                 regionList.Add(region);
+            }
+                }
             }
 
             AddMany(regionList);
@@ -157,7 +162,9 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
         {
             var region = GetSingle(r => r.RegionId == areaId);
             var res = string.Empty;
-            if (region?.FullName != null) return region?.FullName;
+            if (region?.FullName != null) {
+                return region?.FullName;
+            }
 
             res = region?.Name;
             if (areaId.ToString().Length - 2 >= 2)
@@ -186,7 +193,9 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
                     Id = item.RegionId,
                     ParentId = item.ParentId
                 };
-                if (regionJson.Where(x => x.Id == item.RegionId).Count() == 0) regionJson.Add(region);
+                if (regionJson.Where(x => x.Id == item.RegionId).Count() == 0) {
+                    regionJson.Add(region);
+                }
             }
 
             return regionJson;
@@ -195,7 +204,10 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
         public string GetRegionNameById(long id)
         {
             var model = Resolve<IRegionService>().GetSingle(u => u.RegionId == id);
-            if (model == null) return string.Empty;
+            if (model == null) {
+                return string.Empty;
+            }
+
             var regionName = model.Name;
 
             if (model.ParentId != 0)
@@ -205,7 +217,10 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
                 if (tempId.Count() == 6)
                 {
                     var regionParent = "";
-                    for (var i = 0; i <= 3; i++) regionParent += tempId[i].ToString();
+                    for (var i = 0; i <= 3; i++) {
+                        regionParent += tempId[i].ToString();
+                    }
+
                     model.ParentId = regionParent.ToInt64();
                 }
 
@@ -257,7 +272,9 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
                     foreach (var provinceItem in country.Districts)
                     {
                         var list = new List<Region>();
-                        if (provinceItem.AdCode.IsNullOrEmpty()) throw new ValidException("省份Id获取失败");
+                        if (provinceItem.AdCode.IsNullOrEmpty()) {
+                            throw new ValidException("省份Id获取失败");
+                        }
 
                         if (provinceItem.Level == "province")
                         {
@@ -275,7 +292,9 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
                             // 添加城市
                             foreach (var cityItem in provinceItem.Districts)
                             {
-                                if (cityItem.AdCode.IsNullOrEmpty()) throw new ValidException("城市Id获取失败");
+                                if (cityItem.AdCode.IsNullOrEmpty()) {
+                                    throw new ValidException("城市Id获取失败");
+                                }
 
                                 if (cityItem.Level == "city")
                                 {
@@ -298,7 +317,9 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
                                     var i = 60;
                                     foreach (var countyItem in cityItem.Districts)
                                     {
-                                        if (countyItem.AdCode.IsNullOrEmpty()) throw new ValidException("区域Id获取失败");
+                                        if (countyItem.AdCode.IsNullOrEmpty()) {
+                                            throw new ValidException("区域Id获取失败");
+                                        }
 
                                         var countryId = countyItem.AdCode.ConvertToLong(0);
                                         if (regionIdList.Contains(countryId))
@@ -339,7 +360,9 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
         /// </summary>
         private string FormatRegionName(string name)
         {
-            if (name.IsNullOrEmpty()) return string.Empty;
+            if (name.IsNullOrEmpty()) {
+                return string.Empty;
+            }
 
             name = name.Replace("自治区", "")
                 .Replace("特别行政区", "")
@@ -358,9 +381,13 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
         public long GetCountyId(long id)
         {
             var region = GetSingle(m => m.RegionId == id);
-            if (region == null) return 0;
+            if (region == null) {
+                return 0;
+            }
 
-            if (region.Level == RegionLevel.County) return region.RegionId;
+            if (region.Level == RegionLevel.County) {
+                return region.RegionId;
+            }
 
             return 0;
         }
@@ -368,20 +395,26 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
         public long GetCityId(long id)
         {
             var region = GetSingle(m => m.RegionId == id);
-            if (region == null) return 0;
+            if (region == null) {
+                return 0;
+            }
 
             if (region.Level == RegionLevel.County)
             {
                 if (region.CityId == 0L)
                 {
                     var regStr = region.RegionId.ToString();
-                    if (regStr.Length >= 4) return regStr.Substring(0, 4).ToInt64();
+                    if (regStr.Length >= 4) {
+                        return regStr.Substring(0, 4).ToInt64();
+                    }
                 }
 
                 return region.CityId;
             }
 
-            if (region.Level == RegionLevel.City) return region.RegionId;
+            if (region.Level == RegionLevel.City) {
+                return region.RegionId;
+            }
 
             return 0;
         }
@@ -389,13 +422,21 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
         public long GetProvinceId(long id)
         {
             var region = GetSingle(m => m.RegionId == id);
-            if (region == null) return 0;
+            if (region == null) {
+                return 0;
+            }
 
-            if (region.Level == RegionLevel.County) return region.ProvinceId;
+            if (region.Level == RegionLevel.County) {
+                return region.ProvinceId;
+            }
 
-            if (region.Level == RegionLevel.City) return region.ProvinceId;
+            if (region.Level == RegionLevel.City) {
+                return region.ProvinceId;
+            }
 
-            if (region.Level == RegionLevel.Province) return region.RegionId;
+            if (region.Level == RegionLevel.Province) {
+                return region.RegionId;
+            }
 
             return 0;
         }

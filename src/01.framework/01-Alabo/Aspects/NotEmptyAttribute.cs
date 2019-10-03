@@ -15,8 +15,9 @@ namespace Alabo.Aspects
         /// </summary>
         public override Task Invoke(ParameterAspectContext context, ParameterAspectDelegate next)
         {
-            if (string.IsNullOrWhiteSpace(Extensions.Extensions.SafeString(context.Parameter.Value)))
+            if (string.IsNullOrWhiteSpace(Extensions.Extensions.SafeString(context.Parameter.Value))) {
                 throw new ArgumentNullException(context.Parameter.Name);
+            }
 
             return next(context);
         }

@@ -27,6 +27,7 @@ namespace _01_Alabo.Cloud.Core.AppVersion.Controllers
             var config = Resolve<IAutoConfigService>().GetValue<AppVersionConfig>();
             //获取服务器app当前版本
             if (config.IsEnble && !input.Version.Equals(config.Version)) //最新版本
+{
                 return new ApiResult<AppVersionOutput>
                 {
                     Result = new AppVersionOutput
@@ -39,6 +40,8 @@ namespace _01_Alabo.Cloud.Core.AppVersion.Controllers
                     Message = string.Empty,
                     MessageCode = 200
                 };
+            }
+
             return new ApiResult<AppVersionOutput>
             {
                 Result = new AppVersionOutput

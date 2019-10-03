@@ -13,7 +13,9 @@ namespace Alabo.Datas.Sql
         /// <param name="value">参数值</param>
         public static string GetParamLiterals(object value)
         {
-            if (value == null) return "''";
+            if (value == null) {
+                return "''";
+            }
 
             switch (value.GetType().Name.ToLower())
             {

@@ -33,7 +33,9 @@ namespace Alabo.RestfulApi
                 if (string.IsNullOrWhiteSpace(_openApiId))
                 {
                     var openApiSetting = _systemConfiguration.GetSection("OpenApiSetting");
-                    if (openApiSetting != null) _openApiId = openApiSetting.GetSection("Id")?.Value;
+                    if (openApiSetting != null) {
+                        _openApiId = openApiSetting.GetSection("Id")?.Value;
+                    }
                 }
 
                 return _openApiId;
@@ -51,7 +53,9 @@ namespace Alabo.RestfulApi
                 if (string.IsNullOrWhiteSpace(_openApiKey))
                 {
                     var openApiSetting = _systemConfiguration.GetSection("OpenApiSetting");
-                    if (openApiSetting != null) _openApiKey = openApiSetting.GetSection("Key")?.Value;
+                    if (openApiSetting != null) {
+                        _openApiKey = openApiSetting.GetSection("Key")?.Value;
+                    }
                 }
 
                 return _openApiKey;
@@ -65,7 +69,9 @@ namespace Alabo.RestfulApi
         /// <returns></returns>
         public async Task SetTenant(string tenant)
         {
-            if (tenant.IsNullOrEmpty()) throw new ArgumentNullException(nameof(tenant));
+            if (tenant.IsNullOrEmpty()) {
+                throw new ArgumentNullException(nameof(tenant));
+            }
 
             var session = new Session();
             var basicUser = new BasicUser

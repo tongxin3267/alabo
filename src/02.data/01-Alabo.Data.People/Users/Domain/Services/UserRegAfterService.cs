@@ -80,10 +80,14 @@ namespace Alabo.Data.People.Users.Domain.Services
             foreach (var item in types.ToList())
             {
                 var config = Activator.CreateInstance(item);
-                if (config is IUserRegAfter set) userAfterMethods.Add(set);
+                if (config is IUserRegAfter set) {
+                    userAfterMethods.Add(set);
+                }
             }
 
-            foreach (var userRegItem in userAfterMethods.OrderBy(r => r.SortOrder)) userRegItem.Excecute(user);
+            foreach (var userRegItem in userAfterMethods.OrderBy(r => r.SortOrder)) {
+                userRegItem.Excecute(user);
+            }
         }
 
         #endregion 继承IUserRegAfter的方法

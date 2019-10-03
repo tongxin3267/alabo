@@ -19,7 +19,9 @@ namespace Alabo.Framework.Core.WebApis.Controller
         [ApiAuth]
         public ApiResult<PagedList<TEntity>> QueryUserList()
         {
-            if (BaseService == null) return ApiResult.Failure<PagedList<TEntity>>("请在控制器中定义BaseService");
+            if (BaseService == null) {
+                return ApiResult.Failure<PagedList<TEntity>>("请在控制器中定义BaseService");
+            }
 
             var result = BaseService.GetPagedList(Query);
             return ApiResult.Success(result);

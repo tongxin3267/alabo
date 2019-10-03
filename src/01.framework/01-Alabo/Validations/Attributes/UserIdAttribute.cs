@@ -33,15 +33,23 @@ namespace Alabo.Validations.Attributes
     {
         public override bool IsValid(object value)
         {
-            if (value == null) return false;
+            if (value == null) {
+                return false;
+            }
 
             var userId = value.ConvertToLong();
-            if (userId <= 0) return false;
+            if (userId <= 0) {
+                return false;
+            }
 
             var find = EntityDynamicService.GetSingleUser(userId);
-            if (find == null) return false;
+            if (find == null) {
+                return false;
+            }
 
-            if (find.Status != Status.Normal) return false;
+            if (find.Status != Status.Normal) {
+                return false;
+            }
 
             return true;
         }

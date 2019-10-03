@@ -48,7 +48,9 @@ namespace Alabo.Datas.Sql.Queries.Builders.Conditions
         /// </summary>
         public string GetCondition()
         {
-            if (string.IsNullOrWhiteSpace(_name)) return null;
+            if (string.IsNullOrWhiteSpace(_name)) {
+                return null;
+            }
 
             var condition = new AndCondition(CreateLeftCondition(), CreateRightCondition());
             return condition.GetCondition();
@@ -59,7 +61,9 @@ namespace Alabo.Datas.Sql.Queries.Builders.Conditions
         /// </summary>
         private ICondition CreateLeftCondition()
         {
-            if (string.IsNullOrWhiteSpace(_min)) return NullCondition.Instance;
+            if (string.IsNullOrWhiteSpace(_min)) {
+                return NullCondition.Instance;
+            }
 
             return SqlConditionFactory.Create(_name, _min, CreateLeftOperator());
         }
@@ -87,7 +91,9 @@ namespace Alabo.Datas.Sql.Queries.Builders.Conditions
         /// </summary>
         private ICondition CreateRightCondition()
         {
-            if (string.IsNullOrWhiteSpace(_max)) return NullCondition.Instance;
+            if (string.IsNullOrWhiteSpace(_max)) {
+                return NullCondition.Instance;
+            }
 
             return SqlConditionFactory.Create(_name, _max, CreateRightOperator());
         }

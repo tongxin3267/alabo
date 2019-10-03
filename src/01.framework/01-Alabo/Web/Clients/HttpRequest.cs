@@ -147,12 +147,17 @@ namespace Alabo.Web.Clients
         /// </summary>
         private TResult ConvertTo(string result, string contentType)
         {
-            if (typeof(TResult) == typeof(string)) return Convert.To<TResult>(result);
+            if (typeof(TResult) == typeof(string)) {
+                return Convert.To<TResult>(result);
+            }
 
-            if (_convertAction != null) return _convertAction(result);
+            if (_convertAction != null) {
+                return _convertAction(result);
+            }
 
-            if (Alabo.Extensions.Extensions.SafeString(contentType).ToLower() == "application/json")
+            if (Alabo.Extensions.Extensions.SafeString(contentType).ToLower() == "application/json") {
                 return Json.ToObject<TResult>(result);
+            }
 
             return null;
         }

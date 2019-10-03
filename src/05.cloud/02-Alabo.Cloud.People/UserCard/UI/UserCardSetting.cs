@@ -89,10 +89,14 @@ namespace Alabo.Cloud.People.UserCard.UI
         {
             var list = Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
             var model = list.FirstOrDefault(u => u.Id == id.ToGuid());
-            if (model == null) return ToAutoForm(new UserCardSetting());
+            if (model == null) {
+                return ToAutoForm(new UserCardSetting());
+            }
 
             var autoForm = AutoMapping.SetValue<UserCardSetting>(model);
-            if (!string.IsNullOrEmpty(model.Icon)) autoForm.CardImage = model.Icon;
+            if (!string.IsNullOrEmpty(model.Icon)) {
+                autoForm.CardImage = model.Icon;
+            }
 
             return ToAutoForm(autoForm);
         }
@@ -110,12 +114,16 @@ namespace Alabo.Cloud.People.UserCard.UI
             }
             else
             {
-                if (view.Id.ToString() == "00000000-0000-0000-0000-000000000000") view.Id = Guid.NewGuid();
+                if (view.Id.ToString() == "00000000-0000-0000-0000-000000000000") {
+                    view.Id = Guid.NewGuid();
+                }
 
                 var mapList = new List<UserGradeConfig>();
-                foreach (var item in list)
-                    if (userGrade.Name != item.Name)
+                foreach (var item in list) {
+                    if (userGrade.Name != item.Name) {
                         mapList.Add(item);
+                    }
+                }
 
                 userGrade.Id = view.Id;
                 userGrade.Discount = view.Discount;
@@ -137,8 +145,9 @@ namespace Alabo.Cloud.People.UserCard.UI
             var model = ToQuery<QueryWhere>();
 
             var userGradeConfig = Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
-            if (model.Name.IsNotNullOrEmpty())
+            if (model.Name.IsNotNullOrEmpty()) {
                 userGradeConfig = Resolve<IAutoConfigService>().GetList<UserGradeConfig>(l => l.Name == model.Name);
+            }
 
             var result = new PagedList<UserCardSetting>();
             var apiService = Resolve<IApiService>();
@@ -146,7 +155,9 @@ namespace Alabo.Cloud.People.UserCard.UI
             userGradeConfig.ForEach(u =>
             {
                 var view = AutoMapping.SetValue<UserCardSetting>(u);
-                if (!string.IsNullOrEmpty(u.Icon)) view.CardImage = apiService.ApiImageUrl(u.Icon);
+                if (!string.IsNullOrEmpty(u.Icon)) {
+                    view.CardImage = apiService.ApiImageUrl(u.Icon);
+                }
 
                 result.Add(view);
             });

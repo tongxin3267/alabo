@@ -54,7 +54,9 @@ namespace Alabo.Cloud.School.BookingSignup.UI
             var dic = query.ToObject<Dictionary<string, string>>();
             long pageIndex = 1;
             dic.TryGetValue("pageIndex", out var pageIndexStr);
-            if (!pageIndexStr.IsNullOrEmpty()) pageIndex = pageIndexStr.ToInt64();
+            if (!pageIndexStr.IsNullOrEmpty()) {
+                pageIndex = pageIndexStr.ToInt64();
+            }
 
             var signInput = new ExpressionQuery<Domain.Entities.BookingSignup>
             {
@@ -70,12 +72,13 @@ namespace Alabo.Cloud.School.BookingSignup.UI
                 var model = Resolve<IBookingSignupOrderService>().GetList(u => u.IsPay && u.BookingId == tent.Id)
                     .ToList();
                 var users = new List<BookingSignupOrderUser>();
-                foreach (var item in model)
+                foreach (var item in model) {
                     foreach (var temp in item.Contacts)
                     {
                         var view = AutoMapping.SetValue<BookingSignupOrderUser>(temp);
                         users.Add(view);
                     }
+                }
 
                 var userCount = new BookingSignAutoUserCount
                 {

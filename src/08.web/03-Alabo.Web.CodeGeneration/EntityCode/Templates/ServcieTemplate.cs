@@ -31,8 +31,9 @@ namespace Alabo.Web.CodeGeneration.EntityCode.Templates
                 testBuilder.AppendLine($"using {type.Namespace};");
                 testBuilder.AppendLine("using Alabo.Domains.Entities;");
 
-                if (testBuilder.ToString().IndexOf(type.Namespace, StringComparison.OrdinalIgnoreCase) == -1)
+                if (testBuilder.ToString().IndexOf(type.Namespace, StringComparison.OrdinalIgnoreCase) == -1) {
                     testBuilder.AppendLine($"using {type.Namespace};");
+                }
 
                 testBuilder.AppendLine();
                 testBuilder.AppendLine($"namespace {type.Namespace.Replace("Entities", "Services")} {{");
@@ -67,8 +68,9 @@ namespace Alabo.Web.CodeGeneration.EntityCode.Templates
                 testBuilder.AppendLine("using Alabo.Domains.Repositories;");
                 testBuilder.AppendLine($"using {type.Namespace};");
 
-                if (testBuilder.ToString().IndexOf(type.Namespace, StringComparison.OrdinalIgnoreCase) == -1)
+                if (testBuilder.ToString().IndexOf(type.Namespace, StringComparison.OrdinalIgnoreCase) == -1) {
                     testBuilder.AppendLine($"using {type.Namespace};");
+                }
 
                 testBuilder.AppendLine();
                 testBuilder.AppendLine($"namespace {type.Namespace.Replace("Entities", "Services")} {{");

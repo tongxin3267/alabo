@@ -24,14 +24,20 @@ namespace Alabo.Helpers
         /// <param name="encoding">字符编码</param>
         public static string ToString(Stream stream, Encoding encoding)
         {
-            if (stream == null) return string.Empty;
+            if (stream == null) {
+                return string.Empty;
+            }
 
-            if (stream.CanRead == false) return string.Empty;
+            if (stream.CanRead == false) {
+                return string.Empty;
+            }
 
             string result;
             using (var reader = new StreamReader(stream, encoding))
             {
-                if (reader.BaseStream.CanSeek) reader.BaseStream.Position = 0;
+                if (reader.BaseStream.CanSeek) {
+                    reader.BaseStream.Position = 0;
+                }
 
                 result = reader.ReadToEnd();
             }

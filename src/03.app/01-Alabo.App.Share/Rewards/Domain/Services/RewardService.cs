@@ -67,8 +67,10 @@ namespace Alabo.App.Share.Rewards.Domain.Services
         /// <param name="context">上下文</param>
         public PagedList<ViewAdminReward> GetViewRewardPageList(RewardInput userInput, HttpContext context)
         {
-            if (!userInput.Serial.IsNullOrEmpty() && userInput.Serial.Length > 8)
+            if (!userInput.Serial.IsNullOrEmpty() && userInput.Serial.Length > 8) {
                 userInput.Serial = userInput.Serial.Substring(1, userInput.Serial.Length - 1).TrimStart('0');
+            }
+
             var rewardList = _rewardRepository.GetRewardList(userInput, out var count);
             var shareModuleList = Resolve<ITaskModuleConfigService>().GetList(context);
             var shareUserIds = rewardList.Select(r => r.UserId).Distinct().ToList();
@@ -105,8 +107,14 @@ namespace Alabo.App.Share.Rewards.Domain.Services
                     Intro = item.Intro,
                     CreateTimeStr = item.CreateTime.ToString("yyyy-MM-dd HH:mm")
                 };
-                if (users.FirstOrDefault(r => r.Id == item.OrderUserId) == null) viewAdminReward.OrderUser = new User();
-                if (users.FirstOrDefault(r => r.Id == item.UserId) == null) viewAdminReward.OrderUser = new User();
+                if (users.FirstOrDefault(r => r.Id == item.OrderUserId) == null) {
+                    viewAdminReward.OrderUser = new User();
+                }
+
+                if (users.FirstOrDefault(r => r.Id == item.UserId) == null) {
+                    viewAdminReward.OrderUser = new User();
+                }
+
                 result.Add(viewAdminReward);
             }
 
@@ -142,7 +150,10 @@ namespace Alabo.App.Share.Rewards.Domain.Services
         public ViewAdminReward GetRewardView(long Id)
         {
             var reward = GetSingle(r => r.Id == Id);
-            if (reward == null) return null;
+            if (reward == null) {
+                return null;
+            }
+
             var viewAdmin = new ViewAdminReward
             {
                 Reward = reward
@@ -166,9 +177,13 @@ namespace Alabo.App.Share.Rewards.Domain.Services
         /// <param name="soucre">The soucre.</param>
         public void AddOrUpdate(IEnumerable<Reward> soucre)
         {
-            if (soucre == null) throw new ArgumentNullException(nameof(soucre));
+            if (soucre == null) {
+                throw new ArgumentNullException(nameof(soucre));
+            }
 
-            foreach (var item in soucre) AddOrUpdate(item);
+            foreach (var item in soucre) {
+                AddOrUpdate(item);
+            }
         }
 
         /// <summary>
@@ -177,10 +192,11 @@ namespace Alabo.App.Share.Rewards.Domain.Services
         /// <param name="entity">The entity.</param>
         public void AddOrUpdate(Reward entity)
         {
-            if (entity.Id > 0)
+            if (entity.Id > 0) {
                 Repository<IRewardRepository>().UpdateSingle(entity);
-            else
+            } else {
                 Repository<IRewardRepository>().AddSingle(entity);
+            }
         }
 
         /// <summary>
@@ -206,11 +222,15 @@ namespace Alabo.App.Share.Rewards.Domain.Services
             foreach (var item in moduleTypess)
             {
                 var attributes = item.GetTypeInfo().GetAttributes<ShareModulesAttribute>();
-                if (attributes == null || attributes.Count() <= 0) continue;
+                if (attributes == null || attributes.Count() <= 0) {
+                    continue;
+                }
 
-                foreach (var items in attributes)
-                    if (items.Id.ToUpper() == id.ToUpper())
+                foreach (var items in attributes) {
+                    if (items.Id.ToUpper() == id.ToUpper()) {
                         sobj = items;
+                    }
+                }
             }
 
             return sobj;
@@ -227,10 +247,22 @@ namespace Alabo.App.Share.Rewards.Domain.Services
             int? isEnable)
         {
             var moduleList = Resolve<ITaskModuleConfigService>().GetList(context);
-            if (moduleId != Guid.Empty) moduleList = moduleList.Where(r => r.ModuleId == moduleId).ToList();
-            if (!name.IsNullOrEmpty()) moduleList = moduleList.Where(r => r.Name.Contains(name)).ToList();
-            if (isEnable == 1) moduleList = moduleList.Where(r => r.IsEnable).ToList();
-            if (isEnable == 2) moduleList = moduleList.Where(r => r.IsEnable == false).ToList();
+            if (moduleId != Guid.Empty) {
+                moduleList = moduleList.Where(r => r.ModuleId == moduleId).ToList();
+            }
+
+            if (!name.IsNullOrEmpty()) {
+                moduleList = moduleList.Where(r => r.Name.Contains(name)).ToList();
+            }
+
+            if (isEnable == 1) {
+                moduleList = moduleList.Where(r => r.IsEnable).ToList();
+            }
+
+            if (isEnable == 2) {
+                moduleList = moduleList.Where(r => r.IsEnable == false).ToList();
+            }
+
             var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
             var userTypes = Resolve<IAutoConfigService>().GetList<UserTypeConfig>();
             var productLines = Resolve<IGoodsLineService>().GetList();
@@ -448,8 +480,14 @@ namespace Alabo.App.Share.Rewards.Domain.Services
                     Intro = item.Intro,
                     CreateTimeStr = item.CreateTime.ToString("yyyy-MM-dd HH:mm")
                 };
-                if (users.FirstOrDefault(r => r.Id == item.OrderUserId) == null) viewAdminReward.OrderUser = new User();
-                if (users.FirstOrDefault(r => r.Id == item.UserId) == null) viewAdminReward.OrderUser = new User();
+                if (users.FirstOrDefault(r => r.Id == item.OrderUserId) == null) {
+                    viewAdminReward.OrderUser = new User();
+                }
+
+                if (users.FirstOrDefault(r => r.Id == item.UserId) == null) {
+                    viewAdminReward.OrderUser = new User();
+                }
+
                 result.Add(viewAdminReward);
             }
 

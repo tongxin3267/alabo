@@ -50,9 +50,11 @@ namespace Alabo.Framework.Reports.Domain.Services
         {
             var report = Resolve<IReportService>().GetReport(typeof(T).FullName);
             var typeclassProperty = typeof(T).GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
-            if (typeclassProperty == null) return ServiceResult.FailedWithMessage("未设置ClassPropertyAttribute特性");
+            if (typeclassProperty == null) {
+                return ServiceResult.FailedWithMessage("未设置ClassPropertyAttribute特性");
+            }
 
-            if (report == null)
+            if (report == null) {
                 report = new Report
                 {
                     // AppName = typeclassProperty.AppName,
@@ -62,6 +64,7 @@ namespace Alabo.Framework.Reports.Domain.Services
                         ? typeclassProperty.Name
                         : typeclassProperty.Description
                 };
+            }
 
             report.Value = value.ToJson();
             report.LastUpdated = DateTime.Now;
@@ -71,12 +74,18 @@ namespace Alabo.Framework.Reports.Domain.Services
 
         public void AddOrUpdate(Report report)
         {
-            if (report == null) throw new ArgumentNullException(nameof(report));
+            if (report == null) {
+                throw new ArgumentNullException(nameof(report));
+            }
 
             Report find = null;
-            if (!report.Id.IsObjectIdNullOrEmpty()) find = GetSingle(e => e.Id == report.Id);
+            if (!report.Id.IsObjectIdNullOrEmpty()) {
+                find = GetSingle(e => e.Id == report.Id);
+            }
 
-            if (find == null) find = GetSingle(e => e.Type == report.Type);
+            if (find == null) {
+                find = GetSingle(e => e.Type == report.Type);
+            }
 
             if (find == null)
             {
@@ -112,13 +121,17 @@ namespace Alabo.Framework.Reports.Domain.Services
         /// <param name="key"></param>
         public Report GetReport(string key)
         {
-            if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+            if (string.IsNullOrWhiteSpace(key)) {
+                throw new ArgumentNullException(nameof(key));
+            }
 
             var cacheKey = _ReportCacheKey + key;
             if (!ObjectCache.TryGet(cacheKey, out Report report))
             {
                 report = GetSingle(e => e.Type == key);
-                if (report != null) ObjectCache.Set(cacheKey, report);
+                if (report != null) {
+                    ObjectCache.Set(cacheKey, report);
+                }
             }
 
             return report;
@@ -127,7 +140,9 @@ namespace Alabo.Framework.Reports.Domain.Services
         public T GetValue<T>() where T : class, IReport
         {
             var report = GetReport(typeof(T).FullName);
-            if (report == null) return Activator.CreateInstance(typeof(T)) as T;
+            if (report == null) {
+                return Activator.CreateInstance(typeof(T)) as T;
+            }
 
             var result = JsonConvert.DeserializeObject<T>(report.Value);
             return result;
@@ -136,9 +151,11 @@ namespace Alabo.Framework.Reports.Domain.Services
         public object GetValue(string key)
         {
             var types = GetAllTypes();
-            foreach (var item in types)
-                if (item.FullName == key)
+            foreach (var item in types) {
+                if (item.FullName == key) {
                     return GetValue(item);
+                }
+            }
 
             return null;
         }
@@ -156,7 +173,9 @@ namespace Alabo.Framework.Reports.Domain.Services
                     r.GetTypeInfo().GetAttribute<ClassPropertyAttribute>() != null
                         ? r.GetTypeInfo().GetAttribute<ClassPropertyAttribute>().SortOrder
                         : 1);
-                if (types != null) ObjectCache.Set(cacheKey, types);
+                if (types != null) {
+                    ObjectCache.Set(cacheKey, types);
+                }
             }
 
             return types;
@@ -166,7 +185,9 @@ namespace Alabo.Framework.Reports.Domain.Services
         {
             var list = new List<JObject>();
             var dataReport = GetReport(key);
-            if (dataReport != null) list = JsonConvert.DeserializeObject<List<JObject>>(dataReport.Value);
+            if (dataReport != null) {
+                list = JsonConvert.DeserializeObject<List<JObject>>(dataReport.Value);
+            }
 
             return list;
         }
@@ -176,12 +197,15 @@ namespace Alabo.Framework.Reports.Domain.Services
             var report = GetReport(typeof(T).FullName);
             var t = new T();
             var reportlist = new List<T>();
-            if (report != null)
+            if (report != null) {
                 if (report.Value != null)
                 {
                     reportlist = report.Value.Deserialize(t);
-                    if (predicate != null) return reportlist.Where(predicate).ToList();
+                    if (predicate != null) {
+                        return reportlist.Where(predicate).ToList();
+                    }
                 }
+            }
 
             return reportlist;
         }
@@ -228,7 +252,9 @@ namespace Alabo.Framework.Reports.Domain.Services
                     foreach (var item in request)
                     {
                         PropertyDescription.SetValue(data, item);
-                        if (data.GetType().GetProperty("Id").GetValue(data).ToString() == id.ToString()) return data;
+                        if (data.GetType().GetProperty("Id").GetValue(data).ToString() == id.ToString()) {
+                            return data;
+                        }
                     }
                 }
                 else
@@ -287,9 +313,11 @@ namespace Alabo.Framework.Reports.Domain.Services
         public Type GetType(string key)
         {
             var types = GetAllTypes();
-            foreach (var item in types)
-                if (item.FullName == key)
+            foreach (var item in types) {
+                if (item.FullName == key) {
                     return item;
+                }
+            }
 
             return null;
         }
@@ -298,12 +326,13 @@ namespace Alabo.Framework.Reports.Domain.Services
             IEnumerable<T> elements,
             Func<T, object> textSelector, Func<T, object> valueSelector)
         {
-            foreach (var element in elements)
+            foreach (var element in elements) {
                 yield return new SelectListItem
                 {
                     Text = textSelector(element)?.ToString(),
                     Value = valueSelector(element)?.ToString()
                 };
+            }
         }
     }
 }

@@ -24,7 +24,9 @@ namespace Alabo.Datas.Stores.Add.Mongo
         public TEntity FindByIdNoTracking(TKey id)
         {
             var entities = FindByIdsNoTracking(id);
-            if (entities == null || entities.Count == 0) return null;
+            if (entities == null || entities.Count == 0) {
+                return null;
+            }
 
             return entities[0];
         }

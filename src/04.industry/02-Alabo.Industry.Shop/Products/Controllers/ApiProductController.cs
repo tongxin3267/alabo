@@ -51,10 +51,11 @@ namespace Alabo.Industry.Shop.Products.Controllers
 
                     productDetail.DisplayPrice = Resolve<IProductService>()
                         .GetDisplayPrice(productDetail.Price, productDetail.PriceStyleId, 0M);
-                    if (productDetail?.ProductExtensions?.ProductSkus?.Count > 0)
+                    if (productDetail?.ProductExtensions?.ProductSkus?.Count > 0) {
                         productDetail.ProductExtensions.ProductSkus.Foreach(x =>
                             x.DisplayPrice = Resolve<IProductService>()
                                 .GetDisplayPrice(productDetail.Price, productDetail.PriceStyleId, 0M));
+                    }
 
                     return ApiResult.Success(productDetail);
                 }
@@ -84,17 +85,21 @@ namespace Alabo.Industry.Shop.Products.Controllers
                     {
                         var productDetail = result.Item2.MapTo<ProductDetailView>();
                         var config = Resolve<IAutoConfigService>().GetValue<MemberDiscountConfig>();
-                        if ((AutoModel?.BasicUser?.Id ?? 0) != 0) userId = AutoModel.BasicUser.Id;
+                        if ((AutoModel?.BasicUser?.Id ?? 0) != 0) {
+                            userId = AutoModel.BasicUser.Id;
+                        }
+
                         var loginUser = Resolve<IUserService>().GetSingle(userId);
                         var isAdmin = Resolve<IUserService>().IsAdmin(userId);
                         productDetail.IsFrontShowPrice = true;
 
                         productDetail.DisplayPrice = Resolve<IProductService>()
                             .GetDisplayPrice(productDetail.Price, productDetail.PriceStyleId, 0M);
-                        if (productDetail?.ProductExtensions?.ProductSkus?.Count > 0)
+                        if (productDetail?.ProductExtensions?.ProductSkus?.Count > 0) {
                             productDetail.ProductExtensions.ProductSkus.Foreach(x =>
                                 x.DisplayPrice = Resolve<IProductService>()
                                     .GetDisplayPrice(productDetail.Price, productDetail.PriceStyleId, 0M));
+                        }
                         //bniuniu 不进行该判断
                         StringValues isTenant = string.Empty;
 
@@ -189,7 +194,10 @@ namespace Alabo.Industry.Shop.Products.Controllers
             var apiOutput = Resolve<IProductService>().GetProductItems(parameter);
             var config = Resolve<IAutoConfigService>().GetValue<MemberDiscountConfig>();
 
-            if ((AutoModel?.BasicUser?.Id ?? 0) != 0) parameter.LoginUserId = AutoModel.BasicUser.Id;
+            if ((AutoModel?.BasicUser?.Id ?? 0) != 0) {
+                parameter.LoginUserId = AutoModel.BasicUser.Id;
+            }
+
             var loginUser = Resolve<IUserService>().GetSingle(parameter.LoginUserId);
             var isAdmin = Resolve<IUserService>().IsAdmin(parameter.LoginUserId);
             apiOutput.IsFrontShowPrice = true;
@@ -277,7 +285,9 @@ namespace Alabo.Industry.Shop.Products.Controllers
             return ObjectCache.GetOrSet(() =>
                 {
                     var productClassList = Resolve<IProductService>().GetProductClassList();
-                    if (productClassList == null) return ApiResult.Failure<IList<RelationApiOutput>>("商品分类不存在");
+                    if (productClassList == null) {
+                        return ApiResult.Failure<IList<RelationApiOutput>>("商品分类不存在");
+                    }
 
                     IList<RelationApiOutput> result = new List<RelationApiOutput>();
 
@@ -353,11 +363,17 @@ namespace Alabo.Industry.Shop.Products.Controllers
                 EnablePaging = true
             };
             //query.And(e => e.StoreId == parameter.StoreId);
-            if (!parameter.StoreId.IsObjectIdNullOrEmpty()) query.And(s => s.StoreId == parameter.StoreId.ToString());
+            if (!parameter.StoreId.IsObjectIdNullOrEmpty()) {
+                query.And(s => s.StoreId == parameter.StoreId.ToString());
+            }
 
-            if (parameter.Bn != null) query.And(s => s.Bn.Contains(parameter.Bn));
+            if (parameter.Bn != null) {
+                query.And(s => s.Bn.Contains(parameter.Bn));
+            }
 
-            if (parameter.Name != null) query.And(s => s.Name.Contains(parameter.Name));
+            if (parameter.Name != null) {
+                query.And(s => s.Name.Contains(parameter.Name));
+            }
 
             query.OrderByDescending(e => e.Id);
 
@@ -372,7 +388,10 @@ namespace Alabo.Industry.Shop.Products.Controllers
                 PageSize = list.PageSize
             };
 
-            if (list.Count < 0) return ApiResult.Success(new PageResult<Product>());
+            if (list.Count < 0) {
+                return ApiResult.Success(new PageResult<Product>());
+            }
+
             return ApiResult.Success(apiRusult);
             //return ApiResult.Success(list);
         }

@@ -47,7 +47,9 @@ namespace Alabo.Domains.Query
         /// <param name="type">The 类型.</param>
         public IPredicateQuery<TEntity> Append(Expression<Func<TEntity, bool>> predicate, PredicateLinkType type)
         {
-            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            if (predicate == null) {
+                throw new ArgumentNullException(nameof(predicate));
+            }
 
             _predicateList.Add(new PredicateQueryItem(predicate, type));
             return this;
@@ -78,7 +80,9 @@ namespace Alabo.Domains.Query
         /// <param name="type">The 类型.</param>
         public IPredicateQuery<TEntity> Append(IPredicateQuery<TEntity> predicateQuery, PredicateLinkType type)
         {
-            if (predicateQuery == null) throw new ArgumentNullException(nameof(predicateQuery));
+            if (predicateQuery == null) {
+                throw new ArgumentNullException(nameof(predicateQuery));
+            }
 
             return Append(predicateQuery.BuildPredicateExpression(), type);
         }
@@ -90,7 +94,9 @@ namespace Alabo.Domains.Query
         public virtual IQueryable<TEntity> Execute(IQueryable<TEntity> query)
         {
             var predicateExpression = BuildPredicateExpression();
-            if (predicateExpression == null) return query;
+            if (predicateExpression == null) {
+                return query;
+            }
 
             return query.Where(predicateExpression);
         }
@@ -100,17 +106,20 @@ namespace Alabo.Domains.Query
         /// </summary>
         public Expression<Func<TEntity, bool>> BuildPredicateExpression()
         {
-            if (_predicateList.Count <= 0) return null;
+            if (_predicateList.Count <= 0) {
+                return null;
+            }
 
             var parameterExpression = Expression.Parameter(typeof(TEntity), "e");
             Expression predicateExrpession = Expression.Constant(DefaultValue);
             foreach (var item in _predicateList)
             {
                 var visitor = new ChangeParameterTypeExpressionVisitor(item.Predicate.Body, parameterExpression);
-                if (item.Type == PredicateLinkType.And)
+                if (item.Type == PredicateLinkType.And) {
                     predicateExrpession = Expression.AndAlso(predicateExrpession, visitor.Convert());
-                else
+                } else {
                     predicateExrpession = Expression.OrElse(predicateExrpession, visitor.Convert());
+                }
             }
 
             return Expression.Lambda<Func<TEntity, bool>>(predicateExrpession, parameterExpression);

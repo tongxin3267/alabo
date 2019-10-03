@@ -22,7 +22,9 @@ namespace Alabo.Datas.Stores.Exist.EfCore
         /// <param name="predicate">条件</param>
         public async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            if (predicate == null) return false;
+            if (predicate == null) {
+                return false;
+            }
 
             return await Set.AnyAsync(predicate);
         }

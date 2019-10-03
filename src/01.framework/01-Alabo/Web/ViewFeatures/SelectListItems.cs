@@ -48,12 +48,13 @@ namespace Alabo.Web.ViewFeatures
             IEnumerable<T> elements,
             Func<T, object> textSelector, Func<T, object> valueSelector)
         {
-            foreach (var element in elements)
+            foreach (var element in elements) {
                 yield return new SelectListItem
                 {
                     Text = textSelector(element)?.ToString(),
                     Value = valueSelector(element)?.ToString()
                 };
+            }
         }
     }
 }

@@ -35,10 +35,11 @@ namespace Alabo.Test.Base
         public static string HttpGet(string url)
         {
             HttpClient httpClient;
-            if (ClientAuthContainer.CurrentHandler != null)
+            if (ClientAuthContainer.CurrentHandler != null) {
                 httpClient = new HttpClient(ClientAuthContainer.CurrentHandler);
-            else
+            } else {
                 httpClient = new HttpClient();
+            }
 
             var t = httpClient.GetByteArrayAsync(url);
             t.Wait();
@@ -54,10 +55,11 @@ namespace Alabo.Test.Base
         public static Tuple<bool, string> Post(string url, Dictionary<string, string> dictionary)
         {
             HttpClient client;
-            if (ClientAuthContainer.CurrentHandler != null)
+            if (ClientAuthContainer.CurrentHandler != null) {
                 client = new HttpClient(ClientAuthContainer.CurrentHandler);
-            else
+            } else {
                 client = new HttpClient();
+            }
 
             var ms = new MemoryStream();
             dictionary.FillFormDataStream(ms); //填充formData
@@ -90,10 +92,11 @@ namespace Alabo.Test.Base
             Encoding encoding = null, int timeOut = 10000)
         {
             HttpClient client;
-            if (ClientAuthContainer.CurrentHandler != null)
+            if (ClientAuthContainer.CurrentHandler != null) {
                 client = new HttpClient(ClientAuthContainer.CurrentHandler);
-            else
+            } else {
                 client = new HttpClient();
+            }
 
             var ms = new MemoryStream();
             formData.FillFormDataStream(ms); //填充formData
@@ -124,10 +127,11 @@ namespace Alabo.Test.Base
         public static string HttpPost(string url, Dictionary<string, string> formData = null, int timeOut = 10000)
         {
             HttpClient client;
-            if (ClientAuthContainer.CurrentHandler != null)
+            if (ClientAuthContainer.CurrentHandler != null) {
                 client = new HttpClient(ClientAuthContainer.CurrentHandler);
-            else
+            } else {
                 client = new HttpClient();
+            }
 
             var ms = new MemoryStream();
             formData.FillFormDataStream(ms); //填充formData
@@ -157,7 +161,9 @@ namespace Alabo.Test.Base
         /// <param name="formData"></param>
         public static string GetQueryString(this Dictionary<string, string> formData)
         {
-            if (formData == null || formData.Count == 0) return "";
+            if (formData == null || formData.Count == 0) {
+                return "";
+            }
 
             var sb = new StringBuilder();
 
@@ -166,7 +172,9 @@ namespace Alabo.Test.Base
             {
                 i++;
                 sb.AppendFormat("{0}={1}", kv.Key, kv.Value);
-                if (i < formData.Count) sb.Append("&");
+                if (i < formData.Count) {
+                    sb.Append("&");
+                }
             }
 
             return sb.ToString();

@@ -45,8 +45,9 @@ namespace Alabo.Web.Mvc
                     Location = ResponseCacheLocation.None,
                     NoStore = true
                 });
-                if (RuntimeContext.Current.WebsiteConfig.IsDevelopment == false)
+                if (RuntimeContext.Current.WebsiteConfig.IsDevelopment == false) {
                     option.Filters.Add<ExceptionHandlerAttribute>();
+                }
                 //  option.Filters.Add<WebExceptionFilterAttribute>();
             }).AddJsonOptions(options =>
             {

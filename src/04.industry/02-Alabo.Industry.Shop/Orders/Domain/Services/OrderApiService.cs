@@ -30,7 +30,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
             var orders = Resolve<IOrderService>().GetPagedList(query, expressionQuery.BuildExpression());
 
             var model = new List<ApiOrderListOutput>();
-            if (orders.Count < 0) return new PagedList<ApiOrderListOutput>();
+            if (orders.Count < 0) {
+                return new PagedList<ApiOrderListOutput>();
+            }
 
             foreach (var item in orders)
             {
@@ -44,9 +46,10 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                 };
                 if (item.OrderExtension != null)
                 {
-                    if (item.OrderExtension.UserAddress != null)
+                    if (item.OrderExtension.UserAddress != null) {
                         listOutput.RegionName = Resolve<IRegionService>()
                             .GetRegionNameById(item.OrderExtension.UserAddress.RegionId);
+                    }
                 }
                 else
                 {

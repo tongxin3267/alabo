@@ -79,7 +79,9 @@ namespace Alabo.Data.People.Circles.Client
             {
                 var proviceMap = circelMaps.FirstOrDefault(r =>
                     r.Name.Contains(proviceItem.Name.Replace("省", "").Replace("市", "").Replace("区", "")));
-                if (proviceMap == null) throw new SystemException();
+                if (proviceMap == null) {
+                    throw new SystemException();
+                }
 
                 // 城市
                 var cities = Ioc.Resolve<IRegionService>()
@@ -88,7 +90,9 @@ namespace Alabo.Data.People.Circles.Client
                 {
                     var cityMap = proviceMap.Cities.FirstOrDefault(r =>
                         r.Name.Contains(cityItem.Name.Replace("省", "").Replace("市", "").Replace("区", "")));
-                    if (cityMap == null) continue;
+                    if (cityMap == null) {
+                        continue;
+                    }
 
                     var coutries = Ioc.Resolve<IRegionService>().GetList(r =>
                         r.Level == RegionLevel.County && r.ParentId == cityItem.RegionId);
@@ -97,8 +101,8 @@ namespace Alabo.Data.People.Circles.Client
                         var coutryItem = cityMap.Counties.FirstOrDefault(r =>
                             r.Name.Contains(countyItem.Name.Replace("省", "").Replace("市", "").Replace("区", "")
                                 .Replace("县", "")));
-                        if (coutryItem != null)
-                            foreach (var circleItem in coutryItem.Circles)
+                        if (coutryItem != null) {
+                            foreach (var circleItem in coutryItem.Circles) {
                                 if (circleItem.Name != "其他")
                                 {
                                     var circle = new Circle
@@ -111,6 +115,8 @@ namespace Alabo.Data.People.Circles.Client
                                     };
                                     list.Add(circle);
                                 }
+                            }
+                        }
                     }
                 }
             }

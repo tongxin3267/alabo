@@ -50,10 +50,14 @@ namespace Alabo.Tool.Office.Core
         public Row GetRow(int index)
         {
             var realIndex = index - _startIndex;
-            if (realIndex < 0)
+            if (realIndex < 0) {
                 return null;
-            if (realIndex > _rows.Count - 1)
+            }
+
+            if (realIndex > _rows.Count - 1) {
                 return null;
+            }
+
             return _rows[realIndex];
         }
 
@@ -72,11 +76,14 @@ namespace Alabo.Tool.Office.Core
         /// <param name="cells">单元格集合</param>
         public void AddRow(int rowIndex, IEnumerable<Cell> cells)
         {
-            if (cells == null)
+            if (cells == null) {
                 return;
+            }
+
             var row = CreateRow(rowIndex);
-            foreach (var cell in cells)
+            foreach (var cell in cells) {
                 AddCell(row, cell, rowIndex);
+            }
         }
 
         /// <summary>
@@ -85,8 +92,10 @@ namespace Alabo.Tool.Office.Core
         private Row CreateRow(int index)
         {
             var row = GetRow(index);
-            if (row != null)
+            if (row != null) {
                 return row;
+            }
+
             row = new Row(index);
             _rows.Add(row);
             return row;
@@ -98,10 +107,13 @@ namespace Alabo.Tool.Office.Core
         private void AddCell(Row row, Cell cell, int rowIndex)
         {
             row.Add(cell);
-            if (cell.RowSpan <= 1)
+            if (cell.RowSpan <= 1) {
                 return;
-            for (var i = 1; i < cell.RowSpan; i++)
+            }
+
+            for (var i = 1; i < cell.RowSpan; i++) {
                 AddPlaceholderCell(cell, rowIndex + i);
+            }
         }
 
         /// <summary>

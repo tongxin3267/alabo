@@ -109,11 +109,14 @@ namespace Alabo.Datas.Sql.Queries.Builders.Internal
         /// <param name="operator">运算符</param>
         public ICondition CreateCondition(string column, object value, Operator @operator)
         {
-            if (string.IsNullOrWhiteSpace(column)) throw new ArgumentNullException(nameof(column));
+            if (string.IsNullOrWhiteSpace(column)) {
+                throw new ArgumentNullException(nameof(column));
+            }
 
             column = GetColumn(column);
-            if (@operator == Operator.Contains && value != null && Reflection.IsCollection(value.GetType()))
+            if (@operator == Operator.Contains && value != null && Reflection.IsCollection(value.GetType())) {
                 return CreateInCondition(column, value as IEnumerable);
+            }
 
             var paramName = GenerateParamName(value, @operator);
             _parameterManager.Add(paramName, value, @operator);
@@ -125,7 +128,9 @@ namespace Alabo.Datas.Sql.Queries.Builders.Internal
         /// </summary>
         private ICondition CreateInCondition(string column, IEnumerable values)
         {
-            if (values == null) return NullCondition.Instance;
+            if (values == null) {
+                return NullCondition.Instance;
+            }
 
             var paramNames = new List<string>();
             foreach (var value in values)
@@ -146,9 +151,13 @@ namespace Alabo.Datas.Sql.Queries.Builders.Internal
         public string GenerateParamName(object value, Operator @operator)
         {
             var result = _parameterManager.GenerateName();
-            if (value != null) return result;
+            if (value != null) {
+                return result;
+            }
 
-            if (@operator == Operator.Equal || @operator == Operator.NotEqual) return null;
+            if (@operator == Operator.Equal || @operator == Operator.NotEqual) {
+                return null;
+            }
 
             return result;
         }

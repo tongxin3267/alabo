@@ -20,7 +20,9 @@ namespace Alabo.Cloud.People.Enterprise.Domain.Services
 
         public ServiceResult AddOrUpdate(EnterpriseView view)
         {
-            if (view == null) throw new ValidException("输入不能为空");
+            if (view == null) {
+                throw new ValidException("输入不能为空");
+            }
 
             var enterprise = AutoMapping.SetValue<Entities.Enterprise>(view);
             enterprise.UserId = view.LoginUserId;
@@ -30,13 +32,19 @@ namespace Alabo.Cloud.People.Enterprise.Domain.Services
             {
                 enterprise.Status = IdentityStatus.IsPost;
                 var addResult = Resolve<IEnterpriseService>().Add(enterprise);
-                if (addResult) return ServiceResult.Success;
+                if (addResult) {
+                    return ServiceResult.Success;
+                }
+
                 return ServiceResult.Failed;
             }
 
             enterprise.Status = view.Status;
             var result = Resolve<IEnterpriseService>().Update(enterprise);
-            if (result) return ServiceResult.Success;
+            if (result) {
+                return ServiceResult.Success;
+            }
+
             return ServiceResult.Failed;
         }
 

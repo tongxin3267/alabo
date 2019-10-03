@@ -25,7 +25,10 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
         public List<KeyValue> GetStoreDeliveryTemplateByCache(ObjectId storeId)
         {
             var store = Resolve<IStoreService>().GetSingleFromCache(storeId);
-            if (store == null) return null;
+            if (store == null) {
+                return null;
+            }
+
             var result = new List<KeyValue>();
             var list = GetList(r => r.StoreId == storeId);
             list.Foreach(r => { result.Add(new KeyValue(r.Id, r.TemplateName)); });

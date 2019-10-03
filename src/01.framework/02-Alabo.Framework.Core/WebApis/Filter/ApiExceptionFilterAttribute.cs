@@ -22,7 +22,10 @@ namespace Alabo.Framework.Core.WebApis.Filter
             else
             {
                 var message = context.Exception.Message;
-                if (context.Exception.InnerException != null) message = context.Exception.InnerException.Message;
+                if (context.Exception.InnerException != null) {
+                    message = context.Exception.InnerException.Message;
+                }
+
                 exceptionApiResult = ApiResult.Error(message);
             }
 

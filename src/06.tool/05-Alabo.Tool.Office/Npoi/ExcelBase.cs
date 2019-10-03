@@ -102,8 +102,10 @@ namespace Alabo.Tool.Office.Npoi
         /// <param name="cell">单元格</param>
         public IExcel CreateCell(Cell cell)
         {
-            if (cell.IsNull())
+            if (cell.IsNull()) {
                 return this;
+            }
+
             _cell = GetOrCreateCell(_row, cell.ColumnIndex);
             SetCellValue(cell.Value);
             MergeCell(cell);
@@ -130,8 +132,10 @@ namespace Alabo.Tool.Office.Npoi
         /// <param name="cell">单元格</param>
         public IExcel MergeCell(Cell cell)
         {
-            if (cell.NeedMerge)
+            if (cell.NeedMerge) {
                 MergeCell(cell.RowIndex, cell.EndRowIndex, cell.ColumnIndex, cell.EndColumnIndex);
+            }
+
             return this;
         }
 
@@ -152,8 +156,10 @@ namespace Alabo.Tool.Office.Npoi
         /// <param name="style">单元格样式</param>
         public IExcel HeadStyle(Table table, CellStyle style)
         {
-            if (_headStyle == null)
+            if (_headStyle == null) {
                 _headStyle = CellStyleResolver.Resolve(_workbook, style);
+            }
+
             Style(0, table.HeadRowCount - 1, 0, table.ColumnNumber - 1, _headStyle);
             return this;
         }
@@ -165,8 +171,10 @@ namespace Alabo.Tool.Office.Npoi
         /// <param name="style">单元格样式</param>
         public IExcel BodyStyle(Table table, CellStyle style)
         {
-            if (_bodyStyle == null)
+            if (_bodyStyle == null) {
                 _bodyStyle = CellStyleResolver.Resolve(_workbook, style);
+            }
+
             Style(table.HeadRowCount, table.HeadRowCount + table.BodyRowCount - 1, 0, table.ColumnNumber - 1,
                 _bodyStyle);
             return this;
@@ -179,8 +187,10 @@ namespace Alabo.Tool.Office.Npoi
         /// <param name="style">单元格样式</param>
         public IExcel FootStyle(Table table, CellStyle style)
         {
-            if (_footStyle == null)
+            if (_footStyle == null) {
                 _footStyle = CellStyleResolver.Resolve(_workbook, style);
+            }
+
             Style(table.HeadRowCount + table.BodyRowCount, table.Count - 1, 0, table.ColumnNumber - 1, _footStyle);
             return this;
         }
@@ -232,8 +242,10 @@ namespace Alabo.Tool.Office.Npoi
         /// </summary>
         private void SetCellValue(object value)
         {
-            if (value == null)
+            if (value == null) {
                 return;
+            }
+
             switch (value.GetType().ToString())
             {
                 case "System.String":
@@ -272,8 +284,10 @@ namespace Alabo.Tool.Office.Npoi
         /// </summary>
         private ICellStyle CreateDateStyle()
         {
-            if (_dateStyle != null)
+            if (_dateStyle != null) {
                 return _dateStyle;
+            }
+
             _dateStyle = CellStyleResolver.Resolve(_workbook, CellStyle.Body());
             var format = _workbook.CreateDataFormat();
             _dateStyle.DataFormat = format.GetFormat(_dateFormat);
@@ -294,8 +308,9 @@ namespace Alabo.Tool.Office.Npoi
             for (var i = startRowIndex; i <= endRowIndex; i++)
             {
                 var row = GetOrCreateRow(i);
-                for (var j = startColumnIndex; j <= endColumnIndex; j++)
+                for (var j = startColumnIndex; j <= endColumnIndex; j++) {
                     GetOrCreateCell(row, j).CellStyle = style;
+                }
             }
 
             return this;

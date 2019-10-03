@@ -16,9 +16,15 @@ namespace Alabo.Cloud.Cms.BookDonae.Controllers
         [HttpGet]
         public ApiResult GetBook(string bookName)
         {
-            if (bookName.IsNullOrEmpty()) return ApiResult.Failure("需传入书名");
+            if (bookName.IsNullOrEmpty()) {
+                return ApiResult.Failure("需传入书名");
+            }
+
             var book = Resolve<IBookDonaeInfoService>().GetSingle(u => u.Name == bookName);
-            if (book == null) return ApiResult.Failure("不存在该书籍");
+            if (book == null) {
+                return ApiResult.Failure("不存在该书籍");
+            }
+
             return ApiResult.Success(book);
         }
     }

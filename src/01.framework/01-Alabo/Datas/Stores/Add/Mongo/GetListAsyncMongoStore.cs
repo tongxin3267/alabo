@@ -25,7 +25,9 @@ namespace Alabo.Datas.Stores.Add.Mongo
 
         public async Task<IEnumerable<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            if (predicate == null) return await Collection.AsQueryable().ToListAsync(CancellationToken.None);
+            if (predicate == null) {
+                return await Collection.AsQueryable().ToListAsync(CancellationToken.None);
+            }
 
             var list = Collection.AsQueryable().Where(predicate).ToListAsync(CancellationToken.None);
             return await list;

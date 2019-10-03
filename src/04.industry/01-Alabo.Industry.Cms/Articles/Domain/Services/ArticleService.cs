@@ -30,19 +30,23 @@ namespace Alabo.Industry.Cms.Articles.Domain.Services
             var query = new ExpressionQuery<Article>();
 
             query.OrderByAscending(e => e.CreateTime);
-            if (!articleInput.ChannelId.IsNullOrEmpty())
+            if (!articleInput.ChannelId.IsNullOrEmpty()) {
                 query.And(r => r.ChannelId == articleInput.ChannelId.ToObjectId());
+            }
 
-            if (articleInput.OrderType == 0)
+            if (articleInput.OrderType == 0) {
                 query.OrderByAscending(a => a.ViewCount);
-            else
+            } else {
                 query.OrderByDescending(a => a.ViewCount);
+            }
 
             var list = GetList(query);
             var result = new List<ArticleItem>();
             foreach (var item in list)
             {
-                if (articleInput.TotalCount > 0 && result.Count >= articleInput.TotalCount) break;
+                if (articleInput.TotalCount > 0 && result.Count >= articleInput.TotalCount) {
+                    break;
+                }
 
                 var articleItem = AutoMapping.SetValue<ArticleItem>(item);
                 articleItem.RelationId = item.RelationId;

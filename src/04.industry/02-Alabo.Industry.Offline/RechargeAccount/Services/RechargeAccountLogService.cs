@@ -27,13 +27,24 @@ namespace Alabo.Industry.Offline.RechargeAccount.Services
         {
             #region 安全验证
 
-            if (rechargeAccount == null) return ServiceResult.FailedWithMessage("对象不能为空");
-            if (rechargeAccount.UserName.IsNullOrEmpty()) return ServiceResult.FailedWithMessage("用户名不能为空!");
+            if (rechargeAccount == null) {
+                return ServiceResult.FailedWithMessage("对象不能为空");
+            }
+
+            if (rechargeAccount.UserName.IsNullOrEmpty()) {
+                return ServiceResult.FailedWithMessage("用户名不能为空!");
+            }
+
             var user = Resolve<IUserService>().GetSingleByUserNameOrMobile(rechargeAccount.UserName);
-            if (user == null) return ServiceResult.FailedWithMessage("用户不存在");
+            if (user == null) {
+                return ServiceResult.FailedWithMessage("用户不存在");
+            }
+
             var config = Resolve<IAutoConfigService>().GetList<RechargeAccountConfig>();
             var find = config.FirstOrDefault(r => r.Id == rechargeAccount.Id);
-            if (find == null) return ServiceResult.FailedWithMessage("配置不存在");
+            if (find == null) {
+                return ServiceResult.FailedWithMessage("配置不存在");
+            }
 
             #endregion 安全验证
 

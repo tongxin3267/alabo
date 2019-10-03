@@ -50,9 +50,11 @@ namespace Alabo.Industry.Cms.LightApps.Domain
 
         public static (string Field, Operator op, string Value) ComparisonParse(KeyValuePair<string, string> kvItem)
         {
-            foreach (var item in DicComparison)
-                if (kvItem.Value.StartsWith(item.Key))
+            foreach (var item in DicComparison) {
+                if (kvItem.Value.StartsWith(item.Key)) {
                     return (kvItem.Key, DicComparison[item.Key], kvItem.Value.Replace(item.Key, ""));
+                }
+            }
 
             return (kvItem.Key, Operator.Equal, kvItem.Value);
         }
@@ -141,18 +143,26 @@ namespace Alabo.Industry.Cms.LightApps.Domain
 
         public static dynamic ValueParse(string value)
         {
-            if (value.Length == 24 && ObjectId.TryParse(value, out var rsObjectId)) return rsObjectId;
+            if (value.Length == 24 && ObjectId.TryParse(value, out var rsObjectId)) {
+                return rsObjectId;
+            }
 
-            if (value.Contains('.') && decimal.TryParse(value, out var rsDecimal)) return rsDecimal;
+            if (value.Contains('.') && decimal.TryParse(value, out var rsDecimal)) {
+                return rsDecimal;
+            }
 
             //if (DateTime.TryParse(value, out DateTime rsDateTime))
             //{
             //    return rsDateTime;
             //}
 
-            if (long.TryParse(value, out var rsLong)) return rsLong;
+            if (long.TryParse(value, out var rsLong)) {
+                return rsLong;
+            }
 
-            if (bool.TryParse(value, out var rsBool)) return rsBool;
+            if (bool.TryParse(value, out var rsBool)) {
+                return rsBool;
+            }
 
             return value;
         }

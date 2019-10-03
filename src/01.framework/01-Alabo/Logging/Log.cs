@@ -83,7 +83,9 @@ namespace Alabo.Logging
         /// <param name="instance">实例</param>
         public static ILog GetLog(object instance)
         {
-            if (instance == null) return GetLog();
+            if (instance == null) {
+                return GetLog();
+            }
 
             var className = instance.GetType().ToString();
             return GetLog(className, className);

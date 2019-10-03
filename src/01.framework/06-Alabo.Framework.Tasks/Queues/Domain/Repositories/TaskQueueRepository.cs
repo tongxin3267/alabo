@@ -25,7 +25,9 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Repositories
             using (var reader = RepositoryContext.ExecuteDataReader(sql))
             {
                 var list = new List<TaskQueue>();
-                while (reader.Read()) list.Add(ReaderSingle(reader));
+                while (reader.Read()) {
+                    list.Add(ReaderSingle(reader));
+                }
 
                 return list;
             }

@@ -47,9 +47,11 @@ namespace Alabo.Industry.Shop.Orders.Job
                 foreach (var item in orders)
                 {
                     var ts = DateTime.Now.Subtract(item.CreateTime);
-                    if (item.OrderExtension == null || item.OrderExtension.ProductSkuItems == null) continue;
+                    if (item.OrderExtension == null || item.OrderExtension.ProductSkuItems == null) {
+                        continue;
+                    }
                     //待付款定时关闭
-                    if (item.OrderStatus == OrderStatus.WaitingBuyerPay)
+                    if (item.OrderStatus == OrderStatus.WaitingBuyerPay) {
                         if (ts.Hours >= orderConfig.OrderClosedHour)
                         {
                             item.OrderStatus = OrderStatus.Closed;
@@ -59,7 +61,9 @@ namespace Alabo.Industry.Shop.Orders.Job
                             //先获取skuId的list
                             var skuList = new List<long>();
 
-                            foreach (var view in item.OrderExtension.ProductSkuItems) skuList.Add(view.ProductSkuId);
+                            foreach (var view in item.OrderExtension.ProductSkuItems) {
+                                skuList.Add(view.ProductSkuId);
+                            }
                             //根据获取的skulist来获取数据 减少循环数量
                             var productSkus = scope.Resolve<IProductSkuService>().GetList(skuList);
                             foreach (var view in productSkus)
@@ -85,9 +89,10 @@ namespace Alabo.Industry.Shop.Orders.Job
 
                             scope.Resolve<IOrderActionService>().Add(orderAction);
                         }
+                    }
 
                     //待收货定时确认收货
-                    if (item.OrderStatus == OrderStatus.WaitingReceiptProduct)
+                    if (item.OrderStatus == OrderStatus.WaitingReceiptProduct) {
                         if (ts.Days >= orderConfig.OrderTakeDay)
                         {
                             item.OrderStatus = OrderStatus.WaitingEvaluated;
@@ -102,6 +107,7 @@ namespace Alabo.Industry.Shop.Orders.Job
 
                             scope.Resolve<IOrderActionService>().Add(orderAction);
                         }
+                    }
                 }
             }
 

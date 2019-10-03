@@ -23,7 +23,9 @@ namespace Alabo.Data.Things.Orders.ResultModel
 
         public ExecuteResult Update()
         {
-            if (ChangeAmount == 0) return ExecuteResult.Success();
+            if (ChangeAmount == 0) {
+                return ExecuteResult.Success();
+            }
 
             try
             {

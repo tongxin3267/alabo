@@ -76,21 +76,26 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Configs
                         Unit = item.GetFieldAttribute().Mark
                     };
                     var color = item.GetFieldAttribute().Selection;
-                    if (!color.IsNullOrEmpty())
+                    if (!color.IsNullOrEmpty()) {
                         config.BackGroudColor = (ColorLibrary) Enum.Parse(typeof(ColorLibrary), color);
+                    }
 
-                    if (item.GetFieldAttribute().SortOrder > 0) SortOrder = item.GetFieldAttribute().SortOrder;
+                    if (item.GetFieldAttribute().SortOrder > 0) {
+                        SortOrder = item.GetFieldAttribute().SortOrder;
+                    }
 
-                    if (config.Currency == Currency.Custom)
+                    if (config.Currency == Currency.Custom) {
                         config.Id = Guid.NewGuid();
-                    else
+                    } else {
                         config.Id = item.GetFieldAttribute().GuidId.ToGuid();
+                    }
 
                     config.Name = item.GetDisplayName();
-                    if (item.IsDefault())
+                    if (item.IsDefault()) {
                         config.Status = Status.Normal;
-                    else
+                    } else {
                         config.Status = Status.Freeze;
+                    }
 
                     configs.Add(config);
                 }

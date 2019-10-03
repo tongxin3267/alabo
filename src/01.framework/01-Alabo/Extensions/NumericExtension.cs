@@ -6,7 +6,9 @@ namespace Alabo.Extensions
     {
         public static string ToPercent(this decimal value, int place = 2)
         {
-            if (value > 1 || value < 0) return string.Empty;
+            if (value > 1 || value < 0) {
+                return string.Empty;
+            }
 
             return (value * 100).ToString($"f{place}") + "%";
         }
@@ -63,7 +65,9 @@ namespace Alabo.Extensions
         /// <param name="max_value">最大值（包含最大值）</param>
         public static int Restrict(this int v, int minValue, int maxValue)
         {
-            if (minValue > maxValue) throw new ArgumentOutOfRangeException("min_value cannot large than max_value");
+            if (minValue > maxValue) {
+                throw new ArgumentOutOfRangeException("min_value cannot large than max_value");
+            }
 
             return Math.Max(Math.Min(v, maxValue), minValue);
         }
@@ -76,7 +80,9 @@ namespace Alabo.Extensions
         /// <param name="max_value">最大值（包含最大值）</param>
         public static long Restrict(this long v, long minValue, long maxValue)
         {
-            if (minValue > maxValue) throw new ArgumentOutOfRangeException("min_value cannot large than max_value");
+            if (minValue > maxValue) {
+                throw new ArgumentOutOfRangeException("min_value cannot large than max_value");
+            }
 
             return Math.Max(Math.Min(v, maxValue), minValue);
         }
@@ -89,7 +95,9 @@ namespace Alabo.Extensions
         /// <param name="max_value">最大值（包含最大值）</param>
         public static float Restrict(this float v, float minValue, float maxValue)
         {
-            if (minValue > maxValue) throw new ArgumentOutOfRangeException("min_value cannot large than max_value");
+            if (minValue > maxValue) {
+                throw new ArgumentOutOfRangeException("min_value cannot large than max_value");
+            }
 
             return Math.Max(Math.Min(v, maxValue), minValue);
         }
@@ -102,7 +110,9 @@ namespace Alabo.Extensions
         /// <param name="max_value">最大值（包含最大值）</param>
         public static double Restrict(this double v, double minValue, double maxValue)
         {
-            if (minValue > maxValue) throw new ArgumentOutOfRangeException("min_value cannot large than max_value");
+            if (minValue > maxValue) {
+                throw new ArgumentOutOfRangeException("min_value cannot large than max_value");
+            }
 
             return Math.Max(Math.Min(v, maxValue), minValue);
         }
@@ -115,7 +125,9 @@ namespace Alabo.Extensions
         /// <param name="max_value">最大值（包含最大值）</param>
         public static decimal Restrict(this decimal v, decimal minValue, decimal maxValue)
         {
-            if (minValue > maxValue) throw new ArgumentOutOfRangeException("min_value cannot large than max_value");
+            if (minValue > maxValue) {
+                throw new ArgumentOutOfRangeException("min_value cannot large than max_value");
+            }
 
             return Math.Max(Math.Min(v, maxValue), minValue);
         }
@@ -204,7 +216,9 @@ namespace Alabo.Extensions
         public static decimal RoundDown(this decimal value, int retain)
         {
             var result = Math.Round(value, retain, MidpointRounding.AwayFromZero);
-            if (result > value) result -= (decimal)Math.Pow(10, -retain); //2 => 0.01
+            if (result > value) {
+                result -= (decimal)Math.Pow(10, -retain); //2 => 0.01
+            }
 
             return result;
         }
@@ -217,7 +231,9 @@ namespace Alabo.Extensions
         /// <param name="default_value">失败时返回的默认值</param>
         public static T ConvertToEnum<T>(this int value, T defaultValue) where T : struct, IConvertible
         {
-            if (!Enum.IsDefined(typeof(T), value)) return defaultValue;
+            if (!Enum.IsDefined(typeof(T), value)) {
+                return defaultValue;
+            }
 
             return (T)Enum.ToObject(typeof(T), value);
         }
@@ -230,7 +246,9 @@ namespace Alabo.Extensions
         /// <param name="default_value">失败时返回的默认值</param>
         public static T? ConvertToNullableEnum<T>(this int value) where T : struct, IConvertible
         {
-            if (!Enum.IsDefined(typeof(T), value)) return null;
+            if (!Enum.IsDefined(typeof(T), value)) {
+                return null;
+            }
 
             return (T)Enum.ToObject(typeof(T), value);
         }

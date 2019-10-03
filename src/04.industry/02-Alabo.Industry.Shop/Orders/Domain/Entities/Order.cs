@@ -143,7 +143,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Entities
             get
             {
                 var searSerial = $"9{Id.ToString().PadLeft(9, '0')}";
-                if (Id.ToString().Length == 10) searSerial = $"{Id.ToString()}";
+                if (Id.ToString().Length == 10) {
+                    searSerial = $"{Id.ToString()}";
+                }
 
                 return searSerial;
             }

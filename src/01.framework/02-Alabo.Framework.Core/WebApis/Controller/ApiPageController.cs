@@ -19,7 +19,10 @@ namespace Alabo.Framework.Core.WebApis.Controller
         [Display(Description = "动态Url分页查询")]
         public ApiResult<PageResult<TEntity>> QueryPageList([FromQuery] PagedInputDto parameter)
         {
-            if (BaseService == null) return ApiResult.Failure<PageResult<TEntity>>("请在控制器中定义BaseService");
+            if (BaseService == null) {
+                return ApiResult.Failure<PageResult<TEntity>>("请在控制器中定义BaseService");
+            }
+
             var dic = QueryDictionary();
             var result = BaseService.GetApiPagedList(dic.ToJson());
             return ApiResult.Success(result);

@@ -73,7 +73,9 @@ namespace Alabo.Schedules.Job
                     //get tenant and switch
                     var jobDataMap = context.JobDetail.JobDataMap;
                     var tenantName = jobDataMap.GetString(nameof(Tenant));
-                    if (!string.IsNullOrWhiteSpace(tenantName)) TenantContext.SwitchDatabase(scope, tenantName);
+                    if (!string.IsNullOrWhiteSpace(tenantName)) {
+                        TenantContext.SwitchDatabase(scope, tenantName);
+                    }
                     //execute
                     await Execute(context, scope);
                 }

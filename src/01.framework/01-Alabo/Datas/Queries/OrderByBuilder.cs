@@ -28,7 +28,9 @@ namespace Alabo.Datas.Queries
         /// <param name="desc">是否降序</param>
         public void Add(string name, bool desc = false)
         {
-            if (string.IsNullOrWhiteSpace(name)) return;
+            if (string.IsNullOrWhiteSpace(name)) {
+                return;
+            }
 
             _items.Add(new OrderByItem(name, desc));
         }

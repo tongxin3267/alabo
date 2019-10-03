@@ -15,7 +15,9 @@ namespace Alabo.Framework.Core.Enums
         {
             var dict = new Dictionary<int, string>();
             var arr = System.Enum.GetValues(enumType);
-            foreach (var v in arr) dict.Add((int)v, System.Enum.GetName(enumType, v));
+            foreach (var v in arr) {
+                dict.Add((int)v, System.Enum.GetName(enumType, v));
+            }
 
             return dict;
         }
@@ -24,7 +26,9 @@ namespace Alabo.Framework.Core.Enums
         {
             var dict = new Dictionary<long, string>();
             var arr = System.Enum.GetValues(enumType);
-            foreach (var v in arr) dict.Add((long)v, v.GetDisplayName());
+            foreach (var v in arr) {
+                dict.Add((long)v, v.GetDisplayName());
+            }
 
             return dict;
         }
@@ -37,7 +41,9 @@ namespace Alabo.Framework.Core.Enums
         {
             var dict = new Dictionary<long, string>();
             var arr = System.Enum.GetValues(enumType);
-            foreach (var v in arr) dict.Add((long)v, System.Enum.GetName(enumType, v));
+            foreach (var v in arr) {
+                dict.Add((long)v, System.Enum.GetName(enumType, v));
+            }
 
             return dict;
         }
@@ -50,7 +56,9 @@ namespace Alabo.Framework.Core.Enums
         {
             var dict = new Dictionary<short, string>();
             var arr = System.Enum.GetValues(enumType);
-            foreach (var v in arr) dict.Add((short)v, System.Enum.GetName(enumType, v));
+            foreach (var v in arr) {
+                dict.Add((short)v, System.Enum.GetName(enumType, v));
+            }
 
             return dict;
         }
@@ -63,7 +71,9 @@ namespace Alabo.Framework.Core.Enums
         {
             var dict = new Dictionary<object, string>();
             var arr = System.Enum.GetValues(enumType);
-            foreach (var v in arr) dict.Add(v, System.Enum.GetName(enumType, v));
+            foreach (var v in arr) {
+                dict.Add(v, System.Enum.GetName(enumType, v));
+            }
 
             return dict;
         }
@@ -77,12 +87,14 @@ namespace Alabo.Framework.Core.Enums
         {
             var sb = new StringBuilder();
             var arr = System.Enum.GetValues(enumType);
-            foreach (var v in arr)
-                if (v.ToString() == selectedValue.ToString())
+            foreach (var v in arr) {
+                if (v.ToString() == selectedValue.ToString()) {
                     sb.AppendFormat("<option value='{0}' selected='selected'>{1}</option>", v,
                         System.Enum.GetName(enumType, v));
-                else
+                } else {
                     sb.AppendFormat("<option value='{0}'>{1}</option>", v, v.GetDisplayName());
+                }
+            }
 
             return sb.ToString();
         }
@@ -95,7 +107,9 @@ namespace Alabo.Framework.Core.Enums
         {
             var sb = new StringBuilder();
             var arr = System.Enum.GetValues(enumType);
-            foreach (var v in arr) sb.AppendFormat("<option value='{0}'>{1}</option>", (T)v, v.GetDisplayName());
+            foreach (var v in arr) {
+                sb.AppendFormat("<option value='{0}'>{1}</option>", (T)v, v.GetDisplayName());
+            }
 
             return sb.ToString();
         }

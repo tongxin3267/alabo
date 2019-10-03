@@ -48,7 +48,9 @@ namespace Alabo.Cloud.People.UserTree.Domain.Service
                     $"SELECT TOP 30 Id FROM (SELECT  ROW_NUMBER() OVER (ORDER BY id  ) AS RowNumber,Id FROM User_User  ) as A WHERE RowNumber > {pageCount}*({i}-1)  ";
                 using (var reader = Repository<IUserTreeRepository>().RepositoryContext.ExecuteDataReader(sql))
                 {
-                    while (reader.Read()) userIds.Add(reader["Id"].ConvertToLong());
+                    while (reader.Read()) {
+                        userIds.Add(reader["Id"].ConvertToLong());
+                    }
                 }
 
                 foreach (var userId in userIds)
@@ -58,14 +60,16 @@ namespace Alabo.Cloud.People.UserTree.Domain.Service
                     var parentMap = userMap.ParentMap.ToObject<List<ParentMap>>();
                     if (user.ParentId == 0)
                     {
-                        if (parentMap.Count != 0)
+                        if (parentMap.Count != 0) {
                             return ServiceResult.FailedWithMessage($"会员{user.UserName},Id{user.Id}家谱图错误");
+                        }
                     }
                     else
                     {
                         var fristMap = parentMap.FirstOrDefault();
-                        if (fristMap == null || fristMap.UserId != user.ParentId)
+                        if (fristMap == null || fristMap.UserId != user.ParentId) {
                             return ServiceResult.FailedWithMessage($"会员{user.UserName},Id{user.Id}家谱图错误");
+                        }
                     }
                 }
             }
@@ -90,10 +94,14 @@ namespace Alabo.Cloud.People.UserTree.Domain.Service
                     $"SELECT TOP 30 Id FROM (SELECT  ROW_NUMBER() OVER (ORDER BY id  ) AS RowNumber,Id FROM User_User  ) as A WHERE RowNumber > {pageCount}*({i}-1)  ";
                 using (var reader = Repository<IUserTreeRepository>().RepositoryContext.ExecuteDataReader(sql))
                 {
-                    while (reader.Read()) userIds.Add(reader["Id"].ConvertToLong());
+                    while (reader.Read()) {
+                        userIds.Add(reader["Id"].ConvertToLong());
+                    }
                 }
 
-                foreach (var userId in userIds) UpdateMap(userId);
+                foreach (var userId in userIds) {
+                    UpdateMap(userId);
+                }
             }
         }
 

@@ -162,7 +162,9 @@ namespace Alabo.App.Share.OpenTasks.Parameter
             User shareUser, ShareBaseConfig config, TaskParameter parameter, long shareLevel = 0)
         {
             //如果分润金额小于等于0,则退出
-            if (shareAamount <= 0) return null;
+            if (shareAamount <= 0) {
+                return null;
+            }
 
             //判断用户是否满足type与grade要求，不满足则跳过当前用户
 

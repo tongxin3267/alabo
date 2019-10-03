@@ -85,11 +85,17 @@ namespace Alabo.Industry.Shop.Activitys.Modules.BuyPermision.Model
         public ServiceResult SetValueOfRule(object rules)
         {
             var model = rules.ToObject<BuyPermisionActivity>();
-            if (model == null) return ServiceResult.FailedWithMessage("活动规则数据异常");
-            if (model.SingleBuyCountMax > 0 && model.SingleBuyCountMin > model.SingleBuyCountMax)
+            if (model == null) {
+                return ServiceResult.FailedWithMessage("活动规则数据异常");
+            }
+
+            if (model.SingleBuyCountMax > 0 && model.SingleBuyCountMin > model.SingleBuyCountMax) {
                 return ServiceResult.FailedWithMessage("单次最低购买不能大于单次最多购买");
-            if (model.TotalBuyCountMax > 0 && model.TotalBuyCountMax < model.SingleBuyCountMax)
+            }
+
+            if (model.TotalBuyCountMax > 0 && model.TotalBuyCountMax < model.SingleBuyCountMax) {
                 return ServiceResult.FailedWithMessage("最多购买不能小于单次最多购买");
+            }
 
             return new ServiceResult(true);
         }

@@ -22,9 +22,11 @@ namespace Alabo.Industry.Shop.Categories.Domain.Services
         public ServiceResult AddOrUpdateOrDelete(CategoryProperty model, string fieldJson)
         {
             var fields = fieldJson.DeserializeJson<List<DataField>>();
-            foreach (var item in fields)
-                if (item.SortOrder.IsNullOrEmpty() || item.FieldName.IsNullOrEmpty())
+            foreach (var item in fields) {
+                if (item.SortOrder.IsNullOrEmpty() || item.FieldName.IsNullOrEmpty()) {
                     return ServiceResult.FailedWithMessage("属性值或者排序不能为空");
+                }
+            }
             //保存属性
             var result = ServiceResult.Success;
 
@@ -53,6 +55,7 @@ namespace Alabo.Industry.Shop.Categories.Domain.Services
             var updateList = new List<CategoryPropertyValue>();
 
             foreach (var item in fields) //名称为空不做处理
+{
                 if (!item.FieldName.IsNullOrEmpty())
                 {
                     if (Guid.TryParse(item.Key, out var valueId) && valueIds.Contains(valueId))
@@ -78,6 +81,7 @@ namespace Alabo.Industry.Shop.Categories.Domain.Services
                         addList.Add(propertyValue);
                     }
                 }
+            }
 
             //修改属性值
 
@@ -87,14 +91,18 @@ namespace Alabo.Industry.Shop.Categories.Domain.Services
 
             var filedKeys = fields.Select(r => r.Key).ToList();
             var fieldKeysGuid = new List<Guid>();
-            foreach (var item in filedKeys)
-                if (Guid.TryParse(item, out var valueId))
+            foreach (var item in filedKeys) {
+                if (Guid.TryParse(item, out var valueId)) {
                     fieldKeysGuid.Add(valueId);
+                }
+            }
 
             var valueDeleteIds = new List<Guid>();
-            foreach (var item in model.PropertyValues)
-                if (!fieldKeysGuid.Contains(item.Id))
+            foreach (var item in model.PropertyValues) {
+                if (!fieldKeysGuid.Contains(item.Id)) {
                     valueDeleteIds.Add(item.Id);
+                }
+            }
 
             #endregion 属性值删除
 
@@ -102,14 +110,19 @@ namespace Alabo.Industry.Shop.Categories.Domain.Services
             context.BeginTransaction();
             try
             {
-                if (valueDeleteIds.Count > 0)
+                if (valueDeleteIds.Count > 0) {
                     Resolve<ICategoryPropertyValueService>().Delete(r => valueDeleteIds.Any(e => e == r.Id));
+                }
 
-                if (updateList.Count > 0)
-                    foreach (var item in updateList)
+                if (updateList.Count > 0) {
+                    foreach (var item in updateList) {
                         Resolve<ICategoryPropertyValueService>().Update(item);
+                    }
+                }
 
-                if (addList.Count > 0) Resolve<ICategoryPropertyValueService>().AddMany(addList);
+                if (addList.Count > 0) {
+                    Resolve<ICategoryPropertyValueService>().AddMany(addList);
+                }
 
                 context.SaveChanges();
                 context.CommitTransaction();
@@ -131,20 +144,25 @@ namespace Alabo.Industry.Shop.Categories.Domain.Services
         {
             var categoryPropertys = Resolve<ICategoryPropertyService>()
                 .GetList(p => p.CategoryId == categoryId && p.IsSale == isSale).OrderBy(r => r.SortOrder).ToList();
-            if (categoryPropertys != null && categoryPropertys.Count() > 0)
+            if (categoryPropertys != null && categoryPropertys.Count() > 0) {
                 foreach (var categoryProperty in categoryPropertys)
                 {
                     var valueNames = string.Empty;
                     var categoryPropertyValues = Resolve<ICategoryPropertyValueService>()
                         .GetList(p => p.PropertyId == categoryProperty.Id).OrderBy(r => r.SortOrder).ToList();
-                    foreach (var categoryPropertyValue in categoryPropertyValues)
+                    foreach (var categoryPropertyValue in categoryPropertyValues) {
                         if (categoryPropertyValue != null && categoryPropertyValue.ValueName != null &&
-                            categoryPropertyValue.ValueName != "")
+                            categoryPropertyValue.ValueName != "") {
                             valueNames += categoryPropertyValue.ValueName + ",";
+                        }
+                    }
 
-                    if (valueNames.IndexOf(",") != -1) valueNames = valueNames.Substring(0, valueNames.Length - 1);
+                    if (valueNames.IndexOf(",") != -1) {
+                        valueNames = valueNames.Substring(0, valueNames.Length - 1);
+                    }
                     //  categoryProperty.ValuesName = valueNames;
                 }
+            }
 
             return categoryPropertys;
         }
@@ -152,9 +170,10 @@ namespace Alabo.Industry.Shop.Categories.Domain.Services
         public CategoryProperty GetSingle(Guid id, bool isSale)
         {
             var property = GetSingle(r => r.Id == id && r.IsSale == isSale);
-            if (property != null)
+            if (property != null) {
                 property.PropertyValues = Resolve<ICategoryPropertyValueService>()
                     .GetList(r => r.PropertyId == property.Id).OrderBy(r => r.SortOrder).ToList();
+            }
 
             return property;
         }

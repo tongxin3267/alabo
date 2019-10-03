@@ -20,15 +20,24 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         [Display(Description = "根据配置获取自动表单的值")]
         public ApiResult<object> Get([FromQuery] WidgetInput input)
         {
-            if (!this.IsFormValid()) return ApiResult.Failure<object>(this.FormInvalidReason());
+            if (!this.IsFormValid()) {
+                return ApiResult.Failure<object>(this.FormInvalidReason());
+            }
 
             var type = input.Type.GetTypeByName();
-            if (type == null) return ApiResult.Failure<object>($"类型{input.Type}不存在");
+            if (type == null) {
+                return ApiResult.Failure<object>($"类型{input.Type}不存在");
+            }
 
             if (!type.FullName.EndsWith("Widget") || !type.FullName.Contains("Widgets") || !type.FullName.Contains("UI")
-            ) return ApiResult.Failure<object>($"类型{input.Type}Widget的命名约定，不符合约定");
+            ) {
+                return ApiResult.Failure<object>($"类型{input.Type}Widget的命名约定，不符合约定");
+            }
+
             var find = input.Type.GetInstanceByName();
-            if (find == null) return ApiResult.Failure<object>($"类型{input.Type}不存在");
+            if (find == null) {
+                return ApiResult.Failure<object>($"类型{input.Type}不存在");
+            }
 
             if (find is IWidget set)
             {

@@ -22,9 +22,13 @@ namespace Alabo.Helpers
         {
             try
             {
-                if (path.IsNullOrEmpty()) throw new ValidException("路径不能为空");
+                if (path.IsNullOrEmpty()) {
+                    throw new ValidException("路径不能为空");
+                }
 
-                if (command.IsNullOrEmpty()) throw new ValidException("命令不能为空");
+                if (command.IsNullOrEmpty()) {
+                    throw new ValidException("命令不能为空");
+                }
                 //var realPath = FileHelper.WwwRootPath + path;
                 //FileHelper.CreateDirectory(path);
 

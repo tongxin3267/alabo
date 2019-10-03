@@ -18,7 +18,9 @@ namespace Alabo.Extensions
         /// <param name="input"></param>
         public static bool IsNull(this Guid input)
         {
-            if (input.ToString() == "00000000-0000-0000-0000-000000000000") return true;
+            if (input.ToString() == "00000000-0000-0000-0000-000000000000") {
+                return true;
+            }
 
             return false;
         }

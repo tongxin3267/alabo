@@ -24,7 +24,9 @@ namespace Alabo.Datas.Stores.Add.Mongo
 
         public TEntity GetSingle(object id)
         {
-            if (id.IsNullOrEmpty()) return null;
+            if (id.IsNullOrEmpty()) {
+                return null;
+            }
 
             return GetSingle(IdPredicate(id));
         }
@@ -55,7 +57,9 @@ namespace Alabo.Datas.Stores.Add.Mongo
         {
             var queryCriteria = new ExpressionQuery<TEntity>();
             queryCriteria.OrderBy(keySelector);
-            if (predicate != null) queryCriteria.And(predicate);
+            if (predicate != null) {
+                queryCriteria.And(predicate);
+            }
 
             var find = queryCriteria.Execute(Collection.AsQueryable());
             return find.FirstOrDefault();
@@ -71,7 +75,9 @@ namespace Alabo.Datas.Stores.Add.Mongo
         {
             var queryCriteria = new ExpressionQuery<TEntity>();
             queryCriteria.OrderByDescending(keySelector);
-            if (predicate != null) queryCriteria.And(predicate);
+            if (predicate != null) {
+                queryCriteria.And(predicate);
+            }
 
             var find = queryCriteria.Execute(Collection.AsQueryable());
             return find.FirstOrDefault();

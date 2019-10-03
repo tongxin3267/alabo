@@ -55,15 +55,18 @@ namespace Alabo.Data.People.Teams.Domain.Services
         {
             var grades = Resolve<IGradeService>().GetUserGradeList();
             var grade = grades.FirstOrDefault(r => r.Id == gradeId);
-            if (grade == null) throw new ValidException("等级Id传入出错");
+            if (grade == null) {
+                throw new ValidException("等级Id传入出错");
+            }
 
             // 所有上级用户
             var teamUser = GetParentUsers(userId);
             // 升级点高于当前等级的
-            if (equalUserGradeId)
+            if (equalUserGradeId) {
                 grades = grades.Where(r => r.Contribute >= grade.Contribute).ToList();
-            else
+            } else {
                 grades = grades.Where(r => r.Contribute > grade.Contribute).ToList();
+            }
 
             var result = new List<User>();
             foreach (var item in teamUser)
@@ -87,16 +90,19 @@ namespace Alabo.Data.People.Teams.Domain.Services
         {
             var grades = Resolve<IGradeService>().GetUserGradeList();
             var grade = grades.FirstOrDefault(r => r.Id == gradeId);
-            if (grade == null) throw new ValidException("等级Id传入出错");
+            if (grade == null) {
+                throw new ValidException("等级Id传入出错");
+            }
 
             var user = Resolve<IUserService>().GetSingle(userId);
             // 所有上级用户
             var teamUser = GetParentUsers(userId);
             // 升级点高于当前等级的
-            if (equalUserGradeId)
+            if (equalUserGradeId) {
                 grades = grades.Where(r => r.Contribute >= grade.Contribute).ToList();
-            else
+            } else {
                 grades = grades.Where(r => r.Contribute > grade.Contribute).ToList();
+            }
 
             long parentContribute = 0;
             var result = new List<User>();
@@ -104,7 +110,9 @@ namespace Alabo.Data.People.Teams.Domain.Services
             var contributeMin = grades.Min(u => u.Contribute);
             foreach (var item in teamUser)
             {
-                if (contributeMin >= 500000) return result;
+                if (contributeMin >= 500000) {
+                    return result;
+                }
 
                 var parentGrade = grades.FirstOrDefault(r => r.Id == item.GradeId);
 
@@ -121,11 +129,15 @@ namespace Alabo.Data.People.Teams.Domain.Services
                         }
                         else
                         {
-                            if (parentGrade.Contribute < 10000 && parentContribute < 10000) result.Add(item);
+                            if (parentGrade.Contribute < 10000 && parentContribute < 10000) {
+                                result.Add(item);
+                            }
                         }
 
                         //找到营业部停止
-                        if (parentGrade.Contribute >= 500000) return result;
+                        if (parentGrade.Contribute >= 500000) {
+                            return result;
+                        }
                     }
                     else
                     {
@@ -168,7 +180,9 @@ namespace Alabo.Data.People.Teams.Domain.Services
                 userIdStrings.ForEach(e =>
                 {
                     var userId = e.Trim().ConvertToLong(0);
-                    if (userId > 0) userIds.Add(userId);
+                    if (userId > 0) {
+                        userIds.Add(userId);
+                    }
                 });
                 var users = Resolve<IUserService>().GetList(userIds);
                 return users;
@@ -214,7 +228,9 @@ namespace Alabo.Data.People.Teams.Domain.Services
                 foreach (var item in parnetMap)
                 {
                     var user = users.FirstOrDefault(r => r.Id == item.UserId);
-                    if (user != null) resultList.Add(user);
+                    if (user != null) {
+                        resultList.Add(user);
+                    }
                 }
 
                 return resultList;
@@ -238,7 +254,9 @@ namespace Alabo.Data.People.Teams.Domain.Services
                 userIdStrings.ForEach(e =>
                 {
                     var idItem = e.Trim().ConvertToLong(0);
-                    if (idItem > 0) userIds.Add(idItem);
+                    if (idItem > 0) {
+                        userIds.Add(idItem);
+                    }
                 });
                 var users = Resolve<IUserService>().GetList(userIds);
                 return users;

@@ -35,7 +35,7 @@ namespace Alabo.Domains.Repositories.Mongo.Extension
         {
             if (objectType != typeof(ObjectId))
             {
-                if (objectType == typeof(Guid))
+                if (objectType == typeof(Guid)) {
                     try
                     {
                         return Guid.Parse(reader.Value.ToString());
@@ -44,12 +44,16 @@ namespace Alabo.Domains.Repositories.Mongo.Extension
                     {
                         return Guid.Empty;
                     }
+                }
 
-                if (objectType == typeof(short) || objectType == typeof(int) || objectType == typeof(long))
+                if (objectType == typeof(short) || objectType == typeof(int) || objectType == typeof(long)) {
                     return reader.Value.ConvertToLong(0);
+                }
             }
 
-            if (reader.ToString().IsNullOrEmpty()) return null;
+            if (reader.ToString().IsNullOrEmpty()) {
+                return null;
+            }
 
             try
             {

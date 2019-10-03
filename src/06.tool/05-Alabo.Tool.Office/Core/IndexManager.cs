@@ -29,8 +29,10 @@ namespace Alabo.Tool.Office.Core
         {
             var range = _list.First();
             var index = range.GetIndex(span);
-            if (range.IsEnd)
+            if (range.IsEnd) {
                 _list.Remove(range);
+            }
+
             return index;
         }
 
@@ -41,12 +43,13 @@ namespace Alabo.Tool.Office.Core
         /// <param name="span">跨度</param>
         public void AddIndex(int index, int span = 1)
         {
-            foreach (var range in _list)
+            foreach (var range in _list) {
                 if (range.Contains(index))
                 {
                     AddIndex(range, index, span);
                     return;
                 }
+            }
         }
 
         /// <summary>
@@ -55,8 +58,10 @@ namespace Alabo.Tool.Office.Core
         private void AddIndex(IndexRange range, int index, int span)
         {
             var newRange = range.Split(index, span);
-            if (newRange == null)
+            if (newRange == null) {
                 return;
+            }
+
             _list.Add(newRange);
         }
     }

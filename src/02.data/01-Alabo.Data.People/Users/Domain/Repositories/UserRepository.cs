@@ -45,7 +45,9 @@ namespace Alabo.Data.People.Users.Domain.Repositories
                 RepositoryContext.ExecuteDataReader(sql, RepositoryContext.CreateParameter("@Email", mail)))
             {
                 User user = null;
-                if (reader.Read()) user = ReadUser(reader);
+                if (reader.Read()) {
+                    user = ReadUser(reader);
+                }
 
                 return user;
             }
@@ -58,7 +60,9 @@ namespace Alabo.Data.People.Users.Domain.Repositories
                 RepositoryContext.ExecuteDataReader(sql, RepositoryContext.CreateParameter("@Mobile", mobile)))
             {
                 User user = null;
-                if (reader.Read()) user = ReadUser(reader);
+                if (reader.Read()) {
+                    user = ReadUser(reader);
+                }
 
                 return user;
             }
@@ -71,7 +75,9 @@ namespace Alabo.Data.People.Users.Domain.Repositories
                 RepositoryContext.ExecuteDataReader(sql, RepositoryContext.CreateParameter("@UserName", userName)))
             {
                 User user = null;
-                if (reader.Read()) user = ReadUser(reader);
+                if (reader.Read()) {
+                    user = ReadUser(reader);
+                }
 
                 return user;
             }
@@ -84,7 +90,9 @@ namespace Alabo.Data.People.Users.Domain.Repositories
                 RepositoryContext.ExecuteDataReader(sql, RepositoryContext.CreateParameter("@Id", userId)))
             {
                 User user = null;
-                if (reader.Read()) user = ReadUser(reader);
+                if (reader.Read()) {
+                    user = ReadUser(reader);
+                }
 
                 return user;
             }
@@ -99,7 +107,9 @@ namespace Alabo.Data.People.Users.Domain.Repositories
                 RepositoryContext.ExecuteDataReader(sql, RepositoryContext.CreateParameter("@Id", userId)))
             {
                 User user = null;
-                if (reader.Read()) user = ReadUser(reader);
+                if (reader.Read()) {
+                    user = ReadUser(reader);
+                }
 
                 return user;
             }
@@ -155,7 +165,9 @@ namespace Alabo.Data.People.Users.Domain.Repositories
         {
             var sql = "select count(Id) from User_User where UserName=@UserName";
             var result = RepositoryContext.ExecuteScalar(sql, RepositoryContext.CreateParameter("@UserName", name));
-            if (result == null || result == DBNull.Value) return false;
+            if (result == null || result == DBNull.Value) {
+                return false;
+            }
 
             return Convert.ToInt64(result) > 0;
         }
@@ -164,7 +176,9 @@ namespace Alabo.Data.People.Users.Domain.Repositories
         {
             var sql = "select count(Id) from User_User where EMail=@EMail";
             var result = RepositoryContext.ExecuteScalar(sql, RepositoryContext.CreateParameter("@EMail", mail));
-            if (result == null || result == DBNull.Value) return false;
+            if (result == null || result == DBNull.Value) {
+                return false;
+            }
 
             return Convert.ToInt64(result) > 0;
         }
@@ -173,7 +187,9 @@ namespace Alabo.Data.People.Users.Domain.Repositories
         {
             var sql = "select count(Id) from User_User where Mobile=@mobile";
             var result = RepositoryContext.ExecuteScalar(sql, RepositoryContext.CreateParameter("@mobile", mobile));
-            if (result == null || result == DBNull.Value) return false;
+            if (result == null || result == DBNull.Value) {
+                return false;
+            }
 
             return Convert.ToInt64(result) > 0;
         }
@@ -181,7 +197,9 @@ namespace Alabo.Data.People.Users.Domain.Repositories
         [Obsolete("the Transation has bug")]
         public User Add(User user, List<MoneyTypeConfig> moneyTypes)
         {
-            if (user == null) throw new ArgumentNullException("user");
+            if (user == null) {
+                throw new ArgumentNullException("user");
+            }
 
             var sql =
                 "INSERT INTO dbo.User_User ([Name], [Email], [Mobile], [UserName],[Status],[GradeId],[ParentId] ) VALUES  (@Name,@Email,@Mobile,@UserName ,@Status,@GradeId,@ParentId); select @@identity;";
@@ -201,7 +219,9 @@ namespace Alabo.Data.People.Users.Domain.Repositories
                 try
                 {
                     var result = Convert.ToInt64(RepositoryContext.ExecuteScalar(transaction, sql, parameters));
-                    if (result != 0) user.Id = Convert.ToInt64(result);
+                    if (result != 0) {
+                        user.Id = Convert.ToInt64(result);
+                    }
 
                     user.Map.UserId = user.Id;
                     user.Map = AddUserMap(transaction, user.Map);
@@ -226,7 +246,9 @@ namespace Alabo.Data.People.Users.Domain.Repositories
 
         public bool UpdateSingle(User model)
         {
-            if (model == null) throw new ArgumentNullException("model");
+            if (model == null) {
+                throw new ArgumentNullException("model");
+            }
 
             var sql =
                 "UPDATE dbo.User_User SET Name=@Name, Email=@Email, Mobile=@Mobile, Status=@Status,GradeId=@GradeId WHERE Id=@Id";
@@ -240,7 +262,9 @@ namespace Alabo.Data.People.Users.Domain.Repositories
                 RepositoryContext.CreateParameter("@Id", model.Id)
             };
             var count = RepositoryContext.ExecuteNonQuery(sql, parameters);
-            if (count > 0) return true;
+            if (count > 0) {
+                return true;
+            }
 
             return false;
         }
@@ -261,35 +285,55 @@ namespace Alabo.Data.People.Users.Domain.Repositories
                 $"delete from [User_UserDetail] where UserId={userId};"
             };
             var count = RepositoryContext.ExecuteSqlList(sqlList);
-            if (count > 0) return true;
+            if (count > 0) {
+                return true;
+            }
 
             return false;
         }
 
         public IList<User> GetViewUserList(UserInput userInput, out long count)
         {
-            if (userInput.PageIndex < 0)
+            if (userInput.PageIndex < 0) {
                 throw new ArgumentNullException("pageIndex", "pageindex has to be greater than 1");
+            }
 
-            if (userInput.PageSize > 100) userInput.PageSize = 100;
+            if (userInput.PageSize > 100) {
+                userInput.PageSize = 100;
+            }
 
             var sqlWhere = string.Empty;
-            if (Convert.ToInt16(userInput.Status) > 0) sqlWhere = $"{sqlWhere} AND Status={(int)userInput.Status}";
+            if (Convert.ToInt16(userInput.Status) > 0) {
+                sqlWhere = $"{sqlWhere} AND Status={(int)userInput.Status}";
+            }
 
-            if (userInput.ParentId > 0) sqlWhere = $"{sqlWhere} AND ParentId={userInput.ParentId}";
+            if (userInput.ParentId > 0) {
+                sqlWhere = $"{sqlWhere} AND ParentId={userInput.ParentId}";
+            }
 
-            if (!userInput.Email.IsNullOrEmpty()) sqlWhere = $"{sqlWhere} AND Email= '{userInput.Email}' ";
+            if (!userInput.Email.IsNullOrEmpty()) {
+                sqlWhere = $"{sqlWhere} AND Email= '{userInput.Email}' ";
+            }
 
-            if (!userInput.Mobile.IsNullOrEmpty()) sqlWhere = $"{sqlWhere} AND Mobile= '{userInput.Mobile}' ";
+            if (!userInput.Mobile.IsNullOrEmpty()) {
+                sqlWhere = $"{sqlWhere} AND Mobile= '{userInput.Mobile}' ";
+            }
 
-            if (!userInput.UserName.IsNullOrEmpty()) sqlWhere = $"{sqlWhere} AND UserName='{userInput.UserName}' ";
+            if (!userInput.UserName.IsNullOrEmpty()) {
+                sqlWhere = $"{sqlWhere} AND UserName='{userInput.UserName}' ";
+            }
 
-            if (!userInput.Name.IsNullOrEmpty()) sqlWhere = $"{sqlWhere} AND Name='{userInput.Name}'";
+            if (!userInput.Name.IsNullOrEmpty()) {
+                sqlWhere = $"{sqlWhere} AND Name='{userInput.Name}'";
+            }
 
-            if (!userInput.GradeId.IsGuidNullOrEmpty()) sqlWhere = $"{sqlWhere} AND GradeId='{userInput.GradeId}'";
+            if (!userInput.GradeId.IsGuidNullOrEmpty()) {
+                sqlWhere = $"{sqlWhere} AND GradeId='{userInput.GradeId}'";
+            }
 
-            if (userInput.ServiceCenterId > 0)
+            if (userInput.ServiceCenterId > 0) {
                 sqlWhere = $"{sqlWhere} AND ServiceCenterUserId={userInput.ServiceCenterId}";
+            }
 
             var sqlCount = $"SELECT COUNT(Id) [Count] FROM User_User where 1=1 {sqlWhere}";
             count = RepositoryContext.ExecuteScalar(sqlCount)?.ConvertToLong() ?? 0;
@@ -301,7 +345,9 @@ namespace Alabo.Data.People.Users.Domain.Repositories
                         WHERE RowNumber > {userInput.PageSize}*({userInput.PageIndex}-1)  ";
             using (var dr = RepositoryContext.ExecuteDataReader(sql))
             {
-                while (dr.Read()) result.Add(ReadUser(dr));
+                while (dr.Read()) {
+                    result.Add(ReadUser(dr));
+                }
             }
 
             return result;
@@ -313,7 +359,9 @@ namespace Alabo.Data.People.Users.Domain.Repositories
             var result = new List<User>();
             using (var reader = RepositoryContext.ExecuteDataReader(sql))
             {
-                while (reader.Read()) result.Add(ReadUser(reader));
+                while (reader.Read()) {
+                    result.Add(ReadUser(reader));
+                }
 
                 return result;
             }
@@ -330,7 +378,9 @@ namespace Alabo.Data.People.Users.Domain.Repositories
         {
             var sql = $" update  user_user set parentId={parentId} where Id in ({userIds.ToSqlString()})";
             var result = RepositoryContext.ExecuteNonQuery(sql);
-            if (result > 0) return true;
+            if (result > 0) {
+                return true;
+            }
 
             return false;
         }
@@ -387,7 +437,9 @@ namespace Alabo.Data.People.Users.Domain.Repositories
 
         private UserDetail AddUserDetail(DbTransaction transaction, UserDetail userDetail)
         {
-            if (userDetail == null) throw new ArgumentNullException("userDetail");
+            if (userDetail == null) {
+                throw new ArgumentNullException("userDetail");
+            }
 
             var sql = @"INSERT INTO [dbo].[User_UserDetail]
            ([UserId],[Password],[PayPassword] ,
@@ -428,14 +480,18 @@ namespace Alabo.Data.People.Users.Domain.Repositories
             };
 
             var result = RepositoryContext.ExecuteScalar(transaction, sql, parameters);
-            if (result != null && result != DBNull.Value) userDetail.Id = Convert.ToInt64(result);
+            if (result != null && result != DBNull.Value) {
+                userDetail.Id = Convert.ToInt64(result);
+            }
 
             return userDetail;
         }
 
         private UserMap AddUserMap(DbTransaction transaction, UserMap userMap)
         {
-            if (userMap == null) throw new ArgumentNullException("userMap");
+            if (userMap == null) {
+                throw new ArgumentNullException("userMap");
+            }
 
             var sql = @"INSERT INTO [dbo].[User_UserMap]
                ([UserId] ,[LevelNumber],[TeamNumber],[ChildNode],[ParentMap])
@@ -450,7 +506,9 @@ namespace Alabo.Data.People.Users.Domain.Repositories
             };
 
             var result = RepositoryContext.ExecuteScalar(transaction, sql, parameters);
-            if (result != null && result != DBNull.Value) userMap.Id = Convert.ToInt64(result);
+            if (result != null && result != DBNull.Value) {
+                userMap.Id = Convert.ToInt64(result);
+            }
 
             return userMap;
         }

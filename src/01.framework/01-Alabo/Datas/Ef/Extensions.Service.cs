@@ -57,11 +57,17 @@ namespace Alabo.Datas.Ef
         private static DatabaseType GetDbType<TUnitOfWork>()
         {
             var type = typeof(TUnitOfWork).BaseType;
-            if (type == typeof(MsSqlUnitOfWork)) return DatabaseType.SqlServer;
+            if (type == typeof(MsSqlUnitOfWork)) {
+                return DatabaseType.SqlServer;
+            }
 
-            if (type == typeof(MySqlUnitOfWork)) return DatabaseType.MySql;
+            if (type == typeof(MySqlUnitOfWork)) {
+                return DatabaseType.MySql;
+            }
 
-            if (type == typeof(PgSqlUnitOfWork)) return DatabaseType.PgSql;
+            if (type == typeof(PgSqlUnitOfWork)) {
+                return DatabaseType.PgSql;
+            }
 
             return DatabaseType.SqlServer;
         }

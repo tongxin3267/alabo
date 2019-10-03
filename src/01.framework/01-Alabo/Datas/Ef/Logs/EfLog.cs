@@ -62,7 +62,9 @@ namespace Alabo.Datas.Ef.Logs
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception,
             Func<TState, Exception, string> formatter)
         {
-            if (IsEnabled(eventId) == false) return;
+            if (IsEnabled(eventId) == false) {
+                return;
+            }
 
             _log.Caption($"执行Ef操作：{_category}")
                 .Content($"工作单元跟踪号: {_unitOfWork.TraceId.ToString()}")
@@ -94,11 +96,17 @@ namespace Alabo.Datas.Ef.Logs
         /// </summary>
         private bool IsEnabled(EventId eventId)
         {
-            if (EfConfig.LogLevel == EfLogLevel.Off) return false;
+            if (EfConfig.LogLevel == EfLogLevel.Off) {
+                return false;
+            }
 
-            if (EfConfig.LogLevel == EfLogLevel.All) return true;
+            if (EfConfig.LogLevel == EfLogLevel.All) {
+                return true;
+            }
 
-            if (eventId.Name == "Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted") return true;
+            if (eventId.Name == "Microsoft.EntityFrameworkCore.Database.Command.CommandExecuted") {
+                return true;
+            }
 
             return false;
         }
@@ -108,14 +116,18 @@ namespace Alabo.Datas.Ef.Logs
         /// </summary>
         private void AddContent<TState>(TState state)
         {
-            if (EfConfig.LogLevel == EfLogLevel.All)
+            if (EfConfig.LogLevel == EfLogLevel.All) {
                 _log.Content("事件内容：").Content(Alabo.Extensions.Extensions.SafeString(state));
+            }
 
-            if (!(state is IEnumerable list)) return;
+            if (!(state is IEnumerable list)) {
+                return;
+            }
 
             var dictionary = new Dictionary<string, string>();
-            foreach (KeyValuePair<string, object> item in list)
+            foreach (KeyValuePair<string, object> item in list) {
                 dictionary.Add(item.Key, Alabo.Extensions.Extensions.SafeString(item.Value));
+            }
 
             AddDictionary(dictionary);
         }
@@ -136,7 +148,9 @@ namespace Alabo.Datas.Ef.Logs
         /// </summary>
         private string GetValue(IDictionary<string, string> dictionary, string key)
         {
-            if (dictionary.ContainsKey(key)) return dictionary[key];
+            if (dictionary.ContainsKey(key)) {
+                return dictionary[key];
+            }
 
             return string.Empty;
         }
@@ -146,7 +160,9 @@ namespace Alabo.Datas.Ef.Logs
         /// </summary>
         private void AddElapsed(string value)
         {
-            if (string.IsNullOrWhiteSpace(value)) return;
+            if (string.IsNullOrWhiteSpace(value)) {
+                return;
+            }
 
             _log.Content($"执行时间: {value} 毫秒");
         }
@@ -156,7 +172,9 @@ namespace Alabo.Datas.Ef.Logs
         /// </summary>
         private void AddSql(string sql, string sqlParams)
         {
-            if (string.IsNullOrWhiteSpace(sql)) return;
+            if (string.IsNullOrWhiteSpace(sql)) {
+                return;
+            }
 
             _log.Sql("原始Sql: ").Sql($"{sql}{Common.Line}");
             sql = sql.Replace("SET NOCOUNT ON;", "");
@@ -168,7 +186,9 @@ namespace Alabo.Datas.Ef.Logs
         /// </summary>
         private void AddSqlParams(string value)
         {
-            if (string.IsNullOrWhiteSpace(value)) return;
+            if (string.IsNullOrWhiteSpace(value)) {
+                return;
+            }
 
             _log.SqlParams(value);
         }
@@ -179,7 +199,9 @@ namespace Alabo.Datas.Ef.Logs
         public static string GetSql(string sql, string sqlParams)
         {
             var parameters = GetSqlParameters(sqlParams);
-            foreach (var parameter in parameters) sql = Regex.Replace(sql, $@"{parameter.Key}\b", parameter.Value);
+            foreach (var parameter in parameters) {
+                sql = Regex.Replace(sql, $@"{parameter.Key}\b", parameter.Value);
+            }
 
             return sql;
         }
@@ -192,11 +214,15 @@ namespace Alabo.Datas.Ef.Logs
         {
             var result = new Dictionary<string, string>();
             var paramName = GetParamName(sqlParams);
-            if (string.IsNullOrWhiteSpace(paramName)) return result;
+            if (string.IsNullOrWhiteSpace(paramName)) {
+                return result;
+            }
 
             var pattern = $@",\s*?{paramName}";
             var parameters = Regex.Split(sqlParams, pattern);
-            foreach (var parameter in parameters) AddParameter(result, parameter, paramName);
+            foreach (var parameter in parameters) {
+                AddParameter(result, parameter, paramName);
+            }
 
             return result;
         }
@@ -217,7 +243,9 @@ namespace Alabo.Datas.Ef.Logs
         {
             var pattern = $@"(?:{paramName})?(\d+)='(.*)'(.*)";
             var values = Regex.GetValues(parameter, pattern, new[] { "$1", "$2", "$3" }).Select(t => t.Value).ToList();
-            if (values.Count != 3) return;
+            if (values.Count != 3) {
+                return;
+            }
 
             result.Add($"{paramName}{values[0]}", GetValue(values[1], values[2]));
         }
@@ -229,7 +257,9 @@ namespace Alabo.Datas.Ef.Logs
         {
             value = Alabo.Extensions.Extensions.SafeString(value);
             parameter = Alabo.Extensions.Extensions.SafeString(parameter);
-            if (string.IsNullOrWhiteSpace(value) && parameter.Contains("DbType = Guid")) return "null";
+            if (string.IsNullOrWhiteSpace(value) && parameter.Contains("DbType = Guid")) {
+                return "null";
+            }
 
             return $"'{value}'";
         }

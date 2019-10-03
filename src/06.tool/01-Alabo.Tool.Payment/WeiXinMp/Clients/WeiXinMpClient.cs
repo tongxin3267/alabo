@@ -15,7 +15,9 @@ namespace Alabo.Tool.Payment.WeiXinMp.Clients
         public JsApiTicketResult GetTicketByAccessToken()
         {
             var token = Ioc.Resolve<IWeixinMpClient>().GetToken();
-            if (token == null) throw new ValidException("access_token获取失败");
+            if (token == null) {
+                throw new ValidException("access_token获取失败");
+            }
 
             if (token.access_token.IsNullOrEmpty())
             {

@@ -70,9 +70,13 @@ namespace Alabo.Data.People.Users.UI.AutoFrom
             if (!view.RecName.IsNullOrEmpty())
             {
                 var parentUser = Resolve<IUserService>().GetSingle(view.RecName.Trim());
-                if (parentUser == null) return ServiceResult.FailedMessage("推荐人不存在,请重新输入");
+                if (parentUser == null) {
+                    return ServiceResult.FailedMessage("推荐人不存在,请重新输入");
+                }
 
-                if (parentUser.Status != Status.Normal) return ServiceResult.FailedMessage("推荐人状态不正常，不能作为推荐人");
+                if (parentUser.Status != Status.Normal) {
+                    return ServiceResult.FailedMessage("推荐人状态不正常，不能作为推荐人");
+                }
 
                 user.ParentId = parentUser.Id;
             }

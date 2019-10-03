@@ -68,7 +68,9 @@ namespace Alabo.Data.People.Users
             defaultUser.Map = new UserMap();
             //save admin user
             var userService = Ioc.Resolve<IUserService>();
-            if (!userService.ExistsUserName(defaultUser.UserName)) defaultUser = userService.AddUser(defaultUser);
+            if (!userService.ExistsUserName(defaultUser.UserName)) {
+                defaultUser = userService.AddUser(defaultUser);
+            }
 
             //add platform user
             var planformUser = new User
@@ -91,7 +93,10 @@ namespace Alabo.Data.People.Users
             planformUser.Map = new UserMap();
 
             //save platform user
-            if (!userService.ExistsUserName(planformUser.UserName)) planformUser = userService.AddUser(planformUser);
+            if (!userService.ExistsUserName(planformUser.UserName)) {
+                planformUser = userService.AddUser(planformUser);
+            }
+
             userService.Log("初始化化系统管理员成功，请尽快修改您的登录信息");
             userService.Log("初始化化系统平台用户成功，请尽快修改您的登录信息");
             try

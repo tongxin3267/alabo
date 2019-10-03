@@ -19,12 +19,13 @@ namespace Alabo.Industry.Shop.Products.Schedules
 
             // 更新Sku价格，只有在更新货币类型和商城类型的时候，才更新数据库
             var productPriceScheduleKey = "ProductPriceSchedule";
-            if (scope.Resolve<IObjectCache>().TryGet(productPriceScheduleKey, out bool result))
+            if (scope.Resolve<IObjectCache>().TryGet(productPriceScheduleKey, out bool result)) {
                 if (result)
                 {
                     productSkuService.AutoUpdateSkuPrice();
                     scope.Resolve<IObjectCache>().Set(productPriceScheduleKey, false);
                 }
+            }
         }
     }
 }

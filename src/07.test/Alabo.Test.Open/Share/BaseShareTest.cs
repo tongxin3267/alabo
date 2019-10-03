@@ -18,22 +18,26 @@ namespace Alabo.Test.Open.Share
         {
             var shareOrder = Resolve<IShareOrderService>().GetSingle(r => r.Id == queueId);
 
-            if (shareOrder == null)
+            if (shareOrder == null) {
                 throw new MessageQueueHandleException(queueId, $"shareOrder queue with id {queueId} not found.");
+            }
 
             try
             {
-                if (shareOrder.Status != ShareOrderStatus.Pending)
+                if (shareOrder.Status != ShareOrderStatus.Pending) {
                     throw new MessageQueueHandleException(queueId, "分润订单状态不是待处理状态");
+                }
 
                 var moduleTypeArray = taskManager.GetModulePriceArray();
-                foreach (var type in moduleTypeArray)
-                    if (shareOrder.TriggerType == TriggerType.Order)
+                foreach (var type in moduleTypeArray) {
+                    if (shareOrder.TriggerType == TriggerType.Order) {
                         taskActuator.ExecuteTask(type, shareOrder,
                             new {ShareOrderId = queueId, shareOrder.TriggerType, OrderId = shareOrder.EntityId});
-                    else
+                    } else {
                         taskActuator.ExecuteTask(type, shareOrder,
                             new {ShareOrderId = queueId, shareOrder.TriggerType, BaseFenRunAmount = shareOrder.Amount});
+                    }
+                }
 
                 //更新成功
                 Resolve<IShareOrderService>().Update(r =>

@@ -35,7 +35,9 @@ namespace Alabo.Data.People.Users.UI.AutoFrom
             if (id.ToString().ToObjectId() != ObjectId.Empty)
             {
                 var model = Resolve<IUserAddressService>().GetSingle(id);
-                if (model == null) result = ToAutoForm(new UserAddressAutoFrom());
+                if (model == null) {
+                    result = ToAutoForm(new UserAddressAutoFrom());
+                }
 
                 var resultModel = model.MapTo<UserAddressAutoFrom>();
                 resultModel.RootUserId = model.UserId;
@@ -89,7 +91,10 @@ namespace Alabo.Data.People.Users.UI.AutoFrom
             var dic = HttpWeb.HttpContext.ToDictionary();
             //dic = dic.RemoveKey("type");// 移除该type否则无法正常lambda
             var id = autoModel.BasicUser.Id;
-            if (dic.TryGetValue("id", out var userid)) id = userid.ConvertToLong();
+            if (dic.TryGetValue("id", out var userid)) {
+                id = userid.ConvertToLong();
+            }
+
             var result = Resolve<IUserAddressService>().GetAllList(id);
 
             return ToPageResult(result.MapTo<PagedList<UserAddressAutoFrom>>());

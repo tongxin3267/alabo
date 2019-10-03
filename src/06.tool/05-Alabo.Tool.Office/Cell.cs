@@ -43,8 +43,10 @@ namespace Alabo.Tool.Office
             get => _columnSpan;
             set
             {
-                if (value < 1)
+                if (value < 1) {
                     value = 1;
+                }
+
                 _columnSpan = value;
             }
         }
@@ -57,8 +59,10 @@ namespace Alabo.Tool.Office
             get => _rowSpan;
             set
             {
-                if (value < 1)
+                if (value < 1) {
                     value = 1;
+                }
+
                 _rowSpan = value;
             }
         }

@@ -23,24 +23,35 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         public string CreateImage(Product product, List<string> images)
         {
             var list = new List<ProductThum>();
-            if (images.IsNullOrEmpty()) return list.ToJson();
+            if (images.IsNullOrEmpty()) {
+                return list.ToJson();
+            }
 
             var config = Resolve<IAutoConfigService>().GetValue<ProductConfig>();
-            if (config.WidthThanHeight <= 0) throw new InvalidOperationException("缩略图高宽比例必须>0.");
+            if (config.WidthThanHeight <= 0) {
+                throw new InvalidOperationException("缩略图高宽比例必须>0.");
+            }
 
-            if (config.ThumbnailWidth <= 0) throw new InvalidOperationException("列表页缩略图宽度必须>0.");
+            if (config.ThumbnailWidth <= 0) {
+                throw new InvalidOperationException("列表页缩略图宽度必须>0.");
+            }
 
-            if (config.ShowCaseWidth <= 0) throw new InvalidOperationException("详情页橱窗图宽度必须>0.");
+            if (config.ShowCaseWidth <= 0) {
+                throw new InvalidOperationException("详情页橱窗图宽度必须>0.");
+            }
 
             var i = 0;
-            foreach (var item in images)
+            foreach (var item in images) {
                 if (!item.IsNullOrEmpty())
                 {
                     var savePath = "";
                     var thum = new ProductThum();
                     var originalPath = "";
                     var suffixIndex = item.LastIndexOf(".", StringComparison.Ordinal);
-                    if (suffixIndex < 0) continue;
+                    if (suffixIndex < 0) {
+                        continue;
+                    }
+
                     var suffix = item.Substring(suffixIndex, item.Length - suffixIndex); //后缀名
                     if (item.Contains("X") || item.StartsWith("http")) //如果不是新增，上送的图片会带有X,处理为原图片
                     {
@@ -67,7 +78,9 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                         savePath = Path.Combine(FileHelper.RootPath, thum.ThumbnailUrl.TrimStart('/'));
                         //替换第二个路径前的/，避免生成相对路径
                         if (!File.Exists(savePath)) //图片不存在才处理
+{
                             ImageHelper.ImageCompression(originalPath, savePath, width, height); //改成绝对路径
+                        }
 
                         //详情页图片处理
                         width = decimal.ToInt16(config.ShowCaseWidth); //宽度
@@ -76,7 +89,9 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                         savePath = Path.Combine(FileHelper.RootPath, thum.ShowCaseUrl.TrimStart('/'));
                         //替换第二个路径前的/，避免生成相对路径
                         if (!File.Exists(savePath)) //图片不存在才处理
+{
                             ImageHelper.ImageCompression(originalPath, savePath, width, height); //改成绝对路径
+                        }
                     }
 
                     //生成小图片
@@ -87,13 +102,16 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                         savePath = Path.Combine(FileHelper.RootPath,
                             product.SmallUrl.TrimStart('/')); //替换第二个路径前的/，避免生成相对路径
                         if (!File.Exists(savePath)) //图片不存在才处理
+{
                             ImageHelper.ImageCompression(originalPath, savePath, 50, 50); //改成绝对路径
+                        }
 
                         i++;
                     }
 
                     list.Add(thum);
                 }
+            }
 
             return list.ToJson();
         }

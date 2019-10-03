@@ -58,7 +58,9 @@ namespace Alabo.Logging.Core
         /// <param name="action">设置内容操作</param>
         public ILog Set<T>(Action<T> action) where T : ILogContent
         {
-            if (action == null) throw new ArgumentNullException(nameof(action));
+            if (action == null) {
+                throw new ArgumentNullException(nameof(action));
+            }
 
             ILogContent content = LogContent;
             action((T)content);
@@ -217,9 +219,13 @@ namespace Alabo.Logging.Core
         /// </summary>
         private void Execute(LogLevel level, ref TContent content)
         {
-            if (content == null) return;
+            if (content == null) {
+                return;
+            }
 
-            if (Enabled(level) == false) return;
+            if (Enabled(level) == false) {
+                return;
+            }
 
             try
             {
@@ -238,7 +244,9 @@ namespace Alabo.Logging.Core
         /// </summary>
         private bool Enabled(LogLevel level)
         {
-            if (level > LogLevel.Debug) return true;
+            if (level > LogLevel.Debug) {
+                return true;
+            }
 
             return IsDebugEnabled || IsTraceEnabled && level == LogLevel.Trace;
         }

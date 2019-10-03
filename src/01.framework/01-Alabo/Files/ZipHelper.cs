@@ -24,13 +24,19 @@ namespace Alabo.Files
         /// <param name="fileName"></param>
         public static bool Zip(string path, string fileName)
         {
-            if (path.IsNullOrEmpty()) return false;
+            if (path.IsNullOrEmpty()) {
+                return false;
+            }
 
             path = path.IndexOf(':') > 0 ? path : $"{Widgets}/{path}";
-            if (!Directory.Exists(path)) return false;
+            if (!Directory.Exists(path)) {
+                return false;
+            }
 
             fileName = fileName.EndsWith(".zip", StringComparison.OrdinalIgnoreCase) ? fileName : $"{fileName}.zip";
-            if (File.Exists(fileName)) File.Delete(fileName);
+            if (File.Exists(fileName)) {
+                File.Delete(fileName);
+            }
 
             ZipFile.CreateFromDirectory(path, fileName, CompressionLevel.Optimal, true, Encoding.GetEncoding("GBK"));
             return true;
@@ -45,10 +51,14 @@ namespace Alabo.Files
         public static bool UnZip(string name, string path, byte[] buffer)
         {
             var zip = Path.Combine(Packages, $"{name}.zip");
-            if (ServiceResult.Success != FileHelper.Write(zip, buffer)) return false;
+            if (ServiceResult.Success != FileHelper.Write(zip, buffer)) {
+                return false;
+            }
 
             var extraTemp = Path.Combine(Temp, Path.GetFileName(path));
-            if (Directory.Exists(extraTemp)) Directory.Delete(extraTemp, true);
+            if (Directory.Exists(extraTemp)) {
+                Directory.Delete(extraTemp, true);
+            }
 
             ZipFile.ExtractToDirectory(zip, Temp, Encoding.GetEncoding("GBK"));
 
@@ -72,13 +82,17 @@ namespace Alabo.Files
 
             Action<string[], string> copy = (files, target) =>
             {
-                foreach (var file in files) FileHelper.Copy(file, target);
+                foreach (var file in files) {
+                    FileHelper.Copy(file, target);
+                }
             };
-            if (!Directory.Exists(targetBin) && ServiceResult.Success != FileHelper.CreateDirectory(targetBin))
+            if (!Directory.Exists(targetBin) && ServiceResult.Success != FileHelper.CreateDirectory(targetBin)) {
                 throw new ValidException("Copy files to target failed.");
+            }
 
-            if (!Directory.Exists(targetView) && ServiceResult.Success != FileHelper.CreateDirectory(targetView))
+            if (!Directory.Exists(targetView) && ServiceResult.Success != FileHelper.CreateDirectory(targetView)) {
                 throw new ValidException("Copy files to target failed.");
+            }
 
             copy(dlls, targetBin);
             copy(cshtmls, targetView);

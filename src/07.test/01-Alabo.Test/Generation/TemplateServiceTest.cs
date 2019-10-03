@@ -21,8 +21,9 @@ namespace Alabo.Test.Generation
 
         private static string GetFromCache(string text, string serviceModel)
         {
-            if (text.IndexOf(@"[TestMethod(""GetSingleFromCache_Test"")]", StringComparison.OrdinalIgnoreCase) != -1)
+            if (text.IndexOf(@"[TestMethod(""GetSingleFromCache_Test"")]", StringComparison.OrdinalIgnoreCase) != -1) {
                 return string.Empty;
+            }
 
             // 单元测试时模板路径
             var templatePath = FileHelper.RootPath + "/Generation/Template/ServcieCodeGetCache.txt";
@@ -34,8 +35,9 @@ namespace Alabo.Test.Generation
 
         private static string Count(string text, string serviceModel)
         {
-            if (text.IndexOf(@"[TestMethod(""Count_Expected_Test"")]", StringComparison.OrdinalIgnoreCase) != -1)
+            if (text.IndexOf(@"[TestMethod(""Count_Expected_Test"")]", StringComparison.OrdinalIgnoreCase) != -1) {
                 return string.Empty;
+            }
 
             var templatePath = FileHelper.RootPath + "/Generation/Template/CountTest.txt";
             var template = FileHelper.Read(templatePath);

@@ -15,7 +15,9 @@ namespace Alabo.Data.Things.Orders.Extensions
 
         public static void AddTaskModule(Guid id, Type parameterType)
         {
-            if (_moduleParameterSetting.ContainsKey(id)) return;
+            if (_moduleParameterSetting.ContainsKey(id)) {
+                return;
+            }
 
             _moduleParameterSetting.Add(id, parameterType);
         }

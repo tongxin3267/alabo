@@ -50,7 +50,9 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         public ApiResult<OrderShowOutput> Show(long id, long loginUserId)
         {
             var orderShow = Resolve<IOrderService>().GetSingleAdmin(id, loginUserId);
-            if (orderShow == null) return ApiResult.Failure<OrderShowOutput>("订单不存在");
+            if (orderShow == null) {
+                return ApiResult.Failure<OrderShowOutput>("订单不存在");
+            }
 
             return ApiResult.Success(orderShow);
         }
@@ -67,11 +69,15 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         {
             var store = Resolve<IStoreService>().GetSingle(u => u.UserId == loginUserId);
             var order = Resolve<IOrderService>().GetSingle(u => u.Id == id);
-            if (order?.StoreId != store?.Id.ToString()) return ApiResult.Failure<OrderShowOutput>("你无权查看该订单");
+            if (order?.StoreId != store?.Id.ToString()) {
+                return ApiResult.Failure<OrderShowOutput>("你无权查看该订单");
+            }
 
             var orderShow = Resolve<IOrderService>().GetSingleAdmin(id, loginUserId);
 
-            if (orderShow == null) return ApiResult.Failure<OrderShowOutput>("订单不存在");
+            if (orderShow == null) {
+                return ApiResult.Failure<OrderShowOutput>("订单不存在");
+            }
 
             return ApiResult.Success(orderShow);
         }
@@ -87,15 +93,22 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         public ApiResult Pay([FromBody] OrderEditPay orderEditPay)
         {
             var user = Resolve<IUserService>().GetUserDetail(orderEditPay.UserId);
-            if (user == null) return ApiResult.Failure("用户已经不存在");
+            if (user == null) {
+                return ApiResult.Failure("用户已经不存在");
+            }
 
-            if (user.Detail.PayPassword != orderEditPay.PayPassword.ToMd5HashString())
+            if (user.Detail.PayPassword != orderEditPay.PayPassword.ToMd5HashString()) {
                 return ApiResult.Failure("支付密码不正确");
+            }
 
             var order = Resolve<IOrderService>().GetSingle(r => r.Id == orderEditPay.OrderId);
-            if (order == null) return ApiResult.Failure("订单不存在");
+            if (order == null) {
+                return ApiResult.Failure("订单不存在");
+            }
 
-            if (order.OrderStatus != OrderStatus.WaitingBuyerPay) return ApiResult.Failure("订单已付款或关闭，请刷新");
+            if (order.OrderStatus != OrderStatus.WaitingBuyerPay) {
+                return ApiResult.Failure("订单已付款或关闭，请刷新");
+            }
 
             IList<Order> orderList = new List<Order>
             {
@@ -119,14 +132,18 @@ namespace Alabo.Industry.Shop.Orders.Controllers
                 IsAdminPay = true
             };
             var payResult = Resolve<IOrderAdminService>().AddSinglePay(singlePayInput);
-            if (!payResult.Item1.Succeeded) return ApiResult.Failure(payResult.Item1.ToString());
+            if (!payResult.Item1.Succeeded) {
+                return ApiResult.Failure(payResult.Item1.ToString());
+            }
 
             var payInput = AutoMapping.SetValue<PayInput>(payResult.Item2);
             payInput.LoginUserId = user.Id;
             payInput.PayId = payResult.Item2.Id;
 
             var result = Resolve<IPayService>().Pay(payInput);
-            if (!result.Item1.Succeeded) return ApiResult.Failure(result.ToString());
+            if (!result.Item1.Succeeded) {
+                return ApiResult.Failure(result.ToString());
+            }
 
             return ApiResult.Success("支付成功!");
         }
@@ -143,7 +160,9 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         {
             var order = Resolve<IOrderService>().GetSingle(e =>
                 e.Id == id && e.StoreId == storeId && e.OrderStatus == OrderStatus.WaitingBuyerPay);
-            if (order == null) return ApiResult.Failure("订单不存在");
+            if (order == null) {
+                return ApiResult.Failure("订单不存在");
+            }
 
             order.OrderStatus = OrderStatus.Closed;
             Resolve<IOrderService>().Update(order);
@@ -161,11 +180,15 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         public ApiResult AdminCancel(long id, long userId)
         {
             var isAdmin = Resolve<IUserService>().IsAdmin(userId);
-            if (!isAdmin) return ApiResult.Failure("权限不足");
+            if (!isAdmin) {
+                return ApiResult.Failure("权限不足");
+            }
 
             var order = Resolve<IOrderService>()
                 .GetSingle(e => e.Id == id && e.OrderStatus == OrderStatus.WaitingBuyerPay);
-            if (order == null) return ApiResult.Failure("订单不存在");
+            if (order == null) {
+                return ApiResult.Failure("订单不存在");
+            }
 
             order.OrderStatus = OrderStatus.Closed;
             Resolve<IOrderService>().Update(order);
@@ -182,8 +205,10 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         public ApiResult Delivery([FromBody] OrderEditDelivery model)
         {
             var rs = Ioc.Resolve<IOrderActionService>().Delivery(model);
-            if (rs.Succeeded)
+            if (rs.Succeeded) {
                 return ApiResult.Success("发货成功");
+            }
+
             return ApiResult.Failure(rs.ReturnMessage);
         }
 
@@ -198,14 +223,20 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         {
             var order = Resolve<IOrderService>().GetSingle(r => r.Id == modelIn.OrderId);
 
-            if (order == null) return ApiResult.Failure("订单不存在");
+            if (order == null) {
+                return ApiResult.Failure("订单不存在");
+            }
 
-            if (order.OrderExtension.OrderRemark == null) order.OrderExtension.OrderRemark = new OrderRemark();
+            if (order.OrderExtension.OrderRemark == null) {
+                order.OrderExtension.OrderRemark = new OrderRemark();
+            }
 
             order.OrderExtension.OrderRemark.PlatplatformRemark = modelIn.PlatplatformRemark;
             order.Extension = ObjectExtension.ToJson(order.OrderExtension);
             var result = Resolve<IOrderService>().Update(order);
-            if (result) return ApiResult.Success("备注成功!");
+            if (result) {
+                return ApiResult.Success("备注成功!");
+            }
 
             return ApiResult.Failure("备注失败!");
         }
@@ -292,14 +323,19 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         public ApiResult GetRefundInfo(long orderId)
         {
             var order = Resolve<IOrderService>().GetSingle(u => u.Id == orderId);
-            if (order == null) return ApiResult.Failure("不存在的订单");
+            if (order == null) {
+                return ApiResult.Failure("不存在的订单");
+            }
 
             //if (order.OrderStatus != OrderStatus.AfterSale || order.OrderStatus != OrderStatus.Refund) {
             //    return ApiResult.Failure("该订单不是退款订单");
             //}
 
             var refund = Resolve<IRefundService>().GetSingle(u => u.OrderId == orderId);
-            if (refund == null) return ApiResult.Failure("不存在的退款订单");
+            if (refund == null) {
+                return ApiResult.Failure("不存在的退款订单");
+            }
+
             return ApiResult.Success(refund);
         }
     }

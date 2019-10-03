@@ -142,11 +142,13 @@ namespace Alabo.Cloud.People.Enterprise.UI
             var result = new AutoForm();
             if (model != null)
             {
-                if (model.Status == IdentityStatus.Failed)
+                if (model.Status == IdentityStatus.Failed) {
                     result = ToAutoForm(new Domain.Entities.Enterprise());
-                else //if (model.Status == IdentityStatus.Succeed)
+                } else //if (model.Status == IdentityStatus.Succeed)
+ {
                     //{
                     result.FromMessage = new FromMessage(FromMessageType.Success, "恭喜您,企业认证已成功");
+                }
                 //}
             }
             else

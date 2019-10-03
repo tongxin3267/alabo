@@ -65,24 +65,36 @@ namespace Alabo.App.Share.TaskExecutes
         public void ExecuteQueue<TParameter>(Type moduleType, TaskQueue taskQueue, TParameter parameter)
             where TParameter : class
         {
-            if (parameter == null) throw new ArgumentNullException(nameof(parameter));
+            if (parameter == null) {
+                throw new ArgumentNullException(nameof(parameter));
+            }
 
-            if (moduleType == null) throw new ArgumentNullException(nameof(moduleType));
+            if (moduleType == null) {
+                throw new ArgumentNullException(nameof(moduleType));
+            }
 
             var taskModuleAttribute = moduleType.GetTypeInfo().GetAttribute<TaskModuleAttribute>();
-            if (taskModuleAttribute == null) throw new ArgumentNullException(nameof(moduleType));
+            if (taskModuleAttribute == null) {
+                throw new ArgumentNullException(nameof(moduleType));
+            }
 
             // 如果模块Id不相同退出
-            if (taskModuleAttribute.Id != taskQueue.ModuleId) return;
+            if (taskModuleAttribute.Id != taskQueue.ModuleId) {
+                return;
+            }
 
             //从数据库中获取所有分润模块
             var modules = _taskModuleFactory.CreateModules(moduleType);
-            if (modules.Count() <= 0) return;
+            if (modules.Count() <= 0) {
+                return;
+            }
 
             // 参数处理
             var taskParameter = new TaskParameter();
             var propertyList = GetOrCreatePropertyCache<TParameter>();
-            foreach (var item in propertyList) taskParameter.AddValue(item.Key.Name, item.Value(parameter));
+            foreach (var item in propertyList) {
+                taskParameter.AddValue(item.Key.Name, item.Value(parameter));
+            }
 
             var taskMessage = new TaskMessage
             {
@@ -132,9 +144,11 @@ namespace Alabo.App.Share.TaskExecutes
 
             var repositoryContext = Ioc.Resolve<IUserRepository>().RepositoryContext;
             IList<UserGradeChangeResult> gradeResultList = new List<UserGradeChangeResult>();
-            foreach (var graderesult in resultList)
-                if (graderesult is UserGradeChangeResult)
+            foreach (var graderesult in resultList) {
+                if (graderesult is UserGradeChangeResult) {
                     gradeResultList.Add((UserGradeChangeResult)graderesult);
+                }
+            }
 
             // 更新分润结果，财务结果到数据库
             Ioc.Resolve<IShareOrderRepository>().UpdateUpgradeTaskResult(gradeResultList);
@@ -167,21 +181,31 @@ namespace Alabo.App.Share.TaskExecutes
         public void ExecuteTask<TParameter>(Type moduleType, ShareOrder shareOrder, TParameter parameter)
             where TParameter : class
         {
-            if (parameter == null) throw new ArgumentNullException(nameof(parameter));
+            if (parameter == null) {
+                throw new ArgumentNullException(nameof(parameter));
+            }
 
-            if (moduleType == null) throw new ArgumentNullException(nameof(moduleType));
+            if (moduleType == null) {
+                throw new ArgumentNullException(nameof(moduleType));
+            }
 
             var taskModuleAttribute = moduleType.GetTypeInfo().GetAttribute<TaskModuleAttribute>();
-            if (taskModuleAttribute == null) throw new ArgumentNullException(nameof(moduleType));
+            if (taskModuleAttribute == null) {
+                throw new ArgumentNullException(nameof(moduleType));
+            }
 
             //从数据库中获取所有分润模块
             var modules = _taskModuleFactory.CreateModules(moduleType);
-            if (modules.Count() <= 0) return;
+            if (modules.Count() <= 0) {
+                return;
+            }
 
             // 参数处理
             var taskParameter = new TaskParameter();
             var propertyList = GetOrCreatePropertyCache<TParameter>();
-            foreach (var item in propertyList) taskParameter.AddValue(item.Key.Name, item.Value(parameter));
+            foreach (var item in propertyList) {
+                taskParameter.AddValue(item.Key.Name, item.Value(parameter));
+            }
 
             var taskMessage = new TaskMessage
             {
@@ -195,7 +219,9 @@ namespace Alabo.App.Share.TaskExecutes
                 // 通过动态类型获取配置属性
                 var configuration = ((dynamic)item).Configuration;
                 var triggerType = (TriggerType)configuration.TriggerType;
-                if (triggerType != shareOrder.TriggerType) continue;
+                if (triggerType != shareOrder.TriggerType) {
+                    continue;
+                }
 
                 taskMessage.ConfigName = (string)configuration.Name;
                 taskParameter.TryGetValue("ShareOrderId", out long ShareOrderId);
@@ -234,7 +260,9 @@ namespace Alabo.App.Share.TaskExecutes
             {
                 var shareOrderNative = Ioc.Resolve<IShareOrderService>()
                     .GetSingleNative(shareOrder.Id);
-                if (shareOrderNative.Status == ShareOrderStatus.Pending) UpdateTaskPriceResult(resultList);
+                if (shareOrderNative.Status == ShareOrderStatus.Pending) {
+                    UpdateTaskPriceResult(resultList);
+                }
             }
         }
 

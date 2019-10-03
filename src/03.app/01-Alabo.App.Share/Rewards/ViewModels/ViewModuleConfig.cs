@@ -116,9 +116,11 @@ namespace Alabo.App.Share.Rewards.ViewModels
         {
             get
             {
-                if (_configuration == null)
-                    if (ConfigurationValue != null && ModuleAttribute != null)
+                if (_configuration == null) {
+                    if (ConfigurationValue != null && ModuleAttribute != null) {
                         _configuration = ConfigurationValue.ConvertToModuleConfig(ModuleAttribute.ConfigurationType);
+                    }
+                }
 
                 return _configuration;
             }
@@ -171,7 +173,9 @@ namespace Alabo.App.Share.Rewards.ViewModels
 
         public T GetConfigration<T>() where T : class, IModuleConfig
         {
-            if (Configuration == null) return default;
+            if (Configuration == null) {
+                return default;
+            }
 
             return Configuration as T;
         }

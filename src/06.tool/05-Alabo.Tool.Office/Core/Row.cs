@@ -65,8 +65,10 @@ namespace Alabo.Tool.Office.Core
         /// <param name="cell">单元格</param>
         public void Add(Cell cell)
         {
-            if (cell == null)
+            if (cell == null) {
                 return;
+            }
+
             cell.Row = this;
             SetColumnIndex(cell);
             Cells.Add(cell);

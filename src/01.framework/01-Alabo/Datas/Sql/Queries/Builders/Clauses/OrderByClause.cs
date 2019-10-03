@@ -52,7 +52,9 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <param name="order">排序列表</param>
         public void OrderBy(string order)
         {
-            if (string.IsNullOrWhiteSpace(order)) return;
+            if (string.IsNullOrWhiteSpace(order)) {
+                return;
+            }
 
             _items.AddRange(order.Split(',').Select(column => new OrderByItem(column)));
         }
@@ -65,7 +67,9 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <param name="desc">是否倒排</param>
         public void OrderBy<TEntity>(Expression<Func<TEntity, object>> column, bool desc = false)
         {
-            if (column == null) return;
+            if (column == null) {
+                return;
+            }
 
             _items.Add(new OrderByItem(_resolver.GetColumn(column), desc, typeof(TEntity)));
         }
@@ -84,7 +88,9 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// </summary>
         public string ToSql()
         {
-            if (_items.Count == 0) return null;
+            if (_items.Count == 0) {
+                return null;
+            }
 
             return $"Order By {Alabo.Extensions.Extensions.Join(_items.Select(t => t.ToSql(_dialect, _register)))}";
         }

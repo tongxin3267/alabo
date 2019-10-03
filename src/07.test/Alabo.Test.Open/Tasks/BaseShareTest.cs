@@ -82,7 +82,9 @@ namespace Alabo.Test.Open.Tasks
         {
             // 复制id=465的订单
             var order = Resolve<IOrderService>().GetSingle(r => r.Id == 7);
-            if (order == null) throw new InvalidExpressionException("基础订单不存在，请重新复制订单");
+            if (order == null) {
+                throw new InvalidExpressionException("基础订单不存在，请重新复制订单");
+            }
 
             // 添加订单
             var newOrder = AutoMapping.SetValue<Order>(order);

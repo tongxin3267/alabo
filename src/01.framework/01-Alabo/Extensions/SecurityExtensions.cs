@@ -18,11 +18,15 @@ namespace Alabo.Extensions
     {
         public static string ToMd5HashString(this string s)
         {
-            if (s.IsNullOrEmpty()) return s;
+            if (s.IsNullOrEmpty()) {
+                return s;
+            }
 
             var data = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(s));
             var sb = new StringBuilder();
-            for (var i = 0; i < data.Length; i++) sb.AppendFormat("{0:x2}", data[i]);
+            for (var i = 0; i < data.Length; i++) {
+                sb.AppendFormat("{0:x2}", data[i]);
+            }
 
             return sb.ToString();
         }
@@ -53,7 +57,9 @@ namespace Alabo.Extensions
         /// </summary>
         private static string Md5(string value, Encoding encoding, int? startIndex, int? length)
         {
-            if (string.IsNullOrWhiteSpace(value)) return string.Empty;
+            if (string.IsNullOrWhiteSpace(value)) {
+                return string.Empty;
+            }
 
             var md5 = new MD5CryptoServiceProvider();
             string result;
@@ -128,7 +134,9 @@ namespace Alabo.Extensions
         public static string DesEncrypt(object value, string key, Encoding encoding)
         {
             var text = value.SafeString();
-            if (ValidateDes(text, key) == false) return string.Empty;
+            if (ValidateDes(text, key) == false) {
+                return string.Empty;
+            }
 
             using (var transform = CreateDesProvider(key).CreateEncryptor())
             {
@@ -141,7 +149,9 @@ namespace Alabo.Extensions
         /// </summary>
         private static bool ValidateDes(string text, string key)
         {
-            if (string.IsNullOrWhiteSpace(text) || string.IsNullOrWhiteSpace(key)) return false;
+            if (string.IsNullOrWhiteSpace(text) || string.IsNullOrWhiteSpace(key)) {
+                return false;
+            }
 
             return key.Length == 24;
         }
@@ -197,7 +207,9 @@ namespace Alabo.Extensions
         public static string DesDecrypt(object value, string key, Encoding encoding)
         {
             var text = value.SafeString();
-            if (!ValidateDes(text, key)) return string.Empty;
+            if (!ValidateDes(text, key)) {
+                return string.Empty;
+            }
 
             using (var transform = CreateDesProvider(key).CreateDecryptor())
             {
@@ -235,7 +247,9 @@ namespace Alabo.Extensions
                 {
                     var size = 16;
                     _iv = new byte[size];
-                    for (var i = 0; i < size; i++) _iv[i] = 0;
+                    for (var i = 0; i < size; i++) {
+                        _iv[i] = 0;
+                    }
                 }
 
                 return _iv;
@@ -274,7 +288,9 @@ namespace Alabo.Extensions
         /// <param name="encoding">编码</param>
         public static string AesEncrypt(string value, string key, Encoding encoding)
         {
-            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(key)) return string.Empty;
+            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(key)) {
+                return string.Empty;
+            }
 
             var rijndaelManaged = CreateRijndaelManaged(key);
             using (var transform = rijndaelManaged.CreateEncryptor(rijndaelManaged.Key, rijndaelManaged.IV))
@@ -324,7 +340,9 @@ namespace Alabo.Extensions
         /// <param name="encoding">编码</param>
         public static string AesDecrypt(string value, string key, Encoding encoding)
         {
-            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(key)) return string.Empty;
+            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(key)) {
+                return string.Empty;
+            }
 
             var rijndaelManaged = CreateRijndaelManaged(key);
             using (var transform = rijndaelManaged.CreateDecryptor(rijndaelManaged.Key, rijndaelManaged.IV))
@@ -384,7 +402,9 @@ namespace Alabo.Extensions
         /// </summary>
         private static string RsaSign(string value, string key, Encoding encoding, RsaType type)
         {
-            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(key)) return string.Empty;
+            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(key)) {
+                return string.Empty;
+            }
 
             var rsa = new RsaHelper(type, encoding, key);
             return rsa.Sign(value);

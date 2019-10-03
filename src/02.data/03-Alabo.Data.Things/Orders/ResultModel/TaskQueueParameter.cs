@@ -23,7 +23,9 @@ namespace Alabo.Data.Things.Orders.ResultModel
         {
             get
             {
-                if (!Parameters.ContainsKey(name)) throw new ArgumentOutOfRangeException(nameof(name));
+                if (!Parameters.ContainsKey(name)) {
+                    throw new ArgumentOutOfRangeException(nameof(name));
+                }
 
                 return Parameters[name];
             }
@@ -31,7 +33,9 @@ namespace Alabo.Data.Things.Orders.ResultModel
 
         public void Add(string name, object value)
         {
-            if (Parameters.ContainsKey(name)) throw new ArgumentException($"data with key {name} is in parameter.");
+            if (Parameters.ContainsKey(name)) {
+                throw new ArgumentException($"data with key {name} is in parameter.");
+            }
 
             Parameters.Add(name, new TaskQueueParameterItem
             {
@@ -42,12 +46,14 @@ namespace Alabo.Data.Things.Orders.ResultModel
 
         public object GetValue(string name)
         {
-            if (!Parameters.TryGetValue(name, out var item))
+            if (!Parameters.TryGetValue(name, out var item)) {
                 throw new KeyNotFoundException($"value with key {name} not found.");
+            }
 
             var value = item.Value;
-            if (item.Type.IsClass && item.Type != typeof(string))
+            if (item.Type.IsClass && item.Type != typeof(string)) {
                 value = JsonConvert.DeserializeObject(value.ToString(), item.Type);
+            }
 
             return Convert.ChangeType(value, item.Type);
         }
@@ -55,11 +61,14 @@ namespace Alabo.Data.Things.Orders.ResultModel
         public T GetValue<T>(string name)
         {
             var value = GetValue(name);
-            if (value.GetType() != typeof(T))
+            if (value.GetType() != typeof(T)) {
                 throw new ArgumentException(
                     $"value with key {name} of type {typeof(T).Name} not equals data type {value.GetType().Name}");
+            }
 
-            if (value.GetType() != typeof(T)) value = Convert.ChangeType(value, typeof(T));
+            if (value.GetType() != typeof(T)) {
+                value = Convert.ChangeType(value, typeof(T));
+            }
 
             return (T)value;
         }

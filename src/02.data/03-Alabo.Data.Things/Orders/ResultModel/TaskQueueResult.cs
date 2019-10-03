@@ -47,13 +47,17 @@ namespace Alabo.Data.Things.Orders.ResultModel
             {
                 if (typeof(T) == typeof(TaskQueueParameter))
                 {
-                    if (QueueId < 1) return ExecuteResult.Cancel("QueueId is empty.");
+                    if (QueueId < 1) {
+                        return ExecuteResult.Cancel("QueueId is empty.");
+                    }
 
                     Ioc.Resolve<ITaskQueueService>().Handle(QueueId);
                     return ExecuteResult.Success();
                 }
 
-                if (Parameter == null) return ExecuteResult.Cancel("parameter is null.");
+                if (Parameter == null) {
+                    return ExecuteResult.Cancel("parameter is null.");
+                }
 
                 Ioc.Resolve<ITaskQueueService>()
                     .Add(UserId, ModuleId, Type, ExecutionTime, MaxExecutionTimes, Parameter);

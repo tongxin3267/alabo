@@ -27,13 +27,19 @@ namespace Alabo.App.Asset.Coupons.Domain.Services
         /// <returns></returns>
         public ServiceResult Send(string usersStr, string couponId)
         {
-            if (string.IsNullOrEmpty(usersStr)) return ServiceResult.FailedMessage("请输入发放用户名！");
+            if (string.IsNullOrEmpty(usersStr)) {
+                return ServiceResult.FailedMessage("请输入发放用户名！");
+            }
+
             var userList = usersStr.Split(',');
-            if (userList.Length <= 0) return ServiceResult.FailedMessage("请输入正确的格式！");
+            if (userList.Length <= 0) {
+                return ServiceResult.FailedMessage("请输入正确的格式！");
+            }
 
             var couponModel = Resolve<ICouponService>().GetSingle(ObjectId.Parse(couponId));
-            if (couponModel.TotalCount - couponModel.UsedCount < userList.Length)
+            if (couponModel.TotalCount - couponModel.UsedCount < userList.Length) {
                 return ServiceResult.FailedMessage("选择的用户人数超过优惠券总数！");
+            }
 
             var StartTime = DateTime.Now;
             var EndTime = DateTime.Now;
@@ -94,7 +100,10 @@ namespace Alabo.App.Asset.Coupons.Domain.Services
                 AddMany(userCouponList);
 
                 Resolve<ICouponService>().Update(couponModel);
-                if (strB != null) return ServiceResult.SuccessWithObject(strB + "不存在，其他用户发放成功！");
+                if (strB != null) {
+                    return ServiceResult.SuccessWithObject(strB + "不存在，其他用户发放成功！");
+                }
+
                 return ServiceResult.SuccessWithObject("发放成功！");
             }
 

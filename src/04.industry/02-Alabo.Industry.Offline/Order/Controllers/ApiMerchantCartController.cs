@@ -25,17 +25,25 @@ namespace Alabo.Industry.Offline.Order.Controllers
         [ApiAuth]
         public ApiResult AddCart([FromBody] MerchantCartInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
+
             var stokCount = 0L;
             var merchantModel = Resolve<IMerchantProductService>().GetSingle(parameter.MerchantProductId);
-            if (merchantModel != null)
+            if (merchantModel != null) {
                 merchantModel.Skus.ForEach(p =>
                 {
-                    if (p.SkuId == parameter.SkuId) stokCount = p.Stock;
+                    if (p.SkuId == parameter.SkuId) {
+                        stokCount = p.Stock;
+                    }
                 });
+            }
+
             var serviceResult = Resolve<IMerchantCartService>().AddCart(parameter);
-            if (serviceResult.Succeeded) serviceResult.ReturnObject = stokCount;
+            if (serviceResult.Succeeded) {
+                serviceResult.ReturnObject = stokCount;
+            }
 
             return ToResult(serviceResult);
         }
@@ -50,7 +58,10 @@ namespace Alabo.Industry.Offline.Order.Controllers
         public ApiResult<MerchantCartOutput> GetCart([FromQuery] long loginUserId, long userId, string merchantStoreId)
         {
             var result = Resolve<IMerchantCartService>().GetCart(userId > 0 ? userId : loginUserId, merchantStoreId);
-            if (result.Item1.Succeeded) return ApiResult.Success(result.Item2);
+            if (result.Item1.Succeeded) {
+                return ApiResult.Success(result.Item2);
+            }
+
             return ApiResult.Failure<MerchantCartOutput>(result.Item1.ToString());
         }
 
@@ -63,8 +74,9 @@ namespace Alabo.Industry.Offline.Order.Controllers
         [ApiAuth]
         public ApiResult RemoveCart([FromQuery] MerchantCartInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var serviceResult = Resolve<IMerchantCartService>().RemoveCart(parameter);
             return ToResult(serviceResult);
@@ -79,16 +91,20 @@ namespace Alabo.Industry.Offline.Order.Controllers
         [ApiAuth]
         public ApiResult UpdateCart([FromBody] MerchantCartInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var stokCount = 0L;
             var merchantModel = Resolve<IMerchantProductService>().GetSingle(parameter.MerchantProductId);
-            if (merchantModel != null)
+            if (merchantModel != null) {
                 merchantModel.Skus.ForEach(p =>
                 {
-                    if (p.SkuId == parameter.SkuId) stokCount = p.Stock;
+                    if (p.SkuId == parameter.SkuId) {
+                        stokCount = p.Stock;
+                    }
                 });
+            }
 
             var serviceResult = Resolve<IMerchantCartService>().UpdateCart(parameter);
             serviceResult.ReturnObject = stokCount;

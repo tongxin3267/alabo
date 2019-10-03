@@ -41,7 +41,9 @@ namespace Alabo.Industry.Shop.Categories.Controllers
         [HttpGet]
         public ApiResult<CategoryView> GetView(Guid categoryId)
         {
-            if (categoryId == Guid.Empty) return ApiResult.Failure<CategoryView>("类目ID不能为空");
+            if (categoryId == Guid.Empty) {
+                return ApiResult.Failure<CategoryView>("类目ID不能为空");
+            }
 
             var category = Resolve<ICategoryService>().GetSingle(categoryId);
             //增加排序功能 从小到大
@@ -97,35 +99,47 @@ namespace Alabo.Industry.Shop.Categories.Controllers
                 //判断重复
                 var confrim = Resolve<ICategoryService>()
                     .Count(s => s.Name == view.Name && s.PartentId != view.PartentId);
-                if (confrim > 0) return ApiResult.Failure("已存在同名类目!");
+                if (confrim > 0) {
+                    return ApiResult.Failure("已存在同名类目!");
+                }
             }
             else
             {
                 //判断重复
                 var confrim = Resolve<ICategoryService>().Count(s => s.Name == view.Name);
-                if (confrim > 0) return ApiResult.Failure("已存在同名类目!");
+                if (confrim > 0) {
+                    return ApiResult.Failure("已存在同名类目!");
+                }
             }
 
             //销售属性
             var saleDistinct = view.SalePropertys.GroupBy(p => new {p.Name}).Select(g => g.First()).ToList();
-            if (saleDistinct.Count() < view.SalePropertys.Count) return ApiResult.Failure("已存在同名销售属性!");
+            if (saleDistinct.Count() < view.SalePropertys.Count) {
+                return ApiResult.Failure("已存在同名销售属性!");
+            }
 
             foreach (var item in view.SalePropertys)
             {
                 ///销售属性值
                 var saleItemDistinct = item.Values.GroupBy(p => new {p.ValueName}).Select(g => g.First()).ToList();
-                if (saleItemDistinct.Count() < item.Values.Count) return ApiResult.Failure("已存在同名销售属性值!");
+                if (saleItemDistinct.Count() < item.Values.Count) {
+                    return ApiResult.Failure("已存在同名销售属性值!");
+                }
             }
 
             //商品参数
             var displayDistinct = view.DisplayPropertys.GroupBy(p => new {p.Name}).Select(g => g.First()).ToList();
-            if (displayDistinct.Count() < view.DisplayPropertys.Count) return ApiResult.Failure("已存在同名商品参数!");
+            if (displayDistinct.Count() < view.DisplayPropertys.Count) {
+                return ApiResult.Failure("已存在同名商品参数!");
+            }
 
             foreach (var item in view.DisplayPropertys)
             {
                 ///销售属性值
                 var saleItemDistinct = item.Values.GroupBy(p => new {p.ValueName}).Select(g => g.First()).ToList();
-                if (saleItemDistinct.Count() < item.Values.Count) return ApiResult.Failure("已存在同名商品参数值!");
+                if (saleItemDistinct.Count() < item.Values.Count) {
+                    return ApiResult.Failure("已存在同名商品参数值!");
+                }
             }
 
             var valAdd = new List<CategoryPropertyValue>();
@@ -162,14 +176,18 @@ namespace Alabo.Industry.Shop.Categories.Controllers
                 {
                     property = ProcessProp(catetory, saleProp);
 
-                    foreach (var vi in saleProp.Values) ValueProcess(property, vi, valAdd);
+                    foreach (var vi in saleProp.Values) {
+                        ValueProcess(property, vi, valAdd);
+                    }
                 }
 
                 foreach (var dispProp in view.DisplayPropertys)
                 {
                     property = ProcessDispProp(catetory, dispProp);
 
-                    foreach (var vi in dispProp.Values) ValueProcess(property, vi, valAdd);
+                    foreach (var vi in dispProp.Values) {
+                        ValueProcess(property, vi, valAdd);
+                    }
                 }
             }
             else // Update Exist
@@ -207,7 +225,9 @@ namespace Alabo.Industry.Shop.Categories.Controllers
 
                     property = ProcessProp(catetory, saleProp);
 
-                    foreach (var vi in saleProp.Values) ValueProcess(property, vi, valAdd, valUpd, delIdList);
+                    foreach (var vi in saleProp.Values) {
+                        ValueProcess(property, vi, valAdd, valUpd, delIdList);
+                    }
                 }
 
                 foreach (var dispProp in view.DisplayPropertys)
@@ -220,7 +240,9 @@ namespace Alabo.Industry.Shop.Categories.Controllers
 
                     property = ProcessDispProp(catetory, dispProp);
 
-                    foreach (var vi in dispProp.Values) ValueProcess(property, vi, valAdd, valUpd, delIdList);
+                    foreach (var vi in dispProp.Values) {
+                        ValueProcess(property, vi, valAdd, valUpd, delIdList);
+                    }
                 }
             }
 
@@ -229,7 +251,10 @@ namespace Alabo.Industry.Shop.Categories.Controllers
             //再删除属性
             Resolve<ICategoryPropertyService>().DeleteMany(propertyDel.Select(x => x.Id));
             // Resolve<ICategoryPropertyValueService>().DeleteMany(valDel.Select(x => x.Id));
-            foreach (var item in valUpd) Resolve<ICategoryPropertyValueService>().Update(item);
+            foreach (var item in valUpd) {
+                Resolve<ICategoryPropertyValueService>().Update(item);
+            }
+
             Resolve<ICategoryPropertyValueService>().AddMany(valAdd);
 
             return ApiResult.Success("保存成功!");
@@ -245,7 +270,10 @@ namespace Alabo.Industry.Shop.Categories.Controllers
         {
             var id = new Guid(categoryId);
             var check = Resolve<IProductAdminService>().CheckCategoryHasProduct(id);
-            if (check) return ApiResult.Failure("类目下有商品,不能删除!");
+            if (check) {
+                return ApiResult.Failure("类目下有商品,不能删除!");
+            }
+
             Resolve<ICategoryService>().Delete(id);
             return ApiResult.Success();
         }
@@ -305,7 +333,9 @@ namespace Alabo.Industry.Shop.Categories.Controllers
         private void ValueProcess(CategoryProperty property, ViewPropertyValue vi, List<CategoryPropertyValue> valAdd,
             List<CategoryPropertyValue> valUpd = null, IEnumerable<string> delIdList = null)
         {
-            if (delIdList != null && delIdList.Contains(vi.Id.ToString())) return;
+            if (delIdList != null && delIdList.Contains(vi.Id.ToString())) {
+                return;
+            }
 
             if (vi.Id == Guid.Empty)
             {

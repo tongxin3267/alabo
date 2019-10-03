@@ -26,7 +26,9 @@ namespace Alabo.Cloud.People.UserTree.Controllers
         {
             //var ll = Resolve<IUserService>().GetList(e => e.ParentId == loginUserId);
             var bRoot = loginUserId == 0;
-            if (bRoot) loginUserId = AutoModel.BasicUser.Id;
+            if (bRoot) {
+                loginUserId = AutoModel.BasicUser.Id;
+            }
 
             var userTreeList = Resolve<IUserTreeService>().GetUserTree(loginUserId);
             var kk = userTreeList.ToJson();
@@ -40,7 +42,9 @@ namespace Alabo.Cloud.People.UserTree.Controllers
         [HttpGet]
         public ApiResult GetUserTree(int id, string isFirst = "")
         {
-            if (isFirst.ToLower().Equal("yes") && id == 1) id = 0;
+            if (isFirst.ToLower().Equal("yes") && id == 1) {
+                id = 0;
+            }
 
             var uMsgs = Resolve<IUserTreeService>().GetUserTree(id);
 

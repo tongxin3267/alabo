@@ -21,7 +21,10 @@ namespace Alabo.Framework.Core.WebApis.Controller
         [Display(Description = "根据Id获取单个实例")]
         public virtual ApiResult<TEntity> ViewById(string id)
         {
-            if (BaseService == null) return ApiResult.Failure<TEntity>("请在控制器中定义BaseService");
+            if (BaseService == null) {
+                return ApiResult.Failure<TEntity>("请在控制器中定义BaseService");
+            }
+
             var result = BaseService.GetViewById(id);
             return ApiResult.Success(result);
         }
@@ -38,12 +41,18 @@ namespace Alabo.Framework.Core.WebApis.Controller
         [Display(Description = "根据Id获取单个实例")]
         public ApiResult<TEntity> QueryById(string id)
         {
-            if (BaseService == null) return ApiResult.Failure<TEntity>("请在控制器中定义BaseService");
+            if (BaseService == null) {
+                return ApiResult.Failure<TEntity>("请在控制器中定义BaseService");
+            }
 
-            if (id.IsNullOrEmpty()) return ApiResult.Failure<TEntity>("Id不能为空");
+            if (id.IsNullOrEmpty()) {
+                return ApiResult.Failure<TEntity>("Id不能为空");
+            }
 
             var result = BaseService.GetSingle(id);
-            if (result == null) return ApiResult.Failure<TEntity>("数据记录不存在");
+            if (result == null) {
+                return ApiResult.Failure<TEntity>("数据记录不存在");
+            }
 
             return ApiResult.Success(result);
         }
@@ -60,12 +69,18 @@ namespace Alabo.Framework.Core.WebApis.Controller
         [Display(Description = "根据Id获取单个实例字典集合")]
         public ApiResult<Dictionary<string, string>> QueryDic(string id)
         {
-            if (BaseService == null) return ApiResult.Failure<Dictionary<string, string>>("请在控制器中定义BaseService");
+            if (BaseService == null) {
+                return ApiResult.Failure<Dictionary<string, string>>("请在控制器中定义BaseService");
+            }
 
-            if (id.IsNullOrEmpty()) return ApiResult.Failure<Dictionary<string, string>>("Id不能为空");
+            if (id.IsNullOrEmpty()) {
+                return ApiResult.Failure<Dictionary<string, string>>("Id不能为空");
+            }
 
             var result = BaseService.GetDictionary(id);
-            if (result == null) return ApiResult.Failure<Dictionary<string, string>>("数据记录不存在");
+            if (result == null) {
+                return ApiResult.Failure<Dictionary<string, string>>("数据记录不存在");
+            }
 
             return ApiResult.Success(result);
         }

@@ -24,7 +24,9 @@ namespace Alabo.Cloud.People.UserRightss.UI.Widgets
 
             //前端传值需注意大小写 userId为必传项
             dic.TryGetValue("userId", out var userId);
-            if (userId.IsNullOrEmpty()) return null;
+            if (userId.IsNullOrEmpty()) {
+                return null;
+            }
 
             var userGradeList = Ioc.Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
             var userRights = Ioc.Resolve<IUserRightsService>().GetList(u => u.UserId == u.UserId.ToInt64());

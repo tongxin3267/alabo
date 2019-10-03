@@ -67,8 +67,9 @@ namespace Alabo.App.Asset.Bills.Domain.Services
         /// <param name="userInput">The 会员 input.</param>
         public PagedList<ViewAdminBill> GetViewBillPageList(BillInput userInput)
         {
-            if (!userInput.Serial.IsNullOrEmpty() && userInput.Serial.Length > 8)
+            if (!userInput.Serial.IsNullOrEmpty() && userInput.Serial.Length > 8) {
                 userInput.Id = long.Parse(userInput.Serial.Substring(1, userInput.Serial.Length - 1).TrimStart('0'));
+            }
 
             var billList = _billRepository.GetBillList(userInput, out var count);
 
@@ -145,7 +146,9 @@ namespace Alabo.App.Asset.Bills.Domain.Services
         public ViewAdminBill GetViewBillSingle(long id)
         {
             var bill = Resolve<IBillService>().GetSingle(r => r.Id == id);
-            if (bill == null) return null;
+            if (bill == null) {
+                return null;
+            }
 
             var moneyTypes = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
             var grades = Resolve<IGradeService>().GetUserGradeList();

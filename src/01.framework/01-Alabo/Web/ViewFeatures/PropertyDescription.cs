@@ -25,19 +25,23 @@ namespace Alabo.Web.ViewFeatures
 
             //获取或构建 特性
             FieldAttribute = property.GetAttributes<FieldAttribute>().FirstOrDefault();
-            if (FieldAttribute == null)
+            if (FieldAttribute == null) {
                 FieldAttribute = new FieldAttribute
                 {
                     //FieldName = property.Name,
                     EditShow = false
                 };
+            }
 
             // 通过DataSource来构建FullName
-            if (FieldAttribute.DataSource.IsNullOrEmpty())
+            if (FieldAttribute.DataSource.IsNullOrEmpty()) {
                 FieldAttribute.DataSource = FieldAttribute.DataSourceType?.FullName;
+            }
 
             DisplayAttribute = property.GetAttributes<DisplayAttribute>().FirstOrDefault();
-            if (DisplayAttribute == null) DisplayAttribute = new DisplayAttribute();
+            if (DisplayAttribute == null) {
+                DisplayAttribute = new DisplayAttribute();
+            }
 
             Name = property.Name;
             HelpBlockAttribute = property.GetAttributes<HelpBlockAttribute>()?.FirstOrDefault();
@@ -130,10 +134,11 @@ namespace Alabo.Web.ViewFeatures
                 {
                     //Checkbox: bootstrap on 为true
                     if (value != null && (value.ToString().ToLower().Contains("true") ||
-                                          value.ToString().ToLower().Contains("on")))
+                                          value.ToString().ToLower().Contains("on"))) {
                         item.SetValue(instanse, true);
-                    else
+                    } else {
                         item.SetValue(instanse, false);
+                    }
                 }
                 else if (item.PropertyType == typeof(decimal))
                 {
@@ -184,7 +189,9 @@ namespace Alabo.Web.ViewFeatures
                 foreach (var item in instanse.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
                 {
                     object value = null;
-                    if (obj.Property(item.Name) != null) value = obj.Property(item.Name).Value;
+                    if (obj.Property(item.Name) != null) {
+                        value = obj.Property(item.Name).Value;
+                    }
 
                     if (item.PropertyType == typeof(string))
                     {
@@ -198,10 +205,11 @@ namespace Alabo.Web.ViewFeatures
                     {
                         //Checkbox: bootstrap on 为true
                         if (value != null && (value.ToString().ToLower().Contains("true") ||
-                                              value.ToString().ToLower().Contains("on")))
+                                              value.ToString().ToLower().Contains("on"))) {
                             item.SetValue(instanse, true);
-                        else
+                        } else {
                             item.SetValue(instanse, false);
+                        }
                     }
                     else if (item.PropertyType == typeof(decimal))
                     {
@@ -226,7 +234,9 @@ namespace Alabo.Web.ViewFeatures
                     else
                     {
                         // 不可写的, 调用SetValue()会报错
-                        if (!item.CanWrite) continue;
+                        if (!item.CanWrite) {
+                            continue;
+                        }
 
                         if (item.PropertyType != null && item.PropertyType.GetTypeInfo().BaseType != null &&
                             item.PropertyType.GetTypeInfo().BaseType.Name == nameof(Enum))
@@ -255,7 +265,9 @@ namespace Alabo.Web.ViewFeatures
             foreach (var item in instanse.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
                 object value = null;
-                if (obj.Property(item.Name) != null) value = obj.Property(item.Name).Value;
+                if (obj.Property(item.Name) != null) {
+                    value = obj.Property(item.Name).Value;
+                }
 
                 if (item.PropertyType == typeof(string))
                 {
@@ -269,10 +281,11 @@ namespace Alabo.Web.ViewFeatures
                 {
                     //Checkbox: bootstrap on 为true
                     if (value != null && (value.ToString().ToLower().Contains("true") ||
-                                          value.ToString().ToLower().Contains("on")))
+                                          value.ToString().ToLower().Contains("on"))) {
                         item.SetValue(instanse, true);
-                    else
+                    } else {
                         item.SetValue(instanse, false);
+                    }
                 }
                 else if (item.PropertyType == typeof(decimal))
                 {
@@ -300,7 +313,9 @@ namespace Alabo.Web.ViewFeatures
                 else
                 {
                     // 不可写的, 调用SetValue()会报错
-                    if (!item.CanWrite) continue;
+                    if (!item.CanWrite) {
+                        continue;
+                    }
 
                     if (item.PropertyType != null && item.PropertyType.GetTypeInfo().BaseType != null
                                                   && item.PropertyType.GetTypeInfo().BaseType.Name == nameof(Enum))
@@ -322,7 +337,9 @@ namespace Alabo.Web.ViewFeatures
 
         public object GetValue<T>(object instanse) where T : class
         {
-            if (instanse == null) throw new ArgumentNullException(nameof(instanse));
+            if (instanse == null) {
+                throw new ArgumentNullException(nameof(instanse));
+            }
 
             Func<T, object> getValueFunction = null;
             if (getValueFunction == null)
@@ -340,9 +357,13 @@ namespace Alabo.Web.ViewFeatures
 
         public void SetValue<T>(object instanse, object value)
         {
-            if (instanse == null) throw new ArgumentNullException(nameof(instanse));
+            if (instanse == null) {
+                throw new ArgumentNullException(nameof(instanse));
+            }
 
-            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null) {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             Action<T, object> setValueAction = null;
             if (setValueAction == null)

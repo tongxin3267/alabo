@@ -31,7 +31,9 @@ namespace Alabo.Test.Shop.Product.Domain.Services
         public void AutoUpdateSkuPrice_Int64_test(long productId)
         {
             var product = Resolve<IProductService>().GetRandom(productId);
-            if (product != null) Resolve<IProductSkuService>().AutoUpdateSkuPrice(product.Id);
+            if (product != null) {
+                Resolve<IProductSkuService>().AutoUpdateSkuPrice(product.Id);
+            }
         }
 
         [Fact]

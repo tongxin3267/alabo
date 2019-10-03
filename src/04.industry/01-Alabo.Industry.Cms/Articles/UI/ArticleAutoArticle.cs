@@ -17,7 +17,10 @@ namespace Alabo.Industry.Cms.Articles.UI
         public AutoArticleItem ResultList(string Id)
         {
             var model = Ioc.Resolve<IArticleService>().GetSingle(u => u.Id == Id.ToObjectId());
-            if (model == null) return new AutoArticleItem();
+            if (model == null) {
+                return new AutoArticleItem();
+            }
+
             var result = AutoMapping.SetValue<AutoArticleItem>(model);
             result.Image = model.ImageUrl;
             result.Content = Ioc.Resolve<IApiService>().ConvertToApiImageUrl(result.Content);

@@ -24,9 +24,13 @@ namespace Alabo.App.Asset.Coupons.Controllers
         [HttpGet]
         public ApiResult SendCoupon(string usersStr, string couponId)
         {
-            if (string.IsNullOrEmpty(usersStr)) return ApiResult.Failure("请输入正确的用户名！");
+            if (string.IsNullOrEmpty(usersStr)) {
+                return ApiResult.Failure("请输入正确的用户名！");
+            }
 
-            if (couponId == null) return ApiResult.Failure("请选择有效的优惠券！");
+            if (couponId == null) {
+                return ApiResult.Failure("请选择有效的优惠券！");
+            }
 
             var result = Resolve<IUserCouponService>().Send(usersStr, couponId);
 

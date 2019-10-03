@@ -21,9 +21,13 @@ namespace Alabo.Exceptions.Prompts
         /// <param name="prompt">异常提示</param>
         public static void AddPrompt(IExceptionPrompt prompt)
         {
-            if (prompt == null) throw new ArgumentNullException(nameof(prompt));
+            if (prompt == null) {
+                throw new ArgumentNullException(nameof(prompt));
+            }
 
-            if (Prompts.Contains(prompt)) return;
+            if (Prompts.Contains(prompt)) {
+                return;
+            }
 
             Prompts.Add(prompt);
         }
@@ -36,9 +40,13 @@ namespace Alabo.Exceptions.Prompts
         {
             exception = exception.GetRawException();
             var prompt = GetExceptionPrompt(exception);
-            if (string.IsNullOrWhiteSpace(prompt) == false) return prompt;
+            if (string.IsNullOrWhiteSpace(prompt) == false) {
+                return prompt;
+            }
 
-            if (exception is ValidException warning) return warning.Message;
+            if (exception is ValidException warning) {
+                return warning.Message;
+            }
 
             return R.SystemError;
         }
@@ -51,7 +59,9 @@ namespace Alabo.Exceptions.Prompts
             foreach (var prompt in Prompts)
             {
                 var result = prompt.GetPrompt(exception);
-                if (result.IsEmpty() == false) return result;
+                if (result.IsEmpty() == false) {
+                    return result;
+                }
             }
 
             return string.Empty;

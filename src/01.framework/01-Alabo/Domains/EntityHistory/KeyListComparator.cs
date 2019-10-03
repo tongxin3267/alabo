@@ -17,9 +17,13 @@ namespace Alabo.Domains.EntityHistory
         /// <param name="oldList">旧实体集合</param>
         public KeyListCompareResult<TKey> Compare(IEnumerable<TKey> newList, IEnumerable<TKey> oldList)
         {
-            if (newList == null) throw new ArgumentNullException(nameof(newList));
+            if (newList == null) {
+                throw new ArgumentNullException(nameof(newList));
+            }
 
-            if (oldList == null) throw new ArgumentNullException(nameof(oldList));
+            if (oldList == null) {
+                throw new ArgumentNullException(nameof(oldList));
+            }
 
             var newEntities = newList.ToList();
             var oldEntities = oldList.ToList();

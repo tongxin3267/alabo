@@ -100,7 +100,9 @@ namespace Alabo.App.Asset.Recharges.Domain.Entities
             get
             {
                 var searSerial = $"T{Id.ToString().PadLeft(9, '0')}";
-                if (Id.ToString().Length == 10) searSerial = $"{Id.ToString()}";
+                if (Id.ToString().Length == 10) {
+                    searSerial = $"{Id.ToString()}";
+                }
 
                 return searSerial;
             }

@@ -55,24 +55,31 @@ namespace Alabo.Cloud.People.Relationship.Share
         public override ExecuteResult<ITaskResult[]> Execute(TaskParameter parameter)
         {
             var baseResult = base.Execute(parameter);
-            if (baseResult.Status != ResultStatus.Success)
+            if (baseResult.Status != ResultStatus.Success) {
                 return ExecuteResult<ITaskResult[]>.Cancel("基础验证未通过" + baseResult.Message);
+            }
 
             IList<ITaskResult> resultList = new List<ITaskResult>();
 
             // 检查关系图
             var userRelationshipConfigs = Resolve<IAutoConfigService>().GetList<UserRelationshipIndexConfig>();
             var config = userRelationshipConfigs.FirstOrDefault(r => r.IsEnable && r.Id == Configuration.ConfigId);
-            if (config == null) return ExecuteResult<ITaskResult[]>.Cancel("关系图配置不存在");
+            if (config == null) {
+                return ExecuteResult<ITaskResult[]>.Cancel("关系图配置不存在");
+            }
 
             // 查找分润订单用户的，关系图索引
             var userRelationshipIndex = Resolve<IRelationshipIndexService>()
                 .GetSingle(r => r.ConfigId == config.Id && r.UserId == ShareOrder.UserId);
-            if (userRelationshipIndex == null) return ExecuteResult<ITaskResult[]>.Cancel("触发用户关系图索引不存在");
+            if (userRelationshipIndex == null) {
+                return ExecuteResult<ITaskResult[]>.Cancel("触发用户关系图索引不存在");
+            }
 
             // 根据关系索引获取分润用户
             base.GetShareUser(userRelationshipIndex.ParentId, out var shareUser); //从基类获取分润用户
-            if (shareUser == null) return ExecuteResult<ITaskResult[]>.Cancel("分润用户不符合条件或不存在");
+            if (shareUser == null) {
+                return ExecuteResult<ITaskResult[]>.Cancel("分润用户不符合条件或不存在");
+            }
 
             // 一级分润比例
             if (Ratios.Count > 0)
@@ -88,11 +95,15 @@ namespace Alabo.Cloud.People.Relationship.Share
                     var user = shareUser;
                     userRelationshipIndex = Resolve<IRelationshipIndexService>()
                         .GetSingle(r => r.ConfigId == config.Id && r.UserId == user.Id);
-                    if (userRelationshipIndex == null) return ExecuteResult<ITaskResult[]>.Cancel("二级用户关系图索引不存在");
+                    if (userRelationshipIndex == null) {
+                        return ExecuteResult<ITaskResult[]>.Cancel("二级用户关系图索引不存在");
+                    }
 
                     // 根据关系索引获取二级分润用户
                     base.GetShareUser(userRelationshipIndex.ParentId, out shareUser);
-                    if (shareUser == null) return ExecuteResult<ITaskResult[]>.Cancel("二级分润用户不符合条件或不存在");
+                    if (shareUser == null) {
+                        return ExecuteResult<ITaskResult[]>.Cancel("二级分润用户不符合条件或不存在");
+                    }
 
                     ratio = Convert.ToDecimal(Ratios[1]);
                     shareAmount = BaseFenRunAmount * ratio;

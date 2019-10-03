@@ -55,7 +55,9 @@ namespace Alabo.Test.Cms.Articles.Domain.Services
         {
             foreach (ChannelType item in Enum.GetValues(typeof(ChannelType)))
             {
-                if (item == ChannelType.Customer) continue;
+                if (item == ChannelType.Customer) {
+                    continue;
+                }
 
                 var fullName = $"Alabo.App.Cms.Articles.Domain.CallBacks.Channel{item.ToString()}ClassRelation";
                 var type = fullName.GetTypeByFullName();
@@ -90,7 +92,9 @@ namespace Alabo.Test.Cms.Articles.Domain.Services
         {
             foreach (ChannelType item in Enum.GetValues(typeof(ChannelType)))
             {
-                if (item == ChannelType.Customer) continue;
+                if (item == ChannelType.Customer) {
+                    continue;
+                }
 
                 var fullName = $"Alabo.App.Cms.Articles.Domain.CallBacks.Channel{item.ToString()}TagRelation";
                 var type = fullName.GetTypeByFullName();

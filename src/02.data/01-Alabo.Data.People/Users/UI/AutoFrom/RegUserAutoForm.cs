@@ -28,7 +28,9 @@ namespace Alabo.Data.People.Users.UI.AutoFrom
         public AutoForm GetView(object id, AutoBaseModel autoModel)
         {
             var res = Ioc.Resolve<IUserService>().GetSingle(s => s.Id == id.ConvertToLong(-1));
-            if (res != null) return ToAutoForm(res);
+            if (res != null) {
+                return ToAutoForm(res);
+            }
 
             return ToAutoForm(new RegUserAutoForm());
         }
@@ -42,11 +44,17 @@ namespace Alabo.Data.People.Users.UI.AutoFrom
         {
             var view = (RegUserAutoForm)model;
 
-            if (view.Password.Length < 6) return ServiceResult.FailedWithMessage("请您务必输入【密码】大于6位！");
+            if (view.Password.Length < 6) {
+                return ServiceResult.FailedWithMessage("请您务必输入【密码】大于6位！");
+            }
 
-            if (view.ConfirmPassword.Length < 6) return ServiceResult.FailedWithMessage("请您务必输入【支付密码】大于6位！");
+            if (view.ConfirmPassword.Length < 6) {
+                return ServiceResult.FailedWithMessage("请您务必输入【支付密码】大于6位！");
+            }
 
-            if (view.PayPassword.Length < 6) return ServiceResult.FailedWithMessage("请您务必输入【支付密码】6位,否则不能支付！");
+            if (view.PayPassword.Length < 6) {
+                return ServiceResult.FailedWithMessage("请您务必输入【支付密码】6位,否则不能支付！");
+            }
 
             var user = new User
             {
@@ -62,8 +70,14 @@ namespace Alabo.Data.People.Users.UI.AutoFrom
             {
                 var parentUser = Ioc.Resolve<IUserService>()
                     .GetSingle(s => s.Mobile == view.RecName.Trim() || s.UserName == view.RecName.Trim());
-                if (parentUser == null) return ServiceResult.FailedMessage("推荐人不存在,请重新输入");
-                if (parentUser.Status != Status.Normal) return ServiceResult.FailedMessage("推荐人状态不正常，不能作为推荐人");
+                if (parentUser == null) {
+                    return ServiceResult.FailedMessage("推荐人不存在,请重新输入");
+                }
+
+                if (parentUser.Status != Status.Normal) {
+                    return ServiceResult.FailedMessage("推荐人状态不正常，不能作为推荐人");
+                }
+
                 user.ParentId = parentUser.Id;
             }
 

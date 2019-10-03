@@ -22,7 +22,7 @@ namespace Alabo.Mapping.Dynamic
             var propertyInfo =
                 propertys?.FirstOrDefault(r => r.Name.Equals(binder.Name, StringComparison.OrdinalIgnoreCase));
             // 值为null 不更新
-            if (propertyInfo != null && value != null)
+            if (propertyInfo != null && value != null) {
                 if (!(propertyInfo.Name.Equals("Id", StringComparison.OrdinalIgnoreCase) ||
                       propertyInfo.Name.Equals("CreateTime", StringComparison.OrdinalIgnoreCase)))
                 {
@@ -37,12 +37,15 @@ namespace Alabo.Mapping.Dynamic
                         else
                         {
                             var isIgnoredIfEmpty = propertyInfo.GetAttribute<DynamicNotIgnoreEmptyAttribute>() != null;
-                            if (isIgnoredIfEmpty) _changedProperties.Add(propertyInfo, value);
+                            if (isIgnoredIfEmpty) {
+                                _changedProperties.Add(propertyInfo, value);
+                            }
                         }
 
                         // 如果值为空的时候，可以更新，则设置该值
                     }
                 }
+            }
 
             return base.TrySetMember(binder, value);
         }
@@ -53,7 +56,9 @@ namespace Alabo.Mapping.Dynamic
         /// <param name="model"></param>
         public void SetValue(TModel model)
         {
-            if (model == null) throw new ArgumentNullException(nameof(model));
+            if (model == null) {
+                throw new ArgumentNullException(nameof(model));
+            }
 
             if (_changedProperties.Count > 0)
             {
@@ -61,26 +66,33 @@ namespace Alabo.Mapping.Dynamic
                 // 设置最新的更新时间
                 var propertyInfo = propertys?.FirstOrDefault(r =>
                     r.Name.Equals("ModifiedTime", StringComparison.OrdinalIgnoreCase));
-                if (propertyInfo != null) _changedProperties.Add(propertyInfo, DateTime.Now);
+                if (propertyInfo != null) {
+                    _changedProperties.Add(propertyInfo, DateTime.Now);
+                }
             }
 
-            foreach (var property in _changedProperties)
+            foreach (var property in _changedProperties) {
                 if (!IsExcludedProperty(property.Key.Name))
                 {
                     var value = ChangeType(property.Value, property.Key.PropertyType);
                     property.Key.SetValue(model, value);
                 }
+            }
         }
 
         private static object ChangeType(object value, Type type)
         {
             try
             {
-                if (type == typeof(Guid)) return Guid.Parse((string)value);
+                if (type == typeof(Guid)) {
+                    return Guid.Parse((string)value);
+                }
 
                 if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
                 {
-                    if (value == null) return null;
+                    if (value == null) {
+                        return null;
+                    }
 
                     type = Nullable.GetUnderlyingType(type);
                 }

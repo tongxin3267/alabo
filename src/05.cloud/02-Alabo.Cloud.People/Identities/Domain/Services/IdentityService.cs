@@ -92,8 +92,14 @@ namespace Alabo.Cloud.People.Identities.Domain.Services
         public bool IsIdentity(long userId)
         {
             var model = GetSingle(r => r.UserId == userId);
-            if (model == null) return false;
-            if (model.Status == IdentityStatus.Succeed) return true;
+            if (model == null) {
+                return false;
+            }
+
+            if (model.Status == IdentityStatus.Succeed) {
+                return true;
+            }
+
             return false;
         }
 
@@ -131,7 +137,10 @@ namespace Alabo.Cloud.People.Identities.Domain.Services
             }
 
             view.Status = IdentityStatus.Failed;
-            if (model == null) Resolve<IIdentityService>().Add(view);
+            if (model == null) {
+                Resolve<IIdentityService>().Add(view);
+            }
+
             return ServiceResult.FailedWithMessage(result.Message);
 
             return ServiceResult.FailedWithMessage("实名认证失败");

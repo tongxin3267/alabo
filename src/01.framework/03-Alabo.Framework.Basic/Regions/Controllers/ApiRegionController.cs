@@ -53,7 +53,9 @@ namespace Alabo.Framework.Basic.Regions.Controllers
 
             list.Foreach(r =>
             {
-                if (dict.ContainsKey(r.ParentId)) dict[r.ParentId].Children.Add(r);
+                if (dict.ContainsKey(r.ParentId)) {
+                    dict[r.ParentId].Children.Add(r);
+                }
             });
 
             var ret = list.Where(r => !dict.ContainsKey(r.ParentId));

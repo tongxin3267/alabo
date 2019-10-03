@@ -15,11 +15,15 @@ namespace Alabo.Extensions
         /// <param name="exception">异常</param>
         public static Exception GetRawException(this Exception exception)
         {
-            if (exception == null) return null;
+            if (exception == null) {
+                return null;
+            }
 
             if (exception is AspectInvocationException aspectInvocationException)
             {
-                if (aspectInvocationException.InnerException == null) return aspectInvocationException;
+                if (aspectInvocationException.InnerException == null) {
+                    return aspectInvocationException;
+                }
 
                 return GetRawException(aspectInvocationException.InnerException);
             }

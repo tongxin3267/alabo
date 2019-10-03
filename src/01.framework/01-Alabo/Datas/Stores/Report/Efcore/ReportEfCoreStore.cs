@@ -55,8 +55,9 @@ namespace Alabo.Datas.Stores.Report.Efcore
         public PagedList<SumReportTable> GetSumReportTable(SumTableInput inputParas)
         {
             Expression<Func<TEntity, bool>> predicate = x => x.CreateTime > DateTime.MinValue;
-            if (inputParas.StartTime != null && inputParas.EndTime != null)
+            if (inputParas.StartTime != null && inputParas.EndTime != null) {
                 predicate = predicate.And(x => x.CreateTime >= inputParas.StartTime);
+            }
 
             var queryList = QueryList(predicate);
             var rsList = ReportStoreCommons<TEntity, TKey>.GetSumReportTable(queryList, inputParas);

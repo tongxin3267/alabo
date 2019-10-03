@@ -65,19 +65,28 @@ namespace Alabo.Cloud.People.UserTree.Domain.UI
         public ServiceResult Save(object model, AutoBaseModel autoModel)
         {
             var view = model.MapTo<UpdateParentForm>();
-            if (autoModel != null) view.UserId = autoModel.BasicUser.Id;
+            if (autoModel != null) {
+                view.UserId = autoModel.BasicUser.Id;
+            }
 
             var user = Resolve<IUserService>().GetSingle(r => r.UserName == view.UserName);
-            if (user == null) return ServiceResult.FailedWithMessage("用户名不存在");
+            if (user == null) {
+                return ServiceResult.FailedWithMessage("用户名不存在");
+            }
 
             var parentUser = Resolve<IUserService>().GetSingle(view.ParentUserName);
-            if (parentUser == null) return ServiceResult.FailedWithMessage("推荐人不存在");
+            if (parentUser == null) {
+                return ServiceResult.FailedWithMessage("推荐人不存在");
+            }
 
-            if (parentUser.Status != Status.Normal) return ServiceResult.FailedWithMessage("推荐人状态不正常");
+            if (parentUser.Status != Status.Normal) {
+                return ServiceResult.FailedWithMessage("推荐人状态不正常");
+            }
 
             var currentUserPay = Resolve<IUserDetailService>().GetSingle(r => r.Id == view.UserId);
-            if (view.PayPassword.ToMd5HashString() != currentUserPay.PayPassword)
+            if (view.PayPassword.ToMd5HashString() != currentUserPay.PayPassword) {
                 return ServiceResult.FailedWithMessage("支付密码错误！");
+            }
 
             var result = ServiceResult.Success;
             var context = Ioc.Resolve<IUserRepository>().RepositoryContext;
@@ -101,7 +110,9 @@ namespace Alabo.Cloud.People.UserTree.Domain.UI
                 context.DisposeTransaction();
             }
 
-            if (!result.Succeeded) return ServiceResult.FailedWithMessage("推荐人修改失败");
+            if (!result.Succeeded) {
+                return ServiceResult.FailedWithMessage("推荐人修改失败");
+            }
 
             return result;
         }

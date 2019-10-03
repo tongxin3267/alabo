@@ -30,8 +30,10 @@ namespace Alabo.Framework.Themes.Controllers
         [HttpGet]
         public ApiResult SetDefaultTheme(string id)
         {
-            if (Resolve<IThemeService>().SetDefaultTheme(id.ToObjectId()))
+            if (Resolve<IThemeService>().SetDefaultTheme(id.ToObjectId())) {
                 return ApiResult.Success();
+            }
+
             return ApiResult.Failure("ƒ¨»œƒ£∞Â…Ë÷√ ß∞‹");
         }
 
@@ -52,7 +54,10 @@ namespace Alabo.Framework.Themes.Controllers
         [AllowAnonymous]
         public ApiResult<AllClientPages> GetAllClientPages([FromQuery] ClientPageInput parameter)
         {
-            if (!this.IsFormValid()) return ApiResult.Failure<AllClientPages>(this.FormInvalidReason());
+            if (!this.IsFormValid()) {
+                return ApiResult.Failure<AllClientPages>(this.FormInvalidReason());
+            }
+
             try
             {
                 var allClientPages = Resolve<IThemePageService>().GetAllClientPages(parameter);

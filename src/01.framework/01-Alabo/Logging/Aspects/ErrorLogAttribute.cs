@@ -26,7 +26,9 @@ namespace Alabo.Logging.Aspects
             catch (Exception ex)
             {
                 log.Class(context.ServiceMethod.DeclaringType.FullName).Method(methodName).Exception(ex);
-                foreach (var parameter in context.GetParameters()) parameter.AppendTo(log);
+                foreach (var parameter in context.GetParameters()) {
+                    parameter.AppendTo(log);
+                }
 
                 log.Error();
                 throw;

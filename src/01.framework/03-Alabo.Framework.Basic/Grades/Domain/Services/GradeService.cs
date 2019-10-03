@@ -25,7 +25,9 @@ namespace Alabo.Framework.Basic.Grades.Domain.Services
             get
             {
                 var grades = GetUserGradeList();
-                if (grades != null) return grades.FirstOrDefault(r => r.IsDefault);
+                if (grades != null) {
+                    return grades.FirstOrDefault(r => r.IsDefault);
+                }
 
                 var gradeConfig = new UserGradeConfig();
                 gradeConfig.SetDefault();
@@ -37,7 +39,9 @@ namespace Alabo.Framework.Basic.Grades.Domain.Services
         {
             var userGrades = GetUserGradeList();
             var grade = userGrades.FirstOrDefault(e => e.Id == gradeId);
-            if (grade == null) grade = new UserGradeConfig();
+            if (grade == null) {
+                grade = new UserGradeConfig();
+            }
 
             return grade;
         }
@@ -51,7 +55,9 @@ namespace Alabo.Framework.Basic.Grades.Domain.Services
                 var userType = Resolve<IAlaboAutoConfigService>().GetList<UserTypeConfig>()
                     .FirstOrDefault(r => r.TypeClass == UserTypeEnum.Member);
                 var gradeConfig = new UserGradeConfig();
-                if (userType != null) gradeConfig.Id = userType.Id;
+                if (userType != null) {
+                    gradeConfig.Id = userType.Id;
+                }
 
                 gradeConfig.SetDefault();
                 userGrades = Resolve<IAlaboAutoConfigService>()
@@ -70,9 +76,11 @@ namespace Alabo.Framework.Basic.Grades.Domain.Services
             var config = Resolve<IAlaboAutoConfigService>().GetConfig(key);
             var t = new BaseGradeConfig();
             var configlist = new List<BaseGradeConfig>();
-            if (config != null)
-                if (config.Value != null)
+            if (config != null) {
+                if (config.Value != null) {
                     configlist = config.Value.Deserialize(t);
+                }
+            }
 
             return configlist;
         }

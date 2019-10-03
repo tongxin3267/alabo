@@ -38,11 +38,17 @@ namespace Alabo.Industry.Shop.Carts.Domain.Services
             var productSku = Resolve<IProductSkuService>().GetSingle(r => r.Id == orderProductInput.ProductSkuId);
             var storeId = _productSkuRepository.GetStoreIdByProductSkuId(orderProductInput.ProductSkuId);
 
-            if (product == null) return ServiceResult.FailedWithMessage("商品不存在");
+            if (product == null) {
+                return ServiceResult.FailedWithMessage("商品不存在");
+            }
 
-            if (productSku == null) return ServiceResult.FailedWithMessage("商品SKU错误");
+            if (productSku == null) {
+                return ServiceResult.FailedWithMessage("商品SKU错误");
+            }
 
-            if (storeId.IsObjectIdNullOrEmpty()) return ServiceResult.FailedWithMessage("storeId错误");
+            if (storeId.IsObjectIdNullOrEmpty()) {
+                return ServiceResult.FailedWithMessage("storeId错误");
+            }
 
             var cartSingle = Resolve<ICartService>().GetSingle(u =>
                 u.ProductId == orderProductInput.ProductId && u.ProductSkuId == orderProductInput.ProductSkuId
@@ -107,8 +113,9 @@ namespace Alabo.Industry.Shop.Carts.Domain.Services
                 orderProductInputList.Add(orderProductInput);
             }
 
-            if (orderProductInputList.Count == 0)
+            if (orderProductInputList.Count == 0) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("商品数量为0"), new StoreProductSku());
+            }
 
             var buyInput = new BuyInfoInput
             {

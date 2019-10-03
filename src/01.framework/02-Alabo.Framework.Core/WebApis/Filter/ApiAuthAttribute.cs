@@ -22,10 +22,11 @@ namespace Alabo.Framework.Core.WebApis.Filter
         {
             base.OnException(context);
             ApiResult exceptionApiResult = null;
-            if (RuntimeContext.Current.WebsiteConfig.IsDevelopment)
+            if (RuntimeContext.Current.WebsiteConfig.IsDevelopment) {
                 exceptionApiResult = ApiResult.Error(context.Exception.ToString(), context.Exception.Message);
-            else
+            } else {
                 exceptionApiResult = ApiResult.Error(context.Exception.Message);
+            }
 
             context.Result = new JsonResult(exceptionApiResult)
             {

@@ -47,11 +47,15 @@ namespace Alabo.Test.Open.Tasks.Configs.UserRecommendedRelationship
                 var beforeAccounts = new List<Account>();
                 for (var i = 0; i < ratios.Count; i++)
                 {
-                    if (map.Count < i + 1) break;
+                    if (map.Count < i + 1) {
+                        break;
+                    }
 
                     var item = map[i];
                     var shareUser = Resolve<IUserService>().GetNomarlUser(item.UserId);
-                    if (shareUser == null) break;
+                    if (shareUser == null) {
+                        break;
+                    }
 
                     shareUserList.Add(shareUser);
                     var ratio = Convert.ToDecimal(ratios[i]);
@@ -95,11 +99,15 @@ namespace Alabo.Test.Open.Tasks.Configs.UserRecommendedRelationship
                 var beforeAccounts = new List<Account>();
                 for (var i = 0; i < ratios.Count; i++)
                 {
-                    if (map.Count < i + 1) break;
+                    if (map.Count < i + 1) {
+                        break;
+                    }
 
                     var item = map[i];
                     var shareUser = Resolve<IUserService>().GetNomarlUser(item.UserId);
-                    if (shareUser == null) break;
+                    if (shareUser == null) {
+                        break;
+                    }
 
                     shareUserList.Add(shareUser);
                     var ratio = Convert.ToDecimal(ratios[i]);

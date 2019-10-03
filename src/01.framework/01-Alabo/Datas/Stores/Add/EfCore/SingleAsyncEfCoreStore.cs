@@ -23,7 +23,9 @@ namespace Alabo.Datas.Stores.Add.EfCore
 
         public async Task<TEntity> GetSingleAsync(object id)
         {
-            if (id.SafeString().IsEmpty()) return null;
+            if (id.SafeString().IsEmpty()) {
+                return null;
+            }
 
             return await Set.FindAsync(new[] { id }, default);
         }

@@ -21,17 +21,35 @@ namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Repositories
 
         public List<PresaleProductItem> GetPresaleProducts(PresaleProductApiInput input, out long count)
         {
-            if (input.PageIndex < 0) throw new ArgumentNullException("pageIndex", "pageindex has to be greater than 1");
-            if (input.PageSize > 100) input.PageSize = 100;
-            if (input.StartPrice > input.EndPrice) throw new ArgumentNullException("price", "开始区间不大于结束区间");
+            if (input.PageIndex < 0) {
+                throw new ArgumentNullException("pageIndex", "pageindex has to be greater than 1");
+            }
+
+            if (input.PageSize > 100) {
+                input.PageSize = 100;
+            }
+
+            if (input.StartPrice > input.EndPrice) {
+                throw new ArgumentNullException("price", "开始区间不大于结束区间");
+            }
 
             //where
             var sqlWhere = string.Empty;
-            if (input.PriceStyleId.HasValue) sqlWhere += $" AND presale.PriceStyleId ='{input.PriceStyleId}'";
-            if (!string.IsNullOrEmpty(input.ProductName)) sqlWhere += $" AND product.Name Like '%{input.ProductName}%'";
-            if (!string.IsNullOrEmpty(input.CategoryId)) sqlWhere += $" AND product.CategoryId='{input.CategoryId}'";
-            if (input.StartPrice > 0 && input.EndPrice > 0)
+            if (input.PriceStyleId.HasValue) {
+                sqlWhere += $" AND presale.PriceStyleId ='{input.PriceStyleId}'";
+            }
+
+            if (!string.IsNullOrEmpty(input.ProductName)) {
+                sqlWhere += $" AND product.Name Like '%{input.ProductName}%'";
+            }
+
+            if (!string.IsNullOrEmpty(input.CategoryId)) {
+                sqlWhere += $" AND product.CategoryId='{input.CategoryId}'";
+            }
+
+            if (input.StartPrice > 0 && input.EndPrice > 0) {
                 sqlWhere += $" AND presale.VirtualPrice>={input.StartPrice} AND presale.VirtualPrice<={input.EndPrice}";
+            }
             //status
             var status = (int)ProductStatus.Online;
             sqlWhere += $" AND product.ProductStatus= {status}  AND product.StoreId>0 AND presale.Status={status}";
@@ -70,7 +88,9 @@ namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Repositories
             var result = new List<PresaleProductItem>();
             using (var dr = RepositoryContext.ExecuteDataReader(sql))
             {
-                while (dr.Read()) result.Add(ReadProduct(dr));
+                while (dr.Read()) {
+                    result.Add(ReadProduct(dr));
+                }
             }
 
             return result;

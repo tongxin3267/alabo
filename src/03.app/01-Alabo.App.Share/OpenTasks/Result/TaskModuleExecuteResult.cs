@@ -37,14 +37,21 @@ namespace Alabo.App.Share.OpenTasks.Result
         {
             try
             {
-                if (_taskActuator == null) return ExecuteResult.Cancel("task actuator is null.");
+                if (_taskActuator == null) {
+                    return ExecuteResult.Cancel("task actuator is null.");
+                }
 
-                if (_taskManager == null) return ExecuteResult.Cancel("task manager is null.");
+                if (_taskManager == null) {
+                    return ExecuteResult.Cancel("task manager is null.");
+                }
 
-                if (ModuleId == Guid.Empty) return ExecuteResult.Cancel("module is is empty, return.");
+                if (ModuleId == Guid.Empty) {
+                    return ExecuteResult.Cancel("module is is empty, return.");
+                }
 
-                if (!_taskManager.ContainsModuleId(ModuleId))
+                if (!_taskManager.ContainsModuleId(ModuleId)) {
                     return ExecuteResult.Fail($"module with id {ModuleId} not found.");
+                }
                 // 注释可能出现出错
                 // _taskActuator.ExecuteTaskAndUpdateResults(ModuleId, Parameter);
                 return ExecuteResult.Success();

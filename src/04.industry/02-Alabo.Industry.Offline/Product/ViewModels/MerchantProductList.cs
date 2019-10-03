@@ -148,7 +148,9 @@ namespace Alabo.Industry.Offline.Product.ViewModels
             if (!string.IsNullOrWhiteSpace(model.ClassName))
             {
                 var relation = allRelations.Find(r => r.Name.Contains(model.ClassName));
-                if (relation != null) expressionQuery.And(e => e.ClassId == relation.Id);
+                if (relation != null) {
+                    expressionQuery.And(e => e.ClassId == relation.Id);
+                }
             }
 
             //query

@@ -56,7 +56,7 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories
         /// <param name="sqlList"></param>
         public void ExecuteSql(List<string> sqlList)
         {
-            foreach (var item in sqlList)
+            foreach (var item in sqlList) {
                 try
                 {
                     RepositoryContext.ExecuteNonQuery(item);
@@ -65,6 +65,7 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories
                 {
                     Trace.WriteLine(ex.Message);
                 }
+            }
         }
 
         public void DeleteDatabase(string databaseName)

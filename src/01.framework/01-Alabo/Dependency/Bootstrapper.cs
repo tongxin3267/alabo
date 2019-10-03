@@ -136,7 +136,9 @@ namespace Alabo.Dependency
         /// </summary>
         private void RegisterContext()
         {
-            if (_context != null) _builder.AddSingleton(_context);
+            if (_context != null) {
+                _builder.AddSingleton(_context);
+            }
         }
 
         /// <summary>
@@ -153,12 +155,13 @@ namespace Alabo.Dependency
         private void RegisterEventHandlers(Type handlerType)
         {
             var handlerTypes = GetTypes(handlerType);
-            foreach (var handler in handlerTypes)
+            foreach (var handler in handlerTypes) {
                 _builder.RegisterType(handler).As(handler.FindInterfaces(
                     (filter, criteria) => filter.IsGenericType &&
                                           ((Type)criteria).IsAssignableFrom(filter.GetGenericTypeDefinition())
                     , handlerType
                 )).InstancePerLifetimeScope();
+            }
         }
 
         /// <summary>

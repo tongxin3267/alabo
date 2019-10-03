@@ -27,11 +27,15 @@ namespace Alabo.Cloud.Support.Controllers
         [HttpPost]
         public ApiResult Add([FromBody] WorkOrderInput workOrder)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var user = Resolve<IUserService>().GetSingle(u => u.Id == workOrder.LoginUserId);
-            if (user == null) return ApiResult.Failure("会员为空");
+            if (user == null) {
+                return ApiResult.Failure("会员为空");
+            }
+
             var view = new WorkOrder
             {
                 Description = workOrder.Description,

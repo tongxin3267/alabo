@@ -40,25 +40,38 @@ namespace _01_Alabo.Cloud.Core.MogoMigrate.Domain.Services
 
         public ServiceResult Migrate(MogoMigrateView view)
         {
-            if (!HttpWeb.UserName.Equal("admin")) return ServiceResult.FailedWithMessage("当前操作用户名非admin,不能进行该操作");
+            if (!HttpWeb.UserName.Equal("admin")) {
+                return ServiceResult.FailedWithMessage("当前操作用户名非admin,不能进行该操作");
+            }
 
-            if (view.MongoTableName.IsNullOrEmpty()) return ServiceResult.FailedWithMessage("Mongodb数据库不能为空");
+            if (view.MongoTableName.IsNullOrEmpty()) {
+                return ServiceResult.FailedWithMessage("Mongodb数据库不能为空");
+            }
 
-            if (view.MongoConnectionString.IsNullOrEmpty()) return ServiceResult.FailedWithMessage("Mongodb链接字符串不能为空");
+            if (view.MongoConnectionString.IsNullOrEmpty()) {
+                return ServiceResult.FailedWithMessage("Mongodb链接字符串不能为空");
+            }
 
             var user = Resolve<IUserService>().GetSingle(HttpWeb.UserId);
-            if (user.Status != Status.Normal) return ServiceResult.FailedWithMessage("用户状态不正常,不能进行该操作");
+            if (user.Status != Status.Normal) {
+                return ServiceResult.FailedWithMessage("用户状态不正常,不能进行该操作");
+            }
 
-            if (!user.UserName.Equal("admin")) return ServiceResult.FailedWithMessage("当前操作用户名非admin,不能进行该操作");
+            if (!user.UserName.Equal("admin")) {
+                return ServiceResult.FailedWithMessage("当前操作用户名非admin,不能进行该操作");
+            }
 
-            if (!view.UserTable.Equals("User_User")) return ServiceResult.FailedWithMessage("用户数据表填写出错,不能进行该操作");
+            if (!view.UserTable.Equals("User_User")) {
+                return ServiceResult.FailedWithMessage("用户数据表填写出错,不能进行该操作");
+            }
 
             //if (!view.ProjectId.Equals(HttpWeb.Token.ProjectId.ToString())) {
             //    return ServiceResult.FailedWithMessage("项目Id填写错误,不能进行该操作");
             //}
 
-            if (!view.Key.Equals(RuntimeContext.Current.WebsiteConfig.OpenApiSetting.Key))
+            if (!view.Key.Equals(RuntimeContext.Current.WebsiteConfig.OpenApiSetting.Key)) {
                 return ServiceResult.FailedWithMessage("秘钥填写错误,不能进行该操作");
+            }
 
             var connection = new MongoDbConnection
             {

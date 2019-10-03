@@ -44,15 +44,25 @@ namespace Alabo.Datas.Persistence
         /// </summary>
         public static bool operator ==(PersistentEntityBase<TKey> left, PersistentEntityBase<TKey> right)
         {
-            if ((object)left == null && (object)right == null) return true;
+            if ((object)left == null && (object)right == null) {
+                return true;
+            }
 
-            if ((object)left == null || (object)right == null) return false;
+            if ((object)left == null || (object)right == null) {
+                return false;
+            }
 
-            if (left.GetType() != right.GetType()) return false;
+            if (left.GetType() != right.GetType()) {
+                return false;
+            }
 
-            if (Equals(left.Id, null)) return false;
+            if (Equals(left.Id, null)) {
+                return false;
+            }
 
-            if (left.Id.Equals(default(TKey))) return false;
+            if (left.Id.Equals(default(TKey))) {
+                return false;
+            }
 
             return left.Id.Equals(right.Id);
         }

@@ -79,7 +79,9 @@ namespace Alabo.Test.Core.Admin.Domain.Services
         public void GetEnumDictionary_String_test(string enumName)
         {
             var result = Resolve<ITypeService>().GetEnumDictionary(enumName);
-            if (result == null) Console.WriteLine(result);
+            if (result == null) {
+                Console.WriteLine(result);
+            }
 
             Assert.NotNull(result);
         }

@@ -21,12 +21,19 @@ namespace Alabo.Cloud.People.UserRightss.UI.Widgets
         {
             var dbContext = Ioc.Resolve<IUserRepository>().RepositoryContext;
             var userMap = json.ToObject<UserMap>();
-            if (userMap == null) throw new ValidException("会员Id没有传入进来");
+            if (userMap == null) {
+                throw new ValidException("会员Id没有传入进来");
+            }
+
             var userId = userMap.UserId;
-            if (userId <= 0) throw new ValidException("会员Id没有传入进来");
+            if (userId <= 0) {
+                throw new ValidException("会员Id没有传入进来");
+            }
 
             var user = Ioc.Resolve<IUserService>().GetSingle(r => r.Id == userId);
-            if (user == null) throw new ValidException("对应ID会员不存在");
+            if (user == null) {
+                throw new ValidException("对应ID会员不存在");
+            }
 
             var sqlNewOrder =
                 $@" SELECT COUNT(*) FROM Shop_Order WHERE CreateTime > '{DateTime.Now.Date.ToString("yyyyMMdd")}' AND OrderType = 1 AND UserId = {userId} ";
@@ -50,7 +57,9 @@ namespace Alabo.Cloud.People.UserRightss.UI.Widgets
             var userDetail = Ioc.Resolve<IUserDetailService>().GetSingle(userId);
             //    var favorite = Ioc.Resolve<IFavoriteService>().GetFavoriteCountByUserId(userId);
             var isNotAdmin = !Ioc.Resolve<IUserService>().IsAdmin(userId);
-            if (userDetail.Avator.IsNullOrEmpty()) userDetail.Avator = @"/wwwroot/static/images/avator/man_64.png";
+            if (userDetail.Avator.IsNullOrEmpty()) {
+                userDetail.Avator = @"/wwwroot/static/images/avator/man_64.png";
+            }
 
             var rs = new MemberView
             {

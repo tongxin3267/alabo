@@ -20,7 +20,9 @@ namespace Alabo.Test.Generation.CodeTemplate
             //  type = typeof(WidgetHistory);
             //if (type.BaseType.FullName != typeof(MongoEntity).FullName) throw new ValidException("非Mongodb实体方法，不支持服务方法生成");
 
-            if (!type.BaseType.FullName.Contains("Entities")) throw new ValidException("命名空间必须包含Entities");
+            if (!type.BaseType.FullName.Contains("Entities")) {
+                throw new ValidException("命名空间必须包含Entities");
+            }
 
             var testBuilder = new StringBuilder();
             var filePath = BaseTemplate.GetFilePath(type, "Controllers").Replace("Domain", "").Replace("Domains", "")
@@ -45,8 +47,9 @@ namespace Alabo.Test.Generation.CodeTemplate
                 testBuilder.AppendLine("using Alabo.Web.Mvc.Controllers;");
                 testBuilder.AppendLine($"using {type.Namespace};");
 
-                if (testBuilder.ToString().IndexOf(type.Namespace, StringComparison.OrdinalIgnoreCase) == -1)
+                if (testBuilder.ToString().IndexOf(type.Namespace, StringComparison.OrdinalIgnoreCase) == -1) {
                     testBuilder.AppendLine($"using {type.Namespace};");
+                }
 
                 testBuilder.AppendLine();
                 testBuilder.AppendLine(

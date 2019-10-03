@@ -85,12 +85,16 @@ namespace Alabo.Data.People.Users.Controllers
         [HttpPost]
         public ApiResult AddUser([FromBody] ViewUser view)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<UserOutput>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
+
             var model = view.MapTo<RegInput>();
             var result = Resolve<IUserBaseService>().Reg(model);
-            if (result.Item1.Succeeded)
+            if (result.Item1.Succeeded) {
                 return ApiResult.Success();
+            }
+
             return ApiResult.Failure(result.Item1.ErrorMessages);
         }
 
@@ -138,8 +142,9 @@ namespace Alabo.Data.People.Users.Controllers
         [Display(Description = "会员注册")]
         public ApiResult<UserOutput> Reg([FromBody] RegInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<UserOutput>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var result = Resolve<IUserBaseService>().Reg(parameter);
             return ToResult(result);
@@ -156,7 +161,9 @@ namespace Alabo.Data.People.Users.Controllers
         {
             //var loginUserId = HttpContext.Request.Query["loginuserid"].ConvertToLong();
             var userDetail = Resolve<IUserDetailService>().GetSingle(r => r.UserId == parameter.UserId);
-            if (userDetail == null) return ApiResult.Failure();
+            if (userDetail == null) {
+                return ApiResult.Failure();
+            }
 
             userDetail.Avator = parameter.Avator;
             //userDetail.NickName = parameter.NickName;
@@ -186,9 +193,14 @@ namespace Alabo.Data.People.Users.Controllers
             var user = Resolve<IUserService>().GetSingle(s => s.Mobile == parameter.Mobile);
             if (user != null)
             {
-                if (user.ParentId <= 0) return ApiResult.Success(true, "该手机用户无人推荐!");
-                if (user.ParentId == parameter.UserId)
+                if (user.ParentId <= 0) {
+                    return ApiResult.Success(true, "该手机用户无人推荐!");
+                }
+
+                if (user.ParentId == parameter.UserId) {
                     return ApiResult.Success(true, "该手机用户已是您的推荐用户");
+                }
+
                 return ApiResult.Success(false, "该手机用户不是您的推荐用户,请谨慎操作!");
             }
 
@@ -220,21 +232,31 @@ namespace Alabo.Data.People.Users.Controllers
             if (parameter.UserId != 0)
             {
                 var userModel = Resolve<IUserService>().GetSingle(parameter.UserId);
-                if (userModel == null) return ApiResult.Failure("您访问的用户不存在！", MessageCodes.ParameterValidationFailure);
+                if (userModel == null) {
+                    return ApiResult.Failure("您访问的用户不存在！", MessageCodes.ParameterValidationFailure);
+                }
             }
             else
             {
                 return ApiResult.Failure("您访问的用户不存在！", MessageCodes.ParameterValidationFailure);
             }
 
-            if (parameter.Password != parameter.ConfirmPassword) return ApiResult.Failure("两次密码输入不一致");
+            if (parameter.Password != parameter.ConfirmPassword) {
+                return ApiResult.Failure("两次密码输入不一致");
+            }
 
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
-            if (parameter.Type.IsDefault()) parameter.Type = PasswordType.LoginPassword;
+            }
+
+            if (parameter.Type.IsDefault()) {
+                parameter.Type = PasswordType.LoginPassword;
+            }
 
             var result = Resolve<IUserDetailService>().ChangePassword(parameter);
-            if (!result.Succeeded) return ApiResult.Failure(result.ToString(), MessageCodes.ParameterValidationFailure);
+            if (!result.Succeeded) {
+                return ApiResult.Failure(result.ToString(), MessageCodes.ParameterValidationFailure);
+            }
 
             return ApiResult.Success("密码修改成功");
         }
@@ -251,21 +273,29 @@ namespace Alabo.Data.People.Users.Controllers
             if (parameter.UserId != 0)
             {
                 var userModel = Resolve<IUserService>().GetSingle(parameter.UserId);
-                if (userModel == null) return ApiResult.Failure("您访问的用户不存在！", MessageCodes.ParameterValidationFailure);
+                if (userModel == null) {
+                    return ApiResult.Failure("您访问的用户不存在！", MessageCodes.ParameterValidationFailure);
+                }
             }
             else
             {
                 return ApiResult.Failure("您访问的用户不存在！", MessageCodes.ParameterValidationFailure);
             }
 
-            if (parameter.Password != parameter.ConfirmPassword) return ApiResult.Failure("两次密码输入不一致");
+            if (parameter.Password != parameter.ConfirmPassword) {
+                return ApiResult.Failure("两次密码输入不一致");
+            }
 
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             parameter.Type = PasswordType.PayPassword;
             var result = Resolve<IUserDetailService>().ChangePassword(parameter);
-            if (!result.Succeeded) return ApiResult.Failure(result.ToString(), MessageCodes.ParameterValidationFailure);
+            if (!result.Succeeded) {
+                return ApiResult.Failure(result.ToString(), MessageCodes.ParameterValidationFailure);
+            }
+
             return ApiResult.Success("密码修改成功");
         }
 
@@ -281,14 +311,19 @@ namespace Alabo.Data.People.Users.Controllers
             //if (parameter.Email.IsNullOrEmpty()) {
             //    parameter.Email = parameter.UserName + "@5ug.com";
             //}
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             if (!Resolve<IOpenService>().CheckVerifiyCode(parameter.Mobile, parameter.MobileVerifiyCode.ConvertToLong())
-            ) return ApiResult.Failure("手机验证码错误", MessageCodes.ParameterValidationFailure);
+            ) {
+                return ApiResult.Failure("手机验证码错误", MessageCodes.ParameterValidationFailure);
+            }
 
             var result = Resolve<IUserDetailService>().FindPassword(parameter);
-            if (!result.Succeeded) return ApiResult.Failure(result.ToString(), MessageCodes.ParameterValidationFailure);
+            if (!result.Succeeded) {
+                return ApiResult.Failure(result.ToString(), MessageCodes.ParameterValidationFailure);
+            }
 
             return ApiResult.Success("密码修改成功");
         }
@@ -301,14 +336,20 @@ namespace Alabo.Data.People.Users.Controllers
         [Display(Description = "找回密码，密码传入明文")]
         public ApiResult FindPayPassword([FromBody] FindPasswordInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
+
             parameter.UserName = parameter.Mobile;
             if (!Resolve<IOpenService>().CheckVerifiyCode(parameter.Mobile, parameter.MobileVerifiyCode.ConvertToLong())
-            ) return ApiResult.Failure("手机验证码错误", MessageCodes.ParameterValidationFailure);
+            ) {
+                return ApiResult.Failure("手机验证码错误", MessageCodes.ParameterValidationFailure);
+            }
 
             var result = Resolve<IUserDetailService>().FindPayPassword(parameter);
-            if (!result.Succeeded) return ApiResult.Failure(result.ToString(), MessageCodes.ParameterValidationFailure);
+            if (!result.Succeeded) {
+                return ApiResult.Failure(result.ToString(), MessageCodes.ParameterValidationFailure);
+            }
 
             return ApiResult.Success("支付密码修改成功");
         }
@@ -323,10 +364,13 @@ namespace Alabo.Data.People.Users.Controllers
         public ApiResult<UserOutput> View([FromQuery] ApiBaseInput parameter)
         {
             var userOutPut = Resolve<IUserDetailService>().GetUserOutput(parameter.LoginUserId.ConvertToLong());
-            if (userOutPut == null) return ApiResult.Failure<UserOutput>("用户不存在或者已经删除！");
+            if (userOutPut == null) {
+                return ApiResult.Failure<UserOutput>("用户不存在或者已经删除！");
+            }
 
-            if (!(userOutPut.ParentId == parameter.LoginUserId || userOutPut.Id == parameter.LoginUserId))
+            if (!(userOutPut.ParentId == parameter.LoginUserId || userOutPut.Id == parameter.LoginUserId)) {
                 return ApiResult.Failure<UserOutput>("对不起您无权查看！");
+            }
 
             return ApiResult.Success(userOutPut);
         }
@@ -340,12 +384,15 @@ namespace Alabo.Data.People.Users.Controllers
         [ApiAuth]
         public ApiResult<AutoPreview> Preview([FromQuery] PreviewInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<AutoPreview>(this.FormInvalidReason(),
                     MessageCodes.ParameterValidationFailure);
+            }
 
             var userOutPut = Resolve<IUserDetailService>().GetUserOutput(parameter.Id.ConvertToLong());
-            if (userOutPut == null) return ApiResult.Failure<AutoPreview>("用户不存在或者已经删除！");
+            if (userOutPut == null) {
+                return ApiResult.Failure<AutoPreview>("用户不存在或者已经删除！");
+            }
 
             //if (!(userOutPut.ParentId == parameter.LoginUserId || userOutPut.Id == parameter.LoginUserId)) {
             //    return ApiResult.Failure<List<KeyValue>>("对不起您无权查看！");
@@ -366,10 +413,15 @@ namespace Alabo.Data.People.Users.Controllers
         [Display(Description = "会员详细信息、包括用户名、姓名、手机号地址等新")]
         public ApiResult<UserOutput> Info(ListInput parameter)
         {
-            if (parameter.LoginUserId < 1) return ApiResult.Failure<UserOutput>($"用户ID不能为{parameter.LoginUserId}！");
+            if (parameter.LoginUserId < 1) {
+                return ApiResult.Failure<UserOutput>($"用户ID不能为{parameter.LoginUserId}！");
+            }
 
             var user = Resolve<IUserService>().GetSingle(parameter.LoginUserId);
-            if (user == null) return ApiResult.Failure<UserOutput>($"用户ID={parameter.LoginUserId}没有对应数据记录！");
+            if (user == null) {
+                return ApiResult.Failure<UserOutput>($"用户ID={parameter.LoginUserId}没有对应数据记录！");
+            }
+
             var userGrade = Resolve<IAutoConfigService>().GetList<UserGradeConfig>(u => u.Id == user.GradeId);
             var userDetail = Resolve<IUserDetailService>().GetSingle(parameter.LoginUserId);
 
@@ -380,10 +432,12 @@ namespace Alabo.Data.People.Users.Controllers
             userOutput.ParentUserName = Resolve<IUserService>().GetSingle(u => u.Id == user.ParentId)?.UserName;
 
             userOutput.RegionName = Resolve<IRegionService>().GetRegionNameById(userDetail.RegionId);
-            if (!userDetail.Avator.IsNullOrEmpty())
+            if (!userDetail.Avator.IsNullOrEmpty()) {
                 userOutput.Avator = Resolve<IApiService>().ApiImageUrl(userDetail.Avator);
-            else
+            } else {
                 userOutput.Avator = Resolve<IApiService>().ApiImageUrl(@"/wwwroot/static/images/avator/man_64.png");
+            }
+
             return ApiResult.Success(userOutput);
         }
 
@@ -407,7 +461,10 @@ namespace Alabo.Data.People.Users.Controllers
         [ApiAuth(Filter = FilterType.Admin)]
         public ApiResult Delete(long id)
         {
-            if (Resolve<IUserAdminService>().DeleteUser(id)) return ApiResult.Success("会员删除成功");
+            if (Resolve<IUserAdminService>().DeleteUser(id)) {
+                return ApiResult.Success("会员删除成功");
+            }
+
             return ApiResult.Failure("会员删除失败,服务异常，请稍后再试");
         }
 

@@ -63,7 +63,9 @@ namespace Alabo.Helpers
         /// <param name="password"></param>
         public bool Check(string password)
         {
-            if (string.IsNullOrEmpty(password)) return false;
+            if (string.IsNullOrEmpty(password)) {
+                return false;
+            }
 
             var slat = Slat == null ? null : System.Convert.FromBase64String(Slat);
             var info = FromPassword(password, slat, Type);
@@ -79,7 +81,9 @@ namespace Alabo.Helpers
         public static PasswordInfo FromPassword(string password,
             byte[] slat = null, PasswordHashType type = PasswordHashType.Pbkdf2)
         {
-            if (string.IsNullOrEmpty(password)) throw new ArgumentNullException("password can't be empty");
+            if (string.IsNullOrEmpty(password)) {
+                throw new ArgumentNullException("password can't be empty");
+            }
 
             var info = new PasswordInfo { Type = type };
             var passwordBytes = Encoding.UTF8.GetBytes(password);

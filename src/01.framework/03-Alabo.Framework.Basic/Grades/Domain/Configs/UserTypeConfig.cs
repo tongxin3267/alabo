@@ -27,10 +27,11 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs
     {
         public UserTypeConfig()
         {
-            if (TypeClass != UserTypeEnum.Customer)
+            if (TypeClass != UserTypeEnum.Customer) {
                 Id = TypeClass.GetCustomAttr<FieldAttribute>().GuidId.ToGuid();
-            else
+            } else {
                 Id = Guid.NewGuid();
+            }
         }
 
         #region
@@ -174,7 +175,7 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs
             {
                 var configs = new List<UserTypeConfig>();
                 var config = new UserTypeConfig();
-                foreach (UserTypeEnum item in Enum.GetValues(typeof(UserTypeEnum)))
+                foreach (UserTypeEnum item in Enum.GetValues(typeof(UserTypeEnum))) {
                     if (item.IsDefault())
                     {
                         config = new UserTypeConfig
@@ -182,16 +183,18 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs
                             TypeClass = item,
                             Icon = item.GetFieldAttribute().Icon
                         };
-                        if (config.TypeClass == UserTypeEnum.Customer)
+                        if (config.TypeClass == UserTypeEnum.Customer) {
                             config.Id = Guid.NewGuid();
-                        else
+                        } else {
                             config.Id = item.GetCustomAttr<FieldAttribute>().GuidId.ToGuid();
+                        }
 
                         config.Name = item.GetDisplayName();
                         config.Name = item.GetDisplayName();
                         config.FrontName = item.GetDisplayName() + "中心";
                         configs.Add(config);
                     }
+                }
 
                 var typeclassProperty = config.GetType().GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
                 var autoConfig = new AutoConfig

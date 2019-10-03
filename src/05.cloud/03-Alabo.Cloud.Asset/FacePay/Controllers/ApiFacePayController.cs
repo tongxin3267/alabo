@@ -22,10 +22,14 @@ namespace Alabo.Cloud.Asset.FacePay.Controllers
         public ApiResult Pay([FromBody] Domain.Entities.FacePay model)
         {
             var user = Ioc.Resolve<IUserService>().GetSingle(x => x.Id == model.UserId);
-            if (user == null) return ApiResult.Failure("用户不存在!");
+            if (user == null) {
+                return ApiResult.Failure("用户不存在!");
+            }
 
             var account = Resolve<IAccountService>().GetAccount(user.Id, Currency.Cny);
-            if (account.Amount < model.Amount) return ApiResult.Failure("余额不足，请充值");
+            if (account.Amount < model.Amount) {
+                return ApiResult.Failure("余额不足，请充值");
+            }
 
             var rs = Ioc.Resolve<IFacePayService>().Add(model);
             if (rs)

@@ -43,8 +43,9 @@ namespace Alabo.Industry.Offline.Order.Domain.Services
             //user
             var result = new MerchantCartOutput();
             var user = Resolve<IUserService>().GetSingle(buyInfo.UserId);
-            if (user == null || user.Status != Status.Normal)
+            if (user == null || user.Status != Status.Normal) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("您的输入的账户不存在，或者状态不正常"), result);
+            }
             //get merchant store
             //var merchantStore = Resolve<IMerchantStoreService>().GetSingle(s => s.Id == buyInfo.MerchantStoreId.ToObjectId());
             //if (merchantStore == null)
@@ -54,7 +55,9 @@ namespace Alabo.Industry.Offline.Order.Domain.Services
             //get cart from database
             var cartIds = buyInfo.ProductItems.Select(c => c.Id.ToObjectId()).ToList();
             var carts = Resolve<IMerchantCartService>().GetCart(cartIds);
-            if (carts.Count <= 0) return Tuple.Create(ServiceResult.FailedWithMessage("购物车为空"), result);
+            if (carts.Count <= 0) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("购物车为空"), result);
+            }
 
             return CountPrice(carts);
         }
@@ -68,7 +71,9 @@ namespace Alabo.Industry.Offline.Order.Domain.Services
         {
             //check
             var output = new MerchantCartOutput();
-            if (cartProducts.Count <= 0) return Tuple.Create(ServiceResult.FailedWithMessage("购物车数据异常"), output);
+            if (cartProducts.Count <= 0) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("购物车数据异常"), output);
+            }
             //product
             var result = ServiceResult.Success;
             var productService = Resolve<IMerchantProductService>();
@@ -120,25 +125,36 @@ namespace Alabo.Industry.Offline.Order.Domain.Services
             //check
             var orderBuyOutput = new MerchantOrderBuyOutput();
             var user = Resolve<IUserService>().GetNomarlUser(orderBuyInput.UserId);
-            if (user == null) return Tuple.Create(ServiceResult.FailedWithMessage("用户不存在，或状态不正常"), orderBuyOutput);
-            if (orderBuyInput.Products.Count <= 0)
+            if (user == null) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("用户不存在，或状态不正常"), orderBuyOutput);
+            }
+
+            if (orderBuyInput.Products.Count <= 0) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("提交商品数据异常"), orderBuyOutput);
+            }
             //get cart from database
             var cartIds = orderBuyInput.Products.Select(c => c.Id.ToObjectId()).ToList();
             var carts = Resolve<IMerchantCartService>().GetCart(cartIds);
-            if (carts.Count <= 0) return Tuple.Create(ServiceResult.FailedWithMessage("提交商品数据异常"), orderBuyOutput);
+            if (carts.Count <= 0) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("提交商品数据异常"), orderBuyOutput);
+            }
 
             //Calculator price
             var priceResult = CountPrice(carts);
-            if (!priceResult.Item1.Succeeded) return Tuple.Create(priceResult.Item1, orderBuyOutput);
+            if (!priceResult.Item1.Succeeded) {
+                return Tuple.Create(priceResult.Item1, orderBuyOutput);
+            }
+
             var orderPrice = priceResult.Item2;
 
             //check input data
-            if (orderBuyInput.TotalAmount != orderPrice.TotalAmount)
+            if (orderBuyInput.TotalAmount != orderPrice.TotalAmount) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("商品价格计算有误"), orderBuyOutput);
+            }
 
-            if (orderBuyInput.TotalCount != orderPrice.TotalCount)
+            if (orderBuyInput.TotalCount != orderPrice.TotalCount) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("订单商品计算有误"), orderBuyOutput);
+            }
 
             //save
             var result = ServiceResult.Success;
@@ -194,7 +210,10 @@ namespace Alabo.Industry.Offline.Order.Domain.Services
                     if (productData != null)
                     {
                         var sku = productData.Skus?.Find(s => s.SkuId == product.SkuId);
-                        if (sku != null) sku.Stock -= product.Count;
+                        if (sku != null) {
+                            sku.Stock -= product.Count;
+                        }
+
                         productData.SoldCount += product.Count;
                         productService.Update(productData);
                     }
@@ -271,7 +290,10 @@ namespace Alabo.Industry.Offline.Order.Domain.Services
             orders.ForEach(order =>
             {
                 var pay = pays.Find(o => o.Id == order.PayId);
-                if (pay == null) return;
+                if (pay == null) {
+                    return;
+                }
+
                 sqlList.Add(
                     $"update Offline_MerchantOrder set OrderStatus={(int) MerchantOrderStatus.Success},PayId='{pay.Id}'  where OrderStatus={(int) MerchantOrderStatus.WaitingBuyerPay} and id in  ({entityIdList.ToSqlString()})");
                 // TODO 线下订单支付关闭
@@ -289,17 +311,26 @@ namespace Alabo.Industry.Offline.Order.Domain.Services
         {
             //query express
             var query = new ExpressionQuery<MerchantOrder>();
-            if (orderInput.OrderStatus > 0) query.And(e => e.OrderStatus == orderInput.OrderStatus);
+            if (orderInput.OrderStatus > 0) {
+                query.And(e => e.OrderStatus == orderInput.OrderStatus);
+            }
 
-            if (!string.IsNullOrWhiteSpace(orderInput.MerchantStoreId))
+            if (!string.IsNullOrWhiteSpace(orderInput.MerchantStoreId)) {
                 query.And(e => e.MerchantStoreId == orderInput.MerchantStoreId);
-            if (orderInput.UserId > 0) query.And(e => e.UserId == orderInput.UserId);
+            }
+
+            if (orderInput.UserId > 0) {
+                query.And(e => e.UserId == orderInput.UserId);
+            }
+
             query.PageIndex = (int) orderInput.PageIndex;
             query.PageSize = (int) orderInput.PageSize;
             query.EnablePaging = true;
             query.OrderByDescending(e => e.Id);
             var orders = Resolve<IMerchantOrderService>().GetPagedList(query);
-            if (orders.Count < 0) return new PagedList<MerchantOrderList>();
+            if (orders.Count < 0) {
+                return new PagedList<MerchantOrderList>();
+            }
             //all stores
             var merchantStores = Resolve<IMerchantStoreService>().GetList().ToList();
             //query
@@ -308,7 +339,10 @@ namespace Alabo.Industry.Offline.Order.Domain.Services
             orders.ForEach(item =>
             {
                 var store = merchantStores.Find(s => s.Id == item.MerchantStoreId.ToObjectId());
-                if (store == null) return;
+                if (store == null) {
+                    return;
+                }
+
                 var extension = item.Extension.DeserializeJson<MerchantOrderExtension>();
                 var temp = new MerchantOrderList();
                 temp = AutoMapping.SetValue(item, temp);
@@ -335,11 +369,17 @@ namespace Alabo.Industry.Offline.Order.Domain.Services
         public Tuple<ServiceResult, MerchantOrderList> GetOrderSingle(long id, long userId)
         {
             var order = GetSingle(r => r.Id == id && r.UserId == userId);
-            if (order == null) return Tuple.Create(ServiceResult.FailedWithMessage("订单不存在"), new MerchantOrderList());
+            if (order == null) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("订单不存在"), new MerchantOrderList());
+            }
+
             var orderDetail = AutoMapping.SetValue<MerchantOrderList>(order);
             //user
             var user = Resolve<IUserService>().GetSingle(order.UserId);
-            if (user == null) return Tuple.Create(ServiceResult.FailedWithMessage("用户不存在"), orderDetail);
+            if (user == null) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("用户不存在"), orderDetail);
+            }
+
             orderDetail.MerchantOrderStatus = order.OrderStatus;
             orderDetail.CreateTime = order.CreateTime.ToDateTimeString();
             orderDetail.BuyUser = AutoMapping.SetValue<UserOutput>(user);
@@ -380,11 +420,17 @@ namespace Alabo.Industry.Offline.Order.Domain.Services
         public Tuple<ServiceResult, MerchantOrderList> GetOrderSingle(long id)
         {
             var order = GetSingle(r => r.Id == id);
-            if (order == null) return Tuple.Create(ServiceResult.FailedWithMessage("订单不存在"), new MerchantOrderList());
+            if (order == null) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("订单不存在"), new MerchantOrderList());
+            }
+
             var orderDetail = AutoMapping.SetValue<MerchantOrderList>(order);
             //user
             var user = Resolve<IUserService>().GetSingle(order.UserId);
-            if (user == null) return Tuple.Create(ServiceResult.FailedWithMessage("用户不存在"), orderDetail);
+            if (user == null) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("用户不存在"), orderDetail);
+            }
+
             orderDetail.MerchantOrderStatus = order.OrderStatus;
             orderDetail.CreateTime = order.CreateTime.ToDateTimeString();
             orderDetail.BuyUser = AutoMapping.SetValue<UserOutput>(user);

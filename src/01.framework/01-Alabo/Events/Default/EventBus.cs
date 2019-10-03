@@ -46,7 +46,9 @@ namespace Alabo.Events.Default
 
             foreach (var handler in handlers)
             {
-                if (handler == null) continue;
+                if (handler == null) {
+                    continue;
+                }
 
                 await handler.HandleAsync(@event);
             }
@@ -59,9 +61,13 @@ namespace Alabo.Events.Default
         /// </summary>
         private async Task PublishMessageEvents<TEvent>(TEvent @event)
         {
-            if (MessageEventBus == null) return;
+            if (MessageEventBus == null) {
+                return;
+            }
 
-            if (@event is IMessageEvent messageEvent) await MessageEventBus.PublishAsync(messageEvent);
+            if (@event is IMessageEvent messageEvent) {
+                await MessageEventBus.PublishAsync(messageEvent);
+            }
         }
     }
 }

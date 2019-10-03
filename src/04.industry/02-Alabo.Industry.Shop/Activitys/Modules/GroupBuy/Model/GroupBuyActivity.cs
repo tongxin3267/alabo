@@ -127,11 +127,15 @@ namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Model
             var moneyTypes = Resolve<IAutoConfigService>().MoneyTypes(); // 所有货币类型
             var productId = httpContext.Request.Form["ProductId"].ConvertToLong();
             var product = Resolve<IProductService>().GetSingle(r => r.Id == productId);
-            if (product == null) return ServiceResult.FailedWithMessage("商品不存在");
+            if (product == null) {
+                return ServiceResult.FailedWithMessage("商品不存在");
+            }
 
             var priceStyleConfig = Resolve<IAutoConfigService>().GetList<PriceStyleConfig>()
                 .FirstOrDefault(r => r.Id == product.PriceStyleId);
-            if (product.MinCashRate == 0) product.MinCashRate = priceStyleConfig.MinCashRate;
+            if (product.MinCashRate == 0) {
+                product.MinCashRate = priceStyleConfig.MinCashRate;
+            }
 
             activityModule.SkuProducts.Foreach(r =>
             {
@@ -141,7 +145,9 @@ namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Model
                 if (priceStyleConfig != null)
                 {
                     var moneyConfig = moneyTypes.FirstOrDefault(e => e.Id == priceStyleConfig.MoneyTypeId);
-                    if (moneyConfig?.RateFee == 0) moneyConfig.RateFee = 1;
+                    if (moneyConfig?.RateFee == 0) {
+                        moneyConfig.RateFee = 1;
+                    }
                     // 如果不是现金商品
                     if (priceStyleConfig.PriceStyle != PriceStyle.CashProduct)
                     {

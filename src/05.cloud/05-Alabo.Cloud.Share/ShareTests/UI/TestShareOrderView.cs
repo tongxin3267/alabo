@@ -66,9 +66,13 @@ namespace _05_Alabo.Cloud.Share.ShareTests.UI
         {
             var view = model.MapTo<TestShareOrderView>();
             var user = Resolve<IUserService>().GetSingle(view.UserName);
-            if (user == null) return ServiceResult.FailedWithMessage("用户不存在");
+            if (user == null) {
+                return ServiceResult.FailedWithMessage("用户不存在");
+            }
 
-            if (view.Amount <= 0) return ServiceResult.FailedWithMessage("分润金额不能小于0");
+            if (view.Amount <= 0) {
+                return ServiceResult.FailedWithMessage("分润金额不能小于0");
+            }
 
             var shareOrder = new ShareOrder
             {
@@ -77,7 +81,10 @@ namespace _05_Alabo.Cloud.Share.ShareTests.UI
                 Amount = view.Amount,
                 TriggerType = TriggerType.Other
             };
-            if (!Resolve<IShareOrderService>().Add(shareOrder)) return ServiceResult.FailedWithMessage("添加失败");
+            if (!Resolve<IShareOrderService>().Add(shareOrder)) {
+                return ServiceResult.FailedWithMessage("添加失败");
+            }
+
             return ServiceResult.Success;
         }
     }

@@ -15,7 +15,9 @@ namespace Alabo.Security.Identity.Extensions
         /// <param name="permissionOptions">权限配置</param>
         public static void Load(this IdentityOptions options, PermissionOptions permissionOptions)
         {
-            if (options == null || permissionOptions == null) return;
+            if (options == null || permissionOptions == null) {
+                return;
+            }
 
             LoadPassword(options, permissionOptions);
             LoadUser(options, permissionOptions);

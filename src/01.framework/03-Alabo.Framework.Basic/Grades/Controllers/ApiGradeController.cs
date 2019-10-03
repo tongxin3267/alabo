@@ -49,7 +49,9 @@ namespace Alabo.Framework.Basic.Grades.Controllers
         public ApiResult<UserGradeConfig> GetUserGrade([FromQuery] string userName)
         {
             var user = Resolve<IAlaboUserService>().GetSingle(userName);
-            if (user == null) return ApiResult.Failure<UserGradeConfig>("用户不存在");
+            if (user == null) {
+                return ApiResult.Failure<UserGradeConfig>("用户不存在");
+            }
 
             var grade = Resolve<IGradeService>().GetGrade(user.GradeId);
             return ApiResult.Success(grade);
@@ -62,8 +64,9 @@ namespace Alabo.Framework.Basic.Grades.Controllers
         [Display(Description = "修改会员等级")]
         public ApiResult UpdateGrade([FromBody] UserGradeInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var result = Resolve<IGradeService>().UpdateUserGrade(parameter);
             return ToResult(result);

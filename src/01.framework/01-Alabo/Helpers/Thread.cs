@@ -18,10 +18,14 @@ namespace Alabo.Helpers
         /// <param name="actions">操作集合</param>
         public static void WaitAll(params Action[] actions)
         {
-            if (actions == null) return;
+            if (actions == null) {
+                return;
+            }
 
             var tasks = new List<Task>();
-            foreach (var action in actions) tasks.Add(Task.Factory.StartNew(action, TaskCreationOptions.None));
+            foreach (var action in actions) {
+                tasks.Add(Task.Factory.StartNew(action, TaskCreationOptions.None));
+            }
 
             Task.WaitAll(tasks.ToArray());
         }
@@ -128,14 +132,18 @@ namespace Alabo.Helpers
                 Tuple<SendOrPostCallback, object> task = null;
                 lock (_items)
                 {
-                    if (_items.Count > 0) task = _items.Dequeue();
+                    if (_items.Count > 0) {
+                        task = _items.Dequeue();
+                    }
                 }
 
                 if (task != null)
                 {
                     task.Item1(task.Item2);
                     if (InnerException != null) // the method threw an exeption
+{
                         throw new AggregateException("AsyncExtend.Run method threw an exception.", InnerException);
+                    }
                 }
                 else
                 {

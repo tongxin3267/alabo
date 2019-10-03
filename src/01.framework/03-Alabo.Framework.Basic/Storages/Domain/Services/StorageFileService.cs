@@ -30,7 +30,9 @@ namespace Alabo.Framework.Basic.Storages.Domain.Services
             var pathBase = $"{basePath.ToLower()}/{DateTime.Now:yyyy-MM-dd}/";
             var uploadPath = Path.Combine(FileHelper.WwwRootPath, pathBase.TrimStart('/')).ToLower().Replace("//", "/");
 
-            if (!Directory.Exists(uploadPath)) Directory.CreateDirectory(uploadPath);
+            if (!Directory.Exists(uploadPath)) {
+                Directory.CreateDirectory(uploadPath);
+            }
 
             var uploadFile = files.First();
             var originalName = uploadFile.FileName;

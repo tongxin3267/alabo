@@ -31,7 +31,9 @@ namespace Alabo.App.Asset.Accounts.Domain.Repositories
         {
             var sql = $"select Amount from Asset_Account where UserId={userId} and MoneyTypeId='{moneyTypeId}'";
             var result = RepositoryContext.ExecuteScalar(sql);
-            if (result == null || result == DBNull.Value) return -1;
+            if (result == null || result == DBNull.Value) {
+                return -1;
+            }
 
             return Convert.ToDecimal(result);
         }
@@ -46,7 +48,9 @@ namespace Alabo.App.Asset.Accounts.Domain.Repositories
         public bool ChangeAccountAmount(long userId, Guid moneyTypeId, decimal changedAmount)
         {
             var historyUpdateSql = string.Empty;
-            if (changedAmount > 0) historyUpdateSql = $" ,HistoryAmount=HistoryAmount+{changedAmount}";
+            if (changedAmount > 0) {
+                historyUpdateSql = $" ,HistoryAmount=HistoryAmount+{changedAmount}";
+            }
 
             var sql =
                 $"update Asset_Account set Amount=Amount+{changedAmount} {historyUpdateSql} where UserId={userId} and MoneyTypeId='{moneyTypeId}'";
@@ -94,7 +98,9 @@ namespace Alabo.App.Asset.Accounts.Domain.Repositories
             Account result = null;
             using (var dr = RepositoryContext.ExecuteDataReader(sql))
             {
-                if (dr.Read()) result = ReadAccount(dr);
+                if (dr.Read()) {
+                    result = ReadAccount(dr);
+                }
             }
 
             return result;
@@ -113,7 +119,9 @@ namespace Alabo.App.Asset.Accounts.Domain.Repositories
             Account result = null;
             using (var dr = RepositoryContext.ExecuteDataReader(transaction, sql))
             {
-                if (dr.Read()) result = ReadAccount(dr);
+                if (dr.Read()) {
+                    result = ReadAccount(dr);
+                }
             }
 
             return result;
@@ -128,14 +136,20 @@ namespace Alabo.App.Asset.Accounts.Domain.Repositories
         public IList<Account> GetUserAllAccount(long userId, string moneyTypeGuid)
         {
             IList<Account> result = new List<Account>();
-            if (userId <= 0) return result;
+            if (userId <= 0) {
+                return result;
+            }
 
-            if (moneyTypeGuid.IsNullOrEmpty()) return result;
+            if (moneyTypeGuid.IsNullOrEmpty()) {
+                return result;
+            }
 
             var sql = $"select * from Asset_Account where   UserId={userId} and MoneyTypeId In ('{moneyTypeGuid}')";
             using (var dr = RepositoryContext.ExecuteDataReader(sql))
             {
-                while (dr.Read()) result.Add(ReadAccount(dr));
+                while (dr.Read()) {
+                    result.Add(ReadAccount(dr));
+                }
             }
 
             return result;
@@ -152,7 +166,9 @@ namespace Alabo.App.Asset.Accounts.Domain.Repositories
             IList<Account> result = new List<Account>();
             using (var dr = RepositoryContext.ExecuteDataReader(sql))
             {
-                while (dr.Read()) result.Add(ReadAccount(dr));
+                while (dr.Read()) {
+                    result.Add(ReadAccount(dr));
+                }
             }
 
             return result;
@@ -169,7 +185,9 @@ namespace Alabo.App.Asset.Accounts.Domain.Repositories
             Account result = null;
             using (var dr = RepositoryContext.ExecuteDataReader(sql))
             {
-                if (dr.Read()) result = ReadAccount(dr);
+                if (dr.Read()) {
+                    result = ReadAccount(dr);
+                }
             }
 
             return result;
@@ -182,7 +200,9 @@ namespace Alabo.App.Asset.Accounts.Domain.Repositories
             IList<long> result = new List<long>();
             using (var dr = RepositoryContext.ExecuteDataReader(sql))
             {
-                while (dr.Read()) result.Add(dr["Id"].ConvertToLong(0));
+                while (dr.Read()) {
+                    result.Add(dr["Id"].ConvertToLong(0));
+                }
             }
 
             return result;

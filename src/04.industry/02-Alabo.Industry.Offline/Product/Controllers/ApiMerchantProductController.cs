@@ -113,7 +113,9 @@ namespace Alabo.Industry.Offline.Product.Controllers
         [HttpDelete]
         public ApiResult Delete(string Id)
         {
-            if (Resolve<IMerchantProductService>().Delete(Id)) return ApiResult.Success("商品删除成功");
+            if (Resolve<IMerchantProductService>().Delete(Id)) {
+                return ApiResult.Success("商品删除成功");
+            }
 
             return ApiResult.Failure("商品删除失败,服务异常，请稍后再试");
         }
@@ -130,28 +132,42 @@ namespace Alabo.Industry.Offline.Product.Controllers
         [Display(Description = "修改或删除")]
         public ApiResult<MerchantProduct> SaveMerchantProduct([FromBody] MerchantProduct paramaer)
         {
-            if (BaseService == null) return ApiResult.Failure<MerchantProduct>("请在控制器中定义BaseService");
+            if (BaseService == null) {
+                return ApiResult.Failure<MerchantProduct>("请在控制器中定义BaseService");
+            }
 
-            if (paramaer == null) return ApiResult.Failure<MerchantProduct>("参数值为空,请认真检查服务器特性配置：比如ObjectId是否配置特性");
-            if (!this.IsFormValid()) return ApiResult.Failure<MerchantProduct>(this.FormInvalidReason());
+            if (paramaer == null) {
+                return ApiResult.Failure<MerchantProduct>("参数值为空,请认真检查服务器特性配置：比如ObjectId是否配置特性");
+            }
 
-            foreach (var item in paramaer.Skus)
+            if (!this.IsFormValid()) {
+                return ApiResult.Failure<MerchantProduct>(this.FormInvalidReason());
+            }
+
+            foreach (var item in paramaer.Skus) {
                 if (string.IsNullOrEmpty(item.SkuId) || item.SkuId == ObjectId.Empty.ToString() ||
-                    item.SkuId == "000000000000000000000000")
+                    item.SkuId == "000000000000000000000000") {
                     item.SkuId = ObjectId.GenerateNewId().ToString();
+                }
+            }
 
             var find = Resolve<IMerchantProductService>().GetSingle(paramaer.Id);
             if (find == null)
             {
                 var result = Resolve<IMerchantProductService>().Add(paramaer);
-                if (result == false) return ApiResult.Failure<MerchantProduct>("添加失败");
+                if (result == false) {
+                    return ApiResult.Failure<MerchantProduct>("添加失败");
+                }
+
                 return ApiResult.Success(paramaer);
             }
             else
             {
                 find = AutoMapping.SetValue<MerchantProduct>(paramaer);
                 var result = Resolve<IMerchantProductService>().Update(find);
-                if (result == false) return ApiResult.Failure<MerchantProduct>("添加失败");
+                if (result == false) {
+                    return ApiResult.Failure<MerchantProduct>("添加失败");
+                }
 
                 return ApiResult.Success(find);
             }

@@ -25,7 +25,9 @@ namespace Alabo.App.Share.TaskExecutes
         /// <param name="config">The configuration.</param>
         public static string ToRepositoryString(this IModuleConfig config)
         {
-            if (config == null) throw new ArgumentNullException(nameof(config));
+            if (config == null) {
+                throw new ArgumentNullException(nameof(config));
+            }
 
             return JsonConvert.SerializeObject(config, _serializerSettings);
         }
@@ -36,7 +38,9 @@ namespace Alabo.App.Share.TaskExecutes
         /// <param name="value">The value.</param>
         public static T ConvertToModuleConfig<T>(this string value) where T : IModuleConfig
         {
-            if (string.IsNullOrWhiteSpace(value)) return default;
+            if (string.IsNullOrWhiteSpace(value)) {
+                return default;
+            }
 
             return JsonConvert.DeserializeObject<T>(value, _serializerSettings);
         }
@@ -49,7 +53,9 @@ namespace Alabo.App.Share.TaskExecutes
         /// <param name="name">The name.</param>
         public static T ConvertToModuleConfig<T>(this string value, int id, string name) where T : IModuleConfig
         {
-            if (string.IsNullOrWhiteSpace(value)) return default;
+            if (string.IsNullOrWhiteSpace(value)) {
+                return default;
+            }
 
             var result = JsonConvert.DeserializeObject<T>(value, _serializerSettings);
             result.Id = id;
@@ -64,7 +70,9 @@ namespace Alabo.App.Share.TaskExecutes
         /// <param name="type">The 类型.</param>
         public static object ConvertToModuleConfig(this string value, Type type)
         {
-            if (string.IsNullOrWhiteSpace(value)) return null;
+            if (string.IsNullOrWhiteSpace(value)) {
+                return null;
+            }
 
             return JsonConvert.DeserializeObject(value, type, _serializerSettings);
         }
@@ -75,7 +83,9 @@ namespace Alabo.App.Share.TaskExecutes
         /// <param name="services">The services.</param>
         public static IServiceCollection AddTasks(this IServiceCollection services)
         {
-            if (services == null) throw new ArgumentNullException(nameof(services));
+            if (services == null) {
+                throw new ArgumentNullException(nameof(services));
+            }
 
             //TaskManager taskManager = new TaskManager();
             services.AddSingleton<TaskManager>(); //注册taskManager

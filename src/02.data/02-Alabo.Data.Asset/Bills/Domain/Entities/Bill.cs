@@ -97,7 +97,9 @@ namespace Alabo.App.Asset.Bills.Domain.Entities
             get
             {
                 var searSerial = $"9{Id.ToString().PadLeft(8, '0')}";
-                if (Id.ToString().Length >= 9) searSerial = $"{Id.ToString()}";
+                if (Id.ToString().Length >= 9) {
+                    searSerial = $"{Id.ToString()}";
+                }
 
                 return searSerial;
             }

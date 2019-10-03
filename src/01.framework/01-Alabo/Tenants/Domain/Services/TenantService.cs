@@ -40,7 +40,9 @@ namespace Alabo.Tenants.Domain.Services
                     {"sign", sign}
                 };
                 var tenantSite = Ioc.Resolve<IOpenClient>().Get<Tenant>(apiUrl, parameters);
-                if (tenantSite != null) Add(tenantSite);
+                if (tenantSite != null) {
+                    Add(tenantSite);
+                }
             }
         }
 

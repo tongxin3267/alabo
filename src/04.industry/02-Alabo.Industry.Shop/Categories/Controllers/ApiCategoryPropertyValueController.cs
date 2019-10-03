@@ -27,21 +27,32 @@ namespace Alabo.Industry.Shop.Categories.Controllers
         {
             try
             {
-                if (modelInput == null) return ApiResult.Failure("类目属性id不能为空!");
+                if (modelInput == null) {
+                    return ApiResult.Failure("类目属性id不能为空!");
+                }
 
                 var propertyId = modelInput.PropertyId;
                 var name = modelInput.Name;
 
-                if (propertyId == Guid.Empty) return ApiResult.Failure("类目属性id不能为空!");
+                if (propertyId == Guid.Empty) {
+                    return ApiResult.Failure("类目属性id不能为空!");
+                }
 
-                if (string.IsNullOrEmpty(name)) return ApiResult.Failure("类目属性值不能为空!");
+                if (string.IsNullOrEmpty(name)) {
+                    return ApiResult.Failure("类目属性值不能为空!");
+                }
 
                 var model = Resolve<ICategoryPropertyValueService>()
                     .GetSingle(x => x.PropertyId == propertyId && x.ValueName == name);
-                if (model != null) return ApiResult.Failure("类目属性值已经存在!");
+                if (model != null) {
+                    return ApiResult.Failure("类目属性值已经存在!");
+                }
+
                 var newmodel = new CategoryPropertyValue {PropertyId = propertyId, ValueName = name};
                 var rs = Resolve<ICategoryPropertyValueService>().Add(newmodel);
-                if (rs) return ApiResult.Success(newmodel, "类目属性值新增成功!");
+                if (rs) {
+                    return ApiResult.Success(newmodel, "类目属性值新增成功!");
+                }
 
                 return ApiResult.Failure("类目属性值新增失败!");
             }

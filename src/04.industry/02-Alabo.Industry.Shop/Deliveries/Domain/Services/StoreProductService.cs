@@ -49,10 +49,11 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
             //如果是管理员就直接上架或者下架
             if (Resolve<IUserService>().IsAdmin(parameter.Store.UserId))
             {
-                if (parameter.OnSale)
+                if (parameter.OnSale) {
                     parameter.Product.ProductStatus = ProductStatus.Online;
-                else
+                } else {
                     parameter.Product.ProductStatus = ProductStatus.SoldOut;
+                }
             }
             else
             {
@@ -74,36 +75,52 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
 
             #region 基础安全验证
 
-            if (parameter.ProductSkus == null || parameter.ProductSkus.Count == 0)
+            if (parameter.ProductSkus == null || parameter.ProductSkus.Count == 0) {
                 return ServiceResult.FailedWithMessage("商品Sku不能为空");
+            }
             //if (parameter.Product.PurchasePrice > parameter.Product.CostPrice) {
             //    return ServiceResult.FailedWithMessage("进货价不能大于成本价");
             //}
             //尝试过特性,属性set函数 均无效
-            if (parameter.Product.CostPrice > parameter.Product.Price)
+            if (parameter.Product.CostPrice > parameter.Product.Price) {
                 return ServiceResult.FailedWithMessage("商品销售价必须为大于等于成本价");
+            }
 
-            if (parameter.Product.CostPrice > parameter.Product.MarketPrice)
+            if (parameter.Product.CostPrice > parameter.Product.MarketPrice) {
                 return ServiceResult.FailedWithMessage("商品市场价必须为大于等于成本价");
+            }
 
             //判断sku的价格是否低于成本
             foreach (var item in parameter.ProductSkus)
             {
-                if (item.CostPrice > item.Price) return ServiceResult.FailedWithMessage("商品SKU销售价必须为大于等于成本价");
+                if (item.CostPrice > item.Price) {
+                    return ServiceResult.FailedWithMessage("商品SKU销售价必须为大于等于成本价");
+                }
 
-                if (item.CostPrice > item.MarketPrice) return ServiceResult.FailedWithMessage("商品SKU市场价必须为大于等于成本价");
+                if (item.CostPrice > item.MarketPrice) {
+                    return ServiceResult.FailedWithMessage("商品SKU市场价必须为大于等于成本价");
+                }
 
                 if (item.FenRunPrice > item.CostPrice || item.FenRunPrice > item.MarketPrice ||
-                    item.FenRunPrice > item.MarketPrice) return ServiceResult.FailedWithMessage("分润价格不能大于其他价格");
+                    item.FenRunPrice > item.MarketPrice) {
+                    return ServiceResult.FailedWithMessage("分润价格不能大于其他价格");
+                }
             }
 
-            if (parameter.Product.StoreId.IsObjectIdNullOrEmpty()) return ServiceResult.FailedWithMessage("请为商品选择店铺");
+            if (parameter.Product.StoreId.IsObjectIdNullOrEmpty()) {
+                return ServiceResult.FailedWithMessage("请为商品选择店铺");
+            }
+
             var category = Resolve<ICategoryService>().GetSingle(parameter.Product.CategoryId);
-            if (category == null) return ServiceResult.FailedWithMessage("未选择商品类目，或者商品类目已不存在");
+            if (category == null) {
+                return ServiceResult.FailedWithMessage("未选择商品类目，或者商品类目已不存在");
+            }
+
             if (Repository<IProductRepository>()
                     .Count(r => r.Bn == parameter.Product.Bn && r.Id != parameter.Product.Id) >
-                0)
+                0) {
                 return ServiceResult.FailedWithMessage("该货号已存在，请使用其他货号");
+            }
 
             #endregion 基础安全验证
 
@@ -137,7 +154,9 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
                 // 更新商品Sku
                 var skuResult = Resolve<IProductSkuService>()
                     .AddUpdateOrDelete(parameter.Product, parameter.ProductSkus); // 更新Shop_productsku表
-                if (!skuResult.Succeeded) throw new ArgumentException(skuResult.ToString());
+                if (!skuResult.Succeeded) {
+                    throw new ArgumentException(skuResult.ToString());
+                }
 
                 //添加商品分类和标签
                 Resolve<IRelationIndexService>().AddUpdateOrDelete<ProductClassRelation>(parameter.Product.Id,
@@ -178,56 +197,79 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
             #region 安全验证
 
             var productEditOuput = new ProductEditOuput();
-            if (parameter == null) throw new Exception("参数不能为空");
+            if (parameter == null) {
+                throw new Exception("参数不能为空");
+            }
+
             var user = Resolve<IUserService>().GetNomarlUser(parameter.UserId);
-            if (user == null) throw new Exception("用户不存在");
+            if (user == null) {
+                throw new Exception("用户不存在");
+            }
 
             var store = Resolve<IStoreService>().GetUserStore(user.Id);
-            if (store == null) throw new Exception("当前用户不存在店铺");
+            if (store == null) {
+                throw new Exception("当前用户不存在店铺");
+            }
+
             productEditOuput.Store = store;
 
-            if (parameter.ProductId != 0)
+            if (parameter.ProductId != 0) {
                 productEditOuput.Setting = new ProductViewEditSetting
                 {
                     Title = "商品编辑",
                     IsAdd = false
                 };
+            }
 
             productEditOuput.Relation = GetRelationView(store, parameter.UserId);
 
             #endregion 安全验证
 
             var productView = Resolve<IProductAdminService>().GetViewProductEdit(parameter.ProductId, ObjectId.Empty);
-            if (productView == null) throw new Exception("商品不存在");
+            if (productView == null) {
+                throw new Exception("商品不存在");
+            }
+
             productEditOuput.Product = productView.Product;
             productEditOuput.ProductDetail = productView.ProductDetail;
 
             // 新加商品, 返回默认配置值.
             if (parameter.ProductId == 0)
             {
-                if (parameter.CategoryId.IsGuidNullOrEmpty()) throw new Exception("商品添加是请传入类目ID");
+                if (parameter.CategoryId.IsGuidNullOrEmpty()) {
+                    throw new Exception("商品添加是请传入类目ID");
+                }
+
                 var category = Resolve<ICategoryService>().GetSingle(parameter.CategoryId);
                 productEditOuput.Category = category;
-                if (productEditOuput.Category == null) throw new Exception("类目不存在");
+                if (productEditOuput.Category == null) {
+                    throw new Exception("类目不存在");
+                }
+
                 productEditOuput.Product.DeliveryTemplateId =
                     productEditOuput.Relation.DeliveryTemplates.FirstOrDefault()?.Key.ToStr();
             }
             else
             {
-                if (productEditOuput.Product.Id <= 0) throw new Exception("商品不存在");
+                if (productEditOuput.Product.Id <= 0) {
+                    throw new Exception("商品不存在");
+                }
 
                 productEditOuput.ProductSkus = Resolve<IProductSkuService>()
                     .GetList(o => o.ProductId == parameter.ProductId)?.ToList();
-                if (productEditOuput.ProductSkus == null) throw new Exception("商品SKU不存在");
+                if (productEditOuput.ProductSkus == null) {
+                    throw new Exception("商品SKU不存在");
+                }
 
                 var outCategory = productView.ProductDetail.PropertyJson.ToObject<Category>();
                 //var categoryEntity = productView.Category;
 
                 //var checkCategory = outCategory.SalePropertys?[0]?.PropertyValues;
                 if (outCategory != null && outCategory.SalePropertys != null && outCategory.SalePropertys.Count > 0 &&
-                    outCategory.SalePropertys[0].PropertyValues != null)
+                    outCategory.SalePropertys[0].PropertyValues != null) {
                     outCategory.SalePropertys[0].PropertyValues =
                         outCategory.SalePropertys[0].PropertyValues.Where(s => s != null).ToList();
+                }
                 //    productView?.Category?.SalePropertys?[0]?.PropertyValues.Select(s => new CategoryPropertyValue()
                 //{
                 //    Id = s.Id,
@@ -244,7 +286,9 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
 
                 //productView?.Category?.SalePropertys?.Where(s => s != null)?.Select(s=>return new );
                 productEditOuput.Category = outCategory;
-                if (productEditOuput.Category == null) throw new Exception("该商品类目不存在");
+                if (productEditOuput.Category == null) {
+                    throw new Exception("该商品类目不存在");
+                }
 
                 // 商品分类，和商品标签，商品副标题会通过此处来回绑定
                 if (productView.ProductDetail != null)
@@ -256,10 +300,11 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
                         .Select(o => o.OriginalUrl).ToList();
                 }
 
-                if (productEditOuput.Product.ProductStatus != ProductStatus.Online)
+                if (productEditOuput.Product.ProductStatus != ProductStatus.Online) {
                     productEditOuput.OnSale = false;
-                else
+                } else {
                     productEditOuput.OnSale = true;
+                }
             }
 
             return productEditOuput;

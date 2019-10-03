@@ -56,6 +56,7 @@ namespace Alabo.App.Asset.Pays.Controllers
                 // 返回的商户号要与配置中的相同
                 if (aliPayConfig.AppId == notify.AppId
                     ) //Resolve<IPayService>().Log("在回调中执行pay中的预留方法aliPayConfig.AppId == notify.AppId");
+{
                     // 支付状态为成功
                     if ("TRADE_SUCCESS" == notify.TradeStatus)
                     {
@@ -113,6 +114,7 @@ namespace Alabo.App.Asset.Pays.Controllers
 
                         return Content("success", "text/plain");
                     }
+                }
                 // 如果支付状态为成功
 
                 return NoContent();
@@ -153,8 +155,9 @@ namespace Alabo.App.Asset.Pays.Controllers
                         Resolve<IPayService>().Log("微信公众号支付回调结果:" + res.ToJson(), LogsLevel.Warning);
                     }
 
-                    if (notify.ResultCode == "SUCCESS")
+                    if (notify.ResultCode == "SUCCESS") {
                         return Content("<xml><return_code><![CDATA[SUCCESS]]></return_code></xml>", "text/xml");
+                    }
                 }
 
                 return NoContent();
@@ -174,7 +177,10 @@ namespace Alabo.App.Asset.Pays.Controllers
         public async Task<IActionResult> PublicPayAsyncByPayId([FromBody] PayCallBack payInput)
         {
             Resolve<IPayService>().Log($"PublicPayAsyncByPayId{payInput.ToJson()}");
-            if (payInput == null) return NoContent();
+            if (payInput == null) {
+                return NoContent();
+            }
+
             var pay = Resolve<IPayService>().GetSingle(payInput.PayId);
             if (pay == null)
             {

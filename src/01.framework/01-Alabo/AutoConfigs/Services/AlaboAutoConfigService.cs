@@ -33,13 +33,17 @@ namespace Alabo.AutoConfigs.Services
         /// <param name="key"></param>
         public AutoConfig GetConfig(string key)
         {
-            if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+            if (string.IsNullOrWhiteSpace(key)) {
+                throw new ArgumentNullException(nameof(key));
+            }
 
             var cacheKey = AutoConfigCacheKey + key;
             if (!ObjectCache.TryGet(cacheKey, out AutoConfig config))
             {
                 config = Repository<IAutoConfigRepository>().GetSingle(e => e.Type == key);
-                if (config != null) ObjectCache.Set(cacheKey, config);
+                if (config != null) {
+                    ObjectCache.Set(cacheKey, config);
+                }
             }
 
             return config;
@@ -48,7 +52,9 @@ namespace Alabo.AutoConfigs.Services
         public T GetValue<T>() where T : class, IAutoConfig
         {
             var config = GetConfig(typeof(T).FullName);
-            if (config == null) return Activator.CreateInstance(typeof(T)) as T;
+            if (config == null) {
+                return Activator.CreateInstance(typeof(T)) as T;
+            }
 
             var result = JsonConvert.DeserializeObject<T>(config.Value);
             return result;
@@ -59,12 +65,15 @@ namespace Alabo.AutoConfigs.Services
             var config = GetConfig(typeof(T).FullName);
             var t = new T();
             var configlist = new List<T>();
-            if (config != null)
+            if (config != null) {
                 if (config.Value != null)
                 {
                     configlist = config.Value.Deserialize(t);
-                    if (predicate != null) return configlist.Where(predicate).ToList();
+                    if (predicate != null) {
+                        return configlist.Where(predicate).ToList();
+                    }
                 }
+            }
 
             return configlist;
         }
@@ -90,9 +99,11 @@ namespace Alabo.AutoConfigs.Services
         public object GetValue(string key)
         {
             var types = GetAllTypes();
-            foreach (var item in types)
-                if (item.FullName == key)
+            foreach (var item in types) {
+                if (item.FullName == key) {
                     return GetValue(item);
+                }
+            }
 
             return null;
         }
@@ -150,9 +161,11 @@ namespace Alabo.AutoConfigs.Services
 
             // 如果包含Id的字段
             var idField = type.GetProperty("Id");
-            if (idField != null)
-                if (id.IsGuidNullOrEmpty())
+            if (idField != null) {
+                if (id.IsGuidNullOrEmpty()) {
                     return data;
+                }
+            }
 
             if (config != null)
             {

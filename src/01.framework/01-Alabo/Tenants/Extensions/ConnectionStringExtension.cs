@@ -12,7 +12,10 @@ namespace Alabo.Tenants.Extensions
         /// <returns></returns>
         public static string GetConnectionStringForMaster(this string connectionString)
         {
-            if (string.IsNullOrWhiteSpace(connectionString)) return string.Empty;
+            if (string.IsNullOrWhiteSpace(connectionString)) {
+                return string.Empty;
+            }
+
             var sqlConnection = new SqlConnection(connectionString);
 
             var database = RuntimeContext.GetTenantSqlDataBase();
@@ -30,8 +33,9 @@ namespace Alabo.Tenants.Extensions
         /// <returns></returns>
         public static string GetConnectionStringForTenant(this string connectionString, string tenantName)
         {
-            if (string.IsNullOrWhiteSpace(connectionString) || string.IsNullOrWhiteSpace(tenantName))
+            if (string.IsNullOrWhiteSpace(connectionString) || string.IsNullOrWhiteSpace(tenantName)) {
                 return string.Empty;
+            }
 
             var database = RuntimeContext.GetTenantMongodbDataBase();
             var databaseName = RuntimeContext.GetTenantMongodbDataBase(tenantName);

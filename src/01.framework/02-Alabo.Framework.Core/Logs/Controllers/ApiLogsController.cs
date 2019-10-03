@@ -23,8 +23,9 @@ namespace Alabo.Framework.Core.Logs.Controllers
         [Display(Description = "添加日志")]
         public ApiResult Add([FromBody] LogInput logInput)
         {
-            if (logInput != null && !logInput.Message.IsNullOrEmpty())
+            if (logInput != null && !logInput.Message.IsNullOrEmpty()) {
                 Resolve<IAlaboUserService>().Log(logInput.Message);
+            }
 
             return ApiResult.Success();
         }

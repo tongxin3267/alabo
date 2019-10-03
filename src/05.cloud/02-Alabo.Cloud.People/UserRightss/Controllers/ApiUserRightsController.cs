@@ -80,14 +80,17 @@ namespace Alabo.Cloud.People.UserRightss.Controllers
         [ApiAuth]
         public async Task<ApiResult<OrderBuyOutput>> Buy([FromBody] UserRightsOrderInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<OrderBuyOutput>(this.FormInvalidReason(),
                     MessageCodes.ParameterValidationFailure);
+            }
             // var usr = Resolve<IUserService>().GetByIdNoTracking(parameter.UserId);
 
             var result = await Resolve<IUserRightsService>().Buy(parameter);
-            if (!result.Item1.Succeeded)
+            if (!result.Item1.Succeeded) {
                 return ApiResult.Failure<OrderBuyOutput>(result.Item1.ToString(), MessageCodes.ServiceFailure);
+            }
+
             var user = Resolve<IUserService>().GetSingle(s => s.Mobile == parameter.Mobile);
             //如果该用户推荐人为空 则直接绑定当前登陆的账户
             if (user != null && user.ParentId <= 0)
@@ -139,12 +142,18 @@ namespace Alabo.Cloud.People.UserRightss.Controllers
         [ApiAuth]
         public ApiResult AddPorts([FromBody] AddPortsInput modelInput)
         {
-            if (!this.IsFormValid()) return ApiResult.Failure("数据验证不通过");
+            if (!this.IsFormValid()) {
+                return ApiResult.Failure("数据验证不通过");
+            }
 
-            if (modelInput.LoginUserId < 1) return ApiResult.Failure("登录会员Id没有传入进来");
+            if (modelInput.LoginUserId < 1) {
+                return ApiResult.Failure("登录会员Id没有传入进来");
+            }
 
             var loginUser = Ioc.Resolve<IUserService>().GetSingle(r => r.Id == modelInput.LoginUserId);
-            if (loginUser == null) return ApiResult.Failure("对应ID会员不存在");
+            if (loginUser == null) {
+                return ApiResult.Failure("对应ID会员不存在");
+            }
 
             var forUser = Ioc.Resolve<IUserService>().GetSingleByUserNameOrMobile(modelInput.Mobile);
             if (forUser == null)
@@ -168,7 +177,9 @@ namespace Alabo.Cloud.People.UserRightss.Controllers
             }
 
             var loginUserIsAdmin = Resolve<IUserService>().IsAdmin(modelInput.LoginUserId);
-            if (!loginUserIsAdmin) return ApiResult.Failure("登录用户不是Admin, 不能执行端口赠送!");
+            if (!loginUserIsAdmin) {
+                return ApiResult.Failure("登录用户不是Admin, 不能执行端口赠送!");
+            }
 
             var rightsConfigList = Resolve<IUserRightsService>().GetView(modelInput.LoginUserId);
             var forUserExistRights = Resolve<IUserRightsService>().GetList(x => x.UserId == forUser.Id);
@@ -205,7 +216,9 @@ namespace Alabo.Cloud.People.UserRightss.Controllers
                         break;
                 }
 
-                if (forCount < 1) continue;
+                if (forCount < 1) {
+                    continue;
+                }
 
                 var rightItem = forUserExistRights.FirstOrDefault(x => x.GradeId == Guid.Parse(forGradeId));
                 if (rightItem == null)
@@ -235,8 +248,14 @@ namespace Alabo.Cloud.People.UserRightss.Controllers
         public ApiResult IsRegion(long UserId)
         {
             var model = Resolve<IUserDetailService>().GetSingle(u => u.UserId == UserId);
-            if (model == null) return ApiResult.Failure("未找到用户");
-            if (model.RegionId <= 0) return ApiResult.Failure("未登记区域");
+            if (model == null) {
+                return ApiResult.Failure("未找到用户");
+            }
+
+            if (model.RegionId <= 0) {
+                return ApiResult.Failure("未登记区域");
+            }
+
             return ApiResult.Success();
         }
 
@@ -248,15 +267,25 @@ namespace Alabo.Cloud.People.UserRightss.Controllers
         [HttpGet]
         public ApiResult UserRightsAddRegion(UserRightsRegion view)
         {
-            if (view == null) return ApiResult.Failure("传入数据为空");
+            if (view == null) {
+                return ApiResult.Failure("传入数据为空");
+            }
 
-            if (view.RegionId <= 0) return ApiResult.Failure("请选择所属区域");
+            if (view.RegionId <= 0) {
+                return ApiResult.Failure("请选择所属区域");
+            }
+
             var model = Resolve<IUserDetailService>().GetSingle(u => u.UserId == view.UserId);
-            if (model == null) return ApiResult.Failure("用户不存在");
+            if (model == null) {
+                return ApiResult.Failure("用户不存在");
+            }
 
             model.RegionId = view.RegionId;
             var result = Resolve<IUserDetailService>().Update(model);
-            if (!result) return ApiResult.Failure("修改失败");
+            if (!result) {
+                return ApiResult.Failure("修改失败");
+            }
+
             return ApiResult.Success();
         }
     }

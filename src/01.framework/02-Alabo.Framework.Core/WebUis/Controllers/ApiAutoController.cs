@@ -36,9 +36,14 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         public ApiResult ToExcel([FromQuery] string type)
         {
             var dataResult = Resolve<IAutoTableService>().Table(type, QueryDictionary().ToJsons(), AutoModel);
-            if (!dataResult.Item1.Succeeded) return ApiResult.Failure(dataResult.Item1.ErrorMessages.ToString());
+            if (!dataResult.Item1.Succeeded) {
+                return ApiResult.Failure(dataResult.Item1.ErrorMessages.ToString());
+            }
+
             var modelType = type.GetTypeByName();
-            if (type.IsNullOrEmpty() || type == "undefined") return ApiResult.Failure(new { File = "" }, "失败: 类型不能为空");
+            if (type.IsNullOrEmpty() || type == "undefined") {
+                return ApiResult.Failure(new { File = "" }, "失败: 类型不能为空");
+            }
 
             var autoTable = dataResult.Item2;
 
@@ -47,7 +52,10 @@ namespace Alabo.Framework.Core.WebUis.Controllers
                 var result = Resolve<IAdminTableService>().ToExcel(modelType, autoTable.Result);
 
                 var index = result.Item2.LastIndexOf(@"\wwwroot\");
-                if (index < 0) return ApiResult.Failure(new { File = "" }, "失败: 文件生成失败");
+                if (index < 0) {
+                    return ApiResult.Failure(new { File = "" }, "失败: 文件生成失败");
+                }
+
                 var fileBytes = System.IO.File.ReadAllBytes(result.Item2);
                 var file = File(fileBytes, "application/x-msdownload", result.Item3);
 
@@ -71,7 +79,10 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         public ApiResult<AutoTable> Table([FromQuery] string type)
         {
             var tenant = HttpContext.Request.Headers["zk-tenant"];
-            if (AutoModel != null && AutoModel.BasicUser != null) AutoModel.BasicUser.Tenant = tenant;
+            if (AutoModel != null && AutoModel.BasicUser != null) {
+                AutoModel.BasicUser.Tenant = tenant;
+            }
+
             var result = Resolve<IAutoTableService>().Table(type, QueryDictionary().ToJsons(), AutoModel);
             return ToResult(result);
         }
@@ -83,11 +94,15 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         [Display(Description = "获取所有的Api地址")]
         public ApiResult<AutoList> List([FromQuery] string type)
         {
-            if (type.IsNullOrEmpty() || type == "undefined") return ApiResult.Failure<AutoList>("类型不能为空");
+            if (type.IsNullOrEmpty() || type == "undefined") {
+                return ApiResult.Failure<AutoList>("类型不能为空");
+            }
 
             var modelType = type.GetTypeByName();
             var find = type.GetInstanceByName();
-            if (modelType == null || find == null) return ApiResult.Failure<AutoList>($"类型不存在，请确认{type}输入是否正确");
+            if (modelType == null || find == null) {
+                return ApiResult.Failure<AutoList>($"类型不存在，请确认{type}输入是否正确");
+            }
 
             var autoList = new AutoList();
             if (find is IAutoList set)
@@ -108,13 +123,19 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         public ApiResult<AutoPreview> Preview(string id, string type)
         {
             //check
-            if (type.IsNullOrEmpty() || type == "undefined") return ApiResult.Failure<AutoPreview>("类型不能为空");
+            if (type.IsNullOrEmpty() || type == "undefined") {
+                return ApiResult.Failure<AutoPreview>("类型不能为空");
+            }
 
-            if (id.IsNullOrEmpty()) return ApiResult.Failure<AutoPreview>("id不能为空");
+            if (id.IsNullOrEmpty()) {
+                return ApiResult.Failure<AutoPreview>("id不能为空");
+            }
 
             var typeIntance = type.GetTypeByName();
             var find = type.GetInstanceByName();
-            if (find == null || typeIntance == null) return ApiResult.Failure<AutoPreview>($"类型不存在，请确认{type}输入是否正确");
+            if (find == null || typeIntance == null) {
+                return ApiResult.Failure<AutoPreview>($"类型不存在，请确认{type}输入是否正确");
+            }
 
             //entity
             if (find is IEntity)
@@ -141,7 +162,9 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         [Display(Description = "获取新闻列表")]
         public ApiResult<AutoNews> News([FromQuery] string type)
         {
-            if (type.IsNullOrEmpty() || type == "undefined") return ApiResult.Failure<AutoNews>("类型不能为空");
+            if (type.IsNullOrEmpty() || type == "undefined") {
+                return ApiResult.Failure<AutoNews>("类型不能为空");
+            }
 
             var find = type.GetInstanceByName();
 
@@ -177,15 +200,20 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         [Display(Description = "获取文章")]
         public ApiResult<AutoArticle> Article([FromQuery] string type, string id)
         {
-            if (type.IsNullOrEmpty() || type == "undefined") return ApiResult.Failure<AutoArticle>("类型不能为空");
+            if (type.IsNullOrEmpty() || type == "undefined") {
+                return ApiResult.Failure<AutoArticle>("类型不能为空");
+            }
 
             var find = type.GetInstanceByName();
-            if (find == null) return ApiResult.Failure<AutoArticle>($"类型不存在，请确认{type}输入是否正确");
+            if (find == null) {
+                return ApiResult.Failure<AutoArticle>($"类型不存在，请确认{type}输入是否正确");
+            }
 
             if (find is IAutoArticle set)
             {
-                if (!type.EndsWith("Article") || !type.Contains("AutoArticle"))
+                if (!type.EndsWith("Article") || !type.Contains("AutoArticle")) {
                     return ApiResult.Failure<AutoArticle>($"类型{type}的命名约定，不符合约定");
+                }
 
                 var auto = new AutoArticle
                 {
@@ -205,14 +233,20 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         [Display(Description = "获取文章")]
         public ApiResult<List<AutoReport>> Report([FromQuery] string type)
         {
-            if (type.IsNullOrEmpty() || type == "undefined") return ApiResult.Failure<List<AutoReport>>("类型不能为空");
+            if (type.IsNullOrEmpty() || type == "undefined") {
+                return ApiResult.Failure<List<AutoReport>>("类型不能为空");
+            }
 
             var find = type.GetInstanceByName();
-            if (find == null) return ApiResult.Failure<List<AutoReport>>($"类型不存在，请确认{type}输入是否正确");
+            if (find == null) {
+                return ApiResult.Failure<List<AutoReport>>($"类型不存在，请确认{type}输入是否正确");
+            }
 
             if (find is IAutoReport set)
             {
-                if (!type.EndsWith("Report")) return ApiResult.Failure<List<AutoReport>>($"类型{type}的命名约定，不符合约定");
+                if (!type.EndsWith("Report")) {
+                    return ApiResult.Failure<List<AutoReport>>($"类型{type}的命名约定，不符合约定");
+                }
 
                 var result = set.ResultList(Query, AutoModel);
                 return ApiResult.Success(result);
@@ -242,11 +276,17 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         [HttpPost]
         public ApiResult Save([FromBody] AutoFormInput autoFormInput)
         {
-            if (!this.IsFormValid()) return ApiResult.Failure(this.FormInvalidReason());
+            if (!this.IsFormValid()) {
+                return ApiResult.Failure(this.FormInvalidReason());
+            }
+
             Type typeFind = null;
             object instanceFind = null;
             var checkType = Resolve<IUIBaseService>().CheckType(autoFormInput.Type, ref typeFind, ref instanceFind);
-            if (!checkType.Succeeded) return ApiResult.Failure(checkType.ToString());
+            if (!checkType.Succeeded) {
+                return ApiResult.Failure(checkType.ToString());
+            }
+
             autoFormInput.TypeFind = typeFind;
             autoFormInput.TypeInstance = instanceFind;
             try
@@ -260,8 +300,13 @@ namespace Alabo.Framework.Core.WebUis.Controllers
 
             // 表单数据验证,特性验证
             var model = autoFormInput.ModelFind;
-            if (model == null) return ApiResult.Failure("保存数据出错");
-            if (!IsFormValid(ref model, out var error)) return ApiResult.Failure(error);
+            if (model == null) {
+                return ApiResult.Failure("保存数据出错");
+            }
+
+            if (!IsFormValid(ref model, out var error)) {
+                return ApiResult.Failure(error);
+            }
 
             var result = Resolve<IAutoFormServcie>().Save(autoFormInput, AutoModel);
             return ToResult(result);

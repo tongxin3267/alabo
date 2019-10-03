@@ -23,7 +23,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Repositories
                 $"select OrderStatus,Id,CreateTime from  Shop_order where OrderStatus= {Convert.ToInt16(OrderStatus.WaitingBuyerPay)} and DATEDIFF(DAY, Createtime,GETDATE())={day}";
             using (var dr = RepositoryContext.ExecuteDataReader(sql))
             {
-                while (dr.Read()) result.Add(ReadOrder(dr));
+                while (dr.Read()) {
+                    result.Add(ReadOrder(dr));
+                }
             }
 
             return result;

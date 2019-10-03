@@ -31,19 +31,24 @@ namespace Alabo.Framework.Basic.Storages.Controllers
         [Display(Description = "获取上传状态")]
         public ApiResult<StorageFile> Upload(UploadApiInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<StorageFile>(this.FormInvalidReason(),
                     MessageCodes.ParameterValidationFailure);
+            }
 
-            if (parameter.SavePath.IsNullOrEmpty()) parameter.SavePath = "/uploads/api/";
+            if (parameter.SavePath.IsNullOrEmpty()) {
+                parameter.SavePath = "/uploads/api/";
+            }
 
             try
             {
                 var formFile = Request.Form.Files;
 
-                foreach (var item in formFile)
-                    if (!parameter.FileType.Split(',').ToList().Contains(Path.GetExtension(item.FileName)))
+                foreach (var item in formFile) {
+                    if (!parameter.FileType.Split(',').ToList().Contains(Path.GetExtension(item.FileName))) {
                         return ApiResult.Failure<StorageFile>("后缀不支持!");
+                    }
+                }
 
                 var info = Resolve<IStorageFileService>().Upload(formFile, parameter.SavePath); //获取上传状态
                 return ApiResult.Success(info);

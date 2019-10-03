@@ -30,10 +30,15 @@ namespace Alabo.Industry.Shop.OrderActions.Controllers
         [ApiAuth]
         public ApiResult<BuyOutput> Pay(long id, long loginUserId)
         {
-            if (id <= 0) return ApiResult.Failure<BuyOutput>("Id不正确");
+            if (id <= 0) {
+                return ApiResult.Failure<BuyOutput>("Id不正确");
+            }
+
             var result = Resolve<IOrderBuyServcie>().Pay(id, loginUserId);
-            if (!result.Item1.Succeeded)
+            if (!result.Item1.Succeeded) {
                 return ApiResult.Failure<BuyOutput>(result.Item1.ToString(), MessageCodes.ServiceFailure);
+            }
+
             return ApiResult.Success(result.Item2);
         }
 
@@ -48,7 +53,10 @@ namespace Alabo.Industry.Shop.OrderActions.Controllers
         public ApiResult Cancel(long id, long loginUserId)
         {
             var order = Resolve<IOrderService>().GetSingle(e => e.Id == id && e.UserId == loginUserId);
-            if (order == null) return ApiResult.Failure("订单不存在");
+            if (order == null) {
+                return ApiResult.Failure("订单不存在");
+            }
+
             order.OrderStatus = OrderStatus.Closed;
             Resolve<IOrderService>().Update(order);
             return ApiResult.Success("订单取消成功");

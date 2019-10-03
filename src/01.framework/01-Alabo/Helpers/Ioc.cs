@@ -58,7 +58,9 @@ namespace Alabo.Helpers
         public static T Resolve<T>(string name = null)
         {
             var scope = GetScope(CurrentScope);
-            if (scope != null) return scope.Resolve<T>();
+            if (scope != null) {
+                return scope.Resolve<T>();
+            }
 
             return DefaultContainer.Create<T>(name);
         }
@@ -90,7 +92,9 @@ namespace Alabo.Helpers
         public static object Resolve(string fullName)
         {
             var type = fullName.GetTypeByName();
-            if (type != null) return ResolveType(type);
+            if (type != null) {
+                return ResolveType(type);
+            }
 
             return null;
         }
@@ -151,7 +155,9 @@ namespace Alabo.Helpers
         /// <param name="scope"></param>
         public static void AddScope(int hashCode, IScope scope)
         {
-            if (!_scopeDictionaries.ContainsKey(hashCode)) _scopeDictionaries.TryAdd(hashCode, scope);
+            if (!_scopeDictionaries.ContainsKey(hashCode)) {
+                _scopeDictionaries.TryAdd(hashCode, scope);
+            }
         }
 
         /// <summary>
@@ -161,7 +167,9 @@ namespace Alabo.Helpers
         /// <returns></returns>
         private static IScope GetScope(int hashCode)
         {
-            if (_scopeDictionaries.ContainsKey(hashCode)) return _scopeDictionaries[hashCode];
+            if (_scopeDictionaries.ContainsKey(hashCode)) {
+                return _scopeDictionaries[hashCode];
+            }
 
             return null;
         }

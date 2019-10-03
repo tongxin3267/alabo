@@ -40,8 +40,9 @@ namespace Alabo.Cloud.Shop.ProductQrCode.Servcies
             var qrConfig = Resolve<IAutoConfigService>().GetValue<ProductQrCodeConfig>();
             if (qrConfig != null)
             {
-                if (qrConfig.BgPicture.IsNullOrEmpty())
+                if (qrConfig.BgPicture.IsNullOrEmpty()) {
                     qrConfig.BgPicture = "/wwwroot/assets/mobile/images/qrcode/01.png";
+                }
 
                 qrConfig.BgPicture.Replace('/', '\\');
             }
@@ -54,7 +55,9 @@ namespace Alabo.Cloud.Shop.ProductQrCode.Servcies
             var url = $@"{webSite.DomainName}/product/show/{productId}";
             var product = Resolve<IProductService>().GetSingle(u => u.Id == productId);
             var productDetail = Resolve<IProductDetailService>().GetSingle(u => u.ProductId == productId);
-            if (!url.Contains("http://")) url = $"http://{url}";
+            if (!url.Contains("http://")) {
+                url = $"http://{url}";
+            }
 
             try
             {
@@ -96,8 +99,9 @@ namespace Alabo.Cloud.Shop.ProductQrCode.Servcies
             var qrConfig = Resolve<IAutoConfigService>().GetValue<ProductQrCodeConfig>();
             if (qrConfig != null)
             {
-                if (qrConfig.BgPicture.IsNullOrEmpty())
+                if (qrConfig.BgPicture.IsNullOrEmpty()) {
                     qrConfig.BgPicture = "/wwwroot/assets/mobile/images/qrcode/01.png";
+                }
 
                 qrConfig.BgPicture.Replace('/', '\\');
             }
@@ -109,7 +113,9 @@ namespace Alabo.Cloud.Shop.ProductQrCode.Servcies
             //二维码网址
             var url = $@"{webSite.DomainName}/product/show/{productId}";
             var product = Resolve<IProductService>().GetSingle(u => u.Id == productId);
-            if (!url.Contains("http://")) url = $"http://{url}";
+            if (!url.Contains("http://")) {
+                url = $"http://{url}";
+            }
 
             try
             {

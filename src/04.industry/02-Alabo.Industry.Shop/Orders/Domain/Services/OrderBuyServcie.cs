@@ -68,25 +68,32 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
             var result = ServiceResult.Success;
             var BookingBuyOutput = new BuyOutput();
             var user = Resolve<IUserService>().GetNomarlUser(orderBuyInput.UserId);
-            if (user == null) return Tuple.Create(ServiceResult.FailedWithMessage("用户不存在，或状态不正常"), BookingBuyOutput);
+            if (user == null) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("用户不存在，或状态不正常"), BookingBuyOutput);
+            }
+
             user.Detail = null; // 减少体积保存
             user.Map = null;
             //实名认证判断
             var orderConfig = Resolve<IAutoConfigService>().GetValue<OrderConfig>();
-            if (orderConfig.IsIdentity)
-                if (!Resolve<IUserDetailService>().IsIdentity(user.Id))
+            if (orderConfig.IsIdentity) {
+                if (!Resolve<IUserDetailService>().IsIdentity(user.Id)) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("请先实名认证"), new BuyOutput());
+                }
+            }
             // 验证前台数据传入是否正确
             try
             {
                 orderBuyInput.StoreOrders = orderBuyInput.StoreOrderJson.DeserializeJson<List<StoreOrderItem>>();
-                if (orderBuyInput.StoreOrders == null)
+                if (orderBuyInput.StoreOrders == null) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("店铺数据传入不正确"), new BuyOutput());
+                }
 
                 orderBuyInput.StoreOrders.ToList().ForEach(r =>
                 {
-                    if (r.ProductSkuItems == null || r.ProductSkuItems.Count == 0)
+                    if (r.ProductSkuItems == null || r.ProductSkuItems.Count == 0) {
                         result = ServiceResult.FailedWithMessage("商品数据有误");
+                    }
                 });
             }
             catch
@@ -97,9 +104,10 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
             // 验证前台数据传入是否正确 验证币种类型
             try
             {
-                if (!orderBuyInput.ReduceMoneysJson.IsNullOrEmpty())
+                if (!orderBuyInput.ReduceMoneysJson.IsNullOrEmpty()) {
                     orderBuyInput.ReduceMoneys =
                         orderBuyInput.ReduceMoneysJson.DeserializeJson<List<KeyValuePair<Guid, decimal>>>();
+                }
             }
             catch
             {
@@ -108,11 +116,13 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
 
             // 验证签名是否有数据，如果没有则表示订单已经不存在，或者被串改
             var cacheKey = $"OrderPrice_{orderBuyInput.Sign}";
-            if (!ObjectCache.TryGet(cacheKey, out OrderPriceCache orderPriceCache))
+            if (!ObjectCache.TryGet(cacheKey, out OrderPriceCache orderPriceCache)) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("签名错误，请刷新"), new BuyOutput());
+            }
 
-            if (orderPriceCache.StoreProductSku.StoreItems.Count != orderBuyInput.StoreOrders.ToList().Count())
+            if (orderPriceCache.StoreProductSku.StoreItems.Count != orderBuyInput.StoreOrders.ToList().Count()) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("店铺数与配送方式数不比配"), new BuyOutput());
+            }
             // 缓存中的地址，与数据库中的真实地址对不，验证是否被串改
             var cacheAddress =
                 orderPriceCache.UserAddresses.FirstOrDefault(r => r.Id == orderBuyInput.AddressId.ToObjectId());
@@ -121,17 +131,21 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                 // 如果缓存不存在地址，则从数据库在读取一次，解决购物时，地址新增的情况
                 cacheAddress = Resolve<IUserAddressService>()
                     .GetUserAddress(orderBuyInput.AddressId.ToObjectId(), orderBuyInput.UserId);
-                if (cacheAddress == null)
+                if (cacheAddress == null) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("您选择的地址不存在"), new BuyOutput());
+                }
             }
 
             var address = Resolve<IUserAddressService>()
                 .GetUserAddress(orderBuyInput.AddressId.ToObjectId(), orderBuyInput.UserId);
-            if (address == null) return Tuple.Create(ServiceResult.FailedWithMessage("地址已被删掉"), new BuyOutput());
+            if (address == null) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("地址已被删掉"), new BuyOutput());
+            }
 
             if (cacheAddress.Province != address.Province || cacheAddress.City != address.City ||
-                cacheAddress.RegionId != address.RegionId)
+                cacheAddress.RegionId != address.RegionId) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("地址已被更改，请重新选择地址"), new BuyOutput());
+            }
 
             #endregion 安全验证
 
@@ -153,7 +167,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                 order.ProductSkuItems.Foreach(sku =>
                 {
                     var tempSku = skuItems.Find(s => s.ProductSkuId == sku.ProductSkuId);
-                    if (tempSku != null) sku.Amount = tempSku.Price;
+                    if (tempSku != null) {
+                        sku.Amount = tempSku.Price;
+                    }
                 });
             });
 
@@ -169,16 +185,20 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                         var moneyTypeItem = Resolve<IAutoConfigService>().MoneyTypes()
                             .FirstOrDefault(e => e.Id == t.Key);
                         var orderMoneyItem = latestStoreOrderPrice.ReduceMoneys.FirstOrDefault(r => r.MoneyId == t.Key);
-                        if (orderMoneyItem.MaxPayPrice == t.Value)
+                        if (orderMoneyItem.MaxPayPrice == t.Value) {
                             reduceMoney += t.Value * moneyTypeItem.RateFee; // 减少的人民币
+                        }
 
-                        if (t.Value != orderMoneyItem.MaxPayPrice) result = ServiceResult.FailedWithMessage("虚拟资产计算有误");
+                        if (t.Value != orderMoneyItem.MaxPayPrice) {
+                            result = ServiceResult.FailedWithMessage("虚拟资产计算有误");
+                        }
                     });
                     if (latestStoreOrderPrice.TotalAmount != latestStoreOrderPrice.ExpressAmount +
                         latestStoreOrderPrice.ProductAmount - reduceMoney +
-                        latestStoreOrderPrice.FeeAmount)
+                        latestStoreOrderPrice.FeeAmount) {
                         return Tuple.Create(ServiceResult.FailedWithMessage("总价不登录商品总非+运费+非人民币资产+服务费"),
                             new BuyOutput());
+                    }
                 }
                 else
                 {
@@ -188,64 +208,78 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
             else
             {
                 if (latestStoreOrderPrice.TotalAmount != latestStoreOrderPrice.ExpressAmount +
-                    latestStoreOrderPrice.ProductAmount + latestStoreOrderPrice.FeeAmount)
+                    latestStoreOrderPrice.ProductAmount + latestStoreOrderPrice.FeeAmount) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("总价不登录商品总非+运费+服务费"), new BuyOutput());
+                }
             }
 
             #endregion 如果虚拟资产不为空
 
             #region 安全验证 客户端购买信息，价格等和服务器计算数据对比
 
-            if (orderPriceCache.StoreProductSku.TotalAmount != latestStoreProductSku.TotalAmount)
+            if (orderPriceCache.StoreProductSku.TotalAmount != latestStoreProductSku.TotalAmount) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("商品价格计算有误"), new BuyOutput());
+            }
 
-            if (orderPriceCache.StoreProductSku.TotalCount != latestStoreProductSku.TotalCount)
+            if (orderPriceCache.StoreProductSku.TotalCount != latestStoreProductSku.TotalCount) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("订单商品计算有误"), new BuyOutput());
+            }
 
-            if (latestStoreOrderPrice.TotalAmount != orderBuyInput.TotalAmount)
+            if (latestStoreOrderPrice.TotalAmount != orderBuyInput.TotalAmount) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("订单总价格计算有误"), new BuyOutput());
+            }
 
-            if (latestStoreOrderPrice.TotalAmount < latestStoreOrderPrice.ExpressAmount)
+            if (latestStoreOrderPrice.TotalAmount < latestStoreOrderPrice.ExpressAmount) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("订单总价格不能小于运费"), new BuyOutput());
+            }
 
-            if (latestStoreProductSku.TotalCount != orderBuyInput.TotalCount)
+            if (latestStoreProductSku.TotalCount != orderBuyInput.TotalCount) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("订单总数量计算有误"), new BuyOutput());
+            }
 
             foreach (var storeOrder in orderBuyInput.StoreOrders)
             {
                 var storePriceItem =
                     latestStoreOrderPrice.StorePrices.FirstOrDefault(r => r.StoreId == storeOrder.StoreId);
-                if (storePriceItem == null)
+                if (storePriceItem == null) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("订单数据传入有误"), new BuyOutput());
+                }
 
-                if (storePriceItem.TotalAmount != storeOrder.TotalAmount)
+                if (storePriceItem.TotalAmount != storeOrder.TotalAmount) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("店铺总价格计算有误"), new BuyOutput());
+                }
 
-                if (storePriceItem.ExpressAmount != storeOrder.ExpressAmount)
+                if (storePriceItem.ExpressAmount != storeOrder.ExpressAmount) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("店铺总运费计算有误"), new BuyOutput());
+                }
 
                 var storeItem = latestStoreProductSku.StoreItems.FirstOrDefault(r => r.StoreId == storeOrder.StoreId);
-                if (storeItem == null)
+                if (storeItem == null) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("订单数据传入有误"), new BuyOutput());
+                }
 
-                if (storeItem.TotalCount != storeOrder.TotalCount)
+                if (storeItem.TotalCount != storeOrder.TotalCount) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("店铺数量计算有误"), new BuyOutput());
+                }
 
-                if (storeItem.TotalAmount != storeOrder.ProductAmount)
+                if (storeItem.TotalAmount != storeOrder.ProductAmount) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("店铺商品总费用计算有误"), new BuyOutput());
+                }
 
                 foreach (var skuItem in storeOrder.ProductSkuItems)
                 {
                     // 逐一验证所有商品传递的价格模式
                     var priceConfig = priceSytles.FirstOrDefault(r => r.Id == skuItem.PriceStyleId);
-                    if (priceConfig == null)
+                    if (priceConfig == null) {
                         return Tuple.Create(ServiceResult.FailedWithMessage("商品Sku商品模式错误"), new BuyOutput());
+                    }
                     // 数据库中的sku信息
                     // 逐一验证所有商品Sku的价格
                     var lasetSku = latestStoreProductSku.StoreItems.FirstOrDefault(r => r.StoreId == skuItem.StoreId)
                         .ProductSkuItems.FirstOrDefault(r => r.ProductSkuId == skuItem.ProductSkuId);
-                    if (lasetSku.Price * skuItem.Count != skuItem.Amount * skuItem.Count)
+                    if (lasetSku.Price * skuItem.Count != skuItem.Amount * skuItem.Count) {
                         return Tuple.Create(ServiceResult.FailedWithMessage("商品Sku价格计算错误"), new BuyOutput());
+                    }
                 }
             }
 
@@ -253,20 +287,25 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
 
             #region 验证人民币金额
 
-            if (!orderBuyInput.PaymentAmount.EqualsDigits(latestStoreOrderPrice.TotalAmount))
+            if (!orderBuyInput.PaymentAmount.EqualsDigits(latestStoreOrderPrice.TotalAmount)) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("人民币支付金额计算错误"), new BuyOutput());
+            }
 
             if (!orderBuyInput.PaymentAmount.EqualsDigits(
                 latestStoreProductSku.TotalAmount - reduceMoney + latestStoreOrderPrice.ExpressAmount +
-                latestStoreOrderPrice.FeeAmount))
+                latestStoreOrderPrice.FeeAmount)) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("人民币支付金额计算错误"), new BuyOutput());
+            }
 
             if (!orderBuyInput.PaymentAmount.EqualsDigits(orderBuyInput.StoreOrders.Sum(r => r.ProductAmount) +
                                                           orderBuyInput.StoreOrders.Sum(r => r.ExpressAmount) -
-                                                          reduceMoney + latestStoreOrderPrice.FeeAmount))
+                                                          reduceMoney + latestStoreOrderPrice.FeeAmount)) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("人民币支付金额计算错误"), new BuyOutput());
+            }
             //如果验证不成功，则直接返回错误
-            if (result != ServiceResult.Success) return Tuple.Create(result, new BuyOutput());
+            if (result != ServiceResult.Success) {
+                return Tuple.Create(result, new BuyOutput());
+            }
 
             #endregion 验证人民币金额
 
@@ -275,16 +314,25 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
             var activityService = Resolve<IActivityApiService>();
             //预售
             var checkResult = activityService.CheckPreSellActivity(orderBuyInput.StoreOrders);
-            if (!checkResult.Succeeded) return Tuple.Create(checkResult, new BuyOutput());
+            if (!checkResult.Succeeded) {
+                return Tuple.Create(checkResult, new BuyOutput());
+            }
             //限时购
             checkResult = activityService.CheckTimeLimitBuyActivity(orderBuyInput.StoreOrders);
-            if (!checkResult.Succeeded) return Tuple.Create(checkResult, new BuyOutput());
+            if (!checkResult.Succeeded) {
+                return Tuple.Create(checkResult, new BuyOutput());
+            }
+
             var timeLimitActivities = new List<Activity>();
-            if (checkResult.ReturnObject != null) timeLimitActivities = (List<Activity>)checkResult.ReturnObject;
+            if (checkResult.ReturnObject != null) {
+                timeLimitActivities = (List<Activity>)checkResult.ReturnObject;
+            }
 
             //购买权限
             checkResult = activityService.CheckBuyPermissionActivity(orderBuyInput.StoreOrders, user);
-            if (!checkResult.Succeeded) return Tuple.Create(checkResult, new BuyOutput());
+            if (!checkResult.Succeeded) {
+                return Tuple.Create(checkResult, new BuyOutput());
+            }
 
             #endregion 活动限购
 
@@ -296,40 +344,49 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
             {
                 var productId = orderBuyInput.StoreOrders.FirstOrDefault().ProductSkuItems.FirstOrDefault().ProductId;
                 var product = Resolve<IProductService>().GetSingle(r => r.Id == productId);
-                if (product == null) return Tuple.Create(ServiceResult.FailedWithMessage("拼团商品已不存在"), new BuyOutput());
+                if (product == null) {
+                    return Tuple.Create(ServiceResult.FailedWithMessage("拼团商品已不存在"), new BuyOutput());
+                }
 
                 var productActivity =
                     product.ProductActivityExtension?.Activitys?.FirstOrDefault(r =>
                         r.Key == typeof(GroupBuyActivity).FullName);
                 activity = Resolve<IActivityService>().GetSingle(r => r.Id == productActivity.Id);
-                if (activity == null) return Tuple.Create(ServiceResult.FailedWithMessage("拼团活动不存在"), new BuyOutput());
+                if (activity == null) {
+                    return Tuple.Create(ServiceResult.FailedWithMessage("拼团活动不存在"), new BuyOutput());
+                }
 
                 groupBuyActivity = productActivity.Value.ToObject<GroupBuyActivity>();
-                if (groupBuyActivity == null)
+                if (groupBuyActivity == null) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("商品拼团数据出错"), new BuyOutput());
+                }
 
                 if (orderBuyInput.ActivityRecordId > 0)
                 {
                     var activityRecord = Resolve<IActivityRecordService>()
                         .GetSingle(r => r.Id == orderBuyInput.ActivityRecordId);
-                    if (activityRecord == null)
+                    if (activityRecord == null) {
                         return Tuple.Create(ServiceResult.FailedWithMessage("参与的拼团记录已不存在"), new BuyOutput());
+                    }
 
-                    if (activityRecord.Status != ActivityRecordStatus.IsPay)
+                    if (activityRecord.Status != ActivityRecordStatus.IsPay) {
                         return Tuple.Create(ServiceResult.FailedWithMessage("参与的拼团记录未支付或已结束"), new BuyOutput());
+                    }
 
                     var count = Resolve<IActivityRecordService>()
                         .Count(r => r.ParentId == orderBuyInput.ActivityRecordId);
-                    if (count + 1 >= groupBuyActivity.BuyerCount)
+                    if (count + 1 >= groupBuyActivity.BuyerCount) {
                         return Tuple.Create(ServiceResult.FailedWithMessage("改拼团人数已达标"), new BuyOutput());
+                    }
                 }
 
                 //当前用户记录
                 var userActivityRecord = Resolve<IActivityRecordService>().GetSingle(r =>
                     r.ActivityId == activity.Id && r.UserId == orderBuyInput.UserId &&
                     r.Status == ActivityRecordStatus.IsPay);
-                if (userActivityRecord != null)
+                if (userActivityRecord != null) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("您已参与的拼团未结束，不能重复参加"), new BuyOutput());
+                }
             }
 
             #endregion 拼团验证
@@ -390,8 +447,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                     {
                         var coupon = Resolve<IUserCouponService>()
                             .GetSingle(x => x.Id == couponList.FirstOrDefault().ToObjectId());
-                        if (coupon != null && storePriceItem.TotalAmount > coupon.MinOrderPrice)
+                        if (coupon != null && storePriceItem.TotalAmount > coupon.MinOrderPrice) {
                             couponAmount = coupon.Value;
+                        }
                     }
 
                     // var orderForCashAmount= storePriceItem.
@@ -449,7 +507,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                     order.Extension = ObjectExtension.ToJson(order.OrderExtension);
 
                     // 如果发货人不为空
-                    if (deliverUser != null) order.DeliverUserId = deliverUser.Id;
+                    if (deliverUser != null) {
+                        order.DeliverUserId = deliverUser.Id;
+                    }
 
                     Resolve<IOrderService>().Add(order);
 
@@ -496,7 +556,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                         orderProduct.FenRunAmount =
                             storeItemSku.FenRunPrice * storeItemSku.BuyCount -
                             reduceAcount.ForCashAmount; // 分润价格,需要减去非人民币支付扣除的价格，比如分润价格为100，人民币支付价格为20，则分润价格为100-20=80
-                        if (orderProduct.FenRunAmount <= 0) orderProduct.FenRunAmount = 0;
+                        if (orderProduct.FenRunAmount <= 0) {
+                            orderProduct.FenRunAmount = 0;
+                        }
 
                         orderProduct.OrderProductExtension = new OrderProductExtension
                         {
@@ -611,13 +673,16 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                     foreach (var accountPay in order.AccountPayPair)
                     {
                         var value = 0.0m;
-                        foreach (var orderProduct in orderProducts)
-                            if (orderProduct.OrderProductExtension.ReduceAmount.MoneyTypeId == accountPay.Key)
+                        foreach (var orderProduct in orderProducts) {
+                            if (orderProduct.OrderProductExtension.ReduceAmount.MoneyTypeId == accountPay.Key) {
                                 value += orderProduct.OrderProductExtension.ReduceAmount.Amount;
+                            }
+                        }
 
-                        if (!value.EqualsDigits(accountPay.Value))
+                        if (!value.EqualsDigits(accountPay.Value)) {
                             return Tuple.Create(ServiceResult.FailedWithMessage("订单账户支付金额与订单商品账户金额不对"),
                                 new BuyOutput());
+                        }
                     }
 
                     #endregion 验证订单和订单商品的数据是否相符
@@ -693,7 +758,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                 #region 删除购物车、更新商品数据等操作
 
                 // 删除购物车数据
-                if (orderBuyInput.IsFromCart) Resolve<IOrderActionService>().DeleteCartBuyOrder(orderBuyInput);
+                if (orderBuyInput.IsFromCart) {
+                    Resolve<IOrderActionService>().DeleteCartBuyOrder(orderBuyInput);
+                }
 
                 // 更新购买记录
                 var productBuyCount = new Dictionary<long, long>();
@@ -701,9 +768,10 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                 {
                     var productIds = store.ProductSkuItems.Select(r => r.ProductId).Distinct();
                     //库存减少
-                    foreach (var sku in store.ProductSkuItems)
+                    foreach (var sku in store.ProductSkuItems) {
                         Resolve<IProductSkuService>().Update(r => { r.Stock = r.Stock - sku.Count; },
                             r => r.Id == sku.ProductSkuId);
+                    }
 
                     foreach (var productId in productIds)
                     {
@@ -713,9 +781,10 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                 }
 
                 //销量
-                foreach (var item in productBuyCount)
+                foreach (var item in productBuyCount) {
                     Resolve<IProductService>().Update(r => { r.SoldCount = r.SoldCount + item.Value; },
                         r => r.Id == item.Key);
+                }
 
                 // 如果使用了优惠券, set为已经使用
                 if (couponAmount > 0)
@@ -782,25 +851,30 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
             }
 
             //购买数量小于等于0直接返回失败
-            if (orderProductInputList.Count <= 0)
+            if (orderProductInputList.Count <= 0) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("购买数量不能小于等于0"), storeProductSku);
+            }
 
             // 当PriceStyle修改后, 要更新Sku数据才能正确计算订单数据.
-            foreach (var product in orderProductInputList)
+            foreach (var product in orderProductInputList) {
                 Ioc.Resolve<IProductSkuService>().AutoUpdateSkuPrice(product.ProductId);
+            }
 
             var userIds = orderProductInputList.Select(r => r.LoginUserId).Distinct().ToList();
-            if (userIds.Count != 1 && userIds.FirstOrDefault() != buyInfoInput.LoginUserId)
+            if (userIds.Count != 1 && userIds.FirstOrDefault() != buyInfoInput.LoginUserId) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("用户与商品不对应，或者存在多个用户的订单"), storeProductSku);
+            }
 
             var user = Resolve<IUserService>().GetSingle(buyInfoInput.LoginUserId); // 缓存中读取用户
-            if (user == null || user.Status != Status.Normal)
+            if (user == null || user.Status != Status.Normal) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("您的输入的账户不存在，或者状态不正常"), storeProductSku);
+            }
 
             var storeItems = Resolve<IShopStoreService>().GetStoreItemListFromCache()
                 .Where(r => orderProductInputList.Select(e => e.StoreId).Contains(r.StoreId))?.ToList();
-            if (storeItems == null || storeItems.Count == 0)
+            if (storeItems == null || storeItems.Count == 0) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("您购买的商品店铺不存"), storeProductSku);
+            }
 
             // 获取店铺是商品信息
             var storeProductSkuDtos = new StoreProductSkuDtos
@@ -814,16 +888,18 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
             var storeProductSkuResult = Resolve<IShopStoreService>().GetStoreProductSku(storeProductSkuDtos);
             if (storeProductSkuResult == null
                 || storeProductSkuResult.Item1 == null
-                || !storeProductSkuResult.Item1.Succeeded)
+                || !storeProductSkuResult.Item1.Succeeded) {
                 return Tuple.Create(
                     storeProductSkuResult == null || storeProductSkuResult.Item1 == null
                         ? ServiceResult.FailedWithMessage("Sku库存不足")
                         : storeProductSkuResult.Item1, storeProductSku);
+            }
 
             storeProductSku = storeProductSkuResult.Item2;
             if (storeProductSku == null || storeProductSku?.StoreItems == null ||
-                storeProductSku?.StoreItems?.Count == 0)
+                storeProductSku?.StoreItems?.Count == 0) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("您购买的商品店铺不存"), storeProductSku);
+            }
 
             #endregion 安全验证
 
@@ -834,7 +910,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                 {
                     e.BuyCount = (orderProductInputList.FirstOrDefault(r => r.ProductSkuId == e.ProductSkuId)?.Count)
                         .ConvertToLong();
-                    if (e.BuyCount > e.Stock) e.BuyCount = e.Stock; // 如果购买数量大于库存，则购买数据等于库存，全部购买，库存0商品已经判断
+                    if (e.BuyCount > e.Stock) {
+                        e.BuyCount = e.Stock; // 如果购买数量大于库存，则购买数据等于库存，全部购买，库存0商品已经判断
+                    }
 
                     e.DisplayPrice = Resolve<IProductService>().GetDisplayPrice(e.Price, e.PriceStyleId, 0M);
                 });
@@ -901,14 +979,17 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
         {
             //user
             var user = Resolve<IUserService>().GetSingle(userOrderInput.LoginUserId); // 缓存中读取用户
-            if (user == null || user.Status != Status.Normal)
+            if (user == null || user.Status != Status.Normal) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("您的输入的账户不存在，或者状态不正常"), new StoreOrderPrice());
+            }
+
             var cacheKey = $"OrderPrice_{userOrderInput.Sign}";
             try
             {
                 userOrderInput.StoreExpress = userOrderInput.StoreExpressJson.DeserializeJson<List<StoreExpress>>();
-                if (userOrderInput.StoreExpress == null || userOrderInput.StoreExpress?.ToList()?.Count == 0)
+                if (userOrderInput.StoreExpress == null || userOrderInput.StoreExpress?.ToList()?.Count == 0) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("请选择配送方式"), new StoreOrderPrice());
+                }
             }
             catch
             {
@@ -917,9 +998,10 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
 
             try
             {
-                if (!userOrderInput.ReduceMoneysJson.IsNullOrEmpty())
+                if (!userOrderInput.ReduceMoneysJson.IsNullOrEmpty()) {
                     userOrderInput.ReduceMoneys = userOrderInput.ReduceMoneysJson
                         .DeserializeJson<List<KeyValuePair<Guid, decimal>>>();
+                }
             }
             catch
             {
@@ -935,18 +1017,22 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                     // 如果缓存不存在地址，则从数据库在读取一次，解决购物时，地址新增的情况
                     address = Resolve<IUserAddressService>()
                         .GetUserAddress(userOrderInput.AddressId.ToObjectId(), userOrderInput.LoginUserId);
-                    if (address == null)
+                    if (address == null) {
                         return Tuple.Create(ServiceResult.FailedWithMessage("您选择地址不存在"), new StoreOrderPrice());
+                    }
                 }
 
-                if (orderPriceCache.StoreProductSku.StoreItems.Count != userOrderInput.StoreExpress.ToList().Count())
+                if (orderPriceCache.StoreProductSku.StoreItems.Count != userOrderInput.StoreExpress.ToList().Count()) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("店铺数与配送方式数不比配"), new StoreOrderPrice());
+                }
 
                 var storeProductSku = orderPriceCache.StoreProductSku;
                 storeProductSku.StoreItems.ForEach(item =>
                 {
                     var temp = userOrderInput.StoreExpress.Find(s => s.Key == item.StoreId.ToString());
-                    if (temp != null) item.ExpressType = temp.ExpressType;
+                    if (temp != null) {
+                        item.ExpressType = temp.ExpressType;
+                    }
                 });
                 return CountPrice(ref storeProductSku, userOrderInput, user, orderPriceCache.UserAddresses,
                     orderPriceCache.OrderMoneys, false);
@@ -968,9 +1054,10 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
             var address = userOrderInput != null
                 ? userAddress.FirstOrDefault(r => r.Id == userOrderInput.AddressId.ToObjectId())
                 : null;
-            if (address == null && userOrderInput != null)
+            if (address == null && userOrderInput != null) {
                 address = Resolve<IUserAddressService>()
                     .GetUserAddress(userOrderInput.AddressId.ToObjectId(), userOrderInput.LoginUserId);
+            }
 
             var result = ServiceResult.Success;
             var storeOrderPrice = new StoreOrderPrice();
@@ -987,8 +1074,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                 };
                 foreach (var productSkuItem in storeItem.ProductSkuItems)
                 {
-                    if (productSkuItem.BuyCount > productSkuItem.Stock)
+                    if (productSkuItem.BuyCount > productSkuItem.Stock) {
                         result = ServiceResult.FailedWithMessage("购买数量大于商品库存数量");
+                    }
 
                     //member sku price
                     var price = productSkuItem.Price;
@@ -999,17 +1087,21 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                     if (productGrade != null)
                     {
                         price = productGrade.MemberPrice;
-                        if (isUpdateSkuPrice) productSkuItem.Price = price;
+                        if (isUpdateSkuPrice) {
+                            productSkuItem.Price = price;
+                        }
                     }
 
                     //member discount price
                     storePrice.ProductAmount += productSkuItem.BuyCount * price; // sku价格
                     var discountAmount = originalAmount - storePrice.ProductAmount;
                     storePrice.MemberDiscountAmount += discountAmount > 0 ? discountAmount : 0;
-                    if (productSkuItem.IsFreeShipping)
+                    if (productSkuItem.IsFreeShipping) {
                         storePrice.TotalWeight += 0; // 免邮费
-                    else
+                    } else {
                         storePrice.TotalWeight += productSkuItem.BuyCount * productSkuItem.Weight / 1000; // 重量
+                    }
+
                     minPayCash += productSkuItem.BuyCount * productSkuItem.MinPayCash;
                 }
 
@@ -1026,7 +1118,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                     {
                         storePrice.ExpressAmount = expressFeeResult.Item2;
                         storePrice.CalculateExpressAmount = expressFeeResult.Item2;
-                        if (storeItem.ExpressType == ExpressType.Self) storePrice.ExpressAmount = 0;
+                        if (storeItem.ExpressType == ExpressType.Self) {
+                            storePrice.ExpressAmount = 0;
+                        }
                     }
                 }
 
@@ -1110,7 +1204,7 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                         var productAmount = storeOrderPrice.ProductAmount;
                         var coupon = Resolve<IUserCouponService>()
                             .GetSingle(x => x.Id == coupList.FirstOrDefault().ToObjectId());
-                        if (coupon != null)
+                        if (coupon != null) {
                             if (productAmount > coupon.MinOrderPrice)
                             {
                                 storeOrderPrice.TotalAmount -= coupon.Value; // 现金总额减去资产
@@ -1118,6 +1212,7 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                                 storeOrderPrice.FeeAmount -= coupon.Value; // 店铺 服务费
                                 //storeOrderPrice.TotalAmount += feeAmount; //总资产加上服务费
                             }
+                        }
                     }
                 }
 
@@ -1146,12 +1241,20 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
         public Tuple<ServiceResult, BuyOutput> Pay(long orderId, long userId)
         {
             var order = Resolve<IOrderService>().GetSingle(e => e.Id == orderId && e.UserId == userId);
-            if (order == null) return Tuple.Create(ServiceResult.FailedWithMessage("订单不存在"), new BuyOutput());
-            if (order.OrderStatus != OrderStatus.WaitingBuyerPay)
+            if (order == null) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("订单不存在"), new BuyOutput());
+            }
+
+            if (order.OrderStatus != OrderStatus.WaitingBuyerPay) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("非待付款订单，不能付款"), new BuyOutput());
+            }
+
             order.OrderExtension = order.Extension.ToObject<OrderExtension>();
             var user = Resolve<IUserService>().GetNomarlUser(userId);
-            if (user == null) return Tuple.Create(ServiceResult.FailedWithMessage("用户不存在或状态不正常"), new BuyOutput());
+            if (user == null) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("用户不存在或状态不正常"), new BuyOutput());
+            }
+
             var ordersList = new List<Order>
             {
                 order
@@ -1168,7 +1271,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                 BuyerCount = order.TotalCount
             };
             var payResult = Resolve<IOrderAdminService>().AddSinglePay(singlePayInput);
-            if (!payResult.Item1.Succeeded) return Tuple.Create(payResult.Item1, new BuyOutput());
+            if (!payResult.Item1.Succeeded) {
+                return Tuple.Create(payResult.Item1, new BuyOutput());
+            }
 
             var orderBuy = new BuyOutput
             {
@@ -1253,12 +1358,13 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
             //店铺使用的资产
             var allowMoneys = Resolve<IProductSkuService>().GetStoreMoneyBuySkus(allProductSkus, buyInput.UserId)
                 .ToList();
-            if (buyInput.ReduceMoneys != null)
+            if (buyInput.ReduceMoneys != null) {
                 buyInput.ReduceMoneys.Foreach(r =>
                 {
                     var useMoneyItem = allowMoneys.First(e => e.MoneyId == r.Key);
                     storeProductSku.AllowMoneys.Add(useMoneyItem);
                 });
+            }
 
             return storeProductSku;
         }
@@ -1372,13 +1478,15 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                 Resolve<IAutoConfigService>().GetList<PriceStyleConfig>(r => r.Status == Status.Normal);
             // 根据sku获取价格模式，在根据价格模式获取虚拟资产
             var skuPriceStyle = priceStyleConfigs.FirstOrDefault(r => r.Id == storeOrderSku.PriceStyleId);
-            if (skuPriceStyle == null)
+            if (skuPriceStyle == null) {
                 return Tuple.Create(0m, ServiceResult.FailedWithMessage("sku的价格模式已不存在"), new ReduceAmount());
+            }
 
             var moneyConfig = Resolve<IAutoConfigService>().MoneyTypes()
                 .FirstOrDefault(r => r.Id == skuPriceStyle.MoneyTypeId);
-            if (moneyConfig == null)
+            if (moneyConfig == null) {
                 return Tuple.Create(0m, ServiceResult.FailedWithMessage("sku的货币类型不正常"), new ReduceAmount());
+            }
             // 现金商城，支付金额与商品金额相等
             if (skuPriceStyle.Id == Guid.Parse("e0000000-1478-49bd-bfc7-e73a5d699000"))
             {
@@ -1416,8 +1524,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
             var skuPayment =
                 Math.Round(storeOrderSku.Amount - reduceMoney / storeOrderSku.Count * moneyConfig.RateFee + feeAmount,
                     4);
-            if (skuPayment < 0)
+            if (skuPayment < 0) {
                 return Tuple.Create(0m, ServiceResult.FailedWithMessage("sku价格计算错误"), new ReduceAmount());
+            }
 
             var reduceAmount = new ReduceAmount
             {

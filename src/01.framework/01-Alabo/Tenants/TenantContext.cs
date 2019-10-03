@@ -43,7 +43,9 @@ namespace Alabo.Tenants
         /// <returns></returns>
         public static string GetCurrentTenant()
         {
-            if (string.IsNullOrWhiteSpace(CurrentTenant)) return string.Empty;
+            if (string.IsNullOrWhiteSpace(CurrentTenant)) {
+                return string.Empty;
+            }
 
             return GetTenant(CurrentTenant);
         }
@@ -63,7 +65,9 @@ namespace Alabo.Tenants
         /// <param name="name"></param>
         public static string GetTenant(string name)
         {
-            if (_tenantDictionary.ContainsKey(name)) return _tenantDictionary[name];
+            if (_tenantDictionary.ContainsKey(name)) {
+                return _tenantDictionary[name];
+            }
 
             return string.Empty;
         }
@@ -84,7 +88,9 @@ namespace Alabo.Tenants
         /// <param name="value"></param>
         public static void AddTenant(string name, string value)
         {
-            if (!_tenantDictionary.ContainsKey(name)) _tenantDictionary.TryAdd(name, value);
+            if (!_tenantDictionary.ContainsKey(name)) {
+                _tenantDictionary.TryAdd(name, value);
+            }
         }
 
         /// <summary>
@@ -107,7 +113,9 @@ namespace Alabo.Tenants
         /// <param name="tenantName"></param>
         public static void SwitchDatabase(IScope scope, string tenantName)
         {
-            if (string.IsNullOrWhiteSpace(tenantName)) return;
+            if (string.IsNullOrWhiteSpace(tenantName)) {
+                return;
+            }
 
             CurrentTenant = tenantName;
             Ioc.CurrentScope = scope.GetHashCode();

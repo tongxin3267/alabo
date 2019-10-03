@@ -25,7 +25,9 @@ namespace Alabo.Industry.Shop.Activitys.Controllers
         [Display(Description = "��ȡ�")]
         public ApiResult<ActivityEditOutput> GetView([FromQuery] ActivityEditInput input)
         {
-            if (!this.IsFormValid()) return ApiResult.Failure<ActivityEditOutput>(this.FormInvalidReason());
+            if (!this.IsFormValid()) {
+                return ApiResult.Failure<ActivityEditOutput>(this.FormInvalidReason());
+            }
 
             var model = Resolve<IActivityApiService>().GetView(input);
             return ApiResult.Success(model);
@@ -39,7 +41,10 @@ namespace Alabo.Industry.Shop.Activitys.Controllers
         [Display(Description = "����")]
         public ApiResult Save([FromBody] ActivityEditOutput input)
         {
-            if (!this.IsFormValid()) return ApiResult.Failure<ActivityEditOutput>(this.FormInvalidReason());
+            if (!this.IsFormValid()) {
+                return ApiResult.Failure<ActivityEditOutput>(this.FormInvalidReason());
+            }
+
             var result = Resolve<IActivityApiService>().Save(input);
             return ToResult(result);
         }

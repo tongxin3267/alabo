@@ -54,13 +54,25 @@ namespace Alabo.Cloud.People.UserCard.UI
         public ServiceResult Save(object model, AutoBaseModel autoModel)
         {
             var find = AutoMapping.SetValue<UserCardOpen>(model);
-            if (find.GradeId.IsGuidNullOrEmpty()) return ServiceResult.FailedWithMessage("会员卡等级不能为空");
+            if (find.GradeId.IsGuidNullOrEmpty()) {
+                return ServiceResult.FailedWithMessage("会员卡等级不能为空");
+            }
+
             var userGrade = Resolve<IGradeService>().GetGrade(find.GradeId);
-            if (userGrade == null) return ServiceResult.FailedWithMessage("会员等级不存在");
+            if (userGrade == null) {
+                return ServiceResult.FailedWithMessage("会员等级不存在");
+            }
+
             var user = Resolve<IUserService>().GetSingle(r => r.UserName == find.UserName);
-            if (user == null) return ServiceResult.FailedWithMessage("用户不存在");
+            if (user == null) {
+                return ServiceResult.FailedWithMessage("用户不存在");
+            }
+
             user.GradeId = userGrade.Id;
-            if (!Resolve<IUserService>().UpdateUser(user)) return ServiceResult.FailedWithMessage("开卡失败");
+            if (!Resolve<IUserService>().UpdateUser(user)) {
+                return ServiceResult.FailedWithMessage("开卡失败");
+            }
+
             return ServiceResult.Success;
         }
     }

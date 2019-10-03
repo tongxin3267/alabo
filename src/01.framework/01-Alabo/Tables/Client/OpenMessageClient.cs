@@ -82,7 +82,9 @@ namespace Alabo.Tables.Client
         public async Task<ApiResult> SendTemplateAsync(string token, string mobile, long templateId,
             string userIpAddress, IDictionary<string, string> parameter = null)
         {
-            if (parameter == null) throw new ArgumentNullException(nameof(parameter));
+            if (parameter == null) {
+                throw new ArgumentNullException(nameof(parameter));
+            }
 
             var url = BuildQueryUri(_sendTemplateUrl);
             IDictionary<string, string> parameters = new Dictionary<string, string>

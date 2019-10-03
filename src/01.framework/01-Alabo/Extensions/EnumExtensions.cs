@@ -73,11 +73,15 @@ namespace Alabo.Extensions
             // 获取枚举值类型和名称
             var type = value.GetType();
             var name = Enum.GetName(type, value);
-            if (name == null) return Convert.ToInt32(value).ToString();
+            if (name == null) {
+                return Convert.ToInt32(value).ToString();
+            }
             // 获取Display属性
             var field = type.GetField(Enum.GetName(type, value));
             var displayAttribute = field.GetAttributes<DisplayAttribute>().FirstOrDefault();
-            if (displayAttribute != null) return displayAttribute.GetName() ?? displayAttribute.GetShortName();
+            if (displayAttribute != null) {
+                return displayAttribute.GetName() ?? displayAttribute.GetShortName();
+            }
 
             // 返回默认名称
             return name;
@@ -90,8 +94,9 @@ namespace Alabo.Extensions
         public static string GetDisplayResourceTypeName(this Enum value)
         {
             var displayAttribute = GetDisplayAttribute(value);
-            if (displayAttribute != null && displayAttribute.ResourceType != null)
+            if (displayAttribute != null && displayAttribute.ResourceType != null) {
                 return displayAttribute.ResourceType.FullName;
+            }
 
             return string.Empty;
         }
@@ -106,11 +111,15 @@ namespace Alabo.Extensions
             // 获取枚举值类型和名称
             var type = value.GetType();
             var name = Enum.GetName(type, value);
-            if (name == null) return Convert.ToInt32(value).ToString();
+            if (name == null) {
+                return Convert.ToInt32(value).ToString();
+            }
             // 获取Display属性
             var field = type.GetField(Enum.GetName(type, value));
             var displayAttribute = field.GetAttributes<DisplayAttribute>().FirstOrDefault();
-            if (displayAttribute != null) return selector(displayAttribute);
+            if (displayAttribute != null) {
+                return selector(displayAttribute);
+            }
 
             // 返回默认名称
             return name;
@@ -121,7 +130,9 @@ namespace Alabo.Extensions
             //get enum value
             var type = value.GetType();
             var name = Enum.GetName(type, value);
-            if (name == null) return null;
+            if (name == null) {
+                return null;
+            }
             //field
             var field = type.GetField(name);
             return field.GetAttributes<DisplayAttribute>().FirstOrDefault();
@@ -152,7 +163,9 @@ namespace Alabo.Extensions
         {
             // 获取枚举值类型和名称
             var fieldAttribute = GetFieldAttribute(value);
-            if (fieldAttribute == null) return Guid.Empty;
+            if (fieldAttribute == null) {
+                return Guid.Empty;
+            }
 
             try
             {
@@ -172,7 +185,9 @@ namespace Alabo.Extensions
         {
             // 获取枚举值类型和名称
             var fieldAttribute = GetFieldAttribute(value);
-            if (fieldAttribute == null) return string.Empty;
+            if (fieldAttribute == null) {
+                return string.Empty;
+            }
 
             return fieldAttribute.Icon?.Replace("_", "_");
         }
@@ -197,11 +212,15 @@ namespace Alabo.Extensions
         {
             var type = value.GetType();
             var name = Enum.GetName(type, value);
-            if (name == null) return Convert.ToInt32(value).ToString();
+            if (name == null) {
+                return Convert.ToInt32(value).ToString();
+            }
             // 获取Display属性
             var field = type.GetField(Enum.GetName(type, value));
             var displayAttribute = field.GetAttributes<DisplayAttribute>().FirstOrDefault();
-            if (displayAttribute != null) return displayAttribute.Name ?? displayAttribute.ShortName;
+            if (displayAttribute != null) {
+                return displayAttribute.Name ?? displayAttribute.ShortName;
+            }
             // 返回默认名称
             return name;
         }
@@ -215,11 +234,15 @@ namespace Alabo.Extensions
             // 获取枚举值类型和名称
             var type = value.GetType();
             var name = Enum.GetName(type, value);
-            if (name == null) return false;
+            if (name == null) {
+                return false;
+            }
             // 获取Display属性
             var field = type.GetField(Enum.GetName(type, value));
             var fieldAttribute = field.GetAttributes<FieldAttribute>().FirstOrDefault();
-            if (fieldAttribute != null) return fieldAttribute.IsDefault;
+            if (fieldAttribute != null) {
+                return fieldAttribute.IsDefault;
+            }
             // 返回默认名称
             return false;
             ;
@@ -234,7 +257,9 @@ namespace Alabo.Extensions
             // 获取枚举值类型和名称
             var type = value.GetType();
             var name = Enum.GetName(type, value);
-            if (name == null) return Convert.ToInt32(value).ToString();
+            if (name == null) {
+                return Convert.ToInt32(value).ToString();
+            }
             // 获取Display属性
             var field = type.GetField(Enum.GetName(type, value));
             var displayAttribute = field.GetAttributes<DisplayAttribute>().FirstOrDefault();
@@ -243,8 +268,9 @@ namespace Alabo.Extensions
             {
                 name = displayAttribute.GetName() ?? displayAttribute.GetShortName();
                 var cssAttribute = field.GetAttributes<LabelCssClassAttribute>().FirstOrDefault();
-                if (cssAttribute != null)
+                if (cssAttribute != null) {
                     name = $@"<span class='m-badge m-badge--wide {cssAttribute.CssClass}'>{name}</span>";
+                }
             }
 
             // 返回默认名称
@@ -260,7 +286,9 @@ namespace Alabo.Extensions
             // 获取枚举值类型和名称
             var type = value.GetType();
             var name = Enum.GetName(type, value);
-            if (name == null) return Convert.ToInt32(value).ToString();
+            if (name == null) {
+                return Convert.ToInt32(value).ToString();
+            }
             // 获取Display属性
             var field = type.GetField(Enum.GetName(type, value));
             var displayAttribute = field.GetAttributes<DisplayAttribute>().FirstOrDefault();
@@ -269,8 +297,9 @@ namespace Alabo.Extensions
             {
                 name = displayAttribute.GetName() ?? displayAttribute.GetShortName();
                 var cssAttribute = field.GetAttributes<LabelCssClassAttribute>().FirstOrDefault();
-                if (cssAttribute != null)
+                if (cssAttribute != null) {
                     name = $@"<span class='m-badge  m-badge--wide {cssAttribute.CssClass}'>{name}</span>";
+                }
             }
 
             // 返回默认名称
@@ -287,7 +316,9 @@ namespace Alabo.Extensions
             try
             {
                 enumValue = (T)Enum.Parse(typeof(T), stringValue, true);
-                if (Enum.IsDefined(typeof(T), enumValue)) return true;
+                if (Enum.IsDefined(typeof(T), enumValue)) {
+                    return true;
+                }
 
                 return false;
             }

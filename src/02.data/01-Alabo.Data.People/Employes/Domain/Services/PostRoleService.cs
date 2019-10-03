@@ -100,28 +100,42 @@ namespace Alabo.Data.People.Employes.Domain.Services
         public ServiceResult Edit(PostRoleInput model)
         {
             var postRole = model.MapTo<PostRole>();
-            if (postRole.RoleIds == null) postRole.RoleIds = new List<ObjectId>();
+            if (postRole.RoleIds == null) {
+                postRole.RoleIds = new List<ObjectId>();
+            }
 
             // 添加首页权限Id
             var adminThemeMenus = GetAdminThemeMenus();
             var indexMenu =
                 adminThemeMenus.FirstOrDefault(r => r.Url.Contains("admin/index", StringComparison.OrdinalIgnoreCase));
-            if (indexMenu != null) postRole.RoleIds.Add(indexMenu.Id);
+            if (indexMenu != null) {
+                postRole.RoleIds.Add(indexMenu.Id);
+            }
             // 消息页面
             indexMenu = adminThemeMenus.FirstOrDefault(r =>
                 r.Url.Contains("admin/message", StringComparison.OrdinalIgnoreCase));
-            if (indexMenu != null) postRole.RoleIds.Add(indexMenu.Id);
+            if (indexMenu != null) {
+                postRole.RoleIds.Add(indexMenu.Id);
+            }
 
-            if (model.RoleIds == null) model.RoleIds = new List<string>();
+            if (model.RoleIds == null) {
+                model.RoleIds = new List<string>();
+            }
+
             foreach (var item in model.RoleIds)
             {
                 var roleId = item.ToObjectId();
-                if (roleId != ObjectId.Empty) postRole.RoleIds.Add(roleId);
+                if (roleId != ObjectId.Empty) {
+                    postRole.RoleIds.Add(roleId);
+                }
             }
 
             postRole.RoleIds = postRole.RoleIds;
 
-            if (!AddOrUpdate(postRole, s => s.Id == postRole.Id)) return ServiceResult.FailedMessage("更新失败");
+            if (!AddOrUpdate(postRole, s => s.Id == postRole.Id)) {
+                return ServiceResult.FailedMessage("更新失败");
+            }
+
             return ServiceResult.Success;
         }
 

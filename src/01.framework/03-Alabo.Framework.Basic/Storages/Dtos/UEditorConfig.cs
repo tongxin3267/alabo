@@ -22,7 +22,9 @@ namespace Alabo.Framework.Basic.Storages.Dtos
         {
             get
             {
-                if (noCache || _Items == null) _Items = BuildItems();
+                if (noCache || _Items == null) {
+                    _Items = BuildItems();
+                }
 
                 return _Items;
             }

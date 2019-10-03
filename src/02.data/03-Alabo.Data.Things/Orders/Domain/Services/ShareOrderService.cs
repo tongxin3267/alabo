@@ -46,15 +46,23 @@ namespace Alabo.Data.Things.Orders.Domain.Services
         /// <param name="shareOrder">The share order.</param>
         public ServiceResult AddSingle(ShareOrder shareOrder)
         {
-            if (shareOrder.UserName.IsNullOrEmpty()) return ServiceResult.FailedWithMessage("用户名不能为空");
+            if (shareOrder.UserName.IsNullOrEmpty()) {
+                return ServiceResult.FailedWithMessage("用户名不能为空");
+            }
 
             var user = Resolve<IUserService>().GetSingle(shareOrder.UserName);
-            if (user == null) return ServiceResult.FailedWithMessage("用户不存在");
+            if (user == null) {
+                return ServiceResult.FailedWithMessage("用户不存在");
+            }
 
-            if (user.Status != Status.Normal) return ServiceResult.FailedWithMessage("用户状态不正常");
+            if (user.Status != Status.Normal) {
+                return ServiceResult.FailedWithMessage("用户状态不正常");
+            }
 
             shareOrder.UserId = user.Id;
-            if (Add(shareOrder)) return ServiceResult.Success;
+            if (Add(shareOrder)) {
+                return ServiceResult.Success;
+            }
 
             return ServiceResult.FailedWithMessage("添加失败");
         }
@@ -67,7 +75,9 @@ namespace Alabo.Data.Things.Orders.Domain.Services
         {
             var result = ServiceResult.Success;
             var model = Resolve<IShareOrderService>().GetSingle(u => u.Id == id);
-            if (model == null) return Tuple.Create(ServiceResult.FailedWithMessage("删除失败"), new ShareOrder());
+            if (model == null) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("删除失败"), new ShareOrder());
+            }
 
             var context = Repository<IShareOrderRepository>().RepositoryContext;
             context.BeginTransaction();
@@ -112,7 +122,9 @@ namespace Alabo.Data.Things.Orders.Domain.Services
             if (shareOrder != null)
             {
                 shareOrder.ShareOrderExtension = shareOrder.Extension.DeserializeJson<ShareOrderExtension>();
-                if (shareOrder.ShareOrderExtension == null) shareOrder.ShareOrderExtension = new ShareOrderExtension();
+                if (shareOrder.ShareOrderExtension == null) {
+                    shareOrder.ShareOrderExtension = new ShareOrderExtension();
+                }
             }
 
             return shareOrder;
@@ -131,7 +143,9 @@ namespace Alabo.Data.Things.Orders.Domain.Services
         public ShareOrder GetTestView(object id)
         {
             var view = Resolve<IShareOrderService>().GetSingle(id);
-            if (view == null) view = new ShareOrder();
+            if (view == null) {
+                view = new ShareOrder();
+            }
 
             return view;
         }

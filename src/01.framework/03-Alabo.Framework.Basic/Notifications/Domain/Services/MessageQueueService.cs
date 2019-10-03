@@ -102,8 +102,9 @@ namespace Alabo.Framework.Basic.Notifications.Domain.Services
         public async Task HandleQueueAsync(long queueId)
         {
             var queue = GetSingle(queueId);
-            if (queue == null)
+            if (queue == null) {
                 throw new MessageQueueHandleException(queueId, $"message queue with id {queueId} not found.");
+            }
 
             try
             {
@@ -115,12 +116,13 @@ namespace Alabo.Framework.Basic.Notifications.Domain.Services
                     //  await _messageManager.SendTemplateAsync(queue.TemplateCode, queue.Mobile, parameters);
                 }
 
-                if (messageResult == null)
+                if (messageResult == null) {
                     ErrorQueue(queueId, "message send with no result!");
-                else if (messageResult.Type == ResultType.Success)
+                } else if (messageResult.Type == ResultType.Success) {
                     HandleQueueAndUpdateContent(queueId, "message send open service  success!", messageResult.Message);
-                else
+                } else {
                     ErrorQueue(queueId, $"message send {messageResult.Type}!", messageResult.Message);
+                }
             }
             catch (Exception e)
             {

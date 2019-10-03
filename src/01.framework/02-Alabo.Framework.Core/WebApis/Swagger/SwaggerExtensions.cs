@@ -28,9 +28,11 @@ namespace Alabo.Framework.Core.WebApis.Swagger
                     typeof(ApiBaseController).IsAssignableFrom((a.ActionDescriptor
                         as ControllerActionDescriptor).ControllerTypeInfo));
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                foreach (var item in Directory.GetFiles(basePath, "*.xml"))
-                    if (Path.GetFileName(item).Contains("Alabo"))
+                foreach (var item in Directory.GetFiles(basePath, "*.xml")) {
+                    if (Path.GetFileName(item).Contains("Alabo")) {
                         options.IncludeXmlComments(item);
+                    }
+                }
             });
 
             return services;

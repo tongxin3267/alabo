@@ -65,14 +65,22 @@ namespace Alabo.App.Asset.BankCards.UI
 
             //银行卡必须为数字不能以0开头
             var r = new Regex("^([1-9][0-9]*)$");
-            if (!r.IsMatch(temp.BankCardId)) return ServiceResult.FailedWithMessage("请正确输入银行卡号");
+            if (!r.IsMatch(temp.BankCardId)) {
+                return ServiceResult.FailedWithMessage("请正确输入银行卡号");
+            }
 
-            if (temp.BankCardId.Length < 10) return ServiceResult.FailedWithMessage("请正确输入银行卡号");
+            if (temp.BankCardId.Length < 10) {
+                return ServiceResult.FailedWithMessage("请正确输入银行卡号");
+            }
 
-            if (temp.Type == 0) return ServiceResult.FailedWithMessage("请选择银行类型");
+            if (temp.Type == 0) {
+                return ServiceResult.FailedWithMessage("请选择银行类型");
+            }
 
             var bankCardList = Resolve<IBankCardService>().GetList(u => u.UserId == temp.LoginUserId);
-            if (bankCardList.Count >= 10) return ServiceResult.FailedWithMessage("银行卡最多只可绑定十张");
+            if (bankCardList.Count >= 10) {
+                return ServiceResult.FailedWithMessage("银行卡最多只可绑定十张");
+            }
 
             var res = Resolve<IBankCardService>().GetSingle(u => u.Number == temp.BankCardId);
             var bankCard = new BankCard
@@ -88,7 +96,9 @@ namespace Alabo.App.Asset.BankCards.UI
             if (res == null)
             {
                 var result = Resolve<IBankCardService>().Add(bankCard);
-                if (!result) return ServiceResult.Failed;
+                if (!result) {
+                    return ServiceResult.Failed;
+                }
 
                 return ServiceResult.Success;
             }

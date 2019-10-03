@@ -24,7 +24,9 @@ namespace Alabo.Data.People.Users.Domain.Repositories
 
         public UserMap Add(UserMap userMap)
         {
-            if (userMap == null) throw new ArgumentNullException("userMap");
+            if (userMap == null) {
+                throw new ArgumentNullException("userMap");
+            }
 
             var sql = @"INSERT INTO [dbo].[User_UserMap]
                ([UserId] ,[LevelNumber],[TeamNumber]
@@ -41,7 +43,9 @@ namespace Alabo.Data.People.Users.Domain.Repositories
             };
 
             var result = RepositoryContext.ExecuteScalar(sql, parameters);
-            if (result != null && result != DBNull.Value) userMap.Id = Convert.ToInt64(result);
+            if (result != null && result != DBNull.Value) {
+                userMap.Id = Convert.ToInt64(result);
+            }
 
             return userMap;
         }
@@ -53,7 +57,9 @@ namespace Alabo.Data.People.Users.Domain.Repositories
                 RepositoryContext.ExecuteDataReader(sql, RepositoryContext.CreateParameter("@userId", userId)))
             {
                 var userMap = new UserMap();
-                if (reader.Read()) userMap.ParentMap = reader["ParentMap"].ToString();
+                if (reader.Read()) {
+                    userMap.ParentMap = reader["ParentMap"].ToString();
+                }
 
                 return userMap;
             }
@@ -66,7 +72,9 @@ namespace Alabo.Data.People.Users.Domain.Repositories
                 RepositoryContext.ExecuteDataReader(sql, RepositoryContext.CreateParameter("@UserId", userId)))
             {
                 UserMap userMap = null;
-                if (reader.Read()) userMap = ReadUser(reader);
+                if (reader.Read()) {
+                    userMap = ReadUser(reader);
+                }
 
                 return userMap;
             }
@@ -112,7 +120,9 @@ namespace Alabo.Data.People.Users.Domain.Repositories
                         $"SELECT TOP 30 userId FROM (SELECT  ROW_NUMBER() OVER (ORDER BY id ) AS RowNumber,userId FROM User_UserMap  ) as A WHERE RowNumber > {pageCount}*({i}-1)  ";
                     using (var reader = RepositoryContext.ExecuteDataReader(sql))
                     {
-                        while (reader.Read()) userIds.Add(reader["UserId"].ConvertToLong());
+                        while (reader.Read()) {
+                            userIds.Add(reader["UserId"].ConvertToLong());
+                        }
                     }
 
                     UpdateTeamInfo(userIds, userConfig);

@@ -35,7 +35,9 @@ namespace Alabo.Data.People.Users.UI.AutoFrom
             if (id.ToString().ToObjectId() != ObjectId.Empty)
             {
                 var model = Resolve<IUserAddressService>().GetSingle(id);
-                if (model == null) result = ToAutoForm(new UserAddressAdminAutoFrom());
+                if (model == null) {
+                    result = ToAutoForm(new UserAddressAdminAutoFrom());
+                }
 
                 var resultModel = model.MapTo<UserAddressAdminAutoFrom>();
                 resultModel.RootUserId = model.UserId;

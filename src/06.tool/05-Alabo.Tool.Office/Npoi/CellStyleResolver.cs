@@ -55,10 +55,14 @@ namespace Alabo.Tool.Office.Npoi
         /// </summary>
         private HorizontalAlignment GetHorizontalAlignment()
         {
-            if (_style.Alignment == Core.HorizontalAlignment.Left)
+            if (_style.Alignment == Core.HorizontalAlignment.Left) {
                 return HorizontalAlignment.Left;
-            if (_style.Alignment == Core.HorizontalAlignment.Right)
+            }
+
+            if (_style.Alignment == Core.HorizontalAlignment.Right) {
                 return HorizontalAlignment.Right;
+            }
+
             return HorizontalAlignment.Center;
         }
 
@@ -67,10 +71,14 @@ namespace Alabo.Tool.Office.Npoi
         /// </summary>
         private VerticalAlignment GetVerticalAlignment()
         {
-            if (_style.VerticalAlignment == Core.VerticalAlignment.Top)
+            if (_style.VerticalAlignment == Core.VerticalAlignment.Top) {
                 return VerticalAlignment.Top;
-            if (_style.VerticalAlignment == Core.VerticalAlignment.Bottom)
+            }
+
+            if (_style.VerticalAlignment == Core.VerticalAlignment.Bottom) {
                 return VerticalAlignment.Bottom;
+            }
+
             return VerticalAlignment.Center;
         }
 

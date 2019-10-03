@@ -17,7 +17,9 @@ namespace Alabo.Datas.Stores.Exist.Mongo
         public bool Exists(Expression<Func<TEntity, bool>> predicate)
         {
             var find = GetSingle(predicate);
-            if (find == null) return false;
+            if (find == null) {
+                return false;
+            }
 
             return true;
         }

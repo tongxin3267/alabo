@@ -29,7 +29,9 @@ namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Controller
         public ApiResult<IList<GroupBuyProductRecord>> ProductRecord([FromQuery] long productId)
         {
             var result = Resolve<IGroupBuyService>().GetGroupBuyProductRecords(productId);
-            if (result.Item1.Succeeded) return ApiResult.Success(result.Item2);
+            if (result.Item1.Succeeded) {
+                return ApiResult.Success(result.Item2);
+            }
 
             return ApiResult.Failure<IList<GroupBuyProductRecord>>(result.Item1.ToString());
         }
@@ -80,7 +82,9 @@ namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Controller
         public ApiResult<IList<GroupBuyRecordUser>> OrderGroupUser([FromQuery] long orderId)
         {
             var result = Resolve<IGroupBuyService>().GetGrouyBuyUserByOrderId(orderId);
-            if (result.Item1.Succeeded) return ApiResult.Success(result.Item2);
+            if (result.Item1.Succeeded) {
+                return ApiResult.Success(result.Item2);
+            }
 
             return ApiResult.Failure<IList<GroupBuyRecordUser>>(result.Item1.ToString());
         }

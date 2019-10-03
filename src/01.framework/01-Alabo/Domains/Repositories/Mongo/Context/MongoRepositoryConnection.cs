@@ -102,11 +102,14 @@ namespace Alabo.Domains.Repositories.Mongo.Context
             get
             {
                 var database = RuntimeContext.GetTenantMongodbDataBase();
-                if (!TenantContext.IsTenant) return database;
+                if (!TenantContext.IsTenant) {
+                    return database;
+                }
 
                 var tenantName = TenantContext.CurrentTenant;
-                if (string.IsNullOrWhiteSpace(tenantName) || tenantName.ToLower() == TenantContext.Master.ToLower())
+                if (string.IsNullOrWhiteSpace(tenantName) || tenantName.ToLower() == TenantContext.Master.ToLower()) {
                     return database;
+                }
 
                 return RuntimeContext.GetTenantMongodbDataBase(tenantName);
             }
@@ -128,7 +131,9 @@ namespace Alabo.Domains.Repositories.Mongo.Context
         {
             var dataBaseName = DataBaseName;
             //exists database return
-            if (_mongoDatabase.ContainsKey(dataBaseName)) return _mongoDatabase[dataBaseName];
+            if (_mongoDatabase.ContainsKey(dataBaseName)) {
+                return _mongoDatabase[dataBaseName];
+            }
 
             //not exists add adn return
             var database = Client.GetDatabase(dataBaseName);

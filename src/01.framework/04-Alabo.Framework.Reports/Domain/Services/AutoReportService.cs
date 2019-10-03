@@ -57,8 +57,10 @@ namespace Alabo.Framework.Reports.Domain.Services
 
             if (dateCountReportInput == null)
             {
-                if (string.IsNullOrEmpty(dateCountReportInput.EntityType))
+                if (string.IsNullOrEmpty(dateCountReportInput.EntityType)) {
                     return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnList);
+                }
+
                 return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnList);
             }
 
@@ -66,10 +68,14 @@ namespace Alabo.Framework.Reports.Domain.Services
             object instanceFind = null;
             var checkType = Resolve<IUIBaseService>()
                 .CheckType(dateCountReportInput.EntityType, ref typeFind, ref instanceFind);
-            if (!checkType.Succeeded) return Tuple.Create(ServiceResult.FailedMessage("实体类型不存在"), returnList);
+            if (!checkType.Succeeded) {
+                return Tuple.Create(ServiceResult.FailedMessage("实体类型不存在"), returnList);
+            }
 
             if (!(instanceFind is IEntity)) // 非实体类型不能完成数据统计
+{
                 return Tuple.Create(ServiceResult.FailedMessage("非实体类型不能进行数据统计"), returnList);
+            }
 
             #endregion 安全验证
 
@@ -91,7 +97,10 @@ namespace Alabo.Framework.Reports.Domain.Services
             }
 
             var table = Resolve<ITableService>().GetSingle(r => r.Key == typeFind.Name);
-            if (table == null) return Tuple.Create(ServiceResult.FailedMessage("表不存在"), returnList);
+            if (table == null) {
+                return Tuple.Create(ServiceResult.FailedMessage("表不存在"), returnList);
+            }
+
             if (table.TableType == TableType.Mongodb)
             {
                 var rs = DynamicService.ResolveMethod(typeFind.Name, "GetCountReport", dateCountReportInput);
@@ -126,16 +135,21 @@ namespace Alabo.Framework.Reports.Domain.Services
             var returnList = new List<AutoReport>();
             var TempTable = string.Empty;
 
-            if (inputParas == null || inputParas.EntityType.IsNullOrEmpty())
+            if (inputParas == null || inputParas.EntityType.IsNullOrEmpty()) {
                 return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnList);
+            }
 
             Type typeFind = null;
             object instanceFind = null;
             var checkType = Resolve<IUIBaseService>().CheckType(inputParas.EntityType, ref typeFind, ref instanceFind);
-            if (!checkType.Succeeded) return Tuple.Create(ServiceResult.FailedMessage("实体类型不存在"), returnList);
+            if (!checkType.Succeeded) {
+                return Tuple.Create(ServiceResult.FailedMessage("实体类型不存在"), returnList);
+            }
 
             if (!(instanceFind is IEntity)) // 非实体类型不能完成数据统计
+{
                 return Tuple.Create(ServiceResult.FailedMessage("非实体类型不能进行数据统计"), returnList);
+            }
 
             // 特殊字段处理
             if (inputParas.Field.IsNotNullOrEmpty())
@@ -164,8 +178,9 @@ namespace Alabo.Framework.Reports.Domain.Services
 
             if (dateCountReportInput == null)
             {
-                if (string.IsNullOrEmpty(dateCountReportInput.EntityType))
+                if (string.IsNullOrEmpty(dateCountReportInput.EntityType)) {
                     return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnList);
+                }
 
                 return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnList);
             }
@@ -174,10 +189,14 @@ namespace Alabo.Framework.Reports.Domain.Services
             object instanceFind = null;
             var checkType = Resolve<IUIBaseService>()
                 .CheckType(dateCountReportInput.EntityType, ref typeFind, ref instanceFind);
-            if (!checkType.Succeeded) return Tuple.Create(ServiceResult.FailedMessage("实体类型不存在"), returnList);
+            if (!checkType.Succeeded) {
+                return Tuple.Create(ServiceResult.FailedMessage("实体类型不存在"), returnList);
+            }
 
             if (!(instanceFind is IEntity)) // 非实体类型不能完成数据统计
+{
                 return Tuple.Create(ServiceResult.FailedMessage("非实体类型不能进行数据统计"), returnList);
+            }
 
             #endregion 安全验证
 
@@ -186,8 +205,9 @@ namespace Alabo.Framework.Reports.Domain.Services
             {
                 var property = instanceFind.GetType().GetProperty(dateCountReportInput.Field);
                 var filedType = property.GetType();
-                if (filedType.Name != dateCountReportInput.Field)
+                if (filedType.Name != dateCountReportInput.Field) {
                     Tuple.Create(ServiceResult.FailedMessage("实体的字段不存在"), returnList);
+                }
             }
 
             var table = Resolve<ITableService>().GetSingle(r => r.Key == typeFind.Name);
@@ -200,7 +220,9 @@ namespace Alabo.Framework.Reports.Domain.Services
                 //             select new { g.Key, Total = g.Sum(n => n.ToObjectId().ToInt64()) };
             }
 
-            if (table.TableType == TableType.SqlServer) TempTable = table.TableName;
+            if (table.TableType == TableType.SqlServer) {
+                TempTable = table.TableName;
+            }
             //调用Response的方法
 
             //标记待更新
@@ -224,8 +246,9 @@ namespace Alabo.Framework.Reports.Domain.Services
 
             if (reportInput == null)
             {
-                if (string.IsNullOrEmpty(reportInput.EntityType))
+                if (string.IsNullOrEmpty(reportInput.EntityType)) {
                     return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnList);
+                }
 
                 return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnList);
             }
@@ -233,10 +256,14 @@ namespace Alabo.Framework.Reports.Domain.Services
             Type typeFind = null;
             object instanceFind = null;
             var checkType = Resolve<IUIBaseService>().CheckType(reportInput.EntityType, ref typeFind, ref instanceFind);
-            if (!checkType.Succeeded) return Tuple.Create(ServiceResult.FailedMessage("实体类型不存在"), returnList);
+            if (!checkType.Succeeded) {
+                return Tuple.Create(ServiceResult.FailedMessage("实体类型不存在"), returnList);
+            }
 
             if (!(instanceFind is IEntity)) // 非实体类型不能完成数据统计
+{
                 return Tuple.Create(ServiceResult.FailedMessage("非实体类型不能进行数据统计"), returnList);
+            }
 
             #endregion 安全验证
 
@@ -280,8 +307,9 @@ namespace Alabo.Framework.Reports.Domain.Services
 
             if (reportInput == null)
             {
-                if (string.IsNullOrEmpty(reportInput.EntityType))
+                if (string.IsNullOrEmpty(reportInput.EntityType)) {
                     return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnList);
+                }
 
                 return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnList);
             }
@@ -289,10 +317,14 @@ namespace Alabo.Framework.Reports.Domain.Services
             Type typeFind = null;
             object instanceFind = null;
             var checkType = Resolve<IUIBaseService>().CheckType(reportInput.EntityType, ref typeFind, ref instanceFind);
-            if (!checkType.Succeeded) return Tuple.Create(ServiceResult.FailedMessage("实体类型不存在"), returnList);
+            if (!checkType.Succeeded) {
+                return Tuple.Create(ServiceResult.FailedMessage("实体类型不存在"), returnList);
+            }
 
             if (!(instanceFind is IEntity)) // 非实体类型不能完成数据统计
+{
                 return Tuple.Create(ServiceResult.FailedMessage("非实体类型不能进行数据统计"), returnList);
+            }
 
             #endregion 安全验证
 
@@ -324,10 +356,11 @@ namespace Alabo.Framework.Reports.Domain.Services
             {
                 TempTable = table.TableName;
                 // 调用Response的方法
-                if (IsSpec == 1)
+                if (IsSpec == 1) {
                     returnList = GetTableFormByField(reportInput, EnumName);
-                else
+                } else {
                     returnList = GetTableForm(reportInput);
+                }
             }
 
             return Tuple.Create(ServiceResult.Success, returnList);
@@ -347,8 +380,9 @@ namespace Alabo.Framework.Reports.Domain.Services
 
             if (reportInput == null)
             {
-                if (string.IsNullOrEmpty(reportInput.EntityType))
+                if (string.IsNullOrEmpty(reportInput.EntityType)) {
                     return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnList);
+                }
 
                 return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnList);
             }
@@ -356,10 +390,14 @@ namespace Alabo.Framework.Reports.Domain.Services
             Type typeFind = null;
             object instanceFind = null;
             var checkType = Resolve<IUIBaseService>().CheckType(reportInput.EntityType, ref typeFind, ref instanceFind);
-            if (!checkType.Succeeded) return Tuple.Create(ServiceResult.FailedMessage("实体类型不存在"), returnList);
+            if (!checkType.Succeeded) {
+                return Tuple.Create(ServiceResult.FailedMessage("实体类型不存在"), returnList);
+            }
 
             if (!(instanceFind is IEntity)) // 非实体类型不能完成数据统计
+{
                 return Tuple.Create(ServiceResult.FailedMessage("非实体类型不能进行数据统计"), returnList);
+            }
 
             #endregion 安全验证
 
@@ -389,8 +427,9 @@ namespace Alabo.Framework.Reports.Domain.Services
 
             if (singleDataInpu == null)
             {
-                if (string.IsNullOrEmpty(singleDataInpu.EntityType))
+                if (string.IsNullOrEmpty(singleDataInpu.EntityType)) {
                     return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnValue);
+                }
 
                 return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnValue);
             }
@@ -400,15 +439,22 @@ namespace Alabo.Framework.Reports.Domain.Services
             var checkType = Resolve<IUIBaseService>()
                 .CheckType(singleDataInpu.EntityType, ref typeFind, ref instanceFind);
 
-            if (!checkType.Succeeded) return Tuple.Create(ServiceResult.FailedMessage("实体类型不存在"), returnValue);
+            if (!checkType.Succeeded) {
+                return Tuple.Create(ServiceResult.FailedMessage("实体类型不存在"), returnValue);
+            }
 
             if (!(instanceFind is IEntity)) // 非实体类型不能完成数据统计
+{
                 return Tuple.Create(ServiceResult.FailedMessage("非实体类型不能进行数据统计"), returnValue);
+            }
 
             #endregion 安全验证
 
             var table = Resolve<ITableService>().GetSingle(r => r.Key == typeFind.Name);
-            if (table == null) return Tuple.Create(ServiceResult.FailedMessage("表未找到"), returnValue);
+            if (table == null) {
+                return Tuple.Create(ServiceResult.FailedMessage("表未找到"), returnValue);
+            }
+
             if (table.TableType == TableType.Mongodb)
             {
                 var rs = DynamicService.ResolveMethod(typeFind.Name, "GetSingleReportData", singleDataInpu);
@@ -440,8 +486,10 @@ namespace Alabo.Framework.Reports.Domain.Services
 
             if (reportInput == null)
             {
-                if (string.IsNullOrEmpty(reportInput.EntityType))
+                if (string.IsNullOrEmpty(reportInput.EntityType)) {
                     return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), resultPage);
+                }
+
                 return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), resultPage);
             }
 
@@ -449,13 +497,18 @@ namespace Alabo.Framework.Reports.Domain.Services
             object instanceFind = null;
             var checkType = Resolve<IUIBaseService>().CheckType(reportInput.EntityType, ref typeFind, ref instanceFind);
 
-            if (!checkType.Succeeded) return Tuple.Create(ServiceResult.FailedMessage("所输入实体不存在"), resultPage);
+            if (!checkType.Succeeded) {
+                return Tuple.Create(ServiceResult.FailedMessage("所输入实体不存在"), resultPage);
+            }
 
             if (!(instanceFind is IEntity)) // 非实体类型不能完成数据统计
+{
                 return Tuple.Create(ServiceResult.FailedMessage("非实体类型不能进行数据统计"), resultPage);
+            }
 
-            if (reportInput.Fields.Count <= 0)
+            if (reportInput.Fields.Count <= 0) {
                 return Tuple.Create(ServiceResult.FailedMessage("统计的字段不能为空"), resultPage);
+            }
 
             #endregion 安全验证
 
@@ -466,11 +519,15 @@ namespace Alabo.Framework.Reports.Domain.Services
                 var property = instanceFind.GetType().GetProperty(reportInput.Field);
                 var filedType = property.GetType();
                 var filed = reportInput.Field.GetPropertyValue(instanceFind);
-                if (filed.ToString() != "0") EnumName = property.PropertyType.Name;
+                if (filed.ToString() != "0") {
+                    EnumName = property.PropertyType.Name;
+                }
             }
 
             var table = Resolve<ITableService>().GetSingle(r => r.Key == typeFind.Name);
-            if (table == null) return Tuple.Create(ServiceResult.FailedMessage("查询的表不存在"), resultPage);
+            if (table == null) {
+                return Tuple.Create(ServiceResult.FailedMessage("查询的表不存在"), resultPage);
+            }
 
             if (table.TableType == TableType.Mongodb)
             {
@@ -480,8 +537,9 @@ namespace Alabo.Framework.Reports.Domain.Services
             {
                 var tableName = table.TableName;
 
-                if (string.IsNullOrEmpty(tableName))
+                if (string.IsNullOrEmpty(tableName)) {
                     return Tuple.Create(ServiceResult.FailedMessage("查询的表不存在"), resultPage);
+                }
 
                 var resultList = _autoReportRepository.GetSumReportTable(reportInput, EnumName);
                 resultPage = PagedList<SumReportTable>.Create(resultList, resultList.Count(), reportInput.PageIndex,
@@ -506,8 +564,10 @@ namespace Alabo.Framework.Reports.Domain.Services
 
             if (reportInput == null)
             {
-                if (string.IsNullOrEmpty(reportInput.Type))
+                if (string.IsNullOrEmpty(reportInput.Type)) {
                     return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), resultPage);
+                }
+
                 return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), resultPage);
             }
 
@@ -515,18 +575,25 @@ namespace Alabo.Framework.Reports.Domain.Services
             object instanceFind = null;
             var checkType = Resolve<IUIBaseService>().CheckType(reportInput.Type, ref typeFind, ref instanceFind);
 
-            if (!checkType.Succeeded) return Tuple.Create(ServiceResult.FailedMessage("所输入实体不存在"), resultPage);
+            if (!checkType.Succeeded) {
+                return Tuple.Create(ServiceResult.FailedMessage("所输入实体不存在"), resultPage);
+            }
 
             if (!(instanceFind is IEntity)) // 非实体类型不能完成数据统计
+{
                 return Tuple.Create(ServiceResult.FailedMessage("非实体类型不能进行数据统计"), resultPage);
+            }
 
-            if (reportInput.Fields.Count <= 0)
+            if (reportInput.Fields.Count <= 0) {
                 return Tuple.Create(ServiceResult.FailedMessage("统计的字段不能为空"), resultPage);
+            }
 
             #endregion 安全验证
 
             var table = Resolve<ITableService>().GetSingle(r => r.Key == typeFind.Name);
-            if (table == null) return Tuple.Create(ServiceResult.FailedMessage("查询的表不存在"), resultPage);
+            if (table == null) {
+                return Tuple.Create(ServiceResult.FailedMessage("查询的表不存在"), resultPage);
+            }
 
             var rs = DynamicService.ResolveMethod(typeFind.Name, "GetSumReportTable", reportInput);
             var rsList = rs.Item2 as PagedList<SumReportTable>;
@@ -546,8 +613,9 @@ namespace Alabo.Framework.Reports.Domain.Services
 
             if (reportInput == null)
             {
-                if (string.IsNullOrEmpty(reportInput.EntityType))
+                if (string.IsNullOrEmpty(reportInput.EntityType)) {
                     return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnList);
+                }
 
                 return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnList);
             }
@@ -555,12 +623,18 @@ namespace Alabo.Framework.Reports.Domain.Services
             Type typeFind = null;
             object instanceFind = null;
             var checkType = Resolve<IUIBaseService>().CheckType(reportInput.EntityType, ref typeFind, ref instanceFind);
-            if (!checkType.Succeeded) return Tuple.Create(ServiceResult.FailedMessage("实体类型不存在"), returnList);
+            if (!checkType.Succeeded) {
+                return Tuple.Create(ServiceResult.FailedMessage("实体类型不存在"), returnList);
+            }
 
             if (!(instanceFind is IEntity)) // 非实体类型不能完成数据统计
+{
                 return Tuple.Create(ServiceResult.FailedMessage("非实体类型不能进行数据统计"), returnList);
+            }
 
-            if (reportInput.Fields == null) return Tuple.Create(ServiceResult.FailedMessage("统计的字段不能为空"), returnList);
+            if (reportInput.Fields == null) {
+                return Tuple.Create(ServiceResult.FailedMessage("统计的字段不能为空"), returnList);
+            }
 
             //验证传入的统计字段和表是否匹配
             var fieldsList = reportInput.Fields;
@@ -568,7 +642,9 @@ namespace Alabo.Framework.Reports.Domain.Services
             #endregion 安全验证
 
             var table = Resolve<ITableService>().GetSingle(r => r.Key == typeFind.Name);
-            if (table == null) return Tuple.Create(ServiceResult.FailedMessage("查询的表不存在"), returnList);
+            if (table == null) {
+                return Tuple.Create(ServiceResult.FailedMessage("查询的表不存在"), returnList);
+            }
 
             if (table.TableType == TableType.Mongodb)
             {
@@ -578,7 +654,9 @@ namespace Alabo.Framework.Reports.Domain.Services
             {
                 var tableName = table.TableName;
 
-                if (tableName == null) return Tuple.Create(ServiceResult.FailedMessage("查询在表不存在"), returnList);
+                if (tableName == null) {
+                    return Tuple.Create(ServiceResult.FailedMessage("查询在表不存在"), returnList);
+                }
 
                 returnList = _autoReportRepository.GetSumReport(reportInput);
             }
@@ -599,8 +677,9 @@ namespace Alabo.Framework.Reports.Domain.Services
 
             if (reportInput == null)
             {
-                if (string.IsNullOrEmpty(reportInput.Type))
+                if (string.IsNullOrEmpty(reportInput.Type)) {
                     return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnList);
+                }
 
                 return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnList);
             }
@@ -608,13 +687,18 @@ namespace Alabo.Framework.Reports.Domain.Services
             Type typeFind = null;
             object instanceFind = null;
             var checkType = Resolve<IUIBaseService>().CheckType(reportInput.Type, ref typeFind, ref instanceFind);
-            if (!checkType.Succeeded) return Tuple.Create(ServiceResult.FailedMessage("实体类型不存在"), returnList);
+            if (!checkType.Succeeded) {
+                return Tuple.Create(ServiceResult.FailedMessage("实体类型不存在"), returnList);
+            }
 
             if (!(instanceFind is IEntity)) // 非实体类型不能完成数据统计
+{
                 return Tuple.Create(ServiceResult.FailedMessage("非实体类型不能进行数据统计"), returnList);
+            }
 
-            if (reportInput.Fields.Count <= 0)
+            if (reportInput.Fields.Count <= 0) {
                 return Tuple.Create(ServiceResult.FailedMessage("统计的字段不能为空"), returnList);
+            }
 
             //验证传入的统计字段和表是否匹配
             var fieldsList = reportInput.Fields;
@@ -623,7 +707,9 @@ namespace Alabo.Framework.Reports.Domain.Services
             #endregion 安全验证
 
             var table = Resolve<ITableService>().GetSingle(r => r.Key == typeFind.Name);
-            if (table == null) return Tuple.Create(ServiceResult.FailedMessage("查询的表不存在"), returnList);
+            if (table == null) {
+                return Tuple.Create(ServiceResult.FailedMessage("查询的表不存在"), returnList);
+            }
 
             var rs = DynamicService.ResolveMethod(typeFind.Name, "GetSumReport", reportInput);
             var rsList = rs.Item2 as List<AutoReport>;
@@ -639,9 +725,13 @@ namespace Alabo.Framework.Reports.Domain.Services
         /// <returns></returns>
         protected PagedList<CountTableOutput> GetPagedList(IList<CountTableOutput> List, int pageSize, int pageIndex)
         {
-            if (pageSize < 1) pageSize = 1;
+            if (pageSize < 1) {
+                pageSize = 1;
+            }
 
-            if (pageIndex < 1) pageIndex = 1;
+            if (pageIndex < 1) {
+                pageIndex = 1;
+            }
 
             long totalCount;
 
@@ -659,9 +749,13 @@ namespace Alabo.Framework.Reports.Domain.Services
 
         protected PagedList<CountReportTable> GetPagedListx(IList<CountReportTable> List, int pageSize, int pageIndex)
         {
-            if (pageSize < 1) pageSize = 1;
+            if (pageSize < 1) {
+                pageSize = 1;
+            }
 
-            if (pageIndex < 1) pageIndex = 1;
+            if (pageIndex < 1) {
+                pageIndex = 1;
+            }
 
             long totalCount;
 

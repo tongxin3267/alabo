@@ -31,7 +31,9 @@ namespace Alabo.Industry.Cms.Articles.Domain.Dto
         {
             var str = id.ToString();
             var model = Ioc.Resolve<IArticleService>().GetSingle(u => u.Id == str.ToObjectId());
-            if (model != null) return ToAutoForm(model.MapTo<ViewArticle>());
+            if (model != null) {
+                return ToAutoForm(model.MapTo<ViewArticle>());
+            }
 
             return ToAutoForm(new ViewArticle());
         }
@@ -46,7 +48,10 @@ namespace Alabo.Industry.Cms.Articles.Domain.Dto
         {
             var ArticlModel = model.MapTo<Article>();
             var result = Resolve<IArticleService>().AddOrUpdate(ArticlModel);
-            if (result) return ServiceResult.Success;
+            if (result) {
+                return ServiceResult.Success;
+            }
+
             return ServiceResult.FailedWithMessage("操作失败，请重试");
         }
 

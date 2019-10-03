@@ -35,9 +35,15 @@ namespace Alabo.Cloud.People.Enterprise.Controllers
         [HttpPost]
         public ApiResult Enterprise([FromBody] Domain.Entities.Enterprise enterprise)
         {
-            if (enterprise == null) return ApiResult.Failure("实体不能为空");
+            if (enterprise == null) {
+                return ApiResult.Failure("实体不能为空");
+            }
+
             var result = Resolve<IEnterpriseService>().AddOrUpdate(enterprise);
-            if (result) return ApiResult.Success("认证成功！");
+            if (result) {
+                return ApiResult.Success("认证成功！");
+            }
+
             return ApiResult.Failure("认证失败");
         }
     }

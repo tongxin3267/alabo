@@ -81,7 +81,9 @@ namespace Alabo.Test.Shop.Activitys.Modules.GroupBuy.Service
             Assert.NotNull(result);
             var activitys = Resolve<IActivityService>().GetList(r => r.Key == typeof(GroupBuyActivity).FullName);
 
-            if (activitys.Count() > 0) Assert.True(result.ProductItems.Count() > 0);
+            if (activitys.Count() > 0) {
+                Assert.True(result.ProductItems.Count() > 0);
+            }
         }
     }
 }

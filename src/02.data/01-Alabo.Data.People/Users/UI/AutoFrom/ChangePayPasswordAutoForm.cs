@@ -80,7 +80,10 @@ namespace Alabo.Data.People.Users.UI.AutoFrom
             var view = AutoMapping.SetValue<PasswordInput>(parameter);
             view.Type = PasswordType.PayPassword;
             var result = Resolve<IUserDetailService>().ChangePassword(view);
-            if (result.Succeeded) return ServiceResult.Success;
+            if (result.Succeeded) {
+                return ServiceResult.Success;
+            }
+
             return ServiceResult.FailedWithMessage(result.ErrorMessages.Join());
         }
     }

@@ -66,7 +66,9 @@ namespace Alabo.Security.Sessions
         {
             if (HttpWeb.IsTenant)
             {
-                if (tenant.IsNullOrEmpty()) throw new ValidException("多租户模式，请设置租户");
+                if (tenant.IsNullOrEmpty()) {
+                    throw new ValidException("多租户模式，请设置租户");
+                }
 
                 var basicUser = HttpWeb.User;
                 if (basicUser == null)
@@ -97,14 +99,21 @@ namespace Alabo.Security.Sessions
                 "ASP.NET Identity"));
             identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
             identity.AddClaim(new Claim(ClaimTypes.Sid, user.Id.ToString()));
-            if (!string.IsNullOrWhiteSpace(user.Tenant))
+            if (!string.IsNullOrWhiteSpace(user.Tenant)) {
                 identity.AddClaim(new Claim(IdentityClaimTypes.TenantName, user.Tenant));
+            }
 
-            if (!string.IsNullOrWhiteSpace(user.UserName)) identity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
+            if (!string.IsNullOrWhiteSpace(user.UserName)) {
+                identity.AddClaim(new Claim(ClaimTypes.Name, user.UserName));
+            }
 
-            if (!string.IsNullOrWhiteSpace(user.Email)) identity.AddClaim(new Claim(ClaimTypes.Email, user.Email));
+            if (!string.IsNullOrWhiteSpace(user.Email)) {
+                identity.AddClaim(new Claim(ClaimTypes.Email, user.Email));
+            }
 
-            if (!string.IsNullOrWhiteSpace(user.Name)) identity.AddClaim(new Claim(ClaimTypes.GivenName, user.Name));
+            if (!string.IsNullOrWhiteSpace(user.Name)) {
+                identity.AddClaim(new Claim(ClaimTypes.GivenName, user.Name));
+            }
 
             identity.AddClaim(new Claim(ClaimTypes.AuthorizationDecision, user.LoginAuthorizeType.ToString()));
             return identity;
@@ -116,10 +125,13 @@ namespace Alabo.Security.Sessions
         /// <param name="user"></param>
         public async Task SignInUser(BasicUser user)
         {
-            if (string.IsNullOrWhiteSpace(user.UserName) || string.IsNullOrWhiteSpace(user.Email))
+            if (string.IsNullOrWhiteSpace(user.UserName) || string.IsNullOrWhiteSpace(user.Email)) {
                 throw new ArgumentException("UserName and email is requred in user model.");
+            }
 
-            if (user.Id == 0) throw new ArgumentException("userId is requred in user model.");
+            if (user.Id == 0) {
+                throw new ArgumentException("userId is requred in user model.");
+            }
 
             var claimsPrincipal = CreateClaimsIdentity(user);
             var httpContextAccessor = Ioc.Resolve<IHttpContextAccessor>();

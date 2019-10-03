@@ -53,8 +53,9 @@ namespace Alabo.Apps
             AppAssembly = appAssembly;
             AppBaseDirectory = appBaseDirectory;
             Type = type;
-            if (type == AppType.Binary)
+            if (type == AppType.Binary) {
                 InitializeSettings(); //only binary app maybe have json config file, dynamic app use code config
+            }
         }
 
         /// <summary>
@@ -81,7 +82,9 @@ namespace Alabo.Apps
             {
                 //no config file, create auto config message
                 Name = appConfigPath.Split('\\').Reverse().Skip(2).FirstOrDefault();
-                if (string.IsNullOrWhiteSpace(Name)) throw new AppConfigErrorException("can not get app name.");
+                if (string.IsNullOrWhiteSpace(Name)) {
+                    throw new AppConfigErrorException("can not get app name.");
+                }
 
                 Description = Name;
             }

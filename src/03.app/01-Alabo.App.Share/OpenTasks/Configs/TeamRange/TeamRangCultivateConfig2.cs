@@ -95,12 +95,15 @@ namespace Alabo.App.Share.OpenTasks.Configs.TeamRange
         public override ExecuteResult<ITaskResult[]> Execute(TaskParameter parameter)
         {
             var baseResult = base.Execute(parameter);
-            if (baseResult.Status != ResultStatus.Success)
+            if (baseResult.Status != ResultStatus.Success) {
                 return ExecuteResult<ITaskResult[]>.Cancel("未找到触发会员的Parent Map.");
+            }
 
             var userMap = Resolve<IUserMapService>().GetParentMapFromCache(ShareOrderUser.Id);
             var map = userMap.ParentMap.DeserializeJson<List<ParentMap>>();
-            if (map == null) return ExecuteResult<ITaskResult[]>.Cancel("未找到触发会员的Parent Map.");
+            if (map == null) {
+                return ExecuteResult<ITaskResult[]>.Cancel("未找到触发会员的Parent Map.");
+            }
 
             IList<ITaskResult> resultList = new List<ITaskResult>();
 
@@ -113,10 +116,17 @@ namespace Alabo.App.Share.OpenTasks.Configs.TeamRange
             var level = 0;
             for (var i = 0; i < TeamLevel;)
             {
-                if (useRatio >= maxRatio) break;
+                if (useRatio >= maxRatio) {
+                    break;
+                }
 
-                if (a >= 6) break;
-                if (map.Count < i + 1) break;
+                if (a >= 6) {
+                    break;
+                }
+
+                if (map.Count < i + 1) {
+                    break;
+                }
                 //var item = map[i];
                 //var grade = Resolve<IGradeService>().GetGrade(teamRangCultivateItem.GradeId);
                 //base.GetShareUser(item.UserId, out var shareUser);
@@ -125,9 +135,14 @@ namespace Alabo.App.Share.OpenTasks.Configs.TeamRange
                 base.GetShareUser(item.UserId, out var shareUser); //从基类获取分润用户
                 var grade = Resolve<IGradeService>().GetGrade(shareUser.GradeId);
                 var shareUserRule = Configuration.TeamRangCultivateItems.FirstOrDefault(r => r.GradeId == grade.Id);
-                if (shareUserRule == null) continue;
+                if (shareUserRule == null) {
+                    continue;
+                }
+
                 var sumAmount = shareUserRule.FristAmount + shareUserRule.SecondAmount;
-                if (grade == null) continue;
+                if (grade == null) {
+                    continue;
+                }
 
                 //if (grade == null)
                 //{
@@ -169,7 +184,9 @@ namespace Alabo.App.Share.OpenTasks.Configs.TeamRange
                             }
                         }
 
-                        if (level >= 2) continue;
+                        if (level >= 2) {
+                            continue;
+                        }
                     }
                 }
             }

@@ -40,7 +40,10 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         {
             var result = ServiceResult.Failed;
             var oldList = Resolve<IProductSkuService>().GetList(m => m.ProductId == product.Id).ToList();
-            if (skuList.Count == 0) return ServiceResult.FailedWithMessage("商品规格为空");
+            if (skuList.Count == 0) {
+                return ServiceResult.FailedWithMessage("商品规格为空");
+            }
+
             var specnList = skuList.Select(r => r.SpecSn).IsDistinct();
 
             var addList = new List<ProductSku>();
@@ -49,7 +52,9 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
             foreach (var skuItem in skuList) //遍历上送的是增加还是修改
             {
                 skuItem.ProductId = product.Id;
-                if (string.IsNullOrEmpty(skuItem.SpecSn)) continue;
+                if (string.IsNullOrEmpty(skuItem.SpecSn)) {
+                    continue;
+                }
 
                 var find = oldList.FirstOrDefault(e => e.SpecSn.Contains(skuItem.SpecSn));
                 if (find == null)
@@ -90,12 +95,21 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
 
             // 删除处理
             var deleteList = oldList.Where(r => !updateList.Select(e => e.Id).Contains(r.Id)).ToList();
-            foreach (var item in deleteList) Resolve<IProductSkuService>().Delete(e => e.Id == item.Id);
+            foreach (var item in deleteList) {
+                Resolve<IProductSkuService>().Delete(e => e.Id == item.Id);
+            }
 
-            if (!addList.Select(r => r.SpecSn).IsDistinct()) return ServiceResult.FailedWithMessage("商品规格重复添加");
+            if (!addList.Select(r => r.SpecSn).IsDistinct()) {
+                return ServiceResult.FailedWithMessage("商品规格重复添加");
+            }
             // 编辑数据无需处理，EF会自动处理
-            if (!updateList.Select(r => r.SpecSn).IsDistinct()) return ServiceResult.FailedWithMessage("商品规格重复添加");
-            if (addList.Count > 0) Resolve<IProductSkuService>().AddMany(addList);
+            if (!updateList.Select(r => r.SpecSn).IsDistinct()) {
+                return ServiceResult.FailedWithMessage("商品规格重复添加");
+            }
+
+            if (addList.Count > 0) {
+                Resolve<IProductSkuService>().AddMany(addList);
+            }
 
             return ServiceResult.Success;
         }
@@ -130,13 +144,17 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                 };
                 var priceStyleConfig = priceSytles.FirstOrDefault(r => r.Id == item.PriceStyleId);
                 // 如果商品中有价格参数，则使员商品中的最小抵现价格
-                if ((item.MinCashRate > 0) & (item.MinCashRate <= 1)) priceStyleConfig.MinCashRate = item.MinCashRate;
+                if ((item.MinCashRate > 0) & (item.MinCashRate <= 1)) {
+                    priceStyleConfig.MinCashRate = item.MinCashRate;
+                }
 
-                if (priceStyleConfig != null)
+                if (priceStyleConfig != null) {
                     try
                     {
                         var moneyConfig = moneyTypes.FirstOrDefault(r => r.Id == priceStyleConfig.MoneyTypeId);
-                        if (moneyConfig.RateFee == 0) moneyConfig.RateFee = 1;
+                        if (moneyConfig.RateFee == 0) {
+                            moneyConfig.RateFee = 1;
+                        }
 
                         // 如果不是现金商品
                         if (priceStyleConfig.PriceStyle != PriceStyle.CashProduct)
@@ -158,6 +176,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                     {
                         Trace.WriteLine(ex.Message);
                     }
+                }
             }
 
             // 跟新价格
@@ -236,14 +255,17 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                                     orderMoneyItem.MaxPayPrice += r.MaxPayPrice * r.BuyCount; // 最高可以使用虚拟资产支付
                                     orderMoneyItem.MinPayCash += r.MinPayCash * r.BuyCount; // 最低现金支付
                                 });
-                                if (orderMoneyItem.MaxPayPrice > account.Amount)
+                                if (orderMoneyItem.MaxPayPrice > account.Amount) {
                                     orderMoneyItem.MaxPayPrice = account.Amount; // 不能超过余额
+                                }
 
                                 orderMoneyItem.Title =
                                     $"使用{moneyItemConfig.Name}{orderMoneyItem.MaxPayPrice}{moneyItemConfig.Unit}";
                             }
 
-                            if (orderMoneyItem.MaxPayPrice > 0) moneyItems.Add(orderMoneyItem);
+                            if (orderMoneyItem.MaxPayPrice > 0) {
+                                moneyItems.Add(orderMoneyItem);
+                            }
                         }
                     }
                 }
@@ -265,7 +287,9 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
             var productSkus = _productSkuRepository.GetList(e => e.ProductId == productId).ToList();
             productSkus.Foreach(item =>
             {
-                if (userGrades.Count <= 0) return;
+                if (userGrades.Count <= 0) {
+                    return;
+                }
                 //add default grade
                 item.GradePriceList = userGrades.Select(u => new SkuGradePriceItem
                 {
@@ -279,7 +303,9 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                 item.GradePriceList.ForEach(grade =>
                 {
                     var tempGrade = skuGradeList.Find(g => g.Id == grade.Id);
-                    if (tempGrade != null) grade.Price = tempGrade.Price;
+                    if (tempGrade != null) {
+                        grade.Price = tempGrade.Price;
+                    }
                     //grade.FenRunPrice = tempGrade.FenRunPrice;
                 });
             });
@@ -295,14 +321,20 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
             //check
             var skuIds = productSkus.Select(s => s.Id).ToList();
             var productSkusOfData = new List<ProductSku>();
-            if (skuIds.Count > 0)
+            if (skuIds.Count > 0) {
                 productSkusOfData = Resolve<IProductSkuService>().GetList(s => skuIds.Contains(s.Id)).ToList();
-            if (productSkusOfData.Count <= 0) return ApiResult.Failure("更新会员价失败，提交数据错误");
+            }
+
+            if (productSkusOfData.Count <= 0) {
+                return ApiResult.Failure("更新会员价失败，提交数据错误");
+            }
             //save
             productSkusOfData.ForEach(item =>
             {
                 var tempSku = productSkus.Find(s => s.Id == item.Id);
-                if (tempSku != null) item.GradePrice = tempSku.GradePriceList.ToJson();
+                if (tempSku != null) {
+                    item.GradePrice = tempSku.GradePriceList.ToJson();
+                }
 
                 Resolve<IProductSkuService>().Update(item);
             });

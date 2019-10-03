@@ -38,10 +38,14 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         [Display(Description = "根据枚举获取KeyValues")]
         public ApiResult<IList<KeyValue>> GetKeyValuesByEnum([FromQuery] string type)
         {
-            if (type.IsNullOrEmpty()) ApiResult.Failure("类型不能为空");
+            if (type.IsNullOrEmpty()) {
+                ApiResult.Failure("类型不能为空");
+            }
 
             var keyValues = KeyValueExtesions.EnumToKeyValues(type);
-            if (keyValues == null) return ApiResult.Failure<IList<KeyValue>>("枚举不存在");
+            if (keyValues == null) {
+                return ApiResult.Failure<IList<KeyValue>>("枚举不存在");
+            }
 
             return ApiResult.Success(keyValues);
         }
@@ -54,7 +58,9 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         [Display(Description = "发送手机验证码")]
         public ApiResult SendMobileVerifiyCode([FromQuery] string mobile)
         {
-            if (!RegexHelper.CheckMobile(mobile)) return ApiResult.Failure("手机号码格式不正确");
+            if (!RegexHelper.CheckMobile(mobile)) {
+                return ApiResult.Failure("手机号码格式不正确");
+            }
             // var code = Ioc.Resolve<IOpenService>().GenerateVerifiyCode(mobile);
 
             //_messageManager.SendRaw(mobile, $"您的验证码是{code},请在5分钟内按页面提示提交验证码,切勿将验证码泄露于他人!");
@@ -74,7 +80,9 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         [Display(Description = "发送短信")]
         public ApiResult SendMessage(string mobile, string message)
         {
-            if (!RegexHelper.CheckMobile(mobile)) return ApiResult.Failure("手机号码格式不正确");
+            if (!RegexHelper.CheckMobile(mobile)) {
+                return ApiResult.Failure("手机号码格式不正确");
+            }
             // _messageManager.SendRaw(mobile, message);
 
             return ApiResult.Success();

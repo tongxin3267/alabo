@@ -46,7 +46,9 @@ namespace Alabo.Reflections
         {
             assemblies = assemblies ?? GetAssemblies();
             var result = new List<Type>();
-            foreach (var assembly in assemblies) result.AddRange(GetTypes(findType, assembly));
+            foreach (var assembly in assemblies) {
+                result.AddRange(GetTypes(findType, assembly));
+            }
 
             return result.Distinct().ToList();
         }
@@ -57,9 +59,11 @@ namespace Alabo.Reflections
         private List<Assembly> GetAssembliesFromCurrentAppDomain()
         {
             var result = new List<Assembly>();
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-                if (Match(assembly))
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies()) {
+                if (Match(assembly)) {
                     result.Add(assembly);
+                }
+            }
 
             return result.Distinct().ToList();
         }
@@ -80,7 +84,9 @@ namespace Alabo.Reflections
         {
             foreach (var file in Directory.GetFiles(path, "*.dll"))
             {
-                if (Match(Path.GetFileName(file)) == false) continue;
+                if (Match(Path.GetFileName(file)) == false) {
+                    continue;
+                }
 
                 var assemblyName = AssemblyName.GetAssemblyName(file);
                 AppDomain.CurrentDomain.Load(assemblyName);
@@ -92,10 +98,13 @@ namespace Alabo.Reflections
         /// </summary>
         protected virtual bool Match(string assemblyName)
         {
-            if (assemblyName.StartsWith($"{PlatformServices.Default.Application.ApplicationName}.Views")) return false;
-
-            if (assemblyName.StartsWith($"{PlatformServices.Default.Application.ApplicationName}.PrecompiledViews"))
+            if (assemblyName.StartsWith($"{PlatformServices.Default.Application.ApplicationName}.Views")) {
                 return false;
+            }
+
+            if (assemblyName.StartsWith($"{PlatformServices.Default.Application.ApplicationName}.PrecompiledViews")) {
+                return false;
+            }
 
             return !Regex.IsMatch(assemblyName, SkipAssemblies, RegexOptions.IgnoreCase | RegexOptions.Compiled);
         }
@@ -116,9 +125,13 @@ namespace Alabo.Reflections
                 return result;
             }
 
-            if (types == null) return result;
+            if (types == null) {
+                return result;
+            }
 
-            foreach (var type in types) AddType(result, findType, type);
+            foreach (var type in types) {
+                AddType(result, findType, type);
+            }
 
             return result;
         }
@@ -128,9 +141,13 @@ namespace Alabo.Reflections
         /// </summary>
         private void AddType(List<Type> result, Type findType, Type type)
         {
-            if (type.IsInterface || type.IsAbstract) return;
+            if (type.IsInterface || type.IsAbstract) {
+                return;
+            }
 
-            if (findType.IsAssignableFrom(type) == false && MatchGeneric(findType, type) == false) return;
+            if (findType.IsAssignableFrom(type) == false && MatchGeneric(findType, type) == false) {
+                return;
+            }
 
             result.Add(type);
         }
@@ -140,12 +157,16 @@ namespace Alabo.Reflections
         /// </summary>
         private bool MatchGeneric(Type findType, Type type)
         {
-            if (findType.IsGenericTypeDefinition == false) return false;
+            if (findType.IsGenericTypeDefinition == false) {
+                return false;
+            }
 
             var definition = findType.GetGenericTypeDefinition();
             foreach (var implementedInterface in type.FindInterfaces((filter, criteria) => true, null))
             {
-                if (implementedInterface.IsGenericType == false) continue;
+                if (implementedInterface.IsGenericType == false) {
+                    continue;
+                }
 
                 return definition.IsAssignableFrom(implementedInterface.GetGenericTypeDefinition());
             }

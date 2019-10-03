@@ -301,23 +301,29 @@ namespace Alabo.Domains.Repositories.SqlServer
         private static void PrepareCommand(SqlCommand command, SqlConnection connection, SqlTransaction transaction,
             CommandType commandType, string commandText, SqlParameter[] parms)
         {
-            if (connection.State != ConnectionState.Open) connection.Open();
+            if (connection.State != ConnectionState.Open) {
+                connection.Open();
+            }
 
             command.Connection = connection;
             command.CommandTimeout = CommandTimeOut;
             // 设置命令文本(存储过程名或SQL语句)
             command.CommandText = commandText;
             // 分配事务
-            if (transaction != null) command.Transaction = transaction;
+            if (transaction != null) {
+                command.Transaction = transaction;
+            }
             // 设置命令类型.
             command.CommandType = commandType;
             if (parms != null && parms.Length > 0)
             {
                 //预处理SqlParameter参数数组，将为NULL的参数赋值为DBNull.Value;
-                foreach (var parameter in parms)
+                foreach (var parameter in parms) {
                     if ((parameter.Direction == ParameterDirection.InputOutput ||
-                         parameter.Direction == ParameterDirection.Input) && parameter.Value == null)
+                         parameter.Direction == ParameterDirection.Input) && parameter.Value == null) {
                         parameter.Value = DBNull.Value;
+                    }
+                }
 
                 command.Parameters.AddRange(parms);
             }
@@ -750,7 +756,9 @@ namespace Alabo.Domains.Repositories.SqlServer
                 new SqlParameter("@RowNumber_Begin", SqlDbType.Int) {Value = (pageIndex - 1) * pageSize + 1},
                 new SqlParameter("@RowNumber_End", SqlDbType.Int) {Value = pageIndex * pageSize}
             };
-            if (parms != null) paramlist.AddRange(parms);
+            if (parms != null) {
+                paramlist.AddRange(parms);
+            }
 
             return ExecuteDataTable(connectionString, psql, paramlist.ToArray());
         }
@@ -839,20 +847,25 @@ namespace Alabo.Domains.Repositories.SqlServer
             {
                 commandText = commandText.ToLower();
                 var index = commandText.IndexOf("where ");
-                if (index < 0) index = commandText.IndexOf("\nwhere");
+                if (index < 0) {
+                    index = commandText.IndexOf("\nwhere");
+                }
 
-                if (index > 0)
+                if (index > 0) {
                     ds.ExtendedProperties.Add("SQL",
                         commandText.Substring(0, index - 1)); //将获取的语句保存在表的一个附属数组里，方便更新时生成CommandBuilder
-                else
+                } else {
                     ds.ExtendedProperties.Add("SQL", commandText); //将获取的语句保存在表的一个附属数组里，方便更新时生成CommandBuilder
+                }
             }
             else
             {
                 ds.ExtendedProperties.Add("SQL", commandText); //将获取的语句保存在表的一个附属数组里，方便更新时生成CommandBuilder
             }
 
-            foreach (DataTable dt in ds.Tables) dt.ExtendedProperties.Add("SQL", ds.ExtendedProperties["SQL"]);
+            foreach (DataTable dt in ds.Tables) {
+                dt.ExtendedProperties.Add("SQL", ds.ExtendedProperties["SQL"]);
+            }
 
             command.Parameters.Clear();
             return ds;
@@ -869,14 +882,18 @@ namespace Alabo.Domains.Repositories.SqlServer
         /// <param name="table">数据表</param>
         public static void BulkInsert(string connectionString, DataTable table)
         {
-            if (string.IsNullOrEmpty(table.TableName)) throw new System.Exception("DataTable.TableName属性不能为空");
+            if (string.IsNullOrEmpty(table.TableName)) {
+                throw new System.Exception("DataTable.TableName属性不能为空");
+            }
 
             using (var bulk = new SqlBulkCopy(connectionString))
             {
                 bulk.BatchSize = BatchSize;
                 bulk.BulkCopyTimeout = CommandTimeOut;
                 bulk.DestinationTableName = table.TableName;
-                foreach (DataColumn col in table.Columns) bulk.ColumnMappings.Add(col.ColumnName, col.ColumnName);
+                foreach (DataColumn col in table.Columns) {
+                    bulk.ColumnMappings.Add(col.ColumnName, col.ColumnName);
+                }
 
                 bulk.WriteToServer(table);
                 bulk.Close();
@@ -909,15 +926,18 @@ namespace Alabo.Domains.Repositories.SqlServer
                 //设置事物
                 adapter.SelectCommand.Transaction = transaction;
 
-                if (table.ExtendedProperties["SQL"] != null)
+                if (table.ExtendedProperties["SQL"] != null) {
                     adapter.SelectCommand.CommandText = table.ExtendedProperties["SQL"].ToString();
+                }
 
                 adapter.Update(table);
                 transaction.Commit(); /////提交事务
             }
             catch (SqlException ex)
             {
-                if (transaction != null) transaction.Rollback();
+                if (transaction != null) {
+                    transaction.Rollback();
+                }
 
                 throw ex;
             }
@@ -939,9 +959,13 @@ namespace Alabo.Domains.Repositories.SqlServer
         {
             sql = sql.ToLower();
 
-            if (batchSize < 1000) batchSize = 1000;
+            if (batchSize < 1000) {
+                batchSize = 1000;
+            }
 
-            if (interval < 1) interval = 1;
+            if (interval < 1) {
+                interval = 1;
+            }
 
             while (ExecuteScalar(connectionString, sql.Replace("delete", "select top 1 1")) != null)
             {
@@ -960,9 +984,13 @@ namespace Alabo.Domains.Repositories.SqlServer
         /// <param name="interval">批次执行间隔(秒)</param>
         public static void BatchUpdate(string connectionString, string sql, int batchSize = 1000, int interval = 1)
         {
-            if (batchSize < 1000) batchSize = 1000;
+            if (batchSize < 1000) {
+                batchSize = 1000;
+            }
 
-            if (interval < 1) interval = 1;
+            if (interval < 1) {
+                interval = 1;
+            }
 
             var existsSql = Regex.Replace(sql, @"[\w\s.=,']*from", "select top 1 1 from", RegexOptions.IgnoreCase);
             existsSql = Regex.Replace(existsSql, @"set[\w\s.=,']* where", "where", RegexOptions.IgnoreCase);

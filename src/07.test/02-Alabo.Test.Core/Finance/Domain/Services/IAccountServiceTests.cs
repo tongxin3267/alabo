@@ -158,7 +158,9 @@ namespace Alabo.Test.Core.Finance.Domain.Services
         public void InitSingleUserAccount_Int64_test(long userId)
         {
             var user = Resolve<IUserService>().GetRandom(userId);
-            if (user != null) Resolve<IAccountService>().InitSingleUserAccount(user.Id);
+            if (user != null) {
+                Resolve<IAccountService>().InitSingleUserAccount(user.Id);
+            }
         }
 
         [Theory]
@@ -224,7 +226,9 @@ namespace Alabo.Test.Core.Finance.Domain.Services
             var user = Resolve<IUserService>().LastOrDefault();
             var config = moneyTypes.FirstOrDefault();
             var account = Resolve<IAccountService>().GetAccount(user.Id, config.Id);
-            if (account != null) Resolve<IAccountService>().Delete(r => r.Id == account.Id);
+            if (account != null) {
+                Resolve<IAccountService>().Delete(r => r.Id == account.Id);
+            }
 
             var result = Resolve<IAccountService>().CreateAccount(user.Id, config);
             Assert.NotNull(result);

@@ -25,7 +25,10 @@ namespace Alabo.Data.People.Cities.Domain.Services
         public ServiceResult ChangeUserStatus(string userId, string status)
         {
             var user = Resolve<IUserService>().GetSingle(userId);
-            if (user == null) return ServiceResult.FailedMessage("用户不存在");
+            if (user == null) {
+                return ServiceResult.FailedMessage("用户不存在");
+            }
+
             var model = new User
             {
                 Id = Convert.ToInt32(userId),

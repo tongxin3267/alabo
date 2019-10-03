@@ -15,8 +15,10 @@ namespace Alabo.RestfulApi.Clients
             {
                 var result = Connector.Get(uri, para);
                 var apiResult = DataFormatter.ToObject<ApiResult<T>>(result);
-                if (apiResult.Status == ResultStatus.Success)
+                if (apiResult.Status == ResultStatus.Success) {
                     return apiResult.Result;
+                }
+
                 throw new SystemException($"{apiUrl}请求失败,{apiResult.Message}");
             }
             catch (Exception ex)
@@ -32,8 +34,10 @@ namespace Alabo.RestfulApi.Clients
             {
                 var result = await Connector.GetAsync(uri, para);
                 var apiResult = DataFormatter.ToObject<ApiResult<T>>(result);
-                if (apiResult.Status == ResultStatus.Success)
+                if (apiResult.Status == ResultStatus.Success) {
                     return apiResult.Result;
+                }
+
                 throw new SystemException($"{apiUrl}请求失败,{apiResult.Message}");
             }
             catch (Exception ex)

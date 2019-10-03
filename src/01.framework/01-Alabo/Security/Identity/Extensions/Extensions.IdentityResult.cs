@@ -16,9 +16,13 @@ namespace Alabo.Security.Identity.Extensions
         /// <param name="result">Identity结果</param>
         public static void ThrowIfError(this IdentityResult result)
         {
-            if (result == null) throw new ArgumentNullException(nameof(result));
+            if (result == null) {
+                throw new ArgumentNullException(nameof(result));
+            }
 
-            if (result.Succeeded == false) throw new ValidException(result.Errors.First().Description);
+            if (result.Succeeded == false) {
+                throw new ValidException(result.Errors.First().Description);
+            }
         }
     }
 }

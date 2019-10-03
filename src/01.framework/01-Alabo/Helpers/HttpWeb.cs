@@ -70,7 +70,9 @@ namespace Alabo.Helpers
             get
             {
                 var result = TenantContext.CurrentTenant;
-                if (result.IsNullOrEmpty()) result = "master";
+                if (result.IsNullOrEmpty()) {
+                    result = "master";
+                }
 
                 return result;
             }
@@ -96,7 +98,9 @@ namespace Alabo.Helpers
         {
             get
             {
-                if (Claims.Identity is ClaimsIdentity identity) return identity;
+                if (Claims.Identity is ClaimsIdentity identity) {
+                    return identity;
+                }
 
                 return UnauthenticatedIdentity.Instance;
             }
@@ -159,7 +163,9 @@ namespace Alabo.Helpers
         public static T GetValue<T>(string key)
         {
             var value = HttpContext.Request.Form[key];
-            if (value.IsNullOrEmpty()) return Convert.To<T>(null);
+            if (value.IsNullOrEmpty()) {
+                return Convert.To<T>(null);
+            }
 
             var result = Convert.To<T>(value);
             return result;
@@ -176,7 +182,9 @@ namespace Alabo.Helpers
         {
             var result = new List<IFormFile>();
             var files = HttpContext.Request.Form.Files;
-            if (files == null || files.Count == 0) return result;
+            if (files == null || files.Count == 0) {
+                return result;
+            }
 
             result.AddRange(files.Where(file => file?.Length > 0));
             return result;
@@ -215,7 +223,9 @@ namespace Alabo.Helpers
             {
                 var host = ((HttpRequestHeaders)HttpContext.Request.Headers).HeaderOrigin;
                 var clientHost = string.Empty;
-                if (!host.IsNullOrEmpty()) clientHost = host[0].ToStr();
+                if (!host.IsNullOrEmpty()) {
+                    clientHost = host[0].ToStr();
+                }
 
                 return clientHost;
             }
@@ -272,7 +282,9 @@ namespace Alabo.Helpers
         {
             get
             {
-                if ((UserId == 0) | UserName.IsNullOrEmpty()) return null;
+                if ((UserId == 0) | UserName.IsNullOrEmpty()) {
+                    return null;
+                }
 
                 var user = new BasicUser
                 {
@@ -324,9 +336,13 @@ namespace Alabo.Helpers
         {
             get
             {
-                if (HttpContext == null) return UnauthenticatedPrincipal.Instance;
+                if (HttpContext == null) {
+                    return UnauthenticatedPrincipal.Instance;
+                }
 
-                if (HttpContext.User is ClaimsPrincipal principal) return principal;
+                if (HttpContext.User is ClaimsPrincipal principal) {
+                    return principal;
+                }
 
                 return UnauthenticatedPrincipal.Instance;
             }
@@ -415,11 +431,15 @@ namespace Alabo.Helpers
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(_ip) == false) return _ip;
+                if (string.IsNullOrWhiteSpace(_ip) == false) {
+                    return _ip;
+                }
 
                 var list = new[] { "127.0.0.1", "::1" };
                 var result = (HttpContext?.Connection?.RemoteIpAddress).SafeString();
-                if (string.IsNullOrWhiteSpace(result) || list.Contains(result)) result = GetLanIp();
+                if (string.IsNullOrWhiteSpace(result) || list.Contains(result)) {
+                    result = GetLanIp();
+                }
 
                 return result;
             }
@@ -430,9 +450,11 @@ namespace Alabo.Helpers
         /// </summary>
         private static string GetLanIp()
         {
-            foreach (var hostAddress in Dns.GetHostAddresses(Dns.GetHostName()))
-                if (hostAddress.AddressFamily == AddressFamily.InterNetwork)
+            foreach (var hostAddress in Dns.GetHostAddresses(Dns.GetHostName())) {
+                if (hostAddress.AddressFamily == AddressFamily.InterNetwork) {
                     return hostAddress.ToString();
+                }
+            }
 
             return string.Empty;
         }
@@ -476,10 +498,14 @@ namespace Alabo.Helpers
         private static string GetClientHostName()
         {
             var address = GetRemoteAddress();
-            if (string.IsNullOrWhiteSpace(address)) return Dns.GetHostName();
+            if (string.IsNullOrWhiteSpace(address)) {
+                return Dns.GetHostName();
+            }
 
             var result = Dns.GetHostEntry(IPAddress.Parse(address)).HostName;
-            if (result == "localhost.localdomain") result = Dns.GetHostName();
+            if (result == "localhost.localdomain") {
+                result = Dns.GetHostName();
+            }
 
             return result;
         }
@@ -528,7 +554,9 @@ namespace Alabo.Helpers
         public static string UrlEncode(string url, Encoding encoding, bool isUpper = false)
         {
             var result = HttpUtility.UrlEncode(url, encoding);
-            if (isUpper == false) return result;
+            if (isUpper == false) {
+                return result;
+            }
 
             return GetUpperEncode(result);
         }
@@ -543,9 +571,13 @@ namespace Alabo.Helpers
             for (var i = 0; i < encode.Length; i++)
             {
                 var character = encode[i].ToString();
-                if (character == "%") index = i;
+                if (character == "%") {
+                    index = i;
+                }
 
-                if (i - index == 1 || i - index == 2) character = character.ToUpper();
+                if (i - index == 1 || i - index == 2) {
+                    character = character.ToUpper();
+                }
 
                 result.Append(character);
             }

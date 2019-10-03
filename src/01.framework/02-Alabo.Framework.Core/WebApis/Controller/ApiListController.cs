@@ -19,7 +19,9 @@ namespace Alabo.Framework.Core.WebApis.Controller
         [Display(Description = "根据Url获取列表")]
         public ApiResult<List<TEntity>> QueryList()
         {
-            if (BaseService == null) return ApiResult.Failure<List<TEntity>>("请在控制器中定义BaseService");
+            if (BaseService == null) {
+                return ApiResult.Failure<List<TEntity>>("请在控制器中定义BaseService");
+            }
 
             var result = BaseService.GetList(QueryDictionary()).ToList();
             return ApiResult.Success(result);
@@ -31,7 +33,9 @@ namespace Alabo.Framework.Core.WebApis.Controller
         [Display(Description = "根据Url获取列表")]
         public ApiResult<List<TEntity>> QueryListAsc()
         {
-            if (BaseService == null) return ApiResult.Failure<List<TEntity>>("请在控制器中定义BaseService");
+            if (BaseService == null) {
+                return ApiResult.Failure<List<TEntity>>("请在控制器中定义BaseService");
+            }
 
             var result = BaseService.GetList(QueryDictionary()).ToList();
             result = result.OrderBy(r => r.CreateTime).ToList();

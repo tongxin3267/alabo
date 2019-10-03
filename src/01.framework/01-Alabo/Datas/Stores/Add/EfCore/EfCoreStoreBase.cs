@@ -59,7 +59,9 @@ namespace Alabo.Datas.Stores.Add.EfCore
         {
             get
             {
-                if (dbContext == null) dbContext = _unitOfWorkBase.Database.GetDbConnection();
+                if (dbContext == null) {
+                    dbContext = _unitOfWorkBase.Database.GetDbConnection();
+                }
 
                 return dbContext;
             }
@@ -95,7 +97,9 @@ namespace Alabo.Datas.Stores.Add.EfCore
         public IQueryable<TEntity> ToQueryable(Expression<Func<TEntity, bool>> predicate = null)
         {
             var work = HttpWeb.Tenant;
-            if (predicate == null) return Set;
+            if (predicate == null) {
+                return Set;
+            }
 
             return Set.Where(predicate);
         }
@@ -106,7 +110,9 @@ namespace Alabo.Datas.Stores.Add.EfCore
         /// <param name="predicate">条件</param>
         public IQueryable<TEntity> ToQueryableAsNoTracking(Expression<Func<TEntity, bool>> predicate = null)
         {
-            if (predicate == null) return Set.AsNoTracking();
+            if (predicate == null) {
+                return Set.AsNoTracking();
+            }
 
             return Set.AsNoTracking().Where(predicate);
         }
@@ -117,9 +123,13 @@ namespace Alabo.Datas.Stores.Add.EfCore
         /// <param name="id">标识</param>
         public TEntity Find(object id)
         {
-            if (id.SafeString().IsEmpty()) return null;
+            if (id.SafeString().IsEmpty()) {
+                return null;
+            }
 
-            if (id.ToString() == "0") return null;
+            if (id.ToString() == "0") {
+                return null;
+            }
 
             return Set.Find(id);
         }
@@ -132,7 +142,9 @@ namespace Alabo.Datas.Stores.Add.EfCore
         public async Task<TEntity> FindAsync(object id,
             CancellationToken cancellationToken = default)
         {
-            if (id.SafeString().IsEmpty()) return null;
+            if (id.SafeString().IsEmpty()) {
+                return null;
+            }
 
             return await Set.FindAsync(new[] { id }, cancellationToken);
         }
@@ -152,7 +164,9 @@ namespace Alabo.Datas.Stores.Add.EfCore
         /// <param name="ids">标识列表</param>
         public List<TEntity> FindByIds(IEnumerable<TKey> ids)
         {
-            if (ids == null) return null;
+            if (ids == null) {
+                return null;
+            }
 
             return ToQueryable(t => ids.Contains(t.Id)).ToList();
         }

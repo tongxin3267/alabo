@@ -27,7 +27,9 @@ namespace Alabo.Domains.Services.Bulk
 
         public async Task AddManyAsync(IEnumerable<TEntity> soucre)
         {
-            if (soucre == null || !soucre.Any()) return;
+            if (soucre == null || !soucre.Any()) {
+                return;
+            }
 
             var addList = new List<TEntity>();
             soucre.Foreach(r =>
@@ -38,7 +40,9 @@ namespace Alabo.Domains.Services.Bulk
                     addList.Add(r);
                 }
             });
-            if (!addList.Any()) return;
+            if (!addList.Any()) {
+                return;
+            }
 
             await Store.AddManyAsync(addList);
             Log($"成功新增{{Table}}记录{addList.Count}条,新增记录Id:{addList.Select(r => r.Id).SplitString()}");

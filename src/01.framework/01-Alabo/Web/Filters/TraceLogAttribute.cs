@@ -36,10 +36,14 @@ namespace Alabo.Web.Filters
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             base.OnActionExecuting(context);
-            if (Ignore) return;
+            if (Ignore) {
+                return;
+            }
 
             Logger = GetLog();
-            if (Logger.IsTraceEnabled == false) return;
+            if (Logger.IsTraceEnabled == false) {
+                return;
+            }
 
             WriteLog(context);
         }
@@ -78,8 +82,9 @@ namespace Alabo.Web.Filters
         {
             var request = context.HttpContext.Request;
             Logger.Params("Http请求方式", request.Method);
-            if (string.IsNullOrWhiteSpace(request.ContentType) == false)
+            if (string.IsNullOrWhiteSpace(request.ContentType) == false) {
                 Logger.Params("ContentType", request.ContentType);
+            }
 
             AddFormParams(request);
             AddCookie(request);
@@ -91,7 +96,9 @@ namespace Alabo.Web.Filters
         private void AddFormParams(HttpRequest request)
         {
             var result = File.ToString(request.Body);
-            if (string.IsNullOrWhiteSpace(result)) return;
+            if (string.IsNullOrWhiteSpace(result)) {
+                return;
+            }
 
             Logger.Params("表单参数:").Params(result);
         }
@@ -102,7 +109,9 @@ namespace Alabo.Web.Filters
         private void AddCookie(HttpRequest request)
         {
             Logger.Params("Cookie:");
-            foreach (var key in request.Cookies.Keys) Logger.Params(key, request.Cookies[key]);
+            foreach (var key in request.Cookies.Keys) {
+                Logger.Params(key, request.Cookies[key]);
+            }
         }
 
         /// <summary>
@@ -111,9 +120,13 @@ namespace Alabo.Web.Filters
         public override void OnResultExecuted(ResultExecutedContext context)
         {
             base.OnResultExecuted(context);
-            if (Ignore) return;
+            if (Ignore) {
+                return;
+            }
 
-            if (Logger.IsTraceEnabled == false) return;
+            if (Logger.IsTraceEnabled == false) {
+                return;
+            }
 
             WriteLog(context);
         }
@@ -137,8 +150,9 @@ namespace Alabo.Web.Filters
         private void AddResponseInfo(ResultExecutedContext context)
         {
             var response = context.HttpContext.Response;
-            if (string.IsNullOrWhiteSpace(response.ContentType) == false)
+            if (string.IsNullOrWhiteSpace(response.ContentType) == false) {
                 Logger.Content($"ContentType: {response.ContentType}");
+            }
 
             Logger.Content($"Http状态码: {response.StatusCode}");
         }
@@ -148,7 +162,9 @@ namespace Alabo.Web.Filters
         /// </summary>
         private void AddResult(ResultExecutedContext context)
         {
-            if (!(context.Result is Result result)) return;
+            if (!(context.Result is Result result)) {
+                return;
+            }
 
             Logger.Content($"响应消息: {result.Message}")
                 .Content("响应结果:")

@@ -74,7 +74,9 @@ namespace Alabo.Industry.Shop.Categories.Domain.Services
             HttpRequest request)
         {
             var category = GetSingle(product.CategoryId);
-            if (category == null) return string.Empty;
+            if (category == null) {
+                return string.Empty;
+            }
 
             var productCategory = new Category(); // 需要保存的类目数据信息
 
@@ -135,7 +137,9 @@ namespace Alabo.Industry.Shop.Categories.Domain.Services
                 {
                     //其他框一条记录
                     var value = request.Form["display_" + item.Id];
-                    if (!value.IsNullOrEmpty()) productDisplayProperty.DisplayValue = value; // 单个属性值
+                    if (!value.IsNullOrEmpty()) {
+                        productDisplayProperty.DisplayValue = value; // 单个属性值
+                    }
                 }
 
                 displayPropertys.Add(productDisplayProperty);
@@ -149,7 +153,9 @@ namespace Alabo.Industry.Shop.Categories.Domain.Services
         public Tuple<ServiceResult, Category> Delete(Guid id)
         {
             var result = ServiceResult.Success;
-            if (id == Guid.Empty) return Tuple.Create(ServiceResult.FailedWithMessage("删除失败"), new Category());
+            if (id == Guid.Empty) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("删除失败"), new Category());
+            }
 
             var model = Resolve<ICategoryService>().GetSingle(id);
             var context = Ioc.Resolve<IUserRepository>().RepositoryContext;

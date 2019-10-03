@@ -28,11 +28,16 @@ namespace Alabo.Cloud.Shop.Favorites.Controllers
         /// <returns></returns>
         public ApiResult Check([FromQuery] FavoriteInput parameter)
         {
-            if (parameter == null) return ApiResult.Failure();
+            if (parameter == null) {
+                return ApiResult.Failure();
+            }
+
             var result = Resolve<IFavoriteService>().GetSingle(r =>
                 r.EntityId == parameter.EntityId && r.UserId == parameter.LoginUserId && r.Type == parameter.Type);
-            if (result != null)
+            if (result != null) {
                 return ApiResult.Success();
+            }
+
             return ApiResult.Failure();
         }
 

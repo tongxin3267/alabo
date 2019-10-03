@@ -130,12 +130,15 @@ namespace Alabo.Data.People.Employes.UI.AutoFrom
         public AutoForm GetView(object id, AutoBaseModel autoModel)
         {
             var model = new Employee();
-            if (ObjectId.TryParse(id.ToString(), out var objectId))
+            if (ObjectId.TryParse(id.ToString(), out var objectId)) {
                 model = Resolve<IEmployeeService>().GetSingle(s => s.Id == objectId);
-            else
+            } else {
                 return ToAutoForm(new EmployeeAutoForm());
+            }
 
-            if (model == null) return ToAutoForm(new EmployeeAutoForm());
+            if (model == null) {
+                return ToAutoForm(new EmployeeAutoForm());
+            }
 
             var resultEntity = model.MapTo<EmployeeAutoForm>();
             var user = Resolve<IUserService>().GetSingle(s => s.Id == resultEntity.UserId);
@@ -151,8 +154,9 @@ namespace Alabo.Data.People.Employes.UI.AutoFrom
             var user = Resolve<IUserService>().GetSingleByUserNameOrMobile(entity.UserName);
             if (user == null)
             {
-                if (!RegexHelper.CheckMobile(entity.UserName))
+                if (!RegexHelper.CheckMobile(entity.UserName)) {
                     return ServiceResult.FailedWithMessage("当用户不存在，添加新员工时用户名必须为手机号");
+                }
 
                 var regInput = new RegInput
                 {
@@ -165,18 +169,25 @@ namespace Alabo.Data.People.Employes.UI.AutoFrom
                 user = Resolve<IUserService>().GetSingleByUserNameOrMobile(entity.UserName);
             }
 
-            if (user == null) return ServiceResult.FailedWithMessage("用户不存在");
+            if (user == null) {
+                return ServiceResult.FailedWithMessage("用户不存在");
+            }
 
-            if (!(user?.Id).HasValue) return ServiceResult.FailedMessage("找不到该用户");
+            if (!(user?.Id).HasValue) {
+                return ServiceResult.FailedMessage("找不到该用户");
+            }
 
             var employee = Resolve<IEmployeeService>().GetSingle(s => s.UserId == user.Id);
-            if (employee != null && employee.Id != entity.Id)
+            if (employee != null && employee.Id != entity.Id) {
                 return ServiceResult.FailedMessage($"该用户已关联员工:{employee.Name}");
+            }
 
             //如果没有 就赋值
             entity.UserId = user.Id;
 
-            if (!Resolve<IEmployeeService>().AddOrUpdate(entity)) return ServiceResult.FailedWithMessage("员工添加失败");
+            if (!Resolve<IEmployeeService>().AddOrUpdate(entity)) {
+                return ServiceResult.FailedWithMessage("员工添加失败");
+            }
 
             return ServiceResult.Success;
         }

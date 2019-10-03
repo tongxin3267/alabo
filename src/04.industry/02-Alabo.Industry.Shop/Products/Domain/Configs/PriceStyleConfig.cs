@@ -128,7 +128,9 @@ namespace Alabo.Industry.Shop.Products.Domain.Configs
         {
             var list = Ioc.Resolve<IAutoConfigService>().GetList<PriceStyleConfig>();
             var moneyTypelist = Ioc.Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
-            if (moneyTypelist.Count == 0) new MoneyTypeConfig().SetDefault();
+            if (moneyTypelist.Count == 0) {
+                new MoneyTypeConfig().SetDefault();
+            }
 
             if (list.Count == 0)
             {
@@ -136,7 +138,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Configs
                 var config = new PriceStyleConfig();
                 MoneyTypeConfig mt = null;
                 moneyTypelist = Ioc.Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
-                foreach (PriceStyle item in Enum.GetValues(typeof(PriceStyle)))
+                foreach (PriceStyle item in Enum.GetValues(typeof(PriceStyle))) {
                     if (Convert.ToInt32(item) >= 0)
                     {
                         config = new PriceStyleConfig
@@ -218,13 +220,18 @@ namespace Alabo.Industry.Shop.Products.Domain.Configs
                                 break;
                         }
 
-                        if (mt == null) continue;
+                        if (mt == null) {
+                            continue;
+                        }
 
                         config.MoneyTypeId = mt.Id;
-                        if (Convert.ToInt32(item) > 1000) config.Status = Status.Freeze;
+                        if (Convert.ToInt32(item) > 1000) {
+                            config.Status = Status.Freeze;
+                        }
 
                         configs.Add(config);
                     }
+                }
 
                 var typeclassProperty = config.GetType().GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
                 var autoConfig = new AutoConfig

@@ -26,16 +26,21 @@ namespace Alabo.App.Share.TaskExecutes.ResultModel
 
         public ExecuteResult Update()
         {
-            if (ChangeAmount == 0) return ExecuteResult.Success();
+            if (ChangeAmount == 0) {
+                return ExecuteResult.Success();
+            }
 
             try
             {
                 var findAccount = Ioc.Resolve<IAccountService>().GetAccount(AccountId);
-                if (findAccount == null)
+                if (findAccount == null) {
                     return ExecuteResult.Fail($"not found account when UserId={UserId} and AccountId={AccountId}");
+                }
 
                 findAccount.Amount += ChangeAmount;
-                if (ChangeAmount > 0) findAccount.HistoryAmount += ChangeAmount;
+                if (ChangeAmount > 0) {
+                    findAccount.HistoryAmount += ChangeAmount;
+                }
 
                 Ioc.Resolve<IAccountService>().Update(findAccount);
                 //decimal historyChangeAmount = ChangeAmount > 0 ? ChangeAmount : 0;

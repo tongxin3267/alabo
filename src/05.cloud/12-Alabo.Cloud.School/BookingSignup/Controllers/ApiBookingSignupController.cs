@@ -46,13 +46,15 @@ namespace Alabo.Cloud.School.BookingSignup.Controllers
         [ApiAuth]
         public ApiResult<BookingBuyOutput> Buy([FromBody] BookingBuyInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<BookingBuyOutput>(this.FormInvalidReason(),
                     MessageCodes.ParameterValidationFailure);
+            }
 
             var result = Resolve<IBookingSignupService>().Buy(parameter);
-            if (!result.Item2.Succeeded)
+            if (!result.Item2.Succeeded) {
                 return ApiResult.Failure<BookingBuyOutput>(result.Item2.ToString(), MessageCodes.ServiceFailure);
+            }
 
             return ApiResult.Success(result.Item1);
         }
@@ -60,11 +62,18 @@ namespace Alabo.Cloud.School.BookingSignup.Controllers
         [HttpGet]
         public ApiResult<List<BookingSignupOrderContact>> GetOrderUserByOrderId(string id)
         {
-            if (id.IsNullOrEmpty()) return ApiResult.Failure<List<BookingSignupOrderContact>>("Id不能为空");
+            if (id.IsNullOrEmpty()) {
+                return ApiResult.Failure<List<BookingSignupOrderContact>>("Id不能为空");
+            }
 
             var order = Resolve<IBookingSignupOrderService>().GetSingle(u => u.Id == id.ToObjectId() && u.IsPay);
-            if (order == null) return ApiResult.Failure<List<BookingSignupOrderContact>>("请支付");
-            if (order.Contacts.IsNullOrEmpty()) return ApiResult.Failure<List<BookingSignupOrderContact>>("数据异常");
+            if (order == null) {
+                return ApiResult.Failure<List<BookingSignupOrderContact>>("请支付");
+            }
+
+            if (order.Contacts.IsNullOrEmpty()) {
+                return ApiResult.Failure<List<BookingSignupOrderContact>>("数据异常");
+            }
 
             return ApiResult.Success(order.Contacts);
         }
@@ -94,6 +103,7 @@ namespace Alabo.Cloud.School.BookingSignup.Controllers
 
                 // 返回的商户号要与配置中的相同
                 if (aliPayConfig.AppId == notify.AppId) // 支付状态为成功
+{
                     if ("TRADE_SUCCESS" == notify.TradeStatus)
                     {
                         var payId = notify.PassbackParams.ConvertToLong(0); // 通过支付宝获取订单Id参数
@@ -123,6 +133,7 @@ namespace Alabo.Cloud.School.BookingSignup.Controllers
 
                         return Content("success", "text/plain");
                     }
+                }
                 // 如果支付状态为成功
 
                 return NoContent();
@@ -163,8 +174,9 @@ namespace Alabo.Cloud.School.BookingSignup.Controllers
                         //Resolve<IPayService>().Log("微信公众号支付回调结果:" + res.ToJson(), LogsLevel.Warning);
                     }
 
-                    if (notify.ResultCode == "SUCCESS")
+                    if (notify.ResultCode == "SUCCESS") {
                         return Content("<xml><return_code><![CDATA[SUCCESS]]></return_code></xml>", "text/xml");
+                    }
                 }
 
                 return NoContent();
@@ -185,7 +197,10 @@ namespace Alabo.Cloud.School.BookingSignup.Controllers
         {
             //Resolve<IBookingSignupOrderService>().Log($"活动预约,微信回调唤起PublicPayAsyncByPayId{payInput.ToJson()}", LogsLevel.Success);
 
-            if (payInput == null) return NoContent();
+            if (payInput == null) {
+                return NoContent();
+            }
+
             var pay = Resolve<IPayService>().GetSingle(payInput.PayId);
             if (pay == null)
             {

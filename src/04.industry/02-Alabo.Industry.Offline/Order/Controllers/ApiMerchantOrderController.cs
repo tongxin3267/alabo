@@ -30,14 +30,16 @@ namespace Alabo.Industry.Offline.Order.Controllers
         [ApiAuth]
         public ApiResult<MerchantCartOutput> BuyInfo([FromBody] MerchantBuyInfoInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<MerchantCartOutput>(this.FormInvalidReason(),
                     MessageCodes.ParameterValidationFailure);
+            }
 
             var serviceResult = Resolve<IMerchantOrderService>().BuyInfo(parameter);
-            if (!serviceResult.Item1.Succeeded)
+            if (!serviceResult.Item1.Succeeded) {
                 return ApiResult.Failure<MerchantCartOutput>(serviceResult.Item1.ToString(),
                     MessageCodes.ServiceFailure);
+            }
 
             return ApiResult.Success(serviceResult.Item2);
         }
@@ -51,13 +53,15 @@ namespace Alabo.Industry.Offline.Order.Controllers
         [ApiAuth]
         public ApiResult<MerchantOrderBuyOutput> Buy([FromBody] MerchantOrderBuyInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<MerchantOrderBuyOutput>(this.FormInvalidReason(),
                     MessageCodes.ParameterValidationFailure);
+            }
 
             var result = Resolve<IMerchantOrderService>().Buy(parameter);
-            if (!result.Item1.Succeeded)
+            if (!result.Item1.Succeeded) {
                 return ApiResult.Failure<MerchantOrderBuyOutput>(result.Item1.ToString(), MessageCodes.ServiceFailure);
+            }
 
             return ApiResult.Success(result.Item2);
         }
@@ -71,9 +75,11 @@ namespace Alabo.Industry.Offline.Order.Controllers
         [ApiAuth]
         public ApiResult<PagedList<MerchantOrderList>> BuyOrderList([FromQuery] MerchantOrderListInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<PagedList<MerchantOrderList>>(this.FormInvalidReason(),
                     MessageCodes.ParameterValidationFailure);
+            }
+
             var result = Resolve<IMerchantOrderService>().GetOrderList(parameter);
             return ApiResult.Success(result);
         }
@@ -87,7 +93,9 @@ namespace Alabo.Industry.Offline.Order.Controllers
         public ApiResult GetOrder(long id)
         {
             var result = Resolve<IMerchantOrderService>().GetOrderSingle(id);
-            if (!result.Item1.Succeeded) return ApiResult.Failure(result.Item1.ErrorMessages);
+            if (!result.Item1.Succeeded) {
+                return ApiResult.Failure(result.Item1.ErrorMessages);
+            }
 
             return ApiResult.Success(result.Item2);
         }

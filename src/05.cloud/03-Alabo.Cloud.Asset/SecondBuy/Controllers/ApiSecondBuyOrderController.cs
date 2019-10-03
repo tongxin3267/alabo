@@ -27,9 +27,11 @@ namespace Alabo.Cloud.Asset.SecondBuy.Controllers
         [HttpPost]
         public ApiResult Buy([FromBody] SecondBuyOrder model)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(),
                     MessageCodes.ParameterValidationFailure);
+            }
+
             var result = Resolve<ISecondBuyOrderService>().Buy(model);
             return ToResult(result);
         }

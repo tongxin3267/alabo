@@ -55,19 +55,26 @@ namespace Alabo.App.Asset.Accounts.Domain.Services
 
             #region 安全验证
 
-            if (rechargeAccount == null)
+            if (rechargeAccount == null) {
                 return Task.FromResult(Tuple.Create(ServiceResult.FailedWithMessage("对象不能为空"),
                     new RechageAccountOutput()));
-            if (rechargeAccount.Money <= 0)
+            }
+
+            if (rechargeAccount.Money <= 0) {
                 return Task.FromResult(Tuple.Create(ServiceResult.FailedWithMessage("金额不能小于等于0!"),
                     new RechageAccountOutput()));
-            if (rechargeAccount.UserId <= 0)
+            }
+
+            if (rechargeAccount.UserId <= 0) {
                 return Task.FromResult(Tuple.Create(ServiceResult.FailedWithMessage("用户id不能为空!"),
                     new RechageAccountOutput()));
+            }
+
             var user = Resolve<IUserService>().GetSingle(rechargeAccount.UserId);
-            if (user == null)
+            if (user == null) {
                 return Task.FromResult(Tuple.Create(ServiceResult.FailedWithMessage("用户不存在"),
                     new RechageAccountOutput()));
+            }
 
             #endregion 安全验证
 

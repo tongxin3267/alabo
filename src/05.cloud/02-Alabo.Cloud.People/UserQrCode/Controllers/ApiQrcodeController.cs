@@ -43,7 +43,9 @@ namespace Alabo.Cloud.People.UserQrCode.Controllers
         public ApiResult<string> QrCode([FromQuery] long loginUserId)
         {
             var result = Resolve<IUserQrCodeService>().QrCore(loginUserId);
-            if (result == null) return ApiResult.Failure<string>("用户不存在或者已经删除！");
+            if (result == null) {
+                return ApiResult.Failure<string>("用户不存在或者已经删除！");
+            }
 
             return ApiResult.Success<string>(result);
         }

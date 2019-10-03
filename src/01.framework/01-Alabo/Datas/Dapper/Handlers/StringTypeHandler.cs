@@ -15,7 +15,9 @@ namespace Alabo.Datas.Dapper.Handlers
         /// <param name="value">值</param>
         public override void SetValue(IDbDataParameter parameter, string value)
         {
-            if (parameter == null) return;
+            if (parameter == null) {
+                return;
+            }
 
             parameter.Value = value;
         }

@@ -49,7 +49,9 @@ namespace Alabo.Domains.Services.Single
         public TEntity GetSingle(Expression<Func<TEntity, bool>> predicate)
         {
             var find = Store.GetSingle(predicate);
-            if (find != null) find = JsonMapping.ConvertToExtension(find);
+            if (find != null) {
+                find = JsonMapping.ConvertToExtension(find);
+            }
 
             return find;
         }
@@ -59,7 +61,9 @@ namespace Alabo.Domains.Services.Single
             var dynamic = (dynamic)model;
             var dynamicWhere = LinqHelper.GetExpression<TEntity, bool>($"entity.Id > {dynamic.Id}", "entity");
             var next = GetSingle(dynamicWhere);
-            if (next == null) next = model;
+            if (next == null) {
+                next = model;
+            }
 
             return next;
         }
@@ -75,7 +79,9 @@ namespace Alabo.Domains.Services.Single
             var orderExpression = LinqHelper.GetExpression<TEntity, long>("entity.Id", "entity");
             query.OrderByDescending(orderExpression);
             var prex = GetSingle(query);
-            if (prex == null) prex = model;
+            if (prex == null) {
+                prex = model;
+            }
 
             return prex;
         }

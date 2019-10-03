@@ -75,7 +75,9 @@ namespace Alabo.Domains.Services.Page
         {
             var result = GetPagedList<TOutput>(paramater, predicate);
 
-            if (result == null) return null;
+            if (result == null) {
+                return null;
+            }
 
             var apiRusult = PageResult<TOutput>.Convert(result);
 
@@ -118,7 +120,9 @@ namespace Alabo.Domains.Services.Page
 
             #endregion 构建查询页数
 
-            if (predicate != null) query.And(predicate);
+            if (predicate != null) {
+                query.And(predicate);
+            }
 
             var result = HanderDictionary(ref dictionary); // 获取搜索范围相关的字段
             var rangList = result.Item1;
@@ -133,7 +137,9 @@ namespace Alabo.Domains.Services.Page
             {
                 var name = item.Key.Replace("_Start", "").Replace("_End", "");
                 var value = item.Value.SafeString();
-                if (value.IsNullOrEmpty() || name.IsNullOrEmpty()) continue;
+                if (value.IsNullOrEmpty() || name.IsNullOrEmpty()) {
+                    continue;
+                }
 
                 if (name.Equals("UserName", StringComparison.OrdinalIgnoreCase))
                 {
@@ -141,7 +147,9 @@ namespace Alabo.Domains.Services.Page
 
                     var property =
                         propertyInfos.FirstOrDefault(r => r.Name.Equals("UserId", StringComparison.OrdinalIgnoreCase));
-                    if (property == null) continue;
+                    if (property == null) {
+                        continue;
+                    }
 
                     var user = EntityDynamicService.GetSingleUser(value); // 动态获取用户名
                     if (user != null)
@@ -159,9 +167,13 @@ namespace Alabo.Domains.Services.Page
                     // 序号处理,适合序号是通过Id生成的方式，比如Bill,Order,Reard表
                     var property =
                         propertyInfos.FirstOrDefault(r => r.Name.Equals("Id", StringComparison.OrdinalIgnoreCase));
-                    if (property == null) continue;
+                    if (property == null) {
+                        continue;
+                    }
 
-                    if (value.Length > 7 && value.StartsWith("9")) value = value.Substring(1, value.Length - 1);
+                    if (value.Length > 7 && value.StartsWith("9")) {
+                        value = value.Substring(1, value.Length - 1);
+                    }
                     // 去掉前面的0
                     var reg = new Regex(@"^0+");
                     value = reg.Replace(value, "");
@@ -179,26 +191,32 @@ namespace Alabo.Domains.Services.Page
                     var property =
                         propertyInfos.FirstOrDefault(r => r.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
 
-                    if (property == null) continue;
+                    if (property == null) {
+                        continue;
+                    }
 
-                    if (property.PropertyType.IsEnum)
-                        if (value == "-1")
+                    if (property.PropertyType.IsEnum) {
+                        if (value == "-1") {
                             continue;
+                        }
+                    }
 
                     var fieldAttribute = propertyResults.FirstOrDefault(r => r.PropertyInfo.Name == property.Name)
                         .FieldAttribute;
                     var valueList = value.ToSplitList();
-                    foreach (var itemValue in valueList)
+                    foreach (var itemValue in valueList) {
                         if (!itemValue.IsNullOrEmpty())
                         {
                             Expression<Func<TEntity, bool>> expression = null;
                             if (fieldAttribute != null)
                             {
-                                if (fieldAttribute.Operator == Operator.Contains)
+                                if (fieldAttribute.Operator == Operator.Contains) {
                                     expression = Lambda.Contains<TEntity>(property.Name, itemValue);
+                                }
 
-                                if (fieldAttribute.Operator == Operator.Equal)
+                                if (fieldAttribute.Operator == Operator.Equal) {
                                     expression = Lambda.Equal<TEntity>(property.Name, itemValue);
+                                }
                             }
                             // 字段中包含name和title，一般都可以模糊搜索
                             else if (property.Name.Contains("name", StringComparison.OrdinalIgnoreCase)
@@ -214,8 +232,11 @@ namespace Alabo.Domains.Services.Page
                                 expression = Lambda.Equal<TEntity>(property.Name, itemValue);
                             }
 
-                            if (expression != null) query.And(expression);
+                            if (expression != null) {
+                                query.And(expression);
+                            }
                         }
+                    }
                 }
             }
 
@@ -227,19 +248,25 @@ namespace Alabo.Domains.Services.Page
             {
                 var property =
                     propertyInfos.FirstOrDefault(r => r.Name.Equals(item.Name, StringComparison.OrdinalIgnoreCase));
-                if (property == null || item.StartValue.IsNullOrEmpty() && item.EndValue.IsNullOrEmpty()) continue;
+                if (property == null || item.StartValue.IsNullOrEmpty() && item.EndValue.IsNullOrEmpty()) {
+                    continue;
+                }
                 // 大于等于
                 if (!item.StartValue.IsNullOrEmpty())
                 {
                     var expression = Lambda.GreaterEqual<TEntity>(property.Name, item.StartValue);
-                    if (expression != null) query.And(expression);
+                    if (expression != null) {
+                        query.And(expression);
+                    }
                 }
 
                 // 小于等于
                 if (!item.EndValue.IsNullOrEmpty())
                 {
                     var expression = Lambda.LessEqual<TEntity>(property.Name, item.EndValue);
-                    if (expression != null) query.And(expression);
+                    if (expression != null) {
+                        query.And(expression);
+                    }
                 }
             }
 
@@ -254,10 +281,11 @@ namespace Alabo.Domains.Services.Page
             {
                 var selectExpression = $"entity.{propertySort.Name}";
                 var expression = interpreter.ParseAsExpression<Func<TEntity, object>>(selectExpression, "entity");
-                if (sortType.OrderType == OrderType.Descending)
+                if (sortType.OrderType == OrderType.Descending) {
                     query.OrderByDescending(expression);
-                else
+                } else {
                     query.OrderByAscending(expression);
+                }
             }
 
             #endregion 排序
@@ -276,12 +304,19 @@ namespace Alabo.Domains.Services.Page
         /// <param name="imageUrl"></param>
         public string ApiImageUrl(string imageUrl)
         {
-            if (imageUrl != null)
-                if (!imageUrl.Contains("http", StringComparison.CurrentCultureIgnoreCase))
+            if (imageUrl != null) {
+                if (!imageUrl.Contains("http", StringComparison.CurrentCultureIgnoreCase)) {
                     imageUrl = $"{HttpWeb.ServiceHostUrl}/{imageUrl}";
+                }
+            }
 
-            if (imageUrl.IsNullOrEmpty()) return string.Empty;
-            if (imageUrl.Contains("///")) return imageUrl.Replace("//", "/");
+            if (imageUrl.IsNullOrEmpty()) {
+                return string.Empty;
+            }
+
+            if (imageUrl.Contains("///")) {
+                return imageUrl.Replace("//", "/");
+            }
 
             return imageUrl;
         }
@@ -374,7 +409,9 @@ namespace Alabo.Domains.Services.Page
                 //排序方式
                 if (item.Key.Equals("SortOrder_Type", StringComparison.OrdinalIgnoreCase))
                 {
-                    if (item.Value.StringToEnum(out OrderType orderType)) sortTypeDto.OrderType = orderType;
+                    if (item.Value.StringToEnum(out OrderType orderType)) {
+                        sortTypeDto.OrderType = orderType;
+                    }
 
                     dictionary = dictionary.RemoveKey(item.Key);
                 }
@@ -392,10 +429,11 @@ namespace Alabo.Domains.Services.Page
                 {
                     Name = key
                 };
-                if (isStart)
+                if (isStart) {
                     rangDto.StartValue = value;
-                else
+                } else {
                     rangDto.EndValue = value;
+                }
 
                 list.Add(rangDto);
             }
@@ -405,10 +443,11 @@ namespace Alabo.Domains.Services.Page
                 {
                     if (r.Name.Equals(key, StringComparison.OrdinalIgnoreCase))
                     {
-                        if (isStart)
+                        if (isStart) {
                             r.StartValue = value;
-                        else
+                        } else {
                             r.EndValue = value;
+                        }
                     }
                 });
             }
@@ -418,7 +457,9 @@ namespace Alabo.Domains.Services.Page
         {
             var result = GetPagedList<TEntity>(paramater);
 
-            if (result == null) return null;
+            if (result == null) {
+                return null;
+            }
 
             var apiRusult = PageResult<TEntity>.Convert(result);
 

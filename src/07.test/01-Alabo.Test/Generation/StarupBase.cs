@@ -13,7 +13,7 @@ namespace Alabo.Test.Generation
             Console.WriteLine(@"开始生成代码");
             var allServiceType = Resolve<ITypeService>().GetAllEntityService(); //.Where(o=>!o.IsAbstract);
 
-            foreach (var type in allServiceType)
+            foreach (var type in allServiceType) {
                 try
                 {
                     var startupTest = new StartupTest();
@@ -21,6 +21,7 @@ namespace Alabo.Test.Generation
                 catch (Exception ex)
                 {
                 }
+            }
         } /*end*/
 
         [Fact]

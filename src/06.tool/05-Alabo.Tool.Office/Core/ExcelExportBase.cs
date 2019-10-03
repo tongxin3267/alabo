@@ -75,8 +75,9 @@ namespace Alabo.Tool.Office.Core
             foreach (var row in rows)
             {
                 _excel.CreateRow(row.RowIndex);
-                foreach (var cell in row.Cells)
+                foreach (var cell in row.Cells) {
                     _excel.CreateCell(cell);
+                }
             }
         }
 

@@ -90,7 +90,9 @@ namespace Alabo.Cloud.School.BookingSignup.UI
             var dic = query.ToObject<Dictionary<string, string>>();
             long pageIndex = 1;
             dic.TryGetValue("pageIndex", out var pageIndexStr);
-            if (!pageIndexStr.IsNullOrEmpty()) pageIndex = pageIndexStr.ToInt64();
+            if (!pageIndexStr.IsNullOrEmpty()) {
+                pageIndex = pageIndexStr.ToInt64();
+            }
 
             var input = new ExpressionQuery<BookingSignupOrder>
             {

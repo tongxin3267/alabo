@@ -108,7 +108,9 @@ namespace Alabo.Logging.NLog
         /// </summary>
         private IFormatProvider GetFormatProvider()
         {
-            if (_format == null) return null;
+            if (_format == null) {
+                return null;
+            }
 
             return new FormatProvider(_format);
         }

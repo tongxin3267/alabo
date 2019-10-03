@@ -27,7 +27,10 @@ namespace Alabo.App.Asset.Accounts.UI
             var autoAmountItem = new AutoAmountItem();
             //前端传值需注意大小写 userId为必传项
             dic.TryGetValue("userId", out var userId);
-            if (userId.IsNullOrEmpty()) return null;
+            if (userId.IsNullOrEmpty()) {
+                return null;
+            }
+
             var billList = Ioc.Resolve<IBillService>()
                 .GetList(u => u.UserId == userId.ToInt64() && u.Flow == AccountFlow.Income);
 
@@ -48,7 +51,9 @@ namespace Alabo.App.Asset.Accounts.UI
             if (todayBillList != null || todayBillList.Count() > 0)
             {
                 var Amount = new decimal();
-                foreach (var item in todayBillList) Amount += item.Amount;
+                foreach (var item in todayBillList) {
+                    Amount += item.Amount;
+                }
 
                 autoAmountItem.TodayEarnings = Amount;
             }
@@ -64,7 +69,9 @@ namespace Alabo.App.Asset.Accounts.UI
             if (monthBillList != null || monthBillList.Count() > 0)
             {
                 var Amount = new decimal();
-                foreach (var item in monthBillList) Amount += item.Amount;
+                foreach (var item in monthBillList) {
+                    Amount += item.Amount;
+                }
 
                 autoAmountItem.MonthEarnings = Amount;
             }
@@ -76,7 +83,10 @@ namespace Alabo.App.Asset.Accounts.UI
             if (billList.Count > 0)
             {
                 var Amount = new decimal();
-                foreach (var item in monthBillList) Amount += item.Amount;
+                foreach (var item in monthBillList) {
+                    Amount += item.Amount;
+                }
+
                 autoAmountItem.TotalEarnings = Amount;
             }
 
@@ -87,7 +97,9 @@ namespace Alabo.App.Asset.Accounts.UI
             if (billList.Count > 0)
             {
                 var bill = billList.OrderByDescending(u => u.Id).FirstOrDefault();
-                if (bill != null) autoAmountItem.LastEarnings = bill.Amount;
+                if (bill != null) {
+                    autoAmountItem.LastEarnings = bill.Amount;
+                }
             }
 
             #endregion 获取最后一笔收益

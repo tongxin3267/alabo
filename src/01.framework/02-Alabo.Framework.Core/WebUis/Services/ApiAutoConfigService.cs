@@ -28,13 +28,15 @@ namespace Alabo.Framework.Core.WebUis.Services
             var key = type.FullName;
 
             var config = Resolve<IAlaboAutoConfigService>().GetConfig(type.FullName);
-            if (config == null)
+            if (config == null) {
                 config = new AutoConfig
                 {
                     Type = key,
                     AppName = Resolve<ITypeService>().GetAppName(type.FullName),
                     LastUpdated = DateTime.Now
                 };
+            }
+
             var classDescription = type.FullName.GetClassDescription();
             if (classDescription.ClassPropertyAttribute.PageType == ViewPageType.Edit)
             {
@@ -72,9 +74,11 @@ namespace Alabo.Framework.Core.WebUis.Services
             var data = Activator.CreateInstance(type);
             // 如果包含Id的字段
             var idField = type.GetProperty("Id");
-            if (idField != null)
-                if (id.IsGuidNullOrEmpty())
+            if (idField != null) {
+                if (id.IsGuidNullOrEmpty()) {
                     return data;
+                }
+            }
             // 重构注释
             //var config = Resolve<IAlaboAutoConfigService>().GetConfig(type.FullName);
             //if (config == null) {

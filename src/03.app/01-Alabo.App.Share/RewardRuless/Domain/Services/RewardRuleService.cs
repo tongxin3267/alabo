@@ -32,9 +32,10 @@ namespace Alabo.App.Share.RewardRuless.Domain.Services
         public Tuple<ServiceResult, RewardEditSimpleView> GetEditSimpleView(Guid moduleId)
         {
             var taskModuleAttribute = Resolve<ITaskQueueService>().GetTaskModuleAttribute(moduleId);
-            if (taskModuleAttribute == null)
+            if (taskModuleAttribute == null) {
                 return new Tuple<ServiceResult, RewardEditSimpleView>(
                     ServiceResult.FailedWithMessage("类型不存在，请确定Id是否输入正确"), null);
+            }
 
             var view = new RewardEditSimpleView
             {
@@ -62,11 +63,13 @@ namespace Alabo.App.Share.RewardRuless.Domain.Services
             var taskModuleAttributeList = new List<TaskModuleAttribute>();
             if (!key.IsNullOrEmpty())
             {
-                foreach (var item in moduleAttributeArray)
+                foreach (var item in moduleAttributeArray) {
                     if (item.Name.Contains(key, StringComparison.OrdinalIgnoreCase)
                         || item.Id.ToString().Contains(key, StringComparison.OrdinalIgnoreCase)
-                        || item.Intro.Contains(key, StringComparison.OrdinalIgnoreCase))
+                        || item.Intro.Contains(key, StringComparison.OrdinalIgnoreCase)) {
                         taskModuleAttributeList.Add(item);
+                    }
+                }
 
                 result.ShareModules = taskModuleAttributeList;
             }
@@ -79,9 +82,10 @@ namespace Alabo.App.Share.RewardRuless.Domain.Services
             #region 安全验证
 
             var taskModuleAttribute = Resolve<ITaskQueueService>().GetTaskModuleAttribute(moduleId);
-            if (taskModuleAttribute == null)
+            if (taskModuleAttribute == null) {
                 return new Tuple<ServiceResult, RewardRuleOutput>(ServiceResult.FailedWithMessage("类型不存在，请确定Id是否输入正确"),
                     null);
+            }
 
             #endregion 安全验证
 
@@ -126,7 +130,9 @@ namespace Alabo.App.Share.RewardRuless.Domain.Services
         public Type ModuleType(Guid moduleId)
         {
             var taskModuleAttribute = Resolve<ITaskQueueService>().GetTaskModuleAttribute(moduleId);
-            if (taskModuleAttribute == null) return null;
+            if (taskModuleAttribute == null) {
+                return null;
+            }
 
             return taskModuleAttribute.ConfigurationType;
         }
@@ -134,7 +140,9 @@ namespace Alabo.App.Share.RewardRuless.Domain.Services
         public AutoForm GetAutoForm(Guid moduleId)
         {
             var taskModuleAttribute = Resolve<ITaskQueueService>().GetTaskModuleAttribute(moduleId);
-            if (taskModuleAttribute == null) return null;
+            if (taskModuleAttribute == null) {
+                return null;
+            }
 
             var autoForm = AutoFormMapping.Convert(taskModuleAttribute.ConfigurationType.FullName);
             return autoForm;

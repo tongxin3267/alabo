@@ -77,7 +77,9 @@ namespace Alabo.Cloud.People.UserQrCode.Domain.Services
             for (var i = 0; i < maxUserId + 1; i++)
             {
                 var user = Ioc.Resolve<IUserService>().GetUserDetail(i);
-                if (user != null) CreateCode(user);
+                if (user != null) {
+                    CreateCode(user);
+                }
             }
         }
 
@@ -90,7 +92,9 @@ namespace Alabo.Cloud.People.UserQrCode.Domain.Services
             var path = $"/wwwroot/qrcode/{userId}.jpeg";
             var qrcodePath = FileHelper.RootPath + path;
 
-            if (File.Exists(qrcodePath)) return Resolve<IApiService>().ApiImageUrl(path);
+            if (File.Exists(qrcodePath)) {
+                return Resolve<IApiService>().ApiImageUrl(path);
+            }
 
             var user = Resolve<IUserService>().GetSingle(userId);
             CreateCode(user); // 如果不存在则继续生成二维码
@@ -110,13 +114,16 @@ namespace Alabo.Cloud.People.UserQrCode.Domain.Services
             var qrConfig = Resolve<IAutoConfigService>().GetValue<QrCodeConfig>();
             if (qrConfig != null)
             {
-                if (qrConfig.BgPicture.IsNullOrEmpty())
+                if (qrConfig.BgPicture.IsNullOrEmpty()) {
                     qrConfig.BgPicture = "/wwwroot/assets/mobile/images/qrcode/01.png";
+                }
 
                 qrConfig.BgPicture.Replace('/', '\\');
             }
 
-            if (qrConfig.QrCodeBig <= 50) qrConfig.QrCodeBig = 300;
+            if (qrConfig.QrCodeBig <= 50) {
+                qrConfig.QrCodeBig = 300;
+            }
 
             var webSite = Resolve<IAutoConfigService>().GetValue<WebSiteConfig>();
             //二维码网址
@@ -125,7 +132,9 @@ namespace Alabo.Cloud.People.UserQrCode.Domain.Services
             // from页面根据二维码设置，完成两种客户需求：1.跳转需求，2 展示具体的内容，比如公司介绍等等
             //var url = $@"{webSite.DomainName}/user/reg?ParentUserName={user.UserName}";
             var url = $@"{webSite.DomainName}/pages/index?path=user_reg&usercode={user.UserName}";
-            if (!url.Contains("http://") || !url.Contains("https://")) url = $"https://{url}";
+            if (!url.Contains("http://") || !url.Contains("https://")) {
+                url = $"https://{url}";
+            }
 
             try
             {
@@ -147,8 +156,9 @@ namespace Alabo.Cloud.People.UserQrCode.Domain.Services
                 {
                     var avatorPath = RuntimeContext.Current.Path.RootPath +
                                      Resolve<IApiService>().ApiUserAvator(user.Id);
-                    if (!File.Exists(avatorPath))
+                    if (!File.Exists(avatorPath)) {
                         avatorPath = RuntimeContext.Current.Path.WebRootPath + @"\static\images\avator\Man_48.png";
+                    }
 
                     var avatorWidth = 150;
                     var avator = new Bitmap(Image.FromFile(avatorPath), avatorWidth, avatorWidth);
@@ -162,7 +172,9 @@ namespace Alabo.Cloud.People.UserQrCode.Domain.Services
                     //获取等级
                     var grade = Resolve<IGradeService>().GetGrade(user.GradeId);
                     var gradeName = string.Empty;
-                    if (grade != null) gradeName = grade.Name;
+                    if (grade != null) {
+                        gradeName = grade.Name;
+                    }
 
                     // gradeName = "匠心" + gradeName;
                     length = g.MeasureString(gradeName, font);

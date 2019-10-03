@@ -39,7 +39,9 @@ namespace Alabo.Domains.Entities.Core
         /// <param name="handler">验证处理器</param>
         public void SetValidationHandler(IValidationHandler handler)
         {
-            if (handler == null) return;
+            if (handler == null) {
+                return;
+            }
 
             _handler = handler;
         }
@@ -54,9 +56,13 @@ namespace Alabo.Domains.Entities.Core
         /// <param name="rules">验证规则列表</param>
         public void AddValidationRules(IEnumerable<IValidationRule> rules)
         {
-            if (rules == null) return;
+            if (rules == null) {
+                return;
+            }
 
-            foreach (var rule in rules) AddValidationRule(rule);
+            foreach (var rule in rules) {
+                AddValidationRule(rule);
+            }
         }
 
         #endregion AddValidationRules(添加验证规则列表)
@@ -69,7 +75,9 @@ namespace Alabo.Domains.Entities.Core
         /// <param name="rule">验证规则</param>
         public void AddValidationRule(IValidationRule rule)
         {
-            if (rule == null) return;
+            if (rule == null) {
+                return;
+            }
 
             _rules.Add(rule);
         }
@@ -133,7 +141,9 @@ namespace Alabo.Domains.Entities.Core
         {
             var result = DataAnnotationValidation.Validate(this);
             Validate(result);
-            foreach (var rule in _rules) result.Add(rule.Validate());
+            foreach (var rule in _rules) {
+                result.Add(rule.Validate());
+            }
 
             return result;
         }
@@ -151,7 +161,9 @@ namespace Alabo.Domains.Entities.Core
         /// </summary>
         private void HandleValidationResults(ValidationResultCollection results)
         {
-            if (results.IsValid) return;
+            if (results.IsValid) {
+                return;
+            }
 
             _handler.Handle(results);
         }
@@ -167,7 +179,9 @@ namespace Alabo.Domains.Entities.Core
         public ChangeValueCollection GetChanges(T newEntity)
         {
             _changeValues = new ChangeValueCollection();
-            if (Equals(newEntity, null)) return _changeValues;
+            if (Equals(newEntity, null)) {
+                return _changeValues;
+            }
 
             AddChanges(newEntity);
             return _changeValues;
@@ -204,11 +218,15 @@ namespace Alabo.Domains.Entities.Core
         /// <param name="newValue">新值,范例：newEntity.Name</param>
         protected void AddChange<TValue>(string propertyName, string description, TValue oldValue, TValue newValue)
         {
-            if (Equals(oldValue, newValue)) return;
+            if (Equals(oldValue, newValue)) {
+                return;
+            }
 
             var oldValueString = oldValue.SafeString().ToLower().Trim();
             var newValueString = newValue.SafeString().ToLower().Trim();
-            if (oldValueString == newValueString) return;
+            if (oldValueString == newValueString) {
+                return;
+            }
 
             _changeValues.Add(propertyName, description, oldValueString, newValueString);
         }
@@ -221,9 +239,13 @@ namespace Alabo.Domains.Entities.Core
         protected void AddChange<TDomainObject>(ICompareChange<TDomainObject> oldObject, TDomainObject newObject)
             where TDomainObject : IDomainObject
         {
-            if (Equals(oldObject, null)) return;
+            if (Equals(oldObject, null)) {
+                return;
+            }
 
-            if (Equals(newObject, null)) return;
+            if (Equals(newObject, null)) {
+                return;
+            }
 
             _changeValues.AddRange(oldObject.GetChanges(newObject));
         }
@@ -236,15 +258,21 @@ namespace Alabo.Domains.Entities.Core
         protected void AddChange<TDomainObject>(IEnumerable<ICompareChange<TDomainObject>> oldObjects,
             IEnumerable<TDomainObject> newObjects) where TDomainObject : IDomainObject
         {
-            if (Equals(oldObjects, null)) return;
+            if (Equals(oldObjects, null)) {
+                return;
+            }
 
-            if (Equals(newObjects, null)) return;
+            if (Equals(newObjects, null)) {
+                return;
+            }
 
             var oldList = oldObjects.ToList();
             var newList = newObjects.ToList();
             for (var i = 0; i < oldList.Count; i++)
             {
-                if (newList.Count <= i) return;
+                if (newList.Count <= i) {
+                    return;
+                }
 
                 AddChange(oldList[i], newList[i]);
             }
@@ -266,7 +294,9 @@ namespace Alabo.Domains.Entities.Core
         /// </summary>
         protected void AddDescription(string description)
         {
-            if (string.IsNullOrWhiteSpace(description)) return;
+            if (string.IsNullOrWhiteSpace(description)) {
+                return;
+            }
 
             _description.Append(description);
         }
@@ -276,7 +306,9 @@ namespace Alabo.Domains.Entities.Core
         /// </summary>
         protected void AddDescription<TValue>(string name, TValue value)
         {
-            if (string.IsNullOrWhiteSpace(value.SafeString())) return;
+            if (string.IsNullOrWhiteSpace(value.SafeString())) {
+                return;
+            }
 
             _description.AppendFormat("{0}:{1},", name, value);
         }
@@ -290,7 +322,9 @@ namespace Alabo.Domains.Entities.Core
             var member = Lambda.GetMember(expression);
             var description = Reflection.GetDisplayNameOrDescription(member);
             var value = member.GetPropertyValue(this);
-            if (Reflection.IsBool(member)) value = Convert.ToBool(value).Description();
+            if (Reflection.IsBool(member)) {
+                value = Convert.ToBool(value).Description();
+            }
 
             AddDescription(description, value);
         }

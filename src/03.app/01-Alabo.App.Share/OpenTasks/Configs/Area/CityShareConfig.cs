@@ -54,8 +54,9 @@ namespace Alabo.App.Share.OpenTasks.Configs.Area
         public override ExecuteResult<ITaskResult[]> Execute(TaskParameter parameter)
         {
             var baseResult = base.Execute(parameter);
-            if (baseResult.Status != ResultStatus.Success)
+            if (baseResult.Status != ResultStatus.Success) {
                 return ExecuteResult<ITaskResult[]>.Cancel(baseResult.Message);
+            }
             //TODO 2019年9月24日 城市代理商分润
             //// 如果触发方式是订单类型，用户触发和其他触发后续支出
             //long? cityRegionId = 0; // 城市区域代理Id

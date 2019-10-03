@@ -50,12 +50,15 @@ namespace Alabo.App.Asset.Pays.Controllers
         [ApiAuth]
         public ApiResult<PayTypeOutput> GetList([FromQuery] ClientInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<PayTypeOutput>(this.FormInvalidReason(),
                     MessageCodes.ParameterValidationFailure);
+            }
 
             var result = Resolve<IPayService>().GetPayType(parameter);
-            if (result.Item1.Succeeded) return ApiResult.Success(result.Item2);
+            if (result.Item1.Succeeded) {
+                return ApiResult.Success(result.Item2);
+            }
 
             return ApiResult.Failure<PayTypeOutput>(result.Item1.ToString());
         }
@@ -70,12 +73,15 @@ namespace Alabo.App.Asset.Pays.Controllers
         [ApiAuth]
         public ApiResult<PayOutput> Pay([FromBody] PayInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<PayOutput>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
             //Resolve<IPayService>().Log($"支付参数:{parameter.ToJson()}");
             var result = Resolve<IPayService>().Pay(parameter, HttpContext);
             Resolve<IPayService>().Log($"支付返回结果:{result.Item2.ToJson()}");
-            if (result.Item1.Succeeded) return ApiResult.Success(result.Item2);
+            if (result.Item1.Succeeded) {
+                return ApiResult.Success(result.Item2);
+            }
 
             return ApiResult.Failure<PayOutput>(result.Item1.ToString(), MessageCodes.ServiceFailure);
         }
@@ -88,7 +94,9 @@ namespace Alabo.App.Asset.Pays.Controllers
             //Resolve<IPayService>().Log($"支付参数:{parameter.ToJson()}");
             var result = Resolve<IPayService>().Pay(parameter, HttpContext);
             Resolve<IPayService>().Log($"支付返回结果:{result.Item2.ToJson()}");
-            if (result.Item1.Succeeded) return ApiResult.Success(result.Item2);
+            if (result.Item1.Succeeded) {
+                return ApiResult.Success(result.Item2);
+            }
 
             return ApiResult.Failure<PayOutput>(result.Item1.ToString(), MessageCodes.ServiceFailure);
         }
@@ -110,7 +118,10 @@ namespace Alabo.App.Asset.Pays.Controllers
             var serviceUrl = HttpWeb.ServiceHost;
 
             var result = Resolve<IPayService>().WechatAppPayment(ref pay, url, serviceUrl); //(parameter, HttpContext);
-            if (result.Item1.Succeeded) return ApiResult.Success(result.Item2);
+            if (result.Item1.Succeeded) {
+                return ApiResult.Success(result.Item2);
+            }
+
             return ApiResult.Failure<PayOutput>(result.Item1.ToString(), MessageCodes.ServiceFailure);
         }
 
@@ -158,7 +169,9 @@ namespace Alabo.App.Asset.Pays.Controllers
             var result = Resolve<IPayService>().GetSingle(r => r.Id == id);
             if (result != null)
             {
-                if (result.UserId != loginUserId) return ApiResult.Failure<PayPrivew>("对不起，您无权查看他人提现详情");
+                if (result.UserId != loginUserId) {
+                    return ApiResult.Failure<PayPrivew>("对不起，您无权查看他人提现详情");
+                }
 
                 var payprivew = AutoMapping.SetValue<PayPrivew>(result);
                 return ApiResult.Success(payprivew);

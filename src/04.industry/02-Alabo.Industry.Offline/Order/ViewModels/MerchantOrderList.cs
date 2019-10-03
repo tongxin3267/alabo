@@ -61,7 +61,10 @@ namespace Alabo.Industry.Offline.Order.ViewModels
             get
             {
                 var searSerial = $"9{Id.ToString().PadLeft(9, '0')}";
-                if (Id.ToString().Length == 10) searSerial = $"{Id.ToString()}";
+                if (Id.ToString().Length == 10) {
+                    searSerial = $"{Id.ToString()}";
+                }
+
                 return searSerial;
             }
         }
@@ -158,11 +161,13 @@ namespace Alabo.Industry.Offline.Order.ViewModels
             foreach (var item in pageList.Result)
             {
                 var intro = new StringBuilder();
-                if (item.Products?.Count > 0)
+                if (item.Products?.Count > 0) {
                     item.Products.ForEach(product =>
                     {
                         intro.AppendLine($"{product.ProductName}-{product.SkuName}x{product.Count}");
                     });
+                }
+
                 var apiData = new AutoListItem
                 {
                     Id = item.Id,
@@ -205,7 +210,9 @@ namespace Alabo.Industry.Offline.Order.ViewModels
             //express
             var model = ToQuery<MerchantOrderList>();
             var expressionQuery = new ExpressionQuery<MerchantOrder>();
-            if (model.MerchantOrderStatus > 0) expressionQuery.And(e => e.OrderStatus == model.MerchantOrderStatus);
+            if (model.MerchantOrderStatus > 0) {
+                expressionQuery.And(e => e.OrderStatus == model.MerchantOrderStatus);
+            }
             //all stores
             var merchantStores = Resolve<IMerchantStoreService>().GetList().ToList();
 
@@ -217,13 +224,19 @@ namespace Alabo.Industry.Offline.Order.ViewModels
             orders.ForEach(item =>
             {
                 var store = merchantStores.Find(s => s.Id == item.MerchantStoreId.ToObjectId());
-                if (store == null) return;
+                if (store == null) {
+                    return;
+                }
+
                 var extension = item.Extension.DeserializeJson<MerchantOrderExtension>();
                 var temp = new MerchantOrderList();
                 temp = AutoMapping.SetValue(item, temp);
                 //user
                 var user = Resolve<IUserService>().GetSingle(item.UserId);
-                if (user != null) temp.BuyUser = AutoMapping.SetValue<UserOutput>(user);
+                if (user != null) {
+                    temp.BuyUser = AutoMapping.SetValue<UserOutput>(user);
+                }
+
                 temp.MerchantOrderStatus = item.OrderStatus;
                 temp.MerchantStoreName = store.Name;
                 temp.ThumbnailUrl = apiService.ApiImageUrl(store.Logo);

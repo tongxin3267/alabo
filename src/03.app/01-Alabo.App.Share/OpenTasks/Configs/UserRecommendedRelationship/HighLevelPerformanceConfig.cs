@@ -59,37 +59,50 @@ namespace Alabo.App.Share.OpenTasks.Configs.UserRecommendedRelationship
         public override ExecuteResult<ITaskResult[]> Execute(TaskParameter parameter)
         {
             var baseResult = base.Execute(parameter);
-            if (baseResult.Status != ResultStatus.Success)
+            if (baseResult.Status != ResultStatus.Success) {
                 return ExecuteResult<ITaskResult[]>.Cancel("基础验证未通过" + baseResult.Message);
+            }
 
             var userMap = Resolve<IUserMapService>().GetParentMapFromCache(ShareOrderUser.Id);
             var map = userMap.ParentMap.DeserializeJson<List<ParentMap>>();
-            if (map == null) return ExecuteResult<ITaskResult[]>.Cancel("未找到触发会员的Parent Map.");
+            if (map == null) {
+                return ExecuteResult<ITaskResult[]>.Cancel("未找到触发会员的Parent Map.");
+            }
 
             var parentUserIds = map.OrderBy(r => r.ParentLevel).Select(r => r.UserId).ToList();
-            if (Configuration.IsAllowUserSelf) parentUserIds = parentUserIds.AddBefore(ShareOrderUser.Id).ToList();
-            if (Configuration.UserGradeId.IsGuidNullOrEmpty()) return ExecuteResult<ITaskResult[]>.Cancel("会员等级设置错误");
+            if (Configuration.IsAllowUserSelf) {
+                parentUserIds = parentUserIds.AddBefore(ShareOrderUser.Id).ToList();
+            }
+
+            if (Configuration.UserGradeId.IsGuidNullOrEmpty()) {
+                return ExecuteResult<ITaskResult[]>.Cancel("会员等级设置错误");
+            }
 
             var allUserGradeIds = Resolve<IGradeService>().GetUserGradeList().Select(r => r.Id);
 
             var allGrades = Resolve<IGradeService>().GetUserGradeList();
             var configGrade = allGrades.FirstOrDefault(r => r.Id == Configuration.UserGradeId);
-            if (configGrade == null) return ExecuteResult<ITaskResult[]>.Cancel("会员等级不存在，不是有效的会员等级");
+            if (configGrade == null) {
+                return ExecuteResult<ITaskResult[]>.Cancel("会员等级不存在，不是有效的会员等级");
+            }
 
             allGrades = allGrades.Where(r => r.Contribute >= configGrade.Contribute).ToList(); // 获取高等级的
 
             var shareUsersList = Resolve<IUserService>().GetList(parentUserIds).ToList();
-            if (!shareUsersList.Any()) return ExecuteResult<ITaskResult[]>.Cancel("符合条件的会员不存在");
+            if (!shareUsersList.Any()) {
+                return ExecuteResult<ITaskResult[]>.Cancel("符合条件的会员不存在");
+            }
 
             var shareUsersListIds = shareUsersList.Select(r => r.Id).ToList();
             var allGradeIds = allGrades.Select(r => r.Id).ToList();
 
             IList<ITaskResult> resultList = new List<ITaskResult>();
-            foreach (var parentId in parentUserIds)
+            foreach (var parentId in parentUserIds) {
                 if (shareUsersListIds.Contains(parentId))
                 {
                     base.GetShareUser(parentId, out var shareUser); //从基类获取分润用户
                     if (shareUser != null) // 符合等级条件
+{
                         if (allGradeIds.Contains(shareUser.GradeId))
                         {
                             var shareAmount = BaseFenRunAmount * Ratios[0].ToDecimal(); //绩效奖励
@@ -97,7 +110,9 @@ namespace Alabo.App.Share.OpenTasks.Configs.UserRecommendedRelationship
                                 resultList);
                             break;
                         }
+                    }
                 }
+            }
 
             return ExecuteResult<ITaskResult[]>.Success(resultList.ToArray());
         }

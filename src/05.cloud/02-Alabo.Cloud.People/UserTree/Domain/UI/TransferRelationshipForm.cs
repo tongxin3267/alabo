@@ -67,22 +67,34 @@ namespace Alabo.Cloud.People.UserTree.Domain.UI
         public ServiceResult Save(object model, AutoBaseModel autoModel)
         {
             var view = model.MapTo<TransferRelationshipForm>();
-            if (autoModel != null) view.UserId = autoModel.BasicUser.Id;
+            if (autoModel != null) {
+                view.UserId = autoModel.BasicUser.Id;
+            }
+
             var user = Resolve<IUserService>().GetSingle(r => r.UserName == view.UserName);
-            if (user == null) return ServiceResult.FailedWithMessage("用户名不存在");
+            if (user == null) {
+                return ServiceResult.FailedWithMessage("用户名不存在");
+            }
 
             var parentUser = Resolve<IUserService>().GetSingle(view.ParentUserName);
-            if (parentUser == null) return ServiceResult.FailedWithMessage("推荐人不存在");
+            if (parentUser == null) {
+                return ServiceResult.FailedWithMessage("推荐人不存在");
+            }
 
-            if (parentUser.Status != Status.Normal) return ServiceResult.FailedWithMessage("推荐人状态不正常");
+            if (parentUser.Status != Status.Normal) {
+                return ServiceResult.FailedWithMessage("推荐人状态不正常");
+            }
 
             var currentUserPay = Resolve<IUserDetailService>().GetSingle(r => r.Id == view.UserId);
-            if (view.PayPassword.ToMd5HashString() != currentUserPay.PayPassword)
+            if (view.PayPassword.ToMd5HashString() != currentUserPay.PayPassword) {
                 return ServiceResult.FailedWithMessage("支付密码错误！");
+            }
 
             var result = UpdateParentUserAfterUserDelete(user.Id, parentUser.Id);
 
-            if (!result.Succeeded) return ServiceResult.FailedWithMessage("推荐人修改失败");
+            if (!result.Succeeded) {
+                return ServiceResult.FailedWithMessage("推荐人修改失败");
+            }
 
             return ServiceResult.Success;
         }
@@ -91,15 +103,18 @@ namespace Alabo.Cloud.People.UserTree.Domain.UI
         {
             var userTreeConfig = Resolve<IAutoConfigService>().GetValue<UserTreeConfig>();
             // 不修改
-            if (!userTreeConfig.AfterDeleteUserUpdateParentMap) return ServiceResult.Success;
+            if (!userTreeConfig.AfterDeleteUserUpdateParentMap) {
+                return ServiceResult.Success;
+            }
 
             //var user = Resolve<IUserService>().GetSingle(r => r.Id == userId);
             //if (user != null) {
             //    return ServiceResult.FailedWithMessage("该用户没有物理删除会员");
             //}
             var parentUser = Resolve<IUserService>().GetSingle(r => r.Id == parentId);
-            if (parentUser == null || parentUser.Status != Status.Normal)
+            if (parentUser == null || parentUser.Status != Status.Normal) {
                 return ServiceResult.FailedWithMessage("用户已删除,其推荐人不存在或状态不正常");
+            }
 
             var childUsers = Resolve<IUserService>().GetList(r => r.ParentId == userId);
             var childUserIds = childUsers.Select(r => r.Id).ToList();

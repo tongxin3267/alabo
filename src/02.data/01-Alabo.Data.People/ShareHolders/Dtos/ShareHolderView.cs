@@ -38,7 +38,9 @@ namespace Alabo.Data.People.ShareHolders.Dtos
         {
             var str = id.ToString();
             var model = Resolve<IShareHolderService>().GetSingle(u => u.Id == str.ToObjectId());
-            if (model != null) return ToAutoForm(model);
+            if (model != null) {
+                return ToAutoForm(model);
+            }
 
             return ToAutoForm(new ShareHolder());
         }
@@ -49,17 +51,23 @@ namespace Alabo.Data.People.ShareHolders.Dtos
             var user = Resolve<IUserService>().GetSingle(u => u.UserName == shareHolderView.UserName);
 
             var view = shareHolderView.MapTo<ShareHolder>();
-            if (user == null) return ServiceResult.FailedWithMessage("所属用户名不存在");
+            if (user == null) {
+                return ServiceResult.FailedWithMessage("所属用户名不存在");
+            }
 
             var shareHolder = Resolve<IShareHolderService>().GetSingle(u => u.UserName == view.UserName);
-            if (shareHolder != null && shareHolderView.Id.IsNullOrEmpty())
+            if (shareHolder != null && shareHolderView.Id.IsNullOrEmpty()) {
                 return ServiceResult.FailedWithMessage("该用户已是股东了");
+            }
 
             view.Id = shareHolderView.Id.ToObjectId();
             view.UserId = user.Id;
             var result = Resolve<IShareHolderService>().AddOrUpdate(view);
 
-            if (result) return ServiceResult.Success;
+            if (result) {
+                return ServiceResult.Success;
+            }
+
             return ServiceResult.FailedWithMessage("操作失败，请重试");
         }
     }

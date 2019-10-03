@@ -60,7 +60,9 @@ namespace Alabo.Cloud.Cms.BookDonae.Domain.Services
                         ClassId = findClass.Id
                     };
                     var find = findBooks.FirstOrDefault(r => r.Name == view.Name);
-                    if (find == null) bookList.Add(view);
+                    if (find == null) {
+                        bookList.Add(view);
+                    }
                 }
 
                 Resolve<IBookDonaeInfoService>().AddMany(bookList);

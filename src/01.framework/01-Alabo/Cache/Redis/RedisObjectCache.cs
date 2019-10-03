@@ -48,10 +48,14 @@ namespace Alabo.Cache.Redis
         /// <param name="key">The key.</param>
         public T Get<T>(string key)
         {
-            if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+            if (string.IsNullOrWhiteSpace(key)) {
+                throw new ArgumentNullException(nameof(key));
+            }
 
             var stringValue = _redisDatabase.StringGet(key);
-            if (!stringValue.HasValue) return default;
+            if (!stringValue.HasValue) {
+                return default;
+            }
 
             return JsonConvert.DeserializeObject<T>(stringValue);
         }
@@ -63,7 +67,9 @@ namespace Alabo.Cache.Redis
         /// <param name="value">The value.</param>
         public bool TryGet<T>(string key, out T value)
         {
-            if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+            if (string.IsNullOrWhiteSpace(key)) {
+                throw new ArgumentNullException(nameof(key));
+            }
 
             var stringValue = _redisDatabase.StringGet(key);
             if (!stringValue.HasValue)
@@ -90,7 +96,9 @@ namespace Alabo.Cache.Redis
         /// <param name="key">The key.</param>
         public void Remove(string key)
         {
-            if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+            if (string.IsNullOrWhiteSpace(key)) {
+                throw new ArgumentNullException(nameof(key));
+            }
 
             _redisDatabase.KeyDelete(key);
         }
@@ -102,9 +110,13 @@ namespace Alabo.Cache.Redis
         /// <param name="value">The value.</param>
         public void Set(string key, object value)
         {
-            if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+            if (string.IsNullOrWhiteSpace(key)) {
+                throw new ArgumentNullException(nameof(key));
+            }
 
-            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null) {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             _redisDatabase.StringSet(key, value.ToJson());
         }
@@ -116,9 +128,13 @@ namespace Alabo.Cache.Redis
         /// <param name="value">The value.</param>
         public void Set<T>(string key, T value)
         {
-            if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+            if (string.IsNullOrWhiteSpace(key)) {
+                throw new ArgumentNullException(nameof(key));
+            }
 
-            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null) {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             _redisDatabase.StringSet(key, value.ToJson(typeof(T)));
         }
@@ -131,9 +147,13 @@ namespace Alabo.Cache.Redis
         /// <param name="expire">The expire.</param>
         public void Set<T>(string key, T value, TimeSpan expire)
         {
-            if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+            if (string.IsNullOrWhiteSpace(key)) {
+                throw new ArgumentNullException(nameof(key));
+            }
 
-            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null) {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             _redisDatabase.StringSet(key, value.ToJson(typeof(T)), expire);
         }
@@ -165,7 +185,9 @@ namespace Alabo.Cache.Redis
             //ArgumentCheck.NotNegativeOrZero(expiration, nameof(expiration));
 
             TryGet(HandleCacheKey(cacheKey), out T result);
-            if (result != null) return new CacheValue<T>(result, true);
+            if (result != null) {
+                return new CacheValue<T>(result, true);
+            }
 
             var item = dataRetriever?.Invoke();
             if (item != null)
@@ -183,7 +205,9 @@ namespace Alabo.Cache.Redis
         /// <param name="key">The key.</param>
         public object Get(string key)
         {
-            if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+            if (string.IsNullOrWhiteSpace(key)) {
+                throw new ArgumentNullException(nameof(key));
+            }
 
             string result = _redisDatabase.StringGet(key);
             return result;
@@ -197,9 +221,13 @@ namespace Alabo.Cache.Redis
         /// <param name="expire">The expire.</param>
         public void Set(string key, object value, TimeSpan expire)
         {
-            if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+            if (string.IsNullOrWhiteSpace(key)) {
+                throw new ArgumentNullException(nameof(key));
+            }
 
-            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null) {
+                throw new ArgumentNullException(nameof(value));
+            }
 
             _redisDatabase.StringSet(key, JsonConvert.SerializeObject(value), expire);
         }
@@ -212,9 +240,13 @@ namespace Alabo.Cache.Redis
         /// <param name="hashValue">The hash value.</param>
         public void Set<TKey, TValue>(string key, TKey hashKey, TValue hashValue)
         {
-            if (hashKey == null) throw new ArgumentNullException(nameof(hashKey));
+            if (hashKey == null) {
+                throw new ArgumentNullException(nameof(hashKey));
+            }
 
-            if (hashValue == null) throw new ArgumentNullException(nameof(hashValue));
+            if (hashValue == null) {
+                throw new ArgumentNullException(nameof(hashValue));
+            }
 
             var redisHashKey = GetHashKey(hashKey);
             _redisDatabase.HashSet(key, redisHashKey, JsonConvert.SerializeObject(hashValue));
@@ -228,7 +260,9 @@ namespace Alabo.Cache.Redis
         /// <param name="value">The value.</param>
         public bool TryGet<T, TKey>(string key, TKey hashKey, out T value)
         {
-            if (hashKey == null) throw new ArgumentNullException(nameof(hashKey));
+            if (hashKey == null) {
+                throw new ArgumentNullException(nameof(hashKey));
+            }
 
             var redisHashKey = GetHashKey(hashKey);
             var result = _redisDatabase.HashGet(key, redisHashKey);
@@ -257,7 +291,9 @@ namespace Alabo.Cache.Redis
         {
             // ArgumentCheck.NotNullOrWhiteSpace(cacheKey, nameof(cacheKey));
             TryGet(HandleCacheKey(cacheKey), out T result);
-            if (result != null) return new CacheValue<T>(result, true);
+            if (result != null) {
+                return new CacheValue<T>(result, true);
+            }
 
             var item = await dataRetriever?.Invoke();
             if (item != null)
@@ -277,10 +313,11 @@ namespace Alabo.Cache.Redis
         {
             RedisValue redisHashKey;
             var keyConvertor = HashKeyCache<TKey>.KeyConvertor;
-            if (keyConvertor == null)
+            if (keyConvertor == null) {
                 redisHashKey = hashKey.GetHashCode();
-            else
+            } else {
                 redisHashKey = keyConvertor(hashKey);
+            }
 
             return redisHashKey;
         }
@@ -289,12 +326,13 @@ namespace Alabo.Cache.Redis
         {
             // Memcached has a 250 character limit
             // Following memcached.h in https://github.com/memcached/memcached/
-            if (cacheKey.Length >= 250)
+            if (cacheKey.Length >= 250) {
                 using (var sha1 = SHA1.Create())
                 {
                     var data = sha1.ComputeHash(Encoding.UTF8.GetBytes(cacheKey));
                     return Convert.ToBase64String(data, Base64FormattingOptions.None);
                 }
+            }
 
             return cacheKey;
         }

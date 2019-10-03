@@ -23,9 +23,13 @@ namespace Alabo.Runtime
         public static IServiceCollection AddRuntimeConfiguration(this IServiceCollection services,
             IConfiguration configuration)
         {
-            if (services == null) throw new ArgumentNullException(nameof(services));
+            if (services == null) {
+                throw new ArgumentNullException(nameof(services));
+            }
 
-            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+            if (configuration == null) {
+                throw new ArgumentNullException(nameof(configuration));
+            }
 
             services.AddSingleton(configuration);
             services.AddSingleton<RuntimeContext>();

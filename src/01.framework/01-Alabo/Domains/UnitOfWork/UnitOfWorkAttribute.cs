@@ -24,10 +24,14 @@ namespace Alabo.Domains.UnitOfWork
         {
             await next(context);
             var manager = context.ServiceProvider.GetService<IUnitOfWorkManager>();
-            if (manager == null) return;
+            if (manager == null) {
+                return;
+            }
 
             await manager.CommitAsync();
-            if (context.Implementation is ICommitAfter service) service.CommitAfter();
+            if (context.Implementation is ICommitAfter service) {
+                service.CommitAfter();
+            }
         }
     }
 }

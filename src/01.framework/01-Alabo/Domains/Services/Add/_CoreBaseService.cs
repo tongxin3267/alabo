@@ -49,7 +49,9 @@ namespace Alabo.Domains.Services.Add
         {
             get
             {
-                if (typeof(TEntity).BaseType.Name.Contains("Mongo")) return TableType.Mongodb;
+                if (typeof(TEntity).BaseType.Name.Contains("Mongo")) {
+                    return TableType.Mongodb;
+                }
 
                 return TableType.SqlServer;
             }
@@ -89,7 +91,9 @@ namespace Alabo.Domains.Services.Add
         protected IEnumerable<TDto> ToDto<TDto>(IEnumerable<TEntity> entities)
             where TDto : IResponse, new()
         {
-            if (entities == null) return null;
+            if (entities == null) {
+                return null;
+            }
 
             IList<TDto> resultList = new List<TDto>();
             entities.Foreach(r => { resultList.Add(ToDto<TDto>(r)); });
@@ -121,7 +125,7 @@ namespace Alabo.Domains.Services.Add
                     Level = level,
                     Type = typeof(TEntity).Name
                 };
-                if (HttpWeb.HttpContext != null)
+                if (HttpWeb.HttpContext != null) {
                     try
                     {
                         log.Url = HttpWeb.Url;
@@ -133,8 +137,11 @@ namespace Alabo.Domains.Services.Add
                     {
                         // ignored
                     }
+                }
 
-                if (log.Type != "Logs") Ioc.Resolve<ILogsService>().Add(log);
+                if (log.Type != "Logs") {
+                    Ioc.Resolve<ILogsService>().Add(log);
+                }
             }
         }
     }

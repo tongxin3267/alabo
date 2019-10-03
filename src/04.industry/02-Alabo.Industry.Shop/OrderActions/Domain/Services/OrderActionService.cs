@@ -57,14 +57,18 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
         {
             var orderEditPay = AutoMapping.SetValue<OrderEditPay>(httpContext);
             var user = Resolve<IUserService>().GetUserDetail(orderEditPay.UserId);
-            if (user.Detail.PayPassword != orderEditPay.PayPassword.ToMd5HashString())
+            if (user.Detail.PayPassword != orderEditPay.PayPassword.ToMd5HashString()) {
                 return ServiceResult.FailedWithMessage("支付密码不正确");
+            }
 
             var order = Resolve<IOrderService>().GetSingle(r => r.Id == orderEditPay.OrderId);
-            if (order == null) return ServiceResult.FailedWithMessage("订单不存在");
+            if (order == null) {
+                return ServiceResult.FailedWithMessage("订单不存在");
+            }
 
-            if (order.OrderStatus != OrderStatus.WaitingBuyerPay)
+            if (order.OrderStatus != OrderStatus.WaitingBuyerPay) {
                 return ServiceResult.FailedWithMessage("订单已付款或关闭，请刷新");
+            }
 
             IList<Order> orderList = new List<Order>
             {
@@ -88,14 +92,18 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
                 IsAdminPay = true
             };
             var payResult = Resolve<IOrderAdminService>().AddSinglePay(singlePayInput);
-            if (!payResult.Item1.Succeeded) return ServiceResult.FailedWithMessage(payResult.Item1.ToString());
+            if (!payResult.Item1.Succeeded) {
+                return ServiceResult.FailedWithMessage(payResult.Item1.ToString());
+            }
 
             var payInput = AutoMapping.SetValue<PayInput>(payResult.Item2);
             payInput.LoginUserId = user.Id;
             payInput.PayId = payResult.Item2.Id;
 
             var result = Resolve<IPayService>().Pay(payInput, httpContext);
-            if (!result.Item1.Succeeded) return ServiceResult.FailedWithMessage(result.ToString());
+            if (!result.Item1.Succeeded) {
+                return ServiceResult.FailedWithMessage(result.ToString());
+            }
 
             return ServiceResult.Success;
         }
@@ -110,10 +118,11 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
 
         public void AddOrUpdate(OrderAction model)
         {
-            if (model.Id > 0)
+            if (model.Id > 0) {
                 Repository<IOrderActionRepository>().UpdateSingle(model);
-            else
+            } else {
                 Repository<IOrderActionRepository>().AddSingle(model);
+            }
         }
 
         /// <summary>
@@ -222,14 +231,19 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
         public ServiceResult Delivery(OrderEditDelivery model)
         {
             var order = Resolve<IOrderService>().GetSingle(model.OrderId);
-            if (order == null) return ServiceResult.FailedWithMessage("订单不存在");
+            if (order == null) {
+                return ServiceResult.FailedWithMessage("订单不存在");
+            }
             // 发货数量
-            if (!model.DeliveryProducts.IsNullOrEmpty())
+            if (!model.DeliveryProducts.IsNullOrEmpty()) {
                 model.DeliveryProductSkus = model.DeliveryProducts.Deserialize<OrderEditDeliveryProduct>();
-            else
+            } else {
                 return ServiceResult.FailedWithMessage("发货数据异常，请重新操作！");
+            }
 
-            if (model.DeliveryProductSkus.Sum(e => e.Count) <= 0) return ServiceResult.FailedWithMessage("发货总数量不能为0");
+            if (model.DeliveryProductSkus.Sum(e => e.Count) <= 0) {
+                return ServiceResult.FailedWithMessage("发货总数量不能为0");
+            }
 
             var orderDelivery = new OrderDelivery
             {
@@ -255,8 +269,9 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
             IList<ProductDeliveryInfo> productDeliveryInfos = new List<ProductDeliveryInfo>();
             if (Deliverys.Count > 0)
             {
-                foreach (var item in Deliverys)
+                foreach (var item in Deliverys) {
                     productDeliveryInfos.AddRange(item.OrderDeliveryExtension.ProductDeliveryInfo);
+                }
                 // 已发货数量
                 var Records = from ProductDeliveryInfo p in productDeliveryInfos
                               group p by p.ProductSkuId
@@ -267,14 +282,19 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
                 {
                     var item = order.OrderExtension.ProductSkuItems.SingleOrDefault(e => e.ProductSkuId == sku.SkuId);
                     var record = Records.SingleOrDefault(e => e.skuId == sku.SkuId);
-                    if (record == null) record = new { skuId = sku.SkuId, Count = 0L };
+                    if (record == null) {
+                        record = new { skuId = sku.SkuId, Count = 0L };
+                    }
 
                     var productDeliveryInfo = AutoMapping.SetValue<ProductDeliveryInfo>(item);
                     productDeliveryInfo.Count = sku.Count;
-                    if (sku.Count + record.Count > item.BuyCount)
+                    if (sku.Count + record.Count > item.BuyCount) {
                         return ServiceResult.FailedWithMessage($"{item.Bn}{item.PropertyValueDesc}的发货数量不能超过购买数量");
+                    }
 
-                    if (sku.Count + record.Count != item.BuyCount) Judgement = false;
+                    if (sku.Count + record.Count != item.BuyCount) {
+                        Judgement = false;
+                    }
 
                     orderDelivery.OrderDeliveryExtension.ProductDeliveryInfo.Add(productDeliveryInfo);
                 }
@@ -286,20 +306,24 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
                     var item = order.OrderExtension.ProductSkuItems.SingleOrDefault(e => e.ProductSkuId == sku.SkuId);
                     var productDeliveryInfo = AutoMapping.SetValue<ProductDeliveryInfo>(item);
                     productDeliveryInfo.Count = sku.Count;
-                    if (sku.Count > item.BuyCount)
+                    if (sku.Count > item.BuyCount) {
                         return ServiceResult.FailedWithMessage($"{item.Bn}{item.PropertyValueDesc}的发货数量不能超过购买数量");
+                    }
 
-                    if (sku.Count != item.BuyCount) Judgement = false;
+                    if (sku.Count != item.BuyCount) {
+                        Judgement = false;
+                    }
 
                     orderDelivery.OrderDeliveryExtension.ProductDeliveryInfo.Add(productDeliveryInfo);
                 }
             }
 
             orderDelivery.Extension = ObjectExtension.ToJson(orderDelivery.OrderDeliveryExtension);
-            if (Judgement)
+            if (Judgement) {
                 order.OrderStatus = OrderStatus.WaitingReceiptProduct;
-            else
+            } else {
                 order.OrderStatus = OrderStatus.WaitingSellerSendGoods;
+            }
 
             var context = Repository<IOrderRepository>().RepositoryContext;
             context.BeginTransaction();
@@ -349,14 +373,20 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
             var orderId = httpContext.Request.Form["OrderId"].ConvertToLong();
             var order = Resolve<IOrderService>().GetSingle(r => r.Id == orderId);
 
-            if (order == null) return ServiceResult.FailedWithMessage("订单不存在");
+            if (order == null) {
+                return ServiceResult.FailedWithMessage("订单不存在");
+            }
 
-            if (order.OrderExtension.OrderRemark == null) order.OrderExtension.OrderRemark = new OrderRemark();
+            if (order.OrderExtension.OrderRemark == null) {
+                order.OrderExtension.OrderRemark = new OrderRemark();
+            }
 
             order.OrderExtension.OrderRemark.PlatplatformRemark = orderRemark.PlatplatformRemark;
             order.Extension = ObjectExtension.ToJson(order.OrderExtension);
             var result = Resolve<IOrderService>().Update(order);
-            if (result) return ServiceResult.Success;
+            if (result) {
+                return ServiceResult.Success;
+            }
 
             return ServiceResult.FailedWithMessage("失败");
         }
@@ -371,11 +401,14 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
             var payPassword = httpContext.Request.Form["PayPassword"].ToString();
             var UserId = httpContext.Request.Form["UserId"].ConvertToLong();
             var order = Resolve<IOrderService>().GetSingle(r => r.Id == orderId);
-            if (order == null) return ServiceResult.FailedWithMessage("订单不存在");
+            if (order == null) {
+                return ServiceResult.FailedWithMessage("订单不存在");
+            }
 
             var user = Resolve<IUserService>().GetUserDetail(UserId);
-            if (user.Detail.PayPassword != payPassword.ToMd5HashString())
+            if (user.Detail.PayPassword != payPassword.ToMd5HashString()) {
                 return ServiceResult.FailedWithMessage("支付密码不正确");
+            }
 
             var context = Repository<IOrderRepository>().RepositoryContext;
             context.BeginTransaction();
@@ -407,11 +440,14 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
         public ServiceResult Delete(OrderActionViewIn modelIn)
         {
             var order = Resolve<IOrderService>().GetSingle(r => r.Id == modelIn.OrderId);
-            if (order == null) return ServiceResult.FailedWithMessage("订单不存在");
+            if (order == null) {
+                return ServiceResult.FailedWithMessage("订单不存在");
+            }
 
             var user = Resolve<IUserService>().GetUserDetail(modelIn.UserId);
-            if (user.Detail.PayPassword != modelIn.PayPassword.ToMd5HashString())
+            if (user.Detail.PayPassword != modelIn.PayPassword.ToMd5HashString()) {
                 return ServiceResult.FailedWithMessage("支付密码不正确");
+            }
 
             var context = Repository<IOrderRepository>().RepositoryContext;
             context.BeginTransaction();
@@ -445,11 +481,14 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
             var payPassword = httpContext.Request.Form["PayPassword"].ToString();
             var UserId = httpContext.Request.Form["UserId"].ConvertToLong();
             var order = Resolve<IOrderService>().GetSingle(r => r.Id == orderId);
-            if (order == null) return ServiceResult.FailedWithMessage("订单不存在");
+            if (order == null) {
+                return ServiceResult.FailedWithMessage("订单不存在");
+            }
 
             var user = Resolve<IUserService>().GetUserDetail(UserId);
-            if (user.Detail.PayPassword != payPassword.ToMd5HashString())
+            if (user.Detail.PayPassword != payPassword.ToMd5HashString()) {
                 return ServiceResult.FailedWithMessage("支付密码不正确");
+            }
 
             order.OrderStatus = OrderStatus.Closed;
             var context = Repository<IOrderRepository>().RepositoryContext;
@@ -482,11 +521,14 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
         public ServiceResult Cancel(OrderActionViewIn modelIn)
         {
             var order = Resolve<IOrderService>().GetSingle(r => r.Id == modelIn.OrderId);
-            if (order == null) return ServiceResult.FailedWithMessage("订单不存在");
+            if (order == null) {
+                return ServiceResult.FailedWithMessage("订单不存在");
+            }
 
             var user = Resolve<IUserService>().GetUserDetail(modelIn.UserId);
-            if (user.Detail.PayPassword != modelIn.PayPassword.ToMd5HashString())
+            if (user.Detail.PayPassword != modelIn.PayPassword.ToMd5HashString()) {
                 return ServiceResult.FailedWithMessage("支付密码不正确");
+            }
 
             order.OrderStatus = OrderStatus.Closed;
             var context = Repository<IOrderRepository>().RepositoryContext;
@@ -520,14 +562,20 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
             var orderRate = AutoMapping.SetValue<OrderRateInfo>(httpContext);
             var orderId = httpContext.Request.Form["OrderId"].ConvertToLong();
             var order = Resolve<IOrderService>().GetSingle(r => r.Id == orderId);
-            if (orderRate.Intro.IsNullOrEmpty()) return ServiceResult.FailedWithMessage("详情不能为空");
+            if (orderRate.Intro.IsNullOrEmpty()) {
+                return ServiceResult.FailedWithMessage("详情不能为空");
+            }
 
-            if (order == null) return ServiceResult.FailedWithMessage("订单不存在");
+            if (order == null) {
+                return ServiceResult.FailedWithMessage("订单不存在");
+            }
 
             order.OrderExtension.OrderRate.SellerRate = orderRate;
             order.Extension = ObjectExtension.ToJson(order.OrderExtension);
             var result = Resolve<IOrderService>().Update(order);
-            if (result) return ServiceResult.Success;
+            if (result) {
+                return ServiceResult.Success;
+            }
 
             return ServiceResult.FailedWithMessage("失败");
         }
@@ -539,14 +587,20 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
         public ServiceResult Rate(OrderRateInfo orderRate)
         {
             var order = Resolve<IOrderService>().GetSingle(r => r.Id == orderRate.OrderId);
-            if (orderRate.Intro.IsNullOrEmpty()) return ServiceResult.FailedWithMessage("详情不能为空");
+            if (orderRate.Intro.IsNullOrEmpty()) {
+                return ServiceResult.FailedWithMessage("详情不能为空");
+            }
 
-            if (order == null) return ServiceResult.FailedWithMessage("订单不存在");
+            if (order == null) {
+                return ServiceResult.FailedWithMessage("订单不存在");
+            }
 
             order.OrderExtension.OrderRate.SellerRate = orderRate;
             order.Extension = ObjectExtension.ToJson(order.OrderExtension);
             var result = Resolve<IOrderService>().Update(order);
-            if (result) return ServiceResult.Success;
+            if (result) {
+                return ServiceResult.Success;
+            }
 
             return ServiceResult.FailedWithMessage("失败");
         }
@@ -577,17 +631,27 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
         {
             var order = Resolve<IOrderService>().GetSingle(r => r.Id == orderId);
 
-            if (order == null) return ServiceResult.FailedWithMessage("订单不存在");
+            if (order == null) {
+                return ServiceResult.FailedWithMessage("订单不存在");
+            }
 
-            if (address.RegionId == 0) return ServiceResult.FailedWithMessage("县级不能为空！");
+            if (address.RegionId == 0) {
+                return ServiceResult.FailedWithMessage("县级不能为空！");
+            }
 
-            if (address.Mobile.IsNullOrEmpty()) return ServiceResult.FailedWithMessage("收件人手机号不能为空！");
+            if (address.Mobile.IsNullOrEmpty()) {
+                return ServiceResult.FailedWithMessage("收件人手机号不能为空！");
+            }
 
-            if (address.Name.IsNullOrEmpty()) return ServiceResult.FailedWithMessage("收件人姓名不能为空！");
+            if (address.Name.IsNullOrEmpty()) {
+                return ServiceResult.FailedWithMessage("收件人姓名不能为空！");
+            }
 
-            if (order.OrderExtension.UserAddress == null)
+            if (order.OrderExtension.UserAddress == null) {
                 order.OrderExtension.OrderRemark = new OrderRemark();
-            else address.Id = order.OrderExtension.UserAddress.Id;
+            } else {
+                address.Id = order.OrderExtension.UserAddress.Id;
+            }
             //address.LoginUserId = order.OrderExtension.UserAddress.LoginUserId;
 
             address.AddressDescription =
@@ -595,7 +659,9 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
             order.OrderExtension.UserAddress = address;
             order.Extension = ObjectExtension.ToJson(order.OrderExtension);
             var result = Resolve<IOrderService>().Update(order);
-            if (result) return ServiceResult.Success;
+            if (result) {
+                return ServiceResult.Success;
+            }
 
             return ServiceResult.FailedWithMessage("失败");
         }
@@ -609,14 +675,20 @@ namespace Alabo.Industry.Shop.OrderActions.Domain.Services
             var orderId = httpContext.Request.Form["OrderId"].ConvertToLong();
             var order = Resolve<IOrderService>().GetSingle(r => r.Id == orderId);
 
-            if (order == null) return ServiceResult.FailedWithMessage("订单不存在");
+            if (order == null) {
+                return ServiceResult.FailedWithMessage("订单不存在");
+            }
 
-            if (order.OrderExtension.OrderRemark == null) order.OrderExtension.OrderRemark = new OrderRemark();
+            if (order.OrderExtension.OrderRemark == null) {
+                order.OrderExtension.OrderRemark = new OrderRemark();
+            }
 
             order.OrderExtension.Message.PlatplatformMessage = orderMessage.PlatplatformMessage;
             order.Extension = ObjectExtension.ToJson(order.OrderExtension);
             var result = Resolve<IOrderService>().Update(order);
-            if (result) return ServiceResult.Success;
+            if (result) {
+                return ServiceResult.Success;
+            }
 
             return ServiceResult.FailedWithMessage("失败");
         }

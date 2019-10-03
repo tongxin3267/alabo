@@ -134,9 +134,10 @@ namespace Alabo.Runtime
         {
             get
             {
-                if (_runtimeAssemblies == null)
+                if (_runtimeAssemblies == null) {
                     _runtimeAssemblies = _dependencyContext.RuntimeLibraries
                         .SelectMany(library => library.GetDefaultAssemblyNames(_dependencyContext)).ToArray();
+                }
 
                 return _runtimeAssemblies;
             }
@@ -151,7 +152,9 @@ namespace Alabo.Runtime
                 if (string.IsNullOrWhiteSpace(_cacheConfigurationString))
                 {
                     _cacheConfigurationString = Configuration.GetSection("CacheConfigurationString")?.Value;
-                    if (_cacheConfigurationString.IsNullOrEmpty()) _cacheConfigurationString = "localhost";
+                    if (_cacheConfigurationString.IsNullOrEmpty()) {
+                        _cacheConfigurationString = "localhost";
+                    }
                 }
 
                 return _cacheConfigurationString;
@@ -198,7 +201,9 @@ namespace Alabo.Runtime
         /// <param name="predicate">筛选条件</param>
         public Assembly[] GetRuntimeAssemblies(Func<AssemblyName, bool> predicate)
         {
-            if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            if (predicate == null) {
+                throw new ArgumentNullException(nameof(predicate));
+            }
 
             var list = RuntimeAssemblies.Where(predicate).Select(Assembly.Load);
             return list.ToArray();
@@ -209,11 +214,12 @@ namespace Alabo.Runtime
         /// </summary>
         public Assembly[] GetPlatformRuntimeAssemblies()
         {
-            if (_platformRuntimeAssemblie == null)
+            if (_platformRuntimeAssemblie == null) {
                 _platformRuntimeAssemblie = GetRuntimeAssemblies(e =>
                     (e.FullName.StartsWith("Alabo") || e.FullName.StartsWith("ZKOpen") ||
                      e.FullName.StartsWith("ZKCloud")) &&
                     !e.FullName.Contains("ZKCloud.Open"));
+            }
 
             return _platformRuntimeAssemblie;
         }

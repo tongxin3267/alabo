@@ -63,7 +63,9 @@ namespace Alabo.Industry.Cms.Articles.Domain.Dto
         {
             var result = Ioc.Resolve<IRelationService>().GetSingle(id);
             var articleForm = new TopLineTagInput();
-            if (result != null) articleForm = result.MapTo<TopLineTagInput>();
+            if (result != null) {
+                articleForm = result.MapTo<TopLineTagInput>();
+            }
 
             var autoForm = ToAutoForm(new TopLineTagInput());
             return autoForm;

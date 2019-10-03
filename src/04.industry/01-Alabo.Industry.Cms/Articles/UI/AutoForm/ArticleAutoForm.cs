@@ -40,13 +40,17 @@ namespace Alabo.Industry.Cms.Articles.UI.AutoForm
             dic.TryGetValue("ChannelId", out var channelId);
             var result = Resolve<IArticleService>().GetSingle(id);
             var articleForm = new ArticleAutoForm();
-            if (result != null) articleForm = result.MapTo<ArticleAutoForm>();
+            if (result != null) {
+                articleForm = result.MapTo<ArticleAutoForm>();
+            }
 
             articleForm.Id = id.ToString();
-            if (channelId == null)
+            if (channelId == null) {
                 articleForm.ChannelId = result.ChannelId.ToString();
-            else
+            } else {
                 articleForm.ChannelId = channelId;
+            }
+
             if (result != null)
             {
                 var channel = Resolve<IChannelService>().GetSingle(r => r.Id == articleForm.ChannelId.ToObjectId());
@@ -60,8 +64,9 @@ namespace Alabo.Industry.Cms.Articles.UI.AutoForm
                     if (!string.IsNullOrEmpty(classlist))
                     {
                         var clas = classlist.ToSplitList();
-                        if (clas.Count > 0)
+                        if (clas.Count > 0) {
                             clas.ForEach(p => { articleForm.Classes.Add(Convert.ToInt16(p)); });
+                        }
                     }
 
                     var relationList = Resolve<IRelationIndexService>()
@@ -71,8 +76,9 @@ namespace Alabo.Industry.Cms.Articles.UI.AutoForm
                     {
                         articleForm.Tags.Clear();
                         var tags = relationList.ToSplitList();
-                        if (tags.Count > 0)
+                        if (tags.Count > 0) {
                             tags.ForEach(p => { articleForm.Tags.Add(Convert.ToInt16(p)); });
+                        }
                     }
                 }
             }
@@ -90,17 +96,29 @@ namespace Alabo.Industry.Cms.Articles.UI.AutoForm
         /// <returns></returns>
         public ServiceResult Save(object model, AutoBaseModel autoModel)
         {
-            if (model == null) return ServiceResult.FailedMessage("保存的内容不能为空");
+            if (model == null) {
+                return ServiceResult.FailedMessage("保存的内容不能为空");
+            }
+
             var aform = model.MapTo<ArticleAutoForm>();
 
             var input = model.MapTo<Article>();
-            if (aform.Classes != null) input.Classes = aform.Classes.Join();
-            if (aform.Tags != null) input.Tags = aform.Tags.Join();
+            if (aform.Classes != null) {
+                input.Classes = aform.Classes.Join();
+            }
+
+            if (aform.Tags != null) {
+                input.Tags = aform.Tags.Join();
+            }
+
             input.ChannelId = aform.ChannelId.ToObjectId();
 
             var article = AutoMapping.SetValue<Article>(input);
             var channel = Resolve<IChannelService>().GetSingle(r => r.Id == article.ChannelId);
-            if (channel == null) Tuple.Create(ServiceResult.FailedWithMessage("频道不存在"), new Article());
+            if (channel == null) {
+                Tuple.Create(ServiceResult.FailedWithMessage("频道不存在"), new Article());
+            }
+
             var SerResult = ServiceResult.Success;
             article.RelationId = GetMaxRelationId();
             article.Id = aform.Id.ToObjectId();
@@ -110,10 +128,11 @@ namespace Alabo.Industry.Cms.Articles.UI.AutoForm
             if (entity == null)
             {
                 result = Resolve<IArticleAdminService>().Add(article);
-                if (result)
+                if (result) {
                     SerResult = ServiceResult.Success;
-                else
+                } else {
                     SerResult = ServiceResult.Failed;
+                }
             }
             else
             {
@@ -161,8 +180,10 @@ namespace Alabo.Industry.Cms.Articles.UI.AutoForm
         {
             var articles = Resolve<IRelationIndexService>().GetList();
             var article = articles.OrderByDescending(r => r.RelationId).FirstOrDefault();
-            if (article != null)
+            if (article != null) {
                 return article.RelationId + 1;
+            }
+
             return 1;
         }
 

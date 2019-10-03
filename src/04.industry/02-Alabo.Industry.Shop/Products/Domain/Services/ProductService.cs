@@ -160,7 +160,10 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
             var result = new List<Relation>();
             foreach (var item in productClassList)
             {
-                if (item.FatherId > 0) continue;
+                if (item.FatherId > 0) {
+                    continue;
+                }
+
                 result.Add(item);
             }
 
@@ -190,10 +193,15 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         {
             //product
             var product = GetSingle(r => r.Id == id);
-            if (product == null) return product;
+            if (product == null) {
+                return product;
+            }
             //details
             product.Detail = Resolve<IProductDetailService>().GetSingle(e => e.ProductId == product.Id);
-            if (product.Detail == null) return null;
+            if (product.Detail == null) {
+                return null;
+            }
+
             var apiService = Resolve<IApiService>();
             product.Detail.MobileIntro = apiService.ConvertToApiImageUrl(product.Detail.MobileIntro);
             product.Detail.Intro = apiService.ConvertToApiImageUrl(product.Detail.Intro);
@@ -232,7 +240,9 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                     saleItem.PropertyValues = item.PropertyValues.Where(r => r.IsCheck).ToList();
                     saleItem.PropertyValues.ForEach(r =>
                     {
-                        if (r.ValueAlias.IsNullOrEmpty()) r.ValueAlias = r.ValueName;
+                        if (r.ValueAlias.IsNullOrEmpty()) {
+                            r.ValueAlias = r.ValueName;
+                        }
                     });
                     newSalePropertys.Add(saleItem);
                 }
@@ -267,11 +277,14 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                 {
                     userPermissions = rules.MapTo<UserPermissions>();
                     if (rules.MemberLeverBuyPermissions?.Count > 0 &&
-                        !rules.MemberLeverBuyPermissions.Contains(user.GradeId))
+                        !rules.MemberLeverBuyPermissions.Contains(user.GradeId)) {
                         userPermissions.IsMemberLeverBuy = false;
+                    }
+
                     if (rules.MemberLeverViewPermissions?.Count > 0 &&
-                        !rules.MemberLeverViewPermissions.Contains(user.GradeId))
+                        !rules.MemberLeverViewPermissions.Contains(user.GradeId)) {
                         userPermissions.IsMemberLeverView = false;
+                    }
                 }
 
                 //remove
@@ -293,13 +306,18 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                 //show front grade
                 var showGradeIds = new List<string>();
                 var showGrade = Resolve<IAutoConfigService>().GetValue<MemberDiscountConfig>();
-                if (showGrade != null && !showGrade.GradeIds.IsNullOrEmpty())
+                if (showGrade != null && !showGrade.GradeIds.IsNullOrEmpty()) {
                     showGradeIds = showGrade.GradeIds.Split(new[] { ',' }).ToList();
+                }
+
                 var rules = memberDiscountActivity.Value.ToObject<MemberDiscountActivity>();
                 productSkus.Foreach(item =>
                 {
                     var tempSku = rules.DiscountList.Find(d => d.ProductSkuId == item.Id);
-                    if (tempSku == null || tempSku.GradeItems.Count <= 0) return;
+                    if (tempSku == null || tempSku.GradeItems.Count <= 0) {
+                        return;
+                    }
+
                     var tempSkuGrades = tempSku.GradeItems.MapTo<List<SkuGradePriceItem>>();
                     item.GradePriceList = tempSkuGrades.Where(g => showGradeIds.Exists(u => u == g.Id.ToString()))
                         .ToList();
@@ -318,7 +336,10 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                 .Foreach(grade =>
                 {
                     var tempList = grade.OrderBy(g => g.Price).ToList();
-                    if (tempList.Count <= 0) return;
+                    if (tempList.Count <= 0) {
+                        return;
+                    }
+
                     userGradePrices.Add(new UserGradePriceView
                     {
                         Name = tempList.First().Name,
@@ -346,14 +367,20 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
             var psList = Ioc.Resolve<IAutoConfigService>().GetList<PriceStyleConfig>();
             var priceStyleConfig = Ioc.Resolve<IAutoConfigService>()
                 .GetList<PriceStyleConfig>(e => e.Id == priceStyleId).FirstOrDefault();
-            if (priceStyleConfig == null) return price.ToString("F2");
+            if (priceStyleConfig == null) {
+                return price.ToString("F2");
+            }
 
             var moneyTypeConfig = Ioc.Resolve<IAutoConfigService>()
                 .GetList<MoneyTypeConfig>(e => e.Id == priceStyleConfig.MoneyTypeId).FirstOrDefault();
             //货币类型不存在，或者状态不正常
-            if (moneyTypeConfig == null) return price.ToString("F2");
+            if (moneyTypeConfig == null) {
+                return price.ToString("F2");
+            }
 
-            if (moneyTypeConfig.RateFee == 0) moneyTypeConfig.RateFee = 1;
+            if (moneyTypeConfig.RateFee == 0) {
+                moneyTypeConfig.RateFee = 1;
+            }
 
             if (priceStyleConfig.PriceStyle == PriceStyle.CashProduct
                 || priceStyleConfig.PriceStyle == PriceStyle.PointProduct
@@ -362,8 +389,9 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                 || priceStyleConfig.PriceStyle == PriceStyle.ShopAmount
             //|| priceStyleConfig.PriceStyle == PriceStyle.CashAndVirtual
             //|| priceStyleConfig.PriceStyle == PriceStyle.CashAndCredit
-            )
+            ) {
                 priceStyle = Math.Round(price / moneyTypeConfig.RateFee, 2).ToString("F2") + moneyTypeConfig.Unit;
+            }
 
             if (priceStyleConfig.PriceStyle == PriceStyle.CashAndPoint
                 || priceStyleConfig.PriceStyle == PriceStyle.CashAndVirtual
@@ -371,7 +399,9 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                 || priceStyleConfig.PriceStyle == PriceStyle.Customer
             )
             {
-                if (productMinCashRate != 0) priceStyleConfig.MinCashRate = productMinCashRate;
+                if (productMinCashRate != 0) {
+                    priceStyleConfig.MinCashRate = productMinCashRate;
+                }
 
                 if (priceStyleConfig.MinCashRate == 1)
                 {
@@ -403,21 +433,32 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         public Tuple<ServiceResult, Product> Show(long id, long userId)
         {
             var product = GetShow(id, userId);
-            if (product == null) return Tuple.Create(ServiceResult.FailedWithMessage("商品不存在"), product);
-            if (product.ProductActivityExtension != null && product.ProductActivityExtension.UserPermissions != null)
-                if (!product.ProductActivityExtension.UserPermissions.IsMemberLeverView)
+            if (product == null) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("商品不存在"), product);
+            }
+
+            if (product.ProductActivityExtension != null && product.ProductActivityExtension.UserPermissions != null) {
+                if (!product.ProductActivityExtension.UserPermissions.IsMemberLeverView) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("您的用户等级不能浏览该商品"), product);
-            if (product.ProductStatus != ProductStatus.Online)
+                }
+            }
+
+            if (product.ProductStatus != ProductStatus.Online) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("商品没有上架"), product);
+            }
 
             var priceStyle = Resolve<IAutoConfigService>()
                 .GetList<PriceStyleConfig>(r => r.Status == Status.Normal && r.Id == product.PriceStyleId)
                 ?.FirstOrDefault();
-            if (priceStyle == null) return Tuple.Create(ServiceResult.FailedWithMessage("商品的商城模式已下架"), product);
+            if (priceStyle == null) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("商品的商城模式已下架"), product);
+            }
 
             var moneyConfig = Resolve<IAutoConfigService>().MoneyTypes()
                 .FirstOrDefault(r => r.Id == priceStyle.MoneyTypeId);
-            if (moneyConfig == null) return Tuple.Create(ServiceResult.FailedWithMessage("商品的货币类型不正常"), product);
+            if (moneyConfig == null) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("商品的货币类型不正常"), product);
+            }
 
             return Tuple.Create(ServiceResult.Success, product);
         }
@@ -425,7 +466,10 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         public StoreInfoOutput GetStoreInfoByProductId(long productId)
         {
             var product = GetSingle(u => u.Id == productId);
-            if (product == null) return null;
+            if (product == null) {
+                return null;
+            }
+
             var storeInfo = Resolve<IStoreService>().GetSingle(u => u.Id == product.StoreId.ToObjectId());
             // var grade = Resolve<IAutoConfigService>().GetList<SupplierGradeConfig>(u => u.Id == storeInfo.GradeId);
             var model = new StoreInfoOutput
@@ -471,12 +515,20 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
             {
                 //rule
                 var rules = activity.Value.ToObject<TimeLimitBuyActivity>();
-                if (rules == null) return;
+                if (rules == null) {
+                    return;
+                }
                 //product
                 var currentDate = DateTime.Now;
-                if (rules.StartTime > currentDate || rules.EndTime < currentDate) return;
+                if (rules.StartTime > currentDate || rules.EndTime < currentDate) {
+                    return;
+                }
+
                 var product = products.Find(p => p.Id == activity.ProductId);
-                if (product == null) return;
+                if (product == null) {
+                    return;
+                }
+
                 var item = product.MapTo<TimeLimitBuyItem>();
                 item.ThumbnailUrl = Resolve<IApiService>().ApiImageUrl(item.ThumbnailUrl);
                 item.StartTime = rules.StartTime;

@@ -55,14 +55,17 @@ namespace Alabo.Cloud.People.Identities.Controllers
         [ApiAuth]
         public ApiResult IdentityInfo(long loginUserId)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var identity = Resolve<IIdentityService>().GetSingle(u => u.UserId == loginUserId);
             identity.Status = IdentityStatus.Succeed;
 
             var result = Resolve<IIdentityService>().Update(identity);
-            if (result) return ApiResult.Success("认证成功");
+            if (result) {
+                return ApiResult.Success("认证成功");
+            }
 
             return ApiResult.Failure("认证失败");
         }
@@ -103,9 +106,15 @@ namespace Alabo.Cloud.People.Identities.Controllers
         [HttpPost]
         public ApiResult Identity([FromBody] Identity identity)
         {
-            if (identity == null) return ApiResult.Failure("实体不能为空");
+            if (identity == null) {
+                return ApiResult.Failure("实体不能为空");
+            }
+
             var result = Resolve<IIdentityService>().Identity(identity);
-            if (result.Succeeded) return ApiResult.Success("认证成功！");
+            if (result.Succeeded) {
+                return ApiResult.Success("认证成功！");
+            }
+
             return ApiResult.Failure("认证失败");
         }
 
@@ -113,10 +122,15 @@ namespace Alabo.Cloud.People.Identities.Controllers
         [ApiAuth]
         public ApiResult FaceIdentity([FromQuery] Identity identity)
         {
-            if (identity == null) return ApiResult.Failure("实体不能为空");
+            if (identity == null) {
+                return ApiResult.Failure("实体不能为空");
+            }
 
             var result = Resolve<IIdentityService>().FaceIdentity(identity);
-            if (result.Succeeded) return ApiResult.Success("认证成功！");
+            if (result.Succeeded) {
+                return ApiResult.Success("认证成功！");
+            }
+
             return ApiResult.Failure("认证失败");
         }
     }

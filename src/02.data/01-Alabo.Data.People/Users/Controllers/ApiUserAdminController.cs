@@ -43,7 +43,9 @@ namespace Alabo.Data.People.Users.Controllers
         public ApiResult Edit(long id)
         {
             var user = Resolve<IUserService>().GetUserDetail(id);
-            if (user == null) return ApiResult.Failure("您访问的用户不存在");
+            if (user == null) {
+                return ApiResult.Failure("您访问的用户不存在");
+            }
 
             //ViewBag.ServiceCenterTypeName = "所属" + typeName;
             var parent = Resolve<IUserService>().GetSingle(u => u.Id == user.ParentId);
@@ -78,14 +80,17 @@ namespace Alabo.Data.People.Users.Controllers
         [HttpPost]
         public ApiResult EditBasic([FromBody] ViewAdminEdit view)
         {
-            if (view.User.Name.IsNullOrEmpty() || view.User.Email.IsNullOrEmpty())
+            if (view.User.Name.IsNullOrEmpty() || view.User.Email.IsNullOrEmpty()) {
                 return ApiResult.Failure("操作失败", "姓名或邮箱不能为空");
+            }
 
             var user = view.User;
             user.Status = view.Status;
             user.Detail.ModifiedTime = DateTime.Now;
             var result = Resolve<IUserAdminService>().UpdateUser(user);
-            if (!result.Succeeded) return ApiResult.Failure(result.ErrorMessages.Join());
+            if (!result.Succeeded) {
+                return ApiResult.Failure(result.ErrorMessages.Join());
+            }
 
             //  _messageManager.Keep("信息修改成功");
             //Resolve<IUserService>().Log($"修改会员基本信息，用户名{user.UserName},姓名{user.Name},手机{user.Mobile}");
@@ -102,7 +107,9 @@ namespace Alabo.Data.People.Users.Controllers
             try
             {
                 var find = Resolve<IUserDetailService>().GetSingle(r => r.Id == view.UserDetail.Id);
-                if (find == null) return ApiResult.Failure("该用户的详细资料不存在");
+                if (find == null) {
+                    return ApiResult.Failure("该用户的详细资料不存在");
+                }
 
                 find.Remark = view.UserDetail.Remark;
                 find.Sex = view.Sex;
@@ -111,10 +118,14 @@ namespace Alabo.Data.People.Users.Controllers
                 find.RegionId = view.UserDetail.RegionId;
                 find.RegionId = view.RegionId;
 
-                if (view.UserDetail != null && view.UserDetail.RegionId >= 0) find.RegionId = view.UserDetail.RegionId;
+                if (view.UserDetail != null && view.UserDetail.RegionId >= 0) {
+                    find.RegionId = view.UserDetail.RegionId;
+                }
 
                 var result = Resolve<IUserAdminService>().UpdateUserDetail(find);
-                if (!result) return ApiResult.Failure("服务异常:会员资料修改失败");
+                if (!result) {
+                    return ApiResult.Failure("服务异常:会员资料修改失败");
+                }
 
                 var userInfoAddress = new UserInfoAddressInput
                 {
@@ -152,7 +163,10 @@ namespace Alabo.Data.People.Users.Controllers
             };
 
             var editUser = Resolve<IUserService>().GetSingle(view.EditUserId);
-            if (editUser == null) return ApiResult.Failure("要编辑的用户ID对应用户信息不存在");
+            if (editUser == null) {
+                return ApiResult.Failure("要编辑的用户ID对应用户信息不存在");
+            }
+
             view.User = editUser;
 
             //修改登录密码

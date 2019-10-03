@@ -80,7 +80,9 @@ namespace Alabo.App.Share.Rewards.ViewModels
             get
             {
                 var searSerial = $"9{Reward.Id.ToString().PadLeft(9, '0')}";
-                if (Reward.Id.ToString().Length == 10) searSerial = $"{Reward.Id.ToString()}";
+                if (Reward.Id.ToString().Length == 10) {
+                    searSerial = $"{Reward.Id.ToString()}";
+                }
 
                 return searSerial;
             }

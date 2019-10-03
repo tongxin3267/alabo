@@ -15,7 +15,9 @@ namespace Alabo.Cache.Memory
 
         public void Dispose()
         {
-            if (Instance is IDisposable) (Instance as IDisposable).Dispose();
+            if (Instance is IDisposable) {
+                (Instance as IDisposable).Dispose();
+            }
         }
     }
 }

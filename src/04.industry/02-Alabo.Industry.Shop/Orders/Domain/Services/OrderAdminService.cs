@@ -60,9 +60,13 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                 UserId = singlePayInput.User.Id
             };
             // 是否为管理员代付
-            if (singlePayInput.IsAdminPay) pay.PayType = PayType.AdminPay;
+            if (singlePayInput.IsAdminPay) {
+                pay.PayType = PayType.AdminPay;
+            }
 
-            if (singlePayInput.Type == CheckoutType.Customer) pay.Type = singlePayInput.Type;
+            if (singlePayInput.Type == CheckoutType.Customer) {
+                pay.Type = singlePayInput.Type;
+            }
 
             var payExtension = new PayExtension
             {
@@ -82,14 +86,27 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                 payExtension.BuyerCount = singlePayInput.BuyerCount;
             }
 
-            if (singlePayInput.ExcecuteSqlList != null) payExtension.ExcecuteSqlList = singlePayInput.ExcecuteSqlList;
-            if (singlePayInput.AfterSuccess != null) payExtension.AfterSuccess = singlePayInput.AfterSuccess;
+            if (singlePayInput.ExcecuteSqlList != null) {
+                payExtension.ExcecuteSqlList = singlePayInput.ExcecuteSqlList;
+            }
 
-            if (singlePayInput.OrderUser != null) payExtension.OrderUser = singlePayInput.OrderUser;
+            if (singlePayInput.AfterSuccess != null) {
+                payExtension.AfterSuccess = singlePayInput.AfterSuccess;
+            }
+
+            if (singlePayInput.OrderUser != null) {
+                payExtension.OrderUser = singlePayInput.OrderUser;
+            }
+
             payExtension.RedirectUrl = singlePayInput.RedirectUrl;
-            if (Convert.ToInt16(singlePayInput.TriggerType) > 0) payExtension.TriggerType = singlePayInput.TriggerType;
+            if (Convert.ToInt16(singlePayInput.TriggerType) > 0) {
+                payExtension.TriggerType = singlePayInput.TriggerType;
+            }
 
-            if (!singlePayInput.EntityId.IsNullOrEmpty()) pay.EntityId = singlePayInput.EntityId;
+            if (!singlePayInput.EntityId.IsNullOrEmpty()) {
+                pay.EntityId = singlePayInput.EntityId;
+            }
+
             IList<KeyValuePair<Guid, decimal>> acmountPay = new List<KeyValuePair<Guid, decimal>>();
             if (singlePayInput.ReduceMoneys != null && singlePayInput.ReduceMoneys.Count > 0)
             {
@@ -103,11 +120,15 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
 
             pay.AccountPay = acmountPay.ToJson();
 
-            if (!singlePayInput.RedirectUrl.IsNullOrEmpty()) payExtension.RedirectUrl = singlePayInput.RedirectUrl;
+            if (!singlePayInput.RedirectUrl.IsNullOrEmpty()) {
+                payExtension.RedirectUrl = singlePayInput.RedirectUrl;
+            }
 
             pay.Extensions = payExtension.ToJson();
 
-            if (Resolve<IPayService>().Add(pay)) return Tuple.Create(ServiceResult.Success, pay);
+            if (Resolve<IPayService>().Add(pay)) {
+                return Tuple.Create(ServiceResult.Success, pay);
+            }
 
             return Tuple.Create(ServiceResult.FailedWithMessage("支付订单创建失败"), new Pay());
         }
@@ -139,7 +160,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                 listOutput.Order.OrderExtension.ReduceAmounts.Foreach(e =>
                 {
                     listOutput.ForCash += $"{e.MoneyName}{e.Amount}抵现{e.ForCashAmount}";
-                    if (e.FeeAmount > 0) listOutput.ForCash += $"服务费{e.FeeAmount}";
+                    if (e.FeeAmount > 0) {
+                        listOutput.ForCash += $"服务费{e.FeeAmount}";
+                    }
 
                     listOutput.ForCash += "</br>";
                 });
@@ -171,8 +194,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                 IList<ProductDeliveryInfo> productDeliveryInfos = new List<ProductDeliveryInfo>();
                 if (view.OrderDeliveries.Count > 0)
                 {
-                    foreach (var item in view.OrderDeliveries)
+                    foreach (var item in view.OrderDeliveries) {
                         productDeliveryInfos.AddRange(item.OrderDeliveryExtension.ProductDeliveryInfo);
+                    }
                     // 已发货数量
                     view.DeliveryProduct = (from ProductDeliveryInfo p in productDeliveryInfos
                                             group p by p.ProductSkuId
@@ -188,12 +212,13 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                 view.OrderExtension = order.OrderExtension;
 
                 var isAdmin = Resolve<IUserService>().IsAdmin(UserId);
-                if (isAdmin)
+                if (isAdmin) {
                     view.Methods = Resolve<IOrderService>().GetMethodByStatus(order.OrderStatus)
                         .Where(r => r.Method.Contains("Admin")).ToList();
-                else
+                } else {
                     view.Methods = Resolve<IOrderService>().GetMethodByStatus(order.OrderStatus)
                         .Where(r => r.Method.Contains("Seller")).ToList();
+                }
 
                 view.Pay = Resolve<IPayService>().GetSingle(order.PayId);
                 view.OrderExtension.ReduceAmounts.Foreach(r =>
@@ -218,8 +243,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                     Resolve<IProductService>().Update(r => { r.Stock += item.Count; }, e => e.Id == item.ProductId);
                 }
 
-                foreach (var a in orders)
+                foreach (var a in orders) {
                     Resolve<IOrderService>().Update(r => { r.OrderStatus = OrderStatus.Closed; }, e => e.Id == a.Id);
+                }
             }
         }
 

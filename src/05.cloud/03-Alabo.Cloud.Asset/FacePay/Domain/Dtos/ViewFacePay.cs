@@ -62,7 +62,10 @@ namespace Alabo.Cloud.Asset.FacePay.Domain.Dtos
             dic.TryGetValue("loginUserId", out var userId);
             dic.TryGetValue("pageIndex", out var pageIndexStr);
             var pageIndex = pageIndexStr.ToInt64();
-            if (pageIndex <= 0) pageIndex = 1;
+            if (pageIndex <= 0) {
+                pageIndex = 1;
+            }
+
             var orderQuery = new ExpressionQuery<Entities.FacePay>
             {
                 EnablePaging = true,

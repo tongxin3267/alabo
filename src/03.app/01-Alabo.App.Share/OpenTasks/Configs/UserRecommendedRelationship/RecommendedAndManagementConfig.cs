@@ -79,7 +79,9 @@ namespace Alabo.App.Share.OpenTasks.Configs.UserRecommendedRelationship
         public override ExecuteResult<ITaskResult[]> Execute(TaskParameter parameter)
         {
             var baseResult = base.Execute(parameter);
-            if (baseResult.Status != ResultStatus.Success) return baseResult;
+            if (baseResult.Status != ResultStatus.Success) {
+                return baseResult;
+            }
 
             IList<ITaskResult> resultList = new List<ITaskResult>();
 
@@ -87,7 +89,10 @@ namespace Alabo.App.Share.OpenTasks.Configs.UserRecommendedRelationship
             //当前下单用户
             var user = Resolve<IUserService>().GetSingle(ShareOrder.UserId);
             base.GetShareUser(user.ParentId, out var shareUser); //从基类获取分润用户
-            if (shareUser == null) return ExecuteResult<ITaskResult[]>.Cancel("推荐用户不存在");
+            if (shareUser == null) {
+                return ExecuteResult<ITaskResult[]>.Cancel("推荐用户不存在");
+            }
+
             var ratio = Convert.ToDecimal(Ratios[0]);
             var shareAmount = BaseFenRunAmount * ratio; //分润金额
             CreateResultList(shareAmount, ShareOrderUser, shareUser, parameter, Configuration, resultList); //构建分润参数
@@ -95,19 +100,28 @@ namespace Alabo.App.Share.OpenTasks.Configs.UserRecommendedRelationship
             // 开始计算管理分红
             var userMap = Resolve<IUserMapService>().GetParentMapFromCache(shareUser.Id);
             var map = userMap.ParentMap.DeserializeJson<List<ParentMap>>();
-            if (map == null) return ExecuteResult<ITaskResult[]>.Cancel("未找到触发会员的Parent Map.");
+            if (map == null) {
+                return ExecuteResult<ITaskResult[]>.Cancel("未找到触发会员的Parent Map.");
+            }
 
             for (var i = 0; i < map.Count; i++)
             {
                 // 如果大于团队层数
-                if (i + 1 > Configuration.TeamLevel) break;
+                if (i + 1 > Configuration.TeamLevel) {
+                    break;
+                }
+
                 var item = map[i];
                 GetShareUser(item.UserId, out shareUser); //从基类获取分润用户
-                if (shareUser == null) continue;
+                if (shareUser == null) {
+                    continue;
+                }
                 // 每上一级50%
                 var itemRatio = Math.Pow(Convert.ToDouble(Configuration.ManagerRatio), Convert.ToDouble(i + 1))
                                     .ToDecimal() * ratio;
-                if (itemRatio <= 0) continue;
+                if (itemRatio <= 0) {
+                    continue;
+                }
 
                 shareAmount = BaseFenRunAmount * itemRatio; //分润金额
 

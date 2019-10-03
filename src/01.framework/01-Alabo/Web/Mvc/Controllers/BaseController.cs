@@ -54,7 +54,7 @@ namespace Alabo.Web.Mvc.Controllers
         {
             Type inputType = view.GetType();
             var propertyInfos = inputType.GetPropertiesFromCache();
-            foreach (var item in propertyInfos)
+            foreach (var item in propertyInfos) {
                 try
                 {
                     var property =
@@ -74,26 +74,30 @@ namespace Alabo.Web.Mvc.Controllers
 
                     var displayAttribute = attributes.FirstOrDefault(r => r.GetType() == typeof(DisplayAttribute));
                     var displayName = property.Name;
-                    if (displayAttribute != null) displayName = ((DisplayAttribute)displayAttribute).Name;
+                    if (displayAttribute != null) {
+                        displayName = ((DisplayAttribute)displayAttribute).Name;
+                    }
 
                     foreach (var attribute in attributes)
                     {
                         // 验证必填
-                        if (attribute.GetType() == typeof(RequiredAttribute))
+                        if (attribute.GetType() == typeof(RequiredAttribute)) {
                             if (stringValue.IsNullOrEmpty())
                             {
                                 errorMessage = displayName + "不能为空";
                                 return false;
                             }
+                        }
 
                         // 验证长度大小
-                        if (attribute.GetType() == typeof(StringLengthAttribute))
+                        if (attribute.GetType() == typeof(StringLengthAttribute)) {
                             if (stringValue.Length > ((StringLengthAttribute)attribute).MaximumLength)
                             {
                                 errorMessage = displayName +
                                                $"长度不能超过{((StringLengthAttribute)attribute).MaximumLength}字符";
                                 return false;
                             }
+                        }
 
                         // 验证远程信息
                         if (attribute.GetType() == typeof(FieldAttribute))
@@ -104,16 +108,18 @@ namespace Alabo.Web.Mvc.Controllers
                             {
                                 // 推荐人为空的时候，不验证
                                 if (fieldAttribute.ValidType == ValidType.ParentUserName &&
-                                    stringValue.IsNullOrEmpty())
+                                    stringValue.IsNullOrEmpty()) {
                                     break;
+                                }
 
                                 // 用户名为空的时候
-                                if (fieldAttribute.ValidType == ValidType.UserName)
+                                if (fieldAttribute.ValidType == ValidType.UserName) {
                                     if (stringValue.IsNullOrEmpty())
                                     {
                                         errorMessage = "用户名不能为空";
                                         return false;
                                     }
+                                }
 
                                 var user = EntityDynamicService.GetSingleUser(value.ToString());
                                 var dynamicUser = user;
@@ -150,7 +156,7 @@ namespace Alabo.Web.Mvc.Controllers
                                 }
 
                                 // 用户Id动态转换
-                                if (fieldAttribute.ValidType == ValidType.UserName)
+                                if (fieldAttribute.ValidType == ValidType.UserName) {
                                     try
                                     {
                                         view.UserId = dynamicUser.Id;
@@ -158,6 +164,7 @@ namespace Alabo.Web.Mvc.Controllers
                                     catch
                                     {
                                     }
+                                }
                             }
                         }
                     }
@@ -166,6 +173,7 @@ namespace Alabo.Web.Mvc.Controllers
                 {
                     Console.WriteLine(filedException);
                 }
+            }
 
             var error = string.Empty;
             errorMessage = error;

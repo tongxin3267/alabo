@@ -27,7 +27,9 @@ namespace Alabo.Datas.Stores.Add.Mongo
 
         public bool AddSingle([Valid] TEntity entity)
         {
-            if (entity.Id.IsNullOrEmpty()) throw new InvalidExpressionException("Id不能为空,添加时");
+            if (entity.Id.IsNullOrEmpty()) {
+                throw new InvalidExpressionException("Id不能为空,添加时");
+            }
 
             entity.CreateTime = DateTime.Now;
             Collection.InsertOne(entity);

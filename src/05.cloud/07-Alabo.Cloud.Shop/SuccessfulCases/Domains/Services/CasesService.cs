@@ -31,11 +31,15 @@ namespace Alabo.Cloud.Shop.SuccessfulCases.Domains.Services
             var find = GetSingle(view.Id);
             if (find == null)
             {
-                if (Add(view)) return ServiceResult.Success;
+                if (Add(view)) {
+                    return ServiceResult.Success;
+                }
             }
             else
             {
-                if (Update(view)) return ServiceResult.Success;
+                if (Update(view)) {
+                    return ServiceResult.Success;
+                }
             }
 
             return ServiceResult.Failed;

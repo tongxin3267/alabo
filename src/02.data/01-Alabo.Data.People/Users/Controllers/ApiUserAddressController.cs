@@ -15,14 +15,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Data.People.Users.Controllers
-{
+namespace Alabo.Data.People.Users.Controllers {
+
     [ApiExceptionFilter]
     [Route("Api/UserAddress/[action]")]
-    public class ApiUserAddressController : ApiBaseController<UserAddress, ObjectId>
-    {
-        public ApiUserAddressController()
-        {
+    public class ApiUserAddressController : ApiBaseController<UserAddress, ObjectId> {
+
+        public ApiUserAddressController() {
             BaseService = Resolve<IUserAddressService>();
         }
 
@@ -31,8 +30,7 @@ namespace Alabo.Data.People.Users.Controllers
         /// </summary>
         [HttpGet]
         [Display(Description = "获取添加地址视图")]
-        public ApiResult<AutoForm> GetAddAddressForm()
-        {
+        public ApiResult<AutoForm> GetAddAddressForm() {
             var view = AutoFormMapping.Convert<UserAddress>();
             return null;
         }
@@ -43,20 +41,31 @@ namespace Alabo.Data.People.Users.Controllers
         [HttpPost]
         [Display(Description = "更新、添加、保存收货地址")]
         [ApiAuth]
-        public ApiResult SaveOrderAddress([FromBody] AddressInput parameter)
-        {
-            if (parameter == null) return ApiResult.Failure("所在地区不能为空");
+        public ApiResult SaveOrderAddress([FromBody] AddressInput parameter) {
+            if (parameter == null) {
+                return ApiResult.Failure("所在地区不能为空");
+            }
 
             var regex = RegexHelper.ChinaMobile.IsMatch(parameter.Mobile);
-            if (!regex) return ApiResult.Failure("联系电话格式不正确");
-            if (parameter.Mobile.IsNullOrEmpty()) return ApiResult.Failure("联系电话不能为空");
+            if (!regex) {
+                return ApiResult.Failure("联系电话格式不正确");
+            }
 
-            if (parameter.Address.IsNullOrEmpty()) return ApiResult.Failure("详细地址不能为空");
+            if (parameter.Mobile.IsNullOrEmpty()) {
+                return ApiResult.Failure("联系电话不能为空");
+            }
 
-            if (parameter.Name.IsNullOrEmpty()) return ApiResult.Failure("收货人姓名不能为空");
+            if (parameter.Address.IsNullOrEmpty()) {
+                return ApiResult.Failure("详细地址不能为空");
+            }
 
-            if (!this.IsFormValid())
+            if (parameter.Name.IsNullOrEmpty()) {
+                return ApiResult.Failure("收货人姓名不能为空");
+            }
+
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var serviceResult = Resolve<IUserAddressService>().SaveOrderAddress(parameter);
             return ToResult(serviceResult);
@@ -68,10 +77,10 @@ namespace Alabo.Data.People.Users.Controllers
         [HttpPost]
         [Display(Description = "备案地址修改")]
         [ApiAuth]
-        public ApiResult SaveUserInfoAddress([FromBody] UserInfoAddressInput parameter)
-        {
-            if (!this.IsFormValid())
+        public ApiResult SaveUserInfoAddress([FromBody] UserInfoAddressInput parameter) {
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             parameter.Type = AddressLockType.UserInfoAddress;
             var serviceResult = Resolve<IUserAddressService>().SaveUserInfoAddress(parameter);
@@ -84,8 +93,7 @@ namespace Alabo.Data.People.Users.Controllers
         [HttpGet]
         [Display(Description = "获取用户地址数据")]
         [ApiAuth]
-        public ApiResult<List<UserAddress>> Get([FromQuery] long loginUserId)
-        {
+        public ApiResult<List<UserAddress>> Get([FromQuery] long loginUserId) {
             var result = Resolve<IUserAddressService>().GetAllList(loginUserId)
                 .Where(x => x.Type != AddressLockType.CustomeShopOrderAddress).ToList(); // 自定义商城自动下单的地址排除掉不显示
             return ApiResult.Success(result);
@@ -97,10 +105,11 @@ namespace Alabo.Data.People.Users.Controllers
         [HttpDelete]
         [Display(Description = "删除用户地址")]
         [ApiAuth]
-        public ApiResult Delete([FromQuery] long loginUserId, string id)
-        {
-            if (!this.IsFormValid())
+        public ApiResult Delete([FromQuery] long loginUserId, string id) {
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
+
             var serviceResult = Resolve<IUserAddressService>().Delete(loginUserId, id.ToObjectId());
             return ToResult(serviceResult);
         }
@@ -111,10 +120,10 @@ namespace Alabo.Data.People.Users.Controllers
         [HttpPost]
         [Display(Description = "设置默认地址")]
         [ApiAuth]
-        public ApiResult SetDefault([FromBody] AddressDefaultInput parameter)
-        {
-            if (!this.IsFormValid())
+        public ApiResult SetDefault([FromBody] AddressDefaultInput parameter) {
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var serviceResult = Resolve<IUserAddressService>().SetDefault(parameter.UserId, parameter.Id.ToObjectId());
             return ToResult(serviceResult);
@@ -128,11 +137,9 @@ namespace Alabo.Data.People.Users.Controllers
         [ApiAuth]
         [HttpGet]
         [Display(Description = "id值为空获取默认地址 如果没有默认地址则返回值为空 id 值存在则获取与id相同的地址")]
-        public ApiResult Single([FromQuery] string id, long loginUserId)
-        {
+        public ApiResult Single([FromQuery] string id, long loginUserId) {
             var result = Resolve<IUserAddressService>().GetUserAddress(id.ToObjectId(), loginUserId);
-            if (result != null)
-            {
+            if (result != null) {
                 var regionName = Resolve<IRegionService>().GetSingle(u => u.RegionId == result.RegionId);
                 result.AddressDescription = regionName.Name;
                 return ApiResult.Success(result);

@@ -16,11 +16,15 @@ namespace Alabo.Datas.Stores.Delete.Mongo
 
         public bool Delete(TEntity entity)
         {
-            if (entity == null) return false;
+            if (entity == null) {
+                return false;
+            }
 
             Collection.DeleteOne(ToFilter(entity.Id));
             var find = GetSingle(entity.Id);
-            if (find == null) return true;
+            if (find == null) {
+                return true;
+            }
 
             return false;
         }

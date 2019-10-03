@@ -23,7 +23,10 @@ namespace Alabo.Industry.Cms.Articles.UI.AutoForm
             dic.TryGetValue("loginUserId", out var userId);
             dic.TryGetValue("pageIndex", out var pageIndexStr);
             var pageIndex = pageIndexStr.ToInt64();
-            if (pageIndex <= 0) pageIndex = 1;
+            if (pageIndex <= 0) {
+                pageIndex = 1;
+            }
+
             var temp = new ExpressionQuery<Article>
             {
                 EnablePaging = true,

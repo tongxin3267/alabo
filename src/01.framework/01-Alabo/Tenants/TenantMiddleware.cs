@@ -34,8 +34,9 @@ namespace Alabo.Tenants
             {
                 var tenantHeader = context.Request.Headers["zk-tenant"];
                 var tenant = tenantHeader.FirstOrDefault();
-                if (tenant.IsNullOrEmpty() || tenant.Contains("null", StringComparison.OrdinalIgnoreCase))
+                if (tenant.IsNullOrEmpty() || tenant.Contains("null", StringComparison.OrdinalIgnoreCase)) {
                     tenant = TenantContext.Master;
+                }
 
                 TenantContext.CurrentTenant = tenant.Trim().ToLower();
             }

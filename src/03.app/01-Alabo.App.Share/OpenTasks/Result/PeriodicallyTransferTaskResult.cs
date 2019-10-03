@@ -46,15 +46,16 @@ namespace Alabo.App.Share.OpenTasks.Result
                 var sql =
                     $"update Asset_Account set Amount=Amount-{Amount}, ModifiedTime=GetDate() where MoneyTypeId='{SourceMoneyTypeId}' and UserId={UserId} and Amount>={Amount}";
                 //判断更新语句是否影响了数据库
-                if (repositoryContext.ExecuteNonQuery(transaction, sql) > 0)
+                if (repositoryContext.ExecuteNonQuery(transaction, sql) > 0) {
                     foreach (var item in RuleItems)
                     {
                         var addAmount = item.Ratio * Amount;
                         sql =
                             $"declare @amount decimal(18, 2);update Asset_Account set Amount=Amount+{addAmount}, @amount=Amount+{addAmount}, HistoryAmount=HistoryAmount+{addAmount}, ModifiedTime=GetDate() where MoneyTypeId='{item.MoneyTypeId}' and UserId={UserId};select @amount";
                         var result = repositoryContext.ExecuteScalar(transaction, sql);
-                        if (result == null || result == DBNull.Value)
+                        if (result == null || result == DBNull.Value) {
                             return ExecuteResult.Fail($"sql script:\"{sql}\" execute with 0 line update.");
+                        }
 
                         var afterAmount = Convert.ToDecimal(result);
                         //此处继续加入Share_Reward与Asset_Bill表的记录
@@ -96,6 +97,7 @@ namespace Alabo.App.Share.OpenTasks.Result
                         };
                         repositoryContext.ExecuteNonQuery(transaction, sql, parameterList.ToArray());
                     }
+                }
 
                 transaction.Commit();
                 return ExecuteResult.Success();

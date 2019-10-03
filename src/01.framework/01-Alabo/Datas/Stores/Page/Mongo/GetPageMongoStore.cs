@@ -27,9 +27,13 @@ namespace Alabo.Datas.Stores.Page.Mongo
 
         public PagedList<TEntity> GetPagedList(Expression<Func<TEntity, bool>> predicate, int pageSize, int pageIndex)
         {
-            if (pageSize < 1) pageSize = 1;
+            if (pageSize < 1) {
+                pageSize = 1;
+            }
 
-            if (pageIndex < 1) pageIndex = 1;
+            if (pageIndex < 1) {
+                pageIndex = 1;
+            }
 
             long totalCount;
             List<TEntity> resultList;
@@ -71,12 +75,18 @@ namespace Alabo.Datas.Stores.Page.Mongo
         public IEnumerable<TEntity> GetListByPage(Expression<Func<TEntity, bool>> predicate, int pageSize,
             int pageIndex)
         {
-            if (pageSize < 1) pageSize = 1;
+            if (pageSize < 1) {
+                pageSize = 1;
+            }
 
-            if (pageIndex < 1) pageIndex = 1;
+            if (pageIndex < 1) {
+                pageIndex = 1;
+            }
 
             var query = Collection.AsQueryable();
-            if (predicate != null) query = query.Where(predicate);
+            if (predicate != null) {
+                query = query.Where(predicate);
+            }
 
             var source = query
                 .OrderBy(r => r.Id)
@@ -89,12 +99,18 @@ namespace Alabo.Datas.Stores.Page.Mongo
         public IEnumerable<TEntity> GetListByPageDesc(Expression<Func<TEntity, bool>> predicate, int pageSize,
             int pageIndex)
         {
-            if (pageSize < 1) pageSize = 1;
+            if (pageSize < 1) {
+                pageSize = 1;
+            }
 
-            if (pageIndex < 1) pageIndex = 1;
+            if (pageIndex < 1) {
+                pageIndex = 1;
+            }
 
             var query = Collection.AsQueryable();
-            if (predicate != null) query = query.Where(predicate);
+            if (predicate != null) {
+                query = query.Where(predicate);
+            }
 
             var source = query
                 .OrderBy(r => r.Id)

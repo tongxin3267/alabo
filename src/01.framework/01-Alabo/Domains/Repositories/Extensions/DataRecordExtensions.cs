@@ -39,7 +39,7 @@ namespace Alabo.Domains.Repositories.Extensions
         public static T Read<T>(this IDataRecord reader, int i)
         {
             var invoker = Cache<T>.Invoker;
-            if (invoker != null)
+            if (invoker != null) {
                 try
                 {
                     return invoker(reader, i);
@@ -48,6 +48,7 @@ namespace Alabo.Domains.Repositories.Extensions
                 {
                     return default;
                 }
+            }
 
             var objectValue = reader.GetValue(i);
             try

@@ -151,8 +151,10 @@ namespace Alabo.Tool.Office.Core
             data.CheckNull(nameof(data));
             propertyNames.CheckNull(nameof(propertyNames));
             var list = data.ToList();
-            foreach (var entity in list)
+            foreach (var entity in list) {
                 AddEntity(entity, propertyNames);
+            }
+
             AdjustColumnWidth(list.FirstOrDefault(), propertyNames);
             return this;
         }
@@ -256,11 +258,15 @@ namespace Alabo.Tool.Office.Core
             var type = entity.GetType();
             return propertyNames.Select(type.GetProperty).Select(property =>
             {
-                if (property == null)
+                if (property == null) {
                     return "";
+                }
+
                 var result = property.GetValue(entity);
-                if (property.PropertyType == typeof(bool))
+                if (property.PropertyType == typeof(bool)) {
                     result = Convert.ToBoolean(result).Description();
+                }
+
                 return result;
             }).ToList();
         }
@@ -270,11 +276,14 @@ namespace Alabo.Tool.Office.Core
         /// </summary>
         private void AdjustColumnWidth<T>(T entity, string[] propertyNames) where T : class
         {
-            if (entity == null)
+            if (entity == null) {
                 return;
+            }
+
             var type = entity.GetType();
-            for (var i = 0; i < propertyNames.Length; i++)
+            for (var i = 0; i < propertyNames.Length; i++) {
                 AdjustColumnWidth(type.GetProperty(propertyNames[i]), i);
+            }
         }
 
         /// <summary>
@@ -282,10 +291,13 @@ namespace Alabo.Tool.Office.Core
         /// </summary>
         private void AdjustColumnWidth(PropertyInfo property, int index)
         {
-            if (property == null)
+            if (property == null) {
                 return;
-            if (Reflection.IsDate(property))
+            }
+
+            if (Reflection.IsDate(property)) {
                 ColumnWidth(index, 12);
+            }
         }
 
         /// <summary>
@@ -301,10 +313,14 @@ namespace Alabo.Tool.Office.Core
         /// </summary>
         private string GetFileName(string fileName)
         {
-            if (fileName.IsEmpty())
+            if (fileName.IsEmpty()) {
                 fileName = Table.Title;
-            if (fileName.IsEmpty())
+            }
+
+            if (fileName.IsEmpty()) {
                 fileName = DateTime.Now.ToLongTimeString();
+            }
+
             return fileName + "." + _format.ToString().ToLower();
         }
 

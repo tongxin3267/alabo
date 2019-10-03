@@ -32,11 +32,15 @@ namespace Alabo.Framework.Themes.Domain.Services
             {
                 var allClientPages = new AllClientPages();
                 var defaultTheme = Resolve<IThemeService>().GetDefaultTheme(themePageInput);
-                if (defaultTheme == null) throw new ValidException("默认模板为空");
+                if (defaultTheme == null) {
+                    throw new ValidException("默认模板为空");
+                }
 
                 var themePage = GetList(r => r.ThemeId == defaultTheme.Id);
                 var resultList = new List<ClientPage>();
-                foreach (var page in themePage) resultList.Add(page.ToClientPage());
+                foreach (var page in themePage) {
+                    resultList.Add(page.ToClientPage());
+                }
 
                 // 赋值
                 allClientPages.Theme.Setting = defaultTheme.Setting.ToObject<object>();
@@ -63,7 +67,10 @@ namespace Alabo.Framework.Themes.Domain.Services
                 {
                     allClientPages.Site.IsWeiXinPay = true;
                     var scope = "snsapi_userinfo";
-                    if (!config.IsBaseUserInfo) scope = "snsapi_base";
+                    if (!config.IsBaseUserInfo) {
+                        scope = "snsapi_base";
+                    }
+
                     allClientPages.Site.WeiXinUrl =
                         $"https://open.weixin.qq.com/connect/oauth2/authorize?appid={config.AppId}&redirect_uri={config.ReturnUrl}&response_type=code&scope={scope}&state=STATE#wechat_redirect";
                 }

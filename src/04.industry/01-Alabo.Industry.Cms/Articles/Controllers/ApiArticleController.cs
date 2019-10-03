@@ -52,7 +52,10 @@ namespace Alabo.Industry.Cms.Articles.Controllers
         public ApiResult Agreement()
         {
             var model = Resolve<IAutoConfigService>().GetValue<WebSiteConfig>();
-            if (model == null) return null;
+            if (model == null) {
+                return null;
+            }
+
             var result = new Article
             {
                 Content = model.ServiceAgreement
@@ -74,7 +77,10 @@ namespace Alabo.Industry.Cms.Articles.Controllers
             if (id.IsNullOrEmpty() || id == "undefined")
             {
                 var web = Resolve<IAutoConfigService>().GetValue<WebSiteConfig>();
-                if (web == null) return null;
+                if (web == null) {
+                    return null;
+                }
+
                 var result = new Article
                 {
                     Content = web.ServiceAgreement
@@ -83,7 +89,9 @@ namespace Alabo.Industry.Cms.Articles.Controllers
             }
 
             var model = Resolve<IArticleService>().GetSingle(e => e.Id == id.ToObjectId());
-            if (model == null) return ApiResult.Failure<Article>("内容不存在");
+            if (model == null) {
+                return ApiResult.Failure<Article>("内容不存在");
+            }
 
             model.ViewCount++;
             Resolve<IArticleService>().Update(model);
@@ -309,7 +317,9 @@ namespace Alabo.Industry.Cms.Articles.Controllers
         {
             //var model = Resolve<IAboutService>().GetSingle(e => e.Id == id);
             var model = Resolve<IAutoConfigService>().GetList<About>().FirstOrDefault(e => e.Id == id.ToObjectId());
-            if (model == null) return ApiResult.Failure<About>("内容不存在");
+            if (model == null) {
+                return ApiResult.Failure<About>("内容不存在");
+            }
 
             model.Content = Resolve<IApiService>().ConvertToApiImageUrl(model.Content);
             return ApiResult.Success(model);
@@ -362,12 +372,13 @@ namespace Alabo.Industry.Cms.Articles.Controllers
             var relation = Resolve<IRelationService>().GetList(u =>
                 u.Type == "Alabo.App.Cms.Articles.Domain.CallBacks.ChannelTopLineTagRelation");
             var relationOutput = new List<TopLineClassOutput>();
-            foreach (var item in relation)
+            foreach (var item in relation) {
                 relationOutput.Add(new TopLineClassOutput
                 {
                     ClassName = item.Name,
                     RelationId = item.Id
                 });
+            }
 
             return ApiResult.Success(relationOutput);
         }
@@ -387,7 +398,10 @@ namespace Alabo.Industry.Cms.Articles.Controllers
             var apiService = Resolve<IApiService>();
             foreach (var item in relation)
             {
-                if (item.FatherId > 0) continue;
+                if (item.FatherId > 0) {
+                    continue;
+                }
+
                 var apiOutput = new HelpClassOutput
                 {
                     Name = item.Name,
@@ -439,7 +453,10 @@ namespace Alabo.Industry.Cms.Articles.Controllers
         public ApiResult Delete(string id)
         {
             var result = Resolve<IArticleAdminService>().Delete(id);
-            if (result.Item1.Succeeded) return ApiResult.Success();
+            if (result.Item1.Succeeded) {
+                return ApiResult.Success();
+            }
+
             return ApiResult.Failure("删除失败");
         }
     }

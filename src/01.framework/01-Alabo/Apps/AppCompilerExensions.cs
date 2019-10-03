@@ -19,7 +19,9 @@ namespace Alabo.Apps
         /// <param name="compiler">The compiler.</param>
         public static IDynamicAppCompiler AddCoreReference(this IDynamicAppCompiler compiler)
         {
-            if (compiler == null) throw new ArgumentNullException(nameof(compiler));
+            if (compiler == null) {
+                throw new ArgumentNullException(nameof(compiler));
+            }
 
             var coreLocation = typeof(object).GetTypeInfo().Assembly.Location;
             return compiler.AddReference(coreLocation);
@@ -31,12 +33,16 @@ namespace Alabo.Apps
         /// <param name="compiler">The compiler.</param>
         public static IDynamicAppCompiler AddCurrentReferences(this IDynamicAppCompiler compiler)
         {
-            if (compiler == null) throw new ArgumentNullException(nameof(compiler));
+            if (compiler == null) {
+                throw new ArgumentNullException(nameof(compiler));
+            }
 
             RuntimeContext.Current.GetPlatformRuntimeAssemblies()
                 .Foreach(e =>
                 {
-                    if (File.Exists(e.Location) && !e.Location.EndsWith("ni.dll")) compiler.AddReference(e.Location);
+                    if (File.Exists(e.Location) && !e.Location.EndsWith("ni.dll")) {
+                        compiler.AddReference(e.Location);
+                    }
                 });
             return compiler;
         }
@@ -47,7 +53,9 @@ namespace Alabo.Apps
         /// <param name="compiler">The compiler.</param>
         public static IDynamicAppCompiler AddDefaultUsing(this IDynamicAppCompiler compiler)
         {
-            if (compiler == null) throw new ArgumentNullException(nameof(compiler));
+            if (compiler == null) {
+                throw new ArgumentNullException(nameof(compiler));
+            }
 
             return compiler.AddUsing("System")
                 .AddUsing("System.Linq")
@@ -63,17 +71,25 @@ namespace Alabo.Apps
         public static IDynamicAppCompiler AddDirectory(this IDynamicAppCompiler compiler, string path,
             Encoding encoding)
         {
-            if (compiler == null) throw new ArgumentNullException(nameof(compiler));
+            if (compiler == null) {
+                throw new ArgumentNullException(nameof(compiler));
+            }
 
-            if (path == null) throw new ArgumentNullException(nameof(path));
+            if (path == null) {
+                throw new ArgumentNullException(nameof(path));
+            }
 
-            if (!Directory.Exists(path)) throw new DirectoryNotFoundException($"{path} not found.");
+            if (!Directory.Exists(path)) {
+                throw new DirectoryNotFoundException($"{path} not found.");
+            }
 
             var directoryInfo = new DirectoryInfo(path);
             var files = directoryInfo.GetFiles();
             compiler.AddFiles(files.Select(e => e.FullName).ToArray(), encoding);
             var directories = directoryInfo.GetDirectories();
-            foreach (var item in directories) compiler.AddDirectory(item.FullName, encoding);
+            foreach (var item in directories) {
+                compiler.AddDirectory(item.FullName, encoding);
+            }
 
             return compiler;
         }
@@ -86,11 +102,17 @@ namespace Alabo.Apps
         /// <param name="encoding">The encoding.</param>
         public static IDynamicAppCompiler AddFiles(this IDynamicAppCompiler compiler, string[] paths, Encoding encoding)
         {
-            if (compiler == null) throw new ArgumentNullException(nameof(compiler));
+            if (compiler == null) {
+                throw new ArgumentNullException(nameof(compiler));
+            }
 
-            if (paths == null) throw new ArgumentNullException(nameof(paths));
+            if (paths == null) {
+                throw new ArgumentNullException(nameof(paths));
+            }
 
-            foreach (var path in paths) compiler.AddFile(path, encoding);
+            foreach (var path in paths) {
+                compiler.AddFile(path, encoding);
+            }
 
             return compiler;
         }

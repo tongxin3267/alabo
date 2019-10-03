@@ -32,12 +32,16 @@ namespace Alabo.App.Share.HuDong.Controllers
         [HttpGet]
         public ApiResult GetAwards([FromQuery] HuDongViewInput viewInput)
         {
-            if (!this.IsFormValid()) return ApiResult.Failure<Hudong>(this.FormInvalidReason());
+            if (!this.IsFormValid()) {
+                return ApiResult.Failure<Hudong>(this.FormInvalidReason());
+            }
 
             var result = Resolve<IHudongService>().GetAwards(viewInput);
 
-            if (result.Item1.Succeeded == false)
+            if (result.Item1.Succeeded == false) {
                 return ApiResult.Failure(result);
+            }
+
             return ApiResult.Success(result);
         }
 
@@ -49,7 +53,9 @@ namespace Alabo.App.Share.HuDong.Controllers
         [HttpGet]
         public ApiResult Draw(DrawInput drawInput)
         {
-            if (!this.IsFormValid()) return ApiResult.Failure<Hudong>(this.FormInvalidReason());
+            if (!this.IsFormValid()) {
+                return ApiResult.Failure<Hudong>(this.FormInvalidReason());
+            }
 
             var result = Resolve<IHudongService>().Draw(drawInput);
             return ApiResult.Success(result);
@@ -75,7 +81,9 @@ namespace Alabo.App.Share.HuDong.Controllers
         [HttpGet]
         public ApiResult<Hudong> GetView([FromQuery] HuDongViewInput viewInput)
         {
-            if (!this.IsFormValid()) return ApiResult.Failure<Hudong>(this.FormInvalidReason());
+            if (!this.IsFormValid()) {
+                return ApiResult.Failure<Hudong>(this.FormInvalidReason());
+            }
 
             var result = Resolve<IHudongService>().GetView(viewInput);
             return ToResult(result);
@@ -98,8 +106,13 @@ namespace Alabo.App.Share.HuDong.Controllers
             {
                 decimal sumRate = 0;
                 model.Awards.ForEach(a => sumRate += a.Rate);
-                if (sumRate > 100) return ApiResult.Failure("获奖几率不能大于100%");
-                if (sumRate <= 0) return ApiResult.Failure("获奖几率必须大于0%");
+                if (sumRate > 100) {
+                    return ApiResult.Failure("获奖几率不能大于100%");
+                }
+
+                if (sumRate <= 0) {
+                    return ApiResult.Failure("获奖几率必须大于0%");
+                }
 
                 model.Awards.ForEach(a => { a.AwardId = Guid.NewGuid(); });
 
@@ -128,7 +141,9 @@ namespace Alabo.App.Share.HuDong.Controllers
             var name = type?.GetInstanceByName()?.GetType()?.FullName?.GetClassDescription()?.ClassPropertyAttribute
                 ?.Name;
             var list = new List<HudongAward>();
-            for (var i = 0; i < 8; i++) list.Add(new HudongAward { Intro = $"{name}获奖{i + 1}" });
+            for (var i = 0; i < 8; i++) {
+                list.Add(new HudongAward { Intro = $"{name}获奖{i + 1}" });
+            }
 
             return list;
         }

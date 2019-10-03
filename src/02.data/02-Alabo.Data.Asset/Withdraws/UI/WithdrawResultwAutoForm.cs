@@ -17,9 +17,9 @@ namespace Alabo.App.Asset.Withdraws.UI
         {
             var withDraw = Resolve<IWithdrawService>().GetAdminWithDraw(id.ConvertToLong());
             var form = new WithdrawResultwAutoForm();
-            if (withDraw == null)
+            if (withDraw == null) {
                 form = new WithdrawResultwAutoForm();
-            else
+            } else {
                 form = new WithdrawResultwAutoForm
                 {
                     Status = withDraw.Status.GetDisplayName(),
@@ -39,6 +39,7 @@ namespace Alabo.App.Asset.Withdraws.UI
                     UserRemark = withDraw.UserRemark,
                     UserId = withDraw.UserId
                 };
+            }
             // withDraw.MapTo<WithdrawReviewAutoForm>();
             var result = ToAutoForm(form);
             result.AlertText = "【审核结果】";
@@ -82,7 +83,9 @@ namespace Alabo.App.Asset.Withdraws.UI
             get
             {
                 var searSerial = $"9{Id.ToString().PadLeft(9, '0')}";
-                if (Id.ToString().Length == 10) searSerial = $"{Id.ToString()}";
+                if (Id.ToString().Length == 10) {
+                    searSerial = $"{Id.ToString()}";
+                }
 
                 return searSerial;
             }

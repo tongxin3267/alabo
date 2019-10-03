@@ -38,7 +38,9 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
         public ServiceResult Delete(long userId, ObjectId id)
         {
             var find = GetSingle(r => r.Id == id && r.UserId == userId);
-            if (find == null) return ServiceResult.FailedWithMessage("地址不存在");
+            if (find == null) {
+                return ServiceResult.FailedWithMessage("地址不存在");
+            }
             //else {
             //    return ServiceResult.FailedWithMessage("已添加的地址不允许删除");
             //}
@@ -61,7 +63,10 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
         public UserAddress GetUserAddress(ObjectId guid, long userId)
         {
             InitDefaultAddress(userId);
-            if (guid.IsObjectIdNullOrEmpty()) return GetSingle(r => r.UserId == userId && r.IsDefault);
+            if (guid.IsObjectIdNullOrEmpty()) {
+                return GetSingle(r => r.UserId == userId && r.IsDefault);
+            }
+
             return GetSingle(r => r.UserId == userId && r.Id == guid);
         }
 
@@ -77,7 +82,9 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
             if (userAddress != null && userAddress.Count > 0)
             {
                 var address = userAddress.FirstOrDefault(r => r.Id == addressId);
-                if (address == null) return ServiceResult.FailedWithMessage("地址未找到，或已删除");
+                if (address == null) {
+                    return ServiceResult.FailedWithMessage("地址未找到，或已删除");
+                }
 
                 address.IsDefault = true;
                 if (Update(address))
@@ -109,9 +116,15 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
         /// <param name="userInfoAddress"></param>
         public ServiceResult SaveUserInfoAddress(UserInfoAddressInput userInfoAddress)
         {
-            if (userInfoAddress == null) throw new Exception("输入不能为空");
+            if (userInfoAddress == null) {
+                throw new Exception("输入不能为空");
+            }
+
             var userAddress = AutoMapping.SetValue<UserAddress>(userInfoAddress);
-            if (!userInfoAddress.Id.IsNullOrEmpty()) userAddress.Id = userInfoAddress.Id.ToSafeObjectId();
+            if (!userInfoAddress.Id.IsNullOrEmpty()) {
+                userAddress.Id = userInfoAddress.Id.ToSafeObjectId();
+            }
+
             var result = AddOrUpdateSingle(userAddress);
             if (result == ServiceResult.Success)
             {
@@ -158,7 +171,10 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
             //只允许更改收货人姓名及电话
             //限定每个用户只能有一个地址
 
-            if (addressInput == null) throw new Exception("输入不能为空");
+            if (addressInput == null) {
+                throw new Exception("输入不能为空");
+            }
+
             var userAddress = AutoMapping.SetValue<UserAddress>(addressInput);
             var addressConfig = Resolve<IAutoConfigService>().GetValue<UserAddressConfig>();
             if (!addressInput.Id.IsNullOrEmpty() && !addressInput.Id.ToObjectId().IsObjectIdNullOrEmpty())
@@ -166,15 +182,22 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
                 //修改
                 userAddress.Id = addressInput.Id.ToObjectId();
                 var model = Resolve<IUserAddressService>().GetSingle(u => u.Id == addressInput.Id.ToObjectId());
-                if (model == null) return ServiceResult.FailedWithMessage("数据异常");
+                if (model == null) {
+                    return ServiceResult.FailedWithMessage("数据异常");
+                }
 
                 //查看配置是否开启
                 if (addressConfig.IsEnble)
                 {
                     if (userAddress.Address != model.Address) //不允许修改
+{
                         return ServiceResult.FailedWithMessage(addressConfig.EditTips);
+                    }
+
                     if (userAddress.RegionId != model.RegionId) //不允许修改
+{
                         return ServiceResult.FailedWithMessage(addressConfig.EditTips);
+                    }
                 }
             }
             else
@@ -189,8 +212,9 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
                 if (addressConfig.IsEnble)
                 {
                     var addressList = Resolve<IUserAddressService>().GetList(u => u.UserId == addressInput.UserId);
-                    if (addressList.Count >= addressConfig.MaxNumber)
+                    if (addressList.Count >= addressConfig.MaxNumber) {
                         return ServiceResult.FailedWithMessage(addressConfig.AddTips);
+                    }
                 }
             }
 
@@ -205,8 +229,9 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
         public IList<UserAddress> GetAllList(long userId)
         {
             var model = GetList(r => r.UserId == userId);
-            foreach (var item in model)
+            foreach (var item in model) {
                 item.AddressDescription = Resolve<IRegionService>().GetRegionNameById(item.RegionId);
+            }
 
             return model;
         }
@@ -222,21 +247,33 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
         /// <param name="userAddress"></param>
         public ServiceResult AddOrUpdateSingle(UserAddress userAddress)
         {
-            if (userAddress == null) throw new ValidException("地址不能为空");
-            var find = GetSingle(userAddress.Id);
-            if (userAddress.Type == AddressLockType.UserInfoAddress)
-                find = GetSingle(u => u.UserId == userAddress.UserId && u.Type == userAddress.Type);
+            if (userAddress == null) {
+                throw new ValidException("地址不能为空");
+            }
 
-            if (find == null) find = new UserAddress();
+            var find = GetSingle(userAddress.Id);
+            if (userAddress.Type == AddressLockType.UserInfoAddress) {
+                find = GetSingle(u => u.UserId == userAddress.UserId && u.Type == userAddress.Type);
+            }
+
+            if (find == null) {
+                find = new UserAddress();
+            }
 
             var user = Resolve<IAlaboUserService>().GetSingle(r => r.Id == userAddress.UserId);
 
-            if (user == null) return ServiceResult.FailedWithMessage("会员不存在");
+            if (user == null) {
+                return ServiceResult.FailedWithMessage("会员不存在");
+            }
 
             var region = Resolve<IRegionService>().GetSingle(r => r.RegionId == userAddress.RegionId);
-            if (region == null) return ServiceResult.FailedWithMessage("您选择的区域不存在");
+            if (region == null) {
+                return ServiceResult.FailedWithMessage("您选择的区域不存在");
+            }
 
-            if (region.Level != RegionLevel.County) return ServiceResult.FailedWithMessage("请选择完整的地址");
+            if (region.Level != RegionLevel.County) {
+                return ServiceResult.FailedWithMessage("请选择完整的地址");
+            }
 
             find.AddressDescription = region.FullName + " " + userAddress.Address;
             find.Address = userAddress.Address;
@@ -253,14 +290,27 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
             find.Name = userAddress.Name;
 
             //名字和手机特殊处理
-            if (find.Mobile.IsNullOrEmpty()) find.Mobile = user.Mobile;
-            if (find.Name.IsNullOrEmpty()) find.Name = user.Name;
-            if (find.Name.IsNullOrEmpty()) find.Name = user.UserName;
+            if (find.Mobile.IsNullOrEmpty()) {
+                find.Mobile = user.Mobile;
+            }
+
+            if (find.Name.IsNullOrEmpty()) {
+                find.Name = user.Name;
+            }
+
+            if (find.Name.IsNullOrEmpty()) {
+                find.Name = user.UserName;
+            }
 
             var saveResult = AddOrUpdate(find, r => r.Id == find.Id);
-            if (saveResult && userAddress.IsDefault)
+            if (saveResult && userAddress.IsDefault) {
                 return SetDefault(userAddress.UserId, find.Id); // 如果设置为默认值地址，则更新为默认值地址
-            if (saveResult && !userAddress.IsDefault) return ServiceResult.Success;
+            }
+
+            if (saveResult && !userAddress.IsDefault) {
+                return ServiceResult.Success;
+            }
+
             return ServiceResult.FailedWithMessage("地址保存失败");
         }
 
@@ -279,7 +329,9 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
                 if (defaultAddress == null)
                 {
                     var firsetAddress = address.FirstOrDefault(); // 使用第一个做默认地址
-                    if (firsetAddress != null) SetDefault(userId, firsetAddress.Id);
+                    if (firsetAddress != null) {
+                        SetDefault(userId, firsetAddress.Id);
+                    }
                 }
             }
         }

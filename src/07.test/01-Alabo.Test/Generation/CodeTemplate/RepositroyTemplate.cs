@@ -17,7 +17,9 @@ namespace Alabo.Test.Generation.CodeTemplate
         {
             //type = typeof(Theme);
 
-            if (!type.BaseType.FullName.Contains("Entities")) throw new ValidException("命名空间必须包含Entities");
+            if (!type.BaseType.FullName.Contains("Entities")) {
+                throw new ValidException("命名空间必须包含Entities");
+            }
 
             var testBuilder = new StringBuilder();
 
@@ -33,8 +35,9 @@ namespace Alabo.Test.Generation.CodeTemplate
                 testBuilder.AppendLine("using Alabo.Domains.Repositories;");
                 testBuilder.AppendLine($"using {type.Namespace};");
 
-                if (testBuilder.ToString().IndexOf(type.Namespace, StringComparison.OrdinalIgnoreCase) == -1)
+                if (testBuilder.ToString().IndexOf(type.Namespace, StringComparison.OrdinalIgnoreCase) == -1) {
                     testBuilder.AppendLine($"using {type.Namespace};");
+                }
 
                 testBuilder.AppendLine();
                 testBuilder.AppendLine($"namespace {type.Namespace.Replace("Entities", "Repositories")} {{");
@@ -71,8 +74,9 @@ namespace Alabo.Test.Generation.CodeTemplate
                 testBuilder.AppendLine("using Alabo.Datas.UnitOfWorks;");
                 testBuilder.AppendLine($"using  {type.Namespace.Replace("Entities", "Repositories")};");
 
-                if (testBuilder.ToString().IndexOf(type.Namespace, StringComparison.OrdinalIgnoreCase) == -1)
+                if (testBuilder.ToString().IndexOf(type.Namespace, StringComparison.OrdinalIgnoreCase) == -1) {
                     testBuilder.AppendLine($"using {type.Namespace};");
+                }
 
                 testBuilder.AppendLine();
                 testBuilder.AppendLine($"namespace {type.Namespace.Replace("Entities", "Repositories")} {{");

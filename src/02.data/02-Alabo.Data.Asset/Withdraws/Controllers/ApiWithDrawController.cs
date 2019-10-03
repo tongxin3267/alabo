@@ -27,7 +27,9 @@ namespace Alabo.App.Asset.Withdraws.Controllers
         public ApiResult GetAccountType([FromQuery] long loginUserId)
         {
             var result = Resolve<IWithdrawService>().GetWithDrawMoneys(loginUserId);
-            if (result != null) return ApiResult.Success(result);
+            if (result != null) {
+                return ApiResult.Success(result);
+            }
 
             return ApiResult.Failure("提现类型获取失败", MessageCodes.ParameterValidationFailure);
         }
@@ -41,8 +43,9 @@ namespace Alabo.App.Asset.Withdraws.Controllers
         [ApiAuth]
         public ApiResult Add([FromBody] WithDrawInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             parameter.UserId = parameter.LoginUserId;
             var serviceResult = Resolve<IWithdrawService>().Add(parameter);
@@ -59,8 +62,9 @@ namespace Alabo.App.Asset.Withdraws.Controllers
         [ApiAuth]
         public ApiResult Delete([FromQuery] long loginUserId, long id)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var serviceResult = Resolve<IWithdrawService>().Delete(loginUserId, id);
             return ToResult(serviceResult);
@@ -105,7 +109,9 @@ namespace Alabo.App.Asset.Withdraws.Controllers
             var result = Resolve<IWithdrawService>().GetSingle(loginUserId, id);
             if (result != null)
             {
-                if (result.UserId != loginUserId) return ApiResult.Failure<WithDrawShowOutput>("对不起，您无权查看他人提现详情");
+                if (result.UserId != loginUserId) {
+                    return ApiResult.Failure<WithDrawShowOutput>("对不起，您无权查看他人提现详情");
+                }
 
                 return ApiResult.Success(result.ToKeyValues());
             }

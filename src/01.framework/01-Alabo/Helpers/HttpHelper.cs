@@ -30,14 +30,16 @@ namespace Alabo.Helpers
                 return new Tuple<ServiceResult, T>(ServiceResult.FailedWithMessage($"网络请求失败,apiUrl:{url}"), default);
             }
 
-            if (response.IsNullOrEmpty())
+            if (response.IsNullOrEmpty()) {
                 return new Tuple<ServiceResult, T>(ServiceResult.FailedWithMessage($"网络请求为空,apiUrl:{url}"), default);
+            }
 
             try
             {
                 var result = response.ToObject<ApiResult<T>>();
-                if (result.Status != ResultStatus.Success)
+                if (result.Status != ResultStatus.Success) {
                     return new Tuple<ServiceResult, T>(ServiceResult.FailedWithMessage(result.Message), default);
+                }
 
                 return new Tuple<ServiceResult, T>(ServiceResult.Success, result.Result);
             }
@@ -68,14 +70,16 @@ namespace Alabo.Helpers
                 return new Tuple<ServiceResult, T>(ServiceResult.FailedWithMessage($"网络请求失败,apiUrl:{url}"), default);
             }
 
-            if (response.IsNullOrEmpty())
+            if (response.IsNullOrEmpty()) {
                 return new Tuple<ServiceResult, T>(ServiceResult.FailedWithMessage($"网络请求为空,apiUrl:{url}"), default);
+            }
 
             try
             {
                 var result = response.ToObject<ApiResult<T>>();
-                if (result.Status != ResultStatus.Success)
+                if (result.Status != ResultStatus.Success) {
                     return new Tuple<ServiceResult, T>(ServiceResult.FailedWithMessage(result.Message), default);
+                }
 
                 return new Tuple<ServiceResult, T>(ServiceResult.Success, result.Result);
             }

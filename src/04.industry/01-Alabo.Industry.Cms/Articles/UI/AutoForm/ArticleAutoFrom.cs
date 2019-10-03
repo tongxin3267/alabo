@@ -38,7 +38,9 @@ namespace Alabo.Industry.Cms.Articles.UI.AutoForm
 
             var result = Ioc.Resolve<IArticleService>().GetSingle(id);
             var articleForm = new ArticleAutoFrom();
-            if (result != null) articleForm = result.MapTo<ArticleAutoFrom>();
+            if (result != null) {
+                articleForm = result.MapTo<ArticleAutoFrom>();
+            }
 
             articleForm.Id = id.ToString();
             articleForm.ChannelId = channelId; // channel.Id.ToString();
@@ -78,12 +80,18 @@ namespace Alabo.Industry.Cms.Articles.UI.AutoForm
             if (entity == null)
             {
                 var addResult = Resolve<IArticleAdminService>().Add(article);
-                if (addResult) return ServiceResult.Success;
+                if (addResult) {
+                    return ServiceResult.Success;
+                }
+
                 return ServiceResult.Failed;
             }
 
             var result = Resolve<IArticleAdminService>().Update(article);
-            if (result) return ServiceResult.Success;
+            if (result) {
+                return ServiceResult.Success;
+            }
+
             return ServiceResult.Failed;
         }
 

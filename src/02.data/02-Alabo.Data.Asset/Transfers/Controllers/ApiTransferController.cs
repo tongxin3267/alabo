@@ -24,7 +24,9 @@ namespace Alabo.App.Asset.Transfers.Controllers
         public ApiResult GetTransferConfis()
         {
             var result = Resolve<ITransferService>().GetTransferConfig();
-            if (result != null) return ApiResult.Success(result);
+            if (result != null) {
+                return ApiResult.Success(result);
+            }
 
             return ApiResult.Failure("转账类型获取失败", MessageCodes.ParameterValidationFailure);
         }
@@ -37,8 +39,9 @@ namespace Alabo.App.Asset.Transfers.Controllers
         [ApiAuth]
         public ApiResult Add([FromBody] TransferAddInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var serviceResult = Resolve<ITransferService>().Add(parameter);
 
@@ -68,7 +71,9 @@ namespace Alabo.App.Asset.Transfers.Controllers
         public ApiResult Get([FromQuery] long loginUserId, long id)
         {
             var result = Resolve<ITransferService>().GetSingle(id, loginUserId);
-            if (result != null) return ApiResult.Success(result);
+            if (result != null) {
+                return ApiResult.Success(result);
+            }
 
             return ApiResult.Failure("没有数据");
         }

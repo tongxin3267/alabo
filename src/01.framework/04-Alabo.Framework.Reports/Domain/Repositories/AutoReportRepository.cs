@@ -67,7 +67,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
                                 @"group by CONVERT(VARCHAR(100), CreateTime, 23) ";
 
             var lists = new List<object>();
-            if (FilterSqlScript(sqlCountByDay) != true)
+            if (FilterSqlScript(sqlCountByDay) != true) {
                 using (var dr = dbContext.ExecuteDataReader(sqlCountByDay))
                 {
                     while (dr.Read())
@@ -76,6 +76,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
                         lists.Add(item);
                     }
                 }
+            }
 
             return lists;
         }
@@ -99,7 +100,9 @@ namespace Alabo.Framework.Reports.Domain.Repositories
             chartCols.Add("比率");
 
             //查询条件
-            if (!string.IsNullOrEmpty(sqlWhere)) tempSqlWhere = " and " + sqlWhere;
+            if (!string.IsNullOrEmpty(sqlWhere)) {
+                tempSqlWhere = " and " + sqlWhere;
+            }
 
             //日期验证
             if (startTime.ToString().IndexOf("0001") == -1 || endTime.ToString().IndexOf("0001") == -1)
@@ -141,7 +144,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
             var result = new List<AutoReport>();
 
             var typeEnumExt = specialField.GetTypeByName();
-            if (FilterSqlScript(sqlCountByDay) != true)
+            if (FilterSqlScript(sqlCountByDay) != true) {
                 using (var dr = dbContext.ExecuteDataReader(sqlCountByDay))
                 {
                     while (dr.Read())
@@ -151,18 +154,20 @@ namespace Alabo.Framework.Reports.Domain.Repositories
 
                         chartCols.ForEach(p =>
                         {
-                            if (p.ToLower() == "日期")
+                            if (p.ToLower() == "日期") {
                                 output.Date = dr[p].ToString();
-                            else if (p.ToLower() == "全部数量")
+                            } else if (p.ToLower() == "全部数量") {
                                 output.Date = dr[p].ToString();
-                            else if (p.ToLower() == "比率")
+                            } else if (p.ToLower() == "比率") {
                                 output.Date = dr[p].ToString();
-                            else
+                            } else {
                                 listItem.Add(new AutoReportItem {Name = p.ToString(), Value = dr[p].ToString()});
+                            }
                         });
                         output.AutoReportItem = listItem;
                     }
                 }
+            }
 
             return result;
         }
@@ -219,7 +224,9 @@ namespace Alabo.Framework.Reports.Domain.Repositories
             var tempSqlWhere = string.Empty;
 
             //查询条件
-            if (!string.IsNullOrEmpty(sqlWhere)) tempSqlWhere = " and " + sqlWhere;
+            if (!string.IsNullOrEmpty(sqlWhere)) {
+                tempSqlWhere = " and " + sqlWhere;
+            }
             //日期验证
             if (startTime.ToString().IndexOf("0001") == -1 || endTime.ToString().IndexOf("0001") == -1)
             {
@@ -231,7 +238,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
 
             var tempSqlStatusCount = string.Empty;
             var tempSqlStatusRatioCount = string.Empty;
-            if (!string.IsNullOrEmpty(specialField))
+            if (!string.IsNullOrEmpty(specialField)) {
                 foreach (Status item in Enum.GetValues(typeof(Status)))
                 {
                     var itemName = item.ToString();
@@ -246,6 +253,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
                                               " THEN Status END) as float)/cast(((count(1) ) )as float) ) as varchar)+'%' as CountStatusRatio" +
                                               itemName + ",";
                 }
+            }
 
             var dbContext = Ioc.Resolve<IAlaboUserRepository>().RepositoryContext;
             var sqlCountByDay = @" select  CONVERT(VARCHAR(100), CreateTime, 23) Day, count(id) as TotalNum," +
@@ -258,7 +266,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
 
             var lists = new List<object>();
 
-            if (FilterSqlScript(sqlCountByDay) != true)
+            if (FilterSqlScript(sqlCountByDay) != true) {
                 using (var dr = dbContext.ExecuteDataReader(sqlCountByDay))
                 {
                     while (dr.Read())
@@ -267,6 +275,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
                         lists.Add(item);
                     }
                 }
+            }
 
             return lists;
         }
@@ -296,7 +305,9 @@ namespace Alabo.Framework.Reports.Domain.Repositories
                         var value = item.name;
                         var key = item.type;
 
-                        if (!dic.ContainsKey(key)) dic.Add(key, dr[key].ToString());
+                        if (!dic.ContainsKey(key)) {
+                            dic.Add(key, dr[key].ToString());
+                        }
                     }
 
                     chartRows.Add(dic);
@@ -318,7 +329,10 @@ namespace Alabo.Framework.Reports.Domain.Repositories
         /// <returns></returns>
         public decimal GetSingleData(SingleReportInput singleReportInput)
         {
-            if (string.IsNullOrEmpty(singleReportInput.Field)) singleReportInput.Field = "id";
+            if (string.IsNullOrEmpty(singleReportInput.Field)) {
+                singleReportInput.Field = "id";
+            }
+
             singleReportInput.Condition.EntityType = singleReportInput.EntityType;
             var tableName = singleReportInput.Condition.GetTableName();
 
@@ -425,7 +439,10 @@ namespace Alabo.Framework.Reports.Domain.Repositories
 
             sql.Append(singleReportInput.Condition.ToSqlWhere(singleReportInput.Style));
             var returnValue = dbContext.ExecuteScalar(sql.ToString());
-            if (returnValue == null) returnValue = 0;
+            if (returnValue == null) {
+                returnValue = 0;
+            }
+
             return returnValue.ToDecimal();
         }
 
@@ -473,7 +490,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
             if (!string.IsNullOrEmpty(EnumName))
             {
                 var typeEnum = EnumName.GetTypeByName();
-                if (typeEnum != null)
+                if (typeEnum != null) {
                     foreach (Enum item in Enum.GetValues(typeEnum))
                     {
                         var itemName = item.GetDisplayName();
@@ -484,6 +501,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
                                              key + " THEN " + countReportInput.Field + " END) AS  " + itemName + " , ";
                         chartCols.Add(itemName);
                     }
+                }
             }
 
             var sqlCountByDay = @" select  CONVERT(VARCHAR(100), CreateTime, 23) 日期, count(id) as 全部数量," +
@@ -690,7 +708,10 @@ namespace Alabo.Framework.Reports.Domain.Repositories
             sSql = sSql.Replace("create", "");
             sSql = sSql.Replace("xp_", "no");
             decLen = sSql.Length;
-            if (srcLen == decLen) return true;
+            if (srcLen == decLen) {
+                return true;
+            }
+
             return false;
         }
 
@@ -801,7 +822,9 @@ namespace Alabo.Framework.Reports.Domain.Repositories
                         var value = item.name;
                         var key = item.type;
 
-                        if (!dic.ContainsKey(key)) dic.Add(key, dr[key].ToString());
+                        if (!dic.ContainsKey(key)) {
+                            dic.Add(key, dr[key].ToString());
+                        }
                     }
 
                     chartRows.Add(dic);
@@ -848,9 +871,11 @@ namespace Alabo.Framework.Reports.Domain.Repositories
             var tempSqlWhere = string.Empty;
 
             if (sumReportInput.Condition.StartTime.ToString().IndexOf("0001") == -1 ||
-                sumReportInput.Condition.EndTime.ToString().IndexOf("0001") == -1)
+                sumReportInput.Condition.EndTime.ToString().IndexOf("0001") == -1) {
                 tempSqlWhere = " and  CreateTime between CONVERT(VARCHAR(100), '" + sumReportInput.Condition.StartTime +
                                "', 23) and CONVERT(VARCHAR(100), '" + sumReportInput.Condition.EndTime + "', 23)";
+            }
+
             sumReportInput.Condition.EntityType = sumReportInput.EntityType;
 
             var tableName = sumReportInput.Condition.GetTableName();
@@ -859,7 +884,10 @@ namespace Alabo.Framework.Reports.Domain.Repositories
                                     from " + tableName + @"
                                     where 1=1 " + tempSqlWhere +
                               @"group by CONVERT(VARCHAR(100), CreateTime, 23)";
-            if (FilterSqlScript(sqlBaseExec)) throw new ArgumentNullException("sql语句有异常！");
+            if (FilterSqlScript(sqlBaseExec)) {
+                throw new ArgumentNullException("sql语句有异常！");
+            }
+
             return Tuple.Create(sqlBaseExec, chartCols);
         }
 
@@ -883,7 +911,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
             if (!string.IsNullOrEmpty(EnumName))
             {
                 var typeEnum = EnumName.GetTypeByName();
-                if (typeEnum != null)
+                if (typeEnum != null) {
                     foreach (Enum item in Enum.GetValues(typeEnum))
                     {
                         var itemName = item.GetDisplayName();
@@ -907,9 +935,11 @@ namespace Alabo.Framework.Reports.Domain.Repositories
                             colList.Add(col);
                         }
                     }
+                }
             }
 
             if (reportInput.Fields.Count > 0) //实体字段 过滤
+{
                 foreach (var field in reportInput.Fields)
                 {
                     var tempDisplayName = reportInput.EntityType.GetFiledDisplayName(field);
@@ -920,6 +950,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
                     col.type = field;
                     colList.Add(col);
                 }
+            }
             ////查询条件
             //if (!string.IsNullOrEmpty(sqlWhere))
             //{
@@ -928,10 +959,11 @@ namespace Alabo.Framework.Reports.Domain.Repositories
 
             //日期验证
             if (reportInput.Condition.StartTime.ToString().IndexOf("0001") == -1 ||
-                reportInput.Condition.EndTime.ToString().IndexOf("0001") == -1)
+                reportInput.Condition.EndTime.ToString().IndexOf("0001") == -1) {
                 tempSqlWhere = tempSqlWhere + "  and  CreateTime between CONVERT(VARCHAR(100), '" +
                                reportInput.Condition.StartTime + "', 23) and CONVERT(VARCHAR(100), '" +
                                reportInput.Condition.EndTime + "', 23)";
+            }
 
             reportInput.Condition.EntityType = reportInput.EntityType;
             var tableName = reportInput.Condition.GetTableName();
@@ -940,7 +972,9 @@ namespace Alabo.Framework.Reports.Domain.Repositories
                                     from " + tableName + @"
                                     where 1=1 " + tempSqlWhere + @"
                                     group by CONVERT(VARCHAR(100), CreateTime, 23)";
-            if (FilterSqlScript(sqlBaseExec)) throw new ArgumentNullException("sql语句有异常！");
+            if (FilterSqlScript(sqlBaseExec)) {
+                throw new ArgumentNullException("sql语句有异常！");
+            }
 
             return Tuple.Create(sqlBaseExec, colList);
         }

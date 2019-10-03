@@ -25,9 +25,13 @@ namespace Alabo.Cloud.People.Identities.UI
             var result = new AutoForm();
             if (model != null)
             {
-                if (model.Status == IdentityStatus.Succeed)
+                if (model.Status == IdentityStatus.Succeed) {
                     result.FromMessage = new FromMessage(FromMessageType.Success, "恭喜您,实名认证已成功");
-                if (model.Status == IdentityStatus.Failed) result = ToAutoForm(new Identity());
+                }
+
+                if (model.Status == IdentityStatus.Failed) {
+                    result = ToAutoForm(new Identity());
+                }
             }
             else
             {

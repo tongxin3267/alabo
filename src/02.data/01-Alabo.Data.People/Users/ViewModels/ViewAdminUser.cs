@@ -49,7 +49,9 @@ namespace Alabo.Data.People.Users.ViewModels
         /// <param name="size">The size.</param>
         public string GetAvator(int size = 48)
         {
-            if (Avator.IsNullOrEmpty()) return $@"/wwwroot/static/images/avator/{Sex}_{size}.png";
+            if (Avator.IsNullOrEmpty()) {
+                return $@"/wwwroot/static/images/avator/{Sex}_{size}.png";
+            }
 
             return Avator;
         }

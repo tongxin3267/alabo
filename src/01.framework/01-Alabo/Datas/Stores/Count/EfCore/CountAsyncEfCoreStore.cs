@@ -22,7 +22,9 @@ namespace Alabo.Datas.Stores.Count.EfCore
         /// <param name="predicate">条件</param>
         public async Task<long> CountAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            if (predicate == null) return await Set.CountAsync();
+            if (predicate == null) {
+                return await Set.CountAsync();
+            }
 
             return await Set.CountAsync(predicate);
         }

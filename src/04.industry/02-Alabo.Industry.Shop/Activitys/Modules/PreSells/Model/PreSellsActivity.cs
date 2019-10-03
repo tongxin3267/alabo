@@ -72,9 +72,14 @@ namespace Alabo.Industry.Shop.Activitys.Modules.PreSells.Model
         public ServiceResult SetValueOfRule(object rules)
         {
             var model = rules.ToObject<PreSellsActivity>();
-            if (model == null) return ServiceResult.FailedWithMessage("活动规则数据异常");
-            if (model.PreSellStartTime >= model.PreSellEndTime)
+            if (model == null) {
+                return ServiceResult.FailedWithMessage("活动规则数据异常");
+            }
+
+            if (model.PreSellStartTime >= model.PreSellEndTime) {
                 return ServiceResult.FailedWithMessage("预售开始时间必须小于且不等于结束时间");
+            }
+
             return new ServiceResult(true);
         }
     }

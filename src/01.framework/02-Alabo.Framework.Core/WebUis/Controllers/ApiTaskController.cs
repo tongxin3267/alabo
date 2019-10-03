@@ -34,24 +34,27 @@ namespace Alabo.Framework.Core.WebUis.Controllers
                     fileName = string.Empty
                 };
                 var file = new FileInfo(batPath);
-                if (string.IsNullOrEmpty(batPath))
+                if (string.IsNullOrEmpty(batPath)) {
                     runPath = new
                     {
                         working = AppDomain.CurrentDomain.BaseDirectory,
                         fileName = "1.bat"
                     };
-                else
+                } else {
                     runPath = new
                     {
                         working = file.Directory.FullName,
                         fileName = file.Name
                     };
+                }
 
                 pro.StartInfo.WorkingDirectory = runPath.working;
                 pro.StartInfo.FileName = Path.Combine(runPath.working, runPath.fileName);
                 // 当我们需要给可执行文件传入参数时候可以设置这个参数
                 // "para1 para2 para3" 参数为字符串形式，每一个参数用空格隔开
-                if (!string.IsNullOrEmpty(arguments)) pro.StartInfo.Arguments = arguments;
+                if (!string.IsNullOrEmpty(arguments)) {
+                    pro.StartInfo.Arguments = arguments;
+                }
 
                 pro.StartInfo.UseShellExecute = false; //不使用shell壳运行
                 pro.StartInfo.CreateNoWindow = true; //创建不可见window
@@ -66,7 +69,9 @@ namespace Alabo.Framework.Core.WebUis.Controllers
             }
             finally
             {
-                if (pro != null) pro.Close();
+                if (pro != null) {
+                    pro.Close();
+                }
             }
         }
 

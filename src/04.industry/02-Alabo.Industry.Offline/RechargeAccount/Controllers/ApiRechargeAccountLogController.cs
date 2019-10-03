@@ -33,14 +33,19 @@ namespace Alabo.Industry.Offline.RechargeAccount.Controllers
             var aliPay = Ioc.Resolve<IAutoConfigService>().GetValue<AlipayPaymentConfig>();
             var wechatPay = Ioc.Resolve<IAutoConfigService>().GetValue<WeChatPaymentConfig>();
             var isPay = false;
-            if (aliPay.IsEnable || wechatPay.IsEnable) isPay = true;
+            if (aliPay.IsEnable || wechatPay.IsEnable) {
+                isPay = true;
+            }
+
             return ApiResult.Success(list, (isPay ? 1 : 0).ToString());
         }
 
         [HttpPost]
         public ApiResult Save([FromBody] RechargeAccountInput model)
         {
-            if (!this.IsFormValid()) return ApiResult.Failure(this.FormInvalidReason());
+            if (!this.IsFormValid()) {
+                return ApiResult.Failure(this.FormInvalidReason());
+            }
 
             var result = Resolve<IRechargeAccountLogService>().Add(model);
             return ToResult(result);

@@ -29,15 +29,18 @@ namespace Alabo.Test.Cms
         public void CreateTest(Type type)
         {
             var moduleAttribute = Resolve<ITaskModuleConfigService>().GetModuleAttribute(type);
-            if (moduleAttribute == null) throw new ValidException("请定义模块特性");
+            if (moduleAttribute == null) {
+                throw new ValidException("请定义模块特性");
+            }
 
             var host = new TestHostingEnvironment();
             var testBuilder = new StringBuilder();
             var proj = string.Empty;
-            if (type.Module.Name == "ZKCloud")
+            if (type.Module.Name == "ZKCloud") {
                 proj = type.Assembly.GetName().Name + ".Test";
-            else
+            } else {
                 proj = type.Assembly.GetName().Name.Replace(".App.", ".Test.");
+            }
 
             var paths = type.Namespace.Replace(type.Assembly.GetName().Name, "")
                 .Split(".", StringSplitOptions.RemoveEmptyEntries);
@@ -45,7 +48,9 @@ namespace Alabo.Test.Cms
             foreach (var item in paths)
             {
                 filePath += "\\" + item;
-                if (!Directory.Exists(filePath)) Directory.CreateDirectory(filePath);
+                if (!Directory.Exists(filePath)) {
+                    Directory.CreateDirectory(filePath);
+                }
             }
 
             var fileName = $"{filePath}\\{type.Name}Tests.cs";

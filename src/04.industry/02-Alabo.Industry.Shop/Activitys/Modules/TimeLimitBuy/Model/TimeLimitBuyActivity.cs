@@ -63,8 +63,14 @@ namespace Alabo.Industry.Shop.Activitys.Modules.TimeLimitBuy.Model
         public ServiceResult SetValueOfRule(object rules)
         {
             var model = rules.ToObject<TimeLimitBuyActivity>();
-            if (model == null) return ServiceResult.FailedWithMessage("活动规则数据异常");
-            if (model.StartTime >= model.EndTime) return ServiceResult.FailedWithMessage("抢购开始时间必须小于且不等于结束时间");
+            if (model == null) {
+                return ServiceResult.FailedWithMessage("活动规则数据异常");
+            }
+
+            if (model.StartTime >= model.EndTime) {
+                return ServiceResult.FailedWithMessage("抢购开始时间必须小于且不等于结束时间");
+            }
+
             return new ServiceResult(true);
         }
     }

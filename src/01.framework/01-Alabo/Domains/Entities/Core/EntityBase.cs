@@ -87,8 +87,9 @@ namespace Alabo.Domains.Entities.Core
         /// </summary>
         public virtual void Init()
         {
-            if (string.IsNullOrWhiteSpace(Alabo.Extensions.Extensions.SafeString(Id)) || Id.Equals(default(TKey)))
+            if (string.IsNullOrWhiteSpace(Alabo.Extensions.Extensions.SafeString(Id)) || Id.Equals(default(TKey))) {
                 Id = CreateId();
+            }
         }
 
         /// <summary>
@@ -112,13 +113,21 @@ namespace Alabo.Domains.Entities.Core
         /// </summary>
         public static bool operator ==(EntityBase<TEntity, TKey> left, EntityBase<TEntity, TKey> right)
         {
-            if ((object)left == null && (object)right == null) return true;
+            if ((object)left == null && (object)right == null) {
+                return true;
+            }
 
-            if (!(left is TEntity) || !(right is TEntity)) return false;
+            if (!(left is TEntity) || !(right is TEntity)) {
+                return false;
+            }
 
-            if (Equals(left.Id, null)) return false;
+            if (Equals(left.Id, null)) {
+                return false;
+            }
 
-            if (left.Id.Equals(default(TKey))) return false;
+            if (left.Id.Equals(default(TKey))) {
+                return false;
+            }
 
             return left.Id.Equals(right.Id);
         }
@@ -148,7 +157,9 @@ namespace Alabo.Domains.Entities.Core
             //    results.Add(new ValidationResult("Id不能为空"));
             //}
 
-            if (Id == null) results.Add(new ValidationResult("Id不能为空"));
+            if (Id == null) {
+                results.Add(new ValidationResult("Id不能为空"));
+            }
         }
     }
 }

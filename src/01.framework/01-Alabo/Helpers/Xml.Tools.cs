@@ -25,7 +25,9 @@ namespace Alabo.Helpers
         public static List<XElement> ToElements(string xml)
         {
             var document = ToDocument(xml);
-            if (document?.Root == null) return new List<XElement>();
+            if (document?.Root == null) {
+                return new List<XElement>();
+            }
 
             return document.Root.Elements().ToList();
         }

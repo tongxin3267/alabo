@@ -19,7 +19,9 @@ namespace Alabo.Logging.Aspects
         {
             var methodName = GetMethodName(context);
             var log = Log.GetLog(methodName);
-            if (!Enabled(log)) return;
+            if (!Enabled(log)) {
+                return;
+            }
 
             ExecuteBefore(log, context, methodName);
             await next(context);
@@ -50,7 +52,9 @@ namespace Alabo.Logging.Aspects
             log.Caption($"{context.ServiceMethod.Name}方法执行前")
                 .Class(context.ServiceMethod.DeclaringType.FullName)
                 .Method(methodName);
-            foreach (var parameter in context.GetParameters()) parameter.AppendTo(log);
+            foreach (var parameter in context.GetParameters()) {
+                parameter.AppendTo(log);
+            }
 
             WriteLog(log);
         }

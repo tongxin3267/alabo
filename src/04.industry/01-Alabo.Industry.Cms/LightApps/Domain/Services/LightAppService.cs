@@ -55,8 +55,9 @@ namespace Alabo.Industry.Cms.LightApps.Domain.Services
         public List<dynamic> GetList(string tableName, string fieldName = "", string fieldValue = "")
         {
             // return all data.
-            if (fieldName.IsNullOrEmpty() || fieldValue.IsNullOrEmpty())
+            if (fieldName.IsNullOrEmpty() || fieldValue.IsNullOrEmpty()) {
                 return LightAppStore.GetCollection(tableName).AsQueryable().ToList();
+            }
 
             var dic = new Dictionary<string, string>
             {
@@ -138,9 +139,13 @@ namespace Alabo.Industry.Cms.LightApps.Domain.Services
                 }
             }
 
-            if (pageSize < 1) pageSize = 1;
+            if (pageSize < 1) {
+                pageSize = 1;
+            }
 
-            if (pageIndex < 1) pageIndex = 1;
+            if (pageIndex < 1) {
+                pageIndex = 1;
+            }
 
             dictionary.Remove("PageSize");
             dictionary.Remove("PageIndex");

@@ -24,7 +24,9 @@ namespace Alabo.Framework.Themes.Domain.Services
         /// <returns></returns>
         public ServiceResult Publish(ThemePublish themePublish)
         {
-            if (themePublish.Theme == null) return ServiceResult.FailedWithMessage("模板不能为空");
+            if (themePublish.Theme == null) {
+                return ServiceResult.FailedWithMessage("模板不能为空");
+            }
 
             //if (!themePublish.Tenant.Equals(HttpWeb.Tenant, StringComparison.CurrentCultureIgnoreCase)) {
             //    return ServiceResult.FailedWithMessage("租户设置错误");
@@ -42,13 +44,18 @@ namespace Alabo.Framework.Themes.Domain.Services
 
             theme = themePublish.Theme;
             theme.UpdateTime = DateTime.Now;
-            if (!Resolve<IThemeService>().Update(theme)) return ServiceResult.FailedWithMessage("模板更新失败");
+            if (!Resolve<IThemeService>().Update(theme)) {
+                return ServiceResult.FailedWithMessage("模板更新失败");
+            }
 
             //修改默认模板
             Resolve<IThemeService>().SetDefaultTheme(theme.Id);
 
             var addList = new List<ThemePage>();
-            foreach (var themePage in themePublish.PageList) addList.Add(themePage);
+            foreach (var themePage in themePublish.PageList) {
+                addList.Add(themePage);
+            }
+
             if (addList.Count > 0)
             {
                 Resolve<IThemePageService>().DeleteMany(r => r.ThemeId == themePublish.Theme.Id);

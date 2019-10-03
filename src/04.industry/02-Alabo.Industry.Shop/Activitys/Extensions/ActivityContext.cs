@@ -40,8 +40,9 @@ namespace Alabo.Industry.Shop.Activitys.Extensions
         {
             get
             {
-                if (_loggerFactory == null)
+                if (_loggerFactory == null) {
                     _loggerFactory = HttpContextAccessor.HttpContext.RequestServices.GetService<ILoggerFactory>();
+                }
 
                 return _loggerFactory;
             }

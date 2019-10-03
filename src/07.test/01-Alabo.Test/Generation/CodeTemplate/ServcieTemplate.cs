@@ -14,9 +14,13 @@ namespace Alabo.Test.Generation.CodeTemplate
         public static void Create(Type type, string projectName = "zkcloudv11s")
         {
             //type = typeof(Theme);
-            if (!type.BaseType.FullName.Contains("Entit")) throw new ValidException("非Mongodb实体方法，不支持服务方法生成");
+            if (!type.BaseType.FullName.Contains("Entit")) {
+                throw new ValidException("非Mongodb实体方法，不支持服务方法生成");
+            }
 
-            if (!type.BaseType.FullName.Contains("Entities")) throw new ValidException("命名空间必须包含Entities");
+            if (!type.BaseType.FullName.Contains("Entities")) {
+                throw new ValidException("命名空间必须包含Entities");
+            }
 
             var testBuilder = new StringBuilder();
             var filePath = BaseTemplate.GetFilePath(type, "Services");
@@ -32,8 +36,9 @@ namespace Alabo.Test.Generation.CodeTemplate
                 testBuilder.AppendLine($"using {type.Namespace};");
                 testBuilder.AppendLine("using Alabo.Domains.Entities;");
 
-                if (testBuilder.ToString().IndexOf(type.Namespace, StringComparison.OrdinalIgnoreCase) == -1)
+                if (testBuilder.ToString().IndexOf(type.Namespace, StringComparison.OrdinalIgnoreCase) == -1) {
                     testBuilder.AppendLine($"using {type.Namespace};");
+                }
 
                 testBuilder.AppendLine();
                 testBuilder.AppendLine($"namespace {type.Namespace.Replace("Entities", "Services")} {{");
@@ -69,8 +74,9 @@ namespace Alabo.Test.Generation.CodeTemplate
                 testBuilder.AppendLine("using Alabo.Domains.Repositories;");
                 testBuilder.AppendLine($"using {type.Namespace};");
 
-                if (testBuilder.ToString().IndexOf(type.Namespace, StringComparison.OrdinalIgnoreCase) == -1)
+                if (testBuilder.ToString().IndexOf(type.Namespace, StringComparison.OrdinalIgnoreCase) == -1) {
                     testBuilder.AppendLine($"using {type.Namespace};");
+                }
 
                 testBuilder.AppendLine();
                 testBuilder.AppendLine($"namespace {type.Namespace.Replace("Entities", "Services")} {{");

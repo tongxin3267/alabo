@@ -58,7 +58,9 @@ namespace Alabo.Tool.Payment.Controllers
         [Display(Description = "微信分享")]
         public ApiResult<WeiXinShare> Share(WeiXinShareInput shareInput)
         {
-            if (shareInput.Url.IsNullOrEmpty()) return ApiResult.Failure<WeiXinShare>("分享网址不能为空");
+            if (shareInput.Url.IsNullOrEmpty()) {
+                return ApiResult.Failure<WeiXinShare>("分享网址不能为空");
+            }
 
             //Resolve<IUserService>().Log("分享" + shareInput.ToJsons());
 

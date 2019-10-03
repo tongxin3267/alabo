@@ -16,11 +16,15 @@ namespace Alabo.Extensions
         public static IQueryable<T> OrderBy<T>(this IQueryable<T> source, string propertyName, bool ascending)
             where T : class
         {
-            if (string.IsNullOrEmpty(propertyName)) return source;
+            if (string.IsNullOrEmpty(propertyName)) {
+                return source;
+            }
 
             var type = typeof(T);
             var property = type.GetProperty(propertyName);
-            if (property == null) throw new ArgumentException("propertyName", "不存在");
+            if (property == null) {
+                throw new ArgumentException("propertyName", "不存在");
+            }
 
             var param = Expression.Parameter(type, "p");
             Expression propertyAccessExpression = Expression.MakeMemberAccess(param, property);

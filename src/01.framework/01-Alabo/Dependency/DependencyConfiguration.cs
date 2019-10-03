@@ -121,12 +121,13 @@ namespace Alabo.Dependency
         private void RegistEventHandlers(Type handlerType)
         {
             var handlerTypes = GetTypes(handlerType);
-            foreach (var handler in handlerTypes)
+            foreach (var handler in handlerTypes) {
                 _builder.RegisterType(handler).As(handler.FindInterfaces(
                     (filter, criteria) => filter.IsGenericType &&
                                           ((Type)criteria).IsAssignableFrom(filter.GetGenericTypeDefinition())
                     , handlerType
                 )).InstancePerLifetimeScope();
+            }
         }
 
         /// <summary>

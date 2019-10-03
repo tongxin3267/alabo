@@ -44,7 +44,9 @@ namespace Alabo.Industry.Shop.Products.Dtos
             var model = new PagedList<Product>();
 
             var store = Resolve<IStoreService>().GetUserStore(autoModel.BasicUser.Id);
-            if (store == null) throw new ValidException("您不是供应商,暂无店铺");
+            if (store == null) {
+                throw new ValidException("您不是供应商,暂无店铺");
+            }
             // model = Resolve<IProductService>().GetPagedList(query, r => r.StoreId == store.Id);
 
             // return ToPageResult(model);

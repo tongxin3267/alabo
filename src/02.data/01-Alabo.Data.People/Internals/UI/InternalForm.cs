@@ -73,11 +73,15 @@ namespace Alabo.Data.People.Internals.UI
             view.Id = city.Id.ToObjectId();
             view.UserId = user.Id;
             view.FullName = Resolve<IRegionService>().GetRegionNameById(view.RegionId);
-            if (city.Id.IsNullOrEmpty() && partner != null)
+            if (city.Id.IsNullOrEmpty() && partner != null) {
                 return ServiceResult.FailedWithMessage("该地区已有合伙人，一个地区只允许有一个合伙人");
+            }
 
             var result = Resolve<IInternalService>().AddOrUpdate(view);
-            if (result) return ServiceResult.Success;
+            if (result) {
+                return ServiceResult.Success;
+            }
+
             return ServiceResult.FailedWithMessage("操作失败，请重试");
         }
     }

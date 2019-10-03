@@ -122,7 +122,9 @@ namespace Alabo.Datas.PetaPoco
         /// <exception cref="ArgumentException">Thrown when <paramref name="connection" /> is null or empty.</exception>
         public Database(IDbConnection connection, IMapper defaultMapper = null)
         {
-            if (connection == null) throw new ArgumentNullException("connection");
+            if (connection == null) {
+                throw new ArgumentNullException("connection");
+            }
 
             Connection = connection;
             ConnectionString = connection.ConnectionString;
@@ -143,8 +145,9 @@ namespace Alabo.Datas.PetaPoco
         /// <exception cref="ArgumentException">Thrown when <paramref name="connectionString" /> is null or empty.</exception>
         public Database(string connectionString, string providerName)
         {
-            if (string.IsNullOrEmpty(connectionString))
+            if (string.IsNullOrEmpty(connectionString)) {
                 throw new ArgumentException("Connection string cannot be null or empty", "connectionString");
+            }
 
             ConnectionString = connectionString;
             Initialise(DatabaseProvider.Resolve(providerName, true, ConnectionString), null);
@@ -159,10 +162,13 @@ namespace Alabo.Datas.PetaPoco
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="factory" /> is null.</exception>
         public Database(string connectionString, DbProviderFactory factory)
         {
-            if (string.IsNullOrEmpty(connectionString))
+            if (string.IsNullOrEmpty(connectionString)) {
                 throw new ArgumentException("Connection string must not be null or empty", "connectionString");
+            }
 
-            if (factory == null) throw new ArgumentNullException("factory");
+            if (factory == null) {
+                throw new ArgumentNullException("factory");
+            }
 
             ConnectionString = connectionString;
             Initialise(DatabaseProvider.Resolve(DatabaseProvider.Unwrap(factory).GetType(), false, ConnectionString),
@@ -178,8 +184,9 @@ namespace Alabo.Datas.PetaPoco
         /// <exception cref="InvalidOperationException">Thrown when a connection string cannot be found.</exception>
         public Database(string connectionStringName)
         {
-            if (string.IsNullOrEmpty(connectionStringName))
+            if (string.IsNullOrEmpty(connectionStringName)) {
                 throw new ArgumentException("Connection string name must not be null or empty", "connectionStringName");
+            }
 
             var entry = new
             {
@@ -187,9 +194,10 @@ namespace Alabo.Datas.PetaPoco
                 ProviderName = ""
             }; //  ConfigurationManager.ConnectionStrings[connectionStringName];
 
-            if (entry == null)
+            if (entry == null) {
                 throw new InvalidOperationException(string.Format("Can't find a connection string with the name '{0}'",
                     connectionStringName));
+            }
 
             ConnectionString = entry.ConnectionString;
             var providerName = !string.IsNullOrEmpty(entry.ProviderName) ? entry.ProviderName : "System.Data.SqlClient";
@@ -206,10 +214,13 @@ namespace Alabo.Datas.PetaPoco
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="provider" /> is null.</exception>
         public Database(string connectionString, IProvider provider, IMapper defaultMapper = null)
         {
-            if (string.IsNullOrEmpty(connectionString))
+            if (string.IsNullOrEmpty(connectionString)) {
                 throw new ArgumentException("Connection string must not be null or empty", "connectionString");
+            }
 
-            if (provider == null) throw new ArgumentNullException("provider");
+            if (provider == null) {
+                throw new ArgumentNullException("provider");
+            }
 
             ConnectionString = connectionString;
             Initialise(provider, defaultMapper);
@@ -227,7 +238,9 @@ namespace Alabo.Datas.PetaPoco
         /// <exception cref="InvalidOperationException">Thrown when a connection string configured and no provider is configured.</exception>
         public Database(IDatabaseBuildConfiguration configuration)
         {
-            if (configuration == null) throw new ArgumentNullException("configuration");
+            if (configuration == null) {
+                throw new ArgumentNullException("configuration");
+            }
 
             var settings = (IBuildConfigurationSettings)configuration;
 
@@ -260,9 +273,10 @@ namespace Alabo.Datas.PetaPoco
             settings.TryGetSetting<IProvider>(DatabaseConfigurationExtensions.Provider,
                 v => Initialise(v, defaultMapper), () =>
                 {
-                    if (entry == null)
+                    if (entry == null) {
                         throw new InvalidOperationException(
                             "Both a connection string and provider are required or neither.");
+                    }
 
                     var providerName = !string.IsNullOrEmpty(entry.ProviderName)
                         ? entry.ProviderName
@@ -317,13 +331,19 @@ namespace Alabo.Datas.PetaPoco
                 Connection = _factory.CreateConnection();
                 Connection.ConnectionString = ConnectionString;
 
-                if (Connection.State == ConnectionState.Broken) Connection.Close();
+                if (Connection.State == ConnectionState.Broken) {
+                    Connection.Close();
+                }
 
-                if (Connection.State == ConnectionState.Closed) Connection.Open();
+                if (Connection.State == ConnectionState.Closed) {
+                    Connection.Open();
+                }
 
                 Connection = OnConnectionOpened(Connection);
 
-                if (KeepConnectionAlive) _sharedConnectionDepth++; // Make sure you call Dispose
+                if (KeepConnectionAlive) {
+                    _sharedConnectionDepth++; // Make sure you call Dispose
+                }
             }
 
             _sharedConnectionDepth++;
@@ -427,10 +447,11 @@ namespace Alabo.Datas.PetaPoco
         {
             OnEndTransaction();
 
-            if (_transactionCancelled)
+            if (_transactionCancelled) {
                 _transaction.Rollback();
-            else
+            } else {
                 _transaction.Commit();
+            }
 
             _transaction.Dispose();
             _transaction = null;
@@ -448,7 +469,9 @@ namespace Alabo.Datas.PetaPoco
         public void AbortTransaction()
         {
             _transactionCancelled = true;
-            if (--_transactionDepth == 0) CleanupTransaction();
+            if (--_transactionDepth == 0) {
+                CleanupTransaction();
+            }
         }
 
         /// <summary>
@@ -456,7 +479,9 @@ namespace Alabo.Datas.PetaPoco
         /// </summary>
         public void CompleteTransaction()
         {
-            if (--_transactionDepth == 0) CleanupTransaction();
+            if (--_transactionDepth == 0) {
+                CleanupTransaction();
+            }
         }
 
         #endregion Transaction Management
@@ -476,7 +501,9 @@ namespace Alabo.Datas.PetaPoco
             {
                 var mapper = Mappers.GetMapper(pi.DeclaringType, DefaultMapper);
                 var fn = mapper.GetToDbConverter(pi);
-                if (fn != null) value = fn(value);
+                if (fn != null) {
+                    value = fn(value);
+                }
             }
 
             // Support passed in parameters
@@ -497,7 +524,9 @@ namespace Alabo.Datas.PetaPoco
             {
                 p.Value = DBNull.Value;
 
-                if (pi != null && pi.PropertyType.Name == "Byte[]") p.DbType = DbType.Binary;
+                if (pi != null && pi.PropertyType.Name == "Byte[]") {
+                    p.DbType = DbType.Binary;
+                }
             }
             else
             {
@@ -518,8 +547,9 @@ namespace Alabo.Datas.PetaPoco
                 else if (t == typeof(string))
                 {
                     // out of memory exception occurs if trying to save more than 4000 characters to SQL Server CE NText column. Set before attempting to set Size, or Size will always max out at 4000
-                    if ((value as string).Length + 1 > 4000 && p.GetType().Name == "SqlCeParameter")
+                    if ((value as string).Length + 1 > 4000 && p.GetType().Name == "SqlCeParameter") {
                         p.GetType().GetProperty("SqlDbType").SetValue(p, SqlDbType.NText, null);
+                    }
 
                     p.Size = Math.Max((value as string).Length + 1,
                         4000); // Help query plan caching by using common size
@@ -568,7 +598,9 @@ namespace Alabo.Datas.PetaPoco
             }
 
             // Perform parameter prefix replacements
-            if (_paramPrefix != "@") sql = rxParamsPrefix.Replace(sql, m => _paramPrefix + m.Value.Substring(1));
+            if (_paramPrefix != "@") {
+                sql = rxParamsPrefix.Replace(sql, m => _paramPrefix + m.Value.Substring(1));
+            }
 
             sql = sql.Replace("@@", "@"); // <- double @@ escapes a single @
 
@@ -577,13 +609,17 @@ namespace Alabo.Datas.PetaPoco
             cmd.Connection = connection;
             cmd.CommandText = sql;
             cmd.Transaction = _transaction;
-            foreach (var item in args) AddParam(cmd, item, null);
+            foreach (var item in args) {
+                AddParam(cmd, item, null);
+            }
 
             // Notify the DB type
             Provider.PreExecute(cmd);
 
             // Call logging
-            if (!string.IsNullOrEmpty(sql)) DoPreExecute(cmd);
+            if (!string.IsNullOrEmpty(sql)) {
+                DoPreExecute(cmd);
+            }
 
             return cmd;
         }
@@ -677,7 +713,9 @@ namespace Alabo.Datas.PetaPoco
             }
             catch (Exception x)
             {
-                if (OnException(x)) throw;
+                if (OnException(x)) {
+                    throw;
+                }
 
                 return -1;
             }
@@ -718,7 +756,9 @@ namespace Alabo.Datas.PetaPoco
 
                         // Handle nullable types
                         var u = Nullable.GetUnderlyingType(typeof(T));
-                        if (u != null && (val == null || val == DBNull.Value)) return default;
+                        if (u != null && (val == null || val == DBNull.Value)) {
+                            return default;
+                        }
 
                         return (T)Convert.ChangeType(val, u == null ? typeof(T) : u);
                     }
@@ -730,7 +770,9 @@ namespace Alabo.Datas.PetaPoco
             }
             catch (Exception x)
             {
-                if (OnException(x)) throw;
+                if (OnException(x)) {
+                    throw;
+                }
 
                 return default;
             }
@@ -805,12 +847,15 @@ namespace Alabo.Datas.PetaPoco
             out string sqlPage)
         {
             // Add auto select clause
-            if (EnableAutoSelect) sql = AutoSelectHelper.AddSelectClause<T>(Provider, sql, DefaultMapper);
+            if (EnableAutoSelect) {
+                sql = AutoSelectHelper.AddSelectClause<T>(Provider, sql, DefaultMapper);
+            }
 
             // Split the SQL
             SQLParts parts;
-            if (!Provider.PagingUtility.SplitSQL(sql, out parts))
+            if (!Provider.PagingUtility.SplitSQL(sql, out parts)) {
                 throw new ValidException("Unable to parse SQL statement for paged query");
+            }
 
             sqlPage = Provider.BuildPageQuery(skip, take, parts, ref args);
             sqlCount = parts.SqlCount;
@@ -847,7 +892,9 @@ namespace Alabo.Datas.PetaPoco
             };
             result.TotalPages = result.TotalItems / itemsPerPage;
 
-            if (result.TotalItems % itemsPerPage != 0) result.TotalPages++;
+            if (result.TotalItems % itemsPerPage != 0) {
+                result.TotalPages++;
+            }
 
             OneTimeCommandTimeout = saveTimeout;
 
@@ -1014,7 +1061,9 @@ namespace Alabo.Datas.PetaPoco
         /// </remarks>
         public IEnumerable<T> Query<T>(string sql, params object[] args)
         {
-            if (EnableAutoSelect) sql = AutoSelectHelper.AddSelectClause<T>(Provider, sql, DefaultMapper);
+            if (EnableAutoSelect) {
+                sql = AutoSelectHelper.AddSelectClause<T>(Provider, sql, DefaultMapper);
+            }
 
             OpenSharedConnection();
             try
@@ -1030,7 +1079,9 @@ namespace Alabo.Datas.PetaPoco
                     }
                     catch (Exception x)
                     {
-                        if (OnException(x)) throw;
+                        if (OnException(x)) {
+                            throw;
+                        }
 
                         yield break;
                     }
@@ -1045,13 +1096,17 @@ namespace Alabo.Datas.PetaPoco
                             T poco;
                             try
                             {
-                                if (!r.Read()) yield break;
+                                if (!r.Read()) {
+                                    yield break;
+                                }
 
                                 poco = factory(r);
                             }
                             catch (Exception x)
                             {
-                                if (OnException(x)) throw;
+                                if (OnException(x)) {
+                                    throw;
+                                }
 
                                 yield break;
                             }
@@ -1098,8 +1153,9 @@ namespace Alabo.Datas.PetaPoco
         {
             var poco = PocoData.ForType(typeof(T), DefaultMapper).TableInfo;
 
-            if (sqlCondition.TrimStart().StartsWith("where", StringComparison.OrdinalIgnoreCase))
+            if (sqlCondition.TrimStart().StartsWith("where", StringComparison.OrdinalIgnoreCase)) {
                 sqlCondition = sqlCondition.TrimStart().Substring(5);
+            }
 
             return ExecuteScalar<int>(
                        string.Format(Provider.GetExistsSql(), Provider.EscapeTableName(poco.TableName), sqlCondition),
@@ -1267,9 +1323,13 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>The auto allocated primary key of the new record, or null for non-auto-increment tables</returns>
         public object Insert(string tableName, object poco)
         {
-            if (string.IsNullOrEmpty(tableName)) throw new ArgumentNullException("tableName");
+            if (string.IsNullOrEmpty(tableName)) {
+                throw new ArgumentNullException("tableName");
+            }
 
-            if (poco == null) throw new ArgumentNullException("poco");
+            if (poco == null) {
+                throw new ArgumentNullException("poco");
+            }
 
             var pd = PocoData.ForType(poco.GetType(), DefaultMapper);
 
@@ -1286,11 +1346,17 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>The auto allocated primary key of the new record, or null for non-auto-increment tables</returns>
         public object Insert(string tableName, string primaryKeyName, object poco)
         {
-            if (string.IsNullOrEmpty(tableName)) throw new ArgumentNullException("tableName");
+            if (string.IsNullOrEmpty(tableName)) {
+                throw new ArgumentNullException("tableName");
+            }
 
-            if (string.IsNullOrEmpty(primaryKeyName)) throw new ArgumentNullException("primaryKeyName");
+            if (string.IsNullOrEmpty(primaryKeyName)) {
+                throw new ArgumentNullException("primaryKeyName");
+            }
 
-            if (poco == null) throw new ArgumentNullException("poco");
+            if (poco == null) {
+                throw new ArgumentNullException("poco");
+            }
 
             var t = poco.GetType();
             var pd = PocoData.ForType(poco.GetType(), DefaultMapper);
@@ -1317,11 +1383,17 @@ namespace Alabo.Datas.PetaPoco
         /// </remarks>
         public object Insert(string tableName, string primaryKeyName, bool autoIncrement, object poco)
         {
-            if (string.IsNullOrEmpty(tableName)) throw new ArgumentNullException("tableName");
+            if (string.IsNullOrEmpty(tableName)) {
+                throw new ArgumentNullException("tableName");
+            }
 
-            if (string.IsNullOrEmpty(primaryKeyName)) throw new ArgumentNullException("primaryKeyName");
+            if (string.IsNullOrEmpty(primaryKeyName)) {
+                throw new ArgumentNullException("primaryKeyName");
+            }
 
-            if (poco == null) throw new ArgumentNullException("poco");
+            if (poco == null) {
+                throw new ArgumentNullException("poco");
+            }
 
             return ExecuteInsert(tableName, primaryKeyName, autoIncrement, poco);
         }
@@ -1337,7 +1409,9 @@ namespace Alabo.Datas.PetaPoco
         /// </remarks>
         public object Insert(object poco)
         {
-            if (poco == null) throw new ArgumentNullException("poco");
+            if (poco == null) {
+                throw new ArgumentNullException("poco");
+            }
 
             var pd = PocoData.ForType(poco.GetType(), DefaultMapper);
             return ExecuteInsert(pd.TableInfo.TableName, pd.TableInfo.PrimaryKey, pd.TableInfo.AutoIncrement, poco);
@@ -1359,7 +1433,9 @@ namespace Alabo.Datas.PetaPoco
                         foreach (var i in pd.Columns)
                         {
                             // Don't insert result columns
-                            if (i.Value.ResultColumn) continue;
+                            if (i.Value.ResultColumn) {
+                                continue;
+                            }
 
                             // Don't insert the primary key (except under oracle where we need bring in the next sequence value)
                             if (autoIncrement && primaryKeyName != null &&
@@ -1382,7 +1458,9 @@ namespace Alabo.Datas.PetaPoco
                         }
 
                         var outputClause = string.Empty;
-                        if (autoIncrement) outputClause = Provider.GetInsertOutputClause(primaryKeyName);
+                        if (autoIncrement) {
+                            outputClause = Provider.GetInsertOutputClause(primaryKeyName);
+                        }
 
                         cmd.CommandText = string.Format("INSERT INTO {0} ({1}){2} VALUES ({3})",
                             Provider.EscapeTableName(tableName),
@@ -1398,10 +1476,11 @@ namespace Alabo.Datas.PetaPoco
                             OnExecutedCommand(cmd);
 
                             PocoColumn pkColumn;
-                            if (primaryKeyName != null && pd.Columns.TryGetValue(primaryKeyName, out pkColumn))
+                            if (primaryKeyName != null && pd.Columns.TryGetValue(primaryKeyName, out pkColumn)) {
                                 return pkColumn.GetValue(poco);
-                            else
+                            } else {
                                 return null;
+                            }
                         }
 
                         var id = Provider.ExecuteInsert(this, cmd, primaryKeyName);
@@ -1410,7 +1489,9 @@ namespace Alabo.Datas.PetaPoco
                         if (primaryKeyName != null && !poco.GetType().Name.Contains("AnonymousType"))
                         {
                             PocoColumn pc;
-                            if (pd.Columns.TryGetValue(primaryKeyName, out pc)) pc.SetValue(poco, pc.ChangeType(id));
+                            if (pd.Columns.TryGetValue(primaryKeyName, out pc)) {
+                                pc.SetValue(poco, pc.ChangeType(id));
+                            }
                         }
 
                         return id;
@@ -1423,7 +1504,9 @@ namespace Alabo.Datas.PetaPoco
             }
             catch (Exception x)
             {
-                if (OnException(x)) throw;
+                if (OnException(x)) {
+                    throw;
+                }
 
                 return null;
             }
@@ -1443,11 +1526,17 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>The number of affected records</returns>
         public int Update(string tableName, string primaryKeyName, object poco, object primaryKeyValue)
         {
-            if (string.IsNullOrEmpty(tableName)) throw new ArgumentNullException("tableName");
+            if (string.IsNullOrEmpty(tableName)) {
+                throw new ArgumentNullException("tableName");
+            }
 
-            if (string.IsNullOrEmpty(primaryKeyName)) throw new ArgumentNullException("primaryKeyName");
+            if (string.IsNullOrEmpty(primaryKeyName)) {
+                throw new ArgumentNullException("primaryKeyName");
+            }
 
-            if (poco == null) throw new ArgumentNullException("poco");
+            if (poco == null) {
+                throw new ArgumentNullException("poco");
+            }
 
             return ExecuteUpdate(tableName, primaryKeyName, poco, primaryKeyValue, null);
         }
@@ -1464,11 +1553,17 @@ namespace Alabo.Datas.PetaPoco
         public int Update(string tableName, string primaryKeyName, object poco, object primaryKeyValue,
             IEnumerable<string> columns)
         {
-            if (string.IsNullOrEmpty(tableName)) throw new ArgumentNullException("tableName");
+            if (string.IsNullOrEmpty(tableName)) {
+                throw new ArgumentNullException("tableName");
+            }
 
-            if (string.IsNullOrEmpty(primaryKeyName)) throw new ArgumentNullException("primaryKeyName");
+            if (string.IsNullOrEmpty(primaryKeyName)) {
+                throw new ArgumentNullException("primaryKeyName");
+            }
 
-            if (poco == null) throw new ArgumentNullException("poco");
+            if (poco == null) {
+                throw new ArgumentNullException("poco");
+            }
 
             return ExecuteUpdate(tableName, primaryKeyName, poco, primaryKeyValue, columns);
         }
@@ -1495,11 +1590,17 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>The number of affected rows</returns>
         public int Update(string tableName, string primaryKeyName, object poco, IEnumerable<string> columns)
         {
-            if (string.IsNullOrEmpty(tableName)) throw new ArgumentNullException("tableName");
+            if (string.IsNullOrEmpty(tableName)) {
+                throw new ArgumentNullException("tableName");
+            }
 
-            if (string.IsNullOrEmpty(primaryKeyName)) throw new ArgumentNullException("primaryKeyName");
+            if (string.IsNullOrEmpty(primaryKeyName)) {
+                throw new ArgumentNullException("primaryKeyName");
+            }
 
-            if (poco == null) throw new ArgumentNullException("poco");
+            if (poco == null) {
+                throw new ArgumentNullException("poco");
+            }
 
             return ExecuteUpdate(tableName, primaryKeyName, poco, null, columns);
         }
@@ -1545,7 +1646,9 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>The number of affected rows</returns>
         public int Update(object poco, object primaryKeyValue, IEnumerable<string> columns)
         {
-            if (poco == null) throw new ArgumentNullException("poco");
+            if (poco == null) {
+                throw new ArgumentNullException("poco");
+            }
 
             var pd = PocoData.ForType(poco.GetType(), DefaultMapper);
             return ExecuteUpdate(pd.TableInfo.TableName, pd.TableInfo.PrimaryKey, poco, primaryKeyValue, columns);
@@ -1560,7 +1663,9 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>The number of affected rows</returns>
         public int Update<T>(string sql, params object[] args)
         {
-            if (string.IsNullOrEmpty(sql)) throw new ArgumentNullException("sql");
+            if (string.IsNullOrEmpty(sql)) {
+                throw new ArgumentNullException("sql");
+            }
 
             var pd = PocoData.ForType(typeof(T), DefaultMapper);
             return Execute(string.Format("UPDATE {0} {1}", Provider.EscapeTableName(pd.TableInfo.TableName), sql),
@@ -1578,7 +1683,9 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>The number of affected rows</returns>
         public int Update<T>(Sql sql)
         {
-            if (sql == null) throw new ArgumentNullException("sql");
+            if (sql == null) {
+                throw new ArgumentNullException("sql");
+            }
 
             var pd = PocoData.ForType(typeof(T), DefaultMapper);
             return Execute(
@@ -1605,16 +1712,22 @@ namespace Alabo.Datas.PetaPoco
                                 // Don't update the primary key, but grab the value if we don't have it
                                 if (string.Compare(i.Key, primaryKeyName, true) == 0)
                                 {
-                                    if (primaryKeyValue == null) primaryKeyValue = i.Value.GetValue(poco);
+                                    if (primaryKeyValue == null) {
+                                        primaryKeyValue = i.Value.GetValue(poco);
+                                    }
 
                                     continue;
                                 }
 
                                 // Dont update result only columns
-                                if (i.Value.ResultColumn) continue;
+                                if (i.Value.ResultColumn) {
+                                    continue;
+                                }
 
                                 // Build the sql
-                                if (index > 0) sb.Append(", ");
+                                if (index > 0) {
+                                    sb.Append(", ");
+                                }
 
                                 sb.AppendFormat(i.Value.UpdateTemplate ?? "{0} = {1}{2}",
                                     Provider.EscapeSqlIdentifier(i.Key), _paramPrefix, index++);
@@ -1630,7 +1743,9 @@ namespace Alabo.Datas.PetaPoco
                                 var pc = pd.Columns[colname];
 
                                 // Build the sql
-                                if (index > 0) sb.Append(", ");
+                                if (index > 0) {
+                                    sb.Append(", ");
+                                }
 
                                 sb.AppendFormat(pc.UpdateTemplate ?? "{0} = {1}{2}",
                                     Provider.EscapeSqlIdentifier(colname), _paramPrefix, index++);
@@ -1677,7 +1792,9 @@ namespace Alabo.Datas.PetaPoco
             }
             catch (Exception x)
             {
-                if (OnException(x)) throw;
+                if (OnException(x)) {
+                    throw;
+                }
 
                 return -1;
             }
@@ -1720,7 +1837,9 @@ namespace Alabo.Datas.PetaPoco
             {
                 var pd = PocoData.ForObject(poco, primaryKeyName, DefaultMapper);
                 PocoColumn pc;
-                if (pd.Columns.TryGetValue(primaryKeyName, out pc)) primaryKeyValue = pc.GetValue(poco);
+                if (pd.Columns.TryGetValue(primaryKeyName, out pc)) {
+                    primaryKeyValue = pc.GetValue(poco);
+                }
             }
 
             // Do it
@@ -1748,7 +1867,9 @@ namespace Alabo.Datas.PetaPoco
         /// <returns></returns>
         public int Delete<T>(object pocoOrPrimaryKey)
         {
-            if (pocoOrPrimaryKey.GetType() == typeof(T)) return Delete(pocoOrPrimaryKey);
+            if (pocoOrPrimaryKey.GetType() == typeof(T)) {
+                return Delete(pocoOrPrimaryKey);
+            }
 
             var pd = PocoData.ForType(typeof(T), DefaultMapper);
 
@@ -1756,9 +1877,10 @@ namespace Alabo.Datas.PetaPoco
             {
                 var pi = pocoOrPrimaryKey.GetType().GetProperty(pd.TableInfo.PrimaryKey);
 
-                if (pi == null)
+                if (pi == null) {
                     throw new InvalidOperationException(string.Format(
                         "Anonymous type does not contain an id for PK column `{0}`.", pd.TableInfo.PrimaryKey));
+                }
 
                 pocoOrPrimaryKey = pi.GetValue(pocoOrPrimaryKey, new object[0]);
             }
@@ -1809,18 +1931,23 @@ namespace Alabo.Datas.PetaPoco
         /// <remarks>This method simply tests if the POCO's primary key column property has been set to something non-zero.</remarks>
         public bool IsNew(string primaryKeyName, object poco)
         {
-            if (poco == null) throw new ArgumentNullException("poco");
+            if (poco == null) {
+                throw new ArgumentNullException("poco");
+            }
 
-            if (string.IsNullOrEmpty(primaryKeyName)) throw new ArgumentException("primaryKeyName");
+            if (string.IsNullOrEmpty(primaryKeyName)) {
+                throw new ArgumentException("primaryKeyName");
+            }
 
             return IsNew(primaryKeyName, PocoData.ForObject(poco, primaryKeyName, DefaultMapper), poco);
         }
 
         protected virtual bool IsNew(string primaryKeyName, PocoData pd, object poco)
         {
-            if (string.IsNullOrEmpty(primaryKeyName) || poco is ExpandoObject)
+            if (string.IsNullOrEmpty(primaryKeyName) || poco is ExpandoObject) {
                 throw new InvalidOperationException(
                     "IsNew() and Save() are only supported on tables with identity (inc auto-increment) primary key columns");
+            }
 
             object pk;
             PocoColumn pc;
@@ -1833,36 +1960,56 @@ namespace Alabo.Datas.PetaPoco
             else
             {
                 pi = poco.GetType().GetProperty(primaryKeyName);
-                if (pi == null)
+                if (pi == null) {
                     throw new ArgumentException(string.Format(
                         "The object doesn't have a property matching the primary key column name '{0}'",
                         primaryKeyName));
+                }
 
                 pk = pi.GetValue(poco, null);
             }
 
             var type = pk != null ? pk.GetType() : pi.PropertyType;
 
-            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>) || !type.IsValueType)
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>) || !type.IsValueType) {
                 return pk == null;
+            }
 
-            if (type == typeof(string)) return string.IsNullOrEmpty((string)pk);
+            if (type == typeof(string)) {
+                return string.IsNullOrEmpty((string)pk);
+            }
 
-            if (!pi.PropertyType.IsValueType) return pk == null;
+            if (!pi.PropertyType.IsValueType) {
+                return pk == null;
+            }
 
-            if (type == typeof(long)) return (long)pk == default;
+            if (type == typeof(long)) {
+                return (long)pk == default;
+            }
 
-            if (type == typeof(int)) return (int)pk == default;
+            if (type == typeof(int)) {
+                return (int)pk == default;
+            }
 
-            if (type == typeof(Guid)) return (Guid)pk == default;
+            if (type == typeof(Guid)) {
+                return (Guid)pk == default;
+            }
 
-            if (type == typeof(ulong)) return (ulong)pk == default;
+            if (type == typeof(ulong)) {
+                return (ulong)pk == default;
+            }
 
-            if (type == typeof(uint)) return (uint)pk == default;
+            if (type == typeof(uint)) {
+                return (uint)pk == default;
+            }
 
-            if (type == typeof(short)) return (short)pk == default(short);
+            if (type == typeof(short)) {
+                return (short)pk == default(short);
+            }
 
-            if (type == typeof(ushort)) return (ushort)pk == default(ushort);
+            if (type == typeof(ushort)) {
+                return (ushort)pk == default(ushort);
+            }
 
             // Create a default instance and compare
             return pk == Activator.CreateInstance(pk.GetType());
@@ -1876,7 +2023,9 @@ namespace Alabo.Datas.PetaPoco
         /// <remarks>This method simply tests if the POCO's primary key column property has been set to something non-zero.</remarks>
         public bool IsNew(object poco)
         {
-            if (poco == null) throw new ArgumentNullException("poco");
+            if (poco == null) {
+                throw new ArgumentNullException("poco");
+            }
 
             var pd = PocoData.ForType(poco.GetType(), DefaultMapper);
             return IsNew(pd.TableInfo.PrimaryKey, pd, poco);
@@ -1894,10 +2043,11 @@ namespace Alabo.Datas.PetaPoco
         /// <param name="poco">The POCO object to be saved</param>
         public void Save(string tableName, string primaryKeyName, object poco)
         {
-            if (IsNew(primaryKeyName, poco))
+            if (IsNew(primaryKeyName, poco)) {
                 Insert(tableName, primaryKeyName, true, poco);
-            else
+            } else {
                 Update(tableName, primaryKeyName, poco);
+            }
         }
 
         /// <summary>
@@ -2423,14 +2573,18 @@ namespace Alabo.Datas.PetaPoco
                     }
                     catch (Exception x)
                     {
-                        if (OnException(x)) throw;
+                        if (OnException(x)) {
+                            throw;
+                        }
 
                         yield break;
                     }
 
                     var factory =
                         MultiPocoFactory.GetFactory<TRet>(types, Connection.ConnectionString, sql, r, DefaultMapper);
-                    if (cb == null) cb = MultiPocoFactory.GetAutoMapper(types.ToArray());
+                    if (cb == null) {
+                        cb = MultiPocoFactory.GetAutoMapper(types.ToArray());
+                    }
 
                     var bNeedTerminator = false;
                     using (r)
@@ -2440,30 +2594,36 @@ namespace Alabo.Datas.PetaPoco
                             TRet poco;
                             try
                             {
-                                if (!r.Read()) break;
+                                if (!r.Read()) {
+                                    break;
+                                }
 
                                 poco = factory(r, cb);
                             }
                             catch (Exception x)
                             {
-                                if (OnException(x)) throw;
+                                if (OnException(x)) {
+                                    throw;
+                                }
 
                                 yield break;
                             }
 
-                            if (poco != null)
+                            if (poco != null) {
                                 yield return poco;
-                            else
+                            } else {
                                 bNeedTerminator = true;
+                            }
                         }
 
                         if (bNeedTerminator)
                         {
                             var poco = (TRet)(cb as Delegate).DynamicInvoke(new object[types.Length]);
-                            if (poco != null)
+                            if (poco != null) {
                                 yield return poco;
-                            else
+                            } else {
                                 yield break;
+                            }
                         }
                     }
                 }
@@ -2509,7 +2669,9 @@ namespace Alabo.Datas.PetaPoco
             }
             catch (Exception x)
             {
-                if (OnException(x)) throw;
+                if (OnException(x)) {
+                    throw;
+                }
             }
 
             return result;
@@ -2558,14 +2720,17 @@ namespace Alabo.Datas.PetaPoco
         public string FormatCommand(string sql, object[] args)
         {
             var sb = new StringBuilder();
-            if (sql == null) return "";
+            if (sql == null) {
+                return "";
+            }
 
             sb.Append(sql);
             if (args != null && args.Length > 0)
             {
                 sb.Append("\n");
-                for (var i = 0; i < args.Length; i++)
+                for (var i = 0; i < args.Length; i++) {
                     sb.AppendFormat("\t -> {0}{1} [{2}] = \"{3}\"\n", _paramPrefix, i, args[i].GetType().Name, args[i]);
+                }
 
                 sb.Remove(sb.Length - 1, 1);
             }
@@ -2630,8 +2795,9 @@ namespace Alabo.Datas.PetaPoco
             get => _isolationLevel;
             set
             {
-                if (_transaction != null)
+                if (_transaction != null) {
                     throw new InvalidOperationException("Isolation level can't be changed during a transaction.");
+                }
 
                 _isolationLevel = value;
             }
@@ -2671,19 +2837,22 @@ namespace Alabo.Datas.PetaPoco
         void IBuildConfigurationSettings.SetSetting(string key, object value)
         {
             // Note: no argument checking because, pref, enduser unlikely and handled by RT/FW
-            if (value != null)
+            if (value != null) {
                 _settings[key] = value;
-            else
+            } else {
                 _settings.Remove(key);
+            }
         }
 
         void IBuildConfigurationSettings.TryGetSetting<T>(string key, Action<T> setSetting, Action onFail = null)
         {
             // Note: no argument checking because, pref, enduser unlikely and handled by RT/FW
             object setting;
-            if (_settings.TryGetValue(key, out setting))
+            if (_settings.TryGetValue(key, out setting)) {
                 setSetting((T)setting);
-            else if (onFail != null) onFail();
+            } else if (onFail != null) {
+                onFail();
+            }
         }
 
         /// <summary>
@@ -2732,7 +2901,9 @@ namespace Alabo.Datas.PetaPoco
         public static IDatabaseBuildConfiguration UsingCommandTimeout(this IDatabaseBuildConfiguration source,
             int seconds)
         {
-            if (seconds < 1) throw new ArgumentException("Timeout value must be greater than zero.");
+            if (seconds < 1) {
+                throw new ArgumentException("Timeout value must be greater than zero.");
+            }
 
             source.SetSetting(CommandTimeout, seconds);
             return source;
@@ -2770,7 +2941,9 @@ namespace Alabo.Datas.PetaPoco
         public static IDatabaseBuildConfiguration UsingProvider<T>(this IDatabaseBuildConfiguration source, T provider)
             where T : class, IProvider
         {
-            if (provider == null) throw new ArgumentNullException("provider");
+            if (provider == null) {
+                throw new ArgumentNullException("provider");
+            }
 
             source.SetSetting(Provider, provider);
             return source;
@@ -2789,9 +2962,13 @@ namespace Alabo.Datas.PetaPoco
             Action<T> configure)
             where T : class, IProvider
         {
-            if (provider == null) throw new ArgumentNullException("provider");
+            if (provider == null) {
+                throw new ArgumentNullException("provider");
+            }
 
-            if (configure == null) throw new ArgumentNullException("configure");
+            if (configure == null) {
+                throw new ArgumentNullException("configure");
+            }
 
             configure(provider);
             source.SetSetting(Provider, provider);
@@ -2823,7 +3000,9 @@ namespace Alabo.Datas.PetaPoco
             Action<T> configure)
             where T : class, IProvider, new()
         {
-            if (configure == null) throw new ArgumentNullException("configure");
+            if (configure == null) {
+                throw new ArgumentNullException("configure");
+            }
 
             var provider = new T();
             configure(provider);
@@ -2863,8 +3042,9 @@ namespace Alabo.Datas.PetaPoco
         public static IDatabaseBuildConfiguration UsingConnectionString(this IDatabaseBuildConfiguration source,
             string connectionString)
         {
-            if (string.IsNullOrEmpty(connectionString))
+            if (string.IsNullOrEmpty(connectionString)) {
                 throw new ArgumentException("Argument is null or empty", "connectionString");
+            }
 
             source.SetSetting(ConnectionString, connectionString);
             return source;
@@ -2880,8 +3060,9 @@ namespace Alabo.Datas.PetaPoco
         public static IDatabaseBuildConfiguration UsingConnectionStringName(this IDatabaseBuildConfiguration source,
             string connectionStringName)
         {
-            if (string.IsNullOrEmpty(connectionStringName))
+            if (string.IsNullOrEmpty(connectionStringName)) {
                 throw new ArgumentException("Argument is null or empty", "connectionStringName");
+            }
 
             source.SetSetting(ConnectionStringName, connectionStringName);
             return source;
@@ -2898,7 +3079,9 @@ namespace Alabo.Datas.PetaPoco
             T mapper)
             where T : class, IMapper
         {
-            if (mapper == null) throw new ArgumentNullException("mapper");
+            if (mapper == null) {
+                throw new ArgumentNullException("mapper");
+            }
 
             source.SetSetting(DefaultMapper, mapper);
             return source;
@@ -2917,9 +3100,13 @@ namespace Alabo.Datas.PetaPoco
             T mapper, Action<T> configure)
             where T : class, IMapper
         {
-            if (mapper == null) throw new ArgumentNullException("mapper");
+            if (mapper == null) {
+                throw new ArgumentNullException("mapper");
+            }
 
-            if (configure == null) throw new ArgumentNullException("configure");
+            if (configure == null) {
+                throw new ArgumentNullException("configure");
+            }
 
             configure(mapper);
             source.SetSetting(DefaultMapper, mapper);
@@ -2951,7 +3138,9 @@ namespace Alabo.Datas.PetaPoco
             Action<T> configure)
             where T : class, IMapper, new()
         {
-            if (configure == null) throw new ArgumentNullException("configure");
+            if (configure == null) {
+                throw new ArgumentNullException("configure");
+            }
 
             var mapper = new T();
             configure(mapper);
@@ -4236,8 +4425,9 @@ namespace Alabo.Datas.PetaPoco
         {
             _connectionType = TypeFromAssembly(_connectionTypeName, _assemblyName);
             _commandType = TypeFromAssembly(_commandTypeName, _assemblyName);
-            if (_connectionType == null)
+            if (_connectionType == null) {
                 throw new InvalidOperationException("Can't find Connection type: " + _connectionTypeName);
+            }
         }
 
         public override DbConnection CreateConnection()
@@ -4262,7 +4452,9 @@ namespace Alabo.Datas.PetaPoco
                 // Try to get the type from an already loaded assembly
                 var type = Type.GetType(typeName);
 
-                if (type != null) return type;
+                if (type != null) {
+                    return type;
+                }
 
                 if (assemblyName == null)
                 {
@@ -4273,11 +4465,15 @@ namespace Alabo.Datas.PetaPoco
 
                 var assembly = Assembly.Load(assemblyName);
 
-                if (assembly == null) throw new InvalidOperationException("Can't find assembly: " + assemblyName);
+                if (assembly == null) {
+                    throw new InvalidOperationException("Can't find assembly: " + assemblyName);
+                }
 
                 type = assembly.GetType(typeName);
 
-                if (type == null) return null;
+                if (type == null) {
+                    return null;
+                }
 
                 return type;
             }
@@ -4548,11 +4744,15 @@ namespace Alabo.Datas.PetaPoco
             var colAttrs = propertyInfo.GetCustomAttributes(typeof(ColumnAttribute), true);
             if (explicitColumns)
             {
-                if (colAttrs.Length == 0) return null;
+                if (colAttrs.Length == 0) {
+                    return null;
+                }
             }
             else
             {
-                if (propertyInfo.GetCustomAttributes(typeof(IgnoreAttribute), true).Length != 0) return null;
+                if (propertyInfo.GetCustomAttributes(typeof(IgnoreAttribute), true).Length != 0) {
+                    return null;
+                }
             }
 
             var ci = new ColumnInfo();
@@ -4565,7 +4765,9 @@ namespace Alabo.Datas.PetaPoco
                 ci.UpdateTemplate = colattr.UpdateTemplate;
                 ci.ColumnName = colattr.Name == null ? propertyInfo.Name : colattr.Name;
                 ci.ForceToUtc = colattr.ForceToUtc;
-                if (colattr as ResultColumnAttribute != null) ci.ResultColumn = true;
+                if (colattr as ResultColumnAttribute != null) {
+                    ci.ResultColumn = true;
+                }
             }
             else
             {
@@ -4610,16 +4812,24 @@ namespace Alabo.Datas.PetaPoco
 
                 var prop = t.GetProperties().FirstOrDefault(p =>
                 {
-                    if (p.Name.Equals("Id", StringComparison.OrdinalIgnoreCase)) return true;
+                    if (p.Name.Equals("Id", StringComparison.OrdinalIgnoreCase)) {
+                        return true;
+                    }
 
-                    if (p.Name.Equals(t.Name + "Id", StringComparison.OrdinalIgnoreCase)) return true;
+                    if (p.Name.Equals(t.Name + "Id", StringComparison.OrdinalIgnoreCase)) {
+                        return true;
+                    }
 
-                    if (p.Name.Equals(t.Name + "_Id", StringComparison.OrdinalIgnoreCase)) return true;
+                    if (p.Name.Equals(t.Name + "_Id", StringComparison.OrdinalIgnoreCase)) {
+                        return true;
+                    }
 
                     return false;
                 });
 
-                if (prop == null) return false;
+                if (prop == null) {
+                    return false;
+                }
 
                 ti.PrimaryKey = InflectColumnName(Inflector.Instance, prop.Name);
                 ti.AutoIncrement = IsPrimaryKeyAutoIncrement(prop.PropertyType);
@@ -4636,14 +4846,21 @@ namespace Alabo.Datas.PetaPoco
             };
             IsPrimaryKeyAutoIncrement = t =>
             {
-                if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>))
+                if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Nullable<>)) {
                     t = t.GetGenericArguments()[0];
+                }
 
-                if (t == typeof(long) || t == typeof(ulong)) return true;
+                if (t == typeof(long) || t == typeof(ulong)) {
+                    return true;
+                }
 
-                if (t == typeof(int) || t == typeof(uint)) return true;
+                if (t == typeof(int) || t == typeof(uint)) {
+                    return true;
+                }
 
-                if (t == typeof(short) || t == typeof(ushort)) return true;
+                if (t == typeof(short) || t == typeof(ushort)) {
+                    return true;
+                }
 
                 return false;
             };
@@ -4655,9 +4872,13 @@ namespace Alabo.Datas.PetaPoco
                 // Check for [Column]/[Ignore] Attributes
                 var column = pi.GetCustomAttributes(typeof(ColumnAttribute), true).FirstOrDefault() as ColumnAttribute;
 
-                if (isExplicit && column == null) return false;
+                if (isExplicit && column == null) {
+                    return false;
+                }
 
-                if (pi.GetCustomAttributes(typeof(IgnoreAttribute), true).Any()) return false;
+                if (pi.GetCustomAttributes(typeof(IgnoreAttribute), true).Any()) {
+                    return false;
+                }
 
                 // Read attribute
                 if (column != null)
@@ -4682,7 +4903,9 @@ namespace Alabo.Datas.PetaPoco
                     var valueConverter =
                         pi.GetCustomAttributes(typeof(ValueConverterAttribute), true).FirstOrDefault() as
                             ValueConverterAttribute;
-                    if (valueConverter != null) return valueConverter.ConvertFromDb;
+                    if (valueConverter != null) {
+                        return valueConverter.ConvertFromDb;
+                    }
                 }
 
                 return null;
@@ -4694,7 +4917,9 @@ namespace Alabo.Datas.PetaPoco
                     var valueConverter =
                         pi.GetCustomAttributes(typeof(ValueConverterAttribute), true).FirstOrDefault() as
                             ValueConverterAttribute;
-                    if (valueConverter != null) return valueConverter.ConvertToDb;
+                    if (valueConverter != null) {
+                        return valueConverter.ConvertToDb;
+                    }
                 }
 
                 return null;
@@ -4867,7 +5092,9 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>The converted value</returns>
         public virtual object MapParameterValue(object value)
         {
-            if (value is bool) return (bool)value ? 1 : 0;
+            if (value is bool) {
+                return (bool)value ? 1 : 0;
+            }
 
             return value;
         }
@@ -4952,10 +5179,14 @@ namespace Alabo.Datas.PetaPoco
             foreach (var assemblyName in assemblyQualifiedNames)
             {
                 ft = Type.GetType(assemblyName);
-                if (ft != null) break;
+                if (ft != null) {
+                    break;
+                }
             }
 
-            if (ft == null) throw new ArgumentException("Could not load the " + GetType().Name + " DbProviderFactory.");
+            if (ft == null) {
+                throw new ArgumentException("Could not load the " + GetType().Name + " DbProviderFactory.");
+            }
 
             return (DbProviderFactory)ft.GetField("Instance").GetValue(null);
         }
@@ -4968,8 +5199,9 @@ namespace Alabo.Datas.PetaPoco
         /// <param name="initialString">String to be matched against the beginning of the provider name.</param>
         public static void RegisterCustomProvider<T>(string initialString) where T : IProvider, new()
         {
-            if (string.IsNullOrWhiteSpace(initialString))
+            if (string.IsNullOrWhiteSpace(initialString)) {
                 throw new ArgumentException("Initial string must not be null or empty", "initialString");
+            }
 
             _customProviders[initialString] = Singleton<T>.Instance;
         }
@@ -4977,10 +5209,12 @@ namespace Alabo.Datas.PetaPoco
         private static IProvider GetCustomProvider(string name)
         {
             IProvider provider;
-            foreach (var initialString in _customProviders.Keys)
+            foreach (var initialString in _customProviders.Keys) {
                 if (name.IndexOf(initialString, StringComparison.InvariantCultureIgnoreCase) == 0
-                    && _customProviders.TryGetValue(initialString, out provider))
+                    && _customProviders.TryGetValue(initialString, out provider)) {
                     return provider;
+                }
+            }
 
             return null;
         }
@@ -5006,34 +5240,51 @@ namespace Alabo.Datas.PetaPoco
 
             // Try using type name first (more reliable)
             var custom = GetCustomProvider(typeName);
-            if (custom != null) return custom;
+            if (custom != null) {
+                return custom;
+            }
 
-            if (typeName.StartsWith("MySql")) return Singleton<MySqlDatabaseProvider>.Instance;
+            if (typeName.StartsWith("MySql")) {
+                return Singleton<MySqlDatabaseProvider>.Instance;
+            }
 
-            if (typeName.StartsWith("MariaDb")) return Singleton<MariaDbDatabaseProvider>.Instance;
+            if (typeName.StartsWith("MariaDb")) {
+                return Singleton<MariaDbDatabaseProvider>.Instance;
+            }
 
-            if (typeName.StartsWith("SqlCe")) return Singleton<SqlServerCEDatabaseProviders>.Instance;
+            if (typeName.StartsWith("SqlCe")) {
+                return Singleton<SqlServerCEDatabaseProviders>.Instance;
+            }
 
-            if (typeName.StartsWith("Npgsql") || typeName.StartsWith("PgSql"))
+            if (typeName.StartsWith("Npgsql") || typeName.StartsWith("PgSql")) {
                 return Singleton<PostgreSQLDatabaseProvider>.Instance;
+            }
 
-            if (typeName.StartsWith("Oracle")) return Singleton<OracleDatabaseProvider>.Instance;
+            if (typeName.StartsWith("Oracle")) {
+                return Singleton<OracleDatabaseProvider>.Instance;
+            }
 
-            if (typeName.StartsWith("SQLite")) return Singleton<SQLiteDatabaseProvider>.Instance;
+            if (typeName.StartsWith("SQLite")) {
+                return Singleton<SQLiteDatabaseProvider>.Instance;
+            }
 
-            if (typeName.Equals("SqlConnection") || typeName.Equals("SqlClientFactory"))
+            if (typeName.Equals("SqlConnection") || typeName.Equals("SqlClientFactory")) {
                 return Singleton<SqlServerDatabaseProvider>.Instance;
+            }
 
-            if (typeName.StartsWith("FbConnection") || typeName.EndsWith("FirebirdClientFactory"))
+            if (typeName.StartsWith("FbConnection") || typeName.EndsWith("FirebirdClientFactory")) {
                 return Singleton<FirebirdDbDatabaseProvider>.Instance;
+            }
 
             if (typeName.IndexOf("OleDb", StringComparison.InvariantCultureIgnoreCase) >= 0
                 && (connectionString.IndexOf("Jet.OLEDB", StringComparison.InvariantCultureIgnoreCase) > 0 ||
-                    connectionString.IndexOf("ACE.OLEDB", StringComparison.InvariantCultureIgnoreCase) > 0))
+                    connectionString.IndexOf("ACE.OLEDB", StringComparison.InvariantCultureIgnoreCase) > 0)) {
                 return Singleton<MsAccessDbDatabaseProvider>.Instance;
+            }
 
-            if (!allowDefault)
+            if (!allowDefault) {
                 throw new ArgumentException("Could not match `" + type.FullName + "` to a provider.", "type");
+            }
 
             // Assume SQL Server
             return Singleton<SqlServerDatabaseProvider>.Instance;
@@ -5053,43 +5304,55 @@ namespace Alabo.Datas.PetaPoco
         {
             // Try again with provider name
             var custom = GetCustomProvider(providerName);
-            if (custom != null) return custom;
+            if (custom != null) {
+                return custom;
+            }
 
-            if (providerName.IndexOf("MySql", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            if (providerName.IndexOf("MySql", StringComparison.InvariantCultureIgnoreCase) >= 0) {
                 return Singleton<MySqlDatabaseProvider>.Instance;
+            }
 
-            if (providerName.IndexOf("MariaDb", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            if (providerName.IndexOf("MariaDb", StringComparison.InvariantCultureIgnoreCase) >= 0) {
                 return Singleton<MariaDbDatabaseProvider>.Instance;
+            }
 
             if (providerName.IndexOf("SqlServerCe", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
-                providerName.IndexOf("SqlCeConnection", StringComparison.InvariantCultureIgnoreCase) >= 0)
+                providerName.IndexOf("SqlCeConnection", StringComparison.InvariantCultureIgnoreCase) >= 0) {
                 return Singleton<SqlServerCEDatabaseProviders>.Instance;
+            }
 
             if (providerName.IndexOf("Npgsql", StringComparison.InvariantCultureIgnoreCase) >= 0
-                || providerName.IndexOf("pgsql", StringComparison.InvariantCultureIgnoreCase) >= 0)
+                || providerName.IndexOf("pgsql", StringComparison.InvariantCultureIgnoreCase) >= 0) {
                 return Singleton<PostgreSQLDatabaseProvider>.Instance;
+            }
 
-            if (providerName.IndexOf("Oracle", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            if (providerName.IndexOf("Oracle", StringComparison.InvariantCultureIgnoreCase) >= 0) {
                 return Singleton<OracleDatabaseProvider>.Instance;
+            }
 
-            if (providerName.IndexOf("SQLite", StringComparison.InvariantCultureIgnoreCase) >= 0)
+            if (providerName.IndexOf("SQLite", StringComparison.InvariantCultureIgnoreCase) >= 0) {
                 return Singleton<SQLiteDatabaseProvider>.Instance;
+            }
 
             if (providerName.IndexOf("Firebird", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
-                providerName.IndexOf("FbConnection", StringComparison.InvariantCultureIgnoreCase) >= 0)
+                providerName.IndexOf("FbConnection", StringComparison.InvariantCultureIgnoreCase) >= 0) {
                 return Singleton<FirebirdDbDatabaseProvider>.Instance;
+            }
 
             if (providerName.IndexOf("OleDb", StringComparison.InvariantCultureIgnoreCase) >= 0
                 && (connectionString.IndexOf("Jet.OLEDB", StringComparison.InvariantCultureIgnoreCase) > 0 ||
-                    connectionString.IndexOf("ACE.OLEDB", StringComparison.InvariantCultureIgnoreCase) > 0))
+                    connectionString.IndexOf("ACE.OLEDB", StringComparison.InvariantCultureIgnoreCase) > 0)) {
                 return Singleton<MsAccessDbDatabaseProvider>.Instance;
+            }
 
             if (providerName.IndexOf("SqlServer", StringComparison.InvariantCultureIgnoreCase) >= 0 ||
-                providerName.IndexOf("System.Data.SqlClient", StringComparison.InvariantCultureIgnoreCase) >= 0)
+                providerName.IndexOf("System.Data.SqlClient", StringComparison.InvariantCultureIgnoreCase) >= 0) {
                 return Singleton<SqlServerDatabaseProvider>.Instance;
+            }
 
-            if (!allowDefault)
+            if (!allowDefault) {
                 throw new ArgumentException("Could not match `" + providerName + "` to a provider.", "providerName");
+            }
 
             // Assume SQL Server
             return Singleton<SqlServerDatabaseProvider>.Instance;
@@ -5104,7 +5367,9 @@ namespace Alabo.Datas.PetaPoco
         {
             var sp = factory as IServiceProvider;
 
-            if (sp == null) return factory;
+            if (sp == null) {
+                return factory;
+            }
 
             var unwrapped = sp.GetService(factory.GetType()) as DbProviderFactory;
             return unwrapped == null ? factory : Unwrap(unwrapped);
@@ -5272,12 +5537,14 @@ namespace Alabo.Datas.PetaPoco
         /// <returns></returns>
         private IEnumerable<T> SinglePocoFromIDataReader<T>(int index)
         {
-            if (_reader == null)
+            if (_reader == null) {
                 throw new ObjectDisposedException(GetType().FullName, "The data reader has been disposed");
+            }
 
-            if (_consumed)
+            if (_consumed) {
                 throw new InvalidOperationException(
                     "Query results must be consumed in the correct order, and each result can only be consumed once");
+            }
 
             _consumed = true;
 
@@ -5295,13 +5562,17 @@ namespace Alabo.Datas.PetaPoco
                         T poco;
                         try
                         {
-                            if (!_reader.Read()) yield break;
+                            if (!_reader.Read()) {
+                                yield break;
+                            }
 
                             poco = factory(_reader);
                         }
                         catch (Exception x)
                         {
-                            if (_db.OnException(x)) throw;
+                            if (_db.OnException(x)) {
+                                throw;
+                            }
 
                             yield break;
                         }
@@ -5312,7 +5583,9 @@ namespace Alabo.Datas.PetaPoco
             }
             finally // finally so that First etc progresses things even when multiple rows
             {
-                if (index == _gridIndex) NextResult();
+                if (index == _gridIndex) {
+                    NextResult();
+                }
             }
         }
 
@@ -5326,12 +5599,14 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>A collection of POCO's as an IEnumerable</returns>
         private IEnumerable<TRet> MultiPocoFromIDataReader<TRet>(int index, Type[] types, object cb)
         {
-            if (_reader == null)
+            if (_reader == null) {
                 throw new ObjectDisposedException(GetType().FullName, "The data reader has been disposed");
+            }
 
-            if (_consumed)
+            if (_consumed) {
                 throw new InvalidOperationException(
                     "Query results must be consumed in the correct order, and each result can only be consumed once");
+            }
 
             _consumed = true;
 
@@ -5342,7 +5617,9 @@ namespace Alabo.Datas.PetaPoco
 
                 var factory = MultiPocoFactory.GetFactory<TRet>(types, cmd.Connection.ConnectionString, cmd.CommandText,
                     r, _defaultMapper);
-                if (cb == null) cb = MultiPocoFactory.GetAutoMapper(types.ToArray());
+                if (cb == null) {
+                    cb = MultiPocoFactory.GetAutoMapper(types.ToArray());
+                }
 
                 var bNeedTerminator = false;
 
@@ -5351,35 +5628,43 @@ namespace Alabo.Datas.PetaPoco
                     TRet poco;
                     try
                     {
-                        if (!r.Read()) break;
+                        if (!r.Read()) {
+                            break;
+                        }
 
                         poco = factory(r, cb);
                     }
                     catch (Exception x)
                     {
-                        if (_db.OnException(x)) throw;
+                        if (_db.OnException(x)) {
+                            throw;
+                        }
 
                         yield break;
                     }
 
-                    if (poco != null)
+                    if (poco != null) {
                         yield return poco;
-                    else
+                    } else {
                         bNeedTerminator = true;
+                    }
                 }
 
                 if (bNeedTerminator)
                 {
                     var poco = (TRet)(cb as Delegate).DynamicInvoke(new object[types.Length]);
-                    if (poco != null)
+                    if (poco != null) {
                         yield return poco;
-                    else
+                    } else {
                         yield break;
+                    }
                 }
             }
             finally
             {
-                if (index == _gridIndex) NextResult();
+                if (index == _gridIndex) {
+                    NextResult();
+                }
             }
         }
 
@@ -5395,7 +5680,9 @@ namespace Alabo.Datas.PetaPoco
         /// </summary>
         private void NextResult()
         {
-            if (!_reader.NextResult()) return;
+            if (!_reader.NextResult()) {
+                return;
+            }
 
             _gridIndex++;
             _consumed = false;
@@ -5408,7 +5695,9 @@ namespace Alabo.Datas.PetaPoco
         {
             if (_reader != null)
             {
-                if (!_reader.IsClosed && _command != null) _command.Cancel();
+                if (!_reader.IsClosed && _command != null) {
+                    _command.Cancel();
+                }
 
                 _reader.Dispose();
                 _reader = null;
@@ -5714,7 +6003,9 @@ namespace Alabo.Datas.PetaPoco
             _lock.EnterWriteLock();
             try
             {
-                foreach (var i in _mappers.Where(kvp => kvp.Value == mapper).ToList()) _mappers.Remove(i.Key);
+                foreach (var i in _mappers.Where(kvp => kvp.Value == mapper).ToList()) {
+                    _mappers.Remove(i.Key);
+                }
             }
             finally
             {
@@ -5752,9 +6043,13 @@ namespace Alabo.Datas.PetaPoco
             try
             {
                 IMapper val;
-                if (_mappers.TryGetValue(entityType, out val)) return val;
+                if (_mappers.TryGetValue(entityType, out val)) {
+                    return val;
+                }
 
-                if (_mappers.TryGetValue(entityType.Assembly, out val)) return val;
+                if (_mappers.TryGetValue(entityType.Assembly, out val)) {
+                    return val;
+                }
 
                 return defaultMapper;
             }
@@ -5837,12 +6132,15 @@ namespace Alabo.Datas.PetaPoco
                         // Find the property
                         var candidates = (from p in types[j].GetProperties() where p.PropertyType == types[i] select p)
                             .ToArray();
-                        if (!candidates.Any()) continue;
+                        if (!candidates.Any()) {
+                            continue;
+                        }
 
-                        if (candidates.Length > 1)
+                        if (candidates.Length > 1) {
                             throw new InvalidOperationException(string.Format(
                                 "Can't auto join {0} as {1} has more than one property of type {0}", types[i],
                                 types[j]));
+                        }
 
                         // Generate code
                         il.Emit(OpCodes.Ldarg_S, j);
@@ -5851,7 +6149,9 @@ namespace Alabo.Datas.PetaPoco
                         handled = true;
                     }
 
-                    if (!handled) throw new InvalidOperationException(string.Format("Can't auto join {0}", types[i]));
+                    if (!handled) {
+                        throw new InvalidOperationException(string.Format("Can't auto join {0}", types[i]));
+                    }
                 }
 
                 il.Emit(OpCodes.Ldarg_0);
@@ -5867,9 +6167,10 @@ namespace Alabo.Datas.PetaPoco
             IDataReader r, ref int pos, IMapper defaultMapper)
         {
             // Last?
-            if (typeNext == null)
+            if (typeNext == null) {
                 return PocoData.ForType(typeThis, defaultMapper)
                     .GetFactory(sql, connectionString, pos, r.FieldCount - pos, r, defaultMapper);
+            }
 
             // Get PocoData for the two types
             var pdThis = PocoData.ForType(typeThis, defaultMapper);
@@ -5883,8 +6184,9 @@ namespace Alabo.Datas.PetaPoco
                 // Split if field name has already been used, or if the field doesn't exist in current poco but does in the next
                 var fieldName = r.GetName(pos);
                 if (usedColumns.ContainsKey(fieldName) ||
-                    !pdThis.Columns.ContainsKey(fieldName) && pdNext.Columns.ContainsKey(fieldName))
+                    !pdThis.Columns.ContainsKey(fieldName) && pdNext.Columns.ContainsKey(fieldName)) {
                     return pdThis.GetFactory(sql, connectionString, firstColumn, pos - firstColumn, r, defaultMapper);
+                }
 
                 usedColumns.Add(fieldName, true);
             }
@@ -6014,8 +6316,9 @@ namespace Alabo.Datas.PetaPoco
         {
             var t = PropertyInfo.PropertyType;
             if (val.GetType().IsValueType && PropertyInfo.PropertyType.IsGenericType &&
-                PropertyInfo.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                PropertyInfo.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>)) {
                 t = t.GetGenericArguments()[0];
+            }
 
             return Convert.ChangeType(val, t);
         }
@@ -6061,7 +6364,9 @@ namespace Alabo.Datas.PetaPoco
             foreach (var pi in type.GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public))
             {
                 var ci = mapper.GetColumnInfo(pi);
-                if (ci == null) continue;
+                if (ci == null) {
+                    continue;
+                }
 
                 var pc = new PocoColumn();
                 pc.PropertyInfo = pi;
@@ -6099,9 +6404,11 @@ namespace Alabo.Datas.PetaPoco
                 pd.Columns.Add(primaryKeyName, new ExpandoColumn { ColumnName = primaryKeyName });
                 pd.TableInfo.PrimaryKey = primaryKeyName;
                 pd.TableInfo.AutoIncrement = true;
-                foreach (var col in (obj as IDictionary<string, object>).Keys)
-                    if (col != primaryKeyName)
+                foreach (var col in (obj as IDictionary<string, object>).Keys) {
+                    if (col != primaryKeyName) {
                         pd.Columns.Add(col, new ExpandoColumn { ColumnName = col });
+                    }
+                }
 
                 return pd;
             }
@@ -6111,8 +6418,9 @@ namespace Alabo.Datas.PetaPoco
 
         public static PocoData ForType(Type type, IMapper defaultMapper)
         {
-            if (type == typeof(ExpandoObject))
+            if (type == typeof(ExpandoObject)) {
                 throw new InvalidOperationException("Can't use dynamic types with this method");
+            }
 
             return _pocoDatas.Get(type, () => new PocoData(type, defaultMapper));
         }
@@ -6176,7 +6484,9 @@ namespace Alabo.Datas.PetaPoco
                             var lblNotNull = il.DefineLabel();
                             il.Emit(OpCodes.Brfalse_S, lblNotNull); // obj, obj, fieldname, converter?,  value
                             il.Emit(OpCodes.Pop); // obj, obj, fieldname, converter?
-                            if (converter != null) il.Emit(OpCodes.Pop); // obj, obj, fieldname,
+                            if (converter != null) {
+                                il.Emit(OpCodes.Pop); // obj, obj, fieldname,
+                            }
 
                             il.Emit(OpCodes.Ldnull); // obj, obj, fieldname, null
                             if (converter != null)
@@ -6221,7 +6531,9 @@ namespace Alabo.Datas.PetaPoco
                         il.Emit(OpCodes.Callvirt, fnGetValue); // value
 
                         // Call the converter
-                        if (converter != null) il.Emit(OpCodes.Callvirt, fnInvoke);
+                        if (converter != null) {
+                            il.Emit(OpCodes.Callvirt, fnInvoke);
+                        }
 
                         il.MarkLabel(lblFin);
                         il.Emit(OpCodes.Unbox_Any, Type); // value converted
@@ -6232,9 +6544,10 @@ namespace Alabo.Datas.PetaPoco
                         var ctor = Type.GetConstructor(
                             BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null, new Type[0],
                             null);
-                        if (ctor == null)
+                        if (ctor == null) {
                             throw new InvalidOperationException(
                                 "Type [" + Type.FullName + "] should have default public or non-public constructor");
+                        }
 
                         il.Emit(OpCodes.Newobj, ctor);
 
@@ -6243,7 +6556,9 @@ namespace Alabo.Datas.PetaPoco
                         {
                             // Get the PocoColumn for this db column, ignore if not known
                             PocoColumn pc;
-                            if (!Columns.TryGetValue(reader.GetName(i), out pc)) continue;
+                            if (!Columns.TryGetValue(reader.GetName(i), out pc)) {
+                                continue;
+                            }
 
                             // Get the source type for this column
                             var srcType = reader.GetFieldType(i);
@@ -6277,9 +6592,10 @@ namespace Alabo.Datas.PetaPoco
                                     il.Emit(OpCodes.Callvirt, valuegetter); // *,value
 
                                     // Convert to Nullable
-                                    if (Nullable.GetUnderlyingType(dstType) != null)
+                                    if (Nullable.GetUnderlyingType(dstType) != null) {
                                         il.Emit(OpCodes.Newobj,
                                             dstType.GetConstructor(new[] { Nullable.GetUnderlyingType(dstType) }));
+                                    }
 
                                     il.Emit(OpCodes.Callvirt, pc.PropertyInfo.GetSetMethod(true)); // poco
                                     Handled = true;
@@ -6298,7 +6614,9 @@ namespace Alabo.Datas.PetaPoco
                                 il.Emit(OpCodes.Callvirt, fnGetValue); // *,value
 
                                 // Call the converter
-                                if (converter != null) il.Emit(OpCodes.Callvirt, fnInvoke);
+                                if (converter != null) {
+                                    il.Emit(OpCodes.Callvirt, fnInvoke);
+                                }
 
                                 // Assign it
                                 il.Emit(OpCodes.Unbox_Any, pc.PropertyInfo.PropertyType); // poco,poco,value
@@ -6355,34 +6673,44 @@ namespace Alabo.Datas.PetaPoco
             if (pc != null)
             {
                 converter = mapper.GetFromDbConverter(pc.PropertyInfo, srcType);
-                if (converter != null) return converter;
+                if (converter != null) {
+                    return converter;
+                }
             }
 
             // Standard DateTime->Utc mapper
             if (pc != null && pc.ForceToUtc && srcType == typeof(DateTime) &&
-                (dstType == typeof(DateTime) || dstType == typeof(DateTime?)))
+                (dstType == typeof(DateTime) || dstType == typeof(DateTime?))) {
                 return delegate (object src) { return new DateTime(((DateTime)src).Ticks, DateTimeKind.Utc); };
+            }
 
             // unwrap nullable types
             var underlyingDstType = Nullable.GetUnderlyingType(dstType);
-            if (underlyingDstType != null) dstType = underlyingDstType;
+            if (underlyingDstType != null) {
+                dstType = underlyingDstType;
+            }
 
             // Forced type conversion including integral types -> enum
             if (dstType.IsEnum && IsIntegralType(srcType))
             {
                 var backingDstType = Enum.GetUnderlyingType(dstType);
-                if (underlyingDstType != null) return delegate (object src) { return Enum.ToObject(dstType, src); };
+                if (underlyingDstType != null) {
+                    return delegate (object src) { return Enum.ToObject(dstType, src); };
+                }
 
-                if (srcType != backingDstType)
+                if (srcType != backingDstType) {
                     return delegate (object src) { return Convert.ChangeType(src, backingDstType, null); };
+                }
             }
             else if (!dstType.IsAssignableFrom(srcType))
             {
-                if (dstType.IsEnum && srcType == typeof(string))
+                if (dstType.IsEnum && srcType == typeof(string)) {
                     return delegate (object src) { return EnumMapper.EnumFromString(dstType, (string)src); };
+                }
 
-                if (dstType == typeof(Guid) && srcType == typeof(string))
+                if (dstType == typeof(Guid) && srcType == typeof(string)) {
                     return delegate (object src) { return Guid.Parse((string)src); };
+                }
 
                 return delegate (object src) { return Convert.ChangeType(src, dstType, null); };
             }
@@ -6395,7 +6723,9 @@ namespace Alabo.Datas.PetaPoco
             while (t != null)
             {
                 var info = cb(t);
-                if (info != null) return info;
+                if (info != null) {
+                    return info;
+                }
 
                 t = t.BaseType;
             }
@@ -6478,7 +6808,9 @@ namespace Alabo.Datas.PetaPoco
         private void Build()
         {
             // already built?
-            if (_sqlFinal != null) return;
+            if (_sqlFinal != null) {
+                return;
+            }
 
             // Build it
             var sb = new StringBuilder();
@@ -6495,10 +6827,11 @@ namespace Alabo.Datas.PetaPoco
         /// <returns>A reference to this builder, allowing for fluent style concatenation</returns>
         public Sql Append(Sql sql)
         {
-            if (_rhs != null)
+            if (_rhs != null) {
                 _rhs.Append(sql);
-            else
+            } else {
                 _rhs = sql;
+            }
 
             _sqlFinal = null;
             return this;
@@ -6526,21 +6859,31 @@ namespace Alabo.Datas.PetaPoco
             if (!string.IsNullOrEmpty(_sql))
             {
                 // Add SQL to the string
-                if (sb.Length > 0) sb.Append("\n");
+                if (sb.Length > 0) {
+                    sb.Append("\n");
+                }
 
                 var sql = ParametersHelper.ProcessParams(_sql, _args, args);
 
-                if (Is(lhs, "WHERE ") && Is(this, "WHERE ")) sql = "AND " + sql.Substring(6);
+                if (Is(lhs, "WHERE ") && Is(this, "WHERE ")) {
+                    sql = "AND " + sql.Substring(6);
+                }
 
-                if (Is(lhs, "ORDER BY ") && Is(this, "ORDER BY ")) sql = ", " + sql.Substring(9);
+                if (Is(lhs, "ORDER BY ") && Is(this, "ORDER BY ")) {
+                    sql = ", " + sql.Substring(9);
+                }
                 // add set clause
-                if (Is(lhs, "SET ") && Is(this, "SET ")) sql = ", " + sql.Substring(4);
+                if (Is(lhs, "SET ") && Is(this, "SET ")) {
+                    sql = ", " + sql.Substring(4);
+                }
 
                 sb.Append(sql);
             }
 
             // Now do rhs
-            if (_rhs != null) _rhs.Build(sb, args, this);
+            if (_rhs != null) {
+                _rhs.Build(sb, args, this);
+            }
         }
 
         /// <summary>
@@ -6773,11 +7116,17 @@ namespace Alabo.Datas.PetaPoco
             {
                 var prop = t.GetProperties().FirstOrDefault(p =>
                 {
-                    if (p.Name.Equals("id", StringComparison.OrdinalIgnoreCase)) return true;
+                    if (p.Name.Equals("id", StringComparison.OrdinalIgnoreCase)) {
+                        return true;
+                    }
 
-                    if (p.Name.Equals(t.Name + "id", StringComparison.OrdinalIgnoreCase)) return true;
+                    if (p.Name.Equals(t.Name + "id", StringComparison.OrdinalIgnoreCase)) {
+                        return true;
+                    }
 
-                    if (p.Name.Equals(t.Name + "_id", StringComparison.OrdinalIgnoreCase)) return true;
+                    if (p.Name.Equals(t.Name + "_id", StringComparison.OrdinalIgnoreCase)) {
+                        return true;
+                    }
 
                     return false;
                 });
@@ -6814,7 +7163,9 @@ namespace Alabo.Datas.PetaPoco
 
         public void Dispose()
         {
-            if (_db != null) _db.AbortTransaction();
+            if (_db != null) {
+                _db.AbortTransaction();
+            }
         }
     }
 
@@ -7125,11 +7476,15 @@ namespace Alabo.Datas.PetaPoco
         {
             var result = word;
 
-            if (Uncountables.Contains(word.ToLower())) return result;
+            if (Uncountables.Contains(word.ToLower())) {
+                return result;
+            }
 
-            for (var i = rules.Count - 1; i >= 0; i--)
-                if ((result = rules[i].Apply(word)) != null)
+            for (var i = rules.Count - 1; i >= 0; i--) {
+                if ((result = rules[i].Apply(word)) != null) {
                     break;
+                }
+            }
 
             return result;
         }
@@ -7138,7 +7493,9 @@ namespace Alabo.Datas.PetaPoco
         {
             var nMod100 = number % 100;
 
-            if (nMod100 >= 11 && nMod100 <= 13) return numberString + "th";
+            if (nMod100 >= 11 && nMod100 <= 13) {
+                return numberString + "th";
+            }
 
             switch (number % 10)
             {
@@ -7395,8 +7752,9 @@ namespace Alabo.Datas.PetaPoco
         {
             cmd.CommandText = cmd.CommandText.TrimEnd();
 
-            if (cmd.CommandText.EndsWith(";"))
+            if (cmd.CommandText.EndsWith(";")) {
                 cmd.CommandText = cmd.CommandText.Substring(0, cmd.CommandText.Length - 1);
+            }
 
             cmd.CommandText += " RETURNING " + EscapeSqlIdentifier(primaryKeyName) + ";";
             return ExecuteScalarHelper(database, cmd);
@@ -7419,7 +7777,9 @@ namespace Alabo.Datas.PetaPoco
 
         public override string GetParameterPrefix(string connectionString)
         {
-            if (connectionString != null && connectionString.IndexOf("Allow User Variables=true") >= 0) return "?";
+            if (connectionString != null && connectionString.IndexOf("Allow User Variables=true") >= 0) {
+                return "?";
+            }
 
             return "@";
         }
@@ -7465,7 +7825,9 @@ namespace Alabo.Datas.PetaPoco
 
         public override string GetParameterPrefix(string connectionString)
         {
-            if (connectionString != null && connectionString.IndexOf("Allow User Variables=true") >= 0) return "?";
+            if (connectionString != null && connectionString.IndexOf("Allow User Variables=true") >= 0) {
+                return "?";
+            }
 
             return "@";
         }
@@ -7496,9 +7858,10 @@ namespace Alabo.Datas.PetaPoco
 
         public override string BuildPageQuery(long skip, long take, SQLParts parts, ref object[] args)
         {
-            if (parts.SqlSelectRemoved.StartsWith("*"))
+            if (parts.SqlSelectRemoved.StartsWith("*")) {
                 throw new Exception(
                     "Query must alias '*' when performing a paged query.\neg. select t.* from table t order by t.id");
+            }
 
             // Same deal as SQL Server
             return Singleton<SqlServerDatabaseProvider>.Instance.BuildPageQuery(skip, take, parts, ref args);
@@ -7520,7 +7883,9 @@ namespace Alabo.Datas.PetaPoco
 
         public override string GetAutoIncrementExpression(TableInfo ti)
         {
-            if (!string.IsNullOrEmpty(ti.SequenceName)) return string.Format("{0}.nextval", ti.SequenceName);
+            if (!string.IsNullOrEmpty(ti.SequenceName)) {
+                return string.Format("{0}.nextval", ti.SequenceName);
+            }
 
             return null;
         }
@@ -7562,7 +7927,9 @@ namespace Alabo.Datas.PetaPoco
         public override object MapParameterValue(object value)
         {
             // Don't map bools to ints in PostgreSQL
-            if (value.GetType() == typeof(bool)) return value;
+            if (value.GetType() == typeof(bool)) {
+                return value;
+            }
 
             return base.MapParameterValue(value);
         }
@@ -7595,7 +7962,9 @@ namespace Alabo.Datas.PetaPoco
 
         public override object MapParameterValue(object value)
         {
-            if (value.GetType() == typeof(uint)) return (long)(uint)value;
+            if (value.GetType() == typeof(uint)) {
+                return (long)(uint)value;
+            }
 
             return base.MapParameterValue(value);
         }
@@ -7628,7 +7997,9 @@ namespace Alabo.Datas.PetaPoco
 
         public override string BuildPageQuery(long skip, long take, SQLParts parts, ref object[] args)
         {
-            if (string.IsNullOrEmpty(parts.SqlOrderBy)) parts.Sql += " ORDER BY ABS(1)";
+            if (string.IsNullOrEmpty(parts.SqlOrderBy)) {
+                parts.Sql += " ORDER BY ABS(1)";
+            }
 
             var sqlPage = string.Format("{0}\nOFFSET @{1} ROWS FETCH NEXT @{2} ROWS ONLY", parts.Sql, args.Length,
                 args.Length + 1);
@@ -7665,8 +8036,9 @@ namespace Alabo.Datas.PetaPoco
                 }
             }
 
-            if (helper.RegexDistinct.IsMatch(parts.SqlSelectRemoved))
+            if (helper.RegexDistinct.IsMatch(parts.SqlSelectRemoved)) {
                 parts.SqlSelectRemoved = "peta_inner.* FROM (SELECT " + parts.SqlSelectRemoved + ") peta_inner";
+            }
 
             var sqlPage =
                 string.Format(
@@ -7705,20 +8077,30 @@ namespace Alabo.Datas.PetaPoco
 
             // Calculate the hashcode
             _hashCode = 17;
-            foreach (var k in keys) _hashCode = _hashCode * 23 + (k == null ? 0 : k.GetHashCode());
+            foreach (var k in keys) {
+                _hashCode = _hashCode * 23 + (k == null ? 0 : k.GetHashCode());
+            }
         }
 
         private bool Equals(ArrayKey<T> other)
         {
-            if (other == null) return false;
+            if (other == null) {
+                return false;
+            }
 
-            if (other._hashCode != _hashCode) return false;
+            if (other._hashCode != _hashCode) {
+                return false;
+            }
 
-            if (other._keys.Length != _keys.Length) return false;
+            if (other._keys.Length != _keys.Length) {
+                return false;
+            }
 
-            for (var i = 0; i < _keys.Length; i++)
-                if (!Equals(_keys[i], other._keys[i]))
+            for (var i = 0; i < _keys.Length; i++) {
+                if (!Equals(_keys[i], other._keys[i])) {
                     return false;
+                }
+            }
 
             return true;
         }
@@ -7744,7 +8126,9 @@ namespace Alabo.Datas.PetaPoco
 
         public static string AddSelectClause<T>(IProvider provider, string sql, IMapper defaultMapper)
         {
-            if (sql.StartsWith(";")) return sql.Substring(1);
+            if (sql.StartsWith(";")) {
+                return sql.Substring(1);
+            }
 
             if (!rxSelect.IsMatch(sql))
             {
@@ -7754,10 +8138,11 @@ namespace Alabo.Datas.PetaPoco
                     ? string.Join(", ",
                         (from c in pd.QueryColumns select tableName + "." + provider.EscapeSqlIdentifier(c)).ToArray())
                     : "NULL";
-                if (!rxFrom.IsMatch(sql))
+                if (!rxFrom.IsMatch(sql)) {
                     sql = string.Format("SELECT {0} FROM {1} {2}", cols, tableName, sql);
-                else
+                } else {
                     sql = string.Format("SELECT {0} {1}", cols, sql);
+                }
             }
 
             return sql;
@@ -7778,7 +8163,9 @@ namespace Alabo.Datas.PetaPoco
             TValue val;
             try
             {
-                if (_map.TryGetValue(key, out val)) return val;
+                if (_map.TryGetValue(key, out val)) {
+                    return val;
+                }
             }
             finally
             {
@@ -7790,7 +8177,9 @@ namespace Alabo.Datas.PetaPoco
             try
             {
                 // Check again
-                if (_map.TryGetValue(key, out val)) return val;
+                if (_map.TryGetValue(key, out val)) {
+                    return val;
+                }
 
                 // Create it
                 val = factory();
@@ -7835,7 +8224,9 @@ namespace Alabo.Datas.PetaPoco
 
                 var newmap = new Dictionary<string, object>(values.Length, StringComparer.InvariantCultureIgnoreCase);
 
-                foreach (var v in values) newmap.Add(v.ToString(), v);
+                foreach (var v in values) {
+                    newmap.Add(v.ToString(), v);
+                }
 
                 return newmap;
             });
@@ -7899,17 +8290,20 @@ namespace Alabo.Datas.PetaPoco
 
             // Extract the columns from "SELECT <whatever> FROM"
             var m = RegexColumns.Match(sql);
-            if (!m.Success) return false;
+            if (!m.Success) {
+                return false;
+            }
 
             // Save column list and replace with COUNT(*)
             var g = m.Groups[1];
             parts.SqlSelectRemoved = sql.Substring(g.Index);
 
-            if (RegexDistinct.IsMatch(parts.SqlSelectRemoved))
+            if (RegexDistinct.IsMatch(parts.SqlSelectRemoved)) {
                 parts.SqlCount = sql.Substring(0, g.Index) + "COUNT(" + m.Groups[1].ToString().Trim() + ") " +
                                  sql.Substring(g.Index + g.Length);
-            else
+            } else {
                 parts.SqlCount = sql.Substring(0, g.Index) + "COUNT(*) " + sql.Substring(g.Index + g.Length);
+            }
 
             // Look for the last "ORDER BY <whatever>" clause not part of a ROW_NUMBER expression
             m = SimpleRegexOrderBy.Match(parts.SqlCount);
@@ -7941,10 +8335,11 @@ namespace Alabo.Datas.PetaPoco
                     if (int.TryParse(param, out paramIndex))
                     {
                         // Numbered parameter
-                        if (paramIndex < 0 || paramIndex >= args_src.Length)
+                        if (paramIndex < 0 || paramIndex >= args_src.Length) {
                             throw new ArgumentOutOfRangeException(string.Format(
                                 "Parameter '@{0}' specified but only {1} parameters supplied (in `{2}`)", paramIndex,
                                 args_src.Length, sql));
+                        }
 
                         arg_val = args_src[paramIndex];
                     }
@@ -7964,11 +8359,12 @@ namespace Alabo.Datas.PetaPoco
                             }
                         }
 
-                        if (!found)
+                        if (!found) {
                             throw new ArgumentException(
                                 string.Format(
                                     "Parameter '@{0}' specified but none of the passed arguments have a property with this name (in '{1}')",
                                     param, sql));
+                        }
                     }
 
                     // Expand collections to parameter lists

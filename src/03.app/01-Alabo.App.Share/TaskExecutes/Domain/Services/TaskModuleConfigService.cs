@@ -36,10 +36,13 @@ namespace Alabo.App.Share.TaskExecutes.Domain.Services
             TaskModuleConfigBaseService(context);
             if (!ObjectCache.TryGet(_shareModuleCacheKey, out IList<ShareModule> shareModuleList)
                 ) //添加统计 TODO 重构注释 分润维度获取
+{
                 //var result = _openApiClient.GetShareList(_serverAuthenticationManager.Token.Token);
                 // shareModuleList = result.Result;
-                if (shareModuleList != null)
+                if (shareModuleList != null) {
                     ObjectCache.Set(_shareModuleCacheKey, shareModuleList);
+                }
+            }
 
             //var shareModuleReports = new ShareModuleReports {
             //    ConfigCount = shareModuleList.Count,
@@ -56,11 +59,17 @@ namespace Alabo.App.Share.TaskExecutes.Domain.Services
         {
             TaskModuleConfigBaseService(context);
             var result = ServiceResult.Success;
-            if (config == null) return ServiceResult.FailedWithMessage("配置信息不存在");
+            if (config == null) {
+                return ServiceResult.FailedWithMessage("配置信息不存在");
+            }
 
-            if (moduleType == null) return ServiceResult.FailedWithMessage("类型不能为空");
+            if (moduleType == null) {
+                return ServiceResult.FailedWithMessage("类型不能为空");
+            }
 
-            if (string.IsNullOrWhiteSpace(shareModule.Name)) return ServiceResult.FailedWithMessage("请输入配置名称");
+            if (string.IsNullOrWhiteSpace(shareModule.Name)) {
+                return ServiceResult.FailedWithMessage("请输入配置名称");
+            }
 
             var attribute = GetModuleAttribute(moduleType);
             CheckTaskModuleAttribute(attribute, config);
@@ -69,7 +78,9 @@ namespace Alabo.App.Share.TaskExecutes.Domain.Services
             {
                 var moduleList = GetList(context);
                 var find = moduleList?.FirstOrDefault(e => e.ModuleId == attribute.Id);
-                if (find != null && find.Id != shareModule.Id) return ServiceResult.FailedWithMessage("该维度已配置，不支持重复配置");
+                if (find != null && find.Id != shareModule.Id) {
+                    return ServiceResult.FailedWithMessage("该维度已配置，不支持重复配置");
+                }
             }
 
             try
@@ -81,7 +92,9 @@ namespace Alabo.App.Share.TaskExecutes.Domain.Services
                 {
                     var resultToken =
                         await _shareApiClient.AddShareModule(_serverAuthenticationManager.Token.Token, shareModule);
-                    if (!resultToken) return ServiceResult.FailedWithMessage("添加失败");
+                    if (!resultToken) {
+                        return ServiceResult.FailedWithMessage("添加失败");
+                    }
 
                     DeleteCache();
                 }
@@ -90,7 +103,9 @@ namespace Alabo.App.Share.TaskExecutes.Domain.Services
                     var find = GetSingle(context, shareModule.Id);
                     var resultToken =
                         await _shareApiClient.UpdateShareModule(_serverAuthenticationManager.Token.Token, shareModule);
-                    if (!resultToken) return ServiceResult.FailedWithMessage("更新失败");
+                    if (!resultToken) {
+                        return ServiceResult.FailedWithMessage("更新失败");
+                    }
 
                     DeleteCache();
                 }
@@ -120,8 +135,9 @@ namespace Alabo.App.Share.TaskExecutes.Domain.Services
         public TaskModuleAttribute GetModuleAttribute(Type moduleType)
         {
             var attributes = moduleType.GetTypeInfo().GetAttributes<TaskModuleAttribute>();
-            if (attributes == null || attributes.Count() <= 0)
+            if (attributes == null || attributes.Count() <= 0) {
                 throw new ArgumentException($"type {moduleType.Name} do not have module attribute.");
+            }
 
             return attributes.First();
         }
@@ -138,12 +154,16 @@ namespace Alabo.App.Share.TaskExecutes.Domain.Services
             try
             {
                 var shareModule = GetSingle(context, id);
-                if (shareModule == null) return ServiceResult.FailedWithMessage("配置未找到");
+                if (shareModule == null) {
+                    return ServiceResult.FailedWithMessage("配置未找到");
+                }
 
                 shareModule.ConfigValue = configValue.ToJson();
                 var resultToken =
                     await _shareApiClient.UpdateShareModule(_serverAuthenticationManager.Token.Token, shareModule);
-                if (!resultToken) return ServiceResult.FailedWithMessage("锁定/解锁失败");
+                if (!resultToken) {
+                    return ServiceResult.FailedWithMessage("锁定/解锁失败");
+                }
 
                 DeleteCache();
             }
@@ -185,24 +205,27 @@ namespace Alabo.App.Share.TaskExecutes.Domain.Services
             where T : ITaskModule
         {
             var attributes = typeof(T).GetTypeInfo().GetAttributes<TaskModuleAttribute>();
-            if (attributes == null || attributes.Count() <= 0)
+            if (attributes == null || attributes.Count() <= 0) {
                 throw new ArgumentException($"type {typeof(T).Name} do not have module attribute.");
+            }
 
             return attributes.First();
         }
 
         private void CheckTaskModuleAttribute(TaskModuleAttribute attribute, IModuleConfig config)
         {
-            if (attribute.ConfigurationType != config.GetType())
+            if (attribute.ConfigurationType != config.GetType()) {
                 throw new TypeAccessException(
                     $"config type {config.GetType().Name} not equals attribtue config type {attribute.ConfigurationType}");
+            }
         }
 
         private void CheckTaskModuleAttribute(TaskModuleAttribute attribute, Type configType)
         {
-            if (attribute.ConfigurationType != configType)
+            if (attribute.ConfigurationType != configType) {
                 throw new TypeAccessException(
                     $"config type {configType.Name} not equals attribtue config type {attribute.ConfigurationType}");
+            }
         }
 
         private void DeleteCache()

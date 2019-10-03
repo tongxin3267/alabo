@@ -27,8 +27,9 @@ namespace Alabo.Framework.Core.WebApis.Controller
         {
             get
             {
-                if (_user == null && AutoModel.BasicUser != null)
+                if (_user == null && AutoModel.BasicUser != null) {
                     _user = Resolve<IAlaboUserService>().GetSingle(AutoModel.BasicUser.Id);
+                }
 
                 return _user;
             }
@@ -45,7 +46,10 @@ namespace Alabo.Framework.Core.WebApis.Controller
                 {
                     _autoModel = new AutoBaseModel();
                     var filter = HttpContext.Request.Query["filter"].ConvertToInt();
-                    if (filter <= 0) filter = HttpContext.Request.Headers["zk-filter"].ToString().ConvertToInt();
+                    if (filter <= 0) {
+                        filter = HttpContext.Request.Headers["zk-filter"].ToString().ConvertToInt();
+                    }
+
                     if (filter > 0)
                     {
                         filter.IntToEnum(out FilterType filterType);
@@ -57,7 +61,9 @@ namespace Alabo.Framework.Core.WebApis.Controller
                     {
                         var user = Resolve<IAlaboUserService>().GetSingle(userId);
                         _autoModel.BasicUser = new BasicUser { Id = userId };
-                        if (user != null) _autoModel.BasicUser = user.MapTo<BasicUser>();
+                        if (user != null) {
+                            _autoModel.BasicUser = user.MapTo<BasicUser>();
+                        }
                     }
                 }
 
@@ -72,8 +78,10 @@ namespace Alabo.Framework.Core.WebApis.Controller
         /// <returns></returns>
         public ApiResult ToResult(ServiceResult serviceResult)
         {
-            if (serviceResult.Succeeded)
+            if (serviceResult.Succeeded) {
                 return ApiResult.Success();
+            }
+
             return ApiResult.Failure(serviceResult.ToString());
         }
 
@@ -104,8 +112,10 @@ namespace Alabo.Framework.Core.WebApis.Controller
         /// <returns></returns>
         public ApiResult<T> ToResult<T>(Tuple<ServiceResult, T> serviceResult)
         {
-            if (serviceResult.Item1.Succeeded)
+            if (serviceResult.Item1.Succeeded) {
                 return ApiResult.Success(serviceResult.Item2);
+            }
+
             return ApiResult.Failure<T>(serviceResult.Item1.ToString());
         }
     }

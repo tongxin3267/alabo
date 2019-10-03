@@ -66,7 +66,9 @@ namespace Alabo.Cloud.People.UserTree.Domain.Repositories
                         PId = userId
                     };
                     //显示直推人数
-                    if (directFlag) userTree.Name = UserName + "  " + childCount + "人";
+                    if (directFlag) {
+                        userTree.Name = UserName + "  " + childCount + "人";
+                    }
 
                     //显示门店
                     //if (serviceFlag) {
@@ -75,14 +77,16 @@ namespace Alabo.Cloud.People.UserTree.Domain.Repositories
                     //    }
                     //}
                     //显示等级
-                    if (levelFlag)
+                    if (levelFlag) {
                         if (userType != null)
                         {
                             var userGrade = userGradeConfigList.Find(r => r.Id == GradeId);
-                            if (userGrade != null)
+                            if (userGrade != null) {
                                 userTree.Name = $@"{UserName}({realName})" + " " + userGrade.Name +
                                                 $"（直推:{childCount}））";
+                            }
                         }
+                    }
 
                     userTree.Open = false;
                     userTree.IsParent = childCount > 0 ? true : false;

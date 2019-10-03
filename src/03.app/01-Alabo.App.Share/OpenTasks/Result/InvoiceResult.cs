@@ -42,7 +42,9 @@ namespace Alabo.App.Share.OpenTasks.Result
             var moneyType = Ioc.Resolve<IAutoConfigService>()
                 .GetList<MoneyTypeConfig>()
                 .FirstOrDefault(e => e.Id == Parameter.MoneyTypeId);
-            if (moneyType == null) return ExecuteResult.Fail($"未找到MoneyTypeId为{Parameter.MoneyTypeId}的货币类型.");
+            if (moneyType == null) {
+                return ExecuteResult.Fail($"未找到MoneyTypeId为{Parameter.MoneyTypeId}的货币类型.");
+            }
 
             var userAccount = Ioc.Resolve<IAccountService>().GetAccount(Parameter.ReceiveUserId, moneyType.Id);
             var invoiceReward = new Reward
@@ -61,7 +63,10 @@ namespace Alabo.App.Share.OpenTasks.Result
                 //TriggerType = Parameter.TriggerType,
                 ModuleConfigId = Parameter.ModuleConfigId
             };
-            if (Parameter.Order != null) invoiceReward.OrderId = Parameter.Order.Id;
+            if (Parameter.Order != null) {
+                invoiceReward.OrderId = Parameter.Order.Id;
+            }
+
             Ioc.Resolve<IRewardService>().AddOrUpdate(invoiceReward);
             var invoiceBill = new Bill
             {

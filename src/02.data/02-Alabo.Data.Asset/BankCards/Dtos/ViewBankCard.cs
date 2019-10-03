@@ -81,9 +81,13 @@ namespace Alabo.App.Asset.BankCards.Dtos
                     PageIndex = (int)userInput.PageIndex,
                     PageSize = 15
                 };
-                if (!userInput.Name.IsNullOrEmpty()) temp.And(u => u.Name.Contains(userInput.Name));
+                if (!userInput.Name.IsNullOrEmpty()) {
+                    temp.And(u => u.Name.Contains(userInput.Name));
+                }
 
-                if (!userInput.Number.IsNullOrEmpty()) temp.And(u => u.Number.Contains(userInput.Number));
+                if (!userInput.Number.IsNullOrEmpty()) {
+                    temp.And(u => u.Number.Contains(userInput.Number));
+                }
 
                 var model = Resolve<IBankCardService>().GetPagedList(temp);
                 foreach (var item in model)

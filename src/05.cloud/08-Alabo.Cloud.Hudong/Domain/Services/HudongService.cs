@@ -31,16 +31,23 @@ namespace Alabo.App.Share.HuDong.Domain.Services
         public ServiceResult Edit(Hudong huDong)
         {
             var findType = huDong.Key.GetInstanceByName();
-            if (findType == null) return ServiceResult.FailedWithMessage("互动类型不存在");
+            if (findType == null) {
+                return ServiceResult.FailedWithMessage("互动类型不存在");
+            }
+
             var find = GetSingle(huDong.Id, huDong.Key);
             if (find != null)
             {
-                if (!Update(huDong)) return ServiceResult.FailedWithMessage("活动更新失败");
+                if (!Update(huDong)) {
+                    return ServiceResult.FailedWithMessage("活动更新失败");
+                }
             }
             else
             {
                 // 赋值操作
-                if (!Add(huDong)) return ServiceResult.FailedWithMessage("活动添加失败");
+                if (!Add(huDong)) {
+                    return ServiceResult.FailedWithMessage("活动添加失败");
+                }
             }
 
             return ServiceResult.Success;
@@ -75,7 +82,10 @@ namespace Alabo.App.Share.HuDong.Domain.Services
         {
             var find = GetSingle(id);
             if (find == null && !key.IsNullOrEmpty()) // 目前一种活动只支持创建一条记录
+{
                 find = GetSingle(r => r.Key == key);
+            }
+
             return find;
         }
 
@@ -88,12 +98,14 @@ namespace Alabo.App.Share.HuDong.Domain.Services
         {
             var view = GetSingle(viewInput.Id, viewInput.Key);
 
-            if (viewInput.Key.IsNullOrEmpty())
+            if (viewInput.Key.IsNullOrEmpty()) {
                 return new Tuple<ServiceResult, Hudong>(ServiceResult.FailedWithMessage("互动类型不能为空"), view);
+            }
 
             var findType = viewInput.Key.GetInstanceByName();
-            if (findType == null)
+            if (findType == null) {
                 return new Tuple<ServiceResult, Hudong>(ServiceResult.FailedWithMessage("互动类型不存在"), view);
+            }
 
             if (view == null)
             {
@@ -138,12 +150,15 @@ namespace Alabo.App.Share.HuDong.Domain.Services
 
                     if (view != null)
                     {
-                        if (view.IsEnable == false)
+                        if (view.IsEnable == false) {
                             return new Tuple<ServiceResult, Hudong>(ServiceResult.FailedWithMessage("活动尚未启动"), view);
-                        if (view.DrawCount - drawCount <= 0)
+                        }
+
+                        if (view.DrawCount - drawCount <= 0) {
                             view.DrawCount = 0;
-                        else
+                        } else {
                             view.DrawCount = view.DrawCount - drawCount;
+                        }
                     }
                     else
                     {
@@ -156,12 +171,14 @@ namespace Alabo.App.Share.HuDong.Domain.Services
                 view.DrawCount = 0;
             }
 
-            if (viewInput.Key.IsNullOrEmpty())
+            if (viewInput.Key.IsNullOrEmpty()) {
                 return new Tuple<ServiceResult, Hudong>(ServiceResult.FailedWithMessage("互动类型不能为空"), view);
+            }
 
             var findType = viewInput.Key.GetInstanceByName();
-            if (findType == null)
+            if (findType == null) {
                 return new Tuple<ServiceResult, Hudong>(ServiceResult.FailedWithMessage("互动类型不存在"), view);
+            }
 
             if (view == null)
             {
@@ -189,23 +206,34 @@ namespace Alabo.App.Share.HuDong.Domain.Services
         /// <returns></returns>
         public ServiceResult Draw(DrawInput drawInput)
         {
-            if (drawInput.DrawCount <= 0) return ServiceResult.FailedWithMessage("抽奖次数已用完！");
-            if (drawInput.Id == null) return ServiceResult.FailedWithMessage("获取数据为空！");
+            if (drawInput.DrawCount <= 0) {
+                return ServiceResult.FailedWithMessage("抽奖次数已用完！");
+            }
+
+            if (drawInput.Id == null) {
+                return ServiceResult.FailedWithMessage("获取数据为空！");
+            }
 
             var model = GetSingle(ObjectId.Parse(drawInput.Id), drawInput.Key);
-            if (model == null) return ServiceResult.FailedWithMessage("获取数据为空！");
+            if (model == null) {
+                return ServiceResult.FailedWithMessage("获取数据为空！");
+            }
 
             var list = model.Awards;
 
             var rateDic = new Dictionary<Guid, int>();
             list.ForEach(a =>
             {
-                if (a.Count > 0) rateDic.Add(a.AwardId, (int)a.Rate * 100);
+                if (a.Count > 0) {
+                    rateDic.Add(a.AwardId, (int)a.Rate * 100);
+                }
             });
 
             var resultsDic = Lottery(rateDic); //获取抽奖结果
             var results = "";
-            foreach (var d in resultsDic) results = d.Key.ToString();
+            foreach (var d in resultsDic) {
+                results = d.Key.ToString();
+            }
 
             if (!string.IsNullOrEmpty(results))
             {
@@ -219,10 +247,12 @@ namespace Alabo.App.Share.HuDong.Domain.Services
                     foreach (var award in model.Awards)
                     {
                         var awardModel = new HudongAward();
-                        if (award.AwardId == results.ToGuid())
+                        if (award.AwardId == results.ToGuid()) {
                             awardModel.Count = award.Count - 1;
-                        else
+                        } else {
                             awardModel.Count = award.Count;
+                        }
+
                         awardModel.AwardId = award.AwardId;
                         awardModel.img = award.img;
                         awardModel.Grade = award.Grade;
@@ -301,7 +331,9 @@ namespace Alabo.App.Share.HuDong.Domain.Services
         public Dictionary<Guid, int> Lottery(Dictionary<Guid, int> orignalRates)
         {
             var resultDic = new Dictionary<Guid, int>();
-            if (orignalRates == null || orignalRates.IsNullOrEmpty()) return null;
+            if (orignalRates == null || orignalRates.IsNullOrEmpty()) {
+                return null;
+            }
 
             var maxSize = orignalRates.Count();
             var maxProbabilityNum = 0;

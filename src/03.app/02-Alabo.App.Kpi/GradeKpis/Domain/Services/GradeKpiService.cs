@@ -74,7 +74,7 @@ namespace Alabo.App.Kpis.GradeKpis.Domain.Services
         {
             var promotedKpiConfigs = Resolve<IAutoConfigService>().GetList<PromotedKpiConfig>();
             promotedKpiConfigs = promotedKpiConfigs.Where(r => r.GradeId == user.GradeId).ToList();
-            foreach (var gradeKpiConfig in promotedKpiConfigs)
+            foreach (var gradeKpiConfig in promotedKpiConfigs) {
                 if (gradeKpiConfig != null && !gradeKpiConfig.LogicalOperator.IsNullOrEmpty())
                 {
                     var kpiItemOperatorResult = KpiItemOperator(user, gradeKpiConfig.KpiItems,
@@ -102,6 +102,7 @@ namespace Alabo.App.Kpis.GradeKpis.Domain.Services
 
                     return gradeKpi;
                 }
+            }
 
             return null;
         }
@@ -111,7 +112,7 @@ namespace Alabo.App.Kpis.GradeKpis.Domain.Services
             var demotionKpiConfigs = Resolve<IAutoConfigService>().GetList<DemotionKpiConfig>();
 
             demotionKpiConfigs = demotionKpiConfigs.Where(r => r.GradeId == user.GradeId).ToList();
-            foreach (var gradeKpiConfig in demotionKpiConfigs)
+            foreach (var gradeKpiConfig in demotionKpiConfigs) {
                 if (gradeKpiConfig != null && !gradeKpiConfig.LogicalOperator.IsNullOrEmpty())
                 {
                     var kpiItemOperatorResult = KpiItemOperator(user, gradeKpiConfig.KpiItems,
@@ -140,6 +141,7 @@ namespace Alabo.App.Kpis.GradeKpis.Domain.Services
 
                     return gradeKpi;
                 }
+            }
 
             return null;
         }
@@ -206,7 +208,9 @@ namespace Alabo.App.Kpis.GradeKpis.Domain.Services
             var model = Resolve<IGradeKpiService>().GetPagedList(query);
             var users = Resolve<IUserService>().GetList();
 
-            foreach (var item in model) item.UserName = users.FirstOrDefault(u => u.Id == item.UserId)?.UserName;
+            foreach (var item in model) {
+                item.UserName = users.FirstOrDefault(u => u.Id == item.UserId)?.UserName;
+            }
 
             return model;
         }
@@ -219,10 +223,15 @@ namespace Alabo.App.Kpis.GradeKpis.Domain.Services
         public GradeChangeView GetGradeChangeView(object id)
         {
             var find = GetSingle(id);
-            if (find == null) throw new ValidException("等级考核结果不存在");
+            if (find == null) {
+                throw new ValidException("等级考核结果不存在");
+            }
 
             var user = Resolve<IUserService>().GetSingle(find.UserId);
-            if (user == null) throw new ValidException("用户不存在");
+            if (user == null) {
+                throw new ValidException("用户不存在");
+            }
+
             var view = new GradeChangeView
             {
                 Id = find.Id.ToString(),
@@ -237,15 +246,27 @@ namespace Alabo.App.Kpis.GradeKpis.Domain.Services
         public ServiceResult SaveChangeGrade(GradeChangeView view)
         {
             var find = GetSingle(view.Id);
-            if (find == null) throw new ValidException("等级考核结果不存在");
+            if (find == null) {
+                throw new ValidException("等级考核结果不存在");
+            }
+
             var user = Resolve<IUserService>().GetSingle(find.UserId);
-            if (user == null) throw new ValidException("用户不存在");
+            if (user == null) {
+                throw new ValidException("用户不存在");
+            }
 
-            if (find.GradeId != user.GradeId) return ServiceResult.FailedWithMessage("用户等级已发生改变");
+            if (find.GradeId != user.GradeId) {
+                return ServiceResult.FailedWithMessage("用户等级已发生改变");
+            }
 
-            if (find.GradeId == find.ChangeGradeId) return ServiceResult.FailedWithMessage("用户当前等级和更改后等级一样，无需修改");
+            if (find.GradeId == find.ChangeGradeId) {
+                return ServiceResult.FailedWithMessage("用户当前等级和更改后等级一样，无需修改");
+            }
 
-            if (find.KpiResult == KpiResult.NoChange) return ServiceResult.FailedWithMessage("考核结果为保持，无需修改");
+            if (find.KpiResult == KpiResult.NoChange) {
+                return ServiceResult.FailedWithMessage("考核结果为保持，无需修改");
+            }
+
             user.GradeId = find.ChangeGradeId;
             var result = Resolve<IUserService>().UpdateUser(user);
             if (result)

@@ -37,10 +37,15 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         [ApiAuth]
         public ApiResult<BuyOutput> Pay(long id, long loginUserId)
         {
-            if (id <= 0) return ApiResult.Failure<BuyOutput>("Id不正确");
+            if (id <= 0) {
+                return ApiResult.Failure<BuyOutput>("Id不正确");
+            }
+
             var result = Resolve<IOrderBuyServcie>().Pay(id, loginUserId);
-            if (!result.Item1.Succeeded)
+            if (!result.Item1.Succeeded) {
                 return ApiResult.Failure<BuyOutput>(result.Item1.ToString(), MessageCodes.ServiceFailure);
+            }
+
             return ApiResult.Success(result.Item2);
         }
 
@@ -55,8 +60,14 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         public ApiResult Cancel(long id, long loginUserId)
         {
             var order = Resolve<IOrderService>().GetSingle(e => e.Id == id && e.UserId == loginUserId);
-            if (order == null) return ApiResult.Failure("订单不存在");
-            if (order.OrderStatus != OrderStatus.WaitingBuyerPay) return ApiResult.Failure("该状态不可取消!");
+            if (order == null) {
+                return ApiResult.Failure("订单不存在");
+            }
+
+            if (order.OrderStatus != OrderStatus.WaitingBuyerPay) {
+                return ApiResult.Failure("该状态不可取消!");
+            }
+
             order.OrderStatus = OrderStatus.Closed;
             Resolve<IOrderService>().Update(order);
             return ApiResult.Success("订单取消成功");
@@ -73,7 +84,9 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         public ApiResult<OrderShowOutput> Show(long id, long loginUserId)
         {
             var orderShow = Resolve<IOrderService>().Show(id);
-            if (orderShow == null) return ApiResult.Failure<OrderShowOutput>("订单不存在");
+            if (orderShow == null) {
+                return ApiResult.Failure<OrderShowOutput>("订单不存在");
+            }
 
             return ApiResult.Success(orderShow);
         }
@@ -87,7 +100,9 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         public ApiResult GetOrder(long id, long loginUserId)
         {
             var orderShow = Resolve<IOrderService>().GetOrderSingle(id, loginUserId);
-            if (orderShow == null) return ApiResult.Failure("订单不存在");
+            if (orderShow == null) {
+                return ApiResult.Failure("订单不存在");
+            }
 
             return ApiResult.Success(orderShow);
         }
@@ -138,7 +153,10 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         public ApiResult Delivery([FromBody] OrderInput model)
         {
             var result = Resolve<IOrderService>().Deliver(model);
-            if (result.Succeeded) return ApiResult.Success();
+            if (result.Succeeded) {
+                return ApiResult.Success();
+            }
+
             return ApiResult.Failure(result.ReturnMessage);
         }
 
@@ -153,7 +171,10 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         public ApiResult Deliver([FromBody] Deliver model)
         {
             var result = Resolve<IOrderService>().Deliver(model);
-            if (result.Succeeded) return ApiResult.Success();
+            if (result.Succeeded) {
+                return ApiResult.Success();
+            }
+
             return ApiResult.Failure(result.ReturnMessage);
         }
 
@@ -167,11 +188,19 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         [ApiAuth]
         public ApiResult AddExpress([FromBody] Deliver model)
         {
-            if (model.ExpressName.IsNullOrEmpty()) return ApiResult.Failure("快递公司不能为空");
+            if (model.ExpressName.IsNullOrEmpty()) {
+                return ApiResult.Failure("快递公司不能为空");
+            }
 
-            if (model.ExpressNum.IsNullOrEmpty()) return ApiResult.Failure("快递单号不能为空");
+            if (model.ExpressNum.IsNullOrEmpty()) {
+                return ApiResult.Failure("快递单号不能为空");
+            }
+
             var result = Resolve<IOrderService>().AddExpress(model);
-            if (result.Succeeded) return ApiResult.Success();
+            if (result.Succeeded) {
+                return ApiResult.Success();
+            }
+
             return ApiResult.Failure(result.ReturnMessage);
         }
 
@@ -184,15 +213,17 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         [ApiAuth]
         public ApiResult<StoreOrderPrice> GetPrice([FromBody] UserOrderInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<StoreOrderPrice>(this.FormInvalidReason(),
                     MessageCodes.ParameterValidationFailure);
+            }
 
             var result = Resolve<IOrderBuyServcie>().GetPrice(parameter);
             if (!result.Item1.Succeeded)
             {
-                if (result.Item1.Id.ToInt16() == -1)
+                if (result.Item1.Id.ToInt16() == -1) {
                     return ApiResult.Failure<StoreOrderPrice>(result.Item1.ToString(), MessageCodes.ReremoteRequest);
+                }
 
                 return ApiResult.Failure<StoreOrderPrice>(result.Item1.ToString(), MessageCodes.ServiceFailure);
             }
@@ -229,15 +260,17 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         [ApiAuth]
         public ApiResult<BuyOutput> Buy([FromBody] BuyInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<BuyOutput>(this.FormInvalidReason(),
                     MessageCodes.ParameterValidationFailure);
+            }
 
             IList<StoreOrderItem> StoreOrders = new List<StoreOrderItem>();
 
             var result = Resolve<IOrderBuyServcie>().Buy(parameter);
-            if (!result.Item1.Succeeded)
+            if (!result.Item1.Succeeded) {
                 return ApiResult.Failure<BuyOutput>(result.Item1.ToString(), MessageCodes.ServiceFailure);
+            }
 
             return ApiResult.Success(result.Item2);
         }
@@ -285,14 +318,16 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         [ApiAuth]
         public ApiResult<StoreProductSku> BuyInfo([FromBody] BuyInfoInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<StoreProductSku>(this.FormInvalidReason(),
                     MessageCodes.ParameterValidationFailure);
+            }
 
             parameter.IsBuy = true; // 为购买，生成sign 插入缓存
             var result = Resolve<IOrderBuyServcie>().BuyInfo(parameter);
-            if (!result.Item1.Succeeded)
+            if (!result.Item1.Succeeded) {
                 return ApiResult.Failure<StoreProductSku>(result.Item1.ToString(), MessageCodes.ServiceFailure);
+            }
 
             return ApiResult.Success(result.Item2);
         }
@@ -319,8 +354,9 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         [ApiAuth]
         public ApiResult Rate([FromBody] RateInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var result = Resolve<IOrderService>().Rate(parameter);
             return ToResult(result);
@@ -335,8 +371,9 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         [ApiAuth]
         public ApiResult Confirm([FromBody] ConfirmInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var result = Resolve<IOrderService>().Confirm(parameter);
             return ToResult(result);
@@ -373,8 +410,9 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         public ApiResult<OrderExpressViewModel> GetExpressAmount(long orderId)
         {
             var result = Resolve<IOrderService>().GetExpressAmount(orderId);
-            if (!result.Item1.Succeeded)
+            if (!result.Item1.Succeeded) {
                 return ApiResult.Failure<OrderExpressViewModel>(result.Item1.ToString(), MessageCodes.ServiceFailure);
+            }
 
             return ApiResult.Success(result.Item2);
         }
@@ -388,8 +426,10 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         [Display(Description = "修改订单邮费")]
         public ApiResult UpdateExpressAmount([FromBody] OrderExpressViewModel orderExpressInput)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
+
             var result = Resolve<IOrderService>().UpdateExpressAmount(orderExpressInput);
 
             return ToResult(result);
@@ -404,8 +444,10 @@ namespace Alabo.Industry.Shop.Orders.Controllers
         [Display(Description = "支付货款")]
         public ApiResult PayGoodsAmount([FromBody] PayGoodsAmountInput input)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
+
             var order = Resolve<IOrderService>().GetSingle(s => s.Id == input.OrderId);
             order.OrderExtension.IsSupplierView = true;
             order.OrderExtension.PayGoods = input;

@@ -17,13 +17,19 @@ namespace Alabo.Helpers
         {
             // HttpContext.Current等于null时使用备用Cookies储存
             var key = $"{plugin}.{name}";
-            if (context == null) return null;
+            if (context == null) {
+                return null;
+            }
 
             var cookie = context.Request.Cookies ?? new RequestCookieCollection();
-            if (!cookie.ContainsKey(key)) return null;
+            if (!cookie.ContainsKey(key)) {
+                return null;
+            }
 
             var x = cookie[key];
-            if (string.IsNullOrEmpty(x)) return null;
+            if (string.IsNullOrEmpty(x)) {
+                return null;
+            }
 
             cookie.TryGetValue(key, out var value);
             return WebUtility.UrlDecode(value);
@@ -35,13 +41,19 @@ namespace Alabo.Helpers
         /// </summary>
         public static string GetCookie(this HttpContext context, string key)
         {
-            if (context == null) return null;
+            if (context == null) {
+                return null;
+            }
 
             var cookie = context.Request.Cookies ?? new RequestCookieCollection();
-            if (!cookie.ContainsKey(key)) return null;
+            if (!cookie.ContainsKey(key)) {
+                return null;
+            }
 
             var x = cookie[key];
-            if (string.IsNullOrEmpty(x)) return null;
+            if (string.IsNullOrEmpty(x)) {
+                return null;
+            }
 
             cookie.TryGetValue(key, out var value);
             return WebUtility.UrlDecode(value);
@@ -54,7 +66,9 @@ namespace Alabo.Helpers
         public static bool PutCookie(this HttpContext context, string key, string value,
             DateTime? expired = default, bool httpOnly = false)
         {
-            if (context == null) return false;
+            if (context == null) {
+                return false;
+            }
 
             var cookie = context.Response.Cookies;
             var option = new CookieOptions
@@ -81,7 +95,9 @@ namespace Alabo.Helpers
             DateTime? expired = default, bool httpOnly = false)
         {
             var key = $"{plugin}.{name}";
-            if (context == null) return false;
+            if (context == null) {
+                return false;
+            }
 
             var cookie = context.Response.Cookies;
             var option = new CookieOptions
@@ -144,7 +160,9 @@ namespace Alabo.Helpers
         {
             var ip = string.Empty;
             var remoteIpAddress = context.Features.Get<IHttpConnectionFeature>()?.RemoteIpAddress;
-            if (remoteIpAddress != null) ip = remoteIpAddress.ToString();
+            if (remoteIpAddress != null) {
+                ip = remoteIpAddress.ToString();
+            }
 
             return ip;
         }

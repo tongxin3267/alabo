@@ -20,10 +20,13 @@ namespace Alabo.App.Share.Rewards.Domain.Repositories
 
         public IList<Reward> GetRewardList(RewardInput userInput, out long count)
         {
-            if (userInput.PageIndex < 0)
+            if (userInput.PageIndex < 0) {
                 throw new ArgumentNullException("pageIndex", "pageindex has to be greater than 1");
+            }
 
-            if (userInput.PageSize > 100) userInput.PageSize = 100;
+            if (userInput.PageSize > 100) {
+                userInput.PageSize = 100;
+            }
 
             var sqlWhere = string.Empty;
             //if (userInput.BeginAmount.HasValue)
@@ -37,13 +40,21 @@ namespace Alabo.App.Share.Rewards.Domain.Repositories
             //    sqlWhere = $"{sqlWhere} AND MoneyTypeId= '{userInput.MoneyTypeId}' ";
             //if (userInput.Serial.IsNullOrEmpty())
             //    sqlWhere = $"{sqlWhere} AND Serial='{userInput.Serial}' ";
-            if (userInput.UserId > 0) sqlWhere = $"{sqlWhere} AND UserId='{userInput.UserId}' ";
+            if (userInput.UserId > 0) {
+                sqlWhere = $"{sqlWhere} AND UserId='{userInput.UserId}' ";
+            }
 
-            if (userInput.OrderId > 0) sqlWhere = $"{sqlWhere} AND OrderId='{userInput.OrderId}' ";
+            if (userInput.OrderId > 0) {
+                sqlWhere = $"{sqlWhere} AND OrderId='{userInput.OrderId}' ";
+            }
 
-            if (!userInput.ModuleId.IsGuidNullOrEmpty()) sqlWhere = $"{sqlWhere} AND ModuleId='{userInput.ModuleId}' ";
+            if (!userInput.ModuleId.IsGuidNullOrEmpty()) {
+                sqlWhere = $"{sqlWhere} AND ModuleId='{userInput.ModuleId}' ";
+            }
 
-            if (userInput.ModuleConfigId > 0) sqlWhere = $"{sqlWhere} AND ModuleConfigId='{userInput.ModuleConfigId}' ";
+            if (userInput.ModuleConfigId > 0) {
+                sqlWhere = $"{sqlWhere} AND ModuleConfigId='{userInput.ModuleConfigId}' ";
+            }
 
             var sqlCount = $"SELECT COUNT(Id) [Count] FROM [Share_Reward] where 1=1 {sqlWhere}";
             count = RepositoryContext.ExecuteScalar(sqlCount)?.ConvertToLong() ?? 0;
@@ -56,7 +67,9 @@ namespace Alabo.App.Share.Rewards.Domain.Repositories
                         WHERE RowNumber > {userInput.PageSize}*({userInput.PageIndex}-1)  ";
             using (var dr = RepositoryContext.ExecuteDataReader(sql))
             {
-                while (dr.Read()) result.Add(ReadReward(dr));
+                while (dr.Read()) {
+                    result.Add(ReadReward(dr));
+                }
             }
 
             return result;

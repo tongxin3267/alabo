@@ -28,17 +28,20 @@ namespace Alabo.App.Share.TaskExecutes.Job
             var taskManager = scope.Resolve<TaskManager>();
 
             var httpContextAccessor = scope.Resolve<IHttpContextAccessor>();
-            if (httpContextAccessor != null)
+            if (httpContextAccessor != null) {
                 httpContextAccessor.HttpContext = new DefaultHttpContext
                 {
                     RequestServices = scope.Resolve<IServiceProvider>()
                 };
+            }
 
             // 平台暂停分润
             if (RuntimeContext.Current.WebsiteConfig.IsDevelopment == false)
             {
                 var adminCenterConfig = scope.Resolve<IAutoConfigService>().GetValue<AdminCenterConfig>();
-                if (adminCenterConfig.StartFenrun == false) return;
+                if (adminCenterConfig.StartFenrun == false) {
+                    return;
+                }
             }
 
             var updateGradeQueue = scope.Resolve<ITaskQueueService>().GetUpgradePendingList();
@@ -46,7 +49,9 @@ namespace Alabo.App.Share.TaskExecutes.Job
             foreach (var item in updateGradeQueue)
             {
                 var moduleTypeArray = taskManager.GetModuleUpgradeArray();
-                foreach (var type in moduleTypeArray) taskActuator.ExecuteQueue(type, item, new { QueueId = item.Id });
+                foreach (var type in moduleTypeArray) {
+                    taskActuator.ExecuteQueue(type, item, new { QueueId = item.Id });
+                }
             }
         }
     }

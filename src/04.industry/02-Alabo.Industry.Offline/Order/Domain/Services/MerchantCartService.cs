@@ -33,14 +33,26 @@ namespace Alabo.Industry.Offline.Order.Domain.Services
             var product = Resolve<IMerchantProductService>()
                 .GetSingle(r =>
                     r.Id == input.MerchantProductId.ToObjectId()); //&& r.MerchantStoreId == input.MerchantStoreId
-            if (product == null) return ServiceResult.FailedWithMessage("商品不存在");
-            if (input.Count <= 0) return ServiceResult.FailedWithMessage("商品数量必须大于0");
+            if (product == null) {
+                return ServiceResult.FailedWithMessage("商品不存在");
+            }
+
+            if (input.Count <= 0) {
+                return ServiceResult.FailedWithMessage("商品数量必须大于0");
+            }
             //stock
             var sku = product.Skus?.Find(s => s.SkuId == input.SkuId);
-            if (sku == null) return ServiceResult.FailedWithMessage($"商品:{product.Name}，Sku不存在");
-            if (sku.Stock <= 0) return ServiceResult.FailedWithMessage($"商品:{product.Name}，Sku:{sku.Name}，库存不足");
-            if (input.Count > sku.Stock)
+            if (sku == null) {
+                return ServiceResult.FailedWithMessage($"商品:{product.Name}，Sku不存在");
+            }
+
+            if (sku.Stock <= 0) {
+                return ServiceResult.FailedWithMessage($"商品:{product.Name}，Sku:{sku.Name}，库存不足");
+            }
+
+            if (input.Count > sku.Stock) {
                 return ServiceResult.FailedWithMessage($"商品:{product.Name}，Sku:{sku.Name}，购买数量大于商品库存数量");
+            }
 
             //Get cart
             var cartSingle = Resolve<IMerchantCartService>().GetSingle(c => c.UserId == input.UserId
@@ -69,8 +81,9 @@ namespace Alabo.Industry.Offline.Order.Domain.Services
             // 数量递增
             cartSingle.Count += input.Count;
             //递增后检查是否超过购买数量
-            if (cartSingle.Count > sku.Stock)
+            if (cartSingle.Count > sku.Stock) {
                 return ServiceResult.FailedWithMessage($"商品:{product.Name}，Sku:{sku.Name}，购买数量大于商品库存数量");
+            }
 
             Update(cartSingle);
 
@@ -98,8 +111,9 @@ namespace Alabo.Industry.Offline.Order.Domain.Services
             var viewCarts = Resolve<IMerchantCartService>()
                 .GetList(e => e.UserId == userId && e.Status == Status.Normal).ToList();
             var carts = viewCarts.MapToList<MerchantCartViewModel>();
-            if (carts.Count <= 0)
+            if (carts.Count <= 0) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("您的购物车空空如也"), new MerchantCartOutput());
+            }
 
             return Resolve<IMerchantOrderService>().CountPrice(carts);
         }
@@ -111,7 +125,10 @@ namespace Alabo.Industry.Offline.Order.Domain.Services
         /// <returns></returns>
         public List<MerchantCartViewModel> GetCart(List<ObjectId> cartIds)
         {
-            if (cartIds.Count <= 0) return new List<MerchantCartViewModel>();
+            if (cartIds.Count <= 0) {
+                return new List<MerchantCartViewModel>();
+            }
+
             var viewCarts = Resolve<IMerchantCartService>().GetList(e => cartIds.Contains(e.Id)).ToList();
             return viewCarts.MapToList<MerchantCartViewModel>();
         }
@@ -147,13 +164,23 @@ namespace Alabo.Industry.Offline.Order.Domain.Services
             var product = Resolve<IMerchantProductService>()
                 .GetSingle(r =>
                     r.Id == input.MerchantProductId.ToObjectId()); //&& r.MerchantStoreId == input.MerchantStoreId
-            if (product == null) return ServiceResult.FailedWithMessage("商品不存在");
-            if (input.Count <= 0) return ServiceResult.FailedWithMessage("商品数量必须大于0");
+            if (product == null) {
+                return ServiceResult.FailedWithMessage("商品不存在");
+            }
+
+            if (input.Count <= 0) {
+                return ServiceResult.FailedWithMessage("商品数量必须大于0");
+            }
             //stock
             var sku = product.Skus?.Find(s => s.SkuId == input.SkuId);
-            if (sku == null) return ServiceResult.FailedWithMessage($"商品:{product.Name}，Sku不存在");
-            if (input.Count > sku.Stock)
+            if (sku == null) {
+                return ServiceResult.FailedWithMessage($"商品:{product.Name}，Sku不存在");
+            }
+
+            if (input.Count > sku.Stock) {
                 return ServiceResult.FailedWithMessage($"商品:{product.Name}，Sku:{sku.Name}，购买数量大于商品库存数量");
+            }
+
             var cartSingle = Resolve<IMerchantCartService>().GetSingle(c => c.UserId == input.UserId
                                                                             //&& c.MerchantProductId == input.MerchantProductId
                                                                             && c.SkuId == input.SkuId
@@ -161,8 +188,10 @@ namespace Alabo.Industry.Offline.Order.Domain.Services
             // 数量递增
             cartSingle.Count += input.Count;
             //递增后检查是否超过购买数量
-            if (cartSingle.Count > sku.Stock)
+            if (cartSingle.Count > sku.Stock) {
                 return ServiceResult.FailedWithMessage($"商品:{product.Name}，Sku:{sku.Name}，购买数量大于商品库存数量");
+            }
+
             Update(cart);
 
             return ServiceResult.Success;

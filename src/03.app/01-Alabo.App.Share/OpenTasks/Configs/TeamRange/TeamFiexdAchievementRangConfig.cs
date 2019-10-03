@@ -88,12 +88,16 @@ namespace Alabo.App.Share.OpenTasks.Configs.TeamRange
         public override ExecuteResult<ITaskResult[]> Execute(TaskParameter parameter)
         {
             var baseResult = base.Execute(parameter);
-            if (baseResult.Status != ResultStatus.Success)
+            if (baseResult.Status != ResultStatus.Success) {
                 return ExecuteResult<ITaskResult[]>.Cancel("未找到触发会员的Parent Map.");
+            }
 
             var userMap = Resolve<IUserMapService>().GetParentMapFromCache(ShareOrderUser.Id);
             var map = userMap.ParentMap.DeserializeJson<List<ParentMap>>();
-            if (map == null) return ExecuteResult<ITaskResult[]>.Cancel("未找到触发会员的Parent Map.");
+            if (map == null) {
+                return ExecuteResult<ITaskResult[]>.Cancel("未找到触发会员的Parent Map.");
+            }
+
             IList<ITaskResult> resultList = new List<ITaskResult>();
             //检查分润比例
             var distriRatio = Configuration.DistriRatio.Split(',');
@@ -101,11 +105,16 @@ namespace Alabo.App.Share.OpenTasks.Configs.TeamRange
             // 以结构A->B->C->D，D下单为列子
             for (var i = 0; i < distriRatio.Count(); i++)
             {
-                if (map.Count < i + 1 || i > 2) break;
+                if (map.Count < i + 1 || i > 2) {
+                    break;
+                }
                 //当前级别奖励
                 var ratio = distriRatio[i].ConvertToDecimal();
                 var levelRadio = ratio;
-                if (ratio <= 0) continue;
+                if (ratio <= 0) {
+                    continue;
+                }
+
                 var item = map[i];
                 var shareGuids = new List<Guid>(); // 已分配的等级，极差分配中，同一等级只能分配一次
                 base.GetShareUser(item.UserId, out var shareUser); //从基类获取分润用户
@@ -115,14 +124,17 @@ namespace Alabo.App.Share.OpenTasks.Configs.TeamRange
                 {
                     // 第一层分配有剩，开始第二层分配
                     base.GetShareUser(shareUser.ParentId, out shareUser); //从基类获取分润用户
-                    if (shareUser.GradeId == Guid.Parse("cc873faa-749b-449b-b85a-c7d26f626feb"))
+                    if (shareUser.GradeId == Guid.Parse("cc873faa-749b-449b-b85a-c7d26f626feb")) {
                         ExecuteLevelAmount(resultList, shareUser, i + 1, parameter, ref levelRadio, ref shareGuids);
+                    }
+
                     if (levelRadio > 0 && i < 1)
                     {
                         // 第二层分配有剩，开始第三层分配
                         base.GetShareUser(shareUser.ParentId, out shareUser); //从基类获取分润用户
-                        if (shareUser.GradeId == Guid.Parse("cc873faa-749b-449b-b85a-c7d26f626feb"))
+                        if (shareUser.GradeId == Guid.Parse("cc873faa-749b-449b-b85a-c7d26f626feb")) {
                             ExecuteLevelAmount(resultList, shareUser, i + 1, parameter, ref levelRadio, ref shareGuids);
+                        }
                     }
                 }
             }
@@ -156,13 +168,22 @@ namespace Alabo.App.Share.OpenTasks.Configs.TeamRange
             }
 
             var maxAmount = GetRadioByGrade(shareUser, level); // 当前等级最大分润金额
-            if (shareGuids.Contains(shareUser.GradeId)) return taskResults;
+            if (shareGuids.Contains(shareUser.GradeId)) {
+                return taskResults;
+            }
+
             shareGuids.Add(shareUser.GradeId);
             var shareAmount = Math.Min(levelAmount, maxAmount);
             levelAmount = levelAmount - shareAmount;
             var intro = "直推";
-            if (level == 2) intro = "间推";
-            if (level == 3) intro = "三层";
+            if (level == 2) {
+                intro = "间推";
+            }
+
+            if (level == 3) {
+                intro = "三层";
+            }
+
             CreateResultList(shareAmount, ShareOrderUser, shareUser, parameter, Configuration, taskResults, intro);
             return taskResults;
         }
@@ -176,13 +197,28 @@ namespace Alabo.App.Share.OpenTasks.Configs.TeamRange
         private decimal GetRadioByGrade(User shareUser, int level)
         {
             var shareGrade = Resolve<IGradeService>().GetGrade(shareUser.GradeId);
-            if (shareGrade == null) return 0;
+            if (shareGrade == null) {
+                return 0;
+            }
+
             var radio = 0m;
             var rangeItem = Configuration.TeamFiexdAchievementRangItems.FirstOrDefault(r => r.GradeId == shareGrade.Id);
-            if (rangeItem == null) return radio;
-            if (level == 1) return rangeItem.FristAmount;
-            if (level == 2) return rangeItem.SecondAmount;
-            if (level == 3) return rangeItem.ThreeAmount;
+            if (rangeItem == null) {
+                return radio;
+            }
+
+            if (level == 1) {
+                return rangeItem.FristAmount;
+            }
+
+            if (level == 2) {
+                return rangeItem.SecondAmount;
+            }
+
+            if (level == 3) {
+                return rangeItem.ThreeAmount;
+            }
+
             return radio;
         }
     }

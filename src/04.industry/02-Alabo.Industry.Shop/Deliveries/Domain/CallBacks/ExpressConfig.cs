@@ -71,7 +71,9 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.CallBacks
                         Name = item.GetDisplayName(),
                         Status = Status.Normal
                     };
-                    if (!item.IsDefault()) config.Status = Status.Freeze;
+                    if (!item.IsDefault()) {
+                        config.Status = Status.Freeze;
+                    }
 
                     configs.Add(config);
                 }

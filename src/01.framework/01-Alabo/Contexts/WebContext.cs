@@ -20,7 +20,9 @@ namespace Alabo.Contexts
         /// <param name="value">对象</param>
         public void Add<T>(string key, T value)
         {
-            if (HttpWeb.HttpContext == null) return;
+            if (HttpWeb.HttpContext == null) {
+                return;
+            }
 
             HttpWeb.HttpContext.Items[key] = value;
         }
@@ -32,7 +34,9 @@ namespace Alabo.Contexts
         /// <param name="key">键名</param>
         public T Get<T>(string key)
         {
-            if (HttpWeb.HttpContext == null) return default;
+            if (HttpWeb.HttpContext == null) {
+                return default;
+            }
 
             return Convert.To<T>(HttpWeb.HttpContext.Items[key]);
         }

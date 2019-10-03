@@ -19,7 +19,9 @@ namespace Alabo.Datas.Stores.Delete.Mongo
         {
             var filter = ToFilter(IdPredicate(entity.Id));
             var result = await Collection.DeleteOneAsync(filter);
-            if (result.DeletedCount > 0) return true;
+            if (result.DeletedCount > 0) {
+                return true;
+            }
 
             return false;
         }
@@ -29,7 +31,9 @@ namespace Alabo.Datas.Stores.Delete.Mongo
             var ids = entities.Select(r => r.Id);
             var filter = ToFilter(r => ids.Contains(r.Id));
             var result = await Collection.DeleteManyAsync(filter);
-            if (result.DeletedCount > 0) return true;
+            if (result.DeletedCount > 0) {
+                return true;
+            }
 
             return false;
         }

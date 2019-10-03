@@ -45,7 +45,9 @@ namespace Alabo.Domains.Entities
         /// <returns></returns>
         public static PageResult<T> Convert(PagedList<T> result)
         {
-            if (result == null) return null;
+            if (result == null) {
+                return null;
+            }
 
             var apiRusult = new PageResult<T>
             {

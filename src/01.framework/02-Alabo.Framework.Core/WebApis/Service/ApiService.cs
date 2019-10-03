@@ -44,15 +44,18 @@ namespace Alabo.Framework.Core.WebApis.Service
 
             if (imageUrl != null)
             {
-                if (!imageUrl.Contains("http", StringComparison.CurrentCultureIgnoreCase))
+                if (!imageUrl.Contains("http", StringComparison.CurrentCultureIgnoreCase)) {
                     imageUrl = $"{HttpWeb.ServiceHostUrl}/{imageUrl}";
+                }
             }
             else
             {
                 imageUrl = Resolve<IAlaboAutoConfigService>().GetValue<WebSiteConfig>().NoPic;
             }
 
-            if (imageUrl.Contains("///")) return imageUrl.Replace("//", "/");
+            if (imageUrl.Contains("///")) {
+                return imageUrl.Replace("//", "/");
+            }
 
             return imageUrl;
         }

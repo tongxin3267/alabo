@@ -44,8 +44,8 @@ namespace Alabo.Framework.Basic.Notifications.Job
                 scope.Resolve<IObjectCache>().Set("MessageIsAllSend_Cache", true);
                 var messageQueueService = scope.Resolve<IMessageQueueService>();
                 var unHandledIdList = messageQueueService.GetUnHandledIdList();
-                if (unHandledIdList != null && unHandledIdList.Count > 0)
-                    foreach (var id in unHandledIdList)
+                if (unHandledIdList != null && unHandledIdList.Count > 0) {
+                    foreach (var id in unHandledIdList) {
                         try
                         {
                             await HandleQueueAsync(messageQueueService, id);
@@ -55,6 +55,8 @@ namespace Alabo.Framework.Basic.Notifications.Job
                             scope.Resolve<IObjectCache>().Set("MessageIsAllSend_Cache", false);
                             throw new ArgumentNullException(ex.Message);
                         }
+                    }
+                }
             }
         }
 
@@ -62,24 +64,27 @@ namespace Alabo.Framework.Basic.Notifications.Job
         {
             var queue = messageQueueService.GetSingle(queueId);
             // var result = await _adminMessageApiClient.GetAccount(_serverAuthenticationManager.Token.Token);
-            if (queue == null)
+            if (queue == null) {
                 throw new MessageQueueHandleException(queueId, $"message queue with id {queueId} not found.");
+            }
 
             RegexHelper.CheckMobile(queue.Mobile);
             MessageResult messageResult = null;
-            if (queue.TemplateCode > 0)
+            if (queue.TemplateCode > 0) {
                 messageResult = await SendTemplateAsync(queue);
-            else
+            } else {
                 messageResult = await SendRawAsync(queue);
+            }
 
-            if (messageResult == null)
+            if (messageResult == null) {
                 messageQueueService.ErrorQueue(queueId, "message send with no result!");
-            else if (messageResult.Type == ResultType.Success)
+            } else if (messageResult.Type == ResultType.Success) {
                 messageQueueService.HandleQueueAndUpdateContent(queueId, "message send open service  success!",
                     messageResult.Message);
-            else
+            } else {
                 messageQueueService.ErrorQueue(queueId, $"message send {messageResult.Type}!",
                     messageResult.Message);
+            }
         }
 
         /// <summary>
@@ -88,37 +93,51 @@ namespace Alabo.Framework.Basic.Notifications.Job
         /// <param name="queue"></param>
         private async Task<MessageResult> SendRawAsync(MessageQueue queue)
         {
-            if (string.IsNullOrWhiteSpace(queue.Mobile)) throw new ArgumentNullException(nameof(queue.Mobile));
+            if (string.IsNullOrWhiteSpace(queue.Mobile)) {
+                throw new ArgumentNullException(nameof(queue.Mobile));
+            }
 
-            if (string.IsNullOrWhiteSpace(queue.Content)) throw new ArgumentNullException(nameof(queue.Content));
+            if (string.IsNullOrWhiteSpace(queue.Content)) {
+                throw new ArgumentNullException(nameof(queue.Content));
+            }
 
             RegexHelper.CheckMobile(queue.Mobile);
             var result = await _messageApiClient.SendRawAsync(Token.Token,
                 queue.Mobile,
                 queue.Content, queue.IpAdress);
-            if (result.Status != ResultStatus.Success)
+            if (result.Status != ResultStatus.Success) {
                 throw new ServerApiException(result.Status, result.MessageCode, result.Message);
+            }
 
             return ParseResult(result);
         }
 
         private async Task<MessageResult> SendTemplateAsync(MessageQueue queue)
         {
-            if (string.IsNullOrWhiteSpace(queue.Mobile)) throw new ArgumentNullException(nameof(queue.Mobile));
+            if (string.IsNullOrWhiteSpace(queue.Mobile)) {
+                throw new ArgumentNullException(nameof(queue.Mobile));
+            }
 
-            if (queue.TemplateCode <= 0) throw new ArgumentNullException(nameof(queue.TemplateCode));
+            if (queue.TemplateCode <= 0) {
+                throw new ArgumentNullException(nameof(queue.TemplateCode));
+            }
 
             var template = GetTemplate(queue.TemplateCode);
-            if (template == null) throw new ArgumentNullException(nameof(template));
+            if (template == null) {
+                throw new ArgumentNullException(nameof(template));
+            }
 
-            if (template.Status != MessageTemplateStatus.Verified) throw new ArgumentNullException(nameof(template));
+            if (template.Status != MessageTemplateStatus.Verified) {
+                throw new ArgumentNullException(nameof(template));
+            }
 
             RegexHelper.CheckMobile(queue.Mobile);
             var parameters = JsonConvert.DeserializeObject<IDictionary<string, string>>(queue.Parameters);
             var result = await _messageApiClient.SendTemplateAsync(Token.Token,
                 queue.Mobile, template.Id, queue.IpAdress, parameters);
-            if (result.Status != ResultStatus.Success)
+            if (result.Status != ResultStatus.Success) {
                 throw new ServerApiException(result.Status, result.MessageCode, result.Message);
+            }
 
             return ParseResult(result);
         }
@@ -129,7 +148,9 @@ namespace Alabo.Framework.Basic.Notifications.Job
         /// <param name="code"></param>
         public MessageTemplate GetTemplate(long code)
         {
-            if (code <= 0) throw new ArgumentNullException(nameof(code));
+            if (code <= 0) {
+                throw new ArgumentNullException(nameof(code));
+            }
 
             var result = _messageApiClient.GetTemplate(Token.Token, code);
             var entity = result.Result.Result;

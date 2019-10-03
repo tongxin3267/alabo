@@ -295,7 +295,9 @@ namespace Alabo.Framework.Basic.Relations.Domain.Services
         public Type FindType(string typeName)
         {
             var findType = typeName.GetTypeByName();
-            if (findType == null) throw new ValidException("输入的类型不存在");
+            if (findType == null) {
+                throw new ValidException("输入的类型不存在");
+            }
 
             return findType;
         }

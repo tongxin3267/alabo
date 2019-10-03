@@ -16,7 +16,9 @@ namespace Alabo.Industry.Cms.Articles.Domain.Services
         public SinglePage GetSingleView(object id)
         {
             var find = GetSingle(id);
-            if (find == null) return new SinglePage();
+            if (find == null) {
+                return new SinglePage();
+            }
 
             return find;
         }

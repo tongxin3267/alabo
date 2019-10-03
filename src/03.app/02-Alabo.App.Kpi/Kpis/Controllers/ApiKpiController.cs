@@ -34,7 +34,9 @@ namespace Alabo.App.Kpis.Kpis.Controllers
             transfers.Foreach(r =>
                 dic.Add(r.Id.ToString(), r.Name));
 
-            if (dic != null) return ApiResult.Success(dic);
+            if (dic != null) {
+                return ApiResult.Success(dic);
+            }
 
             return ApiResult.Failure<Dictionary<string, object>>("ªÒ»°Kpiøº∫À≈‰÷√", MessageCodes.ParameterValidationFailure);
         }

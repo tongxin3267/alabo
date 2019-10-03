@@ -84,15 +84,18 @@ namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Services
         public ServiceResult AddPresaleProducts(IList<PresaleProductEdit> presaleProducts)
         {
             //check
-            if (presaleProducts == null || presaleProducts.Count <= 0)
+            if (presaleProducts == null || presaleProducts.Count <= 0) {
                 return ServiceResult.FailedWithMessage("预售商品数据异常！");
+            }
             //Distinct
             var newPresaleProducts = presaleProducts
                 .Where(p => p.ProductId > 0)
                 .GroupBy(p => p.ProductId)
                 .Select(p => p.First())
                 .ToList();
-            if (newPresaleProducts.Count <= 0) return ServiceResult.FailedWithMessage("预售商品数据异常！");
+            if (newPresaleProducts.Count <= 0) {
+                return ServiceResult.FailedWithMessage("预售商品数据异常！");
+            }
 
             //get exists ids
             var repository = Repository<IPresaleProductRepository>();
@@ -116,7 +119,9 @@ namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Services
                     tempItem.Status = (int)ProductStatus.Online;
                     datas.Add(tempItem);
                 });
-            if (datas.Count > 0) repository.AddMany(datas);
+            if (datas.Count > 0) {
+                repository.AddMany(datas);
+            }
 
             return ServiceResult.Success;
         }
@@ -128,7 +133,9 @@ namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Services
         /// <returns></returns>
         public ServiceResult UpdatePresaleProduct(PresaleProductEdit presaleProduct)
         {
-            if (presaleProduct == null || presaleProduct.Id <= 0) return ServiceResult.FailedWithMessage("预售商品数据异常！");
+            if (presaleProduct == null || presaleProduct.Id <= 0) {
+                return ServiceResult.FailedWithMessage("预售商品数据异常！");
+            }
             //update
             var repository = Repository<IPresaleProductRepository>();
             var data = repository.GetSingle(presaleProduct.Id);
@@ -148,7 +155,10 @@ namespace Alabo.Cloud.Shop.PresaleProducts.Domain.Services
             //update
             var repository = Repository<IPresaleProductRepository>();
             var data = repository.GetSingle(id);
-            if (data == null) ServiceResult.FailedWithMessage("产品不存在");
+            if (data == null) {
+                ServiceResult.FailedWithMessage("产品不存在");
+            }
+
             data.Status = (int)status;
             repository.UpdateSingle(data);
 

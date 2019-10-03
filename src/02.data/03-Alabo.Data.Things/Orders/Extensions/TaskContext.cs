@@ -19,8 +19,9 @@ namespace Alabo.Data.Things.Orders.Extensions
         {
             get
             {
-                if (_loggerFactory == null)
+                if (_loggerFactory == null) {
                     _loggerFactory = HttpContextAccessor.HttpContext.RequestServices.GetService<ILoggerFactory>();
+                }
 
                 return _loggerFactory;
             }

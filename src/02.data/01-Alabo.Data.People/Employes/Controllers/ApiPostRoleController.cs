@@ -30,7 +30,9 @@ namespace Alabo.Data.People.Employes.Controllers
         [HttpPost]
         public ApiResult Edit([FromBody] PostRoleInput model)
         {
-            if (!this.IsFormValid()) return ApiResult.Failure(this.FormInvalidReason());
+            if (!this.IsFormValid()) {
+                return ApiResult.Failure(this.FormInvalidReason());
+            }
 
             var result = Resolve<IPostRoleService>().Edit(model);
             return ToResult(result);
@@ -66,7 +68,10 @@ namespace Alabo.Data.People.Employes.Controllers
         [Display(Description = "根据Id获取单个实例")]
         public override ApiResult<PostRole> ViewById(string id)
         {
-            if (BaseService == null) return ApiResult.Failure<PostRole>("请在控制器中定义BaseService");
+            if (BaseService == null) {
+                return ApiResult.Failure<PostRole>("请在控制器中定义BaseService");
+            }
+
             var result = Resolve<IPostRoleService>().GetViewById(id);
             var tree = Resolve<IPostRoleService>().RoleTrees();
             //判断第一级 是否勾选,如果勾选 判断第二季是否全选
@@ -87,7 +92,9 @@ namespace Alabo.Data.People.Employes.Controllers
         private List<ObjectId> GetPostRoleId(IList<PlatformRoleTreeOutput> input, IList<ObjectId> ids)
         {
             var result = new List<ObjectId>();
-            if (ids == null || input == null) return result;
+            if (ids == null || input == null) {
+                return result;
+            }
 
             foreach (var item in input)
             {
@@ -96,14 +103,20 @@ namespace Alabo.Data.People.Employes.Controllers
                     foreach (var itemNode in items.AppItems)
                     {
                         var id = ids.SingleOrDefault(s => s == itemNode.Id);
-                        if (id != null && ObjectId.Empty != id) result.Add(itemNode.Id); //第三级全部加入
+                        if (id != null && ObjectId.Empty != id) {
+                            result.Add(itemNode.Id); //第三级全部加入
+                        }
                     }
 
                     //如果全选则把上级写入
-                    if (items.AppItems.Count == items.AppItems.Count(s => ids.Contains(s.Id))) result.Add(items.Id);
+                    if (items.AppItems.Count == items.AppItems.Count(s => ids.Contains(s.Id))) {
+                        result.Add(items.Id);
+                    }
                 }
 
-                if (item.AppItems.Count == item.AppItems.Count(s => ids.Contains(s.Id))) result.Add(item.Id);
+                if (item.AppItems.Count == item.AppItems.Count(s => ids.Contains(s.Id))) {
+                    result.Add(item.Id);
+                }
             }
 
             return result;

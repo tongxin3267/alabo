@@ -106,7 +106,9 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                     Resolve<IAutoConfigService>().GetList<PriceStyleConfig>().FirstOrDefault().Id;
                 viewProduct.ProductStatus = ProductStatus.Online;
                 var Categorys = Resolve<ICategoryService>().GetList(r => r.Status == Status.Normal);
-                if (Categorys.Count() > 0) viewProduct.CategoryId = Categorys.FirstOrDefault().Id;
+                if (Categorys.Count() > 0) {
+                    viewProduct.CategoryId = Categorys.FirstOrDefault().Id;
+                }
             }
 
             viewProduct.Intro = viewProduct.ProductDetail.Intro;
@@ -121,14 +123,16 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
             viewProduct.PriceStyleItems = Resolve<IAutoConfigService>()
                 .GetList<PriceStyleConfig>(r => r.Status == Status.Normal).OrderBy(r => r.SortOrder).ToList();
 
-            if (!viewProduct.Product.StoreId.IsObjectIdNullOrEmpty())
+            if (!viewProduct.Product.StoreId.IsObjectIdNullOrEmpty()) {
                 viewProduct.Store = Resolve<IStoreService>().GetSingle(r => r.Id == viewProduct.Product.StoreId.ToObjectId());
+            }
 
-            if (viewProduct.Product.PriceStyleId.IsGuidNullOrEmpty())
+            if (viewProduct.Product.PriceStyleId.IsGuidNullOrEmpty()) {
                 viewProduct.PriceStyleConfig = viewProduct.PriceStyleItems.FirstOrDefault();
-            else
+            } else {
                 viewProduct.PriceStyleConfig =
                     viewProduct.PriceStyleItems.FirstOrDefault(r => r.Id == viewProduct.Product.PriceStyleId);
+            }
 
             return viewProduct;
         }
@@ -140,7 +144,9 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         public ServiceResult AddOrUpdate(ViewProductEdit viewProduct, HttpRequest httpRequest)
         {
             var result = MappingProductValue(viewProduct, httpRequest, out viewProduct); // 商品属性值处理
-            if (!result.Succeeded) return result;
+            if (!result.Succeeded) {
+                return result;
+            }
 
             var context = Repository<IProductRepository>().RepositoryContext;
             context.BeginTransaction();
@@ -166,7 +172,9 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                 // 更新商品Sku
                 var skuResult = Resolve<IProductSkuService>()
                     .AddUpdateOrDelete(viewProduct.Product, viewProduct.ProductSkus); // 更新Shop_productsku表
-                if (!skuResult.Succeeded) throw new ArgumentException(skuResult.ToString());
+                if (!skuResult.Succeeded) {
+                    throw new ArgumentException(skuResult.ToString());
+                }
 
                 //添加商品分类和标签
                 Resolve<IRelationIndexService>()
@@ -236,13 +244,15 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
             view.PriceStyleItems = Resolve<IAutoConfigService>()
                 .GetList<PriceStyleConfig>(r => r.Status == Status.Normal).OrderBy(r => r.SortOrder).ToList();
             view.StoreId = view.Product.StoreId.ToObjectId();
-            if (!view.Product.StoreId.IsObjectIdNullOrEmpty())
+            if (!view.Product.StoreId.IsObjectIdNullOrEmpty()) {
                 view.Store = Resolve<IStoreService>().GetSingle(r => r.Id == view.Product.StoreId.ToObjectId());
+            }
 
-            if (view.Product.PriceStyleId.IsGuidNullOrEmpty())
+            if (view.Product.PriceStyleId.IsGuidNullOrEmpty()) {
                 view.PriceStyleConfig = view.PriceStyleItems.FirstOrDefault();
-            else
+            } else {
                 view.PriceStyleConfig = view.PriceStyleItems.FirstOrDefault(r => r.Id == view.Product.PriceStyleId);
+            }
 
             return view;
         }
@@ -254,12 +264,15 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         public PagedList<ViewProductList> GetViewProductList(object query)
         {
             var dic = query.ToObject<Dictionary<string, string>>();
-            if (dic.TryGetValue("StoreName", out var storeName))
+            if (dic.TryGetValue("StoreName", out var storeName)) {
                 if (!storeName.IsNullOrEmpty())
                 {
                     var store = Resolve<IStoreService>().GetSingle(r => r.Name.Contains(storeName));
-                    if (store != null) dic.Add("StoreId", store.Id.ToString());
+                    if (store != null) {
+                        dic.Add("StoreId", store.Id.ToString());
+                    }
                 }
+            }
 
             var pageList = Resolve<IProductService>().GetPagedList<ViewProductList>(ObjectExtension.ToJson(dic));
             var storesId = pageList.Select(r => r.StoreId).Distinct();
@@ -292,27 +305,38 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
             out ViewProductEdit updateView)
         {
             updateView = new ViewProductEdit();
-            if (viewProduct.Product.PurchasePrice > viewProduct.Product.CostPrice)
+            if (viewProduct.Product.PurchasePrice > viewProduct.Product.CostPrice) {
                 return ServiceResult.FailedWithMessage("进货价不能大于成本价");
+            }
             //如果是后台添加商品,则商品关联平台店铺
             if (viewProduct.IsAdminAddProduct)
             {
                 var planform = Resolve<IStoreService>().PlatformStore();
-                if (planform == null) return ServiceResult.FailedWithMessage("请先添加平台店铺");
+                if (planform == null) {
+                    return ServiceResult.FailedWithMessage("请先添加平台店铺");
+                }
 
                 viewProduct.Product.StoreId = planform.Id.ToString();
             }
 
-            if (viewProduct.Product.StoreId.IsObjectIdNullOrEmpty()) return ServiceResult.FailedWithMessage("请为商品选择店铺");
+            if (viewProduct.Product.StoreId.IsObjectIdNullOrEmpty()) {
+                return ServiceResult.FailedWithMessage("请为商品选择店铺");
+            }
 
-            if (viewProduct.SkuJson.IsNullOrEmpty()) return ServiceResult.FailedWithMessage("请设置商品Sku");
+            if (viewProduct.SkuJson.IsNullOrEmpty()) {
+                return ServiceResult.FailedWithMessage("请设置商品Sku");
+            }
 
             var category = Resolve<ICategoryService>().GetSingle(viewProduct.CategoryId);
-            if (category == null) return ServiceResult.FailedWithMessage("未选择商品类目，或者商品类目已不存在");
+            if (category == null) {
+                return ServiceResult.FailedWithMessage("未选择商品类目，或者商品类目已不存在");
+            }
 
             if (Repository<IProductRepository>()
                     .Count(r => r.Bn == viewProduct.Product.Bn && r.Id != viewProduct.Product.Id) >
-                0) return ServiceResult.FailedWithMessage("该货号已存在，请使用其他货号");
+                0) {
+                return ServiceResult.FailedWithMessage("该货号已存在，请使用其他货号");
+            }
 
             #region product表属性处理
 
@@ -332,7 +356,9 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
 
             #region productDetail表属性，处理
 
-            if (viewProduct.ProductDetail == null) viewProduct.ProductDetail = new ProductDetail();
+            if (viewProduct.ProductDetail == null) {
+                viewProduct.ProductDetail = new ProductDetail();
+            }
 
             viewProduct.ProductDetail = AutoMapping.SetValue(viewProduct, viewProduct.ProductDetail); // 动态赋值
             viewProduct.ProductDetail.Extension = ObjectExtension.ToJson(viewProduct.ProductDetail.ProductDetailExtension); // 扩展属性序列
@@ -340,8 +366,9 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
             ///商品属性值处理
             viewProduct.ProductDetail.PropertyJson = Resolve<ICategoryService>()
                 .AddOrUpdateOrDeleteProductCategoryData(viewProduct.Product, httpRequest);
-            if (viewProduct.ProductDetail.PropertyJson.IsNullOrEmpty())
+            if (viewProduct.ProductDetail.PropertyJson.IsNullOrEmpty()) {
                 return ServiceResult.FailedWithMessage("商品属性值处理失败，不能为空");
+            }
             // 商品图片处理
             viewProduct.ProductDetail.ImageJson = CreateImage(viewProduct.Product, viewProduct.Images);
 
@@ -356,17 +383,25 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         private string CreateImage(Product product, string images)
         {
             var list = new List<ProductThum>();
-            if (images.IsNullOrEmpty()) return ObjectExtension.ToJson(list);
+            if (images.IsNullOrEmpty()) {
+                return ObjectExtension.ToJson(list);
+            }
 
             var config = Resolve<IAutoConfigService>().GetValue<ProductConfig>();
-            if (config.WidthThanHeight <= 0) throw new InvalidOperationException("缩略图高宽比例必须>0.");
+            if (config.WidthThanHeight <= 0) {
+                throw new InvalidOperationException("缩略图高宽比例必须>0.");
+            }
 
-            if (config.ThumbnailWidth <= 0) throw new InvalidOperationException("列表页缩略图宽度必须>0.");
+            if (config.ThumbnailWidth <= 0) {
+                throw new InvalidOperationException("列表页缩略图宽度必须>0.");
+            }
 
-            if (config.ShowCaseWidth <= 0) throw new InvalidOperationException("详情页橱窗图宽度必须>0.");
+            if (config.ShowCaseWidth <= 0) {
+                throw new InvalidOperationException("详情页橱窗图宽度必须>0.");
+            }
 
             var i = 0;
-            foreach (var item in images.SplitList(new[] { ',' }))
+            foreach (var item in images.SplitList(new[] { ',' })) {
                 if (!item.IsNullOrEmpty())
                 {
                     var savePath = "";
@@ -399,7 +434,9 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                         savePath = Path.Combine(FileHelper.RootPath, thum.ThumbnailUrl.TrimStart('/'));
                         //替换第二个路径前的/，避免生成相对路径
                         if (!File.Exists(savePath)) //图片不存在才处理
+{
                             ImageHelper.ImageCompression(originalPath, savePath, width, height); //改成绝对路径
+                        }
 
                         //详情页图片处理
                         width = decimal.ToInt16(config.ShowCaseWidth); //宽度
@@ -408,7 +445,9 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                         savePath = Path.Combine(FileHelper.RootPath, thum.ShowCaseUrl.TrimStart('/'));
                         //替换第二个路径前的/，避免生成相对路径
                         if (!File.Exists(savePath)) //图片不存在才处理
+{
                             ImageHelper.ImageCompression(originalPath, savePath, width, height); //改成绝对路径
+                        }
                     }
 
                     //生成小图片
@@ -419,13 +458,16 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                         savePath = Path.Combine(FileHelper.RootPath,
                             product.SmallUrl.TrimStart('/')); //替换第二个路径前的/，避免生成相对路径
                         if (!File.Exists(savePath)) //图片不存在才处理
+{
                             ImageHelper.ImageCompression(originalPath, savePath, 50, 50); //改成绝对路径
+                        }
 
                         i++;
                     }
 
                     list.Add(thum);
                 }
+            }
 
             return ObjectExtension.ToJson(list);
         }
@@ -437,10 +479,14 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         public Product GetSingle(long id)
         {
             var product = Resolve<IProductService>().GetSingle(r => r.Id == id);
-            if (product == null) return product;
+            if (product == null) {
+                return product;
+            }
 
             product.Detail = Resolve<IProductDetailService>().GetSingle(e => e.ProductId == product.Id); //商品SKU
-            if (product.Detail == null) return null;
+            if (product.Detail == null) {
+                return null;
+            }
 
             product.Detail.ProductDetailExtension = product.Detail.Extension.DeserializeJson<ProductDetailExtension>();
             product.ProductExtensions = new ProductExtensions

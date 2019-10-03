@@ -28,7 +28,9 @@ namespace Alabo.Industry.Cms.Articles.Domain.Services
             try
             {
                 var article = Resolve<IArticleAdminService>().Delete(u => u.Id == objId);
-                if (article) return Tuple.Create(result, new Article());
+                if (article) {
+                    return Tuple.Create(result, new Article());
+                }
             }
             catch (Exception ex)
             {
@@ -58,8 +60,10 @@ namespace Alabo.Industry.Cms.Articles.Domain.Services
         {
             var articles = Resolve<IRelationIndexService>().GetList();
             var article = articles.OrderByDescending(r => r.RelationId).FirstOrDefault();
-            if (article != null)
+            if (article != null) {
                 return article.RelationId + 1;
+            }
+
             return 1;
         }
 
@@ -93,11 +97,15 @@ namespace Alabo.Industry.Cms.Articles.Domain.Services
         {
             var id = request.Form["Id"];
             var channelId = request.Form["ChannelId"];
-            if (!id.ToString().IsNullOrEmpty()) model.Id = id.ToString().ToSafeObjectId();
+            if (!id.ToString().IsNullOrEmpty()) {
+                model.Id = id.ToString().ToSafeObjectId();
+            }
 
             model.ChannelId = channelId.ToString().ToSafeObjectId();
             var channel = Resolve<IChannelService>().GetSingle(r => r.Id == model.ChannelId);
-            if (channel == null) Tuple.Create(ServiceResult.FailedWithMessage("频道不存在"), new Article());
+            if (channel == null) {
+                Tuple.Create(ServiceResult.FailedWithMessage("频道不存在"), new Article());
+            }
 
             var list = Resolve<IChannelService>().DataFields(channelId.ToString());
             var dic = new Dictionary<string, string>();

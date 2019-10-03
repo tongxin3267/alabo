@@ -35,14 +35,17 @@ namespace Alabo.Cloud.School.BookingSignup.Domain.Services
 
             #region 验证
 
-            if (buyInput.UserId <= 0)
+            if (buyInput.UserId <= 0) {
                 return Tuple.Create(new BookingBuyOutput(), ServiceResult.FailedWithMessage("会员不存在"));
+            }
 
-            if (buyInput.Count < 1)
+            if (buyInput.Count < 1) {
                 return Tuple.Create(new BookingBuyOutput(), ServiceResult.FailedWithMessage("至少要有一名参与者"));
+            }
 
-            if (buyInput.Price != buyInput.TotalPrice / buyInput.Count)
+            if (buyInput.Price != buyInput.TotalPrice / buyInput.Count) {
                 return Tuple.Create(new BookingBuyOutput(), ServiceResult.FailedWithMessage("价格计算有误"));
+            }
             //if (buyInput.BookingId.IsNullOrEmpty()) {
             //    return Tuple.Create(new BookingBuyOutput(), ServiceResult.FailedWithMessage("订单为空"));
             //}
@@ -66,14 +69,17 @@ namespace Alabo.Cloud.School.BookingSignup.Domain.Services
             foreach (var item in model.Contacts)
             {
                 i++;
-                if (item.Name.IsNullOrEmpty())
+                if (item.Name.IsNullOrEmpty()) {
                     return Tuple.Create(new BookingBuyOutput(), ServiceResult.FailedWithMessage($"第{i}名参与者名字不能为空"));
+                }
 
-                if (item.Mobile.IsNullOrEmpty())
+                if (item.Mobile.IsNullOrEmpty()) {
                     return Tuple.Create(new BookingBuyOutput(), ServiceResult.FailedWithMessage($"第{i}名参与者手机号不能为空"));
+                }
 
-                if (!RegexHelper.CheckMobile(item.Mobile))
+                if (!RegexHelper.CheckMobile(item.Mobile)) {
                     return Tuple.Create(new BookingBuyOutput(), ServiceResult.FailedWithMessage($"第{i}名参与者手机号不正确"));
+                }
             }
 
             #endregion 手机验证
@@ -138,14 +144,18 @@ namespace Alabo.Cloud.School.BookingSignup.Domain.Services
         {
             // var orderId = entityIdList.FirstOrDefault();
             var order = Resolve<IBookingSignupOrderService>().GetSingle(entityId.FirstOrDefault());
-            if (order == null) return;
+            if (order == null) {
+                return;
+            }
 
             order.IsPay = true;
             Resolve<IBookingSignupOrderService>().Update(order);
             var bookingSignup = Resolve<IBookingSignupService>().GetSingle(order.BookingId);
             var message =
                 $"恭喜您成功报名{bookingSignup.Name}课程，课程将于{bookingSignup.StartTime}在{bookingSignup.Address}开始，预定{bookingSignup.EndTime}结束，望悉知!";
-            foreach (var item in order.Contacts) Resolve<IOpenService>().SendRaw(item.Mobile, message);
+            foreach (var item in order.Contacts) {
+                Resolve<IOpenService>().SendRaw(item.Mobile, message);
+            }
         }
     }
 }

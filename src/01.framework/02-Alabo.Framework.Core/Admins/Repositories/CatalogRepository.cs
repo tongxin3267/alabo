@@ -377,7 +377,9 @@ namespace Alabo.Framework.Core.Admins.Repositories
                     if (arrarys.Count > 1)
                     {
                         var entity = arrarys[1];
-                        if (entityNames.Contains(entity)) list.Add(tableName);
+                        if (entityNames.Contains(entity)) {
+                            list.Add(tableName);
+                        }
                     }
                 }
             }
@@ -395,7 +397,7 @@ namespace Alabo.Framework.Core.Admins.Repositories
         /// <param name="sqlList"></param>
         private void ExecuteSql(List<string> sqlList)
         {
-            foreach (var item in sqlList)
+            foreach (var item in sqlList) {
                 try
                 {
                     RepositoryContext.ExecuteNonQuery(item);
@@ -404,6 +406,7 @@ namespace Alabo.Framework.Core.Admins.Repositories
                 {
                     Trace.WriteLine(ex.Message);
                 }
+            }
         }
 
         #endregion others

@@ -31,8 +31,10 @@ namespace Alabo.Industry.Shop.Deliveries.Controllers
         {
             var template = Resolve<IDeliveryTemplateService>().GetSingle(id);
 
-            if (template != null)
+            if (template != null) {
                 return ApiResult.Success(template);
+            }
+
             return ApiResult.Failure("运费模板不存在");
         }
 
@@ -46,8 +48,10 @@ namespace Alabo.Industry.Shop.Deliveries.Controllers
         {
             var template = Resolve<IDeliveryTemplateService>().GetList(x => x.StoreId == storeId);
 
-            if (template != null)
+            if (template != null) {
                 return ApiResult.Success(template);
+            }
+
             return ApiResult.Failure("运费模板不存在");
         }
 
@@ -60,10 +64,15 @@ namespace Alabo.Industry.Shop.Deliveries.Controllers
         public ApiResult DeleteDeliveryTemplate([FromQuery] string id)
         {
             var count = Resolve<IProductService>().Count(s => s.DeliveryTemplateId == id);
-            if (count > 0) return ApiResult.Failure($"删除失败:该运费模板已被{count}个商品使用！");
+            if (count > 0) {
+                return ApiResult.Failure($"删除失败:该运费模板已被{count}个商品使用！");
+            }
+
             var rs = Resolve<IDeliveryTemplateService>().Delete(id);
 
-            if (rs) return ApiResult.Success("删除成功！");
+            if (rs) {
+                return ApiResult.Success("删除成功！");
+            }
 
             return ApiResult.Failure("删除失败！");
         }
@@ -89,7 +98,9 @@ namespace Alabo.Industry.Shop.Deliveries.Controllers
                         {
                             var count = Resolve<IDeliveryTemplateService>().Count(s =>
                                 s.TemplateName == template.TemplateName && s.UserId == template.UserId);
-                            if (count > 0) return ApiResult.Failure("运费模板保存失败:该模板已存在!");
+                            if (count > 0) {
+                                return ApiResult.Failure("运费模板保存失败:该模板已存在!");
+                            }
 
                             Resolve<IDeliveryTemplateService>().Add(template);
                         }
@@ -98,7 +109,9 @@ namespace Alabo.Industry.Shop.Deliveries.Controllers
                             var count = Resolve<IDeliveryTemplateService>().Count(s =>
                                 s.TemplateName == template.TemplateName && s.UserId == template.UserId &&
                                 s.Id != template.Id);
-                            if (count > 0) return ApiResult.Failure("运费模板保存失败:该模板名已存在!");
+                            if (count > 0) {
+                                return ApiResult.Failure("运费模板保存失败:该模板名已存在!");
+                            }
 
                             Resolve<IDeliveryTemplateService>().Update(template);
                         }

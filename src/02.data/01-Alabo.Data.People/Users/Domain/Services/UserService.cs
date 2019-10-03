@@ -77,7 +77,9 @@ namespace Alabo.Data.People.Users.Domain.Services
         public User GetNomarlUser(long userId)
         {
             var user = GetSingle(userId);
-            if (user != null && user.Status == Status.Normal) return user;
+            if (user != null && user.Status == Status.Normal) {
+                return user;
+            }
 
             return null;
         }
@@ -100,13 +102,17 @@ namespace Alabo.Data.People.Users.Domain.Services
         /// <param name="userName">Name of the 会员.</param>
         public User GetSingle(string userName)
         {
-            if (userName.IsNullOrEmpty()) return null;
+            if (userName.IsNullOrEmpty()) {
+                return null;
+            }
 
             var cacheKey = SingleUserCacheKey + "_UserName_" + userName;
             if (!ObjectCache.TryGet(cacheKey, out User result))
             {
                 result = Repository<IUserRepository>().GetSingle(userName.Trim());
-                if (result != null) ObjectCache.Set(cacheKey, result);
+                if (result != null) {
+                    ObjectCache.Set(cacheKey, result);
+                }
             }
 
             return result;
@@ -151,7 +157,9 @@ namespace Alabo.Data.People.Users.Domain.Services
             if (!ObjectCache.TryGet(cacheKey, out User result))
             {
                 result = Repository<IUserRepository>().GetUserDetail(userId);
-                if (result != null) ObjectCache.Set(cacheKey, result);
+                if (result != null) {
+                    ObjectCache.Set(cacheKey, result);
+                }
                 //  result.UserGradeConfig = Resolve<IGradeService>().GetGrade(result.GradeId);
             }
 
@@ -164,13 +172,17 @@ namespace Alabo.Data.People.Users.Domain.Services
         /// <param name="userName">Name of the 会员.</param>
         public User GetUserDetail(string userName)
         {
-            if (userName.IsNullOrEmpty()) return null;
+            if (userName.IsNullOrEmpty()) {
+                return null;
+            }
 
             var cacheKey = SingleUserCacheKey + "_Detail_UserName_" + userName;
             if (!ObjectCache.TryGet(cacheKey, out User result))
             {
                 result = Repository<IUserRepository>().GetUserDetail(userName.Trim());
-                if (result != null) ObjectCache.Set(cacheKey, result);
+                if (result != null) {
+                    ObjectCache.Set(cacheKey, result);
+                }
             }
 
             return result;
@@ -185,7 +197,9 @@ namespace Alabo.Data.People.Users.Domain.Services
         {
             var result = _userRepository.UpdateSingle(model);
 
-            if (result) DeleteUserCache(model.Id, model.UserName);
+            if (result) {
+                DeleteUserCache(model.Id, model.UserName);
+            }
 
             return result;
         }
@@ -334,10 +348,14 @@ namespace Alabo.Data.People.Users.Domain.Services
                 var grade = Resolve<IGradeService>().GetGrade(item.GradeId);
                 viewUser.UserGradeConfig = grade;
 
-                if (grade != null) viewUser.GradeName = grade.Name;
+                if (grade != null) {
+                    viewUser.GradeName = grade.Name;
+                }
 
                 var userDetail = userDetailList.FirstOrDefault(r => r.UserId == item.Id);
-                if (userDetail == null) continue;
+                if (userDetail == null) {
+                    continue;
+                }
 
                 viewUser.CreateTime = userDetail.CreateTime;
                 viewUser.Sex = userDetail.Sex;
@@ -356,7 +374,10 @@ namespace Alabo.Data.People.Users.Domain.Services
                 //    viewUser.IdentityStatus = identityItem.Status;
                 //}
 
-                if (userInput.FilterType == FilterType.User) viewUser.UserName = item.GetUserName();
+                if (userInput.FilterType == FilterType.User) {
+                    viewUser.UserName = item.GetUserName();
+                }
+
                 userResult.Add(viewUser);
             }
 
@@ -396,10 +417,14 @@ namespace Alabo.Data.People.Users.Domain.Services
                 var grade = Resolve<IGradeService>().GetGrade(item.GradeId);
                 viewUser.UserGradeConfig = grade;
 
-                if (grade != null) viewUser.GradeName = grade.Name;
+                if (grade != null) {
+                    viewUser.GradeName = grade.Name;
+                }
 
                 var userDetail = userDetailList.FirstOrDefault(r => r.UserId == item.Id);
-                if (userDetail == null) continue;
+                if (userDetail == null) {
+                    continue;
+                }
 
                 viewUser.CreateTime = userDetail.CreateTime;
                 viewUser.Sex = userDetail.Sex;
@@ -418,7 +443,9 @@ namespace Alabo.Data.People.Users.Domain.Services
                 //    viewUser.IdentityStatus = identityItem.Status;
                 //}
 
-                if (userInput.FilterType == FilterType.User) viewUser.UserName = item.GetUserName();
+                if (userInput.FilterType == FilterType.User) {
+                    viewUser.UserName = item.GetUserName();
+                }
 
                 userResult.Add(viewUser);
             }
@@ -433,7 +460,9 @@ namespace Alabo.Data.People.Users.Domain.Services
         public void DeleteUserCache(long userId)
         {
             var user = GetSingle(userId);
-            if (user != null) DeleteUserCache(user.Id, user.UserName);
+            if (user != null) {
+                DeleteUserCache(user.Id, user.UserName);
+            }
         }
 
         /// <summary>
@@ -463,7 +492,9 @@ namespace Alabo.Data.People.Users.Domain.Services
         /// <param name="user">用户</param>
         public string GetUserStyle(User user)
         {
-            if (user == null) return string.Empty;
+            if (user == null) {
+                return string.Empty;
+            }
 
             var gradeConfig = Resolve<IGradeService>().GetGrade(user.GradeId);
             var userName =
@@ -480,7 +511,9 @@ namespace Alabo.Data.People.Users.Domain.Services
         /// <param name="user">The user.</param>
         public string GetHomeUserStyle(User user)
         {
-            if (user == null) return string.Empty;
+            if (user == null) {
+                return string.Empty;
+            }
 
             var gradeConfig = Resolve<IGradeService>().GetGrade(user.GradeId);
             var userName =
@@ -499,7 +532,9 @@ namespace Alabo.Data.People.Users.Domain.Services
             var grades = Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
             var user = GetSingle(userId);
 
-            if (user.ParentId == 0 || user.Id == user.ParentId) return 0;
+            if (user.ParentId == 0 || user.Id == user.ParentId) {
+                return 0;
+            }
 
             return GetTeamCenterService(user.ParentId, grade);
         }
@@ -512,7 +547,10 @@ namespace Alabo.Data.People.Users.Domain.Services
         public bool IsAdmin(long userId)
         {
             var find = Resolve<IEmployeeService>().GetSingle(r => r.UserId == userId);
-            if (find == null) return false;
+            if (find == null) {
+                return false;
+            }
+
             return true;
         }
 
@@ -541,7 +579,9 @@ namespace Alabo.Data.People.Users.Domain.Services
         {
             return ObjectCache.GetOrSet(() =>
                 {
-                    if (user == null) throw new ValidException("用户不能为空");
+                    if (user == null) {
+                        throw new ValidException("用户不能为空");
+                    }
 
                     //     var accout = Resolve<IAccountService>().GetSingle(r => r.UserId == user.Id);
                     //if (accout == null) {

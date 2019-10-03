@@ -33,9 +33,13 @@ namespace Alabo.Data.People.Users.Domain.Services
                 if (result != null)
                 {
                     result.ParentMapList = result.ParentMap.DeserializeJson<List<ParentMap>>();
-                    if (result.ParentMapList == null) result.ParentMapList = new List<ParentMap>();
+                    if (result.ParentMapList == null) {
+                        result.ParentMapList = new List<ParentMap>();
+                    }
 
-                    if (!_parentMapCache.ContainsKey(userId)) _parentMapCache.Add(userId, result);
+                    if (!_parentMapCache.ContainsKey(userId)) {
+                        _parentMapCache.Add(userId, result);
+                    }
                 }
             }
 
@@ -54,7 +58,9 @@ namespace Alabo.Data.People.Users.Domain.Services
                 //}
 
                 userMap.ParentMapList = userMap.ParentMap.DeserializeJson<List<ParentMap>>();
-                if (userMap.ParentMapList == null) userMap.ParentMapList = new List<ParentMap>();
+                if (userMap.ParentMapList == null) {
+                    userMap.ParentMapList = new List<ParentMap>();
+                }
             }
 
             return userMap;
@@ -62,13 +68,17 @@ namespace Alabo.Data.People.Users.Domain.Services
 
         public string GetParentMap(long parentId)
         {
-            if (parentId == 0) return new List<ParentMap>().ToJson();
+            if (parentId == 0) {
+                return new List<ParentMap>().ToJson();
+            }
 
             var userMap = GetSingle(parentId);
 
             var parentMapList = new List<ParentMap>();
             // 如果为空，则给默认值
-            if (userMap == null || parentId <= 0) return new List<ParentMap>().ToJson();
+            if (userMap == null || parentId <= 0) {
+                return new List<ParentMap>().ToJson();
+            }
 
             // 如果推荐的关系图为空个，则初始化推荐人关系图
             // userMap.ParentMap.ToStr().Length<10 字符串格式不正确
@@ -94,12 +104,13 @@ namespace Alabo.Data.People.Users.Domain.Services
                 }
             };
             // 将老会员赋值上去
-            foreach (var item in parentMapList)
+            foreach (var item in parentMapList) {
                 newParentMapList.Add(new ParentMap
                 {
                     UserId = item.UserId,
                     ParentLevel = item.ParentLevel + 1
                 });
+            }
 
             return newParentMapList.ToJson();
         }
@@ -107,7 +118,9 @@ namespace Alabo.Data.People.Users.Domain.Services
         public void UpdateMap(long userId, long parentId)
         {
             var map = GetParentMap(parentId);
-            if (!map.IsNullOrEmpty()) Repository<IUserMapRepository>().UpdateMap(userId, map);
+            if (!map.IsNullOrEmpty()) {
+                Repository<IUserMapRepository>().UpdateMap(userId, map);
+            }
         }
 
         public ServiceResult UpdateParentUserAfterUserDelete(long userId, long parentId)

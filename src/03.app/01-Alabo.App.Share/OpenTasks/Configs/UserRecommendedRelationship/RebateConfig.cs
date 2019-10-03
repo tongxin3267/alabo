@@ -42,7 +42,9 @@ namespace Alabo.App.Share.OpenTasks.Configs.UserRecommendedRelationship
         public override ExecuteResult<ITaskResult[]> Execute(TaskParameter parameter)
         {
             var baseResult = base.Execute(parameter);
-            if (baseResult.Status != ResultStatus.Success) return baseResult;
+            if (baseResult.Status != ResultStatus.Success) {
+                return baseResult;
+            }
 
             IList<ITaskResult> resultList = new List<ITaskResult>();
 

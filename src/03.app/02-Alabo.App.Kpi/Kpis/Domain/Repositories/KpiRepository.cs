@@ -28,13 +28,17 @@ namespace Alabo.App.Kpis.Kpis.Domain.Repositories
         {
             var sqlWhere = $"  UserId={kpi.UserId} and ModuleId='{kpi.ModuleId}' and Type={Convert.ToInt16(kpi.Type)}";
             var timeTypeCondition = DataRecordExtension.GetTimeTypeCondition(kpi.Type, kpi.CreateTime);
-            if (!timeTypeCondition.IsNullOrEmpty()) sqlWhere += $" And {timeTypeCondition}";
+            if (!timeTypeCondition.IsNullOrEmpty()) {
+                sqlWhere += $" And {timeTypeCondition}";
+            }
 
             var sql = $"SELECT top 1 * FROM kpi_kpi WHERE {sqlWhere} order by id desc ";
             using (var reader = RepositoryContext.ExecuteDataReader(sql))
             {
                 Kpi readKpi = null;
-                if (reader.Read()) readKpi = ReadKpi(reader);
+                if (reader.Read()) {
+                    readKpi = ReadKpi(reader);
+                }
 
                 return readKpi;
             }

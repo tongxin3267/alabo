@@ -22,36 +22,63 @@ namespace Alabo.Industry.Shop.Products.Domain.Repositories
 
         public List<ProductItem> GetProductItems(ProductApiInput input, out long count)
         {
-            if (input.PageIndex < 0) input.PageIndex = 1;
+            if (input.PageIndex < 0) {
+                input.PageIndex = 1;
+            }
 
-            if (input.PageSize > 100) input.PageSize = 100;
+            if (input.PageSize > 100) {
+                input.PageSize = 100;
+            }
 
             #region 标签 分类查询
 
             var TcSql = string.Empty;
 
-            if (!string.IsNullOrEmpty(input.ClassIds))
+            if (!string.IsNullOrEmpty(input.ClassIds)) {
                 TcSql =
                     $"{TcSql} AND Type='{typeof(ProductClassRelation).FullName}'  AND Id in ({input.ClassIds})  or FatherId in ({input.ClassIds}) ";
+            }
 
-            if (!string.IsNullOrEmpty(input.TagIds))
+            if (!string.IsNullOrEmpty(input.TagIds)) {
                 TcSql =
                     $"{TcSql} AND Type='{typeof(ProductTagRelation).FullName}'  AND Id in ({input.TagIds})  or FatherId in ({input.TagIds}) ";
+            }
 
-            if (!string.IsNullOrEmpty(TcSql))
+            if (!string.IsNullOrEmpty(TcSql)) {
                 TcSql = $@"SELECT DISTINCT EntityId FROM Basic_RelationIndex  WHERE RelationId IN(
                         SELECT Id FROM Basic_Relation WHERE 1=1 {TcSql} )";
+            }
 
             #endregion 标签 分类查询
 
             var sqlWhere = string.Empty;
-            if (!string.IsNullOrEmpty(input.Keyword)) sqlWhere = $"{sqlWhere} AND Name Like '%{input.Keyword}%'";
-            if (input.MinPrice.HasValue) sqlWhere = $"{sqlWhere} AND Price>{input.MinPrice}";
-            if (input.MaxPrice.HasValue) sqlWhere = $"{sqlWhere} AND Price<{input.MaxPrice}";
-            if (input.PriceStyleId.HasValue) sqlWhere = $"{sqlWhere} AND PriceStyleId ='{input.PriceStyleId}'";
-            if (input.BrandId.HasValue) sqlWhere = $"{sqlWhere} AND  BrandId ='{input.BrandId}'";
-            if (!TcSql.IsNullOrEmpty()) sqlWhere = $"{sqlWhere} AND Id in ({TcSql})";
-            if (!input.ProductIds.IsNullOrEmpty()) sqlWhere = $"{sqlWhere} AND Id in ({input.ProductIds})";
+            if (!string.IsNullOrEmpty(input.Keyword)) {
+                sqlWhere = $"{sqlWhere} AND Name Like '%{input.Keyword}%'";
+            }
+
+            if (input.MinPrice.HasValue) {
+                sqlWhere = $"{sqlWhere} AND Price>{input.MinPrice}";
+            }
+
+            if (input.MaxPrice.HasValue) {
+                sqlWhere = $"{sqlWhere} AND Price<{input.MaxPrice}";
+            }
+
+            if (input.PriceStyleId.HasValue) {
+                sqlWhere = $"{sqlWhere} AND PriceStyleId ='{input.PriceStyleId}'";
+            }
+
+            if (input.BrandId.HasValue) {
+                sqlWhere = $"{sqlWhere} AND  BrandId ='{input.BrandId}'";
+            }
+
+            if (!TcSql.IsNullOrEmpty()) {
+                sqlWhere = $"{sqlWhere} AND Id in ({TcSql})";
+            }
+
+            if (!input.ProductIds.IsNullOrEmpty()) {
+                sqlWhere = $"{sqlWhere} AND Id in ({input.ProductIds})";
+            }
             //商品状态过滤  商品店铺过滤
             sqlWhere = $"{sqlWhere} AND ProductStatus= {(int) ProductStatus.Online}";
             sqlWhere = $"{sqlWhere} AND StoreId>0";
@@ -75,12 +102,15 @@ namespace Alabo.Industry.Shop.Products.Domain.Repositories
 
             //排序处理  desc 降序
             var sort = string.Empty;
-            if (input.SortOrder != ProductSortOrder.Defualt)
+            if (input.SortOrder != ProductSortOrder.Defualt) {
                 sort = input.SortOrder.ToString();
-            else
+            } else {
                 sort = "Id";
+            }
 
-            if (input.OrderType == 0) sort = $"{sort} desc";
+            if (input.OrderType == 0) {
+                sort = $"{sort} desc";
+            }
             // 如果有传入指定数量，不分页，输出具体的数量
             if (input.Count > 0)
             {
@@ -97,7 +127,9 @@ namespace Alabo.Industry.Shop.Products.Domain.Repositories
             var result = new List<ProductItem>();
             using (var dr = RepositoryContext.ExecuteDataReader(sql))
             {
-                while (dr.Read()) result.Add(ReadProduct(dr));
+                while (dr.Read()) {
+                    result.Add(ReadProduct(dr));
+                }
             }
 
             return result;

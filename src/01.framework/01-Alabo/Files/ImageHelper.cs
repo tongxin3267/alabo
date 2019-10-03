@@ -101,9 +101,11 @@ namespace Alabo.Files
         private static ImageCodecInfo GetCodecInfo(string mimeType)
         {
             var codecInfo = ImageCodecInfo.GetImageEncoders();
-            foreach (var ici in codecInfo)
-                if (ici.MimeType == mimeType)
+            foreach (var ici in codecInfo) {
+                if (ici.MimeType == mimeType) {
                     return ici;
+                }
+            }
 
             return null;
         }
@@ -116,9 +118,11 @@ namespace Alabo.Files
         {
             var fileExt = fileName.Substring(fileName.LastIndexOf(".") + 1).ToUpper();
             var codecInfo = ImageCodecInfo.GetImageEncoders();
-            foreach (var ici in codecInfo)
-                if (ici.FilenameExtension.Contains(fileExt))
+            foreach (var ici in codecInfo) {
+                if (ici.FilenameExtension.Contains(fileExt)) {
                     return ici;
+                }
+            }
 
             return null;
         }

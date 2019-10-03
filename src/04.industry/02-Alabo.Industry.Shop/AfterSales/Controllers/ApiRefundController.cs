@@ -32,7 +32,9 @@ namespace Alabo.Industry.Shop.AfterSales.Controllers
         {
             var order = Resolve<IOrderService>().GetSingle(orderId);
             //未发货
-            if (order == null) return ApiResult.Failure<Refund>("订单不存在");
+            if (order == null) {
+                return ApiResult.Failure<Refund>("订单不存在");
+            }
 
             //var res = Resolve<IRefundService>().GetById(order.OrderExtension.RefundInfo.Id);
             //订单更新成功且退款信息插入成功
@@ -48,12 +50,14 @@ namespace Alabo.Industry.Shop.AfterSales.Controllers
         {
             var order = Resolve<IOrderService>().GetSingle(parameter.OrderId);
             //未发货
-            if (order.OrderStatus == OrderStatus.WaitingSellerSendGoods)
+            if (order.OrderStatus == OrderStatus.WaitingSellerSendGoods) {
                 order.OrderStatus = OrderStatus.Refund;
-            else if (order.OrderStatus == OrderStatus.WaitingReceiptProduct)
+            } else if (order.OrderStatus == OrderStatus.WaitingReceiptProduct) {
                 order.OrderStatus = OrderStatus.AfterSale;
-            else
+            } else {
                 return await Task.FromResult(ApiResult.Failure("订单状态已更改!"));
+            }
+
             parameter.Process = RefundStatus.BuyerApplyRefund;
             var res = Resolve<IRefundService>().AddOrUpdate(parameter);
             order.OrderExtension.RefundInfo = parameter;
@@ -89,10 +93,14 @@ namespace Alabo.Industry.Shop.AfterSales.Controllers
             //先把微信金额原路退回
 
             var entity = Resolve<IRefundService>().GetByIdNoTracking(order.OrderExtension?.RefundInfo?.Id);
-            if (entity == null) return await Task.FromResult(ApiResult.Failure("退款状态以异常!"));
+            if (entity == null) {
+                return await Task.FromResult(ApiResult.Failure("退款状态以异常!"));
+            }
 
             if (pay.Amount < parameter.Amount) //退款金额不能大于支付金额
+{
                 return await Task.FromResult(ApiResult.Failure("退款金额不能大于订单金额!"));
+            }
             //退款金额等于 手动退款的金额
             entity.Amount = parameter.Amount;
             //再更新订单状态和退货状态
@@ -100,24 +108,27 @@ namespace Alabo.Industry.Shop.AfterSales.Controllers
                 order.OrderExtension?.RefundInfo?.Id.ToString());
 
             //请求结果
-            if (!refundFree.Item1.Succeeded)
+            if (!refundFree.Item1.Succeeded) {
                 return ApiResult.Failure(
                     $"退款失败!refundFree.Item1:ErrorMessages=>{refundFree.Item1.ErrorMessages.Join()}/ReturnMessage=>{refundFree.Item1.ReturnMessage},refundFree.Item2:{refundFree.Item2}");
+            }
             //未发货
             if (order.OrderStatus == OrderStatus.AfterSale)
             {
-                if (order.OrderExtension.RefundInfo.Process == RefundStatus.WaitSaleAllow)
+                if (order.OrderExtension.RefundInfo.Process == RefundStatus.WaitSaleAllow) {
                     entity.Process = RefundStatus.Sucess;
-                else
+                } else {
                     return await Task.FromResult(ApiResult.Failure("售后状态已被更改,操作失败!"));
+                }
             }
             else if (order.OrderStatus == OrderStatus.Refund)
             {
                 //退款可以在 同意之后或者 直接退款,退款后直接完成
-                if (order.OrderExtension.RefundInfo.Process == RefundStatus.BuyerApplyRefund)
+                if (order.OrderExtension.RefundInfo.Process == RefundStatus.BuyerApplyRefund) {
                     entity.Process = RefundStatus.Sucess;
-                else
+                } else {
                     return await Task.FromResult(ApiResult.Failure("售后状态已被更改,操作失败!"));
+                }
             }
             else
             {
@@ -151,10 +162,12 @@ namespace Alabo.Industry.Shop.AfterSales.Controllers
             var entity = Resolve<IRefundService>().GetByIdNoTracking(order.OrderExtension?.RefundInfo?.Id);
             if (entity != null)
             {
-                if (entity.Process == RefundStatus.BuyerApplyRefund)
+                if (entity.Process == RefundStatus.BuyerApplyRefund) {
                     entity.Process = RefundStatus.WaitSaleAllow;
-                else
+                } else {
                     return await Task.FromResult(ApiResult.Failure("售后状态已被更改,操作失败!"));
+                }
+
                 entity.Address = parameter.Address;
             }
 
@@ -189,19 +202,21 @@ namespace Alabo.Industry.Shop.AfterSales.Controllers
             var entity = Resolve<IRefundService>().GetByIdNoTracking(order.OrderExtension?.RefundInfo?.Id);
             if (entity != null)
             {
-                if (entity.Process == RefundStatus.BuyerApplyRefund)
+                if (entity.Process == RefundStatus.BuyerApplyRefund) {
                     entity.Process = RefundStatus.WaitSaleRefuse;
-                else
+                } else {
                     return await Task.FromResult(ApiResult.Failure("售后状态已更改!"));
+                }
             }
 
             //未发货
-            if (order.OrderStatus == OrderStatus.AfterSale)
+            if (order.OrderStatus == OrderStatus.AfterSale) {
                 order.OrderStatus = OrderStatus.WaitingReceiptProduct;
-            else if (order.OrderStatus == OrderStatus.Refund)
+            } else if (order.OrderStatus == OrderStatus.Refund) {
                 order.OrderStatus = OrderStatus.WaitingSellerSendGoods;
-            else
+            } else {
                 return await Task.FromResult(ApiResult.Failure("订单状态已更改!"));
+            }
             //entity.Address = parameter.Address;
             var res = Resolve<IRefundService>().Update(entity);
 
@@ -236,19 +251,21 @@ namespace Alabo.Industry.Shop.AfterSales.Controllers
             var entity = Resolve<IRefundService>().GetByIdNoTracking(order.OrderExtension?.RefundInfo?.Id);
             if (entity != null)
             {
-                if (entity.Process == RefundStatus.BuyerApplyRefund)
+                if (entity.Process == RefundStatus.BuyerApplyRefund) {
                     entity.Process = RefundStatus.Closed; //用户取消
-                else
+                } else {
                     return await Task.FromResult(ApiResult.Failure("售后状态已更改!"));
+                }
             }
 
             //未发货
-            if (order.OrderStatus == OrderStatus.AfterSale)
+            if (order.OrderStatus == OrderStatus.AfterSale) {
                 order.OrderStatus = OrderStatus.WaitingReceiptProduct;
-            else if (order.OrderStatus == OrderStatus.Refund)
+            } else if (order.OrderStatus == OrderStatus.Refund) {
                 order.OrderStatus = OrderStatus.WaitingSellerSendGoods;
-            else
+            } else {
                 return await Task.FromResult(ApiResult.Failure("订单状态已更改!"));
+            }
             //entity.Address = parameter.Address;
             var res = Resolve<IRefundService>().Update(entity);
 

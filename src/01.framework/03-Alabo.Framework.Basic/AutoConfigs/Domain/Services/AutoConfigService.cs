@@ -42,14 +42,17 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Services
         {
             var autoConfig = Resolve<IAutoConfigService>().GetConfig(typeof(T).FullName);
             var typeclassProperty = typeof(T).GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
-            if (typeclassProperty == null) return ServiceResult.FailedWithMessage("未设置ClassPropertyAttribute特性");
+            if (typeclassProperty == null) {
+                return ServiceResult.FailedWithMessage("未设置ClassPropertyAttribute特性");
+            }
 
-            if (autoConfig == null)
+            if (autoConfig == null) {
                 autoConfig = new AutoConfig
                 {
                     AppName = Resolve<ITypeService>().GetAppName(typeof(T)),
                     Type = typeof(T).FullName
                 };
+            }
 
             autoConfig.LastUpdated = DateTime.Now;
             autoConfig.Value = value.ToJson();
@@ -59,7 +62,9 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Services
 
         public void AddOrUpdate(AutoConfig config)
         {
-            if (config == null) throw new ArgumentNullException(nameof(config));
+            if (config == null) {
+                throw new ArgumentNullException(nameof(config));
+            }
 
             AutoConfig find = null;
             if (config.Id > 0)
@@ -67,7 +72,10 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Services
                 find = Repository<IAutoConfigRepository>().GetSingle(e => e.Id == config.Id);
             }
 
-            if (find == null) find = Repository<IAutoConfigRepository>().GetSingle(e => e.Type == config.Type);
+            if (find == null) {
+                find = Repository<IAutoConfigRepository>().GetSingle(e => e.Type == config.Type);
+            }
+
             var appName = Resolve<ITypeService>().GetAppName(config.Type);
             if (find == null)
             {
@@ -98,13 +106,17 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Services
         /// <param name="key"></param>
         public AutoConfig GetConfig(string key)
         {
-            if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+            if (string.IsNullOrWhiteSpace(key)) {
+                throw new ArgumentNullException(nameof(key));
+            }
 
             var cacheKey = AutoConfigCacheKey + key;
             if (!ObjectCache.TryGet(cacheKey, out AutoConfig config))
             {
                 config = Repository<IAutoConfigRepository>().GetSingle(e => e.Type == key);
-                if (config != null) ObjectCache.Set(cacheKey, config);
+                if (config != null) {
+                    ObjectCache.Set(cacheKey, config);
+                }
             }
 
             return config;
@@ -113,7 +125,9 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Services
         public T GetValue<T>() where T : class, IAutoConfig
         {
             var config = GetConfig(typeof(T).FullName);
-            if (config == null) return Activator.CreateInstance(typeof(T)) as T;
+            if (config == null) {
+                return Activator.CreateInstance(typeof(T)) as T;
+            }
 
             var result = JsonConvert.DeserializeObject<T>(config.Value);
             return result;
@@ -122,9 +136,11 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Services
         public object GetValue(string key)
         {
             var types = GetAllTypes();
-            foreach (var item in types)
-                if (item.FullName == key)
+            foreach (var item in types) {
+                if (item.FullName == key) {
                     return GetValue(item);
+                }
+            }
 
             return null;
         }
@@ -155,10 +171,12 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Services
         public Type GetTypeByName(string name)
         {
             var types = GetAllTypes();
-            foreach (var item in types)
+            foreach (var item in types) {
                 if (item.Name.Equals(name, StringComparison.OrdinalIgnoreCase) ||
-                    item.FullName.Equals(name, StringComparison.OrdinalIgnoreCase))
+                    item.FullName.Equals(name, StringComparison.OrdinalIgnoreCase)) {
                     return item;
+                }
+            }
 
             return null;
         }
@@ -167,7 +185,9 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Services
         {
             var list = new List<JObject>();
             var dataConfig = GetConfig(key);
-            if (dataConfig != null) list = JsonConvert.DeserializeObject<List<JObject>>(dataConfig.Value);
+            if (dataConfig != null) {
+                list = JsonConvert.DeserializeObject<List<JObject>>(dataConfig.Value);
+            }
 
             return list;
         }
@@ -177,12 +197,15 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Services
             var config = GetConfig(typeof(T).FullName);
             var t = new T();
             var configlist = new List<T>();
-            if (config != null)
+            if (config != null) {
                 if (config.Value != null)
                 {
                     configlist = config.Value.Deserialize(t);
-                    if (predicate != null) return configlist.Where(predicate).ToList();
+                    if (predicate != null) {
+                        return configlist.Where(predicate).ToList();
+                    }
                 }
+            }
 
             return configlist;
         }
@@ -222,9 +245,11 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Services
 
             // 如果包含Id的字段
             var idField = type.GetProperty("Id");
-            if (idField != null)
-                if (id.IsGuidNullOrEmpty())
+            if (idField != null) {
+                if (id.IsGuidNullOrEmpty()) {
                     return data;
+                }
+            }
 
             if (config != null)
             {
@@ -305,16 +330,19 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Services
         public void InitDefaultData()
         {
             //Delete(r => r.Type == typeof(PostRoleConfig).FullName); // 临时删除所有权限
-            foreach (var type in GetAllTypes())
+            foreach (var type in GetAllTypes()) {
                 try
                 {
                     var config = Activator.CreateInstance(type);
-                    if (config is IAutoConfig set) set.SetDefault();
+                    if (config is IAutoConfig set) {
+                        set.SetDefault();
+                    }
                 }
                 catch (Exception ex)
                 {
                     Trace.WriteLine(ex.Message);
                 }
+            }
         }
 
         /// <summary>
@@ -416,9 +444,11 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Services
         public Type GetType(string key)
         {
             var types = GetAllTypes();
-            foreach (var item in types)
-                if (item.FullName == key)
+            foreach (var item in types) {
+                if (item.FullName == key) {
                     return item;
+                }
+            }
 
             return null;
         }
@@ -427,12 +457,13 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Services
             IEnumerable<T> elements,
             Func<T, object> textSelector, Func<T, object> valueSelector)
         {
-            foreach (var element in elements)
+            foreach (var element in elements) {
                 yield return new SelectListItem
                 {
                     Text = textSelector(element)?.ToString(),
                     Value = valueSelector(element)?.ToString()
                 };
+            }
         }
     }
 }

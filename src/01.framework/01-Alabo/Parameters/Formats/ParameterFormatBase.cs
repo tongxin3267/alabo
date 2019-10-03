@@ -32,9 +32,13 @@
         /// <param name="right">右操作数</param>
         public string Join(string left, string right)
         {
-            if (string.IsNullOrWhiteSpace(left)) return right;
+            if (string.IsNullOrWhiteSpace(left)) {
+                return right;
+            }
 
-            if (string.IsNullOrWhiteSpace(right)) return left;
+            if (string.IsNullOrWhiteSpace(right)) {
+                return left;
+            }
 
             return $"{left}{JoinSeparator}{right}";
         }

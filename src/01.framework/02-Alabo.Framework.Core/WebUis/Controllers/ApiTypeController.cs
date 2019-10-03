@@ -89,44 +89,78 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         public ApiResult<List<KeyValue>> GetKeyValue([FromQuery] string type)
         {
             //check
-            if (type.IsNullOrEmpty() || type == "undefined") return ApiResult.Failure<List<KeyValue>>("类型不能为空");
+            if (type.IsNullOrEmpty() || type == "undefined") {
+                return ApiResult.Failure<List<KeyValue>>("类型不能为空");
+            }
 
-            if (type == "IAutoTable") return ApiResult.Success(Resolve<IAutoUIService>().AutoTableKeyValues());
+            if (type == "IAutoTable") {
+                return ApiResult.Success(Resolve<IAutoUIService>().AutoTableKeyValues());
+            }
 
-            if (type == "IAutoForm") return ApiResult.Success(Resolve<IAutoUIService>().AutoFormKeyValues());
+            if (type == "IAutoForm") {
+                return ApiResult.Success(Resolve<IAutoUIService>().AutoFormKeyValues());
+            }
 
-            if (type == "IAutoList") return ApiResult.Success(Resolve<IAutoUIService>().AutoListKeyValues());
+            if (type == "IAutoList") {
+                return ApiResult.Success(Resolve<IAutoUIService>().AutoListKeyValues());
+            }
 
-            if (type == "IAutoPreview") return ApiResult.Success(Resolve<IAutoUIService>().AutoPreviewKeyValues());
+            if (type == "IAutoPreview") {
+                return ApiResult.Success(Resolve<IAutoUIService>().AutoPreviewKeyValues());
+            }
 
-            if (type == "IAutoNews") return ApiResult.Success(Resolve<IAutoUIService>().AutoNewsKeyValues());
+            if (type == "IAutoNews") {
+                return ApiResult.Success(Resolve<IAutoUIService>().AutoNewsKeyValues());
+            }
 
-            if (type == "IAutoArticle") return ApiResult.Success(Resolve<IAutoUIService>().AutoArticleKeyValues());
+            if (type == "IAutoArticle") {
+                return ApiResult.Success(Resolve<IAutoUIService>().AutoArticleKeyValues());
+            }
 
-            if (type == "IAutoReport") return ApiResult.Success(Resolve<IAutoUIService>().AutoReportKeyValues());
+            if (type == "IAutoReport") {
+                return ApiResult.Success(Resolve<IAutoUIService>().AutoReportKeyValues());
+            }
 
-            if (type == "IAutoFaq") return ApiResult.Success(Resolve<IAutoUIService>().AutoFaqsKeyValues());
+            if (type == "IAutoFaq") {
+                return ApiResult.Success(Resolve<IAutoUIService>().AutoFaqsKeyValues());
+            }
 
-            if (type == "IAutoImage") return ApiResult.Success(Resolve<IAutoUIService>().AutoImagesKeyValues());
+            if (type == "IAutoImage") {
+                return ApiResult.Success(Resolve<IAutoUIService>().AutoImagesKeyValues());
+            }
 
-            if (type == "IAutoIndex") return ApiResult.Success(Resolve<IAutoUIService>().AutoIndexKeyValues());
+            if (type == "IAutoIndex") {
+                return ApiResult.Success(Resolve<IAutoUIService>().AutoIndexKeyValues());
+            }
 
-            if (type == "IAutoIntro") return ApiResult.Success(Resolve<IAutoUIService>().AutoIntroKeyValues());
+            if (type == "IAutoIntro") {
+                return ApiResult.Success(Resolve<IAutoUIService>().AutoIntroKeyValues());
+            }
 
-            if (type == "IAutoTask") return ApiResult.Success(Resolve<IAutoUIService>().AutoTaskKeyValues());
+            if (type == "IAutoTask") {
+                return ApiResult.Success(Resolve<IAutoUIService>().AutoTaskKeyValues());
+            }
 
-            if (type == "IAutoVideo") return ApiResult.Success(Resolve<IAutoUIService>().AutoVideoKeyValues());
+            if (type == "IAutoVideo") {
+                return ApiResult.Success(Resolve<IAutoUIService>().AutoVideoKeyValues());
+            }
 
-            if (type == "CatalogEntity") return ApiResult.Success(Resolve<ITableService>().CatalogEntityKeyValues());
+            if (type == "CatalogEntity") {
+                return ApiResult.Success(Resolve<ITableService>().CatalogEntityKeyValues());
+            }
 
-            if (type == "SqlServcieCatalogEntity")
+            if (type == "SqlServcieCatalogEntity") {
                 return ApiResult.Success(Resolve<ITableService>().SqlServcieCatalogEntityKeyValues());
+            }
 
-            if (type == "MongodbCatalogEntity")
+            if (type == "MongodbCatalogEntity") {
                 return ApiResult.Success(Resolve<ITableService>().MongodbCatalogEntityKeyValues());
+            }
 
             var find = type.GetTypeByName();
-            if (find == null) return ApiResult.Failure<List<KeyValue>>($"类型不存在，请确认{type}输入是否正确");
+            if (find == null) {
+                return ApiResult.Failure<List<KeyValue>>($"类型不存在，请确认{type}输入是否正确");
+            }
 
             var intances = type.GetInstanceByName();
 
@@ -139,7 +173,9 @@ namespace Alabo.Framework.Core.WebUis.Controllers
             if (find.IsEnum)
             {
                 var keyValues = KeyValueExtesions.EnumToKeyValues(type);
-                if (keyValues == null) return ApiResult.Failure<List<KeyValue>>("枚举不存在");
+                if (keyValues == null) {
+                    return ApiResult.Failure<List<KeyValue>>("枚举不存在");
+                }
 
                 return ApiResult.Success(keyValues.ToList());
             }
@@ -155,6 +191,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
                 var keyValues = new List<KeyValue>();
                 if (type.Contains("MoneyTypeConfig")
                     ) //    var moneyConfig = Resolve<IAlaboAutoConfigService>().GetList<MoneyTypeConfig>().Where(x => x.Status == Domains.Enums.Status.Normal && x.IsShowFront);
+{
                     //    foreach (var item in moneyConfig) {
                     //        keyValues.Add(new KeyValue { Key = item.Id, Value = item.Name });
                     //    }
@@ -164,6 +201,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
                     //    }
                     //}
                     return ApiResult.Success(keyValues);
+                }
             }
 
             return null;

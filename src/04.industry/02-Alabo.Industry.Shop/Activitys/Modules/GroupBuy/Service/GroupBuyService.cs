@@ -37,12 +37,16 @@ namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Service
         {
             IList<GroupBuyProductRecord> productRecords = new List<GroupBuyProductRecord>();
             var product = Resolve<IProductService>().GetSingle(r => r.Id == productId);
-            if (product == null) return Tuple.Create(ServiceResult.FailedWithMessage("商品不存在"), productRecords);
+            if (product == null) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("商品不存在"), productRecords);
+            }
 
             var activityId = product.ProductActivityExtension?.Activitys
                 ?.FirstOrDefault(r => r.Key == typeof(GroupBuyActivity).FullName)?.Id;
             var activity = Resolve<IActivityService>().GetSingle(r => r.Id == activityId);
-            if (activity == null) return Tuple.Create(ServiceResult.FailedWithMessage("拼团活动不存在"), productRecords);
+            if (activity == null) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("拼团活动不存在"), productRecords);
+            }
 
             var groupBuyActivity = activity.Value.ToObject<GroupBuyActivity>();
             //所有活动记录
@@ -81,7 +85,9 @@ namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Service
                 groupBuyProductRecord.RemainTime = (item.CreateTime.AddDays(1) - DateTime.Now).TotalSeconds; // 剩余时间
                 groupBuyProductRecord.EndTime = activity.EndTime.ToString("yyyy-MM-dd HH:mm:ss");
                 //剩余人数不为0
-                if (groupBuyProductRecord.RemainCount > 0) productRecords.Add(groupBuyProductRecord);
+                if (groupBuyProductRecord.RemainCount > 0) {
+                    productRecords.Add(groupBuyProductRecord);
+                }
             }
 
             return Tuple.Create(ServiceResult.Success, productRecords);
@@ -96,19 +102,23 @@ namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Service
         {
             IList<GroupBuyRecordUser> orderRecordUsers = new List<GroupBuyRecordUser>();
             var order = Resolve<IOrderService>().GetSingle(r => r.Id == orderId);
-            if (order == null) return Tuple.Create(ServiceResult.FailedWithMessage("订单不存在"), orderRecordUsers);
+            if (order == null) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("订单不存在"), orderRecordUsers);
+            }
 
             var orderRecord = Resolve<IActivityRecordService>().GetSingle(r => r.OrderId == order.Id);
-            if (orderRecord == null)
+            if (orderRecord == null) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("该订单不是拼团订单"), orderRecordUsers);
+            }
             //获取拼团记录订单
             var activityRecords = new List<ActivityRecord>();
-            if (orderRecord.ParentId == 0)
+            if (orderRecord.ParentId == 0) {
                 activityRecords = Resolve<IActivityRecordService>()
                     .GetList(r => r.ParentId == orderRecord.Id || r.Id == orderRecord.Id).ToList();
-            else
+            } else {
                 activityRecords = Resolve<IActivityRecordService>()
                     .GetList(r => r.ParentId == orderRecord.ParentId || r.Id == orderRecord.ParentId).ToList();
+            }
 
             var users = Resolve<IUserService>()
                 .GetList(e => activityRecords.Select(r => r.UserId).Distinct().Contains(e.Id));
@@ -166,13 +176,15 @@ namespace Alabo.Industry.Shop.Activitys.Modules.GroupBuy.Service
             {
                 var idList = new List<long>();
                 var activitys = Resolve<IActivityService>().GetList(r => r.Key == typeof(GroupBuyActivity).FullName);
-                foreach (var item in activitys)
+                foreach (var item in activitys) {
                     if (!item.Value.IsNullOrEmpty())
                     {
                         var groupBuyActivity = item.Value.ToObject<GroupBuyActivity>();
-                        if (groupBuyActivity != null)
+                        if (groupBuyActivity != null) {
                             idList.Add(groupBuyActivity.SkuProducts.FirstOrDefault().ProductId);
+                        }
                     }
+                }
 
                 return idList;
             }, "GetAllProductIds", TimeSpan.FromMinutes(10)).Value;

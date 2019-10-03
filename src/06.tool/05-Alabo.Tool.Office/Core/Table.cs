@@ -45,10 +45,14 @@ namespace Alabo.Tool.Office.Core
         {
             get
             {
-                if (_header.Count == 0)
+                if (_header.Count == 0) {
                     return string.Empty;
-                if (_header[0].Cells.Count > 1)
+                }
+
+                if (_header[0].Cells.Count > 1) {
                     return string.Empty;
+                }
+
                 return _header[0][0].Value.SafeString();
             }
         }
@@ -108,8 +112,10 @@ namespace Alabo.Tool.Office.Core
         /// <param name="titles">标题</param>
         public void AddHeadRow(params string[] titles)
         {
-            if (titles == null)
+            if (titles == null) {
                 return;
+            }
+
             AddHeadRow(titles.Select(title => new Cell(title)).ToArray());
         }
 
@@ -119,8 +125,10 @@ namespace Alabo.Tool.Office.Core
         /// <param name="cells">表头</param>
         public void AddHeadRow(params Cell[] cells)
         {
-            if (cells == null)
+            if (cells == null) {
                 return;
+            }
+
             AddRowToHeader(cells);
             ResetFirstColumnSpan();
         }
@@ -139,20 +147,28 @@ namespace Alabo.Tool.Office.Core
         /// </summary>
         private void ResetFirstColumnSpan()
         {
-            if (_rowIndex < 2)
+            if (_rowIndex < 2) {
                 return;
-            if (_header.Count == 0)
+            }
+
+            if (_header.Count == 0) {
                 return;
-            if (_header[0].ColumnNumber > 1)
+            }
+
+            if (_header[0].ColumnNumber > 1) {
                 return;
+            }
+
             if (_header.Count > 1)
             {
                 _header[0][0].ColumnSpan = _header[1].ColumnNumber;
                 return;
             }
 
-            if (_body == null || _body.Count == 0)
+            if (_body == null || _body.Count == 0) {
                 return;
+            }
+
             _header[0][0].ColumnSpan = _body[0].ColumnNumber;
         }
 
@@ -162,8 +178,10 @@ namespace Alabo.Tool.Office.Core
         /// <param name="cellValues">值</param>
         public void AddBodyRow(params object[] cellValues)
         {
-            if (cellValues == null)
+            if (cellValues == null) {
                 return;
+            }
+
             AddBodyRow(cellValues.Select(t => new Cell(t)));
         }
 
@@ -173,8 +191,10 @@ namespace Alabo.Tool.Office.Core
         /// <param name="cells">单元格集合</param>
         public void AddBodyRow(IEnumerable<Cell> cells)
         {
-            if (cells == null)
+            if (cells == null) {
                 return;
+            }
+
             GetBodyRange().AddRow(_rowIndex, cells);
             _rowIndex++;
             ResetFirstColumnSpan();
@@ -185,8 +205,10 @@ namespace Alabo.Tool.Office.Core
         /// </summary>
         private Range GetBodyRange()
         {
-            if (_body != null)
+            if (_body != null) {
                 return _body;
+            }
+
             _body = new Range(_rowIndex);
             return _body;
         }
@@ -197,8 +219,10 @@ namespace Alabo.Tool.Office.Core
         /// <param name="cellValues">值</param>
         public void AddFootRow(params string[] cellValues)
         {
-            if (cellValues == null)
+            if (cellValues == null) {
                 return;
+            }
+
             AddFootRow(cellValues.Select(t => new Cell(t)).ToArray());
         }
 
@@ -208,8 +232,10 @@ namespace Alabo.Tool.Office.Core
         /// <param name="cells">单元格集合</param>
         public void AddFootRow(params Cell[] cells)
         {
-            if (cells == null)
+            if (cells == null) {
                 return;
+            }
+
             GetFootRange().AddRow(_rowIndex, cells);
             _rowIndex++;
         }
@@ -219,8 +245,10 @@ namespace Alabo.Tool.Office.Core
         /// </summary>
         private Range GetFootRange()
         {
-            if (_footer != null)
+            if (_footer != null) {
                 return _footer;
+            }
+
             _footer = new Range(_rowIndex);
             return _footer;
         }

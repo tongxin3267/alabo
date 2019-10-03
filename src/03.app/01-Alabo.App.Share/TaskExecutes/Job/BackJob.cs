@@ -50,10 +50,13 @@ namespace Alabo.App.Share.TaskExecutes.Job
             if (backJobParameter != null)
             {
                 if (backJobParameter.Parameter.IsNullOrEmpty()) // 无参数方法
+{
                     DynamicService.ResolveMethod(backJobParameter.ServiceName, backJobParameter.Method);
-                else // 有参数方法
+                } else // 有参数方法
+ {
                     DynamicService.ResolveMethod(backJobParameter.ServiceName, backJobParameter.Method,
                         backJobParameter.Parameter);
+                }
             }
         }
     }

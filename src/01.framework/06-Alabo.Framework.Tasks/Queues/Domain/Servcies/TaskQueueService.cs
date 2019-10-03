@@ -34,8 +34,9 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
 
         public ServiceResult AddBackJob(BackJobParameter backJobParameter)
         {
-            if (backJobParameter == null || backJobParameter.ModuleId.IsGuidNullOrEmpty())
+            if (backJobParameter == null || backJobParameter.ModuleId.IsGuidNullOrEmpty()) {
                 throw new ArgumentNullException(nameof(backJobParameter));
+            }
 
             // 是否检查上一个队列的执行情况
             if (backJobParameter.CheckLastOne)
@@ -43,7 +44,9 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
                 var find = GetSingle(r =>
                     r.ModuleId == backJobParameter.ModuleId && r.Status == QueueStatus.Pending &&
                     r.Type == TaskQueueType.Once);
-                if (find != null) return ServiceResult.FailedWithMessage("上一次任务未完成，请稍后重试");
+                if (find != null) {
+                    return ServiceResult.FailedWithMessage("上一次任务未完成，请稍后重试");
+                }
             }
 
             var model = new TaskQueue
@@ -55,7 +58,10 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
                 Type = TaskQueueType.Once,
                 CreateTime = DateTime.Now
             };
-            if (model.UserId == 0) model.UserId = HttpWeb.UserId;
+            if (model.UserId == 0) {
+                model.UserId = HttpWeb.UserId;
+            }
+
             var result = Add(model);
             if (result)
             {
@@ -75,7 +81,9 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
         /// <exception cref="ArgumentNullException">parameter</exception>
         public void Add(long userId, Guid moduleId, object parameter)
         {
-            if (parameter == null) throw new ArgumentNullException(nameof(parameter));
+            if (parameter == null) {
+                throw new ArgumentNullException(nameof(parameter));
+            }
 
             var parameterString = JsonConvert.SerializeObject(parameter);
             var model = new TaskQueue
@@ -100,7 +108,9 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
         /// <exception cref="ArgumentNullException">parameter</exception>
         public void Add(long userId, Guid moduleId, DateTime executionTime, object parameter)
         {
-            if (parameter == null) throw new ArgumentNullException(nameof(parameter));
+            if (parameter == null) {
+                throw new ArgumentNullException(nameof(parameter));
+            }
 
             var parameterString = JsonConvert.SerializeObject(parameter);
             var model = new TaskQueue
@@ -130,7 +140,9 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
         public void Add(long userId, Guid moduleId, TaskQueueType type, DateTime executionTime, int executionTimes,
             object parameter)
         {
-            if (parameter == null) throw new ArgumentNullException(nameof(parameter));
+            if (parameter == null) {
+                throw new ArgumentNullException(nameof(parameter));
+            }
 
             var parameterString = JsonConvert.SerializeObject(parameter);
             var model = new TaskQueue
@@ -160,11 +172,13 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
                 find.HandleTime = DateTime.Now;
                 find.ExecutionTimes++;
                 //单次执行任务直接终结
-                if (find.Type == TaskQueueType.Once)
+                if (find.Type == TaskQueueType.Once) {
                     find.Status = QueueStatus.Handled;
+                }
                 //非单次执行任务根据执行次数终结
-                else if (find.MaxExecutionTimes > 0 && find.ExecutionTimes >= find.MaxExecutionTimes)
+                else if (find.MaxExecutionTimes > 0 && find.ExecutionTimes >= find.MaxExecutionTimes) {
                     find.Status = QueueStatus.Handled;
+                }
 
                 Repository<ITaskQueueRepository>().UpdateSingle(find);
             }
@@ -232,7 +246,9 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
         /// <exception cref="ArgumentNullException">query</exception>
         public IEnumerable<TaskQueue> GetList(IPredicateQuery<TaskQueue> query)
         {
-            if (query == null) throw new ArgumentNullException(nameof(query));
+            if (query == null) {
+                throw new ArgumentNullException(nameof(query));
+            }
 
             return null;
             //   return Repository<ITaskQueueRepository>().GetList(query);
@@ -246,7 +262,9 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
         /// <exception cref="ArgumentNullException">query</exception>
         public PagedList<TaskQueue> GetPagedList(IPageQuery<TaskQueue> query)
         {
-            if (query == null) throw new ArgumentNullException(nameof(query));
+            if (query == null) {
+                throw new ArgumentNullException(nameof(query));
+            }
 
             return null;
             // return Repository<ITaskQueueRepository>().GetPage(query);
@@ -260,7 +278,9 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
         /// <exception cref="ArgumentNullException">moduleId</exception>
         public TaskQueue GetSingle(Guid moduleId)
         {
-            if (moduleId == Guid.Empty) throw new ArgumentNullException(nameof(moduleId));
+            if (moduleId == Guid.Empty) {
+                throw new ArgumentNullException(nameof(moduleId));
+            }
 
             return Repository<ITaskQueueRepository>()
                 .GetSingle(q => q.ModuleId == moduleId && q.Status != QueueStatus.Pending);
@@ -307,7 +327,9 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
                 foreach (var type in moduleTypes)
                 {
                     var attribute = type.GetTypeInfo().GetAttribute<TaskModuleAttribute>();
-                    if (attribute != null) taskModuleAttributes.Add(type, attribute);
+                    if (attribute != null) {
+                        taskModuleAttributes.Add(type, attribute);
+                    }
                 }
 
                 ObjectCache.Set(cacheKey, taskModuleAttributes);
@@ -326,7 +348,9 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
             pageList.ForEach(r =>
             {
                 var taskModuleAttribute = GetTaskModuleAttribute(r.ModuleId);
-                if (taskQueueModuleIds.TryGetValue(r.ModuleId, out var name)) r.ModuleName = name;
+                if (taskQueueModuleIds.TryGetValue(r.ModuleId, out var name)) {
+                    r.ModuleName = name;
+                }
             });
             return pageList;
         }
@@ -338,7 +362,9 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
             pageList.Foreach(r =>
             {
                 var taskModuleAttribute = GetTaskModuleAttribute(r.ModuleId);
-                if (taskQueueModuleIds.TryGetValue(r.ModuleId, out var name)) r.ModuleName = name;
+                if (taskQueueModuleIds.TryGetValue(r.ModuleId, out var name)) {
+                    r.ModuleName = name;
+                }
             });
             return pageList.ToList();
         }

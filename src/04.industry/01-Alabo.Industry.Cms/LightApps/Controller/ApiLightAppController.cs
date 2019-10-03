@@ -21,7 +21,9 @@ namespace Alabo.Industry.Cms.LightApps.Controller
         [HttpPost]
         public ApiResult Add([FromBody] LightAppAddView input)
         {
-            if (input.TableName.IsNullOrEmpty()) return ApiResult.Failure("未正确指定数据表表名");
+            if (input.TableName.IsNullOrEmpty()) {
+                return ApiResult.Failure("未正确指定数据表表名");
+            }
 
             var rs = Ioc.Resolve<ILightAppService>().Add(input.TableName, input.DataJson);
 
@@ -31,7 +33,9 @@ namespace Alabo.Industry.Cms.LightApps.Controller
         [HttpPost]
         public ApiResult Update([FromBody] LightAppAddView input)
         {
-            if (input.TableName.IsNullOrEmpty()) return ApiResult.Failure("未正确指定数据表表名");
+            if (input.TableName.IsNullOrEmpty()) {
+                return ApiResult.Failure("未正确指定数据表表名");
+            }
 
             var rs = Ioc.Resolve<ILightAppService>().Update(input.TableName, input.DataJson, input.Id.ToObjectId());
 
@@ -41,7 +45,9 @@ namespace Alabo.Industry.Cms.LightApps.Controller
         [HttpDelete]
         public ApiResult Delete(string tableName, string id)
         {
-            if (!ObjectId.TryParse(id, out var oId)) return ApiResult.Failure("参数id不是有效的ObjectId!");
+            if (!ObjectId.TryParse(id, out var oId)) {
+                return ApiResult.Failure("参数id不是有效的ObjectId!");
+            }
 
             var rs = Ioc.Resolve<ILightAppService>().Delete(tableName, oId);
 
@@ -56,7 +62,9 @@ namespace Alabo.Industry.Cms.LightApps.Controller
                 {"_id", id}
             };
             var model = Ioc.Resolve<ILightAppService>().GetSingle(tableName, dic);
-            if (model != null) return ApiResult.Success(model);
+            if (model != null) {
+                return ApiResult.Success(model);
+            }
 
             return ApiResult.Failure("未查到相应数据");
         }

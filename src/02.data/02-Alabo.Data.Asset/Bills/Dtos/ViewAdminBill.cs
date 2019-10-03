@@ -189,7 +189,10 @@ namespace Alabo.App.Asset.Bills.Dtos
                 //throw new ValidException("非法请求");//去掉非法请求,默认请求自己下级的
             }
 
-            if (autoModel.Filter == FilterType.User) model.ForEach(r => { r.UserName = r.User?.GetUserName(); });
+            if (autoModel.Filter == FilterType.User) {
+                model.ForEach(r => { r.UserName = r.User?.GetUserName(); });
+            }
+
             return ToPageResult(model);
         }
 

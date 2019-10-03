@@ -95,11 +95,15 @@ namespace Alabo.Cloud.Shop.ShopSaleReport.Services
 
                 // 上一级用户更新推荐业绩
                 var userConfig = Resolve<IAutoConfigService>().GetValue<TeamConfig>();
-                if (userConfig.TeamLevel < 2) userConfig.TeamLevel = 2;
+                if (userConfig.TeamLevel < 2) {
+                    userConfig.TeamLevel = 2;
+                }
 
                 foreach (var parent in userMap.ParentMapList)
                 {
-                    if (parent.ParentLevel > userConfig.TeamLevel) break;
+                    if (parent.ParentLevel > userConfig.TeamLevel) {
+                        break;
+                    }
 
                     var parentUserMap = Resolve<IUserMapService>().GetSingle(parent.UserId);
                     if (parentUserMap != null)
@@ -178,7 +182,7 @@ namespace Alabo.Cloud.Shop.ShopSaleReport.Services
         {
             var dictionary = new Dictionary<Guid, string>();
             var str = string.Empty;
-            if (priceStyleSales != null)
+            if (priceStyleSales != null) {
                 priceStyleSales.Foreach(r =>
                 {
                     str =
@@ -187,6 +191,7 @@ namespace Alabo.Cloud.Shop.ShopSaleReport.Services
                     dictionary.Add(r.PriceStyleId, str);
                     // str += $"{r.GradeName}({r.Count})  ";
                 });
+            }
 
             return Tuple.Create(dictionary, str);
         }
@@ -212,7 +217,9 @@ namespace Alabo.Cloud.Shop.ShopSaleReport.Services
                     // 所有商城的下单商品
                     var priceStyleProducts =
                         order.Products.Where(r => productSkuItems.Select(e => e.ProductSkuId).Contains(r.SkuId));
-                    if (priceStyleProducts.Count() <= 0) continue;
+                    if (priceStyleProducts.Count() <= 0) {
+                        continue;
+                    }
 
                     var priceStyleSale = shopSale.PriceStyleSales.FirstOrDefault(r => r.PriceStyleId == priceStyle.Id);
                     if (priceStyleSale == null)

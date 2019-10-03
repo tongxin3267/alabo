@@ -39,7 +39,7 @@ namespace Alabo.App.Share.OpenTasks.Modules
             ShareBaseConfig config, IList<ITaskResult> resultList, string configName = "")
         {
             //如果分润金额小于等于0,则退出
-            if (shareAmount > 0 && shareUser != null)
+            if (shareAmount > 0 && shareUser != null) {
                 if (shareUser.Status == Status.Normal)
                 {
                     parameter.TryGetValue("OrderId", out long orderId);
@@ -69,7 +69,9 @@ namespace Alabo.App.Share.OpenTasks.Modules
                     {
                         var ruleAmount = shareAmount * rule.Ratio;
                         var ruleMoneyType = moneyTypes.FirstOrDefault(r => r.Id == rule.MoneyTypeId);
-                        if (ruleMoneyType == null) continue;
+                        if (ruleMoneyType == null) {
+                            continue;
+                        }
                         //ExecuteResult<ITaskResult>.Cancel($"资产分润规则设置错误，货币类型Id{ruleMoneyType.Id}");
 
                         var shareResult = new ShareResult
@@ -110,6 +112,7 @@ namespace Alabo.App.Share.OpenTasks.Modules
                         resultList.Add(queueResult);
                     }
                 }
+            }
         }
     }
 }

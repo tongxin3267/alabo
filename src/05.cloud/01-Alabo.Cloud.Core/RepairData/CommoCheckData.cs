@@ -25,7 +25,9 @@ namespace _01_Alabo.Cloud.Core.RepairData
             {
                 moneyTypes.ForEach(r =>
                 {
-                    if (r.Currency == Currency.Cny) r.IsDefault = true;
+                    if (r.Currency == Currency.Cny) {
+                        r.IsDefault = true;
+                    }
                 });
                 Ioc.Resolve<IAutoConfigService>().AddOrUpdate<MoneyTypeConfig>(moneyTypes);
             }

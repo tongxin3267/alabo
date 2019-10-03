@@ -28,15 +28,19 @@ namespace Alabo.App.Asset.Coupons.Controllers
         public ApiResult<Coupon> GetCouponView([FromQuery] string id = "")
         {
             var view = new Coupon();
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<Coupon>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
+
             if (!string.IsNullOrEmpty(id) && !id.Equals("undefined"))
             {
                 view = Resolve<ICouponService>().GetSingle(id.ToObjectId());
-                if (view != null)
+                if (view != null) {
                     if (view.StartPeriodOfValidity.ToString() != "0001/1/1 0:00:00" ||
-                        view.EndPeriodOfValidity.ToString() != "0001/1/1 0:00:00")
+                        view.EndPeriodOfValidity.ToString() != "0001/1/1 0:00:00") {
                         view.AfterDays = -1;
+                    }
+                }
             }
 
             return ApiResult.Success(view);
@@ -50,9 +54,14 @@ namespace Alabo.App.Asset.Coupons.Controllers
         [HttpPost]
         public ApiResult SaveCoupon([FromBody] Coupon coupon)
         {
-            if (coupon == null) return ApiResult.Failure("����Ϊ�գ�");
+            if (coupon == null) {
+                return ApiResult.Failure("����Ϊ�գ�");
+            }
 
-            if (string.IsNullOrEmpty(coupon.Name)) return ApiResult.Failure("�Ż�ȯ���Ʋ���Ϊ�գ�");
+            if (string.IsNullOrEmpty(coupon.Name)) {
+                return ApiResult.Failure("�Ż�ȯ���Ʋ���Ϊ�գ�");
+            }
+
             var serviceResult = Resolve<ICouponService>().EditOrAdd(coupon);
 
             return ApiResult.Success("����ɹ�");
@@ -76,10 +85,14 @@ namespace Alabo.App.Asset.Coupons.Controllers
         [HttpDelete]
         public ApiResult DeleteCoupon(string id)
         {
-            if (string.IsNullOrEmpty(id)) return ApiResult.Failure("����idΪ�գ�ɾ��ʧ�ܣ�");
+            if (string.IsNullOrEmpty(id)) {
+                return ApiResult.Failure("����idΪ�գ�ɾ��ʧ�ܣ�");
+            }
+
             var result = Resolve<ICouponService>().Delete(id);
-            if (result)
+            if (result) {
                 return ApiResult.Success("ɾ���ɹ�!");
+            }
 
             return ApiResult.Failure("ɾ��ʧ�ܣ�");
         }

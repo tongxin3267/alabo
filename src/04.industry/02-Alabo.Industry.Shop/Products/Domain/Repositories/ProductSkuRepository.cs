@@ -146,7 +146,9 @@ namespace Alabo.Industry.Shop.Products.Domain.Repositories
         public IEnumerable<SkuPrice> GetSkuPrice(long productId = 0)
         {
             var sqlWhere = string.Empty;
-            if (productId > 0) sqlWhere = $" and Shop_Product.Id={productId} ";
+            if (productId > 0) {
+                sqlWhere = $" and Shop_Product.Id={productId} ";
+            }
 
             var sql =
                 $@"SELECT   dbo.Shop_ProductSku.Id, dbo.Shop_ProductSku.ProductId, dbo.Shop_ProductSku.Price, dbo.Shop_Product.PriceStyleId, dbo.Shop_Product.MinCashRate

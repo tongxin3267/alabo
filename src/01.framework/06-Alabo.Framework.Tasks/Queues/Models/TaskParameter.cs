@@ -12,7 +12,9 @@ namespace Alabo.Framework.Tasks.Queues.Models
 
         public void AddValue<T>(string name, T value)
         {
-            if (_dataCache.ContainsKey(name)) throw new ArgumentException($"data with key {name} is in parameter.");
+            if (_dataCache.ContainsKey(name)) {
+                throw new ArgumentException($"data with key {name} is in parameter.");
+            }
 
             _dataCache.Add(name, value);
             _dataTypeCache.Add(name, typeof(T));
@@ -20,7 +22,9 @@ namespace Alabo.Framework.Tasks.Queues.Models
 
         public void AddValue(string name, object value)
         {
-            if (_dataCache.ContainsKey(name)) throw new ArgumentException($"data with key {name} is in parameter.");
+            if (_dataCache.ContainsKey(name)) {
+                throw new ArgumentException($"data with key {name} is in parameter.");
+            }
 
             _dataCache.Add(name, value);
             _dataTypeCache.Add(name, value.GetType());
@@ -30,8 +34,9 @@ namespace Alabo.Framework.Tasks.Queues.Models
         {
             if (_dataTypeCache.ContainsKey(name))
             {
-                if (_dataTypeCache[name] != typeof(T))
+                if (_dataTypeCache[name] != typeof(T)) {
                     throw new ArgumentException($"update data with key {name} error, the type not equals");
+                }
 
                 _dataCache[name] = value;
             }
@@ -44,19 +49,23 @@ namespace Alabo.Framework.Tasks.Queues.Models
         public T GetValue<T>(string name)
         {
             var find = GetValue(name);
-            if (find.GetType() != typeof(T))
+            if (find.GetType() != typeof(T)) {
                 throw new ArgumentException(
                     $"value with key {name} of type {typeof(T).Name} not equals data type {find.GetType().Name}");
+            }
 
-            if (find.GetType() != typeof(T)) find = Convert.ChangeType(find, typeof(T));
+            if (find.GetType() != typeof(T)) {
+                find = Convert.ChangeType(find, typeof(T));
+            }
 
             return (T) find;
         }
 
         public object GetValue(string name)
         {
-            if (!_dataCache.TryGetValue(name, out var find))
+            if (!_dataCache.TryGetValue(name, out var find)) {
                 throw new KeyNotFoundException($"value with key {name} not found.");
+            }
 
             return find;
         }
@@ -76,7 +85,9 @@ namespace Alabo.Framework.Tasks.Queues.Models
                 return false;
             }
 
-            if (find.GetType() != typeof(T)) find = Convert.ChangeType(find, typeof(T));
+            if (find.GetType() != typeof(T)) {
+                find = Convert.ChangeType(find, typeof(T));
+            }
 
             value = (T) find;
             return true;

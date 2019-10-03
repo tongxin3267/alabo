@@ -31,7 +31,9 @@ namespace Alabo.Framework.Core.Tenants.Controllers
         [AllowAnonymous]
         public ApiResult DeleteTenant([FromBody] TenantInit tenantInit)
         {
-            if (!this.IsFormValid()) return ApiResult.Failure(this.FormInvalidReason());
+            if (!this.IsFormValid()) {
+                return ApiResult.Failure(this.FormInvalidReason());
+            }
 
             tenantInit.IsTenant = false;
             var result = Resolve<ITenantCreateService>().DeleteTenant(tenantInit);
@@ -51,7 +53,9 @@ namespace Alabo.Framework.Core.Tenants.Controllers
         [AllowAnonymous]
         public ApiResult InitAll([FromBody] TenantInit tenantInit)
         {
-            if (!this.IsFormValid()) return ApiResult.Failure(this.FormInvalidReason());
+            if (!this.IsFormValid()) {
+                return ApiResult.Failure(this.FormInvalidReason());
+            }
 
             tenantInit.IsTenant = false;
             var result = Resolve<ITenantCreateService>().InitTenantDefaultData(tenantInit);
@@ -71,7 +75,10 @@ namespace Alabo.Framework.Core.Tenants.Controllers
         [AllowAnonymous]
         public ApiResult InitDefault([FromBody] TenantInit tenantInit)
         {
-            if (!this.IsFormValid()) return ApiResult.Failure(this.FormInvalidReason());
+            if (!this.IsFormValid()) {
+                return ApiResult.Failure(this.FormInvalidReason());
+            }
+
             tenantInit.IsTenant = true;
             var result = Resolve<ITenantCreateService>().InitTenantDefaultData(tenantInit);
             return ToResult(result);
@@ -90,7 +97,9 @@ namespace Alabo.Framework.Core.Tenants.Controllers
         [AllowAnonymous]
         public ApiResult InitTheme([FromBody] TenantInit tenantInit)
         {
-            if (!this.IsFormValid()) return ApiResult.Failure(this.FormInvalidReason());
+            if (!this.IsFormValid()) {
+                return ApiResult.Failure(this.FormInvalidReason());
+            }
 
             var result = Resolve<ITenantCreateService>().InitTenantTheme(tenantInit);
             return ToResult(result);
@@ -135,7 +144,9 @@ namespace Alabo.Framework.Core.Tenants.Controllers
         [AllowAnonymous]
         public ApiResult CreateSassTenant([FromBody] Tenant tenant)
         {
-            if (tenant == null) return ApiResult.Failure("对象不能为空");
+            if (tenant == null) {
+                return ApiResult.Failure("对象不能为空");
+            }
 
             var result = Resolve<ITenantCreateService>().InitTenantDatabase(tenant.Sign);
             if (result.Succeeded)

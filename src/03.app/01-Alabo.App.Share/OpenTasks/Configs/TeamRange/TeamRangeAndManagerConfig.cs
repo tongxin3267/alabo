@@ -86,29 +86,44 @@ namespace Alabo.App.Share.OpenTasks.Configs.TeamRange
         public override ExecuteResult<ITaskResult[]> Execute(TaskParameter parameter)
         {
             var baseResult = base.Execute(parameter);
-            if (baseResult.Status != ResultStatus.Success)
+            if (baseResult.Status != ResultStatus.Success) {
                 return ExecuteResult<ITaskResult[]>.Cancel("未找到触发会员的Parent Map.");
+            }
 
             var userMap = Resolve<IUserMapService>().GetParentMapFromCache(ShareOrderUser.Id);
             var map = userMap.ParentMap.DeserializeJson<List<ParentMap>>();
-            if (map == null) return ExecuteResult<ITaskResult[]>.Cancel("未找到触发会员的Parent Map.");
+            if (map == null) {
+                return ExecuteResult<ITaskResult[]>.Cancel("未找到触发会员的Parent Map.");
+            }
+
             IList<ITaskResult> resultList = new List<ITaskResult>();
             // 获取最大极差比例
             var maxRate = Configuration.TeamRangeRateItems.Max(r => r.MaxRate);
             for (var i = 0; i < TeamLevel; i++)
             {
-                if (map.Count < i + 1) break;
+                if (map.Count < i + 1) {
+                    break;
+                }
+
                 var item = map[i];
                 base.GetShareUser(item.UserId, out var shareUser); //从基类获取分润用户
                 var shareGrade = Resolve<IGradeService>().GetGrade(shareUser.GradeId);
-                if (shareGrade == null) continue;
+                if (shareGrade == null) {
+                    continue;
+                }
+
                 var userRule = Configuration.TeamRangeRateItems.FirstOrDefault(r => r.GradeId == shareGrade.Id);
-                if (userRule == null) continue;
+                if (userRule == null) {
+                    continue;
+                }
                 //当前分润用户最大极差
                 var shareUserRate = userRule.MaxRate;
                 //剩余极差比例
                 var ratio = maxRate - shareUserRate;
-                if (ratio <= 0) continue;
+                if (ratio <= 0) {
+                    continue;
+                }
+
                 var shareAmount = ratio * BaseFenRunAmount; // 极差分润
                 CreateResultList(shareAmount, ShareOrderUser, shareUser, parameter, Configuration, resultList);
 

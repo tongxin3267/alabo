@@ -17,7 +17,9 @@ namespace Alabo.Domains.EntityHistory
         /// <param name="newValue">新值</param>
         public void Add(string propertyName, string description, string oldValue, string newValue)
         {
-            if (string.IsNullOrWhiteSpace(propertyName)) return;
+            if (string.IsNullOrWhiteSpace(propertyName)) {
+                return;
+            }
 
             Add(new ChangeValue(propertyName, description, oldValue, newValue));
         }
@@ -28,7 +30,9 @@ namespace Alabo.Domains.EntityHistory
         public override string ToString()
         {
             var result = new StringBuilder();
-            foreach (var item in this) result.AppendLine(item.ToString());
+            foreach (var item in this) {
+                result.AppendLine(item.ToString());
+            }
 
             return result.ToString();
         }

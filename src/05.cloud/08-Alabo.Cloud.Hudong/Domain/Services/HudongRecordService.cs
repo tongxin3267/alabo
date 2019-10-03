@@ -25,9 +25,11 @@ namespace Alabo.App.Share.HuDong.Domain.Services
         /// <returns></returns>
         public ServiceResult AddRecord(HudongRecord record)
         {
-            if (record != null)
-                if (!Add(record))
+            if (record != null) {
+                if (!Add(record)) {
                     return ServiceResult.FailedWithMessage("����ʧ��");
+                }
+            }
 
             return ServiceResult.Success;
         }

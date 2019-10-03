@@ -32,7 +32,9 @@ namespace Alabo.Web.Filters
         /// </summary>
         private void WriteLog(ExceptionContext context)
         {
-            if (context == null) return;
+            if (context == null) {
+                return;
+            }
 
             var log = Log.GetLog(context).Caption("WebApi全局异常");
             context.Exception.Log(log);

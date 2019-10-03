@@ -116,14 +116,18 @@ namespace Alabo.App.Share.OpenTasks
         public override ExecuteResult<ITaskResult[]> Execute(TaskParameter parameter)
         {
             var baseResult = base.Execute(parameter);
-            if (baseResult.Status != ResultStatus.Success) return baseResult;
+            if (baseResult.Status != ResultStatus.Success) {
+                return baseResult;
+            }
 
             if (parameter.TryGetValue(TriggerTypeKey, out int triggerType))
             {
                 TriggerType = (TriggerType)triggerType;
                 if (Configuration.TriggerType != TriggerType) //触发类型与配置的触发类型不一致，直接退出
+{
                     return ExecuteResult<ITaskResult[]>.Cancel(
                         $"模块实际触发类型{triggerType}与模块设置的触发类型{Configuration.TriggerType}不一致,退出模块.");
+                }
             }
             else
             {
@@ -135,8 +139,9 @@ namespace Alabo.App.Share.OpenTasks
             {
                 parameter.TryGetValue(FenRunAmountKey, out decimal amount);
                 BaseFenRunAmount = amount;
-                if (BaseFenRunAmount <= 0)
+                if (BaseFenRunAmount <= 0) {
                     return ExecuteResult<ITaskResult[]>.Cancel($"分润基数价格获取为0. BaseFenRunAmount={BaseFenRunAmount}");
+                }
             }
 
             // 触发类型为会员升级
@@ -144,9 +149,10 @@ namespace Alabo.App.Share.OpenTasks
             {
                 parameter.TryGetValue(FenRunAmountKey, out decimal amount);
                 BaseFenRunAmount = amount;
-                if (BaseFenRunAmount <= 0)
+                if (BaseFenRunAmount <= 0) {
                     return ExecuteResult<ITaskResult[]>.Cancel(
                         $"分润基数价格获取为0. BaseFenRunAmount={BaseFenRunAmount},会员Id为{ShareOrder.UserId}");
+                }
             }
 
             // TODO 2019年9月24日 触发类型为商城购物
@@ -209,7 +215,9 @@ namespace Alabo.App.Share.OpenTasks
             // 触发类型为内部连锁
             if (TriggerType == TriggerType.Chain)
             {
-                if (!parameter.TryGetValue(DefaultAmountKey, out decimal amount)) amount = 0;
+                if (!parameter.TryGetValue(DefaultAmountKey, out decimal amount)) {
+                    amount = 0;
+                }
 
                 BaseFenRunAmount = amount;
             }
@@ -220,16 +228,20 @@ namespace Alabo.App.Share.OpenTasks
             {
                 parameter.TryGetValue(FenRunAmountKey, out decimal amount);
                 BaseFenRunAmount = amount;
-                if (BaseFenRunAmount <= 0)
+                if (BaseFenRunAmount <= 0) {
                     return ExecuteResult<ITaskResult[]>.Cancel($"分润基数价格获取为0. BaseFenRunAmount={BaseFenRunAmount}");
+                }
             }
 
-            if (!parameter.TryGetValue("ShareOrderId", out long shareOrderId))
+            if (!parameter.TryGetValue("ShareOrderId", out long shareOrderId)) {
                 return ExecuteResult<ITaskResult[]>.Fail("分润订单ShareOrderId未找到.");
+            }
             // 线程停止3s中，重新读取数据库，保证ShardeOdeer状态正确，不重复触发
             //Thread.Sleep(TimeSpan.FromSeconds(3));
             var shareOrder = Resolve<IShareOrderService>().GetSingleNative(shareOrderId);
-            if (shareOrder == null) return ExecuteResult<ITaskResult[]>.Fail("分润订单未找到.");
+            if (shareOrder == null) {
+                return ExecuteResult<ITaskResult[]>.Fail("分润订单未找到.");
+            }
             // TODO 2019年9月24日 重构 商城模式
             //if (shareOrder.Status != ShareOrderStatus.Pending) {
             //    return ExecuteResult<ITaskResult[]>.Fail("分润订单原生查询，状态不正常.");
@@ -287,7 +299,9 @@ namespace Alabo.App.Share.OpenTasks
                 foreach (var item in parameter)
                 {
                     var account = Ioc.Resolve<IAccountService>().GetAccount(item.ReceiveUserId, item.MoneyTypeId);
-                    if (account == null) continue;
+                    if (account == null) {
+                        continue;
+                    }
 
                     var moneyType = Ioc.Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>()
                         .FirstOrDefault(r => r.Id == item.MoneyTypeId);
@@ -316,7 +330,9 @@ namespace Alabo.App.Share.OpenTasks
             decimal DividendAmount, string orderSerial = "")
         {
             //日志模板对应字段替换
-            if (string.IsNullOrWhiteSpace(Configuration.TemplateRule.LoggerTemplate)) return string.Empty;
+            if (string.IsNullOrWhiteSpace(Configuration.TemplateRule.LoggerTemplate)) {
+                return string.Empty;
+            }
 
             return Configuration.TemplateRule.LoggerTemplate.Replace("{OrderUserName}", TriggerUser.UserName)
                 .Replace("{ShareUserNickName}", TriggerUser.Name).Replace("{ShareUserRealName}", TriggerUser.Name)
@@ -343,9 +359,13 @@ namespace Alabo.App.Share.OpenTasks
                 if (Configuration.StageRule.timeType == TimeType.Day)
                 {
                     //如果已经过1点则第二天执行
-                    if (TimeNow > StartTime) StartTime = StartTime.AddDays(1);
-                    for (var i = 0; i < Configuration.StageRule.StagePeriods; i++)
+                    if (TimeNow > StartTime) {
+                        StartTime = StartTime.AddDays(1);
+                    }
+
+                    for (var i = 0; i < Configuration.StageRule.StagePeriods; i++) {
                         resultList.Add(StartTime.AddDays(i * Configuration.StageRule.StageInterval));
+                    }
                 }
                 //每个星期几
                 else if (Configuration.StageRule.timeType == TimeType.Week)
@@ -353,18 +373,26 @@ namespace Alabo.App.Share.OpenTasks
                     var week = Convert.ToInt32(TimeNow.DayOfWeek);
                     //获取第一期分润开始时间
                     StartTime = StartTime.AddDays(Configuration.StageRule.StageInterval - week);
-                    if (TimeNow > StartTime) StartTime.AddDays(7);
-                    for (var i = 0; i < Configuration.StageRule.StagePeriods; i++)
+                    if (TimeNow > StartTime) {
+                        StartTime.AddDays(7);
+                    }
+
+                    for (var i = 0; i < Configuration.StageRule.StagePeriods; i++) {
                         resultList.Add(StartTime.AddDays(i * 7));
+                    }
                 }
                 //每月几号
                 else if (Configuration.StageRule.timeType == TimeType.Month)
                 {
                     //获取第一期分润开始时间
                     StartTime = StartTime.AddDays(Configuration.StageRule.StageInterval - StartTime.Day);
-                    if (TimeNow > StartTime) StartTime = StartTime.AddMonths(1);
-                    for (var i = 0; i < Configuration.StageRule.StagePeriods; i++)
+                    if (TimeNow > StartTime) {
+                        StartTime = StartTime.AddMonths(1);
+                    }
+
+                    for (var i = 0; i < Configuration.StageRule.StagePeriods; i++) {
                         resultList.Add(StartTime.AddMonths(i));
+                    }
                 }
             }
 
@@ -498,7 +526,10 @@ namespace Alabo.App.Share.OpenTasks
         protected void TryAddToQueue(IList<ITaskResult> resultList, Guid moduleId)
         {
             var queue = Ioc.Resolve<ITaskQueueService>().GetSingle(moduleId);
-            if (queue == null) return;
+            if (queue == null) {
+                return;
+            }
+
             var result = new TaskExecutes.ResultModel.TaskQueueResult<TaskQueueParameter>(Context, queue.Id);
             resultList.Add(result);
         }

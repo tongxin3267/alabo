@@ -18,13 +18,19 @@ namespace Alabo.Datas.Stores.Update.EfCore
         public bool Update(Action<TEntity> updateAction, Expression<Func<TEntity, bool>> predicate = null)
         {
             var query = UnitOfWork.Set<TEntity>().AsQueryable();
-            if (predicate != null) query = query.Where(predicate);
+            if (predicate != null) {
+                query = query.Where(predicate);
+            }
 
             var source = query.ToList();
-            foreach (var item in source) updateAction(item);
+            foreach (var item in source) {
+                updateAction(item);
+            }
 
             var count = UnitOfWork.SaveChanges();
-            if (count >= 0) return true;
+            if (count >= 0) {
+                return true;
+            }
 
             return false;
         }
@@ -37,14 +43,18 @@ namespace Alabo.Datas.Stores.Update.EfCore
         {
             UnitOfWork.Update(entity);
             var count = UnitOfWork.SaveChanges();
-            if (count > 0) return true;
+            if (count > 0) {
+                return true;
+            }
 
             return false;
         }
 
         public bool UpdateNoTracking([Valid] TEntity entity)
         {
-            if (entity == null) throw new ArgumentNullException(nameof(entity));
+            if (entity == null) {
+                throw new ArgumentNullException(nameof(entity));
+            }
 
             var oldEntity = FindByIdNoTracking(entity.Id);
             Update(entity, oldEntity);
@@ -57,7 +67,9 @@ namespace Alabo.Datas.Stores.Update.EfCore
         /// <param name="entities">实体集合</param>
         public virtual void UpdateMany(IEnumerable<TEntity> entities)
         {
-            if (entities == null) throw new ArgumentNullException(nameof(entities));
+            if (entities == null) {
+                throw new ArgumentNullException(nameof(entities));
+            }
 
             var newEntities = entities.ToList();
             var oldEntities = FindByIdsNoTracking(newEntities.Select(t => t.Id));
@@ -69,10 +81,14 @@ namespace Alabo.Datas.Stores.Update.EfCore
         public void UpdateMany(Action<TEntity> updateAction, Expression<Func<TEntity, bool>> predicate = null)
         {
             var query = UnitOfWork.Set<TEntity>().AsQueryable();
-            if (predicate != null) query = query.Where(predicate);
+            if (predicate != null) {
+                query = query.Where(predicate);
+            }
 
             var source = query.ToList();
-            foreach (var item in source) updateAction(item);
+            foreach (var item in source) {
+                updateAction(item);
+            }
 
             UnitOfWork.SaveChanges();
         }
@@ -89,9 +105,13 @@ namespace Alabo.Datas.Stores.Update.EfCore
         /// <param name="oldEntity">旧实体</param>
         protected void Update(TEntity newEntity, TEntity oldEntity)
         {
-            if (newEntity == null) throw new ArgumentNullException(nameof(newEntity));
+            if (newEntity == null) {
+                throw new ArgumentNullException(nameof(newEntity));
+            }
 
-            if (oldEntity == null) throw new ArgumentNullException(nameof(oldEntity));
+            if (oldEntity == null) {
+                throw new ArgumentNullException(nameof(oldEntity));
+            }
 
             ValidateVersion(newEntity, oldEntity);
             var entity = Find(newEntity.Id);

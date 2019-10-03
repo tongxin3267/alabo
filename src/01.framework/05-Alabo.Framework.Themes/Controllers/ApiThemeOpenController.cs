@@ -23,7 +23,9 @@ namespace Alabo.Framework.Themes.Controllers
         public ApiResult PublishAsync([FromBody] ThemePublish parameter)
         {
             var tenant = HttpWeb.Tenant;
-            if (!this.IsFormValid()) return ApiResult.Failure(this.FormInvalidReason());
+            if (!this.IsFormValid()) {
+                return ApiResult.Failure(this.FormInvalidReason());
+            }
 
             var result = Resolve<IThemeOpenService>().Publish(parameter);
             return ToResult(result);

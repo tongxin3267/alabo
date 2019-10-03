@@ -31,45 +31,55 @@ namespace Alabo.App.Share.TaskExecutes.Job
             var taskManager = scope.Resolve<TaskManager>();
 
             var httpContextAccessor = scope.Resolve<IHttpContextAccessor>();
-            if (httpContextAccessor != null)
+            if (httpContextAccessor != null) {
                 httpContextAccessor.HttpContext = new DefaultHttpContext
                 {
                     RequestServices = scope.Resolve<IServiceProvider>()
                 };
+            }
             // 平台暂停分润
             if (RuntimeContext.Current.WebsiteConfig.IsDevelopment == false)
             {
                 var adminCenterConfig = scope.Resolve<IAutoConfigService>().GetValue<AdminCenterConfig>();
-                if (adminCenterConfig.StartFenrun == false) return;
+                if (adminCenterConfig.StartFenrun == false) {
+                    return;
+                }
             }
 
             var unHandledIdList = scope.Resolve<IShareOrderRepository>().GetUnHandledIdList();
 
-            if (unHandledIdList != null && unHandledIdList.Count > 0)
-                foreach (var id in unHandledIdList)
+            if (unHandledIdList != null && unHandledIdList.Count > 0) {
+                foreach (var id in unHandledIdList) {
                     HandleQueueAsync(taskActuator, taskManager, id, scope);
+                }
+            }
         }
 
         private void HandleQueueAsync(ITaskActuator taskActuator, TaskManager taskManager, long queueId, IScope scope)
         {
             var shareOrder = scope.Resolve<IShareOrderService>().GetSingle(r => r.Id == queueId);
 
-            if (shareOrder != null)
+            if (shareOrder != null) {
                 try
                 {
-                    if (shareOrder.Status != ShareOrderStatus.Pending)
+                    if (shareOrder.Status != ShareOrderStatus.Pending) {
                         throw new MessageQueueHandleException(queueId, "分润订单状态不是待处理状态");
+                    }
 
                     var order = scope.Resolve<IShareOrderRepository>().GetSingleNative(shareOrder.Id);
-                    if (order.Status != ShareOrderStatus.Pending)
+                    if (order.Status != ShareOrderStatus.Pending) {
                         throw new MessageQueueHandleException(queueId, "分润订单状态不是待处理状态");
+                    }
 
                     var moduleTypeArray = taskManager.GetModulePriceArray();
-                    foreach (var type in moduleTypeArray)
+                    foreach (var type in moduleTypeArray) {
                         if (shareOrder.TriggerType == TriggerType.Order)
                         {
                             // 确认收货的时候，产生分润
-                            if (shareOrder.SystemStatus != ShareOrderSystemStatus.Pending) continue;
+                            if (shareOrder.SystemStatus != ShareOrderSystemStatus.Pending) {
+                                continue;
+                            }
+
                             taskActuator.ExecuteTask(type, shareOrder,
                                 new { ShareOrderId = queueId, shareOrder.TriggerType, OrderId = shareOrder.EntityId });
                         }
@@ -83,6 +93,7 @@ namespace Alabo.App.Share.TaskExecutes.Job
                                     BaseFenRunAmount = shareOrder.Amount
                                 });
                         }
+                    }
 
                     //更新成功
                     scope.Resolve<IShareOrderService>().Update(r =>
@@ -106,6 +117,7 @@ namespace Alabo.App.Share.TaskExecutes.Job
                         shareOrder.Summary = ex.Message;
                     }, r => r.Id == shareOrder.Id);
                 }
+            }
         }
     }
 }

@@ -29,8 +29,9 @@ namespace Alabo.Industry.Shop.Carts.Controllers
         [ApiAuth]
         public ApiResult AddCart([FromBody] OrderProductInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var serviceResult = Resolve<ICartService>().AddCart(parameter);
             return ToResult(serviceResult);
@@ -46,7 +47,10 @@ namespace Alabo.Industry.Shop.Carts.Controllers
         public ApiResult<StoreProductSku> GetCart([FromQuery] long loginUserId)
         {
             var result = Resolve<ICartService>().GetCart(loginUserId);
-            if (result.Item1.Succeeded) return ApiResult.Success(result.Item2);
+            if (result.Item1.Succeeded) {
+                return ApiResult.Success(result.Item2);
+            }
+
             var storeProductSku = new StoreProductSku();
             return ApiResult.Success(storeProductSku);
             //return ApiResult.Failure<StoreProductSku>(result.Item1.ToString(), MessageCodes.ParameterValidationFailure);
@@ -61,8 +65,9 @@ namespace Alabo.Industry.Shop.Carts.Controllers
         [ApiAuth]
         public ApiResult RemoveCart([FromQuery] OrderProductInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var serviceResult = Resolve<ICartService>().RemoveCart(parameter);
             return ToResult(serviceResult);
@@ -77,8 +82,9 @@ namespace Alabo.Industry.Shop.Carts.Controllers
         [ApiAuth]
         public ApiResult UpdateCart([FromBody] OrderProductInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var serviceResult = Resolve<ICartService>().UpdateCart(parameter);
             return ToResult(serviceResult);

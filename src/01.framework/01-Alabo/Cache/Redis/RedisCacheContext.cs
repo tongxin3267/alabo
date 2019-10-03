@@ -73,8 +73,9 @@ namespace Alabo.Cache.Redis
         {
             get
             {
-                if (_objectCacheDatabase == null && _redisConnection != null && _redisConnection.IsConnected)
+                if (_objectCacheDatabase == null && _redisConnection != null && _redisConnection.IsConnected) {
                     _objectCacheDatabase = _redisConnection.GetDatabase(ObjectCacheIndex);
+                }
 
                 return _objectCacheDatabase;
             }
@@ -87,8 +88,9 @@ namespace Alabo.Cache.Redis
         {
             get
             {
-                if (_listCacheDatabase == null && _redisConnection != null && _redisConnection.IsConnected)
+                if (_listCacheDatabase == null && _redisConnection != null && _redisConnection.IsConnected) {
                     _listCacheDatabase = _redisConnection.GetDatabase(ListCacheIndex);
+                }
 
                 return _listCacheDatabase;
             }
@@ -101,8 +103,9 @@ namespace Alabo.Cache.Redis
         {
             get
             {
-                if (_hashCacheDatabase == null && _redisConnection != null && _redisConnection.IsConnected)
+                if (_hashCacheDatabase == null && _redisConnection != null && _redisConnection.IsConnected) {
                     _hashCacheDatabase = _redisConnection.GetDatabase(HashCacheIndex);
+                }
 
                 return _hashCacheDatabase;
             }
@@ -115,8 +118,9 @@ namespace Alabo.Cache.Redis
         {
             get
             {
-                if (_fileCacheDatabase == null && _redisConnection != null && _redisConnection.IsConnected)
+                if (_fileCacheDatabase == null && _redisConnection != null && _redisConnection.IsConnected) {
                     _fileCacheDatabase = _redisConnection.GetDatabase(FileCacheIndex);
+                }
 
                 return _fileCacheDatabase;
             }

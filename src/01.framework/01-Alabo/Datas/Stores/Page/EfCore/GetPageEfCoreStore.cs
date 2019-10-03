@@ -21,8 +21,9 @@ namespace Alabo.Datas.Stores.Page.EfCore
         public PagedList<TEntity> GetPagedList(IPageQuery<TEntity> queryCriteria)
         {
             var query = UnitOfWork.Set<TEntity>();
-            if (queryCriteria == null)
+            if (queryCriteria == null) {
                 return PagedList<TEntity>.Create(query.ToList(), query.Count(), query.Count(), 1);
+            }
 
             var count = queryCriteria.ExecuteCountQuery(query);
             var queryResult = queryCriteria.Execute(query);
@@ -33,9 +34,13 @@ namespace Alabo.Datas.Stores.Page.EfCore
 
         public PagedList<TEntity> GetPagedList(Expression<Func<TEntity, bool>> predicate, int pageSize, int pageIndex)
         {
-            if (pageSize < 1) pageSize = 1;
+            if (pageSize < 1) {
+                pageSize = 1;
+            }
 
-            if (pageIndex < 1) pageIndex = 1;
+            if (pageIndex < 1) {
+                pageIndex = 1;
+            }
 
             var source = ToQueryable(predicate)
                 .Skip((pageIndex - 1) * pageSize)
@@ -61,9 +66,13 @@ namespace Alabo.Datas.Stores.Page.EfCore
         public IEnumerable<TEntity> GetListByPage(Expression<Func<TEntity, bool>> predicate, int pageSize,
             int pageIndex)
         {
-            if (pageSize < 1) pageSize = 1;
+            if (pageSize < 1) {
+                pageSize = 1;
+            }
 
-            if (pageIndex < 1) pageIndex = 1;
+            if (pageIndex < 1) {
+                pageIndex = 1;
+            }
 
             var source = ToQueryable(predicate)
                 .OrderBy(r => r.Id)
@@ -76,9 +85,13 @@ namespace Alabo.Datas.Stores.Page.EfCore
         public IEnumerable<TEntity> GetListByPageDesc(Expression<Func<TEntity, bool>> predicate, int pageSize,
             int pageIndex)
         {
-            if (pageSize < 1) pageSize = 1;
+            if (pageSize < 1) {
+                pageSize = 1;
+            }
 
-            if (pageIndex < 1) pageIndex = 1;
+            if (pageIndex < 1) {
+                pageIndex = 1;
+            }
 
             var source = ToQueryable(predicate)
                 .OrderByDescending(r => r.Id)

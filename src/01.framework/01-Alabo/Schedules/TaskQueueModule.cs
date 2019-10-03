@@ -83,7 +83,9 @@ namespace Alabo.Schedules
             foreach (var item in fields)
             {
                 var displayAttribute = item.GetAttribute<DisplayAttribute>();
-                if (displayAttribute == null) throw new ValidException("请设置DisplayAttribute特性");
+                if (displayAttribute == null) {
+                    throw new ValidException("请设置DisplayAttribute特性");
+                }
 
                 var value = item.GetValue(null);
                 result.Add(Guid.Parse(value.ToString()), displayAttribute.Name);

@@ -37,7 +37,9 @@ namespace Alabo.Data.Things.Goodss.Controllers
         [HttpPost]
         public ApiResult Edit([FromBody] GoodsLine view)
         {
-            if (!this.IsFormValid()) return ApiResult.Failure(string.Empty, this.FormInvalidReason());
+            if (!this.IsFormValid()) {
+                return ApiResult.Failure(string.Empty, this.FormInvalidReason());
+            }
 
             return ApiResult.Success("����ɹ�");
         }

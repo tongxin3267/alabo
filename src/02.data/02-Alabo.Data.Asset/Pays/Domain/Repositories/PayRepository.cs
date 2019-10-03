@@ -64,13 +64,15 @@ namespace Alabo.App.Asset.Pays.Domain.Repositories
             var result = ServiceResult.Success;
 
             //扣除解冻后的虚拟资产(支付成功后，冻结资产减少）
-            foreach (var payPair in pay.AccountPayPair)
+            foreach (var payPair in pay.AccountPayPair) {
                 if (payPair.Value > 0)
                 {
                     var accountSql =
                         $"select FreezeAmount from Asset_Account where MoneyTypeId='{payPair.Key}' and UserId={pay.UserId}";
                     var freezeAmount = RepositoryContext.ExecuteScalar(accountSql).ToDecimal();
-                    if (freezeAmount < payPair.Value) return ServiceResult.FailedWithMessage("冻结账户余额不足");
+                    if (freezeAmount < payPair.Value) {
+                        return ServiceResult.FailedWithMessage("冻结账户余额不足");
+                    }
 
                     // 扣除冻结资产
                     sql =
@@ -89,6 +91,7 @@ namespace Alabo.App.Asset.Pays.Domain.Repositories
                             })";
                     sqlList.Add(sql);
                 }
+            }
 
             //支付成功
             if (isPaySucess)
@@ -102,7 +105,9 @@ namespace Alabo.App.Asset.Pays.Domain.Repositories
                 {
                     //更新支付状态
                     var orderStatus = 2; // 代发货
-                    if (pay.PayExtension.IsGroupBuy) orderStatus = 10; // 如果是团购商品，状态改成待分享
+                    if (pay.PayExtension.IsGroupBuy) {
+                        orderStatus = 10; // 如果是团购商品，状态改成待分享
+                    }
 
                     sql =
                         $"update  Shop_Order set OrderStatus={orderStatus},PayId='{pay.Id}'  where OrderStatus=1 and id  in  ({entityIdList.ToSqlString()})";
@@ -113,7 +118,10 @@ namespace Alabo.App.Asset.Pays.Domain.Repositories
                         // 如果是管理员代付
                         var orderUserId = pay.UserId;
                         if (pay.PayExtension?.OrderUser?.Id >= 0) // 订单Id使用实际订单Id
+{
                             orderUserId = pay.PayExtension.OrderUser.Id;
+                        }
+
                         if (pay.PayType == PayType.AdminPay)
                         {
                             var order = EntityDynamicService.GetSingleOrder((long)item);
@@ -122,8 +130,9 @@ namespace Alabo.App.Asset.Pays.Domain.Repositories
 
                         // 通过支付记录，修改分入订单的触发类型
                         var triggerType = TriggerType.Order;
-                        if (Convert.ToInt16(pay.PayExtension.TriggerType) > 0)
+                        if (Convert.ToInt16(pay.PayExtension.TriggerType) > 0) {
                             triggerType = pay.PayExtension.TriggerType;
+                        }
 
                         //TODO 2019年9月22日  订单完成后分润 重构
                         //var shareOrderConfig = Ioc.Resolve<IAutoConfigService>().GetValue<ShopOrderShareConfig>();
@@ -190,7 +199,9 @@ namespace Alabo.App.Asset.Pays.Domain.Repositories
                     if (resolveResult.Item1.Succeeded)
                     {
                         var afterSqlList = (IList<string>)resolveResult.Item2;
-                        if (afterSqlList.Count > 0) sqlList.AddRange(afterSqlList);
+                        if (afterSqlList.Count > 0) {
+                            sqlList.AddRange(afterSqlList);
+                        }
                     }
                 }
 
@@ -200,8 +211,8 @@ namespace Alabo.App.Asset.Pays.Domain.Repositories
             //支付失败
             else
             {
-                if (pay.Type == CheckoutType.Order)
-                    foreach (var payPair in pay.AccountPayPair)
+                if (pay.Type == CheckoutType.Order) {
+                    foreach (var payPair in pay.AccountPayPair) {
                         if (payPair.Value > 0)
                         {
                             // 减少冻结资产
@@ -225,18 +236,24 @@ namespace Alabo.App.Asset.Pays.Domain.Repositories
                                     })";
                             sqlList.Add(sql);
                         }
+                    }
+                }
 
                 //更新数据库
             }
 
             var count = RepositoryContext.ExecuteSqlList(sqlList);
             if (count <= 0) //      Ioc. Resolve<IPayService>().Log("订单支付后，数据库相关处理失败", LogsLevel.Error);
+{
                 return ServiceResult.FailedWithMessage("订单支付后，数据库相关处理失败");
+            }
 
             // 支付成功后处理
             var afterSuccess = pay.PayExtension?.AfterSuccess;
             if (afterSuccess != null) // 动态调用执行
+{
                 DynamicService.ResolveMethod(afterSuccess.ServiceName, afterSuccess.Method, entityIdList);
+            }
 
             return result;
         }

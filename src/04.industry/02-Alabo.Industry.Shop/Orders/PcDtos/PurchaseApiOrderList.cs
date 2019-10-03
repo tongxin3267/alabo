@@ -45,22 +45,31 @@ namespace Alabo.Industry.Shop.Orders.PcDtos
             var model = ToQuery<PlatformApiOrderList>();
 
             var expressionQuery = new ExpressionQuery<Order>();
-            if (model.OrderStatus > 0) expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
+            if (model.OrderStatus > 0) {
+                expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
+            }
 
             //  expressionQuery.And(e => e.StoreId.IsObjectIdNullOrEmpty());
             expressionQuery.And(e => e.UserId > 0);
 
-            if (Enum.IsDefined(typeof(OrderType), model.OrderType))
+            if (Enum.IsDefined(typeof(OrderType), model.OrderType)) {
                 expressionQuery.And(e => e.OrderType == model.OrderType);
+            }
+
             if (autoModel.Filter == FilterType.Admin)
             {
                 var isAdmin = Resolve<IUserService>().IsAdmin(autoModel.BasicUser.Id);
-                if (!isAdmin) throw new ValidException("非管理员不能查看平台订单");
+                if (!isAdmin) {
+                    throw new ValidException("非管理员不能查看平台订单");
+                }
             }
             else if (autoModel.Filter == FilterType.Store)
             {
                 var store = Resolve<IStoreService>().GetUserStore(autoModel.BasicUser.Id);
-                if (store == null) throw new ValidException("您不是供应商,暂无店铺");
+                if (store == null) {
+                    throw new ValidException("您不是供应商,暂无店铺");
+                }
+
                 expressionQuery.And(e => e.StoreId == store.Id.ToString());
                 // 供应商
                 expressionQuery.And(e => e.OrderExtension.IsSupplierView);

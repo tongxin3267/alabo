@@ -18,8 +18,9 @@ namespace Alabo.Domains.Repositories.EFCore.Context
         public static EF.DbSet<T> DbSet<T>(this IRepositoryContext context)
             where T : class
         {
-            if (!(context is EfCoreRepositoryContext))
+            if (!(context is EfCoreRepositoryContext)) {
                 throw new InvalidCastException("can not convert context to EntityFrameworkRepositoryContext");
+            }
 
             return (context as EfCoreRepositoryContext).Set<T>();
         }
@@ -31,8 +32,9 @@ namespace Alabo.Domains.Repositories.EFCore.Context
         /// <exception cref="InvalidCastException">can not convert context to EntityFrameworkRepositoryContext</exception>
         public static DbTransaction GetDbTransaction(this IRepositoryContext context)
         {
-            if (!(context is EfCoreRepositoryContext))
+            if (!(context is EfCoreRepositoryContext)) {
                 throw new InvalidCastException("can not convert context to EntityFrameworkRepositoryContext");
+            }
 
             var efContext = context as EfCoreRepositoryContext;
             var transaction = context.UnitOfWork.Database.CurrentTransaction;

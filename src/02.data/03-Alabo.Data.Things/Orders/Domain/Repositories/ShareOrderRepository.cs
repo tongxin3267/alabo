@@ -57,7 +57,9 @@ namespace Alabo.Data.Things.Orders.Domain.Repositories
             var shareOrder = new ShareOrder();
             using (var dr = RepositoryContext.ExecuteDataReader(sql))
             {
-                if (dr.Read()) shareOrder = ReadShareOrder(dr);
+                if (dr.Read()) {
+                    shareOrder = ReadShareOrder(dr);
+                }
             }
 
             return shareOrder;
@@ -90,7 +92,9 @@ namespace Alabo.Data.Things.Orders.Domain.Repositories
             IList<long> list = new List<long>();
             using (var dr = RepositoryContext.ExecuteDataReader(sql))
             {
-                while (dr.Read()) list.Add(dr.Read<long>("Id"));
+                while (dr.Read()) {
+                    list.Add(dr.Read<long>("Id"));
+                }
             }
 
             return list;
@@ -122,7 +126,9 @@ namespace Alabo.Data.Things.Orders.Domain.Repositories
             DbParameter[] parameters = null;
 
             IList<long> shareUsreIds = new List<long>();
-            foreach (var shareResult in resultList) shareUsreIds.Add(shareResult.ShareUser.Id);
+            foreach (var shareResult in resultList) {
+                shareUsreIds.Add(shareResult.ShareUser.Id);
+            }
 
             //TODO 9月重构注释
             var shareUsreAccounts =
@@ -131,11 +137,15 @@ namespace Alabo.Data.Things.Orders.Domain.Repositories
 
             foreach (var shareResult in resultList)
             {
-                if (shareOrderId == 0) shareOrderId = shareResult.ShareOrder.Id;
+                if (shareOrderId == 0) {
+                    shareOrderId = shareResult.ShareOrder.Id;
+                }
 
                 var account = shareUsreAccounts.FirstOrDefault(r =>
                     r.MoneyTypeId == shareResult.MoneyTypeId && r.UserId == shareResult.ShareUser.Id);
-                if (account == null) break;
+                if (account == null) {
+                    break;
+                }
 
                 var afterAccount = account.Amount + shareResult.Amount; //账户金额
                 //更新资产
@@ -194,7 +204,9 @@ namespace Alabo.Data.Things.Orders.Domain.Repositories
                 // 更新货币类型的账号金额，否则多个账号增加金额时会导致账号金额一样
                 shareUsreAccounts.Foreach(r =>
                 {
-                    if (r.MoneyTypeId == shareResult.MoneyTypeId) r.Amount += shareResult.Amount;
+                    if (r.MoneyTypeId == shareResult.MoneyTypeId) {
+                        r.Amount += shareResult.Amount;
+                    }
                 });
 
                 //添加的短信队列
@@ -231,7 +243,7 @@ namespace Alabo.Data.Things.Orders.Domain.Repositories
             var upgradePointsUserIds = resultList
                 .Where(r => r.MoneyTypeId == Guid.Parse("E97CCD1E-1478-49BD-BFC7-E73A5D699006"))
                 .Select(r => r.ShareUser.Id).ToList();
-            if (upgradePointsUserIds.Count > 0)
+            if (upgradePointsUserIds.Count > 0) {
                 foreach (var userId in upgradePointsUserIds)
                 {
                     var taskQueue = new TaskQueue
@@ -260,6 +272,7 @@ namespace Alabo.Data.Things.Orders.Domain.Repositories
                     sqlList.Add(sql);
                     dbParameterList.Add(parameters);
                 }
+            }
 
             #endregion //获取得到升级点的用户，并加入升级队列
 
@@ -279,7 +292,9 @@ namespace Alabo.Data.Things.Orders.Domain.Repositories
                 //Thread.Sleep(1); // 停留1，防止重复触发
                 var shareOrderStatus = repositoryContext.ExecuteScalar(sql).ConvertToInt();
                 // 如果订单状态==1，在执行数据操作
-                if (shareOrderStatus == 1) repositoryContext.ExecuteBatch(sqlList, dbParameterList);
+                if (shareOrderStatus == 1) {
+                    repositoryContext.ExecuteBatch(sqlList, dbParameterList);
+                }
             }
             catch (Exception ex)
             {
@@ -392,7 +407,7 @@ namespace Alabo.Data.Things.Orders.Domain.Repositories
                 Ioc.Resolve<IUpgradeRecordService>().Add(upgradeRecord);
             }
 
-            if (sqlList.Count > 0)
+            if (sqlList.Count > 0) {
                 try
                 {
                     var excuteResult = repositoryContext.ExecuteBatch(sqlList, dbParameterList);
@@ -401,6 +416,7 @@ namespace Alabo.Data.Things.Orders.Domain.Repositories
                 {
                     Console.WriteLine(ex.Message);
                 }
+            }
         }
 
         public List<ShareOrder> GetList(List<long> EntityIds)
@@ -410,7 +426,9 @@ namespace Alabo.Data.Things.Orders.Domain.Repositories
                 $"SELECT T.Id,T.EntityId,T.UserId,T.CreateTime FROM Things_ShareOrder T WHERE EntityId IN ({EntityIds.ToSqlString()}) ";
             using (var dr = RepositoryContext.ExecuteDataReader(strSql))
             {
-                while (dr.Read()) shareOrders.Add(ShareOrder(dr));
+                while (dr.Read()) {
+                    shareOrders.Add(ShareOrder(dr));
+                }
             }
 
             return shareOrders;
@@ -434,8 +452,9 @@ namespace Alabo.Data.Things.Orders.Domain.Repositories
                 TriggerType = (TriggerType)reader["TriggerType"].ConvertToInt(0),
                 Status = (ShareOrderStatus)reader["Status"].ConvertToInt(0)
             };
-            if (!shareOrder.Extension.IsNullOrEmpty())
+            if (!shareOrder.Extension.IsNullOrEmpty()) {
                 shareOrder.ShareOrderExtension = shareOrder.Extension.ToObject<ShareOrderExtension>();
+            }
 
             return shareOrder;
         }

@@ -79,10 +79,15 @@ namespace Alabo.Data.People.Users.UI.AutoFrom
             var parameter = (FindPayPasswordAutoForm)model;
 
             if (!Resolve<IOpenService>().CheckVerifiyCode(parameter.Mobile, parameter.MobileVerifiyCode.ConvertToLong())
-            ) return ServiceResult.FailedWithMessage("验证码错误");
+            ) {
+                return ServiceResult.FailedWithMessage("验证码错误");
+            }
+
             var view = AutoMapping.SetValue<FindPasswordInput>(parameter);
             var result = Resolve<IUserDetailService>().FindPayPassword(view);
-            if (result.Succeeded) return ServiceResult.Success;
+            if (result.Succeeded) {
+                return ServiceResult.Success;
+            }
 
             var resList = result.ErrorMessages.ToList();
             return ServiceResult.FailedWithMessage(resList[0]);

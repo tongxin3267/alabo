@@ -19,7 +19,9 @@ namespace Alabo.Framework.Reports.Controllers
 
         public static ReportResult<T> Success(T result)
         {
-            if (result == null) throw new ArgumentNullException(nameof(result));
+            if (result == null) {
+                throw new ArgumentNullException(nameof(result));
+            }
 
             return new ReportResult<T>
             {

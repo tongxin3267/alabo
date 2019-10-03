@@ -25,8 +25,9 @@ namespace Alabo.Data.People.Employes.Controllers
         public ApiResult<UserOutput> LoginByToken([FromBody] GetLoginToken loginByToken)
         {
             Resolve<IGradeService>().GetUserGradeList();
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<UserOutput>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var loginInput = Resolve<IEmployeeService>().LoginByToken(loginByToken);
             var apiUserController = new ApiMemberController();
@@ -40,8 +41,10 @@ namespace Alabo.Data.People.Employes.Controllers
         [HttpPost]
         public ApiResult<RoleOuput> Login([FromBody] UserOutput userOutput)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<RoleOuput>(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
+
             var result = Resolve<IEmployeeService>().Login(userOutput);
             return ToResult(result);
         }

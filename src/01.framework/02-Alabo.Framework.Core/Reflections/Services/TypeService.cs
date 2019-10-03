@@ -56,7 +56,9 @@ namespace Alabo.Framework.Core.Reflections.Services
                 types = types.Where(r => !r.FullName.Contains("Test."));
                 types = types.Where(r => !r.FullName.Contains("Tests."));
                 types = types.Where(t => !t.GetInterfaces().Contains(typeof(IAutoConfig)));
-                if (types != null) ObjectCache.Set(cacheKey, types);
+                if (types != null) {
+                    ObjectCache.Set(cacheKey, types);
+                }
             }
 
             return types;
@@ -95,7 +97,9 @@ namespace Alabo.Framework.Core.Reflections.Services
                     .Where(t => t.GetInterfaces().Contains(typeof(IService)) ||
                                 t.GetInterfaces().Contains(typeof(IService))));
 
-                if (types != null) ObjectCache.Set(cacheKey, types);
+                if (types != null) {
+                    ObjectCache.Set(cacheKey, types);
+                }
             }
 
             return types;
@@ -111,10 +115,14 @@ namespace Alabo.Framework.Core.Reflections.Services
         public Dictionary<string, object> GetAutoConfigDictionary(string configName, bool isAllSelect = false)
         {
             var config = GetAutoConfigType(configName);
-            if (config == null) return null;
+            if (config == null) {
+                return null;
+            }
             //读取数据库问题
             var dictionary = new Dictionary<string, object>();
-            if (isAllSelect) dictionary.Add("-1", "所有");
+            if (isAllSelect) {
+                dictionary.Add("-1", "所有");
+            }
 
             //IList<JObject> list = Resolve<IAlaboAutoConfigService>().GetList(config.FullName);
 
@@ -200,8 +208,9 @@ namespace Alabo.Framework.Core.Reflections.Services
         public Dictionary<string, object> GetEnumSelectItem(Type type)
         {
             var selects = new Dictionary<string, object>();
-            foreach (Enum item in Enum.GetValues(type))
+            foreach (Enum item in Enum.GetValues(type)) {
                 selects.Add(Convert.ToInt16(item).ToString(), item.GetDisplayName());
+            }
 
             return selects;
         }
@@ -301,7 +310,9 @@ namespace Alabo.Framework.Core.Reflections.Services
                 foreach (var item in types)
                 {
                     var isapiType = Reflection.BaseTypeContains(item, typeof(ApiBaseController));
-                    if (isapiType) list.Add(item);
+                    if (isapiType) {
+                        list.Add(item);
+                    }
                 }
 
                 return list;
@@ -310,14 +321,20 @@ namespace Alabo.Framework.Core.Reflections.Services
 
         public string GetAppName(Type type)
         {
-            if (type == null) return string.Empty;
+            if (type == null) {
+                return string.Empty;
+            }
+
             var arrays = type.FullName.ToSplitList(".");
             return arrays[3];
         }
 
         public string GetGroupName(Type type)
         {
-            if (type == null) return string.Empty;
+            if (type == null) {
+                return string.Empty;
+            }
+
             var arrays = type.FullName.ToSplitList(".");
             return arrays[2];
         }
@@ -330,7 +347,9 @@ namespace Alabo.Framework.Core.Reflections.Services
             {
                 var name = item.Name.Substring(1, item.Name.Length - 1);
                 name = name.Replace("Service", "", StringComparison.OrdinalIgnoreCase).Replace("`2", "");
-                if (entityName.Contains(name)) result.Add(item);
+                if (entityName.Contains(name)) {
+                    result.Add(item);
+                }
             }
 
             return result;
@@ -342,7 +361,9 @@ namespace Alabo.Framework.Core.Reflections.Services
         /// <param name="entityName">比如：输入User 获取IAlaboUserService</param>
         public string GetServiceTypeByEntity(string entityName)
         {
-            if (entityName == null) throw new ValidException("实体名称不能为空");
+            if (entityName == null) {
+                throw new ValidException("实体名称不能为空");
+            }
 
             var serviceName = $"I{entityName}Service";
             return serviceName;
@@ -360,17 +381,29 @@ namespace Alabo.Framework.Core.Reflections.Services
 
         public string GetAppName(string fullName)
         {
-            if (fullName.IsNullOrEmpty()) return string.Empty;
+            if (fullName.IsNullOrEmpty()) {
+                return string.Empty;
+            }
+
             var arrays = fullName.ToSplitList(".");
-            if (arrays.Count < 3) return string.Empty;
+            if (arrays.Count < 3) {
+                return string.Empty;
+            }
+
             return arrays[3];
         }
 
         public string GetGroupName(string fullName)
         {
-            if (fullName.IsNullOrEmpty()) return string.Empty;
+            if (fullName.IsNullOrEmpty()) {
+                return string.Empty;
+            }
+
             var arrays = fullName.ToSplitList(".");
-            if (arrays.Count < 2) return string.Empty;
+            if (arrays.Count < 2) {
+                return string.Empty;
+            }
+
             return arrays[2];
         }
 
@@ -385,14 +418,19 @@ namespace Alabo.Framework.Core.Reflections.Services
                     Name = item.Name
                 };
                 if (enumType.Name == typeof(ZoneTime).Name || enumType.Name == typeof(Languages).Name ||
-                    enumType.Name == typeof(Country).Name || enumType.Name == typeof(ZoneTime).Name) continue;
+                    enumType.Name == typeof(Country).Name || enumType.Name == typeof(ZoneTime).Name) {
+                    continue;
+                }
+
                 enumType.KeyValue = new List<EnumKeyValue>();
                 foreach (var enumItem in Helpers.Enums.GetItems(item))
                 {
                     var key = enumItem.Value;
                     var name = enumItem.Text;
 
-                    if (name.IsNullOrEmpty()) continue;
+                    if (name.IsNullOrEmpty()) {
+                        continue;
+                    }
 
                     var keyValue = new EnumKeyValue
                     {

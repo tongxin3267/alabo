@@ -40,7 +40,9 @@ namespace Alabo.Cloud.Shop.Favorites.Domain.Services
             if (favoriteSingle == null)
             {
                 var result = Add(favorite);
-                if (result) return ServiceResult.Success;
+                if (result) {
+                    return ServiceResult.Success;
+                }
             }
 
             return ServiceResult.Failed;

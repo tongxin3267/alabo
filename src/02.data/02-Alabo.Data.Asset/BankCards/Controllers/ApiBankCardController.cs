@@ -30,8 +30,9 @@ namespace Alabo.App.Asset.BankCards.Controllers
         [ApiAuth]
         public ApiResult AddBankCard([FromBody] ApiBankCardInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var result = Resolve<IBankCardService>().AddOrUpdateBankCard(parameter);
             return ToResult(result);
@@ -46,7 +47,9 @@ namespace Alabo.App.Asset.BankCards.Controllers
         public ApiResult<IList<KeyValue>> GetList([FromQuery] long loginUserId)
         {
             var userId = AutoModel.BasicUser.Id;
-            if (userId < 0) return ApiResult.Failure<IList<KeyValue>>("用户不存在!");
+            if (userId < 0) {
+                return ApiResult.Failure<IList<KeyValue>>("用户不存在!");
+            }
 
             var result = Resolve<IBankCardService>().GetUserBankCardList(userId);
             return ApiResult.Success(result);
@@ -60,8 +63,9 @@ namespace Alabo.App.Asset.BankCards.Controllers
         [ApiAuth]
         public ApiResult Delete([FromQuery] ApiBankCardInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
+            }
 
             var result = Resolve<IBankCardService>().RomoveBankCard(parameter);
             return ToResult(result);
@@ -88,7 +92,10 @@ namespace Alabo.App.Asset.BankCards.Controllers
         public ApiResult DeleteBankCard(string id)
         {
             var result = Resolve<IBankCardService>().DeleteBankCard(id);
-            if (result.Succeeded) return ApiResult.Success("解绑成功");
+            if (result.Succeeded) {
+                return ApiResult.Success("解绑成功");
+            }
+
             return ApiResult.Failure("解绑失败");
         }
     }

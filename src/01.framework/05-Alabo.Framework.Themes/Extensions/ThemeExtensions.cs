@@ -16,7 +16,9 @@ namespace Alabo.Framework.Themes.Extensions
         /// <param name="clientType"></param>
         public static string ToClientUrl(this string value, ClientType clientType)
         {
-            if (value.IsNullOrEmpty()) return string.Empty;
+            if (value.IsNullOrEmpty()) {
+                return string.Empty;
+            }
 
             // pc和H5格式处理
             if (clientType == ClientType.PcWeb)
@@ -51,7 +53,9 @@ namespace Alabo.Framework.Themes.Extensions
         /// <param name="url"></param>
         public static string ToSafeUrl(this string url)
         {
-            if (url.IsNullOrEmpty()) return string.Empty;
+            if (url.IsNullOrEmpty()) {
+                return string.Empty;
+            }
 
             url = url.ToLower()
                 .Replace("/pages", string.Empty, StringComparison.OrdinalIgnoreCase)
@@ -59,9 +63,13 @@ namespace Alabo.Framework.Themes.Extensions
                 .Replace("pages/", string.Empty, StringComparison.OrdinalIgnoreCase)
                 // .Replace("page/", string.Empty, StringComparison.OrdinalIgnoreCase)
                 .Replace("///", "/").Replace("////", "/").Replace("//", "/");
-            if (url.Substring(0, 1) != "/") url = "/" + url;
+            if (url.Substring(0, 1) != "/") {
+                url = "/" + url;
+            }
 
-            if (url.Substring(url.Length - 1, 1) == "/") url = url.Substring(0, url.Length - 1);
+            if (url.Substring(url.Length - 1, 1) == "/") {
+                url = url.Substring(0, url.Length - 1);
+            }
 
             url = url.Replace("//", "/").Replace("///", "/").Replace("////", "/");
             return url.Replace("//", "/");
@@ -75,12 +83,18 @@ namespace Alabo.Framework.Themes.Extensions
         /// <param name="apiUrl"></param>
         public static string ToSafeApiUrl(this string apiUrl)
         {
-            if (apiUrl.IsNullOrEmpty()) return string.Empty;
+            if (apiUrl.IsNullOrEmpty()) {
+                return string.Empty;
+            }
 
             apiUrl = apiUrl.ToSafeUrl();
-            if (apiUrl.Substring(0, 1) != "/") apiUrl = "/" + apiUrl;
+            if (apiUrl.Substring(0, 1) != "/") {
+                apiUrl = "/" + apiUrl;
+            }
 
-            if (apiUrl.Substring(apiUrl.Length - 1, 1) == "/") apiUrl = apiUrl.Substring(0, apiUrl.Length - 1);
+            if (apiUrl.Substring(apiUrl.Length - 1, 1) == "/") {
+                apiUrl = apiUrl.Substring(0, apiUrl.Length - 1);
+            }
 
             return apiUrl.Trim().ToLower();
         }
@@ -91,13 +105,18 @@ namespace Alabo.Framework.Themes.Extensions
         /// <param name="componentPath"></param>
         public static string ToSafeComponentPath(this string componentPath)
         {
-            if (componentPath.IsNullOrEmpty()) return string.Empty;
+            if (componentPath.IsNullOrEmpty()) {
+                return string.Empty;
+            }
 
             componentPath = componentPath.ToSafeUrl();
-            if (componentPath.Substring(0, 1) != "/") componentPath = "/" + componentPath;
+            if (componentPath.Substring(0, 1) != "/") {
+                componentPath = "/" + componentPath;
+            }
 
-            if (componentPath.Substring(componentPath.Length - 1, 1) == "/")
+            if (componentPath.Substring(componentPath.Length - 1, 1) == "/") {
                 componentPath = componentPath.Substring(0, componentPath.Length - 1);
+            }
 
             return componentPath;
         }
@@ -110,7 +129,9 @@ namespace Alabo.Framework.Themes.Extensions
         {
             var nameList = path.ToSafeUrl().Replace("/", "").Replace("zk-", ".").Replace("-", ".").ToSplitList(".");
             var name = string.Empty;
-            foreach (var item in nameList) name += item.ToFristUpper();
+            foreach (var item in nameList) {
+                name += item.ToFristUpper();
+            }
 
             return name;
         }
@@ -122,7 +143,9 @@ namespace Alabo.Framework.Themes.Extensions
         /// <returns></returns>
         public static string UrlToPath(string url)
         {
-            if (url.IsNullOrEmpty()) return string.Empty;
+            if (url.IsNullOrEmpty()) {
+                return string.Empty;
+            }
 
             url = url.ToSafeUrl();
             if (url.Substring(0, 1) == "/")
@@ -139,7 +162,9 @@ namespace Alabo.Framework.Themes.Extensions
         {
             var nameList = url.ToSafeUrl().Replace("/", ".").ToSplitList(".");
             var name = string.Empty;
-            foreach (var item in nameList) name += item.ToFristUpper();
+            foreach (var item in nameList) {
+                name += item.ToFristUpper();
+            }
 
             return name;
         }

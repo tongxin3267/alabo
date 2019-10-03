@@ -34,10 +34,13 @@ namespace Alabo.Cache.Memory
         /// </summary>
         public void Clear()
         {
-            if (GetKeys() != null)
-                foreach (var item in GetKeys())
-                    if (!item.IsNullOrEmpty())
+            if (GetKeys() != null) {
+                foreach (var item in GetKeys()) {
+                    if (!item.IsNullOrEmpty()) {
                         Context?.OfMemory()?.MemoryCache?.Remove(item);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -56,7 +59,9 @@ namespace Alabo.Cache.Memory
         public string[] GetKeys()
         {
             TryGet(AllMemoryObjectCacheKey, out List<string> cacheList);
-            if (cacheList == null) return null;
+            if (cacheList == null) {
+                return null;
+            }
 
             return cacheList.ToArray();
         }
@@ -143,7 +148,9 @@ namespace Alabo.Cache.Memory
         {
             cacheKey = MemoryCacheExtensions.TenantCacheKey(cacheKey);
             TryGet(cacheKey, out T result);
-            if (result != null) return new CacheValue<T>(result, true);
+            if (result != null) {
+                return new CacheValue<T>(result, true);
+            }
 
             var item = dataRetriever?.Invoke();
             if (item != null)
@@ -175,7 +182,9 @@ namespace Alabo.Cache.Memory
             ;
             key = MemoryCacheExtensions.TenantCacheKey(key);
             TryGet(AllMemoryObjectCacheKey, out List<string> cacheList);
-            if (cacheList == null) cacheList = new List<string>();
+            if (cacheList == null) {
+                cacheList = new List<string>();
+            }
 
             if (!cacheList.Contains(key))
             {
@@ -192,7 +201,9 @@ namespace Alabo.Cache.Memory
         {
             key = MemoryCacheExtensions.TenantCacheKey(key);
             TryGet(AllMemoryObjectCacheKey, out List<string> cacheList);
-            if (cacheList == null) cacheList = new List<string>();
+            if (cacheList == null) {
+                cacheList = new List<string>();
+            }
 
             if (cacheList.Contains(key))
             {
@@ -214,7 +225,9 @@ namespace Alabo.Cache.Memory
         {
             cacheKey = MemoryCacheExtensions.PublicCacheKey(cacheKey);
             TryGetPublic(cacheKey, out T result);
-            if (result != null) return new CacheValue<T>(result, true);
+            if (result != null) {
+                return new CacheValue<T>(result, true);
+            }
 
             var item = dataRetriever?.Invoke();
             if (item != null)
@@ -234,7 +247,9 @@ namespace Alabo.Cache.Memory
         public void SetPublic<T>(string key, T value)
         {
             key = MemoryCacheExtensions.PublicCacheKey(key);
-            if (!key.IsNullOrEmpty()) Context.OfMemory().MemoryCache.Set(key, value);
+            if (!key.IsNullOrEmpty()) {
+                Context.OfMemory().MemoryCache.Set(key, value);
+            }
         }
 
         /// <summary>

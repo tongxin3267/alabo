@@ -112,7 +112,9 @@ namespace Alabo.Runtime
         {
             var fullPathArray = new string[path1.Length + 1];
             fullPathArray[0] = BaseDirectory;
-            for (var i = 0; i < path1.Length; i++) fullPathArray[i + 1] = path1[i];
+            for (var i = 0; i < path1.Length; i++) {
+                fullPathArray[i + 1] = path1[i];
+            }
 
             return Path.Combine(fullPathArray);
         }
@@ -123,10 +125,14 @@ namespace Alabo.Runtime
         /// <param name="path">The path.</param>
         public string BuildWebUrl(string path)
         {
-            if (string.IsNullOrWhiteSpace(path)) return RuntimeContext.Current.WebsiteConfig.WebRootUrl;
+            if (string.IsNullOrWhiteSpace(path)) {
+                return RuntimeContext.Current.WebsiteConfig.WebRootUrl;
+            }
 
             path = path.Replace('\\', '/');
-            while (path.StartsWith("/")) path = path.Substring(1);
+            while (path.StartsWith("/")) {
+                path = path.Substring(1);
+            }
 
             return RuntimeContext.Current.WebsiteConfig.WebRootUrl + path;
         }

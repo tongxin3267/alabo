@@ -49,11 +49,12 @@ namespace Alabo.Framework.Themes.Domain.Services
         {
             // 读取默认模板
             Theme defaultTheme = null;
-            if (themePageInput.ClientType == ClientType.PcWeb)
+            if (themePageInput.ClientType == ClientType.PcWeb) {
                 defaultTheme = GetSingle(r =>
                     r.ClientType == themePageInput.ClientType && r.Type == themePageInput.Type && r.IsDefault);
-            else
+            } else {
                 defaultTheme = GetSingle(r => r.ClientType == themePageInput.ClientType && r.IsDefault);
+            }
 
             if (defaultTheme == null)
             {
@@ -66,7 +67,9 @@ namespace Alabo.Framework.Themes.Domain.Services
             }
 
             if (defaultTheme == null) // 从服务器上获取默认模板
+{
                 defaultTheme = Resolve<IThemeOpenService>().InitThemeFormServcie(themePageInput);
+            }
 
             return defaultTheme;
         }
@@ -76,26 +79,33 @@ namespace Alabo.Framework.Themes.Domain.Services
             //Todo Token.ProjectId引起的bug问题，获取模板
             var model = _themeClient.GetThemeAndThemePagesAsync(_serverAuthenticationManager.Token.Token,
                 objectId.ToObjectId(), _serverAuthenticationManager.Token.ProjectId).GetAwaiter();
-            if (model.GetResult() == null) throw new ValidException("模板数据获取失败");
+            if (model.GetResult() == null) {
+                throw new ValidException("模板数据获取失败");
+            }
 
             var publish = model.GetResult();
             publish.Tenant = HttpWeb.Tenant;
             var result = Resolve<IThemeOpenService>().Publish(publish);
-            if (!result.Succeeded) throw new ValidException("模板数据插入失败");
+            if (!result.Succeeded) {
+                throw new ValidException("模板数据插入失败");
+            }
         }
 
         public bool SetDefaultTheme(ObjectId themeId)
         {
             var find = GetSingle(themeId);
-            if (find == null) return false;
+            if (find == null) {
+                return false;
+            }
 
             var list = GetList(r => r.Type == find.Type);
             foreach (var item in list)
             {
-                if (item.Id == find.Id)
+                if (item.Id == find.Id) {
                     item.IsDefault = true;
-                else
+                } else {
                     item.IsDefault = false;
+                }
 
                 Update(item);
             }

@@ -40,7 +40,9 @@ namespace _01_Alabo.Cloud.Core.SendSms.Domain.Services
         public IList<SmsSend> GetAll(SendState input)
         {
             var query = new ExpressionQuery<SmsSend>();
-            if (input != SendState.All) query.And(r => r.State == input);
+            if (input != SendState.All) {
+                query.And(r => r.State == input);
+            }
 
             var list = GetList(query);
             return list;

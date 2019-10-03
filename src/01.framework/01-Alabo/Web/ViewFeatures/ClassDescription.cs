@@ -88,7 +88,9 @@ namespace Alabo.Web.ViewFeatures
             if (!objectCache.TryGet(cacheKey, out CacheClassDescription cacheDescription))
             {
                 cacheDescription = Create(baseType);
-                if (cacheDescription != null) objectCache.Set(cacheKey, cacheDescription);
+                if (cacheDescription != null) {
+                    objectCache.Set(cacheKey, cacheDescription);
+                }
             }
 
             if (cacheDescription != null)

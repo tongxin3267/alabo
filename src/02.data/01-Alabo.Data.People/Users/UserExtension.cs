@@ -19,7 +19,9 @@ namespace Alabo.Data.People.Users
             var dic = obj.ToObject<Dictionary<string, string>>();
             User user = null;
             dic.TryGetValue("BasicUser", out var value);
-            if (!value.IsNullOrEmpty()) user = value.ToObject<User>();
+            if (!value.IsNullOrEmpty()) {
+                user = value.ToObject<User>();
+            }
 
             return user;
         }

@@ -24,8 +24,9 @@ namespace Alabo.Test.Base.Core
                 var priority = 0;
 
                 foreach (var attr in testCase.TestMethod.Method.GetCustomAttributes(typeof(TestPriorityAttribute)
-                    .AssemblyQualifiedName))
+                    .AssemblyQualifiedName)) {
                     priority = attr.GetNamedArgument<int>("Priority");
+                }
 
                 GetOrCreate(sortedMethods, priority).Add(testCase);
             }
@@ -34,7 +35,9 @@ namespace Alabo.Test.Base.Core
             {
                 list.Sort((x, y) =>
                     StringComparer.OrdinalIgnoreCase.Compare(x.TestMethod.Method.Name, y.TestMethod.Method.Name));
-                foreach (var testCase in list) yield return testCase;
+                foreach (var testCase in list) {
+                    yield return testCase;
+                }
             }
         }
 
@@ -47,7 +50,9 @@ namespace Alabo.Test.Base.Core
             where TValue : new()
         {
             TValue result;
-            if (dictionary.TryGetValue(key, out result)) return result;
+            if (dictionary.TryGetValue(key, out result)) {
+                return result;
+            }
 
             result = new TValue();
             dictionary[key] = result;

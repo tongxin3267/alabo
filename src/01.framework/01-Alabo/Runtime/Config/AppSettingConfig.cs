@@ -43,9 +43,11 @@ namespace Alabo.Runtime.Config
             {
                 var value = "memory";
                 var setting = _systemConfiguration.GetSection("CacheScheme");
-                if (setting != null)
-                    if (!setting.Value.IsNullOrEmpty())
+                if (setting != null) {
+                    if (!setting.Value.IsNullOrEmpty()) {
                         value = setting.Value;
+                    }
+                }
 
                 return value;
             }
@@ -62,9 +64,11 @@ namespace Alabo.Runtime.Config
             {
                 var value = "mssql";
                 var setting = _systemConfiguration.GetSection("Database");
-                if (setting != null)
-                    if (!setting.Value.IsNullOrEmpty())
+                if (setting != null) {
+                    if (!setting.Value.IsNullOrEmpty()) {
                         value = setting.Value;
+                    }
+                }
 
                 return value;
             }
@@ -80,10 +84,14 @@ namespace Alabo.Runtime.Config
                 if (_clientHost.IsNullOrEmpty())
                 {
                     var setting = _systemConfiguration.GetSection("ClientHost");
-                    if (setting != null) _clientHost = setting.Value;
+                    if (setting != null) {
+                        _clientHost = setting.Value;
+                    }
                 }
 
-                if (string.IsNullOrWhiteSpace(_clientHost)) _clientHost = "https://s-open.qiniuniu99.com";
+                if (string.IsNullOrWhiteSpace(_clientHost)) {
+                    _clientHost = "https://s-open.qiniuniu99.com";
+                }
 
                 return _clientHost;
             }
@@ -101,7 +109,9 @@ namespace Alabo.Runtime.Config
                     var connections = _systemConfiguration.GetSection("ConnectionStrings");
                     var setting = connections.GetSection("ConnectionString");
 
-                    if (setting != null) _connectionString = setting.Value;
+                    if (setting != null) {
+                        _connectionString = setting.Value;
+                    }
                 }
 
                 return _connectionString;
@@ -133,13 +143,14 @@ namespace Alabo.Runtime.Config
                 {
                     var connections = _systemConfiguration.GetSection("ConnectionStrings");
                     var setting = connections.GetSection("MongoDbConnection");
-                    if (setting != null)
+                    if (setting != null) {
                         _mongoDbConnection = new MongoDbConnection
                         {
                             Database = setting.GetSection("Database").Value,
                             IsRoot = setting.GetSection("IsRoot").Value.ConvertToBool(),
                             ConnectionString = setting.GetSection("ConnectionString").Value
                         };
+                    }
                 }
 
                 return _mongoDbConnection;
@@ -207,7 +218,9 @@ namespace Alabo.Runtime.Config
             get
             {
                 var setting = _systemConfiguration.GetSection("UploadMaxSize");
-                if (setting != null) return setting.Value.ConvertToLong(20480000);
+                if (setting != null) {
+                    return setting.Value.ConvertToLong(20480000);
+                }
 
                 return 20480000;
             }
@@ -221,9 +234,11 @@ namespace Alabo.Runtime.Config
             get
             {
                 var setting = _systemConfiguration.GetSection("UploadFiles");
-                if (setting != null)
-                    if (setting.Value != null)
+                if (setting != null) {
+                    if (setting.Value != null) {
                         return setting.Value;
+                    }
+                }
 
                 return ".jpg,.jpeg,.png,.gif,.bmp,.rar,.zip,.7z,.ico,.icon";
             }
@@ -237,7 +252,9 @@ namespace Alabo.Runtime.Config
             get
             {
                 var setting = _systemConfiguration.GetSection("IsDevelopment");
-                if (setting != null) return setting.Value.ConvertToBool();
+                if (setting != null) {
+                    return setting.Value.ConvertToBool();
+                }
 
                 return false;
             }
@@ -251,7 +268,9 @@ namespace Alabo.Runtime.Config
             get
             {
                 var setting = _systemConfiguration.GetSection("IsTenant");
-                if (setting != null) return setting.Value.ConvertToBool();
+                if (setting != null) {
+                    return setting.Value.ConvertToBool();
+                }
 
                 return false;
             }

@@ -31,13 +31,19 @@ namespace Alabo.Tables.Domain.Services
         public ApiResult SendRaw(string mobile, string message)
         {
             //验证手机
-            if (!CheckMobile(mobile)) return ApiResult.Failure();
+            if (!CheckMobile(mobile)) {
+                return ApiResult.Failure();
+            }
             //验证消息是否为空
-            if (string.IsNullOrWhiteSpace(message)) throw new ArgumentNullException(nameof(message));
+            if (string.IsNullOrWhiteSpace(message)) {
+                throw new ArgumentNullException(nameof(message));
+            }
 
             //先使用v2
             var res = Ioc.Resolve<ISmsService>().Sent(mobile, message);
-            if (res.Code.ToUpper().Equal("SUCCESS")) return ApiResult.Success();
+            if (res.Code.ToUpper().Equal("SUCCESS")) {
+                return ApiResult.Success();
+            }
             //记录错误
             Ioc.Resolve<ITableService>().Log($"V2=>{mobile},{message};res=>{res.ToJson()}", LogsLevel.Error);
             //如果发送不成功尝试使用V1版本
@@ -84,12 +90,18 @@ namespace Alabo.Tables.Domain.Services
 
         public async Task SendRawAsync(string mobile, string message)
         {
-            if (!CheckMobile(mobile)) return;
+            if (!CheckMobile(mobile)) {
+                return;
+            }
 
-            if (string.IsNullOrWhiteSpace(message)) throw new ArgumentNullException(nameof(message));
+            if (string.IsNullOrWhiteSpace(message)) {
+                throw new ArgumentNullException(nameof(message));
+            }
             //先尝试发送V2版本
             var res = Ioc.Resolve<ISmsService>().Sent(mobile, message);
-            if (res.Code.ToUpper().Equal("SUCCESS")) return;
+            if (res.Code.ToUpper().Equal("SUCCESS")) {
+                return;
+            }
             //记录V2发送的错误
             Ioc.Resolve<ITableService>().Log("V2=>" + res.ToJson(), LogsLevel.Error);
             ////如果v2发送失败则用v1
@@ -102,9 +114,13 @@ namespace Alabo.Tables.Domain.Services
 
         public bool CheckMobile(string mobile)
         {
-            if (mobile.IsNullOrEmpty()) return false;
+            if (mobile.IsNullOrEmpty()) {
+                return false;
+            }
 
-            if (mobile.Length != 11) return false;
+            if (mobile.Length != 11) {
+                return false;
+            }
 
             var rg = new Regex(@"^0?(13[0-9]|15[0-9]|18[0-9]|17[0-9]|19[0-9]|16[0-9]|14[0-9])[0-9]{8}$");
             var m = rg.Match(mobile);
@@ -152,7 +168,9 @@ namespace Alabo.Tables.Domain.Services
                 if (verifiyCode.Code == code)
                 {
                     ObjectCache.Remove(cacheKey);
-                    if (verifiyCode.CreateTime > DateTime.Now.AddMinutes(-30)) return true;
+                    if (verifiyCode.CreateTime > DateTime.Now.AddMinutes(-30)) {
+                        return true;
+                    }
                 }
             }
 

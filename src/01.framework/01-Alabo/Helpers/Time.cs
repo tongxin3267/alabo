@@ -43,7 +43,9 @@ namespace Alabo.Helpers
         /// </summary>
         public static DateTime GetDateTime()
         {
-            if (_dateTime == null) return DateTime.Now;
+            if (_dateTime == null) {
+                return DateTime.Now;
+            }
 
             return _dateTime.Value;
         }

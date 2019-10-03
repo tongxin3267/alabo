@@ -76,10 +76,16 @@ namespace Alabo.App.Share.Rewards.Controllers
         [ApiAuth]
         public ApiResult<RewardApiOutput> Show([FromQuery] ApiBaseInput parameter)
         {
-            if (parameter.EntityId.ConvertToLong() <= 0) return ApiResult.Failure<RewardApiOutput>("输入参数不合法！");
+            if (parameter.EntityId.ConvertToLong() <= 0) {
+                return ApiResult.Failure<RewardApiOutput>("输入参数不合法！");
+            }
+
             var model = new RewardApiOutput();
             var rewardView = Resolve<IRewardService>().GetRewardView(parameter.EntityId.ConvertToLong());
-            if (rewardView == null) return ApiResult.Failure<RewardApiOutput>("该分润记录不存在！");
+            if (rewardView == null) {
+                return ApiResult.Failure<RewardApiOutput>("该分润记录不存在！");
+            }
+
             model.Reward = rewardView.Reward;
             var userOutput = AutoMapping.SetValue<UserOutput>(rewardView.OrderUser);
             userOutput.GradeName = Resolve<IGradeService>().GetGrade(rewardView.OrderUser.GradeId)?.Name;
@@ -143,11 +149,15 @@ namespace Alabo.App.Share.Rewards.Controllers
         [ApiAuth]
         public ApiResult<List<KeyValue>> Preview([FromQuery] PreviewInput parameter)
         {
-            if (!this.IsFormValid())
+            if (!this.IsFormValid()) {
                 return ApiResult.Failure<List<KeyValue>>(this.FormInvalidReason(),
                     MessageCodes.ParameterValidationFailure);
+            }
+
             var view = Resolve<IRewardService>().GetRewardView(parameter.Id.ConvertToLong());
-            if (view == null) return ApiResult.Failure<List<KeyValue>>("该分润记录不存在！");
+            if (view == null) {
+                return ApiResult.Failure<List<KeyValue>>("该分润记录不存在！");
+            }
             //var result = view.Reward.ToKeyValues();
             var result = AutoMapping.SetValue<RewardPriviewOutput>(view.Reward);
             result.MoneyTypeName = view.MoneyTypeName;

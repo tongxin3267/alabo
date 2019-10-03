@@ -59,11 +59,16 @@ namespace Alabo.Data.People.Users.Domain.Services
         public ServiceResult ConfirmPayPassword(string payPassWord, long loginUserId)
         {
             var model = Resolve<IUserDetailService>().GetSingle(u => u.UserId == loginUserId);
-            if (model == null) return ServiceResult.FailedWithMessage("您访问的用户不存在");
+            if (model == null) {
+                return ServiceResult.FailedWithMessage("您访问的用户不存在");
+            }
 
             var passWordHash = payPassWord.ToMd5HashString();
 
-            if (model.PayPassword == passWordHash) return ServiceResult.Success;
+            if (model.PayPassword == passWordHash) {
+                return ServiceResult.Success;
+            }
+
             return ServiceResult.FailedWithMessage("密码不正确");
         }
 
@@ -74,42 +79,55 @@ namespace Alabo.Data.People.Users.Domain.Services
         public ServiceResult ChangePassword(PasswordInput passwordInput, bool checkLastPassword = true)
         {
             var userDetail = Resolve<IUserService>().GetUserDetail(passwordInput.UserId);
-            if (userDetail == null) return ServiceResult.FailedWithMessage("您访问的用户不存在");
+            if (userDetail == null) {
+                return ServiceResult.FailedWithMessage("您访问的用户不存在");
+            }
 
             var result = ServiceResult.Failed;
-            if (passwordInput.Password.IsNullOrEmpty()) return ServiceResult.FailedWithMessage("密码不能为空");
+            if (passwordInput.Password.IsNullOrEmpty()) {
+                return ServiceResult.FailedWithMessage("密码不能为空");
+            }
 
-            if (passwordInput.Password.Length < 6) return ServiceResult.FailedWithMessage("密码长度不能小于6");
+            if (passwordInput.Password.Length < 6) {
+                return ServiceResult.FailedWithMessage("密码长度不能小于6");
+            }
 
-            if (passwordInput.Password != passwordInput.ConfirmPassword)
+            if (passwordInput.Password != passwordInput.ConfirmPassword) {
                 return ServiceResult.FailedWithMessage("确认密码与确认密码不相同");
+            }
 
             // 检查老密码
             if (checkLastPassword)
             {
-                if (passwordInput.Type == PasswordType.LoginPassword)
+                if (passwordInput.Type == PasswordType.LoginPassword) {
                     if (!passwordInput.LastPassword.ToMd5HashString()
-                        .Equals(userDetail.Detail.Password, StringComparison.OrdinalIgnoreCase))
+                        .Equals(userDetail.Detail.Password, StringComparison.OrdinalIgnoreCase)) {
                         return ServiceResult.FailedWithMessage("原始登录密码不正确");
+                    }
+                }
 
-                if (passwordInput.Type == PasswordType.PayPassword)
+                if (passwordInput.Type == PasswordType.PayPassword) {
                     if (!passwordInput.LastPassword.ToMd5HashString().Equals(userDetail.Detail.PayPassword,
-                        StringComparison.OrdinalIgnoreCase))
+                        StringComparison.OrdinalIgnoreCase)) {
                         return ServiceResult.FailedWithMessage("原始支付密码不正确");
+                    }
+                }
             }
 
-            if (passwordInput.Type == PasswordType.LoginPassword)
+            if (passwordInput.Type == PasswordType.LoginPassword) {
                 if (_userDetailRepository.ChangePassword(passwordInput.UserId,
                     passwordInput.Password.ToMd5HashString()))
                 {
                     Resolve<IUserService>().DeleteUserCache(userDetail.Id, userDetail.UserName);
                     return ServiceResult.Success;
                 }
+            }
 
             if (passwordInput.Type == PasswordType.PayPassword)
             {
-                if (!RegexHelper.CheckPayPasswrod(passwordInput.Password))
+                if (!RegexHelper.CheckPayPasswrod(passwordInput.Password)) {
                     return ServiceResult.FailedWithMessage("支付密码必须为六位数字");
+                }
 
                 if (_userDetailRepository.ChangePayPassword(passwordInput.UserId,
                     passwordInput.Password.ToMd5HashString()))
@@ -130,20 +148,31 @@ namespace Alabo.Data.People.Users.Domain.Services
         {
             //var user = Resolve<IUserService>().GetUserDetail(findPassword.UserName);
             var user = Resolve<IUserService>().GetSingle(u => u.Mobile == findPassword.Mobile);
-            if (user == null) return ServiceResult.FailedWithMessage("用户名不存在");
+            if (user == null) {
+                return ServiceResult.FailedWithMessage("用户名不存在");
+            }
 
-            if (user.Mobile != findPassword.Mobile) return ServiceResult.FailedWithMessage("用户名与手机不匹配");
+            if (user.Mobile != findPassword.Mobile) {
+                return ServiceResult.FailedWithMessage("用户名与手机不匹配");
+            }
 
-            if (findPassword.Password.IsNullOrEmpty()) return ServiceResult.FailedWithMessage("密码不能为空");
+            if (findPassword.Password.IsNullOrEmpty()) {
+                return ServiceResult.FailedWithMessage("密码不能为空");
+            }
 
-            if (findPassword.Password.Length < 6) return ServiceResult.FailedWithMessage("密码长度不能小于6");
+            if (findPassword.Password.Length < 6) {
+                return ServiceResult.FailedWithMessage("密码长度不能小于6");
+            }
 
-            if (findPassword.Password != findPassword.ConfirmPassword)
+            if (findPassword.Password != findPassword.ConfirmPassword) {
                 return ServiceResult.FailedWithMessage("确认密码与确认密码不相同");
+            }
 
             var userDetail = GetSingle(r => r.UserId == user.Id);
             userDetail.Password = findPassword.Password.ToMd5HashString();
-            if (UpdateSingle(userDetail)) return ServiceResult.Success;
+            if (UpdateSingle(userDetail)) {
+                return ServiceResult.Success;
+            }
 
             return ServiceResult.FailedWithMessage("服务异常");
         }
@@ -156,22 +185,35 @@ namespace Alabo.Data.People.Users.Domain.Services
         {
             //var user = Resolve<IUserService>().GetUserDetail(findPassword.UserName);
             var user = Resolve<IUserService>().GetSingle(u => u.Mobile == findPassword.Mobile);
-            if (user == null) return ServiceResult.FailedWithMessage("用户名不存在");
+            if (user == null) {
+                return ServiceResult.FailedWithMessage("用户名不存在");
+            }
 
-            if (user.Mobile != findPassword.Mobile) return ServiceResult.FailedWithMessage("用户名与手机不匹配");
+            if (user.Mobile != findPassword.Mobile) {
+                return ServiceResult.FailedWithMessage("用户名与手机不匹配");
+            }
 
-            if (findPassword.Password.IsNullOrEmpty()) return ServiceResult.FailedWithMessage("新支付密码不能为空");
+            if (findPassword.Password.IsNullOrEmpty()) {
+                return ServiceResult.FailedWithMessage("新支付密码不能为空");
+            }
 
-            if (findPassword.Password.Length < 6) return ServiceResult.FailedWithMessage("密码长度不能小于6");
+            if (findPassword.Password.Length < 6) {
+                return ServiceResult.FailedWithMessage("密码长度不能小于6");
+            }
 
-            if (findPassword.Password.Length > 6) return ServiceResult.FailedWithMessage("密码长度不能大于6");
+            if (findPassword.Password.Length > 6) {
+                return ServiceResult.FailedWithMessage("密码长度不能大于6");
+            }
 
-            if (findPassword.Password != findPassword.ConfirmPassword)
+            if (findPassword.Password != findPassword.ConfirmPassword) {
                 return ServiceResult.FailedWithMessage("新支付密码与确认支付密码不相同");
+            }
 
             var userDetail = GetSingle(r => r.UserId == user.Id);
             userDetail.PayPassword = findPassword.Password.ToMd5HashString();
-            if (UpdateSingle(userDetail)) return ServiceResult.Success;
+            if (UpdateSingle(userDetail)) {
+                return ServiceResult.Success;
+            }
 
             return ServiceResult.FailedWithMessage("服务异常");
         }
@@ -184,13 +226,19 @@ namespace Alabo.Data.People.Users.Domain.Services
         public ServiceResult ChangeMobile(ViewChangMobile view)
         {
             var user = Resolve<IUserService>().GetSingle(r => r.Mobile == view.Mobile && r.UserName == view.UserName);
-            if (user == null) return ServiceResult.FailedWithMessage("手机号码和用户名不匹配");
+            if (user == null) {
+                return ServiceResult.FailedWithMessage("手机号码和用户名不匹配");
+            }
 
             var newUser = Resolve<IUserService>().GetSingleByMobile(view.NewMobile);
-            if (newUser != null) return ServiceResult.FailedWithMessage("手机号码已被占用");
+            if (newUser != null) {
+                return ServiceResult.FailedWithMessage("手机号码已被占用");
+            }
 
             var result = Resolve<IUserService>().Update(r => { r.Mobile = view.NewMobile; }, r => r.Id == user.Id);
-            if (result) return ServiceResult.Success;
+            if (result) {
+                return ServiceResult.Success;
+            }
 
             return ServiceResult.FailedWithMessage("手机号码修改失败");
         }
@@ -203,21 +251,29 @@ namespace Alabo.Data.People.Users.Domain.Services
         public UserOutput GetUserOutput(long userId)
         {
             var user = Resolve<IUserService>().GetSingle(u => u.Id == userId);
-            if (user == null) throw new ValidException("用户不存在");
+            if (user == null) {
+                throw new ValidException("用户不存在");
+            }
 
             var grade = Resolve<IGradeService>().GetGrade(user.GradeId);
-            if (grade == null) throw new ValidException("用户等级不存在");
+            if (grade == null) {
+                throw new ValidException("用户等级不存在");
+            }
 
             var detail = Resolve<IUserDetailService>().GetSingle(u => u.UserId == userId);
-            if (detail == null) throw new ValidException("用户详细信息不存在");
+            if (detail == null) {
+                throw new ValidException("用户详细信息不存在");
+            }
+
             user.Detail = detail;
             var userOutput = user.Detail.MapTo<UserOutput>();
 
             userOutput.GradeName = Resolve<IGradeService>().GetGrade(user.GradeId)?.Name;
             userOutput.Status = user.Status.GetDisplayName();
             userOutput.Avator = Resolve<IApiService>().ApiUserAvator(user.Id);
-            if (!user.Detail.Avator.IsNullOrEmpty())
+            if (!user.Detail.Avator.IsNullOrEmpty()) {
                 userOutput.Avator = Resolve<IApiService>().ApiImageUrl(user.Detail.Avator);
+            }
 
             userOutput.GradeIcon = Resolve<IApiService>().ApiImageUrl(grade?.Icon);
             userOutput.Sex = user.Detail.Sex.GetDisplayName();
@@ -243,9 +299,14 @@ namespace Alabo.Data.People.Users.Domain.Services
             userOutput.OpenId = user.Detail.OpenId;
 
             var parentUser = Resolve<IUserService>().GetSingle(user.ParentId);
-            if (parentUser != null) userOutput.ParentUserName = parentUser.GetUserName();
+            if (parentUser != null) {
+                userOutput.ParentUserName = parentUser.GetUserName();
+            }
 
-            if (detail.PayPassword.IsNullOrEmpty()) userOutput.IsNeedSetPayPassword = true;
+            if (detail.PayPassword.IsNullOrEmpty()) {
+                userOutput.IsNeedSetPayPassword = true;
+            }
+
             userOutput.IsAdmin = Resolve<IUserService>().IsAdmin(user.Id);
             userOutput.Store = EntityDynamicService.GetStore(user.Id);
             userOutput.Token = Resolve<IUserService>().GetUserToken(user);
@@ -281,10 +342,14 @@ namespace Alabo.Data.People.Users.Domain.Services
         /// <returns></returns>
         public bool CheckPayPassword(string payPassword, long loginUserId)
         {
-            if (payPassword.IsNullOrEmpty()) return false;
+            if (payPassword.IsNullOrEmpty()) {
+                return false;
+            }
 
             if (payPassword.ToMd5HashString() ==
-                Ioc.Resolve<IUserDetailService>().GetSingle(x => x.UserId == loginUserId)?.PayPassword) return true;
+                Ioc.Resolve<IUserDetailService>().GetSingle(x => x.UserId == loginUserId)?.PayPassword) {
+                return true;
+            }
 
             return false;
         }
@@ -292,9 +357,14 @@ namespace Alabo.Data.People.Users.Domain.Services
         public bool IsIdentity(long userId)
         {
             var find = GetSingle(r => r.UserId == userId);
-            if (find == null) return false;
+            if (find == null) {
+                return false;
+            }
 
-            if (find.IdentityStatus == IdentityStatus.Succeed) return true;
+            if (find.IdentityStatus == IdentityStatus.Succeed) {
+                return true;
+            }
+
             return false;
         }
 

@@ -65,21 +65,24 @@ namespace Alabo.Data.People.Users.Domain.Configs
                 var configs = new List<TaskConfig>();
                 var config = new TaskConfig();
 
-                foreach (TaskType item in Enum.GetValues(typeof(TaskType)))
+                foreach (TaskType item in Enum.GetValues(typeof(TaskType))) {
                     if (item.IsDefault())
                     {
                         config = new TaskConfig();
 
                         ///一级推荐会员
-                        if (item == TaskType.RecommendedMember)
+                        if (item == TaskType.RecommendedMember) {
                             if (sharedValue != null)
                             {
                             }
+                        }
 
                         config.Name = "会员注册时候赠送积分";
                         config.Id = Guid.NewGuid();
                         // configs.Add(config);
                     }
+                }
+
                 var autoConfig = new AutoConfig
                 {
                     Type = config.GetType().FullName,

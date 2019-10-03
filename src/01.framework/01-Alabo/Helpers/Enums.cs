@@ -21,7 +21,9 @@ namespace Alabo.Helpers
             var value = Extensions.Extensions.SafeString(member);
             if (string.IsNullOrWhiteSpace(value))
             {
-                if (typeof(TEnum).IsGenericType) return default;
+                if (typeof(TEnum).IsGenericType) {
+                    return default;
+                }
 
                 throw new ArgumentNullException(nameof(member));
             }
@@ -46,13 +48,21 @@ namespace Alabo.Helpers
         /// <param name="member">成员名、值、实例均可</param>
         public static string GetName(Type type, object member)
         {
-            if (type == null) return string.Empty;
+            if (type == null) {
+                return string.Empty;
+            }
 
-            if (member == null) return string.Empty;
+            if (member == null) {
+                return string.Empty;
+            }
 
-            if (member is string) return member.ToString();
+            if (member is string) {
+                return member.ToString();
+            }
 
-            if (type.GetTypeInfo().IsEnum == false) return string.Empty;
+            if (type.GetTypeInfo().IsEnum == false) {
+                return string.Empty;
+            }
 
             return Enum.GetName(type, member);
         }
@@ -75,7 +85,9 @@ namespace Alabo.Helpers
         public static int GetValue(Type type, object member)
         {
             var value = Extensions.Extensions.SafeString(member);
-            if (string.IsNullOrWhiteSpace(value)) throw new ArgumentNullException(nameof(member));
+            if (string.IsNullOrWhiteSpace(value)) {
+                throw new ArgumentNullException(nameof(member));
+            }
 
             try
             {
@@ -123,10 +135,14 @@ namespace Alabo.Helpers
         public static List<Item> GetItems(Type type)
         {
             type = Common.GetType(type);
-            if (type.IsEnum == false) throw new InvalidOperationException($"类型 {type} 不是枚举");
+            if (type.IsEnum == false) {
+                throw new InvalidOperationException($"类型 {type} 不是枚举");
+            }
 
             var result = new List<Item>();
-            foreach (var field in type.GetFields()) AddItem(type, result, field);
+            foreach (var field in type.GetFields()) {
+                AddItem(type, result, field);
+            }
 
             return result.OrderBy(t => t.SortId).ToList();
         }
@@ -136,7 +152,9 @@ namespace Alabo.Helpers
         /// </summary>
         private static void AddItem(Type type, ICollection<Item> result, FieldInfo field)
         {
-            if (!field.FieldType.IsEnum) return;
+            if (!field.FieldType.IsEnum) {
+                return;
+            }
 
             var value = 0;
             try

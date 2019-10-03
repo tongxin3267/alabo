@@ -61,47 +61,68 @@ namespace Alabo.App.Share.OpenTasks
         /// <param name="parameter">参数</param>
         public override ExecuteResult<ITaskResult[]> Execute(TaskParameter parameter)
         {
-            if (Configuration == null) return ExecuteResult<ITaskResult[]>.Fail("configuration is null.");
+            if (Configuration == null) {
+                return ExecuteResult<ITaskResult[]>.Fail("configuration is null.");
+            }
             //进行参数判断
-            if (parameter == null) throw new ArgumentNullException(nameof(parameter));
+            if (parameter == null) {
+                throw new ArgumentNullException(nameof(parameter));
+            }
 
             //判断通用交易订单
-            if (!parameter.TryGetValue("ShareOrderId", out long shareOrderId))
+            if (!parameter.TryGetValue("ShareOrderId", out long shareOrderId)) {
                 return ExecuteResult<ITaskResult[]>.Fail("分润订单ShareOrderId未找到.");
+            }
+
             var shareOrder = Ioc.Resolve<IShareOrderService>().GetSingle(r => r.Id == shareOrderId);
-            if (shareOrder == null)
+            if (shareOrder == null) {
                 return ExecuteResult<ITaskResult[]>.Fail($"分润订单为空，shareorder with id {shareOrderId} is null.");
-            if (shareOrder.Status != ShareOrderStatus.Pending)
+            }
+
+            if (shareOrder.Status != ShareOrderStatus.Pending) {
                 return ExecuteResult<ITaskResult[]>.Fail("分润订单状态不是代理状态，不触发分润.");
-            if (shareOrder.Amount <= 0)
+            }
+
+            if (shareOrder.Amount <= 0) {
                 return ExecuteResult<ITaskResult[]>.Fail("分润订单金额小于0，shareorder with amount is less than zero");
+            }
+
             if (Configuration.PriceLimitType == PriceLimitType.OrderPrice)
             {
-                if (shareOrder.Amount > Configuration.BaseRule.MaxAmount && Configuration.BaseRule.MaxAmount > 0)
+                if (shareOrder.Amount > Configuration.BaseRule.MaxAmount && Configuration.BaseRule.MaxAmount > 0) {
                     return ExecuteResult<ITaskResult[]>.Fail(
                         $"分润订单金额{shareOrder.Amount} > 最大触发金额{Configuration.BaseRule.MinimumAmount}, 退出模块");
+                }
+
                 if (shareOrder.Amount < Configuration.BaseRule.MinimumAmount && Configuration.BaseRule.MinimumAmount > 0
-                )
+                ) {
                     return ExecuteResult<ITaskResult[]>.Fail(
                         $"分润订单金额{shareOrder.Amount} <= 最小触发金额{Configuration.BaseRule.MinimumAmount}, 退出模块");
+                }
             }
 
             ShareOrder = shareOrder;
 
             //判断交易用户
             var user = Ioc.Resolve<IUserService>().GetSingle(shareOrder.UserId);
-            if (user == null)
+            if (user == null) {
                 return ExecuteResult<ITaskResult[]>.Fail(
                     $"shareorder with id {shareOrderId} ,shareorder user is null.");
+            }
+
             ShareOrderUser = user;
             //检查分润用户
             var gradeResult = CheckOrderUserTypeAndGrade();
-            if (gradeResult.Status != ResultStatus.Success) return gradeResult;
+            if (gradeResult.Status != ResultStatus.Success) {
+                return gradeResult;
+            }
 
             //检查分润比例
             var distriRatio = Configuration.DistriRatio.Split(',');
-            if (distriRatio == null || distriRatio.Length == 0)
+            if (distriRatio == null || distriRatio.Length == 0) {
                 return ExecuteResult<ITaskResult[]>.Cancel("模块需要设置分润比例但未设置.");
+            }
+
             Ratios = distriRatio.ToList();
             return ExecuteResult<ITaskResult[]>.Success();
         }
@@ -120,10 +141,14 @@ namespace Alabo.App.Share.OpenTasks
                 {
                     if (Configuration.OrderUser.OrderUserTypeId ==
                         Guid.Parse("71BE65E6-3A64-414D-972E-1A3D4A365000")) //如果是会员，检查会员等级
-                        if (Configuration.OrderUser.IsLimitOrderUserGrade)
-                            if (Configuration.OrderUser.OrderUserGradeId != ShareOrderUser.GradeId)
+{
+                        if (Configuration.OrderUser.IsLimitOrderUserGrade) {
+                            if (Configuration.OrderUser.OrderUserGradeId != ShareOrderUser.GradeId) {
                                 return ExecuteResult<ITaskResult[]>.Cancel(
                                     $"user with id {ShareOrder.UserId} not match UserGradeid:{Configuration.OrderUser.OrderUserTypeId}, exit module"); //会员等级不符合grade要求，直接退出
+                            }
+                        }
+                    }
                 }
                 else
                 {
@@ -146,11 +171,13 @@ namespace Alabo.App.Share.OpenTasks
         {
             shareUser = null;
             var _shareUser = Ioc.Resolve<IUserService>().GetSingle(userId);
-            if (_shareUser == null)
+            if (_shareUser == null) {
                 return ExecuteResult<ITaskResult[]>.Fail($"the shareuser is null.with userid {userId}");
+            }
             //检查分润会员的状态
-            if (_shareUser.Status != Status.Normal)
+            if (_shareUser.Status != Status.Normal) {
                 return ExecuteResult<ITaskResult[]>.Fail($"the shareuser status is not normal .with userid {userId}");
+            }
             //检查分润订单用户类型
             if (Configuration.ShareUser.IsLimitShareUserType)
             {
@@ -159,10 +186,12 @@ namespace Alabo.App.Share.OpenTasks
                     if (Configuration.ShareUser.ShareUserTypeId == Guid.Parse("71BE65E6-3A64-414D-972E-1A3D4A365000"))
                     {
                         //如果是会员，检查会员等级
-                        if (Configuration.ShareUser.IsLimitShareUserGrade)
-                            if (Configuration.ShareUser.ShareUserGradeId != _shareUser.GradeId)
+                        if (Configuration.ShareUser.IsLimitShareUserGrade) {
+                            if (Configuration.ShareUser.ShareUserGradeId != _shareUser.GradeId) {
                                 return ExecuteResult<ITaskResult[]>.Fail(
                                     $"user with id {userId} not match UserGradeid:{Configuration.ShareUser.ShareUserTypeId}, exit module"); //会员等级不符合grade要求，直接退出
+                            }
+                        }
                     }
                 }
                 else

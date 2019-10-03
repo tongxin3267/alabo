@@ -29,28 +29,34 @@ namespace Alabo.Data.People.Employes.Domain.Services
         public Tuple<ServiceResult, RoleOuput> Login(UserOutput userOutput)
         {
             var user = Resolve<IUserService>().GetSingle(userOutput.Id);
-            if (user == null)
+            if (user == null) {
                 return new Tuple<ServiceResult, RoleOuput>(ServiceResult.FailedWithMessage("用户不存在"), null);
+            }
 
             var token = Resolve<IUserService>().GetUserToken(user);
-            if (userOutput.Token != token)
+            if (userOutput.Token != token) {
                 return new Tuple<ServiceResult, RoleOuput>(ServiceResult.FailedWithMessage("Token不正确,权限验证失败"), null);
+            }
 
             var employee = Resolve<IEmployeeService>().GetSingle(r => r.UserId == user.Id);
-            if (employee == null)
+            if (employee == null) {
                 if (user.UserName == "admin")
                 {
                     // 当admin不是管理员时，重新初始数据
                     Resolve<IAdminService>().DefaultInit();
                     employee = Resolve<IEmployeeService>().GetSingle(r => r.UserId == user.Id);
                 }
+            }
 
-            if (employee == null)
+            if (employee == null) {
                 return new Tuple<ServiceResult, RoleOuput>(ServiceResult.FailedWithMessage("当前用户非员工不能登录"), null);
+            }
 
             var menus = Resolve<IPostRoleService>().GetAdminThemeMenus();
-            if (menus == null)
+            if (menus == null) {
                 return new Tuple<ServiceResult, RoleOuput>(ServiceResult.FailedWithMessage("管理员模板不存在菜单"), null);
+            }
+
             var roleOuput = new RoleOuput
             {
                 FilterType = FilterType.Admin,
@@ -66,8 +72,9 @@ namespace Alabo.Data.People.Employes.Domain.Services
             {
                 // 非超级管理员，根据岗位返回菜单
                 var postRole = Resolve<IPostRoleService>().GetSingle(r => r.Id == employee.PostRoleId);
-                if (postRole == null)
+                if (postRole == null) {
                     return new Tuple<ServiceResult, RoleOuput>(ServiceResult.FailedWithMessage("岗位权限不存在"), null);
+                }
 
                 var list = new List<ThemeOneMenu>();
                 var listCount = 0;
@@ -114,8 +121,9 @@ namespace Alabo.Data.People.Employes.Domain.Services
                                 {
                                     var itemNodesIds = postRole.RoleIds.Where(s =>
                                         itemNode.Menus.Select(ss => ss.Id).Contains(s));
-                                    if (itemNodesIds.Contains(itemNodes.Id))
+                                    if (itemNodesIds.Contains(itemNodes.Id)) {
                                         list[listCount].Menus[nodeListCount].Menus.Add(itemNodes);
+                                    }
                                 }
                             }
                         }
@@ -126,13 +134,21 @@ namespace Alabo.Data.People.Employes.Domain.Services
             // 权限Id处理
             roleOuput.Menus?.ForEach(one =>
             {
-                if (!roleOuput.AllRoleIds.Contains(one.Id)) roleOuput.AllRoleIds.Add(one.Id);
+                if (!roleOuput.AllRoleIds.Contains(one.Id)) {
+                    roleOuput.AllRoleIds.Add(one.Id);
+                }
+
                 one.Menus?.ForEach(two =>
                 {
-                    if (!roleOuput.AllRoleIds.Contains(two.Id)) roleOuput.AllRoleIds.Add(two.Id);
+                    if (!roleOuput.AllRoleIds.Contains(two.Id)) {
+                        roleOuput.AllRoleIds.Add(two.Id);
+                    }
+
                     two.Menus?.ForEach(three =>
                     {
-                        if (!roleOuput.AllRoleIds.Contains(three.Id)) roleOuput.AllRoleIds.Add(three.Id);
+                        if (!roleOuput.AllRoleIds.Contains(three.Id)) {
+                            roleOuput.AllRoleIds.Add(three.Id);
+                        }
                     });
                 });
             });
@@ -143,10 +159,22 @@ namespace Alabo.Data.People.Employes.Domain.Services
 
         public string GetLoginToken(GetLoginToken loginToken)
         {
-            if (loginToken == null) throw new ValidException("对象不能为空");
-            if (loginToken.SiteId == null) throw new ValidException("SiteId不能为空");
-            if (loginToken.AdminUrl == null) throw new ValidException("AdminUrl不能为空");
-            if (loginToken.UserId <= 0) throw new ValidException("userId不正确");
+            if (loginToken == null) {
+                throw new ValidException("对象不能为空");
+            }
+
+            if (loginToken.SiteId == null) {
+                throw new ValidException("SiteId不能为空");
+            }
+
+            if (loginToken.AdminUrl == null) {
+                throw new ValidException("AdminUrl不能为空");
+            }
+
+            if (loginToken.UserId <= 0) {
+                throw new ValidException("userId不正确");
+            }
+
             var key = loginToken.UserId + 500;
             var key2 = loginToken.Timestamp + 9912;
             var key3 = loginToken.AdminUrl.Trim().ToLower() + "admin";
@@ -165,21 +193,30 @@ namespace Alabo.Data.People.Employes.Domain.Services
             var maxTimestamp = DateTime.Now.AddMinutes(5).ConvertDateTimeInt();
             var minTimestamp = DateTime.Now.AddMinutes(-5).ConvertDateTimeInt();
             if (loginByToken.Timestamp.ConvertToLong() < minTimestamp ||
-                loginByToken.Timestamp.ConvertToLong() > maxTimestamp)
+                loginByToken.Timestamp.ConvertToLong() > maxTimestamp) {
                 throw new ValidException($"时间错计算错误，服务器当前时间{DateTime.Now}");
+            }
 
-            if (HttpWeb.Ip != loginByToken.Ip) throw new ValidException("IP不正确");
+            if (HttpWeb.Ip != loginByToken.Ip) {
+                throw new ValidException("IP不正确");
+            }
 
-            if (loginByToken.UserId <= 0) throw new ValidException("用户Id不正确");
+            if (loginByToken.UserId <= 0) {
+                throw new ValidException("用户Id不正确");
+            }
 
-            if (loginByToken.Token.IsNullOrEmpty() || loginByToken.Token.Length < 30)
+            if (loginByToken.Token.IsNullOrEmpty() || loginByToken.Token.Length < 30) {
                 throw new ValidException("token不正确");
+            }
 
-            if (loginByToken.SiteId.IsNullOrEmpty() || loginByToken.SiteId.Length < 20)
+            if (loginByToken.SiteId.IsNullOrEmpty() || loginByToken.SiteId.Length < 20) {
                 throw new ValidException("token不正确");
+            }
 
             var token = GetLoginToken(loginByToken);
-            if (token != loginByToken.Token) throw new ValidException("Token验证失败");
+            if (token != loginByToken.Token) {
+                throw new ValidException("Token验证失败");
+            }
 
             //var theme = Resolve<IThemeService>().FirstOrDefault();
             //if (theme != null) {
@@ -189,7 +226,10 @@ namespace Alabo.Data.People.Employes.Domain.Services
             //}
 
             var user = Resolve<IUserService>().GetSingle("admin");
-            if (user == null) Resolve<IAdminService>().DefaultInit();
+            if (user == null) {
+                Resolve<IAdminService>().DefaultInit();
+            }
+
             if (user != null)
             {
                 var userDetail = Resolve<IUserDetailService>().GetByIdNoTracking(r => r.UserId == user.Id);

@@ -45,8 +45,9 @@ namespace Alabo.App.Asset.Withdraws.UI
             withDraw.UserId = autoModel.BasicUser.Id;
             withDraw.Status = WithdrawStatus.FirstCheckSuccess;
             //如果为空则直接赋值为 储值/现金
-            if (withDraw.MoneyTypeId.IsNullOrEmpty())
+            if (withDraw.MoneyTypeId.IsNullOrEmpty()) {
                 withDraw.MoneyTypeId = Guid.Parse("e97ccd1e-1478-49bd-bfc7-e73a5d699000");
+            }
 
             var result = Resolve<IWithdrawService>().Add(withDraw.MapTo<WithDrawInput>());
             return result;
@@ -136,7 +137,9 @@ namespace Alabo.App.Asset.Withdraws.UI
             get
             {
                 var searSerial = $"9{Id.ToString().PadLeft(9, '0')}";
-                if (Id.ToString().Length == 10) searSerial = $"{Id.ToString()}";
+                if (Id.ToString().Length == 10) {
+                    searSerial = $"{Id.ToString()}";
+                }
 
                 return searSerial;
             }

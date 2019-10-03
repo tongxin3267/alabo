@@ -21,7 +21,9 @@ namespace Alabo.Cloud.Support.Domain.Services
         public ServiceResult AddWorkOrder(WorkOrder view)
         {
             var result = Resolve<IWorkOrderService>().Add(view);
-            if (!result) return ServiceResult.FailedWithMessage("Ìí¼ÓÊ§°Ü");
+            if (!result) {
+                return ServiceResult.FailedWithMessage("Ìí¼ÓÊ§°Ü");
+            }
 
             var user = Resolve<IUserService>().GetSingle(view.UserId);
             if (!user.Mobile.IsNullOrEmpty() && !user.Mobile.StartsWith("WX"))
@@ -37,7 +39,10 @@ namespace Alabo.Cloud.Support.Domain.Services
         public ServiceResult Delete(ObjectId id)
         {
             var result = Resolve<IWorkOrderService>().Delete(u => u.Id == id);
-            if (result.IsNullOrEmpty()) return ServiceResult.FailedWithMessage("É¾³ýÊ§°Ü");
+            if (result.IsNullOrEmpty()) {
+                return ServiceResult.FailedWithMessage("É¾³ýÊ§°Ü");
+            }
+
             return ServiceResult.Success;
         }
 
@@ -56,7 +61,10 @@ namespace Alabo.Cloud.Support.Domain.Services
         public ServiceResult UpdateWorkOrder(WorkOrder view)
         {
             var result = Resolve<IWorkOrderService>().Update(view);
-            if (result.IsNullOrEmpty()) return ServiceResult.FailedWithMessage("±à¼­Ê§°Ü");
+            if (result.IsNullOrEmpty()) {
+                return ServiceResult.FailedWithMessage("±à¼­Ê§°Ü");
+            }
+
             return ServiceResult.Success;
         }
     }

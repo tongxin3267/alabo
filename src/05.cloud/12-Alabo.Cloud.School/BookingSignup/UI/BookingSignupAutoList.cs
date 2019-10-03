@@ -20,7 +20,10 @@ namespace Alabo.Cloud.School.BookingSignup.UI
             dic.TryGetValue("loginUserId", out var userId);
             dic.TryGetValue("pageIndex", out var pageIndexStr);
             var pageIndex = pageIndexStr.ToInt64();
-            if (pageIndex <= 0) pageIndex = 1;
+            if (pageIndex <= 0) {
+                pageIndex = 1;
+            }
+
             var orderQuery = new ExpressionQuery<BookingSignupOrder>
             {
                 EnablePaging = true,
@@ -31,7 +34,7 @@ namespace Alabo.Cloud.School.BookingSignup.UI
             orderQuery.And(e => e.IsPay);
             var model = Resolve<IBookingSignupOrderService>().GetPagedList(orderQuery);
             var list = new List<AutoListItem>();
-            foreach (var item in model.ToList())
+            foreach (var item in model.ToList()) {
                 foreach (var temp in item.Contacts)
                 {
                     var apiData = new AutoListItem
@@ -42,6 +45,7 @@ namespace Alabo.Cloud.School.BookingSignup.UI
                     };
                     list.Add(apiData);
                 }
+            }
 
             return ToPageList(list, model);
         }

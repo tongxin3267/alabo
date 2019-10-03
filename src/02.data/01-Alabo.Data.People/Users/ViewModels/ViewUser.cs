@@ -36,7 +36,9 @@ namespace Alabo.Data.People.Users.ViewModels
             if (!string.IsNullOrEmpty(id.ToString()))
             {
                 var result = Resolve<IUserService>().GetSingle(id.ConvertToLong());
-                if (result == null) return ToAutoForm(view);
+                if (result == null) {
+                    return ToAutoForm(view);
+                }
 
                 var model = result.MapTo<AutoForm>();
 
@@ -92,7 +94,9 @@ namespace Alabo.Data.People.Users.ViewModels
         /// <param name="size">The size.</param>
         public string GetAvator(int size = 48)
         {
-            if (Avator.IsNullOrEmpty()) return $@"/wwwroot/static/images/avator/{Sex}_{size}.png";
+            if (Avator.IsNullOrEmpty()) {
+                return $@"/wwwroot/static/images/avator/{Sex}_{size}.png";
+            }
 
             return Avator;
         }

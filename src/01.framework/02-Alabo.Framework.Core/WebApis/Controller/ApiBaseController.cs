@@ -26,15 +26,20 @@ namespace Alabo.Framework.Core.WebApis.Controller
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             // api接口可以匿名访问，不需要任何安全措施
-            if (context.Filters.OfType<IAllowAnonymousFilter>().Any()) return;
+            if (context.Filters.OfType<IAllowAnonymousFilter>().Any()) {
+                return;
+            }
             //基础api接口权限检查
             var token = GetAccessToken();
-            if (token.Status != ResultStatus.Success)
+            if (token.Status != ResultStatus.Success) {
                 context.Result = new JsonResult(ApiResult.Failure(token.Message, token.MessageCode));
+            }
             // 用户权限检查，比如管理员、会员、供应商等权限的检查
             token = UserAccessToken(context);
-            if (token.Status != ResultStatus.Success)
+            if (token.Status != ResultStatus.Success) {
                 context.Result = new JsonResult(ApiResult.Failure(token.Message, token.MessageCode));
+            }
+
             base.OnActionExecuting(context);
         }
 
@@ -47,13 +52,16 @@ namespace Alabo.Framework.Core.WebApis.Controller
         protected ApiResult<AccessToken> UserAccessToken(ActionExecutingContext context)
         {
             var apiAuthAttribute = context.Filters.OfType<ApiAuthAttribute>().FirstOrDefault();
-            if (apiAuthAttribute == null && AutoModel.Filter == FilterType.All)
+            if (apiAuthAttribute == null && AutoModel.Filter == FilterType.All) {
                 return ApiResult.Success(new AccessToken());
-            if (apiAuthAttribute == null)
+            }
+
+            if (apiAuthAttribute == null) {
                 apiAuthAttribute = new ApiAuthAttribute
                 {
                     Filter = FilterType.All
                 };
+            }
             // 其他情况需要用户登录
             if (apiAuthAttribute.Filter != FilterType.All || AutoModel.Filter != FilterType.All)
             {
@@ -97,7 +105,9 @@ namespace Alabo.Framework.Core.WebApis.Controller
         {
             var apiSecurityConfig = Resolve<IAlaboAutoConfigService>().GetValue<ApiSecurityConfig>();
             //如果是开发模式，这不验证安全
-            if (!apiSecurityConfig.IsOpen) return ApiResult.Success(new AccessToken());
+            if (!apiSecurityConfig.IsOpen) {
+                return ApiResult.Success(new AccessToken());
+            }
 
             var maxTimestamp = DateTime.Now.AddMinutes(10).ConvertDateTimeInt();
             var minTimestamp = DateTime.Now.AddMinutes(-10).ConvertDateTimeInt();
@@ -105,19 +115,26 @@ namespace Alabo.Framework.Core.WebApis.Controller
             var timestamp = HttpContext.Request.Headers["zk-timestamp"];
             var apiUrl = HttpContext.Request.Path.ToStr();
             apiUrl = apiUrl.ToLower().Replace("/api/", "api/");
-            if (token.IsNullOrEmpty()) return ApiResult.Failure<AccessToken>("请在http头中传入token");
+            if (token.IsNullOrEmpty()) {
+                return ApiResult.Failure<AccessToken>("请在http头中传入token");
+            }
 
-            if (timestamp.IsNullOrEmpty()) return ApiResult.Failure<AccessToken>("请在http头中传入timestamp");
+            if (timestamp.IsNullOrEmpty()) {
+                return ApiResult.Failure<AccessToken>("请在http头中传入timestamp");
+            }
 
-            if (timestamp.ConvertToLong() < minTimestamp || timestamp.ConvertToLong() > maxTimestamp)
+            if (timestamp.ConvertToLong() < minTimestamp || timestamp.ConvertToLong() > maxTimestamp) {
                 return ApiResult.Failure<AccessToken>($"时间错计算错误，服务器当前时间{DateTime.Now}");
+            }
 
             var tokenSign = apiUrl + timestamp + RuntimeContext.Current.WebsiteConfig.OpenApiSetting.Id +
                             HttpWeb.Tenant + apiSecurityConfig?.PrivateKey.Trim();
             tokenSign = tokenSign.ToLower();
             var md5Token = tokenSign.ToMd5HashString();
 
-            if (md5Token != token) return ApiResult.Failure<AccessToken>("token计算错误,服务器计算,加密因子不匹配");
+            if (md5Token != token) {
+                return ApiResult.Failure<AccessToken>("token计算错误,服务器计算,加密因子不匹配");
+            }
 
             return ApiResult.Success(new AccessToken());
         }

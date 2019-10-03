@@ -18,7 +18,9 @@ namespace Alabo.Validations.Validators
         /// </summary>
         public override string FormatErrorMessage(string name)
         {
-            if (ErrorMessage == null && ErrorMessageResourceName == null) ErrorMessage = LibraryResource.InvalidIdCard;
+            if (ErrorMessage == null && ErrorMessageResourceName == null) {
+                ErrorMessage = LibraryResource.InvalidIdCard;
+            }
 
             return string.Format(CultureInfo.CurrentCulture, ErrorMessageString);
         }
@@ -28,9 +30,13 @@ namespace Alabo.Validations.Validators
         /// </summary>
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if (value.SafeString().IsEmpty()) return ValidationResult.Success;
+            if (value.SafeString().IsEmpty()) {
+                return ValidationResult.Success;
+            }
 
-            if (Regex.IsMatch(value.SafeString(), ValidatePattern.IdCardPattern)) return ValidationResult.Success;
+            if (Regex.IsMatch(value.SafeString(), ValidatePattern.IdCardPattern)) {
+                return ValidationResult.Success;
+            }
 
             return new ValidationResult(FormatErrorMessage(string.Empty));
         }

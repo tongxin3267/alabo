@@ -22,16 +22,21 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         public ApiResult<List<KeyValue>> ReportField(string type)
         {
             var find = type.GetAllPropertys();
-            if (find == null) return ApiResult.Failure<List<KeyValue>>("类型不存在");
+            if (find == null) {
+                return ApiResult.Failure<List<KeyValue>>("类型不存在");
+            }
 
             var list = new List<KeyValue>();
 
-            foreach (var item in find)
+            foreach (var item in find) {
                 if (item.Property.PropertyType == typeof(decimal) || item.Property.PropertyType == typeof(int)
                                                                   || item.Property.PropertyType == typeof(long)
                                                                   || item.Property.PropertyType == typeof(short))
                 {
-                    if (item.Property.Name == "Id") continue;
+                    if (item.Property.Name == "Id") {
+                        continue;
+                    }
+
                     var key = new KeyValue
                     {
                         Name = $"{item.DisplayAttribute.Name}({item.Property.Name})",
@@ -41,6 +46,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
 
                     list.Add(key);
                 }
+            }
 
             return ApiResult.Success(list);
         }
@@ -53,7 +59,9 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         public ApiResult<List<KeyValue>> All(string type)
         {
             var find = type.GetAllPropertys();
-            if (find == null) return ApiResult.Failure<List<KeyValue>>("类型不存在");
+            if (find == null) {
+                return ApiResult.Failure<List<KeyValue>>("类型不存在");
+            }
 
             var list = new List<KeyValue>();
 
@@ -80,11 +88,13 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         public ApiResult<List<KeyValue>> QueryField(string type)
         {
             var find = type.GetAllPropertys();
-            if (find == null) return ApiResult.Failure<List<KeyValue>>("类型不存在");
+            if (find == null) {
+                return ApiResult.Failure<List<KeyValue>>("类型不存在");
+            }
 
             var list = new List<KeyValue>();
 
-            foreach (var item in find)
+            foreach (var item in find) {
                 if (item.Property.PropertyType == typeof(decimal)
                     || item.Property.PropertyType == typeof(Enum)
                     || item.Property.PropertyType.BaseType == typeof(Enum)
@@ -92,7 +102,10 @@ namespace Alabo.Framework.Core.WebUis.Controllers
                     || item.Property.PropertyType == typeof(long)
                     || item.Property.PropertyType == typeof(short))
                 {
-                    if (item.Property.Name == "Id") continue;
+                    if (item.Property.Name == "Id") {
+                        continue;
+                    }
+
                     var key = new KeyValue
                     {
                         Name = $"{item.DisplayAttribute.Name}({item.Property.Name})",
@@ -102,6 +115,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
 
                     list.Add(key);
                 }
+            }
 
             return ApiResult.Success(list);
         }

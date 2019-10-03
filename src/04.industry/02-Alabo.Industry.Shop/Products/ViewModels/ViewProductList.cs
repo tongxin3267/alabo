@@ -163,7 +163,9 @@ namespace Alabo.Industry.Shop.Products.ViewModels
         {
             get
             {
-                if (SmallUrl != null) return SmallUrl;
+                if (SmallUrl != null) {
+                    return SmallUrl;
+                }
 
                 return Resolve<IAutoConfigService>().GetValue<WebSiteConfig>().NoPic;
             }

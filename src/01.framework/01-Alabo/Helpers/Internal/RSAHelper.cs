@@ -31,9 +31,13 @@ namespace Alabo.Helpers.Internal
         public RsaHelper(RsaType rsaType, Encoding encoding, string privateKey, string publicKey = null)
         {
             _encoding = encoding;
-            if (!string.IsNullOrEmpty(privateKey)) _privateKeyRsaProvider = CreateRsaProviderFromPrivateKey(privateKey);
+            if (!string.IsNullOrEmpty(privateKey)) {
+                _privateKeyRsaProvider = CreateRsaProviderFromPrivateKey(privateKey);
+            }
 
-            if (!string.IsNullOrEmpty(publicKey)) _publicKeyRsaProvider = CreateRsaProviderFromPublicKey(publicKey);
+            if (!string.IsNullOrEmpty(publicKey)) {
+                _publicKeyRsaProvider = CreateRsaProviderFromPublicKey(publicKey);
+            }
 
             _hashAlgorithmName = rsaType == RsaType.Rsa ? HashAlgorithmName.SHA1 : HashAlgorithmName.SHA256;
         }
@@ -80,7 +84,9 @@ namespace Alabo.Helpers.Internal
 
         public string Decrypt(string cipherText)
         {
-            if (_privateKeyRsaProvider == null) throw new ValidException("_privateKeyRsaProvider is null");
+            if (_privateKeyRsaProvider == null) {
+                throw new ValidException("_privateKeyRsaProvider is null");
+            }
 
             return Encoding.UTF8.GetString(_privateKeyRsaProvider.Decrypt(System.Convert.FromBase64String(cipherText),
                 RSAEncryptionPadding.Pkcs1));
@@ -92,7 +98,9 @@ namespace Alabo.Helpers.Internal
 
         public string Encrypt(string text)
         {
-            if (_publicKeyRsaProvider == null) throw new ValidException("_publicKeyRsaProvider is null");
+            if (_publicKeyRsaProvider == null) {
+                throw new ValidException("_publicKeyRsaProvider is null");
+            }
 
             return System.Convert.ToBase64String(_publicKeyRsaProvider.Encrypt(Encoding.UTF8.GetBytes(text),
                 RSAEncryptionPadding.Pkcs1));
@@ -114,18 +122,23 @@ namespace Alabo.Helpers.Internal
                 byte bt = 0;
                 ushort twobytes = 0;
                 twobytes = binr.ReadUInt16();
-                if (twobytes == 0x8130)
+                if (twobytes == 0x8130) {
                     binr.ReadByte();
-                else if (twobytes == 0x8230)
+                } else if (twobytes == 0x8230) {
                     binr.ReadInt16();
-                else
+                } else {
                     throw new ValidException("Unexpected value read binr.ReadUInt16()");
+                }
 
                 twobytes = binr.ReadUInt16();
-                if (twobytes != 0x0102) throw new ValidException("Unexpected version");
+                if (twobytes != 0x0102) {
+                    throw new ValidException("Unexpected version");
+                }
 
                 bt = binr.ReadByte();
-                if (bt != 0x00) throw new ValidException("Unexpected value read binr.ReadByte()");
+                if (bt != 0x00) {
+                    throw new ValidException("Unexpected value read binr.ReadByte()");
+                }
 
                 rsaParameters.Modulus = binr.ReadBytes(GetIntegerSize(binr));
                 rsaParameters.Exponent = binr.ReadBytes(GetIntegerSize(binr));
@@ -163,36 +176,46 @@ namespace Alabo.Helpers.Internal
 
                     twobytes = binr.ReadUInt16();
                     if (twobytes == 0x8130) //data read as little endian order (actual data order for Sequence is 30 81)
+{
                         binr.ReadByte(); //advance 1 byte
-                    else if (twobytes == 0x8230)
+                    } else if (twobytes == 0x8230) {
                         binr.ReadInt16(); //advance 2 bytes
-                    else
+                    } else {
                         return null;
+                    }
 
                     seq = binr.ReadBytes(15); //read the Sequence OID
                     if (!CompareBytearrays(seq, seqOid)) //make sure Sequence for OID is correct
+{
                         return null;
+                    }
 
                     twobytes = binr.ReadUInt16();
                     if (twobytes == 0x8103
                     ) //data read as little endian order (actual data order for Bit String is 03 81)
+{
                         binr.ReadByte(); //advance 1 byte
-                    else if (twobytes == 0x8203)
+                    } else if (twobytes == 0x8203) {
                         binr.ReadInt16(); //advance 2 bytes
-                    else
+                    } else {
                         return null;
+                    }
 
                     bt = binr.ReadByte();
                     if (bt != 0x00) //expect null byte next
+{
                         return null;
+                    }
 
                     twobytes = binr.ReadUInt16();
                     if (twobytes == 0x8130) //data read as little endian order (actual data order for Sequence is 30 81)
+{
                         binr.ReadByte(); //advance 1 byte
-                    else if (twobytes == 0x8230)
+                    } else if (twobytes == 0x8230) {
                         binr.ReadInt16(); //advance 2 bytes
-                    else
+                    } else {
                         return null;
+                    }
 
                     twobytes = binr.ReadUInt16();
                     byte lowbyte = 0x00;
@@ -227,7 +250,9 @@ namespace Alabo.Helpers.Internal
                     var modulus = binr.ReadBytes(modsize); //read the modulus bytes
 
                     if (binr.ReadByte() != 0x02) //expect an Integer for the exponent data
+{
                         return null;
+                    }
 
                     var expbytes =
                         (int)binr
@@ -257,7 +282,9 @@ namespace Alabo.Helpers.Internal
             byte bt = 0;
             var count = 0;
             bt = binr.ReadByte();
-            if (bt != 0x02) return 0;
+            if (bt != 0x02) {
+                return 0;
+            }
 
             bt = binr.ReadByte();
 
@@ -277,7 +304,9 @@ namespace Alabo.Helpers.Internal
                 count = bt;
             }
 
-            while (binr.ReadByte() == 0x00) count -= 1;
+            while (binr.ReadByte() == 0x00) {
+                count -= 1;
+            }
 
             binr.BaseStream.Seek(-1, SeekOrigin.Current);
             return count;
@@ -285,12 +314,16 @@ namespace Alabo.Helpers.Internal
 
         private bool CompareBytearrays(byte[] a, byte[] b)
         {
-            if (a.Length != b.Length) return false;
+            if (a.Length != b.Length) {
+                return false;
+            }
 
             var i = 0;
             foreach (var c in a)
             {
-                if (c != b[i]) return false;
+                if (c != b[i]) {
+                    return false;
+                }
 
                 i++;
             }

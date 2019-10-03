@@ -28,9 +28,15 @@ namespace Alabo.Cloud.People.UserRightss.UI.Widgets
             var dbContext = Ioc.Resolve<IUserRepository>().RepositoryContext;
             var valDic = json.ToObject<Dictionary<string, long>>();
             var userId = valDic.GetValue("loginUserId");
-            if (userId < 1) throw new ValidException("会员Id没有传入进来");
+            if (userId < 1) {
+                throw new ValidException("会员Id没有传入进来");
+            }
+
             var user = Ioc.Resolve<IUserService>().GetSingle(r => r.Id == userId);
-            if (user == null) throw new ValidException("对应ID会员不存在");
+            if (user == null) {
+                throw new ValidException("对应ID会员不存在");
+            }
+
             var rights = Ioc.Resolve<IUserRightsService>().GetView(true); //用管理员权限去获取
             var items = Ioc.Resolve<IUserRightsService>().GetList(x => x.UserId == userId).ToList();
             var sqlStoreRevenue =

@@ -17,7 +17,9 @@ namespace Alabo.Datas.Stores.Count.Mongo
 
         public long Count(Expression<Func<TEntity, bool>> predicate)
         {
-            if (predicate == null) return Collection.AsQueryable().LongCount();
+            if (predicate == null) {
+                return Collection.AsQueryable().LongCount();
+            }
 
             return Collection.AsQueryable().LongCount(predicate);
         }

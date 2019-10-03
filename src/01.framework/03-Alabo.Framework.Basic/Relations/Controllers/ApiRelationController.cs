@@ -79,10 +79,18 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         public ApiResult Save([FromBody] Relation model)
         {
             //check
-            if (model.Name.IsNullOrEmpty()) return ApiResult.Failure("保存失败：名称不能为空");
-            if (model.Type.IsNullOrEmpty()) return ApiResult.Failure("保存失败：type参数异常");
+            if (model.Name.IsNullOrEmpty()) {
+                return ApiResult.Failure("保存失败：名称不能为空");
+            }
+
+            if (model.Type.IsNullOrEmpty()) {
+                return ApiResult.Failure("保存失败：type参数异常");
+            }
+
             var type = model.Type.GetTypeByName();
-            if (type == null) return ApiResult.Failure("保存失败：type参数异常");
+            if (type == null) {
+                return ApiResult.Failure("保存失败：type参数异常");
+            }
             //add
             model.Name = model.Name.Trim();
             model.Type = type.FullName;
@@ -103,15 +111,25 @@ namespace Alabo.Framework.Basic.Relations.Controllers
             try
             {
                 var confirm = list.GroupBy(s => s.Name).Select(s => s.First());
-                if (confirm.Count() < list.Count()) return ApiResult.Failure("保存失败：存在重复标签");
+                if (confirm.Count() < list.Count()) {
+                    return ApiResult.Failure("保存失败：存在重复标签");
+                }
 
                 var i = 0;
                 foreach (var model in list)
                 {
-                    if (model.Name.IsNullOrEmpty()) return ApiResult.Failure("保存失败：名称不能为空");
-                    if (model.Type.IsNullOrEmpty()) return ApiResult.Failure("保存失败：type参数异常");
+                    if (model.Name.IsNullOrEmpty()) {
+                        return ApiResult.Failure("保存失败：名称不能为空");
+                    }
+
+                    if (model.Type.IsNullOrEmpty()) {
+                        return ApiResult.Failure("保存失败：type参数异常");
+                    }
+
                     var type = model.Type.GetTypeByName();
-                    if (type == null) return ApiResult.Failure("保存失败：type参数异常");
+                    if (type == null) {
+                        return ApiResult.Failure("保存失败：type参数异常");
+                    }
                     //add
                     model.Name = model.Name.Trim();
                     model.Type = type.FullName;
@@ -138,18 +156,26 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         {
             //get
             var relation = Resolve<IRelationService>().GetSingle(a => a.Id == id);
-            if (relation == null) return ApiResult.Failure("删除失败：提交数据异常");
+            if (relation == null) {
+                return ApiResult.Failure("删除失败：提交数据异常");
+            }
             //relation count
             var relationCount = Resolve<IRelationService>()
                 .Count(a => a.FatherId == id && a.Status == Status.Normal);
-            if (relationCount > 0) return ApiResult.Failure("删除失败：含有子分类不能删除");
+            if (relationCount > 0) {
+                return ApiResult.Failure("删除失败：含有子分类不能删除");
+            }
             //relation index count
             var relationIndexCount = Resolve<IRelationIndexService>()
                 .Count(e => e.RelationId == id);
-            if (relationIndexCount > 0) return ApiResult.Failure("删除失败：分类下有数据,不能删除");
+            if (relationIndexCount > 0) {
+                return ApiResult.Failure("删除失败：分类下有数据,不能删除");
+            }
             //delete
             var result = Resolve<IRelationService>().Delete(o => o.Id == relation.Id);
-            if (!result) ApiResult.Failure("删除失败");
+            if (!result) {
+                ApiResult.Failure("删除失败");
+            }
 
             return ApiResult.Success();
         }
@@ -172,7 +198,10 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         [Display(Description = "分类")]
         public ApiResult GetClass(string type, long userId)
         {
-            if (type.IsNullOrEmpty()) return ApiResult.Failure<object>("类型名称不能为空");
+            if (type.IsNullOrEmpty()) {
+                return ApiResult.Failure<object>("类型名称不能为空");
+            }
+
             var attrNameForTitle = GetAttrValueByName(type, "Name");
             var result = Resolve<IRelationService>().GetClass(type, userId).OrderBy(s => s.SortOrder).ToList();
 
@@ -188,7 +217,9 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         [HttpGet]
         public ApiResult<List<RelationApiOutput>> GetFatherClass(string type)
         {
-            if (type.IsNullOrEmpty()) return ApiResult.Failure<List<RelationApiOutput>>("类型名称不能为空");
+            if (type.IsNullOrEmpty()) {
+                return ApiResult.Failure<List<RelationApiOutput>>("类型名称不能为空");
+            }
 
             var result = Resolve<IRelationService>().GetClass(type).ToList();
             return ApiResult.Success(result);
@@ -201,7 +232,9 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         [HttpGet]
         public ApiResult<List<KeyValue>> GetFatherKeyValues(string type)
         {
-            if (type.IsNullOrEmpty()) return ApiResult.Failure<List<KeyValue>>("类型名称不能为空");
+            if (type.IsNullOrEmpty()) {
+                return ApiResult.Failure<List<KeyValue>>("类型名称不能为空");
+            }
 
             var result = Resolve<IRelationService>().GetFatherKeyValues(type).ToList();
             return ApiResult.Success(result);
@@ -214,7 +247,10 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         [HttpGet]
         public ApiResult GetTag(string type)
         {
-            if (type.IsNullOrEmpty()) return ApiResult.Failure("类型名称不能为空");
+            if (type.IsNullOrEmpty()) {
+                return ApiResult.Failure("类型名称不能为空");
+            }
+
             var attrNameForTitle = GetAttrValueByName(type, "Name");
             var result = Resolve<IRelationService>().GetClass(type).ToList();
 
@@ -246,7 +282,9 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         [HttpGet]
         public ApiResult<List<KeyValue>> GetKeyValues(string type)
         {
-            if (type.IsNullOrEmpty()) return ApiResult.Failure<List<KeyValue>>("类型名称不能为空");
+            if (type.IsNullOrEmpty()) {
+                return ApiResult.Failure<List<KeyValue>>("类型名称不能为空");
+            }
 
             var result = Resolve<IRelationService>().GetKeyValues(type).ToList();
             return ApiResult.Success(result);
@@ -259,7 +297,9 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         [HttpGet]
         public ApiResult<List<KeyValue>> GetClassTree(string type)
         {
-            if (type.IsNullOrEmpty()) return ApiResult.Failure<List<KeyValue>>("类型名称不能为空");
+            if (type.IsNullOrEmpty()) {
+                return ApiResult.Failure<List<KeyValue>>("类型名称不能为空");
+            }
 
             var result = Resolve<IRelationService>().GetKeyValues(type).ToList();
             result.ForEach(u => { u.Key = u.Name; });
@@ -273,7 +313,9 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         [HttpGet]
         public ApiResult<List<KeyValue>> GetTags(string type)
         {
-            if (type.IsNullOrEmpty()) return ApiResult.Failure<List<KeyValue>>("类型名称不能为空");
+            if (type.IsNullOrEmpty()) {
+                return ApiResult.Failure<List<KeyValue>>("类型名称不能为空");
+            }
 
             var result = Resolve<IRelationService>().GetKeyValues(type).ToList();
             result.ForEach(u =>

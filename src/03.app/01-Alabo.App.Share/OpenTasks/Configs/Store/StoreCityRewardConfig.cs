@@ -39,7 +39,9 @@ namespace Alabo.App.Share.OpenTasks.Configs.Store
         public override ExecuteResult<ITaskResult[]> Execute(TaskParameter parameter)
         {
             var baseResult = base.Execute(parameter);
-            if (baseResult.Status != ResultStatus.Success) return baseResult;
+            if (baseResult.Status != ResultStatus.Success) {
+                return baseResult;
+            }
 
             //TODO 2019年9月24日 供应商订单重构
             // 同时下多个供应商订单的时候，分开

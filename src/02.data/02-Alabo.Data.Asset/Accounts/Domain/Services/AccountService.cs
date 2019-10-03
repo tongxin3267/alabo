@@ -52,7 +52,9 @@ namespace Alabo.App.Asset.Accounts.Domain.Services
         {
             var moneyConfigList = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
             var moneyConfig = moneyConfigList.FirstOrDefault(r => r.Currency == currency && r.Status == Status.Normal);
-            if (moneyConfig == null) throw new ArgumentNullException("currency has not moneyconfig ");
+            if (moneyConfig == null) {
+                throw new ArgumentNullException("currency has not moneyconfig ");
+            }
 
             return GetAccount(transation, userid, moneyConfig.Id);
         }
@@ -86,7 +88,9 @@ namespace Alabo.App.Asset.Accounts.Domain.Services
         {
             var moneyConfigList = Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
             var moneyConfig = moneyConfigList.FirstOrDefault(r => r.Currency == currency && r.Status == Status.Normal);
-            if (moneyConfig == null) throw new ArgumentNullException("currency has not moneyconfig ");
+            if (moneyConfig == null) {
+                throw new ArgumentNullException("currency has not moneyconfig ");
+            }
 
             return GetAccount(userid, moneyConfig.Id);
         }
@@ -145,11 +149,22 @@ namespace Alabo.App.Asset.Accounts.Domain.Services
         {
             #region 安全验证
 
-            if (input == null) return ServiceResult.FailedWithMessage("对象不能为空");
-            if (input.Money <= 0) return ServiceResult.FailedWithMessage("金额不能小于等于0!");
-            if (input.UserId.IsNullOrEmpty()) return ServiceResult.FailedWithMessage("用户id不能为空!");
+            if (input == null) {
+                return ServiceResult.FailedWithMessage("对象不能为空");
+            }
+
+            if (input.Money <= 0) {
+                return ServiceResult.FailedWithMessage("金额不能小于等于0!");
+            }
+
+            if (input.UserId.IsNullOrEmpty()) {
+                return ServiceResult.FailedWithMessage("用户id不能为空!");
+            }
+
             var user = Resolve<IUserService>().GetSingle(input.UserId);
-            if (user == null) return ServiceResult.FailedWithMessage("用户不存在");
+            if (user == null) {
+                return ServiceResult.FailedWithMessage("用户不存在");
+            }
 
             #endregion 安全验证
 
@@ -157,7 +172,10 @@ namespace Alabo.App.Asset.Accounts.Domain.Services
             var moneyConfig = moneyConfigs.FirstOrDefault(s => s.Id == MoneyTypeConfig.CNY);
 
             var result = Resolve<IBillService>().Increase(user, moneyConfig, input.Money, "会员通过支付宝储值充值");
-            if (result.Succeeded) return ServiceResult.SuccessWithObject("充值成功");
+            if (result.Succeeded) {
+                return ServiceResult.SuccessWithObject("充值成功");
+            }
+
             return ServiceResult.FailedWithMessage("充值失败");
         }
 
@@ -225,7 +243,9 @@ namespace Alabo.App.Asset.Accounts.Domain.Services
             //比对是否有修改过的资产类型（禁用或删除）
             var update = moneyTypes.Select(o => o.Id).Intersect(accountList.Select(o => o.MoneyTypeId));
             //获取所有的用户
-            foreach (var item in add) CreateAccount(userId, moneyTypes.Where(o => o.Id == item).FirstOrDefault());
+            foreach (var item in add) {
+                CreateAccount(userId, moneyTypes.Where(o => o.Id == item).FirstOrDefault());
+            }
 
             //foreach (var item in update) {
             //    UpdateAccount(userId, moneyTypes.Where(o => o.Id == item).FirstOrDefault());
@@ -240,11 +260,17 @@ namespace Alabo.App.Asset.Accounts.Domain.Services
         public ServiceResult CreateAccount(long userId, MoneyTypeConfig config)
         {
             var result = ServiceResult.Success;
-            if (config == null) return ServiceResult.FailedWithMessage("货币类型不存在");
+            if (config == null) {
+                return ServiceResult.FailedWithMessage("货币类型不存在");
+            }
 
-            if (config.Id.IsNull()) return ServiceResult.FailedWithMessage("货币类型不合法");
+            if (config.Id.IsNull()) {
+                return ServiceResult.FailedWithMessage("货币类型不合法");
+            }
 
-            if (config.Status != Status.Normal) return ServiceResult.FailedWithMessage("货币类型状态不正常，不能添加");
+            if (config.Status != Status.Normal) {
+                return ServiceResult.FailedWithMessage("货币类型状态不正常，不能添加");
+            }
 
             var account = new Account
             {
@@ -258,16 +284,26 @@ namespace Alabo.App.Asset.Accounts.Domain.Services
 
         public string GetToken(long userId, MoneyTypeConfig config)
         {
-            if (config == null) return null;
+            if (config == null) {
+                return null;
+            }
 
             var begin = Convert.ToInt32(config.Currency).ToString(); // 3位数
-            if (config.Currency == Currency.Cny) begin = RandomHelper.Number(11, 99) + "0";
+            if (config.Currency == Currency.Cny) {
+                begin = RandomHelper.Number(11, 99) + "0";
+            }
 
-            if (begin.Length > 3) begin = begin.Substring(0, 3);
+            if (begin.Length > 3) {
+                begin = begin.Substring(0, 3);
+            }
 
-            if (begin.Length == 1) begin += RandomHelper.Number(10, 99).ToString();
+            if (begin.Length == 1) {
+                begin += RandomHelper.Number(10, 99).ToString();
+            }
 
-            if (begin.Length == 2) begin += RandomHelper.Number(0, 9).ToString();
+            if (begin.Length == 2) {
+                begin += RandomHelper.Number(0, 9).ToString();
+            }
 
             var lastMoneyId = config.Id.ToString().Replace("-", "");
 
@@ -293,7 +329,9 @@ namespace Alabo.App.Asset.Accounts.Domain.Services
             {
                 var config = Resolve<IAutoConfigService>().MoneyTypes().FirstOrDefault(r => r.Id == item.MoneyTypeId);
                 item.Token = GetToken(item.UserId, config);
-                if (item.Token == null) item.Token = RandomHelper.RandomString(34);
+                if (item.Token == null) {
+                    item.Token = RandomHelper.RandomString(34);
+                }
 
                 Update(item);
             }
@@ -323,7 +361,9 @@ namespace Alabo.App.Asset.Accounts.Domain.Services
         public void InitAllUserIdsWidthOutAccount()
         {
             var userIds = Repository<IAccountRepository>().GetAllUserIdsWidthOutAccount();
-            foreach (var item in userIds) InitSingleUserAccount(item);
+            foreach (var item in userIds) {
+                InitSingleUserAccount(item);
+            }
         }
 
         #endregion 初始化用户帐户

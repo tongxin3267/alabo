@@ -41,7 +41,7 @@ namespace Alabo.Framework.Tasks.Schedules.Domain.Services
 
             var list = GetList();
             var addList = new List<Schedule>();
-            foreach (var type in GetAllTypes())
+            foreach (var type in GetAllTypes()) {
                 try
                 {
                     long delay = 0;
@@ -59,7 +59,9 @@ namespace Alabo.Framework.Tasks.Schedules.Domain.Services
                             Name = type.Name
                         };
                         var classPropertyAttribute = type.GetAttribute<ClassPropertyAttribute>();
-                        if (classPropertyAttribute != null) find.Name = classPropertyAttribute.Name;
+                        if (classPropertyAttribute != null) {
+                            find.Name = classPropertyAttribute.Name;
+                        }
 
                         addList.Add(find);
                     }
@@ -83,12 +85,15 @@ namespace Alabo.Framework.Tasks.Schedules.Domain.Services
                             }
                         }
 
-                        if (isUpdate) Update(find);
+                        if (isUpdate) {
+                            Update(find);
+                        }
                     }
                 }
                 catch
                 {
                 }
+            }
 
             AddMany(addList);
         }

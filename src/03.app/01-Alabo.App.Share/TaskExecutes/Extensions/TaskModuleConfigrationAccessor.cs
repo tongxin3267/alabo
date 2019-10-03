@@ -24,7 +24,9 @@ namespace Alabo.App.Share.TaskExecutes.Extensions
         public IEnumerable<object> GetConfigurations(Type moduleType)
         {
             IList<object> list = new List<object>();
-            if (!_taskManager.TryGetModuleAttribute(moduleType, out var moduleAttribute)) return list;
+            if (!_taskManager.TryGetModuleAttribute(moduleType, out var moduleAttribute)) {
+                return list;
+            }
 
             list.AddRange(DynamicGetModuleConfigList(moduleType, moduleAttribute.ConfigurationType));
             return list;
@@ -34,11 +36,17 @@ namespace Alabo.App.Share.TaskExecutes.Extensions
         {
             var find = new ShareModule();
             // var find = _taskModuleConfigService.GetSingle(id);
-            if (find == null) return null;
+            if (find == null) {
+                return null;
+            }
 
-            if (!_taskManager.TryGetModuleAttribute(find.ModuleId, out var moduleAttribute)) return null;
+            if (!_taskManager.TryGetModuleAttribute(find.ModuleId, out var moduleAttribute)) {
+                return null;
+            }
 
-            if (!_taskManager.TryGetModuleType(find.ModuleId, out var moduleType)) return null;
+            if (!_taskManager.TryGetModuleType(find.ModuleId, out var moduleType)) {
+                return null;
+            }
 
             var configuration = DynamicGetModuleConfig(moduleType, moduleAttribute.ConfigurationType, id);
             return Tuple.Create(moduleType, configuration);
@@ -46,13 +54,19 @@ namespace Alabo.App.Share.TaskExecutes.Extensions
 
         private object DynamicGetModuleConfig(Type moduleType, Type configurationType)
         {
-            if (moduleType == null) throw new ArgumentNullException(nameof(moduleType));
+            if (moduleType == null) {
+                throw new ArgumentNullException(nameof(moduleType));
+            }
 
-            if (configurationType == null) throw new ArgumentNullException(nameof(configurationType));
+            if (configurationType == null) {
+                throw new ArgumentNullException(nameof(configurationType));
+            }
 
             var method = _taskModuleConfigService.GetType().GetMethods()
                 .FirstOrDefault(e => e.Name == "Get" && e.GetParameters().Length == 0);
-            if (method == null) throw new MissingMethodException("not found method Get<TModule, TConfiguration>()");
+            if (method == null) {
+                throw new MissingMethodException("not found method Get<TModule, TConfiguration>()");
+            }
 
             method = method.MakeGenericMethod(moduleType, configurationType);
             var instanseExpression = Expression.Constant(_taskModuleConfigService);
@@ -63,14 +77,19 @@ namespace Alabo.App.Share.TaskExecutes.Extensions
 
         private object DynamicGetModuleConfig(Type moduleType, Type configurationType, long id)
         {
-            if (moduleType == null) throw new ArgumentNullException(nameof(moduleType));
+            if (moduleType == null) {
+                throw new ArgumentNullException(nameof(moduleType));
+            }
 
-            if (configurationType == null) throw new ArgumentNullException(nameof(configurationType));
+            if (configurationType == null) {
+                throw new ArgumentNullException(nameof(configurationType));
+            }
 
             var method = _taskModuleConfigService.GetType().GetMethods()
                 .FirstOrDefault(e => e.Name == "Get" && e.GetParameters().Length == 1);
-            if (method == null)
+            if (method == null) {
                 throw new MissingMethodException("not found method Get<TModule, TConfiguration>(int id)");
+            }
 
             method = method.MakeGenericMethod(moduleType, configurationType);
             var instanseExpression = Expression.Constant(_taskModuleConfigService);
@@ -88,15 +107,21 @@ namespace Alabo.App.Share.TaskExecutes.Extensions
         /// <param name="configurationType"></param>
         private IEnumerable<object> DynamicGetModuleConfigList(Type moduleType, Type configurationType)
         {
-            if (moduleType == null) throw new ArgumentNullException(nameof(moduleType));
+            if (moduleType == null) {
+                throw new ArgumentNullException(nameof(moduleType));
+            }
 
-            if (configurationType == null) throw new ArgumentNullException(nameof(configurationType));
+            if (configurationType == null) {
+                throw new ArgumentNullException(nameof(configurationType));
+            }
 
             // var resultList = _taskModuleConfigService.GetList();
             var method = _taskModuleConfigService.GetType().GetMethods()
                 .FirstOrDefault(e => e.Name == "GetList" && e.GetGenericArguments().Length == 2);
 
-            if (method == null) throw new MissingMethodException("not found method GetList<TModule, TConfiguration>()");
+            if (method == null) {
+                throw new MissingMethodException("not found method GetList<TModule, TConfiguration>()");
+            }
 
             method = method.MakeGenericMethod(moduleType, configurationType);
             var instanseExpression = Expression.Constant(_taskModuleConfigService);

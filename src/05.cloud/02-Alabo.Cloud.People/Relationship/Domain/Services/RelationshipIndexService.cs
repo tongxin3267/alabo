@@ -29,24 +29,36 @@ namespace Alabo.Cloud.People.Relationship.Domain.Services
         public void UserRegAfter(User user)
         {
             //TODO:用户初始化问题(zhang.zl)
-            if (user.ParentId <= 0) return;
+            if (user.ParentId <= 0) {
+                return;
+            }
 
-            if (user.Map.ParentMap.IsNullOrEmpty()) throw new ValidException("用户Map不能为空");
+            if (user.Map.ParentMap.IsNullOrEmpty()) {
+                throw new ValidException("用户Map不能为空");
+            }
 
             var maps = user.Map.ParentMap.DeserializeJson<List<ParentMap>>();
-            if (maps == null) throw new ValidException("未找到触发会员的Parent Map.");
+            if (maps == null) {
+                throw new ValidException("未找到触发会员的Parent Map.");
+            }
 
             var userRelationshipConfigs = Resolve<IAutoConfigService>().GetList<UserRelationshipIndexConfig>();
             foreach (var item in userRelationshipConfigs.Where(r => r.IsEnable))
             {
-                if (item.HighGrades.IsNullOrEmpty() || item.LowGrades.IsNullOrEmpty()) continue;
+                if (item.HighGrades.IsNullOrEmpty() || item.LowGrades.IsNullOrEmpty()) {
+                    continue;
+                }
 
                 var hightGrades = item.HighGrades.SliptToGuidList();
-                if (hightGrades.Count == 0) continue;
+                if (hightGrades.Count == 0) {
+                    continue;
+                }
 
                 var lowGrades = item.LowGrades.SliptToGuidList();
                 // 判断触发用户等级是否在该范围，如果不在则退出
-                if (!lowGrades.Contains(user.GradeId)) continue;
+                if (!lowGrades.Contains(user.GradeId)) {
+                    continue;
+                }
 
                 // 所有父级用户
                 var parentUsers = Resolve<IUserService>().GetList(maps.Select(r => r.UserId).ToList());

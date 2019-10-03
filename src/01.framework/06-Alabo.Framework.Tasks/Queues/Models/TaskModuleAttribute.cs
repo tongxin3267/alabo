@@ -19,7 +19,9 @@ namespace Alabo.Framework.Tasks.Queues.Models
         /// <exception cref="ArgumentException"></exception>
         public TaskModuleAttribute(string id, string name)
         {
-            if (!Guid.TryParse(id, out var idGuid)) throw new ArgumentException($"can not convert id {id} to guid.");
+            if (!Guid.TryParse(id, out var idGuid)) {
+                throw new ArgumentException($"can not convert id {id} to guid.");
+            }
 
             Id = idGuid;
             Name = name;

@@ -146,7 +146,9 @@ namespace Alabo.App.Share.Rewards.ViewModels
             get
             {
                 var searSerial = $"9{Id.ToString().PadLeft(8, '0')}";
-                if (Id.ToString().Length >= 9) searSerial = $"{Id.ToString()}";
+                if (Id.ToString().Length >= 9) {
+                    searSerial = $"{Id.ToString()}";
+                }
 
                 return searSerial;
             }
@@ -159,7 +161,10 @@ namespace Alabo.App.Share.Rewards.ViewModels
             dic.TryGetValue("loginUserId", out var userId);
             dic.TryGetValue("pageIndex", out var pageIndexStr);
             var pageIndex = pageIndexStr.ToInt64();
-            if (pageIndex <= 0) pageIndex = 1;
+            if (pageIndex <= 0) {
+                pageIndex = 1;
+            }
+
             var temp = new ExpressionQuery<Reward>
             {
                 EnablePaging = true,

@@ -16,7 +16,9 @@ namespace Alabo.Datas.Stores.Column.Mongo
 
         public object GetFieldValue(object id, string field)
         {
-            if (id.IsNullOrEmpty() || field.IsNullOrEmpty()) throw new ValidException("Id或者字段设置不能为空");
+            if (id.IsNullOrEmpty() || field.IsNullOrEmpty()) {
+                throw new ValidException("Id或者字段设置不能为空");
+            }
 
             var find = GetSingle(id);
             var value = field.GetPropertyValue(find);

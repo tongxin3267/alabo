@@ -19,7 +19,9 @@ namespace Alabo.Dependency
             AddTransient<TService, TImplementation>(this ContainerBuilder builder, string name = null)
             where TService : class where TImplementation : class, TService
         {
-            if (name == null) return builder.RegisterType<TImplementation>().As<TService>().InstancePerDependency();
+            if (name == null) {
+                return builder.RegisterType<TImplementation>().As<TService>().InstancePerDependency();
+            }
 
             return builder.RegisterType<TImplementation>().Named<TService>(name).InstancePerDependency();
         }
@@ -35,7 +37,9 @@ namespace Alabo.Dependency
             AddScoped<TService, TImplementation>(this ContainerBuilder builder, string name = null)
             where TService : class where TImplementation : class, TService
         {
-            if (name == null) return builder.RegisterType<TImplementation>().As<TService>().InstancePerLifetimeScope();
+            if (name == null) {
+                return builder.RegisterType<TImplementation>().As<TService>().InstancePerLifetimeScope();
+            }
 
             return builder.RegisterType<TImplementation>().Named<TService>(name).InstancePerLifetimeScope();
         }
@@ -62,7 +66,9 @@ namespace Alabo.Dependency
             AddSingleton<TService, TImplementation>(this ContainerBuilder builder, string name = null)
             where TService : class where TImplementation : class, TService
         {
-            if (name == null) return builder.RegisterType<TImplementation>().As<TService>().SingleInstance();
+            if (name == null) {
+                return builder.RegisterType<TImplementation>().As<TService>().SingleInstance();
+            }
 
             return builder.RegisterType<TImplementation>().Named<TService>(name).SingleInstance();
         }

@@ -59,13 +59,19 @@ namespace Alabo.Web.Filters
             try
             {
                 var html = await RenderToStringAsync(context);
-                if (string.IsNullOrWhiteSpace(html)) return;
+                if (string.IsNullOrWhiteSpace(html)) {
+                    return;
+                }
 
                 var path = Common.GetPhysicalPath(string.IsNullOrWhiteSpace(Path) ? GetPath(context) : Path);
                 var directory = System.IO.Path.GetDirectoryName(path);
-                if (string.IsNullOrWhiteSpace(directory)) return;
+                if (string.IsNullOrWhiteSpace(directory)) {
+                    return;
+                }
 
-                if (Directory.Exists(directory) == false) Directory.CreateDirectory(directory);
+                if (Directory.Exists(directory) == false) {
+                    Directory.CreateDirectory(directory);
+                }
 
                 File.WriteAllText(path, html);
             }
@@ -99,7 +105,9 @@ namespace Alabo.Web.Filters
             using (var stringWriter = new StringWriter())
             {
                 var viewResult = razorViewEngine.FindView(actionContext, viewName, true);
-                if (viewResult.View == null) throw new ArgumentNullException($"未找到视图： {viewName}");
+                if (viewResult.View == null) {
+                    throw new ArgumentNullException($"未找到视图： {viewName}");
+                }
 
                 var viewDictionary =
                     new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())

@@ -17,7 +17,9 @@ namespace Alabo.Extensions
         public static string GetValue(this ClaimsIdentity identity, string type)
         {
             var claim = identity.FindFirst(type);
-            if (claim == null) return string.Empty;
+            if (claim == null) {
+                return string.Empty;
+            }
 
             return claim.Value;
         }
@@ -28,11 +30,17 @@ namespace Alabo.Extensions
         /// <param name="context">Http上下文</param>
         public static ClaimsIdentity GetIdentity(this HttpContext context)
         {
-            if (context == null) return UnauthenticatedIdentity.Instance;
+            if (context == null) {
+                return UnauthenticatedIdentity.Instance;
+            }
 
-            if (!(context.User is ClaimsPrincipal principal)) return UnauthenticatedIdentity.Instance;
+            if (!(context.User is ClaimsPrincipal principal)) {
+                return UnauthenticatedIdentity.Instance;
+            }
 
-            if (principal.Identity is ClaimsIdentity identity) return identity;
+            if (principal.Identity is ClaimsIdentity identity) {
+                return identity;
+            }
 
             return UnauthenticatedIdentity.Instance;
         }

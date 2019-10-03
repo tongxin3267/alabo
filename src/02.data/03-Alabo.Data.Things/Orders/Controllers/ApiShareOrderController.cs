@@ -34,7 +34,9 @@ namespace Alabo.Data.Things.Orders.Controllers
         public ApiResult<ShareOrder> GetSingle(long id)
         {
             var result = Resolve<IShareOrderService>().GetSingle(id);
-            if (result == null) return ApiResult.Failure<ShareOrder>("分润订单信息不存在！");
+            if (result == null) {
+                return ApiResult.Failure<ShareOrder>("分润订单信息不存在！");
+            }
 
             return ApiResult.Success(result);
         }

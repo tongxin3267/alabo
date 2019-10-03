@@ -27,7 +27,9 @@ namespace Alabo.Industry.Shop.Orders.PcDtos
             var model = ToQuery<UniteOrderList>();
             var list = new PagedList<ApiOrderListOutput>();
             var user = Resolve<IUserService>().GetSingle(model.UserId);
-            if (user == null) throw new ValidException("您无权查看其他人订单");
+            if (user == null) {
+                throw new ValidException("您无权查看其他人订单");
+            }
 
             var expressionQuery = new ExpressionQuery<Order>();
             switch (model.Filter)
@@ -36,7 +38,9 @@ namespace Alabo.Industry.Shop.Orders.PcDtos
                     throw new ValidException("无权限查看订单");
                 case FilterType.User:
                     {
-                        if (model.UserId > 0) expressionQuery.And(e => e.UserId == user.Id);
+                        if (model.UserId > 0) {
+                            expressionQuery.And(e => e.UserId == user.Id);
+                        }
 
                         list = Resolve<IOrderApiService>().GetPageList(query, expressionQuery);
                         break;
@@ -47,10 +51,14 @@ namespace Alabo.Industry.Shop.Orders.PcDtos
                         var dic = HttpWeb.HttpContext.ToDictionary();
                         dic = dic.RemoveKey("userId"); // 否则查出的订单都是同一个用户
 
-                        if (model.OrderStatus > 0) expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
+                        if (model.OrderStatus > 0) {
+                            expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
+                        }
 
                         var isAdmin = Resolve<IUserService>().IsAdmin(model.UserId);
-                        if (!isAdmin) throw new ValidException("非管理员不能查看平台订单");
+                        if (!isAdmin) {
+                            throw new ValidException("非管理员不能查看平台订单");
+                        }
                         // expressionQuery.And(e => e.StoreId > 0);
                         expressionQuery.And(e => e.UserId > 0);
 
@@ -63,10 +71,15 @@ namespace Alabo.Industry.Shop.Orders.PcDtos
                     {
                         var dic = HttpWeb.HttpContext.ToDictionary();
                         dic = dic.RemoveKey("userId"); // 否则查出的订单都是同一个用户
-                        if (model.OrderStatus > 0) expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
+                        if (model.OrderStatus > 0) {
+                            expressionQuery.And(e => e.OrderStatus == model.OrderStatus);
+                        }
 
                         var store = Resolve<IStoreService>().GetUserStore(model.UserId);
-                        if (store == null) throw new ValidException("您无权查看其他店铺订单");
+                        if (store == null) {
+                            throw new ValidException("您无权查看其他店铺订单");
+                        }
+
                         expressionQuery.And(e => e.StoreId == store.Id.ToString());
 
                         model.UserId = 0;

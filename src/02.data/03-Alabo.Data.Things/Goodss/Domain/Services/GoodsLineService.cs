@@ -21,7 +21,10 @@ namespace Alabo.Data.Things.Goodss.Domain.Services
         public GoodsLineOutput GetEditView(string id)
         {
             var goodLine = Resolve<IGoodsLineService>().GetSingle(r => r.Id == id.ToObjectId());
-            if (goodLine == null) goodLine = new GoodsLine();
+            if (goodLine == null) {
+                goodLine = new GoodsLine();
+            }
+
             var productList = Resolve<IGoodsService>().GetList(r => goodLine.ProductIds.Contains(r.Id));
             goodLine.ProductIds = productList.Select(r => r.Id).ToList();
             var view = goodLine.MapTo<GoodsLineOutput>();
@@ -35,8 +38,10 @@ namespace Alabo.Data.Things.Goodss.Domain.Services
             goodLine.ProductIds = view.ProductIds;
             goodLine.Name = view.Name;
             goodLine.Intro = view.Intro;
-            if (Resolve<IGoodsLineService>().AddOrUpdate(goodLine, !view.Id.IsObjectIdNullOrEmpty()))
+            if (Resolve<IGoodsLineService>().AddOrUpdate(goodLine, !view.Id.IsObjectIdNullOrEmpty())) {
                 return ServiceResult.Success;
+            }
+
             return ServiceResult.FailedWithMessage("��Ʒ�߱༭ʧ��");
         }
     }

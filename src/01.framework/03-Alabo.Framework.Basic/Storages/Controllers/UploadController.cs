@@ -95,8 +95,9 @@ namespace Alabo.Framework.Basic.Storages.Controllers
         /// <param name="action">The action.</param>
         public IActionResult UEditor([FromQuery] string callback, [FromQuery] string action)
         {
-            if (!Response.Headers.ContainsKey("Access-Control-Allow-Origin"))
+            if (!Response.Headers.ContainsKey("Access-Control-Allow-Origin")) {
                 Response.Headers.Add("Access-Control-Allow-Origin", "*");
+            }
 
             switch (action)
             {
@@ -247,7 +248,9 @@ namespace Alabo.Framework.Basic.Storages.Controllers
                 case "catchimage":
                     StringValues sources;
                     Request.Form.TryGetValue("source[]", out sources);
-                    if (sources.Count == 0) return WriteJson(callback, new {state = "参数错误：没有指定抓取源"});
+                    if (sources.Count == 0) {
+                        return WriteJson(callback, new {state = "参数错误：没有指定抓取源"});
+                    }
 
                     var Crawlers = sources.Select(x => new Crawler(x).Fetch(_hostEnvironment)).ToArray();
                     return WriteJson(callback, new
@@ -338,8 +341,9 @@ namespace Alabo.Framework.Basic.Storages.Controllers
             localPath = _hostEnvironment.ContentRootPath + "/" + savePath;
             try
             {
-                if (!Directory.Exists(Path.GetDirectoryName(localPath)))
+                if (!Directory.Exists(Path.GetDirectoryName(localPath))) {
                     Directory.CreateDirectory(Path.GetDirectoryName(localPath));
+                }
 
                 System.IO.File.WriteAllBytes(localPath, uploadFileBytes);
                 var extension = Path.GetExtension(uploadFileName).ToLower();
@@ -387,19 +391,23 @@ namespace Alabo.Framework.Basic.Storages.Controllers
                         {
                             var arrayICI = ImageCodecInfo.GetImageEncoders();
                             ImageCodecInfo jpegICIinfo = null;
-                            for (var x = 0; x < arrayICI.Length; x++)
+                            for (var x = 0; x < arrayICI.Length; x++) {
                                 if (arrayICI[x].FormatDescription.Equals("JPEG"))
                                 {
                                     jpegICIinfo = arrayICI[x];
                                     break;
                                 }
+                            }
 
-                            if (System.IO.File.Exists(localPath)) System.IO.File.Delete(localPath);
+                            if (System.IO.File.Exists(localPath)) {
+                                System.IO.File.Delete(localPath);
+                            }
 
-                            if (jpegICIinfo != null)
+                            if (jpegICIinfo != null) {
                                 ob.Save(localPath, jpegICIinfo, ep); //dFile是压缩后的新路径
-                            else
+                            } else {
                                 ob.Save(localPath, tFormat);
+                            }
                         }
                         catch (Exception ex)
                         {
@@ -500,7 +508,9 @@ namespace Alabo.Framework.Basic.Storages.Controllers
         {
             var fields = new List<string>();
             var keys = new[] {"originalName", "name", "url", "size", "state", "type"};
-            for (var i = 0; i < keys.Length; i++) fields.Add(string.Format("\"{0}\": \"{1}\"", keys[i], info[keys[i]]));
+            for (var i = 0; i < keys.Length; i++) {
+                fields.Add(string.Format("\"{0}\": \"{1}\"", keys[i], info[keys[i]]));
+            }
 
             return "{" + string.Join(",", fields) + "}";
         }
@@ -557,13 +567,14 @@ namespace Alabo.Framework.Basic.Storages.Controllers
                 fs.Close();
             }
 
-            if (responseType == "json")
+            if (responseType == "json") {
                 return Json(new
                 {
                     uploaded = 1,
                     fileName = img.FileName,
                     url = "/wwwroot/" + fileoutName
                 });
+            }
 
             var result =
                 $"<script type=\"text/javascript\">window.parent.CKEDITOR.tools.callFunction(\"{callback}\", \"{"/" + fileoutName}\", \"\");</script>";
@@ -620,7 +631,9 @@ namespace Alabo.Framework.Basic.Storages.Controllers
 
             var json = info.ToJsons();
             Response.ContentType = "text/html";
-            if (callback != null) return Content($"<script>{callback}(Json.parse(\"{json}\"))</script>");
+            if (callback != null) {
+                return Content($"<script>{callback}(Json.parse(\"{json}\"))</script>");
+            }
 
             return Content(json);
         }
@@ -723,8 +736,9 @@ namespace Alabo.Framework.Basic.Storages.Controllers
                 ServerUrl = PathFormatter.Format(Path.GetFileName(SourceUrl),
                     UEditorConfig.GetString("catcherPathFormat"));
                 var savePath = hostingEnvironment.WebRootPath + "/" + ServerUrl;
-                if (!Directory.Exists(Path.GetDirectoryName(savePath)))
+                if (!Directory.Exists(Path.GetDirectoryName(savePath))) {
                     Directory.CreateDirectory(Path.GetDirectoryName(savePath));
+                }
 
                 try
                 {
@@ -735,7 +749,9 @@ namespace Alabo.Framework.Basic.Storages.Controllers
                     {
                         var buffer = new byte[4096];
                         int count;
-                        while ((count = reader.Read(buffer, 0, buffer.Length)) != 0) ms.Write(buffer, 0, count);
+                        while ((count = reader.Read(buffer, 0, buffer.Length)) != 0) {
+                            ms.Write(buffer, 0, count);
+                        }
 
                         bytes = ms.ToArray();
                     }
@@ -769,9 +785,11 @@ namespace Alabo.Framework.Basic.Storages.Controllers
                     foreach (var ipAddress in ipHostEntry.AddressList)
                     {
                         var ipBytes = ipAddress.GetAddressBytes();
-                        if (ipAddress.AddressFamily == AddressFamily.InterNetwork)
-                            if (!IsPrivateIP(ipAddress))
+                        if (ipAddress.AddressFamily == AddressFamily.InterNetwork) {
+                            if (!IsPrivateIP(ipAddress)) {
                                 return true;
+                            }
+                        }
                     }
 
                     break;
@@ -792,22 +810,32 @@ namespace Alabo.Framework.Basic.Storages.Controllers
         /// </returns>
         private bool IsPrivateIP(IPAddress myIPAddress)
         {
-            if (IPAddress.IsLoopback(myIPAddress)) return true;
+            if (IPAddress.IsLoopback(myIPAddress)) {
+                return true;
+            }
 
             if (myIPAddress.AddressFamily == AddressFamily.InterNetwork)
             {
                 var ipBytes = myIPAddress.GetAddressBytes();
                 // 10.0.0.0/24
-                if (ipBytes[0] == 10) return true;
+                if (ipBytes[0] == 10) {
+                    return true;
+                }
                 // 172.16.0.0/16
 
-                if (ipBytes[0] == 172 && ipBytes[1] == 16) return true;
+                if (ipBytes[0] == 172 && ipBytes[1] == 16) {
+                    return true;
+                }
                 // 192.168.0.0/16
 
-                if (ipBytes[0] == 192 && ipBytes[1] == 168) return true;
+                if (ipBytes[0] == 192 && ipBytes[1] == 168) {
+                    return true;
+                }
                 // 169.254.0.0/16
 
-                if (ipBytes[0] == 169 && ipBytes[1] == 254) return true;
+                if (ipBytes[0] == 169 && ipBytes[1] == 254) {
+                    return true;
+                }
             }
 
             return false;
@@ -951,7 +979,9 @@ namespace Alabo.Framework.Basic.Storages.Controllers
         /// <param name="pathFormat">The path format.</param>
         public static string Format(string originFileName, string pathFormat)
         {
-            if (string.IsNullOrWhiteSpace(pathFormat)) pathFormat = "{filename}{rand:6}";
+            if (string.IsNullOrWhiteSpace(pathFormat)) {
+                pathFormat = "{filename}{rand:6}";
+            }
 
             var invalidPattern = new Regex(@"[\\\/\:\*\?\042\<\>\|]");
             originFileName = invalidPattern.Replace(originFileName, "");
@@ -964,7 +994,9 @@ namespace Alabo.Framework.Basic.Storages.Controllers
                 delegate(Match match)
                 {
                     var digit = 6;
-                    if (match.Groups.Count > 2) digit = Convert.ToInt32(match.Groups[2].Value);
+                    if (match.Groups.Count > 2) {
+                        digit = Convert.ToInt32(match.Groups[2].Value);
+                    }
 
                     var rand = new Random();
                     return rand.Next((int) Math.Pow(10, digit), (int) Math.Pow(10, digit + 1)).ToString();

@@ -15,7 +15,9 @@ namespace Alabo.Extensions
         /// <param name="removeSecond">是否移除秒</param>
         public static string ToDateTimeString(this DateTime dateTime, bool removeSecond = false)
         {
-            if (removeSecond) return dateTime.ToString("yyyy-MM-dd HH:mm");
+            if (removeSecond) {
+                return dateTime.ToString("yyyy-MM-dd HH:mm");
+            }
 
             return dateTime.ToString("yyyy-MM-dd HH:mm:ss");
         }
@@ -27,7 +29,9 @@ namespace Alabo.Extensions
         /// <param name="removeSecond">是否移除秒</param>
         public static string ToDateTimeString(this DateTime? dateTime, bool removeSecond = false)
         {
-            if (dateTime == null) return string.Empty;
+            if (dateTime == null) {
+                return string.Empty;
+            }
 
             return ToDateTimeString(dateTime.Value, removeSecond);
         }
@@ -47,7 +51,9 @@ namespace Alabo.Extensions
         /// <param name="dateTime">日期</param>
         public static string ToDateString(this DateTime? dateTime)
         {
-            if (dateTime == null) return string.Empty;
+            if (dateTime == null) {
+                return string.Empty;
+            }
 
             return ToDateString(dateTime.Value);
         }
@@ -58,7 +64,9 @@ namespace Alabo.Extensions
         /// <param name="dateTime">日期</param>
         public static string ToTimeString(this DateTime? dateTime)
         {
-            if (dateTime == null) return string.Empty;
+            if (dateTime == null) {
+                return string.Empty;
+            }
 
             return ToTimeString(dateTime.Value);
         }
@@ -78,7 +86,9 @@ namespace Alabo.Extensions
         /// <param name="dateTime">日期</param>
         public static string ToMillisecondString(this DateTime? dateTime)
         {
-            if (dateTime == null) return string.Empty;
+            if (dateTime == null) {
+                return string.Empty;
+            }
 
             return ToMillisecondString(dateTime.Value);
         }
@@ -98,7 +108,9 @@ namespace Alabo.Extensions
         /// <param name="dateTime">日期</param>
         public static string ToChineseDateString(this DateTime? dateTime)
         {
-            if (dateTime == null) return string.Empty;
+            if (dateTime == null) {
+                return string.Empty;
+            }
 
             return ToChineseDateString(SafeValue(dateTime));
         }
@@ -113,7 +125,9 @@ namespace Alabo.Extensions
             var result = new StringBuilder();
             result.AppendFormat("{0}年{1}月{2}日", dateTime.Year, dateTime.Month, dateTime.Day);
             result.AppendFormat(" {0}时{1}分", dateTime.Hour, dateTime.Minute);
-            if (removeSecond == false) result.AppendFormat("{0}秒", dateTime.Second);
+            if (removeSecond == false) {
+                result.AppendFormat("{0}秒", dateTime.Second);
+            }
 
             return result.ToString();
         }
@@ -125,7 +139,9 @@ namespace Alabo.Extensions
         /// <param name="removeSecond">是否移除秒</param>
         public static string ToChineseDateTimeString(this DateTime? dateTime, bool removeSecond = false)
         {
-            if (dateTime == null) return string.Empty;
+            if (dateTime == null) {
+                return string.Empty;
+            }
 
             return ToChineseDateTimeString(dateTime.Value, removeSecond);
         }
@@ -137,17 +153,29 @@ namespace Alabo.Extensions
         public static string Description(this TimeSpan span)
         {
             var result = new StringBuilder();
-            if (span.Days > 0) result.AppendFormat("{0}天", span.Days);
+            if (span.Days > 0) {
+                result.AppendFormat("{0}天", span.Days);
+            }
 
-            if (span.Hours > 0) result.AppendFormat("{0}小时", span.Hours);
+            if (span.Hours > 0) {
+                result.AppendFormat("{0}小时", span.Hours);
+            }
 
-            if (span.Minutes > 0) result.AppendFormat("{0}分", span.Minutes);
+            if (span.Minutes > 0) {
+                result.AppendFormat("{0}分", span.Minutes);
+            }
 
-            if (span.Seconds > 0) result.AppendFormat("{0}秒", span.Seconds);
+            if (span.Seconds > 0) {
+                result.AppendFormat("{0}秒", span.Seconds);
+            }
 
-            if (span.Milliseconds > 0) result.AppendFormat("{0}毫秒", span.Milliseconds);
+            if (span.Milliseconds > 0) {
+                result.AppendFormat("{0}毫秒", span.Milliseconds);
+            }
 
-            if (result.Length > 0) return result.ToString();
+            if (result.Length > 0) {
+                return result.ToString();
+            }
 
             return $"{span.TotalSeconds * 1000}毫秒";
         }

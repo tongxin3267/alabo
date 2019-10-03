@@ -73,7 +73,6 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs
             var list = Ioc.Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
             if (list.Count < 1)
             {
-                var configs = new List<UserGradeConfig>();
                 var config = new UserGradeConfig
                 {
                     Id = Guid.Parse("72be65e6-3000-414d-972e-1a3d4a366000"),

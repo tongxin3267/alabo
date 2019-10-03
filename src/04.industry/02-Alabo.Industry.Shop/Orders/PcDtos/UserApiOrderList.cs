@@ -30,9 +30,15 @@ namespace Alabo.Industry.Shop.Orders.PcDtos
         {
             var model = ToQuery<PlatformApiOrderList>();
             var user = Resolve<IUserService>().GetSingle(model.UserId);
-            if (user == null) throw new ValidException("您无权查看其他人订单");
+            if (user == null) {
+                throw new ValidException("您无权查看其他人订单");
+            }
+
             var expressionQuery = new ExpressionQuery<Order>();
-            if (model.UserId > 0) expressionQuery.And(e => e.UserId == user.Id);
+            if (model.UserId > 0) {
+                expressionQuery.And(e => e.UserId == user.Id);
+            }
+
             var list = Resolve<IOrderApiService>().GetPageList(query, expressionQuery);
             return ToPageResult<UserApiOrderList, ApiOrderListOutput>(list);
         }

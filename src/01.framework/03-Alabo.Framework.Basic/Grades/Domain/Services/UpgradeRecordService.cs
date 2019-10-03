@@ -20,11 +20,19 @@ namespace Alabo.Framework.Basic.Grades.Domain.Services
         public ServiceResult ChangeUserGrade(long userId, Guid afterGradeId, UpgradeType upgradeType)
         {
             var afterGrade = Resolve<IGradeService>().GetGrade(afterGradeId);
-            if (afterGrade == null) return ServiceResult.FailedWithMessage("需要升级的等级不存在");
+            if (afterGrade == null) {
+                return ServiceResult.FailedWithMessage("需要升级的等级不存在");
+            }
+
             var user = Resolve<IAlaboUserService>().GetSingle(r => r.Id == userId);
-            if (user == null) return ServiceResult.FailedWithMessage("用户不存在");
+            if (user == null) {
+                return ServiceResult.FailedWithMessage("用户不存在");
+            }
+
             var beforeGrade = Resolve<IGradeService>().GetGrade(user.GradeId);
-            if (beforeGrade == null) return ServiceResult.FailedWithMessage("开始等级不存在");
+            if (beforeGrade == null) {
+                return ServiceResult.FailedWithMessage("开始等级不存在");
+            }
 
             user.GradeId = afterGradeId;
             if (Resolve<IAlaboUserService>().Update(user))

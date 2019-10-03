@@ -72,8 +72,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                 {
                     var actionTypeAttribute = item.GetCustomAttr<OrderActionTypeAttribute>();
                     if (actionTypeAttribute != null && actionTypeAttribute.AllowStatus != null &&
-                        actionTypeAttribute.AllowStatus.Contains(orderStatus.ToString()))
+                        actionTypeAttribute.AllowStatus.Contains(orderStatus.ToString())) {
                         result.Add(actionTypeAttribute);
+                    }
                 }
             }
 
@@ -88,7 +89,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
         public OrderShowOutput GetSingle(long id, long UserdId)
         {
             var order = GetSingle(r => r.Id == id && r.UserId == UserdId);
-            if (order == null) return null;
+            if (order == null) {
+                return null;
+            }
 
             var pay = Resolve<IPayService>().GetSingle(order.PayId);
             var orderShow = AutoMapping.SetValue<OrderShowOutput>(order);
@@ -133,7 +136,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
             orderShow.BuyUser = AutoMapping.SetValue<UserOutput>(user);
 
             var deliverUser = Resolve<IUserService>().GetSingle(order.DeliverUserId);
-            if (deliverUser != null) orderShow.DeliverUser = AutoMapping.SetValue<UserOutput>(deliverUser);
+            if (deliverUser != null) {
+                orderShow.DeliverUser = AutoMapping.SetValue<UserOutput>(deliverUser);
+            }
 
             return orderShow;
         }
@@ -146,7 +151,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
         public OrderShowOutput GetSingleAdmin(long id, long UserdId)
         {
             var order = GetSingle(r => r.Id == id);
-            if (order == null) return null;
+            if (order == null) {
+                return null;
+            }
 
             var pay = Resolve<IPayService>().GetSingle(order.PayId);
             var orderShow = AutoMapping.SetValue<OrderShowOutput>(order);
@@ -224,17 +231,20 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                     }
                     else
                     {
-                        if (order.OrderStatus == OrderStatus.AfterSale)
+                        if (order.OrderStatus == OrderStatus.AfterSale) {
                             orderShow.Methods = allMethods.Where(s => !s.Type.Equal("AdminRefundInfo"))
                                 .Where(s => !s.Type.Equal("AdminRefund")).ToList();
-                        else
+                        } else {
                             orderShow.Methods = allMethods.Where(s => !s.Type.Equal("AdminRefundInfo")).ToList();
+                        }
                     }
 
                     //增加售后详情
                     var after = Resolve<IOrderService>().GetMethodByStatus(OrderStatus.AfterSale)
                         .Where(r => r.AllowUser == 2).FirstOrDefault(s => s.Type.Equal("UserRefundInfo"));
-                    if (after != null) orderShow.Methods.Add(after);
+                    if (after != null) {
+                        orderShow.Methods.Add(after);
+                    }
                     //orderShow.Methods.Add(allMethods.FirstOrDefault(s => s.Type == "AdminRefundInfo"));
                 }
                 else
@@ -259,8 +269,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                 }
             }
 
-            if (orderShow.OrderStatus == OrderStatus.Remited)
+            if (orderShow.OrderStatus == OrderStatus.Remited) {
                 orderShow.Methods = Resolve<IOrderService>().GetMethodByStatus(order.OrderStatus);
+            }
 
             //if (order.OrderStatus == OrderStatus.WaitingReceiptProduct && order.OrderExtension.RefundInfo != null)
             //{
@@ -275,7 +286,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
             orderShow.BuyUser = AutoMapping.SetValue<UserOutput>(user);
 
             var deliverUser = Resolve<IUserService>().GetSingle(order.DeliverUserId);
-            if (deliverUser != null) orderShow.DeliverUser = AutoMapping.SetValue<UserOutput>(deliverUser);
+            if (deliverUser != null) {
+                orderShow.DeliverUser = AutoMapping.SetValue<UserOutput>(deliverUser);
+            }
 
             return orderShow;
         }
@@ -289,7 +302,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
         {
             var order = GetSingle(r => r.Id == id && r.UserId == UserdId);
 
-            if (order == null) return null;
+            if (order == null) {
+                return null;
+            }
 
             var pay = Resolve<IPayService>().GetSingle(order.PayId);
             var orderShow = AutoMapping.SetValue<OrderShowOutput>(order);
@@ -334,7 +349,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                 //增加售后详情这里有可能为空记得判断
                 var after = Resolve<IOrderService>().GetMethodByStatus(OrderStatus.AfterSale)
                     .Where(r => r.AllowUser == 0).FirstOrDefault(s => s.Type.Equal("UserRefundInfo"));
-                if (after != null) orderShow.Methods.Add(after);
+                if (after != null) {
+                    orderShow.Methods.Add(after);
+                }
             }
             else
             {
@@ -348,13 +365,14 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                 foreach (var product in productNotOnline)
                 {
                     var ext = orderShow.ProductSkuItems.SingleOrDefault(s => s.ProductId == product.Id);
-                    if (ext != null)
+                    if (ext != null) {
                         if (product.ProductStatus != ProductStatus.Online)
                         {
                             ext.ProductStatus = product.ProductStatus;
                             orderShow.Methods = orderShow.Methods.Where(s => !s.Type.Equal("Pay")).ToList();
                             orderShow.OrderStatus = OrderStatus.UnderShelf; //标识为下架订单
                         }
+                    }
                 }
             }
 
@@ -364,7 +382,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
             orderShow.BuyUser = AutoMapping.SetValue<UserOutput>(user);
 
             var deliverUser = Resolve<IUserService>().GetSingle(order.DeliverUserId);
-            if (deliverUser != null) orderShow.DeliverUser = AutoMapping.SetValue<UserOutput>(deliverUser);
+            if (deliverUser != null) {
+                orderShow.DeliverUser = AutoMapping.SetValue<UserOutput>(deliverUser);
+            }
 
             return orderShow;
         }
@@ -377,7 +397,10 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
         public OrderShowOutput Show(long id)
         {
             var order = Resolve<IOrderService>().GetSingle(id);
-            if (order == null) return null;
+            if (order == null) {
+                return null;
+            }
+
             var pay = Resolve<IPayService>().GetSingle(order.PayId);
             var orderShow = AutoMapping.SetValue<OrderShowOutput>(order);
             orderShow.CreateTime = order.CreateTime.ToDateTimeString();
@@ -428,24 +451,44 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
         public PagedList<OrderListOutput> GetPageList(OrderListInput orderInput)
         {
             var query = new ExpressionQuery<Order>();
-            if (orderInput.OrderStatus > 0) query.And(e => e.OrderStatus == orderInput.OrderStatus);
-            if (orderInput.OrderType.HasValue) query.And(e => e.OrderType == orderInput.OrderType);
-            if (!orderInput.StoreId.IsObjectIdNullOrEmpty()) query.And(e => e.StoreId == orderInput.StoreId.ToString());
-            if (orderInput.DeliverUserId > 0) // 发货记录
-                query.And(e => e.DeliverUserId == orderInput.DeliverUserId);
-            if (orderInput.UserId > 0) //订单记录
-                query.And(e => e.UserId == orderInput.UserId);
-            else if (orderInput.LoginUserId > 0) //订单记录
-                query.And(e => e.UserId == orderInput.LoginUserId);
+            if (orderInput.OrderStatus > 0) {
+                query.And(e => e.OrderStatus == orderInput.OrderStatus);
+            }
 
-            if (orderInput.OrderType > 0) query.And(e => e.OrderType == orderInput.OrderType);
+            if (orderInput.OrderType.HasValue) {
+                query.And(e => e.OrderType == orderInput.OrderType);
+            }
+
+            if (!orderInput.StoreId.IsObjectIdNullOrEmpty()) {
+                query.And(e => e.StoreId == orderInput.StoreId.ToString());
+            }
+
+            if (orderInput.DeliverUserId > 0) // 发货记录
+{
+                query.And(e => e.DeliverUserId == orderInput.DeliverUserId);
+            }
+
+            if (orderInput.UserId > 0) //订单记录
+{
+                query.And(e => e.UserId == orderInput.UserId);
+            } else if (orderInput.LoginUserId > 0) //订单记录
+{
+                query.And(e => e.UserId == orderInput.LoginUserId);
+            }
+
+            if (orderInput.OrderType > 0) {
+                query.And(e => e.OrderType == orderInput.OrderType);
+            }
 
             query.PageIndex = (int)orderInput.PageIndex;
             query.PageSize = (int)orderInput.PageSize;
             query.EnablePaging = true;
             query.OrderByDescending(e => e.Id);
             var orders = Resolve<IOrderService>().GetPagedList(query);
-            if (orders.Count < 0) return new PagedList<OrderListOutput>();
+            if (orders.Count < 0) {
+                return new PagedList<OrderListOutput>();
+            }
+
             var model = new List<OrderListOutput>();
 
             foreach (var item in orders)
@@ -460,9 +503,10 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
                 };
                 if (item.OrderExtension != null)
                 {
-                    if (item.OrderExtension.UserAddress != null)
+                    if (item.OrderExtension.UserAddress != null) {
                         listOutput.RegionName = Resolve<IRegionService>()
                             .GetRegionNameById(item.OrderExtension.UserAddress.RegionId);
+                    }
                 }
                 else
                 {
@@ -513,7 +557,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
         {
             var result = ServiceResult.Success;
             var model = Resolve<IOrderService>().GetSingle(u => u.Id == id);
-            if (model == null) return Tuple.Create(ServiceResult.FailedWithMessage("删除失败"), new Order());
+            if (model == null) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("删除失败"), new Order());
+            }
 
             var context = Repository<IOrderRepository>().RepositoryContext;
             context.BeginTransaction();
@@ -525,7 +571,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
         public Order GetSingle(long orderId)
         {
             var order = GetSingle(r => r.Id == orderId);
-            if (order == null) return null;
+            if (order == null) {
+                return null;
+            }
 
             order.OrderExtension = order.Extension.DeserializeJson<OrderExtension>();
             return order;
@@ -555,15 +603,23 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
             var result = ServiceResult.Success;
             var orderId = parameter.EntityId.ConvertToLong();
             var order = Resolve<IOrderService>().GetSingle(r => r.Id == orderId);
-            if (order == null) return ServiceResult.FailedWithMessage("订单不存在");
+            if (order == null) {
+                return ServiceResult.FailedWithMessage("订单不存在");
+            }
 
             var user = Resolve<IUserService>().GetSingle(parameter.LoginUserId);
-            if (user == null) return ServiceResult.FailedWithMessage("当前用户不存在！");
+            if (user == null) {
+                return ServiceResult.FailedWithMessage("当前用户不存在！");
+            }
 
-            if (order.OrderExtension.OrderRemark == null) order.OrderExtension.OrderRemark = new OrderRemark();
+            if (order.OrderExtension.OrderRemark == null) {
+                order.OrderExtension.OrderRemark = new OrderRemark();
+            }
 
             var rateInfo = AutoMapping.SetValue<OrderRateInfo>(parameter);
-            if (order.OrderExtension.OrderRate == null) order.OrderExtension.OrderRate = new OrderRate();
+            if (order.OrderExtension.OrderRate == null) {
+                order.OrderExtension.OrderRate = new OrderRate();
+            }
 
             order.OrderExtension.OrderRate.BuyerRate = rateInfo;
             order.Extension = order.OrderExtension.ToJson();
@@ -583,19 +639,25 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
         public ServiceResult Confirm(ConfirmInput parameter)
         {
             var user = Resolve<IUserService>().GetUserDetail(parameter.LoginUserId);
-            if (user == null) return ServiceResult.FailedWithMessage("用户不存在！");
+            if (user == null) {
+                return ServiceResult.FailedWithMessage("用户不存在！");
+            }
 
-            if (user.Detail.PayPassword != parameter.PayPassword.ToMd5HashString())
+            if (user.Detail.PayPassword != parameter.PayPassword.ToMd5HashString()) {
                 return ServiceResult.FailedWithMessage("支付密码不正确！");
+            }
 
             var orderId = parameter.EntityId.ConvertToLong();
             var order = Resolve<IOrderService>().GetSingle(r => r.Id == orderId);
-            if (order == null) return ServiceResult.FailedWithMessage("订单不存在！");
+            if (order == null) {
+                return ServiceResult.FailedWithMessage("订单不存在！");
+            }
 
-            if (order.OrderStatus == OrderStatus.WaitingReceiptProduct)
+            if (order.OrderStatus == OrderStatus.WaitingReceiptProduct) {
                 order.OrderStatus = OrderStatus.WaitingEvaluated;
-            else
+            } else {
                 return ServiceResult.FailedWithMessage("商品状态不支持收货确认操作！");
+            }
 
             var result = Resolve<IOrderService>().Update(order);
             if (result)
@@ -659,10 +721,14 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
         /// <returns></returns>
         public ServiceResult ConfirmToMaster(ConfirmInput parameter)
         {
-            if (TenantContext.CurrentTenant != "master") return ServiceResult.Failed;
+            if (TenantContext.CurrentTenant != "master") {
+                return ServiceResult.Failed;
+            }
 
             var user = Resolve<IUserService>().GetUserDetail(parameter.LoginUserId);
-            if (user == null) return ServiceResult.FailedWithMessage("用户不存在！");
+            if (user == null) {
+                return ServiceResult.FailedWithMessage("用户不存在！");
+            }
 
             //if (user.Detail.PayPassword != parameter.PayPassword.ToMd5HashString())
             //{
@@ -671,12 +737,15 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
 
             var orderId = parameter.EntityId.ConvertToLong();
             var order = Resolve<IOrderService>().GetSingle(r => r.Id == orderId);
-            if (order == null) return ServiceResult.FailedWithMessage("订单不存在！");
+            if (order == null) {
+                return ServiceResult.FailedWithMessage("订单不存在！");
+            }
 
-            if (order.OrderStatus == OrderStatus.WaitingReceiptProduct)
+            if (order.OrderStatus == OrderStatus.WaitingReceiptProduct) {
                 order.OrderStatus = OrderStatus.WaitingEvaluated;
-            else
+            } else {
                 return ServiceResult.FailedWithMessage("商品状态不支持收货确认操作！");
+            }
 
             var result = Resolve<IOrderService>().Update(order);
             if (result)
@@ -726,10 +795,14 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
         {
             var result = new OrderExpressViewModel();
             var order = Resolve<IOrderService>().GetSingle(r => r.Id == orderId);
-            if (order == null) return Tuple.Create(ServiceResult.FailedWithMessage("订单不存在"), result);
+            if (order == null) {
+                return Tuple.Create(ServiceResult.FailedWithMessage("订单不存在"), result);
+            }
+
             var orderExpress = order.Extension.ToObject<OrderExtension>();
-            if (orderExpress == null || orderExpress.OrderAmount == null)
+            if (orderExpress == null || orderExpress.OrderAmount == null) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("订单数据异常"), result);
+            }
 
             result.OrderId = orderId;
             result.ExpressAmount = orderExpress.OrderAmount.ExpressAmount;
@@ -746,11 +819,19 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
         {
             var result = new OrderExpressViewModel();
             var order = Resolve<IOrderService>().GetSingle(r => r.Id == orderExpressInput.OrderId);
-            if (order == null) return ServiceResult.FailedWithMessage("订单不存在");
+            if (order == null) {
+                return ServiceResult.FailedWithMessage("订单不存在");
+            }
+
             var user = Resolve<IUserService>().GetSingle(orderExpressInput.LoginUserId);
-            if (user == null) return ServiceResult.FailedWithMessage("当前用户不存在！");
+            if (user == null) {
+                return ServiceResult.FailedWithMessage("当前用户不存在！");
+            }
+
             var pay = Resolve<IPayService>().GetSingle(p => p.Id == order.PayId);
-            if (pay == null) return ServiceResult.FailedWithMessage("订单支付信息不存在");
+            if (pay == null) {
+                return ServiceResult.FailedWithMessage("订单支付信息不存在");
+            }
             //order info
             order.OrderExtension.OrderAmount.ExpressAmount = orderExpressInput.ExpressAmount;
             order.OrderExtension.OrderAmount.ExpressDescription = orderExpressInput.ExpressDescription;
@@ -803,9 +884,13 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
         public ServiceResult Deliver(Deliver model)
         {
             var order = Resolve<IOrderService>().GetSingle(u => u.Id == model.OrderId);
-            if (order == null) return ServiceResult.FailedMessage("订单有误");
-            if (order.OrderStatus != OrderStatus.WaitingSellerSendGoods)
+            if (order == null) {
+                return ServiceResult.FailedMessage("订单有误");
+            }
+
+            if (order.OrderStatus != OrderStatus.WaitingSellerSendGoods) {
                 return ServiceResult.FailedWithMessage("只有待发货的商品可以发货");
+            }
 
             try
             {
@@ -830,10 +915,15 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
         public ServiceResult Deliver(OrderInput model)
         {
             var order = Resolve<IOrderService>().GetSingle(u => u.Id == model.OrderID);
-            if (order == null) return ServiceResult.FailedMessage("订单有误");
-            if (order.OrderStatus != OrderStatus.WaitingSellerSendGoods)
-                if (order.OrderStatus != OrderStatus.Remited)
+            if (order == null) {
+                return ServiceResult.FailedMessage("订单有误");
+            }
+
+            if (order.OrderStatus != OrderStatus.WaitingSellerSendGoods) {
+                if (order.OrderStatus != OrderStatus.Remited) {
                     return ServiceResult.FailedWithMessage("只有待发货的商品可以发货");
+                }
+            }
 
             try
             {
@@ -856,7 +946,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
 
                     order.OrderExtension = order.Extension.ToObject<OrderExtension>();
                     // 存在关联TenantOrder才执行.
-                    if (rsAddAction && order?.OrderExtension?.TenantOrderInfo?.OrderId > 0) DeliveryToTenant(model);
+                    if (rsAddAction && order?.OrderExtension?.TenantOrderInfo?.OrderId > 0) {
+                        DeliveryToTenant(model);
+                    }
                 }
             }
             catch (Exception e)
@@ -911,7 +1003,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
         public ServiceResult AddExpress(Deliver model)
         {
             var order = Resolve<IOrderService>().GetSingle(u => u.Id == model.OrderId);
-            if (order == null) return ServiceResult.FailedMessage("订单有误");
+            if (order == null) {
+                return ServiceResult.FailedMessage("订单有误");
+            }
             //if (order.OrderStatus != OrderStatus.WaitingSellerSendGoods)
             //{
             //    return ServiceResult.FailedWithMessage("只有待发货的商品可以发货");
@@ -959,7 +1053,9 @@ namespace Alabo.Industry.Shop.Orders.Domain.Services
         {
             var model = Resolve<IDeliverService>().GetSingle(u => u.Id == expressId.ToObjectId());
             //如果是其他物流则直接返回查询失败
-            if (model.ExpressNo.Equal("other")) return "{\"reason\":\"其他物流不提供查询!\",\"result\":{},\"error_code\":1}";
+            if (model.ExpressNo.Equal("other")) {
+                return "{\"reason\":\"其他物流不提供查询!\",\"result\":{},\"error_code\":1}";
+            }
             //e825b7404098dbae15c164a7ab7ced2f 李红建
             //1e2e7e4a7afef7f2cc1dbb3795fc3d33 贾恒
             var url =

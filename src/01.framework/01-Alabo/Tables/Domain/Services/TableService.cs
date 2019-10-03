@@ -52,25 +52,35 @@ namespace Alabo.Tables.Domain.Services
                         TableType = TableType.AutoConfig,
                         TableName = "Core_AutoConfig"
                     };
-                    if (type.FullName.Contains("ViewModels")) continue;
+                    if (type.FullName.Contains("ViewModels")) {
+                        continue;
+                    }
 
-                    if (type.FullName.Contains("Entities")) continue;
+                    if (type.FullName.Contains("Entities")) {
+                        continue;
+                    }
 
-                    if (!(type.FullName.Contains("Config") && type.Name != "AutoConfig")) continue;
+                    if (!(type.FullName.Contains("Config") && type.Name != "AutoConfig")) {
+                        continue;
+                    }
 
                     var classDescription = new ClassDescription(type);
                     table.Name = classDescription?.ClassPropertyAttribute?.Name;
 
-                    foreach (var item in classDescription.Propertys.Where(r => r.Name == "Id"))
+                    foreach (var item in classDescription.Propertys.Where(r => r.Name == "Id")) {
                         table.Columns.Add(GetColumn(item));
+                    }
 
                     var propertys = classDescription.Propertys.Where(r =>
                         r.Name != "Id" && r.Name != "HttpContext" && r.Name != "CreateTime");
 
-                    foreach (var item in propertys) table.Columns.Add(GetColumn(item));
-
-                    foreach (var item in classDescription.Propertys.Where(r => r.Name == "CreateTime"))
+                    foreach (var item in propertys) {
                         table.Columns.Add(GetColumn(item));
+                    }
+
+                    foreach (var item in classDescription.Propertys.Where(r => r.Name == "CreateTime")) {
+                        table.Columns.Add(GetColumn(item));
+                    }
 
                     tables.Add(table);
                 }
@@ -152,16 +162,24 @@ namespace Alabo.Tables.Domain.Services
                 foreach (var type in types)
                 {
                     var table = new Table { Key = type.Name, Type = type.FullName };
-                    if (type.FullName.Contains("Config") && type.Name != "AutoConfig") continue;
+                    if (type.FullName.Contains("Config") && type.Name != "AutoConfig") {
+                        continue;
+                    }
 
-                    if (type.FullName.Contains("ViewModels")) continue;
+                    if (type.FullName.Contains("ViewModels")) {
+                        continue;
+                    }
 
-                    if (!type.FullName.Contains("Entities")) continue;
+                    if (!type.FullName.Contains("Entities")) {
+                        continue;
+                    }
 
                     if (type.BaseType.Name.Contains("Mongo"))
                     {
                         var tableAttribute = type.GetAttribute<TableAttribute>();
-                        if (tableAttribute == null) continue;
+                        if (tableAttribute == null) {
+                            continue;
+                        }
 
                         table.TableName = tableAttribute.Name;
                         table.TableType = TableType.Mongodb;
@@ -170,22 +188,28 @@ namespace Alabo.Tables.Domain.Services
                     {
                         table.TableType = TableType.SqlServer;
                         var find = sqlTables.FirstOrDefault(r => r.EndsWith(table.Key));
-                        if (find != null) table.TableName = find;
+                        if (find != null) {
+                            table.TableName = find;
+                        }
                     }
 
                     var classDescription = new ClassDescription(type);
                     table.Name = classDescription?.ClassPropertyAttribute?.Name;
 
-                    foreach (var item in classDescription.Propertys.Where(r => r.Name == "Id"))
+                    foreach (var item in classDescription.Propertys.Where(r => r.Name == "Id")) {
                         table.Columns.Add(GetColumn(item));
+                    }
 
                     var propertys = classDescription.Propertys.Where(r =>
                         r.Name != "Id" && r.Name != "HttpContext" && r.Name != "CreateTime");
 
-                    foreach (var item in propertys) table.Columns.Add(GetColumn(item));
-
-                    foreach (var item in classDescription.Propertys.Where(r => r.Name == "CreateTime"))
+                    foreach (var item in propertys) {
                         table.Columns.Add(GetColumn(item));
+                    }
+
+                    foreach (var item in classDescription.Propertys.Where(r => r.Name == "CreateTime")) {
+                        table.Columns.Add(GetColumn(item));
+                    }
 
                     tables.Add(table);
                 }
@@ -204,7 +228,9 @@ namespace Alabo.Tables.Domain.Services
         {
             return GetKeyValues(table =>
             {
-                if (table.TableType == TableType.Mongodb) return table;
+                if (table.TableType == TableType.Mongodb) {
+                    return table;
+                }
 
                 return null;
             });
@@ -218,7 +244,9 @@ namespace Alabo.Tables.Domain.Services
         {
             return GetKeyValues(table =>
             {
-                if (table.TableType == TableType.SqlServer) return table;
+                if (table.TableType == TableType.SqlServer) {
+                    return table;
+                }
 
                 return null;
             });
@@ -233,7 +261,9 @@ namespace Alabo.Tables.Domain.Services
         {
             return GetKeyValues(table =>
             {
-                if (table.TableType == TableType.SqlServer || table.TableType == TableType.Mongodb) return table;
+                if (table.TableType == TableType.SqlServer || table.TableType == TableType.Mongodb) {
+                    return table;
+                }
 
                 return null;
             });
@@ -252,7 +282,9 @@ namespace Alabo.Tables.Domain.Services
                 // column.Name = propertyDescription.FieldAttribute.FieldName;
             }
 
-            if (propertyDescription.DisplayAttribute != null) column.Name = propertyDescription.DisplayAttribute.Name;
+            if (propertyDescription.DisplayAttribute != null) {
+                column.Name = propertyDescription.DisplayAttribute.Name;
+            }
 
             return column;
         }
@@ -265,6 +297,7 @@ namespace Alabo.Tables.Domain.Services
             {
                 var result = func.Invoke(item);
                 if (result != null) //避免加null
+{
                     resultList.Add(new KeyValue
                     {
                         Name = $"{result.Name}[{result.Type}]",
@@ -273,6 +306,7 @@ namespace Alabo.Tables.Domain.Services
                         Icon = null
                         //SortOrder=
                     });
+                }
             }
 
             return resultList;

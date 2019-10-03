@@ -36,8 +36,9 @@ namespace Alabo.Framework.Core.WebUis.Services
         public Tuple<ServiceResult, string, string> ToExcel(string key, string service, string method, object query)
         {
             var type = key.GetTypeByFullName();
-            if (type == null)
+            if (type == null) {
                 return Tuple.Create(ServiceResult.FailedWithMessage($"类型不存在，请输入正确的{key}"), string.Empty, string.Empty);
+            }
 
             var classDescription = new ClassDescription(type);
             //获取excel显示字段
@@ -70,7 +71,7 @@ namespace Alabo.Framework.Core.WebUis.Services
                 //添加值
                 var recordIndex = 2;
                 var pageList = new List<object>();
-                if (resultList.Item2 != null)
+                if (resultList.Item2 != null) {
                     try
                     {
                         pageList = ((IEnumerable<object>)resultList.Item2).ToList();
@@ -79,6 +80,7 @@ namespace Alabo.Framework.Core.WebUis.Services
                     {
                         Tuple.Create(ServiceResult.FailedMessage("该类型不支持Excel导出"), file.FullName, file.Name);
                     }
+                }
 
                 foreach (var data in pageList)
                 {

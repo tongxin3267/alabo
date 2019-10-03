@@ -26,7 +26,9 @@ namespace Alabo.Web.Clients
         /// <param name="url">地址</param>
         protected HttpRequestBase(HttpMethod httpMethod, string url)
         {
-            if (string.IsNullOrWhiteSpace(url)) throw new ArgumentNullException(nameof(url));
+            if (string.IsNullOrWhiteSpace(url)) {
+                throw new ArgumentNullException(nameof(url));
+            }
 
             System.Text.Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             _url = url;
@@ -273,9 +275,13 @@ namespace Alabo.Web.Clients
         /// <param name="value">值</param>
         public TRequest Data(string key, object value)
         {
-            if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
+            if (string.IsNullOrWhiteSpace(key)) {
+                throw new ArgumentNullException(nameof(key));
+            }
 
-            if (string.IsNullOrWhiteSpace(value.SafeString())) return This();
+            if (string.IsNullOrWhiteSpace(value.SafeString())) {
+                return This();
+            }
 
             _params.Add(key, value);
             return This();
@@ -389,7 +395,9 @@ namespace Alabo.Web.Clients
                 RequestUri = new Uri(_url),
                 Content = CreateHttpContent()
             };
-            foreach (var header in _headers) message.Headers.Add(header.Key, header.Value);
+            foreach (var header in _headers) {
+                message.Headers.Add(header.Key, header.Value);
+            }
 
             return message;
         }
@@ -420,7 +428,9 @@ namespace Alabo.Web.Clients
         /// </summary>
         private HttpContent CreateJsonContent()
         {
-            if (string.IsNullOrWhiteSpace(_data)) _data = Json.ToJson(_params);
+            if (string.IsNullOrWhiteSpace(_data)) {
+                _data = Json.ToJson(_params);
+            }
 
             return new StringContent(_data, _encoding, "application/json");
         }

@@ -42,7 +42,10 @@ namespace Alabo.Web.CodeGeneration.EntityCode
             }
 
             var idType = "long";
-            if (keyIdType.Name.Contains("ObjectId")) idType = "ObjectId";
+            if (keyIdType.Name.Contains("ObjectId")) {
+                idType = "ObjectId";
+            }
+
             ServcieTemplate.Create(type, idType, entityPath);
             //Console.WriteLine(@"服务代码已生成");
             RepositroyTemplate.Create(type, idType, entityPath);

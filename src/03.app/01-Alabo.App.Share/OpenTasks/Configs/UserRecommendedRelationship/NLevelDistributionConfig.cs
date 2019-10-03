@@ -51,20 +51,28 @@ namespace Alabo.App.Share.OpenTasks.Configs.UserRecommendedRelationship
         public override ExecuteResult<ITaskResult[]> Execute(TaskParameter parameter)
         {
             var baseResult = base.Execute(parameter);
-            if (baseResult.Status != ResultStatus.Success)
+            if (baseResult.Status != ResultStatus.Success) {
                 return ExecuteResult<ITaskResult[]>.Cancel("基础验证未通过" + baseResult.Message);
+            }
 
             var userMap = Resolve<IUserMapService>().GetParentMapFromCache(ShareOrderUser.Id);
             var map = userMap.ParentMap.DeserializeJson<List<ParentMap>>();
-            if (map == null) return ExecuteResult<ITaskResult[]>.Cancel("未找到触发会员的Parent Map.");
+            if (map == null) {
+                return ExecuteResult<ITaskResult[]>.Cancel("未找到触发会员的Parent Map.");
+            }
 
             IList<ITaskResult> resultList = new List<ITaskResult>();
             for (var i = 0; i < Ratios.Count; i++)
             {
-                if (map.Count < i + 1) break;
+                if (map.Count < i + 1) {
+                    break;
+                }
+
                 var item = map[i];
                 base.GetShareUser(item.UserId, out var shareUser); //从基类获取分润用户
-                if (shareUser == null) continue;
+                if (shareUser == null) {
+                    continue;
+                }
 
                 var ratio = Convert.ToDecimal(Ratios[i]);
                 var shareAmount = BaseFenRunAmount * ratio; //分润金额

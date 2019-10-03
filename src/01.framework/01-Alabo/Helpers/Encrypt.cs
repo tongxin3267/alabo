@@ -40,7 +40,9 @@ namespace Alabo.Helpers
         /// </summary>
         private static string Md5(string value, Encoding encoding, int? startIndex, int? length)
         {
-            if (string.IsNullOrWhiteSpace(value)) return string.Empty;
+            if (string.IsNullOrWhiteSpace(value)) {
+                return string.Empty;
+            }
 
             var md5 = new MD5CryptoServiceProvider();
             string result;
@@ -116,7 +118,9 @@ namespace Alabo.Helpers
         public static string DesEncrypt(object value, string key, Encoding encoding)
         {
             var text = Extensions.Extensions.SafeString(value);
-            if (ValidateDes(text, key) == false) return string.Empty;
+            if (ValidateDes(text, key) == false) {
+                return string.Empty;
+            }
 
             using (var transform = CreateDesProvider(key).CreateEncryptor())
             {
@@ -129,7 +133,9 @@ namespace Alabo.Helpers
         /// </summary>
         private static bool ValidateDes(string text, string key)
         {
-            if (string.IsNullOrWhiteSpace(text) || string.IsNullOrWhiteSpace(key)) return false;
+            if (string.IsNullOrWhiteSpace(text) || string.IsNullOrWhiteSpace(key)) {
+                return false;
+            }
 
             return key.Length == 24;
         }
@@ -181,7 +187,9 @@ namespace Alabo.Helpers
         public static string DesDecrypt(object value, string key, Encoding encoding)
         {
             var text = Extensions.Extensions.SafeString(value);
-            if (!ValidateDes(text, key)) return string.Empty;
+            if (!ValidateDes(text, key)) {
+                return string.Empty;
+            }
 
             using (var transform = CreateDesProvider(key).CreateDecryptor())
             {
@@ -219,7 +227,9 @@ namespace Alabo.Helpers
                 {
                     var size = 16;
                     _iv = new byte[size];
-                    for (var i = 0; i < size; i++) _iv[i] = 0;
+                    for (var i = 0; i < size; i++) {
+                        _iv[i] = 0;
+                    }
                 }
 
                 return _iv;
@@ -258,7 +268,9 @@ namespace Alabo.Helpers
         /// <param name="encoding">编码</param>
         public static string AesEncrypt(string value, string key, Encoding encoding)
         {
-            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(key)) return string.Empty;
+            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(key)) {
+                return string.Empty;
+            }
 
             var rijndaelManaged = CreateRijndaelManaged(key);
             using (var transform = rijndaelManaged.CreateEncryptor(rijndaelManaged.Key, rijndaelManaged.IV))
@@ -308,7 +320,9 @@ namespace Alabo.Helpers
         /// <param name="encoding">编码</param>
         public static string AesDecrypt(string value, string key, Encoding encoding)
         {
-            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(key)) return string.Empty;
+            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(key)) {
+                return string.Empty;
+            }
 
             var rijndaelManaged = CreateRijndaelManaged(key);
             using (var transform = rijndaelManaged.CreateDecryptor(rijndaelManaged.Key, rijndaelManaged.IV))
@@ -368,7 +382,9 @@ namespace Alabo.Helpers
         /// </summary>
         private static string RsaSign(string value, string key, Encoding encoding, RsaType type)
         {
-            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(key)) return string.Empty;
+            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(key)) {
+                return string.Empty;
+            }
 
             var rsa = new RsaHelper(type, encoding, key);
             return rsa.Sign(value);
@@ -426,8 +442,9 @@ namespace Alabo.Helpers
         private static bool RsaVerify(string value, string publicKey, string sign, Encoding encoding, RsaType type)
         {
             if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(publicKey) ||
-                string.IsNullOrWhiteSpace(sign))
+                string.IsNullOrWhiteSpace(sign)) {
                 return false;
+            }
 
             var rsa = new RsaHelper(type, encoding, publicKey, publicKey);
             return rsa.Verify(value, sign);
@@ -455,7 +472,9 @@ namespace Alabo.Helpers
         /// <param name="encoding">字符编码</param>
         public static string HmacSha256(string value, string key, Encoding encoding)
         {
-            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(key)) return string.Empty;
+            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(key)) {
+                return string.Empty;
+            }
 
             var sha256 = new HMACSHA256(encoding.GetBytes(key));
             var hash = sha256.ComputeHash(encoding.GetBytes(value));
