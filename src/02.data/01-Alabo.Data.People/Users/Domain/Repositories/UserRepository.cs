@@ -211,7 +211,6 @@ namespace Alabo.Data.People.Users.Domain.Repositories
                     //添加用户资产
                     AddAccount(transaction, user.Id, moneyTypes);
                     //添加分润订单
-                    //TODO 9月重构注释
                     AddShareOrder(transaction, user.Id);
                     transaction.Commit();
                 }
@@ -439,12 +438,8 @@ namespace Alabo.Data.People.Users.Domain.Repositories
             if (userMap == null) throw new ArgumentNullException("userMap");
 
             var sql = @"INSERT INTO [dbo].[User_UserMap]
-               ([UserId] ,[LevelNumber],[TeamNumber] ,
-               ,[ChildNode] ,[ParentMap])
-                 VALUES
-             (@UserId,@LevelNumber,@TeamNumber
-              ,@ChildNode ,@ParentMap);
-                select @@identity;";
+               ([UserId] ,[LevelNumber],[TeamNumber],[ChildNode],[ParentMap])
+                 VALUES(@UserId,@LevelNumber,@TeamNumber,@ChildNode ,@ParentMap);select @@identity;";
             var parameters = new[]
             {
                 RepositoryContext.CreateParameter("@UserId", userMap.UserId),

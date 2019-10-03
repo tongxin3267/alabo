@@ -252,7 +252,7 @@ namespace Alabo.Data.People.Users.Domain.Services
                 .Where(r => r.Status == Status.Normal).ToList();
             var result = _userRepository.Add(user, moneyTypes);
             // 会员注册成功以后操作
-            // Resolve<IUserRegAfterService>().AddBackJob(result);
+            //    Resolve<IUserRegAfterService>().AddBackJob(result);
 
             // 调试用
             Resolve<IUserRegAfterService>().AfterUserRegTask(result.Id);

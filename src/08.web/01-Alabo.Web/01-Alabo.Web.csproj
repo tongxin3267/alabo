@@ -10,6 +10,8 @@
     <Version>13.0.1</Version>
     <Authors>5ug.com</Authors>
     <Company>5ug.com</Company>
+    <AssemblyName>Alabo.Web</AssemblyName>
+    <RootNamespace>Alabo.Web</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netcoreapp2.0\ZKCloud.Web.xml</DocumentationFile>

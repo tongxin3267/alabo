@@ -15,14 +15,12 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Entities
     /// <summary>
     ///     任务队列
     /// </summary>
-    [ClassProperty(Name = "后台任务队列", Icon = IconFontawesome.dedent, Description = "后台任务队列",
-        ListApi = "Api/TaskQueue/TaskQueueList",
-        PageType = ViewPageType.List, PostApi = "Api/TaskQueue/TaskQueueList",
-        SideBarType = SideBarType.TaskQueueSideBar)]
+    [ClassProperty(Name = "后台任务队列", Icon = IconFontawesome.dedent, Description = "后台任务队列")]
     [Table("Task_TaskQueue")]
     public class TaskQueue : AggregateDefaultUserRoot<TaskQueue>
     {
-        [Display(Name = "模块标识")] public Guid ModuleId { get; set; }
+        [Display(Name = "模块标识")]
+        public Guid ModuleId { get; set; }
 
         /// <summary>
         ///     队列执行类型
@@ -32,7 +30,8 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Entities
             SortOrder = 3)]
         public TaskQueueType Type { get; set; } = TaskQueueType.Once;
 
-        [Display(Name = "参数")] public string Parameter { get; set; } = string.Empty;
+        [Display(Name = "参数")]
+        public string Parameter { get; set; } = string.Empty;
 
         /// <summary>
         ///     内容
@@ -107,7 +106,6 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Entities
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.UserName);
             builder.Ignore(e => e.ModuleName);
-         
         }
     }
 }

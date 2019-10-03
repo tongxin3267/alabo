@@ -7,6 +7,7 @@ using Alabo.Users.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Framework.Tasks.Queues.Domain.Servcies;
 
 namespace Alabo.Data.People.Users.Domain.Services
 {
@@ -31,7 +32,7 @@ namespace Alabo.Data.People.Users.Domain.Services
                 UserId = user.Id,
                 Method = "AfterUserRegTask"
             };
-            //   Resolve<ITaskQueueService>().AddBackJob(backJobParameter);
+            Resolve<ITaskQueueService>().AddBackJob(backJobParameter);
         }
 
         /// <summary>

@@ -306,7 +306,7 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories
                 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]";
             sqlList.Add(sql);
 
-            // 退款表
+            // 充值表
             sql = @"CREATE TABLE [dbo].[Asset_Recharge](
 	                [Id] [bigint] IDENTITY(1,1) NOT NULL,
 	                [UserId] [bigint] NOT NULL,
