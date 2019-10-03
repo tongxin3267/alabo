@@ -79,7 +79,7 @@ namespace Alabo.Data.People.ShareHolders.Domain.Configs
                 };
                 list.Add(config);
 
-                var typeclassProperty = config.GetType().GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
+                
                 var autoConfig = new AutoConfig
                 {
                     Type = config.GetType().FullName,

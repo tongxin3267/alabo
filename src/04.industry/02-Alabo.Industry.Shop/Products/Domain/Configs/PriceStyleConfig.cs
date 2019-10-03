@@ -233,7 +233,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Configs
                     }
                 }
 
-                var typeclassProperty = config.GetType().GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
+                
                 var autoConfig = new AutoConfig
                 {
                     Type = config.GetType().FullName,

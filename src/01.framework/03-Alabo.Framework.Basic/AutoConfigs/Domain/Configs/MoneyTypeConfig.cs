@@ -100,7 +100,7 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Configs
                     configs.Add(config);
                 }
 
-                var typeclassProperty = config.GetType().GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
+                
                 var autoConfig = new AutoConfig
                 {
                     Type = config.GetType().FullName,

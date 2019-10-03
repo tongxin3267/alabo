@@ -7,27 +7,25 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace Alabo.Framework.Core.Tenants.Domains.Repositories
-{
+namespace Alabo.Framework.Core.Tenants.Domains.Repositories {
+
     /// <summary>
     ///     TenantCreateRepository
     /// </summary>
-    public class TenantCreateRepository : RepositoryEfCore<User, long>, ITenantCreateRepository
-    {
+    public class TenantCreateRepository : RepositoryEfCore<User, long>, ITenantCreateRepository {
+
         /// <summary>
         ///     TenantCreateRepository
         /// </summary>
         /// <param name="unitOfWork"></param>
-        public TenantCreateRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        public TenantCreateRepository(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
         /// <summary>
         ///     create database
         /// </summary>
         /// <param name="databaseName"></param>
-        public void CreateDatabase(string databaseName)
-        {
+        public void CreateDatabase(string databaseName) {
             var sqlList = new List<string>
             {
                 $"CREATE DATABASE {databaseName};",
@@ -43,8 +41,7 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories
         /// </summary>
         /// <param name="databaseName"></param>
         /// <returns></returns>
-        public bool IsExistsDatabase(string databaseName)
-        {
+        public bool IsExistsDatabase(string databaseName) {
             var sql = $"select COUNT(1) From master.dbo.sysdatabases where name='{databaseName.ToLower()}'";
             var obj = RepositoryContext.ExecuteScalar(sql);
             return obj.ToInt16() > 0;
@@ -54,22 +51,17 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories
         ///     execute sql
         /// </summary>
         /// <param name="sqlList"></param>
-        public void ExecuteSql(List<string> sqlList)
-        {
+        public void ExecuteSql(List<string> sqlList) {
             foreach (var item in sqlList) {
-                try
-                {
+                try {
                     RepositoryContext.ExecuteNonQuery(item);
-                }
-                catch (Exception ex)
-                {
+                } catch (Exception ex) {
                     Trace.WriteLine(ex.Message);
                 }
             }
         }
 
-        public void DeleteDatabase(string databaseName)
-        {
+        public void DeleteDatabase(string databaseName) {
             var sqlList = new List<string>
             {
                 $"Drop DATABASE {databaseName};"
@@ -79,12 +71,9 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories
             ExecuteSql(sqlList);
         }
 
-        private List<string> TableCreateSqlList()
-        {
+        private List<string> TableCreateSqlList() {
             var sqlList = new List<string>
             {
-            //Core_AutoConfig
-            "CREATE TABLE [dbo].[Core_AutoConfig]([Id] [bigint] IDENTITY(1,1) NOT NULL,[AppName] [nvarchar](max) NULL,[Type] [nvarchar](255) NULL,[Value] [ntext] NULL,[LastUpdated] [datetime2](7) NOT NULL,[CreateTime] [datetime2](7) NOT NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
                 //Basic_MessageQueue
                 "CREATE TABLE [dbo].[Basic_MessageQueue]([Id] [bigint] IDENTITY(1,1) NOT NULL,[TemplateCode] [bigint] NOT NULL,[Mobile] [nvarchar](30) NOT NULL,[Content] [nvarchar](500) NOT NULL,[Parameters] [nvarchar](2000) NOT NULL,[Status] [tinyint] NOT NULL,[Message] [nvarchar](max) NOT NULL,[Summary] [nvarchar](max) NOT NULL,[IpAdress] [nvarchar](50) NOT NULL,[RequestTime] [datetime2](7) NOT NULL,[SendTime] [datetime2](7) NOT NULL,[CreateTime] [datetime2](7) NOT NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
                 //Basic_Record
@@ -142,7 +131,6 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories
                 //Shop_ProductSku
                 "CREATE TABLE [dbo].[Shop_ProductSku]([Id] [bigint] IDENTITY(1,1) NOT NULL,[ProductId] [bigint] NOT NULL,[Bn] [nvarchar](max) NULL,[ProductStatus] [int] NOT NULL,[BarCode] [nvarchar](max) NULL,[PurchasePrice] [decimal](18, 2) NOT NULL,[CostPrice] [decimal](18, 2) NOT NULL,[MarketPrice] [decimal](18, 2) NOT NULL,[Price] [decimal](18, 2) NOT NULL,[FenRunPrice] [decimal](18, 2) NULL,[Weight] [decimal](18, 2) NOT NULL,[Size] [decimal](18, 2) NOT NULL,[Stock] [bigint] NOT NULL,[StorePlace] [nvarchar](max) NULL,[PropertyJson] [nvarchar](max) NULL,[PropertyValueDesc] [nvarchar](max) NULL,[CreateTime] [datetime2](7) NOT NULL,[Modified] [datetime2](7) NOT NULL,[SpecSn] [nvarchar](max) NULL,[DisplayPrice] [nvarchar](50) NULL,[MinPayCash] [decimal](18, 2) NULL,[MaxPayPrice] [decimal](18, 2) NULL,[GradePrice] [nvarchar](max) NULL,PRIMARY KEY CLUSTERED ([Id] ASC)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]",
                 //alter
-                "ALTER TABLE [dbo].[Core_AutoConfig] ADD  DEFAULT (getdate()) FOR [CreateTime]",
                 "ALTER TABLE [dbo].[Basic_MessageQueue] ADD  DEFAULT ((0)) FOR [TemplateCode]",
                 "ALTER TABLE [dbo].[Basic_MessageQueue] ADD  DEFAULT ((1)) FOR [Status]",
                 "ALTER TABLE [dbo].[Basic_MessageQueue] ADD  DEFAULT (getdate()) FOR [RequestTime]",
@@ -374,9 +362,46 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories
                     ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]";
             sqlList.Add(sql);
 
+            // autoConfig表
+            sql = @"CREATE TABLE [dbo].[Core_AutoConfig](
+	                [Id] [bigint] IDENTITY(1,1) NOT NULL,
+	                [AppName] [nvarchar](max) NULL,
+	                [Type] [nvarchar](255) NULL,
+	                [Value] [ntext] NULL,
+	                [LastUpdated] [datetime2](7) NOT NULL,
+	                [CreateTime] [datetime2](7) NOT NULL,
+                 CONSTRAINT [PK_Core_AutoConfig] PRIMARY KEY CLUSTERED
+                (
+	                [Id] ASC
+                )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+                ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]";
+            sqlList.Add(sql);
+
             ExecuteSql(sqlList);
 
             return sqlList;
+        }
+
+        /// <summary>
+        ///     设置非聚集索引
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="column"></param>
+        private string SetNonclustered(string tableName, string column) {
+            var sql =
+                $"CREATE NONCLUSTERED INDEX [NonClusteredIndex-{column}] ON [dbo].[{tableName}](	[{column}] ASC)WITH (PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]";
+            return sql;
+        }
+
+        /// <summary>
+        ///     设置唯一索引
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="column"></param>
+        private string SetUnique(string tableName, string column) {
+            var sql =
+                $"CREATE unique  INDEX [uniqueIndex-{column}] ON [dbo].[{tableName}](	[{column}] ASC)WITH (PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]";
+            return sql;
         }
     }
 }

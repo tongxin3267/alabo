@@ -11,20 +11,18 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Alabo.Framework.Core.Admins.Repositories
-{
-    public class CatalogRepository : RepositoryEfCore<User, long>, ICatalogRepository
-    {
-        public CatalogRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+namespace Alabo.Framework.Core.Admins.Repositories {
+
+    public class CatalogRepository : RepositoryEfCore<User, long>, ICatalogRepository {
+
+        public CatalogRepository(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
         /// <summary>
         ///     更新数据库脚本
         ///     https://www.cnblogs.com/jes_shaw/archive/2013/05/14/3077215.html
         /// </summary>
-        public void UpdateDataBase()
-        {
+        public void UpdateDataBase() {
             var sqlList = new List<string>
             {
                 // 重构 2019年9月30日
@@ -269,13 +267,22 @@ namespace Alabo.Framework.Core.Admins.Repositories
                     ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]";
             sqlList.Add(sql);
 
+            // 设置索引等数据
+            var uniqueList = new List<string>
+            {
+               SetUnique("Core_AutoConfig","type"),
+               SetNonclustered("User_UserDetail","UserId"),
+               SetNonclustered("User_UserMap","UserId"),
+               SetNonclustered("Asset_Transfer","UserId"),
+            };
+            sqlList.AddRange(uniqueList);
+
             ExecuteSql(sqlList);
         }
 
         #region 清空表单
 
-        public void TruncateTable()
-        {
+        public void TruncateTable() {
             // ZKCloud项目
             DropMongoDbTable("Core_Logs");
             DropMongoDbTable("Core_Table");
@@ -362,20 +369,16 @@ namespace Alabo.Framework.Core.Admins.Repositories
         /// <summary>
         ///     获取所有的Sql表实体
         /// </summary>
-        public List<string> GetSqlTable()
-        {
+        public List<string> GetSqlTable() {
             var entityNames = Ioc.Resolve<ITypeService>().GetAllEntityType().Select(r => r.Name).ToList();
             var list = new List<string>();
             var sql = "select name from sys.tables";
             using (var reader =
-                RepositoryContext.ExecuteDataReader(sql))
-            {
-                while (reader.Read())
-                {
+                RepositoryContext.ExecuteDataReader(sql)) {
+                while (reader.Read()) {
                     var tableName = reader["name"].ToStr();
                     var arrarys = tableName.SplitString("_").ToList();
-                    if (arrarys.Count > 1)
-                    {
+                    if (arrarys.Count > 1) {
                         var entity = arrarys[1];
                         if (entityNames.Contains(entity)) {
                             list.Add(tableName);
@@ -395,15 +398,11 @@ namespace Alabo.Framework.Core.Admins.Repositories
         ///     执行脚本
         /// </summary>
         /// <param name="sqlList"></param>
-        private void ExecuteSql(List<string> sqlList)
-        {
+        private void ExecuteSql(List<string> sqlList) {
             foreach (var item in sqlList) {
-                try
-                {
+                try {
                     RepositoryContext.ExecuteNonQuery(item);
-                }
-                catch (Exception ex)
-                {
+                } catch (Exception ex) {
                     Trace.WriteLine(ex.Message);
                 }
             }
@@ -413,8 +412,7 @@ namespace Alabo.Framework.Core.Admins.Repositories
 
         #region 备份脚本
 
-        private void BackUpdateDataBase()
-        {
+        private void BackUpdateDataBase() {
             var sqlList = new List<string>
             {
                 // 重构 2019年9月30日
@@ -674,8 +672,7 @@ namespace Alabo.Framework.Core.Admins.Repositories
         /// </summary>
         /// <param name="tableName"></param>
         /// <param name="column"></param>
-        private string SetNonclustered(string tableName, string column)
-        {
+        private string SetNonclustered(string tableName, string column) {
             var sql =
                 $"CREATE NONCLUSTERED INDEX [NonClusteredIndex-{column}] ON [dbo].[{tableName}](	[{column}] ASC)WITH (PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]";
             return sql;
@@ -686,8 +683,7 @@ namespace Alabo.Framework.Core.Admins.Repositories
         /// </summary>
         /// <param name="tableName"></param>
         /// <param name="column"></param>
-        private string SetUnique(string tableName, string column)
-        {
+        private string SetUnique(string tableName, string column) {
             var sql =
                 $"CREATE unique  INDEX [uniqueIndex-{column}] ON [dbo].[{tableName}](	[{column}] ASC)WITH (PAD_INDEX = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]";
             return sql;
@@ -698,8 +694,7 @@ namespace Alabo.Framework.Core.Admins.Repositories
         /// </summary>
         /// <param name="tableName"></param>
         /// <param name="key"></param>
-        private string SetPrimaryKey(string tableName, string key = "Id")
-        {
+        private string SetPrimaryKey(string tableName, string key = "Id") {
             var sql =
                 $"ALTER TABLE [dbo].[{tableName}] ADD  CONSTRAINT [PK_{tableName}] PRIMARY KEY CLUSTERED ([{key}] ASC)";
             return sql;
@@ -709,14 +704,10 @@ namespace Alabo.Framework.Core.Admins.Repositories
         ///     清空mongodb表
         /// </summary>
         /// <param name="tableName"></param>
-        private void DropMongoDbTable(string tableName)
-        {
-            try
-            {
+        private void DropMongoDbTable(string tableName) {
+            try {
                 MongoRepositoryConnection.DropTable(tableName);
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 Trace.WriteLine(ex.Message);
             }
         }

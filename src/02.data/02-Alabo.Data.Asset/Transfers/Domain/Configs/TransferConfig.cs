@@ -239,7 +239,7 @@ namespace Alabo.App.Asset.Transfers.Domain.Configs
                     configs.Add(config);
                 }
 
-                var typeclassProperty = config.GetType().GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
+                
                 var autoConfig = new AutoConfig
                 {
                     Type = config.GetType().FullName,

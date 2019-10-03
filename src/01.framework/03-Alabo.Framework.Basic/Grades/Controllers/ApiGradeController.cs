@@ -11,19 +11,18 @@ using Alabo.Users.Services;
 using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Framework.Basic.Grades.Controllers
-{
+namespace Alabo.Framework.Basic.Grades.Controllers {
+
     [ApiExceptionFilter]
     [Route("Api/Grade/[action]")]
-    public class ApiGradeController : ApiBaseController
-    {
+    public class ApiGradeController : ApiBaseController {
+
         /// <summary>
         ///     会员的所有等级
         /// </summary>
         [HttpGet]
         [Display(Description = "所有等级")]
-        public ApiResult<List<UserGradeConfig>> AllGrade()
-        {
+        public ApiResult<List<UserGradeConfig>> AllGrade() {
             var grades = Resolve<IGradeService>().GetUserGradeList().Where(g => g.Visible).ToList()
                 .OrderBy(g => g.SortOrder).ToList();
             return ApiResult.Success(grades);
@@ -35,8 +34,7 @@ namespace Alabo.Framework.Basic.Grades.Controllers
         /// </summary>
         [HttpGet]
         [Display(Description = "获取比自己级别低的等级（包括自己等级）")]
-        public ApiResult<List<UserGradeConfig>> GetLowGrade([FromQuery] long loginUserId)
-        {
+        public ApiResult<List<UserGradeConfig>> GetLowGrade([FromQuery] long loginUserId) {
             return null;
         }
 
@@ -46,8 +44,7 @@ namespace Alabo.Framework.Basic.Grades.Controllers
         /// <param name="userName">用户名</param>
         [HttpGet]
         [Display(Description = "根据用户名获取会员等级")]
-        public ApiResult<UserGradeConfig> GetUserGrade([FromQuery] string userName)
-        {
+        public ApiResult<UserGradeConfig> GetUserGrade([FromQuery] string userName) {
             var user = Resolve<IAlaboUserService>().GetSingle(userName);
             if (user == null) {
                 return ApiResult.Failure<UserGradeConfig>("用户不存在");
@@ -62,8 +59,7 @@ namespace Alabo.Framework.Basic.Grades.Controllers
         /// </summary>
         [HttpPost]
         [Display(Description = "修改会员等级")]
-        public ApiResult UpdateGrade([FromBody] UserGradeInput parameter)
-        {
+        public ApiResult UpdateGrade([FromBody] UserGradeInput parameter) {
             if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason(), MessageCodes.ParameterValidationFailure);
             }

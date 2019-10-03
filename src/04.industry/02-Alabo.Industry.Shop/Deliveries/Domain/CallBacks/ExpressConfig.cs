@@ -15,14 +15,14 @@ using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
 using Newtonsoft.Json;
 
-namespace Alabo.Industry.Shop.Deliveries.Domain.CallBacks
-{
+namespace Alabo.Industry.Shop.Deliveries.Domain.CallBacks {
+
     [NotMapped]
     [ClassProperty(Name = "常用快递 ", Icon = "fa fa-life-ring", PageType = ViewPageType.List,
         Description = "配置常用快递", SortOrder = 30, SideBarType = SideBarType.SupplierSideBar
     )]
-    public class ExpressConfig : AutoConfigBase, IAutoConfig
-    {
+    public class ExpressConfig : AutoConfigBase, IAutoConfig {
+
         /// <summary>
         ///     快递名称
         /// </summary>
@@ -55,17 +55,13 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.CallBacks
         [Display(Name = "官方网站")]
         public string Url { get; set; }
 
-        public void SetDefault()
-        {
+        public void SetDefault() {
             var list = Ioc.Resolve<IAutoConfigService>().GetList<ExpressConfig>();
-            if (list == null || list.Count == 0)
-            {
+            if (list == null || list.Count == 0) {
                 var configs = new List<ExpressConfig>();
                 var config = new ExpressConfig();
-                foreach (ExpressType item in Enum.GetValues(typeof(ExpressType)))
-                {
-                    config = new ExpressConfig
-                    {
+                foreach (ExpressType item in Enum.GetValues(typeof(ExpressType))) {
+                    config = new ExpressConfig {
                         ExpressType = item,
                         Id = item.GetFieldAttribute().GuidId.ToGuid(),
                         Name = item.GetDisplayName(),
@@ -78,9 +74,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.CallBacks
                     configs.Add(config);
                 }
 
-                var typeclassProperty = config.GetType().GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
-                var autoConfig = new AutoConfig
-                {
+                var autoConfig = new AutoConfig {
                     Type = config.GetType().FullName,
 
                     LastUpdated = DateTime.Now,

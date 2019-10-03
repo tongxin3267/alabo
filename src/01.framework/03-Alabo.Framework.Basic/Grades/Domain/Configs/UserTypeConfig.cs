@@ -9,6 +9,7 @@ using Alabo.AutoConfigs.Services;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Helpers;
 using Alabo.Reflections;
@@ -16,17 +17,16 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Newtonsoft.Json;
 
-namespace Alabo.Framework.Basic.Grades.Domain.Configs
-{
+namespace Alabo.Framework.Basic.Grades.Domain.Configs {
+
     [NotMapped]
     [ClassProperty(Name = "用户类型", Icon = "fa fa-users",
         Description = "用户类型", PageType = ViewPageType.List, SortOrder = 11, SideBarType = SideBarType.ControlSideBar,
         Validator = "SELECT * FROM User_UserType where UserTypeId='{0}'",
         GroupName = "基本信息,加盟信息,高级选项", ValidateMessage = "该用户类型下存在用户")]
-    public class UserTypeConfig : AutoConfigBase, IAutoConfig
-    {
-        public UserTypeConfig()
-        {
+    public class UserTypeConfig : AutoConfigBase, IAutoConfig {
+
+        public UserTypeConfig() {
             if (TypeClass != UserTypeEnum.Customer) {
                 Id = TypeClass.GetCustomAttr<FieldAttribute>().GuidId.ToGuid();
             } else {
@@ -168,18 +168,14 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs
 
         #endregion
 
-        public void SetDefault()
-        {
+        public void SetDefault() {
             var list = Ioc.Resolve<IAlaboAutoConfigService>().GetList<UserTypeConfig>();
-            if (list == null || list.Count == 0)
-            {
+            if (list == null || list.Count == 0) {
                 var configs = new List<UserTypeConfig>();
                 var config = new UserTypeConfig();
                 foreach (UserTypeEnum item in Enum.GetValues(typeof(UserTypeEnum))) {
-                    if (item.IsDefault())
-                    {
-                        config = new UserTypeConfig
-                        {
+                    if (item.IsDefault()) {
+                        config = new UserTypeConfig {
                             TypeClass = item,
                             Icon = item.GetFieldAttribute().Icon
                         };
@@ -196,15 +192,12 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs
                     }
                 }
 
-                var typeclassProperty = config.GetType().GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
-                var autoConfig = new AutoConfig
-                {
+                var autoConfig = new AutoConfig {
                     Type = config.GetType().FullName,
-                    // AppName = typeclassProperty.AppName,
                     LastUpdated = DateTime.Now,
                     Value = JsonConvert.SerializeObject(configs)
                 };
-                Ioc.Resolve<IAlaboAutoConfigService>().AddOrUpdate(autoConfig);
+                Ioc.Resolve<IAutoConfigService>().AddOrUpdate(autoConfig);
             }
         }
     }
