@@ -91,45 +91,12 @@ namespace Alabo.Test.Core.User.Domain.Services
         }
 
         [Fact]
-        [TestMethod("GetUserGradeInfoPageList_Object")]
-        public void GetUserGradeInfoPageList_Object_test()
-        {
-            object query = null;
-            var result = Resolve<IUserMapService>().GetUserGradeInfoPageList(query);
-            Assert.NotNull(result);
-        }
-
-        [Fact]
-        [TestMethod("UpdateAllUserParentMap")]
-        public void UpdateAllUserParentMap_test()
-        {
-            Resolve<IUserMapService>().UpdateAllUserParentMap();
-        }
-
-        [Fact]
         [TestMethod("UpdateMap_Int64_Int64")]
         public void UpdateMap_Int64_Int64_test()
         {
             var userId = 0;
             var parentId = 0;
             Resolve<IUserMapService>().UpdateMap(userId, parentId);
-        }
-
-        [Fact]
-        [TestMethod("UpdateShopSale_Int64_ShopSaleExtension")]
-        public void UpdateShopSale_Int64_ShopSaleExtension_test()
-        {
-            var userId = 0;
-            ShopSaleExtension shopSaleExtension = null;
-            Resolve<IUserMapService>().UpdateShopSale(userId, shopSaleExtension);
-        }
-
-        [Fact]
-        [TestMethod("UpdateTeamInfo_Int64")]
-        public void UpdateTeamInfo_Int64_test()
-        {
-            var childuUserId = 0;
-            Resolve<IUserMapService>().UpdateTeamInfo(childuUserId);
         }
     }
 }

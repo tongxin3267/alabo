@@ -17,7 +17,7 @@ namespace Alabo.Test.Base.Core
                 .Replace("zkcloudopen_v2", "zkcloudv11s");
             TestRootPath = webRootPath + "\\test";
             //ContentRootPath = Environment.CurrentDirectory;
-            WebRootPath = webRootPath + "\\test\\Alabo.Test";
+            WebRootPath = webRootPath + "\\07.test\\01-Alabo.Test";
             ContentRootPath = WebRootPath;
         }
 

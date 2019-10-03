@@ -265,16 +265,3 @@ node_modules/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
-/src/web/ZKCloud.Web/Properties/PublishProfiles/FolderProfile.pubxml
-/src/web/ZKCloud.Web/wwwroot/uploads/static/qrcode
-/src/web/ZKCloud.Web/wwwroot/uploads
-/src/web/ZKCloud.Web/wwwroot/qrcode
-/src/web/ZKCloud.Web/wwwroot/excel
-/src/refs
-/src/web/ZKCloud.Web/Logs
-/src/app/hh/Common/Widgets/LawWidget.cs
-/src/app/hh/Themes/Widgets/AgreementWidget.cs
-/src/web/ZKCloud.Web/wwwroot/assets/admin/src/lib/bootstrap/.github
-/src/web/ZKCloud.Web/Program.cs
-/src/web/ZKCloud.Web/appsettings.json
-/src/web/ZKCloud.Web/wwwroot/productqrcode/foot.jpeg

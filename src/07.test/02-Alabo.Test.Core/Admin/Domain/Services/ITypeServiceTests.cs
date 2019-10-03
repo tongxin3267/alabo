@@ -193,7 +193,6 @@ namespace Alabo.Test.Core.Admin.Domain.Services
 
         [Theory]
         [InlineData(typeof(ArticleApiController))]
-        [InlineData(typeof(ApiSmallTargetController))]
         public void BaseTypeContains_Test(Type type)
         {
             var topBaseType = Reflection.BaseTypeContains(type, typeof(ApiBaseController));

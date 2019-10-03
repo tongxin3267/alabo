@@ -29,7 +29,7 @@ namespace Alabo.Test.Core.User.Domain.Services
         public void IsIdentity_Int64_test(long userId)
         {
             var user = Resolve<IUserService>().GetRandom(userId);
-            var result = Resolve<IIdentityService>().IsIdentity(user.Id);
+            var result = Resolve<IUserDetailService>().IsIdentity(user.Id);
 
             //var model = Resolve<IUserDetailService>().GetSingle(user.Id);
             //if (model != null) {

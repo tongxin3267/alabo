@@ -49,9 +49,6 @@ namespace Alabo.Test.Core.Common.Domain.Services
             var regions = Resolve<IRegionService>()
                 .GetList(r => r.ParentId == result.RegionId || r.CityId == result.RegionId);
             Assert.NotNull(regions);
-
-            var vantAddress = Resolve<IUserAddressService>().GetVantAddress();
-            Assert.NotNull(vantAddress);
         }
 
         [Fact]

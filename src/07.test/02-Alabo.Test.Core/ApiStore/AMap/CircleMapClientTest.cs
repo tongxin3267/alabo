@@ -1,4 +1,5 @@
 ﻿using Alabo.Data.People.Circles.Client;
+using Alabo.Data.People.Circles.Domain.Services;
 using Alabo.Extensions;
 using Alabo.Test.Base.Core.Model;
 using Xunit;

@@ -61,15 +61,6 @@ namespace Alabo.Test.Core.Common.Domain.Services
         [Fact]
         [TestMethod("GetAllApiUrl")]
         [TestIgnore]
-        public void GetAllApiUrl()
-        {
-            var result = Resolve<IApiService>().GetAllApiUrl();
-            Assert.NotNull(result);
-        }
-
-        [Fact]
-        [TestMethod("GetAllApiUrl")]
-        [TestIgnore]
         public void GetAllApiUrl_test()
         {
             //var result = Service<IApiService>().GetAllApiUrl();
