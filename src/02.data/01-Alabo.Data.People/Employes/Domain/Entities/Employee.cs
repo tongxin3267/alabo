@@ -10,8 +10,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Alabo.Data.People.Employes.Domain.Entities
 {
+    /// <summary>
+    /// 员工权限
+    /// </summary>
     [BsonIgnoreExtraElements]
-    [Table("Admin_Employee")]
+    [Table("People_Employee")]
     [ClassProperty(Name = "员工")]
     [AutoDelete(IsAuto = true)]
     public class Employee : AggregateMongodbUserRoot<Employee>
