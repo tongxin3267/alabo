@@ -85,7 +85,7 @@ namespace Alabo.Framework.Core.Tenants.Domains.Services
 
         public ServiceResult InitTenantDatabase(string tenant) {
             if (!TenantContext.IsTenant) {
-                return ServiceResult.FailedWithMessage("非租户模式不能创建租户");
+               //  return ServiceResult.FailedWithMessage("非租户模式不能创建租户");
             }
 
             if (string.IsNullOrWhiteSpace(tenant)) {

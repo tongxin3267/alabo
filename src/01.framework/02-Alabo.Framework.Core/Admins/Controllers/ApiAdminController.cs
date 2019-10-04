@@ -16,8 +16,7 @@ namespace Alabo.Framework.Core.Admins.Controllers
         ///     清空缓存
         /// </summary>
         /// <returns></returns>
-        public ApiResult ClearCache()
-        {
+        public ApiResult ClearCache() {
             Resolve<IAdminService>().ClearCache();
             return ApiResult.Success();
         }
@@ -26,11 +25,16 @@ namespace Alabo.Framework.Core.Admins.Controllers
         ///     初始化权限
         /// </summary>
         [HttpGet]
-        public ApiResult Init()
-        {
+        public ApiResult Init() {
             // 数据脚本，数据初始等
             Resolve<IAdminService>().DefaultInit();
             return ApiResult.Success();
+        }
+
+        [HttpGet]
+        public ApiResult<bool> Test() {
+            var http = HttpWeb.IsTenant;
+            return ApiResult.Success(http);
         }
     }
 }
