@@ -8,6 +8,8 @@
     <LangVersion>7.1</LangVersion>
 
     <AssemblyName>Alabo.Test</AssemblyName>
+
+    <RootNamespace>Alabo.Test</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

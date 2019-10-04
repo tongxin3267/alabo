@@ -8,7 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Admins\Dtos\" />
+    <Compile Remove="Admins\Dtos\**" />
+    <EmbeddedResource Remove="Admins\Dtos\**" />
+    <None Remove="Admins\Dtos\**" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿using Alabo.Cloud.People.UserDigitals.Domain.Entities;
+﻿using Alabo.Data.People.Merchants.Domain.Entities;
 using Alabo.Dependency;
 using Alabo.Reflections;
 using Alabo.Schedules.Job;
@@ -6,12 +6,6 @@ using Alabo.Web.CodeGeneration.EntityCode.Templates;
 using Quartz;
 using System;
 using System.Threading.Tasks;
-using Alabo.App.Asset.Withdraws.Domain.Entities;
-using Alabo.Data.People.BranchCompanys.Domain.Entities;
-using Alabo.Data.People.Merchants.Domain.Entities;
-using Alabo.Data.People.PartnerCompays.Domain.Entities;
-using Alabo.Data.People.Regionals.Domain.Entities;
-using Alabo.Data.People.ServiceCenters.Domain.Entities;
 
 namespace Alabo.Web.CodeGeneration.EntityCode
 {
@@ -20,8 +14,7 @@ namespace Alabo.Web.CodeGeneration.EntityCode
     /// </summary>
     public class EntityCodeGenerationJob : JobBase
     {
-        protected override async Task Execute(IJobExecutionContext context, IScope scope)
-        {
+        protected override async Task Execute(IJobExecutionContext context, IScope scope) {
             //手动修改,实体路径，可右键实体手动复制路径
             var entityPath = @"C:\alaboshu.com\alabo\src\02.data\01-Alabo.Data.People\Merchants\Domain\Entities\";
             CreateCode(typeof(ChainMerchant), entityPath);
@@ -32,11 +25,9 @@ namespace Alabo.Web.CodeGeneration.EntityCode
             Console.WriteLine(@"所有代码生成完成");
         }
 
-        public void CreateCode(Type type, string entityPath)
-        {
+        public void CreateCode(Type type, string entityPath) {
             var keyIdType = Reflection.GetMemberType(type, "Id");
-            if (keyIdType == null)
-            {
+            if (keyIdType == null) {
                 Console.WriteLine($@"{type.Name}非实体，请重新输入");
                 return;
             }

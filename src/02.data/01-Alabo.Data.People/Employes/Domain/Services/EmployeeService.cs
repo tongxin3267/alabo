@@ -8,6 +8,7 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.PostRoles.Dtos;
 using Alabo.Framework.Core.Admins.Services;
 using Alabo.Framework.Themes.Domain.Entities;
 using Alabo.Helpers;
@@ -221,6 +222,23 @@ namespace Alabo.Data.People.Employes.Domain.Services
             }
 
             throw new ValidException("超级管理员不存在");
+        }
+
+        public void Init() {
+            if (!Resolve<IEmployeeService>().Exists()) {
+                var user = Resolve<IUserService>().GetSingle("admin");
+                if (user != null) {
+                    var employee = new Employee {
+                        PostRoleId = ObjectId.Parse("a008029a8600000752803001"),
+                        Name = "超级管理员",
+                        Intro = "系统默认超级管理员",
+                        IsEnable = true,
+                        UserId = user.Id,
+                        IsSuperAdmin = true
+                    };
+                    Resolve<IEmployeeService>().Add(employee);
+                }
+            }
         }
 
         #endregion 根据Token自动登录

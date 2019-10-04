@@ -11,6 +11,7 @@
     <ProjectReference Include="..\..\06.tool\01-Alabo.Tool.Payment\05-Alabo.Tool.Payment.csproj" />
     <ProjectReference Include="..\01-Alabo\01-Alabo.csproj" />
     <ProjectReference Include="..\02-Alabo.Framework.Core\02-Alabo.Framework.Core.csproj" />
+    <ProjectReference Include="..\03-Alabo.Framework.Basic\03-Alabo.Framework.Basic.csproj" />
   </ItemGroup>
 
 </Project>

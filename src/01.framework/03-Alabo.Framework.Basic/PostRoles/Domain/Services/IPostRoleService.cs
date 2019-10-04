@@ -2,7 +2,7 @@ using Alabo.Data.People.Employes.Domain.Entities;
 using Alabo.Data.People.Employes.Dtos;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
-using Alabo.Framework.Themes.Domain.Entities;
+using Alabo.Framework.Basic.PostRoles.Dtos;
 using MongoDB.Bson;
 using System.Collections.Generic;
 

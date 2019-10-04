@@ -1,20 +1,24 @@
+using System.Collections.Generic;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Exceptions;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.PostRoles.Dtos;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Themes.Clients;
 using Alabo.Framework.Themes.Domain.Entities;
+using Alabo.Framework.Themes.Domain.Enums;
 using Alabo.Framework.Themes.Dtos;
 using Alabo.Helpers;
 using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Configuration;
 using ZKCloud.Open.ApiBase.Services;
 
-namespace Alabo.Framework.Themes.Domain.Services {
-
-    public class ThemeService : ServiceBase<Theme, ObjectId>, IThemeService {
+namespace Alabo.Framework.Themes.Domain.Services
+{
+    public class ThemeService : ServiceBase<Theme, ObjectId>, IThemeService
+    {
         private RestClientConfiguration _restClientConfiugration;
         private IServerAuthenticationManager _serverAuthenticationManager;
         private IThemeClient _themeClient;
@@ -64,6 +68,20 @@ namespace Alabo.Framework.Themes.Domain.Services {
             }
 
             return defaultTheme;
+        }
+
+        /// <summary>
+        ///     获取后台管理模板菜单
+        /// </summary>
+        /// <returns></returns>
+        public List<ThemeOneMenu> GetAdminThemeMenus() {
+            var clientPageInput = new ClientPageInput {
+                ClientType = ClientType.PcWeb,
+                Type = ThemeType.Admin
+            };
+            var defaultAdminTemplage = Resolve<IThemeService>().GetDefaultTheme(clientPageInput);
+            var menus = defaultAdminTemplage?.Menu?.Menus;
+            return menus;
         }
 
         public void InitTheme(string objectId) {

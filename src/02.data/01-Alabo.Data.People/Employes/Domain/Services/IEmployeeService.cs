@@ -29,5 +29,10 @@ namespace Alabo.Data.People.Employes.Domain.Services
         /// <param name="loginByToken"></param>
         /// <returns></returns>
         LoginInput LoginByToken(GetLoginToken loginByToken);
+
+        /// <summary>
+        /// 数据初始化
+        /// </summary>
+        void Init();
     }
 }

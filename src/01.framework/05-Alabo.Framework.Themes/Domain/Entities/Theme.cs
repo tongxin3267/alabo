@@ -1,5 +1,6 @@
 ﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories.Mongo.Extension;
+using Alabo.Framework.Basic.PostRoles.Dtos;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Themes.Domain.Enums;
 using Alabo.Web.Mvc.Attributes;
@@ -11,16 +12,16 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Framework.Themes.Domain.Entities {
-
+namespace Alabo.Framework.Themes.Domain.Entities
+{
     /// <summary>
     ///     主题模板配置
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Themes_Theme")]
     [ClassProperty(Name = "主题模板配置")]
-    public class Theme : AggregateMongodbRoot<Theme> {
-
+    public class Theme : AggregateMongodbRoot<Theme>
+    {
         /// <summary>
         ///     所属站点
         ///     站点为空的时候，表示系统模板
@@ -90,8 +91,8 @@ namespace Alabo.Framework.Themes.Domain.Entities {
     /// <summary>
     ///     模板菜单
     /// </summary>
-    public class ThemeMenu {
-
+    public class ThemeMenu
+    {
         /// <summary>
         ///     样式风格
         /// </summary>
@@ -101,108 +102,5 @@ namespace Alabo.Framework.Themes.Domain.Entities {
         ///     菜单 数据
         /// </summary>
         public List<ThemeOneMenu> Menus { get; set; }
-    }
-
-    /// <summary>
-    ///     模板操作菜单
-    /// </summary>
-    public class ThemeOneMenu {
-
-        /// <summary>
-        ///     权限唯一ID
-        /// </summary>
-        [JsonConverter(typeof(ObjectIdConverter))]
-        public ObjectId Id { get; set; }
-
-        /// <summary>
-        ///     图标
-        /// </summary>
-        public string Icon { get; set; }
-
-        /// <summary>
-        ///     名称
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        ///     链接地址
-        /// </summary>
-        public string Url { get; set; }
-
-        /// <summary>
-        ///     是否启用
-        /// </summary>
-        public bool IsEnable { get; set; } = true;
-
-        /// <summary>
-        ///     二级菜单
-        /// </summary>
-        public List<ThemeTwoMenu> Menus { get; set; }
-    }
-
-    public class ThemeTwoMenu {
-
-        /// <summary>
-        ///     权限唯一ID
-        /// </summary>
-        [JsonConverter(typeof(ObjectIdConverter))]
-        public ObjectId Id { get; set; }
-
-        /// <summary>
-        ///     图标
-        /// </summary>
-        public string Icon { get; set; }
-
-        /// <summary>
-        ///     名称
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        ///     是否启用
-        /// </summary>
-        public bool IsEnable { get; set; } = true;
-
-        /// <summary>
-        ///     链接地址
-        /// </summary>
-        public string Url { get; set; }
-
-        /// <summary>
-        ///     三级菜单
-        /// </summary>
-        public List<ThemeThreeMenu> Menus { get; set; }
-    }
-
-    /// <summary>
-    ///     三级菜单
-    /// </summary>
-    public class ThemeThreeMenu {
-
-        /// <summary>
-        ///     权限唯一ID
-        /// </summary>
-        [JsonConverter(typeof(ObjectIdConverter))]
-        public ObjectId Id { get; set; }
-
-        /// <summary>
-        ///     图标
-        /// </summary>
-        public string Icon { get; set; }
-
-        /// <summary>
-        ///     是否启用
-        /// </summary>
-        public bool IsEnable { get; set; } = true;
-
-        /// <summary>
-        ///     名称
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        ///     链接地址
-        /// </summary>
-        public string Url { get; set; }
     }
 }

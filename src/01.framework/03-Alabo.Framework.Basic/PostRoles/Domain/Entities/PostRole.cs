@@ -14,9 +14,8 @@ namespace Alabo.Data.People.Employes.Domain.Entities
     ///     岗位，也可立即成部门表
     /// </summary>
     [BsonIgnoreExtraElements]
-    [Table("People_PostRole")]
+    [Table("Basic_PostRole")]
     [ClassProperty(Name = "岗位权限")]
-    [AutoDelete(IsAuto = true, EntityType = typeof(Employee), RelationId = "PostRoleId")]
     public class PostRole : AggregateMongodbRoot<PostRole>
     {
         /// <summary>
