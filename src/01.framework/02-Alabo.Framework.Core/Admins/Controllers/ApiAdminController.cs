@@ -1,15 +1,16 @@
 ﻿using Alabo.Framework.Core.Admins.Services;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
+using Alabo.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Framework.Core.Admins.Controllers {
-
+namespace Alabo.Framework.Core.Admins.Controllers
+{
     [ApiExceptionFilter]
     [Route("Api/Admin/[action]")]
-    public class ApiAdminController : ApiBaseController {
-
+    public class ApiAdminController : ApiBaseController
+    {
         /// <summary>
         ///     清空缓存
         /// </summary>
@@ -27,12 +28,6 @@ namespace Alabo.Framework.Core.Admins.Controllers {
             // 数据脚本，数据初始等
             Resolve<IAdminService>().DefaultInit();
             return ApiResult.Success();
-        }
-
-        [HttpGet]
-        public ApiResult<bool> Test() {
-            var http = HttpWeb.IsTenant;
-            return ApiResult.Success(http);
         }
     }
 }

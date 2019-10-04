@@ -12,9 +12,10 @@ using Alabo.Tenants;
 using Alabo.Tenants.Domain.Services;
 using Alabo.Users.Services;
 
-namespace Alabo.Framework.Core.Tenants.Domains.Services {
-
-    public class TenantCreateService : ServiceBase, ITenantCreateService {
+namespace Alabo.Framework.Core.Tenants.Domains.Services
+{
+    public class TenantCreateService : ServiceBase, ITenantCreateService
+    {
         private readonly ITenantCreateRepository _tenantCreateRepository;
 
         public TenantCreateService(IUnitOfWork unitOfWork, ITenantCreateRepository tenantCreateRepository)
@@ -84,7 +85,7 @@ namespace Alabo.Framework.Core.Tenants.Domains.Services {
 
         public ServiceResult InitTenantDatabase(string tenant) {
             if (!TenantContext.IsTenant) {
-               //  return ServiceResult.FailedWithMessage("非租户模式不能创建租户");
+                return ServiceResult.FailedWithMessage($"非租户模式不能创建租户 :isTenant:{HttpWeb.IsTenant} {HttpWeb.Host} fullName: {HttpWeb.FullDomain} host:{RuntimeContext.Current.WebsiteConfig.ClientHost}");
             }
 
             if (string.IsNullOrWhiteSpace(tenant)) {
@@ -107,7 +108,7 @@ namespace Alabo.Framework.Core.Tenants.Domains.Services {
 
         public ServiceResult HaveTenant(string tenant) {
             if (tenant.IsNullOrEmpty()) {
-                return ServiceResult.FailedWithMessage("租户标识不能为空");
+                return ServiceResult.FailedWithMessage($"{HttpWeb.Host} fullName: {HttpWeb.FullDomain} host:{RuntimeContext.Current.WebsiteConfig.ClientHost}租户标识不能为空");
             }
 
             var find = Resolve<ITenantService>().GetSingle(r => r.Sign == tenant);

@@ -49,7 +49,7 @@ namespace Alabo.AutoConfigs {
         [Display(Name = "Api图片地址")]
         [HelpBlock("Api图片地址,一般情况下为网址，请补全http://或https://格式如http://www.5ug.com")]
         public string ApiImagesUrl { get; set; } =
-            RuntimeContext.Current.WebsiteConfig.ClientHost; //"https://s-open.qiniuniu99.com";
+            RuntimeContext.Current.WebsiteConfig.ClientHost; //"http://localhost:1800";
 
         [Field(ControlsType = ControlsType.FileUploder, GroupTabId = 1)]
         [Display(Name = "图标")]
