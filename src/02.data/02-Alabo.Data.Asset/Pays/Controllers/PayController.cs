@@ -88,7 +88,7 @@ namespace Alabo.App.Asset.Pays.Controllers
 
                                         dynamic a = pay.PayExtension.AfterSuccess?.ServiceName;
 
-                                        Linq.Dynamic.DynamicService.ResolveMethod(
+                                        Dynamics.DynamicService.ResolveMethod(
                                             pay.PayExtension.AfterSuccess?.ServiceName,
                                             pay.PayExtension.AfterSuccess?.Method,
                                             pay.PayExtension.AfterSuccess?.Parameter);
@@ -97,7 +97,7 @@ namespace Alabo.App.Asset.Pays.Controllers
                                     {
                                         //Resolve<IPayService>().Log($@"在回调中执行pay中的预留方法!无参数{pay.PayExtension.AfterSuccess?.ServiceName}
                                         //    {pay.PayExtension.AfterSuccess?.Method}");
-                                        Linq.Dynamic.DynamicService.ResolveMethod(
+                                        Dynamics.DynamicService.ResolveMethod(
                                             pay.PayExtension.AfterSuccess?.ServiceName,
                                             pay.PayExtension.AfterSuccess?.Method);
                                     }

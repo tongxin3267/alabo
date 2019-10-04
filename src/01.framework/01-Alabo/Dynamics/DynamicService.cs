@@ -1,20 +1,20 @@
-﻿using Alabo.Datas.UnitOfWorks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Attributes;
 using Alabo.Domains.Entities;
 using Alabo.Extensions;
 using Alabo.Helpers;
 using Alabo.Reflections;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 using ZKCloud.Open.DynamicExpression;
 using Convert = System.Convert;
 
-namespace Alabo.Linq.Dynamic {
-
-    public static class DynamicService {
-
+namespace Alabo.Dynamics
+{
+    public static class DynamicService
+    {
         /// <summary>
         ///     动态调取Service服务
         /// </summary>

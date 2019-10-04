@@ -17,6 +17,7 @@ using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Framework.Basic.PostRoles.Domain.Services;
 
 namespace Alabo.Data.People.Employes.Domain.Services
 {

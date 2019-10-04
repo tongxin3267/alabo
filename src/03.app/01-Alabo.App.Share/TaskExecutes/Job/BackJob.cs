@@ -4,12 +4,12 @@ using Alabo.Framework.Tasks.Queues.Domain.Entities;
 using Alabo.Framework.Tasks.Queues.Domain.Enums;
 using Alabo.Framework.Tasks.Queues.Domain.Servcies;
 using Alabo.Helpers;
-using Alabo.Linq.Dynamic;
 using Alabo.Schedules;
 using Alabo.Schedules.Job;
 using Quartz;
 using System;
 using System.Threading.Tasks;
+using Alabo.Dynamics;
 
 namespace Alabo.App.Share.TaskExecutes.Job
 {

@@ -5,11 +5,11 @@ using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Services;
 using Alabo.Framework.Core.WebUis.Dtos;
 using Alabo.Helpers;
-using Alabo.Linq.Dynamic;
 using Alabo.UI;
 using Alabo.UI.Design.AutoForms;
 using System;
 using System.Linq;
+using Alabo.Dynamics;
 
 namespace Alabo.Framework.Core.WebUis.Services {
 

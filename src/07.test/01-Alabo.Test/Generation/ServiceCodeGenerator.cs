@@ -4,6 +4,7 @@ using System.Linq;
 using Alabo.Data.People.Employes.Domain.Entities;
 using Alabo.Domains.Repositories.Model;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.PostRoles.Domain.Entities;
 using Alabo.Framework.Core.Reflections.Services;
 using Alabo.Helpers;
 using Alabo.Tables.Domain.Services;

@@ -13,7 +13,6 @@ using Alabo.Framework.Basic.Grades.Domain.Services;
 using Alabo.Framework.Basic.Regions.Domain.Services;
 using Alabo.Framework.Core.WebApis.Service;
 using Alabo.Helpers;
-using Alabo.Linq.Dynamic;
 using Alabo.Maps;
 using Alabo.Regexs;
 using Alabo.UI;
@@ -21,6 +20,7 @@ using Alabo.Users.Entities;
 using Alabo.Users.Enum;
 using System;
 using System.Collections.Generic;
+using Alabo.Dynamics;
 
 namespace Alabo.Data.People.Users.Domain.Services
 {
@@ -29,23 +29,19 @@ namespace Alabo.Data.People.Users.Domain.Services
         private readonly IUserDetailRepository _userDetailRepository;
 
         public UserDetailService(IUnitOfWork unitOfWork, IRepository<UserDetail, long> repository) : base(unitOfWork,
-            repository)
-        {
+            repository) {
             _userDetailRepository = Repository<IUserDetailRepository>();
         }
 
         /// <summary>
         /// </summary>
         /// <param name="userDetail"></param>
-        public bool UpdateSingle(UserDetail userDetail)
-        {
+        public bool UpdateSingle(UserDetail userDetail) {
             userDetail.ModifiedTime = DateTime.Now;
             var result = Resolve<IUserDetailService>().Update(userDetail);
-            if (result)
-            {
+            if (result) {
                 var user = Resolve<IUserService>().GetSingle(userDetail.UserId);
-                if (!userDetail.NickName.IsNullOrEmpty())
-                {
+                if (!userDetail.NickName.IsNullOrEmpty()) {
                     user.Name = userDetail.NickName;
                     Resolve<IUserService>().Update(user);
                 }
@@ -56,8 +52,7 @@ namespace Alabo.Data.People.Users.Domain.Services
             return result;
         }
 
-        public ServiceResult ConfirmPayPassword(string payPassWord, long loginUserId)
-        {
+        public ServiceResult ConfirmPayPassword(string payPassWord, long loginUserId) {
             var model = Resolve<IUserDetailService>().GetSingle(u => u.UserId == loginUserId);
             if (model == null) {
                 return ServiceResult.FailedWithMessage("您访问的用户不存在");
@@ -76,8 +71,7 @@ namespace Alabo.Data.People.Users.Domain.Services
         /// </summary>
         /// <param name="passwordInput"></param>
         /// <param name="checkLastPassword"></param>
-        public ServiceResult ChangePassword(PasswordInput passwordInput, bool checkLastPassword = true)
-        {
+        public ServiceResult ChangePassword(PasswordInput passwordInput, bool checkLastPassword = true) {
             var userDetail = Resolve<IUserService>().GetUserDetail(passwordInput.UserId);
             if (userDetail == null) {
                 return ServiceResult.FailedWithMessage("您访问的用户不存在");
@@ -97,8 +91,7 @@ namespace Alabo.Data.People.Users.Domain.Services
             }
 
             // 检查老密码
-            if (checkLastPassword)
-            {
+            if (checkLastPassword) {
                 if (passwordInput.Type == PasswordType.LoginPassword) {
                     if (!passwordInput.LastPassword.ToMd5HashString()
                         .Equals(userDetail.Detail.Password, StringComparison.OrdinalIgnoreCase)) {
@@ -116,22 +109,19 @@ namespace Alabo.Data.People.Users.Domain.Services
 
             if (passwordInput.Type == PasswordType.LoginPassword) {
                 if (_userDetailRepository.ChangePassword(passwordInput.UserId,
-                    passwordInput.Password.ToMd5HashString()))
-                {
+                    passwordInput.Password.ToMd5HashString())) {
                     Resolve<IUserService>().DeleteUserCache(userDetail.Id, userDetail.UserName);
                     return ServiceResult.Success;
                 }
             }
 
-            if (passwordInput.Type == PasswordType.PayPassword)
-            {
+            if (passwordInput.Type == PasswordType.PayPassword) {
                 if (!RegexHelper.CheckPayPasswrod(passwordInput.Password)) {
                     return ServiceResult.FailedWithMessage("支付密码必须为六位数字");
                 }
 
                 if (_userDetailRepository.ChangePayPassword(passwordInput.UserId,
-                    passwordInput.Password.ToMd5HashString()))
-                {
+                    passwordInput.Password.ToMd5HashString())) {
                     Resolve<IUserService>().DeleteUserCache(userDetail.Id, userDetail.UserName);
                     return ServiceResult.Success;
                 }
@@ -144,8 +134,7 @@ namespace Alabo.Data.People.Users.Domain.Services
         ///     找回密码
         /// </summary>
         /// <param name="findPassword"></param>
-        public ServiceResult FindPassword(FindPasswordInput findPassword)
-        {
+        public ServiceResult FindPassword(FindPasswordInput findPassword) {
             //var user = Resolve<IUserService>().GetUserDetail(findPassword.UserName);
             var user = Resolve<IUserService>().GetSingle(u => u.Mobile == findPassword.Mobile);
             if (user == null) {
@@ -181,8 +170,7 @@ namespace Alabo.Data.People.Users.Domain.Services
         ///     找回支付密码
         /// </summary>
         /// <param name="findPassword"></param>
-        public ServiceResult FindPayPassword(FindPasswordInput findPassword)
-        {
+        public ServiceResult FindPayPassword(FindPasswordInput findPassword) {
             //var user = Resolve<IUserService>().GetUserDetail(findPassword.UserName);
             var user = Resolve<IUserService>().GetSingle(u => u.Mobile == findPassword.Mobile);
             if (user == null) {
@@ -223,8 +211,7 @@ namespace Alabo.Data.People.Users.Domain.Services
         ///     修改手机号码
         /// </summary>
         /// <param name="view">The 视图.</param>
-        public ServiceResult ChangeMobile(ViewChangMobile view)
-        {
+        public ServiceResult ChangeMobile(ViewChangMobile view) {
             var user = Resolve<IUserService>().GetSingle(r => r.Mobile == view.Mobile && r.UserName == view.UserName);
             if (user == null) {
                 return ServiceResult.FailedWithMessage("手机号码和用户名不匹配");
@@ -248,8 +235,7 @@ namespace Alabo.Data.People.Users.Domain.Services
         ///     前端会员输出模型
         /// </summary>
         /// <param name="userId">会员Id</param>
-        public UserOutput GetUserOutput(long userId)
-        {
+        public UserOutput GetUserOutput(long userId) {
             var user = Resolve<IUserService>().GetSingle(u => u.Id == userId);
             if (user == null) {
                 throw new ValidException("用户不存在");
@@ -320,13 +306,10 @@ namespace Alabo.Data.People.Users.Domain.Services
         /// </summary>
         /// <param name="openId">The open identifier.</param>
         /// <param name="userId">会员Id</param>
-        public void UpdateOpenId(string openId, long userId)
-        {
-            if (!openId.IsNullOrEmpty())
-            {
+        public void UpdateOpenId(string openId, long userId) {
+            if (!openId.IsNullOrEmpty()) {
                 var userDetail = GetSingle(r => r.UserId == userId);
-                if (userDetail != null)
-                {
+                if (userDetail != null) {
                     userDetail.OpenId = openId;
                     Update(userDetail);
                     Resolve<IUserService>().DeleteUserCache(userId);
@@ -340,8 +323,7 @@ namespace Alabo.Data.People.Users.Domain.Services
         /// <param name="payPassword"></param>
         /// <param name="loginUserId"></param>
         /// <returns></returns>
-        public bool CheckPayPassword(string payPassword, long loginUserId)
-        {
+        public bool CheckPayPassword(string payPassword, long loginUserId) {
             if (payPassword.IsNullOrEmpty()) {
                 return false;
             }
@@ -354,8 +336,7 @@ namespace Alabo.Data.People.Users.Domain.Services
             return false;
         }
 
-        public bool IsIdentity(long userId)
-        {
+        public bool IsIdentity(long userId) {
             var find = GetSingle(r => r.UserId == userId);
             if (find == null) {
                 return false;
@@ -371,8 +352,7 @@ namespace Alabo.Data.People.Users.Domain.Services
         /// <summary>
         /// </summary>
         /// <param name="userId">用户Id</param>
-        public bool IsServiceCenter(long userId)
-        {
+        public bool IsServiceCenter(long userId) {
             var userDetail = GetSingle(r => r.UserId == userId);
 
             return false;
@@ -382,8 +362,7 @@ namespace Alabo.Data.People.Users.Domain.Services
         ///     获取当前服务中心下的所有会员Id
         /// </summary>
         /// <param name="userId">用户Id</param>
-        public IList<long> GetAllServiceCenterUserIds(long userId)
-        {
+        public IList<long> GetAllServiceCenterUserIds(long userId) {
             var list = Repository<IUserDetailRepository>().GetAllServiceCenterUserIds(userId);
             return list;
         }
@@ -395,8 +374,7 @@ namespace Alabo.Data.People.Users.Domain.Services
         /// <param name="userOutput"></param>
         /// <param name="filterType"></param>
         /// <returns></returns>
-        public ServiceResult GetUserRoles(ref UserOutput userOutput, FilterType filterType)
-        {
+        public ServiceResult GetUserRoles(ref UserOutput userOutput, FilterType filterType) {
             return null;
             //userOutput.Roles = new UserOutputRoles();
             //// 后台管理员判断

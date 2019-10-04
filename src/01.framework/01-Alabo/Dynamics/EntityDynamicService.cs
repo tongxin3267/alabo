@@ -1,19 +1,19 @@
-﻿using Alabo.Cache;
+﻿using System;
+using System.Collections.Generic;
+using Alabo.Cache;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Extensions;
 using Alabo.Helpers;
-using System;
-using System.Collections.Generic;
 using ZKCloud.Open.DynamicExpression;
 
-namespace Alabo.Linq.Dynamic {
-
+namespace Alabo.Dynamics
+{
     /// <summary>
     ///     Class UserDynamicService.
     ///     动态获取用户
     /// </summary>
-    public static class EntityDynamicService {
-
+    public static class EntityDynamicService
+    {
         #region 动态获取用户列表
 
         /// <summary>

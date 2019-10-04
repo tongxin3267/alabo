@@ -4,7 +4,6 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Files;
 using Alabo.Framework.Core.Reflections.Services;
-using Alabo.Linq.Dynamic;
 using Alabo.Mapping;
 using Alabo.Reflections;
 using Alabo.Web.ViewFeatures;
@@ -15,6 +14,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using Alabo.Dynamics;
 using FileInfo = System.IO.FileInfo;
 
 namespace Alabo.Framework.Core.WebUis.Services {

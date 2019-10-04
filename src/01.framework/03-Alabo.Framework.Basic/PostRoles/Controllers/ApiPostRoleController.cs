@@ -1,17 +1,17 @@
-using Alabo.Data.People.Employes.Domain.Entities;
-using Alabo.Data.People.Employes.Domain.Services;
-using Alabo.Data.People.Employes.Dtos;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Alabo.Extensions;
+using Alabo.Framework.Basic.PostRoles.Domain.Entities;
+using Alabo.Framework.Basic.PostRoles.Domain.Services;
+using Alabo.Framework.Basic.PostRoles.Dtos;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Data.People.Employes.Controllers
+namespace Alabo.Framework.Basic.PostRoles.Controllers
 {
     [ApiExceptionFilter]
     [Route("Api/PostRole/[action]")]

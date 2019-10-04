@@ -1,20 +1,18 @@
-using Alabo.Data.People.Employes.Domain.Entities;
-using Alabo.Data.People.Employes.Dtos;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
+using Alabo.Dynamics;
 using Alabo.Extensions;
-using Alabo.Framework.Core.Enums.Enum;
+using Alabo.Framework.Basic.PostRoles.Domain.Entities;
+using Alabo.Framework.Basic.PostRoles.Dtos;
 using Alabo.Maps;
 using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.Dynamics;
-using Alabo.Framework.Basic.PostRoles.Dtos;
 
-namespace Alabo.Data.People.Employes.Domain.Services
+namespace Alabo.Framework.Basic.PostRoles.Domain.Services
 {
     public class PostRoleService : ServiceBase<PostRole, ObjectId>, IPostRoleService
     {

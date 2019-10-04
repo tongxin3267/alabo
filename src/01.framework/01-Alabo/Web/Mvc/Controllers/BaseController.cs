@@ -4,7 +4,6 @@ using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Helpers;
-using Alabo.Linq.Dynamic;
 using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Validations;
@@ -13,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Alabo.Dynamics;
 
 namespace Alabo.Web.Mvc.Controllers {
 
@@ -165,7 +165,7 @@ namespace Alabo.Web.Mvc.Controllers {
         [NonAction]
         protected static Tuple<ServiceResult, object> DynamicService(string serviceString, string methodString,
             params object[] paramaters) {
-            return Linq.Dynamic.DynamicService.ResolveMethod(serviceString, methodString, paramaters);
+            return Dynamics.DynamicService.ResolveMethod(serviceString, methodString, paramaters);
         }
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace Alabo.Web.Mvc.Controllers {
         [NonAction]
         protected static Tuple<ServiceResult, object> DynamicService(string serviceString, string methodString,
             bool runInUrl, params object[] paramaters) {
-            return Linq.Dynamic.DynamicService.ResolveMethod(serviceString, methodString, runInUrl, paramaters);
+            return Dynamics.DynamicService.ResolveMethod(serviceString, methodString, runInUrl, paramaters);
         }
 
         /// <summary>

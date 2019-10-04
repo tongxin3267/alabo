@@ -26,7 +26,6 @@ using Alabo.Industry.Shop.Orders.Domain.Entities.Extensions;
 using Alabo.Industry.Shop.Orders.Domain.Enums;
 using Alabo.Industry.Shop.Orders.Domain.Services;
 using Alabo.Industry.Shop.Orders.Dtos;
-using Alabo.Linq.Dynamic;
 using Alabo.Mapping;
 using Alabo.Randoms;
 using Alabo.Regexs;
@@ -36,6 +35,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Alabo.Dynamics;
 
 namespace Alabo.Cloud.People.UserRightss.Domain.Services
 {

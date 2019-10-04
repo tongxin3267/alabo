@@ -1,7 +1,7 @@
-﻿using Alabo.Validations;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using Alabo.Validations;
 
-namespace Alabo.Data.People.Employes.Dtos
+namespace Alabo.Framework.Basic.PostRoles.Dtos
 {
     /// <summary>
     ///     获取Token

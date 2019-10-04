@@ -118,7 +118,7 @@ namespace Alabo.Framework.Core.WebApis.Controller {
 
             var entityRelation =
                 // var lambda= Lambda.Equal<>()
-                Linq.Dynamic.DynamicService.ResolveMethod(deleteAttribute.EntityType.Name, "GetSingle",
+                Dynamics.DynamicService.ResolveMethod(deleteAttribute.EntityType.Name, "GetSingle",
                     deleteAttribute.RelationId,
                     entity.Id);
             if (!entityRelation.Item1.Succeeded) {

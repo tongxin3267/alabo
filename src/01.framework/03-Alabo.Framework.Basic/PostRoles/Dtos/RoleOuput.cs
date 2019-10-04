@@ -1,9 +1,8 @@
-﻿using Alabo.Framework.Basic.PostRoles.Dtos;
+﻿using System.Collections.Generic;
 using Alabo.UI;
 using MongoDB.Bson;
-using System.Collections.Generic;
 
-namespace Alabo.Data.People.Employes.Dtos
+namespace Alabo.Framework.Basic.PostRoles.Dtos
 {
     /// <summary>
     ///     权限输入模型

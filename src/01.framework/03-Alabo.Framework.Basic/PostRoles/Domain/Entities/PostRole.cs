@@ -1,14 +1,14 @@
-﻿using Alabo.Domains.Entities;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Data.People.Employes.Domain.Entities
+namespace Alabo.Framework.Basic.PostRoles.Domain.Entities
 {
     /// <summary>
     ///     岗位，也可立即成部门表

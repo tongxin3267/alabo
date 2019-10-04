@@ -6,7 +6,6 @@ using Alabo.Domains.Query;
 using Alabo.Domains.Query.Dto;
 using Alabo.Extensions;
 using Alabo.Helpers;
-using Alabo.Linq.Dynamic;
 using Alabo.Mapping;
 using Alabo.Web.ViewFeatures;
 using System;
@@ -14,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
+using Alabo.Dynamics;
 using ZKCloud.Open.DynamicExpression;
 using Lambda = Alabo.Linq.Lambda;
 

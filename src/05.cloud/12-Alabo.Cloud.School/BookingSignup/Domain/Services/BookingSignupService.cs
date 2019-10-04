@@ -10,7 +10,6 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Linq.Dynamic;
 using Alabo.Mapping;
 using Alabo.Regexs;
 using Alabo.Tables.Domain.Services;
@@ -18,6 +17,7 @@ using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Dynamics;
 
 namespace Alabo.Cloud.School.BookingSignup.Domain.Services
 {

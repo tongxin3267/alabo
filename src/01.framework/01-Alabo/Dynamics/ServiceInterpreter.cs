@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using Alabo.Exceptions;
-using Alabo.Linq.Dynamic;
 using ZKCloud.Open.DynamicExpression;
 
 namespace Alabo.Dynamics

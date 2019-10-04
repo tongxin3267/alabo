@@ -1,12 +1,11 @@
-using Alabo.Data.People.Employes.Domain.Entities;
-using Alabo.Data.People.Employes.Dtos;
+using System.Collections.Generic;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Framework.Basic.PostRoles.Domain.Entities;
 using Alabo.Framework.Basic.PostRoles.Dtos;
 using MongoDB.Bson;
-using System.Collections.Generic;
 
-namespace Alabo.Data.People.Employes.Domain.Services
+namespace Alabo.Framework.Basic.PostRoles.Domain.Services
 {
     public interface IPostRoleService : IService<PostRole, ObjectId>
     {

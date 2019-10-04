@@ -6,10 +6,10 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
 using Alabo.Extensions;
 using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Linq.Dynamic;
 using Alabo.Tool.Payment;
 using System;
 using System.Collections.Generic;
+using Alabo.Dynamics;
 
 namespace Alabo.App.Asset.Pays.Domain.Repositories
 {

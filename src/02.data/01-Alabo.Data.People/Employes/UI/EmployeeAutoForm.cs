@@ -1,4 +1,7 @@
-﻿using Alabo.Data.People.Employes.Domain.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using Alabo.Data.People.Employes.Domain.Entities;
 using Alabo.Data.People.Employes.Domain.Services;
 using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Data.People.Users.Dtos;
@@ -15,11 +18,8 @@ using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Data.People.Employes.UI.AutoFrom
+namespace Alabo.Data.People.Employes.UI
 {
     /// <summary>
     ///     员工操作

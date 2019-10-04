@@ -5,7 +5,6 @@ using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.Model;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
-using Alabo.Linq.Dynamic;
 using Alabo.Reflections;
 using Alabo.Runtime;
 using Alabo.Tables.Domain.Entities;
@@ -15,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using Alabo.Dynamics;
 
 namespace Alabo.Tables.Domain.Services {
 

@@ -10,6 +10,7 @@ using Alabo.Helpers;
 using Alabo.Tables.Domain.Services;
 using Alabo.Users.Entities;
 using System;
+using Alabo.Framework.Basic.PostRoles.Domain.Services;
 
 namespace Alabo.Data.People.Users
 {

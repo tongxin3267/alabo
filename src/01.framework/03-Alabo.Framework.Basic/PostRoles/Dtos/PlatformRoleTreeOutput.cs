@@ -1,10 +1,10 @@
-﻿using Alabo.Domains.Repositories.Mongo.Extension;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using Alabo.Domains.Repositories.Mongo.Extension;
 using MongoDB.Bson;
 using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Data.People.Employes.Dtos
+namespace Alabo.Framework.Basic.PostRoles.Dtos
 {
     public class PlatformRoleTreeOutput
     {

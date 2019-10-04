@@ -131,7 +131,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers {
 
             //entity
             if (find is IEntity) {
-                var obj = Linq.Dynamic.DynamicService.ResolveMethod(typeIntance.Name, "GetViewById", id);
+                var obj = Dynamics.DynamicService.ResolveMethod(typeIntance.Name, "GetViewById", id);
                 var autoPreview = AutoPreviewMapping.Convert(obj);
                 return ApiResult.Success(autoPreview);
             }

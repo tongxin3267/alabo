@@ -1,10 +1,10 @@
 ﻿using Alabo.Domains.Entities.Extensions;
 using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Linq.Dynamic;
 using Alabo.Users.Entities;
 using Alabo.Validations;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using Alabo.Dynamics;
 
 namespace Alabo.App.Asset.Pays.Domain.Entities.Extension
 {

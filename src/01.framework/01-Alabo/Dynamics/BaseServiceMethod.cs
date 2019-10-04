@@ -1,4 +1,4 @@
-﻿namespace Alabo.Linq.Dynamic {
+﻿namespace Alabo.Dynamics {
 
     /// <summary>
     ///     动态调用方法

@@ -4,10 +4,10 @@ using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Services;
-using Alabo.Linq.Dynamic;
 using Alabo.UI;
 using Alabo.UI.Design.AutoTables;
 using System;
+using Alabo.Dynamics;
 using ZKCloud.Open.DynamicExpression;
 
 namespace Alabo.Framework.Core.WebUis.Services {

@@ -9,7 +9,6 @@ using Alabo.Framework.Core.WebUis.Services;
 using Alabo.Framework.Reports.Domain.Entities;
 using Alabo.Framework.Reports.Domain.Repositories;
 using Alabo.Framework.Reports.Dtos;
-using Alabo.Linq.Dynamic;
 using Alabo.Reflections;
 using Alabo.Tables.Domain.Services;
 using Alabo.UI;
@@ -20,6 +19,7 @@ using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Dynamics;
 
 namespace Alabo.Framework.Reports.Domain.Services {
 
