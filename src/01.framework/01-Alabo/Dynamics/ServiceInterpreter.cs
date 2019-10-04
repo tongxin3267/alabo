@@ -24,8 +24,9 @@ namespace Alabo.Dynamics
             if (serviceResolve == null) {
                 throw new ValidException("服务类型输入错误,未找到");
             }
-            var target = new Interpreter().SetVariable("service", service);
-            var result = target.Eval($"service.GetList()");
+            var target = new Interpreter().SetVariable("entityService", serviceResolve);
+            var evalString = $"entityService.{method}()";
+            var result = target.Eval(evalString);
             return (T)result;
         }
 
@@ -46,8 +47,9 @@ namespace Alabo.Dynamics
             {
                 new Parameter("parameter", parameter)
             };
-            var target = new Interpreter().SetVariable("service", service);
-            var result = target.Eval($"service.{method}()", parameters);
+            var target = new Interpreter().SetVariable("entityService", serviceResolve);
+            var evalString = $"entityService.{method}(parameter)";
+            var result = target.Eval(evalString, parameters);
             return (T)result;
         }
     }
