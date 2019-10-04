@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using Alabo.Exceptions;
 
 namespace Alabo.Extensions
 {
@@ -218,7 +219,7 @@ namespace Alabo.Extensions
             try {
                 return ObjectId.Parse(str);
             } catch (Exception ex) {
-                throw new ArgumentException("转换出错" + ex.Message);
+                throw new ValidException("转换出错" + ex.Message);
             }
         }
 
@@ -231,7 +232,7 @@ namespace Alabo.Extensions
             try {
                 return ObjectId.Parse(str);
             } catch (Exception ex) {
-                throw new ArgumentException("转换出错" + ex.Message);
+                throw new ValidException("转换出错" + ex.Message);
             }
         }
 
@@ -914,7 +915,7 @@ namespace Alabo.Extensions
         public static void SetBitValue(
             this byte[] bytes, int bitIndex, bool value, Action<byte[]> realloced) {
             if (bitIndex < 0) {
-                throw new ArgumentException("bit index must not be less than 0");
+                throw new ValidException("bit index must not be less than 0");
             }
             //计算长度
             var bitLength = bitIndex + 1; //位长度
@@ -942,7 +943,7 @@ namespace Alabo.Extensions
         /// <param name="bitIndex"></param>
         public static bool? GetBitValue(this byte[] bytes, int bitIndex) {
             if (bitIndex < 0) {
-                throw new ArgumentException("bit index must not be less than 0");
+                throw new ValidException("bit index must not be less than 0");
             }
             //计算长度
             var bitLength = bitIndex + 1; //位长度

@@ -1,4 +1,5 @@
 ﻿using System;
+using Alabo.Exceptions;
 using Alabo.Framework.Tasks.Queues.Domain.Enums;
 using Alabo.Framework.Tasks.Schedules.Domain.Enums;
 using ZKCloud.Open.Share.Enums;
@@ -17,10 +18,9 @@ namespace Alabo.Framework.Tasks.Queues.Models
         /// <param name="id">Id标识</param>
         /// <param name="name">The name.</param>
         /// <exception cref="ArgumentException"></exception>
-        public TaskModuleAttribute(string id, string name)
-        {
+        public TaskModuleAttribute(string id, string name) {
             if (!Guid.TryParse(id, out var idGuid)) {
-                throw new ArgumentException($"can not convert id {id} to guid.");
+                throw new ValidException($"can not convert id {id} to guid.");
             }
 
             Id = idGuid;

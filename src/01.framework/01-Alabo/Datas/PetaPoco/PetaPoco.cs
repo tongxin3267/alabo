@@ -146,7 +146,7 @@ namespace Alabo.Datas.PetaPoco
         public Database(string connectionString, string providerName)
         {
             if (string.IsNullOrEmpty(connectionString)) {
-                throw new ArgumentException("Connection string cannot be null or empty", "connectionString");
+                throw new ValidException("Connection string cannot be null or empty", "connectionString");
             }
 
             ConnectionString = connectionString;
@@ -163,7 +163,7 @@ namespace Alabo.Datas.PetaPoco
         public Database(string connectionString, DbProviderFactory factory)
         {
             if (string.IsNullOrEmpty(connectionString)) {
-                throw new ArgumentException("Connection string must not be null or empty", "connectionString");
+                throw new ValidException("Connection string must not be null or empty", "connectionString");
             }
 
             if (factory == null) {
@@ -185,7 +185,7 @@ namespace Alabo.Datas.PetaPoco
         public Database(string connectionStringName)
         {
             if (string.IsNullOrEmpty(connectionStringName)) {
-                throw new ArgumentException("Connection string name must not be null or empty", "connectionStringName");
+                throw new ValidException("Connection string name must not be null or empty", "connectionStringName");
             }
 
             var entry = new
@@ -215,7 +215,7 @@ namespace Alabo.Datas.PetaPoco
         public Database(string connectionString, IProvider provider, IMapper defaultMapper = null)
         {
             if (string.IsNullOrEmpty(connectionString)) {
-                throw new ArgumentException("Connection string must not be null or empty", "connectionString");
+                throw new ValidException("Connection string must not be null or empty", "connectionString");
             }
 
             if (provider == null) {
@@ -1936,7 +1936,7 @@ namespace Alabo.Datas.PetaPoco
             }
 
             if (string.IsNullOrEmpty(primaryKeyName)) {
-                throw new ArgumentException("primaryKeyName");
+                throw new ValidException("primaryKeyName");
             }
 
             return IsNew(primaryKeyName, PocoData.ForObject(poco, primaryKeyName, DefaultMapper), poco);
@@ -1961,7 +1961,7 @@ namespace Alabo.Datas.PetaPoco
             {
                 pi = poco.GetType().GetProperty(primaryKeyName);
                 if (pi == null) {
-                    throw new ArgumentException(string.Format(
+                    throw new ValidException(string.Format(
                         "The object doesn't have a property matching the primary key column name '{0}'",
                         primaryKeyName));
                 }
@@ -2902,7 +2902,7 @@ namespace Alabo.Datas.PetaPoco
             int seconds)
         {
             if (seconds < 1) {
-                throw new ArgumentException("Timeout value must be greater than zero.");
+                throw new ValidException("Timeout value must be greater than zero.");
             }
 
             source.SetSetting(CommandTimeout, seconds);
@@ -3043,7 +3043,7 @@ namespace Alabo.Datas.PetaPoco
             string connectionString)
         {
             if (string.IsNullOrEmpty(connectionString)) {
-                throw new ArgumentException("Argument is null or empty", "connectionString");
+                throw new ValidException("Argument is null or empty", "connectionString");
             }
 
             source.SetSetting(ConnectionString, connectionString);
@@ -3061,7 +3061,7 @@ namespace Alabo.Datas.PetaPoco
             string connectionStringName)
         {
             if (string.IsNullOrEmpty(connectionStringName)) {
-                throw new ArgumentException("Argument is null or empty", "connectionStringName");
+                throw new ValidException("Argument is null or empty", "connectionStringName");
             }
 
             source.SetSetting(ConnectionStringName, connectionStringName);
@@ -5185,7 +5185,7 @@ namespace Alabo.Datas.PetaPoco
             }
 
             if (ft == null) {
-                throw new ArgumentException("Could not load the " + GetType().Name + " DbProviderFactory.");
+                throw new ValidException("Could not load the " + GetType().Name + " DbProviderFactory.");
             }
 
             return (DbProviderFactory)ft.GetField("Instance").GetValue(null);
@@ -5200,7 +5200,7 @@ namespace Alabo.Datas.PetaPoco
         public static void RegisterCustomProvider<T>(string initialString) where T : IProvider, new()
         {
             if (string.IsNullOrWhiteSpace(initialString)) {
-                throw new ArgumentException("Initial string must not be null or empty", "initialString");
+                throw new ValidException("Initial string must not be null or empty", "initialString");
             }
 
             _customProviders[initialString] = Singleton<T>.Instance;
@@ -5283,7 +5283,7 @@ namespace Alabo.Datas.PetaPoco
             }
 
             if (!allowDefault) {
-                throw new ArgumentException("Could not match `" + type.FullName + "` to a provider.", "type");
+                throw new ValidException("Could not match `" + type.FullName + "` to a provider.", "type");
             }
 
             // Assume SQL Server
@@ -5351,7 +5351,7 @@ namespace Alabo.Datas.PetaPoco
             }
 
             if (!allowDefault) {
-                throw new ArgumentException("Could not match `" + providerName + "` to a provider.", "providerName");
+                throw new ValidException("Could not match `" + providerName + "` to a provider.", "providerName");
             }
 
             // Assume SQL Server
@@ -8360,7 +8360,7 @@ namespace Alabo.Datas.PetaPoco
                         }
 
                         if (!found) {
-                            throw new ArgumentException(
+                            throw new ValidException(
                                 string.Format(
                                     "Parameter '@{0}' specified but none of the passed arguments have a property with this name (in '{1}')",
                                     param, sql));

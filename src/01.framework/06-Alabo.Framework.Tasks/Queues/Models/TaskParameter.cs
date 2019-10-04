@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Exceptions;
 
 namespace Alabo.Framework.Tasks.Queues.Models
 {
@@ -10,47 +11,40 @@ namespace Alabo.Framework.Tasks.Queues.Models
 
         private readonly IDictionary<string, Type> _dataTypeCache = new Dictionary<string, Type>();
 
-        public void AddValue<T>(string name, T value)
-        {
+        public void AddValue<T>(string name, T value) {
             if (_dataCache.ContainsKey(name)) {
-                throw new ArgumentException($"data with key {name} is in parameter.");
+                throw new ValidException($"data with key {name} is in parameter.");
             }
 
             _dataCache.Add(name, value);
             _dataTypeCache.Add(name, typeof(T));
         }
 
-        public void AddValue(string name, object value)
-        {
+        public void AddValue(string name, object value) {
             if (_dataCache.ContainsKey(name)) {
-                throw new ArgumentException($"data with key {name} is in parameter.");
+                throw new ValidException($"data with key {name} is in parameter.");
             }
 
             _dataCache.Add(name, value);
             _dataTypeCache.Add(name, value.GetType());
         }
 
-        public void SetValue<T>(string name, T value)
-        {
-            if (_dataTypeCache.ContainsKey(name))
-            {
+        public void SetValue<T>(string name, T value) {
+            if (_dataTypeCache.ContainsKey(name)) {
                 if (_dataTypeCache[name] != typeof(T)) {
-                    throw new ArgumentException($"update data with key {name} error, the type not equals");
+                    throw new ValidException($"update data with key {name} error, the type not equals");
                 }
 
                 _dataCache[name] = value;
-            }
-            else
-            {
+            } else {
                 AddValue(name, value);
             }
         }
 
-        public T GetValue<T>(string name)
-        {
+        public T GetValue<T>(string name) {
             var find = GetValue(name);
             if (find.GetType() != typeof(T)) {
-                throw new ArgumentException(
+                throw new ValidException(
                     $"value with key {name} of type {typeof(T).Name} not equals data type {find.GetType().Name}");
             }
 
@@ -58,11 +52,10 @@ namespace Alabo.Framework.Tasks.Queues.Models
                 find = Convert.ChangeType(find, typeof(T));
             }
 
-            return (T) find;
+            return (T)find;
         }
 
-        public object GetValue(string name)
-        {
+        public object GetValue(string name) {
             if (!_dataCache.TryGetValue(name, out var find)) {
                 throw new KeyNotFoundException($"value with key {name} not found.");
             }
@@ -70,17 +63,14 @@ namespace Alabo.Framework.Tasks.Queues.Models
             return find;
         }
 
-        public bool TryGetValue<T>(string name, out T value)
-        {
-            if (!_dataCache.TryGetValue(name, out var find))
-            {
+        public bool TryGetValue<T>(string name, out T value) {
+            if (!_dataCache.TryGetValue(name, out var find)) {
                 value = default;
                 return false;
             }
 
             var type = _dataTypeCache[name];
-            if (find.GetType() != type)
-            {
+            if (find.GetType() != type) {
                 value = default;
                 return false;
             }
@@ -89,22 +79,19 @@ namespace Alabo.Framework.Tasks.Queues.Models
                 find = Convert.ChangeType(find, typeof(T));
             }
 
-            value = (T) find;
+            value = (T)find;
             return true;
         }
 
-        public string[] GetDataKeys()
-        {
+        public string[] GetDataKeys() {
             return _dataCache.Keys.ToArray();
         }
 
-        public KeyValuePair<string, Type>[] GetDataKeyAndTypes()
-        {
+        public KeyValuePair<string, Type>[] GetDataKeyAndTypes() {
             return _dataTypeCache.ToArray();
         }
 
-        public bool Exists(string name)
-        {
+        public bool Exists(string name) {
             return _dataCache.ContainsKey(name);
         }
     }

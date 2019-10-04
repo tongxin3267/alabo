@@ -1,7 +1,7 @@
 ﻿{
   "OpenApiSetting": {
-    "DiyUrl": "http://diyapi.5ug.com",
-    //"DiyUrl": "http://localhost:6800",
+    // "DiyUrl": "http://diyapi.5ug.com",
+    "DiyUrl": "http://localhost:6800",
     "Id": "dc28c0f3e02410c1347df39d",
     "Key": "AMCUJC29JUAXZJICA29KR8NOFG82FODM7XZHONUUVKQ2ZIPZ7CELOZ7C8NOCE9450XACTLNMIPYQRVY70I5DJRIHZ7JA8RQWQVBBIMGWYSCZLRLMYRM5E0VIP2MWBMNB"
   },

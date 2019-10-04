@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
+using Alabo.Exceptions;
 
 namespace Alabo.Maps
 {
@@ -24,8 +25,7 @@ namespace Alabo.Maps
         /// <typeparam name="TDestination">目标类型</typeparam>
         /// <param name="source">源对象</param>
         /// <param name="destination">目标对象</param>
-        public static TDestination MapTo<TSource, TDestination>(this TSource source, TDestination destination)
-        {
+        public static TDestination MapTo<TSource, TDestination>(this TSource source, TDestination destination) {
             return MapTo<TDestination>(source, destination);
         }
 
@@ -34,16 +34,14 @@ namespace Alabo.Maps
         /// </summary>
         /// <typeparam name="TDestination">目标类型</typeparam>
         /// <param name="source">源对象</param>
-        public static TDestination MapTo<TDestination>(this object source) where TDestination : new()
-        {
+        public static TDestination MapTo<TDestination>(this object source) where TDestination : new() {
             return MapTo(source, new TDestination());
         }
 
         /// <summary>
         ///     将源对象映射到目标对象
         /// </summary>
-        private static TDestination MapTo<TDestination>(object source, TDestination destination)
-        {
+        private static TDestination MapTo<TDestination>(object source, TDestination destination) {
             if (source == null) {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -59,8 +57,7 @@ namespace Alabo.Maps
                 return Mapper.Map(source, destination);
             }
 
-            lock (Sync)
-            {
+            lock (Sync) {
                 map = GetMap(sourceType, destinationType);
                 if (map != null) {
                     return Mapper.Map(source, destination);
@@ -75,8 +72,7 @@ namespace Alabo.Maps
         /// <summary>
         ///     获取类型
         /// </summary>
-        private static Type GetType(object obj)
-        {
+        private static Type GetType(object obj) {
             var type = obj.GetType();
             if (obj is IEnumerable == false) {
                 return type;
@@ -88,7 +84,7 @@ namespace Alabo.Maps
 
             var genericArgumentsTypes = type.GetTypeInfo().GetGenericArguments();
             if (genericArgumentsTypes == null || genericArgumentsTypes.Length == 0) {
-                throw new ArgumentException("泛型类型参数不能为空");
+                throw new ValidException("泛型类型参数不能为空");
             }
 
             return genericArgumentsTypes[0];
@@ -97,22 +93,14 @@ namespace Alabo.Maps
         /// <summary>
         ///     获取映射配置
         /// </summary>
-        private static TypeMap GetMap(Type sourceType, Type destinationType)
-        {
-            try
-            {
+        private static TypeMap GetMap(Type sourceType, Type destinationType) {
+            try {
                 return Mapper.Configuration.FindTypeMapFor(sourceType, destinationType);
-            }
-            catch (InvalidOperationException)
-            {
-                lock (Sync)
-                {
-                    try
-                    {
+            } catch (InvalidOperationException) {
+                lock (Sync) {
+                    try {
                         return Mapper.Configuration.FindTypeMapFor(sourceType, destinationType);
-                    }
-                    catch (InvalidOperationException)
-                    {
+                    } catch (InvalidOperationException) {
                         InitMaps(sourceType, destinationType);
                     }
 
@@ -124,13 +112,10 @@ namespace Alabo.Maps
         /// <summary>
         ///     初始化映射配置
         /// </summary>
-        private static void InitMaps(Type sourceType, Type destinationType)
-        {
-            try
-            {
+        private static void InitMaps(Type sourceType, Type destinationType) {
+            try {
                 var maps = Mapper.Configuration.GetAllTypeMaps();
-                Mapper.Initialize(config =>
-                {
+                Mapper.Initialize(config => {
                     ClearConfig();
                     foreach (var item in maps) {
                         config.CreateMap(item.SourceType, item.DestinationType);
@@ -138,9 +123,7 @@ namespace Alabo.Maps
 
                     config.CreateMap(sourceType, destinationType);
                 });
-            }
-            catch (InvalidOperationException)
-            {
+            } catch (InvalidOperationException) {
                 Mapper.Initialize(config => { config.CreateMap(sourceType, destinationType); });
             }
         }
@@ -148,8 +131,7 @@ namespace Alabo.Maps
         /// <summary>
         ///     清空配置
         /// </summary>
-        private static void ClearConfig()
-        {
+        private static void ClearConfig() {
             var typeMapper = typeof(Mapper).GetTypeInfo();
             var configuration = typeMapper.GetDeclaredField("_configuration");
             configuration.SetValue(null, null, BindingFlags.Static, null, CultureInfo.CurrentCulture);
@@ -160,8 +142,7 @@ namespace Alabo.Maps
         /// </summary>
         /// <typeparam name="TDestination">目标元素类型,范例：Sample,不要加List</typeparam>
         /// <param name="source">源集合</param>
-        public static List<TDestination> MapToList<TDestination>(this IEnumerable source)
-        {
+        public static List<TDestination> MapToList<TDestination>(this IEnumerable source) {
             return MapTo<List<TDestination>>(source);
         }
     }

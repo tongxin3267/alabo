@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using Alabo.Exceptions;
 
 namespace Alabo.Extensions
 {
@@ -14,8 +15,7 @@ namespace Alabo.Extensions
         /// <param name="propertyName">属性名</param>
         /// <param name="ascending">是否升序</param>
         public static IQueryable<T> OrderBy<T>(this IQueryable<T> source, string propertyName, bool ascending)
-            where T : class
-        {
+            where T : class {
             if (string.IsNullOrEmpty(propertyName)) {
                 return source;
             }
@@ -23,7 +23,7 @@ namespace Alabo.Extensions
             var type = typeof(T);
             var property = type.GetProperty(propertyName);
             if (property == null) {
-                throw new ArgumentException("propertyName", "不存在");
+                throw new ValidException("propertyName", "不存在");
             }
 
             var param = Expression.Parameter(type, "p");
@@ -43,8 +43,7 @@ namespace Alabo.Extensions
         /// <param name="source">源对象</param>
         /// <param name="pageIndex">页码</param>
         /// <param name="pageSize">分页大小</param>
-        public static IQueryable<T> Page<T>(this IQueryable<T> source, int pageIndex = 1, int pageSize = 10)
-        {
+        public static IQueryable<T> Page<T>(this IQueryable<T> source, int pageIndex = 1, int pageSize = 10) {
             return source.Skip((pageIndex - 1) * pageSize).Take(pageSize);
         }
     }

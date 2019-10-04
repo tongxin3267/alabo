@@ -7,6 +7,7 @@ using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Services;
+using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Files;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
@@ -32,24 +33,20 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
     /// </summary>
     public class ProductAdminService : ServiceBase, IProductAdminService
     {
-        public ProductAdminService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        public ProductAdminService(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
         /// <summary>
         /// </summary>
         /// <param name="productId"></param>
         /// <param name="storeId"></param>
-        public ViewProductEdit GetViewProductEdit(long productId, ObjectId storeId)
-        {
-            var viewProduct = new ViewProductEdit
-            {
+        public ViewProductEdit GetViewProductEdit(long productId, ObjectId storeId) {
+            var viewProduct = new ViewProductEdit {
                 //管理员获取商品 Service<IProductService>().图片不需要处理
                 Product = GetSingle(productId)
             };
 
-            if (viewProduct.Product != null)
-            {
+            if (viewProduct.Product != null) {
                 // viewProduct.ThreeAddress = Resolve<IRegionService>().GetThreeAddress(viewProduct.Product.RegionId);
                 viewProduct.ProductDetail = viewProduct.Product.Detail;
                 viewProduct.ProductDetail.ProductDetailExtension =
@@ -69,22 +66,18 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                 viewProduct.ProductStatus = viewProduct.Product.ProductStatus;
                 viewProduct.Tags = Resolve<IRelationIndexService>().GetRelationIds<ProductTagRelation>(productId);
 
-                if (viewProduct.Product.Id > 0)
-                {
+                if (viewProduct.Product.Id > 0) {
                     viewProduct.Store = Resolve<IStoreService>().GetSingle(e => e.Id == storeId); //供应商
                     //viewProduct.ClassesStore = Service<IRelationIndexService>().GetRelationIds<StoreClassRelation>(productId);///店铺分类
                     viewProduct.ProductSkus = Resolve<IProductSkuService>()
                         .GetList(o => o.ProductId == viewProduct.Product.Id)?.ToList();
                 }
-            }
-            else
-            {
+            } else {
                 var config = Ioc.Resolve<IAutoConfigService>().GetValue<ProductConfig>();
 
                 var maxId = "" + (Resolve<IProductService>().MaxId() + 1);
                 maxId = maxId.PadLeft(3, '0');
-                viewProduct.Product = new Product
-                {
+                viewProduct.Product = new Product {
                     Bn = config.Bn + maxId,
                     PurchasePrice = config.PurchasePrice,
                     MarketPrice = config.MarketPrice,
@@ -96,8 +89,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                 viewProduct.ProductDetail = new ProductDetail();
                 viewProduct.Category = new Category();
                 viewProduct.ProductStatus = ProductStatus.Online;
-                viewProduct.Product.ProductExtensions = new ProductExtensions
-                {
+                viewProduct.Product.ProductExtensions = new ProductExtensions {
                     ProductSkus = new List<ProductSku>(),
                     ProductCategory = new Category(),
                     ProductThums = new List<ProductThum>()
@@ -141,8 +133,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         /// </summary>
         /// <param name="viewProduct"></param>
         /// <param name="httpRequest"></param>
-        public ServiceResult AddOrUpdate(ViewProductEdit viewProduct, HttpRequest httpRequest)
-        {
+        public ServiceResult AddOrUpdate(ViewProductEdit viewProduct, HttpRequest httpRequest) {
             var result = MappingProductValue(viewProduct, httpRequest, out viewProduct); // 商品属性值处理
             if (!result.Succeeded) {
                 return result;
@@ -150,19 +141,15 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
 
             var context = Repository<IProductRepository>().RepositoryContext;
             context.BeginTransaction();
-            try
-            {
+            try {
                 viewProduct.ProductDetail.ProductId = viewProduct.Product.Id;
                 viewProduct.Product.RegionId = httpRequest.Form["Country"].ConvertToLong(1);
-                if (viewProduct.Product.Id == 0)
-                {
+                if (viewProduct.Product.Id == 0) {
                     Resolve<IProductService>().Add(viewProduct.Product); // 添加Shop_product 表
                     viewProduct.ProductDetail.ProductId = viewProduct.Product.Id;
 
                     Resolve<IProductDetailService>().Add(viewProduct.ProductDetail); // 添加Shop_productdetai表
-                }
-                else
-                {
+                } else {
                     viewProduct.Product.StoreId = viewProduct.StoreId.ToString(); //供应商Id单独处理
                     Resolve<IProductService>().Update(viewProduct.Product); // 更新Shop_product 表
                     Resolve<IProductDetailService>()
@@ -173,7 +160,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                 var skuResult = Resolve<IProductSkuService>()
                     .AddUpdateOrDelete(viewProduct.Product, viewProduct.ProductSkus); // 更新Shop_productsku表
                 if (!skuResult.Succeeded) {
-                    throw new ArgumentException(skuResult.ToString());
+                    throw new ValidException(skuResult.ToString());
                 }
 
                 //添加商品分类和标签
@@ -184,14 +171,10 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
 
                 context.SaveChanges();
                 context.CommitTransaction();
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 context.RollbackTransaction();
                 return ServiceResult.FailedWithMessage("更新失败:" + ex.Message);
-            }
-            finally
-            {
+            } finally {
                 context.DisposeTransaction();
             }
 
@@ -206,12 +189,10 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         /// <summary>
         /// </summary>
         /// <param name="id">主键ID</param>
-        public void Delete(long id)
-        {
+        public void Delete(long id) {
             var context = Repository<IProductRepository>().RepositoryContext;
             context.BeginTransaction();
-            try
-            {
+            try {
                 Resolve<IProductService>().Delete(r => r.Id == id);
                 Resolve<IProductDetailService>().Delete(r => r.ProductId == id);
                 Resolve<IProductSkuService>().Delete(r => r.ProductId == id);
@@ -222,13 +203,9 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
 
                 context.SaveChanges();
                 context.CommitTransaction();
-            }
-            catch
-            {
+            } catch {
                 context.RollbackTransaction();
-            }
-            finally
-            {
+            } finally {
                 context.DisposeTransaction();
             }
         }
@@ -236,8 +213,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         /// <summary>
         /// </summary>
         /// <param name="view"></param>
-        public ViewProductEdit GetPageView(ViewProductEdit view)
-        {
+        public ViewProductEdit GetPageView(ViewProductEdit view) {
             //var brandList = Service<IStoreBrandService>().GetListFromCache();
             //view.BrandItems = SelectListItems.FromIEnumerable(brandList, r => r.Name, r => r.Id);
             view.ProductConfig = Resolve<IAutoConfigService>().GetValue<ProductConfig>();
@@ -261,12 +237,10 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         ///     获取商品列表
         /// </summary>
         /// <param name="query"></param>
-        public PagedList<ViewProductList> GetViewProductList(object query)
-        {
+        public PagedList<ViewProductList> GetViewProductList(object query) {
             var dic = query.ToObject<Dictionary<string, string>>();
             if (dic.TryGetValue("StoreName", out var storeName)) {
-                if (!storeName.IsNullOrEmpty())
-                {
+                if (!storeName.IsNullOrEmpty()) {
                     var store = Resolve<IStoreService>().GetSingle(r => r.Name.Contains(storeName));
                     if (store != null) {
                         dic.Add("StoreId", store.Id.ToString());
@@ -286,8 +260,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         /// </summary>
         /// <param name="categoryId"></param>
         /// <returns></returns>
-        public bool CheckCategoryHasProduct(Guid categoryId)
-        {
+        public bool CheckCategoryHasProduct(Guid categoryId) {
             var query = Repository<IProductRepository>().RepositoryContext.Query<Product>();
             query = query.Where(o => o.CategoryId == categoryId && o.ProductStatus == ProductStatus.Online);
             return query.Count() > 0;
@@ -302,15 +275,13 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         /// <param name="httpRequest">The HTTP request.</param>
         /// <param name="updateView">The 更新 视图.</param>
         private ServiceResult MappingProductValue(ViewProductEdit viewProduct, HttpRequest httpRequest,
-            out ViewProductEdit updateView)
-        {
+            out ViewProductEdit updateView) {
             updateView = new ViewProductEdit();
             if (viewProduct.Product.PurchasePrice > viewProduct.Product.CostPrice) {
                 return ServiceResult.FailedWithMessage("进货价不能大于成本价");
             }
             //如果是后台添加商品,则商品关联平台店铺
-            if (viewProduct.IsAdminAddProduct)
-            {
+            if (viewProduct.IsAdminAddProduct) {
                 var planform = Resolve<IStoreService>().PlatformStore();
                 if (planform == null) {
                     return ServiceResult.FailedWithMessage("请先添加平台店铺");
@@ -380,8 +351,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
 
         /// <summary> 根据图片原始地址获取List<ProductThum>，同时自动生成多张图片 </summary>
         /// <param name="images">原始图片地址，多个用,隔开</param>
-        private string CreateImage(Product product, string images)
-        {
+        private string CreateImage(Product product, string images) {
             var list = new List<ProductThum>();
             if (images.IsNullOrEmpty()) {
                 return ObjectExtension.ToJson(list);
@@ -402,8 +372,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
 
             var i = 0;
             foreach (var item in images.SplitList(new[] { ',' })) {
-                if (!item.IsNullOrEmpty())
-                {
+                if (!item.IsNullOrEmpty()) {
                     var savePath = "";
                     var thum = new ProductThum();
                     var originalPath = "";
@@ -420,9 +389,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                         height = decimal.ToInt16(config.ShowCaseWidth * config.WidthThanHeight); //高度
                         thum.ShowCaseUrl = $@"{thum.OriginalUrl}_{width}X{height}{suffix}";
                         originalPath = Path.Combine(FileHelper.RootPath, thum.OriginalUrl.TrimStart('/'));
-                    }
-                    else
-                    {
+                    } else {
                         thum.OriginalUrl = item;
                         //缩略图片处理
                         int width = decimal.ToInt16(config.ThumbnailWidth); //宽度
@@ -451,8 +418,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
                     }
 
                     //生成小图片
-                    if (i == 0 && !item.StartsWith("http"))
-                    {
+                    if (i == 0 && !item.StartsWith("http")) {
                         product.ThumbnailUrl = thum.ThumbnailUrl;
                         product.SmallUrl = $@"{thum.OriginalUrl}_50X50{suffix}";
                         savePath = Path.Combine(FileHelper.RootPath,
@@ -476,8 +442,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
         ///     获得商品详情
         /// </summary>
         /// <param name="id">主键ID</param>
-        public Product GetSingle(long id)
-        {
+        public Product GetSingle(long id) {
             var product = Resolve<IProductService>().GetSingle(r => r.Id == id);
             if (product == null) {
                 return product;
@@ -489,8 +454,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Services
             }
 
             product.Detail.ProductDetailExtension = product.Detail.Extension.DeserializeJson<ProductDetailExtension>();
-            product.ProductExtensions = new ProductExtensions
-            {
+            product.ProductExtensions = new ProductExtensions {
                 ProductSkus =
                     Resolve<IProductSkuService>().GetList(e => e.ProductId == product.Id)
                         .ToList(), //商品SKU                                                                               // ProductBrand = Service<IStoreBrandService>().GetSingle(e => e.Id == product.BrandId),// 商品品牌

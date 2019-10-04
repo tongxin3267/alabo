@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
+using Alabo.Exceptions;
 
 namespace Alabo.Extensions
 {
@@ -22,8 +23,7 @@ namespace Alabo.Extensions
         /// <param name="source">数据源</param>
         /// <param name="criteria">查询条件对象</param>
         public static IQueryable<TEntity> Where<TEntity>(this IQueryable<TEntity> source, ICriteria<TEntity> criteria)
-            where TEntity : class
-        {
+            where TEntity : class {
             if (source == null) {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -48,8 +48,7 @@ namespace Alabo.Extensions
         /// <param name="predicate">查询条件</param>
         /// <param name="condition">该值为true时添加查询条件，否则忽略</param>
         public static IQueryable<TEntity> WhereIf<TEntity>(this IQueryable<TEntity> source,
-            Expression<Func<TEntity, bool>> predicate, bool condition) where TEntity : class
-        {
+            Expression<Func<TEntity, bool>> predicate, bool condition) where TEntity : class {
             if (source == null) {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -71,8 +70,7 @@ namespace Alabo.Extensions
         ///     注意：一次仅能添加一个条件，范例：t => t.Name == "a" &amp;&amp; t.Mobile == "123"，不支持，将抛出异常
         /// </param>
         public static IQueryable<TEntity> WhereIfNotEmpty<TEntity>(this IQueryable<TEntity> source,
-            Expression<Func<TEntity, bool>> predicate) where TEntity : class
-        {
+            Expression<Func<TEntity, bool>> predicate) where TEntity : class {
             if (source == null) {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -97,8 +95,7 @@ namespace Alabo.Extensions
         /// <param name="boundary">包含边界</param>
         public static IQueryable<TEntity> Between<TEntity, TProperty>(this IQueryable<TEntity> source,
             Expression<Func<TEntity, TProperty>> propertyExpression, int? min, int? max,
-            Boundary boundary = Boundary.Both) where TEntity : class
-        {
+            Boundary boundary = Boundary.Both) where TEntity : class {
             if (source == null) {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -118,8 +115,7 @@ namespace Alabo.Extensions
         /// <param name="boundary">包含边界</param>
         public static IQueryable<TEntity> Between<TEntity, TProperty>(this IQueryable<TEntity> source,
             Expression<Func<TEntity, TProperty>> propertyExpression, double? min, double? max,
-            Boundary boundary = Boundary.Both) where TEntity : class
-        {
+            Boundary boundary = Boundary.Both) where TEntity : class {
             if (source == null) {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -139,8 +135,7 @@ namespace Alabo.Extensions
         /// <param name="boundary">包含边界</param>
         public static IQueryable<TEntity> Between<TEntity, TProperty>(this IQueryable<TEntity> source,
             Expression<Func<TEntity, TProperty>> propertyExpression, decimal? min, decimal? max,
-            Boundary boundary = Boundary.Both) where TEntity : class
-        {
+            Boundary boundary = Boundary.Both) where TEntity : class {
             if (source == null) {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -161,8 +156,7 @@ namespace Alabo.Extensions
         /// <param name="boundary">包含边界</param>
         public static IQueryable<TEntity> Between<TEntity, TProperty>(this IQueryable<TEntity> source,
             Expression<Func<TEntity, TProperty>> propertyExpression, DateTime? min, DateTime? max,
-            bool includeTime = true, Boundary? boundary = null) where TEntity : class
-        {
+            bool includeTime = true, Boundary? boundary = null) where TEntity : class {
             if (source == null) {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -182,8 +176,7 @@ namespace Alabo.Extensions
         /// <typeparam name="TEntity">实体类型</typeparam>
         /// <param name="source">数据源</param>
         /// <param name="pager">分页对象</param>
-        public static IQueryable<TEntity> Page<TEntity>(this IQueryable<TEntity> source, IPager pager)
-        {
+        public static IQueryable<TEntity> Page<TEntity>(this IQueryable<TEntity> source, IPager pager) {
             if (source == null) {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -199,7 +192,7 @@ namespace Alabo.Extensions
 
             var orderedQueryable = GetOrderedQueryable(source, pager);
             if (orderedQueryable == null) {
-                throw new ArgumentException("必须设置排序字段");
+                throw new ValidException("必须设置排序字段");
             }
 
             return orderedQueryable.Skip(pager.GetSkipCount()).Take(pager.PageSize);
@@ -208,8 +201,7 @@ namespace Alabo.Extensions
         /// <summary>
         ///     初始化排序
         /// </summary>
-        private static void InitOrder<TEntity>(this IQueryable<TEntity> source, IPager pager)
-        {
+        private static void InitOrder<TEntity>(this IQueryable<TEntity> source, IPager pager) {
             if (string.IsNullOrWhiteSpace(pager.Order) == false) {
                 return;
             }
@@ -225,8 +217,7 @@ namespace Alabo.Extensions
         ///     获取排序查询对象
         /// </summary>
         private static IOrderedQueryable<TEntity> GetOrderedQueryable<TEntity>(this IQueryable<TEntity> source,
-            IPager pager)
-        {
+            IPager pager) {
             if (string.IsNullOrWhiteSpace(pager.Order)) {
                 return source as IOrderedQueryable<TEntity>;
             }
@@ -240,8 +231,7 @@ namespace Alabo.Extensions
         /// <typeparam name="TEntity">实体类型</typeparam>
         /// <param name="source">数据源</param>
         /// <param name="pager">分页对象</param>
-        public static PagerList<TEntity> ToPagerList<TEntity>(this IQueryable<TEntity> source, IPager pager)
-        {
+        public static PagerList<TEntity> ToPagerList<TEntity>(this IQueryable<TEntity> source, IPager pager) {
             if (source == null) {
                 throw new ArgumentNullException(nameof(source));
             }
