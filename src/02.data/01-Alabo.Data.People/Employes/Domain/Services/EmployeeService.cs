@@ -22,12 +22,10 @@ namespace Alabo.Data.People.Employes.Domain.Services
     public class EmployeeService : ServiceBase<Employee, ObjectId>, IEmployeeService
     {
         public EmployeeService(IUnitOfWork unitOfWork, IRepository<Employee, ObjectId> repository) : base(unitOfWork,
-            repository)
-        {
+            repository) {
         }
 
-        public Tuple<ServiceResult, RoleOuput> Login(UserOutput userOutput)
-        {
+        public Tuple<ServiceResult, RoleOuput> Login(UserOutput userOutput) {
             var user = Resolve<IUserService>().GetSingle(userOutput.Id);
             if (user == null) {
                 return new Tuple<ServiceResult, RoleOuput>(ServiceResult.FailedWithMessage("用户不存在"), null);
@@ -40,8 +38,7 @@ namespace Alabo.Data.People.Employes.Domain.Services
 
             var employee = Resolve<IEmployeeService>().GetSingle(r => r.UserId == user.Id);
             if (employee == null) {
-                if (user.UserName == "admin")
-                {
+                if (user.UserName == "admin") {
                     // 当admin不是管理员时，重新初始数据
                     Resolve<IAdminService>().DefaultInit();
                     employee = Resolve<IEmployeeService>().GetSingle(r => r.UserId == user.Id);
@@ -57,19 +54,15 @@ namespace Alabo.Data.People.Employes.Domain.Services
                 return new Tuple<ServiceResult, RoleOuput>(ServiceResult.FailedWithMessage("管理员模板不存在菜单"), null);
             }
 
-            var roleOuput = new RoleOuput
-            {
+            var roleOuput = new RoleOuput {
                 FilterType = FilterType.Admin,
                 Prefix = "Admin/"
             };
 
-            if (employee.IsSuperAdmin)
-            {
+            if (employee.IsSuperAdmin) {
                 //超级管理员
                 roleOuput.Menus = menus;
-            }
-            else
-            {
+            } else {
                 // 非超级管理员，根据岗位返回菜单
                 var postRole = Resolve<IPostRoleService>().GetSingle(r => r.Id == employee.PostRoleId);
                 if (postRole == null) {
@@ -79,14 +72,11 @@ namespace Alabo.Data.People.Employes.Domain.Services
                 var list = new List<ThemeOneMenu>();
                 var listCount = 0;
 
-                for (var i = 0; i < menus.Count; i++)
-                {
+                for (var i = 0; i < menus.Count; i++) {
                     var item = menus[i];
                     var itemIds = postRole.RoleIds.Where(s => menus.Select(ss => ss.Id).Contains(s));
-                    if (itemIds.Contains(item.Id))
-                    {
-                        list.Add(new ThemeOneMenu
-                        {
+                    if (itemIds.Contains(item.Id)) {
+                        list.Add(new ThemeOneMenu {
                             Id = item.Id,
                             Icon = item.Icon,
                             IsEnable = item.IsEnable,
@@ -99,14 +89,11 @@ namespace Alabo.Data.People.Employes.Domain.Services
 
                         var nodeListCount = 0;
                         //foreach (var itemNode in item.Menus)
-                        for (var j = 0; j < item.Menus.Count; j++)
-                        {
+                        for (var j = 0; j < item.Menus.Count; j++) {
                             var itemNode = item.Menus[j];
                             var itemNodeIds = postRole.RoleIds.Where(s => item.Menus.Select(ss => ss.Id).Contains(s));
-                            if (itemNodeIds.Contains(itemNode.Id))
-                            {
-                                list[listCount].Menus.Add(new ThemeTwoMenu
-                                {
+                            if (itemNodeIds.Contains(itemNode.Id)) {
+                                list[listCount].Menus.Add(new ThemeTwoMenu {
                                     Id = itemNode.Id,
                                     Icon = itemNode.Icon,
                                     IsEnable = itemNode.IsEnable,
@@ -117,8 +104,7 @@ namespace Alabo.Data.People.Employes.Domain.Services
                                 nodeListCount = list[listCount].Menus.Count - 1;
                                 //list[listCount].Menus[nodeListCount].Menus = new List<ThemeThreeMenu>();
 
-                                foreach (var itemNodes in itemNode.Menus)
-                                {
+                                foreach (var itemNodes in itemNode.Menus) {
                                     var itemNodesIds = postRole.RoleIds.Where(s =>
                                         itemNode.Menus.Select(ss => ss.Id).Contains(s));
                                     if (itemNodesIds.Contains(itemNodes.Id)) {
@@ -132,20 +118,17 @@ namespace Alabo.Data.People.Employes.Domain.Services
             }
 
             // 权限Id处理
-            roleOuput.Menus?.ForEach(one =>
-            {
+            roleOuput.Menus?.ForEach(one => {
                 if (!roleOuput.AllRoleIds.Contains(one.Id)) {
                     roleOuput.AllRoleIds.Add(one.Id);
                 }
 
-                one.Menus?.ForEach(two =>
-                {
+                one.Menus?.ForEach(two => {
                     if (!roleOuput.AllRoleIds.Contains(two.Id)) {
                         roleOuput.AllRoleIds.Add(two.Id);
                     }
 
-                    two.Menus?.ForEach(three =>
-                    {
+                    two.Menus?.ForEach(three => {
                         if (!roleOuput.AllRoleIds.Contains(three.Id)) {
                             roleOuput.AllRoleIds.Add(three.Id);
                         }
@@ -157,8 +140,7 @@ namespace Alabo.Data.People.Employes.Domain.Services
 
         #region 根据Token自动登录
 
-        public string GetLoginToken(GetLoginToken loginToken)
-        {
+        public string GetLoginToken(GetLoginToken loginToken) {
             if (loginToken == null) {
                 throw new ValidException("对象不能为空");
             }
@@ -188,8 +170,7 @@ namespace Alabo.Data.People.Employes.Domain.Services
         /// </summary>
         /// <param name="loginByToken"></param>
         /// <returns></returns>
-        public LoginInput LoginByToken(GetLoginToken loginByToken)
-        {
+        public LoginInput LoginByToken(GetLoginToken loginByToken) {
             var maxTimestamp = DateTime.Now.AddMinutes(5).ConvertDateTimeInt();
             var minTimestamp = DateTime.Now.AddMinutes(-5).ConvertDateTimeInt();
             if (loginByToken.Timestamp.ConvertToLong() < minTimestamp ||
@@ -221,7 +202,7 @@ namespace Alabo.Data.People.Employes.Domain.Services
             //var theme = Resolve<IThemeService>().FirstOrDefault();
             //if (theme != null) {
             //    if (theme.SiteId.ToString() != loginByToken.SiteId) {
-            //        throw new ArgumentException($"站点验证失败");
+            //        throw new ValidException($"站点验证失败");
             //    }
             //}
 
@@ -230,18 +211,16 @@ namespace Alabo.Data.People.Employes.Domain.Services
                 Resolve<IAdminService>().DefaultInit();
             }
 
-            if (user != null)
-            {
+            if (user != null) {
                 var userDetail = Resolve<IUserDetailService>().GetByIdNoTracking(r => r.UserId == user.Id);
-                var loginInput = new LoginInput
-                {
+                var loginInput = new LoginInput {
                     UserName = user.UserName,
                     Password = userDetail.Password
                 };
                 return loginInput;
             }
 
-            throw new ArgumentException("超级管理员不存在");
+            throw new ValidException("超级管理员不存在");
         }
 
         #endregion 根据Token自动登录

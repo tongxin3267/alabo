@@ -1,16 +1,17 @@
-﻿using Alabo.Framework.Tasks.Queues.Domain.Enums;
+﻿using System;
+using Alabo.Exceptions;
+using Alabo.Framework.Tasks.Queues.Domain.Enums;
 using Alabo.Framework.Tasks.Schedules.Domain.Enums;
-using System;
 using ZKCloud.Open.Share.Enums;
 
-namespace Alabo.Framework.Tasks.Queues.Models {
-
+namespace Alabo.Framework.Tasks.Queues.Models
+{
     /// <summary>
     ///     Class TaskModuleAttribute.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
-    public class TaskModuleAttribute : Attribute {
-
+    public class TaskModuleAttribute : Attribute
+    {
         /// <summary>
         ///     Initializes a new instance of the <see cref="TaskModuleAttribute" /> class.
         /// </summary>
@@ -19,7 +20,7 @@ namespace Alabo.Framework.Tasks.Queues.Models {
         /// <exception cref="ArgumentException"></exception>
         public TaskModuleAttribute(string id, string name) {
             if (!Guid.TryParse(id, out var idGuid)) {
-                throw new ArgumentException($"can not convert id {id} to guid.");
+                throw new ValidException($"can not convert id {id} to guid.");
             }
 
             Id = idGuid;

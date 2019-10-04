@@ -7,6 +7,7 @@ using Alabo.Data.People.Users.Domain.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Basic.Relations.Domain.Services;
@@ -26,8 +27,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
 {
     public class StoreProductService : ServiceBase, IStoreProductService
     {
-        public StoreProductService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        public StoreProductService(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
         /// <summary>
@@ -35,8 +35,8 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
         /// </summary>
         /// <param name="parameter"></param>
         /// <returns></returns>
-        public ServiceResult EditProduct(ProductEditOuput parameter)
-        {
+        public ServiceResult EditProduct(ProductEditOuput parameter) {
+
             #region 基础数据赋值
 
             parameter.Product.CategoryId = parameter.Category.Id;
@@ -47,22 +47,18 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
             parameter.Product.ModifiedTime = DateTime.Now;
             parameter.ProductDetail.ProductId = parameter.Product.Id;
             //如果是管理员就直接上架或者下架
-            if (Resolve<IUserService>().IsAdmin(parameter.Store.UserId))
-            {
+            if (Resolve<IUserService>().IsAdmin(parameter.Store.UserId)) {
                 if (parameter.OnSale) {
                     parameter.Product.ProductStatus = ProductStatus.Online;
                 } else {
                     parameter.Product.ProductStatus = ProductStatus.SoldOut;
                 }
-            }
-            else
-            {
+            } else {
                 //如果是供应商直接状态为审核状态
                 parameter.Product.ProductStatus = ProductStatus.Auditing;
             }
 
-            if (parameter.Product.PriceStyleId.IsGuidNullOrEmpty())
-            {
+            if (parameter.Product.PriceStyleId.IsGuidNullOrEmpty()) {
                 // 默认使用现金商城，后期从前端传值过来
                 var priceStyleConfig = Resolve<IAutoConfigService>()
                     .GetList<PriceStyleConfig>(r => r.PriceStyle == PriceStyle.CashProduct);
@@ -91,8 +87,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
             }
 
             //判断sku的价格是否低于成本
-            foreach (var item in parameter.ProductSkus)
-            {
+            foreach (var item in parameter.ProductSkus) {
                 if (item.CostPrice > item.Price) {
                     return ServiceResult.FailedWithMessage("商品SKU销售价必须为大于等于成本价");
                 }
@@ -135,18 +130,14 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
 
             var context = Repository<IProductRepository>().RepositoryContext;
             context.BeginTransaction();
-            try
-            {
+            try {
                 parameter.ProductDetail.Extension = ObjectExtension.ToJson(parameter.ProductDetail.ProductDetailExtension);
 
-                if (parameter.Product.Id == 0)
-                {
+                if (parameter.Product.Id == 0) {
                     Resolve<IProductService>().Add(parameter.Product); // 添加Shop_product 表
                     parameter.ProductDetail.ProductId = parameter.Product.Id;
                     Resolve<IProductDetailService>().Add(parameter.ProductDetail); // 添加Shop_productdetai表
-                }
-                else
-                {
+                } else {
                     Resolve<IProductService>().Update(parameter.Product); // 更新Shop_product 表
                     Resolve<IProductDetailService>().UpdateNoTracking(parameter.ProductDetail); // 更新Shop_productdetai表
                 }
@@ -155,7 +146,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
                 var skuResult = Resolve<IProductSkuService>()
                     .AddUpdateOrDelete(parameter.Product, parameter.ProductSkus); // 更新Shop_productsku表
                 if (!skuResult.Succeeded) {
-                    throw new ArgumentException(skuResult.ToString());
+                    throw new ValidException(skuResult.ToString());
                 }
 
                 //添加商品分类和标签
@@ -166,14 +157,10 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
 
                 context.SaveChanges();
                 context.CommitTransaction();
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 context.RollbackTransaction();
                 return ServiceResult.FailedWithMessage("更新失败:" + ex.Message);
-            }
-            finally
-            {
+            } finally {
                 context.DisposeTransaction();
             }
 
@@ -192,8 +179,8 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
             #endregion 保存后操作
         }
 
-        public ProductEditOuput GetProductView(ProductEditInput parameter)
-        {
+        public ProductEditOuput GetProductView(ProductEditInput parameter) {
+
             #region 安全验证
 
             var productEditOuput = new ProductEditOuput();
@@ -214,8 +201,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
             productEditOuput.Store = store;
 
             if (parameter.ProductId != 0) {
-                productEditOuput.Setting = new ProductViewEditSetting
-                {
+                productEditOuput.Setting = new ProductViewEditSetting {
                     Title = "商品编辑",
                     IsAdd = false
                 };
@@ -234,8 +220,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
             productEditOuput.ProductDetail = productView.ProductDetail;
 
             // 新加商品, 返回默认配置值.
-            if (parameter.ProductId == 0)
-            {
+            if (parameter.ProductId == 0) {
                 if (parameter.CategoryId.IsGuidNullOrEmpty()) {
                     throw new Exception("商品添加是请传入类目ID");
                 }
@@ -248,9 +233,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
 
                 productEditOuput.Product.DeliveryTemplateId =
                     productEditOuput.Relation.DeliveryTemplates.FirstOrDefault()?.Key.ToStr();
-            }
-            else
-            {
+            } else {
                 if (productEditOuput.Product.Id <= 0) {
                     throw new Exception("商品不存在");
                 }
@@ -291,8 +274,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
                 }
 
                 // 商品分类，和商品标签，商品副标题会通过此处来回绑定
-                if (productView.ProductDetail != null)
-                {
+                if (productView.ProductDetail != null) {
                     productView.ProductDetail.ProductDetailExtension =
                         productView.ProductDetail.Extension.ToObject<ProductDetailExtension>();
                     //回绑图片
@@ -312,8 +294,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.Services
 
         #region 获取级联相关数据
 
-        private StoreRelation GetRelationView(Store store, long userId)
-        {
+        private StoreRelation GetRelationView(Store store, long userId) {
             var relation = new StoreRelation();
             var templates = Resolve<IDeliveryTemplateService>().GetList(x => x.StoreId == store.Id);
             templates.Foreach(r => { relation.DeliveryTemplates.Add(new KeyValue(r.Id, r.TemplateName)); });

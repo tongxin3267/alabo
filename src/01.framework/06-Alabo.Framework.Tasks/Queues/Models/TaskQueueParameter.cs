@@ -1,12 +1,13 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Exceptions;
+using Newtonsoft.Json;
 
-namespace Alabo.Framework.Tasks.Queues.Models {
-
-    public class TaskQueueParameter {
-
+namespace Alabo.Framework.Tasks.Queues.Models
+{
+    public class TaskQueueParameter
+    {
         public TaskQueueParameter() {
         }
 
@@ -29,7 +30,7 @@ namespace Alabo.Framework.Tasks.Queues.Models {
 
         public void Add(string name, object value) {
             if (Parameters.ContainsKey(name)) {
-                throw new ArgumentException($"data with key {name} is in parameter.");
+                throw new ValidException($"data with key {name} is in parameter.");
             }
 
             Parameters.Add(name, new TaskQueueParameterItem {
@@ -54,7 +55,7 @@ namespace Alabo.Framework.Tasks.Queues.Models {
         public T GetValue<T>(string name) {
             var value = GetValue(name);
             if (value.GetType() != typeof(T)) {
-                throw new ArgumentException(
+                throw new ValidException(
                     $"value with key {name} of type {typeof(T).Name} not equals data type {value.GetType().Name}");
             }
 
@@ -86,7 +87,8 @@ namespace Alabo.Framework.Tasks.Queues.Models {
         }
     }
 
-    public class TaskQueueParameterItem {
+    public class TaskQueueParameterItem
+    {
         public Type Type { get; set; }
         public object Value { get; set; }
     }

@@ -63,8 +63,7 @@ namespace Alabo.Web
             //   services.AddXsrfToken();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //添加工作单元
-            services.AddUnitOfWork<IUnitOfWork, SqlServerUnitOfWork>(Configuration
-                .GetConnectionString("ConnectionString").GetConnectionStringForMaster());
+            services.AddUnitOfWork<IUnitOfWork, SqlServerUnitOfWork>(RuntimeContext.Current.WebsiteConfig.ConnectionString.GetConnectionStringForMaster());
 
             // mvc 相关服务
 

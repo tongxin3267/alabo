@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Alabo.Exceptions;
 using ZKCloud.Open.ApiBase.Configuration;
 using ZKCloud.Open.ApiBase.Services;
 using ZKCloud.Open.Share.Models;
@@ -26,12 +27,10 @@ namespace Alabo.App.Share.TaskExecutes.Domain.Services
         private IServerAuthenticationManager _serverAuthenticationManager;
         private IShareApiClient _shareApiClient;
 
-        public TaskModuleConfigService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        public TaskModuleConfigService(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
-        public IList<ShareModule> GetList(HttpContext context)
-        {
+        public IList<ShareModule> GetList(HttpContext context) {
             ObjectCache.Remove(_shareModuleCacheKey);
             TaskModuleConfigBaseService(context);
             if (!ObjectCache.TryGet(_shareModuleCacheKey, out IList<ShareModule> shareModuleList)
@@ -55,8 +54,7 @@ namespace Alabo.App.Share.TaskExecutes.Domain.Services
         }
 
         public async Task<ServiceResult> AddOrUpdate(HttpContext context, ShareModule shareModule, Type moduleType,
-            IModuleConfig config)
-        {
+            IModuleConfig config) {
             TaskModuleConfigBaseService(context);
             var result = ServiceResult.Success;
             if (config == null) {
@@ -74,8 +72,7 @@ namespace Alabo.App.Share.TaskExecutes.Domain.Services
             var attribute = GetModuleAttribute(moduleType);
             CheckTaskModuleAttribute(attribute, config);
             //检查是否符合单一原则
-            if (!attribute.IsSupportMultipleConfiguration)
-            {
+            if (!attribute.IsSupportMultipleConfiguration) {
                 var moduleList = GetList(context);
                 var find = moduleList?.FirstOrDefault(e => e.ModuleId == attribute.Id);
                 if (find != null && find.Id != shareModule.Id) {
@@ -83,13 +80,11 @@ namespace Alabo.App.Share.TaskExecutes.Domain.Services
                 }
             }
 
-            try
-            {
+            try {
                 shareModule.ConfigValue = config.ToRepositoryString();
 
                 //添加
-                if (shareModule.Id <= 0)
-                {
+                if (shareModule.Id <= 0) {
                     var resultToken =
                         await _shareApiClient.AddShareModule(_serverAuthenticationManager.Token.Token, shareModule);
                     if (!resultToken) {
@@ -97,9 +92,7 @@ namespace Alabo.App.Share.TaskExecutes.Domain.Services
                     }
 
                     DeleteCache();
-                }
-                else
-                {
+                } else {
                     var find = GetSingle(context, shareModule.Id);
                     var resultToken =
                         await _shareApiClient.UpdateShareModule(_serverAuthenticationManager.Token.Token, shareModule);
@@ -109,34 +102,29 @@ namespace Alabo.App.Share.TaskExecutes.Domain.Services
 
                     DeleteCache();
                 }
-            }
-            catch
-            {
+            } catch {
                 return ServiceResult.FailedWithMessage("服务异常，请稍后再试");
             }
 
             return result;
         }
 
-        public ShareModule GetSingle(HttpContext context, long id)
-        {
+        public ShareModule GetSingle(HttpContext context, long id) {
             TaskModuleConfigBaseService(context);
             return GetList(context)?.FirstOrDefault(r => r.Id == id);
         }
 
-        public bool Delete(HttpContext context, long id)
-        {
+        public bool Delete(HttpContext context, long id) {
             TaskModuleConfigBaseService(context);
             var resultToken = _shareApiClient.DeleteShareModule(_serverAuthenticationManager.Token.Token, id);
             return resultToken.Result.Result;
         }
 
         /// <summary>
-        public TaskModuleAttribute GetModuleAttribute(Type moduleType)
-        {
+        public TaskModuleAttribute GetModuleAttribute(Type moduleType) {
             var attributes = moduleType.GetTypeInfo().GetAttributes<TaskModuleAttribute>();
             if (attributes == null || attributes.Count() <= 0) {
-                throw new ArgumentException($"type {moduleType.Name} do not have module attribute.");
+                throw new ValidException($"type {moduleType.Name} do not have module attribute.");
             }
 
             return attributes.First();
@@ -148,11 +136,9 @@ namespace Alabo.App.Share.TaskExecutes.Domain.Services
         /// <param name="context">当前上下文</param>
         /// <param name="id">主键ID</param>
         /// <param name="configValue"></param>
-        public async Task<ServiceResult> LockShareModuleAsync(HttpContext context, long id, object configValue)
-        {
+        public async Task<ServiceResult> LockShareModuleAsync(HttpContext context, long id, object configValue) {
             TaskModuleConfigBaseService(context);
-            try
-            {
+            try {
                 var shareModule = GetSingle(context, id);
                 if (shareModule == null) {
                     return ServiceResult.FailedWithMessage("配置未找到");
@@ -166,9 +152,7 @@ namespace Alabo.App.Share.TaskExecutes.Domain.Services
                 }
 
                 DeleteCache();
-            }
-            catch
-            {
+            } catch {
                 return ServiceResult.FailedWithMessage("服务异常，请稍后再试");
             }
 
@@ -177,8 +161,7 @@ namespace Alabo.App.Share.TaskExecutes.Domain.Services
 
         public IEnumerable<TConfiguration> GetList<TModule, TConfiguration>()
             where TModule : ITaskModule
-            where TConfiguration : IModuleConfig
-        {
+            where TConfiguration : IModuleConfig {
             var attribute = GetModuleAttribute<TModule>();
             CheckTaskModuleAttribute(attribute, typeof(TConfiguration));
             // TODO 2019年9月24日 重构 维度获取
@@ -202,39 +185,34 @@ namespace Alabo.App.Share.TaskExecutes.Domain.Services
         }
 
         private TaskModuleAttribute GetModuleAttribute<T>()
-            where T : ITaskModule
-        {
+            where T : ITaskModule {
             var attributes = typeof(T).GetTypeInfo().GetAttributes<TaskModuleAttribute>();
             if (attributes == null || attributes.Count() <= 0) {
-                throw new ArgumentException($"type {typeof(T).Name} do not have module attribute.");
+                throw new ValidException($"type {typeof(T).Name} do not have module attribute.");
             }
 
             return attributes.First();
         }
 
-        private void CheckTaskModuleAttribute(TaskModuleAttribute attribute, IModuleConfig config)
-        {
+        private void CheckTaskModuleAttribute(TaskModuleAttribute attribute, IModuleConfig config) {
             if (attribute.ConfigurationType != config.GetType()) {
                 throw new TypeAccessException(
                     $"config type {config.GetType().Name} not equals attribtue config type {attribute.ConfigurationType}");
             }
         }
 
-        private void CheckTaskModuleAttribute(TaskModuleAttribute attribute, Type configType)
-        {
+        private void CheckTaskModuleAttribute(TaskModuleAttribute attribute, Type configType) {
             if (attribute.ConfigurationType != configType) {
                 throw new TypeAccessException(
                     $"config type {configType.Name} not equals attribtue config type {attribute.ConfigurationType}");
             }
         }
 
-        private void DeleteCache()
-        {
+        private void DeleteCache() {
             ObjectCache.Remove(_shareModuleCacheKey);
         }
 
-        private void TaskModuleConfigBaseService(HttpContext context)
-        {
+        private void TaskModuleConfigBaseService(HttpContext context) {
             _serverAuthenticationManager = context.RequestServices.GetService<IServerAuthenticationManager>();
             _restClientConfiugration = context.RequestServices.GetService<RestClientConfiguration>();
             _shareApiClient = new ShareApiClient(_restClientConfiugration.OpenApiUrl);

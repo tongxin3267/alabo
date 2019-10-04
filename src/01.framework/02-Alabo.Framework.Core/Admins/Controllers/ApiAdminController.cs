@@ -28,5 +28,11 @@ namespace Alabo.Framework.Core.Admins.Controllers {
             Resolve<IAdminService>().DefaultInit();
             return ApiResult.Success();
         }
+
+        [HttpGet]
+        public ApiResult<bool> Test() {
+            var http = HttpWeb.IsTenant;
+            return ApiResult.Success(http);
+        }
     }
 }

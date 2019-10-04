@@ -4,6 +4,7 @@ using System.Linq;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
+using Alabo.Exceptions;
 using Alabo.Extensions;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Industry.Shop.Activitys.Domain.Entities;
@@ -38,8 +39,7 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Services
         ///     constructor
         /// </summary>
         /// <param name="unitOfWork"></param>
-        public ActivityApiService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        public ActivityApiService(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
         /// <summary>
@@ -48,8 +48,7 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Services
         /// <param name="activityType"></param>
         /// <param name="productIds"></param>
         /// <returns></returns>
-        public IList<Activity> GetList(ProductActivityType activityType, IList<long> productIds)
-        {
+        public IList<Activity> GetList(ProductActivityType activityType, IList<long> productIds) {
             var key = activityType.GetDisplayResourceTypeName();
             return Resolve<IActivityService>().GetList(u => u.Key == key && productIds.Contains(u.ProductId));
         }
@@ -59,29 +58,28 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Services
         /// </summary>
         /// <param name="activityInput"></param>
         /// <returns></returns>
-        public ActivityEditOutput GetView(ActivityEditInput activityInput)
-        {
+        public ActivityEditOutput GetView(ActivityEditInput activityInput) {
             //check
             var type = activityInput.Key.GetTypeByFullName();
             if (type == null) {
-                throw new ArgumentException($"类型{activityInput.Key}不存在，请确定Url是否正确");
+                throw new ValidException($"类型{activityInput.Key}不存在，请确定Url是否正确");
             }
 
             var instance = Activator.CreateInstance(type);
             if (!(instance is IActivity)) {
-                throw new ArgumentException("该类型不属于活动实体");
+                throw new ValidException("该类型不属于活动实体");
             }
 
             var activityEntityInstance = instance as IActivity;
 
             //check product
             if (activityInput.ProductId <= 0) {
-                throw new ArgumentException("商品不存在");
+                throw new ValidException("商品不存在");
             }
 
             var product = Resolve<IProductService>().GetSingle(activityInput.ProductId);
             if (product == null) {
-                throw new ArgumentException("商品不存在");
+                throw new ValidException("商品不存在");
             }
 
             //check activity
@@ -92,11 +90,10 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Services
             }
             //builder
             var view = AutoMapping.SetValue<ActivityEditOutput>(activityInput);
-            if (model != null)
-            {
+            if (model != null) {
                 view.Activity = model;
                 view = AutoMapping.SetValue(model, view);
-                //user range 
+                //user range
                 view.UserRange = model.LimitGradeId.IsGuidNullOrEmpty()
                     ? UserRange.AllUser
                     : UserRange.ByUserGrade;
@@ -104,16 +101,12 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Services
                 view.DateTimeRange = $"{model.StartTime.ToTimeString()} / {model.EndTime.ToTimeString()}";
                 //support sigle product
                 var attribute = Resolve<IActivityAdminService>().GetActivityModuleAttribute(type.FullName);
-                if (attribute != null && attribute.IsSupportSigleProduct)
-                {
+                if (attribute != null && attribute.IsSupportSigleProduct) {
                     activityInput.ProductId = model.ActivityExtension.ProductIds.FirstOrDefault();
                     view.ProductId = activityInput.ProductId;
                 }
-            }
-            else
-            {
-                view.Activity = new Activity
-                {
+            } else {
+                view.Activity = new Activity {
                     Key = type.FullName,
                     Status = ActivityStatus.Processing,
                     ProductId = activityInput.ProductId
@@ -130,12 +123,9 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Services
             }
 
             //get form
-            try
-            {
+            try {
                 view.AutoForm = activityEntityInstance.GetAutoForm(view.ActivityRules);
-            }
-            catch (Exception)
-            {
+            } catch (Exception) {
             }
 
             if (view.AutoForm == null) {
@@ -150,8 +140,7 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Services
         /// <summary>
         ///     Adds the or update activity.
         /// </summary>
-        public ServiceResult Save(ActivityEditOutput model)
-        {
+        public ServiceResult Save(ActivityEditOutput model) {
             //check and set  model value.
             var result = SetModelValue(model);
             if (!result.Succeeded) {
@@ -188,18 +177,14 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Services
 
             //transaction
             var context = Repository<IActivityRepository>().RepositoryContext;
-            try
-            {
+            try {
                 context.BeginTransaction();
 
                 //save activity
-                if (activity.Id <= 0)
-                {
+                if (activity.Id <= 0) {
                     activity.Status = ActivityStatus.HasNotStarted;
                     Resolve<IActivityService>().Add(activity);
-                }
-                else
-                {
+                } else {
                     Resolve<IActivityService>().UpdateNoTracking(activity);
                 }
 
@@ -213,12 +198,9 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Services
                 //productActivity.Value = result.ReturnObject;
                 var productFindActivity =
                     product.ProductActivityExtension.Activitys.FirstOrDefault(r => r.Key == model.Activity.Key);
-                if (productFindActivity == null)
-                {
+                if (productFindActivity == null) {
                     product.ProductActivityExtension.Activitys.Add(productActivity);
-                }
-                else
-                {
+                } else {
                     product.ProductActivityExtension.Activitys.Remove(productFindActivity);
                     product.ProductActivityExtension.Activitys.Add(productActivity);
                 }
@@ -228,15 +210,11 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Services
 
                 context.SaveChanges();
                 context.CommitTransaction();
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 Console.WriteLine(ex.Message);
                 context.RollbackTransaction();
                 return ServiceResult.FailedWithMessage("数据保存失败");
-            }
-            finally
-            {
+            } finally {
                 context.DisposeTransaction();
             }
 
@@ -246,8 +224,7 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Services
         /// <summary>
         ///     set model value
         /// </summary>
-        private ServiceResult SetModelValue(ActivityEditOutput model)
-        {
+        private ServiceResult SetModelValue(ActivityEditOutput model) {
             //check type
             var activity = model.Activity;
             var type = activity.Key.GetTypeByFullName();
@@ -314,13 +291,11 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Services
         /// <param name="storeItems"></param>
         /// <param name="user"></param>
         /// <returns></returns>
-        public List<ProductGradePrice> GetMemberDiscountPrice(List<StoreItem> storeItems, User user)
-        {
+        public List<ProductGradePrice> GetMemberDiscountPrice(List<StoreItem> storeItems, User user) {
             //get product ids
             var productGrades = new List<ProductGradePrice>();
             var productIds = new List<long>();
-            storeItems.ForEach(store =>
-            {
+            storeItems.ForEach(store => {
                 var tempProductIds = store.ProductSkuItems.Select(p => p.ProductId);
                 productIds.AddRange(tempProductIds);
             });
@@ -336,22 +311,18 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Services
                 return productGrades;
             }
             //loop
-            currentOrderActivities.ForEach(item =>
-            {
+            currentOrderActivities.ForEach(item => {
                 //rule
                 var rules = item.Value.ToObject<MemberDiscountActivity>();
                 if (rules == null || rules.DiscountList == null || rules.DiscountList.Count <= 0) {
                     return;
                 }
 
-                rules.DiscountList.ForEach(discount =>
-                {
-                    if (discount.GradeItems != null && discount.GradeItems.Count > 0)
-                    {
+                rules.DiscountList.ForEach(discount => {
+                    if (discount.GradeItems != null && discount.GradeItems.Count > 0) {
                         var gradeItem = discount.GradeItems.Find(g => g.Id == user.GradeId);
                         if (gradeItem != null && gradeItem.Price > 0) {
-                            productGrades.Add(new ProductGradePrice
-                            {
+                            productGrades.Add(new ProductGradePrice {
                                 GradeId = gradeItem.Id,
                                 ProductId = item.ProductId,
                                 ProductSkuId = discount.ProductSkuId,
@@ -369,8 +340,7 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Services
         /// </summary>
         /// <param name="storeOrders"></param>
         /// <param name="user"></param>
-        public ServiceResult CheckBuyPermissionActivity(IList<StoreOrderItem> storeOrders, User user)
-        {
+        public ServiceResult CheckBuyPermissionActivity(IList<StoreOrderItem> storeOrders, User user) {
             var result = ServiceResult.Success;
             //get order products
             var orderProductCounts = GetOrderProducts(storeOrders);
@@ -384,8 +354,7 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Services
 
             var userProductCounts = Repository<IOrderProductRepository>().GetUserProductCount(user.Id, orderProductIds);
             //loop proccess acitity
-            foreach (var item in currentOrderActivities)
-            {
+            foreach (var item in currentOrderActivities) {
                 //rule
                 var rules = item.Value.ToObject<BuyPermisionActivity>();
                 if (rules == null) {
@@ -422,10 +391,8 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Services
         ///     check presell activity
         /// </summary>
         /// <param name="storeOrders"></param>
-        public ServiceResult CheckPreSellActivity(IList<StoreOrderItem> storeOrders)
-        {
-            return CheckActivity(storeOrders, ProductActivityType.PreSells, item =>
-            {
+        public ServiceResult CheckPreSellActivity(IList<StoreOrderItem> storeOrders) {
+            return CheckActivity(storeOrders, ProductActivityType.PreSells, item => {
                 //rule
                 var rules = item.Value.ToObject<PreSellsActivity>();
                 if (rules == null) {
@@ -445,15 +412,13 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Services
         ///     check time limit buy activity
         /// </summary>
         /// <param name="storeOrders"></param>
-        public ServiceResult CheckTimeLimitBuyActivity(IList<StoreOrderItem> storeOrders)
-        {
+        public ServiceResult CheckTimeLimitBuyActivity(IList<StoreOrderItem> storeOrders) {
             //get order products
             var orderProductCounts = GetOrderProducts(storeOrders);
             var orderProductIds = orderProductCounts.Select(o => o.ProductId).ToList();
             var productCounts = Repository<IOrderProductRepository>().GetProductCount(orderProductIds);
             var activities = new List<Activity>();
-            var result = CheckActivity(storeOrders, ProductActivityType.TimeLimitBuy, item =>
-            {
+            var result = CheckActivity(storeOrders, ProductActivityType.TimeLimitBuy, item => {
                 //rule
                 var rules = item.Value.ToObject<TimeLimitBuyActivity>();
                 if (rules == null) {
@@ -494,8 +459,7 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Services
         /// <param name="func"></param>
         /// <returns></returns>
         private ServiceResult CheckActivity(IList<StoreOrderItem> storeOrders, ProductActivityType productActivityType,
-            Func<Activity, ServiceResult> func)
-        {
+            Func<Activity, ServiceResult> func) {
             //get order products
             var orderProductCounts = GetOrderProducts(storeOrders);
             var orderProductIds = orderProductCounts.Select(o => o.ProductId).ToList();
@@ -506,8 +470,7 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Services
                 return ServiceResult.Success;
             }
             //loop proccess acitity
-            foreach (var item in currentOrderActivities)
-            {
+            foreach (var item in currentOrderActivities) {
                 var result = func(item);
                 if (!result.Succeeded) {
                     return result;
@@ -522,13 +485,10 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Services
         /// </summary>
         /// <param name="storeOrders"></param>
         /// <returns></returns>
-        private List<UserProductCount> GetOrderProducts(IList<StoreOrderItem> storeOrders)
-        {
+        private List<UserProductCount> GetOrderProducts(IList<StoreOrderItem> storeOrders) {
             var result = new List<UserProductCount>();
-            storeOrders.Foreach(order =>
-            {
-                var temp = order.ProductSkuItems.Select(p => new UserProductCount
-                {
+            storeOrders.Foreach(order => {
+                var temp = order.ProductSkuItems.Select(p => new UserProductCount {
                     Count = p.Count,
                     ProductId = p.ProductId
                 }).ToList();
@@ -537,6 +497,6 @@ namespace Alabo.Industry.Shop.Activitys.Domain.Services
             return result;
         }
 
-        #endregion
+        #endregion activity
     }
 }

@@ -119,11 +119,11 @@ namespace Alabo.Security.Sessions {
         /// <param name="user"></param>
         public async Task SignInUser(BasicUser user) {
             if (string.IsNullOrWhiteSpace(user.UserName) || string.IsNullOrWhiteSpace(user.Email)) {
-                throw new ArgumentException("UserName and email is requred in user model.");
+                throw new ValidException("UserName and email is requred in user model.");
             }
 
             if (user.Id == 0) {
-                throw new ArgumentException("userId is requred in user model.");
+                throw new ValidException("userId is requred in user model.");
             }
 
             var claimsPrincipal = CreateClaimsIdentity(user);

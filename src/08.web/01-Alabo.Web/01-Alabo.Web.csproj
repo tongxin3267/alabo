@@ -14,7 +14,7 @@
     <RootNamespace>Alabo.Web</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netcoreapp2.0\ZKCloud.Web.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netcoreapp2.2\Alabo.Web.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

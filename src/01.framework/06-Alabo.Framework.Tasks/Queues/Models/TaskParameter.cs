@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.Exceptions;
 
 namespace Alabo.Framework.Tasks.Queues.Models {
 
@@ -11,7 +12,7 @@ namespace Alabo.Framework.Tasks.Queues.Models {
 
         public void AddValue<T>(string name, T value) {
             if (_dataCache.ContainsKey(name)) {
-                throw new ArgumentException($"data with key {name} is in parameter.");
+                throw new ValidException($"data with key {name} is in parameter.");
             }
 
             _dataCache.Add(name, value);
@@ -20,7 +21,7 @@ namespace Alabo.Framework.Tasks.Queues.Models {
 
         public void AddValue(string name, object value) {
             if (_dataCache.ContainsKey(name)) {
-                throw new ArgumentException($"data with key {name} is in parameter.");
+                throw new ValidException($"data with key {name} is in parameter.");
             }
 
             _dataCache.Add(name, value);
@@ -30,7 +31,7 @@ namespace Alabo.Framework.Tasks.Queues.Models {
         public void SetValue<T>(string name, T value) {
             if (_dataTypeCache.ContainsKey(name)) {
                 if (_dataTypeCache[name] != typeof(T)) {
-                    throw new ArgumentException($"update data with key {name} error, the type not equals");
+                    throw new ValidException($"update data with key {name} error, the type not equals");
                 }
 
                 _dataCache[name] = value;
@@ -42,7 +43,7 @@ namespace Alabo.Framework.Tasks.Queues.Models {
         public T GetValue<T>(string name) {
             var find = GetValue(name);
             if (find.GetType() != typeof(T)) {
-                throw new ArgumentException(
+                throw new ValidException(
                     $"value with key {name} of type {typeof(T).Name} not equals data type {find.GetType().Name}");
             }
 

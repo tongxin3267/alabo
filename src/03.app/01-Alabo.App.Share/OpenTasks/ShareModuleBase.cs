@@ -454,7 +454,7 @@ namespace Alabo.App.Share.OpenTasks
             //    return result;
             //foreach (var item in BonusLimitList) {
             //    if (item.UserTypeLimits.Count == 0)
-            //        throw new ArgumentException($"奖金配置{item.Id}开启了限制但没有设置限制数据.");
+            //        throw new ValidException($"奖金配置{item.Id}开启了限制但没有设置限制数据.");
             //    var userType = Alabo.Helpers.Ioc.Resolve<IUserTypeService>().GetSingle(UserId, item.UserTypeLimits.FirstOrDefault().UserTypeId);
             //    var limitType = item.UserTypeLimits.FirstOrDefault(e => e.GradeId == userType.GradeId);
             //    if (limitType == null)

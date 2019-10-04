@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Xml;
+using Alabo.Exceptions;
 
 namespace Alabo.Helpers {
 
@@ -17,7 +18,7 @@ namespace Alabo.Helpers {
             Document.LoadXml(GetXml(xml));
             Root = Document.DocumentElement;
             if (Root == null) {
-                throw new ArgumentException(nameof(xml));
+                throw new ValidException(nameof(xml));
             }
         }
 

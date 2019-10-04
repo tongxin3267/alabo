@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
+using Alabo.Exceptions;
 
 namespace Alabo.Extensions {
 
@@ -191,7 +192,7 @@ namespace Alabo.Extensions {
 
             var orderedQueryable = GetOrderedQueryable(source, pager);
             if (orderedQueryable == null) {
-                throw new ArgumentException("必须设置排序字段");
+                throw new ValidException("必须设置排序字段");
             }
 
             return orderedQueryable.Skip(pager.GetSkipCount()).Take(pager.PageSize);

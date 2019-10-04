@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using Alabo.Exceptions;
 
 namespace Alabo.Extensions {
 
@@ -22,7 +23,7 @@ namespace Alabo.Extensions {
             var type = typeof(T);
             var property = type.GetProperty(propertyName);
             if (property == null) {
-                throw new ArgumentException("propertyName", "不存在");
+                throw new ValidException("propertyName", "不存在");
             }
 
             var param = Expression.Parameter(type, "p");

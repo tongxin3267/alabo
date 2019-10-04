@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
+using Alabo.Exceptions;
 
 namespace Alabo.Maps {
 
@@ -83,7 +84,7 @@ namespace Alabo.Maps {
 
             var genericArgumentsTypes = type.GetTypeInfo().GetGenericArguments();
             if (genericArgumentsTypes == null || genericArgumentsTypes.Length == 0) {
-                throw new ArgumentException("泛型类型参数不能为空");
+                throw new ValidException("泛型类型参数不能为空");
             }
 
             return genericArgumentsTypes[0];
