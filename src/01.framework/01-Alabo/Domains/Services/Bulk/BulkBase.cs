@@ -10,26 +10,22 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Alabo.Domains.Services.Bulk
-{
+namespace Alabo.Domains.Services.Bulk {
+
     public abstract class BulkBase<TEntity, TKey> : BulkAsyncBase<TEntity, TKey>, IBulk<TEntity, TKey>
-        where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
-        protected BulkBase(IUnitOfWork unitOfWork, IStore<TEntity, TKey> store) : base(unitOfWork, store)
-        {
+        where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
+        protected BulkBase(IUnitOfWork unitOfWork, IStore<TEntity, TKey> store) : base(unitOfWork, store) {
         }
 
-        public void AddMany(IEnumerable<TEntity> soucre)
-        {
+        public void AddMany(IEnumerable<TEntity> soucre) {
             if (soucre == null || !soucre.Any()) {
                 return;
             }
 
             var addList = new List<TEntity>();
-            soucre.Foreach(r =>
-            {
-                if (r != null)
-                {
+            soucre.Foreach(r => {
+                if (r != null) {
                     r.CreateTime = DateTime.Now;
                     addList.Add(r);
                 }
@@ -41,33 +37,28 @@ namespace Alabo.Domains.Services.Bulk
             Store.AddMany(addList);
         }
 
-        public void AddUpdateOrDelete(IEnumerable<TEntity> entities, Expression<Func<TEntity, bool>> predicate)
-        {
+        public void AddUpdateOrDelete(IEnumerable<TEntity> entities, Expression<Func<TEntity, bool>> predicate) {
             Store.AddUpdateOrDelete(entities, predicate);
         }
 
         public List<TDto> SaveMany<TDto, TRequest>(List<TRequest> addList, List<TRequest> updateList,
             List<TRequest> deleteList)
             where TDto : IResponse, new()
-            where TRequest : IRequest, IKey, new()
-        {
+            where TRequest : IRequest, IKey, new() {
             throw new NotImplementedException();
             //            return Store.Save(addList, updateList, deleteList);
         }
 
-        public void UpdateMany([Valid] IEnumerable<TEntity> entities)
-        {
+        public void UpdateMany([Valid] IEnumerable<TEntity> entities) {
             throw new NotImplementedException();
             //Store.Update(entities);
         }
 
-        public void UpdateMany(Action<TEntity> updateAction, Expression<Func<TEntity, bool>> predicate = null)
-        {
+        public void UpdateMany(Action<TEntity> updateAction, Expression<Func<TEntity, bool>> predicate = null) {
             Store.UpdateMany(updateAction, predicate);
         }
 
-        public Task UpdateAsync([Valid] IEnumerable<TEntity> entities)
-        {
+        public Task UpdateAsync([Valid] IEnumerable<TEntity> entities) {
             throw new NotImplementedException();
             //            return Store.UpdateAsync(entities);
         }

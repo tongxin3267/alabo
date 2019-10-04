@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     团队类型
     /// </summary>
     [ClassProperty(Name = "团队类型")]
-    public enum KpiTeamType
-    {
+    public enum KpiTeamType {
+
         /// <summary>
         ///     会员本身
         /// </summary>

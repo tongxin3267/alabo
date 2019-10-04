@@ -1,9 +1,9 @@
 ﻿using Alabo.Domains.Entities;
 
-namespace Alabo.Domains.Services.Random
-{
-    public interface IRandom<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+namespace Alabo.Domains.Services.Random {
+
+    public interface IRandom<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         /// <summary>
         ///     从数据库中随机读取一条记录
         ///     一般用于单元测试

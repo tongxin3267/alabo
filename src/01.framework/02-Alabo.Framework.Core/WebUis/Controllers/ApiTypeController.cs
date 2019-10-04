@@ -10,21 +10,20 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Framework.Core.WebUis.Controllers
-{
+namespace Alabo.Framework.Core.WebUis.Controllers {
+
     /// <summary>
     ///     Api type controller
     /// </summary>
     [Route("Api/Type/[action]")]
-    public class ApiTypeController : ApiBaseController
-    {
+    public class ApiTypeController : ApiBaseController {
+
         /// <summary>
         ///     根据配置获取自动表单的值
         /// </summary>
         [HttpGet]
         [Display(Description = "获取所有的Api地址")]
-        public ApiResult<AutoTable> FormNoData([FromQuery] string type)
-        {
+        public ApiResult<AutoTable> FormNoData([FromQuery] string type) {
             var result = Resolve<IAutoTableService>().TableNoData(type, QueryDictionary().ToJsons(), AutoModel);
             return ToResult(result);
         }
@@ -34,8 +33,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         /// </summary>
         [HttpGet]
         [Display(Description = "获取所有的Api地址")]
-        public ApiResult<AutoTable> TableNoData([FromQuery] string type)
-        {
+        public ApiResult<AutoTable> TableNoData([FromQuery] string type) {
             var result = Resolve<IAutoTableService>().TableNoData(type, QueryDictionary().ToJsons(), AutoModel);
             return ToResult(result);
         }
@@ -45,8 +43,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         /// </summary>
         [HttpGet]
         [Display(Description = "获取所有的Api地址")]
-        public ApiResult<AutoTable> Table([FromQuery] string type)
-        {
+        public ApiResult<AutoTable> Table([FromQuery] string type) {
             var result = Resolve<IAutoTableService>().Table(type, QueryDictionary().ToJsons(), AutoModel);
             return ToResult(result);
         }
@@ -56,8 +53,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ApiResult<List<EnumList>> AllKeyValues()
-        {
+        public ApiResult<List<EnumList>> AllKeyValues() {
             //var result = Resolve<ITypeService>().AllKeyValues();
             //return ApiResult.Success(result.ToList());
             return null;
@@ -86,8 +82,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         /// <param name="type"></param>
         [HttpGet]
         [Display(Description = "根据枚举获取KeyValues")]
-        public ApiResult<List<KeyValue>> GetKeyValue([FromQuery] string type)
-        {
+        public ApiResult<List<KeyValue>> GetKeyValue([FromQuery] string type) {
             //check
             if (type.IsNullOrEmpty() || type == "undefined") {
                 return ApiResult.Failure<List<KeyValue>>("类型不能为空");
@@ -170,17 +165,14 @@ namespace Alabo.Framework.Core.WebUis.Controllers
             //}
 
             //enum
-            if (find.IsEnum)
-            {
+            if (find.IsEnum) {
                 var keyValues = KeyValueExtesions.EnumToKeyValues(type);
                 if (keyValues == null) {
                     return ApiResult.Failure<List<KeyValue>>("枚举不存在");
                 }
 
                 return ApiResult.Success(keyValues.ToList());
-            }
-            else
-            {
+            } else {
                 //Auto config
                 //var configValue = Resolve<ITypeService>().GetAutoConfigDictionary(type);
 

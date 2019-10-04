@@ -6,36 +6,29 @@ using System.Dynamic;
 using System.Linq;
 using System.Reflection;
 
-namespace Alabo.Mapping.Dynamic
-{
+namespace Alabo.Mapping.Dynamic {
+
     /// <summary>
     ///     动态赋值
     /// </summary>
     /// <typeparam name="TModel"></typeparam>
-    public class Dynamic<TModel> : DynamicObject where TModel : class
-    {
+    public class Dynamic<TModel> : DynamicObject where TModel : class {
         private readonly IDictionary<PropertyInfo, object> _changedProperties = new Dictionary<PropertyInfo, object>();
 
-        public override bool TrySetMember(SetMemberBinder binder, object value)
-        {
+        public override bool TrySetMember(SetMemberBinder binder, object value) {
             var propertys = typeof(TModel).GetProperties();
             var propertyInfo =
                 propertys?.FirstOrDefault(r => r.Name.Equals(binder.Name, StringComparison.OrdinalIgnoreCase));
             // 值为null 不更新
             if (propertyInfo != null && value != null) {
                 if (!(propertyInfo.Name.Equals("Id", StringComparison.OrdinalIgnoreCase) ||
-                      propertyInfo.Name.Equals("CreateTime", StringComparison.OrdinalIgnoreCase)))
-                {
+                      propertyInfo.Name.Equals("CreateTime", StringComparison.OrdinalIgnoreCase))) {
                     //如果字段没有忽略则更新
                     var isIgnoredPropery = propertyInfo.GetAttribute<DynamicIgnoreAttribute>() != null;
-                    if (!isIgnoredPropery)
-                    {
-                        if (!value.IsNullOrEmpty())
-                        {
+                    if (!isIgnoredPropery) {
+                        if (!value.IsNullOrEmpty()) {
                             _changedProperties.Add(propertyInfo, value);
-                        }
-                        else
-                        {
+                        } else {
                             var isIgnoredIfEmpty = propertyInfo.GetAttribute<DynamicNotIgnoreEmptyAttribute>() != null;
                             if (isIgnoredIfEmpty) {
                                 _changedProperties.Add(propertyInfo, value);
@@ -54,14 +47,12 @@ namespace Alabo.Mapping.Dynamic
         ///     动态设置属性的值
         /// </summary>
         /// <param name="model"></param>
-        public void SetValue(TModel model)
-        {
+        public void SetValue(TModel model) {
             if (model == null) {
                 throw new ArgumentNullException(nameof(model));
             }
 
-            if (_changedProperties.Count > 0)
-            {
+            if (_changedProperties.Count > 0) {
                 var propertys = typeof(TModel).GetProperties();
                 // 设置最新的更新时间
                 var propertyInfo = propertys?.FirstOrDefault(r =>
@@ -72,24 +63,20 @@ namespace Alabo.Mapping.Dynamic
             }
 
             foreach (var property in _changedProperties) {
-                if (!IsExcludedProperty(property.Key.Name))
-                {
+                if (!IsExcludedProperty(property.Key.Name)) {
                     var value = ChangeType(property.Value, property.Key.PropertyType);
                     property.Key.SetValue(model, value);
                 }
             }
         }
 
-        private static object ChangeType(object value, Type type)
-        {
-            try
-            {
+        private static object ChangeType(object value, Type type) {
+            try {
                 if (type == typeof(Guid)) {
                     return Guid.Parse((string)value);
                 }
 
-                if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
-                {
+                if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>)) {
                     if (value == null) {
                         return null;
                     }
@@ -98,15 +85,12 @@ namespace Alabo.Mapping.Dynamic
                 }
 
                 return Convert.ChangeType(value, type ?? throw new ArgumentNullException(nameof(type)));
-            }
-            catch
-            {
+            } catch {
                 return null;
             }
         }
 
-        private static bool IsExcludedProperty(string propertyName)
-        {
+        private static bool IsExcludedProperty(string propertyName) {
             IEnumerable<string> defaultExcludedProperies = new[] { "ID" };
             return defaultExcludedProperies.Contains(propertyName.ToUpper());
         }

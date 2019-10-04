@@ -1,12 +1,12 @@
 ﻿using Alabo.Users.Entities;
 
-namespace Alabo.Framework.Core.Reflections.Interfaces
-{
+namespace Alabo.Framework.Core.Reflections.Interfaces {
+
     /// <summary>
     ///     用户注册后时间
     /// </summary>
-    public interface IUserRegAfter
-    {
+    public interface IUserRegAfter {
+
         /// <summary>
         ///     执行顺序，越小越在前面
         /// </summary>

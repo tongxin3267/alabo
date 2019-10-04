@@ -1,6 +1,5 @@
-﻿namespace Alabo.UI.Design.AutoImages
-{
-    public interface IAutoImage
-    {
+﻿namespace Alabo.UI.Design.AutoImages {
+
+    public interface IAutoImage {
     }
 }

@@ -1,17 +1,16 @@
-﻿namespace Alabo.Cache
-{
+﻿namespace Alabo.Cache {
+
     /// <summary>
     ///     Class CacheValue.
     /// </summary>
-    public class CacheValue<T>
-    {
+    public class CacheValue<T> {
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="T:EasyCaching.Core.CacheValue`1" /> class.
         /// </summary>
         /// <param name="value">Value.</param>
         /// <param name="hasValue">If set to <c>true</c> has value.</param>
-        public CacheValue(T value, bool hasValue)
-        {
+        public CacheValue(T value, bool hasValue) {
             Value = value;
             HasValue = hasValue;
         }
@@ -48,8 +47,7 @@
 
         /// <summary>
         /// </summary>
-        public override string ToString()
-        {
+        public override string ToString() {
             return Value?.ToString() ?? "<null>";
         }
     }

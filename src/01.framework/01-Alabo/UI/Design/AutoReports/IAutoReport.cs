@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.UI.Design.AutoReports
-{
-    public interface IAutoReport
-    {
+namespace Alabo.UI.Design.AutoReports {
+
+    public interface IAutoReport {
+
         /// <summary>
         ///     报表类型
         /// </summary>

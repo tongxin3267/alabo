@@ -1,13 +1,13 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Domains.Trees
-{
+namespace Alabo.Domains.Trees {
+
     /// <summary>
     ///     加载操作
     /// </summary>
     [ClassProperty(Name = "加载操作")]
-    public enum LoadOperation
-    {
+    public enum LoadOperation {
+
         /// <summary>
         ///     初次加载
         /// </summary>

@@ -1,11 +1,11 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     [ClassProperty(Name = "条件类型")]
-    public enum ConditionType
-    {
+    public enum ConditionType {
+
         /// <summary>
         ///     条件是金额，比如订单多少金额，商品多少金额
         /// </summary>

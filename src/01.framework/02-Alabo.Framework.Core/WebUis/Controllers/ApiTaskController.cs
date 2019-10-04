@@ -8,14 +8,14 @@ using System.Diagnostics;
 using System.IO;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Framework.Core.WebUis.Controllers
-{
+namespace Alabo.Framework.Core.WebUis.Controllers {
+
     /// <summary>
     ///     自动任务
     /// </summary>
     [Route("Api/Task/[action]")]
-    public class ApiTaskController : ApiBaseController
-    {
+    public class ApiTaskController : ApiBaseController {
+
         /// <summary>
         ///     执行.bat脚本
         /// </summary>
@@ -23,26 +23,21 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         /// <param name="arguments">可执行文件参数,"para1 para2 para3" 参数为字符串形式，每一个参数用空格隔开</param>
         /// <returns></returns>
         [HttpGet]
-        public ApiResult RunBat([FromQuery] string batPath = "", string arguments = "232323")
-        {
+        public ApiResult RunBat([FromQuery] string batPath = "", string arguments = "232323") {
             var pro = new Process();
-            try
-            {
-                var runPath = new
-                {
+            try {
+                var runPath = new {
                     working = string.Empty,
                     fileName = string.Empty
                 };
                 var file = new FileInfo(batPath);
                 if (string.IsNullOrEmpty(batPath)) {
-                    runPath = new
-                    {
+                    runPath = new {
                         working = AppDomain.CurrentDomain.BaseDirectory,
                         fileName = "1.bat"
                     };
                 } else {
-                    runPath = new
-                    {
+                    runPath = new {
                         working = file.Directory.FullName,
                         fileName = file.Name
                     };
@@ -62,13 +57,9 @@ namespace Alabo.Framework.Core.WebUis.Controllers
                 pro.Start();
                 pro.WaitForExit();
                 return ApiResult.Success();
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 return ApiResult.Failure(ex.Message);
-            }
-            finally
-            {
+            } finally {
                 if (pro != null) {
                     pro.Close();
                 }
@@ -79,21 +70,17 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         /// </summary>
         /// <param name="type">类型：示范值UserMapAutoTask</param>
         [HttpPost]
-        public ApiResult Exceute([FromBody] string type)
-        {
+        public ApiResult Exceute([FromBody] string type) {
             Type typeFind = null;
             object instanceFind = null;
             var checkType = Resolve<IUIBaseService>().CheckType(type, ref typeFind, ref instanceFind);
-            if (!checkType.Succeeded)
-            {
+            if (!checkType.Succeeded) {
                 //  return new Tuple<ServiceResult, AutoForm>(checkType, new AutoForm());
             }
 
-            if (instanceFind is IAutoTask set)
-            {
+            if (instanceFind is IAutoTask set) {
                 var autoTask = set.Init();
-                var backJobParameter = new BackJobParameter
-                {
+                var backJobParameter = new BackJobParameter {
                     ModuleId = autoTask.ModuleId,
                     CheckLastOne = true,
                     ServiceName = autoTask.ServcieType.Name,
@@ -127,18 +114,15 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         //    return null;
         //}
 
-        public ApiResult<AutoTask> GetView(string type)
-        {
+        public ApiResult<AutoTask> GetView(string type) {
             Type typeFind = null;
             object instanceFind = null;
             var checkType = Resolve<IUIBaseService>().CheckType(type, ref typeFind, ref instanceFind);
-            if (!checkType.Succeeded)
-            {
+            if (!checkType.Succeeded) {
                 //  return new Tuple<ServiceResult, AutoForm>(checkType, new AutoForm());
             }
 
-            if (instanceFind is IAutoTask set)
-            {
+            if (instanceFind is IAutoTask set) {
                 var autoTask = set.Init();
                 return ApiResult.Success(autoTask);
             }

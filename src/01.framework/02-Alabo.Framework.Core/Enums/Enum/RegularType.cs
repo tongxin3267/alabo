@@ -1,14 +1,14 @@
 using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     正则方式
     /// </summary>
     [ClassProperty(Name = "正则方式")]
-    public enum RegularType
-    {
+    public enum RegularType {
+
         /// <summary>
         ///     数字类型
         /// </summary>

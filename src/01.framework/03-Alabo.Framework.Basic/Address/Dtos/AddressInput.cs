@@ -6,13 +6,13 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Basic.Address.Dtos
-{
+namespace Alabo.Framework.Basic.Address.Dtos {
+
     /// <summary>
     ///     地址输入
     /// </summary>
-    public class AddressInput : EntityDto
-    {
+    public class AddressInput : EntityDto {
+
         /// <summary>
         ///     地址ID
         /// </summary>
@@ -79,8 +79,8 @@ namespace Alabo.Framework.Basic.Address.Dtos
     /// <summary>
     ///     用户备案地址修改
     /// </summary>
-    public class UserInfoAddressInput : EntityDto
-    {
+    public class UserInfoAddressInput : EntityDto {
+
         /// <summary>
         ///     地址ID
         /// </summary>

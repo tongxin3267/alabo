@@ -3,21 +3,20 @@ using Alabo.Extensions;
 using System;
 using System.Linq.Expressions;
 
-namespace Alabo.Datas.Queries.Criterias
-{
+namespace Alabo.Datas.Queries.Criterias {
+
     /// <summary>
     ///     或查询条件
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
-    public class OrCriteria<TEntity> : ICriteria<TEntity> where TEntity : class
-    {
+    public class OrCriteria<TEntity> : ICriteria<TEntity> where TEntity : class {
+
         /// <summary>
         ///     初始化查询条件
         /// </summary>
         /// <param name="left">查询条件1</param>
         /// <param name="right">查询条件2</param>
-        public OrCriteria(Expression<Func<TEntity, bool>> left, Expression<Func<TEntity, bool>> right)
-        {
+        public OrCriteria(Expression<Func<TEntity, bool>> left, Expression<Func<TEntity, bool>> right) {
             Predicate = left.Or(right);
         }
 
@@ -29,8 +28,7 @@ namespace Alabo.Datas.Queries.Criterias
         /// <summary>
         ///     获取查询条件
         /// </summary>
-        public virtual Expression<Func<TEntity, bool>> GetPredicate()
-        {
+        public virtual Expression<Func<TEntity, bool>> GetPredicate() {
             return Predicate;
         }
     }

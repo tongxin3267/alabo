@@ -1,7 +1,6 @@
-﻿namespace Alabo.Framework.Core.WebUis
-{
-    public static class IconFlaticon
-    {
+﻿namespace Alabo.Framework.Core.WebUis {
+
+    public static class IconFlaticon {
         public const string alarm_1 = "flaticon-alarm-1";
         public const string music_2 = "flaticon-music-2";
         public const string support = "flaticon-support";

@@ -11,13 +11,13 @@ using ZKCloud.Open.ApiBase.Services;
 using Qz = Quartz;
 using Thread = System.Threading.Thread;
 
-namespace Alabo.Schedules.Job
-{
+namespace Alabo.Schedules.Job {
+
     /// <summary>
     ///     Quartz作业
     /// </summary>
-    public abstract class JobBase : IJob, Qz.IJob
-    {
+    public abstract class JobBase : IJob, Qz.IJob {
+
         /// <summary>
         ///     组名称
         /// </summary>
@@ -38,19 +38,15 @@ namespace Alabo.Schedules.Job
         /// <summary>
         ///     初始化
         /// </summary>
-        protected JobBase()
-        {
+        protected JobBase() {
             _jobName = Id.Guid();
             _triggerName = Id.Guid();
             _groupName = Id.Guid();
         }
 
-        public SecretKeyAuthentication Token
-        {
-            get
-            {
-                if (_secretKeyAuthentication == null)
-                {
+        public SecretKeyAuthentication Token {
+            get {
+                if (_secretKeyAuthentication == null) {
                     var serverAuthenticationManager = Ioc.Resolve<IServerAuthenticationManager>();
                     var result = serverAuthenticationManager.UpdateTokenAsync().GetAwaiter().GetResult();
                     return result.Result;
@@ -64,12 +60,9 @@ namespace Alabo.Schedules.Job
         ///     执行
         /// </summary>
         /// <param name="context">执行上下文</param>
-        public async Task Execute(Qz.IJobExecutionContext context)
-        {
-            using (var scope = Ioc.BeginScope())
-            {
-                try
-                {
+        public async Task Execute(Qz.IJobExecutionContext context) {
+            using (var scope = Ioc.BeginScope()) {
+                try {
                     //get tenant and switch
                     var jobDataMap = context.JobDetail.JobDataMap;
                     var tenantName = jobDataMap.GetString(nameof(Tenant));
@@ -78,9 +71,7 @@ namespace Alabo.Schedules.Job
                     }
                     //execute
                     await Execute(context, scope);
-                }
-                catch (Exception ex)
-                {
+                } catch (Exception ex) {
                     var type = context.JobInstance;
                     ExceptionLogs.Write(ex, type.GetType().Name);
                 }
@@ -90,88 +81,77 @@ namespace Alabo.Schedules.Job
         /// <summary>
         ///     获取作业名称
         /// </summary>
-        public virtual string GetJobName()
-        {
+        public virtual string GetJobName() {
             return _jobName;
         }
 
         /// <summary>
         ///     获取触发器名称
         /// </summary>
-        public virtual string GetTriggerName()
-        {
+        public virtual string GetTriggerName() {
             return _triggerName;
         }
 
         /// <summary>
         ///     获取组名称
         /// </summary>
-        public virtual string GetGroupName()
-        {
+        public virtual string GetGroupName() {
             return _groupName;
         }
 
         /// <summary>
         ///     获取Cron表达式
         /// </summary>
-        public virtual string GetCron()
-        {
+        public virtual string GetCron() {
             return null;
         }
 
         /// <summary>
         ///     获取重复执行次数，默认返回null，表示持续重复执行
         /// </summary>
-        public virtual int? GetRepeatCount()
-        {
+        public virtual int? GetRepeatCount() {
             return null;
         }
 
         /// <summary>
         ///     获取开始执行时间
         /// </summary>
-        public virtual DateTimeOffset? GetStartTime()
-        {
+        public virtual DateTimeOffset? GetStartTime() {
             return null;
         }
 
         /// <summary>
         ///     获取结束执行时间
         /// </summary>
-        public virtual DateTimeOffset? GetEndTime()
-        {
+        public virtual DateTimeOffset? GetEndTime() {
             return null;
         }
 
         /// <summary>
         ///     获取重复执行间隔时间
         /// </summary>
-        public virtual TimeSpan? GetInterval()
-        {
+        public virtual TimeSpan? GetInterval() {
             return null;
         }
 
         /// <summary>
         ///     获取重复执行间隔时间，单位：小时
         /// </summary>
-        public virtual int? GetIntervalInHours()
-        {
+        public virtual int? GetIntervalInHours() {
             return null;
         }
 
         /// <summary>
         ///     获取重复执行间隔时间，单位：分
         /// </summary>
-        public virtual int? GetIntervalInMinutes()
-        {
+        public virtual int? GetIntervalInMinutes() {
             return null;
         }
 
         /// <summary>
         ///     获取重复执行间隔时间，单位：秒
         /// </summary>
-        public virtual int? GetIntervalInSeconds()
-        {
+        public virtual int? GetIntervalInSeconds() {
             return null;
         }
 
@@ -182,14 +162,12 @@ namespace Alabo.Schedules.Job
         /// <param name="scope"></param>
         /// <param name="tiemSpan">时间间隔</param>
         /// <returns></returns>
-        protected void FirstWaiter(Qz.IJobExecutionContext context, IScope scope, TimeSpan tiemSpan)
-        {
+        protected void FirstWaiter(Qz.IJobExecutionContext context, IScope scope, TimeSpan tiemSpan) {
             var objectCache = scope.Resolve<IObjectCache>();
             var type = context.JobInstance;
             var cacheKey = $"Job_{type.GetType().Name}_FirstWaiter";
             objectCache.TryGet(cacheKey, out bool sendState);
-            if (sendState == false)
-            {
+            if (sendState == false) {
                 Thread.Sleep(tiemSpan);
                 scope.Resolve<IObjectCache>().Set(cacheKey, true);
             }

@@ -4,8 +4,7 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Concurrent;
 
-namespace Alabo.Domains.Repositories.Mongo.Context
-{
+namespace Alabo.Domains.Repositories.Mongo.Context {
     /*
      IMongoDatabase IMongoClient等都没有Close方法，而且没有继承IDispose接口，
      这意味着你不需要显示的关闭数据库操作的连接。这个和以前ado的连接使用方式不同。
@@ -16,8 +15,8 @@ namespace Alabo.Domains.Repositories.Mongo.Context
     /// <summary>
     ///     Class MongoDbContext.
     /// </summary>
-    public static class MongoRepositoryConnection
-    {
+    public static class MongoRepositoryConnection {
+
         /// <summary>
         ///     mongo database cache
         /// </summary>
@@ -42,8 +41,7 @@ namespace Alabo.Domains.Repositories.Mongo.Context
         /// <summary>
         ///     Initializes static members of the <see cref="MongoDbContext" /> class.
         /// </summary>
-        static MongoRepositoryConnection()
-        {
+        static MongoRepositoryConnection() {
             ConnectString = RuntimeContext.Current.WebsiteConfig.MongoDbConnection.ConnectionString;
             MongoUrl = new MongoUrl(ConnectString);
             /////*
@@ -59,8 +57,7 @@ namespace Alabo.Domains.Repositories.Mongo.Context
             ////Client = new MongoClient(ClientSettings);
 
             var rootDataBase = DataBaseName;
-            if (RuntimeContext.Current.WebsiteConfig.MongoDbConnection.IsRoot)
-            {
+            if (RuntimeContext.Current.WebsiteConfig.MongoDbConnection.IsRoot) {
                 rootDataBase = "admin";
             }
             ClientSettings = MongoClientSettings.FromUrl(MongoUrl);
@@ -97,10 +94,8 @@ namespace Alabo.Domains.Repositories.Mongo.Context
         /// <summary>
         ///     Gets or sets the name of the data base.
         /// </summary>
-        private static string DataBaseName
-        {
-            get
-            {
+        private static string DataBaseName {
+            get {
                 var database = RuntimeContext.GetTenantMongodbDataBase();
                 if (!TenantContext.IsTenant) {
                     return database;
@@ -119,16 +114,14 @@ namespace Alabo.Domains.Repositories.Mongo.Context
         ///     清空表
         /// </summary>
         /// <param name="tableName"></param>
-        public static void DropTable(string tableName)
-        {
+        public static void DropTable(string tableName) {
             Database.DropCollection(tableName);
         }
 
         /// <summary>
         ///     get the database.
         /// </summary>
-        private static IMongoDatabase GetDatabase()
-        {
+        private static IMongoDatabase GetDatabase() {
             var dataBaseName = DataBaseName;
             //exists database return
             if (_mongoDatabase.ContainsKey(dataBaseName)) {
@@ -144,8 +137,7 @@ namespace Alabo.Domains.Repositories.Mongo.Context
         /// <summary>
         ///     获取s the legacy database.
         /// </summary>
-        internal static MongoDatabase GetLegacyDatabase()
-        {
+        internal static MongoDatabase GetLegacyDatabase() {
 #pragma warning disable 618
             var server = Client.GetServer();
 #pragma warning restore 618

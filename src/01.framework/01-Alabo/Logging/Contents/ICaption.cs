@@ -1,10 +1,10 @@
-﻿namespace Alabo.Logging.Contents
-{
+﻿namespace Alabo.Logging.Contents {
+
     /// <summary>
     ///     标题
     /// </summary>
-    public interface ICaption
-    {
+    public interface ICaption {
+
         /// <summary>
         ///     标题
         /// </summary>

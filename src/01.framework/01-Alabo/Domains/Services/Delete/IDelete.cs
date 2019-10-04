@@ -3,13 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Alabo.Domains.Services.Delete
-{
+namespace Alabo.Domains.Services.Delete {
+
     /// <summary>
     ///     删除操作
     /// </summary>
-    public interface IDelete<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+    public interface IDelete<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         /// <summary>
         ///     删除
         /// </summary>

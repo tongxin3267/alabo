@@ -1,10 +1,10 @@
-﻿namespace Alabo.Linq.Dynamic
-{
+﻿namespace Alabo.Linq.Dynamic {
+
     /// <summary>
     ///     动态调用方法
     /// </summary>
-    public class BaseServiceMethod
-    {
+    public class BaseServiceMethod {
+
         /// <summary>
         ///     服务名称
         /// </summary>

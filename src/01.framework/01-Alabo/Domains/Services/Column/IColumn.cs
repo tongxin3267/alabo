@@ -1,9 +1,9 @@
 ﻿using Alabo.Domains.Entities;
 
-namespace Alabo.Domains.Services.Column
-{
-    public interface IColumn<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+namespace Alabo.Domains.Services.Column {
+
+    public interface IColumn<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         /// <summary>
         ///     获取字段的值
         /// </summary>

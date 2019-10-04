@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Datas.Queries.Enums
-{
+namespace Alabo.Datas.Queries.Enums {
+
     /// <summary>
     ///     比较操作符
     /// </summary>
     [ClassProperty(Name = "比较操作符")]
-    public enum OperatorCompare
-    {
+    public enum OperatorCompare {
+
         /// <summary>
         ///     等于
         /// </summary>

@@ -1,9 +1,8 @@
-﻿namespace Alabo.Domains.Entities.Core
-{
+﻿namespace Alabo.Domains.Entities.Core {
+
     /// <summary>
     ///     乐观锁
     /// </summary>
-    public interface IVersion
-    {
+    public interface IVersion {
     }
 }

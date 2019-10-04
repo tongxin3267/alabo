@@ -2,13 +2,13 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Alabo.Linq.Expressions
-{
+namespace Alabo.Linq.Expressions {
+
     /// <summary>
     ///     谓词表达式生成器
     /// </summary>
-    public class PredicateExpressionBuilder<TEntity>
-    {
+    public class PredicateExpressionBuilder<TEntity> {
+
         /// <summary>
         ///     参数
         /// </summary>
@@ -22,16 +22,14 @@ namespace Alabo.Linq.Expressions
         /// <summary>
         ///     初始化谓词表达式生成器
         /// </summary>
-        public PredicateExpressionBuilder()
-        {
+        public PredicateExpressionBuilder() {
             _parameter = Expression.Parameter(typeof(TEntity), "t");
         }
 
         /// <summary>
         ///     获取参数
         /// </summary>
-        public ParameterExpression GetParameter()
-        {
+        public ParameterExpression GetParameter() {
             return _parameter;
         }
 
@@ -41,8 +39,7 @@ namespace Alabo.Linq.Expressions
         /// <param name="property">属性表达式</param>
         /// <param name="operator">运算符</param>
         /// <param name="value">值</param>
-        public void Append<TProperty>(Expression<Func<TEntity, TProperty>> property, Operator @operator, object value)
-        {
+        public void Append<TProperty>(Expression<Func<TEntity, TProperty>> property, Operator @operator, object value) {
             _result = Extensions.Extensions.And(_result,
                 Extensions.Extensions.Operation(Extensions.Extensions.Property(_parameter, Lambda.GetMember(property)),
                     @operator, value));
@@ -54,8 +51,7 @@ namespace Alabo.Linq.Expressions
         /// <param name="property">属性名</param>
         /// <param name="operator">运算符</param>
         /// <param name="value">值</param>
-        public void Append(string property, Operator @operator, object value)
-        {
+        public void Append(string property, Operator @operator, object value) {
             _result = Extensions.Extensions.And(_result,
                 Extensions.Extensions.Operation(Extensions.Extensions.Property(_parameter, property), @operator,
                     value));
@@ -64,8 +60,7 @@ namespace Alabo.Linq.Expressions
         /// <summary>
         ///     转换为Lambda表达式
         /// </summary>
-        public Expression<Func<TEntity, bool>> ToLambda()
-        {
+        public Expression<Func<TEntity, bool>> ToLambda() {
             return Extensions.Extensions.ToLambda<Func<TEntity, bool>>(_result, _parameter);
         }
     }

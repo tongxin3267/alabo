@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Alabo.Runtime
-{
+namespace Alabo.Runtime {
+
     /// <summary>
     ///     Class AuthenticationToken.
     /// </summary>
-    public class AuthenticationToken
-    {
+    public class AuthenticationToken {
+
         /// <summary>
         ///     是否认证通过
         /// </summary>

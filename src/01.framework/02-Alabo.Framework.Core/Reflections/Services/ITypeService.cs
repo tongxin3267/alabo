@@ -3,14 +3,14 @@ using Alabo.Domains.Services;
 using System;
 using System.Collections.Generic;
 
-namespace Alabo.Framework.Core.Reflections.Services
-{
+namespace Alabo.Framework.Core.Reflections.Services {
+
     /// <summary>
     ///     类型相关操作服务
     ///     动态类型操作
     /// </summary>
-    public interface ITypeService : IService
-    {
+    public interface ITypeService : IService {
+
         /// <summary>
         ///     获取所有枚举列表，用于前端展示
         /// </summary>

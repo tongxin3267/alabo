@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Alabo.Cache;
+﻿using Alabo.Cache;
 using Alabo.Dependency;
 using Alabo.Framework.Basic.Notifications.Domain.Services;
 using Alabo.Regexs;
@@ -9,6 +6,9 @@ using Alabo.Schedules.Job;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Quartz;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using ZKCloud.Open;
 using ZKCloud.Open.ApiBase.Configuration;
 using ZKCloud.Open.ApiBase.Models;
@@ -16,21 +16,18 @@ using ZKCloud.Open.Message.Models;
 using ZKCloud.Open.Message.Services;
 using MessageQueue = Alabo.Framework.Basic.Notifications.Domain.Entities.MessageQueue;
 
-namespace Alabo.Framework.Basic.Notifications.Job
-{
-    public class MessageQueueJob : JobBase
-    {
+namespace Alabo.Framework.Basic.Notifications.Job {
+
+    public class MessageQueueJob : JobBase {
         private IAdminMeesageApiClient _adminMessageApiClient;
         private IMessageApiClient _messageApiClient;
         private RestClientConfiguration _restClientConfiugration;
 
-        public override TimeSpan? GetInterval()
-        {
+        public override TimeSpan? GetInterval() {
             return TimeSpan.FromSeconds(5);
         }
 
-        protected override async Task Execute(IJobExecutionContext context, IScope scope)
-        {
+        protected override async Task Execute(IJobExecutionContext context, IScope scope) {
             FirstWaiter(context, scope, TimeSpan.FromMinutes(5));
             var config = scope.Resolve<IConfiguration>();
             _restClientConfiugration = new RestClientConfiguration(config);
@@ -39,19 +36,15 @@ namespace Alabo.Framework.Basic.Notifications.Job
 
             var objectCache = scope.Resolve<IObjectCache>();
             objectCache.TryGet("MessageIsAllSend_Cache", out bool sendState);
-            if (sendState == false)
-            {
+            if (sendState == false) {
                 scope.Resolve<IObjectCache>().Set("MessageIsAllSend_Cache", true);
                 var messageQueueService = scope.Resolve<IMessageQueueService>();
                 var unHandledIdList = messageQueueService.GetUnHandledIdList();
                 if (unHandledIdList != null && unHandledIdList.Count > 0) {
                     foreach (var id in unHandledIdList) {
-                        try
-                        {
+                        try {
                             await HandleQueueAsync(messageQueueService, id);
-                        }
-                        catch (Exception ex)
-                        {
+                        } catch (Exception ex) {
                             scope.Resolve<IObjectCache>().Set("MessageIsAllSend_Cache", false);
                             throw new ArgumentNullException(ex.Message);
                         }
@@ -60,8 +53,7 @@ namespace Alabo.Framework.Basic.Notifications.Job
             }
         }
 
-        private async Task HandleQueueAsync(IMessageQueueService messageQueueService, long queueId)
-        {
+        private async Task HandleQueueAsync(IMessageQueueService messageQueueService, long queueId) {
             var queue = messageQueueService.GetSingle(queueId);
             // var result = await _adminMessageApiClient.GetAccount(_serverAuthenticationManager.Token.Token);
             if (queue == null) {
@@ -91,8 +83,7 @@ namespace Alabo.Framework.Basic.Notifications.Job
         ///     发送单条 使用异步方法发送短信
         /// </summary>
         /// <param name="queue"></param>
-        private async Task<MessageResult> SendRawAsync(MessageQueue queue)
-        {
+        private async Task<MessageResult> SendRawAsync(MessageQueue queue) {
             if (string.IsNullOrWhiteSpace(queue.Mobile)) {
                 throw new ArgumentNullException(nameof(queue.Mobile));
             }
@@ -112,8 +103,7 @@ namespace Alabo.Framework.Basic.Notifications.Job
             return ParseResult(result);
         }
 
-        private async Task<MessageResult> SendTemplateAsync(MessageQueue queue)
-        {
+        private async Task<MessageResult> SendTemplateAsync(MessageQueue queue) {
             if (string.IsNullOrWhiteSpace(queue.Mobile)) {
                 throw new ArgumentNullException(nameof(queue.Mobile));
             }
@@ -146,8 +136,7 @@ namespace Alabo.Framework.Basic.Notifications.Job
         ///     根据模板编号获取模板
         /// </summary>
         /// <param name="code"></param>
-        public MessageTemplate GetTemplate(long code)
-        {
+        public MessageTemplate GetTemplate(long code) {
             if (code <= 0) {
                 throw new ArgumentNullException(nameof(code));
             }
@@ -157,16 +146,12 @@ namespace Alabo.Framework.Basic.Notifications.Job
             return entity;
         }
 
-        private MessageResult ParseResult(ApiResult rawResult)
-        {
+        private MessageResult ParseResult(ApiResult rawResult) {
             var messageResult = new MessageResult();
-            if (rawResult.Status == ResultStatus.Success)
-            {
+            if (rawResult.Status == ResultStatus.Success) {
                 messageResult.Message = "send to open success";
                 messageResult.Type = ResultType.Success;
-            }
-            else
-            {
+            } else {
                 messageResult.Message = "send to open faild";
                 messageResult.Type = ResultType.Faild;
             }

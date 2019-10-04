@@ -3,15 +3,15 @@ using Alabo.Domains.Query;
 using System;
 using System.Linq.Expressions;
 
-namespace Alabo.Datas.Stores.Add
-{
+namespace Alabo.Datas.Stores.Add {
+
     /// <summary>
     ///     查找单个实体
     /// </summary>
     /// <typeparam name="TEntity">对象类型</typeparam>
     /// <typeparam name="TKey">对象标识类型</typeparam>
-    public interface ISingleStore<TEntity, TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
+    public interface ISingleStore<TEntity, TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
         /// <summary>
         ///     根据Id 查找实体
         /// </summary>

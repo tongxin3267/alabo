@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel;
 
-namespace Alabo.UI.Enum
-{
+namespace Alabo.UI.Enum {
+
     /// <summary>
     ///     Material图标
     /// </summary>
     [ClassProperty(Name = "Materal图标")]
-    public enum MaterialIcon
-    {
+    public enum MaterialIcon {
+
         /// <summary>
         ///     3d_rotation
         /// </summary>

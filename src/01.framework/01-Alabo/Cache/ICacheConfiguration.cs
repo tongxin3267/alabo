@@ -1,10 +1,10 @@
-﻿namespace Alabo.Cache
-{
+﻿namespace Alabo.Cache {
+
     /// <summary>
     ///     Interface ICacheConfiguration
     /// </summary>
-    public interface ICacheConfiguration
-    {
+    public interface ICacheConfiguration {
+
         /// <summary>
         ///     Gets the cache configuration string.
         /// </summary>
@@ -13,13 +13,12 @@
 
     /// <summary>
     /// </summary>
-    public class CacheConfiguration : ICacheConfiguration
-    {
+    public class CacheConfiguration : ICacheConfiguration {
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="CacheConfiguration" /> class.
         /// </summary>
-        public CacheConfiguration(string cacheConfigurationString)
-        {
+        public CacheConfiguration(string cacheConfigurationString) {
             CacheConfigurationString = cacheConfigurationString;
         }
 

@@ -1,11 +1,11 @@
-﻿namespace Alabo.UI.Design.AutoPreviews
-{
+﻿namespace Alabo.UI.Design.AutoPreviews {
+
     /// <summary>
     ///     预览组件，对应移动端zk-preview
     ///     https://weui.io/#preview
     /// </summary>
-    public interface IAutoPreview
-    {
+    public interface IAutoPreview {
+
         /// <summary>
         ///     获取预览图
         /// </summary>

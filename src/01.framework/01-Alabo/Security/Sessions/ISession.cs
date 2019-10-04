@@ -1,12 +1,12 @@
 ﻿using Alabo.Dependency;
 
-namespace Alabo.Security.Sessions
-{
+namespace Alabo.Security.Sessions {
+
     /// <summary>
     ///     用户会话
     /// </summary>
-    public interface ISession : ISingletonDependency
-    {
+    public interface ISession : ISingletonDependency {
+
         /// <summary>
         ///     是否认证
         /// </summary>

@@ -1,18 +1,17 @@
-﻿using System.Collections.Generic;
-using Alabo.Domains.Repositories;
-using Alabo.Domains.Services.Report;
+﻿using Alabo.Domains.Repositories;
 using Alabo.Framework.Reports.Domain.Entities;
 using Alabo.UI.Design.AutoReports;
 using Alabo.UI.Design.AutoReports.Dtos;
 using MongoDB.Bson;
+using System.Collections.Generic;
 
-namespace Alabo.Framework.Reports.Domain.Repositories
-{
+namespace Alabo.Framework.Reports.Domain.Repositories {
+
     /// <summary>
     ///     数据统计
     /// </summary>
-    public interface IAutoReportRepository : IRepository<Report, ObjectId>
-    {
+    public interface IAutoReportRepository : IRepository<Report, ObjectId> {
+
         /// <summary>
         ///     按天统计数据，只支持Sql数据库
         /// </summary>

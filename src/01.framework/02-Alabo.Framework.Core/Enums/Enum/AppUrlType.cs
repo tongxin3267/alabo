@@ -1,7 +1,7 @@
-﻿namespace Alabo.Framework.Core.Enums.Enum
-{
-    public enum AppUrlType
-    {
+﻿namespace Alabo.Framework.Core.Enums.Enum {
+
+    public enum AppUrlType {
+
         /// <summary>
         ///     前端Url链接
         /// </summary>

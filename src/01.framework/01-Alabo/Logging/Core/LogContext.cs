@@ -4,13 +4,13 @@ using Alabo.Logging.Abstractions;
 using Alabo.Logging.Internal;
 using System.Diagnostics;
 
-namespace Alabo.Logging.Core
-{
+namespace Alabo.Logging.Core {
+
     /// <summary>
     ///     日志上下文
     /// </summary>
-    public class LogContext : ILogContext
-    {
+    public class LogContext : ILogContext {
+
         /// <summary>
         ///     日志上下文信息
         /// </summary>
@@ -25,8 +25,7 @@ namespace Alabo.Logging.Core
         ///     初始化日志上下文
         /// </summary>
         /// <param name="context">上下文</param>
-        public LogContext(IContext context)
-        {
+        public LogContext(IContext context) {
             Context = context;
             _orderId = 0;
         }
@@ -69,8 +68,7 @@ namespace Alabo.Logging.Core
         /// <summary>
         ///     获取日志上下文信息
         /// </summary>
-        private LogContextInfo GetInfo()
-        {
+        private LogContextInfo GetInfo() {
             if (_info != null) {
                 return _info;
             }
@@ -89,10 +87,8 @@ namespace Alabo.Logging.Core
         /// <summary>
         ///     创建日志上下文信息
         /// </summary>
-        protected virtual LogContextInfo CreateInfo()
-        {
-            return new LogContextInfo
-            {
+        protected virtual LogContextInfo CreateInfo() {
+            return new LogContextInfo {
                 TraceId = GetTraceId(),
                 Stopwatch = GetStopwatch(),
                 Ip = HttpWeb.Ip,
@@ -105,8 +101,7 @@ namespace Alabo.Logging.Core
         /// <summary>
         ///     获取跟踪号
         /// </summary>
-        protected string GetTraceId()
-        {
+        protected string GetTraceId() {
             var traceId = Context.TraceId;
             return string.IsNullOrWhiteSpace(traceId) ? Id.Guid() : traceId;
         }
@@ -114,8 +109,7 @@ namespace Alabo.Logging.Core
         /// <summary>
         ///     获取计时器
         /// </summary>
-        protected Stopwatch GetStopwatch()
-        {
+        protected Stopwatch GetStopwatch() {
             var stopwatch = new Stopwatch();
             stopwatch.Start();
             return stopwatch;

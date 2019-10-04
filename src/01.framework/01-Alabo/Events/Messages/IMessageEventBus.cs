@@ -1,12 +1,12 @@
 ﻿using System.Threading.Tasks;
 
-namespace Alabo.Events.Messages
-{
+namespace Alabo.Events.Messages {
+
     /// <summary>
     ///     消息事件总线
     /// </summary>
-    public interface IMessageEventBus
-    {
+    public interface IMessageEventBus {
+
         /// <summary>
         ///     发布消息事件
         /// </summary>

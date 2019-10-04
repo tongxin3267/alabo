@@ -1,11 +1,11 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     [ClassProperty(Name = "数据类型")]
-    public enum ZkCloudDateType
-    {
+    public enum ZkCloudDateType {
+
         #region 数值为10-100,基本控件
 
         /// <summary>

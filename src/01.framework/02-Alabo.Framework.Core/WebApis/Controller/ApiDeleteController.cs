@@ -6,11 +6,11 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Framework.Core.WebApis.Controller
-{
+namespace Alabo.Framework.Core.WebApis.Controller {
+
     public abstract class ApiDeleteController<TEntity, TKey> : ApiByIdController<TEntity, TKey>
-        where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+        where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         #region 动态删除
 
         /// <summary>
@@ -19,8 +19,7 @@ namespace Alabo.Framework.Core.WebApis.Controller
         [HttpDelete]
         [Display(Description = "删除单条记录")]
         [ApiAuth]
-        public ApiResult QueryDelete([FromBody] TEntity entity)
-        {
+        public ApiResult QueryDelete([FromBody] TEntity entity) {
             var checkResult = RelationCheck(entity);
             if (!checkResult.Succeeded) {
                 return ApiResult.Failure(checkResult.ToString());
@@ -49,8 +48,7 @@ namespace Alabo.Framework.Core.WebApis.Controller
         [HttpDelete]
         [Display(Description = "删除单条记录")]
         [ApiAuth]
-        public ApiResult QueryUserDelete([FromBody] TEntity entity)
-        {
+        public ApiResult QueryUserDelete([FromBody] TEntity entity) {
             var checkResult = RelationCheck(entity);
             if (!checkResult.Succeeded) {
                 return ApiResult.Failure(checkResult.ToString());
@@ -85,8 +83,7 @@ namespace Alabo.Framework.Core.WebApis.Controller
         [HttpPost]
         [Display(Description = "删除单条记录")]
         [ApiAuth]
-        public ApiResult BatchDelete([FromBody] string ids)
-        {
+        public ApiResult BatchDelete([FromBody] string ids) {
             return ApiResult.Failure("改类型不支持api 接口删除");
         }
 
@@ -97,8 +94,7 @@ namespace Alabo.Framework.Core.WebApis.Controller
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        private ServiceResult RelationCheck(TEntity entity)
-        {
+        private ServiceResult RelationCheck(TEntity entity) {
             if (entity.Id.IsNullOrEmpty()) {
                 return ServiceResult.FailedWithMessage($"{typeof(TEntity).Name}Id不能为空");
             }

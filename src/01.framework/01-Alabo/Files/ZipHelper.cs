@@ -7,10 +7,9 @@ using System.IO;
 using System.IO.Compression;
 using System.Text;
 
-namespace Alabo.Files
-{
-    public class ZipHelper
-    {
+namespace Alabo.Files {
+
+    public class ZipHelper {
         private static readonly string Packages = RuntimeContext.Current.Path.PackagesDirectory;
         private static readonly string Components = RuntimeContext.Current.Path.ComponentsDirectory;
         private static readonly string Widgets = Path.Combine(RuntimeContext.Current.Path.RootPath, "Widgets");
@@ -22,8 +21,7 @@ namespace Alabo.Files
         /// </summary>
         /// <param name="path"></param>
         /// <param name="fileName"></param>
-        public static bool Zip(string path, string fileName)
-        {
+        public static bool Zip(string path, string fileName) {
             if (path.IsNullOrEmpty()) {
                 return false;
             }
@@ -48,8 +46,7 @@ namespace Alabo.Files
         /// <param name="name">模块包名</param>
         /// <param name="path">模块包中路径参数</param>
         /// <param name="buffer">压缩包数据</param>
-        public static bool UnZip(string name, string path, byte[] buffer)
-        {
+        public static bool UnZip(string name, string path, byte[] buffer) {
             var zip = Path.Combine(Packages, $"{name}.zip");
             if (ServiceResult.Success != FileHelper.Write(zip, buffer)) {
                 return false;
@@ -69,8 +66,7 @@ namespace Alabo.Files
             return true;
         }
 
-        private static void CopyTarget(string extraTemp, string path)
-        {
+        private static void CopyTarget(string extraTemp, string path) {
             var name = Path.GetFileName(path);
             var bin = Path.Combine(extraTemp, name, "bin");
             var view = Path.Combine(extraTemp, name, "view");
@@ -80,8 +76,7 @@ namespace Alabo.Files
             var targetBin = Path.Combine(RuntimeContext.Current.Path.AppDataDirectory, "Components");
             var targetView = Path.Combine(RuntimeContext.Current.Path.RootPath, "Widgets", path);
 
-            Action<string[], string> copy = (files, target) =>
-            {
+            Action<string[], string> copy = (files, target) => {
                 foreach (var file in files) {
                     FileHelper.Copy(file, target);
                 }

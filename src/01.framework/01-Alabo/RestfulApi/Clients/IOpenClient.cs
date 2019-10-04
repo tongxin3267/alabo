@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Alabo.RestfulApi.Clients
-{
+namespace Alabo.RestfulApi.Clients {
+
     /// <summary>
     ///     平台项目,DIY授权项目的Api相关操作
     /// </summary>
-    public interface IOpenClient : IScopeDependency
-    {
+    public interface IOpenClient : IScopeDependency {
+
         /// <summary>
         ///     Get类型请求，同步方法
         /// </summary>

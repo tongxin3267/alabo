@@ -1,12 +1,12 @@
 ﻿using Alabo.Domains.Dtos;
 
-namespace Alabo.Domains.Trees
-{
+namespace Alabo.Domains.Trees {
+
     /// <summary>
     ///     树节点
     /// </summary>
-    public interface ITreeNode : IKey
-    {
+    public interface ITreeNode : IKey {
+
         /// <summary>
         ///     父标识
         /// </summary>

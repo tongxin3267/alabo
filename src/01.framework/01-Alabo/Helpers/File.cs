@@ -1,19 +1,18 @@
 ﻿using System.IO;
 using System.Text;
 
-namespace Alabo.Helpers
-{
+namespace Alabo.Helpers {
+
     /// <summary>
     ///     文件和流操作
     /// </summary>
-    public static class File
-    {
+    public static class File {
+
         /// <summary>
         ///     流转换成字符串
         /// </summary>
         /// <param name="stream">流</param>
-        public static string ToString(Stream stream)
-        {
+        public static string ToString(Stream stream) {
             return ToString(stream, Encoding.UTF8);
         }
 
@@ -22,8 +21,7 @@ namespace Alabo.Helpers
         /// </summary>
         /// <param name="stream">流</param>
         /// <param name="encoding">字符编码</param>
-        public static string ToString(Stream stream, Encoding encoding)
-        {
+        public static string ToString(Stream stream, Encoding encoding) {
             if (stream == null) {
                 return string.Empty;
             }
@@ -33,8 +31,7 @@ namespace Alabo.Helpers
             }
 
             string result;
-            using (var reader = new StreamReader(stream, encoding))
-            {
+            using (var reader = new StreamReader(stream, encoding)) {
                 if (reader.BaseStream.CanSeek) {
                     reader.BaseStream.Position = 0;
                 }

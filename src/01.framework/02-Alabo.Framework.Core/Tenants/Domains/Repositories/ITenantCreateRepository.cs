@@ -2,13 +2,13 @@
 using Alabo.Users.Entities;
 using System.Collections.Generic;
 
-namespace Alabo.Framework.Core.Tenants.Domains.Repositories
-{
+namespace Alabo.Framework.Core.Tenants.Domains.Repositories {
+
     /// <summary>
     ///     ITenantCreateRepository
     /// </summary>
-    public interface ITenantCreateRepository : IRepository<User, long>
-    {
+    public interface ITenantCreateRepository : IRepository<User, long> {
+
         /// <summary>
         ///     create database
         /// </summary>

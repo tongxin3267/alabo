@@ -1,11 +1,11 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     [ClassProperty(Name = "大小关系")]
-    public enum QueryEnum
-    {
+    public enum QueryEnum {
+
         /// <summary>
         ///     等于
         /// </summary>

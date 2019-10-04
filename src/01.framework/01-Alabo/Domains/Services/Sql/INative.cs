@@ -3,15 +3,15 @@ using Alabo.Domains.Enums;
 using System;
 using System.Collections.Generic;
 
-namespace Alabo.Domains.Services.Sql
-{
+namespace Alabo.Domains.Services.Sql {
+
     /// <summary>
     ///     原生SQL语句查询
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     /// <typeparam name="TKey"></typeparam>
-    public interface INative<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+    public interface INative<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         /// <summary>
         ///     获取最近一条记录
         /// </summary>

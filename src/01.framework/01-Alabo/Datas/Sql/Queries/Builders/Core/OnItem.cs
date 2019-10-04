@@ -1,20 +1,19 @@
 ﻿using Alabo.Datas.Queries.Enums;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Core
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Core {
+
     /// <summary>
     ///     连接条件项
     /// </summary>
-    public class OnItem
-    {
+    public class OnItem {
+
         /// <summary>
         ///     初始化连接条件项
         /// </summary>
         /// <param name="left">左表列名</param>
         /// <param name="right">右表列名</param>
         /// <param name="operator">条件运算符</param>
-        public OnItem(string left, string right, Operator @operator)
-        {
+        public OnItem(string left, string right, Operator @operator) {
             Left = new SqlItem(left);
             Right = new SqlItem(right);
             Operator = @operator;

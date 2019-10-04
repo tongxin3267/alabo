@@ -6,13 +6,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Alabo.Apps
-{
+namespace Alabo.Apps {
+
     /// <summary>
     ///     Class RoslynAppCompiler.
     /// </summary>
-    public class RoslynAppCompiler : IDynamicAppCompiler
-    {
+    public class RoslynAppCompiler : IDynamicAppCompiler {
+
         /// <summary>
         ///     The source parse options
         /// </summary>
@@ -39,8 +39,7 @@ namespace Alabo.Apps
         /// </summary>
         /// <param name="savePath">The save path.</param>
         /// <param name="assemblyFileName">Name of the assembly file.</param>
-        public RoslynAppCompiler(string savePath, string assemblyFileName)
-        {
+        public RoslynAppCompiler(string savePath, string assemblyFileName) {
             SavePath = savePath;
             AssemblyName = assemblyFileName;
         }
@@ -60,16 +59,13 @@ namespace Alabo.Apps
         /// </summary>
         /// <param name="path">The path.</param>
         /// <param name="encoding">The encoding.</param>
-        public IDynamicAppCompiler AddFile(string path, Encoding encoding)
-        {
+        public IDynamicAppCompiler AddFile(string path, Encoding encoding) {
             if (!File.Exists(path)) {
                 throw new FileNotFoundException("file not found.", path);
             }
 
-            using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            {
-                using (var sr = new StreamReader(stream, encoding))
-                {
+            using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) {
+                using (var sr = new StreamReader(stream, encoding)) {
                     AddSource(path, sr.ReadToEnd());
                 }
             }
@@ -82,8 +78,7 @@ namespace Alabo.Apps
         /// </summary>
         /// <param name="fileName">Name of the file.</param>
         /// <param name="sourceCode">The source code.</param>
-        public IDynamicAppCompiler AddSource(string fileName, string sourceCode)
-        {
+        public IDynamicAppCompiler AddSource(string fileName, string sourceCode) {
             var tree = SyntaxFactory.ParseSyntaxTree(sourceCode, SourceParseOptions, fileName);
             _sourceTrees.Add(tree);
             return this;
@@ -93,8 +88,7 @@ namespace Alabo.Apps
         ///     Adds the reference.
         /// </summary>
         /// <param name="assemblyPath">The assembly path.</param>
-        public IDynamicAppCompiler AddReference(string assemblyPath)
-        {
+        public IDynamicAppCompiler AddReference(string assemblyPath) {
             if (!File.Exists(assemblyPath)) {
                 throw new FileNotFoundException("file not found.", assemblyPath);
             }
@@ -108,8 +102,7 @@ namespace Alabo.Apps
         ///     Adds the using.
         /// </summary>
         /// <param name="usingString">The using string.</param>
-        public IDynamicAppCompiler AddUsing(string usingString)
-        {
+        public IDynamicAppCompiler AddUsing(string usingString) {
             if (string.IsNullOrWhiteSpace(usingString)) {
                 throw new ArgumentNullException(nameof(usingString));
             }
@@ -121,8 +114,7 @@ namespace Alabo.Apps
         /// <summary>
         ///     Builds this instance.
         /// </summary>
-        public CompilerResult Build()
-        {
+        public CompilerResult Build() {
             var compilationOptions = new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
                 .WithOverflowChecks(true)
                 .WithOptimizationLevel(OptimizationLevel.Release)
@@ -139,8 +131,7 @@ namespace Alabo.Apps
         /// <summary>
         ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
-        public void Dispose()
-        {
+        public void Dispose() {
             //throw new NotImplementedException();
             //do nothing
         }

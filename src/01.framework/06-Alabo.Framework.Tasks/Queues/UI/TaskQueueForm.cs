@@ -1,10 +1,5 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
-using Alabo.Framework.Core.WebApis;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Tasks.Queues.Domain.Entities;
 using Alabo.Framework.Tasks.Queues.Domain.Enums;
 using Alabo.Framework.Tasks.Queues.Domain.Servcies;
@@ -12,9 +7,12 @@ using Alabo.Mapping;
 using Alabo.UI;
 using Alabo.UI.Design.AutoForms;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Framework.Tasks.Queues.UI
-{
+namespace Alabo.Framework.Tasks.Queues.UI {
+
     /// <summary>
     ///     任务队列
     /// </summary>
@@ -22,8 +20,7 @@ namespace Alabo.Framework.Tasks.Queues.UI
         ListApi = "Api/TaskQueue/TaskQueueList",
         PageType = ViewPageType.List, PostApi = "Api/TaskQueue/TaskQueueList",
         SideBarType = SideBarType.TaskQueueSideBar)]
-    public class TaskQueueForm : UIBase, IAutoForm
-    {
+    public class TaskQueueForm : UIBase, IAutoForm {
         [Display(Name = "模块标识")] public Guid ModuleId { get; set; }
 
         /// <summary>
@@ -97,16 +94,14 @@ namespace Alabo.Framework.Tasks.Queues.UI
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public AutoForm GetView(object id, AutoBaseModel autoModel)
-        {
+        public AutoForm GetView(object id, AutoBaseModel autoModel) {
             var taskQueueId = ToId<long>(id);
             var taskQueueView = Resolve<ITaskQueueService>().GetViewById(taskQueueId);
             var model = AutoMapping.SetValue<TaskQueueForm>(taskQueueView);
             return ToAutoForm(model);
         }
 
-        public ServiceResult Save(object model, AutoBaseModel autoModel)
-        {
+        public ServiceResult Save(object model, AutoBaseModel autoModel) {
             var cartView = AutoMapping.SetValue<TaskQueue>(model);
             var result = Resolve<ITaskQueueService>().AddOrUpdate(cartView);
             return new ServiceResult(result);

@@ -7,16 +7,14 @@ using Alabo.Helpers;
 using Alabo.Users.Services;
 using System;
 
-namespace Alabo.Framework.Core.Valids.Services
-{
-    public class ValidService : ServiceBase, IValidService
-    {
-        public ValidService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+namespace Alabo.Framework.Core.Valids.Services {
+
+    public class ValidService : ServiceBase, IValidService {
+
+        public ValidService(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
-        public ServiceResult VerifyUser(string userName)
-        {
+        public ServiceResult VerifyUser(string userName) {
             if (userName.IsNullOrEmpty()) {
                 return ServiceResult.FailedWithMessage("用户名不能为空");
             }
@@ -33,8 +31,7 @@ namespace Alabo.Framework.Core.Valids.Services
             return ServiceResult.Success;
         }
 
-        public ServiceResult VerifyUser(long userId)
-        {
+        public ServiceResult VerifyUser(long userId) {
             if (userId <= 0) {
                 return ServiceResult.FailedWithMessage("用户Id不能小于0");
             }
@@ -51,8 +48,7 @@ namespace Alabo.Framework.Core.Valids.Services
             return ServiceResult.Success;
         }
 
-        public ServiceResult VerifyUserGrade(Guid gradeId)
-        {
+        public ServiceResult VerifyUserGrade(Guid gradeId) {
             if (gradeId.IsGuidNullOrEmpty()) {
                 return ServiceResult.FailedWithMessage("等级ID不能为空");
             }
@@ -64,10 +60,8 @@ namespace Alabo.Framework.Core.Valids.Services
             return ServiceResult.Success;
         }
 
-        public ServiceResult VerifySafePassword()
-        {
-            if (HttpWeb.HttpContext.Request.Form.ContainsKey("PayPassword"))
-            {
+        public ServiceResult VerifySafePassword() {
+            if (HttpWeb.HttpContext.Request.Form.ContainsKey("PayPassword")) {
                 var safePassword = HttpWeb.HttpContext.Request.Form["PayPassword"].ToString();
                 if (safePassword.IsNullOrEmpty()) {
                     return ServiceResult.FailedWithMessage("请输入支付密码");

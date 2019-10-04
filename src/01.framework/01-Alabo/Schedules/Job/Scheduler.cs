@@ -8,25 +8,23 @@ using System.Threading.Tasks;
 
 using Qz = Quartz;
 
-namespace Alabo.Schedules.Job
-{
+namespace Alabo.Schedules.Job {
+
     /// <summary>
     ///     Quartz调度器
     /// </summary>
-    public class Scheduler : IScheduler
-    {
+    public class Scheduler : IScheduler {
+
         /// <summary>
         ///     Quartz调度器
         /// </summary>
         private Qz.IScheduler _scheduler;
 
-        public Scheduler()
-        {
+        public Scheduler() {
             _tenant = TenantContext.GetDefaultMasterTenant();
         }
 
-        public Scheduler(Tenant tenant)
-        {
+        public Scheduler(Tenant tenant) {
             _tenant = tenant;
         }
 
@@ -35,8 +33,7 @@ namespace Alabo.Schedules.Job
         /// <summary>
         ///     启动
         /// </summary>
-        public async Task StartAsync()
-        {
+        public async Task StartAsync() {
             _scheduler = await GetScheduler();
             if (_scheduler.IsStarted) {
                 return;
@@ -48,8 +45,7 @@ namespace Alabo.Schedules.Job
         /// <summary>
         ///     暂停
         /// </summary>
-        public async Task PauseAsync()
-        {
+        public async Task PauseAsync() {
             if (_scheduler == null) {
                 return;
             }
@@ -60,8 +56,7 @@ namespace Alabo.Schedules.Job
         /// <summary>
         ///     恢复
         /// </summary>
-        public async Task ResumeAsync()
-        {
+        public async Task ResumeAsync() {
             if (_scheduler == null) {
                 return;
             }
@@ -72,8 +67,7 @@ namespace Alabo.Schedules.Job
         /// <summary>
         ///     停止
         /// </summary>
-        public async Task StopAsync()
-        {
+        public async Task StopAsync() {
             if (_scheduler == null) {
                 return;
             }
@@ -88,16 +82,14 @@ namespace Alabo.Schedules.Job
         /// <summary>
         ///     添加作业
         /// </summary>
-        public async Task AddJobAsync<TJob>() where TJob : IJob, new()
-        {
+        public async Task AddJobAsync<TJob>() where TJob : IJob, new() {
             await AddJobAsync(new TJob());
         }
 
         /// <summary>
         ///     获取调度器
         /// </summary>
-        private async Task<Qz.IScheduler> GetScheduler()
-        {
+        private async Task<Qz.IScheduler> GetScheduler() {
             if (_scheduler != null) {
                 return _scheduler;
             }
@@ -110,8 +102,7 @@ namespace Alabo.Schedules.Job
         ///     添加作业
         /// </summary>
         /// <param name="job">作业</param>
-        public async Task AddJobAsync(IJob job)
-        {
+        public async Task AddJobAsync(IJob job) {
             if (!(job is JobBase quartzJob)) {
                 throw new InvalidOperationException("Quartz调度器必须从Quartz.JobBase派生");
             }
@@ -124,8 +115,7 @@ namespace Alabo.Schedules.Job
         /// <summary>
         ///     创建作业
         /// </summary>
-        private IJobDetail CreateJob(JobBase job)
-        {
+        private IJobDetail CreateJob(JobBase job) {
             return JobBuilder.Create(job.GetType())
                 .WithIdentity(job.GetJobName(), job.GetGroupName())
                 .UsingJobData("Tenant", _tenant?.Sign)
@@ -135,8 +125,7 @@ namespace Alabo.Schedules.Job
         /// <summary>
         ///     创建触发器
         /// </summary>
-        private ITrigger CreateTrigger(JobBase job)
-        {
+        private ITrigger CreateTrigger(JobBase job) {
             var builder = TriggerBuilder.Create()
                 .WithIdentity(job.GetTriggerName(), job.GetGroupName())
                 .WithSimpleSchedule(scheduleBuilder => Schedule(scheduleBuilder, job));
@@ -149,8 +138,7 @@ namespace Alabo.Schedules.Job
         /// <summary>
         ///     设置调度策略
         /// </summary>
-        private void Schedule(SimpleScheduleBuilder builder, JobBase job)
-        {
+        private void Schedule(SimpleScheduleBuilder builder, JobBase job) {
             SetRepeatCount(builder, job);
             // 默认30分钟
             builder.WithIntervalInMinutes(30);
@@ -174,10 +162,8 @@ namespace Alabo.Schedules.Job
         /// <summary>
         ///     设置重复执行次数
         /// </summary>
-        private void SetRepeatCount(SimpleScheduleBuilder builder, JobBase job)
-        {
-            if (job.GetRepeatCount() == null)
-            {
+        private void SetRepeatCount(SimpleScheduleBuilder builder, JobBase job) {
+            if (job.GetRepeatCount() == null) {
                 builder.RepeatForever();
                 return;
             }
@@ -188,10 +174,8 @@ namespace Alabo.Schedules.Job
         /// <summary>
         ///     设置作业开始时间
         /// </summary>
-        private void SetStartTime(TriggerBuilder builder, JobBase job)
-        {
-            if (job.GetStartTime() == null)
-            {
+        private void SetStartTime(TriggerBuilder builder, JobBase job) {
+            if (job.GetStartTime() == null) {
                 builder.StartNow();
                 return;
             }
@@ -202,8 +186,7 @@ namespace Alabo.Schedules.Job
         /// <summary>
         ///     设置作业结束时间
         /// </summary>
-        private void SetEndTime(TriggerBuilder builder, JobBase job)
-        {
+        private void SetEndTime(TriggerBuilder builder, JobBase job) {
             if (job.GetEndTime() == null) {
                 return;
             }
@@ -214,8 +197,7 @@ namespace Alabo.Schedules.Job
         /// <summary>
         ///     设置Cron表达式
         /// </summary>
-        private void SetCron(TriggerBuilder builder, JobBase job)
-        {
+        private void SetCron(TriggerBuilder builder, JobBase job) {
             if (job.GetCron() == null) {
                 return;
             }
@@ -230,8 +212,7 @@ namespace Alabo.Schedules.Job
         /// <param name="configureJob">作业配置操作</param>
         /// <param name="configureTrigger">触发器配置操作</param>
         public async Task AddJobAsync<TJob>(Action<JobBuilder> configureJob, Action<TriggerBuilder> configureTrigger)
-            where TJob : Qz.IScheduler
-        {
+            where TJob : Qz.IScheduler {
             var jobBuilder = JobBuilder.Create(typeof(TJob));
             configureJob(jobBuilder);
             var job = jobBuilder.Build();
@@ -246,8 +227,7 @@ namespace Alabo.Schedules.Job
         /// </summary>
         /// <param name="job">作业</param>
         /// <param name="trigger">触发器</param>
-        public async Task AddJobAsync(IJobDetail job, ITrigger trigger)
-        {
+        public async Task AddJobAsync(IJobDetail job, ITrigger trigger) {
             _scheduler = await GetScheduler();
             await _scheduler.ScheduleJob(job, trigger);
         }

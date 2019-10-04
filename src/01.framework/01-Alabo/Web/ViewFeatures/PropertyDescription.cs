@@ -11,23 +11,21 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Alabo.Web.ViewFeatures
-{
+namespace Alabo.Web.ViewFeatures {
+
     /// <summary>
     ///     获取字段的属性描述信息
     /// </summary>
-    public class PropertyDescription
-    {
-        public PropertyDescription(Type classType, PropertyInfo property)
-        {
+    public class PropertyDescription {
+
+        public PropertyDescription(Type classType, PropertyInfo property) {
             ClassType = classType;
             Property = property;
 
             //获取或构建 特性
             FieldAttribute = property.GetAttributes<FieldAttribute>().FirstOrDefault();
             if (FieldAttribute == null) {
-                FieldAttribute = new FieldAttribute
-                {
+                FieldAttribute = new FieldAttribute {
                     //FieldName = property.Name,
                     EditShow = false
                 };
@@ -97,41 +95,31 @@ namespace Alabo.Web.ViewFeatures
         /// </summary>
         /// <param name="instanse"></param>
         /// <param name="request"></param>
-        public static void SetValue(object instanse, object request)
-        {
-            foreach (var item in instanse.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
-            {
+        public static void SetValue(object instanse, object request) {
+            foreach (var item in instanse.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)) {
                 object value = null;
-                if (request is HttpRequest)
-                {
+                if (request is HttpRequest) {
                     var obj = (HttpRequest)request;
                     value = obj.Method == "POST" ? obj.Form[item.Name].ToString() : obj.Query[item.Name].ToString();
                 }
 
-                if (request is JObject)
-                {
+                if (request is JObject) {
                     var obj = (JObject)request;
                     value = (JValue)obj[item.Name];
                 }
 
-                if (request is JValue)
-                {
+                if (request is JValue) {
                     //jvalue 可能是一个json对象，需转换为json对象后再操作。
                     var jvalue = JsonConvert.DeserializeObject(((JValue)request).Value.ToString());
                     var obj = (JObject)jvalue;
                     value = (JValue)obj[item.Name];
                 }
 
-                if (item.PropertyType == typeof(string))
-                {
+                if (item.PropertyType == typeof(string)) {
                     item.SetValue(instanse, value?.ToString());
-                }
-                else if (item.PropertyType == typeof(int))
-                {
+                } else if (item.PropertyType == typeof(int)) {
                     item.SetValue(instanse, value.ToInt16());
-                }
-                else if (item.PropertyType == typeof(bool))
-                {
+                } else if (item.PropertyType == typeof(bool)) {
                     //Checkbox: bootstrap on 为true
                     if (value != null && (value.ToString().ToLower().Contains("true") ||
                                           value.ToString().ToLower().Contains("on"))) {
@@ -139,70 +127,45 @@ namespace Alabo.Web.ViewFeatures
                     } else {
                         item.SetValue(instanse, false);
                     }
-                }
-                else if (item.PropertyType == typeof(decimal))
-                {
+                } else if (item.PropertyType == typeof(decimal)) {
                     item.SetValue(instanse, value.ToDecimal());
-                }
-                else if (item.PropertyType == typeof(DateTime))
-                {
+                } else if (item.PropertyType == typeof(DateTime)) {
                     item.SetValue(instanse, value.ToDateTime());
-                }
-                else if (item.PropertyType == typeof(long))
-                {
+                } else if (item.PropertyType == typeof(long)) {
                     item.SetValue(instanse, value.ToInt64());
-                }
-                else if (item.PropertyType == typeof(byte[]))
-                {
-                }
-                else if (item.PropertyType == typeof(Guid))
-                {
+                } else if (item.PropertyType == typeof(byte[])) {
+                } else if (item.PropertyType == typeof(Guid)) {
                     item.SetValue(instanse, value.ToGuid());
-                }
-                else if (item.PropertyType.Name.Contains("List") || item.PropertyType.Name.Contains("HttpContext"))
-                {
+                } else if (item.PropertyType.Name.Contains("List") || item.PropertyType.Name.Contains("HttpContext")) {
                     //如果List类型，暂时不序列化
-                }
-                else
-                {
-                    if (item.PropertyType.GetTypeInfo().BaseType.Name == nameof(Enum))
-                    {
+                } else {
+                    if (item.PropertyType.GetTypeInfo().BaseType.Name == nameof(Enum)) {
                         var enumValue = Enum.Parse(item.PropertyType.GetTypeInfo().UnderlyingSystemType,
                             value.IsNullOrEmpty() ? "0" : value.ToString(), true);
 
                         item.SetValue(instanse, enumValue);
-                    }
-                    else
-                    {
+                    } else {
                         item.SetValue(instanse, value ?? string.Empty);
                     }
                 }
             }
         }
 
-        public static List<object> SetValue(object instanse, IList<JObject> jObject)
-        {
+        public static List<object> SetValue(object instanse, IList<JObject> jObject) {
             var list = new List<object>();
-            foreach (var obj in jObject)
-            {
+            foreach (var obj in jObject) {
                 var newdata = instanse;
-                foreach (var item in instanse.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
-                {
+                foreach (var item in instanse.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)) {
                     object value = null;
                     if (obj.Property(item.Name) != null) {
                         value = obj.Property(item.Name).Value;
                     }
 
-                    if (item.PropertyType == typeof(string))
-                    {
+                    if (item.PropertyType == typeof(string)) {
                         item.SetValue(instanse, value?.ToString());
-                    }
-                    else if (item.PropertyType == typeof(int))
-                    {
+                    } else if (item.PropertyType == typeof(int)) {
                         item.SetValue(instanse, value.ToInt16());
-                    }
-                    else if (item.PropertyType == typeof(bool))
-                    {
+                    } else if (item.PropertyType == typeof(bool)) {
                         //Checkbox: bootstrap on 为true
                         if (value != null && (value.ToString().ToLower().Contains("true") ||
                                               value.ToString().ToLower().Contains("on"))) {
@@ -210,44 +173,29 @@ namespace Alabo.Web.ViewFeatures
                         } else {
                             item.SetValue(instanse, false);
                         }
-                    }
-                    else if (item.PropertyType == typeof(decimal))
-                    {
+                    } else if (item.PropertyType == typeof(decimal)) {
                         item.SetValue(instanse, value.ToDecimal());
-                    }
-                    else if (item.PropertyType == typeof(DateTime))
-                    {
+                    } else if (item.PropertyType == typeof(DateTime)) {
                         item.SetValue(instanse, value.ToDateTime());
-                    }
-                    else if (item.PropertyType == typeof(long))
-                    {
+                    } else if (item.PropertyType == typeof(long)) {
                         item.SetValue(instanse, value.ToInt64());
-                    }
-                    else if (item.PropertyType == typeof(Guid))
-                    {
+                    } else if (item.PropertyType == typeof(Guid)) {
                         item.SetValue(instanse, value.ToGuid());
-                    }
-                    else if (item.PropertyType.Name.Contains("List") || item.PropertyType.Name.Contains("HttpContext"))
-                    {
+                    } else if (item.PropertyType.Name.Contains("List") || item.PropertyType.Name.Contains("HttpContext")) {
                         //如果List类型，暂时不序列化
-                    }
-                    else
-                    {
+                    } else {
                         // 不可写的, 调用SetValue()会报错
                         if (!item.CanWrite) {
                             continue;
                         }
 
                         if (item.PropertyType != null && item.PropertyType.GetTypeInfo().BaseType != null &&
-                            item.PropertyType.GetTypeInfo().BaseType.Name == nameof(Enum))
-                        {
+                            item.PropertyType.GetTypeInfo().BaseType.Name == nameof(Enum)) {
                             var enumValue = Enum.Parse(item.PropertyType.GetTypeInfo().UnderlyingSystemType,
                                 value.IsNullOrEmpty() ? "0" : value.ToString(), true);
 
                             item.SetValue(instanse, enumValue);
-                        }
-                        else
-                        {
+                        } else {
                             item.SetValue(instanse, value ?? string.Empty);
                         }
                     }
@@ -259,26 +207,19 @@ namespace Alabo.Web.ViewFeatures
             return list;
         }
 
-        public static object SetValue(object instanse, JObject obj)
-        {
+        public static object SetValue(object instanse, JObject obj) {
             var newdata = instanse;
-            foreach (var item in instanse.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
-            {
+            foreach (var item in instanse.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)) {
                 object value = null;
                 if (obj.Property(item.Name) != null) {
                     value = obj.Property(item.Name).Value;
                 }
 
-                if (item.PropertyType == typeof(string))
-                {
+                if (item.PropertyType == typeof(string)) {
                     item.SetValue(instanse, value?.ToString());
-                }
-                else if (item.PropertyType == typeof(int))
-                {
+                } else if (item.PropertyType == typeof(int)) {
                     item.SetValue(instanse, value.ToInt16());
-                }
-                else if (item.PropertyType == typeof(bool))
-                {
+                } else if (item.PropertyType == typeof(bool)) {
                     //Checkbox: bootstrap on 为true
                     if (value != null && (value.ToString().ToLower().Contains("true") ||
                                           value.ToString().ToLower().Contains("on"))) {
@@ -286,47 +227,30 @@ namespace Alabo.Web.ViewFeatures
                     } else {
                         item.SetValue(instanse, false);
                     }
-                }
-                else if (item.PropertyType == typeof(decimal))
-                {
+                } else if (item.PropertyType == typeof(decimal)) {
                     item.SetValue(instanse, value.ToDecimal());
-                }
-                else if (item.PropertyType == typeof(DateTime))
-                {
+                } else if (item.PropertyType == typeof(DateTime)) {
                     item.SetValue(instanse, value.ToDateTime());
-                }
-                else if (item.PropertyType == typeof(long))
-                {
+                } else if (item.PropertyType == typeof(long)) {
                     item.SetValue(instanse, value.ToInt64());
-                }
-                else if (item.PropertyType == typeof(Guid))
-                {
+                } else if (item.PropertyType == typeof(Guid)) {
                     item.SetValue(instanse, value.ToGuid());
-                }
-                else if (item.PropertyType == typeof(byte[]))
-                {
-                }
-                else if (item.PropertyType.Name.Contains("List") || item.PropertyType.Name.Contains("HttpContext"))
-                {
+                } else if (item.PropertyType == typeof(byte[])) {
+                } else if (item.PropertyType.Name.Contains("List") || item.PropertyType.Name.Contains("HttpContext")) {
                     //如果List类型，暂时不序列化 HttpContext 不序列化
-                }
-                else
-                {
+                } else {
                     // 不可写的, 调用SetValue()会报错
                     if (!item.CanWrite) {
                         continue;
                     }
 
                     if (item.PropertyType != null && item.PropertyType.GetTypeInfo().BaseType != null
-                                                  && item.PropertyType.GetTypeInfo().BaseType.Name == nameof(Enum))
-                    {
+                                                  && item.PropertyType.GetTypeInfo().BaseType.Name == nameof(Enum)) {
                         var enumValue = Enum.Parse(item.PropertyType.GetTypeInfo().UnderlyingSystemType,
                             value.IsNullOrEmpty() ? "0" : value.ToString(), true);
 
                         item.SetValue(instanse, enumValue);
-                    }
-                    else
-                    {
+                    } else {
                         item.SetValue(instanse, value ?? string.Empty);
                     }
                 }
@@ -335,15 +259,13 @@ namespace Alabo.Web.ViewFeatures
             return newdata;
         }
 
-        public object GetValue<T>(object instanse) where T : class
-        {
+        public object GetValue<T>(object instanse) where T : class {
             if (instanse == null) {
                 throw new ArgumentNullException(nameof(instanse));
             }
 
             Func<T, object> getValueFunction = null;
-            if (getValueFunction == null)
-            {
+            if (getValueFunction == null) {
                 var parameterExpression = Expression.Parameter(typeof(T));
                 var convertTypeExpression = Expression.Convert(parameterExpression, ClassType);
                 var propertyExpression = Expression.Property(convertTypeExpression, Property);
@@ -355,8 +277,7 @@ namespace Alabo.Web.ViewFeatures
             return getValueFunction((T)instanse);
         }
 
-        public void SetValue<T>(object instanse, object value)
-        {
+        public void SetValue<T>(object instanse, object value) {
             if (instanse == null) {
                 throw new ArgumentNullException(nameof(instanse));
             }
@@ -366,8 +287,7 @@ namespace Alabo.Web.ViewFeatures
             }
 
             Action<T, object> setValueAction = null;
-            if (setValueAction == null)
-            {
+            if (setValueAction == null) {
                 var instanseParameterExpression = Expression.Parameter(typeof(T));
                 var valueParameterExpression = Expression.Parameter(typeof(object));
                 var convertTypeExpression = Expression.Convert(instanseParameterExpression, ClassType);

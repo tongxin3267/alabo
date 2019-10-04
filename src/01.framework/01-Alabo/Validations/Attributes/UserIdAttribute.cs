@@ -6,19 +6,18 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Validations.Attributes
-{
+namespace Alabo.Validations.Attributes {
+
     /// <summary>
     ///     用户ID验证:不能为空，Id>0,能够查找到用户
     /// </summary>
-    public class UserIdAttribute : ValidationProviderAttribute
-    {
+    public class UserIdAttribute : ValidationProviderAttribute {
+
         /// <summary>
         ///     验证特性
         /// </summary>
         /// <returns></returns>
-        public override IEnumerable<ValidationAttribute> GetValidationAttributes()
-        {
+        public override IEnumerable<ValidationAttribute> GetValidationAttributes() {
             return new List<ValidationAttribute>
             {
                 ValidationAttributeConst.RequiredAttribute,
@@ -29,10 +28,9 @@ namespace Alabo.Validations.Attributes
     }
 
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter)]
-    public class UserFindAttribute : ValidationAttribute
-    {
-        public override bool IsValid(object value)
-        {
+    public class UserFindAttribute : ValidationAttribute {
+
+        public override bool IsValid(object value) {
             if (value == null) {
                 return false;
             }

@@ -2,14 +2,14 @@
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
 
-namespace Alabo.Domains.Trees
-{
+namespace Alabo.Domains.Trees {
+
     /// <summary>
     ///     树型数据传输对象
     /// </summary>
     [DataContract]
-    public abstract class TreeDtoBase : DtoBase, ITreeNode
-    {
+    public abstract class TreeDtoBase : DtoBase, ITreeNode {
+
         /// <summary>
         ///     父名称
         /// </summary>

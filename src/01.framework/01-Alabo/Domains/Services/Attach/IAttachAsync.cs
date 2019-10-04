@@ -2,10 +2,10 @@
 using Alabo.Domains.Entities;
 using System.Threading.Tasks;
 
-namespace Alabo.Domains.Services.Attach
-{
-    public interface IAttachAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+namespace Alabo.Domains.Services.Attach {
+
+    public interface IAttachAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         Task<string> GetTableName();
 
         /// <summary>

@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Validations
-{
+namespace Alabo.Validations {
+
     /// <summary>
     ///     DataAnnotations验证操作
     /// </summary>
-    public static class DataAnnotationValidation
-    {
+    public static class DataAnnotationValidation {
+
         /// <summary>
         ///     验证
         /// </summary>
         /// <param name="target">验证目标</param>
-        public static ValidationResultCollection Validate(object target)
-        {
+        public static ValidationResultCollection Validate(object target) {
             if (target == null) {
                 throw new ArgumentNullException(nameof(target));
             }

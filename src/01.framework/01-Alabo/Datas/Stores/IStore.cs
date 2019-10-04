@@ -13,13 +13,12 @@ using Alabo.Dependency;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Repositories.EFCore;
 
-namespace Alabo.Datas.Stores
-{
+namespace Alabo.Datas.Stores {
+
     /// <summary>
     ///     存储器
     /// </summary>
-    public interface IStore : IScopeDependency
-    {
+    public interface IStore : IScopeDependency {
     }
 
     /// <summary>
@@ -41,8 +40,8 @@ namespace Alabo.Datas.Stores
         IGetListStore<TEntity, TKey>, IGetListAsyncStore<TEntity, TKey>,
         ISingleStore<TEntity, TKey>, ISingleAsyncStore<TEntity, TKey>,
         IAddStore<TEntity, TKey>, IAddAsyncStore<TEntity, TKey>
-        where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
+        where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
         /// <summary>
         ///     Sql操作
         /// </summary>

@@ -1,13 +1,13 @@
 ﻿using Alabo.Helpers;
 using System.Text;
 
-namespace Alabo.Events.Messages
-{
+namespace Alabo.Events.Messages {
+
     /// <summary>
     ///     消息事件
     /// </summary>
-    public class MessageEvent : Event, IMessageEvent
-    {
+    public class MessageEvent : Event, IMessageEvent {
+
         /// <summary>
         ///     事件数据
         /// </summary>
@@ -26,8 +26,7 @@ namespace Alabo.Events.Messages
         /// <summary>
         ///     输出日志
         /// </summary>
-        public override string ToString()
-        {
+        public override string ToString() {
             var result = new StringBuilder();
             result.AppendLine($"事件标识: {Id}");
             result.AppendLine($"事件时间:{Extensions.Extensions.ToMillisecondString(Time)}");

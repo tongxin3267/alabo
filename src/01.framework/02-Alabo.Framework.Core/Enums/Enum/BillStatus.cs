@@ -1,8 +1,8 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     账单状态 通过此字段来完成转账、提现、充值等流程
     ///     提现流程：
@@ -53,8 +53,8 @@ namespace Alabo.Framework.Core.Enums.Enum
     ///     状态变化：4(Failured)----->5(Activist)
     /// </summary>
     [ClassProperty(Name = "账单状态和充值流程")]
-    public enum BillStatus
-    {
+    public enum BillStatus {
+
         /// <summary>
         ///     进行中
         ///     会员创建记录，或者会员前台进行申请

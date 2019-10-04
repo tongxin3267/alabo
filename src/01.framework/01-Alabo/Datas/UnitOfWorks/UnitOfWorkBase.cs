@@ -20,26 +20,22 @@ using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Alabo.Datas.UnitOfWorks
-{
+namespace Alabo.Datas.UnitOfWorks {
+
     /// <summary>
     ///     工作单元
     /// </summary>
-    public abstract class UnitOfWorkBase : DbContext, IUnitOfWork, IDatabase, IEntityMatedata
-    {
+    public abstract class UnitOfWorkBase : DbContext, IUnitOfWork, IDatabase, IEntityMatedata {
+
         #region Commit(提交)
 
         /// <summary>
         ///     提交,返回影响的行数
         /// </summary>
-        public int Commit()
-        {
-            try
-            {
+        public int Commit() {
+            try {
                 return SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
+            } catch (DbUpdateConcurrencyException ex) {
                 throw new ConcurrencyException(ex);
             }
         }
@@ -51,14 +47,10 @@ namespace Alabo.Datas.UnitOfWorks
         /// <summary>
         ///     异步提交,返回影响的行数
         /// </summary>
-        public async Task<int> CommitAsync()
-        {
-            try
-            {
+        public async Task<int> CommitAsync() {
+            try {
                 return await SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
+            } catch (DbUpdateConcurrencyException ex) {
                 throw new ConcurrencyException(ex);
             }
         }
@@ -70,8 +62,7 @@ namespace Alabo.Datas.UnitOfWorks
         /// <summary>
         ///     异步保存更改
         /// </summary>
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-        {
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) {
             SaveChangesBefore();
             return base.SaveChangesAsync(cancellationToken);
         }
@@ -86,8 +77,7 @@ namespace Alabo.Datas.UnitOfWorks
         /// <param name="options">配置</param>
         /// <param name="manager">工作单元服务</param>
         protected UnitOfWorkBase(DbContextOptions options, IUnitOfWorkManager manager)
-            : base(options)
-        {
+            : base(options) {
             manager?.Register(this);
             TraceId = Guid.NewGuid();
             Session = Security.Sessions.Session.Instance;
@@ -98,13 +88,11 @@ namespace Alabo.Datas.UnitOfWorks
         /// <summary>
         ///     Switch tenant database.
         /// </summary>
-        public void SwitchTenantDatabase()
-        {
+        public void SwitchTenantDatabase() {
             //run in thread 'dbConnection.ConnectionString' is no pwd
             var dbConnection = GetConnection();
             var mainConnectionString = TenantContext.GetMasterTenant();
-            if (string.IsNullOrWhiteSpace(mainConnectionString))
-            {
+            if (string.IsNullOrWhiteSpace(mainConnectionString)) {
                 mainConnectionString = string.IsNullOrWhiteSpace(ConnectionString)
                     ? dbConnection.ConnectionString
                     : ConnectionString;
@@ -124,8 +112,7 @@ namespace Alabo.Datas.UnitOfWorks
                 return;
             }
             //Current tenant is main and connection string is not equal switch to main database
-            if (tenantName.ToLower() == TenantContext.Master.ToLower())
-            {
+            if (tenantName.ToLower() == TenantContext.Master.ToLower()) {
                 if (mainConnectionString != dbConnection.ConnectionString) {
                     SwitchDatabase(dbConnection, mainConnectionString);
                 }
@@ -135,8 +122,7 @@ namespace Alabo.Datas.UnitOfWorks
 
             //get tenant connection string
             var newConnectionString = TenantContext.GetCurrentTenant();
-            if (string.IsNullOrWhiteSpace(newConnectionString))
-            {
+            if (string.IsNullOrWhiteSpace(newConnectionString)) {
                 newConnectionString = mainConnectionString.GetConnectionStringForTenant(tenantName);
                 TenantContext.AddTenant(tenantName, newConnectionString);
             }
@@ -149,11 +135,9 @@ namespace Alabo.Datas.UnitOfWorks
         /// </summary>
         /// <param name="dbConnection"></param>
         /// <param name="connectionString"></param>
-        private void SwitchDatabase(IDbConnection dbConnection, string connectionString)
-        {
+        private void SwitchDatabase(IDbConnection dbConnection, string connectionString) {
             //check state
-            if (dbConnection.State != ConnectionState.Closed)
-            {
+            if (dbConnection.State != ConnectionState.Closed) {
                 //run in thread connection must dispose.
                 dbConnection.Close();
                 dbConnection.Dispose();
@@ -173,8 +157,7 @@ namespace Alabo.Datas.UnitOfWorks
         /// <summary>
         ///     获取数据库连接
         /// </summary>
-        public IDbConnection GetConnection()
-        {
+        public IDbConnection GetConnection() {
             return Database.GetDbConnection();
         }
 
@@ -205,16 +188,14 @@ namespace Alabo.Datas.UnitOfWorks
         ///     配置
         /// </summary>
         /// <param name="builder">配置生成器</param>
-        protected override void OnConfiguring(DbContextOptionsBuilder builder)
-        {
+        protected override void OnConfiguring(DbContextOptionsBuilder builder) {
             EnableLog(builder);
         }
 
         /// <summary>
         ///     启用日志
         /// </summary>
-        protected void EnableLog(DbContextOptionsBuilder builder)
-        {
+        protected void EnableLog(DbContextOptionsBuilder builder) {
             var log = GetLog();
             if (IsEnabled(log) == false) {
                 return;
@@ -227,14 +208,10 @@ namespace Alabo.Datas.UnitOfWorks
         /// <summary>
         ///     获取日志操作
         /// </summary>
-        protected virtual ILog GetLog()
-        {
-            try
-            {
+        protected virtual ILog GetLog() {
+            try {
                 return Log.GetLog(EfLog.TraceLogName);
-            }
-            catch
-            {
+            } catch {
                 return Log.Null;
             }
         }
@@ -242,16 +219,14 @@ namespace Alabo.Datas.UnitOfWorks
         /// <summary>
         ///     是否启用Ef日志
         /// </summary>
-        private bool IsEnabled(ILog log)
-        {
+        private bool IsEnabled(ILog log) {
             return EfConfig.LogLevel != EfLogLevel.Off && log.IsTraceEnabled;
         }
 
         /// <summary>
         ///     获取日志提供器
         /// </summary>
-        protected virtual ILoggerProvider GetLogProvider(ILog log)
-        {
+        protected virtual ILoggerProvider GetLogProvider(ILog log) {
             return new EfLogProvider(log, this);
         }
 
@@ -262,8 +237,7 @@ namespace Alabo.Datas.UnitOfWorks
         /// <summary>
         ///     配置映射
         /// </summary>
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
             foreach (var mapper in GetMaps()) {
                 mapper.Map(modelBuilder);
             }
@@ -272,8 +246,7 @@ namespace Alabo.Datas.UnitOfWorks
         /// <summary>
         ///     获取映射配置列表
         /// </summary>
-        private IEnumerable<IMap> GetMaps()
-        {
+        private IEnumerable<IMap> GetMaps() {
             var result = GetMapTypes();
             return result;
         }
@@ -281,8 +254,7 @@ namespace Alabo.Datas.UnitOfWorks
         /// <summary>
         ///     获取映射类型列表
         /// </summary>
-        protected virtual IEnumerable<IMap> GetMapTypes()
-        {
+        protected virtual IEnumerable<IMap> GetMapTypes() {
             return Reflection.GetInstancesByInterface<IMap>();
         }
 
@@ -293,8 +265,7 @@ namespace Alabo.Datas.UnitOfWorks
         /// <summary>
         ///     保存更改
         /// </summary>
-        public override int SaveChanges()
-        {
+        public override int SaveChanges() {
             SaveChangesBefore();
             return base.SaveChanges();
         }
@@ -302,11 +273,9 @@ namespace Alabo.Datas.UnitOfWorks
         /// <summary>
         ///     保存更改前操作
         /// </summary>An error occurred while updating the entries
-        protected virtual void SaveChangesBefore()
-        {
+        protected virtual void SaveChangesBefore() {
             foreach (var entry in ChangeTracker.Entries()) {
-                switch (entry.State)
-                {
+                switch (entry.State) {
                     case EntityState.Added:
                         InterceptAddedOperation(entry);
                         break;
@@ -325,8 +294,7 @@ namespace Alabo.Datas.UnitOfWorks
         /// <summary>
         ///     拦截添加操作
         /// </summary>
-        protected virtual void InterceptAddedOperation(EntityEntry entry)
-        {
+        protected virtual void InterceptAddedOperation(EntityEntry entry) {
             InitCreationAudited(entry);
             InitModificationAudited(entry);
         }
@@ -334,40 +302,35 @@ namespace Alabo.Datas.UnitOfWorks
         /// <summary>
         ///     初始化创建审计信息
         /// </summary>
-        private void InitCreationAudited(EntityEntry entry)
-        {
+        private void InitCreationAudited(EntityEntry entry) {
             CreationAuditedInitializer.Init(entry.Entity, GetSession());
         }
 
         /// <summary>
         ///     获取用户会话
         /// </summary>
-        protected virtual ISession GetSession()
-        {
+        protected virtual ISession GetSession() {
             return Session;
         }
 
         /// <summary>
         ///     初始化修改审计信息
         /// </summary>
-        private void InitModificationAudited(EntityEntry entry)
-        {
+        private void InitModificationAudited(EntityEntry entry) {
             ModificationAuditedInitializer.Init(entry.Entity, GetSession());
         }
 
         /// <summary>
         ///     拦截修改操作
         /// </summary>
-        protected virtual void InterceptModifiedOperation(EntityEntry entry)
-        {
+        protected virtual void InterceptModifiedOperation(EntityEntry entry) {
             InitModificationAudited(entry);
         }
 
         /// <summary>
         ///     拦截删除操作
         /// </summary>
-        protected virtual void InterceptDeletedOperation(EntityEntry entry)
-        {
+        protected virtual void InterceptDeletedOperation(EntityEntry entry) {
         }
 
         #endregion SaveChanges(保存更改)
@@ -378,8 +341,7 @@ namespace Alabo.Datas.UnitOfWorks
         ///     获取表名
         /// </summary>
         /// <param name="entity">实体类型</param>
-        public string GetTable(Type entity)
-        {
+        public string GetTable(Type entity) {
             if (entity == null) {
                 return null;
             }
@@ -392,8 +354,7 @@ namespace Alabo.Datas.UnitOfWorks
         ///     获取架构
         /// </summary>
         /// <param name="entity">实体类型</param>
-        public string GetSchema(Type entity)
-        {
+        public string GetSchema(Type entity) {
             if (entity == null) {
                 return null;
             }
@@ -407,8 +368,7 @@ namespace Alabo.Datas.UnitOfWorks
         /// </summary>
         /// <param name="entity">实体类型</param>
         /// <param name="property">属性名</param>
-        public string GetColumn(Type entity, string property)
-        {
+        public string GetColumn(Type entity, string property) {
             if (entity == null || string.IsNullOrWhiteSpace(property)) {
                 return null;
             }

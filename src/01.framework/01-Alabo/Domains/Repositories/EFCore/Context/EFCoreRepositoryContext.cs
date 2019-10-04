@@ -9,13 +9,13 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Alabo.Domains.Repositories.EFCore.Context
-{
+namespace Alabo.Domains.Repositories.EFCore.Context {
+
     /// <summary>
     ///     Class EntityFrameworkRepositoryContext.
     /// </summary>
-    public class EfCoreRepositoryContext : IRepositoryContext
-    {
+    public class EfCoreRepositoryContext : IRepositoryContext {
+
         /// <summary>
         ///     The context
         /// </summary>
@@ -33,8 +33,7 @@ namespace Alabo.Domains.Repositories.EFCore.Context
 
         public UnitOfWorkBase _unitOfWork;
 
-        public EfCoreRepositoryContext(UnitOfWorkBase unitOfWork)
-        {
+        public EfCoreRepositoryContext(UnitOfWorkBase unitOfWork) {
             ConnectionString = unitOfWork.ConnectionString;
             _unitOfWork = unitOfWork;
             _context = _unitOfWork;
@@ -57,24 +56,21 @@ namespace Alabo.Domains.Repositories.EFCore.Context
 
         public UnitOfWorkBase UnitOfWork => _unitOfWork;
 
-        public IQueryable<T> Query<T>() where T : class
-        {
+        public IQueryable<T> Query<T>() where T : class {
             return Set<T>();
         }
 
         /// <summary>
         ///     Saves the changes.
         /// </summary>
-        public int SaveChanges()
-        {
+        public int SaveChanges() {
             return _context.SaveChanges();
         }
 
         /// <summary>
         ///     Begins the transaction.
         /// </summary>
-        public void BeginTransaction()
-        {
+        public void BeginTransaction() {
             RaseExceptionIfConnectionIsNotInitialization();
             if (_transactionCount <= 0) {
                 _transaction = _context.Database.BeginTransaction();
@@ -87,8 +83,7 @@ namespace Alabo.Domains.Repositories.EFCore.Context
         ///     Begins the transaction.
         /// </summary>
         /// <param name="isolationLevel">The isolation level.</param>
-        public void BeginTransaction(IsolationLevel isolationLevel)
-        {
+        public void BeginTransaction(IsolationLevel isolationLevel) {
             RaseExceptionIfConnectionIsNotInitialization();
             if (_transactionCount <= 0) {
                 _transaction = _context.Database.BeginTransaction(isolationLevel);
@@ -100,8 +95,7 @@ namespace Alabo.Domains.Repositories.EFCore.Context
         /// <summary>
         ///     Commits the transaction.
         /// </summary>
-        public void CommitTransaction()
-        {
+        public void CommitTransaction() {
             RaseExceptionIfConnectionIsNotInitialization();
             if (_transactionCount > 0) {
                 _transactionCount--;
@@ -113,8 +107,7 @@ namespace Alabo.Domains.Repositories.EFCore.Context
         /// <summary>
         ///     Rollbacks the transaction.
         /// </summary>
-        public void RollbackTransaction()
-        {
+        public void RollbackTransaction() {
             RaseExceptionIfConnectionIsNotInitialization();
             if (_transactionCount > 0) {
                 _transactionCount--;
@@ -126,15 +119,11 @@ namespace Alabo.Domains.Repositories.EFCore.Context
         /// <summary>
         ///     Disposes the transaction.
         /// </summary>
-        public void DisposeTransaction()
-        {
+        public void DisposeTransaction() {
             RaseExceptionIfConnectionIsNotInitialization();
-            if (_transactionCount > 0)
-            {
+            if (_transactionCount > 0) {
                 _transactionCount--;
-            }
-            else
-            {
+            } else {
                 _transaction.Dispose();
                 _transaction = null;
             }
@@ -143,8 +132,7 @@ namespace Alabo.Domains.Repositories.EFCore.Context
         /// <summary>
         ///     通过SQl方式打开事物
         /// </summary>
-        public IRepositoryTransaction OpenTransaction()
-        {
+        public IRepositoryTransaction OpenTransaction() {
             RaseExceptionIfConnectionIsNotInitialization();
             var sqlServerRepositoryContext = new SqlServerRepositoryContext(ConnectionString);
             return sqlServerRepositoryContext.OpenTransaction();
@@ -154,37 +142,29 @@ namespace Alabo.Domains.Repositories.EFCore.Context
         ///     Transations the specified action.
         /// </summary>
         /// <param name="action">The action.</param>
-        public bool Transation(Action action)
-        {
+        public bool Transation(Action action) {
             var sqlConnection = new SqlConnection(ConnectionString);
             sqlConnection.Open();
             var sqlTransaction = sqlConnection.BeginTransaction();
-            var sqlCommand = new SqlCommand
-            {
+            var sqlCommand = new SqlCommand {
                 Connection = sqlConnection,
                 Transaction = sqlTransaction
             };
-            try
-            {
+            try {
                 action();
                 sqlTransaction.Commit();
                 return true;
-            }
-            catch (System.Exception ex)
-            {
+            } catch (System.Exception ex) {
                 Console.WriteLine(ex.Message);
                 sqlTransaction.Rollback();
                 return false;
-            }
-            finally
-            {
+            } finally {
                 sqlTransaction.Dispose();
                 sqlCommand.Dispose();
             }
         }
 
-        public void Close()
-        {
+        public void Close() {
         }
 
         /// <summary>
@@ -193,8 +173,7 @@ namespace Alabo.Domains.Repositories.EFCore.Context
         /// <param name="predicate">The predicate.</param>
         /// <param name="action">The action.</param>
         public void Update<T>(Expression<Func<T, bool>> predicate, Action<T> action)
-            where T : class
-        {
+            where T : class {
             var query = Query<T>();
             if (predicate != null) {
                 query = query.Where(predicate);
@@ -208,13 +187,11 @@ namespace Alabo.Domains.Repositories.EFCore.Context
             SaveChanges();
         }
 
-        public DbSet<T> Set<T>() where T : class
-        {
+        public DbSet<T> Set<T>() where T : class {
             return _context.Set<T>();
         }
 
-        private void RaseExceptionIfConnectionIsNotInitialization()
-        {
+        private void RaseExceptionIfConnectionIsNotInitialization() {
             if (_context == null) {
                 throw new RepositoryContextException("sqlite connection is not initialization.");
             }

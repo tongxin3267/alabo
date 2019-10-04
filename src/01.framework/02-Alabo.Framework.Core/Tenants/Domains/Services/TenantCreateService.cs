@@ -12,10 +12,9 @@ using Alabo.Tenants;
 using Alabo.Tenants.Domain.Services;
 using Alabo.Users.Services;
 
-namespace Alabo.Framework.Core.Tenants.Domains.Services
-{
-    public class TenantCreateService : ServiceBase, ITenantCreateService
-    {
+namespace Alabo.Framework.Core.Tenants.Domains.Services {
+
+    public class TenantCreateService : ServiceBase, ITenantCreateService {
         private readonly ITenantCreateRepository _tenantCreateRepository;
 
         public TenantCreateService(IUnitOfWork unitOfWork, ITenantCreateRepository tenantCreateRepository)

@@ -4,13 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Abstractions
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Abstractions {
+
     /// <summary>
     ///     Sql生成器
     /// </summary>
-    public interface ISqlBuilder : ICondition
-    {
+    public interface ISqlBuilder : ICondition {
+
         /// <summary>
         ///     清空并初始化
         /// </summary>

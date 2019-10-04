@@ -1,11 +1,11 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     [ClassProperty(Name = "显示位置")]
-    public enum ViewLocation
-    {
+    public enum ViewLocation {
+
         /// <summary>
         ///     PC端和移动端都显示
         /// </summary>

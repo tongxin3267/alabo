@@ -1,6 +1,5 @@
-﻿namespace Alabo.Framework.Core.WebUis.Services
-{
-    public interface IAutoListServcie
-    {
+﻿namespace Alabo.Framework.Core.WebUis.Services {
+
+    public interface IAutoListServcie {
     }
 }

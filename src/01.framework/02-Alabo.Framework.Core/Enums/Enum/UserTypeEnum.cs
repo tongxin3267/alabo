@@ -1,11 +1,11 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     [ClassProperty(Name = "用户身份类型")]
-    public enum UserTypeEnum
-    {
+    public enum UserTypeEnum {
+
         /// <summary>
         ///     会员
         ///     系统会员，每个用户类型必须是会员

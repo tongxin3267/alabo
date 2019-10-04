@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Abstractions
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Abstractions {
+
     /// <summary>
     ///     Select子句
     /// </summary>
-    public interface ISelectClause
-    {
+    public interface ISelectClause {
+
         /// <summary>
         ///     设置列名
         /// </summary>

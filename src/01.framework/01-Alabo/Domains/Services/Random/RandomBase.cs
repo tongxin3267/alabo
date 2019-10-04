@@ -2,19 +2,16 @@
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 
-namespace Alabo.Domains.Services.Random
-{
+namespace Alabo.Domains.Services.Random {
+
     public abstract class RandomBase<TEntity, TKey> : RandomAsyncBase<TEntity, TKey>, IRandom<TEntity, TKey>
-        where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
-        protected RandomBase(IUnitOfWork unitOfWork, IStore<TEntity, TKey> store) : base(unitOfWork, store)
-        {
+        where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
+        protected RandomBase(IUnitOfWork unitOfWork, IStore<TEntity, TKey> store) : base(unitOfWork, store) {
         }
 
-        public TEntity GetRandom(long id)
-        {
-            switch (id)
-            {
+        public TEntity GetRandom(long id) {
+            switch (id) {
                 case 1:
                     return FirstOrDefault();
 

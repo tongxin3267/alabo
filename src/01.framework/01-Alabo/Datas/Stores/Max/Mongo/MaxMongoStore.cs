@@ -5,22 +5,19 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Alabo.Datas.Stores.Max.Mongo
-{
+namespace Alabo.Datas.Stores.Max.Mongo {
+
     public abstract class MaxMongoStore<TEntity, TKey> : MaxAsyncMongoStore<TEntity, TKey>, IMaxStore<TEntity, TKey>
-        where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
-        protected MaxMongoStore(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
+        protected MaxMongoStore(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
-        public TEntity Max()
-        {
+        public TEntity Max() {
             return Collection.AsQueryable().Max();
         }
 
-        public TEntity Max(Expression<Func<TEntity, bool>> predicate)
-        {
+        public TEntity Max(Expression<Func<TEntity, bool>> predicate) {
             throw new NotImplementedException();
         }
     }

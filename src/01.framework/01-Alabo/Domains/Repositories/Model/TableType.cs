@@ -1,11 +1,11 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Domains.Repositories.Model
-{
+namespace Alabo.Domains.Repositories.Model {
+
     [ClassProperty(Name = "表类型")]
-    public enum TableType
-    {
+    public enum TableType {
+
         /// <summary>
         ///     Sql Server数据库
         /// </summary>

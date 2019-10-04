@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Alabo.UI.Design.AutoReports
-{
+namespace Alabo.UI.Design.AutoReports {
+
     /// <summary>
     ///     实体统计报表
     /// </summary>
-    public interface IEntityReport
-    {
+    public interface IEntityReport {
+
         /// <summary>
         ///     报表类型，实体统计报表
         /// </summary>

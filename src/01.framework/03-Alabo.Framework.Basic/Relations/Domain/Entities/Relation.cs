@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Datas.Ef.SqlServer;
+﻿using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
 using Alabo.Tenants;
@@ -7,15 +6,16 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Basic.Relations.Domain.Entities
-{
+namespace Alabo.Framework.Basic.Relations.Domain.Entities {
+
     /// <summary>
     ///     通用级联关系
     /// </summary>
     [ClassProperty(Name = "通用级联关系")]
-    public class Relation : EntityCommonWithSeo<Relation>
-    {
+    public class Relation : EntityCommonWithSeo<Relation> {
+
         /// <summary>
         ///     所属类型：比如城市表：City、商品分类ProductClass、文章标签ArticleTag
         /// </summary>
@@ -58,22 +58,19 @@ namespace Alabo.Framework.Basic.Relations.Domain.Entities
         public string Icon { get; set; }
     }
 
-    public class RelationTableMap : MsSqlAggregateRootMap<Relation>
-    {
-        protected override void MapTable(EntityTypeBuilder<Relation> builder)
-        {
+    public class RelationTableMap : MsSqlAggregateRootMap<Relation> {
+
+        protected override void MapTable(EntityTypeBuilder<Relation> builder) {
             builder.ToTable("Basic_Relation");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<Relation> builder)
-        {
+        protected override void MapProperties(EntityTypeBuilder<Relation> builder) {
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Property(e => e.Name).HasMaxLength(255);
             builder.Property(e => e.Value).HasColumnType("ntext");
-         
-            if (TenantContext.IsTenant)
-            {
+
+            if (TenantContext.IsTenant) {
                 // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
             }
         }

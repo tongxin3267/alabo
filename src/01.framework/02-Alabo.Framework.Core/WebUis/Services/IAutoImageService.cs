@@ -1,6 +1,5 @@
-﻿namespace Alabo.Framework.Core.WebUis.Services
-{
-    public interface IAutoImageService
-    {
+﻿namespace Alabo.Framework.Core.WebUis.Services {
+
+    public interface IAutoImageService {
     }
 }

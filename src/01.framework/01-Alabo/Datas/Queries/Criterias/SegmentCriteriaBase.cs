@@ -4,8 +4,8 @@ using Alabo.Linq.Expressions;
 using System;
 using System.Linq.Expressions;
 
-namespace Alabo.Datas.Queries.Criterias
-{
+namespace Alabo.Datas.Queries.Criterias {
+
     /// <summary>
     ///     范围过滤条件
     /// </summary>
@@ -14,8 +14,8 @@ namespace Alabo.Datas.Queries.Criterias
     /// <typeparam name="TValue">值类型</typeparam>
     public abstract class SegmentCriteriaBase<TEntity, TProperty, TValue> : ICriteria<TEntity>
         where TEntity : class
-        where TValue : struct
-    {
+        where TValue : struct {
+
         /// <summary>
         ///     包含边界
         /// </summary>
@@ -49,8 +49,7 @@ namespace Alabo.Datas.Queries.Criterias
         /// <param name="max">最大值</param>
         /// <param name="boundary">包含边界</param>
         protected SegmentCriteriaBase(Expression<Func<TEntity, TProperty>> propertyExpression, TValue? min, TValue? max,
-            Boundary boundary)
-        {
+            Boundary boundary) {
             _builder = new PredicateExpressionBuilder<TEntity>();
             _propertyExpression = propertyExpression;
             _min = min;
@@ -61,8 +60,7 @@ namespace Alabo.Datas.Queries.Criterias
         /// <summary>
         ///     获取查询条件
         /// </summary>
-        public Expression<Func<TEntity, bool>> GetPredicate()
-        {
+        public Expression<Func<TEntity, bool>> GetPredicate() {
             Adjust(_min, _max);
             CreateLeftExpression();
             CreateRightExpression();
@@ -72,8 +70,7 @@ namespace Alabo.Datas.Queries.Criterias
         /// <summary>
         ///     当最小值大于最大值时进行校正
         /// </summary>
-        private void Adjust(TValue? min, TValue? max)
-        {
+        private void Adjust(TValue? min, TValue? max) {
             if (IsMinGreaterMax(min, max) == false) {
                 return;
             }
@@ -92,8 +89,7 @@ namespace Alabo.Datas.Queries.Criterias
         /// <summary>
         ///     创建左操作数，即 t => t.Property >= Min
         /// </summary>
-        private void CreateLeftExpression()
-        {
+        private void CreateLeftExpression() {
             if (_min == null) {
                 return;
             }
@@ -104,10 +100,8 @@ namespace Alabo.Datas.Queries.Criterias
         /// <summary>
         ///     创建左操作符
         /// </summary>
-        protected virtual Operator CreateLeftOperator(Boundary? boundary)
-        {
-            switch (boundary)
-            {
+        protected virtual Operator CreateLeftOperator(Boundary? boundary) {
+            switch (boundary) {
                 case Boundary.Left:
                     return Operator.GreaterEqual;
 
@@ -122,16 +116,14 @@ namespace Alabo.Datas.Queries.Criterias
         /// <summary>
         ///     获取最小值
         /// </summary>
-        protected virtual TValue? GetMinValue()
-        {
+        protected virtual TValue? GetMinValue() {
             return _min;
         }
 
         /// <summary>
         ///     创建右操作数，即 t => t.Property &lt;= Max
         /// </summary>
-        private void CreateRightExpression()
-        {
+        private void CreateRightExpression() {
             if (_max == null) {
                 return;
             }
@@ -142,10 +134,8 @@ namespace Alabo.Datas.Queries.Criterias
         /// <summary>
         ///     创建右操作符
         /// </summary>
-        protected virtual Operator CreateRightOperator(Boundary? boundary)
-        {
-            switch (boundary)
-            {
+        protected virtual Operator CreateRightOperator(Boundary? boundary) {
+            switch (boundary) {
                 case Boundary.Right:
                     return Operator.LessEqual;
 
@@ -160,8 +150,7 @@ namespace Alabo.Datas.Queries.Criterias
         /// <summary>
         ///     获取最大值
         /// </summary>
-        protected virtual TValue? GetMaxValue()
-        {
+        protected virtual TValue? GetMaxValue() {
             return _max;
         }
     }

@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     频道枚举
     /// </summary>
     [ClassProperty(Name = "频道枚举")]
-    public enum ChannelType
-    {
+    public enum ChannelType {
+
         [LabelCssClass(BadgeColorCalss.Success)]
         [Display(Name = "文章")]
         [Field(IsDefault = true, GuidId = "E02220001110000000000000", Icon = "fa fa-copy")]

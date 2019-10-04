@@ -2,14 +2,14 @@
 
 /// <summary>
 /// </summary>
-namespace Alabo.Apps
-{
+namespace Alabo.Apps {
+
     /// <summary>
     ///     Enum AppType
     /// </summary>
     [ClassProperty(Name = "APPType")]
-    public enum AppType
-    {
+    public enum AppType {
+
         /// <summary>
         ///     The dynamic
         /// </summary>

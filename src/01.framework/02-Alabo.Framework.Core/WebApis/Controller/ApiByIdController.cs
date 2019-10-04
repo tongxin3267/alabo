@@ -6,11 +6,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Framework.Core.WebApis.Controller
-{
+namespace Alabo.Framework.Core.WebApis.Controller {
+
     public abstract class ApiByIdController<TEntity, TKey> : ApiBaseController
-        where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+        where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         #region 根据Id获取单个实体
 
         /// <summary>
@@ -19,8 +19,7 @@ namespace Alabo.Framework.Core.WebApis.Controller
         /// <param name="id">标识</param>
         [HttpGet]
         [Display(Description = "根据Id获取单个实例")]
-        public virtual ApiResult<TEntity> ViewById(string id)
-        {
+        public virtual ApiResult<TEntity> ViewById(string id) {
             if (BaseService == null) {
                 return ApiResult.Failure<TEntity>("请在控制器中定义BaseService");
             }
@@ -39,8 +38,7 @@ namespace Alabo.Framework.Core.WebApis.Controller
         /// <param name="id">标识</param>
         [HttpGet]
         [Display(Description = "根据Id获取单个实例")]
-        public ApiResult<TEntity> QueryById(string id)
-        {
+        public ApiResult<TEntity> QueryById(string id) {
             if (BaseService == null) {
                 return ApiResult.Failure<TEntity>("请在控制器中定义BaseService");
             }
@@ -67,8 +65,7 @@ namespace Alabo.Framework.Core.WebApis.Controller
         /// <param name="id">标识</param>
         [HttpGet]
         [Display(Description = "根据Id获取单个实例字典集合")]
-        public ApiResult<Dictionary<string, string>> QueryDic(string id)
-        {
+        public ApiResult<Dictionary<string, string>> QueryDic(string id) {
             if (BaseService == null) {
                 return ApiResult.Failure<Dictionary<string, string>>("请在控制器中定义BaseService");
             }

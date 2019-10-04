@@ -27,13 +27,13 @@ using Alabo.Domains.Services.Tree;
 using Alabo.Domains.Services.Update;
 using Alabo.Domains.Services.View;
 
-namespace Alabo.Domains.Services
-{
+namespace Alabo.Domains.Services {
+
     /// <summary>
     ///     应用服务
     /// </summary>
-    public interface IService : IScopeDependency
-    {
+    public interface IService : IScopeDependency {
+
         /// <summary>
         ///     缓存
         /// </summary>
@@ -77,8 +77,8 @@ namespace Alabo.Domains.Services
         IBulkAsync<TEntity, TKey>, IBulk<TEntity, TKey>,
         IAddAsync<TEntity, TKey>, IAdd<TEntity, TKey>,
         IAttach<TEntity, TKey>
-        where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+        where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         /// <summary>
         ///     日志记录
         /// </summary>

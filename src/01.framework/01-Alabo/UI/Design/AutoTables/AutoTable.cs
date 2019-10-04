@@ -1,13 +1,13 @@
 ﻿using Alabo.Domains.Entities;
 using System.Collections.Generic;
 
-namespace Alabo.UI.Design.AutoTables
-{
+namespace Alabo.UI.Design.AutoTables {
+
     /// <summary>
     ///     自动表格
     /// </summary>
-    public class AutoTable
-    {
+    public class AutoTable {
+
         /// <summary>
         ///     ApiUrl
         /// </summary>
@@ -47,8 +47,8 @@ namespace Alabo.UI.Design.AutoTables
         public List<TableAction> TableActions { get; set; }
     }
 
-    public class TableColumn
-    {
+    public class TableColumn {
+
         /// <summary>
         ///     属性值
         /// </summary>
@@ -75,8 +75,8 @@ namespace Alabo.UI.Design.AutoTables
         public string Options { get; set; }
     }
 
-    public class SearchOptions
-    {
+    public class SearchOptions {
+
         /// <summary>
         ///     基本搜索表单
         /// </summary>
@@ -88,8 +88,8 @@ namespace Alabo.UI.Design.AutoTables
         public List<SearchOptionForm> AdvancedForms { get; set; }
     }
 
-    public class SearchOptionForm
-    {
+    public class SearchOptionForm {
+
         /// <summary>
         ///     属性值
         /// </summary>

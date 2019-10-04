@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.UI.Design.AutoReports.Enums
-{
+namespace Alabo.UI.Design.AutoReports.Enums {
+
     /// <summary>
     ///     统计方式
     /// </summary>
-    public enum ReportStyle
-    {
+    public enum ReportStyle {
+
         /// <summary>
         ///     数量统计，比如会员量
         ///     如果是数量统计的时候，直接统计Id

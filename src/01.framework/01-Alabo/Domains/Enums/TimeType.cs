@@ -1,16 +1,16 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Domains.Enums
-{
+namespace Alabo.Domains.Enums {
+
     /// <summary>
     ///     分润分期方式 目前无效 待用
     ///     http://www.w3school.com.cn/sql/func_datepart.asp
     ///     https://www.cnblogs.com/hyd1213126/p/5828464.html
     /// </summary>
     [ClassProperty(Name = "分润分期方式")]
-    public enum TimeType
-    {
+    public enum TimeType {
+
         /// <summary>
         ///     小时
         /// </summary>

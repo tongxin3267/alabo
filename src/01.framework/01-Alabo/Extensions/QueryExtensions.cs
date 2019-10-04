@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Alabo.Extensions
-{
-    public static class QueryExtensions
-    {
+namespace Alabo.Extensions {
+
+    public static class QueryExtensions {
+
         /// <summary>
         ///     动态排序
         /// </summary>
@@ -14,8 +14,7 @@ namespace Alabo.Extensions
         /// <param name="propertyName">属性名</param>
         /// <param name="ascending">是否升序</param>
         public static IQueryable<T> OrderBy<T>(this IQueryable<T> source, string propertyName, bool ascending)
-            where T : class
-        {
+            where T : class {
             if (string.IsNullOrEmpty(propertyName)) {
                 return source;
             }
@@ -43,8 +42,7 @@ namespace Alabo.Extensions
         /// <param name="source">源对象</param>
         /// <param name="pageIndex">页码</param>
         /// <param name="pageSize">分页大小</param>
-        public static IQueryable<T> Page<T>(this IQueryable<T> source, int pageIndex = 1, int pageSize = 10)
-        {
+        public static IQueryable<T> Page<T>(this IQueryable<T> source, int pageIndex = 1, int pageSize = 10) {
             return source.Skip((pageIndex - 1) * pageSize).Take(pageSize);
         }
     }

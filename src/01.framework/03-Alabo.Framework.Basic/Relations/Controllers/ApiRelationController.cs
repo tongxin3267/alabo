@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Extensions;
@@ -12,16 +8,19 @@ using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Alabo.Framework.Core.WebUis.Models.Links;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Framework.Basic.Relations.Controllers
-{
+namespace Alabo.Framework.Basic.Relations.Controllers {
+
     [ApiExceptionFilter]
     [Route("Api/Relation/[action]")]
-    public class ApiRelationController : ApiBaseController<Relation, long>
-    {
-        public ApiRelationController()
-        {
+    public class ApiRelationController : ApiBaseController<Relation, long> {
+
+        public ApiRelationController() {
             BaseService = Resolve<IRelationService>();
         }
 
@@ -31,8 +30,7 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public ApiResult<Relation> GetView([FromQuery] long id)
-        {
+        public ApiResult<Relation> GetView([FromQuery] long id) {
             var result = Resolve<IRelationService>().GetSingle(id);
             return ApiResult.Success(result);
         }
@@ -41,8 +39,7 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         ///     获取所有的分类链接
         /// </summary>
         /// <returns></returns>
-        public ApiResult<List<Link>> GetClassLinks()
-        {
+        public ApiResult<List<Link>> GetClassLinks() {
             var result = Resolve<IRelationService>().GetClassLinks();
             return ApiResult.Success(result);
         }
@@ -51,8 +48,7 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         ///     获取所有的标签链接
         /// </summary>
         /// <returns></returns>
-        public ApiResult<List<Link>> GetTagLinks()
-        {
+        public ApiResult<List<Link>> GetTagLinks() {
             var result = Resolve<IRelationService>().GetTagLinks();
             return ApiResult.Success(result);
         }
@@ -62,8 +58,7 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public ApiResult<List<Link>> GetLinks([FromQuery] string type)
-        {
+        public ApiResult<List<Link>> GetLinks([FromQuery] string type) {
             //doto 2019年9月22日
             //var result = Resolve<IAutoConfigService>().GetAllLinks();
             //return ApiResult.Success(result);
@@ -76,8 +71,7 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
-        public ApiResult Save([FromBody] Relation model)
-        {
+        public ApiResult Save([FromBody] Relation model) {
             //check
             if (model.Name.IsNullOrEmpty()) {
                 return ApiResult.Failure("保存失败：名称不能为空");
@@ -106,18 +100,15 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         /// <param name="list"></param>
         /// <returns></returns>
         [HttpPost]
-        public ApiResult SaveOrUpdateList([FromBody] List<Relation> list)
-        {
-            try
-            {
+        public ApiResult SaveOrUpdateList([FromBody] List<Relation> list) {
+            try {
                 var confirm = list.GroupBy(s => s.Name).Select(s => s.First());
                 if (confirm.Count() < list.Count()) {
                     return ApiResult.Failure("保存失败：存在重复标签");
                 }
 
                 var i = 0;
-                foreach (var model in list)
-                {
+                foreach (var model in list) {
                     if (model.Name.IsNullOrEmpty()) {
                         return ApiResult.Failure("保存失败：名称不能为空");
                     }
@@ -139,9 +130,7 @@ namespace Alabo.Framework.Basic.Relations.Controllers
                 }
 
                 return ApiResult.Success("保存成功!");
-            }
-            catch (Exception exc)
-            {
+            } catch (Exception exc) {
                 return ApiResult.Failure($"保存失败: {exc.Message}");
             }
         }
@@ -152,8 +141,7 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete]
-        public ApiResult Delete([FromQuery] long id)
-        {
+        public ApiResult Delete([FromQuery] long id) {
             //get
             var relation = Resolve<IRelationService>().GetSingle(a => a.Id == id);
             if (relation == null) {
@@ -184,8 +172,7 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         ///     获取所有的级联分类与标签
         /// </summary>
         [HttpGet]
-        public ApiResult GetAllType()
-        {
+        public ApiResult GetAllType() {
             var result = Resolve<IRelationService>().GetAllTypes();
             return ApiResult.Success(result);
         }
@@ -196,8 +183,7 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         /// <param name="type"></param>
         [HttpGet]
         [Display(Description = "分类")]
-        public ApiResult GetClass(string type, long userId)
-        {
+        public ApiResult GetClass(string type, long userId) {
             if (type.IsNullOrEmpty()) {
                 return ApiResult.Failure<object>("类型名称不能为空");
             }
@@ -205,7 +191,7 @@ namespace Alabo.Framework.Basic.Relations.Controllers
             var attrNameForTitle = GetAttrValueByName(type, "Name");
             var result = Resolve<IRelationService>().GetClass(type, userId).OrderBy(s => s.SortOrder).ToList();
 
-            var rsObj = new {Title = attrNameForTitle, Datas = result};
+            var rsObj = new { Title = attrNameForTitle, Datas = result };
             return ApiResult.Success(rsObj);
         }
 
@@ -215,8 +201,7 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         /// <param name="type"></param>
         [Display(Description = "父级分类")]
         [HttpGet]
-        public ApiResult<List<RelationApiOutput>> GetFatherClass(string type)
-        {
+        public ApiResult<List<RelationApiOutput>> GetFatherClass(string type) {
             if (type.IsNullOrEmpty()) {
                 return ApiResult.Failure<List<RelationApiOutput>>("类型名称不能为空");
             }
@@ -230,8 +215,7 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         /// </summary>
         /// <param name="type"></param>
         [HttpGet]
-        public ApiResult<List<KeyValue>> GetFatherKeyValues(string type)
-        {
+        public ApiResult<List<KeyValue>> GetFatherKeyValues(string type) {
             if (type.IsNullOrEmpty()) {
                 return ApiResult.Failure<List<KeyValue>>("类型名称不能为空");
             }
@@ -245,8 +229,7 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         /// </summary>
         /// <param name="type"></param>
         [HttpGet]
-        public ApiResult GetTag(string type)
-        {
+        public ApiResult GetTag(string type) {
             if (type.IsNullOrEmpty()) {
                 return ApiResult.Failure("类型名称不能为空");
             }
@@ -254,21 +237,17 @@ namespace Alabo.Framework.Basic.Relations.Controllers
             var attrNameForTitle = GetAttrValueByName(type, "Name");
             var result = Resolve<IRelationService>().GetClass(type).ToList();
 
-            var rsObj = new {Title = attrNameForTitle, Datas = result};
+            var rsObj = new { Title = attrNameForTitle, Datas = result };
             return ApiResult.Success(rsObj);
         }
 
-        private object GetAttrValueByName(string type, string name)
-        {
+        private object GetAttrValueByName(string type, string name) {
             var rsObj = new object();
-            try
-            {
+            try {
                 var typeInstance = type.GetTypeByName();
                 rsObj = typeInstance.CustomAttributes.FirstOrDefault().NamedArguments.Where(x => x.MemberName == name)
                     .FirstOrDefault().TypedValue.Value;
-            }
-            catch (Exception)
-            {
+            } catch (Exception) {
                 //
             }
 
@@ -280,8 +259,7 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         /// </summary>
         /// <param name="type"></param>
         [HttpGet]
-        public ApiResult<List<KeyValue>> GetKeyValues(string type)
-        {
+        public ApiResult<List<KeyValue>> GetKeyValues(string type) {
             if (type.IsNullOrEmpty()) {
                 return ApiResult.Failure<List<KeyValue>>("类型名称不能为空");
             }
@@ -295,8 +273,7 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         /// </summary>
         /// <param name="type"></param>
         [HttpGet]
-        public ApiResult<List<KeyValue>> GetClassTree(string type)
-        {
+        public ApiResult<List<KeyValue>> GetClassTree(string type) {
             if (type.IsNullOrEmpty()) {
                 return ApiResult.Failure<List<KeyValue>>("类型名称不能为空");
             }
@@ -311,15 +288,13 @@ namespace Alabo.Framework.Basic.Relations.Controllers
         /// </summary>
         /// <param name="type"></param>
         [HttpGet]
-        public ApiResult<List<KeyValue>> GetTags(string type)
-        {
+        public ApiResult<List<KeyValue>> GetTags(string type) {
             if (type.IsNullOrEmpty()) {
                 return ApiResult.Failure<List<KeyValue>>("类型名称不能为空");
             }
 
             var result = Resolve<IRelationService>().GetKeyValues(type).ToList();
-            result.ForEach(u =>
-            {
+            result.ForEach(u => {
                 u.Key = u.Value;
                 u.Value = u.Name;
             });

@@ -1,10 +1,10 @@
-﻿namespace Alabo.Validations.Validators
-{
+﻿namespace Alabo.Validations.Validators {
+
     /// <summary>
     ///     验证正则
     /// </summary>
-    public static class ValidatePattern
-    {
+    public static class ValidatePattern {
+
         /// <summary>
         ///     手机号验证正则表达式
         /// </summary>

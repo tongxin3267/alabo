@@ -8,18 +8,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Alabo.Datas.Stores.Page.EfCore
-{
+namespace Alabo.Datas.Stores.Page.EfCore {
+
     public abstract class GetPageEfCoreStore<TEntity, TKey> : GetPageAsyncEfCoreStore<TEntity, TKey>,
         IGetPageStore<TEntity, TKey>
-        where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
-        protected GetPageEfCoreStore(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
+        protected GetPageEfCoreStore(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
-        public PagedList<TEntity> GetPagedList(IPageQuery<TEntity> queryCriteria)
-        {
+        public PagedList<TEntity> GetPagedList(IPageQuery<TEntity> queryCriteria) {
             var query = UnitOfWork.Set<TEntity>();
             if (queryCriteria == null) {
                 return PagedList<TEntity>.Create(query.ToList(), query.Count(), query.Count(), 1);
@@ -32,8 +30,7 @@ namespace Alabo.Datas.Stores.Page.EfCore
             return PagedList<TEntity>.Create(resultList, count, queryCriteria.PageSize, queryCriteria.PageIndex);
         }
 
-        public PagedList<TEntity> GetPagedList(Expression<Func<TEntity, bool>> predicate, int pageSize, int pageIndex)
-        {
+        public PagedList<TEntity> GetPagedList(Expression<Func<TEntity, bool>> predicate, int pageSize, int pageIndex) {
             if (pageSize < 1) {
                 pageSize = 1;
             }
@@ -49,23 +46,20 @@ namespace Alabo.Datas.Stores.Page.EfCore
             return PagedList<TEntity>.Create(source, Count(predicate), pageSize, pageIndex);
         }
 
-        public long PageCount(int pageSize, Expression<Func<TEntity, bool>> predicate)
-        {
+        public long PageCount(int pageSize, Expression<Func<TEntity, bool>> predicate) {
             var count = Count(predicate);
             var pageCount = count / pageSize + 1;
             return pageCount;
         }
 
-        public long PageCount(int pageSize)
-        {
+        public long PageCount(int pageSize) {
             var count = Count();
             var pageCount = count / pageSize + 1;
             return pageCount;
         }
 
         public IEnumerable<TEntity> GetListByPage(Expression<Func<TEntity, bool>> predicate, int pageSize,
-            int pageIndex)
-        {
+            int pageIndex) {
             if (pageSize < 1) {
                 pageSize = 1;
             }
@@ -83,8 +77,7 @@ namespace Alabo.Datas.Stores.Page.EfCore
         }
 
         public IEnumerable<TEntity> GetListByPageDesc(Expression<Func<TEntity, bool>> predicate, int pageSize,
-            int pageIndex)
-        {
+            int pageIndex) {
             if (pageSize < 1) {
                 pageSize = 1;
             }

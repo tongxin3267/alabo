@@ -1,12 +1,12 @@
 ﻿using IdentityModel;
 
-namespace Alabo.Security.Claims
-{
+namespace Alabo.Security.Claims {
+
     /// <summary>
     ///     声明类型
     /// </summary>
-    public static class IdentityClaimTypes
-    {
+    public static class IdentityClaimTypes {
+
         /// <summary>
         ///     电子邮件
         /// </summary>

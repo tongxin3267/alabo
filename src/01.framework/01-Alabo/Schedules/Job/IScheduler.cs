@@ -1,12 +1,12 @@
 ﻿using System.Threading.Tasks;
 
-namespace Alabo.Schedules.Job
-{
+namespace Alabo.Schedules.Job {
+
     /// <summary>
     ///     调度器
     /// </summary>
-    public interface IScheduler
-    {
+    public interface IScheduler {
+
         /// <summary>
         ///     启动
         /// </summary>

@@ -3,13 +3,13 @@ using System;
 using System.Data;
 using System.Linq;
 
-namespace Alabo.Domains.Repositories.EFCore
-{
+namespace Alabo.Domains.Repositories.EFCore {
+
     /// <summary>
     ///     Interface IRepositoryContext
     /// </summary>
-    public interface IRepositoryContext
-    {
+    public interface IRepositoryContext {
+
         /// <summary>
         ///     工作单元
         /// </summary>

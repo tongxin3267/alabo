@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.UI.Design.AutoReports
-{
+namespace Alabo.UI.Design.AutoReports {
+
     /// <summary>
     ///     前台报表展示格式
     ///     三种展示方式
@@ -9,8 +9,8 @@ namespace Alabo.UI.Design.AutoReports
     ///     2. 只有图表
     ///     3. 图表和数据表
     /// </summary>
-    public class AutoReport
-    {
+    public class AutoReport {
+
         /// <summary>
         ///     日期格式
         ///     格式：2019-6-26
@@ -50,8 +50,7 @@ namespace Alabo.UI.Design.AutoReports
         public AutoReportChart AutoReportChart { get; set; }
     }
 
-    public class AutoReportItem
-    {
+    public class AutoReportItem {
         public string Name { get; set; }
         public string TempName { get; set; }
         public string Value { get; set; }

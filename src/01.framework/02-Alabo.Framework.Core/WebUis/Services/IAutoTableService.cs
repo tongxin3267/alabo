@@ -4,10 +4,10 @@ using Alabo.UI;
 using Alabo.UI.Design.AutoTables;
 using System;
 
-namespace Alabo.Framework.Core.WebUis.Services
-{
-    public interface IAutoTableService : IService
-    {
+namespace Alabo.Framework.Core.WebUis.Services {
+
+    public interface IAutoTableService : IService {
+
         /// <summary>
         ///     表格数据
         /// </summary>

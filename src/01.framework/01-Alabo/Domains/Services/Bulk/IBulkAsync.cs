@@ -6,13 +6,13 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Alabo.Domains.Services.Bulk
-{
+namespace Alabo.Domains.Services.Bulk {
+
     /// <summary>
     ///     批量保存操作
     /// </summary>
-    public interface IBulkAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+    public interface IBulkAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         /// <summary>
         ///     批量保存
         /// </summary>

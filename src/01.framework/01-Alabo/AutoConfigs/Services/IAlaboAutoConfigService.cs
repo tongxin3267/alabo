@@ -3,10 +3,10 @@ using Alabo.Domains.Services;
 using System;
 using System.Collections.Generic;
 
-namespace Alabo.AutoConfigs.Services
-{
-    public interface IAlaboAutoConfigService : IService<AutoConfig, long>
-    {
+namespace Alabo.AutoConfigs.Services {
+
+    public interface IAlaboAutoConfigService : IService<AutoConfig, long> {
+
         /// <summary>
         ///     获取单个数据
         /// </summary>

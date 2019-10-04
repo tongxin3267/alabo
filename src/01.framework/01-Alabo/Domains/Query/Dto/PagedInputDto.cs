@@ -2,13 +2,13 @@
 using MongoDB.Bson;
 using Newtonsoft.Json;
 
-namespace Alabo.Domains.Query.Dto
-{
+namespace Alabo.Domains.Query.Dto {
+
     /// <summary>
     ///     Class PagedInputDto.
     /// </summary>
-    public class PagedInputDto : EntityDto
-    {
+    public class PagedInputDto : EntityDto {
+
         /// <summary>
         ///     Gets or sets the size of the 分页.
         /// </summary>
@@ -43,8 +43,8 @@ namespace Alabo.Domains.Query.Dto
     /// <summary>
     ///     Class PagedInputDto.
     /// </summary>
-    public class PagedInputDto<T> : EntityDto<T>
-    {
+    public class PagedInputDto<T> : EntityDto<T> {
+
         /// <summary>
         ///     Gets or sets the size of the 分页.
         /// </summary>
@@ -59,8 +59,8 @@ namespace Alabo.Domains.Query.Dto
     /// <summary>
     ///     基础表单数据服务
     /// </summary>
-    public class FormInputDto : EntityDto
-    {
+    public class FormInputDto : EntityDto {
+
         /// <summary>
         ///     Gets or sets the 服务.
         /// </summary>

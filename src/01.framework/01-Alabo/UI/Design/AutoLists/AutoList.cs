@@ -3,10 +3,9 @@ using Alabo.UI.Design.AutoTables;
 using Alabo.Web.Mvc.Attributes;
 using System.Collections.Generic;
 
-namespace Alabo.UI.Design.AutoLists
-{
-    public class AutoList
-    {
+namespace Alabo.UI.Design.AutoLists {
+
+    public class AutoList {
         public string Key { get; set; }
 
         public string Name { get; set; }
@@ -36,8 +35,8 @@ namespace Alabo.UI.Design.AutoLists
     ///     对应移动端zk-list功能
     /// </summary>
     [ClassProperty(Name = "zk-list对象")]
-    public class AutoListItem
-    {
+    public class AutoListItem {
+
         /// <summary>
         ///     主键ID
         /// </summary>

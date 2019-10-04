@@ -1,10 +1,10 @@
-﻿namespace Alabo.Domains.Trees
-{
+﻿namespace Alabo.Domains.Trees {
+
     /// <summary>
     ///     树型节点启用
     /// </summary>
-    public interface IEnabled
-    {
+    public interface IEnabled {
+
         /// <summary>
         ///     启用
         /// </summary>

@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Users.Enum
-{
+namespace Alabo.Users.Enum {
+
     /// <summary>
     ///     Enum LastLoginIp
     /// </summary>
     [ClassProperty(Name = "认证状态")]
-    public enum IdentityStatus
-    {
+    public enum IdentityStatus {
+
         /// <summary>
         ///     未认证
         /// </summary>

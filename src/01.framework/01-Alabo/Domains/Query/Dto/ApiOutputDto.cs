@@ -1,9 +1,8 @@
-﻿namespace Alabo.Domains.Query.Dto
-{
+﻿namespace Alabo.Domains.Query.Dto {
+
     /// <summary>
     ///     Api接口类
     /// </summary>
-    public class ApiOutputDto
-    {
+    public class ApiOutputDto {
     }
 }

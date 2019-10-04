@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.Tables.Dtos
-{
+namespace Alabo.Tables.Dtos {
+
     /// <summary>
     ///     v2响应数据
     /// </summary>
-    public class SmsEntity
-    {
+    public class SmsEntity {
+
         /// <summary>
         ///     结果代码
         /// </summary>
@@ -36,8 +36,8 @@ namespace Alabo.Tables.Dtos
     /// <summary>
     ///     返回的短信响应实体
     /// </summary>
-    public class Smses
-    {
+    public class Smses {
+
         /// <summary>
         ///     手机号
         /// </summary>

@@ -12,10 +12,9 @@ using System;
 using System.Linq;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Framework.Core.WebApis.Controller
-{
-    public abstract class ApiBaseController : ApiExtensionController
-    {
+namespace Alabo.Framework.Core.WebApis.Controller {
+
+    public abstract class ApiBaseController : ApiExtensionController {
         protected AccessToken Token;
 
         /// <summary>
@@ -23,8 +22,7 @@ namespace Alabo.Framework.Core.WebApis.Controller
         /// </summary>
         /// <param name="context"></param>
         [NonAction]
-        public override void OnActionExecuting(ActionExecutingContext context)
-        {
+        public override void OnActionExecuting(ActionExecutingContext context) {
             // api接口可以匿名访问，不需要任何安全措施
             if (context.Filters.OfType<IAllowAnonymousFilter>().Any()) {
                 return;
@@ -49,22 +47,19 @@ namespace Alabo.Framework.Core.WebApis.Controller
         /// <param name="context"></param>
         /// <returns></returns>
         [NonAction]
-        protected ApiResult<AccessToken> UserAccessToken(ActionExecutingContext context)
-        {
+        protected ApiResult<AccessToken> UserAccessToken(ActionExecutingContext context) {
             var apiAuthAttribute = context.Filters.OfType<ApiAuthAttribute>().FirstOrDefault();
             if (apiAuthAttribute == null && AutoModel.Filter == FilterType.All) {
                 return ApiResult.Success(new AccessToken());
             }
 
             if (apiAuthAttribute == null) {
-                apiAuthAttribute = new ApiAuthAttribute
-                {
+                apiAuthAttribute = new ApiAuthAttribute {
                     Filter = FilterType.All
                 };
             }
             // 其他情况需要用户登录
-            if (apiAuthAttribute.Filter != FilterType.All || AutoModel.Filter != FilterType.All)
-            {
+            if (apiAuthAttribute.Filter != FilterType.All || AutoModel.Filter != FilterType.All) {
                 //if (User == null)
                 //{
                 //    return ApiResult.Failure<AccessToken>("请在http头中传入userId");
@@ -101,8 +96,7 @@ namespace Alabo.Framework.Core.WebApis.Controller
         /// </summary>
         /// <returns></returns>
         [NonAction]
-        protected ApiResult<AccessToken> GetAccessToken()
-        {
+        protected ApiResult<AccessToken> GetAccessToken() {
             var apiSecurityConfig = Resolve<IAlaboAutoConfigService>().GetValue<ApiSecurityConfig>();
             //如果是开发模式，这不验证安全
             if (!apiSecurityConfig.IsOpen) {

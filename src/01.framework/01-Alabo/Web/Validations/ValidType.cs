@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Web.Validations
-{
+namespace Alabo.Web.Validations {
+
     /// <summary>
     ///     RemoteAttribute 验证特性名称
     /// </summary>
     [ClassProperty(Name = "验证类型")]
-    public enum ValidType
-    {
+    public enum ValidType {
+
         /// <summary>
         ///     邮箱验证
         /// </summary>

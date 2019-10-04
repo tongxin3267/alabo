@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.Events.Handlers
-{
+namespace Alabo.Events.Handlers {
+
     /// <summary>
     ///     事件处理器服务
     /// </summary>
-    public interface IEventHandlerManager
-    {
+    public interface IEventHandlerManager {
+
         /// <summary>
         ///     获取事件处理器列表
         /// </summary>

@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace Alabo.UI.Design.AutoArticles
-{
-    public class AutoArticle
-    {
+namespace Alabo.UI.Design.AutoArticles {
+
+    public class AutoArticle {
+
         /// <summary>
         ///     文章内容
         /// </summary>
@@ -15,8 +15,8 @@ namespace Alabo.UI.Design.AutoArticles
         public AutoSetting Setting { get; set; }
     }
 
-    public class AutoArticleItem
-    {
+    public class AutoArticleItem {
+
         /// <summary>
         ///     图片
         /// </summary>

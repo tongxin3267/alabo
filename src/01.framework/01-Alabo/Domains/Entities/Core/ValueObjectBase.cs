@@ -3,36 +3,33 @@ using System.Linq;
 using System.Reflection;
 using Convert = Alabo.Helpers.Convert;
 
-namespace Alabo.Domains.Entities.Core
-{
+namespace Alabo.Domains.Entities.Core {
+
     /// <summary>
     ///     值对象
     /// </summary>
     /// <typeparam name="TValueObject">值对象类型</typeparam>
     public abstract class ValueObjectBase<TValueObject> : DomainBase<TValueObject>, IEquatable<TValueObject>
-        where TValueObject : ValueObjectBase<TValueObject>
-    {
+        where TValueObject : ValueObjectBase<TValueObject> {
+
         /// <summary>
         ///     相等性比较
         /// </summary>
-        public bool Equals(TValueObject other)
-        {
+        public bool Equals(TValueObject other) {
             return this == other;
         }
 
         /// <summary>
         ///     相等性比较
         /// </summary>
-        public override bool Equals(object other)
-        {
+        public override bool Equals(object other) {
             return Equals(other as TValueObject);
         }
 
         /// <summary>
         ///     相等性比较
         /// </summary>
-        public static bool operator ==(ValueObjectBase<TValueObject> left, ValueObjectBase<TValueObject> right)
-        {
+        public static bool operator ==(ValueObjectBase<TValueObject> left, ValueObjectBase<TValueObject> right) {
             if ((object)left == null && (object)right == null) {
                 return true;
             }
@@ -48,16 +45,14 @@ namespace Alabo.Domains.Entities.Core
         /// <summary>
         ///     不相等比较
         /// </summary>
-        public static bool operator !=(ValueObjectBase<TValueObject> left, ValueObjectBase<TValueObject> right)
-        {
+        public static bool operator !=(ValueObjectBase<TValueObject> left, ValueObjectBase<TValueObject> right) {
             return !(left == right);
         }
 
         /// <summary>
         ///     获取哈希
         /// </summary>
-        public override int GetHashCode()
-        {
+        public override int GetHashCode() {
             var properties = GetType().GetTypeInfo().GetProperties();
             return properties.Select(property => property.GetValue(this))
                 .Where(value => value != null)
@@ -67,8 +62,7 @@ namespace Alabo.Domains.Entities.Core
         /// <summary>
         ///     克隆副本
         /// </summary>
-        public virtual TValueObject Clone()
-        {
+        public virtual TValueObject Clone() {
             return Convert.To<TValueObject>(MemberwiseClone());
         }
     }

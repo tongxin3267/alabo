@@ -1,9 +1,8 @@
 ﻿using System.Text;
 
-namespace Alabo.Helpers
-{
-    public class UserNameHelper
-    {
+namespace Alabo.Helpers {
+
+    public class UserNameHelper {
         /// <summary>
         ///     在指定的字符串列表CnStr中检索符合拼音索引字符串
         /// </summary>
@@ -16,27 +15,21 @@ namespace Alabo.Helpers
         /// <returns>单个大写字母</returns>
 
         //
-        public string ConvertLetters(string chineseStr)
-        {
-            try
-            {
+        public string ConvertLetters(string chineseStr) {
+            try {
                 var buffer = new char[chineseStr.Length];
                 for (var i = 0; i < chineseStr.Length; i++) {
                     buffer[i] = ConvertChar(chineseStr[i]);
                 }
 
                 return new string(buffer).Replace(" ", string.Empty);
-            }
-            catch
-            {
+            } catch {
                 return string.Empty;
             }
         }
 
-        public char ConvertChar(char chinese)
-        {
-            try
-            {
+        public char ConvertChar(char chinese) {
+            try {
                 var gb2312 = Encoding.GetEncoding("GB2312");
                 var unicode = Encoding.Unicode;
                 var unicodeBytes = unicode.GetBytes(new[] { chinese });
@@ -141,15 +134,12 @@ namespace Alabo.Helpers
                 }
 
                 return ' ';
-            }
-            catch
-            {
+            } catch {
                 return ' ';
             }
         }
 
-        private bool In(int lp, int hp, int value)
-        {
+        private bool In(int lp, int hp, int value) {
             return value <= hp && value >= lp;
         }
     }

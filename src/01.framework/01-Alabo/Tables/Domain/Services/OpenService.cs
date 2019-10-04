@@ -12,24 +12,21 @@ using ZKCloud.Open.ApiBase.Models;
 using ZKCloud.Open.ApiBase.Services;
 using ZKCloud.Open.Message.Services;
 
-namespace Alabo.Tables.Domain.Services
-{
-    public class OpenService : ServiceBase, IOpenService
-    {
+namespace Alabo.Tables.Domain.Services {
+
+    public class OpenService : ServiceBase, IOpenService {
         private static readonly string _CodeCacheKey = "CodeCacheKey_";
         private IAdminMeesageApiClient _adminMessageApiClient;
         private IOpenMessageClient _messageApiClient;
         private RestClientConfiguration _restClientConfiugration;
         private IServerApiClient _serverApiClient;
 
-        public OpenService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        public OpenService(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
         public string OpenMobile => HttpWeb.Site.Phone;
 
-        public ApiResult SendRaw(string mobile, string message)
-        {
+        public ApiResult SendRaw(string mobile, string message) {
             //验证手机
             if (!CheckMobile(mobile)) {
                 return ApiResult.Failure();
@@ -88,8 +85,7 @@ namespace Alabo.Tables.Domain.Services
             return ApiResult.Failure();
         }
 
-        public async Task SendRawAsync(string mobile, string message)
-        {
+        public async Task SendRawAsync(string mobile, string message) {
             if (!CheckMobile(mobile)) {
                 return;
             }
@@ -112,8 +108,7 @@ namespace Alabo.Tables.Domain.Services
             //    throw new ServerApiException(result.Status, result.MessageCode, result.Message);
         }
 
-        public bool CheckMobile(string mobile)
-        {
+        public bool CheckMobile(string mobile) {
             if (mobile.IsNullOrEmpty()) {
                 return false;
             }
@@ -135,15 +130,13 @@ namespace Alabo.Tables.Domain.Services
         /// <param name="projectId"></param>
         /// <param name="mobile"></param>
         /// <returns></returns>
-        public long GenerateVerifiyCode(string mobile)
-        {
+        public long GenerateVerifiyCode(string mobile) {
             //var messageAccount = Ioc.Resolve<IMessageAccountService>().GetSingle(projectId);
             //if (messageAccount == null) return 0;
             var cacheKey = _CodeCacheKey + $"{mobile}";
             ObjectCache.Remove(cacheKey);
             var code = new Random().Next(100001, 999999);
-            var verifiyCode = new VerifiyCode
-            {
+            var verifiyCode = new VerifiyCode {
                 Code = code,
                 CreateTime = DateTime.Now,
                 Mobile = mobile
@@ -158,15 +151,12 @@ namespace Alabo.Tables.Domain.Services
         /// <param name="projectId"></param>
         /// <param name="mobile"></param>
         /// <returns></returns>
-        public bool CheckVerifiyCode(string mobile, long code)
-        {
+        public bool CheckVerifiyCode(string mobile, long code) {
             VerifiyCode verifiyCodeRes = null;
             var cacheKey = _CodeCacheKey + $"{mobile}";
-            if (ObjectCache.TryGet(cacheKey, out VerifiyCode verifiyCode))
-            {
+            if (ObjectCache.TryGet(cacheKey, out VerifiyCode verifiyCode)) {
                 verifiyCodeRes = verifiyCode;
-                if (verifiyCode.Code == code)
-                {
+                if (verifiyCode.Code == code) {
                     ObjectCache.Remove(cacheKey);
                     if (verifiyCode.CreateTime > DateTime.Now.AddMinutes(-30)) {
                         return true;
@@ -180,8 +170,7 @@ namespace Alabo.Tables.Domain.Services
         #endregion 验证码
     }
 
-    public class VerifiyCode
-    {
+    public class VerifiyCode {
         public long Code { get; set; }
         public DateTime CreateTime { get; set; }
         public string Mobile { get; set; }

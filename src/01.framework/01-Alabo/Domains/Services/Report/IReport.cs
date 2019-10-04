@@ -3,10 +3,10 @@ using Alabo.UI.Design.AutoReports;
 using Alabo.UI.Design.AutoReports.Dtos;
 using System.Collections.Generic;
 
-namespace Alabo.Domains.Services.Report
-{
-    public interface IReportStore<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+namespace Alabo.Domains.Services.Report {
+
+    public interface IReportStore<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         /// <summary>
         ///     查询按日期 count 统计
         /// </summary>

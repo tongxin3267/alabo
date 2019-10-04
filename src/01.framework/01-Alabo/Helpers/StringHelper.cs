@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Alabo.Helpers
-{
-    public static class StringHelper
-    {
+namespace Alabo.Helpers {
+
+    public static class StringHelper {
+
         #region 截取字符串的后部分
 
         /// <summary>
@@ -18,8 +18,7 @@ namespace Alabo.Helpers
         /// <param name="beforeValue">开始拆分字符串</param>
         /// <param name="afterValue">结束拆分字符串</param>
         /// <returns>截取后的字符串</returns>
-        public static string SubstringBetween(this string source, string beforeValue, string afterValue)
-        {
+        public static string SubstringBetween(this string source, string beforeValue, string afterValue) {
             if (string.IsNullOrEmpty(beforeValue)) {
                 return source;
             }
@@ -57,8 +56,7 @@ namespace Alabo.Helpers
         /// <param name="source">原字符串</param>
         /// <param name="value">拆分字符串</param>
         /// <returns>截取后的字符串</returns>
-        public static string SubstringAfter(this string source, string value)
-        {
+        public static string SubstringAfter(this string source, string value) {
             if (string.IsNullOrEmpty(value)) {
                 return source;
             }
@@ -82,8 +80,7 @@ namespace Alabo.Helpers
         /// <param name="source">原字符串</param>
         /// <param name="value">拆分字符串</param>
         /// <returns>截取后的字符串</returns>
-        public static string SubstringBefore(this string source, string value)
-        {
+        public static string SubstringBefore(this string source, string value) {
             if (string.IsNullOrEmpty(value)) {
                 return value;
             }
@@ -107,10 +104,8 @@ namespace Alabo.Helpers
         /// <param name="sb">StringBulider对象</param>
         /// <param name="append">要追加的字符串</param>
         /// <param name="split">分隔符</param>
-        public static void AppendString(this StringBuilder sb, string append, string split = ",")
-        {
-            if (sb.Length == 0)
-            {
+        public static void AppendString(this StringBuilder sb, string append, string split = ",") {
+            if (sb.Length == 0) {
                 sb.Append(append);
                 return;
             }
@@ -128,8 +123,7 @@ namespace Alabo.Helpers
         /// </summary>
         /// <param name="input">The string whose values should be replaced.</param>
         /// <returns>A string.</returns>
-        public static string RemoveHtml(this string input)
-        {
+        public static string RemoveHtml(this string input) {
             var stripTags = new Regex("</?[a-z][^<>]*>", RegexOptions.IgnoreCase);
             return stripTags.Replace(input, string.Empty);
         }
@@ -141,8 +135,7 @@ namespace Alabo.Helpers
         /// <summary>
         ///     解码网页参数中的字符串
         /// </summary>
-        public static string InputTexts(string text)
-        {
+        public static string InputTexts(string text) {
             if (string.IsNullOrEmpty(text)) {
                 return string.Empty;
             }
@@ -162,8 +155,7 @@ namespace Alabo.Helpers
         /// <summary>
         ///     把string转换为double
         /// </summary>
-        public static double String2Double(string str)
-        {
+        public static double String2Double(string str) {
             if (!double.TryParse((str ?? string.Empty).Trim(), out var result)) {
                 return -1;
             }
@@ -178,8 +170,7 @@ namespace Alabo.Helpers
         /// <summary>
         ///     把string转换为decimal
         /// </summary>
-        public static decimal StringToDecimal(string str, decimal defaultValue = -1M)
-        {
+        public static decimal StringToDecimal(string str, decimal defaultValue = -1M) {
             if (!decimal.TryParse((str ?? string.Empty).Trim(), out var result)) {
                 return defaultValue;
             }
@@ -194,8 +185,7 @@ namespace Alabo.Helpers
         /// <summary>
         ///     把string转换为DateTime
         /// </summary>
-        public static DateTime StringToDateTime(string str)
-        {
+        public static DateTime StringToDateTime(string str) {
             if (!DateTime.TryParse((str ?? string.Empty).Trim(), out var result)) {
                 return new DateTime(1970, 1, 1);
             }
@@ -210,8 +200,7 @@ namespace Alabo.Helpers
         /// <summary>
         ///     把string转换为int
         /// </summary>
-        public static int StringToInt(string str, int defaultValue = -1)
-        {
+        public static int StringToInt(string str, int defaultValue = -1) {
             if (!int.TryParse((str ?? string.Empty).Trim(), out var result)) {
                 return defaultValue;
             }
@@ -226,8 +215,7 @@ namespace Alabo.Helpers
         /// <summary>
         ///     把对象转换为字符串，如对象为null则返回空字符串
         /// </summary>
-        public static string ToString(object obj)
-        {
+        public static string ToString(object obj) {
             return obj == null ? string.Empty : obj.ToString();
         }
 
@@ -238,8 +226,7 @@ namespace Alabo.Helpers
         /// <summary>
         ///     尝试转换为int，如果失败返回null
         /// </summary>
-        public static int? TryToInt(object data)
-        {
+        public static int? TryToInt(object data) {
             if (!int.TryParse(data.ToString(), out var v)) {
                 return null;
             }
@@ -256,8 +243,7 @@ namespace Alabo.Helpers
         ///     例
         ///     "1,2,3" -> List<int>(){1, 2, 3}
         /// </summary>
-        public static List<int> StringToIntList(string data)
-        {
+        public static List<int> StringToIntList(string data) {
             //如果字符串为null则返回空列表
             if (data == null) {
                 return new List<int>();
@@ -279,8 +265,7 @@ namespace Alabo.Helpers
         ///     例
         ///     List<int>(){1, 2, 3} -> "1,2,3"
         /// </summary>
-        public static string IntListToString(IEnumerable<int> intList)
-        {
+        public static string IntListToString(IEnumerable<int> intList) {
             //如果列表为null则返回空字符串
             if (intList == null) {
                 return string.Empty;
@@ -297,8 +282,7 @@ namespace Alabo.Helpers
         /// <summary>
         ///     尝试转换为uint，如果失败返回null
         /// </summary>
-        public static uint? TryToUInt(object data)
-        {
+        public static uint? TryToUInt(object data) {
             if (!uint.TryParse(data.ToString(), out var v)) {
                 return null;
             }
@@ -315,8 +299,7 @@ namespace Alabo.Helpers
         ///     例
         ///     "1,2,3" -> List uint(){1, 2, 3}
         /// </summary>
-        public static List<uint> StringToUIntList(string data)
-        {
+        public static List<uint> StringToUIntList(string data) {
             //如果字符串为null则返回空列表
             if (data == null) {
                 return new List<uint>();
@@ -338,8 +321,7 @@ namespace Alabo.Helpers
         ///     例
         ///     List<uint>(){1, 2, 3} -> "1,2,3"
         /// </summary>
-        public static string UIntListToString(IEnumerable<uint> uintList)
-        {
+        public static string UIntListToString(IEnumerable<uint> uintList) {
             //如果列表为null则返回空字符串
             if (uintList == null) {
                 return string.Empty;
@@ -360,8 +342,7 @@ namespace Alabo.Helpers
         /// <param name="obj">字符串</param>
         /// <param name="retain">要保留的小数点位数</param>
         /// <returns>格式化过的小数字符串</returns>
-        public static string GetDecimalString(object obj, int retain)
-        {
+        public static string GetDecimalString(object obj, int retain) {
             var dec = obj as decimal?;
             if (dec == null) {
                 dec = StringToDecimal(obj.ToString());
@@ -379,8 +360,7 @@ namespace Alabo.Helpers
         /// <summary>
         ///     通配符转换到正则
         /// </summary>
-        public static Regex WillcardToRegex(string willcard)
-        {
+        public static Regex WillcardToRegex(string willcard) {
             return new Regex(
                 "^" + Regex.Escape(willcard).Replace(@"\*", ".*").Replace(@"\?", ".") +
                 "$",
@@ -392,8 +372,7 @@ namespace Alabo.Helpers
 
         #region 客户端用的函数
 
-        public static string Left(string str, int len)
-        {
+        public static string Left(string str, int len) {
             if (str.Length > len) {
                 return str.Substring(0, len);
             }
@@ -401,8 +380,7 @@ namespace Alabo.Helpers
             return str + "...";
         }
 
-        public static string[] SplitString(string source, string delimiter)
-        {
+        public static string[] SplitString(string source, string delimiter) {
             int iPos, iLength;
             bool bEnd;
             string sTemp;
@@ -428,8 +406,7 @@ namespace Alabo.Helpers
 
             var array = new string[list.Count];
             var k = 0;
-            foreach (var item in list)
-            {
+            foreach (var item in list) {
                 array[k] = item;
                 k++;
             }
@@ -437,8 +414,7 @@ namespace Alabo.Helpers
             return array;
         }
 
-        public static IList<string> SplitStringList(string source, string delimiter)
-        {
+        public static IList<string> SplitStringList(string source, string delimiter) {
             IList<string> list = new List<string>();
             var array = SplitString(source, delimiter);
 
@@ -449,8 +425,7 @@ namespace Alabo.Helpers
             return list;
         }
 
-        public static char[] NumberArray()
-        {
+        public static char[] NumberArray() {
             var str = "0123456789abcdefghijklmnopqrstuvwxyz.";
             return str.ToCharArray();
         }
@@ -460,12 +435,10 @@ namespace Alabo.Helpers
         /// </summary>
         /// <param name="list"></param>
         /// <param name="split"></param>
-        public static string ConvertIListToString(IList<string> list, string split)
-        {
+        public static string ConvertIListToString(IList<string> list, string split) {
             var str = string.Empty;
             var k = 0;
-            foreach (var item in list)
-            {
+            foreach (var item in list) {
                 if (k < list.Count - 1) {
                     str += item + split;
                 } else {
@@ -482,21 +455,16 @@ namespace Alabo.Helpers
         ///     去掉连续重复三个的字符
         /// </summary>
         /// <param name="str"></param>
-        public static string ClearRepeatChar(string str)
-        {
+        public static string ClearRepeatChar(string str) {
             var temp = str;
             for (var i = 0; i < str.Length; i++) {
-                try
-                {
+                try {
                     var item = str.Substring(i, 1);
-                    if (item != ".")
-                    {
+                    if (item != ".") {
                         var partter = item + "{3,}";
                         str = Regex.Replace(str, partter, item);
                     }
-                }
-                catch
-                {
+                } catch {
                 }
             }
 
@@ -507,8 +475,7 @@ namespace Alabo.Helpers
         ///     将Object转换成String
         /// </summary>
         /// <param name="str"></param>
-        public static string ObjectToString(object str)
-        {
+        public static string ObjectToString(object str) {
             if (str == null) {
                 return string.Empty;
             }

@@ -3,10 +3,9 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace Alabo.Extensions
-{
-    public static class ControllerExtensions
-    {
+namespace Alabo.Extensions {
+
+    public static class ControllerExtensions {
         /// <summary>
         ///     TryUpdateModel的函数对象
         /// </summary>
@@ -20,8 +19,7 @@ namespace Alabo.Extensions
         ///     判断表单是否有效
         ///     同时检查AntiForgeryToken和ModelState.IsValid
         /// </summary>
-        public static bool IsFormValid(this Controller controller)
-        {
+        public static bool IsFormValid(this Controller controller) {
             return controller.ModelState.IsValid;
         }
 
@@ -29,10 +27,8 @@ namespace Alabo.Extensions
         ///     返回检查表单失败的原因
         ///     表单有效时返回null
         /// </summary>
-        public static string FormInvalidReason(this Controller controller)
-        {
-            foreach (var value in controller.ModelState.Values)
-            {
+        public static string FormInvalidReason(this Controller controller) {
+            foreach (var value in controller.ModelState.Values) {
                 var error = value.Errors.FirstOrDefault();
                 if (error != null) {
                     return error.ErrorMessage;
@@ -49,8 +45,7 @@ namespace Alabo.Extensions
         /// <param name="controller"></param>
         /// <param name="obj"></param>
         public static bool TryUpdateModelForObject(
-            this Controller controller, object obj)
-        {
+            this Controller controller, object obj) {
             return (bool)TryUpdateModelMethodInfo.Value.MakeGenericMethod(
                 obj.GetType()).Invoke(controller, new[] { obj });
         }

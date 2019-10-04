@@ -1,10 +1,10 @@
-﻿namespace Alabo.Datas.Ef.Configs
-{
+﻿namespace Alabo.Datas.Ef.Configs {
+
     /// <summary>
     ///     Ef配置
     /// </summary>
-    public class EfConfig
-    {
+    public class EfConfig {
+
         /// <summary>
         ///     Ef日志级别
         /// </summary>

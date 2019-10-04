@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     国家
     /// </summary>
     [ClassProperty(Name = "国家")]
-    public enum Country : long
-    {
+    public enum Country : long {
+
         /// <summary>
         ///     默认
         /// </summary>

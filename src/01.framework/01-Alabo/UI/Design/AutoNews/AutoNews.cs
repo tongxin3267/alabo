@@ -1,10 +1,10 @@
 ﻿using Alabo.Domains.Entities;
 using System;
 
-namespace Alabo.UI.Design.AutoNews
-{
-    public class AutoNews
-    {
+namespace Alabo.UI.Design.AutoNews {
+
+    public class AutoNews {
+
         /// <summary>
         ///     文章内容
         /// </summary>
@@ -16,8 +16,8 @@ namespace Alabo.UI.Design.AutoNews
         public AutoSetting Setting { get; set; }
     }
 
-    public class AutoNewsItem
-    {
+    public class AutoNewsItem {
+
         /// <summary>
         ///     图片
         /// </summary>

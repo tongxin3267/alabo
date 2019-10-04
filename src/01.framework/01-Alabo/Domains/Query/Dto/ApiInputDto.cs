@@ -1,10 +1,10 @@
-﻿namespace Alabo.Domains.Query.Dto
-{
+﻿namespace Alabo.Domains.Query.Dto {
+
     /// <summary>
     ///     Api接口
     /// </summary>
-    public class ApiInputDto
-    {
+    public class ApiInputDto {
+
         /// <summary>
         ///     客户端当前登录用户的Id
         /// </summary>

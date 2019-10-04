@@ -3,13 +3,13 @@ using Alabo.Domains.Services;
 using Alabo.Framework.Themes.Domain.Entities;
 using Alabo.Framework.Themes.Dtos;
 
-namespace Alabo.Framework.Themes.Domain.Services
-{
+namespace Alabo.Framework.Themes.Domain.Services {
+
     /// <summary>
     ///     数据保存
     /// </summary>
-    public interface IThemeOpenService : IService
-    {
+    public interface IThemeOpenService : IService {
+
         /// <summary>
         ///     站点发布
         /// </summary>

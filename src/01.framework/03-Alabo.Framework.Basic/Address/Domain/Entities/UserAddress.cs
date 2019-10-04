@@ -9,8 +9,8 @@ using MongoDB.Bson.Serialization.Attributes;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Framework.Basic.Address.Domain.Entities
-{
+namespace Alabo.Framework.Basic.Address.Domain.Entities {
+
     /// <summary>
     ///     用户地址
     /// </summary>
@@ -19,8 +19,8 @@ namespace Alabo.Framework.Basic.Address.Domain.Entities
     [BsonIgnoreExtraElements]
     [AutoDelete(IsAuto = true)]
     [Table("Address_UserAddress")]
-    public class UserAddress : AggregateMongodbUserRoot<UserAddress>
-    {
+    public class UserAddress : AggregateMongodbUserRoot<UserAddress> {
+
         /// <summary>
         ///     收货人名称
         /// </summary>

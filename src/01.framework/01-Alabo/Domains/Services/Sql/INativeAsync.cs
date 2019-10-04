@@ -4,10 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Alabo.Domains.Services.Sql
-{
-    public interface INativeAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+namespace Alabo.Domains.Services.Sql {
+
+    public interface INativeAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         Task<TEntity> GetLastSingleAsync(TimeType timeType, DateTime dateTime);
 
         /// <summary>

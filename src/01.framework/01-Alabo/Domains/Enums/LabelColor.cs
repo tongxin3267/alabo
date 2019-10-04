@@ -1,15 +1,15 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Domains.Enums
-{
+namespace Alabo.Domains.Enums {
+
     /// <summary>
     ///     显示样式
     ///     http://ui.5ug.com/metronic_v4.5.4/theme/admin_4/ui_general.html
     /// </summary>
     [ClassProperty(Name = "显示样式")]
-    public enum LabelColor
-    {
+    public enum LabelColor {
+
         [Display(Name = "灰色")]
         [LabelCssClass(BadgeColorCalss.Metal)]
         Default = 1,

@@ -1,13 +1,13 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Security.Identity.Results
-{
+namespace Alabo.Security.Identity.Results {
+
     /// <summary>
     ///     登录状态
     /// </summary>
     [ClassProperty(Name = "登陆状态")]
-    public enum SignInState
-    {
+    public enum SignInState {
+
         /// <summary>
         ///     登录成功
         /// </summary>

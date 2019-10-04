@@ -1,10 +1,10 @@
-﻿namespace Alabo.Logging.Abstractions
-{
+﻿namespace Alabo.Logging.Abstractions {
+
     /// <summary>
     ///     日志格式器
     /// </summary>
-    public interface ILogFormat
-    {
+    public interface ILogFormat {
+
         /// <summary>
         ///     格式化
         /// </summary>

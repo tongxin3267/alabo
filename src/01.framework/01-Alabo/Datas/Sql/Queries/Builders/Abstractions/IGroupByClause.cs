@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Abstractions
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Abstractions {
+
     /// <summary>
     ///     Group By子句
     /// </summary>
-    public interface IGroupByClause
-    {
+    public interface IGroupByClause {
+
         /// <summary>
         ///     分组
         /// </summary>

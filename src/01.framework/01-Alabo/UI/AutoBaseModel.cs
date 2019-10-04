@@ -1,9 +1,9 @@
 ﻿using Alabo.Security;
 
-namespace Alabo.UI
-{
-    public class AutoBaseModel
-    {
+namespace Alabo.UI {
+
+    public class AutoBaseModel {
+
         /// <summary>
         ///     数据过滤方式
         /// </summary>
@@ -28,8 +28,8 @@ namespace Alabo.UI
     /// <summary>
     ///     权限类型
     /// </summary>
-    public enum FilterType
-    {
+    public enum FilterType {
+
         /// <summary>
         ///     无权限，匿名，谁都可以访问
         /// </summary>

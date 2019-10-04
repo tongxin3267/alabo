@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.UI.Design.AutoReports.Dtos
-{
+namespace Alabo.UI.Design.AutoReports.Dtos {
+
     /// <summary>
     ///     表格
     /// </summary>
-    public class SumReportTableItems
-    {
+    public class SumReportTableItems {
+
         /// <summary>
         ///     当前页记录数
         /// </summary>
@@ -47,8 +47,7 @@ namespace Alabo.UI.Design.AutoReports.Dtos
     /// <summary>
     ///     列
     /// </summary>
-    public class SumColumns
-    {
+    public class SumColumns {
         public string name { get; set; }
         public string type { get; set; }
     }

@@ -4,15 +4,14 @@ using Quartz;
 using System;
 using System.Threading.Tasks;
 
-namespace Alabo.Tenants
-{
+namespace Alabo.Tenants {
+
     /// <summary>
     ///     Tenant job
     /// </summary>
-    public class TenantJob : JobBase
-    {
-        protected override Task Execute(IJobExecutionContext context, IScope scope)
-        {
+    public class TenantJob : JobBase {
+
+        protected override Task Execute(IJobExecutionContext context, IScope scope) {
             //TODO:新增租户时重新循环租户任务(zhang.zl)
             throw new NotImplementedException();
         }

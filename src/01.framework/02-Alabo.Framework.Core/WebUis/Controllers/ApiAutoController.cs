@@ -18,14 +18,14 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Framework.Core.WebUis.Controllers
-{
+namespace Alabo.Framework.Core.WebUis.Controllers {
+
     /// <summary>
     ///     对应前端 form  image table task report等通用页面
     /// </summary>
     [Route("Api/Auto/[action]")]
-    public class ApiAutoController : ApiBaseController
-    {
+    public class ApiAutoController : ApiBaseController {
+
         #region 导出Excel
 
         /// <summary>
@@ -33,8 +33,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         /// </summary>
         [HttpGet]
         [Display(Description = "导出Excel")]
-        public ApiResult ToExcel([FromQuery] string type)
-        {
+        public ApiResult ToExcel([FromQuery] string type) {
             var dataResult = Resolve<IAutoTableService>().Table(type, QueryDictionary().ToJsons(), AutoModel);
             if (!dataResult.Item1.Succeeded) {
                 return ApiResult.Failure(dataResult.Item1.ErrorMessages.ToString());
@@ -47,8 +46,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
 
             var autoTable = dataResult.Item2;
 
-            try
-            {
+            try {
                 var result = Resolve<IAdminTableService>().ToExcel(modelType, autoTable.Result);
 
                 var index = result.Item2.LastIndexOf(@"\wwwroot\");
@@ -61,9 +59,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
 
                 var path = $"{result.Item2.Substring(index)}".Replace(@"\", "/");
                 return ApiResult.Success(path);
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 return ApiResult.Failure(new { File = "" }, ex.Message);
             }
         }
@@ -76,8 +72,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         [HttpGet]
         [Display(Description = "获取所有的Api地址")]
         [ApiAuth(Filter = FilterType.Admin)]
-        public ApiResult<AutoTable> Table([FromQuery] string type)
-        {
+        public ApiResult<AutoTable> Table([FromQuery] string type) {
             var tenant = HttpContext.Request.Headers["zk-tenant"];
             if (AutoModel != null && AutoModel.BasicUser != null) {
                 AutoModel.BasicUser.Tenant = tenant;
@@ -92,8 +87,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         /// </summary>
         [HttpGet]
         [Display(Description = "获取所有的Api地址")]
-        public ApiResult<AutoList> List([FromQuery] string type)
-        {
+        public ApiResult<AutoList> List([FromQuery] string type) {
             if (type.IsNullOrEmpty() || type == "undefined") {
                 return ApiResult.Failure<AutoList>("类型不能为空");
             }
@@ -105,8 +99,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
             }
 
             var autoList = new AutoList();
-            if (find is IAutoList set)
-            {
+            if (find is IAutoList set) {
                 var searchType = set.SearchType();
                 autoList = AutoListMapping.Convert(searchType.FullName);
                 autoList.Result = set.PageList(Query, AutoModel);
@@ -120,8 +113,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         /// </summary>
         [HttpGet]
         [Display(Description = "获取所有的Api地址")]
-        public ApiResult<AutoPreview> Preview(string id, string type)
-        {
+        public ApiResult<AutoPreview> Preview(string id, string type) {
             //check
             if (type.IsNullOrEmpty() || type == "undefined") {
                 return ApiResult.Failure<AutoPreview>("类型不能为空");
@@ -138,16 +130,14 @@ namespace Alabo.Framework.Core.WebUis.Controllers
             }
 
             //entity
-            if (find is IEntity)
-            {
+            if (find is IEntity) {
                 var obj = Linq.Dynamic.DynamicService.ResolveMethod(typeIntance.Name, "GetViewById", id);
                 var autoPreview = AutoPreviewMapping.Convert(obj);
                 return ApiResult.Success(autoPreview);
             }
 
             //Auto preview
-            if (find is IAutoPreview set)
-            {
+            if (find is IAutoPreview set) {
                 var autoPreview = set.GetPreview(id, AutoModel);
                 return ApiResult.Success(autoPreview);
             }
@@ -160,16 +150,14 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         /// </summary>
         [HttpGet]
         [Display(Description = "获取新闻列表")]
-        public ApiResult<AutoNews> News([FromQuery] string type)
-        {
+        public ApiResult<AutoNews> News([FromQuery] string type) {
             if (type.IsNullOrEmpty() || type == "undefined") {
                 return ApiResult.Failure<AutoNews>("类型不能为空");
             }
 
             var find = type.GetInstanceByName();
 
-            if (find is IAutoNews set)
-            {
+            if (find is IAutoNews set) {
                 //约定不完善
                 //if (!type.EndsWith("News") || !type.Contains("AutoNews")){
                 //if (!type.EndsWith("Image") || !type.Contains("AutoImage")) {
@@ -182,8 +170,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
                 //    }
                 // }
                 //}
-                var autoNews = new AutoNews
-                {
+                var autoNews = new AutoNews {
                     ResultList = set.ResultList(Query, AutoModel),
                     Setting = set.Setting()
                 };
@@ -198,8 +185,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         /// </summary>
         [HttpGet]
         [Display(Description = "获取文章")]
-        public ApiResult<AutoArticle> Article([FromQuery] string type, string id)
-        {
+        public ApiResult<AutoArticle> Article([FromQuery] string type, string id) {
             if (type.IsNullOrEmpty() || type == "undefined") {
                 return ApiResult.Failure<AutoArticle>("类型不能为空");
             }
@@ -209,14 +195,12 @@ namespace Alabo.Framework.Core.WebUis.Controllers
                 return ApiResult.Failure<AutoArticle>($"类型不存在，请确认{type}输入是否正确");
             }
 
-            if (find is IAutoArticle set)
-            {
+            if (find is IAutoArticle set) {
                 if (!type.EndsWith("Article") || !type.Contains("AutoArticle")) {
                     return ApiResult.Failure<AutoArticle>($"类型{type}的命名约定，不符合约定");
                 }
 
-                var auto = new AutoArticle
-                {
+                var auto = new AutoArticle {
                     ResultList = set.ResultList(id),
                     Setting = set.Setting()
                 };
@@ -231,8 +215,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         /// </summary>
         [HttpGet]
         [Display(Description = "获取文章")]
-        public ApiResult<List<AutoReport>> Report([FromQuery] string type)
-        {
+        public ApiResult<List<AutoReport>> Report([FromQuery] string type) {
             if (type.IsNullOrEmpty() || type == "undefined") {
                 return ApiResult.Failure<List<AutoReport>>("类型不能为空");
             }
@@ -242,8 +225,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
                 return ApiResult.Failure<List<AutoReport>>($"类型不存在，请确认{type}输入是否正确");
             }
 
-            if (find is IAutoReport set)
-            {
+            if (find is IAutoReport set) {
                 if (!type.EndsWith("Report")) {
                     return ApiResult.Failure<List<AutoReport>>($"类型{type}的命名约定，不符合约定");
                 }
@@ -262,8 +244,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         /// </summary>
         [HttpGet]
         [Display(Description = "获取所有的Api地址")]
-        public ApiResult<AutoForm> Form([FromQuery] string type, string id)
-        {
+        public ApiResult<AutoForm> Form([FromQuery] string type, string id) {
             // Url查询参数
             AutoModel.Query = Query;
             var result = Resolve<IAutoFormServcie>().GetView(type, id, AutoModel);
@@ -274,8 +255,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         ///     AutoForm保存
         /// </summary>
         [HttpPost]
-        public ApiResult Save([FromBody] AutoFormInput autoFormInput)
-        {
+        public ApiResult Save([FromBody] AutoFormInput autoFormInput) {
             if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason());
             }
@@ -289,12 +269,9 @@ namespace Alabo.Framework.Core.WebUis.Controllers
 
             autoFormInput.TypeFind = typeFind;
             autoFormInput.TypeInstance = instanceFind;
-            try
-            {
+            try {
                 autoFormInput.ModelFind = autoFormInput.Model.ToObject(typeFind);
-            }
-            catch
-            {
+            } catch {
                 return ApiResult.Failure("序列化出错");
             }
 

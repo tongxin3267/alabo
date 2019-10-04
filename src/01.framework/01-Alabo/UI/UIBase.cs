@@ -11,17 +11,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Alabo.UI
-{
-    public abstract class UIBase
-    {
+namespace Alabo.UI {
+
+    public abstract class UIBase {
+
         #region 基础对象
 
         /// <summary>
         ///     获取数据操作对象服务
         /// </summary>
-        public T Resolve<T>() where T : IService
-        {
+        public T Resolve<T>() where T : IService {
             return Ioc.Resolve<T>();
         }
 
@@ -34,8 +33,7 @@ namespace Alabo.UI
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        protected AutoForm ToAutoForm(object model)
-        {
+        protected AutoForm ToAutoForm(object model) {
             if (model != null) {
                 return AutoFormMapping.Convert(model);
             }
@@ -53,8 +51,7 @@ namespace Alabo.UI
         /// <typeparam name="TKey"></typeparam>
         /// <param name="id"></param>
         /// <returns></returns>
-        protected TKey ToId<TKey>(object id)
-        {
+        protected TKey ToId<TKey>(object id) {
             if (typeof(TKey) == typeof(int) || typeof(TKey) == typeof(long)) {
                 id = id.ConvertToLong(0);
             }
@@ -83,8 +80,7 @@ namespace Alabo.UI
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static T ToQuery<T>() where T : new()
-        {
+        public static T ToQuery<T>() where T : new() {
             var query = HttpWeb.HttpContext.ToDictionary();
             var model = query.ToJson().ToObject<T>();
             return model;
@@ -100,10 +96,8 @@ namespace Alabo.UI
         /// <param name="name"></param>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static TableAction ToDeleteAction(string name, string url)
-        {
-            var tableAction = new TableAction
-            {
+        public static TableAction ToDeleteAction(string name, string url) {
+            var tableAction = new TableAction {
                 Name = name,
                 Url = url,
                 IconType = Flaticon.Delete,
@@ -122,10 +116,8 @@ namespace Alabo.UI
         /// <param name="name"></param>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static TableAction ToDialogAction(string name, string url, Flaticon flaticon = Flaticon.Dashboard)
-        {
-            var tableAction = new TableAction
-            {
+        public static TableAction ToDialogAction(string name, string url, Flaticon flaticon = Flaticon.Dashboard) {
+            var tableAction = new TableAction {
                 Name = name,
                 Url = url,
                 IconType = flaticon,
@@ -145,14 +137,12 @@ namespace Alabo.UI
         /// <param name="pageList">数据源</param>
         /// <returns></returns>
         protected PageResult<AutoListItem> ToPageList<TInput>(IEnumerable<AutoListItem> list,
-            PagedList<TInput> pageList)
-        {
+            PagedList<TInput> pageList) {
             if (pageList == null) {
                 return null;
             }
 
-            var apiRusult = new PageResult<AutoListItem>
-            {
+            var apiRusult = new PageResult<AutoListItem> {
                 PageCount = pageList.PageCount,
                 Result = list.ToList(),
                 RecordCount = pageList.RecordCount,
@@ -174,20 +164,17 @@ namespace Alabo.UI
         /// <typeparam name="TOutput">输出类型</typeparam>
         /// <param name="pageList">数据源</param>
         /// <returns></returns>
-        protected PageResult<TOutput> ToPageResult<TOutput, TInput>(PagedList<TInput> pageList)
-        {
+        protected PageResult<TOutput> ToPageResult<TOutput, TInput>(PagedList<TInput> pageList) {
             if (pageList == null) {
                 return null;
             }
 
             var newPageList = new PagedList<TOutput>();
-            pageList.ForEach(r =>
-            {
+            pageList.ForEach(r => {
                 var t = AutoMapping.SetValue<TOutput>(r);
                 newPageList.Add(t);
             });
-            var apiRusult = new PageResult<TOutput>
-            {
+            var apiRusult = new PageResult<TOutput> {
                 PageCount = pageList.PageCount,
                 Result = newPageList,
                 RecordCount = pageList.RecordCount,
@@ -204,14 +191,12 @@ namespace Alabo.UI
         /// <typeparam name="T">输入类型</typeparam>
         /// <param name="pageList">数据源</param>
         /// <returns></returns>
-        protected PageResult<T> ToPageResult<T>(PagedList<T> pageList)
-        {
+        protected PageResult<T> ToPageResult<T>(PagedList<T> pageList) {
             if (pageList == null) {
                 return null;
             }
 
-            var apiRusult = new PageResult<T>
-            {
+            var apiRusult = new PageResult<T> {
                 PageCount = pageList.PageCount,
                 Result = pageList,
                 RecordCount = pageList.RecordCount,
@@ -232,10 +217,8 @@ namespace Alabo.UI
         /// <param name="name"></param>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static TableAction ToLinkAction(string name, string url, Flaticon flaticon = Flaticon.Interface5)
-        {
-            var tableAction = new TableAction
-            {
+        public static TableAction ToLinkAction(string name, string url, Flaticon flaticon = Flaticon.Interface5) {
+            var tableAction = new TableAction {
                 Name = name,
                 Url = url,
                 IconType = flaticon,
@@ -245,10 +228,8 @@ namespace Alabo.UI
         }
 
         public static TableAction ToLinkAction(string name, TableActionType tableActionType, Type formType,
-            Flaticon flaticon = Flaticon.Interface5)
-        {
-            var tableAction = new TableAction
-            {
+            Flaticon flaticon = Flaticon.Interface5) {
+            var tableAction = new TableAction {
                 Name = name,
                 FormType = formType.Name,
                 IconType = flaticon,
@@ -259,10 +240,8 @@ namespace Alabo.UI
         }
 
         public static TableAction ToLinkAction(string name, string url, TableActionType tableActionType,
-            Flaticon flaticon = Flaticon.Interface5)
-        {
-            var tableAction = new TableAction
-            {
+            Flaticon flaticon = Flaticon.Interface5) {
+            var tableAction = new TableAction {
                 Name = name,
                 Url = url,
                 IconType = flaticon,
@@ -273,10 +252,8 @@ namespace Alabo.UI
         }
 
         public static TableAction ToLinkAction(string name, string url, ActionLinkType linkType,
-            TableActionType tableActionType, Flaticon flaticon = Flaticon.Interface5)
-        {
-            var tableAction = new TableAction
-            {
+            TableActionType tableActionType, Flaticon flaticon = Flaticon.Interface5) {
+            var tableAction = new TableAction {
                 Name = name,
                 Url = url,
                 IconType = flaticon,

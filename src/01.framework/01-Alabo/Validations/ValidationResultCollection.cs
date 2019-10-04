@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace Alabo.Validations
-{
+namespace Alabo.Validations {
+
     /// <summary>
     ///     验证结果集合
     /// </summary>
-    public class ValidationResultCollection : IEnumerable<ValidationResult>
-    {
+    public class ValidationResultCollection : IEnumerable<ValidationResult> {
+
         /// <summary>
         ///     成功验证结果集合
         /// </summary>
@@ -23,16 +23,14 @@ namespace Alabo.Validations
         /// <summary>
         ///     初始化验证结果集合
         /// </summary>
-        public ValidationResultCollection() : this("")
-        {
+        public ValidationResultCollection() : this("") {
         }
 
         /// <summary>
         ///     初始化验证结果集合
         /// </summary>
         /// <param name="result">验证结果</param>
-        public ValidationResultCollection(string result)
-        {
+        public ValidationResultCollection(string result) {
             _results = new List<ValidationResult>();
             if (string.IsNullOrWhiteSpace(result)) {
                 return;
@@ -54,16 +52,14 @@ namespace Alabo.Validations
         /// <summary>
         ///     获取迭代器
         /// </summary>
-        IEnumerator<ValidationResult> IEnumerable<ValidationResult>.GetEnumerator()
-        {
+        IEnumerator<ValidationResult> IEnumerable<ValidationResult>.GetEnumerator() {
             return _results.GetEnumerator();
         }
 
         /// <summary>
         ///     获取迭代器
         /// </summary>
-        IEnumerator IEnumerable.GetEnumerator()
-        {
+        IEnumerator IEnumerable.GetEnumerator() {
             return _results.GetEnumerator();
         }
 
@@ -71,8 +67,7 @@ namespace Alabo.Validations
         ///     添加验证结果
         /// </summary>
         /// <param name="result">验证结果</param>
-        public void Add(ValidationResult result)
-        {
+        public void Add(ValidationResult result) {
             if (result == null) {
                 return;
             }
@@ -84,8 +79,7 @@ namespace Alabo.Validations
         ///     添加验证结果集合
         /// </summary>
         /// <param name="results">验证结果集合</param>
-        public void AddList(IEnumerable<ValidationResult> results)
-        {
+        public void AddList(IEnumerable<ValidationResult> results) {
             if (results == null) {
                 return;
             }
@@ -98,8 +92,7 @@ namespace Alabo.Validations
         /// <summary>
         ///     输出验证消息
         /// </summary>
-        public override string ToString()
-        {
+        public override string ToString() {
             if (IsValid) {
                 return string.Empty;
             }

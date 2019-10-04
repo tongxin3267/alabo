@@ -6,20 +6,19 @@ using System.Collections.Generic;
 using System.Linq;
 using Convert = System.Convert;
 
-namespace Alabo.Extensions
-{
+namespace Alabo.Extensions {
+
     /// <summary>
     ///     KeyValueExtesions 扩展
     /// </summary>
-    public static class KeyValueExtesions
-    {
+    public static class KeyValueExtesions {
+
         /// <summary>
         ///     对象转换成 keyValues
         ///     只显示定义了Field中的特性
         /// </summary>
         /// <param name="instance"></param>
-        public static List<KeyValue> ToKeyValues<T>(this T instance)
-        {
+        public static List<KeyValue> ToKeyValues<T>(this T instance) {
             if (instance == null) {
                 return null;
             }
@@ -28,10 +27,8 @@ namespace Alabo.Extensions
             var list = new List<KeyValue>();
             var outputPropertyInfo = outputType.GetPropertyResultFromCache(); //从缓存中读取属性，加快速度
             foreach (var item in outputPropertyInfo) {
-                if (item.FieldAttribute != null)
-                {
-                    var keyValue = new KeyValue
-                    {
+                if (item.FieldAttribute != null) {
+                    var keyValue = new KeyValue {
                         Key = item.PropertyInfo.Name,
                         Name = item.PropertyInfo.Name
                     };
@@ -55,8 +52,7 @@ namespace Alabo.Extensions
         ///     将枚举转成字典
         /// </summary>
         /// <param name="enumName"></param>
-        public static IList<KeyValue> EnumToKeyValues(string enumName)
-        {
+        public static IList<KeyValue> EnumToKeyValues(string enumName) {
             var type = enumName.GetTypeByName();
             if (type == null) {
                 return null;
@@ -69,26 +65,22 @@ namespace Alabo.Extensions
         ///     将枚举转成字典
         /// </summary>
         /// <param name="enumType"></param>
-        public static IList<KeyValue> EnumToKeyValues(Type enumType)
-        {
+        public static IList<KeyValue> EnumToKeyValues(Type enumType) {
             var objectCache = Ioc.Resolve<IObjectCache>();
-            return objectCache.GetOrSet(() =>
-                {
-                    IList<KeyValue> list = new List<KeyValue>();
-                    foreach (var item in Enum.GetValues(enumType))
-                    {
-                        var value = item.GetDisplayName();
-                        var icon = ((Enum)item).GetIcon();
-                        var key = Convert.ToInt64(item);
-                        var keyValueItem = new KeyValue(key, value, enumType.Name)
-                        {
-                            Icon = icon
-                        };
-                        list.Add(keyValueItem);
-                    }
-
-                    return list;
+            return objectCache.GetOrSet(() => {
+                IList<KeyValue> list = new List<KeyValue>();
+                foreach (var item in Enum.GetValues(enumType)) {
+                    var value = item.GetDisplayName();
+                    var icon = ((Enum)item).GetIcon();
+                    var key = Convert.ToInt64(item);
+                    var keyValueItem = new KeyValue(key, value, enumType.Name) {
+                        Icon = icon
+                    };
+                    list.Add(keyValueItem);
                 }
+
+                return list;
+            }
                 , "EnumToKeyValues_" + enumType.FullName).Value;
         }
     }

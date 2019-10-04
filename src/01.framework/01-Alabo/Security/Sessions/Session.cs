@@ -10,13 +10,13 @@ using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Alabo.Security.Sessions
-{
+namespace Alabo.Security.Sessions {
+
     /// <summary>
     ///     用户会话
     /// </summary>
-    public class Session : ISession
-    {
+    public class Session : ISession {
+
         /// <summary>
         ///     空用户会话
         /// </summary>
@@ -45,10 +45,8 @@ namespace Alabo.Security.Sessions
         /// <summary>
         ///     用户标识
         /// </summary>
-        public string UserId
-        {
-            get
-            {
+        public string UserId {
+            get {
                 var result = HttpWeb.Identity.GetValue(JwtClaimTypes.Subject);
                 return string.IsNullOrWhiteSpace(result)
                     ? HttpWeb.Identity.GetValue(ClaimTypes.NameIdentifier)
@@ -62,17 +60,14 @@ namespace Alabo.Security.Sessions
         ///     登录多租户模式
         /// </summary>
         /// <param name="tenant"></param>
-        public async Task SignInTenant(string tenant)
-        {
-            if (HttpWeb.IsTenant)
-            {
+        public async Task SignInTenant(string tenant) {
+            if (HttpWeb.IsTenant) {
                 if (tenant.IsNullOrEmpty()) {
                     throw new ValidException("多租户模式，请设置租户");
                 }
 
                 var basicUser = HttpWeb.User;
-                if (basicUser == null)
-                {
+                if (basicUser == null) {
                     basicUser = new BasicUser();
                     basicUser.Tenant = tenant.ToLower().Trim();
                 }
@@ -89,8 +84,7 @@ namespace Alabo.Security.Sessions
         /// <summary>
         ///     创建登录标识
         /// </summary>
-        public ClaimsIdentity CreateClaimsIdentity(BasicUser user)
-        {
+        public ClaimsIdentity CreateClaimsIdentity(BasicUser user) {
             var authenticationScheme = RuntimeContext.Current.WebsiteConfig.AuthenticationScheme;
 
             var identity = new ClaimsIdentity(authenticationScheme);
@@ -123,8 +117,7 @@ namespace Alabo.Security.Sessions
         ///     用户登录
         /// </summary>
         /// <param name="user"></param>
-        public async Task SignInUser(BasicUser user)
-        {
+        public async Task SignInUser(BasicUser user) {
             if (string.IsNullOrWhiteSpace(user.UserName) || string.IsNullOrWhiteSpace(user.Email)) {
                 throw new ArgumentException("UserName and email is requred in user model.");
             }

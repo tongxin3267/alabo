@@ -3,19 +3,18 @@ using AspectCore.DynamicProxy.Parameters;
 using System;
 using System.Threading.Tasks;
 
-namespace Alabo.Aspects
-{
+namespace Alabo.Aspects {
+
     /// <summary>
     ///     验证不能为null
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
-    public class NotNullAttribute : ParameterInterceptorBase
-    {
+    public class NotNullAttribute : ParameterInterceptorBase {
+
         /// <summary>
         ///     执行
         /// </summary>
-        public override Task Invoke(ParameterAspectContext context, ParameterAspectDelegate next)
-        {
+        public override Task Invoke(ParameterAspectContext context, ParameterAspectDelegate next) {
             if (context.Parameter.Value == null) {
                 throw new ArgumentNullException(context.Parameter.Name);
             }

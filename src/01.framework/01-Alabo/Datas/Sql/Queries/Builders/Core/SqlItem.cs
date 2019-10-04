@@ -1,13 +1,13 @@
 ﻿using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 using Alabo.Regexs;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Core
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Core {
+
     /// <summary>
     ///     Sql项
     /// </summary>
-    public class SqlItem
-    {
+    public class SqlItem {
+
         /// <summary>
         ///     别名
         /// </summary>
@@ -30,8 +30,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <param name="prefix">前缀</param>
         /// <param name="alias">别名</param>
         /// <param name="raw">使用原始值</param>
-        public SqlItem(string name, string prefix = null, string alias = null, bool raw = false)
-        {
+        public SqlItem(string name, string prefix = null, string alias = null, bool raw = false) {
             if (string.IsNullOrWhiteSpace(name)) {
                 return;
             }
@@ -39,8 +38,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
             Prefix = prefix;
             Alias = alias;
             Raw = raw;
-            if (raw)
-            {
+            if (raw) {
                 Name = name;
                 return;
             }
@@ -56,8 +54,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <summary>
         ///     前缀，范例:t.a As b，值为 t
         /// </summary>
-        public string Prefix
-        {
+        public string Prefix {
             get => Alabo.Extensions.Extensions.SafeString(_prefix);
             set => _prefix = value;
         }
@@ -65,8 +62,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <summary>
         ///     名称，范例:t.a As b，值为 a
         /// </summary>
-        public string Name
-        {
+        public string Name {
             get => Raw ? _name : Alabo.Extensions.Extensions.SafeString(_name);
             set => _name = value;
         }
@@ -74,8 +70,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <summary>
         ///     别名，范例:t.a As b，值为 b
         /// </summary>
-        public string Alias
-        {
+        public string Alias {
             get => Alabo.Extensions.Extensions.SafeString(_alias);
             set => _alias = value;
         }
@@ -83,8 +78,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <summary>
         ///     设置别名，返回前缀和名称
         /// </summary>
-        private void Resolve(string name)
-        {
+        private void Resolve(string name) {
             var pattern = @"\s+[aA][sS]\s+";
             var list = Regex.Split(name, pattern);
             if (list == null || list.Length == 0) {
@@ -101,8 +95,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <summary>
         ///     设置名称
         /// </summary>
-        private void SetName(string name)
-        {
+        private void SetName(string name) {
             var result = new NameItem(name);
             if (string.IsNullOrWhiteSpace(result.Prefix) == false) {
                 Prefix = result.Prefix;
@@ -116,8 +109,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <summary>
         ///     获取Sql
         /// </summary>
-        public string ToSql(IDialect dialect = null)
-        {
+        public string ToSql(IDialect dialect = null) {
             if (string.IsNullOrWhiteSpace(Name)) {
                 return null;
             }
@@ -135,8 +127,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <summary>
         ///     获取安全名称
         /// </summary>
-        private string GetSafeName(IDialect dialect, string name)
-        {
+        private string GetSafeName(IDialect dialect, string name) {
             if (dialect == null) {
                 return name;
             }

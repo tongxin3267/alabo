@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Domains.Entities.Core
-{
-    public interface ICreateTime
-    {
+namespace Alabo.Domains.Entities.Core {
+
+    public interface ICreateTime {
+
         /// <summary>
         ///     创建时间
         /// </summary>

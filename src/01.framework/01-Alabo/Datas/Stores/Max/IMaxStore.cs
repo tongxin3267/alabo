@@ -2,10 +2,10 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Alabo.Datas.Stores.Max
-{
-    public interface IMaxStore<TEntity, in TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
+namespace Alabo.Datas.Stores.Max {
+
+    public interface IMaxStore<TEntity, in TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
         /// <summary>
         ///     获取最大值
         /// </summary>

@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel;
 
-namespace Alabo.UI.Enum
-{
+namespace Alabo.UI.Enum {
+
     /// <summary>
     ///     图标大小
     /// </summary>
     [ClassProperty(Name = "图标大小")]
-    public enum IconSize
-    {
+    public enum IconSize {
+
         /// <summary>
         ///     1.3倍
         /// </summary>

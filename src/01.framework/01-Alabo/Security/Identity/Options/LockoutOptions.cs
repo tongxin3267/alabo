@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Alabo.Security.Identity.Options
-{
+namespace Alabo.Security.Identity.Options {
+
     /// <summary>
     ///     登录锁定配置
     /// </summary>
-    public class LockoutOptions
-    {
+    public class LockoutOptions {
+
         /// <summary>
         ///     是否锁定新创建的用户，默认锁定
         /// </summary>

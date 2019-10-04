@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Alabo.Linq
-{
+namespace Alabo.Linq {
+
     /// <summary>
     ///     逻辑运算符
     /// </summary>
-    public static class LogicExpression
-    {
+    public static class LogicExpression {
+
         /// <summary>
         ///     逻辑计算 支持：括号、&& 、||
         ///     假设所有bool值都用一个字母表示，也可以使用多个字母，但是需要统一字母的数量
         /// </summary>
         /// <param name="logicExpression">示范值：((AA && !BB)|| CC) && DD ||(EE && FF)</param>
         /// <param name="logicValueBool">示范值：{true, false, false, true, false, true}</param>
-        public static bool Operate(string logicExpression, List<bool> logicValueBool)
-        {
+        public static bool Operate(string logicExpression, List<bool> logicValueBool) {
             //去除空格,括号
             var logicExpressionTemp = logicExpression.Replace(" ", "");
             logicExpressionTemp = logicExpressionTemp.Replace("(", "");
@@ -44,8 +43,7 @@ namespace Alabo.Linq
         ///     逻辑计算 支持：括号、&& 、||
         /// </summary>
         /// <param name="logicExpression">示范：((true && !false) || false) && true || false </param>
-        public static bool Operate(string logicExpression)
-        {
+        public static bool Operate(string logicExpression) {
             var finnalResult = DealBrackets(logicExpression);
             return finnalResult;
         }
@@ -54,18 +52,15 @@ namespace Alabo.Linq
         ///     处理括号
         /// </summary>
         /// <param name="logicExpression"></param>
-        private static bool DealBrackets(string logicExpression)
-        {
-            while (logicExpression.Contains("("))
-            {
+        private static bool DealBrackets(string logicExpression) {
+            while (logicExpression.Contains("(")) {
                 //最后一个左括号
                 var lasttLeftBracketIndex = -1;
                 //与最后第一个左括号对应的右括号
                 var firstRightBracketIndex = -1;
 
                 //找到最后一个左括号
-                for (var i = 0; i < logicExpression.Length; i++)
-                {
+                for (var i = 0; i < logicExpression.Length; i++) {
                     //获取字符串中的第i个字符
                     var tempChar = logicExpression.Substring(i, 1);
                     //如果是左括号，则将该字符的索引号给lasttLeftBracketIndex，直到最后一个
@@ -75,8 +70,7 @@ namespace Alabo.Linq
                 }
 
                 //找到与最后第一个左括号对应的右括号
-                for (var i = lasttLeftBracketIndex; i < logicExpression.Length; i++)
-                {
+                for (var i = lasttLeftBracketIndex; i < logicExpression.Length; i++) {
                     //获取字符串中的第i个字符
                     var tempChar = logicExpression.Substring(i, 1);
                     if (tempChar == ")" && firstRightBracketIndex == -1) {
@@ -98,8 +92,7 @@ namespace Alabo.Linq
         ///     运算逻辑表达式
         /// </summary>
         /// <param name="logicExpression"></param>
-        private static bool LogicOperate(string logicExpression)
-        {
+        private static bool LogicOperate(string logicExpression) {
             //去除空格
             logicExpression = logicExpression.Replace(" ", "");
 

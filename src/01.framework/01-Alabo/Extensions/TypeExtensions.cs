@@ -11,13 +11,13 @@ using System.Data;
 using System.Linq;
 using System.Reflection;
 
-namespace Alabo.Extensions
-{
+namespace Alabo.Extensions {
+
     /// <summary>
     ///     Type类型扩展
     /// </summary>
-    public static class TypeExtensions
-    {
+    public static class TypeExtensions {
+
         /// <summary>
         ///     换行符
         /// </summary>
@@ -27,8 +27,7 @@ namespace Alabo.Extensions
         ///     获取类型
         /// </summary>
         /// <typeparam name="T">类型</typeparam>
-        public static Type GetType<T>()
-        {
+        public static Type GetType<T>() {
             var type = typeof(T);
             return Nullable.GetUnderlyingType(type) ?? type;
         }
@@ -45,16 +44,14 @@ namespace Alabo.Extensions
         ///     从缓存中，获取字段属性，加快访问速度
         /// </summary>
         /// <param name="type"></param>
-        public static PropertyInfo[] GetPropertiesFromCache(this Type type)
-        {
+        public static PropertyInfo[] GetPropertiesFromCache(this Type type) {
             if (type == null) {
                 return null;
             }
 
             var cacheKey = "GetProperties" + type.FullName;
             var objectCache = Ioc.Resolve<IObjectCache>();
-            if (!objectCache.TryGetPublic(cacheKey, out PropertyInfo[] properties))
-            {
+            if (!objectCache.TryGetPublic(cacheKey, out PropertyInfo[] properties)) {
                 properties = type.GetProperties();
                 objectCache.Set(cacheKey, properties);
             }
@@ -67,24 +64,20 @@ namespace Alabo.Extensions
         ///     以及相关特性
         /// </summary>
         /// <param name="type"></param>
-        public static IList<PropertyResult> GetPropertyResultFromCache(this Type type)
-        {
+        public static IList<PropertyResult> GetPropertyResultFromCache(this Type type) {
             if (type == null) {
                 return null;
             }
 
             var cacheKey = "GetPropertyResult" + type.FullName;
             var objectCache = Ioc.Resolve<IObjectCache>();
-            if (!objectCache.TryGetPublic(cacheKey, out List<PropertyResult> propertyResults))
-            {
+            if (!objectCache.TryGetPublic(cacheKey, out List<PropertyResult> propertyResults)) {
                 var properties = type.GetProperties();
                 propertyResults = new List<PropertyResult>();
-                foreach (var item in properties)
-                {
+                foreach (var item in properties) {
                     var fieldAttributes = item.GetAttribute<FieldAttribute>();
                     var displayAttribute = item.GetAttribute<DisplayAttribute>();
-                    var propertyResult = new PropertyResult
-                    {
+                    var propertyResult = new PropertyResult {
                         PropertyInfo = item,
                         FieldAttribute = fieldAttributes,
                         DisplayAttribute = displayAttribute
@@ -102,23 +95,19 @@ namespace Alabo.Extensions
         ///     转换成类型 返回Type类型
         /// </summary>
         /// <param name="input"></param>
-        public static Type GetTypeByFullName(this string input)
-        {
+        public static Type GetTypeByFullName(this string input) {
             if (input.IsNullOrEmpty()) {
                 throw new InvalidExpressionException("类型名称不能为空");
             }
 
             var cacheKey = "GetTypeByFullName" + input;
             var objectCache = Ioc.Resolve<IObjectCache>();
-            if (!objectCache.TryGetPublic(cacheKey, out Type type))
-            {
+            if (!objectCache.TryGetPublic(cacheKey, out Type type)) {
                 if (input.Length > 110) {
-                    if (input.Contains("System.Collections.Generic.List"))
-                    {
+                    if (input.Contains("System.Collections.Generic.List")) {
                         // var typefullName = input.CutString("1[[", ", ZKCloud");
                         var findType = Type.GetType(input);
-                        if (findType != null)
-                        {
+                        if (findType != null) {
                             objectCache.Set(cacheKey, findType);
                             return findType;
                         }
@@ -131,8 +120,7 @@ namespace Alabo.Extensions
                     objectCache.Set(cacheKey, type);
                 }
 
-                if (type == null)
-                {
+                if (type == null) {
                     type = types?.FirstOrDefault(t => t.FullName == input.Trim());
                     if (type != null) {
                         objectCache.Set(cacheKey, type);
@@ -151,16 +139,14 @@ namespace Alabo.Extensions
         ///     如果有相同的获取时候，可请使用FullName
         /// </summary>
         /// <param name="input"></param>
-        public static Type GetTypeByName(this string input)
-        {
+        public static Type GetTypeByName(this string input) {
             if (input.IsNullOrEmpty()) {
                 throw new InvalidExpressionException("类型名称不能为空");
             }
 
             var objectCache = Ioc.Resolve<IObjectCache>();
             var cacheKey = "GetTypeByName" + input;
-            return objectCache.GetOrSetPublic(() =>
-            {
+            return objectCache.GetOrSetPublic(() => {
                 var types = RuntimeContext.Current.GetPlatformRuntimeAssemblies().SelectMany(a => a.GetTypes());
                 var type = types?.FirstOrDefault(t =>
                     t.FullName.Equals(input.Trim(), StringComparison.OrdinalIgnoreCase));
@@ -180,8 +166,7 @@ namespace Alabo.Extensions
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static object GetInstanceByName(this string input)
-        {
+        public static object GetInstanceByName(this string input) {
             var find = input.GetTypeByName();
             if (find == null) {
                 return null;
@@ -201,8 +186,7 @@ namespace Alabo.Extensions
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static object GetInstanceByType(this Type type)
-        {
+        public static object GetInstanceByType(this Type type) {
             var cacheKey = "GetInstanceByName" + type.FullName;
             var objectCache = Ioc.Resolve<IObjectCache>();
             if (!objectCache.TryGetPublic(cacheKey, out object config)) {
@@ -219,17 +203,13 @@ namespace Alabo.Extensions
         /// <param name="methodName"></param>
         /// <param name="paras"></param>
         /// <returns></returns>
-        public static object InvokeMethod(this Type type, string methodName, object[] paras)
-        {
-            try
-            {
+        public static object InvokeMethod(this Type type, string methodName, object[] paras) {
+            try {
                 var instance = Activator.CreateInstance(type);
                 var rs = type.GetMethod(methodName).Invoke(instance, paras);
 
                 return rs;
-            }
-            catch (Exception)
-            {
+            } catch (Exception) {
                 return null;
             }
         }
@@ -238,16 +218,12 @@ namespace Alabo.Extensions
         ///     通过完整的命名空间获取属性值
         /// </summary>
         /// <param name="fullName">输入完整的命名空间</param>
-        public static IEnumerable<PropertyDescription> GetAllPropertys(this string fullName)
-        {
-            try
-            {
+        public static IEnumerable<PropertyDescription> GetAllPropertys(this string fullName) {
+            try {
                 var t = fullName.GetTypeByName();
                 var configDescription = new ClassDescription(t);
                 return configDescription.Propertys.ToList();
-            }
-            catch
-            {
+            } catch {
                 return null;
             }
         }
@@ -256,12 +232,10 @@ namespace Alabo.Extensions
         ///     根据完整的命名空间获取 ClassDescription 特性
         /// </summary>
         /// <param name="fullName">完整的命名空间</param>
-        public static ClassDescription GetClassDescription(this string fullName)
-        {
+        public static ClassDescription GetClassDescription(this string fullName) {
             var cacheKey = "GetClassDescription" + fullName;
             var objectCache = Ioc.Resolve<IObjectCache>();
-            if (!objectCache.TryGetPublic(cacheKey, out ClassDescription configDescription))
-            {
+            if (!objectCache.TryGetPublic(cacheKey, out ClassDescription configDescription)) {
                 if (fullName.IsNullOrEmpty()) {
                     return null;
                 }
@@ -280,18 +254,15 @@ namespace Alabo.Extensions
         /// <param name="typeName">type name or fullName</param>
         /// <param name="filedName">字段名称</param>
         /// <returns></returns>
-        public static string GetFiledDisplayName(this string typeName, string filedName)
-        {
+        public static string GetFiledDisplayName(this string typeName, string filedName) {
             var displayName = string.Empty;
             ;
             var type = typeName.GetTypeByName();
-            if (type != null)
-            {
+            if (type != null) {
                 var classDescription = type.FullName.GetClassDescription();
                 if (classDescription != null) {
                     foreach (var item in classDescription.Propertys) {
-                        if (item.Property.Name.Equals(filedName, StringComparison.CurrentCultureIgnoreCase))
-                        {
+                        if (item.Property.Name.Equals(filedName, StringComparison.CurrentCultureIgnoreCase)) {
                             displayName = item.DisplayAttribute?.Name;
                             if (displayName.IsNullOrEmpty()) {
                                 displayName = item.Property.Name;
@@ -312,17 +283,14 @@ namespace Alabo.Extensions
         /// <param name="typeName">type name or fullName</param>
         /// <param name="filedName">字段名称</param>
         /// <returns></returns>
-        public static Type GetFiledType(this string typeName, string filedName)
-        {
+        public static Type GetFiledType(this string typeName, string filedName) {
             Type displayName = null;
             var type = typeName.GetTypeByName();
-            if (type != null)
-            {
+            if (type != null) {
                 var classDescription = type.FullName.GetClassDescription();
                 if (classDescription != null) {
                     foreach (var item in classDescription.Propertys) {
-                        if (item.Property.Name.Equals(filedName, StringComparison.CurrentCultureIgnoreCase))
-                        {
+                        if (item.Property.Name.Equals(filedName, StringComparison.CurrentCultureIgnoreCase)) {
                             displayName = item.Property.PropertyType;
                             break;
                         }
@@ -337,12 +305,10 @@ namespace Alabo.Extensions
         ///     根据完整的命名空间获取 AutoDeleteAttribute 特性
         /// </summary>
         /// <param name="fullName">完整的命名空间</param>
-        public static AutoDeleteAttribute GetAutoDeleteAttribute(this string fullName)
-        {
+        public static AutoDeleteAttribute GetAutoDeleteAttribute(this string fullName) {
             var cacheKey = "AutoDeleteAttribute" + fullName;
             var objectCache = Ioc.Resolve<IObjectCache>();
-            if (!objectCache.TryGetPublic(cacheKey, out AutoDeleteAttribute typeclassProperty))
-            {
+            if (!objectCache.TryGetPublic(cacheKey, out AutoDeleteAttribute typeclassProperty)) {
                 var t = fullName.GetTypeByFullName();
                 typeclassProperty = t.GetTypeInfo().GetAttribute<AutoDeleteAttribute>();
             }
@@ -354,8 +320,7 @@ namespace Alabo.Extensions
         ///     根据命名空间获取编辑属性
         /// </summary>
         /// <param name="fullName">输入完整的命名空间</param>
-        public static IEnumerable<PropertyDescription> GetEditPropertys(string fullName)
-        {
+        public static IEnumerable<PropertyDescription> GetEditPropertys(string fullName) {
             var propertys = GetAllPropertys(fullName);
             return propertys?.Where(r => r.FieldAttribute.EditShow);
         }
@@ -364,8 +329,7 @@ namespace Alabo.Extensions
         ///     根据命名空间获取列表页属性
         /// </summary>
         /// <param name="fullName">输入完整的命名空间</param>
-        public static IEnumerable<PropertyDescription> GetListPropertys(string fullName)
-        {
+        public static IEnumerable<PropertyDescription> GetListPropertys(string fullName) {
             var propertys = GetAllPropertys(fullName);
             if (propertys != null) {
                 return propertys.Where(r => r.FieldAttribute.ListShow);
@@ -378,8 +342,8 @@ namespace Alabo.Extensions
     /// <summary>
     ///     属性结果集
     /// </summary>
-    public class PropertyResult
-    {
+    public class PropertyResult {
+
         /// <summary>
         ///     字段特性
         /// </summary>

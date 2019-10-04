@@ -9,14 +9,14 @@ using Alabo.UI.Design.AutoReports.Enums;
 using System;
 using System.Linq.Expressions;
 
-namespace Alabo.Linq
-{
+namespace Alabo.Linq {
+
     /// <summary>
     ///     构建实体动态查询条件
     ///     目前只支持单个查询提交，后期可拓展成支持多个
     /// </summary>
-    public class EntityQueryCondition
-    {
+    public class EntityQueryCondition {
+
         /// <summary>
         ///     实体类型,比如User,Order
         /// </summary>
@@ -62,8 +62,7 @@ namespace Alabo.Linq
         ///     获取表名
         /// </summary>
         /// <returns></returns>
-        public string GetTableName()
-        {
+        public string GetTableName() {
             var typeFind = EntityType.GetTypeByName();
             var instanceFind = EntityType.GetInstanceByName();
 
@@ -76,19 +75,16 @@ namespace Alabo.Linq
         ///     转换成Sql查询语句,Sql数据库使用Sql查询
         /// </summary>
         /// <returns></returns>
-        public string ToSqlWhere(ReportStyle reportStyle = ReportStyle.Count)
-        {
+        public string ToSqlWhere(ReportStyle reportStyle = ReportStyle.Count) {
             //  以下为示例代码
             var sqlWhere = " WHERE 1 = 1 ";
-            if (Field.IsNotNullOrEmpty() && Value.IsNotNullOrEmpty())
-            {
+            if (Field.IsNotNullOrEmpty() && Value.IsNotNullOrEmpty()) {
                 var operatorMark = Operator.GetFieldAttribute().Mark;
                 sqlWhere += $" AND {Field} {operatorMark} '{Value}'"; // 此处需要根据类型做额外的处理
             }
 
             if (reportStyle == ReportStyle.Count || reportStyle == ReportStyle.Sum ||
-                reportStyle == ReportStyle.Avg || reportStyle == ReportStyle.Min || reportStyle == ReportStyle.Max)
-            {
+                reportStyle == ReportStyle.Avg || reportStyle == ReportStyle.Min || reportStyle == ReportStyle.Max) {
                 // 根据timeType获取条件,获取季度，年度、月份等条件,构建时间查询语句
                 var timeTypeCondition = DataRecordExtension.GetTimeTypeCondition(TimeType, ReferTime);
                 if (!timeTypeCondition.IsNullOrEmpty()) {
@@ -105,12 +101,10 @@ namespace Alabo.Linq
         /// <typeparam name="TEntity"></typeparam>
         /// <returns></returns>
         public Expression<Func<TEntity, bool>> ToLinq<TEntity, TKey>()
-            where TEntity : class, IAggregateRoot<TEntity, TKey>
-        {
+            where TEntity : class, IAggregateRoot<TEntity, TKey> {
             Expression<Func<TEntity, bool>> predicate = null;
             if (Field.IsNotNullOrEmpty() && Value.IsNotNullOrEmpty()) {
-                switch (Operator)
-                {
+                switch (Operator) {
                     case OperatorCompare.Equal:
                         predicate = Lambda.Equal<TEntity>(Field, Value);
                         break;

@@ -1,10 +1,10 @@
-﻿namespace Alabo.Regexs
-{
+﻿namespace Alabo.Regexs {
+
     /// <summary>
     ///     正则表达式
     /// </summary>
-    public static class RegularExpressionHelper
-    {
+    public static class RegularExpressionHelper {
+
         /// <summary>
         ///     邮箱
         /// </summary>

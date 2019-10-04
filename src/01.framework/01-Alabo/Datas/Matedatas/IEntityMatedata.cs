@@ -1,14 +1,14 @@
 ﻿using Alabo.Aspects;
 using System;
 
-namespace Alabo.Datas.Matedatas
-{
+namespace Alabo.Datas.Matedatas {
+
     /// <summary>
     ///     实体元数据
     /// </summary>
     [Ignore]
-    public interface IEntityMatedata
-    {
+    public interface IEntityMatedata {
+
         /// <summary>
         ///     获取表名
         /// </summary>

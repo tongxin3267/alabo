@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Domains.Enums
-{
+namespace Alabo.Domains.Enums {
+
     /// <summary>
     ///     状态
     /// </summary>
     [ClassProperty(Name = "状态")]
-    public enum Status
-    {
+    public enum Status {
+
         /// <summary>
         ///     正常
         /// </summary>

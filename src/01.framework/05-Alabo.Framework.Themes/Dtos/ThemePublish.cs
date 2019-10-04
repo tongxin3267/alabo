@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Themes.Domain.Entities;
+﻿using Alabo.Framework.Themes.Domain.Entities;
 using Alabo.Validations;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Themes.Dtos
-{
-    public class ThemePublish
-    {
+namespace Alabo.Framework.Themes.Dtos {
+
+    public class ThemePublish {
+
         /// <summary>
         ///     模板
         /// </summary>

@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     收银台配置类型
     /// </summary>
     [ClassProperty(Name = "收银台配置类型")]
-    public enum CheckoutType
-    {
+    public enum CheckoutType {
+
         /// <summary>
         ///     商城订单
         ///     订单表在Shop_Order表中

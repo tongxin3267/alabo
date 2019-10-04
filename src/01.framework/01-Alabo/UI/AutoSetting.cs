@@ -1,10 +1,10 @@
-﻿namespace Alabo.UI
-{
+﻿namespace Alabo.UI {
+
     /// <summary>
     ///     自动页面设置
     /// </summary>
-    public class AutoSetting
-    {
+    public class AutoSetting {
+
         /// <summary>
         ///     Api接口地址
         /// </summary>

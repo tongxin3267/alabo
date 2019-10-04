@@ -4,12 +4,11 @@ using Alabo.Domains.Services;
 using Alabo.Extensions;
 using System;
 
-namespace Alabo.Framework.Core.WebUis.Services
-{
-    public class UIBaseService : ServiceBase, IUIBaseService
-    {
-        public UIBaseService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+namespace Alabo.Framework.Core.WebUis.Services {
+
+    public class UIBaseService : ServiceBase, IUIBaseService {
+
+        public UIBaseService(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
         /// <summary>
@@ -19,8 +18,7 @@ namespace Alabo.Framework.Core.WebUis.Services
         /// <param name="typeFind"></param>
         /// <param name="instanceFind"></param>
         /// <returns></returns>
-        public ServiceResult CheckType(string type, ref Type typeFind, ref object instanceFind)
-        {
+        public ServiceResult CheckType(string type, ref Type typeFind, ref object instanceFind) {
             if (type.IsNullOrEmpty() || type == "undefined") {
                 return ServiceResult.FailedWithMessage("类型不能为空");
             }

@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     活动的适用范围
     /// </summary>
     [ClassProperty(Name = "活动适用范围")]
-    public enum UserRange
-    {
+    public enum UserRange {
+
         /// <summary>
         ///     所有会员
         /// </summary>

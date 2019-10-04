@@ -1,10 +1,9 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     [ClassProperty(Name = "Api传参类型")]
-    public enum ApiMethodType
-    {
+    public enum ApiMethodType {
         HttpPost = 1,
         HttpGet = 2,
         HttpDelete = 3,

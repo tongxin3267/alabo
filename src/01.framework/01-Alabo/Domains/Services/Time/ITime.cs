@@ -4,14 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Alabo.Domains.Services.Time
-{
+namespace Alabo.Domains.Services.Time {
+
     /// <summary>
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     /// <typeparam name="TKey"></typeparam>
-    public interface ITime<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+    public interface ITime<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         /// <summary>
         ///     根据时间与条件查询最后一条记录
         ///     比如：查询当月最后一条记录、周最后一条记录

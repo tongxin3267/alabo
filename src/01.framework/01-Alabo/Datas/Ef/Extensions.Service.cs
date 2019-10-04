@@ -11,13 +11,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 
-namespace Alabo.Datas.Ef
-{
+namespace Alabo.Datas.Ef {
+
     /// <summary>
     ///     服务扩展
     /// </summary>
-    public static partial class Extensions
-    {
+    public static partial class Extensions {
+
         /// <summary>
         ///     注册工作单元服务
         /// </summary>
@@ -26,8 +26,7 @@ namespace Alabo.Datas.Ef
         /// <param name="services">服务集合</param>
         public static IServiceCollection AddService<TService, TImplementation>(this IServiceCollection services)
             where TService : class, IService
-            where TImplementation : ServiceBase, TService
-        {
+            where TImplementation : ServiceBase, TService {
             services.TryAddScoped<TService>(t => t.GetService<TImplementation>());
             return services;
         }
@@ -42,8 +41,7 @@ namespace Alabo.Datas.Ef
         public static IServiceCollection AddUnitOfWork<TService, TImplementation>(this IServiceCollection services,
             Action<DbContextOptionsBuilder> configAction)
             where TService : class, IUnitOfWork
-            where TImplementation : UnitOfWorkBase, TService
-        {
+            where TImplementation : UnitOfWorkBase, TService {
             services.AddDbContext<TImplementation>(configAction);
             services.TryAddScoped<TService>(t => t.GetService<TImplementation>());
             services.AddSqlQuery<TImplementation, TImplementation>(config =>
@@ -54,8 +52,7 @@ namespace Alabo.Datas.Ef
         /// <summary>
         ///     获取数据库类型
         /// </summary>
-        private static DatabaseType GetDbType<TUnitOfWork>()
-        {
+        private static DatabaseType GetDbType<TUnitOfWork>() {
             var type = typeof(TUnitOfWork).BaseType;
             if (type == typeof(MsSqlUnitOfWork)) {
                 return DatabaseType.SqlServer;
@@ -83,8 +80,7 @@ namespace Alabo.Datas.Ef
         public static IServiceCollection AddUnitOfWork<TService, TImplementation>(this IServiceCollection services,
             string connection, EfLogLevel level = EfLogLevel.Sql)
             where TService : class, IUnitOfWork
-            where TImplementation : UnitOfWorkBase, TService
-        {
+            where TImplementation : UnitOfWorkBase, TService {
             EfConfig.LogLevel = level;
             return AddUnitOfWork<TService, TImplementation>(services,
                 builder => { ConfigConnection<TImplementation>(builder, connection); });
@@ -94,10 +90,8 @@ namespace Alabo.Datas.Ef
         ///     配置连接字符串
         /// </summary>
         private static void ConfigConnection<TImplementation>(DbContextOptionsBuilder builder, string connection)
-            where TImplementation : UnitOfWorkBase
-        {
-            switch (GetDbType<TImplementation>())
-            {
+            where TImplementation : UnitOfWorkBase {
+            switch (GetDbType<TImplementation>()) {
                 case DatabaseType.SqlServer:
                     builder.UseSqlServer(connection);
                     return;

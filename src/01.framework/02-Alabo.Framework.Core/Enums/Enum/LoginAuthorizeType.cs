@@ -1,13 +1,13 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     登录激活方式
     /// </summary>
     [ClassProperty(Name = "登陆激活方式")]
-    public enum LoginAuthorizeType
-    {
+    public enum LoginAuthorizeType {
+
         /// <summary>
         ///     通过登录激活
         /// </summary>

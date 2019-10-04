@@ -1,10 +1,10 @@
-﻿namespace Alabo.Helpers
-{
+﻿namespace Alabo.Helpers {
+
     /// <summary>
     ///     常量
     /// </summary>
-    public static class Const
-    {
+    public static class Const {
+
         /// <summary>
         ///     汉字及拼音首字母
         /// </summary>

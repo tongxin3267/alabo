@@ -6,14 +6,14 @@ using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Alabo.Domains.Services.Save
-{
+namespace Alabo.Domains.Services.Save {
+
     /// <summary>
     ///     保存操作
     /// </summary>
     /// <typeparam name="TRequest">参数类型</typeparam>
-    public interface ISaveAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+    public interface ISaveAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         /// <summary>
         ///     保存
         /// </summary>

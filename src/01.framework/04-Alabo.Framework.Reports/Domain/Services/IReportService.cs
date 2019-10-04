@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Framework.Reports.Domain.Entities;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MongoDB.Bson;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
 
-namespace Alabo.Framework.Reports.Domain.Services
-{
-    public interface IReportService : IService<Report, ObjectId>
-    {
+namespace Alabo.Framework.Reports.Domain.Services {
+
+    public interface IReportService : IService<Report, ObjectId> {
+
         void AddOrUpdate<T>(T reporyModel) where T : class, IReport;
 
         /// <summary>

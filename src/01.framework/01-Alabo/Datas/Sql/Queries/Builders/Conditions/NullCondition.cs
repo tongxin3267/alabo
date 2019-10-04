@@ -1,12 +1,12 @@
 ﻿using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Conditions
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Conditions {
+
     /// <summary>
     ///     空查询条件
     /// </summary>
-    public class NullCondition : ICondition
-    {
+    public class NullCondition : ICondition {
+
         /// <summary>
         ///     空查询条件实例
         /// </summary>
@@ -15,15 +15,13 @@ namespace Alabo.Datas.Sql.Queries.Builders.Conditions
         /// <summary>
         ///     封闭构造方法
         /// </summary>
-        private NullCondition()
-        {
+        private NullCondition() {
         }
 
         /// <summary>
         ///     获取查询条件
         /// </summary>
-        public string GetCondition()
-        {
+        public string GetCondition() {
             return null;
         }
     }

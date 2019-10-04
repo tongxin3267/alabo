@@ -2,13 +2,13 @@
 using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 using System.Collections.Generic;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Core
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Core {
+
     /// <summary>
     ///     参数管理器
     /// </summary>
-    public class ParameterManager : IParameterManager
-    {
+    public class ParameterManager : IParameterManager {
+
         /// <summary>
         ///     Sql方言
         /// </summary>
@@ -28,8 +28,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         ///     初始化参数管理器
         /// </summary>
         /// <param name="dialect">Sql方言</param>
-        public ParameterManager(IDialect dialect)
-        {
+        public ParameterManager(IDialect dialect) {
             _params = new Dictionary<string, object>();
             _paramIndex = 0;
             _dialect = dialect;
@@ -38,16 +37,14 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <summary>
         ///     创建参数名
         /// </summary>
-        public string GenerateName()
-        {
+        public string GenerateName() {
             return $"{_dialect.GetPrefix()}_p_{_paramIndex++}";
         }
 
         /// <summary>
         ///     获取参数列表
         /// </summary>
-        public IDictionary<string, object> GetParams()
-        {
+        public IDictionary<string, object> GetParams() {
             return _params;
         }
 
@@ -57,8 +54,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <param name="name">参数名</param>
         /// <param name="value">参数值</param>
         /// <param name="operator">运算符</param>
-        public void Add(string name, object value, Operator? @operator = null)
-        {
+        public void Add(string name, object value, Operator? @operator = null) {
             if (string.IsNullOrWhiteSpace(name)) {
                 return;
             }
@@ -69,14 +65,12 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <summary>
         ///     获取值
         /// </summary>
-        private object GetValue(object value, Operator? @operator)
-        {
+        private object GetValue(object value, Operator? @operator) {
             if (string.IsNullOrWhiteSpace(Alabo.Extensions.Extensions.SafeString(value))) {
                 return value;
             }
 
-            switch (@operator)
-            {
+            switch (@operator) {
                 case Operator.Contains:
                     return $"%{value}%";
 

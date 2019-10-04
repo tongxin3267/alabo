@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Alabo.Domains.Trees
-{
+namespace Alabo.Domains.Trees {
+
     /// <summary>
     ///     树型扩展
     /// </summary>
-    public static class Extensions
-    {
+    public static class Extensions {
+
         /// <summary>
         ///     从路径中获取所有上级节点编号
         /// </summary>
         /// <param name="node">树节点</param>
         /// <param name="excludeSelf">是否排除当前节点,默认排除自身</param>
-        public static List<string> GetParentIdsFromPath(this ITreeNode node, bool excludeSelf = true)
-        {
+        public static List<string> GetParentIdsFromPath(this ITreeNode node, bool excludeSelf = true) {
             if (node == null || node.Path.IsEmpty()) {
                 return new List<string>();
             }
@@ -34,16 +33,14 @@ namespace Alabo.Domains.Trees
         /// <typeparam name="TEntity">实体类型</typeparam>
         /// <param name="entities">实体列表</param>
         public static List<string> GetMissingParentIds<TEntity>(this IEnumerable<TEntity> entities)
-            where TEntity : class, ITreeNode
-        {
+            where TEntity : class, ITreeNode {
             var result = new List<string>();
             if (entities == null) {
                 return result;
             }
 
             var list = entities.ToList();
-            list.ForEach(entity =>
-            {
+            list.ForEach(entity => {
                 if (entity == null) {
                     return;
                 }

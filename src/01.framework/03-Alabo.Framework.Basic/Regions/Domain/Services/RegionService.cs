@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
@@ -13,25 +9,26 @@ using Alabo.Framework.Basic.Regions.Dtos;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Tool.AMap;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
-namespace Alabo.Framework.Basic.Regions.Domain.Services
-{
-    public class RegionService : ServiceBase<Region, ObjectId>, IRegionService
-    {
+namespace Alabo.Framework.Basic.Regions.Domain.Services {
+
+    public class RegionService : ServiceBase<Region, ObjectId>, IRegionService {
+
         public RegionService(IUnitOfWork unitOfWork, IRepository<Region, ObjectId> repository) : base(unitOfWork,
-            repository)
-        {
+            repository) {
         }
 
-        public PagedList<Region> GetProvincePagedList(object query)
-        {
+        public PagedList<Region> GetProvincePagedList(object query) {
             return GetPagedList(query, r => r.Level == RegionLevel.Province);
         }
 
         #region 初始化region表
 
-        public void InitRegion()
-        {
+        public void InitRegion() {
             var check = Resolve<IRegionService>().GetList();
             if (check.Count > 0) {
                 return;
@@ -46,10 +43,8 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
             var cityList = city.Deserialize<List<RegionProvince>>();
             var areaList = area.Deserialize<List<List<RegionProvince>>>();
             var regionList = new List<Region>();
-            foreach (var item in provinceList)
-            {
-                var region = new Region
-                {
+            foreach (var item in provinceList) {
+                var region = new Region {
                     RegionId = item.Value.ToInt64(),
                     Name = item.Label,
                     ProvinceId = item.Value.ToInt64(),
@@ -59,35 +54,31 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
             }
 
             foreach (var temp in cityList) {
-                foreach (var item in temp)
-            {
-                var region = new Region
-                {
-                    RegionId = item.Value.ToInt64(),
-                    Name = item.Label,
-                    ProvinceId = item.Value.ToInt64(),
-                    Level = RegionLevel.City,
-                    ParentId = item.Value.Substring(0, 2).ToInt64()
-                };
-                regionList.Add(region);
-            }
+                foreach (var item in temp) {
+                    var region = new Region {
+                        RegionId = item.Value.ToInt64(),
+                        Name = item.Label,
+                        ProvinceId = item.Value.ToInt64(),
+                        Level = RegionLevel.City,
+                        ParentId = item.Value.Substring(0, 2).ToInt64()
+                    };
+                    regionList.Add(region);
+                }
             }
 
             foreach (var item in areaList) {
                 foreach (var temp in item) {
-                    foreach (var tent in temp)
-            {
-                var region = new Region
-                {
-                    RegionId = tent.Value.ToInt64(),
+                    foreach (var tent in temp) {
+                        var region = new Region {
+                            RegionId = tent.Value.ToInt64(),
 
-                    Name = tent.Label,
-                    ProvinceId = tent.Value.ToInt64(),
-                    Level = RegionLevel.County,
-                    ParentId = tent.Value.Substring(0, 4).ToInt64()
-                };
-                regionList.Add(region);
-            }
+                            Name = tent.Label,
+                            ProvinceId = tent.Value.ToInt64(),
+                            Level = RegionLevel.County,
+                            ParentId = tent.Value.Substring(0, 4).ToInt64()
+                        };
+                        regionList.Add(region);
+                    }
                 }
             }
 
@@ -100,37 +91,28 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
         ///     根据枚举返回区域数据
         ///     返回JSON
         /// </summary>
-        public string GetRegionData(RegionLevel level)
-        {
+        public string GetRegionData(RegionLevel level) {
             var result = string.Empty;
             var fileDir = Environment.CurrentDirectory;
-            if (level == RegionLevel.Province)
-            {
+            if (level == RegionLevel.Province) {
                 var cacheName = "region_province";
                 //判断缓存是否有值 ,如果有就直接读缓存
-                if (ObjectCache.TryGet(cacheName, out string val))
-                {
+                if (ObjectCache.TryGet(cacheName, out string val)) {
                     result = val;
-                }
-                else
-                {
+                } else {
                     result = File.ReadAllText(fileDir + @"\wwwroot\static\js\region\province.js");
                     //无缓存,写入缓存
                     ObjectCache.Set(cacheName, result);
                 }
             }
 
-            if (level == RegionLevel.City)
-            {
+            if (level == RegionLevel.City) {
                 var cacheName = "region_city";
                 //判断缓存是否有值 ,如果有就直接读缓存
 
-                if (ObjectCache.TryGet(cacheName, out string val))
-                {
+                if (ObjectCache.TryGet(cacheName, out string val)) {
                     result = val;
-                }
-                else
-                {
+                } else {
                     //判断缓存是否有值 ,如果有就直接读缓存
                     result = File.ReadAllText(fileDir + @"\wwwroot\static\js\region\city.js");
                     //无缓存,写入缓存
@@ -138,16 +120,12 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
                 }
             }
 
-            if (level == RegionLevel.County)
-            {
+            if (level == RegionLevel.County) {
                 var cacheName = "region_area";
                 //判断缓存是否有值 ,如果有就直接读缓存
-                if (ObjectCache.TryGet(cacheName, out string val))
-                {
+                if (ObjectCache.TryGet(cacheName, out string val)) {
                     result = val;
-                }
-                else
-                {
+                } else {
                     //判断缓存是否有值 ,如果有就直接读缓存
                     result = File.ReadAllText(fileDir + @"\wwwroot\static\js\region\area.js");
                     //无缓存,写入缓存
@@ -158,8 +136,7 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
             return result;
         }
 
-        public string GetFullName(long areaId)
-        {
+        public string GetFullName(long areaId) {
             var region = GetSingle(r => r.RegionId == areaId);
             var res = string.Empty;
             if (region?.FullName != null) {
@@ -167,28 +144,22 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
             }
 
             res = region?.Name;
-            if (areaId.ToString().Length - 2 >= 2)
-            {
+            if (areaId.ToString().Length - 2 >= 2) {
                 areaId = Convert.ToInt64(areaId.ToString().Substring(0, areaId.ToString().Length - 2));
                 res = GetFullName(areaId) + res;
-            }
-            else
-            {
+            } else {
                 return res;
             }
 
             return res;
         }
 
-        public IEnumerable<RegionTree> RegionTrees()
-        {
+        public IEnumerable<RegionTree> RegionTrees() {
             // 可是使用断点获取json数据
             var regionList = Resolve<IRegionService>().GetList();
             var regionJson = new List<RegionTree>();
-            foreach (var item in regionList)
-            {
-                var region = new RegionTree
-                {
+            foreach (var item in regionList) {
+                var region = new RegionTree {
                     Name = item.Name,
                     Id = item.RegionId,
                     ParentId = item.ParentId
@@ -201,8 +172,7 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
             return regionJson;
         }
 
-        public string GetRegionNameById(long id)
-        {
+        public string GetRegionNameById(long id) {
             var model = Resolve<IRegionService>().GetSingle(u => u.RegionId == id);
             if (model == null) {
                 return string.Empty;
@@ -210,12 +180,10 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
 
             var regionName = model.Name;
 
-            if (model.ParentId != 0)
-            {
+            if (model.ParentId != 0) {
                 var tempId = model.RegionId.ToString();
                 //临时解决地址二级地址显示  待重构地址初始化
-                if (tempId.Count() == 6)
-                {
+                if (tempId.Count() == 6) {
                     var regionParent = "";
                     for (var i = 0; i <= 3; i++) {
                         regionParent += tempId[i].ToString();
@@ -225,11 +193,9 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
                 }
 
                 var temp = Resolve<IRegionService>().GetSingle(u => u.RegionId == model.ParentId);
-                if (temp != null)
-                {
+                if (temp != null) {
                     regionName = temp.Name + model.Name;
-                    if (temp.ParentId != 0)
-                    {
+                    if (temp.ParentId != 0) {
                         var item = Resolve<IRegionService>().GetSingle(u => u.RegionId == temp.ParentId);
                         regionName = item.Name + temp.Name + model.Name;
                     }
@@ -244,21 +210,18 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
         /// <summary>
         ///     按照国际区域编码标准导入中国城市与区域
         /// </summary>
-        public void Init()
-        {
-            if (!Exists())
-            {
+        public void Init() {
+            if (!Exists()) {
                 var regionIdList = new List<long>();
                 var crileList = new List<string>();
                 var client = new RegionMapClient();
                 var mapDistrict = client.GetMapDistrict();
-                if (mapDistrict != null && mapDistrict.Status == 1)
-                {
+                if (mapDistrict != null && mapDistrict.Status == 1) {
+
                     #region // 添加国家
 
                     var country = mapDistrict.Districts[0];
-                    var region = new Region(100000, 0)
-                    {
+                    var region = new Region(100000, 0) {
                         Country = Country.China,
                         Name = country.Name,
                         Center = country.Center,
@@ -269,17 +232,14 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
 
                     #endregion // 添加国家
 
-                    foreach (var provinceItem in country.Districts)
-                    {
+                    foreach (var provinceItem in country.Districts) {
                         var list = new List<Region>();
                         if (provinceItem.AdCode.IsNullOrEmpty()) {
                             throw new ValidException("省份Id获取失败");
                         }
 
-                        if (provinceItem.Level == "province")
-                        {
-                            var provinceRegion = new Region(provinceItem.AdCode.ConvertToLong(0), 0)
-                            {
+                        if (provinceItem.Level == "province") {
+                            var provinceRegion = new Region(provinceItem.AdCode.ConvertToLong(0), 0) {
                                 Country = Country.China,
                                 Name = FormatRegionName(provinceItem.Name),
                                 Center = provinceItem.Center,
@@ -290,17 +250,14 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
                             list.Add(provinceRegion); // 添加省份
 
                             // 添加城市
-                            foreach (var cityItem in provinceItem.Districts)
-                            {
+                            foreach (var cityItem in provinceItem.Districts) {
                                 if (cityItem.AdCode.IsNullOrEmpty()) {
                                     throw new ValidException("城市Id获取失败");
                                 }
 
-                                if (cityItem.Level == "city")
-                                {
+                                if (cityItem.Level == "city") {
                                     var cityRegion = new Region(cityItem.AdCode.ConvertToLong(0),
-                                        provinceRegion.RegionId)
-                                    {
+                                        provinceRegion.RegionId) {
                                         Country = Country.China,
                                         Name = FormatRegionName(cityItem.Name),
                                         Center = cityItem.Center,
@@ -315,23 +272,20 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
 
                                     // 添加区域 区县
                                     var i = 60;
-                                    foreach (var countyItem in cityItem.Districts)
-                                    {
+                                    foreach (var countyItem in cityItem.Districts) {
                                         if (countyItem.AdCode.IsNullOrEmpty()) {
                                             throw new ValidException("区域Id获取失败");
                                         }
 
                                         var countryId = countyItem.AdCode.ConvertToLong(0);
-                                        if (regionIdList.Contains(countryId))
-                                        {
+                                        if (regionIdList.Contains(countryId)) {
                                             countryId = (countryId + i.ToString()).ConvertToLong(0);
                                             i++;
                                         }
 
                                         regionIdList.Add(countryId);
                                         var countyRegion = new Region(countryId,
-                                            cityRegion.RegionId)
-                                        {
+                                            cityRegion.RegionId) {
                                             Country = Country.China,
                                             Name = FormatRegionName(countyItem.Name),
                                             Center = countyItem.Center,
@@ -358,8 +312,7 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
         ///     初始化区域ID表
         ///     执行时需Mogodb中region表为空
         /// </summary>
-        private string FormatRegionName(string name)
-        {
+        private string FormatRegionName(string name) {
             if (name.IsNullOrEmpty()) {
                 return string.Empty;
             }
@@ -378,8 +331,7 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
 
         #region 获取省份、城市、区域Id
 
-        public long GetCountyId(long id)
-        {
+        public long GetCountyId(long id) {
             var region = GetSingle(m => m.RegionId == id);
             if (region == null) {
                 return 0;
@@ -392,17 +344,14 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
             return 0;
         }
 
-        public long GetCityId(long id)
-        {
+        public long GetCityId(long id) {
             var region = GetSingle(m => m.RegionId == id);
             if (region == null) {
                 return 0;
             }
 
-            if (region.Level == RegionLevel.County)
-            {
-                if (region.CityId == 0L)
-                {
+            if (region.Level == RegionLevel.County) {
+                if (region.CityId == 0L) {
                     var regStr = region.RegionId.ToString();
                     if (regStr.Length >= 4) {
                         return regStr.Substring(0, 4).ToInt64();
@@ -419,8 +368,7 @@ namespace Alabo.Framework.Basic.Regions.Domain.Services
             return 0;
         }
 
-        public long GetProvinceId(long id)
-        {
+        public long GetProvinceId(long id) {
             var region = GetSingle(m => m.RegionId == id);
             if (region == null) {
                 return 0;

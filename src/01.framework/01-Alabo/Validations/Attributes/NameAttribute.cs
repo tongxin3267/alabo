@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Validations.Attributes
-{
-    public class NameAttribute : ValidationProviderAttribute
-    {
+namespace Alabo.Validations.Attributes {
+
+    public class NameAttribute : ValidationProviderAttribute {
+
         /// <summary>
         ///     获取所有的长度
         /// </summary>
         /// <returns></returns>
-        public override IEnumerable<ValidationAttribute> GetValidationAttributes()
-        {
+        public override IEnumerable<ValidationAttribute> GetValidationAttributes() {
             return new List<ValidationAttribute>
             {
                 ValidationAttributeConst.RequiredAttribute
@@ -23,14 +22,13 @@ namespace Alabo.Validations.Attributes
     /// <summary>
     ///     名称统一验证，名称长度不能超过8
     /// </summary>
-    public class Name8Attribute : ValidationProviderAttribute
-    {
+    public class Name8Attribute : ValidationProviderAttribute {
+
         /// <summary>
         ///     获取所有的长度
         /// </summary>
         /// <returns></returns>
-        public override IEnumerable<ValidationAttribute> GetValidationAttributes()
-        {
+        public override IEnumerable<ValidationAttribute> GetValidationAttributes() {
             return new List<ValidationAttribute>
             {
                 ValidationAttributeConst.RequiredAttribute,
@@ -43,14 +41,13 @@ namespace Alabo.Validations.Attributes
     /// <summary>
     ///     名称统一验证，名称长度不能超过20
     /// </summary>
-    public class Name20Attribute : ValidationProviderAttribute
-    {
+    public class Name20Attribute : ValidationProviderAttribute {
+
         /// <summary>
         ///     获取所有的长度
         /// </summary>
         /// <returns></returns>
-        public override IEnumerable<ValidationAttribute> GetValidationAttributes()
-        {
+        public override IEnumerable<ValidationAttribute> GetValidationAttributes() {
             return new List<ValidationAttribute>
             {
                 ValidationAttributeConst.RequiredAttribute,
@@ -63,14 +60,13 @@ namespace Alabo.Validations.Attributes
     /// <summary>
     ///     名称统一验证，名称长度不能超过60
     /// </summary>
-    public class Name60Attribute : ValidationProviderAttribute
-    {
+    public class Name60Attribute : ValidationProviderAttribute {
+
         /// <summary>
         ///     获取所有的长度
         /// </summary>
         /// <returns></returns>
-        public override IEnumerable<ValidationAttribute> GetValidationAttributes()
-        {
+        public override IEnumerable<ValidationAttribute> GetValidationAttributes() {
             return new List<ValidationAttribute>
             {
                 ValidationAttributeConst.RequiredAttribute,

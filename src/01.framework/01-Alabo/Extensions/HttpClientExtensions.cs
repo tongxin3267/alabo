@@ -4,18 +4,17 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Alabo.Extensions
-{
-    public static class HttpClientExtensions
-    {
+namespace Alabo.Extensions {
+
+    public static class HttpClientExtensions {
+
         /// <summary>
         ///     传递当前页面的header到新的httpclient请求中
         /// </summary>
         /// <param name="client"></param>
         /// <param name="url">请求地址</param>
         /// <param name="header">当前的httpheader信息</param>
-        public static async Task<string> GetStringAsync(this HttpClient client, string url, IHeaderDictionary header)
-        {
+        public static async Task<string> GetStringAsync(this HttpClient client, string url, IHeaderDictionary header) {
             if (client == null) {
                 throw new ArgumentNullException(nameof(client));
             }
@@ -34,8 +33,7 @@ namespace Alabo.Extensions
         }
 
         public static async Task<string> GetAsync(this HttpClient client, string url, HttpRequest req,
-            string method = "Get", string context = "")
-        {
+            string method = "Get", string context = "") {
             if (client == null) {
                 throw new ArgumentNullException(nameof(client));
             }
@@ -61,8 +59,7 @@ namespace Alabo.Extensions
         }
 
         public static async Task<string> PostAsync(string url, HttpRequest req, KeyValuePair<string, string> context,
-            string method = "GET")
-        {
+            string method = "GET") {
             var response = new HttpResponseMessage();
 
             if (req == null) {

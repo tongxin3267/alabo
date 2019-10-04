@@ -2,13 +2,13 @@
 using System.Net;
 using System.Threading.Tasks;
 
-namespace Alabo.Web.Clients
-{
+namespace Alabo.Web.Clients {
+
     /// <summary>
     ///     Http请求
     /// </summary>
-    public interface IHttpRequest : IRequest<IHttpRequest>
-    {
+    public interface IHttpRequest : IRequest<IHttpRequest> {
+
         /// <summary>
         ///     请求成功回调函数
         /// </summary>
@@ -32,8 +32,8 @@ namespace Alabo.Web.Clients
     ///     Http请求
     /// </summary>
     /// <typeparam name="TResult">结果类型</typeparam>
-    public interface IHttpRequest<TResult> : IRequest<IHttpRequest<TResult>> where TResult : class
-    {
+    public interface IHttpRequest<TResult> : IRequest<IHttpRequest<TResult>> where TResult : class {
+
         /// <summary>
         ///     请求成功回调函数
         /// </summary>

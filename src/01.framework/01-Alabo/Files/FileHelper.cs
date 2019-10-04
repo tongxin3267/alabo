@@ -4,13 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Alabo.Files
-{
+namespace Alabo.Files {
+
     /// <summary>
     ///     文件操作类
     /// </summary>
-    public static class FileHelper
-    {
+    public static class FileHelper {
+
         /// <summary>
         ///     网站根目录
         /// </summary>
@@ -61,16 +61,12 @@ namespace Alabo.Files
         /// <summary>
         ///     获取图片地址
         /// </summary>
-        public static string GetSmallPic(string imageUrl)
-        {
-            if (imageUrl != null)
-            {
+        public static string GetSmallPic(string imageUrl) {
+            if (imageUrl != null) {
                 if (File.Exists(RootPath + imageUrl)) {
                     return imageUrl;
                 }
-            }
-            else
-            {
+            } else {
                 return "/wwwroot/static/images/nopic.png";
             }
 
@@ -81,19 +77,14 @@ namespace Alabo.Files
         ///     创建文件夹
         /// </summary>
         /// <param name="filePath"></param>
-        public static ServiceResult CreateDirectory(string filePath)
-        {
-            try
-            {
-                if (!Directory.Exists(filePath))
-                {
+        public static ServiceResult CreateDirectory(string filePath) {
+            try {
+                if (!Directory.Exists(filePath)) {
                     var di = Directory.CreateDirectory(filePath);
                 }
 
                 return ServiceResult.Success;
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 return ServiceResult.FailedWithMessage(ex.Message);
             }
         }
@@ -103,12 +94,9 @@ namespace Alabo.Files
         /// </summary>
         /// <param name="path">文件的完整路径</param>
         /// <param name="content">需要写入文件的内容</param>
-        public static ServiceResult Write(string path, string content)
-        {
-            using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
-            {
-                using (var sw = new StreamWriter(fs))
-                {
+        public static ServiceResult Write(string path, string content) {
+            using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.ReadWrite)) {
+                using (var sw = new StreamWriter(fs)) {
                     sw.WriteLine(content);
                     return ServiceResult.Success;
                 }
@@ -120,12 +108,9 @@ namespace Alabo.Files
         /// </summary>
         /// <param name="path">文件的完整路径</param>
         /// <param name="content">需要写入文件的内容</param>
-        public static ServiceResult Write(string path, byte[] content)
-        {
-            using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
-            {
-                using (var sw = new BinaryWriter(fs))
-                {
+        public static ServiceResult Write(string path, byte[] content) {
+            using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.ReadWrite)) {
+                using (var sw = new BinaryWriter(fs)) {
                     sw.Write(content);
                     return ServiceResult.Success;
                 }
@@ -136,28 +121,21 @@ namespace Alabo.Files
         ///     Checks and deletes given file if it does exists.
         /// </summary>
         /// <param name="filePath">Path of the file</param>
-        public static void DeleteIfExists(string filePath)
-        {
+        public static void DeleteIfExists(string filePath) {
             if (File.Exists(filePath)) {
                 File.Delete(filePath);
             }
         }
 
-        public static ServiceResult FileSave(string filePath, string fileContext)
-        {
-            try
-            {
-                using (var fs = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
-                {
+        public static ServiceResult FileSave(string filePath, string fileContext) {
+            try {
+                using (var fs = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite)) {
                     fs.SetLength(0);
-                    using (var sw = new StreamWriter(fs))
-                    {
+                    using (var sw = new StreamWriter(fs)) {
                         sw.WriteAsync(fileContext);
                     }
                 }
-            }
-            catch (Exception)
-            {
+            } catch (Exception) {
             }
 
             return ServiceResult.Success;
@@ -167,10 +145,8 @@ namespace Alabo.Files
         ///     读取文件的内容
         /// </summary>
         /// <param name="path">文件的完整路径</param>
-        public static Stream ReadStream(string path)
-        {
-            if (File.Exists(path))
-            {
+        public static Stream ReadStream(string path) {
+            if (File.Exists(path)) {
                 Stream stream = new FileStream(path, FileMode.Open);
                 return stream;
             }
@@ -183,13 +159,10 @@ namespace Alabo.Files
         /// </summary>
         /// <param name="path">文件的完整路径</param>
         /// <param name="encoding"></param>
-        public static string Read(string path)
-        {
+        public static string Read(string path) {
             if (File.Exists(path)) {
-                using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
-                {
-                    using (var sr = new StreamReader(fs))
-                    {
+                using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read)) {
+                    using (var sr = new StreamReader(fs)) {
                         return sr.ReadToEnd();
                     }
                 }
@@ -203,20 +176,16 @@ namespace Alabo.Files
         /// </summary>
         /// <param name="path">文件的完整路径</param>
         /// <param name="encoding"></param>
-        public static byte[] ReadBuffer(string path)
-        {
+        public static byte[] ReadBuffer(string path) {
             if (File.Exists(path)) {
-                using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
-                {
-                    using (var sr = new BinaryReader(fs))
-                    {
+                using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read)) {
+                    using (var sr = new BinaryReader(fs)) {
                         var length = fs.Length;
                         var size = 1024;
                         int nTemp, nRead = 0;
                         byte[] buffer;
                         var bufferRes = new byte[length];
-                        do
-                        {
+                        do {
                             buffer = new byte[size];
                             nTemp = sr.Read(buffer, 0, size);
                             Array.Copy(buffer, 0, bufferRes, nRead, nTemp); // buffer.CopyTo(bufferRes, nRead);
@@ -231,19 +200,15 @@ namespace Alabo.Files
             return null;
         }
 
-        public static string ReadUrl(string path)
-        {
-            using (var fs = new FileStream("http://www.baidu.com", FileMode.Open))
-            {
-                using (var sr = new StreamReader(fs))
-                {
+        public static string ReadUrl(string path) {
+            using (var fs = new FileStream("http://www.baidu.com", FileMode.Open)) {
+                using (var sr = new StreamReader(fs)) {
                     return sr.ReadToEnd();
                 }
             }
         }
 
-        public static Dictionary<string, string> GetFileList(string filePath = "Widgets\\Shared\\Area\\images")
-        {
+        public static Dictionary<string, string> GetFileList(string filePath = "Widgets\\Shared\\Area\\images") {
             var dic = new Dictionary<string, string>();
             filePath = Path.Combine(RootPath, filePath);
             if (!Directory.Exists(filePath)) {
@@ -261,18 +226,14 @@ namespace Alabo.Files
             return dic;
         }
 
-        public static void Copy(string source, string target)
-        {
-            try
-            {
+        public static void Copy(string source, string target) {
+            try {
                 if (!File.Exists(source) || !Directory.Exists(target)) {
                     return;
                 }
 
                 File.Copy(source, $"{target}/{Path.GetFileName(source)}", true);
-            }
-            catch
-            {
+            } catch {
             }
         }
     }

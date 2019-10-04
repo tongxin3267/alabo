@@ -1,19 +1,18 @@
 ﻿using System;
 
-namespace Alabo.Web.Mvc.Attributes
-{
+namespace Alabo.Web.Mvc.Attributes {
+
     /// <summary>
     ///     显示为标签文本时使用的css类
     /// </summary>
     [AttributeUsage(AttributeTargets.Field)]
-    public class LabelCssClassAttribute : Attribute
-    {
+    public class LabelCssClassAttribute : Attribute {
+
         /// <summary>
         ///     初始化
         /// </summary>
         /// <param name="cssClass">The CSS class.</param>
-        public LabelCssClassAttribute(string cssClass)
-        {
+        public LabelCssClassAttribute(string cssClass) {
             CssClass = cssClass;
         }
 
@@ -31,8 +30,8 @@ namespace Alabo.Web.Mvc.Attributes
     /// <summary>
     ///     Class BadgeColorCalss.
     /// </summary>
-    public class BadgeColorCalss
-    {
+    public class BadgeColorCalss {
+
         /// <summary>
         ///     The default
         /// </summary>

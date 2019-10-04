@@ -5,13 +5,13 @@ using Alabo.Validations.Aspects;
 using System;
 using System.Linq.Expressions;
 
-namespace Alabo.Domains.Services.Update
-{
+namespace Alabo.Domains.Services.Update {
+
     /// <summary>
     ///     修改操作
     /// </summary>
-    public interface IUpdate<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+    public interface IUpdate<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         /// <summary>
         ///     修改
         /// </summary>

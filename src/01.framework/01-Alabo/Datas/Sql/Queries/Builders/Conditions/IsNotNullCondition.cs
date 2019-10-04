@@ -1,12 +1,12 @@
 ﻿using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Conditions
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Conditions {
+
     /// <summary>
     ///     Is Not Null查询条件
     /// </summary>
-    public class IsNotNullCondition : ICondition
-    {
+    public class IsNotNullCondition : ICondition {
+
         /// <summary>
         ///     列名
         /// </summary>
@@ -16,16 +16,14 @@ namespace Alabo.Datas.Sql.Queries.Builders.Conditions
         ///     初始化Is Not Null查询条件
         /// </summary>
         /// <param name="name">列名</param>
-        public IsNotNullCondition(string name)
-        {
+        public IsNotNullCondition(string name) {
             _name = name;
         }
 
         /// <summary>
         ///     获取查询条件
         /// </summary>
-        public string GetCondition()
-        {
+        public string GetCondition() {
             return string.IsNullOrWhiteSpace(_name) ? null : $"{_name} Is Not Null";
         }
     }

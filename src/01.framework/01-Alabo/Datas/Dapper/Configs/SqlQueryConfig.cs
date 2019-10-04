@@ -1,12 +1,12 @@
 ﻿using Alabo.Datas.Enums;
 
-namespace Alabo.Datas.Dapper.Configs
-{
+namespace Alabo.Datas.Dapper.Configs {
+
     /// <summary>
     ///     Sql查询配置
     /// </summary>
-    public class SqlQueryConfig
-    {
+    public class SqlQueryConfig {
+
         /// <summary>
         ///     数据库类型，默认为Sql Server
         /// </summary>

@@ -3,13 +3,13 @@ using Alabo.Domains.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Alabo.Domains.Services.ById
-{
+namespace Alabo.Domains.Services.ById {
+
     /// <summary>
     ///     获取指定标识实体
     /// </summary>
-    public interface IGetByIdAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+    public interface IGetByIdAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         Task<TDto> GetByIdAsync<TDto>(object id) where TDto : IResponse, new();
 
         /// <summary>

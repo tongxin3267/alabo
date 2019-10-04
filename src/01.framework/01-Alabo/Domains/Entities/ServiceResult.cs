@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.Domains.Entities
-{
-    public class ServiceResult
-    {
-        public ServiceResult()
-        {
+namespace Alabo.Domains.Entities {
+
+    public class ServiceResult {
+
+        public ServiceResult() {
         }
 
         /// <summary>
@@ -14,8 +13,7 @@ namespace Alabo.Domains.Entities
         /// <param name="succeeded">失败或成功，成功则为true,失败则为false</param>
         /// <param name="errorMessages">失败信息</param>
         /// <param name="returnMessage">需要返回的信息，比如返回登录成功后，返回UserId</param>
-        public ServiceResult(bool succeeded, IEnumerable<string> errorMessages = null, string returnMessage = null)
-        {
+        public ServiceResult(bool succeeded, IEnumerable<string> errorMessages = null, string returnMessage = null) {
             Succeeded = succeeded;
             ErrorMessages = errorMessages;
             ReturnMessage = returnMessage;
@@ -42,8 +40,7 @@ namespace Alabo.Domains.Entities
         /// </summary>
         public object Id { get; set; } = 0;
 
-        public override string ToString()
-        {
+        public override string ToString() {
             if (ErrorMessages == null) {
                 return string.Empty;
             }
@@ -51,30 +48,25 @@ namespace Alabo.Domains.Entities
             return string.Join("<br />", ErrorMessages);
         }
 
-        public static ServiceResult FailedWithMessage(string message)
-        {
+        public static ServiceResult FailedWithMessage(string message) {
             return FailedWithMessage(new[] { message });
         }
 
-        public static ServiceResult SuccessWithObject(object resultObject)
-        {
+        public static ServiceResult SuccessWithObject(object resultObject) {
             var result = Success;
             result.ReturnObject = resultObject;
             return result;
         }
 
-        public static ServiceResult FailedWithMessage(IEnumerable<string> messages)
-        {
+        public static ServiceResult FailedWithMessage(IEnumerable<string> messages) {
             return new ServiceResult(false, messages);
         }
 
-        public static ServiceResult FailedMessage(IEnumerable<string> messages)
-        {
+        public static ServiceResult FailedMessage(IEnumerable<string> messages) {
             return new ServiceResult(false, messages);
         }
 
-        public static ServiceResult FailedMessage(string v)
-        {
+        public static ServiceResult FailedMessage(string v) {
             return new ServiceResult(false, returnMessage: v, errorMessages: new List<string> { v });
         }
     }

@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace Alabo.Web.Mvc.Attributes
-{
+namespace Alabo.Web.Mvc.Attributes {
+
     /// <summary>
     ///     自动删除配置特性
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
-    public class AutoDeleteAttribute : Attribute
-    {
+    public class AutoDeleteAttribute : Attribute {
+
         /// <summary>
         ///     管理的实体
         ///     如果未配置关联的实体，则数据不能删除

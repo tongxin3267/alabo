@@ -8,21 +8,19 @@ using MongoDB.Bson;
 using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Framework.Core.Logs.Controllers
-{
+namespace Alabo.Framework.Core.Logs.Controllers {
+
     [ApiExceptionFilter]
     [Route("Api/Logs/[action]")]
-    public class ApiLogsController : ApiBaseController<Logging.Logs.Entities.Logs, ObjectId>
-    {
-        public ApiLogsController()
-        {
+    public class ApiLogsController : ApiBaseController<Logging.Logs.Entities.Logs, ObjectId> {
+
+        public ApiLogsController() {
             BaseService = Resolve<ILogsService>();
         }
 
         [HttpPost]
         [Display(Description = "添加日志")]
-        public ApiResult Add([FromBody] LogInput logInput)
-        {
+        public ApiResult Add([FromBody] LogInput logInput) {
             if (logInput != null && !logInput.Message.IsNullOrEmpty()) {
                 Resolve<IAlaboUserService>().Log(logInput.Message);
             }
@@ -31,8 +29,7 @@ namespace Alabo.Framework.Core.Logs.Controllers
         }
     }
 
-    public class LogInput
-    {
+    public class LogInput {
         public string Message { get; set; }
     }
 }

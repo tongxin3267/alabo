@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Core.Enums.Enum;
+﻿using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Themes.Domain.Entities;
 using Alabo.Framework.Themes.Domain.Enums;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Themes.Dtos
-{
+namespace Alabo.Framework.Themes.Dtos {
+
     /// <summary>
     ///     所有客户端页面
     /// </summary>
-    public class AllClientPages
-    {
+    public class AllClientPages {
+
         /// <summary>
         ///     客户端类型
         /// </summary>
@@ -39,8 +39,8 @@ namespace Alabo.Framework.Themes.Dtos
         public ClientTheme Theme { get; set; } = new ClientTheme();
     }
 
-    public class ClientTheme
-    {
+    public class ClientTheme {
+
         /// <summary>
         ///     模板设置
         /// </summary>

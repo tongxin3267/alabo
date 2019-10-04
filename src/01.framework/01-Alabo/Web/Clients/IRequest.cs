@@ -4,13 +4,13 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Alabo.Web.Clients
-{
+namespace Alabo.Web.Clients {
+
     /// <summary>
     ///     Http请求
     /// </summary>
-    public interface IRequest<out TRequest> where TRequest : IRequest<TRequest>
-    {
+    public interface IRequest<out TRequest> where TRequest : IRequest<TRequest> {
+
         /// <summary>
         ///     设置字符编码
         /// </summary>

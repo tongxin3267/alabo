@@ -1,13 +1,13 @@
 ﻿using Alabo.Datas.Queries.Enums;
 using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Conditions
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Conditions {
+
     /// <summary>
     ///     范围过滤条件
     /// </summary>
-    public class SegmentCondition : ICondition
-    {
+    public class SegmentCondition : ICondition {
+
         /// <summary>
         ///     包含边界
         /// </summary>
@@ -35,8 +35,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Conditions
         /// <param name="min">最小值</param>
         /// <param name="max">最大值</param>
         /// <param name="boundary">包含边界</param>
-        public SegmentCondition(string name, string min, string max, Boundary boundary)
-        {
+        public SegmentCondition(string name, string min, string max, Boundary boundary) {
             _name = name;
             _min = min;
             _max = max;
@@ -46,8 +45,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Conditions
         /// <summary>
         ///     获取查询条件
         /// </summary>
-        public string GetCondition()
-        {
+        public string GetCondition() {
             if (string.IsNullOrWhiteSpace(_name)) {
                 return null;
             }
@@ -59,8 +57,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Conditions
         /// <summary>
         ///     创建左条件
         /// </summary>
-        private ICondition CreateLeftCondition()
-        {
+        private ICondition CreateLeftCondition() {
             if (string.IsNullOrWhiteSpace(_min)) {
                 return NullCondition.Instance;
             }
@@ -71,10 +68,8 @@ namespace Alabo.Datas.Sql.Queries.Builders.Conditions
         /// <summary>
         ///     创建左操作符
         /// </summary>
-        private Operator CreateLeftOperator()
-        {
-            switch (_boundary)
-            {
+        private Operator CreateLeftOperator() {
+            switch (_boundary) {
                 case Boundary.Left:
                     return Operator.GreaterEqual;
 
@@ -89,8 +84,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Conditions
         /// <summary>
         ///     创建右条件
         /// </summary>
-        private ICondition CreateRightCondition()
-        {
+        private ICondition CreateRightCondition() {
             if (string.IsNullOrWhiteSpace(_max)) {
                 return NullCondition.Instance;
             }
@@ -101,10 +95,8 @@ namespace Alabo.Datas.Sql.Queries.Builders.Conditions
         /// <summary>
         ///     创建右操作符
         /// </summary>
-        private Operator CreateRightOperator()
-        {
-            switch (_boundary)
-            {
+        private Operator CreateRightOperator() {
+            switch (_boundary) {
                 case Boundary.Right:
                     return Operator.LessEqual;
 

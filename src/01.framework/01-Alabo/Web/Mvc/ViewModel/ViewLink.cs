@@ -1,19 +1,17 @@
-﻿namespace Alabo.Web.Mvc.ViewModel
-{
+﻿namespace Alabo.Web.Mvc.ViewModel {
+
     /// <summary>
     ///     视图页面链接
     /// </summary>
-    public class ViewLink
-    {
+    public class ViewLink {
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="ViewLink" /> class.
         /// </summary>
-        public ViewLink()
-        {
+        public ViewLink() {
         }
 
-        public ViewLink(string name, string url)
-        {
+        public ViewLink(string name, string url) {
             Name = name;
             Url = url;
         }
@@ -25,8 +23,7 @@
         /// <param name="url">The URL.</param>
         /// <param name="icon">The icon.</param>
         /// <param name="linktype">The linktype.</param>
-        public ViewLink(string name, string url, string icon, LinkType linktype)
-        {
+        public ViewLink(string name, string url, string icon, LinkType linktype) {
             Name = name;
             Url = url;
             Icon = icon;
@@ -58,8 +55,8 @@
     /// <summary>
     ///     链接类型
     /// </summary>
-    public enum LinkType
-    {
+    public enum LinkType {
+
         /// <summary>
         ///     表格页面右上角快捷导航
         /// </summary>

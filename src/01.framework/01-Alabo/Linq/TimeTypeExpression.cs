@@ -4,13 +4,13 @@ using Alabo.Domains.Query;
 using System;
 using System.Linq.Expressions;
 
-namespace Alabo.Linq
-{
+namespace Alabo.Linq {
+
     /// <summary>
     ///     时间方式Lamada表达式
     /// </summary>
-    public static class TimeTypeExpression
-    {
+    public static class TimeTypeExpression {
+
         /// <summary>
         ///     获取时间方式的表达式
         /// </summary>
@@ -21,16 +21,14 @@ namespace Alabo.Linq
         /// <param name="predicate"></param>
         public static Expression<Func<TEntity, bool>> GetPredicate<TEntity, TKey>(this TimeType timeType,
             DateTime dateTime, Expression<Func<TEntity, bool>> predicate)
-            where TEntity : class, IAggregateRoot<TEntity, TKey>
-        {
+            where TEntity : class, IAggregateRoot<TEntity, TKey> {
             var query = new ExpressionQuery<TEntity>();
             if (predicate != null) {
                 query.And(predicate);
             }
 
             query.OrderByAscending(e => e.Id);
-            switch (timeType)
-            {
+            switch (timeType) {
                 case TimeType.Day:
                     query.And(r =>
                         r.CreateTime.Day == dateTime.Day && r.CreateTime.Month == dateTime.Month &&

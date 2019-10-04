@@ -1,13 +1,12 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.UI.Enum
-{
+namespace Alabo.UI.Enum {
+
     /// <summary>
     ///     http://ui.5ug.com/metronic_v5.0.6.1/metronic_v5.0.6.1/theme/default/dist/default/components/icons/lineawesome.html
     /// </summary>
     [ClassProperty(Name = "图标")]
-    public enum LineAwesome
-    {
+    public enum LineAwesome {
         [Field(Icon = "la la-500px")] La500Px = 1,
 
         [Field(Icon = "la la-adjust")] LaAdjust,

@@ -4,27 +4,24 @@ using Alabo.Domains.Entities;
 using System;
 using System.Linq.Expressions;
 
-namespace Alabo.Domains.Services.Count
-{
+namespace Alabo.Domains.Services.Count {
+
     public abstract class CountService<TEntity, TKey> : CountAsyncService<TEntity, TKey>, ICount<TEntity, TKey>
-        where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+        where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         /// <summary>
         ///     服务构造函数
         /// </summary>
         /// <param name="unitOfWork">工作单元</param>
         /// <param name="store">仓储</param>
-        protected CountService(IUnitOfWork unitOfWork, IStore<TEntity, TKey> store) : base(unitOfWork, store)
-        {
+        protected CountService(IUnitOfWork unitOfWork, IStore<TEntity, TKey> store) : base(unitOfWork, store) {
         }
 
-        public long Count(Expression<Func<TEntity, bool>> predicate)
-        {
+        public long Count(Expression<Func<TEntity, bool>> predicate) {
             return Store.Count(predicate);
         }
 
-        public long Count()
-        {
+        public long Count() {
             return Store.Count();
         }
     }

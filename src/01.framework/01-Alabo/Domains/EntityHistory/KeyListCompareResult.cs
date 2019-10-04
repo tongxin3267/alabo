@@ -1,20 +1,19 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.Domains.EntityHistory
-{
+namespace Alabo.Domains.EntityHistory {
+
     /// <summary>
     ///     键列表比较结果
     /// </summary>
-    public class KeyListCompareResult<TKey>
-    {
+    public class KeyListCompareResult<TKey> {
+
         /// <summary>
         ///     初始化键列表比较结果
         /// </summary>
         /// <param name="createList">创建列表</param>
         /// <param name="updateList">更新列表</param>
         /// <param name="deleteList">删除列表</param>
-        public KeyListCompareResult(List<TKey> createList, List<TKey> updateList, List<TKey> deleteList)
-        {
+        public KeyListCompareResult(List<TKey> createList, List<TKey> updateList, List<TKey> deleteList) {
             CreateList = createList;
             UpdateList = updateList;
             DeleteList = deleteList;

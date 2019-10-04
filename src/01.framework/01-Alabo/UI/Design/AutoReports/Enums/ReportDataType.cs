@@ -1,13 +1,13 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.UI.Design.AutoReports.Enums
-{
+namespace Alabo.UI.Design.AutoReports.Enums {
+
     /// <summary>
     ///     数据表
     /// </summary>
     [ClassProperty(Name = "数据表")]
-    public enum ReportDataType
-    {
+    public enum ReportDataType {
+
         /// <summary>
         ///     对应前台 zk-data-number
         /// </summary>

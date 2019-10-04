@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Themes.Domain.Enums;
@@ -10,17 +6,21 @@ using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Framework.Themes.Domain.Entities
-{
+namespace Alabo.Framework.Themes.Domain.Entities {
+
     /// <summary>
     ///     主题模板配置
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Themes_Theme")]
     [ClassProperty(Name = "主题模板配置")]
-    public class Theme : AggregateMongodbRoot<Theme>
-    {
+    public class Theme : AggregateMongodbRoot<Theme> {
+
         /// <summary>
         ///     所属站点
         ///     站点为空的时候，表示系统模板
@@ -90,8 +90,8 @@ namespace Alabo.Framework.Themes.Domain.Entities
     /// <summary>
     ///     模板菜单
     /// </summary>
-    public class ThemeMenu
-    {
+    public class ThemeMenu {
+
         /// <summary>
         ///     样式风格
         /// </summary>
@@ -106,8 +106,8 @@ namespace Alabo.Framework.Themes.Domain.Entities
     /// <summary>
     ///     模板操作菜单
     /// </summary>
-    public class ThemeOneMenu
-    {
+    public class ThemeOneMenu {
+
         /// <summary>
         ///     权限唯一ID
         /// </summary>
@@ -140,8 +140,8 @@ namespace Alabo.Framework.Themes.Domain.Entities
         public List<ThemeTwoMenu> Menus { get; set; }
     }
 
-    public class ThemeTwoMenu
-    {
+    public class ThemeTwoMenu {
+
         /// <summary>
         ///     权限唯一ID
         /// </summary>
@@ -177,8 +177,8 @@ namespace Alabo.Framework.Themes.Domain.Entities
     /// <summary>
     ///     三级菜单
     /// </summary>
-    public class ThemeThreeMenu
-    {
+    public class ThemeThreeMenu {
+
         /// <summary>
         ///     权限唯一ID
         /// </summary>

@@ -2,13 +2,13 @@
 using Alabo.Helpers;
 using Alabo.Parameters;
 
-namespace Alabo.Signatures
-{
+namespace Alabo.Signatures {
+
     /// <summary>
     ///     签名服务
     /// </summary>
-    public class SignManager : ISignManager
-    {
+    public class SignManager : ISignManager {
+
         /// <summary>
         ///     Url参数生成器
         /// </summary>
@@ -24,8 +24,7 @@ namespace Alabo.Signatures
         /// </summary>
         /// <param name="key">签名密钥</param>
         /// <param name="builder">Url参数生成器</param>
-        public SignManager(ISignKey key, UrlParameterBuilder builder = null)
-        {
+        public SignManager(ISignKey key, UrlParameterBuilder builder = null) {
             key.CheckNull(nameof(key));
             _key = key;
             _builder = builder == null ? new UrlParameterBuilder() : new UrlParameterBuilder(builder);
@@ -36,8 +35,7 @@ namespace Alabo.Signatures
         /// </summary>
         /// <param name="key">键</param>
         /// <param name="value">值</param>
-        public ISignManager Add(string key, object value)
-        {
+        public ISignManager Add(string key, object value) {
             _builder.Add(key, value);
             return this;
         }
@@ -45,8 +43,7 @@ namespace Alabo.Signatures
         /// <summary>
         ///     签名
         /// </summary>
-        public string Sign()
-        {
+        public string Sign() {
             return Encrypt.Rsa2Sign(_builder.Result(true), _key.GetKey());
         }
 
@@ -54,8 +51,7 @@ namespace Alabo.Signatures
         ///     验证签名
         /// </summary>
         /// <param name="sign">签名</param>
-        public bool Verify(string sign)
-        {
+        public bool Verify(string sign) {
             return Encrypt.Rsa2Verify(_builder.Result(true), _key.GetPublicKey(), sign);
         }
     }

@@ -9,13 +9,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Convert = Alabo.Helpers.Convert;
 
-namespace Alabo.Datas.Sql.Queries
-{
+namespace Alabo.Datas.Sql.Queries {
+
     /// <summary>
     ///     Sql查询对象
     /// </summary>
-    public abstract class SqlQueryBase : ISqlQuery
-    {
+    public abstract class SqlQueryBase : ISqlQuery {
+
         /// <summary>
         ///     数据库
         /// </summary>
@@ -26,8 +26,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="sqlBuilder">Sql生成器</param>
         /// <param name="database">数据库</param>
-        protected SqlQueryBase(ISqlBuilder sqlBuilder, IDatabase database = null)
-        {
+        protected SqlQueryBase(ISqlBuilder sqlBuilder, IDatabase database = null) {
             Builder = sqlBuilder ?? throw new ArgumentNullException(nameof(sqlBuilder));
             _database = database;
         }
@@ -45,24 +44,21 @@ namespace Alabo.Datas.Sql.Queries
         /// <summary>
         ///     清空并初始化
         /// </summary>
-        public void Clear()
-        {
+        public void Clear() {
             Builder.Clear();
         }
 
         /// <summary>
         ///     获取调试Sql语句
         /// </summary>
-        public string GetDebugSql()
-        {
+        public string GetDebugSql() {
             return Builder.ToDebugSql();
         }
 
         /// <summary>
         ///     创建Sql生成器
         /// </summary>
-        public virtual ISqlBuilder NewBuilder()
-        {
+        public virtual ISqlBuilder NewBuilder() {
             return Builder.New();
         }
 
@@ -70,8 +66,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     获取字符串
         /// </summary>
         /// <param name="connection">数据库连接</param>
-        public string ToString(IDbConnection connection = null)
-        {
+        public string ToString(IDbConnection connection = null) {
             return Extensions.Extensions.SafeString(ToScalar(connection, GetSql(), Params));
         }
 
@@ -79,8 +74,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     获取字符串
         /// </summary>
         /// <param name="connection">数据库连接</param>
-        public async Task<string> ToStringAsync(IDbConnection connection = null)
-        {
+        public async Task<string> ToStringAsync(IDbConnection connection = null) {
             var result = await ToScalarAsync(connection, GetSql(), Params);
             return Extensions.Extensions.SafeString(result);
         }
@@ -89,8 +83,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     获取整型
         /// </summary>
         /// <param name="connection">数据库连接</param>
-        public int ToInt(IDbConnection connection = null)
-        {
+        public int ToInt(IDbConnection connection = null) {
             return Convert.ToInt(ToScalar(connection, GetSql(), Params));
         }
 
@@ -98,8 +91,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     获取整型
         /// </summary>
         /// <param name="connection">数据库连接</param>
-        public async Task<int> ToIntAsync(IDbConnection connection = null)
-        {
+        public async Task<int> ToIntAsync(IDbConnection connection = null) {
             return Convert.ToInt(await ToScalarAsync(connection, GetSql(), Params));
         }
 
@@ -107,8 +99,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     获取可空整型
         /// </summary>
         /// <param name="connection">数据库连接</param>
-        public int? ToIntOrNull(IDbConnection connection = null)
-        {
+        public int? ToIntOrNull(IDbConnection connection = null) {
             return Convert.ToIntOrNull(ToScalar(connection, GetSql(), Params));
         }
 
@@ -116,8 +107,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     获取可空整型
         /// </summary>
         /// <param name="connection">数据库连接</param>
-        public async Task<int?> ToIntOrNullAsync(IDbConnection connection = null)
-        {
+        public async Task<int?> ToIntOrNullAsync(IDbConnection connection = null) {
             return Convert.ToIntOrNull(await ToScalarAsync(connection, GetSql(), Params));
         }
 
@@ -191,8 +181,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="columns">列名</param>
         /// <param name="alias">别名</param>
-        public ISqlQuery Select(string columns, string alias = null)
-        {
+        public ISqlQuery Select(string columns, string alias = null) {
             Builder.Select(columns, alias);
             return this;
         }
@@ -201,8 +190,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     设置列名
         /// </summary>
         /// <param name="columns">列名</param>
-        public ISqlQuery Select<TEntity>(Expression<Func<TEntity, object[]>> columns) where TEntity : class
-        {
+        public ISqlQuery Select<TEntity>(Expression<Func<TEntity, object[]>> columns) where TEntity : class {
             Builder.Select(columns);
             return this;
         }
@@ -213,8 +201,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="column">列名，范例：t => t.A</param>
         /// <param name="columnAlias">列别名</param>
         public ISqlQuery Select<TEntity>(Expression<Func<TEntity, object>> column, string columnAlias = null)
-            where TEntity : class
-        {
+            where TEntity : class {
             Builder.Select(column, columnAlias);
             return this;
         }
@@ -223,8 +210,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     添加到Select子句
         /// </summary>
         /// <param name="sql">Sql语句</param>
-        public ISqlQuery AppendSelect(string sql)
-        {
+        public ISqlQuery AppendSelect(string sql) {
             Builder.AppendSelect(sql);
             return this;
         }
@@ -234,8 +220,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="table">表名</param>
         /// <param name="alias">别名</param>
-        public ISqlQuery From(string table, string alias = null)
-        {
+        public ISqlQuery From(string table, string alias = null) {
             Builder.From(table, alias);
             return this;
         }
@@ -245,8 +230,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="alias">别名</param>
         /// <param name="schema">架构名</param>
-        public ISqlQuery From<TEntity>(string alias = null, string schema = null) where TEntity : class
-        {
+        public ISqlQuery From<TEntity>(string alias = null, string schema = null) where TEntity : class {
             Builder.From<TEntity>(alias, schema);
             return this;
         }
@@ -255,8 +239,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     添加到From子句
         /// </summary>
         /// <param name="sql">Sql语句</param>
-        public ISqlQuery AppendFrom(string sql)
-        {
+        public ISqlQuery AppendFrom(string sql) {
             Builder.AppendFrom(sql);
             return this;
         }
@@ -266,8 +249,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="table">表名</param>
         /// <param name="alias">别名</param>
-        public ISqlQuery Join(string table, string alias = null)
-        {
+        public ISqlQuery Join(string table, string alias = null) {
             Builder.Join(table, alias);
             return this;
         }
@@ -277,8 +259,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="alias">别名</param>
         /// <param name="schema">架构名</param>
-        public ISqlQuery Join<TEntity>(string alias = null, string schema = null) where TEntity : class
-        {
+        public ISqlQuery Join<TEntity>(string alias = null, string schema = null) where TEntity : class {
             Builder.Join<TEntity>(alias, schema);
             return this;
         }
@@ -287,8 +268,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     添加到内连接子句
         /// </summary>
         /// <param name="sql">Sql语句</param>
-        public ISqlQuery AppendJoin(string sql)
-        {
+        public ISqlQuery AppendJoin(string sql) {
             Builder.AppendJoin(sql);
             return this;
         }
@@ -298,8 +278,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="table">表名</param>
         /// <param name="alias">别名</param>
-        public ISqlQuery LeftJoin(string table, string alias = null)
-        {
+        public ISqlQuery LeftJoin(string table, string alias = null) {
             Builder.LeftJoin(table, alias);
             return this;
         }
@@ -309,8 +288,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="alias">别名</param>
         /// <param name="schema">架构名</param>
-        public ISqlQuery LeftJoin<TEntity>(string alias = null, string schema = null) where TEntity : class
-        {
+        public ISqlQuery LeftJoin<TEntity>(string alias = null, string schema = null) where TEntity : class {
             Builder.LeftJoin<TEntity>(alias, schema);
             return this;
         }
@@ -319,8 +297,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     添加到左外连接子句
         /// </summary>
         /// <param name="sql">Sql语句</param>
-        public ISqlQuery AppendLeftJoin(string sql)
-        {
+        public ISqlQuery AppendLeftJoin(string sql) {
             Builder.AppendLeftJoin(sql);
             return this;
         }
@@ -330,8 +307,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="table">表名</param>
         /// <param name="alias">别名</param>
-        public ISqlQuery RightJoin(string table, string alias = null)
-        {
+        public ISqlQuery RightJoin(string table, string alias = null) {
             Builder.RightJoin(table, alias);
             return this;
         }
@@ -341,8 +317,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="alias">别名</param>
         /// <param name="schema">架构名</param>
-        public ISqlQuery RightJoin<TEntity>(string alias = null, string schema = null) where TEntity : class
-        {
+        public ISqlQuery RightJoin<TEntity>(string alias = null, string schema = null) where TEntity : class {
             Builder.RightJoin<TEntity>(alias, schema);
             return this;
         }
@@ -351,8 +326,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     添加到右外连接子句
         /// </summary>
         /// <param name="sql">Sql语句</param>
-        public ISqlQuery AppendRightJoin(string sql)
-        {
+        public ISqlQuery AppendRightJoin(string sql) {
             Builder.AppendRightJoin(sql);
             return this;
         }
@@ -363,8 +337,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="left">左表列名</param>
         /// <param name="right">右表列名</param>
         /// <param name="operator">条件运算符</param>
-        public ISqlQuery On(string left, string right, Operator @operator = Operator.Equal)
-        {
+        public ISqlQuery On(string left, string right, Operator @operator = Operator.Equal) {
             Builder.On(left, right, @operator);
             return this;
         }
@@ -377,8 +350,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="operator">条件运算符</param>
         public ISqlQuery On<TLeft, TRight>(Expression<Func<TLeft, object>> left, Expression<Func<TRight, object>> right,
             Operator @operator = Operator.Equal)
-            where TLeft : class where TRight : class
-        {
+            where TLeft : class where TRight : class {
             Builder.On(left, right, @operator);
             return this;
         }
@@ -388,8 +360,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="expression">条件表达式</param>
         public ISqlQuery On<TLeft, TRight>(Expression<Func<TLeft, TRight, bool>> expression)
-            where TLeft : class where TRight : class
-        {
+            where TLeft : class where TRight : class {
             Builder.On(expression);
             return this;
         }
@@ -398,8 +369,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     And连接条件
         /// </summary>
         /// <param name="condition">查询条件</param>
-        public ISqlQuery And(ICondition condition)
-        {
+        public ISqlQuery And(ICondition condition) {
             Builder.And(condition);
             return this;
         }
@@ -408,8 +378,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     Or连接条件
         /// </summary>
         /// <param name="condition">查询条件</param>
-        public ISqlQuery Or(ICondition condition)
-        {
+        public ISqlQuery Or(ICondition condition) {
             Builder.Or(condition);
             return this;
         }
@@ -418,8 +387,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     设置查询条件
         /// </summary>
         /// <param name="condition">查询条件</param>
-        public ISqlQuery Where(ICondition condition)
-        {
+        public ISqlQuery Where(ICondition condition) {
             Builder.Where(condition);
             return this;
         }
@@ -430,8 +398,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="column">列名</param>
         /// <param name="value">值</param>
         /// <param name="operator">运算符</param>
-        public ISqlQuery Where(string column, object value, Operator @operator = Operator.Equal)
-        {
+        public ISqlQuery Where(string column, object value, Operator @operator = Operator.Equal) {
             Builder.Where(column, value, @operator);
             return this;
         }
@@ -443,8 +410,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="value">值</param>
         /// <param name="operator">运算符</param>
         public ISqlQuery Where<TEntity>(Expression<Func<TEntity, object>> expression, object value,
-            Operator @operator = Operator.Equal) where TEntity : class
-        {
+            Operator @operator = Operator.Equal) where TEntity : class {
             Builder.Where(expression, value, @operator);
             return this;
         }
@@ -453,8 +419,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     设置查询条件
         /// </summary>
         /// <param name="expression">查询条件表达式</param>
-        public ISqlQuery Where<TEntity>(Expression<Func<TEntity, bool>> expression) where TEntity : class
-        {
+        public ISqlQuery Where<TEntity>(Expression<Func<TEntity, bool>> expression) where TEntity : class {
             Builder.Where(expression);
             return this;
         }
@@ -466,8 +431,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="value">值</param>
         /// <param name="condition">该值为true时添加查询条件，否则忽略</param>
         /// <param name="operator">运算符</param>
-        public ISqlQuery WhereIf(string column, object value, bool condition, Operator @operator = Operator.Equal)
-        {
+        public ISqlQuery WhereIf(string column, object value, bool condition, Operator @operator = Operator.Equal) {
             Builder.WhereIf(column, value, condition, @operator);
             return this;
         }
@@ -480,8 +444,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="condition">该值为true时添加查询条件，否则忽略</param>
         /// <param name="operator">运算符</param>
         public ISqlQuery WhereIf<TEntity>(Expression<Func<TEntity, object>> expression, object value, bool condition,
-            Operator @operator = Operator.Equal) where TEntity : class
-        {
+            Operator @operator = Operator.Equal) where TEntity : class {
             Builder.WhereIf(expression, value, condition, @operator);
             return this;
         }
@@ -492,8 +455,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="expression">查询条件表达式</param>
         /// <param name="condition">该值为true时添加查询条件，否则忽略</param>
         public ISqlQuery WhereIf<TEntity>(Expression<Func<TEntity, bool>> expression, bool condition)
-            where TEntity : class
-        {
+            where TEntity : class {
             Builder.WhereIf(expression, condition);
             return this;
         }
@@ -504,8 +466,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="column">列名</param>
         /// <param name="value">值,如果值为空，则忽略该查询条件</param>
         /// <param name="operator">运算符</param>
-        public ISqlQuery WhereIfNotEmpty(string column, object value, Operator @operator = Operator.Equal)
-        {
+        public ISqlQuery WhereIfNotEmpty(string column, object value, Operator @operator = Operator.Equal) {
             Builder.WhereIfNotEmpty(column, value, @operator);
             return this;
         }
@@ -517,8 +478,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="value">值,如果值为空，则忽略该查询条件</param>
         /// <param name="operator">运算符</param>
         public ISqlQuery WhereIfNotEmpty<TEntity>(Expression<Func<TEntity, object>> expression, object value,
-            Operator @operator = Operator.Equal) where TEntity : class
-        {
+            Operator @operator = Operator.Equal) where TEntity : class {
             Builder.WhereIfNotEmpty(expression, value, @operator);
             return this;
         }
@@ -527,8 +487,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     设置查询条件
         /// </summary>
         /// <param name="expression">查询条件表达式,如果参数值为空，则忽略该查询条件</param>
-        public ISqlQuery WhereIfNotEmpty<TEntity>(Expression<Func<TEntity, bool>> expression) where TEntity : class
-        {
+        public ISqlQuery WhereIfNotEmpty<TEntity>(Expression<Func<TEntity, bool>> expression) where TEntity : class {
             Builder.WhereIfNotEmpty(expression);
             return this;
         }
@@ -537,8 +496,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     添加到Where子句
         /// </summary>
         /// <param name="sql">Sql语句</param>
-        public ISqlQuery AppendWhere(string sql)
-        {
+        public ISqlQuery AppendWhere(string sql) {
             Builder.AppendWhere(sql);
             return this;
         }
@@ -548,8 +506,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="column">列名</param>
         /// <param name="value">值</param>
-        public ISqlQuery Equal(string column, object value)
-        {
+        public ISqlQuery Equal(string column, object value) {
             Builder.Equal(column, value);
             return this;
         }
@@ -560,8 +517,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="expression">列名表达式</param>
         /// <param name="value">值</param>
         public ISqlQuery Equal<TEntity>(Expression<Func<TEntity, object>> expression, object value)
-            where TEntity : class
-        {
+            where TEntity : class {
             Builder.Equal(expression, value);
             return this;
         }
@@ -571,8 +527,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="column">列名</param>
         /// <param name="value">值</param>
-        public ISqlQuery NotEqual(string column, object value)
-        {
+        public ISqlQuery NotEqual(string column, object value) {
             Builder.NotEqual(column, value);
             return this;
         }
@@ -583,8 +538,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="expression">列名表达式</param>
         /// <param name="value">值</param>
         public ISqlQuery NotEqual<TEntity>(Expression<Func<TEntity, object>> expression, object value)
-            where TEntity : class
-        {
+            where TEntity : class {
             Builder.NotEqual(expression, value);
             return this;
         }
@@ -594,8 +548,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="column">列名</param>
         /// <param name="value">值</param>
-        public ISqlQuery Greater(string column, object value)
-        {
+        public ISqlQuery Greater(string column, object value) {
             Builder.Greater(column, value);
             return this;
         }
@@ -606,8 +559,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="expression">列名表达式</param>
         /// <param name="value">值</param>
         public ISqlQuery Greater<TEntity>(Expression<Func<TEntity, object>> expression, object value)
-            where TEntity : class
-        {
+            where TEntity : class {
             Builder.Greater(expression, value);
             return this;
         }
@@ -617,8 +569,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="column">列名</param>
         /// <param name="value">值</param>
-        public ISqlQuery Less(string column, object value)
-        {
+        public ISqlQuery Less(string column, object value) {
             Builder.Less(column, value);
             return this;
         }
@@ -628,8 +579,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="expression">列名表达式</param>
         /// <param name="value">值</param>
-        public ISqlQuery Less<TEntity>(Expression<Func<TEntity, object>> expression, object value) where TEntity : class
-        {
+        public ISqlQuery Less<TEntity>(Expression<Func<TEntity, object>> expression, object value) where TEntity : class {
             Builder.Less(expression, value);
             return this;
         }
@@ -639,8 +589,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="column">列名</param>
         /// <param name="value">值</param>
-        public ISqlQuery GreaterEqual(string column, object value)
-        {
+        public ISqlQuery GreaterEqual(string column, object value) {
             Builder.GreaterEqual(column, value);
             return this;
         }
@@ -651,8 +600,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="expression">列名表达式</param>
         /// <param name="value">值</param>
         public ISqlQuery GreaterEqual<TEntity>(Expression<Func<TEntity, object>> expression, object value)
-            where TEntity : class
-        {
+            where TEntity : class {
             Builder.GreaterEqual(expression, value);
             return this;
         }
@@ -662,8 +610,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="column">列名</param>
         /// <param name="value">值</param>
-        public ISqlQuery LessEqual(string column, object value)
-        {
+        public ISqlQuery LessEqual(string column, object value) {
             Builder.LessEqual(column, value);
             return this;
         }
@@ -674,8 +621,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="expression">列名表达式</param>
         /// <param name="value">值</param>
         public ISqlQuery LessEqual<TEntity>(Expression<Func<TEntity, object>> expression, object value)
-            where TEntity : class
-        {
+            where TEntity : class {
             Builder.LessEqual(expression, value);
             return this;
         }
@@ -685,8 +631,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="column">列名</param>
         /// <param name="value">值</param>
-        public ISqlQuery Contains(string column, object value)
-        {
+        public ISqlQuery Contains(string column, object value) {
             Builder.Contains(column, value);
             return this;
         }
@@ -697,8 +642,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="expression">列名表达式</param>
         /// <param name="value">值</param>
         public ISqlQuery Contains<TEntity>(Expression<Func<TEntity, object>> expression, object value)
-            where TEntity : class
-        {
+            where TEntity : class {
             Builder.Contains(expression, value);
             return this;
         }
@@ -708,8 +652,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="column">列名</param>
         /// <param name="value">值</param>
-        public ISqlQuery Starts(string column, object value)
-        {
+        public ISqlQuery Starts(string column, object value) {
             Builder.Starts(column, value);
             return this;
         }
@@ -720,8 +663,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="expression">列名表达式</param>
         /// <param name="value">值</param>
         public ISqlQuery Starts<TEntity>(Expression<Func<TEntity, object>> expression, object value)
-            where TEntity : class
-        {
+            where TEntity : class {
             Builder.Starts(expression, value);
             return this;
         }
@@ -731,8 +673,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="column">列名</param>
         /// <param name="value">值</param>
-        public ISqlQuery Ends(string column, object value)
-        {
+        public ISqlQuery Ends(string column, object value) {
             Builder.Ends(column, value);
             return this;
         }
@@ -742,8 +683,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="expression">列名表达式</param>
         /// <param name="value">值</param>
-        public ISqlQuery Ends<TEntity>(Expression<Func<TEntity, object>> expression, object value) where TEntity : class
-        {
+        public ISqlQuery Ends<TEntity>(Expression<Func<TEntity, object>> expression, object value) where TEntity : class {
             Builder.Ends(expression, value);
             return this;
         }
@@ -752,8 +692,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     设置Is Null查询条件
         /// </summary>
         /// <param name="column">列名</param>
-        public ISqlQuery IsNull(string column)
-        {
+        public ISqlQuery IsNull(string column) {
             Builder.IsNull(column);
             return this;
         }
@@ -762,8 +701,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     设置Is Null查询条件
         /// </summary>
         /// <param name="expression">列名表达式</param>
-        public ISqlQuery IsNull<TEntity>(Expression<Func<TEntity, object>> expression) where TEntity : class
-        {
+        public ISqlQuery IsNull<TEntity>(Expression<Func<TEntity, object>> expression) where TEntity : class {
             Builder.IsNull(expression);
             return this;
         }
@@ -772,8 +710,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     设置Is Not Null查询条件
         /// </summary>
         /// <param name="column">列名</param>
-        public ISqlQuery IsNotNull(string column)
-        {
+        public ISqlQuery IsNotNull(string column) {
             Builder.IsNotNull(column);
             return this;
         }
@@ -782,8 +719,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     设置Is Not Null查询条件
         /// </summary>
         /// <param name="expression">列名表达式</param>
-        public ISqlQuery IsNotNull<TEntity>(Expression<Func<TEntity, object>> expression) where TEntity : class
-        {
+        public ISqlQuery IsNotNull<TEntity>(Expression<Func<TEntity, object>> expression) where TEntity : class {
             Builder.IsNotNull(expression);
             return this;
         }
@@ -792,8 +728,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     设置空条件
         /// </summary>
         /// <param name="column">列名</param>
-        public ISqlQuery IsEmpty(string column)
-        {
+        public ISqlQuery IsEmpty(string column) {
             Builder.IsEmpty(column);
             return this;
         }
@@ -802,8 +737,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     设置空条件
         /// </summary>
         /// <param name="expression">列名表达式</param>
-        public ISqlQuery IsEmpty<TEntity>(Expression<Func<TEntity, object>> expression) where TEntity : class
-        {
+        public ISqlQuery IsEmpty<TEntity>(Expression<Func<TEntity, object>> expression) where TEntity : class {
             Builder.IsEmpty(expression);
             return this;
         }
@@ -812,8 +746,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     设置非空条件
         /// </summary>
         /// <param name="column">列名</param>
-        public ISqlQuery IsNotEmpty(string column)
-        {
+        public ISqlQuery IsNotEmpty(string column) {
             Builder.IsNotEmpty(column);
             return this;
         }
@@ -822,8 +755,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     设置非空条件
         /// </summary>
         /// <param name="expression">列名表达式</param>
-        public ISqlQuery IsNotEmpty<TEntity>(Expression<Func<TEntity, object>> expression) where TEntity : class
-        {
+        public ISqlQuery IsNotEmpty<TEntity>(Expression<Func<TEntity, object>> expression) where TEntity : class {
             Builder.IsNotEmpty(expression);
             return this;
         }
@@ -833,8 +765,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="column">列名</param>
         /// <param name="values">值集合</param>
-        public ISqlQuery In(string column, IEnumerable<object> values)
-        {
+        public ISqlQuery In(string column, IEnumerable<object> values) {
             Builder.In(column, values);
             return this;
         }
@@ -845,8 +776,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="expression">列名表达式</param>
         /// <param name="values">值集合</param>
         public ISqlQuery In<TEntity>(Expression<Func<TEntity, object>> expression, IEnumerable<object> values)
-            where TEntity : class
-        {
+            where TEntity : class {
             Builder.In(expression, values);
             return this;
         }
@@ -859,8 +789,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="max">最大值</param>
         /// <param name="boundary">包含边界</param>
         public ISqlQuery Between<TEntity>(Expression<Func<TEntity, object>> expression, int? min, int? max,
-            Boundary boundary = Boundary.Both) where TEntity : class
-        {
+            Boundary boundary = Boundary.Both) where TEntity : class {
             Builder.Between(expression, min, max, boundary);
             return this;
         }
@@ -873,8 +802,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="max">最大值</param>
         /// <param name="boundary">包含边界</param>
         public ISqlQuery Between<TEntity>(Expression<Func<TEntity, object>> expression, double? min, double? max,
-            Boundary boundary = Boundary.Both) where TEntity : class
-        {
+            Boundary boundary = Boundary.Both) where TEntity : class {
             Builder.Between(expression, min, max, boundary);
             return this;
         }
@@ -887,8 +815,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="max">最大值</param>
         /// <param name="boundary">包含边界</param>
         public ISqlQuery Between<TEntity>(Expression<Func<TEntity, object>> expression, decimal? min, decimal? max,
-            Boundary boundary = Boundary.Both) where TEntity : class
-        {
+            Boundary boundary = Boundary.Both) where TEntity : class {
             Builder.Between(expression, min, max, boundary);
             return this;
         }
@@ -902,8 +829,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="includeTime">是否包含时间</param>
         /// <param name="boundary">包含边界</param>
         public ISqlQuery Between<TEntity>(Expression<Func<TEntity, object>> expression, DateTime? min, DateTime? max,
-            bool includeTime = true, Boundary? boundary = null) where TEntity : class
-        {
+            bool includeTime = true, Boundary? boundary = null) where TEntity : class {
             Builder.Between(expression, min, max, includeTime, boundary);
             return this;
         }
@@ -915,8 +841,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="min">最小值</param>
         /// <param name="max">最大值</param>
         /// <param name="boundary">包含边界</param>
-        public ISqlQuery Between(string column, int? min, int? max, Boundary boundary = Boundary.Both)
-        {
+        public ISqlQuery Between(string column, int? min, int? max, Boundary boundary = Boundary.Both) {
             Builder.Between(column, min, max, boundary);
             return this;
         }
@@ -928,8 +853,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="min">最小值</param>
         /// <param name="max">最大值</param>
         /// <param name="boundary">包含边界</param>
-        public ISqlQuery Between(string column, double? min, double? max, Boundary boundary = Boundary.Both)
-        {
+        public ISqlQuery Between(string column, double? min, double? max, Boundary boundary = Boundary.Both) {
             Builder.Between(column, min, max, boundary);
             return this;
         }
@@ -941,8 +865,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="min">最小值</param>
         /// <param name="max">最大值</param>
         /// <param name="boundary">包含边界</param>
-        public ISqlQuery Between(string column, decimal? min, decimal? max, Boundary boundary = Boundary.Both)
-        {
+        public ISqlQuery Between(string column, decimal? min, decimal? max, Boundary boundary = Boundary.Both) {
             Builder.Between(column, min, max, boundary);
             return this;
         }
@@ -956,8 +879,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <param name="includeTime">是否包含时间</param>
         /// <param name="boundary">包含边界</param>
         public ISqlQuery Between(string column, DateTime? min, DateTime? max, bool includeTime = true,
-            Boundary? boundary = null)
-        {
+            Boundary? boundary = null) {
             Builder.Between(column, min, max, includeTime, boundary);
             return this;
         }
@@ -967,8 +889,7 @@ namespace Alabo.Datas.Sql.Queries
         /// </summary>
         /// <param name="group">分组字段</param>
         /// <param name="having">分组条件</param>
-        public ISqlQuery GroupBy(string group, string having = null)
-        {
+        public ISqlQuery GroupBy(string group, string having = null) {
             Builder.GroupBy(group, having);
             return this;
         }
@@ -979,8 +900,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <typeparam name="TEntity">实体类型</typeparam>
         /// <param name="column">分组字段</param>
         /// <param name="having">分组条件</param>
-        public ISqlQuery GroupBy<TEntity>(Expression<Func<TEntity, object>> column, string having = null)
-        {
+        public ISqlQuery GroupBy<TEntity>(Expression<Func<TEntity, object>> column, string having = null) {
             Builder.GroupBy(column, having);
             return this;
         }
@@ -989,8 +909,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     添加到GroupBy子句
         /// </summary>
         /// <param name="sql">Sql语句</param>
-        public ISqlQuery AppendGroupBy(string sql)
-        {
+        public ISqlQuery AppendGroupBy(string sql) {
             Builder.AppendGroupBy(sql);
             return this;
         }
@@ -999,8 +918,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     排序
         /// </summary>
         /// <param name="order">排序列表</param>
-        public ISqlQuery OrderBy(string order)
-        {
+        public ISqlQuery OrderBy(string order) {
             Builder.OrderBy(order);
             return this;
         }
@@ -1011,8 +929,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <typeparam name="TEntity">实体类型</typeparam>
         /// <param name="column">排序列</param>
         /// <param name="desc">是否倒排</param>
-        public ISqlQuery OrderBy<TEntity>(Expression<Func<TEntity, object>> column, bool desc = false)
-        {
+        public ISqlQuery OrderBy<TEntity>(Expression<Func<TEntity, object>> column, bool desc = false) {
             Builder.OrderBy(column, desc);
             return this;
         }
@@ -1021,8 +938,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     排序
         /// </summary>
         /// <param name="order">排序列表</param>
-        public ISqlQuery AppendOrderBy(string order)
-        {
+        public ISqlQuery AppendOrderBy(string order) {
             Builder.AppendOrderBy(order);
             return this;
         }
@@ -1030,8 +946,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <summary>
         ///     Sql语句
         /// </summary>
-        protected string GetSql()
-        {
+        protected string GetSql() {
             return Builder.ToSql();
         }
 
@@ -1057,8 +972,7 @@ namespace Alabo.Datas.Sql.Queries
         ///     获取数据库连接
         /// </summary>
         /// <param name="connection">数据库连接</param>
-        protected IDbConnection GetConnection(IDbConnection connection)
-        {
+        protected IDbConnection GetConnection(IDbConnection connection) {
             if (connection != null) {
                 return connection;
             }
@@ -1074,24 +988,21 @@ namespace Alabo.Datas.Sql.Queries
         /// <summary>
         ///     获取行数
         /// </summary>
-        protected virtual int GetCount(IDbConnection connection)
-        {
+        protected virtual int GetCount(IDbConnection connection) {
             return Convert.ToInt(ToScalar(connection, GetCountSql(), Params));
         }
 
         /// <summary>
         ///     获取行数
         /// </summary>
-        protected virtual async Task<int> GetCountAsync(IDbConnection connection)
-        {
+        protected virtual async Task<int> GetCountAsync(IDbConnection connection) {
             return Convert.ToInt(await ToScalarAsync(connection, GetCountSql(), Params));
         }
 
         /// <summary>
         ///     获取行数Sql
         /// </summary>
-        protected virtual string GetCountSql()
-        {
+        protected virtual string GetCountSql() {
             var result = new StringBuilder();
             result.AppendLine("Select Count(*) ");
             AppendSql(result, Builder.GetFrom());
@@ -1104,8 +1015,7 @@ namespace Alabo.Datas.Sql.Queries
         /// <summary>
         ///     添加Sql
         /// </summary>
-        protected void AppendSql(StringBuilder result, string sql)
-        {
+        protected void AppendSql(StringBuilder result, string sql) {
             if (string.IsNullOrWhiteSpace(sql)) {
                 return;
             }

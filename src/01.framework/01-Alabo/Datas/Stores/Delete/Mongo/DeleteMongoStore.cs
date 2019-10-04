@@ -4,18 +4,16 @@ using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Alabo.Datas.Stores.Delete.Mongo
-{
+namespace Alabo.Datas.Stores.Delete.Mongo {
+
     public abstract class DeleteMongoStore<TEntity, TKey> : DeleteAsyncMongoStore<TEntity, TKey>,
         IDeleteStore<TEntity, TKey>
-        where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
-        protected DeleteMongoStore(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
+        protected DeleteMongoStore(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
-        public bool Delete(TEntity entity)
-        {
+        public bool Delete(TEntity entity) {
             if (entity == null) {
                 return false;
             }
@@ -29,10 +27,8 @@ namespace Alabo.Datas.Stores.Delete.Mongo
             return false;
         }
 
-        public void Delete(IEnumerable<TEntity> entities)
-        {
-            if (entities.Any())
-            {
+        public void Delete(IEnumerable<TEntity> entities) {
+            if (entities.Any()) {
                 var ids = entities.Select(r => r.Id);
                 Collection.DeleteMany(r => ids.Contains(r.Id));
             }

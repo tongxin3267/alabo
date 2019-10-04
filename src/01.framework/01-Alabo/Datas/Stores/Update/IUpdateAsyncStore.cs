@@ -5,15 +5,15 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Alabo.Datas.Stores.Update
-{
+namespace Alabo.Datas.Stores.Update {
+
     /// <summary>
     ///     修改实体
     /// </summary>
     /// <typeparam name="TEntity">对象类型</typeparam>
     /// <typeparam name="TKey">对象标识类型</typeparam>
-    public interface IUpdateAsyncStore<TEntity, in TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
+    public interface IUpdateAsyncStore<TEntity, in TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
         /// <summary>
         ///     修改实体
         /// </summary>

@@ -6,13 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Alabo.Dependency
-{
+namespace Alabo.Dependency {
+
     /// <summary>
     ///     Autofac对象容器
     /// </summary>
-    internal class Container : IContainer
-    {
+    internal class Container : IContainer {
+
         /// <summary>
         ///     容器
         /// </summary>
@@ -23,8 +23,7 @@ namespace Alabo.Dependency
         /// </summary>
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="name">服务名称</param>
-        public List<T> CreateList<T>(string name = null)
-        {
+        public List<T> CreateList<T>(string name = null) {
             var result = CreateList(typeof(T), name);
             if (result == null) {
                 return new List<T>();
@@ -38,8 +37,7 @@ namespace Alabo.Dependency
         /// </summary>
         /// <param name="type">对象类型</param>
         /// <param name="name">服务名称</param>
-        public object CreateList(Type type, string name = null)
-        {
+        public object CreateList(Type type, string name = null) {
             var serviceType = typeof(IEnumerable<>).MakeGenericType(type);
             return Create(serviceType, name);
         }
@@ -49,8 +47,7 @@ namespace Alabo.Dependency
         /// </summary>
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="name">服务名称</param>
-        public T Create<T>(string name = null)
-        {
+        public T Create<T>(string name = null) {
             return (T)Create(typeof(T), name);
         }
 
@@ -59,16 +56,12 @@ namespace Alabo.Dependency
         /// </summary>
         /// <param name="type">对象类型</param>
         /// <param name="name">服务名称</param>
-        public object Create(Type type, string name = null)
-        {
+        public object Create(Type type, string name = null) {
             var httpRequest = HttpWeb.HttpContext?.RequestServices;
-            if (httpRequest != null)
-            {
+            if (httpRequest != null) {
                 var intances = GetServiceFromHttpContext(type, name);
                 return intances;
-            }
-            else
-            {
+            } else {
                 var intances = GetService(type, name);
                 return intances;
             }
@@ -77,8 +70,7 @@ namespace Alabo.Dependency
         /// <summary>
         ///     作用域开始
         /// </summary>
-        public IScope BeginScope()
-        {
+        public IScope BeginScope() {
             return new Scope(_container.BeginLifetimeScope());
         }
 
@@ -86,8 +78,7 @@ namespace Alabo.Dependency
         ///     注册依赖
         /// </summary>
         /// <param name="configs">依赖配置</param>
-        public void Register(params IConfig[] configs)
-        {
+        public void Register(params IConfig[] configs) {
             Register(null, null, configs);
         }
 
@@ -96,24 +87,21 @@ namespace Alabo.Dependency
         /// </summary>
         /// <param name="services">服务集合</param>
         /// <param name="configs">依赖配置</param>
-        public IServiceProvider Register(IServiceCollection services, params IConfig[] configs)
-        {
+        public IServiceProvider Register(IServiceCollection services, params IConfig[] configs) {
             return Register(services, null, configs);
         }
 
         /// <summary>
         ///     释放容器
         /// </summary>
-        public void Dispose()
-        {
+        public void Dispose() {
             _container.Dispose();
         }
 
         /// <summary>
         ///     从HttpContext获取服务
         /// </summary>
-        private object GetServiceFromHttpContext(Type type, string name)
-        {
+        private object GetServiceFromHttpContext(Type type, string name) {
             var serviceProvider = HttpWeb.HttpContext.RequestServices;
             if (name == null) {
                 return serviceProvider.GetService(type);
@@ -126,8 +114,7 @@ namespace Alabo.Dependency
         /// <summary>
         ///     获取服务
         /// </summary>
-        private object GetService(Type type, string name)
-        {
+        private object GetService(Type type, string name) {
             if (name == null) {
                 return _container.Resolve(type);
             }
@@ -142,8 +129,7 @@ namespace Alabo.Dependency
         /// <param name="actionBefore">注册前操作</param>
         /// <param name="configs">依赖配置</param>
         public IServiceProvider Register(IServiceCollection services, Action<ContainerBuilder> actionBefore,
-            params IConfig[] configs)
-        {
+            params IConfig[] configs) {
             var builder = CreateBuilder(services, actionBefore, configs);
             _container = builder.Build();
             return new AutofacServiceProvider(_container);
@@ -156,8 +142,7 @@ namespace Alabo.Dependency
         /// <param name="actionBefore">注册前执行的操作</param>
         /// <param name="configs">依赖配置</param>
         public ContainerBuilder CreateBuilder(IServiceCollection services, Action<ContainerBuilder> actionBefore,
-            params IConfig[] configs)
-        {
+            params IConfig[] configs) {
             var builder = new ContainerBuilder();
             actionBefore?.Invoke(builder);
             if (configs != null) {

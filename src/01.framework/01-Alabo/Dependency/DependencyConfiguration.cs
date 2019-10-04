@@ -9,13 +9,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Alabo.Dependency
-{
+namespace Alabo.Dependency {
+
     /// <summary>
     ///     依赖配置
     /// </summary>
-    public class DependencyConfiguration
-    {
+    public class DependencyConfiguration {
+
         /// <summary>
         ///     依赖配置
         /// </summary>
@@ -46,8 +46,7 @@ namespace Alabo.Dependency
         /// </summary>
         /// <param name="services">服务集合</param>
         /// <param name="configs">依赖配置</param>
-        public DependencyConfiguration(IServiceCollection services, IConfig[] configs)
-        {
+        public DependencyConfiguration(IServiceCollection services, IConfig[] configs) {
             _services = services;
             _configs = configs;
         }
@@ -55,16 +54,14 @@ namespace Alabo.Dependency
         /// <summary>
         ///     配置依赖
         /// </summary>
-        public IServiceProvider Config()
-        {
+        public IServiceProvider Config() {
             return Ioc.DefaultContainer.Register(_services, RegistServices, _configs);
         }
 
         /// <summary>
         ///     注册服务集合
         /// </summary>
-        private void RegistServices(ContainerBuilder builder)
-        {
+        private void RegistServices(ContainerBuilder builder) {
             _builder = builder;
             _finder = new WebFinder();
             _assemblies = _finder.GetAssemblies();
@@ -76,8 +73,7 @@ namespace Alabo.Dependency
         /// <summary>
         ///     注册基础设施
         /// </summary>
-        private void RegistInfrastracture()
-        {
+        private void RegistInfrastracture() {
             EnableAop();
             RegistFinder();
             RegistContext();
@@ -86,40 +82,35 @@ namespace Alabo.Dependency
         /// <summary>
         ///     启用Aop
         /// </summary>
-        private void EnableAop()
-        {
+        private void EnableAop() {
             _builder.EnableAop();
         }
 
         /// <summary>
         ///     注册类型查找器
         /// </summary>
-        private void RegistFinder()
-        {
+        private void RegistFinder() {
             _builder.AddSingleton(_finder);
         }
 
         /// <summary>
         ///     注册上下文
         /// </summary>
-        private void RegistContext()
-        {
+        private void RegistContext() {
             _builder.AddSingleton<IContext, WebContext>();
         }
 
         /// <summary>
         ///     注册事件处理器
         /// </summary>
-        private void RegistEventHandlers()
-        {
+        private void RegistEventHandlers() {
             RegistEventHandlers(typeof(IEventHandler<>));
         }
 
         /// <summary>
         ///     注册事件处理器
         /// </summary>
-        private void RegistEventHandlers(Type handlerType)
-        {
+        private void RegistEventHandlers(Type handlerType) {
             var handlerTypes = GetTypes(handlerType);
             foreach (var handler in handlerTypes) {
                 _builder.RegisterType(handler).As(handler.FindInterfaces(
@@ -133,8 +124,7 @@ namespace Alabo.Dependency
         /// <summary>
         ///     查找并注册依赖
         /// </summary>
-        private void RegistDependency()
-        {
+        private void RegistDependency() {
             RegistSingletonDependency();
             RegistScopeDependency();
             RegistTransientDependency();
@@ -144,8 +134,7 @@ namespace Alabo.Dependency
         /// <summary>
         ///     注册单例依赖
         /// </summary>
-        private void RegistSingletonDependency()
-        {
+        private void RegistSingletonDependency() {
             _builder.RegisterTypes(GetTypes<ISingletonDependency>()).AsImplementedInterfaces().PropertiesAutowired()
                 .SingleInstance();
         }
@@ -153,8 +142,7 @@ namespace Alabo.Dependency
         /// <summary>
         ///     注册作用域依赖
         /// </summary>
-        private void RegistScopeDependency()
-        {
+        private void RegistScopeDependency() {
             _builder.RegisterTypes(GetTypes<IScopeDependency>()).AsImplementedInterfaces().PropertiesAutowired()
                 .InstancePerLifetimeScope();
         }
@@ -162,8 +150,7 @@ namespace Alabo.Dependency
         /// <summary>
         ///     注册瞬态依赖
         /// </summary>
-        private void RegistTransientDependency()
-        {
+        private void RegistTransientDependency() {
             _builder.RegisterTypes(GetTypes<ITransientDependency>()).AsImplementedInterfaces().PropertiesAutowired()
                 .InstancePerDependency();
         }
@@ -171,8 +158,7 @@ namespace Alabo.Dependency
         /// <summary>
         ///     解析依赖注册器
         /// </summary>
-        private void ResolveDependencyRegistrar()
-        {
+        private void ResolveDependencyRegistrar() {
             var types = GetTypes<IDependencyRegistrar>();
             types.Select(type => Reflection.CreateInstance<IDependencyRegistrar>(type)).ToList()
                 .ForEach(t => t.Register(_services));
@@ -181,16 +167,14 @@ namespace Alabo.Dependency
         /// <summary>
         ///     获取类型集合
         /// </summary>
-        private Type[] GetTypes<T>()
-        {
+        private Type[] GetTypes<T>() {
             return _finder.Find<T>(_assemblies).ToArray();
         }
 
         /// <summary>
         ///     获取类型集合
         /// </summary>
-        private Type[] GetTypes(Type type)
-        {
+        private Type[] GetTypes(Type type) {
             return _finder.Find(type, _assemblies).ToArray();
         }
     }

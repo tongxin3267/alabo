@@ -2,10 +2,10 @@
 using Alabo.UI.Design.AutoForms;
 using System;
 
-namespace Alabo.Framework.Core.WebUis.Services
-{
-    public interface IApIAlaboAutoConfigService : IService
-    {
+namespace Alabo.Framework.Core.WebUis.Services {
+
+    public interface IApIAlaboAutoConfigService : IService {
+
         /// <summary>
         ///     get view
         /// </summary>

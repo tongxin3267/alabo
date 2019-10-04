@@ -1,24 +1,22 @@
 ﻿using Alabo.Helpers;
 
-namespace Alabo.Datas.Sql
-{
+namespace Alabo.Datas.Sql {
+
     /// <summary>
     ///     Sql辅助操作
     /// </summary>
-    public class SqlHelper
-    {
+    public class SqlHelper {
+
         /// <summary>
         ///     获取参数字面值
         /// </summary>
         /// <param name="value">参数值</param>
-        public static string GetParamLiterals(object value)
-        {
+        public static string GetParamLiterals(object value) {
             if (value == null) {
                 return "''";
             }
 
-            switch (value.GetType().Name.ToLower())
-            {
+            switch (value.GetType().Name.ToLower()) {
                 case "boolean":
                     return Convert.ToBool(value) ? "1" : "0";
 

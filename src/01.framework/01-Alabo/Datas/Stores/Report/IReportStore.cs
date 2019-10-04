@@ -4,10 +4,10 @@ using Alabo.UI.Design.AutoReports;
 using Alabo.UI.Design.AutoReports.Dtos;
 using System.Collections.Generic;
 
-namespace Alabo.Datas.Stores.Report
-{
-    public interface IReportStore<TEntity, in TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
+namespace Alabo.Datas.Stores.Report {
+
+    public interface IReportStore<TEntity, in TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
         List<AutoReport> GetCountReport(CountReportInput inputParas);
 
         PagedList<CountReportTable> GetCountTable(CountReportInput inputParas);

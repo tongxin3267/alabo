@@ -1,10 +1,10 @@
-﻿namespace Alabo.Validations
-{
+﻿namespace Alabo.Validations {
+
     /// <summary>
     ///     验证处理器
     /// </summary>
-    public interface IValidationHandler
-    {
+    public interface IValidationHandler {
+
         /// <summary>
         ///     处理验证错误
         /// </summary>

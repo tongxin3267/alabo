@@ -4,13 +4,13 @@ using Alabo.Datas.Sql.Queries.Builders.Internal;
 using System;
 using System.Linq.Expressions;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Core
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Core {
+
     /// <summary>
     ///     谓词表达式解析器
     /// </summary>
-    public class PredicateExpressionResolver
-    {
+    public class PredicateExpressionResolver {
+
         /// <summary>
         ///     辅助操作
         /// </summary>
@@ -24,8 +24,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <param name="register">实体别名注册器</param>
         /// <param name="parameterManager">参数管理器</param>
         public PredicateExpressionResolver(IDialect dialect, IEntityResolver resolver, IEntityAliasRegister register,
-            IParameterManager parameterManager)
-        {
+            IParameterManager parameterManager) {
             _helper = new Helper(dialect, resolver, register, parameterManager);
         }
 
@@ -34,8 +33,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// </summary>
         /// <typeparam name="TEntiy">实体类型</typeparam>
         /// <param name="expression">谓词表达式</param>
-        public ICondition Resolve<TEntiy>(Expression<Func<TEntiy, bool>> expression)
-        {
+        public ICondition Resolve<TEntiy>(Expression<Func<TEntiy, bool>> expression) {
             if (expression == null) {
                 return NullCondition.Instance;
             }
@@ -46,10 +44,8 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <summary>
         ///     解析谓词表达式
         /// </summary>
-        private ICondition ResolveExpression(Expression expression, Type type)
-        {
-            switch (expression.NodeType)
-            {
+        private ICondition ResolveExpression(Expression expression, Type type) {
+            switch (expression.NodeType) {
                 case ExpressionType.Lambda:
                     return ResolveExpression(((LambdaExpression)expression).Body, type);
 
@@ -67,8 +63,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <summary>
         ///     解析Or表达式
         /// </summary>
-        private ICondition ResolveOrExpression(BinaryExpression expression, Type type)
-        {
+        private ICondition ResolveOrExpression(BinaryExpression expression, Type type) {
             var left = ResolveExpression(expression.Left, type);
             var right = ResolveExpression(expression.Right, type);
             return new OrCondition(left, right);
@@ -77,8 +72,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <summary>
         ///     解析And表达式
         /// </summary>
-        private ICondition ResolveAndExpression(BinaryExpression expression, Type type)
-        {
+        private ICondition ResolveAndExpression(BinaryExpression expression, Type type) {
             var left = ResolveExpression(expression.Left, type);
             var right = ResolveExpression(expression.Right, type);
             return new AndCondition(left, right);

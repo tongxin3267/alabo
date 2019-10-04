@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.UI.Design.AutoReports.Dtos
-{
+namespace Alabo.UI.Design.AutoReports.Dtos {
+
     /// <summary>
     ///     表格
     /// </summary>
-    public class CountReportItem
-    {
+    public class CountReportItem {
+
         /// <summary>
         ///     当前页记录数
         /// </summary>
@@ -44,8 +44,7 @@ namespace Alabo.UI.Design.AutoReports.Dtos
         public List<object> Rows { get; set; }
     }
 
-    public class Columns
-    {
+    public class Columns {
         public string name { get; set; }
         public string type { get; set; }
     }

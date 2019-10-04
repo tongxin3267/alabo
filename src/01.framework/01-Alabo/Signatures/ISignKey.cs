@@ -1,10 +1,10 @@
-﻿namespace Alabo.Signatures
-{
+﻿namespace Alabo.Signatures {
+
     /// <summary>
     ///     签名密钥
     /// </summary>
-    public interface ISignKey
-    {
+    public interface ISignKey {
+
         /// <summary>
         ///     获取私钥
         /// </summary>

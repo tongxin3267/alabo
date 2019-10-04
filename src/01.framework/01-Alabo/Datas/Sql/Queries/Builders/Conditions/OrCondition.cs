@@ -1,12 +1,12 @@
 ﻿using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Conditions
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Conditions {
+
     /// <summary>
     ///     Or连接条件
     /// </summary>
-    public class OrCondition : ICondition
-    {
+    public class OrCondition : ICondition {
+
         /// <summary>
         ///     左操作数
         /// </summary>
@@ -22,8 +22,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Conditions
         /// </summary>
         /// <param name="left">左操作数</param>
         /// <param name="right">右操作数</param>
-        public OrCondition(string left, string right)
-        {
+        public OrCondition(string left, string right) {
             _left = left;
             _right = right;
         }
@@ -33,8 +32,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Conditions
         /// </summary>
         /// <param name="left">左操作数</param>
         /// <param name="right">右操作数</param>
-        public OrCondition(ICondition left, ICondition right)
-        {
+        public OrCondition(ICondition left, ICondition right) {
             _left = left?.GetCondition();
             _right = right?.GetCondition();
         }
@@ -42,8 +40,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Conditions
         /// <summary>
         ///     获取查询条件
         /// </summary>
-        public string GetCondition()
-        {
+        public string GetCondition() {
             if (string.IsNullOrWhiteSpace(_left)) {
                 return _right;
             }

@@ -1,13 +1,13 @@
 ﻿using Alabo.UI.Design.AutoReports.Enums;
 using System.Collections.Generic;
 
-namespace Alabo.UI.Design.AutoReports
-{
+namespace Alabo.UI.Design.AutoReports {
+
     /// <summary>
     ///     数据表数据格式
     /// </summary>
-    public class AutoReprotData
-    {
+    public class AutoReprotData {
+
         /// <summary>
         ///     数据表类型
         /// </summary>
@@ -19,8 +19,8 @@ namespace Alabo.UI.Design.AutoReports
         public List<AutoReprotDataItem> List { get; set; }
     }
 
-    public class AutoReprotDataItem
-    {
+    public class AutoReprotDataItem {
+
         /// <summary>
         ///     数据名称
         /// </summary>

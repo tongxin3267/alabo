@@ -1,13 +1,13 @@
 ﻿using Alabo.Logging.Abstractions;
 using System.Diagnostics;
 
-namespace Alabo.Logging.Core
-{
+namespace Alabo.Logging.Core {
+
     /// <summary>
     ///     空日志上下文
     /// </summary>
-    public class NullLogContext : ILogContext
-    {
+    public class NullLogContext : ILogContext {
+
         /// <summary>
         ///     空日志上下文实例
         /// </summary>
@@ -51,8 +51,7 @@ namespace Alabo.Logging.Core
         /// <summary>
         ///     更新上下文
         /// </summary>
-        public void UpdateContext()
-        {
+        public void UpdateContext() {
         }
     }
 }

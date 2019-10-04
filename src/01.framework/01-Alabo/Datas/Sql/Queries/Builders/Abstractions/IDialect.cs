@@ -1,10 +1,10 @@
-﻿namespace Alabo.Datas.Sql.Queries.Builders.Abstractions
-{
+﻿namespace Alabo.Datas.Sql.Queries.Builders.Abstractions {
+
     /// <summary>
     ///     Sql方言
     /// </summary>
-    public interface IDialect
-    {
+    public interface IDialect {
+
         /// <summary>
         ///     安全名称
         /// </summary>

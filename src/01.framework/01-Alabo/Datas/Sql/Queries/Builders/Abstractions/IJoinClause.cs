@@ -2,13 +2,13 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Abstractions
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Abstractions {
+
     /// <summary>
     ///     表连接子句
     /// </summary>
-    public interface IJoinClause
-    {
+    public interface IJoinClause {
+
         /// <summary>
         ///     内连接
         /// </summary>

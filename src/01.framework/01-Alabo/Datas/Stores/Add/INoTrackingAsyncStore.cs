@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Alabo.Datas.Stores.Add
-{
-    public interface INoTrackingAsyncStore<TEntity, in TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
+namespace Alabo.Datas.Stores.Add {
+
+    public interface INoTrackingAsyncStore<TEntity, in TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
         /// <summary>
         ///     查找未跟踪单个实体
         /// </summary>

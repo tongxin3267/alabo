@@ -1,15 +1,13 @@
 ﻿using System;
 
-namespace Alabo.UI.Design.AutoTasks
-{
-    public class AutoTask
-    {
-        public AutoTask()
-        {
+namespace Alabo.UI.Design.AutoTasks {
+
+    public class AutoTask {
+
+        public AutoTask() {
         }
 
-        public AutoTask(string name, Guid moduleId, Type serviceType, string method)
-        {
+        public AutoTask(string name, Guid moduleId, Type serviceType, string method) {
             Name = name;
             Method = method;
             ModuleId = moduleId;

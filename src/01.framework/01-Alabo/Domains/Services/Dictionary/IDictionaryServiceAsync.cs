@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Alabo.Domains.Services.Dictionary
-{
-    public interface IDictionaryServiceAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+namespace Alabo.Domains.Services.Dictionary {
+
+    public interface IDictionaryServiceAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         Task<Dictionary<string, string>> GetDictionaryAsync(object id);
 
         /// <summary>

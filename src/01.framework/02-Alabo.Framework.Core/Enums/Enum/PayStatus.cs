@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     支付状态
     /// </summary>
     [ClassProperty(Name = "支付状态")]
-    public enum PayStatus
-    {
+    public enum PayStatus {
+
         /// <summary>
         ///     等待处理
         /// </summary>

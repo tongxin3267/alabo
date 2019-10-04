@@ -1,10 +1,10 @@
-﻿namespace Alabo.Security.Identity.Options
-{
+﻿namespace Alabo.Security.Identity.Options {
+
     /// <summary>
     ///     存储配置
     /// </summary>
-    public class StoreOptions
-    {
+    public class StoreOptions {
+
         /// <summary>
         ///     键最大长度
         /// </summary>

@@ -1,10 +1,10 @@
-﻿namespace Alabo.Framework.Themes.Dtos
-{
+﻿namespace Alabo.Framework.Themes.Dtos {
+
     /// <summary>
     ///     客户端站点设置
     /// </summary>
-    public class ClientSite
-    {
+    public class ClientSite {
+
         /// <summary>
         ///     是否开通微信支付
         /// </summary>

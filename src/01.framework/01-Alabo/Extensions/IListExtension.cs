@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Alabo.Extensions
-{
-    public static class ListExtension
-    {
+namespace Alabo.Extensions {
+
+    public static class ListExtension {
+
         /// <summary>
         ///     对列表中的对每个元素进行处理
         /// </summary>
-        public static IList<T> MapEach<T>(this IList<T> list, Func<T, T> method)
-        {
+        public static IList<T> MapEach<T>(this IList<T> list, Func<T, T> method) {
             if (list == null) {
                 return list;
             }
@@ -24,8 +23,7 @@ namespace Alabo.Extensions
         /// <summary>
         ///     判断列表是否为null或空
         /// </summary>
-        public static bool IsNullOrEmpty<T>(this IList<T> array)
-        {
+        public static bool IsNullOrEmpty<T>(this IList<T> array) {
             return array == null || array.Count <= 0;
         }
 
@@ -38,8 +36,7 @@ namespace Alabo.Extensions
         /// <param name="dst">目标数组</param>
         /// <param name="dstIndex"></param>
         /// <param name="length">要复制的长度</param>
-        public static void CopyArray<T>(this IList<T> src, int srcIndex, IList<T> dst, int dstIndex, int length)
-        {
+        public static void CopyArray<T>(this IList<T> src, int srcIndex, IList<T> dst, int dstIndex, int length) {
             for (var n = 0; n < length; n++) {
                 dst[dstIndex++] = src[srcIndex++];
             }
@@ -48,8 +45,7 @@ namespace Alabo.Extensions
         /// <summary>
         ///     交换位于x和y的对象的位置
         /// </summary>
-        public static void Swap<T>(this IList<T> self, int x, int y)
-        {
+        public static void Swap<T>(this IList<T> self, int x, int y) {
             var tmp = self[x];
             self[x] = self[y];
             self[y] = tmp;
@@ -61,8 +57,7 @@ namespace Alabo.Extensions
         /// <param name="list">列表</param>
         /// <param name="index">位置，负数时为length-index</param>
         /// <param name="defaultValue"></param>
-        public static T GetIndex<T>(this IList<T> list, int index, T defaultValue = default)
-        {
+        public static T GetIndex<T>(this IList<T> list, int index, T defaultValue = default) {
             if (list == null) {
                 return defaultValue;
             }
@@ -78,16 +73,14 @@ namespace Alabo.Extensions
             return list[index];
         }
 
-        public static IList<int> ToIntList(this string val)
-        {
+        public static IList<int> ToIntList(this string val) {
             var data = val.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             var retList = new List<int>();
             data.Foreach(o => retList.Add(o.ToInt()));
             return retList;
         }
 
-        public static IList<long> ToLongList(this string val)
-        {
+        public static IList<long> ToLongList(this string val) {
             var data = val.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             var retList = new List<long>();
             data.Foreach(o => retList.Add(o.ConvertToLong()));
@@ -98,8 +91,7 @@ namespace Alabo.Extensions
         ///     转换成sql 查询语句
         /// </summary>
         /// <param name="ids">Id标识列表</param>
-        public static string ToSqlString(this IList<long> ids)
-        {
+        public static string ToSqlString(this IList<long> ids) {
             var idString = ids.JoinToString("','");
             var result = $"'{idString}'";
             return result;
@@ -109,8 +101,7 @@ namespace Alabo.Extensions
         ///     转换成sql 查询语句
         /// </summary>
         /// <param name="ids">Id标识列表</param>
-        public static string ToSqlString(this IList<object> ids)
-        {
+        public static string ToSqlString(this IList<object> ids) {
             var idString = ids.JoinToString("','");
             var result = $"'{idString}'";
             return result;
@@ -120,8 +111,7 @@ namespace Alabo.Extensions
         ///     转换成sql 查询语句
         /// </summary>
         /// <param name="ids">Id标识列表</param>
-        public static string ToSqlString(this IList<Guid> ids)
-        {
+        public static string ToSqlString(this IList<Guid> ids) {
             var idString = ids.JoinToString("','");
             var result = $"'{idString}'";
             return result;

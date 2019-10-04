@@ -5,8 +5,8 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Alabo.Helpers.Internal
-{
+namespace Alabo.Helpers.Internal {
+
     /// <summary>
     ///     RSA加解密 使用OpenSSL的公钥加密/私钥解密
     ///     公私钥请使用openssl生成  ssh-keygen -t rsa 命令生成的公钥私钥是不行的
@@ -14,8 +14,7 @@ namespace Alabo.Helpers.Internal
     ///     时间：2017年10月30日15:50:14
     ///     QQ:501232752
     /// </summary>
-    internal class RsaHelper
-    {
+    internal class RsaHelper {
         private readonly Encoding _encoding;
         private readonly HashAlgorithmName _hashAlgorithmName;
         private readonly RSA _privateKeyRsaProvider;
@@ -28,8 +27,7 @@ namespace Alabo.Helpers.Internal
         /// <param name="encoding">编码类型</param>
         /// <param name="privateKey">私钥</param>
         /// <param name="publicKey">公钥</param>
-        public RsaHelper(RsaType rsaType, Encoding encoding, string privateKey, string publicKey = null)
-        {
+        public RsaHelper(RsaType rsaType, Encoding encoding, string privateKey, string publicKey = null) {
             _encoding = encoding;
             if (!string.IsNullOrEmpty(privateKey)) {
                 _privateKeyRsaProvider = CreateRsaProviderFromPrivateKey(privateKey);
@@ -48,8 +46,7 @@ namespace Alabo.Helpers.Internal
         ///     使用私钥签名
         /// </summary>
         /// <param name="data">原始数据</param>
-        public string Sign(string data)
-        {
+        public string Sign(string data) {
             var dataBytes = _encoding.GetBytes(data);
 
             var signatureBytes =
@@ -67,8 +64,7 @@ namespace Alabo.Helpers.Internal
         /// </summary>
         /// <param name="data">原始数据</param>
         /// <param name="sign">签名</param>
-        public bool Verify(string data, string sign)
-        {
+        public bool Verify(string data, string sign) {
             var dataBytes = _encoding.GetBytes(data);
             var signBytes = System.Convert.FromBase64String(sign);
 
@@ -82,8 +78,7 @@ namespace Alabo.Helpers.Internal
 
         #region 解密
 
-        public string Decrypt(string cipherText)
-        {
+        public string Decrypt(string cipherText) {
             if (_privateKeyRsaProvider == null) {
                 throw new ValidException("_privateKeyRsaProvider is null");
             }
@@ -96,8 +91,7 @@ namespace Alabo.Helpers.Internal
 
         #region 加密
 
-        public string Encrypt(string text)
-        {
+        public string Encrypt(string text) {
             if (_publicKeyRsaProvider == null) {
                 throw new ValidException("_publicKeyRsaProvider is null");
             }
@@ -110,15 +104,13 @@ namespace Alabo.Helpers.Internal
 
         #region 使用私钥创建RSA实例
 
-        public RSA CreateRsaProviderFromPrivateKey(string privateKey)
-        {
+        public RSA CreateRsaProviderFromPrivateKey(string privateKey) {
             var privateKeyBits = System.Convert.FromBase64String(privateKey);
 
             var rsa = RSA.Create();
             var rsaParameters = new RSAParameters();
 
-            using (var binr = new BinaryReader(new MemoryStream(privateKeyBits)))
-            {
+            using (var binr = new BinaryReader(new MemoryStream(privateKeyBits))) {
                 byte bt = 0;
                 ushort twobytes = 0;
                 twobytes = binr.ReadUInt16();
@@ -158,8 +150,7 @@ namespace Alabo.Helpers.Internal
 
         #region 使用公钥创建RSA实例
 
-        public RSA CreateRsaProviderFromPublicKey(string publicKeyString)
-        {
+        public RSA CreateRsaProviderFromPublicKey(string publicKeyString) {
             // encoded OID sequence for  PKCS #1 rsaEncryption szOID_RSA_RSA = "1.2.840.113549.1.1.1"
             byte[] seqOid = { 0x30, 0x0D, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x01, 0x01, 0x05, 0x00 };
             var seq = new byte[15];
@@ -167,8 +158,7 @@ namespace Alabo.Helpers.Internal
             var x509Key = System.Convert.FromBase64String(publicKeyString);
 
             // ---------  Set up stream to read the asn.1 encoded SubjectPublicKeyInfo blob  ------
-            using (var mem = new MemoryStream(x509Key))
-            {
+            using (var mem = new MemoryStream(x509Key)) {
                 using (var binr = new BinaryReader(mem)) //wrap Memory Stream with BinaryReader for easy reading
                 {
                     byte bt = 0;
@@ -224,14 +214,10 @@ namespace Alabo.Helpers.Internal
                     if (twobytes == 0x8102) //data read as little endian order (actual data order for Integer is 02 81)
                     {
                         lowbyte = binr.ReadByte(); // read next bytes which is bytes in modulus
-                    }
-                    else if (twobytes == 0x8202)
-                    {
+                    } else if (twobytes == 0x8202) {
                         highbyte = binr.ReadByte(); //advance 2 bytes
                         lowbyte = binr.ReadByte();
-                    }
-                    else
-                    {
+                    } else {
                         return null;
                     }
 
@@ -240,8 +226,7 @@ namespace Alabo.Helpers.Internal
                     var modsize = BitConverter.ToInt32(modint, 0);
 
                     var firstbyte = binr.PeekChar();
-                    if (firstbyte == 0x00)
-                    {
+                    if (firstbyte == 0x00) {
                         //if first byte (highest order) of modulus is zero, don't include it
                         binr.ReadByte(); //skip this null byte
                         modsize -= 1; //reduce modulus buffer size by 1
@@ -261,8 +246,7 @@ namespace Alabo.Helpers.Internal
 
                     // ------- create RSACryptoServiceProvider instance and initialize with public key -----
                     var rsa = RSA.Create();
-                    var rsaKeyInfo = new RSAParameters
-                    {
+                    var rsaKeyInfo = new RSAParameters {
                         Modulus = modulus,
                         Exponent = exponent
                     };
@@ -277,8 +261,7 @@ namespace Alabo.Helpers.Internal
 
         #region 导入密钥算法
 
-        private int GetIntegerSize(BinaryReader binr)
-        {
+        private int GetIntegerSize(BinaryReader binr) {
             byte bt = 0;
             var count = 0;
             bt = binr.ReadByte();
@@ -288,19 +271,14 @@ namespace Alabo.Helpers.Internal
 
             bt = binr.ReadByte();
 
-            if (bt == 0x81)
-            {
+            if (bt == 0x81) {
                 count = binr.ReadByte();
-            }
-            else if (bt == 0x82)
-            {
+            } else if (bt == 0x82) {
                 var highbyte = binr.ReadByte();
                 var lowbyte = binr.ReadByte();
                 byte[] modint = { lowbyte, highbyte, 0x00, 0x00 };
                 count = BitConverter.ToInt32(modint, 0);
-            }
-            else
-            {
+            } else {
                 count = bt;
             }
 
@@ -312,15 +290,13 @@ namespace Alabo.Helpers.Internal
             return count;
         }
 
-        private bool CompareBytearrays(byte[] a, byte[] b)
-        {
+        private bool CompareBytearrays(byte[] a, byte[] b) {
             if (a.Length != b.Length) {
                 return false;
             }
 
             var i = 0;
-            foreach (var c in a)
-            {
+            foreach (var c in a) {
                 if (c != b[i]) {
                     return false;
                 }
@@ -338,8 +314,8 @@ namespace Alabo.Helpers.Internal
     ///     RSA算法类型
     /// </summary>
     [ClassProperty(Name = "RSA算法类型")]
-    public enum RsaType
-    {
+    public enum RsaType {
+
         /// <summary>
         ///     SHA1
         /// </summary>

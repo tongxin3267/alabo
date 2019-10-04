@@ -1,13 +1,13 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Runtime.Config
-{
+namespace Alabo.Runtime.Config {
+
     /// <summary>
     ///     数据库类型的字符串定义
     /// </summary>
-    public static class DatabaseTypes
-    {
+    public static class DatabaseTypes {
+
         /// <summary>
         ///     PostgreSQL
         /// </summary>
@@ -38,8 +38,8 @@ namespace Alabo.Runtime.Config
     ///     Enum DatabaseType
     /// </summary>
     [ClassProperty(Name = "数据库连接方式")]
-    public enum DatabaseType
-    {
+    public enum DatabaseType {
+
         /// <summary>
         ///     SqlService
         /// </summary>

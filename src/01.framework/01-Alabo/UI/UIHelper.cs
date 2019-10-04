@@ -2,20 +2,18 @@
 using System;
 using System.Collections.Generic;
 
-namespace Alabo.UI
-{
+namespace Alabo.UI {
+
     /// <summary>
     ///     UI相关的函数
     /// </summary>
-    public static class UIHelper
-    {
+    public static class UIHelper {
+
         /// <summary>
         ///     随机颜色
         /// </summary>
-        public static string Color
-        {
-            get
-            {
+        public static string Color {
+            get {
                 var list = new List<string>
                 {
                     "info",
@@ -38,10 +36,8 @@ namespace Alabo.UI
         /// <summary>
         ///     随机图标
         /// </summary>
-        public static string Icon
-        {
-            get
-            {
+        public static string Icon {
+            get {
                 var index = new Random().Next(1, 80);
                 index.IntToEnum<Flaticon>(out var flaticon);
                 return flaticon.GetIcon();

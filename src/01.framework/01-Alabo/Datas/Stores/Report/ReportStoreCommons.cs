@@ -6,12 +6,11 @@ using Alabo.UI.Design.AutoReports.Dtos;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Alabo.Datas.Stores.Report
-{
-    public class ReportStoreCommons<TEntity, TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
-        public static List<AutoReport> GetCountReport(IEnumerable<TEntity> queryList, CountReportInput inputParas)
-        {
+namespace Alabo.Datas.Stores.Report {
+
+    public class ReportStoreCommons<TEntity, TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
+        public static List<AutoReport> GetCountReport(IEnumerable<TEntity> queryList, CountReportInput inputParas) {
             var type = typeof(TEntity);
             var rsList = new List<AutoReport>();
             var gpListByDate = queryList.GroupBy(x => x.CreateTime.Date).OrderBy(x => x.Key);
@@ -20,16 +19,13 @@ namespace Alabo.Datas.Stores.Report
             var rowList = new List<object>();
 
             var dicEnumNameValue = new Dictionary<string, string>();
-            if (inputParas.Field.IsNotNullOrEmpty())
-            {
+            if (inputParas.Field.IsNotNullOrEmpty()) {
                 var objEnum = type.GetProperty(inputParas.Field);
 
                 // IsEnum == true
-                if (objEnum != null && objEnum.PropertyType.IsEnum)
-                {
+                if (objEnum != null && objEnum.PropertyType.IsEnum) {
                     var enumMembers = objEnum.PropertyType.GetFields().Where(x => x.IsLiteral);
-                    foreach (var item in enumMembers)
-                    {
+                    foreach (var item in enumMembers) {
                         var enumItem = item.GetValue(null);
 
                         dicEnumNameValue.Add(enumItem.GetDisplayName(), enumItem.ToString());
@@ -37,16 +33,13 @@ namespace Alabo.Datas.Stores.Report
                 }
             }
 
-            foreach (var gpDataDate in gpListByDate)
-            {
-                var rowDic = new Dictionary<string, string>
-                {
+            foreach (var gpDataDate in gpListByDate) {
+                var rowDic = new Dictionary<string, string> {
                     ["日期"] = gpDataDate.Key.ToString("yyyy-MM-dd"),
                     ["全部"] = gpDataDate.Count().ToString()
                 };
 
-                foreach (var enumItem in dicEnumNameValue)
-                {
+                foreach (var enumItem in dicEnumNameValue) {
                     var enumDispayName = enumItem.Key;
                     if (!colList.Contains(enumDispayName)) {
                         colList.Add(enumDispayName);
@@ -59,11 +52,9 @@ namespace Alabo.Datas.Stores.Report
                 rowList.Add(rowDic);
             }
 
-            rsList.Add(new AutoReport
-            {
+            rsList.Add(new AutoReport {
                 Name = $"{inputParas.EntityType}统计",
-                AutoReportChart = new AutoReportChart
-                {
+                AutoReportChart = new AutoReportChart {
                     // Type = ReportChartType.Line,
                     Columns = colList,
                     Rows = rowList
@@ -74,8 +65,7 @@ namespace Alabo.Datas.Stores.Report
         }
 
         public static PagedList<CountReportTable> GetCountTable(IEnumerable<TEntity> queryList,
-            CountReportInput inputParas)
-        {
+            CountReportInput inputParas) {
             var type = typeof(TEntity);
             var rsList = new PagedList<CountReportTable>();
             var gpListByDate = queryList.GroupBy(x => x.CreateTime.Date).OrderBy(x => x.Key);
@@ -89,16 +79,13 @@ namespace Alabo.Datas.Stores.Report
             var rowList = new List<object>();
 
             var dicEnumNameValue = new Dictionary<string, string>();
-            if (inputParas.Field.IsNotNullOrEmpty())
-            {
+            if (inputParas.Field.IsNotNullOrEmpty()) {
                 var objEnum = type.GetProperty(inputParas.Field);
 
                 // IsEnum == true
-                if (objEnum != null && objEnum.PropertyType.IsEnum)
-                {
+                if (objEnum != null && objEnum.PropertyType.IsEnum) {
                     var enumMembers = objEnum.PropertyType.GetFields().Where(x => x.IsLiteral);
-                    foreach (var item in enumMembers)
-                    {
+                    foreach (var item in enumMembers) {
                         var enumItem = item.GetValue(null);
 
                         dicEnumNameValue.Add(enumItem.GetDisplayName(), enumItem.ToString());
@@ -106,16 +93,13 @@ namespace Alabo.Datas.Stores.Report
                 }
             }
 
-            foreach (var gpDataDate in gpListByDate)
-            {
-                var rowDic = new Dictionary<string, string>
-                {
+            foreach (var gpDataDate in gpListByDate) {
+                var rowDic = new Dictionary<string, string> {
                     ["Date"] = gpDataDate.Key.ToString("yyyy-MM-dd"),
                     ["Count"] = gpDataDate.Count().ToString()
                 };
 
-                foreach (var enumItem in dicEnumNameValue)
-                {
+                foreach (var enumItem in dicEnumNameValue) {
                     var enumDispayName = enumItem.Key;
                     if (coluList.Where(x => x.type == enumItem.Key).Count() < 1) {
                         coluList.Add(new Columns { name = enumDispayName, type = enumItem.Key });
@@ -131,11 +115,9 @@ namespace Alabo.Datas.Stores.Report
             var rsRowList = rowList.Skip((inputParas.PageIndex - 1) * inputParas.PageSize).Take(inputParas.PageSize)
                 .ToList();
 
-            rsList.Add(new CountReportTable
-            {
+            rsList.Add(new CountReportTable {
                 Name = $"{inputParas.EntityType}报表数据",
-                AutoReportChart = new CountReportItem
-                {
+                AutoReportChart = new CountReportItem {
                     CurrentSize = inputParas.PageSize,
                     PageIndex = inputParas.PageIndex,
                     TotalCount = rowList.Count,
@@ -151,8 +133,7 @@ namespace Alabo.Datas.Stores.Report
             return rsList;
         }
 
-        public static List<AutoReport> GetSumReport(IEnumerable<TEntity> queryList, SumTableInput inputParas)
-        {
+        public static List<AutoReport> GetSumReport(IEnumerable<TEntity> queryList, SumTableInput inputParas) {
             var rsList = new List<AutoReport>();
             var type = typeof(TEntity);
 
@@ -162,16 +143,13 @@ namespace Alabo.Datas.Stores.Report
             var rowList = new List<object>();
 
             var dicEnumNameValue = new Dictionary<string, string>();
-            if (inputParas.SpecialField.IsNotNullOrEmpty())
-            {
+            if (inputParas.SpecialField.IsNotNullOrEmpty()) {
                 var objEnum = type.GetProperty(inputParas.SpecialField);
 
                 // IsEnum == true
-                if (objEnum != null && objEnum.PropertyType.IsEnum)
-                {
+                if (objEnum != null && objEnum.PropertyType.IsEnum) {
                     var enumMembers = objEnum.PropertyType.GetFields().Where(x => x.IsLiteral);
-                    foreach (var item in enumMembers)
-                    {
+                    foreach (var item in enumMembers) {
                         var enumItem = item.GetValue(null);
 
                         dicEnumNameValue.Add(enumItem.GetDisplayName(), enumItem.ToString());
@@ -180,21 +158,17 @@ namespace Alabo.Datas.Stores.Report
             }
 
             if (inputParas.Fields.Count > 0) {
-                foreach (var gItemList in gpListByDate)
-                {
+                foreach (var gItemList in gpListByDate) {
                     var dic = new Dictionary<string, string>
                     {
                         {"日期", gItemList.Key.ToString("yyyy-MM-dd")}
                     };
 
-                    foreach (var fieldName in inputParas.Fields)
-                    {
+                    foreach (var fieldName in inputParas.Fields) {
                         var fieldDispName = type.FullName.GetFiledDisplayName(fieldName);
 
-                        if (dicEnumNameValue.Count > 0)
-                        {
-                            foreach (var enumItem in dicEnumNameValue)
-                            {
+                        if (dicEnumNameValue.Count > 0) {
+                            foreach (var enumItem in dicEnumNameValue) {
                                 var keyName = $"{fieldDispName}[{enumItem.Key}]";
                                 if (colList.Where(x => x == keyName).Count() < 1) {
                                     colList.Add(keyName);
@@ -210,9 +184,7 @@ namespace Alabo.Datas.Stores.Report
 
                                 dic.Add(keyName, rsSum.ToString());
                             }
-                        }
-                        else
-                        {
+                        } else {
                             if (!colList.Contains(fieldName)) {
                                 colList.Add(fieldName);
                             }
@@ -232,11 +204,9 @@ namespace Alabo.Datas.Stores.Report
                 }
             }
 
-            rsList.Add(new AutoReport
-            {
+            rsList.Add(new AutoReport {
                 Name = $"{inputParas.Type}SumReport统计",
-                AutoReportChart = new AutoReportChart
-                {
+                AutoReportChart = new AutoReportChart {
                     // Type = ReportChartType.Line,
                     Columns = colList,
                     Rows = rowList
@@ -247,8 +217,7 @@ namespace Alabo.Datas.Stores.Report
         }
 
         public static PagedList<SumReportTable> GetSumReportTable(IEnumerable<TEntity> queryList,
-            SumTableInput inputParas)
-        {
+            SumTableInput inputParas) {
             var rsList = new PagedList<SumReportTable>();
             var type = typeof(TEntity);
 
@@ -261,16 +230,13 @@ namespace Alabo.Datas.Stores.Report
             var rowList = new List<object>();
 
             var dicEnumNameValue = new Dictionary<string, string>();
-            if (inputParas.SpecialField.IsNotNullOrEmpty())
-            {
+            if (inputParas.SpecialField.IsNotNullOrEmpty()) {
                 var objEnum = type.GetProperty(inputParas.SpecialField);
 
                 // IsEnum == true
-                if (objEnum != null && objEnum.PropertyType.IsEnum)
-                {
+                if (objEnum != null && objEnum.PropertyType.IsEnum) {
                     var enumMembers = objEnum.PropertyType.GetFields().Where(x => x.IsLiteral);
-                    foreach (var item in enumMembers)
-                    {
+                    foreach (var item in enumMembers) {
                         var enumItem = item.GetValue(null);
 
                         dicEnumNameValue.Add(enumItem.GetDisplayName(), enumItem.ToString());
@@ -279,21 +245,17 @@ namespace Alabo.Datas.Stores.Report
             }
 
             if (inputParas.Fields.Count > 0) {
-                foreach (var gItemList in gpListByDate)
-                {
+                foreach (var gItemList in gpListByDate) {
                     var dic = new Dictionary<string, string>
                     {
                         {"日期", gItemList.Key.ToString("yyyy-MM-dd")}
                     };
 
-                    foreach (var fieldName in inputParas.Fields)
-                    {
+                    foreach (var fieldName in inputParas.Fields) {
                         var fieldDispName = type.FullName.GetFiledDisplayName(fieldName);
 
-                        if (dicEnumNameValue.Count > 0)
-                        {
-                            foreach (var enumItem in dicEnumNameValue)
-                            {
+                        if (dicEnumNameValue.Count > 0) {
+                            foreach (var enumItem in dicEnumNameValue) {
                                 var keyName = $"{fieldDispName}[{enumItem.Key}]";
                                 if (colList.Where(x => x.type == keyName).Count() < 1) {
                                     colList.Add(new SumColumns { name = keyName, type = keyName });
@@ -309,9 +271,7 @@ namespace Alabo.Datas.Stores.Report
 
                                 dic.Add(keyName, rsSum.ToString());
                             }
-                        }
-                        else
-                        {
+                        } else {
                             if (colList.Where(x => x.type == fieldDispName).Count() < 1) {
                                 colList.Add(new SumColumns { name = fieldDispName, type = fieldDispName });
                             }
@@ -332,11 +292,9 @@ namespace Alabo.Datas.Stores.Report
 
             var rsRowList = rowList.Skip((int)((inputParas.PageIndex - 1) * inputParas.PageSize))
                 .Take((int)inputParas.PageSize).ToList();
-            rsList.Add(new SumReportTable
-            {
+            rsList.Add(new SumReportTable {
                 Name = $"{inputParas.Type} SumTable 统计",
-                SumReportTableItem = new SumReportTableItems
-                {
+                SumReportTableItem = new SumReportTableItems {
                     CurrentSize = inputParas.PageSize,
                     PageIndex = inputParas.PageIndex,
                     TotalCount = rowList.Count,
@@ -353,10 +311,8 @@ namespace Alabo.Datas.Stores.Report
         }
 
         public static IEnumerable<TEntity> WhereQuery(IEnumerable<TEntity> queryList, string columnName,
-            string propertyValue)
-        {
-            return queryList.Where(m =>
-            {
+            string propertyValue) {
+            return queryList.Where(m => {
                 return m.GetType().GetProperty(columnName).GetValue(m, null).ToString().StartsWith(propertyValue);
             });
         }

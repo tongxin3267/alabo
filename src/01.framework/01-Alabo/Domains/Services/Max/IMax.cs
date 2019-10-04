@@ -2,10 +2,10 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Alabo.Domains.Services.Max
-{
-    public interface IMax<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+namespace Alabo.Domains.Services.Max {
+
+    public interface IMax<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         /// <summary>
         ///     最大Id
         /// </summary>

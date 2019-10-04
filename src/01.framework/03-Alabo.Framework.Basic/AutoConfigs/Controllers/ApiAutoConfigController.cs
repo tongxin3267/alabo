@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Reflection;
 using Alabo.AutoConfigs.Entities;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
@@ -18,16 +15,18 @@ using Alabo.Web.ViewFeatures;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Framework.Basic.AutoConfigs.Controllers
-{
+namespace Alabo.Framework.Basic.AutoConfigs.Controllers {
+
     [ApiExceptionFilter]
     [Route("Api/AutoConfig/[action]")]
-    public class ApiAutoConfigController : ApiBaseController<AutoConfig, long>
-    {
-        public ApiAutoConfigController()
-        {
+    public class ApiAutoConfigController : ApiBaseController<AutoConfig, long> {
+
+        public ApiAutoConfigController() {
             BaseService = Resolve<IAutoConfigService>();
         }
 
@@ -38,8 +37,7 @@ namespace Alabo.Framework.Basic.AutoConfigs.Controllers
         /// <param name="parameter">参数</param>
         [HttpGet]
         [Display(Description = "获取AutoConfig")]
-        public ApiResult<List<JObject>> GetAutoConfigList([FromQuery] string parameter)
-        {
+        public ApiResult<List<JObject>> GetAutoConfigList([FromQuery] string parameter) {
             if (parameter.IsNullOrEmpty()) {
                 ApiResult.Failure("类型不能为空");
             }
@@ -51,8 +49,7 @@ namespace Alabo.Framework.Basic.AutoConfigs.Controllers
 
             var classPropertyAttribute = configType.GetAttribute<ClassPropertyAttribute>();
             if (classPropertyAttribute != null) {
-                if (classPropertyAttribute.PageType == ViewPageType.List)
-                {
+                if (classPropertyAttribute.PageType == ViewPageType.List) {
                     var configValue = Resolve<IAutoConfigService>().GetList(configType.FullName);
                     //var configJson = Resolve<IApiService>().InstanceToApiImageUrl(configValue.ToJson());
                     //configValue = configJson.ToObject<List<JObject>>();
@@ -69,18 +66,15 @@ namespace Alabo.Framework.Basic.AutoConfigs.Controllers
         /// <param name="type"></param>
         [HttpGet]
         [Display(Description = "根据AutoConfig获取KeyValues")]
-        public ApiResult<IList<KeyValue>> GetKeyValuesByAutoConfig([FromQuery] string type)
-        {
+        public ApiResult<IList<KeyValue>> GetKeyValuesByAutoConfig([FromQuery] string type) {
             if (type.IsNullOrEmpty()) {
                 return ApiResult.Failure<IList<KeyValue>>("类型不能为空");
             }
 
             var configValue = Resolve<ITypeService>().GetAutoConfigDictionary(type);
             IList<KeyValue> keyValues = new List<KeyValue>();
-            foreach (var item in configValue)
-            {
-                var keyValue = new KeyValue
-                {
+            foreach (var item in configValue) {
+                var keyValue = new KeyValue {
                     Name = item.Value.ToStr(),
                     Key = item.Key,
                     Value = item.Value.ToStr()
@@ -98,8 +92,7 @@ namespace Alabo.Framework.Basic.AutoConfigs.Controllers
         /// <param name="parameter">参数</param>
         [HttpGet]
         [Display(Description = "获取AutoConfig")]
-        public ApiResult<object> GetAutoConfig([FromQuery] string parameter)
-        {
+        public ApiResult<object> GetAutoConfig([FromQuery] string parameter) {
             if (parameter.IsNullOrEmpty()) {
                 ApiResult.Failure("类型不能为空");
             }
@@ -111,8 +104,7 @@ namespace Alabo.Framework.Basic.AutoConfigs.Controllers
 
             var classPropertyAttribute = configType.GetAttribute<ClassPropertyAttribute>();
             if (classPropertyAttribute != null) {
-                if (classPropertyAttribute.PageType == ViewPageType.Edit)
-                {
+                if (classPropertyAttribute.PageType == ViewPageType.Edit) {
                     var configValue = Resolve<IAutoConfigService>().GetValue(configType.FullName);
                     configValue = Resolve<IApiService>().InstanceToApiImageUrl(configValue);
                     return ApiResult.Success(configValue);
@@ -128,8 +120,7 @@ namespace Alabo.Framework.Basic.AutoConfigs.Controllers
         [HttpDelete]
         [Display(Description = "删除单条记录")]
         [ApiAuth]
-        public ApiResult Delete([FromBody] AutoConfigDelete entity)
-        {
+        public ApiResult Delete([FromBody] AutoConfigDelete entity) {
             if (entity == null) {
                 return ApiResult.Failure("参数不能为空");
             }
@@ -146,8 +137,7 @@ namespace Alabo.Framework.Basic.AutoConfigs.Controllers
             var attr = type.GetTypeInfo().GetAttribute<ClassPropertyAttribute>();
             var configDescription = new ClassDescription(type.GetTypeInfo());
 
-            if (attr != null && !string.IsNullOrEmpty(attr.Validator) && FilterSQLScript(attr.Validator) == 0)
-            {
+            if (attr != null && !string.IsNullOrEmpty(attr.Validator) && FilterSQLScript(attr.Validator) == 0) {
                 var script = string.Format(attr.Validator, entity.Id);
                 var isValidated = Resolve<IAutoConfigService>().Check(script);
                 if (isValidated) {
@@ -158,8 +148,7 @@ namespace Alabo.Framework.Basic.AutoConfigs.Controllers
             var list = Resolve<IAutoConfigService>().GetObjectList(type);
             object deleteItem = null;
             foreach (var item in list) {
-                if (item.GetType().GetProperty("Id").GetValue(item).ToGuid() == entity.Id.ToGuid())
-                {
+                if (item.GetType().GetProperty("Id").GetValue(item).ToGuid() == entity.Id.ToGuid()) {
                     if (type.GetTypeInfo().BaseType.Name == "BaseGradeConfig") {
                         if (item.GetType().GetProperty("IsDefault").GetValue(item).ToBoolean()) {
                             continue;
@@ -188,8 +177,7 @@ namespace Alabo.Framework.Basic.AutoConfigs.Controllers
         /// </summary>
         /// <param name="sSql">The s SQL.</param>
         [NonAction]
-        private int FilterSQLScript(string sSql)
-        {
+        private int FilterSQLScript(string sSql) {
             int srcLen, decLen = 0;
             sSql = sSql.ToLower().Trim();
             srcLen = sSql.Length;
@@ -213,8 +201,7 @@ namespace Alabo.Framework.Basic.AutoConfigs.Controllers
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public ApiResult<List<Link>> GetLinks([FromQuery] string type)
-        {
+        public ApiResult<List<Link>> GetLinks([FromQuery] string type) {
             var result = Resolve<IAutoConfigService>().GetAllLinks();
             return ApiResult.Success(result);
         }
@@ -226,8 +213,7 @@ namespace Alabo.Framework.Basic.AutoConfigs.Controllers
         /// <returns></returns>
         [HttpGet]
         [Display(Description = "获取AutoConfig")]
-        public ApiResult<object> Get([FromQuery] string type)
-        {
+        public ApiResult<object> Get([FromQuery] string type) {
             if (type.IsNullOrEmpty()) {
                 ApiResult.Failure("类型不能为空");
             }
@@ -239,8 +225,7 @@ namespace Alabo.Framework.Basic.AutoConfigs.Controllers
 
             var classPropertyAttribute = configType.GetAttribute<ClassPropertyAttribute>();
             if (classPropertyAttribute != null) {
-                if (classPropertyAttribute.PageType == ViewPageType.Edit)
-                {
+                if (classPropertyAttribute.PageType == ViewPageType.Edit) {
                     var configValue = Resolve<IAutoConfigService>().GetValue(configType.FullName);
                     configValue = Resolve<IApiService>().InstanceToApiImageUrl(configValue);
                     return ApiResult.Success(configValue);
@@ -257,8 +242,7 @@ namespace Alabo.Framework.Basic.AutoConfigs.Controllers
         /// <param name="type">参数</param>
         [HttpGet]
         [Display(Description = "获取AutoConfig")]
-        public ApiResult<List<JObject>> List([FromQuery] string type)
-        {
+        public ApiResult<List<JObject>> List([FromQuery] string type) {
             if (type.IsNullOrEmpty()) {
                 ApiResult.Failure("类型不能为空");
             }
@@ -270,8 +254,7 @@ namespace Alabo.Framework.Basic.AutoConfigs.Controllers
 
             var classPropertyAttribute = configType.GetAttribute<ClassPropertyAttribute>();
             if (classPropertyAttribute != null) {
-                if (classPropertyAttribute.PageType == ViewPageType.List)
-                {
+                if (classPropertyAttribute.PageType == ViewPageType.List) {
                     var configValue = Resolve<IAutoConfigService>().GetList(configType.FullName);
                     //var configJson = Resolve<IApiService>().InstanceToApiImageUrl(configValue.ToJson());
                     //configValue = configJson.ToObject<List<JObject>>();

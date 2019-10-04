@@ -5,24 +5,22 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 
-namespace Alabo.Extensions
-{
+namespace Alabo.Extensions {
+
     /// <summary>
     ///     Class DictionaryExtension.
     /// </summary>
-    public static class DictionaryExtension
-    {
+    public static class DictionaryExtension {
+
         /// <summary>
         ///     删除值，不区分大小写
         ///     Removes the key.
         /// </summary>
         /// <param name="self">The self.</param>
         /// <param name="key">The key.</param>
-        public static Dictionary<T, TV> RemoveKey<T, TV>(this Dictionary<T, TV> self, string key)
-        {
+        public static Dictionary<T, TV> RemoveKey<T, TV>(this Dictionary<T, TV> self, string key) {
             var dic = new Dictionary<T, TV>();
-            self.Foreach(r =>
-            {
+            self.Foreach(r => {
                 var dicKey = r.Key.ToStr();
                 if (!dicKey.Equals(key, StringComparison.OrdinalIgnoreCase)) {
                     dic.Add(r.Key, r.Value);
@@ -36,8 +34,7 @@ namespace Alabo.Extensions
         /// </summary>
         /// <param name="self">The self.</param>
         /// <param name="keys">The keys.</param>
-        public static Dictionary<T, TV> RemoveKey<T, TV>(this Dictionary<T, TV> self, params string[] keys)
-        {
+        public static Dictionary<T, TV> RemoveKey<T, TV>(this Dictionary<T, TV> self, params string[] keys) {
             foreach (var key in keys) {
                 self = self.RemoveKey(key);
             }
@@ -49,11 +46,9 @@ namespace Alabo.Extensions
         ///     删除字典中空的值
         /// </summary>
         /// <param name="self">The self.</param>
-        public static Dictionary<T, TV> RemoveNullOrEmpty<T, TV>(this Dictionary<T, TV> self)
-        {
+        public static Dictionary<T, TV> RemoveNullOrEmpty<T, TV>(this Dictionary<T, TV> self) {
             var dic = new Dictionary<T, TV>();
-            self.Foreach(r =>
-            {
+            self.Foreach(r => {
                 if (!r.Value.ToStr().IsNullOrEmpty()) {
                     dic.Add(r.Key, r.Value);
                 }
@@ -68,8 +63,7 @@ namespace Alabo.Extensions
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
         public static Dictionary<TKey, TValue> TryAdd<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key,
-            TValue value)
-        {
+            TValue value) {
             if (dict.ContainsKey(key) == false) {
                 dict.Add(key, value);
             }
@@ -84,8 +78,7 @@ namespace Alabo.Extensions
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
         public static Dictionary<TKey, TValue> AddOrReplace<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key,
-            TValue value)
-        {
+            TValue value) {
             dict[key] = value;
             return dict;
         }
@@ -97,8 +90,7 @@ namespace Alabo.Extensions
         /// <param name="values">The values.</param>
         /// <param name="replaceExisted">如果已存在，是否替换</param>
         public static Dictionary<TKey, TValue> AddRange<TKey, TValue>(this Dictionary<TKey, TValue> dict,
-            IEnumerable<KeyValuePair<TKey, TValue>> values, bool replaceExisted)
-        {
+            IEnumerable<KeyValuePair<TKey, TValue>> values, bool replaceExisted) {
             foreach (var item in values) {
                 if (dict.ContainsKey(item.Key) == false || replaceExisted) {
                     dict[item.Key] = item.Value;
@@ -114,8 +106,7 @@ namespace Alabo.Extensions
         /// <param name="self">The self.</param>
         /// <param name="key">The key.</param>
         /// <param name="defaultValue"></param>
-        public static TV GetValue<T, TV>(this IDictionary<T, TV> self, T key, TV defaultValue = default)
-        {
+        public static TV GetValue<T, TV>(this IDictionary<T, TV> self, T key, TV defaultValue = default) {
             if (key == null) {
                 return defaultValue;
             }
@@ -133,8 +124,7 @@ namespace Alabo.Extensions
         /// <param name="self">The self.</param>
         /// <param name="key">The key.</param>
         /// <param name="defaultValue"></param>
-        public static string GetString<T, TV>(this IDictionary<T, TV> self, T key, string defaultValue = null)
-        {
+        public static string GetString<T, TV>(this IDictionary<T, TV> self, T key, string defaultValue = null) {
             if (key == null) {
                 return defaultValue;
             }
@@ -152,8 +142,7 @@ namespace Alabo.Extensions
         /// <param name="self">The self.</param>
         /// <param name="key">The key.</param>
         /// <param name="defaultValue"></param>
-        public static int GetInt<T, TV>(this IDictionary<T, TV> self, T key, int defaultValue = -1)
-        {
+        public static int GetInt<T, TV>(this IDictionary<T, TV> self, T key, int defaultValue = -1) {
             if (key == null) {
                 return defaultValue;
             }
@@ -175,8 +164,7 @@ namespace Alabo.Extensions
         /// <param name="self">The self.</param>
         /// <param name="key">The key.</param>
         /// <param name="defaultValue"></param>
-        public static bool GetBool<T, TV>(this IDictionary<T, TV> self, T key, bool defaultValue)
-        {
+        public static bool GetBool<T, TV>(this IDictionary<T, TV> self, T key, bool defaultValue) {
             if (key == null) {
                 return defaultValue;
             }
@@ -195,8 +183,7 @@ namespace Alabo.Extensions
         /// <param name="self">The self.</param>
         /// <param name="key">The key.</param>
         /// <param name="defaultValue"></param>
-        public static bool? GetNullableBool<T, TV>(this IDictionary<T, TV> self, T key, bool? defaultValue = null)
-        {
+        public static bool? GetNullableBool<T, TV>(this IDictionary<T, TV> self, T key, bool? defaultValue = null) {
             if (key == null) {
                 return defaultValue;
             }
@@ -214,8 +201,7 @@ namespace Alabo.Extensions
         /// <param name="self">The self.</param>
         /// <param name="key">The key.</param>
         /// <param name="defaultValue"></param>
-        public static decimal GetDecimal<T, TV>(this IDictionary<T, TV> self, T key, decimal defaultValue = -1)
-        {
+        public static decimal GetDecimal<T, TV>(this IDictionary<T, TV> self, T key, decimal defaultValue = -1) {
             if (key == null) {
                 return defaultValue;
             }
@@ -238,8 +224,7 @@ namespace Alabo.Extensions
         /// <param name="key">The key.</param>
         /// <param name="defaultValue"></param>
         public static DateTime GetDateTime<T, TV>(this IDictionary<T, TV> self, T key,
-            DateTime defaultValue = default)
-        {
+            DateTime defaultValue = default) {
             if (key == null) {
                 return defaultValue;
             }
@@ -261,8 +246,7 @@ namespace Alabo.Extensions
         /// <param name="self">The self.</param>
         /// <param name="key">The key.</param>
         /// <param name="defaultValue"></param>
-        public static IList<int> GetIntList<T, TV>(this IDictionary<T, TV> self, T key, IList<int> defaultValue = null)
-        {
+        public static IList<int> GetIntList<T, TV>(this IDictionary<T, TV> self, T key, IList<int> defaultValue = null) {
             IList<int> result;
             if (key == null) {
                 return defaultValue;
@@ -285,10 +269,8 @@ namespace Alabo.Extensions
         /// </summary>
         /// <param name="self">The self.</param>
         /// <param name="key">The key.</param>
-        public static TV GetCreateValue<T, TV>(this IDictionary<T, TV> self, T key) where TV : new()
-        {
-            if (!self.TryGetValue(key, out var value))
-            {
+        public static TV GetCreateValue<T, TV>(this IDictionary<T, TV> self, T key) where TV : new() {
+            if (!self.TryGetValue(key, out var value)) {
                 value = new TV();
                 self[key] = value;
                 return value;
@@ -304,10 +286,8 @@ namespace Alabo.Extensions
         /// <param name="source">The source.</param>
         /// <param name="replace">if set to <c>true</c> [replace].</param>
         public static void Merge<T, TV>(this IDictionary<T, TV> self, IEnumerable<KeyValuePair<T, TV>> source,
-            bool replace = true)
-        {
-            foreach (var pair in source)
-            {
+            bool replace = true) {
+            foreach (var pair in source) {
                 if (!replace && self.ContainsKey(pair.Key)) {
                     continue;
                 }
@@ -321,8 +301,7 @@ namespace Alabo.Extensions
         /// </summary>
         /// <param name="dic">The dic.</param>
         /// <param name="key">The key.</param>
-        public static string GetVaule(this IDictionary<long, string> dic, long key)
-        {
+        public static string GetVaule(this IDictionary<long, string> dic, long key) {
             if (dic.TryGetValue(key, out var str)) {
                 return str;
             }
@@ -335,8 +314,7 @@ namespace Alabo.Extensions
         /// </summary>
         /// <param name="dic">The dic.</param>
         /// <param name="key">The key.</param>
-        public static string GetVaule(this IDictionary<string, string> dic, string key)
-        {
+        public static string GetVaule(this IDictionary<string, string> dic, string key) {
             if (dic.TryGetValue(key, out var str)) {
                 return str;
             }
@@ -348,8 +326,7 @@ namespace Alabo.Extensions
         ///     Url中的值，转成字典类型
         /// </summary>
         /// <param name="httpContext"></param>
-        public static Dictionary<string, string> ToDictionary(this HttpContext httpContext)
-        {
+        public static Dictionary<string, string> ToDictionary(this HttpContext httpContext) {
             var dictionary = new Dictionary<string, string>();
 
             // 指定搜索
@@ -357,12 +334,10 @@ namespace Alabo.Extensions
 
             var keyDictionary = httpContext.Request.Query.Keys;
 
-            foreach (var item in keyDictionary)
-            {
+            foreach (var item in keyDictionary) {
                 // 指定搜索
                 if (!currentMode.ToString().IsNullOrEmpty()) {
-                    if (!(item == currentMode || item == "Service" || item == "Method"))
-                    {
+                    if (!(item == currentMode || item == "Service" || item == "Method")) {
                         continue;
                         ;
                     }
@@ -387,12 +362,10 @@ namespace Alabo.Extensions
         ///     Url中的值，转成NameValueCollection
         /// </summary>
         /// <param name="httpContext">The HTTP context.</param>
-        public static NameValueCollection ToNameValueCollection(this HttpContext httpContext)
-        {
+        public static NameValueCollection ToNameValueCollection(this HttpContext httpContext) {
             var nameValueCollection = new NameValueCollection();
             var keyDictionary = httpContext.Request.Query.Keys;
-            foreach (var item in keyDictionary)
-            {
+            foreach (var item in keyDictionary) {
                 var value = httpContext.Request.Query[item];
                 if (value == "-1" || item == "_currentMode") {
                     continue;
@@ -413,25 +386,21 @@ namespace Alabo.Extensions
         /// </summary>
         /// <param name="dic"></param>
         /// <param name="baseUrl"></param>
-        public static string DictionaryToUrl(this Dictionary<string, string> dic, string baseUrl)
-        {
+        public static string DictionaryToUrl(this Dictionary<string, string> dic, string baseUrl) {
             var sb = new StringBuilder();
-            if (!baseUrl.Contains("Basic/List"))
-            {
+            if (!baseUrl.Contains("Basic/List")) {
                 dic = dic.RemoveKey("service");
                 dic = dic.RemoveKey("method");
             }
 
-            foreach (var item in dic)
-            {
+            foreach (var item in dic) {
                 var value = item.Value;
                 if (item.Key != "PageIndex") {
                     sb.AppendFormat("{0}={1}&", item.Key, item.Value);
                 }
             }
 
-            if (sb.Length > 0)
-            {
+            if (sb.Length > 0) {
                 sb.Insert(0, "?");
                 sb.Remove(sb.Length - 1, 1);
             }

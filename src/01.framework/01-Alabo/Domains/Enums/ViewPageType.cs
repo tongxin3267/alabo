@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Domains.Enums
-{
+namespace Alabo.Domains.Enums {
+
     /// <summary>
     ///     视图样式
     /// </summary>
     [ClassProperty(Name = "视图样式")]
-    public enum ViewPageType
-    {
+    public enum ViewPageType {
+
         [LabelCssClass(BadgeColorCalss.Success)]
         [Display(Name = "编辑")]
         Edit = 1,

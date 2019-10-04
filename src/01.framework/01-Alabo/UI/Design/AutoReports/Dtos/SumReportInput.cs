@@ -1,10 +1,10 @@
 ﻿using Alabo.Linq;
 using System.Collections.Generic;
 
-namespace Alabo.UI.Design.AutoReports.Dtos
-{
-    public class SumReportInput
-    {
+namespace Alabo.UI.Design.AutoReports.Dtos {
+
+    public class SumReportInput {
+
         /// <summary>
         ///     实体类型，通过Type可以获取表格
         /// </summary>

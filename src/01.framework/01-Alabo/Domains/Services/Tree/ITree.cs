@@ -1,10 +1,10 @@
 ﻿using Alabo.Domains.Entities;
 using System.Collections.Generic;
 
-namespace Alabo.Domains.Services.Tree
-{
-    public interface ITree<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+namespace Alabo.Domains.Services.Tree {
+
+    public interface ITree<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         /// <summary>
         ///     交换排序
         /// </summary>

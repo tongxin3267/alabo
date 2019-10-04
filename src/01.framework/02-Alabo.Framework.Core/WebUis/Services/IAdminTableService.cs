@@ -2,13 +2,13 @@
 using Alabo.Domains.Services;
 using System;
 
-namespace Alabo.Framework.Core.WebUis.Services
-{
+namespace Alabo.Framework.Core.WebUis.Services {
+
     /// <summary>
     ///     通用表单服务
     /// </summary>
-    public interface IAdminTableService : IService
-    {
+    public interface IAdminTableService : IService {
+
         /// <summary>
         ///     导出表格
         /// </summary>

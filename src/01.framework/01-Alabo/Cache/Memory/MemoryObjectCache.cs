@@ -3,13 +3,13 @@ using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 
-namespace Alabo.Cache.Memory
-{
+namespace Alabo.Cache.Memory {
+
     /// <summary>
     ///     Class MemoryObjectCache.
     /// </summary>
-    public class MemoryObjectCache : IObjectCache
-    {
+    public class MemoryObjectCache : IObjectCache {
+
         /// <summary>
         ///     The 所有 memory object cache key
         /// </summary>
@@ -19,8 +19,7 @@ namespace Alabo.Cache.Memory
         ///     Initializes a new instance of the <see cref="MemoryObjectCache" /> class.
         /// </summary>
         /// <param name="context">上下文</param>
-        public MemoryObjectCache(ICacheContext context)
-        {
+        public MemoryObjectCache(ICacheContext context) {
             Context = context;
         }
 
@@ -32,8 +31,7 @@ namespace Alabo.Cache.Memory
         /// <summary>
         ///     Clears this instance.
         /// </summary>
-        public void Clear()
-        {
+        public void Clear() {
             if (GetKeys() != null) {
                 foreach (var item in GetKeys()) {
                     if (!item.IsNullOrEmpty()) {
@@ -47,8 +45,7 @@ namespace Alabo.Cache.Memory
         ///     Gets the specified key.
         /// </summary>
         /// <param name="key">The key.</param>
-        public T Get<T>(string key)
-        {
+        public T Get<T>(string key) {
             key = MemoryCacheExtensions.TenantCacheKey(key);
             return Context.OfMemory().MemoryCache.Get<T>(key);
         }
@@ -56,8 +53,7 @@ namespace Alabo.Cache.Memory
         /// <summary>
         ///     Gets the keys.
         /// </summary>
-        public string[] GetKeys()
-        {
+        public string[] GetKeys() {
             TryGet(AllMemoryObjectCacheKey, out List<string> cacheList);
             if (cacheList == null) {
                 return null;
@@ -70,11 +66,9 @@ namespace Alabo.Cache.Memory
         ///     Removes the specified key.
         /// </summary>
         /// <param name="key">The key.</param>
-        public void Remove(string key)
-        {
+        public void Remove(string key) {
             key = MemoryCacheExtensions.TenantCacheKey(key);
-            if (!key.IsNullOrEmpty())
-            {
+            if (!key.IsNullOrEmpty()) {
                 Context.OfMemory().MemoryCache.Remove(key);
                 RemoveCacheKey(key);
             }
@@ -85,11 +79,9 @@ namespace Alabo.Cache.Memory
         /// </summary>
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
-        public void Set(string key, object value)
-        {
+        public void Set(string key, object value) {
             key = MemoryCacheExtensions.TenantCacheKey(key);
-            if (!key.IsNullOrEmpty())
-            {
+            if (!key.IsNullOrEmpty()) {
                 Context.OfMemory().MemoryCache.Set(key, value);
                 AddCacheKey(key);
             }
@@ -100,11 +92,9 @@ namespace Alabo.Cache.Memory
         /// </summary>
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
-        public void Set<T>(string key, T value)
-        {
+        public void Set<T>(string key, T value) {
             key = MemoryCacheExtensions.TenantCacheKey(key);
-            if (!key.IsNullOrEmpty())
-            {
+            if (!key.IsNullOrEmpty()) {
                 Context.OfMemory().MemoryCache.Set(key, value);
                 AddCacheKey(key);
             }
@@ -116,11 +106,9 @@ namespace Alabo.Cache.Memory
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
         /// <param name="expire">The expire.</param>
-        public void Set<T>(string key, T value, TimeSpan expire)
-        {
+        public void Set<T>(string key, T value, TimeSpan expire) {
             key = MemoryCacheExtensions.TenantCacheKey(key);
-            if (!key.IsNullOrEmpty())
-            {
+            if (!key.IsNullOrEmpty()) {
                 Context.OfMemory().MemoryCache.Set(key, value, expire);
                 AddCacheKey(key);
             }
@@ -131,8 +119,7 @@ namespace Alabo.Cache.Memory
         /// </summary>
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
-        public bool TryGet<T>(string key, out T value)
-        {
+        public bool TryGet<T>(string key, out T value) {
             key = MemoryCacheExtensions.TenantCacheKey(key);
             return Context.OfMemory().MemoryCache.TryGetValue(key, out value);
         }
@@ -144,8 +131,7 @@ namespace Alabo.Cache.Memory
         /// <param name="cacheKey">Cache key.</param>
         /// <param name="dataRetriever">Data retriever.</param>
         /// <param name="expiration">Expiration.</param>
-        public CacheValue<T> GetOrSet<T>(Func<T> dataRetriever, string cacheKey, TimeSpan expiration) where T : class
-        {
+        public CacheValue<T> GetOrSet<T>(Func<T> dataRetriever, string cacheKey, TimeSpan expiration) where T : class {
             cacheKey = MemoryCacheExtensions.TenantCacheKey(cacheKey);
             TryGet(cacheKey, out T result);
             if (result != null) {
@@ -153,8 +139,7 @@ namespace Alabo.Cache.Memory
             }
 
             var item = dataRetriever?.Invoke();
-            if (item != null)
-            {
+            if (item != null) {
                 Set(cacheKey, item, expiration);
                 return new CacheValue<T>(item, true);
             }
@@ -168,8 +153,7 @@ namespace Alabo.Cache.Memory
         /// </summary>
         /// <param name="dataRetriever">Data retriever.</param>
         /// <param name="cacheKey">Cache key.</param>
-        public CacheValue<T> GetOrSet<T>(Func<T> dataRetriever, string cacheKey) where T : class
-        {
+        public CacheValue<T> GetOrSet<T>(Func<T> dataRetriever, string cacheKey) where T : class {
             return GetOrSet(dataRetriever, cacheKey, TimeSpan.FromDays(30));
         }
 
@@ -177,8 +161,7 @@ namespace Alabo.Cache.Memory
         ///     Adds the cache key.
         /// </summary>
         /// <param name="key">The key.</param>
-        private void AddCacheKey(string key)
-        {
+        private void AddCacheKey(string key) {
             ;
             key = MemoryCacheExtensions.TenantCacheKey(key);
             TryGet(AllMemoryObjectCacheKey, out List<string> cacheList);
@@ -186,8 +169,7 @@ namespace Alabo.Cache.Memory
                 cacheList = new List<string>();
             }
 
-            if (!cacheList.Contains(key))
-            {
+            if (!cacheList.Contains(key)) {
                 cacheList.Add(key);
                 Set(AllMemoryObjectCacheKey, cacheList);
             }
@@ -197,16 +179,14 @@ namespace Alabo.Cache.Memory
         ///     Removes the cache key.
         /// </summary>
         /// <param name="key">The key.</param>
-        private void RemoveCacheKey(string key)
-        {
+        private void RemoveCacheKey(string key) {
             key = MemoryCacheExtensions.TenantCacheKey(key);
             TryGet(AllMemoryObjectCacheKey, out List<string> cacheList);
             if (cacheList == null) {
                 cacheList = new List<string>();
             }
 
-            if (cacheList.Contains(key))
-            {
+            if (cacheList.Contains(key)) {
                 cacheList.Remove(key);
                 Set(AllMemoryObjectCacheKey, cacheList);
             }
@@ -221,8 +201,7 @@ namespace Alabo.Cache.Memory
         /// <param name="dataRetriever"></param>
         /// <param name="cacheKey"></param>
         /// <returns></returns>
-        public CacheValue<T> GetOrSetPublic<T>(Func<T> dataRetriever, string cacheKey) where T : class
-        {
+        public CacheValue<T> GetOrSetPublic<T>(Func<T> dataRetriever, string cacheKey) where T : class {
             cacheKey = MemoryCacheExtensions.PublicCacheKey(cacheKey);
             TryGetPublic(cacheKey, out T result);
             if (result != null) {
@@ -230,8 +209,7 @@ namespace Alabo.Cache.Memory
             }
 
             var item = dataRetriever?.Invoke();
-            if (item != null)
-            {
+            if (item != null) {
                 SetPublic(cacheKey, item);
                 return new CacheValue<T>(item, true);
             }
@@ -244,8 +222,7 @@ namespace Alabo.Cache.Memory
         /// </summary>
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
-        public void SetPublic<T>(string key, T value)
-        {
+        public void SetPublic<T>(string key, T value) {
             key = MemoryCacheExtensions.PublicCacheKey(key);
             if (!key.IsNullOrEmpty()) {
                 Context.OfMemory().MemoryCache.Set(key, value);
@@ -259,8 +236,7 @@ namespace Alabo.Cache.Memory
         /// <param name="key"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public bool TryGetPublic<T>(string key, out T value)
-        {
+        public bool TryGetPublic<T>(string key, out T value) {
             key = MemoryCacheExtensions.PublicCacheKey(key);
             return Context.OfMemory().MemoryCache.TryGetValue(key, out value);
         }

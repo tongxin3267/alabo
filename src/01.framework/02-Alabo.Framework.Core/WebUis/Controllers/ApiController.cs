@@ -10,8 +10,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Framework.Core.WebUis.Controllers
-{
+namespace Alabo.Framework.Core.WebUis.Controllers {
+
     /// <summary>
     ///     通用Api接口文档
     /// </summary>
@@ -19,15 +19,14 @@ namespace Alabo.Framework.Core.WebUis.Controllers
     //[Produces("application/json")]
     //[Consumes("application/json", "multipart/form-data")] //此处为新增
     [Route("Api/Common/[action]")]
-    public class ApiController : ApiBaseController
-    {
+    public class ApiController : ApiBaseController {
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="ApiAController" /> class.
         /// </summary>
         /// <param name="restClientConfig">The rest client configuration.</param>
         public ApiController(RestClientConfig restClientConfig
-        )
-        {
+        ) {
         }
 
         /// <summary>
@@ -36,8 +35,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         /// <param name="type"></param>
         [HttpGet]
         [Display(Description = "根据枚举获取KeyValues")]
-        public ApiResult<IList<KeyValue>> GetKeyValuesByEnum([FromQuery] string type)
-        {
+        public ApiResult<IList<KeyValue>> GetKeyValuesByEnum([FromQuery] string type) {
             if (type.IsNullOrEmpty()) {
                 ApiResult.Failure("类型不能为空");
             }
@@ -56,8 +54,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         /// <param name="mobile">手机号码</param>
         [HttpGet]
         [Display(Description = "发送手机验证码")]
-        public ApiResult SendMobileVerifiyCode([FromQuery] string mobile)
-        {
+        public ApiResult SendMobileVerifiyCode([FromQuery] string mobile) {
             if (!RegexHelper.CheckMobile(mobile)) {
                 return ApiResult.Failure("手机号码格式不正确");
             }
@@ -78,8 +75,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         /// <param name="message">短信内容</param>
         [HttpGet]
         [Display(Description = "发送短信")]
-        public ApiResult SendMessage(string mobile, string message)
-        {
+        public ApiResult SendMessage(string mobile, string message) {
             if (!RegexHelper.CheckMobile(mobile)) {
                 return ApiResult.Failure("手机号码格式不正确");
             }
@@ -93,8 +89,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ApiResult GetObjectId()
-        {
+        public ApiResult GetObjectId() {
             var id = ObjectId.GenerateNewId();
             return ApiResult.Success(id);
         }

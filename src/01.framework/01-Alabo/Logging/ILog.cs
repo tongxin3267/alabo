@@ -1,13 +1,13 @@
 ﻿using Alabo.Logging.Abstractions;
 using System;
 
-namespace Alabo.Logging
-{
+namespace Alabo.Logging {
+
     /// <summary>
     ///     日志操作
     /// </summary>
-    public interface ILog
-    {
+    public interface ILog {
+
         /// <summary>
         ///     调试级别是否启用
         /// </summary>

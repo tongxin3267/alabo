@@ -4,18 +4,17 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 
-namespace Alabo.Domains.Repositories.SqlServer
-{
-    public sealed partial class SqlHelper
-    {
+namespace Alabo.Domains.Repositories.SqlServer {
+
+    public sealed partial class SqlHelper {
+
         #region Schema 数据库结构
 
         /// <summary>
         ///     执行指定数据库连接字符串的命令,返回服务器数据库名称数组
         /// </summary>
         /// <param name="connectionString">数据库连接字符串</param>
-        public string[] GetDatabases(string connectionString)
-        {
+        public string[] GetDatabases(string connectionString) {
             var sql = "select name from sys.databases where name not in ('master','model','msdb','tempdb')";
             var dt = ExecuteDataTable(connectionString, sql);
             return dt.Rows.Cast<DataRow>().Select(row => row["name"].ToString()).ToArray();
@@ -26,8 +25,8 @@ namespace Alabo.Domains.Repositories.SqlServer
         /// </summary>
         /// <param name="connectionString">数据库连接字符串</param>
         /// <param name="database"></param>
-        public List<DbTable> GetDbTables(string connectionString, string database)
-        {
+        public List<DbTable> GetDbTables(string connectionString, string database) {
+
             #region SQL
 
             var sql = string.Format(@"SELECT
@@ -61,8 +60,8 @@ namespace Alabo.Domains.Repositories.SqlServer
         /// <param name="tableName"></param>
         /// <param name="schema"></param>
         public List<DbColumn> GetDbColumns(string connectionString, string database, string tableName,
-            string schema = "dbo")
-        {
+            string schema = "dbo") {
+
             #region SQL
 
             var sql = string.Format(@"
@@ -104,11 +103,9 @@ namespace Alabo.Domains.Repositories.SqlServer
 
             #endregion SQL
 
-            var param = new SqlParameter("@tableName", SqlDbType.NVarChar, 100)
-            { Value = string.Format("{0}.{1}.{2}", database, schema, tableName) };
+            var param = new SqlParameter("@tableName", SqlDbType.NVarChar, 100) { Value = string.Format("{0}.{1}.{2}", database, schema, tableName) };
             var dt = ExecuteDataTable(connectionString, sql, param);
-            return dt.Rows.Cast<DataRow>().Select(row => new DbColumn
-            {
+            return dt.Rows.Cast<DataRow>().Select(row => new DbColumn {
                 //ColumnID = row.Field<int>("ColumnID"),
                 //IsPrimaryKey = row.Field<bool>("IsPrimaryKey"),
                 //ColumnName = row.Field<string>("ColumnName"),
@@ -130,8 +127,8 @@ namespace Alabo.Domains.Repositories.SqlServer
         /// <param name="tableName"></param>
         /// <param name="schema"></param>
         public List<DbIndex> GetDbIndexs(string connectionString, string database, string tableName,
-            string schema = "dbo")
-        {
+            string schema = "dbo") {
+
             #region SQL
 
             var sql = string.Format(@"
@@ -162,8 +159,7 @@ namespace Alabo.Domains.Repositories.SqlServer
 
             #endregion SQL
 
-            var param = new SqlParameter("@tableName", SqlDbType.NVarChar, 100)
-            { Value = string.Format("{0}.{1}.{2}", database, schema, tableName) };
+            var param = new SqlParameter("@tableName", SqlDbType.NVarChar, 100) { Value = string.Format("{0}.{1}.{2}", database, schema, tableName) };
             var dt = ExecuteDataTable(connectionString, sql, param);
             return dt.Rows.Cast<DataRow>().Select(row => new DbIndex()).ToList();
         }
@@ -174,8 +170,8 @@ namespace Alabo.Domains.Repositories.SqlServer
     /// <summary>
     ///     表索引结构
     /// </summary>
-    public sealed class DbIndex
-    {
+    public sealed class DbIndex {
+
         /// <summary>
         ///     索引名称
         /// </summary>
@@ -215,8 +211,8 @@ namespace Alabo.Domains.Repositories.SqlServer
     /// <summary>
     ///     表结构
     /// </summary>
-    public sealed class DbTable
-    {
+    public sealed class DbTable {
+
         /// <summary>
         ///     表名称
         /// </summary>
@@ -241,8 +237,8 @@ namespace Alabo.Domains.Repositories.SqlServer
     /// <summary>
     ///     表字段结构
     /// </summary>
-    public sealed class DbColumn
-    {
+    public sealed class DbColumn {
+
         /// <summary>
         ///     字段ID
         /// </summary>
@@ -303,18 +299,16 @@ namespace Alabo.Domains.Repositories.SqlServer
         public string Remark { get; set; }
     }
 
-    public class SqlMap
-    {
-        public static string MapCsharpType(string dbtype)
-        {
+    public class SqlMap {
+
+        public static string MapCsharpType(string dbtype) {
             if (string.IsNullOrEmpty(dbtype)) {
                 return dbtype;
             }
 
             dbtype = dbtype.ToLower();
             var csharpType = "object";
-            switch (dbtype)
-            {
+            switch (dbtype) {
                 case "bigint":
                     csharpType = "long";
                     break;
@@ -447,16 +441,14 @@ namespace Alabo.Domains.Repositories.SqlServer
             return csharpType;
         }
 
-        public static Type MapCommonType(string dbtype)
-        {
+        public static Type MapCommonType(string dbtype) {
             if (string.IsNullOrEmpty(dbtype)) {
                 return Type.Missing.GetType();
             }
 
             dbtype = dbtype.ToLower();
             var commonType = typeof(object);
-            switch (dbtype)
-            {
+            switch (dbtype) {
                 case "bigint":
                     commonType = typeof(long);
                     break;

@@ -1,11 +1,11 @@
-﻿namespace Alabo.UI.Design.AutoTables
-{
+﻿namespace Alabo.UI.Design.AutoTables {
+
     /// <summary>
     ///     表格列上操作，通常用来做审核功能
     ///     比如提现初审，二审
     /// </summary>
-    public class ColumnAction
-    {
+    public class ColumnAction {
+
         /// <summary>
         ///     操作名称
         /// </summary>

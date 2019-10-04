@@ -2,13 +2,13 @@
 using Alabo.Domains.Services;
 using System.Collections.Generic;
 
-namespace Alabo.Framework.Core.WebUis.Services
-{
+namespace Alabo.Framework.Core.WebUis.Services {
+
     /// <summary>
     ///     自动UI相关的服务
     /// </summary>
-    public interface IAutoUIService : IService
-    {
+    public interface IAutoUIService : IService {
+
         /// <summary>
         ///     根据类型返回UI表单
         /// </summary>

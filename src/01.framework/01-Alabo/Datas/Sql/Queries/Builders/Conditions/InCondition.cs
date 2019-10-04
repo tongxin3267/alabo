@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Conditions
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Conditions {
+
     /// <summary>
     ///     In查询条件
     /// </summary>
-    public class InCondition : ICondition
-    {
+    public class InCondition : ICondition {
+
         /// <summary>
         ///     列名
         /// </summary>
@@ -24,8 +24,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Conditions
         /// </summary>
         /// <param name="name">列名</param>
         /// <param name="values">值集合</param>
-        public InCondition(string name, IList<string> values)
-        {
+        public InCondition(string name, IList<string> values) {
             _name = name;
             _values = values;
         }
@@ -33,8 +32,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Conditions
         /// <summary>
         ///     获取查询条件
         /// </summary>
-        public string GetCondition()
-        {
+        public string GetCondition() {
             if (string.IsNullOrWhiteSpace(_name) || _values == null || _values.Count == 0) {
                 return null;
             }

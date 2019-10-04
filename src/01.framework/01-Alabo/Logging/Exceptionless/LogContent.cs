@@ -1,18 +1,17 @@
 ﻿using Alabo.Properties;
 using System.Collections.Generic;
 
-namespace Alabo.Logging.Exceptionless
-{
+namespace Alabo.Logging.Exceptionless {
+
     /// <summary>
     ///     Exceptionless日志内容
     /// </summary>
-    public class LogContent : Contents.LogContent, ILogConvert
-    {
+    public class LogContent : Contents.LogContent, ILogConvert {
+
         /// <summary>
         ///     转换
         /// </summary>
-        public List<Item> To()
-        {
+        public List<Item> To() {
             return new List<Item>
             {
                 new Item(LogResource.LogName, LogName, 1),

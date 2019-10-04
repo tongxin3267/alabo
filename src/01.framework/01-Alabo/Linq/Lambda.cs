@@ -8,13 +8,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Alabo.Linq
-{
+namespace Alabo.Linq {
+
     /// <summary>
     ///     Lambda表达式操作
     /// </summary>
-    public static class Lambda
-    {
+    public static class Lambda {
+
         #region GetNames(获取名称列表)
 
         /// <summary>
@@ -22,8 +22,7 @@ namespace Alabo.Linq
         /// </summary>
         /// <typeparam name="T">实体类型</typeparam>
         /// <param name="expression">属性集合表达式,范例：t => new object[]{t.A,t.B}</param>
-        public static List<string> GetNames<T>(Expression<Func<T, object[]>> expression)
-        {
+        public static List<string> GetNames<T>(Expression<Func<T, object[]>> expression) {
             var result = new List<string>();
             if (expression == null) {
                 return result;
@@ -33,8 +32,7 @@ namespace Alabo.Linq
                 return result;
             }
 
-            foreach (var each in arrayExpression.Expressions)
-            {
+            foreach (var each in arrayExpression.Expressions) {
                 var name = GetName(each);
                 if (string.IsNullOrWhiteSpace(name) == false) {
                     result.Add(name);
@@ -53,8 +51,7 @@ namespace Alabo.Linq
         /// </summary>
         /// <param name="expression">表达式,范例：t => t.Name</param>
         /// <param name="right">取表达式右侧,(l,r) => l.LId == r.RId，设置为true,返回RId</param>
-        public static string GetLastName(Expression expression, bool right = false)
-        {
+        public static string GetLastName(Expression expression, bool right = false) {
             var memberExpression = GetMemberExpression(expression, right);
             if (memberExpression == null) {
                 return string.Empty;
@@ -73,8 +70,7 @@ namespace Alabo.Linq
         /// </summary>
         /// <typeparam name="T">实体类型</typeparam>
         /// <param name="expression">属性集合表达式,范例：t => new object[]{t.A,t.B}</param>
-        public static List<string> GetLastNames<T>(Expression<Func<T, object[]>> expression)
-        {
+        public static List<string> GetLastNames<T>(Expression<Func<T, object[]>> expression) {
             var result = new List<string>();
             if (expression == null) {
                 return result;
@@ -84,8 +80,7 @@ namespace Alabo.Linq
                 return result;
             }
 
-            foreach (var each in arrayExpression.Expressions)
-            {
+            foreach (var each in arrayExpression.Expressions) {
                 var name = GetLastName(each);
                 if (string.IsNullOrWhiteSpace(name) == false) {
                     result.Add(name);
@@ -103,14 +98,12 @@ namespace Alabo.Linq
         ///     获取参数，范例：t.Name,返回 t
         /// </summary>
         /// <param name="expression">表达式，范例：t.Name</param>
-        public static ParameterExpression GetParameter(Expression expression)
-        {
+        public static ParameterExpression GetParameter(Expression expression) {
             if (expression == null) {
                 return null;
             }
 
-            switch (expression.NodeType)
-            {
+            switch (expression.NodeType) {
                 case ExpressionType.Lambda:
                     return GetParameter(((LambdaExpression)expression).Body);
 
@@ -149,8 +142,7 @@ namespace Alabo.Linq
         ///     谓词表达式,范例1：t => t.Name == "A" ，结果1。
         ///     范例2：t => t.Name == "A" &amp;&amp; t.Age =1 ，结果2。
         /// </param>
-        public static int GetConditionCount(LambdaExpression expression)
-        {
+        public static int GetConditionCount(LambdaExpression expression) {
             if (expression == null) {
                 return 0;
             }
@@ -171,8 +163,7 @@ namespace Alabo.Linq
         /// <typeparam name="TAttribute">特性类型</typeparam>
         /// <param name="propertyExpression">属性表达式</param>
         public static IEnumerable<TAttribute> GetAttributes<TEntity, TProperty, TAttribute>(
-            Expression<Func<TEntity, TProperty>> propertyExpression) where TAttribute : Attribute
-        {
+            Expression<Func<TEntity, TProperty>> propertyExpression) where TAttribute : Attribute {
             var memberInfo = GetMember(propertyExpression);
             return memberInfo.GetCustomAttributes<TAttribute>();
         }
@@ -186,8 +177,7 @@ namespace Alabo.Linq
         /// </summary>
         /// <param name="expression">表达式</param>
         /// <param name="value">值</param>
-        public static ConstantExpression Constant(Expression expression, object value)
-        {
+        public static ConstantExpression Constant(Expression expression, object value) {
             var memberExpression = expression as MemberExpression;
             if (memberExpression == null) {
                 return Expression.Constant(value);
@@ -197,41 +187,31 @@ namespace Alabo.Linq
                 return null;
             }
 
-            if (memberExpression.Type == typeof(ObjectId))
-            {
+            if (memberExpression.Type == typeof(ObjectId)) {
                 var changeValue = value.ToStr();
                 if (!changeValue.IsNullOrEmpty()) {
                     return Expression.Constant(changeValue.ToObjectId(), memberExpression.Type);
                 }
             }
 
-            if (memberExpression.Type == typeof(string))
-            {
+            if (memberExpression.Type == typeof(string)) {
                 var changeValue = value.ToStr();
                 if (!changeValue.IsNullOrEmpty()) {
                     return Expression.Constant(changeValue, memberExpression.Type);
                 }
-            }
-            else if (memberExpression.Type == typeof(int))
-            {
+            } else if (memberExpression.Type == typeof(int)) {
                 if (value.ToStr().ConvertToInt() != -1) {
                     return Expression.Constant(value.ToStr().ConvertToInt(), memberExpression.Type);
                 }
-            }
-            else if (memberExpression.Type == typeof(decimal))
-            {
+            } else if (memberExpression.Type == typeof(decimal)) {
                 if (value.ToStr().ConvertToDecimal() != -1) {
                     return Expression.Constant(value.ToStr().ConvertToDecimal(), memberExpression.Type);
                 }
-            }
-            else if (memberExpression.Type == typeof(long))
-            {
+            } else if (memberExpression.Type == typeof(long)) {
                 if (value.ToStr().ConvertToLong() != -1) {
                     return Expression.Constant(value.ToStr().ConvertToLong(), memberExpression.Type);
                 }
-            }
-            else if (memberExpression.Type == typeof(DateTime))
-            {
+            } else if (memberExpression.Type == typeof(DateTime)) {
                 var dateTime = value.ToStr().ConvertToDateTime();
                 if (dateTime.Year == 1900) {
                     dateTime = value.ConvertToDateTimeOfTimeStamp();
@@ -240,34 +220,23 @@ namespace Alabo.Linq
                 if (dateTime.Year != 1900) {
                     return Expression.Constant(dateTime, memberExpression.Type);
                 }
-            }
-            else if (memberExpression.Type == typeof(bool) || memberExpression.Type == typeof(bool))
-            {
+            } else if (memberExpression.Type == typeof(bool) || memberExpression.Type == typeof(bool)) {
                 var valueDefault = value.ConvertToNullableBool();
                 if (valueDefault.HasValue) {
                     return Expression.Constant(value, memberExpression.Type);
                 }
-            }
-            else if (memberExpression.Type == typeof(Guid))
-            {
+            } else if (memberExpression.Type == typeof(Guid)) {
                 if (!value.ToGuid().IsGuidNullOrEmpty()) {
                     return Expression.Constant(value.ToGuid(), memberExpression.Type);
                 }
-            }
-            else if (memberExpression.Type.GetTypeInfo().BaseType?.Name == nameof(Enum))
-            {
+            } else if (memberExpression.Type.GetTypeInfo().BaseType?.Name == nameof(Enum)) {
                 var enumValue = Enum.Parse(memberExpression.Type.GetTypeInfo().UnderlyingSystemType,
                     value.IsNullOrEmpty() ? "0" : value.ToStr(), true);
                 return Expression.Constant(enumValue, memberExpression.Type);
-            }
-            else
-            {
-                try
-                {
+            } else {
+                try {
                     return Expression.Constant(value, memberExpression.Type);
-                }
-                catch (Exception ex)
-                {
+                } catch (Exception ex) {
                     Console.WriteLine(ex.Message);
                     return Expression.Constant(value);
                 }
@@ -286,8 +255,7 @@ namespace Alabo.Linq
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="propertyName">属性名</param>
         /// <param name="value">值</param>
-        public static Expression<Func<T, bool>> NotEqual<T>(string propertyName, object value)
-        {
+        public static Expression<Func<T, bool>> NotEqual<T>(string propertyName, object value) {
             var parameter = CreateParameter<T>();
             return parameter.Property(propertyName).NotEqual(value).ToLambda<Func<T, bool>>(parameter);
         }
@@ -302,8 +270,7 @@ namespace Alabo.Linq
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="propertyName">属性名</param>
         /// <param name="value">值</param>
-        public static Expression<Func<T, bool>> Greater<T>(string propertyName, object value)
-        {
+        public static Expression<Func<T, bool>> Greater<T>(string propertyName, object value) {
             var parameter = CreateParameter<T>();
             return parameter.Property(propertyName).Greater(value).ToLambda<Func<T, bool>>(parameter);
         }
@@ -318,8 +285,7 @@ namespace Alabo.Linq
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="propertyName">属性名</param>
         /// <param name="value">值</param>
-        public static Expression<Func<T, bool>> GreaterEqual<T>(string propertyName, object value)
-        {
+        public static Expression<Func<T, bool>> GreaterEqual<T>(string propertyName, object value) {
             var parameter = CreateParameter<T>();
             return parameter.Property(propertyName).GreaterEqual(value).ToLambda<Func<T, bool>>(parameter);
         }
@@ -334,8 +300,7 @@ namespace Alabo.Linq
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="propertyName">属性名</param>
         /// <param name="value">值</param>
-        public static Expression<Func<T, bool>> Less<T>(string propertyName, object value)
-        {
+        public static Expression<Func<T, bool>> Less<T>(string propertyName, object value) {
             var parameter = CreateParameter<T>();
             return parameter.Property(propertyName).Less(value).ToLambda<Func<T, bool>>(parameter);
         }
@@ -350,8 +315,7 @@ namespace Alabo.Linq
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="propertyName">属性名</param>
         /// <param name="value">值</param>
-        public static Expression<Func<T, bool>> LessEqual<T>(string propertyName, object value)
-        {
+        public static Expression<Func<T, bool>> LessEqual<T>(string propertyName, object value) {
             var parameter = CreateParameter<T>();
             return parameter.Property(propertyName).LessEqual(value).ToLambda<Func<T, bool>>(parameter);
         }
@@ -366,8 +330,7 @@ namespace Alabo.Linq
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="propertyName">属性名</param>
         /// <param name="value">值</param>
-        public static Expression<Func<T, bool>> Starts<T>(string propertyName, string value)
-        {
+        public static Expression<Func<T, bool>> Starts<T>(string propertyName, string value) {
             var parameter = CreateParameter<T>();
             return parameter.Property(propertyName).StartsWith(value).ToLambda<Func<T, bool>>(parameter);
         }
@@ -382,8 +345,7 @@ namespace Alabo.Linq
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="propertyName">属性名</param>
         /// <param name="value">值</param>
-        public static Expression<Func<T, bool>> Ends<T>(string propertyName, string value)
-        {
+        public static Expression<Func<T, bool>> Ends<T>(string propertyName, string value) {
             var parameter = CreateParameter<T>();
             return parameter.Property(propertyName).EndsWith(value).ToLambda<Func<T, bool>>(parameter);
         }
@@ -398,8 +360,7 @@ namespace Alabo.Linq
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="propertyName">属性名</param>
         /// <param name="value">值</param>
-        public static Expression<Func<T, bool>> Contains<T>(string propertyName, object value)
-        {
+        public static Expression<Func<T, bool>> Contains<T>(string propertyName, object value) {
             var parameter = CreateParameter<T>();
             return parameter.Property(propertyName).Contains(value).ToLambda<Func<T, bool>>(parameter);
         }
@@ -415,8 +376,7 @@ namespace Alabo.Linq
         /// <param name="propertyName">属性名</param>
         /// <param name="value">值</param>
         /// <param name="operator">运算符</param>
-        public static Expression<Func<T, bool>> ParsePredicate<T>(string propertyName, object value, Operator @operator)
-        {
+        public static Expression<Func<T, bool>> ParsePredicate<T>(string propertyName, object value, Operator @operator) {
             var parameter = Expression.Parameter(typeof(T), "t");
             return parameter.Property(propertyName).Operation(@operator, value).ToLambda<Func<T, bool>>(parameter);
         }
@@ -429,8 +389,7 @@ namespace Alabo.Linq
         ///     获取成员
         /// </summary>
         /// <param name="expression">表达式,范例：t => t.Name</param>
-        public static MemberInfo GetMember(Expression expression)
-        {
+        public static MemberInfo GetMember(Expression expression) {
             var memberExpression = GetMemberExpression(expression);
             return memberExpression?.Member;
         }
@@ -440,14 +399,12 @@ namespace Alabo.Linq
         /// </summary>
         /// <param name="expression">表达式</param>
         /// <param name="right">取表达式右侧,(l,r) => l.id == r.id，设置为true,返回r.id表达式</param>
-        public static MemberExpression GetMemberExpression(Expression expression, bool right = false)
-        {
+        public static MemberExpression GetMemberExpression(Expression expression, bool right = false) {
             if (expression == null) {
                 return null;
             }
 
-            switch (expression.NodeType)
-            {
+            switch (expression.NodeType) {
                 case ExpressionType.Lambda:
                     return GetMemberExpression(((LambdaExpression)expression).Body, right);
 
@@ -477,12 +434,10 @@ namespace Alabo.Linq
         /// <summary>
         ///     获取方法调用表达式的成员名称
         /// </summary>
-        private static MemberExpression GetMethodCallExpressionName(Expression expression)
-        {
+        private static MemberExpression GetMethodCallExpressionName(Expression expression) {
             var methodCallExpression = (MethodCallExpression)expression;
             var left = (MemberExpression)methodCallExpression.Object;
-            if (Reflection.IsGenericCollection(left?.Type))
-            {
+            if (Reflection.IsGenericCollection(left?.Type)) {
                 var argumentExpression = methodCallExpression.Arguments.FirstOrDefault();
                 if (argumentExpression != null && argumentExpression.NodeType == ExpressionType.MemberAccess) {
                     return (MemberExpression)argumentExpression;
@@ -500,8 +455,7 @@ namespace Alabo.Linq
         ///     获取成员名称，范例：t => t.A.Name,返回 A.Name
         /// </summary>
         /// <param name="expression">表达式,范例：t => t.Name</param>
-        public static string GetName(Expression expression)
-        {
+        public static string GetName(Expression expression) {
             var memberExpression = GetMemberExpression(expression);
             return GetMemberName(memberExpression);
         }
@@ -509,8 +463,7 @@ namespace Alabo.Linq
         /// <summary>
         ///     获取成员名称
         /// </summary>
-        public static string GetMemberName(MemberExpression memberExpression)
-        {
+        public static string GetMemberName(MemberExpression memberExpression) {
             if (memberExpression == null) {
                 return string.Empty;
             }
@@ -527,14 +480,12 @@ namespace Alabo.Linq
         ///     获取值,范例：t => t.Name == "A",返回 A
         /// </summary>
         /// <param name="expression">表达式,范例：t => t.Name == "A"</param>
-        public static object GetValue(Expression expression)
-        {
+        public static object GetValue(Expression expression) {
             if (expression == null) {
                 return null;
             }
 
-            switch (expression.NodeType)
-            {
+            switch (expression.NodeType) {
                 case ExpressionType.Lambda:
                     return GetValue(((LambdaExpression)expression).Body);
 
@@ -572,8 +523,7 @@ namespace Alabo.Linq
         /// <summary>
         ///     获取方法调用表达式的值
         /// </summary>
-        private static object GetMethodCallExpressionValue(Expression expression)
-        {
+        private static object GetMethodCallExpressionValue(Expression expression) {
             var methodCallExpression = (MethodCallExpression)expression;
             var value = GetValue(methodCallExpression.Arguments.FirstOrDefault());
             if (value != null) {
@@ -591,15 +541,13 @@ namespace Alabo.Linq
         /// <summary>
         ///     获取属性表达式的值
         /// </summary>
-        private static object GetMemberValue(MemberExpression expression)
-        {
+        private static object GetMemberValue(MemberExpression expression) {
             if (expression == null) {
                 return null;
             }
 
             var field = expression.Member as FieldInfo;
-            if (field != null)
-            {
+            if (field != null) {
                 var constValue = GetConstantExpressionValue(expression.Expression);
                 return field.GetValue(constValue);
             }
@@ -614,8 +562,7 @@ namespace Alabo.Linq
             }
 
             var value = GetMemberValue(expression.Expression as MemberExpression);
-            if (value == null)
-            {
+            if (value == null) {
                 if (property.PropertyType == typeof(bool)) {
                     return true;
                 }
@@ -629,8 +576,7 @@ namespace Alabo.Linq
         /// <summary>
         ///     获取常量表达式的值
         /// </summary>
-        private static object GetConstantExpressionValue(Expression expression)
-        {
+        private static object GetConstantExpressionValue(Expression expression) {
             var constantExpression = (ConstantExpression)expression;
             return constantExpression.Value;
         }
@@ -643,14 +589,12 @@ namespace Alabo.Linq
         ///     获取查询操作符,范例：t => t.Name == "A",返回 Operator.Equal
         /// </summary>
         /// <param name="expression">表达式,范例：t => t.Name == "A"</param>
-        public static Operator? GetOperator(Expression expression)
-        {
+        public static Operator? GetOperator(Expression expression) {
             if (expression == null) {
                 return null;
             }
 
-            switch (expression.NodeType)
-            {
+            switch (expression.NodeType) {
                 case ExpressionType.Lambda:
                     return GetOperator(((LambdaExpression)expression).Body);
 
@@ -685,11 +629,9 @@ namespace Alabo.Linq
         /// <summary>
         ///     获取方法调用表达式的值
         /// </summary>
-        private static Operator? GetMethodCallExpressionOperator(Expression expression)
-        {
+        private static Operator? GetMethodCallExpressionOperator(Expression expression) {
             var methodCallExpression = (MethodCallExpression)expression;
-            switch (methodCallExpression?.Method?.Name?.ToLower())
-            {
+            switch (methodCallExpression?.Method?.Name?.ToLower()) {
                 case "contains":
                     return Operator.Contains;
 
@@ -711,8 +653,7 @@ namespace Alabo.Linq
         ///     获取分组的谓词表达式，通过Or进行分组
         /// </summary>
         /// <param name="expression">谓词表达式</param>
-        public static List<List<Expression>> GetGroupPredicates(Expression expression)
-        {
+        public static List<List<Expression>> GetGroupPredicates(Expression expression) {
             var result = new List<List<Expression>>();
             if (expression == null) {
                 return result;
@@ -725,8 +666,7 @@ namespace Alabo.Linq
         /// <summary>
         ///     创建分组
         /// </summary>
-        private static List<Expression> CreateGroup(List<List<Expression>> result)
-        {
+        private static List<Expression> CreateGroup(List<List<Expression>> result) {
             var gourp = new List<Expression>();
             result.Add(gourp);
             return gourp;
@@ -735,10 +675,8 @@ namespace Alabo.Linq
         /// <summary>
         ///     添加通过Or分割的谓词表达式
         /// </summary>
-        private static void AddPredicates(Expression expression, List<List<Expression>> result, List<Expression> group)
-        {
-            switch (expression.NodeType)
-            {
+        private static void AddPredicates(Expression expression, List<List<Expression>> result, List<Expression> group) {
+            switch (expression.NodeType) {
                 case ExpressionType.Lambda:
                     AddPredicates(((LambdaExpression)expression).Body, result, group);
                     break;
@@ -768,8 +706,7 @@ namespace Alabo.Linq
         /// </summary>
         /// <typeparam name="TAttribute">特性类型</typeparam>
         /// <param name="expression">属性表达式</param>
-        public static TAttribute GetAttribute<TAttribute>(Expression expression) where TAttribute : Attribute
-        {
+        public static TAttribute GetAttribute<TAttribute>(Expression expression) where TAttribute : Attribute {
             var memberInfo = GetMember(expression);
             return memberInfo.GetCustomAttribute<TAttribute>();
         }
@@ -782,8 +719,7 @@ namespace Alabo.Linq
         /// <typeparam name="TAttribute">特性类型</typeparam>
         /// <param name="propertyExpression">属性表达式</param>
         public static TAttribute GetAttribute<TEntity, TProperty, TAttribute>(
-            Expression<Func<TEntity, TProperty>> propertyExpression) where TAttribute : Attribute
-        {
+            Expression<Func<TEntity, TProperty>> propertyExpression) where TAttribute : Attribute {
             return GetAttribute<TAttribute>(propertyExpression);
         }
 
@@ -794,8 +730,7 @@ namespace Alabo.Linq
         /// <typeparam name="TAttribute">特性类型</typeparam>
         /// <param name="propertyExpression">属性表达式</param>
         public static TAttribute GetAttribute<TProperty, TAttribute>(Expression<Func<TProperty>> propertyExpression)
-            where TAttribute : Attribute
-        {
+            where TAttribute : Attribute {
             return GetAttribute<TAttribute>(propertyExpression);
         }
 
@@ -809,8 +744,7 @@ namespace Alabo.Linq
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="propertyName">属性名</param>
         /// <param name="value">值</param>
-        public static Expression<Func<T, bool>> Equal<T>(string propertyName, object value)
-        {
+        public static Expression<Func<T, bool>> Equal<T>(string propertyName, object value) {
             var parameter = CreateParameter<T>();
             return parameter.Property(propertyName).Equal(value).ToLambda<Func<T, bool>>(parameter);
         }
@@ -818,8 +752,7 @@ namespace Alabo.Linq
         /// <summary>
         ///     创建参数
         /// </summary>
-        private static ParameterExpression CreateParameter<T>()
-        {
+        private static ParameterExpression CreateParameter<T>() {
             return Expression.Parameter(typeof(T), "t");
         }
 

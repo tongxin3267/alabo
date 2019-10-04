@@ -8,21 +8,20 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Alabo.Runtime
-{
+namespace Alabo.Runtime {
+
     /// <summary>
     ///     Class RuntimeExtensions.
     /// </summary>
-    public static class RuntimeExtensions
-    {
+    public static class RuntimeExtensions {
+
         /// <summary>
         ///     添加s the runtime configuration.
         /// </summary>
         /// <param name="services">The services.</param>
         /// <param name="configuration">The configuration.</param>
         public static IServiceCollection AddRuntimeConfiguration(this IServiceCollection services,
-            IConfiguration configuration)
-        {
+            IConfiguration configuration) {
             if (services == null) {
                 throw new ArgumentNullException(nameof(services));
             }
@@ -41,10 +40,8 @@ namespace Alabo.Runtime
         ///     Uses the runtime context.
         /// </summary>
         /// <param name="app">The application.</param>
-        public static IApplicationBuilder UseRuntimeContext(this IApplicationBuilder app)
-        {
-            async Task Middleware(HttpContext context, Func<Task> next)
-            {
+        public static IApplicationBuilder UseRuntimeContext(this IApplicationBuilder app) {
+            async Task Middleware(HttpContext context, Func<Task> next) {
                 var threadId = Thread.CurrentThread.ManagedThreadId;
                 RuntimeContext.SetRequestServices(threadId, context.RequestServices);
                 await next();
@@ -57,8 +54,7 @@ namespace Alabo.Runtime
         ///     Sets the runtime request services.
         /// </summary>
         /// <param name="services">The services.</param>
-        public static void SetRuntimeRequestServices(IServiceProvider services)
-        {
+        public static void SetRuntimeRequestServices(IServiceProvider services) {
             var threadId = Thread.CurrentThread.ManagedThreadId;
             RuntimeContext.SetRequestServices(threadId, services);
         }
@@ -68,8 +64,7 @@ namespace Alabo.Runtime
         /// </summary>
         /// <param name="env">The env.</param>
         /// <param name="configuration"></param>
-        public static void ConfigurationRuntimePath(this IHostingEnvironment env, IConfiguration configuration)
-        {
+        public static void ConfigurationRuntimePath(this IHostingEnvironment env, IConfiguration configuration) {
             RuntimeContext.Current.Path = new RuntimePath(env);
             RuntimeContext.Current.Configuration = configuration;
         }
@@ -79,8 +74,7 @@ namespace Alabo.Runtime
         /// </summary>
         /// <param name="path">The env.</param>
         /// <param name="configuration"></param>
-        public static void ConfigurationRuntimePath(this IConfiguration configuration, string path)
-        {
+        public static void ConfigurationRuntimePath(this IConfiguration configuration, string path) {
             RuntimeContext.Current.Path = new RuntimePath(path);
             RuntimeContext.Current.Configuration = configuration;
         }

@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.Framework.Reports.Dtos
-{
+namespace Alabo.Framework.Reports.Dtos {
+
     /// <summary>
     ///     输入报表表格格式
     /// </summary>
-    public class CountTableOutput
-    {
+    public class CountTableOutput {
+
         /// <summary>
         ///     日期格式
         ///     格式：2019-6-26
@@ -26,8 +26,7 @@ namespace Alabo.Framework.Reports.Dtos
         public List<CountTableOutputItems> CountTableOutputItem { get; set; }
     }
 
-    public class CountTableOutputItems
-    {
+    public class CountTableOutputItems {
         public string Name { get; set; }
         public string TempName { get; set; }
         public string Value { get; set; }

@@ -1,13 +1,12 @@
 ﻿using Alabo.Validations;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.UI.Design.Widgets
-{
+namespace Alabo.UI.Design.Widgets {
+
     /// <summary>
     ///     模块参数获取
     /// </summary>
-    public class WidgetInput
-    {
+    public class WidgetInput {
         /// <summary>
         ///     模块类型
         /// </summary>

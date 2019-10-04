@@ -1,13 +1,13 @@
 ﻿using Alabo.Datas.Queries.Enums;
 using System.Collections.Generic;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Abstractions
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Abstractions {
+
     /// <summary>
     ///     参数管理器
     /// </summary>
-    public interface IParameterManager
-    {
+    public interface IParameterManager {
+
         /// <summary>
         ///     创建参数名
         /// </summary>

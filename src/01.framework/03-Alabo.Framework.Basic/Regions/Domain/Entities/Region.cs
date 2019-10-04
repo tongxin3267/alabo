@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Framework.Core.Enums.Enum;
@@ -8,9 +6,11 @@ using Alabo.Framework.Core.WebUis;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Framework.Basic.Regions.Domain.Entities
-{
+namespace Alabo.Framework.Basic.Regions.Domain.Entities {
+
     /// <summary>
     ///     地区
     ///     这个对象中的值生成后不应该修改
@@ -19,14 +19,12 @@ namespace Alabo.Framework.Basic.Regions.Domain.Entities
         PageType = ViewPageType.List, PostApi = "Api/Region/RegionList")]
     [BsonIgnoreExtraElements]
     [Table("Basic_Region")]
-    public class Region : AggregateMongodbRoot<Region>
-    {
-        public Region() : base(ObjectId.Empty)
-        {
+    public class Region : AggregateMongodbRoot<Region> {
+
+        public Region() : base(ObjectId.Empty) {
         }
 
-        public Region(long regionId, long parentId)
-        {
+        public Region(long regionId, long parentId) {
             RegionId = regionId;
             ParentId = parentId;
             // this.Id = (regionId.ToString() + parentId.ToString()).ConvertToObjectId();

@@ -2,10 +2,10 @@
 using Alabo.Users.Entities;
 using System.Collections.Generic;
 
-namespace Alabo.Framework.Core.Admins.Repositories
-{
-    public interface ICatalogRepository : IRepository<User, long>
-    {
+namespace Alabo.Framework.Core.Admins.Repositories {
+
+    public interface ICatalogRepository : IRepository<User, long> {
+
         /// <summary>
         ///     更新数据库
         /// </summary>

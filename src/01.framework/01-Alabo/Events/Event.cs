@@ -2,18 +2,17 @@
 using System;
 using System.Text;
 
-namespace Alabo.Events
-{
+namespace Alabo.Events {
+
     /// <summary>
     ///     事件
     /// </summary>
-    public class Event : IEvent
-    {
+    public class Event : IEvent {
+
         /// <summary>
         ///     初始化事件
         /// </summary>
-        public Event()
-        {
+        public Event() {
             Id = Guid.NewGuid().ToString();
             Time = DateTime.Now;
         }
@@ -31,8 +30,7 @@ namespace Alabo.Events
         /// <summary>
         ///     输出日志
         /// </summary>
-        public override string ToString()
-        {
+        public override string ToString() {
             var result = new StringBuilder();
             result.AppendLine($"事件标识: {Id}");
             result.AppendLine($"事件时间: {Extensions.Extensions.ToMillisecondString(Time)}");

@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
-using Alabo.Domains.Services.Report;
 using Alabo.Framework.Reports.Domain.Entities;
 using Alabo.UI.Design.AutoReports;
 using Alabo.UI.Design.AutoReports.Dtos;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
 
-namespace Alabo.Framework.Reports.Domain.Services
-{
+namespace Alabo.Framework.Reports.Domain.Services {
+
     /// <summary>
     /// </summary>
-    public interface IAutoReportService : IService<Report, ObjectId>
-    {
+    public interface IAutoReportService : IService<Report, ObjectId> {
+
         /// <summary>
         ///     按天统计数据
         ///     支持SqlService，和Mongdob数据库，可以统计出所有实体的增加数量

@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     民族
     /// </summary>
     [ClassProperty(Name = "民族")]
-    public enum Nation
-    {
+    public enum Nation {
+
         /// <summary>
         ///     汉族
         /// </summary>

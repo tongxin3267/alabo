@@ -1,30 +1,27 @@
 ﻿using Alabo.Extensions;
 using Alabo.Helpers;
 
-namespace Alabo.Files
-{
+namespace Alabo.Files {
+
     /// <summary>
     ///     文件大小
     /// </summary>
-    public struct FileSize
-    {
+    public struct FileSize {
+
         /// <summary>
         ///     初始化文件大小
         /// </summary>
         /// <param name="size">文件大小</param>
         /// <param name="unit">文件大小单位</param>
-        public FileSize(long size, FileSizeUnit unit = FileSizeUnit.Byte)
-        {
+        public FileSize(long size, FileSizeUnit unit = FileSizeUnit.Byte) {
             Size = GetSize(size, unit);
         }
 
         /// <summary>
         ///     获取文件大小
         /// </summary>
-        private static long GetSize(long size, FileSizeUnit unit)
-        {
-            switch (unit)
-            {
+        private static long GetSize(long size, FileSizeUnit unit) {
+            switch (unit) {
                 case FileSizeUnit.K:
                     return size * 1024;
 
@@ -47,40 +44,35 @@ namespace Alabo.Files
         /// <summary>
         ///     获取文件大小，单位：字节
         /// </summary>
-        public int GetSize()
-        {
+        public int GetSize() {
             return (int)Size;
         }
 
         /// <summary>
         ///     获取文件大小，单位：K
         /// </summary>
-        public double GetSizeByK()
-        {
+        public double GetSizeByK() {
             return Convert.ToDouble(Size / 1024.0, 2);
         }
 
         /// <summary>
         ///     获取文件大小，单位：M
         /// </summary>
-        public double GetSizeByM()
-        {
+        public double GetSizeByM() {
             return Convert.ToDouble(Size / 1024.0 / 1024.0, 2);
         }
 
         /// <summary>
         ///     获取文件大小，单位：G
         /// </summary>
-        public double GetSizeByG()
-        {
+        public double GetSizeByG() {
             return Convert.ToDouble(Size / 1024.0 / 1024.0 / 1024.0, 2);
         }
 
         /// <summary>
         ///     输出描述
         /// </summary>
-        public override string ToString()
-        {
+        public override string ToString() {
             if (Size >= 1024 * 1024 * 1024) {
                 return $"{GetSizeByG()} {FileSizeUnit.G.Description()}";
             }

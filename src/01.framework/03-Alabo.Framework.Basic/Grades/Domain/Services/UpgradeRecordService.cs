@@ -1,4 +1,3 @@
-using System;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Repositories;
@@ -7,18 +6,17 @@ using Alabo.Framework.Basic.Grades.Domain.Entities;
 using Alabo.Framework.Basic.Grades.Domain.Enums;
 using Alabo.Users.Services;
 using MongoDB.Bson;
+using System;
 
-namespace Alabo.Framework.Basic.Grades.Domain.Services
-{
-    public class UpgradeRecordService : ServiceBase<UpgradeRecord, ObjectId>, IUpgradeRecordService
-    {
+namespace Alabo.Framework.Basic.Grades.Domain.Services {
+
+    public class UpgradeRecordService : ServiceBase<UpgradeRecord, ObjectId>, IUpgradeRecordService {
+
         public UpgradeRecordService(IUnitOfWork unitOfWork, IRepository<UpgradeRecord, ObjectId> repository) : base(
-            unitOfWork, repository)
-        {
+            unitOfWork, repository) {
         }
 
-        public ServiceResult ChangeUserGrade(long userId, Guid afterGradeId, UpgradeType upgradeType)
-        {
+        public ServiceResult ChangeUserGrade(long userId, Guid afterGradeId, UpgradeType upgradeType) {
             var afterGrade = Resolve<IGradeService>().GetGrade(afterGradeId);
             if (afterGrade == null) {
                 return ServiceResult.FailedWithMessage("需要升级的等级不存在");
@@ -35,10 +33,8 @@ namespace Alabo.Framework.Basic.Grades.Domain.Services
             }
 
             user.GradeId = afterGradeId;
-            if (Resolve<IAlaboUserService>().Update(user))
-            {
-                var upgradeRecord = new UpgradeRecord
-                {
+            if (Resolve<IAlaboUserService>().Update(user)) {
+                var upgradeRecord = new UpgradeRecord {
                     AfterGradeId = afterGradeId,
                     BeforeGradeId = beforeGrade.Id,
                     UserId = user.Id,

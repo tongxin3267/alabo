@@ -1,11 +1,11 @@
-﻿namespace Alabo.Web.Mvc.ViewModel
-{
+﻿namespace Alabo.Web.Mvc.ViewModel {
+
     /// <summary>
     ///     图标
     ///     https://keenthemes.com/metronic/preview/?page=components/icons/flaticon&demo=default
     /// </summary>
-    public static class Icons
-    {
+    public static class Icons {
+
         /// <summary>
         ///     编辑图标
         /// </summary>

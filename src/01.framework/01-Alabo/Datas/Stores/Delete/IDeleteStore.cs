@@ -1,10 +1,10 @@
 ﻿using Alabo.Domains.Entities.Core;
 using System.Collections.Generic;
 
-namespace Alabo.Datas.Stores.Delete
-{
-    public interface IDeleteStore<TEntity, in TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
+namespace Alabo.Datas.Stores.Delete {
+
+    public interface IDeleteStore<TEntity, in TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
         bool Delete(TEntity entity);
 
         /// <summary>

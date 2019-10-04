@@ -6,18 +6,17 @@ using Microsoft.Extensions.DependencyModel;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
 
-namespace Alabo.Runtime
-{
+namespace Alabo.Runtime {
+
     /// <summary>
     ///     Class RuntimeContext.
     /// </summary>
-    public sealed class RuntimeContext : ICacheConfiguration
-    {
+    public sealed class RuntimeContext : ICacheConfiguration {
+
         /// <summary>
         ///     The 服务 provider cache
         /// </summary>

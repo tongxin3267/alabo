@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     卡券类型
     /// </summary>
     [ClassProperty(Name = "卡券类型")]
-    public enum CardCouponsType
-    {
+    public enum CardCouponsType {
+
         /// <summary>
         ///     折扣券
         /// </summary>

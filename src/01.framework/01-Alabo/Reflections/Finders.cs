@@ -4,13 +4,13 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
-namespace Alabo.Reflections
-{
+namespace Alabo.Reflections {
+
     /// <summary>
     ///     类型查找器
     /// </summary>
-    public class Finders
-    {
+    public class Finders {
+
         /// <summary>
         ///     跳过的程序集
         /// </summary>
@@ -20,16 +20,14 @@ namespace Alabo.Reflections
         /// <summary>
         ///     获取程序集列表
         /// </summary>
-        public virtual List<Assembly> GetAssemblies()
-        {
+        public virtual List<Assembly> GetAssemblies() {
             return GetAssembliesFromCurrentAppDomain();
         }
 
         /// <summary>
         ///     从当前应用程序域获取程序集列表
         /// </summary>
-        private List<Assembly> GetAssembliesFromCurrentAppDomain()
-        {
+        private List<Assembly> GetAssembliesFromCurrentAppDomain() {
             var result = new List<Assembly>();
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies()) {
                 if (Match(assembly)) {
@@ -43,8 +41,7 @@ namespace Alabo.Reflections
         /// <summary>
         ///     程序集是否匹配
         /// </summary>
-        private bool Match(Assembly assembly)
-        {
+        private bool Match(Assembly assembly) {
             return !Regex.IsMatch(assembly.FullName, SkipAssemblies, RegexOptions.IgnoreCase | RegexOptions.Compiled);
         }
 
@@ -53,8 +50,7 @@ namespace Alabo.Reflections
         /// </summary>
         /// <typeparam name="T">查找类型</typeparam>
         /// <param name="assemblies">在指定的程序集列表中查找</param>
-        public List<Type> Find<T>(List<Assembly> assemblies = null)
-        {
+        public List<Type> Find<T>(List<Assembly> assemblies = null) {
             return Find(typeof(T), assemblies);
         }
 
@@ -63,8 +59,7 @@ namespace Alabo.Reflections
         /// </summary>
         /// <param name="findType">查找类型</param>
         /// <param name="assemblies">在指定的程序集列表中查找</param>
-        public List<Type> Find(Type findType, List<Assembly> assemblies = null)
-        {
+        public List<Type> Find(Type findType, List<Assembly> assemblies = null) {
             assemblies = assemblies ?? GetAssemblies();
             var result = new List<Type>();
             foreach (var assembly in assemblies) {
@@ -77,16 +72,12 @@ namespace Alabo.Reflections
         /// <summary>
         ///     获取类型列表
         /// </summary>
-        private List<Type> GetTypes(Type findType, Assembly assembly)
-        {
+        private List<Type> GetTypes(Type findType, Assembly assembly) {
             var result = new List<Type>();
             Type[] types;
-            try
-            {
+            try {
                 types = assembly.GetTypes();
-            }
-            catch (ReflectionTypeLoadException)
-            {
+            } catch (ReflectionTypeLoadException) {
                 return result;
             }
 
@@ -104,8 +95,7 @@ namespace Alabo.Reflections
         /// <summary>
         ///     添加类型
         /// </summary>
-        private void AddType(List<Type> result, Type findType, Type type)
-        {
+        private void AddType(List<Type> result, Type findType, Type type) {
             if (type.IsInterface || type.IsAbstract) {
                 return;
             }
@@ -120,15 +110,13 @@ namespace Alabo.Reflections
         /// <summary>
         ///     泛型匹配
         /// </summary>
-        private bool MatchGeneric(Type findType, Type type)
-        {
+        private bool MatchGeneric(Type findType, Type type) {
             if (findType.IsGenericTypeDefinition == false) {
                 return false;
             }
 
             var definition = findType.GetGenericTypeDefinition();
-            foreach (var implementedInterface in type.FindInterfaces((filter, criteria) => true, null))
-            {
+            foreach (var implementedInterface in type.FindInterfaces((filter, criteria) => true, null)) {
                 if (implementedInterface.IsGenericType == false) {
                     continue;
                 }

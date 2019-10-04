@@ -1,11 +1,11 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     [ClassProperty(Name = "认证类型")]
-    public enum IdentityType
-    {
+    public enum IdentityType {
+
         /// <summary>
         ///     个人
         /// </summary>

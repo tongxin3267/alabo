@@ -1,13 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace Alabo
-{
+namespace Alabo {
+
     /// <summary>
     ///     列表项
     /// </summary>
-    public class Item : IComparable<Item>
-    {
+    public class Item : IComparable<Item> {
+
         /// <summary>
         ///     初始化
         /// </summary>
@@ -16,8 +16,7 @@ namespace Alabo
         /// <param name="sortId">排序号</param>
         /// <param name="group">组</param>
         /// <param name="disabled">禁用</param>
-        public Item(string text, object value, int? sortId = null, string group = null, bool? disabled = null)
-        {
+        public Item(string text, object value, int? sortId = null, string group = null, bool? disabled = null) {
             Text = text;
             Value = value;
             SortId = sortId;
@@ -59,8 +58,7 @@ namespace Alabo
         ///     比较
         /// </summary>
         /// <param name="other">其它列表项</param>
-        public int CompareTo(Item other)
-        {
+        public int CompareTo(Item other) {
             return string.Compare(Text, other.Text, StringComparison.CurrentCulture);
         }
     }

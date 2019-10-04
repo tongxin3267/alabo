@@ -2,10 +2,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace Alabo.UI.Design.AutoReports.Dtos
-{
-    public class SumTableInput : PagedInputDto
-    {
+namespace Alabo.UI.Design.AutoReports.Dtos {
+
+    public class SumTableInput : PagedInputDto {
+
         /// <summary>
         ///     实体类型，通过Type可以获取表格
         /// </summary>
@@ -53,8 +53,8 @@ namespace Alabo.UI.Design.AutoReports.Dtos
     /// <summary>
     ///     输出
     /// </summary>
-    public class SumTableOutput
-    {
+    public class SumTableOutput {
+
         /// <summary>
         ///     日期格式
         ///     格式：2019-6-26
@@ -70,8 +70,8 @@ namespace Alabo.UI.Design.AutoReports.Dtos
     /// <summary>
     ///     数据统计项
     /// </summary>
-    public class SumTableOutputItems
-    {
+    public class SumTableOutputItems {
+
         /// <summary>
         ///     数据项名称
         ///     比如订单数量，去字段特性Filed或DisplayName的值

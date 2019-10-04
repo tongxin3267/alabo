@@ -1,11 +1,11 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     [ClassProperty(Name = "区时")]
-    public enum ZoneTime
-    {
+    public enum ZoneTime {
+
         /// <summary>
         ///     (UTC-12:00)
         /// </summary>

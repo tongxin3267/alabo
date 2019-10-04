@@ -5,10 +5,10 @@ using Alabo.UI;
 using Alabo.UI.Design.AutoForms;
 using System;
 
-namespace Alabo.Framework.Core.WebUis.Services
-{
-    public interface IAutoFormServcie : IService
-    {
+namespace Alabo.Framework.Core.WebUis.Services {
+
+    public interface IAutoFormServcie : IService {
+
         /// <summary>
         ///     通过Id获取自动视图，视图Id可以为空
         /// </summary>

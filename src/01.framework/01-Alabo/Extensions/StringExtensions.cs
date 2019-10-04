@@ -10,13 +10,13 @@ using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Alabo.Extensions
-{
+namespace Alabo.Extensions {
+
     /// <summary>
     ///     文本类型数据扩展
     /// </summary>
-    public static class StringExtensions
-    {
+    public static class StringExtensions {
+
         /// <summary>
         ///     空白字符串的定义
         /// </summary>
@@ -1243,8 +1243,8 @@ namespace Alabo.Extensions
     /// <summary>
     ///     ContentTypes List for reference using
     /// </summary>
-    public class ContentTypes
-    {
+    public class ContentTypes {
+
         /// <summary>
         ///     application/json
         /// </summary>

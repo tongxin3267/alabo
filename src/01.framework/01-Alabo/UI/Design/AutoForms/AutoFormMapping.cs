@@ -8,17 +8,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Alabo.UI.Design.AutoForms
-{
-    public static class AutoFormMapping
-    {
+namespace Alabo.UI.Design.AutoForms {
+
+    public static class AutoFormMapping {
+
         /// <summary>
         ///     get generic type
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        private static Type GetGenericType(Type type)
-        {
+        private static Type GetGenericType(Type type) {
             if (type.IsGenericType) {
                 return type.GenericTypeArguments[0];
             }
@@ -32,8 +31,7 @@ namespace Alabo.UI.Design.AutoForms
         ///     将视图转成AutoForm
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public static AutoForm Convert<T>()
-        {
+        public static AutoForm Convert<T>() {
             return Convert(typeof(T).FullName);
         }
 
@@ -42,71 +40,61 @@ namespace Alabo.UI.Design.AutoForms
         /// </summary>
         /// <param name="fullName"></param>
         /// <returns></returns>
-        public static AutoForm Convert(string fullName)
-        {
+        public static AutoForm Convert(string fullName) {
             var objectCache = Ioc.Resolve<IObjectCache>();
-            return objectCache.GetOrSet(() =>
-                {
-                    var classDescription = fullName.GetClassDescription();
-                    if (classDescription != null)
-                    {
-                        var classPropertyAttribute = classDescription.ClassPropertyAttribute;
-                        var auto = new AutoForm
-                        {
-                            Key = fullName,
-                            Name = classPropertyAttribute.Name,
-                            BottonText = classPropertyAttribute.ButtonText,
-                            ViewLinks = classDescription.ViewLinks,
-                            Title = classPropertyAttribute.Name,
-                            Service = new FormService(classPropertyAttribute.PostApi,
-                                classPropertyAttribute.SuccessReturn)
-                        };
-                        // 构建字段
+            return objectCache.GetOrSet(() => {
+                var classDescription = fullName.GetClassDescription();
+                if (classDescription != null) {
+                    var classPropertyAttribute = classDescription.ClassPropertyAttribute;
+                    var auto = new AutoForm {
+                        Key = fullName,
+                        Name = classPropertyAttribute.Name,
+                        BottonText = classPropertyAttribute.ButtonText,
+                        ViewLinks = classDescription.ViewLinks,
+                        Title = classPropertyAttribute.Name,
+                        Service = new FormService(classPropertyAttribute.PostApi,
+                            classPropertyAttribute.SuccessReturn)
+                    };
+                    // 构建字段
 
-                        var groups = classPropertyAttribute.GroupName.Split(",");
-                        var propertys = classDescription.Propertys;
+                    var groups = classPropertyAttribute.GroupName.Split(",");
+                    var propertys = classDescription.Propertys;
 
-                        if (groups.Length == 0)
-                        {
-                            var fieldGroup = new FieldGroup { GroupName = "default" };
-                            fieldGroup.Items.AddRange(GetFormFieds(propertys));
+                    if (groups.Length == 0) {
+                        var fieldGroup = new FieldGroup { GroupName = "default" };
+                        fieldGroup.Items.AddRange(GetFormFieds(propertys));
+                        auto.Groups.Add(fieldGroup);
+                    } else {
+                        // 多标签
+                        long i = 0;
+                        foreach (var group in groups) {
+                            i++;
+                            var fieldGroup = new FieldGroup();
+                            fieldGroup.GroupName = group;
+                            var groupPropertys = propertys.Where(r => r.FieldAttribute?.GroupTabId == i).ToArray();
+                            if (group.Trim().IsNullOrEmpty()) {
+                                groupPropertys = propertys;
+                            }
+
+                            fieldGroup.Items.AddRange(GetFormFieds(groupPropertys));
                             auto.Groups.Add(fieldGroup);
                         }
-                        else
-                        {
-                            // 多标签
-                            long i = 0;
-                            foreach (var group in groups)
-                            {
-                                i++;
-                                var fieldGroup = new FieldGroup();
-                                fieldGroup.GroupName = group;
-                                var groupPropertys = propertys.Where(r => r.FieldAttribute?.GroupTabId == i).ToArray();
-                                if (group.Trim().IsNullOrEmpty()) {
-                                    groupPropertys = propertys;
-                                }
-
-                                fieldGroup.Items.AddRange(GetFormFieds(groupPropertys));
-                                auto.Groups.Add(fieldGroup);
-                            }
-                        }
-
-                        return auto;
                     }
 
-                    return null;
-                }, fullName + "AutoForm").Value;
+                    return auto;
+                }
+
+                return null;
+            }, fullName + "AutoForm").Value;
         }
 
         /// <summary>
         ///     字段转换
         /// </summary>
         /// <param name="propertys"></param>
-        private static IList<FormFieldProperty> GetFormFieds(PropertyDescription[] propertys)
-        {
+        private static IList<FormFieldProperty> GetFormFieds(PropertyDescription[] propertys) {
             var resultFieldProperties = new List<FormFieldProperty>();
-            foreach (var item in propertys)
-            {
+            foreach (var item in propertys) {
                 if (item.FieldAttribute == null || !item.FieldAttribute.EditShow) {
                     continue;
                 }
@@ -147,11 +135,9 @@ namespace Alabo.UI.Design.AutoForms
                 }
 
                 //Json类型
-                if (formField.Type == ControlsType.JsonList)
-                {
+                if (formField.Type == ControlsType.JsonList) {
                     var propertyType = item.Property.PropertyType;
-                    if (propertyType.IsGenericType)
-                    {
+                    if (propertyType.IsGenericType) {
                         var genericTypeName = GetGenericType(propertyType).FullName;
                         var genericPropertys = genericTypeName.GetClassDescription().Propertys;
                         formField.JsonItems.Add(GetGroup(genericPropertys));
@@ -169,8 +155,7 @@ namespace Alabo.UI.Design.AutoForms
         /// </summary>
         /// <param name="propertys"></param>
         /// <returns></returns>
-        private static FieldGroup GetGroup(PropertyDescription[] propertys)
-        {
+        private static FieldGroup GetGroup(PropertyDescription[] propertys) {
             var fieldGroup = new FieldGroup { GroupName = "default" };
             fieldGroup.Items.AddRange(GetFormFieds(propertys));
             return fieldGroup;
@@ -185,8 +170,7 @@ namespace Alabo.UI.Design.AutoForms
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static AutoForm Convert(object model)
-        {
+        public static AutoForm Convert(object model) {
             //cache class descrption
             var fullName = model.GetType().FullName;
             var classDescription = fullName.GetClassDescription();
@@ -195,8 +179,7 @@ namespace Alabo.UI.Design.AutoForms
             }
 
             var classPropertyAttribute = classDescription.ClassPropertyAttribute;
-            var auto = new AutoForm
-            {
+            var auto = new AutoForm {
                 Key = fullName,
                 Name = classPropertyAttribute.Name,
                 BottonText = classPropertyAttribute.ButtonText,
@@ -208,18 +191,14 @@ namespace Alabo.UI.Design.AutoForms
             var groups = classPropertyAttribute.GroupName.Split(",");
             var propertys = classDescription.Propertys;
 
-            if (groups.Length == 0)
-            {
+            if (groups.Length == 0) {
                 var fieldGroup = new FieldGroup { GroupName = "default" };
                 fieldGroup.Items.AddRange(GetFormFieds(propertys, model));
                 auto.Groups.Add(fieldGroup);
-            }
-            else
-            {
+            } else {
                 //group
                 long i = 0;
-                foreach (var group in groups)
-                {
+                foreach (var group in groups) {
                     i++;
                     var fieldGroup = new FieldGroup();
                     fieldGroup.GroupName = group;
@@ -240,8 +219,7 @@ namespace Alabo.UI.Design.AutoForms
         ///     get form fields
         /// </summary>
         /// <param name="obj">list类型</param>
-        public static IList<FieldGroup> GetFormFields(object obj)
-        {
+        public static IList<FieldGroup> GetFormFields(object obj) {
             var result = new List<FieldGroup>();
             var propertyType = obj.GetType();
             if (!propertyType.IsGenericType) {
@@ -251,16 +229,12 @@ namespace Alabo.UI.Design.AutoForms
             var genericTypeName = GetGenericType(propertyType).FullName;
             var propertyDescriptions = genericTypeName.GetClassDescription().Propertys;
             var propertyValue = obj as dynamic;
-            if (propertyValue != null && propertyValue.Count > 0)
-            {
-                for (var i = 0; i < propertyValue.Count; i++)
-                {
+            if (propertyValue != null && propertyValue.Count > 0) {
+                for (var i = 0; i < propertyValue.Count; i++) {
                     var group = GetGroup(propertyDescriptions, propertyValue[i]);
                     result.Add(group);
                 }
-            }
-            else
-            {
+            } else {
                 var group = GetGroup(propertyDescriptions);
                 result.Add(group);
             }
@@ -272,12 +246,10 @@ namespace Alabo.UI.Design.AutoForms
         ///     builder property
         /// </summary>
         /// <param name="propertys"></param>
-        private static IList<FormFieldProperty> GetFormFieds(PropertyDescription[] propertys, object model)
-        {
+        private static IList<FormFieldProperty> GetFormFieds(PropertyDescription[] propertys, object model) {
             var result = new List<FormFieldProperty>();
             var propertyInfos = model.GetType().GetProperties();
-            foreach (var propertyInfo in propertyInfos)
-            {
+            foreach (var propertyInfo in propertyInfos) {
                 //find property description
                 var propertyDesc = propertys.ToList().Find(p => p.Property.Name == propertyInfo.Name);
                 if (propertyDesc == null
@@ -310,19 +282,13 @@ namespace Alabo.UI.Design.AutoForms
                     formField.Width = propertyDesc.FieldAttribute.Width;
                 }
 
-                if (!propertyDesc.FieldAttribute.ApiDataSource.IsNullOrEmpty())
-                {
+                if (!propertyDesc.FieldAttribute.ApiDataSource.IsNullOrEmpty()) {
                     formField.DataSource = propertyDesc.FieldAttribute.ApiDataSource;
-                }
-                else
-                {
-                    if (propertyDesc.FieldAttribute.DataSourceType != null)
-                    {
+                } else {
+                    if (propertyDesc.FieldAttribute.DataSourceType != null) {
                         formField.DataSource =
                             $"Api/Type/GetKeyValue?type={propertyDesc.FieldAttribute.DataSourceType.Name}";
-                    }
-                    else
-                    {
+                    } else {
                         // enum
                         if (propertyDesc.Property.PropertyType.BaseType == typeof(System.Enum)) {
                             formField.DataSource =
@@ -337,8 +303,7 @@ namespace Alabo.UI.Design.AutoForms
                 }
 
                 //Json
-                if (formField.Type == ControlsType.JsonList)
-                {
+                if (formField.Type == ControlsType.JsonList) {
                     var propertyValue = propertyInfo.GetPropertyValue(model);
                     formField.JsonItems.AddRange(GetFormFields(propertyValue));
                 }
@@ -367,8 +332,7 @@ namespace Alabo.UI.Design.AutoForms
         /// <param name="propertys"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        private static FieldGroup GetGroup(PropertyDescription[] propertys, object model)
-        {
+        private static FieldGroup GetGroup(PropertyDescription[] propertys, object model) {
             var fieldGroup = new FieldGroup { GroupName = "default" };
             fieldGroup.Items.AddRange(GetFormFieds(propertys, model));
             return fieldGroup;

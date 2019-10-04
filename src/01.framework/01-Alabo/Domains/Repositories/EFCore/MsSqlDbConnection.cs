@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace Alabo.Domains.Repositories.EFCore {
 
-namespace Alabo.Domains.Repositories.EFCore
-{
-    public class MsSqlDbConnection
-    {
+    public class MsSqlDbConnection {
+
         /// <summary>
         ///     链接字符串
         /// </summary>

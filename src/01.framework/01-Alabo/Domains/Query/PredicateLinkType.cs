@@ -1,11 +1,11 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Domains.Query
-{
+namespace Alabo.Domains.Query {
+
     [ClassProperty(Name = "且  或")]
-    public enum PredicateLinkType
-    {
+    public enum PredicateLinkType {
+
         /// <summary>
         ///     并且
         /// </summary>

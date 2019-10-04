@@ -1,15 +1,15 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     会员状态
     ///     激活状态
     /// </summary>
     [ClassProperty(Name = "会员激活状态")]
-    public enum ActivateState
-    {
+    public enum ActivateState {
+
         /// <summary>
         ///     未激活
         /// </summary>

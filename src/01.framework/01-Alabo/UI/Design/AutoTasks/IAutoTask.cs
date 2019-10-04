@@ -1,7 +1,7 @@
-﻿namespace Alabo.UI.Design.AutoTasks
-{
-    public interface IAutoTask
-    {
+﻿namespace Alabo.UI.Design.AutoTasks {
+
+    public interface IAutoTask {
+
         /// <summary>
         ///     初始化
         /// </summary>

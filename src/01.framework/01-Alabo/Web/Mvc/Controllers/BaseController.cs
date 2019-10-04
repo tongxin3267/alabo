@@ -14,13 +14,13 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace Alabo.Web.Mvc.Controllers
-{
+namespace Alabo.Web.Mvc.Controllers {
+
     /// <summary>
     ///     Class BaseController.
     /// </summary>
-    public abstract class BaseController : Controller
-    {
+    public abstract class BaseController : Controller {
+
         /// <summary>
         ///     The default message 视图 name
         /// </summary>
@@ -50,25 +50,20 @@ namespace Alabo.Web.Mvc.Controllers
         /// </summary>
         /// <param name="view">The 视图.</param>
         /// <param name="errorMessage">The error message.</param>
-        protected static bool IsFormValid(ref dynamic view, out string errorMessage)
-        {
+        protected static bool IsFormValid(ref dynamic view, out string errorMessage) {
             Type inputType = view.GetType();
             var propertyInfos = inputType.GetPropertiesFromCache();
             foreach (var item in propertyInfos) {
-                try
-                {
+                try {
                     var property =
                         propertyInfos.FirstOrDefault(r => r.Name.Equals(item.Name, StringComparison.OrdinalIgnoreCase));
                     // 所有的特性
                     var attributes = property.GetAttributes();
                     var value = property?.GetValue(view);
                     var stringValue = string.Empty;
-                    try
-                    {
+                    try {
                         stringValue = value.ToString();
-                    }
-                    catch (System.Exception ex)
-                    {
+                    } catch (System.Exception ex) {
                         Console.WriteLine(ex.Message);
                     }
 
@@ -78,12 +73,10 @@ namespace Alabo.Web.Mvc.Controllers
                         displayName = ((DisplayAttribute)displayAttribute).Name;
                     }
 
-                    foreach (var attribute in attributes)
-                    {
+                    foreach (var attribute in attributes) {
                         // 验证必填
                         if (attribute.GetType() == typeof(RequiredAttribute)) {
-                            if (stringValue.IsNullOrEmpty())
-                            {
+                            if (stringValue.IsNullOrEmpty()) {
                                 errorMessage = displayName + "不能为空";
                                 return false;
                             }
@@ -91,8 +84,7 @@ namespace Alabo.Web.Mvc.Controllers
 
                         // 验证长度大小
                         if (attribute.GetType() == typeof(StringLengthAttribute)) {
-                            if (stringValue.Length > ((StringLengthAttribute)attribute).MaximumLength)
-                            {
+                            if (stringValue.Length > ((StringLengthAttribute)attribute).MaximumLength) {
                                 errorMessage = displayName +
                                                $"长度不能超过{((StringLengthAttribute)attribute).MaximumLength}字符";
                                 return false;
@@ -100,12 +92,10 @@ namespace Alabo.Web.Mvc.Controllers
                         }
 
                         // 验证远程信息
-                        if (attribute.GetType() == typeof(FieldAttribute))
-                        {
+                        if (attribute.GetType() == typeof(FieldAttribute)) {
                             var fieldAttribute = (FieldAttribute)attribute;
                             if (fieldAttribute.ValidType == ValidType.UserName ||
-                                fieldAttribute.ValidType == ValidType.ParentUserName)
-                            {
+                                fieldAttribute.ValidType == ValidType.ParentUserName) {
                                 // 推荐人为空的时候，不验证
                                 if (fieldAttribute.ValidType == ValidType.ParentUserName &&
                                     stringValue.IsNullOrEmpty()) {
@@ -114,8 +104,7 @@ namespace Alabo.Web.Mvc.Controllers
 
                                 // 用户名为空的时候
                                 if (fieldAttribute.ValidType == ValidType.UserName) {
-                                    if (stringValue.IsNullOrEmpty())
-                                    {
+                                    if (stringValue.IsNullOrEmpty()) {
                                         errorMessage = "用户名不能为空";
                                         return false;
                                     }
@@ -123,54 +112,40 @@ namespace Alabo.Web.Mvc.Controllers
 
                                 var user = EntityDynamicService.GetSingleUser(value.ToString());
                                 var dynamicUser = user;
-                                if (dynamicUser == null)
-                                {
+                                if (dynamicUser == null) {
                                     errorMessage = $"用户名{value}不存在，请重新输入";
                                     return false;
                                 }
 
-                                if (dynamicUser.Status != Status.Normal)
-                                {
+                                if (dynamicUser.Status != Status.Normal) {
                                     errorMessage = $"用户{value}，状态不正常，已被冻结或删除";
                                     return false;
                                 }
 
                                 // 推荐人为空的时候，不验证
-                                if (fieldAttribute.ValidType == ValidType.ParentUserName && stringValue.IsNullOrEmpty())
-                                {
-                                    try
-                                    {
+                                if (fieldAttribute.ValidType == ValidType.ParentUserName && stringValue.IsNullOrEmpty()) {
+                                    try {
                                         view.ParentUserId = dynamicUser.Id;
-                                    }
-                                    catch
-                                    {
+                                    } catch {
                                     }
 
-                                    try
-                                    {
+                                    try {
                                         view.ParentId = dynamicUser.Id;
-                                    }
-                                    catch
-                                    {
+                                    } catch {
                                     }
                                 }
 
                                 // 用户Id动态转换
                                 if (fieldAttribute.ValidType == ValidType.UserName) {
-                                    try
-                                    {
+                                    try {
                                         view.UserId = dynamicUser.Id;
-                                    }
-                                    catch
-                                    {
+                                    } catch {
                                     }
                                 }
                             }
                         }
                     }
-                }
-                catch (AggregateException filedException)
-                {
+                } catch (AggregateException filedException) {
                     Console.WriteLine(filedException);
                 }
             }
@@ -189,8 +164,7 @@ namespace Alabo.Web.Mvc.Controllers
         /// <param name="paramaters">The paramaters.</param>
         [NonAction]
         protected static Tuple<ServiceResult, object> DynamicService(string serviceString, string methodString,
-            params object[] paramaters)
-        {
+            params object[] paramaters) {
             return Linq.Dynamic.DynamicService.ResolveMethod(serviceString, methodString, paramaters);
         }
 
@@ -203,8 +177,7 @@ namespace Alabo.Web.Mvc.Controllers
         /// <param name="paramaters">The paramaters.</param>
         [NonAction]
         protected static Tuple<ServiceResult, object> DynamicService(string serviceString, string methodString,
-            bool runInUrl, params object[] paramaters)
-        {
+            bool runInUrl, params object[] paramaters) {
             return Linq.Dynamic.DynamicService.ResolveMethod(serviceString, methodString, runInUrl, paramaters);
         }
 
@@ -213,8 +186,7 @@ namespace Alabo.Web.Mvc.Controllers
         /// </summary>
         [NonAction]
         protected T Resolve<T>()
-            where T : IService
-        {
+            where T : IService {
             return Ioc.Resolve<T>();
         }
 
@@ -223,8 +195,7 @@ namespace Alabo.Web.Mvc.Controllers
         ///     把空值过滤掉
         /// </summary>
         [NonAction]
-        protected Dictionary<string, string> QueryDictionary()
-        {
+        protected Dictionary<string, string> QueryDictionary() {
             //移除type 不然很容出现 类型为enum
             return HttpContext.ToDictionary().RemoveKey("type");
         }

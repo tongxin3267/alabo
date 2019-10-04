@@ -2,13 +2,13 @@
 using Autofac;
 using System;
 
-namespace Alabo.Dependency
-{
+namespace Alabo.Dependency {
+
     /// <summary>
     ///     作用域
     /// </summary>
-    internal class Scope : IScope
-    {
+    internal class Scope : IScope {
+
         /// <summary>
         ///     autofac作用域
         /// </summary>
@@ -18,8 +18,7 @@ namespace Alabo.Dependency
         ///     初始化作用域
         /// </summary>
         /// <param name="scope">autofac作用域</param>
-        public Scope(ILifetimeScope scope)
-        {
+        public Scope(ILifetimeScope scope) {
             _scope = scope;
         }
 
@@ -27,8 +26,7 @@ namespace Alabo.Dependency
         ///     创建实例
         /// </summary>
         /// <typeparam name="T">实例类型</typeparam>
-        public T Resolve<T>()
-        {
+        public T Resolve<T>() {
             return _scope.Resolve<T>();
         }
 
@@ -36,16 +34,14 @@ namespace Alabo.Dependency
         ///     创建对象
         /// </summary>
         /// <param name="type">对象类型</param>
-        public object Create(Type type)
-        {
+        public object Create(Type type) {
             return _scope.Resolve(type);
         }
 
         /// <summary>
         ///     释放对象
         /// </summary>
-        public void Dispose()
-        {
+        public void Dispose() {
             Ioc.RemoveScope(GetHashCode());
             _scope.Dispose();
         }

@@ -1,10 +1,10 @@
-﻿namespace Alabo.Security.Sessions
-{
+﻿namespace Alabo.Security.Sessions {
+
     /// <summary>
     ///     空用户会话
     /// </summary>
-    public class NullSession : ISession
-    {
+    public class NullSession : ISession {
+
         /// <summary>
         ///     空用户会话实例
         /// </summary>

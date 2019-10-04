@@ -5,8 +5,8 @@ using MongoDB.Bson.Serialization.Attributes;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Logging.Logs.Entities
-{
+namespace Alabo.Logging.Logs.Entities {
+
     /// <summary>
     ///     日志
     /// </summary>
@@ -14,8 +14,8 @@ namespace Alabo.Logging.Logs.Entities
     [Table("Core_Logs")]
     [ClassProperty(Name = "日志", Icon = "fa fa-cog", SortOrder = 1,
         SideBarType = SideBarType.LogSideBar)]
-    public class Logs : AggregateMongodbUserRoot<Logs>
-    {
+    public class Logs : AggregateMongodbUserRoot<Logs> {
+
         /// <summary>
         ///     类型
         /// </summary>

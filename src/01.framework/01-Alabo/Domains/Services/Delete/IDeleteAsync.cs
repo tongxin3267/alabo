@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Alabo.Domains.Services.Delete
-{
+namespace Alabo.Domains.Services.Delete {
+
     /// <summary>
     ///     删除操作
     /// </summary>
-    public interface IDeleteAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+    public interface IDeleteAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         Task DeleteManyAsync(string ids);
 
         /// <summary>

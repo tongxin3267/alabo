@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Alabo.AutoConfigs.Services;
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
@@ -10,14 +9,14 @@ using Alabo.Framework.Themes.Dtos;
 using Alabo.Helpers;
 using Alabo.Tool.Payment.CallBacks;
 using MongoDB.Bson;
+using System.Collections.Generic;
 
-namespace Alabo.Framework.Themes.Domain.Services
-{
-    public class ThemePageService : ServiceBase<ThemePage, ObjectId>, IThemePageService
-    {
+namespace Alabo.Framework.Themes.Domain.Services {
+
+    public class ThemePageService : ServiceBase<ThemePage, ObjectId>, IThemePageService {
+
         public ThemePageService(IUnitOfWork unitOfWork, IRepository<ThemePage, ObjectId> repository) : base(unitOfWork,
-            repository)
-        {
+            repository) {
         }
 
         /// <summary>
@@ -25,11 +24,9 @@ namespace Alabo.Framework.Themes.Domain.Services
         ///     用户客户端缓存
         /// </summary>
         /// <param name="themePageInput"></param>
-        public AllClientPages GetAllClientPages(ClientPageInput themePageInput)
-        {
+        public AllClientPages GetAllClientPages(ClientPageInput themePageInput) {
             var cacheKey = $"AllThemePageInfo_{themePageInput.Type.ToStr()}_{themePageInput.ClientType.ToStr()}";
-            return ObjectCache.GetOrSet(() =>
-            {
+            return ObjectCache.GetOrSet(() => {
                 var allClientPages = new AllClientPages();
                 var defaultTheme = Resolve<IThemeService>().GetDefaultTheme(themePageInput);
                 if (defaultTheme == null) {
@@ -59,12 +56,9 @@ namespace Alabo.Framework.Themes.Domain.Services
                 // 判断是否开启微信支付
                 var config = Resolve<IAlaboAutoConfigService>().GetValue<WeChatPaymentConfig>();
                 if (!config.IsEnable || config.AppId.IsNullOrEmpty() || config.APISecretKey.IsNullOrEmpty() ||
-                    config.CallBackUrl.IsNullOrEmpty())
-                {
+                    config.CallBackUrl.IsNullOrEmpty()) {
                     allClientPages.Site.IsWeiXinPay = false;
-                }
-                else
-                {
+                } else {
                     allClientPages.Site.IsWeiXinPay = true;
                     var scope = "snsapi_userinfo";
                     if (!config.IsBaseUserInfo) {

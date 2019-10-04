@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection;
-using Alabo.AutoConfigs;
+﻿using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
@@ -11,13 +6,16 @@ using Alabo.Extensions;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Helpers;
-using Alabo.Reflections;
 using Alabo.UI.Enum;
 using Alabo.Web.Mvc.Attributes;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Framework.Basic.AutoConfigs.Domain.Configs
-{
+namespace Alabo.Framework.Basic.AutoConfigs.Domain.Configs {
+
     /// <summary>
     ///     货币类型配置
     /// </summary>
@@ -26,8 +24,8 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Configs
         PageType = ViewPageType.List, SortOrder = 20,
         Validator = "select 1 from Asset_Account where MoneyTypeId ='{0}'", ValidateMessage = "当前有账户正在使用当前货币",
         SideBarType = SideBarType.ControlSideBar)]
-    public class MoneyTypeConfig : AutoConfigBase, IAutoConfig
-    {
+    public class MoneyTypeConfig : AutoConfigBase, IAutoConfig {
+
         /// <summary>
         ///     人民币
         /// </summary>
@@ -61,23 +59,19 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Configs
         /// <summary>
         ///     设置默认值
         /// </summary>
-        public void SetDefault()
-        {
+        public void SetDefault() {
             var list = Ioc.Resolve<IAutoConfigService>().GetList<MoneyTypeConfig>();
-            if (list == null || list.Count == 0)
-            {
+            if (list == null || list.Count == 0) {
                 var configs = new List<MoneyTypeConfig>();
                 var config = new MoneyTypeConfig();
-                foreach (Currency item in Enum.GetValues(typeof(Currency)))
-                {
-                    config = new MoneyTypeConfig
-                    {
+                foreach (Currency item in Enum.GetValues(typeof(Currency))) {
+                    config = new MoneyTypeConfig {
                         Currency = item,
                         Unit = item.GetFieldAttribute().Mark
                     };
                     var color = item.GetFieldAttribute().Selection;
                     if (!color.IsNullOrEmpty()) {
-                        config.BackGroudColor = (ColorLibrary) Enum.Parse(typeof(ColorLibrary), color);
+                        config.BackGroudColor = (ColorLibrary)Enum.Parse(typeof(ColorLibrary), color);
                     }
 
                     if (item.GetFieldAttribute().SortOrder > 0) {
@@ -100,9 +94,7 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Configs
                     configs.Add(config);
                 }
 
-                
-                var autoConfig = new AutoConfig
-                {
+                var autoConfig = new AutoConfig {
                     Type = config.GetType().FullName,
                     //// AppName = typeclassProperty.AppName,
                     LastUpdated = DateTime.Now,

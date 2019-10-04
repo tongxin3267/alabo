@@ -4,10 +4,10 @@ using Alabo.Framework.Themes.Domain.Entities;
 using Alabo.Framework.Themes.Dtos;
 using MongoDB.Bson;
 
-namespace Alabo.Framework.Themes.Domain.Services
-{
-    public interface IThemeService : IService<Theme, ObjectId>
-    {
+namespace Alabo.Framework.Themes.Domain.Services {
+
+    public interface IThemeService : IService<Theme, ObjectId> {
+
         /// <summary>
         ///     获取默认模板
         /// </summary>

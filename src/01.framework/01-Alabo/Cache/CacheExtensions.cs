@@ -3,26 +3,24 @@ using Alabo.Cache.Redis;
 using Alabo.Runtime;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Alabo.Cache
-{
+namespace Alabo.Cache {
+
     /// <summary>
     ///     Class CacheExtensions.
     /// </summary>
-    public static class CacheExtensions
-    {
+    public static class CacheExtensions {
+
         /// <summary>
         ///     添加缓存服务
         /// </summary>
         /// <param name="services">The services.</param>
-        public static IServiceCollection AddCacheService(this IServiceCollection services)
-        {
+        public static IServiceCollection AddCacheService(this IServiceCollection services) {
             services.AddMemoryCache();
             var cacheScheme = RuntimeContext.Current.WebsiteConfig.CacheScheme;
             // 使用内存作为缓存时
             ICacheContext cacheContext = new MemoryCacheContext();
             IObjectCache objectCache = new MemoryObjectCache(cacheContext);
-            if (cacheScheme == "redis")
-            {
+            if (cacheScheme == "redis") {
                 // 使用redis做为缓存时
                 ICacheConfiguration cacheConfiguration =
                     new CacheConfiguration(RuntimeContext.Current.CacheConfigurationString);

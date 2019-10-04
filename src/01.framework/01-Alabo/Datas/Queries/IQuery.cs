@@ -4,14 +4,13 @@ using Alabo.Domains.Repositories.Pager;
 using System;
 using System.Linq.Expressions;
 
-namespace Alabo.Datas.Queries
-{
+namespace Alabo.Datas.Queries {
+
     /// <summary>
     ///     查询对象
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
-    public interface IQuery<TEntity> : IQuery<TEntity, Guid> where TEntity : class
-    {
+    public interface IQuery<TEntity> : IQuery<TEntity, Guid> where TEntity : class {
     }
 
     /// <summary>
@@ -19,8 +18,8 @@ namespace Alabo.Datas.Queries
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
     /// <typeparam name="TKey">实体标识类型</typeparam>
-    public interface IQuery<TEntity, TKey> : IQueryBase<TEntity> where TEntity : class
-    {
+    public interface IQuery<TEntity, TKey> : IQueryBase<TEntity> where TEntity : class {
+
         /// <summary>
         ///     添加查询条件
         /// </summary>

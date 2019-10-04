@@ -4,10 +4,10 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Alabo.Helpers
-{
-    public static class PasswordHelper
-    {
+namespace Alabo.Helpers {
+
+    public static class PasswordHelper {
+
         /// <summary>
         ///     获取指定数据的PBKDF2校验值
         /// </summary>
@@ -16,23 +16,20 @@ namespace Alabo.Helpers
         /// <param name="iterations">计算循环次数，越长强度越高但越耗费性能</param>
         /// <param name="hashLength">校验值长度</param>
         public static byte[] Pbkdf2Sum(
-            byte[] data, byte[] slat, int iterations = 1024, int hashLength = 32)
-        {
+            byte[] data, byte[] slat, int iterations = 1024, int hashLength = 32) {
             var hash = new Rfc2898DeriveBytes(data, slat, iterations).GetBytes(hashLength);
             return hash;
         }
 
         /// <summary>
         ///     获取指定数据的Md5校验值
-        public static byte[] Md5Sum(byte[] data)
-        {
+        public static byte[] Md5Sum(byte[] data) {
             return MD5.Create().ComputeHash(data);
         }
 
         /// <summary>
         ///     获取指定数据的Sha1校验值
-        public static byte[] Sha1Sum(byte[] data)
-        {
+        public static byte[] Sha1Sum(byte[] data) {
             return SHA1.Create().ComputeHash(data);
         }
     }
@@ -40,8 +37,8 @@ namespace Alabo.Helpers
     /// <summary>
     ///     密码信息
     /// </summary>
-    public class PasswordInfo
-    {
+    public class PasswordInfo {
+
         /// <summary>
         ///     密码类型
         /// </summary>
@@ -61,8 +58,7 @@ namespace Alabo.Helpers
         ///     检查密码，返回密码是否正确
         /// </summary>
         /// <param name="password"></param>
-        public bool Check(string password)
-        {
+        public bool Check(string password) {
             if (string.IsNullOrEmpty(password)) {
                 return false;
             }
@@ -79,26 +75,20 @@ namespace Alabo.Helpers
         /// <param name="slat">参与校验的随机数据，不指定时使用默认值</param>
         /// <param name="type">密码类型</param>
         public static PasswordInfo FromPassword(string password,
-            byte[] slat = null, PasswordHashType type = PasswordHashType.Pbkdf2)
-        {
+            byte[] slat = null, PasswordHashType type = PasswordHashType.Pbkdf2) {
             if (string.IsNullOrEmpty(password)) {
                 throw new ArgumentNullException("password can't be empty");
             }
 
             var info = new PasswordInfo { Type = type };
             var passwordBytes = Encoding.UTF8.GetBytes(password);
-            if (type == PasswordHashType.Pbkdf2)
-            {
+            if (type == PasswordHashType.Pbkdf2) {
                 slat = slat ?? RandomHelper.SystemRandomBytes();
                 info.Slat = System.Convert.ToBase64String(slat);
                 info.Hash = System.Convert.ToBase64String(PasswordHelper.Pbkdf2Sum(passwordBytes, slat));
-            }
-            else if (type == PasswordHashType.Md5)
-            {
+            } else if (type == PasswordHashType.Md5) {
                 info.Hash = System.Convert.ToBase64String(PasswordHelper.Md5Sum(passwordBytes));
-            }
-            else if (type == PasswordHashType.Sha1)
-            {
+            } else if (type == PasswordHashType.Sha1) {
                 info.Hash = System.Convert.ToBase64String(PasswordHelper.Sha1Sum(passwordBytes));
             }
 
@@ -110,8 +100,8 @@ namespace Alabo.Helpers
     ///     密码类型
     /// </summary>
     [ClassProperty(Name = "密码类型")]
-    public enum PasswordHashType
-    {
+    public enum PasswordHashType {
+
         /// <summary>
         ///     默认，等于PBKDF2
         /// </summary>

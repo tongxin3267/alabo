@@ -4,20 +4,19 @@ using Alabo.Web.ViewFeatures;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Alabo.UI.Design.AutoPreviews
-{
+namespace Alabo.UI.Design.AutoPreviews {
+
     /// <summary>
     ///     AutoPreviewMapping
     /// </summary>
-    public static class AutoPreviewMapping
-    {
+    public static class AutoPreviewMapping {
+
         /// <summary>
         ///     convert to auto preview of type name
         /// </summary>
         /// <param name="fullName"></param>
         /// <returns></returns>
-        public static AutoPreview Convert(string fullName)
-        {
+        public static AutoPreview Convert(string fullName) {
             var instance = fullName.GetInstanceByName();
             return Convert(instance);
         }
@@ -27,8 +26,7 @@ namespace Alabo.UI.Design.AutoPreviews
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static AutoPreview Convert(object model)
-        {
+        public static AutoPreview Convert(object model) {
             //cache class descrption
             var fullName = model.GetType().FullName;
             var classDescription = fullName.GetClassDescription();
@@ -37,8 +35,7 @@ namespace Alabo.UI.Design.AutoPreviews
             }
 
             var classPropertyAttribute = classDescription.ClassPropertyAttribute;
-            return new AutoPreview
-            {
+            return new AutoPreview {
                 Key = fullName,
                 Name = classPropertyAttribute.Name,
                 Icon = classPropertyAttribute.Icon,
@@ -50,12 +47,10 @@ namespace Alabo.UI.Design.AutoPreviews
         ///     builder property
         /// </summary>
         /// <param name="propertys"></param>
-        private static IList<KeyValue> GetKeyValues(PropertyDescription[] propertys, object model)
-        {
+        private static IList<KeyValue> GetKeyValues(PropertyDescription[] propertys, object model) {
             var result = new List<KeyValue>();
             var propertyInfos = model.GetType().GetProperties();
-            foreach (var propertyInfo in propertyInfos)
-            {
+            foreach (var propertyInfo in propertyInfos) {
                 //find property description
                 var propertyDesc = propertys.ToList().Find(p => p.Property.Name == propertyInfo.Name);
                 if (propertyDesc == null
@@ -77,8 +72,7 @@ namespace Alabo.UI.Design.AutoPreviews
                 }
 
                 //builder
-                var field = new KeyValue
-                {
+                var field = new KeyValue {
                     Name = propertyDesc.DisplayAttribute?.Name,
                     Icon = propertyDesc.FieldAttribute.Icon,
                     Key = propertyDesc.DisplayAttribute?.Name,

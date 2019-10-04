@@ -3,13 +3,13 @@ using Alabo.Domains.Query;
 using System;
 using System.Linq.Expressions;
 
-namespace Alabo.Domains.Services.Single
-{
+namespace Alabo.Domains.Services.Single {
+
     /// <summary>
     ///     获取指定当个实体
     /// </summary>
-    public interface ISingle<TEntity, TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+    public interface ISingle<TEntity, TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         /// <summary>
         ///     查找实体
         /// </summary>

@@ -11,13 +11,13 @@ using System.Linq;
 using System.Reflection;
 using ZKCloud.Open.DynamicExpression;
 
-namespace Alabo.Web.ViewFeatures
-{
+namespace Alabo.Web.ViewFeatures {
+
     /// <summary>
     ///     获取类的属性以及描述信息
     /// </summary>
-    public class ClassDescription
-    {
+    public class ClassDescription {
+
         /// <summary>
         ///     The cache
         /// </summary>
@@ -27,8 +27,7 @@ namespace Alabo.Web.ViewFeatures
         /// <summary>
         ///     Initializes a new instance of the <see cref="ClassDescription" /> class.
         /// </summary>
-        public ClassDescription()
-        {
+        public ClassDescription() {
             ClassPropertyAttribute = new ClassPropertyAttribute();
         }
 
@@ -36,13 +35,11 @@ namespace Alabo.Web.ViewFeatures
         ///     Initializes a new instance of the <see cref="ClassDescription" /> class.
         /// </summary>
         /// <param name="configType">The configuration 类型.</param>
-        public ClassDescription(Type configType)
-        {
+        public ClassDescription(Type configType) {
             Init(configType);
         }
 
-        public ClassDescription(string fullName)
-        {
+        public ClassDescription(string fullName) {
             var configType = fullName.GetTypeByFullName();
             Init(configType);
         }
@@ -68,10 +65,8 @@ namespace Alabo.Web.ViewFeatures
         /// </summary>
         public IEnumerable<ViewLink> ViewLinks { get; set; }
 
-        private Type GetGenericType(Type configType)
-        {
-            if (configType.IsGenericType)
-            {
+        private Type GetGenericType(Type configType) {
+            if (configType.IsGenericType) {
                 // 如果是泛型类型获取基类类型
                 var result = configType.GenericTypeArguments[0];
                 return result;
@@ -80,21 +75,18 @@ namespace Alabo.Web.ViewFeatures
             return configType;
         }
 
-        private void Init(Type configType)
-        {
+        private void Init(Type configType) {
             var baseType = GetGenericType(configType);
             var objectCache = Ioc.Resolve<IObjectCache>();
             var cacheKey = $"classDescription_{baseType.FullName.Replace(".", "_")}";
-            if (!objectCache.TryGet(cacheKey, out CacheClassDescription cacheDescription))
-            {
+            if (!objectCache.TryGet(cacheKey, out CacheClassDescription cacheDescription)) {
                 cacheDescription = Create(baseType);
                 if (cacheDescription != null) {
                     objectCache.Set(cacheKey, cacheDescription);
                 }
             }
 
-            if (cacheDescription != null)
-            {
+            if (cacheDescription != null) {
                 ClassType = baseType;
                 ClassPropertyAttribute = cacheDescription.ClassPropertyAttribute;
                 Propertys = cacheDescription.Propertys;
@@ -106,20 +98,17 @@ namespace Alabo.Web.ViewFeatures
         ///     Creates the specified configuration 类型.
         /// </summary>
         /// <param name="configType">The configuration 类型.</param>
-        public CacheClassDescription Create(Type configType)
-        {
+        public CacheClassDescription Create(Type configType) {
             var objectCache = Ioc.Resolve<IObjectCache>();
             var cacheKey = $"classDescription_{configType.FullName.Replace(".", "_")}";
 
-            if (!objectCache.TryGet(cacheKey, out CacheClassDescription cacheDescription))
-            {
+            if (!objectCache.TryGet(cacheKey, out CacheClassDescription cacheDescription)) {
                 var classType = configType ?? throw new ArgumentNullException(nameof(configType));
 
                 var classPropertyAttribute =
                     classType.GetTypeInfo().GetAttributes<ClassPropertyAttribute>().FirstOrDefault();
                 //如果类特性为空，配置特性
-                if (classPropertyAttribute == null)
-                {
+                if (classPropertyAttribute == null) {
                     var typeName = classType.Name;
                     classPropertyAttribute = new ClassPropertyAttribute();
                     classPropertyAttribute.Name = typeName;
@@ -134,16 +123,14 @@ namespace Alabo.Web.ViewFeatures
                 var links = new List<ViewLink>();
 
                 var linkMethod = configType.GetMethod("ViewLinks");
-                if (linkMethod != null)
-                {
+                if (linkMethod != null) {
                     // 使用动态方法获取链接地址
                     var config = Activator.CreateInstance(configType);
                     var target = new Interpreter().SetVariable("baseViewModel", config);
                     links = (List<ViewLink>)target.Eval("baseViewModel.ViewLinks()");
                 }
 
-                cacheDescription = new CacheClassDescription
-                {
+                cacheDescription = new CacheClassDescription {
                     ClassType = classType,
                     ClassPropertyAttribute = classPropertyAttribute,
                     Propertys = propertys,
@@ -160,8 +147,8 @@ namespace Alabo.Web.ViewFeatures
     /// <summary>
     ///     Class CacheClassDescription.
     /// </summary>
-    public class CacheClassDescription
-    {
+    public class CacheClassDescription {
+
         /// <summary>
         ///     类型
         /// </summary>

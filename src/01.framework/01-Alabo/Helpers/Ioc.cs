@@ -6,13 +6,13 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Alabo.Helpers
-{
+namespace Alabo.Helpers {
+
     /// <summary>
     ///     容器
     /// </summary>
-    public static class Ioc
-    {
+    public static class Ioc {
+
         /// <summary>
         ///     默认容器
         /// </summary>
@@ -22,8 +22,7 @@ namespace Alabo.Helpers
         ///     创建容器
         /// </summary>
         /// <param name="configs">依赖配置</param>
-        public static IContainer CreateContainer(params IConfig[] configs)
-        {
+        public static IContainer CreateContainer(params IConfig[] configs) {
             var container = new Container();
             container.Register(null, builder => builder.EnableAop(), configs);
             return container;
@@ -34,8 +33,7 @@ namespace Alabo.Helpers
         /// </summary>
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="name">服务名称</param>
-        public static List<T> ResolveAll<T>(string name = null)
-        {
+        public static List<T> ResolveAll<T>(string name = null) {
             return DefaultContainer.CreateList<T>(name);
         }
 
@@ -45,8 +43,7 @@ namespace Alabo.Helpers
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="type">对象类型</param>
         /// <param name="name">服务名称</param>
-        public static List<T> ResolveAll<T>(Type type, string name = null)
-        {
+        public static List<T> ResolveAll<T>(Type type, string name = null) {
             return ((IEnumerable<T>)DefaultContainer.CreateList(type, name)).ToList();
         }
 
@@ -55,8 +52,7 @@ namespace Alabo.Helpers
         /// </summary>
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="name">服务名称</param>
-        public static T Resolve<T>(string name = null)
-        {
+        public static T Resolve<T>(string name = null) {
             var scope = GetScope(CurrentScope);
             if (scope != null) {
                 return scope.Resolve<T>();
@@ -71,8 +67,7 @@ namespace Alabo.Helpers
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="type">对象类型</param>
         /// <param name="name">服务名称</param>
-        public static T Resolve<T>(Type type, string name = null)
-        {
+        public static T Resolve<T>(Type type, string name = null) {
             return (T)DefaultContainer.Create(type, name);
         }
 
@@ -80,8 +75,7 @@ namespace Alabo.Helpers
         ///     创建实例
         /// </summary>
         /// <param name="type">创建实例需为接口</param>
-        public static object ResolveType(Type type)
-        {
+        public static object ResolveType(Type type) {
             return DefaultContainer.Create(type);
         }
 
@@ -89,8 +83,7 @@ namespace Alabo.Helpers
         ///     创建实例
         /// </summary>
         /// <param name="fullName">命名空间</param>
-        public static object Resolve(string fullName)
-        {
+        public static object Resolve(string fullName) {
             var type = fullName.GetTypeByName();
             if (type != null) {
                 return ResolveType(type);
@@ -102,8 +95,7 @@ namespace Alabo.Helpers
         /// <summary>
         ///     作用域开始
         /// </summary>
-        public static IScope BeginScope()
-        {
+        public static IScope BeginScope() {
             var scope = DefaultContainer.BeginScope();
 
             AddScope(scope.GetHashCode(), scope);
@@ -115,8 +107,7 @@ namespace Alabo.Helpers
         ///     注册依赖
         /// </summary>
         /// <param name="configs">依赖配置</param>
-        public static void Register(params IConfig[] configs)
-        {
+        public static void Register(params IConfig[] configs) {
             DefaultContainer.Register(null, builder => builder.EnableAop(), configs);
         }
 
@@ -125,16 +116,14 @@ namespace Alabo.Helpers
         /// </summary>
         /// <param name="services">服务集合</param>
         /// <param name="configs">依赖配置</param>
-        public static IServiceProvider Register(IServiceCollection services, params IConfig[] configs)
-        {
+        public static IServiceProvider Register(IServiceCollection services, params IConfig[] configs) {
             return DefaultContainer.Register(services, builder => builder.EnableAop(), configs);
         }
 
         /// <summary>
         ///     释放容器
         /// </summary>
-        public static void Dispose()
-        {
+        public static void Dispose() {
             DefaultContainer.Dispose();
         }
 
@@ -153,8 +142,7 @@ namespace Alabo.Helpers
         /// </summary>
         /// <param name="hashCode"></param>
         /// <param name="scope"></param>
-        public static void AddScope(int hashCode, IScope scope)
-        {
+        public static void AddScope(int hashCode, IScope scope) {
             if (!_scopeDictionaries.ContainsKey(hashCode)) {
                 _scopeDictionaries.TryAdd(hashCode, scope);
             }
@@ -165,8 +153,7 @@ namespace Alabo.Helpers
         /// </summary>
         /// <param name="hashCode"></param>
         /// <returns></returns>
-        private static IScope GetScope(int hashCode)
-        {
+        private static IScope GetScope(int hashCode) {
             if (_scopeDictionaries.ContainsKey(hashCode)) {
                 return _scopeDictionaries[hashCode];
             }
@@ -179,8 +166,7 @@ namespace Alabo.Helpers
         /// </summary>
         /// <param name="hashCode"></param>
         /// <returns></returns>
-        public static IScope RemoveScope(int hashCode)
-        {
+        public static IScope RemoveScope(int hashCode) {
             _scopeDictionaries.TryRemove(hashCode, out var scope);
             return scope;
         }

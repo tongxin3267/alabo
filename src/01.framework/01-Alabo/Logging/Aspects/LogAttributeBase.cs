@@ -5,18 +5,17 @@ using AspectCore.DynamicProxy;
 using AspectCore.DynamicProxy.Parameters;
 using System.Threading.Tasks;
 
-namespace Alabo.Logging.Aspects
-{
+namespace Alabo.Logging.Aspects {
+
     /// <summary>
     ///     日志操作
     /// </summary>
-    public abstract class LogAttributeBase : InterceptorBase
-    {
+    public abstract class LogAttributeBase : InterceptorBase {
+
         /// <summary>
         ///     执行
         /// </summary>
-        public override async Task Invoke(AspectContext context, AspectDelegate next)
-        {
+        public override async Task Invoke(AspectContext context, AspectDelegate next) {
             var methodName = GetMethodName(context);
             var log = Log.GetLog(methodName);
             if (!Enabled(log)) {
@@ -31,24 +30,21 @@ namespace Alabo.Logging.Aspects
         /// <summary>
         ///     获取方法名
         /// </summary>
-        private string GetMethodName(AspectContext context)
-        {
+        private string GetMethodName(AspectContext context) {
             return $"{context.ServiceMethod.DeclaringType.FullName}.{context.ServiceMethod.Name}";
         }
 
         /// <summary>
         ///     是否启用
         /// </summary>
-        protected virtual bool Enabled(ILog log)
-        {
+        protected virtual bool Enabled(ILog log) {
             return true;
         }
 
         /// <summary>
         ///     执行前
         /// </summary>
-        private void ExecuteBefore(ILog log, AspectContext context, string methodName)
-        {
+        private void ExecuteBefore(ILog log, AspectContext context, string methodName) {
             log.Caption($"{context.ServiceMethod.Name}方法执行前")
                 .Class(context.ServiceMethod.DeclaringType.FullName)
                 .Method(methodName);
@@ -67,8 +63,7 @@ namespace Alabo.Logging.Aspects
         /// <summary>
         ///     执行后
         /// </summary>
-        private void ExecuteAfter(ILog log, AspectContext context, string methodName)
-        {
+        private void ExecuteAfter(ILog log, AspectContext context, string methodName) {
             var parameter = context.GetReturnParameter();
             log.Caption($"{context.ServiceMethod.Name}方法执行后")
                 .Method(methodName)

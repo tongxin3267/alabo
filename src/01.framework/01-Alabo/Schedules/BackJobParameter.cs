@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace Alabo.Schedules
-{
-    public class BackJobParameter
-    {
+namespace Alabo.Schedules {
+
+    public class BackJobParameter {
+
         /// <summary>
         ///     当前用户Id
         /// </summary>

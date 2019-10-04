@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     充值方式
     /// </summary>
     [ClassProperty(Name = "充值方式")]
-    public enum RchargeStyle
-    {
+    public enum RchargeStyle {
+
         /// <summary>
         ///     线上充值
         /// </summary>

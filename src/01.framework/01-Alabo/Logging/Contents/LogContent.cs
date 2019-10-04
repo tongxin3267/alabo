@@ -2,18 +2,17 @@
 using Alabo.Logging.Abstractions;
 using System.Text;
 
-namespace Alabo.Logging.Contents
-{
+namespace Alabo.Logging.Contents {
+
     /// <summary>
     ///     日志内容
     /// </summary>
-    public class LogContent : ILogContent, ICaption
-    {
+    public class LogContent : ILogContent, ICaption {
+
         /// <summary>
         ///     初始化日志内容
         /// </summary>
-        public LogContent()
-        {
+        public LogContent() {
             Params = new StringBuilder();
             Content = new StringBuilder();
             Sql = new StringBuilder();

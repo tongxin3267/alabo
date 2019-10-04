@@ -6,13 +6,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Clauses
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Clauses {
+
     /// <summary>
     ///     Group By子句
     /// </summary>
-    public class GroupByClause : IGroupByClause
-    {
+    public class GroupByClause : IGroupByClause {
+
         /// <summary>
         ///     Sql方言
         /// </summary>
@@ -44,8 +44,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <param name="dialect">Sql方言</param>
         /// <param name="resolver">实体解析器</param>
         /// <param name="register">实体别名注册器</param>
-        public GroupByClause(IDialect dialect, IEntityResolver resolver, IEntityAliasRegister register)
-        {
+        public GroupByClause(IDialect dialect, IEntityResolver resolver, IEntityAliasRegister register) {
             _dialect = dialect;
             _resolver = resolver;
             _register = register;
@@ -57,8 +56,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// </summary>
         /// <param name="group">分组字段</param>
         /// <param name="having">分组条件</param>
-        public void GroupBy(string group, string having = null)
-        {
+        public void GroupBy(string group, string having = null) {
             if (string.IsNullOrWhiteSpace(group)) {
                 return;
             }
@@ -73,8 +71,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <typeparam name="TEntity">实体类型</typeparam>
         /// <param name="column">分组字段</param>
         /// <param name="having">分组条件</param>
-        public void GroupBy<TEntity>(Expression<Func<TEntity, object>> column, string having = null)
-        {
+        public void GroupBy<TEntity>(Expression<Func<TEntity, object>> column, string having = null) {
             if (column == null) {
                 return;
             }
@@ -87,8 +84,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         ///     添加到GroupBy子句
         /// </summary>
         /// <param name="sql">Sql语句</param>
-        public void AppendSql(string sql)
-        {
+        public void AppendSql(string sql) {
             if (string.IsNullOrWhiteSpace(sql)) {
                 return;
             }
@@ -99,8 +95,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <summary>
         ///     获取Sql
         /// </summary>
-        public string ToSql()
-        {
+        public string ToSql() {
             if (_group.Count == 0) {
                 return null;
             }

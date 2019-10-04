@@ -2,14 +2,14 @@
 
 using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.UI.Enum
-{
+namespace Alabo.UI.Enum {
+
     /// <summary>
     ///     背景颜色
     /// </summary>
     [ClassProperty(Name = "背景颜色")]
-    public enum BackgroudColor
-    {
+    public enum BackgroudColor {
+
         /// <summary>
         ///     The bg success
         /// </summary>

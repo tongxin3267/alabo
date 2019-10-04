@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Clauses
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Clauses {
+
     /// <summary>
     ///     排序子句
     /// </summary>
-    public class OrderByClause : IOrderByClause
-    {
+    public class OrderByClause : IOrderByClause {
+
         /// <summary>
         ///     Sql方言
         /// </summary>
@@ -38,8 +38,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <param name="dialect">Sql方言</param>
         /// <param name="resolver">实体解析器</param>
         /// <param name="register">实体别名注册器</param>
-        public OrderByClause(IDialect dialect, IEntityResolver resolver, IEntityAliasRegister register)
-        {
+        public OrderByClause(IDialect dialect, IEntityResolver resolver, IEntityAliasRegister register) {
             _items = new List<OrderByItem>();
             _dialect = dialect;
             _resolver = resolver;
@@ -50,8 +49,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         ///     排序
         /// </summary>
         /// <param name="order">排序列表</param>
-        public void OrderBy(string order)
-        {
+        public void OrderBy(string order) {
             if (string.IsNullOrWhiteSpace(order)) {
                 return;
             }
@@ -65,8 +63,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <typeparam name="TEntity">实体类型</typeparam>
         /// <param name="column">排序列</param>
         /// <param name="desc">是否倒排</param>
-        public void OrderBy<TEntity>(Expression<Func<TEntity, object>> column, bool desc = false)
-        {
+        public void OrderBy<TEntity>(Expression<Func<TEntity, object>> column, bool desc = false) {
             if (column == null) {
                 return;
             }
@@ -78,16 +75,14 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         ///     添加到OrderBy子句
         /// </summary>
         /// <param name="sql">Sql语句</param>
-        public void AppendSql(string sql)
-        {
+        public void AppendSql(string sql) {
             _items.Add(new OrderByItem(sql, raw: true));
         }
 
         /// <summary>
         ///     获取Sql
         /// </summary>
-        public string ToSql()
-        {
+        public string ToSql() {
             if (_items.Count == 0) {
                 return null;
             }

@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace Alabo.Logging.Abstractions
-{
+namespace Alabo.Logging.Abstractions {
+
     /// <summary>
     ///     日志提供程序
     /// </summary>
-    public interface ILogProvider
-    {
+    public interface ILogProvider {
+
         /// <summary>
         ///     日志名称
         /// </summary>

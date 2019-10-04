@@ -2,13 +2,13 @@
 using Alabo.Domains.Services;
 using Alabo.Framework.Core.Tenants.Domains.Dtos;
 
-namespace Alabo.Framework.Core.Tenants.Domains.Services
-{
+namespace Alabo.Framework.Core.Tenants.Domains.Services {
+
     /// <summary>
     ///     ITenantCreateService
     /// </summary>
-    public interface ITenantCreateService : IService
-    {
+    public interface ITenantCreateService : IService {
+
         /// <summary>
         ///     删除租户
         /// </summary>

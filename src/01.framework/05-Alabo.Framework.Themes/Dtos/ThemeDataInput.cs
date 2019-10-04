@@ -1,13 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Repositories.Mongo.Extension;
+﻿using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Validations;
 using MongoDB.Bson;
 using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Themes.Dtos
-{
-    public class ThemeDataInput
-    {
+namespace Alabo.Framework.Themes.Dtos {
+
+    public class ThemeDataInput {
+
         [Display(Name = "Id")]
         [JsonConverter(typeof(ObjectIdConverter))]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]

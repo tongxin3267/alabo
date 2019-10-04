@@ -2,10 +2,10 @@
 using Alabo.Domains.Services;
 using System;
 
-namespace Alabo.Framework.Core.Valids.Services
-{
-    public interface IValidService : IService
-    {
+namespace Alabo.Framework.Core.Valids.Services {
+
+    public interface IValidService : IService {
+
         /// <summary>
         ///     根据用户名，验证用户状态是否正常
         /// </summary>

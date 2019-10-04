@@ -4,14 +4,12 @@ using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 
-namespace Alabo.Domains.Repositories.SqlServer
-{
-    public sealed class SqlServerRepositoryContext
-    {
+namespace Alabo.Domains.Repositories.SqlServer {
+
+    public sealed class SqlServerRepositoryContext {
         private int _transactionCount;
 
-        public SqlServerRepositoryContext(string connectionString)
-        {
+        public SqlServerRepositoryContext(string connectionString) {
             DbContext = new SqlConnection(connectionString);
             Open();
         }
@@ -26,34 +24,28 @@ namespace Alabo.Domains.Repositories.SqlServer
 
         public DbConnection DbConnection => DbContext as DbConnection;
 
-        public void Open()
-        {
+        public void Open() {
             if (DbConnection != null) {
                 DbConnection.Open();
             }
         }
 
-        public IRepositoryTransaction OpenTransaction()
-        {
+        public IRepositoryTransaction OpenTransaction() {
             return new SqlServerRepositoryTransaction(this);
         }
 
-        public void Close()
-        {
-            if (DbContext != null && DbContext is IDisposable)
-            {
+        public void Close() {
+            if (DbContext != null && DbContext is IDisposable) {
                 (DbContext as IDisposable).Dispose();
                 DbContext = null;
             }
         }
 
-        public void Dispose()
-        {
+        public void Dispose() {
             Close();
         }
 
-        public void BeginTransaction()
-        {
+        public void BeginTransaction() {
             RaseExceptionIfConnectionIsNotInitialization();
             if (_transactionCount <= 0) {
                 DbTransaction = DbConnection.BeginTransaction();
@@ -62,8 +54,7 @@ namespace Alabo.Domains.Repositories.SqlServer
             _transactionCount++;
         }
 
-        public void BeginTransaction(IsolationLevel isolationLevel)
-        {
+        public void BeginTransaction(IsolationLevel isolationLevel) {
             RaseExceptionIfConnectionIsNotInitialization();
             if (_transactionCount <= 0) {
                 DbTransaction = DbConnection.BeginTransaction(isolationLevel);
@@ -72,8 +63,7 @@ namespace Alabo.Domains.Repositories.SqlServer
             _transactionCount++;
         }
 
-        public void CommitTransaction()
-        {
+        public void CommitTransaction() {
             RaseExceptionIfConnectionIsNotInitialization();
             if (_transactionCount > 0) {
                 _transactionCount--;
@@ -84,8 +74,7 @@ namespace Alabo.Domains.Repositories.SqlServer
             }
         }
 
-        public void RollbackTransaction()
-        {
+        public void RollbackTransaction() {
             RaseExceptionIfConnectionIsNotInitialization();
             if (_transactionCount > 0) {
                 _transactionCount--;
@@ -96,22 +85,17 @@ namespace Alabo.Domains.Repositories.SqlServer
             }
         }
 
-        public void DisposeTransaction()
-        {
+        public void DisposeTransaction() {
             RaseExceptionIfConnectionIsNotInitialization();
-            if (_transactionCount > 0)
-            {
+            if (_transactionCount > 0) {
                 _transactionCount--;
-            }
-            else
-            {
+            } else {
                 DbTransaction.Dispose();
                 DbTransaction = null;
             }
         }
 
-        private void RaseExceptionIfConnectionIsNotInitialization()
-        {
+        private void RaseExceptionIfConnectionIsNotInitialization() {
             if (DbContext == null) {
                 throw new System.Exception("sql connection is not initialization.");
             }

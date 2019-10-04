@@ -9,13 +9,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Clauses
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Clauses {
+
     /// <summary>
     ///     表连接子句
     /// </summary>
-    public class JoinClause : IJoinClause
-    {
+    public class JoinClause : IJoinClause {
+
         /// <summary>
         ///     Join关键字
         /// </summary>
@@ -57,8 +57,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <param name="dialect">方言</param>
         /// <param name="resolver">实体解析器</param>
         /// <param name="register">实体注册器</param>
-        public JoinClause(IDialect dialect, IEntityResolver resolver, IEntityAliasRegister register)
-        {
+        public JoinClause(IDialect dialect, IEntityResolver resolver, IEntityAliasRegister register) {
             _params = new List<JoinItem>();
             _dialect = dialect;
             _resolver = resolver;
@@ -70,8 +69,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// </summary>
         /// <param name="table">表名</param>
         /// <param name="alias">别名</param>
-        public void Join(string table, string alias = null)
-        {
+        public void Join(string table, string alias = null) {
             Join(JoinKey, table, alias);
         }
 
@@ -80,8 +78,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// </summary>
         /// <param name="alias">别名</param>
         /// <param name="schema">架构名</param>
-        public void Join<TEntity>(string alias = null, string schema = null) where TEntity : class
-        {
+        public void Join<TEntity>(string alias = null, string schema = null) where TEntity : class {
             Join<TEntity>(JoinKey, alias, schema);
         }
 
@@ -89,8 +86,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         ///     添加到内连接子句
         /// </summary>
         /// <param name="sql">Sql语句</param>
-        public void AppendJoin(string sql)
-        {
+        public void AppendJoin(string sql) {
             AppendJoin(JoinKey, sql);
         }
 
@@ -99,8 +95,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// </summary>
         /// <param name="table">表名</param>
         /// <param name="alias">别名</param>
-        public void LeftJoin(string table, string alias = null)
-        {
+        public void LeftJoin(string table, string alias = null) {
             Join(LeftJoinKey, table, alias);
         }
 
@@ -109,8 +104,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// </summary>
         /// <param name="alias">别名</param>
         /// <param name="schema">架构名</param>
-        public void LeftJoin<TEntity>(string alias = null, string schema = null) where TEntity : class
-        {
+        public void LeftJoin<TEntity>(string alias = null, string schema = null) where TEntity : class {
             Join<TEntity>(LeftJoinKey, alias, schema);
         }
 
@@ -118,8 +112,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         ///     添加到左外连接子句
         /// </summary>
         /// <param name="sql">Sql语句</param>
-        public void AppendLeftJoin(string sql)
-        {
+        public void AppendLeftJoin(string sql) {
             AppendJoin(LeftJoinKey, sql);
         }
 
@@ -128,8 +121,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// </summary>
         /// <param name="table">表名</param>
         /// <param name="alias">别名</param>
-        public void RightJoin(string table, string alias = null)
-        {
+        public void RightJoin(string table, string alias = null) {
             Join(RightJoinKey, table, alias);
         }
 
@@ -138,8 +130,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// </summary>
         /// <param name="alias">别名</param>
         /// <param name="schema">架构名</param>
-        public void RightJoin<TEntity>(string alias = null, string schema = null) where TEntity : class
-        {
+        public void RightJoin<TEntity>(string alias = null, string schema = null) where TEntity : class {
             Join<TEntity>(RightJoinKey, alias, schema);
         }
 
@@ -147,8 +138,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         ///     添加到右外连接子句
         /// </summary>
         /// <param name="sql">Sql语句</param>
-        public void AppendRightJoin(string sql)
-        {
+        public void AppendRightJoin(string sql) {
             AppendJoin(RightJoinKey, sql);
         }
 
@@ -158,8 +148,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <param name="left">左表列名</param>
         /// <param name="right">右表列名</param>
         /// <param name="operator">条件运算符</param>
-        public void On(string left, string right, Operator @operator = Operator.Equal)
-        {
+        public void On(string left, string right, Operator @operator = Operator.Equal) {
             _params.LastOrDefault()?.On(left, right, @operator);
         }
 
@@ -172,8 +161,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         public void On<TLeft, TRight>(Expression<Func<TLeft, object>> left, Expression<Func<TRight, object>> right,
             Operator @operator = Operator.Equal)
             where TLeft : class
-            where TRight : class
-        {
+            where TRight : class {
             On(GetColumn(left), GetColumn(right), @operator);
         }
 
@@ -182,8 +170,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// </summary>
         /// <param name="expression">条件表达式</param>
         public void On<TLeft, TRight>(Expression<Func<TLeft, TRight, bool>> expression)
-            where TLeft : class where TRight : class
-        {
+            where TLeft : class where TRight : class {
             if (expression == null) {
                 throw new ArgumentNullException(nameof(expression));
             }
@@ -195,8 +182,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <summary>
         ///     输出Sql
         /// </summary>
-        public string ToSql()
-        {
+        public string ToSql() {
             var result = new StringBuilder();
             _params.ForEach(item => { result.AppendLine($"{item.ToSql(_dialect)} "); });
             return result.ToString().Trim();
@@ -205,16 +191,14 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <summary>
         ///     表连接
         /// </summary>
-        private void Join(string joinType, string table, string alias)
-        {
+        private void Join(string joinType, string table, string alias) {
             _params.Add(new JoinItem(joinType, table, alias: alias));
         }
 
         /// <summary>
         ///     表连接
         /// </summary>
-        private void Join<TEntity>(string joinType, string alias, string schema)
-        {
+        private void Join<TEntity>(string joinType, string alias, string schema) {
             var entity = typeof(TEntity);
             var table = _resolver.GetTableAndSchema(entity);
             _params.Add(new JoinItem(joinType, table, schema, alias));
@@ -224,32 +208,28 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <summary>
         ///     添加到连接子句
         /// </summary>
-        private void AppendJoin(string joinType, string sql)
-        {
+        private void AppendJoin(string joinType, string sql) {
             _params.Add(new JoinItem(joinType, sql, raw: true));
         }
 
         /// <summary>
         ///     获取列
         /// </summary>
-        private string GetColumn<TEntity>(Expression<Func<TEntity, object>> column)
-        {
+        private string GetColumn<TEntity>(Expression<Func<TEntity, object>> column) {
             return GetColumn(typeof(TEntity), _resolver.GetColumn(column));
         }
 
         /// <summary>
         ///     获取列
         /// </summary>
-        private string GetColumn(Type entity, string column)
-        {
+        private string GetColumn(Type entity, string column) {
             return $"{_register.GetAlias(entity)}.{column}";
         }
 
         /// <summary>
         ///     设置连接条件组
         /// </summary>
-        private void On(List<Expression> group, Type typeLeft, Type typeRight)
-        {
+        private void On(List<Expression> group, Type typeLeft, Type typeRight) {
             var items = group.Select(expression => new OnItem(
                 GetColumn(expression, typeLeft, false), GetColumn(expression, typeRight, true),
                 Alabo.Extensions.Extensions.SafeValue(Lambda.GetOperator(expression))
@@ -260,8 +240,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <summary>
         ///     获取列
         /// </summary>
-        private string GetColumn(Expression expression, Type entity, bool right)
-        {
+        private string GetColumn(Expression expression, Type entity, bool right) {
             return GetColumn(entity, _resolver.GetColumn(expression, entity, right));
         }
     }

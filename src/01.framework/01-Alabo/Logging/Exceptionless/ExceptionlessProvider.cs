@@ -7,13 +7,13 @@ using Microsoft.Extensions.Logging;
 using System.Linq;
 using NLogs = NLog;
 
-namespace Alabo.Logging.Exceptionless
-{
+namespace Alabo.Logging.Exceptionless {
+
     /// <summary>
     ///     Exceptionless日志提供程序
     /// </summary>
-    public class ExceptionlessProvider : ILogProvider
-    {
+    public class ExceptionlessProvider : ILogProvider {
+
         /// <summary>
         ///     客户端
         /// </summary>
@@ -33,8 +33,7 @@ namespace Alabo.Logging.Exceptionless
         ///     初始化Exceptionless日志提供程序
         /// </summary>
         /// <param name="logName">日志名称</param>
-        public ExceptionlessProvider(string logName)
-        {
+        public ExceptionlessProvider(string logName) {
             _logger = NLogProvider.GetLogger(logName);
             _client = ExceptionlessClient.Default;
         }
@@ -59,8 +58,7 @@ namespace Alabo.Logging.Exceptionless
         /// </summary>
         /// <param name="level">日志等级</param>
         /// <param name="content">日志内容</param>
-        public void WriteLog(LogLevel level, ILogContent content)
-        {
+        public void WriteLog(LogLevel level, ILogContent content) {
             InitLine();
             var builder = CreateBuilder(level, content);
             SetUser(content);
@@ -73,16 +71,14 @@ namespace Alabo.Logging.Exceptionless
         /// <summary>
         ///     初始化行号
         /// </summary>
-        private void InitLine()
-        {
+        private void InitLine() {
             _line = 1;
         }
 
         /// <summary>
         ///     创建事件生成器
         /// </summary>
-        private EventBuilder CreateBuilder(LogLevel level, ILogContent content)
-        {
+        private EventBuilder CreateBuilder(LogLevel level, ILogContent content) {
             if (content.Exception != null) {
                 return _client.CreateException(content.Exception);
             }
@@ -94,8 +90,7 @@ namespace Alabo.Logging.Exceptionless
         ///     获取日志消息
         /// </summary>
         /// <param name="content">日志内容</param>
-        private string GetMessage(ILogContent content)
-        {
+        private string GetMessage(ILogContent content) {
             if (content is ICaption caption && string.IsNullOrWhiteSpace(caption.Caption) == false) {
                 return caption.Caption;
             }
@@ -110,10 +105,8 @@ namespace Alabo.Logging.Exceptionless
         /// <summary>
         ///     转换日志等级
         /// </summary>
-        private global::Exceptionless.Logging.LogLevel ConvertTo(LogLevel level)
-        {
-            switch (level)
-            {
+        private global::Exceptionless.Logging.LogLevel ConvertTo(LogLevel level) {
+            switch (level) {
                 case LogLevel.Trace:
                     return global::Exceptionless.Logging.LogLevel.Trace;
 
@@ -140,8 +133,7 @@ namespace Alabo.Logging.Exceptionless
         /// <summary>
         ///     设置用户信息
         /// </summary>
-        private void SetUser(ILogContent content)
-        {
+        private void SetUser(ILogContent content) {
             if (string.IsNullOrWhiteSpace(content.UserId)) {
                 return;
             }
@@ -152,8 +144,7 @@ namespace Alabo.Logging.Exceptionless
         /// <summary>
         ///     设置来源
         /// </summary>
-        private void SetSource(EventBuilder builder, ILogContent content)
-        {
+        private void SetSource(EventBuilder builder, ILogContent content) {
             if (string.IsNullOrWhiteSpace(content.Url)) {
                 return;
             }
@@ -164,22 +155,19 @@ namespace Alabo.Logging.Exceptionless
         /// <summary>
         ///     设置跟踪号
         /// </summary>
-        private void SetReferenceId(EventBuilder builder, ILogContent content)
-        {
+        private void SetReferenceId(EventBuilder builder, ILogContent content) {
             builder.SetReferenceId(content.TraceId);
         }
 
         /// <summary>
         ///     添加属性集合
         /// </summary>
-        private void AddProperties(EventBuilder builder, ILogConvert content)
-        {
+        private void AddProperties(EventBuilder builder, ILogConvert content) {
             if (content == null) {
                 return;
             }
 
-            foreach (var parameter in content.To().OrderBy(t => t.SortId))
-            {
+            foreach (var parameter in content.To().OrderBy(t => t.SortId)) {
                 if (string.IsNullOrWhiteSpace(parameter.Value.SafeString())) {
                     continue;
                 }
@@ -191,8 +179,7 @@ namespace Alabo.Logging.Exceptionless
         /// <summary>
         ///     获取行号
         /// </summary>
-        private string GetLine()
-        {
+        private string GetLine() {
             return _line++.ToString().PadLeft(2, '0');
         }
     }

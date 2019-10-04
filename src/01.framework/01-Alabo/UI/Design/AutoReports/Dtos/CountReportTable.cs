@@ -1,10 +1,10 @@
-﻿namespace Alabo.UI.Design.AutoReports.Dtos
-{
+﻿namespace Alabo.UI.Design.AutoReports.Dtos {
+
     /// <summary>
     ///     CountReportTable
     /// </summary>
-    public class CountReportTable
-    {
+    public class CountReportTable {
+
         /// <summary>
         ///     表格名称
         /// </summary>

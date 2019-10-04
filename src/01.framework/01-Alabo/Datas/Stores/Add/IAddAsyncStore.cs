@@ -3,10 +3,10 @@ using Alabo.Validations.Aspects;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Alabo.Datas.Stores.Add
-{
-    public interface IAddAsyncStore<in TEntity, in TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
+namespace Alabo.Datas.Stores.Add {
+
+    public interface IAddAsyncStore<in TEntity, in TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
         /// <summary>
         ///     添加实体，异步
         /// </summary>

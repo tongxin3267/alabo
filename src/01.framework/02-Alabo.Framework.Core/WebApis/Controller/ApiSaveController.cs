@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Framework.Core.WebApis.Controller
-{
+namespace Alabo.Framework.Core.WebApis.Controller {
+
     public abstract class ApiSaveController<TEntity, TKey> : ApiPageController<TEntity, TKey>
-        where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+        where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         #region 增加单条记录
 
         /// <summary>
@@ -17,8 +17,7 @@ namespace Alabo.Framework.Core.WebApis.Controller
         /// </summary>
         [HttpPost]
         [Display(Description = "修改或删除")]
-        public ApiResult<TEntity> QuerySave([FromBody] TEntity paramaer)
-        {
+        public ApiResult<TEntity> QuerySave([FromBody] TEntity paramaer) {
             if (BaseService == null) {
                 return ApiResult.Failure<TEntity>("请在控制器中定义BaseService");
             }
@@ -32,17 +31,14 @@ namespace Alabo.Framework.Core.WebApis.Controller
             }
 
             var find = BaseService.GetSingle(paramaer.Id);
-            if (find == null)
-            {
+            if (find == null) {
                 var result = BaseService.Add(paramaer);
                 if (result == false) {
                     return ApiResult.Failure<TEntity>("添加失败");
                 }
 
                 return ApiResult.Success(paramaer);
-            }
-            else
-            {
+            } else {
                 find = AutoMapping.SetValue<TEntity>(paramaer);
                 var result = BaseService.Update(find);
                 if (result == false) {
@@ -62,8 +58,7 @@ namespace Alabo.Framework.Core.WebApis.Controller
         /// </summary>
         [HttpPost]
         [Display(Description = "增加单条记录")]
-        public ApiResult<TEntity> QueryAdd([FromBody] TEntity paramaer)
-        {
+        public ApiResult<TEntity> QueryAdd([FromBody] TEntity paramaer) {
             if (BaseService == null) {
                 return ApiResult.Failure<TEntity>("请在控制器中定义BaseService");
             }
@@ -90,8 +85,7 @@ namespace Alabo.Framework.Core.WebApis.Controller
         [HttpPut]
         [Display(Description = "修改单条记录")]
         [HttpPost]
-        public ApiResult<TEntity> QueryUpdate([FromBody] TEntity paramaer)
-        {
+        public ApiResult<TEntity> QueryUpdate([FromBody] TEntity paramaer) {
             if (BaseService == null) {
                 return ApiResult.Failure<TEntity>("请在控制器中定义BaseService");
             }

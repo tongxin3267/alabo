@@ -7,14 +7,13 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Alabo.Datas.Stores.Add.EfCore
-{
+namespace Alabo.Datas.Stores.Add.EfCore {
+
     public abstract class NoTrackingAsyncEfCoreStore<TEntity, TKey> : EfCoreStoreBase<TEntity, TKey>,
         INoTrackingAsyncStore<TEntity, TKey>
-        where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
-        protected NoTrackingAsyncEfCoreStore(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
+        protected NoTrackingAsyncEfCoreStore(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
         /// <summary>
@@ -23,8 +22,7 @@ namespace Alabo.Datas.Stores.Add.EfCore
         /// <param name="id">标识</param>
         /// <param name="cancellationToken">取消令牌</param>
         public async Task<TEntity> FindByIdNoTrackingAsync(TKey id,
-            CancellationToken cancellationToken = default)
-        {
+            CancellationToken cancellationToken = default) {
             var entities = await FindByIdsNoTrackingAsync(id);
             if (entities == null || entities.Count == 0) {
                 return null;
@@ -37,8 +35,7 @@ namespace Alabo.Datas.Stores.Add.EfCore
         ///     查找实体列表,不跟踪
         /// </summary>
         /// <param name="ids">标识列表</param>
-        public async Task<List<TEntity>> FindByIdsNoTrackingAsync(params TKey[] ids)
-        {
+        public async Task<List<TEntity>> FindByIdsNoTrackingAsync(params TKey[] ids) {
             return await FindByIdsNoTrackingAsync((IEnumerable<TKey>)ids);
         }
 
@@ -48,8 +45,7 @@ namespace Alabo.Datas.Stores.Add.EfCore
         /// <param name="ids">标识列表</param>
         /// <param name="cancellationToken">取消令牌</param>
         public async Task<List<TEntity>> FindByIdsNoTrackingAsync(IEnumerable<TKey> ids,
-            CancellationToken cancellationToken = default)
-        {
+            CancellationToken cancellationToken = default) {
             if (ids == null) {
                 return null;
             }
@@ -61,8 +57,7 @@ namespace Alabo.Datas.Stores.Add.EfCore
         ///     查找实体列表,不跟踪
         /// </summary>
         /// <param name="ids">逗号分隔的标识列表，范例："1,2"</param>
-        public async Task<List<TEntity>> FindByIdsNoTrackingAsync(string ids)
-        {
+        public async Task<List<TEntity>> FindByIdsNoTrackingAsync(string ids) {
             var idList = Convert.ToList<TKey>(ids);
             return await FindByIdsNoTrackingAsync(idList);
         }

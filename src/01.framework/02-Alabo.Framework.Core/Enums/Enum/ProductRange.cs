@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     商品范围
     /// </summary>
     [ClassProperty(Name = "商品范围")]
-    public enum ProductRange
-    {
+    public enum ProductRange {
+
         /// <summary>
         ///     所有商品
         /// </summary>

@@ -4,12 +4,11 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Alabo.Cache.Memory
-{
-    public static class MemoryCacheExtensions
-    {
-        public static MemoryCacheContext OfMemory(this ICacheContext context)
-        {
+namespace Alabo.Cache.Memory {
+
+    public static class MemoryCacheExtensions {
+
+        public static MemoryCacheContext OfMemory(this ICacheContext context) {
             if (context == null) {
                 throw new ArgumentNullException(nameof(context));
             }
@@ -25,8 +24,7 @@ namespace Alabo.Cache.Memory
         ///     租户的缓冲Key
         /// </summary>
         /// <param name="cacheKey">Cache Key</param>
-        public static string TenantCacheKey(string cacheKey)
-        {
+        public static string TenantCacheKey(string cacheKey) {
             if (cacheKey.IsNullOrEmpty()) {
                 throw new ArgumentNullException(nameof(cacheKey));
             }
@@ -38,8 +36,7 @@ namespace Alabo.Cache.Memory
             }
 
             if (cacheKey.Length >= 250) {
-                using (var sha1 = SHA1.Create())
-                {
+                using (var sha1 = SHA1.Create()) {
                     var data = sha1.ComputeHash(Encoding.UTF8.GetBytes(cacheKey));
                     return Convert.ToBase64String(data, Base64FormattingOptions.None);
                 }
@@ -53,16 +50,14 @@ namespace Alabo.Cache.Memory
         /// </summary>
         /// <param name="cacheKey"></param>
         /// <returns></returns>
-        public static string PublicCacheKey(string cacheKey)
-        {
+        public static string PublicCacheKey(string cacheKey) {
             if (cacheKey.IsNullOrEmpty()) {
                 throw new ArgumentNullException(nameof(cacheKey));
             }
 
             cacheKey = $"Global_{cacheKey}";
             if (cacheKey.Length >= 250) {
-                using (var sha1 = SHA1.Create())
-                {
+                using (var sha1 = SHA1.Create()) {
                     var data = sha1.ComputeHash(Encoding.UTF8.GetBytes(cacheKey));
                     return Convert.ToBase64String(data, Base64FormattingOptions.None);
                 }

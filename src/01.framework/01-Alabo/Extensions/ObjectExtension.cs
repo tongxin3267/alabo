@@ -13,16 +13,15 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Alabo.Extensions
-{
-    public static class ObjectExtension
-    {
+namespace Alabo.Extensions {
+
+    public static class ObjectExtension {
+
         /// <summary>
         ///     将字符串生成固定的ObjectId
         /// </summary>
         /// <param name="value"></param>
-        public static ObjectId ConvertToObjectId(this string value)
-        {
+        public static ObjectId ConvertToObjectId(this string value) {
             value = value.Trim().ToLower();
 
             var data = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(value));
@@ -38,8 +37,7 @@ namespace Alabo.Extensions
             return objectId;
         }
 
-        public static T Cast<T>(this object obj, T t)
-        {
+        public static T Cast<T>(this object obj, T t) {
             return (T)obj;
         }
 
@@ -49,8 +47,7 @@ namespace Alabo.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
         /// <param name="t"></param>
-        public static List<T> ConvertToList<T>(this object obj, T t)
-        {
+        public static List<T> ConvertToList<T>(this object obj, T t) {
             var list = new List<T>();
             return list ?? default;
         }
@@ -59,8 +56,7 @@ namespace Alabo.Extensions
         ///     避免与mongdb tojson重复命名
         /// </summary>
         /// <param name="obj"></param>
-        public static string ToJsons(this object obj)
-        {
+        public static string ToJsons(this object obj) {
             return ToJson(obj);
         }
 
@@ -71,12 +67,9 @@ namespace Alabo.Extensions
         /// </summary>
         /// <typeparam name="obj"></typeparam>
         /// <param name="obj"></param>
-        public static string ToJson(this object obj)
-        {
-            try
-            {
-                var timeFormat = new IsoDateTimeConverter
-                {
+        public static string ToJson(this object obj) {
+            try {
+                var timeFormat = new IsoDateTimeConverter {
                     DateTimeFormat = "yyyy-MM-dd HH:mm:ss"
                 };
                 if (obj == null) {
@@ -84,9 +77,7 @@ namespace Alabo.Extensions
                 }
 
                 return JsonConvert.SerializeObject(obj, Formatting.Indented, timeFormat);
-            }
-            catch
-            {
+            } catch {
                 return JsonConvert.SerializeObject(obj);
             }
         }
@@ -96,27 +87,21 @@ namespace Alabo.Extensions
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static string ToJsoCamelCase(this object obj)
-        {
-            try
-            {
-                var timeFormat = new IsoDateTimeConverter
-                {
+        public static string ToJsoCamelCase(this object obj) {
+            try {
+                var timeFormat = new IsoDateTimeConverter {
                     DateTimeFormat = "yyyy-MM-dd HH:mm:ss"
                 };
                 if (obj == null) {
                     obj = string.Empty;
                 }
 
-                var serializerSettings = new JsonSerializerSettings
-                {
+                var serializerSettings = new JsonSerializerSettings {
                     // 设置为驼峰命名
                     ContractResolver = new CamelCasePropertyNamesContractResolver()
                 };
                 return JsonConvert.SerializeObject(obj, Formatting.Indented, serializerSettings);
-            }
-            catch
-            {
+            } catch {
                 return JsonConvert.SerializeObject(obj);
             }
         }
@@ -128,21 +113,16 @@ namespace Alabo.Extensions
         /// </summary>
         /// <param name="obj">The object.</param>
         /// <param name="type">The type.</param>
-        public static string ToJson(this object obj, Type type)
-        {
-            try
-            {
-                var options = new JsonSerializerSettings
-                {
+        public static string ToJson(this object obj, Type type) {
+            try {
+                var options = new JsonSerializerSettings {
                     Formatting = Formatting.Indented,
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                 };
 
                 var value = JsonConvert.SerializeObject(obj, type, options);
                 return value;
-            }
-            catch
-            {
+            } catch {
                 return JsonConvert.SerializeObject(obj);
             }
         }
@@ -152,8 +132,7 @@ namespace Alabo.Extensions
         /// </summary>
         /// <param name="httpContext">The form collection.</param>
         /// <param name="type">The 类型.</param>
-        public static string ToJson(HttpContext httpContext, Type type)
-        {
+        public static string ToJson(HttpContext httpContext, Type type) {
             var obj = AutoMapping.SetValue(httpContext, type);
             return obj.ToJson();
         }
@@ -164,8 +143,7 @@ namespace Alabo.Extensions
         ///     将表单Type转成指定的Json数据，先实例化对象
         /// </summary>
         /// <param name="type">The 类型.</param>
-        public static string ToJson(this Type type)
-        {
+        public static string ToJson(this Type type) {
             var instance = Activator.CreateInstance(type);
             return instance?.ToJson();
         }
@@ -175,8 +153,7 @@ namespace Alabo.Extensions
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
-        public static T ToObject<T>(this object obj) where T : new()
-        {
+        public static T ToObject<T>(this object obj) where T : new() {
             return DeserializeJson<T>(obj);
         }
 
@@ -185,8 +162,7 @@ namespace Alabo.Extensions
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="fullName"></param>
-        public static object ToObject(this object obj, string fullName)
-        {
+        public static object ToObject(this object obj, string fullName) {
             var type = fullName.GetTypeByFullName();
             return ToObject(obj, type);
         }
@@ -196,8 +172,7 @@ namespace Alabo.Extensions
         /// </summary>
         /// <param name="obj"></param>
         /// <paramref name="type" />
-        public static object ToObject(this object obj, Type type)
-        {
+        public static object ToObject(this object obj, Type type) {
             if (obj.IsNullOrEmpty()) {
                 return null;
             }
@@ -216,8 +191,7 @@ namespace Alabo.Extensions
         /// <param name="obj"></param>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static object ToObjectIgnoreNull(this object obj, Type type)
-        {
+        public static object ToObjectIgnoreNull(this object obj, Type type) {
             if (obj.IsNullOrEmpty()) {
                 return null;
             }
@@ -226,8 +200,7 @@ namespace Alabo.Extensions
                 return null;
             }
 
-            var jsonSerializerSettings = new JsonSerializerSettings
-            {
+            var jsonSerializerSettings = new JsonSerializerSettings {
                 NullValueHandling = NullValueHandling.Ignore
             };
 
@@ -240,14 +213,12 @@ namespace Alabo.Extensions
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
-        public static T DeserializeJson<T>(this object obj) where T : new()
-        {
+        public static T DeserializeJson<T>(this object obj) where T : new() {
             if (obj == null) {
                 obj = string.Empty;
             }
 
-            var settings = new JsonSerializerSettings
-            {
+            var settings = new JsonSerializerSettings {
                 Formatting = Formatting.Indented
             };
             settings.Converters.Add(new ObjectIdConverter());
@@ -260,8 +231,7 @@ namespace Alabo.Extensions
             return result;
         }
 
-        public static object DeserializeJson<T>(this string jsonString, T defaultValue)
-        {
+        public static object DeserializeJson<T>(this string jsonString, T defaultValue) {
             if (jsonString == null) {
                 throw new ArgumentNullException(nameof(jsonString));
             }
@@ -270,8 +240,7 @@ namespace Alabo.Extensions
             return result;
         }
 
-        public static T ToClass<T>(this object obj)
-        {
+        public static T ToClass<T>(this object obj) {
             if (obj != null) {
                 return (T)obj;
             }
@@ -282,8 +251,7 @@ namespace Alabo.Extensions
         /// <summary>
         ///     把object转换为string，失败时返回default_value
         /// </summary>
-        public static string ConvertToString(this object obj, string defaultValue = "")
-        {
+        public static string ConvertToString(this object obj, string defaultValue = "") {
             if (obj == null) {
                 return defaultValue;
             }
@@ -294,8 +262,7 @@ namespace Alabo.Extensions
         /// <summary>
         ///     把object转换为int，失败时返回default_value
         /// </summary>
-        public static int ConvertToInt(this object obj, int defaultValue = -1)
-        {
+        public static int ConvertToInt(this object obj, int defaultValue = -1) {
             if (obj == null) {
                 return defaultValue;
             }
@@ -314,8 +281,7 @@ namespace Alabo.Extensions
         /// <summary>
         ///     把object转换为long，失败时返回default_value
         /// </summary>
-        public static long ConvertToLong(this object obj, long defaultValue = -1)
-        {
+        public static long ConvertToLong(this object obj, long defaultValue = -1) {
             if (obj == null) {
                 return defaultValue;
             }
@@ -334,8 +300,7 @@ namespace Alabo.Extensions
         /// <summary>
         ///     把object转换为decimal，失败时返回default_value
         /// </summary>
-        public static decimal ConvertToDecimal(this object obj, decimal defaultValue = -1M)
-        {
+        public static decimal ConvertToDecimal(this object obj, decimal defaultValue = -1M) {
             if (obj == null) {
                 return defaultValue;
             }
@@ -354,8 +319,7 @@ namespace Alabo.Extensions
         /// <summary>
         ///     把object转换为double，失败时返回default_value
         /// </summary>
-        public static double ConvertToDouble(this object obj, double defaultValue = -1)
-        {
+        public static double ConvertToDouble(this object obj, double defaultValue = -1) {
             if (obj == null) {
                 return defaultValue;
             }
@@ -374,8 +338,7 @@ namespace Alabo.Extensions
         /// <summary>
         ///     把object转换为DateTime，失败时返回default_value
         /// </summary>
-        public static DateTime ConvertToDateTime(this object obj, DateTime defaultValue)
-        {
+        public static DateTime ConvertToDateTime(this object obj, DateTime defaultValue) {
             if (obj == null) {
                 return defaultValue;
             }
@@ -394,8 +357,7 @@ namespace Alabo.Extensions
         /// <summary>
         ///     把object转换为DateTime，失败时返回1900年1月1日
         /// </summary>
-        public static DateTime ConvertToDateTime(this object obj)
-        {
+        public static DateTime ConvertToDateTime(this object obj) {
             return obj.ConvertToDateTime(new DateTime(1900, 1, 1));
         }
 
@@ -404,8 +366,7 @@ namespace Alabo.Extensions
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static DateTime ConvertToDateTimeOfTimeStamp(this object obj)
-        {
+        public static DateTime ConvertToDateTimeOfTimeStamp(this object obj) {
             var startTime = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1)); // 当地时区
             var value = obj.ConvertToLong();
             if (value > 0) {
@@ -421,8 +382,7 @@ namespace Alabo.Extensions
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="defaultValue"></param>
-        public static DateTime ConvertToUtcDateTime(this object obj, DateTime defaultValue)
-        {
+        public static DateTime ConvertToUtcDateTime(this object obj, DateTime defaultValue) {
             return obj.ConvertToUtcDateTime() ?? defaultValue;
         }
 
@@ -431,8 +391,7 @@ namespace Alabo.Extensions
         ///     默认判断传入的来源时间是本地时间
         /// </summary>
         /// <param name="obj"></param>
-        public static DateTime? ConvertToUtcDateTime(this object obj)
-        {
+        public static DateTime? ConvertToUtcDateTime(this object obj) {
             return obj.ConvertToUtcDateTime(DateTimeKind.Local);
         }
 
@@ -443,8 +402,7 @@ namespace Alabo.Extensions
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="sourceKind"></param>
-        public static DateTime? ConvertToUtcDateTime(this object obj, DateTimeKind sourceKind)
-        {
+        public static DateTime? ConvertToUtcDateTime(this object obj, DateTimeKind sourceKind) {
             DateTime result;
             if (obj == null) {
                 return null;
@@ -469,8 +427,7 @@ namespace Alabo.Extensions
         /// <summary>
         ///     把object转换为Guid，失败时返回Guid.Empty
         /// </summary>
-        public static Guid ConvertToGuid(this object obj)
-        {
+        public static Guid ConvertToGuid(this object obj) {
             if (obj == null) {
                 return Guid.Empty;
             }
@@ -489,8 +446,7 @@ namespace Alabo.Extensions
         /// <summary>
         ///     把object转换为bool，失败时返回default_value
         /// </summary>
-        public static bool ConvertToBool(this object obj, bool defaultValue = false)
-        {
+        public static bool ConvertToBool(this object obj, bool defaultValue = false) {
             if (obj.IsNullOrEmpty()) {
                 return false;
             }
@@ -506,8 +462,7 @@ namespace Alabo.Extensions
         /// <summary>
         ///     把object转换为bool?，失败时返回null
         /// </summary>
-        public static bool? ConvertToNullableBool(this object obj)
-        {
+        public static bool? ConvertToNullableBool(this object obj) {
             if (obj == null) {
                 return null;
             }
@@ -539,8 +494,7 @@ namespace Alabo.Extensions
         /// <summary>
         ///     把object换为int列表（如object是字符串，则按逗号分割并转换）
         /// </summary>
-        public static List<int> ConvertToIntList(this object data)
-        {
+        public static List<int> ConvertToIntList(this object data) {
             //如果字符串为null则返回空列表
             var result = new List<int>();
             if (data == null) {
@@ -569,8 +523,7 @@ namespace Alabo.Extensions
         /// <summary>
         ///     把object换为uint列表（如object是字符串，则按逗号分割并转换）
         /// </summary>
-        public static List<uint> ConvertToUIntList(this object data)
-        {
+        public static List<uint> ConvertToUIntList(this object data) {
             //如果字符串为null则返回空列表
             var result = new List<uint>();
             if (data == null) {
@@ -602,8 +555,7 @@ namespace Alabo.Extensions
         /// <param name="data">要转换的对象</param>
         /// <param name="kind">url的类型</param>
         /// <param name="allowedScheme"></param>
-        public static Uri ConvertToUri(this object data, UriKind kind, params string[] allowedScheme)
-        {
+        public static Uri ConvertToUri(this object data, UriKind kind, params string[] allowedScheme) {
             if (data == null) {
                 return null;
             }
@@ -633,8 +585,7 @@ namespace Alabo.Extensions
         /// <typeparam name="T">要复制到的类型</typeparam>
         /// <param name="self">要复制的对象</param>
         /// <returns>复制后的对象</returns>
-        public static T CopyObject<T>(this T self) where T : class
-        {
+        public static T CopyObject<T>(this T self) where T : class {
             if (self == null) {
                 return null;
             }
@@ -657,20 +608,15 @@ namespace Alabo.Extensions
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="source">被复制的对象</param>
-        public static void CopyPropertyValuesFrom(this object obj, object source)
-        {
-            if (obj is IEnumerable)
-            {
+        public static void CopyPropertyValuesFrom(this object obj, object source) {
+            if (obj is IEnumerable) {
                 var destEnumerator = (obj as IEnumerable).GetEnumerator();
                 var srcEnumerator = (obj as IEnumerable).GetEnumerator();
                 while (destEnumerator.MoveNext() && srcEnumerator.MoveNext()) {
                     destEnumerator.Current.CopyPropertyValuesFrom(srcEnumerator.Current);
                 }
-            }
-            else
-            {
-                foreach (var propertyInfo in source.GetType().GetProperties())
-                {
+            } else {
+                foreach (var propertyInfo in source.GetType().GetProperties()) {
                     var destPropertyInfo = obj.GetType().GetProperty(propertyInfo.Name);
                     if (destPropertyInfo == null) {
                         continue;
@@ -687,8 +633,7 @@ namespace Alabo.Extensions
         ///     把object转换到Nullable&lt;DateTime&gt;
         /// </summary>
         /// <param name="obj"></param>
-        public static DateTime? ConvertToNullableDateTime(this object obj)
-        {
+        public static DateTime? ConvertToNullableDateTime(this object obj) {
             if (obj == null) {
                 return null;
             }
@@ -704,8 +649,7 @@ namespace Alabo.Extensions
             return result;
         }
 
-        public static bool CheckJsonIsEmpty(this string str)
-        {
+        public static bool CheckJsonIsEmpty(this string str) {
             if (string.IsNullOrEmpty(str) || str == "[]" || str == "{}") {
                 return true;
             }
@@ -717,14 +661,10 @@ namespace Alabo.Extensions
         ///     判断是否能反序列化
         /// </summary>
         /// <param name="str"></param>
-        public static bool IsJsonDeserialize<T>(this string str)
-        {
-            try
-            {
+        public static bool IsJsonDeserialize<T>(this string str) {
+            try {
                 JsonConvert.DeserializeObject<T>(str);
-            }
-            catch (Exception)
-            {
+            } catch (Exception) {
                 return true;
             }
 
@@ -737,8 +677,7 @@ namespace Alabo.Extensions
         /// <param name="charStrand">字符串</param>
         /// <param name="label">截取的标签 标签必须是 XXX="xxxx"</param>
         /// <returns>如果字符串不存在则放回空 存在则返回存在的值</returns>
-        public static string Substring(this string charStrand, string label)
-        {
+        public static string Substring(this string charStrand, string label) {
             var index = charStrand.IndexOf(label + "=\"", StringComparison.OrdinalIgnoreCase);
             if (index < 1) {
                 return charStrand;
@@ -749,8 +688,7 @@ namespace Alabo.Extensions
             return charStrand.Substring(0, index);
         }
 
-        public static string Replaces(this string str, string strRep, string rep)
-        {
+        public static string Replaces(this string str, string strRep, string rep) {
             var index = str.IndexOf(strRep, StringComparison.OrdinalIgnoreCase);
             if (index < 1) {
                 return str;
@@ -761,8 +699,7 @@ namespace Alabo.Extensions
             return string.Format("{0}{1}{2}", strStart, rep, strStop);
         }
 
-        public static int GetCount(this string str, string strCount)
-        {
+        public static int GetCount(this string str, string strCount) {
             var result = 0;
             if (string.IsNullOrEmpty(str)) {
                 return result;
@@ -774,8 +711,7 @@ namespace Alabo.Extensions
             }
 
             str = str.Substring(index + strCount.Length);
-            while (index > 0)
-            {
+            while (index > 0) {
                 index = str.IndexOf(strCount, StringComparison.OrdinalIgnoreCase);
                 str = str.Substring(index + strCount.Length);
                 result++;
@@ -790,8 +726,7 @@ namespace Alabo.Extensions
         /// <param name="str"></param>
         /// <param name="newChild"></param>
         /// <param name="refChild"></param>
-        public static string InsertAfter(this string str, string newChild, string refChild)
-        {
+        public static string InsertAfter(this string str, string newChild, string refChild) {
             var index = str.IndexOf(refChild);
             if (index < 0) {
                 return str;
@@ -808,8 +743,7 @@ namespace Alabo.Extensions
         /// <param name="str"></param>
         /// <param name="newChild"></param>
         /// <param name="refChild"></param>
-        public static string InsertBefore(this string str, string newChild, string refChild)
-        {
+        public static string InsertBefore(this string str, string newChild, string refChild) {
             var index = str.IndexOf(refChild);
             if (index < 0) {
                 return str;
@@ -820,8 +754,7 @@ namespace Alabo.Extensions
             return $"{strart}{newChild}{stop}";
         }
 
-        public static string RemoveIndexOf(this string str, string refChild)
-        {
+        public static string RemoveIndexOf(this string str, string refChild) {
             var index = str.IndexOf(refChild);
             if (index < 0) {
                 return str;
@@ -839,8 +772,7 @@ namespace Alabo.Extensions
         /// <param name="cssKey">要操作的css 不加 .</param>
         /// <param name="cssContexts">css的实际内容 如: width:100px;height:100px;</param>
         /// <returns>操作后的css本身</returns>
-        public static string AddCss(this string cssContext, string cssKey, string cssContexts)
-        {
+        public static string AddCss(this string cssContext, string cssKey, string cssContexts) {
             var sb = new StringBuilder();
             sb.Append(cssContext.RemoveCssContext(cssKey));
             sb.AppendFormat("\r\n.{0}", cssKey);
@@ -856,8 +788,7 @@ namespace Alabo.Extensions
         /// </summary>
         /// <param name="cssContext">css内容</param>
         /// <param name="cssKey">需要移除的css值  不加. </param>
-        public static string RemoveCssContext(this string cssContext, string cssKey)
-        {
+        public static string RemoveCssContext(this string cssContext, string cssKey) {
             var index = cssContext.IndexOf($".{cssKey}");
             index = index < 0 ? 0 : index;
             var stop = cssContext.IndexOf("}", index);
@@ -865,8 +796,7 @@ namespace Alabo.Extensions
             return $"{cssContext.Substring(0, index)}{cssContext.Substring(stop)}";
         }
 
-        public static string LastChar(this string str, string cha = ".")
-        {
+        public static string LastChar(this string str, string cha = ".") {
             return str.Substring(str.LastIndexOf(cha) + 1);
         }
     }

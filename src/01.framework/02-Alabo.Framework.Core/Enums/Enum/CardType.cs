@@ -1,11 +1,11 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     [ClassProperty(Name = "身份卡类型")]
-    public enum CardType
-    {
+    public enum CardType {
+
         /// <summary>
         ///     身份证
         /// </summary>

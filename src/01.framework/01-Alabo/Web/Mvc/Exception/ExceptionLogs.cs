@@ -3,12 +3,11 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace Alabo.Web.Mvc.Exception
-{
-    public static class ExceptionLogs
-    {
-        public static void Write(System.Exception exception, string path, string fullPath = "")
-        {
+namespace Alabo.Web.Mvc.Exception {
+
+    public static class ExceptionLogs {
+
+        public static void Write(System.Exception exception, string path, string fullPath = "") {
             var rootPath = RuntimeContext.Current.Path.RootPath + "/Logs";
             if (!Directory.Exists(rootPath)) {
                 Directory.CreateDirectory(rootPath);
@@ -36,10 +35,8 @@ namespace Alabo.Web.Mvc.Exception
             stringBuilder.AppendLine();
             stringBuilder.AppendLine("intro:");
             stringBuilder.AppendLine(exception.StackTrace);
-            using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
-            {
-                using (var sw = new BinaryWriter(fs))
-                {
+            using (var fs = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.ReadWrite)) {
+                using (var sw = new BinaryWriter(fs)) {
                     sw.Write(stringBuilder.ToString());
                 }
             }

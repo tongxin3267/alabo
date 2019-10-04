@@ -2,13 +2,13 @@
 using System.Threading.Tasks;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Tables.Domain.Services
-{
+namespace Alabo.Tables.Domain.Services {
+
     /// <summary>
     ///     授权服务
     /// </summary>
-    public interface IOpenService : IService
-    {
+    public interface IOpenService : IService {
+
         /// <summary>
         ///     平台预留手机号码
         /// </summary>

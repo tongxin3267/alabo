@@ -8,20 +8,19 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
-namespace Alabo.Domains.Repositories.EFCore
-{
+namespace Alabo.Domains.Repositories.EFCore {
+
     /// <summary>
     ///     Class RepositoryContextExtensions.
     /// </summary>
-    public static class RepositoryContextExtensions
-    {
+    public static class RepositoryContextExtensions {
+
         /// <summary>
         ///     执行Sql语句
         /// </summary>
         /// <param name="context">上下文</param>
         /// <param name="sql">The SQL.</param>
-        public static int ExecuteNonQuery(this IRepositoryContext context, string sql)
-        {
+        public static int ExecuteNonQuery(this IRepositoryContext context, string sql) {
             var command = context.Connection().CreateCommand();
             if (context.IsInTransaction) {
                 command.Transaction = context.GetDbTransaction();
@@ -40,8 +39,7 @@ namespace Alabo.Domains.Repositories.EFCore
         /// </summary>
         /// <param name="context">上下文</param>
         /// <param name="sql">The SQL.</param>
-        public static bool IsHasData(this IRepositoryContext context, string sql)
-        {
+        public static bool IsHasData(this IRepositoryContext context, string sql) {
             var result = false;
             var command = context.Connection().CreateCommand();
             if (context.IsInTransaction) {
@@ -65,11 +63,9 @@ namespace Alabo.Domains.Repositories.EFCore
         /// </summary>
         /// <param name="context">上下文</param>
         /// <param name="sqlList">sql语句列表</param>
-        public static int ExecuteNonQuery(this IRepositoryContext context, List<string> sqlList)
-        {
+        public static int ExecuteNonQuery(this IRepositoryContext context, List<string> sqlList) {
             var count = 0;
-            foreach (var item in sqlList)
-            {
+            foreach (var item in sqlList) {
                 ExecuteNonQuery(context, item);
                 count++;
             }
@@ -81,8 +77,7 @@ namespace Alabo.Domains.Repositories.EFCore
         ///     Begins the native database transaction.
         /// </summary>
         /// <param name="context">上下文</param>
-        public static DbTransaction BeginNativeDbTransaction(this IRepositoryContext context)
-        {
+        public static DbTransaction BeginNativeDbTransaction(this IRepositoryContext context) {
             var connection = context.Connection();
             if (connection.State != ConnectionState.Open) {
                 connection.Open();
@@ -97,8 +92,7 @@ namespace Alabo.Domains.Repositories.EFCore
         /// <param name="context">上下文</param>
         /// <param name="sql">The SQL.</param>
         /// <param name="parameters">The parameters.</param>
-        public static int ExecuteNonQuery(this IRepositoryContext context, string sql, params DbParameter[] parameters)
-        {
+        public static int ExecuteNonQuery(this IRepositoryContext context, string sql, params DbParameter[] parameters) {
             var command = context.Connection().CreateCommand();
             if (context.IsInTransaction) {
                 command.Transaction = context.GetDbTransaction();
@@ -121,8 +115,7 @@ namespace Alabo.Domains.Repositories.EFCore
         /// </summary>
         /// <param name="context">上下文</param>
         /// <param name="sqlStringList">多条SQL语句</param>
-        public static int ExecuteSqlList(this IRepositoryContext context, List<string> sqlStringList)
-        {
+        public static int ExecuteSqlList(this IRepositoryContext context, List<string> sqlStringList) {
             var command = context.Connection().CreateCommand();
             if (command.Connection.State == ConnectionState.Closed) {
                 command.Connection.Open();
@@ -130,27 +123,21 @@ namespace Alabo.Domains.Repositories.EFCore
 
             DbTransaction transaction = null;
             var count = 0;
-            try
-            {
+            try {
                 transaction = context.Connection().BeginTransaction();
                 command.Transaction = transaction;
 
-                foreach (var item in sqlStringList)
-                {
+                foreach (var item in sqlStringList) {
                     command.CommandText = item;
                     count += command.ExecuteNonQuery();
                 }
 
                 transaction.Commit();
-            }
-            catch (System.Exception ex)
-            {
+            } catch (System.Exception ex) {
                 Trace.WriteLine(ex.Message);
                 transaction.Rollback();
                 return 0;
-            }
-            finally
-            {
+            } finally {
                 if (transaction != null) {
                     transaction.Dispose();
                 }
@@ -166,8 +153,7 @@ namespace Alabo.Domains.Repositories.EFCore
         /// </summary>
         /// <param name="context">上下文</param>
         /// <param name="batchParameters">The batch parameters.</param>
-        public static bool ExecuteBatch(this IRepositoryContext context, IEnumerable<BatchParameter> batchParameters)
-        {
+        public static bool ExecuteBatch(this IRepositoryContext context, IEnumerable<BatchParameter> batchParameters) {
             var sqlList = batchParameters.Select(r => r.Sql);
             var paramList = batchParameters.Select(r => r.Parameters);
             return ExecuteBatch(context, sqlList, paramList);
@@ -180,22 +166,19 @@ namespace Alabo.Domains.Repositories.EFCore
         /// <param name="sqlList">sql语句集合</param>
         /// <param name="paramList">参数数组集合</param>
         public static bool ExecuteBatch(this IRepositoryContext context, IEnumerable<string> sqlList,
-            IEnumerable<DbParameter[]> paramList)
-        {
+            IEnumerable<DbParameter[]> paramList) {
             var command = context.Connection().CreateCommand();
             if (command.Connection.State == ConnectionState.Closed) {
                 command.Connection.Open();
             }
 
             DbTransaction trans = null;
-            try
-            {
+            try {
                 trans = context.Connection().BeginTransaction();
                 command.Transaction = trans;
                 var length = sqlList.Count();
                 IEnumerable<DbParameter> parameters = null;
-                for (var i = 0; i < length; i++)
-                {
+                for (var i = 0; i < length; i++) {
                     command.CommandText = sqlList.ElementAt(i);
                     command.Parameters.Clear();
                     parameters = paramList.ElementAt(i);
@@ -208,18 +191,14 @@ namespace Alabo.Domains.Repositories.EFCore
 
                 trans.Commit();
                 return true;
-            }
-            catch (System.Exception ex)
-            {
+            } catch (System.Exception ex) {
                 Trace.WriteLine(ex.Message);
                 if (trans != null) {
                     trans.Rollback();
                 }
 
                 throw;
-            }
-            finally
-            {
+            } finally {
                 if (trans != null) {
                     trans.Dispose();
                 }
@@ -233,8 +212,7 @@ namespace Alabo.Domains.Repositories.EFCore
         /// </summary>
         /// <param name="context">上下文</param>
         /// <param name="sql">The SQL.</param>
-        public static object ExecuteScalar(this IRepositoryContext context, string sql)
-        {
+        public static object ExecuteScalar(this IRepositoryContext context, string sql) {
             var command = context.Connection().CreateCommand();
             if (context.IsInTransaction) {
                 command.Transaction = context.GetDbTransaction();
@@ -254,8 +232,7 @@ namespace Alabo.Domains.Repositories.EFCore
         /// <param name="context">上下文</param>
         /// <param name="sql">The SQL.</param>
         /// <param name="parameters">The parameters.</param>
-        public static object ExecuteScalar(this IRepositoryContext context, string sql, params DbParameter[] parameters)
-        {
+        public static object ExecuteScalar(this IRepositoryContext context, string sql, params DbParameter[] parameters) {
             var command = context.Connection().CreateCommand();
             if (context.IsInTransaction) {
                 command.Transaction = context.GetDbTransaction();
@@ -278,8 +255,7 @@ namespace Alabo.Domains.Repositories.EFCore
         /// </summary>
         /// <param name="context">上下文</param>
         /// <param name="sql">The SQL.</param>
-        public static DbDataReader ExecuteDataReader(this IRepositoryContext context, string sql)
-        {
+        public static DbDataReader ExecuteDataReader(this IRepositoryContext context, string sql) {
             var command = context.Connection().CreateCommand();
             if (context.IsInTransaction) {
                 command.Transaction = context.GetDbTransaction();
@@ -300,8 +276,7 @@ namespace Alabo.Domains.Repositories.EFCore
         /// <param name="sql">The SQL.</param>
         /// <param name="parameters">The parameters.</param>
         public static DbDataReader ExecuteDataReader(this IRepositoryContext context, string sql,
-            params DbParameter[] parameters)
-        {
+            params DbParameter[] parameters) {
             var command = context.Connection().CreateCommand();
             if (context.IsInTransaction) {
                 command.Transaction = context.GetDbTransaction();
@@ -327,8 +302,7 @@ namespace Alabo.Domains.Repositories.EFCore
         /// <param name="sql">The SQL.</param>
         /// <param name="parameters">The parameters.</param>
         public static int ExecuteNonQuery(this IRepositoryContext context, DbTransaction transaction, string sql,
-            params DbParameter[] parameters)
-        {
+            params DbParameter[] parameters) {
             var command = context.Connection().CreateCommand();
             command.Transaction = transaction;
             command.CommandText = sql;
@@ -349,8 +323,7 @@ namespace Alabo.Domains.Repositories.EFCore
         /// <param name="context">上下文</param>
         /// <param name="transaction">The transaction.</param>
         /// <param name="sql">The SQL.</param>
-        public static object ExecuteScalar(this IRepositoryContext context, DbTransaction transaction, string sql)
-        {
+        public static object ExecuteScalar(this IRepositoryContext context, DbTransaction transaction, string sql) {
             var command = context.Connection().CreateCommand();
             command.Transaction = transaction;
             command.CommandText = sql;
@@ -369,8 +342,7 @@ namespace Alabo.Domains.Repositories.EFCore
         /// <param name="sql">The SQL.</param>
         /// <param name="parameters">The parameters.</param>
         public static object ExecuteScalar(this IRepositoryContext context, DbTransaction transaction, string sql,
-            params DbParameter[] parameters)
-        {
+            params DbParameter[] parameters) {
             var command = context.Connection().CreateCommand();
             command.Transaction = transaction;
             command.CommandText = sql;
@@ -392,8 +364,7 @@ namespace Alabo.Domains.Repositories.EFCore
         /// <param name="transaction">The transaction.</param>
         /// <param name="sql">The SQL.</param>
         public static DbDataReader ExecuteDataReader(this IRepositoryContext context, DbTransaction transaction,
-            string sql)
-        {
+            string sql) {
             var command = context.Connection().CreateCommand();
             command.Transaction = transaction;
             command.CommandText = sql;
@@ -412,8 +383,7 @@ namespace Alabo.Domains.Repositories.EFCore
         /// <param name="sql">The SQL.</param>
         /// <param name="parameters">The parameters.</param>
         public static DbDataReader ExecuteDataReader(this IRepositoryContext context, DbTransaction transaction,
-            string sql, params DbParameter[] parameters)
-        {
+            string sql, params DbParameter[] parameters) {
             var command = context.Connection().CreateCommand();
             command.Transaction = transaction;
             command.CommandText = sql;
@@ -434,8 +404,7 @@ namespace Alabo.Domains.Repositories.EFCore
         /// <param name="context">上下文</param>
         /// <param name="name">The name.</param>
         /// <param name="value">The value.</param>
-        public static DbParameter CreateParameter(this IRepositoryContext context, string name, object value)
-        {
+        public static DbParameter CreateParameter(this IRepositoryContext context, string name, object value) {
             var command = context.Connection().CreateCommand();
             var result = command.CreateParameter();
             result.ParameterName = name;
@@ -451,8 +420,7 @@ namespace Alabo.Domains.Repositories.EFCore
         /// <param name="type">The 类型.</param>
         /// <param name="value">The value.</param>
         public static DbParameter CreateParameter(this IRepositoryContext context, string name, DbType type,
-            object value)
-        {
+            object value) {
             var command = context.Connection().CreateCommand();
             var result = command.CreateParameter();
             result.ParameterName = name;
@@ -470,8 +438,7 @@ namespace Alabo.Domains.Repositories.EFCore
         /// <param name="size">The size.</param>
         /// <param name="value">The value.</param>
         public static DbParameter CreateParameter(this IRepositoryContext context, string name, DbType type, int size,
-            object value)
-        {
+            object value) {
             var command = context.Connection().CreateCommand();
             var result = command.CreateParameter();
             result.ParameterName = name;
@@ -485,8 +452,7 @@ namespace Alabo.Domains.Repositories.EFCore
         ///     Connections the specified context.
         /// </summary>
         /// <param name="context">上下文</param>
-        private static DbConnection Connection(this IRepositoryContext context)
-        {
+        private static DbConnection Connection(this IRepositoryContext context) {
             var dbConnection = context.UnitOfWork.GetConnection();
             return (DbConnection)dbConnection;
         }
@@ -496,17 +462,13 @@ namespace Alabo.Domains.Repositories.EFCore
         /// </summary>
         /// <param name="context">上下文</param>
         /// <param name="tableName">Name of the table.</param>
-        public static bool CreateDataTable(this IRepositoryContext context, string tableName)
-        {
-            try
-            {
+        public static bool CreateDataTable(this IRepositoryContext context, string tableName) {
+            try {
                 var createDbStr = $"Create database {tableName}";
                 var command = context.Connection().CreateCommand();
                 command.ExecuteNonQuery();
                 return false;
-            }
-            catch (System.Exception ex)
-            {
+            } catch (System.Exception ex) {
                 Trace.WriteLine(ex.Message);
                 return true;
             }
@@ -521,38 +483,29 @@ namespace Alabo.Domains.Repositories.EFCore
         /// <param name="args"></param>
         /// <returns></returns>
         public static IEnumerable<T> Query<T>(this IRepositoryContext context, string sql, params object[] args)
-            where T : new()
-        {
-            using (var dr = context.ExecuteDataReader(sql))
-            {
-                if (dr.HasRows)
-                {
+            where T : new() {
+            using (var dr = context.ExecuteDataReader(sql)) {
+                if (dr.HasRows) {
                     var propCache = new Dictionary<string, PropertyInfo>();
                     var drFields = new List<string>();
                     for (var i = 0; i < dr.FieldCount; i++) {
                         drFields.Add(dr.GetName(i));
                     }
 
-                    while (dr.Read())
-                    {
+                    while (dr.Read()) {
                         var insT = new T();
-                        if (propCache.Count == drFields.Count)
-                        {
+                        if (propCache.Count == drFields.Count) {
                             var propList = insT.GetType().GetProperties();
-                            foreach (var field in drFields)
-                            {
+                            foreach (var field in drFields) {
                                 var prop = propCache[field];
                                 var value = dr[field];
                                 if (value != DBNull.Value) {
                                     prop.SetValue(insT, value, null);
                                 }
                             }
-                        }
-                        else
-                        {
+                        } else {
                             var propList = insT.GetType().GetProperties();
-                            foreach (var prop in propList)
-                            {
+                            foreach (var prop in propList) {
                                 var field = prop.Name;
                                 if (!drFields.Contains(field)) {
                                     continue;
@@ -573,8 +526,7 @@ namespace Alabo.Domains.Repositories.EFCore
                             }
 
                             // Re-balance PropCache & drFields
-                            if (propCache.Count != drFields.Count)
-                            {
+                            if (propCache.Count != drFields.Count) {
                                 var interset = drFields.Intersect(propCache.Select(x => x.Key)).ToList();
                                 drFields = interset;
 
@@ -600,8 +552,7 @@ namespace Alabo.Domains.Repositories.EFCore
         /// <param name="args"></param>
         /// <returns></returns>
         public static List<T> Fetch<T>(this IRepositoryContext context, string sql, params object[] args)
-            where T : new()
-        {
+            where T : new() {
             return context.Query<T>(sql, args).ToList();
         }
     }

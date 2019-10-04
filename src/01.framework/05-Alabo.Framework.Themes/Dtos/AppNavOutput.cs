@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Enums;
+﻿using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Themes.Dtos
-{
-    public class AppNavOutput
-    {
+namespace Alabo.Framework.Themes.Dtos {
+
+    public class AppNavOutput {
+
         /// <summary>
         ///     所属应用
         /// </summary>
@@ -32,8 +32,8 @@ namespace Alabo.Framework.Themes.Dtos
     /// <summary>
     ///     左侧导航链接
     /// </summary>
-    public class AppNavOutputLink
-    {
+    public class AppNavOutputLink {
+
         /// <summary>
         ///     图标
         /// </summary>
@@ -67,8 +67,8 @@ namespace Alabo.Framework.Themes.Dtos
 
     /// <summary>
     /// </summary>
-    public class AppNavOutputLinkItem
-    {
+    public class AppNavOutputLinkItem {
+
         /// <summary>
         ///     图标
         /// </summary>

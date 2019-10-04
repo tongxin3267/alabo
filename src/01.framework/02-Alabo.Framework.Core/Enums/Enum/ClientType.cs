@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     终端类型
     /// </summary>
     [ClassProperty(Name = "终端类型")]
-    public enum ClientType
-    {
+    public enum ClientType {
+
         /// <summary>
         ///     电脑PC端
         /// </summary>

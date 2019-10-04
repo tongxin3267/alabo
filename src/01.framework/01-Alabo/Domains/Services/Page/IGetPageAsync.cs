@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Alabo.Domains.Services.Page
-{
-    public interface IGetPageAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+namespace Alabo.Domains.Services.Page {
+
+    public interface IGetPageAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         Task<PagedList<TEntity>> GetPagedListAsync(object paramater, Dictionary<string, string> dictionary);
 
         /// <summary>

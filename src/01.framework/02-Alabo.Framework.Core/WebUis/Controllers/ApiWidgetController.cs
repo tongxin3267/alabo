@@ -5,21 +5,20 @@ using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Framework.Core.WebUis.Controllers
-{
+namespace Alabo.Framework.Core.WebUis.Controllers {
+
     /// <summary>
     ///     对应前端的Widget模块
     /// </summary>
     [Route("Api/Widget/[action]")]
-    public class ApiWidgetController : ApiBaseController
-    {
+    public class ApiWidgetController : ApiBaseController {
+
         /// <summary>
         ///     根据配置获取自动表单的值
         /// </summary>
         [HttpGet]
         [Display(Description = "根据配置获取自动表单的值")]
-        public ApiResult<object> Get([FromQuery] WidgetInput input)
-        {
+        public ApiResult<object> Get([FromQuery] WidgetInput input) {
             if (!this.IsFormValid()) {
                 return ApiResult.Failure<object>(this.FormInvalidReason());
             }
@@ -39,8 +38,7 @@ namespace Alabo.Framework.Core.WebUis.Controllers
                 return ApiResult.Failure<object>($"类型{input.Type}不存在");
             }
 
-            if (find is IWidget set)
-            {
+            if (find is IWidget set) {
                 var result = set.Get(input.Json);
                 return ApiResult.Success(result);
             }

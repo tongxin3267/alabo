@@ -6,15 +6,14 @@ using Alabo.Domains.Services.View;
 using Alabo.Helpers;
 using Alabo.Security.Sessions;
 
-namespace Alabo.Domains.Services
-{
-    public abstract class ServiceBase : IService
-    {
+namespace Alabo.Domains.Services {
+
+    public abstract class ServiceBase : IService {
+
         /// <summary>
         ///     初始化应用服务
         /// </summary>
-        protected ServiceBase(IUnitOfWork unitOfWork)
-        {
+        protected ServiceBase(IUnitOfWork unitOfWork) {
             Session = Security.Sessions.Session.Instance;
             UnitOfWork = unitOfWork;
         }
@@ -32,8 +31,7 @@ namespace Alabo.Domains.Services
         /// <summary>
         ///     获取数据操作对象服务
         /// </summary>
-        public T Repository<T>() where T : IRepository
-        {
+        public T Repository<T>() where T : IRepository {
             return Ioc.Resolve<T>();
         }
 
@@ -41,8 +39,7 @@ namespace Alabo.Domains.Services
         ///     获取实体的数据库操作服务
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public T Resolve<T>() where T : IService
-        {
+        public T Resolve<T>() where T : IService {
             return Ioc.Resolve<T>();
         }
 
@@ -58,16 +55,15 @@ namespace Alabo.Domains.Services
     /// <typeparam name="TEntity">实体</typeparam>
     /// <typeparam name="TKey">主键类型</typeparam>
     public abstract class ServiceBase<TEntity, TKey> : ViewBaseService<TEntity, TKey>, IService<TEntity, TKey>
-        where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+        where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         /// <summary>
         ///     初始化增删改查服务
         /// </summary>
         /// <param name="unitOfWork">工作单元</param>
         /// <param name="repository">仓储</param>
         protected ServiceBase(IUnitOfWork unitOfWork, IRepository<TEntity, TKey> repository) : base(unitOfWork,
-            repository)
-        {
+            repository) {
         }
 
         ///// <summary>

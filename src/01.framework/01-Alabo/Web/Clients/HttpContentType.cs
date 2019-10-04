@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel;
 
-namespace Alabo.Web.Clients
-{
+namespace Alabo.Web.Clients {
+
     /// <summary>
     ///     内容类型
     /// </summary>
     [ClassProperty(Name = "内容类型")]
-    public enum HttpContentType
-    {
+    public enum HttpContentType {
+
         /// <summary>
         ///     application/x-www-form-urlencoded
         /// </summary>

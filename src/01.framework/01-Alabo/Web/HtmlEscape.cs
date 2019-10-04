@@ -1,10 +1,10 @@
-﻿namespace Alabo.Web
-{
+﻿namespace Alabo.Web {
+
     /// <summary>
     ///     Html转义字符
     /// </summary>
-    public static class HtmlEscape
-    {
+    public static class HtmlEscape {
+
         /// <summary>
         ///     双引号,值为 &amp;quot;
         /// </summary>

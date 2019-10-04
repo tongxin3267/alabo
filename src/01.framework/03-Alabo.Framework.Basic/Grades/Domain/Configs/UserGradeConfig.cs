@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection;
-using Alabo.AutoConfigs;
+﻿using Alabo.AutoConfigs;
 using Alabo.AutoConfigs.Entities;
-using Alabo.AutoConfigs.Services;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Basic.AutoConfigs.Domain.Services;
 using Alabo.Helpers;
-using Alabo.Reflections;
 using Alabo.Web.Mvc.Attributes;
 using Newtonsoft.Json;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Framework.Basic.Grades.Domain.Configs
-{
+namespace Alabo.Framework.Basic.Grades.Domain.Configs {
+
     /// <summary>
     ///     用户等级设置
     /// </summary>
@@ -25,8 +21,8 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs
         Description = "用户等级", PageType = ViewPageType.List, SortOrder = 12,
         SideBarType = SideBarType.UserSideBar,
         ValidateMessage = "该会员等级下存在用户，或者该等级为默认等级不能删除")]
-    public class UserGradeConfig : BaseGradeConfig, IAutoConfig
-    {
+    public class UserGradeConfig : BaseGradeConfig, IAutoConfig {
+
         /// <summary>
         ///     会员类型Id，不同的会员类型有不同的等级
         /// </summary>
@@ -68,13 +64,10 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs
         /// <summary>
         ///     Sets the default.
         /// </summary>
-        public void SetDefault()
-        {
+        public void SetDefault() {
             var list = Ioc.Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
-            if (list.Count < 1)
-            {
-                var config = new UserGradeConfig
-                {
+            if (list.Count < 1) {
+                var config = new UserGradeConfig {
                     Id = Guid.Parse("72be65e6-3000-414d-972e-1a3d4a366000"),
                     Name = "会员默认等级",
                     Icon = "/wwwroot/static/images/GradeIcon/User01.png",
@@ -82,8 +75,7 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs
                 };
                 list.Add(config);
 
-                config = new UserGradeConfig
-                {
+                config = new UserGradeConfig {
                     Id = Guid.Parse("72be65e6-3000-414d-972e-1a3d4a366001"),
                     Name = "钻石会员",
                     Icon = "/wwwroot/static/images/GradeIcon/User02.png",
@@ -92,8 +84,7 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs
                 };
                 list.Add(config);
 
-                config = new UserGradeConfig
-                {
+                config = new UserGradeConfig {
                     Id = Guid.Parse("72be65e6-3000-414d-972e-1a3d4a366002"),
                     Name = "黄金会员",
                     Icon = "/wwwroot/static/images/GradeIcon/User03.png",
@@ -102,8 +93,7 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs
                 };
                 list.Add(config);
 
-                var autoConfig = new AutoConfig
-                {
+                var autoConfig = new AutoConfig {
                     Type = config.GetType().FullName,
                     LastUpdated = DateTime.Now,
                     Value = JsonConvert.SerializeObject(list)

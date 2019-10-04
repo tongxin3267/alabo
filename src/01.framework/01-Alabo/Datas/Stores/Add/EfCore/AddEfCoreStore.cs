@@ -4,22 +4,20 @@ using Alabo.Validations.Aspects;
 using System;
 using System.Collections.Generic;
 
-namespace Alabo.Datas.Stores.Add.EfCore
-{
+namespace Alabo.Datas.Stores.Add.EfCore {
+
     public abstract class AddEfCoreStore<TEntity, TKey> : GetListAsyncEfCoretStore<TEntity, TKey>,
         IAddStore<TEntity, TKey>
-        where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
-        public AddEfCoreStore(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
+        public AddEfCoreStore(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
         /// <summary>
         ///     添加单个实体
         /// </summary>
         /// <param name="entity"></param>
-        public bool AddSingle([Valid] TEntity entity)
-        {
+        public bool AddSingle([Valid] TEntity entity) {
             if (entity == null) {
                 throw new ArgumentNullException(nameof(entity));
             }
@@ -37,8 +35,7 @@ namespace Alabo.Datas.Stores.Add.EfCore
         ///     批量添加
         /// </summary>
         /// <param name="soucre"></param>
-        public void AddMany(IEnumerable<TEntity> soucre)
-        {
+        public void AddMany(IEnumerable<TEntity> soucre) {
             if (soucre == null) {
                 throw new ArgumentNullException(nameof(soucre));
             }

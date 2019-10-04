@@ -2,15 +2,14 @@
 using System;
 using System.Data;
 
-namespace Alabo.Domains.Repositories.Extensions
-{
+namespace Alabo.Domains.Repositories.Extensions {
+
     /// <summary>
     ///     数据库操作扩展
     /// </summary>
-    public static class DataRecordExtension
-    {
-        static DataRecordExtension()
-        {
+    public static class DataRecordExtension {
+
+        static DataRecordExtension() {
             Cache<byte>.Invoker = (reader, i) => reader.GetByte(i);
             Cache<short>.Invoker = (reader, i) => reader.GetInt16(i);
             Cache<int>.Invoker = (reader, i) => reader.GetInt32(i);
@@ -36,27 +35,20 @@ namespace Alabo.Domains.Repositories.Extensions
         /// <param name="reader">datarecord对象</param>
         /// <param name="i">列位置</param>
         /// <returns>所需的T对象</returns>
-        public static T Read<T>(this IDataRecord reader, int i)
-        {
+        public static T Read<T>(this IDataRecord reader, int i) {
             var invoker = Cache<T>.Invoker;
             if (invoker != null) {
-                try
-                {
+                try {
                     return invoker(reader, i);
-                }
-                catch
-                {
+                } catch {
                     return default;
                 }
             }
 
             var objectValue = reader.GetValue(i);
-            try
-            {
+            try {
                 return (T)objectValue;
-            }
-            catch
-            {
+            } catch {
                 return default;
             }
         }
@@ -69,27 +61,21 @@ namespace Alabo.Domains.Repositories.Extensions
         /// <param name="reader">datarecord对象</param>
         /// <param name="name">列名称</param>
         /// <returns>所需的T对象</returns>
-        public static T Read<T>(this IDataRecord reader, string name)
-        {
+        public static T Read<T>(this IDataRecord reader, string name) {
             var i = reader.GetOrdinal(name);
             return Read<T>(reader, i);
         }
 
-        public static T TryRead<T>(this IDataRecord reader, string name, T defaultValue = default)
-        {
-            try
-            {
+        public static T TryRead<T>(this IDataRecord reader, string name, T defaultValue = default) {
+            try {
                 var i = reader.GetOrdinal(name);
                 return Read<T>(reader, i);
-            }
-            catch
-            {
+            } catch {
                 return defaultValue;
             }
         }
 
-        public static T SafeRead<T>(this IDataRecord reader, string name)
-        {
+        public static T SafeRead<T>(this IDataRecord reader, string name) {
             return reader.TryRead<T>(name);
         }
 
@@ -100,11 +86,9 @@ namespace Alabo.Domains.Repositories.Extensions
         /// </summary>
         /// <param name="tiemType"></param>
         /// <param name="dateTime"></param>
-        public static string GetTimeTypeCondition(TimeType tiemType, DateTime dateTime)
-        {
+        public static string GetTimeTypeCondition(TimeType tiemType, DateTime dateTime) {
             var sqlWhere = string.Empty;
-            switch (tiemType)
-            {
+            switch (tiemType) {
                 // 当天
                 case TimeType.Day:
                     sqlWhere = $"datediff(day,CreateTime,'{dateTime}')=0";
@@ -155,8 +139,7 @@ namespace Alabo.Domains.Repositories.Extensions
             return sqlWhere;
         }
 
-        private static class Cache<T>
-        {
+        private static class Cache<T> {
             public static Func<IDataRecord, int, T> Invoker;
         }
     }

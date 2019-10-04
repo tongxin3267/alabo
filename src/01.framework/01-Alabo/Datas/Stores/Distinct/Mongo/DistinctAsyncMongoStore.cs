@@ -4,18 +4,16 @@ using Alabo.Domains.Entities.Core;
 using System;
 using System.Threading.Tasks;
 
-namespace Alabo.Datas.Stores.Distinct.Mongo
-{
+namespace Alabo.Datas.Stores.Distinct.Mongo {
+
     public abstract class DistinctAsyncMongoStore<TEntity, TKey> : DeleteMongoStore<TEntity, TKey>,
         IDistinctAsyncStore<TEntity, TKey>
-        where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
-        protected DistinctAsyncMongoStore(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
+        protected DistinctAsyncMongoStore(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
-        public Task<bool> DistinctAsync(string filedName)
-        {
+        public Task<bool> DistinctAsync(string filedName) {
             throw new NotImplementedException();
         }
     }

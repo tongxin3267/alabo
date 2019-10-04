@@ -1,17 +1,14 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.Helpers
-{
-    public class CharHelper
-    {
+namespace Alabo.Helpers {
+
+    public class CharHelper {
         private static readonly string CnNumber = "零壹贰叁肆伍陆柒捌玖";
         private static readonly string CnUnit = "分角元拾佰仟万拾佰仟亿拾佰仟兆拾佰仟";
 
-        public static string GetUpper(int i)
-        {
+        public static string GetUpper(int i) {
             string str = null;
-            switch (i)
-            {
+            switch (i) {
                 case 1:
                     str = "一";
                     break;
@@ -56,8 +53,7 @@ namespace Alabo.Helpers
             return str;
         }
 
-        public static string GetCnString(string moneyString)
-        {
+        public static string GetCnString(string moneyString) {
             var tmpString = moneyString.Split('.');
             var intString = moneyString; // 默认为整数
             var decString = string.Empty; // 保存小数部分字串
@@ -66,8 +62,7 @@ namespace Alabo.Helpers
             int j;
             int n;
 
-            if (tmpString.Length > 1)
-            {
+            if (tmpString.Length > 1) {
                 intString = tmpString[0]; // 取整数部分
                 decString = tmpString[1]; // 取小数部分
             }
@@ -76,31 +71,22 @@ namespace Alabo.Helpers
             decString = decString.Substring(0, 2); // 保留两位小数位
             intString += decString;
 
-            try
-            {
+            try {
                 k = intString.Length - 1;
-                if (k > 0 && k < 18)
-                {
-                    for (var i = 0; i <= k; i++)
-                    {
+                if (k > 0 && k < 18) {
+                    for (var i = 0; i <= k; i++) {
                         j = intString[i] - 48;
                         // rmbCapital = rmbCapital + cnNumber[j] + cnUnit[k-i];     // 供调试用的直接转换
                         n = i + 1 >= k ? intString[k] - 48 : intString[i + 1] - 48; // 等效于 if( ){ }else{ }
-                        if (j == 0)
-                        {
-                            if (k - i == 2 || k - i == 6 || k - i == 10 || k - i == 14)
-                            {
+                        if (j == 0) {
+                            if (k - i == 2 || k - i == 6 || k - i == 10 || k - i == 14) {
                                 rmbCapital += CnUnit[k - i];
-                            }
-                            else
-                            {
+                            } else {
                                 if (n != 0) {
                                     rmbCapital += CnNumber[j];
                                 }
                             }
-                        }
-                        else
-                        {
+                        } else {
                             rmbCapital = rmbCapital + CnNumber[j] + CnUnit[k - i];
                         }
                     }
@@ -115,15 +101,12 @@ namespace Alabo.Helpers
                 }
 
                 return string.Empty; // 超出转换范围时，返回零长字串
-            }
-            catch
-            {
+            } catch {
                 return string.Empty; // 含有非数值字符时，返回零长字串
             }
         }
 
-        public static int GetDays(int i, List<int> models)
-        {
+        public static int GetDays(int i, List<int> models) {
             var days = 0;
             for (var j = 0; j <= i; j++) {
                 if (j != 0) {

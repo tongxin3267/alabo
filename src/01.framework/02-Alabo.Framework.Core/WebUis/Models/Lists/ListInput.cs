@@ -4,14 +4,14 @@ using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.WebUis.Models.Lists
-{
+namespace Alabo.Framework.Core.WebUis.Models.Lists {
+
     /// <summary>
     ///     zk-list 分页数据
     /// </summary>
     [ClassProperty(Name = "链接")]
-    public class ListInput : BaseComponent
-    {
+    public class ListInput : BaseComponent {
+
         /// <summary>
         ///     数据ID
         /// </summary>

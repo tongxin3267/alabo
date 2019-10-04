@@ -17,17 +17,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Alabo.Framework.Basic.Address.Domain.Services
-{
+namespace Alabo.Framework.Basic.Address.Domain.Services {
+
     /// <summary>
     ///     地址数据保存到UserDetail表中的 Extensions 对象中
     ///     为UserExtensions对象
     /// </summary>
-    public class UserAddressService : ServiceBase<UserAddress, ObjectId>, IUserAddressService
-    {
+    public class UserAddressService : ServiceBase<UserAddress, ObjectId>, IUserAddressService {
+
         public UserAddressService(IUnitOfWork unitOfWork, IRepository<UserAddress, ObjectId> repository) : base(
-            unitOfWork, repository)
-        {
+            unitOfWork, repository) {
         }
 
         /// <summary>
@@ -35,8 +34,7 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
         /// </summary>
         /// <param name="userId">会员Id</param>
         /// <param name="id">Id标识</param>
-        public ServiceResult Delete(long userId, ObjectId id)
-        {
+        public ServiceResult Delete(long userId, ObjectId id) {
             var find = GetSingle(r => r.Id == id && r.UserId == userId);
             if (find == null) {
                 return ServiceResult.FailedWithMessage("地址不存在");
@@ -46,8 +44,7 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
             //}
 
             var result = Delete(find);
-            if (result)
-            {
+            if (result) {
                 InitDefaultAddress(userId);
                 return ServiceResult.Success;
             }
@@ -60,8 +57,7 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
         /// </summary>
         /// <param name="guid"></param>
         /// <param name="userId">The user identifier.</param>
-        public UserAddress GetUserAddress(ObjectId guid, long userId)
-        {
+        public UserAddress GetUserAddress(ObjectId guid, long userId) {
             InitDefaultAddress(userId);
             if (guid.IsObjectIdNullOrEmpty()) {
                 return GetSingle(r => r.UserId == userId && r.IsDefault);
@@ -76,22 +72,18 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
         /// </summary>
         /// <param name="userId">会员Id</param>
         /// <param name="addressId">The address identifier.</param>
-        public ServiceResult SetDefault(long userId, ObjectId addressId)
-        {
+        public ServiceResult SetDefault(long userId, ObjectId addressId) {
             var userAddress = GetList(r => r.UserId == userId);
-            if (userAddress != null && userAddress.Count > 0)
-            {
+            if (userAddress != null && userAddress.Count > 0) {
                 var address = userAddress.FirstOrDefault(r => r.Id == addressId);
                 if (address == null) {
                     return ServiceResult.FailedWithMessage("地址未找到，或已删除");
                 }
 
                 address.IsDefault = true;
-                if (Update(address))
-                {
+                if (Update(address)) {
                     userAddress.Remove(address);
-                    userAddress.Foreach(u =>
-                    {
+                    userAddress.Foreach(u => {
                         u.IsDefault = false;
                         Update(u);
                     });
@@ -114,8 +106,7 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
         ///     保存收货地址
         /// </summary>
         /// <param name="userInfoAddress"></param>
-        public ServiceResult SaveUserInfoAddress(UserInfoAddressInput userInfoAddress)
-        {
+        public ServiceResult SaveUserInfoAddress(UserInfoAddressInput userInfoAddress) {
             if (userInfoAddress == null) {
                 throw new Exception("输入不能为空");
             }
@@ -126,8 +117,7 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
             }
 
             var result = AddOrUpdateSingle(userAddress);
-            if (result == ServiceResult.Success)
-            {
+            if (result == ServiceResult.Success) {
                 // 修改User_Detial表
                 var userDetail = Resolve<IAlaboUserDetailService>().GetSingle(r => r.UserId == userInfoAddress.UserId);
                 userDetail.AddressId = userAddress.Id.ToStr();
@@ -142,8 +132,8 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
         ///     保存收货地址
         /// </summary>
         /// <param name="addressInput"></param>
-        public ServiceResult SaveOrderAddress(AddressInput addressInput)
-        {
+        public ServiceResult SaveOrderAddress(AddressInput addressInput) {
+
             #region MyRegion
 
             //if (addressInput == null) {
@@ -177,8 +167,7 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
 
             var userAddress = AutoMapping.SetValue<UserAddress>(addressInput);
             var addressConfig = Resolve<IAutoConfigService>().GetValue<UserAddressConfig>();
-            if (!addressInput.Id.IsNullOrEmpty() && !addressInput.Id.ToObjectId().IsObjectIdNullOrEmpty())
-            {
+            if (!addressInput.Id.IsNullOrEmpty() && !addressInput.Id.ToObjectId().IsObjectIdNullOrEmpty()) {
                 //修改
                 userAddress.Id = addressInput.Id.ToObjectId();
                 var model = Resolve<IUserAddressService>().GetSingle(u => u.Id == addressInput.Id.ToObjectId());
@@ -187,8 +176,7 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
                 }
 
                 //查看配置是否开启
-                if (addressConfig.IsEnble)
-                {
+                if (addressConfig.IsEnble) {
                     if (userAddress.Address != model.Address) //不允许修改
 {
                         return ServiceResult.FailedWithMessage(addressConfig.EditTips);
@@ -199,9 +187,7 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
                         return ServiceResult.FailedWithMessage(addressConfig.EditTips);
                     }
                 }
-            }
-            else
-            {
+            } else {
                 //限定每个用户只能有一个地址
                 //var addressList = Resolve<IUserAddressService>().GetList(u => u.UserId == addressInput.UserId);
                 //if (addressList.Count >= 1)
@@ -209,8 +195,7 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
                 //    return ServiceResult.FailedWithMessage("每个用户只允许拥有一个收货地址");
                 //}
                 //新增
-                if (addressConfig.IsEnble)
-                {
+                if (addressConfig.IsEnble) {
                     var addressList = Resolve<IUserAddressService>().GetList(u => u.UserId == addressInput.UserId);
                     if (addressList.Count >= addressConfig.MaxNumber) {
                         return ServiceResult.FailedWithMessage(addressConfig.AddTips);
@@ -226,8 +211,7 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
             #endregion 5.20后开放
         }
 
-        public IList<UserAddress> GetAllList(long userId)
-        {
+        public IList<UserAddress> GetAllList(long userId) {
             var model = GetList(r => r.UserId == userId);
             foreach (var item in model) {
                 item.AddressDescription = Resolve<IRegionService>().GetRegionNameById(item.RegionId);
@@ -236,8 +220,7 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
             return model;
         }
 
-        public UserAddress GetUserInfoAddress(long userId)
-        {
+        public UserAddress GetUserInfoAddress(long userId) {
             return GetSingle(r => r.UserId == userId && r.Type == AddressLockType.UserInfoAddress);
         }
 
@@ -245,8 +228,7 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
         ///     添加或更新地址
         /// </summary>
         /// <param name="userAddress"></param>
-        public ServiceResult AddOrUpdateSingle(UserAddress userAddress)
-        {
+        public ServiceResult AddOrUpdateSingle(UserAddress userAddress) {
             if (userAddress == null) {
                 throw new ValidException("地址不能为空");
             }
@@ -319,15 +301,12 @@ namespace Alabo.Framework.Basic.Address.Domain.Services
         ///     初始化默认地址，如果默认地址不存在的时候，设置为第一个
         /// </summary>
         /// <param name="userId">会员Id</param>
-        private void InitDefaultAddress(long userId)
-        {
+        private void InitDefaultAddress(long userId) {
             var address = GetList(r => r.UserId == userId);
-            if (address != null)
-            {
+            if (address != null) {
                 var defaultAddress = address.FirstOrDefault(r => r.IsDefault);
                 // 不存在默认地址
-                if (defaultAddress == null)
-                {
+                if (defaultAddress == null) {
                     var firsetAddress = address.FirstOrDefault(); // 使用第一个做默认地址
                     if (firsetAddress != null) {
                         SetDefault(userId, firsetAddress.Id);

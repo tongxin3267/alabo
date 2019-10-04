@@ -1,12 +1,12 @@
 ﻿using Alabo.Domains.EntityHistory;
 
-namespace Alabo.Domains.Entities.Core
-{
+namespace Alabo.Domains.Entities.Core {
+
     /// <summary>
     ///     实体
     /// </summary>
-    public interface IEntity : IDomainObject, ICreateTime
-    {
+    public interface IEntity : IDomainObject, ICreateTime {
+
         /// <summary>
         ///     初始化
         /// </summary>
@@ -17,8 +17,7 @@ namespace Alabo.Domains.Entities.Core
     ///     实体
     /// </summary>
     /// <typeparam name="TKey">标识类型</typeparam>
-    public interface IEntity<TKey> : IKey<TKey>, IEntity
-    {
+    public interface IEntity<TKey> : IKey<TKey>, IEntity {
     }
 
     /// <summary>
@@ -26,7 +25,6 @@ namespace Alabo.Domains.Entities.Core
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
     /// <typeparam name="TKey">标识类型</typeparam>
-    public interface IEntity<in TEntity, TKey> : ICompareChange<TEntity>, IEntity<TKey> where TEntity : IEntity
-    {
+    public interface IEntity<in TEntity, TKey> : ICompareChange<TEntity>, IEntity<TKey> where TEntity : IEntity {
     }
 }

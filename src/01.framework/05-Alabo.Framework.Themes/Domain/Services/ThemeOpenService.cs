@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
@@ -8,13 +6,14 @@ using Alabo.Framework.Themes.Domain.Entities;
 using Alabo.Framework.Themes.Dtos;
 using Alabo.Helpers;
 using Alabo.RestfulApi.Clients;
+using System;
+using System.Collections.Generic;
 
-namespace Alabo.Framework.Themes.Domain.Services
-{
-    public class ThemeOpenService : ServiceBase, IThemeOpenService
-    {
-        public ThemeOpenService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+namespace Alabo.Framework.Themes.Domain.Services {
+
+    public class ThemeOpenService : ServiceBase, IThemeOpenService {
+
+        public ThemeOpenService(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
         /// <summary>
@@ -22,8 +21,7 @@ namespace Alabo.Framework.Themes.Domain.Services
         /// </summary>
         /// <param name="themePublish"></param>
         /// <returns></returns>
-        public ServiceResult Publish(ThemePublish themePublish)
-        {
+        public ServiceResult Publish(ThemePublish themePublish) {
             if (themePublish.Theme == null) {
                 return ServiceResult.FailedWithMessage("模板不能为空");
             }
@@ -34,8 +32,7 @@ namespace Alabo.Framework.Themes.Domain.Services
 
             // 模板不存在则添加模板
             var theme = Resolve<IThemeService>().GetSingle(r => r.Id == themePublish.Theme.Id);
-            if (theme == null)
-            {
+            if (theme == null) {
                 // 和服务器ID模板一样
                 theme = new Theme();
                 theme.Id = themePublish.Theme.Id;
@@ -56,8 +53,7 @@ namespace Alabo.Framework.Themes.Domain.Services
                 addList.Add(themePage);
             }
 
-            if (addList.Count > 0)
-            {
+            if (addList.Count > 0) {
                 Resolve<IThemePageService>().DeleteMany(r => r.ThemeId == themePublish.Theme.Id);
                 Resolve<IThemePageService>().AddMany(addList);
             }
@@ -78,8 +74,7 @@ namespace Alabo.Framework.Themes.Domain.Services
         /// </summary>
         /// <param name="themePageInput"></param>
         /// <returns></returns>
-        public Theme InitThemeFormServcie(ClientPageInput themePageInput)
-        {
+        public Theme InitThemeFormServcie(ClientPageInput themePageInput) {
             var apiUrl = "Api/Make/Init";
             IDictionary<string, string> parameters = new Dictionary<string, string>
             {
@@ -89,8 +84,7 @@ namespace Alabo.Framework.Themes.Domain.Services
             };
 
             var themePublish = Ioc.Resolve<IOpenClient>().Get<ThemePublish>(apiUrl, parameters);
-            if (themePublish != null)
-            {
+            if (themePublish != null) {
                 Publish(themePublish);
                 var theme = Resolve<IThemeService>().GetSingle(themePublish.Theme.Id);
                 return theme;

@@ -1,15 +1,15 @@
 ﻿using Alabo.Domains.Enums;
 using Alabo.Framework.Core.Enums.Enum;
 
-namespace Alabo.Framework.Core.Admins.Configs
-{
+namespace Alabo.Framework.Core.Admins.Configs {
+
     /// <summary>
     ///     数据库字段，CSS内容管理系统，代码生成，可视化编辑都需要此字段
     ///     通过次字段动态构建视图，列表，表单等操作
     ///     配置通过Field特性配置  FieldAttribute
     /// </summary>
-    public class DataField
-    {
+    public class DataField {
+
         /// <summary>
         ///     字段的英文名
         /// </summary>

@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace Alabo.Domains.Repositories.EFCore
-{
-    public interface IRepositoryTransaction : IDisposable
-    {
+namespace Alabo.Domains.Repositories.EFCore {
+
+    public interface IRepositoryTransaction : IDisposable {
+
         /// <summary>
         ///     Commits this instance.
         /// </summary>

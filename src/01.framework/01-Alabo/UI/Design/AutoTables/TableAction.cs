@@ -2,22 +2,20 @@
 using Newtonsoft.Json;
 using System;
 
-namespace Alabo.UI.Design.AutoTables
-{
+namespace Alabo.UI.Design.AutoTables {
+
     /// <summary>
     ///     表格操作
     /// </summary>
-    public class TableAction
-    {
+    public class TableAction {
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="TableAction" /> class.
         /// </summary>
-        public TableAction()
-        {
+        public TableAction() {
         }
 
-        public TableAction(string name, string url)
-        {
+        public TableAction(string name, string url) {
             Name = name;
             Url = url;
             Type = ActionLinkType.Link;
@@ -27,16 +25,14 @@ namespace Alabo.UI.Design.AutoTables
             }
         }
 
-        public TableAction(string name, string url, TableActionType tableAction)
-        {
+        public TableAction(string name, string url, TableActionType tableAction) {
             Name = name;
             Url = url;
             Type = ActionLinkType.Link;
             ActionType = tableAction;
         }
 
-        public TableAction(string name, string url, ActionLinkType type)
-        {
+        public TableAction(string name, string url, ActionLinkType type) {
             Name = name;
             Url = url;
             Type = type;
@@ -57,10 +53,8 @@ namespace Alabo.UI.Design.AutoTables
         /// <summary>
         ///     图标
         /// </summary>
-        public string Icon
-        {
-            get
-            {
+        public string Icon {
+            get {
                 if (Convert.ToInt16(IconType) > 0) {
                     return IconType.GetIcon();
                 }
@@ -74,10 +68,8 @@ namespace Alabo.UI.Design.AutoTables
         ///     图标名称
         /// </summary>
         [JsonIgnore]
-        public Flaticon IconType
-        {
-            get
-            {
+        public Flaticon IconType {
+            get {
                 if (Name.Contains("编辑")) {
                     return Flaticon.Edit;
                 }
@@ -112,8 +104,8 @@ namespace Alabo.UI.Design.AutoTables
     /// <summary>
     ///     表格相关的操作
     /// </summary>
-    public enum TableActionType
-    {
+    public enum TableActionType {
+
         /// <summary>
         ///     表格列操作方式
         /// </summary>
@@ -139,8 +131,8 @@ namespace Alabo.UI.Design.AutoTables
     /// <summary>
     ///     链接类型
     /// </summary>
-    public enum ActionLinkType
-    {
+    public enum ActionLinkType {
+
         /// <summary>
         ///     链接方式
         /// </summary>

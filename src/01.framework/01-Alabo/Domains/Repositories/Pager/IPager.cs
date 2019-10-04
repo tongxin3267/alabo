@@ -1,10 +1,10 @@
-﻿namespace Alabo.Domains.Repositories.Pager
-{
+﻿namespace Alabo.Domains.Repositories.Pager {
+
     /// <summary>
     ///     分页
     /// </summary>
-    public interface IPager : IPagerBase
-    {
+    public interface IPager : IPagerBase {
+
         /// <summary>
         ///     排序条件
         /// </summary>

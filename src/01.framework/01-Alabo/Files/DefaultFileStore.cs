@@ -4,13 +4,13 @@ using Alabo.Helpers;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Alabo.Files
-{
+namespace Alabo.Files {
+
     /// <summary>
     ///     本地文件存储服务
     /// </summary>
-    public class DefaultFileStore : IFileStore
-    {
+    public class DefaultFileStore : IFileStore {
+
         /// <summary>
         ///     路径生成器
         /// </summary>
@@ -20,16 +20,14 @@ namespace Alabo.Files
         ///     初始化本地文件存储服务
         /// </summary>
         /// <param name="pathGenerator">路径生成器</param>
-        public DefaultFileStore(IPathGenerator pathGenerator)
-        {
+        public DefaultFileStore(IPathGenerator pathGenerator) {
             _generator = pathGenerator;
         }
 
         /// <summary>
         ///     保存文件,返回完整文件路径 w
         /// </summary>
-        public async Task<string> SaveAsync()
-        {
+        public async Task<string> SaveAsync() {
             var fileControl = HttpWeb.GetFile();
             var path = _generator.Generate(fileControl.FileName);
             var physicalPath = Common.GetWebRootPath(path);
@@ -42,8 +40,7 @@ namespace Alabo.Files
                 Directory.CreateDirectory(directory);
             }
 
-            using (var stream = new FileStream(physicalPath, FileMode.Create))
-            {
+            using (var stream = new FileStream(physicalPath, FileMode.Create)) {
                 await fileControl.CopyToAsync(stream);
             }
 

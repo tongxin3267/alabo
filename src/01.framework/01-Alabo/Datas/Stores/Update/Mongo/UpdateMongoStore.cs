@@ -6,23 +6,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Alabo.Datas.Stores.Update.Mongo
-{
+namespace Alabo.Datas.Stores.Update.Mongo {
+
     public abstract class UpdateMongoStore<TEntity, TKey> : UpdateAsyncMongoStore<TEntity, TKey>,
         IUpdateStore<TEntity, TKey>
-        where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
-        protected UpdateMongoStore(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
+        protected UpdateMongoStore(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
-        public void AddUpdateOrDelete(IEnumerable<TEntity> entities, Expression<Func<TEntity, bool>> predicate)
-        {
+        public void AddUpdateOrDelete(IEnumerable<TEntity> entities, Expression<Func<TEntity, bool>> predicate) {
             throw new NotImplementedException();
         }
 
-        public bool Update(Action<TEntity> updateAction, Expression<Func<TEntity, bool>> predicate = null)
-        {
+        public bool Update(Action<TEntity> updateAction, Expression<Func<TEntity, bool>> predicate = null) {
             //TODO: mongodb批量操作数据库
             throw new NotImplementedException();
             //var expression = IdPredicate(entity.Id);
@@ -61,23 +58,19 @@ namespace Alabo.Datas.Stores.Update.Mongo
             //return true;
         }
 
-        public void UpdateMany(IEnumerable<TEntity> entities)
-        {
+        public void UpdateMany(IEnumerable<TEntity> entities) {
             throw new NotImplementedException();
         }
 
-        public void UpdateMany(Action<TEntity> updateAction, Expression<Func<TEntity, bool>> predicate = null)
-        {
+        public void UpdateMany(Action<TEntity> updateAction, Expression<Func<TEntity, bool>> predicate = null) {
             throw new NotImplementedException();
         }
 
-        public bool UpdateNoTracking([Valid] TEntity model)
-        {
+        public bool UpdateNoTracking([Valid] TEntity model) {
             throw new NotImplementedException();
         }
 
-        public bool UpdateSingle([Valid] TEntity entity)
-        {
+        public bool UpdateSingle([Valid] TEntity entity) {
             var expression = IdPredicate(entity.Id);
             var filter = ToFilter(entity.Id);
             var updateModel = Collection.FindOneAndReplace(filter, entity);

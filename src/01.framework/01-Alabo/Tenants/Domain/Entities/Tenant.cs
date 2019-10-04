@@ -8,16 +8,16 @@ using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Tenants.Domain.Entities
-{
+namespace Alabo.Tenants.Domain.Entities {
+
     /// <summary>
     ///     主机站点
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Base_Tenant")]
     [ClassProperty(Name = "租户", Icon = "fa fa-cog", SortOrder = 1, SideBarType = SideBarType.LogSideBar)]
-    public class Tenant : AggregateMongodbUserRoot<Tenant>
-    {
+    public class Tenant : AggregateMongodbUserRoot<Tenant> {
+
         /// <summary>
         ///     Name
         /// </summary>
@@ -64,8 +64,8 @@ namespace Alabo.Tenants.Domain.Entities
     /// <summary>
     ///     租户站点信息
     /// </summary>
-    public class TenantSite
-    {
+    public class TenantSite {
+
         /// <summary>
         ///     站点Id
         /// </summary>

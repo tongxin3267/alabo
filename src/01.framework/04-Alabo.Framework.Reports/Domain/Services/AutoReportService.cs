@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.Model;
 using Alabo.Domains.Services;
-using Alabo.Domains.Services.Report;
 using Alabo.Extensions;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Core.WebUis.Services;
 using Alabo.Framework.Reports.Domain.Entities;
 using Alabo.Framework.Reports.Domain.Repositories;
@@ -22,12 +17,14 @@ using Alabo.UI.Design.AutoReports;
 using Alabo.UI.Design.AutoReports.Dtos;
 using Alabo.UI.Design.AutoReports.Enums;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace Alabo.Framework.Reports.Domain.Services
-{
+namespace Alabo.Framework.Reports.Domain.Services {
+
     ///
-    public class AutoReportService : ServiceBase<Report, ObjectId>, IAutoReportService
-    {
+    public class AutoReportService : ServiceBase<Report, ObjectId>, IAutoReportService {
         private readonly IAutoReportRepository _autoReportRepository;
 
         /// <summary>
@@ -36,8 +33,7 @@ namespace Alabo.Framework.Reports.Domain.Services
         /// <param name="unitOfWork"></param>
         /// <param name="repository"></param>
         public AutoReportService(IUnitOfWork unitOfWork, IRepository<Report, ObjectId> repository)
-            : base(unitOfWork, repository)
-        {
+            : base(unitOfWork, repository) {
             _autoReportRepository = Repository<IAutoReportRepository>();
         }
 
@@ -46,8 +42,7 @@ namespace Alabo.Framework.Reports.Domain.Services
         /// </summary>
         /// <param name="dateCountReportInput"></param>
         /// <returns></returns>
-        public Tuple<ServiceResult, List<AutoReport>> GetDayCountReport(CountReportInput dateCountReportInput)
-        {
+        public Tuple<ServiceResult, List<AutoReport>> GetDayCountReport(CountReportInput dateCountReportInput) {
             var returnList = new List<AutoReport>();
             var TempTable = string.Empty;
             //是否特殊字段处理
@@ -55,8 +50,7 @@ namespace Alabo.Framework.Reports.Domain.Services
 
             #region 安全验证
 
-            if (dateCountReportInput == null)
-            {
+            if (dateCountReportInput == null) {
                 if (string.IsNullOrEmpty(dateCountReportInput.EntityType)) {
                     return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnList);
                 }
@@ -81,15 +75,12 @@ namespace Alabo.Framework.Reports.Domain.Services
 
             // 特殊字段处理
             var EnumName = string.Empty;
-            if (dateCountReportInput.Field.IsNotNullOrEmpty())
-            {
+            if (dateCountReportInput.Field.IsNotNullOrEmpty()) {
                 var property = instanceFind.GetType().GetProperty(dateCountReportInput.Field);
-                if (property != null)
-                {
+                if (property != null) {
                     var filedType = property.GetType();
                     var filed = dateCountReportInput.Field.GetPropertyValue(instanceFind);
-                    if (filed.ToString() != "0")
-                    {
+                    if (filed.ToString() != "0") {
                         EnumName = property.PropertyType.Name;
                         IsSpec = 1;
                     }
@@ -101,22 +92,17 @@ namespace Alabo.Framework.Reports.Domain.Services
                 return Tuple.Create(ServiceResult.FailedMessage("表不存在"), returnList);
             }
 
-            if (table.TableType == TableType.Mongodb)
-            {
+            if (table.TableType == TableType.Mongodb) {
                 var rs = DynamicService.ResolveMethod(typeFind.Name, "GetCountReport", dateCountReportInput);
                 var rsList = rs.Item2 as List<AutoReport>;
             }
 
-            if (table.TableType == TableType.SqlServer)
-            {
+            if (table.TableType == TableType.SqlServer) {
                 TempTable = table.TableName;
                 // 调用Response的方法
-                if (IsSpec == 1)
-                {
+                if (IsSpec == 1) {
                     returnList = GetReportFormWithField(dateCountReportInput, EnumName);
-                }
-                else
-                {
+                } else {
                     dateCountReportInput.Condition.EntityType = dateCountReportInput.EntityType;
                     returnList = GetReportForm(dateCountReportInput);
                 }
@@ -130,8 +116,7 @@ namespace Alabo.Framework.Reports.Domain.Services
         /// </summary>
         /// <param name="inputParas"></param>
         /// <returns></returns>
-        public Tuple<ServiceResult, List<AutoReport>> GetCountReport2(CountReportInput inputParas)
-        {
+        public Tuple<ServiceResult, List<AutoReport>> GetCountReport2(CountReportInput inputParas) {
             var returnList = new List<AutoReport>();
             var TempTable = string.Empty;
 
@@ -152,8 +137,7 @@ namespace Alabo.Framework.Reports.Domain.Services
             }
 
             // 特殊字段处理
-            if (inputParas.Field.IsNotNullOrEmpty())
-            {
+            if (inputParas.Field.IsNotNullOrEmpty()) {
                 var property = instanceFind.GetType().GetProperty(inputParas.Field);
                 var filedType = property.GetType();
                 var filed = inputParas.Field.GetPropertyValue(instanceFind);
@@ -169,15 +153,13 @@ namespace Alabo.Framework.Reports.Domain.Services
         /// </summary>
         /// <param name="dateCountReportInput"></param>
         /// <returns></returns>
-        public Tuple<ServiceResult, List<AutoReport>> GetDayCountReportByField(CountReportInput dateCountReportInput)
-        {
+        public Tuple<ServiceResult, List<AutoReport>> GetDayCountReportByField(CountReportInput dateCountReportInput) {
             var returnList = new List<AutoReport>();
             var TempTable = string.Empty;
 
             #region 安全验证
 
-            if (dateCountReportInput == null)
-            {
+            if (dateCountReportInput == null) {
                 if (string.IsNullOrEmpty(dateCountReportInput.EntityType)) {
                     return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnList);
                 }
@@ -201,8 +183,7 @@ namespace Alabo.Framework.Reports.Domain.Services
             #endregion 安全验证
 
             // 特殊字段处理
-            if (dateCountReportInput.Field.IsNotNullOrEmpty())
-            {
+            if (dateCountReportInput.Field.IsNotNullOrEmpty()) {
                 var property = instanceFind.GetType().GetProperty(dateCountReportInput.Field);
                 var filedType = property.GetType();
                 if (filedType.Name != dateCountReportInput.Field) {
@@ -211,8 +192,7 @@ namespace Alabo.Framework.Reports.Domain.Services
             }
 
             var table = Resolve<ITableService>().GetSingle(r => r.Key == typeFind.Name);
-            if (table.TableType == TableType.Mongodb)
-            {
+            if (table.TableType == TableType.Mongodb) {
                 // var serviceBase= DynamicService
                 //var tlist = Resolve<ITableService>().GetList();
                 //var result = from list in tlist
@@ -238,14 +218,12 @@ namespace Alabo.Framework.Reports.Domain.Services
         /// </summary>
         /// <param name="reportInput"></param>
         /// <returns></returns>
-        public Tuple<ServiceResult, PagedList<CountReportTable>> GetDayCountTableByField(CountReportInput reportInput)
-        {
+        public Tuple<ServiceResult, PagedList<CountReportTable>> GetDayCountTableByField(CountReportInput reportInput) {
             var returnList = new PagedList<CountReportTable>();
 
             #region 安全验证
 
-            if (reportInput == null)
-            {
+            if (reportInput == null) {
                 if (string.IsNullOrEmpty(reportInput.EntityType)) {
                     return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnList);
                 }
@@ -268,8 +246,7 @@ namespace Alabo.Framework.Reports.Domain.Services
             #endregion 安全验证
 
             var table = Resolve<ITableService>().GetSingle(r => r.Key == typeFind.Name);
-            if (table.TableType == TableType.Mongodb)
-            {
+            if (table.TableType == TableType.Mongodb) {
                 // var serviceBase= DynamicService
                 //var tlist = Resolve<ITableService>().GetList();
                 //var result = from list in tlist
@@ -281,8 +258,7 @@ namespace Alabo.Framework.Reports.Domain.Services
             var StartTime = DateTime.Now;
             var EndTime = DateTime.Now;
 
-            if (table.TableType == TableType.SqlServer)
-            {
+            if (table.TableType == TableType.SqlServer) {
                 var tableName = table.TableName;
 
                 returnList = GetTableForm(reportInput);
@@ -296,8 +272,7 @@ namespace Alabo.Framework.Reports.Domain.Services
         /// </summary>
         /// <param name="reportInput"></param>
         /// <returns></returns>
-        public Tuple<ServiceResult, PagedList<CountReportTable>> GetDayCountTable(CountReportInput reportInput)
-        {
+        public Tuple<ServiceResult, PagedList<CountReportTable>> GetDayCountTable(CountReportInput reportInput) {
             var returnList = new PagedList<CountReportTable>();
             var TempTable = string.Empty;
             //是否特殊字段处理
@@ -305,8 +280,7 @@ namespace Alabo.Framework.Reports.Domain.Services
 
             #region 安全验证
 
-            if (reportInput == null)
-            {
+            if (reportInput == null) {
                 if (string.IsNullOrEmpty(reportInput.EntityType)) {
                     return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnList);
                 }
@@ -330,21 +304,18 @@ namespace Alabo.Framework.Reports.Domain.Services
 
             var EnumName = string.Empty;
             // 特殊字段处理
-            if (reportInput.Field.IsNotNullOrEmpty())
-            {
+            if (reportInput.Field.IsNotNullOrEmpty()) {
                 var property = instanceFind.GetType().GetProperty(reportInput.Field);
                 var filedType = property.GetType();
                 var filed = reportInput.Field.GetPropertyValue(instanceFind);
-                if (filed.ToString() != "0")
-                {
+                if (filed.ToString() != "0") {
                     EnumName = property.PropertyType.Name;
                     IsSpec = 1;
                 }
             }
 
             var table = Resolve<ITableService>().GetSingle(r => r.Key == typeFind.Name);
-            if (table.TableType == TableType.Mongodb)
-            {
+            if (table.TableType == TableType.Mongodb) {
                 // var serviceBase= DynamicService
                 //var tlist = Resolve<ITableService>().GetList();
                 //var result = from list in tlist
@@ -352,8 +323,7 @@ namespace Alabo.Framework.Reports.Domain.Services
                 //             select new { g.Key, Total = g.Sum(n => n.ToObjectId().ToInt64()) };
             }
 
-            if (table.TableType == TableType.SqlServer)
-            {
+            if (table.TableType == TableType.SqlServer) {
                 TempTable = table.TableName;
                 // 调用Response的方法
                 if (IsSpec == 1) {
@@ -371,15 +341,13 @@ namespace Alabo.Framework.Reports.Domain.Services
         /// </summary>
         /// <param name="reportInput"></param>
         /// <returns></returns>
-        public Tuple<ServiceResult, PagedList<CountReportTable>> GetDayCountTable2(CountReportInput reportInput)
-        {
+        public Tuple<ServiceResult, PagedList<CountReportTable>> GetDayCountTable2(CountReportInput reportInput) {
             var returnList = new PagedList<CountReportTable>();
             var TempTable = string.Empty;
 
             #region 安全验证
 
-            if (reportInput == null)
-            {
+            if (reportInput == null) {
                 if (string.IsNullOrEmpty(reportInput.EntityType)) {
                     return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnList);
                 }
@@ -402,8 +370,7 @@ namespace Alabo.Framework.Reports.Domain.Services
             #endregion 安全验证
 
             // 特殊字段处理
-            if (reportInput.Field.IsNotNullOrEmpty())
-            {
+            if (reportInput.Field.IsNotNullOrEmpty()) {
                 var property = instanceFind.GetType().GetProperty(reportInput.Field);
                 var filedType = property.GetType();
                 var filed = reportInput.Field.GetPropertyValue(instanceFind);
@@ -419,14 +386,12 @@ namespace Alabo.Framework.Reports.Domain.Services
         /// </summary>
         /// <param name="singleDataInpu"></param>
         /// <returns></returns>
-        public Tuple<ServiceResult, decimal> GetSingleData(SingleReportInput singleDataInpu)
-        {
+        public Tuple<ServiceResult, decimal> GetSingleData(SingleReportInput singleDataInpu) {
             var returnValue = 0m;
 
             #region 安全验证
 
-            if (singleDataInpu == null)
-            {
+            if (singleDataInpu == null) {
                 if (string.IsNullOrEmpty(singleDataInpu.EntityType)) {
                     return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnValue);
                 }
@@ -455,14 +420,12 @@ namespace Alabo.Framework.Reports.Domain.Services
                 return Tuple.Create(ServiceResult.FailedMessage("表未找到"), returnValue);
             }
 
-            if (table.TableType == TableType.Mongodb)
-            {
+            if (table.TableType == TableType.Mongodb) {
                 var rs = DynamicService.ResolveMethod(typeFind.Name, "GetSingleReportData", singleDataInpu);
                 returnValue = rs.Item2.ConvertToDecimal();
             }
 
-            if (table.TableType == TableType.SqlServer)
-            {
+            if (table.TableType == TableType.SqlServer) {
                 var tableName = table.TableName;
 
                 var rs = _autoReportRepository.GetSingleData(singleDataInpu);
@@ -478,14 +441,12 @@ namespace Alabo.Framework.Reports.Domain.Services
         /// </summary>
         /// <param name="reportInput"></param>
         /// <returns></returns>
-        public Tuple<ServiceResult, PagedList<SumReportTable>> GetCountSumTable(SumReportInput reportInput)
-        {
+        public Tuple<ServiceResult, PagedList<SumReportTable>> GetCountSumTable(SumReportInput reportInput) {
             var resultPage = new PagedList<SumReportTable>();
 
             #region 安全验证
 
-            if (reportInput == null)
-            {
+            if (reportInput == null) {
                 if (string.IsNullOrEmpty(reportInput.EntityType)) {
                     return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), resultPage);
                 }
@@ -514,8 +475,7 @@ namespace Alabo.Framework.Reports.Domain.Services
 
             var EnumName = string.Empty;
             // 特殊字段处理
-            if (reportInput.Field.IsNotNullOrEmpty())
-            {
+            if (reportInput.Field.IsNotNullOrEmpty()) {
                 var property = instanceFind.GetType().GetProperty(reportInput.Field);
                 var filedType = property.GetType();
                 var filed = reportInput.Field.GetPropertyValue(instanceFind);
@@ -529,12 +489,10 @@ namespace Alabo.Framework.Reports.Domain.Services
                 return Tuple.Create(ServiceResult.FailedMessage("查询的表不存在"), resultPage);
             }
 
-            if (table.TableType == TableType.Mongodb)
-            {
+            if (table.TableType == TableType.Mongodb) {
             }
 
-            if (table.TableType == TableType.SqlServer)
-            {
+            if (table.TableType == TableType.SqlServer) {
                 var tableName = table.TableName;
 
                 if (string.IsNullOrEmpty(tableName)) {
@@ -556,14 +514,12 @@ namespace Alabo.Framework.Reports.Domain.Services
         /// </summary>
         /// <param name="reportInput"></param>
         /// <returns></returns>
-        public Tuple<ServiceResult, PagedList<SumReportTable>> GetCountSumTable2(SumTableInput reportInput)
-        {
+        public Tuple<ServiceResult, PagedList<SumReportTable>> GetCountSumTable2(SumTableInput reportInput) {
             var resultPage = new PagedList<SumReportTable>();
 
             #region 安全验证
 
-            if (reportInput == null)
-            {
+            if (reportInput == null) {
                 if (string.IsNullOrEmpty(reportInput.Type)) {
                     return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), resultPage);
                 }
@@ -605,14 +561,12 @@ namespace Alabo.Framework.Reports.Domain.Services
         /// </summary>
         /// <param name="reportInput"></param>
         /// <returns></returns>
-        public Tuple<ServiceResult, List<AutoReport>> GetSumReport(SumReportInput reportInput)
-        {
+        public Tuple<ServiceResult, List<AutoReport>> GetSumReport(SumReportInput reportInput) {
             var returnList = new List<AutoReport>();
 
             #region 安全验证
 
-            if (reportInput == null)
-            {
+            if (reportInput == null) {
                 if (string.IsNullOrEmpty(reportInput.EntityType)) {
                     return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnList);
                 }
@@ -646,12 +600,10 @@ namespace Alabo.Framework.Reports.Domain.Services
                 return Tuple.Create(ServiceResult.FailedMessage("查询的表不存在"), returnList);
             }
 
-            if (table.TableType == TableType.Mongodb)
-            {
+            if (table.TableType == TableType.Mongodb) {
             }
 
-            if (table.TableType == TableType.SqlServer)
-            {
+            if (table.TableType == TableType.SqlServer) {
                 var tableName = table.TableName;
 
                 if (tableName == null) {
@@ -669,14 +621,12 @@ namespace Alabo.Framework.Reports.Domain.Services
         /// </summary>
         /// <param name="reportInput"></param>
         /// <returns></returns>
-        public Tuple<ServiceResult, List<AutoReport>> GetSumReport2(SumTableInput reportInput)
-        {
+        public Tuple<ServiceResult, List<AutoReport>> GetSumReport2(SumTableInput reportInput) {
             var returnList = new List<AutoReport>();
 
             #region 安全验证
 
-            if (reportInput == null)
-            {
+            if (reportInput == null) {
                 if (string.IsNullOrEmpty(reportInput.Type)) {
                     return Tuple.Create(ServiceResult.FailedMessage("实体类型不能为空"), returnList);
                 }
@@ -723,8 +673,7 @@ namespace Alabo.Framework.Reports.Domain.Services
         /// <param name="pageSize"></param>
         /// <param name="pageIndex"></param>
         /// <returns></returns>
-        protected PagedList<CountTableOutput> GetPagedList(IList<CountTableOutput> List, int pageSize, int pageIndex)
-        {
+        protected PagedList<CountTableOutput> GetPagedList(IList<CountTableOutput> List, int pageSize, int pageIndex) {
             if (pageSize < 1) {
                 pageSize = 1;
             }
@@ -736,8 +685,7 @@ namespace Alabo.Framework.Reports.Domain.Services
             long totalCount;
 
             IList<CountTableOutput> pgeResultList;
-            if (true)
-            {
+            if (true) {
                 pgeResultList = List.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
                 totalCount = List.Count;
             }
@@ -747,8 +695,7 @@ namespace Alabo.Framework.Reports.Domain.Services
             return pagedList;
         }
 
-        protected PagedList<CountReportTable> GetPagedListx(IList<CountReportTable> List, int pageSize, int pageIndex)
-        {
+        protected PagedList<CountReportTable> GetPagedListx(IList<CountReportTable> List, int pageSize, int pageIndex) {
             if (pageSize < 1) {
                 pageSize = 1;
             }
@@ -760,8 +707,7 @@ namespace Alabo.Framework.Reports.Domain.Services
             long totalCount;
 
             IList<CountReportTable> pgeResultList;
-            if (true)
-            {
+            if (true) {
                 pgeResultList = List.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
                 totalCount = List.Count;
             }
@@ -779,8 +725,7 @@ namespace Alabo.Framework.Reports.Domain.Services
         /// <param name="dateCountReportInput"></param>
         /// <param name="EnumName"></param>
         /// <returns></returns>
-        protected List<AutoReport> GetReportFormWithField(CountReportInput dateCountReportInput, string EnumName)
-        {
+        protected List<AutoReport> GetReportFormWithField(CountReportInput dateCountReportInput, string EnumName) {
             var result = _autoReportRepository.GetReportFormWithField(dateCountReportInput, EnumName);
             return result;
         }
@@ -789,8 +734,7 @@ namespace Alabo.Framework.Reports.Domain.Services
         ///     报表图状数据 扩展
         /// </summary>
         /// <returns></returns>
-        protected List<AutoReport> GetReportFormByField(CountReportInput countReport)
-        {
+        protected List<AutoReport> GetReportFormByField(CountReportInput countReport) {
             var returnList = new List<AutoReport>();
             returnList = _autoReportRepository.GetDayCountReportByFiled(countReport);
             return returnList;
@@ -800,17 +744,14 @@ namespace Alabo.Framework.Reports.Domain.Services
         ///     报表图状数据
         /// </summary>
         /// <returns></returns>
-        protected List<AutoReport> GetReportForm(CountReportInput countReportInput)
-        {
+        protected List<AutoReport> GetReportForm(CountReportInput countReportInput) {
             var returnList = new List<object>();
             returnList = _autoReportRepository.GetDayCountReport(countReportInput);
             var tempObjectList = new List<object>();
-            var chartCols = new List<string> {"日期", "数量", "比率"};
+            var chartCols = new List<string> { "日期", "数量", "比率" };
 
-            foreach (var item in returnList)
-            {
-                var viewTableOutput = new
-                {
+            foreach (var item in returnList) {
+                var viewTableOutput = new {
                     日期 = item.GetType().GetProperty("Date").GetValue(item, null).ToString(),
                     数量 = item.GetType().GetProperty("Count").GetValue(item, null).ConvertToLong(),
                     比率 = item.GetType().GetProperty("Rate").GetValue(item, null).ToString()
@@ -818,8 +759,8 @@ namespace Alabo.Framework.Reports.Domain.Services
                 tempObjectList.Add(viewTableOutput);
             }
 
-            var line = (ReportChartType) Enum.Parse(typeof(ReportChartType), "0");
-            var Histogram = (ReportChartType) Enum.Parse(typeof(ReportChartType), "1");
+            var line = (ReportChartType)Enum.Parse(typeof(ReportChartType), "0");
+            var Histogram = (ReportChartType)Enum.Parse(typeof(ReportChartType), "1");
             var returnReport = new List<AutoReport>
             {
                 new AutoReport
@@ -840,18 +781,15 @@ namespace Alabo.Framework.Reports.Domain.Services
         ///     表格格式
         /// </summary>
         /// <returns></returns>
-        protected PagedList<CountReportTable> GetTableForm(CountReportInput countReportInput)
-        {
+        protected PagedList<CountReportTable> GetTableForm(CountReportInput countReportInput) {
             var objectList = new List<object>();
             //调用Response的方法
             objectList = _autoReportRepository.GetDayCountReport(countReportInput);
             var count = objectList.Count();
             IList<CountReportTable> resultList = new List<CountReportTable>();
 
-            foreach (var item in objectList)
-            {
-                var viewTableOutput = new CountReportTable
-                {
+            foreach (var item in objectList) {
+                var viewTableOutput = new CountReportTable {
                     Date = item.GetType().GetProperty("Date").GetValue(item, null).ToString(),
                     Count = item.GetType().GetProperty("Count").GetValue(item, null).ConvertToLong(),
                     Rate = item.GetType().GetProperty("Rate").GetValue(item, null).ToString()
@@ -871,8 +809,7 @@ namespace Alabo.Framework.Reports.Domain.Services
         /// <param name="countReportInput"></param>
         /// <param name="EnumName"></param>
         /// <returns></returns>
-        protected PagedList<CountReportTable> GetTableFormByField(CountReportInput countReportInput, string EnumName)
-        {
+        protected PagedList<CountReportTable> GetTableFormByField(CountReportInput countReportInput, string EnumName) {
             var CountTableOutputList = new List<CountReportTable>();
             CountTableOutputList = _autoReportRepository.GetCountReportTableWithField(countReportInput, EnumName);
             var result = PagedList<CountReportTable>.Create(CountTableOutputList, CountTableOutputList.Count(),

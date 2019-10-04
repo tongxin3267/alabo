@@ -2,16 +2,16 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Alabo.Datas.Queries.Criterias
-{
+namespace Alabo.Datas.Queries.Criterias {
+
     /// <summary>
     ///     整数范围过滤条件
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
     /// <typeparam name="TProperty">属性类型</typeparam>
     public class IntSegmentCriteria<TEntity, TProperty> : SegmentCriteriaBase<TEntity, TProperty, int>
-        where TEntity : class
-    {
+        where TEntity : class {
+
         /// <summary>
         ///     初始化整数范围过滤条件
         /// </summary>
@@ -21,15 +21,13 @@ namespace Alabo.Datas.Queries.Criterias
         /// <param name="boundary">包含边界</param>
         public IntSegmentCriteria(Expression<Func<TEntity, TProperty>> propertyExpression, int? min, int? max,
             Boundary boundary = Boundary.Both)
-            : base(propertyExpression, min, max, boundary)
-        {
+            : base(propertyExpression, min, max, boundary) {
         }
 
         /// <summary>
         ///     最小值是否大于最大值
         /// </summary>
-        protected override bool IsMinGreaterMax(int? min, int? max)
-        {
+        protected override bool IsMinGreaterMax(int? min, int? max) {
             return min > max;
         }
     }

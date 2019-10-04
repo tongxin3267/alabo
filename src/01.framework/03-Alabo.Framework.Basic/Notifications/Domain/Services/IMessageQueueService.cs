@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Alabo.Domains.Services;
+using Alabo.Framework.Basic.Notifications.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Alabo.Domains.Services;
-using Alabo.Framework.Basic.Notifications.Domain.Entities;
 
-namespace Alabo.Framework.Basic.Notifications.Domain.Services
-{
-    public interface IMessageQueueService : IService<MessageQueue, long>
-    {
+namespace Alabo.Framework.Basic.Notifications.Domain.Services {
+
+    public interface IMessageQueueService : IService<MessageQueue, long> {
+
         void Add(MessageQueue entity);
 
         void HandleQueue(long id, string message = null, string summary = null);

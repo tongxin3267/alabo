@@ -6,23 +6,21 @@ using MongoDB.Bson.Serialization.Attributes;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Domains.Entities
-{
+namespace Alabo.Domains.Entities {
+
     /// <summary>
     ///     sql聚合根
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
     public abstract class AggregateDefaultRoot<TEntity> : AggregateRoot<TEntity, long>
-        where TEntity : IAggregateRoot
-    {
+        where TEntity : IAggregateRoot {
+
         protected AggregateDefaultRoot(long id)
-            : base(id)
-        {
+            : base(id) {
         }
 
         protected AggregateDefaultRoot()
-            : base(0)
-        {
+            : base(0) {
         }
     }
 
@@ -31,16 +29,14 @@ namespace Alabo.Domains.Entities
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
     public abstract class AggregateDefaultUserRoot<TEntity> : AggregateUserRoot<TEntity, long>
-        where TEntity : IAggregateRoot
-    {
+        where TEntity : IAggregateRoot {
+
         protected AggregateDefaultUserRoot(long id)
-            : base(id)
-        {
+            : base(id) {
         }
 
         protected AggregateDefaultUserRoot()
-            : base(0)
-        {
+            : base(0) {
         }
     }
 
@@ -50,15 +46,14 @@ namespace Alabo.Domains.Entities
     /// <typeparam name="TEntity">实体类型</typeparam>
     /// <typeparam name="TKey">标识类型</typeparam>
     public abstract class AggregateRoot<TEntity, TKey> : EntityBase<TEntity, TKey>, IAggregateRoot<TEntity, TKey>
-        where TEntity : IAggregateRoot
-    {
+        where TEntity : IAggregateRoot {
+
         /// <summary>
         ///     初始化聚合根
         /// </summary>
         /// <param name="id">标识</param>
         protected AggregateRoot(TKey id)
-            : base(id)
-        {
+            : base(id) {
         }
     }
 
@@ -68,15 +63,14 @@ namespace Alabo.Domains.Entities
     /// <typeparam name="TEntity">实体类型</typeparam>
     /// <typeparam name="TKey">标识类型</typeparam>
     public abstract class AggregateUserRoot<TEntity, TKey> : EntityUserBase<TEntity, TKey>,
-        IAggregateRoot<TEntity, TKey> where TEntity : IAggregateRoot
-    {
+        IAggregateRoot<TEntity, TKey> where TEntity : IAggregateRoot {
+
         /// <summary>
         ///     初始化聚合根
         /// </summary>
         /// <param name="id">标识</param>
         protected AggregateUserRoot(TKey id)
-            : base(id)
-        {
+            : base(id) {
         }
 
         /// <summary>
@@ -105,15 +99,14 @@ namespace Alabo.Domains.Entities
     ///     聚合根
     /// </summary>
     /// <typeparam name="TEntity">实体类型</typeparam>
-    public abstract class AggregateRoot<TEntity> : AggregateRoot<TEntity, long> where TEntity : IAggregateRoot
-    {
+    public abstract class AggregateRoot<TEntity> : AggregateRoot<TEntity, long> where TEntity : IAggregateRoot {
+
         /// <summary>
         ///     初始化聚合根
         /// </summary>
         /// <param name="id">标识</param>
         protected AggregateRoot(long id)
-            : base(id)
-        {
+            : base(id) {
         }
     }
 }

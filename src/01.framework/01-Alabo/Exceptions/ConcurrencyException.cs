@@ -1,19 +1,18 @@
 ﻿using Alabo.Properties;
 using System;
 
-namespace Alabo.Exceptions
-{
+namespace Alabo.Exceptions {
+
     /// <summary>
     ///     并发异常
     /// </summary>
-    public class ConcurrencyException : ValidException
-    {
+    public class ConcurrencyException : ValidException {
+
         /// <summary>
         ///     初始化并发异常
         /// </summary>
         public ConcurrencyException()
-            : this("")
-        {
+            : this("") {
         }
 
         /// <summary>
@@ -21,8 +20,7 @@ namespace Alabo.Exceptions
         /// </summary>
         /// <param name="message">错误消息</param>
         public ConcurrencyException(string message)
-            : this(message, null)
-        {
+            : this(message, null) {
         }
 
         /// <summary>
@@ -30,8 +28,7 @@ namespace Alabo.Exceptions
         /// </summary>
         /// <param name="exception">异常</param>
         public ConcurrencyException(Exception exception)
-            : this("", exception)
-        {
+            : this("", exception) {
         }
 
         /// <summary>
@@ -40,8 +37,7 @@ namespace Alabo.Exceptions
         /// <param name="message">错误消息</param>
         /// <param name="exception">异常</param>
         public ConcurrencyException(string message, Exception exception)
-            : this(message, exception, "")
-        {
+            : this(message, exception, "") {
         }
 
         /// <summary>
@@ -51,8 +47,7 @@ namespace Alabo.Exceptions
         /// <param name="exception">异常</param>
         /// <param name="code">错误码</param>
         public ConcurrencyException(string message, Exception exception, string code)
-            : base($"并发异常:{LibraryResource.ConcurrencyExceptionMessage}.{message}", code, exception)
-        {
+            : base($"并发异常:{LibraryResource.ConcurrencyExceptionMessage}.{message}", code, exception) {
         }
     }
 }

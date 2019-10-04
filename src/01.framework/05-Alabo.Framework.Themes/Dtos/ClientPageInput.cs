@@ -1,14 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Core.Enums.Enum;
+﻿using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Framework.Themes.Domain.Enums;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Themes.Dtos
-{
+namespace Alabo.Framework.Themes.Dtos {
+
     /// <summary>
     ///     终端页面获取
     /// </summary>
-    public class ClientPageInput
-    {
+    public class ClientPageInput {
+
         /// <summary>
         ///     终端配置
         /// </summary>

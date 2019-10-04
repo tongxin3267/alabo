@@ -11,26 +11,21 @@ using System.Security.Cryptography;
 using System.Text;
 using Convert = System.Convert;
 
-namespace Alabo.Tables.Domain.Services
-{
-    public class SmsService : ServiceBase, ISmsService
-    {
+namespace Alabo.Tables.Domain.Services {
+
+    public class SmsService : ServiceBase, ISmsService {
         private static readonly DateTime Jan1st1970 = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
-        public SmsService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        public SmsService(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
-        public SmsEntity Sent(string phone, string content)
-        {
+        public SmsEntity Sent(string phone, string content) {
             var res = Send(phone, $"【企牛牛】{content}");
             return res.ToObject<SmsEntity>();
         }
 
-        private static string Send(string phone, string content)
-        {
-            try
-            {
+        private static string Send(string phone, string content) {
+            try {
                 var appId = "GZDL4G51N7299516832"; //账号
                 var key = "8A8E1D851D816964721A3010A426636B"; //秘钥 "0OIFS";
                 var sign = AESEncrypts(currentTimeMillis().ToString(), key);
@@ -38,19 +33,15 @@ namespace Alabo.Tables.Domain.Services
                 var smsBody = AESEncrypts(smsdata, key);
                 var body = $"appId={appId}&sign={sign}&smsData={smsBody}";
                 return SendByHttpPost("https://sdk.gzdlinfo.cn/dlcpInterface/sendsms", body);
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 Ioc.Resolve<ITableService>().Log(ex.Message, LogsLevel.Error);
             }
 
             return string.Empty;
         }
 
-        private static string SendByHttpPost(string Url, string postDataStr)
-        {
-            try
-            {
+        private static string SendByHttpPost(string Url, string postDataStr) {
+            try {
                 ServicePointManager.Expect100Continue = false;
 
                 var request = (HttpWebRequest)WebRequest.Create(Url);
@@ -72,16 +63,13 @@ namespace Alabo.Tables.Domain.Services
                 reader.Close();
                 response.Close();
                 return retstring;
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 throw ex;
             }
         }
 
         //系统当前时间毫秒数的生成方法
-        private static long currentTimeMillis()
-        {
+        private static long currentTimeMillis() {
             return (long)(DateTime.UtcNow - Jan1st1970).TotalMilliseconds;
         }
 
@@ -92,8 +80,7 @@ namespace Alabo.Tables.Domain.Services
         /// <param name="password">加密的密码</param>
         /// <param name="iv">密钥</param>
         /// <returns></returns>
-        private static string AESEncrypts(string Data, string Key)
-        {
+        private static string AESEncrypts(string Data, string Key) {
             // 256-AES key
             var keyArray = HexStringToBytes(Key); //UTF8Encoding.ASCII.GetBytes(Key);  //
             var toEncryptArray = Encoding.UTF8.GetBytes(Data);
@@ -110,8 +97,7 @@ namespace Alabo.Tables.Domain.Services
             return BytesToHexString(resultArray);
         }
 
-        private static string BytesToHexString(byte[] bytes)
-        {
+        private static string BytesToHexString(byte[] bytes) {
             var returnStr = new StringBuilder();
             if (bytes != null || bytes.Length == 0) {
                 for (var i = 0; i < bytes.Length; i++) {
@@ -127,8 +113,7 @@ namespace Alabo.Tables.Domain.Services
         /// </summary>
         /// <param name="hexString">16 hex string</param>
         /// <returns>byte array</returns>
-        private static byte[] HexStringToBytes(string hexString)
-        {
+        private static byte[] HexStringToBytes(string hexString) {
             if (hexString == null || string.IsNullOrEmpty(hexString)) {
                 return null;
             }

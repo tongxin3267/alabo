@@ -3,14 +3,14 @@ using System.Text;
 
 /// <summary>
 /// </summary>
-namespace Alabo.Apps
-{
+namespace Alabo.Apps {
+
     /// <summary>
     ///     Interface IDynamicAppCompiler
     /// </summary>
     /// <seealso cref="System.IDisposable" />
-    public interface IDynamicAppCompiler : IDisposable
-    {
+    public interface IDynamicAppCompiler : IDisposable {
+
         /// <summary>
         ///     Gets the name of the assembly.
         /// </summary>

@@ -4,13 +4,13 @@ using Alabo.Domains.UnitOfWork;
 using Alabo.Validations.Aspects;
 using System.Threading.Tasks;
 
-namespace Alabo.Domains.Services.Add
-{
+namespace Alabo.Domains.Services.Add {
+
     /// <summary>
     ///     创建操作
     /// </summary>
-    public interface IAddAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+    public interface IAddAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         /// <summary>
         ///     创建
         /// </summary>

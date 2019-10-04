@@ -7,13 +7,13 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
 
-namespace Alabo.Apps
-{
+namespace Alabo.Apps {
+
     /// <summary>
     ///     Class AppManager.
     /// </summary>
-    public static class AppManager
-    {
+    public static class AppManager {
+
         /// <summary>
         ///     The loaded apps
         /// </summary>
@@ -27,14 +27,12 @@ namespace Alabo.Apps
         /// <summary>
         ///     Loads the 所有.
         /// </summary>
-        public static void LoadAll()
-        {
+        public static void LoadAll() {
             var appRootDirectory = new DirectoryInfo(RuntimeContext.Current.Path.AppBaseDirectory);
             _loadedApps.AddRange(
                 LoadDynamicApps(appRootDirectory.FullName)); //need add dynamic apps before add binary apps
             var appDirectories = appRootDirectory.GetDirectories();
-            foreach (var item in appDirectories)
-            {
+            foreach (var item in appDirectories) {
                 var appBinPath = Path.Combine(item.FullName, "bin");
                 if (Directory.Exists(appBinPath) && new DirectoryInfo(appBinPath).GetFiles("*.dll").Length > 0) {
                     _loadedApps.AddRange(LoadBinaryApp(item.FullName));
@@ -46,13 +44,11 @@ namespace Alabo.Apps
         ///     Loads the binary application.
         /// </summary>
         /// <param name="appPath">The application path.</param>
-        private static IApp[] LoadBinaryApp(string appPath)
-        {
+        private static IApp[] LoadBinaryApp(string appPath) {
             var appBinPath = Path.Combine(appPath, "bin");
             var dllFiles = new DirectoryInfo(appBinPath).GetFiles("*.dll");
             IList<IApp> appList = new List<IApp>();
-            foreach (var file in dllFiles)
-            {
+            foreach (var file in dllFiles) {
                 var assembly = AssemblyLoadContext.Default
                     .LoadFromStream(GetAssemblyMemoryStream(file.FullName),
                         GetAssemblySymbolsMemoryStream(file.FullName));
@@ -77,8 +73,7 @@ namespace Alabo.Apps
         ///     Loads the dynamic apps.
         /// </summary>
         /// <param name="appRootPath">The application root path.</param>
-        private static IApp[] LoadDynamicApps(string appRootPath)
-        {
+        private static IApp[] LoadDynamicApps(string appRootPath) {
             IList<IApp> appList = new List<IApp>();
             var appInterfaceType = typeof(IApp);
 
@@ -88,8 +83,7 @@ namespace Alabo.Apps
                 .Where(e => e.GetTypeInfo().IsClass && !e.GetTypeInfo().IsAbstract && !e.GetTypeInfo().IsGenericType &&
                             appInterfaceType.IsAssignableFrom(e))
                 .ToArray();
-            foreach (var type in appTypes)
-            {
+            foreach (var type in appTypes) {
                 var app = (IApp)Activator.CreateInstance(type);
                 //promise: app namespace eg:Alabo.Web.Apps.Demo01, app name is "Demo01"
                 var appName = type.Namespace.Split('.').Last();
@@ -105,14 +99,12 @@ namespace Alabo.Apps
         ///     获取s the assembly memory stream.
         /// </summary>
         /// <param name="path">The path.</param>
-        private static Stream GetAssemblyMemoryStream(string path)
-        {
+        private static Stream GetAssemblyMemoryStream(string path) {
             if (!File.Exists(path)) {
                 throw new FileNotFoundException();
             }
 
-            using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            {
+            using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) {
                 var ms = new MemoryStream();
                 fs.CopyTo(ms);
                 ms.Flush();
@@ -125,8 +117,7 @@ namespace Alabo.Apps
         ///     获取s the assembly symbols memory stream.
         /// </summary>
         /// <param name="path">The path.</param>
-        private static Stream GetAssemblySymbolsMemoryStream(string path)
-        {
+        private static Stream GetAssemblySymbolsMemoryStream(string path) {
             if (!File.Exists(path)) {
                 throw new FileNotFoundException();
             }
@@ -136,8 +127,7 @@ namespace Alabo.Apps
                 return null;
             }
 
-            using (var fs = new FileStream(pdbPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            {
+            using (var fs = new FileStream(pdbPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) {
                 var ms = new MemoryStream();
                 fs.CopyTo(ms);
                 ms.Flush();

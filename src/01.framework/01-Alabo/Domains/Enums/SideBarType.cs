@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Domains.Enums
-{
+namespace Alabo.Domains.Enums {
+
     /// <summary>
     ///     左边菜单导航
     ///     根据枚举来构建左侧菜单
     /// </summary>
     [ClassProperty(Name = "左侧菜单导航")]
-    public enum SideBarType
-    {
+    public enum SideBarType {
+
         /// <summary>
         ///     全屏
         /// </summary>

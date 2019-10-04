@@ -1,14 +1,12 @@
 ﻿using Alabo.Domains.Repositories.EFCore;
 using System;
 
-namespace Alabo.Domains.Repositories.SqlServer
-{
-    public sealed class SqlServerRepositoryTransaction : IRepositoryTransaction
-    {
+namespace Alabo.Domains.Repositories.SqlServer {
+
+    public sealed class SqlServerRepositoryTransaction : IRepositoryTransaction {
         private readonly SqlServerRepositoryContext _context;
 
-        public SqlServerRepositoryTransaction(SqlServerRepositoryContext context)
-        {
+        public SqlServerRepositoryTransaction(SqlServerRepositoryContext context) {
             if (context == null) {
                 throw new ArgumentNullException(nameof(context));
             }
@@ -17,18 +15,15 @@ namespace Alabo.Domains.Repositories.SqlServer
             _context.BeginTransaction();
         }
 
-        public void Commit()
-        {
+        public void Commit() {
             _context.CommitTransaction();
         }
 
-        public void Rollback()
-        {
+        public void Rollback() {
             _context.RollbackTransaction();
         }
 
-        public void Dispose()
-        {
+        public void Dispose() {
             _context.DisposeTransaction();
         }
     }

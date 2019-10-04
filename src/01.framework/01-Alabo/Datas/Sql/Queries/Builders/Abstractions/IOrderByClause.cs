@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Abstractions
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Abstractions {
+
     /// <summary>
     ///     排序子句
     /// </summary>
-    public interface IOrderByClause
-    {
+    public interface IOrderByClause {
+
         /// <summary>
         ///     排序
         /// </summary>

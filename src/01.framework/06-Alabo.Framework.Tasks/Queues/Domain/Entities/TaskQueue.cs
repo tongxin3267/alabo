@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Datas.Ef.SqlServer;
+﻿using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Tasks.Queues.Domain.Enums;
@@ -9,16 +6,19 @@ using Alabo.UI;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Framework.Tasks.Queues.Domain.Entities
-{
+namespace Alabo.Framework.Tasks.Queues.Domain.Entities {
+
     /// <summary>
     ///     任务队列
     /// </summary>
     [ClassProperty(Name = "后台任务队列", Icon = IconFontawesome.dedent, Description = "后台任务队列")]
     [Table("Task_TaskQueue")]
-    public class TaskQueue : AggregateDefaultUserRoot<TaskQueue>
-    {
+    public class TaskQueue : AggregateDefaultUserRoot<TaskQueue> {
+
         [Display(Name = "模块标识")]
         public Guid ModuleId { get; set; }
 
@@ -93,15 +93,13 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Entities
     /// <summary>
     ///     Task_TaskQueue
     /// </summary>
-    public class TaskQueueTableMap : MsSqlAggregateRootMap<TaskQueue>
-    {
-        protected override void MapTable(EntityTypeBuilder<TaskQueue> builder)
-        {
+    public class TaskQueueTableMap : MsSqlAggregateRootMap<TaskQueue> {
+
+        protected override void MapTable(EntityTypeBuilder<TaskQueue> builder) {
             builder.ToTable("Task_TaskQueue");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<TaskQueue> builder)
-        {
+        protected override void MapProperties(EntityTypeBuilder<TaskQueue> builder) {
             //应用程序编号
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.UserName);

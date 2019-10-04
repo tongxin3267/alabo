@@ -1,10 +1,10 @@
-﻿namespace Alabo.Domains.Trees
-{
+﻿namespace Alabo.Domains.Trees {
+
     /// <summary>
     ///     树型物化路径
     /// </summary>
-    public interface IPath
-    {
+    public interface IPath {
+
         /// <summary>
         ///     路径
         /// </summary>

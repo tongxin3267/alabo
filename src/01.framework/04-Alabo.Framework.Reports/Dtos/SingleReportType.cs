@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Reports.Dtos
-{
+namespace Alabo.Framework.Reports.Dtos {
+
     /// <summary>
     ///     单个数据统计动作
     ///     环比，表示连续2个单位周期（比如连续两月）内的量的变化比。环比增长率=（本期数-上期数）/上期数×100%
     /// </summary>
-    public enum SingleReportType
-    {
+    public enum SingleReportType {
+
         /// <summary>
         ///     数量统计，比如会员量
         ///     如果是数量统计的时候，直接统计Id

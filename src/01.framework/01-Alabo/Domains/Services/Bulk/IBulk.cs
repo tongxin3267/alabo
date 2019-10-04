@@ -5,13 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Alabo.Domains.Services.Bulk
-{
+namespace Alabo.Domains.Services.Bulk {
+
     /// <summary>
     ///     批量保存操作
     /// </summary>
-    public interface IBulk<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+    public interface IBulk<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         /// <summary>
         ///     批量保存AddMany
         /// </summary>

@@ -1,13 +1,13 @@
 ﻿using Alabo.Dependency;
 using System.Threading.Tasks;
 
-namespace Alabo.Datas.UnitOfWorks
-{
+namespace Alabo.Datas.UnitOfWorks {
+
     /// <summary>
     ///     工作单元服务
     /// </summary>
-    public interface IUnitOfWorkManager : IScopeDependency
-    {
+    public interface IUnitOfWorkManager : IScopeDependency {
+
         /// <summary>
         ///     提交
         /// </summary>

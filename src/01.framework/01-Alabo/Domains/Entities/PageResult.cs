@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.Domains.Entities
-{
+namespace Alabo.Domains.Entities {
+
     /// <summary>
     ///     分页数据输出
     /// </summary>
-    public class PageResult<T>
-    {
+    public class PageResult<T> {
+
         /// <summary>
         ///     当前页记录数
         /// </summary>
@@ -43,14 +43,12 @@ namespace Alabo.Domains.Entities
         /// </summary>
         /// <param name="result"></param>
         /// <returns></returns>
-        public static PageResult<T> Convert(PagedList<T> result)
-        {
+        public static PageResult<T> Convert(PagedList<T> result) {
             if (result == null) {
                 return null;
             }
 
-            var apiRusult = new PageResult<T>
-            {
+            var apiRusult = new PageResult<T> {
                 PageCount = result.PageCount,
                 Result = result,
                 RecordCount = result.RecordCount,

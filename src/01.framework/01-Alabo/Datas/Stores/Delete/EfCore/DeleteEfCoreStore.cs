@@ -2,18 +2,16 @@
 using Alabo.Domains.Entities.Core;
 using System.Collections.Generic;
 
-namespace Alabo.Datas.Stores.Delete.EfCore
-{
+namespace Alabo.Datas.Stores.Delete.EfCore {
+
     public abstract class DeleteEfCoreStore<TEntity, TKey> : DeleteAsyncEfCoreStore<TEntity, TKey>,
         IDeleteStore<TEntity, TKey>
-        where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
-        protected DeleteEfCoreStore(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
+        protected DeleteEfCoreStore(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
-        public bool Delete(TEntity entity)
-        {
+        public bool Delete(TEntity entity) {
             if (entity == null) {
                 return false;
             }
@@ -27,8 +25,7 @@ namespace Alabo.Datas.Stores.Delete.EfCore
             return false;
         }
 
-        public void Delete(IEnumerable<TEntity> entities)
-        {
+        public void Delete(IEnumerable<TEntity> entities) {
             if (entities == null) {
                 return;
             }

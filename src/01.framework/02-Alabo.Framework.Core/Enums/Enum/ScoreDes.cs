@@ -1,11 +1,11 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     [ClassProperty(Name = "评分类型")]
-    public enum ScoreDes
-    {
+    public enum ScoreDes {
+
         [LabelCssClass(BadgeColorCalss.Success)]
         [Display(Name = "排斥")]
         排斥 = 1,

@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Validations;
+﻿using Alabo.Validations;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Themes.Dtos
-{
-    public class WidgeInput
-    {
+namespace Alabo.Framework.Themes.Dtos {
+
+    public class WidgeInput {
+
         /// <summary>
         ///     数据Id为空的时候，使用默认数据Id
         /// </summary>

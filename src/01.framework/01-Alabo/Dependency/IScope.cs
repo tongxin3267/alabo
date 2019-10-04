@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Alabo.Dependency
-{
+namespace Alabo.Dependency {
+
     /// <summary>
     ///     作用域
     /// </summary>
-    public interface IScope : IDisposable
-    {
+    public interface IScope : IDisposable {
+
         /// <summary>
         ///     创建实例
         /// </summary>

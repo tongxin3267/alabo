@@ -1,13 +1,13 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Datas.Queries.Enums
-{
+namespace Alabo.Datas.Queries.Enums {
+
     /// <summary>
     ///     查询边界
     /// </summary>
     [ClassProperty(Name = "查询边界")]
-    public enum Boundary
-    {
+    public enum Boundary {
+
         /// <summary>
         ///     包含左边
         /// </summary>

@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Domains.Enums
-{
+namespace Alabo.Domains.Enums {
+
     /// <summary>
     ///     控件类型
     /// </summary>
     [ClassProperty(Name = "控件类型")]
-    public enum ControlsType
-    {
+    public enum ControlsType {
+
         /// <summary>
         ///     Label类型
         /// </summary>

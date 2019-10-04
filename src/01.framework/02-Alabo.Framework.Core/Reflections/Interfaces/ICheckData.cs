@@ -1,12 +1,12 @@
 ﻿using System.Threading.Tasks;
 
-namespace Alabo.Framework.Core.Reflections.Interfaces
-{
+namespace Alabo.Framework.Core.Reflections.Interfaces {
+
     /// <summary>
     ///     数据一致性检查
     /// </summary>
-    public interface ICheckData
-    {
+    public interface ICheckData {
+
         /// <summary>
         ///     同步方法执行数据检查
         /// </summary>

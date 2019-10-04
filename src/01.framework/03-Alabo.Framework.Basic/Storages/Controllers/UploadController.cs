@@ -1,4 +1,12 @@
-﻿using System;
+﻿using Alabo.Extensions;
+using Alabo.Framework.Basic.Storages.Domain.Services;
+using Alabo.Framework.Basic.Storages.Dtos;
+using Alabo.Web.Mvc.Attributes;
+using Alabo.Web.Mvc.Controllers;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -9,20 +17,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
-using Alabo.Extensions;
-using Alabo.Framework.Basic.Storages.Domain.Services;
-using Alabo.Framework.Basic.Storages.Dtos;
-using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.Controllers;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Primitives;
 
-namespace Alabo.Framework.Basic.Storages.Controllers
-{
+namespace Alabo.Framework.Basic.Storages.Controllers {
+
     [Route("/Web/[Action]")]
-    public class UploadController : BaseController
-    {
+    public class UploadController : BaseController {
+
         /// <summary>
         ///     The host environment
         /// </summary>
@@ -36,7 +36,7 @@ namespace Alabo.Framework.Basic.Storages.Controllers
         /// <summary>
         ///     The result
         /// </summary>
-        private readonly UploadResult Result = new UploadResult {State = UploadState.Unknown};
+        private readonly UploadResult Result = new UploadResult { State = UploadState.Unknown };
 
         /// <summary>
         ///     The file list
@@ -67,8 +67,7 @@ namespace Alabo.Framework.Basic.Storages.Controllers
         ///     Initializes a new instance of the <see cref="UploadController" /> class.
         /// </summary>
         /// <param name="hostingEnvironment">The hosting environment.</param>
-        public UploadController(IHostingEnvironment hostingEnvironment)
-        {
+        public UploadController(IHostingEnvironment hostingEnvironment) {
             _hostEnvironment = hostingEnvironment;
         }
 
@@ -93,29 +92,25 @@ namespace Alabo.Framework.Basic.Storages.Controllers
         /// </summary>
         /// <param name="callback">The callback.</param>
         /// <param name="action">The action.</param>
-        public IActionResult UEditor([FromQuery] string callback, [FromQuery] string action)
-        {
+        public IActionResult UEditor([FromQuery] string callback, [FromQuery] string action) {
             if (!Response.Headers.ContainsKey("Access-Control-Allow-Origin")) {
                 Response.Headers.Add("Access-Control-Allow-Origin", "*");
             }
 
-            switch (action)
-            {
+            switch (action) {
                 case "config":
-                    if (!callback.IsNullOrEmpty())
-                    {
+                    if (!callback.IsNullOrEmpty()) {
                         var items = UEditorConfig.Items;
 
                         items["imageUrlPrefix"] =
                             Request.IsHttps ? $"https://{Request.Host}/" : $"http://{Request.Host}/";
-                        return new ContentResult {Content = $"{callback}({items})"};
+                        return new ContentResult { Content = $"{callback}({items})" };
                     }
 
                     return WriteJson(callback, UEditorConfig.Items);
 
                 case "uploadimage":
-                    var config = new UploadConfig
-                    {
+                    var config = new UploadConfig {
                         AllowExtensions = UEditorConfig.GetStringList("imageAllowFiles"),
                         PathFormat = UEditorConfig.GetString("imagePathFormat"),
                         SizeLimit = UEditorConfig.GetInt("imageMaxSize"),
@@ -124,9 +119,8 @@ namespace Alabo.Framework.Basic.Storages.Controllers
                     return UploadFile(callback, config);
 
                 case "uploadscrawl":
-                    config = new UploadConfig
-                    {
-                        AllowExtensions = new[] {".png"},
+                    config = new UploadConfig {
+                        AllowExtensions = new[] { ".png" },
                         PathFormat = UEditorConfig.GetString("scrawlPathFormat"),
                         SizeLimit = UEditorConfig.GetInt("scrawlMaxSize"),
                         UploadFieldName = UEditorConfig.GetString("scrawlFieldName"),
@@ -136,8 +130,7 @@ namespace Alabo.Framework.Basic.Storages.Controllers
                     return UploadFile(callback, config);
 
                 case "uploadvideo":
-                    config = new UploadConfig
-                    {
+                    config = new UploadConfig {
                         AllowExtensions = UEditorConfig.GetStringList("videoAllowFiles"),
                         PathFormat = UEditorConfig.GetString("videoPathFormat"),
                         SizeLimit = UEditorConfig.GetInt("videoMaxSize"),
@@ -146,8 +139,7 @@ namespace Alabo.Framework.Basic.Storages.Controllers
                     return UploadFile(callback, config);
 
                 case "uploadfile":
-                    config = new UploadConfig
-                    {
+                    config = new UploadConfig {
                         AllowExtensions = UEditorConfig.GetStringList("fileAllowFiles"),
                         PathFormat = UEditorConfig.GetString("filePathFormat"),
                         SizeLimit = UEditorConfig.GetInt("fileMaxSize"),
@@ -156,90 +148,68 @@ namespace Alabo.Framework.Basic.Storages.Controllers
                     return UploadFile(callback, config);
 
                 case "listimage":
-                    try
-                    {
+                    try {
                         Start = string.IsNullOrEmpty(HttpContext.Request.Query["start"])
                             ? 0
                             : Convert.ToInt32(HttpContext.Request.Query["start"]);
                         Size = Convert.ToInt32(HttpContext.Request.Query["size"]);
-                    }
-                    catch (FormatException)
-                    {
+                    } catch (FormatException) {
                         State = ResultState.InvalidParam;
                         WriteJson(callback, new { });
                     }
 
-                    try
-                    {
+                    try {
                         var localPath = _hostEnvironment.ContentRootPath + "/upload/UEditor/image";
                         buildingList.AddRange(Directory.GetFiles(localPath, "*", SearchOption.AllDirectories)
                             .Where(x => SearchExtensions.Contains(Path.GetExtension(x).ToLower()))
                             .Select(x => PathToList + x.Substring(localPath.Length).Replace("\\", "/")));
                         Total = buildingList.Count;
                         FileList = buildingList.OrderBy(x => x).Skip(Start).Take(Size).ToArray();
-                    }
-                    catch (UnauthorizedAccessException)
-                    {
+                    } catch (UnauthorizedAccessException) {
                         State = ResultState.AuthorizError;
-                    }
-                    catch (DirectoryNotFoundException)
-                    {
+                    } catch (DirectoryNotFoundException) {
                         State = ResultState.PathNotFound;
-                    }
-                    catch (IOException)
-                    {
+                    } catch (IOException) {
                         State = ResultState.IOError;
                     }
 
-                    return WriteJson(callback, new
-                    {
+                    return WriteJson(callback, new {
                         state = GetStateString(),
-                        list = FileList?.Select(x => new {url = x}),
+                        list = FileList?.Select(x => new { url = x }),
                         start = Start,
                         size = Size,
                         total = Total
                     });
 
                 case "listfile":
-                    try
-                    {
+                    try {
                         Start = string.IsNullOrEmpty(HttpContext.Request.Query["start"])
                             ? 0
                             : Convert.ToInt32(HttpContext.Request.Query["start"]);
                         Size = Convert.ToInt32(HttpContext.Request.Query["size"]);
-                    }
-                    catch (FormatException)
-                    {
+                    } catch (FormatException) {
                         State = ResultState.InvalidParam;
                         WriteJson(callback, new { });
                     }
 
-                    try
-                    {
+                    try {
                         var localPath = _hostEnvironment.ContentRootPath + "/upload/UEditor/file";
                         buildingList.AddRange(Directory.GetFiles(localPath, "*", SearchOption.AllDirectories)
                             .Where(x => SearchExtensions.Contains(Path.GetExtension(x).ToLower()))
                             .Select(x => PathToList + x.Substring(localPath.Length).Replace("\\", "/")));
                         Total = buildingList.Count;
                         FileList = buildingList.OrderBy(x => x).Skip(Start).Take(Size).ToArray();
-                    }
-                    catch (UnauthorizedAccessException)
-                    {
+                    } catch (UnauthorizedAccessException) {
                         State = ResultState.AuthorizError;
-                    }
-                    catch (DirectoryNotFoundException)
-                    {
+                    } catch (DirectoryNotFoundException) {
                         State = ResultState.PathNotFound;
-                    }
-                    catch (IOException)
-                    {
+                    } catch (IOException) {
                         State = ResultState.IOError;
                     }
 
-                    return WriteJson(callback, new
-                    {
+                    return WriteJson(callback, new {
                         state = GetStateString(),
-                        list = FileList?.Select(x => new {url = x}),
+                        list = FileList?.Select(x => new { url = x }),
                         start = Start,
                         size = Size,
                         total = Total
@@ -249,15 +219,13 @@ namespace Alabo.Framework.Basic.Storages.Controllers
                     StringValues sources;
                     Request.Form.TryGetValue("source[]", out sources);
                     if (sources.Count == 0) {
-                        return WriteJson(callback, new {state = "参数错误：没有指定抓取源"});
+                        return WriteJson(callback, new { state = "参数错误：没有指定抓取源" });
                     }
 
                     var Crawlers = sources.Select(x => new Crawler(x).Fetch(_hostEnvironment)).ToArray();
-                    return WriteJson(callback, new
-                    {
+                    return WriteJson(callback, new {
                         state = "SUCCESS",
-                        list = Crawlers.Select(x => new
-                        {
+                        list = Crawlers.Select(x => new {
                             state = x.State,
                             source = x.SourceUrl,
                             url = x.ServerUrl
@@ -265,7 +233,7 @@ namespace Alabo.Framework.Basic.Storages.Controllers
                     });
 
                 default:
-                    return WriteJson(callback, new {state = "action 参数为空或者 action 不被支持。"});
+                    return WriteJson(callback, new { state = "action 参数为空或者 action 不被支持。" });
             }
         }
 
@@ -274,28 +242,22 @@ namespace Alabo.Framework.Basic.Storages.Controllers
         /// </summary>
         /// <param name="callback">The callback.</param>
         /// <param name="config">The configuration.</param>
-        private IActionResult UploadFile(string callback, UploadConfig config)
-        {
+        private IActionResult UploadFile(string callback, UploadConfig config) {
             config.PathFormat = "wwwroot/" + config.PathFormat.Replace("upload", "uploads");
             var localPath = string.Empty;
 
             byte[] uploadFileBytes = null;
             string uploadFileName = null;
-            if (config.Base64)
-            {
+            if (config.Base64) {
                 uploadFileName = config.Base64Filename;
                 uploadFileBytes = Convert.FromBase64String(Request.Query[config.UploadFieldName]);
-            }
-            else
-            {
+            } else {
                 var file = Request.Form.Files[config.UploadFieldName];
                 uploadFileName = file.FileName;
 
-                if (!CheckFileType(uploadFileName, config))
-                {
+                if (!CheckFileType(uploadFileName, config)) {
                     Result.State = UploadState.TypeNotAllow;
-                    return WriteJson(callback, new
-                    {
+                    return WriteJson(callback, new {
                         state = GetStateMessage(Result.State),
                         url = Result.Url,
                         title = Result.OriginFileName,
@@ -304,11 +266,9 @@ namespace Alabo.Framework.Basic.Storages.Controllers
                     });
                 }
 
-                if (!CheckFileSize((int) file.Length, config))
-                {
+                if (!CheckFileSize((int)file.Length, config)) {
                     Result.State = UploadState.SizeLimitExceed;
-                    return WriteJson(callback, new
-                    {
+                    return WriteJson(callback, new {
                         state = GetStateMessage(Result.State),
                         url = Result.Url,
                         title = Result.OriginFileName,
@@ -318,15 +278,11 @@ namespace Alabo.Framework.Basic.Storages.Controllers
                 }
 
                 uploadFileBytes = new byte[file.Length];
-                try
-                {
-                    file.OpenReadStream().Read(uploadFileBytes, 0, (int) file.Length);
-                }
-                catch (Exception)
-                {
+                try {
+                    file.OpenReadStream().Read(uploadFileBytes, 0, (int)file.Length);
+                } catch (Exception) {
                     Result.State = UploadState.NetworkError;
-                    return WriteJson(callback, new
-                    {
+                    return WriteJson(callback, new {
                         state = GetStateMessage(Result.State),
                         url = Result.Url,
                         title = Result.OriginFileName,
@@ -339,8 +295,7 @@ namespace Alabo.Framework.Basic.Storages.Controllers
             Result.OriginFileName = uploadFileName;
             var savePath = PathFormatter.Format(uploadFileName, config.PathFormat);
             localPath = _hostEnvironment.ContentRootPath + "/" + savePath;
-            try
-            {
+            try {
                 if (!Directory.Exists(Path.GetDirectoryName(localPath))) {
                     Directory.CreateDirectory(Path.GetDirectoryName(localPath));
                 }
@@ -351,22 +306,17 @@ namespace Alabo.Framework.Basic.Storages.Controllers
                     extension == ".png" ||
                     extension == ".jpeg" ||
                     extension == ".gif" ||
-                    extension == ".bmp")
-                {
+                    extension == ".bmp") {
                     var iSource = Image.FromFile(localPath);
-                    if (iSource.PhysicalDimension.Width > 1024)
-                    {
+                    if (iSource.PhysicalDimension.Width > 1024) {
                         int dHeight = 64, dWidth = 64;
                         var rate = iSource.Width * 1.00 / iSource.Height;
-                        if (rate <= 1)
-                        {
+                        if (rate <= 1) {
                             dHeight = 1024;
-                            dWidth = (int) (rate * 1024);
-                        }
-                        else
-                        {
+                            dWidth = (int)(rate * 1024);
+                        } else {
                             dWidth = 1024;
-                            dHeight = (int) (1024 / rate);
+                            dHeight = (int)(1024 / rate);
                         }
 
                         var tFormat = iSource.RawFormat;
@@ -387,13 +337,11 @@ namespace Alabo.Framework.Basic.Storages.Controllers
                         qy[0] = 90; //设置压缩的比例1-100
                         var eParam = new EncoderParameter(Encoder.Quality, qy);
                         ep.Param[0] = eParam;
-                        try
-                        {
+                        try {
                             var arrayICI = ImageCodecInfo.GetImageEncoders();
                             ImageCodecInfo jpegICIinfo = null;
                             for (var x = 0; x < arrayICI.Length; x++) {
-                                if (arrayICI[x].FormatDescription.Equals("JPEG"))
-                                {
+                                if (arrayICI[x].FormatDescription.Equals("JPEG")) {
                                     jpegICIinfo = arrayICI[x];
                                     break;
                                 }
@@ -408,13 +356,9 @@ namespace Alabo.Framework.Basic.Storages.Controllers
                             } else {
                                 ob.Save(localPath, tFormat);
                             }
-                        }
-                        catch (Exception ex)
-                        {
+                        } catch (Exception ex) {
                             Console.Write(ex.Message);
-                        }
-                        finally
-                        {
+                        } finally {
                             iSource.Dispose();
                             ob.Dispose();
                         }
@@ -423,15 +367,12 @@ namespace Alabo.Framework.Basic.Storages.Controllers
 
                 Result.Url = savePath;
                 Result.State = UploadState.Success;
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 Result.State = UploadState.FileAccessError;
                 Result.ErrorMessage = e.Message;
             }
 
-            return WriteJson(callback, new
-            {
+            return WriteJson(callback, new {
                 state = GetStateMessage(Result.State),
                 url = Result.Url,
                 title = Result.OriginFileName,
@@ -444,10 +385,8 @@ namespace Alabo.Framework.Basic.Storages.Controllers
         ///     Gets the state message.
         /// </summary>
         /// <param name="state">The state.</param>
-        private string GetStateMessage(UploadState state)
-        {
-            switch (state)
-            {
+        private string GetStateMessage(UploadState state) {
+            switch (state) {
                 case UploadState.Success:
                     return "SUCCESS";
 
@@ -472,8 +411,7 @@ namespace Alabo.Framework.Basic.Storages.Controllers
         /// </summary>
         /// <param name="filename">The filename.</param>
         /// <param name="config">The configuration.</param>
-        private bool CheckFileType(string filename, UploadConfig config)
-        {
+        private bool CheckFileType(string filename, UploadConfig config) {
             var fileExtension = Path.GetExtension(filename).ToLower();
             return config.AllowExtensions.Select(x => x.ToLower()).Contains(fileExtension);
         }
@@ -483,8 +421,7 @@ namespace Alabo.Framework.Basic.Storages.Controllers
         /// </summary>
         /// <param name="size">The size.</param>
         /// <param name="config">The configuration.</param>
-        private bool CheckFileSize(int size, UploadConfig config)
-        {
+        private bool CheckFileSize(int size, UploadConfig config) {
             return size < config.SizeLimit;
         }
 
@@ -493,8 +430,7 @@ namespace Alabo.Framework.Basic.Storages.Controllers
         /// </summary>
         /// <param name="callback">The callback.</param>
         /// <param name="data">The data.</param>
-        private JsonResult WriteJson(string callback, object data)
-        {
+        private JsonResult WriteJson(string callback, object data) {
             var o = data as JsonObject;
             return Json(data);
         }
@@ -504,10 +440,9 @@ namespace Alabo.Framework.Basic.Storages.Controllers
         /// </summary>
         /// <param name="info">The information.</param>
         [NonAction]
-        private string BuildJson(Hashtable info)
-        {
+        private string BuildJson(Hashtable info) {
             var fields = new List<string>();
-            var keys = new[] {"originalName", "name", "url", "size", "state", "type"};
+            var keys = new[] { "originalName", "name", "url", "size", "state", "type" };
             for (var i = 0; i < keys.Length; i++) {
                 fields.Add(string.Format("\"{0}\": \"{1}\"", keys[i], info[keys[i]]));
             }
@@ -518,10 +453,8 @@ namespace Alabo.Framework.Basic.Storages.Controllers
         /// <summary>
         ///     Gets the state string.
         /// </summary>
-        private string GetStateString()
-        {
-            switch (State)
-            {
+        private string GetStateString() {
+            switch (State) {
                 case ResultState.Success:
                     return "SUCCESS";
 
@@ -546,8 +479,7 @@ namespace Alabo.Framework.Basic.Storages.Controllers
         /// </summary>
         /// <param name="env">The env.</param>
         /// <param name="responseType">Type of the response.</param>
-        public IActionResult UploadImageUrl([FromServices] IHostingEnvironment env, string responseType)
-        {
+        public IActionResult UploadImageUrl([FromServices] IHostingEnvironment env, string responseType) {
             // CKEditor提交的很重要的一个参数
             string callback = Request.Query["CKEditorFuncNum"];
             var form = Request.Form;
@@ -561,15 +493,13 @@ namespace Alabo.Framework.Basic.Storages.Controllers
             var fileoutName = "Upload/" + filenameGuid + extension;
             //var bowerPath = Path.Combine(WebContext.Config.AppBaseDirectory, fileoutName);//获取到图片保存的路径，这边根据自己的实现
             var savePath = Path.Combine(env.WebRootPath, fileoutName);
-            using (var fs = new FileStream(savePath, FileMode.OpenOrCreate))
-            {
+            using (var fs = new FileStream(savePath, FileMode.OpenOrCreate)) {
                 fs.WriteAsync(buff, 0, buff.Length);
                 fs.Close();
             }
 
             if (responseType == "json") {
-                return Json(new
-                {
+                return Json(new {
                     uploaded = 1,
                     fileName = img.FileName,
                     url = "/wwwroot/" + fileoutName
@@ -587,8 +517,7 @@ namespace Alabo.Framework.Basic.Storages.Controllers
         /// </summary>
         /// <param name="env">The env.</param>
         [HttpPost]
-        public IActionResult UploadImageUrlPaste([FromServices] IHostingEnvironment env)
-        {
+        public IActionResult UploadImageUrlPaste([FromServices] IHostingEnvironment env) {
             // CKEditor提交的很重要的一个参数
             string callback = Request.Query["CKEditorFuncNum"];
             var form = Request.Form;
@@ -601,13 +530,11 @@ namespace Alabo.Framework.Basic.Storages.Controllers
             var filenameGuid = Guid.NewGuid().ToString();
             var fileoutName = "upload/" + filenameGuid + extension;
             var savePath = Path.Combine(env.WebRootPath, fileoutName);
-            using (var fs = new FileStream(savePath, FileMode.Create))
-            {
+            using (var fs = new FileStream(savePath, FileMode.Create)) {
                 fs.WriteAsync(buff, 0, buff.Length);
             }
 
-            return Json(new
-            {
+            return Json(new {
                 uploaded = 1,
                 fileName = img.FileName,
                 url = fileoutName
@@ -617,8 +544,7 @@ namespace Alabo.Framework.Basic.Storages.Controllers
         /// <summary>
         ///     Uploads this instance.
         /// </summary>
-        public ActionResult Upload()
-        {
+        public ActionResult Upload() {
             //上传配置
             var pathbase = "/wwwroot/uploads/editor/"; //保存路径
             var size = 10; //文件大小限制,单位mb
@@ -640,8 +566,8 @@ namespace Alabo.Framework.Basic.Storages.Controllers
 
         /// <summary>
         /// </summary>
-        private enum ResultState
-        {
+        private enum ResultState {
+
             /// <summary>
             ///     The success
             /// </summary>
@@ -671,14 +597,13 @@ namespace Alabo.Framework.Basic.Storages.Controllers
 
     /// <summary>
     /// </summary>
-    public class Crawler
-    {
+    public class Crawler {
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="Crawler" /> class.
         /// </summary>
         /// <param name="sourceUrl">The source URL.</param>
-        public Crawler(string sourceUrl)
-        {
+        public Crawler(string sourceUrl) {
             SourceUrl = sourceUrl;
         }
 
@@ -710,25 +635,20 @@ namespace Alabo.Framework.Basic.Storages.Controllers
         ///     Fetches the specified hosting environment.
         /// </summary>
         /// <param name="hostingEnvironment">The hosting environment.</param>
-        public Crawler Fetch(IHostingEnvironment hostingEnvironment)
-        {
-            if (!IsExternalIPAddress(SourceUrl))
-            {
+        public Crawler Fetch(IHostingEnvironment hostingEnvironment) {
+            if (!IsExternalIPAddress(SourceUrl)) {
                 State = "INVALID_URL";
                 return this;
             }
 
             var request = WebRequest.Create(SourceUrl) as HttpWebRequest;
-            using (var response = request.GetResponseAsync().Result as HttpWebResponse)
-            {
-                if (response.StatusCode != HttpStatusCode.OK)
-                {
+            using (var response = request.GetResponseAsync().Result as HttpWebResponse) {
+                if (response.StatusCode != HttpStatusCode.OK) {
                     State = "Url returns " + response.StatusCode + ", " + response.StatusDescription;
                     return this;
                 }
 
-                if (response.ContentType.IndexOf("image") == -1)
-                {
+                if (response.ContentType.IndexOf("image") == -1) {
                     State = "Url is not an image";
                     return this;
                 }
@@ -740,13 +660,11 @@ namespace Alabo.Framework.Basic.Storages.Controllers
                     Directory.CreateDirectory(Path.GetDirectoryName(savePath));
                 }
 
-                try
-                {
+                try {
                     var stream = response.GetResponseStream();
                     var reader = new BinaryReader(stream);
                     byte[] bytes;
-                    using (var ms = new MemoryStream())
-                    {
+                    using (var ms = new MemoryStream()) {
                         var buffer = new byte[4096];
                         int count;
                         while ((count = reader.Read(buffer, 0, buffer.Length)) != 0) {
@@ -758,9 +676,7 @@ namespace Alabo.Framework.Basic.Storages.Controllers
 
                     File.WriteAllBytes(savePath, bytes);
                     State = "SUCCESS";
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     State = "抓取错误：" + e.Message;
                 }
 
@@ -775,15 +691,12 @@ namespace Alabo.Framework.Basic.Storages.Controllers
         /// <returns>
         ///     <c>true</c> if [is external ip address] [the specified URL]; otherwise, <c>false</c>.
         /// </returns>
-        private bool IsExternalIPAddress(string url)
-        {
+        private bool IsExternalIPAddress(string url) {
             var uri = new Uri(url);
-            switch (uri.HostNameType)
-            {
+            switch (uri.HostNameType) {
                 case UriHostNameType.Dns:
                     var ipHostEntry = Dns.GetHostEntryAsync(uri.DnsSafeHost).Result;
-                    foreach (var ipAddress in ipHostEntry.AddressList)
-                    {
+                    foreach (var ipAddress in ipHostEntry.AddressList) {
                         var ipBytes = ipAddress.GetAddressBytes();
                         if (ipAddress.AddressFamily == AddressFamily.InterNetwork) {
                             if (!IsPrivateIP(ipAddress)) {
@@ -808,14 +721,12 @@ namespace Alabo.Framework.Basic.Storages.Controllers
         /// <returns>
         ///     <c>true</c> if [is private ip] [the specified my ip address]; otherwise, <c>false</c>.
         /// </returns>
-        private bool IsPrivateIP(IPAddress myIPAddress)
-        {
+        private bool IsPrivateIP(IPAddress myIPAddress) {
             if (IPAddress.IsLoopback(myIPAddress)) {
                 return true;
             }
 
-            if (myIPAddress.AddressFamily == AddressFamily.InterNetwork)
-            {
+            if (myIPAddress.AddressFamily == AddressFamily.InterNetwork) {
                 var ipBytes = myIPAddress.GetAddressBytes();
                 // 10.0.0.0/24
                 if (ipBytes[0] == 10) {
@@ -844,8 +755,8 @@ namespace Alabo.Framework.Basic.Storages.Controllers
 
     /// <summary>
     /// </summary>
-    public class UploadConfig
-    {
+    public class UploadConfig {
+
         /// <summary>
         ///     文件命名规则
         /// </summary>
@@ -897,8 +808,8 @@ namespace Alabo.Framework.Basic.Storages.Controllers
 
     /// <summary>
     /// </summary>
-    public class UploadResult
-    {
+    public class UploadResult {
+
         /// <summary>
         ///     Gets or sets the state.
         /// </summary>
@@ -935,8 +846,8 @@ namespace Alabo.Framework.Basic.Storages.Controllers
     /// <summary>
     /// </summary>
     [ClassProperty(Name = "上传状态")]
-    public enum UploadState
-    {
+    public enum UploadState {
+
         /// <summary>
         ///     The success
         /// </summary>
@@ -970,15 +881,14 @@ namespace Alabo.Framework.Basic.Storages.Controllers
 
     /// <summary>
     /// </summary>
-    public static class PathFormatter
-    {
+    public static class PathFormatter {
+
         /// <summary>
         ///     Formats the specified origin file name.
         /// </summary>
         /// <param name="originFileName">Name of the origin file.</param>
         /// <param name="pathFormat">The path format.</param>
-        public static string Format(string originFileName, string pathFormat)
-        {
+        public static string Format(string originFileName, string pathFormat) {
             if (string.IsNullOrWhiteSpace(pathFormat)) {
                 pathFormat = "{filename}{rand:6}";
             }
@@ -991,15 +901,14 @@ namespace Alabo.Framework.Basic.Storages.Controllers
 
             pathFormat = pathFormat.Replace("{filename}", filename);
             pathFormat = new Regex(@"\{rand(\:?)(\d+)\}", RegexOptions.Compiled).Replace(pathFormat,
-                delegate(Match match)
-                {
+                delegate (Match match) {
                     var digit = 6;
                     if (match.Groups.Count > 2) {
                         digit = Convert.ToInt32(match.Groups[2].Value);
                     }
 
                     var rand = new Random();
-                    return rand.Next((int) Math.Pow(10, digit), (int) Math.Pow(10, digit + 1)).ToString();
+                    return rand.Next((int)Math.Pow(10, digit), (int)Math.Pow(10, digit + 1)).ToString();
                 });
 
             pathFormat = pathFormat.Replace("{time}", DateTime.Now.Ticks.ToString());

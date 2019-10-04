@@ -1,10 +1,10 @@
-﻿namespace Alabo.Security.Identity.Options
-{
+﻿namespace Alabo.Security.Identity.Options {
+
     /// <summary>
     ///     用户配置
     /// </summary>
-    public class UserOptions
-    {
+    public class UserOptions {
+
         /// <summary>
         ///     用户名允许使用的字符. 默认值为 abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+
         /// </summary>

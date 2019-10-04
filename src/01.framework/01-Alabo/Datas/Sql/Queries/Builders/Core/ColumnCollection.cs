@@ -2,13 +2,13 @@
 using System;
 using System.Linq;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Core
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Core {
+
     /// <summary>
     ///     列集合
     /// </summary>
-    public class ColumnCollection
-    {
+    public class ColumnCollection {
+
         /// <summary>
         ///     初始化列集合
         /// </summary>
@@ -16,8 +16,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <param name="tableAlias">表别名</param>
         /// <param name="table">表实体类型</param>
         /// <param name="raw">使用原始值</param>
-        public ColumnCollection(string columns, string tableAlias = null, Type table = null, bool raw = false)
-        {
+        public ColumnCollection(string columns, string tableAlias = null, Type table = null, bool raw = false) {
             Columns = columns;
             TableAlias = tableAlias;
             Table = table;
@@ -49,8 +48,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// </summary>
         /// <param name="dialect">Sql方言</param>
         /// <param name="register">实体别名注册器</param>
-        public string ToSql(IDialect dialect, IEntityAliasRegister register)
-        {
+        public string ToSql(IDialect dialect, IEntityAliasRegister register) {
             if (Raw) {
                 return Columns;
             }
@@ -62,8 +60,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <summary>
         ///     获取表别名
         /// </summary>
-        private string GetTableAlias(IEntityAliasRegister register)
-        {
+        private string GetTableAlias(IEntityAliasRegister register) {
             if (register.Contains(Table)) {
                 return register.GetAlias(Table);
             }

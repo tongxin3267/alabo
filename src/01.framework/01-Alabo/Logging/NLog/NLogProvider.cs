@@ -4,13 +4,13 @@ using Microsoft.Extensions.Logging;
 using System;
 using NLogs = NLog;
 
-namespace Alabo.Logging.NLog
-{
+namespace Alabo.Logging.NLog {
+
     /// <summary>
     ///     NLog日志提供程序
     /// </summary>
-    public class NLogProvider : ILogProvider
-    {
+    public class NLogProvider : ILogProvider {
+
         /// <summary>
         ///     日志格式化器
         /// </summary>
@@ -26,8 +26,7 @@ namespace Alabo.Logging.NLog
         /// </summary>
         /// <param name="logName">日志名称</param>
         /// <param name="format">日志格式化器</param>
-        public NLogProvider(string logName, ILogFormat format = null)
-        {
+        public NLogProvider(string logName, ILogFormat format = null) {
             _logger = GetLogger(logName);
             _format = format;
         }
@@ -52,11 +51,9 @@ namespace Alabo.Logging.NLog
         /// </summary>
         /// <param name="level">日志等级</param>
         /// <param name="content">日志内容</param>
-        public void WriteLog(LogLevel level, ILogContent content)
-        {
+        public void WriteLog(LogLevel level, ILogContent content) {
             var provider = GetFormatProvider();
-            if (provider == null)
-            {
+            if (provider == null) {
                 _logger.Log(ConvertTo(level), content);
                 return;
             }
@@ -68,18 +65,15 @@ namespace Alabo.Logging.NLog
         ///     获取NLog日志操作
         /// </summary>
         /// <param name="logName">日志名称</param>
-        public static NLogs.ILogger GetLogger(string logName)
-        {
+        public static NLogs.ILogger GetLogger(string logName) {
             return NLogs.LogManager.GetLogger(logName);
         }
 
         /// <summary>
         ///     转换日志等级
         /// </summary>
-        private NLogs.LogLevel ConvertTo(LogLevel level)
-        {
-            switch (level)
-            {
+        private NLogs.LogLevel ConvertTo(LogLevel level) {
+            switch (level) {
                 case LogLevel.Trace:
                     return NLogs.LogLevel.Trace;
 
@@ -106,8 +100,7 @@ namespace Alabo.Logging.NLog
         /// <summary>
         ///     获取格式化提供程序
         /// </summary>
-        private IFormatProvider GetFormatProvider()
-        {
+        private IFormatProvider GetFormatProvider() {
             if (_format == null) {
                 return null;
             }

@@ -4,13 +4,13 @@ using Alabo.Web.Mvc.Attributes;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.UI.Design.AutoImages
-{
+namespace Alabo.UI.Design.AutoImages {
+
     /// <summary>
     ///     通用图片
     /// </summary>
-    public class AutoImage
-    {
+    public class AutoImage {
+
         /// <summary>
         ///     图标
         /// </summary>

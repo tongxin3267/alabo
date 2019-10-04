@@ -6,17 +6,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Alabo.Datas.Stores.Update.EfCore
-{
+namespace Alabo.Datas.Stores.Update.EfCore {
+
     public class UpdateEfCoreStore<TEntity, TKey> : UpdateAsyncEfCoreStore<TEntity, TKey>, IUpdateStore<TEntity, TKey>
-        where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
-        protected UpdateEfCoreStore(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
+        protected UpdateEfCoreStore(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
-        public bool Update(Action<TEntity> updateAction, Expression<Func<TEntity, bool>> predicate = null)
-        {
+        public bool Update(Action<TEntity> updateAction, Expression<Func<TEntity, bool>> predicate = null) {
             var query = UnitOfWork.Set<TEntity>().AsQueryable();
             if (predicate != null) {
                 query = query.Where(predicate);
@@ -39,8 +37,7 @@ namespace Alabo.Datas.Stores.Update.EfCore
         ///     修改实体
         /// </summary>
         /// <param name="entity">实体</param>
-        public bool UpdateSingle(TEntity entity)
-        {
+        public bool UpdateSingle(TEntity entity) {
             UnitOfWork.Update(entity);
             var count = UnitOfWork.SaveChanges();
             if (count > 0) {
@@ -50,8 +47,7 @@ namespace Alabo.Datas.Stores.Update.EfCore
             return false;
         }
 
-        public bool UpdateNoTracking([Valid] TEntity entity)
-        {
+        public bool UpdateNoTracking([Valid] TEntity entity) {
             if (entity == null) {
                 throw new ArgumentNullException(nameof(entity));
             }
@@ -65,8 +61,7 @@ namespace Alabo.Datas.Stores.Update.EfCore
         ///     修改实体集合
         /// </summary>
         /// <param name="entities">实体集合</param>
-        public virtual void UpdateMany(IEnumerable<TEntity> entities)
-        {
+        public virtual void UpdateMany(IEnumerable<TEntity> entities) {
             if (entities == null) {
                 throw new ArgumentNullException(nameof(entities));
             }
@@ -78,8 +73,7 @@ namespace Alabo.Datas.Stores.Update.EfCore
             var count = UnitOfWork.SaveChanges();
         }
 
-        public void UpdateMany(Action<TEntity> updateAction, Expression<Func<TEntity, bool>> predicate = null)
-        {
+        public void UpdateMany(Action<TEntity> updateAction, Expression<Func<TEntity, bool>> predicate = null) {
             var query = UnitOfWork.Set<TEntity>().AsQueryable();
             if (predicate != null) {
                 query = query.Where(predicate);
@@ -93,8 +87,7 @@ namespace Alabo.Datas.Stores.Update.EfCore
             UnitOfWork.SaveChanges();
         }
 
-        public void AddUpdateOrDelete(IEnumerable<TEntity> entities, Expression<Func<TEntity, bool>> predicate)
-        {
+        public void AddUpdateOrDelete(IEnumerable<TEntity> entities, Expression<Func<TEntity, bool>> predicate) {
             throw new NotImplementedException();
         }
 
@@ -103,8 +96,7 @@ namespace Alabo.Datas.Stores.Update.EfCore
         /// </summary>
         /// <param name="newEntity">新实体</param>
         /// <param name="oldEntity">旧实体</param>
-        protected void Update(TEntity newEntity, TEntity oldEntity)
-        {
+        protected void Update(TEntity newEntity, TEntity oldEntity) {
             if (newEntity == null) {
                 throw new ArgumentNullException(nameof(newEntity));
             }

@@ -7,14 +7,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
 
-namespace Alabo.Web.Filters
-{
+namespace Alabo.Web.Filters {
+
     /// <summary>
     ///     跟踪日志过滤器
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
-    public class TraceLogAttribute : ActionFilterAttribute
-    {
+    public class TraceLogAttribute : ActionFilterAttribute {
+
         /// <summary>
         ///     日志名
         /// </summary>
@@ -33,8 +33,7 @@ namespace Alabo.Web.Filters
         /// <summary>
         ///     执行前
         /// </summary>
-        public override void OnActionExecuting(ActionExecutingContext context)
-        {
+        public override void OnActionExecuting(ActionExecutingContext context) {
             base.OnActionExecuting(context);
             if (Ignore) {
                 return;
@@ -51,14 +50,10 @@ namespace Alabo.Web.Filters
         /// <summary>
         ///     获取日志操作
         /// </summary>
-        private ILog GetLog()
-        {
-            try
-            {
+        private ILog GetLog() {
+            try {
                 return Log.GetLog(TraceLogName);
-            }
-            catch
-            {
+            } catch {
                 return Log.Null;
             }
         }
@@ -66,8 +61,7 @@ namespace Alabo.Web.Filters
         /// <summary>
         ///     执行前日志
         /// </summary>
-        private void WriteLog(ActionExecutingContext context)
-        {
+        private void WriteLog(ActionExecutingContext context) {
             Logger.Caption("WebApi跟踪-准备执行操作")
                 .Class(context.Controller.SafeString())
                 .Method(context.ActionDescriptor.DisplayName);
@@ -78,8 +72,7 @@ namespace Alabo.Web.Filters
         /// <summary>
         ///     添加请求信息参数
         /// </summary>
-        private void AddRequestInfo(ActionExecutingContext context)
-        {
+        private void AddRequestInfo(ActionExecutingContext context) {
             var request = context.HttpContext.Request;
             Logger.Params("Http请求方式", request.Method);
             if (string.IsNullOrWhiteSpace(request.ContentType) == false) {
@@ -93,8 +86,7 @@ namespace Alabo.Web.Filters
         /// <summary>
         ///     添加表单参数
         /// </summary>
-        private void AddFormParams(HttpRequest request)
-        {
+        private void AddFormParams(HttpRequest request) {
             var result = File.ToString(request.Body);
             if (string.IsNullOrWhiteSpace(result)) {
                 return;
@@ -106,8 +98,7 @@ namespace Alabo.Web.Filters
         /// <summary>
         ///     添加Cookie
         /// </summary>
-        private void AddCookie(HttpRequest request)
-        {
+        private void AddCookie(HttpRequest request) {
             Logger.Params("Cookie:");
             foreach (var key in request.Cookies.Keys) {
                 Logger.Params(key, request.Cookies[key]);
@@ -117,8 +108,7 @@ namespace Alabo.Web.Filters
         /// <summary>
         ///     执行后
         /// </summary>
-        public override void OnResultExecuted(ResultExecutedContext context)
-        {
+        public override void OnResultExecuted(ResultExecutedContext context) {
             base.OnResultExecuted(context);
             if (Ignore) {
                 return;
@@ -134,8 +124,7 @@ namespace Alabo.Web.Filters
         /// <summary>
         ///     执行后日志
         /// </summary>
-        private void WriteLog(ResultExecutedContext context)
-        {
+        private void WriteLog(ResultExecutedContext context) {
             Logger.Caption("WebApi跟踪-执行操作完成")
                 .Class(context.Controller.SafeString())
                 .Method(context.ActionDescriptor.DisplayName);
@@ -147,8 +136,7 @@ namespace Alabo.Web.Filters
         /// <summary>
         ///     添加响应信息参数
         /// </summary>
-        private void AddResponseInfo(ResultExecutedContext context)
-        {
+        private void AddResponseInfo(ResultExecutedContext context) {
             var response = context.HttpContext.Response;
             if (string.IsNullOrWhiteSpace(response.ContentType) == false) {
                 Logger.Content($"ContentType: {response.ContentType}");
@@ -160,8 +148,7 @@ namespace Alabo.Web.Filters
         /// <summary>
         ///     记录响应结果
         /// </summary>
-        private void AddResult(ResultExecutedContext context)
-        {
+        private void AddResult(ResultExecutedContext context) {
             if (!(context.Result is Result result)) {
                 return;
             }

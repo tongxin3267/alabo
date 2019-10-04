@@ -1,7 +1,6 @@
-﻿namespace Alabo.UI
-{
-    public class IconFontawesome
-    {
+﻿namespace Alabo.UI {
+
+    public class IconFontawesome {
         public const string glass = "fa fa-glass";
         public const string music = "fa fa-music";
         public const string search = "fa fa-search";

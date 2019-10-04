@@ -16,26 +16,23 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
-namespace Alabo.Tables.Domain.Services
-{
+namespace Alabo.Tables.Domain.Services {
+
     /// <summary>
     ///     表相关服务
     /// </summary>
-    public class TableService : ServiceBase<Table, ObjectId>, ITableService
-    {
+    public class TableService : ServiceBase<Table, ObjectId>, ITableService {
+
         public TableService(IUnitOfWork unitOfWork, IRepository<Table, ObjectId> repository) : base(unitOfWork,
-            repository)
-        {
+            repository) {
         }
 
         /// <summary>
         ///     初始化所有的表服务
         /// </summary>
-        public void Init()
-        {
+        public void Init() {
             Resolve<ITableService>().DeleteAll();
-            if (!Exists())
-            {
+            if (!Exists()) {
                 var tables = new List<Table>();
 
                 #region AutoConfig配置
@@ -43,10 +40,8 @@ namespace Alabo.Tables.Domain.Services
                 // AutoConfig配置
                 var types = EntityDynamicService.GetAllAutoConfig();
 
-                foreach (var type in types)
-                {
-                    var table = new Table
-                    {
+                foreach (var type in types) {
+                    var table = new Table {
                         Key = type.Name,
                         Type = type.FullName,
                         TableType = TableType.AutoConfig,
@@ -92,18 +87,15 @@ namespace Alabo.Tables.Domain.Services
                 // AutoConfig配置
                 types = EntityDynamicService.GetAllEnum();
 
-                foreach (var type in types)
-                {
-                    var table = new Table
-                    {
+                foreach (var type in types) {
+                    var table = new Table {
                         Key = type.Name,
                         Type = type.FullName,
                         TableType = TableType.Enum,
                         TableName = string.Empty
                     };
 
-                    foreach (var item in Enum.GetValues(type))
-                    {
+                    foreach (var item in Enum.GetValues(type)) {
                         var column = new TableColumn();
                         column.Key = Enum.GetName(type, item);
                         column.Name = item.GetDisplayName();
@@ -120,10 +112,8 @@ namespace Alabo.Tables.Domain.Services
 
                 types = EntityDynamicService.GetAllRelationTypes();
 
-                foreach (var type in types)
-                {
-                    var table = new Table
-                    {
+                foreach (var type in types) {
+                    var table = new Table {
                         Key = type.Name,
                         Type = type.FullName,
                         TableName = "Basic_Relation"
@@ -132,14 +122,12 @@ namespace Alabo.Tables.Domain.Services
                     var classDescription = new ClassDescription(type);
                     table.Name = classDescription?.ClassPropertyAttribute?.Name;
 
-                    if (type.FullName.Contains("Class"))
-                    {
+                    if (type.FullName.Contains("Class")) {
                         table.TableType = TableType.ClassRelation;
                         tables.Add(table);
                     }
 
-                    if (type.FullName.Contains("Tag"))
-                    {
+                    if (type.FullName.Contains("Tag")) {
                         table.TableType = TableType.TagRelation;
                         tables.Add(table);
                     }
@@ -159,8 +147,7 @@ namespace Alabo.Tables.Domain.Services
                 types = types.Where(r => !r.FullName.Contains("Tests."));
 
                 var sqlTables = EntityDynamicService.GetSqlTable();
-                foreach (var type in types)
-                {
+                foreach (var type in types) {
                     var table = new Table { Key = type.Name, Type = type.FullName };
                     if (type.FullName.Contains("Config") && type.Name != "AutoConfig") {
                         continue;
@@ -174,8 +161,7 @@ namespace Alabo.Tables.Domain.Services
                         continue;
                     }
 
-                    if (type.BaseType.Name.Contains("Mongo"))
-                    {
+                    if (type.BaseType.Name.Contains("Mongo")) {
                         var tableAttribute = type.GetAttribute<TableAttribute>();
                         if (tableAttribute == null) {
                             continue;
@@ -183,9 +169,7 @@ namespace Alabo.Tables.Domain.Services
 
                         table.TableName = tableAttribute.Name;
                         table.TableType = TableType.Mongodb;
-                    }
-                    else
-                    {
+                    } else {
                         table.TableType = TableType.SqlServer;
                         var find = sqlTables.FirstOrDefault(r => r.EndsWith(table.Key));
                         if (find != null) {
@@ -224,10 +208,8 @@ namespace Alabo.Tables.Domain.Services
         ///     获取mongo的表
         /// </summary>
         /// <returns></returns>
-        public List<KeyValue> MongodbCatalogEntityKeyValues()
-        {
-            return GetKeyValues(table =>
-            {
+        public List<KeyValue> MongodbCatalogEntityKeyValues() {
+            return GetKeyValues(table => {
                 if (table.TableType == TableType.Mongodb) {
                     return table;
                 }
@@ -240,10 +222,8 @@ namespace Alabo.Tables.Domain.Services
         ///     获取sqlserver的表
         /// </summary>
         /// <returns></returns>
-        public List<KeyValue> SqlServcieCatalogEntityKeyValues()
-        {
-            return GetKeyValues(table =>
-            {
+        public List<KeyValue> SqlServcieCatalogEntityKeyValues() {
+            return GetKeyValues(table => {
                 if (table.TableType == TableType.SqlServer) {
                     return table;
                 }
@@ -257,10 +237,8 @@ namespace Alabo.Tables.Domain.Services
         ///     获取所有表咯
         /// </summary>
         /// <returns></returns>
-        public List<KeyValue> CatalogEntityKeyValues()
-        {
-            return GetKeyValues(table =>
-            {
+        public List<KeyValue> CatalogEntityKeyValues() {
+            return GetKeyValues(table => {
                 if (table.TableType == TableType.SqlServer || table.TableType == TableType.Mongodb) {
                     return table;
                 }
@@ -269,16 +247,14 @@ namespace Alabo.Tables.Domain.Services
             });
         }
 
-        private TableColumn GetColumn(PropertyDescription propertyDescription)
-        {
+        private TableColumn GetColumn(PropertyDescription propertyDescription) {
             var column = new TableColumn();
 
             column.Key = propertyDescription.Property.Name;
             column.Type = propertyDescription.Property.PropertyType.Name;
 
             column.Name = column.Key;
-            if (propertyDescription.FieldAttribute != null)
-            {
+            if (propertyDescription.FieldAttribute != null) {
                 // column.Name = propertyDescription.FieldAttribute.FieldName;
             }
 
@@ -289,17 +265,14 @@ namespace Alabo.Tables.Domain.Services
             return column;
         }
 
-        private List<KeyValue> GetKeyValues(Func<Table, Table> func)
-        {
+        private List<KeyValue> GetKeyValues(Func<Table, Table> func) {
             var resultList = new List<KeyValue>();
             var tables = Resolve<ITableService>().GetList();
-            foreach (var item in tables)
-            {
+            foreach (var item in tables) {
                 var result = func.Invoke(item);
                 if (result != null) //避免加null
 {
-                    resultList.Add(new KeyValue
-                    {
+                    resultList.Add(new KeyValue {
                         Name = $"{result.Name}[{result.Type}]",
                         Value = item.Key,
                         Key = result.Key,

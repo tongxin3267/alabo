@@ -1,7 +1,7 @@
-﻿namespace Alabo.Framework.Core.Enums.Enum
-{
-    public enum CodeType
-    {
+﻿namespace Alabo.Framework.Core.Enums.Enum {
+
+    public enum CodeType {
+
         /// <summary>
         ///     zkweb
         /// </summary>

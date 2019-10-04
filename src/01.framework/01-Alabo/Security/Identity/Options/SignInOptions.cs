@@ -1,10 +1,10 @@
-﻿namespace Alabo.Security.Identity.Options
-{
+﻿namespace Alabo.Security.Identity.Options {
+
     /// <summary>
     ///     登录配置
     /// </summary>
-    public class SignInOptions
-    {
+    public class SignInOptions {
+
         /// <summary>
         ///     必须确认电子邮件才能登录
         /// </summary>

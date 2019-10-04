@@ -10,11 +10,11 @@ using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Alabo.Datas.Stores.Add.Mongo
-{
+namespace Alabo.Datas.Stores.Add.Mongo {
+
     public abstract class MongoCoreStoreBase<TEntity, TKey> : StoreBase
-        where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
+        where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
         /// <summary>
         ///     The entity key
         /// </summary>
@@ -25,8 +25,7 @@ namespace Alabo.Datas.Stores.Add.Mongo
         /// </summary>
         private readonly string TableName = MongoEntityMapping.GetTableName(typeof(TEntity));
 
-        protected MongoCoreStoreBase(IUnitOfWork unitOfWork)
-        {
+        protected MongoCoreStoreBase(IUnitOfWork unitOfWork) {
             UnitOfWork = (UnitOfWorkBase)unitOfWork;
         }
 
@@ -40,10 +39,8 @@ namespace Alabo.Datas.Stores.Add.Mongo
         /// <summary>
         ///     IMongoCollection 集合，原生支持Async
         /// </summary>
-        public IMongoCollection<TEntity> Collection
-        {
-            get
-            {
+        public IMongoCollection<TEntity> Collection {
+            get {
                 var tableName = TableName;
                 if (tableName.IsNullOrEmpty()) {
                     tableName = MongoEntityMapping.GetTableName(typeof(TEntity));
@@ -67,8 +64,7 @@ namespace Alabo.Datas.Stores.Add.Mongo
         ///     获取查询对象
         /// </summary>
         /// <param name="predicate">条件</param>
-        public IQueryable<TEntity> ToQueryable(Expression<Func<TEntity, bool>> predicate = null)
-        {
+        public IQueryable<TEntity> ToQueryable(Expression<Func<TEntity, bool>> predicate = null) {
             if (predicate == null) {
                 return Collection.AsQueryable();
             }
@@ -79,8 +75,7 @@ namespace Alabo.Datas.Stores.Add.Mongo
         /// <summary>
         ///     查询表达式,ID的查询
         /// </summary>
-        protected virtual Expression<Func<TEntity, bool>> IdPredicate(object id)
-        {
+        protected virtual Expression<Func<TEntity, bool>> IdPredicate(object id) {
             return Lambda.Equal<TEntity>("Id", id);
         }
 
@@ -90,14 +85,12 @@ namespace Alabo.Datas.Stores.Add.Mongo
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
-        protected virtual FilterDefinition<TEntity> ToFilter(Expression<Func<TEntity, bool>> expression)
-        {
+        protected virtual FilterDefinition<TEntity> ToFilter(Expression<Func<TEntity, bool>> expression) {
             var filter = Builders<TEntity>.Filter.Where(expression);
             return filter;
         }
 
-        protected virtual FilterDefinition<TEntity> ToFilter(object id)
-        {
+        protected virtual FilterDefinition<TEntity> ToFilter(object id) {
             var expression = IdPredicate(id);
             var filter = Builders<TEntity>.Filter.Where(expression);
             return filter;

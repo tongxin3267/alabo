@@ -1,14 +1,14 @@
 ﻿using Alabo.UI.Design.AutoReports.Enums;
 using System.Collections.Generic;
 
-namespace Alabo.UI.Design.AutoReports
-{
+namespace Alabo.UI.Design.AutoReports {
+
     /// <summary>
     ///     图表数据格式
     ///     数据格式参考：https://v-charts.js.org/#/radar
     /// </summary>
-    public class AutoReportChart
-    {
+    public class AutoReportChart {
+
         /// <summary>
         ///     图表类型
         /// </summary>

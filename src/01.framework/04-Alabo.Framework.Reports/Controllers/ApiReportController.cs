@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using Alabo.Domains.Entities;
-using Alabo.Domains.Services.Report;
 using Alabo.Extensions;
 using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
@@ -11,22 +8,23 @@ using Alabo.UI.Design.AutoReports;
 using Alabo.UI.Design.AutoReports.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Framework.Reports.Controllers
-{
+namespace Alabo.Framework.Reports.Controllers {
+
     /// <summary>
     ///     报表
     /// </summary>
     [ApiExceptionFilter]
     [Route("Api/Report/[action]")]
-    public class ApiReportController : ApiBaseController<Report, ObjectId>
-    {
+    public class ApiReportController : ApiBaseController<Report, ObjectId> {
+
         /// <summary>
         ///     报表 构造
         /// </summary>
-        public ApiReportController()
-        {
+        public ApiReportController() {
             BaseService = Resolve<IReportService>();
         }
 
@@ -39,8 +37,7 @@ namespace Alabo.Framework.Reports.Controllers
         /// <returns></returns>
         [HttpPost]
         [Display(Description = "统计单一数字")]
-        public ApiResult<decimal> GetSingleReport([FromBody] SingleReportInput singleReportInput)
-        {
+        public ApiResult<decimal> GetSingleReport([FromBody] SingleReportInput singleReportInput) {
             if (!this.IsFormValid()) {
                 return ApiResult.Failure<decimal>(this.FormInvalidReason());
             }
@@ -60,8 +57,7 @@ namespace Alabo.Framework.Reports.Controllers
         /// <returns></returns>
         [HttpGet]
         [Display(Description = "按天统计数据")]
-        public ApiResult<List<AutoReport>> GetCountReport2([FromQuery] CountReportInput reportInput)
-        {
+        public ApiResult<List<AutoReport>> GetCountReport2([FromQuery] CountReportInput reportInput) {
             var result = Resolve<IAutoReportService>().GetCountReport2(reportInput);
             return ToResult(result);
         }
@@ -73,8 +69,7 @@ namespace Alabo.Framework.Reports.Controllers
         /// <returns></returns>
         [HttpGet]
         [Display(Description = "按天统计实体增加数据,输出表格形式")]
-        public ApiResult<PagedList<CountReportTable>> GetCountTable2([FromQuery] CountReportInput reportInput)
-        {
+        public ApiResult<PagedList<CountReportTable>> GetCountTable2([FromQuery] CountReportInput reportInput) {
             var result = Resolve<IAutoReportService>().GetDayCountTable2(reportInput);
             return ToResult(result);
         }
@@ -86,8 +81,7 @@ namespace Alabo.Framework.Reports.Controllers
         /// <returns></returns>
         [HttpGet]
         [Display(Description = "根据字段状态,输出报表表格形式")]
-        public ApiResult<PagedList<CountReportTable>> GetDayCountTableByField(CountReportInput reportInput)
-        {
+        public ApiResult<PagedList<CountReportTable>> GetDayCountTableByField(CountReportInput reportInput) {
             var result = Resolve<IAutoReportService>().GetDayCountTableByField(reportInput);
             return ToResult(result);
         }
@@ -99,8 +93,7 @@ namespace Alabo.Framework.Reports.Controllers
         /// </summary>
         [HttpGet]
         [Display(Description = "按查询条件，求和统计")]
-        public ApiResult<List<AutoReport>> GetSumReport2([FromQuery] SumTableInput reportInput)
-        {
+        public ApiResult<List<AutoReport>> GetSumReport2([FromQuery] SumTableInput reportInput) {
             var result = Resolve<IAutoReportService>().GetSumReport2(reportInput);
             return ToResult(result);
         }
@@ -112,8 +105,7 @@ namespace Alabo.Framework.Reports.Controllers
         /// <returns></returns>
         [HttpGet]
         [Display(Description = "按天统计实体增加数据,输出表格形式")]
-        public ApiResult<PagedList<SumReportTable>> GetSumTable2([FromQuery] SumTableInput reportInput)
-        {
+        public ApiResult<PagedList<SumReportTable>> GetSumTable2([FromQuery] SumTableInput reportInput) {
             var result = Resolve<IAutoReportService>().GetCountSumTable2(null);
             return ToResult(result);
         }
@@ -131,8 +123,7 @@ namespace Alabo.Framework.Reports.Controllers
         /// <returns></returns>
         [HttpPost]
         [Display(Description = "按天统计数据")]
-        public ApiResult<List<AutoReport>> GetCountReport([FromBody] CountReportInput reportInput)
-        {
+        public ApiResult<List<AutoReport>> GetCountReport([FromBody] CountReportInput reportInput) {
             if (!this.IsFormValid()) {
                 return ApiResult.Failure<List<AutoReport>>(this.FormInvalidReason());
             }
@@ -148,8 +139,7 @@ namespace Alabo.Framework.Reports.Controllers
         /// <returns></returns>
         [HttpPost]
         [Display(Description = "按天统计实体增加数据,输出表格形式")]
-        public ApiResult<PagedList<CountReportTable>> GetCountTable([FromBody] CountReportInput reportInput)
-        {
+        public ApiResult<PagedList<CountReportTable>> GetCountTable([FromBody] CountReportInput reportInput) {
             if (!this.IsFormValid()) {
                 return ApiResult.Failure<PagedList<CountReportTable>>(this.FormInvalidReason());
             }
@@ -167,8 +157,7 @@ namespace Alabo.Framework.Reports.Controllers
         /// </summary>
         [HttpPost]
         [Display(Description = "按查询条件，求和统计")]
-        public ApiResult<List<AutoReport>> GetSumReport([FromBody] SumReportInput reportInput)
-        {
+        public ApiResult<List<AutoReport>> GetSumReport([FromBody] SumReportInput reportInput) {
             if (!this.IsFormValid()) {
                 return ApiResult.Failure<List<AutoReport>>(this.FormInvalidReason());
             }
@@ -184,8 +173,7 @@ namespace Alabo.Framework.Reports.Controllers
         /// <returns></returns>
         [HttpPost]
         [Display(Description = "按天统计实体增加数据,输出表格形式")]
-        public ApiResult<PagedList<SumReportTable>> GetSumTable([FromBody] SumReportInput reportInput)
-        {
+        public ApiResult<PagedList<SumReportTable>> GetSumTable([FromBody] SumReportInput reportInput) {
             if (!this.IsFormValid()) {
                 return ApiResult.Failure<PagedList<SumReportTable>>(this.FormInvalidReason());
             }

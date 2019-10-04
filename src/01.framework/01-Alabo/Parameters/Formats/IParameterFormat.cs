@@ -1,10 +1,10 @@
-﻿namespace Alabo.Parameters.Formats
-{
+﻿namespace Alabo.Parameters.Formats {
+
     /// <summary>
     ///     参数格式化器
     /// </summary>
-    public interface IParameterFormat
-    {
+    public interface IParameterFormat {
+
         /// <summary>
         ///     格式化
         /// </summary>

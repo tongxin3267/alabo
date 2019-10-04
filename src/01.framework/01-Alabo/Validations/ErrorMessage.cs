@@ -1,13 +1,13 @@
-﻿namespace Alabo.Validations
-{
+﻿namespace Alabo.Validations {
+
     /// <summary>
     ///     ErrorMessageFormats 类存放格式化错误消息
     ///     https://www.cnblogs.com/lonelyxmas/p/9065756.html
     ///     正则替换示列： ErrorMessage = "(\w*)格式错误"   替换:ErrorMessage = ErrorMessage.NotMatchFormat
     ///     ErrorMessage = "(\w*)格式错误"   替换:ErrorMessage = ErrorMessage.NotMatchFormat
     /// </summary>
-    public class ErrorMessage
-    {
+    public class ErrorMessage {
+
         /// <summary>
         ///     "{0}不能为空"
         /// </summary>

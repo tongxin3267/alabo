@@ -1,10 +1,10 @@
-﻿namespace Alabo.Logging.Abstractions
-{
+﻿namespace Alabo.Logging.Abstractions {
+
     /// <summary>
     ///     日志提供程序工厂
     /// </summary>
-    public interface ILogProviderFactory
-    {
+    public interface ILogProviderFactory {
+
         /// <summary>
         ///     创建日志提供程序
         /// </summary>

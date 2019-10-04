@@ -5,13 +5,13 @@ using Alabo.Framework.Basic.Address.Dtos;
 using MongoDB.Bson;
 using System.Collections.Generic;
 
-namespace Alabo.Framework.Basic.Address.Domain.Services
-{
+namespace Alabo.Framework.Basic.Address.Domain.Services {
+
     /// <summary>
     ///     用户地址管理
     /// </summary>
-    public interface IUserAddressService : IService<UserAddress, ObjectId>
-    {
+    public interface IUserAddressService : IService<UserAddress, ObjectId> {
+
         /// <summary>
         ///     添加地址
         /// </summary>

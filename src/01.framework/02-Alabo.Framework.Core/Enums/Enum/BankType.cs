@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     银行类型
     /// </summary>
     [ClassProperty(Name = "银行类型")]
-    public enum BankType
-    {
+    public enum BankType {
+
         /// <summary>
         ///     中国银行
         /// </summary>

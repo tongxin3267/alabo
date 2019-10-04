@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Alabo.Helpers
-{
+namespace Alabo.Helpers {
+
     #region 词典读取器
 
     /// <summary>
@@ -11,16 +11,15 @@ namespace Alabo.Helpers
     /// </summary>
     /// <typeparam name="T">键的类型</typeparam>
     /// <typeparam name="V">值的类型</typeparam>
-    public class DictionaryHelper<T, TV>
-    {
+    public class DictionaryHelper<T, TV> {
+
         #region 初始化
 
         /// <summary>
         ///     初始化
         /// </summary>
         /// <param name="dict">要读取的词典</param>
-        public DictionaryHelper(IDictionary<T, TV> dict)
-        {
+        public DictionaryHelper(IDictionary<T, TV> dict) {
             _dict = dict;
         }
 
@@ -33,8 +32,7 @@ namespace Alabo.Helpers
         /// </summary>
         /// <param name="key"></param>
         /// <param name="default_value"></param>
-        public TV GetValue(T key, TV defaultValue = default)
-        {
+        public TV GetValue(T key, TV defaultValue = default) {
             if (!_dict.TryGetValue(key, out var value)) {
                 return defaultValue;
             }
@@ -51,8 +49,7 @@ namespace Alabo.Helpers
         /// </summary>
         /// <param name="key"></param>
         /// <param name="default_value"></param>
-        public string GetString(T key, string defaultValue = null)
-        {
+        public string GetString(T key, string defaultValue = null) {
             if (!_dict.TryGetValue(key, out var value)) {
                 return defaultValue;
             }
@@ -69,8 +66,7 @@ namespace Alabo.Helpers
         /// </summary>
         /// <param name="key"></param>
         /// <param name="default_value"></param>
-        public int GetInt(T key, int defaultValue = -1)
-        {
+        public int GetInt(T key, int defaultValue = -1) {
             if (!_dict.TryGetValue(key, out var value)) {
                 return defaultValue;
             }
@@ -90,8 +86,7 @@ namespace Alabo.Helpers
         ///     尝试转换布尔值，失败时返回null
         /// </summary>
         /// <param name="value"></param>
-        public bool? StringToBool(string value)
-        {
+        public bool? StringToBool(string value) {
             if (value == null) {
                 return null;
             }
@@ -125,8 +120,7 @@ namespace Alabo.Helpers
         /// </summary>
         /// <param name="key"></param>
         /// <param name="default_value"></param>
-        public bool GetBool(T key, bool defaultValue)
-        {
+        public bool GetBool(T key, bool defaultValue) {
             var value = GetNullableBool(key);
             if (value.HasValue) {
                 return value.Value;
@@ -144,8 +138,7 @@ namespace Alabo.Helpers
         /// </summary>
         /// <param name="key"></param>
         /// <param name="default_value"></param>
-        public bool? GetNullableBool(T key, bool? defaultValue = null)
-        {
+        public bool? GetNullableBool(T key, bool? defaultValue = null) {
             if (!_dict.TryGetValue(key, out var value)) {
                 return defaultValue;
             }
@@ -162,8 +155,7 @@ namespace Alabo.Helpers
         /// </summary>
         /// <param name="key"></param>
         /// <param name="default_value"></param>
-        public decimal GetDecimal(T key, decimal defaultValue = -1)
-        {
+        public decimal GetDecimal(T key, decimal defaultValue = -1) {
             if (!_dict.TryGetValue(key, out var value)) {
                 return defaultValue;
             }
@@ -184,8 +176,7 @@ namespace Alabo.Helpers
         /// </summary>
         /// <param name="key"></param>
         /// <param name="default_value"></param>
-        public DateTime GetDateTime(T key, DateTime defaultValue = default)
-        {
+        public DateTime GetDateTime(T key, DateTime defaultValue = default) {
             if (!_dict.TryGetValue(key, out var value)) {
                 return defaultValue;
             }
@@ -206,8 +197,7 @@ namespace Alabo.Helpers
         /// </summary>
         /// <param name="key"></param>
         /// <param name="default_value"></param>
-        public IList<int> GetIntList(T key, IList<int> defaultValue = null)
-        {
+        public IList<int> GetIntList(T key, IList<int> defaultValue = null) {
             IList<int> result;
             if (!_dict.TryGetValue(key, out var value)) {
                 return defaultValue;
@@ -230,10 +220,8 @@ namespace Alabo.Helpers
         /// </summary>
         /// <param name="pdict"></param>
         /// <param name="replace"></param>
-        public void Merge(IEnumerable<KeyValuePair<T, TV>> pdict, bool replace = true)
-        {
-            foreach (var pair in pdict)
-            {
+        public void Merge(IEnumerable<KeyValuePair<T, TV>> pdict, bool replace = true) {
+            foreach (var pair in pdict) {
                 if (!replace && _dict.ContainsKey(pair.Key)) {
                     continue;
                 }
@@ -270,14 +258,13 @@ namespace Alabo.Helpers
     /// <typeparam name="S">列表中的对象的类型</typeparam>
     /// <typeparam name="T">词典的键的类型</typeparam>
     /// <typeparam name="V">词典的值的类型</typeparam>
-    public static class IterToDictionary<TS, T, TV>
-    {
+    public static class IterToDictionary<TS, T, TV> {
+
         public delegate T ItemToKey(TS item);
 
         public delegate TV ItemToValue(TS item);
 
-        public static Dictionary<T, TV> Convert(IEnumerable<TS> list, ItemToKey toKey, ItemToValue toValue)
-        {
+        public static Dictionary<T, TV> Convert(IEnumerable<TS> list, ItemToKey toKey, ItemToValue toValue) {
             var dict = new Dictionary<T, TV>();
             foreach (var item in list) {
                 dict[toKey(item)] = toValue(item);
@@ -298,14 +285,13 @@ namespace Alabo.Helpers
     /// <typeparam name="S">列表中的对象的类型</typeparam>
     /// <typeparam name="T">词典的键的类型</typeparam>
     /// <typeparam name="V">词典的值的类型</typeparam>
-    public static class IterToSortedDictionary<TS, T, TV>
-    {
+    public static class IterToSortedDictionary<TS, T, TV> {
+
         public delegate T ItemToKey(TS item);
 
         public delegate TV ItemToValue(TS item);
 
-        public static SortedDictionary<T, TV> Convert(IEnumerable<TS> list, ItemToKey toKey, ItemToValue toValue)
-        {
+        public static SortedDictionary<T, TV> Convert(IEnumerable<TS> list, ItemToKey toKey, ItemToValue toValue) {
             var dict = new SortedDictionary<T, TV>();
             foreach (var item in list) {
                 dict[toKey(item)] = toValue(item);

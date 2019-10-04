@@ -1,6 +1,5 @@
-﻿namespace Alabo.UI.Design.AutoIntros
-{
-    internal class AutoIntro
-    {
+﻿namespace Alabo.UI.Design.AutoIntros {
+
+    internal class AutoIntro {
     }
 }

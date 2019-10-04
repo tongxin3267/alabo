@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     任务类型
     /// </summary>
     [ClassProperty(Name = "任务类型")]
-    public enum TaskType
-    {
+    public enum TaskType {
+
         /// <summary>
         ///     缴费升级
         /// </summary>

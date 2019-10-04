@@ -1,8 +1,8 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     账单操作类型
     ///     可以在BillTypeConfig中自行启用或者增加
@@ -11,8 +11,8 @@ namespace Alabo.Framework.Core.Enums.Enum
     ///     300-400自定义
     /// </summary>
     [ClassProperty(Name = "账单操作类型")]
-    public enum BillActionType
-    {
+    public enum BillActionType {
+
         /// <summary>
         ///     消费
         /// </summary>

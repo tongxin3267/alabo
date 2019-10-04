@@ -2,10 +2,10 @@
 using Alabo.Validations.Aspects;
 using System.Collections.Generic;
 
-namespace Alabo.Datas.Stores.Add
-{
-    public interface IAddStore<in TEntity, in TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
+namespace Alabo.Datas.Stores.Add {
+
+    public interface IAddStore<in TEntity, in TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
         /// <summary>
         ///     添加单个实体
         /// </summary>

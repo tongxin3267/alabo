@@ -3,13 +3,13 @@ using Alabo.Security.Enums;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Security
-{
+namespace Alabo.Security {
+
     /// <summary>
     ///     基础用户
     /// </summary>
-    public class BasicUser
-    {
+    public class BasicUser {
+
         /// <summary>
         ///     用户ID
         /// </summary>

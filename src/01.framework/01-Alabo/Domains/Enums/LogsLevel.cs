@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Domains.Enums
-{
+namespace Alabo.Domains.Enums {
+
     /// <summary>
     ///     系统日志级别
     /// </summary>
     [ClassProperty(Name = "系统日志级别")]
-    public enum LogsLevel
-    {
+    public enum LogsLevel {
+
         [LabelCssClass(BadgeColorCalss.Info)]
         [Display(Name = "信息")]
         Information = 1,

@@ -1,11 +1,11 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     [ClassProperty(Name = "关联类型")]
-    public enum RelationType
-    {
+    public enum RelationType {
+
         /// <summary>
         ///     分类类型
         /// </summary>

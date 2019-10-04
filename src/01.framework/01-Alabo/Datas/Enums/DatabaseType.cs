@@ -1,13 +1,13 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Datas.Enums
-{
+namespace Alabo.Datas.Enums {
+
     /// <summary>
     ///     数据库类型
     /// </summary>
     [ClassProperty(Name = "数据库类型")]
-    public enum DatabaseType
-    {
+    public enum DatabaseType {
+
         /// <summary>
         ///     Sql Server数据库
         /// </summary>

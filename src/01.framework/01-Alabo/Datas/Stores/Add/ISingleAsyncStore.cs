@@ -3,15 +3,15 @@ using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Alabo.Datas.Stores.Add
-{
+namespace Alabo.Datas.Stores.Add {
+
     /// <summary>
     ///     查找单个实体
     /// </summary>
     /// <typeparam name="TEntity">对象类型</typeparam>
     /// <typeparam name="TKey">对象标识类型</typeparam>
-    public interface ISingleAsyncStore<TEntity, in TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
+    public interface ISingleAsyncStore<TEntity, in TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
         /// <param name="id">实体标识</param>
         Task<TEntity> GetSingleAsync(object id);
 

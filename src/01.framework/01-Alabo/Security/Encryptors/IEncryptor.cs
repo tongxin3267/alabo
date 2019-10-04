@@ -1,10 +1,10 @@
-﻿namespace Alabo.Security.Encryptors
-{
+﻿namespace Alabo.Security.Encryptors {
+
     /// <summary>
     ///     加密器
     /// </summary>
-    public interface IEncryptor
-    {
+    public interface IEncryptor {
+
         /// <summary>
         ///     加密
         /// </summary>

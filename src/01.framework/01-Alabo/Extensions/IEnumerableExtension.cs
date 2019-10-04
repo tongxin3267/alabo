@@ -3,20 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Alabo.Extensions
-{
+namespace Alabo.Extensions {
+
     /// <summary>
     ///     IEnumerable的扩展函数
     /// </summary>
-    public static class EnumerableExtension
-    {
+    public static class EnumerableExtension {
+
         /// <summary>
         ///     Foreaches the specified action.
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="action">The action.</param>
-        public static IEnumerable<T> Foreach<T>(this IEnumerable<T> source, Action<T> action)
-        {
+        public static IEnumerable<T> Foreach<T>(this IEnumerable<T> source, Action<T> action) {
             if (source == null) {
                 throw new ArgumentNullException("source");
             }
@@ -33,8 +32,7 @@ namespace Alabo.Extensions
         /// </summary>
         /// <param name="source">The source.</param>
         /// <param name="data">The data.</param>
-        public static ICollection<T> AddRange<T>(this ICollection<T> source, IEnumerable<T> data)
-        {
+        public static ICollection<T> AddRange<T>(this ICollection<T> source, IEnumerable<T> data) {
             if (source == null) {
                 throw new ArgumentNullException(nameof(source));
             }
@@ -57,8 +55,7 @@ namespace Alabo.Extensions
         /// <param name="items">The items.</param>
         /// <param name="before">The before.</param>
         /// <param name="obj">The object.</param>
-        public static void AddBefore<T>(this IEnumerable<T> items, Predicate<T> before, T obj)
-        {
+        public static void AddBefore<T>(this IEnumerable<T> items, Predicate<T> before, T obj) {
             var index = items.FindIndex(x => before(x));
             if (index < 0) {
                 index = 0;
@@ -74,8 +71,7 @@ namespace Alabo.Extensions
         /// <param name="items">The items.</param>
         /// <param name="before">The before.</param>
         /// <param name="obj">The object.</param>
-        public static IEnumerable<T> AddBefore<T>(this IEnumerable<T> items, T obj)
-        {
+        public static IEnumerable<T> AddBefore<T>(this IEnumerable<T> items, T obj) {
             var list = new List<T>();
             list.Add(obj);
             list.AddRange(items);
@@ -89,8 +85,7 @@ namespace Alabo.Extensions
         /// <param name="items">The items.</param>
         /// <param name="after">The after.</param>
         /// <param name="obj">The object.</param>
-        public static void AddAfter<T>(this IEnumerable<T> items, Predicate<T> after, T obj)
-        {
+        public static void AddAfter<T>(this IEnumerable<T> items, Predicate<T> after, T obj) {
             var index = items.FindLastIndex(x => after(x));
             if (index < 0) {
                 index = items.Count() - 1;
@@ -101,8 +96,7 @@ namespace Alabo.Extensions
         ///     判断列表所有的值是否唯一
         /// </summary>
         /// <param name="items"></param>
-        public static bool IsDistinct(this IEnumerable<string> items)
-        {
+        public static bool IsDistinct(this IEnumerable<string> items) {
             var distinct = items.Distinct();
             if (distinct.Count() < items.Count()) {
                 return false;
@@ -118,8 +112,7 @@ namespace Alabo.Extensions
         /// <param name="items">The items.</param>
         /// <param name="startIndex">The start index.</param>
         /// <param name="match">The match.</param>
-        public static int FindIndex<T>(this IEnumerable<T> items, int startIndex, Predicate<T> match)
-        {
+        public static int FindIndex<T>(this IEnumerable<T> items, int startIndex, Predicate<T> match) {
             for (var i = Math.Max(startIndex, 0); i < items.Count(); ++i) {
                 if (match(items.ToList()[i])) {
                     return i;
@@ -135,8 +128,7 @@ namespace Alabo.Extensions
         /// </summary>
         /// <param name="items">The items.</param>
         /// <param name="match">The match.</param>
-        public static int FindIndex<T>(this IEnumerable<T> items, Predicate<T> match)
-        {
+        public static int FindIndex<T>(this IEnumerable<T> items, Predicate<T> match) {
             return FindIndex(items, 0, match);
         }
 
@@ -147,8 +139,7 @@ namespace Alabo.Extensions
         /// <param name="items">The items.</param>
         /// <param name="startIndex">The start index.</param>
         /// <param name="match">The match.</param>
-        public static int FindLastIndex<T>(this IEnumerable<T> items, int startIndex, Predicate<T> match)
-        {
+        public static int FindLastIndex<T>(this IEnumerable<T> items, int startIndex, Predicate<T> match) {
             for (var i = Math.Min(startIndex, items.Count() - 1); i >= 0; --i) {
                 if (match(items.ToList()[i])) {
                     return i;
@@ -164,8 +155,7 @@ namespace Alabo.Extensions
         /// </summary>
         /// <param name="items">The items.</param>
         /// <param name="match">The match.</param>
-        public static int FindLastIndex<T>(this IEnumerable<T> items, Predicate<T> match)
-        {
+        public static int FindLastIndex<T>(this IEnumerable<T> items, Predicate<T> match) {
             return FindLastIndex(items, items.Count() - 1, match);
         }
 
@@ -175,8 +165,7 @@ namespace Alabo.Extensions
         /// <typeparam name="T">对象类型</typeparam>
         /// <param name="objList"></param>
         /// <param name="spliter">分隔符</param>
-        public static string JoinToString<T>(this IEnumerable<T> objList, string spliter)
-        {
+        public static string JoinToString<T>(this IEnumerable<T> objList, string spliter) {
             if (objList.IsNullOrEmpty()) {
                 return string.Empty;
             }
@@ -195,8 +184,7 @@ namespace Alabo.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="source">The source.</param>
         /// <param name="data">The data.</param>
-        public static IEnumerable<T> AppendBefore<T>(this IEnumerable<T> source, T data)
-        {
+        public static IEnumerable<T> AppendBefore<T>(this IEnumerable<T> source, T data) {
             var list = new List<T>
             {
                 data
@@ -212,8 +200,7 @@ namespace Alabo.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="source">The source.</param>
         /// <param name="data">The data.</param>
-        public static IEnumerable<T> AppendAfter<T>(this IEnumerable<T> source, T data)
-        {
+        public static IEnumerable<T> AppendAfter<T>(this IEnumerable<T> source, T data) {
             var list = new List<T>();
             list.AddRange(source);
             list.Add(data);
@@ -223,24 +210,21 @@ namespace Alabo.Extensions
         /// <summary>
         ///     IEnumerable的Sorted
         /// </summary>
-        public static IEnumerable<T> Sorted<T>(this IEnumerable<T> iter)
-        {
+        public static IEnumerable<T> Sorted<T>(this IEnumerable<T> iter) {
             return iter.OrderBy(v => v);
         }
 
         /// <summary>
         ///     判断IEnumerable是否为null或空
         /// </summary>
-        public static bool IsNullOrEmpty<T>(this IEnumerable<T> list)
-        {
+        public static bool IsNullOrEmpty<T>(this IEnumerable<T> list) {
             return list == null || !list.Any();
         }
 
         /// <summary>
         ///     获取IEnumerable枚举器
         /// </summary>
-        public static IEnumerable<T> GetIter<T>(this IEnumerable enumerable)
-        {
+        public static IEnumerable<T> GetIter<T>(this IEnumerable enumerable) {
             return from T v in enumerable where v is T select v;
         }
 
@@ -248,8 +232,7 @@ namespace Alabo.Extensions
         ///     转换任意类型的可枚举的对象到词典
         /// </summary>
         public static Dictionary<TKey, TValue> ToDictionaryEx<TKey, TValue, TSource>(
-            this IEnumerable<TSource> list, Func<TSource, TKey> toKey, Func<TSource, TValue> toValue)
-        {
+            this IEnumerable<TSource> list, Func<TSource, TKey> toKey, Func<TSource, TValue> toValue) {
             var dict = new Dictionary<TKey, TValue>();
             foreach (var item in list) {
                 dict[toKey(item)] = toValue(item);
@@ -262,8 +245,7 @@ namespace Alabo.Extensions
         ///     转换任意类型的可枚举的对象到经过排序的词典
         /// </summary>
         public static SortedDictionary<TKey, TValue> ToSortedDictionaryEx<TKey, TValue, TSource>(
-            this IEnumerable<TSource> list, Func<TSource, TKey> toKey, Func<TSource, TValue> toValue)
-        {
+            this IEnumerable<TSource> list, Func<TSource, TKey> toKey, Func<TSource, TValue> toValue) {
             var dict = new SortedDictionary<TKey, TValue>();
             foreach (var item in list) {
                 dict[toKey(item)] = toValue(item);
@@ -278,8 +260,7 @@ namespace Alabo.Extensions
         /// <typeparam name="T">对象的类型</typeparam>
         /// <param name="iter">可枚举的对象</param>
         /// <returns>循环返回带有序号和值的KeyValuePair</returns>
-        public static IEnumerable<KeyValuePair<int, T>> IterIndex<T>(this IEnumerable<T> iter)
-        {
+        public static IEnumerable<KeyValuePair<int, T>> IterIndex<T>(this IEnumerable<T> iter) {
             var index = 0;
             foreach (var value in iter) {
                 yield return new KeyValuePair<int, T>(index++, value);
@@ -295,8 +276,7 @@ namespace Alabo.Extensions
         /// <param name="groups">分组</param>
         /// <param name="maxCount"></param>
         /// <returns>组合结果</returns>
-        public static T[][] IterCombination<T>(this IEnumerable<IEnumerable<T>> groups, int maxCount = 0x7fffffff)
-        {
+        public static T[][] IterCombination<T>(this IEnumerable<IEnumerable<T>> groups, int maxCount = 0x7fffffff) {
             //计算可能出现的组合数量
             var count = 1;
             var groupsCount = groups.Count();
@@ -318,16 +298,14 @@ namespace Alabo.Extensions
             }
             //计算可能出现的组合
             var repat = count; //当前集合中单个值需要的重复次数
-            foreach (var pair in groups.IterIndex())
-            {
+            foreach (var pair in groups.IterIndex()) {
                 var setCount = pair.Value.Count(); //当前集合的数量
                 repat /= setCount; //更新当前集合中单个值需要的重复次数
                 //当前计算的组合位置
                 var index = 0;
                 for (int min = 0, max = count / repat / setCount; min < max; min++) {
                     foreach (var value in pair.Value) {
-                        for (var _ = 0; _ < repat; _++)
-                        {
+                        for (var _ = 0; _ < repat; _++) {
                             combList[index][pair.Key] = value;
                             index++;
                         }
@@ -349,12 +327,10 @@ namespace Alabo.Extensions
         /// <typeparam name="V">第二个枚举器的类型</typeparam>
         /// <param name="a">第一个枚举器</param>
         /// <param name="b">第二个枚举器</param>
-        public static IEnumerable<KeyValuePair<T, TV>> IterZip<T, TV>(this IEnumerable<T> a, IEnumerable<TV> b)
-        {
+        public static IEnumerable<KeyValuePair<T, TV>> IterZip<T, TV>(this IEnumerable<T> a, IEnumerable<TV> b) {
             var enumeratorA = a.GetEnumerator();
             var enumeratorB = b.GetEnumerator();
-            while (enumeratorA.MoveNext())
-            {
+            while (enumeratorA.MoveNext()) {
                 if (!enumeratorB.MoveNext()) {
                     yield break;
                 }

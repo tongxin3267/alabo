@@ -1,6 +1,5 @@
-﻿namespace Alabo.UI.Design.AutoIndexs
-{
-    public interface IAutoIndex
-    {
+﻿namespace Alabo.UI.Design.AutoIndexs {
+
+    public interface IAutoIndex {
     }
 }

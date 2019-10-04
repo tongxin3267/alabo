@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     会员自动升级类型
     /// </summary>
     [ClassProperty(Name = "会员自动升级类型")]
-    public enum KpiUpgradeType
-    {
+    public enum KpiUpgradeType {
+
         /// <summary>
         ///     推荐会员
         /// </summary>

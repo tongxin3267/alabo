@@ -15,13 +15,13 @@ using System.IO;
 using System.Threading.Tasks;
 using File = System.IO.File;
 
-namespace Alabo.Web.Filters
-{
+namespace Alabo.Web.Filters {
+
     /// <summary>
     ///     生成Html静态文件
     /// </summary>
-    public class HtmlAttribute : ActionFilterAttribute
-    {
+    public class HtmlAttribute : ActionFilterAttribute {
+
         /// <summary>
         ///     生成路径，相对根路径，范例：/Typings/app/app.component.html
         /// </summary>
@@ -45,8 +45,7 @@ namespace Alabo.Web.Filters
         /// <summary>
         ///     执行生成
         /// </summary>
-        public override async Task OnResultExecutionAsync(ResultExecutingContext context, ResultExecutionDelegate next)
-        {
+        public override async Task OnResultExecutionAsync(ResultExecutingContext context, ResultExecutionDelegate next) {
             await WriteViewToFileAsync(context);
             await base.OnResultExecutionAsync(context, next);
         }
@@ -54,10 +53,8 @@ namespace Alabo.Web.Filters
         /// <summary>
         ///     将视图写入html文件
         /// </summary>
-        private async Task WriteViewToFileAsync(ResultExecutingContext context)
-        {
-            try
-            {
+        private async Task WriteViewToFileAsync(ResultExecutingContext context) {
+            try {
                 var html = await RenderToStringAsync(context);
                 if (string.IsNullOrWhiteSpace(html)) {
                     return;
@@ -74,9 +71,7 @@ namespace Alabo.Web.Filters
                 }
 
                 File.WriteAllText(path, html);
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 ex.Log(Log.GetLog().Caption("生成html静态文件失败"));
             }
         }
@@ -84,12 +79,10 @@ namespace Alabo.Web.Filters
         /// <summary>
         ///     渲染视图
         /// </summary>
-        protected async Task<string> RenderToStringAsync(ResultExecutingContext context)
-        {
+        protected async Task<string> RenderToStringAsync(ResultExecutingContext context) {
             var viewName = "";
             object model = null;
-            if (context.Result is ViewResult result)
-            {
+            if (context.Result is ViewResult result) {
                 viewName = result.ViewName;
                 viewName = string.IsNullOrWhiteSpace(viewName)
                     ? context.RouteData.Values["action"].SafeString()
@@ -102,16 +95,14 @@ namespace Alabo.Web.Filters
             var serviceProvider = Ioc.Resolve<IServiceProvider>();
             var httpContext = new DefaultHttpContext { RequestServices = serviceProvider };
             var actionContext = new ActionContext(httpContext, context.RouteData, new ActionDescriptor());
-            using (var stringWriter = new StringWriter())
-            {
+            using (var stringWriter = new StringWriter()) {
                 var viewResult = razorViewEngine.FindView(actionContext, viewName, true);
                 if (viewResult.View == null) {
                     throw new ArgumentNullException($"未找到视图： {viewName}");
                 }
 
                 var viewDictionary =
-                    new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())
-                    { Model = model };
+                    new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary()) { Model = model };
                 var viewContext = new ViewContext(actionContext, viewResult.View, viewDictionary,
                     new TempDataDictionary(actionContext.HttpContext, tempDataProvider), stringWriter,
                     new HtmlHelperOptions());
@@ -123,8 +114,7 @@ namespace Alabo.Web.Filters
         /// <summary>
         ///     获取Html默认生成路径
         /// </summary>
-        protected virtual string GetPath(ResultExecutingContext context)
-        {
+        protected virtual string GetPath(ResultExecutingContext context) {
             var area = context.RouteData.Values["area"].SafeString();
             var controller = context.RouteData.Values["controller"].SafeString();
             var action = context.RouteData.Values["action"].SafeString();

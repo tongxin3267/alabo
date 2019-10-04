@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Query;
 using Alabo.Domains.Repositories;
@@ -17,30 +13,31 @@ using Alabo.Reflections;
 using Alabo.Runtime;
 using Alabo.Schedules;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
-namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
-{
+namespace Alabo.Framework.Tasks.Queues.Domain.Servcies {
+
     /// <summary>
     ///     Class TaskQueueService.
     /// </summary>
     /// <seealso cref="Alabo.Domains.Services.ServiceBase" />
     /// <seealso cref="ITaskQueueService" />
-    public class TaskQueueService : ServiceBase<TaskQueue, long>, ITaskQueueService
-    {
+    public class TaskQueueService : ServiceBase<TaskQueue, long>, ITaskQueueService {
+
         public TaskQueueService(IUnitOfWork unitOfWork, IRepository<TaskQueue, long> repository) : base(unitOfWork,
-            repository)
-        {
+            repository) {
         }
 
-        public ServiceResult AddBackJob(BackJobParameter backJobParameter)
-        {
+        public ServiceResult AddBackJob(BackJobParameter backJobParameter) {
             if (backJobParameter == null || backJobParameter.ModuleId.IsGuidNullOrEmpty()) {
                 throw new ArgumentNullException(nameof(backJobParameter));
             }
 
             // 是否检查上一个队列的执行情况
-            if (backJobParameter.CheckLastOne)
-            {
+            if (backJobParameter.CheckLastOne) {
                 var find = GetSingle(r =>
                     r.ModuleId == backJobParameter.ModuleId && r.Status == QueueStatus.Pending &&
                     r.Type == TaskQueueType.Once);
@@ -49,8 +46,7 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
                 }
             }
 
-            var model = new TaskQueue
-            {
+            var model = new TaskQueue {
                 ModuleId = backJobParameter.ModuleId,
                 UserId = backJobParameter.UserId,
                 Parameter = backJobParameter.ToJson(),
@@ -63,8 +59,7 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
             }
 
             var result = Add(model);
-            if (result)
-            {
+            if (result) {
                 return ServiceResult.Success;
                 ;
             }
@@ -79,15 +74,13 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
         /// <param name="moduleId">The module identifier.</param>
         /// <param name="parameter">参数</param>
         /// <exception cref="ArgumentNullException">parameter</exception>
-        public void Add(long userId, Guid moduleId, object parameter)
-        {
+        public void Add(long userId, Guid moduleId, object parameter) {
             if (parameter == null) {
                 throw new ArgumentNullException(nameof(parameter));
             }
 
             var parameterString = JsonConvert.SerializeObject(parameter);
-            var model = new TaskQueue
-            {
+            var model = new TaskQueue {
                 ModuleId = moduleId,
                 UserId = userId,
                 Parameter = parameterString,
@@ -106,15 +99,13 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
         /// <param name="executionTime">The execution time.</param>
         /// <param name="parameter">参数</param>
         /// <exception cref="ArgumentNullException">parameter</exception>
-        public void Add(long userId, Guid moduleId, DateTime executionTime, object parameter)
-        {
+        public void Add(long userId, Guid moduleId, DateTime executionTime, object parameter) {
             if (parameter == null) {
                 throw new ArgumentNullException(nameof(parameter));
             }
 
             var parameterString = JsonConvert.SerializeObject(parameter);
-            var model = new TaskQueue
-            {
+            var model = new TaskQueue {
                 ModuleId = moduleId,
                 UserId = userId,
                 Parameter = parameterString,
@@ -138,15 +129,13 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
         /// <param name="parameter">参数</param>
         /// <exception cref="ArgumentNullException">parameter</exception>
         public void Add(long userId, Guid moduleId, TaskQueueType type, DateTime executionTime, int executionTimes,
-            object parameter)
-        {
+            object parameter) {
             if (parameter == null) {
                 throw new ArgumentNullException(nameof(parameter));
             }
 
             var parameterString = JsonConvert.SerializeObject(parameter);
-            var model = new TaskQueue
-            {
+            var model = new TaskQueue {
                 ModuleId = moduleId,
                 UserId = userId,
                 Parameter = parameterString,
@@ -164,11 +153,9 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
         ///     Handles the specified identifier.
         /// </summary>
         /// <param name="id">Id标识</param>
-        public void Handle(long id)
-        {
+        public void Handle(long id) {
             var find = Repository<ITaskQueueRepository>().GetSingle(e => e.Id == id);
-            if (find != null)
-            {
+            if (find != null) {
                 find.HandleTime = DateTime.Now;
                 find.ExecutionTimes++;
                 //单次执行任务直接终结
@@ -189,9 +176,8 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
         /// </summary>
         /// <param name="moduleId">The module identifier.</param>
         /// <returns>System.Int32.</returns>
-        public int Count(Guid moduleId)
-        {
-            return (int) Repository<ITaskQueueRepository>().Count(e => e.ModuleId == moduleId);
+        public int Count(Guid moduleId) {
+            return (int)Repository<ITaskQueueRepository>().Count(e => e.ModuleId == moduleId);
         }
 
         /// <summary>
@@ -199,8 +185,7 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
         /// </summary>
         /// <param name="userId">The user identifier.</param>
         /// <param name="moduleId">The module identifier.</param>
-        public void Delete(long userId, Guid moduleId)
-        {
+        public void Delete(long userId, Guid moduleId) {
             Delete(e => e.UserId == userId && e.ModuleId == moduleId);
         }
 
@@ -209,8 +194,7 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
         /// </summary>
         /// <param name="id">Id标识</param>
         /// <returns>TaskQueue.</returns>
-        public TaskQueue GetSingle(long id)
-        {
+        public TaskQueue GetSingle(long id) {
             var find = Repository<ITaskQueueRepository>().GetSingle(e => e.Id == id);
             return find;
         }
@@ -219,8 +203,7 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
         ///     Gets all unhandled list.
         /// </summary>
         /// <returns>IEnumerable&lt;TaskQueue&gt;.</returns>
-        public IEnumerable<TaskQueue> GetAllUnhandledList()
-        {
+        public IEnumerable<TaskQueue> GetAllUnhandledList() {
             //var list = Repository<ITaskQueueRepository>().GetList(e => e.IsHandled == false);
             //return list;
             return Repository<ITaskQueueRepository>().GetUnhandledList();
@@ -232,8 +215,7 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
         /// <param name="ModuleId">The module identifier.</param>
         /// <param name="IsHandled">if set to <c>true</c> [is handled].</param>
         /// <returns>IEnumerable&lt;TaskQueue&gt;.</returns>
-        public IEnumerable<TaskQueue> GetList(Guid ModuleId, bool IsHandled = false)
-        {
+        public IEnumerable<TaskQueue> GetList(Guid ModuleId, bool IsHandled = false) {
             return Repository<ITaskQueueRepository>()
                 .GetList(e => e.ModuleId == ModuleId && e.Status == QueueStatus.Handled);
         }
@@ -244,8 +226,7 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
         /// <param name="query">查询</param>
         /// <returns>IEnumerable&lt;TaskQueue&gt;.</returns>
         /// <exception cref="ArgumentNullException">query</exception>
-        public IEnumerable<TaskQueue> GetList(IPredicateQuery<TaskQueue> query)
-        {
+        public IEnumerable<TaskQueue> GetList(IPredicateQuery<TaskQueue> query) {
             if (query == null) {
                 throw new ArgumentNullException(nameof(query));
             }
@@ -260,8 +241,7 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
         /// <param name="query">查询</param>
         /// <returns>PagedList&lt;TaskQueue&gt;.</returns>
         /// <exception cref="ArgumentNullException">query</exception>
-        public PagedList<TaskQueue> GetPagedList(IPageQuery<TaskQueue> query)
-        {
+        public PagedList<TaskQueue> GetPagedList(IPageQuery<TaskQueue> query) {
             if (query == null) {
                 throw new ArgumentNullException(nameof(query));
             }
@@ -276,8 +256,7 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
         /// <param name="moduleId">The module identifier.</param>
         /// <returns>TaskQueue.</returns>
         /// <exception cref="ArgumentNullException">moduleId</exception>
-        public TaskQueue GetSingle(Guid moduleId)
-        {
+        public TaskQueue GetSingle(Guid moduleId) {
             if (moduleId == Guid.Empty) {
                 throw new ArgumentNullException(nameof(moduleId));
             }
@@ -291,8 +270,7 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns>TaskModuleAttribute.</returns>
-        public TaskModuleAttribute GetTaskModuleAttribute<T>() where T : ITaskModule
-        {
+        public TaskModuleAttribute GetTaskModuleAttribute<T>() where T : ITaskModule {
             var attribute = typeof(T).GetTypeInfo().GetAttribute<TaskModuleAttribute>();
             return attribute;
         }
@@ -302,8 +280,7 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
         /// </summary>
         /// <param name="moduleId">The module identifier.</param>
         /// <returns>TaskModuleAttribute.</returns>
-        public TaskModuleAttribute GetTaskModuleAttribute(Guid moduleId)
-        {
+        public TaskModuleAttribute GetTaskModuleAttribute(Guid moduleId) {
             var allTaskModuleAttribute = GetAllTaskModuleAttribute();
             var allAttributes = allTaskModuleAttribute.Select(r => r.Value);
             var attribute = allAttributes.FirstOrDefault(r => r.Id == moduleId);
@@ -315,17 +292,14 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
         ///     获取所有的分润维度
         /// </summary>
         /// <returns>Type.</returns>
-        public IDictionary<Type, TaskModuleAttribute> GetAllTaskModuleAttribute()
-        {
+        public IDictionary<Type, TaskModuleAttribute> GetAllTaskModuleAttribute() {
             var cacheKey = "_TaskModuleAttribute";
-            if (!ObjectCache.TryGetPublic(cacheKey, out IDictionary<Type, TaskModuleAttribute> taskModuleAttributes))
-            {
+            if (!ObjectCache.TryGetPublic(cacheKey, out IDictionary<Type, TaskModuleAttribute> taskModuleAttributes)) {
                 taskModuleAttributes = new Dictionary<Type, TaskModuleAttribute>();
                 var assemblies = RuntimeContext.Current.GetPlatformRuntimeAssemblies();
                 var moduleTypes = assemblies.SelectMany(e => e.GetTypes())
                     .Where(e => e.GetInterfaces().Contains(typeof(ITaskModule))).ToArray();
-                foreach (var type in moduleTypes)
-                {
+                foreach (var type in moduleTypes) {
                     var attribute = type.GetTypeInfo().GetAttribute<TaskModuleAttribute>();
                     if (attribute != null) {
                         taskModuleAttributes.Add(type, attribute);
@@ -341,12 +315,10 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
         /// <summary>
         /// </summary>
         /// <param name="parparameter"></param>
-        public PagedList<TaskQueue> GetPageList(object parparameter)
-        {
+        public PagedList<TaskQueue> GetPageList(object parparameter) {
             var pageList = GetPagedList(parparameter);
             var taskQueueModuleIds = TaskQueueModule.GetTaskQueueModuleIds();
-            pageList.ForEach(r =>
-            {
+            pageList.ForEach(r => {
                 var taskModuleAttribute = GetTaskModuleAttribute(r.ModuleId);
                 if (taskQueueModuleIds.TryGetValue(r.ModuleId, out var name)) {
                     r.ModuleName = name;
@@ -355,12 +327,10 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
             return pageList;
         }
 
-        public List<TaskQueue> GetQueuePageList(Guid moduleId)
-        {
-            var pageList = (IEnumerable<TaskQueue>) GetList(r => r.ModuleId == moduleId);
+        public List<TaskQueue> GetQueuePageList(Guid moduleId) {
+            var pageList = (IEnumerable<TaskQueue>)GetList(r => r.ModuleId == moduleId);
             var taskQueueModuleIds = TaskQueueModule.GetTaskQueueModuleIds();
-            pageList.Foreach(r =>
-            {
+            pageList.Foreach(r => {
                 var taskModuleAttribute = GetTaskModuleAttribute(r.ModuleId);
                 if (taskQueueModuleIds.TryGetValue(r.ModuleId, out var name)) {
                     r.ModuleName = name;
@@ -369,16 +339,14 @@ namespace Alabo.Framework.Tasks.Queues.Domain.Servcies
             return pageList.ToList();
         }
 
-        public IList<TaskQueue> GetBackJobPendingList()
-        {
+        public IList<TaskQueue> GetBackJobPendingList() {
             var list = GetListNoTracking(r =>
                 r.Status == QueueStatus.Pending
                 && r.ModuleId != TaskQueueModuleId.UserUpgradeByUpgradePoints);
             return list;
         }
 
-        public IList<TaskQueue> GetUpgradePendingList()
-        {
+        public IList<TaskQueue> GetUpgradePendingList() {
             var list = GetListNoTracking(r =>
                 r.Status == QueueStatus.Pending
                 && r.ModuleId == TaskQueueModuleId.UserUpgradeByUpgradePoints);

@@ -1,18 +1,17 @@
-﻿using System.Data.SqlClient;
+﻿using Alabo.Domains.Repositories.EFCore;
 using Alabo.Domains.Repositories.Mongo.Context;
 using Alabo.Extensions;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using System.Data.SqlClient;
 using System.IO;
-using Alabo.Domains.Repositories.EFCore;
 
-namespace Alabo.Runtime.Config
-{
+namespace Alabo.Runtime.Config {
+
     /// <summary>
     ///     系统配置
     /// </summary>
-    public class AppSettingConfig
-    {
+    public class AppSettingConfig {
         private readonly IConfiguration _systemConfiguration;
 
         private string _clientHost;
@@ -298,8 +297,7 @@ namespace Alabo.Runtime.Config
         }
     }
 
-    public class MySqlConfig
-    {
+    public class MySqlConfig {
         public string ConnectionString { get; set; }
         public string ProviderName { get; set; }
     }
@@ -307,8 +305,8 @@ namespace Alabo.Runtime.Config
     /// <summary>
     ///     测试配置
     /// </summary>
-    public class TestBaseConfig
-    {
+    public class TestBaseConfig {
+
         /// <summary>
         ///     Gets or sets the base URL.
         /// </summary>
@@ -328,8 +326,8 @@ namespace Alabo.Runtime.Config
     /// <summary>
     ///     授权配置
     /// </summary>
-    public class OpenApiSetting
-    {
+    public class OpenApiSetting {
+
         /// <summary>
         ///     授权服务网址
         /// </summary>

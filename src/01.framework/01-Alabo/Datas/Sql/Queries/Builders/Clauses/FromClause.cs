@@ -4,13 +4,13 @@ using Alabo.Datas.Sql.Queries.Builders.Extensions;
 using Alabo.Properties;
 using System;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Clauses
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Clauses {
+
     /// <summary>
     ///     From子句
     /// </summary>
-    public class FromClause : IFromClause
-    {
+    public class FromClause : IFromClause {
+
         /// <summary>
         ///     方言
         /// </summary>
@@ -37,8 +37,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <param name="dialect">方言</param>
         /// <param name="resolver">实体解析器</param>
         /// <param name="register">实体别名注册器</param>
-        public FromClause(IDialect dialect, IEntityResolver resolver, IEntityAliasRegister register)
-        {
+        public FromClause(IDialect dialect, IEntityResolver resolver, IEntityAliasRegister register) {
             _dialect = dialect;
             _resolver = resolver;
             _register = register;
@@ -49,8 +48,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// </summary>
         /// <param name="table">表名</param>
         /// <param name="alias">别名</param>
-        public void From(string table, string alias = null)
-        {
+        public void From(string table, string alias = null) {
             _item = new SqlItem(table, alias: alias);
         }
 
@@ -59,8 +57,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// </summary>
         /// <param name="alias">别名</param>
         /// <param name="schema">架构名</param>
-        public void From<TEntity>(string alias = null, string schema = null) where TEntity : class
-        {
+        public void From<TEntity>(string alias = null, string schema = null) where TEntity : class {
             var entity = typeof(TEntity);
             var table = _resolver.GetTableAndSchema(entity);
             _item = new SqlItem(table, schema, alias);
@@ -71,10 +68,8 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         ///     添加到From子句
         /// </summary>
         /// <param name="sql">Sql语句</param>
-        public void AppendSql(string sql)
-        {
-            if (_item != null && _item.Raw)
-            {
+        public void AppendSql(string sql) {
+            if (_item != null && _item.Raw) {
                 _item.Name += sql;
                 return;
             }
@@ -85,8 +80,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <summary>
         ///     验证
         /// </summary>
-        public void Validate()
-        {
+        public void Validate() {
             if (string.IsNullOrWhiteSpace(_item?.Name)) {
                 throw new InvalidOperationException(LibraryResource.TableIsEmpty);
             }
@@ -95,8 +89,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <summary>
         ///     输出Sql
         /// </summary>
-        public string ToSql()
-        {
+        public string ToSql() {
             var table = _item?.ToSql(_dialect);
             if (string.IsNullOrWhiteSpace(table)) {
                 return null;

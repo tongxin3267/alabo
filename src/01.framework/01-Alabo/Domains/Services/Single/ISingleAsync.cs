@@ -3,10 +3,10 @@ using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Alabo.Domains.Services.Single
-{
-    public interface ISingleAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+namespace Alabo.Domains.Services.Single {
+
+    public interface ISingleAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         /// <param name="id">实体标识</param>
         Task<TEntity> GetSingleAsync(object id);
 

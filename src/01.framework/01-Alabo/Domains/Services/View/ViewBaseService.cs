@@ -6,19 +6,16 @@ using Alabo.Extensions;
 using System;
 using System.Collections.Generic;
 
-namespace Alabo.Domains.Services.View
-{
+namespace Alabo.Domains.Services.View {
+
     public abstract class ViewBaseService<TEntity, TKey> : UpdateBase<TEntity, TKey>, IViewBase<TEntity, TKey>
-        where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
-        protected ViewBaseService(IUnitOfWork unitOfWork, IStore<TEntity, TKey> store) : base(unitOfWork, store)
-        {
+        where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
+        protected ViewBaseService(IUnitOfWork unitOfWork, IStore<TEntity, TKey> store) : base(unitOfWork, store) {
         }
 
-        public TEntity GetViewById(object id)
-        {
-            if (!id.IsNullOrEmpty())
-            {
+        public TEntity GetViewById(object id) {
+            if (!id.IsNullOrEmpty()) {
                 var model = GetSingle(id);
                 if (model != null) {
                     return model;
@@ -28,8 +25,7 @@ namespace Alabo.Domains.Services.View
             return GetDefaultModel();
         }
 
-        private TEntity GetDefaultModel()
-        {
+        private TEntity GetDefaultModel() {
             var model = Activator.CreateInstance<TEntity>();
             // model.Id ;
             CreateSubInstance(model);
@@ -40,12 +36,10 @@ namespace Alabo.Domains.Services.View
         /// <summary>
         ///     创建对象
         /// </summary>
-        private void CreateSubInstance(object obj)
-        {
+        private void CreateSubInstance(object obj) {
             //loop properties.
             var type = obj.GetType();
-            foreach (var p in type.GetProperties())
-            {
+            foreach (var p in type.GetProperties()) {
                 if (!p.CanWrite) {
                     continue;
                 }
@@ -56,8 +50,7 @@ namespace Alabo.Domains.Services.View
                 }
 
                 //reference type
-                if (propertyType.IsGenericType)
-                {
+                if (propertyType.IsGenericType) {
                     var subItemType = propertyType.GetGenericArguments()[0];
                     //解决循环依赖创建
                     if (subItemType == type || IsValueType(subItemType)) {
@@ -68,9 +61,7 @@ namespace Alabo.Domains.Services.View
                     CreateSubInstance(subItem);
                     var value = GetGenericValue(subItemType, subItem);
                     p.SetValue(obj, value, null);
-                }
-                else
-                {
+                } else {
                     //解决循环依赖创建
                     if (propertyType == type) {
                         continue;
@@ -89,8 +80,7 @@ namespace Alabo.Domains.Services.View
         /// <param name="type"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        private object GetGenericValue(Type type, object value)
-        {
+        private object GetGenericValue(Type type, object value) {
             var genericType = typeof(List<>).MakeGenericType(type);
             var result = Activator.CreateInstance(genericType);
             var addMethod = genericType.GetMethod("Add");
@@ -103,8 +93,7 @@ namespace Alabo.Domains.Services.View
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public bool IsValueType(Type type)
-        {
+        public bool IsValueType(Type type) {
             return type == typeof(string) ||
                    type == typeof(string) ||
                    type.IsPrimitive ||

@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Framework.Basic.Regions.Domain.Entities;
 using Alabo.Framework.Basic.Regions.Dtos;
 using Alabo.Framework.Core.Enums.Enum;
 using MongoDB.Bson;
+using System.Collections.Generic;
 
-namespace Alabo.Framework.Basic.Regions.Domain.Services
-{
-    public interface IRegionService : IService<Region, ObjectId>
-    {
+namespace Alabo.Framework.Basic.Regions.Domain.Services {
+
+    public interface IRegionService : IService<Region, ObjectId> {
+
         /// <summary>
         ///     导入初始数据
         /// </summary>

@@ -6,22 +6,20 @@ using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Alabo.Datas.Stores.Count.EfCore
-{
+namespace Alabo.Datas.Stores.Count.EfCore {
+
     public abstract class CountAsyncEfCoreStore<TEntity, TKey> : ColumnEfCoreStore<TEntity, TKey>,
         ICountAsyncStore<TEntity, TKey>
-        where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
-        protected CountAsyncEfCoreStore(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
+        protected CountAsyncEfCoreStore(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
         /// <summary>
         ///     查找数量
         /// </summary>
         /// <param name="predicate">条件</param>
-        public async Task<long> CountAsync(Expression<Func<TEntity, bool>> predicate)
-        {
+        public async Task<long> CountAsync(Expression<Func<TEntity, bool>> predicate) {
             if (predicate == null) {
                 return await Set.CountAsync();
             }
@@ -32,8 +30,7 @@ namespace Alabo.Datas.Stores.Count.EfCore
         /// <summary>
         ///     查找数量
         /// </summary>
-        public async Task<long> CountAsync()
-        {
+        public async Task<long> CountAsync() {
             return await Set.CountAsync();
         }
     }

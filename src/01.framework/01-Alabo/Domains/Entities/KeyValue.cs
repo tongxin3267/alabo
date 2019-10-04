@@ -1,24 +1,21 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.Domains.Entities
-{
+namespace Alabo.Domains.Entities {
+
     /// <summary>
     ///     键值 对
     /// </summary>
-    public class KeyValue
-    {
-        public KeyValue()
-        {
+    public class KeyValue {
+
+        public KeyValue() {
         }
 
-        public KeyValue(object key, object value)
-        {
+        public KeyValue(object key, object value) {
             Key = key;
             Value = value;
         }
 
-        public KeyValue(object key, object value, string name)
-        {
+        public KeyValue(object key, object value, string name) {
             Key = key;
             Value = value;
             Name = name;
@@ -44,8 +41,8 @@ namespace Alabo.Domains.Entities
         public string Name { get; set; }
     }
 
-    public class EnumList
-    {
+    public class EnumList {
+
         /// <summary>
         ///     名称
         /// </summary>
@@ -57,8 +54,8 @@ namespace Alabo.Domains.Entities
         public List<EnumKeyValue> KeyValue { get; set; } = new List<EnumKeyValue>();
     }
 
-    public class EnumKeyValue
-    {
+    public class EnumKeyValue {
+
         /// <summary>
         ///     关键字
         /// </summary>

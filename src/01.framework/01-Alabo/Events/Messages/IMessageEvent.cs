@@ -1,10 +1,10 @@
-﻿namespace Alabo.Events.Messages
-{
+﻿namespace Alabo.Events.Messages {
+
     /// <summary>
     ///     消息事件
     /// </summary>
-    public interface IMessageEvent : IEvent
-    {
+    public interface IMessageEvent : IEvent {
+
         /// <summary>
         ///     事件数据
         /// </summary>

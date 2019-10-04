@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
 
-namespace Alabo.Mapping.Dynamic
-{
-    public class DynamicCollection<TModel> : List<Dynamic<TModel>> where TModel : class, new()
-    {
-        public void Apply(IList<TModel> deltas)
-        {
+namespace Alabo.Mapping.Dynamic {
+
+    public class DynamicCollection<TModel> : List<Dynamic<TModel>> where TModel : class, new() {
+
+        public void Apply(IList<TModel> deltas) {
             if (deltas == null) {
                 throw new ArgumentNullException(nameof(deltas));
             }

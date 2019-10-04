@@ -2,14 +2,14 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     语言
     /// </summary>
     [ClassProperty(Name = "语言")]
-    public enum Languages
-    {
+    public enum Languages {
+
         /// <summary>
         ///     中文
         /// </summary>
@@ -135,14 +135,13 @@ namespace Alabo.Framework.Core.Enums.Enum
     ///     语言代码的属性
     /// </summary>
     [AttributeUsage(AttributeTargets.Field)]
-    public class LanguageCodeAttribute : Attribute
-    {
+    public class LanguageCodeAttribute : Attribute {
+
         /// <summary>
         ///     初始化
         /// </summary>
         /// <param name="code"></param>
-        public LanguageCodeAttribute(string code)
-        {
+        public LanguageCodeAttribute(string code) {
             Code = code;
         }
 

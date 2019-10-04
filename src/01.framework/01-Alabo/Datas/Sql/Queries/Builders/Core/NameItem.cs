@@ -1,12 +1,12 @@
 ﻿using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Core
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Core {
+
     /// <summary>
     ///     名称项，处理名称中包含符号.
     /// </summary>
-    public class NameItem
-    {
+    public class NameItem {
+
         /// <summary>
         ///     名称
         /// </summary>
@@ -21,21 +21,18 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         ///     初始化名称项
         /// </summary>
         /// <param name="name">名称</param>
-        public NameItem(string name)
-        {
+        public NameItem(string name) {
             if (string.IsNullOrWhiteSpace(name)) {
                 return;
             }
 
             var list = name.Split('.');
-            if (list.Length == 1)
-            {
+            if (list.Length == 1) {
                 Name = list[0];
                 return;
             }
 
-            if (list.Length == 2)
-            {
+            if (list.Length == 2) {
                 Prefix = list[0];
                 Name = list[1];
             }
@@ -44,8 +41,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <summary>
         ///     前缀
         /// </summary>
-        public string Prefix
-        {
+        public string Prefix {
             get => Alabo.Extensions.Extensions.SafeString(_prefix);
             set => _prefix = value;
         }
@@ -53,8 +49,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <summary>
         ///     名称
         /// </summary>
-        public string Name
-        {
+        public string Name {
             get => Alabo.Extensions.Extensions.SafeString(_name);
             set => _name = value;
         }
@@ -64,8 +59,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// </summary>
         /// <param name="dialect">Sql方言</param>
         /// <param name="prefix">前缀</param>
-        public string ToSql(IDialect dialect, string prefix)
-        {
+        public string ToSql(IDialect dialect, string prefix) {
             Prefix = GetPrefix(prefix);
             if (string.IsNullOrWhiteSpace(Prefix)) {
                 return dialect.SafeName(Name);
@@ -77,8 +71,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <summary>
         ///     获取前缀
         /// </summary>
-        private string GetPrefix(string prefix)
-        {
+        private string GetPrefix(string prefix) {
             if (string.IsNullOrWhiteSpace(Prefix)) {
                 return prefix;
             }

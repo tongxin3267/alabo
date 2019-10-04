@@ -11,15 +11,15 @@ using System.Reflection;
 using ZKCloud.Open.ApiBase.Configuration;
 using ZKCloud.Open.ApiBase.Services;
 
-namespace Alabo.Framework.Core.Admins.Services
-{
+namespace Alabo.Framework.Core.Admins.Services {
+
     /// <summary>
     ///     Class AdminService.
     /// </summary>
     /// <seealso cref="Alabo.Domains.Services.ServiceBase" />
     /// <seealso cref="IAdminService" />
-    public class AdminService : ServiceBase, IAdminService
-    {
+    public class AdminService : ServiceBase, IAdminService {
+
         /// <summary>
         ///     The admin cache key
         /// </summary>
@@ -29,16 +29,14 @@ namespace Alabo.Framework.Core.Admins.Services
 
         private IServerApiClient _userApiClient;
 
-        public AdminService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        public AdminService(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
         /// <summary>
         ///     租户初始时候需要速度比较快
         /// </summary>
         /// <returns></returns>
-        public void DefaultInit(bool isTenant = false)
-        {
+        public void DefaultInit(bool isTenant = false) {
             if (!isTenant) // 先更新数据库脚本,非租户时执行
 {
                 Resolve<ICatalogService>().UpdateDatabase();
@@ -50,8 +48,7 @@ namespace Alabo.Framework.Core.Admins.Services
             // 其他项目的默认数据
             var dic = new Dictionary<string, long>();
             var types = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IDefaultInit)).ToList();
-            types.ForEach(item =>
-            {
+            types.ForEach(item => {
                 var attr = item.GetCustomAttribute<DefaultInitSortAttribute>();
                 if (attr == null) {
                     attr = new DefaultInitSortAttribute();
@@ -63,40 +60,29 @@ namespace Alabo.Framework.Core.Admins.Services
             });
             //asc sort
             var dicSort = from item in dic orderby item.Value select item;
-            foreach (var item in dicSort)
-            {
+            foreach (var item in dicSort) {
                 var type = types.Find(t => t.FullName == item.Key);
                 if (type == null) {
                     continue;
                 }
 
-                try
-                {
+                try {
                     var config = Activator.CreateInstance(type);
                     if (config is IDefaultInit set) {
-                        try
-                        {
-                            if (isTenant)
-                            {
-                                if (set.IsTenant)
-                                {
+                        try {
+                            if (isTenant) {
+                                if (set.IsTenant) {
                                     set.Init();
                                 }
-                            }
-                            else
-                            {
+                            } else {
                                 // 非租户执行模式
                                 set.Init();
                             }
-                        }
-                        catch (Exception ex)
-                        {
+                        } catch (Exception ex) {
                             Trace.WriteLine(ex.Message);
                         }
                     }
-                }
-                catch (Exception ex)
-                {
+                } catch (Exception ex) {
                     Trace.WriteLine(ex.Message);
                 }
             }
@@ -107,8 +93,7 @@ namespace Alabo.Framework.Core.Admins.Services
         /// <summary>
         ///     Clears the cache.
         /// </summary>
-        public void ClearCache()
-        {
+        public void ClearCache() {
             ObjectCache.Clear();
         }
     }

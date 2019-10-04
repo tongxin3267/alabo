@@ -1,10 +1,10 @@
-﻿namespace Alabo.Domains.Query.Dto
-{
+﻿namespace Alabo.Domains.Query.Dto {
+
     /// <summary>
     ///     搜索范围
     /// </summary>
-    public class RangDto
-    {
+    public class RangDto {
+
         /// <summary>
         ///     字段名称
         /// </summary>
@@ -26,8 +26,8 @@
     /// <summary>
     ///     高级搜索排序方式
     /// </summary>
-    public class SortTypeDto
-    {
+    public class SortTypeDto {
+
         /// <summary>
         ///     字段名称
         /// </summary>

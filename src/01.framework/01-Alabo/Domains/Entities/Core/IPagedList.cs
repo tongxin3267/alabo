@@ -1,10 +1,10 @@
-﻿namespace Alabo.Domains.Entities.Core
-{
+﻿namespace Alabo.Domains.Entities.Core {
+
     /// <summary>
     ///     排序
     /// </summary>
-    public interface IPagedList
-    {
+    public interface IPagedList {
+
         /// <summary>
         ///     数据量
         /// </summary>

@@ -1,12 +1,12 @@
 ﻿using Alabo.Linq;
 
-namespace Alabo.UI.Design.AutoReports.Dtos
-{
+namespace Alabo.UI.Design.AutoReports.Dtos {
+
     /// <summary>
     ///     Report统计参数类
     /// </summary>
-    public class CountReportInput
-    {
+    public class CountReportInput {
+
         /// <summary>
         ///     字段查询提交
         /// </summary>

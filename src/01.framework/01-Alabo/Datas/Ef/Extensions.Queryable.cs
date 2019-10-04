@@ -5,13 +5,13 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Alabo.Datas.Ef
-{
+namespace Alabo.Datas.Ef {
+
     /// <summary>
     ///     查询扩展
     /// </summary>
-    public static partial class Extensions
-    {
+    public static partial class Extensions {
+
         /// <summary>
         ///     转换为分页列表，包含排序分页操作
         /// </summary>
@@ -19,8 +19,7 @@ namespace Alabo.Datas.Ef
         /// <param name="source">数据源</param>
         /// <param name="pager">分页对象</param>
         public static async Task<PagerList<TEntity>> ToPagerListAsync<TEntity>(this IQueryable<TEntity> source,
-            IPager pager)
-        {
+            IPager pager) {
             if (source == null) {
                 throw new ArgumentNullException(nameof(source));
             }

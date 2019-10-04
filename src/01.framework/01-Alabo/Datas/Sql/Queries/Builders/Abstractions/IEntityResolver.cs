@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Abstractions
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Abstractions {
+
     /// <summary>
     ///     实体解析器
     /// </summary>
-    public interface IEntityResolver
-    {
+    public interface IEntityResolver {
+
         /// <summary>
         ///     获取表
         /// </summary>

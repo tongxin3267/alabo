@@ -1,18 +1,16 @@
-﻿namespace Alabo.Domains.Repositories.Pager
-{
+﻿namespace Alabo.Domains.Repositories.Pager {
+
     /// <summary>
     ///     分页参数
     /// </summary>
-    public class Pager : IPager
-    {
+    public class Pager : IPager {
         private int _pageIndex;
 
         /// <summary>
         ///     初始化分页参数
         /// </summary>
         public Pager()
-            : this(1)
-        {
+            : this(1) {
         }
 
         /// <summary>
@@ -22,8 +20,7 @@
         /// <param name="pageSize">每页显示行数,默认20</param>
         /// <param name="order">排序条件</param>
         public Pager(int page, int pageSize, string order)
-            : this(page, pageSize, 0, order)
-        {
+            : this(page, pageSize, 0, order) {
         }
 
         /// <summary>
@@ -33,8 +30,7 @@
         /// <param name="pageSize">每页显示行数,默认20</param>
         /// <param name="totalCount">总行数</param>
         /// <param name="order">排序条件</param>
-        public Pager(int page, int pageSize = 20, int totalCount = 0, string order = "")
-        {
+        public Pager(int page, int pageSize = 20, int totalCount = 0, string order = "") {
             Page = page;
             PageSize = pageSize;
             TotalCount = totalCount;
@@ -44,10 +40,8 @@
         /// <summary>
         ///     页索引，即第几页，从1开始
         /// </summary>
-        public int Page
-        {
-            get
-            {
+        public int Page {
+            get {
                 if (_pageIndex <= 0) {
                     _pageIndex = 1;
                 }
@@ -70,8 +64,7 @@
         /// <summary>
         ///     获取总页数
         /// </summary>
-        public int GetPageCount()
-        {
+        public int GetPageCount() {
             if (TotalCount % PageSize == 0) {
                 return TotalCount / PageSize;
             }
@@ -82,8 +75,7 @@
         /// <summary>
         ///     获取跳过的行数
         /// </summary>
-        public int GetSkipCount()
-        {
+        public int GetSkipCount() {
             if (Page > GetPageCount()) {
                 Page = GetPageCount();
             }
@@ -99,16 +91,14 @@
         /// <summary>
         ///     起始行数
         /// </summary>
-        public int GetStartNumber()
-        {
+        public int GetStartNumber() {
             return (Page - 1) * PageSize + 1;
         }
 
         /// <summary>
         ///     结束行数
         /// </summary>
-        public int GetEndNumber()
-        {
+        public int GetEndNumber() {
             return Page * PageSize;
         }
     }

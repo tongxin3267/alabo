@@ -1,13 +1,12 @@
 ﻿using Alabo.Domains.Entities.Core;
 using MongoDB.Bson;
 
-namespace Alabo.Domains.Entities
-{
+namespace Alabo.Domains.Entities {
+
     /// <summary>
     ///     聚合根
     /// </summary>
-    public interface IAggregateMongoRoot : IEntity<ObjectId>, IMongoEntity, IAggregateRoot
-    {
+    public interface IAggregateMongoRoot : IEntity<ObjectId>, IMongoEntity, IAggregateRoot {
     }
 
     /// <summary>
@@ -15,7 +14,6 @@ namespace Alabo.Domains.Entities
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     public interface IAggregateMongoRoot<TEntity> : IAggregateRoot<TEntity, ObjectId>, IAggregateMongoRoot
-        where TEntity : IAggregateRoot
-    {
+        where TEntity : IAggregateRoot {
     }
 }

@@ -3,19 +3,17 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Alabo.Domains.Entities
-{
-    public class PagedList<T> : List<T>, IPagedList
-    {
+namespace Alabo.Domains.Entities {
+
+    public class PagedList<T> : List<T>, IPagedList {
+
         /// <summary>
         /// </summary>
-        public PagedList()
-        {
+        public PagedList() {
         }
 
         private PagedList(IEnumerable<T> source)
-            : base(source)
-        {
+            : base(source) {
         }
 
         /// <summary>
@@ -51,10 +49,8 @@ namespace Alabo.Domains.Entities
         ///     总页数
         /// </summary>
         [JsonProperty(PropertyName = "pagecount")]
-        public long PageCount
-        {
-            get
-            {
+        public long PageCount {
+            get {
                 if (PageSize == 0) {
                     return 0;
                 }
@@ -68,10 +64,8 @@ namespace Alabo.Domains.Entities
         /// </summary>
         public string Order { get; set; }
 
-        public static PagedList<T> Create(IEnumerable<T> source, long recordCount, long pageSize, long pageIndex)
-        {
-            var res = new PagedList<T>(source)
-            {
+        public static PagedList<T> Create(IEnumerable<T> source, long recordCount, long pageSize, long pageIndex) {
+            var res = new PagedList<T>(source) {
                 CurrentSize = source.Count(),
                 Result = source,
                 RecordCount = recordCount,

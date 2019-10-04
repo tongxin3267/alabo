@@ -9,13 +9,12 @@ using System;
 using ZKCloud.Open.ApiBase.Models;
 using User = Alabo.Users.Entities.User;
 
-namespace Alabo.Framework.Core.WebApis.Controller
-{
+namespace Alabo.Framework.Core.WebApis.Controller {
+
     /// <summary>
     ///     扩展
     /// </summary>
-    public abstract class ApiExtensionController : BaseController
-    {
+    public abstract class ApiExtensionController : BaseController {
         private AutoBaseModel _autoModel;
 
         private User _user;
@@ -23,10 +22,8 @@ namespace Alabo.Framework.Core.WebApis.Controller
         /// <summary>
         ///     当前Api接口访问的登录用户，由前台传UserId过来判断
         /// </summary>
-        public User User
-        {
-            get
-            {
+        public User User {
+            get {
                 if (_user == null && AutoModel.BasicUser != null) {
                     _user = Resolve<IAlaboUserService>().GetSingle(AutoModel.BasicUser.Id);
                 }
@@ -38,27 +35,22 @@ namespace Alabo.Framework.Core.WebApis.Controller
         /// <summary>
         ///     基础信息
         /// </summary>
-        public AutoBaseModel AutoModel
-        {
-            get
-            {
-                if (_autoModel == null)
-                {
+        public AutoBaseModel AutoModel {
+            get {
+                if (_autoModel == null) {
                     _autoModel = new AutoBaseModel();
                     var filter = HttpContext.Request.Query["filter"].ConvertToInt();
                     if (filter <= 0) {
                         filter = HttpContext.Request.Headers["zk-filter"].ToString().ConvertToInt();
                     }
 
-                    if (filter > 0)
-                    {
+                    if (filter > 0) {
                         filter.IntToEnum(out FilterType filterType);
                         _autoModel.Filter = filterType;
                     }
 
                     var userId = HttpContext.Request.Headers["zk-user-id"].ToString().ConvertToLong();
-                    if (userId > 0)
-                    {
+                    if (userId > 0) {
                         var user = Resolve<IAlaboUserService>().GetSingle(userId);
                         _autoModel.BasicUser = new BasicUser { Id = userId };
                         if (user != null) {
@@ -76,8 +68,7 @@ namespace Alabo.Framework.Core.WebApis.Controller
         /// </summary>
         /// <param name="serviceResult"></param>
         /// <returns></returns>
-        public ApiResult ToResult(ServiceResult serviceResult)
-        {
+        public ApiResult ToResult(ServiceResult serviceResult) {
             if (serviceResult.Succeeded) {
                 return ApiResult.Success();
             }
@@ -92,10 +83,8 @@ namespace Alabo.Framework.Core.WebApis.Controller
         /// <typeparam name="T"></typeparam>
         /// <param name="serviceResult"></param>
         /// <returns></returns>
-        public ApiResult<T> ToResult<T>(ServiceResult serviceResult)
-        {
-            if (serviceResult.Succeeded)
-            {
+        public ApiResult<T> ToResult<T>(ServiceResult serviceResult) {
+            if (serviceResult.Succeeded) {
                 var obj = (T)serviceResult.ReturnObject;
                 return ApiResult.Success(obj);
             }
@@ -110,8 +99,7 @@ namespace Alabo.Framework.Core.WebApis.Controller
         /// <typeparam name="T"></typeparam>
         /// <param name="serviceResult"></param>
         /// <returns></returns>
-        public ApiResult<T> ToResult<T>(Tuple<ServiceResult, T> serviceResult)
-        {
+        public ApiResult<T> ToResult<T>(Tuple<ServiceResult, T> serviceResult) {
             if (serviceResult.Item1.Succeeded) {
                 return ApiResult.Success(serviceResult.Item2);
             }

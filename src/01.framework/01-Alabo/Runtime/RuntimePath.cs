@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using System.IO;
 
-namespace Alabo.Runtime
-{
+namespace Alabo.Runtime {
+
     /// <summary>
     ///     Class RuntimePath.
     /// </summary>
-    public class RuntimePath
-    {
+    public class RuntimePath {
+
         /// <summary>
         ///     The hosting environment
         /// </summary>
@@ -17,15 +17,13 @@ namespace Alabo.Runtime
         ///     Initializes a new instance of the <see cref="RuntimePath" /> class.
         /// </summary>
         /// <param name="env">The env.</param>
-        internal RuntimePath(IHostingEnvironment env)
-        {
+        internal RuntimePath(IHostingEnvironment env) {
             _hostingEnvironment = env;
             RootPath = _hostingEnvironment.ContentRootPath;
             WebRootPath = _hostingEnvironment.WebRootPath;
         }
 
-        internal RuntimePath(string rootPath)
-        {
+        internal RuntimePath(string rootPath) {
             RootPath = rootPath;
             WebRootPath = rootPath + "\\wwwroot";
         }
@@ -89,8 +87,7 @@ namespace Alabo.Runtime
         ///     Combines the specified path1.
         /// </summary>
         /// <param name="path1">The path1.</param>
-        public string Combine(string path1)
-        {
+        public string Combine(string path1) {
             return Path.Combine(BaseDirectory, path1);
         }
 
@@ -99,8 +96,7 @@ namespace Alabo.Runtime
         /// </summary>
         /// <param name="path1">The path1.</param>
         /// <param name="path2">The path2.</param>
-        public string Combine(string path1, string path2)
-        {
+        public string Combine(string path1, string path2) {
             return Path.Combine(BaseDirectory, path1, path2);
         }
 
@@ -108,8 +104,7 @@ namespace Alabo.Runtime
         ///     Combines the specified path1.
         /// </summary>
         /// <param name="path1">The path1.</param>
-        public string Combine(params string[] path1)
-        {
+        public string Combine(params string[] path1) {
             var fullPathArray = new string[path1.Length + 1];
             fullPathArray[0] = BaseDirectory;
             for (var i = 0; i < path1.Length; i++) {
@@ -123,8 +118,7 @@ namespace Alabo.Runtime
         ///     Builds the web URL.
         /// </summary>
         /// <param name="path">The path.</param>
-        public string BuildWebUrl(string path)
-        {
+        public string BuildWebUrl(string path) {
             if (string.IsNullOrWhiteSpace(path)) {
                 return RuntimeContext.Current.WebsiteConfig.WebRootUrl;
             }

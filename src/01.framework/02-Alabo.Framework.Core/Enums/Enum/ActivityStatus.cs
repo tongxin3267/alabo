@@ -1,11 +1,11 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     [ClassProperty(Name = "活动开启状态")]
-    public enum ActivityStatus
-    {
+    public enum ActivityStatus {
+
         /// <summary>
         ///     未开始
         /// </summary>

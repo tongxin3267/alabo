@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     评论类型
     /// </summary>
     [ClassProperty(Name = "评论类型")]
-    public enum CommentType
-    {
+    public enum CommentType {
+
         /// <summary>
         ///     文章评论
         /// </summary>

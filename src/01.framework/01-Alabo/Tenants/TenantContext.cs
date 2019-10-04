@@ -7,10 +7,10 @@ using MongoDB.Bson;
 using System;
 using System.Collections.Concurrent;
 
-namespace Alabo.Tenants
-{
-    public class TenantContext
-    {
+namespace Alabo.Tenants {
+
+    public class TenantContext {
+
         /// <summary>
         ///     Tenants
         /// </summary>
@@ -41,8 +41,7 @@ namespace Alabo.Tenants
         ///     get current tenant
         /// </summary>
         /// <returns></returns>
-        public static string GetCurrentTenant()
-        {
+        public static string GetCurrentTenant() {
             if (string.IsNullOrWhiteSpace(CurrentTenant)) {
                 return string.Empty;
             }
@@ -54,8 +53,7 @@ namespace Alabo.Tenants
         ///     get master tenant
         /// </summary>
         /// <returns></returns>
-        public static string GetMasterTenant()
-        {
+        public static string GetMasterTenant() {
             return GetTenant(Master);
         }
 
@@ -63,8 +61,7 @@ namespace Alabo.Tenants
         ///     get tenant
         /// </summary>
         /// <param name="name"></param>
-        public static string GetTenant(string name)
-        {
+        public static string GetTenant(string name) {
             if (_tenantDictionary.ContainsKey(name)) {
                 return _tenantDictionary[name];
             }
@@ -76,8 +73,7 @@ namespace Alabo.Tenants
         ///     add master tenant
         /// </summary>
         /// <param name="value"></param>
-        public static void AddMasterTenant(string value)
-        {
+        public static void AddMasterTenant(string value) {
             AddTenant(Master, value);
         }
 
@@ -86,8 +82,7 @@ namespace Alabo.Tenants
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
-        public static void AddTenant(string name, string value)
-        {
+        public static void AddTenant(string name, string value) {
             if (!_tenantDictionary.ContainsKey(name)) {
                 _tenantDictionary.TryAdd(name, value);
             }
@@ -97,10 +92,8 @@ namespace Alabo.Tenants
         ///     get master tenant
         /// </summary>
         /// <returns></returns>
-        public static Tenant GetDefaultMasterTenant()
-        {
-            return new Tenant
-            {
+        public static Tenant GetDefaultMasterTenant() {
+            return new Tenant {
                 Name = Master,
                 DatabaseName = RuntimeContext.GetTenantMongodbDataBase()
             };
@@ -111,8 +104,7 @@ namespace Alabo.Tenants
         /// </summary>
         /// <param name="scope"></param>
         /// <param name="tenantName"></param>
-        public static void SwitchDatabase(IScope scope, string tenantName)
-        {
+        public static void SwitchDatabase(IScope scope, string tenantName) {
             if (string.IsNullOrWhiteSpace(tenantName)) {
                 return;
             }

@@ -1,9 +1,9 @@
 ﻿using Alabo.Dependency;
 
-namespace Alabo.UI.Design.AutoArticles
-{
-    public interface IAutoArticle : IScopeDependency
-    {
+namespace Alabo.UI.Design.AutoArticles {
+
+    public interface IAutoArticle : IScopeDependency {
+
         /// <summary>
         ///     文章详情内容
         /// </summary>

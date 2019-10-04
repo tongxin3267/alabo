@@ -5,21 +5,20 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Framework.Core.WebApis.Filter
-{
+namespace Alabo.Framework.Core.WebApis.Filter {
+
     /// <summary>
     ///     Api 接口，用户登录授权
     /// </summary>
-    public class ApiAuthAttribute : ExceptionFilterAttribute
-    {
+    public class ApiAuthAttribute : ExceptionFilterAttribute {
+
         /// <summary>
         ///     Api接口数据过滤方式
         ///     默认Api接口权限为用户级别
         /// </summary>
         public FilterType Filter { get; set; } = FilterType.User;
 
-        public override void OnException(ExceptionContext context)
-        {
+        public override void OnException(ExceptionContext context) {
             base.OnException(context);
             ApiResult exceptionApiResult = null;
             if (RuntimeContext.Current.WebsiteConfig.IsDevelopment) {
@@ -28,8 +27,7 @@ namespace Alabo.Framework.Core.WebApis.Filter
                 exceptionApiResult = ApiResult.Error(context.Exception.Message);
             }
 
-            context.Result = new JsonResult(exceptionApiResult)
-            {
+            context.Result = new JsonResult(exceptionApiResult) {
                 StatusCode = (int)HttpStatusCode.BadRequest
             };
             context.ExceptionHandled = true;

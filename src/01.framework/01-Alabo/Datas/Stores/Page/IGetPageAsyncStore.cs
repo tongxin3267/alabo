@@ -5,10 +5,10 @@ using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Alabo.Datas.Stores.Page
-{
-    public interface IGetPageAsyncStore<TEntity, in TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
+namespace Alabo.Datas.Stores.Page {
+
+    public interface IGetPageAsyncStore<TEntity, in TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
         /// <summary>
         ///     分页查询
         /// </summary>

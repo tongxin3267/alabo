@@ -5,18 +5,16 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Alabo.Datas.Stores.Count.Mongo
-{
+namespace Alabo.Datas.Stores.Count.Mongo {
+
     public abstract class CountMongoStore<TEntity, TKey> : CountAsyncMongoStore<TEntity, TKey>,
         ICountStore<TEntity, TKey>
-        where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
-        protected CountMongoStore(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
+        protected CountMongoStore(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
-        public long Count(Expression<Func<TEntity, bool>> predicate)
-        {
+        public long Count(Expression<Func<TEntity, bool>> predicate) {
             if (predicate == null) {
                 return Collection.AsQueryable().LongCount();
             }
@@ -24,8 +22,7 @@ namespace Alabo.Datas.Stores.Count.Mongo
             return Collection.AsQueryable().LongCount(predicate);
         }
 
-        public long Count()
-        {
+        public long Count() {
             return Collection.Count(FilterDefinition<TEntity>.Empty);
         }
     }

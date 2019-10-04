@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace Alabo.Framework.Basic.Regions.Dtos
-{
-    public class RegionWithChild
-    {
+namespace Alabo.Framework.Basic.Regions.Dtos {
+
+    public class RegionWithChild {
+
         /// <summary>
         ///     区域Id
         /// </summary>

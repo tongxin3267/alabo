@@ -1,14 +1,14 @@
-﻿using System;
-using System.Threading.Tasks;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Framework.Themes.Dtos;
 using Alabo.RestfulApi;
 using MongoDB.Bson;
+using System;
+using System.Threading.Tasks;
 
-namespace Alabo.Framework.Themes.Clients
-{
-    public interface IThemeClient : IClient
-    {
+namespace Alabo.Framework.Themes.Clients {
+
+    public interface IThemeClient : IClient {
+
         /// <summary>
         ///     初始化服务端站点数据
         /// </summary>

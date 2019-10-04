@@ -4,10 +4,10 @@ using ZKCloud.Open.ApiBase.Models;
 using ZKCloud.Open.ApiBase.Services;
 using ZKCloud.Open.Message.Models;
 
-namespace Alabo.Tables.Client
-{
-    public interface IOpenMessageClient : IRestClient
-    {
+namespace Alabo.Tables.Client {
+
+    public interface IOpenMessageClient : IRestClient {
+
         /// <summary>
         ///     同步方法发送一条短信
         /// </summary>

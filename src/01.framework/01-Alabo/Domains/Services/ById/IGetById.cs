@@ -4,13 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Alabo.Domains.Services.ById
-{
+namespace Alabo.Domains.Services.ById {
+
     /// <summary>
     ///     获取指定标识实体
     /// </summary>
-    public interface IGetById<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+    public interface IGetById<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         /// <summary>
         ///     通过编号获取
         /// </summary>

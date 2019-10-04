@@ -1,13 +1,13 @@
 ﻿using Alabo.Exceptions;
 using System.Text;
 
-namespace Alabo.Logging.Abstractions
-{
+namespace Alabo.Logging.Abstractions {
+
     /// <summary>
     ///     日志内容
     /// </summary>
-    public interface ILogContent
-    {
+    public interface ILogContent {
+
         /// <summary>
         ///     日志名称
         /// </summary>

@@ -20,31 +20,25 @@ using Alabo.UI.Design.AutoVideos;
 using System;
 using System.Collections.Generic;
 
-namespace Alabo.Framework.Core.WebUis.Services
-{
-    public class AutoUIService : ServiceBase, IAutoUIService
-    {
-        public AutoUIService(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+namespace Alabo.Framework.Core.WebUis.Services {
+
+    public class AutoUIService : ServiceBase, IAutoUIService {
+
+        public AutoUIService(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
-        public List<KeyValue> AutoFormKeyValues()
-        {
+        public List<KeyValue> AutoFormKeyValues() {
             var allAutoFormTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoForm));
             var resultList = new List<KeyValue>();
             foreach (var item in allAutoFormTypes) {
-                try
-                {
+                try {
                     var classProperty = item.FullName.GetClassDescription();
-                    var keyValue = new KeyValue
-                    {
+                    var keyValue = new KeyValue {
                         Value = item.FullName,
                         Name = $"{classProperty?.ClassPropertyAttribute?.Name} [{item.FullName}]"
                     };
                     resultList.Add(keyValue);
-                }
-                catch (Exception exception)
-                {
+                } catch (Exception exception) {
                     Console.WriteLine(exception.Message);
                 }
             }
@@ -56,23 +50,18 @@ namespace Alabo.Framework.Core.WebUis.Services
             return resultList;
         }
 
-        public List<KeyValue> AutoTableKeyValues()
-        {
+        public List<KeyValue> AutoTableKeyValues() {
             var allAutoTableTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoTable));
             var resultList = new List<KeyValue>();
             foreach (var item in allAutoTableTypes) {
-                try
-                {
+                try {
                     var classProperty = item.FullName.GetClassDescription();
-                    var keyValue = new KeyValue
-                    {
+                    var keyValue = new KeyValue {
                         Value = item.FullName,
                         Name = $"{classProperty?.ClassPropertyAttribute?.Name} [{item.FullName}]"
                     };
                     resultList.Add(keyValue);
-                }
-                catch (Exception exception)
-                {
+                } catch (Exception exception) {
                     Console.WriteLine(exception.Message);
                 }
             }
@@ -84,23 +73,18 @@ namespace Alabo.Framework.Core.WebUis.Services
             return resultList;
         }
 
-        public List<KeyValue> AutoListKeyValues()
-        {
+        public List<KeyValue> AutoListKeyValues() {
             var allAutoListTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoList));
             var resultList = new List<KeyValue>();
             foreach (var item in allAutoListTypes) {
-                try
-                {
+                try {
                     var classProperty = item.FullName.GetClassDescription();
-                    var keyValue = new KeyValue
-                    {
+                    var keyValue = new KeyValue {
                         Value = item.FullName,
                         Name = $"{classProperty?.ClassPropertyAttribute?.Name} [{item.FullName}]"
                     };
                     resultList.Add(keyValue);
-                }
-                catch (Exception exception)
-                {
+                } catch (Exception exception) {
                     Console.WriteLine(exception.Message);
                 }
             }
@@ -108,23 +92,18 @@ namespace Alabo.Framework.Core.WebUis.Services
             return resultList;
         }
 
-        public List<KeyValue> AutoPreviewKeyValues()
-        {
+        public List<KeyValue> AutoPreviewKeyValues() {
             var allAutoPreviewTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoPreview));
             var resultList = new List<KeyValue>();
             foreach (var item in allAutoPreviewTypes) {
-                try
-                {
+                try {
                     var classProperty = item.FullName.GetClassDescription();
-                    var keyValue = new KeyValue
-                    {
+                    var keyValue = new KeyValue {
                         Value = item.FullName,
                         Name = $"{classProperty?.ClassPropertyAttribute?.Name} [{item.FullName}]"
                     };
                     resultList.Add(keyValue);
-                }
-                catch (Exception exception)
-                {
+                } catch (Exception exception) {
                     Console.WriteLine(exception.Message);
                 }
             }
@@ -132,23 +111,18 @@ namespace Alabo.Framework.Core.WebUis.Services
             return resultList;
         }
 
-        public List<KeyValue> AutoNewsKeyValues()
-        {
+        public List<KeyValue> AutoNewsKeyValues() {
             var allAutoNewsTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoNews));
             var resultList = new List<KeyValue>();
             foreach (var item in allAutoNewsTypes) {
-                try
-                {
+                try {
                     var classProperty = item.FullName.GetClassDescription();
-                    var keyValue = new KeyValue
-                    {
+                    var keyValue = new KeyValue {
                         Value = item.FullName,
                         Name = $"{classProperty?.ClassPropertyAttribute?.Name} [{item.FullName}]"
                     };
                     resultList.Add(keyValue);
-                }
-                catch (Exception exception)
-                {
+                } catch (Exception exception) {
                     Console.WriteLine(exception.Message);
                 }
             }
@@ -156,23 +130,18 @@ namespace Alabo.Framework.Core.WebUis.Services
             return resultList;
         }
 
-        public List<KeyValue> AutoArticleKeyValues()
-        {
+        public List<KeyValue> AutoArticleKeyValues() {
             var allAutoArticleTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoArticle));
             var resultList = new List<KeyValue>();
             foreach (var item in allAutoArticleTypes) {
-                try
-                {
+                try {
                     var classProperty = item.FullName.GetClassDescription();
-                    var keyValue = new KeyValue
-                    {
+                    var keyValue = new KeyValue {
                         Value = item.FullName,
                         Name = $"{classProperty?.ClassPropertyAttribute?.Name} [{item.FullName}]"
                     };
                     resultList.Add(keyValue);
-                }
-                catch (Exception exception)
-                {
+                } catch (Exception exception) {
                     Console.WriteLine(exception.Message);
                 }
             }
@@ -180,23 +149,18 @@ namespace Alabo.Framework.Core.WebUis.Services
             return resultList;
         }
 
-        public List<KeyValue> AutoReportKeyValues()
-        {
+        public List<KeyValue> AutoReportKeyValues() {
             var allAutoReportTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoReport));
             var resultList = new List<KeyValue>();
             foreach (var item in allAutoReportTypes) {
-                try
-                {
+                try {
                     var classProperty = item.FullName.GetClassDescription();
-                    var keyValue = new KeyValue
-                    {
+                    var keyValue = new KeyValue {
                         Value = item.FullName,
                         Name = $"{classProperty?.ClassPropertyAttribute?.Name} [{item.FullName}]"
                     };
                     resultList.Add(keyValue);
-                }
-                catch (Exception exception)
-                {
+                } catch (Exception exception) {
                     Console.WriteLine(exception.Message);
                 }
             }
@@ -204,23 +168,18 @@ namespace Alabo.Framework.Core.WebUis.Services
             return resultList;
         }
 
-        public List<KeyValue> AutoFaqsKeyValues()
-        {
+        public List<KeyValue> AutoFaqsKeyValues() {
             var allAutoFaqsTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoFaq));
             var resultList = new List<KeyValue>();
             foreach (var item in allAutoFaqsTypes) {
-                try
-                {
+                try {
                     var classProperty = item.FullName.GetClassDescription();
-                    var keyValue = new KeyValue
-                    {
+                    var keyValue = new KeyValue {
                         Value = item.FullName,
                         Name = $"{classProperty?.ClassPropertyAttribute?.Name} [{item.FullName}]"
                     };
                     resultList.Add(keyValue);
-                }
-                catch (Exception exception)
-                {
+                } catch (Exception exception) {
                     Console.WriteLine(exception.Message);
                 }
             }
@@ -228,23 +187,18 @@ namespace Alabo.Framework.Core.WebUis.Services
             return resultList;
         }
 
-        public List<KeyValue> AutoImagesKeyValues()
-        {
+        public List<KeyValue> AutoImagesKeyValues() {
             var allAutoImageTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoImage));
             var resultList = new List<KeyValue>();
             foreach (var item in allAutoImageTypes) {
-                try
-                {
+                try {
                     var classProperty = item.FullName.GetClassDescription();
-                    var keyValue = new KeyValue
-                    {
+                    var keyValue = new KeyValue {
                         Value = item.FullName,
                         Name = $"{classProperty?.ClassPropertyAttribute?.Name} [{item.FullName}]"
                     };
                     resultList.Add(keyValue);
-                }
-                catch (Exception exception)
-                {
+                } catch (Exception exception) {
                     Console.WriteLine(exception.Message);
                 }
             }
@@ -252,23 +206,18 @@ namespace Alabo.Framework.Core.WebUis.Services
             return resultList;
         }
 
-        public List<KeyValue> AutoIndexKeyValues()
-        {
+        public List<KeyValue> AutoIndexKeyValues() {
             var allAutoIndexTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoIndex));
             var resultList = new List<KeyValue>();
             foreach (var item in allAutoIndexTypes) {
-                try
-                {
+                try {
                     var classProperty = item.FullName.GetClassDescription();
-                    var keyValue = new KeyValue
-                    {
+                    var keyValue = new KeyValue {
                         Value = item.FullName,
                         Name = $"{classProperty?.ClassPropertyAttribute?.Name} [{item.FullName}]"
                     };
                     resultList.Add(keyValue);
-                }
-                catch (Exception exception)
-                {
+                } catch (Exception exception) {
                     Console.WriteLine(exception.Message);
                 }
             }
@@ -276,23 +225,18 @@ namespace Alabo.Framework.Core.WebUis.Services
             return resultList;
         }
 
-        public List<KeyValue> AutoIntroKeyValues()
-        {
+        public List<KeyValue> AutoIntroKeyValues() {
             var allAutoIntroTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoIntro));
             var resultList = new List<KeyValue>();
             foreach (var item in allAutoIntroTypes) {
-                try
-                {
+                try {
                     var classProperty = item.FullName.GetClassDescription();
-                    var keyValue = new KeyValue
-                    {
+                    var keyValue = new KeyValue {
                         Value = item.FullName,
                         Name = $"{classProperty?.ClassPropertyAttribute?.Name} [{item.FullName}]"
                     };
                     resultList.Add(keyValue);
-                }
-                catch (Exception exception)
-                {
+                } catch (Exception exception) {
                     Console.WriteLine(exception.Message);
                 }
             }
@@ -300,23 +244,18 @@ namespace Alabo.Framework.Core.WebUis.Services
             return resultList;
         }
 
-        public List<KeyValue> AutoTaskKeyValues()
-        {
+        public List<KeyValue> AutoTaskKeyValues() {
             var allAutoTaskTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoTask));
             var resultList = new List<KeyValue>();
             foreach (var item in allAutoTaskTypes) {
-                try
-                {
+                try {
                     var classProperty = item.FullName.GetClassDescription();
-                    var keyValue = new KeyValue
-                    {
+                    var keyValue = new KeyValue {
                         Value = item.FullName,
                         Name = $"{classProperty?.ClassPropertyAttribute?.Name} [{item.FullName}]"
                     };
                     resultList.Add(keyValue);
-                }
-                catch (Exception exception)
-                {
+                } catch (Exception exception) {
                     Console.WriteLine(exception.Message);
                 }
             }
@@ -324,23 +263,18 @@ namespace Alabo.Framework.Core.WebUis.Services
             return resultList;
         }
 
-        public List<KeyValue> AutoVideoKeyValues()
-        {
+        public List<KeyValue> AutoVideoKeyValues() {
             var allAutoVideoTypes = Resolve<ITypeService>().GetAllTypeByInterface(typeof(IAutoVideo));
             var resultList = new List<KeyValue>();
             foreach (var item in allAutoVideoTypes) {
-                try
-                {
+                try {
                     var classProperty = item.FullName.GetClassDescription();
-                    var keyValue = new KeyValue
-                    {
+                    var keyValue = new KeyValue {
                         Value = item.FullName,
                         Name = $"{classProperty?.ClassPropertyAttribute?.Name} [{item.FullName}]"
                     };
                     resultList.Add(keyValue);
-                }
-                catch (Exception exception)
-                {
+                } catch (Exception exception) {
                     Console.WriteLine(exception.Message);
                 }
             }
@@ -348,8 +282,7 @@ namespace Alabo.Framework.Core.WebUis.Services
             return resultList;
         }
 
-        public ServiceResult GetAutoComponents(string type)
-        {
+        public ServiceResult GetAutoComponents(string type) {
             var resultList = new List<string>();
             if (type.IsNullOrEmpty() || type == "undefined") {
                 return ServiceResult.FailedWithMessage("类型不能为空");
@@ -420,8 +353,7 @@ namespace Alabo.Framework.Core.WebUis.Services
         ///     返回所有的URL地址
         /// </summary>
         /// <returns></returns>
-        public List<KeyValue> GetAllPcUrl()
-        {
+        public List<KeyValue> GetAllPcUrl() {
             var result = new List<KeyValue>();
             var baseUrl = "http://localhost:2008/auto?type={0}";
             var _TypeService = Resolve<ITypeService>();
@@ -447,21 +379,16 @@ namespace Alabo.Framework.Core.WebUis.Services
             return result;
         }
 
-        private static void ProcessUrls(List<KeyValue> result, string baseUrl, IEnumerable<Type> autoTypeList)
-        {
+        private static void ProcessUrls(List<KeyValue> result, string baseUrl, IEnumerable<Type> autoTypeList) {
             foreach (var type in autoTypeList) {
-                try
-                {
+                try {
                     var classProperty = type.FullName.GetClassDescription();
-                    var keyValue = new KeyValue
-                    {
+                    var keyValue = new KeyValue {
                         Value = string.Format(baseUrl, type.Name),
                         Name = $"{classProperty?.ClassPropertyAttribute?.Name}"
                     };
                     result.Add(keyValue);
-                }
-                catch (Exception exception)
-                {
+                } catch (Exception exception) {
                     Console.WriteLine(exception.Message);
                 }
             }

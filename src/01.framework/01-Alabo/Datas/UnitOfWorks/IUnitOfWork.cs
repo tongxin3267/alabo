@@ -2,14 +2,14 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Alabo.Datas.UnitOfWorks
-{
+namespace Alabo.Datas.UnitOfWorks {
+
     /// <summary>
     ///     工作单元
     /// </summary>
     [Ignore]
-    public interface IUnitOfWork : IDisposable
-    {
+    public interface IUnitOfWork : IDisposable {
+
         /// <summary>
         ///     跟踪Id号
         /// </summary>

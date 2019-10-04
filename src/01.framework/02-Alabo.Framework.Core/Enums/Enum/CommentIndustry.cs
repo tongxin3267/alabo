@@ -1,11 +1,11 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     [ClassProperty(Name = "商家服务类型")]
-    public enum CommentIndustry
-    {
+    public enum CommentIndustry {
+
         /// <summary>
         ///     通用
         /// </summary>

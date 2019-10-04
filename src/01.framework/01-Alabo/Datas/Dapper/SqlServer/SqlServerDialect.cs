@@ -1,17 +1,16 @@
 ﻿using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 
-namespace Alabo.Datas.Dapper.SqlServer
-{
+namespace Alabo.Datas.Dapper.SqlServer {
+
     /// <summary>
     ///     Sql Server方言
     /// </summary>
-    public class SqlServerDialect : IDialect
-    {
+    public class SqlServerDialect : IDialect {
+
         /// <summary>
         ///     获取安全名称
         /// </summary>
-        public string SafeName(string name)
-        {
+        public string SafeName(string name) {
             if (string.IsNullOrWhiteSpace(name)) {
                 return string.Empty;
             }
@@ -27,8 +26,7 @@ namespace Alabo.Datas.Dapper.SqlServer
         /// <summary>
         ///     获取参数前缀
         /// </summary>
-        public string GetPrefix()
-        {
+        public string GetPrefix() {
             return "@";
         }
     }

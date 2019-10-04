@@ -3,14 +3,14 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Alabo.Domains.Query
-{
+namespace Alabo.Domains.Query {
+
     /// <summary>
     ///     Class ExpressionQuery. This class cannot be inherited.
     /// </summary>
     public sealed class ExpressionQuery<TEntity> : IPredicateQuery<TEntity>, IOrderQuery<TEntity>, IPageQuery<TEntity>
-        where TEntity : class, IEntity
-    {
+        where TEntity : class, IEntity {
+
         /// <summary>
         ///     The order query
         /// </summary>
@@ -30,8 +30,7 @@ namespace Alabo.Domains.Query
         ///     Orders the by ascending.
         /// </summary>
         /// <param name="keySelector">The key selector.</param>
-        public IOrderQuery<TEntity> OrderByAscending<TKey>(Expression<Func<TEntity, TKey>> keySelector)
-        {
+        public IOrderQuery<TEntity> OrderByAscending<TKey>(Expression<Func<TEntity, TKey>> keySelector) {
             return _orderQuery.OrderByAscending(keySelector);
         }
 
@@ -39,8 +38,7 @@ namespace Alabo.Domains.Query
         ///     Orders the by descending.
         /// </summary>
         /// <param name="keySelector">The key selector.</param>
-        public IOrderQuery<TEntity> OrderByDescending<TKey>(Expression<Func<TEntity, TKey>> keySelector)
-        {
+        public IOrderQuery<TEntity> OrderByDescending<TKey>(Expression<Func<TEntity, TKey>> keySelector) {
             return _orderQuery.OrderByDescending(keySelector);
         }
 
@@ -50,16 +48,14 @@ namespace Alabo.Domains.Query
         /// <param name="keySelector">The key selector.</param>
         /// <param name="type">The 类型.</param>
         public IOrderQuery<TEntity> OrderBy<TKey>(Expression<Func<TEntity, TKey>> keySelector,
-            OrderType type = OrderType.Ascending)
-        {
+            OrderType type = OrderType.Ascending) {
             return _orderQuery.OrderBy(keySelector, type);
         }
 
         /// <summary>
         ///     Gets or sets a value indicating whether [enable paging].
         /// </summary>
-        public bool EnablePaging
-        {
+        public bool EnablePaging {
             get => _pageQuery.EnablePaging;
             set => _pageQuery.EnablePaging = value;
         }
@@ -67,8 +63,7 @@ namespace Alabo.Domains.Query
         /// <summary>
         ///     Gets or sets the index of the 分页.
         /// </summary>
-        public int PageIndex
-        {
+        public int PageIndex {
             get => _pageQuery.PageIndex;
             set => _pageQuery.PageIndex = value;
         }
@@ -76,8 +71,7 @@ namespace Alabo.Domains.Query
         /// <summary>
         ///     Gets or sets the size of the 分页.
         /// </summary>
-        public int PageSize
-        {
+        public int PageSize {
             get => _pageQuery.PageSize;
             set => _pageQuery.PageSize = value;
         }
@@ -86,8 +80,7 @@ namespace Alabo.Domains.Query
         ///     Executes the count query.
         /// </summary>
         /// <param name="query">查询</param>
-        public int ExecuteCountQuery(IQueryable<TEntity> query)
-        {
+        public int ExecuteCountQuery(IQueryable<TEntity> query) {
             if (query == null) {
                 return 0;
             }
@@ -98,8 +91,7 @@ namespace Alabo.Domains.Query
         /// <summary>
         ///     初始默认值，一般为true
         /// </summary>
-        public bool DefaultValue
-        {
+        public bool DefaultValue {
             get => _predicateQuery.DefaultValue;
             set => _predicateQuery.DefaultValue = value;
         }
@@ -108,8 +100,7 @@ namespace Alabo.Domains.Query
         ///     Ands the specified predicate.
         /// </summary>
         /// <param name="predicate">The predicate.</param>
-        public IPredicateQuery<TEntity> And(Expression<Func<TEntity, bool>> predicate)
-        {
+        public IPredicateQuery<TEntity> And(Expression<Func<TEntity, bool>> predicate) {
             return _predicateQuery.And(predicate);
         }
 
@@ -117,8 +108,7 @@ namespace Alabo.Domains.Query
         ///     或s the specified predicate.
         /// </summary>
         /// <param name="predicate">The predicate.</param>
-        public IPredicateQuery<TEntity> Or(Expression<Func<TEntity, bool>> predicate)
-        {
+        public IPredicateQuery<TEntity> Or(Expression<Func<TEntity, bool>> predicate) {
             return _predicateQuery.Or(predicate);
         }
 
@@ -127,8 +117,7 @@ namespace Alabo.Domains.Query
         /// </summary>
         /// <param name="predicate">The predicate.</param>
         /// <param name="type">The 类型.</param>
-        public IPredicateQuery<TEntity> Append(Expression<Func<TEntity, bool>> predicate, PredicateLinkType type)
-        {
+        public IPredicateQuery<TEntity> Append(Expression<Func<TEntity, bool>> predicate, PredicateLinkType type) {
             return _predicateQuery.Append(predicate, type);
         }
 
@@ -136,8 +125,7 @@ namespace Alabo.Domains.Query
         ///     Ands the specified predicate query.
         /// </summary>
         /// <param name="predicateQuery">The predicate query.</param>
-        public IPredicateQuery<TEntity> And(IPredicateQuery<TEntity> predicateQuery)
-        {
+        public IPredicateQuery<TEntity> And(IPredicateQuery<TEntity> predicateQuery) {
             return _predicateQuery.And(predicateQuery);
         }
 
@@ -145,8 +133,7 @@ namespace Alabo.Domains.Query
         ///     或s the specified predicate query.
         /// </summary>
         /// <param name="predicateQuery">The predicate query.</param>
-        public IPredicateQuery<TEntity> Or(IPredicateQuery<TEntity> predicateQuery)
-        {
+        public IPredicateQuery<TEntity> Or(IPredicateQuery<TEntity> predicateQuery) {
             return _predicateQuery.Or(predicateQuery);
         }
 
@@ -155,16 +142,14 @@ namespace Alabo.Domains.Query
         /// </summary>
         /// <param name="predicateQuery">The predicate query.</param>
         /// <param name="type">The 类型.</param>
-        public IPredicateQuery<TEntity> Append(IPredicateQuery<TEntity> predicateQuery, PredicateLinkType type)
-        {
+        public IPredicateQuery<TEntity> Append(IPredicateQuery<TEntity> predicateQuery, PredicateLinkType type) {
             return _predicateQuery.Append(predicateQuery, type);
         }
 
         /// <summary>
         ///     Builds the predicate expression.
         /// </summary>
-        public Expression<Func<TEntity, bool>> BuildPredicateExpression()
-        {
+        public Expression<Func<TEntity, bool>> BuildPredicateExpression() {
             return _predicateQuery.BuildPredicateExpression();
         }
 
@@ -172,8 +157,7 @@ namespace Alabo.Domains.Query
         ///     执行查询
         /// </summary>
         /// <param name="query">查询</param>
-        public IQueryable<TEntity> Execute(IQueryable<TEntity> query)
-        {
+        public IQueryable<TEntity> Execute(IQueryable<TEntity> query) {
             if (query == null) {
                 return query;
             }
@@ -188,8 +172,7 @@ namespace Alabo.Domains.Query
         ///     Builds the predicate expression.
         ///     构建Linq表达式
         /// </summary>
-        public Expression<Func<TEntity, bool>> BuildExpression()
-        {
+        public Expression<Func<TEntity, bool>> BuildExpression() {
             return _predicateQuery.BuildPredicateExpression();
         }
     }

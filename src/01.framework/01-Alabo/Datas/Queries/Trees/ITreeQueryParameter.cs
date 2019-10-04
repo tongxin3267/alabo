@@ -1,13 +1,13 @@
 ﻿using System;
 
-namespace Alabo.Datas.Queries.Trees
-{
+namespace Alabo.Datas.Queries.Trees {
+
     /// <summary>
     ///     树型查询参数
     /// </summary>
     /// <typeparam name="TParentId">父编号类型</typeparam>
-    public interface ITreeQueryParameter<TParentId> : IQueryParameter
-    {
+    public interface ITreeQueryParameter<TParentId> : IQueryParameter {
+
         /// <summary>
         ///     父标识
         /// </summary>
@@ -37,7 +37,6 @@ namespace Alabo.Datas.Queries.Trees
     /// <summary>
     ///     树型查询参数
     /// </summary>
-    public interface ITreeQueryParameter : ITreeQueryParameter<Guid?>
-    {
+    public interface ITreeQueryParameter : ITreeQueryParameter<Guid?> {
     }
 }

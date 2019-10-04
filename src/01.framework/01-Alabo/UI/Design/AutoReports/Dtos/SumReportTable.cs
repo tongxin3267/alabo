@@ -1,10 +1,10 @@
-﻿namespace Alabo.UI.Design.AutoReports.Dtos
-{
+﻿namespace Alabo.UI.Design.AutoReports.Dtos {
+
     /// <summary>
     ///     报表表格
     /// </summary>
-    public class SumReportTable
-    {
+    public class SumReportTable {
+
         /// <summary>
         ///     表格名称
         /// </summary>

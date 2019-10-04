@@ -1,12 +1,12 @@
 ﻿using System.Data.Common;
 
-namespace Alabo.Domains.Repositories.Model
-{
+namespace Alabo.Domains.Repositories.Model {
+
     /// <summary>
     ///     批量执行Sql语句参数
     /// </summary>
-    public class BatchParameter
-    {
+    public class BatchParameter {
+
         /// <summary>
         ///     Gets or sets the SQL. sql语句
         /// </summary>

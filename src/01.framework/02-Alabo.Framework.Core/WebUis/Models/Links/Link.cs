@@ -5,21 +5,19 @@ using MongoDB.Bson;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.WebUis.Models.Links
-{
+namespace Alabo.Framework.Core.WebUis.Models.Links {
+
     /// <summary>
     ///     链接、支持图片、链接、广告等
     /// </summary>
     [ClassProperty(Name = "链接")]
-    public class Link : BaseComponent
-    {
-        public Link()
-        {
+    public class Link : BaseComponent {
+
+        public Link() {
             Id = ObjectId.GenerateNewId();
         }
 
-        public Link(string name, string url, long sortOrder, string image)
-        {
+        public Link(string name, string url, long sortOrder, string image) {
             Name = name;
             Url = url;
             SortOrder = sortOrder;

@@ -1,11 +1,10 @@
 ﻿using Alabo.Validations;
 
-namespace Alabo.Domains.Entities.Core
-{
+namespace Alabo.Domains.Entities.Core {
+
     /// <summary>
     ///     领域对象
     /// </summary>
-    public interface IDomainObject : IValidation
-    {
+    public interface IDomainObject : IValidation {
     }
 }

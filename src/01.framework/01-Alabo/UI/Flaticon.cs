@@ -1,13 +1,12 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.UI
-{
+namespace Alabo.UI {
+
     /// <summary>
     ///     http://ui.5ug.com/metronic_v5.0.6.1/metronic_v5.0.6.1/theme/default/dist/default/components/icons/flaticon.html
     /// </summary>
     [ClassProperty(Name = "图标")]
-    public enum Flaticon
-    {
+    public enum Flaticon {
         [Field(Icon = "flaticon-alarm-1")] Alarm1 = 1,
         [Field(Icon = "flaticon-music-2")] Music2,
         [Field(Icon = "flaticon-support")] Support,

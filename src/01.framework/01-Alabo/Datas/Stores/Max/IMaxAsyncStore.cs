@@ -3,10 +3,10 @@ using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Alabo.Datas.Stores.Max
-{
-    public interface IMaxAsyncStore<TEntity, in TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
+namespace Alabo.Datas.Stores.Max {
+
+    public interface IMaxAsyncStore<TEntity, in TKey> where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
         /// <summary>
         ///     获取最大值
         /// </summary>

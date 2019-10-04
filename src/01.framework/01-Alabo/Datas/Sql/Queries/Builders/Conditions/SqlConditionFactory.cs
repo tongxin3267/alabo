@@ -3,23 +3,21 @@ using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 using Alabo.Extensions;
 using System;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Conditions
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Conditions {
+
     /// <summary>
     ///     Sql查询条件工厂
     /// </summary>
-    public static class SqlConditionFactory
-    {
+    public static class SqlConditionFactory {
+
         /// <summary>
         ///     创建Sql查询条件
         /// </summary>
         /// <param name="left">左操作数</param>
         /// <param name="right">右操作数</param>
         /// <param name="operator">操作符</param>
-        public static ICondition Create(string left, string right, Operator @operator)
-        {
-            switch (@operator)
-            {
+        public static ICondition Create(string left, string right, Operator @operator) {
+            switch (@operator) {
                 case Operator.Equal:
                     if (right == null) {
                         return new IsNullCondition(left);

@@ -1,10 +1,10 @@
-﻿namespace Alabo.Parameters.Formats
-{
+﻿namespace Alabo.Parameters.Formats {
+
     /// <summary>
     ///     Url参数格式化器
     /// </summary>
-    public class UrlParameterFormat : ParameterFormatBase
-    {
+    public class UrlParameterFormat : ParameterFormatBase {
+
         /// <summary>
         ///     Url参数格式化器实例
         /// </summary>

@@ -1,15 +1,14 @@
-﻿namespace Alabo.Security.Identity.Results
-{
+﻿namespace Alabo.Security.Identity.Results {
+
     /// <summary>
     ///     登录结果
     /// </summary>
-    public class SignInResult
-    {
+    public class SignInResult {
+
         /// <summary>
         ///     初始化
         /// </summary>
-        public SignInResult()
-        {
+        public SignInResult() {
             State = SignInState.Failed;
         }
 
@@ -18,8 +17,7 @@
         /// </summary>
         /// <param name="state">登录状态</param>
         /// <param name="userId">用户标识</param>
-        public SignInResult(SignInState state, string userId)
-        {
+        public SignInResult(SignInState state, string userId) {
             State = state;
             UserId = userId;
         }

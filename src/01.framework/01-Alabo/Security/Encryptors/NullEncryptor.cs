@@ -1,10 +1,10 @@
-﻿namespace Alabo.Security.Encryptors
-{
+﻿namespace Alabo.Security.Encryptors {
+
     /// <summary>
     ///     空加密器
     /// </summary>
-    public class NullEncryptor : IEncryptor
-    {
+    public class NullEncryptor : IEncryptor {
+
         /// <summary>
         ///     空加密器实例
         /// </summary>
@@ -14,8 +14,7 @@
         ///     加密
         /// </summary>
         /// <param name="data">原始数据</param>
-        public string Encrypt(string data)
-        {
+        public string Encrypt(string data) {
             return string.Empty;
         }
 
@@ -23,8 +22,7 @@
         ///     解密
         /// </summary>
         /// <param name="data">已加密数据</param>
-        public string Decrypt(string data)
-        {
+        public string Decrypt(string data) {
             return string.Empty;
         }
     }

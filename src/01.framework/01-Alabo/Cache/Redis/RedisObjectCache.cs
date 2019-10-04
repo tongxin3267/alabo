@@ -6,13 +6,13 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Alabo.Cache.Redis
-{
+namespace Alabo.Cache.Redis {
+
     /// <summary>
     ///     Class RedisObjectCache.
     /// </summary>
-    internal class RedisObjectCache : IObjectCache
-    {
+    internal class RedisObjectCache : IObjectCache {
+
         /// <summary>
         ///     The redis database
         /// </summary>
@@ -22,8 +22,7 @@ namespace Alabo.Cache.Redis
         ///     Initializes a new instance of the <see cref="RedisObjectCache" /> class.
         /// </summary>
         /// <param name="context">上下文</param>
-        public RedisObjectCache(ICacheContext context)
-        {
+        public RedisObjectCache(ICacheContext context) {
             Context = context;
             _redisDatabase = Context.OfRedis().ObjectCacheDatabase;
             HashKeyCache<byte>.KeyConvertor = key => key;
@@ -46,8 +45,7 @@ namespace Alabo.Cache.Redis
         ///     Gets the specified key.
         /// </summary>
         /// <param name="key">The key.</param>
-        public T Get<T>(string key)
-        {
+        public T Get<T>(string key) {
             if (string.IsNullOrWhiteSpace(key)) {
                 throw new ArgumentNullException(nameof(key));
             }
@@ -65,26 +63,21 @@ namespace Alabo.Cache.Redis
         /// </summary>
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
-        public bool TryGet<T>(string key, out T value)
-        {
+        public bool TryGet<T>(string key, out T value) {
             if (string.IsNullOrWhiteSpace(key)) {
                 throw new ArgumentNullException(nameof(key));
             }
 
             var stringValue = _redisDatabase.StringGet(key);
-            if (!stringValue.HasValue)
-            {
+            if (!stringValue.HasValue) {
                 value = default;
                 return false;
             }
 
-            try
-            {
+            try {
                 value = JsonConvert.DeserializeObject<T>(stringValue);
                 return true;
-            }
-            catch
-            {
+            } catch {
                 value = default;
                 return false;
             }
@@ -94,8 +87,7 @@ namespace Alabo.Cache.Redis
         ///     Removes the specified key.
         /// </summary>
         /// <param name="key">The key.</param>
-        public void Remove(string key)
-        {
+        public void Remove(string key) {
             if (string.IsNullOrWhiteSpace(key)) {
                 throw new ArgumentNullException(nameof(key));
             }
@@ -108,8 +100,7 @@ namespace Alabo.Cache.Redis
         /// </summary>
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
-        public void Set(string key, object value)
-        {
+        public void Set(string key, object value) {
             if (string.IsNullOrWhiteSpace(key)) {
                 throw new ArgumentNullException(nameof(key));
             }
@@ -126,8 +117,7 @@ namespace Alabo.Cache.Redis
         /// </summary>
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
-        public void Set<T>(string key, T value)
-        {
+        public void Set<T>(string key, T value) {
             if (string.IsNullOrWhiteSpace(key)) {
                 throw new ArgumentNullException(nameof(key));
             }
@@ -145,8 +135,7 @@ namespace Alabo.Cache.Redis
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
         /// <param name="expire">The expire.</param>
-        public void Set<T>(string key, T value, TimeSpan expire)
-        {
+        public void Set<T>(string key, T value, TimeSpan expire) {
             if (string.IsNullOrWhiteSpace(key)) {
                 throw new ArgumentNullException(nameof(key));
             }
@@ -161,26 +150,22 @@ namespace Alabo.Cache.Redis
         /// <summary>
         ///     Gets the keys.
         /// </summary>
-        public string[] GetKeys()
-        {
+        public string[] GetKeys() {
             throw new NotImplementedException();
         }
 
         /// <summary>
         ///     Clears this instance.
         /// </summary>
-        public void Clear()
-        {
+        public void Clear() {
             throw new NotImplementedException();
         }
 
-        public CacheValue<T> GetOrSet<T>(Func<T> dataRetriever, string cacheKey) where T : class
-        {
+        public CacheValue<T> GetOrSet<T>(Func<T> dataRetriever, string cacheKey) where T : class {
             return GetOrSet(dataRetriever, cacheKey, TimeSpan.FromHours(30));
         }
 
-        public CacheValue<T> GetOrSet<T>(Func<T> dataRetriever, string cacheKey, TimeSpan expiration) where T : class
-        {
+        public CacheValue<T> GetOrSet<T>(Func<T> dataRetriever, string cacheKey, TimeSpan expiration) where T : class {
             //ArgumentCheck.NotNullOrWhiteSpace(cacheKey, nameof(cacheKey));
             //ArgumentCheck.NotNegativeOrZero(expiration, nameof(expiration));
 
@@ -190,8 +175,7 @@ namespace Alabo.Cache.Redis
             }
 
             var item = dataRetriever?.Invoke();
-            if (item != null)
-            {
+            if (item != null) {
                 Set(cacheKey, item, expiration);
                 return new CacheValue<T>(item, true);
             }
@@ -203,8 +187,7 @@ namespace Alabo.Cache.Redis
         ///     Gets the specified key.
         /// </summary>
         /// <param name="key">The key.</param>
-        public object Get(string key)
-        {
+        public object Get(string key) {
             if (string.IsNullOrWhiteSpace(key)) {
                 throw new ArgumentNullException(nameof(key));
             }
@@ -219,8 +202,7 @@ namespace Alabo.Cache.Redis
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
         /// <param name="expire">The expire.</param>
-        public void Set(string key, object value, TimeSpan expire)
-        {
+        public void Set(string key, object value, TimeSpan expire) {
             if (string.IsNullOrWhiteSpace(key)) {
                 throw new ArgumentNullException(nameof(key));
             }
@@ -238,8 +220,7 @@ namespace Alabo.Cache.Redis
         /// <param name="key">The key.</param>
         /// <param name="hashKey">The hash key.</param>
         /// <param name="hashValue">The hash value.</param>
-        public void Set<TKey, TValue>(string key, TKey hashKey, TValue hashValue)
-        {
+        public void Set<TKey, TValue>(string key, TKey hashKey, TValue hashValue) {
             if (hashKey == null) {
                 throw new ArgumentNullException(nameof(hashKey));
             }
@@ -258,16 +239,14 @@ namespace Alabo.Cache.Redis
         /// <param name="key">The key.</param>
         /// <param name="hashKey">The hash key.</param>
         /// <param name="value">The value.</param>
-        public bool TryGet<T, TKey>(string key, TKey hashKey, out T value)
-        {
+        public bool TryGet<T, TKey>(string key, TKey hashKey, out T value) {
             if (hashKey == null) {
                 throw new ArgumentNullException(nameof(hashKey));
             }
 
             var redisHashKey = GetHashKey(hashKey);
             var result = _redisDatabase.HashGet(key, redisHashKey);
-            if (!result.HasValue)
-            {
+            if (!result.HasValue) {
                 value = default;
                 return false;
             }
@@ -281,14 +260,12 @@ namespace Alabo.Cache.Redis
         /// </summary>
         /// <param name="key">The key.</param>
         /// <param name="hashKey">The hash key.</param>
-        public void Remove<TKey>(string key, TKey hashKey)
-        {
+        public void Remove<TKey>(string key, TKey hashKey) {
             Remove(key, hashKey);
         }
 
         public async Task<CacheValue<T>> GetOrSetAsync<T>(Func<Task<T>> dataRetriever, string cacheKey,
-            TimeSpan expiration) where T : class
-        {
+            TimeSpan expiration) where T : class {
             // ArgumentCheck.NotNullOrWhiteSpace(cacheKey, nameof(cacheKey));
             TryGet(HandleCacheKey(cacheKey), out T result);
             if (result != null) {
@@ -296,8 +273,7 @@ namespace Alabo.Cache.Redis
             }
 
             var item = await dataRetriever?.Invoke();
-            if (item != null)
-            {
+            if (item != null) {
                 Set(cacheKey, item, expiration);
                 return new CacheValue<T>(item, true);
             }
@@ -309,8 +285,7 @@ namespace Alabo.Cache.Redis
         ///     获取s the hash key.
         /// </summary>
         /// <param name="hashKey">The hash key.</param>
-        private RedisValue GetHashKey<TKey>(TKey hashKey)
-        {
+        private RedisValue GetHashKey<TKey>(TKey hashKey) {
             RedisValue redisHashKey;
             var keyConvertor = HashKeyCache<TKey>.KeyConvertor;
             if (keyConvertor == null) {
@@ -322,13 +297,11 @@ namespace Alabo.Cache.Redis
             return redisHashKey;
         }
 
-        private string HandleCacheKey(string cacheKey)
-        {
+        private string HandleCacheKey(string cacheKey) {
             // Memcached has a 250 character limit
             // Following memcached.h in https://github.com/memcached/memcached/
             if (cacheKey.Length >= 250) {
-                using (var sha1 = SHA1.Create())
-                {
+                using (var sha1 = SHA1.Create()) {
                     var data = sha1.ComputeHash(Encoding.UTF8.GetBytes(cacheKey));
                     return Convert.ToBase64String(data, Base64FormattingOptions.None);
                 }
@@ -340,8 +313,8 @@ namespace Alabo.Cache.Redis
         /// <summary>
         ///     Class HashKeyCache.
         /// </summary>
-        private static class HashKeyCache<T>
-        {
+        private static class HashKeyCache<T> {
+
             /// <summary>
             ///     Gets or sets the key convertor.
             /// </summary>
@@ -350,18 +323,15 @@ namespace Alabo.Cache.Redis
 
         #region global
 
-        public CacheValue<T> GetOrSetPublic<T>(Func<T> dataRetriever, string cacheKey) where T : class
-        {
+        public CacheValue<T> GetOrSetPublic<T>(Func<T> dataRetriever, string cacheKey) where T : class {
             throw new NotImplementedException();
         }
 
-        public void SetPublic<T>(string key, T value)
-        {
+        public void SetPublic<T>(string key, T value) {
             throw new NotImplementedException();
         }
 
-        public bool TryGetPublic<T>(string key, out T value)
-        {
+        public bool TryGetPublic<T>(string key, out T value) {
             throw new NotImplementedException();
         }
 

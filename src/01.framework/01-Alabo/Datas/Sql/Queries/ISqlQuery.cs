@@ -7,13 +7,13 @@ using System.Data;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Alabo.Datas.Sql.Queries
-{
+namespace Alabo.Datas.Sql.Queries {
+
     /// <summary>
     ///     Sql查询对象
     /// </summary>
-    public interface ISqlQuery
-    {
+    public interface ISqlQuery {
+
         /// <summary>
         ///     清空并初始化，用于多次执行不同Sql语句，当执行完一个Sql语句后，清空即可继续使用
         /// </summary>

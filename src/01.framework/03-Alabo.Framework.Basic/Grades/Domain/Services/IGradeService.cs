@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Services;
 using Alabo.Framework.Basic.Grades.Domain.Configs;
 using Alabo.Framework.Basic.Grades.Dtos;
+using System;
+using System.Collections.Generic;
 
-namespace Alabo.Framework.Basic.Grades.Domain.Services
-{
-    public interface IGradeService : IService
-    {
+namespace Alabo.Framework.Basic.Grades.Domain.Services {
+
+    public interface IGradeService : IService {
         UserGradeConfig DefaultUserGrade { get; }
 
         IList<UserGradeConfig> GetUserGradeList();

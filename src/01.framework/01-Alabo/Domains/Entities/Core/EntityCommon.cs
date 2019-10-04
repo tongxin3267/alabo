@@ -4,17 +4,15 @@ using Alabo.Web.Mvc.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Domains.Entities.Core
-{
+namespace Alabo.Domains.Entities.Core {
+
     public abstract class EntityCommonWithSeo<TEntity> : EntityCommonWithSeo<TEntity, long>
-        where TEntity : IAggregateRoot
-    {
-        protected EntityCommonWithSeo(long id) : base(id)
-        {
+        where TEntity : IAggregateRoot {
+
+        protected EntityCommonWithSeo(long id) : base(id) {
         }
 
-        protected EntityCommonWithSeo() : this(0)
-        {
+        protected EntityCommonWithSeo() : this(0) {
         }
     }
 
@@ -25,11 +23,10 @@ namespace Alabo.Domains.Entities.Core
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
     public abstract class EntityCommonWithSeo<TEntity, TKey> : EntityCommon<TEntity, TKey>
-        where TEntity : IAggregateRoot
-    {
+        where TEntity : IAggregateRoot {
+
         protected EntityCommonWithSeo(TKey id)
-            : base(id)
-        {
+            : base(id) {
         }
 
         /// <summary>
@@ -61,11 +58,10 @@ namespace Alabo.Domains.Entities.Core
     ///     基类继承
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
-    public abstract class EntityCommon<TEntity, TKey> : AggregateRoot<TEntity, TKey> where TEntity : IAggregateRoot
-    {
+    public abstract class EntityCommon<TEntity, TKey> : AggregateRoot<TEntity, TKey> where TEntity : IAggregateRoot {
+
         protected EntityCommon(TKey id)
-            : base(id)
-        {
+            : base(id) {
         }
 
         /// <summary>
@@ -103,13 +99,11 @@ namespace Alabo.Domains.Entities.Core
         [Field(ControlsType = ControlsType.TextArea, ListShow = false, EditShow = true, Row = 5, SortOrder = 10004)]
         public string Remark { get; set; }
 
-        public void Init()
-        {
+        public void Init() {
             throw new NotImplementedException();
         }
 
-        public ValidationResultCollection Validate()
-        {
+        public ValidationResultCollection Validate() {
             throw new NotImplementedException();
         }
     }

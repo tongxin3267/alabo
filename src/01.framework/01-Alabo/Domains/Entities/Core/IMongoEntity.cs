@@ -4,8 +4,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 using System;
 
-namespace Alabo.Domains.Entities.Core
-{
+namespace Alabo.Domains.Entities.Core {
     /**
     * DateTime values in MongoDB are always saved as UTC
     * DateTime类型在MongoDB存储格式是UTC格式。
@@ -41,8 +40,8 @@ namespace Alabo.Domains.Entities.Core
     /// <summary>
     ///     Mongo数据表接口
     /// </summary>
-    public interface IMongoEntity : IEntity<ObjectId>
-    {
+    public interface IMongoEntity : IEntity<ObjectId> {
+
         /// <summary>
         ///     唯一Id
         /// </summary>

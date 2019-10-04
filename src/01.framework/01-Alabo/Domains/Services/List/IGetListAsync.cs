@@ -6,13 +6,13 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Alabo.Domains.Services.List
-{
+namespace Alabo.Domains.Services.List {
+
     /// <summary>
     ///     获取全部数据
     /// </summary>
-    public interface IGetListAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+    public interface IGetListAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         Task<List<TDto>> GetAllAsync<TDto>() where TDto : IResponse, new();
 
         /// <summary>

@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.UI.Enum
-{
+namespace Alabo.UI.Enum {
+
     /// <summary>
     ///     颜色库
     ///     http://ui.5ug.com/metronic_v4.5.4/theme/admin_4/ui_colors.html
     /// </summary>
     [ClassProperty(Name = "颜色库")]
-    public enum ColorLibrary
-    {
+    public enum ColorLibrary {
+
         /// <summary>
         ///     #ffffff
         /// </summary>

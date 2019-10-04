@@ -1,7 +1,6 @@
-﻿namespace Alabo.UI
-{
-    public static class IconLineawesome
-    {
+﻿namespace Alabo.UI {
+
+    public static class IconLineawesome {
         public const string pixel = "la la-500px";
 
         public const string adjust = "la la-adjust";

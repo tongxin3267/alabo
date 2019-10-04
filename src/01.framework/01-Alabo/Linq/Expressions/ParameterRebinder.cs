@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Alabo.Linq.Expressions
-{
+namespace Alabo.Linq.Expressions {
+
     /// <summary>
     ///     参数重绑定操作
     /// </summary>
-    public class ParameterRebinder : ExpressionVisitor
-    {
+    public class ParameterRebinder : ExpressionVisitor {
+
         /// <summary>
         ///     参数字典
         /// </summary>
@@ -17,8 +17,7 @@ namespace Alabo.Linq.Expressions
         ///     初始化参数重绑定操作
         /// </summary>
         /// <param name="map">参数字典</param>
-        public ParameterRebinder(Dictionary<ParameterExpression, ParameterExpression> map)
-        {
+        public ParameterRebinder(Dictionary<ParameterExpression, ParameterExpression> map) {
             _map = map ?? new Dictionary<ParameterExpression, ParameterExpression>();
         }
 
@@ -28,8 +27,7 @@ namespace Alabo.Linq.Expressions
         /// <param name="map">参数字典</param>
         /// <param name="exp">表达式</param>
         public static Expression ReplaceParameters(Dictionary<ParameterExpression, ParameterExpression> map,
-            Expression exp)
-        {
+            Expression exp) {
             return new ParameterRebinder(map).Visit(exp);
         }
 
@@ -37,8 +35,7 @@ namespace Alabo.Linq.Expressions
         ///     访问参数
         /// </summary>
         /// <param name="parameterExpression">参数</param>
-        protected override Expression VisitParameter(ParameterExpression parameterExpression)
-        {
+        protected override Expression VisitParameter(ParameterExpression parameterExpression) {
             if (_map.TryGetValue(parameterExpression, out var replacement)) {
                 parameterExpression = replacement;
             }

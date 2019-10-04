@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     分润触发类型
     /// </summary>
     [ClassProperty(Name = "分润触发类型")]
-    public enum TriggerType
-    {
+    public enum TriggerType {
+
         /// <summary>
         ///     用户注册
         ///     用户注册(会员注册时触发）

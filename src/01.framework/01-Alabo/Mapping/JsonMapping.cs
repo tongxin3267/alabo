@@ -6,14 +6,14 @@ using Newtonsoft.Json;
 using System;
 using System.Linq;
 
-namespace Alabo.Mapping
-{
+namespace Alabo.Mapping {
+
     /// <summary>
     ///     Class JsonMapping.
     ///     Json 数据自动序列化，与反序列化
     /// </summary>
-    public static class JsonMapping
-    {
+    public static class JsonMapping {
+
         #region 将Json数据转换成实体类型
 
         /// <summary>
@@ -23,8 +23,7 @@ namespace Alabo.Mapping
         ///     Converts to extension.
         /// </summary>
         /// <param name="instance">The instance.</param>
-        public static T EntityToExtension<T>(T instance) where T : class, IEntity
-        {
+        public static T EntityToExtension<T>(T instance) where T : class, IEntity {
             if (instance == null) {
                 return instance;
             }
@@ -38,20 +37,16 @@ namespace Alabo.Mapping
             }
 
             var propertyInfo = type.GetPropertiesFromCache();
-            foreach (var item in propertyInfo)
-            {
+            foreach (var item in propertyInfo) {
                 var property = propertys.FirstOrDefault(r => r.Name == item.Name);
 
-                if (property != null)
-                {
+                if (property != null) {
                     var value = item.GetValue(instance);
-                    if (!value.IsNullOrEmpty())
-                    {
+                    if (!value.IsNullOrEmpty()) {
                         var extesionName = property.FieldAttribute.ExtensionJson;
                         var extensionField = propertyInfo.FirstOrDefault(r => r.Name == extesionName);
                         if (!extensionField.IsNullOrEmpty()) {
-                            if (extensionField != null)
-                            {
+                            if (extensionField != null) {
                                 //设置值
                                 var extesionValue =
                                     JsonConvert.DeserializeObject(value.ToString(), extensionField.PropertyType);
@@ -74,8 +69,7 @@ namespace Alabo.Mapping
         ///     Converts to extension.
         /// </summary>
         /// <param name="instance">The instance.</param>
-        public static T ConvertToExtension<T>(T instance) where T : class, IEntity
-        {
+        public static T ConvertToExtension<T>(T instance) where T : class, IEntity {
             if (instance == null) {
                 return instance;
             }
@@ -92,27 +86,21 @@ namespace Alabo.Mapping
             }
 
             var propertyInfo = type.GetPropertiesFromCache();
-            foreach (var item in propertyInfo)
-            {
+            foreach (var item in propertyInfo) {
                 var property = propertys.FirstOrDefault(r => r.Name == item.Name);
 
-                if (property != null)
-                {
+                if (property != null) {
                     var value = item.GetValue(instance);
-                    if (value != null && !value.ToStr().IsNullOrEmpty())
-                    {
+                    if (value != null && !value.ToStr().IsNullOrEmpty()) {
                         var extesionName = property.FieldAttribute.ExtensionJson;
                         // 获取扩展字段
                         var extensionType = extesionName.GetTypeByName();
                         var extensionField = propertyInfo.FirstOrDefault(r => r.Name == extensionType?.Name);
                         if (extensionField != null && extensionType != null) {
-                            try
-                            {
+                            try {
                                 var extesionValue = JsonConvert.DeserializeObject(value.ToString(), extensionType);
                                 extensionField.SetValue(instance, extesionValue);
-                            }
-                            catch (Exception ex)
-                            {
+                            } catch (Exception ex) {
                                 Console.WriteLine(ex.Message);
                             }
                         }
@@ -132,8 +120,7 @@ namespace Alabo.Mapping
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <param name="httpContext">The HTTP context.</param>
-        public static T HttpContextToExtension<T>(object instance, HttpContext httpContext)
-        {
+        public static T HttpContextToExtension<T>(object instance, HttpContext httpContext) {
             instance = HttpContextToExtension(instance, typeof(T), httpContext);
             return (T)instance;
         }
@@ -144,27 +131,22 @@ namespace Alabo.Mapping
         /// <param name="instance">The instance.</param>
         /// <param name="type">The 类型.</param>
         /// <param name="httpContext">The HTTP context.</param>
-        public static object HttpContextToExtension(object instance, Type type, HttpContext httpContext)
-        {
+        public static object HttpContextToExtension(object instance, Type type, HttpContext httpContext) {
             // Json
             var classDescription = new ClassDescription(type);
             //获取有枚举的属性
             var propertys = classDescription.Propertys.Where(r => !r.FieldAttribute.ExtensionJson.IsNullOrEmpty());
             var propertyInfo = type.GetPropertiesFromCache();
-            foreach (var item in propertyInfo)
-            {
+            foreach (var item in propertyInfo) {
                 var property = propertys.FirstOrDefault(r => r.Name == item.Name);
 
-                if (property != null)
-                {
+                if (property != null) {
                     var value = httpContext.Request.Form[item.Name].FirstOrDefault();
-                    if (!value.IsNullOrEmpty())
-                    {
+                    if (!value.IsNullOrEmpty()) {
                         var extesionName = property.FieldAttribute.ExtensionJson;
                         var extensionField = propertyInfo.FirstOrDefault(r => r.Name == extesionName);
                         if (!extensionField.IsNullOrEmpty()) {
-                            if (extensionField != null)
-                            {
+                            if (extensionField != null) {
                                 //设置值
                                 var extesionValue = JsonConvert.DeserializeObject(value, extensionField.PropertyType);
                                 extensionField.SetValue(instance, extesionValue);
@@ -183,25 +165,21 @@ namespace Alabo.Mapping
         /// <param name="instance">The instance.</param>
         /// <param name="type">The 类型.</param>
         /// <param name="value">The HTTP context.</param>
-        public static object HttpContextToExtension(object instance, Type type, string value)
-        {
+        public static object HttpContextToExtension(object instance, Type type, string value) {
             // Json
             var classDescription = new ClassDescription(type);
             //获取有枚举的属性
             var propertys = classDescription.Propertys.Where(r => !r.FieldAttribute.ExtensionJson.IsNullOrEmpty());
             var propertyInfo = type.GetPropertiesFromCache();
-            foreach (var item in propertyInfo)
-            {
+            foreach (var item in propertyInfo) {
                 var property = propertys.FirstOrDefault(r => r.Name == item.Name);
 
                 if (property != null) {
-                    if (!value.IsNullOrEmpty())
-                    {
+                    if (!value.IsNullOrEmpty()) {
                         var extesionName = property.FieldAttribute.ExtensionJson;
                         var extensionField = propertyInfo.FirstOrDefault(r => r.Name == extesionName);
                         if (!extensionField.IsNullOrEmpty()) {
-                            if (extensionField != null)
-                            {
+                            if (extensionField != null) {
                                 //设置值
                                 var extesionValue = JsonConvert.DeserializeObject(value, extensionField.PropertyType);
                                 extensionField.SetValue(instance, extesionValue);

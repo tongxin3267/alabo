@@ -2,17 +2,16 @@
 using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Entities.Core;
 
-namespace Alabo.Datas.Stores
-{
+namespace Alabo.Datas.Stores {
+
     public abstract class EfCoreStore<TEntity, TKey> : UpdateEfCoreStore<TEntity, TKey>, IStore<TEntity, TKey>
-        where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
+        where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
         /// <summary>
         ///     初始化查询存储器
         /// </summary>
         /// <param name="unitOfWork">工作单元</param>
-        protected EfCoreStore(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        protected EfCoreStore(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
     }
 }

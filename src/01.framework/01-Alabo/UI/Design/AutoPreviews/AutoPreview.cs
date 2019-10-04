@@ -1,13 +1,13 @@
 ﻿using Alabo.Domains.Entities;
 using System.Collections.Generic;
 
-namespace Alabo.UI.Design.AutoPreviews
-{
+namespace Alabo.UI.Design.AutoPreviews {
+
     /// <summary>
     ///     自动预览对应zk-priview组件
     /// </summary>
-    public class AutoPreview
-    {
+    public class AutoPreview {
+
         /// <summary>
         ///     命名空间
         /// </summary>

@@ -8,8 +8,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Tables.Domain.Entities
-{
+namespace Alabo.Tables.Domain.Entities {
+
     /// <summary>
     ///     表以及数据库结构说明书
     /// </summary>
@@ -17,8 +17,8 @@ namespace Alabo.Tables.Domain.Entities
     [Table("Core_Table")]
     [ClassProperty(Name = "数据库表", Icon = "fa fa-cog", SortOrder = 1,
         SideBarType = SideBarType.TableSideBar)]
-    public class Table : AggregateMongodbRoot<Table>
-    {
+    public class Table : AggregateMongodbRoot<Table> {
+
         /// <summary>
         ///     名称
         /// </summary>
@@ -77,8 +77,8 @@ namespace Alabo.Tables.Domain.Entities
     /// </summary>
     [ClassProperty(Name = "列结构", Icon = "fa fa-cog", SortOrder = 1,
         SideBarType = SideBarType.TableSideBar)]
-    public class TableColumn : BaseViewModel
-    {
+    public class TableColumn : BaseViewModel {
+
         /// <summary>
         ///     名称
         /// </summary>

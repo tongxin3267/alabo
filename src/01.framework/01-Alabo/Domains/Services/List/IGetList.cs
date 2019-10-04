@@ -5,13 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Alabo.Domains.Services.List
-{
+namespace Alabo.Domains.Services.List {
+
     /// <summary>
     ///     获取全部数据
     /// </summary>
-    public interface IGetList<TEntity, TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+    public interface IGetList<TEntity, TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         /// <summary>
         ///     获取全部
         /// </summary>

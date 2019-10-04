@@ -6,18 +6,16 @@ using MongoDB.Driver.Linq;
 using System;
 using System.Threading.Tasks;
 
-namespace Alabo.Datas.Stores.Random.Mongo
-{
+namespace Alabo.Datas.Stores.Random.Mongo {
+
     public abstract class RandomAsyncMongoStore<TEntity, TKey> : GetPageMongoStore<TEntity, TKey>,
         IRandomAsyncStore<TEntity, TKey>
-        where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
-        protected RandomAsyncMongoStore(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
+        protected RandomAsyncMongoStore(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
-        public async Task<TEntity> GetRandomAsync()
-        {
+        public async Task<TEntity> GetRandomAsync() {
             return await Collection.AsQueryable().Where(x => true).OrderBy(a => Guid.NewGuid()).Take(1)
                 .FirstOrDefaultAsync();
         }

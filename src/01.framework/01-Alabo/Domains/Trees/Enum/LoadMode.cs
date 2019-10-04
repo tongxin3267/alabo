@@ -1,13 +1,13 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.Domains.Trees.Enum
-{
+namespace Alabo.Domains.Trees.Enum {
+
     /// <summary>
     ///     加载模式
     /// </summary>
     [ClassProperty(Name = "加载模式")]
-    public enum LoadMode
-    {
+    public enum LoadMode {
+
         /// <summary>
         ///     同步
         /// </summary>

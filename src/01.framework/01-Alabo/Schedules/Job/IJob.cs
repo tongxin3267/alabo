@@ -1,9 +1,8 @@
-﻿namespace Alabo.Schedules.Job
-{
+﻿namespace Alabo.Schedules.Job {
+
     /// <summary>
     ///     作业
     /// </summary>
-    public interface IJob
-    {
+    public interface IJob {
     }
 }

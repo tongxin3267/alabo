@@ -1,10 +1,10 @@
 ﻿using Alabo.Domains.Entities;
 using System.Threading.Tasks;
 
-namespace Alabo.Domains.Services.Cache
-{
-    public interface ICacheAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+namespace Alabo.Domains.Services.Cache {
+
+    public interface ICacheAsync<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         /// <summary>
         ///     从缓存中读取数据
         /// </summary>

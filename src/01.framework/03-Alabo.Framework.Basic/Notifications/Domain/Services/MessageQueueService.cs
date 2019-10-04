@@ -1,21 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Services;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Notifications.Domain.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using ZKCloud.Open.Message.Models;
 using MessageQueue = Alabo.Framework.Basic.Notifications.Domain.Entities.MessageQueue;
 
-namespace Alabo.Framework.Basic.Notifications.Domain.Services
-{
-    public class MessageQueueService : ServiceBase<MessageQueue, long>, IMessageQueueService
-    {
+namespace Alabo.Framework.Basic.Notifications.Domain.Services {
+
+    public class MessageQueueService : ServiceBase<MessageQueue, long>, IMessageQueueService {
+
         public MessageQueueService(IUnitOfWork unitOfWork, IRepository<MessageQueue, long> repository) : base(
-            unitOfWork, repository)
-        {
+            unitOfWork, repository) {
         }
 
         // private MessageManager _messageManager;
@@ -23,16 +22,13 @@ namespace Alabo.Framework.Basic.Notifications.Domain.Services
         //
         //}
 
-        public void Add(MessageQueue entity)
-        {
+        public void Add(MessageQueue entity) {
             Repository<IMessageQueueRepository>().Add(entity);
             ObjectCache.Set("MessageIsAllSend_Cache", false);
         }
 
-        public void AddRawQueue(string mobile, string content, string ipAdress)
-        {
-            var queue = new MessageQueue
-            {
+        public void AddRawQueue(string mobile, string content, string ipAdress) {
+            var queue = new MessageQueue {
                 Mobile = mobile,
                 IpAdress = ipAdress,
                 RequestTime = DateTime.Now,
@@ -44,10 +40,8 @@ namespace Alabo.Framework.Basic.Notifications.Domain.Services
         }
 
         public void AddTemplateQueue(long code, string mobile, string ipAdress,
-            IDictionary<string, string> parameters = null)
-        {
-            var queue = new MessageQueue
-            {
+            IDictionary<string, string> parameters = null) {
+            var queue = new MessageQueue {
                 Mobile = mobile,
                 Parameters = parameters.ToJson(),
                 IpAdress = ipAdress,
@@ -59,59 +53,48 @@ namespace Alabo.Framework.Basic.Notifications.Domain.Services
             Add(queue);
         }
 
-        public void Cancel(long id)
-        {
+        public void Cancel(long id) {
             Repository<IMessageQueueRepository>().Cancel(id);
         }
 
-        public void ErrorQueue(long id, string message)
-        {
+        public void ErrorQueue(long id, string message) {
             Repository<IMessageQueueRepository>().ErrorQueue(id, message);
         }
 
-        public void ErrorQueue(long id, string message, string summary)
-        {
+        public void ErrorQueue(long id, string message, string summary) {
             Repository<IMessageQueueRepository>().ErrorQueue(id, message, summary);
         }
 
-        public void ErrorQueue(long id, string message, Exception exception)
-        {
+        public void ErrorQueue(long id, string message, Exception exception) {
             Repository<IMessageQueueRepository>().ErrorQueue(id, message, exception);
         }
 
-        public MessageQueue GetSingle(long id)
-        {
+        public MessageQueue GetSingle(long id) {
             return Repository<IMessageQueueRepository>().GetSingle(id);
         }
 
-        public IList<long> GetUnHandledIdList()
-        {
+        public IList<long> GetUnHandledIdList() {
             return Repository<IMessageQueueRepository>().GetUnHandledIdList();
         }
 
-        public void HandleQueue(long id, string message = null, string summary = null)
-        {
+        public void HandleQueue(long id, string message = null, string summary = null) {
             Repository<IMessageQueueRepository>().HandleQueue(id, message, summary);
         }
 
-        public void HandleQueueAndUpdateContent(long id, string message = null, string summary = null)
-        {
+        public void HandleQueueAndUpdateContent(long id, string message = null, string summary = null) {
             Repository<IMessageQueueRepository>().HandleQueueAndUpdateContent(id, message, summary);
         }
 
-        public async Task HandleQueueAsync(long queueId)
-        {
+        public async Task HandleQueueAsync(long queueId) {
             var queue = GetSingle(queueId);
             if (queue == null) {
                 throw new MessageQueueHandleException(queueId, $"message queue with id {queueId} not found.");
             }
 
-            try
-            {
+            try {
                 ErrorQueue(queueId, "message send with no result!");
                 MessageResult messageResult = null;
-                if (queue.TemplateCode > 0)
-                {
+                if (queue.TemplateCode > 0) {
                     IDictionary<string, string> parameters = null;
                     //  await _messageManager.SendTemplateAsync(queue.TemplateCode, queue.Mobile, parameters);
                 }
@@ -123,9 +106,7 @@ namespace Alabo.Framework.Basic.Notifications.Domain.Services
                 } else {
                     ErrorQueue(queueId, $"message send {messageResult.Type}!", messageResult.Message);
                 }
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 ErrorQueue(queueId, e.Message, e);
             }
         }

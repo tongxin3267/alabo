@@ -7,13 +7,13 @@ using Alabo.Security;
 using Alabo.Security.Sessions;
 using LogProviderFactory = Alabo.Logging.NLog.LogProviderFactory;
 
-namespace Alabo.Logging
-{
+namespace Alabo.Logging {
+
     /// <summary>
     ///     日志操作
     /// </summary>
-    public class Log : LogBase<LogContent>
-    {
+    public class Log : LogBase<LogContent> {
+
         /// <summary>
         ///     空日志操作
         /// </summary>
@@ -32,8 +32,7 @@ namespace Alabo.Logging
         /// <param name="format">日志格式器</param>
         /// <param name="session">用户会话</param>
         public Log(ILogProviderFactory providerFactory, ILogContext context, ILogFormat format, ISession session) :
-            base(providerFactory.Create("", format), context, session)
-        {
+            base(providerFactory.Create("", format), context, session) {
         }
 
         /// <summary>
@@ -44,24 +43,21 @@ namespace Alabo.Logging
         /// <param name="session">用户会话</param>
         /// <param name="class">类名</param>
         private Log(ILogProvider provider, ILogContext context, ISession session, string @class) : base(provider,
-            context, session)
-        {
+            context, session) {
             _class = @class;
         }
 
         /// <summary>
         ///     获取日志内容
         /// </summary>
-        protected override LogContent GetContent()
-        {
+        protected override LogContent GetContent() {
             return new LogContent { Class = _class };
         }
 
         /// <summary>
         ///     初始化
         /// </summary>
-        protected override void Init(LogContent content)
-        {
+        protected override void Init(LogContent content) {
             base.Init(content);
             content.Tenant = Session.GetTenantName();
             content.Application = Session.GetApplicationName();
@@ -72,8 +68,7 @@ namespace Alabo.Logging
         /// <summary>
         ///     获取日志操作实例
         /// </summary>
-        public static ILog GetLog()
-        {
+        public static ILog GetLog() {
             return GetLog(string.Empty);
         }
 
@@ -81,8 +76,7 @@ namespace Alabo.Logging
         ///     获取日志操作实例
         /// </summary>
         /// <param name="instance">实例</param>
-        public static ILog GetLog(object instance)
-        {
+        public static ILog GetLog(object instance) {
             if (instance == null) {
                 return GetLog();
             }
@@ -95,16 +89,14 @@ namespace Alabo.Logging
         ///     获取日志操作实例
         /// </summary>
         /// <param name="logName">日志名称</param>
-        public static ILog GetLog(string logName)
-        {
+        public static ILog GetLog(string logName) {
             return GetLog(logName, string.Empty);
         }
 
         /// <summary>
         ///     获取日志操作实例
         /// </summary>
-        private static ILog GetLog(string logName, string @class)
-        {
+        private static ILog GetLog(string logName, string @class) {
             var providerFactory = GetLogProviderFactory();
             var format = GetLogFormat();
             var context = GetLogContext();
@@ -115,14 +107,10 @@ namespace Alabo.Logging
         /// <summary>
         ///     获取日志提供程序工厂
         /// </summary>
-        private static ILogProviderFactory GetLogProviderFactory()
-        {
-            try
-            {
+        private static ILogProviderFactory GetLogProviderFactory() {
+            try {
                 return Ioc.Resolve<ILogProviderFactory>();
-            }
-            catch
-            {
+            } catch {
                 return new LogProviderFactory();
             }
         }
@@ -130,14 +118,10 @@ namespace Alabo.Logging
         /// <summary>
         ///     获取日志格式器
         /// </summary>
-        private static ILogFormat GetLogFormat()
-        {
-            try
-            {
+        private static ILogFormat GetLogFormat() {
+            try {
                 return Ioc.Resolve<ILogFormat>();
-            }
-            catch
-            {
+            } catch {
                 return ContentFormat.Instance;
             }
         }
@@ -145,14 +129,10 @@ namespace Alabo.Logging
         /// <summary>
         ///     获取日志上下文
         /// </summary>
-        private static ILogContext GetLogContext()
-        {
-            try
-            {
+        private static ILogContext GetLogContext() {
+            try {
                 return Ioc.Resolve<ILogContext>();
-            }
-            catch
-            {
+            } catch {
                 return NullLogContext.Instance;
             }
         }
@@ -160,14 +140,10 @@ namespace Alabo.Logging
         /// <summary>
         ///     获取用户会话
         /// </summary>
-        private static ISession GetSession()
-        {
-            try
-            {
+        private static ISession GetSession() {
+            try {
                 return Ioc.Resolve<ISession>();
-            }
-            catch
-            {
+            } catch {
                 return Security.Sessions.Session.Null;
             }
         }

@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Text;
-using Alabo.Datas.UnitOfWorks;
+﻿using Alabo.Datas.UnitOfWorks;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories;
 using Alabo.Domains.Repositories.EFCore;
-using Alabo.Domains.Services.Report;
 using Alabo.Extensions;
-using Alabo.Framework.Core.WebUis;
 using Alabo.Framework.Reports.Domain.Entities;
 using Alabo.Helpers;
 using Alabo.UI;
@@ -17,29 +11,31 @@ using Alabo.UI.Design.AutoReports.Dtos;
 using Alabo.UI.Design.AutoReports.Enums;
 using Alabo.Users.Repositories;
 using MongoDB.Bson;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Text;
 using Convert = System.Convert;
 
-namespace Alabo.Framework.Reports.Domain.Repositories
-{
+namespace Alabo.Framework.Reports.Domain.Repositories {
+
     /// <summary>
     ///     AutoReportRepository
     /// </summary>
-    public class AutoReportRepository : RepositoryMongo<Report, ObjectId>, IAutoReportRepository
-    {
+    public class AutoReportRepository : RepositoryMongo<Report, ObjectId>, IAutoReportRepository {
+
         /// <summary>
         ///     AutoReportRepository
         /// </summary>
         /// <param name="unitOfWork"></param>
-        public AutoReportRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        public AutoReportRepository(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
         /// <summary>
         ///     按天数统计数量 报图图状
         /// </summary>
         /// <returns></returns>
-        public List<object> GetDayCountReport(CountReportInput countReportInput)
-        {
+        public List<object> GetDayCountReport(CountReportInput countReportInput) {
             countReportInput.Condition.EntityType = countReportInput.EntityType;
             var tableName = countReportInput.Condition.GetTableName();
             var dbContext = Ioc.Resolve<IAlaboUserRepository>().RepositoryContext;
@@ -48,8 +44,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
 
             //日期验证
             if (countReportInput.Condition.StartTime.ToString().IndexOf("0001") == -1 ||
-                countReportInput.Condition.EndTime.ToString().IndexOf("0001") == -1)
-            {
+                countReportInput.Condition.EndTime.ToString().IndexOf("0001") == -1) {
                 var varStartTime = string.Format("{0:yyyy-MM-dd}", countReportInput.Condition.StartTime);
                 var varEndTime = string.Format("{0:yyyy-MM-dd}", countReportInput.Condition.EndTime);
                 tempSqlWhere = @" and (CONVERT(VARCHAR(100), CreateTime, 23) >='" + varStartTime +
@@ -68,10 +63,8 @@ namespace Alabo.Framework.Reports.Domain.Repositories
 
             var lists = new List<object>();
             if (FilterSqlScript(sqlCountByDay) != true) {
-                using (var dr = dbContext.ExecuteDataReader(sqlCountByDay))
-                {
-                    while (dr.Read())
-                    {
+                using (var dr = dbContext.ExecuteDataReader(sqlCountByDay)) {
+                    while (dr.Read()) {
                         var item = ReadAutoReport(dr);
                         lists.Add(item);
                     }
@@ -85,8 +78,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
         ///     按天数根据状态 统计数量 扩展 报图图状
         /// </summary>
         /// <returns></returns>
-        public List<AutoReport> GetDayCountReportByFiled(CountReportInput countReport)
-        {
+        public List<AutoReport> GetDayCountReportByFiled(CountReportInput countReport) {
             var tableName = "";
             var specialField = "";
             var startTime = DateTime.Now;
@@ -105,8 +97,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
             }
 
             //日期验证
-            if (startTime.ToString().IndexOf("0001") == -1 || endTime.ToString().IndexOf("0001") == -1)
-            {
+            if (startTime.ToString().IndexOf("0001") == -1 || endTime.ToString().IndexOf("0001") == -1) {
                 var varStartTime = string.Format("{0:yyyy-MM-dd}", startTime);
                 var varEndTime = string.Format("{0:yyyy-MM-dd}", endTime);
                 tempSqlWhere = @" and (CONVERT(VARCHAR(100), CreateTime, 23) >='" + varStartTime +
@@ -116,12 +107,10 @@ namespace Alabo.Framework.Reports.Domain.Repositories
             var tempSqlStatusCount = string.Empty;
 
             //枚举
-            if (!string.IsNullOrEmpty(specialField))
-            {
+            if (!string.IsNullOrEmpty(specialField)) {
                 var typeEnum = specialField.GetTypeByName();
 
-                foreach (Enum item in Enum.GetValues(typeEnum))
-                {
+                foreach (Enum item in Enum.GetValues(typeEnum)) {
                     var itemName = item.GetDisplayName();
                     var itemValue = item.ToString();
                     var key = Convert.ToInt16(item);
@@ -145,15 +134,12 @@ namespace Alabo.Framework.Reports.Domain.Repositories
 
             var typeEnumExt = specialField.GetTypeByName();
             if (FilterSqlScript(sqlCountByDay) != true) {
-                using (var dr = dbContext.ExecuteDataReader(sqlCountByDay))
-                {
-                    while (dr.Read())
-                    {
+                using (var dr = dbContext.ExecuteDataReader(sqlCountByDay)) {
+                    while (dr.Read()) {
                         var listItem = new List<AutoReportItem>();
                         var output = new AutoReport();
 
-                        chartCols.ForEach(p =>
-                        {
+                        chartCols.ForEach(p => {
                             if (p.ToLower() == "日期") {
                                 output.Date = dr[p].ToString();
                             } else if (p.ToLower() == "全部数量") {
@@ -161,7 +147,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
                             } else if (p.ToLower() == "比率") {
                                 output.Date = dr[p].ToString();
                             } else {
-                                listItem.Add(new AutoReportItem {Name = p.ToString(), Value = dr[p].ToString()});
+                                listItem.Add(new AutoReportItem { Name = p.ToString(), Value = dr[p].ToString() });
                             }
                         });
                         output.AutoReportItem = listItem;
@@ -178,25 +164,22 @@ namespace Alabo.Framework.Reports.Domain.Repositories
         /// <param name="dateCountReportInput"></param>
         /// <param name="EnumName"></param>
         /// <returns></returns>
-        public List<AutoReport> GetReportFormWithField(CountReportInput dateCountReportInput, string EnumName)
-        {
+        public List<AutoReport> GetReportFormWithField(CountReportInput dateCountReportInput, string EnumName) {
             var queryResult = ExeclCountSql(dateCountReportInput, EnumName);
             var strSql = queryResult.Item1;
             var chartCols = queryResult.Item2;
             var chartRows = new List<object>();
             var dbContext = Ioc.Resolve<IAlaboUserRepository>().RepositoryContext;
 
-            using (var dr = dbContext.ExecuteDataReader(strSql))
-            {
-                while (dr.Read())
-                {
+            using (var dr = dbContext.ExecuteDataReader(strSql)) {
+                while (dr.Read()) {
                     var dic = new Dictionary<string, string>();
                     chartCols.ForEach(p => { dic.Add(p, dr[p].ToString()); });
                     chartRows.Add(dic);
                 }
             }
 
-            var line = (ReportChartType) Enum.Parse(typeof(ReportChartType), "0");
+            var line = (ReportChartType)Enum.Parse(typeof(ReportChartType), "0");
             var result = new List<AutoReport>
             {
                 new AutoReport
@@ -212,8 +195,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
         ///     根据日期 状态 统计报表表格
         /// </summary>
         /// <returns></returns>
-        public List<object> GetDayCountReportTableByFiled(CountReportInput countReport)
-        {
+        public List<object> GetDayCountReportTableByFiled(CountReportInput countReport) {
             var tableName = "";
             var specialField = "";
             var startTime = DateTime.Now;
@@ -228,8 +210,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
                 tempSqlWhere = " and " + sqlWhere;
             }
             //日期验证
-            if (startTime.ToString().IndexOf("0001") == -1 || endTime.ToString().IndexOf("0001") == -1)
-            {
+            if (startTime.ToString().IndexOf("0001") == -1 || endTime.ToString().IndexOf("0001") == -1) {
                 var varStartTime = string.Format("{0:yyyy-MM-dd}", startTime);
                 var varEndTime = string.Format("{0:yyyy-MM-dd}", endTime);
                 tempSqlWhere = @" and (CONVERT(VARCHAR(100), CreateTime, 23) >='" + varStartTime +
@@ -239,10 +220,9 @@ namespace Alabo.Framework.Reports.Domain.Repositories
             var tempSqlStatusCount = string.Empty;
             var tempSqlStatusRatioCount = string.Empty;
             if (!string.IsNullOrEmpty(specialField)) {
-                foreach (Status item in Enum.GetValues(typeof(Status)))
-                {
+                foreach (Status item in Enum.GetValues(typeof(Status))) {
                     var itemName = item.ToString();
-                    var itemValue = (int) item;
+                    var itemValue = (int)item;
                     //统计状态数量
                     tempSqlStatusCount = tempSqlStatusCount + @" count(CASE WHEN " + specialField + " =" + itemValue +
                                          " THEN " + specialField + " END) AS  CountStatus" + itemName + " , ";
@@ -267,10 +247,8 @@ namespace Alabo.Framework.Reports.Domain.Repositories
             var lists = new List<object>();
 
             if (FilterSqlScript(sqlCountByDay) != true) {
-                using (var dr = dbContext.ExecuteDataReader(sqlCountByDay))
-                {
-                    while (dr.Read())
-                    {
+                using (var dr = dbContext.ExecuteDataReader(sqlCountByDay)) {
+                    while (dr.Read()) {
                         var item = ReadAutoReportTableSpec(dr);
                         lists.Add(item);
                     }
@@ -286,8 +264,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
         /// <param name="countReport"></param>
         /// <param name="EnumName"></param>
         /// <returns></returns>
-        public List<CountReportTable> GetCountReportTableWithField(CountReportInput countReport, string EnumName)
-        {
+        public List<CountReportTable> GetCountReportTableWithField(CountReportInput countReport, string EnumName) {
             var dbContext = Ioc.Resolve<IAlaboUserRepository>().RepositoryContext;
             var queryResult = ExeclCountTableSql(countReport, EnumName);
             var strSql = queryResult.Item1;
@@ -295,13 +272,10 @@ namespace Alabo.Framework.Reports.Domain.Repositories
 
             var chartRows = new List<object>();
 
-            using (var dr = dbContext.ExecuteDataReader(strSql))
-            {
-                while (dr.Read())
-                {
+            using (var dr = dbContext.ExecuteDataReader(strSql)) {
+                while (dr.Read()) {
                     var dic = new Dictionary<string, string>();
-                    foreach (var item in chartCols)
-                    {
+                    foreach (var item in chartCols) {
                         var value = item.name;
                         var key = item.type;
 
@@ -327,8 +301,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
         /// </summary>
         /// <param name="singleReportInput"></param>
         /// <returns></returns>
-        public decimal GetSingleData(SingleReportInput singleReportInput)
-        {
+        public decimal GetSingleData(SingleReportInput singleReportInput) {
             if (string.IsNullOrEmpty(singleReportInput.Field)) {
                 singleReportInput.Field = "id";
             }
@@ -339,8 +312,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
             var dbContext = Ioc.Resolve<IAlaboUserRepository>().RepositoryContext;
             var sql = new StringBuilder();
 
-            switch (singleReportInput.Style)
-            {
+            switch (singleReportInput.Style) {
                 case ReportStyle.Count:
                     sql.Append(@"SELECT ISNULL(COUNT(" + singleReportInput.Field + "),0) AS " +
                                singleReportInput.Field + " FROM " + tableName);
@@ -383,7 +355,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
                     break;
 
                 case ReportStyle.ChainRatioLastWeek:
-                    var day = (int) DateTime.Now.DayOfWeek;
+                    var day = (int)DateTime.Now.DayOfWeek;
 
                     var thisWeekStart = DateTime.Now.AddDays(-day + 1).ToString("yyyy-MM-dd 00:00:00"); //本周第一天
                     var thisWeekNow = DateTime.Now; //当前天
@@ -452,8 +424,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
         /// <param name="countReportInput"></param>
         /// <param name="EnumName"></param>
         /// <returns></returns>
-        private Tuple<string, List<string>> ExeclCountSql(CountReportInput countReportInput, string EnumName)
-        {
+        private Tuple<string, List<string>> ExeclCountSql(CountReportInput countReportInput, string EnumName) {
             var tempSqlWhere = string.Empty;
             var chartCols = new List<string>();
             chartCols.Add("日期");
@@ -471,8 +442,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
 
             //日期验证
             if (countReportInput.Condition.StartTime.ToString().IndexOf("0001") == -1 ||
-                countReportInput.Condition.EndTime.ToString().IndexOf("0001") == -1)
-            {
+                countReportInput.Condition.EndTime.ToString().IndexOf("0001") == -1) {
                 var varStartTime = string.Format("{0:yyyy-MM-dd}", countReportInput.Condition.StartTime);
                 var varEndTime = string.Format("{0:yyyy-MM-dd}", countReportInput.Condition.EndTime);
                 tempSqlWhere = @" and (CONVERT(VARCHAR(100), CreateTime, 23) >='" + varStartTime +
@@ -487,12 +457,10 @@ namespace Alabo.Framework.Reports.Domain.Repositories
             var tableName = countReportInput.Condition.GetTableName();
 
             //枚举
-            if (!string.IsNullOrEmpty(EnumName))
-            {
+            if (!string.IsNullOrEmpty(EnumName)) {
                 var typeEnum = EnumName.GetTypeByName();
                 if (typeEnum != null) {
-                    foreach (Enum item in Enum.GetValues(typeEnum))
-                    {
+                    foreach (Enum item in Enum.GetValues(typeEnum)) {
                         var itemName = item.GetDisplayName();
                         itemName = FilterSpecial(itemName);
                         var itemValue = item.ToString();
@@ -521,8 +489,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
         /// <param name="reportInput"></param>
         /// <param name="EnumName"></param>
         /// <returns></returns>
-        private Tuple<string, List<Columns>> ExeclCountTableSql(CountReportInput reportInput, string EnumName)
-        {
+        private Tuple<string, List<Columns>> ExeclCountTableSql(CountReportInput reportInput, string EnumName) {
             var listCol = new List<Columns>();
             var col = new Columns();
             var tempSqlWhere = string.Empty;
@@ -549,8 +516,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
 
             //日期验证
             if (reportInput.Condition.StartTime.ToString().IndexOf("0001") == -1 ||
-                reportInput.Condition.EndTime.ToString().IndexOf("0001") == -1)
-            {
+                reportInput.Condition.EndTime.ToString().IndexOf("0001") == -1) {
                 var varStartTime = string.Format("{0:yyyy-MM-dd}", reportInput.Condition.StartTime);
                 var varEndTime = string.Format("{0:yyyy-MM-dd}", reportInput.Condition.EndTime);
                 tempSqlWhere = @" and (CONVERT(VARCHAR(100), CreateTime, 23) >='" + varStartTime +
@@ -566,12 +532,10 @@ namespace Alabo.Framework.Reports.Domain.Repositories
             var tableName = reportInput.Condition.GetTableName();
 
             //枚举
-            if (!string.IsNullOrEmpty(EnumName))
-            {
+            if (!string.IsNullOrEmpty(EnumName)) {
                 var typeEnum = EnumName.GetTypeByName();
 
-                foreach (Enum item in Enum.GetValues(typeEnum))
-                {
+                foreach (Enum item in Enum.GetValues(typeEnum)) {
                     var itemName = item.GetDisplayName();
                     itemName = FilterSpecial(itemName);
                     var itemValue = item.ToString();
@@ -618,10 +582,8 @@ namespace Alabo.Framework.Reports.Domain.Repositories
         /// </summary>
         /// <param name="reader"></param>
         /// <returns></returns>
-        private object ReadAutoReport(IDataReader reader)
-        {
-            var item = new
-            {
+        private object ReadAutoReport(IDataReader reader) {
+            var item = new {
                 Date = reader["Day"].ToString(),
                 Count = reader["TotalNum"].ToString(),
                 Rate = reader["SaleRatio"].ToString()
@@ -634,10 +596,8 @@ namespace Alabo.Framework.Reports.Domain.Repositories
         /// </summary>
         /// <param name="reader"></param>
         /// <returns></returns>
-        private object ReadAutoReportSpec(IDataReader reader)
-        {
-            var item = new
-            {
+        private object ReadAutoReportSpec(IDataReader reader) {
+            var item = new {
                 Date = reader["Day"].ToString(),
                 Count = reader["TotalNum"].ToString(),
                 Rate = reader["SaleRatio"].ToString()
@@ -645,17 +605,14 @@ namespace Alabo.Framework.Reports.Domain.Repositories
             return item;
         }
 
-        private object ReadAutoReportSpec1(IDataReader reader, string specialField)
-        {
+        private object ReadAutoReportSpec1(IDataReader reader, string specialField) {
             var typeEnum = specialField.GetTypeByName();
             object obj = null;
 
-            foreach (Enum il in Enum.GetValues(typeEnum))
-            {
+            foreach (Enum il in Enum.GetValues(typeEnum)) {
                 var itemValue = il.ToString();
                 itemValue = reader[itemValue].ToString();
-                obj = new
-                {
+                obj = new {
                     ItemValue = reader[itemValue].ToString()
                 };
             }
@@ -668,10 +625,8 @@ namespace Alabo.Framework.Reports.Domain.Repositories
         /// </summary>
         /// <param name="reader"></param>
         /// <returns></returns>
-        private object ReadAutoReportTableSpec(IDataReader reader)
-        {
-            var item = new
-            {
+        private object ReadAutoReportTableSpec(IDataReader reader) {
+            var item = new {
                 Date = reader["Day"].ToString(),
                 Count = reader["TotalNum"].ToString(),
 
@@ -695,8 +650,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
         ///     过滤Sql脚本关键字
         /// </summary>
         /// <param name="sSql">The s SQL.</param>
-        private bool FilterSqlScript(string sSql)
-        {
+        private bool FilterSqlScript(string sSql) {
             int srcLen, decLen = 0;
             sSql = sSql.ToLower().Trim();
             srcLen = sSql.Length;
@@ -721,10 +675,8 @@ namespace Alabo.Framework.Reports.Domain.Repositories
         /// </summary>
         /// <param name="str">需要过滤的字符串</param>
         /// <returns>过滤好的字符串</returns>
-        public static string FilterSpecial(string str)
-        {
-            if (str == "")
-            {
+        public static string FilterSpecial(string str) {
+            if (str == "") {
                 return str;
             }
 
@@ -765,25 +717,22 @@ namespace Alabo.Framework.Reports.Domain.Repositories
         ///     根据字段求和 统计报表
         /// </summary>
         /// <returns></returns>
-        public List<AutoReport> GetSumReport(SumReportInput sumReportInput)
-        {
+        public List<AutoReport> GetSumReport(SumReportInput sumReportInput) {
             var dbContext = Ioc.Resolve<IAlaboUserRepository>().RepositoryContext;
             var queryResult = GetSumReportQuerySql(sumReportInput);
             var strSql = queryResult.Item1;
             var chartCols = queryResult.Item2;
             var chartRows = new List<object>();
 
-            using (var dr = dbContext.ExecuteDataReader(strSql))
-            {
-                while (dr.Read())
-                {
+            using (var dr = dbContext.ExecuteDataReader(strSql)) {
+                while (dr.Read()) {
                     var dic = new Dictionary<string, string>();
                     chartCols.ForEach(p => { dic.Add(p, dr[p].ToString()); });
                     chartRows.Add(dic);
                 }
             }
 
-            var line = (ReportChartType) Enum.Parse(typeof(ReportChartType), "0");
+            var line = (ReportChartType)Enum.Parse(typeof(ReportChartType), "0");
             var result = new List<AutoReport>
             {
                 new AutoReport
@@ -801,8 +750,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
         /// <param name="reportInput"></param>
         /// <param name="EnumName"></param>
         /// <returns></returns>
-        public List<SumReportTable> GetSumReportTable(SumReportInput reportInput, string EnumName)
-        {
+        public List<SumReportTable> GetSumReportTable(SumReportInput reportInput, string EnumName) {
             var dbContext = Ioc.Resolve<IAlaboUserRepository>().RepositoryContext;
             var queryResult = GetSumTableQuerySql(reportInput, EnumName);
 
@@ -811,14 +759,11 @@ namespace Alabo.Framework.Reports.Domain.Repositories
 
             var chartRows = new List<object>();
 
-            using (var dr = dbContext.ExecuteDataReader(strSql))
-            {
-                while (dr.Read())
-                {
+            using (var dr = dbContext.ExecuteDataReader(strSql)) {
+                while (dr.Read()) {
                     var dic = new Dictionary<string, string>();
 
-                    foreach (var item in chartCols)
-                    {
+                    foreach (var item in chartCols) {
                         var value = item.name;
                         var key = item.type;
 
@@ -847,15 +792,13 @@ namespace Alabo.Framework.Reports.Domain.Repositories
         /// </summary>
         /// <param name="sumReportInput"></param>
         /// <returns></returns>
-        private Tuple<string, List<string>> GetSumReportQuerySql(SumReportInput sumReportInput)
-        {
+        private Tuple<string, List<string>> GetSumReportQuerySql(SumReportInput sumReportInput) {
             var tempSqlField = string.Empty;
             var chartCols = new List<string>();
             chartCols.Add("日期");
 
             //实体字段 过滤
-            foreach (var field in sumReportInput.Fields)
-            {
+            foreach (var field in sumReportInput.Fields) {
                 var tempDisplayName = sumReportInput.EntityType.GetFiledDisplayName(field);
 
                 tempSqlField = tempSqlField + " ,sum(" + field + ") as " + tempDisplayName;
@@ -896,8 +839,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
         /// </summary>
         /// <param name="reportInput">表字段</param>
         /// <returns></returns>
-        private Tuple<string, List<SumColumns>> GetSumTableQuerySql(SumReportInput reportInput, string EnumName)
-        {
+        private Tuple<string, List<SumColumns>> GetSumTableQuerySql(SumReportInput reportInput, string EnumName) {
             //还得扩展 SpecialField
             var tempSqlWhere = string.Empty;
             var tempSqlField = string.Empty;
@@ -908,20 +850,17 @@ namespace Alabo.Framework.Reports.Domain.Repositories
             col.type = "Date";
             colList.Add(col);
 
-            if (!string.IsNullOrEmpty(EnumName))
-            {
+            if (!string.IsNullOrEmpty(EnumName)) {
                 var typeEnum = EnumName.GetTypeByName();
                 if (typeEnum != null) {
-                    foreach (Enum item in Enum.GetValues(typeEnum))
-                    {
+                    foreach (Enum item in Enum.GetValues(typeEnum)) {
                         var itemName = item.GetDisplayName();
                         itemName = FilterSpecial(itemName);
                         var itemValue = item.ToString();
                         var itemKey = Convert.ToInt16(item);
                         col = new SumColumns();
                         //实体字段
-                        foreach (var field in reportInput.Fields)
-                        {
+                        foreach (var field in reportInput.Fields) {
                             var tempDisplayName = reportInput.EntityType.GetFiledDisplayName(field);
                             //统计 Sum状态数量
                             var TotalAmountName = tempDisplayName + itemName;
@@ -940,8 +879,7 @@ namespace Alabo.Framework.Reports.Domain.Repositories
 
             if (reportInput.Fields.Count > 0) //实体字段 过滤
 {
-                foreach (var field in reportInput.Fields)
-                {
+                foreach (var field in reportInput.Fields) {
                     var tempDisplayName = reportInput.EntityType.GetFiledDisplayName(field);
                     tempSqlField = tempSqlField + " ,sum(" + field + ") as " + field;
 

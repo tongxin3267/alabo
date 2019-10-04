@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Core
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Core {
+
     /// <summary>
     ///     表连接项
     /// </summary>
-    public class JoinItem
-    {
+    public class JoinItem {
+
         /// <summary>
         ///     初始化表连接项
         /// </summary>
@@ -20,8 +20,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <param name="schema">架构</param>
         /// <param name="alias">别名</param>
         /// <param name="raw">使用原始值</param>
-        public JoinItem(string joinType, string table, string schema = null, string alias = null, bool raw = false)
-        {
+        public JoinItem(string joinType, string table, string schema = null, string alias = null, bool raw = false) {
             JoinType = joinType;
             Table = new SqlItem(table, schema, alias, raw);
             Conditions = new List<List<OnItem>>();
@@ -48,8 +47,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <param name="left">左表列名</param>
         /// <param name="right">右表列名</param>
         /// <param name="operator">条件运算符</param>
-        public void On(string left, string right, Operator @operator)
-        {
+        public void On(string left, string right, Operator @operator) {
             if (string.IsNullOrWhiteSpace(left) || string.IsNullOrWhiteSpace(right)) {
                 return;
             }
@@ -61,11 +59,9 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <summary>
         ///     获取第一个连接条件列表
         /// </summary>
-        private List<OnItem> GetFirstConditions()
-        {
+        private List<OnItem> GetFirstConditions() {
             var result = Conditions.FirstOrDefault();
-            if (result == null)
-            {
+            if (result == null) {
                 result = new List<OnItem>();
                 Conditions.Add(result);
             }
@@ -77,8 +73,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         ///     设置连接条件列表
         /// </summary>
         /// <param name="items">连接条件列表</param>
-        public void On(List<OnItem> items)
-        {
+        public void On(List<OnItem> items) {
             if (items == null) {
                 return;
             }
@@ -89,8 +84,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <summary>
         ///     获取Join语句
         /// </summary>
-        public string ToSql(IDialect dialect)
-        {
+        public string ToSql(IDialect dialect) {
             var table = Table.ToSql(dialect);
             return $"{JoinType} {table}{GetOn(dialect)}";
         }
@@ -98,15 +92,13 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <summary>
         ///     获取On语句
         /// </summary>
-        private string GetOn(IDialect dialect)
-        {
+        private string GetOn(IDialect dialect) {
             if (Conditions.Count == 0) {
                 return null;
             }
 
             var result = new StringBuilder();
-            Conditions.ForEach(items =>
-            {
+            Conditions.ForEach(items => {
                 On(items, result, dialect);
                 result.Append(" Or ");
             });
@@ -117,10 +109,8 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <summary>
         ///     获取单个连接条件
         /// </summary>
-        private void On(List<OnItem> items, StringBuilder result, IDialect dialect)
-        {
-            items.ForEach(item =>
-            {
+        private void On(List<OnItem> items, StringBuilder result, IDialect dialect) {
+            items.ForEach(item => {
                 On(item, result, dialect);
                 result.Append(" And ");
             });
@@ -130,8 +120,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <summary>
         ///     获取单个连接条件
         /// </summary>
-        private void On(OnItem item, StringBuilder result, IDialect dialect)
-        {
+        private void On(OnItem item, StringBuilder result, IDialect dialect) {
             var left = item.Left.ToSql(dialect);
             var right = item.Right.ToSql(dialect);
             result.Append(SqlConditionFactory.Create(left, right, item.Operator).GetCondition());

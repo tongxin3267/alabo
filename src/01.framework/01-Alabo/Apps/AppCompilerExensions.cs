@@ -6,19 +6,18 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace Alabo.Apps
-{
+namespace Alabo.Apps {
+
     /// <summary>
     ///     Class AppCompilerExensions.
     /// </summary>
-    public static class AppCompilerExensions
-    {
+    public static class AppCompilerExensions {
+
         /// <summary>
         ///     Adds the core reference.
         /// </summary>
         /// <param name="compiler">The compiler.</param>
-        public static IDynamicAppCompiler AddCoreReference(this IDynamicAppCompiler compiler)
-        {
+        public static IDynamicAppCompiler AddCoreReference(this IDynamicAppCompiler compiler) {
             if (compiler == null) {
                 throw new ArgumentNullException(nameof(compiler));
             }
@@ -31,15 +30,13 @@ namespace Alabo.Apps
         ///     Adds the current references.
         /// </summary>
         /// <param name="compiler">The compiler.</param>
-        public static IDynamicAppCompiler AddCurrentReferences(this IDynamicAppCompiler compiler)
-        {
+        public static IDynamicAppCompiler AddCurrentReferences(this IDynamicAppCompiler compiler) {
             if (compiler == null) {
                 throw new ArgumentNullException(nameof(compiler));
             }
 
             RuntimeContext.Current.GetPlatformRuntimeAssemblies()
-                .Foreach(e =>
-                {
+                .Foreach(e => {
                     if (File.Exists(e.Location) && !e.Location.EndsWith("ni.dll")) {
                         compiler.AddReference(e.Location);
                     }
@@ -51,8 +48,7 @@ namespace Alabo.Apps
         ///     添加s the default using.
         /// </summary>
         /// <param name="compiler">The compiler.</param>
-        public static IDynamicAppCompiler AddDefaultUsing(this IDynamicAppCompiler compiler)
-        {
+        public static IDynamicAppCompiler AddDefaultUsing(this IDynamicAppCompiler compiler) {
             if (compiler == null) {
                 throw new ArgumentNullException(nameof(compiler));
             }
@@ -69,8 +65,7 @@ namespace Alabo.Apps
         /// <param name="path">The path.</param>
         /// <param name="encoding">The encoding.</param>
         public static IDynamicAppCompiler AddDirectory(this IDynamicAppCompiler compiler, string path,
-            Encoding encoding)
-        {
+            Encoding encoding) {
             if (compiler == null) {
                 throw new ArgumentNullException(nameof(compiler));
             }
@@ -100,8 +95,7 @@ namespace Alabo.Apps
         /// <param name="compiler">The compiler.</param>
         /// <param name="paths">The paths.</param>
         /// <param name="encoding">The encoding.</param>
-        public static IDynamicAppCompiler AddFiles(this IDynamicAppCompiler compiler, string[] paths, Encoding encoding)
-        {
+        public static IDynamicAppCompiler AddFiles(this IDynamicAppCompiler compiler, string[] paths, Encoding encoding) {
             if (compiler == null) {
                 throw new ArgumentNullException(nameof(compiler));
             }

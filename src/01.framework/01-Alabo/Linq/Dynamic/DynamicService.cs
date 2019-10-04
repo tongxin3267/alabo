@@ -11,16 +11,15 @@ using System.Linq.Expressions;
 using ZKCloud.Open.DynamicExpression;
 using Convert = System.Convert;
 
-namespace Alabo.Linq.Dynamic
-{
-    public static class DynamicService
-    {
+namespace Alabo.Linq.Dynamic {
+
+    public static class DynamicService {
+
         /// <summary>
         ///     动态调取Service服务
         /// </summary>
         /// <param name="entityName">实体名称：比如User,Order,Product等</param>
-        public static object Resolve(string entityName)
-        {
+        public static object Resolve(string entityName) {
             if (entityName.EndsWith("Service")) {
                 entityName = entityName.Substring(0, entityName.Length - 7);
             }
@@ -33,14 +32,11 @@ namespace Alabo.Linq.Dynamic
 
             var unitOfWork = Ioc.Resolve<IUnitOfWork>();
             var repositoryType = $"{entityName}Repository".GetTypeByName();
-            if (repositoryType == null)
-            {
+            if (repositoryType == null) {
                 var servcieType = $"{entityName}Service".GetTypeByName();
                 var service = Activator.CreateInstance(servcieType, unitOfWork);
                 return service;
-            }
-            else
-            {
+            } else {
                 var repository = Activator.CreateInstance(repositoryType, unitOfWork);
                 var servcieType = $"{entityName}Service".GetTypeByName();
                 var service = Activator.CreateInstance(servcieType, unitOfWork, repository);
@@ -52,18 +48,14 @@ namespace Alabo.Linq.Dynamic
         ///     动态获取List对象
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public static IEnumerable<T> ResolveList<T>(Expression<Func<T, bool>> predicate = null)
-        {
+        public static IEnumerable<T> ResolveList<T>(Expression<Func<T, bool>> predicate = null) {
             var entityName = typeof(T).Name;
             var service = Resolve(entityName);
             var target = new Interpreter().SetVariable("service", service);
-            if (predicate == null)
-            {
+            if (predicate == null) {
                 var result = target.Eval("service.GetList()");
                 return (IEnumerable<T>)result;
-            }
-            else
-            {
+            } else {
                 var parameters = new[]
                 {
                     new Parameter("predicate", predicate)
@@ -78,8 +70,7 @@ namespace Alabo.Linq.Dynamic
         /// </summary>
         /// <param name="entityName">实体名称：比如User,Order,Product等</param>
         public static Tuple<ServiceResult, object> ResolveMethod(string serviceString, string methodString,
-            params object[] paramaters)
-        {
+            params object[] paramaters) {
             return ResolveMethod(serviceString, methodString, false, paramaters);
         }
 
@@ -91,8 +82,7 @@ namespace Alabo.Linq.Dynamic
         /// <param name="runInUrl">是否可以在Url中运行</param>
         /// <param name="paramaters">参数</param>
         public static Tuple<ServiceResult, object> ResolveMethod(string serviceString, string methodString,
-            bool runInUrl = false, params object[] paramaters)
-        {
+            bool runInUrl = false, params object[] paramaters) {
             //var type = Reflection.GetAllServices().FirstOrDefault(e => e.Name.EndsWith(serviceString, StringComparison.OrdinalIgnoreCase));
 
             var instanse = Resolve(serviceString);
@@ -117,24 +107,20 @@ namespace Alabo.Linq.Dynamic
             var isMatching = false;
             ConstantExpression[] parameterExpressions = null;
 
-            foreach (var item in methods)
-            {
+            foreach (var item in methods) {
                 method = item;
                 isMatching = true;
-                if (paramaters != null && paramaters.Length > 0)
-                {
+                if (paramaters != null && paramaters.Length > 0) {
                     parameterExpressions = new ConstantExpression[paramaters.Length];
                     var methodParameters = method.GetParameters();
                     // 参数数量是否相同
-                    if (methodParameters.Count() != paramaters.Length)
-                    {
+                    if (methodParameters.Count() != paramaters.Length) {
                         isMatching = false;
                         continue;
                     }
 
                     for (var i = 0; i < paramaters.Length; i++) {
-                        try
-                        {
+                        try {
                             if (methodParameters[i].ParameterType == typeof(Guid)) {
                                 parameterExpressions[i] = Expression.Constant(Guid.Parse(paramaters[i].ToString()),
                                     methodParameters[i].ParameterType);
@@ -143,9 +129,7 @@ namespace Alabo.Linq.Dynamic
                                     Convert.ChangeType(paramaters[i], methodParameters[i].ParameterType),
                                     methodParameters[i].ParameterType);
                             }
-                        }
-                        catch (Exception ex)
-                        {
+                        } catch (Exception ex) {
                             Console.WriteLine(ex.Message);
                             isMatching = false;
                         }
@@ -158,8 +142,7 @@ namespace Alabo.Linq.Dynamic
             }
 
             // 如果方法在URl中执行，检查方法的安全设置
-            if (runInUrl)
-            {
+            if (runInUrl) {
                 var attribute = method.GetAttribute<MethodAttribute>();
                 if (attribute == null || attribute.RunInUrl == false) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("该方法未非安全方法，不能通过Url方式来执行，请设置Method特性"),
@@ -175,14 +158,11 @@ namespace Alabo.Linq.Dynamic
             var callExpression = parameterExpressions == null
                 ? Expression.Call(instanseExpression, method)
                 : Expression.Call(instanseExpression, method, parameterExpressions);
-            if (method.ReturnType == typeof(void))
-            {
+            if (method.ReturnType == typeof(void)) {
                 var lambdaExpression = Expression.Lambda<Action>(callExpression, null);
                 lambdaExpression.Compile()();
                 return Tuple.Create(ServiceResult.Success, new object());
-            }
-            else
-            {
+            } else {
                 var convertExpression = Expression.Convert(callExpression, typeof(object));
                 var lambdaExpression = Expression.Lambda<Func<object>>(convertExpression, null);
                 var result = lambdaExpression.Compile()();

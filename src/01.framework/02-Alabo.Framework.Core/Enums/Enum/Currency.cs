@@ -1,11 +1,11 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     [ClassProperty(Name = "货币类型")]
-    public enum Currency
-    {
+    public enum Currency {
+
         /// <summary>
         ///     人民币
         ///     Selection 表示颜色

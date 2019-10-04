@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Alabo.Randoms
-{
+namespace Alabo.Randoms {
+
     /// <summary>
     ///     随机数生成器
     /// </summary>
-    public interface IRandomBuilder
-    {
+    public interface IRandomBuilder {
+
         /// <summary>
         ///     生成随机字符串
         /// </summary>

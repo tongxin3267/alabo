@@ -1,13 +1,12 @@
 ﻿using Alabo.Domains.Trees;
 using System;
 
-namespace Alabo.Datas.Persistence
-{
+namespace Alabo.Datas.Persistence {
+
     /// <summary>
     ///     树型持久化对象
     /// </summary>
-    public abstract class TreePersistentObjectBase : TreePersistentObjectBase<Guid, Guid?>
-    {
+    public abstract class TreePersistentObjectBase : TreePersistentObjectBase<Guid, Guid?> {
     }
 
     /// <summary>
@@ -16,8 +15,8 @@ namespace Alabo.Datas.Persistence
     /// <typeparam name="TKey">标识类型</typeparam>
     /// <typeparam name="TParentId">父标识类型</typeparam>
     public abstract class TreePersistentObjectBase<TKey, TParentId> : PersistentObjectBase<TKey>, IParentId<TParentId>,
-        IPath, IEnabled, ISortId
-    {
+        IPath, IEnabled, ISortId {
+
         /// <summary>
         ///     启用
         /// </summary>

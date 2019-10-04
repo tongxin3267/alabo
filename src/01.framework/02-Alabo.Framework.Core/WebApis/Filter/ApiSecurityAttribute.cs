@@ -1,17 +1,16 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Alabo.Framework.Core.WebApis.Filter
-{
-    public class ApiSecurityAttribute : ExceptionFilterAttribute
-    {
+namespace Alabo.Framework.Core.WebApis.Filter {
+
+    public class ApiSecurityAttribute : ExceptionFilterAttribute {
+
         /// <summary>
         ///     安全级别
         /// </summary>
         public SecurityLevel SecurityLevel { get; set; } = SecurityLevel.Client;
 
-        public override void OnException(ExceptionContext context)
-        {
+        public override void OnException(ExceptionContext context) {
             base.OnException(context);
             //ApiResult exceptionApiResult = null;
             //if (RuntimeContext.Current.WebsiteConfig.IsDevelopment) {
@@ -31,8 +30,8 @@ namespace Alabo.Framework.Core.WebApis.Filter
     ///     安全级别
     /// </summary>
     [ClassProperty(Name = "安全级别")]
-    public enum SecurityLevel
-    {
+    public enum SecurityLevel {
+
         /// <summary>
         ///     ZkWeb客户端可以访问
         /// </summary>

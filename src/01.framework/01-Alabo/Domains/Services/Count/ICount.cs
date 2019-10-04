@@ -2,10 +2,10 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Alabo.Domains.Services.Count
-{
-    public interface ICount<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+namespace Alabo.Domains.Services.Count {
+
+    public interface ICount<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         /// <summary>
         ///     统计数量
         /// </summary>

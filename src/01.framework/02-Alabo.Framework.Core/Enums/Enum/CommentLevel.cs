@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     评论级别
     /// </summary>
     [ClassProperty(Name = "评论级别")]
-    public enum CommentLevel
-    {
+    public enum CommentLevel {
+
         /// <summary>
         ///     好评
         /// </summary>

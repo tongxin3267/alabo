@@ -1,11 +1,10 @@
 ﻿using Autofac;
 
-namespace Alabo.Dependency
-{
+namespace Alabo.Dependency {
+
     /// <summary>
     ///     配置
     /// </summary>
-    public abstract class ConfigBase : Module, IConfig
-    {
+    public abstract class ConfigBase : Module, IConfig {
     }
 }

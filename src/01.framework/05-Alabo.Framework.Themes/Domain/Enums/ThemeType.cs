@@ -1,14 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Alabo.Web.Mvc.Attributes;
+﻿using Alabo.Web.Mvc.Attributes;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Themes.Domain.Enums
-{
+namespace Alabo.Framework.Themes.Domain.Enums {
+
     /// <summary>
     ///     模板类型
     /// </summary>
     [ClassProperty(Name = "模板类型")]
-    public enum ThemeType
-    {
+    public enum ThemeType {
+
         /// <summary>
         ///     前端
         /// </summary>

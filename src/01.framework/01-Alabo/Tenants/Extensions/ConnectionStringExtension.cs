@@ -1,10 +1,9 @@
-﻿using System.Data.SqlClient;
-using Alabo.Runtime;
+﻿using Alabo.Runtime;
 
-namespace Alabo.Tenants.Extensions
-{
-    public static class ConnectionStringExtension
-    {
+namespace Alabo.Tenants.Extensions {
+
+    public static class ConnectionStringExtension {
+
         /// <summary>
         ///     Get master connection string
         /// </summary>

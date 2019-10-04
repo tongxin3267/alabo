@@ -4,14 +4,13 @@ using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Alabo.Framework.Basic.Relations.Controllers
-{
+namespace Alabo.Framework.Basic.Relations.Controllers {
+
     [ApiExceptionFilter]
     [Route("Api/RelationIndex/[action]")]
-    public class ApiRelationIndexController : ApiBaseController<RelationIndex, long>
-    {
-        public ApiRelationIndexController()
-        {
+    public class ApiRelationIndexController : ApiBaseController<RelationIndex, long> {
+
+        public ApiRelationIndexController() {
             BaseService = Resolve<IRelationIndexService>();
         }
     }

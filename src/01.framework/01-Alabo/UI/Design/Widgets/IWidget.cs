@@ -1,11 +1,11 @@
-﻿namespace Alabo.UI.Design.Widgets
-{
+﻿namespace Alabo.UI.Design.Widgets {
+
     /// <summary>
     ///     通用Widget获取接口
     ///     一个模块一个接口
     /// </summary>
-    public interface IWidget
-    {
+    public interface IWidget {
+
         /// <summary>
         ///     获取数据
         /// </summary>

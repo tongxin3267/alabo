@@ -12,31 +12,26 @@ using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Configuration;
 using ZKCloud.Open.ApiBase.Services;
 
-namespace Alabo.Framework.Themes.Domain.Services
-{
-    public class ThemeService : ServiceBase<Theme, ObjectId>, IThemeService
-    {
+namespace Alabo.Framework.Themes.Domain.Services {
+
+    public class ThemeService : ServiceBase<Theme, ObjectId>, IThemeService {
         private RestClientConfiguration _restClientConfiugration;
         private IServerAuthenticationManager _serverAuthenticationManager;
         private IThemeClient _themeClient;
 
         public ThemeService(IUnitOfWork unitOfWork, IRepository<Theme, ObjectId> repository) : base(unitOfWork,
-            repository)
-        {
+            repository) {
         }
 
         /// <summary>
         ///     获取默认模板
         /// </summary>
         /// <param name="clientType"></param>
-        public Theme GetDefaultTheme(ClientType clientType)
-        {
+        public Theme GetDefaultTheme(ClientType clientType) {
             var theme = GetSingle(r => r.ClientType == clientType && r.IsDefault);
-            if (theme == null)
-            {
+            if (theme == null) {
                 theme = GetSingle(r => r.ClientType == clientType);
-                if (theme != null)
-                {
+                if (theme != null) {
                     theme.IsDefault = true;
                     Update(theme);
                 }
@@ -45,8 +40,7 @@ namespace Alabo.Framework.Themes.Domain.Services
             return theme;
         }
 
-        public Theme GetDefaultTheme(ClientPageInput themePageInput)
-        {
+        public Theme GetDefaultTheme(ClientPageInput themePageInput) {
             // 读取默认模板
             Theme defaultTheme = null;
             if (themePageInput.ClientType == ClientType.PcWeb) {
@@ -56,11 +50,9 @@ namespace Alabo.Framework.Themes.Domain.Services
                 defaultTheme = GetSingle(r => r.ClientType == themePageInput.ClientType && r.IsDefault);
             }
 
-            if (defaultTheme == null)
-            {
+            if (defaultTheme == null) {
                 defaultTheme = GetSingle(r => r.ClientType == themePageInput.ClientType);
-                if (defaultTheme != null)
-                {
+                if (defaultTheme != null) {
                     defaultTheme.IsDefault = true;
                     Update(defaultTheme);
                 }
@@ -74,8 +66,7 @@ namespace Alabo.Framework.Themes.Domain.Services
             return defaultTheme;
         }
 
-        public void InitTheme(string objectId)
-        {
+        public void InitTheme(string objectId) {
             //Todo Token.ProjectId引起的bug问题，获取模板
             var model = _themeClient.GetThemeAndThemePagesAsync(_serverAuthenticationManager.Token.Token,
                 objectId.ToObjectId(), _serverAuthenticationManager.Token.ProjectId).GetAwaiter();
@@ -91,16 +82,14 @@ namespace Alabo.Framework.Themes.Domain.Services
             }
         }
 
-        public bool SetDefaultTheme(ObjectId themeId)
-        {
+        public bool SetDefaultTheme(ObjectId themeId) {
             var find = GetSingle(themeId);
             if (find == null) {
                 return false;
             }
 
             var list = GetList(r => r.Type == find.Type);
-            foreach (var item in list)
-            {
+            foreach (var item in list) {
                 if (item.Id == find.Id) {
                     item.IsDefault = true;
                 } else {

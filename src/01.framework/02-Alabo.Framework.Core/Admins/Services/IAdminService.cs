@@ -1,11 +1,11 @@
 ﻿using Alabo.Domains.Services;
 
-namespace Alabo.Framework.Core.Admins.Services
-{
+namespace Alabo.Framework.Core.Admins.Services {
+
     /// <summary>
     /// </summary>
-    public interface IAdminService : IService
-    {
+    public interface IAdminService : IService {
+
         /// <summary>
         ///     数据初始化
         /// </summary>

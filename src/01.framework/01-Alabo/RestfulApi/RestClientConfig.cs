@@ -9,10 +9,9 @@ using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace Alabo.RestfulApi
-{
-    public sealed class RestClientConfig
-    {
+namespace Alabo.RestfulApi {
+
+    public sealed class RestClientConfig {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IConfiguration _systemConfiguration;
 
@@ -20,18 +19,14 @@ namespace Alabo.RestfulApi
 
         private string _openApiKey;
 
-        public RestClientConfig(IHttpContextAccessor httpContextAccessor, IConfiguration systemConfiguration)
-        {
+        public RestClientConfig(IHttpContextAccessor httpContextAccessor, IConfiguration systemConfiguration) {
             _httpContextAccessor = httpContextAccessor;
             _systemConfiguration = systemConfiguration;
         }
 
-        public string OpenApiId
-        {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(_openApiId))
-                {
+        public string OpenApiId {
+            get {
+                if (string.IsNullOrWhiteSpace(_openApiId)) {
                     var openApiSetting = _systemConfiguration.GetSection("OpenApiSetting");
                     if (openApiSetting != null) {
                         _openApiId = openApiSetting.GetSection("Id")?.Value;
@@ -46,12 +41,9 @@ namespace Alabo.RestfulApi
         ///     Gets the open API key.
         /// </summary>
         /// <value>The open API key.</value>
-        public string OpenApiKey
-        {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(_openApiKey))
-                {
+        public string OpenApiKey {
+            get {
+                if (string.IsNullOrWhiteSpace(_openApiKey)) {
                     var openApiSetting = _systemConfiguration.GetSection("OpenApiSetting");
                     if (openApiSetting != null) {
                         _openApiKey = openApiSetting.GetSection("Key")?.Value;
@@ -67,15 +59,13 @@ namespace Alabo.RestfulApi
         /// </summary>
         /// <param name="tenant"></param>
         /// <returns></returns>
-        public async Task SetTenant(string tenant)
-        {
+        public async Task SetTenant(string tenant) {
             if (tenant.IsNullOrEmpty()) {
                 throw new ArgumentNullException(nameof(tenant));
             }
 
             var session = new Session();
-            var basicUser = new BasicUser
-            {
+            var basicUser = new BasicUser {
                 Tenant = tenant
             };
             var claimsPrincipal = session.CreateClaimsIdentity(basicUser);

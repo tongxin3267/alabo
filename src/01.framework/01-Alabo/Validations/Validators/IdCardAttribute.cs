@@ -5,19 +5,18 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 
-namespace Alabo.Validations.Validators
-{
+namespace Alabo.Validations.Validators {
+
     /// <summary>
     ///     身份证验证
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
-    public class IdCardAttribute : ValidationAttribute
-    {
+    public class IdCardAttribute : ValidationAttribute {
+
         /// <summary>
         ///     格式化错误消息
         /// </summary>
-        public override string FormatErrorMessage(string name)
-        {
+        public override string FormatErrorMessage(string name) {
             if (ErrorMessage == null && ErrorMessageResourceName == null) {
                 ErrorMessage = LibraryResource.InvalidIdCard;
             }
@@ -28,8 +27,7 @@ namespace Alabo.Validations.Validators
         /// <summary>
         ///     是否验证通过
         /// </summary>
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-        {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext) {
             if (value.SafeString().IsEmpty()) {
                 return ValidationResult.Success;
             }

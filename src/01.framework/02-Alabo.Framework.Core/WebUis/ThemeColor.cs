@@ -1,7 +1,6 @@
-﻿namespace Alabo.Framework.Core.WebUis
-{
-    public class ThemeColor
-    {
+﻿namespace Alabo.Framework.Core.WebUis {
+
+    public class ThemeColor {
         public const string Info = "info";
         public const string Success = "success";
         public const string Warning = "warning";

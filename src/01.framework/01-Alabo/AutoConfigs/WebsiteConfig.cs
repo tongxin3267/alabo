@@ -5,8 +5,8 @@ using Alabo.Web.Mvc.ViewModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.AutoConfigs
-{
+namespace Alabo.AutoConfigs {
+
     /// <summary>
     ///     网站设置
     /// </summary>
@@ -14,13 +14,12 @@ namespace Alabo.AutoConfigs
     [ClassProperty(Name = "网站设置", GroupName = "基本设置,联系信息,本地化信息,法律信息",
         Icon = "fa fa-puzzle-piece", SortOrder = 1, Description = "设置以及查看系统的详细信息",
         SideBarType = SideBarType.ControlSideBar)]
-    public class WebSiteConfig : BaseViewModel, IAutoConfig
-    {
+    public class WebSiteConfig : BaseViewModel, IAutoConfig {
+
         /// <summary>
         ///     SetDefault
         /// </summary>
-        public void SetDefault()
-        {
+        public void SetDefault() {
         }
 
         #region 第一个标签 基本设置

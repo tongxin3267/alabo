@@ -9,24 +9,21 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading;
 
-namespace Alabo.Datas.Stores.Page.Mongo
-{
+namespace Alabo.Datas.Stores.Page.Mongo {
+
     public abstract class GetPageMongoStore<TEntity, TKey> : GetPageAsyncMongoStore<TEntity, TKey>,
         IGetPageStore<TEntity, TKey>
-        where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
-        protected GetPageMongoStore(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
+        protected GetPageMongoStore(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
-        public PagedList<TEntity> GetPagedList(IPageQuery<TEntity> queryCriteria)
-        {
+        public PagedList<TEntity> GetPagedList(IPageQuery<TEntity> queryCriteria) {
             var predicate = queryCriteria.BuildExpression();
             return GetPagedList(predicate, queryCriteria.PageSize, queryCriteria.PageIndex);
         }
 
-        public PagedList<TEntity> GetPagedList(Expression<Func<TEntity, bool>> predicate, int pageSize, int pageIndex)
-        {
+        public PagedList<TEntity> GetPagedList(Expression<Func<TEntity, bool>> predicate, int pageSize, int pageIndex) {
             if (pageSize < 1) {
                 pageSize = 1;
             }
@@ -37,17 +34,14 @@ namespace Alabo.Datas.Stores.Page.Mongo
 
             long totalCount;
             List<TEntity> resultList;
-            if (predicate != null)
-            {
+            if (predicate != null) {
                 resultList = Collection.AsQueryable().Where(predicate)
                     .OrderByDescending(r => r.Id)
                     .Skip((pageIndex - 1) * pageSize)
                     .Take(pageSize)
                     .ToList(CancellationToken.None);
                 totalCount = Count(predicate);
-            }
-            else
-            {
+            } else {
                 resultList = Collection.AsQueryable()
                     .OrderByDescending(r => r.Id)
                     .Skip((pageIndex - 1) * pageSize)
@@ -58,23 +52,20 @@ namespace Alabo.Datas.Stores.Page.Mongo
             return PagedList<TEntity>.Create(resultList, totalCount, pageSize, pageIndex);
         }
 
-        public long PageCount(int pageSize, Expression<Func<TEntity, bool>> predicate)
-        {
+        public long PageCount(int pageSize, Expression<Func<TEntity, bool>> predicate) {
             var count = Count(predicate);
             var pageCount = pageSize / count + 1;
             return pageCount;
         }
 
-        public long PageCount(int pageSize)
-        {
+        public long PageCount(int pageSize) {
             var count = Count();
             var pageCount = pageSize / count + 1;
             return pageCount;
         }
 
         public IEnumerable<TEntity> GetListByPage(Expression<Func<TEntity, bool>> predicate, int pageSize,
-            int pageIndex)
-        {
+            int pageIndex) {
             if (pageSize < 1) {
                 pageSize = 1;
             }
@@ -97,8 +88,7 @@ namespace Alabo.Datas.Stores.Page.Mongo
         }
 
         public IEnumerable<TEntity> GetListByPageDesc(Expression<Func<TEntity, bool>> predicate, int pageSize,
-            int pageIndex)
-        {
+            int pageIndex) {
             if (pageSize < 1) {
                 pageSize = 1;
             }

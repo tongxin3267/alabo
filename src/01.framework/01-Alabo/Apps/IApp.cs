@@ -3,13 +3,13 @@ using System.Reflection;
 
 /// <summary>
 /// </summary>
-namespace Alabo.Apps
-{
+namespace Alabo.Apps {
+
     /// <summary>
     ///     Interface IApp
     /// </summary>
-    public interface IApp : IDisposable
-    {
+    public interface IApp : IDisposable {
+
         /// <summary>
         ///     Gets the name.
         /// </summary>

@@ -5,22 +5,19 @@ using Alabo.Domains.Services.Time;
 using System;
 using System.Collections.Generic;
 
-namespace Alabo.Domains.Services.Tree
-{
+namespace Alabo.Domains.Services.Tree {
+
     public abstract class TreeBase<TEntity, TKey> : TimeBase<TEntity, TKey>, ITree<TEntity, TKey>
-        where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
-        protected TreeBase(IUnitOfWork unitOfWork, IStore<TEntity, TKey> store) : base(unitOfWork, store)
-        {
+        where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
+        protected TreeBase(IUnitOfWork unitOfWork, IStore<TEntity, TKey> store) : base(unitOfWork, store) {
         }
 
-        public void SwapSort()
-        {
+        public void SwapSort() {
             throw new NotImplementedException();
         }
 
-        public List<string> GetMissingParentIds(IEnumerable<TEntity> entities)
-        {
+        public List<string> GetMissingParentIds(IEnumerable<TEntity> entities) {
             throw new NotImplementedException();
             //return Store.GetMissingParentIds(entities);
         }

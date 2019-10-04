@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Alabo.Exceptions.Prompts
-{
+namespace Alabo.Exceptions.Prompts {
+
     /// <summary>
     ///     异常提示
     /// </summary>
-    public interface IExceptionPrompt
-    {
+    public interface IExceptionPrompt {
+
         /// <summary>
         ///     获取异常提示
         /// </summary>

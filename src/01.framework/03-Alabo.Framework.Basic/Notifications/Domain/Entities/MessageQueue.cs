@@ -1,22 +1,22 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Datas.Ef.SqlServer;
+﻿using Alabo.Datas.Ef.SqlServer;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Web.Mvc.Attributes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.Message.Models;
 
-namespace Alabo.Framework.Basic.Notifications.Domain.Entities
-{
+namespace Alabo.Framework.Basic.Notifications.Domain.Entities {
+
     /// <summary>
     ///     消息发送队列
     ///     在Mongdob的事物未解决之前不能换成Mongdob，在分润中有事物操作
     /// </summary>
     [ClassProperty(Name = "消息发送队列")]
-    public class MessageQueue : AggregateDefaultRoot<MessageQueue>
-    {
+    public class MessageQueue : AggregateDefaultRoot<MessageQueue> {
+
         /// <summary>
         ///     短信模板id（非模板短信id为0）
         /// </summary>
@@ -84,18 +84,15 @@ namespace Alabo.Framework.Basic.Notifications.Domain.Entities
         public string IpAdress { get; set; } = string.Empty;
     }
 
-    public class MessageQueueTableMap : MsSqlAggregateRootMap<MessageQueue>
-    {
-        protected override void MapTable(EntityTypeBuilder<MessageQueue> builder)
-        {
+    public class MessageQueueTableMap : MsSqlAggregateRootMap<MessageQueue> {
+
+        protected override void MapTable(EntityTypeBuilder<MessageQueue> builder) {
             builder.ToTable("Basic_MessageQueue");
         }
 
-        protected override void MapProperties(EntityTypeBuilder<MessageQueue> builder)
-        {
+        protected override void MapProperties(EntityTypeBuilder<MessageQueue> builder) {
             //应用程序编号
             builder.HasKey(e => e.Id);
-         
         }
     }
 }

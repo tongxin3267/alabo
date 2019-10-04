@@ -5,23 +5,20 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Alabo.Datas.Stores.Add.EfCore
-{
+namespace Alabo.Datas.Stores.Add.EfCore {
+
     public abstract class AddAsyncEfCoreStore<TEntity, TKey> : AddEfCoreStore<TEntity, TKey>,
         IAddAsyncStore<TEntity, TKey>
-        where TEntity : class, IKey<TKey>, IVersion, IEntity
-    {
-        public AddAsyncEfCoreStore(IUnitOfWork unitOfWork) : base(unitOfWork)
-        {
+        where TEntity : class, IKey<TKey>, IVersion, IEntity {
+
+        public AddAsyncEfCoreStore(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
-        public Task AddManyAsync([Valid] IEnumerable<TEntity> entities)
-        {
+        public Task AddManyAsync([Valid] IEnumerable<TEntity> entities) {
             throw new NotImplementedException();
         }
 
-        public async Task<bool> AddSingleAsync(TEntity entity)
-        {
+        public async Task<bool> AddSingleAsync(TEntity entity) {
             if (entity == null) {
                 throw new ArgumentNullException(nameof(entity));
             }

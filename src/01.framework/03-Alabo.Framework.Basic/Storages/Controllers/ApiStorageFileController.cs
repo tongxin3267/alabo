@@ -1,7 +1,3 @@
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.IO;
-using System.Linq;
 using Alabo.Extensions;
 using Alabo.Framework.Basic.Storages.Domain.Entities;
 using Alabo.Framework.Basic.Storages.Domain.Services;
@@ -10,16 +6,19 @@ using Alabo.Framework.Core.WebApis.Controller;
 using Alabo.Framework.Core.WebApis.Filter;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.IO;
+using System.Linq;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Framework.Basic.Storages.Controllers
-{
+namespace Alabo.Framework.Basic.Storages.Controllers {
+
     [ApiExceptionFilter]
     [Route("Api/StorageFile/[action]")]
-    public class ApiStorageFileController : ApiBaseController<StorageFile, ObjectId>
-    {
-        public ApiStorageFileController()
-        {
+    public class ApiStorageFileController : ApiBaseController<StorageFile, ObjectId> {
+
+        public ApiStorageFileController() {
             BaseService = Resolve<IStorageFileService>();
         }
 
@@ -29,8 +28,7 @@ namespace Alabo.Framework.Basic.Storages.Controllers
         /// <param name="parameter">参数</param>
         [HttpPost]
         [Display(Description = "获取上传状态")]
-        public ApiResult<StorageFile> Upload(UploadApiInput parameter)
-        {
+        public ApiResult<StorageFile> Upload(UploadApiInput parameter) {
             if (!this.IsFormValid()) {
                 return ApiResult.Failure<StorageFile>(this.FormInvalidReason(),
                     MessageCodes.ParameterValidationFailure);
@@ -40,8 +38,7 @@ namespace Alabo.Framework.Basic.Storages.Controllers
                 parameter.SavePath = "/uploads/api/";
             }
 
-            try
-            {
+            try {
                 var formFile = Request.Form.Files;
 
                 foreach (var item in formFile) {
@@ -52,9 +49,7 @@ namespace Alabo.Framework.Basic.Storages.Controllers
 
                 var info = Resolve<IStorageFileService>().Upload(formFile, parameter.SavePath); //获取上传状态
                 return ApiResult.Success(info);
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 return ApiResult.Failure<StorageFile>(e.Message);
             }
         }

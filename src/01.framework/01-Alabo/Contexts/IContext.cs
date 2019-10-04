@@ -1,12 +1,12 @@
 ﻿using Alabo.Dependency;
 
-namespace Alabo.Contexts
-{
+namespace Alabo.Contexts {
+
     /// <summary>
     ///     上下文
     /// </summary>
-    public interface IContext : ISingletonDependency
-    {
+    public interface IContext : ISingletonDependency {
+
         /// <summary>
         ///     跟踪号
         /// </summary>

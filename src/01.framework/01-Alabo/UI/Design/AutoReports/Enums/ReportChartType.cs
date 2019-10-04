@@ -1,13 +1,13 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 
-namespace Alabo.UI.Design.AutoReports.Enums
-{
+namespace Alabo.UI.Design.AutoReports.Enums {
+
     /// <summary>
     ///     图表, 类型参考自 https://v-charts.js.org/#/line
     /// </summary>
     [ClassProperty(Name = "图表类型")]
-    public enum ReportChartType
-    {
+    public enum ReportChartType {
+
         /// <summary>
         ///     折线图
         /// </summary>

@@ -5,13 +5,13 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Convert = Alabo.Helpers.Convert;
 
-namespace Alabo.Web.Clients
-{
+namespace Alabo.Web.Clients {
+
     /// <summary>
     ///     Http请求
     /// </summary>
-    public class HttpRequest : HttpRequestBase<IHttpRequest>, IHttpRequest
-    {
+    public class HttpRequest : HttpRequestBase<IHttpRequest>, IHttpRequest {
+
         /// <summary>
         ///     执行成功的回调函数
         /// </summary>
@@ -27,16 +27,14 @@ namespace Alabo.Web.Clients
         /// </summary>
         /// <param name="httpMethod">Http动词</param>
         /// <param name="url">地址</param>
-        public HttpRequest(HttpMethod httpMethod, string url) : base(httpMethod, url)
-        {
+        public HttpRequest(HttpMethod httpMethod, string url) : base(httpMethod, url) {
         }
 
         /// <summary>
         ///     请求成功回调函数
         /// </summary>
         /// <param name="action">执行成功的回调函数,参数为响应结果</param>
-        public IHttpRequest OnSuccess(Action<string> action)
-        {
+        public IHttpRequest OnSuccess(Action<string> action) {
             _successAction = action;
             return this;
         }
@@ -45,8 +43,7 @@ namespace Alabo.Web.Clients
         ///     请求成功回调函数
         /// </summary>
         /// <param name="action">执行成功的回调函数,第一个参数为响应结果，第二个参数为状态码</param>
-        public IHttpRequest OnSuccess(Action<string, HttpStatusCode> action)
-        {
+        public IHttpRequest OnSuccess(Action<string, HttpStatusCode> action) {
             _successStatusCodeAction = action;
             return this;
         }
@@ -54,16 +51,14 @@ namespace Alabo.Web.Clients
         /// <summary>
         ///     获取Json结果
         /// </summary>
-        public async Task<TResult> ResultFromJsonAsync<TResult>()
-        {
+        public async Task<TResult> ResultFromJsonAsync<TResult>() {
             return Json.ToObject<TResult>(await ResultAsync());
         }
 
         /// <summary>
         ///     成功处理操作
         /// </summary>
-        protected override void SuccessHandler(string result, HttpStatusCode statusCode, string contentType)
-        {
+        protected override void SuccessHandler(string result, HttpStatusCode statusCode, string contentType) {
             _successAction?.Invoke(result);
             _successStatusCodeAction?.Invoke(result, statusCode);
         }
@@ -73,8 +68,8 @@ namespace Alabo.Web.Clients
     ///     Http请求
     /// </summary>
     public class HttpRequest<TResult> : HttpRequestBase<IHttpRequest<TResult>>, IHttpRequest<TResult>
-        where TResult : class
-    {
+        where TResult : class {
+
         /// <summary>
         ///     执行成功的转换函数
         /// </summary>
@@ -95,8 +90,7 @@ namespace Alabo.Web.Clients
         /// </summary>
         /// <param name="httpMethod">Http动词</param>
         /// <param name="url">地址</param>
-        public HttpRequest(HttpMethod httpMethod, string url) : base(httpMethod, url)
-        {
+        public HttpRequest(HttpMethod httpMethod, string url) : base(httpMethod, url) {
         }
 
         /// <summary>
@@ -104,8 +98,7 @@ namespace Alabo.Web.Clients
         /// </summary>
         /// <param name="action">执行成功的回调函数,参数为响应结果</param>
         /// <param name="convertAction">将结果字符串转换为指定类型，当默认转换实现无法转换时使用</param>
-        public IHttpRequest<TResult> OnSuccess(Action<TResult> action, Func<string, TResult> convertAction = null)
-        {
+        public IHttpRequest<TResult> OnSuccess(Action<TResult> action, Func<string, TResult> convertAction = null) {
             _successAction = action;
             _convertAction = convertAction;
             return this;
@@ -117,8 +110,7 @@ namespace Alabo.Web.Clients
         /// <param name="action">执行成功的回调函数,第一个参数为响应结果，第二个参数为状态码</param>
         /// <param name="convertAction">将结果字符串转换为指定类型，当默认转换实现无法转换时使用</param>
         public IHttpRequest<TResult> OnSuccess(Action<TResult, HttpStatusCode> action,
-            Func<string, TResult> convertAction = null)
-        {
+            Func<string, TResult> convertAction = null) {
             _successStatusCodeAction = action;
             _convertAction = convertAction;
             return this;
@@ -127,16 +119,14 @@ namespace Alabo.Web.Clients
         /// <summary>
         ///     获取Json结果
         /// </summary>
-        public async Task<TResult> ResultFromJsonAsync()
-        {
+        public async Task<TResult> ResultFromJsonAsync() {
             return Json.ToObject<TResult>(await ResultAsync());
         }
 
         /// <summary>
         ///     成功处理操作
         /// </summary>
-        protected override void SuccessHandler(string result, HttpStatusCode statusCode, string contentType)
-        {
+        protected override void SuccessHandler(string result, HttpStatusCode statusCode, string contentType) {
             var successResult = ConvertTo(result, contentType);
             _successAction?.Invoke(successResult);
             _successStatusCodeAction?.Invoke(successResult, statusCode);
@@ -145,8 +135,7 @@ namespace Alabo.Web.Clients
         /// <summary>
         ///     将结果字符串转换为指定类型
         /// </summary>
-        private TResult ConvertTo(string result, string contentType)
-        {
+        private TResult ConvertTo(string result, string contentType) {
             if (typeof(TResult) == typeof(string)) {
                 return Convert.To<TResult>(result);
             }

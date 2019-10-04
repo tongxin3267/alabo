@@ -1,14 +1,14 @@
 ﻿using Alabo.Domains.Entities;
 using System;
 
-namespace Alabo.UI.Design.AutoLists
-{
+namespace Alabo.UI.Design.AutoLists {
+
     /// <summary>
     ///     自动列表接口
     ///     对应移动端zk-list
     /// </summary>
-    public interface IAutoList
-    {
+    public interface IAutoList {
+
         /// <summary>
         ///     通用分页查询列表
         /// </summary>

@@ -3,13 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Abstractions
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Abstractions {
+
     /// <summary>
     ///     Where子句
     /// </summary>
-    public interface IWhereClause : ICondition
-    {
+    public interface IWhereClause : ICondition {
+
         /// <summary>
         ///     And连接条件
         /// </summary>

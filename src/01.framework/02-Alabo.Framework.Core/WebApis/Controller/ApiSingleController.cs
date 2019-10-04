@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Framework.Core.WebApis.Controller
-{
+namespace Alabo.Framework.Core.WebApis.Controller {
+
     public abstract class ApiSingleController<TEntity, TKey> : ApiSaveController<TEntity, TKey>
-        where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+        where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         #region 根据Id和字段名称,获取单个字段的值
 
         /// <summary>
@@ -18,8 +18,7 @@ namespace Alabo.Framework.Core.WebApis.Controller
         /// <param name="field">字段</param>
         [Display(Description = " 根据Id和字段名称,获取单个字段的值")]
         [HttpGet]
-        public ApiResult QueryFieldValue(string id, string field)
-        {
+        public ApiResult QueryFieldValue(string id, string field) {
             if (field.IsNullOrEmpty()) {
                 return ApiResult.Failure("Field不能为空");
             }
@@ -41,8 +40,7 @@ namespace Alabo.Framework.Core.WebApis.Controller
         /// </summary>
         [HttpGet]
         [Display(Description = "根据Id获取下一条记录")]
-        public ApiResult<TEntity> QueryDefault()
-        {
+        public ApiResult<TEntity> QueryDefault() {
             if (BaseService == null) {
                 return ApiResult.Failure<TEntity>("请在控制器中定义BaseService");
             }
@@ -65,8 +63,7 @@ namespace Alabo.Framework.Core.WebApis.Controller
         /// <param name="id">标识</param>
         [HttpGet]
         [Display(Description = "根据Id获取下一条记录")]
-        public ApiResult<TEntity> NextById(string id)
-        {
+        public ApiResult<TEntity> NextById(string id) {
             if (BaseService == null) {
                 return ApiResult.Failure<TEntity>("请在控制器中定义BaseService");
             }
@@ -93,8 +90,7 @@ namespace Alabo.Framework.Core.WebApis.Controller
         /// <param name="id">标识</param>
         [HttpGet]
         [Display(Description = "根据Id获取上一条记录")]
-        public ApiResult<TEntity> PrexById(string id)
-        {
+        public ApiResult<TEntity> PrexById(string id) {
             if (BaseService == null) {
                 return ApiResult.Failure<TEntity>("请在控制器中定义BaseService");
             }

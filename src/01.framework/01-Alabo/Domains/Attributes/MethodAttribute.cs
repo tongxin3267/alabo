@@ -1,7 +1,7 @@
 ﻿using System;
 
-namespace Alabo.Domains.Attributes
-{
+namespace Alabo.Domains.Attributes {
+
     /// <summary>
     ///     ///
     ///     <summary>
@@ -9,8 +9,8 @@ namespace Alabo.Domains.Attributes
     ///     </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
     /// </summary>
-    public class MethodAttribute : Attribute
-    {
+    public class MethodAttribute : Attribute {
+
         /// <summary>
         ///     通过Url的方式来执行
         ///     可以

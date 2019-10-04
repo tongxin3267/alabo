@@ -3,13 +3,13 @@ using Alabo.Domains.Entities;
 using Alabo.Domains.UnitOfWork;
 using Alabo.Validations.Aspects;
 
-namespace Alabo.Domains.Services.Add
-{
+namespace Alabo.Domains.Services.Add {
+
     /// <summary>
     ///     创建操作
     /// </summary>
-    public interface IAdd<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey>
-    {
+    public interface IAdd<TEntity, in TKey> where TEntity : class, IAggregateRoot<TEntity, TKey> {
+
         /// <summary>
         ///     创建
         /// </summary>

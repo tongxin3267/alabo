@@ -1,17 +1,16 @@
-﻿namespace Alabo.Apps
-{
+﻿namespace Alabo.Apps {
+
     /// <summary>
     ///     Class CompilerResult.
     /// </summary>
-    public class CompilerResult
-    {
+    public class CompilerResult {
+
         /// <summary>
         ///     Initializes a new instance of the <see cref="CompilerResult" /> class.
         /// </summary>
         /// <param name="success">if set to <c>true</c> [success].</param>
         /// <param name="message">The message.</param>
-        internal CompilerResult(bool success, string message)
-        {
+        internal CompilerResult(bool success, string message) {
             Success = success;
             Message = message;
         }

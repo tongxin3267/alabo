@@ -1,13 +1,13 @@
 ﻿using Alabo.Validations;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Tenants.Domains.Dtos
-{
+namespace Alabo.Framework.Core.Tenants.Domains.Dtos {
+
     /// <summary>
     ///     租户输入模型
     /// </summary>
-    public class TenantInit
-    {
+    public class TenantInit {
+
         /// <summary>
         /// </summary>
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]

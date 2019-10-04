@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Clauses
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Clauses {
+
     /// <summary>
     ///     Select子句
     /// </summary>
-    public class SelectClause : ISelectClause
-    {
+    public class SelectClause : ISelectClause {
+
         /// <summary>
         ///     列名集合
         /// </summary>
@@ -38,8 +38,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <param name="dialect">方言</param>
         /// <param name="resolver">实体解析器</param>
         /// <param name="register">实体注册器</param>
-        public SelectClause(IDialect dialect, IEntityResolver resolver, IEntityAliasRegister register)
-        {
+        public SelectClause(IDialect dialect, IEntityResolver resolver, IEntityAliasRegister register) {
             _columns = new List<ColumnCollection>();
             _dialect = dialect;
             _resolver = resolver;
@@ -51,8 +50,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// </summary>
         /// <param name="columns">列名</param>
         /// <param name="tableAlias">表别名</param>
-        public void Select(string columns, string tableAlias = null)
-        {
+        public void Select(string columns, string tableAlias = null) {
             if (string.IsNullOrWhiteSpace(columns)) {
                 return;
             }
@@ -64,8 +62,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         ///     设置列名
         /// </summary>
         /// <param name="columns">列名</param>
-        public void Select<TEntity>(Expression<Func<TEntity, object[]>> columns) where TEntity : class
-        {
+        public void Select<TEntity>(Expression<Func<TEntity, object[]>> columns) where TEntity : class {
             if (columns == null) {
                 return;
             }
@@ -79,8 +76,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         /// <param name="column">列名</param>
         /// <param name="columnAlias">列别名</param>
         public void Select<TEntity>(Expression<Func<TEntity, object>> column, string columnAlias = null)
-            where TEntity : class
-        {
+            where TEntity : class {
             if (column == null) {
                 return;
             }
@@ -93,24 +89,21 @@ namespace Alabo.Datas.Sql.Queries.Builders.Clauses
         ///     添加到Select子句
         /// </summary>
         /// <param name="sql">Sql语句</param>
-        public void AppendSql(string sql)
-        {
+        public void AppendSql(string sql) {
             _columns.Add(new ColumnCollection(sql, raw: true));
         }
 
         /// <summary>
         ///     输出Sql
         /// </summary>
-        public string ToSql()
-        {
+        public string ToSql() {
             return $"Select {GetColumns()}";
         }
 
         /// <summary>
         ///     获取列名
         /// </summary>
-        protected virtual string GetColumns()
-        {
+        protected virtual string GetColumns() {
             if (_columns.Count == 0) {
                 return "*";
             }

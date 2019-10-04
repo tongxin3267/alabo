@@ -1,13 +1,13 @@
 ﻿using Alabo.Datas.Sql.Queries.Builders.Abstractions;
 using System;
 
-namespace Alabo.Datas.Sql.Queries.Builders.Core
-{
+namespace Alabo.Datas.Sql.Queries.Builders.Core {
+
     /// <summary>
     ///     排序项
     /// </summary>
-    public class OrderByItem
-    {
+    public class OrderByItem {
+
         /// <summary>
         ///     初始化排序项
         /// </summary>
@@ -15,8 +15,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// <param name="desc">是否倒排</param>
         /// <param name="entity">实体类型</param>
         /// <param name="raw">使用原始值</param>
-        public OrderByItem(string order, bool desc = false, Type entity = null, bool raw = false)
-        {
+        public OrderByItem(string order, bool desc = false, Type entity = null, bool raw = false) {
             Column = Alabo.Extensions.Extensions.SafeString(order);
             Desc = desc;
             Entity = entity;
@@ -25,8 +24,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
                 return;
             }
 
-            if (Column.ToLower().EndsWith("desc"))
-            {
+            if (Column.ToLower().EndsWith("desc")) {
                 Desc = true;
                 Column = Column.Remove(Column.Length - 4, 4);
             }
@@ -57,8 +55,7 @@ namespace Alabo.Datas.Sql.Queries.Builders.Core
         /// </summary>
         /// <param name="dialect">Sql方言</param>
         /// <param name="register">实体别名注册器</param>
-        public string ToSql(IDialect dialect, IEntityAliasRegister register)
-        {
+        public string ToSql(IDialect dialect, IEntityAliasRegister register) {
             if (Raw) {
                 return Column;
             }

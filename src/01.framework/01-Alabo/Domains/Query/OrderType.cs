@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Domains.Query
-{
+namespace Alabo.Domains.Query {
+
     /// <summary>
     ///     排序方式
     /// </summary>
     [ClassProperty(Name = "排序方式")]
-    public enum OrderType
-    {
+    public enum OrderType {
+
         /// <summary>
         ///     倒序
         /// </summary>

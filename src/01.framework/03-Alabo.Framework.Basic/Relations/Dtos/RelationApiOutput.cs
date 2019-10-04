@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Basic.Relations.Dtos
-{
+namespace Alabo.Framework.Basic.Relations.Dtos {
+
     /// <summary>
     ///     级联数据类型：包含分类与标签
     /// </summary>
-    public class RelationApiOutput
-    {
+    public class RelationApiOutput {
+
         /// <summary>
         ///     Id
         /// </summary>

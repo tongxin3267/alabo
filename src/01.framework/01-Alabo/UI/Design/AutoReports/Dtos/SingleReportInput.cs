@@ -5,13 +5,13 @@ using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.UI.Design.AutoReports.Dtos
-{
+namespace Alabo.UI.Design.AutoReports.Dtos {
+
     /// <summary>
     ///     单数据类型，输入模型
     /// </summary>
-    public class SingleReportInput
-    {
+    public class SingleReportInput {
+
         /// <summary>
         ///     用来做缓存
         /// </summary>

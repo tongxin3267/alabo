@@ -1,11 +1,11 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     [ClassProperty(Name = "推荐方式")]
-    public enum RecommendModel
-    {
+    public enum RecommendModel {
+
         /// <summary>
         ///     任意推荐
         ///     会员推荐任意其他类型的会员

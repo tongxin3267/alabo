@@ -1,10 +1,10 @@
-﻿namespace Alabo.Datas.Sql.Queries.Builders.Abstractions
-{
+﻿namespace Alabo.Datas.Sql.Queries.Builders.Abstractions {
+
     /// <summary>
     ///     From子句
     /// </summary>
-    public interface IFromClause
-    {
+    public interface IFromClause {
+
         /// <summary>
         ///     设置表名
         /// </summary>

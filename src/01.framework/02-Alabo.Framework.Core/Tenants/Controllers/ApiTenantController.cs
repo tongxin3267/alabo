@@ -10,13 +10,12 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Framework.Core.Tenants.Controllers
-{
+namespace Alabo.Framework.Core.Tenants.Controllers {
+
     [Route("Api/Tenant/[action]")]
-    public class ApiTenantController : ApiBaseController<Tenant, ObjectId>
-    {
-        public ApiTenantController()
-        {
+    public class ApiTenantController : ApiBaseController<Tenant, ObjectId> {
+
+        public ApiTenantController() {
             BaseService = Resolve<ITenantService>();
         }
 
@@ -29,8 +28,7 @@ namespace Alabo.Framework.Core.Tenants.Controllers
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public ApiResult DeleteTenant([FromBody] TenantInit tenantInit)
-        {
+        public ApiResult DeleteTenant([FromBody] TenantInit tenantInit) {
             if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason());
             }
@@ -51,8 +49,7 @@ namespace Alabo.Framework.Core.Tenants.Controllers
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public ApiResult InitAll([FromBody] TenantInit tenantInit)
-        {
+        public ApiResult InitAll([FromBody] TenantInit tenantInit) {
             if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason());
             }
@@ -73,8 +70,7 @@ namespace Alabo.Framework.Core.Tenants.Controllers
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public ApiResult InitDefault([FromBody] TenantInit tenantInit)
-        {
+        public ApiResult InitDefault([FromBody] TenantInit tenantInit) {
             if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason());
             }
@@ -95,8 +91,7 @@ namespace Alabo.Framework.Core.Tenants.Controllers
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public ApiResult InitTheme([FromBody] TenantInit tenantInit)
-        {
+        public ApiResult InitTheme([FromBody] TenantInit tenantInit) {
             if (!this.IsFormValid()) {
                 return ApiResult.Failure(this.FormInvalidReason());
             }
@@ -116,8 +111,7 @@ namespace Alabo.Framework.Core.Tenants.Controllers
         /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
-        public ApiResult NoTenant(string tenant)
-        {
+        public ApiResult NoTenant(string tenant) {
             var result = Resolve<ITenantCreateService>().NoTenant(tenant);
             return ToResult(result);
         }
@@ -129,8 +123,7 @@ namespace Alabo.Framework.Core.Tenants.Controllers
         /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
-        public ApiResult HaveTenant(string tenant)
-        {
+        public ApiResult HaveTenant(string tenant) {
             var result = Resolve<ITenantCreateService>().HaveTenant(tenant);
             return ToResult(result);
         }
@@ -142,15 +135,13 @@ namespace Alabo.Framework.Core.Tenants.Controllers
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public ApiResult CreateSassTenant([FromBody] Tenant tenant)
-        {
+        public ApiResult CreateSassTenant([FromBody] Tenant tenant) {
             if (tenant == null) {
                 return ApiResult.Failure("对象不能为空");
             }
 
             var result = Resolve<ITenantCreateService>().InitTenantDatabase(tenant.Sign);
-            if (result.Succeeded)
-            {
+            if (result.Succeeded) {
                 tenant.DatabaseName = RuntimeContext.GetTenantMongodbDataBase(tenant.Sign);
                 Resolve<ITenantService>().Add(tenant);
             }

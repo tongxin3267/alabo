@@ -1,14 +1,13 @@
 ﻿using Alabo.Web.Mvc.ViewModel;
 using System;
 
-namespace Alabo.Domains.Query.Dto
-{
+namespace Alabo.Domains.Query.Dto {
+
     /// <summary>
     ///     A shortcut of <see cref="EntityDto{TPrimaryKey}" /> for most used primary key type (<see cref="int" />).
     /// </summary>
     [Serializable]
-    public class EntityDto : EntityDto<long>, IEntityDto
-    {
+    public class EntityDto : EntityDto<long>, IEntityDto {
         ///// <summary>
         ///// Creates a new <see cref="EntityDto"/> object.
         ///// </summary>
@@ -23,8 +22,7 @@ namespace Alabo.Domains.Query.Dto
     /// </summary>
     /// <typeparam name="TPrimaryKey">Type of the primary key</typeparam>
     [Serializable]
-    public class EntityDto<TPrimaryKey> : BaseViewModel, IEntityDto<TPrimaryKey>
-    {
+    public class EntityDto<TPrimaryKey> : BaseViewModel, IEntityDto<TPrimaryKey> {
         ///// <summary>
         ///// Id of the entity.
         ///// </summary>

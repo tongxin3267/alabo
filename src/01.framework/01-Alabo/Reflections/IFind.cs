@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Alabo.Reflections
-{
+namespace Alabo.Reflections {
+
     /// <summary>
     ///     类型查找器
     /// </summary>
-    public interface IFind
-    {
+    public interface IFind {
+
         /// <summary>
         ///     获取程序集列表
         /// </summary>

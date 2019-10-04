@@ -3,13 +3,13 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace Alabo.Apps
-{
+namespace Alabo.Apps {
+
     /// <summary>
     ///     Class AppBase.
     /// </summary>
-    public abstract class AppBase : IApp
-    {
+    public abstract class AppBase : IApp {
+
         /// <summary>
         ///     Gets the application base directory.
         /// </summary>
@@ -38,8 +38,7 @@ namespace Alabo.Apps
         /// <summary>
         ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
-        public void Dispose()
-        {
+        public void Dispose() {
         }
 
         /// <summary>
@@ -48,8 +47,7 @@ namespace Alabo.Apps
         /// <param name="appAssembly">The application assembly.</param>
         /// <param name="appBaseDirectory">The application base directory.</param>
         /// <param name="type">The 类型.</param>
-        public void Initialize(Assembly appAssembly, string appBaseDirectory, AppType type)
-        {
+        public void Initialize(Assembly appAssembly, string appBaseDirectory, AppType type) {
             AppAssembly = appAssembly;
             AppBaseDirectory = appBaseDirectory;
             Type = type;
@@ -61,25 +59,19 @@ namespace Alabo.Apps
         /// <summary>
         ///     Initializes the settings.
         /// </summary>
-        private void InitializeSettings()
-        {
+        private void InitializeSettings() {
             var appConfigPath = Path.Combine(AppBaseDirectory, "app.json");
-            if (File.Exists(appConfigPath))
-            {
+            if (File.Exists(appConfigPath)) {
                 //has config file
-                using (var fs = new FileStream(appConfigPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-                {
-                    using (var sr = new StreamReader(fs))
-                    {
+                using (var fs = new FileStream(appConfigPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) {
+                    using (var sr = new StreamReader(fs)) {
                         var appConfig = JsonConvert.DeserializeAnonymousType(sr.ReadToEnd(),
                             new { Name = string.Empty, Description = string.Empty });
                         Name = appConfig.Name;
                         Description = appConfig.Description;
                     }
                 }
-            }
-            else
-            {
+            } else {
                 //no config file, create auto config message
                 Name = appConfigPath.Split('\\').Reverse().Skip(2).FirstOrDefault();
                 if (string.IsNullOrWhiteSpace(Name)) {

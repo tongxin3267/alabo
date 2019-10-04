@@ -4,10 +4,10 @@ using Alabo.Web.Mvc.Attributes;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.UI.Design.AutoVideos
-{
-    public class AutoVideo
-    {
+namespace Alabo.UI.Design.AutoVideos {
+
+    public class AutoVideo {
+
         /// <summary>
         ///     链接名称
         /// </summary>

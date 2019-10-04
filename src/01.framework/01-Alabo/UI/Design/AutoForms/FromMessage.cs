@@ -1,20 +1,19 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using Alabo.Web.Mvc.ViewModel;
 
-namespace Alabo.UI.Design.AutoForms
-{
+namespace Alabo.UI.Design.AutoForms {
+
     /// <summary>
     ///     form信息框
     /// </summary>
-    public class FromMessage
-    {
+    public class FromMessage {
+
         /// <summary>
         ///     表单提示信息构造函数
         /// </summary>
         /// <param name="formMessageType">提示方式，失败或成功</param>
         /// <param name="message">提示信息</param>
-        public FromMessage(FromMessageType formMessageType, string message)
-        {
+        public FromMessage(FromMessageType formMessageType, string message) {
             Type = Type;
             Message = message;
             Link = new ViewLink("返回首页", "pages/index");
@@ -27,8 +26,7 @@ namespace Alabo.UI.Design.AutoForms
         /// <param name="message">提示信息</param>
         /// <param name="linkName">主链接文字</param>
         /// <param name="linkUrl">主链接Url</param>
-        public FromMessage(FromMessageType formMessageType, string message, string linkName, string linkUrl)
-        {
+        public FromMessage(FromMessageType formMessageType, string message, string linkName, string linkUrl) {
             Type = Type;
             Message = message;
             Link = new ViewLink(linkName, linkUrl);
@@ -56,8 +54,8 @@ namespace Alabo.UI.Design.AutoForms
     ///     返回信息类型
     /// </summary>
     [ClassProperty(Name = "返回信息类型")]
-    public enum FromMessageType
-    {
+    public enum FromMessageType {
+
         /// <summary>
         ///     操作成功
         /// </summary>

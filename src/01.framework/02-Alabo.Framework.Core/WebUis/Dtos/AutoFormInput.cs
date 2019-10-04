@@ -3,13 +3,13 @@ using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.WebUis.Dtos
-{
+namespace Alabo.Framework.Core.WebUis.Dtos {
+
     /// <summary>
     ///     view form
     /// </summary>
-    public class AutoFormInput
-    {
+    public class AutoFormInput {
+
         /// <summary>
         ///     type
         /// </summary>

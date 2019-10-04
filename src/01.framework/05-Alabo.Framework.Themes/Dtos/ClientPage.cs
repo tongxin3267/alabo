@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using Alabo.Framework.Themes.Domain.Entities;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Alabo.Framework.Themes.Domain.Entities;
 
-namespace Alabo.Framework.Themes.Dtos
-{
+namespace Alabo.Framework.Themes.Dtos {
+
     /// <summary>
     ///     客户端页面设置
     /// </summary>
-    public class ClientPage
-    {
+    public class ClientPage {
+
         /// <summary>
         ///     页面Id
         /// </summary>

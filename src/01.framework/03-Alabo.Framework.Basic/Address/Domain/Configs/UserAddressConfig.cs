@@ -1,12 +1,12 @@
 ﻿using Alabo.AutoConfigs;
 
-namespace Alabo.Framework.Basic.Address.Domain.Configs
-{
+namespace Alabo.Framework.Basic.Address.Domain.Configs {
+
     /// <summary>
     ///     地址配置文件
     /// </summary>
-    public class UserAddressConfig : IAutoConfig
-    {
+    public class UserAddressConfig : IAutoConfig {
+
         /// <summary>
         ///     是否开启配置
         ///     如果不开启则不限制
@@ -31,8 +31,7 @@ namespace Alabo.Framework.Basic.Address.Domain.Configs
         /// <summary>
         ///     设置默认值
         /// </summary>
-        public void SetDefault()
-        {
+        public void SetDefault() {
             IsEnble = false;
             MaxNumber = 0;
         }

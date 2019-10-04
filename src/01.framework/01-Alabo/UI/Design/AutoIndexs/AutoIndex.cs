@@ -1,10 +1,10 @@
 ﻿using Alabo.UI.Design.AutoReports;
 using Alabo.UI.Design.AutoTables;
 
-namespace Alabo.UI.Design.AutoIndexs
-{
-    public class AutoIndex
-    {
+namespace Alabo.UI.Design.AutoIndexs {
+
+    public class AutoIndex {
+
         /// <summary>
         ///     名称
         /// </summary>
@@ -18,8 +18,8 @@ namespace Alabo.UI.Design.AutoIndexs
         public string Icon { get; set; } = UIHelper.Icon;
     }
 
-    public class AutoIndexItem
-    {
+    public class AutoIndexItem {
+
         /// <summary>
         ///     表格
         /// </summary>

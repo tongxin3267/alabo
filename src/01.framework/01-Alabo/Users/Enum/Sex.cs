@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Users.Enum
-{
+namespace Alabo.Users.Enum {
+
     /// <summary>
     ///     性别
     /// </summary>
     [ClassProperty(Name = "性别")]
-    public enum Sex
-    {
+    public enum Sex {
+
         /// <summary>
         ///     男
         /// </summary>

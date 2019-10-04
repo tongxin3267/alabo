@@ -1,13 +1,13 @@
 ﻿using Alabo.Domains.Entities;
 
-namespace Alabo.UI.Design.AutoForms
-{
+namespace Alabo.UI.Design.AutoForms {
+
     /// <summary>
     ///     自动表单接口
     ///     继承的类，必须以AutoForm结尾
     /// </summary>
-    public interface IAutoForm : IUI
-    {
+    public interface IAutoForm : IUI {
+
         /// <summary>
         ///     通过Id获取自动视图，视图Id可以为空
         /// </summary>

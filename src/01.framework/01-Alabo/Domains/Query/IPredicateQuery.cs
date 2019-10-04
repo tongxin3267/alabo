@@ -2,13 +2,13 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Alabo.Domains.Query
-{
+namespace Alabo.Domains.Query {
+
     /// <summary>
     ///     Interface IPredicateQuery
     /// </summary>
-    public interface IPredicateQuery<T> : IExpressionQuery<T> where T : class, IEntity
-    {
+    public interface IPredicateQuery<T> : IExpressionQuery<T> where T : class, IEntity {
+
         /// <summary>
         ///     初始默认值，一般为true
         /// </summary>

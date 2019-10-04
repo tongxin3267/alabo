@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Alabo.Dependency
-{
+namespace Alabo.Dependency {
+
     /// <summary>
     ///     依赖注册器
     /// </summary>
-    public interface IDependencyRegistrar
-    {
+    public interface IDependencyRegistrar {
+
         /// <summary>
         ///     注册依赖
         /// </summary>

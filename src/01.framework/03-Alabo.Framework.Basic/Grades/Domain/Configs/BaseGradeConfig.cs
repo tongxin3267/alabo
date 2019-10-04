@@ -1,17 +1,17 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Alabo.Domains.Entities.Core;
+﻿using Alabo.Domains.Entities.Core;
 using Alabo.Domains.Enums;
 using Alabo.Validations;
 using Alabo.Web.Mvc.Attributes;
+using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Basic.Grades.Domain.Configs
-{
+namespace Alabo.Framework.Basic.Grades.Domain.Configs {
+
     /// <summary>
     ///     会员等级基类函数
     /// </summary>
-    public class BaseGradeConfig : AutoConfigBase
-    {
+    public class BaseGradeConfig : AutoConfigBase {
+
         /// <summary>
         ///     Gets or sets the user type identifier.
         /// </summary>

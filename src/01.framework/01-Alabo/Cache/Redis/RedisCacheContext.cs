@@ -1,12 +1,12 @@
 ﻿using StackExchange.Redis;
 
-namespace Alabo.Cache.Redis
-{
+namespace Alabo.Cache.Redis {
+
     /// <summary>
     ///     Class RedisCacheContext.
     /// </summary>
-    public class RedisCacheContext : ICacheContext
-    {
+    public class RedisCacheContext : ICacheContext {
+
         /// <summary>
         ///     The object cache index
         /// </summary>
@@ -56,8 +56,7 @@ namespace Alabo.Cache.Redis
         ///     Initializes a new instance of the <see cref="RedisCacheContext" /> class.
         /// </summary>
         /// <param name="configuration">The configuration.</param>
-        public RedisCacheContext(ICacheConfiguration configuration)
-        {
+        public RedisCacheContext(ICacheConfiguration configuration) {
             //_redisConnection = ConnectionMultiplexer.Connect(configuration.CacheConfigurationString);
             var configurationOptions = ConfigurationOptions.Parse(configuration.CacheConfigurationString);
             configurationOptions.ConnectTimeout = 60000;
@@ -69,10 +68,8 @@ namespace Alabo.Cache.Redis
         /// <summary>
         ///     Gets the object cache database.
         /// </summary>
-        public IDatabase ObjectCacheDatabase
-        {
-            get
-            {
+        public IDatabase ObjectCacheDatabase {
+            get {
                 if (_objectCacheDatabase == null && _redisConnection != null && _redisConnection.IsConnected) {
                     _objectCacheDatabase = _redisConnection.GetDatabase(ObjectCacheIndex);
                 }
@@ -84,10 +81,8 @@ namespace Alabo.Cache.Redis
         /// <summary>
         ///     Gets the list cache database.
         /// </summary>
-        public IDatabase ListCacheDatabase
-        {
-            get
-            {
+        public IDatabase ListCacheDatabase {
+            get {
                 if (_listCacheDatabase == null && _redisConnection != null && _redisConnection.IsConnected) {
                     _listCacheDatabase = _redisConnection.GetDatabase(ListCacheIndex);
                 }
@@ -99,10 +94,8 @@ namespace Alabo.Cache.Redis
         /// <summary>
         ///     Gets the hash cache database.
         /// </summary>
-        public IDatabase HashCacheDatabase
-        {
-            get
-            {
+        public IDatabase HashCacheDatabase {
+            get {
                 if (_hashCacheDatabase == null && _redisConnection != null && _redisConnection.IsConnected) {
                     _hashCacheDatabase = _redisConnection.GetDatabase(HashCacheIndex);
                 }
@@ -114,10 +107,8 @@ namespace Alabo.Cache.Redis
         /// <summary>
         ///     Gets the file cache database.
         /// </summary>
-        public IDatabase FileCacheDatabase
-        {
-            get
-            {
+        public IDatabase FileCacheDatabase {
+            get {
                 if (_fileCacheDatabase == null && _redisConnection != null && _redisConnection.IsConnected) {
                     _fileCacheDatabase = _redisConnection.GetDatabase(FileCacheIndex);
                 }
@@ -134,10 +125,8 @@ namespace Alabo.Cache.Redis
         /// <summary>
         ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
-        public void Dispose()
-        {
-            if (_redisConnection != null)
-            {
+        public void Dispose() {
+            if (_redisConnection != null) {
                 _redisConnection.Close();
                 _redisConnection.Dispose();
                 _redisConnection = null;

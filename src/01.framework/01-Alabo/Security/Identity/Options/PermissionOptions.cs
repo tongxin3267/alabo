@@ -1,10 +1,10 @@
-﻿namespace Alabo.Security.Identity.Options
-{
+﻿namespace Alabo.Security.Identity.Options {
+
     /// <summary>
     ///     权限配置
     /// </summary>
-    public class PermissionOptions
-    {
+    public class PermissionOptions {
+
         /// <summary>
         ///     密码配置
         /// </summary>

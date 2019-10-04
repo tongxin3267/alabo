@@ -2,10 +2,10 @@
 using Alabo.Domains.Services;
 using System;
 
-namespace Alabo.Framework.Core.WebUis.Services
-{
-    public interface IUIBaseService : IService
-    {
+namespace Alabo.Framework.Core.WebUis.Services {
+
+    public interface IUIBaseService : IService {
+
         /// <summary>
         ///     检查基础类型
         /// </summary>

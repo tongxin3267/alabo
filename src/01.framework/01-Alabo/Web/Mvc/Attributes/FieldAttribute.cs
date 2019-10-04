@@ -3,15 +3,15 @@ using Alabo.Domains.Enums;
 using Alabo.Web.Validations;
 using System;
 
-namespace Alabo.Web.Mvc.Attributes
-{
+namespace Alabo.Web.Mvc.Attributes {
+
     /// <summary>
     ///     字段属性配置
     /// </summary>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Field |
                     AttributeTargets.Parameter)]
-    public class FieldAttribute : Attribute
-    {
+    public class FieldAttribute : Attribute {
+
         /// <summary>
         ///     Gets the key.
         /// </summary>
@@ -198,8 +198,8 @@ namespace Alabo.Web.Mvc.Attributes
     ///     Enum DisplayMode
     /// </summary>
     [ClassProperty(Name = "显示模式")]
-    public enum DisplayMode
-    {
+    public enum DisplayMode {
+
         /// <summary>
         ///     The text
         /// </summary>
@@ -225,8 +225,8 @@ namespace Alabo.Web.Mvc.Attributes
     ///     表格显示方式
     /// </summary>
     [ClassProperty(Name = "表格显示方式")]
-    public enum TableDispalyStyle
-    {
+    public enum TableDispalyStyle {
+
         /// <summary>
         ///     代码的方式显示
         /// </summary>

@@ -5,26 +5,22 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Alabo.Domains.Query
-{
+namespace Alabo.Domains.Query {
+
     internal class ExpressionOrderQuery<TEntity> : ExpressionPredicateQuery<TEntity>, IOrderQuery<TEntity>
-        where TEntity : class, IEntity
-    {
+        where TEntity : class, IEntity {
         private readonly IList<OrderQueryItem> _orderQueryList = new List<OrderQueryItem>();
 
-        public IOrderQuery<TEntity> OrderByAscending<TKey>(Expression<Func<TEntity, TKey>> keySelector)
-        {
+        public IOrderQuery<TEntity> OrderByAscending<TKey>(Expression<Func<TEntity, TKey>> keySelector) {
             return OrderBy(keySelector);
         }
 
-        public IOrderQuery<TEntity> OrderByDescending<TKey>(Expression<Func<TEntity, TKey>> keySelector)
-        {
+        public IOrderQuery<TEntity> OrderByDescending<TKey>(Expression<Func<TEntity, TKey>> keySelector) {
             return OrderBy(keySelector, OrderType.Descending);
         }
 
         public IOrderQuery<TEntity> OrderBy<TKey>(Expression<Func<TEntity, TKey>> keySelector,
-            OrderType type = OrderType.Ascending)
-        {
+            OrderType type = OrderType.Ascending) {
             if (keySelector == null) {
                 throw new ArgumentNullException(nameof(keySelector));
             }
@@ -33,8 +29,7 @@ namespace Alabo.Domains.Query
             return this;
         }
 
-        public override IQueryable<TEntity> Execute(IQueryable<TEntity> query)
-        {
+        public override IQueryable<TEntity> Execute(IQueryable<TEntity> query) {
             query = base.Execute(query);
             if (_orderQueryList.Count <= 0) {
                 return query;
@@ -47,10 +42,9 @@ namespace Alabo.Domains.Query
             return query;
         }
 
-        private class OrderQueryItem
-        {
-            public OrderQueryItem(Type keyType, OrderType orderType, LambdaExpression keySelectorExpression)
-            {
+        private class OrderQueryItem {
+
+            public OrderQueryItem(Type keyType, OrderType orderType, LambdaExpression keySelectorExpression) {
                 KeyType = keyType;
                 OrderType = orderType;
                 KeySelectorExpression = keySelectorExpression;
@@ -69,8 +63,7 @@ namespace Alabo.Domains.Query
             public Func<IQueryable<TEntity>, Expression, IQueryable<TEntity>> Executor { get; }
 
             private Func<IQueryable<TEntity>, Expression, IQueryable<TEntity>> BuildOrderExecutor(Type keyType,
-                OrderType type)
-            {
+                OrderType type) {
                 MethodInfo method;
                 if (type == OrderType.Ascending) {
                     method = typeof(Queryable)

@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Alabo.Datas.Ef.Map
-{
+namespace Alabo.Datas.Ef.Map {
+
     /// <summary>
     ///     映射
     /// </summary>
-    public interface IMap
-    {
+    public interface IMap {
+
         /// <summary>
         ///     映射配置
         /// </summary>

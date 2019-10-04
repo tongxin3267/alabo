@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace Alabo.Domains.Query
-{
+namespace Alabo.Domains.Query {
+
     /// <summary>
     ///     Class ExpressionPredicateQuery.
     /// </summary>
-    internal class ExpressionPredicateQuery<TEntity> : IPredicateQuery<TEntity> where TEntity : class, IEntity
-    {
+    internal class ExpressionPredicateQuery<TEntity> : IPredicateQuery<TEntity> where TEntity : class, IEntity {
+
         /// <summary>
         ///     The predicate list
         /// </summary>
@@ -26,8 +26,7 @@ namespace Alabo.Domains.Query
         ///     Ands the specified predicate.
         /// </summary>
         /// <param name="predicate">The predicate.</param>
-        public IPredicateQuery<TEntity> And(Expression<Func<TEntity, bool>> predicate)
-        {
+        public IPredicateQuery<TEntity> And(Expression<Func<TEntity, bool>> predicate) {
             return Append(predicate, PredicateLinkType.And);
         }
 
@@ -35,8 +34,7 @@ namespace Alabo.Domains.Query
         ///     或s the specified predicate.
         /// </summary>
         /// <param name="predicate">The predicate.</param>
-        public IPredicateQuery<TEntity> Or(Expression<Func<TEntity, bool>> predicate)
-        {
+        public IPredicateQuery<TEntity> Or(Expression<Func<TEntity, bool>> predicate) {
             return Append(predicate, PredicateLinkType.Or);
         }
 
@@ -45,8 +43,7 @@ namespace Alabo.Domains.Query
         /// </summary>
         /// <param name="predicate">The predicate.</param>
         /// <param name="type">The 类型.</param>
-        public IPredicateQuery<TEntity> Append(Expression<Func<TEntity, bool>> predicate, PredicateLinkType type)
-        {
+        public IPredicateQuery<TEntity> Append(Expression<Func<TEntity, bool>> predicate, PredicateLinkType type) {
             if (predicate == null) {
                 throw new ArgumentNullException(nameof(predicate));
             }
@@ -59,8 +56,7 @@ namespace Alabo.Domains.Query
         ///     Ands the specified predicate query.
         /// </summary>
         /// <param name="predicateQuery">The predicate query.</param>
-        public IPredicateQuery<TEntity> And(IPredicateQuery<TEntity> predicateQuery)
-        {
+        public IPredicateQuery<TEntity> And(IPredicateQuery<TEntity> predicateQuery) {
             return Append(predicateQuery, PredicateLinkType.And);
         }
 
@@ -68,8 +64,7 @@ namespace Alabo.Domains.Query
         ///     或s the specified predicate query.
         /// </summary>
         /// <param name="predicateQuery">The predicate query.</param>
-        public IPredicateQuery<TEntity> Or(IPredicateQuery<TEntity> predicateQuery)
-        {
+        public IPredicateQuery<TEntity> Or(IPredicateQuery<TEntity> predicateQuery) {
             return Append(predicateQuery, PredicateLinkType.Or);
         }
 
@@ -78,8 +73,7 @@ namespace Alabo.Domains.Query
         /// </summary>
         /// <param name="predicateQuery">The predicate query.</param>
         /// <param name="type">The 类型.</param>
-        public IPredicateQuery<TEntity> Append(IPredicateQuery<TEntity> predicateQuery, PredicateLinkType type)
-        {
+        public IPredicateQuery<TEntity> Append(IPredicateQuery<TEntity> predicateQuery, PredicateLinkType type) {
             if (predicateQuery == null) {
                 throw new ArgumentNullException(nameof(predicateQuery));
             }
@@ -91,8 +85,7 @@ namespace Alabo.Domains.Query
         ///     执行查询
         /// </summary>
         /// <param name="query">查询</param>
-        public virtual IQueryable<TEntity> Execute(IQueryable<TEntity> query)
-        {
+        public virtual IQueryable<TEntity> Execute(IQueryable<TEntity> query) {
             var predicateExpression = BuildPredicateExpression();
             if (predicateExpression == null) {
                 return query;
@@ -104,16 +97,14 @@ namespace Alabo.Domains.Query
         /// <summary>
         ///     Builds the predicate expression.
         /// </summary>
-        public Expression<Func<TEntity, bool>> BuildPredicateExpression()
-        {
+        public Expression<Func<TEntity, bool>> BuildPredicateExpression() {
             if (_predicateList.Count <= 0) {
                 return null;
             }
 
             var parameterExpression = Expression.Parameter(typeof(TEntity), "e");
             Expression predicateExrpession = Expression.Constant(DefaultValue);
-            foreach (var item in _predicateList)
-            {
+            foreach (var item in _predicateList) {
                 var visitor = new ChangeParameterTypeExpressionVisitor(item.Predicate.Body, parameterExpression);
                 if (item.Type == PredicateLinkType.And) {
                     predicateExrpession = Expression.AndAlso(predicateExrpession, visitor.Convert());
@@ -129,8 +120,7 @@ namespace Alabo.Domains.Query
         ///     Builds the predicate expression.
         ///     构建Linq表达式
         /// </summary>
-        public Expression<Func<TEntity, bool>> BuildExpression()
-        {
+        public Expression<Func<TEntity, bool>> BuildExpression() {
             var predicateExpression = BuildPredicateExpression();
             return predicateExpression;
         }
@@ -138,15 +128,14 @@ namespace Alabo.Domains.Query
         /// <summary>
         ///     Class PredicateQueryItem.
         /// </summary>
-        private class PredicateQueryItem
-        {
+        private class PredicateQueryItem {
+
             /// <summary>
             ///     Initializes a new instance of the <see cref="PredicateQueryItem" /> class.
             /// </summary>
             /// <param name="predicate">The predicate.</param>
             /// <param name="type">The 类型.</param>
-            public PredicateQueryItem(Expression<Func<TEntity, bool>> predicate, PredicateLinkType type)
-            {
+            public PredicateQueryItem(Expression<Func<TEntity, bool>> predicate, PredicateLinkType type) {
                 Predicate = predicate;
                 Type = type;
             }

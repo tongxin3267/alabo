@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Alabo.Events
-{
+namespace Alabo.Events {
+
     /// <summary>
     ///     事件
     /// </summary>
-    public interface IEvent
-    {
+    public interface IEvent {
+
         /// <summary>
         ///     事件标识
         /// </summary>

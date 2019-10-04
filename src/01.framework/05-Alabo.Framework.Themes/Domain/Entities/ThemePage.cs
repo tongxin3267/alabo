@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Alabo.Domains.Entities;
+﻿using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Domains.Repositories.Mongo.Extension;
 using Alabo.Framework.Core.Enums.Enum;
@@ -10,14 +7,17 @@ using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Framework.Themes.Domain.Entities
-{
+namespace Alabo.Framework.Themes.Domain.Entities {
+
     [BsonIgnoreExtraElements]
     [Table("Themes_ThemePage")]
     [ClassProperty(Name = "主题页面")]
-    public class ThemePage : AggregateMongodbRoot<ThemePage>
-    {
+    public class ThemePage : AggregateMongodbRoot<ThemePage> {
+
         /// <summary>
         ///     主题Id
         /// </summary>
@@ -80,10 +80,8 @@ namespace Alabo.Framework.Themes.Domain.Entities
         ///     转换成客户端页面
         /// </summary>
         /// <returns></returns>
-        public ClientPage ToClientPage()
-        {
-            var clientPage = new ClientPage
-            {
+        public ClientPage ToClientPage() {
+            var clientPage = new ClientPage {
                 Name = Name,
                 Url = Url,
                 Path = Path,
@@ -102,8 +100,8 @@ namespace Alabo.Framework.Themes.Domain.Entities
     ///     一个页面多个布局
     ///     x: 0, y: 0, w: 12, h: 1, i: 0
     /// </summary>
-    public class PageLayout
-    {
+    public class PageLayout {
+
         /// <summary>
         ///     X坐标
         /// </summary>
@@ -134,8 +132,8 @@ namespace Alabo.Framework.Themes.Domain.Entities
     ///     一个布局多个模块
     /// </summary>
     [BsonIgnoreExtraElements]
-    public class PageWidget
-    {
+    public class PageWidget {
+
         /// <summary>
         ///     名称
         /// </summary>
@@ -198,8 +196,8 @@ namespace Alabo.Framework.Themes.Domain.Entities
         public WidgetStyle Style { get; set; }
     }
 
-    public class WidgetStyle
-    {
+    public class WidgetStyle {
+
         /// <summary>
         ///     边框 使用对象
         /// </summary>
@@ -216,8 +214,8 @@ namespace Alabo.Framework.Themes.Domain.Entities
         public string Css { get; set; }
     }
 
-    public class WidgetLayout
-    {
+    public class WidgetLayout {
+
         /// <summary>
         ///     布局类型
         ///     tab-layer,grid-layer,float-layer
@@ -240,8 +238,8 @@ namespace Alabo.Framework.Themes.Domain.Entities
         public string Options { get; set; }
     }
 
-    public class WidgetLayoutColumns
-    {
+    public class WidgetLayoutColumns {
+
         /// <summary>
         ///     模块
         /// </summary>
@@ -256,8 +254,8 @@ namespace Alabo.Framework.Themes.Domain.Entities
     /// <summary>
     ///     页面设置
     /// </summary>
-    public class PageSetting
-    {
+    public class PageSetting {
+
         /// <summary>
         ///     底部TarBar设置
         /// </summary>

@@ -4,23 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Alabo.Helpers
-{
+namespace Alabo.Helpers {
+
     /// <summary>
     ///     枚举操作
     /// </summary>
-    public static class Enums
-    {
+    public static class Enums {
+
         /// <summary>
         ///     获取实例
         /// </summary>
         /// <typeparam name="TEnum">枚举类型</typeparam>
         /// <param name="member">成员名或值,范例:Enum1枚举有成员A=0,则传入"A"或"0"获取 Enum1.A</param>
-        public static TEnum Parse<TEnum>(object member)
-        {
+        public static TEnum Parse<TEnum>(object member) {
             var value = Extensions.Extensions.SafeString(member);
-            if (string.IsNullOrWhiteSpace(value))
-            {
+            if (string.IsNullOrWhiteSpace(value)) {
                 if (typeof(TEnum).IsGenericType) {
                     return default;
                 }
@@ -36,8 +34,7 @@ namespace Alabo.Helpers
         /// </summary>
         /// <typeparam name="TEnum">枚举类型</typeparam>
         /// <param name="member">成员名、值、实例均可,范例:Enum1枚举有成员A=0,则传入Enum1.A或0,获取成员名"A"</param>
-        public static string GetName<TEnum>(object member)
-        {
+        public static string GetName<TEnum>(object member) {
             return GetName(Common.GetType<TEnum>(), member);
         }
 
@@ -46,8 +43,7 @@ namespace Alabo.Helpers
         /// </summary>
         /// <param name="type">枚举类型</param>
         /// <param name="member">成员名、值、实例均可</param>
-        public static string GetName(Type type, object member)
-        {
+        public static string GetName(Type type, object member) {
             if (type == null) {
                 return string.Empty;
             }
@@ -72,8 +68,7 @@ namespace Alabo.Helpers
         /// </summary>
         /// <typeparam name="TEnum">枚举类型</typeparam>
         /// <param name="member">成员名、值、实例均可，范例:Enum1枚举有成员A=0,可传入"A"、0、Enum1.A，获取值0</param>
-        public static int GetValue<TEnum>(object member)
-        {
+        public static int GetValue<TEnum>(object member) {
             return GetValue(Common.GetType<TEnum>(), member);
         }
 
@@ -82,19 +77,15 @@ namespace Alabo.Helpers
         /// </summary>
         /// <param name="type">枚举类型</param>
         /// <param name="member">成员名、值、实例均可</param>
-        public static int GetValue(Type type, object member)
-        {
+        public static int GetValue(Type type, object member) {
             var value = Extensions.Extensions.SafeString(member);
             if (string.IsNullOrWhiteSpace(value)) {
                 throw new ArgumentNullException(nameof(member));
             }
 
-            try
-            {
+            try {
                 return (int)Enum.Parse(type, member.ToString(), true);
-            }
-            catch
-            {
+            } catch {
                 return 0;
             }
         }
@@ -104,8 +95,7 @@ namespace Alabo.Helpers
         /// </summary>
         /// <typeparam name="TEnum">枚举类型</typeparam>
         /// <param name="member">成员名、值、实例均可</param>
-        public static string GetDescription<TEnum>(object member)
-        {
+        public static string GetDescription<TEnum>(object member) {
             return Reflection.GetDescription<TEnum>(GetName<TEnum>(member));
         }
 
@@ -114,8 +104,7 @@ namespace Alabo.Helpers
         /// </summary>
         /// <param name="type">枚举类型</param>
         /// <param name="member">成员名、值、实例均可</param>
-        public static string GetDescription(Type type, object member)
-        {
+        public static string GetDescription(Type type, object member) {
             return Reflection.GetDescription(type, GetName(type, member));
         }
 
@@ -123,8 +112,7 @@ namespace Alabo.Helpers
         ///     获取项集合,文本设置为Description，值为Value
         /// </summary>
         /// <typeparam name="TEnum">枚举类型</typeparam>
-        public static List<Item> GetItems<TEnum>()
-        {
+        public static List<Item> GetItems<TEnum>() {
             return GetItems(typeof(TEnum));
         }
 
@@ -132,8 +120,7 @@ namespace Alabo.Helpers
         ///     获取项集合,文本设置为Description，值为Value
         /// </summary>
         /// <param name="type">枚举类型</param>
-        public static List<Item> GetItems(Type type)
-        {
+        public static List<Item> GetItems(Type type) {
             type = Common.GetType(type);
             if (type.IsEnum == false) {
                 throw new InvalidOperationException($"类型 {type} 不是枚举");
@@ -150,19 +137,15 @@ namespace Alabo.Helpers
         /// <summary>
         ///     添加描述项
         /// </summary>
-        private static void AddItem(Type type, ICollection<Item> result, FieldInfo field)
-        {
+        private static void AddItem(Type type, ICollection<Item> result, FieldInfo field) {
             if (!field.FieldType.IsEnum) {
                 return;
             }
 
             var value = 0;
-            try
-            {
+            try {
                 value = GetValue(type, field.Name);
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 Console.WriteLine(ex.Message);
             }
 

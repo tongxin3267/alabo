@@ -10,15 +10,15 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Users.Entities
-{
+namespace Alabo.Users.Entities {
+
     /// <summary>
     ///     Class UserDetail.
     /// </summary>
     [ClassProperty(Name = "用户详情", PageType = ViewPageType.List, PostApi = "Api/User/Update",
         ListApi = "Api/User/Update")]
-    public class UserDetail : AggregateDefaultUserRoot<UserDetail>
-    {
+    public class UserDetail : AggregateDefaultUserRoot<UserDetail> {
+
         /// <summary>
         ///     密码
         /// </summary>
@@ -134,21 +134,19 @@ namespace Alabo.Users.Entities
     /// <summary>
     ///     应用程序映射配置
     /// </summary>
-    public class UserDetailTableMap : MsSqlAggregateRootMap<UserDetail>
-    {
+    public class UserDetailTableMap : MsSqlAggregateRootMap<UserDetail> {
+
         /// <summary>
         ///     映射表
         /// </summary>
-        protected override void MapTable(EntityTypeBuilder<UserDetail> builder)
-        {
+        protected override void MapTable(EntityTypeBuilder<UserDetail> builder) {
             builder.ToTable("User_UserDetail");
         }
 
         /// <summary>
         ///     映射属性
         /// </summary>
-        protected override void MapProperties(EntityTypeBuilder<UserDetail> builder)
-        {
+        protected override void MapProperties(EntityTypeBuilder<UserDetail> builder) {
             builder.HasKey(e => e.Id);
             builder.Ignore(e => e.UserName);
         }

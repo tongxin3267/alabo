@@ -1,6 +1,5 @@
-﻿namespace Alabo.UI.Design.AutoVideos
-{
-    public interface IAutoVideo
-    {
+﻿namespace Alabo.UI.Design.AutoVideos {
+
+    public interface IAutoVideo {
     }
 }

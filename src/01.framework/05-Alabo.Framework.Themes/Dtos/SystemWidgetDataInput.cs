@@ -2,10 +2,10 @@
 using MongoDB.Bson;
 using Newtonsoft.Json;
 
-namespace Alabo.Framework.Themes.Dtos
-{
-    public class SystemWidgetDataInput
-    {
+namespace Alabo.Framework.Themes.Dtos {
+
+    public class SystemWidgetDataInput {
+
         [JsonConverter(typeof(ObjectIdConverter))]
         public ObjectId Id { get; set; }
 

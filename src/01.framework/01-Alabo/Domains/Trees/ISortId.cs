@@ -1,10 +1,10 @@
-﻿namespace Alabo.Domains.Trees
-{
+﻿namespace Alabo.Domains.Trees {
+
     /// <summary>
     ///     排序号
     /// </summary>
-    public interface ISortId
-    {
+    public interface ISortId {
+
         /// <summary>
         ///     排序号
         /// </summary>

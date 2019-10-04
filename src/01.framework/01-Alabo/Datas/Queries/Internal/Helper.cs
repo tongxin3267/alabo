@@ -4,13 +4,13 @@ using Alabo.Properties;
 using System;
 using System.Linq.Expressions;
 
-namespace Alabo.Datas.Queries.Internal
-{
+namespace Alabo.Datas.Queries.Internal {
+
     /// <summary>
     ///     查询工具类
     /// </summary>
-    internal static class Helper
-    {
+    internal static class Helper {
+
         /// <summary>
         ///     获取查询条件表达式
         /// </summary>
@@ -19,8 +19,7 @@ namespace Alabo.Datas.Queries.Internal
         ///     注意：一次仅能添加一个条件，范例：t => t.Name == "a" &amp;&amp; t.Mobile == "123"，不支持，将抛出异常
         /// </param>
         public static Expression<Func<TEntity, bool>> GetWhereIfNotEmptyExpression<TEntity>(
-            Expression<Func<TEntity, bool>> predicate) where TEntity : class
-        {
+            Expression<Func<TEntity, bool>> predicate) where TEntity : class {
             if (predicate == null) {
                 return null;
             }

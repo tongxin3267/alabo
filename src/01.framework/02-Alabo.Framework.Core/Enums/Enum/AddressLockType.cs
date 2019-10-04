@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum
-{
+namespace Alabo.Framework.Core.Enums.Enum {
+
     /// <summary>
     ///     地址锁定方式
     /// </summary>
     [ClassProperty(Name = "地址锁定方式")]
-    public enum AddressLockType
-    {
+    public enum AddressLockType {
+
         /// <summary>
         ///     订单收货地址
         ///     根据订单的最终收货地址来锁定分润。如订单收货地址为：广东省东莞市南城区天安数码城，则南城区区代理、东莞市市代理、广东省省代理会按比例获得该订单的分润

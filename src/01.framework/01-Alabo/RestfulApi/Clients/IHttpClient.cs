@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Alabo.RestfulApi.Clients
-{
-    public interface IHttpClient : IScopeDependency
-    {
+namespace Alabo.RestfulApi.Clients {
+
+    public interface IHttpClient : IScopeDependency {
+
         /// <summary>
         ///     Get类型请求，同步方法
         /// </summary>
