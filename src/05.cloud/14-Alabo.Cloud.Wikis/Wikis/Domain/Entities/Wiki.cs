@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.Domains.Entities;
 using Alabo.Web.Mvc.Attributes;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace Alabo.Cloud.Wikis.Wikis.Domain.Entities
@@ -13,5 +14,24 @@ namespace Alabo.Cloud.Wikis.Wikis.Domain.Entities
     [ClassProperty(Name = "Wiki", Description = "Wiki")]
     public class Wiki : AggregateMongodbUserRoot<Wiki>
     {
+        /// <summary>
+        /// 分类Id
+        /// </summary>
+        public ObjectId ClassId { get; set; }
+
+        /// <summary>
+        /// 项目Id
+        /// </summary>
+        public ObjectId ProjectId { get; set; }
+
+        /// <summary>
+        /// 标题
+        /// </summary>
+        public string Title { get; set; }
+
+        /// <summary>
+        /// 内容
+        /// </summary>
+        public string Content { get; set; }
     }
 }

@@ -13,5 +13,9 @@ namespace Alabo.Cloud.Wikis.Wikis.Domain.Entities
     [ClassProperty(Name = "Wiki", Description = "Wiki")]
     public class WikiHistory : AggregateMongodbUserRoot<WikiHistory>
     {
+        /// <summary>
+        /// Wiki
+        /// </summary>
+        public Wiki Wiki { get; set; }
     }
 }
