@@ -29,8 +29,7 @@ namespace Alabo.Data.People.Users
         /// <summary>
         ///     init
         /// </summary>
-        public void Init()
-        {
+        public void Init() {
             //导入地址数据 ,从js文件导入,如果从高德地图导入会导致地址库不同步的问题
             Ioc.Resolve<IRegionService>().InitRegion();
 
@@ -50,8 +49,7 @@ namespace Alabo.Data.People.Users
             var openService = Ioc.Resolve<IOpenService>();
 
             var defaultPwd = "111111";
-            var defaultUser = new User
-            {
+            var defaultUser = new User {
                 Email = "admin@5ug.com",
                 Name = "老板",
                 Status = Status.Normal,
@@ -61,8 +59,7 @@ namespace Alabo.Data.People.Users
             };
             var passWord = defaultPwd;
             var payPassWord = defaultPwd;
-            defaultUser.Detail = new UserDetail
-            {
+            defaultUser.Detail = new UserDetail {
                 Password = passWord.ToMd5HashString(),
                 PayPassword = payPassWord.ToMd5HashString()
             };
@@ -74,8 +71,7 @@ namespace Alabo.Data.People.Users
             }
 
             //add platform user
-            var planformUser = new User
-            {
+            var planformUser = new User {
                 Email = "planform@5ug.com",
                 Name = "平台",
                 Status = Status.Normal,
@@ -85,8 +81,7 @@ namespace Alabo.Data.People.Users
             };
             var planformpassWord = defaultPwd;
             var planformpayPassWord = defaultPwd;
-            planformUser.Detail = new UserDetail
-            {
+            planformUser.Detail = new UserDetail {
                 Password = planformpassWord.ToMd5HashString(),
                 PayPassword = planformpassWord.ToMd5HashString()
             };
@@ -100,20 +95,18 @@ namespace Alabo.Data.People.Users
 
             userService.Log("初始化化系统管理员成功，请尽快修改您的登录信息");
             userService.Log("初始化化系统平台用户成功，请尽快修改您的登录信息");
-            try
-            {
+            try {
                 openService.SendRaw(defaultUser.Mobile,
                     $@"恭喜您系统管理员初始成功，用户名为{defaultUser.UserName},登录密码为{passWord},支付密码为{payPassWord},请尽快修改您的登录信息");
                 openService.SendRaw(planformUser.Mobile,
                     $@"恭喜您系统平台初始成功，用户名为{planformUser.UserName},登录密码为{planformpassWord},支付密码为{planformpayPassWord},请尽快修改您的登录信息");
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 userService.Log($"初始化数据-短信发送失败，{ex.Message}");
             }
 
             // 初始化岗位权限以及员工
             Ioc.Resolve<IPostRoleService>().Init();
+            Ioc.Resolve<IEmployeeService>().Init();
         }
     }
 }
