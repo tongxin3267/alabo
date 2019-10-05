@@ -25,7 +25,7 @@ namespace Alabo.Web.CodeGeneration.EntityCode
             CreateCode(typeof(WikiProject), entityPath);
 
             entityPath = @"C:\alaboshu.com\alabo\src\05.cloud\14-Alabo.Cloud.Wikis\Wikis\Domain\Entities\";
-            CreateCode(typeof(Wiki), entityPath);
+            CreateCode(typeof(WikiHistory), entityPath);
 
             entityPath = @"C:\alaboshu.com\alabo\src\05.cloud\13-Alabo.Cloud.Targets\Iterations\Domain\Entities\";
             CreateCode(typeof(Iteration), entityPath);
