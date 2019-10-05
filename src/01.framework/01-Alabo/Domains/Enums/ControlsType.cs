@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Domains.Enums {
-
+namespace Alabo.Domains.Enums
+{
     /// <summary>
     ///     控件类型
     /// </summary>
     [ClassProperty(Name = "控件类型")]
-    public enum ControlsType {
-
+    public enum ControlsType
+    {
         /// <summary>
         ///     Label类型
         /// </summary>
@@ -336,6 +336,12 @@ namespace Alabo.Domains.Enums {
         /// <summary>
         ///     数据选择控件，对应前台x-select-data
         /// </summary>
-        DataSelect = 1200
+        DataSelect = 1200,
+
+        /// <summary>
+        /// Markdown
+        /// </summary>
+        [Display(Name = "Markdown")]
+        Markdown = 1280,
     }
 }

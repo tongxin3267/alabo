@@ -14,8 +14,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Framework.Basic.AutoConfigs.Domain.Configs {
-
+namespace Alabo.Framework.Basic.AutoConfigs.Domain.Configs
+{
     /// <summary>
     ///     货币类型配置
     /// </summary>
@@ -24,8 +24,8 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Configs {
         PageType = ViewPageType.List, SortOrder = 20,
         Validator = "select 1 from Asset_Account where MoneyTypeId ='{0}'", ValidateMessage = "当前有账户正在使用当前货币",
         SideBarType = SideBarType.ControlSideBar)]
-    public class MoneyTypeConfig : AutoConfigBase, IAutoConfig {
-
+    public class MoneyTypeConfig : AutoConfigBase, IAutoConfig
+    {
         /// <summary>
         ///     人民币
         /// </summary>
@@ -96,7 +96,6 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Configs {
 
                 var autoConfig = new AutoConfig {
                     Type = config.GetType().FullName,
-                    //// AppName = typeclassProperty.AppName,
                     LastUpdated = DateTime.Now,
                     Value = JsonConvert.SerializeObject(configs)
                 };
@@ -109,9 +108,8 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Configs {
         /// <summary>
         ///     货币类型
         /// </summary>
-        [Field(ControlsType = ControlsType.DropdownList, SortOrder = 1, EnumUniqu = true, ListShow = true,
-            DataSource = "Alabo.Framework.Core.Enums.Enum.Currency")]
         [Display(Name = "货币类型")]
+        [Field(ControlsType = ControlsType.DropdownList, SortOrder = 1, EnumUniqu = true, ListShow = true, DataSourceType = typeof(Currency))]
         [HelpBlock("除自定义货币以外，一种货币类型只能添加一次。如需添加非系统指定货币，可选择自定义类型。常见货币类型：人民币，积分、卡券、红包、虚拟币、授信、美元等")]
         public Currency Currency { get; set; }
 
