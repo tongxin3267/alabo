@@ -33,5 +33,10 @@ namespace Alabo.Cloud.Wikis.Wikis.Domain.Entities
         /// 内容
         /// </summary>
         public string Content { get; set; }
+
+        /// <summary>
+        /// 是否发布
+        /// </summary>
+        public bool IsPublish { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Alabo.Data.People.Merchants.Domain.Entities;
+﻿using Alabo.Cloud.Wikis.Settings.Domain.Entities;
+using Alabo.Cloud.Wikis.Wikis.Domain.Entities;
+using Alabo.Data.Targets.Targets.Domain.Entities;
 using Alabo.Dependency;
 using Alabo.Reflections;
 using Alabo.Schedules.Job;
@@ -6,10 +8,6 @@ using Alabo.Web.CodeGeneration.EntityCode.Templates;
 using Quartz;
 using System;
 using System.Threading.Tasks;
-using Alabo.Cloud.Targets.Iterations.Domain.Entities;
-using Alabo.Cloud.Targets.Targets.Domain.Entities;
-using Alabo.Cloud.Wikis.Settings.Domain.Entities;
-using Alabo.Cloud.Wikis.Wikis.Domain.Entities;
 
 namespace Alabo.Web.CodeGeneration.EntityCode
 {
@@ -27,11 +25,8 @@ namespace Alabo.Web.CodeGeneration.EntityCode
             entityPath = @"C:\alaboshu.com\alabo\src\05.cloud\14-Alabo.Cloud.Wikis\Wikis\Domain\Entities\";
             CreateCode(typeof(WikiHistory), entityPath);
 
-            entityPath = @"C:\alaboshu.com\alabo\src\05.cloud\13-Alabo.Cloud.Targets\Iterations\Domain\Entities\";
-            CreateCode(typeof(Iteration), entityPath);
-
             entityPath = @"C:\alaboshu.com\alabo\src\05.cloud\13-Alabo.Cloud.Targets\Targets\Domain\Entities\";
-            CreateCode(typeof(Target), entityPath);
+            CreateCode(typeof(TargetHistory), entityPath);
 
             Console.WriteLine(@"所有代码生成完成");
         }
