@@ -1,9 +1,9 @@
-﻿using Alabo.Domains.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.Domains.Entities;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Cloud.Targets.Iterations.Domain.Entities
+namespace Alabo.Data.Targets.Iterations.Domain.Entities
 {
     /// <summary>
     ///     迭代

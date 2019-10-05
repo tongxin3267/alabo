@@ -1,11 +1,10 @@
-using System;
-using System.Linq;
-using MongoDB.Bson;
+using Alabo.Data.Targets.Targets.Domain.Entities;
 using Alabo.Domains.Services;
-using Alabo.Cloud.Targets.Targets.Domain.Entities;
-using Alabo.Domains.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.Cloud.Targets.Targets.Domain.Services {
-	public interface ITargetService : IService<Target, ObjectId>  {
-	}
-	}
+namespace Alabo.Data.Targets.Targets.Domain.Services
+{
+    public interface ITargetService : IService<Target, ObjectId>
+    {
+    }
+}

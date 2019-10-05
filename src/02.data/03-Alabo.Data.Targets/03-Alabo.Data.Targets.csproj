@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <RootNamespace>Alabo.Cloud.Targets</RootNamespace>
+    <RootNamespace>Alabo.Data.Targets</RootNamespace>
     <AssemblyName>Alabo.Data.Targets</AssemblyName>
   </PropertyGroup>
 

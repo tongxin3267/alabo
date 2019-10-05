@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using Alabo.Domains.Entities;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Cloud.Targets.Targets.Domain.Entities
+namespace Alabo.Data.Targets.Targets.Domain.Entities
 {
     /// <summary>
     ///     迭代

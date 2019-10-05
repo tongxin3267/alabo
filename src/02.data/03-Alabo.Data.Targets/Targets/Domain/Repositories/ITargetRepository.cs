@@ -1,10 +1,10 @@
-using System;using Alabo.Domains.Repositories.EFCore;using Alabo.Domains.Repositories.Model;
-using System.Linq;
-using MongoDB.Bson;
+using Alabo.Data.Targets.Targets.Domain.Entities;
 using Alabo.Domains.Repositories;
-using Alabo.Cloud.Targets.Targets.Domain.Entities;
+using MongoDB.Bson;
 
-namespace Alabo.Cloud.Targets.Targets.Domain.Repositories {
-	public interface ITargetRepository : IRepository<Target, ObjectId>  {
-	}
+namespace Alabo.Data.Targets.Targets.Domain.Repositories
+{
+    public interface ITargetRepository : IRepository<Target, ObjectId>
+    {
+    }
 }

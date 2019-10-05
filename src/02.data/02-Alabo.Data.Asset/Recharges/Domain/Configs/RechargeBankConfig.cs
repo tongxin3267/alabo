@@ -46,8 +46,7 @@ namespace Alabo.App.Asset.Recharges.Domain.Configs
         [Field(ControlsType = ControlsType.TextBox, ListShow = false)]
         public string BankAddress { get; set; }
 
-        public void SetDefault()
-        {
+        public void SetDefault() {
         }
     }
 }
