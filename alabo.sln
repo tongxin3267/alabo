@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.645
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "08.web", "08.web", "{46FC4C36-FE1B-465D-BAD0-E7E954BD2F84}"
 EndProject
@@ -24,7 +24,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-items", "solution-
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03.app", "03.app", "{78B783FE-A75F-435B-9C34-64D875B74923}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01-Alabo", "src\01.framework\01-Alabo\01-Alabo.csproj", "{86D265D9-1BB5-465D-8838-64C1C9B7836F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01-Alabo", "src\01.framework\01-Alabo\01-Alabo.csproj", "{3BB13FDE-E902-413B-9800-FAEF00448369}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02-Alabo.Framework.Core", "src\01.framework\02-Alabo.Framework.Core\02-Alabo.Framework.Core.csproj", "{81BD0C56-3494-4A7D-A13C-6BE12844A9F2}"
 EndProject
@@ -104,16 +104,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "09-Alabo.Cloud.Cms", "src\0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "12-Alabo.Cloud.School", "src\05.cloud\12-Alabo.Cloud.School\12-Alabo.Cloud.School.csproj", "{7E992FFD-B81C-40EF-9467-A423CDC5CE3D}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "13-Alabo.Cloud.Targets", "src\05.cloud\13-Alabo.Cloud.Targets\13-Alabo.Cloud.Targets.csproj", "{1D47AF44-96FA-4261-9597-1EAD81D62783}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "14-Alabo.Cloud.Wikis", "src\05.cloud\14-Alabo.Cloud.Wikis\14-Alabo.Cloud.Wikis.csproj", "{40504069-CB93-43E5-A67F-52A6A815DA46}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{86D265D9-1BB5-465D-8838-64C1C9B7836F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{86D265D9-1BB5-465D-8838-64C1C9B7836F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{86D265D9-1BB5-465D-8838-64C1C9B7836F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{86D265D9-1BB5-465D-8838-64C1C9B7836F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BB13FDE-E902-413B-9800-FAEF00448369}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BB13FDE-E902-413B-9800-FAEF00448369}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BB13FDE-E902-413B-9800-FAEF00448369}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BB13FDE-E902-413B-9800-FAEF00448369}.Release|Any CPU.Build.0 = Release|Any CPU
 		{81BD0C56-3494-4A7D-A13C-6BE12844A9F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{81BD0C56-3494-4A7D-A13C-6BE12844A9F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81BD0C56-3494-4A7D-A13C-6BE12844A9F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -266,12 +270,20 @@ Global
 		{7E992FFD-B81C-40EF-9467-A423CDC5CE3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E992FFD-B81C-40EF-9467-A423CDC5CE3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E992FFD-B81C-40EF-9467-A423CDC5CE3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D47AF44-96FA-4261-9597-1EAD81D62783}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D47AF44-96FA-4261-9597-1EAD81D62783}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D47AF44-96FA-4261-9597-1EAD81D62783}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D47AF44-96FA-4261-9597-1EAD81D62783}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40504069-CB93-43E5-A67F-52A6A815DA46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40504069-CB93-43E5-A67F-52A6A815DA46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40504069-CB93-43E5-A67F-52A6A815DA46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40504069-CB93-43E5-A67F-52A6A815DA46}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{86D265D9-1BB5-465D-8838-64C1C9B7836F} = {AB3D1F36-F7F5-45C6-8686-F5F5962B782B}
+		{3BB13FDE-E902-413B-9800-FAEF00448369} = {AB3D1F36-F7F5-45C6-8686-F5F5962B782B}
 		{81BD0C56-3494-4A7D-A13C-6BE12844A9F2} = {AB3D1F36-F7F5-45C6-8686-F5F5962B782B}
 		{9E3E7645-60EA-442F-B7B9-812DFB170AE4} = {AB3D1F36-F7F5-45C6-8686-F5F5962B782B}
 		{76D55872-530D-45CB-A74E-800C04E9AF4D} = {1768DF6A-E58B-4A8C-8D4D-9504C40238CE}
@@ -310,6 +322,8 @@ Global
 		{C93E103B-C564-45E2-8AB2-A773E10C41EF} = {4EBEA55A-BB69-48A6-9F3F-1703D9942A7B}
 		{CAA1C78F-B342-4E03-BD99-75D8C29643A2} = {88893B6D-E6A5-4347-8D36-1F2FD57DA466}
 		{7E992FFD-B81C-40EF-9467-A423CDC5CE3D} = {88893B6D-E6A5-4347-8D36-1F2FD57DA466}
+		{1D47AF44-96FA-4261-9597-1EAD81D62783} = {88893B6D-E6A5-4347-8D36-1F2FD57DA466}
+		{40504069-CB93-43E5-A67F-52A6A815DA46} = {88893B6D-E6A5-4347-8D36-1F2FD57DA466}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A1E90677-FAAA-4BD1-8798-FCFEE91E8323}

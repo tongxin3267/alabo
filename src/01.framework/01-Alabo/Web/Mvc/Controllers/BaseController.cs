@@ -14,25 +14,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Alabo.Dynamics;
 
-namespace Alabo.Web.Mvc.Controllers {
-
+namespace Alabo.Web.Mvc.Controllers
+{
     /// <summary>
     ///     Class BaseController.
     /// </summary>
-    public abstract class BaseController : Controller {
-
-        /// <summary>
-        ///     The default message 视图 name
-        /// </summary>
-        private static readonly string DefaultMessageViewName = "/Admin/Shared/Message.cshtml";
-
-        //如果共用，可以放这里
-
-        /// <summary>
-        ///     Gets the name of the message 视图.
-        /// </summary>
-        protected virtual string MessageViewName => DefaultMessageViewName;
-
+    public abstract class BaseController : Controller
+    {
         /// <summary>
         ///     查询参数，可以通过动态 查询
         ///     包括分页等参数
