@@ -62,6 +62,8 @@
     <ProjectReference Include="..\..\05.cloud\10-Alabo.Cloud.Support\10-Alabo.Cloud.Support.csproj" />
     <ProjectReference Include="..\..\05.cloud\11-Alabo.Cloud.Contracts\11-Alabo.Cloud.Contracts.csproj" />
     <ProjectReference Include="..\..\05.cloud\12-Alabo.Cloud.School\12-Alabo.Cloud.School.csproj" />
+    <ProjectReference Include="..\..\05.cloud\13-Alabo.Cloud.Targets\13-Alabo.Cloud.Targets.csproj" />
+    <ProjectReference Include="..\..\05.cloud\14-Alabo.Cloud.Wikis\14-Alabo.Cloud.Wikis.csproj" />
     <ProjectReference Include="..\..\06.tool\01-Alabo.Tool.Payment\05-Alabo.Tool.Payment.csproj" />
     <ProjectReference Include="..\..\06.tool\02-Alabo.Tool.WeiXin\06-Alabo.Tool.WeiXin.csproj" />
     <ProjectReference Include="..\..\06.tool\03-Alabo.Tool.Sms\02-Alabo.Tool.Sms.csproj" />
