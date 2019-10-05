@@ -15,6 +15,8 @@
     <ProjectReference Include="..\..\02.data\01-Alabo.Data.People\01-Alabo.Data.People.csproj" />
     <ProjectReference Include="..\..\02.data\03-Alabo.Data.Things\03-Alabo.Data.Things.csproj" />
     <ProjectReference Include="..\..\05.cloud\02-Alabo.Cloud.People\02-Alabo.Cloud.People.csproj" />
+    <ProjectReference Include="..\..\05.cloud\13-Alabo.Cloud.Targets\13-Alabo.Cloud.Targets.csproj" />
+    <ProjectReference Include="..\..\05.cloud\14-Alabo.Cloud.Wikis\14-Alabo.Cloud.Wikis.csproj" />
     <ProjectReference Include="..\..\06.tool\01-Alabo.Tool.Payment\05-Alabo.Tool.Payment.csproj" />
     <ProjectReference Include="..\..\06.tool\06-Alabo.Tool.QrCode\01-Alabo.Tool.QrCode.csproj" />
   </ItemGroup>

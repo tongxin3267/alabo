@@ -3,7 +3,7 @@ using Alabo.Domains.Entities;
 using Alabo.Web.Mvc.Attributes;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Alabo.Cloud.Wikis.Domain.Entities
+namespace Alabo.Cloud.Wikis.Wikis.Domain.Entities
 {
     /// <summary>
     ///     迭代

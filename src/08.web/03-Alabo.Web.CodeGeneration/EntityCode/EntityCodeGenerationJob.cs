@@ -6,6 +6,10 @@ using Alabo.Web.CodeGeneration.EntityCode.Templates;
 using Quartz;
 using System;
 using System.Threading.Tasks;
+using Alabo.Cloud.Targets.Iterations.Domain.Entities;
+using Alabo.Cloud.Targets.Targets.Domain.Entities;
+using Alabo.Cloud.Wikis.Settings.Domain.Entities;
+using Alabo.Cloud.Wikis.Wikis.Domain.Entities;
 
 namespace Alabo.Web.CodeGeneration.EntityCode
 {
@@ -16,11 +20,18 @@ namespace Alabo.Web.CodeGeneration.EntityCode
     {
         protected override async Task Execute(IJobExecutionContext context, IScope scope) {
             //手动修改,实体路径，可右键实体手动复制路径
-            var entityPath = @"C:\alaboshu.com\alabo\src\02.data\01-Alabo.Data.People\Merchants\Domain\Entities\";
-            CreateCode(typeof(ChainMerchant), entityPath);
+            var entityPath = @"C:\alaboshu.com\alabo\src\05.cloud\14-Alabo.Cloud.Wikis\Settings\Domain\Entities\";
+            CreateCode(typeof(WikiClass), entityPath);
+            CreateCode(typeof(WikiProject), entityPath);
 
-            //entityPath = @"C:\alaboshu.com\alabo\src\02.data\01-Alabo.Data.People\PartnerCompanies\Domain\Entities\";
-            //CreateCode(typeof(PartnerCompany), entityPath);
+            entityPath = @"C:\alaboshu.com\alabo\src\05.cloud\14-Alabo.Cloud.Wikis\Wikis\Domain\Entities\";
+            CreateCode(typeof(Wiki), entityPath);
+
+            entityPath = @"C:\alaboshu.com\alabo\src\05.cloud\13-Alabo.Cloud.Targets\Iterations\Domain\Entities\";
+            CreateCode(typeof(Iteration), entityPath);
+
+            entityPath = @"C:\alaboshu.com\alabo\src\05.cloud\13-Alabo.Cloud.Targets\Targets\Domain\Entities\";
+            CreateCode(typeof(Target), entityPath);
 
             Console.WriteLine(@"所有代码生成完成");
         }
