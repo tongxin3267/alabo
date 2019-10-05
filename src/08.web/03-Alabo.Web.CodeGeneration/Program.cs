@@ -8,8 +8,7 @@ namespace Alabo.Web.CodeGeneration
 {
     public class Program
     {
-        public static void Main(string[] args)
-        {
+        public static void Main(string[] args) {
             var host = BuildWebHost(args);
             RunJobs(host).GetAwaiter().GetResult();
             host.Run();
@@ -18,8 +17,7 @@ namespace Alabo.Web.CodeGeneration
         /// <summary>
         ///     通过调度任务启动，不同的生成，请手动修改生成方法
         /// </summary>
-        private static async Task RunJobs(IWebHost host)
-        {
+        private static async Task RunJobs(IWebHost host) {
             var scheduler = new Scheduler();
             //实体服务和方法生成
             await scheduler.AddJobAsync<EntityCodeGenerationJob>();
@@ -27,8 +25,7 @@ namespace Alabo.Web.CodeGeneration
             await scheduler.StartAsync();
         }
 
-        public static IWebHost BuildWebHost(string[] args)
-        {
+        public static IWebHost BuildWebHost(string[] args) {
             return WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .Build();

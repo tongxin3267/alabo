@@ -18,6 +18,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
+using Alabo.App.Share.TaskExecutes;
 
 namespace Alabo.Web.CodeGeneration
 {
@@ -32,6 +33,7 @@ namespace Alabo.Web.CodeGeneration
         /// <param name="configuration">配置</param>
         /// <param name="env">主机111111123</param>
         public Startup(IConfiguration configuration, IHostingEnvironment env) {
+            var ddd = env.ContentRootPath;
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("web.json", true, true)
@@ -62,7 +64,6 @@ namespace Alabo.Web.CodeGeneration
             //   services.AddXsrfToken();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //添加工作单元
-            //添加工作单元
             services.AddUnitOfWork<IUnitOfWork, SqlServerUnitOfWork>(RuntimeContext.Current.WebsiteConfig.ConnectionString.GetConnectionStringForMaster());
 
             // mvc 相关服务
@@ -72,7 +73,7 @@ namespace Alabo.Web.CodeGeneration
             // 添加支付方式等,第三方注入
             services.AddApiStoreService();
             // 添加任务调度服务
-            //  services.AddTasks();
+            services.AddTasks();
 
             return services.AddUtil();
         }
