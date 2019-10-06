@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Alabo.Data.Targets.Targets.Domain.Enums;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Core.Enums.Enum;
@@ -14,8 +15,8 @@ namespace Alabo.Data.Targets.Targets.Domain.Entities
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Target_Target")]
-    [ClassProperty(Name = "目标", GroupName = "基本设置,高级选项", Description = "目标")]
-    public class Target : AggregateMongodbUserRoot<Target>
+    [ClassProperty(Name = "目标", Description = "极简单目标管理,小步快跑", GroupName = "基本设置,高级选项")]
+    public class Target : AggregateMongodbRoot<Target>
     {
         /// <summary>
         /// 迭代Id
@@ -28,7 +29,7 @@ namespace Alabo.Data.Targets.Targets.Domain.Entities
         [Display(Name = "目标名称")]
         [Required]
         [BsonRequired]
-        [Field(ControlsType = ControlsType.TextArea, SortOrder = 1, ListShow = true, GroupTabId = 1)]
+        [Field(ControlsType = ControlsType.TextBox, SortOrder = 1, ListShow = true, GroupTabId = 1)]
         public string Name { get; set; }
 
         /// <summary>
@@ -54,11 +55,67 @@ namespace Alabo.Data.Targets.Targets.Domain.Entities
         public decimal Contribution { get; set; } = 0m;
 
         /// <summary>
+        /// 安排人
+        /// </summary>
+        [Display(Name = "安排人")]
+        public long ArrangeUserId { get; set; }
+
+        /// <summary>
+        /// 处理人
+        /// </summary>
+        [Display(Name = "处理人")]
+        public long HandlerUserId { get; set; }
+
+        /// <summary>
+        /// 检视人
+        /// </summary>
+        [Display(Name = "检视人")]
+        public long AuditorUserId { get; set; }
+
+        /// <summary>
         /// 满意度
         /// </summary>
         [Display(Name = "满意度")]
         [Field(ControlsType = ControlsType.Decimal, SortOrder = 10, ListShow = true, GroupTabId = 2)]
         [HelpBlock("任务满意度")]
         public decimal Satisfaction { get; set; } = 0m;
+
+        /// <summary>
+        /// 类型
+        /// </summary>
+        [Display(Name = "类型")]
+        [Field(ControlsType = ControlsType.RadioButton, SortOrder = 10, ListShow = true, GroupTabId = 2)]
+        public TargetType Type { get; set; } = TargetType.Internal;
+
+        /// <summary>
+        /// 预估工时
+        /// </summary>
+        [Display(Name = "预估工时")]
+        [Field(ControlsType = ControlsType.RadioButton, SortOrder = 10, ListShow = true, GroupTabId = 2)]
+        [HelpBlock("该目标完成的预估工时，有任务完成人员评价")]
+        public decimal EstimateWorkingHours { get; set; }
+
+        /// <summary>
+        /// 实际工时
+        /// </summary>
+        [Display(Name = "实际工时")]
+        [Field(ControlsType = ControlsType.RadioButton, SortOrder = 10, ListShow = true, GroupTabId = 2)]
+        [HelpBlock("该目标实际完成的工时，由任务检视人员填写")]
+        public decimal ActualWorkingHours { get; set; }
+
+        /// <summary>
+        /// 阶段
+        /// </summary>
+        [Display(Name = "阶段")]
+        [Field(ControlsType = ControlsType.RadioButton, SortOrder = 10, ListShow = true, GroupTabId = 2)]
+        public TargetPhase Phase { get; set; } = TargetPhase.NotBegin;
+
+        /// <summary>
+        /// 难度分级
+        /// </summary>
+        [Display(Name = "难度分级")]
+        [Field(ControlsType = ControlsType.RadioButton, SortOrder = 10, ListShow = true, GroupTabId = 2)]
+        [HelpBlock("一星目标:无难度,助理或实习生可完成<br/>二星目标：会做,初级专员可完成<br/>三星目标：知道做,中级专员可完成<br/>四星目标：安排做,高级专员可完成<br/>五星目标：规划做,难度最高,总监级或架构师级")]
+        public DifficultyClassification Difficulty { get; set; } = DifficultyClassification.TwoStar;
     }
 }

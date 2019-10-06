@@ -8,10 +8,10 @@ using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 using System.Linq;
 
-namespace Alabo.Framework.Core.WebApis.Swagger {
-
-    public static class SwaggerExtensions {
-
+namespace Alabo.Framework.Core.WebApis.Swagger
+{
+    public static class SwaggerExtensions
+    {
         /// <summary>
         ///     添加 Swagger Api 接口服务
         /// </summary>

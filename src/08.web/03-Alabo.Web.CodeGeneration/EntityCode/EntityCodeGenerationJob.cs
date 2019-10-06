@@ -8,6 +8,7 @@ using Alabo.Web.CodeGeneration.EntityCode.Templates;
 using Quartz;
 using System;
 using System.Threading.Tasks;
+using Alabo.Data.Targets.Reports.Domain.Entities;
 
 namespace Alabo.Web.CodeGeneration.EntityCode
 {
@@ -24,8 +25,8 @@ namespace Alabo.Web.CodeGeneration.EntityCode
             entityPath = @"C:\alaboshu.com\alabo\src\05.cloud\14-Alabo.Cloud.Wikis\Wikis\Domain\Entities\";
             CreateCode(typeof(WikiHistory), entityPath);
 
-            entityPath = @"C:\alaboshu.com\alabo\src\05.cloud\13-Alabo.Cloud.Targets\Targets\Domain\Entities\";
-            CreateCode(typeof(TargetHistory), entityPath);
+            entityPath = @"C:\alaboshu.com\alabo\src\02.data\03-Alabo.Data.Targets\Reports\Domain\Entities\";
+            CreateCode(typeof(TargetReport), entityPath);
 
             Console.WriteLine(@"所有代码生成完成");
         }
