@@ -35,6 +35,7 @@
     <ProjectReference Include="..\..\02.data\01-Alabo.Data.People\01-Alabo.Data.People.csproj" />
     <ProjectReference Include="..\..\02.data\02-Alabo.Data.Asset\02-Alabo.Data.Asset.csproj" />
     <ProjectReference Include="..\..\02.data\03-Alabo.Data.Things\03-Alabo.Data.Things.csproj" />
+    <ProjectReference Include="..\..\02.data\04-Alabo.Data.Things\04-Alabo.Data.Things.csproj" />
     <ProjectReference Include="..\..\03.app\01-Alabo.App.Share\01-Alabo.App.Share.csproj" />
     <ProjectReference Include="..\..\03.app\02-Alabo.App.Kpi\02-Alabo.App.Kpis.csproj" />
     <ProjectReference Include="..\..\04.industry\01-Alabo.Industry.Cms\01-Alabo.Industry.Cms.csproj" />

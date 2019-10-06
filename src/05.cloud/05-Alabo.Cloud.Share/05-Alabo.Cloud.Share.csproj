@@ -14,6 +14,7 @@
     <ProjectReference Include="..\..\01.framework\06-Alabo.Framework.Tasks\06-Alabo.Framework.Tasks.csproj" />
     <ProjectReference Include="..\..\02.data\01-Alabo.Data.People\01-Alabo.Data.People.csproj" />
     <ProjectReference Include="..\..\02.data\02-Alabo.Data.Asset\02-Alabo.Data.Asset.csproj" />
+    <ProjectReference Include="..\..\02.data\04-Alabo.Data.Things\04-Alabo.Data.Things.csproj" />
     <ProjectReference Include="..\..\03.app\01-Alabo.App.Share\01-Alabo.App.Share.csproj" />
     <ProjectReference Include="..\03-Alabo.Cloud.Asset\03-Alabo.Cloud.Asset.csproj" />
     <ProjectReference Include="..\04-Alabo.Cloud.Things\04-Alabo.Cloud.Things.csproj" />

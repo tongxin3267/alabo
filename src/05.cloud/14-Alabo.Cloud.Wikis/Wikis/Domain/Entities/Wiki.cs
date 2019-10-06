@@ -17,7 +17,7 @@ namespace Alabo.Cloud.Wikis.Wikis.Domain.Entities
         /// <summary>
         /// 分类Id
         /// </summary>
-        public ObjectId ClassId { get; set; }
+        public ObjectId FatherId { get; set; }
 
         /// <summary>
         /// 项目Id

@@ -19,7 +19,6 @@ namespace Alabo.Web.CodeGeneration.EntityCode
         protected override async Task Execute(IJobExecutionContext context, IScope scope) {
             //手动修改,实体路径，可右键实体手动复制路径
             var entityPath = @"C:\alaboshu.com\alabo\src\05.cloud\14-Alabo.Cloud.Wikis\Settings\Domain\Entities\";
-            CreateCode(typeof(WikiClass), entityPath);
             CreateCode(typeof(WikiProject), entityPath);
 
             entityPath = @"C:\alaboshu.com\alabo\src\05.cloud\14-Alabo.Cloud.Wikis\Wikis\Domain\Entities\";
