@@ -7,13 +7,13 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace Alabo.Framework.Core.Tenants.Domains.Repositories {
-
+namespace Alabo.Framework.Core.Tenants.Domains.Repositories
+{
     /// <summary>
     ///     TenantCreateRepository
     /// </summary>
-    public class TenantCreateRepository : RepositoryEfCore<User, long>, ITenantCreateRepository {
-
+    public class TenantCreateRepository : RepositoryEfCore<User, long>, ITenantCreateRepository
+    {
         /// <summary>
         ///     TenantCreateRepository
         /// </summary>
@@ -375,6 +375,23 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories {
                 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]";
             sqlList.Add(sql);
 
+            // 任务统计表
+            sql = @"CREATE TABLE [dbo].[Target_Report](
+	                    [Id] [bigint] IDENTITY(1,1) NOT NULL,
+	                    [UserId] [bigint] NOT NULL,
+	                    [TargetId] [nvarchar](250) NULL,
+						[Type] [int] NOT NULL,
+	                    [MoneyTypeId] [uniqueidentifier] NOT NULL,
+	                    [Bonus] [decimal](18, 2) NOT NULL,
+	                    [Contribution] [decimal](18, 2) NOT NULL,
+	                    [CreateTime] [datetime2](7) NOT NULL,
+                    PRIMARY KEY CLUSTERED
+                    (
+	                    [Id] ASC
+                    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+                    ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]";
+            sqlList.Add(sql);
+
             // 设置索引等数据
             var uniqueList = new List<string>
             {
@@ -450,11 +467,13 @@ namespace Alabo.Framework.Core.Tenants.Domains.Repositories {
 
                SetNonclustered("Shop_Activity","ProductId"),
                SetNonclustered("Share_Reward","UserId"),
-               SetNonclustered("Share_Reward","UserId"),
                SetNonclustered("Share_Reward","OrderUserId"),
                SetNonclustered("Share_Reward","OrderId"),
                SetNonclustered("Share_Reward","MoneyTypeId"),
                SetNonclustered("Share_Reward","Status"),
+
+               SetNonclustered("Target_Report","UserId"),
+               SetNonclustered("Target_Report","Type"),
             };
             sqlList.AddRange(uniqueList);
             ExecuteSql(sqlList);

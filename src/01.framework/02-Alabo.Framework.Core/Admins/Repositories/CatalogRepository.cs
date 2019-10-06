@@ -11,10 +11,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 
-namespace Alabo.Framework.Core.Admins.Repositories {
-
-    public class CatalogRepository : RepositoryEfCore<User, long>, ICatalogRepository {
-
+namespace Alabo.Framework.Core.Admins.Repositories
+{
+    public class CatalogRepository : RepositoryEfCore<User, long>, ICatalogRepository
+    {
         public CatalogRepository(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
@@ -26,6 +26,30 @@ namespace Alabo.Framework.Core.Admins.Repositories {
             var sqlList = new List<string> {
             };
 
+            // 任务统计表
+            var sql = @"CREATE TABLE [dbo].[Target_Report](
+	                    [Id] [bigint] IDENTITY(1,1) NOT NULL,
+	                    [UserId] [bigint] NOT NULL,
+	                    [TargetId] [nvarchar](250) NULL,
+						[Type] [int] NOT NULL,
+	                    [MoneyTypeId] [uniqueidentifier] NOT NULL,
+	                    [Bonus] [decimal](18, 2) NOT NULL,
+	                    [Contribution] [decimal](18, 2) NOT NULL,
+	                    [CreateTime] [datetime2](7) NOT NULL,
+                    PRIMARY KEY CLUSTERED
+                    (
+	                    [Id] ASC
+                    )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+                    ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]";
+            sqlList.Add(sql);
+
+            // 设置索引等数据
+            var uniqueList = new List<string>
+            {
+               SetNonclustered("Target_Report","UserId"),
+               SetNonclustered("Target_Report","Type"),
+            };
+            sqlList.AddRange(uniqueList);
             ExecuteSql(sqlList);
         }
 
