@@ -35,11 +35,6 @@ namespace Alabo.UI.Design.AutoForms
         public IList<FieldGroup> Groups { get; set; } = new List<FieldGroup>();
 
         /// <summary>
-        ///     表单数据交付服务
-        /// </summary>
-        public FormService Service { get; set; } = new FormService();
-
-        /// <summary>
         ///     底部按钮文字
         /// </summary>
         public string BottonText { get; set; } = "提交";
@@ -63,28 +58,6 @@ namespace Alabo.UI.Design.AutoForms
         ///     表单底部提示文字
         /// </summary>
         public List<string> ButtomHelpText { get; set; } = new List<string>();
-    }
-
-    public class FormService
-    {
-        public FormService() {
-        }
-
-        public FormService(string postApi, string successReturn) {
-            PostApi = postApi;
-            SuccessReturn = successReturn;
-        }
-
-        /// <summary>
-        ///     提交表单数据的API
-        /// </summary>
-        public string PostApi { get; set; }
-
-        /// <summary>
-        ///     表单提交成功以后的返回值
-        ///     可以是URL，或者其他
-        /// </summary>
-        public string SuccessReturn { get; set; }
     }
 
     /// <summary>

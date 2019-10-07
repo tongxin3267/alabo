@@ -29,7 +29,7 @@ namespace Alabo.UI.Design.AutoTables
                 var auto = new AutoTable {
                     Key = fullName,
                     Name = classPropertyAttribute.Name,
-                    ApiUrl = GetApiUrl(type, classDescription.ClassPropertyAttribute.ListApi),
+                    ApiUrl = GetApiUrl(type),
                     Icon = classPropertyAttribute.Icon
                 };
 
@@ -84,27 +84,14 @@ namespace Alabo.UI.Design.AutoTables
         ///     获取Api地址
         /// </summary>
         /// <returns></returns>
-        private static string GetApiUrl(Type type, string apiUrl) {
+        private static string GetApiUrl(Type type) {
             var config = Activator.CreateInstance(type);
             // 如果是继承了IAutoTable，则优先使用/Api/Auto/Table接口
             if (config is IAutoTable) {
                 return "/Api/Auto/Table";
             }
 
-            if (!apiUrl.IsNullOrEmpty()) {
-                return apiUrl;
-            }
-
-            if (apiUrl.IsNotNullOrEmpty()) {
-                return "/Api/Auto/Table";
-            }
-            //if (GetTableType(type) == TableType.AutoConfig)
-            //{
-            //    var url = $"Api/AutoConfig/List?Key={type.FullName}";
-            //    return url;
-            //}
-
-            return apiUrl;
+            return string.Empty;
         }
 
         private static List<TableAction> GetAction(Type type) {

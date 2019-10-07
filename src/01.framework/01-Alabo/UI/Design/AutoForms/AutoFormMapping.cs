@@ -49,11 +49,8 @@ namespace Alabo.UI.Design.AutoForms
                     var auto = new AutoForm {
                         Key = fullName,
                         Name = classPropertyAttribute.Name,
-                        BottonText = classPropertyAttribute.ButtonText,
                         ViewLinks = classDescription.ViewLinks,
                         Title = classPropertyAttribute.Name,
-                        Service = new FormService(classPropertyAttribute.PostApi,
-                            classPropertyAttribute.SuccessReturn)
                     };
                     // 构建字段
 
@@ -181,10 +178,8 @@ namespace Alabo.UI.Design.AutoForms
             var auto = new AutoForm {
                 Key = fullName,
                 Name = classPropertyAttribute.Name,
-                BottonText = classPropertyAttribute.ButtonText,
                 ViewLinks = classDescription.ViewLinks,
                 Title = classPropertyAttribute.Name,
-                Service = new FormService(classPropertyAttribute.PostApi, classPropertyAttribute.SuccessReturn)
             };
             // builder filed
             var groups = classPropertyAttribute.GroupName.Split(",");
