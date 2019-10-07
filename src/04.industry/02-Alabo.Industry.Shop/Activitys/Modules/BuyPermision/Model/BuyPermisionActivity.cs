@@ -47,7 +47,7 @@ namespace Alabo.Industry.Shop.Activitys.Modules.BuyPermision.Model
         ///     会员等级浏览权限
         /// </summary>
         [Display(Name = "会员等级浏览权限")]
-        [Field(ControlsType = ControlsType.CheckBoxMultipl,
+        [Field(ControlsType = ControlsType.CheckBox,
             ApiDataSource = "Api/Common/GetKeyValuesByAutoConfig?type=UserGradeConfig", ListShow = true,
             EditShow = true)]
         [HelpBlock("不设置默认全部会员等级")]
@@ -57,7 +57,7 @@ namespace Alabo.Industry.Shop.Activitys.Modules.BuyPermision.Model
         ///     会员等级购买权限
         /// </summary>
         [Display(Name = "会员等级购买权限")]
-        [Field(ControlsType = ControlsType.CheckBoxMultipl,
+        [Field(ControlsType = ControlsType.CheckBox,
             ApiDataSource = "Api/Common/GetKeyValuesByAutoConfig?type=UserGradeConfig", ListShow = true,
             EditShow = true)]
         [HelpBlock("不设置默认全部会员等级")]

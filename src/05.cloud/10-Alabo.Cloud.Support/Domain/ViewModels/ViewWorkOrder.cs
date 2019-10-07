@@ -34,7 +34,7 @@ namespace Alabo.Cloud.Support.Domain.ViewModels
         public WorkOrderType Type { get; set; }
 
         [Display(Name = "确认时间")]
-        [Field(ControlsType = ControlsType.DateTimePicker, ListShow = true, EditShow = false, SortOrder = 10003,
+        [Field(ControlsType = ControlsType.TimePicker, ListShow = true, EditShow = false, SortOrder = 10003,
             Width = "160")]
         public DateTime ConfirmTime { get; set; } = DateTime.Now;
 

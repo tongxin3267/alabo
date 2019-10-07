@@ -63,7 +63,7 @@ namespace Alabo.Data.People.Users
         /// <value>
         ///     The grade privileges.
         /// </value>
-        [Field(ControlsType = ControlsType.CheckBoxMultipl, SortOrder = 2,
+        [Field(ControlsType = ControlsType.CheckBox, SortOrder = 2,
             DataSourceType =
                 typeof(GradePrivilegesConfig))] //DataSource = "Alabo.App.Core.UserType.Domain.CallBacks.GradePrivilegesConfig")]
         [Display(Name = "等级特权")]

@@ -30,7 +30,7 @@ namespace Alabo.Industry.Shop.Activitys.Modules.TimeLimitBuy.Model
         ///     预售开始时间
         /// </summary>
         [Display(Name = "开始时间")]
-        [Field(ControlsType = ControlsType.DateTimePicker, ListShow = true, EditShow = true)]
+        [Field(ControlsType = ControlsType.TimePicker, ListShow = true, EditShow = true)]
         [HelpBlock("请设置您准备开始的抢购时间，抢购时间应预售活动结束后")]
         public DateTime StartTime { get; set; }
 
@@ -38,7 +38,7 @@ namespace Alabo.Industry.Shop.Activitys.Modules.TimeLimitBuy.Model
         ///     预售结束时间
         /// </summary>
         [Display(Name = "结束时间")]
-        [Field(ControlsType = ControlsType.DateTimePicker, ListShow = true, EditShow = true)]
+        [Field(ControlsType = ControlsType.TimePicker, ListShow = true, EditShow = true)]
         [HelpBlock("请设置您准备结束抢购的时间，抢购结束时间与抢购开始时间相隔不宜低于24小时")]
         public DateTime EndTime { get; set; }
 

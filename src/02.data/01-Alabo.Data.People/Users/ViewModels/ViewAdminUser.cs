@@ -205,7 +205,7 @@ namespace Alabo.Data.People.Users.ViewModels
         /// </summary>
         [Display(Name = "注册时间")]
         [HelpBlock("请输入注册时间")]
-        [Field(ControlsType = ControlsType.DateTimePicker, GroupTabId = 1, Width = "150", EditShow = false,
+        [Field(ControlsType = ControlsType.TimePicker, GroupTabId = 1, Width = "150", EditShow = false,
             ListShow = true, SortOrder = 1000)]
         public DateTime CreateTime { get; set; } = DateTime.Now;
 

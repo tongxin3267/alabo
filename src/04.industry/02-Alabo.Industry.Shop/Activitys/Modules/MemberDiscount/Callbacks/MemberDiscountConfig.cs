@@ -32,7 +32,7 @@ namespace Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Callbacks
         /// <summary>
         ///     GradeIds
         /// </summary>
-        [Field(ControlsType = ControlsType.CheckBoxMultipl, SortOrder = 2, DataSourceType = typeof(UserGradeConfig))]
+        [Field(ControlsType = ControlsType.CheckBox, SortOrder = 2, DataSourceType = typeof(UserGradeConfig))]
         [Display(Name = "显示会员等级价")]
         [HelpBlock("不选择时，前台不显示该等级的价格。")]
         public string GradeIds { get; set; }

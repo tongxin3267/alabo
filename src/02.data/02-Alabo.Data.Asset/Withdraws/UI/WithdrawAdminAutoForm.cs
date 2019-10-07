@@ -231,7 +231,7 @@ namespace Alabo.App.Asset.Withdraws.UI
         ///     时间
         /// </summary>
         [Display(Name = "时间")]
-        [Field(ControlsType = ControlsType.DateTimePicker, EditShow = false, ListShow = true, SortOrder = 11)]
+        [Field(ControlsType = ControlsType.TimePicker, EditShow = false, ListShow = true, SortOrder = 11)]
         public DateTime CreateTime { get; set; }
 
         #endregion

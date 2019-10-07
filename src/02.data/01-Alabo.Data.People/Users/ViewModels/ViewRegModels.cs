@@ -71,7 +71,7 @@ namespace Alabo.Data.People.Users.ViewModels
         ///     Gets or sets the email.
         /// </summary>
         [Display(Name = "邮箱")]
-        [Field(ControlsType = ControlsType.Email, IsMain = true, EditShow = true, GroupTabId = 1, Width = "110",
+        [Field(ControlsType = ControlsType.TextBox, IsMain = true, EditShow = true, GroupTabId = 1, Width = "110",
             ListShow = true,
             SortOrder = 4)]
         [Remote("verify_email", HttpMethod = "POST", ErrorMessage = ErrorMessage.IsUserd)]
@@ -142,21 +142,18 @@ namespace Alabo.Data.People.Users.ViewModels
         ///     Gets or sets the status.
         /// </summary>
         [Display(Name = "状态")]
-        [Field(ControlsType = ControlsType.RadioButtonMultipl, IsMain = true, EditShow = true, GroupTabId = 1,
+        [Field(ControlsType = ControlsType.RadioButton, IsMain = true, EditShow = true, GroupTabId = 1,
             Width = "110", ListShow = true,
             SortOrder = 8)]
         public Status Status { get; set; } = Status.Normal;
 
-        public AutoForm GetView(object id, AutoBaseModel autoModel)
-        {
-            var view = new ViewRegModels
-            {
+        public AutoForm GetView(object id, AutoBaseModel autoModel) {
+            var view = new ViewRegModels {
                 GradeId = Resolve<IGradeService>().DefaultUserGrade.Id,
                 Status = Status.Normal
             };
             var userConfig = Resolve<IAutoConfigService>().GetValue<UserConfig>();
-            if (userConfig.IsFixedData)
-            {
+            if (userConfig.IsFixedData) {
                 view.Mobile = RandomHelper.Mobile();
                 view.Email = RandomHelper.Email();
                 var sex = RandomHelper.GetSex();
@@ -167,8 +164,7 @@ namespace Alabo.Data.People.Users.ViewModels
             return null;
         }
 
-        public ServiceResult Save(object model, AutoBaseModel autoModel)
-        {
+        public ServiceResult Save(object model, AutoBaseModel autoModel) {
             //var user = new Domain.Entities.User
             //{
             //    Map = new UserMap(),

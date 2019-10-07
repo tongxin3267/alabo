@@ -111,7 +111,7 @@ namespace Alabo.Data.People.Employes.UI
         ///     创建时间
         /// </summary>
         [Display(Name = "创建时间")]
-        [Field(ControlsType = ControlsType.DateTimePicker, ListShow = true, EditShow = false, SortOrder = 10001,
+        [Field(ControlsType = ControlsType.TimePicker, ListShow = true, EditShow = false, SortOrder = 10001,
             Width = "160")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]

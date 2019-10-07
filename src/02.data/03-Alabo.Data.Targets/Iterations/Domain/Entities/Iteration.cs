@@ -54,7 +54,7 @@ namespace Alabo.Data.Targets.Iterations.Domain.Entities
 
         [Display(Name = "开始时间")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        [Field(ListShow = false, SortOrder = 5, ControlsType = ControlsType.DateTimePicker)]
+        [Field(ListShow = false, SortOrder = 5, ControlsType = ControlsType.DatePicker)]
         [HelpBlock("迭代预计开始时间")]
         public DateTime StartTime { get; set; } = DateTime.Now;
 
@@ -64,7 +64,7 @@ namespace Alabo.Data.Targets.Iterations.Domain.Entities
 
         [Display(Name = "结束时间")]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
-        [Field(ListShow = false, SortOrder = 6, ControlsType = ControlsType.DateTimePicker)]
+        [Field(ListShow = false, SortOrder = 6, ControlsType = ControlsType.DatePicker)]
         [HelpBlock("迭代结束时间时间")]
         public DateTime EndTime { get; set; } = DateTime.Now.AddDays(30);
 

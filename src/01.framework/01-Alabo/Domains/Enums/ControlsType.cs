@@ -59,11 +59,26 @@ namespace Alabo.Domains.Enums
         Numberic = 7,
 
         /// <summary>
-        ///     时间框
+        ///     时间框 选择时间和日期
         /// </summary>
         [LabelCssClass(BadgeColorCalss.Success)]
         [Display(Name = "时间框")]
-        DateTimePicker = 9,
+        TimePicker = 9,
+
+        /// <summary>
+        ///     日期选择框，只能选择日期不能选择时间
+        /// </summary>
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "日期选择框")]
+        DatePicker = 91,
+
+        /// <summary>
+        ///     时间范围
+        ///     用于高级搜索
+        /// </summary>
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "时间范围")]
+        DateTimeRang = 1003,
 
         /// <summary>
         ///     图片类型
@@ -159,7 +174,7 @@ namespace Alabo.Domains.Enums
         ///     表单提交时的确认框，比如同意注册协议等
         /// </summary>
         [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "布尔值")]
+        [Display(Name = "确认框")]
         Agree = 53,
 
         /// <summary>
@@ -192,14 +207,6 @@ namespace Alabo.Domains.Enums
         [LabelCssClass(BadgeColorCalss.Success)]
         [Display(Name = "数字区间")]
         NumberRang = 1002,
-
-        /// <summary>
-        ///     时间范围
-        ///     用于高级搜索
-        /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "时间范围")]
-        DateTimeRang = 1003,
 
         /// <summary>
         ///     图片预览

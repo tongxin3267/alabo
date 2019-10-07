@@ -55,7 +55,7 @@ namespace Alabo.App.Asset.Refunds.Domain.Entities
         ///     付款时间
         /// </summary>
         [Display(Name = "交易时间")]
-        [Field(ControlsType = ControlsType.DateTimePicker, GroupTabId = 1, Width = "150", ListShow = true,
+        [Field(ControlsType = ControlsType.TimePicker, GroupTabId = 1, Width = "150", ListShow = true,
             SortOrder = 7)]
         public DateTime PayTime { get; set; } = DateTime.MinValue;
 

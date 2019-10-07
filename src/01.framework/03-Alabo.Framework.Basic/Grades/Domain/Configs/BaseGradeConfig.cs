@@ -5,13 +5,13 @@ using Alabo.Web.Mvc.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Basic.Grades.Domain.Configs {
-
+namespace Alabo.Framework.Basic.Grades.Domain.Configs
+{
     /// <summary>
     ///     会员等级基类函数
     /// </summary>
-    public class BaseGradeConfig : AutoConfigBase {
-
+    public class BaseGradeConfig : AutoConfigBase
+    {
         /// <summary>
         ///     Gets or sets the user type identifier.
         /// </summary>
@@ -62,7 +62,7 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs {
         /// <value>
         ///     The grade privileges.
         /// </value>
-        [Field(ControlsType = ControlsType.CheckBoxMultipl, SortOrder = 2,
+        [Field(ControlsType = ControlsType.CheckBox, SortOrder = 2,
             DataSourceType = typeof(GradePrivilegesConfig))]
         [Display(Name = "等级特权")]
         [HelpBlock(

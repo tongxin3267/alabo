@@ -94,7 +94,7 @@ namespace Alabo.App.Asset.Coupons.Domain.Entities
         ///     TimeLimit=PeriodOfValidity是有效
         /// </summary>
         [Display(Name = "开始时间")]
-        [Field(ControlsType = ControlsType.DateTimePicker, ListShow = true, EditShow = true, SortOrder = 9)]
+        [Field(ControlsType = ControlsType.TimePicker, ListShow = true, EditShow = true, SortOrder = 9)]
         public DateTime StartPeriodOfValidity { get; set; }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Alabo.App.Asset.Coupons.Domain.Entities
         ///     TimeLimit=PeriodOfValidity是有效
         /// </summary>
         [Display(Name = "到期时间")]
-        [Field(ControlsType = ControlsType.DateTimePicker, ListShow = true, EditShow = true, SortOrder = 10)]
+        [Field(ControlsType = ControlsType.TimePicker, ListShow = true, EditShow = true, SortOrder = 10)]
         public DateTime EndPeriodOfValidity { get; set; }
     }
 
