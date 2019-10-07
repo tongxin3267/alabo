@@ -15,7 +15,7 @@ namespace Alabo.Tenants.Domain.Entities {
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Base_Tenant")]
-    [ClassProperty(Name = "租户", Icon = "fa fa-cog", SortOrder = 1, SideBarType = SideBarType.LogSideBar)]
+    [ClassProperty(Name = "租户", Icon = "fa fa-cog", SortOrder = 1)]
     public class Tenant : AggregateMongodbUserRoot<Tenant> {
 
         /// <summary>

@@ -9,7 +9,7 @@ namespace Alabo.App.Kpis.GradeKpis.Dtos
 {
     /// <summary>
     /// </summary>
-    [ClassProperty(Name = "等级考核", Icon = "flaticon-route", SideBarType = SideBarType.KpiSideBar)]
+    [ClassProperty(Name = "等级考核", Icon = "flaticon-route")]
     public class GradeKpiView : BaseViewModel
     {
         /// <summary>
@@ -92,7 +92,7 @@ namespace Alabo.App.Kpis.GradeKpis.Dtos
 
     /// <summary>
     /// </summary>
-    [ClassProperty(Name = "考核详情", Icon = "flaticon-route", SideBarType = SideBarType.GradeKpiSideBar)]
+    [ClassProperty(Name = "考核详情", Icon = "flaticon-route")]
     public class GradeKpiDetailView : BaseViewModel
     {
         /// <summary>

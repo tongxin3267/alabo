@@ -17,8 +17,7 @@ namespace Alabo.Framework.Tasks.Schedules.Domain.Entities {
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Task_Schedule")]
-    [ClassProperty(Name = "后台作业任务", Icon = IconFlaticon.file, Description = "后台作业任务,在后台系统执行的时间",
-        SideBarType = SideBarType.ControlSideBar)]
+    [ClassProperty(Name = "后台作业任务", Icon = IconFlaticon.file, Description = "后台作业任务,在后台系统执行的时间")]
     public class Schedule : AggregateMongodbRoot<Schedule> {
 
         /// <summary>
@@ -71,8 +70,7 @@ namespace Alabo.Framework.Tasks.Schedules.Domain.Entities {
     /// <summary>
     ///     历史记录
     /// </summary>
-    [ClassProperty(Name = "最近记录", Icon = IconFlaticon.menu, SortOrder = 1, Description = "系统保留最近100条记录",
-        SideBarType = SideBarType.SinglePageSideBar)]
+    [ClassProperty(Name = "最近记录", Icon = IconFlaticon.menu, SortOrder = 1, Description = "系统保留最近100条记录")]
     public class ScheduleHistory : BaseViewModel {
 
         /// <summary>

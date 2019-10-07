@@ -15,7 +15,7 @@ namespace Alabo.App.Share.HuDong.Domain.Entities
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Hudong")]
-    [ClassProperty(Name = "互动", Icon = "fa fa-cog", SortOrder = 1, SideBarType = SideBarType.LogSideBar)]
+    [ClassProperty(Name = "互动", Icon = "fa fa-cog", SortOrder = 1)]
     public class Hudong : AggregateMongodbUserRoot<Hudong>
     {
         /// <summary>

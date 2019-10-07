@@ -21,8 +21,7 @@ namespace Alabo.App.Asset.Withdraws.Dtos
     /// <summary>
     ///     Class ViewAdminWithDraw.
     /// </summary>
-    [ClassProperty(Name = "提现管理", Icon = "fa fa-puzzle-piece", Description = "提现管理",
-        SideBarType = SideBarType.FinanceSideBar)]
+    [ClassProperty(Name = "提现管理", Icon = "fa fa-puzzle-piece", Description = "提现管理")]
     public class ViewAdminWithDraw : UIBase, IAutoTable<ViewAdminWithDraw>
     {
         /// <summary>

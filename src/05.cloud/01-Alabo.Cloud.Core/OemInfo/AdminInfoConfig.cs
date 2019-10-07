@@ -12,8 +12,7 @@ namespace _01_Alabo.Cloud.Core.OemInfo
     ///     公司信息
     /// </summary>
     [NotMapped]
-    [ClassProperty(Name = "登陆页公司信息", Icon = IconFlaticon.computer, SortOrder = 1,
-        SideBarType = SideBarType.ControlSideBar)]
+    [ClassProperty(Name = "登陆页公司信息", Icon = IconFlaticon.computer, SortOrder = 1)]
     public class AdminInfoConfig : BaseViewModel, IAutoConfig
     {
         /// <summary>

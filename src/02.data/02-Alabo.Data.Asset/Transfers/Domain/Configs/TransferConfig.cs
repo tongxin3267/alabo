@@ -23,7 +23,7 @@ namespace Alabo.App.Asset.Transfers.Domain.Configs
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "账户转账设置", Icon = "fa fa-exchange", Description = "账户转账设置", PageType = ViewPageType.List,
-        SortOrder = 23, SideBarType = SideBarType.TransferSideBar)]
+        SortOrder = 23)]
     public class TransferConfig : AutoConfigBase, IAutoConfig
     {
         /// <summary>

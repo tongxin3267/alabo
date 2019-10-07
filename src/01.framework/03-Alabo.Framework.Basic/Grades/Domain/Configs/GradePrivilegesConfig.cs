@@ -19,7 +19,7 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs {
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "等级特权", Icon = "fa fa-birthday-cake", Description = "等级特权", PageType = ViewPageType.List,
-        SortOrder = 22, SideBarType = SideBarType.ControlSideBar)]
+        SortOrder = 22)]
     public class GradePrivilegesConfig : AutoConfigBase, IAutoConfig {
 
         public void SetDefault() {

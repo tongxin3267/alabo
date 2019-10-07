@@ -15,8 +15,7 @@ namespace Alabo.Cloud.Asset.SecondBuy.Domain.Entities
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("SecondBuy_SecondBuyOrder")]
-    [ClassProperty(Name = "订单管理", Description = "订单管理", Icon = IconFlaticon.route,
-        SideBarType = SideBarType.SchoolSideBar)]
+    [ClassProperty(Name = "订单管理", Description = "订单管理", Icon = IconFlaticon.route)]
     public class SecondBuyOrder : AggregateMongodbRoot<SecondBuyOrder>
     {
         /// <summary>

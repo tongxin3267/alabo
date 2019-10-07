@@ -11,9 +11,7 @@ namespace Alabo.Tool.Payment.CallBacks
     /// <summary>
     /// QQ钱包支付配置
     /// </summary>
-    [ClassProperty(Name = "QQ钱包支付配置", Icon = "fa fa-puzzle-piece",
-        SideBarType = SideBarType.ApiStoreSideBar,
-        SortOrder = 2, Description = "QQ钱包支付配置")]
+    [ClassProperty(Name = "QQ钱包支付配置", Icon = "fa fa-puzzle-piece")]
     public class QPayPaymentConfig : BaseViewModel, IAutoConfig
     {
         /// <summary>

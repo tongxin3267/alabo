@@ -9,7 +9,7 @@ namespace Alabo.App.Kpis.GradeKpis.Dtos
     /// <summary>
     ///     修改会员等级
     /// </summary>
-    [ClassProperty(Name = "修改会员等级", SideBarType = SideBarType.KpiSideBar)]
+    [ClassProperty(Name = "修改会员等级")]
     public class GradeChangeView : BaseViewModel
     {
         /// <summary>

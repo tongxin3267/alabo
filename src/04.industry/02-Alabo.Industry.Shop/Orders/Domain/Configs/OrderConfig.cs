@@ -10,8 +10,7 @@ namespace Alabo.Industry.Shop.Orders.Domain.Configs
     ///     订单配置
     /// </summary>
     [ClassProperty(Name = "订单配置", Icon = "fa fa-puzzle-piece", SortOrder = 1,
-        Description = "订单配置",
-        SideBarType = SideBarType.OrderSideBar)]
+        Description = "订单配置")]
     public class OrderConfig : BaseViewModel, IAutoConfig
     {
         /// <summary>

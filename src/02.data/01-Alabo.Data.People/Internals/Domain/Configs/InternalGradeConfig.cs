@@ -10,8 +10,7 @@ namespace Alabo.Data.People.Internals.Domain.Configs
 {
     [NotMapped]
     [ClassProperty(Name = "内部合伙人等级", Icon = "fa fa-user-times",
-        Description = "内部合伙人等级", PageType = ViewPageType.List, SortOrder = 12,
-        SideBarType = SideBarType.PartnerSideBar)]
+        Description = "内部合伙人等级", PageType = ViewPageType.List, SortOrder = 12)]
     public class InternalGradeConfig : BaseGradeConfig, IAutoConfig
     {
         /// <summary>

@@ -18,8 +18,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Entities
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Cloud_People_UserRight")]
-    [ClassProperty(Name = "会员权益", Description = "查看会员会员权益", Icon = IconFlaticon.route,
-        SideBarType = SideBarType.UserRightsSideBar)]
+    [ClassProperty(Name = "会员权益", Description = "查看会员会员权益", Icon = IconFlaticon.route)]
     public class UserRights : AggregateDefaultUserRoot<UserRights>
     {
         /// <summary>

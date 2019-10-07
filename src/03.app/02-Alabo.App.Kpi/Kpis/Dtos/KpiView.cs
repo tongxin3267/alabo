@@ -9,7 +9,7 @@ namespace Alabo.App.Kpis.Kpis.Dtos
     /// <summary>
     /// </summary>
     /// <seealso cref="BaseViewModel" />
-    [ClassProperty(Name = "KPI绩效", Icon = "flaticon-route", SideBarType = SideBarType.KpiSideBar)]
+    [ClassProperty(Name = "KPI绩效", Icon = "flaticon-route")]
     public class KpiView : BaseViewModel
     {
         /// <summary>

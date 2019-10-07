@@ -17,8 +17,7 @@ namespace Alabo.Industry.Shop.Activitys.ViewModels
 {
     /// <summary>
     /// </summary>
-    [ClassProperty(Name = "活动订单统计", Icon = "fa fa-puzzle-piece", Description = "活动订单统计",
-        SideBarType = SideBarType.OrderSideBar)]
+    [ClassProperty(Name = "活动订单统计", Icon = "fa fa-puzzle-piece", Description = "活动订单统计")]
     public class ViewActivityOrderPage : BaseViewModel
     {
         /// <summary>

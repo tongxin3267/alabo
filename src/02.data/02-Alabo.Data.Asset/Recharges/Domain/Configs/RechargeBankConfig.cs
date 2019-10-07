@@ -8,8 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.Recharges.Domain.Configs
 {
-    [ClassProperty(Name = "收款银行设置", Icon = "fa fa-external-link", Description = "收款设置", SortOrder = 23, PageType = ViewPageType.List,
-        SideBarType = SideBarType.RechargeSideBar)]
+    [ClassProperty(Name = "收款银行设置", Icon = "fa fa-external-link", Description = "收款设置", SortOrder = 23, PageType = ViewPageType.List)]
     public class RechargeBankConfig : AutoConfigBase, IAutoConfig
     {
         /// <summary>

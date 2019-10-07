@@ -13,9 +13,7 @@ namespace Alabo.Cloud.People.GradeInfos.Domain.Entities
     /// <summary>
     ///     用户等级信息
     /// </summary>
-    [ClassProperty(Name = "用户等级信息", Icon = "fa fa-puzzle-piece", Description = "用户等级信息", PageType = ViewPageType.List,
-        ListApi = "Api/GradeInfo/UserList",
-        SideBarType = SideBarType.GradeInfoSideBar, PostApi = "Api/GradeInfo/UserList")]
+    [ClassProperty(Name = "用户等级信息", Icon = "fa fa-puzzle-piece", Description = "用户等级信息", PageType = ViewPageType.List)]
     [BsonIgnoreExtraElements]
     [Table("Cloud_People_GradeInfo")]
     public class GradeInfo : AggregateMongodbUserRoot<GradeInfo>
@@ -77,7 +75,7 @@ namespace Alabo.Cloud.People.GradeInfos.Domain.Entities
     /// <summary>
     ///     用户直推会员数量
     /// </summary>
-    [ClassProperty(Name = "等级信息", SideBarType = SideBarType.GradeInfoSideBar)]
+    [ClassProperty(Name = "等级信息")]
     public class GradeInfoItem : BaseViewModel
     {
         /// <summary>

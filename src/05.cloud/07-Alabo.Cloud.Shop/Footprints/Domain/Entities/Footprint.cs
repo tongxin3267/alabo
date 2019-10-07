@@ -13,8 +13,7 @@ namespace Alabo.Cloud.Shop.Footprints.Domain.Entities
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Attach_FootPrint")]
-    [ClassProperty(Name = "足迹", SideBarType = SideBarType.FullScreen, ListApi = "Api/Footprint/List",
-        PostApi = "Api/Footprint/List")]
+    [ClassProperty(Name = "足迹")]
     public class Footprint : AggregateMongodbUserRoot<Footprint>
     {
         /// <summary>

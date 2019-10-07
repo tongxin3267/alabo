@@ -18,8 +18,7 @@ namespace Alabo.App.Asset.Recharges.Dtos
     /// <summary>
     ///     充值管理
     /// </summary>
-    [ClassProperty(Name = "充值管理", Icon = "fa fa-puzzle-piece", Description = "充值管理",
-        SideBarType = SideBarType.RechargeSideBar)]
+    [ClassProperty(Name = "充值管理", Icon = "fa fa-puzzle-piece", Description = "充值管理")]
     public class RechargeOutput : UIBase, IAutoTable<RechargeOutput>
     {
         /// <summary>

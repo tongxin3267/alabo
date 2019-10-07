@@ -19,9 +19,7 @@ namespace Alabo.Framework.Basic.Grades.Domain.Configs {
 
     [NotMapped]
     [ClassProperty(Name = "用户类型", Icon = "fa fa-users",
-        Description = "用户类型", PageType = ViewPageType.List, SortOrder = 11, SideBarType = SideBarType.ControlSideBar,
-        Validator = "SELECT * FROM User_UserType where UserTypeId='{0}'",
-        GroupName = "基本信息,加盟信息,高级选项", ValidateMessage = "该用户类型下存在用户")]
+        Description = "用户类型", PageType = ViewPageType.List, SortOrder = 11)]
     public class UserTypeConfig : AutoConfigBase, IAutoConfig {
 
         public UserTypeConfig() {

@@ -1,28 +1,31 @@
 ﻿using Alabo.Domains.Enums;
 using System;
 
-namespace Alabo.Web.Mvc.Attributes {
-
+namespace Alabo.Web.Mvc.Attributes
+{
     /// <summary>
     ///     类属性特性信息
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Enum)]
-    public class ClassPropertyAttribute : Attribute {
-        private string v;
-
+    public class ClassPropertyAttribute : Attribute
+    {
         public ClassPropertyAttribute() {
         }
 
-        public ClassPropertyAttribute(string v, string Icon, string Description) {
-            this.v = v;
-            this.Icon = Icon;
-            this.Description = Description;
+        public ClassPropertyAttribute(string icon, string description) {
+            this.Icon = icon;
+            this.Description = description;
         }
 
         /// <summary>
         ///     显示在导航上的图标
         /// </summary>
         public string Icon { get; set; } = "flaticon-interface-8 ";
+
+        /// <summary>
+        /// 是否显示快捷操作按钮
+        /// </summary>
+        public bool IsShowQuickAction { get; set; } = true;
 
         /// <summary>
         ///     显示名称
@@ -66,31 +69,5 @@ namespace Alabo.Web.Mvc.Attributes {
         ///     验证信息
         /// </summary>
         public string ValidateMessage { get; set; }
-
-        /// <summary>
-        ///     左侧菜单样式，默认全屏样式
-        /// </summary>
-        public SideBarType SideBarType { get; set; } = SideBarType.FullScreen;
-
-        /// <summary>
-        ///     提交表单数据的API
-        /// </summary>
-        public string PostApi { get; set; }
-
-        /// <summary>
-        ///     List对象Api接口
-        /// </summary>
-        public string ListApi { get; set; }
-
-        /// <summary>
-        ///     提交表单的文字
-        /// </summary>
-        public string ButtonText { get; set; } = "提交";
-
-        /// <summary>
-        ///     表单提交成功以后的返回值
-        ///     可以是URL，或者其他
-        /// </summary>
-        public string SuccessReturn { get; set; }
     }
 }

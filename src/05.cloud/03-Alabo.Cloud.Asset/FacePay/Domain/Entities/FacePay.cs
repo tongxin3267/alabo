@@ -10,7 +10,7 @@ namespace Alabo.Cloud.Asset.FacePay.Domain.Entities
 {
     [BsonIgnoreExtraElements]
     [Table("FacePay")]
-    [ClassProperty(Name = "当面付记录", Icon = "fa fa-cog", SortOrder = 1, SideBarType = SideBarType.LogSideBar)]
+    [ClassProperty(Name = "当面付记录", Icon = "fa fa-cog", SortOrder = 1)]
     public class FacePay : AggregateMongodbUserRoot<FacePay>
     {
         /// <summary>

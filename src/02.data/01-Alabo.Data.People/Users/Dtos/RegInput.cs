@@ -7,8 +7,7 @@ namespace Alabo.Data.People.Users.Dtos
     /// <summary>
     ///     注册模块
     /// </summary>
-    [ClassProperty(Name = "会员注册", GroupName = "推荐人信息,基本信息", PostApi = "Api/User/Reg",
-        SuccessReturn = "/User/Login", ButtonText = "会员注册")]
+    [ClassProperty(Name = "会员注册", GroupName = "推荐人信息,基本信息",  ButtonText = "会员注册")]
     public class RegInput : EntityDto
     {
         /// <summary>

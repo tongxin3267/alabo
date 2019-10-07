@@ -11,9 +11,7 @@ namespace Alabo.Tool.Payment.CallBacks
     /// <summary>
     /// 易宝支付配置
     /// </summary>
-    [ClassProperty(Name = "易宝支付配置", Icon = "fa fa-puzzle-piece",
-        SideBarType = SideBarType.ApiStoreSideBar,
-        SortOrder = 2, Description = "易宝支付配置")]
+    [ClassProperty(Name = "易宝支付配置", Icon = "fa fa-puzzle-piece")]
     public class YeePayPaymentConfig : BaseViewModel, IAutoConfig
     {
         /// <summary>

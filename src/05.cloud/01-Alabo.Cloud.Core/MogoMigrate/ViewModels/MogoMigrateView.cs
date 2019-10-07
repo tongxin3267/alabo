@@ -10,7 +10,7 @@ namespace _01_Alabo.Cloud.Core.MogoMigrate.ViewModels
     /// <summary>
     ///     Mongo数据迁移
     /// </summary>
-    [ClassProperty(Name = "Mogo数据迁移", Icon = IconFlaticon.alert_off, SideBarType = SideBarType.MogoMigrateSideBar)]
+    [ClassProperty(Name = "Mogo数据迁移", Icon = IconFlaticon.alert_off)]
     public class MogoMigrateView : BaseViewModel
     {
         /// <summary>

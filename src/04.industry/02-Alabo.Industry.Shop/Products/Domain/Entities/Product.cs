@@ -19,8 +19,7 @@ using MongoDB.Bson;
 
 namespace Alabo.Industry.Shop.Products.Domain.Entities
 {
-    [ClassProperty(Name = "商品管理", Icon = "fa fa-puzzle-piece", Description = "产品线商品", PageType = ViewPageType.List,
-        PostApi = "Api/Store/GetProductList", ListApi = "Api/Product/ProductList")]
+    [ClassProperty(Name = "商品管理", Icon = "fa fa-puzzle-piece", Description = "产品线商品", PageType = ViewPageType.List)]
     /// <summary>
     /// Class Product.
     /// </summary>

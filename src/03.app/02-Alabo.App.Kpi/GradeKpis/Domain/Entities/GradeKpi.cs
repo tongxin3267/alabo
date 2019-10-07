@@ -15,8 +15,7 @@ namespace Alabo.App.Kpis.GradeKpis.Domain.Entities
     /// <summary>
     ///     等级考核
     /// </summary>
-    [ClassProperty(Name = "等级考核", SideBarType = SideBarType.KpiSideBar, PageType = ViewPageType.List,
-        PostApi = "Api/GradeKpi/GradeKpiList", ListApi = "Api/GradeKpi/GradeKpiList")]
+    [ClassProperty(Name = "等级考核")]
     [BsonIgnoreExtraElements]
     [Table("Kpi_GradeKpi")]
     public class GradeKpi : AggregateMongodbUserRoot<GradeKpi>
@@ -109,7 +108,7 @@ namespace Alabo.App.Kpis.GradeKpis.Domain.Entities
         }
     }
 
-    [ClassProperty(Name = "等级考核详情", SideBarType = SideBarType.GradeKpiSideBar)]
+    [ClassProperty(Name = "等级考核详情")]
     public class GradeKpiItem : BaseViewModel
     {
         [Display(Name = "KPI类型")]

@@ -14,8 +14,8 @@ namespace Alabo.App.Share.Rewards.ViewModels
     /// <summary>
     ///     分润配置
     /// </summary>
-    [ClassProperty(Name = "分润配置", Icon = "fa fa-puzzle-piece", Description = "分润配置", ListApi = "Api/Reward/List",
-        PageType = ViewPageType.List, PostApi = "Api/Reward/List")]
+    [ClassProperty(Name = "分润配置", Icon = "fa fa-puzzle-piece", Description = "分润配置", 
+        PageType = ViewPageType.List )]
     [BsonIgnoreExtraElements]
     public class ViewReward : BaseViewModel
     {

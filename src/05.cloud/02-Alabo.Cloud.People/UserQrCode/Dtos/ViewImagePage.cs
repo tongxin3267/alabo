@@ -8,8 +8,7 @@ namespace Alabo.Cloud.People.UserQrCode.Dtos
     /// <summary>
     ///     图片
     /// </summary>
-    [ClassProperty(Name = "用户二维码", Icon = "fa fa-puzzle-piece", Description = "用户二维码",
-        ListApi = "Api/QrCode/QrcodeList")]
+    [ClassProperty(Name = "用户二维码", Icon = "fa fa-puzzle-piece", Description = "用户二维码")]
     public class ViewImagePage : BaseViewModel
     {
         /// <summary>

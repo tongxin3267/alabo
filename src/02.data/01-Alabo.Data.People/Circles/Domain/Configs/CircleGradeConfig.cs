@@ -22,8 +22,7 @@ namespace Alabo.Data.People.Circles.Domain.Configs
     [ClassProperty(Name = "商圈等级", Icon = "fa fa-user-times",
         Description = "商圈等级", PageType = ViewPageType.List, SortOrder = 12,
         Validator = "SELECT 1 FROM User_UserType WHERE GradeId='{0}'",
-        ValidateMessage = "该等级下存在用户或者为默认等级",
-        SideBarType = SideBarType.CircleSideBar)]
+        ValidateMessage = "该等级下存在用户或者为默认等级")]
     //SideBar = "/Core/UserType/SideBar/CircleSideBar")]
     public class CircleGradeConfig : BaseGradeConfig, IAutoConfig
     {

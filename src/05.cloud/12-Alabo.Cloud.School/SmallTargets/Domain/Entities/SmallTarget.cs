@@ -12,8 +12,7 @@ namespace Alabo.Cloud.School.SmallTargets.Domain.Entities
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Market_SmallTarget")]
-    [ClassProperty(Name = "小目标", Description = "小目标", Icon = IconFlaticon.background,
-        SideBarType = SideBarType.RelationshipIndexSideBar)]
+    [ClassProperty(Name = "小目标", Description = "小目标", Icon = IconFlaticon.background)]
     public class SmallTarget : AggregateMongodbRoot<SmallTarget>
     {
         /// <summary>

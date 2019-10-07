@@ -17,8 +17,7 @@ namespace Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Callbacks
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "会员等级前台显示配置", Icon = "fa fa-cny", Description = "",
-        PageType = ViewPageType.Edit, SortOrder = 20,
-        SideBarType = SideBarType.UserRightsSideBar)]
+        PageType = ViewPageType.Edit, SortOrder = 20)]
     public class MemberDiscountConfig : BaseViewModel, IAutoConfig
     {
         /// <summary>

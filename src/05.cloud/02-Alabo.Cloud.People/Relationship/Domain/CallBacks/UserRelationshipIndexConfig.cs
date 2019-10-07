@@ -23,8 +23,7 @@ namespace Alabo.Cloud.People.Relationship.Domain.CallBacks
     [NotMapped]
     [ClassProperty(Name = "会员关系网配置", Icon = "fa fa-cny",
         Description = "会员关系网配置较为复杂，需要在专业人员的指导下完成配置，请慎重修改，配置不当将会影响整个系统的分润数据",
-        PageType = ViewPageType.List, SortOrder = 20,
-        SideBarType = SideBarType.RelationshipIndexSideBar)]
+        PageType = ViewPageType.List, SortOrder = 20)]
     public class UserRelationshipIndexConfig : BaseViewModel, IAutoConfig
     {
         /// <summary>

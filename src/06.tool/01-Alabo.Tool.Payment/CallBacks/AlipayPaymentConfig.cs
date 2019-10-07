@@ -11,9 +11,7 @@ namespace Alabo.Tool.Payment.CallBacks
     /// <summary>
     /// 支付宝配置
     /// </summary>
-    [ClassProperty(Name = "支付宝配置", Icon = "fa fa-puzzle-piece",
-        SideBarType = SideBarType.ApiStoreSideBar,
-        SortOrder = 2, Description = "支付宝配置,支持PC电脑端、手机移动端、苹果手机、安卓手机")]
+    [ClassProperty(Name = "支付宝配置", Icon = "fa fa-puzzle-piece")]
     public class AlipayPaymentConfig : BaseViewModel, IAutoConfig
     {
         //internal

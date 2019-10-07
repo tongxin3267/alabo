@@ -26,8 +26,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Configs
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "商城配置", GroupName = "Shop", Icon = "fa fa-fire",
-        PageType = ViewPageType.List, Description = "商城配置,不同的商城使用不同的购买模式购买",
-        SideBarType = SideBarType.ProductSideBar, SortOrder = 400)]
+        PageType = ViewPageType.List, Description = "商城配置,不同的商城使用不同的购买模式购买")]
     public class PriceStyleConfig : AutoConfigBase, IAutoConfig
     {
         /// <summary>

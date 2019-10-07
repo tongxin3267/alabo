@@ -12,8 +12,7 @@ namespace Alabo.Cloud.People.UserQrCode.Domain.Configs
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "二维码设置",
-        Icon = "fa fa-qrcode", SortOrder = 1, Description = "修改二维码设置，会员所有的二维码会重新生成",
-        SideBarType = SideBarType.UserQrCodeSideBar)]
+        Icon = "fa fa-qrcode", SortOrder = 1, Description = "修改二维码设置，会员所有的二维码会重新生成")]
     public class QrCodeConfig : BaseViewModel, IAutoConfig
     {
         /// <summary>

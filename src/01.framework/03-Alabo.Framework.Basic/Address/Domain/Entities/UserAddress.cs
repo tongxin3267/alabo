@@ -14,8 +14,7 @@ namespace Alabo.Framework.Basic.Address.Domain.Entities {
     /// <summary>
     ///     用户地址
     /// </summary>
-    [ClassProperty(Name = "用户地址", PageType = ViewPageType.List, Icon = IconFontawesome.address_book,
-        SideBarType = SideBarType.UserAddressSideBar)]
+    [ClassProperty(Name = "用户地址", PageType = ViewPageType.List, Icon = IconFontawesome.address_book)]
     [BsonIgnoreExtraElements]
     [AutoDelete(IsAuto = true)]
     [Table("Address_UserAddress")]

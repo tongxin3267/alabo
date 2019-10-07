@@ -24,8 +24,8 @@ namespace Alabo.Data.People.Users.ViewModels
     ///     会员管理
     /// </summary>
     [ClassProperty(Name = "会员管理", Icon = "fa fa-puzzle-piece", Description = "管理系统所有会员",
-        ListApi = "Api/UserAdmin/UserList",
-        PageType = ViewPageType.List, PostApi = "Api/User/AddUser")]
+        
+        PageType = ViewPageType.List )]
     [BsonIgnoreExtraElements]
     public class ViewUser : UIBase, IAutoTable<ViewUser>, IAutoForm
     {

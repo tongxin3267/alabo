@@ -24,8 +24,7 @@ using Convert = System.Convert;
 
 namespace Alabo.Industry.Cms.Articles.UI.AutoForm
 {
-    [ClassProperty(Name = "文章", GroupName = "基本设置,详细内容,搜索引擎优化,其他选项", Icon = "fa fa-puzzle-piece",
-        SideBarType = SideBarType.ArticleSideBarSideBar)]
+    [ClassProperty(Name = "文章", GroupName = "基本设置,详细内容,搜索引擎优化,其他选项", Icon = "fa fa-puzzle-piece")]
     public class ArticleAutoForm : UIBase, IAutoForm
     {
         /// <summary>

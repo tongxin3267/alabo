@@ -7,8 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Alabo.App.Asset.Recharges.Domain.Configs
 {
-    [ClassProperty(Name = "充值设置", Icon = "fa fa-plus-square", Description = "充值设置", SortOrder = 23,
-        SideBarType = SideBarType.RechargeSideBar)]
+    [ClassProperty(Name = "充值设置", Icon = "fa fa-plus-square", Description = "充值设置", SortOrder = 23)]
     [NotMapped]
     public class RechargeConfig : AutoConfigBase, IAutoConfig
     {

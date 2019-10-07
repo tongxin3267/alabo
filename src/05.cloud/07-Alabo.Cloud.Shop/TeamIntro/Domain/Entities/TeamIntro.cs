@@ -13,8 +13,7 @@ namespace Alabo.Cloud.Shop.TeamIntro.Domain.Entities
 {
     [BsonIgnoreExtraElements]
     [Table("TeamIntro_TeamIntro")]
-    [ClassProperty(Name = "团队介绍", Description = "团队介绍", Icon = IconFlaticon.route,
-        SideBarType = SideBarType.TeamIntroSideBar)]
+    [ClassProperty(Name = "团队介绍", Description = "团队介绍", Icon = IconFlaticon.route)]
     public class TeamIntro : AggregateMongodbRoot<TeamIntro>
     {
         /// <summary>

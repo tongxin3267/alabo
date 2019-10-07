@@ -23,7 +23,7 @@ namespace Alabo.Data.People.Cities.Domain.Configs
     [ClassProperty(Name = "市代理等级", Icon = "fa fa-user-times",
         Description = "市代理等级", PageType = ViewPageType.List, SortOrder = 12,
         Validator = "SELECT 1 FROM  WHERE GradeId='{0}'",
-        ValidateMessage = "该等级下存在用户或者为默认等级", SideBarType = SideBarType.CitySideBar)]
+        ValidateMessage = "该等级下存在用户或者为默认等级")]
     public class CityGradeConfig : BaseGradeConfig, IAutoConfig
     {
         /// <summary>
@@ -34,14 +34,10 @@ namespace Alabo.Data.People.Cities.Domain.Configs
         [Display(Name = "市代理等级")]
         public new Guid UserTypeId { get; set; } = Guid.Parse("71BE65E6-3A64-414D-972E-1A3D4A365102");
 
-        public void SetDefault()
-        {
+        public void SetDefault() {
             var list = Ioc.Resolve<IAutoConfigService>().GetList<CityGradeConfig>();
-            if (list.Count < 1)
-            {
-                var configs = new List<CityGradeConfig>();
-                var config = new CityGradeConfig
-                {
+            if (list.Count < 1) {
+                var config = new CityGradeConfig {
                     Id = Guid.Parse("72be65e6-3a64-414d-972e-1a3d4a368000"),
                     Name = "市代理默认等级",
                     Icon = "/wwwroot/static/images/GradeIcon/City01.png",
@@ -49,8 +45,7 @@ namespace Alabo.Data.People.Cities.Domain.Configs
                 };
                 list.Add(config);
 
-                config = new CityGradeConfig
-                {
+                config = new CityGradeConfig {
                     Id = Guid.Parse("72be65e6-3a64-414d-972e-1a3d4a368001"),
                     Name = "黄金市代理",
                     Icon = "/wwwroot/static/images/GradeIcon/City02.png",
@@ -59,8 +54,7 @@ namespace Alabo.Data.People.Cities.Domain.Configs
                 };
                 list.Add(config);
 
-                config = new CityGradeConfig
-                {
+                config = new CityGradeConfig {
                     Id = Guid.Parse("72be65e6-3a64-414d-972e-1a3d4a368002"),
                     Name = "钻石市代理",
                     Icon = "/wwwroot/static/images/GradeIcon/City03.png",
@@ -69,9 +63,7 @@ namespace Alabo.Data.People.Cities.Domain.Configs
                 };
                 list.Add(config);
 
-                
-                var autoConfig = new AutoConfig
-                {
+                var autoConfig = new AutoConfig {
                     Type = config.GetType().FullName,
                     // // AppName = typeclassProperty.AppName,
                     LastUpdated = DateTime.Now,
@@ -80,17 +72,5 @@ namespace Alabo.Data.People.Cities.Domain.Configs
                 Ioc.Resolve<IAutoConfigService>().AddOrUpdate(autoConfig);
             }
         }
-    }
-
-    /// <summary>
-    ///     控制面板中 商品分类
-    ///     Alabo.App.Shop.Product.Domain.CallBacks.ProductCalssRelation
-    /// </summary>
-    [ClassProperty(Name = "市代理等级", Icon = "fa fa-database", Description = "市代理等级", PageType = ViewPageType.List,
-        Mark = 0,
-        SideBarType = SideBarType.CitySideBar)]
-    // SideBar = "/Core/UserType/SideBar/CitySideBar")]
-    public class CityGradeRelation : IRelation
-    {
     }
 }

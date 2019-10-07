@@ -9,8 +9,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace _05_Alabo.Cloud.Share.BonusPools.Domain.Configs
 {
-    [ClassProperty(Name = "奖金池", Icon = IconFlaticon.menu, SortOrder = 1,
-        SideBarType = SideBarType.BonusPoolBar)]
+    [ClassProperty(Name = "奖金池", Icon = IconFlaticon.menu, SortOrder = 1)]
     /// <summary>
     ///     奖金池配置
     /// </summary>

@@ -14,8 +14,7 @@ namespace Alabo.Data.People.Stores.UI
     /// <summary>
     /// </summary>
     /// <seealso cref="BaseViewModel" />
-    [ClassProperty(Name = "店铺管理", Icon = "la la-users", Description = "店铺管理",
-        SideBarType = SideBarType.SupplierSideBar)]
+    [ClassProperty(Name = "店铺管理", Icon = "la la-users", Description = "店铺管理")]
     public class ViewStoreForm : Store, IAutoForm
     {
         public AutoForm GetView(object id, AutoBaseModel autoModel)

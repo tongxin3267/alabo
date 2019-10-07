@@ -14,7 +14,7 @@ namespace Alabo.Cloud.Shop.Favorites.Domain.Entities
     [BsonIgnoreExtraElements]
     [Table("Attach_Favorite")]
     [AutoDelete(IsAuto = true)]
-    [ClassProperty(Name = "收藏", SideBarType = SideBarType.FullScreen)]
+    [ClassProperty(Name = "收藏")]
     public class Favorite : AggregateMongodbUserRoot<Favorite>
     {
         /// <summary>

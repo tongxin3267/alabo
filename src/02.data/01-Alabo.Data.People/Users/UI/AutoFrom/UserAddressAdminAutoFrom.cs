@@ -24,8 +24,7 @@ namespace Alabo.Data.People.Users.UI.AutoFrom
     ///     用户地址
     ///     用于管理员 查看所有用户的地址
     /// </summary>
-    [ClassProperty(Name = "用户地址", PageType = ViewPageType.List, Icon = IconFontawesome.address_book,
-        SideBarType = SideBarType.UserAddressSideBar)]
+    [ClassProperty(Name = "用户地址", PageType = ViewPageType.List, Icon = IconFontawesome.address_book)]
     public class UserAddressAdminAutoFrom : UIBase, IAutoTable<UserAddressAdminAutoFrom>, IAutoForm
     {
         public AutoForm GetView(object id, AutoBaseModel autoModel)

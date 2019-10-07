@@ -8,8 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Alabo.App.Asset.Pays.Dtos
 {
-    [ClassProperty(Name = "收银台", Icon = "fa fa-puzzle-piece", Description = "提现管理", PostApi = "Api/WithDraw/Add",
-        SuccessReturn = "Api/WithDraw/Get")]
+    [ClassProperty(Name = "收银台", Icon = "fa fa-puzzle-piece", Description = "提现管理" )]
     public class PayPrivew
     {
         /// <summary>

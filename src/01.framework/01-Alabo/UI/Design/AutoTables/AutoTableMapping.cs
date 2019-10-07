@@ -189,9 +189,11 @@ namespace Alabo.UI.Design.AutoTables
                 // 如果实体继承了Action,则Action 实体通用删除
                 list.Add(new TableAction("编辑", $"/Admin/{type.Name}/Edit"));
                 list.Add(new TableAction("删除", $"/Api/{type.Name}/QueryDelete"));
-                if (classProperty.Description)
+
+                if (classProperty.IsShowQuickAction) {
                     list.Add(new TableAction($"新增{classProperty.Name}", $"/Admin/{type.Name}/Edit",
                         TableActionType.QuickAction));
+                }
             }
 
             return list;

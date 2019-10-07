@@ -15,8 +15,7 @@ namespace _01_Alabo.Cloud.Core.DataBackup.Domain.Entities
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Market_DataBackup")]
-    [ClassProperty(Name = "备份还原", Description = "备份还原", Icon = IconFlaticon.background,
-        SideBarType = SideBarType.RelationshipIndexSideBar)]
+    [ClassProperty(Name = "备份还原", Description = "备份还原", Icon = IconFlaticon.background)]
     public class DataBackup : AggregateMongodbRoot<DataBackup>
     {
         /// <summary>

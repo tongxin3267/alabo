@@ -9,18 +9,17 @@ using MongoDB.Bson.Serialization.Attributes;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Framework.Basic.Regions.Domain.Entities {
-
+namespace Alabo.Framework.Basic.Regions.Domain.Entities
+{
     /// <summary>
     ///     地区
     ///     这个对象中的值生成后不应该修改
     /// </summary>
-    [ClassProperty(Name = "国家区域", Icon = IconFlaticon.map_location, SideBarType = SideBarType.ControlSideBar,
-        PageType = ViewPageType.List, PostApi = "Api/Region/RegionList")]
+    [ClassProperty(Name = "国家区域", Icon = IconFlaticon.map_location)]
     [BsonIgnoreExtraElements]
     [Table("Basic_Region")]
-    public class Region : AggregateMongodbRoot<Region> {
-
+    public class Region : AggregateMongodbRoot<Region>
+    {
         public Region() : base(ObjectId.Empty) {
         }
 

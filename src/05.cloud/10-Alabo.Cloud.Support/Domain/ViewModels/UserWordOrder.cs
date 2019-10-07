@@ -34,7 +34,7 @@ namespace Alabo.Cloud.Support.Domain.ViewModels
     }
 
     [ClassProperty(Name = "意见反馈", Icon = "fa fa-puzzle-piece", Description = "意见反馈",
-        PostApi = "Api/User/GetPasswordForm", SuccessReturn = "Api/User/ChangePassword")]
+         SuccessReturn = "Api/User/ChangePassword")]
     public class UserWordOrderInput : EntityDto
     {
         [Display(Name = "标题")]

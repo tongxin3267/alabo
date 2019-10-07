@@ -15,8 +15,7 @@ namespace Alabo.Users.Entities
     /// <summary>
     ///     Class UserDetail.
     /// </summary>
-    [ClassProperty(Name = "用户详情", PageType = ViewPageType.List,
-        ListApi = "Api/User/Update")]
+    [ClassProperty(Name = "用户详情", PageType = ViewPageType.List)]
     public class UserDetail : AggregateDefaultUserRoot<UserDetail>
     {
         /// <summary>

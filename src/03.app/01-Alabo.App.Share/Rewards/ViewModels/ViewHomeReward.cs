@@ -43,8 +43,7 @@ namespace Alabo.App.Share.Rewards.ViewModels
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Share_ViewHomeReward")]
-    [ClassProperty(Name = "我的分润", Icon = "fa fa-puzzle-piece", Description = "我的分润", PageType = ViewPageType.List,
-        PostApi = "Api/Reward/RewardList", ListApi = "Api/Reward/RewardList")]
+    [ClassProperty(Name = "我的分润", Icon = "fa fa-puzzle-piece", Description = "我的分润", PageType = ViewPageType.List)]
     public class ViewHomeReward : UIBase, IAutoTable<ViewHomeReward>, IAutoList
     {
         /// <summary>

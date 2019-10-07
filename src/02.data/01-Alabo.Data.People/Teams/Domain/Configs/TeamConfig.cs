@@ -9,7 +9,7 @@ namespace Alabo.Data.People.Teams.Domain.Configs
 {
     [NotMapped]
     [ClassProperty(Name = "团队配置", Icon = "flaticon-map",
-        Description = "团队配置", PageType = ViewPageType.Edit, SortOrder = 12, SideBarType = SideBarType.ControlSideBar)]
+        Description = "团队配置", PageType = ViewPageType.Edit, SortOrder = 12)]
     public class TeamConfig : BaseViewModel, IAutoConfig
     {
         /// <summary>

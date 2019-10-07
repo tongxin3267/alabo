@@ -14,7 +14,7 @@ namespace Alabo.Cloud.People.Enterprise.Domain.Entities
     ///     商家认证
     ///     企业资质认证
     /// </summary>
-    [BsonIgnoreExtraElements] //PostApi = "Api/Enterprise/EnterpriseList", ListApi = "Api/Enterprise/EnterpriseList"
+    [BsonIgnoreExtraElements]
     [ClassProperty(Name = "企业认证", Icon = "fa fa-puzzle-piece", Description = "企业认证",
         PageType = ViewPageType.List)]
     [Table("Cloud_People_Enterprise")]

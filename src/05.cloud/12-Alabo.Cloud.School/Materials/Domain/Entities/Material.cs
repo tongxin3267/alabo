@@ -16,8 +16,7 @@ namespace Alabo.Cloud.School.Materials.Domain.Entities
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("PromotionalMaterial_Material")]
-    [ClassProperty(Name = "素材", Description = "素材", Icon = IconFlaticon.route,
-        SideBarType = SideBarType.PromotionalMaterialSideBar)]
+    [ClassProperty(Name = "素材", Description = "素材", Icon = IconFlaticon.route)]
     public class Material : AggregateMongodbRoot<Material>
     {
         /// <summary>

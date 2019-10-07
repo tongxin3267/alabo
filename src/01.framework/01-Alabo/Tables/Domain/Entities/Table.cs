@@ -15,8 +15,7 @@ namespace Alabo.Tables.Domain.Entities {
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Core_Table")]
-    [ClassProperty(Name = "数据库表", Icon = "fa fa-cog", SortOrder = 1,
-        SideBarType = SideBarType.TableSideBar)]
+    [ClassProperty(Name = "数据库表", Icon = "fa fa-cog", SortOrder = 1)]
     public class Table : AggregateMongodbRoot<Table> {
 
         /// <summary>
@@ -75,8 +74,7 @@ namespace Alabo.Tables.Domain.Entities {
     /// <summary>
     ///     列结构
     /// </summary>
-    [ClassProperty(Name = "列结构", Icon = "fa fa-cog", SortOrder = 1,
-        SideBarType = SideBarType.TableSideBar)]
+    [ClassProperty(Name = "列结构", Icon = "fa fa-cog", SortOrder = 1)]
     public class TableColumn : BaseViewModel {
 
         /// <summary>

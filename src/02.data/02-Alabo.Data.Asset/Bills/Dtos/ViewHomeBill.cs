@@ -18,8 +18,7 @@ namespace Alabo.App.Asset.Bills.Dtos
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Asset_ViewHomeBill")]
-    [ClassProperty(Name = "资产明细", Icon = "fa fa-puzzle-piece", SideBarType = SideBarType.FullScreen,
-        PageType = ViewPageType.List, PostApi = "Api/Account/List", ListApi = "Api/Account/List")]
+    [ClassProperty(Name = "资产明细", Icon = "fa fa-puzzle-piece")]
     public class ViewHomeBill : BaseViewModel
     {
         /// <summary>

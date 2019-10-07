@@ -19,7 +19,7 @@ namespace Alabo.Data.Targets.Reports.Domain.Entities
     /// 目标完成统计
     /// 表只增不减少
     /// </summary>
-    [ClassProperty(Name = "目标统计")]
+    [ClassProperty(Name = "目标统计", IsShowQuickAction = false)]
     public class TargetReport : AggregateDefaultUserRoot<TargetReport>
     {
         /// <summary>

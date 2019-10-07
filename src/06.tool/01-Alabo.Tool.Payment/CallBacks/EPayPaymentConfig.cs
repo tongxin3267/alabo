@@ -11,9 +11,7 @@ namespace Alabo.Tool.Payment.CallBacks
     /// <summary>
     /// Paypal支付配置
     /// </summary>
-    [ClassProperty(Name = "网银支付配置", Icon = "fa fa-puzzle-piece",
-        SideBarType = SideBarType.ApiStoreSideBar,
-        SortOrder = 2, Description = "网银支付配置")]
+    [ClassProperty(Name = "网银支付配置", Icon = "fa fa-puzzle-piece")]
     public class EPayPaymentConfig : BaseViewModel, IAutoConfig
     {
         /// <summary>

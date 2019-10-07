@@ -8,18 +8,16 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Framework.Basic.Grades.Domain.Entities {
-
+namespace Alabo.Framework.Basic.Grades.Domain.Entities
+{
     /// <summary>
     ///     用户升级记录
     /// </summary>
-    [ClassProperty(Name = "升级记录", Icon = IconFontawesome.registered, SortOrder = 1, PageType = ViewPageType.List,
-        PostApi = "Api/UpgradeRecord/UpgradeList", ListApi = "Api/UpgradeRecord/UpgradeList",
-        SideBarType = SideBarType.GradeInfoSideBar)]
+    [ClassProperty(Name = "升级记录", Icon = IconFontawesome.registered, SortOrder = 1, PageType = ViewPageType.List)]
     [BsonIgnoreExtraElements]
     [Table("Task_UpgradeRecord")]
-    public class UpgradeRecord : AggregateMongodbUserRoot<UpgradeRecord> {
-
+    public class UpgradeRecord : AggregateMongodbUserRoot<UpgradeRecord>
+    {
         /// <summary>
         ///     升级记录类型
         /// </summary>

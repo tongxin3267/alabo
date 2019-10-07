@@ -22,8 +22,7 @@ namespace Alabo.Framework.Basic.AutoConfigs.Domain.Configs
     [NotMapped]
     [ClassProperty(Name = "货币类型", Icon = "fa fa-cny", Description = "支付方式",
         PageType = ViewPageType.List, SortOrder = 20,
-        Validator = "select 1 from Asset_Account where MoneyTypeId ='{0}'", ValidateMessage = "当前有账户正在使用当前货币",
-        SideBarType = SideBarType.ControlSideBar)]
+        Validator = "select 1 from Asset_Account where MoneyTypeId ='{0}'", ValidateMessage = "当前有账户正在使用当前货币")]
     public class MoneyTypeConfig : AutoConfigBase, IAutoConfig
     {
         /// <summary>

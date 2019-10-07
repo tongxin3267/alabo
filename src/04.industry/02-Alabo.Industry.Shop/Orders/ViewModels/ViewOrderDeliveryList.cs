@@ -14,9 +14,7 @@ namespace Alabo.Industry.Shop.Orders.ViewModels
     /// <summary>
     ///     发货记录表
     /// </summary>
-    [ClassProperty(Name = "发货记录", Icon = "fa fa-puzzle-piece", Description = "发货记录", PageType = ViewPageType.List,
-        ListApi = "Api/OrderDelivery/OrderDeliveryList",
-        SideBarType = SideBarType.OrderSideBar, PostApi = "Api/OrderDelivery/OrderDeliveryList")]
+    [ClassProperty(Name = "发货记录", Icon = "fa fa-puzzle-piece", Description = "发货记录", PageType = ViewPageType.List)]
     public class ViewOrderDeliveryList : BaseViewModel
     {
         /// <summary>

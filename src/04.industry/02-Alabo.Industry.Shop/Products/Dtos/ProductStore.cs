@@ -27,8 +27,7 @@ using Newtonsoft.Json;
 
 namespace Alabo.Industry.Shop.Products.Dtos
 {
-    [ClassProperty(Name = "供应商商品管理", Icon = "fa fa-puzzle-piece", Description = "供应商商品", PageType = ViewPageType.List,
-        PostApi = "Api/Store/GetProductList", ListApi = "Api/Product/ProductList")]
+    [ClassProperty(Name = "供应商商品管理", Icon = "fa fa-puzzle-piece", Description = "供应商商品", PageType = ViewPageType.List)]
     /// <summary>
     /// Class Product.
     /// </summary>

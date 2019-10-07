@@ -8,8 +8,7 @@ namespace Alabo.Industry.Shop.Products.Dtos
 {
     /// <summary>
     /// </summary>
-    [ClassProperty(Name = "商品数据统计", Icon = "fa fa-puzzle-piece", Description = "商品数据统计",
-        SideBarType = SideBarType.ProductSideBar)]
+    [ClassProperty(Name = "商品数据统计", Icon = "fa fa-puzzle-piece", Description = "商品数据统计")]
     public class ProductBaseReport : BaseViewModel
     {
         public long Id { get; set; }

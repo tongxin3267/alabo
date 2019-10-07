@@ -18,7 +18,7 @@ namespace Alabo.Industry.Shop.Orders.Domain.Entities
     /// <summary>
     ///     订单表
     /// </summary>
-    [ClassProperty(Name = "订单表", Description = "店铺管理", PageType = ViewPageType.List, ListApi = "Api/Order/Index")]
+    [ClassProperty(Name = "订单表", Description = "店铺管理", PageType = ViewPageType.List)]
     public class Order : AggregateDefaultUserRoot<Order>
     {
         /// <summary>

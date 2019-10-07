@@ -12,8 +12,7 @@ namespace Alabo.App.Asset.Transfers.Dtos
     /// <summary>
     ///     Class ViewAdminWithDraw.
     /// </summary>
-    [ClassProperty(Name = "转账详情", Icon = "fa fa-puzzle-piece", Description = "转账详情",
-        SideBarType = SideBarType.FinanceSideBar)]
+    [ClassProperty(Name = "转账详情", Icon = "fa fa-puzzle-piece", Description = "转账详情")]
     public class ViewAdminTransfer : BaseViewModel
     {
         /// <summary>

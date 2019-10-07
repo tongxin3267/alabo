@@ -11,8 +11,7 @@ namespace Alabo.App.Asset.Withdraws.Dtos
     ///     Class WithDrawInput.
     ///     提现申请
     /// </summary>
-    [ClassProperty(Name = "提现管理", Icon = "fa fa-puzzle-piece", Description = "提现管理", PostApi = "Api/WithDraw/Add",
-        SuccessReturn = "pages/WithDraw/view")]
+    [ClassProperty(Name = "提现管理", Icon = "fa fa-puzzle-piece", Description = "提现管理" )]
     public class WithDrawInput : EntityDto
     {
         /// <summary>

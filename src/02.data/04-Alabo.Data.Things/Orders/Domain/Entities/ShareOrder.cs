@@ -17,9 +17,7 @@ namespace Alabo.Data.Things.Orders.Domain.Entities
     /// <summary>
     ///     分润订单
     /// </summary>
-    [ClassProperty(Name = "分润订单", Icon = "fa fa-file", Description = "分润订单",
-        ListApi = "Api//AdminBasic/List?Service=IShareOrderService&Method=GetPagedList",
-        SideBarType = SideBarType.FenRunSideBar)]
+    [ClassProperty(Name = "分润订单", Icon = "fa fa-file", Description = "分润订单")]
     public class ShareOrder : AggregateDefaultUserRoot<ShareOrder>
     {
         /// <summary>

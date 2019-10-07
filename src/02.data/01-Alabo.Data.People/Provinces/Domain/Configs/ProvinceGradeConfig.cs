@@ -21,7 +21,7 @@ namespace Alabo.Data.People.Provinces.Domain.Configs
     [ClassProperty(Name = "省代理等级", Icon = "fa fa-user-times",
         Description = "省代理等级", PageType = ViewPageType.List, SortOrder = 12,
         Validator = "SELECT 1 FROM  WHERE GradeId='{0}'",
-        ValidateMessage = "该等级下存在用户或者为默认等级", SideBarType = SideBarType.ProvinceSideBar)]
+        ValidateMessage = "该等级下存在用户或者为默认等级")]
     public class ProvinceGradeConfig : BaseGradeConfig, IAutoConfig
     {
         public void SetDefault()

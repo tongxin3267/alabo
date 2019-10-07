@@ -17,8 +17,7 @@ namespace _05_Alabo.Cloud.Share.ShareTests.UI
     /// <summary>
     ///     分润订单
     /// </summary>
-    [ClassProperty(Name = "分润测试", Icon = "fa fa-file", Description = "分润测试",
-        SideBarType = SideBarType.ShareOrderTestSideBar)]
+    [ClassProperty(Name = "分润测试", Icon = "fa fa-file", Description = "分润测试")]
     public class TestShareOrderView : UIBase, IAutoForm
     {
         /// <summary>

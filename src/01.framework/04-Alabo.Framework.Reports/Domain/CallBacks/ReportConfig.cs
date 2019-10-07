@@ -11,7 +11,7 @@ namespace Alabo.Framework.Reports.Domain.CallBacks {
     ///     统计设置
     /// </summary>
     [ClassProperty(Name = "统计设置", Icon = "fa fa-calendar", SortOrder = 500,
-        Description = "设置以及查看系统的统计设置", SideBarType = SideBarType.ControlSideBar)]
+        Description = "设置以及查看系统的统计设置")]
     [NotMapped]
     public class ReportConfig : BaseViewModel, IAutoConfig {
 

@@ -13,7 +13,7 @@ namespace Alabo.Data.People.Users.Dtos
     ///     密码修改传输层
     /// </summary>
     [ClassProperty(Name = "密码修改", Icon = "fa fa-puzzle-piece", Description = "密码修改",
-        PostApi = "Api/User/ChangePassword", SuccessReturn = "pages/user/index")]
+         SuccessReturn = "pages/user/index")]
     public class PasswordInput : UIBase, IAutoForm //EntityDto
     {
         /// <summary>

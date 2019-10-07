@@ -15,7 +15,7 @@ namespace Alabo.Data.People.Users.Dtos
     ///     支付密码修改传输层
     /// </summary>
     [ClassProperty(Name = "支付密码修改", Icon = "fa fa-puzzle-piece", Description = "支付密码修改",
-        PostApi = "Api/User/ChangePayPassword", SuccessReturn = "pages/user/index")]
+         SuccessReturn = "pages/user/index")]
     public class PayPasswordInput : UIBase, IAutoForm //EntityDto
     {
         /// <summary>

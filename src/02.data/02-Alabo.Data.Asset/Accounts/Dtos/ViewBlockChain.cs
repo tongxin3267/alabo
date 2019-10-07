@@ -17,7 +17,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Alabo.App.Asset.Accounts.Dtos
 {
     [BsonIgnoreExtraElements]
-    [ClassProperty(Name = "区块链钱包", Icon = "flaticon-route", SideBarType = SideBarType.FinanceBlockChainSideBar)]
+    [ClassProperty(Name = "区块链钱包", Icon = "flaticon-route")]
     public class ViewBlockChain : UIBase, IAutoTable<ViewBlockChain>
     {
         /// <summary>
