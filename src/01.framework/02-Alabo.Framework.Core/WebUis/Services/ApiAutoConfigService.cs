@@ -41,8 +41,6 @@ namespace Alabo.Framework.Core.WebUis.Services
             if (classDescription.ClassPropertyAttribute.PageType == ViewPageType.Edit) {
                 config.Value = model.ToJsons();
             } else {
-                // var list = Ioc.Resolve<IAutoConfigService>().GetList(key);
-
                 var list = ServiceInterpreter.Eval<List<JObject>>("IAutoConfigService", "GetList", key);
                 var idValue = Reflection.GetPropertyValue("Id", model);
                 var guid = idValue.ConvertToGuid();
@@ -59,7 +57,6 @@ namespace Alabo.Framework.Core.WebUis.Services
                     }
                     list.Remove(current);
                 }
-
                 list.Add(JObject.FromObject(model));
                 config.Value = list.ToJsons();
             }
