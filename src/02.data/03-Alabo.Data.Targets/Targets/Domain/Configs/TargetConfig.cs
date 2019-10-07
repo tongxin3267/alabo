@@ -12,14 +12,14 @@ namespace Alabo.Data.Targets.Targets.Domain.Configs
     /// <summary>
     /// 目标设置
     /// </summary>
-    [ClassProperty(Name = "目标设置", Icon = "fa fa-external-link", Description = "目标设置", SortOrder = 23, PageType = ViewPageType.List)]
-    public class TargetConfig : AutoConfigBase, IAutoConfig
+    [ClassProperty(Name = "目标设置", Icon = "fa fa-external-link", Description = "目标设置", SortOrder = 23, PageType = ViewPageType.Edit)]
+    public class TargetConfig : IAutoConfig
     {
         /// <summary>
         ///     是否启用贡献值
         /// </summary>
         [Display(Name = "是否启用贡献值")]
-        [Field(ControlsType = ControlsType.DropdownList, DataSourceType = typeof(MoneyTypeConfig))]
+        [Field(ControlsType = ControlsType.Switch, DataSourceType = typeof(MoneyTypeConfig))]
         [HelpBlock("是否启用贡献值，启用贡献值后，任务完成后会根据贡献值来获取奖励")]
         public bool Contribution { get; set; } = false;
 

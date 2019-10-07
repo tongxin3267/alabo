@@ -23,8 +23,8 @@ namespace Alabo.Dynamics
             if (entityName.EndsWith("Service")) {
                 entityName = entityName.Substring(0, entityName.Length - 7);
             }
-
-            if (entityName != "Identity") {
+            // 以I开头的实体单独处理下
+            if (entityName != "Identity" && entityName != "Iteration") {
                 if (entityName.StartsWith("I")) {
                     entityName = entityName.Substring(1, entityName.Length - 1);
                 }

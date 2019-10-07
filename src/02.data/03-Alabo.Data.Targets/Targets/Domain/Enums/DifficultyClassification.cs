@@ -12,38 +12,38 @@ namespace Alabo.Data.Targets.Targets.Domain.Enums
     public enum DifficultyClassification
     {
         /// <summary>
-        /// 一星目标
+        /// 一星难度
         /// </summary>
         [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "一星目标")]
+        [Display(Name = "一星难度")]
         OneStar = 1,
 
         /// <summary>
-        /// 二星目标
+        /// 二星难度
         /// </summary>
         [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "二星目标")]
+        [Display(Name = "二星难度")]
         TwoStar = 2,
 
         /// <summary>
-        /// 三星目标
+        /// 三星难度
         /// </summary>
         [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "三星目标")]
+        [Display(Name = "三星难度")]
         ThreeStar = 3,
 
         /// <summary>
-        /// 四星目标
+        /// 四星难度
         /// </summary>
         [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "四星目标")]
+        [Display(Name = "四星难度")]
         FourStar = 4,
 
         /// <summary>
-        /// 五星目标
+        /// 五星难度
         /// </summary>
         [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "五星目标")]
+        [Display(Name = "五星难度")]
         FiveStar = 5,
     }
 }
