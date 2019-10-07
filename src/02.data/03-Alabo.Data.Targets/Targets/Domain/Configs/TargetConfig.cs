@@ -35,7 +35,7 @@ namespace Alabo.Data.Targets.Targets.Domain.Configs
         /// 任务安排人奖金获取比例
         /// </summary>
         [Display(Name = "任务安排人奖金获取比例")]
-        [Field(ControlsType = ControlsType.Decimal, DataSourceType = typeof(MoneyTypeConfig))]
+        [Field(ControlsType = ControlsType.Decimal)]
         [HelpBlock("任务安排人奖金获取比例,是以任务的奖励为基数.比如一个任务奖金为100元，如果比例为10%，则任务安排人可获得10元的奖励")]
         public decimal ArrangeUserBonusRatio { get; set; } = 0m;
 
@@ -43,7 +43,7 @@ namespace Alabo.Data.Targets.Targets.Domain.Configs
         /// 任务安排人奖金获取比例
         /// </summary>
         [Display(Name = "任务安排人共贡献值获取比例")]
-        [Field(ControlsType = ControlsType.DropdownList, DataSourceType = typeof(MoneyTypeConfig))]
+        [Field(ControlsType = ControlsType.Decimal)]
         [HelpBlock("任务安排人贡献值获取比例,是以任务的贡献值为基数.比如一个任务贡献值为100，如果比例为10%，则任务安排人可获得10贡献值")]
         public decimal ArrangeUserContributionRatio { get; set; } = 0m;
 
@@ -51,7 +51,7 @@ namespace Alabo.Data.Targets.Targets.Domain.Configs
         /// 任务安排人奖金获取比例
         /// </summary>
         [Display(Name = "任务检视人奖金获取比例")]
-        [Field(ControlsType = ControlsType.Decimal, DataSourceType = typeof(MoneyTypeConfig))]
+        [Field(ControlsType = ControlsType.Decimal)]
         [HelpBlock("任务检视人奖金获取比例,是以任务的奖励为基数.比如一个任务奖金为100元，如果比例为10%，则任务检视人可获得10元的奖励")]
         public decimal AuditorUserBonusRatio { get; set; } = 0m;
 
@@ -59,7 +59,7 @@ namespace Alabo.Data.Targets.Targets.Domain.Configs
         /// 任务安排人奖金获取比例
         /// </summary>
         [Display(Name = "任务检视人共贡献值获取比例")]
-        [Field(ControlsType = ControlsType.DropdownList, DataSourceType = typeof(MoneyTypeConfig))]
+        [Field(ControlsType = ControlsType.Decimal)]
         [HelpBlock("任务检视人贡献值获取比例,是以任务的贡献值为基数.比如一个任务贡献值为100，如果比例为10%，则任务检视人可获得10贡献值")]
         public decimal AuditorUserContributionRatio { get; set; } = 0m;
 
