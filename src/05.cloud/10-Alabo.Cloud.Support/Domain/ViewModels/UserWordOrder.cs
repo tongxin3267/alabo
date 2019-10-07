@@ -33,8 +33,7 @@ namespace Alabo.Cloud.Support.Domain.ViewModels
         public int ClassId { get; set; }
     }
 
-    [ClassProperty(Name = "意见反馈", Icon = "fa fa-puzzle-piece", Description = "意见反馈",
-         SuccessReturn = "Api/User/ChangePassword")]
+    [ClassProperty(Name = "意见反馈", Icon = "fa fa-puzzle-piece", Description = "意见反馈")]
     public class UserWordOrderInput : EntityDto
     {
         [Display(Name = "标题")]

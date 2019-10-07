@@ -12,8 +12,7 @@ namespace Alabo.App.Asset.Recharges.Dtos
     ///     Class RechargeAddInput.
     ///     线上和线下充值接口
     /// </summary>
-    [ClassProperty(Name = "充值",  SuccessReturn = "Api/Recharge/Get",
-        Description = "充值")]
+    [ClassProperty(Name = "充值")]
     public class RechargeAddInput : ApiInputDto
     {
         /// <summary>

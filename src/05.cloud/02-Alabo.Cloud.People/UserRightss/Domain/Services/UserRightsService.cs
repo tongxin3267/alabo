@@ -42,8 +42,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
     public class UserRightsService : ServiceBase<UserRights, long>, IUserRightsService
     {
         public UserRightsService(IUnitOfWork unitOfWork, IRepository<UserRights, long> repository) : base(
-            unitOfWork, repository)
-        {
+            unitOfWork, repository) {
         }
 
         #region 商家服务订购
@@ -53,8 +52,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
         /// </summary>
         /// <param name="orderBuyInput"></param>
         /// <returns></returns>
-        public async Task<Tuple<ServiceResult, OrderBuyOutput>> Buy(UserRightsOrderInput orderBuyInput)
-        {
+        public async Task<Tuple<ServiceResult, OrderBuyOutput>> Buy(UserRightsOrderInput orderBuyInput) {
             #region 安全验证
 
             var result = ServiceResult.Success;
@@ -94,8 +92,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
             // 准营销中心，和营销中心的开通只能是管理员 动态配置,不用写死
             //if (orderBuyInput.GradeId == Guid.Parse("f2b8d961-3fec-462d-91e8-d381488ea972") || orderBuyInput.GradeId == Guid.Parse("cc873faa-749b-449b-b85a-c7d26f626feb"))
             //{
-            if (orderBuyInput.OpenType == UserRightOpenType.AdminOpenHightGrade)
-            {
+            if (orderBuyInput.OpenType == UserRightOpenType.AdminOpenHightGrade) {
                 if (!Resolve<IUserService>().IsAdmin(user.Id)) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("您不是管理员无权开通"), orderBuyOutput);
                 }
@@ -113,8 +110,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
 
             if (orderBuyInput.OpenType == UserRightOpenType.OpenToOtherByPay ||
                 orderBuyInput.OpenType == UserRightOpenType.AdminOpenHightGrade ||
-                orderBuyInput.OpenType == UserRightOpenType.OpenToOtherByRight)
-            {
+                orderBuyInput.OpenType == UserRightOpenType.OpenToOtherByRight) {
                 if (orderBuyInput.Mobile.IsNullOrEmpty()) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("请输入手机号码"), orderBuyOutput);
                 }
@@ -125,8 +121,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
 
                 // 查找是否为注册用户
                 var find = Resolve<IUserService>().GetSingleByUserNameOrMobile(orderBuyInput.Mobile);
-                if (find != null)
-                {
+                if (find != null) {
                     var findUserGrade = userGrades.FirstOrDefault(r => r.Id == find.GradeId);
                     if (findUserGrade == null) {
                         return Tuple.Create(ServiceResult.FailedWithMessage("激活的用户等级不存在"), orderBuyOutput);
@@ -143,8 +138,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
                     //    orderBuyInput.RegInfo = findUser;
                     //else
                     //{
-                    orderBuyInput.RegInfo = new RegInput
-                    {
+                    orderBuyInput.RegInfo = new RegInput {
                         Mobile = find.Mobile,
                         UserName = find.Mobile,
                         Name = find.Name,
@@ -153,17 +147,14 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
                         ParentId = find.ParentId
                     };
                     // }
-                }
-                else
-                {
+                } else {
                     if (!RegexHelper.CheckMobile(orderBuyInput.Mobile)) {
                         return Tuple.Create(ServiceResult.FailedWithMessage("手机号码格式不正确"), orderBuyOutput);
                     }
                     // 注册新用户
                     var password = RandomHelper.PassWord();
                     var payPassword = RandomHelper.PayPassWord();
-                    var regInput = new RegInput
-                    {
+                    var regInput = new RegInput {
                         Mobile = orderBuyInput.Mobile,
                         UserName = orderBuyInput.Mobile,
                         Name = orderBuyInput.Name,
@@ -222,24 +213,20 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
         /// <summary>
         ///     获取需要支付的价格
         /// </summary>
-        public Tuple<ServiceResult, decimal> GetPayPrice(UserRightsOrderInput orderInput)
-        {
+        public Tuple<ServiceResult, decimal> GetPayPrice(UserRightsOrderInput orderInput) {
             var result = ServiceResult.Success;
             if (orderInput.OpenType == UserRightOpenType.OpenToOtherByRight) {
                 return Tuple.Create(ServiceResult.FailedWithMessage("帮他购买时无价格计算"), 0m);
             }
 
-            if (orderInput.OpenType == UserRightOpenType.OpenToOtherByPay)
-            {
+            if (orderInput.OpenType == UserRightOpenType.OpenToOtherByPay) {
                 if (orderInput.User.Id == orderInput.BuyUser.Id) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("不能帮自己购买"), 0m);
                 }
 
                 var price = orderInput.BuyGrade.Price;
                 return Tuple.Create(result, price);
-            }
-            else
-            {
+            } else {
                 if (orderInput.BuyGrade.Price <= orderInput.CurrentGrade.Price &&
                     orderInput.OpenType != UserRightOpenType.AdminOpenHightGrade) {
                     return Tuple.Create(ServiceResult.FailedWithMessage("购买的等级不能低于当前等级"), 0m);
@@ -253,15 +240,12 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
                 var userRightsConfigs = Resolve<IAutoConfigService>().GetList<UserRightsConfig>();
                 var userGrades = Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
                 // 如果包含，则为升级
-                if (userRightsConfigs.Select(r => r.GradeId).Contains(orderInput.User.GradeId))
-                {
+                if (userRightsConfigs.Select(r => r.GradeId).Contains(orderInput.User.GradeId)) {
                     if (orderInput.OpenType != UserRightOpenType.Upgrade &&
                         orderInput.OpenType != UserRightOpenType.AdminOpenHightGrade) {
                         return Tuple.Create(ServiceResult.FailedWithMessage("开通方式有错,应该为自身升级"), 0m);
                     }
-                }
-                else
-                {
+                } else {
                     if (orderInput.OpenType != UserRightOpenType.OpenSelf) {
                         return Tuple.Create(ServiceResult.FailedWithMessage("开通方式有错,应该为自身购买"), 0m);
                     }
@@ -294,8 +278,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
         /// </summary>
         /// <param name="orderBuyInput"></param>
         /// <returns></returns>
-        public async Task<Tuple<ServiceResult, OrderBuyOutput>> OpenToOther(UserRightsOrderInput orderBuyInput)
-        {
+        public async Task<Tuple<ServiceResult, OrderBuyOutput>> OpenToOther(UserRightsOrderInput orderBuyInput) {
             var result = ServiceResult.Success;
             var orderBuyOutput = new OrderBuyOutput();
 
@@ -317,11 +300,9 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
             }
 
             var context = Repository<IUserRightsRepository>().RepositoryContext;
-            try
-            {
+            try {
                 context.BeginTransaction();
-                var kpi = new Kpi
-                {
+                var kpi = new Kpi {
                     ModuleId = orderBuyInput.GradeId,
                     UserId = orderBuyInput.UserId,
                     Type = TimeType.NoLimit,
@@ -349,13 +330,10 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
                 // 添加用户权益
                 var userRightConfigList = Resolve<IAutoConfigService>().GetList<UserRightsConfig>();
                 var userRightConfig = userRightConfigList.FirstOrDefault(r => r.GradeId == orderBuyInput.GradeId);
-                if (userRightConfig != null)
-                {
+                if (userRightConfig != null) {
                     var addList = new List<UserRights>();
-                    foreach (var rightItem in userRightConfig.UserRightItems)
-                    {
-                        var addItem = new UserRights
-                        {
+                    foreach (var rightItem in userRightConfig.UserRightItems) {
+                        var addItem = new UserRights {
                             GradeId = rightItem.GradeId,
                             TotalCount = rightItem.Count,
                             UserId = orderBuyInput.BuyUser.Id
@@ -370,8 +348,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
 
                 //开通成功修改UserDetail表地址
                 var buyUserDetail = Resolve<IUserDetailService>().GetSingle(u => u.UserId == orderBuyInput.BuyUser.Id);
-                if (buyUserDetail.RegionId <= 0)
-                {
+                if (buyUserDetail.RegionId <= 0) {
                     buyUserDetail.RegionId = orderBuyInput.RegionId.ToInt64();
                     Resolve<IUserDetailService>().Update(buyUserDetail);
                 }
@@ -386,14 +363,10 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
                 orderBuyOutput.BuyGrade =
                     orderBuyInput
                         .BuyGrade; // Resolve<IAutoConfigService>().GetList<UserGradeConfig>().FirstOrDefault(s => s.Id == orderBuyInput.BuyUser.GradeId);
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 context.RollbackTransaction();
                 result = ServiceResult.FailedWithMessage(ex.Message);
-            }
-            finally
-            {
+            } finally {
                 context.DisposeTransaction();
             }
 
@@ -405,8 +378,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
 
         #region 自己开通或升级,支付钱帮朋友开通，管理员开通营销中心
 
-        public async Task<Tuple<ServiceResult, OrderBuyOutput>> OpenSelfOrUpgrade(UserRightsOrderInput orderInput)
-        {
+        public async Task<Tuple<ServiceResult, OrderBuyOutput>> OpenSelfOrUpgrade(UserRightsOrderInput orderInput) {
             var result = ServiceResult.Success;
             var orderBuyOutput = new OrderBuyOutput();
             //if (orderInput.GradeId == Guid.Parse("72be65e6-3000-414d-972e-1a3d4a366001"))
@@ -422,12 +394,10 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
 
             var context = Repository<IUserRightsRepository>().RepositoryContext;
 
-            try
-            {
+            try {
                 context.BeginTransaction();
 
-                var order = new Order
-                {
+                var order = new Order {
                     UserId = orderInput.BuyUser.Id,
                     StoreId = string.Empty,
                     OrderStatus = OrderStatus.WaitingBuyerPay,
@@ -440,11 +410,9 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
                 // 订单扩展数据
                 var userRightOrder = AutoMapping.SetValue<UserRightsOrderInput>(orderInput);
 
-                order.OrderExtension = new OrderExtension
-                {
+                order.OrderExtension = new OrderExtension {
                     // 价格信息
-                    OrderAmount = new OrderAmount
-                    {
+                    OrderAmount = new OrderAmount {
                         TotalProductAmount = payPrice.Item2, // 商品总价
                         ExpressAmount = 0m, // 邮费
                         FeeAmount = 0m // 服务费
@@ -464,19 +432,16 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
                 {
                     order
                 };
-                var singlePayInput = new SinglePayInput
-                {
+                var singlePayInput = new SinglePayInput {
                     Orders = orderList,
                     User = orderInput.User,
                     OrderUser = orderInput.BuyUser,
-                    ExcecuteSqlList = new BaseServiceMethod
-                    {
+                    ExcecuteSqlList = new BaseServiceMethod {
                         Method = "ExcecuteSqlList",
                         ServiceName = typeof(IUserRightsService).Name,
                         Parameter = order.Id
                     },
-                    AfterSuccess = new BaseServiceMethod
-                    {
+                    AfterSuccess = new BaseServiceMethod {
                         Method = "AfterPaySuccess",
                         ServiceName = typeof(IUserRightsService).Name,
                         Parameter = order.Id
@@ -486,8 +451,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
                     RedirectUrl = "/pages/index?path=successful_opening"
                 };
                 var payResult = Resolve<IOrderAdminService>().AddSinglePay(singlePayInput);
-                if (!payResult.Item1.Succeeded)
-                {
+                if (!payResult.Item1.Succeeded) {
                     // 支付记录添加失败，回滚
                     context.RollbackTransaction();
                     return Tuple.Create(payResult.Item1, new OrderBuyOutput());
@@ -504,8 +468,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
 
                 //开通成功修改UserDetail表地址
                 var buyUserDetail = Resolve<IUserDetailService>().GetSingle(u => u.UserId == orderInput.BuyUser.Id);
-                if (buyUserDetail.RegionId <= 0)
-                {
+                if (buyUserDetail.RegionId <= 0) {
                     buyUserDetail.RegionId = orderInput.RegionId.ToInt64();
                     Resolve<IUserDetailService>().Update(buyUserDetail);
                 }
@@ -518,14 +481,10 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
                 orderBuyOutput.BuyGrade =
                     orderInput
                         .BuyGrade; // Resolve<IAutoConfigService>().GetList<UserGradeConfig>().FirstOrDefault(s => s.Id == orderInput.BuyUser.GradeId);
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 context.RollbackTransaction();
                 result = ServiceResult.FailedWithMessage(ex.Message);
-            }
-            finally
-            {
+            } finally {
                 context.DisposeTransaction();
             }
 
@@ -544,35 +503,29 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
         /// </summary>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public IList<UserRightsOutput> GetView(long userId)
-        {
+        public IList<UserRightsOutput> GetView(long userId) {
             var isAdmin = Resolve<IUserService>().IsAdmin(userId);
             var userRightsOutputList = GetViewByCache(isAdmin);
-            if (userId > 0)
-            {
+            if (userId > 0) {
                 var user = Resolve<IUserService>().GetSingle(r => r.Id == userId); //  非缓存中读取
 
-                if (user != null && user.Status == Status.Normal)
-                {
+                if (user != null && user.Status == Status.Normal) {
                     // 删除缓存
                     Resolve<IUserService>().DeleteUserCache(user.Id, user.UserName);
                     var userRightsConfigs = Resolve<IAutoConfigService>().GetList<UserRightsConfig>();
                     var userGrades = Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
                     var userGrade = userGrades.FirstOrDefault(r => r.Id == user.GradeId);
-                    userRightsOutputList.Foreach(r =>
-                    {
+                    userRightsOutputList.Foreach(r => {
                         r.CurrnetGradeName = userGrade?.Name;
                         r.UserName = user.GetUserName();
                     });
 
                     // 如果包含
-                    if (userRightsConfigs.Select(r => r.GradeId).Contains(user.GradeId))
-                    {
+                    if (userRightsConfigs.Select(r => r.GradeId).Contains(user.GradeId)) {
                         var userRightsList = Resolve<IUserRightsService>().GetList(r => r.UserId == user.Id);
 
                         if (userGrade != null) {
-                            foreach (var userRightOutputItem in userRightsOutputList)
-                            {
+                            foreach (var userRightOutputItem in userRightsOutputList) {
                                 var itemGrade = userGrades.FirstOrDefault(r => r.Id == userRightOutputItem.GradeId);
                                 if (itemGrade == null) {
                                     continue;
@@ -586,11 +539,9 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
                                 //}
                                 userRightOutputItem.SalePrice = itemGrade.Price;
                                 //是否开放按钮
-                                if (userRightOutputItem.IsOpen)
-                                {
+                                if (userRightOutputItem.IsOpen) {
                                     //升级会员
-                                    if (itemGrade.Price > userGrade.Price)
-                                    {
+                                    if (itemGrade.Price > userGrade.Price) {
                                         //判断是否已经登记地址
                                         var userDetail = Resolve<IUserDetailService>()
                                             .GetSingle(u => u.UserId == userId);
@@ -598,22 +549,18 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
                                             userRightOutputItem.IsRegion = false;
                                         }
 
-                                        if (gradeConfig.CanUpgradeBySelf)
-                                        {
+                                        if (gradeConfig.CanUpgradeBySelf) {
                                             userRightOutputItem.OpenType = UserRightOpenType.Upgrade;
                                             userRightOutputItem.Price = itemGrade.Price - userGrade.Price;
                                             userRightOutputItem.ButtonText =
                                                 $"补{itemGrade.Price - userGrade.Price}升级{userRightOutputItem.Name}";
                                         }
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         //帮朋友开通
                                         var userRightItem = userRightsList.FirstOrDefault(r =>
                                             r.GradeId == userRightOutputItem.GradeId);
                                         long remainCount = 0; // 剩余数量
-                                        if (userRightItem != null)
-                                        {
+                                        if (userRightItem != null) {
                                             userRightOutputItem.TotalCount = userRightItem.TotalCount;
                                             remainCount = userRightItem.TotalCount - userRightItem.TotalUseCount;
                                         }
@@ -641,44 +588,35 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
                                         //}
 
                                         //有端口的时候
-                                        if (remainCount > 0)
-                                        {
-                                            if (!gradeConfig.IsHavePortNeedToPay)
-                                            {
+                                        if (remainCount > 0) {
+                                            if (!gradeConfig.IsHavePortNeedToPay) {
                                                 //使用端口名额帮朋友开通
                                                 userRightOutputItem.OpenType = UserRightOpenType.OpenToOtherByRight;
                                                 userRightOutputItem.ButtonText = $"帮朋友开通{itemGrade?.Name}";
-                                            }
-                                            else
-                                            {
+                                            } else {
                                                 //支付金额帮朋友开通
                                                 userRightOutputItem.OpenType = UserRightOpenType.OpenToOtherByPay;
                                                 userRightOutputItem.Price = itemGrade.Price;
                                                 userRightOutputItem.ButtonText =
                                                     $"支付{itemGrade.Price}元帮朋友开通{userRightOutputItem.Name}";
                                             }
-                                        }
-                                        else
-                                        {
+                                        } else {
                                             //无端口
-                                            if (gradeConfig.HaveNotPortCanOpen)
-                                            {
+                                            if (gradeConfig.HaveNotPortCanOpen) {
                                                 //支付金额帮胖友开通
                                                 userRightOutputItem.OpenType = UserRightOpenType.OpenToOtherByPay;
                                                 userRightOutputItem.Price = itemGrade.Price;
                                                 userRightOutputItem.ButtonText =
                                                     $"支付{itemGrade.Price}元帮朋友开通{userRightOutputItem.Name}";
-                                            }
-                                            else
-                                            {
+                                            } else {
                                                 userRightOutputItem.ButtonText = null;
                                             }
                                         }
 
-                                        if (gradeConfig.IsCanOnlyAdminOpen)
-                                        {
+                                        if (gradeConfig.IsCanOnlyAdminOpen) {
                                             userRightOutputItem.OpenType = UserRightOpenType.AdminOpenHightGrade;
-                                            userRightOutputItem.ButtonText = "管理员权限开通";
+                                            userRightOutputItem.ButtonText =
+                                                $"补{itemGrade.Price - userGrade.Price}升级{userRightOutputItem.Name}";
                                         }
 
                                         ////// 按要求全部要钱(2019.04.02)
@@ -706,15 +644,13 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
         /// </summary>
         /// <param name="isAdmin"></param>
         /// <returns></returns>
-        public IList<UserRightsOutput> GetView(bool isAdmin)
-        {
+        public IList<UserRightsOutput> GetView(bool isAdmin) {
             var userRightsOutputList = GetViewByCache(isAdmin);
 
             var userRightsConfigs = Resolve<IAutoConfigService>().GetList<UserRightsConfig>();
             var userGrades = Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
 
-            foreach (var userRightOutputItem in userRightsOutputList)
-            {
+            foreach (var userRightOutputItem in userRightsOutputList) {
                 var itemGrade = userGrades.FirstOrDefault(r => r.Id == userRightOutputItem.GradeId);
                 if (itemGrade == null) {
                     continue;
@@ -732,8 +668,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
 
         #endregion
 
-        public List<string> ExcecuteSqlList(List<object> entityIdList)
-        {
+        public List<string> ExcecuteSqlList(List<object> entityIdList) {
             // 会员权益，订单Id只有一个
 
             var sqlList = new List<string>();
@@ -777,19 +712,16 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
             var currentUserRightConfig =
                 userRightConfigList.FirstOrDefault(r => r.GradeId == order.OrderExtension.User.GradeId);
             if (upgradeUserRightConfig != null) {
-                foreach (var rightItem in upgradeUserRightConfig.UserRightItems)
-                {
+                foreach (var rightItem in upgradeUserRightConfig.UserRightItems) {
                     var userRightItem = userRightsList.FirstOrDefault(r => r.GradeId == rightItem.GradeId);
-                    if (userRightItem != null)
-                    {
+                    if (userRightItem != null) {
                         // 需增加的端口数量
                         var count = rightItem.Count;
                         // 当前会员的等级的权益
                         var currentRightItem =
                             currentUserRightConfig?.UserRightItems?.FirstOrDefault(r =>
                                 r.GradeId == userRightItem.GradeId);
-                        if (currentRightItem != null)
-                        {
+                        if (currentRightItem != null) {
                             // 计算需要增加的端口数
                             count = rightItem.Count - currentRightItem.Count;
                             if (count < 0) {
@@ -800,9 +732,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
                         sql =
                             $"update Market_UserRights set TotalCount=TotalCount+{count} where UserId={buyUser.Id} and GradeId='{rightItem.GradeId}'";
                         sqlList.Add(sql);
-                    }
-                    else
-                    {
+                    } else {
                         sql =
                             $"INSERT INTO [dbo].[Market_UserRights] ([GradeId] ,[UserId] ,[TotalUseCount],[TotalCount] ,[CreateTime]) VALUES('{rightItem.GradeId}',{buyUser.Id},0,{rightItem.Count},'{DateTime.Now}')";
                         sqlList.Add(sql);
@@ -816,22 +746,17 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
             return sqlList;
         }
 
-        public void AfterPaySuccess(List<object> entityIdList)
-        {
+        public void AfterPaySuccess(List<object> entityIdList) {
             var orderId = entityIdList.FirstOrDefault();
             var order = Resolve<IOrderService>().GetSingle(r => r.Id == orderId.ConvertToLong(0));
 
             UserRightsOrderInput userRightsOrder;
-            if (order != null)
-            {
+            if (order != null) {
                 userRightsOrder = order.OrderExtension.AttachContent.ToObject<UserRightsOrderInput>();
-                if (userRightsOrder != null)
-                {
+                if (userRightsOrder != null) {
                     var buyUser = Resolve<IUserService>().GetSingle(userRightsOrder.BuyUser?.Id);
-                    if (buyUser != null)
-                    {
-                        var upgradeRecord = new UpgradeRecord
-                        {
+                    if (buyUser != null) {
+                        var upgradeRecord = new UpgradeRecord {
                             AfterGradeId = userRightsOrder.GradeId,
                             UserId = buyUser.Id,
                             Type = UpgradeType.Buy
@@ -842,8 +767,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
 
                         var beforeGrade = Resolve<IGradeService>().GetGrade(buyUser.GradeId); // 当前等级
                         var afterGrade = Resolve<IGradeService>().GetGrade(upgradeRecord.AfterGradeId); // 升级后等级
-                        if (afterGrade.Id == afterGrade.Id)
-                        {
+                        if (afterGrade.Id == afterGrade.Id) {
                             //throw new ValidException("非法调用");
                             Resolve<IUserRightsService>()
                                 .Log(
@@ -851,8 +775,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
                             return;
                         }
 
-                        if (afterGrade.Contribute <= beforeGrade.Contribute)
-                        {
+                        if (afterGrade.Contribute <= beforeGrade.Contribute) {
                             Resolve<IUserRightsService>()
                                 .Log(
                                     $"购买者:{userRightsOrder.BuyUser?.Id},order:{order.Id}=>{afterGrade.Contribute + "<=" + beforeGrade.Contribute}非法调用!");
@@ -861,18 +784,15 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
                         }
 
                         // 按要求所有开通, 既要花钱又扣端口 2019.04.02
-                        if (true)
-                        {
+                        if (true) {
                             // 检查端口, 检查用户的名额
                             var userGrades = Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
                             var userRight = GetSingle(r =>
                                 r.UserId == userRightsOrder.UserId && r.GradeId == userRightsOrder.GradeId);
 
                             if (userRight != null && userRight.TotalCount - userRight.TotalUseCount > 0 &&
-                                userRightsOrder.BuyUser != null)
-                            {
-                                var kpi = new Kpi
-                                {
+                                userRightsOrder.BuyUser != null) {
+                                var kpi = new Kpi {
                                     ModuleId = userRightsOrder.GradeId,
                                     UserId = userRightsOrder.UserId,
                                     Type = TimeType.NoLimit,
@@ -910,8 +830,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
         ///     获取没有userId的数据
         /// </summary>
         /// <returns></returns>
-        private IList<UserRightsOutput> GetViewByCache(bool isAdmin)
-        {
+        private IList<UserRightsOutput> GetViewByCache(bool isAdmin) {
             var result = new List<UserRightsOutput>();
             var userRightsConfigs = Resolve<IAutoConfigService>().GetList<UserRightsConfig>().OrderBy(r => r.SortOrder);
             var userGrades = Resolve<IAutoConfigService>().GetList<UserGradeConfig>();
@@ -919,8 +838,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
 
             //var isAdmin = Resolve<IUserService>().IsAdmin(userId);
 
-            foreach (var item in userRightsConfigs)
-            {
+            foreach (var item in userRightsConfigs) {
                 var itemGrade = userGrades.FirstOrDefault(r => r.Id == item.GradeId);
                 //如果不是管理员就判断是否显示该等级
                 if (!isAdmin) //是否显示该等级
@@ -930,8 +848,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
                     }
                 }
 
-                if (itemGrade != null)
-                {
+                if (itemGrade != null) {
                     var userRightsOutput = AutoMapping.SetValue<UserRightsOutput>(itemGrade);
                     userRightsOutput.BackGroundImage = Resolve<IApiService>().ApiImageUrl(item.BackGroundImage);
                     userRightsOutput.ThemeColor = item.ThemeColor;
@@ -942,8 +859,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
                     userRightsOutput.Price = itemGrade.Price;
                     //是否开放按钮
                     if (userRightsOutput.IsOpen) {
-                        if (item.CanUpgradeBySelf)
-                        {
+                        if (item.CanUpgradeBySelf) {
                             // 无登录用户
                             userRightsOutput.OpenType = UserRightOpenType.OpenSelf;
                             //if (userRightsOutput.OpenType == UserRightOpenType.OpenToOtherByPay)
@@ -965,8 +881,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
                     var privilegeIds = itemGrade?.GradePrivileges.ToGuidList()
                         ?.OrderBy(id => privilegeDict[id].SortOrder);
                     if (privilegeIds != null) {
-                        foreach (var itemId in privilegeIds)
-                        {
+                        foreach (var itemId in privilegeIds) {
                             var gradePrivilegeItem = privilegeDict[itemId];
                             var privilegesItem = AutoMapping.SetValue<PrivilegesItem>(gradePrivilegeItem);
                             privilegesItem.Icon = Resolve<IApiService>().ApiImageUrl(privilegesItem.Icon);
@@ -988,10 +903,8 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
         /// </summary>
         /// <param name="buyUser"></param>
         /// <param name="gradeId"></param>
-        private void SendMessage(User buyUser, Guid gradeId)
-        {
-            if (buyUser != null)
-            {
+        private void SendMessage(User buyUser, Guid gradeId) {
+            if (buyUser != null) {
                 var buyGrade = Resolve<IGradeService>().GetGrade(gradeId);
                 var message = $"尊敬的用户您好,您已成为{buyGrade.Name},请登录系统查看相关的权益和熟悉相关操作";
                 Resolve<IOpenService>().SendRaw(buyUser.Mobile, message);
@@ -1003,8 +916,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
 
                 // 发送推荐人
                 var parentUser = Resolve<IUserService>().GetSingle(buyUser.ParentId);
-                if (parentUser != null)
-                {
+                if (parentUser != null) {
                     buyGrade = Resolve<IGradeService>().GetGrade(gradeId);
                     message = $"尊敬的用户您好,您推荐的商户{buyUser.Mobile}已成为{buyGrade.Name},请悉知并在指导商家熟悉{buyGrade.Name}相关的权益";
                     Resolve<IOpenService>().SendRaw(parentUser.Mobile, message);
@@ -1021,16 +933,13 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
         ///     获取用户权益描述信息
         /// </summary>
         /// <param name="userId"></param>
-        private string GetUserRightIntro(long userId)
-        {
+        private string GetUserRightIntro(long userId) {
             var userRights = GetList(r => r.UserId == userId);
             var message = string.Empty;
-            if (userRights.Count > 0)
-            {
+            if (userRights.Count > 0) {
                 message = "您当前包含如下权益端口：";
                 var grades = Resolve<IGradeService>().GetUserGradeList();
-                foreach (var item in userRights)
-                {
+                foreach (var item in userRights) {
                     var grade = grades.FirstOrDefault(r => r.Id == item.GradeId);
                     message +=
                         $"{grade.Name}共:{item.TotalCount},已使用:{item.TotalUseCount},剩余:{item.TotalCount - item.TotalUseCount} ";
@@ -1042,8 +951,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
 
         #region 后台添加或编辑
 
-        public UserRights GetEditView(object id)
-        {
+        public UserRights GetEditView(object id) {
             var key = id.ConvertToLong();
             var find = GetSingle(r => r.Id == key);
             if (find == null) {
@@ -1055,8 +963,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
             return find;
         }
 
-        public ServiceResult AddOrUpdate(UserRights view)
-        {
+        public ServiceResult AddOrUpdate(UserRights view) {
             // 验证用户
             var result = Resolve<IValidService>().VerifyUser(view.UserName);
             if (!result.Succeeded) {
@@ -1070,8 +977,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
 
             var user = Resolve<IUserService>().GetSingle(view.UserName);
             var find = GetSingle(view.Id);
-            if (find != null)
-            {
+            if (find != null) {
                 if (find.GradeId != view.GradeId) {
                     return ServiceResult.FailedWithMessage("该用户该等级权益已存在，请选择后编辑");
                 }
@@ -1085,11 +991,8 @@ namespace Alabo.Cloud.People.UserRightss.Domain.Services
                 if (!Update(find)) {
                     return ServiceResult.FailedWithMessage("编辑权益失败");
                 }
-            }
-            else
-            {
-                var model = new UserRights
-                {
+            } else {
+                var model = new UserRights {
                     TotalUseCount = view.TotalUseCount.ConvertToLong(),
                     TotalCount = view.TotalCount.ConvertToLong(),
                     UserId = user.Id,

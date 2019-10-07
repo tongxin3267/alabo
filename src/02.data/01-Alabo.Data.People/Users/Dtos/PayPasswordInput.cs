@@ -14,8 +14,7 @@ namespace Alabo.Data.People.Users.Dtos
     /// <summary>
     ///     支付密码修改传输层
     /// </summary>
-    [ClassProperty(Name = "支付密码修改", Icon = "fa fa-puzzle-piece", Description = "支付密码修改",
-         SuccessReturn = "pages/user/index")]
+    [ClassProperty(Name = "支付密码修改", Icon = "fa fa-puzzle-piece", Description = "支付密码修改")]
     public class PayPasswordInput : UIBase, IAutoForm //EntityDto
     {
         /// <summary>
@@ -75,8 +74,7 @@ namespace Alabo.Data.People.Users.Dtos
 
         //public IObjectCache ObjectCache => throw new System.NotImplementedException();
 
-        public AutoForm GetView(object id, AutoBaseModel autoModel)
-        {
+        public AutoForm GetView(object id, AutoBaseModel autoModel) {
             var result = new AutoForm();
             result = ToAutoForm(new PasswordInput());
             result.AlertText = "【修改支付密码】为了更好的保护你的帐号安全，避免您和您的好友受到损失，建议您设置密码";
@@ -94,8 +92,7 @@ namespace Alabo.Data.People.Users.Dtos
         //    throw new System.NotImplementedException();
         //}
 
-        public ServiceResult Save(object model, AutoBaseModel autoModel)
-        {
+        public ServiceResult Save(object model, AutoBaseModel autoModel) {
             var parameter = (PayPasswordInput)model;
             var view = AutoMapping.SetValue<PasswordInput>(parameter);
             view.Type = PasswordType.PayPassword;
