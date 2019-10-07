@@ -12,8 +12,7 @@ namespace Alabo.Logging.Logs.Entities {
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Core_Logs")]
-    [ClassProperty(Name = "日志", Icon = "fa fa-cog", SortOrder = 1,
-        SideBarType = SideBarType.LogSideBar)]
+    [ClassProperty(Name = "日志", Icon = "fa fa-cog", SortOrder = 1)]
     public class Logs : AggregateMongodbUserRoot<Logs> {
 
         /// <summary>

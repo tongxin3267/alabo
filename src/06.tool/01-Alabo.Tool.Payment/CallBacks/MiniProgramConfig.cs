@@ -13,9 +13,7 @@ namespace Alabo.Tool.Payment.CallBacks
     /// <summary>
     /// 微信小程序配置
     /// </summary>
-    [ClassProperty(Name = "微信小程序配置", Icon = "fa fa-puzzle-piece",
-        SideBarType = SideBarType.ApiStoreSideBar,
-        SortOrder = 2, Description = "微信小程序配置")]
+    [ClassProperty(Name = "微信小程序配置", Icon = "fa fa-puzzle-piece")]
     public class MiniProgramConfig : BaseViewModel, IAutoConfig
     {
         /// <summary>

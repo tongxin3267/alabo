@@ -23,7 +23,7 @@ namespace Alabo.Data.People.ShareHolders.Domain.Configs
     [ClassProperty(Name = "股东等级", Icon = "fa fa-user-times",
         Description = "股东等级", PageType = ViewPageType.List, SortOrder = 12,
         Validator = "SELECT 1 FROM User_UserType WHERE GradeId='{0}'",
-        ValidateMessage = "该等级下存在用户或者为默认等级", SideBarType = SideBarType.ShareHoldersSideBar)]
+        ValidateMessage = "该等级下存在用户或者为默认等级")]
     public class ShareHoldersGradeConfig : BaseGradeConfig, IAutoConfig
     {
         /// <summary>
@@ -96,8 +96,7 @@ namespace Alabo.Data.People.ShareHolders.Domain.Configs
     ///     控制面板中 商品分类
     ///     Alabo.App.Shop.Product.Domain.CallBacks.ProductCalssRelation
     /// </summary>
-    [ClassProperty(Name = "股东等级", Icon = "fa fa-database", Description = "股东等级", PageType = ViewPageType.List, Mark = 0,
-        SideBarType = SideBarType.ShareHoldersSideBar)]
+    [ClassProperty(Name = "股东等级", Icon = "fa fa-database", Description = "股东等级", PageType = ViewPageType.List, Mark = 0)]
     //SideBar = "/Core/UserType/SideBar/RewardHoldersSideBar")]
     public class ShareHoldersGradeRelation : IRelation
     {

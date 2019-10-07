@@ -11,8 +11,7 @@ namespace Alabo.Data.People.Provinces.Domain.Configs
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "省代理配置", Icon = "fa fa-user-times",
-        Description = "省代理配置", PageType = ViewPageType.Edit, SortOrder = 12,
-        SideBarType = SideBarType.PartnerSideBar)]
+        Description = "省代理配置", PageType = ViewPageType.Edit, SortOrder = 12)]
     public class ProvinceConfig : IAutoConfig
     {
         /// <summary>

@@ -17,8 +17,7 @@ namespace Alabo.Industry.Shop.Activitys.ViewModels
 {
     /// <summary>
     /// </summary>
-    [ClassProperty(Name = "活动订单统计", Icon = "fa fa-puzzle-piece", Description = "活动订单统计",
-        SideBarType = SideBarType.OrderSideBar)]
+    [ClassProperty(Name = "活动订单统计", Icon = "fa fa-puzzle-piece", Description = "活动订单统计")]
     public class ViewActivityOrderPage : BaseViewModel
     {
         /// <summary>
@@ -191,15 +190,14 @@ namespace Alabo.Industry.Shop.Activitys.ViewModels
         ///     下单时间，订单创建时间
         /// </summary>
         [Display(Name = "创建时间")]
-        [Field(ControlsType = ControlsType.DateTimePickerRank, IsShowBaseSerach = true, IsShowAdvancedSerach = true,
+        [Field(ControlsType = ControlsType.TimePicker, IsShowBaseSerach = true, IsShowAdvancedSerach = true,
             ListShow = true, SortOrder = 30)]
         public DateTime CreateTime { get; set; } = DateTime.Now;
 
         /// <summary>
         ///     获取链接
         /// </summary>
-        public IEnumerable<ViewLink> ViewLinks()
-        {
+        public IEnumerable<ViewLink> ViewLinks() {
             var quickLinks = new List<ViewLink>
             {
                 new ViewLink("活动管理", "/Admin/Activitys/Index?Key=[[Key]]", Icons.List, LinkType.FormQuickLink),

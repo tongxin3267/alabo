@@ -17,8 +17,7 @@ namespace Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Callbacks
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "会员等级前台显示配置", Icon = "fa fa-cny", Description = "",
-        PageType = ViewPageType.Edit, SortOrder = 20,
-        SideBarType = SideBarType.UserRightsSideBar)]
+        PageType = ViewPageType.Edit, SortOrder = 20)]
     public class MemberDiscountConfig : BaseViewModel, IAutoConfig
     {
         /// <summary>
@@ -32,7 +31,7 @@ namespace Alabo.Industry.Shop.Activitys.Modules.MemberDiscount.Callbacks
         /// <summary>
         ///     GradeIds
         /// </summary>
-        [Field(ControlsType = ControlsType.CheckBoxMultipl, SortOrder = 2, DataSourceType = typeof(UserGradeConfig))]
+        [Field(ControlsType = ControlsType.CheckBox, SortOrder = 2, DataSourceType = typeof(UserGradeConfig))]
         [Display(Name = "显示会员等级价")]
         [HelpBlock("不选择时，前台不显示该等级的价格。")]
         public string GradeIds { get; set; }

@@ -2,11 +2,12 @@
 using Alabo.Web.Mvc.ViewModel;
 using Alabo.Web.Validations;
 using System.Collections.Generic;
+using Alabo.Extensions;
 
-namespace Alabo.UI.Design.AutoForms {
-
-    public class AutoForm {
-
+namespace Alabo.UI.Design.AutoForms
+{
+    public class AutoForm
+    {
         /// <summary>
         ///     如果为空的时候，渲染表单
         ///     如果不为空：渲染信息提示，不渲染表单
@@ -34,11 +35,6 @@ namespace Alabo.UI.Design.AutoForms {
         public IList<FieldGroup> Groups { get; set; } = new List<FieldGroup>();
 
         /// <summary>
-        ///     表单数据交付服务
-        /// </summary>
-        public FormService Service { get; set; } = new FormService();
-
-        /// <summary>
         ///     底部按钮文字
         /// </summary>
         public string BottonText { get; set; } = "提交";
@@ -64,33 +60,11 @@ namespace Alabo.UI.Design.AutoForms {
         public List<string> ButtomHelpText { get; set; } = new List<string>();
     }
 
-    public class FormService {
-
-        public FormService() {
-        }
-
-        public FormService(string postApi, string successReturn) {
-            PostApi = postApi;
-            SuccessReturn = successReturn;
-        }
-
-        /// <summary>
-        ///     提交表单数据的API
-        /// </summary>
-        public string PostApi { get; set; }
-
-        /// <summary>
-        ///     表单提交成功以后的返回值
-        ///     可以是URL，或者其他
-        /// </summary>
-        public string SuccessReturn { get; set; }
-    }
-
     /// <summary>
     ///     表单布局方式
     /// </summary>
-    public class FormLayout {
-
+    public class FormLayout
+    {
         /// <summary>
         ///     表单布局方式
         /// </summary>
@@ -105,8 +79,8 @@ namespace Alabo.UI.Design.AutoForms {
     /// <summary>
     ///     字段组
     /// </summary>
-    public class FieldGroup {
-
+    public class FieldGroup
+    {
         /// <summary>
         ///     分组名称
         /// </summary>
@@ -121,8 +95,8 @@ namespace Alabo.UI.Design.AutoForms {
     /// <summary>
     ///     表单字段属性
     /// </summary>
-    public class FormFieldProperty {
-
+    public class FormFieldProperty
+    {
         /// <summary>
         ///     字段英文名字
         /// </summary>
@@ -143,7 +117,15 @@ namespace Alabo.UI.Design.AutoForms {
         /// <summary>
         ///     控件类型，输入框类型
         /// </summary>
-        public ControlsType Type { get; set; }
+        public ControlsType ControlsType { get; set; }
+
+        /// <summary>
+        /// 控件类型，用于前台数据渲染
+        /// </summary>
+
+        public string Type {
+            get { return this.ControlsType.ToString().ToLower(); }
+        }
 
         /// <summary>
         ///     必填

@@ -14,8 +14,7 @@ namespace Alabo.Data.People.Users.ViewModels
     /// <summary>
     ///     用户身份认证
     /// </summary>
-    [ClassProperty(Name = "实名认证", Icon = "fa fa-puzzle-piece", Description = "实名认证",
-        SideBarType = SideBarType.IdentitySideBar)]
+    [ClassProperty(Name = "实名认证", Icon = "fa fa-puzzle-piece", Description = "实名认证")]
     public class IdentityView : BaseViewModel
     {
         /// <summary>

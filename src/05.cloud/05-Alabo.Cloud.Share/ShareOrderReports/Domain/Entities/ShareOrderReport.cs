@@ -14,8 +14,7 @@ namespace _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Entities
     /// <summary>
     ///     分润订单统计
     /// </summary>
-    [ClassProperty(Name = "分润订单统计", Icon = "fa fa-file", Description = "分润订单统计",
-        SideBarType = SideBarType.BonusPoolBar)]
+    [ClassProperty(Name = "分润订单统计", Icon = "fa fa-file", Description = "分润订单统计")]
     [BsonIgnoreExtraElements]
     [Table("Things_ShareOrderReport")]
     public class ShareOrderReport : AggregateMongodbUserRoot<ShareOrderReport>
@@ -89,8 +88,7 @@ namespace _05_Alabo.Cloud.Share.ShareOrderReports.Domain.Entities
         }
     }
 
-    [ClassProperty(Name = "分润订单详情", Icon = "fa fa-file", Description = "分润订单统计",
-        SideBarType = SideBarType.BonusPoolBar)]
+    [ClassProperty(Name = "分润订单详情", Icon = "fa fa-file", Description = "分润订单统计")]
     public class ShareOrderReportItem
     {
         [Display(Name = "用户ID")] public long UserId { get; set; }

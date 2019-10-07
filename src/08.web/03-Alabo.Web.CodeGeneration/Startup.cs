@@ -18,6 +18,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
+using Alabo.App.Share.TaskExecutes;
 
 namespace Alabo.Web.CodeGeneration
 {
@@ -31,8 +32,8 @@ namespace Alabo.Web.CodeGeneration
         /// </summary>
         /// <param name="configuration">配置</param>
         /// <param name="env">主机111111123</param>
-        public Startup(IConfiguration configuration, IHostingEnvironment env)
-        {
+        public Startup(IConfiguration configuration, IHostingEnvironment env) {
+            var ddd = env.ContentRootPath;
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("web.json", true, true)
@@ -50,8 +51,7 @@ namespace Alabo.Web.CodeGeneration
         /// <summary>
         ///     配置服务
         /// </summary>
-        public IServiceProvider ConfigureServices(IServiceCollection services)
-        {
+        public IServiceProvider ConfigureServices(IServiceCollection services) {
             // 项目底层配置服务
             services.AddAppServcie(Configuration);
 
@@ -64,8 +64,7 @@ namespace Alabo.Web.CodeGeneration
             //   services.AddXsrfToken();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //添加工作单元
-            services.AddUnitOfWork<IUnitOfWork, SqlServerUnitOfWork>(Configuration
-                .GetConnectionString("ConnectionString").GetConnectionStringForMaster());
+            services.AddUnitOfWork<IUnitOfWork, SqlServerUnitOfWork>(RuntimeContext.Current.WebsiteConfig.ConnectionString.GetConnectionStringForMaster());
 
             // mvc 相关服务
 
@@ -74,7 +73,7 @@ namespace Alabo.Web.CodeGeneration
             // 添加支付方式等,第三方注入
             services.AddApiStoreService();
             // 添加任务调度服务
-            //  services.AddTasks();
+            services.AddTasks();
 
             return services.AddUtil();
         }
@@ -82,8 +81,7 @@ namespace Alabo.Web.CodeGeneration
         /// <summary>
         ///     公共配置
         /// </summary>
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
             // 项目底层启动服务
             app.UseAppApplication();
             app.UseErrorLog();

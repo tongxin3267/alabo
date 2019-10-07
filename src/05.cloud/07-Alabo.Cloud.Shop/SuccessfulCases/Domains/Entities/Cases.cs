@@ -15,8 +15,7 @@ namespace Alabo.Cloud.Shop.SuccessfulCases.Domains.Entities
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("SuccessfulCases_Cases")]
-    [ClassProperty(Name = "案例", Description = "案例", Icon = IconFlaticon.route,
-        SideBarType = SideBarType.SuccessfulCasesSideBar)]
+    [ClassProperty(Name = "案例", Description = "案例", Icon = IconFlaticon.route)]
     public class Cases : AggregateMongodbRoot<Cases>
     {
         /// <summary>

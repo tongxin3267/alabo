@@ -1,26 +1,22 @@
-﻿using Alabo.Data.Things.Orders.Domain.Entities.Extensions;
-using Alabo.Datas.Ef.SqlServer;
+﻿using Alabo.Data.Things.Orders.Domain.Entities;
+using Alabo.Data.Things.Orders.Domain.Services;
 using Alabo.Domains.Entities;
 using Alabo.Domains.Enums;
 using Alabo.Framework.Core.Enums.Enum;
-using Alabo.Tenants;
+using Alabo.Mapping;
+using Alabo.UI;
+using Alabo.UI.Design.AutoForms;
 using Alabo.Web.Mvc.Attributes;
-using Alabo.Web.Mvc.ViewModel;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Data.Things.Orders.Domain.Entities
+namespace Alabo.Data.Things.Orders.UI
 {
     /// <summary>
     ///     分润订单
     /// </summary>
-    [ClassProperty(Name = "分润订单", Icon = "fa fa-file", Description = "分润订单",
-        ListApi = "Api//AdminBasic/List?Service=IShareOrderService&Method=GetPagedList",
-        SideBarType = SideBarType.FenRunSideBar)]
-    public class ShareOrder : AggregateDefaultUserRoot<ShareOrder>
+    [ClassProperty(Name = "分润订单", Icon = "fa fa-file", Description = "分润订单")]
+    public class ShareOrderForm : UIBase, IAutoForm
     {
         /// <summary>
         ///     订单金额，分润的金额基数，如果是商品金额，则写商品金额，如果是分润价则使用分润价
@@ -101,59 +97,24 @@ namespace Alabo.Data.Things.Orders.Domain.Entities
             SortOrder = 3000)]
         public long ExecuteCount { get; set; }
 
-        #region 以下字段不插入数据库
-
         /// <summary>
-        ///     扩展数据
+        ///     转换成Id
         /// </summary>
-        [Display(Name = "扩展数据")]
-        public ShareOrderExtension ShareOrderExtension { get; set; }
-
-        /// <summary>
-        ///     尽在前台显示用，不插入数据库
-        /// </summary>
-        [Display(Name = "分润数据")]
-        [Field(ControlsType = ControlsType.TextBox, GroupTabId = 1, Width = "150", ListShow = true, EditShow = false,
-            SortOrder = 1, Link = "/Admin/Reward/List?OrderId=[[Id]]")]
-        public string DisplayName { get; set; } = "分润数据";
-
-        /// <summary>
-        ///     获取链接
-        /// </summary>
-        public IEnumerable<ViewLink> ViewLinks()
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public AutoForm GetView(object id, AutoBaseModel autoModel)
         {
-            var quickLinks = new List<ViewLink>
-            {
-                new ViewLink("分润测试", "/Admin/ShareOrder/Edit", Icons.Add, LinkType.TableQuickLink),
-                new ViewLink("分润订单管理", "/Admin/ShareOrder/Index", Icons.List, LinkType.FormQuickLink),
-                //new ViewLink("详情", "/Admin/ShareOrder/Show?Id=[[Id]]", Icons.Edit, LinkType.ColumnLink),
-                new ViewLink("分润数据", "/Admin/Reward/List?OrderId=[[Id]]", Icons.Edit, LinkType.ColumnLink)
-            };
-            return quickLinks;
+            var shareOrderId = ToId<long>(id);
+            var shareOrderView = Resolve<IShareOrderService>().GetViewById(shareOrderId);
+            var model = AutoMapping.SetValue<ShareOrderForm>(shareOrderView);
+            return ToAutoForm(model);
         }
 
-        #endregion 以下字段不插入数据库
-    }
-
-    public class ShareOrderTableMap : MsSqlAggregateRootMap<ShareOrder>
-    {
-        protected override void MapTable(EntityTypeBuilder<ShareOrder> builder)
+        public ServiceResult Save(object model, AutoBaseModel autoModel)
         {
-            builder.ToTable("Things_ShareOrder");
-        }
-
-        protected override void MapProperties(EntityTypeBuilder<ShareOrder> builder)
-        {
-            //应用程序编号
-            builder.HasKey(e => e.Id);
-            builder.Ignore(r => r.UserName);
-            builder.Ignore(r => r.ShareOrderExtension);
-            builder.Ignore(r => r.DisplayName);
-
-            if (TenantContext.IsTenant)
-            {
-                // builder.HasQueryFilter(r => r.Tenant == TenantContext.CurrentTenant);
-            }
+            var cartView = AutoMapping.SetValue<ShareOrder>(model);
+            var result = Resolve<IShareOrderService>().AddOrUpdate(cartView);
+            return new ServiceResult(result);
         }
     }
 }

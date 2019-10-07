@@ -16,8 +16,7 @@ namespace Alabo.App.Kpis.GradeKpis.Domain.Configs
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "绩效晋升配置", Icon = "fa fa-cny", Description = "绩效晋升配置",
-        PageType = ViewPageType.List, SortOrder = 20,
-        SideBarType = SideBarType.KpiSideBar)]
+        PageType = ViewPageType.List, SortOrder = 20)]
     public class PromotedKpiConfig : BaseViewModel, IAutoConfig
     {
         /// <summary>

@@ -30,7 +30,7 @@ namespace Alabo.Industry.Shop.Activitys.Modules.PreSells.Model
         ///     预售开始时间
         /// </summary>
         [Display(Name = "预售开始时间")]
-        [Field(ControlsType = ControlsType.DateTimePicker, ListShow = true, EditShow = true)]
+        [Field(ControlsType = ControlsType.TimePicker, ListShow = true, EditShow = true)]
         [HelpBlock("请设置您准备开始的预售时间，确定预售开始后，预售商品供应量充足")]
         public DateTime PreSellStartTime { get; set; }
 
@@ -38,7 +38,7 @@ namespace Alabo.Industry.Shop.Activitys.Modules.PreSells.Model
         ///     预售结束时间
         /// </summary>
         [Display(Name = "预售结束时间")]
-        [Field(ControlsType = ControlsType.DateTimePicker, ListShow = true, EditShow = true)]
+        [Field(ControlsType = ControlsType.TimePicker, ListShow = true, EditShow = true)]
         [HelpBlock("设置您准备结束预售的时间，预售结束时间与预售开始时间相隔不宜低于24小时")]
         public DateTime PreSellEndTime { get; set; }
 
@@ -46,7 +46,7 @@ namespace Alabo.Industry.Shop.Activitys.Modules.PreSells.Model
         ///     固定发货时间
         /// </summary>
         [Display(Name = "发货时间")]
-        [Field(ControlsType = ControlsType.DateTimePicker, ListShow = true, EditShow = true)]
+        [Field(ControlsType = ControlsType.TimePicker, ListShow = true, EditShow = true)]
         [HelpBlock("请设置您的发货时间，发货时间应在订单付款后的24小时内，若在节假日发货时间不宜超过付款后的72小时")]
         public DateTime DeliverTime { get; set; }
 

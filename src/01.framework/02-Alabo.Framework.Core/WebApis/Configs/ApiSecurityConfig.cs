@@ -6,8 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.Framework.Core.WebApis.Configs {
 
-    [ClassProperty(Name = "Api接口安全", Icon = "fa	fa-exclamation-circle", SortOrder = 1,
-        SideBarType = SideBarType.ControlSideBar)]
+    [ClassProperty(Name = "Api接口安全", Icon = "fa	fa-exclamation-circle", SortOrder = 1)]
     public class ApiSecurityConfig : BaseViewModel, IAutoConfig {
 
         [Field(ControlsType = ControlsType.Switch, GroupTabId = 1)]

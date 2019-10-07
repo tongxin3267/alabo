@@ -12,8 +12,7 @@ namespace Alabo.Framework.Core.Admins.Configs {
     /// <summary>
     /// 管理控制台
     /// </summary>
-    [ClassProperty(Name = "管理控制台", Icon = IconFlaticon.menu, SortOrder = 1,
-        SideBarType = SideBarType.ControlSideBar)]
+    [ClassProperty(Name = "管理控制台", Icon = IconFlaticon.menu, SortOrder = 1)]
     public class AdminCenterConfig : BaseViewModel, IAutoConfig {
 
         [Field(ControlsType = ControlsType.Switch, GroupTabId = 1)]

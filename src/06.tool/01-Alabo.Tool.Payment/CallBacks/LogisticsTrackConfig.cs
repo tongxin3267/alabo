@@ -11,9 +11,7 @@ namespace Alabo.Tool.Payment.CallBacks
     /// <summary>
     /// 物流跟踪配置
     /// </summary>
-    [ClassProperty(Name = "物流跟踪配置", Icon = "fa fa-puzzle-piece",
-        SideBarType = SideBarType.ApiStoreSideBar,
-        SortOrder = 2, Description = "物流跟踪配置")]
+    [ClassProperty(Name = "物流跟踪配置", Icon = "fa fa-puzzle-piece")]
     public class LogisticsTrackConfig : BaseViewModel, IAutoConfig
     {
         /// <summary>

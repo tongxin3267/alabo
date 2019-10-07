@@ -14,8 +14,7 @@ namespace Alabo.Data.People.ShareHolders.Domain.Configs
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "股东配置", Icon = "fa fa-user-times",
-        Description = "股东配置", PageType = ViewPageType.Edit, SortOrder = 12,
-        SideBarType = SideBarType.ShareHoldersSideBar)]
+        Description = "股东配置", PageType = ViewPageType.Edit, SortOrder = 12)]
     public class ShareHoldersConfig : IAutoConfig
     {
         /// <summary>

@@ -1,0 +1,13 @@
+﻿  <Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <RootNamespace>Alabo.Cloud.Wikis</RootNamespace>
+    <AssemblyName>Alabo.Cloud.Wikis</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\01.framework\01-Alabo\01-Alabo.csproj" />
+    <ProjectReference Include="..\..\01.framework\02-Alabo.Framework.Core\02-Alabo.Framework.Core.csproj" />
+  </ItemGroup>
+</Project>

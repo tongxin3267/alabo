@@ -6,6 +6,10 @@
     <RootNamespace>Alabo.Web.CodeGeneration</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\01.framework\01-Alabo\01-Alabo.csproj" />
     <ProjectReference Include="..\..\01.framework\02-Alabo.Framework.Core\02-Alabo.Framework.Core.csproj" />
@@ -13,8 +17,9 @@
     <ProjectReference Include="..\..\01.framework\05-Alabo.Framework.Themes\05-Alabo.Framework.Themes.csproj" />
     <ProjectReference Include="..\..\01.framework\06-Alabo.Framework.Tasks\06-Alabo.Framework.Tasks.csproj" />
     <ProjectReference Include="..\..\02.data\01-Alabo.Data.People\01-Alabo.Data.People.csproj" />
-    <ProjectReference Include="..\..\02.data\03-Alabo.Data.Things\03-Alabo.Data.Things.csproj" />
+    <ProjectReference Include="..\..\02.data\03-Alabo.Data.Targets\03-Alabo.Data.Targets.csproj" />
     <ProjectReference Include="..\..\05.cloud\02-Alabo.Cloud.People\02-Alabo.Cloud.People.csproj" />
+    <ProjectReference Include="..\..\05.cloud\14-Alabo.Cloud.Wikis\14-Alabo.Cloud.Wikis.csproj" />
     <ProjectReference Include="..\..\06.tool\01-Alabo.Tool.Payment\05-Alabo.Tool.Payment.csproj" />
     <ProjectReference Include="..\..\06.tool\06-Alabo.Tool.QrCode\01-Alabo.Tool.QrCode.csproj" />
   </ItemGroup>

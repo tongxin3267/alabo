@@ -15,9 +15,7 @@ namespace Alabo.App.Asset.Withdraws.Dtos
     /// <summary>
     ///     提现输出模型
     /// </summary>
-    [ClassProperty(Name = "提现管理", Icon = "fa fa-puzzle-piece", Description = "提现管理", PostApi = "Api/WithDraw/GetList",
-        PageType = ViewPageType.List, ListApi = "Api/WithDraw/GetList",
-        SuccessReturn = "Api/WithDraw/GetList", SideBarType = SideBarType.WithDrawSideBar)]
+    [ClassProperty(Name = "提现管理", Icon = "fa fa-puzzle-piece", Description = "提现管理")]
     public class WithDrawOutput : UIBase, IAutoTable<WithDrawOutput>
     {
         //EntityDto
@@ -203,8 +201,7 @@ namespace Alabo.App.Asset.Withdraws.Dtos
     /// <summary>
     ///     Class WithDrawShowOutput.
     /// </summary>
-    [ClassProperty(Name = "提现管理", Icon = "fa fa-puzzle-piece", Description = "提现管理", PostApi = "Api/WithDraw/Add",
-        SuccessReturn = "Api/WithDraw/Get")]
+    [ClassProperty(Name = "提现管理", Icon = "fa fa-puzzle-piece", Description = "提现管理" )]
     public class WithDrawShowOutput
     {
         /// <summary>

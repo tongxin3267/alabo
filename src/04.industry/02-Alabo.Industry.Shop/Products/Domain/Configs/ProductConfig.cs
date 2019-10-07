@@ -12,7 +12,7 @@ namespace Alabo.Industry.Shop.Products.Domain.Configs
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "商品发布规则", GroupName = "后台商品发布,图片设置", Icon = "fa fa-cloud-upload", Description = "商品图片上传",
-        SortOrder = 400, SideBarType = SideBarType.ProductSideBar)]
+        SortOrder = 400)]
     public class ProductConfig : BaseViewModel, IAutoConfig
     {
         /// <summary>

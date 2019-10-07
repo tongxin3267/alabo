@@ -10,7 +10,7 @@ namespace Alabo.Data.People.Circles.Domain.Configs
     ///     商圈配置
     /// </summary>
     [NotMapped]
-    [ClassProperty(Name = "商圈配置", Icon = "fa fa-user-times", Description = "商圈配置", PageType = ViewPageType.Edit, SortOrder = 12, SideBarType = SideBarType.CircleSideBar)]
+    [ClassProperty(Name = "商圈配置", Icon = "fa fa-user-times", Description = "商圈配置", PageType = ViewPageType.Edit, SortOrder = 12)]
     public class CircleConfig : IAutoConfig
     {
         /// <summary>

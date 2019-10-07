@@ -17,8 +17,7 @@ namespace Alabo.Industry.Shop.OrderDeliveries.Domain.Entities
     /// <summary>
     ///     发货记录表
     /// </summary>
-    [ClassProperty(Name = "发货记录表", Description = "店铺管理", SideBarType = SideBarType.SupplierSideBar,
-        PostApi = "Api/OrderDelivery/List", ListApi = "Api/OrderDelivery/List")]
+    [ClassProperty(Name = "发货记录表", Description = "店铺管理")]
     public class OrderDelivery : AggregateDefaultUserRoot<OrderDelivery>
     {
         /// <summary>

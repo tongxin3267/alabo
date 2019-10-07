@@ -26,8 +26,8 @@ namespace Alabo.Data.People.Users.ViewModels
     ///     会员管理 (租户)
     /// </summary>
     [ClassProperty(Name = "会员管理", Icon = "fa fa-puzzle-piece", Description = "管理系统所有会员",
-        ListApi = "Api/UserAdmin/UserList",
-        PageType = ViewPageType.List, PostApi = "Api/User/AddUser")]
+        
+        PageType = ViewPageType.List )]
     [BsonIgnoreExtraElements]
     public class ViewCrmUser : UIBase, IAutoTable<ViewUser>, IAutoForm, IAutoList
     {
@@ -306,7 +306,7 @@ namespace Alabo.Data.People.Users.ViewModels
         /// </summary>
         [Display(Name = "注册时间")]
         [HelpBlock("请输入注册时间")]
-        [Field(ControlsType = ControlsType.DateTimePicker, GroupTabId = 1, Width = "150", EditShow = false,
+        [Field(ControlsType = ControlsType.TimePicker, GroupTabId = 1, Width = "150", EditShow = false,
             ListShow = true, SortOrder = 1000)]
         public DateTime CreateTime { get; set; } = DateTime.Now;
 

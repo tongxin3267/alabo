@@ -16,8 +16,7 @@ namespace Alabo.Cloud.People.GradeInfos.Domain.Configs
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "会员自动升级配置", Icon = "fa fa-cny", Description = "会员自动升级配置",
-        PageType = ViewPageType.List, SortOrder = 20,
-        SideBarType = SideBarType.GradeInfoSideBar)]
+        PageType = ViewPageType.List, SortOrder = 20)]
     public class AutoUpgradeConfig : BaseViewModel, IAutoConfig
     {
         /// <summary>

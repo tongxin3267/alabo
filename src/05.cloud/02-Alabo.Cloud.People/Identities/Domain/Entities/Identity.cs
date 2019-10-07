@@ -14,8 +14,7 @@ namespace Alabo.Cloud.People.Identities.Domain.Entities
     /// <summary>
     ///     用户身份认证
     /// </summary>
-    [ClassProperty(Name = "个人认证", Icon = "fa fa-puzzle-piece", Description = "个人认证",
-        SideBarType = SideBarType.IdentitySideBar, PostApi = "/Api/Identity/Identity")]
+    [ClassProperty(Name = "个人认证", Icon = "fa fa-puzzle-piece", Description = "个人认证")]
     [BsonIgnoreExtraElements]
     [Table("Cloud_People_Identity")]
     [AutoDelete(IsAuto = true)] //  /Api/Identity/QueryDelete

@@ -15,16 +15,19 @@ using Alabo.Web.Mvc.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Alabo.AutoConfigs.Services;
+using Alabo.Dynamics;
+using Newtonsoft.Json.Linq;
 
-namespace Alabo.Framework.Core.Reflections.Services {
-
+namespace Alabo.Framework.Core.Reflections.Services
+{
     /// <summary>
     ///     Class TypeService.
     /// </summary>
     /// <seealso cref="Alabo.Domains.Services.ServiceBase" />
     /// <seealso cref="ITypeService" />
-    public class TypeService : ServiceBase, ITypeService {
-
+    public class TypeService : ServiceBase, ITypeService
+    {
         public TypeService(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
@@ -115,41 +118,58 @@ namespace Alabo.Framework.Core.Reflections.Services {
                 dictionary.Add("-1", "所有");
             }
 
-            //IList<JObject> list = Resolve<IAlaboAutoConfigService>().GetList(config.FullName);
+            IList<JObject> list = ServiceInterpreter.Eval<List<JObject>>("IAutoConfigService", "GetList", config.FullName);
 
-            //if (!list.Any()) {
-            //    return dictionary;
-            //}
+            if (!list.Any()) {
+                return dictionary;
+            }
 
-            //var TextField = string.Empty; //如果不存在Main特性则取Id字段显示
-            //foreach (var item in config.GetProperties()) {
-            //    if (item.GetAttribute<MainAttribute>() == null) {
-            //        continue;
-            //    }
+            var textField = string.Empty; //如果不存在Main特性则取Id字段显示
+            foreach (var item in config.GetProperties()) {
+                if (item.GetAttribute<MainAttribute>() == null) {
+                    continue;
+                }
 
-            //    TextField = item.Name;
-            //    break;
-            //}
+                textField = item.Name;
+                break;
+            }
 
-            //if (TextField.IsNullOrEmpty()) {
-            //    foreach (var item in config.GetProperties()) {
-            //        if (item.Name == "Name") {
-            //            TextField = item.Name;
-            //        }
-            //    }
-            //}
+            if (textField.IsNullOrEmpty()) {
+                foreach (var item in config.GetProperties()) {
+                    if (item.Name == "Name") {
+                        textField = item.Name;
+                    }
+                }
+            }
 
-            //if (TextField.IsNullOrEmpty()) {
-            //    TextField = "Id";
-            //}
+            if (textField.IsNullOrEmpty()) {
+                textField = "Id";
+            }
 
-            //foreach (var data in list) {
-            //    var key = data["Id"].ToString();
-            //    var value = data[TextField];
-            //    if (!dictionary.Keys.Contains(key)) {
-            //        dictionary.Add(key, value);
-            //    }
-            //}
+            // 判断是否包括status字段，如果包含则显示状态为正常的
+            var hasStatus = false;
+            foreach (var item in config.GetProperties()) {
+                var statusField = item.Name;
+                if (statusField.ToLower() == "status") {
+                    hasStatus = true;
+                    break;
+                }
+            }
+
+            foreach (var data in list) {
+                if (hasStatus) {
+                    var status = data["Status"].ConvertToInt();
+                    if (status != 1) {
+                        continue;
+                    }
+                }
+                var key = data["Id"].ToString();
+                var value = data[textField];
+
+                if (!dictionary.Keys.Contains(key)) {
+                    dictionary.Add(key, value);
+                }
+            }
 
             return dictionary;
         }

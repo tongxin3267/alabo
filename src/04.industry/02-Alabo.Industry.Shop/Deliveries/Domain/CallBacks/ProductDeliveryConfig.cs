@@ -9,9 +9,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.CallBacks
 {
     [NotMapped]
     [ClassProperty(Name = "商品配送配置", GroupName = "商品配送配置", Icon = "fa fa-cloud-upload", Description = "商品图片上传",
-        SortOrder = 400,
-        SideBarType = SideBarType.SupplierSideBar
-    )]
+        SortOrder = 400)]
     //SideBar = "Shop/StoreSideBar"
     public class ProductDeliveryConfig : BaseViewModel, IAutoConfig
     {

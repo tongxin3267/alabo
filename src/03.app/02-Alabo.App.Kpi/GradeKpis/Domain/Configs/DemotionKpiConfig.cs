@@ -16,8 +16,7 @@ namespace Alabo.App.Kpis.GradeKpis.Domain.Configs
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "绩效降职配置", Icon = "fa fa-cny", Description = "绩效降职配置",
-        PageType = ViewPageType.List, SortOrder = 20,
-        SideBarType = SideBarType.KpiSideBar)]
+        PageType = ViewPageType.List, SortOrder = 20)]
     public class DemotionKpiConfig : BaseViewModel, IAutoConfig
     {
         /// <summary>

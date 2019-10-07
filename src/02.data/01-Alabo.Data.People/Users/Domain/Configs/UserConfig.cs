@@ -11,8 +11,7 @@ namespace Alabo.Data.People.Users.Domain.Configs
     /// <summary>
     /// 会员注册选项
     /// </summary>
-    [ClassProperty(Name = "用户选项 ", Icon = "fa fa-user", Description = "会员选项", SortOrder = 10,
-        SideBarType = SideBarType.UserSideBar)]
+    [ClassProperty(Name = "用户选项 ", Icon = "fa fa-user", Description = "会员选项", SortOrder = 10)]
     public class UserConfig : BaseViewModel, IAutoConfig
     {
         /// <summary>

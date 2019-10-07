@@ -8,10 +8,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Alabo.UI.Design.AutoForms {
-
-    public static class AutoFormMapping {
-
+namespace Alabo.UI.Design.AutoForms
+{
+    public static class AutoFormMapping
+    {
         /// <summary>
         ///     get generic type
         /// </summary>
@@ -49,11 +49,8 @@ namespace Alabo.UI.Design.AutoForms {
                     var auto = new AutoForm {
                         Key = fullName,
                         Name = classPropertyAttribute.Name,
-                        BottonText = classPropertyAttribute.ButtonText,
                         ViewLinks = classDescription.ViewLinks,
                         Title = classPropertyAttribute.Name,
-                        Service = new FormService(classPropertyAttribute.PostApi,
-                            classPropertyAttribute.SuccessReturn)
                     };
                     // 构建字段
 
@@ -102,7 +99,7 @@ namespace Alabo.UI.Design.AutoForms {
                 var formField = AutoMapping.SetValue<FormFieldProperty>(item.FieldAttribute);
                 formField.Name = item.DisplayAttribute?.Name;
                 formField.Field = item.Property.Name.ToCamelCaseString();
-                formField.Type = item.FieldAttribute.ControlsType;
+                formField.ControlsType = item.FieldAttribute.ControlsType;
                 formField.Maxlength = item.MaxLengthAttribute?.Length;
                 formField.MinLength = item.MinLengthAttribute?.Length;
                 if (item.RequiredAttribute != null) {
@@ -135,7 +132,7 @@ namespace Alabo.UI.Design.AutoForms {
                 }
 
                 //Json类型
-                if (formField.Type == ControlsType.JsonList) {
+                if (formField.ControlsType == ControlsType.JsonList) {
                     var propertyType = item.Property.PropertyType;
                     if (propertyType.IsGenericType) {
                         var genericTypeName = GetGenericType(propertyType).FullName;
@@ -177,15 +174,12 @@ namespace Alabo.UI.Design.AutoForms {
             if (classDescription == null) {
                 return null;
             }
-
             var classPropertyAttribute = classDescription.ClassPropertyAttribute;
             var auto = new AutoForm {
                 Key = fullName,
                 Name = classPropertyAttribute.Name,
-                BottonText = classPropertyAttribute.ButtonText,
                 ViewLinks = classDescription.ViewLinks,
                 Title = classPropertyAttribute.Name,
-                Service = new FormService(classPropertyAttribute.PostApi, classPropertyAttribute.SuccessReturn)
             };
             // builder filed
             var groups = classPropertyAttribute.GroupName.Split(",");
@@ -262,7 +256,7 @@ namespace Alabo.UI.Design.AutoForms {
                 var formField = AutoMapping.SetValue<FormFieldProperty>(propertyDesc.FieldAttribute);
                 formField.Name = propertyDesc.DisplayAttribute?.Name;
                 formField.Field = propertyDesc.Property.Name.ToCamelCaseString();
-                formField.Type = propertyDesc.FieldAttribute.ControlsType;
+                formField.ControlsType = propertyDesc.FieldAttribute.ControlsType;
                 formField.Maxlength = propertyDesc.MaxLengthAttribute?.Length;
                 formField.MinLength = propertyDesc.MinLengthAttribute?.Length;
                 formField.HelpBlock = propertyDesc.HelpBlockAttribute?.HelpText;
@@ -278,42 +272,47 @@ namespace Alabo.UI.Design.AutoForms {
                     formField.PlaceHolder = "请输入" + formField.Name;
                 }
 
-                if (!propertyDesc.FieldAttribute.Width.IsNullOrEmpty()) {
-                    formField.Width = propertyDesc.FieldAttribute.Width;
-                }
+                // 下拉菜单、单选框、复选框时构建数据源
+                if (propertyDesc.FieldAttribute.ControlsType == ControlsType.RadioButton ||
+                    propertyDesc.FieldAttribute.ControlsType == ControlsType.DropdownList ||
+                    propertyDesc.FieldAttribute.ControlsType == ControlsType.CheckBox) {
+                    if (!propertyDesc.FieldAttribute.Width.IsNullOrEmpty()) {
+                        formField.Width = propertyDesc.FieldAttribute.Width;
+                    }
 
-                if (!propertyDesc.FieldAttribute.ApiDataSource.IsNullOrEmpty()) {
-                    formField.DataSource = propertyDesc.FieldAttribute.ApiDataSource;
-                } else {
-                    if (propertyDesc.FieldAttribute.DataSourceType != null) {
-                        formField.DataSource =
-                            $"Api/Type/GetKeyValue?type={propertyDesc.FieldAttribute.DataSourceType.Name}";
+                    if (!propertyDesc.FieldAttribute.ApiDataSource.IsNullOrEmpty()) {
+                        formField.DataSource = propertyDesc.FieldAttribute.ApiDataSource;
                     } else {
-                        // enum
-                        if (propertyDesc.Property.PropertyType.BaseType == typeof(System.Enum)) {
+                        if (propertyDesc.FieldAttribute.DataSourceType != null) {
                             formField.DataSource =
-                                $"Api/Type/GetKeyValue?type={propertyDesc.Property.PropertyType.Name}";
+                                $"Api/Type/GetKeyValue?type={propertyDesc.FieldAttribute.DataSourceType.Name}";
+                        } else {
+                            // enum
+                            if (propertyDesc.Property.PropertyType.BaseType == typeof(System.Enum)) {
+                                formField.DataSource =
+                                    $"Api/Type/GetKeyValue?type={propertyDesc.Property.PropertyType.Name}";
+                            }
                         }
+                    }
+
+                    // enum
+                    if (propertyDesc.Property.PropertyType.BaseType == typeof(System.Enum)) {
+                        formField.DataSource = $"Api/Type/GetKeyValue?type={propertyDesc.Property.PropertyType.Name}";
                     }
                 }
 
-                // enum
-                if (propertyDesc.Property.PropertyType.BaseType == typeof(System.Enum)) {
-                    formField.DataSource = $"Api/Type/GetKeyValue?type={propertyDesc.Property.PropertyType.Name}";
-                }
-
                 //Json
-                if (formField.Type == ControlsType.JsonList) {
+                if (formField.ControlsType == ControlsType.JsonList) {
                     var propertyValue = propertyInfo.GetPropertyValue(model);
                     formField.JsonItems.AddRange(GetFormFields(propertyValue));
                 }
 
-                if (formField.Type == ControlsType.RelationClass && propertyDesc.FieldAttribute.DataSourceType != null) {
+                if (formField.ControlsType == ControlsType.RelationClass && propertyDesc.FieldAttribute.DataSourceType != null) {
                     formField.DataSource =
                         $"Api/Relation/GetClassTree?Type={propertyDesc.FieldAttribute.DataSourceType.Name}";
                 }
 
-                if (formField.Type == ControlsType.RelationTags && propertyDesc.FieldAttribute.DataSourceType != null) {
+                if (formField.ControlsType == ControlsType.RelationTags && propertyDesc.FieldAttribute.DataSourceType != null) {
                     formField.DataSource =
                         $"Api/Relation/GetTag?Type={propertyDesc.FieldAttribute.DataSourceType.Name}";
                 }

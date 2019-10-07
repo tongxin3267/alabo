@@ -12,8 +12,7 @@ namespace Alabo.Industry.Cms.Articles.Domain.Entities
     ///     关于我们
     /// </summary>
     [ClassProperty(Name = "关于我们", Icon = "fa fa-building", Description = "关于我们", GroupName = "基本设置,搜索引擎优化,高级选项",
-        PageType = ViewPageType.List, SortOrder = 20, SideBarType = SideBarType.CustomerServiceSideBar
-    )]
+        PageType = ViewPageType.List, SortOrder = 20)]
     [BsonIgnoreExtraElements]
     [Table("CMS_About")]
     public class About : AggregateMongodbRoot<About>

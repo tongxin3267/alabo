@@ -7,8 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.Transfers.Dtos
 {
-    [ClassProperty(Name = "转账", Icon = "fa fa-puzzle-piece", Description = "转账", PostApi = "Api/Transfer/Add",
-        SuccessReturn = "Api/Transfer/Get")]
+    [ClassProperty(Name = "转账", Icon = "fa fa-puzzle-piece", Description = "转账" )]
     public class TransferAddInput : ApiInputDto
     {
         /// <summary>

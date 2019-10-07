@@ -12,10 +12,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Alabo.UI.Design.AutoTables {
-
-    public class AutoTableMapping {
-
+namespace Alabo.UI.Design.AutoTables
+{
+    public class AutoTableMapping
+    {
         public static AutoTable Convert(string fullName) {
             var objectCache = Ioc.Resolve<IObjectCache>();
             return objectCache.GetOrSet(() => {
@@ -29,7 +29,7 @@ namespace Alabo.UI.Design.AutoTables {
                 var auto = new AutoTable {
                     Key = fullName,
                     Name = classPropertyAttribute.Name,
-                    ApiUrl = GetApiUrl(type, classDescription.ClassPropertyAttribute.ListApi),
+                    ApiUrl = GetApiUrl(type),
                     Icon = classPropertyAttribute.Icon
                 };
 
@@ -84,27 +84,14 @@ namespace Alabo.UI.Design.AutoTables {
         ///     获取Api地址
         /// </summary>
         /// <returns></returns>
-        private static string GetApiUrl(Type type, string apiUrl) {
+        private static string GetApiUrl(Type type) {
             var config = Activator.CreateInstance(type);
             // 如果是继承了IAutoTable，则优先使用/Api/Auto/Table接口
             if (config is IAutoTable) {
                 return "/Api/Auto/Table";
             }
 
-            if (!apiUrl.IsNullOrEmpty()) {
-                return apiUrl;
-            }
-
-            if (apiUrl.IsNotNullOrEmpty()) {
-                return "/Api/Auto/Table";
-            }
-            //if (GetTableType(type) == TableType.AutoConfig)
-            //{
-            //    var url = $"Api/AutoConfig/List?Key={type.FullName}";
-            //    return url;
-            //}
-
-            return apiUrl;
+            return string.Empty;
         }
 
         private static List<TableAction> GetAction(Type type) {
@@ -189,8 +176,11 @@ namespace Alabo.UI.Design.AutoTables {
                 // 如果实体继承了Action,则Action 实体通用删除
                 list.Add(new TableAction("编辑", $"/Admin/{type.Name}/Edit"));
                 list.Add(new TableAction("删除", $"/Api/{type.Name}/QueryDelete"));
-                list.Add(new TableAction($"新增{classProperty.Name}", $"/Admin/{type.Name}/Edit",
-                    TableActionType.QuickAction));
+
+                if (classProperty.IsShowQuickAction) {
+                    list.Add(new TableAction($"新增{classProperty.Name}", $"/Admin/{type.Name}/Edit",
+                        TableActionType.QuickAction));
+                }
             }
 
             return list;

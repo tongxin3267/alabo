@@ -35,7 +35,7 @@ namespace Alabo.Industry.Cms.LightApps.Domain
         ///     创建时间
         /// </summary>
         [Display(Name = "创建时间")]
-        [Field(ControlsType = ControlsType.DateTimePicker, ListShow = true, EditShow = false, SortOrder = 10001)]
+        [Field(ControlsType = ControlsType.TimePicker, ListShow = true, EditShow = false, SortOrder = 10001)]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime CreateTime { get; set; } = DateTime.Now;
@@ -54,7 +54,7 @@ namespace Alabo.Industry.Cms.LightApps.Domain
         ///     最后更新时间
         /// </summary>
         [Display(Name = "最后更新时间")]
-        [Field(ControlsType = ControlsType.DateTimePicker, ListShow = true, EditShow = false, SortOrder = 10001)]
+        [Field(ControlsType = ControlsType.TimePicker, ListShow = true, EditShow = false, SortOrder = 10001)]
         [Required(ErrorMessage = ErrorMessage.NameNotAllowEmpty)]
         [BsonDateTimeOptions(Kind = DateTimeKind.Local)]
         public DateTime UpdateTime { get; set; } = DateTime.Now;

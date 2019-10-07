@@ -9,7 +9,7 @@ namespace Alabo.Data.People.Users.Dtos
     /// <summary>
     ///     登录模块
     /// </summary>
-    [ClassProperty(Name = "会员登陆", PostApi = "Api/User/Login", SuccessReturn = "pages/index")]
+    [ClassProperty(Name = "会员登陆")]
     public class LoginInput : EntityDto
     {
         /// <summary>

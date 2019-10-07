@@ -17,9 +17,7 @@ namespace Alabo.Industry.Shop.Carts.Domain.Entities
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Order_Cart")]
-    [ClassProperty(Name = "购物车", Icon = IconLineawesome.shopping_cart, ListApi = "Api/Cart/GetCart",
-        PostApi = "Api/Cart/GetCart",
-        SideBarType = SideBarType.FullScreen)]
+    [ClassProperty(Name = "购物车", Icon = IconLineawesome.shopping_cart)]
     public class Cart : AggregateMongodbUserRoot<Cart>
     {
         /// <summary>

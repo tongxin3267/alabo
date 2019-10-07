@@ -23,8 +23,7 @@ namespace Alabo.Cloud.People.Relationship.Domain.CallBacks
     [NotMapped]
     [ClassProperty(Name = "会员关系网配置", Icon = "fa fa-cny",
         Description = "会员关系网配置较为复杂，需要在专业人员的指导下完成配置，请慎重修改，配置不当将会影响整个系统的分润数据",
-        PageType = ViewPageType.List, SortOrder = 20,
-        SideBarType = SideBarType.RelationshipIndexSideBar)]
+        PageType = ViewPageType.List, SortOrder = 20)]
     public class UserRelationshipIndexConfig : BaseViewModel, IAutoConfig
     {
         /// <summary>
@@ -58,7 +57,7 @@ namespace Alabo.Cloud.People.Relationship.Domain.CallBacks
         /// <summary>
         ///     等级名称
         /// </summary>
-        [Field(ControlsType = ControlsType.CheckBoxMultipl, DataSourceType = typeof(UserGradeConfig), SortOrder = 14)]
+        [Field(ControlsType = ControlsType.CheckBox, DataSourceType = typeof(UserGradeConfig), SortOrder = 14)]
         [Display(Name = "推荐人会员等级范围(高级别)")]
         [HelpBlock("推荐人用户等级必须得在该等级区间，。区间等级不存在的时候，规则不执行。升级点越高等级越高,可以选择一个或多个高级别的等级。")]
         public string HighGrades { get; set; }
@@ -66,7 +65,7 @@ namespace Alabo.Cloud.People.Relationship.Domain.CallBacks
         /// <summary>
         ///     等级名称
         /// </summary>
-        [Field(ControlsType = ControlsType.CheckBoxMultipl, DisplayMode = DisplayMode.Grade,
+        [Field(ControlsType = ControlsType.CheckBox, DisplayMode = DisplayMode.Grade,
             DataSourceType = typeof(UserGradeConfig), SortOrder = 15)]
         [Display(Name = "触发用户等级范围(按升级点)")]
         [HelpBlock("触发用户必须得在该等级区间，比如刚刚注册的用户、升级的用户都需要在该设置区间。区间等级不存在的时候，规则不执行。等级范围升级点越高等级越高")]

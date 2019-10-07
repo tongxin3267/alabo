@@ -7,17 +7,11 @@ using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Industry.Cms.Articles.Domain.Entities;
 using MongoDB.Bson;
 
-namespace Alabo.Industry.Cms.Articles.Domain.Services
-{
-    public interface IChannelService : IService<Channel, ObjectId>
-    {
-        List<DataField> DataFields(string channelId);
+namespace Alabo.Industry.Cms.Articles.Domain.Services {
 
-        /// <summary>
-        ///     Gets the side by type by channel.
-        /// </summary>
-        /// <param name="channel">The channel.</param>
-        SideBarType GetSideByTypeByChannel(Channel channel);
+    public interface IChannelService : IService<Channel, ObjectId> {
+
+        List<DataField> DataFields(string channelId);
 
         bool Check(string script);
 

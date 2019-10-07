@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.Recharges.Dtos
 {
-    [ClassProperty(Name = "充值", Icon = "fa fa-puzzle-piece", ListApi = "Api/RechargeApi/GetList",
-        PageType = ViewPageType.List, PostApi = "Api/RechargeApi/GetList")]
+    [ClassProperty(Name = "充值", Icon = "fa fa-puzzle-piece", 
+        PageType = ViewPageType.List )]
     public class RechargeDetail
     {
         /// <summary>

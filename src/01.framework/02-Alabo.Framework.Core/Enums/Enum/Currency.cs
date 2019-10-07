@@ -1,11 +1,11 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Framework.Core.Enums.Enum {
-
+namespace Alabo.Framework.Core.Enums.Enum
+{
     [ClassProperty(Name = "货币类型")]
-    public enum Currency {
-
+    public enum Currency
+    {
         /// <summary>
         ///     人民币
         ///     Selection 表示颜色
@@ -74,12 +74,12 @@ namespace Alabo.Framework.Core.Enums.Enum {
         Charity = 7,
 
         /// <summary>
-        ///     红包
+        ///     贡献值，根据平台贡献值参与分润
         /// </summary>
-        [Display(Name = "红包")]
+        [Display(Name = "贡献值")]
         [LabelCssClass(BadgeColorCalss.Metal)]
-        [Field(IsDefault = false, GuidId = "E97CCD1E-1478-49BD-BFC7-E73A5D699008", Mark = "红包")]
-        RedPacket = 8,
+        [Field(IsDefault = true, GuidId = "E97CCD1E-1478-49BD-BFC7-E73A5D699008", Mark = "贡献值")]
+        Contribution = 8,
 
         /// <summary>
         ///     抵用券
@@ -166,7 +166,7 @@ namespace Alabo.Framework.Core.Enums.Enum {
         /// </summary>
         [Display(Name = "基金账户")]
         [LabelCssClass(BadgeColorCalss.Metal)]
-        [Field(IsDefault = true, GuidId = "E97CCD1E-1478-40BD-BFC7-E73A5D699301", Mark = "基金", Selection = "Dark")]
+        [Field(IsDefault = false, GuidId = "E97CCD1E-1478-40BD-BFC7-E73A5D699301", Mark = "基金", Selection = "Dark")]
         Fund = 301,
 
         /// <summary>

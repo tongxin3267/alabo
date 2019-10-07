@@ -16,7 +16,7 @@ namespace Alabo.Industry.Cms.Articles.Domain.Entities
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("CMS_Article")]
-    [ClassProperty(Name = "文章", Icon = "fa fa-puzzle-piece", SideBarType = SideBarType.ArticleSideBarSideBar)]
+    [ClassProperty(Name = "文章", Icon = "fa fa-puzzle-piece")]
     public class Article : AggregateMongodbUserRoot<Article>
     {
         /// <summary>

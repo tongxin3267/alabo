@@ -11,16 +11,16 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Framework.Tasks.Queues.UI {
-
+namespace Alabo.Framework.Tasks.Queues.UI
+{
     /// <summary>
     ///     任务队列
     /// </summary>
     [ClassProperty(Name = "后台任务队列", Icon = IconFontawesome.dedent, Description = "后台任务队列",
-        ListApi = "Api/TaskQueue/TaskQueueList",
-        PageType = ViewPageType.List, PostApi = "Api/TaskQueue/TaskQueueList",
-        SideBarType = SideBarType.TaskQueueSideBar)]
-    public class TaskQueueForm : UIBase, IAutoForm {
+
+        PageType = ViewPageType.List)]
+    public class TaskQueueForm : UIBase, IAutoForm
+    {
         [Display(Name = "模块标识")] public Guid ModuleId { get; set; }
 
         /// <summary>

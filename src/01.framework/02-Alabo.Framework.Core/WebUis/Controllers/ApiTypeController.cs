@@ -8,16 +8,20 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Alabo.AutoConfigs;
+using Alabo.Dynamics;
+using Alabo.Framework.Core.Reflections.Interfaces;
+using Alabo.Framework.Core.Reflections.Services;
 using ZKCloud.Open.ApiBase.Models;
 
-namespace Alabo.Framework.Core.WebUis.Controllers {
-
+namespace Alabo.Framework.Core.WebUis.Controllers
+{
     /// <summary>
     ///     Api type controller
     /// </summary>
     [Route("Api/Type/[action]")]
-    public class ApiTypeController : ApiBaseController {
-
+    public class ApiTypeController : ApiBaseController
+    {
         /// <summary>
         ///     根据配置获取自动表单的值
         /// </summary>
@@ -83,7 +87,6 @@ namespace Alabo.Framework.Core.WebUis.Controllers {
         [HttpGet]
         [Display(Description = "根据枚举获取KeyValues")]
         public ApiResult<List<KeyValue>> GetKeyValue([FromQuery] string type) {
-            //check
             if (type.IsNullOrEmpty() || type == "undefined") {
                 return ApiResult.Failure<List<KeyValue>>("类型不能为空");
             }
@@ -159,10 +162,10 @@ namespace Alabo.Framework.Core.WebUis.Controllers {
 
             var intances = type.GetInstanceByName();
 
-            //if (intances is IRelation) {
-            //    var result = Resolve<IRelationService>().GetKeyValues2(type).ToList();
-            //    return ApiResult.Success(result);
-            //}
+            if (intances is IRelation) {
+                var result = ServiceInterpreter.Eval<IEnumerable<KeyValue>>("IRelationService", "GetKeyValues2", type);
+                return ApiResult.Success(result.ToList());
+            }
 
             //enum
             if (find.IsEnum) {
@@ -172,30 +175,20 @@ namespace Alabo.Framework.Core.WebUis.Controllers {
                 }
 
                 return ApiResult.Success(keyValues.ToList());
-            } else {
-                //Auto config
-                //var configValue = Resolve<ITypeService>().GetAutoConfigDictionary(type);
-
-                //if (configValue == null) {
-                //    return ApiResult.Failure<List<KeyValue>>($"{type}不存在");
-                // }
-
-                var keyValues = new List<KeyValue>();
-                if (type.Contains("MoneyTypeConfig")
-                    ) //    var moneyConfig = Resolve<IAlaboAutoConfigService>().GetList<MoneyTypeConfig>().Where(x => x.Status == Domains.Enums.Status.Normal && x.IsShowFront);
-{
-                    //    foreach (var item in moneyConfig) {
-                    //        keyValues.Add(new KeyValue { Key = item.Id, Value = item.Name });
-                    //    }
-                    //} else {
-                    //    foreach (var item in configValue) {
-                    //        keyValues.Add(new KeyValue { Key = item.Key, Value = item.Value });
-                    //    }
-                    //}
-                    return ApiResult.Success(keyValues);
-                }
             }
 
+            // auto config
+            if (intances is IAutoConfig) {
+                var configValue = Resolve<ITypeService>().GetAutoConfigDictionary(type);
+                if (configValue == null) {
+                    return ApiResult.Failure<List<KeyValue>>($"{type}不存在");
+                }
+                var keyValues = new List<KeyValue>();
+                foreach (var item in configValue) {
+                    keyValues.Add(new KeyValue { Key = item.Key, Value = item.Value });
+                }
+                return ApiResult.Success(keyValues);
+            }
             return null;
         }
     }

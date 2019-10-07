@@ -13,18 +13,17 @@ using MongoDB.Bson.Serialization.Attributes;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Alabo.Framework.Basic.Regions.UI {
-
+namespace Alabo.Framework.Basic.Regions.UI
+{
     /// <summary>
     ///     地区
     ///     这个对象中的值生成后不应该修改
     /// </summary>
-    [ClassProperty(Name = "国家区域", Icon = IconFlaticon.map_location, SideBarType = SideBarType.ControlSideBar,
-        PageType = ViewPageType.List, PostApi = "Api/Region/RegionList")]
+    [ClassProperty(Name = "国家区域", Icon = IconFlaticon.map_location)]
     [BsonIgnoreExtraElements]
     [Table("Basic_Region")]
-    public class RegionForm : UIBase, IAutoForm {
-
+    public class RegionForm : UIBase, IAutoForm
+    {
         public RegionForm(long regionId, long parentId) {
             RegionId = regionId;
             ParentId = parentId;

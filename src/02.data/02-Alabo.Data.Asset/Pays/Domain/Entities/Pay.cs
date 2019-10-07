@@ -23,8 +23,7 @@ namespace Alabo.App.Asset.Pays.Domain.Entities
     ///     收银台支付信息
     ///     账单,收款请求
     /// </summary>
-    [ClassProperty(Name = "收银台", Icon = "fa fa-puzzle-piece", Description = "收银台",
-        SideBarType = SideBarType.FinancePaySideBar)]
+    [ClassProperty(Name = "收银台", Icon = "fa fa-puzzle-piece", Description = "收银台")]
     public class Pay : AggregateDefaultUserRoot<Pay>
     {
         /// <summary>

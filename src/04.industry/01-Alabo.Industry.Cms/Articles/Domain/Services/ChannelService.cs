@@ -11,21 +11,19 @@ using Alabo.Framework.Core.Enums.Enum;
 using Alabo.Industry.Cms.Articles.Domain.Entities;
 using MongoDB.Bson;
 
-namespace Alabo.Industry.Cms.Articles.Domain.Services
-{
-    public class ChannelService : ServiceBase<Channel, ObjectId>, IChannelService
-    {
+namespace Alabo.Industry.Cms.Articles.Domain.Services {
+
+    public class ChannelService : ServiceBase<Channel, ObjectId>, IChannelService {
+
         public ChannelService(IUnitOfWork unitOfWork, IRepository<Channel, ObjectId> repository) : base(unitOfWork,
-            repository)
-        {
+            repository) {
         }
 
         /// <summary>
         ///     获取频道分类类型
         /// </summary>
         /// <param name="channel"></param>
-        public Type GetChannelClassType(Channel channel)
-        {
+        public Type GetChannelClassType(Channel channel) {
             var fullName =
                 $"Alabo.App.Cms.Articles.Domain.CallBacks.Channel{channel.ChannelType.ToString()}ClassRelation";
             // string fullName = $"Alabo.App.Cms.Articles.Domain.CallBacks.ChannelArticleCalssRelation";
@@ -37,25 +35,21 @@ namespace Alabo.Industry.Cms.Articles.Domain.Services
         ///     获取频道标签类型
         /// </summary>
         /// <param name="channel"></param>
-        public Type GetChannelTagType(Channel channel)
-        {
+        public Type GetChannelTagType(Channel channel) {
             var fullName =
                 $"Alabo.App.Cms.Articles.Domain.CallBacks.Channel{channel.ChannelType.ToString()}TagRelation";
             var type = fullName.GetTypeByFullName();
             return type;
         }
 
-        public bool Check(string script)
-        {
+        public bool Check(string script) {
             // return Repository.IsHavingData(script);
             return false;
         }
 
-        public List<DataField> DataFields(string channelId)
-        {
+        public List<DataField> DataFields(string channelId) {
             var channel = GetSingle(r => r.Id == channelId.ToObjectId());
-            if (channel != null)
-            {
+            if (channel != null) {
                 var list = channel.FieldJson.DeserializeJson<List<DataField>>();
                 return list;
             }
@@ -63,19 +57,14 @@ namespace Alabo.Industry.Cms.Articles.Domain.Services
             return null;
         }
 
-        public void InitialData()
-        {
+        public void InitialData() {
             var list = GetList();
-            if (!list.Any())
-            {
+            if (!list.Any()) {
                 var channelTypeEnum = typeof(ChannelType);
-                foreach (var channelTypeName in Enum.GetNames(channelTypeEnum))
-                {
+                foreach (var channelTypeName in Enum.GetNames(channelTypeEnum)) {
                     var channelType = (ChannelType)Enum.Parse(channelTypeEnum, channelTypeName);
-                    if (channelType >= 0)
-                    {
-                        var channel = new Channel
-                        {
+                    if (channelType >= 0) {
+                        var channel = new Channel {
                             ChannelType = channelType,
                             Name = channelType.GetDisplayName(),
                             Status = Status.Normal,
@@ -88,51 +77,8 @@ namespace Alabo.Industry.Cms.Articles.Domain.Services
             }
         }
 
-        public SideBarType GetSideByTypeByChannel(Channel channel)
-        {
-            switch (channel.ChannelType)
-            {
-                case ChannelType.Article:
-                    return SideBarType.ArticleSideBarSideBar;
-
-                case ChannelType.Comment:
-                    return SideBarType.CommentSideBar;
-
-                case ChannelType.Video:
-                    return SideBarType.VideoSideBar;
-
-                case ChannelType.Images:
-                    return SideBarType.ImagesSideBar;
-
-                case ChannelType.Down:
-                    return SideBarType.DownSideBar;
-
-                case ChannelType.Question:
-                    return SideBarType.QuestionSideBar;
-
-                case ChannelType.Help:
-                    return SideBarType.HelpSideBar;
-
-                case ChannelType.Job:
-                    return SideBarType.JobSideBar;
-
-                case ChannelType.TopLine:
-                    return SideBarType.NewsSideBar;
-
-                case ChannelType.Message:
-                    return SideBarType.MessageSideBar;
-
-                case ChannelType.UserNotice:
-                    return SideBarType.UserNoticeSideBar;
-            }
-
-            return SideBarType.ArticleSideBarSideBar;
-        }
-
-        public ObjectId GetChannelId(ChannelType channelType)
-        {
-            switch (channelType)
-            {
+        public ObjectId GetChannelId(ChannelType channelType) {
+            switch (channelType) {
                 case ChannelType.Article:
                     return ChannelType.Article.GetFieldAttribute().GuidId.ToSafeObjectId();
 

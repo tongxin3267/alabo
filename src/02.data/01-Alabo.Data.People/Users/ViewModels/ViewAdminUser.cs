@@ -19,8 +19,8 @@ namespace Alabo.Data.People.Users.ViewModels
     ///     管理员专用 其他界面不允许调用 否则会出异常
     /// </summary>
     [ClassProperty(Name = "会员管理", Icon = "fa fa-puzzle-piece", Description = "管理系统所有会员",
-        ListApi = "Api/UserAdmin/UserList",
-        PageType = ViewPageType.List, PostApi = "Api/User/AddUser")]
+        
+        PageType = ViewPageType.List )]
     [BsonIgnoreExtraElements]
     public class ViewAdminUser : UIBase, IAutoTable<ViewAdminUser>, IUserView
     {
@@ -205,7 +205,7 @@ namespace Alabo.Data.People.Users.ViewModels
         /// </summary>
         [Display(Name = "注册时间")]
         [HelpBlock("请输入注册时间")]
-        [Field(ControlsType = ControlsType.DateTimePicker, GroupTabId = 1, Width = "150", EditShow = false,
+        [Field(ControlsType = ControlsType.TimePicker, GroupTabId = 1, Width = "150", EditShow = false,
             ListShow = true, SortOrder = 1000)]
         public DateTime CreateTime { get; set; } = DateTime.Now;
 

@@ -11,9 +11,7 @@ namespace Alabo.Cloud.Shop.ShopSaleReport.Dtos
     /// <summary>
     ///     直推会员等级报表
     /// </summary>
-    [ClassProperty(Name = "销售统计表", Icon = "fa fa-puzzle-piece", Description = "会员等级报表",
-        SideBarType = SideBarType.FullScreen,
-        GroupName = "基本信息,高级选项")]
+    [ClassProperty(Name = "销售统计表", Icon = "fa fa-puzzle-piece", Description = "会员等级报表")]
     public class ViewShopSale : BaseViewModel
     {
         [Field(ListShow = true)] [Key] public long Id { get; set; }

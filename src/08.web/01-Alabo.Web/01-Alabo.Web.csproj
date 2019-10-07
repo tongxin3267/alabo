@@ -14,7 +14,9 @@
     <RootNamespace>Alabo.Web</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netcoreapp2.2\Alabo.Web.xml</DocumentationFile>
+    <DocumentationFile></DocumentationFile>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningsAsErrors />
   </PropertyGroup>
 
   <ItemGroup>
@@ -43,7 +45,8 @@
     <ProjectReference Include="..\..\01.framework\06-Alabo.Framework.Tasks\06-Alabo.Framework.Tasks.csproj" />
     <ProjectReference Include="..\..\02.data\01-Alabo.Data.People\01-Alabo.Data.People.csproj" />
     <ProjectReference Include="..\..\02.data\02-Alabo.Data.Asset\02-Alabo.Data.Asset.csproj" />
-    <ProjectReference Include="..\..\02.data\03-Alabo.Data.Things\03-Alabo.Data.Things.csproj" />
+    <ProjectReference Include="..\..\02.data\03-Alabo.Data.Targets\03-Alabo.Data.Targets.csproj" />
+    <ProjectReference Include="..\..\02.data\04-Alabo.Data.Things\04-Alabo.Data.Things.csproj" />
     <ProjectReference Include="..\..\03.app\01-Alabo.App.Share\01-Alabo.App.Share.csproj" />
     <ProjectReference Include="..\..\03.app\02-Alabo.App.Kpi\02-Alabo.App.Kpis.csproj" />
     <ProjectReference Include="..\..\04.industry\01-Alabo.Industry.Cms\01-Alabo.Industry.Cms.csproj" />
@@ -60,6 +63,7 @@
     <ProjectReference Include="..\..\05.cloud\10-Alabo.Cloud.Support\10-Alabo.Cloud.Support.csproj" />
     <ProjectReference Include="..\..\05.cloud\11-Alabo.Cloud.Contracts\11-Alabo.Cloud.Contracts.csproj" />
     <ProjectReference Include="..\..\05.cloud\12-Alabo.Cloud.School\12-Alabo.Cloud.School.csproj" />
+    <ProjectReference Include="..\..\05.cloud\14-Alabo.Cloud.Wikis\14-Alabo.Cloud.Wikis.csproj" />
     <ProjectReference Include="..\..\06.tool\01-Alabo.Tool.Payment\05-Alabo.Tool.Payment.csproj" />
     <ProjectReference Include="..\..\06.tool\02-Alabo.Tool.WeiXin\06-Alabo.Tool.WeiXin.csproj" />
     <ProjectReference Include="..\..\06.tool\03-Alabo.Tool.Sms\02-Alabo.Tool.Sms.csproj" />

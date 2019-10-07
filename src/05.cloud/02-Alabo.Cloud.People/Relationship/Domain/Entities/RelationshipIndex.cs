@@ -14,8 +14,7 @@ namespace Alabo.Cloud.People.Relationship.Domain.Entities
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Cloud_People_RelationshipIndex")]
-    [ClassProperty(Name = "会员关系网", Description = "查看会员的关系网", Icon = IconFlaticon.route,
-        SideBarType = SideBarType.RelationshipIndexSideBar)]
+    [ClassProperty(Name = "会员关系网", Description = "查看会员的关系网", Icon = IconFlaticon.route)]
     public class RelationshipIndex : AggregateMongodbUserRoot<RelationshipIndex>
     {
         /// <summary>

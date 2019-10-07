@@ -23,9 +23,7 @@ namespace Alabo.Industry.Shop.Carts.UI
     /// </summary>
     [BsonIgnoreExtraElements]
     [Table("Order_Cart")]
-    [ClassProperty(Name = "购物车", Icon = IconLineawesome.shopping_cart, ListApi = "Api/Cart/GetCart",
-        PostApi = "Api/Cart/GetCart",
-        SideBarType = SideBarType.FullScreen)]
+    [ClassProperty(Name = "购物车", Icon = IconLineawesome.shopping_cart)]
     public class CartForm : UIBase, IAutoForm
     {
         /// <summary>
@@ -90,16 +88,14 @@ namespace Alabo.Industry.Shop.Carts.UI
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public AutoForm GetView(object id, AutoBaseModel autoModel)
-        {
+        public AutoForm GetView(object id, AutoBaseModel autoModel) {
             var cartId = ToId<long>(id);
             var cartView = Resolve<ICartService>().GetViewById(cartId);
             var model = AutoMapping.SetValue<CartForm>(cartView);
             return ToAutoForm(model);
         }
 
-        public ServiceResult Save(object model, AutoBaseModel autoModel)
-        {
+        public ServiceResult Save(object model, AutoBaseModel autoModel) {
             var cartView = AutoMapping.SetValue<Cart>(model);
             var result = Resolve<ICartService>().AddOrUpdate(cartView);
             return new ServiceResult(result);

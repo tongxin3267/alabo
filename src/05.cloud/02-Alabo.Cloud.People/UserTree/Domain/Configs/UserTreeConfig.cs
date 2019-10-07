@@ -9,9 +9,7 @@ namespace Alabo.Cloud.People.UserTree.Domain.Configs
     /// <summary>
     ///     组织架构图设置
     /// </summary>
-    [ClassProperty(Name = "组织架构图设置 ", Icon = "fa fa-user", Description = "组织架构图设置",
-        SideBarType = SideBarType.OrganizationalChartSideBar,
-        SortOrder = 10)]
+    [ClassProperty(Name = "组织架构图设置 ", Icon = "fa fa-user", Description = "组织架构图设置")]
     public class UserTreeConfig : BaseViewModel, IAutoConfig
     {
         [Field(ControlsType = ControlsType.Switch, ListShow = true, GroupTabId = 1)]

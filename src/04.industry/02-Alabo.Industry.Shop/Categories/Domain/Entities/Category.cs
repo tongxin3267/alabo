@@ -99,7 +99,7 @@ namespace Alabo.Industry.Shop.Categories.Domain.Entities
         ///     最后更新时间
         /// </summary>
         [Display(Name = "更新时间")]
-        [Field(ControlsType = ControlsType.DateTimePicker, ListShow = true, EditShow = false, SortOrder = 10002,
+        [Field(ControlsType = ControlsType.TimePicker, ListShow = true, EditShow = false, SortOrder = 10002,
             Width = "160")]
         public DateTime ModifiedTime { get; set; } = DateTime.Now;
 

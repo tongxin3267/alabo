@@ -12,7 +12,7 @@ namespace Alabo.App.Asset.Withdraws.Domain.Configs
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "提现设置", Icon = "fa fa-paw", PageType = ViewPageType.Edit, Description = "提现设置",
-        SortOrder = 24, SideBarType = SideBarType.WithDrawSideBar)]
+        SortOrder = 24)]
     public class WithddrawConfig : AutoConfigBase, IAutoConfig
     {
         /// <summary>

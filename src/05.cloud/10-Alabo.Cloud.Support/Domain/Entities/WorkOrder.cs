@@ -16,8 +16,8 @@ namespace Alabo.Cloud.Support.Domain.Entities
     [BsonIgnoreExtraElements]
     [Table("Cms_WorkOrder")]
     [ClassProperty(Name = "工单系统", Icon = "fa fa-puzzle-piece", Description = "工单系统",
-        ListApi = "Api/WorkOrder/WordOrderList",
-        PageType = ViewPageType.List, PostApi = "Api/WorkOrder/WordOrderList")]
+        
+        PageType = ViewPageType.List )]
     public class WorkOrder : AggregateMongodbRoot<WorkOrder>
     {
         /// <summary>

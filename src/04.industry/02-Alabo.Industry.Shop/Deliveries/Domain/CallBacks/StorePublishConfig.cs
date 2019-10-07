@@ -12,8 +12,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.CallBacks
     /// 店铺商品发布规则
     /// </summary>
     [ClassProperty(Name = "入驻规则", SortOrder = 449, Icon = "fa fa-bullseye", GroupName = "Shop",
-        PageType = ViewPageType.Edit,
-        SideBarType = SideBarType.SupplierSideBar)]
+        PageType = ViewPageType.Edit)]
     //SideBar = "Shop/StoreSideBar")]
     public class StorePublishConfig : BaseViewModel, IAutoConfig
     {

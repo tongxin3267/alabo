@@ -8,7 +8,7 @@ namespace Alabo.Industry.Offline.RechargeAccount.Entities
 {
     [BsonIgnoreExtraElements]
     [Table("RechargeAccountLog")]
-    [ClassProperty(Name = "储值记录", Icon = "fa fa-cog", SortOrder = 1, SideBarType = SideBarType.LogSideBar)]
+    [ClassProperty(Name = "储值记录", Icon = "fa fa-cog", SortOrder = 1)]
     public class RechargeAccountLog : AggregateMongodbUserRoot<RechargeAccountLog>
     {
         /// <summary>

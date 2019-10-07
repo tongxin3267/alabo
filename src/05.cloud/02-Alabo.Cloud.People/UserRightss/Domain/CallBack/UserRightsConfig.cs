@@ -16,8 +16,7 @@ namespace Alabo.Cloud.People.UserRightss.Domain.CallBack
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "等级权益设置", Icon = "fa fa-cny", Description = "等级权益设置",
-        PageType = ViewPageType.List, SortOrder = 20,
-        SideBarType = SideBarType.UserRightsSideBar)]
+        PageType = ViewPageType.List, SortOrder = 20)]
     public class UserRightsConfig : BaseViewModel, IAutoConfig
     {
         /// <summary>

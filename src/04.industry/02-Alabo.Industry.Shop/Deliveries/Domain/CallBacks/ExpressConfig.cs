@@ -19,8 +19,7 @@ namespace Alabo.Industry.Shop.Deliveries.Domain.CallBacks {
 
     [NotMapped]
     [ClassProperty(Name = "常用快递 ", Icon = "fa fa-life-ring", PageType = ViewPageType.List,
-        Description = "配置常用快递", SortOrder = 30, SideBarType = SideBarType.SupplierSideBar
-    )]
+        Description = "配置常用快递", SortOrder = 30)]
     public class ExpressConfig : AutoConfigBase, IAutoConfig {
 
         /// <summary>

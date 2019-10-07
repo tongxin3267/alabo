@@ -14,8 +14,7 @@ namespace Alabo.App.Kpis.Kpis.Domain.Configs
     /// </summary>
     [NotMapped]
     [ClassProperty(Name = "绩效配置", Icon = "fa fa-cny", Description = "绩效配置", GroupName = "基本设置,高级选项",
-        PageType = ViewPageType.List, SortOrder = 20,
-        SideBarType = SideBarType.KpiSideBar)]
+        PageType = ViewPageType.List, SortOrder = 20)]
     public class KpiAutoConfig : BaseViewModel, IAutoConfig
     {
         /// <summary>

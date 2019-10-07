@@ -1,14 +1,14 @@
 ﻿using Alabo.Web.Mvc.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace Alabo.Domains.Enums {
-
+namespace Alabo.Domains.Enums
+{
     /// <summary>
     ///     控件类型
     /// </summary>
     [ClassProperty(Name = "控件类型")]
-    public enum ControlsType {
-
+    public enum ControlsType
+    {
         /// <summary>
         ///     Label类型
         /// </summary>
@@ -59,18 +59,26 @@ namespace Alabo.Domains.Enums {
         Numberic = 7,
 
         /// <summary>
-        ///     HTMl文本
-        /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "HtmlEditBox")]
-        HtmlEditBox = 8,
-
-        /// <summary>
-        ///     时间框
+        ///     时间框 选择时间和日期
         /// </summary>
         [LabelCssClass(BadgeColorCalss.Success)]
         [Display(Name = "时间框")]
-        DateTimePicker = 9,
+        TimePicker = 9,
+
+        /// <summary>
+        ///     日期选择框，只能选择日期不能选择时间
+        /// </summary>
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "日期选择框")]
+        DatePicker = 91,
+
+        /// <summary>
+        ///     时间范围
+        ///     用于高级搜索
+        /// </summary>
+        [LabelCssClass(BadgeColorCalss.Success)]
+        [Display(Name = "时间范围")]
+        DateTimeRang = 1003,
 
         /// <summary>
         ///     图片类型
@@ -101,90 +109,18 @@ namespace Alabo.Domains.Enums {
         Hidden = 13,
 
         /// <summary>
-        ///     可编辑的下拉列表
-        /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "EditableDropdownList")]
-        EditableDropdownList = 14,
-
-        /// <summary>
-        ///     样式参考：http://ui.5ug.com/metronic_v4.5.4/theme/admin_4/components_bootstrap_switch.html
+        ///     Swith开关,用户bool类型
         /// </summary>
         [LabelCssClass("m-badge--success", IsDataField = true)]
         [Display(Name = "Switch切换")]
         Switch = 15,
 
-        ListBox = 16,
-
-        DropDownListMutil = 17,
-
         /// <summary>
-        ///     数字框，浮点数
+        ///    浮点数
         /// </summary>
         [LabelCssClass("m-badge--success", IsDataField = true)]
         [Display(Name = "浮点数")]
         Decimal = 18,
-
-        /// <summary>
-        ///     可编辑的下拉列表
-        /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "EditableDropdownList")]
-        ListBoxMultiple = 19,
-
-        /// <summary>
-        ///     时间范围
-        /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "DateTimePickerRank")]
-        DateTimePickerRank = 20,
-
-        /// <summary>
-        ///     复训多选
-        /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "CheckBoxList")]
-        CheckBoxMultipl = 21,
-
-        [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "RadioButtonMultipl")]
-        RadioButtonMultipl = 30,
-
-        /// <summary>
-        ///     商品分类
-        /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "商品分类")]
-        ProductCate = 31,
-
-        /// <summary>
-        ///     商品标签
-        /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "商品标签")]
-        ProductTag = 32,
-
-        /// <summary>
-        ///     地区
-        /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "地区")]
-        City = 33,
-
-        /// <summary>
-        ///     邮箱
-        /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "邮箱")]
-        Email = 34,
-
-        /// <summary>
-        ///     用户类型与等级
-        ///     显示两个联动下拉框，第一个显示用户类型，第二个显示类型等级
-        /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "用户类型与等级")]
-        UserTypeGrade = 35,
 
         /// <summary>
         ///     级联标签
@@ -229,20 +165,16 @@ namespace Alabo.Domains.Enums {
         [Display(Name = "EditableDropdownList")]
         Editor = 45,
 
-        Color = 51,
-
         /// <summary>
-        ///     布尔值
+        /// 颜色
         /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "布尔值")]
-        Bool = 52,
+        Color = 51,
 
         /// <summary>
         ///     表单提交时的确认框，比如同意注册协议等
         /// </summary>
         [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "布尔值")]
+        [Display(Name = "确认框")]
         Agree = 53,
 
         /// <summary>
@@ -273,16 +205,8 @@ namespace Alabo.Domains.Enums {
         ///     用于高级搜索
         /// </summary>
         [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "用户名")]
+        [Display(Name = "数字区间")]
         NumberRang = 1002,
-
-        /// <summary>
-        ///     时间范围
-        ///     用于高级搜索
-        /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "时间范围")]
-        DateTimeRang = 1003,
 
         /// <summary>
         ///     图片预览
@@ -308,13 +232,6 @@ namespace Alabo.Domains.Enums {
         Icon = 1006,
 
         /// <summary>
-        ///     链接选择
-        /// </summary>
-        [LabelCssClass(BadgeColorCalss.Success)]
-        [Display(Name = "链接选择")]
-        Link = 1007,
-
-        /// <summary>
         ///     字列表
         /// </summary>
         [LabelCssClass(BadgeColorCalss.Success)]
@@ -336,6 +253,12 @@ namespace Alabo.Domains.Enums {
         /// <summary>
         ///     数据选择控件，对应前台x-select-data
         /// </summary>
-        DataSelect = 1200
+        DataSelect = 1200,
+
+        /// <summary>
+        /// Markdown
+        /// </summary>
+        [Display(Name = "Markdown")]
+        Markdown = 1280,
     }
 }

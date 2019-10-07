@@ -14,8 +14,7 @@ namespace Alabo.App.Asset.Transfers.Dtos
     /// <summary>
     ///     转账管理
     /// </summary>
-    [ClassProperty(Name = "转账管理", Icon = "fa fa-puzzle-piece", Description = "转账管理",
-        SideBarType = SideBarType.TransferSideBar)]
+    [ClassProperty(Name = "转账管理", Icon = "fa fa-puzzle-piece", Description = "转账管理")]
     public class TransferOutput : EntityDto
     {
         /// <summary>

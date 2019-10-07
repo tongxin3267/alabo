@@ -11,8 +11,7 @@ namespace Alabo.Data.People.Users.Dtos
     /// <summary>
     ///     找回密码
     /// </summary>
-    [ClassProperty(Name = "找回密码", Icon = "fa fa-puzzle-piece", Description = "找回密码", PostApi = "Api/User/FindPassword",
-        SuccessReturn = "Api/User/GetLoginform")]
+    [ClassProperty(Name = "找回密码", Icon = "fa fa-puzzle-piece", Description = "找回密码" )]
     public class FindPasswordInput : EntityDto
     {
         /// <summary>

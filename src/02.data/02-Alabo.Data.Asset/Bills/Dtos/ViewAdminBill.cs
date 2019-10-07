@@ -20,8 +20,7 @@ namespace Alabo.App.Asset.Bills.Dtos
     /// <summary>
     ///     Class ViewAdminBill.
     /// </summary>
-    [ClassProperty(Name = "财务明细", Icon = "fa fa-puzzle-piece", SideBarType = SideBarType.FullScreen,
-        PageType = ViewPageType.List, PostApi = "Api/Bill/ViewBillList", ListApi = "Api/Bill/ViewBillList")]
+    [ClassProperty(Name = "财务明细", Icon = "fa fa-puzzle-piece")]
     public class ViewAdminBill : UIBase, IAutoTable<ViewAdminBill>
     {
         /// <summary>

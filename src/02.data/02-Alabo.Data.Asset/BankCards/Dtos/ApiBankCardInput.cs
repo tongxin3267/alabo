@@ -8,8 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Alabo.App.Asset.BankCards.Dtos
 {
-    [ClassProperty(Name = "银行卡管理", SideBarType = SideBarType.BankCardSideBar, PostApi = "Api/BankCard/AddBankCard",
-        Icon = IconFontawesome.bank)]
+    [ClassProperty(Name = "银行卡管理")]
     public class ApiBankCardInput : EntityDto
     {
         public string Id { get; set; }

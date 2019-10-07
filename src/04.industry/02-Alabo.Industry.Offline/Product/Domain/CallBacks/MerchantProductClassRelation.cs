@@ -9,7 +9,7 @@ namespace Alabo.Industry.Offline.Product.Domain.CallBacks
     ///     线下商品分类
     /// </summary>
     [ClassProperty(Name = "本店出品分类", Icon = "fa fa-question", Description = "本店出品分类", SortOrder = 40,
-        PageType = ViewPageType.List, SideBarType = SideBarType.NewsSideBar)]
+        PageType = ViewPageType.List)]
     [RelationProperty(RelationType = RelationType.ClassRelation, IsOnlyRoot = true)]
     public class MerchantProductClassRelation : IRelation
     {

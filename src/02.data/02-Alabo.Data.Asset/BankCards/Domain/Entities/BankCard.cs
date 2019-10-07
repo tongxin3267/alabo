@@ -13,7 +13,7 @@ namespace Alabo.App.Asset.BankCards.Domain.Entities
     /// <summary>
     ///     银行卡
     /// </summary>
-    [ClassProperty(Name = "银行卡管理", SideBarType = SideBarType.BankCardSideBar, Icon = IconFontawesome.bank)]
+    [ClassProperty(Name = "银行卡管理")]
     [BsonIgnoreExtraElements]
     [Table("Asset_BankCard")]
     public class BankCard : AggregateMongodbUserRoot<BankCard>

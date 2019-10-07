@@ -12,8 +12,7 @@ namespace Alabo.Cloud.School.BookingSignup.Domain.Entities
 {
     [BsonIgnoreExtraElements]
     [Table("BookingSignup_BookingSignupOrder")]
-    [ClassProperty(Name = "预约订单", Description = "预约订单", Icon = IconFlaticon.route,
-        SideBarType = SideBarType.SchoolSideBar)]
+    [ClassProperty(Name = "预约订单", Description = "预约订单", Icon = IconFlaticon.route)]
     public class BookingSignupOrder : AggregateMongodbUserRoot<BookingSignupOrder>
     {
         /// <summary>
