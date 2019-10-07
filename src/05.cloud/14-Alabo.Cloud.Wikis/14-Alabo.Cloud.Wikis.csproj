@@ -8,6 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\01.framework\01-Alabo\01-Alabo.csproj" />
-    <ProjectReference Include="..\..\02.data\03-Alabo.Data.Things\03-Alabo.Data.Things.csproj" />
+    <ProjectReference Include="..\..\01.framework\02-Alabo.Framework.Core\02-Alabo.Framework.Core.csproj" />
   </ItemGroup>
 </Project>
