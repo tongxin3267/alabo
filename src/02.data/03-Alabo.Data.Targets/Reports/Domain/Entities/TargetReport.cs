@@ -32,12 +32,13 @@ namespace Alabo.Data.Targets.Reports.Domain.Entities
         /// </summary>
         [Display(Name = "目标名称")]
         [Required]
-        [Field(ControlsType = ControlsType.TextBox, SortOrder = 1, ListShow = true, GroupTabId = 1)]
+        [Field(ControlsType = ControlsType.TextBox, IsShowBaseSerach = true, SortOrder = 1, ListShow = true)]
         public string Name { get; set; }
 
         /// <summary>
         /// 统计方式
         /// </summary>
+        [Field(ControlsType = ControlsType.RadioButton, IsTabSearch = true, SortOrder = 2, ListShow = true)]
         public TargetReportType Type { get; set; }
 
         /// <summary>
@@ -52,7 +53,7 @@ namespace Alabo.Data.Targets.Reports.Domain.Entities
         /// 奖金
         /// </summary>
         [Display(Name = "奖金")]
-        [Field(ControlsType = ControlsType.Decimal, SortOrder = 10, ListShow = true, GroupTabId = 2)]
+        [Field(ControlsType = ControlsType.Decimal, SortOrder = 10, ListShow = true)]
         [HelpBlock("完成该任务后,由主管部分对新任务进行满意度评价,根据满意度获取奖金。比如任务奖金为1000元,任务完成后，主管部门对任务进行评价满意度为90%，则所得到的奖金为900元")]
         public decimal Bonus { get; set; } = 0m;
 
@@ -60,7 +61,7 @@ namespace Alabo.Data.Targets.Reports.Domain.Entities
         /// 目标贡献值
         /// </summary>
         [Display(Name = "目标贡献值")]
-        [Field(ControlsType = ControlsType.Decimal, SortOrder = 10, ListShow = true, GroupTabId = 2)]
+        [Field(ControlsType = ControlsType.Decimal, SortOrder = 10, ListShow = true)]
         public decimal Contribution { get; set; } = 0m;
     }
 

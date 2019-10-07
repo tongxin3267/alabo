@@ -12,10 +12,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Alabo.UI.Design.AutoTables {
-
-    public class AutoTableMapping {
-
+namespace Alabo.UI.Design.AutoTables
+{
+    public class AutoTableMapping
+    {
         public static AutoTable Convert(string fullName) {
             var objectCache = Ioc.Resolve<IObjectCache>();
             return objectCache.GetOrSet(() => {
@@ -189,8 +189,9 @@ namespace Alabo.UI.Design.AutoTables {
                 // 如果实体继承了Action,则Action 实体通用删除
                 list.Add(new TableAction("编辑", $"/Admin/{type.Name}/Edit"));
                 list.Add(new TableAction("删除", $"/Api/{type.Name}/QueryDelete"));
-                list.Add(new TableAction($"新增{classProperty.Name}", $"/Admin/{type.Name}/Edit",
-                    TableActionType.QuickAction));
+                if (classProperty.Description)
+                    list.Add(new TableAction($"新增{classProperty.Name}", $"/Admin/{type.Name}/Edit",
+                        TableActionType.QuickAction));
             }
 
             return list;

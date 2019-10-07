@@ -10,23 +10,23 @@ using System;
 using Alabo.Dynamics;
 using ZKCloud.Open.DynamicExpression;
 
-namespace Alabo.Framework.Core.WebUis.Services {
-
-    public class AutoTableServcie : ServiceBase, IAutoTableService {
-
+namespace Alabo.Framework.Core.WebUis.Services
+{
+    public class AutoTableServcie : ServiceBase, IAutoTableService
+    {
         public AutoTableServcie(IUnitOfWork unitOfWork) : base(unitOfWork) {
         }
 
         public Tuple<ServiceResult, AutoTable> Table(string type, object query, AutoBaseModel autoBaseModel) {
             Type typeFind = null;
             object instanceFind = null;
-            AutoTable autoTable = null;
+
             var checkType = Resolve<IUIBaseService>().CheckType(type, ref typeFind, ref instanceFind);
             if (!checkType.Succeeded) {
                 return new Tuple<ServiceResult, AutoTable>(checkType, new AutoTable());
             }
 
-            autoTable = AutoTableMapping.Convert(typeFind.FullName);
+            var autoTable = AutoTableMapping.Convert(typeFind.FullName);
 
             #region IAutoTable类型
 
